@@ -220,6 +220,11 @@ export function getCluster(): string | null {
   return (!!clusterURLMatch && clusterURLMatch.params.cluster) || null;
 }
 
+export function getClusterGroup(returnWhenNoClusters: string[] = []): string[] {
+  const clusterFromURL = getCluster();
+  return clusterFromURL?.split('+') || returnWhenNoClusters;
+}
+
 export function useErrorState(dependentSetter?: (...args: any) => void) {
   const [error, setError] = React.useState<ApiError | null>(null);
 
