@@ -1,0 +1,8 @@
+linters:
+  enable:
+    - gofmt
+    - whitespace
+
+linters-settings:
+  gofmt:
+    simplify: true
