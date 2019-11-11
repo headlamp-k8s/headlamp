@@ -35,6 +35,8 @@
     ]
   },
   "devDependencies": {
+    "@iconify/icons-mdi": "^1.0.31",
+    "@iconify/react": "^1.1.1",
     "eslint": "^6.6.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-react": "^7.16.0"
