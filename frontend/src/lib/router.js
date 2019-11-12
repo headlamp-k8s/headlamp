@@ -1,6 +1,7 @@
 import React from 'react';
 import Auth from '../components/account/Auth';
 import Overview from '../components/cluster/Overview';
+import NamespacesList from '../components/namespaces/List';
 
 export const ROUTES = [
   {
@@ -8,6 +9,11 @@ export const ROUTES = [
     exact: true,
     name: 'Cluster',
     component: () => <Overview />
+  },
+  {
+    path: '/namespaces',
+    name: 'Namespaces',
+    component: () => <NamespacesList />
   },
   {
     path: '/login',
