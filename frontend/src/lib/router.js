@@ -1,13 +1,13 @@
 import React from 'react';
 import Auth from '../components/account/Auth';
-import ClusterOverview from '../components/ClusterOverview';
+import Overview from '../components/cluster/Overview';
 
 export const ROUTES = [
   {
     path: '/',
     exact: true,
     name: 'Cluster',
-    component: () => <ClusterOverview />
+    component: () => <Overview />
   },
   {
     path: '/login',
