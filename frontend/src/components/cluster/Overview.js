@@ -12,7 +12,6 @@ export default function Overview(props) {
 
   function setEvents(events) {
     const data = events.map(event => {
-      console.log(event);
       return {
         kind: event.involvedObject.kind,
         name: event.involvedObject.name,
