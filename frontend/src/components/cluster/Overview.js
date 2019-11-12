@@ -1,7 +1,7 @@
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import api from '../../lib/api';
+import api, { useConnectApi } from '../../lib/api';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -24,12 +24,11 @@ export default function Overview(props) {
     setEventsData(data);
   }
 
-  React.useEffect(() => {
-    api.pod.list(null, setPods);
-    api.event.list(null, setEvents);
-    api.node.list(setNodes);
-  },
-  []);
+  useConnectApi(
+    api.pod.list.bind(null, null, setPods),
+    api.event.list.bind(null, null, setEvents),
+    api.node.list.bind(null, setNodes),
+  );
 
   return (
     <Paper>
