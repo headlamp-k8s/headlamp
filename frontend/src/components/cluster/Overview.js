@@ -1,11 +1,11 @@
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import api from '../lib/api';
-import SectionHeader from './common/SectionHeader';
-import SimpleTable from './common/SimpleTable';
+import api from '../../lib/api';
+import SectionHeader from '../common/SectionHeader';
+import SimpleTable from '../common/SimpleTable';
 
-export default function ClusterOverview(props) {
+export default function Overview(props) {
   const [pods, setPods] = React.useState(null);
   const [eventsData, setEventsData] = React.useState(null);
   const [nodes, setNodes] = React.useState(null);

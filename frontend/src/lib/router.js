@@ -1,5 +1,5 @@
 import React from 'react';
-import ClusterOverview from '../components/ClusterOverview';
+import Overview from '../components/cluster/Overview';
 import Auth from '../components/account/Auth';
 
 export const ROUTES = [
@@ -7,7 +7,7 @@ export const ROUTES = [
     path: "/",
     exact: true,
     name: 'Cluster',
-    component: () => <ClusterOverview />
+    component: () => <Overview />
   },
   {
     path: "/login",
