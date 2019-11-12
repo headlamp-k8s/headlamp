@@ -2,6 +2,7 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -15,7 +16,7 @@ export default function Overview(props) {
       return {
         kind: event.involvedObject.kind,
         name: event.involvedObject.name,
-        time: event.metadata.creationTimestamp,
+        time: timeAgo(event.metadata.creationTimestamp),
         reason: event.reason,
         message: event.message,
       };
@@ -45,7 +46,7 @@ export default function Overview(props) {
               datum: 'name',
             },
             {
-              label: 'Time',
+              label: 'Age',
               datum: 'time',
             },
             {
