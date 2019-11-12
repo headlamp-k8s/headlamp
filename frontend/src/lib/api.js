@@ -5,6 +5,7 @@
 import _ from 'lodash';
 import {Base64} from 'js-base64';
 import {request, post, stream, apiFactory, apiFactoryWithNamespace} from './apiProxy';
+import React from 'react';
 
 const configMap = apiFactoryWithNamespace('', 'v1', 'configmaps');
 const event = apiFactoryWithNamespace('', 'v1', 'events');
@@ -163,6 +164,20 @@ function logs(namespace, name, container, tailLines, showPrevious, cb) {
         items.push(message);
         cb(items);
     }
+}
+
+// Hook for managing API connections in a shared and coherent way.
+export function useConnectApi(...apiCalls) {
+    React.useEffect(() => {
+        let cancellables = apiCalls.map(func => func());
+
+        return function cleanup() {
+            for (let cancellablePromise of cancellables) {
+                cancellablePromise.then(cancellable => cancellable());
+            }
+        };
+    },
+    []);
 }
 
 export default apis;
