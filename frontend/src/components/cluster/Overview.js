@@ -4,6 +4,7 @@ import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import { timeAgo } from '../../lib/util';
 
 export default function Overview(props) {
   const [pods, setPods] = React.useState(null);
@@ -15,7 +16,7 @@ export default function Overview(props) {
       return {
         kind: event.involvedObject.kind,
         name: event.involvedObject.name,
-        time: event.metadata.creationTimestamp,
+        time: timeAgo(event.metadata.creationTimestamp),
         reason: event.reason,
         message: event.message,
       };
@@ -45,7 +46,7 @@ export default function Overview(props) {
               datum: 'name',
             },
             {
-              label: 'Time',
+              label: 'Age',
               datum: 'time',
             },
             {
