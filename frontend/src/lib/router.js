@@ -10,6 +10,7 @@ import PersistentVolumeClaimList from '../components/storage/ClaimList';
 import ServiceList from '../components/service/List';
 import IngressList from '../components/ingress/List';
 import ReplicaSetList from '../components/replicaset/List';
+import ConfigMapList from '../components/configmap/List';
 
 export const ROUTES = [
   {
@@ -69,6 +70,12 @@ export const ROUTES = [
     exact: true,
     name: 'Replica Sets',
     component: () => <ReplicaSetList />
+  },
+  {
+    path: "/configmaps",
+    exact: true,
+    name: 'Config Maps',
+    component: () => <ConfigMapList />
   },
   {
     path: "/login",
