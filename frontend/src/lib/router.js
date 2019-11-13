@@ -12,6 +12,7 @@ import IngressList from '../components/ingress/List';
 import ReplicaSetList from '../components/replicaset/List';
 import ConfigMapList from '../components/configmap/List';
 import ServiceAccountList from '../components/serviceaccount/List';
+import RoleList from '../components/role/List';
 
 export const ROUTES = [
   {
@@ -83,6 +84,12 @@ export const ROUTES = [
     exact: true,
     name: 'Service Accounts',
     component: () => <ServiceAccountList />
+  },
+  {
+    path: "/roles",
+    exact: true,
+    name: 'Roles',
+    component: () => <RoleList />
   },
   {
     path: "/login",
