@@ -6,6 +6,7 @@ import IngressList from '../components/ingress/List';
 import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
 import ReplicaSetList from '../components/replicaset/List';
+import RoleBindingList from '../components/role/BindingList';
 import RoleList from '../components/role/List';
 import SecretList from '../components/secret/List';
 import ServiceList from '../components/service/List';
@@ -91,6 +92,12 @@ export const ROUTES = [
     exact: true,
     name: 'Roles',
     component: () => <RoleList />
+  },
+  {
+    path: '/rolebindings',
+    exact: true,
+    name: 'Role Bindings',
+    component: () => <RoleBindingList />
   },
   {
     path: '/secrets',
