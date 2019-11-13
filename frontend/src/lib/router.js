@@ -7,6 +7,7 @@ import NodeList from '../components/node/List';
 import StorageClassList from '../components/storage/ClassList';
 import PersistentVolumeList from '../components/storage/VolumeList';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
+import ServiceList from '../components/service/List';
 
 export const ROUTES = [
   {
@@ -48,6 +49,12 @@ export const ROUTES = [
     exact: true,
     name: 'Workloads',
     component: () => <WorkloadOverview />
+  },
+  {
+    path: "/services",
+    exact: true,
+    name: 'Services',
+    component: () => <ServiceList />
   },
   {
     path: "/login",
