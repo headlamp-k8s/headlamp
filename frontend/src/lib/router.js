@@ -1,6 +1,7 @@
 import React from 'react';
 import Auth from '../components/account/Auth';
 import Overview from '../components/cluster/Overview';
+import ConfigMapList from '../components/configmap/List';
 import IngressList from '../components/ingress/List';
 import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
@@ -69,6 +70,12 @@ export const ROUTES = [
     exact: true,
     name: 'Replica Sets',
     component: () => <ReplicaSetList />
+  },
+  {
+    path: '/configmaps',
+    exact: true,
+    name: 'Config Maps',
+    component: () => <ConfigMapList />
   },
   {
     path: '/login',
