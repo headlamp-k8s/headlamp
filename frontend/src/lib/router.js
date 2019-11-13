@@ -3,6 +3,8 @@ import Overview from '../components/cluster/Overview';
 import Auth from '../components/account/Auth';
 import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
+import StorageClassList from '../components/storage/ClassList';
+import PersistentVolumeList from '../components/storage/VolumeList';
 
 export const ROUTES = [
   {
@@ -20,6 +22,18 @@ export const ROUTES = [
     path: "/nodes",
     name: 'Nodes',
     component: () => <NodeList />
+  },
+  {
+    path: "/storage/classes",
+    exact: true,
+    name: 'Storage Classes',
+    component: () => <StorageClassList />
+  },
+  {
+    path: "/storage/persistentvolumes",
+    exact: true,
+    name: 'Persistent Volumes',
+    component: () => <PersistentVolumeList />
   },
   {
     path: "/login",
