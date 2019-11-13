@@ -15,6 +15,7 @@ import ServiceAccountList from '../components/serviceaccount/List';
 import RoleList from '../components/role/List';
 import SecretList from '../components/secret/List';
 import RoleBindingList from '../components/role/BindingList';
+import PodList from '../components/pods/List';
 
 export const ROUTES = [
   {
@@ -56,6 +57,12 @@ export const ROUTES = [
     exact: true,
     name: 'Workloads',
     component: () => <WorkloadOverview />
+  },
+  {
+    path: "/pods",
+    exact: true,
+    name: 'Pods',
+    component: () => <PodList />
   },
   {
     path: "/services",
