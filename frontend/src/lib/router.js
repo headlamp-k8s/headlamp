@@ -1,5 +1,6 @@
 import React from 'react';
 import Overview from '../components/cluster/Overview';
+import WorkloadOverview from '../components/workload/Overview';
 import Auth from '../components/account/Auth';
 import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
@@ -41,6 +42,12 @@ export const ROUTES = [
     exact: true,
     name: 'Persistent Volume Claims',
     component: () => <PersistentVolumeClaimList />
+  },
+  {
+    path: "/workload",
+    exact: true,
+    name: 'Workloads',
+    component: () => <WorkloadOverview />
   },
   {
     path: "/login",
