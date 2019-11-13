@@ -5,6 +5,7 @@ import ConfigMapList from '../components/configmap/List';
 import IngressList from '../components/ingress/List';
 import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
+import PodList from '../components/pods/List';
 import ReplicaSetList from '../components/replicaset/List';
 import RoleBindingList from '../components/role/BindingList';
 import RoleList from '../components/role/List';
@@ -56,6 +57,12 @@ export const ROUTES = [
     exact: true,
     name: 'Workloads',
     component: () => <WorkloadOverview />
+  },
+  {
+    path: '/pods',
+    exact: true,
+    name: 'Pods',
+    component: () => <PodList />
   },
   {
     path: '/services',
