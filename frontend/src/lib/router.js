@@ -4,6 +4,7 @@ import Overview from '../components/cluster/Overview';
 import IngressList from '../components/ingress/List';
 import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
+import ReplicaSetList from '../components/replicaset/List';
 import ServiceList from '../components/service/List';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
 import StorageClassList from '../components/storage/ClassList';
@@ -62,6 +63,12 @@ export const ROUTES = [
     exact: true,
     name: 'Ingresses',
     component: () => <IngressList />
+  },
+  {
+    path: '/replicasets',
+    exact: true,
+    name: 'Replica Sets',
+    component: () => <ReplicaSetList />
   },
   {
     path: '/login',
