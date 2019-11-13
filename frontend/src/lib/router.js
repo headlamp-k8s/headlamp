@@ -11,6 +11,7 @@ import ServiceList from '../components/service/List';
 import IngressList from '../components/ingress/List';
 import ReplicaSetList from '../components/replicaset/List';
 import ConfigMapList from '../components/configmap/List';
+import ServiceAccountList from '../components/serviceaccount/List';
 
 export const ROUTES = [
   {
@@ -76,6 +77,12 @@ export const ROUTES = [
     exact: true,
     name: 'Config Maps',
     component: () => <ConfigMapList />
+  },
+  {
+    path: "/serviceaccounts",
+    exact: true,
+    name: 'Service Accounts',
+    component: () => <ServiceAccountList />
   },
   {
     path: "/login",
