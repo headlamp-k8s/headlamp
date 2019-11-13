@@ -14,6 +14,7 @@ import ConfigMapList from '../components/configmap/List';
 import ServiceAccountList from '../components/serviceaccount/List';
 import RoleList from '../components/role/List';
 import SecretList from '../components/secret/List';
+import RoleBindingList from '../components/role/BindingList';
 
 export const ROUTES = [
   {
@@ -91,6 +92,12 @@ export const ROUTES = [
     exact: true,
     name: 'Roles',
     component: () => <RoleList />
+  },
+  {
+    path: "/rolebindings",
+    exact: true,
+    name: 'Role Bindings',
+    component: () => <RoleBindingList />
   },
   {
     path: "/secrets",
