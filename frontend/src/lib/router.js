@@ -7,6 +7,7 @@ import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
 import ReplicaSetList from '../components/replicaset/List';
 import RoleList from '../components/role/List';
+import SecretList from '../components/secret/List';
 import ServiceList from '../components/service/List';
 import ServiceAccountList from '../components/serviceaccount/List';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
@@ -90,6 +91,12 @@ export const ROUTES = [
     exact: true,
     name: 'Roles',
     component: () => <RoleList />
+  },
+  {
+    path: '/secrets',
+    exact: true,
+    name: 'Secrets',
+    component: () => <SecretList />
   },
   {
     path: '/login',
