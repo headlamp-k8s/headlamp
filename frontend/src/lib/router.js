@@ -8,6 +8,7 @@ import StorageClassList from '../components/storage/ClassList';
 import PersistentVolumeList from '../components/storage/VolumeList';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
 import ServiceList from '../components/service/List';
+import IngressList from '../components/ingress/List';
 
 export const ROUTES = [
   {
@@ -55,6 +56,12 @@ export const ROUTES = [
     exact: true,
     name: 'Services',
     component: () => <ServiceList />
+  },
+  {
+    path: "/ingresses",
+    exact: true,
+    name: 'Ingresses',
+    component: () => <IngressList />
   },
   {
     path: "/login",
