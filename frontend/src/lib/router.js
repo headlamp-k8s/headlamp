@@ -1,6 +1,7 @@
 import React from 'react';
 import Auth from '../components/account/Auth';
 import Overview from '../components/cluster/Overview';
+import IngressList from '../components/ingress/List';
 import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
 import ServiceList from '../components/service/List';
@@ -55,6 +56,12 @@ export const ROUTES = [
     exact: true,
     name: 'Services',
     component: () => <ServiceList />
+  },
+  {
+    path: '/ingresses',
+    exact: true,
+    name: 'Ingresses',
+    component: () => <IngressList />
   },
   {
     path: '/login',
