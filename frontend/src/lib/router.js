@@ -16,6 +16,7 @@ import RoleList from '../components/role/List';
 import SecretList from '../components/secret/List';
 import RoleBindingList from '../components/role/BindingList';
 import PodList from '../components/pods/List';
+import StorageClassDetails from '../components/storage/ClassDetails';
 
 export const ROUTES = [
   {
@@ -39,6 +40,11 @@ export const ROUTES = [
     exact: true,
     name: 'Storage Classes',
     component: () => <StorageClassList />
+  },
+  {
+    path: "/storage/classes/:name",
+    name: 'Storage Classes',
+    component: () => <StorageClassDetails />
   },
   {
     path: "/storage/persistentvolumes",
