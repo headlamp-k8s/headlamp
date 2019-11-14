@@ -51,7 +51,7 @@ export default function SimpleTable(props) {
           {props.data &&
            getPagedRows().map((row, i) =>
             <TableRow key={i}>
-              {columns.map(({datum}, i) =>
+              {columns.map(({datum, getter}, i) =>
                 <TableCell key={`cell_${i}`}>
                   {i == 0 && row.color &&
                     <React.Fragment>
@@ -64,7 +64,7 @@ export default function SimpleTable(props) {
                       &nbsp;
                     </React.Fragment>
                   }
-                  {row[datum]}
+                  { datum ? row[datum] : getter(row) }
                 </TableCell>
               )}
             </TableRow>
