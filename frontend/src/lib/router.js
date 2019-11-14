@@ -13,6 +13,7 @@ import SecretList from '../components/secret/List';
 import ServiceList from '../components/service/List';
 import ServiceAccountList from '../components/serviceaccount/List';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
+import StorageClassDetails from '../components/storage/ClassDetails';
 import StorageClassList from '../components/storage/ClassList';
 import PersistentVolumeList from '../components/storage/VolumeList';
 import WorkloadOverview from '../components/workload/Overview';
@@ -39,6 +40,11 @@ export const ROUTES = [
     exact: true,
     name: 'Storage Classes',
     component: () => <StorageClassList />
+  },
+  {
+    path: '/storage/classes/:name',
+    name: 'Storage Classes',
+    component: () => <StorageClassDetails />
   },
   {
     path: '/storage/persistentvolumes',
