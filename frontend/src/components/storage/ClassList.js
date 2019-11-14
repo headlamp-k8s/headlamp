@@ -1,28 +1,18 @@
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
+import Link from '@material-ui/core/Link';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import {Link as RouterLink} from 'react-router-dom';
 
 export default function ClassList() {
   const [storageClassData, setStorageClassData] = React.useState([]);
 
-  function setClasses(storageClasses) {
-    const data = storageClasses.map(storageClass => {
-      return {
-        name: storageClass.metadata.name,
-        reclaim_policy: storageClass.reclaimPolicy,
-        binding_mode: storageClass.volumeBindingMode,
-        date: timeAgo(storageClass.metadata.creationTimestamp),
-      };
-    });
-    setStorageClassData(data);
-  }
-
   useConnectApi(
-    api.storageClass.list.bind(null, setClasses),
+    api.storageClass.list.bind(null, setStorageClassData),
   );
 
   return (
@@ -34,19 +24,19 @@ export default function ClassList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (storageClass) => <Link component={RouterLink} to={`/storage/classes/${storageClass.metadata.name}`}>{storageClass.metadata.name}</Link>
             },
             {
               label: 'Reclaim Policy',
-              datum: 'reclaim_policy',
+              getter: (storageClass) => storageClass.reclaimPolicy
             },
             {
               label: 'Volume Binding Mode',
-              datum: 'binding_mode',
+              getter: (storageClass) => storageClass.volumeBindingMode,
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (storageClass) => timeAgo(storageClass.metadata.creationTimestamp)
             },
           ]}
           data={storageClassData}
