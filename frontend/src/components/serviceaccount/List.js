@@ -7,18 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceAccountList() {
-  const [serviceAccountsData, setServiceAccountsData] = React.useState([]);
-
-  function setServiceAccounts(serviceAccounts) {
-    const data = serviceAccounts.map(serviceAccount => {
-      return {
-        name: serviceAccount.metadata.name,
-        namespace: serviceAccount.metadata.namespace,
-        date: timeAgo(serviceAccount.metadata.creationTimestamp),
-      };
-    });
-    setServiceAccountsData(data);
-  }
+  const [serviceAccounts, setServiceAccounts] = React.useState([]);
 
   useConnectApi(
     api.serviceAccount.list.bind(null, null, setServiceAccounts),
@@ -33,18 +22,18 @@ export default function ServiceAccountList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (serviceAccount) => serviceAccount.metadata.name
             },
             {
               label: 'Namespace',
-              datum: 'namespace',
+              getter: (serviceAccount) => serviceAccount.metadata.namespace
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (serviceAccount) => timeAgo(serviceAccount.metadata.creationTimestamp)
             },
           ]}
-          data={serviceAccountsData}
+          data={serviceAccounts}
         />
       </Box>
     </Paper>
