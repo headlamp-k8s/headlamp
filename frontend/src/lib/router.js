@@ -12,6 +12,7 @@ import ReplicaSetList from '../components/replicaset/List';
 import RoleBindingList from '../components/role/BindingList';
 import RoleList from '../components/role/List';
 import SecretList from '../components/secret/List';
+import ServiceDetails from '../components/service/Details';
 import ServiceList from '../components/service/List';
 import ServiceAccountList from '../components/serviceaccount/List';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
@@ -77,6 +78,11 @@ export const ROUTES = {
     exact: true,
     name: 'Services',
     component: () => <ServiceList />
+  },
+  service: {
+    path: '/services/:namespace/:name',
+    exact: true,
+    component: () => <ServiceDetails />
   },
   ingresses: {
     path: '/ingresses',

@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import Link from '../common/Link';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -22,7 +23,16 @@ export default function ServiceList() {
           columns={[
             {
               label: 'Name',
-              getter: (service) => service.metadata.name
+              getter: (service) =>
+                <Link
+                  routeName="service"
+                  params={{
+                    namespace: service.metadata.namespace,
+                    name: service.metadata.name,
+                  }}
+                >
+                  {service.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',
