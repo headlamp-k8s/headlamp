@@ -7,18 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceList() {
-  const [servicesData, setServicesData] = React.useState([]);
-
-  function setServices(services) {
-    const data = services.map(service => {
-      return {
-        name: service.metadata.name,
-        namespace: service.metadata.namespace,
-        date: timeAgo(service.metadata.creationTimestamp),
-      };
-    });
-    setServicesData(data);
-  }
+  const [services, setServices] = React.useState([]);
 
   useConnectApi(
     api.service.list.bind(null, null, setServices),
@@ -33,18 +22,18 @@ export default function ServiceList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (service) => service.metadata.name
             },
             {
               label: 'Namespace',
-              datum: 'namespace',
+              getter: (service) => service.metadata.namespace
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (service) => timeAgo(service.metadata.creationTimestamp)
             },
           ]}
-          data={servicesData}
+          data={services}
         />
       </Box>
     </Paper>
