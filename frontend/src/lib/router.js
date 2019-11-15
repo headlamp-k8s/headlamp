@@ -2,6 +2,7 @@ import React from 'react';
 import { generatePath } from 'react-router';
 import Auth from '../components/account/Auth';
 import Overview from '../components/cluster/Overview';
+import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
@@ -106,6 +107,11 @@ export const ROUTES = {
     exact: true,
     name: 'Config Maps',
     component: () => <ConfigMapList />
+  },
+  configMap: {
+    path: '/configmaps/:namespace/:name',
+    exact: true,
+    component: () => <ConfigDetails />
   },
   serviceAccounts: {
     path: '/serviceaccounts',
