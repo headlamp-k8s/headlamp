@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import Link from '../common/Link';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -48,7 +49,16 @@ export default function RoleList() {
             },
             {
               label: 'Name',
-              getter: (item) => item.metadata.name
+              getter: (item) =>
+                <Link
+                  routeName={item.metadata.namespace ? 'role' : 'clusterrole'}
+                  params={{
+                    namespace: item.metadata.namespace || '',
+                    name: item.metadata.name
+                  }}
+                >
+                  {item.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',

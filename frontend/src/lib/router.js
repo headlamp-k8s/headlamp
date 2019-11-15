@@ -11,6 +11,7 @@ import NodeList from '../components/node/List';
 import PodList from '../components/pods/List';
 import ReplicaSetList from '../components/replicaset/List';
 import RoleBindingList from '../components/role/BindingList';
+import RoleDetails from '../components/role/Details';
 import RoleList from '../components/role/List';
 import SecretList from '../components/secret/List';
 import ServiceDetails from '../components/service/Details';
@@ -143,6 +144,16 @@ export const ROUTES = {
     exact: true,
     name: 'Roles',
     component: () => <RoleList />
+  },
+  role: {
+    path: '/roles/:namespace/:name',
+    exact: true,
+    component: () => <RoleDetails />
+  },
+  clusterrole: {
+    path: '/clusterroles/:name',
+    exact: true,
+    component: () => <RoleDetails />
   },
   roleBindings: {
     path: '/rolebindings',
