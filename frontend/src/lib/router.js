@@ -17,6 +17,7 @@ import SecretList from '../components/secret/List';
 import RoleBindingList from '../components/role/BindingList';
 import PodList from '../components/pods/List';
 import StorageClassDetails from '../components/storage/ClassDetails';
+import { generatePath } from 'react-router';
 
 export const ROUTES = {
   cluster: {
@@ -128,4 +129,9 @@ export const ROUTES = {
 
 export function getRoute(routeName) {
   return ROUTES[routeName];
+}
+
+export function createRouteURL(routeName, params={}) {
+  const url = getRoute(routeName).path;
+  return generatePath(url, params);
 }
