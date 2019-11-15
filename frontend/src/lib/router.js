@@ -1,4 +1,5 @@
 import React from 'react';
+import { generatePath } from 'react-router';
 import Auth from '../components/account/Auth';
 import Overview from '../components/cluster/Overview';
 import ConfigMapList from '../components/configmap/List';
@@ -128,4 +129,9 @@ export const ROUTES = {
 
 export function getRoute(routeName) {
   return ROUTES[routeName];
+}
+
+export function createRouteURL(routeName, params={}) {
+  const url = getRoute(routeName).path;
+  return generatePath(url, params);
 }
