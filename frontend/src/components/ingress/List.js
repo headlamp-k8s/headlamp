@@ -5,6 +5,7 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import Link from '../common/Link';
 
 export default function IngressList() {
   const [ingresses, setIngresses] = React.useState([]);
@@ -26,7 +27,13 @@ export default function IngressList() {
           columns={[
             {
               label: 'Name',
-              getter: (ingress) => ingress.metadata.name
+              getter: (ingress) =>
+                <Link
+                  routeName="ingress"
+                  params={{namespace: ingress.metadata.namespace, name: ingress.metadata.name}}
+                >
+                  {ingress.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',

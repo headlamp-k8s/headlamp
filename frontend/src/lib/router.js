@@ -17,6 +17,7 @@ import SecretList from '../components/secret/List';
 import RoleBindingList from '../components/role/BindingList';
 import PodList from '../components/pods/List';
 import StorageClassDetails from '../components/storage/ClassDetails';
+import IngressDetails from '../components/ingress/Details';
 import { generatePath } from 'react-router';
 
 export const ROUTES = {
@@ -82,6 +83,11 @@ export const ROUTES = {
     exact: true,
     name: 'Ingresses',
     component: () => <IngressList />
+  },
+  ingress: {
+    path: "/ingresses/:namespace/:name",
+    exact: true,
+    component: () => <IngressDetails />
   },
   replicaSets: {
     path: "/replicasets",
