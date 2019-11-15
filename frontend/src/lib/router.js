@@ -16,6 +16,7 @@ import SecretList from '../components/secret/List';
 import ServiceDetails from '../components/service/Details';
 import ServiceList from '../components/service/List';
 import ServiceAccountList from '../components/serviceaccount/List';
+import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
 import StorageClassDetails from '../components/storage/ClassDetails';
 import StorageClassList from '../components/storage/ClassList';
@@ -68,6 +69,11 @@ export const ROUTES = {
     exact: true,
     name: 'Persistent Volume Claims',
     component: () => <PersistentVolumeClaimList />
+  },
+  persistentVolumeClaim: {
+    path: '/storage/persistentvolumeclaims/:namespace/:name',
+    exact: true,
+    component: () => <PersistentVolumeClaimDetails />
   },
   workloads: {
     path: '/workload',

@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import Link from '../common/Link';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -23,7 +24,16 @@ export default function VolumeClaimList() {
           columns={[
             {
               label: 'Name',
-              getter: (volumeClaim) => volumeClaim.metadata.name
+              getter: (volumeClaim) =>
+                <Link
+                  routeName="persistentVolumeClaim"
+                  params={{
+                    namespace: volumeClaim.metadata.namespace,
+                    name: volumeClaim.metadata.name
+                  }}
+                >
+                  {volumeClaim.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',
