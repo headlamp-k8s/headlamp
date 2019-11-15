@@ -20,6 +20,7 @@ import StorageClassDetails from '../components/storage/ClassDetails';
 import IngressDetails from '../components/ingress/Details';
 import { generatePath } from 'react-router';
 import ServiceDetails from '../components/service/Details';
+import ConfigDetails from '../components/configmap/Details';
 
 export const ROUTES = {
   cluster: {
@@ -106,6 +107,11 @@ export const ROUTES = {
     exact: true,
     name: 'Config Maps',
     component: () => <ConfigMapList />
+  },
+  configMap: {
+    path: "/configmaps/:namespace/:name",
+    exact: true,
+    component: () => <ConfigDetails />
   },
   serviceAccounts: {
     path: "/serviceaccounts",

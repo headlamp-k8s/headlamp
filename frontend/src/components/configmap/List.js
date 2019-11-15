@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import Link from '../common/Link';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -22,7 +23,16 @@ export default function ConfigMapList() {
           columns={[
             {
               label: 'Name',
-              getter: (configMap) => configMap.metadata.name
+              getter: (configMap) =>
+                <Link
+                  routeName="configMap"
+                  params={{
+                    namespace: configMap.metadata.namespace,
+                    name: configMap.metadata.name
+                  }}
+                >
+                  {configMap.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',
