@@ -7,19 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function VolumeList() {
-  const [volumesData, setVolumesData] = React.useState([]);
-
-  function setVolumes(volumes) {
-    const data = volumes.map(volume => {
-      return {
-        name: volume.metadata.name,
-        status: volume.status.phase,
-        capacity: volume.spec.capacity.storage,
-        date: timeAgo(volume.metadata.creationTimestamp),
-      };
-    });
-    setVolumesData(data);
-  }
+  const [volumes, setVolumes] = React.useState([]);
 
   useConnectApi(
     api.persistentVolume.list.bind(null, setVolumes),
@@ -34,22 +22,22 @@ export default function VolumeList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (volume) => volume.metadata.name
             },
             {
               label: 'Status',
-              datum: 'status',
+              getter: (volume) => volume.status.phase
             },
             {
               label: 'Capacity',
-              datum: 'capacity',
+              getter: (volume) => volume.spec.capacity.storage
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (volume) => timeAgo(volume.metadata.creationTimestamp)
             },
           ]}
-          data={volumesData}
+          data={volumes}
         />
       </Box>
     </Paper>
