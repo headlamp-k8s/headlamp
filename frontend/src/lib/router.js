@@ -23,6 +23,7 @@ import { generatePath } from 'react-router';
 import ServiceDetails from '../components/service/Details';
 import ConfigDetails from '../components/configmap/Details';
 import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
+import ServiceAccountDetails from '../components/serviceaccount/Details';
 
 export const ROUTES = {
   cluster: {
@@ -131,6 +132,11 @@ export const ROUTES = {
     exact: true,
     name: 'Service Accounts',
     component: () => <ServiceAccountList />
+  },
+  serviceAccount: {
+    path: "/serviceaccounts/:namespace/:name",
+    exact: true,
+    component: () => <ServiceAccountDetails />
   },
   roles: {
     path: "/roles",
