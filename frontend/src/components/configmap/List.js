@@ -7,18 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ConfigMapList() {
-  const [configMapsData, setConfigMapsData] = React.useState([]);
-
-  function setConfigMaps(configMaps) {
-    const data = configMaps.map(configMap => {
-      return {
-        name: configMap.metadata.name,
-        namespace: configMap.metadata.namespace,
-        date: timeAgo(configMap.metadata.creationTimestamp),
-      };
-    });
-    setConfigMapsData(data);
-  }
+  const [configMaps, setConfigMaps] = React.useState([]);
 
   useConnectApi(
     api.configMap.list.bind(null, null, setConfigMaps),
@@ -33,18 +22,18 @@ export default function ConfigMapList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (configMap) => configMap.metadata.name
             },
             {
               label: 'Namespace',
-              datum: 'namespace',
+              getter: (configMap) => configMap.metadata.namespace
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (configMap) => timeAgo(configMap.metadata.creationTimestamp)
             },
           ]}
-          data={configMapsData}
+          data={configMaps}
         />
       </Box>
     </Paper>
