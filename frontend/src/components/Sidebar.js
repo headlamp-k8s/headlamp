@@ -34,20 +34,24 @@ const LIST_ITEMS = [
     label: 'Nodes'
   },
   {
-    name: 'storage_classes',
+    name: 'storageClasses',
     label: 'Storage Classes'
   },
   {
-    name: 'storage_volumes',
+    name: 'storageVolumes',
     label: 'Storage Volumes'
   },
   {
-    name: 'persistent_volume_claims',
+    name: 'persistentVolumeClaims',
     label: 'Persistent Volume Claims'
   },
   {
     name: 'workloads',
     label: 'Workloads'
+  },
+  {
+    name: 'services',
+    label: 'Services'
   },
   {
     name: 'pods',
@@ -58,11 +62,11 @@ const LIST_ITEMS = [
     label: 'Ingresses'
   },
   {
-    name: 'replica_sets',
+    name: 'replicaSets',
     label: 'Replica Sets'
   },
   {
-    name: 'service_accounts',
+    name: 'serviceAccounts',
     label: 'Service Accounts'
   },
   {
@@ -70,11 +74,11 @@ const LIST_ITEMS = [
     label: 'Roles'
   },
   {
-    name: 'config_maps',
+    name: 'configMaps',
     label: 'Config Maps'
   },
   {
-    name: 'role_bindings',
+    name: 'roleBindings',
     label: 'Role Bindings'
   },
   {
