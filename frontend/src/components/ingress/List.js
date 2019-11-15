@@ -7,19 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function IngressList() {
-  const [ingressesData, setIngressesData] = React.useState([]);
-
-  function setIngresses(ingresses) {
-    const data = ingresses.map(ingress => {
-      return {
-        name: ingress.metadata.name,
-        namespace: ingress.metadata.namespace,
-        hosts: getHosts(ingress),
-        date: timeAgo(ingress.metadata.creationTimestamp),
-      };
-    });
-    setIngressesData(data);
-  }
+  const [ingresses, setIngresses] = React.useState([]);
 
   function getHosts(ingress) {
     return ingress.spec.rules.map(({host}) => host).join(' | ');
@@ -38,22 +26,22 @@ export default function IngressList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (ingress) => ingress.metadata.name
             },
             {
               label: 'Namespace',
-              datum: 'namespace',
+              getter: (ingress) => ingress.metadata.namespace
             },
             {
               label: 'Hosts',
-              datum: 'hosts',
+              getter: (ingress) => getHosts(ingress)
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (ingress) => timeAgo(ingress.metadata.creationTimestamp)
             },
           ]}
-          data={ingressesData}
+          data={ingresses}
         />
       </Box>
     </Paper>
