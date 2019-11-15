@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import Link from '../common/Link';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -22,7 +23,15 @@ export default function VolumeList() {
           columns={[
             {
               label: 'Name',
-              getter: (volume) => volume.metadata.name
+              getter: (volume) =>
+                <Link
+                  routeName="persistentVolume"
+                  params={{
+                    name: volume.metadata.name,
+                  }}
+                >
+                  {volume.metadata.name}
+                </Link>
             },
             {
               label: 'Status',
