@@ -19,6 +19,7 @@ import PodList from '../components/pods/List';
 import StorageClassDetails from '../components/storage/ClassDetails';
 import IngressDetails from '../components/ingress/Details';
 import { generatePath } from 'react-router';
+import ServiceDetails from '../components/service/Details';
 
 export const ROUTES = {
   cluster: {
@@ -77,6 +78,11 @@ export const ROUTES = {
     exact: true,
     name: 'Services',
     component: () => <ServiceList />
+  },
+  service: {
+    path: "/services/:namespace/:name",
+    exact: true,
+    component: () => <ServiceDetails />
   },
   ingresses: {
     path: "/ingresses",

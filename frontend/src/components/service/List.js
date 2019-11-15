@@ -5,6 +5,7 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import Link from '../common/Link';
 
 export default function ServiceList() {
   const [services, setServices] = React.useState([]);
@@ -22,7 +23,16 @@ export default function ServiceList() {
           columns={[
             {
               label: 'Name',
-              getter: (service) => service.metadata.name
+              getter: (service) =>
+                <Link
+                  routeName="service"
+                  params={{
+                    namespace: service.metadata.namespace,
+                    name: service.metadata.name,
+                  }}
+                >
+                  {service.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',
