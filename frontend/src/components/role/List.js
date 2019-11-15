@@ -13,13 +13,10 @@ export default function RoleList() {
     let data = {...roles};
 
     newRoles.forEach((item) => {
-      if (!(item.kind in data)) data[item.kind] = [];
-      data[item.kind].push({
-        kind: item.kind,
-        name: item.metadata.name,
-        namespace: item.metadata.namespace || "All namespaces",
-        date: timeAgo(item.metadata.creationTimestamp),
-      });
+      if (!(item.kind in data)) {
+        data[item.kind] = [];
+      }
+      data[item.kind].push(item);
     });
 
     return data;
@@ -47,19 +44,19 @@ export default function RoleList() {
           columns={[
             {
               label: 'Type',
-              datum: 'kind'
+              getter: (item) => item.kind
             },
             {
               label: 'Name',
-              datum: 'name'
+              getter: (item) => item.metadata.name
             },
             {
               label: 'Namespace',
-              datum: 'namespace',
+              getter: (item) => item.metadata.namespace
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (item) => timeAgo(item.metadata.creationTimestamp)
             },
           ]}
           data={getJointItems()}
