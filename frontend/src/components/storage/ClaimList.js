@@ -7,26 +7,11 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function VolumeClaimList() {
-  const [volumeClaimData, setVolumeClaimData] = React.useState([]);
-
-  function setClaims(volumeClaims) {
-    const data = volumeClaims.map(volumeClaim => {
-      return {
-        name: volumeClaim.metadata.name,
-        namespace: volumeClaim.metadata.namespace,
-        status: volumeClaim.status.phase,
-        class_name: volumeClaim.spec.storageClassName,
-        volume_name: volumeClaim.spec.volumeName,
-        capacity: volumeClaim.status.capacity.storage,
-        date: timeAgo(volumeClaim.metadata.creationTimestamp),
-      };
-    });
-    setVolumeClaimData(data);
-  }
+  const [volumeClaim, setVolumeClaim] = React.useState([]);
 
   useConnectApi(
     // @todo: use namespace for filtering.
-    api.persistentVolumeClaim.list.bind(null, null, setClaims),
+    api.persistentVolumeClaim.list.bind(null, null, setVolumeClaim),
   );
 
   return (
@@ -38,34 +23,34 @@ export default function VolumeClaimList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (volumeClaim) => volumeClaim.metadata.name
             },
             {
               label: 'Namespace',
-              datum: 'namespace',
+              getter: (volumeClaim) => volumeClaim.metadata.namespace
             },
             {
               label: 'Status',
-              datum: 'status',
+              getter: (volumeClaim) => volumeClaim.status.phase
             },
             {
               label: 'Class Name',
-              datum: 'class_name',
+              getter: (volumeClaim) => volumeClaim.spec.storageClassName
             },
             {
               label: 'Volume',
-              datum: 'volume_name',
+              getter: (volumeClaim) => volumeClaim.spec.volumeName
             },
             {
               label: 'Capacity',
-              datum: 'capacity',
+              getter: (volumeClaim) => volumeClaim.status.capacity.storage
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (volumeClaim) => timeAgo(volumeClaim.metadata.creationTimestamp)
             },
           ]}
-          data={volumeClaimData}
+          data={volumeClaim}
         />
       </Box>
     </Paper>
