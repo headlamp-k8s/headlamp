@@ -18,110 +18,114 @@ import RoleBindingList from '../components/role/BindingList';
 import PodList from '../components/pods/List';
 import StorageClassDetails from '../components/storage/ClassDetails';
 
-export const ROUTES = [
-  {
+export const ROUTES = {
+  cluster: {
     path: "/",
     exact: true,
     name: 'Cluster',
     component: () => <Overview />
   },
-  {
+  namespaces: {
     path: "/namespaces",
     name: 'Namespaces',
     component: () => <NamespacesList />
   },
-  {
+  nodes: {
     path: "/nodes",
     name: 'Nodes',
     component: () => <NodeList />
   },
-  {
+  storage_classes: {
     path: "/storage/classes",
     exact: true,
     name: 'Storage Classes',
     component: () => <StorageClassList />
   },
-  {
+  storage_class_details: {
     path: "/storage/classes/:name",
     name: 'Storage Classes',
     component: () => <StorageClassDetails />
   },
-  {
+  storage_volumes: {
     path: "/storage/persistentvolumes",
     exact: true,
     name: 'Persistent Volumes',
     component: () => <PersistentVolumeList />
   },
-  {
+  persistent_volume_claims: {
     path: "/storage/persistentvolumeclaims",
     exact: true,
     name: 'Persistent Volume Claims',
     component: () => <PersistentVolumeClaimList />
   },
-  {
+  workloads: {
     path: "/workload",
     exact: true,
     name: 'Workloads',
     component: () => <WorkloadOverview />
   },
-  {
+  pods: {
     path: "/pods",
     exact: true,
     name: 'Pods',
     component: () => <PodList />
   },
-  {
+  services: {
     path: "/services",
     exact: true,
     name: 'Services',
     component: () => <ServiceList />
   },
-  {
+  ingresses: {
     path: "/ingresses",
     exact: true,
     name: 'Ingresses',
     component: () => <IngressList />
   },
-  {
+  replica_sets: {
     path: "/replicasets",
     exact: true,
     name: 'Replica Sets',
     component: () => <ReplicaSetList />
   },
-  {
+  config_maps: {
     path: "/configmaps",
     exact: true,
     name: 'Config Maps',
     component: () => <ConfigMapList />
   },
-  {
+  service_accounts: {
     path: "/serviceaccounts",
     exact: true,
     name: 'Service Accounts',
     component: () => <ServiceAccountList />
   },
-  {
+  roles: {
     path: "/roles",
     exact: true,
     name: 'Roles',
     component: () => <RoleList />
   },
-  {
+  role_bindings: {
     path: "/rolebindings",
     exact: true,
     name: 'Role Bindings',
     component: () => <RoleBindingList />
   },
-  {
+  secrets: {
     path: "/secrets",
     exact: true,
     name: 'Secrets',
     component: () => <SecretList />
   },
-  {
+  login: {
     path: "/login",
     exact: true,
     name: 'Login',
     component: () => <Auth />
   },
-];
+};
+
+export function getRoute(route_name) {
+  return ROUTES[route_name];
+}

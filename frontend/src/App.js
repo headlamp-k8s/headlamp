@@ -36,7 +36,7 @@ function App() {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <Switch>
-              {ROUTES.map((route, index) =>
+              {Object.values(ROUTES).map((route, index) =>
                 <Route
                   key={index}
                   path={route.path}
