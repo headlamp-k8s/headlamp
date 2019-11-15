@@ -24,6 +24,7 @@ import ServiceDetails from '../components/service/Details';
 import ConfigDetails from '../components/configmap/Details';
 import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
 import ServiceAccountDetails from '../components/serviceaccount/Details';
+import RoleDetails from '../components/role/Details';
 
 export const ROUTES = {
   cluster: {
@@ -143,6 +144,16 @@ export const ROUTES = {
     exact: true,
     name: 'Roles',
     component: () => <RoleList />
+  },
+  role: {
+    path: "/roles/:namespace/:name",
+    exact: true,
+    component: () => <RoleDetails />
+  },
+  clusterrole: {
+    path: "/clusterroles/:name",
+    exact: true,
+    component: () => <RoleDetails />
   },
   roleBindings: {
     path: "/rolebindings",

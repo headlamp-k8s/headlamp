@@ -5,6 +5,7 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import Link from '../common/Link';
 
 export default function RoleList() {
   const [rolesData, dispatch] = React.useReducer(setRoles, {});
@@ -48,7 +49,16 @@ export default function RoleList() {
             },
             {
               label: 'Name',
-              getter: (item) => item.metadata.name
+              getter: (item) =>
+                <Link
+                  routeName={item.metadata.namespace ? "role" : "clusterrole"}
+                  params={{
+                    namespace: item.metadata.namespace || "",
+                    name: item.metadata.name
+                  }}
+                >
+                  {item.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',
