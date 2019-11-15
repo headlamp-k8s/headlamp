@@ -5,6 +5,7 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import Link from '../common/Link';
 
 export default function VolumeClaimList() {
   const [volumeClaim, setVolumeClaim] = React.useState([]);
@@ -23,7 +24,16 @@ export default function VolumeClaimList() {
           columns={[
             {
               label: 'Name',
-              getter: (volumeClaim) => volumeClaim.metadata.name
+              getter: (volumeClaim) =>
+                <Link
+                  routeName="persistentVolumeClaim"
+                  params={{
+                    namespace: volumeClaim.metadata.namespace,
+                    name: volumeClaim.metadata.name
+                  }}
+                >
+                  {volumeClaim.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',

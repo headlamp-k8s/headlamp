@@ -22,6 +22,7 @@ import IngressDetails from '../components/ingress/Details';
 import { generatePath } from 'react-router';
 import ServiceDetails from '../components/service/Details';
 import ConfigDetails from '../components/configmap/Details';
+import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
 
 export const ROUTES = {
   cluster: {
@@ -68,6 +69,11 @@ export const ROUTES = {
     exact: true,
     name: 'Persistent Volume Claims',
     component: () => <PersistentVolumeClaimList />
+  },
+  persistentVolumeClaim: {
+    path: "/storage/persistentvolumeclaims/:namespace/:name",
+    exact: true,
+    component: () => <PersistentVolumeClaimDetails />
   },
   workloads: {
     path: "/workload",
