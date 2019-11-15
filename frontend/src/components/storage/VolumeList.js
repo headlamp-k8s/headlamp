@@ -5,6 +5,7 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import Link from '../common/Link';
 
 export default function VolumeList() {
   const [volumes, setVolumes] = React.useState([]);
@@ -22,7 +23,15 @@ export default function VolumeList() {
           columns={[
             {
               label: 'Name',
-              getter: (volume) => volume.metadata.name
+              getter: (volume) =>
+                <Link
+                  routeName="persistentVolume"
+                  params={{
+                    name: volume.metadata.name,
+                  }}
+                >
+                  {volume.metadata.name}
+                </Link>
             },
             {
               label: 'Status',
