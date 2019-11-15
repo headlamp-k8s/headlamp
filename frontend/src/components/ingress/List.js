@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import Link from '../common/Link';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -26,7 +27,13 @@ export default function IngressList() {
           columns={[
             {
               label: 'Name',
-              getter: (ingress) => ingress.metadata.name
+              getter: (ingress) =>
+                <Link
+                  routeName="ingress"
+                  params={{namespace: ingress.metadata.namespace, name: ingress.metadata.name}}
+                >
+                  {ingress.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',

@@ -3,6 +3,7 @@ import { generatePath } from 'react-router';
 import Auth from '../components/account/Auth';
 import Overview from '../components/cluster/Overview';
 import ConfigMapList from '../components/configmap/List';
+import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
@@ -82,6 +83,11 @@ export const ROUTES = {
     exact: true,
     name: 'Ingresses',
     component: () => <IngressList />
+  },
+  ingress: {
+    path: '/ingresses/:namespace/:name',
+    exact: true,
+    component: () => <IngressDetails />
   },
   replicaSets: {
     path: '/replicasets',
