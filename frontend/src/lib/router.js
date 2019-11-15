@@ -35,24 +35,24 @@ export const ROUTES = {
     name: 'Nodes',
     component: () => <NodeList />
   },
-  storage_classes: {
+  storageClasses: {
     path: "/storage/classes",
     exact: true,
     name: 'Storage Classes',
     component: () => <StorageClassList />
   },
-  storage_class_details: {
+  storageClassDetails: {
     path: "/storage/classes/:name",
     name: 'Storage Classes',
     component: () => <StorageClassDetails />
   },
-  storage_volumes: {
+  storageVolumes: {
     path: "/storage/persistentvolumes",
     exact: true,
     name: 'Persistent Volumes',
     component: () => <PersistentVolumeList />
   },
-  persistent_volume_claims: {
+  persistentVolumeClaims: {
     path: "/storage/persistentvolumeclaims",
     exact: true,
     name: 'Persistent Volume Claims',
@@ -82,19 +82,19 @@ export const ROUTES = {
     name: 'Ingresses',
     component: () => <IngressList />
   },
-  replica_sets: {
+  replicaSets: {
     path: "/replicasets",
     exact: true,
     name: 'Replica Sets',
     component: () => <ReplicaSetList />
   },
-  config_maps: {
+  configMaps: {
     path: "/configmaps",
     exact: true,
     name: 'Config Maps',
     component: () => <ConfigMapList />
   },
-  service_accounts: {
+  serviceAccounts: {
     path: "/serviceaccounts",
     exact: true,
     name: 'Service Accounts',
@@ -106,7 +106,7 @@ export const ROUTES = {
     name: 'Roles',
     component: () => <RoleList />
   },
-  role_bindings: {
+  roleBindings: {
     path: "/rolebindings",
     exact: true,
     name: 'Role Bindings',
@@ -126,6 +126,6 @@ export const ROUTES = {
   },
 };
 
-export function getRoute(route_name) {
-  return ROUTES[route_name];
+export function getRoute(routeName) {
+  return ROUTES[routeName];
 }
