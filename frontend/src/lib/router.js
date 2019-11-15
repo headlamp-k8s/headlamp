@@ -15,6 +15,7 @@ import RoleList from '../components/role/List';
 import SecretList from '../components/secret/List';
 import ServiceDetails from '../components/service/Details';
 import ServiceList from '../components/service/List';
+import ServiceAccountDetails from '../components/serviceaccount/Details';
 import ServiceAccountList from '../components/serviceaccount/List';
 import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
@@ -131,6 +132,11 @@ export const ROUTES = {
     exact: true,
     name: 'Service Accounts',
     component: () => <ServiceAccountList />
+  },
+  serviceAccount: {
+    path: '/serviceaccounts/:namespace/:name',
+    exact: true,
+    component: () => <ServiceAccountDetails />
   },
   roles: {
     path: '/roles',
