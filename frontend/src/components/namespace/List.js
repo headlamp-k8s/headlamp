@@ -7,18 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function NamespacesList() {
-  const [namespacesData, setNamespacesData] = React.useState([]);
-
-  function setNamespaces(namespaces) {
-    const data = namespaces.map(namespace => {
-      return {
-        name: namespace.metadata.name,
-        status: namespace.status.phase,
-        date: timeAgo(namespace.metadata.creationTimestamp),
-      };
-    });
-    setNamespacesData(data);
-  }
+  const [namespaces, setNamespaces] = React.useState([]);
 
   useConnectApi(
     api.namespace.list.bind(null, setNamespaces),
@@ -33,18 +22,18 @@ export default function NamespacesList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (namespace) => namespace.metadata.name
             },
             {
               label: 'Status',
-              datum: 'status',
+              getter: (namespace) => namespace.status.phase
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (namespace) => timeAgo(namespace.metadata.creationTimestamp)
             },
           ]}
-          data={namespacesData}
+          data={namespaces}
         />
       </Box>
     </Paper>
