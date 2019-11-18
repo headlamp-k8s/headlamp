@@ -8,6 +8,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
 import Empty from './EmptyContent';
+import Loader from './Loader';
 
 export default function SimpleTable(props) {
   const {columns} = props;
@@ -32,6 +33,10 @@ export default function SimpleTable(props) {
   function getPagedRows() {
     const startIndex = page * rowsPerPage;
     return props.data.slice(startIndex, startIndex + rowsPerPage);
+  }
+
+  if (props.data === null) {
+    return <Loader />;
   }
 
   return (
