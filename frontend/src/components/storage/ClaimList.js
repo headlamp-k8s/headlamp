@@ -8,7 +8,7 @@ import SimpleTable from '../common/SimpleTable';
 import Link from '../common/Link';
 
 export default function VolumeClaimList() {
-  const [volumeClaim, setVolumeClaim] = React.useState([]);
+  const [volumeClaim, setVolumeClaim] = React.useState(null);
 
   useConnectApi(
     // @todo: use namespace for filtering.

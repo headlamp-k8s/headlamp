@@ -8,7 +8,7 @@ import SimpleTable from '../common/SimpleTable';
 import Link from '../common/Link';
 
 export default function PodList() {
-  const [pods, setPods] = React.useState([]);
+  const [pods, setPods] = React.useState(null);
 
   useConnectApi(
     api.pod.list.bind(null, null, setPods),

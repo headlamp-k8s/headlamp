@@ -8,7 +8,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function NodeList() {
-  const [nodes, setNodes] = React.useState([]);
+  const [nodes, setNodes] = React.useState(null);
 
   useConnectApi(
     api.node.list.bind(null, setNodes),

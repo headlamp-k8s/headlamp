@@ -8,7 +8,7 @@ import SimpleTable from '../common/SimpleTable';
 import Link from '../common/Link';
 
 export default function VolumeList() {
-  const [volumes, setVolumes] = React.useState([]);
+  const [volumes, setVolumes] = React.useState(null);
 
   useConnectApi(
     api.persistentVolume.list.bind(null, setVolumes),

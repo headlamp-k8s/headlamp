@@ -8,7 +8,7 @@ import SimpleTable from '../common/SimpleTable';
 import Link from '../common/Link';
 
 export default function IngressList() {
-  const [ingresses, setIngresses] = React.useState([]);
+  const [ingresses, setIngresses] = React.useState(null);
 
   function getHosts(ingress) {
     return ingress.spec.rules.map(({host}) => host).join(' | ');

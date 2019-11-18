@@ -9,7 +9,7 @@ import SimpleTable from '../common/SimpleTable';
 import {Link as RouterLink} from 'react-router-dom';
 
 export default function ClassList() {
-  const [storageClassData, setStorageClassData] = React.useState([]);
+  const [storageClassData, setStorageClassData] = React.useState(null);
 
   useConnectApi(
     api.storageClass.list.bind(null, setStorageClassData),

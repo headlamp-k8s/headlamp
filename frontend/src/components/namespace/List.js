@@ -8,7 +8,7 @@ import SimpleTable from '../common/SimpleTable';
 import { ResourceLink } from '../common/Resource';
 
 export default function NamespacesList() {
-  const [namespaces, setNamespaces] = React.useState([]);
+  const [namespaces, setNamespaces] = React.useState(null);
 
   useConnectApi(
     api.namespace.list.bind(null, setNamespaces),

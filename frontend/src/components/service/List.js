@@ -8,7 +8,7 @@ import SimpleTable from '../common/SimpleTable';
 import Link from '../common/Link';
 
 export default function ServiceList() {
-  const [services, setServices] = React.useState([]);
+  const [services, setServices] = React.useState(null);
 
   useConnectApi(
     api.service.list.bind(null, null, setServices),

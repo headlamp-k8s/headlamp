@@ -8,7 +8,7 @@ import SimpleTable from '../common/SimpleTable';
 import Link from '../common/Link';
 
 export default function SecretList() {
-  const [secrets, setSecrets] = React.useState([]);
+  const [secrets, setSecrets] = React.useState(null);
 
   useConnectApi(
     api.secret.list.bind(null, null, setSecrets),
