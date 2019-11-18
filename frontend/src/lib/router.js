@@ -6,6 +6,7 @@ import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
+import NamespaceDetails from '../components/namespace/Details';
 import NamespacesList from '../components/namespace/List';
 import NodeDetails from '../components/node/Details';
 import NodeList from '../components/node/List';
@@ -41,7 +42,12 @@ export const ROUTES = {
   namespaces: {
     path: '/namespaces',
     name: 'Namespaces',
+    exact: true,
     component: () => <NamespacesList />
+  },
+  Namespace: {
+    path: '/namespaces/:name',
+    component: () => <NamespaceDetails />
   },
   nodes: {
     path: '/nodes',
