@@ -5,6 +5,7 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import { ResourceLink } from '../common/Resource';
 
 export default function ReplicaSetList() {
   const [replicaSets, setReplicaSets] = React.useState([]);
@@ -26,7 +27,7 @@ export default function ReplicaSetList() {
           columns={[
             {
               label: 'Name',
-              getter: (replicaSet) => replicaSet.metadata.name
+              getter: (replicaSet) => <ResourceLink resource={replicaSet} />
             },
             {
               label: 'Namespace',

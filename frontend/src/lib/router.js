@@ -28,6 +28,7 @@ import RoleDetails from '../components/role/Details';
 import RoleBindingDetails from '../components/role/BindingDetails';
 import SecretDetails from '../components/secret/Details';
 import PodDetails from '../components/pods/Details';
+import ReplicaSetDetails from '../components/replicaset/Details';
 
 export const ROUTES = {
   cluster: {
@@ -124,6 +125,11 @@ export const ROUTES = {
     exact: true,
     name: 'Replica Sets',
     component: () => <ReplicaSetList />
+  },
+  ReplicaSet: {
+    path: "/replicasets/:namespace/:name",
+    exact: true,
+    component: () => <ReplicaSetDetails />
   },
   configMaps: {
     path: "/configmaps",
