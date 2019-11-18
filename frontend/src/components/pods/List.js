@@ -7,19 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function PodList() {
-  const [podsData, setPodsData] = React.useState([]);
-
-  function setPods(pods) {
-    const data = pods.map(pod => {
-      return {
-        name: pod.metadata.name,
-        namespace: pod.metadata.namespace,
-        status: pod.status.phase,
-        date: timeAgo(pod.metadata.creationTimestamp),
-      };
-    });
-    setPodsData(data);
-  }
+  const [pods, setPods] = React.useState([]);
 
   useConnectApi(
     api.pod.list.bind(null, null, setPods),
@@ -34,22 +22,22 @@ export default function PodList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (pod) => pod.metadata.name
             },
             {
               label: 'Namespace',
-              datum: 'namespace',
+              getter: (pod) => pod.metadata.namespace
             },
             {
               label: 'Status',
-              datum: 'status',
+              getter: (pod) => pod.status.phase
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (pod) => timeAgo(pod.metadata.creationTimestamp)
             },
           ]}
-          data={podsData}
+          data={pods}
         />
       </Box>
     </Paper>
