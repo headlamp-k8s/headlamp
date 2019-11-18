@@ -7,6 +7,7 @@ import ConfigMapList from '../components/configmap/List';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import NamespacesList from '../components/namespace/List';
+import NodeDetails from '../components/node/Details';
 import NodeList from '../components/node/List';
 import PodDetails from '../components/pods/Details';
 import PodList from '../components/pods/List';
@@ -45,7 +46,12 @@ export const ROUTES = {
   nodes: {
     path: '/nodes',
     name: 'Nodes',
+    exact: true,
     component: () => <NodeList />
+  },
+  Node: {
+    path: '/nodes/:name',
+    component: () => <NodeDetails />
   },
   storageClasses: {
     path: '/storage/classes',
