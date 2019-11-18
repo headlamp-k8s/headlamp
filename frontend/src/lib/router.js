@@ -10,6 +10,7 @@ import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
 import PodDetails from '../components/pods/Details';
 import PodList from '../components/pods/List';
+import ReplicaSetDetails from '../components/replicaset/Details';
 import ReplicaSetList from '../components/replicaset/List';
 import RoleBindingDetails from '../components/role/BindingDetails';
 import RoleBindingList from '../components/role/BindingList';
@@ -124,6 +125,11 @@ export const ROUTES = {
     exact: true,
     name: 'Replica Sets',
     component: () => <ReplicaSetList />
+  },
+  ReplicaSet: {
+    path: '/replicasets/:namespace/:name',
+    exact: true,
+    component: () => <ReplicaSetDetails />
   },
   configMaps: {
     path: '/configmaps',
