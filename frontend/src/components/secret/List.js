@@ -7,19 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function SecretList() {
-  const [secretsData, setSecretsData] = React.useState([]);
-
-  function setSecrets(secrets) {
-    const data = secrets.map(secret => {
-      return {
-        name: secret.metadata.name,
-        namespace: secret.metadata.namespace,
-        type: secret.type,
-        date: timeAgo(secret.metadata.creationTimestamp),
-      };
-    });
-    setSecretsData(data);
-  }
+  const [secrets, setSecrets] = React.useState([]);
 
   useConnectApi(
     api.secret.list.bind(null, null, setSecrets),
@@ -34,22 +22,22 @@ export default function SecretList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (secret) => secret.metadata.name
             },
             {
               label: 'Namespace',
-              datum: 'namespace',
+              getter: (secret) => secret.metadata.namespace
             },
             {
               label: 'Type',
-              datum: 'type',
+              getter: (secret) => secret.type
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (secret) => timeAgo(secret.metadata.creationTimestamp)
             },
           ]}
-          data={secretsData}
+          data={secrets}
         />
       </Box>
     </Paper>
