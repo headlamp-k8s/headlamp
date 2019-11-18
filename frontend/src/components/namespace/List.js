@@ -5,6 +5,7 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import { ResourceLink } from '../common/Resource';
 
 export default function NamespacesList() {
   const [namespaces, setNamespaces] = React.useState([]);
@@ -22,7 +23,8 @@ export default function NamespacesList() {
           columns={[
             {
               label: 'Name',
-              getter: (namespace) => namespace.metadata.name
+              getter: (namespace) =>
+                <ResourceLink resource={namespace} />
             },
             {
               label: 'Status',

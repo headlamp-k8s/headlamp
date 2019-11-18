@@ -30,6 +30,7 @@ import SecretDetails from '../components/secret/Details';
 import PodDetails from '../components/pods/Details';
 import ReplicaSetDetails from '../components/replicaset/Details';
 import NodeDetails from '../components/node/Details';
+import NamespaceDetails from '../components/namespace/Details';
 
 export const ROUTES = {
   cluster: {
@@ -41,7 +42,12 @@ export const ROUTES = {
   namespaces: {
     path: "/namespaces",
     name: 'Namespaces',
+    exact: true,
     component: () => <NamespacesList />
+  },
+  Namespace: {
+    path: "/namespaces/:name",
+    component: () => <NamespaceDetails />
   },
   nodes: {
     path: "/nodes",
