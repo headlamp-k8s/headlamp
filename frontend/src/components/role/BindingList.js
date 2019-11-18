@@ -5,6 +5,7 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import Link from '../common/Link';
 
 export default function RoleBindingList() {
   const [roleBindingsData, dispatch] = React.useReducer(setRoleBindings, {});
@@ -49,7 +50,16 @@ export default function RoleBindingList() {
             },
             {
               label: 'Name',
-              getter: (item) => item.metadata.name
+              getter: (item) =>
+                <Link
+                  routeName={item.metadata.namespace ? "roleBinding" : "clusterRoleBinding"}
+                  params={{
+                    namespace: item.metadata.namespace || "",
+                    name: item.metadata.name
+                  }}
+                >
+                  {item.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',
