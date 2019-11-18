@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { InfoLabel, ValueLabel } from '../common/Label';
+import Link from './Link';
 
 export function MetadataDisplay(props) {
   const { resource } = props;
@@ -25,5 +26,22 @@ export function MetadataDisplay(props) {
         </InfoLabel>
       }
     </React.Fragment>
+  );
+}
+
+export function ResourceLink(props) {
+  const {
+    routeName=props.resource.kind,
+    routeParams=props.resource.metadata,
+    name=props.resource.metadata.name,
+  } = props;
+
+  return (
+    <Link
+      routeName={routeName}
+      params={routeParams}
+    >
+      {name}
+    </Link>
   );
 }
