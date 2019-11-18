@@ -7,20 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ReplicaSetList() {
-  const [replicasetsData, setReplicaSetsData] = React.useState([]);
-
-  function setReplicaSets(replicaSets) {
-    const data = replicaSets.map(replicaSet => {
-      return {
-        name: replicaSet.metadata.name,
-        namespace: replicaSet.metadata.namespace,
-        generation: replicaSet.status.observedGeneration,
-        replicas: getReplicas(replicaSet),
-        date: timeAgo(replicaSet.metadata.creationTimestamp),
-      };
-    });
-    setReplicaSetsData(data);
-  }
+  const [replicaSets, setReplicaSets] = React.useState([]);
 
   function getReplicas(replicaSet) {
     return `${replicaSet.spec.replicas} / ${replicaSet.status.replicas}`
@@ -39,26 +26,26 @@ export default function ReplicaSetList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (replicaSet) => replicaSet.metadata.name
             },
             {
               label: 'Namespace',
-              datum: 'namespace',
+              getter: (replicaSet) => replicaSet.metadata.namespace
             },
             {
               label: 'Generation',
-              datum: 'generation',
+              getter: (replicaSet) => replicaSet.status.observedGeneration
             },
             {
               label: 'Replicas',
-              datum: 'replicas',
+              getter: (replicaSet) => getReplicas(replicaSet)
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (replicaSet) => timeAgo(replicaSet.metadata.creationTimestamp)
             },
           ]}
-          data={replicasetsData}
+          data={replicaSets}
         />
       </Box>
     </Paper>
