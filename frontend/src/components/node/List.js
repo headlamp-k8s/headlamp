@@ -7,19 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function NodeList() {
-  const [nodesData, setNodesData] = React.useState([]);
-
-  function setNodes(nodes) {
-    const data = nodes.map(node => {
-      return {
-        name: node.metadata.name,
-        status: node.status.phase,
-        date: timeAgo(node.metadata.creationTimestamp),
-        // @todo: Add CPU/RAM data
-      };
-    });
-    setNodesData(data);
-  }
+  const [nodes, setNodes] = React.useState([]);
 
   useConnectApi(
     api.node.list.bind(null, setNodes),
@@ -34,34 +22,34 @@ export default function NodeList() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              getter: (node) => node.metadata.name
             },
             {
               label: 'Ready',
-              datum: 'ready',
+              getter: (node) => node.status.phase
             },
             {
               label: 'CPU Requests',
-              datum: 'cpu_requests',
+              getter: (node) => null // @todo: TBD
             },
             {
               label: 'CPU Limits',
-              datum: 'cpu_limits',
+              getter: (node) => null // @todo: TBD
             },
             {
               label: 'Memory Requests',
-              datum: 'ram_requests',
+              getter: (node) => null // @todo: TBD
             },
             {
               label: 'Memory Limits',
-              datum: 'ram_limits',
+              getter: (node) => null // @todo: TBD
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (node) => timeAgo(node.metadata.creationTimestamp)
             },
           ]}
-          data={nodesData}
+          data={nodes}
         />
       </Box>
     </Paper>
