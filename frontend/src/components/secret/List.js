@@ -5,6 +5,7 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import Link from '../common/Link';
 
 export default function SecretList() {
   const [secrets, setSecrets] = React.useState([]);
@@ -22,7 +23,16 @@ export default function SecretList() {
           columns={[
             {
               label: 'Name',
-              getter: (secret) => secret.metadata.name
+              getter: (secret) =>
+                <Link
+                  routeName="secret"
+                  params={{
+                    namespace: secret.metadata.namespace,
+                    name: secret.metadata.name,
+                  }}
+                >
+                  {secret.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',

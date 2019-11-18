@@ -26,6 +26,7 @@ import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
 import ServiceAccountDetails from '../components/serviceaccount/Details';
 import RoleDetails from '../components/role/Details';
 import RoleBindingDetails from '../components/role/BindingDetails';
+import SecretDetails from '../components/secret/Details';
 
 export const ROUTES = {
   cluster: {
@@ -179,6 +180,11 @@ export const ROUTES = {
     exact: true,
     name: 'Secrets',
     component: () => <SecretList />
+  },
+  secret: {
+    path: "/secrets/:namespace/:name",
+    exact: true,
+    component: () => <SecretDetails />
   },
   login: {
     path: "/login",
