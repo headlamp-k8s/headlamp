@@ -29,6 +29,7 @@ import RoleBindingDetails from '../components/role/BindingDetails';
 import SecretDetails from '../components/secret/Details';
 import PodDetails from '../components/pods/Details';
 import ReplicaSetDetails from '../components/replicaset/Details';
+import NodeDetails from '../components/node/Details';
 
 export const ROUTES = {
   cluster: {
@@ -45,7 +46,12 @@ export const ROUTES = {
   nodes: {
     path: "/nodes",
     name: 'Nodes',
+    exact: true,
     component: () => <NodeList />
+  },
+  Node: {
+    path: "/nodes/:name",
+    component: () => <NodeDetails />
   },
   storageClasses: {
     path: "/storage/classes",

@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import { ResourceLink } from '../common/Resource';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -22,7 +23,8 @@ export default function NodeList() {
           columns={[
             {
               label: 'Name',
-              getter: (node) => node.metadata.name
+              getter: (node) =>
+                <ResourceLink resource={node} />
             },
             {
               label: 'Ready',
