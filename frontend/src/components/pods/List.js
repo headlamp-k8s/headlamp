@@ -5,6 +5,7 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import Link from '../common/Link';
 
 export default function PodList() {
   const [pods, setPods] = React.useState([]);
@@ -22,7 +23,16 @@ export default function PodList() {
           columns={[
             {
               label: 'Name',
-              getter: (pod) => pod.metadata.name
+              getter: (pod) =>
+                <Link
+                  routeName="pod"
+                  params={{
+                    namespace: pod.metadata.namespace,
+                    name: pod.metadata.name
+                  }}
+                >
+                  {pod.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',

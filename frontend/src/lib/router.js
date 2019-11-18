@@ -27,6 +27,7 @@ import ServiceAccountDetails from '../components/serviceaccount/Details';
 import RoleDetails from '../components/role/Details';
 import RoleBindingDetails from '../components/role/BindingDetails';
 import SecretDetails from '../components/secret/Details';
+import PodDetails from '../components/pods/Details';
 
 export const ROUTES = {
   cluster: {
@@ -90,6 +91,11 @@ export const ROUTES = {
     exact: true,
     name: 'Pods',
     component: () => <PodList />
+  },
+  pod: {
+    path: "/pods/:namespace/:name",
+    exact: true,
+    component: () => <PodDetails />
   },
   services: {
     path: "/services",
