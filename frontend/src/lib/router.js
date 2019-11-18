@@ -30,6 +30,7 @@ import StorageClassDetails from '../components/storage/ClassDetails';
 import StorageClassList from '../components/storage/ClassList';
 import PersistentVolumeDetails from '../components/storage/VolumeDetails';
 import PersistentVolumeList from '../components/storage/VolumeList';
+import WorkloadDetails from '../components/workload/Details';
 import WorkloadOverview from '../components/workload/Overview';
 
 export const ROUTES = {
@@ -98,6 +99,31 @@ export const ROUTES = {
     exact: true,
     name: 'Workloads',
     component: () => <WorkloadOverview />
+  },
+  DaemonSet: {
+    path: '/daemonsets/:namespace/:name',
+    exact: true,
+    component: () => <WorkloadDetails workloadKind="DaemonSet" />
+  },
+  StatefulSet: {
+    path: '/statefulsets/:namespace/:name',
+    exact: true,
+    component: () => <WorkloadDetails workloadKind="StatefulSet" />
+  },
+  Deployment: {
+    path: '/deployments/:namespace/:name',
+    exact: true,
+    component: () => <WorkloadDetails workloadKind="Deployment" />
+  },
+  Job: {
+    path: '/jobs/:namespace/:name',
+    exact: true,
+    component: () => <WorkloadDetails workloadKind="Job" />
+  },
+  CronJob: {
+    path: '/cronjobs/:namespace/:name',
+    exact: true,
+    component: () => <WorkloadDetails workloadKind="CronJob" />
   },
   pods: {
     path: '/pods',

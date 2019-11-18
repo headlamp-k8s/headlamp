@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import { ResourceLink } from '../common/Resource';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -13,14 +14,10 @@ export default function Overview() {
     const data = {...workloads};
 
     newWorkloads.forEach((item) => {
-      if (!(item.kind in data)) data[item.kind] = [];
-      data[item.kind].push({
-        kind: item.kind,
-        name: item.metadata.name,
-        namespace: item.metadata.namespace,
-        pods: getPods(item),
-        date: timeAgo(item.metadata.creationTimestamp),
-      });
+      if (!(item.kind in data)) {
+        data[item.kind] = [];
+      }
+      data[item.kind].push(item);
     });
 
     return data;
@@ -57,23 +54,24 @@ export default function Overview() {
           columns={[
             {
               label: 'Type',
-              datum: 'kind'
+              getter: (item) => item.kind
             },
             {
               label: 'Name',
-              datum: 'name'
+              getter: (item) =>
+                <ResourceLink resource={item} />
             },
             {
               label: 'Namespace',
-              datum: 'namespace',
+              getter: (item) => item.metadata.namespace
             },
             {
               label: 'Pods',
-              datum: 'pods',
+              getter: (item) => getPods(item)
             },
             {
               label: 'Age',
-              datum: 'date',
+              getter: (item) => timeAgo(item.metadata.creationTimestamp)
             },
           ]}
           data={getJointItems()}
