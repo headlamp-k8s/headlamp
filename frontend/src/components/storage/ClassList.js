@@ -9,7 +9,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ClassList() {
-  const [storageClassData, setStorageClassData] = React.useState([]);
+  const [storageClassData, setStorageClassData] = React.useState(null);
 
   useConnectApi(
     api.storageClass.list.bind(null, setStorageClassData),

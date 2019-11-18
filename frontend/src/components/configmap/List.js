@@ -8,7 +8,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ConfigMapList() {
-  const [configMaps, setConfigMaps] = React.useState([]);
+  const [configMaps, setConfigMaps] = React.useState(null);
 
   useConnectApi(
     api.configMap.list.bind(null, null, setConfigMaps),

@@ -8,7 +8,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function NamespacesList() {
-  const [namespaces, setNamespaces] = React.useState([]);
+  const [namespaces, setNamespaces] = React.useState(null);
 
   useConnectApi(
     api.namespace.list.bind(null, setNamespaces),

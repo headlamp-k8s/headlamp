@@ -8,7 +8,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceAccountList() {
-  const [serviceAccounts, setServiceAccounts] = React.useState([]);
+  const [serviceAccounts, setServiceAccounts] = React.useState(null);
 
   useConnectApi(
     api.serviceAccount.list.bind(null, null, setServiceAccounts),

@@ -8,7 +8,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function VolumeClaimList() {
-  const [volumeClaim, setVolumeClaim] = React.useState([]);
+  const [volumeClaim, setVolumeClaim] = React.useState(null);
 
   useConnectApi(
     // @todo: use namespace for filtering.

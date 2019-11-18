@@ -8,7 +8,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ReplicaSetList() {
-  const [replicaSets, setReplicaSets] = React.useState([]);
+  const [replicaSets, setReplicaSets] = React.useState(null);
 
   function getReplicas(replicaSet) {
     return `${replicaSet.spec.replicas} / ${replicaSet.status.replicas}`;

@@ -8,7 +8,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function PodList() {
-  const [pods, setPods] = React.useState([]);
+  const [pods, setPods] = React.useState(null);
 
   useConnectApi(
     api.pod.list.bind(null, null, setPods),
