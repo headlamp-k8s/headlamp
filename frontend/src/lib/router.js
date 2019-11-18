@@ -8,6 +8,7 @@ import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import NamespacesList from '../components/namespace/List';
 import NodeList from '../components/node/List';
+import PodDetails from '../components/pods/Details';
 import PodList from '../components/pods/List';
 import ReplicaSetList from '../components/replicaset/List';
 import RoleBindingDetails from '../components/role/BindingDetails';
@@ -90,6 +91,11 @@ export const ROUTES = {
     exact: true,
     name: 'Pods',
     component: () => <PodList />
+  },
+  pod: {
+    path: '/pods/:namespace/:name',
+    exact: true,
+    component: () => <PodDetails />
   },
   services: {
     path: '/services',
