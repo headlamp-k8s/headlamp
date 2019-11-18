@@ -14,6 +14,7 @@ import RoleBindingDetails from '../components/role/BindingDetails';
 import RoleBindingList from '../components/role/BindingList';
 import RoleDetails from '../components/role/Details';
 import RoleList from '../components/role/List';
+import SecretDetails from '../components/secret/Details';
 import SecretList from '../components/secret/List';
 import ServiceDetails from '../components/service/Details';
 import ServiceList from '../components/service/List';
@@ -179,6 +180,11 @@ export const ROUTES = {
     exact: true,
     name: 'Secrets',
     component: () => <SecretList />
+  },
+  secret: {
+    path: '/secrets/:namespace/:name',
+    exact: true,
+    component: () => <SecretDetails />
   },
   login: {
     path: '/login',

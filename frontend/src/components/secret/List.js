@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import Link from '../common/Link';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -22,7 +23,16 @@ export default function SecretList() {
           columns={[
             {
               label: 'Name',
-              getter: (secret) => secret.metadata.name
+              getter: (secret) =>
+                <Link
+                  routeName="secret"
+                  params={{
+                    namespace: secret.metadata.namespace,
+                    name: secret.metadata.name,
+                  }}
+                >
+                  {secret.metadata.name}
+                </Link>
             },
             {
               label: 'Namespace',
