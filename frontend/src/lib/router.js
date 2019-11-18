@@ -31,6 +31,7 @@ import PodDetails from '../components/pods/Details';
 import ReplicaSetDetails from '../components/replicaset/Details';
 import NodeDetails from '../components/node/Details';
 import NamespaceDetails from '../components/namespace/Details';
+import WorkloadDetails from '../components/workload/Details';
 
 export const ROUTES = {
   cluster: {
@@ -98,6 +99,31 @@ export const ROUTES = {
     exact: true,
     name: 'Workloads',
     component: () => <WorkloadOverview />
+  },
+  DaemonSet: {
+    path: "/daemonsets/:namespace/:name",
+    exact: true,
+    component: () => <WorkloadDetails workloadKind="DaemonSet" />
+  },
+  StatefulSet: {
+    path: "/statefulsets/:namespace/:name",
+    exact: true,
+    component: () => <WorkloadDetails workloadKind="StatefulSet" />
+  },
+  Deployment: {
+    path: "/deployments/:namespace/:name",
+    exact: true,
+    component: () => <WorkloadDetails workloadKind="Deployment" />
+  },
+  Job: {
+    path: "/jobs/:namespace/:name",
+    exact: true,
+    component: () => <WorkloadDetails workloadKind="Job" />
+  },
+  CronJob: {
+    path: "/cronjobs/:namespace/:name",
+    exact: true,
+    component: () => <WorkloadDetails workloadKind="CronJob" />
   },
   pods: {
     path: "/pods",
