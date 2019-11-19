@@ -1,11 +1,30 @@
 import AppBar from '@material-ui/core/AppBar';
+import green from '@material-ui/core/colors/green';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
+import { ThemeProvider } from '@material-ui/styles';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import { ROUTES } from './lib/router';
+
+const dashboardTheme = createMuiTheme({
+  palette: {
+    primary: {
+      contrastText: '#fff',
+      main: '#09bac8',
+    },
+    success: {
+      main: green['500'],
+      ...green
+    },
+  },
+  typography: {
+    fontFamily: ['Overpass', 'sans-serif'].join(', ')
+  },
+});
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -25,29 +44,31 @@ function App() {
   const classes = useStyle();
 
   return (
-    <Router>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-          </Toolbar>
-        </AppBar>
-        <Sidebar />
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Switch>
-            {Object.values(ROUTES).map((route, index) =>
-              <Route
-                key={index}
-                path={route.path}
-                exact={!!route.exact}
-                children={<route.component />}
-              />
-            )}
-          </Switch>
-        </main>
-      </div>
-    </Router>
+    <ThemeProvider theme={dashboardTheme}>
+      <Router>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+            </Toolbar>
+          </AppBar>
+          <Sidebar />
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Switch>
+              {Object.values(ROUTES).map((route, index) =>
+                <Route
+                  key={index}
+                  path={route.path}
+                  exact={!!route.exact}
+                  children={<route.component />}
+                />
+              )}
+            </Switch>
+          </main>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
