@@ -117,7 +117,7 @@ function oidcFactory() {
     };
 }
 
-function metrics(url, cb) {
+async function metrics(url, cb) {
     const handel = setInterval(getMetrics, 10000);
     getMetrics();
 
