@@ -12,6 +12,7 @@
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "recharts": "^1.8.5",
     "swagger-parser": "^8.0.3"
   },
   "scripts": {
