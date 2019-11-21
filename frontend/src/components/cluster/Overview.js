@@ -1,11 +1,12 @@
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
-import { MemoryCircularChart } from './Charts';
+import { CpuCircularChart,MemoryCircularChart } from './Charts';
 
 export default function Overview(props) {
   const [pods, setPods] = React.useState(null);
@@ -38,10 +39,24 @@ export default function Overview(props) {
       <Paper>
         <SectionHeader title="Overview" />
         <Box p={1} m={1} >
-          <MemoryCircularChart
-            nodes={nodes}
-            nodesMetrics={nodeMetrics}
-          />
+          <Grid
+            container
+            justify="space-around"
+            alignItems="center"
+          >
+            <Grid item>
+              <CpuCircularChart
+                nodes={nodes}
+                nodesMetrics={nodeMetrics}
+              />
+            </Grid>
+            <Grid item>
+              <MemoryCircularChart
+                nodes={nodes}
+                nodesMetrics={nodeMetrics}
+              />
+            </Grid>
+          </Grid>
         </Box>
       </Paper>
       <Paper>

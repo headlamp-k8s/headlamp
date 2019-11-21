@@ -1,10 +1,18 @@
 import _ from 'lodash';
 import React from 'react';
-import { parseRam, TO_GB } from '../../lib/units';
+import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
 import { PercentageCircle } from '../common/Chart';
 
-export function MemoryCircularChart(props) {
-  const [usedMemory, totalMemory] = getMemoryUsage(props);
+export function ResourceCircularChart(props) {
+  const {
+    nodes,
+    nodesMetrics,
+    resourceUsedGetter,
+    resourceAvailableGetter,
+    ...others
+  } = props;
+
+  const [used, available] = getResourceUsage();
 
   function filterMetrics(items, metrics) {
     if (!items || !metrics)
@@ -15,49 +23,95 @@ export function MemoryCircularChart(props) {
   }
 
   function getLabel() {
-    if (totalMemory === 0) {
+    if (available === 0) {
       return '…';
     }
-    return `${(usedMemory / totalMemory * 100).toFixed(1)} %`;
+    return `${(used / available * 100).toFixed(1)} %`;
   }
 
-  function getMemoryUsage() {
-    const { nodes, nodesMetrics } = props;
-
+  function getResourceUsage() {
     if (!nodes)
       return [0, 0];
 
     const nodeMetrics = filterMetrics(nodes, nodesMetrics);
-    const usedMemory = _.sumBy(nodeMetrics, item => parseRam(item.usage.memory) / TO_GB);
-    const totalMemory = _.sumBy(nodes, item => parseRam(item.status.capacity.memory) / TO_GB);
+    const usedValue = _.sumBy(nodeMetrics, resourceUsedGetter);
+    const availableValue = _.sumBy(nodes, resourceAvailableGetter);
 
-    return [usedMemory, totalMemory];
+    return [usedValue, availableValue];
   }
 
   function makeData() {
     return [
       {
         name: 'used',
-        value: usedMemory,
+        value: used,
       }
     ];
   }
 
-  function getLegend() {
-    if (totalMemory === 0) {
+  return (
+    <PercentageCircle
+      {...others}
+      data={makeData()}
+      total={available}
+      label={getLabel()}
+      legend={props.getLegend(used, available)}
+    />
+  );
+}
+
+export function MemoryCircularChart(props) {
+  function memoryUsedGetter(item) {
+    return parseRam(item.usage.memory) / TO_GB;
+  }
+
+  function memoryAvailableGetter(item) {
+    return parseRam(item.status.capacity.memory) / TO_GB;
+  }
+
+  function getLegend(used, available) {
+    if (available === 0) {
       return null;
     }
 
-    return `${usedMemory.toFixed(2)} / ${totalMemory.toFixed(2)} GB`;
+    return `${used.toFixed(2)} / ${available.toFixed(2)} GB`;
   }
 
   return (
-    <PercentageCircle
-      title="Memory Usage"
-      data={makeData()}
-      total={totalMemory}
-      label={getLabel()}
-      legend={getLegend()}
+    <ResourceCircularChart
+      getLegend={getLegend}
+      resourceUsedGetter={memoryUsedGetter}
+      resourceAvailableGetter={memoryAvailableGetter}
+      title="Memory usage"
+      {...props}
+    />
+  );
+}
+
+export function CpuCircularChart(props) {
+  function cpuUsedGetter(item) {
+    return parseCpu(item.usage.cpu) / TO_ONE_CPU;
+  }
+
+  function cpuAvailableGetter(item) {
+    return parseCpu(item.status.capacity.cpu) / TO_ONE_CPU;
+  }
+
+  function getLegend(used, available) {
+    if (available === 0) {
+      return null;
+    }
+
+    return `${used.toFixed(2)} / ${available} units`;
+  }
+
+  return (
+    <ResourceCircularChart
+      getLegend={getLegend}
+      resourceUsedGetter={cpuUsedGetter}
+      resourceAvailableGetter={cpuAvailableGetter}
+      title="CPU usage"
+      {...props}
     />
   );
 }
