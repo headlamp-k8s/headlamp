@@ -31,7 +31,7 @@ export function ResourceCircularChart(props) {
 
   function getResourceUsage() {
     if (!nodes)
-      return [0, 0];
+      return [-1, -1];
 
     const nodeMetrics = filterMetrics(nodes, nodesMetrics);
     const usedValue = _.sumBy(nodeMetrics, resourceUsedGetter);
@@ -41,6 +41,10 @@ export function ResourceCircularChart(props) {
   }
 
   function makeData() {
+    if (used === -1) {
+      return [];
+    }
+
     return [
       {
         name: 'used',

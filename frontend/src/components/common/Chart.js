@@ -3,6 +3,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { Label, Pie, PieChart } from 'recharts';
+import Loader from './Loader';
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -36,6 +37,7 @@ export function PercentageCircle(props) {
   } = props;
 
   const chartSize = size * .8;
+  const isLoading = total < 0;
 
   function formatData() {
     let filledValue = 0;
@@ -67,38 +69,42 @@ export function PercentageCircle(props) {
       {title &&
         <Typography className={classes.title}>{title}</Typography>
       }
-      <PieChart
-        cx={size / 2}
-        cy={size / 2}
-        width={chartSize}
-        height={chartSize}
-        className={classes.chart}
-      >
-        <Pie
-          data={formatData()}
-          // Center the chart
-          cx={chartSize / 2}
-          cy={chartSize / 2}
-          innerRadius={chartSize * .35}
-          outerRadius={chartSize * .4}
-          dataKey={dataKey}
-          // Start at the top
-          startAngle={90}
-          endAngle={-270}
-          fill={theme.palette.primary.main}
+      {isLoading ?
+        <Loader />
+        :
+        <PieChart
+          cx={size / 2}
+          cy={size / 2}
+          width={chartSize}
+          height={chartSize}
+          className={classes.chart}
         >
-          <Label
+          <Pie
+            data={formatData()}
+            // Center the chart
             cx={chartSize / 2}
             cy={chartSize / 2}
-            value={label}
-            position="center"
-            style={{
-              fontSize: `${chartSize * .15}px`,
-            }}
-          />
-        </Pie>
-      </PieChart>
-      {legend !== null &&
+            innerRadius={chartSize * .35}
+            outerRadius={chartSize * .4}
+            dataKey={dataKey}
+            // Start at the top
+            startAngle={90}
+            endAngle={-270}
+            fill={theme.palette.primary.main}
+          >
+            <Label
+              cx={chartSize / 2}
+              cy={chartSize / 2}
+              value={label}
+              position="center"
+              style={{
+                fontSize: `${chartSize * .15}px`,
+              }}
+            />
+          </Pie>
+        </PieChart>
+      }
+      {!isLoading && legend !== null &&
         <Typography className={classes.legend}>{legend}</Typography>
       }
     </Box>
