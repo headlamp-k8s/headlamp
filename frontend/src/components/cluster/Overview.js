@@ -7,6 +7,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import { timeAgo } from '../../lib/util';
 import { MemoryCircularChart, CpuCircularChart, PodsStatusCircleChart } from './Charts';
+import { SectionBox } from '../common/SectionBox';
 
 export default function Overview(props) {
   const [pods, setPods] = React.useState(null);
@@ -38,7 +39,7 @@ export default function Overview(props) {
     <Box>
       <Paper>
         <SectionHeader title="Overview" />
-        <Box p={1} m={1} >
+        <SectionBox>
           <Grid
             container
             justify="space-around"
@@ -62,11 +63,11 @@ export default function Overview(props) {
               />
             </Grid>
           </Grid>
-        </Box>
+        </SectionBox>
       </Paper>
       <Paper>
         <SectionHeader title="Events" />
-        <Box padding={1}>
+        <SectionBox>
           <SimpleTable
             rowsPerPage={[15, 25, 50]}
             columns={[
@@ -93,7 +94,7 @@ export default function Overview(props) {
             ]}
             data={eventsData}
           />
-        </Box>
+        </SectionBox>
       </Paper>
     </Box>
   );
