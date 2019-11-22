@@ -2,6 +2,8 @@ import _ from 'lodash';
 import React from 'react';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
 import { PercentageCircle } from '../common/Chart';
+import { podIsReady } from '../../lib/cluster';
+import { useTheme } from '@material-ui/core/styles';
 
 export function ResourceCircularChart(props) {
   const {
@@ -116,6 +118,56 @@ export function CpuCircularChart(props) {
       resourceAvailableGetter={cpuAvailableGetter}
       title="CPU usage"
       {...props}
+    />
+  );
+}
+
+export function PodsStatusCircleChart(props) {
+  const theme = useTheme();
+  let { pods } = props;
+
+  const podsReady = (pods || []).filter(podIsReady);
+
+  function getLegend() {
+    if (pods === null) {
+      return null;
+    }
+    return `${podsReady.length} Ready / ${pods.length} Requested`;
+  }
+
+  function getLabel() {
+    if (pods === null) {
+      return '…';
+    }
+    const percentage = (podsReady.length / pods.length * 100).toFixed(1);
+    return `${percentage} %`;
+  }
+
+  function getData() {
+    if (pods === null) {
+      return [];
+    }
+
+    return [
+      {
+        name: 'ready',
+        value: podsReady.length
+      },
+      {
+        name: 'notReady',
+        value: pods.length - podsReady.length,
+        fill: theme.palette.error.main
+      }
+    ];
+  }
+
+  return (
+    <PercentageCircle
+      data={getData()}
+      total={pods !== null ? pods.length : -1}
+      label={getLabel()}
+      title="Pods"
+      legend={getLegend()}
     />
   );
 }

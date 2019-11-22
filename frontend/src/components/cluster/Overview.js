@@ -6,7 +6,7 @@ import api, { useConnectApi } from '../../lib/api';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import { timeAgo } from '../../lib/util';
-import { MemoryCircularChart, CpuCircularChart } from './Charts';
+import { MemoryCircularChart, CpuCircularChart, PodsStatusCircleChart } from './Charts';
 
 export default function Overview(props) {
   const [pods, setPods] = React.useState(null);
@@ -54,6 +54,11 @@ export default function Overview(props) {
               <MemoryCircularChart
                 nodes={nodes}
                 nodesMetrics={nodeMetrics}
+              />
+            </Grid>
+            <Grid item>
+              <PodsStatusCircleChart
+                pods={pods}
               />
             </Grid>
           </Grid>
