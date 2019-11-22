@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './Charts';
@@ -38,7 +39,7 @@ export default function Overview(props) {
     <Box>
       <Paper>
         <SectionHeader title="Overview" />
-        <Box p={1} m={1} >
+        <SectionBox>
           <Grid
             container
             justify="space-around"
@@ -62,11 +63,11 @@ export default function Overview(props) {
               />
             </Grid>
           </Grid>
-        </Box>
+        </SectionBox>
       </Paper>
       <Paper>
         <SectionHeader title="Events" />
-        <Box padding={1}>
+        <SectionBox>
           <SimpleTable
             rowsPerPage={[15, 25, 50]}
             columns={[
@@ -93,7 +94,7 @@ export default function Overview(props) {
             ]}
             data={eventsData}
           />
-        </Box>
+        </SectionBox>
       </Paper>
     </Box>
   );
