@@ -51,12 +51,21 @@ export function PercentageCircle(props) {
       };
     });
 
-    const totalValue = {
-      name: 'total',
-      percentage: (total - filledValue) / total * 100,
-      fill: theme.palette.grey['300'],
-      ...totalProps
-    };
+    const totalValue = total === 0 ?
+      {
+        name: 'total',
+        percentage: 100,
+        value: total,
+        fill: theme.palette.grey['300'],
+      }
+    :
+      {
+        name: 'total',
+        percentage: (total - filledValue) / total * 100,
+        value: total,
+        fill: theme.palette.grey['300'],
+        ...totalProps
+      };
 
     return formattedData.concat(totalValue);
   }
