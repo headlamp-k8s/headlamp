@@ -42,6 +42,8 @@ export default function Overview() {
     api.daemonSet.list.bind(null, null, dispatch),
     api.deployment.list.bind(null, null, dispatch),
     api.job.list.bind(null, null, dispatch),
+    api.cronJob.list.bind(null, null, dispatch),
+    api.replicaSet.list.bind(null, null, dispatch),
     api.statefulSet.list.bind(null, null, dispatch),
   );
 
@@ -61,8 +63,16 @@ export default function Overview() {
       title: 'StatefulSets',
     },
     {
+      kind: 'ReplicaSet',
+      title: 'ReplicaSets',
+    },
+    {
       kind: 'Job',
       title: 'Jobs',
+    },
+    {
+      kind: 'CronJob',
+      title: 'CronJobs',
     },
   ];
 
