@@ -34,6 +34,7 @@ export function PercentageCircle(props) {
     title='',
     legend=null,
     total=100,
+    totalProps={}
   } = props;
 
   const chartSize = size * .8;
@@ -54,6 +55,7 @@ export function PercentageCircle(props) {
       name: 'total',
       percentage: (total - filledValue) / total * 100,
       fill: theme.palette.grey['300'],
+      ...totalProps
     };
 
     return formattedData.concat(totalValue);
