@@ -17,3 +17,11 @@ export function getPercentStr(value, total) {
   return `${percentage.toFixed(decimals)} %`;
 
 }
+
+export function getReadyReplicas(item) {
+  return (item.status.readyReplicas || item.status.numberReady || 0);
+}
+
+export function getTotalReplicas(item) {
+  return (item.spec.replicas || item.status.currentNumberScheduled || 0);
+}
