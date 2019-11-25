@@ -1,4 +1,3 @@
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
@@ -36,66 +35,75 @@ export default function Overview(props) {
   );
 
   return (
-    <Box>
-      <Paper>
-        <SectionHeader title="Overview" />
-        <SectionBox>
-          <Grid
-            container
-            justify="space-around"
-            alignItems="center"
-          >
-            <Grid item>
-              <CpuCircularChart
-                nodes={nodes}
-                nodesMetrics={nodeMetrics}
-              />
+    <Grid
+      container
+      direction="column"
+      spacing={1}
+      alignItems="stretch"
+    >
+      <Grid item>
+        <Paper>
+          <SectionHeader title="Overview" />
+          <SectionBox>
+            <Grid
+              container
+              justify="space-around"
+              alignItems="flex-start"
+            >
+              <Grid item>
+                <CpuCircularChart
+                  nodes={nodes}
+                  nodesMetrics={nodeMetrics}
+                />
+              </Grid>
+              <Grid item>
+                <MemoryCircularChart
+                  nodes={nodes}
+                  nodesMetrics={nodeMetrics}
+                />
+              </Grid>
+              <Grid item>
+                <PodsStatusCircleChart
+                  pods={pods}
+                />
+              </Grid>
             </Grid>
-            <Grid item>
-              <MemoryCircularChart
-                nodes={nodes}
-                nodesMetrics={nodeMetrics}
-              />
-            </Grid>
-            <Grid item>
-              <PodsStatusCircleChart
-                pods={pods}
-              />
-            </Grid>
-          </Grid>
-        </SectionBox>
-      </Paper>
-      <Paper>
-        <SectionHeader title="Events" />
-        <SectionBox>
-          <SimpleTable
-            rowsPerPage={[15, 25, 50]}
-            columns={[
-              {
-                label: 'Type',
-                datum: 'kind'
-              },
-              {
-                label: 'Name',
-                datum: 'name',
-              },
-              {
-                label: 'Age',
-                datum: 'time',
-              },
-              {
-                label: 'Reason',
-                datum: 'reason',
-              },
-              {
-                label: 'Message',
-                datum: 'message',
-              }
-            ]}
-            data={eventsData}
-          />
-        </SectionBox>
-      </Paper>
-    </Box>
+          </SectionBox>
+        </Paper>
+      </Grid>
+      <Grid item>
+        <Paper>
+          <SectionHeader title="Events" />
+          <SectionBox>
+            <SimpleTable
+              rowsPerPage={[15, 25, 50]}
+              columns={[
+                {
+                  label: 'Type',
+                  datum: 'kind'
+                },
+                {
+                  label: 'Name',
+                  datum: 'name',
+                },
+                {
+                  label: 'Age',
+                  datum: 'time',
+                },
+                {
+                  label: 'Reason',
+                  datum: 'reason',
+                },
+                {
+                  label: 'Message',
+                  datum: 'message',
+                }
+              ]}
+              data={eventsData}
+            />
+          </SectionBox>
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
