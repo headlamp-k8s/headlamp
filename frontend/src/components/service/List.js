@@ -1,9 +1,9 @@
-import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import Link from '../common/Link';
+import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -17,7 +17,7 @@ export default function ServiceList() {
   return (
     <Paper>
       <SectionHeader title="Services" />
-      <Box margin={1}>
+      <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
           columns={[
@@ -45,7 +45,7 @@ export default function ServiceList() {
           ]}
           data={services}
         />
-      </Box>
+      </SectionBox>
     </Paper>
   );
 }
