@@ -24,67 +24,86 @@ const useStyle = makeStyles(theme => ({
 const LIST_ITEMS = [
   {
     name: 'cluster',
-    label: 'Cluster'
-  },
-  {
-    name: 'namespaces',
-    label: 'Namespaces'
-  },
-  {
-    name: 'nodes',
-    label: 'Nodes'
-  },
-  {
-    name: 'storageClasses',
-    label: 'Storage Classes'
-  },
-  {
-    name: 'storageVolumes',
-    label: 'Storage Volumes'
-  },
-  {
-    name: 'persistentVolumeClaims',
-    label: 'Persistent Volume Claims'
+    label: 'Cluster',
+    subList: [
+      {
+        name: 'namespaces',
+        label: 'Namespaces'
+      },
+      {
+        name: 'nodes',
+        label: 'Nodes'
+      },
+      {
+        name: 'roles',
+        label: 'Roles'
+      },
+    ]
   },
   {
     name: 'workloads',
-    label: 'Workloads'
+    label: 'Workloads',
+    subList: [
+      {
+        name: 'pods',
+        label: 'Pods'
+      },
+      {
+        name: 'replicaSets',
+        label: 'Replica Sets'
+      },
+    ]
   },
   {
-    name: 'services',
-    label: 'Services'
+    label: 'Storage',
+    subList: [
+      {
+        name: 'storageClasses',
+        label: 'Storage Classes'
+      },
+      {
+        name: 'storageVolumes',
+        label: 'Storage Volumes'
+      },
+      {
+        name: 'persistentVolumeClaims',
+        label: 'Persistent Volume Claims'
+      },
+    ]
   },
   {
-    name: 'pods',
-    label: 'Pods'
+    label: 'Network'  ,
+    subList: [
+      {
+        name: 'services',
+        label: 'Services'
+      },
+      {
+        name: 'ingresses',
+        label: 'Ingresses'
+      },
+    ]
   },
   {
-    name: 'ingresses',
-    label: 'Ingresses'
-  },
-  {
-    name: 'replicaSets',
-    label: 'Replica Sets'
-  },
-  {
-    name: 'serviceAccounts',
-    label: 'Service Accounts'
-  },
-  {
-    name: 'roles',
-    label: 'Roles'
-  },
-  {
-    name: 'configMaps',
-    label: 'Config Maps'
-  },
-  {
-    name: 'roleBindings',
-    label: 'Role Bindings'
-  },
-  {
-    name: 'secrets',
-    label: 'Secrets'
+    label: 'Security',
+    subList: [
+      {
+        name: 'serviceAccounts',
+        label: 'Service Accounts'
+      },
+      {
+        name: 'configMaps',
+        label: 'Config Maps'
+      },
+      {
+        name: 'roleBindings',
+        label: 'Role Bindings'
+      },
+      {
+        name: 'secrets',
+        label: 'Secrets'
+      },
+    ]
   },
 ];
 
