@@ -3,12 +3,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import { ROUTES } from './lib/router';
+import { ROUTES, getRoute } from './lib/router';
 import green from '@material-ui/core/colors/green';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
+import { getToken } from './lib/auth';
 
 const dashboardTheme = createMuiTheme({
   palette: {
@@ -57,9 +58,10 @@ function App() {
               <div className={classes.toolbar} />
               <Switch>
                 {Object.values(ROUTES).map((route, index) =>
-                  <Route
+                  <AuthRoute
                     key={index}
                     path={route.path}
+                    requiresAuth={!route.noAuthRequired}
                     exact={!!route.exact}
                     children={<route.component />}
                   />
@@ -69,6 +71,34 @@ function App() {
         </div>
       </Router>
     </ThemeProvider>
+  );
+}
+
+function AuthRoute(props) {
+  const { children, requiresAuth=true, ...other } = props;
+
+  function getRenderer({ location }) {
+    if (!requiresAuth || !!getToken()) {
+      return children;
+    }
+
+    return (
+      <Redirect
+        to={{
+          pathname: getRoute('login').path,
+          state: { from: location }
+        }}
+      />
+    );
+  }
+
+  // If no auth is required for the view, or the token is set up, then
+  // render the assigned component. Otherwise redirect to the login route.
+  return (
+    <Route
+      {...other}
+      render={getRenderer}
+    />
   );
 }
 

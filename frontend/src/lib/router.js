@@ -240,6 +240,7 @@ export const ROUTES = {
     path: "/login",
     exact: true,
     name: 'Login',
+    noAuthRequired: true,
     component: () => <Auth />
   },
 };
