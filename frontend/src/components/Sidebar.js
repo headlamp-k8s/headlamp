@@ -124,8 +124,10 @@ const useItemStyle = makeStyles(theme => ({
 function SidebarItem(props) {
   const classes = useItemStyle();
 
-  const {label, name, subList=[], selectedName, onSelect, ...other} = props;
-  const linkPath = getRoute(name).path;
+  const {label, name=null, subList=[], selectedName, onSelect, ...other} = props;
+
+  const routeName = name !== null ? name : subList.find(item => !!item.name).name;
+  const linkPath = getRoute(routeName).path;
   const urlMatch = useRouteMatch(linkPath);
 
   function isSelected() {
@@ -137,7 +139,7 @@ function SidebarItem(props) {
   }
 
   function setSelected() {
-    onSelect(name);
+    onSelect(routeName);
   }
 
   // Check if the item should be selected because of a direct access through the URL
