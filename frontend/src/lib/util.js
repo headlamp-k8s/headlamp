@@ -1,5 +1,6 @@
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 TimeAgo.addLocale(en);
 
 const TIME_AGO = new TimeAgo();
@@ -24,4 +25,30 @@ export function getReadyReplicas(item) {
 
 export function getTotalReplicas(item) {
   return (item.spec.replicas || item.status.currentNumberScheduled || 0);
+}
+
+export function getResourceStr(value, resourceType) {
+  const resourceFormatters = {
+    cpu: unparseCpu,
+    memory: unparseRam,
+  };
+
+  const valueInfo = resourceFormatters[resourceType](value);
+  return `${valueInfo.value}${valueInfo.unit}`;
+}
+
+export function getResourceMetrics(item, metrics, resourceType) {
+  const type = resourceType.toLowerCase();
+  const resourceParsers = {
+    cpu: parseCpu,
+    memory: parseRam,
+  };
+
+  const parser = resourceParsers[type];
+  const itemMetrics = metrics.find(itemMetrics => itemMetrics.metadata.name == item.metadata.name);
+
+  const used = parser(itemMetrics.usage[type]);
+  const capacity = parser(item.status.capacity[type]);
+
+  return [used, capacity];
 }
