@@ -1,8 +1,9 @@
 import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { Label, Pie, PieChart } from 'recharts';
+import { Bar, BarChart, Label, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import Loader from './Loader';
 
 const useStyle = makeStyles(theme => ({
@@ -119,5 +120,80 @@ export function PercentageCircle(props) {
         <Typography className={classes.legend}>{legend}</Typography>
       }
     </Box>
+  );
+}
+
+const useBarStyle = makeStyles(theme => ({
+  chart: {
+    zIndex: theme.zIndex.drawer,
+  },
+  container: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+}));
+
+export function PercentageBar(props) {
+  const classes = useBarStyle();
+  const theme = useTheme();
+
+  let {
+    data,
+    total=100,
+    tooltipFunc=null,
+  } = props;
+
+  function formatData() {
+    let dataItems = {};
+
+    data.forEach(item => {
+      dataItems[item.name] = item.value / total * 100;
+    });
+
+    return dataItems;
+  }
+
+  return (
+    <ResponsiveContainer width="95%" height={20} className={classes.container}>
+      <BarChart
+        layout="vertical"
+        maxBarSize={5}
+        data={[formatData()]}
+        className={classes.chart}
+      >
+        {tooltipFunc &&
+          <Tooltip content={
+            <PaperTooltip >
+              {tooltipFunc(data)}
+            </PaperTooltip>
+          }
+          />
+        }
+        <XAxis hide domain={[0, 100]} type="number" />
+        <YAxis hide type="category" />
+        {data.map((item, index) => {
+          return (
+            <Bar
+              key={index}
+              dataKey={item.name}
+              stackId="1"
+              fill={item.fill ||theme.palette.primary.main}
+              layout="vertical"
+              background={{fill: theme.palette.grey['300']}}
+            />
+          );
+        })}
+      </BarChart>
+    </ResponsiveContainer>
+  );
+}
+
+function PaperTooltip(props) {
+  return (
+    <Paper className="custom-tooltip">
+      <Box m={1}>
+        {props.children}
+      </Box>
+    </Paper>
   );
 }
