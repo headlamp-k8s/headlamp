@@ -1,4 +1,5 @@
 import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
@@ -8,7 +9,14 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import { UsageBarChart } from './Charts';
 
+const useStyle = makeStyles(theme => ({
+  chartCell: {
+    width: '20%',
+  },
+}));
+
 export default function NodeList() {
+  const classes = useStyle();
   const [nodes, setNodes] = React.useState(null);
   const [nodeMetrics, setNodeMetrics] = React.useState(null);
 
@@ -35,6 +43,9 @@ export default function NodeList() {
             },
             {
               label: 'CPU',
+              cellProps: {
+                className: classes.chartCell,
+              },
               getter: (node) =>
                 <UsageBarChart
                   node={node}
@@ -44,6 +55,9 @@ export default function NodeList() {
             },
             {
               label: 'Memory',
+              cellProps: {
+                className: classes.chartCell,
+              },
               getter: (node) =>
                 <UsageBarChart
                   node={node}
