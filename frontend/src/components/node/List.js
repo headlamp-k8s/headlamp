@@ -6,12 +6,15 @@ import { ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import { UsageBarChart } from './Charts';
 
 export default function NodeList() {
   const [nodes, setNodes] = React.useState(null);
+  const [nodeMetrics, setNodeMetrics] = React.useState(null);
 
   useConnectApi(
     api.node.list.bind(null, setNodes),
+    api.metrics.nodes.bind(null, setNodeMetrics)
   );
 
   return (
@@ -31,20 +34,22 @@ export default function NodeList() {
               getter: (node) => node.status.phase
             },
             {
-              label: 'CPU Requests',
-              getter: (node) => null // @todo: TBD
+              label: 'CPU',
+              getter: (node) =>
+                <UsageBarChart
+                  node={node}
+                  nodeMetrics={nodeMetrics}
+                  resourceType="cpu"
+                />
             },
             {
-              label: 'CPU Limits',
-              getter: (node) => null // @todo: TBD
-            },
-            {
-              label: 'Memory Requests',
-              getter: (node) => null // @todo: TBD
-            },
-            {
-              label: 'Memory Limits',
-              getter: (node) => null // @todo: TBD
+              label: 'Memory',
+              getter: (node) =>
+                <UsageBarChart
+                  node={node}
+                  nodeMetrics={nodeMetrics}
+                  resourceType="memory"
+                />
             },
             {
               label: 'Age',
