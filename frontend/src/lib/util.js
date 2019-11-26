@@ -1,6 +1,7 @@
 import TimeAgo from 'javascript-time-ago'
 
 import en from 'javascript-time-ago/locale/en'
+import { unparseCpu, unparseRam, parseCpu, parseRam } from './units';
 TimeAgo.addLocale(en)
 
 const TIME_AGO = new TimeAgo();
@@ -17,4 +18,30 @@ export function getPercentStr(value, total) {
   const decimals = percentage % 10 > 0 ? 1 : 0;
   return `${percentage.toFixed(decimals)} %`;
 
+}
+
+export function getResourceStr(value, resourceType) {
+  const resourceFormatters = {
+    cpu: unparseCpu,
+    memory: unparseRam,
+  };
+
+  const valueInfo = resourceFormatters[resourceType](value);
+  return `${valueInfo.value}${valueInfo.unit}`
+}
+
+export function getResourceMetrics(item, metrics, resourceType) {
+  const type = resourceType.toLowerCase();
+  const resourceParsers = {
+    cpu: parseCpu,
+    memory: parseRam,
+  };
+
+  const parser = resourceParsers[type];
+  const itemMetrics = metrics.find(itemMetrics => itemMetrics.metadata.name == item.metadata.name);
+
+  const used = parser(itemMetrics.usage[type]);
+  const capacity = parser(item.status.capacity[type]);
+
+  return [used, capacity];
 }
