@@ -47,8 +47,8 @@ export default function SimpleTable(props) {
         <Table>
           <TableHead>
             <TableRow>
-              {columns.map(({label}, i) =>
-                <TableCell key={`tabletitle_${i}`}>{label}</TableCell>
+              {columns.map(({label, cellProps={}}, i) =>
+                <TableCell key={`tabletitle_${i}`} {...cellProps}>{label}</TableCell>
               )}
             </TableRow>
           </TableHead>
