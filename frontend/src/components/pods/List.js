@@ -1,4 +1,5 @@
 import Paper from '@material-ui/core/Paper';
+import _ from 'lodash';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
@@ -13,6 +14,10 @@ export default function PodList() {
   useConnectApi(
     api.pod.list.bind(null, null, setPods),
   );
+
+  function getRestartCount(pod) {
+    return _.sumBy(pod.status.containerStatuses, container => container.restartCount);
+  }
 
   return (
     <Paper>
@@ -37,6 +42,10 @@ export default function PodList() {
             {
               label: 'Namespace',
               getter: (pod) => pod.metadata.namespace
+            },
+            {
+              label: 'Restarts',
+              getter: (pod) => getRestartCount(pod)
             },
             {
               label: 'Status',
