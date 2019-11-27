@@ -39,6 +39,14 @@ export default function ServiceList() {
               getter: (service) => service.metadata.namespace
             },
             {
+              label: 'Type',
+              getter: (service) => service.spec.type
+            },
+            {
+              label: 'Cluster IP',
+              getter: (service) => service.spec.clusterIP
+            },
+            {
               label: 'Age',
               getter: (service) => timeAgo(service.metadata.creationTimestamp)
             },
