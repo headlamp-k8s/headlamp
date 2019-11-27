@@ -7,6 +7,7 @@ import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import Link from '../common/Link';
+import { StatusLabel } from '../common/Label';
 
 export default function PodList() {
   const [pods, setPods] = React.useState(null);
@@ -17,6 +18,15 @@ export default function PodList() {
 
   function getRestartCount(pod) {
     return _.sumBy(pod.status.containerStatuses, container => container.restartCount);
+  }
+
+  function makeStatusLabel(pod) {
+    const status = pod.status.phase;
+    return (
+      <StatusLabel status={status == 'Running' ? 'success' : 'error'}>
+        {status}
+      </StatusLabel>
+    );
   }
 
   return (
@@ -49,7 +59,7 @@ export default function PodList() {
             },
             {
               label: 'Status',
-              getter: (pod) => pod.status.phase
+              getter: makeStatusLabel
             },
             {
               label: 'Age',
