@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import { StatusLabel } from '../common/Label';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
@@ -17,6 +18,15 @@ export default function PodList() {
 
   function getRestartCount(pod) {
     return _.sumBy(pod.status.containerStatuses, container => container.restartCount);
+  }
+
+  function makeStatusLabel(pod) {
+    const status = pod.status.phase;
+    return (
+      <StatusLabel status={status == 'Running' ? 'success' : 'error'}>
+        {status}
+      </StatusLabel>
+    );
   }
 
   return (
@@ -49,7 +59,7 @@ export default function PodList() {
             },
             {
               label: 'Status',
-              getter: (pod) => pod.status.phase
+              getter: makeStatusLabel
             },
             {
               label: 'Age',
