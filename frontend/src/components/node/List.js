@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import { StatusLabel } from '../common/Label';
 import { ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
@@ -25,6 +26,27 @@ export default function NodeList() {
     api.metrics.nodes.bind(null, setNodeMetrics)
   );
 
+  function getNodeReadyLabel(node) {
+    const isReady = !!node.status.conditions
+      .find(condition => condition.type == 'Ready' && condition.status == 'True');
+
+    let status = null;
+    let label = null;
+    if (isReady) {
+      status = 'success';
+      label = 'Yes';
+    } else {
+      status = 'error';
+      label = 'No';
+    }
+
+    return (
+      <StatusLabel status={status}>
+        {label}
+      </StatusLabel>
+    );
+  }
+
   return (
     <Paper>
       <SectionHeader title="Nodes" />
@@ -39,7 +61,7 @@ export default function NodeList() {
             },
             {
               label: 'Ready',
-              getter: (node) => node.status.phase
+              getter: getNodeReadyLabel
             },
             {
               label: 'CPU',
