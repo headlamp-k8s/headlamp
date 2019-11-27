@@ -1,5 +1,6 @@
 import AppBar from '@material-ui/core/AppBar';
 import green from '@material-ui/core/colors/green';
+import orange from '@material-ui/core/colors/orange';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -20,6 +21,10 @@ const dashboardTheme = createMuiTheme({
     success: {
       main: green['500'],
       ...green
+    },
+    warning: {
+      main: orange['700'],
+      ...orange
     },
   },
   typography: {
