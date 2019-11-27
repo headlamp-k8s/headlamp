@@ -2,6 +2,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import { StatusLabel } from '../common/Label';
 import { ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
@@ -13,6 +14,15 @@ export default function NamespacesList() {
   useConnectApi(
     api.namespace.list.bind(null, setNamespaces),
   );
+
+  function makeStatusLabel(namespace) {
+    const status = namespace.status.phase;
+    return (
+      <StatusLabel status={status == 'Active' ? 'success' : 'error'}>
+        {status}
+      </StatusLabel>
+    );
+  }
 
   return (
     <Paper>
@@ -28,7 +38,7 @@ export default function NamespacesList() {
             },
             {
               label: 'Status',
-              getter: (namespace) => namespace.status.phase
+              getter: makeStatusLabel
             },
             {
               label: 'Age',
