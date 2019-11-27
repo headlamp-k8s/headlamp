@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
@@ -17,6 +17,16 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.primary,
     fontSize: '1.1em',
     wordBreak: "break-word"
+  },
+  statusLabel: {
+    color: theme.palette.primary.contrastText,
+    fontSize: '1.1em',
+    wordBreak: "break-word",
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    paddingTop: theme.spacing(.5),
+    paddingBottom: theme.spacing(.5),
+    borderRadius: '5%',
   },
 }));
 
@@ -57,5 +67,22 @@ export function ValueLabel(props) {
   const classes = useStyles();
   return (
     <Typography className={classes.valueLabel} component="span">{props.children}</Typography>
+  );
+}
+
+export function StatusLabel(props) {
+  const { status, ...other } = props;
+  const classes = useStyles();
+  const theme = useTheme();
+
+  return (
+    <Typography
+      className={classes.statusLabel}
+      style={{
+        backgroundColor: theme.palette[status].main,
+      }}
+      component="span"
+      {...other}
+    />
   );
 }

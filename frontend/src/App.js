@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import Sidebar from './components/Sidebar';
 import { ROUTES, getRoute } from './lib/router';
 import green from '@material-ui/core/colors/green';
+import orange from '@material-ui/core/colors/orange';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { getToken } from './lib/auth';
@@ -20,6 +21,10 @@ const dashboardTheme = createMuiTheme({
     success: {
       main: green['500'],
       ...green
+    },
+    warning: {
+      main: orange['700'],
+      ...orange
     },
   },
   typography: {
