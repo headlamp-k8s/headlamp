@@ -1,12 +1,8 @@
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
-import Loader from '../common/Loader';
-import { MetadataDisplay } from '../common/Resource';
-import SectionHeader from '../common/SectionHeader';
+import { StatusLabel } from '../common/Label';
+import { MainInfoSection } from '../common/Resource';
 
 export default function NamespaceDetails(props) {
   let { name } = useParams();
@@ -16,18 +12,22 @@ export default function NamespaceDetails(props) {
     api.namespace.get.bind(null, name, setItem),
   );
 
+  function makeStatusLabel(namespace) {
+    const status = namespace.status.phase;
+    return (
+      <StatusLabel status={status == 'Active' ? 'success' : 'error'}>
+        {status}
+      </StatusLabel>
+    );
+  }
+
   return (
-    <Paper>
-      <SectionHeader
-        title="Namespace"
-      />
-      <Box padding={2}>
-        {item === null ?
-          <Loader />
-        :
-          <MetadataDisplay resource={item} />
-        }
-      </Box>
-    </Paper>
+    <MainInfoSection
+      resource={item}
+      mainInfo={item && [{
+        name: 'Status',
+        value: makeStatusLabel(item),
+      }]}
+    />
   );
 }
