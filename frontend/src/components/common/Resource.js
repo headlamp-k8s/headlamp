@@ -235,3 +235,22 @@ export function MainInfoSection(props) {
     </Paper>
   );
 }
+
+export function PageGrid(props) {
+  const { sections, ...other } = props;
+  return (
+    <Grid
+      container
+      spacing={1}
+      justify="flex-start"
+      alignItems="stretch"
+      {...other}
+    >
+      {sections.map((section, i) =>
+        <Grid item key={i} xs={12}>
+          {section}
+        </Grid>
+      )}
+    </Grid>
+  );
+}
