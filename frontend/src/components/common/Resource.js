@@ -254,3 +254,40 @@ export function PageGrid(props) {
     </Grid>
   );
 }
+
+export function SectionGrid(props) {
+  const classes = useStyle();
+  const { items, useDivider=false } = props;
+  return (
+    <Grid
+      container
+      justify="space-between"
+    >
+      {items.map((item, i) => {
+        return (
+          <React.Fragment key={i}>
+            <Grid
+              item
+              lg
+              md={12}
+              xs={12}
+            >
+              {item}
+            </Grid>
+            {/* Only use a divider if required and this item is not the last one */}
+            {useDivider && (items.length - 1) != i &&
+              <Grid
+                item
+                md={12}
+                xs={12}
+                className={classes.tinyDivider}
+              >
+                <Divider />
+              </Grid>
+            }
+          </React.Fragment>
+        );
+      })}
+    </Grid>
+  );
+}
