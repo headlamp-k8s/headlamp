@@ -1,14 +1,20 @@
 import menuDown from '@iconify/icons-mdi/menu-down';
 import menuUp from '@iconify/icons-mdi/menu-up';
 import { Icon } from '@iconify/react';
+import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { localeDate } from '../../lib/util';
+import Loader from '../common/Loader';
+import { SectionBox } from '../common/SectionBox';
+import SectionHeader from '../common/SectionHeader';
+import { NameValueTable } from '../common/SimpleTable';
 import Link from './Link';
-import { NameValueTable } from './SimpleTable';
 import { LightTooltip } from './Tooltip';
 
 const useStyles = makeStyles(theme => ({
@@ -157,5 +163,79 @@ export function ResourceLink(props) {
     >
       {name}
     </Link>
+  );
+}
+
+const useStyle = makeStyles(theme => ({
+  tinyDivider: {
+    margin: theme.spacing(1),
+    display: 'none',
+    [theme.breakpoints.down('md')]: {
+      display: 'block'
+    }
+  },
+  name: {
+    marginBottom: theme.spacing(1),
+  }
+}));
+
+export function MainInfoSection(props) {
+  const classes = useStyle();
+  let { resource, title, mainInfo=[] } = props;
+
+  return (
+    <Paper>
+      <SectionHeader
+        title={title || (resource ? resource.kind : '')}
+      />
+      <SectionBox>
+        {resource === null ?
+          <Loader />
+        :
+          <Box px={1}>
+            <Grid
+              container
+              justify="space-between"
+            >
+              <Grid
+                item
+                lg
+                md={12}
+                xs={12}
+              >
+                <NameValueTable
+                  rows={[
+                    {
+                      name: 'Name',
+                      valueComponent:
+                        <Typography variant="h6" >
+                          {resource.metadata.name}
+                        </Typography>
+                    },
+                    ...mainInfo
+                  ]}
+                />
+              </Grid>
+              <Grid
+                item
+                md={12}
+                xs={12}
+                className={classes.tinyDivider}
+              >
+                <Divider />
+              </Grid>
+              <Grid
+                item
+                lg
+                md={12}
+                xs={12}
+              >
+                <MetadataDisplay resource={resource} />
+              </Grid>
+            </Grid>
+          </Box>
+        }
+      </SectionBox>
+    </Paper>
   );
 }
