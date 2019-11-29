@@ -1,7 +1,6 @@
 import menuDown from '@iconify/icons-mdi/menu-down';
 import menuUp from '@iconify/icons-mdi/menu-up';
 import { Icon } from '@iconify/react';
-import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -176,7 +175,6 @@ const useStyle = makeStyles(theme => ({
 }));
 
 export function MainInfoSection(props) {
-  const classes = useStyle();
   const { resource, title, mainInfo=[] } = props;
 
   return (
@@ -188,48 +186,24 @@ export function MainInfoSection(props) {
         {resource === null ?
           <Loader />
           :
-          <Box px={1}>
-            <Grid
-              container
-              justify="space-between"
-            >
-              <Grid
-                item
-                lg
-                md={12}
-                xs={12}
-              >
-                <NameValueTable
-                  rows={[
-                    {
-                      name: 'Name',
-                      valueComponent:
+          <SectionGrid
+            useDivider
+            items={[
+              <NameValueTable
+                rows={[
+                  {
+                    name: 'Name',
+                    valueComponent:
             <Typography variant="h6" >
               {resource.metadata.name}
             </Typography>
-                    },
-                    ...mainInfo
-                  ]}
-                />
-              </Grid>
-              <Grid
-                item
-                md={12}
-                xs={12}
-                className={classes.tinyDivider}
-              >
-                <Divider />
-              </Grid>
-              <Grid
-                item
-                lg
-                md={12}
-                xs={12}
-              >
-                <MetadataDisplay resource={resource} />
-              </Grid>
-            </Grid>
-          </Box>
+                  },
+                  ...mainInfo
+                ]}
+              />,
+              <MetadataDisplay resource={resource} />
+            ]}
+          />
         }
       </SectionBox>
     </Paper>
