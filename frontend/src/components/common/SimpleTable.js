@@ -1,5 +1,6 @@
 import squareIcon from '@iconify/icons-mdi/square';
 import { InlineIcon } from '@iconify/react';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,6 +9,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
 import Empty from './EmptyContent';
+import { NameLabel, ValueLabel } from './Label';
 import Loader from './Loader';
 
 export default function SimpleTable(props) {
@@ -94,5 +96,54 @@ export default function SimpleTable(props) {
           />
         }
       </React.Fragment>
+  );
+}
+
+const useStyles = makeStyles(theme => ({
+  metadataCell: {
+    border: 'none',
+    width: '100%',
+    verticalAlign: 'top',
+  },
+  metadataNameCell: {
+    border: 'none',
+    textAlign: 'left',
+    maxWidth: '50%',
+    minWidth: '10rem',
+    verticalAlign: 'top',
+  },
+}));
+
+export function NameValueTable(props) {
+  const classes = useStyles();
+  const { rows } = props;
+
+  return (
+    <Table
+      size="small"
+    >
+      <TableBody>
+        {rows.map(({name, value=null, valueComponent=null, hide=false}, i) => {
+          if (hide)
+            return null;
+          return (
+            <TableRow key={i}>
+              <TableCell className={classes.metadataNameCell}>
+                <NameLabel>
+                  {name}
+                </NameLabel>
+              </TableCell>
+              <TableCell scope="row" className={classes.metadataCell}>
+                {valueComponent ?
+                  valueComponent
+                :
+                  <ValueLabel>{value}</ValueLabel>
+                }
+              </TableCell>
+            </TableRow>
+          )
+        })}
+      </TableBody>
+    </Table>
   );
 }
