@@ -10,6 +10,10 @@ export function timeAgo(date) {
   return TIME_AGO.format(new Date(date), 'time');
 }
 
+export function localeDate(date) {
+  return new Date(date).toLocaleString();
+}
+
 export function getPercentStr(value, total) {
   if (total === 0) {
     return null;
