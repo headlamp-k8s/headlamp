@@ -33,21 +33,6 @@ export default function NodeDetails(props) {
     });
   }
 
-  function getOSComponent(osName) {
-    let icon = null;
-
-    if (osName.toLowerCase() == 'linux') {
-      icon = <InlineIcon icon={penguinIcon} fontSize="1.4rem"/>
-    }
-
-    return (
-      <React.Fragment>
-        {icon}
-        <ValueLabel>{osName}</ValueLabel>
-      </React.Fragment>
-    );
-  }
-
   return (
     !item ? <Loader /> :
     <PageGrid
@@ -65,65 +50,7 @@ export default function NodeDetails(props) {
             ...getAddresses(item)
           ]}
         />,
-        <Paper>
-          <SectionHeader
-            title="System Info"
-          />
-          <SectionBox>
-            <SectionGrid
-              items={[
-                <NameValueTable
-                  rows={[
-                    {
-                      name: 'Architecture',
-                      value: item.status.nodeInfo.architecture
-                    },
-                    {
-                      name: 'Boot ID',
-                      value: item.status.nodeInfo.bootID
-                    },
-                    {
-                      name: 'System UUID',
-                      value: item.status.nodeInfo.systemUUID
-                    },
-                    {
-                      name: 'OS',
-                      valueComponent: getOSComponent(item.status.nodeInfo.operatingSystem),
-                    },
-                    {
-                      name: 'Image',
-                      value: item.status.nodeInfo.osImage
-                    },
-                    {
-                      name: 'Kernel Version',
-                      value: item.status.nodeInfo.kernelVersion,
-                    },
-                  ]}
-                />,
-                <NameValueTable
-                  rows={[
-                    {
-                      name: 'Machine ID',
-                      value: item.status.nodeInfo.machineID,
-                    },
-                    {
-                      name: 'Kube Proxy Version',
-                      value: item.status.nodeInfo.kubeProxyVersion
-                    },
-                    {
-                      name: 'Kubelet Version',
-                      value: item.status.nodeInfo.kubeletVersion
-                    },
-                    {
-                      name: 'Container Runtime Version',
-                      value: item.status.nodeInfo.containerRuntimeVersion
-                    },
-                  ]}
-                />
-              ]}
-            />
-          </SectionBox>
-        </Paper>
+        <SystemInfoSection node={item} />
       ]}
     />
   );
@@ -172,5 +99,86 @@ function ChartsSection(props) {
         />
       </Grid>
     </Grid>
+  );
+}
+
+function SystemInfoSection(props) {
+  const { node } = props;
+
+  function getOSComponent(osName) {
+    let icon = null;
+
+    if (osName.toLowerCase() == 'linux') {
+      icon = <InlineIcon icon={penguinIcon} fontSize="1.4rem"/>
+    }
+
+    return (
+      <React.Fragment>
+        {icon}
+        <ValueLabel>{osName}</ValueLabel>
+      </React.Fragment>
+    );
+  }
+
+  return (
+    <Paper>
+      <SectionHeader
+        title="System Info"
+      />
+      <SectionBox>
+        <SectionGrid
+          items={[
+            <NameValueTable
+              rows={[
+                {
+                  name: 'Architecture',
+                  value: node.status.nodeInfo.architecture
+                },
+                {
+                  name: 'Boot ID',
+                  value: node.status.nodeInfo.bootID
+                },
+                {
+                  name: 'System UUID',
+                  value: node.status.nodeInfo.systemUUID
+                },
+                {
+                  name: 'OS',
+                  valueComponent: getOSComponent(node.status.nodeInfo.operatingSystem),
+                },
+                {
+                  name: 'Image',
+                  value: node.status.nodeInfo.osImage
+                },
+                {
+                  name: 'Kernel Version',
+                  value: node.status.nodeInfo.kernelVersion,
+                },
+              ]}
+            />,
+            <NameValueTable
+              rows={[
+                {
+                  name: 'Machine ID',
+                  value: node.status.nodeInfo.machineID,
+                },
+                {
+                  name: 'Kube Proxy Version',
+                  value: node.status.nodeInfo.kubeProxyVersion
+                },
+                {
+                  name: 'Kubelet Version',
+                  value: node.status.nodeInfo.kubeletVersion
+                },
+                {
+                  name: 'Container Runtime Version',
+                  value: node.status.nodeInfo.containerRuntimeVersion
+                },
+              ]}
+            />
+          ]}
+        />
+      </SectionBox>
+    </Paper>
   );
 }
