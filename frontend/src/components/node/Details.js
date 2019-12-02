@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
-import { HeaderLabel, ValueLabel } from '../common/Label';
+import { HeaderLabel, ValueLabel, StatusLabel } from '../common/Label';
 import { MainInfoSection, PageGrid, SectionGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
@@ -43,6 +43,10 @@ export default function NodeDetails(props) {
           }
           resource={item}
           mainInfo={item && [
+            {
+              name: 'Ready',
+              value: <NodeReadyLabel node={item} />
+            },
             {
               name: 'Pod CIDR',
               value: item.spec.podCIDR,
@@ -180,5 +184,27 @@ function SystemInfoSection(props) {
         />
       </SectionBox>
     </Paper>
+  );
+}
+
+export function NodeReadyLabel(props) {
+  const { node } = props;
+  let isReady = !!node.status.conditions
+    .find(condition => condition.type == 'Ready' && condition.status == 'True');
+
+  let status = null;
+  let label = null;
+  if (isReady) {
+    status = 'success';
+    label = 'Yes';
+  } else {
+    status = 'error';
+    label = 'No'
+  }
+
+  return (
+    <StatusLabel status={status}>
+      {label}
+    </StatusLabel>
   );
 }

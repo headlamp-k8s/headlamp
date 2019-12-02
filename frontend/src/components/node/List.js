@@ -9,6 +9,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import { UsageBarChart } from './Charts';
 import { StatusLabel } from '../common/Label';
+import { NodeReadyLabel } from './Details';
 
 const useStyle = makeStyles(theme => ({
   chartCell: {
@@ -26,27 +27,6 @@ export default function NodeList() {
     api.metrics.nodes.bind(null, setNodeMetrics)
   );
 
-  function getNodeReadyLabel(node) {
-    let isReady = !!node.status.conditions
-      .find(condition => condition.type == 'Ready' && condition.status == 'True');
-
-    let status = null;
-    let label = null;
-    if (isReady) {
-      status = 'success';
-      label = 'Yes';
-    } else {
-      status = 'error';
-      label = 'No'
-    }
-
-  return (
-    <StatusLabel status={status}>
-      {label}
-    </StatusLabel>
-  );
-  }
-
   return (
     <Paper>
       <SectionHeader title="Nodes" />
@@ -61,7 +41,7 @@ export default function NodeList() {
             },
             {
               label: 'Ready',
-              getter: getNodeReadyLabel
+              getter: (node) => <NodeReadyLabel node={node} />
             },
             {
               label: 'CPU',
