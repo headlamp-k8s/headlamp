@@ -1,9 +1,11 @@
 import penguinIcon from '@iconify/icons-mdi/penguin';
 import { InlineIcon } from '@iconify/react';
+import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
 import { ValueLabel } from '../common/Label';
 import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid, SectionGrid } from '../common/Resource';
@@ -14,9 +16,11 @@ import { NameValueTable } from '../common/SimpleTable';
 export default function NodeDetails(props) {
   const { name } = useParams();
   const [item, setItem] = React.useState(null);
+  const [nodeMetrics, setNodeMetrics] = React.useState(null);
 
   useConnectApi(
     api.node.get.bind(null, name, setItem),
+    api.metrics.nodes.bind(null, setNodeMetrics)
   );
 
   function getAddresses(item) {
@@ -48,6 +52,9 @@ export default function NodeDetails(props) {
     <PageGrid
       sections={[
         <MainInfoSection
+          headerSection={
+            <ChartsSection node={item} metrics={nodeMetrics} />
+          }
           resource={item}
           mainInfo={item && [
             {
@@ -118,5 +125,31 @@ export default function NodeDetails(props) {
         </Paper>
       ]}
     />
+  );
+}
+
+function ChartsSection(props) {
+  const { node, metrics } = props;
+  return (
+    <Grid
+      container
+      justify="space-around"
+      style={{
+        marginBottom: '2rem'
+      }}
+    >
+      <Grid item>
+        <CpuCircularChart
+          nodes={[node]}
+          nodesMetrics={metrics}
+        />
+      </Grid>
+      <Grid item>
+        <MemoryCircularChart
+          nodes={[node]}
+          nodesMetrics={metrics}
+        />
+      </Grid>
+    </Grid>
   );
 }
