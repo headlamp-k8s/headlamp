@@ -175,7 +175,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 export function MainInfoSection(props) {
-  const { resource, title, mainInfo=[] } = props;
+  const { resource, headerSection, title, mainInfo=[] } = props;
 
   return (
     <Paper>
@@ -186,24 +186,27 @@ export function MainInfoSection(props) {
         {resource === null ?
           <Loader />
           :
-          <SectionGrid
-            useDivider
-            items={[
-              <NameValueTable
-                rows={[
-                  {
-                    name: 'Name',
-                    valueComponent:
+          <React.Fragment>
+            {headerSection}
+            <SectionGrid
+              useDivider
+              items={[
+                <NameValueTable
+                  rows={[
+                    {
+                      name: 'Name',
+                      valueComponent:
             <Typography variant="h6" >
               {resource.metadata.name}
             </Typography>
-                  },
-                  ...mainInfo
-                ]}
-              />,
-              <MetadataDisplay resource={resource} />
-            ]}
-          />
+                    },
+                    ...mainInfo
+                  ]}
+                />,
+                <MetadataDisplay resource={resource} />
+              ]}
+            />
+          </React.Fragment>
         }
       </SectionBox>
     </Paper>
