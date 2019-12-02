@@ -86,3 +86,42 @@ export function StatusLabel(props) {
     />
   );
 }
+
+const useHeaderLabelStyles = makeStyles(theme => ({
+  value: {
+    fontSize: '3rem;'
+  },
+  label: {
+    textAlign: 'center',
+    fontSize: '1.2em',
+    flexGrow: 1,
+    fontWeight: 'bold',
+  },
+}));
+
+export function HeaderLabel(props) {
+  const classes = useHeaderLabelStyles();
+  const { value, label } = props;
+
+  return (
+    <Grid
+      container
+      alignItems="center"
+      direction="column"
+    >
+      <Grid item>
+        <Typography className={classes.label}>{label}</Typography>
+      </Grid>
+      <Grid
+        item
+        container
+        alignItems="center"
+        justify="center"
+      >
+        <Grid item>
+          <Typography className={classes.value}>{value}</Typography>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+}
