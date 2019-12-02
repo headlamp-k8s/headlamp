@@ -161,8 +161,10 @@ function SidebarItem(props) {
     onSelect(routeName);
   }
 
-  // Check if the item should be selected because of a direct access through the URL
-  if (urlMatch && urlMatch.isExact) {
+  // Check if the ite should be selected because of a direct access through the URL.
+  // @todo: Now this is matching any path prefix and works, but it's not very clever and can lead
+  // to false selections in the future. So it should be changed to a more direct selection.
+  if (urlMatch && (urlMatch.isExact || urlMatch.path != '/')) {
     if (!isSelected()) {
       setSelected();
     }
