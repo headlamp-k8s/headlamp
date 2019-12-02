@@ -12,11 +12,19 @@ import Empty from './EmptyContent';
 import { NameLabel, ValueLabel } from './Label';
 import Loader from './Loader';
 
+const useTableStyle = makeStyles(theme => ({
+  headerCell: {
+    fontWeight: 'bold',
+    paddingBottom: theme.spacing(.5),
+  }
+}));
+
 export default function SimpleTable(props) {
   const {columns} = props;
   const [page, setPage] = React.useState(0);
   const rowsPerPageOptions = props.rowsPerPage || [5, 10, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
+  const classes = useTableStyle();
 
   function handleChangePage(event, newPage) {
     setPage(newPage);
@@ -50,7 +58,13 @@ export default function SimpleTable(props) {
           <TableHead>
             <TableRow>
               {columns.map(({label, cellProps={}}, i) =>
-                <TableCell key={`tabletitle_${i}`} {...cellProps}>{label}</TableCell>
+                <TableCell
+                  key={`tabletitle_${i}`}
+                  className={classes.headerCell}
+                  {...cellProps}
+                >
+                  {label}
+                </TableCell>
               )}
             </TableRow>
           </TableHead>
