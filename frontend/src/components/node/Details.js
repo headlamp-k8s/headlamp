@@ -5,8 +5,9 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
+import { timeAgo } from '../../lib/util';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
-import { ValueLabel } from '../common/Label';
+import { HeaderLabel, ValueLabel } from '../common/Label';
 import { MainInfoSection, PageGrid, SectionGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
@@ -130,6 +131,20 @@ export default function NodeDetails(props) {
 
 function ChartsSection(props) {
   const { node, metrics } = props;
+
+  function getUptime() {
+    if (!node) {
+      return '…';
+    }
+
+    const readyInfo = node.status.conditions.find(({type}) => type == 'Ready');
+    if (readyInfo) {
+      return timeAgo(readyInfo.lastTransitionTime);
+    }
+
+    return 'Not ready yet!';
+  }
+
   return (
     <Grid
       container
@@ -138,6 +153,12 @@ function ChartsSection(props) {
         marginBottom: '2rem'
       }}
     >
+      <Grid item>
+        <HeaderLabel
+          value={getUptime()}
+          label="Uptime"
+        />
+      </Grid>
       <Grid item>
         <CpuCircularChart
           nodes={[node]}
