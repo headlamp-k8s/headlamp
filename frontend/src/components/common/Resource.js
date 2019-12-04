@@ -29,13 +29,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export function MetadataDisplay(props) {
-  let { resource, noName=true } = props;
+  let { resource } = props;
 
   let mainRows = [
     {
       name: 'Name',
-      value: resource.metadata.name,
-      hide: noName,
+      valueComponent:
+        <Typography variant="h6" >
+          {resource.metadata.name}
+        </Typography>,
+    },
+    {
+      name: 'Namespace',
+      value: resource.metadata.namespace,
+      hide: !resource.metadata.namespace
     },
     {
       name: 'Creation',
@@ -195,19 +202,10 @@ export function MainInfoSection(props) {
             <SectionGrid
               useDivider
               items={[
+                <MetadataDisplay resource={resource} />,
                 <NameValueTable
-                  rows={[
-                    {
-                      name: 'Name',
-                      valueComponent:
-                        <Typography variant="h6" >
-                          {resource.metadata.name}
-                        </Typography>
-                    },
-                    ...mainInfo
-                  ]}
-                />,
-                <MetadataDisplay resource={resource} />
+                  rows={mainInfo}
+                />
               ]}
             />
           </React.Fragment>
