@@ -9,6 +9,8 @@ import { InfoLabel, ValueLabel } from '../common/Label';
 import Loader from '../common/Loader';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import { PageGrid, MainInfoSection } from '../common/Resource';
+import { SectionBox } from '../common/SectionBox';
 
 export default function RoleDetails() {
   let { namespace=null, name } = useParams();
@@ -22,34 +24,15 @@ export default function RoleDetails() {
   );
 
   return (
-    <Paper>
-      <SectionHeader
-        title="Role"
-      />
-      <Box padding={2}>
-        {item === null ?
-          <Loader />
-        :
-          <React.Fragment>
-            {/* @todo Restyle this */}
-            <Grid
-              item
-              container
-              spacing={1}
-              justify="flex-start"
-              alignItems="flex-start"
-              xs={12}
-              lg
-            >
-              <InfoLabel name="Name" value={item.metadata.name} />
-              <InfoLabel name="Kind" value={item.kind} />
-              <InfoLabel name="UID" value={item.metadata.uid} />
-              <InfoLabel name="Namespace" value={item.metadata.namespace || "All"} />
-              <InfoLabel name="Creation">
-                <ValueLabel>{new Date(item.metadata.creationTimestamp).toLocaleString()}</ValueLabel>
-              </InfoLabel>
-              <InfoLabel name="Version" value={item.metadata.resourceVersion} />
-            </Grid>
+    !item ? <Loader /> :
+    <PageGrid
+      sections={[
+        <MainInfoSection
+          resource={item}
+        />,
+        <Paper>
+          <SectionHeader title="Rules" />
+          <SectionBox>
             <SimpleTable
               columns={[
                 {
@@ -71,9 +54,9 @@ export default function RoleDetails() {
               ]}
               data={item.rules}
             />
-          </React.Fragment>
-        }
-      </Box>
-    </Paper>
+          </SectionBox>
+        </Paper>,
+      ]}
+    />
   );
 }

@@ -1,15 +1,33 @@
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import chevronRight from '@iconify/icons-mdi/chevron-right';
+import { InlineIcon } from '@iconify/react';
 import Paper from '@material-ui/core/Paper';
-import _ from 'lodash';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
-import { InfoLabel, ValueLabel } from '../common/Label';
+import { ValueLabel } from '../common/Label';
 import Loader from '../common/Loader';
+import { MainInfoSection, MetadataDictGrid, PageGrid } from '../common/Resource';
+import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
+import SimpleTable from '../common/SimpleTable';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: 'fit-content',
+    border: `1px solid ${theme.palette.divider}`,
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.secondary,
+    paddingTop: theme.spacing(.5),
+    paddingBottom: theme.spacing(.5),
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+  },
+}));
 
 export default function ServiceDetails(props) {
+  const classes = useStyles();
   let { namespace, name } = useParams();
   const [item, setItem] = React.useState(null);
 
@@ -18,47 +36,56 @@ export default function ServiceDetails(props) {
   );
 
   return (
-    <Paper>
-      <SectionHeader
-        title="Service"
-      />
-      <Box padding={2}>
-        {item === null ?
-          <Loader />
-        :
-          <React.Fragment>
-            <Grid
-              item
-              container
-              spacing={1}
-              justify="flex-start"
-              alignItems="flex-start"
-              xs={12}
-              lg
-            >
-              <InfoLabel name="Name" value={item.metadata.name} />
-              <InfoLabel name="UID" value={item.metadata.uid} />
-              <InfoLabel name="Namespace" value={item.metadata.namespace} />
-              <InfoLabel name="Version" value={item.metadata.resourceVersion} />
-              <InfoLabel name="Creation">
-                <ValueLabel>{new Date(item.metadata.creationTimestamp).toLocaleString()}</ValueLabel>
-              </InfoLabel>
-              <InfoLabel name="Cluster IP" value={item.spec.clusterIP} />
-              {item.spec.ports.map(({protocol, port, targetPort}, i) =>
-                <InfoLabel key={i} name="Port" value={`${protocol}: ${port} -> ${targetPort}`} />
-              )}
-              {/* @todo Restyle this */}
-              <InfoLabel name="Annotations">
-                {_.map(item.metadata.annotations, (value, key) => {
-                  return (
-                    <p key={key}><ValueLabel>{key}{': '}{value}</ValueLabel></p>
-                  );
-                })}
-              </InfoLabel>
-            </Grid>
-          </React.Fragment>
-        }
-      </Box>
-    </Paper>
+    !item ? <Loader /> :
+    <PageGrid
+      sections={[
+        <MainInfoSection
+          resource={item}
+          mainInfo={item && [
+            {
+              name: 'Type',
+              value: item.spec.type,
+            },
+            {
+              name: 'Cluster IP',
+              value: item.spec.clusterIP,
+            },
+            {
+              name: 'Selector',
+              value: <MetadataDictGrid dict={item.spec.selector} />,
+            },
+          ]}
+        />,
+        <Paper>
+          <SectionHeader
+            title="Ports"
+          />
+          <SectionBox>
+            <SimpleTable
+              data={item.spec.ports}
+              columns={[
+                {
+                  label: "Protocol",
+                  datum: 'protocol',
+                },
+                {
+                  label: "Name",
+                  datum: 'name',
+                },
+                {
+                  label: "Ports",
+                  getter: ({port, targetPort}) =>
+                    <React.Fragment>
+                      <ValueLabel>{port}</ValueLabel>
+                      <InlineIcon icon={chevronRight} />
+                      <ValueLabel>{targetPort}</ValueLabel>
+                    </React.Fragment>
+                },
+              ]}
+            />
+          </SectionBox>
+        </Paper>
+      ]}
+    />
   );
 }

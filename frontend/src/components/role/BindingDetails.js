@@ -1,12 +1,10 @@
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
-import { InfoLabel } from '../common/Label';
 import Loader from '../common/Loader';
-import { MetadataDisplay } from '../common/Resource';
+import { MainInfoSection, PageGrid } from '../common/Resource';
+import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
@@ -23,48 +21,49 @@ export default function RoleBindingDetails() {
   );
 
   return (
-    <Paper>
-      <SectionHeader
-        title="Role Binding"
-      />
-      <Box padding={2}>
-        {item === null ?
-          <Loader />
-        :
-          <React.Fragment>
-            {/* @todo Restyle this */}
-            <Grid
-              item
-              container
-              spacing={1}
-              justify="flex-start"
-              alignItems="flex-start"
-              xs={12}
-              lg
-            >
-              <MetadataDisplay resource={item} />
-              <InfoLabel name="Role" value={item.roleRef.name} />
-            </Grid>
+    !item ? <Loader /> :
+    <PageGrid
+      sections={[
+        <MainInfoSection
+          resource={item}
+          mainInfo={[
+            {
+              name: 'Reference Kind',
+              value: item.roleRef.kind,
+            },
+            {
+              name: 'Reference Name',
+              value: item.roleRef.name,
+            },
+            {
+              name: 'Ref. API Group',
+              value: item.roleRef.apiGroup,
+            }
+          ]}
+        />,
+        <Paper>
+          <SectionHeader title="Binding Info" />
+          <SectionBox>
             <SimpleTable
+              data={item.subjects}
               columns={[
                 {
-                  label: 'Type',
-                  getter: (item) => item.kind
+                  label: 'Kind',
+                  getter: item => item.kind,
                 },
                 {
                   label: 'Name',
-                  getter: (item) => item.name
+                  getter: item => item.name,
                 },
                 {
                   label: 'Namespace',
-                  getter: (item) => item.namespace
-                }
+                  getter: item => item.namespace,
+                },
               ]}
-              data={item.subjects}
             />
-          </React.Fragment>
-        }
-      </Box>
-    </Paper>
+          </SectionBox>
+        </Paper>,
+      ]}
+    />
   );
 }
