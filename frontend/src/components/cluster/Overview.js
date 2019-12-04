@@ -10,22 +10,9 @@ import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './
 
 export default function Overview(props) {
   const [pods, setPods] = React.useState(null);
-  const [eventsData, setEventsData] = React.useState(null);
+  const [events, setEvents] = React.useState(null);
   const [nodes, setNodes] = React.useState(null);
   const [nodeMetrics, setNodeMetrics] = React.useState(null);
-
-  function setEvents(events) {
-    const data = events.map(event => {
-      return {
-        kind: event.involvedObject.kind,
-        name: event.involvedObject.name,
-        time: timeAgo(event.metadata.creationTimestamp),
-        reason: event.reason,
-        message: event.message,
-      };
-    });
-    setEventsData(data);
-  }
 
   useConnectApi(
     api.pod.list.bind(null, null, setPods),
@@ -72,38 +59,46 @@ export default function Overview(props) {
         </Paper>
       </Grid>
       <Grid item>
-        <Paper>
-          <SectionHeader title="Events" />
-          <SectionBox>
-            <SimpleTable
-              rowsPerPage={[15, 25, 50]}
-              columns={[
-                {
-                  label: 'Type',
-                  datum: 'kind'
-                },
-                {
-                  label: 'Name',
-                  datum: 'name',
-                },
-                {
-                  label: 'Age',
-                  datum: 'time',
-                },
-                {
-                  label: 'Reason',
-                  datum: 'reason',
-                },
-                {
-                  label: 'Message',
-                  datum: 'message',
-                }
-              ]}
-              data={eventsData}
-            />
-          </SectionBox>
-        </Paper>
+        <EventsSection events={events} />
       </Grid>
     </Grid>
+  );
+}
+
+function EventsSection(props) {
+  const { events } = props;
+
+  return (
+    <Paper>
+      <SectionHeader title="Events" />
+      <SectionBox>
+        <SimpleTable
+          rowsPerPage={[15, 25, 50]}
+          columns={events && [
+            {
+              label: 'Type',
+              getter: event => event.involvedObject.kind
+            },
+            {
+              label: 'Name',
+              getter: event => event.involvedObject.name,
+            },
+            {
+              label: 'Age',
+              getter: event => timeAgo(event.metadata.creationTimestamp),
+            },
+            {
+              label: 'Reason',
+              getter: event => event.reason,
+            },
+            {
+              label: 'Message',
+              getter: event => event.message,
+            }
+          ]}
+          data={events}
+        />
+      </SectionBox>
+    </Paper>
   );
 }
