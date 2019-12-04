@@ -137,15 +137,19 @@ export function NameValueTable(props) {
       size="small"
     >
       <TableBody>
-        {rows.map(({name, value=null, valueComponent=null, hide=false}, i) => {
+        {rows.map(({name, value=null, nameComponent=null, valueComponent=null, hide=false}, i) => {
           if (hide)
             return null;
           return (
             <TableRow key={i}>
               <TableCell className={classes.metadataNameCell}>
-                <NameLabel>
-                  {name}
-                </NameLabel>
+                {nameComponent ?
+                  nameComponent
+                  :
+                  <NameLabel>
+                    {name}
+                  </NameLabel>
+                }
               </TableCell>
               <TableCell scope="row" className={classes.metadataCell}>
                 {valueComponent ?
