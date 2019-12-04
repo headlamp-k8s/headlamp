@@ -1,9 +1,12 @@
+import eyeIcon from '@iconify/icons-mdi/eye';
+import eyeOff from '@iconify/icons-mdi/eye-off';
 import menuDown from '@iconify/icons-mdi/menu-down';
 import menuUp from '@iconify/icons-mdi/menu-up';
 import { Icon } from '@iconify/react';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -293,5 +296,49 @@ export function DataField(props) {
       value={value}
       {...other}
     />
+  );
+}
+
+export function SecretField(props) {
+  const { label, value, ...other } = props;
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  function handleClickShowPassword() {
+    setShowPassword(!showPassword);
+  }
+
+  function handleMouseDownPassword(event) {
+    event.preventDefault();
+  }
+
+  return (
+    <Grid
+      container
+      alignItems="stretch"
+      spacing={2}
+    >
+      <Grid item>
+        <IconButton
+          edge="end"
+          aria-label="toggle field visibility"
+          onClick={handleClickShowPassword}
+          onMouseDown={handleMouseDownPassword}
+        >
+          <Icon icon={showPassword ? eyeOff : eyeIcon} />
+        </IconButton>
+      </Grid>
+      <Grid item xs>
+        <Input
+          readOnly
+          paddingLeft="30px"
+          type="password"
+          fullWidth
+          multiline={showPassword}
+          rowsMax="20"
+          value={showPassword ? value : '******'}
+          {...other}
+        />
+      </Grid>
+    </Grid>
   );
 }
