@@ -87,6 +87,14 @@ export function StatusLabel(props) {
   );
 }
 
+export function makeStatusLabel(label, successStatusName) {
+  return (
+    <StatusLabel status={label == successStatusName ? 'success' : 'error'} >
+      {label}
+    </StatusLabel>
+  );
+}
+
 const useHeaderLabelStyles = makeStyles(theme => ({
   value: {
     fontSize: '3rem;'
