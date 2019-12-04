@@ -1,12 +1,10 @@
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import _ from 'lodash';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
-import { InfoLabel, ValueLabel } from '../common/Label';
 import Loader from '../common/Loader';
+import { DataField, MainInfoSection, PageGrid } from '../common/Resource';
+import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 
 export default function ConfigDetails(props) {
@@ -18,43 +16,22 @@ export default function ConfigDetails(props) {
   );
 
   return (
-    <Paper>
-      <SectionHeader
-        title="Config Map"
-      />
-      <Box padding={2}>
-        {item === null ?
-          <Loader />
-          :
-          <React.Fragment>
-            <Grid
-              item
-              container
-              spacing={1}
-              justify="flex-start"
-              alignItems="flex-start"
-              xs={12}
-              lg
-            >
-              <InfoLabel name="Name" value={item.metadata.name} />
-              <InfoLabel name="UID" value={item.metadata.uid} />
-              <InfoLabel name="Namespace" value={item.metadata.namespace} />
-              <InfoLabel name="Version" value={item.metadata.resourceVersion} />
-              <InfoLabel name="Creation">
-                <ValueLabel>{new Date(item.metadata.creationTimestamp).toLocaleString()}</ValueLabel>
-              </InfoLabel>
-              {/* @todo Restyle this */}
-              <InfoLabel name="Config Data">
-                {_.map(item.data, (value, key) => {
-                  return (
-                    <p key={key}><ValueLabel>{key}{': '}{value}</ValueLabel></p>
-                  );
-                })}
-              </InfoLabel>
-            </Grid>
-          </React.Fragment>
-        }
-      </Box>
-    </Paper>
+    !item ? <Loader /> :
+    <PageGrid
+      sections={[
+        <MainInfoSection resource={item} />,
+        <Paper>
+          <SectionHeader title="Data" />
+          {Object.keys(item.data).map((key, i) =>
+            <React.Fragment key={i}>
+              <SectionBox marginBottom="2rem">
+                <DataField label={key} value={item.data[key]} />
+              </SectionBox>
+            </React.Fragment>
+          )
+          }
+        </Paper>
+      ]}
+    />
   );
 }

@@ -73,7 +73,7 @@ export function MetadataDisplay(props) {
   );
 }
 
-function MetadataDictGrid(props) {
+export function MetadataDictGrid(props) {
   const classes = useStyles();
   const { dict } = props;
   const [expanded, setExpanded] = React.useState(false);
