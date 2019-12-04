@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { localeDate } from '../../lib/util';
@@ -264,5 +265,29 @@ export function SectionGrid(props) {
         );
       })}
     </Grid>
+  );
+}
+
+export function DataField(props) {
+  const { label, value, ...other } = props;
+  return (
+    <TextField
+      label={label}
+      InputProps={{
+        readOnly: true,
+        paddingLeft: '30px'
+      }}
+      InputLabelProps={{
+        shrink: true,
+        style: {fontSize: '1.3rem'}
+      }}
+      variant="outlined"
+      fullWidth
+      shrink
+      multiline
+      rowsMax="20"
+      value={value}
+      {...other}
+    />
   );
 }
