@@ -1,11 +1,14 @@
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
+import { makeStatusLabel } from '../common/Label';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
+import { LightTooltip } from '../common/Tooltip';
 import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './Charts';
 
 export default function Overview(props) {
@@ -87,14 +90,17 @@ function EventsSection(props) {
               label: 'Age',
               getter: event => timeAgo(event.metadata.creationTimestamp),
             },
+            // @todo: Maybe the message should be shown on slide-down.
             {
               label: 'Reason',
-              getter: event => event.reason,
+              getter: event =>
+                <LightTooltip
+                  title={event.message}
+                  interactive
+                >
+                  <Box>{makeStatusLabel(event.reason, 'Synced')}</Box>
+                </LightTooltip>,
             },
-            {
-              label: 'Message',
-              getter: event => event.message,
-            }
           ]}
           data={events}
         />
