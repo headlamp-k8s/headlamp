@@ -1,3 +1,4 @@
+import calendarIcon from '@iconify/icons-mdi/calendar';
 import informationOutline from '@iconify/icons-mdi/information-outline';
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
@@ -5,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import { localeDate, timeAgo } from '../../lib/util';
 import { LightTooltip } from './Tooltip';
 
 const useStyles = makeStyles(theme => ({
@@ -157,5 +159,16 @@ export function HoverInfoLabel(props) {
         </LightTooltip>
       </Grid>
     </Grid>
+  );
+}
+
+export function DateLabel(props) {
+  const { date } = props;
+  return (
+    <HoverInfoLabel
+      label={timeAgo(date)}
+      hoverInfo={localeDate(date)}
+      icon={calendarIcon}
+    />
   );
 }
