@@ -1,7 +1,11 @@
+import informationOutline from '@iconify/icons-mdi/information-outline';
+import { Icon } from '@iconify/react';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import { LightTooltip } from './Tooltip';
 
 const useStyles = makeStyles(theme => ({
   nameLabel: {
@@ -129,6 +133,28 @@ export function HeaderLabel(props) {
         <Grid item>
           <Typography className={classes.value}>{value}</Typography>
         </Grid>
+      </Grid>
+    </Grid>
+  );
+}
+
+export function HoverInfoLabel(props) {
+  const { label, hoverInfo, icon=null } = props;
+
+  return (
+    <Grid
+      container
+      spacing={1}
+    >
+      <Grid item>
+        {label}
+      </Grid>
+      <Grid item>
+        <LightTooltip title={hoverInfo}>
+          <Box>
+            <Icon icon={icon || informationOutline} width="1rem" height="1rem"/>
+          </Box>
+        </LightTooltip>
       </Grid>
     </Grid>
   );
