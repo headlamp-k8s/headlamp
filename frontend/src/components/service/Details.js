@@ -41,7 +41,7 @@ export default function ServiceDetails(props) {
       sections={[
         <MainInfoSection
           resource={item}
-          mainInfo={item && [
+          extraInfo={item && [
             {
               name: 'Type',
               value: item.spec.type,

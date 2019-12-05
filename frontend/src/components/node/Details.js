@@ -42,7 +42,7 @@ export default function NodeDetails(props) {
             <ChartsSection node={item} metrics={nodeMetrics} />
           }
           resource={item}
-          mainInfo={item && [
+          extraInfo={item && [
             {
               name: 'Ready',
               value: <NodeReadyLabel node={item} />

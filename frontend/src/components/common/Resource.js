@@ -186,7 +186,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 export function MainInfoSection(props) {
-  const { resource, headerSection, title, mainInfo=[] } = props;
+  const { resource, headerSection, title, extraInfo=[] } = props;
 
   return (
     <Paper>
@@ -204,7 +204,7 @@ export function MainInfoSection(props) {
               items={[
                 <MetadataDisplay resource={resource} />,
                 <NameValueTable
-                  rows={mainInfo}
+                  rows={extraInfo}
                 />
               ]}
             />
