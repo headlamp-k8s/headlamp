@@ -16,7 +16,8 @@ import { localeDate } from '../../lib/util';
 import Loader from '../common/Loader';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
-import { NameValueTable } from '../common/SimpleTable';
+import SimpleTable, { NameValueTable } from '../common/SimpleTable';
+import { DateLabel, HoverInfoLabel, StatusLabel } from './Label';
 import Link from './Link';
 import { LightTooltip } from './Tooltip';
 
@@ -336,5 +337,57 @@ export function SecretField(props) {
         />
       </Grid>
     </Grid>
+  );
+}
+
+export function ConditionsTable(props) {
+  const { resource } = props;
+
+  function makeStatusLabel(condition) {
+    let status = '';
+    if (condition.type == 'Available') {
+      status = condition.status == 'True' ? 'success' : 'error';
+    }
+
+    return (
+      <StatusLabel
+        status={status}
+      >
+        {condition.type}
+      </StatusLabel>
+    );
+  }
+
+  return (
+    <SimpleTable
+      data={resource && resource.status.conditions}
+      columns={[
+        {
+          label: 'Condition',
+          getter: makeStatusLabel
+        },
+        {
+          label: 'Status',
+          getter: condition => condition.status,
+        },
+        {
+          label: 'Last Transition',
+          getter: condition => <DateLabel date={condition.lastTransitionTime} />,
+        },
+        {
+          label: 'Last Update',
+          getter: condition => <DateLabel date={condition.lastUpdateTime} />,
+        },
+        {
+          label: 'Reason',
+          getter: condition =>
+            <HoverInfoLabel
+              label={condition.reason}
+              hoverInfo={condition.message}
+            />
+          ,
+        }
+      ]}
+    />
   );
 }
