@@ -4,6 +4,7 @@ import Auth from '../components/account/Auth';
 import Overview from '../components/cluster/Overview';
 import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
+import DaemonSet from '../components/daemonset/Details';
 import Deployment from '../components/deployment/Details';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
@@ -104,7 +105,7 @@ export const ROUTES = {
   DaemonSet: {
     path: '/daemonsets/:namespace/:name',
     exact: true,
-    component: () => <WorkloadDetails workloadKind="DaemonSet" />
+    component: () => <DaemonSet />
   },
   StatefulSet: {
     path: '/statefulsets/:namespace/:name',
