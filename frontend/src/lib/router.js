@@ -32,6 +32,7 @@ import ReplicaSetDetails from '../components/replicaset/Details';
 import NodeDetails from '../components/node/Details';
 import NamespaceDetails from '../components/namespace/Details';
 import WorkloadDetails from '../components/workload/Details';
+import Deployment from '../components/deployment/Details';
 
 export const ROUTES = {
   cluster: {
@@ -113,7 +114,7 @@ export const ROUTES = {
   Deployment: {
     path: "/deployments/:namespace/:name",
     exact: true,
-    component: () => <WorkloadDetails workloadKind="Deployment" />
+    component: () => <Deployment />
   },
   Job: {
     path: "/jobs/:namespace/:name",
