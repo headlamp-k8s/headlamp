@@ -4,6 +4,7 @@ import Auth from '../components/account/Auth';
 import Overview from '../components/cluster/Overview';
 import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
+import Deployment from '../components/deployment/Details';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import NamespaceDetails from '../components/namespace/Details';
@@ -113,7 +114,7 @@ export const ROUTES = {
   Deployment: {
     path: '/deployments/:namespace/:name',
     exact: true,
-    component: () => <WorkloadDetails workloadKind="Deployment" />
+    component: () => <Deployment />
   },
   Job: {
     path: '/jobs/:namespace/:name',
