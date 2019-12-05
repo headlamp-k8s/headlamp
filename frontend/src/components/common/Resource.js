@@ -217,7 +217,8 @@ export function MainInfoSection(props) {
 }
 
 export function PageGrid(props) {
-  const { sections, ...other } = props;
+  const { sections=[], children=[], ...other } = props;
+  const childrenArray = React.Children.toArray(children).concat(sections);
   return (
     <Grid
       container
@@ -226,7 +227,7 @@ export function PageGrid(props) {
       alignItems="stretch"
       {...other}
     >
-      {sections.map((section, i) =>
+      {childrenArray.map((section, i) =>
         <Grid item key={i} xs={12}>
           {section}
         </Grid>
