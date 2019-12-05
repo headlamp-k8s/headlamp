@@ -81,11 +81,16 @@ export function StatusLabel(props) {
   const classes = useStyles();
   const theme = useTheme();
 
+  const statuses = ['success', 'warning', 'error'];
+
+  // Assign to a status color if it exists.
+  let color = statuses.includes(status) ? theme.palette[status].main : theme.palette.grey['400'];
+
   return (
     <Typography
       className={classes.statusLabel}
       style={{
-        backgroundColor: theme.palette[status].main,
+        backgroundColor: color,
       }}
       component="span"
       {...other}
