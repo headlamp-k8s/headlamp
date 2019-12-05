@@ -24,7 +24,7 @@ export default function NamespaceDetails(props) {
   return (
     <MainInfoSection
       resource={item}
-      mainInfo={item && [{
+      extraInfo={item && [{
         name: 'Status',
         value: makeStatusLabel(item),
       }]}

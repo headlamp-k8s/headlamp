@@ -26,7 +26,7 @@ export default function RoleBindingDetails() {
       sections={[
         <MainInfoSection
           resource={item}
-          mainInfo={[
+          extraInfo={[
             {
               name: 'Reference Kind',
               value: item.roleRef.kind,

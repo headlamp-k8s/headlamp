@@ -16,7 +16,7 @@ export default function ServiceAccountDetails(props) {
   return (
     <MainInfoSection
       resource={item}
-      mainInfo={item && [
+      extraInfo={item && [
         {
           name: 'Secrets',
           value: item.secrets.map(({name}) => name).join(', ')

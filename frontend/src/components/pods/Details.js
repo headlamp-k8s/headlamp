@@ -14,7 +14,7 @@ export default function PodDetails(props) {
   return (
     <MainInfoSection
       resource={item}
-      mainInfo={item && [
+      extraInfo={item && [
         {
           name: 'State',
           value: item.status.phase

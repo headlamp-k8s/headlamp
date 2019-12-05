@@ -15,7 +15,7 @@ export default function SecretDetails(props) {
   return (
     <MainInfoSection
       resource={item}
-      mainInfo={item && _.map(item.data, (value, key) => (
+      extraInfo={item && _.map(item.data, (value, key) => (
         {
           name: key,
           valueComponent: <SecretField label={key} value={value} />

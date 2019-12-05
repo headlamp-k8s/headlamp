@@ -14,7 +14,7 @@ export default function StorageClassDetails(props) {
   return (
     <MainInfoSection
       resource={item}
-      mainInfo={item && [
+      extraInfo={item && [
         {
           name: 'Reclaim Policy',
           value: item.reclaimPolicy,
