@@ -1,14 +1,15 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
-import { timeAgo } from '../../lib/util';
+import { timeAgo, useFilterFunc } from '../../lib/util';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
+import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 import Link from '../common/Link';
 
 export default function SecretList() {
   const [secrets, setSecrets] = React.useState(null);
+  const filterFunc = useFilterFunc();
 
   useConnectApi(
     api.secret.list.bind(null, null, setSecrets),
@@ -16,10 +17,13 @@ export default function SecretList() {
 
   return (
     <Paper>
-      <SectionHeader title="Secrets" />
+      <SectionFilterHeader
+        title="Secrets"
+      />
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
+          filterFunction={filterFunc}
           columns={[
             {
               label: 'Name',
