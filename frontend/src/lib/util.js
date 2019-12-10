@@ -49,3 +49,18 @@ export function getResourceMetrics(item, metrics, resourceType) {
 
   return [used, capacity];
 }
+
+export function filterResource(item, filter) {
+  let matches = true;
+
+  if (filter.namespaces.size > 0) {
+    matches = filter.namespaces.has(item.metadata.namespace);
+  }
+
+  if (matches && filter.search) {
+    const filterString = filter.search.toLowerCase();
+    matches = item.metadata.namespace.toLowerCase().includes(filterString);
+  }
+
+  return matches;
+}
