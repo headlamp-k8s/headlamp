@@ -1,14 +1,16 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
-import { timeAgo } from '../../lib/util';
+import { timeAgo, useFilterFunc } from '../../lib/util';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import { ResourceLink } from '../common/Resource';
+import SectionFilterHeader from '../common/SectionFilterHeader';
 
 export default function ReplicaSetList() {
   const [replicaSets, setReplicaSets] = React.useState(null);
+  const filterFunc = useFilterFunc();
 
   function getReplicas(replicaSet) {
     return `${replicaSet.spec.replicas} / ${replicaSet.status.replicas}`
@@ -20,10 +22,13 @@ export default function ReplicaSetList() {
 
   return (
     <Paper>
-      <SectionHeader title="Replica Sets" />
+      <SectionFilterHeader
+        title="Replica Sets"
+      />
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
+          filterFunction={filterFunc}
           columns={[
             {
               label: 'Name',
