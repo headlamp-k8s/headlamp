@@ -2,10 +2,10 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
-import { timeAgo } from '../../lib/util';
+import { timeAgo, useFilterFunc } from '../../lib/util';
 import { ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
+import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 import { UsageBarChart } from './Charts';
 import { StatusLabel } from '../common/Label';
@@ -21,6 +21,7 @@ export default function NodeList() {
   const classes = useStyle();
   const [nodes, setNodes] = React.useState(null);
   const [nodeMetrics, setNodeMetrics] = React.useState(null);
+  const filterFunc = useFilterFunc();
 
   useConnectApi(
     api.node.list.bind(null, setNodes),
@@ -29,10 +30,14 @@ export default function NodeList() {
 
   return (
     <Paper>
-      <SectionHeader title="Nodes" />
+      <SectionFilterHeader
+        title="Nodes"
+        noNamespaceFilter
+      />
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
+          filterFunction={filterFunc}
           columns={[
             {
               label: 'Name',
