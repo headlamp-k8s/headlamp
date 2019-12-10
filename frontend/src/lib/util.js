@@ -67,7 +67,14 @@ export function filterResource(item, filter) {
 
   if (matches && filter.search) {
     const filterString = filter.search.toLowerCase();
-    matches = item.metadata.namespace.toLowerCase().includes(filterString);
+    const matchCriteria = [
+      item.metadata.namespace ? item.metadata.namespace.toLowerCase() : '',
+      item.metadata.name.toLowerCase(),
+      ...Object.keys(item.metadata.labels || {}).map(item => item.toLowerCase()),
+      ...Object.values(item.metadata.labels || {}).map(item => item.toLowerCase()),
+    ];
+
+    matches = matchCriteria.find(item => item.includes(filterString));
   }
 
   return matches;
