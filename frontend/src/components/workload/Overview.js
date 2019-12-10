@@ -2,15 +2,17 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
-import { getReadyReplicas, getTotalReplicas, timeAgo } from '../../lib/util';
+import { getReadyReplicas, getTotalReplicas, timeAgo, useFilterFunc } from '../../lib/util';
 import { PageGrid, ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
+import SectionFilterHeader from '../common/SectionFilterHeader';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import { WorkloadCircleChart } from './Charts';
 
 export default function Overview() {
   const [workloadsData, dispatch] = React.useReducer(setWorkloads, {});
+  const filterFunc = useFilterFunc();
 
   function setWorkloads(workloads, newWorkloads) {
     const data = {...workloads};
@@ -107,10 +109,11 @@ export default function Overview() {
         </SectionBox>
       </Paper>
       <Paper>
-        <SectionHeader title="Workloads" />
+        <SectionFilterHeader title="Workloads" />
         <SectionBox>
           <SimpleTable
             rowsPerPage={[15, 25, 50]}
+            filterFunction={filterFunc}
             columns={[
               {
                 label: 'Type',
