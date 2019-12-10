@@ -1,5 +1,6 @@
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { useSelector } from 'react-redux';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 TimeAgo.addLocale(en);
 
@@ -70,4 +71,9 @@ export function filterResource(item, filter) {
   }
 
   return matches;
+}
+
+export function useFilterFunc() {
+  const filter = useSelector(state => state.filter);
+  return item => filterResource(item, filter);
 }
