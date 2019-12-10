@@ -4,7 +4,7 @@ import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { Controller } from '../../lib/cluster/workload';
 import { timeAgo } from '../../lib/util';
-import { ResourceLink } from '../common/Resource';
+import { PageGrid, ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
@@ -78,75 +78,66 @@ export default function Overview() {
   ];
 
   return (
-    <Grid
-      container
-      direction="column"
-      spacing={1}
-      alignItems="stretch"
-    >
-      <Grid item>
-        <Paper>
-          <SectionHeader title="Overview" />
-          <SectionBox>
-            <Grid
-              container
-              justify="space-around"
-              alignItems="flex-start"
-              spacing={1}
-            >
-              {chartDefinitions.map(({kind, title}) =>
-                <Grid
-                  item
-                  lg={2}
-                  md={4}
-                  xs={6}
-                  key={kind}>
-                  <WorkloadCircleChart
-                    workloadData={workloadsData[kind] || []}
-                    title={title}
-                    partialLabel="Failed"
-                    totalLabel="Running"
-                  />
-                </Grid>
-              )}
-            </Grid>
-          </SectionBox>
-        </Paper>
-      </Grid>
-      <Grid item>
-        <Paper>
-          <SectionHeader title="Workloads" />
-          <SectionBox>
-            <SimpleTable
-              rowsPerPage={[15, 25, 50]}
-              columns={[
-                {
-                  label: 'Type',
-                  getter: (item) => item.kind
-                },
-                {
-                  label: 'Name',
-                  getter: (item) =>
-                    <ResourceLink resource={item} />
-                },
-                {
-                  label: 'Namespace',
-                  getter: (item) => item.metadata.namespace
-                },
-                {
-                  label: 'Pods',
-                  getter: (item) => getPods(item)
-                },
-                {
-                  label: 'Age',
-                  getter: (item) => timeAgo(item.metadata.creationTimestamp)
-                },
-              ]}
-              data={getJointItems()}
-            />
-          </SectionBox>
-        </Paper>
-      </Grid>
-    </Grid>
+    <PageGrid>
+      <Paper>
+        <SectionHeader title="Overview" />
+        <SectionBox>
+          <Grid
+            container
+            justify="space-around"
+            alignItems="flex-start"
+            spacing={1}
+          >
+            {chartDefinitions.map(({kind, title}) =>
+              <Grid
+                item
+                lg={2}
+                md={4}
+                xs={6}
+                key={kind}>
+                <WorkloadCircleChart
+                  workloadData={workloadsData[kind] || []}
+                  title={title}
+                  partialLabel="Failed"
+                  totalLabel="Running"
+                />
+              </Grid>
+            )}
+          </Grid>
+        </SectionBox>
+      </Paper>
+      <Paper>
+        <SectionHeader title="Workloads" />
+        <SectionBox>
+          <SimpleTable
+            rowsPerPage={[15, 25, 50]}
+            columns={[
+              {
+                label: 'Type',
+                getter: (item) => item.kind
+              },
+              {
+                label: 'Name',
+                getter: (item) =>
+                  <ResourceLink resource={item} />
+              },
+              {
+                label: 'Namespace',
+                getter: (item) => item.metadata.namespace
+              },
+              {
+                label: 'Pods',
+                getter: (item) => getPods(item)
+              },
+              {
+                label: 'Age',
+                getter: (item) => timeAgo(item.metadata.creationTimestamp)
+              },
+            ]}
+            data={getJointItems()}
+          />
+        </SectionBox>
+      </Paper>
+    </PageGrid>
   );
 }
