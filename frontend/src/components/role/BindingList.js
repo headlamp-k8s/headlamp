@@ -1,14 +1,15 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
-import { timeAgo } from '../../lib/util';
+import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
+import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function RoleBindingList() {
   const [roleBindingsData, dispatch] = React.useReducer(setRoleBindings, {});
+  const filterFunc = useFilterFunc();
 
   function setRoleBindings(roleBindings, newRoleBindings) {
     const data = {...roleBindings};
@@ -39,10 +40,13 @@ export default function RoleBindingList() {
 
   return (
     <Paper>
-      <SectionHeader title="Role Bindings" />
+      <SectionFilterHeader
+        title="Role Bindings"
+      />
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
+          filterFunction={filterFunc}
           columns={[
             {
               label: 'Type',
