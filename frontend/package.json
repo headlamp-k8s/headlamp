@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.5.2",
+    "@material-ui/core": "^4.7.2",
     "javascript-time-ago": "^2.0.4",
     "js-base64": "^2.5.1",
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.15",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "recharts": "^1.8.5",
@@ -34,10 +34,10 @@
     ]
   },
   "devDependencies": {
-    "@iconify/icons-mdi": "^1.0.31",
+    "@iconify/icons-mdi": "^1.0.36",
     "@iconify/react": "^1.1.1",
-    "eslint": "^6.6.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-react": "^7.16.0"
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-react": "^7.17.0"
   }
 }
