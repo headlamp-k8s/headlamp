@@ -1,14 +1,15 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
-import { timeAgo } from '../../lib/util';
+import { timeAgo, useFilterFunc } from '../../lib/util';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
+import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 import Link from '../common/Link';
 
 export default function VolumeClaimList() {
   const [volumeClaim, setVolumeClaim] = React.useState(null);
+  const filterFunc = useFilterFunc();
 
   useConnectApi(
     // @todo: use namespace for filtering.
@@ -17,10 +18,13 @@ export default function VolumeClaimList() {
 
   return (
     <Paper>
-      <SectionHeader title="Volume Claims" />
+      <SectionFilterHeader
+        title="Volume Claims"
+      />
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
+          filterFunction={filterFunc}
           columns={[
             {
               label: 'Name',

@@ -2,14 +2,15 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
-import { timeAgo } from '../../lib/util';
+import { timeAgo, useFilterFunc } from '../../lib/util';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
+import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 import {Link as RouterLink} from 'react-router-dom';
 
 export default function ClassList() {
   const [storageClassData, setStorageClassData] = React.useState(null);
+  const filterFunc = useFilterFunc();
 
   useConnectApi(
     api.storageClass.list.bind(null, setStorageClassData),
@@ -17,10 +18,14 @@ export default function ClassList() {
 
   return (
     <Paper>
-      <SectionHeader title="Storage Classes" />
+      <SectionFilterHeader
+        title="Storage Classes"
+        noNamespaceFilter
+      />
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
+          filterFunction={filterFunc}
           columns={[
             {
               label: 'Name',
