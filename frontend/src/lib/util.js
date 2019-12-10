@@ -61,7 +61,7 @@ export function getResourceMetrics(item, metrics, resourceType) {
 export function filterResource(item, filter) {
   let matches = true;
 
-  if (filter.namespaces.size > 0) {
+  if (item.metadata.namespace && filter.namespaces.size > 0) {
     matches = filter.namespaces.has(item.metadata.namespace);
   }
 
