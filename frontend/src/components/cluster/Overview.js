@@ -3,13 +3,14 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
-import { timeAgo } from '../../lib/util';
+import { timeAgo, useFilterFunc } from '../../lib/util';
 import { makeStatusLabel } from '../common/Label';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import { LightTooltip } from '../common/Tooltip';
 import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './Charts';
+import SectionFilterHeader from '../common/SectionFilterHeader';
 
 export default function Overview(props) {
   const [pods, setPods] = React.useState(null);
@@ -70,10 +71,15 @@ export default function Overview(props) {
 
 function EventsSection(props) {
   const { events } = props;
+  const filterFunc = useFilterFunc();
 
   return (
     <Paper>
-      <SectionHeader title="Events" />
+      <SectionFilterHeader
+        title="Events"
+        // Not filtering since we don't show a namespace column in the events table
+        noNamespaceFilter
+      />
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
