@@ -1,14 +1,14 @@
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { Controller } from '../../lib/cluster/workload';
 import { timeAgo } from '../../lib/util';
+import { ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
-import { ResourceLink } from '../common/Resource';
 import { WorkloadCircleChart } from './Charts';
-import { Controller } from '../../lib/cluster/workload';
 
 export default function Overview() {
   const [workloadsData, dispatch] = React.useReducer(setWorkloads, {});
