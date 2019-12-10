@@ -15,7 +15,7 @@ export default function SectionHeader(props) {
 
   return (<Grid
             container
-            alignItems="flex-start"
+            alignItems="center"
             justify="space-between"
             className={classes.sectionHeader}
           >
