@@ -1,9 +1,8 @@
 import Paper from '@material-ui/core/Paper';
 import _ from 'lodash';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import api, { useConnectApi } from '../../lib/api';
-import { filterResource, timeAgo } from '../../lib/util';
+import { timeAgo, useFilterFunc } from '../../lib/util';
 import { StatusLabel } from '../common/Label';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
@@ -12,7 +11,7 @@ import SimpleTable from '../common/SimpleTable';
 
 export default function PodList() {
   const [pods, setPods] = React.useState(null);
-  const filter = useSelector(state => state.filter);
+  const filterFunc = useFilterFunc();
 
   useConnectApi(
     api.pod.list.bind(null, null, setPods),
@@ -37,7 +36,7 @@ export default function PodList() {
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
-          filterFunction={item => filterResource(item, filter)}
+          filterFunction={filterFunc}
           columns={[
             {
               label: 'Name',
