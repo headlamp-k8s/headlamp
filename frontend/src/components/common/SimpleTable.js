@@ -20,7 +20,7 @@ const useTableStyle = makeStyles(theme => ({
 }));
 
 export default function SimpleTable(props) {
-  const {columns} = props;
+  const {columns, data, filterFunction=null} = props;
   const [page, setPage] = React.useState(0);
   const rowsPerPageOptions = props.rowsPerPage || [5, 10, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
@@ -38,19 +38,25 @@ export default function SimpleTable(props) {
   React.useEffect(() => {
     setPage(0);
   },
-  [props.data]);
+  [data]);
 
   function getPagedRows() {
     const startIndex = page * rowsPerPage;
-    return props.data.slice(startIndex, startIndex + rowsPerPage);
+    return filteredData.slice(startIndex, startIndex + rowsPerPage);
   }
 
-  if (props.data === null) {
+  if (data === null) {
     return <Loader />;
   }
 
+  let filteredData = data;
+
+  if (filterFunction) {
+    filteredData = data.filter(filterFunction);
+  }
+
   return (
-    (!props.data || props.data.length == 0) ?
+    (!data || data.length == 0) ?
       <Empty>{props.emptyMessage ? props.emptyMessage : 'No data to be shown.'}</Empty>
       :
       <React.Fragment>
@@ -69,34 +75,41 @@ export default function SimpleTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.data &&
-           getPagedRows().map((row, i) =>
-             <TableRow key={i}>
-               {columns.map(({datum, getter}, i) =>
-                 <TableCell key={`cell_${i}`}>
-                   {i == 0 && row.color &&
-                   <React.Fragment>
-                     <InlineIcon
-                       icon={squareIcon}
-                       color={row.color}
-                       height="15"
-                       width="15"
-                     />
-                      &nbsp;
-                   </React.Fragment>
-                   }
-                   { datum ? row[datum] : getter(row) }
-                 </TableCell>
-               )}
-             </TableRow>
-           )}
+            {filteredData.length > 0 ?
+              getPagedRows().map((row, i) =>
+                <TableRow key={i}>
+                  {columns.map(({datum, getter}, i) =>
+                    <TableCell key={`cell_${i}`}>
+                      {i == 0 && row.color &&
+                      <React.Fragment>
+                        <InlineIcon
+                          icon={squareIcon}
+                          color={row.color}
+                          height="15"
+                          width="15"
+                        />
+                        &nbsp;
+                      </React.Fragment>
+                      }
+                      { datum ? row[datum] : getter(row) }
+                    </TableCell>
+                  )}
+                </TableRow>
+              )
+              :
+              <TableRow>
+                <TableCell colSpan={columns.length}>
+                  <Empty>No data matching the filter criteria.</Empty>
+                </TableCell>
+              </TableRow>
+            }
           </TableBody>
         </Table>
-        {props.data.length > rowsPerPageOptions[0] &&
+        {filteredData.length > rowsPerPageOptions[0] &&
           <TablePagination
             rowsPerPageOptions={rowsPerPageOptions}
             component="div"
-            count={props.data.length}
+            count={filteredData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             backIconButtonProps={{
