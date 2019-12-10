@@ -1,14 +1,16 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
-import { timeAgo } from '../../lib/util';
+import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
+import SectionFilterHeader from '../common/SectionFilterHeader';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function IngressList() {
   const [ingresses, setIngresses] = React.useState(null);
+  const filterFunc = useFilterFunc();
 
   function getHosts(ingress) {
     return ingress.spec.rules.map(({host}) => host).join(' | ');
@@ -20,10 +22,13 @@ export default function IngressList() {
 
   return (
     <Paper>
-      <SectionHeader title="Ingresses" />
+      <SectionFilterHeader
+        title="Ingresses"
+      />
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
+          filterFunction={filterFunc}
           columns={[
             {
               label: 'Name',
