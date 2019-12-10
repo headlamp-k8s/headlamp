@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import Sidebar from './components/Sidebar';
 import { ROUTES, getRoute } from './lib/router';
 import green from '@material-ui/core/colors/green';
@@ -11,6 +12,7 @@ import orange from '@material-ui/core/colors/orange';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { getToken } from './lib/auth';
+import store from './redux/stores/store';
 
 const dashboardTheme = createMuiTheme({
   palette: {
@@ -50,32 +52,34 @@ function App() {
   const classes = useStyle();
 
   return (
-    <ThemeProvider theme={dashboardTheme}>
-      <Router>
-        <div className={classes.root}>
-          <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-              <Toolbar>
-              </Toolbar>
-            </AppBar>
-            <Sidebar />
-            <main className={classes.content}>
-              <div className={classes.toolbar} />
-              <Switch>
-                {Object.values(ROUTES).map((route, index) =>
-                  <AuthRoute
-                    key={index}
-                    path={route.path}
-                    requiresAuth={!route.noAuthRequired}
-                    exact={!!route.exact}
-                    children={<route.component />}
-                  />
-                )}
-              </Switch>
-            </main>
-        </div>
-      </Router>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={dashboardTheme}>
+        <Router>
+          <div className={classes.root}>
+            <CssBaseline />
+              <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar>
+                </Toolbar>
+              </AppBar>
+              <Sidebar />
+              <main className={classes.content}>
+                <div className={classes.toolbar} />
+                <Switch>
+                  {Object.values(ROUTES).map((route, index) =>
+                    <AuthRoute
+                      key={index}
+                      path={route.path}
+                      requiresAuth={!route.noAuthRequired}
+                      exact={!!route.exact}
+                      children={<route.component />}
+                    />
+                  )}
+                </Switch>
+              </main>
+          </div>
+        </Router>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

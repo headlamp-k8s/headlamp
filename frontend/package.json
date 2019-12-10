@@ -10,9 +10,11 @@
     "lodash": "^4.17.15",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "recharts": "^1.8.5",
+    "redux": "^4.0.4",
     "swagger-parser": "^8.0.3"
   },
   "scripts": {
