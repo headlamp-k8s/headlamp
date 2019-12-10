@@ -1,14 +1,15 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
-import { timeAgo } from '../../lib/util';
+import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
+import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function RoleList() {
   const [rolesData, dispatch] = React.useReducer(setRoles, {});
+  const filterFunc = useFilterFunc();
 
   function setRoles(roles, newRoles) {
     const data = {...roles};
@@ -38,10 +39,13 @@ export default function RoleList() {
 
   return (
     <Paper>
-      <SectionHeader title="Roles" />
+      <SectionFilterHeader
+        title="Roles"
+      />
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
+          filterFunction={filterFunc}
           columns={[
             {
               label: 'Type',
