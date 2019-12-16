@@ -187,12 +187,13 @@ const useStyle = makeStyles(theme => ({
 }));
 
 export function MainInfoSection(props) {
-  const { resource, headerSection, title, extraInfo=[] } = props;
+  const { resource, headerSection, title, extraInfo=[], actions=[] } = props;
 
   return (
     <Paper>
       <SectionHeader
         title={title || (resource ? resource.kind : '')}
+        actions={actions}
       />
       <SectionBox>
         {resource === null ?
