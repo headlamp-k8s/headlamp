@@ -1,3 +1,5 @@
+import fileDownloadOutline from '@iconify/icons-mdi/file-download-outline';
+import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -6,10 +8,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 import Ansi from 'ansi-to-react';
 import _ from 'lodash';
 import React from 'react';
@@ -48,6 +52,16 @@ export function LogViewer(props) {
 
   function getDefaultContainer() {
     return (item.spec.containers.length > 0) ? item.spec.containers[0].name : '';
+  }
+
+  function downloadLog() {
+    const element = document.createElement('a');
+    const file = new Blob(logs, {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = `${item.metadata.name}_${container}.txt`;
+    // Required for FireFox
+    document.body.appendChild(element);
+    element.click();
   }
 
   const options = {leading: true, trailing: true, maxWait: 1000};
@@ -103,41 +117,59 @@ export function LogViewer(props) {
       >
         <Grid
           container
-          spacing={1}
+          justify="space-between"
+          alignItems="center"
+          wrap="nowrap"
         >
-          <Grid item>
-            <FormControl className={classes.containerFormControl}>
-              <InputLabel shrink id="container-name-chooser-label">
-                Container
-              </InputLabel>
-              <Select
-                labelId="container-name-chooser-label"
-                id="container-name-chooser"
-                value={container}
-                onChange={handleContainerChange}
-              >
-                {item && item.spec.containers.map(({name}) =>
-                  <MenuItem value={name} key={name}>{name}</MenuItem>
-                )}
-              </Select>
-            </FormControl>
+          <Grid
+            item
+            container
+            spacing={1}
+          >
+            <Grid item>
+              <FormControl className={classes.containerFormControl}>
+                <InputLabel shrink id="container-name-chooser-label">
+                  Container
+                </InputLabel>
+                <Select
+                  labelId="container-name-chooser-label"
+                  id="container-name-chooser"
+                  value={container}
+                  onChange={handleContainerChange}
+                >
+                  {item && item.spec.containers.map(({name}) =>
+                    <MenuItem value={name} key={name}>{name}</MenuItem>
+                  )}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl className={classes.containerFormControl}>
+                <InputLabel shrink id="container-lines-chooser-label">
+                  Lines
+                </InputLabel>
+                <Select
+                  labelId="container-lines-chooser-label"
+                  id="container-lines-chooser"
+                  value={lines}
+                  onChange={handleLinesChange}
+                >
+                  {[100, 1000, 2500].map((i) =>
+                    <MenuItem value={i} key={i}>{i}</MenuItem>
+                  )}
+                </Select>
+              </FormControl>
+            </Grid>
           </Grid>
-          <Grid item>
-            <FormControl className={classes.containerFormControl}>
-              <InputLabel shrink id="container-lines-chooser-label">
-                Lines
-              </InputLabel>
-              <Select
-                labelId="container-lines-chooser-label"
-                id="container-lines-chooser"
-                value={lines}
-                onChange={handleLinesChange}
+          <Grid item xs>
+            <Tooltip title="Download">
+              <IconButton
+                aria-label="download"
+                onClick={downloadLog}
               >
-                {[100, 1000, 2500].map((i) =>
-                  <MenuItem value={i} key={i}>{i}</MenuItem>
-                )}
-              </Select>
-            </FormControl>
+                <Icon icon={fileDownloadOutline} />
+              </IconButton>
+            </Tooltip>
           </Grid>
         </Grid>
         <Box className={classes.terminal}>
