@@ -17,6 +17,7 @@ export default function SectionHeader(props) {
             container
             alignItems="center"
             justify="space-between"
+            wrap="nowrap"
             className={classes.sectionHeader}
           >
             {props.title &&
@@ -24,12 +25,19 @@ export default function SectionHeader(props) {
                 <Typography variant="h5">{props.title}</Typography>
               </Grid>
             }
-            {actions &&
-              actions.map((action, i) =>
-                <Grid item key={i}>
-                  {action}
-                </Grid>
-              )
+            {actions.length > 0 &&
+              <Grid
+                item
+                container
+                alignItems="center"
+                justify="flex-end"
+              >
+                {actions.map((action, i) =>
+                  <Grid item key={i}>
+                    {action}
+                  </Grid>
+                )}
+              </Grid>
             }
           </Grid>
   );
