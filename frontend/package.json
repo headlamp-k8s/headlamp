@@ -18,7 +18,8 @@
     "react-scroll": "^1.7.14",
     "recharts": "^1.8.5",
     "redux": "^4.0.4",
-    "swagger-parser": "^8.0.3"
+    "swagger-parser": "^8.0.3",
+    "xterm": "^4.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
