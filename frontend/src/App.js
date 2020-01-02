@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar from './components/Sidebar';
 import { ROUTES, getRoute } from './lib/router';
 import green from '@material-ui/core/colors/green';
@@ -76,6 +77,7 @@ function App() {
                   )}
                 </Switch>
               </main>
+              <ActionsNotifier />
           </div>
         </Router>
       </ThemeProvider>
