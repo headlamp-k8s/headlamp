@@ -9,6 +9,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Redirect,Route, Switch } from 'react-router-dom';
+import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar from './components/Sidebar';
 import { getToken } from './lib/auth';
 import { getRoute,ROUTES } from './lib/router';
@@ -76,6 +77,7 @@ function App() {
                 )}
               </Switch>
             </main>
+            <ActionsNotifier />
           </div>
         </Router>
       </ThemeProvider>
