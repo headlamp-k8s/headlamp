@@ -1,13 +1,22 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { INITIAL_STATE as FILTER_INITIAL_STATE } from '../reducers/filter';
 import reducers from '../reducers/reducers';
+import rootSaga from '../sagas/sagas';
 
 let initialState = {
   filter: FILTER_INITIAL_STATE,
 };
 
-export default createStore(
+const sagaMiddleware = createSagaMiddleware();
+
+let store = createStore(
   reducers,
   initialState,
+  applyMiddleware(sagaMiddleware),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+export default store;
+
+sagaMiddleware.run(rootSaga);
