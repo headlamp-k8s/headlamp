@@ -77,7 +77,7 @@ func main() {
 	// On dev mode we're loose about w
 	if *devMode {
 		headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
-		methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"})
+		methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "DELETE", "OPTIONS"})
 		origins := handlers.AllowedOrigins([]string{"*"})
 		handler = handlers.CORS(headers, methods, origins)(r)
 	} else {
