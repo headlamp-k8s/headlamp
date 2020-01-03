@@ -1,6 +1,8 @@
 import React from 'react';
 import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
+import { getRoute } from '../../lib/router';
+import DeleteButton from '../common/DeleteButton';
 import { MainInfoSection } from '../common/Resource';
 
 export default function ServiceAccountDetails(props) {
@@ -21,6 +23,13 @@ export default function ServiceAccountDetails(props) {
           name: 'Secrets',
           value: item.secrets.map(({name}) => name).join(', ')
         }
+      ]}
+      actions={item && [
+        <DeleteButton
+          items={[item]}
+          deletionCallback={() => api.serviceAccount.delete(namespace, name)}
+          options={{startUrl: getRoute('serviceAccounts').path}}
+        />
       ]}
     />
   );
