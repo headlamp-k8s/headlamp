@@ -26,7 +26,7 @@ export default function ServiceAccountDetails(props) {
       ]}
       actions={item && [
         <DeleteButton
-          items={[item]}
+          item={item}
           deletionCallback={() => api.serviceAccount.delete(namespace, name)}
           options={{startUrl: getRoute('serviceAccounts').path}}
         />

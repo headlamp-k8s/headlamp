@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import deletion from './deletion';
+import clusterAction from './clusterAction';
 import filter from './filter';
 
 const reducers = combineReducers({
   filter: filter,
-  deletion: deletion,
+  clusterAction: clusterAction,
 });
 
 export default reducers;

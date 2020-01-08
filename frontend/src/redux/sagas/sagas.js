@@ -1,47 +1,76 @@
 import { all, call, cancelled, delay, put, race, take, takeEvery } from 'redux-saga/effects';
-import { DELETION_GRACE_PERIOD } from '../../lib/cluster';
-import { clusterObjectsDeleted, CLUSTER_OBJECTS_CANCEL_DELETE, CLUSTER_OBJECTS_DELETE, deleteClusterObjectsCancelled, startDeleteClusterObjects } from '../actions/actions';
+import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/cluster';
+import { CLUSTER_ACTION, CLUSTER_ACTION_CANCEL, updateClusterAction } from '../actions/actions';
 
-function* watchDeleteClusterObject() {
-  yield takeEvery(CLUSTER_OBJECTS_DELETE, deleteClusterObjectWithCancellation);
+function* watchClusterAction() {
+  yield takeEvery(CLUSTER_ACTION, clusterActionWithCancellation);
 }
 
-function* deleteClusterObjectWithCancellation(action) {
+function* clusterActionWithCancellation(action) {
+
   yield race({
-    task: call(deleteClusterObject, action),
-    cancel: take(CLUSTER_OBJECTS_CANCEL_DELETE),
+    task: call(doClusterAction, action),
+    cancel: take(CLUSTER_ACTION_CANCEL),
   });
 }
 
-function* deleteClusterObject(action) {
-  const { items, options, deleteCallback } = action;
+function* doClusterAction(action) {
+  const {
+    type,
+    actionCallback,
+    startUrl,
+    cancelUrl,
+    successUrl,
+    startMessage,
+    cancelledMessage,
+    successMessage,
+    ...options
+  } = action;
+
   try {
-    yield put(startDeleteClusterObjects(items, {url: options.startUrl}));
-    yield delay(DELETION_GRACE_PERIOD);
-
-    // Actually delete the object.
-    deleteCallback();
-
-    yield put(clusterObjectsDeleted(items, {url: options.successUrl}));
+    yield put(updateClusterAction({
+      message: startMessage,
+      url: startUrl,
+      buttons: [
+        {
+          label: 'Cancel',
+          actionToDispatch: CLUSTER_ACTION_CANCEL,
+        },
+      ],
+      ...options
+    }));
+    yield delay(CLUSTER_ACTION_GRACE_PERIOD);
   } finally {
+    // Check if it's been cancelled.
     if (yield cancelled()) {
-      yield put(deleteClusterObjectsCancelled(items, {url: options.cancelUrl}));
+      yield put(updateClusterAction({
+        message: cancelledMessage,
+        url: cancelUrl,
+      }));
+    } else {
+      // Actually perform the action.
+      yield call(actionCallback);
+
+      yield put(updateClusterAction({
+        message: successMessage
+      }));
     }
 
     // Reset state if no other deletion happens
     const {timeout} = yield race({
-      newDeletion: take(CLUSTER_OBJECTS_DELETE),
+      newAction: take(CLUSTER_ACTION),
       timeout: delay(3000)
     })
 
+    // Reset the cluster action
     if (timeout) {
-      yield put(clusterObjectsDeleted([]));
+      yield put(updateClusterAction({}));
     }
   }
 }
 
 export default function* rootSaga() {
   yield all([
-    watchDeleteClusterObject(),
+    watchClusterAction(),
   ])
 }

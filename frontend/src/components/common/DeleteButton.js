@@ -5,12 +5,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from "react-router-dom";
-import { deleteClusterObjects } from '../../redux/actions/actions';
+import { clusterAction } from '../../redux/actions/actions';
 import { ConfirmDialog } from './Dialog';
 
 export default function DeleteButton(props) {
   const dispatch = useDispatch();
-  const { items, deletionCallback, options } = props;
+  const { item, deletionCallback, options } = props;
   const [openAlert, setOpenAlert] = React.useState(false);
   const location = useLocation();
 
@@ -30,8 +30,15 @@ export default function DeleteButton(props) {
         description="Are you sure you want to delete this item?"
         handleClose={() => setOpenAlert(false)}
         onConfirm={() => {
-          dispatch(deleteClusterObjects(items, deletionCallback,
-            {cancelUrl: location.pathname, ...options}));
+          dispatch(clusterAction(deletionCallback,
+            {
+              startMessage: `Deleting item ${item.metadata.name}…`,
+              cancelledMessage: `Cancelled!`,
+              successMessage: `Deleted item ${item.metadata.name}.`,
+              cancelUrl: location.pathname,
+              ...options
+            }
+          ));
         }}
       />
     </React.Fragment>
