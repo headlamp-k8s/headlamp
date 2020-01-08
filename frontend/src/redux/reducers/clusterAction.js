@@ -1,14 +1,20 @@
+import _ from 'lodash';
 import { CLUSTER_ACTION_UPDATE } from "../actions/actions";
 
 export const INITIAL_STATE = {
+  // id: { message, ... } . See the ActionsNotifier.
 };
 
-function cluster(deletion = INITIAL_STATE, action) {
-  const {type, ...actionOptions} = action;
-  let newState = {...deletion};
+function cluster(clusterActions = INITIAL_STATE, action) {
+  const {type, id, ...actionOptions} = action;
+  let newState = {...clusterActions};
   switch(type) {
     case CLUSTER_ACTION_UPDATE:
-      newState = {...actionOptions};
+      if (_.isEmpty(actionOptions)) {
+        delete newState[id];
+      } else {
+        newState[id] = {...actionOptions};
+      }
       break;
 
     default:

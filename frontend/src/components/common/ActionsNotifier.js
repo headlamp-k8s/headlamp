@@ -1,52 +1,66 @@
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
 import _ from 'lodash';
+import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
+import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/cluster';
 
 export default function ActionsNotifier() {
-  const [open, setOpen] = React.useState(false);
-  const clusterAction = useSelector(state => state.clusterAction);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const history = useHistory();
+  const clusterActions = useSelector(state => state.clusterAction);
 
-  function handleClose() {
-    setOpen(false);
+  function handleAction(clusterAction) {
+    if (_.isEmpty(clusterAction)) {
+      return;
+    }
+
+    if (clusterAction.url && history.location.pathname != clusterAction.url) {
+      history.push(clusterAction.url);
+    }
+
+    const action = _key => (
+      <React.Fragment>
+        {(clusterAction.buttons || []).map(({label, actionToDispatch}, i) =>
+          <Button
+            key={i}
+            color="secondary"
+            size="small"
+            onClick={() => {
+              dispatch({type: actionToDispatch});
+            }}
+          >
+            {label}
+          </Button>
+        )}
+      </React.Fragment>
+    );
+
+    // The original idea was to reuse the Snackbar with the same key.
+    // However, with notistack it proved to be complicated, so we dismiss+show
+    // Snackbars as needed instead.
+    if (clusterAction.dismissSnackbar) {
+      closeSnackbar(clusterAction.dismissSnackbar);
+    }
+
+    const {key, message, snackbarProps} = clusterAction;
+    enqueueSnackbar(message, {
+      key,
+      preventDuplicate: true,
+      autoHideDuration: CLUSTER_ACTION_GRACE_PERIOD,
+      action,
+      ...snackbarProps
+    });
   }
 
-  const actionIsEmpty = _.isEmpty(clusterAction);
-  if (!actionIsEmpty ^ open) {
-    setOpen(!actionIsEmpty);
-  }
+  React.useEffect(() => {
+    for (const clusterAction of Object.values(clusterActions)) {
+      handleAction(clusterAction);
+    }
+  },
+  [clusterActions]);
 
-  if (clusterAction.url && history.location.pathname != clusterAction.url) {
-    history.push(clusterAction.url);
-  }
-
-  return (
-    <Snackbar
-      open={open}
-      onClose={handleClose}
-      ContentProps={{
-        'aria-describedby': 'message-id',
-      }}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'left',
-      }}
-      autoHideDuration={3000}
-      message={<span id="message-id">{clusterAction.message}</span>}
-      action={(clusterAction.buttons || []).map(({label, actionToDispatch}, i) =>
-        <Button
-          key={i}
-          color="secondary"
-          size="small"
-          onClick={() => dispatch({type: actionToDispatch})}
-        >
-          {label}
-        </Button>
-      )}
-    />
-  );
+  return null;
 }

@@ -2,6 +2,7 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -54,33 +55,40 @@ function App() {
 
   return (
     <Provider store={store}>
-      <ThemeProvider theme={dashboardTheme}>
-        <Router>
-          <div className={classes.root}>
-            <CssBaseline />
-              <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                </Toolbar>
-              </AppBar>
-              <Sidebar />
-              <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Switch>
-                  {Object.values(ROUTES).map((route, index) =>
-                    <AuthRoute
-                      key={index}
-                      path={route.path}
-                      requiresAuth={!route.noAuthRequired}
-                      exact={!!route.exact}
-                      children={<route.component />}
-                    />
-                  )}
-                </Switch>
-              </main>
-              <ActionsNotifier />
-          </div>
-        </Router>
-      </ThemeProvider>
+    <ThemeProvider theme={dashboardTheme}>
+    <SnackbarProvider
+      anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+      }}
+    >
+      <Router>
+        <div className={classes.root}>
+          <CssBaseline />
+            <AppBar position="fixed" className={classes.appBar}>
+              <Toolbar>
+              </Toolbar>
+            </AppBar>
+            <Sidebar />
+            <main className={classes.content}>
+              <div className={classes.toolbar} />
+              <Switch>
+                {Object.values(ROUTES).map((route, index) =>
+                  <AuthRoute
+                    key={index}
+                    path={route.path}
+                    requiresAuth={!route.noAuthRequired}
+                    exact={!!route.exact}
+                    children={<route.component />}
+                  />
+                )}
+              </Switch>
+            </main>
+            <ActionsNotifier />
+        </div>
+      </Router>
+    </SnackbarProvider>
+    </ThemeProvider>
     </Provider>
   );
 }
