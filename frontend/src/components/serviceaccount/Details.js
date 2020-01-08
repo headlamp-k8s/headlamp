@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
 import { getRoute } from '../../lib/router';
 import DeleteButton from '../common/DeleteButton';
+import EditButton from '../common/EditButton';
 import { MainInfoSection } from '../common/Resource';
 
 export default function ServiceAccountDetails(props) {
@@ -15,6 +16,10 @@ export default function ServiceAccountDetails(props) {
     api.serviceAccount.get.bind(null, namespace, name, setItem),
   );
 
+  function handleApply(newItem) {
+    api.serviceAccount.put(newItem);
+  }
+
   return (
     <MainInfoSection
       resource={item}
@@ -25,6 +30,13 @@ export default function ServiceAccountDetails(props) {
         }
       ]}
       actions={item && [
+        <EditButton
+          item={item}
+          applyCallback={handleApply}
+          options={{
+            successOptions: {variant: 'success'}
+          }}
+        />,
         <DeleteButton
           item={item}
           deletionCallback={() => api.serviceAccount.delete(namespace, name)}
