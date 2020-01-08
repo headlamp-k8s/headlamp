@@ -1,14 +1,13 @@
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import _ from 'lodash';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { cancelDeleteClusterObjects } from '../../redux/actions/actions';
 
 export default function ActionsNotifier() {
-  let message = '';
   const [open, setOpen] = React.useState(false);
-  const deletion = useSelector(state => state.deletion);
+  const clusterAction = useSelector(state => state.clusterAction);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -16,43 +15,17 @@ export default function ActionsNotifier() {
     setOpen(false);
   }
 
-  const itemsString = `${deletion.items.map(item => item.metadata.name).join(', ').slice(0, 25)}`;
-
-  switch (deletion.status) {
-    case 'start':
-      message = `Deleting ${itemsString}…`;
-      break;
-    case 'success':
-      message = `Deleted ${itemsString}…`;
-      break;
-    case 'cancelled':
-      message = 'Cancelled!';
-      break;
-    default:
-      break;
+  const actionIsEmpty = _.isEmpty(clusterAction);
+  if (!actionIsEmpty ^ open) {
+    setOpen(!actionIsEmpty);
   }
 
-  if (deletion.status != '' ^ open) {
-    setOpen(deletion.status != '');
-  }
-
-  if (deletion.url !== null && history.location.pathname != deletion.url) {
-    history.push(deletion.url);
-  }
-
-  function handleDeleteCancellation() {
-    if (isCancellable()) {
-      dispatch(cancelDeleteClusterObjects());
-    }
-  }
-
-  function isCancellable() {
-    return deletion.status == 'start';
+  if (clusterAction.url && history.location.pathname != clusterAction.url) {
+    history.push(clusterAction.url);
   }
 
   return (
     <Snackbar
-      key={deletion.status}
       open={open}
       onClose={handleClose}
       ContentProps={{
@@ -63,12 +36,17 @@ export default function ActionsNotifier() {
         horizontal: 'left',
       }}
       autoHideDuration={3000}
-      message={<span id="message-id">{message}</span>}
-      action={isCancellable() && [
-        <Button key="cancel" color="secondary" size="small" onClick={handleDeleteCancellation}>
-          Cancel
+      message={<span id="message-id">{clusterAction.message}</span>}
+      action={(clusterAction.buttons || []).map(({label, actionToDispatch}, i) =>
+        <Button
+          key={i}
+          color="secondary"
+          size="small"
+          onClick={() => dispatch({type: actionToDispatch})}
+        >
+          {label}
         </Button>
-      ]}
+      )}
     />
   );
 }
