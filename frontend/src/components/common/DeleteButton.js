@@ -33,7 +33,7 @@ export default function DeleteButton(props) {
           dispatch(clusterAction(deletionCallback,
             {
               startMessage: `Deleting item ${item.metadata.name}…`,
-              cancelledMessage: 'Cancelled!',
+              cancelledMessage: `Cancelled deleting ${item.metadata.name}.`,
               successMessage: `Deleted item ${item.metadata.name}.`,
               cancelUrl: location.pathname,
               ...options

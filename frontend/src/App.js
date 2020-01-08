@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import { ThemeProvider } from '@material-ui/styles';
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Redirect,Route, Switch } from 'react-router-dom';
@@ -55,31 +56,38 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={dashboardTheme}>
-        <Router>
-          <div className={classes.root}>
-            <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-              <Toolbar>
-              </Toolbar>
-            </AppBar>
-            <Sidebar />
-            <main className={classes.content}>
-              <div className={classes.toolbar} />
-              <Switch>
-                {Object.values(ROUTES).map((route, index) =>
-                  <AuthRoute
-                    key={index}
-                    path={route.path}
-                    requiresAuth={!route.noAuthRequired}
-                    exact={!!route.exact}
-                    children={<route.component />}
-                  />
-                )}
-              </Switch>
-            </main>
-            <ActionsNotifier />
-          </div>
-        </Router>
+        <SnackbarProvider
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+        >
+          <Router>
+            <div className={classes.root}>
+              <CssBaseline />
+              <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar>
+                </Toolbar>
+              </AppBar>
+              <Sidebar />
+              <main className={classes.content}>
+                <div className={classes.toolbar} />
+                <Switch>
+                  {Object.values(ROUTES).map((route, index) =>
+                    <AuthRoute
+                      key={index}
+                      path={route.path}
+                      requiresAuth={!route.noAuthRequired}
+                      exact={!!route.exact}
+                      children={<route.component />}
+                    />
+                  )}
+                </Switch>
+              </main>
+              <ActionsNotifier />
+            </div>
+          </Router>
+        </SnackbarProvider>
       </ThemeProvider>
     </Provider>
   );
