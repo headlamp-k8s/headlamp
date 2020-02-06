@@ -38,6 +38,7 @@ const storageClass = apiFactory('storage.k8s.io', 'v1', 'storageclasses');
 const apis = {
     apply,
     testAuth,
+    getAuthorization,
     getRules,
     logs,
     swagger,
@@ -76,6 +77,28 @@ async function testAuth() {
 
 function getRules(namespace) {
     return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', {spec: {namespace}});
+}
+
+async function getAuthorization(resource, verb) {
+    let resourceAttrs = {
+        name: resource.metadata.name,
+        verb
+    };
+
+    if (resource.metadata.namespace) {
+        resourceAttrs['namespace'] = resource.metadata.namespace;
+    }
+
+    let spec = {
+        resourceAttributes: resourceAttrs
+    }
+
+    return await post('/apis/authorization.k8s.io/v1beta1/selfsubjectaccessreviews', {
+        kind: 'SelfSubjectAccessReview',
+        apiVersion: 'authorization.k8s.io/v1beta1',
+        spec: spec
+    },
+    false);
 }
 
 async function apply(body) {
