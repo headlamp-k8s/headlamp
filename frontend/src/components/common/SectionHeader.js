@@ -21,13 +21,14 @@ export default function SectionHeader(props) {
             className={classes.sectionHeader}
           >
             {props.title &&
-              <Grid item>
+              <Grid item md={6}>
                 <Typography variant="h5">{props.title}</Typography>
               </Grid>
             }
             {actions.length > 0 &&
               <Grid
                 item
+                md={6}
                 container
                 alignItems="center"
                 justify="flex-end"
