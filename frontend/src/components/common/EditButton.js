@@ -5,6 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import api from '../../lib/api';
 import { clusterAction } from '../../redux/actions/actions';
 import EditorDialog from './EditorDialog';
 
@@ -12,6 +13,7 @@ export default function EditButton(props) {
   const dispatch = useDispatch();
   const { item, options, applyCallback, errorCallback } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
+  const [visible, setVisible] = React.useState(false);
   const location = useLocation();
 
   function handleSave(newItemDef) {
@@ -30,7 +32,20 @@ export default function EditButton(props) {
     ));
   }
 
-  return (
+  React.useEffect(() => {
+    if (item && item.metadata) {
+      api.getAuthorization(item, 'update').then(
+        result => {
+          if (result.status.allowed) {
+            setVisible(true);
+          }
+        }
+      );
+    }
+  },
+  [item]);
+
+  return visible && (
     <React.Fragment>
       <Tooltip title="Edit">
         <IconButton
