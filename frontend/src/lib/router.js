@@ -41,59 +41,70 @@ export const ROUTES = {
     path: "/",
     exact: true,
     name: 'Cluster',
+    sidebar: 'cluster',
     component: () => <Overview />
   },
   namespaces: {
     path: "/namespaces",
     name: 'Namespaces',
     exact: true,
+    sidebar: 'namespaces',
     component: () => <NamespacesList />
   },
   Namespace: {
     path: "/namespaces/:name",
+    sidebar: 'namespaces',
     component: () => <NamespaceDetails />
   },
   nodes: {
     path: "/nodes",
     name: 'Nodes',
     exact: true,
+    sidebar: 'nodes',
     component: () => <NodeList />
   },
   Node: {
     path: "/nodes/:name",
+    sidebar: 'nodes',
     component: () => <NodeDetails />
   },
   storageClasses: {
     path: "/storage/classes",
     exact: true,
+    sidebar: 'storageClasses',
     name: 'Storage Classes',
     component: () => <StorageClassList />
   },
   storageClassDetails: {
     path: "/storage/classes/:name",
     name: 'Storage Classes',
+    sidebar: 'storageClasses',
     component: () => <StorageClassDetails />
   },
   storageVolumes: {
     path: "/storage/persistentvolumes",
     exact: true,
+    sidebar: 'storageVolumes',
     name: 'Persistent Volumes',
     component: () => <PersistentVolumeList />
   },
   persistentVolume: {
     path: "/storage/persistentvolumes/:name",
     exact: true,
+    sidebar: 'storageVolumes',
     name: 'Persistent Volume',
     component: () => <PersistentVolumeDetails />
   },
   persistentVolumeClaims: {
     path: "/storage/persistentvolumeclaims",
     exact: true,
+    sidebar: 'persistentVolumeClaims',
     name: 'Persistent Volume Claims',
     component: () => <PersistentVolumeClaimList />
   },
   persistentVolumeClaim: {
     path: "/storage/persistentvolumeclaims/:namespace/:name",
+    sidebar: 'persistentVolumeClaims',
     exact: true,
     component: () => <PersistentVolumeClaimDetails />
   },
@@ -101,148 +112,175 @@ export const ROUTES = {
     path: "/workload",
     exact: true,
     name: 'Workloads',
+    sidebar: 'workloads',
     component: () => <WorkloadOverview />
   },
   DaemonSet: {
     path: "/daemonsets/:namespace/:name",
     exact: true,
+    sidebar: 'workloads',
     component: () => <DaemonSet />
   },
   StatefulSet: {
     path: "/statefulsets/:namespace/:name",
     exact: true,
+    sidebar: 'workloads',
     component: () => <StatefulSet />
   },
   Deployment: {
     path: "/deployments/:namespace/:name",
     exact: true,
+    sidebar: 'workloads',
     component: () => <Deployment />
   },
   Job: {
     path: "/jobs/:namespace/:name",
     exact: true,
+    sidebar: 'workloads',
     component: () => <WorkloadDetails workloadKind="Job" />
   },
   CronJob: {
     path: "/cronjobs/:namespace/:name",
     exact: true,
+    sidebar: 'workloads',
     component: () => <WorkloadDetails workloadKind="CronJob" />
   },
   pods: {
     path: "/pods",
     exact: true,
     name: 'Pods',
+    sidebar: 'pods',
     component: () => <PodList />
   },
   pod: {
     path: "/pods/:namespace/:name",
     exact: true,
+    sidebar: 'pods',
     component: () => <PodDetails />
   },
   services: {
     path: "/services",
     exact: true,
     name: 'Services',
+    sidebar: 'services',
     component: () => <ServiceList />
   },
   service: {
     path: "/services/:namespace/:name",
     exact: true,
+    sidebar: 'services',
     component: () => <ServiceDetails />
   },
   ingresses: {
     path: "/ingresses",
     exact: true,
     name: 'Ingresses',
+    sidebar: 'ingresses',
     component: () => <IngressList />
   },
   ingress: {
     path: "/ingresses/:namespace/:name",
     exact: true,
+    sidebar: 'ingresses',
     component: () => <IngressDetails />
   },
   replicaSets: {
     path: "/replicasets",
     exact: true,
     name: 'Replica Sets',
+    sidebar: 'replicaSets',
     component: () => <ReplicaSetList />
   },
   ReplicaSet: {
     path: "/replicasets/:namespace/:name",
     exact: true,
+    sidebar: 'replicaSets',
     component: () => <ReplicaSetDetails />
   },
   configMaps: {
     path: "/configmaps",
     exact: true,
     name: 'Config Maps',
+    sidebar: 'configMaps',
     component: () => <ConfigMapList />
   },
   configMap: {
     path: "/configmaps/:namespace/:name",
     exact: true,
+    sidebar: 'configMaps',
     component: () => <ConfigDetails />
   },
   serviceAccounts: {
     path: "/serviceaccounts",
     exact: true,
     name: 'Service Accounts',
+    sidebar: 'serviceAccounts',
     component: () => <ServiceAccountList />
   },
   serviceAccount: {
     path: "/serviceaccounts/:namespace/:name",
     exact: true,
+    sidebar: 'serviceAccounts',
     component: () => <ServiceAccountDetails />
   },
   roles: {
     path: "/roles",
     exact: true,
     name: 'Roles',
+    sidebar: 'roles',
     component: () => <RoleList />
   },
   role: {
     path: "/roles/:namespace/:name",
     exact: true,
+    sidebar: 'roles',
     component: () => <RoleDetails />
   },
   clusterrole: {
     path: "/clusterroles/:name",
     exact: true,
+    sidebar: 'roles',
     component: () => <RoleDetails />
   },
   roleBindings: {
     path: "/rolebindings",
     exact: true,
     name: 'Role Bindings',
+    sidebar: 'roleBindings',
     component: () => <RoleBindingList />
   },
   roleBinding: {
     path: "/rolebinding/:namespace/:name",
     exact: true,
     name: 'Role Binding',
+    sidebar: 'roleBindings',
     component: () => <RoleBindingDetails />
   },
   clusterRoleBinding: {
     path: "/clusterrolebinding/:name",
     exact: true,
     name: 'Role Binding',
+    sidebar: 'roleBindings',
     component: () => <RoleBindingDetails />
   },
   secrets: {
     path: "/secrets",
     exact: true,
     name: 'Secrets',
+    sidebar: 'secrets',
     component: () => <SecretList />
   },
   secret: {
     path: "/secrets/:namespace/:name",
     exact: true,
+    sidebar: 'secrets',
     component: () => <SecretDetails />
   },
   login: {
     path: "/login",
     exact: true,
     name: 'Login',
+    sidebar: null,
     noAuthRequired: true,
     component: () => <Auth />
   },

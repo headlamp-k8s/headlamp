@@ -10,7 +10,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ActionsNotifier from './components/common/ActionsNotifier';
-import Sidebar from './components/Sidebar';
+import Sidebar, { useSidebarItem } from './components/Sidebar';
 import { getToken } from './lib/auth';
 import { getRoute, ROUTES } from './lib/router';
 import store from './redux/stores/store';
@@ -76,6 +76,7 @@ function App() {
                   <AuthRoute
                     key={index}
                     path={route.path}
+                    sidebar={route.sidebar}
                     requiresAuth={!route.noAuthRequired}
                     exact={!!route.exact}
                     children={<route.component />}
@@ -93,7 +94,9 @@ function App() {
 }
 
 function AuthRoute(props) {
-  const { children, requiresAuth=true, ...other } = props;
+  const { children, sidebar, requiresAuth=true, ...other } = props;
+
+  useSidebarItem(sidebar);
 
   function getRenderer({ location }) {
     if (!requiresAuth || !!getToken()) {
