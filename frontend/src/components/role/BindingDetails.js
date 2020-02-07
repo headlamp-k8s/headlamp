@@ -52,7 +52,7 @@ export default function RoleBindingDetails() {
           ]}
           actions={item && [
             <DeleteButton
-              items={[item]}
+              item={item}
               deletionCallback={handleDelete}
               options={{startUrl: getRoute('roleBindings').path}}
             />
