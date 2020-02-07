@@ -1,12 +1,14 @@
+import Collapse from '@material-ui/core/Collapse';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getRoute } from '../lib/router';
-import Collapse from '@material-ui/core/Collapse';
+import { setSidebarSelected } from '../redux/actions/actions';
 
 const DRAWER_WIDTH = 200;
 
@@ -109,9 +111,9 @@ const LIST_ITEMS = [
 
 export default function Sidebar(props) {
   const classes = useStyle();
-  const [selectedItem, setSelectedItem] = React.useState(null);
+  const sidebar = useSelector(state => state.ui.sidebar);
 
-  return (
+  return sidebar.isVisible && (
     <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -124,8 +126,7 @@ export default function Sidebar(props) {
           {LIST_ITEMS.map((item, i) =>
             <SidebarItem
               key={i}
-              onSelect={setSelectedItem}
-              selectedName={selectedItem}
+              selectedName={sidebar.selected}
               {...item}
             />
           )}
@@ -143,11 +144,10 @@ const useItemStyle = makeStyles(theme => ({
 function SidebarItem(props) {
   const classes = useItemStyle();
 
-  const {label, name=null, subList=[], selectedName, onSelect, ...other} = props;
+  const {label, name=null, subList=[], selectedName, ...other} = props;
 
   let routeName = name !== null ? name : subList.find(item => !!item.name).name;
   const linkPath = getRoute(routeName).path;
-  const urlMatch = useRouteMatch(linkPath);
 
   function isSelected() {
     return name == selectedName;
@@ -157,26 +157,12 @@ function SidebarItem(props) {
     return isSelected() || !!subList.find(item => item.name == selectedName);
   }
 
-  function setSelected() {
-    onSelect(routeName);
-  }
-
-  // Check if the ite should be selected because of a direct access through the URL.
-  // @todo: Now this is matching any path prefix and works, but it's not very clever and can lead
-  // to false selections in the future. So it should be changed to a more direct selection.
-  if (urlMatch && (urlMatch.isExact || urlMatch.path != '/')) {
-    if (!isSelected()) {
-      setSelected();
-    }
-  }
-
   return (
     <React.Fragment>
       <ListItem
         button
         component={Link}
         selected={isSelected()}
-        onClick={setSelected}
         to={linkPath}
         {...other}
       >
@@ -188,7 +174,6 @@ function SidebarItem(props) {
             {subList.map((item, i) =>
               <SidebarItem
                 key={i}
-                onSelect={onSelect}
                 selectedName={selectedName}
                 {...item}
               />
