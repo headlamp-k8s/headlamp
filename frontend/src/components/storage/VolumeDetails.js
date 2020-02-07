@@ -15,7 +15,7 @@ export default function VolumeDetails() {
   function makeStatusLabel(item) {
     const status = item.status.phase;
     return (
-      <StatusLabel status={status == 'Bound' ? 'success' : 'error'}>
+      <StatusLabel status={status === 'Bound' ? 'success' : 'error'}>
         {status}
       </StatusLabel>
     );

@@ -100,7 +100,7 @@ export function StatusLabel(props) {
 
 export function makeStatusLabel(label, successStatusName) {
   return (
-    <StatusLabel status={label == successStatusName ? 'success' : 'error'} >
+    <StatusLabel status={label === successStatusName ? 'success' : 'error'} >
       {label}
     </StatusLabel>
   );

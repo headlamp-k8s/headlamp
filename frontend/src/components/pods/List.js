@@ -24,7 +24,7 @@ export default function PodList() {
   function makeStatusLabel(pod) {
     const status = pod.status.phase;
     return (
-      <StatusLabel status={status == 'Running' ? 'success' : 'error'}>
+      <StatusLabel status={status === 'Running' ? 'success' : 'error'}>
         {status}
       </StatusLabel>
     );

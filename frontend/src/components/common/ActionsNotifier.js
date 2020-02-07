@@ -17,7 +17,7 @@ export default function ActionsNotifier() {
       return;
     }
 
-    if (clusterAction.url && history.location.pathname != clusterAction.url) {
+    if (clusterAction.url && history.location.pathname !== clusterAction.url) {
       history.push(clusterAction.url);
     }
 

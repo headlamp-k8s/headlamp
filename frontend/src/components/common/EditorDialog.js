@@ -156,7 +156,7 @@ export default function EditorDialog(props) {
       </DialogContent>
       <DialogActions>
         <ConfirmButton
-          disabled={originalCode == code}
+          disabled={originalCode === code}
           color="secondary"
           aria-label="undo"
           onConfirm={onUndo}
@@ -180,7 +180,7 @@ export default function EditorDialog(props) {
         <Button
           onClick={handleSave}
           color="primary"
-          disabled={originalCode == code || !!error}
+          disabled={originalCode === code || !!error}
         >
           Save &amp; Apply
         </Button>

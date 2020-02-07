@@ -261,7 +261,7 @@ export function SectionGrid(props) {
               {item}
             </Grid>
             {/* Only use a divider if required and this item is not the last one */}
-            {useDivider && (items.length - 1) != i &&
+            {useDivider && (items.length - 1) !== i &&
               <Grid
                 item
                 md={12}
@@ -351,8 +351,8 @@ export function ConditionsTable(props) {
 
   function makeStatusLabel(condition) {
     let status = '';
-    if (condition.type == 'Available') {
-      status = condition.status == 'True' ? 'success' : 'error';
+    if (condition.type === 'Available') {
+      status = condition.status === 'True' ? 'success' : 'error';
     }
 
     return (

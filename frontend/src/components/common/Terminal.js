@@ -51,7 +51,7 @@ export default function Terminal(props) {
       }
 
       // Send a newline when pressing enter
-      const code = event.domEvent.key == 'Enter' ? '\n' : event.key;
+      const code = event.domEvent.key === 'Enter' ? '\n' : event.key;
 
       // We just send the key strokes to the socket; the actual writing into the
       // terminal will be done when the data arrives.

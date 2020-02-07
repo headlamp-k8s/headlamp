@@ -15,7 +15,7 @@ export default function NamespaceDetails(props) {
   function makeStatusLabel(namespace) {
     const status = namespace.status.phase;
     return (
-      <StatusLabel status={status == 'Active' ? 'success' : 'error'}>
+      <StatusLabel status={status === 'Active' ? 'success' : 'error'}>
         {status}
       </StatusLabel>
     );

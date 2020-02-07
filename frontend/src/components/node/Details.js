@@ -68,7 +68,7 @@ function ChartsSection(props) {
       return '…';
     }
 
-    const readyInfo = node.status.conditions.find(({type}) => type == 'Ready');
+    const readyInfo = node.status.conditions.find(({type}) => type === 'Ready');
     if (readyInfo) {
       return timeAgo(readyInfo.lastTransitionTime);
     }
@@ -112,7 +112,7 @@ function SystemInfoSection(props) {
   function getOSComponent(osName) {
     let icon = null;
 
-    if (osName.toLowerCase() == 'linux') {
+    if (osName.toLowerCase() === 'linux') {
       icon = <InlineIcon icon={penguinIcon} fontSize="1.4rem"/>
     }
 
@@ -190,7 +190,7 @@ function SystemInfoSection(props) {
 export function NodeReadyLabel(props) {
   const { node } = props;
   let isReady = !!node.status.conditions
-    .find(condition => condition.type == 'Ready' && condition.status == 'True');
+    .find(condition => condition.type === 'Ready' && condition.status === 'True');
 
   let status = null;
   let label = null;
