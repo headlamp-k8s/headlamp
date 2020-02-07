@@ -27,7 +27,7 @@ function Auth() {
   function onAuthClicked() {
     loginWithToken(token).then(code => {
       // If successful, redirect.
-      if (code == 200) {
+      if (code === 200) {
         history.replace(from);
       } else {
         setToken('');

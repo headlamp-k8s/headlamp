@@ -50,7 +50,7 @@ export function getResourceMetrics(item, metrics, resourceType) {
   };
 
   const parser = resourceParsers[type];
-  const itemMetrics = metrics.find(itemMetrics => itemMetrics.metadata.name == item.metadata.name);
+  const itemMetrics = metrics.find(itemMetrics => itemMetrics.metadata.name === item.metadata.name);
 
   const used = parser(itemMetrics.usage[type]);
   const capacity = parser(item.status.capacity[type]);

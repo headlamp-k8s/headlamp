@@ -150,11 +150,11 @@ function SidebarItem(props) {
   const linkPath = getRoute(routeName).path;
 
   function isSelected() {
-    return name == selectedName;
+    return name === selectedName;
   }
 
   function shouldExpand() {
-    return isSelected() || !!subList.find(item => item.name == selectedName);
+    return isSelected() || !!subList.find(item => item.name === selectedName);
   }
 
   return (

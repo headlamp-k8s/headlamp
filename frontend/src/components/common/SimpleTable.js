@@ -56,7 +56,7 @@ export default function SimpleTable(props) {
   }
 
   return (
-    (!data || data.length == 0) ?
+    (!data || data.length === 0) ?
       <Empty>{props.emptyMessage ? props.emptyMessage : 'No data to be shown.'}</Empty>
       :
       <React.Fragment>
@@ -80,7 +80,7 @@ export default function SimpleTable(props) {
                 <TableRow key={i}>
                   {columns.map(({datum, getter}, i) =>
                     <TableCell key={`cell_${i}`}>
-                      {i == 0 && row.color &&
+                      {i === 0 && row.color &&
                       <React.Fragment>
                         <InlineIcon
                           icon={squareIcon}
