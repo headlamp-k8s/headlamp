@@ -184,3 +184,12 @@ function SidebarItem(props) {
     </React.Fragment>
   );
 }
+
+export function useSidebarItem(itemName) {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(setSidebarSelected(itemName));
+  },
+  []);
+}
