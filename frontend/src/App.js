@@ -2,18 +2,17 @@ import AppBar from '@material-ui/core/AppBar';
 import green from '@material-ui/core/colors/green';
 import orange from '@material-ui/core/colors/orange';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/core/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Redirect,Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar from './components/Sidebar';
 import { getToken } from './lib/auth';
-import { getRoute,ROUTES } from './lib/router';
+import { getRoute, ROUTES } from './lib/router';
 import store from './redux/stores/store';
 
 const dashboardTheme = createMuiTheme({
