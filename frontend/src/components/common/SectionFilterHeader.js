@@ -33,6 +33,7 @@ export default function SectionFilterHeader(props) {
       dispatch(setSearchFilter(''));
     };
   },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   []);
 
   const hasNamespaceFilters = !noNamespaceFilter && [...filter.namespaces.values()].length > 0;

@@ -200,6 +200,9 @@ export function useConnectApi(...apiCalls) {
       }
     };
   },
+    // If we add the apiCalls to the dependency list, then it actually
+    // results in undesired reloads.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []);
 }
 

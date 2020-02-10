@@ -191,5 +191,6 @@ export function useSidebarItem(itemName) {
   React.useEffect(() => {
     dispatch(setSidebarSelected(itemName));
   },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   []);
 }
