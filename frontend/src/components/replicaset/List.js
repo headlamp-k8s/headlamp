@@ -5,7 +5,6 @@ import { timeAgo, useFilterFunc } from '../../lib/util';
 import { ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
-import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ReplicaSetList() {

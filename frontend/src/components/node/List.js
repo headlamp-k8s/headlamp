@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo, useFilterFunc } from '../../lib/util';
-import { StatusLabel } from '../common/Label';
 import { ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';

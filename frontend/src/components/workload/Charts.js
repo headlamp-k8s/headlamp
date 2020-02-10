@@ -1,5 +1,4 @@
 import { useTheme } from '@material-ui/core/styles';
-import _ from 'lodash';
 import React from 'react';
 import { getPercentStr, getReadyReplicas, getTotalReplicas } from '../../lib/util';
 import { PercentageCircle } from '../common/Chart';

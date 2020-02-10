@@ -1,13 +1,9 @@
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import _ from 'lodash';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
-import { InfoLabel, ValueLabel } from '../common/Label';
 import Loader from '../common/Loader';
-import { MainInfoSection,PageGrid } from '../common/Resource';
+import { MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
