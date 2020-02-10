@@ -60,6 +60,7 @@ export default function ActionsNotifier() {
       handleAction(clusterAction);
     }
   },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   [clusterActions]);
 
   return null;

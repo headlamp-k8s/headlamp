@@ -114,6 +114,7 @@ export default function Terminal(props) {
       exec.cancel();
     }
   },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   [container, terminalContainerRef]);
 
   React.useEffect(() => {
@@ -121,6 +122,7 @@ export default function Terminal(props) {
       setContainer(getDefaultContainer());
     }
   },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   [props.open]);
 
   function handleContainerChange(event) {

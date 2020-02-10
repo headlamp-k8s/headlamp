@@ -93,6 +93,7 @@ export function LogViewer(props) {
       }
     };
   },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   [container, lines, props.open]);
 
   function handleContainerChange(event) {
