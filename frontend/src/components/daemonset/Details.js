@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
-import { MainInfoSection, MetadataDictGrid, PageGrid } from '../common/Resource';
+import { MainInfoSection, MetadataDictGrid } from '../common/Resource';
 
 export default function DaemonSet() {
   let { namespace, name } = useParams();

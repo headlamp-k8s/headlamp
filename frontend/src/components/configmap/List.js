@@ -4,9 +4,8 @@ import api, { useConnectApi } from '../../lib/api';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
-import SimpleTable from '../common/SimpleTable';
 import SectionFilterHeader from '../common/SectionFilterHeader';
+import SimpleTable from '../common/SimpleTable';
 
 export default function ConfigMapList() {
   const [configMaps, setConfigMaps] = React.useState(null);

@@ -8,7 +8,6 @@ import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 import { UsageBarChart } from './Charts';
-import { StatusLabel } from '../common/Label';
 import { NodeReadyLabel } from './Details';
 
 const useStyle = makeStyles(theme => ({

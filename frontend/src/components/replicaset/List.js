@@ -2,11 +2,10 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo, useFilterFunc } from '../../lib/util';
-import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
-import SimpleTable from '../common/SimpleTable';
 import { ResourceLink } from '../common/Resource';
+import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
+import SimpleTable from '../common/SimpleTable';
 
 export default function ReplicaSetList() {
   const [replicaSets, setReplicaSets] = React.useState(null);
