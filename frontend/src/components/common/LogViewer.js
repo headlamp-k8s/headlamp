@@ -45,7 +45,7 @@ export function LogViewer(props) {
   const [logs, setLogs] = React.useState([]);
   // This is a workaround because just setting the logs doesn't seem to update
   // the view...
-  const [count, setCount] = React.useState(0);
+  const setCount = React.useState(0)[1];
   const logsBottomRef = React.useRef(null);
   const [container, setContainer] = React.useState(getDefaultContainer());
   const [lines, setLines] = React.useState(100);

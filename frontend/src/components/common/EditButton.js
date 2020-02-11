@@ -11,7 +11,7 @@ import EditorDialog from './EditorDialog';
 
 export default function EditButton(props) {
   const dispatch = useDispatch();
-  const { item, options, applyCallback, errorCallback } = props;
+  const { item, options, applyCallback } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
   const location = useLocation();
