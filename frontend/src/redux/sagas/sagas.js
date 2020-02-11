@@ -23,7 +23,6 @@ function* clusterActionWithCancellation(action) {
 
 function* doClusterAction(action, actionKey, uniqueCancelAction) {
   const {
-    type,
     actionCallback,
     startUrl,
     cancelUrl,
