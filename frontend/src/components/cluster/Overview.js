@@ -83,6 +83,7 @@ function EventsSection(props) {
       <SectionBox>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
+          filterFunction={filterFunc}
           columns={events && [
             {
               label: 'Type',
