@@ -144,10 +144,10 @@ const useItemStyle = makeStyles(theme => ({
 function SidebarItem(props) {
   const classes = useItemStyle();
 
-  const {label, name=null, subList=[], selectedName, ...other} = props;
+  const {label, name=null, url=null, subList=[], selectedName, ...other} = props;
 
   let routeName = name !== null ? name : subList.find(item => !!item.name).name;
-  const linkPath = getRoute(routeName).path;
+  const linkPath = url || getRoute(routeName).path;
 
   function isSelected() {
     return name === selectedName;
