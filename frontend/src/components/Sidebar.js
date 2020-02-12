@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getRoute } from '../lib/router';
 import { setSidebarSelected } from '../redux/actions/actions';
+import store from '../redux/stores/store';
 
 const DRAWER_WIDTH = 200;
 
@@ -109,9 +110,33 @@ const LIST_ITEMS = [
   },
 ];
 
+function prepareRoutes() {
+  const items = store.getState().ui.sidebar.entries;
+  // @todo: Find a better way to avoid modifying the objects in LIST_ITEMS.
+  const routes = JSON.parse(JSON.stringify(LIST_ITEMS));
+
+  for (const item of Object.values(items)) {
+    const parent = item.parent ? routes.find(({name}) => name === item.parent) : null;
+    let placement = routes;
+    if (parent) {
+      if (!parent['subList']) {
+        parent['subList'] = [];
+      }
+
+      placement = parent['subList'];
+    }
+
+    placement.push(item);
+  }
+
+  return routes;
+}
+
 export default function Sidebar(props) {
   const classes = useStyle();
   const sidebar = useSelector(state => state.ui.sidebar);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const items = React.useMemo(() => prepareRoutes(), [sidebar.entries]);
 
   return sidebar.isVisible && (
     <Drawer
@@ -123,7 +148,7 @@ export default function Sidebar(props) {
     >
       <div className={classes.toolbar} />
       <List>
-        {LIST_ITEMS.map((item, i) =>
+        {items.map((item, i) =>
           <SidebarItem
             key={i}
             selectedName={sidebar.selected}
