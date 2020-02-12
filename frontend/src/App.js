@@ -13,6 +13,7 @@ import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar, { useSidebarItem } from './components/Sidebar';
 import { getToken } from './lib/auth';
 import { getRoute, ROUTES } from './lib/router';
+import { initializePlugins } from './plugin';
 import store from './redux/stores/store';
 
 const dashboardTheme = createMuiTheme({
@@ -51,6 +52,11 @@ const useStyle = makeStyles(theme => ({
 
 function App() {
   const classes = useStyle();
+
+  React.useEffect(() => {
+    initializePlugins();
+  },
+  []);
 
   return (
     <Provider store={store}>
