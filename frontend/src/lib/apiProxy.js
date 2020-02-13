@@ -224,7 +224,7 @@ export async function streamResults(url, cb, errCb) {
 export function stream(url, cb, args) {
   let connection;
   let isCancelled;
-  const {isJson, additionalProtocols, connectCb} = args;
+  const {isJson, additionalProtocols, connectCb, reconnectOnFailure=true} = args;
 
   connect();
 
@@ -247,8 +247,10 @@ export function stream(url, cb, args) {
   function onFail() {
     if (isCancelled) return;
 
-    console.info('Reconnecting in 3 seconds', {url});
-    setTimeout(connect, 3000);
+    if (reconnectOnFailure) {
+      console.log('Reconnecting in 3 seconds', {url});
+      setTimeout(connect, 3000);
+    }
   }
 }
 
