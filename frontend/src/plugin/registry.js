@@ -1,4 +1,4 @@
-import { setSidebarItem } from '../redux/actions/actions';
+import { setRoute, setSidebarItem } from '../redux/actions/actions';
 import store from '../redux/stores/store';
 
 export default class Registry {
@@ -9,5 +9,9 @@ export default class Registry {
       url,
       parent: parentName
     }));
+  }
+
+  registerRoute(routeSpec) {
+    store.dispatch(setRoute(routeSpec));
   }
 }
