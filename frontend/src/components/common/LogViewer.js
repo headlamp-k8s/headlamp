@@ -6,18 +6,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import Ansi from 'ansi-to-react';
-import _ from 'lodash';
 import React from 'react';
-import api from '../../lib/api';
 
 const useStyle = makeStyles(theme => ({
   dialogContent: {
@@ -40,69 +34,34 @@ const useStyle = makeStyles(theme => ({
 }));
 
 export function LogViewer(props) {
-  const { item, onClose, ...other } = props;
+  const {
+    logs,
+    title='',
+    downloadName='log',
+    onClose,
+    topActions=[],
+    ...other
+  } = props;
   const classes = useStyle();
-  const [logs, setLogs] = React.useState([]);
-  // This is a workaround because just setting the logs doesn't seem to update
-  // the view...
-  const setCount = React.useState(0)[1];
   const logsBottomRef = React.useRef(null)
-  const [container, setContainer] = React.useState(getDefaultContainer());
-  const [lines, setLines] = React.useState(100);
-
-  function getDefaultContainer() {
-    return (item.spec.containers.length > 0) ? item.spec.containers[0].name : '';
-  }
 
   function downloadLog() {
     const element = document.createElement("a");
     const file = new Blob(logs, {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = `${item.metadata.name}_${container}.txt`;
+    element.download = `${downloadName}.txt`;
     // Required for FireFox
     document.body.appendChild(element);
     element.click();
   }
 
-  const options = {leading: true, trailing: true, maxWait: 1000};
-  function setLogsDebounced(args) {
-    setLogs(args);
-    setCount(args.length);
-
+  React.useEffect(() => {
     // @todo: Only scroll down automatically if the view hasn't been scrolled up by the user yet.
     if (logsBottomRef && logsBottomRef.current) {
       logsBottomRef.current.scrollIntoView();
     }
-  }
-  const debouncedSetState = _.debounce(setLogsDebounced, 500, options);
-
-  React.useEffect(() => {
-    let callback = null;
-    if (props.open) {
-      callback = api.logs(item.metadata.namespace,
-                          item.metadata.name,
-                          container,
-                          lines,
-                          false,
-                          debouncedSetState);
-    }
-
-    return function cleanup() {
-      if (callback) {
-        callback();
-      }
-    };
   },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  [container, lines, props.open]);
-
-  function handleContainerChange(event) {
-    setContainer(event.target.value);
-  }
-
-  function handleLinesChange(event) {
-    setLines(event.target.value);
-  }
+  [logs]);
 
   return (
     <Dialog
@@ -112,7 +71,7 @@ export function LogViewer(props) {
       onBackdropClick={onClose}
       {...other}
     >
-      <DialogTitle>Logs: {item.metadata.name}</DialogTitle>
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent
         className={classes.dialogContent}
       >
@@ -127,40 +86,11 @@ export function LogViewer(props) {
             container
             spacing={1}
           >
-            <Grid item>
-              <FormControl className={classes.containerFormControl}>
-                <InputLabel shrink id="container-name-chooser-label">
-                  Container
-                </InputLabel>
-                <Select
-                  labelId="container-name-chooser-label"
-                  id="container-name-chooser"
-                  value={container}
-                  onChange={handleContainerChange}
-                >
-                  {item && item.spec.containers.map(({name}) =>
-                    <MenuItem value={name} key={name}>{name}</MenuItem>
-                  )}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <FormControl className={classes.containerFormControl}>
-                <InputLabel shrink id="container-lines-chooser-label">
-                  Lines
-                </InputLabel>
-                <Select
-                  labelId="container-lines-chooser-label"
-                  id="container-lines-chooser"
-                  value={lines}
-                  onChange={handleLinesChange}
-                >
-                  {[100, 1000, 2500].map((i) =>
-                    <MenuItem value={i} key={i}>{i}</MenuItem>
-                  )}
-                </Select>
-              </FormControl>
-            </Grid>
+            {topActions.map((component, i) =>
+              <Grid item key={i}>
+                {component}
+              </Grid>
+            )}
           </Grid>
           <Grid item xs>
             <Tooltip title="Download">
