@@ -1,11 +1,14 @@
-import { UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
+import { UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
 
 export const INITIAL_STATE = {
   sidebar: {
     selected: 'cluster',
     isVisible: true,
     entries: {}
-  }
+  },
+  routes: {
+    // path -> component
+  },
 }
 
 function reducer(state = INITIAL_STATE, action) {
@@ -32,6 +35,11 @@ function reducer(state = INITIAL_STATE, action) {
         ...newFilters.sidebar,
         entries
       }
+      break;
+    case UI_ROUTER_SET_ROUTE:
+      let routes = {...newFilters.routes};
+      routes[action.route.path] = action.route;
+      newFilters.routes = routes;
       break;
 
     default:
