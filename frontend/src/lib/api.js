@@ -165,11 +165,11 @@ function swagger() {
 }
 
 function exec(namespace, name, container, cb, options={}) {
-    const {command=['sh']} = options;
+    const {command=['sh'], reconnectOnFailure=undefined} = options;
     const commandStr = command.map(item => '&command=' + encodeURIComponent(item)).join('');
     const url = `/api/v1/namespaces/${namespace}/pods/${name}/exec?container=${container}${commandStr}&stdin=1&stderr=1&stdout=1&tty=1`;
     const additionalProtocols = ['v4.channel.k8s.io', 'v3.channel.k8s.io', 'v2.channel.k8s.io', 'channel.k8s.io'];
-    return stream(url, cb, {additionalProtocols, isJson: false});
+    return stream(url, cb, {additionalProtocols, isJson: false, reconnectOnFailure});
 }
 
 function logs(namespace, name, container, tailLines, showPrevious, cb) {
