@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar, { useSidebarItem } from './components/Sidebar';
@@ -50,6 +50,25 @@ const useStyle = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
 }));
 
+function RouteSwitcher() {
+  const routes = useSelector(state => state.ui.routes);
+
+  return (
+    <Switch>
+      {Object.values(ROUTES).concat(Object.values(routes)).map((route, index) =>
+        <AuthRoute
+          key={index}
+          path={route.path}
+          sidebar={route.sidebar}
+          requiresAuth={!route.noAuthRequired}
+          exact={!!route.exact}
+          children={<route.component />}
+        />
+      )}
+    </Switch>
+  );
+}
+
 function App() {
   const classes = useStyle();
 
@@ -77,18 +96,7 @@ function App() {
               <Sidebar />
               <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Switch>
-                  {Object.values(ROUTES).map((route, index) =>
-                    <AuthRoute
-                      key={index}
-                      path={route.path}
-                      sidebar={route.sidebar}
-                      requiresAuth={!route.noAuthRequired}
-                      exact={!!route.exact}
-                      children={<route.component />}
-                    />
-                  )}
-                </Switch>
+                <RouteSwitcher />
               </main>
               <ActionsNotifier />
             </div>
