@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { localeDate } from '../../lib/util';
 import Loader from '../common/Loader';
 import { SectionBox } from '../common/SectionBox';
@@ -192,12 +193,17 @@ const useStyle = makeStyles(theme => ({
 
 export function MainInfoSection(props) {
   let { resource, headerSection, title, extraInfo=[], actions=[] } = props;
+  const headerActions = useSelector(state => state.ui.views.details.headerActions);
+
+  function getHeaderActions() {
+    return Object.values(headerActions).map(action => action({item: resource}));
+  }
 
   return (
     <Paper>
       <SectionHeader
         title={title || (resource ? resource.kind : '')}
-        actions={actions}
+        actions={(actions || []).concat(getHeaderActions())}
       />
       <SectionBox>
         {resource === null ?
