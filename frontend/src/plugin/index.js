@@ -1,5 +1,15 @@
 import Registry from './registry';
 
+window.pluginLib = {
+  API: require('../lib/api'),
+  CommonComponents: require('../components/common'),
+  MuiCore: require('@material-ui/core'),
+  MuiStyles: require('@material-ui/styles'),
+  React: require('react'),
+  ReactRedux: require('react-redux'),
+  Utils: require('../lib/util'),
+};
+
 window.plugins = {};
 
 function registerPlugin(pluginId, pluginObj) {
