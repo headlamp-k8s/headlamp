@@ -8,6 +8,7 @@ export const UI_SIDEBAR_SET_SELECTED = 'UI_SIDEBAR_SET_SELECTED';
 export const UI_SIDEBAR_SET_VISIBLE = 'UI_SIDEBAR_SET_VISIBLE';
 export const UI_SIDEBAR_SET_ITEM = 'UI_SIDEBAR_SET_ITEM';
 export const UI_ROUTER_SET_ROUTE = 'UI_ROUTER_SET_ROUTE';
+export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
 
 export function setNamespaceFilter(namespaces) {
   return { type: FILTER_SET_NAMESPACE, namespaces: namespaces };
@@ -48,4 +49,8 @@ export function setSidebarItem(item) {
 export function setRoute(routeSpec) {
   // @todo: Define routeSpec.
   return { type: UI_ROUTER_SET_ROUTE, route: routeSpec};
+}
+
+export function setDetailsViewHeaderAction(actionName, actionFunc) {
+  return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, name: actionName, action: actionFunc};
 }

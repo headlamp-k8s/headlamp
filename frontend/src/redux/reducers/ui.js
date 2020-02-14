@@ -1,4 +1,4 @@
-import { UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
+import { UI_DETAILS_VIEW_SET_HEADER_ACTION, UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
 
 export const INITIAL_STATE = {
   sidebar: {
@@ -9,6 +9,13 @@ export const INITIAL_STATE = {
   routes: {
     // path -> component
   },
+  views: {
+    details: {
+      headerActions: {
+        // action-name -> action-callback
+      }
+    }
+  }
 };
 
 function reducer(state = INITIAL_STATE, action) {
@@ -43,6 +50,12 @@ function reducer(state = INITIAL_STATE, action) {
       const routes = {...newFilters.routes};
       routes[action.route.path] = action.route;
       newFilters.routes = routes;
+      break;
+    }
+    case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
+      const headerActions = {...newFilters.views.details.headerActions};
+      headerActions[action.actionName] = action.action;
+      newFilters.views.details.headerActions = headerActions;
       break;
     }
     default:
