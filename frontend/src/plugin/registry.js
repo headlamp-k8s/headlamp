@@ -1,4 +1,4 @@
-import { setRoute, setSidebarItem } from '../redux/actions/actions';
+import { setDetailsViewHeaderAction, setRoute, setSidebarItem } from '../redux/actions/actions';
 import store from '../redux/stores/store';
 
 export default class Registry {
@@ -13,5 +13,9 @@ export default class Registry {
 
   registerRoute(routeSpec) {
     store.dispatch(setRoute(routeSpec));
+  }
+
+  registerDetailsViewHeaderAction(actionName, actionFunc) {
+    store.dispatch(setDetailsViewHeaderAction(actionName, actionFunc));
   }
 }
