@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo, useFilterFunc } from '../../lib/util';
-import { makeStatusLabel } from '../common/Label';
+import { StatusLabel } from '../common';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SectionHeader from '../common/SectionHeader';
@@ -73,6 +73,14 @@ function EventsSection(props) {
   const { events } = props;
   const filterFunc = useFilterFunc();
 
+  function makeStatusLabel(event) {
+    return (
+      <StatusLabel status={event.type === 'Normal' ? null : 'warning'} >
+        {event.reason}
+      </StatusLabel>
+    );
+  }
+
   return (
     <Paper>
       <SectionFilterHeader
@@ -105,7 +113,7 @@ function EventsSection(props) {
                   title={event.message}
                   interactive
                 >
-                  <Box>{makeStatusLabel(event.reason, 'Synced')}</Box>
+                  <Box>{makeStatusLabel(event)}</Box>
                 </LightTooltip>,
             },
           ]}
