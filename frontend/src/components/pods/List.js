@@ -22,10 +22,18 @@ export default function PodList() {
   }
 
   function makeStatusLabel(pod) {
-    const status = pod.status.phase;
+    const phase = pod.status.phase;
+    let status = '';
+
+    if (phase === 'Failed') {
+      status = 'error';
+    } else if (phase === 'Succeeded' || phase === 'Running') {
+      status = 'success';
+    }
+
     return (
-      <StatusLabel status={status === 'Running' ? 'success' : 'error'}>
-        {status}
+      <StatusLabel status={status}>
+        {phase}
       </StatusLabel>
     );
   }
