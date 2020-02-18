@@ -44,7 +44,7 @@ export function getResourceMetrics(item, metrics, resourceType) {
   const parser = resourceParsers[type];
   const itemMetrics = metrics.find(itemMetrics => itemMetrics.metadata.name === item.metadata.name);
 
-  const used = parser(itemMetrics.usage[type]);
+  const used = parser(itemMetrics ? itemMetrics.usage[type] : 0);
   const capacity = parser(item.status.capacity[type]);
 
   return [used, capacity];
