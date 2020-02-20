@@ -1,10 +1,7 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
-import { ConditionsTable, MainInfoSection, MetadataDictGrid, PageGrid } from '../common/Resource';
-import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
+import { ContainersSection, MainInfoSection, MetadataDictGrid, PageGrid, ReplicasSection } from '../common/Resource';
 
 export default function Deployment() {
   let { namespace, name } = useParams();
@@ -31,23 +28,9 @@ export default function Deployment() {
           ]}
         />
         ,
-        <ReplicasSection resource={item} />
+        <ReplicasSection resource={item} />,
       ]}
     />
   );
 }
 
-function ReplicasSection(props) {
-  const { resource } = props;
-
-  return (
-    <Paper>
-      <SectionHeader
-        title="Conditions"
-      />
-      <SectionBox>
-        <ConditionsTable resource={resource} />
-      </SectionBox>
-    </Paper>
-  );
-}
