@@ -396,16 +396,18 @@ export function ConditionsTable(props) {
         },
         {
           label: 'Last Update',
-          getter: condition => <DateLabel date={condition.lastUpdateTime} />,
+          getter: condition => condition.lastUpdateTime ? <DateLabel date={condition.lastUpdateTime} /> : '-',
         },
         {
           label: 'Reason',
           getter: condition =>
-            <HoverInfoLabel
-              label={condition.reason}
-              hoverInfo={condition.message}
-            />
-          ,
+            condition.reason ?
+              <HoverInfoLabel
+                label={condition.reason}
+                hoverInfo={condition.message}
+              />
+            :
+              '-'
         }
       ]}
     />
