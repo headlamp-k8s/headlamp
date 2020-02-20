@@ -1,5 +1,14 @@
+import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
+import { Icon } from '@iconify/react';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Drawer from '@material-ui/core/Drawer';
+import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -7,9 +16,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import api from '../lib/api';
 import { getRoute } from '../lib/router';
 import { setSidebarSelected } from '../redux/actions/actions';
 import store from '../redux/stores/store';
+import { NameValueTable } from './common';
 
 const DRAWER_WIDTH = 200;
 
@@ -22,6 +33,9 @@ const useStyle = makeStyles(theme => ({
     width: DRAWER_WIDTH,
   },
   toolbar: theme.mixins.toolbar,
+  sidebarGrid: {
+    height: '100%',
+  }
 }));
 
 const LIST_ITEMS = [
@@ -132,6 +146,90 @@ function prepareRoutes() {
   return routes;
 }
 
+const useVersionButtonStyle = makeStyles({
+  versionBox: {
+    textAlign: 'center',
+    borderTop: '1px solid #afafaf',
+  },
+  versionIcon: {
+    marginBottom: '3px',
+  },
+});
+
+function VersionButton(props) {
+  const classes = useVersionButtonStyle();
+  const [clusterVersion, setClusterVersion] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+
+  function getVersionRows() {
+    if (!clusterVersion) {
+      return [];
+    }
+
+    return [
+      {
+        name: 'Git Version',
+        value: clusterVersion.gitVersion,
+      },
+      {
+        name: 'Git Commit',
+        value: clusterVersion.gitCommit,
+      },
+      {
+        name: 'Git Tree State',
+        value: clusterVersion.gitTreeState,
+      },
+      {
+        name: 'Go Version',
+        value: clusterVersion.goVersion,
+      },
+      {
+        name: 'Platform',
+        value: clusterVersion.platform,
+      },
+    ];
+  }
+
+  React.useEffect(() => {
+    if (!clusterVersion) {
+      api.getVersion().then(results => setClusterVersion(results));
+    }
+  },
+  [clusterVersion]);
+
+  function handleClose() {
+    setOpen(false);
+  }
+
+  return (!clusterVersion ?
+      null
+    :
+      <Box mx="auto" py=".2em" className={classes.versionBox}>
+        <Button
+          onClick={() => setOpen(true) }
+          style={{textTransform: 'none',}}
+          startIcon={<Icon color="#09bac8" icon={kubernetesIcon} className={classes.versionIcon} />}
+        >
+          {clusterVersion.gitVersion}
+        </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+        >
+          <DialogTitle>Kubernetes Version</DialogTitle>
+          <DialogContent>
+            <NameValueTable rows={getVersionRows()} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
+  );
+}
+
 export default function Sidebar(props) {
   const classes = useStyle();
   const sidebar = useSelector(state => state.ui.sidebar);
@@ -147,15 +245,28 @@ export default function Sidebar(props) {
         }}
       >
         <div className={classes.toolbar} />
-        <List>
-          {items.map((item, i) =>
-            <SidebarItem
-              key={i}
-              selectedName={sidebar.selected}
-              {...item}
-            />
-          )}
-        </List>
+        <Grid
+          className={classes.sidebarGrid}
+          container
+          direction="column"
+          justify="space-between"
+          wrap="nowrap"
+        >
+          <Grid item>
+            <List>
+              {items.map((item, i) =>
+                <SidebarItem
+                  key={i}
+                  selectedName={sidebar.selected}
+                  {...item}
+                />
+              )}
+            </List>
+          </Grid>
+          <Grid item>
+            <VersionButton />
+          </Grid>
+        </Grid>
     </Drawer>
   );
 }
