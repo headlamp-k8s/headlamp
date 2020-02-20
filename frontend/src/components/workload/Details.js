@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
-import { MainInfoSection } from '../common/Resource';
+import { ContainersSection, MainInfoSection, MetadataDictGrid, PageGrid, ReplicasSection } from '../common/Resource';
 
 export default function WorkloadDetails(props) {
   const { namespace, name } = useParams();
@@ -39,8 +39,23 @@ export default function WorkloadDetails(props) {
   }
 
   return (
-    <MainInfoSection
-      resource={item}
-    />
+    <PageGrid>
+      <MainInfoSection
+        resource={item}
+        extraInfo={item && [
+          {
+            name: 'Strategy Type',
+            value: item.spec.strategy && item.spec.strategy.type,
+            hide: !item.spec.strategy
+          },
+          {
+            name: 'Selector',
+            value: <MetadataDictGrid dict={item.spec.selector.matchLabels} />,
+          },
+        ]}
+      />
+      <ReplicasSection resource={item} />
+      <ContainersSection resource={item} />
+    </PageGrid>
   );
 }
