@@ -27,7 +27,6 @@ const useStyles = makeStyles(theme => ({
   statusLabel: {
     color: theme.palette.primary.contrastText,
     fontSize: '1.1em',
-    wordBreak: "break-word",
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     paddingTop: theme.spacing(.5),
