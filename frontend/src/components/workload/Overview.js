@@ -15,15 +15,9 @@ export default function Overview() {
   const [workloadsData, dispatch] = React.useReducer(setWorkloads, {});
   const filterFunc = useFilterFunc();
 
-  function setWorkloads(workloads, newWorkloads) {
+  function setWorkloads(workloads, {items, kind}) {
     let data = {...workloads};
-
-    newWorkloads.forEach((item) => {
-      if (!(item.kind in data)) {
-        data[item.kind] = [];
-      }
-      data[item.kind].push(item);
-    });
+    data[kind] = items;
 
     return data;
   }
@@ -41,12 +35,12 @@ export default function Overview() {
   }
 
   useConnectApi(
-    api.daemonSet.list.bind(null, null, dispatch),
-    api.deployment.list.bind(null, null, dispatch),
-    api.job.list.bind(null, null, dispatch),
-    api.cronJob.list.bind(null, null, dispatch),
-    api.replicaSet.list.bind(null, null, dispatch),
-    api.statefulSet.list.bind(null, null, dispatch),
+    api.daemonSet.list.bind(null, null, (items) => dispatch({items, kind: 'DaemonSet'})),
+    api.deployment.list.bind(null, null, (items) => dispatch({items, kind: 'Deployment'})),
+    api.job.list.bind(null, null, (items) => dispatch({items, kind: 'Job'})),
+    api.cronJob.list.bind(null, null, (items) => dispatch({items, kind: 'CronJob'})),
+    api.replicaSet.list.bind(null, null, (items) => dispatch({items, kind: 'ReplicaSet'})),
+    api.statefulSet.list.bind(null, null, (items) => dispatch({items, kind: 'StatefulSet'})),
   );
 
   // @todo: Abstract the kind, title/name, and API methods into classes,
