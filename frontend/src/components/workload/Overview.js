@@ -41,7 +41,6 @@ export default function Overview() {
   }
 
   useConnectApi(
-    api.cronJob.list.bind(null, null, dispatch),
     api.daemonSet.list.bind(null, null, dispatch),
     api.deployment.list.bind(null, null, dispatch),
     api.job.list.bind(null, null, dispatch),
