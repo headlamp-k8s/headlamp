@@ -77,7 +77,7 @@ export function MetadataDisplay(props) {
 
 export function MetadataDictGrid(props) {
   const classes = useStyles();
-  const { dict } = props;
+  const { dict, showKeys=true } = props;
   const [expanded, setExpanded] = React.useState(false);
 
   if (!dict) {
@@ -98,7 +98,12 @@ export function MetadataDictGrid(props) {
   });
 
   function makeLabel(key) {
-    const fullText = key + ': ' + dict[key] + '';
+    let fullText = dict[key];
+
+    if (showKeys) {
+      fullText = key + ': ' + fullText;
+    }
+
     let shortText = fullText;
 
     // Shorten the label manually because relying on the ellipsing methods
