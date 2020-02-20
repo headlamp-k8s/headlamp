@@ -13,7 +13,7 @@ import React from 'react';
 import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
 import { LogViewer } from '../common/LogViewer';
-import { MainInfoSection } from '../common/Resource';
+import { ContainersSection, MainInfoSection, PageGrid } from '../common/Resource';
 import Terminal from '../common/Terminal';
 
 const useStyle = makeStyles({
@@ -124,41 +124,44 @@ export default function PodDetails(props) {
 
   return (
     <React.Fragment>
-      <MainInfoSection
-        resource={item}
-        actions={item && [
-          <Tooltip title="Show Logs">
-            <IconButton
-              aria-label="delete"
-              onClick={() => setShowLogs(true)}
-            >
-              <Icon icon={fileDocumentBoxOutline} />
-            </IconButton>
-          </Tooltip>,
-          <Tooltip title="Terminal / Exec">
-            <IconButton
-              aria-label="delete"
-              onClick={() => setShowTerminal(true)}
-            >
-              <Icon icon={consoleIcon} />
-            </IconButton>
-          </Tooltip>
-        ]}
-        extraInfo={item && [
-          {
-            name: 'State',
-            value: item.status.phase
-          },
-          {
-            name: 'Host IP',
-            value: item.status.hostIP,
-          },
-          {
-            name: 'Pod IP',
-            value: item.status.podIP,
-          }
-        ]}
-      />
+      <PageGrid>
+        <MainInfoSection
+          resource={item}
+          actions={item && [
+            <Tooltip title="Show Logs">
+              <IconButton
+                aria-label="delete"
+                onClick={() => setShowLogs(true)}
+              >
+                <Icon icon={fileDocumentBoxOutline} />
+              </IconButton>
+            </Tooltip>,
+            <Tooltip title="Terminal / Exec">
+              <IconButton
+                aria-label="delete"
+                onClick={() => setShowTerminal(true)}
+              >
+                <Icon icon={consoleIcon} />
+              </IconButton>
+            </Tooltip>
+          ]}
+          extraInfo={item && [
+            {
+              name: 'State',
+              value: item.status.phase
+            },
+            {
+              name: 'Host IP',
+              value: item.status.hostIP,
+            },
+            {
+              name: 'Pod IP',
+              value: item.status.podIP,
+            }
+          ]}
+        />
+        {item && <ContainersSection resource={item} />}
+      </PageGrid>
       {item &&
         [
           <PodLogViewer
