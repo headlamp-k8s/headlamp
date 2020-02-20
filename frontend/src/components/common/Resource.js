@@ -11,13 +11,16 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import _ from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { localeDate } from '../../lib/util';
+import { NameValueTable } from '../common';
 import Loader from '../common/Loader';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
-import SimpleTable, { NameValueTable } from '../common/SimpleTable';
+import SimpleTable from '../common/SimpleTable';
+import Empty from './EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel } from './Label';
 import Link from './Link';
 import { LightTooltip } from './Tooltip';
@@ -404,3 +407,109 @@ export function ConditionsTable(props) {
     />
   );
 }
+
+export function ContainerInfo(props) {
+  const {container} = props;
+
+  function containerRows() {
+    const env = {};
+    (container.env || []).forEach(envVar => {
+      let value = '';
+
+      if (envVar.value) {
+        value = envVar.value;
+      } else if (envVar.valueFrom) {
+        if (envVar.valueFrom.fieldRef) {
+          value = envVar.valueFrom.fieldRef.fieldPath;
+        } else if (envVar.valueFrom.secretKeyRef) {
+          value = envVar.valueFrom.secretKeyRef.key;
+        }
+      }
+
+      env[envVar.name] = value;
+    });
+
+    return ([
+      {
+        name: 'Image',
+        value: container.image,
+      },
+      {
+        name: 'Args',
+        valueComponent: <MetadataDictGrid dict={container.args} showKeys={false} />,
+        hide: !container.args
+      },
+      {
+        name: 'Command',
+        value: (container.command || []).join(' '),
+        hide: !container.command
+      },
+      {
+        name: 'Environment',
+        valueComponent: <MetadataDictGrid dict={env} />,
+        hide: _.isEmpty(env),
+      },
+    ]);
+  }
+
+  return (
+    <React.Fragment>
+      <SectionHeader
+        title={container.name}
+      />
+      <SectionGrid
+        items={[
+          <NameValueTable
+            rows={containerRows()}
+          />
+        ]}
+      />
+    </React.Fragment>
+  );
+}
+
+export function ContainersSection(props) {
+  const { resource } = props;
+
+  function getContainers() {
+    if (!resource) {
+      return [];
+    }
+
+    let containers = [];
+
+    if (resource.spec) {
+      if (resource.spec.containers) {
+        containers = resource.spec.containers;
+      } else if (resource.spec.template && resource.spec.template.spec) {
+        containers = resource.spec.template.spec.containers;
+      }
+    }
+
+    return containers;
+  }
+
+  const containers = getContainers();
+
+  return (
+    <Paper>
+      <SectionHeader
+        title="Containers"
+      />
+      {_.isEmpty(containers) ?
+        <Empty>No containers to show</Empty>
+        :
+        containers.map((container, i) => {
+          return (
+            <React.Fragment key={i}>
+              <SectionBox>
+                <ContainerInfo container={container} />
+              </SectionBox>
+              <Divider />
+            </React.Fragment>
+          );
+        })}
+    </Paper>
+  );
+}
+
