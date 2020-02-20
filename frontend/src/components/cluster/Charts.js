@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React from 'react';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
 import { PercentageCircle } from '../common/Chart';
-import { podIsReady } from '../../lib/cluster';
 import { useTheme } from '@material-ui/core/styles';
 
 export function ResourceCircularChart(props) {
@@ -126,13 +125,13 @@ export function PodsStatusCircleChart(props) {
   const theme = useTheme();
   let { pods } = props;
 
-  const podsReady = (pods || []).filter(podIsReady);
+  const podsReady = (pods || []).filter(pod => ['Running', 'Succeeded'].includes(pod.status.phase));
 
   function getLegend() {
     if (pods === null) {
       return null;
     }
-    return `${podsReady.length} Ready / ${pods.length} Requested`;
+    return `${podsReady.length} / ${pods.length} Requested`;
   }
 
   function getLabel() {
