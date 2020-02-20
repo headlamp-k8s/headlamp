@@ -515,3 +515,17 @@ export function ContainersSection(props) {
   );
 }
 
+export function ReplicasSection(props) {
+  const { resource } = props;
+
+  return (
+    <Paper>
+      <SectionHeader
+        title="Conditions"
+      />
+      <SectionBox>
+        <ConditionsTable resource={resource} />
+      </SectionBox>
+    </Paper>
+  );
+}
