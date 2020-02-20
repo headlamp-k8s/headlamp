@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
-import { MainInfoSection, MetadataDictGrid } from '../common/Resource';
+import { ContainersSection, MainInfoSection, MetadataDictGrid, PageGrid } from '../common/Resource';
 
 export default function DaemonSet() {
   let { namespace, name } = useParams();
@@ -12,18 +12,23 @@ export default function DaemonSet() {
   );
 
   return (
-    <MainInfoSection
-      resource={item}
-      extraInfo={item && [
-        {
-          name: 'Update Strategy',
-          value: item.spec.updateStrategy.type,
-        },
-        {
-          name: 'Selector',
-          value: <MetadataDictGrid dict={item.spec.selector.matchLabels} />,
-        },
-      ]}
-    />
+    <PageGrid>
+      <MainInfoSection
+        resource={item}
+        extraInfo={item && [
+          {
+            name: 'Update Strategy',
+            value: item.spec.updateStrategy.type,
+          },
+          {
+            name: 'Selector',
+            value: <MetadataDictGrid dict={item.spec.selector.matchLabels} />,
+          },
+        ]}
+      />
+      <ContainersSection
+        resource={item}
+      />
+    </PageGrid>
   );
 }
