@@ -192,7 +192,9 @@ function VersionButton(props) {
 
   React.useEffect(() => {
     if (!clusterVersion) {
-      api.getVersion().then(results => setClusterVersion(results));
+      api.getVersion()
+        .then(results => setClusterVersion(results))
+        .catch(error => console.error('Getting the cluster version:', error));
     }
   },
   [clusterVersion]);
