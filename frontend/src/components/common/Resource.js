@@ -357,7 +357,7 @@ export function SecretField(props) {
 }
 
 export function ConditionsTable(props) {
-  const { resource } = props;
+  const { resource, showLastUpdate=true } = props;
 
   function makeStatusLabel(condition) {
     let status = '';
@@ -374,38 +374,46 @@ export function ConditionsTable(props) {
     );
   }
 
+  function getColumns() {
+    const cols = [
+      {
+        label: 'Condition',
+        getter: makeStatusLabel
+      },
+      {
+        label: 'Status',
+        getter: condition => condition.status,
+      },
+      {
+        label: 'Last Transition',
+        getter: condition => <DateLabel date={condition.lastTransitionTime} />,
+      },
+      {
+        label: 'Last Update',
+        getter: condition => condition.lastUpdateTime ? <DateLabel date={condition.lastUpdateTime} /> : '-',
+        hide: !showLastUpdate
+      },
+      {
+        label: 'Reason',
+        getter: condition =>
+          condition.reason ?
+            <HoverInfoLabel
+              label={condition.reason}
+              hoverInfo={condition.message}
+            />
+            :
+            '-'
+      }
+    ];
+
+    // Allow to filter the columns by using a hide field
+    return cols.filter(col => !col.hide);
+  }
+
   return (
     <SimpleTable
       data={resource && resource.status.conditions}
-      columns={[
-        {
-          label: 'Condition',
-          getter: makeStatusLabel
-        },
-        {
-          label: 'Status',
-          getter: condition => condition.status,
-        },
-        {
-          label: 'Last Transition',
-          getter: condition => <DateLabel date={condition.lastTransitionTime} />,
-        },
-        {
-          label: 'Last Update',
-          getter: condition => condition.lastUpdateTime ? <DateLabel date={condition.lastUpdateTime} /> : '-',
-        },
-        {
-          label: 'Reason',
-          getter: condition =>
-            condition.reason ?
-              <HoverInfoLabel
-                label={condition.reason}
-                hoverInfo={condition.message}
-              />
-              :
-              '-'
-        }
-      ]}
+      columns={getColumns()}
     />
   );
 }
