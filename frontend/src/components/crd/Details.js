@@ -1,9 +1,12 @@
+import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useParams } from "react-router-dom";
 import api, { useConnectApi } from '../../lib/api';
 import { apiFactory, apiFactoryWithNamespace } from '../../lib/apiProxy';
 import { timeAgo } from '../../lib/util';
+import { ViewDialog } from '../common/EditorDialog';
 import Loader from '../common/Loader';
 import { ConditionsTable, MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
@@ -21,9 +24,17 @@ function getAPIForCRD(item) {
   return apiFactory(group, version, name);
 }
 
+const useStyle = makeStyles({
+  link: {
+    cursor: 'pointer'
+  }
+});
+
 export default function CustomResourceDefinitionDetails(props) {
+  const classes = useStyle();
   let { name } = useParams();
   const [item, setItem] = React.useState(null);
+  const [objToShow, setObjToShow] = React.useState(null);
   const [objects, setObjects] = React.useState([]);
 
   useConnectApi(
@@ -142,7 +153,13 @@ export default function CustomResourceDefinitionDetails(props) {
             columns={[
               {
                 label: "Name",
-                getter: obj => obj.metadata.name
+                getter: obj =>
+                  <Link
+                    className={classes.link}
+                    onClick={() => setObjToShow(obj)}
+                  >
+                    {obj.metadata.name}
+                  </Link>
               },
               {
                 label: "Namespace",
@@ -156,6 +173,11 @@ export default function CustomResourceDefinitionDetails(props) {
           />
         </SectionBox>
       </Paper>
+      <ViewDialog
+        item={objToShow}
+        open={!!objToShow}
+        onClose={() => setObjToShow(null)}
+      />
     </PageGrid>
   );
 }
