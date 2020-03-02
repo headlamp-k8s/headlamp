@@ -4,6 +4,8 @@ import Auth from '../components/account/Auth';
 import Overview from '../components/cluster/Overview';
 import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
+import CustomResourceDefinitionDetails from '../components/crd/Details';
+import CustomResourceDefinitionList from '../components/crd/List';
 import DaemonSet from '../components/daemonset/Details';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
@@ -282,6 +284,20 @@ export const ROUTES = {
     sidebar: null,
     noAuthRequired: true,
     component: () => <Auth />
+  },
+  crds: {
+    path: '/crds',
+    exact: true,
+    name: 'CRDs',
+    sidebar: 'crds',
+    component: () => <CustomResourceDefinitionList />
+  },
+  crd: {
+    path: '/crds/:name',
+    exact: true,
+    name: 'CRD',
+    sidebar: 'crds',
+    component: () => <CustomResourceDefinitionDetails />
   },
 };
 
