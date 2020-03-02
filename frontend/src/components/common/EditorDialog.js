@@ -52,10 +52,31 @@ export default function EditorDialog(props) {
     selectOnLineNumbers: true
   };
   const classes = useStyle();
-  const originalCode = yaml.stringify(item);
+  const [originalCode, setOriginalCode] = React.useState('');
   const [code, setCode] = React.useState(originalCode);
+  const [previousVersion, setPreviousVersion] = React.useState(0);
   const [error, setError] = React.useState('');
   const [docSpecs, setDocSpecs] = React.useState({});
+
+  React.useEffect(() => {
+    if (!item) {
+      return;
+    }
+
+    const itemCode = yaml.stringify(item);
+    if (itemCode !== originalCode) {
+      setOriginalCode(itemCode);
+    }
+
+    // Only change if the code hasn't been touched.
+    if (previousVersion < item.metadata.resourceVersion || code === originalCode) {
+      setCode(itemCode);
+      if (previousVersion < item.metadata.resourceVersion) {
+        setPreviousVersion(item.metadata.resourceVersion);
+      }
+    }
+  },
+  [item, previousVersion, originalCode, code]);
 
   function onChange(newValue, e) {
     setCode(newValue);
