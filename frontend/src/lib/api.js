@@ -35,6 +35,8 @@ const ingress = apiFactoryWithNamespace('extensions', 'v1beta1', 'ingresses');
 
 const storageClass = apiFactory('storage.k8s.io', 'v1', 'storageclasses');
 
+const crd = apiFactory('apiextensions.k8s.io', 'v1beta1', 'customresourcedefinitions');
+
 const apis = {
   apply,
   testAuth,
@@ -48,6 +50,7 @@ const apis = {
   oidc: oidcFactory(),
 
   clusterRole,
+  crd,
   namespace: namespaceService,
   node,
   persistentVolume,
