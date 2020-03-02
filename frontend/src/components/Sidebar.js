@@ -52,6 +52,10 @@ const LIST_ITEMS = [
         label: 'Nodes'
       },
       {
+        name: 'crds',
+        label: 'CRDs'
+      },
+      {
         name: 'roles',
         label: 'Roles'
       },
