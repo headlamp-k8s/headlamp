@@ -49,7 +49,8 @@ const useStyle = makeStyles(theme => ({
 export default function EditorDialog(props) {
   const { item, onClose, onSave, ...other } = props;
   const editorOptions = {
-    selectOnLineNumbers: true
+    selectOnLineNumbers: true,
+    readOnly: isReadOnly(),
   };
   const classes = useStyle();
   const [originalCode, setOriginalCode] = React.useState('');
@@ -77,6 +78,10 @@ export default function EditorDialog(props) {
     }
   },
   [item, previousVersion, originalCode, code]);
+
+  function isReadOnly() {
+    return onSave === null;
+  }
 
   function onChange(newValue, e) {
     setCode(newValue);
@@ -129,6 +134,21 @@ export default function EditorDialog(props) {
     onSave(getObjectFromCode(code));
   }
 
+  function makeEditor() {
+    return (
+      <Box paddingTop={2} height="100%">
+        <MonacoEditor
+          language="yaml"
+          theme="vs-dark"
+          value={code}
+          options={editorOptions}
+          onChange={onChange}
+          height="600"
+        />
+      </Box>
+    );
+  }
+
   return (
     <Dialog
       maxWidth="lg"
@@ -138,75 +158,93 @@ export default function EditorDialog(props) {
       className={classes.dialog}
       {...other}
     >
-      <DialogTitle>Edit: {item.metadata.name}</DialogTitle>
-      <DialogContent
-        className={classes.dialogContent}
-      >
-        <Tabs
-          onTabChanged={handleTabChange}
-          tabProps={{
-            centered: true,
-          }}
-          tabs={[
-            {
-              label: 'Editor',
-              component:
-  <Box paddingTop={2} height="100%">
-    <MonacoEditor
-      language="yaml"
-      theme="vs-dark"
-      value={code}
-      options={editorOptions}
-      onChange={onChange}
-      height="600"
-      // editorDidMount={this.editorDidMount}
-    />
-  </Box>
-            },
-            {
-              label: 'Documentation',
-              component:
-  <Box p={2} className={classes.scrollable} height="600px">
-    <DocsViewer
-      docSpecs={docSpecs}
-    />
-  </Box>
-            },
-          ]}
-        />
-      </DialogContent>
-      <DialogActions>
-        <ConfirmButton
-          disabled={originalCode === code}
-          color="secondary"
-          aria-label="undo"
-          onConfirm={onUndo}
-          confirmTitle="Are you sure?"
-          confirmDescription="This will discard your changes in the editor. Do you want to proceed?"
-        >
-          Undo Changes
-        </ConfirmButton>
-        <div style={{flex: '1 0 0'}} />
-        { error &&
-          <Typography color="error">{error}</Typography>
-        }
-        <div style={{flex: '1 0 0'}} />
-        <Button
-          onClick={onClose}
-          color="primary"
-          autoFocus
-        >
-          Close
-        </Button>
-        <Button
-          onClick={handleSave}
-          color="primary"
-          disabled={originalCode === code || !!error}
-        >
-          Save &amp; Apply
-        </Button>
-      </DialogActions>
+      {!item ?
+        <Loader />
+        :
+        <React.Fragment>
+          <DialogTitle>
+            {isReadOnly() ?
+              `View: ${item.metadata.name}`
+              :
+              `Edit: ${item.metadata.name}`
+            }
+          </DialogTitle>
+          <DialogContent
+            className={classes.dialogContent}
+          >
+            {isReadOnly() ?
+              makeEditor()
+              :
+              <Tabs
+                onTabChanged={handleTabChange}
+                tabProps={{
+                  centered: true,
+                }}
+                tabs={[
+                  {
+                    label: 'Editor',
+                    component: makeEditor()
+                  },
+                  {
+                    label: 'Documentation',
+                    component:
+                <Box p={2} className={classes.scrollable} height="600px">
+                  <DocsViewer
+                    docSpecs={docSpecs}
+                  />
+                </Box>
+                  },
+                ]}
+              />
+            }
+          </DialogContent>
+          <DialogActions>
+            {!isReadOnly() &&
+            <ConfirmButton
+              disabled={originalCode === code}
+              color="secondary"
+              aria-label="undo"
+              onConfirm={onUndo}
+              confirmTitle="Are you sure?"
+              confirmDescription="This will discard your changes in the editor. Do you want to proceed?"
+            >
+              Undo Changes
+            </ConfirmButton>
+            }
+            <div style={{flex: '1 0 0'}} />
+            { error &&
+            <Typography color="error">{error}</Typography>
+            }
+            <div style={{flex: '1 0 0'}} />
+            <Button
+              onClick={onClose}
+              color="primary"
+              autoFocus
+            >
+              Close
+            </Button>
+            {!isReadOnly() &&
+            <Button
+              onClick={handleSave}
+              color="primary"
+              disabled={originalCode === code || !!error}
+            >
+              Save &amp; Apply
+            </Button>
+            }
+          </DialogActions>
+        </React.Fragment>
+      }
     </Dialog>
+  );
+}
+
+export function ViewDialog(props) {
+  return (
+    <EditorDialog
+      {...props}
+      onSave={null}
+    />
   );
 }
 
