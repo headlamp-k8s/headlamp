@@ -51,7 +51,15 @@ apiVersion: extensions/v1beta1
 metadata:
   name: lokodash
   namespace: kube-system
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    kubernetes.io/ingress.class: contour
 spec:
+  tls:
+  - secretName: lokodash
+    hosts:
+    - lokodash.kinvolk-dev-test.dev.lokomotive-k8s.net
   rules:
   -
     host: lokodash.kinvolk-dev-test.dev.lokomotive-k8s.net
