@@ -69,7 +69,7 @@ func main() {
 	proxy.Transport = tr
 
 	r := mux.NewRouter()
-	r.HandleFunc("/{api:.*}", handler(remote, proxy))
+	r.HandleFunc("/cluster/{api:.*}", handler(remote, proxy))
 	http.Handle("/", r)
 
 	var handler http.Handler
@@ -86,7 +86,7 @@ func main() {
 
 	log.Println("Lokodash Server:")
 	log.Println("API Router:")
-	log.Println("\t", "localhost:"+*port+"/{api...} ->", serverURL)
+	log.Println("\t", "localhost:"+*port+"/cluster/{api...} ->", serverURL)
 
 	// Start server
 	log.Fatal(http.ListenAndServe(":"+*port, handler))

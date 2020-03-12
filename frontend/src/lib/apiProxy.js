@@ -4,7 +4,10 @@
 
 import { getToken, logout } from './auth';
 
-const BASE_HTTP_URL = 'http://localhost:4654';
+const {host, href, hash, search} = window.location;
+const nonHashedUrl = href.replace(hash, '').replace(search, '');
+const isDev = process.env.NODE_ENV !== 'production';
+const BASE_HTTP_URL = (isDev && host === 'localhost:3000' ? 'http://localhost:4654/' : nonHashedUrl) + 'cluster';
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
 
