@@ -32,6 +32,8 @@ func main() {
 	// @todo: Make this a uint and validate the values
 	port := flag.String("port", "4654", "Port to listen from")
 
+	staticDir := flag.String("html-static-dir", "", "Static HTML directory to serve")
+
 	flag.Parse()
 
 	// Use the current context in kubeconfig
@@ -70,6 +72,13 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/cluster/{api:.*}", handler(remote, proxy))
+
+	// Serve the frontend if needed
+	if *staticDir != "" {
+		fs := http.FileServer(http.Dir(*staticDir))
+		r.PathPrefix("/").Handler(fs)
+	}
+
 	http.Handle("/", r)
 
 	var handler http.Handler
