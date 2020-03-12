@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -16,6 +17,7 @@ import (
 	"flag"
 
 	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
+	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 )
 
@@ -27,6 +29,8 @@ func main() {
 		kubeconfig = flag.String("kubeconfig", "", "Absolute path to the kubeconfig file")
 	}
 
+	inCluster := flag.Bool("in-cluster", false, "Set when running from a k8s cluster")
+
 	devMode := flag.Bool("dev", false, "Allow connections from other origins")
 
 	// @todo: Make this a uint and validate the values
@@ -36,10 +40,22 @@ func main() {
 
 	flag.Parse()
 
+	var k8sConfig *rest.Config = nil
+	if *inCluster {
+		var err error = nil
+		k8sConfig, err = rest.InClusterConfig()
+		if err != nil {
+			panic(err.Error())
+		}
+	}
+
 	// Use the current context in kubeconfig
-	k8sConfig, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
-	if err != nil {
-		panic(err)
+	if k8sConfig == nil {
+		var err error = nil
+		k8sConfig, err = clientcmd.BuildConfigFromFlags("", *kubeconfig)
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	// Get the server URL
@@ -54,10 +70,20 @@ func main() {
 
 	// Set up certificates for TLS
 	rootCAs := x509.NewCertPool()
-	certificates := k8sConfig.TLSClientConfig.CAData
 
-	if ok := rootCAs.AppendCertsFromPEM(certificates); !ok {
-		log.Println("No certificates were found")
+	if k8sConfig.TLSClientConfig.CAFile != "" {
+		if pemBytes, err := ioutil.ReadFile(k8sConfig.TLSClientConfig.CAFile); err == nil {
+			ok := rootCAs.AppendCertsFromPEM(pemBytes)
+			if !ok {
+				log.Println("Failed to add certificate")
+			}
+		}
+	}
+
+	if certificates := k8sConfig.TLSClientConfig.CAData; len(certificates) > 0 {
+		if rootCAs.AppendCertsFromPEM(certificates) {
+			log.Println("No certificates were found")
+		}
 	}
 
 	config := &tls.Config{
