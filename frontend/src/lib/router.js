@@ -15,7 +15,6 @@ import NodeDetails from '../components/node/Details';
 import NodeList from '../components/node/List';
 import PodDetails from '../components/pods/Details';
 import PodList from '../components/pods/List';
-import ReplicaSetDetails from '../components/replicaset/Details';
 import ReplicaSetList from '../components/replicaset/List';
 import RoleBindingDetails from '../components/role/BindingDetails';
 import RoleBindingList from '../components/role/BindingList';
@@ -196,7 +195,7 @@ export const ROUTES = {
     path: '/replicasets/:namespace/:name',
     exact: true,
     sidebar: 'replicaSets',
-    component: () => <ReplicaSetDetails />
+    component: () => <WorkloadDetails workloadKind="ReplicaSet" />
   },
   configMaps: {
     path: '/configmaps',

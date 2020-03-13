@@ -30,6 +30,9 @@ export default function WorkloadDetails(props) {
       case 'CronJob':
         resourceApi = api.cronJob;
         break;
+      case 'ReplicaSet':
+        resourceApi = api.replicaSet;
+        break;
       default:
         break;
     }
