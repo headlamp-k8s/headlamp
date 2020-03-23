@@ -55,6 +55,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     kubernetes.io/ingress.class: contour
+    contour.heptio.com/websocket-routes: "/"
 spec:
   tls:
   - secretName: lokodash
