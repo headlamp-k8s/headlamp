@@ -11,7 +11,7 @@ all: backend frontend
 
 .PHONY: backend
 backend:
-	go build -o ./backend/server ./backend/server.go
+	cd backend && go build -o ./server ./cmd
 
 frontend-install:
 	cd frontend && npm install
