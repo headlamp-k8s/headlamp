@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -23,6 +24,10 @@ type HeadlampConfig struct {
 	devMode        bool
 	staticDir      string
 	insecure       bool
+}
+
+type clientConfig struct {
+	Clusters []Cluster `json:"clusters"`
 }
 
 func StartHeadlampServer(config *HeadlampConfig) {
@@ -58,6 +63,8 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		clusters = append(clusters, confClusters...)
 	}
 
+	clientConf := &clientConfig{clusters}
+
 	r := mux.NewRouter()
 
 	fmt.Println("*** Headlamp Server ***")
@@ -81,6 +88,9 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	}
 
 	http.Handle("/", r)
+
+	// Configuration
+	r.HandleFunc("/config", clientConf.getConfig).Methods("GET")
 
 	var handler http.Handler
 
@@ -153,4 +163,9 @@ func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.Response
 
 func GetDefaultKubeConfigPath() string {
 	return filepath.Join(os.Getenv("HOME"), ".kube", "config")
+}
+
+func (c *clientConfig) getConfig(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(c)
 }
