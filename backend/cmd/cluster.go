@@ -14,7 +14,8 @@ import (
 const OWN_CLUSTER_NAME = "_main_"
 
 type Cluster struct {
-	name   string
+	Name   string `json:"name"`
+	Server string `json:"server,omitempty"`
 	config *clientcmdapi.Cluster
 }
 
@@ -34,7 +35,7 @@ func GetClustersFromKubeConfigFile(kubeConfigPath string) ([]Cluster, error) {
 		if key == "" {
 			log.Fatalf("Please make sure the cluster with URL %v has a name configured!", value.Server)
 		}
-		clusters = append(clusters, Cluster{key, value})
+		clusters = append(clusters, Cluster{key, value.Server, value})
 	}
 
 	return clusters, nil
@@ -52,15 +53,15 @@ func GetOwnCluster() (*Cluster, error) {
 		CertificateAuthorityData: config.TLSClientConfig.CAData,
 	}
 
-	return &Cluster{name: OWN_CLUSTER_NAME, config: cluster}, nil
+	return &Cluster{Name: OWN_CLUSTER_NAME, Server: config.Host, config: cluster}, nil
 }
 
 func (c *Cluster) getServer() *string {
-	return &c.config.Server
+	return &c.Server
 }
 
 func (c *Cluster) getName() *string {
-	return &c.name
+	return &c.Name
 }
 
 func (c *Cluster) getCAData() []byte {
