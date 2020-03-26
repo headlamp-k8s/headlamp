@@ -43,6 +43,7 @@ const apis = {
     getAuthorization,
     getRules,
     getVersion,
+    getConfig,
     logs,
     swagger,
     exec,
@@ -81,6 +82,10 @@ async function testAuth() {
 
 function getVersion() {
     return request('/version');
+}
+
+async function getConfig() {
+    return request('/config');
 }
 
 function getRules(namespace) {
