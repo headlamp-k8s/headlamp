@@ -3,7 +3,7 @@ import { UI_DETAILS_VIEW_SET_HEADER_ACTION, UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_
 export const INITIAL_STATE = {
   sidebar: {
     selected: 'cluster',
-    isVisible: true,
+    isVisible: false,
     entries: {}
   },
   routes: {
