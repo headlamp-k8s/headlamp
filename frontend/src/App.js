@@ -7,16 +7,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar, { useSidebarItem } from './components/Sidebar';
-import api from './lib/api';
 import { getToken } from './lib/auth';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
 import { getCluster } from './lib/util';
 import { initializePlugins } from './plugin';
-import { setConfig } from './redux/actions/actions';
 import store from './redux/stores/store';
 
 const dashboardTheme = createMuiTheme({
@@ -55,18 +53,6 @@ const useStyle = makeStyles(theme => ({
 
 function RouteSwitcher() {
   const routes = useSelector(state => state.ui.routes);
-  const dispatch = useDispatch();
-
-  // @todo: Move the logic for getting the config to a more
-  // appropriate place.
-  React.useEffect(() => {
-    api.getConfig()
-      .then(config => {
-        dispatch(setConfig(config));
-      })
-      .catch(err => console.error(err));
-  },
-  [dispatch]);
 
   return (
     <Switch>
@@ -124,19 +110,21 @@ function App() {
 }
 
 function AuthRoute(props) {
-  const { children, sidebar, requiresAuth=true, ...other } = props;
+  const { children, sidebar, requiresAuth=true, requiresCluster=true, ...other } = props;
+  const clusters = useSelector(state => state.config.clusters);
+  const redirectRoute = (!getCluster() || clusters.length === 0) ? 'chooser' : 'login';
 
   useSidebarItem(sidebar);
 
   function getRenderer({ location }) {
-    if (!requiresAuth || !!getToken()) {
+    if (!requiresAuth || (requiresCluster && getCluster() && !!getToken())) {
       return children;
     }
 
     return (
       <Redirect
         to={{
-          pathname: createRouteURL('login'),
+          pathname: createRouteURL(redirectRoute),
           state: { from: location }
         }}
       />
