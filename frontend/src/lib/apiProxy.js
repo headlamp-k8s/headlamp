@@ -3,21 +3,31 @@
  */
 
 import { getToken, logout } from './auth';
+import { getCluster } from './util';
 
 const {host, href, hash, search} = window.location;
 const nonHashedUrl = href.replace(hash, '').replace(search, '');
 const isDev = process.env.NODE_ENV !== 'production';
-const BASE_HTTP_URL = (isDev && host === 'localhost:3000' ? 'http://localhost:4654/' : nonHashedUrl) + 'cluster';
+const BASE_HTTP_URL = (isDev && host === 'localhost:3000' ? 'http://localhost:4654/' : nonHashedUrl);
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
+const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
 
 export async function request(path, params, autoLogoutOnAuthError = true) {
   const opts = Object.assign({headers: {}}, params);
 
+  // @todo: This is a temporary way of getting the current cluster. We should improve it later.
+  const cluster = getCluster();
+
   const token = getToken();
   if (token) opts.headers.Authorization = `Bearer ${token}`;
 
-  const url = combinePath(BASE_HTTP_URL, path);
+  let fullPath = path;
+  if (cluster) {
+    fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
+  }
+
+  const url = combinePath(BASE_HTTP_URL, fullPath);
   const response = await fetch(url, opts);
 
   if (!response.ok) {
@@ -269,7 +279,15 @@ function connectStream(path, cb, onFail, isJson, additionalProtocols = []) {
     ...additionalProtocols,
   ];
 
-  const url = combinePath(BASE_WS_URL, path);
+  // @todo: This is a temporary way of getting the current cluster. We should improve it later.
+  const cluster = getCluster();
+
+  let fullPath = path;
+  if (cluster) {
+    fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
+  }
+
+  const url = combinePath(BASE_WS_URL, fullPath);
   const socket = new WebSocket(url, protocols);
   socket.binaryType = 'arraybuffer';
   socket.addEventListener('message', onMessage);
