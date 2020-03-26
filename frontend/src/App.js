@@ -7,13 +7,15 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar, { useSidebarItem } from './components/Sidebar';
+import api from './lib/api';
 import { getToken } from './lib/auth';
 import { getRoute, ROUTES } from './lib/router';
 import { initializePlugins } from './plugin';
+import { setConfig } from './redux/actions/actions';
 import store from './redux/stores/store';
 
 const dashboardTheme = createMuiTheme({
@@ -52,6 +54,18 @@ const useStyle = makeStyles(theme => ({
 
 function RouteSwitcher() {
   const routes = useSelector(state => state.ui.routes);
+  const dispatch = useDispatch();
+
+  // @todo: Move the logic for getting the config to a more
+  // appropriate place.
+  React.useEffect(() => {
+    api.getConfig()
+      .then(config => {
+        dispatch(setConfig(config));
+      })
+      .catch(err => console.error(err));
+  },
+  [dispatch]);
 
   return (
     <Switch>
