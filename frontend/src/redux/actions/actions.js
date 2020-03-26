@@ -4,6 +4,7 @@ export const FILTER_SET_SEARCH = 'FILTER_SET_SEARCH';
 export const CLUSTER_ACTION = 'CLUSTER_ACTION';
 export const CLUSTER_ACTION_UPDATE = 'CLUSTER_ACTION_UPDATE';
 export const CLUSTER_ACTION_CANCEL = 'CLUSTER_ACTION_CANCEL';
+export const CONFIG_NEW = 'CONFIG_NEW';
 export const UI_SIDEBAR_SET_SELECTED = 'UI_SIDEBAR_SET_SELECTED';
 export const UI_SIDEBAR_SET_VISIBLE = 'UI_SIDEBAR_SET_VISIBLE';
 export const UI_SIDEBAR_SET_ITEM = 'UI_SIDEBAR_SET_ITEM';
@@ -53,4 +54,8 @@ export function setRoute(routeSpec) {
 
 export function setDetailsViewHeaderAction(actionName, actionFunc) {
   return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, name: actionName, action: actionFunc};
+}
+
+export function setConfig(config) {
+  return { type: CONFIG_NEW, config};
 }
