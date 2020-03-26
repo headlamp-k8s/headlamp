@@ -13,7 +13,8 @@ import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar, { useSidebarItem } from './components/Sidebar';
 import api from './lib/api';
 import { getToken } from './lib/auth';
-import { getRoute, ROUTES } from './lib/router';
+import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
+import { getCluster } from './lib/util';
 import { initializePlugins } from './plugin';
 import { setConfig } from './redux/actions/actions';
 import store from './redux/stores/store';
@@ -72,9 +73,10 @@ function RouteSwitcher() {
       {Object.values(ROUTES).concat(Object.values(routes)).map((route, index) =>
         <AuthRoute
           key={index}
-          path={route.path}
+          path={getRoutePath(route)}
           sidebar={route.sidebar}
           requiresAuth={!route.noAuthRequired}
+          requiresCluster={!route.noCluster}
           exact={!!route.exact}
           children={<route.component />}
         />
@@ -134,7 +136,7 @@ function AuthRoute(props) {
     return (
       <Redirect
         to={{
-          pathname: getRoute('login').path,
+          pathname: createRouteURL('login'),
           state: { from: location }
         }}
       />

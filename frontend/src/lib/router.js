@@ -35,6 +35,8 @@ import PersistentVolumeDetails from '../components/storage/VolumeDetails';
 import PersistentVolumeList from '../components/storage/VolumeList';
 import WorkloadDetails from '../components/workload/Details';
 import WorkloadOverview from '../components/workload/Overview';
+import store from '../redux/stores/store';
+import { getCluster, getClusterPrefixedPath } from './util';
 
 export const ROUTES = {
   cluster: {
@@ -304,7 +306,30 @@ export function getRoute(routeName) {
   return ROUTES[routeName];
 }
 
+export function getRoutePath(route) {
+  if (route.noCluster) {
+    return route.path;
+  }
+
+  return getClusterPrefixedPath(route.path);
+}
+
 export function createRouteURL(routeName, params={}) {
-  const url = getRoute(routeName).path;
-  return generatePath(url, params);
+  const route = getRoute(routeName);
+  let cluster = null;
+  if (!route.noCluster) {
+    cluster = getCluster();
+    if (!cluster) {
+      const clusters = store.getState().config.clusters;
+      cluster = clusters.length > 0 ? clusters[0] : null;
+    }
+  }
+  const fullParams = {
+    ...params
+  };
+  if (cluster) {
+    fullParams.cluster = cluster;
+  }
+  const url = getRoutePath(route);
+  return generatePath(url, fullParams);
 }

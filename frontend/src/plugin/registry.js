@@ -2,11 +2,12 @@ import { setDetailsViewHeaderAction, setRoute, setSidebarItem } from '../redux/a
 import store from '../redux/stores/store';
 
 export default class Registry {
-  registerSidebarItem(parentName, itemName, itemLabel, url) {
+  registerSidebarItem(parentName, itemName, itemLabel, url, opts={useClusterURL: true}) {
     store.dispatch(setSidebarItem({
       name: itemName,
       label: itemLabel,
       url,
+      useClusterURL: !!opts.useClusterURL,
       parent: parentName
     }));
   }

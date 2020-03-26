@@ -2,6 +2,7 @@ import TimeAgo from 'javascript-time-ago'
 import { useSelector } from 'react-redux';
 import en from 'javascript-time-ago/locale/en'
 import { unparseCpu, unparseRam, parseCpu, parseRam } from './units';
+import { matchPath } from "react-router";
 TimeAgo.addLocale(en)
 
 const TIME_AGO = new TimeAgo();
@@ -75,4 +76,17 @@ export function filterResource(item, filter) {
 export function useFilterFunc() {
   const filter = useSelector(state => state.filter);
   return item => filterResource(item, filter);
+}
+
+export function getClusterPrefixedPath(path) {
+  const baseClusterPath = '/c/:cluster';
+  if (!path) {
+    return baseClusterPath;
+  }
+  return baseClusterPath + (path[0] === '/' ? '' : '/') + path;
+}
+
+export function getCluster() {
+  const clusterURLMatch = matchPath(window.location.pathname, {path: getClusterPrefixedPath()});
+  return (!!clusterURLMatch && clusterURLMatch.params.cluster) || null;
 }

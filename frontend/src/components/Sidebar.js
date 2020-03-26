@@ -15,9 +15,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { generatePath } from 'react-router';
 import { Link } from 'react-router-dom';
 import api from '../lib/api';
-import { getRoute } from '../lib/router';
+import { createRouteURL } from '../lib/router';
+import { getCluster, getClusterPrefixedPath } from '../lib/util';
 import { setSidebarSelected } from '../redux/actions/actions';
 import store from '../redux/stores/store';
 import { NameValueTable } from './common';
@@ -286,10 +288,14 @@ const useItemStyle = makeStyles(theme => ({
 function SidebarItem(props) {
   const classes = useItemStyle();
 
-  const {label, name=null, url=null, subList=[], selectedName, ...other} = props;
+  const {label, name=null, url=null, useClusterURL=false, subList=[], selectedName, ...other} = props;
 
   let routeName = name !== null ? name : subList.find(item => !!item.name).name;
-  const linkPath = url || getRoute(routeName).path;
+  let fullURL = url;
+  if (fullURL && useClusterURL && getCluster()) {
+    fullURL = generatePath(getClusterPrefixedPath(url), {cluster: getCluster()});
+  }
+  const linkPath = fullURL || createRouteURL(routeName);
 
   function isSelected() {
     return name === selectedName;
