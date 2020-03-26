@@ -1,6 +1,7 @@
 import React from 'react';
 import { generatePath } from 'react-router';
 import Auth from '../components/account/Auth';
+import Chooser from '../components/cluster/Chooser';
 import Overview from '../components/cluster/Overview';
 import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
@@ -45,6 +46,14 @@ export const ROUTES = {
     name: 'Cluster',
     sidebar: 'cluster',
     component: () => <Overview />
+  },
+  chooser: {
+    path: '/',
+    exact: true,
+    sidebar: null,
+    noCluster: true,
+    noAuthRequired: true,
+    component: () => <Chooser />
   },
   namespaces: {
     path: "/namespaces",
