@@ -85,7 +85,7 @@ function getVersion() {
 }
 
 async function getConfig() {
-  return request('/config');
+  return request('/config', {}, false, false);
 }
 
 function getRules(namespace) {
