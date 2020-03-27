@@ -13,7 +13,7 @@ const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
 
-export async function request(path, params, autoLogoutOnAuthError = true) {
+export async function request(path, params, autoLogoutOnAuthError = true, useCluster=true) {
     const opts = Object.assign({headers: {}}, params);
 
     // @todo: This is a temporary way of getting the current cluster. We should improve it later.
@@ -22,7 +22,7 @@ export async function request(path, params, autoLogoutOnAuthError = true) {
     console.log('{}}}}}}}', BASE_HTTP_URL, opts)
 
     let fullPath = path;
-    if (cluster) {
+    if (useCluster && cluster) {
         const token = getToken(cluster);
         if (!!token) {
             opts.headers.Authorization = `Bearer ${token}`;
