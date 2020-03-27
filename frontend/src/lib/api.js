@@ -6,6 +6,7 @@ import _ from 'lodash';
 import {Base64} from 'js-base64';
 import {request, post, stream, apiFactory, apiFactoryWithNamespace} from './apiProxy';
 import React from 'react';
+import { useLocation } from "react-router-dom";
 
 const configMap = apiFactoryWithNamespace('', 'v1', 'configmaps');
 const event = apiFactoryWithNamespace('', 'v1', 'events');
@@ -204,8 +205,14 @@ function logs(namespace, name, container, tailLines, showPrevious, cb) {
     }
 }
 
+
 // Hook for managing API connections in a shared and coherent way.
 export function useConnectApi(...apiCalls) {
+    // Use the location to make sure the API calls are changed, as they may depend on the cluster
+    // (defined in the URL ATM).
+    // @todo: Update this if the active cluster management is changed.
+    const location = useLocation();
+
     React.useEffect(() => {
         let cancellables = apiCalls.map(func => func());
 
@@ -218,7 +225,7 @@ export function useConnectApi(...apiCalls) {
     // If we add the apiCalls to the dependency list, then it actually
     // results in undesired reloads.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []);
+    [location]);
 }
 
 export default apis;
