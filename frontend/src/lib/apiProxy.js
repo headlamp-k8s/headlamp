@@ -19,13 +19,15 @@ export async function request(path, params, autoLogoutOnAuthError = true) {
     // @todo: This is a temporary way of getting the current cluster. We should improve it later.
     const cluster = getCluster();
 
-    const token = getToken();
-    if (token) opts.headers.Authorization = `Bearer ${token}`;
-
     console.log('{}}}}}}}', BASE_HTTP_URL, opts)
 
     let fullPath = path;
     if (cluster) {
+        const token = getToken(cluster);
+        if (!!token) {
+            opts.headers.Authorization = `Bearer ${token}`;
+        }
+
         fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
     }
 
@@ -34,7 +36,7 @@ export async function request(path, params, autoLogoutOnAuthError = true) {
 
     if (!response.ok) {
         const {status, statusText} = response;
-        if (autoLogoutOnAuthError && status === 401 && token) {
+        if (autoLogoutOnAuthError && status === 401 && opts.headers.Authorization) {
             console.error('Logging out due to auth error', {status, statusText, path});
             logout();
         }
@@ -276,7 +278,9 @@ export function stream(url, cb, args) {
 function connectStream(path, cb, onFail, isJson, additionalProtocols = []) {
     let isClosing = false;
 
-    const token = getToken();
+    // @todo: This is a temporary way of getting the current cluster. We should improve it later.
+    const cluster = getCluster();
+    const token = getToken(cluster);
     const encodedToken = btoa(token).replace(/=/g, '');
 
     const protocols = [
@@ -284,9 +288,6 @@ function connectStream(path, cb, onFail, isJson, additionalProtocols = []) {
         'base64.binary.k8s.io',
         ...additionalProtocols,
     ];
-
-    // @todo: This is a temporary way of getting the current cluster. We should improve it later.
-    const cluster = getCluster();
 
     let fullPath = path;
     if (cluster) {

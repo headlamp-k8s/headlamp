@@ -11,28 +11,34 @@ if (authorizationCookie) {
     cookie.remove('Authorization');
 }
 
-export function getToken() {
-    return localStorage.authToken;
+export function getToken(cluster) {
+    return getTokens()[cluster];
 }
 
-export function getUserInfo() {
-    const user = getToken().split('.')[1];
+export function getUserInfo(cluster) {
+    const user = getToken(cluster).split('.')[1];
     return JSON.parse(atob(user));
 }
 
-export function hasToken() {
-    return !!getToken();
+export function hasToken(cluster) {
+    return !!getToken(cluster);
 }
 
-export function setToken(token) {
-    localStorage.authToken = token;
+function getTokens() {
+    return JSON.parse(localStorage.tokens || '{}');
 }
 
-export function deleteToken() {
-    delete localStorage.authToken;
+export function setToken(cluster, token) {
+    let tokens = getTokens();
+    tokens[cluster] = token;
+    localStorage.tokens = JSON.stringify(tokens);
+}
+
+export function deleteTokens() {
+    delete localStorage.tokens;
 }
 
 export function logout() {
-    deleteToken();
+    deleteTokens();
     //window.location.reload();
 }
