@@ -13,6 +13,7 @@ import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import api from '../../lib/api';
 import { setToken } from '../../lib/auth';
+import { getCluster } from '../../lib/util';
 
 function Auth() {
   const location = useLocation();
@@ -88,7 +89,7 @@ function Auth() {
 
 async function loginWithToken(token) {
   try {
-    setToken(token);
+    setToken(getCluster(), token);
     await api.testAuth();
 
     return 200;
