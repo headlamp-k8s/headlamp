@@ -1,5 +1,5 @@
 import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
-import { Icon } from '@iconify/react';
+import { Icon, InlineIcon } from '@iconify/react';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,17 +8,44 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { generatePath } from 'react-router';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import api from '../../lib/api';
-import { getClusterPrefixedPath } from '../../lib/util';
+import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { setConfig } from '../../redux/actions/actions';
 import Loader from '../common/Loader';
+
+export function ClusterTitle() {
+  // Use location is only added here in order for the component to be aware of
+  // a URL change which may indicate a cluster change.
+  // @todo: Update if the way to manage the current cluster changes.
+  useLocation();
+
+  const cluster = getCluster();
+  const [showChooser, setShowChooser] = React.useState(false);
+
+  return (cluster &&
+    <React.Fragment>
+      <IconButton
+        onClick={() => setShowChooser(true)}
+      >
+        <InlineIcon icon={kubernetesIcon} width="50" height="50" color="#fff" />
+      </IconButton>
+      <Typography variant="h4">&nbsp;{cluster}</Typography>
+      <Chooser
+        title="Clusters"
+        open={showChooser}
+        onClose={() => setShowChooser(false)}
+      />
+    </React.Fragment>
+  );
+}
 
 const useStyles = makeStyles({
   chooserDialog: {

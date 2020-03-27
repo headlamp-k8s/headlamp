@@ -9,6 +9,7 @@ import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar, { useSidebarItem } from './components/Sidebar';
 import { getToken } from './lib/auth';
@@ -93,6 +94,7 @@ function App() {
           <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
               <Toolbar>
+                <ClusterTitle />
               </Toolbar>
             </AppBar>
             <Sidebar />
