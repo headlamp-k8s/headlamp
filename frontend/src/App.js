@@ -117,8 +117,15 @@ function AuthRoute(props) {
   useSidebarItem(sidebar);
 
   function getRenderer({ location }) {
-    if (!requiresAuth || (requiresCluster && getCluster() && !!getToken())) {
+    if (!requiresAuth) {
       return children;
+    }
+
+    if (requiresCluster) {
+      const cluster = getCluster();
+      if (!!cluster && !!getToken(cluster)) {
+        return children;
+      }
     }
 
     return (
