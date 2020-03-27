@@ -16,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { generatePath } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 import api from '../lib/api';
 import { createRouteURL } from '../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../lib/util';
@@ -163,8 +163,11 @@ const useVersionButtonStyle = makeStyles({
 });
 
 function VersionButton(props) {
+  const location = useLocation();
+
   const classes = useVersionButtonStyle();
   const [clusterVersion, setClusterVersion] = React.useState(null);
+  const [cluster, setCluster] = React.useState(getCluster());
   const [open, setOpen] = React.useState(false);
 
   function getVersionRows() {
@@ -205,6 +208,18 @@ function VersionButton(props) {
   },
   [clusterVersion]);
 
+  // Use the location to make sure the version is changed, as it depends on the cluster
+  // (defined in the URL ATM).
+  // @todo: Update this if the active cluster management is changed.
+  React.useEffect(() => {
+    const currentCluster = getCluster();
+    if (currentCluster !== cluster) {
+      setCluster(currentCluster);
+      setClusterVersion(null);
+    }
+  },
+  [location, cluster]);
+
   function handleClose() {
     setOpen(false);
   }
@@ -243,6 +258,10 @@ export default function Sidebar(props) {
   const sidebar = useSelector(state => state.ui.sidebar);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const items = React.useMemo(() => prepareRoutes(), [sidebar.entries]);
+  // Use the location to make sure the sidebar is changed, as it depends on the cluster
+  // (defined in the URL ATM).
+  // @todo: Update this if the active cluster management is changed.
+  useLocation();
 
   return sidebar.isVisible && (
     <Drawer
