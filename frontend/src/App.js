@@ -56,7 +56,7 @@ function RouteSwitcher() {
   const routes = useSelector(state => state.ui.routes);
 
   return (
-    <Switch>
+  <Switch>
       {Object.values(ROUTES).concat(Object.values(routes)).map((route, index) =>
         <AuthRoute
           key={index}
@@ -130,8 +130,7 @@ function AuthRoute(props) {
       }
     }
 
-    return (
-      <Redirect
+    return (      <Redirect
         to={{
           pathname: createRouteURL(redirectRoute),
           state: { from: location }
