@@ -9,6 +9,12 @@ DOCKER_IMAGE_BASE ?= alpine:3.11.3
 
 all: backend frontend
 
+tools/golangci-lint: backend/go.mod backend/go.sum
+	cd backend && go build -o ./tools/golangci-lint github.com/golangci/golangci-lint/cmd/golangci-lint
+
+backend-lint: tools/golangci-lint
+	cd backend && ./tools/golangci-lint run
+
 .PHONY: backend
 backend:
 	cd backend && go build -o ./server ./cmd
