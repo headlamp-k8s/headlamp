@@ -1,0 +1,29 @@
+name: Build Backend
+on:
+  pull_request:
+    paths:
+    - 'backend/**'
+    - Makefile
+
+jobs:
+
+  build:
+    name: Lint & Build
+    runs-on: ubuntu-18.04
+
+    steps:
+
+    - name: Set up Go 1.13
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13.x
+      id: go
+
+    - name: Check out code
+      uses: actions/checkout@v1
+
+    - name: Lint, Build & Check
+      run: |
+        cd $GITHUB_WORKSPACE
+        make backend-lint
+        make backend
