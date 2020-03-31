@@ -31,7 +31,8 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "lint": "eslint -c .eslintrc.yml src/"
   },
   "browserslist": {
     "production": [

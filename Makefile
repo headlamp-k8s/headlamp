@@ -26,6 +26,12 @@ run-backend:
 run-frontend:
 	cd frontend && npm start
 
+frontend-lint:
+	cd frontend && npm run lint -- --max-warnings 0
+
+frontend-fixlint:
+	cd frontend && npm run lint -- --fix
+
 image:
 	$(DOCKER_CMD) build \
 	--no-cache \
