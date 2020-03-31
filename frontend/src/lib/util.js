@@ -7,6 +7,8 @@ TimeAgo.addLocale(en);
 
 const TIME_AGO = new TimeAgo();
 
+export const CLUSTER_ACTION_GRACE_PERIOD = 5000; // ms
+
 export function timeAgo(date) {
   return TIME_AGO.format(new Date(date), 'time');
 }

@@ -4,7 +4,7 @@ import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/cluster';
+import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/util';
 
 export default function ActionsNotifier() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
