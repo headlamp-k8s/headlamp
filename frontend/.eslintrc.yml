@@ -1,0 +1,124 @@
+env:
+  browser: true
+  es6: true
+  node: true
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 2018
+  sourceType: module
+plugins:
+- react
+- react-hooks
+- simple-import-sort
+rules:
+  eqeqeq:
+  - 1
+  - always
+  space-in-parens:
+  - 0
+  - always
+  template-curly-spacing:
+  - 0
+  - always
+  array-bracket-spacing:
+  - 0
+  - always
+  object-curly-spacing:
+  - 0
+  - always
+  computed-property-spacing:
+  - 0
+  - always
+  no-multiple-empty-lines:
+  - 1
+  - max: 1
+    maxEOF: 1
+    maxBOF: 0
+  quotes:
+  - 1
+  - single
+  - avoidEscape: true
+  no-use-before-define:
+  - 0
+  - functions: false
+  semi:
+  - 1
+  - always
+  prefer-const: 1
+  react/prefer-es6-class: 0
+  react/jsx-filename-extension: 0
+  react/jsx-curly-spacing:
+  - 0
+  - always
+  react/jsx-indent:
+  - 1
+  - 2
+  - checkAttributes: true
+  react/jsx-indent-props:
+  - 1
+  - 2
+  react/jsx-closing-bracket-location:
+  - 1
+  react/jsx-boolean-value:
+  - 1
+  - never
+  react/jsx-max-props-per-line:
+  - 1
+  - maximum: 1
+    when: multiline
+  no-unneeded-ternary:
+  - 1
+  indent:
+  - 1
+  - 2
+  - ArrayExpression: 1
+    CallExpression:
+      arguments: 'off'
+    FunctionDeclaration:
+      body: 1
+      parameters: first
+    FunctionExpression:
+      body: 1
+      parameters: first
+    MemberExpression: 1
+    ObjectExpression: first
+    SwitchCase: 1
+    ignoredNodes:
+    - JSXElement
+    outerIIFEBody: 1
+  no-case-declarations:
+  - 1
+  no-trailing-spaces:
+  - 1
+  no-return-assign:
+  - 1
+  no-param-reassign:
+  - 1
+  - props: false
+  no-shadow:
+  - 0
+  no-underscore-dangle:
+  - 0
+  - always
+  sort-imports:
+  - 0
+  simple-import-sort/sort:
+  - 1
+  - groups:
+    - - "^\\u0000"
+      - "^@?\\w"
+      - "^[^.]"
+      - "^\\."
+  eol-last:
+  - 1
+  - always
+  one-var:
+  - 1
+  - never
+settings:
+  react:
+    version: detect
