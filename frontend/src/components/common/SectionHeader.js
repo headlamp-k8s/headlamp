@@ -13,33 +13,34 @@ export default function SectionHeader(props) {
   const classes = useStyles();
   const actions = props.actions || [];
 
-  return (<Grid
-    container
-    alignItems="center"
-    justify="space-between"
-    wrap="nowrap"
-    className={classes.sectionHeader}
-  >
-    {props.title &&
-    <Grid item md={6}>
-      <Typography variant="h5">{props.title}</Typography>
-    </Grid>
-    }
-    {actions.length > 0 &&
+  return (
     <Grid
-      item
-      md={6}
       container
       alignItems="center"
-      justify="flex-end"
+      justify="space-between"
+      wrap="nowrap"
+      className={classes.sectionHeader}
     >
-      {actions.map((action, i) =>
-        <Grid item key={i}>
-          {action}
+      {props.title &&
+        <Grid item md={6}>
+          <Typography variant="h5">{props.title}</Typography>
         </Grid>
-      )}
+      }
+      {actions.length > 0 &&
+        <Grid
+          item
+          md={6}
+          container
+          alignItems="center"
+          justify="flex-end"
+        >
+          {actions.map((action, i) =>
+            <Grid item key={i}>
+              {action}
+            </Grid>
+          )}
+        </Grid>
+      }
     </Grid>
-    }
-  </Grid>
   );
 }
