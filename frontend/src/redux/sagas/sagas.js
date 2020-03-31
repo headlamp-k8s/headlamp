@@ -1,5 +1,5 @@
 import { all, call, cancelled, delay, put, race, take, takeEvery } from 'redux-saga/effects';
-import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/cluster';
+import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/util';
 import { CLUSTER_ACTION, CLUSTER_ACTION_CANCEL, updateClusterAction } from '../actions/actions';
 
 function newActionKey() {
