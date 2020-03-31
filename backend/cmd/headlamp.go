@@ -167,5 +167,7 @@ func GetDefaultKubeConfigPath() string {
 
 func (c *clientConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(c)
+	if err := json.NewEncoder(w).Encode(c); err != nil {
+		log.Println("Error encoding config", err)
+	}
 }
