@@ -1,21 +1,21 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: lokodash
+  name: headlamp
   namespace: kube-system
 spec:
   replicas: 1
   selector:
     matchLabels:
-      k8s-app: lokodash
+      k8s-app: headlamp
   template:
     metadata:
       labels:
-        k8s-app: lokodash
+        k8s-app: headlamp
     spec:
       containers:
-      - name: lokodash
-        image: joaquimrocha/lokodash:latest
+      - name: headlamp
+        image: joaquimrocha/headlamp:latest
         args:
           - "-in-cluster"
         ports:
@@ -27,8 +27,6 @@ spec:
             port: 4654
           initialDelaySeconds: 30
           timeoutSeconds: 30
-      imagePullSecrets:
-        - name: lokodash-dockerhub
       nodeSelector:
         'beta.kubernetes.io/os': linux
 
@@ -36,11 +34,11 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: lokodash
+  name: headlamp
   namespace: kube-system
 spec:
   ports:
     - port: 80
       targetPort: 4654
   selector:
-    k8s-app: lokodash
+    k8s-app: headlamp

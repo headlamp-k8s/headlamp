@@ -3,7 +3,7 @@ export GO111MODULE
 
 DOCKER_CMD ?= docker
 DOCKER_REPO ?= docker.io/joaquim
-DOCKER_IMAGE_NAME ?= lokodash
+DOCKER_IMAGE_NAME ?= headlamp
 DOCKER_IMAGE_VERSION ?= $(shell git describe --tags --always --dirty)
 DOCKER_IMAGE_BASE ?= alpine:3.11.3
 

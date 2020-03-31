@@ -8,18 +8,18 @@ ENV GOPATH=/go \
 RUN apk update && \
 	apk add git nodejs npm go ca-certificates make musl-dev bash
 
-COPY ./ /lokodash/
+COPY ./ /headlamp/
 
-WORKDIR /lokodash
+WORKDIR /headlamp
 
-RUN go build -o ./backend/server ./backend/server.go
+RUN cd ./backend && go build -o ./server ./cmd/
 
-RUN cd ./frontend && npm run build
+RUN cd ./frontend && npm install && npm run build
 
 FROM $IMAGE_BASE
 
-COPY --from=base-build /lokodash/backend/server /lokodash/server
-COPY --from=base-build /lokodash/frontend/build /lokodash/frontend
+COPY --from=base-build /headlamp/backend/server /headlamp/server
+COPY --from=base-build /headlamp/frontend/build /headlamp/frontend
 
 EXPOSE 4654
-ENTRYPOINT ["/lokodash/server", "-html-static-dir", "/lokodash/frontend"]
+ENTRYPOINT ["/headlamp/server", "-html-static-dir", "/headlamp/frontend"]
