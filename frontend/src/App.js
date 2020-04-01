@@ -57,17 +57,18 @@ function RouteSwitcher() {
 
   return (
     <Switch>
-      {Object.values(ROUTES).concat(Object.values(routes)).map((route, index) =>
-        <AuthRoute
-          key={index}
-          path={getRoutePath(route)}
-          sidebar={route.sidebar}
-          requiresAuth={!route.noAuthRequired}
-          requiresCluster={!route.noCluster}
-          exact={!!route.exact}
-          children={<route.component />}
-        />
-      )}
+      {Object.values(ROUTES).concat(Object.values(routes))
+        .map((route, index) =>
+          <AuthRoute
+            key={index}
+            path={getRoutePath(route)}
+            sidebar={route.sidebar}
+            requiresAuth={!route.noAuthRequired}
+            requiresCluster={!route.noCluster}
+            exact={!!route.exact}
+            children={<route.component />}
+          />
+        )}
     </Switch>
   );
 }

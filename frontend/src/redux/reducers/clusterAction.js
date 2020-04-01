@@ -8,7 +8,7 @@ export const INITIAL_STATE = {
 function cluster(clusterActions = INITIAL_STATE, action) {
   const {type, id, ...actionOptions} = action;
   const newState = {...clusterActions};
-  switch(type) {
+  switch (type) {
     case CLUSTER_ACTION_UPDATE:
       if (_.isEmpty(actionOptions)) {
         delete newState[id];

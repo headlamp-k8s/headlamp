@@ -20,7 +20,7 @@ export const INITIAL_STATE = {
 
 function reducer(state = INITIAL_STATE, action) {
   const newFilters = {...state};
-  switch(action.type) {
+  switch (action.type) {
     case UI_SIDEBAR_SET_SELECTED: {
       newFilters.sidebar = {
         ...newFilters.sidebar,

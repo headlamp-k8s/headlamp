@@ -6,7 +6,7 @@ export const INITIAL_STATE = {
 
 function reducer(state = INITIAL_STATE, action) {
   const newState = {...state};
-  switch(action.type) {
+  switch (action.type) {
     case CONFIG_NEW:
       newState.clusters = [...action.config.clusters];
       break;

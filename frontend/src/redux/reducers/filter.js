@@ -4,7 +4,7 @@ export const INITIAL_STATE = {namespaces: new Set(), search: ''};
 
 function filter(filters = INITIAL_STATE, action) {
   let newFilters = {...filters};
-  switch(action.type) {
+  switch (action.type) {
     case FILTER_SET_NAMESPACE:
       newFilters.namespaces = new Set(action.namespaces);
       break;

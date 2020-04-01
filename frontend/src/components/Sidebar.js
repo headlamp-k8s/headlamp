@@ -95,7 +95,7 @@ const LIST_ITEMS = [
     ]
   },
   {
-    label: 'Network'  ,
+    label: 'Network',
     subList: [
       {
         name: 'services',
@@ -230,7 +230,7 @@ function VersionButton(props) {
     <Box mx="auto" py=".2em" className={classes.versionBox}>
       <Button
         onClick={() => setOpen(true) }
-        style={{textTransform: 'none',}}
+        style={{textTransform: 'none', }}
         startIcon={<Icon color="#09bac8" icon={kubernetesIcon} className={classes.versionIcon} />}
       >
         {clusterVersion.gitVersion}

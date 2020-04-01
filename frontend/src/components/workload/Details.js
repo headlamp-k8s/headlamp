@@ -14,7 +14,7 @@ export default function WorkloadDetails(props) {
 
   function getApiConnection() {
     let resourceApi = null;
-    switch(workloadKind) {
+    switch (workloadKind) {
       case 'StatefulSet':
         resourceApi = api.statefulSet;
         break;

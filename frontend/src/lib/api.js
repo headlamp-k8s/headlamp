@@ -6,7 +6,7 @@ import {Base64} from 'js-base64';
 import _ from 'lodash';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import {apiFactory, apiFactoryWithNamespace,post, request, stream} from './apiProxy';
+import {apiFactory, apiFactoryWithNamespace, post, request, stream} from './apiProxy';
 
 const configMap = apiFactoryWithNamespace('', 'v1', 'configmaps');
 const event = apiFactoryWithNamespace('', 'v1', 'events');

@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo } from '../../lib/util';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
-import { HeaderLabel, StatusLabel,ValueLabel } from '../common/Label';
+import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
 import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid, SectionGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
