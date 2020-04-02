@@ -118,14 +118,26 @@ function Chooser(props) {
   const [show, setShow] = React.useState(true);
 
   React.useEffect(() => {
-    if (open && clusters.length === 0) {
+    if (!open) {
+      return;
+    }
+
+    if (clusters.length === 0) {
       api.getConfig()
         .then(config => {
           dispatch(setConfig(config));
         })
         .catch(err => console.error(err));
+      return;
+    }
+
+    // If we only have one cluster configured, then we skip offering
+    // the choice to the user.
+    if (clusters.length === 1) {
+      handleButtonClick(clusters[0]);
     }
   },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   [open, clusters, dispatch]);
 
   function handleClose() {
