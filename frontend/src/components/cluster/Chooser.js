@@ -28,15 +28,22 @@ export function ClusterTitle() {
   useLocation();
 
   const cluster = getCluster();
+  const clusters = useSelector(state => state.config.clusters);
   const [showChooser, setShowChooser] = React.useState(false);
+
+  const icon = <InlineIcon icon={kubernetesIcon} width="50" height="50" color="#fff" />;
 
   return (cluster &&
     <React.Fragment>
-      <IconButton
-        onClick={() => setShowChooser(true)}
-      >
-        <InlineIcon icon={kubernetesIcon} width="50" height="50" color="#fff" />
-      </IconButton>
+      {clusters.length > 1 ?
+        <IconButton
+          onClick={() => setShowChooser(true)}
+        >
+          {icon}
+        </IconButton>
+        :
+        icon
+      }
       <Typography variant="h4">&nbsp;{cluster}</Typography>
       <Chooser
         title="Clusters"
