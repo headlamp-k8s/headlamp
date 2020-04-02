@@ -16,6 +16,15 @@ and a brief demo of it.
   </a>
 </div>
 
+## Features
+
+  * Vendor independent / Generic
+  * Common ops for Kubernetes clusters
+  * Multi-cluster
+  * Extensible
+  * Clean / modern UI
+  * Read-write (actions based on permissions)
+
 ## Get involved
 
 Check out our [guidelines](./docs/contributing.md) on how to contribute to the project.
