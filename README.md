@@ -8,6 +8,6 @@ An easy-to-use and versatile dashboard for Kubernetes.
 
 Check out our [guidelines](./docs/contributing.md) on how to contribute to the project.
 
-# License
+## License
 
 Headlamp is released under the terms of the [Apache 2.0](./LICENSE) license.
