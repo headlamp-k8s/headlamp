@@ -38,6 +38,10 @@ rules:
   - max: 1
     maxEOF: 1
     maxBOF: 0
+  space-infix-ops:
+  - 1
+  no-multi-spaces:
+  - 1
   quotes:
   - 1
   - single
