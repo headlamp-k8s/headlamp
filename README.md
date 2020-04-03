@@ -29,6 +29,12 @@ and a brief demo of it.
 
 Check out our [guidelines](./docs/contributing.md) on how to contribute to the project.
 
+## Roadmap
+
+If you are interested in the direction of the project, we maintain a
+[Roadmap](https://github.com/kinvolk/headlamp/projects/2) for it with the
+biggest changes planned so far.
+
 ## License
 
 Headlamp is released under the terms of the [Apache 2.0](./LICENSE) license.
