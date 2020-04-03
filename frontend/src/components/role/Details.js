@@ -9,7 +9,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function RoleDetails() {
-  const { namespace=null, name } = useParams();
+  const { namespace = null, name } = useParams();
   const [item, setItem] = React.useState(null);
 
   useConnectApi(
@@ -41,7 +41,7 @@ export default function RoleDetails() {
                 },
                 {
                   label: 'Non Resources',
-                  getter: ({nonResources=[]}) => nonResources.join(', ')
+                  getter: ({nonResources = []}) => nonResources.join(', ')
                 },
                 {
                   label: 'Verbs',

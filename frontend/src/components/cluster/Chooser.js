@@ -73,7 +73,7 @@ const useClusterButtonStyles = makeStyles({
 
 function ClusterButton(props) {
   const classes = useClusterButtonStyles();
-  const {cluster, onClick=null} = props;
+  const {cluster, onClick = null} = props;
 
   return (
     <ButtonBase
@@ -120,7 +120,7 @@ function Chooser(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const clusters = useSelector(state => state.config.clusters);
-  const {open=true, title='Welcome', onClose=null} = props;
+  const {open = true, title = 'Welcome', onClose = null} = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
 

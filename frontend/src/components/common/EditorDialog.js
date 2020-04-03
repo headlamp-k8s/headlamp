@@ -301,7 +301,10 @@ function DocsViewer(props) {
 
   return (
     docSpecs.error ?
-      <Empty>Error getting documentation! Please make sure the YAML is valid and has the kind and apiVersion set.</Empty>
+      <Empty>
+        Error getting documentation!
+        Please make sure the YAML is valid and has the kind and apiVersion set.
+      </Empty>
       : docs === null ?
         <Loader />
         : _.isEmpty(docs) ?

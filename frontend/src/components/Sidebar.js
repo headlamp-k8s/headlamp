@@ -307,7 +307,15 @@ const useItemStyle = makeStyles(theme => ({
 function SidebarItem(props) {
   const classes = useItemStyle();
 
-  const {label, name=null, url=null, useClusterURL=false, subList=[], selectedName, ...other} = props;
+  const {
+    label,
+    name = null,
+    url = null,
+    useClusterURL = false,
+    subList = [],
+    selectedName,
+    ...other
+  } = props;
 
   const routeName = name !== null ? name : subList.find(item => !!item.name).name;
   let fullURL = url;

@@ -113,7 +113,7 @@ function App() {
 }
 
 function AuthRoute(props) {
-  const { children, sidebar, requiresAuth=true, requiresCluster=true, ...other } = props;
+  const { children, sidebar, requiresAuth = true, requiresCluster = true, ...other } = props;
   const clusters = useSelector(state => state.config.clusters);
   const redirectRoute = (!getCluster() || clusters.length === 0) ? 'chooser' : 'login';
 

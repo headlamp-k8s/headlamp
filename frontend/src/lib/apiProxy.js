@@ -13,7 +13,7 @@ const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
 
-export async function request(path, params, autoLogoutOnAuthError = true, useCluster=true) {
+export async function request(path, params, autoLogoutOnAuthError = true, useCluster = true) {
   const opts = Object.assign({headers: {}}, params);
 
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
@@ -239,7 +239,7 @@ export async function streamResults(url, cb, errCb) {
 export function stream(url, cb, args) {
   let connection;
   let isCancelled;
-  const {isJson, additionalProtocols, connectCb, reconnectOnFailure=true} = args;
+  const {isJson, additionalProtocols, connectCb, reconnectOnFailure = true} = args;
 
   connect();
 

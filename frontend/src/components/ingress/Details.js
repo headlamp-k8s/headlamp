@@ -17,7 +17,7 @@ export default function IngressDetails(props) {
   );
 
   function getHostsData() {
-    const data =[];
+    const data = [];
     item.spec.rules.forEach(({host, http}) => {
       http.paths.forEach(pathData => {
         data.push({...pathData, host: host});

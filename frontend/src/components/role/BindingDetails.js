@@ -11,7 +11,7 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function RoleBindingDetails() {
-  const { namespace=null, name } = useParams();
+  const { namespace = null, name } = useParams();
   const [item, setItem] = React.useState(null);
 
   useConnectApi(

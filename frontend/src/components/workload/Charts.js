@@ -8,8 +8,8 @@ export function WorkloadCircleChart(props) {
 
   const {
     workloadData,
-    partialLabel='',
-    totalLabel='',
+    partialLabel = '',
+    totalLabel = '',
     ...other
   } = props;
 
