@@ -18,6 +18,12 @@ rules:
   eqeqeq:
   - 1
   - always
+  max-len:
+  - 1
+  - code: 100
+    ignoreTemplateLiterals: true
+    ignoreStrings: true
+    ignoreUrls: true
   space-in-parens:
   - 0
   - always
