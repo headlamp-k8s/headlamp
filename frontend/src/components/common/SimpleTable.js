@@ -150,7 +150,8 @@ export function NameValueTable(props) {
       size="small"
     >
       <TableBody>
-        {rows.map(({name, value = null, nameComponent = null, valueComponent = null, hide = false}, i) => {
+        {rows.map(({name, value = null, nameComponent = null,
+                    valueComponent = null, hide = false}, i) => {
           if (hide)
             return null;
           return (
