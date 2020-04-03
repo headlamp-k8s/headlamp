@@ -30,9 +30,9 @@ function* doClusterAction(action, actionKey, uniqueCancelAction) {
     startMessage,
     cancelledMessage,
     successMessage,
-    startOptions={},
-    cancelledOptions={},
-    successOptions={},
+    startOptions = {},
+    cancelledOptions = {},
+    successOptions = {},
   } = action;
 
   try {

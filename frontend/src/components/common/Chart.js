@@ -29,13 +29,13 @@ export function PercentageCircle(props) {
   const classes = useStyle();
   const {
     data,
-    size=200,
-    dataKey='percentage',
-    label='',
-    title='',
-    legend=null,
-    total=100,
-    totalProps={}
+    size = 200,
+    dataKey = 'percentage',
+    label = '',
+    title = '',
+    legend = null,
+    total = 100,
+    totalProps = {}
   } = props;
 
   const chartSize = size * .8;
@@ -139,8 +139,8 @@ export function PercentageBar(props) {
 
   const {
     data,
-    total=100,
-    tooltipFunc=null,
+    total = 100,
+    tooltipFunc = null,
   } = props;
 
   function formatData() {
@@ -177,7 +177,7 @@ export function PercentageBar(props) {
               key={index}
               dataKey={item.name}
               stackId="1"
-              fill={item.fill ||theme.palette.primary.main}
+              fill={item.fill || theme.palette.primary.main}
               layout="vertical"
               background={{fill: theme.palette.grey['300']}}
             />

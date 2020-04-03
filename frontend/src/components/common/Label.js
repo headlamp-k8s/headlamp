@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 
 export function InfoLabel(props) {
   const classes = useStyles();
-  const {name, value=null} = props;
+  const {name, value = null} = props;
 
   return (
     <Grid
@@ -145,7 +145,7 @@ export function HeaderLabel(props) {
 }
 
 export function HoverInfoLabel(props) {
-  const { label, hoverInfo, icon=null } = props;
+  const { label, hoverInfo, icon = null } = props;
 
   return (
     <Grid

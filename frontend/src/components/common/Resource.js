@@ -80,7 +80,7 @@ export function MetadataDisplay(props) {
 
 export function MetadataDictGrid(props) {
   const classes = useStyles();
-  const { dict, showKeys=true } = props;
+  const { dict, showKeys = true } = props;
   const [expanded, setExpanded] = React.useState(false);
 
   if (!dict) {
@@ -167,9 +167,9 @@ export function MetadataDictGrid(props) {
 
 export function ResourceLink(props) {
   const {
-    routeName=props.resource.kind,
-    routeParams=props.resource.metadata,
-    name=props.resource.metadata.name,
+    routeName = props.resource.kind,
+    routeParams = props.resource.metadata,
+    name = props.resource.metadata.name,
   } = props;
 
   return (
@@ -196,7 +196,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 export function MainInfoSection(props) {
-  const { resource, headerSection, title, extraInfo=[], actions=[] } = props;
+  const { resource, headerSection, title, extraInfo = [], actions = [] } = props;
   const headerActions = useSelector(state => state.ui.views.details.headerActions);
 
   function getHeaderActions() {
@@ -232,7 +232,7 @@ export function MainInfoSection(props) {
 }
 
 export function PageGrid(props) {
-  const { sections=[], children=[], ...other } = props;
+  const { sections = [], children = [], ...other } = props;
   const childrenArray = React.Children.toArray(children).concat(sections);
   return (
     <Grid
@@ -253,7 +253,7 @@ export function PageGrid(props) {
 
 export function SectionGrid(props) {
   const classes = useStyle();
-  const { items, useDivider=false } = props;
+  const { items, useDivider = false } = props;
   return (
     <Grid
       container
@@ -357,7 +357,7 @@ export function SecretField(props) {
 }
 
 export function ConditionsTable(props) {
-  const { resource, showLastUpdate=true } = props;
+  const { resource, showLastUpdate = true } = props;
 
   function makeStatusLabel(condition) {
     let status = '';

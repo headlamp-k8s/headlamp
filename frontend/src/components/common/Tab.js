@@ -11,7 +11,7 @@ function a11yProps(index) {
 }
 
 export default function Tabs(props) {
-  const {tabs, tabProps={}, onTabChanged=null} = props;
+  const {tabs, tabProps = {}, onTabChanged = null} = props;
   const [tabIndex, setTabIndex] = React.useState(0);
 
   function handleTabChange(event, newValue) {

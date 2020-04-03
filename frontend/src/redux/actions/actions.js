@@ -23,7 +23,7 @@ export function resetFilter() {
   return { type: FILTER_RESET };
 }
 
-export function clusterAction(actionCallback, actionOptions={}) {
+export function clusterAction(actionCallback, actionOptions = {}) {
   return { type: CLUSTER_ACTION, actionCallback, ...actionOptions};
 }
 

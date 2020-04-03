@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SectionFilterHeader(props) {
-  const { noNamespaceFilter=false, noSearch=false, ...headerProps } = props;
+  const { noNamespaceFilter = false, noSearch = false, ...headerProps } = props;
   const classes = useStyles();
   const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
@@ -89,7 +89,7 @@ export default function SectionFilterHeader(props) {
             <Button
               variant="outlined"
               color="secondary"
-              endIcon={<Icon icon={filterVariantRemove} />  }
+              endIcon={<Icon icon={filterVariantRemove} /> }
               onClick={resetFilters}
             >
               Reset Filters

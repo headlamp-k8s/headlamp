@@ -20,7 +20,7 @@ const useTableStyle = makeStyles(theme => ({
 }));
 
 export default function SimpleTable(props) {
-  const {columns, data, filterFunction=null} = props;
+  const {columns, data, filterFunction = null} = props;
   const [page, setPage] = React.useState(0);
   const rowsPerPageOptions = props.rowsPerPage || [5, 10, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
@@ -63,7 +63,7 @@ export default function SimpleTable(props) {
         <Table>
           <TableHead>
             <TableRow>
-              {columns.map(({label, cellProps={}}, i) =>
+              {columns.map(({label, cellProps = {}}, i) =>
                 <TableCell
                   key={`tabletitle_${i}`}
                   className={classes.headerCell}
@@ -150,7 +150,7 @@ export function NameValueTable(props) {
       size="small"
     >
       <TableBody>
-        {rows.map(({name, value=null, nameComponent=null, valueComponent=null, hide=false}, i) => {
+        {rows.map(({name, value = null, nameComponent = null, valueComponent = null, hide = false}, i) => {
           if (hide)
             return null;
           return (

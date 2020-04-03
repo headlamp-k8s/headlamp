@@ -323,7 +323,7 @@ export function getRoutePath(route) {
   return getClusterPrefixedPath(route.path);
 }
 
-export function createRouteURL(routeName, params={}) {
+export function createRouteURL(routeName, params = {}) {
   const route = getRoute(routeName);
   let cluster = null;
   if (!route.noCluster) {

@@ -36,10 +36,10 @@ const useStyle = makeStyles(theme => ({
 export function LogViewer(props) {
   const {
     logs,
-    title='',
-    downloadName='log',
+    title = '',
+    downloadName = 'log',
     onClose,
-    topActions=[],
+    topActions = [],
     ...other
   } = props;
   const classes = useStyle();
