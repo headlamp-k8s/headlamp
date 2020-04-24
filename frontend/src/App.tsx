@@ -7,8 +7,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
-import { Provider, useSelector } from 'react-redux';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar, { useSidebarItem } from './components/Sidebar';
@@ -16,7 +16,19 @@ import { getToken } from './lib/auth';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
 import { getCluster } from './lib/util';
 import { initializePlugins } from './plugin';
+import { useTypedSelector } from './redux/reducers/reducers';
 import store from './redux/stores/store';
+
+declare module '@material-ui/core/styles/createPalette.d' {
+  interface Palette {
+    success: object;
+    [propName: string]: any;
+  }
+  interface PaletteOptions {
+    success: object;
+    [propName: string]: any;
+  }
+}
 
 const dashboardTheme = createMuiTheme({
   palette: {
@@ -53,7 +65,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 function RouteSwitcher() {
-  const routes = useSelector(state => state.ui.routes);
+  const routes = useTypedSelector(state => state.ui.routes);
 
   return (
     <Switch>
@@ -112,14 +124,22 @@ function App() {
   );
 }
 
-function AuthRoute(props) {
+interface AuthRouteProps {
+  children: React.ReactNode | JSX.Element;
+  sidebar: string | null;
+  requiresAuth: boolean;
+  requiresCluster: boolean;
+  [otherProps: string]: any;
+}
+
+function AuthRoute(props: AuthRouteProps) {
   const { children, sidebar, requiresAuth = true, requiresCluster = true, ...other } = props;
-  const clusters = useSelector(state => state.config.clusters);
+  const clusters = useTypedSelector(state => state.config.clusters);
   const redirectRoute = (!getCluster() || clusters.length === 0) ? 'chooser' : 'login';
 
   useSidebarItem(sidebar);
 
-  function getRenderer({ location }) {
+  function getRenderer({ location }: RouteProps) {
     if (!requiresAuth) {
       return children;
     }

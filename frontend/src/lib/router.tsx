@@ -39,7 +39,19 @@ import WorkloadOverview from '../components/workload/Overview';
 import store from '../redux/stores/store';
 import { getCluster, getClusterPrefixedPath } from './util';
 
-export const ROUTES = {
+export interface Route {
+  path: string;
+  exact?: boolean;
+  name?: string;
+  noCluster?: boolean;
+  noAuthRequired?: boolean;
+  sidebar: string | null;
+  component: () => JSX.Element;
+}
+
+export const ROUTES: {
+  [routeName: string]: Route;
+} = {
   cluster: {
     path: '/',
     exact: true,
@@ -311,11 +323,11 @@ export const ROUTES = {
   },
 };
 
-export function getRoute(routeName) {
+export function getRoute(routeName: string) {
   return ROUTES[routeName];
 }
 
-export function getRoutePath(route) {
+export function getRoutePath(route: Route) {
   if (route.noCluster) {
     return route.path;
   }
@@ -323,14 +335,19 @@ export function getRoutePath(route) {
   return getClusterPrefixedPath(route.path);
 }
 
-export function createRouteURL(routeName, params = {}) {
+interface RouteURLProps {
+  cluster?: string;
+  [prop: string]: any;
+}
+
+export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   const route = getRoute(routeName);
   let cluster = null;
   if (!route.noCluster) {
     cluster = getCluster();
     if (!cluster) {
       const clusters = store.getState().config.clusters;
-      cluster = clusters.length > 0 ? clusters[0] : null;
+      cluster = clusters.length > 0 ? clusters[0].name : null;
     }
   }
   const fullParams = {
