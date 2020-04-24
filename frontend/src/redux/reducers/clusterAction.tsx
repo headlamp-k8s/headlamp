@@ -1,19 +1,23 @@
 import _ from 'lodash';
-import { CLUSTER_ACTION_UPDATE } from '../actions/actions';
+import { Action, CLUSTER_ACTION_UPDATE } from '../actions/actions';
 
-export const INITIAL_STATE = {
+interface ClusterState {
+  [id: string]: any; // todo: Complete the type.
+}
+
+export const INITIAL_STATE: ClusterState = {
   // id: { message, ... } . See the ActionsNotifier.
 };
 
-function cluster(clusterActions = INITIAL_STATE, action) {
+function cluster(clusterActions = INITIAL_STATE, action: Action) {
   const {type, id, ...actionOptions} = action;
   const newState = {...clusterActions};
   switch (type) {
     case CLUSTER_ACTION_UPDATE:
       if (_.isEmpty(actionOptions)) {
-        delete newState[id];
+        delete newState[id as string];
       } else {
-        newState[id] = {...actionOptions};
+        newState[id as string] = {...actionOptions};
       }
       break;
 

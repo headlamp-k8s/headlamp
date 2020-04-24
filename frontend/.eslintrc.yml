@@ -5,6 +5,7 @@ env:
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
+parser: '@typescript-eslint/parser'
 parserOptions:
   ecmaFeatures:
     jsx: true
@@ -14,6 +15,7 @@ plugins:
 - react
 - react-hooks
 - simple-import-sort
+- '@typescript-eslint/eslint-plugin'
 rules:
   arrow-spacing:
   - 1
@@ -41,6 +43,8 @@ rules:
   computed-property-spacing:
   - 0
   - always
+  '@typescript-eslint/member-delimiter-style':
+  - 1
   no-multiple-empty-lines:
   - 1
   - max: 1

@@ -1,6 +1,31 @@
-import { UI_DETAILS_VIEW_SET_HEADER_ACTION, UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
+import { Action, UI_DETAILS_VIEW_SET_HEADER_ACTION, UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
 
-export const INITIAL_STATE = {
+interface SidebarEntry {
+  name: string;
+  [propName: string]: any;
+}
+
+interface UIState {
+  sidebar: {
+    selected: string | null;
+    isVisible: boolean;
+    entries: {
+      [propName: string]: SidebarEntry;
+    };
+  };
+  routes: {
+    [path: string]: any;
+  };
+  views: {
+    details: {
+      headerActions: {
+        [name: string]: any;
+      };
+    };
+  };
+}
+
+export const INITIAL_STATE: UIState = {
   sidebar: {
     selected: 'cluster',
     isVisible: false,
@@ -18,7 +43,7 @@ export const INITIAL_STATE = {
   }
 };
 
-function reducer(state = INITIAL_STATE, action) {
+function reducer(state = INITIAL_STATE, action: Action) {
   const newFilters = {...state};
   switch (action.type) {
     case UI_SIDEBAR_SET_SELECTED: {
@@ -54,7 +79,7 @@ function reducer(state = INITIAL_STATE, action) {
     }
     case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
       const headerActions = {...newFilters.views.details.headerActions};
-      headerActions[action.actionName] = action.action;
+      headerActions[action.actionName as string] = action.action;
       newFilters.views.details.headerActions = headerActions;
       break;
     }

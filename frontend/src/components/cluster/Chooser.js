@@ -33,7 +33,11 @@ export function ClusterTitle() {
 
   const icon = <InlineIcon icon={kubernetesIcon} width="50" height="50" color="#fff" />;
 
-  return (cluster &&
+  if (!cluster) {
+    return null;
+  }
+
+  return (
     <React.Fragment>
       {clusters.length > 1 ?
         <IconButton

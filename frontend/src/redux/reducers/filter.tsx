@@ -1,8 +1,16 @@
-import { FILTER_RESET, FILTER_SET_NAMESPACE, FILTER_SET_SEARCH } from '../actions/actions';
+import { Action, FILTER_RESET, FILTER_SET_NAMESPACE, FILTER_SET_SEARCH } from '../actions/actions';
 
-export const INITIAL_STATE = {namespaces: new Set(), search: ''};
+export interface FilterState {
+  namespaces: Set<string>;
+  search: string;
+}
 
-function filter(filters = INITIAL_STATE, action) {
+export const INITIAL_STATE: FilterState = {
+  namespaces: new Set(),
+  search: ''
+};
+
+function filter(filters = INITIAL_STATE, action: Action) {
   let newFilters = {...filters};
   switch (action.type) {
     case FILTER_SET_NAMESPACE:
