@@ -1,5 +1,5 @@
 import Box from '@material-ui/core/Box';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress, { CircularProgressProps } from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
@@ -10,7 +10,11 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Loader(props) {
+interface LoaderProps {
+  noContainer?: boolean;
+}
+
+export default function Loader(props: LoaderProps & CircularProgressProps) {
   const classes = useStyles();
   const {noContainer = false, ...other} = props;
   const progress = <CircularProgress {...other} />;
