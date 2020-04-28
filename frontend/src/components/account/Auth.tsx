@@ -9,19 +9,23 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { useTheme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Location } from 'history';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import api from '../../lib/api';
 import { setToken } from '../../lib/auth';
 import { getCluster } from '../../lib/util';
 
+interface ReactRouterLocationStateIface {
+  from?: Location;
+}
+
 function Auth() {
   const location = useLocation();
   const history = useHistory();
-  const {from} = location.state || { from: { pathname: '/' }};
+  const {from = { pathname: '/' }} = location.state as ReactRouterLocationStateIface;
   const [token, setToken] = React.useState('');
   const [showError, setShowError] = React.useState(false);
-
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -35,10 +39,6 @@ function Auth() {
         setShowError(true);
       }
     });
-  }
-
-  function handleTokenChange(event) {
-    setToken(event.target.value);
   }
 
   return (
@@ -60,7 +60,7 @@ function Auth() {
             label="ID token"
             type="password"
             value={token}
-            onChange={handleTokenChange}
+            onChange={event => setToken(event.target.value)}
             fullWidth
           />
         </DialogContent>
@@ -87,7 +87,7 @@ function Auth() {
   );
 }
 
-async function loginWithToken(token) {
+async function loginWithToken(token: string) {
   try {
     setToken(getCluster(), token);
     await api.testAuth();
