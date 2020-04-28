@@ -2,7 +2,7 @@ import fileDownloadOutline from '@iconify/icons-mdi/file-download-outline';
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
+import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -33,7 +33,15 @@ const useStyle = makeStyles(theme => ({
   }
 }));
 
-export function LogViewer(props) {
+interface LogViewerProps extends DialogProps {
+  logs: string[];
+  title?: string;
+  downloadName?: string;
+  onClose: () => void;
+  topActions?: JSX.Element[];
+}
+
+export function LogViewer(props: LogViewerProps) {
   const {
     logs,
     title = '',
@@ -43,7 +51,7 @@ export function LogViewer(props) {
     ...other
   } = props;
   const classes = useStyle();
-  const logsBottomRef = React.useRef(null);
+  const logsBottomRef = React.useRef<HTMLDivElement>(null);
 
   function downloadLog() {
     const element = document.createElement('a');
@@ -106,7 +114,7 @@ export function LogViewer(props) {
         <Box className={classes.terminal}>
           <pre>
             {logs.map((item, i) =>
-              <Ansi className={classes.terminalCode} key={i}>{item}</Ansi>
+              <Ansi className={classes.terminalCode} key={i} linkify={false}>{item}</Ansi>
             )}
           </pre>
           <div ref={logsBottomRef} />
