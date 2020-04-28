@@ -335,7 +335,7 @@ export function getRoutePath(route: Route) {
   return getClusterPrefixedPath(route.path);
 }
 
-interface RouteURLProps {
+export interface RouteURLProps {
   cluster?: string;
   [prop: string]: any;
 }
