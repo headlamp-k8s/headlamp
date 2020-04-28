@@ -35,7 +35,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function InfoLabel(props) {
+interface InfoLabelProps {
+  name: string;
+  value?: string | null;
+}
+
+export function InfoLabel(props: React.PropsWithChildren<InfoLabelProps>) {
   const classes = useStyles();
   const {name, value = null} = props;
 
@@ -61,21 +66,26 @@ export function InfoLabel(props) {
   );
 }
 
-export function NameLabel(props) {
+export function NameLabel(props: React.PropsWithChildren<{}>) {
   const classes = useStyles();
   return (
     <Typography className={classes.nameLabel} component="span">{props.children}</Typography>
   );
 }
 
-export function ValueLabel(props) {
+export function ValueLabel(props: React.PropsWithChildren<{}>) {
   const classes = useStyles();
   return (
     <Typography className={classes.valueLabel} component="span">{props.children}</Typography>
   );
 }
 
-export function StatusLabel(props) {
+export interface StatusLabelProps {
+  status: 'success' | 'warning' | 'error' | '';
+  [otherProps: string]: any;
+}
+
+export function StatusLabel(props: StatusLabelProps) {
   const { status, ...other } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -97,7 +107,7 @@ export function StatusLabel(props) {
   );
 }
 
-export function makeStatusLabel(label, successStatusName) {
+export function makeStatusLabel(label: string, successStatusName: string) {
   return (
     <StatusLabel status={label === successStatusName ? 'success' : 'error'} >
       {label}
@@ -117,7 +127,12 @@ const useHeaderLabelStyles = makeStyles(theme => ({
   },
 }));
 
-export function HeaderLabel(props) {
+interface HeaderLabelProps {
+  label: string;
+  value: string;
+}
+
+export function HeaderLabel(props: HeaderLabelProps) {
   const classes = useHeaderLabelStyles();
   const { value, label } = props;
 
@@ -144,7 +159,13 @@ export function HeaderLabel(props) {
   );
 }
 
-export function HoverInfoLabel(props) {
+interface HoverInfoLabelProps {
+  label: string;
+  hoverInfo: string | JSX.Element | undefined;
+  icon?: any;
+}
+
+export function HoverInfoLabel(props: HoverInfoLabelProps) {
   const { label, hoverInfo, icon = null } = props;
 
   return (
@@ -166,7 +187,11 @@ export function HoverInfoLabel(props) {
   );
 }
 
-export function DateLabel(props) {
+interface DateLabelProps {
+  date: number | string | Date;
+}
+
+export function DateLabel(props: DateLabelProps) {
   const { date } = props;
   return (
     <HoverInfoLabel
