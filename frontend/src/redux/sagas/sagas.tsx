@@ -1,6 +1,6 @@
 import { all, call, cancelled, delay, put, race, take, takeEvery } from 'redux-saga/effects';
 import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/util';
-import { Action, CLUSTER_ACTION, CLUSTER_ACTION_CANCEL, updateClusterAction } from '../actions/actions';
+import { Action, CallbackAction, CLUSTER_ACTION, CLUSTER_ACTION_CANCEL, updateClusterAction } from '../actions/actions';
 
 function newActionKey() {
   return (new Date().getTime() + Math.random()).toString();
@@ -10,7 +10,7 @@ function* watchClusterAction() {
   yield takeEvery(CLUSTER_ACTION, clusterActionWithCancellation);
 }
 
-function* clusterActionWithCancellation(action: Action) {
+function* clusterActionWithCancellation(action: Action & CallbackAction) {
   const actionKey = newActionKey();
   // We create a unique action type so we're sure that the cancellation
   // is done on the right actions.
@@ -21,9 +21,9 @@ function* clusterActionWithCancellation(action: Action) {
   });
 }
 
-function* doClusterAction(action: Action, actionKey: string, uniqueCancelAction: string) {
+function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCancelAction: string) {
   const {
-    actionCallback,
+    callback,
     startUrl,
     cancelUrl,
     successUrl,
@@ -65,7 +65,7 @@ function* doClusterAction(action: Action, actionKey: string, uniqueCancelAction:
       // Actually perform the action. This part is no longer cancellable,
       // so it's here instead of within the try block.
       // @todo: Handle exceptions.
-      yield call(actionCallback);
+      yield call(callback);
 
       yield put(updateClusterAction({
         id: actionKey,

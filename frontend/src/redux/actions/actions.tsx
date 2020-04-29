@@ -28,6 +28,22 @@ export interface ClusterAction {
   snackbarProps?: SnackbarProps;
 }
 
+export interface CallbackAction extends CallbackActionOptions {
+  callback: (...args: any[]) => void;
+}
+
+export interface CallbackActionOptions {
+  startUrl?: string;
+  cancelUrl?: string;
+  successUrl?: string;
+  startMessage?: string;
+  cancelledMessage?: string;
+  successMessage?: string;
+  startOptions?: SnackbarProps;
+  cancelledOptions?: SnackbarProps;
+  successOptions?: SnackbarProps;
+}
+
 export interface Action {
   type: string,
   [propName: string]: any;
@@ -45,8 +61,8 @@ export function resetFilter() {
   return { type: FILTER_RESET };
 }
 
-export function clusterAction(actionCallback: () => void, actionOptions: object = {}) {
-  return { type: CLUSTER_ACTION, actionCallback, ...actionOptions};
+export function clusterAction(callback: CallbackAction['callback'], actionOptions: CallbackActionOptions = {}) {
+  return { type: CLUSTER_ACTION, callback, ...actionOptions};
 }
 
 export function updateClusterAction(actionOptions: ClusterAction) {
