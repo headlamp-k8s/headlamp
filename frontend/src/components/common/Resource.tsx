@@ -17,11 +17,10 @@ import { KubeCondition, KubeContainer, KubeObject } from '../../lib/cluster';
 import { RouteURLProps } from '../../lib/router';
 import { localeDate } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { NameValueTable } from '../common';
 import Loader from '../common/Loader';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
-import SimpleTable from '../common/SimpleTable';
+import SimpleTable, { NameValueTable, NameValueTableRow } from '../common/SimpleTable';
 import Empty from './EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from './Label';
 import Link from './Link';
@@ -49,14 +48,11 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
   const mainRows = [
     {
       name: 'Name',
-      valueComponent:
-  <Typography variant="h6" >
-    {resource.metadata.name}
-  </Typography>,
+      value: <Typography variant="h6" >{resource.metadata.name}</Typography>,
     },
     {
       name: 'Namespace',
-      value: resource.metadata.namespace,
+      value: resource.metadata.namespace && resource.metadata.namespace,
       hide: !resource.metadata.namespace
     },
     {
@@ -69,13 +65,12 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
     },
     {
       name: 'Labels',
-      valueComponent: resource.metadata.labels &&
-        <MetadataDictGrid dict={resource.metadata.labels} />,
+      value: resource.metadata.labels && <MetadataDictGrid dict={resource.metadata.labels} />,
       hide: !resource.metadata.labels,
     },
     {
       name: 'Annotations',
-      valueComponent: resource.metadata.annotations &&
+      value: resource.metadata.annotations &&
         <MetadataDictGrid dict={resource.metadata.annotations} />,
       hide: !resource.metadata.annotations,
     },
@@ -218,7 +213,7 @@ interface MainInfoSectionProps {
   resource: KubeObject | null;
   headerSection?: JSX.Element;
   title?: string;
-  extraInfo?: JSX.Element[];
+  extraInfo?: NameValueTableRow[];
   actions?: JSX.Element[];
 }
 
@@ -246,6 +241,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
               useDivider
               items={[
                 <MetadataDisplay resource={resource} />,
+                extraInfo &&
                 <NameValueTable
                   rows={extraInfo}
                 />
@@ -484,7 +480,7 @@ export function ContainerInfo(props: {container: KubeContainer}) {
       },
       {
         name: 'Args',
-        valueComponent: container.args &&
+        value: container.args &&
           <MetadataDictGrid dict={container.args as {[index: number]: string}} showKeys={false} />,
         hide: !container.args
       },
@@ -495,7 +491,7 @@ export function ContainerInfo(props: {container: KubeContainer}) {
       },
       {
         name: 'Environment',
-        valueComponent: <MetadataDictGrid dict={env} />,
+        value: <MetadataDictGrid dict={env} />,
         hide: _.isEmpty(env),
       },
     ]);

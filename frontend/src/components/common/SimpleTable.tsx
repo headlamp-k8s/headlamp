@@ -19,18 +19,44 @@ const useTableStyle = makeStyles(theme => ({
   }
 }));
 
-export default function SimpleTable(props) {
-  const {columns, data, filterFunction = null} = props;
+interface SimpleTableColumn {
+  label: string;
+  cellProps?: {
+    [propName: string]: any;
+  };
+}
+
+interface SimpleTableDatumColumn extends SimpleTableColumn {
+  datum: string;
+}
+
+interface SimpleTableGetterColumn extends SimpleTableColumn {
+  getter: (...args: any[]) => void;
+}
+
+export interface SimpleTableProps {
+  columns: (SimpleTableGetterColumn | SimpleTableDatumColumn)[];
+  data: {
+    [dataProp: string]: any;
+    [dataProp: number]: any;
+  } | null;
+  filterFunction?: (...args: any[]) => boolean;
+  rowsPerPage?: number[];
+  emptyMessage?: string;
+}
+
+export default function SimpleTable(props: SimpleTableProps) {
+  const {columns, data, filterFunction = null, emptyMessage = null} = props;
   const [page, setPage] = React.useState(0);
   const rowsPerPageOptions = props.rowsPerPage || [5, 10, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
   const classes = useTableStyle();
 
-  function handleChangePage(event, newPage) {
+  function handleChangePage(_event: any, newPage: number) {
     setPage(newPage);
   }
 
-  function handleChangeRowsPerPage(event) {
+  function handleChangeRowsPerPage(event: any) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   }
@@ -57,7 +83,7 @@ export default function SimpleTable(props) {
 
   return (
     (!data || data.length === 0) ?
-      <Empty>{props.emptyMessage ? props.emptyMessage : 'No data to be shown.'}</Empty>
+      <Empty>{emptyMessage || 'No data to be shown.'}</Empty>
       :
       <React.Fragment>
         <Table>
@@ -76,9 +102,9 @@ export default function SimpleTable(props) {
           </TableHead>
           <TableBody>
             {filteredData.length > 0 ?
-              getPagedRows().map((row, i) =>
+              getPagedRows().map((row: any, i: number) =>
                 <TableRow key={i}>
-                  {columns.map(({datum, getter}, i) =>
+                  {columns.map((col, i) =>
                     <TableCell key={`cell_${i}`}>
                       {i === 0 && row.color &&
                       <React.Fragment>
@@ -91,7 +117,7 @@ export default function SimpleTable(props) {
                         &nbsp;
                       </React.Fragment>
                       }
-                      { datum ? row[datum] : getter(row) }
+                      { ('datum' in col) ? row[col.datum] : col.getter(row) }
                     </TableCell>
                   )}
                 </TableRow>
@@ -141,7 +167,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function NameValueTable(props) {
+export interface NameValueTableRow {
+  name: string | JSX.Element;
+  value?: string | JSX.Element;
+  hide?: boolean;
+}
+
+interface NameValueTableProps {
+  rows: NameValueTableRow[];
+}
+
+export function NameValueTable(props: NameValueTableProps) {
   const classes = useStyles();
   const { rows } = props;
 
@@ -150,26 +186,25 @@ export function NameValueTable(props) {
       size="small"
     >
       <TableBody>
-        {rows.map(({name, value = null, nameComponent = null,
-                    valueComponent = null, hide = false}, i) => {
+        {rows.map(({name, value, hide = false}, i) => {
           if (hide)
             return null;
           return (
             <TableRow key={i}>
               <TableCell className={classes.metadataNameCell}>
-                {nameComponent ?
-                  nameComponent
-                  :
+                {(typeof name === 'string') ?
                   <NameLabel>
                     {name}
                   </NameLabel>
+                  :
+                  name
                 }
               </TableCell>
               <TableCell scope="row" className={classes.metadataCell}>
-                {valueComponent ?
-                  valueComponent
-                  :
+                {(typeof value === 'string') ?
                   <ValueLabel>{value}</ValueLabel>
+                  :
+                  value
                 }
               </TableCell>
             </TableRow>
