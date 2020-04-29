@@ -59,6 +59,7 @@
     "@iconify/icons-mdi": "^1.0.36",
     "@iconify/react": "^1.1.1",
     "@types/js-yaml": "^3.12.4",
+    "@types/recharts": "^1.8.10",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-react": "^7.17.0",
