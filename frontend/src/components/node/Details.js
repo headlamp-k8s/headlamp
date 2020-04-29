@@ -148,7 +148,7 @@ function SystemInfoSection(props) {
                 },
                 {
                   name: 'OS',
-                  valueComponent: getOSComponent(node.status.nodeInfo.operatingSystem),
+                  value: getOSComponent(node.status.nodeInfo.operatingSystem),
                 },
                 {
                   name: 'Image',
