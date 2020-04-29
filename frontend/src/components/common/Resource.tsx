@@ -4,24 +4,26 @@ import menuDown from '@iconify/icons-mdi/menu-down';
 import menuUp from '@iconify/icons-mdi/menu-up';
 import { Icon } from '@iconify/react';
 import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
+import Grid, { GridProps } from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
+import Input, { InputProps } from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import TextField, { TextFieldProps } from '@material-ui/core/TextField';
+import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import _ from 'lodash';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { KubeCondition, KubeContainer, KubeObject } from '../../lib/cluster';
+import { RouteURLProps } from '../../lib/router';
 import { localeDate } from '../../lib/util';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { NameValueTable } from '../common';
 import Loader from '../common/Loader';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import Empty from './EmptyContent';
-import { DateLabel, HoverInfoLabel, StatusLabel } from './Label';
+import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from './Label';
 import Link from './Link';
 import { LightTooltip } from './Tooltip';
 
@@ -37,7 +39,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function MetadataDisplay(props) {
+interface MetadataDisplayProps {
+  resource: KubeObject;
+}
+
+export function MetadataDisplay(props: MetadataDisplayProps) {
   const { resource } = props;
 
   const mainRows = [
@@ -63,12 +69,14 @@ export function MetadataDisplay(props) {
     },
     {
       name: 'Labels',
-      valueComponent: <MetadataDictGrid dict={resource.metadata.labels} />,
+      valueComponent: resource.metadata.labels &&
+        <MetadataDictGrid dict={resource.metadata.labels} />,
       hide: !resource.metadata.labels,
     },
     {
       name: 'Annotations',
-      valueComponent: <MetadataDictGrid dict={resource.metadata.annotations} />,
+      valueComponent: resource.metadata.annotations &&
+        <MetadataDictGrid dict={resource.metadata.annotations} />,
       hide: !resource.metadata.annotations,
     },
   ];
@@ -78,18 +86,22 @@ export function MetadataDisplay(props) {
   );
 }
 
-export function MetadataDictGrid(props) {
+interface MetadataDictGridProps {
+  dict: {
+    [index: string]: string;
+    [index: number]: string;
+  };
+  showKeys?: boolean;
+}
+
+export function MetadataDictGrid(props: MetadataDictGridProps) {
   const classes = useStyles();
   const { dict, showKeys = true } = props;
   const [expanded, setExpanded] = React.useState(false);
 
-  if (!dict) {
-    return null;
-  }
-
   const keys = Object.keys(dict);
 
-  const MetadataEntry = React.forwardRef((props, ref) => {
+  const MetadataEntry = React.forwardRef((props: TypographyProps, ref) => {
     return (
       <Typography
         noWrap
@@ -100,7 +112,7 @@ export function MetadataDictGrid(props) {
     );
   });
 
-  function makeLabel(key) {
+  function makeLabel(key: string | number) {
     let fullText = dict[key];
 
     if (showKeys) {
@@ -165,10 +177,17 @@ export function MetadataDictGrid(props) {
   );
 }
 
-export function ResourceLink(props) {
+interface ResourceLinkProps {
+  name?: string;
+  routeName?: string;
+  routeParams?: RouteURLProps;
+  resource: KubeObject;
+}
+
+export function ResourceLink(props: ResourceLinkProps) {
   const {
     routeName = props.resource.kind,
-    routeParams = props.resource.metadata,
+    routeParams = props.resource.metadata as RouteURLProps,
     name = props.resource.metadata.name,
   } = props;
 
@@ -195,9 +214,17 @@ const useStyle = makeStyles(theme => ({
   }
 }));
 
-export function MainInfoSection(props) {
+interface MainInfoSectionProps {
+  resource: KubeObject | null;
+  headerSection?: React.ReactNode;
+  title?: string;
+  extraInfo?: JSX.Element[];
+  actions?: React.ReactNode[] | null;
+}
+
+export function MainInfoSection(props: MainInfoSectionProps) {
   const { resource, headerSection, title, extraInfo = [], actions = [] } = props;
-  const headerActions = useSelector(state => state.ui.views.details.headerActions);
+  const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
 
   function getHeaderActions() {
     return Object.values(headerActions).map(action => action({item: resource}));
@@ -231,7 +258,11 @@ export function MainInfoSection(props) {
   );
 }
 
-export function PageGrid(props) {
+interface PageGridProps extends GridProps {
+  sections?: React.ReactNode[];
+}
+
+export function PageGrid(props: PageGridProps) {
   const { sections = [], children = [], ...other } = props;
   const childrenArray = React.Children.toArray(children).concat(sections);
   return (
@@ -251,7 +282,12 @@ export function PageGrid(props) {
   );
 }
 
-export function SectionGrid(props) {
+interface SectionGridProps {
+  items: React.ReactNode[];
+  useDivider?: boolean;
+}
+
+export function SectionGrid(props: SectionGridProps) {
   const classes = useStyle();
   const { items, useDivider = false } = props;
   return (
@@ -288,14 +324,13 @@ export function SectionGrid(props) {
   );
 }
 
-export function DataField(props) {
+export function DataField(props: TextFieldProps) {
   const { label, value, ...other } = props;
   return (
     <TextField
       label={label}
       InputProps={{
         readOnly: true,
-        paddingLeft: '30px'
       }}
       InputLabelProps={{
         shrink: true,
@@ -303,7 +338,6 @@ export function DataField(props) {
       }}
       variant="outlined"
       fullWidth
-      shrink
       multiline
       rowsMax="20"
       value={value}
@@ -312,16 +346,12 @@ export function DataField(props) {
   );
 }
 
-export function SecretField(props) {
-  const { label, value, ...other } = props;
+export function SecretField(props: InputProps) {
+  const { value, ...other } = props;
   const [showPassword, setShowPassword] = React.useState(false);
 
   function handleClickShowPassword() {
     setShowPassword(!showPassword);
-  }
-
-  function handleMouseDownPassword(event) {
-    event.preventDefault();
   }
 
   return (
@@ -335,7 +365,7 @@ export function SecretField(props) {
           edge="end"
           aria-label="toggle field visibility"
           onClick={handleClickShowPassword}
-          onMouseDown={handleMouseDownPassword}
+          onMouseDown={event => event.preventDefault()}
         >
           <Icon icon={showPassword ? eyeOff : eyeIcon} />
         </IconButton>
@@ -343,7 +373,6 @@ export function SecretField(props) {
       <Grid item xs>
         <Input
           readOnly
-          paddingLeft="30px"
           type="password"
           fullWidth
           multiline={showPassword}
@@ -356,11 +385,16 @@ export function SecretField(props) {
   );
 }
 
-export function ConditionsTable(props) {
+interface ConditionsTableProps {
+  resource: KubeObject | null;
+  showLastUpdate?: boolean;
+}
+
+export function ConditionsTable(props: ConditionsTableProps) {
   const { resource, showLastUpdate = true } = props;
 
-  function makeStatusLabel(condition) {
-    let status = '';
+  function makeStatusLabel(condition: KubeCondition) {
+    let status: StatusLabelProps['status'] = '';
     if (condition.type === 'Available') {
       status = condition.status === 'True' ? 'success' : 'error';
     }
@@ -375,7 +409,11 @@ export function ConditionsTable(props) {
   }
 
   function getColumns() {
-    const cols = [
+    const cols: {
+      label: string;
+      getter: (arg: KubeCondition) => void;
+      hide?: boolean;
+    }[] = [
       {
         label: 'Condition',
         getter: makeStatusLabel
@@ -386,11 +424,11 @@ export function ConditionsTable(props) {
       },
       {
         label: 'Last Transition',
-        getter: condition => <DateLabel date={condition.lastTransitionTime} />,
+        getter: condition => <DateLabel date={condition.lastTransitionTime as string} />,
       },
       {
         label: 'Last Update',
-        getter: condition => condition.lastUpdateTime ? <DateLabel date={condition.lastUpdateTime} /> : '-',
+        getter: condition => condition.lastUpdateTime ? <DateLabel date={condition.lastUpdateTime as string} /> : '-',
         hide: !showLastUpdate
       },
       {
@@ -412,17 +450,17 @@ export function ConditionsTable(props) {
 
   return (
     <SimpleTable
-      data={resource && resource.status.conditions}
+      data={(resource && resource.status && resource.status.conditions) || {}}
       columns={getColumns()}
     />
   );
 }
 
-export function ContainerInfo(props) {
+export function ContainerInfo(props: {container: KubeContainer}) {
   const {container} = props;
 
   function containerRows() {
-    const env = {};
+    const env: { [name: string]: string } = {};
     (container.env || []).forEach(envVar => {
       let value = '';
 
@@ -446,7 +484,8 @@ export function ContainerInfo(props) {
       },
       {
         name: 'Args',
-        valueComponent: <MetadataDictGrid dict={container.args} showKeys={false} />,
+        valueComponent: container.args &&
+          <MetadataDictGrid dict={container.args as {[index: number]: string}} showKeys={false} />,
         hide: !container.args
       },
       {
@@ -478,7 +517,7 @@ export function ContainerInfo(props) {
   );
 }
 
-export function ContainersSection(props) {
+export function ContainersSection(props: {resource: KubeObject | null}) {
   const { resource } = props;
 
   function getContainers() {
@@ -486,7 +525,7 @@ export function ContainersSection(props) {
       return [];
     }
 
-    let containers = [];
+    let containers: KubeContainer[] = [];
 
     if (resource.spec) {
       if (resource.spec.containers) {
@@ -509,7 +548,7 @@ export function ContainersSection(props) {
       {_.isEmpty(containers) ?
         <Empty>No containers to show</Empty>
         :
-        containers.map((container, i) => {
+        containers.map((container: any, i: number) => {
           return (
             <React.Fragment key={i}>
               <SectionBox>
@@ -523,8 +562,12 @@ export function ContainersSection(props) {
   );
 }
 
-export function ReplicasSection(props) {
+export function ReplicasSection(props: {resource: KubeObject | null }) {
   const { resource } = props;
+
+  if (!resource) {
+    return null;
+  }
 
   return (
     <Paper>
