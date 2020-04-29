@@ -1,20 +1,33 @@
 import Tab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
+import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import React from 'react';
 
-function a11yProps(index) {
+function a11yProps(index: number) {
   return {
     id: `full-width-tab-${index}`,
     'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
-export default function Tabs(props) {
+export interface Tab {
+  label: string;
+  component: JSX.Element | JSX.Element[];
+}
+
+interface TabsProps {
+  tabs: Tab[];
+  tabProps?: {
+    [propName: string]: any;
+  };
+  onTabChanged?: (tabIndex: number) => void;
+}
+
+export default function Tabs(props: TabsProps) {
   const {tabs, tabProps = {}, onTabChanged = null} = props;
   const [tabIndex, setTabIndex] = React.useState(0);
 
-  function handleTabChange(event, newValue) {
+  function handleTabChange(event: any, newValue: number) {
     setTabIndex(newValue);
 
     if (onTabChanged !== null) {
@@ -53,8 +66,13 @@ export default function Tabs(props) {
   );
 }
 
-export function TabPanel(props) {
-  const { label, children, tabIndex, index, ...other } = props;
+interface TabPanelProps extends TypographyProps {
+  tabIndex: number;
+  index: number;
+}
+
+export function TabPanel(props: TabPanelProps) {
+  const { children, tabIndex, index, ...other } = props;
 
   return (
     <Typography
