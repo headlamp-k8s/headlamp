@@ -5,10 +5,11 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { resetFilter, setSearchFilter } from '../../redux/actions/actions';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { NamespacesAutocomplete } from './Autocomplete';
-import SectionHeader from './SectionHeader';
+import SectionHeader, { SectionHeaderProps } from './SectionHeader';
 
 const useStyles = makeStyles(theme => ({
   filterAction: {
@@ -16,10 +17,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SectionFilterHeader(props) {
+interface SectionFilterHeaderProps extends SectionHeaderProps {
+  noNamespaceFilter?: boolean;
+  noSearch?: boolean;
+}
+
+export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   const { noNamespaceFilter = false, noSearch = false, ...headerProps } = props;
   const classes = useStyles();
-  const filter = useSelector(state => state.filter);
+  const filter = useTypedSelector(state => state.filter);
   const dispatch = useDispatch();
 
   function resetFilters() {
@@ -36,7 +42,7 @@ export default function SectionFilterHeader(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   []);
 
-  const hasNamespaceFilters = !noNamespaceFilter && [...filter.namespaces.values()].length > 0;
+  const hasNamespaceFilters = !noNamespaceFilter && filter.namespaces.size > 0;
   const hasSearch = !noSearch && filter.search;
 
   const actions = [
