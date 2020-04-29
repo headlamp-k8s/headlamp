@@ -18,6 +18,7 @@
     "javascript-time-ago": "^2.0.4",
     "js-base64": "^2.5.1",
     "js-cookie": "^2.2.1",
+    "js-yaml": "^3.14.0",
     "lodash": "^4.17.15",
     "monaco-editor": "^0.19.0",
     "notistack": "^0.9.7",
@@ -33,8 +34,7 @@
     "redux-saga": "^1.1.3",
     "swagger-parser": "^8.0.3",
     "typescript": "^3.8.3",
-    "xterm": "^4.3.0",
-    "yaml": "^1.7.2"
+    "xterm": "^4.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -58,6 +58,7 @@
   "devDependencies": {
     "@iconify/icons-mdi": "^1.0.36",
     "@iconify/react": "^1.1.1",
+    "@types/js-yaml": "^3.12.4",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-react": "^7.17.0",

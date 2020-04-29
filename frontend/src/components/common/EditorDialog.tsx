@@ -3,7 +3,7 @@ import chevronRight from '@iconify/icons-mdi/chevron-right';
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
+import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -11,10 +11,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
+import * as yaml from 'js-yaml';
 import _ from 'lodash';
 import React from 'react';
 import MonacoEditor from 'react-monaco-editor';
-import yaml from 'yaml';
+import { KubeObject } from '../../lib/cluster';
 import getDocDefinitions from '../../lib/docs';
 import ConfirmButton from './ConfirmButton';
 import Empty from './EmptyContent';
@@ -46,7 +47,13 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
-export default function EditorDialog(props) {
+interface EditorDialogProps extends DialogProps{
+  item: KubeObject | null;
+  onClose: () => void;
+  onSave: ((...args: any[]) => void) | null;
+}
+
+export default function EditorDialog(props: EditorDialogProps) {
   const { item, onClose, onSave, ...other } = props;
   const editorOptions = {
     selectOnLineNumbers: true,
@@ -55,7 +62,7 @@ export default function EditorDialog(props) {
   const classes = useStyle();
   const [originalCode, setOriginalCode] = React.useState('');
   const [code, setCode] = React.useState(originalCode);
-  const [previousVersion, setPreviousVersion] = React.useState(0);
+  const [previousVersion, setPreviousVersion] = React.useState('');
   const [error, setError] = React.useState('');
   const [docSpecs, setDocSpecs] = React.useState({});
 
@@ -64,15 +71,15 @@ export default function EditorDialog(props) {
       return;
     }
 
-    const itemCode = yaml.stringify(item);
+    const itemCode = yaml.dump(item);
     if (itemCode !== originalCode) {
       setOriginalCode(itemCode);
     }
 
     // Only change if the code hasn't been touched.
-    if (previousVersion < item.metadata.resourceVersion || code === originalCode) {
+    if (previousVersion !== item.metadata.resourceVersion || code === originalCode) {
       setCode(itemCode);
-      if (previousVersion < item.metadata.resourceVersion) {
+      if (previousVersion !== item.metadata.resourceVersion) {
         setPreviousVersion(item.metadata.resourceVersion);
       }
     }
@@ -83,7 +90,7 @@ export default function EditorDialog(props) {
     return onSave === null;
   }
 
-  function onChange(newValue, e) {
+  function onChange(newValue: string) {
     setCode(newValue);
 
     if (error && getObjectFromCode(newValue)) {
@@ -91,18 +98,18 @@ export default function EditorDialog(props) {
     }
   }
 
-  function getObjectFromCode(code) {
+  function getObjectFromCode(code: string): KubeObject | null {
     let codeObj = {};
     try {
-      codeObj = yaml.parse(code);
+      codeObj = yaml.load(code);
     } catch (e) {
-      codeObj = null;
+      return null;
     }
 
-    return codeObj;
+    return codeObj as KubeObject;
   }
 
-  function handleTabChange(tabIndex) {
+  function handleTabChange(tabIndex: number) {
     // Check if the docs tab has been selected.
     if (tabIndex !== 1) {
       return;
@@ -110,7 +117,7 @@ export default function EditorDialog(props) {
 
     const codeObj = getObjectFromCode(code);
 
-    const {kind, apiVersion} = codeObj || {};
+    const {kind, apiVersion} = (codeObj || {}) as KubeObject;
     if (codeObj === null || (!!kind && !!apiVersion)) {
       setDocSpecs({
         error: codeObj === null,
@@ -131,7 +138,7 @@ export default function EditorDialog(props) {
       return;
     }
 
-    onSave(getObjectFromCode(code));
+    onSave!(getObjectFromCode(code));
   }
 
   function makeEditor() {
@@ -155,7 +162,6 @@ export default function EditorDialog(props) {
       scroll="paper"
       fullWidth
       onBackdropClick={onClose}
-      className={classes.dialog}
       {...other}
     >
       {!item ?
@@ -239,7 +245,7 @@ export default function EditorDialog(props) {
   );
 }
 
-export function ViewDialog(props) {
+export function ViewDialog(props: Omit<EditorDialogProps, 'onSave'>) {
   return (
     <EditorDialog
       {...props}
@@ -256,10 +262,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function DocsViewer(props) {
+// @todo: Declare strict types.
+function DocsViewer(props: {docSpecs: any}) {
   const { docSpecs } = props;
   const classes = useStyles();
-  const [docs, setDocs] = React.useState(null);
+  const [docs, setDocs] = React.useState<object | null>(null);
 
   React.useEffect(() => {
     if (!docSpecs.apiVersion || !docSpecs.kind) {
@@ -268,12 +275,12 @@ function DocsViewer(props) {
 
     getDocDefinitions(docSpecs.apiVersion, docSpecs.kind)
       .then(result => {
-        setDocs(result ? result.properties : {});
+        setDocs(result?.properties || {});
       });
   },
   [docSpecs]);
 
-  function makeItems(name, value, key) {
+  function makeItems(name: string, value: any, key: string) {
     return (
       <TreeItem
         key={key}
@@ -317,7 +324,9 @@ function DocsViewer(props) {
               defaultCollapseIcon={<Icon icon={chevronDown} />}
               defaultExpandIcon={<Icon icon={chevronRight} />}
             >
-              {Object.entries(docs).map(([name, value], i) => makeItems(name, value, i))}
+              {Object.entries(docs || {})
+                .map(([name, value], i) => makeItems(name, value, i.toString()))
+              }
             </TreeView>
           </Box>
   );
