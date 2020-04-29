@@ -1,8 +1,17 @@
-import Button from '@material-ui/core/Button';
+import Button, { ButtonProps } from '@material-ui/core/Button';
 import React from 'react';
 import { ConfirmDialog } from './Dialog';
 
-export default function ConfirmButton(props) {
+interface ConfirmButtonProps extends ButtonProps {
+  buttonComponent?: typeof Button;
+  ariaLabel?: string;
+  confirmTitle: string;
+  confirmDescription: string;
+  onConfirm: (...args: any[]) => void;
+  [otherProps: string]: any;
+}
+
+export default function ConfirmButton(props: ConfirmButtonProps) {
   const {
     buttonComponent,
     ariaLabel,
