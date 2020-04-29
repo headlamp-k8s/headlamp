@@ -6,10 +6,17 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import api from '../../lib/api';
-import { clusterAction } from '../../redux/actions/actions';
+import { KubeObject } from '../../lib/cluster';
+import { CallbackAction, CallbackActionOptions, clusterAction } from '../../redux/actions/actions';
 import { ConfirmDialog } from './Dialog';
 
-export default function DeleteButton(props) {
+interface DeleteButtonProps {
+  item?: KubeObject;
+  deletionCallback: CallbackAction['callback'];
+  options?: CallbackActionOptions;
+}
+
+export default function DeleteButton(props: DeleteButtonProps) {
   const dispatch = useDispatch();
   const { item, deletionCallback, options } = props;
   const [openAlert, setOpenAlert] = React.useState(false);
@@ -19,7 +26,7 @@ export default function DeleteButton(props) {
   React.useEffect(() => {
     if (item && item.metadata) {
       api.getAuthorization(item, 'delete').then(
-        result => {
+        (result: any) => {
           if (result.status.allowed) {
             setVisible(true);
           }
@@ -29,7 +36,11 @@ export default function DeleteButton(props) {
   },
   [item]);
 
-  return visible && (
+  if (!visible) {
+    return null;
+  }
+
+  return (
     <React.Fragment>
       <Tooltip title="Delete">
         <IconButton
@@ -47,9 +58,9 @@ export default function DeleteButton(props) {
         onConfirm={() => {
           dispatch(clusterAction(deletionCallback,
             {
-              startMessage: `Deleting item ${item.metadata.name}…`,
-              cancelledMessage: `Cancelled deleting ${item.metadata.name}.`,
-              successMessage: `Deleted item ${item.metadata.name}.`,
+              startMessage: `Deleting item ${item!.metadata.name}…`,
+              cancelledMessage: `Cancelled deleting ${item!.metadata.name}.`,
+              successMessage: `Deleted item ${item!.metadata.name}.`,
               cancelUrl: location.pathname,
               ...options
             }
