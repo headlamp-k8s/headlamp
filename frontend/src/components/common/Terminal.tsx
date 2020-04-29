@@ -1,6 +1,6 @@
 import 'xterm/css/xterm.css';
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
+import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { Terminal as XTerminal } from 'xterm';
 import api from '../../lib/api';
+import { KubeContainer, KubeObject } from '../../lib/cluster';
 
 const decoder = new TextDecoder('utf-8');
 const encoder = new TextEncoder();
@@ -27,17 +28,27 @@ const useStyle = makeStyles(theme => ({
   }
 }));
 
-export default function Terminal(props) {
+interface TerminalProps extends DialogProps {
+  item: KubeObject & {
+    spec: {
+      containers: KubeContainer[];
+    };
+  };
+  onClose?: () => void;
+}
+
+export default function Terminal(props: TerminalProps) {
   const { item, onClose, ...other } = props;
   const classes = useStyle();
-  const [terminalContainerRef, setTerminalContainerRef] = React.useState(null);
-  const [container, setContainer] = React.useState(null);
+  const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
+  const [container, setContainer] = React.useState<string | null>(null);
 
   function getDefaultContainer() {
     return (item.spec.containers.length > 0) ? item.spec.containers[0].name : '';
   }
 
-  function setupTerminal(containerRef, xterm, exec) {
+  // @todo: Give the real exec type when we have it.
+  function setupTerminal(containerRef: HTMLElement, xterm: XTerminal, exec: any) {
     if (!containerRef) {
       return;
     }
@@ -59,7 +70,8 @@ export default function Terminal(props) {
     });
   }
 
-  function send(data, exec) {
+  // @todo: Give the real exec type when we have it.
+  function send(data: string, exec: any) {
     const socket = exec.getSocket();
 
     // We should only send data if the socket is ready.
@@ -74,7 +86,7 @@ export default function Terminal(props) {
     socket.send(buffer);
   }
 
-  function onData(xterm, bytes) {
+  function onData(xterm: XTerminal, bytes: ArrayBuffer) {
     // The first byte is discarded because it just identifies whether
     // this data is from stderr, stdout, or stdin.
     const data = bytes.slice(1);
@@ -105,7 +117,7 @@ export default function Terminal(props) {
     const exec = api.exec(item.metadata.namespace,
                           item.metadata.name,
                           container,
-                          items => onData(xterm, items));
+                          (items: ArrayBuffer) => onData(xterm, items));
 
     setupTerminal(terminalContainerRef, xterm, exec);
 
@@ -125,7 +137,7 @@ export default function Terminal(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   [props.open]);
 
-  function handleContainerChange(event) {
+  function handleContainerChange(event: any) {
     setContainer(event.target.value);
   }
 
