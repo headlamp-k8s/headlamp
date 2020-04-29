@@ -9,7 +9,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SectionHeader(props) {
+export interface SectionHeaderProps {
+  title: string;
+  actions?: React.ReactNode[] | null;
+}
+
+export default function SectionHeader(props: SectionHeaderProps) {
   const classes = useStyles();
   const actions = props.actions || [];
 
