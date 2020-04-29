@@ -2,7 +2,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 
-export default function Empty(props) {
+export default function Empty(props: React.PropsWithChildren<{}>) {
   return (
     <Box padding={2}>
       {React.Children.map(props.children, child => {
