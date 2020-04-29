@@ -2,17 +2,19 @@ import Button from '@material-ui/core/Button';
 import _ from 'lodash';
 import { useSnackbar } from 'notistack';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/util';
+import { ClusterAction } from '../../redux/actions/actions';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 
 export default function ActionsNotifier() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const history = useHistory();
-  const clusterActions = useSelector(state => state.clusterAction);
+  const clusterActions = useTypedSelector(state => state.clusterAction);
 
-  function handleAction(clusterAction) {
+  function handleAction(clusterAction: ClusterAction) {
     if (_.isEmpty(clusterAction)) {
       return;
     }
@@ -21,7 +23,7 @@ export default function ActionsNotifier() {
       history.push(clusterAction.url);
     }
 
-    const action = _key => (
+    const action = () => (
       <React.Fragment>
         {(clusterAction.buttons || []).map(({label, actionToDispatch}, i) =>
           <Button
