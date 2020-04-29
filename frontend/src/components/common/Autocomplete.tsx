@@ -8,17 +8,19 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeObject } from '../../lib/cluster';
 import { setNamespaceFilter } from '../../redux/actions/actions';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 
 // @todo: This is using Autcomplete from Material-UI's lab, but we should instead replace it
 // by a fully custom solution, as getting the input to behave the way we intended proved difficult
 // and not worth of pulling the extra dependencies.
-export function NamespacesAutocomplete(props) {
+export function NamespacesAutocomplete() {
   const theme = useTheme();
-  const filter = useSelector(state => state.filter);
-  const [namespaces, setNamespaces] = React.useState([]);
+  const filter = useTypedSelector(state => state.filter);
+  const [namespaces, setNamespaces] = React.useState<KubeObject[]>([]);
 
   useConnectApi(
     api.namespace.list.bind(null, setNamespaces),
@@ -26,7 +28,7 @@ export function NamespacesAutocomplete(props) {
 
   const dispatch = useDispatch();
 
-  function renderTags(tags) {
+  function renderTags(tags: string[]) {
     let jointTags = tags.join(', ');
     if (jointTags.length > 15) {
       jointTags = jointTags.slice(0, 15) + '…';
