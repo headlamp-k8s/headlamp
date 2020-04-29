@@ -24,7 +24,26 @@ const useStyle = makeStyles(theme => ({
   }
 }));
 
-export function PercentageCircle(props) {
+export interface ChartDataPoint {
+  name: string;
+  value: number;
+  fill?: string;
+}
+
+export interface PercentageCircleProps {
+  data: ChartDataPoint[];
+  size?: number;
+  dataKey?: string;
+  label?: string;
+  title?: string | null;
+  legend?: string | null;
+  total?: number;
+  totalProps?: {
+    [propName: string]: any;
+  }
+}
+
+export function PercentageCircle(props: PercentageCircleProps) {
   const theme = useTheme();
   const classes = useStyle();
   const {
@@ -105,8 +124,6 @@ export function PercentageCircle(props) {
             fill={theme.palette.primary.main}
           >
             <Label
-              cx={chartSize / 2}
-              cy={chartSize / 2}
               value={label}
               position="center"
               style={{
@@ -133,7 +150,13 @@ const useBarStyle = makeStyles(theme => ({
   },
 }));
 
-export function PercentageBar(props) {
+interface PercentageBarProps {
+  data: ChartDataPoint[];
+  total?: number;
+  tooltipFunc?: ((data: any) => JSX.Element | string) | null;
+}
+
+export function PercentageBar(props: PercentageBarProps) {
   const classes = useBarStyle();
   const theme = useTheme();
 
@@ -144,7 +167,7 @@ export function PercentageBar(props) {
   } = props;
 
   function formatData() {
-    const dataItems = {};
+    const dataItems: {[name: string]: number} = {};
 
     data.forEach(item => {
       dataItems[item.name] = item.value / total * 100;
@@ -188,7 +211,7 @@ export function PercentageBar(props) {
   );
 }
 
-function PaperTooltip(props) {
+function PaperTooltip(props: React.PropsWithChildren<{}>) {
   return (
     <Paper className="custom-tooltip">
       <Box m={1}>
