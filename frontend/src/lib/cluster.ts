@@ -123,3 +123,7 @@ export interface KubeEvent {
   }
   [otherProps: string]: any;
 }
+
+export interface KubeConfigMap extends KubeObject {
+  data: StringDict;
+}

@@ -1,6 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeConfigMap } from '../../lib/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
@@ -8,7 +9,7 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ConfigMapList() {
-  const [configMaps, setConfigMaps] = React.useState(null);
+  const [configMaps, setConfigMaps] = React.useState<KubeConfigMap[] | null>(null);
   const filterFunc = useFilterFunc();
 
   useConnectApi(
