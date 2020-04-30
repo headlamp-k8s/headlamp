@@ -1,5 +1,21 @@
 import Registry from './registry';
 
+abstract class Plugin {
+    abstract initialize(register: Registry): boolean;
+}
+
+declare global {
+  interface Window {
+    pluginLib: {
+      [libName: string]: any;
+    };
+    plugins: {
+      [pluginId: string]: Plugin;
+    };
+    registerPlugin: (pluginId: string, pluginObj: Plugin) => void;
+  }
+}
+
 window.pluginLib = {
   API: require('../lib/api'),
   CommonComponents: require('../components/common'),
@@ -12,7 +28,7 @@ window.pluginLib = {
 
 window.plugins = {};
 
-function registerPlugin(pluginId, pluginObj) {
+function registerPlugin(pluginId: string, pluginObj: Plugin) {
   window.plugins[pluginId] = pluginObj;
 }
 
