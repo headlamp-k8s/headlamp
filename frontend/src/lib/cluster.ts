@@ -102,3 +102,20 @@ interface KubeContainerProbe {
   successThreshold?: number;
   failureThreshold?: number;
 }
+
+export interface KubeEvent {
+  type: string;
+  reason: string;
+  message: string;
+  metadata: KubeMetadata;
+  involvedObject: {
+    kind: string;
+    namespace: string;
+    name: string;
+    uid: string;
+    apiVersion: string;
+    resourceVersion: string;
+    fieldPath: string;
+  };
+  [otherProps: string]: any;
+}

@@ -1,13 +1,22 @@
 import { useTheme } from '@material-ui/core/styles';
 import _ from 'lodash';
 import React from 'react';
+import { KubeObject } from '../../lib/cluster';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
-import { PercentageCircle } from '../common/Chart';
+import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
 
-export function ResourceCircularChart(props) {
+interface ResourceCircularChartProps extends Omit<PercentageCircleProps, 'data'> {
+  items: KubeObject[] | null;
+  itemsMetrics: any;
+  resourceUsedGetter?: (node: KubeObject) => number;
+  resourceAvailableGetter?: (node: KubeObject) => number;
+  getLegend?: (used: number, available: number) => string;
+}
+
+export function ResourceCircularChart(props: ResourceCircularChartProps) {
   const {
-    nodes,
-    nodesMetrics,
+    items,
+    itemsMetrics,
     resourceUsedGetter,
     resourceAvailableGetter,
     ...others
@@ -15,7 +24,7 @@ export function ResourceCircularChart(props) {
 
   const [used, available] = getResourceUsage();
 
-  function filterMetrics(items, metrics) {
+  function filterMetrics(items: KubeObject[], metrics: any[]) {
     if (!items || !metrics)
       return [];
 
@@ -31,12 +40,12 @@ export function ResourceCircularChart(props) {
   }
 
   function getResourceUsage() {
-    if (!nodes)
+    if (!items)
       return [-1, -1];
 
-    const nodeMetrics = filterMetrics(nodes, nodesMetrics);
+    const nodeMetrics = filterMetrics(items, itemsMetrics);
     const usedValue = _.sumBy(nodeMetrics, resourceUsedGetter);
-    const availableValue = _.sumBy(nodes, resourceAvailableGetter);
+    const availableValue = _.sumBy(items, resourceAvailableGetter);
 
     return [usedValue, availableValue];
   }
@@ -60,23 +69,23 @@ export function ResourceCircularChart(props) {
       data={makeData()}
       total={available}
       label={getLabel()}
-      legend={props.getLegend(used, available)}
+      legend={props.getLegend!(used, available)}
     />
   );
 }
 
-export function MemoryCircularChart(props) {
-  function memoryUsedGetter(item) {
+export function MemoryCircularChart(props: ResourceCircularChartProps) {
+  function memoryUsedGetter(item: KubeObject) {
     return parseRam(item.usage.memory) / TO_GB;
   }
 
-  function memoryAvailableGetter(item) {
-    return parseRam(item.status.capacity.memory) / TO_GB;
+  function memoryAvailableGetter(item: KubeObject) {
+    return parseRam(item.status!.capacity.memory) / TO_GB;
   }
 
-  function getLegend(used, available) {
+  function getLegend(used: number, available: number) {
     if (available === 0) {
-      return null;
+      return '';
     }
 
     return `${used.toFixed(2)} / ${available.toFixed(2)} GB`;
@@ -93,18 +102,18 @@ export function MemoryCircularChart(props) {
   );
 }
 
-export function CpuCircularChart(props) {
-  function cpuUsedGetter(item) {
+export function CpuCircularChart(props: ResourceCircularChartProps) {
+  function cpuUsedGetter(item: KubeObject) {
     return parseCpu(item.usage.cpu) / TO_ONE_CPU;
   }
 
-  function cpuAvailableGetter(item) {
-    return parseCpu(item.status.capacity.cpu) / TO_ONE_CPU;
+  function cpuAvailableGetter(item: KubeObject) {
+    return parseCpu(item.status!.capacity.cpu) / TO_ONE_CPU;
   }
 
-  function getLegend(used, available) {
+  function getLegend(used: number, available: number) {
     if (available === 0) {
-      return null;
+      return '';
     }
 
     return `${used.toFixed(2)} / ${available} units`;
@@ -121,29 +130,29 @@ export function CpuCircularChart(props) {
   );
 }
 
-export function PodsStatusCircleChart(props) {
+export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'items'>) {
   const theme = useTheme();
-  const { pods } = props;
+  const { items } = props;
 
-  const podsReady = (pods || []).filter(pod => ['Running', 'Succeeded'].includes(pod.status.phase));
+  const podsReady = (items || []).filter(pod => ['Running', 'Succeeded'].includes(pod.status!.phase));
 
   function getLegend() {
-    if (pods === null) {
+    if (items === null) {
       return null;
     }
-    return `${podsReady.length} / ${pods.length} Requested`;
+    return `${podsReady.length} / ${items.length} Requested`;
   }
 
   function getLabel() {
-    if (pods === null) {
+    if (items === null) {
       return '…';
     }
-    const percentage = (podsReady.length / pods.length * 100).toFixed(1);
+    const percentage = (podsReady.length / items.length * 100).toFixed(1);
     return `${percentage} %`;
   }
 
   function getData() {
-    if (pods === null) {
+    if (items === null) {
       return [];
     }
 
@@ -154,7 +163,7 @@ export function PodsStatusCircleChart(props) {
       },
       {
         name: 'notReady',
-        value: pods.length - podsReady.length,
+        value: items.length - podsReady.length,
         fill: theme.palette.error.main
       }
     ];
@@ -163,7 +172,7 @@ export function PodsStatusCircleChart(props) {
   return (
     <PercentageCircle
       data={getData()}
-      total={pods !== null ? pods.length : -1}
+      total={items !== null ? items.length : -1}
       label={getLabel()}
       title="Pods"
       legend={getLegend()}

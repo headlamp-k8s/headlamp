@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeEvent } from '../../lib/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { StatusLabel } from '../common';
 import { SectionBox } from '../common/SectionBox';
@@ -12,7 +13,7 @@ import SimpleTable from '../common/SimpleTable';
 import { LightTooltip } from '../common/Tooltip';
 import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './Charts';
 
-export default function Overview(props) {
+export default function Overview() {
   const [pods, setPods] = React.useState(null);
   const [events, setEvents] = React.useState(null);
   const [nodes, setNodes] = React.useState(null);
@@ -43,19 +44,19 @@ export default function Overview(props) {
             >
               <Grid item>
                 <CpuCircularChart
-                  nodes={nodes}
-                  nodesMetrics={nodeMetrics}
+                  items={nodes}
+                  itemsMetrics={nodeMetrics}
                 />
               </Grid>
               <Grid item>
                 <MemoryCircularChart
-                  nodes={nodes}
-                  nodesMetrics={nodeMetrics}
+                  items={nodes}
+                  itemsMetrics={nodeMetrics}
                 />
               </Grid>
               <Grid item>
                 <PodsStatusCircleChart
-                  pods={pods}
+                  items={pods}
                 />
               </Grid>
             </Grid>
@@ -69,13 +70,13 @@ export default function Overview(props) {
   );
 }
 
-function EventsSection(props) {
+function EventsSection(props: { events: KubeEvent[] | null }) {
   const { events } = props;
   const filterFunc = useFilterFunc();
 
-  function makeStatusLabel(event) {
+  function makeStatusLabel(event: KubeEvent) {
     return (
-      <StatusLabel status={event.type === 'Normal' ? null : 'warning'} >
+      <StatusLabel status={event.type === 'Normal' ? '' : 'warning'} >
         {event.reason}
       </StatusLabel>
     );
@@ -92,7 +93,7 @@ function EventsSection(props) {
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
           filterFunction={filterFunc}
-          columns={events && [
+          columns={events ? [
             {
               label: 'Type',
               getter: event => event.involvedObject.kind
@@ -116,8 +117,11 @@ function EventsSection(props) {
                   <Box>{makeStatusLabel(event)}</Box>
                 </LightTooltip>,
             },
-          ]}
-          data={events}
+          ]
+            :
+            []
+          }
+          data={events || []}
         />
       </SectionBox>
     </Paper>

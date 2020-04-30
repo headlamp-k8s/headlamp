@@ -92,14 +92,14 @@ function ChartsSection(props) {
       </Grid>
       <Grid item>
         <CpuCircularChart
-          nodes={[node]}
-          nodesMetrics={metrics}
+          items={[node]}
+          itemsMetrics={metrics}
         />
       </Grid>
       <Grid item>
         <MemoryCircularChart
-          nodes={[node]}
-          nodesMetrics={metrics}
+          items={[node]}
+          itemsMetrics={metrics}
         />
       </Grid>
     </Grid>
