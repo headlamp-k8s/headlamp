@@ -13,12 +13,14 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
 import { useHistory, useLocation } from 'react-router-dom';
 import api from '../../lib/api';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { setConfig } from '../../redux/actions/actions';
+import { Cluster } from '../../redux/reducers/config';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import Loader from '../common/Loader';
 
 export function ClusterTitle() {
@@ -28,7 +30,7 @@ export function ClusterTitle() {
   useLocation();
 
   const cluster = getCluster();
-  const clusters = useSelector(state => state.config.clusters);
+  const clusters = useTypedSelector(state => state.config.clusters);
   const [showChooser, setShowChooser] = React.useState(false);
 
   const icon = <InlineIcon icon={kubernetesIcon} width="50" height="50" color="#fff" />;
@@ -75,9 +77,14 @@ const useClusterButtonStyles = makeStyles({
   },
 });
 
-function ClusterButton(props) {
+interface ClusterButtonProps {
+  cluster: Cluster;
+  onClick?: ((...args: any[]) => void);
+}
+
+function ClusterButton(props: ClusterButtonProps) {
   const classes = useClusterButtonStyles();
-  const {cluster, onClick = null} = props;
+  const {cluster, onClick = undefined} = props;
 
   return (
     <ButtonBase
@@ -87,7 +94,7 @@ function ClusterButton(props) {
       <Card className={classes.root}>
         <CardContent className={classes.content}>
           <Icon icon={kubernetesIcon} width="50" height="50" color="#000" />
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
+          <Typography color="textSecondary" gutterBottom>
             {cluster.name}
           </Typography>
         </CardContent>
@@ -96,7 +103,12 @@ function ClusterButton(props) {
   );
 }
 
-function ClusterList(props) {
+interface ClusterListProps {
+  clusters: Cluster[];
+  onButtonClick: (cluster: Cluster) => void;
+}
+
+function ClusterList(props: ClusterListProps) {
   const {clusters, onButtonClick} = props;
 
   return (
@@ -117,13 +129,19 @@ function ClusterList(props) {
   );
 }
 
-function Chooser(props) {
+interface ChooserProps {
+  open?: boolean;
+  title?: string;
+  onClose?: (() => void) | null;
+}
+
+function Chooser(props: ChooserProps) {
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const history = useHistory();
   const dispatch = useDispatch();
-  const clusters = useSelector(state => state.config.clusters);
+  const clusters = useTypedSelector(state => state.config.clusters);
   const {open = true, title = 'Welcome', onClose = null} = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
@@ -163,7 +181,7 @@ function Chooser(props) {
     }
   }
 
-  function handleButtonClick(cluster) {
+  function handleButtonClick(cluster: Cluster) {
     history.push({pathname: generatePath(getClusterPrefixedPath(), {cluster: cluster.name})});
     handleClose();
   }
