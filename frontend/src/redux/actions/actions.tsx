@@ -49,6 +49,8 @@ export interface Action {
   [propName: string]: any;
 }
 
+export type HeaderActionFunc = (...args: any[]) => JSX.Element | null;
+
 export function setNamespaceFilter(namespaces: string[]) {
   return { type: FILTER_SET_NAMESPACE, namespaces: namespaces };
 }
@@ -90,7 +92,7 @@ export function setRoute(routeSpec: any) {
   return { type: UI_ROUTER_SET_ROUTE, route: routeSpec};
 }
 
-export function setDetailsViewHeaderAction(actionName: string, actionFunc: () => void) {
+export function setDetailsViewHeaderAction(actionName: string, actionFunc: HeaderActionFunc) {
   return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, name: actionName, action: actionFunc};
 }
 
