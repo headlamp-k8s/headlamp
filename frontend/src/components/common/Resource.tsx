@@ -513,7 +513,7 @@ export function ContainerInfo(props: {container: KubeContainer}) {
   );
 }
 
-export function ContainersSection(props: {resource: KubeObject}) {
+export function ContainersSection(props: {resource: KubeObject | null}) {
   const { resource } = props;
 
   function getContainers() {
