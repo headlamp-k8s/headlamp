@@ -342,8 +342,12 @@ export interface RouteURLProps {
 
 export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   const route = getRoute(routeName);
-  let cluster: string | null = null;
 
+  if (!route) {
+    return '';
+  }
+
+  let cluster: string | null = null;
   if (!route.noCluster) {
     cluster = getCluster();
     if (!cluster) {
