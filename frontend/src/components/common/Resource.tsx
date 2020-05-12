@@ -255,7 +255,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
 }
 
 interface PageGridProps extends GridProps {
-  sections: JSX.Element[];
+  sections?: React.ReactNode[];
 }
 
 export function PageGrid(props: PageGridProps) {
