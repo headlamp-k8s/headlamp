@@ -1,4 +1,5 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
+import { SidebarEntry, UIState } from '../reducers/ui';
 
 export const FILTER_RESET = 'FILTER_RESET';
 export const FILTER_SET_NAMESPACE = 'FILTER_SET_NAMESPACE';
@@ -45,9 +46,11 @@ export interface CallbackActionOptions {
 }
 
 export interface Action {
-  type: string,
+  type: string;
   [propName: string]: any;
 }
+
+type SidebarType = UIState['sidebar'];
 
 export type HeaderActionFunc = (...args: any[]) => JSX.Element | null;
 
@@ -71,15 +74,15 @@ export function updateClusterAction(actionOptions: ClusterAction) {
   return { type: CLUSTER_ACTION_UPDATE, ...actionOptions};
 }
 
-export function setSidebarSelected(selected: string) {
+export function setSidebarSelected(selected: SidebarType['selected']) {
   return { type: UI_SIDEBAR_SET_SELECTED, selected };
 }
 
-export function setSidebarVisible(isVisible: boolean) {
+export function setSidebarVisible(isVisible: SidebarType['isVisible']) {
   return { type: UI_SIDEBAR_SET_VISIBLE, isVisible };
 }
 
-export function setSidebarItem(item: any) {
+export function setSidebarItem(item: SidebarEntry) {
   // @todo: Clarify the spec when we port this to Ts.
   if (item.parent === undefined) {
     item['parent'] = null;
