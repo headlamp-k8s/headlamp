@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
 
 export interface SectionHeaderProps {
   title: string;
-  actions?: JSX.Element[] | null;
+  actions?: React.ReactNode[] | null;
 }
 
 export default function SectionHeader(props: SectionHeaderProps) {
