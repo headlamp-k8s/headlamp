@@ -2,23 +2,31 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeIngress } from '../../lib/cluster';
 import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
-export default function IngressDetails(props) {
+export default function IngressDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubeIngress | null>(null);
 
   useConnectApi(
     api.ingress.get.bind(null, namespace, name, setItem),
   );
 
   function getHostsData() {
-    const data = [];
-    item.spec.rules.forEach(({host, http}) => {
+    const data: {
+      host: string;
+      path?: string;
+      backend: {
+        serviceName: string;
+        servicePort: string;
+      };
+    }[] = [];
+    item?.spec.rules.forEach(({host, http}) => {
       http.paths.forEach(pathData => {
         data.push({...pathData, host: host});
       });

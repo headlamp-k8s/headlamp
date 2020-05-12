@@ -123,3 +123,20 @@ export interface KubeEvent {
 export interface KubeConfigMap extends KubeObject {
   data: StringDict;
 }
+
+export interface KubeIngress extends KubeObject {
+  spec: {
+    rules: {
+      host: string;
+      http: {
+        paths: {
+          path: string;
+          backend: {
+            serviceName: string;
+            servicePort: string;
+          };
+        }[];
+      };
+    }[];
+  };
+}
