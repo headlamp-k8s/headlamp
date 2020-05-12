@@ -1,6 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeIngress } from '../../lib/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
@@ -8,10 +9,10 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function IngressList() {
-  const [ingresses, setIngresses] = React.useState(null);
+  const [ingresses, setIngresses] = React.useState<KubeIngress[] | null>(null);
   const filterFunc = useFilterFunc();
 
-  function getHosts(ingress) {
+  function getHosts(ingress: KubeIngress) {
     return ingress.spec.rules.map(({host}) => host).join(' | ');
   }
 
