@@ -279,7 +279,7 @@ export function PageGrid(props: PageGridProps) {
 }
 
 interface SectionGridProps {
-  items: JSX.Element[];
+  items: React.ReactNode[];
   useDivider?: boolean;
 }
 
