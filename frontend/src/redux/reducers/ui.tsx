@@ -1,11 +1,15 @@
 import { Action, UI_DETAILS_VIEW_SET_HEADER_ACTION, UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
 
-interface SidebarEntry {
+export interface SidebarEntry {
   name: string;
-  [propName: string]: any;
+  label: string;
+  parent?: string | null;
+  url?: string;
+  useClusterURL?: boolean;
+  subList?: this[];
 }
 
-interface UIState {
+export interface UIState {
   sidebar: {
     selected: string | null;
     isVisible: boolean;
@@ -27,7 +31,7 @@ interface UIState {
 
 export const INITIAL_STATE: UIState = {
   sidebar: {
-    selected: 'cluster',
+    selected: null,
     isVisible: false,
     entries: {}
   },

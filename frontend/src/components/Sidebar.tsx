@@ -10,17 +10,20 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
-import { Link, useLocation } from 'react-router-dom';
+import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from 'react-router-dom';
 import api from '../lib/api';
-import { createRouteURL } from '../lib/router';
+import { StringDict } from '../lib/cluster';
+import { createRouteURL, getRoute } from '../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../lib/util';
 import { setSidebarSelected } from '../redux/actions/actions';
+import { useTypedSelector } from '../redux/reducers/reducers';
+import { SidebarEntry } from '../redux/reducers/ui';
 import store from '../redux/stores/store';
 import { NameValueTable } from './common';
 
@@ -40,7 +43,7 @@ const useStyle = makeStyles(theme => ({
   }
 }));
 
-const LIST_ITEMS = [
+const LIST_ITEMS: SidebarEntry[] = [
   {
     name: 'cluster',
     label: 'Cluster',
@@ -78,6 +81,7 @@ const LIST_ITEMS = [
     ]
   },
   {
+    name: 'storage',
     label: 'Storage',
     subList: [
       {
@@ -95,6 +99,7 @@ const LIST_ITEMS = [
     ]
   },
   {
+    name: 'network',
     label: 'Network',
     subList: [
       {
@@ -108,6 +113,7 @@ const LIST_ITEMS = [
     ]
   },
   {
+    name: 'security',
     label: 'Security',
     subList: [
       {
@@ -133,7 +139,7 @@ const LIST_ITEMS = [
 function prepareRoutes() {
   const items = store.getState().ui.sidebar.entries;
   // @todo: Find a better way to avoid modifying the objects in LIST_ITEMS.
-  const routes = JSON.parse(JSON.stringify(LIST_ITEMS));
+  const routes: SidebarEntry[] = JSON.parse(JSON.stringify(LIST_ITEMS));
 
   for (const item of Object.values(items)) {
     const parent = item.parent ? routes.find(({name}) => name === item.parent) : null;
@@ -162,11 +168,11 @@ const useVersionButtonStyle = makeStyles({
   },
 });
 
-function VersionButton(props) {
+function VersionButton() {
   const location = useLocation();
 
   const classes = useVersionButtonStyle();
-  const [clusterVersion, setClusterVersion] = React.useState(null);
+  const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
   const [cluster, setCluster] = React.useState(getCluster());
   const [open, setOpen] = React.useState(false);
 
@@ -178,23 +184,23 @@ function VersionButton(props) {
     return [
       {
         name: 'Git Version',
-        value: clusterVersion.gitVersion,
+        value: clusterVersion?.gitVersion,
       },
       {
         name: 'Git Commit',
-        value: clusterVersion.gitCommit,
+        value: clusterVersion?.gitCommit,
       },
       {
         name: 'Git Tree State',
-        value: clusterVersion.gitTreeState,
+        value: clusterVersion?.gitTreeState,
       },
       {
         name: 'Go Version',
-        value: clusterVersion.goVersion,
+        value: clusterVersion?.goVersion,
       },
       {
         name: 'Platform',
-        value: clusterVersion.platform,
+        value: clusterVersion?.platform,
       },
     ];
   }
@@ -253,17 +259,49 @@ function VersionButton(props) {
   );
 }
 
-export default function Sidebar(props) {
+interface ListItemLinkProps {
+  primary: string;
+  to: string;
+}
+
+function ListItemLink(props: ListItemLinkProps) {
+  const { primary, to, ...other } = props;
+
+  const renderLink = React.useMemo(
+    () =>
+      React.forwardRef<any, Omit<RouterLinkProps, 'to'>>((itemProps, ref) => (
+        <RouterLink to={to} ref={ref} {...itemProps} />
+      )),
+    [to],
+  );
+
+  return (
+    <li>
+      <ListItem
+        button
+        component={renderLink}
+        {...other}
+      >
+        <ListItemText primary={primary} />
+      </ListItem>
+    </li>
+  );
+}
+
+export default function Sidebar() {
   const classes = useStyle();
-  const sidebar = useSelector(state => state.ui.sidebar);
+  const sidebar = useTypedSelector(state => state.ui.sidebar);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const items = React.useMemo(() => prepareRoutes(), [sidebar.entries]);
   // Use the location to make sure the sidebar is changed, as it depends on the cluster
   // (defined in the URL ATM).
   // @todo: Update this if the active cluster management is changed.
   useLocation();
+  if (!sidebar?.isVisible) {
+    return null;
+  }
 
-  return sidebar.isVisible && (
+  return (
     <Drawer
       className={classes.drawer}
       variant="permanent"
@@ -304,12 +342,17 @@ const useItemStyle = makeStyles(theme => ({
   },
 }));
 
-function SidebarItem(props) {
+interface SidebarItemProps extends ListItemProps, SidebarEntry {
+  selectedName?: string | null;
+}
+
+
+function SidebarItem(props: SidebarItemProps) {
   const classes = useItemStyle();
 
   const {
     label,
-    name = null,
+    name,
     url = null,
     useClusterURL = false,
     subList = [],
@@ -317,12 +360,18 @@ function SidebarItem(props) {
     ...other
   } = props;
 
-  const routeName = name !== null ? name : subList.find(item => !!item.name).name;
   let fullURL = url;
   if (fullURL && useClusterURL && getCluster()) {
-    fullURL = generatePath(getClusterPrefixedPath(url), {cluster: getCluster()});
+    fullURL = generatePath(getClusterPrefixedPath(url), {cluster: getCluster()!});
   }
-  const linkPath = fullURL || createRouteURL(routeName);
+
+  if (!fullURL) {
+    let routeName = name;
+    if (!getRoute(name)) {
+      routeName = subList.length > 0 ? subList[0].name : '';
+    }
+    fullURL = createRouteURL(routeName);
+  }
 
   function isSelected() {
     return name === selectedName;
@@ -334,15 +383,12 @@ function SidebarItem(props) {
 
   return (
     <React.Fragment>
-      <ListItem
-        button
-        component={Link}
+      <ListItemLink
         selected={isSelected()}
-        to={linkPath}
+        to={fullURL || ''}
+        primary={label}
         {...other}
-      >
-        <ListItemText primary={label} />
-      </ListItem>
+      />
       {subList.length > 0 &&
         <Collapse in={shouldExpand()}>
           <List component="div" disablePadding className={classes.nested}>
@@ -360,7 +406,7 @@ function SidebarItem(props) {
   );
 }
 
-export function useSidebarItem(itemName) {
+export function useSidebarItem(itemName: string | null) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
