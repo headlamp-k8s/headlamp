@@ -274,3 +274,16 @@ export interface KubeReplicaSet extends KubeObject {
     replicas: number;
   };
 }
+
+export interface KubeStatefulSet extends KubeObject {
+  spec: {
+    selector: LabelSelector;
+    updateStrategy: {
+      rollingUpdate: {
+        partition: number;
+      };
+      type: string;
+    };
+    [other: string]: any;
+  };
+}
