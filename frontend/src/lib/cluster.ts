@@ -3,10 +3,6 @@ export interface KubeObject {
   apiVersion?: string;
   metadata: KubeMetadata;
   [otherProps: string]: any;
-  status?: {
-    conditions?: KubeCondition[];
-    [otherProps: string]: any;
-  }
 }
 
 export interface StringDict {
