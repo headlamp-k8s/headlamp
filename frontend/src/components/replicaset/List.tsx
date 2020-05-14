@@ -1,6 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeReplicaSet } from '../../lib/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
@@ -8,10 +9,10 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ReplicaSetList() {
-  const [replicaSets, setReplicaSets] = React.useState(null);
+  const [replicaSets, setReplicaSets] = React.useState<KubeReplicaSet | null>(null);
   const filterFunc = useFilterFunc();
 
-  function getReplicas(replicaSet) {
+  function getReplicas(replicaSet: KubeReplicaSet) {
     return `${replicaSet.spec.replicas} / ${replicaSet.status.replicas}`;
   }
 

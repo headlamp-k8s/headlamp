@@ -253,3 +253,20 @@ export interface KubePod extends KubeObject {
     [other: string]: any;
   };
 }
+
+export interface KubeReplicaSet extends KubeObject {
+  spec: {
+    minReadySeconds: number;
+    replicas: number;
+    selector: LabelSelector;
+    [other: string]: any;
+  };
+  status: {
+    availableReplicas: number;
+    conditions: Omit<KubeCondition, 'lastProbeTime' | 'lastUpdateTime'>[];
+    fullyLabeledReplicas: number;
+    observedGeneration: number;
+    readyReplicas: number;
+    replicas: number;
+  };
+}
