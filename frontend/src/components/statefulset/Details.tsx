@@ -1,11 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeStatefulSet } from '../../lib/cluster';
 import { MainInfoSection, MetadataDictGrid } from '../common/Resource';
 
 export default function StatefulSet() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubeStatefulSet | null>(null);
 
   useConnectApi(
     api.statefulSet.get.bind(null, namespace, name, setItem),
@@ -21,7 +22,7 @@ export default function StatefulSet() {
         },
         {
           name: 'Selector',
-          value: <MetadataDictGrid dict={item.spec.selector.matchLabels} />,
+          value: <MetadataDictGrid dict={item.spec.selector.matchLabels as {[key: string]: string}} />,
         },
       ]}
     />
