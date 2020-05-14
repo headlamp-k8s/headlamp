@@ -214,7 +214,7 @@ interface MainInfoSectionProps {
   headerSection?: React.ReactNode;
   title?: string;
   extraInfo?: NameValueTableRow[] | null;
-  actions?: JSX.Element[];
+  actions?: React.ReactNode[];
 }
 
 export function MainInfoSection(props: MainInfoSectionProps) {
