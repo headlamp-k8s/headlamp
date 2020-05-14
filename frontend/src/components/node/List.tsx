@@ -2,6 +2,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeMetrics, KubeObject } from '../../lib/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
@@ -10,16 +11,16 @@ import SimpleTable from '../common/SimpleTable';
 import { UsageBarChart } from './Charts';
 import { NodeReadyLabel } from './Details';
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles({
   chartCell: {
     width: '20%',
   },
-}));
+});
 
 export default function NodeList() {
   const classes = useStyle();
-  const [nodes, setNodes] = React.useState(null);
-  const [nodeMetrics, setNodeMetrics] = React.useState(null);
+  const [nodes, setNodes] = React.useState<KubeObject | null>(null);
+  const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
   const filterFunc = useFilterFunc();
 
   useConnectApi(

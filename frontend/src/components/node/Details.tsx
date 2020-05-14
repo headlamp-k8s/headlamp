@@ -5,18 +5,19 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeMetrics, KubeNode } from '../../lib/cluster';
 import { timeAgo } from '../../lib/util';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
-import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
+import { HeaderLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../common/Label';
 import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid, SectionGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import { NameValueTable } from '../common/SimpleTable';
 
-export default function NodeDetails(props) {
+export default function NodeDetails() {
   const { name } = useParams();
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubeNode | null>(null);
   const [nodeMetrics, setNodeMetrics] = React.useState(null);
 
   useConnectApi(
@@ -24,7 +25,7 @@ export default function NodeDetails(props) {
     api.metrics.nodes.bind(null, setNodeMetrics)
   );
 
-  function getAddresses(item) {
+  function getAddresses(item: KubeNode) {
     return item.status.addresses.map(({type, address}) => {
       return {
         name: type,
@@ -60,7 +61,12 @@ export default function NodeDetails(props) {
   );
 }
 
-function ChartsSection(props) {
+interface ChartsSectionProps {
+  node: KubeNode | null;
+  metrics: KubeMetrics[] | null;
+}
+
+function ChartsSection(props: ChartsSectionProps) {
   const { node, metrics } = props;
 
   function getUptime() {
@@ -92,13 +98,13 @@ function ChartsSection(props) {
       </Grid>
       <Grid item>
         <CpuCircularChart
-          items={[node]}
+          items={node && [node]}
           itemsMetrics={metrics}
         />
       </Grid>
       <Grid item>
         <MemoryCircularChart
-          items={[node]}
+          items={node && [node]}
           itemsMetrics={metrics}
         />
       </Grid>
@@ -106,14 +112,18 @@ function ChartsSection(props) {
   );
 }
 
-function SystemInfoSection(props) {
+interface SystemInfoSectionProps {
+  node: KubeNode;
+}
+
+function SystemInfoSection(props: SystemInfoSectionProps) {
   const { node } = props;
 
-  function getOSComponent(osName) {
+  function getOSComponent(osName: string) {
     let icon = null;
 
     if (osName.toLowerCase() === 'linux') {
-      icon = <InlineIcon icon={penguinIcon} fontSize="1.4rem"/>;
+      icon = <InlineIcon icon={penguinIcon} />;
     }
 
     return (
@@ -187,12 +197,16 @@ function SystemInfoSection(props) {
   );
 }
 
-export function NodeReadyLabel(props) {
+interface NodeReadyLabelProps {
+  node: KubeNode;
+}
+
+export function NodeReadyLabel(props: NodeReadyLabelProps) {
   const { node } = props;
   const isReady = !!node.status.conditions
     .find(condition => condition.type === 'Ready' && condition.status === 'True');
 
-  let status = null;
+  let status: StatusLabelProps['status'] = '';
   let label = null;
   if (isReady) {
     status = 'success';
