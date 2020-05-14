@@ -33,7 +33,7 @@ const useStyle = makeStyles(theme => ({
   }
 }));
 
-interface LogViewerProps extends DialogProps {
+export interface LogViewerProps extends DialogProps {
   logs: string[];
   title?: string;
   downloadName?: string;
