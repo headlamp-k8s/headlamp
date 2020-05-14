@@ -23,7 +23,7 @@ export interface UIState {
   views: {
     details: {
       headerActions: {
-        [name: string]: any;
+        [name: string]: (...args: any[]) => React.ReactNode | null;
       };
     };
   };
