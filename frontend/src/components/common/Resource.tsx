@@ -213,7 +213,7 @@ interface MainInfoSectionProps {
   resource: KubeObject | null;
   headerSection?: React.ReactNode;
   title?: string;
-  extraInfo?: NameValueTableRow[];
+  extraInfo?: NameValueTableRow[] | null;
   actions?: JSX.Element[];
 }
 
