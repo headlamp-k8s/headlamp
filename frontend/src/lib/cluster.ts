@@ -174,3 +174,46 @@ export interface KubeNamespace extends KubeObject {
     phase: string;
   };
 }
+
+export interface KubeNode extends Exclude<KubeObject, 'status'> {
+  status: {
+    addresses: {
+      address: string;
+      type: string;
+    }[];
+    conditions: {
+      lastHeartbeatTime: string;
+      lastTransitionTime: string;
+      message: string;
+      reason: string;
+      status: string;
+      type: string;
+    }[];
+    nodeInfo: {
+      architecture: string;
+      bootID: string;
+      containerRuntimeVersion: string;
+      kernelVersion: string;
+      kubeProxyVersion: string;
+      kubeletVersion: string;
+      machineID: string;
+      operatingSystem: string;
+      osImage: string;
+      systemUUID: string;
+    };
+  };
+}
+
+export interface KubeMetrics {
+  metadata: KubeMetadata;
+  usage: {
+    cpu: number;
+    memory: number;
+  };
+  status: {
+    capacity: {
+      cpu: number;
+      memory: number;
+    };
+  };
+}

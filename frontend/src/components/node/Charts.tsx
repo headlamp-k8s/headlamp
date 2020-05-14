@@ -1,9 +1,16 @@
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import { KubeMetrics, KubeNode } from '../../lib/cluster';
 import { getPercentStr, getResourceMetrics, getResourceStr } from '../../lib/util';
 import { PercentageBar } from '../common/Chart';
 
-export function UsageBarChart(props) {
+interface UsageBarChartProps {
+  node: KubeNode;
+  nodeMetrics: KubeMetrics | null;
+  resourceType: keyof (KubeMetrics['usage'])
+}
+
+export function UsageBarChart(props: UsageBarChartProps) {
   const { node, nodeMetrics, resourceType } = props;
   let [used, capacity] = [0, 0];
 
