@@ -211,7 +211,7 @@ const useStyle = makeStyles(theme => ({
 
 interface MainInfoSectionProps {
   resource: KubeObject | null;
-  headerSection?: JSX.Element;
+  headerSection?: React.ReactNode;
   title?: string;
   extraInfo?: NameValueTableRow[];
   actions?: JSX.Element[];
