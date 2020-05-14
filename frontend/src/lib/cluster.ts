@@ -164,3 +164,9 @@ export interface KubeDaemonSet extends KubeObject {
     [otherProps: string]: any;
   };
 }
+
+export interface KubeNamespace extends KubeObject {
+  status: {
+    phase: string;
+  };
+}

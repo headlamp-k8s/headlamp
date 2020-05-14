@@ -1,6 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeNamespace } from '../../lib/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { StatusLabel } from '../common/Label';
 import { ResourceLink } from '../common/Resource';
@@ -9,14 +10,14 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function NamespacesList() {
-  const [namespaces, setNamespaces] = React.useState(null);
+  const [namespaces, setNamespaces] = React.useState<KubeNamespace[] | null>(null);
   const filterFunc = useFilterFunc();
 
   useConnectApi(
     api.namespace.list.bind(null, setNamespaces),
   );
 
-  function makeStatusLabel(namespace) {
+  function makeStatusLabel(namespace: KubeNamespace) {
     const status = namespace.status.phase;
     return (
       <StatusLabel status={status === 'Active' ? 'success' : 'error'}>
