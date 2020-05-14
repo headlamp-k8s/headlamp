@@ -171,20 +171,15 @@ export interface KubeNamespace extends KubeObject {
   };
 }
 
-export interface KubeNode extends Exclude<KubeObject, 'status'> {
+export interface KubeNode extends KubeObject {
   status: {
     addresses: {
       address: string;
       type: string;
     }[];
-    conditions: {
+    conditions: (Omit<KubeCondition, 'lastProbeTime' | 'lastUpdateTime'> & {
       lastHeartbeatTime: string;
-      lastTransitionTime: string;
-      message: string;
-      reason: string;
-      status: string;
-      type: string;
-    }[];
+    })[];
     nodeInfo: {
       architecture: string;
       bootID: string;
