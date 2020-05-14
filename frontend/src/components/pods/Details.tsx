@@ -12,7 +12,8 @@ import _ from 'lodash';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
-import { LogViewer } from '../common/LogViewer';
+import { KubePod } from '../../lib/cluster';
+import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import { ContainersSection, MainInfoSection, PageGrid } from '../common/Resource';
 import Terminal from '../common/Terminal';
 
@@ -22,26 +23,30 @@ const useStyle = makeStyles({
   }
 });
 
-function PodLogViewer(props) {
+interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
+  item: KubePod;
+}
+
+function PodLogViewer(props: PodLogViewerProps) {
   const classes = useStyle();
   const { item, onClose, open, ...other } = props;
   const [container, setContainer] = React.useState(getDefaultContainer());
-  const [lines, setLines] = React.useState(100);
-  const [logs, setLogs] = React.useState([]);
+  const [lines, setLines] = React.useState<number>(100);
+  const [logs, setLogs] = React.useState<string[]>([]);
 
   function getDefaultContainer() {
     return (item.spec.containers.length > 0) ? item.spec.containers[0].name : '';
   }
 
   const options = {leading: true, trailing: true, maxWait: 1000};
-  function setLogsDebounced(args) {
+  function setLogsDebounced(args: string[]) {
     setLogs([]);
     setLogs(args);
   }
   const debouncedSetState = _.debounce(setLogsDebounced, 500, options);
 
   React.useEffect(() => {
-    let callback = null;
+    let callback: any = null;
     if (props.open) {
       callback = api.logs(item.metadata.namespace,
                           item.metadata.name,
@@ -60,11 +65,11 @@ function PodLogViewer(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   [container, lines, open]);
 
-  function handleContainerChange(event) {
+  function handleContainerChange(event: any) {
     setContainer(event.target.value);
   }
 
-  function handleLinesChange(event) {
+  function handleLinesChange(event: any) {
     setLines(event.target.value);
   }
 
@@ -112,9 +117,9 @@ function PodLogViewer(props) {
   );
 }
 
-export default function PodDetails(props) {
+export default function PodDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubePod | null>(null);
   const [showLogs, setShowLogs] = React.useState(false);
   const [showTerminal, setShowTerminal] = React.useState(false);
 
