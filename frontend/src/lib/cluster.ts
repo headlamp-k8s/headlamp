@@ -208,3 +208,48 @@ export interface KubeMetrics {
     };
   };
 }
+
+export interface KubeContainerStatus {
+  containerID: string;
+  image: string;
+  imageID: string;
+  lastState: string;
+  name: string;
+  ready: boolean;
+  restartCount: number;
+  state: {
+    running: {
+      startedAt: number;
+    };
+    terminated: {
+      containerID: string;
+      exitCode: number;
+      finishedAt: number;
+      message: string;
+      reason: string;
+      signal: number;
+      startedAt: number;
+    };
+    waiting: {
+      message: string;
+      reason: string;
+    };
+  };
+}
+
+export interface KubePod extends KubeObject {
+  spec: {
+    containers: KubeContainer[];
+  };
+  status: {
+    conditions: KubeCondition[];
+    containerStatuses: KubeContainerStatus[];
+    hostIP: string;
+    message: string;
+    phase: string;
+    qosClass: string;
+    reason: string;
+    startTime: number;
+    [other: string]: any;
+  };
+}
