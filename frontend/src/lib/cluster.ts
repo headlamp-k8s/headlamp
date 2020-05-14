@@ -144,3 +144,27 @@ export interface KubeIngress extends KubeObject {
     }[];
   };
 }
+
+interface LabelSelector {
+  matchExpressions?: {
+    key: string;
+    operator: string;
+    values: string[];
+  };
+  matchLabels?: {
+    [key: string]: string;
+  };
+}
+
+export interface KubeDaemonSet extends KubeObject {
+  spec: {
+    updateStrategy: {
+      type: string;
+      rollingUpdate: {
+        maxUnavailable: number;
+      };
+    };
+    selector: LabelSelector;
+    [otherProps: string]: any;
+  };
+}
