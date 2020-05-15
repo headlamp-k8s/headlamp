@@ -302,3 +302,18 @@ export interface KubeSecretAccount extends KubeObject {
 export interface KubeSecret extends KubeObject {
   data: StringDict;
 }
+
+export interface KubeService extends KubeObject {
+  spec: {
+    clusterIP: string;
+    ports: {
+      name: string;
+      nodePort: number;
+      port: number;
+      protocol: string;
+      targetPort: number | string;
+    }[];
+    type: string;
+    [otherProps: string]: any;
+  };
+}

@@ -1,6 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeService } from '../../lib/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
@@ -8,7 +9,7 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceList() {
-  const [services, setServices] = React.useState(null);
+  const [services, setServices] = React.useState<KubeService | null>(null);
   const filterFunc = useFilterFunc();
 
   useConnectApi(

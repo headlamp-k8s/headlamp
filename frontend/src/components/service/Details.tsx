@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeService } from '../../lib/cluster';
 import { ValueLabel } from '../common/Label';
 import Loader from '../common/Loader';
 import { MainInfoSection, MetadataDictGrid, PageGrid } from '../common/Resource';
@@ -11,9 +12,9 @@ import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
-export default function ServiceDetails(props) {
+export default function ServiceDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubeService | null>(null);
 
   useConnectApi(
     api.service.get.bind(null, namespace, name, setItem),
