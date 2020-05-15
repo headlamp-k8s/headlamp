@@ -229,7 +229,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     <Paper>
       <SectionHeader
         title={title || (resource ? resource.kind : '')}
-        actions={(actions || []).concat(getHeaderActions())}
+        actions={React.Children.toArray(actions).concat(getHeaderActions())}
       />
       <SectionBox>
         {resource === null ?
