@@ -294,3 +294,7 @@ export interface KubeSecretAccount extends KubeObject {
     uid: string;
   }[];
 }
+
+export interface KubeSecret extends KubeObject {
+  data: StringDict;
+}
