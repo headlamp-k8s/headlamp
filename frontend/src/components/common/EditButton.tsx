@@ -52,7 +52,11 @@ export default function EditButton(props: EditButtonProps) {
   },
   [item]);
 
-  return visible && (
+  if (!visible) {
+    return null;
+  }
+
+  return (
     <React.Fragment>
       <Tooltip title="Edit">
         <IconButton
