@@ -2,13 +2,14 @@ import _ from 'lodash';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeSecret } from '../../lib/cluster';
 import { getRoute } from '../../lib/router';
 import DeleteButton from '../common/DeleteButton';
 import { MainInfoSection, SecretField } from '../common/Resource';
 
-export default function SecretDetails(props) {
+export default function SecretDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubeSecret | null>(null);
 
   useConnectApi(
     api.secret.get.bind(null, namespace, name, setItem),
@@ -24,12 +25,12 @@ export default function SecretDetails(props) {
       extraInfo={item && _.map(item.data, (value, key) => (
         {
           name: key,
-          valueComponent: <SecretField label={key} value={value} />
+          value: <SecretField value={value} />
         }
       ))}
       actions={item && [
         <DeleteButton
-          items={[item]}
+          item={item}
           deletionCallback={handleDelete}
           options={{startUrl: getRoute('secrets').path}}
         />
