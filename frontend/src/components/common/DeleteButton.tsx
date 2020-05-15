@@ -36,7 +36,11 @@ export default function DeleteButton(props: DeleteButtonProps) {
   },
   [item]);
 
-  return visible && (
+  if (!visible) {
+    return null;
+  }
+
+  return (
     <React.Fragment>
       <Tooltip title="Delete">
         <IconButton
