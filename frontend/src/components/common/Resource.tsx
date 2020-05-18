@@ -558,8 +558,12 @@ export function ContainersSection(props: {resource: KubeObject | null}) {
   );
 }
 
-export function ReplicasSection(props: {resource: KubeObject }) {
+export function ReplicasSection(props: {resource: KubeObject | null }) {
   const { resource } = props;
+
+  if (!resource) {
+    return null;
+  }
 
   return (
     <Paper>
