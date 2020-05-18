@@ -338,3 +338,21 @@ export interface KubeCRD extends KubeObject {
     [other: string]: any;
   };
 }
+
+export interface KubeRole extends KubeObject {
+  rules: {
+    apiGroups: string[];
+    nonResourceURLs: string[];
+    resourceNames: string[];
+    resources: string[];
+    verbs: string[];
+  };
+}
+
+export interface KubeRoleBinding extends KubeObject {
+  roleRef: {
+    apiGroup: string;
+    kind: string;
+    name: string;
+  };
+}

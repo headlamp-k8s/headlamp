@@ -2,6 +2,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeRoleBinding } from '../../lib/cluster';
 import { getRoute } from '../../lib/router';
 import DeleteButton from '../common/DeleteButton';
 import Loader from '../common/Loader';
@@ -12,7 +13,7 @@ import SimpleTable from '../common/SimpleTable';
 
 export default function RoleBindingDetails() {
   const { namespace = null, name } = useParams();
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubeRoleBinding | null>(null);
 
   useConnectApi(
     (namespace ?
