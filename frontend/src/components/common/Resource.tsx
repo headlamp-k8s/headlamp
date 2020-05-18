@@ -382,7 +382,7 @@ export function SecretField(props: InputProps) {
 }
 
 interface ConditionsTableProps {
-  resource: KubeObject;
+  resource: KubeObject | null;
   showLastUpdate?: boolean;
 }
 
