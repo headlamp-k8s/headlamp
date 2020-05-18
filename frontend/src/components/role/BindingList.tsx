@@ -1,23 +1,29 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeRoleBinding } from '../../lib/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
-export default function RoleList() {
-  const [rolesData, dispatch] = React.useReducer(setRoles, {});
+interface RoleBindingDict {
+  [kind: string]: KubeRoleBinding[];
+}
+
+export default function RoleBindingList() {
+  const [roleBindingsData, dispatch] = React.useReducer(setRoleBindings, {});
   const filterFunc = useFilterFunc();
 
-  function setRoles(roles, newRoles) {
-    const data = {...roles};
+  function setRoleBindings(roleBindings: RoleBindingDict, newRoleBindings: KubeRoleBinding[]) {
+    const data = {...roleBindings};
 
-    newRoles.forEach((item) => {
+    newRoleBindings.forEach((item) => {
       if (!(item.kind in data)) {
         data[item.kind] = [];
       }
+
       data[item.kind].push(item);
     });
 
@@ -25,22 +31,22 @@ export default function RoleList() {
   }
 
   function getJointItems() {
-    let joint = [];
-    for (const items of Object.values(rolesData)) {
+    let joint: KubeRoleBinding[] = [];
+    for (const items of Object.values(roleBindingsData)) {
       joint = joint.concat(items);
     }
     return joint;
   }
 
   useConnectApi(
-    api.role.list.bind(null, null, dispatch),
-    api.clusterRole.list.bind(null, dispatch),
+    api.roleBinding.list.bind(null, null, dispatch),
+    api.clusterRoleBinding.list.bind(null, dispatch),
   );
 
   return (
     <Paper>
       <SectionFilterHeader
-        title="Roles"
+        title="Role Bindings"
       />
       <SectionBox>
         <SimpleTable
@@ -55,7 +61,7 @@ export default function RoleList() {
               label: 'Name',
               getter: (item) =>
                 <Link
-                  routeName={item.metadata.namespace ? 'role' : 'clusterrole'}
+                  routeName={item.metadata.namespace ? 'roleBinding' : 'clusterRoleBinding'}
                   params={{
                     namespace: item.metadata.namespace || '',
                     name: item.metadata.name
@@ -66,7 +72,7 @@ export default function RoleList() {
             },
             {
               label: 'Namespace',
-              getter: (item) => item.metadata.namespace
+              getter: (item) => item.metadata.namespace || 'All namespaces'
             },
             {
               label: 'Age',

@@ -2,6 +2,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeRole } from '../../lib/cluster';
 import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
@@ -10,7 +11,7 @@ import SimpleTable from '../common/SimpleTable';
 
 export default function RoleDetails() {
   const { namespace = null, name } = useParams();
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubeRole | null>(null);
 
   useConnectApi(
     (namespace ?
