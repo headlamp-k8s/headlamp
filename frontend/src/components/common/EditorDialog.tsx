@@ -48,7 +48,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 interface EditorDialogProps extends DialogProps{
-  item: KubeObject;
+  item: KubeObject | null;
   onClose: () => void;
   onSave: ((...args: any[]) => void) | null;
 }
