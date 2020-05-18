@@ -34,7 +34,7 @@ export interface PercentageCircleProps {
   data: ChartDataPoint[];
   size?: number;
   dataKey?: string;
-  label?: string;
+  label?: string | null;
   title?: string | null;
   legend?: string | null;
   total?: number;
@@ -124,7 +124,7 @@ export function PercentageCircle(props: PercentageCircleProps) {
             fill={theme.palette.primary.main}
           >
             <Label
-              value={label}
+              value={label || ''}
               position="center"
               style={{
                 fontSize: `${chartSize * .15}px`,
