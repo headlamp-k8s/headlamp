@@ -5,6 +5,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
 import { apiFactory, apiFactoryWithNamespace } from '../../lib/apiProxy';
+import { KubeCRD } from '../../lib/cluster';
 import { timeAgo } from '../../lib/util';
 import { ViewDialog } from '../common/EditorDialog';
 import Loader from '../common/Loader';
@@ -13,7 +14,7 @@ import { SectionBox } from '../common/SectionBox';
 import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 
-function getAPIForCRD(item) {
+function getAPIForCRD(item: KubeCRD) {
   const group = item.spec.group;
   const version = item.spec.version;
   const name = item.spec.names.plural;
@@ -30,26 +31,26 @@ const useStyle = makeStyles({
   }
 });
 
-export default function CustomResourceDefinitionDetails(props) {
+export default function CustomResourceDefinitionDetails() {
   const classes = useStyle();
   const { name } = useParams();
-  const [item, setItem] = React.useState(null);
-  const [objToShow, setObjToShow] = React.useState(null);
-  const [objects, setObjects] = React.useState([]);
+  const [item, setItem] = React.useState<KubeCRD | null>(null);
+  const [objToShow, setObjToShow] = React.useState<KubeCRD | null>(null);
+  const [objects, setObjects] = React.useState<KubeCRD[]>([]);
 
   useConnectApi(
     api.crd.get.bind(null, name, setItem),
   );
 
   React.useEffect(() => {
-    let promise = null;
+    let promise: Promise<any> | null = null;
     if (item) {
       promise = getAPIForCRD(item).list(setObjects);
     }
 
     return function cleanup () {
       if (promise) {
-        promise.then(cancellable => cancellable());
+        promise.then((cancellable: () => void) => cancellable());
       }
     };
   },
