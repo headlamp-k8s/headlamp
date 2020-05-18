@@ -317,3 +317,14 @@ export interface KubeService extends KubeObject {
     [otherProps: string]: any;
   };
 }
+
+export type KubeWorkload = KubeReplicaSet | KubeStatefulSet | (KubeObject & {
+  spec: {
+    selector?: LabelSelector;
+    strategy?: {
+      type: string;
+      [otherProps: string]: any;
+    };
+    [otherProps: string]: any;
+  };
+});

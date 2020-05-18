@@ -1,9 +1,16 @@
 import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
+import { KubeWorkload } from '../../lib/cluster';
 import { getPercentStr, getReadyReplicas, getTotalReplicas } from '../../lib/util';
-import { PercentageCircle } from '../common/Chart';
+import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
 
-export function WorkloadCircleChart(props) {
+interface WorkloadCircleChartProps extends Omit<PercentageCircleProps, 'data'> {
+  workloadData: KubeWorkload[];
+  partialLabel: string;
+  totalLabel: string;
+}
+
+export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
   const theme = useTheme();
 
   const {

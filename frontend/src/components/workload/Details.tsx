@@ -1,15 +1,21 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeWorkload } from '../../lib/cluster';
 import { ContainersSection, MainInfoSection, MetadataDictGrid, PageGrid, ReplicasSection } from '../common/Resource';
 
-export default function WorkloadDetails(props) {
+interface WorkloadDetailsProps {
+  workloadKind: string;
+}
+
+export default function WorkloadDetails(props: WorkloadDetailsProps) {
   const { namespace, name } = useParams();
+  // @todo: Don't use this property for determining the time. Use the actual type instead.
   const { workloadKind } = props;
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubeWorkload | null>(null);
 
   useConnectApi(
-    getApiConnection(item)
+    getApiConnection()
   );
 
   function getApiConnection() {
@@ -38,7 +44,7 @@ export default function WorkloadDetails(props) {
     }
 
     // @todo: Handle error
-    return resourceApi.get.bind(null, namespace, name, setItem);
+    return resourceApi!.get.bind(null, namespace, name, setItem);
   }
 
   return (
@@ -53,7 +59,10 @@ export default function WorkloadDetails(props) {
           },
           {
             name: 'Selector',
-            value: <MetadataDictGrid dict={item.spec.selector.matchLabels} />,
+            value: item.spec.selector &&
+              <MetadataDictGrid
+                dict={item.spec.selector.matchLabels as {[key: string]: string}}
+              />,
           },
         ]}
       />
