@@ -1,11 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeStorageClass } from '../../lib/cluster';
 import { MainInfoSection } from '../common/Resource';
 
-export default function StorageClassDetails(props) {
+export default function StorageClassDetails() {
   const { name } = useParams();
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubeStorageClass | null>(null);
 
   useConnectApi(
     api.storageClass.get.bind(null, name, setItem),
