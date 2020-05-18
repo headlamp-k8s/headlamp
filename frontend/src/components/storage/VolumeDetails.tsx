@@ -1,18 +1,19 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
+import { KubePersistentVolume } from '../../lib/cluster';
 import { StatusLabel } from '../common/Label';
 import { MainInfoSection } from '../common/Resource';
 
 export default function VolumeDetails() {
   const { name } = useParams();
-  const [item, setItem] = React.useState(null);
+  const [item, setItem] = React.useState<KubePersistentVolume | null>(null);
 
   useConnectApi(
     api.persistentVolume.get.bind(null, name, setItem),
   );
 
-  function makeStatusLabel(item) {
+  function makeStatusLabel(item: KubePersistentVolume) {
     const status = item.status.phase;
     return (
       <StatusLabel status={status === 'Bound' ? 'success' : 'error'}>

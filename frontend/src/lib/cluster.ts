@@ -360,3 +360,46 @@ export interface KubeRoleBinding extends KubeObject {
     name: string;
   };
 }
+
+export interface KubePersistentVolume extends KubeObject {
+  spec: {
+    capacity: {
+      storage: string;
+    };
+    [other: string]: any;
+  };
+  status: {
+    message: string;
+    phase: string;
+    reason: string;
+  };
+}
+
+export interface KubePersistentVolumeClaim extends KubeObject {
+  spec: {
+    accessModes: string[];
+    resources: {
+      limits: object;
+      requests: {
+        storage?: string;
+        [other: string]: any;
+      };
+    };
+    storageClassName: string;
+    volumeMode: string;
+    volumeName: string;
+    [other: string]: any;
+  };
+  status: {
+    capacity?: {
+      storage?: string;
+    };
+    phase: string;
+  };
+}
+
+export interface KubeStorageClass extends KubeObject {
+  provisioner: string;
+  reclaimPolicy: string;
+  volumeBindingMode: string;
+}
