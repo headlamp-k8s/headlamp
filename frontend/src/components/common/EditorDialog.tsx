@@ -245,7 +245,7 @@ export default function EditorDialog(props: EditorDialogProps) {
   );
 }
 
-export function ViewDialog(props: EditorDialogProps) {
+export function ViewDialog(props: Omit<EditorDialogProps, 'onSave'>) {
   return (
     <EditorDialog
       {...props}
