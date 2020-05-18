@@ -2,6 +2,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
+import { KubeWorkload } from '../../lib/cluster';
 import { getReadyReplicas, getTotalReplicas, timeAgo, useFilterFunc } from '../../lib/util';
 import { PageGrid, ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
@@ -10,23 +11,27 @@ import SectionHeader from '../common/SectionHeader';
 import SimpleTable from '../common/SimpleTable';
 import { WorkloadCircleChart } from './Charts';
 
+interface KubeWorkloadDict {
+  [key: string]: KubeWorkload[];
+}
+
 export default function Overview() {
   const [workloadsData, dispatch] = React.useReducer(setWorkloads, {});
   const filterFunc = useFilterFunc();
 
-  function setWorkloads(workloads, {items, kind}) {
+  function setWorkloads(workloads: KubeWorkloadDict, {items, kind}: {items: KubeWorkload[]; kind: string;}) {
     const data = {...workloads};
     data[kind] = items;
 
     return data;
   }
 
-  function getPods(item) {
+  function getPods(item: KubeWorkload) {
     return `${getReadyReplicas(item)}/${getTotalReplicas(item)}`;
   }
 
   function getJointItems() {
-    let joint = [];
+    let joint: KubeWorkload[] = [];
     for (const items of Object.values(workloadsData)) {
       joint = joint.concat(items);
     }
@@ -34,12 +39,12 @@ export default function Overview() {
   }
 
   useConnectApi(
-    api.daemonSet.list.bind(null, null, (items) => dispatch({items, kind: 'DaemonSet'})),
-    api.deployment.list.bind(null, null, (items) => dispatch({items, kind: 'Deployment'})),
-    api.job.list.bind(null, null, (items) => dispatch({items, kind: 'Job'})),
-    api.cronJob.list.bind(null, null, (items) => dispatch({items, kind: 'CronJob'})),
-    api.replicaSet.list.bind(null, null, (items) => dispatch({items, kind: 'ReplicaSet'})),
-    api.statefulSet.list.bind(null, null, (items) => dispatch({items, kind: 'StatefulSet'})),
+    api.daemonSet.list.bind(null, null, (items: KubeWorkload[]) => dispatch({items, kind: 'DaemonSet'})),
+    api.deployment.list.bind(null, null, (items: KubeWorkload[]) => dispatch({items, kind: 'Deployment'})),
+    api.job.list.bind(null, null, (items: KubeWorkload[]) => dispatch({items, kind: 'Job'})),
+    api.cronJob.list.bind(null, null, (items: KubeWorkload[]) => dispatch({items, kind: 'CronJob'})),
+    api.replicaSet.list.bind(null, null, (items: KubeWorkload[]) => dispatch({items, kind: 'ReplicaSet'})),
+    api.statefulSet.list.bind(null, null, (items: KubeWorkload[]) => dispatch({items, kind: 'StatefulSet'})),
   );
 
   // @todo: Abstract the kind, title/name, and API methods into classes,
