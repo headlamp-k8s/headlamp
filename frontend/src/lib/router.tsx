@@ -347,7 +347,7 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
     return '';
   }
 
-  let cluster = null;
+  let cluster: string | null = null;
   if (!route.noCluster) {
     cluster = getCluster();
     if (!cluster) {
