@@ -6,7 +6,7 @@ import { PercentageBar } from '../common/Chart';
 
 interface UsageBarChartProps {
   node: KubeNode;
-  nodeMetrics: KubeMetrics | null;
+  nodeMetrics: KubeMetrics[] | null;
   resourceType: keyof (KubeMetrics['usage'])
 }
 
