@@ -20,7 +20,7 @@ const useStyle = makeStyles({
 export default function NodeList() {
   const classes = useStyle();
   const [nodes, setNodes] = React.useState<KubeObject | null>(null);
-  const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics | null>(null);
+  const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
   const filterFunc = useFilterFunc();
 
   useConnectApi(
