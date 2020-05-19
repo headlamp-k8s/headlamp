@@ -202,13 +202,13 @@ export interface KubeNode extends KubeObject {
 export interface KubeMetrics {
   metadata: KubeMetadata;
   usage: {
-    cpu: number;
-    memory: number;
+    cpu: string;
+    memory: string;
   };
   status: {
     capacity: {
-      cpu: number;
-      memory: number;
+      cpu: string;
+      memory: string;
     };
   };
 }
