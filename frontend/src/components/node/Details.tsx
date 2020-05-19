@@ -76,7 +76,7 @@ function ChartsSection(props: ChartsSectionProps) {
 
     const readyInfo = node.status.conditions.find(({type}) => type === 'Ready');
     if (readyInfo) {
-      return timeAgo(readyInfo.lastTransitionTime);
+      return timeAgo((readyInfo.lastTransitionTime as string));
     }
 
     return 'Not ready yet!';

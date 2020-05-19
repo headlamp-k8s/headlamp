@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.7.2",
     "@material-ui/lab": "^4.0.0-alpha.38",
+    "@types/javascript-time-ago": "^2.0.1",
     "@types/jest": "^25.2.1",
     "@types/lodash": "^4.14.150",
     "@types/node": "^13.13.2",
