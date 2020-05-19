@@ -11,18 +11,18 @@ export const TO_GB = 1024 * 1024 * 1024;
 export const TO_ONE_M_CPU = 1000000;
 export const TO_ONE_CPU = 1000000000;
 
-export function parseDiskSpace(value) {
+export function parseDiskSpace(value: string) {
   return parseUnitsOfBytes(value);
 }
 
-export function parseRam(value) {
+export function parseRam(value: string) {
   return parseUnitsOfBytes(value);
 }
 
-function parseUnitsOfBytes(value) {
+function parseUnitsOfBytes(value: string): number {
   if (!value) return 0;
 
-  const groups = value.match(/(\d+)([BKMGTPEe])?(i)?(\d+)?/);
+  const groups = value.match(/(\d+)([BKMGTPEe])?(i)?(\d+)?/) || [];
   const number = parseInt(groups[1], 10);
 
   // number ex. 1000
@@ -46,7 +46,7 @@ function parseUnitsOfBytes(value) {
   return number * (1000 ** unitIndex);
 }
 
-export function unparseRam(value) {
+export function unparseRam(value: number) {
   let i = 0;
   while (value >= 1024 && i < RAM_TYPES.length - 1) {
     i++;
@@ -59,7 +59,7 @@ export function unparseRam(value) {
   };
 }
 
-export function parseCpu(value) {
+export function parseCpu(value: string) {
   if (!value) return 0;
 
   const number = parseInt(value, 10);
@@ -69,7 +69,7 @@ export function parseCpu(value) {
   return number * 1000 * 1000 * 1000;
 }
 
-export function unparseCpu(value) {
+export function unparseCpu(value: string) {
   const result = parseFloat(value);
 
   return {

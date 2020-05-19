@@ -1,7 +1,9 @@
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
-import { useSelector } from 'react-redux';
 import { matchPath } from 'react-router';
+import { FilterState } from '../redux/reducers/filter';
+import { useTypedSelector } from '../redux/reducers/reducers';
+import { KubeMetrics, KubeNode, KubeObject, KubeWorkload } from './cluster';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 TimeAgo.addLocale(en);
 
@@ -9,15 +11,17 @@ const TIME_AGO = new TimeAgo();
 
 export const CLUSTER_ACTION_GRACE_PERIOD = 5000; // ms
 
-export function timeAgo(date) {
+type DateParam = string | number | Date;
+
+export function timeAgo(date: DateParam) {
   return TIME_AGO.format(new Date(date), 'time');
 }
 
-export function localeDate(date) {
+export function localeDate(date: DateParam) {
   return new Date(date).toLocaleString();
 }
 
-export function getPercentStr(value, total) {
+export function getPercentStr(value: number, total: number) {
   if (total === 0) {
     return null;
   }
@@ -27,16 +31,16 @@ export function getPercentStr(value, total) {
 
 }
 
-export function getReadyReplicas(item) {
+export function getReadyReplicas(item: KubeWorkload) {
   return (item.status.readyReplicas || item.status.numberReady || 0);
 }
 
-export function getTotalReplicas(item) {
+export function getTotalReplicas(item: KubeWorkload) {
   return (item.spec.replicas || item.status.currentNumberScheduled || 0);
 }
 
-export function getResourceStr(value, resourceType) {
-  const resourceFormatters = {
+export function getResourceStr(value: number, resourceType: 'cpu' | 'memory') {
+  const resourceFormatters: any = {
     cpu: unparseCpu,
     memory: unparseRam,
   };
@@ -45,24 +49,23 @@ export function getResourceStr(value, resourceType) {
   return `${valueInfo.value}${valueInfo.unit}`;
 }
 
-export function getResourceMetrics(item, metrics, resourceType) {
-  const type = resourceType.toLowerCase();
-  const resourceParsers = {
+export function getResourceMetrics(item: KubeNode, metrics: KubeMetrics[], resourceType: 'cpu' | 'memory') {
+  const resourceParsers: any = {
     cpu: parseCpu,
     memory: parseRam,
   };
 
-  const parser = resourceParsers[type];
+  const parser = resourceParsers[resourceType];
   const itemMetrics = metrics.find(itemMetrics => itemMetrics.metadata.name === item.metadata.name);
 
-  const used = parser(itemMetrics ? itemMetrics.usage[type] : 0);
-  const capacity = parser(item.status.capacity[type]);
+  const used = parser(itemMetrics ? itemMetrics.usage[resourceType] : '0');
+  const capacity = parser(item.status.capacity[resourceType]);
 
   return [used, capacity];
 }
 
-export function filterResource(item, filter) {
-  let matches = true;
+export function filterResource(item: KubeObject, filter: FilterState) {
+  let matches: boolean = true;
 
   if (item.metadata.namespace && filter.namespaces.size > 0) {
     matches = filter.namespaces.has(item.metadata.namespace);
@@ -77,18 +80,18 @@ export function filterResource(item, filter) {
       ...Object.values(item.metadata.labels || {}).map(item => item.toLowerCase()),
     ];
 
-    matches = matchCriteria.find(item => item.includes(filterString));
+    matches = !!matchCriteria.find(item => item.includes(filterString));
   }
 
   return matches;
 }
 
 export function useFilterFunc() {
-  const filter = useSelector(state => state.filter);
-  return item => filterResource(item, filter);
+  const filter = useTypedSelector(state => state.filter);
+  return (item: KubeObject) => filterResource(item, filter);
 }
 
-export function getClusterPrefixedPath(path) {
+export function getClusterPrefixedPath(path?: string | null) {
   const baseClusterPath = '/c/:cluster';
   if (!path) {
     return baseClusterPath;
@@ -96,7 +99,8 @@ export function getClusterPrefixedPath(path) {
   return baseClusterPath + (path[0] === '/' ? '' : '/') + path;
 }
 
-export function getCluster() {
-  const clusterURLMatch = matchPath(window.location.pathname, {path: getClusterPrefixedPath()});
+export function getCluster(): string | null {
+  const clusterURLMatch =
+    matchPath<{cluster?: string}>(window.location.pathname, {path: getClusterPrefixedPath()});
   return (!!clusterURLMatch && clusterURLMatch.params.cluster) || null;
 }
