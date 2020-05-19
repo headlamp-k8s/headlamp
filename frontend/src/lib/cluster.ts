@@ -177,6 +177,10 @@ export interface KubeNode extends KubeObject {
       address: string;
       type: string;
     }[];
+    capacity: {
+      cpu: any;
+      memory: any;
+    };
     conditions: (Omit<KubeCondition, 'lastProbeTime' | 'lastUpdateTime'> & {
       lastHeartbeatTime: string;
     })[];
