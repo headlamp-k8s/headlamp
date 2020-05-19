@@ -1,6 +1,6 @@
 import { Action, FILTER_RESET, FILTER_SET_NAMESPACE, FILTER_SET_SEARCH } from '../actions/actions';
 
-interface FilterState {
+export interface FilterState {
   namespaces: Set<string>;
   search: string
 }
