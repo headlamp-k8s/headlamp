@@ -101,6 +101,7 @@ export const ROUTES: {
   storageClassDetails: {
     path: '/storage/classes/:name',
     name: 'Storage Classes',
+    exact: true,
     sidebar: 'storageClasses',
     component: () => <StorageClassDetails />
   },

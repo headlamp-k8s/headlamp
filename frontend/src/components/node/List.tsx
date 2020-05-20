@@ -27,7 +27,7 @@ export default function NodeList() {
     api.node.list.bind(null, setNodes),
     api.metrics.nodes.bind(null, setNodeMetrics)
   );
-
+    
   return (
     <Paper>
       <SectionFilterHeader

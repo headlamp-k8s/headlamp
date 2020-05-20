@@ -275,7 +275,7 @@ function DocsViewer(props: {docSpecs: any;}) {
 
     getDocDefinitions(docSpecs.apiVersion, docSpecs.kind)
       .then(result => {
-        setDocs(result ? result.properties : {});
+        setDocs(result?.properties || {});
       });
   },
   [docSpecs]);
