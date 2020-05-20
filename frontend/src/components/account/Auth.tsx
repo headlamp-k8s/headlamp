@@ -89,7 +89,13 @@ function Auth() {
 
 async function loginWithToken(token: string) {
   try {
-    setToken(getCluster(), token);
+    let cluster = getCluster();
+    if (!cluster) {
+      // Expectation failed.
+      return 417;
+    }
+
+    setToken(cluster, token);
     await api.testAuth();
 
     return 200;
