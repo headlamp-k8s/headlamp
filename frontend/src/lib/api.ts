@@ -1,12 +1,18 @@
 /*
- * This module was taken from the k8dash project.
+ * This module was originally taken from the K8dash project before modifications.
+ *
+ * K8dash is licensed under Apache License 2.0.
+ *
+ * Copyright © 2020 Eric Herbrandson
+ * Copyright © 2020 Kinvolk GmbH
  */
 
-import {Base64} from 'js-base64';
+import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import {apiFactory, apiFactoryWithNamespace, post, request, stream} from './apiProxy';
+import { apiFactory, apiFactoryWithNamespace, post, request, stream, StreamResultsCb } from './apiProxy';
+import { KubeMetrics, KubeObject, StringDict } from './cluster';
 
 const configMap = apiFactoryWithNamespace('', 'v1', 'configmaps');
 const event = apiFactoryWithNamespace('', 'v1', 'events');
@@ -38,7 +44,9 @@ const storageClass = apiFactory('storage.k8s.io', 'v1', 'storageclasses');
 
 const crd = apiFactory('apiextensions.k8s.io', 'v1beta1', 'customresourcedefinitions');
 
-const apis = {
+const apis: {
+  [apiPoint: string]: any;
+} = {
   apply,
   testAuth,
   getAuthorization,
@@ -81,20 +89,24 @@ async function testAuth() {
   await post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', {spec}, false);
 }
 
-function getVersion() {
+function getVersion(): Promise<StringDict> {
   return request('/version');
 }
 
 async function getConfig() {
-  return request('/config', {}, false, false);
+  return request('/config', {}, false, false) as Promise<{[prop: string]: string | number | any}>;
 }
 
-function getRules(namespace) {
+function getRules(namespace: string) {
   return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', {spec: {namespace}});
 }
 
-async function getAuthorization(resource, verb) {
-  const resourceAttrs = {
+async function getAuthorization(resource: KubeObject, verb: string) {
+  const resourceAttrs: {
+    name: string;
+    verb: string;
+    namespace?: string;
+  } = {
     name: resource.metadata.name,
     verb
   };
@@ -115,7 +127,7 @@ async function getAuthorization(resource, verb) {
     false);
 }
 
-async function apply(body) {
+async function apply(body: KubeObject) {
   const serviceName = _.camelCase(body.kind);
   const service = apis[serviceName];
   if (!service) {
@@ -134,15 +146,18 @@ async function apply(body) {
   }
 }
 
+type ApiListCb = (objsList: KubeObject[]) => void;
+type ApiMetricsListCb = (objsList: KubeMetrics[]) => void;
+
 function metricsFactory() {
   return {
-    nodes: cb => metrics('/apis/metrics.k8s.io/v1beta1/nodes', cb),
-    node: (name, cb) => metrics(`/apis/metrics.k8s.io/v1beta1/nodes/${name}`, cb),
-    pods: (namespace, cb) => metrics(url(namespace), cb),
-    pod: (namespace, name, cb) => metrics(`/apis/metrics.k8s.io/v1beta1/namespaces/${namespace}/pods/${name}`, cb),
+    nodes: (cb: ApiMetricsListCb) => metrics('/apis/metrics.k8s.io/v1beta1/nodes', cb),
+    node: (name: string, cb: ApiMetricsListCb) => metrics(`/apis/metrics.k8s.io/v1beta1/nodes/${name}`, cb),
+    pods: (namespace: string, cb: ApiMetricsListCb) => metrics(url(namespace), cb),
+    pod: (namespace: string, name: string, cb: ApiMetricsListCb) => metrics(`/apis/metrics.k8s.io/v1beta1/namespaces/${namespace}/pods/${name}`, cb),
   };
 
-  function url(namespace) {
+  function url(namespace: string) {
     return namespace ? `/apis/metrics.k8s.io/v1beta1/namespaces/${namespace}/pods` : '/apis/metrics.k8s.io/v1beta1/pods';
   }
 }
@@ -150,11 +165,11 @@ function metricsFactory() {
 function oidcFactory() {
   return {
     get: () => request('/oidc'),
-    post: (code, redirectUri) => post('/oidc', {code, redirectUri}),
+    post: (code: string, redirectUri: string) => post('/oidc', {code, redirectUri}),
   };
 }
 
-async function metrics(url, cb) {
+async function metrics(url: string, cb: (arg: KubeMetrics[]) => void) {
   const handel = setInterval(getMetrics, 10000);
   getMetrics();
 
@@ -178,7 +193,13 @@ function swagger() {
   return request('/openapi/v2');
 }
 
-function exec(namespace, name, container, cb, options = {}) {
+interface ExecOptions {
+  command?: string[];
+  reconnectOnFailure?: boolean;
+}
+
+function exec(namespace: string, name: string, container: string, cb: StreamResultsCb,
+              options: ExecOptions = {}) {
   const {command = ['sh'], reconnectOnFailure = undefined} = options;
   const commandStr = command.map(item => '&command=' + encodeURIComponent(item)).join('');
   const url = `/api/v1/namespaces/${namespace}/pods/${name}/exec?container=${container}${commandStr}&stdin=1&stderr=1&stdout=1&tty=1`;
@@ -186,8 +207,9 @@ function exec(namespace, name, container, cb, options = {}) {
   return stream(url, cb, {additionalProtocols, isJson: false, reconnectOnFailure});
 }
 
-function logs(namespace, name, container, tailLines, showPrevious, cb) {
-  const items = [];
+function logs(namespace: string, name: string, container: string, tailLines: number,
+              showPrevious: boolean, cb: StreamResultsCb) {
+  const items: string[] = [];
   const url = `/api/v1/namespaces/${namespace}/pods/${name}/log?container=${container}&previous=${showPrevious}&tailLines=${tailLines}&follow=true`;
   const {cancel} = stream(url, transformer, {isJson: false, connectCb});
   return cancel;
@@ -196,7 +218,7 @@ function logs(namespace, name, container, tailLines, showPrevious, cb) {
     items.length = 0;
   }
 
-  function transformer(item) {
+  function transformer(item: string) {
     if (!item) return; // For some reason, this api returns a lot of empty strings
 
     const message = Base64.decode(item);
@@ -205,8 +227,10 @@ function logs(namespace, name, container, tailLines, showPrevious, cb) {
   }
 }
 
+type CancellablePromise = Promise<() => void>;
+
 // Hook for managing API connections in a shared and coherent way.
-export function useConnectApi(...apiCalls) {
+export function useConnectApi(...apiCalls: (() => CancellablePromise)[]) {
   // Use the location to make sure the API calls are changed, as they may depend on the cluster
   // (defined in the URL ATM).
   // @todo: Update this if the active cluster management is changed.

@@ -60,6 +60,7 @@
   "devDependencies": {
     "@iconify/icons-mdi": "^1.0.36",
     "@iconify/react": "^1.1.1",
+    "@types/js-base64": "^2.3.1",
     "@types/js-yaml": "^3.12.4",
     "@types/recharts": "^1.8.10",
     "eslint": "^6.7.2",

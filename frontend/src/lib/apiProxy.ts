@@ -1,8 +1,14 @@
 /*
- * This module was taken from the k8dash project.
+ * This module was originally taken from the K8dash project before modifications.
+ *
+ * K8dash is licensed under Apache License 2.0.
+ *
+ * Copyright © 2020 Eric Herbrandson
+ * Copyright © 2020 Kinvolk GmbH
  */
 
 import { getToken, logout } from './auth';
+import { KubeObject } from './cluster';
 import { getCluster } from './util';
 
 const {host, href, hash, search} = window.location;
@@ -13,8 +19,17 @@ const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
 
-export async function request(path, params, autoLogoutOnAuthError = true, useCluster = true) {
-  const opts = Object.assign({headers: {}}, params);
+interface RequestParams {
+  [prop: string]: any;
+}
+
+export async function request(path: string, params: RequestParams = {},
+                              autoLogoutOnAuthError: boolean = true, useCluster: boolean = true) {
+  interface RequestHeaders {
+    Authorization?: string;
+    [otherHeader: string]: any;
+  };
+  const opts: {headers: RequestHeaders} = Object.assign({headers: {}}, params);
 
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
   const cluster = getCluster();
@@ -47,7 +62,7 @@ export async function request(path, params, autoLogoutOnAuthError = true, useClu
       console.error('Unable to parse error json', {err});
     }
 
-    const error = new Error(message);
+    const error: Error & {status?: number} = new Error(message);
     error.status = status;
     throw error;
   }
@@ -55,28 +70,41 @@ export async function request(path, params, autoLogoutOnAuthError = true, useClu
   return response.json();
 }
 
-export function apiFactory(group, version, resource) {
+export type StreamResultsCb = (...args: any[]) => void;
+export type StreamErrCb = (err: Error) => void;
+
+export function apiFactory(group: string, version: string, resource: string) {
   const apiRoot = getApiRoot(group, version);
   const url = `${apiRoot}/${resource}`;
   return {
     resource: {group, resource},
-    list: (cb, errCb) => streamResults(url, cb, errCb),
-    get: (name, cb, errCb) => streamResult(url, name, cb, errCb),
-    post: body => post(url, body),
-    put: body => put(`${url}/${body.metadata.name}`, body),
-    delete: name => remove(`${url}/${name}`),
+    list: (cb: StreamResultsCb, errCb: StreamErrCb) => streamResults(url, cb, errCb),
+    get: (name: string, cb: StreamResultsCb,
+          errCb: StreamErrCb) => streamResult(url, name, cb, errCb),
+    post: (body: KubeObject) => post(url, body),
+    put: (body: KubeObject) => put(`${url}/${body.metadata.name}`, body),
+    delete: (name: string) => remove(`${url}/${name}`),
   };
 }
 
-export function apiFactoryWithNamespace(group, version, resource, includeScale) {
+export function apiFactoryWithNamespace(group: string, version: string, resource: string,
+                                        includeScale: boolean = false) {
   const apiRoot = getApiRoot(group, version);
-  const results = {
+  const results: {
+    resource: {
+      group: string;
+      resource: string;
+    };
+    [other: string]: any;
+  } = {
     resource: {group, resource},
-    list: (namespace, cb, errCb) => streamResults(url(namespace), cb, errCb),
-    get: (namespace, name, cb, errCb) => streamResult(url(namespace), name, cb, errCb),
-    post: body => post(url(body.metadata.namespace), body),
-    put: body => put(`${url(body.metadata.namespace)}/${body.metadata.name}`, body),
-    delete: (namespace, name) => remove(`${url(namespace)}/${name}`),
+    list: (namespace: string, cb: StreamResultsCb,
+           errCb: StreamErrCb) => streamResults(url(namespace), cb, errCb),
+    get: (namespace: string, name: string, cb: StreamResultsCb,
+          errCb: StreamErrCb) => streamResult(url(namespace), name, cb, errCb),
+    post: (body: KubeObject) => post(url(body.metadata.namespace as string), body),
+    put: (body: KubeObject) => put(`${url(body.metadata.namespace as string)}/${body.metadata.name}`, body),
+    delete: (namespace: string, name: string) => remove(`${url(namespace)}/${name}`),
   };
 
   if (includeScale) {
@@ -85,46 +113,48 @@ export function apiFactoryWithNamespace(group, version, resource, includeScale) 
 
   return results;
 
-  function url(namespace) {
+  function url(namespace: string) {
     return namespace ? `${apiRoot}/namespaces/${namespace}/${resource}` : `${apiRoot}/${resource}`;
   }
 }
 
-function getApiRoot(group, version) {
+function getApiRoot(group: string, version: string) {
   return group ? `/apis/${group}/${version}` : `api/${version}`;
 }
 
-function apiScaleFactory(apiRoot, resource) {
+function apiScaleFactory(apiRoot: string, resource: string) {
   return {
-    get: (namespace, name) => request(url(namespace, name)),
-    put: body => put(url(body.metadata.namespace, body.metadata.name), body),
+    get: (namespace: string, name: string) => request(url(namespace, name)),
+    put: (body: KubeObject) =>
+      put(url(body.metadata.namespace as string, body.metadata.name), body),
   };
 
-  function url(namespace, name) {
+  function url(namespace: string, name: string) {
     return `${apiRoot}/namespaces/${namespace}/${resource}/${name}/scale`;
   }
 }
 
-export function post(url, json, autoLogoutOnAuthError = true) {
+export function post(url: string, json: JSON | object | KubeObject, autoLogoutOnAuthError = true) {
   const body = JSON.stringify(json);
   const opts = {method: 'POST', body, headers: JSON_HEADERS};
   return request(url, opts, autoLogoutOnAuthError);
 }
 
-export function put(url, json, autoLogoutOnAuthError = true) {
+export function put(url: string, json: KubeObject, autoLogoutOnAuthError = true) {
   const body = JSON.stringify(json);
   const opts = {method: 'PUT', body, headers: JSON_HEADERS};
   return request(url, opts, autoLogoutOnAuthError);
 }
 
-export function remove(url) {
+export function remove(url: string) {
   const opts = {method: 'DELETE', headers: JSON_HEADERS};
   return request(url, opts);
 }
 
-export async function streamResult(url, name, cb, errCb) {
+export async function streamResult(url: string, name: string, cb: StreamResultsCb,
+                                   errCb: StreamErrCb) {
   let isCancelled = false;
-  let socket;
+  let socket: ReturnType<typeof stream>;
   run();
 
   return cancel;
@@ -154,10 +184,12 @@ export async function streamResult(url, name, cb, errCb) {
   }
 }
 
-export async function streamResults(url, cb, errCb) {
-  const results = {};
+export async function streamResults(url: string, cb: StreamResultsCb, errCb: StreamErrCb) {
+  const results: {
+    [uid: string]: KubeObject;
+  } = {};
   let isCancelled = false;
-  let socket;
+  let socket: ReturnType<typeof stream>;
   run();
 
   return cancel;
@@ -185,7 +217,7 @@ export async function streamResults(url, cb, errCb) {
     if (socket) socket.cancel();
   }
 
-  function add(items, kind) {
+  function add(items: KubeObject[], kind: string) {
     const fixedKind = kind.slice(0, -4); // Trim off the word "List" from the end of the string
     for (const item of items) {
       item.kind = fixedKind;
@@ -195,7 +227,7 @@ export async function streamResults(url, cb, errCb) {
     push();
   }
 
-  function update({type, object}) {
+  function update({type, object}: {type: 'ADDED' | 'MODIFIED' | 'DELETED' | 'ERROR'; object: KubeObject}) {
     object.actionType = type; // eslint-disable-line no-param-reassign
 
     switch (type) {
@@ -236,10 +268,17 @@ export async function streamResults(url, cb, errCb) {
   }
 }
 
-export function stream(url, cb, args) {
-  let connection;
-  let isCancelled;
-  const {isJson, additionalProtocols, connectCb, reconnectOnFailure = true} = args;
+interface StreamArgs {
+  isJson?: boolean;
+  additionalProtocols?: string[];
+  connectCb?: () => void;
+  reconnectOnFailure?: boolean;
+}
+
+export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
+  let connection: ReturnType<typeof connectStream>;
+  let isCancelled = false;
+  const {isJson = false, additionalProtocols, connectCb, reconnectOnFailure = true} = args;
 
   connect();
 
@@ -269,12 +308,13 @@ export function stream(url, cb, args) {
   }
 }
 
-function connectStream(path, cb, onFail, isJson, additionalProtocols = []) {
+function connectStream(path: string, cb: StreamResultsCb, onFail: () => void, isJson: boolean,
+                       additionalProtocols: string[] = []) {
   let isClosing = false;
 
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
   const cluster = getCluster();
-  const token = getToken(cluster);
+  const token = getToken(cluster || '');
   const encodedToken = btoa(token).replace(/=/g, '');
 
   const protocols = [
@@ -302,14 +342,14 @@ function connectStream(path, cb, onFail, isJson, additionalProtocols = []) {
     socket.close();
   }
 
-  function onMessage(body) {
+  function onMessage(body: MessageEvent) {
     if (isClosing) return;
 
     const item = isJson ? JSON.parse(body.data) : body.data;
     cb(item);
   }
 
-  function onClose(...args) {
+  function onClose(...args: any[]) {
     if (isClosing) return;
     isClosing = true;
 
@@ -321,12 +361,12 @@ function connectStream(path, cb, onFail, isJson, additionalProtocols = []) {
     onFail();
   }
 
-  function onError(err) {
+  function onError(err: any) {
     console.error('Error in api stream', {err, path});
   }
 }
 
-function combinePath(base, path) {
+function combinePath(base: string, path: string) {
   if (base.endsWith('/')) base = base.slice(0, -1); // eslint-disable-line no-param-reassign
   if (path.startsWith('/')) path = path.slice(1); // eslint-disable-line no-param-reassign
   return `${base}/${path}`;
