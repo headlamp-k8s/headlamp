@@ -124,7 +124,9 @@ function App() {
               <CssBaseline />
               <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
+                  <div style={{flex: '1 0 0'}} />
                   <ClusterTitle />
+                  <div style={{flex: '1 0 0'}} />
                 </Toolbar>
               </AppBar>
               <Sidebar />
