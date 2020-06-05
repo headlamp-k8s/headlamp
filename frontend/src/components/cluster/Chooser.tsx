@@ -1,5 +1,6 @@
 import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon } from '@iconify/react';
+import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,7 +9,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -23,7 +23,18 @@ import { Cluster } from '../../redux/reducers/config';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import Loader from '../common/Loader';
 
+const useClusterTitleStyle = makeStyles(theme => ({
+  button: {
+    backgroundColor: theme.palette.sidebarBg,
+    color: theme.palette.primary.contrastText,
+    '&:hover': {
+      color: theme.palette.text.primary,
+    }
+  }
+}));
+
 export function ClusterTitle() {
+  const classes = useClusterTitleStyle();
   // Use location is only added here in order for the component to be aware of
   // a URL change which may indicate a cluster change.
   // @todo: Update if the way to manage the current cluster changes.
@@ -33,24 +44,24 @@ export function ClusterTitle() {
   const clusters = useTypedSelector(state => state.config.clusters);
   const [showChooser, setShowChooser] = React.useState(false);
 
-  const icon = <InlineIcon icon={kubernetesIcon} width="50" height="50" color="#fff" />;
-
   if (!cluster) {
     return null;
   }
 
   return (
     <React.Fragment>
-      {clusters.length > 1 ?
-        <IconButton
+      {(clusters.length > 1) ?
+        <Button
+          size="large"
+          variant="contained"
           onClick={() => setShowChooser(true)}
+          className={classes.button}
         >
-          {icon}
-        </IconButton>
-        :
-        icon
+          Cluster: {cluster}
+        </Button>
+      :
+        <Typography color="textPrimary">Cluster: {cluster}</Typography>
       }
-      <Typography variant="h4">&nbsp;{cluster}</Typography>
       <Chooser
         title="Clusters"
         open={showChooser}
