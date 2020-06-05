@@ -1,5 +1,6 @@
 import AppBar from '@material-ui/core/AppBar';
 import green from '@material-ui/core/colors/green';
+import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
@@ -11,7 +12,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
-import Sidebar, { useSidebarItem } from './components/Sidebar';
+import Sidebar, { drawerWidth, useSidebarItem } from './components/Sidebar';
 import { getToken } from './lib/auth';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
 import { getCluster } from './lib/util';
@@ -22,10 +23,16 @@ import store from './redux/stores/store';
 declare module '@material-ui/core/styles/createPalette.d' {
   interface Palette {
     success: object;
+    sidebarLink: {
+      [propName: string]: string;
+    };
     [propName: string]: any;
   }
   interface PaletteOptions {
     success: object;
+    sidebarLink: {
+      [propName: string]: string;
+    };
     [propName: string]: any;
   }
 }
@@ -44,6 +51,11 @@ const dashboardTheme = createMuiTheme({
       main: orange['700'],
       ...orange
     },
+    sidebarLink: {
+      main: grey['500'],
+      selectedBg: grey['800'],
+    },
+    sidebarBg: '#000',
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', ')
@@ -55,7 +67,9 @@ const useStyle = makeStyles(theme => ({
     display: 'flex',
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
+    background: '#fff',
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
   },
   content: {
     flexGrow: 1,

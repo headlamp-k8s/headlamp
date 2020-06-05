@@ -13,6 +13,7 @@ import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
+import SvgIcon from '@material-ui/core/SvgIcon';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
@@ -25,21 +26,36 @@ import { setSidebarSelected } from '../redux/actions/actions';
 import { useTypedSelector } from '../redux/reducers/reducers';
 import { SidebarEntry } from '../redux/reducers/ui';
 import store from '../redux/stores/store';
+import { ReactComponent as LogoLight } from '../resources/logo-light.svg';
 import { NameValueTable } from './common';
 
-const DRAWER_WIDTH = 200;
+
+export const drawerWidth = 330;
 
 const useStyle = makeStyles(theme => ({
   drawer: {
-    width: DRAWER_WIDTH,
+    width: drawerWidth,
     flexShrink: 0,
   },
   drawerPaper: {
-    width: DRAWER_WIDTH,
+    width: drawerWidth,
+    background: theme.palette.sidebarBg,
   },
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    borderBottom: '1px solid #1e1e1e',
+    paddingTop: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
+    paddingBottom: theme.spacing(1),
+  },
   sidebarGrid: {
-    height: '100%',
+    height: '100%'
+  },
+  '.MuiListItemText-primary': {
+    color: 'red'
+  },
+  logo: {
+    height: '32px',
+    width: 'auto',
   }
 }));
 
@@ -158,15 +174,17 @@ function prepareRoutes() {
   return routes;
 }
 
-const useVersionButtonStyle = makeStyles({
+const useVersionButtonStyle = makeStyles(theme => ({
   versionBox: {
     textAlign: 'center',
-    borderTop: '1px solid #afafaf',
+    '& .MuiButton-label': {
+      color: theme.palette.sidebarLink.main,
+    }
   },
   versionIcon: {
     marginBottom: '3px',
   },
-});
+}));
 
 function VersionButton() {
   const location = useLocation();
@@ -237,7 +255,7 @@ function VersionButton() {
       <Button
         onClick={() => setOpen(true) }
         style={{textTransform: 'none', }}
-        startIcon={<Icon color="#09bac8" icon={kubernetesIcon} className={classes.versionIcon} />}
+        startIcon={<Icon color="#adadad" icon={kubernetesIcon} className={classes.versionIcon} />}
       >
         {clusterVersion.gitVersion}
       </Button>
@@ -309,7 +327,13 @@ export default function Sidebar() {
         paper: classes.drawerPaper,
       }}
     >
-      <div className={classes.toolbar} />
+      <div className={classes.toolbar}>
+        <SvgIcon
+          className={classes.logo}
+          component={LogoLight}
+          viewBox="0 0 175 32"
+        />
+      </div>
       <Grid
         className={classes.sidebarGrid}
         container
@@ -338,12 +362,53 @@ export default function Sidebar() {
 
 const useItemStyle = makeStyles(theme => ({
   nested: {
-    paddingLeft: theme.spacing(2),
+    '& .MuiListItem-root': {
+      paddingLeft: theme.spacing(7),
+    }
+  },
+  linkMain: {
+    textTransform: 'uppercase',
+  },
+  link: {
+    color: theme.palette.sidebarLink.main,
+    '&:hover': {
+      color: theme.palette.primary.contrastText,
+      backgroundColor: `${theme.palette.sidebarLink.selectedBg}!important`,
+    },
+    '& *': {
+      fontSize: '1.2rem',
+    },
+    '& .MuiListItemIcon-root': {
+      minWidth: 0,
+      marginRight: '12px',
+    },
+  },
+  linkSelected: {
+    color: theme.palette.primary.contrastText,
+    // For some reason we need to use important as even though we override the
+    // "selected" class, it uses the default one first.
+    backgroundColor: `${theme.palette.sidebarLink.selectedBg}!important`,
+    '& *': {
+      fontWeight: 'bold',
+    },
+  },
+  linkActive: {
+    color: theme.palette.primary.contrastText,
+    '&:hover': {
+      backgroundColor: theme.palette.sidebarLink.selectedBg,
+      'svg': {
+        color: theme.palette.primary.contrastText,
+      },
+    },
+    '& *': {
+      fontSize: '1.2rem',
+    },
   },
 }));
 
 interface SidebarItemProps extends ListItemProps, SidebarEntry {
   selectedName?: string | null;
+  hasParent?: boolean;
 }
 
 function SidebarItem(props: SidebarItemProps) {
@@ -356,6 +421,7 @@ function SidebarItem(props: SidebarItemProps) {
     useClusterURL = false,
     subList = [],
     selectedName,
+    hasParent=false,
     ...other
   } = props;
 
@@ -380,21 +446,35 @@ function SidebarItem(props: SidebarItemProps) {
     return isSelected() || !!subList.find(item => item.name === selectedName);
   }
 
+  const expanded = subList.length > 0 && shouldExpand();
+  let linkClass = classes.link;
+  if (hasParent || expanded) {
+    linkClass += ' ' + classes.linkActive;
+  }
+  if (!hasParent) {
+    linkClass += ' ' + classes.linkMain;
+  }
+
   return (
     <React.Fragment>
       <ListItemLink
         selected={isSelected()}
         to={fullURL || ''}
         primary={label}
+        classes={{
+          selected: classes.linkSelected,
+        }}
+        className={linkClass}
         {...other}
       />
       {subList.length > 0 &&
-        <Collapse in={shouldExpand()}>
+        <Collapse in={expanded}>
           <List component="div" disablePadding className={classes.nested}>
             {subList.map((item, i) =>
               <SidebarItem
                 key={i}
                 selectedName={selectedName}
+                hasParent={true}
                 {...item}
               />
             )}
