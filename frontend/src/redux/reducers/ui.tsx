@@ -7,6 +7,7 @@ export interface SidebarEntry {
   url?: string;
   useClusterURL?: boolean;
   subList?: this[];
+  icon?: object;
 }
 
 export interface UIState {

@@ -1,4 +1,9 @@
+import circleSlice2 from '@iconify/icons-mdi/circle-slice-2';
+import databaseIcon from '@iconify/icons-mdi/database';
+import folderNetworkOutline from '@iconify/icons-mdi/folder-network-outline';
+import hexagonMultipleOutline from '@iconify/icons-mdi/hexagon-multiple-outline';
 import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
+import lockIcon from '@iconify/icons-mdi/lock';
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -11,6 +16,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -63,6 +69,7 @@ const LIST_ITEMS: SidebarEntry[] = [
   {
     name: 'cluster',
     label: 'Cluster',
+    icon: hexagonMultipleOutline,
     subList: [
       {
         name: 'namespaces',
@@ -85,6 +92,7 @@ const LIST_ITEMS: SidebarEntry[] = [
   {
     name: 'workloads',
     label: 'Workloads',
+    icon: circleSlice2,
     subList: [
       {
         name: 'pods',
@@ -99,6 +107,7 @@ const LIST_ITEMS: SidebarEntry[] = [
   {
     name: 'storage',
     label: 'Storage',
+    icon: databaseIcon,
     subList: [
       {
         name: 'storageClasses',
@@ -117,6 +126,7 @@ const LIST_ITEMS: SidebarEntry[] = [
   {
     name: 'network',
     label: 'Network',
+    icon: folderNetworkOutline,
     subList: [
       {
         name: 'services',
@@ -131,6 +141,7 @@ const LIST_ITEMS: SidebarEntry[] = [
   {
     name: 'security',
     label: 'Security',
+    icon: lockIcon,
     subList: [
       {
         name: 'serviceAccounts',
@@ -280,10 +291,11 @@ function VersionButton() {
 interface ListItemLinkProps {
   primary: string;
   to: string;
+  icon?: object;
 }
 
 function ListItemLink(props: ListItemLinkProps) {
-  const { primary, to, ...other } = props;
+  const { primary, to, icon, ...other } = props;
 
   const renderLink = React.useMemo(
     () =>
@@ -300,6 +312,11 @@ function ListItemLink(props: ListItemLinkProps) {
         component={renderLink}
         {...other}
       >
+        {icon &&
+          <ListItemIcon>
+            <Icon icon={icon} width={30} height={30} />
+          </ListItemIcon>
+        }
         <ListItemText primary={primary} />
       </ListItem>
     </li>
@@ -375,6 +392,9 @@ const useItemStyle = makeStyles(theme => ({
       color: theme.palette.primary.contrastText,
       backgroundColor: `${theme.palette.sidebarLink.selectedBg}!important`,
     },
+    '& svg': {
+      color: theme.palette.sidebarLink.main,
+    },
     '& *': {
       fontSize: '1.2rem',
     },
@@ -400,6 +420,9 @@ const useItemStyle = makeStyles(theme => ({
         color: theme.palette.primary.contrastText,
       },
     },
+    '& svg': {
+      color: theme.palette.primary.contrastText,
+    },
     '& *': {
       fontSize: '1.2rem',
     },
@@ -422,6 +445,7 @@ function SidebarItem(props: SidebarItemProps) {
     subList = [],
     selectedName,
     hasParent=false,
+    icon,
     ...other
   } = props;
 
@@ -465,6 +489,7 @@ function SidebarItem(props: SidebarItemProps) {
           selected: classes.linkSelected,
         }}
         className={linkClass}
+        icon={icon}
         {...other}
       />
       {subList.length > 0 &&
