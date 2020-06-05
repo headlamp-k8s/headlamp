@@ -60,6 +60,9 @@ const dashboardTheme = createMuiTheme({
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', ')
   },
+  shape: {
+    borderRadius: 0,
+  }
 });
 
 const useStyle = makeStyles(theme => ({
