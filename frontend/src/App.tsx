@@ -41,7 +41,7 @@ const dashboardTheme = createMuiTheme({
   palette: {
     primary: {
       contrastText: '#fff',
-      main: '#09bac8',
+      main: '#3DA3F5',
     },
     success: {
       main: green['500'],
