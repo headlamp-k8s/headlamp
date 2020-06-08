@@ -1,6 +1,7 @@
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { KubeEvent } from '../../lib/cluster';
@@ -70,13 +71,24 @@ export default function Overview() {
   );
 }
 
+const useStyles = makeStyles(theme => ({
+  eventLabel: {
+    [theme.breakpoints.up('md')]: {
+      minWidth: '180px',
+    },
+  }
+}));
+
 function EventsSection(props: { events: KubeEvent[] | null }) {
+  const classes = useStyles();
   const { events } = props;
   const filterFunc = useFilterFunc();
 
   function makeStatusLabel(event: KubeEvent) {
     return (
-      <StatusLabel status={event.type === 'Normal' ? '' : 'warning'} >
+      <StatusLabel status={event.type === 'Normal' ? '' : 'warning'}
+        className={classes.eventLabel}
+      >
         {event.reason}
       </StatusLabel>
     );
