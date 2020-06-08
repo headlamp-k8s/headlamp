@@ -498,6 +498,7 @@ export function ContainerInfo(props: {container: KubeContainer}) {
   return (
     <React.Fragment>
       <SectionHeader
+        noPadding
         title={container.name}
       />
       <SectionGrid
