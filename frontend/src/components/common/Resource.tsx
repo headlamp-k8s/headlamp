@@ -93,7 +93,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
   const { dict, showKeys = true } = props;
   const [expanded, setExpanded] = React.useState(false);
 
-  const keys = Object.keys(dict);
+  const keys = Object.keys(dict || []);
 
   const MetadataEntry = React.forwardRef((props: TypographyProps, ref) => {
     return (
