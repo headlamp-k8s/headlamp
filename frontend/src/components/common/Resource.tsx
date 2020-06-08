@@ -195,19 +195,6 @@ export function ResourceLink(props: ResourceLinkProps) {
   );
 }
 
-const useStyle = makeStyles(theme => ({
-  tinyDivider: {
-    margin: theme.spacing(1),
-    display: 'none',
-    [theme.breakpoints.down('md')]: {
-      display: 'block'
-    }
-  },
-  name: {
-    marginBottom: theme.spacing(1),
-  }
-}));
-
 interface MainInfoSectionProps {
   resource: KubeObject | null;
   headerSection?: React.ReactNode;
@@ -237,7 +224,6 @@ export function MainInfoSection(props: MainInfoSectionProps) {
           <React.Fragment>
             {headerSection}
             <SectionGrid
-              useDivider
               items={[
                 <MetadataDisplay resource={resource} />,
                 extraInfo &&
@@ -283,8 +269,7 @@ interface SectionGridProps {
 }
 
 export function SectionGrid(props: SectionGridProps) {
-  const classes = useStyle();
-  const { items, useDivider = false } = props;
+  const { items } = props;
   return (
     <Grid
       container
@@ -292,26 +277,14 @@ export function SectionGrid(props: SectionGridProps) {
     >
       {items.map((item, i) => {
         return (
-          <React.Fragment key={i}>
-            <Grid
-              item
-              md={12}
-              xs={12}
-            >
-              {item}
-            </Grid>
-            {/* Only use a divider if required and this item is not the last one */}
-            {useDivider && (items.length - 1) !== i &&
-              <Grid
-                item
-                md={12}
-                xs={12}
-                className={classes.tinyDivider}
-              >
-                <Divider />
-              </Grid>
-            }
-          </React.Fragment>
+          <Grid
+            item
+            md={12}
+            xs={12}
+            key={i}
+          >
+            {item}
+          </Grid>
         );
       })}
     </Grid>
