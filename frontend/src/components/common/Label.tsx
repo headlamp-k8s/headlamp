@@ -86,7 +86,7 @@ export interface StatusLabelProps {
 }
 
 export function StatusLabel(props: StatusLabelProps) {
-  const { status, ...other } = props;
+  const { status, className = '', ...other } = props;
   const classes = useStyles();
   const theme = useTheme();
 
@@ -97,7 +97,7 @@ export function StatusLabel(props: StatusLabelProps) {
 
   return (
     <Typography
-      className={classes.statusLabel}
+      className={classes.statusLabel + ' ' + className}
       style={{
         backgroundColor: color,
       }}
