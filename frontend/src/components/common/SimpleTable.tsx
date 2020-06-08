@@ -9,13 +9,18 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
 import Empty from './EmptyContent';
-import { NameLabel, ValueLabel } from './Label';
+import { ValueLabel } from './Label';
 import Loader from './Loader';
 
 const useTableStyle = makeStyles(theme => ({
   headerCell: {
     fontWeight: 'bold',
     paddingBottom: theme.spacing(.5),
+  },
+  table: {
+    '& .MuiTableCell-root': {
+      paddingLeft: '0',
+    }
   }
 }));
 
@@ -86,7 +91,7 @@ export default function SimpleTable(props: SimpleTableProps) {
       <Empty>{emptyMessage || 'No data to be shown.'}</Empty>
       :
       <React.Fragment>
-        <Table>
+        <Table className={classes.table}>
           <TableHead>
             <TableRow>
               {columns.map(({label, cellProps = {}}, i) =>
@@ -154,16 +159,17 @@ export default function SimpleTable(props: SimpleTableProps) {
 
 const useStyles = makeStyles(theme => ({
   metadataCell: {
-    border: 'none',
     width: '100%',
     verticalAlign: 'top',
   },
   metadataNameCell: {
-    border: 'none',
     textAlign: 'left',
     maxWidth: '50%',
     minWidth: '10rem',
     verticalAlign: 'top',
+    paddingLeft: '0',
+    paddingRight: '0',
+    color: theme.palette.text.secondary,
   },
 }));
 
@@ -182,9 +188,7 @@ export function NameValueTable(props: NameValueTableProps) {
   const { rows } = props;
 
   return (
-    <Table
-      size="small"
-    >
+    <Table>
       <TableBody>
         {rows.map(({name, value, hide = false}, i) => {
           if (hide)
@@ -192,13 +196,7 @@ export function NameValueTable(props: NameValueTableProps) {
           return (
             <TableRow key={i}>
               <TableCell className={classes.metadataNameCell}>
-                {(typeof name === 'string') ?
-                  <NameLabel>
-                    {name}
-                  </NameLabel>
-                  :
-                  name
-                }
+                {name}
               </TableCell>
               <TableCell scope="row" className={classes.metadataCell}>
                 {(typeof value === 'string') ?
