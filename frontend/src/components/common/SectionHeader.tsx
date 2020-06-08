@@ -7,6 +7,9 @@ const useStyles = makeStyles(theme => ({
   sectionHeader: {
     padding: ({noPadding}: {noPadding: boolean}) => noPadding ? '0' : '1rem',
   },
+  title: {
+    fontWeight: 'bold',
+  }
 }));
 
 export interface SectionHeaderProps {
@@ -30,7 +33,12 @@ export default function SectionHeader(props: SectionHeaderProps) {
     >
       {props.title &&
         <Grid item md={6}>
-          <Typography variant="h5">{props.title}</Typography>
+          <Typography
+            variant="h6"
+            className={classes.title}
+          >
+            {props.title}
+          </Typography>
         </Grid>
       }
       {actions.length > 0 &&
