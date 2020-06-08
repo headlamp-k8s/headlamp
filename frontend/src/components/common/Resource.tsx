@@ -47,7 +47,7 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
   const mainRows = [
     {
       name: 'Name',
-      value: <Typography variant="h6" >{resource.metadata.name}</Typography>,
+      value: resource.metadata.name,
     },
     {
       name: 'Namespace',
