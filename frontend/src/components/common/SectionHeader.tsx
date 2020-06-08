@@ -5,17 +5,19 @@ import React from 'react';
 
 const useStyles = makeStyles(theme => ({
   sectionHeader: {
-    padding: '1em',
+    padding: ({noPadding}: {noPadding: boolean}) => noPadding ? '0' : '1rem',
   },
 }));
 
 export interface SectionHeaderProps {
   title: string;
   actions?: React.ReactNode[] | null;
+  noPadding?: boolean;
 }
 
 export default function SectionHeader(props: SectionHeaderProps) {
-  const classes = useStyles();
+  const {noPadding = false} = props;
+  const classes = useStyles({noPadding});
   const actions = props.actions || [];
 
   return (
