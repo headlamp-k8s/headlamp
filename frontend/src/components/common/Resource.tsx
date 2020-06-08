@@ -239,27 +239,42 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   );
 }
 
+const usePageGridStyle = makeStyles({
+  noPaper: {
+    // Remove the elevation for the regular paper-wrapped sections as the PageGrid
+    // now is wrapped in paper too.
+    // @todo: Remove this rule once no sections use a Paper wrapper component anymore.
+    '& .MuiPaper-elevation1': {
+      boxShadow: 'none',
+    }
+  },
+});
+
 interface PageGridProps extends GridProps {
   sections?: React.ReactNode[];
 }
 
 export function PageGrid(props: PageGridProps) {
+  const classes = usePageGridStyle();
   const { sections = [], children = [], ...other } = props;
   const childrenArray = React.Children.toArray(children).concat(sections);
   return (
-    <Grid
-      container
-      spacing={1}
-      justify="flex-start"
-      alignItems="stretch"
-      {...other}
-    >
-      {childrenArray.map((section, i) =>
-        <Grid item key={i} xs={12}>
-          {section}
-        </Grid>
-      )}
-    </Grid>
+    <Paper>
+      <Grid
+        container
+        spacing={1}
+        justify="flex-start"
+        alignItems="stretch"
+        className={classes.noPaper}
+        {...other}
+      >
+        {childrenArray.map((section, i) =>
+          <Grid item key={i} xs={12}>
+            {section}
+          </Grid>
+        )}
+      </Grid>
+    </Paper>
   );
 }
 
