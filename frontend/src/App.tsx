@@ -63,6 +63,7 @@ const dashboardTheme = createMuiTheme({
       light: red['50'],
     },
     sidebarBg: '#000',
+    normalEventBg: '#F0F0F0',
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', ')

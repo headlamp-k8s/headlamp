@@ -93,13 +93,16 @@ export function StatusLabel(props: StatusLabelProps) {
   const statuses = ['success', 'warning', 'error'];
 
   // Assign to a status color if it exists.
-  const color = statuses.includes(status) ? theme.palette[status].main : theme.palette.grey['400'];
+  const bgColor =
+    statuses.includes(status) ? theme.palette[status].light : theme.palette.normalEventBg;
+  const color = statuses.includes(status) ? theme.palette[status].main : theme.palette.text.primary;
 
   return (
     <Typography
       className={classes.statusLabel + ' ' + className}
       style={{
-        backgroundColor: color,
+        backgroundColor: bgColor,
+        color,
       }}
       component="span"
       {...other}
