@@ -2,6 +2,7 @@ import AppBar from '@material-ui/core/AppBar';
 import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
+import red from '@material-ui/core/colors/red';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -44,16 +45,22 @@ const dashboardTheme = createMuiTheme({
       main: '#3DA3F5',
     },
     success: {
+      light: green['50'],
       main: green['500'],
       ...green
     },
     warning: {
-      main: orange['700'],
+      main: orange['500'],
+      light: orange['50'],
       ...orange
     },
     sidebarLink: {
       main: grey['500'],
       selectedBg: grey['800'],
+    },
+    error: {
+      main: red['500'],
+      light: red['50'],
     },
     sidebarBg: '#000',
   },
