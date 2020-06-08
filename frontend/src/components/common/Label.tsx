@@ -27,11 +27,12 @@ const useStyles = makeStyles(theme => ({
   statusLabel: {
     color: theme.palette.primary.contrastText,
     fontSize: '1.1em',
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(.5),
     paddingBottom: theme.spacing(.5),
-    borderRadius: '5%',
+    display: 'inline-block',
+    textAlign: 'center',
   },
 }));
 
