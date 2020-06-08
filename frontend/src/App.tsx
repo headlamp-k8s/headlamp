@@ -3,6 +3,7 @@ import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
 import red from '@material-ui/core/colors/red';
+import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -140,7 +141,9 @@ function App() {
               <Sidebar />
               <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <RouteSwitcher />
+                <Container maxWidth="lg">
+                  <RouteSwitcher />
+                </Container>
               </main>
               <ActionsNotifier />
             </div>
