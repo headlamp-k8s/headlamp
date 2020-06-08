@@ -295,7 +295,6 @@ export function SectionGrid(props: SectionGridProps) {
           <React.Fragment key={i}>
             <Grid
               item
-              lg
               md={12}
               xs={12}
             >
