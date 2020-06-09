@@ -1,10 +1,9 @@
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
 import { KubeStorageClass } from '../../lib/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
+import { Link } from '../common';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
@@ -30,7 +29,15 @@ export default function ClassList() {
           columns={[
             {
               label: 'Name',
-              getter: (storageClass) => <Link component={RouterLink} to={`/storage/classes/${storageClass.metadata.name}`}>{storageClass.metadata.name}</Link>
+              getter: (storageClass) =>
+                <Link
+                  routeName="storageClassDetails"
+                  params={{
+                    name: storageClass.metadata.name,
+                  }}
+                >
+                  {storageClass.metadata.name}
+                </Link>
             },
             {
               label: 'Reclaim Policy',
