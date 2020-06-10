@@ -1,4 +1,5 @@
 import Box, { BoxProps } from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';
 
@@ -28,13 +29,16 @@ export function SectionBox(props: SectionBoxProps) {
   }
 
   return (
-    <Box
-      px={2}
-      paddingBottom={1}
-      {...otherProps}
-    >
+    <Box py={0}>
       { title && titleElem }
-      {React.Children.toArray(children)}
+      <Paper>
+        <Box
+          px={2}
+          {...otherProps}
+        >
+          {React.Children.toArray(children)}
+        </Box>
+      </Paper>
     </Box>
   );
 }
