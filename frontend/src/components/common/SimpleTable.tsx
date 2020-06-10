@@ -20,6 +20,13 @@ const useTableStyle = makeStyles(theme => ({
   table: {
     '& .MuiTableCell-root': {
       paddingLeft: '0',
+    },
+    '& .MuiTableBody-root': {
+      '& .MuiTableRow-root:last-child': {
+        '& .MuiTableCell-root': {
+          borderBottom: 'none',
+        },
+      }
     }
   }
 }));
@@ -171,6 +178,15 @@ const useStyles = makeStyles(theme => ({
     paddingRight: '0',
     color: theme.palette.text.secondary,
   },
+  table: {
+    '& .MuiTableBody-root': {
+      '& .MuiTableRow-root:last-child': {
+        '& .MuiTableCell-root': {
+          borderBottom: 'none',
+        },
+      }
+    }
+  }
 }));
 
 export interface NameValueTableRow {
@@ -188,7 +204,7 @@ export function NameValueTable(props: NameValueTableProps) {
   const { rows } = props;
 
   return (
-    <Table>
+    <Table className={classes.table}>
       <TableBody>
         {rows.map(({name, value, hide = false}, i) => {
           if (hide)
