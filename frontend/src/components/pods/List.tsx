@@ -1,4 +1,3 @@
-import Paper from '@material-ui/core/Paper';
 import _ from 'lodash';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
@@ -7,7 +6,6 @@ import { timeAgo, useFilterFunc } from '../../lib/util';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function PodList() {
@@ -40,46 +38,46 @@ export default function PodList() {
   }
 
   return (
-    <Paper>
-      <SectionHeader title="Pods" />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (pod) =>
-                <Link
-                  routeName="pod"
-                  params={{
-                    namespace: pod.metadata.namespace,
-                    name: pod.metadata.name
-                  }}
-                >
-                  {pod.metadata.name}
-                </Link>
-            },
-            {
-              label: 'Namespace',
-              getter: (pod: KubePod) => pod.metadata.namespace
-            },
-            {
-              label: 'Restarts',
-              getter: (pod: KubePod) => getRestartCount(pod)
-            },
-            {
-              label: 'Status',
-              getter: makeStatusLabel
-            },
-            {
-              label: 'Age',
-              getter: (pod: KubePod) => timeAgo(pod.metadata.creationTimestamp)
-            },
-          ]}
-          data={pods}
-        />
-      </SectionBox>
-    </Paper>
+    <SectionBox
+      title="Pods"
+      headerProps={{headerStyle: 'main'}}
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (pod) =>
+              <Link
+                routeName="pod"
+                params={{
+                  namespace: pod.metadata.namespace,
+                  name: pod.metadata.name
+                }}
+              >
+                {pod.metadata.name}
+              </Link>
+          },
+          {
+            label: 'Namespace',
+            getter: (pod: KubePod) => pod.metadata.namespace
+          },
+          {
+            label: 'Restarts',
+            getter: (pod: KubePod) => getRestartCount(pod)
+          },
+          {
+            label: 'Status',
+            getter: makeStatusLabel
+          },
+          {
+            label: 'Age',
+            getter: (pod: KubePod) => timeAgo(pod.metadata.creationTimestamp)
+          },
+        ]}
+        data={pods}
+      />
+    </SectionBox>
   );
 }

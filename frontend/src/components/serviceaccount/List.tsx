@@ -1,4 +1,3 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo, useFilterFunc } from '../../lib/util';
@@ -16,40 +15,41 @@ export default function ServiceAccountList() {
   );
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Service Accounts"
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (serviceAccount) =>
-                <Link
-                  routeName="serviceAccount"
-                  params={{
-                    namespace: serviceAccount.metadata.namespace,
-                    name:  serviceAccount.metadata.name
-                  }}
-                >
-                  {serviceAccount.metadata.name}
-                </Link>
-            },
-            {
-              label: 'Namespace',
-              getter: (serviceAccount) => serviceAccount.metadata.namespace
-            },
-            {
-              label: 'Age',
-              getter: (serviceAccount) => timeAgo(serviceAccount.metadata.creationTimestamp)
-            },
-          ]}
-          data={serviceAccounts}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Service Accounts"
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (serviceAccount) =>
+              <Link
+                routeName="serviceAccount"
+                params={{
+                  namespace: serviceAccount.metadata.namespace,
+                  name:  serviceAccount.metadata.name
+                }}
+              >
+                {serviceAccount.metadata.name}
+              </Link>
+          },
+          {
+            label: 'Namespace',
+            getter: (serviceAccount) => serviceAccount.metadata.namespace
+          },
+          {
+            label: 'Age',
+            getter: (serviceAccount) => timeAgo(serviceAccount.metadata.creationTimestamp)
+          },
+        ]}
+        data={serviceAccounts}
+      />
+    </SectionBox>
   );
 }

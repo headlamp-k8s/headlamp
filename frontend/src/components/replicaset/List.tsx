@@ -1,4 +1,3 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { KubeReplicaSet } from '../../lib/cluster';
@@ -21,39 +20,40 @@ export default function ReplicaSetList() {
   );
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Replica Sets"
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (replicaSet) => <ResourceLink resource={replicaSet} />
-            },
-            {
-              label: 'Namespace',
-              getter: (replicaSet) => replicaSet.metadata.namespace
-            },
-            {
-              label: 'Generation',
-              getter: (replicaSet) => replicaSet.status.observedGeneration
-            },
-            {
-              label: 'Replicas',
-              getter: (replicaSet) => getReplicas(replicaSet)
-            },
-            {
-              label: 'Age',
-              getter: (replicaSet) => timeAgo(replicaSet.metadata.creationTimestamp)
-            },
-          ]}
-          data={replicaSets}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Replica Sets"
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (replicaSet) => <ResourceLink resource={replicaSet} />
+          },
+          {
+            label: 'Namespace',
+            getter: (replicaSet) => replicaSet.metadata.namespace
+          },
+          {
+            label: 'Generation',
+            getter: (replicaSet) => replicaSet.status.observedGeneration
+          },
+          {
+            label: 'Replicas',
+            getter: (replicaSet) => getReplicas(replicaSet)
+          },
+          {
+            label: 'Age',
+            getter: (replicaSet) => timeAgo(replicaSet.metadata.creationTimestamp)
+          },
+        ]}
+        data={replicaSets}
+      />
+    </SectionBox>
   );
 }

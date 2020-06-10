@@ -482,6 +482,7 @@ export function ContainerInfo(props: {container: KubeContainer}) {
       <SectionHeader
         noPadding
         title={container.name}
+        headerStyle="normal"
       />
       <SectionGrid
         items={[
@@ -518,10 +519,7 @@ export function ContainersSection(props: {resource: KubeObject | null}) {
   const containers = getContainers();
 
   return (
-    <Paper>
-      <SectionHeader
-        title="Containers"
-      />
+    <SectionBox title="Containers">
       {_.isEmpty(containers) ?
         <Empty>No containers to show</Empty>
         :
@@ -535,7 +533,7 @@ export function ContainersSection(props: {resource: KubeObject | null}) {
             </React.Fragment>
           );
         })}
-    </Paper>
+    </SectionBox>
   );
 }
 
@@ -547,13 +545,8 @@ export function ReplicasSection(props: {resource: KubeObject | null }) {
   }
 
   return (
-    <Paper>
-      <SectionHeader
-        title="Conditions"
-      />
-      <SectionBox>
-        <ConditionsTable resource={resource} />
-      </SectionBox>
-    </Paper>
+    <SectionBox title="Conditions">
+      <ConditionsTable resource={resource} />
+    </SectionBox>
   );
 }

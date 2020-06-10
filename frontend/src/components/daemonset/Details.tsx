@@ -15,6 +15,7 @@ export default function DaemonSet() {
   return (
     <PageGrid>
       <MainInfoSection
+
         resource={item}
         extraInfo={item && [
           {

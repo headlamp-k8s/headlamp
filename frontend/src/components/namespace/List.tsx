@@ -1,4 +1,3 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { KubeNamespace } from '../../lib/cluster';
@@ -27,33 +26,35 @@ export default function NamespacesList() {
   }
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Namespaces"
-        noNamespaceFilter
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (namespace) =>
-                <ResourceLink resource={namespace} />
-            },
-            {
-              label: 'Status',
-              getter: makeStatusLabel
-            },
-            {
-              label: 'Age',
-              getter: (namespace) => timeAgo(namespace.metadata.creationTimestamp)
-            },
-          ]}
-          data={namespaces}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Namespaces"
+          noNamespaceFilter
+          headerStyle="main"
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (namespace) =>
+              <ResourceLink resource={namespace} />
+          },
+          {
+            label: 'Status',
+            getter: makeStatusLabel
+          },
+          {
+            label: 'Age',
+            getter: (namespace) => timeAgo(namespace.metadata.creationTimestamp)
+          },
+        ]}
+        data={namespaces}
+      />
+    </SectionBox>
   );
 }

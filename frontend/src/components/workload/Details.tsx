@@ -50,6 +50,7 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
   return (
     <PageGrid>
       <MainInfoSection
+
         resource={item}
         extraInfo={item && [
           {

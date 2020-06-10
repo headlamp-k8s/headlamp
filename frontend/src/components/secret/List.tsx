@@ -1,4 +1,3 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { timeAgo, useFilterFunc } from '../../lib/util';
@@ -16,44 +15,45 @@ export default function SecretList() {
   );
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Secrets"
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (secret) =>
-                <Link
-                  routeName="secret"
-                  params={{
-                    namespace: secret.metadata.namespace,
-                    name: secret.metadata.name,
-                  }}
-                >
-                  {secret.metadata.name}
-                </Link>
-            },
-            {
-              label: 'Namespace',
-              getter: (secret) => secret.metadata.namespace
-            },
-            {
-              label: 'Type',
-              getter: (secret) => secret.type
-            },
-            {
-              label: 'Age',
-              getter: (secret) => timeAgo(secret.metadata.creationTimestamp)
-            },
-          ]}
-          data={secrets}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Secrets"
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (secret) =>
+              <Link
+                routeName="secret"
+                params={{
+                  namespace: secret.metadata.namespace,
+                  name: secret.metadata.name,
+                }}
+              >
+                {secret.metadata.name}
+              </Link>
+          },
+          {
+            label: 'Namespace',
+            getter: (secret) => secret.metadata.namespace
+          },
+          {
+            label: 'Type',
+            getter: (secret) => secret.type
+          },
+          {
+            label: 'Age',
+            getter: (secret) => timeAgo(secret.metadata.creationTimestamp)
+          },
+        ]}
+        data={secrets}
+      />
+    </SectionBox>
   );
 }

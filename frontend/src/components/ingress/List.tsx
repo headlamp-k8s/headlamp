@@ -1,4 +1,3 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { KubeIngress } from '../../lib/cluster';
@@ -21,41 +20,42 @@ export default function IngressList() {
   );
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Ingresses"
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (ingress) =>
-                <Link
-                  routeName="ingress"
-                  params={{namespace: ingress.metadata.namespace, name: ingress.metadata.name}}
-                >
-                  {ingress.metadata.name}
-                </Link>
-            },
-            {
-              label: 'Namespace',
-              getter: (ingress) => ingress.metadata.namespace
-            },
-            {
-              label: 'Hosts',
-              getter: (ingress) => getHosts(ingress)
-            },
-            {
-              label: 'Age',
-              getter: (ingress) => timeAgo(ingress.metadata.creationTimestamp)
-            },
-          ]}
-          data={ingresses}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Ingresses"
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (ingress) =>
+              <Link
+                routeName="ingress"
+                params={{namespace: ingress.metadata.namespace, name: ingress.metadata.name}}
+              >
+                {ingress.metadata.name}
+              </Link>
+          },
+          {
+            label: 'Namespace',
+            getter: (ingress) => ingress.metadata.namespace
+          },
+          {
+            label: 'Hosts',
+            getter: (ingress) => getHosts(ingress)
+          },
+          {
+            label: 'Age',
+            getter: (ingress) => timeAgo(ingress.metadata.creationTimestamp)
+          },
+        ]}
+        data={ingresses}
+      />
+    </SectionBox>
   );
 }
