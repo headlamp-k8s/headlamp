@@ -72,7 +72,6 @@ export function NamespacesAutocomplete() {
             {...params}
             variant="standard"
             label="Namespaces"
-            margin="normal"
             fullWidth
             InputLabelProps={{shrink: true}}
             style={{marginTop: 0}}
