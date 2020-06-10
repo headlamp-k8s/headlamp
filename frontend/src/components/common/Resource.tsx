@@ -38,12 +38,13 @@ const useStyles = makeStyles(theme => ({
 
 interface MetadataDisplayProps {
   resource: KubeObject;
+  extraRows?: NameValueTableRow[] | null;
 }
 
 export function MetadataDisplay(props: MetadataDisplayProps) {
-  const { resource } = props;
+  const { resource, extraRows } = props;
 
-  const mainRows = [
+  const mainRows = ([
     {
       name: 'Name',
       value: resource.metadata.name,
@@ -72,7 +73,7 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
         <MetadataDictGrid dict={resource.metadata.annotations} />,
       hide: !resource.metadata.annotations,
     },
-  ];
+  ] as NameValueTableRow[]).concat(extraRows || []);
 
   return (
     <NameValueTable rows={mainRows}/>
@@ -233,14 +234,9 @@ export function MainInfoSection(props: MainInfoSectionProps) {
         :
         <React.Fragment>
           {headerSection}
-          <SectionGrid
-            items={[
-              <MetadataDisplay resource={resource} />,
-              extraInfo &&
-              <NameValueTable
-                rows={extraInfo}
-              />
-            ]}
+          <MetadataDisplay
+            resource={resource}
+            extraRows={extraInfo}
           />
         </React.Fragment>
       }
