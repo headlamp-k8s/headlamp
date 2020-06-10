@@ -39,32 +39,36 @@ export default function SectionHeader(props: SectionHeaderProps) {
       container
       alignItems="center"
       justify="space-between"
-      wrap="nowrap"
       className={classes.sectionHeader}
+      spacing={2}
     >
       {props.title &&
-        <Grid item md={6}>
+        <Grid
+          item
+        >
           <Typography
             variant="h6"
             className={classes.title}
+            noWrap
           >
             {props.title}
           </Typography>
         </Grid>
       }
       {actions.length > 0 &&
-        <Grid
-          item
-          md={6}
-          container
-          alignItems="center"
-          justify="flex-end"
-        >
-          {actions.map((action, i) =>
-            <Grid item key={i}>
-              {action}
-            </Grid>
-          )}
+        <Grid item>
+          <Grid
+            item
+            container
+            alignItems="center"
+            justify="flex-end"
+          >
+            {actions.map((action, i) =>
+              <Grid item key={i}>
+                {action}
+              </Grid>
+            )}
+          </Grid>
         </Grid>
       }
     </Grid>
