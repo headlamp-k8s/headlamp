@@ -7,7 +7,6 @@ import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps } from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Input, { InputProps } from '@material-ui/core/Input';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
@@ -19,7 +18,7 @@ import { localeDate } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import Loader from '../common/Loader';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
+import SectionHeader, { HeaderStyleProps } from '../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../common/SimpleTable';
 import Empty from './EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from './Label';
@@ -201,10 +200,18 @@ interface MainInfoSectionProps {
   title?: string;
   extraInfo?: NameValueTableRow[] | null;
   actions?: React.ReactNode[] | null;
+  headerStyle?: HeaderStyleProps['headerStyle'];
 }
 
 export function MainInfoSection(props: MainInfoSectionProps) {
-  const { resource, headerSection, title, extraInfo = [], actions = [] } = props;
+  const {
+    resource,
+    headerSection,
+    title,
+    extraInfo = [],
+    actions = [],
+    headerStyle = 'main',
+  } = props;
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
 
   function getHeaderActions() {
@@ -212,30 +219,32 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   }
 
   return (
-    <Paper>
-      <SectionHeader
-        title={title || (resource ? resource.kind : '')}
-        actions={React.Children.toArray(actions).concat(getHeaderActions())}
-      />
-      <SectionBox>
-        {resource === null ?
-          <Loader />
-          :
-          <React.Fragment>
-            {headerSection}
-            <SectionGrid
-              items={[
-                <MetadataDisplay resource={resource} />,
-                extraInfo &&
-                <NameValueTable
-                  rows={extraInfo}
-                />
-              ]}
-            />
-          </React.Fragment>
-        }
-      </SectionBox>
-    </Paper>
+    <SectionBox
+      title={
+        <SectionHeader
+          title={title || (resource ? resource.kind : '')}
+          headerStyle={headerStyle}
+          actions={React.Children.toArray(actions).concat(getHeaderActions())}
+        />
+      }
+    >
+      {resource === null ?
+        <Loader />
+        :
+        <React.Fragment>
+          {headerSection}
+          <SectionGrid
+            items={[
+              <MetadataDisplay resource={resource} />,
+              extraInfo &&
+              <NameValueTable
+                rows={extraInfo}
+              />
+            ]}
+          />
+        </React.Fragment>
+      }
+    </SectionBox>
   );
 }
 
