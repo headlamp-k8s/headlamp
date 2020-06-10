@@ -3,24 +3,35 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 
+type HeaderStyle = 'main' | 'subsection' | 'normal';
+
+export interface HeaderStyleProps {
+  noPadding?: boolean;
+  headerStyle?: HeaderStyle;
+}
+
 const useStyles = makeStyles(theme => ({
-  sectionHeader: {
-    padding: ({noPadding}: {noPadding: boolean}) => noPadding ? '0' : '1rem',
-  },
+  sectionHeader: ({noPadding, headerStyle}: HeaderStyleProps) => ({
+    padding: theme.spacing(noPadding ? 0 : 2),
+    paddingTop: theme.spacing(noPadding ? 0 : 3),
+    paddingRight: '0',
+    ...theme.palette.headerStyle[headerStyle || 'normal']
+  }),
   title: {
     fontWeight: 'bold',
-  }
+  },
 }));
 
 export interface SectionHeaderProps {
   title: string;
   actions?: React.ReactNode[] | null;
   noPadding?: boolean;
+  headerStyle?: HeaderStyle;
 }
 
 export default function SectionHeader(props: SectionHeaderProps) {
-  const {noPadding = false} = props;
-  const classes = useStyles({noPadding});
+  const {noPadding = false, headerStyle = 'main'} = props;
+  const classes = useStyles({noPadding, headerStyle});
   const actions = props.actions || [];
 
   return (

@@ -65,6 +65,22 @@ const dashboardTheme = createMuiTheme({
     },
     sidebarBg: '#000',
     normalEventBg: '#F0F0F0',
+    headerStyle: {
+      normal: {
+        '& h6': {
+          fontSize: '1.1rem',
+        },
+      },
+      main: {
+        '& h6': {
+          fontSize: '1.87rem',
+        },
+        minHeight: '64px',
+      },
+      subsection: {
+        fontSize: '1.2rem',
+      },
+    }
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', ')
