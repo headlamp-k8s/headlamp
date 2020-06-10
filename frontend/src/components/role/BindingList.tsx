@@ -1,4 +1,3 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { KubeRoleBinding } from '../../lib/cluster';
@@ -44,44 +43,45 @@ export default function RoleBindingList() {
   );
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Role Bindings"
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Type',
-              getter: (item) => item.kind
-            },
-            {
-              label: 'Name',
-              getter: (item) =>
-                <Link
-                  routeName={item.metadata.namespace ? 'roleBinding' : 'clusterRoleBinding'}
-                  params={{
-                    namespace: item.metadata.namespace || '',
-                    name: item.metadata.name
-                  }}
-                >
-                  {item.metadata.name}
-                </Link>
-            },
-            {
-              label: 'Namespace',
-              getter: (item) => item.metadata.namespace || 'All namespaces'
-            },
-            {
-              label: 'Age',
-              getter: (item) => timeAgo(item.metadata.creationTimestamp)
-            },
-          ]}
-          data={getJointItems()}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Role Bindings"
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Type',
+            getter: (item) => item.kind
+          },
+          {
+            label: 'Name',
+            getter: (item) =>
+              <Link
+                routeName={item.metadata.namespace ? 'roleBinding' : 'clusterRoleBinding'}
+                params={{
+                  namespace: item.metadata.namespace || '',
+                  name: item.metadata.name
+                }}
+              >
+                {item.metadata.name}
+              </Link>
+          },
+          {
+            label: 'Namespace',
+            getter: (item) => item.metadata.namespace || 'All namespaces'
+          },
+          {
+            label: 'Age',
+            getter: (item) => timeAgo(item.metadata.creationTimestamp)
+          },
+        ]}
+        data={getJointItems()}
+      />
+    </SectionBox>
   );
 }

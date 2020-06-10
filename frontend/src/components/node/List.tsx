@@ -1,4 +1,3 @@
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
@@ -29,57 +28,58 @@ export default function NodeList() {
   );
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Nodes"
-        noNamespaceFilter
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (node) =>
-                <ResourceLink resource={node} />
-            },
-            {
-              label: 'Ready',
-              getter: (node) => <NodeReadyLabel node={node} />
-            },
-            {
-              label: 'CPU',
-              cellProps: {
-                className: classes.chartCell,
-              },
-              getter: (node) =>
-                <UsageBarChart
-                  node={node}
-                  nodeMetrics={nodeMetrics}
-                  resourceType="cpu"
-                />
-            },
-            {
-              label: 'Memory',
-              cellProps: {
-                className: classes.chartCell,
-              },
-              getter: (node) =>
-                <UsageBarChart
-                  node={node}
-                  nodeMetrics={nodeMetrics}
-                  resourceType="memory"
-                />
-            },
-            {
-              label: 'Age',
-              getter: (node) => timeAgo(node.metadata.creationTimestamp)
-            },
-          ]}
-          data={nodes}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Nodes"
+          noNamespaceFilter
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (node) =>
+              <ResourceLink resource={node} />
+          },
+          {
+            label: 'Ready',
+            getter: (node) => <NodeReadyLabel node={node} />
+          },
+          {
+            label: 'CPU',
+            cellProps: {
+              className: classes.chartCell,
+            },
+            getter: (node) =>
+              <UsageBarChart
+                node={node}
+                nodeMetrics={nodeMetrics}
+                resourceType="cpu"
+              />
+          },
+          {
+            label: 'Memory',
+            cellProps: {
+              className: classes.chartCell,
+            },
+            getter: (node) =>
+              <UsageBarChart
+                node={node}
+                nodeMetrics={nodeMetrics}
+                resourceType="memory"
+              />
+          },
+          {
+            label: 'Age',
+            getter: (node) => timeAgo(node.metadata.creationTimestamp)
+          },
+        ]}
+        data={nodes}
+      />
+    </SectionBox>
   );
 }
