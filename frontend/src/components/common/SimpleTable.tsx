@@ -27,6 +27,9 @@ const useTableStyle = makeStyles(theme => ({
           borderBottom: 'none',
         },
       }
+    },
+    '& .MuiTableCell-head': {
+      color: theme.palette.tables.headerText,
     }
   }
 }));
@@ -101,15 +104,18 @@ export default function SimpleTable(props: SimpleTableProps) {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              {columns.map(({label, cellProps = {}}, i) =>
-                <TableCell
-                  key={`tabletitle_${i}`}
-                  className={classes.headerCell}
-                  {...cellProps}
-                >
-                  {label}
-                </TableCell>
-              )}
+              {columns.map(({label, cellProps = {}}, i) => {
+                const {className = '', ...otherProps} = cellProps;
+                return (
+                  <TableCell
+                    key={`tabletitle_${i}`}
+                    className={classes.headerCell + ' ' + className}
+                    {...otherProps}
+                  >
+                    {label}
+                  </TableCell>
+                );
+              })}
             </TableRow>
           </TableHead>
           <TableBody>
