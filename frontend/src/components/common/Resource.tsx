@@ -522,9 +522,7 @@ export function ContainersSection(props: {resource: KubeObject | null}) {
         containers.map((container: any, i: number) => {
           return (
             <React.Fragment key={i}>
-              <SectionBox>
-                <ContainerInfo container={container} />
-              </SectionBox>
+              <ContainerInfo container={container} />
               <Divider />
             </React.Fragment>
           );
