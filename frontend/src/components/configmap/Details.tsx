@@ -1,3 +1,4 @@
+import Box from '@material-ui/core/Box';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/api';
@@ -24,11 +25,9 @@ export default function ConfigDetails() {
         {!itemData ?
           <Empty>No data in this config map</Empty>
           : Object.keys(itemData).map((key, i) =>
-            <React.Fragment key={i}>
-              <SectionBox marginBottom="2rem">
-                <DataField label={key} value={itemData[key]} />
-              </SectionBox>
-            </React.Fragment>
+            <Box py={2} key={i}>
+              <DataField label={key} value={itemData[key]} />
+            </Box>
           )
         }
       </SectionBox>
