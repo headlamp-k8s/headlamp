@@ -3,6 +3,7 @@ import eyeOff from '@iconify/icons-mdi/eye-off';
 import menuDown from '@iconify/icons-mdi/menu-down';
 import menuUp from '@iconify/icons-mdi/menu-up';
 import { Icon } from '@iconify/react';
+import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps } from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -474,20 +475,16 @@ export function ContainerInfo(props: {container: KubeContainer}) {
   }
 
   return (
-    <React.Fragment>
+    <Box py={1}>
       <SectionHeader
         noPadding
         title={container.name}
         headerStyle="normal"
       />
-      <SectionGrid
-        items={[
-          <NameValueTable
-            rows={containerRows()}
-          />
-        ]}
+      <NameValueTable
+        rows={containerRows()}
       />
-    </React.Fragment>
+    </Box>
   );
 }
 
@@ -513,17 +510,19 @@ export function ContainersSection(props: {resource: KubeObject | null}) {
   }
 
   const containers = getContainers();
+  const numContainers = containers.length;
 
   return (
     <SectionBox title="Containers">
-      {_.isEmpty(containers) ?
+      {numContainers === 0 ?
         <Empty>No containers to show</Empty>
         :
         containers.map((container: any, i: number) => {
           return (
             <React.Fragment key={i}>
               <ContainerInfo container={container} />
-              <Divider />
+              {/* Don't show the divider if this is the last container */}
+              { (i !== (numContainers - 1)) && <Divider /> }
             </React.Fragment>
           );
         })}
