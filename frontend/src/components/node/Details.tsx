@@ -10,7 +10,7 @@ import { timeAgo } from '../../lib/util';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
 import { HeaderLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../common/Label';
 import Loader from '../common/Loader';
-import { MainInfoSection, PageGrid, SectionGrid } from '../common/Resource';
+import { MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
 
@@ -136,56 +136,48 @@ function SystemInfoSection(props: SystemInfoSectionProps) {
 
   return (
     <SectionBox title="System Info">
-      <SectionGrid
-        items={[
-          <NameValueTable
-            rows={[
-              {
-                name: 'Architecture',
-                value: node.status.nodeInfo.architecture
-              },
-              {
-                name: 'Boot ID',
-                value: node.status.nodeInfo.bootID
-              },
-              {
-                name: 'System UUID',
-                value: node.status.nodeInfo.systemUUID
-              },
-              {
-                name: 'OS',
-                value: getOSComponent(node.status.nodeInfo.operatingSystem),
-              },
-              {
-                name: 'Image',
-                value: node.status.nodeInfo.osImage
-              },
-              {
-                name: 'Kernel Version',
-                value: node.status.nodeInfo.kernelVersion,
-              },
-            ]}
-          />,
-          <NameValueTable
-            rows={[
-              {
-                name: 'Machine ID',
-                value: node.status.nodeInfo.machineID,
-              },
-              {
-                name: 'Kube Proxy Version',
-                value: node.status.nodeInfo.kubeProxyVersion
-              },
-              {
-                name: 'Kubelet Version',
-                value: node.status.nodeInfo.kubeletVersion
-              },
-              {
-                name: 'Container Runtime Version',
-                value: node.status.nodeInfo.containerRuntimeVersion
-              },
-            ]}
-          />
+      <NameValueTable
+        rows={[
+          {
+            name: 'Architecture',
+            value: node.status.nodeInfo.architecture
+          },
+          {
+            name: 'Boot ID',
+            value: node.status.nodeInfo.bootID
+          },
+          {
+            name: 'System UUID',
+            value: node.status.nodeInfo.systemUUID
+          },
+          {
+            name: 'OS',
+            value: getOSComponent(node.status.nodeInfo.operatingSystem),
+          },
+          {
+            name: 'Image',
+            value: node.status.nodeInfo.osImage
+          },
+          {
+            name: 'Kernel Version',
+            value: node.status.nodeInfo.kernelVersion,
+          },
+          {
+            name: 'Machine ID',
+            value: node.status.nodeInfo.machineID,
+          },
+          {
+            name: 'Kube Proxy Version',
+            value: node.status.nodeInfo.kubeProxyVersion
+          },
+          {
+            name: 'Kubelet Version',
+            value: node.status.nodeInfo.kubeletVersion
+          },
+          {
+            name: 'Container Runtime Version',
+            value: node.status.nodeInfo.containerRuntimeVersion
+          },
         ]}
       />
     </SectionBox>
