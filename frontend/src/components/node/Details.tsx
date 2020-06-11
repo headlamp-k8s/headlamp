@@ -81,7 +81,7 @@ function ChartsSection(props: ChartsSectionProps) {
   }
 
   return (
-    <Box py={1}>
+    <Box py={2}>
       <Grid
         container
         justify="space-around"
