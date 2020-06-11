@@ -80,7 +80,10 @@ const dashboardTheme = createMuiTheme({
       subsection: {
         fontSize: '1.2rem',
       },
-    }
+    },
+    tables: {
+      headerText: '#474747',
+    },
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', ')
