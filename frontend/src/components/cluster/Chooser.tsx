@@ -13,14 +13,11 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
 import { useHistory, useLocation } from 'react-router-dom';
-import api from '../../lib/api';
+import { useClustersConf } from '../../lib/api';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
-import { setConfig } from '../../redux/actions/actions';
 import { Cluster } from '../../redux/reducers/config';
-import { useTypedSelector } from '../../redux/reducers/reducers';
 import Loader from '../common/Loader';
 
 const useClusterTitleStyle = makeStyles(theme => ({
@@ -41,7 +38,7 @@ export function ClusterTitle() {
   useLocation();
 
   const cluster = getCluster();
-  const clusters = useTypedSelector(state => state.config.clusters);
+  const clusters = useClustersConf();
   const [showChooser, setShowChooser] = React.useState(false);
 
   if (!cluster) {
@@ -151,23 +148,13 @@ function Chooser(props: ChooserProps) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const history = useHistory();
-  const dispatch = useDispatch();
-  const clusters = useTypedSelector(state => state.config.clusters);
+  const clusters = useClustersConf();
   const {open = true, title = 'Welcome', onClose = null} = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
 
   React.useEffect(() => {
     if (!open) {
-      return;
-    }
-
-    if (clusters.length === 0) {
-      api.getConfig()
-        .then((config: object) => {
-          dispatch(setConfig(config));
-        })
-        .catch((err: Error) => console.error(err));
       return;
     }
 
@@ -178,7 +165,7 @@ function Chooser(props: ChooserProps) {
     }
   },
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  [open, clusters, dispatch]);
+  [open, clusters]);
 
   function handleClose() {
     if (onClose !== null) {
