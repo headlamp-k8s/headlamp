@@ -99,7 +99,7 @@ const useStyle = makeStyles(theme => ({
   },
   appBar: {
     background: '#fff',
-    width: `calc(100% - ${drawerWidth}px)`,
+    paddingLeft: `${drawerWidth}px`,
     marginLeft: drawerWidth,
   },
   content: {
