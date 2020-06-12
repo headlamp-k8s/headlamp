@@ -10,6 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import SvgIcon from '@material-ui/core/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React from 'react';
@@ -18,6 +19,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useClustersConf } from '../../lib/api';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { Cluster } from '../../redux/reducers/config';
+import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
 import Loader from '../common/Loader';
 
 const useClusterTitleStyle = makeStyles(theme => ({
@@ -60,7 +62,6 @@ export function ClusterTitle() {
         <Typography color="textPrimary">Cluster: {cluster}</Typography>
       }
       <Chooser
-        title="Clusters"
         open={showChooser}
         onClose={() => setShowChooser(false)}
       />
@@ -68,11 +69,33 @@ export function ClusterTitle() {
   );
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   chooserDialog: {
     minWidth: 500,
+  },
+  chooserDialogCover: {
+    background: theme.palette.common.black,
+  },
+  logo: {
+    height: '24px',
+    width: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  chooserTitle: {
+    background: theme.palette.common.black,
+    textAlign: 'center',
+    alignItems: 'center',
+    display: 'flex',
+  },
+  bigText: {
+    textAlign: 'center',
+    fontSize: '2.2rem',
+    color: theme.palette.common.black,
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
   }
-});
+}));
 
 const useClusterButtonStyles = makeStyles({
   root: {
@@ -139,8 +162,8 @@ function ClusterList(props: ClusterListProps) {
 
 interface ChooserProps {
   open?: boolean;
-  title?: string;
   onClose?: (() => void) | null;
+  useCover?: boolean;
 }
 
 function Chooser(props: ChooserProps) {
@@ -149,7 +172,7 @@ function Chooser(props: ChooserProps) {
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const history = useHistory();
   const clusters = useClustersConf();
-  const {open = true, title = 'Welcome', onClose = null} = props;
+  const {open = true, onClose = null, useCover = false} = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
 
@@ -190,8 +213,19 @@ function Chooser(props: ChooserProps) {
       open={open !== null ? open : show}
       onClose={handleClose}
       aria-labelledby="authentication-dialog"
+      className={useCover ? classes.chooserDialogCover : ''}
     >
-      <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
+      <DialogTitle
+        id="responsive-dialog-title"
+        className={classes.chooserTitle}
+        disableTypography
+      >
+        <SvgIcon
+          className={classes.logo}
+          component={LogoLight}
+          viewBox="0 0 175 32"
+        />
+      </DialogTitle>
       <DialogContent
         className={classes.chooserDialog}
       >
@@ -204,7 +238,10 @@ function Chooser(props: ChooserProps) {
           </React.Fragment>
           :
           <React.Fragment>
-            <DialogContentText>
+            <DialogContentText
+              variant="h4"
+              className={classes.bigText}
+            >
               Choose a cluster
             </DialogContentText>
             <ClusterList
