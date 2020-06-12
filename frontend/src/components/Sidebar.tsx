@@ -20,6 +20,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -47,6 +48,27 @@ const useStyle = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    background: theme.palette.sidebarBg,
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    background: theme.palette.sidebarBg,
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9) + 1,
+    },
+    background: theme.palette.sidebarBg,
   },
   drawerPaper: {
     width: drawerWidth,
@@ -363,6 +385,8 @@ export default function Sidebar() {
   const sidebar = useTypedSelector(state => state.ui.sidebar);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const items = React.useMemo(() => prepareRoutes(), [sidebar.entries]);
+  const [open, setOpen] = React.useState(false);
+
   // Use the location to make sure the sidebar is changed, as it depends on the cluster
   // (defined in the URL ATM).
   // @todo: Update this if the active cluster management is changed.
@@ -373,18 +397,26 @@ export default function Sidebar() {
 
   return (
     <Drawer
-      className={classes.drawer}
       variant="permanent"
+      className={clsx(classes.drawer, {
+        [classes.drawerOpen]: open,
+        [classes.drawerClose]: !open,
+      })}
       classes={{
-        paper: classes.drawerPaper,
+        paper: clsx({
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        }),
       }}
     >
       <div className={classes.toolbar}>
-        <SvgIcon
-          className={classes.logo}
-          component={LogoLight}
-          viewBox="0 0 auto 32"
-        />
+        <Button onClick={() => setOpen(!open)}>
+          <SvgIcon
+            className={classes.logo}
+            component={LogoLight}
+            viewBox="0 0 auto 32"
+          />
+        </Button>
       </div>
       <Grid
         className={classes.sidebarGrid}
@@ -399,6 +431,7 @@ export default function Sidebar() {
               <SidebarItem
                 key={i}
                 selectedName={sidebar.selected}
+                fullWidth={open}
                 {...item}
               />
             )}
@@ -418,7 +451,7 @@ export default function Sidebar() {
 const useItemStyle = makeStyles(theme => ({
   nested: {
     '& .MuiListItem-root': {
-      paddingLeft: theme.spacing(7),
+      paddingLeft: theme.spacing(9),
     }
   },
   linkMain: {
@@ -440,6 +473,7 @@ const useItemStyle = makeStyles(theme => ({
       minWidth: 0,
       marginRight: '12px',
     },
+    paddingLeft: '23px',
   },
   linkSelected: {
     color: theme.palette.primary.contrastText,
@@ -465,16 +499,18 @@ const useItemStyle = makeStyles(theme => ({
       fontSize: '1.2rem',
     },
   },
+  linkSmallWidth: {
+    backgroundColor: 'inherit !important',
+  },
 }));
 
 interface SidebarItemProps extends ListItemProps, SidebarEntry {
   selectedName?: string | null;
   hasParent?: boolean;
+  fullWidth?: boolean;
 }
 
 function SidebarItem(props: SidebarItemProps) {
-  const classes = useItemStyle();
-
   const {
     label,
     name,
@@ -484,8 +520,11 @@ function SidebarItem(props: SidebarItemProps) {
     selectedName,
     hasParent = false,
     icon,
+    fullWidth = true,
     ...other
   } = props;
+
+  const classes = useItemStyle({fullWidth});
 
   let fullURL = url;
   if (fullURL && useClusterURL && getCluster()) {
@@ -516,13 +555,16 @@ function SidebarItem(props: SidebarItemProps) {
   if (!hasParent) {
     linkClass += ' ' + classes.linkMain;
   }
+  if (!fullWidth) {
+    linkClass += ' ' + classes.linkSmallWidth;
+  }
 
   return (
     <React.Fragment>
       <ListItemLink
         selected={isSelected()}
         to={fullURL || ''}
-        primary={label}
+        primary={fullWidth ? label : ''}
         classes={{
           selected: classes.linkSelected,
         }}
@@ -531,7 +573,7 @@ function SidebarItem(props: SidebarItemProps) {
         {...other}
       />
       {subList.length > 0 &&
-        <Collapse in={expanded}>
+        <Collapse in={fullWidth && expanded}>
           <List component="div" disablePadding className={classes.nested}>
             {subList.map((item, i) =>
               <SidebarItem
