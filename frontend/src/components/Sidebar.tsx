@@ -35,7 +35,6 @@ import store from '../redux/stores/store';
 import { ReactComponent as LogoLight } from '../resources/logo-light.svg';
 import { NameValueTable } from './common';
 
-
 export const drawerWidth = 330;
 
 const useStyle = makeStyles(theme => ({
@@ -444,7 +443,7 @@ function SidebarItem(props: SidebarItemProps) {
     useClusterURL = false,
     subList = [],
     selectedName,
-    hasParent=false,
+    hasParent = false,
     icon,
     ...other
   } = props;
@@ -499,7 +498,7 @@ function SidebarItem(props: SidebarItemProps) {
               <SidebarItem
                 key={i}
                 selectedName={selectedName}
-                hasParent={true}
+                hasParent
                 {...item}
               />
             )}

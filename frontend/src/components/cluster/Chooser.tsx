@@ -59,7 +59,7 @@ export function ClusterTitle() {
         >
           Cluster: {cluster}
         </Button>
-      :
+        :
         <Typography color="textPrimary">Cluster: {cluster}</Typography>
       }
       <Chooser
