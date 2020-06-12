@@ -1,11 +1,9 @@
 import accountIcon from '@iconify/icons-mdi/account';
 import logoutIcon from '@iconify/icons-mdi/logout';
+import darkIcon from '@iconify/icons-mdi/weather-night';
+import lightIcon from '@iconify/icons-mdi/weather-sunny';
 import { Icon } from '@iconify/react';
 import AppBar from '@material-ui/core/AppBar';
-import green from '@material-ui/core/colors/green';
-import grey from '@material-ui/core/colors/grey';
-import orange from '@material-ui/core/colors/orange';
-import red from '@material-ui/core/colors/red';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
@@ -27,88 +25,18 @@ import { isElectron } from './helpers';
 import { getToken, setToken } from './lib/auth';
 import { useCluster, useClustersConf } from './lib/k8s';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
+import themes, { getTheme, setTheme, ThemesConf } from './lib/themes';
 import { getCluster } from './lib/util';
 import { initializePlugins } from './plugin';
 import { useTypedSelector } from './redux/reducers/reducers';
 import store from './redux/stores/store';
-
-declare module '@material-ui/core/styles/createPalette.d' {
-  interface Palette {
-    success: object;
-    sidebarLink: {
-      [propName: string]: string;
-    };
-    [propName: string]: any;
-  }
-  interface PaletteOptions {
-    success: object;
-    sidebarLink: {
-      [propName: string]: string;
-    };
-    [propName: string]: any;
-  }
-}
-
-const dashboardTheme = createMuiTheme({
-  palette: {
-    primary: {
-      contrastText: '#fff',
-      main: '#3DA3F5',
-    },
-    success: {
-      light: green['50'],
-      main: green['500'],
-      ...green
-    },
-    warning: {
-      main: orange['500'],
-      light: orange['50'],
-      ...orange
-    },
-    sidebarLink: {
-      main: grey['500'],
-      selectedBg: grey['800'],
-    },
-    error: {
-      main: red['500'],
-      light: red['50'],
-    },
-    sidebarBg: '#000',
-    normalEventBg: '#F0F0F0',
-    headerStyle: {
-      normal: {
-        '& h6': {
-          fontSize: '1.1rem',
-        },
-      },
-      main: {
-        '& h6': {
-          fontSize: '1.87rem',
-        },
-        minHeight: '64px',
-      },
-      subsection: {
-        fontSize: '1.2rem',
-      },
-    },
-    tables: {
-      headerText: '#474747',
-    },
-  },
-  typography: {
-    fontFamily: ['Overpass', 'sans-serif'].join(', ')
-  },
-  shape: {
-    borderRadius: 0,
-  }
-});
 
 const useStyle = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
   appBar: {
-    background: '#fff',
+    background: theme.palette.background.default,
     paddingLeft: `${drawerWidth}px`,
     marginLeft: drawerWidth,
     '& > *': {
@@ -227,6 +155,45 @@ function TopBar() {
         </Menu>
       </Toolbar>
     </AppBar>
+  )
+}
+
+interface ThemeChangeButtonProps {
+  onChange: (theme: string) => void;
+}
+
+function ThemeChangeButton(props: ThemeChangeButtonProps) {
+  const {onChange} = props;
+  type iconType = typeof darkIcon;
+
+  const counterIcons: {
+    [themeName in keyof ThemesConf]: iconType;
+  } = {
+    light: darkIcon,
+    dark: lightIcon,
+  };
+
+  const [icon, setIcon] = React.useState<iconType>(counterIcons[getTheme()]);
+
+  const themeNames = Object.keys(counterIcons);
+
+  function changeTheme() {
+    const idx = themeNames.indexOf(getTheme());
+    const newTheme = themeNames[(idx + 1) % themeNames.length];
+
+    setTheme(newTheme);
+    setIcon(counterIcons[newTheme]);
+
+    onChange(newTheme);
+  }
+
+  return (
+    <IconButton
+      aria-label="change-theme"
+      onClick={() => changeTheme()}
+    >
+      <Icon icon={icon} />
+    </IconButton>
   );
 }
 
@@ -235,15 +202,21 @@ function App() {
   const Router = ({children} : React.PropsWithChildren<{}>) => isElectron() ?
     <HashRouter>{children}</HashRouter> :
     <BrowserRouter>{children}</BrowserRouter>;
+  const [themeName, setThemeName] = React.useState(getTheme());
 
   React.useEffect(() => {
     initializePlugins();
   },
-  []);
+  [themeName]);
+
+  React.useEffect(() => {
+    console.log(themeName)
+  },
+  [themeName]);
 
   return (
     <Provider store={store}>
-      <ThemeProvider theme={dashboardTheme}>
+      <ThemeProvider theme={themes[themeName]}>
         <SnackbarProvider
           anchorOrigin={{
             vertical: 'bottom',
@@ -254,6 +227,20 @@ function App() {
             <div className={classes.root}>
               <CssBaseline />
               <TopBar />
+              <AppBar
+                position="fixed"
+                className={classes.appBar}
+                elevation={1}
+              >
+                <Toolbar>
+                  <div style={{flex: '1 0 0'}} />
+                  <ClusterTitle />
+                  <div style={{flex: '1 0 0'}} />
+                  <ThemeChangeButton
+                    onChange={(theme: string) => setThemeName(theme)}
+                  />
+                </Toolbar>
+              </AppBar>
               <Sidebar />
               <main className={classes.content}>
                 <div className={classes.toolbar} />
