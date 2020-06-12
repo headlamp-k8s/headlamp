@@ -10,7 +10,10 @@
 import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { setConfig } from '../redux/actions/actions';
+import { useTypedSelector } from '../redux/reducers/reducers';
 import { apiFactory, apiFactoryWithNamespace, post, request, stream, StreamResultsCb } from './apiProxy';
 import { KubeMetrics, KubeObject, StringDict } from './cluster';
 
@@ -249,6 +252,26 @@ export function useConnectApi(...apiCalls: (() => CancellablePromise)[]) {
     // results in undesired reloads.
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [location]);
+}
+
+// Hook for getting or fetching the clusters configuration.
+export function useClustersConf() {
+  const dispatch = useDispatch();
+  const clusters = useTypedSelector(state => state.config.clusters);
+
+  React.useEffect(() => {
+    if (clusters.length === 0) {
+      getConfig()
+        .then((config: object) => {
+          dispatch(setConfig(config));
+        })
+        .catch((err: Error) => console.error(err));
+      return;
+    }
+  },
+  [clusters, dispatch]);
+
+  return clusters;
 }
 
 export default apis;
