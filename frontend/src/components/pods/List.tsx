@@ -3,6 +3,7 @@ import React from 'react';
 import api, { useConnectApi } from '../../lib/api';
 import { KubePod } from '../../lib/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
+import { SectionFilterHeader } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
@@ -39,8 +40,11 @@ export default function PodList() {
 
   return (
     <SectionBox
-      title="Pods"
-      headerProps={{headerStyle: 'main'}}
+      title={
+        <SectionFilterHeader
+          title="Pods"
+        />
+      }
     >
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
