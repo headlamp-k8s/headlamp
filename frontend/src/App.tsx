@@ -150,7 +150,11 @@ function App() {
           <Router>
             <div className={classes.root}>
               <CssBaseline />
-              <AppBar position="fixed" className={classes.appBar}>
+              <AppBar
+                position="fixed"
+                className={classes.appBar}
+                elevation={1}
+              >
                 <Toolbar>
                   <div style={{flex: '1 0 0'}} />
                   <ClusterTitle />
