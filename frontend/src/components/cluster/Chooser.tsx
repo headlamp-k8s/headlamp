@@ -62,7 +62,6 @@ export function ClusterTitle() {
         <Typography color="textPrimary">Cluster: {cluster}</Typography>
       }
       <Chooser
-        title="Clusters"
         open={showChooser}
         onClose={() => setShowChooser(false)}
       />
@@ -163,7 +162,6 @@ function ClusterList(props: ClusterListProps) {
 
 interface ChooserProps {
   open?: boolean;
-  title?: string;
   onClose?: (() => void) | null;
   useCover?: boolean;
 }
@@ -174,7 +172,7 @@ function Chooser(props: ChooserProps) {
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const history = useHistory();
   const clusters = useClustersConf();
-  const {open = true, title = 'Welcome', onClose = null, useCover = false} = props;
+  const {open = true, onClose = null, useCover = false} = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
 
