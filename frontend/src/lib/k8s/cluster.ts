@@ -231,10 +231,6 @@ export interface KubeEvent {
   [otherProps: string]: any;
 }
 
-export interface KubeConfigMap extends KubeObjectInterface {
-  data: StringDict;
-}
-
 export interface KubeIngress extends KubeObjectInterface {
   spec: {
     rules: {

@@ -1,19 +1,16 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeConfigMap } from '../../lib/k8s/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import ConfigMap from '../../lib/k8s/configMap';
+import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ConfigMapList() {
-  const [configMaps, setConfigMaps] = React.useState<KubeConfigMap[] | null>(null);
+  const [configMaps, setConfigMaps] = React.useState<ConfigMap[] | null>(null);
   const filterFunc = useFilterFunc();
 
-  useConnectApi(
-    api.configMap.list.bind(null, null, setConfigMaps),
-  );
+  ConfigMap.useApiList(setConfigMaps);
 
   return (
     <SectionBox
@@ -30,23 +27,15 @@ export default function ConfigMapList() {
           {
             label: 'Name',
             getter: (configMap) =>
-              <Link
-                routeName="configMap"
-                params={{
-                  namespace: configMap.metadata.namespace,
-                  name: configMap.metadata.name
-                }}
-              >
-                {configMap.metadata.name}
-              </Link>
+              <Link kubeObject={configMap} />
           },
           {
             label: 'Namespace',
-            getter: (configMap) => configMap.metadata.namespace
+            getter: (configMap) => configMap.getNamespace(),
           },
           {
             label: 'Age',
-            getter: (configMap) => timeAgo(configMap.metadata.creationTimestamp)
+            getter: (configMap) => configMap.getAge(),
           },
         ]}
         data={configMaps}
