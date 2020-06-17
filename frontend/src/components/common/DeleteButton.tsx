@@ -6,12 +6,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import api from '../../lib/k8s/api';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { CallbackAction, CallbackActionOptions, clusterAction } from '../../redux/actions/actions';
 import { ConfirmDialog } from './Dialog';
 
 interface DeleteButtonProps {
-  item?: KubeObject;
+  item?: KubeObjectInterface;
   deletionCallback: CallbackAction['callback'];
   options?: CallbackActionOptions;
 }

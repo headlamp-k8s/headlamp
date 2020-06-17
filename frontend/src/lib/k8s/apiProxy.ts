@@ -9,7 +9,7 @@
 
 import { getToken, logout } from '../auth';
 import { getCluster } from '../util';
-import { KubeObject } from './cluster';
+import { KubeObjectInterface } from './cluster';
 
 const {host, href, hash, search} = window.location;
 const nonHashedUrl = href.replace(hash, '').replace(search, '');
@@ -81,9 +81,10 @@ export function apiFactory(group: string, version: string, resource: string) {
     list: (cb: StreamResultsCb, errCb: StreamErrCb) => streamResults(url, cb, errCb),
     get: (name: string, cb: StreamResultsCb,
           errCb: StreamErrCb) => streamResult(url, name, cb, errCb),
-    post: (body: KubeObject) => post(url, body),
-    put: (body: KubeObject) => put(`${url}/${body.metadata.name}`, body),
+    post: (body: KubeObjectInterface) => post(url, body),
+    put: (body: KubeObjectInterface) => put(`${url}/${body.metadata.name}`, body),
     delete: (name: string) => remove(`${url}/${name}`),
+    isNamespaced: false,
   };
 }
 
@@ -102,9 +103,10 @@ export function apiFactoryWithNamespace(group: string, version: string, resource
            errCb: StreamErrCb) => streamResults(url(namespace), cb, errCb),
     get: (namespace: string, name: string, cb: StreamResultsCb,
           errCb: StreamErrCb) => streamResult(url(namespace), name, cb, errCb),
-    post: (body: KubeObject) => post(url(body.metadata.namespace as string), body),
-    put: (body: KubeObject) => put(`${url(body.metadata.namespace as string)}/${body.metadata.name}`, body),
+    post: (body: KubeObjectInterface) => post(url(body.metadata.namespace as string), body),
+    put: (body: KubeObjectInterface) => put(`${url(body.metadata.namespace as string)}/${body.metadata.name}`, body),
     delete: (namespace: string, name: string) => remove(`${url(namespace)}/${name}`),
+    isNamespaced: true,
   };
 
   if (includeScale) {
@@ -125,7 +127,7 @@ function getApiRoot(group: string, version: string) {
 function apiScaleFactory(apiRoot: string, resource: string) {
   return {
     get: (namespace: string, name: string) => request(url(namespace, name)),
-    put: (body: KubeObject) =>
+    put: (body: KubeObjectInterface) =>
       put(url(body.metadata.namespace as string, body.metadata.name), body),
   };
 
@@ -134,13 +136,14 @@ function apiScaleFactory(apiRoot: string, resource: string) {
   }
 }
 
-export function post(url: string, json: JSON | object | KubeObject, autoLogoutOnAuthError = true) {
+export function post(url: string, json: JSON | object | KubeObjectInterface,
+                     autoLogoutOnAuthError = true) {
   const body = JSON.stringify(json);
   const opts = {method: 'POST', body, headers: JSON_HEADERS};
   return request(url, opts, autoLogoutOnAuthError);
 }
 
-export function put(url: string, json: KubeObject, autoLogoutOnAuthError = true) {
+export function put(url: string, json: KubeObjectInterface, autoLogoutOnAuthError = true) {
   const body = JSON.stringify(json);
   const opts = {method: 'PUT', body, headers: JSON_HEADERS};
   return request(url, opts, autoLogoutOnAuthError);
@@ -186,7 +189,7 @@ export async function streamResult(url: string, name: string, cb: StreamResultsC
 
 export async function streamResults(url: string, cb: StreamResultsCb, errCb: StreamErrCb) {
   const results: {
-    [uid: string]: KubeObject;
+    [uid: string]: KubeObjectInterface;
   } = {};
   let isCancelled = false;
   let socket: ReturnType<typeof stream>;
@@ -217,7 +220,7 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
     if (socket) socket.cancel();
   }
 
-  function add(items: KubeObject[], kind: string) {
+  function add(items: KubeObjectInterface[], kind: string) {
     const fixedKind = kind.slice(0, -4); // Trim off the word "List" from the end of the string
     for (const item of items) {
       item.kind = fixedKind;
@@ -227,7 +230,7 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
     push();
   }
 
-  function update({type, object}: {type: 'ADDED' | 'MODIFIED' | 'DELETED' | 'ERROR'; object: KubeObject}) {
+  function update({type, object}: {type: 'ADDED' | 'MODIFIED' | 'DELETED' | 'ERROR'; object: KubeObjectInterface}) {
     object.actionType = type; // eslint-disable-line no-param-reassign
 
     switch (type) {

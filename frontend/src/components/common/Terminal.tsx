@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { Terminal as XTerminal } from 'xterm';
 import api from '../../lib/k8s/api';
-import { KubeContainer, KubeObject } from '../../lib/k8s/cluster';
+import { KubeContainer, KubeObjectInterface } from '../../lib/k8s/cluster';
 
 const decoder = new TextDecoder('utf-8');
 const encoder = new TextEncoder();
@@ -29,7 +29,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 interface TerminalProps extends DialogProps {
-  item: KubeObject & {
+  item: KubeObjectInterface & {
     spec: {
       containers: KubeContainer[];
     };

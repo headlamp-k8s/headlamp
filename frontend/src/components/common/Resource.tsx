@@ -13,7 +13,7 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import _ from 'lodash';
 import React from 'react';
-import { KubeCondition, KubeContainer, KubeObject } from '../../lib/k8s/cluster';
+import { KubeCondition, KubeContainer, KubeObjectInterface } from '../../lib/k8s/cluster';
 import { RouteURLProps } from '../../lib/router';
 import { localeDate } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface MetadataDisplayProps {
-  resource: KubeObject;
+  resource: KubeObjectInterface;
   extraRows?: NameValueTableRow[] | null;
 }
 
@@ -176,7 +176,7 @@ interface ResourceLinkProps {
   name?: string;
   routeName?: string;
   routeParams?: RouteURLProps;
-  resource: KubeObject;
+  resource: KubeObjectInterface;
 }
 
 export function ResourceLink(props: ResourceLinkProps) {
@@ -197,7 +197,7 @@ export function ResourceLink(props: ResourceLinkProps) {
 }
 
 interface MainInfoSectionProps {
-  resource: KubeObject | null;
+  resource: KubeObjectInterface | null;
   headerSection?: React.ReactNode;
   title?: string;
   extraInfo?: NameValueTableRow[] | null;
@@ -359,7 +359,7 @@ export function SecretField(props: InputProps) {
 }
 
 interface ConditionsTableProps {
-  resource: KubeObject | null;
+  resource: KubeObjectInterface | null;
   showLastUpdate?: boolean;
 }
 
@@ -488,7 +488,7 @@ export function ContainerInfo(props: {container: KubeContainer}) {
   );
 }
 
-export function ContainersSection(props: {resource: KubeObject | null}) {
+export function ContainersSection(props: {resource: KubeObjectInterface | null}) {
   const { resource } = props;
 
   function getContainers() {
@@ -530,7 +530,7 @@ export function ContainersSection(props: {resource: KubeObject | null}) {
   );
 }
 
-export function ReplicasSection(props: {resource: KubeObject | null }) {
+export function ReplicasSection(props: {resource: KubeObjectInterface | null }) {
   const { resource } = props;
 
   if (!resource) {

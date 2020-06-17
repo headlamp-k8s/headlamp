@@ -10,7 +10,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { setNamespaceFilter } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
@@ -20,7 +20,7 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 export function NamespacesAutocomplete() {
   const theme = useTheme();
   const filter = useTypedSelector(state => state.filter);
-  const [namespaces, setNamespaces] = React.useState<KubeObject[]>([]);
+  const [namespaces, setNamespaces] = React.useState<KubeObjectInterface[]>([]);
 
   useConnectApi(
     api.namespace.list.bind(null, setNamespaces),

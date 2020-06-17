@@ -3,7 +3,7 @@ import en from 'javascript-time-ago/locale/en';
 import { matchPath } from 'react-router';
 import { FilterState } from '../redux/reducers/filter';
 import { useTypedSelector } from '../redux/reducers/reducers';
-import { KubeMetrics, KubeNode, KubeObject, KubeWorkload } from './k8s/cluster';
+import { KubeMetrics, KubeNode, KubeObjectInterface, KubeWorkload } from './k8s/cluster';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 TimeAgo.addLocale(en);
 
@@ -64,7 +64,7 @@ export function getResourceMetrics(item: KubeNode, metrics: KubeMetrics[], resou
   return [used, capacity];
 }
 
-export function filterResource(item: KubeObject, filter: FilterState) {
+export function filterResource(item: KubeObjectInterface, filter: FilterState) {
   let matches: boolean = true;
 
   if (item.metadata.namespace && filter.namespaces.size > 0) {
@@ -88,7 +88,7 @@ export function filterResource(item: KubeObject, filter: FilterState) {
 
 export function useFilterFunc() {
   const filter = useTypedSelector(state => state.filter);
-  return (item: KubeObject) => filterResource(item, filter);
+  return (item: KubeObjectInterface) => filterResource(item, filter);
 }
 
 export function getClusterPrefixedPath(path?: string | null) {

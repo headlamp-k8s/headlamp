@@ -16,7 +16,7 @@ import _ from 'lodash';
 import React from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import getDocDefinitions from '../../lib/docs';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import ConfirmButton from './ConfirmButton';
 import Empty from './EmptyContent';
 import Loader from './Loader';
@@ -48,7 +48,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 interface EditorDialogProps extends DialogProps{
-  item: KubeObject | null;
+  item: KubeObjectInterface | null;
   onClose: () => void;
   onSave: ((...args: any[]) => void) | null;
 }
@@ -98,7 +98,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     }
   }
 
-  function getObjectFromCode(code: string): KubeObject | null {
+  function getObjectFromCode(code: string): KubeObjectInterface | null {
     let codeObj = {};
     try {
       codeObj = yaml.load(code);
@@ -106,7 +106,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       return null;
     }
 
-    return codeObj as KubeObject;
+    return codeObj as KubeObjectInterface;
   }
 
   function handleTabChange(tabIndex: number) {
@@ -117,7 +117,7 @@ export default function EditorDialog(props: EditorDialogProps) {
 
     const codeObj = getObjectFromCode(code);
 
-    const {kind, apiVersion} = (codeObj || {}) as KubeObject;
+    const {kind, apiVersion} = (codeObj || {}) as KubeObjectInterface;
     if (codeObj === null || (!!kind && !!apiVersion)) {
       setDocSpecs({
         error: codeObj === null,

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeMetrics, KubeObject } from '../../lib/k8s/cluster';
+import { KubeMetrics, KubeObjectInterface } from '../../lib/k8s/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
@@ -18,7 +18,7 @@ const useStyle = makeStyles({
 
 export default function NodeList() {
   const classes = useStyle();
-  const [nodes, setNodes] = React.useState<KubeObject | null>(null);
+  const [nodes, setNodes] = React.useState<KubeObjectInterface | null>(null);
   const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
   const filterFunc = useFilterFunc();
 
