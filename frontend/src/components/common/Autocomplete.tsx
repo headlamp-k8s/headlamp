@@ -9,8 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeObject } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeObject } from '../../lib/k8s/cluster';
 import { setNamespaceFilter } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 

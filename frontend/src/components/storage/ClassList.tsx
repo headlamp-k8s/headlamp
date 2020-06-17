@@ -1,6 +1,6 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeStorageClass } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeStorageClass } from '../../lib/k8s/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
 import { SectionBox } from '../common/SectionBox';

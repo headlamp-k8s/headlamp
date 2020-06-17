@@ -7,9 +7,9 @@
  * Copyright © 2020 Kinvolk GmbH
  */
 
-import { getToken, logout } from './auth';
+import { getToken, logout } from '../auth';
+import { getCluster } from '../util';
 import { KubeObject } from './cluster';
-import { getCluster } from './util';
 
 const {host, href, hash, search} = window.location;
 const nonHashedUrl = href.replace(hash, '').replace(search, '');

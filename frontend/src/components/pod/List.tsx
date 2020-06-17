@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
-import api, { useConnectApi } from '../../lib/api';
-import { KubePod } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubePod } from '../../lib/k8s/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { SectionFilterHeader } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';

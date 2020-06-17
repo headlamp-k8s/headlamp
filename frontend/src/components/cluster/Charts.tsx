@@ -1,7 +1,7 @@
 import { useTheme } from '@material-ui/core/styles';
 import _ from 'lodash';
 import React from 'react';
-import { KubeObject } from '../../lib/cluster';
+import { KubeObject } from '../../lib/k8s/cluster';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
 import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
 

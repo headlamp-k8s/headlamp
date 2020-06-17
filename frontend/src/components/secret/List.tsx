@@ -1,5 +1,5 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/api';
+import api, { useConnectApi } from '../../lib/k8s/api';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';

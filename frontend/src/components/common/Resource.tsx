@@ -13,7 +13,7 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import _ from 'lodash';
 import React from 'react';
-import { KubeCondition, KubeContainer, KubeObject } from '../../lib/cluster';
+import { KubeCondition, KubeContainer, KubeObject } from '../../lib/k8s/cluster';
 import { RouteURLProps } from '../../lib/router';
 import { localeDate } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubePersistentVolume } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubePersistentVolume } from '../../lib/k8s/cluster';
 import { StatusLabel } from '../common/Label';
 import { MainInfoSection } from '../common/Resource';
 

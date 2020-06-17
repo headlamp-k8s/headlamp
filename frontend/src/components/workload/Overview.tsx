@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeWorkload } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeWorkload } from '../../lib/k8s/cluster';
 import { getReadyReplicas, getTotalReplicas, timeAgo, useFilterFunc } from '../../lib/util';
 import { PageGrid, ResourceLink } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';

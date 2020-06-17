@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeRole } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeRole } from '../../lib/k8s/cluster';
 import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';

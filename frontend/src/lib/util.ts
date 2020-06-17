@@ -3,7 +3,7 @@ import en from 'javascript-time-ago/locale/en';
 import { matchPath } from 'react-router';
 import { FilterState } from '../redux/reducers/filter';
 import { useTypedSelector } from '../redux/reducers/reducers';
-import { KubeMetrics, KubeNode, KubeObject, KubeWorkload } from './cluster';
+import { KubeMetrics, KubeNode, KubeObject, KubeWorkload } from './k8s/cluster';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 TimeAgo.addLocale(en);
 

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeSecret } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeSecret } from '../../lib/k8s/cluster';
 import { getRoute } from '../../lib/router';
 import DeleteButton from '../common/DeleteButton';
 import { MainInfoSection, SecretField } from '../common/Resource';

@@ -12,8 +12,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Location } from 'history';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import api from '../../lib/api';
 import { setToken } from '../../lib/auth';
+import api from '../../lib/k8s/api';
 import { getCluster } from '../../lib/util';
 
 interface ReactRouterLocationStateIface {

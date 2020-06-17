@@ -12,8 +12,8 @@ import _ from 'lodash';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setConfig } from '../redux/actions/actions';
-import { useTypedSelector } from '../redux/reducers/reducers';
+import { setConfig } from '../../redux/actions/actions';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { apiFactory, apiFactoryWithNamespace, post, request, stream, StreamResultsCb } from './apiProxy';
 import { KubeMetrics, KubeObject, StringDict } from './cluster';
 

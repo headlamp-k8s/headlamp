@@ -1,6 +1,6 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/api';
-import { KubePersistentVolume } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubePersistentVolume } from '../../lib/k8s/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';

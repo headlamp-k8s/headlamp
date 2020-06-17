@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeStorageClass } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeStorageClass } from '../../lib/k8s/cluster';
 import { MainInfoSection } from '../common/Resource';
 
 export default function StorageClassDetails() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeDaemonSet } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeDaemonSet } from '../../lib/k8s/cluster';
 import { ContainersSection, MainInfoSection, MetadataDictGrid, PageGrid } from '../common/Resource';
 
 export default function DaemonSet() {

@@ -1,8 +1,8 @@
 import Box from '@material-ui/core/Box';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeConfigMap } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeConfigMap } from '../../lib/k8s/cluster';
 import Empty from '../common/EmptyContent';
 import Loader from '../common/Loader';
 import { DataField, MainInfoSection, PageGrid } from '../common/Resource';

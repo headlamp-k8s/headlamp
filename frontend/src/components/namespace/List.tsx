@@ -1,6 +1,6 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeNamespace } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeNamespace } from '../../lib/k8s/cluster';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { StatusLabel } from '../common/Label';
 import { ResourceLink } from '../common/Resource';

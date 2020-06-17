@@ -1,6 +1,6 @@
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { KubeMetrics, KubeNode } from '../../lib/cluster';
+import { KubeMetrics, KubeNode } from '../../lib/k8s/cluster';
 import { getPercentStr, getResourceMetrics, getResourceStr } from '../../lib/util';
 import { PercentageBar } from '../common/Chart';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeRoleBinding } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeRoleBinding } from '../../lib/k8s/cluster';
 import { getRoute } from '../../lib/router';
 import DeleteButton from '../common/DeleteButton';
 import Loader from '../common/Loader';

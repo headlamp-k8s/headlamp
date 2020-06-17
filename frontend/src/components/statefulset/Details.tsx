@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeStatefulSet, StringDict } from '../../lib/cluster';
+import api, { useConnectApi } from '../../lib/k8s/api';
+import { KubeStatefulSet, StringDict } from '../../lib/k8s/cluster';
 import { MainInfoSection, MetadataDictGrid } from '../common/Resource';
 
 export default function StatefulSet() {
