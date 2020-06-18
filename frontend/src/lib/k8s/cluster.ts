@@ -296,9 +296,3 @@ export type KubeWorkload = KubeReplicaSet | KubeStatefulSet | (KubeObjectInterfa
     [otherProps: string]: any;
   };
 });
-
-export interface KubeStorageClass extends KubeObjectInterface {
-  provisioner: string;
-  reclaimPolicy: string;
-  volumeBindingMode: string;
-}
