@@ -1,21 +1,21 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeRoleBinding } from '../../lib/k8s/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
+import RoleBinding from '../../lib/k8s/roleBinding';
+import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 interface RoleBindingDict {
-  [kind: string]: KubeRoleBinding[];
+  [kind: string]: RoleBinding[];
 }
 
 export default function RoleBindingList() {
   const [roleBindingsData, dispatch] = React.useReducer(setRoleBindings, {});
   const filterFunc = useFilterFunc();
 
-  function setRoleBindings(roleBindings: RoleBindingDict, newRoleBindings: KubeRoleBinding[]) {
+  function setRoleBindings(roleBindings: RoleBindingDict, newRoleBindings: RoleBinding[]) {
     const data = {...roleBindings};
 
     newRoleBindings.forEach((item) => {
@@ -30,17 +30,15 @@ export default function RoleBindingList() {
   }
 
   function getJointItems() {
-    let joint: KubeRoleBinding[] = [];
+    let joint: RoleBinding[] = [];
     for (const items of Object.values(roleBindingsData)) {
       joint = joint.concat(items);
     }
     return joint;
   }
 
-  useConnectApi(
-    api.roleBinding.list.bind(null, null, dispatch),
-    api.clusterRoleBinding.list.bind(null, dispatch),
-  );
+  RoleBinding.useApiList(dispatch);
+  ClusterRoleBinding.useApiList(dispatch);
 
   return (
     <SectionBox
@@ -61,23 +59,15 @@ export default function RoleBindingList() {
           {
             label: 'Name',
             getter: (item) =>
-              <Link
-                routeName={item.metadata.namespace ? 'roleBinding' : 'clusterRoleBinding'}
-                params={{
-                  namespace: item.metadata.namespace || '',
-                  name: item.metadata.name
-                }}
-              >
-                {item.metadata.name}
-              </Link>
+              <Link kubeObject={item} />
           },
           {
             label: 'Namespace',
-            getter: (item) => item.metadata.namespace || 'All namespaces'
+            getter: (item) => item.getNamespace() || 'All namespaces'
           },
           {
             label: 'Age',
-            getter: (item) => timeAgo(item.metadata.creationTimestamp)
+            getter: (item) => item.getAge()
           },
         ]}
         data={getJointItems()}

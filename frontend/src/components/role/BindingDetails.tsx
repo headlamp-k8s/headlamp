@@ -1,7 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeRoleBinding } from '../../lib/k8s/cluster';
+import api from '../../lib/k8s/api';
+import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
+import RoleBinding from '../../lib/k8s/roleBinding';
 import { getRoute } from '../../lib/router';
 import DeleteButton from '../common/DeleteButton';
 import Loader from '../common/Loader';
@@ -10,16 +11,15 @@ import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function RoleBindingDetails() {
-  const { namespace = null, name } = useParams();
-  const [item, setItem] = React.useState<KubeRoleBinding | null>(null);
+  const { namespace = undefined, name } = useParams();
+  const [item, setItem] = React.useState<RoleBinding | null>(null);
 
-  useConnectApi(
-    (namespace ?
-      api.roleBinding.get.bind(null, namespace, name, setItem)
-      :
-      api.clusterRoleBinding.get.bind(null, name, setItem)
-    )
-  );
+  let cls = RoleBinding;
+  if (!namespace) {
+    cls = ClusterRoleBinding;
+  }
+
+  cls.useApiGet(setItem, name, namespace);
 
   function handleDelete() {
     if (namespace) {
