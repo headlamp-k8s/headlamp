@@ -297,20 +297,6 @@ export type KubeWorkload = KubeReplicaSet | KubeStatefulSet | (KubeObjectInterfa
   };
 });
 
-export interface KubePersistentVolume extends KubeObjectInterface {
-  spec: {
-    capacity: {
-      storage: string;
-    };
-    [other: string]: any;
-  };
-  status: {
-    message: string;
-    phase: string;
-    reason: string;
-  };
-}
-
 export interface KubePersistentVolumeClaim extends KubeObjectInterface {
   spec: {
     accessModes: string[];

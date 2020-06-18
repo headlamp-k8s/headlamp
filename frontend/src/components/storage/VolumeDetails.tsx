@@ -1,20 +1,17 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubePersistentVolume } from '../../lib/k8s/cluster';
+import PersistentVolume from '../../lib/k8s/persistentVolume';
 import { StatusLabel } from '../common/Label';
 import { MainInfoSection } from '../common/Resource';
 
 export default function VolumeDetails() {
   const { name } = useParams();
-  const [item, setItem] = React.useState<KubePersistentVolume | null>(null);
+  const [item, setItem] = React.useState<PersistentVolume | null>(null);
 
-  useConnectApi(
-    api.persistentVolume.get.bind(null, name, setItem),
-  );
+  PersistentVolume.useApiGet(setItem, name);
 
-  function makeStatusLabel(item: KubePersistentVolume) {
-    const status = item.status.phase;
+  function makeStatusLabel(item: PersistentVolume) {
+    const status = item.status!.phase;
     return (
       <StatusLabel status={status === 'Bound' ? 'success' : 'error'}>
         {status}
@@ -32,19 +29,19 @@ export default function VolumeDetails() {
         },
         {
           name: 'Capacity',
-          value: item.spec.capacity.storage,
+          value: item.spec!.capacity.storage,
         },
         {
           name: 'Access Modes',
-          value: item.spec.accessModes.join(', '),
+          value: item.spec!.accessModes.join(', '),
         },
         {
           name: 'Reclaim Policy',
-          value: item.spec.persistentVolumeReclaimPolicy,
+          value: item.spec!.persistentVolumeReclaimPolicy,
         },
         {
           name: 'Storage Class',
-          value: item.spec.storageClassName,
+          value: item.spec!.storageClassName,
         },
       ]}
     />

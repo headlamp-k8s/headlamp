@@ -113,7 +113,7 @@ const LIST_ITEMS: SidebarEntry[] = [
         label: 'Storage Classes'
       },
       {
-        name: 'storageVolumes',
+        name: 'persistentVolumes',
         label: 'Storage Volumes'
       },
       {

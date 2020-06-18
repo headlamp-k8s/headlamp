@@ -1,19 +1,16 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubePersistentVolume } from '../../lib/k8s/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import PersistentVolume from '../../lib/k8s/persistentVolume';
+import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function VolumeList() {
-  const [volumes, setVolumes] = React.useState<KubePersistentVolume[] | null>(null);
+  const [volumes, setVolumes] = React.useState<PersistentVolume[] | null>(null);
   const filterFunc = useFilterFunc();
 
-  useConnectApi(
-    api.persistentVolume.list.bind(null, setVolumes),
-  );
+  PersistentVolume.useApiList(setVolumes);
 
   return (
     <SectionBox
@@ -30,15 +27,7 @@ export default function VolumeList() {
         columns={[
           {
             label: 'Name',
-            getter: (volume) =>
-              <Link
-                routeName="persistentVolume"
-                params={{
-                  name: volume.metadata.name,
-                }}
-              >
-                {volume.metadata.name}
-              </Link>
+            getter: (volume) => <Link kubeObject={volume} />
           },
           {
             label: 'Status',
@@ -50,7 +39,7 @@ export default function VolumeList() {
           },
           {
             label: 'Age',
-            getter: (volume) => timeAgo(volume.metadata.creationTimestamp)
+            getter: (volume) => volume.getAge()
           },
         ]}
         data={volumes}

@@ -104,18 +104,18 @@ export const ROUTES: {
     sidebar: 'storageClasses',
     component: () => <StorageClassDetails />
   },
-  storageVolumes: {
+  persistentVolumes: {
     path: '/storage/persistentvolumes',
     exact: true,
-    sidebar: 'storageVolumes',
-    name: 'Persistent Volumes',
+    sidebar: 'persistentVolumes',
+    name: 'Storage Volumes',
     component: () => <PersistentVolumeList />
   },
   persistentVolume: {
     path: '/storage/persistentvolumes/:name',
     exact: true,
-    sidebar: 'storageVolumes',
-    name: 'Persistent Volume',
+    sidebar: 'persistentVolumes',
+    name: 'Storage Volume',
     component: () => <PersistentVolumeDetails />
   },
   persistentVolumeClaims: {
