@@ -309,10 +309,6 @@ export interface KubeSecretAccount extends KubeObjectInterface {
   }[];
 }
 
-export interface KubeSecret extends KubeObjectInterface {
-  data: StringDict;
-}
-
 export interface KubeService extends KubeObjectInterface {
   spec: {
     clusterIP: string;

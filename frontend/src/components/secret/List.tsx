@@ -1,18 +1,16 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import Secret from '../../lib/k8s/secret';
+import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function SecretList() {
-  const [secrets, setSecrets] = React.useState(null);
+  const [secrets, setSecrets] = React.useState<Secret[] | null>(null);
   const filterFunc = useFilterFunc();
 
-  useConnectApi(
-    api.secret.list.bind(null, null, setSecrets),
-  );
+  Secret.useApiList(setSecrets);
 
   return (
     <SectionBox
@@ -28,20 +26,11 @@ export default function SecretList() {
         columns={[
           {
             label: 'Name',
-            getter: (secret) =>
-              <Link
-                routeName="secret"
-                params={{
-                  namespace: secret.metadata.namespace,
-                  name: secret.metadata.name,
-                }}
-              >
-                {secret.metadata.name}
-              </Link>
+            getter: (secret) => <Link kubeObject={secret} />
           },
           {
             label: 'Namespace',
-            getter: (secret) => secret.metadata.namespace
+            getter: (secret) => secret.getNamespace()
           },
           {
             label: 'Type',
@@ -49,7 +38,7 @@ export default function SecretList() {
           },
           {
             label: 'Age',
-            getter: (secret) => timeAgo(secret.metadata.creationTimestamp)
+            getter: (secret) => secret.getAge()
           },
         ]}
         data={secrets}
