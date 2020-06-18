@@ -207,17 +207,17 @@ export const ROUTES: {
     sidebar: 'ingresses',
     component: () => <IngressDetails />
   },
-  replicaSets: {
+  ReplicaSets: {
     path: '/replicasets',
     exact: true,
     name: 'Replica Sets',
-    sidebar: 'replicaSets',
+    sidebar: 'ReplicaSets',
     component: () => <ReplicaSetList />
   },
   ReplicaSet: {
     path: '/replicasets/:namespace/:name',
     exact: true,
-    sidebar: 'replicaSets',
+    sidebar: 'ReplicaSets',
     component: () => <WorkloadDetails workloadKind="ReplicaSet" />
   },
   configMaps: {

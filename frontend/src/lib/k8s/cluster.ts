@@ -2,6 +2,7 @@ import { createRouteURL } from '../router';
 import { timeAgo } from '../util';
 import { useConnectApi } from './api';
 import { apiFactory, apiFactoryWithNamespace } from './apiProxy';
+import { KubeReplicaSet } from './replicaSet';
 
 export interface KubeObjectInterface {
   kind: string;
@@ -281,40 +282,6 @@ export interface KubeContainerStatus {
       message: string;
       reason: string;
     };
-  };
-}
-
-export interface KubePod extends KubeObjectInterface {
-  spec: {
-    containers: KubeContainer[];
-  };
-  status: {
-    conditions: KubeCondition[];
-    containerStatuses: KubeContainerStatus[];
-    hostIP: string;
-    message: string;
-    phase: string;
-    qosClass: string;
-    reason: string;
-    startTime: number;
-    [other: string]: any;
-  };
-}
-
-export interface KubeReplicaSet extends KubeObjectInterface {
-  spec: {
-    minReadySeconds: number;
-    replicas: number;
-    selector: LabelSelector;
-    [other: string]: any;
-  };
-  status: {
-    availableReplicas: number;
-    conditions: Omit<KubeCondition, 'lastProbeTime' | 'lastUpdateTime'>[];
-    fullyLabeledReplicas: number;
-    observedGeneration: number;
-    readyReplicas: number;
-    replicas: number;
   };
 }
 

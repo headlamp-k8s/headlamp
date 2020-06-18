@@ -98,7 +98,7 @@ const LIST_ITEMS: SidebarEntry[] = [
         label: 'Pods'
       },
       {
-        name: 'replicaSets',
+        name: 'ReplicaSets',
         label: 'Replica Sets'
       },
     ]

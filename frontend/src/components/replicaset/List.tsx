@@ -1,23 +1,20 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeReplicaSet } from '../../lib/k8s/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
-import { ResourceLink } from '../common/Resource';
+import ReplicaSet from '../../lib/k8s/replicaSet';
+import { useFilterFunc } from '../../lib/util';
+import { Link } from '../common';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ReplicaSetList() {
-  const [replicaSets, setReplicaSets] = React.useState<KubeReplicaSet | null>(null);
+  const [replicaSets, setReplicaSets] = React.useState<ReplicaSet | null>(null);
   const filterFunc = useFilterFunc();
 
-  function getReplicas(replicaSet: KubeReplicaSet) {
+  function getReplicas(replicaSet: ReplicaSet) {
     return `${replicaSet.spec.replicas} / ${replicaSet.status.replicas}`;
   }
 
-  useConnectApi(
-    api.replicaSet.list.bind(null, null, setReplicaSets),
-  );
+  ReplicaSet.useApiList(setReplicaSets);
 
   return (
     <SectionBox
@@ -33,11 +30,11 @@ export default function ReplicaSetList() {
         columns={[
           {
             label: 'Name',
-            getter: (replicaSet) => <ResourceLink resource={replicaSet} />
+            getter: (replicaSet) => <Link kubeObject={replicaSet} />
           },
           {
             label: 'Namespace',
-            getter: (replicaSet) => replicaSet.metadata.namespace
+            getter: (replicaSet) => replicaSet.getNamespace()
           },
           {
             label: 'Generation',
@@ -49,7 +46,7 @@ export default function ReplicaSetList() {
           },
           {
             label: 'Age',
-            getter: (replicaSet) => timeAgo(replicaSet.metadata.creationTimestamp)
+            getter: (replicaSet) => replicaSet.getAge()
           },
         ]}
         data={replicaSets}
