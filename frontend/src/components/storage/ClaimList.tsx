@@ -1,19 +1,15 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubePersistentVolumeClaim } from '../../lib/k8s/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import PersistentVolumeClaim from '../../lib/k8s/persistentVolumeClaim';
+import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function VolumeClaimList() {
-  const [volumeClaim, setVolumeClaim] = React.useState<KubePersistentVolumeClaim[] | null>(null);
+  const [volumeClaim, setVolumeClaim] = React.useState<PersistentVolumeClaim[] | null>(null);
   const filterFunc = useFilterFunc();
 
-  useConnectApi(
-    // @todo: use namespace for filtering.
-    api.persistentVolumeClaim.list.bind(null, null, setVolumeClaim),
-  );
+  PersistentVolumeClaim.useApiList(setVolumeClaim);
 
   return (
     <SectionBox
@@ -28,20 +24,11 @@ export default function VolumeClaimList() {
         columns={[
           {
             label: 'Name',
-            getter: (volumeClaim) =>
-              <Link
-                routeName="persistentVolumeClaim"
-                params={{
-                  namespace: volumeClaim.metadata.namespace,
-                  name: volumeClaim.metadata.name
-                }}
-              >
-                {volumeClaim.metadata.name}
-              </Link>
+            getter: (volumeClaim) => <Link kubeObject={volumeClaim} />
           },
           {
             label: 'Namespace',
-            getter: (volumeClaim) => volumeClaim.metadata.namespace
+            getter: (volumeClaim) => volumeClaim.getNamespace()
           },
           {
             label: 'Status',
@@ -61,7 +48,7 @@ export default function VolumeClaimList() {
           },
           {
             label: 'Age',
-            getter: (volumeClaim) => timeAgo(volumeClaim.metadata.creationTimestamp)
+            getter: (volumeClaim) => volumeClaim.getAge()
           },
         ]}
         data={volumeClaim}

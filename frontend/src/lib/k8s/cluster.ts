@@ -297,29 +297,6 @@ export type KubeWorkload = KubeReplicaSet | KubeStatefulSet | (KubeObjectInterfa
   };
 });
 
-export interface KubePersistentVolumeClaim extends KubeObjectInterface {
-  spec: {
-    accessModes: string[];
-    resources: {
-      limits: object;
-      requests: {
-        storage?: string;
-        [other: string]: any;
-      };
-    };
-    storageClassName: string;
-    volumeMode: string;
-    volumeName: string;
-    [other: string]: any;
-  };
-  status: {
-    capacity?: {
-      storage?: string;
-    };
-    phase: string;
-  };
-}
-
 export interface KubeStorageClass extends KubeObjectInterface {
   provisioner: string;
   reclaimPolicy: string;
