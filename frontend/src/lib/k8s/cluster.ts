@@ -3,6 +3,7 @@ import { timeAgo } from '../util';
 import { useConnectApi } from './api';
 import { apiFactory, apiFactoryWithNamespace } from './apiProxy';
 import { KubeReplicaSet } from './replicaSet';
+import { KubeStatefulSet } from './statefulSet';
 
 export interface KubeObjectInterface {
   kind: string;
@@ -282,19 +283,6 @@ export interface KubeContainerStatus {
       message: string;
       reason: string;
     };
-  };
-}
-
-export interface KubeStatefulSet extends KubeObjectInterface {
-  spec: {
-    selector: LabelSelector;
-    updateStrategy: {
-      rollingUpdate: {
-        partition: number;
-      };
-      type: string;
-    };
-    [other: string]: any;
   };
 }
 

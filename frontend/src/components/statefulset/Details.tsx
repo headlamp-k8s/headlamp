@@ -1,16 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeStatefulSet, StringDict } from '../../lib/k8s/cluster';
+import { StringDict } from '../../lib/k8s/cluster';
+import StatefulSet from '../../lib/k8s/statefulSet';
 import { MainInfoSection, MetadataDictGrid } from '../common/Resource';
 
-export default function StatefulSet() {
+export default function StatefulSetDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState<KubeStatefulSet | null>(null);
+  const [item, setItem] = React.useState<StatefulSet | null>(null);
 
-  useConnectApi(
-    api.statefulSet.get.bind(null, namespace, name, setItem),
-  );
+  StatefulSet.useApiGet(setItem, name, namespace);
 
   return (
     <MainInfoSection

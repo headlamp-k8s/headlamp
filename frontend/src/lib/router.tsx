@@ -27,7 +27,7 @@ import ServiceDetails from '../components/service/Details';
 import ServiceList from '../components/service/List';
 import ServiceAccountDetails from '../components/serviceaccount/Details';
 import ServiceAccountList from '../components/serviceaccount/List';
-import StatefulSet from '../components/statefulset/Details';
+import StatefulSetDetails from '../components/statefulset/Details';
 import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
 import StorageClassDetails from '../components/storage/ClassDetails';
@@ -148,7 +148,7 @@ export const ROUTES: {
     path: '/statefulsets/:namespace/:name',
     exact: true,
     sidebar: 'workloads',
-    component: () => <StatefulSet />
+    component: () => <StatefulSetDetails />
   },
   Deployment: {
     path: '/deployments/:namespace/:name',
