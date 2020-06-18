@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubePod } from '../../lib/k8s/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import Pod from '../../lib/k8s/pod';
+import { useFilterFunc } from '../../lib/util';
 import { SectionFilterHeader } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import Link from '../common/Link';
@@ -10,18 +9,16 @@ import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function PodList() {
-  const [pods, setPods] = React.useState<KubePod[] | null>(null);
+  const [pods, setPods] = React.useState<Pod[] | null>(null);
   const filterFunc = useFilterFunc();
 
-  useConnectApi(
-    api.pod.list.bind(null, null, setPods),
-  );
+  Pod.useApiList(setPods);
 
-  function getRestartCount(pod: KubePod) {
+  function getRestartCount(pod: Pod) {
     return _.sumBy(pod.status.containerStatuses, container => container.restartCount);
   }
 
-  function makeStatusLabel(pod: KubePod) {
+  function makeStatusLabel(pod: Pod) {
     const phase = pod.status.phase;
     let status: StatusLabelProps['status'] = '';
 
@@ -52,24 +49,15 @@ export default function PodList() {
         columns={[
           {
             label: 'Name',
-            getter: (pod) =>
-              <Link
-                routeName="pod"
-                params={{
-                  namespace: pod.metadata.namespace,
-                  name: pod.metadata.name
-                }}
-              >
-                {pod.metadata.name}
-              </Link>
+            getter: (pod) => <Link kubeObject={pod} />
           },
           {
             label: 'Namespace',
-            getter: (pod: KubePod) => pod.metadata.namespace
+            getter: (pod: Pod) => pod.getNamespace()
           },
           {
             label: 'Restarts',
-            getter: (pod: KubePod) => getRestartCount(pod)
+            getter: (pod: Pod) => getRestartCount(pod)
           },
           {
             label: 'Status',
@@ -77,7 +65,7 @@ export default function PodList() {
           },
           {
             label: 'Age',
-            getter: (pod: KubePod) => timeAgo(pod.metadata.creationTimestamp)
+            getter: (pod: Pod) => pod.getAge()
           },
         ]}
         data={pods}

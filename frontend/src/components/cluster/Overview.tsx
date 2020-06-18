@@ -5,6 +5,7 @@ import React from 'react';
 import api, { useConnectApi } from '../../lib/k8s/api';
 import { KubeEvent } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
+import Pod from '../../lib/k8s/pod';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { StatusLabel } from '../common';
 import { PageGrid } from '../common/Resource';
@@ -15,15 +16,15 @@ import { LightTooltip } from '../common/Tooltip';
 import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './Charts';
 
 export default function Overview() {
-  const [pods, setPods] = React.useState(null);
+  const [pods, setPods] = React.useState<Pod[] | null>(null);
   const [events, setEvents] = React.useState(null);
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
   const [nodeMetrics, setNodeMetrics] = React.useState(null);
 
   Node.useApiList(setNodes);
+  Pod.useApiList(setPods);
 
   useConnectApi(
-    api.pod.list.bind(null, null, setPods),
     api.event.list.bind(null, null, setEvents),
     api.metrics.nodes.bind(null, setNodeMetrics)
   );
