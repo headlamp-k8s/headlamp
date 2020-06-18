@@ -86,7 +86,7 @@ export const ROUTES: {
     sidebar: 'nodes',
     component: () => <NodeList />
   },
-  Node: {
+  node: {
     path: '/nodes/:name',
     sidebar: 'nodes',
     component: () => <NodeDetails />

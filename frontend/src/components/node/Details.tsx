@@ -5,7 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeMetrics, KubeNode } from '../../lib/k8s/cluster';
+import { KubeMetrics } from '../../lib/k8s/cluster';
+import Node from '../../lib/k8s/node';
 import { timeAgo } from '../../lib/util';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
 import { HeaderLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../common/Label';
@@ -16,15 +17,16 @@ import { NameValueTable } from '../common/SimpleTable';
 
 export default function NodeDetails() {
   const { name } = useParams();
-  const [item, setItem] = React.useState<KubeNode | null>(null);
+  const [item, setItem] = React.useState<Node | null>(null);
   const [nodeMetrics, setNodeMetrics] = React.useState(null);
 
+  Node.useApiGet(setItem, name);
+
   useConnectApi(
-    api.node.get.bind(null, name, setItem),
     api.metrics.nodes.bind(null, setNodeMetrics)
   );
 
-  function getAddresses(item: KubeNode) {
+  function getAddresses(item: Node) {
     return item.status.addresses.map(({type, address}) => {
       return {
         name: type,
@@ -60,7 +62,7 @@ export default function NodeDetails() {
 }
 
 interface ChartsSectionProps {
-  node: KubeNode | null;
+  node: Node | null;
   metrics: KubeMetrics[] | null;
 }
 
@@ -113,7 +115,7 @@ function ChartsSection(props: ChartsSectionProps) {
 }
 
 interface SystemInfoSectionProps {
-  node: KubeNode;
+  node: Node;
 }
 
 function SystemInfoSection(props: SystemInfoSectionProps) {
@@ -185,7 +187,7 @@ function SystemInfoSection(props: SystemInfoSectionProps) {
 }
 
 interface NodeReadyLabelProps {
-  node: KubeNode;
+  node: Node;
 }
 
 export function NodeReadyLabel(props: NodeReadyLabelProps) {

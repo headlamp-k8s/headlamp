@@ -1,9 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeMetrics, KubeObjectInterface } from '../../lib/k8s/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
-import { ResourceLink } from '../common/Resource';
+import { KubeMetrics } from '../../lib/k8s/cluster';
+import Node from '../../lib/k8s/node';
+import { useFilterFunc } from '../../lib/util';
+import { Link } from '../common';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
@@ -18,12 +19,13 @@ const useStyle = makeStyles({
 
 export default function NodeList() {
   const classes = useStyle();
-  const [nodes, setNodes] = React.useState<KubeObjectInterface | null>(null);
+  const [nodes, setNodes] = React.useState<Node[] | null>(null);
   const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
   const filterFunc = useFilterFunc();
 
+  Node.useApiList(setNodes);
+
   useConnectApi(
-    api.node.list.bind(null, setNodes),
     api.metrics.nodes.bind(null, setNodeMetrics)
   );
 
@@ -42,8 +44,7 @@ export default function NodeList() {
         columns={[
           {
             label: 'Name',
-            getter: (node) =>
-              <ResourceLink resource={node} />
+            getter: (node) => <Link kubeObject={node} />
           },
           {
             label: 'Ready',
@@ -75,7 +76,7 @@ export default function NodeList() {
           },
           {
             label: 'Age',
-            getter: (node) => timeAgo(node.metadata.creationTimestamp)
+            getter: (node) => node.getAge()
           },
         ]}
         data={nodes}

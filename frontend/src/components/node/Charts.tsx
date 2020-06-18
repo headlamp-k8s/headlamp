@@ -1,11 +1,12 @@
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { KubeMetrics, KubeNode } from '../../lib/k8s/cluster';
+import { KubeMetrics } from '../../lib/k8s/cluster';
+import Node from '../../lib/k8s/node';
 import { getPercentStr, getResourceMetrics, getResourceStr } from '../../lib/util';
 import { PercentageBar } from '../common/Chart';
 
 interface UsageBarChartProps {
-  node: KubeNode;
+  node: Node;
   nodeMetrics: KubeMetrics[] | null;
   resourceType: keyof (KubeMetrics['usage']);
 }
