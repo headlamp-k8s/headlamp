@@ -339,16 +339,6 @@ export type KubeWorkload = KubeReplicaSet | KubeStatefulSet | (KubeObjectInterfa
   };
 });
 
-export interface KubeRole extends KubeObjectInterface {
-  rules: {
-    apiGroups: string[];
-    nonResourceURLs: string[];
-    resourceNames: string[];
-    resources: string[];
-    verbs: string[];
-  };
-}
-
 export interface KubeRoleBinding extends KubeObjectInterface {
   roleRef: {
     apiGroup: string;

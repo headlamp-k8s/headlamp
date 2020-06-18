@@ -1,22 +1,22 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeRole } from '../../lib/k8s/cluster';
+import ClusterRole from '../../lib/k8s/clusterRole';
+import Role from '../../lib/k8s/role';
 import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function RoleDetails() {
-  const { namespace = null, name } = useParams();
-  const [item, setItem] = React.useState<KubeRole | null>(null);
+  const { namespace = undefined, name } = useParams();
+  const [item, setItem] = React.useState<Role | null>(null);
 
-  useConnectApi(
-    (namespace ?
-      api.role.get.bind(null, namespace, name, setItem)
-      :
-      api.clusterRole.get.bind(null, name, setItem))
-  );
+  let cls = Role;
+  if (!namespace) {
+    cls = ClusterRole;
+  }
+
+  cls.useApiGet(setItem, name!, namespace);
 
   return (
     !item ? <Loader /> :
