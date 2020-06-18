@@ -1,19 +1,16 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeService } from '../../lib/k8s/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import Service from '../../lib/k8s/service';
+import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceList() {
-  const [services, setServices] = React.useState<KubeService | null>(null);
+  const [services, setServices] = React.useState<Service | null>(null);
   const filterFunc = useFilterFunc();
 
-  useConnectApi(
-    api.service.list.bind(null, null, setServices),
-  );
+  Service.useApiList(setServices);
 
   return (
     <SectionBox
@@ -29,20 +26,11 @@ export default function ServiceList() {
         columns={[
           {
             label: 'Name',
-            getter: (service) =>
-              <Link
-                routeName="service"
-                params={{
-                  namespace: service.metadata.namespace,
-                  name: service.metadata.name,
-                }}
-              >
-                {service.metadata.name}
-              </Link>
+            getter: (service) => <Link kubeObject={service} />
           },
           {
             label: 'Namespace',
-            getter: (service) => service.metadata.namespace
+            getter: (service) => service.getNamespace()
           },
           {
             label: 'Type',
@@ -54,7 +42,7 @@ export default function ServiceList() {
           },
           {
             label: 'Age',
-            getter: (service) => timeAgo(service.metadata.creationTimestamp)
+            getter: (service) => service.getAge()
           },
         ]}
         data={services}

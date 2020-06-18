@@ -309,21 +309,6 @@ export interface KubeSecretAccount extends KubeObjectInterface {
   }[];
 }
 
-export interface KubeService extends KubeObjectInterface {
-  spec: {
-    clusterIP: string;
-    ports: {
-      name: string;
-      nodePort: number;
-      port: number;
-      protocol: string;
-      targetPort: number | string;
-    }[];
-    type: string;
-    [otherProps: string]: any;
-  };
-}
-
 export type KubeWorkload = KubeReplicaSet | KubeStatefulSet | (KubeObjectInterface & {
   spec: {
     selector?: LabelSelector;

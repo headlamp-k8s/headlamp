@@ -2,8 +2,7 @@ import chevronRight from '@iconify/icons-mdi/chevron-right';
 import { InlineIcon } from '@iconify/react';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeService } from '../../lib/k8s/cluster';
+import Service from '../../lib/k8s/service';
 import { ValueLabel } from '../common/Label';
 import Loader from '../common/Loader';
 import { MainInfoSection, MetadataDictGrid, PageGrid } from '../common/Resource';
@@ -12,11 +11,9 @@ import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState<KubeService | null>(null);
+  const [item, setItem] = React.useState<Service | null>(null);
 
-  useConnectApi(
-    api.service.get.bind(null, namespace, name, setItem),
-  );
+  Service.useApiGet(setItem, name, namespace);
 
   return (
     !item ? <Loader /> :
