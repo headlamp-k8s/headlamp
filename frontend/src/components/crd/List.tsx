@@ -1,5 +1,5 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
+import CRD from '../../lib/k8s/crd';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
 import { SectionBox } from '../common/SectionBox';
@@ -7,12 +7,10 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function CustomResourceDefinitionList() {
-  const [crds, setCRDS] = React.useState(null);
+  const [crds, setCRDs] = React.useState<CRD[] | null>(null);
   const filterFunc = useFilterFunc();
 
-  useConnectApi(
-    api.crd.list.bind(null, setCRDS),
-  );
+  CRD.useApiList(setCRDs);
 
   return (
     <SectionBox

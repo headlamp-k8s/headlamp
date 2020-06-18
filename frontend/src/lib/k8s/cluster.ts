@@ -436,20 +436,6 @@ export type KubeWorkload = KubeReplicaSet | KubeStatefulSet | (KubeObjectInterfa
   };
 });
 
-export interface KubeCRD extends KubeObjectInterface {
-  spec: {
-    group: string;
-    version: string;
-    versions: {
-      name: string;
-      served: boolean;
-      storage: boolean;
-    };
-    scope: string;
-    [other: string]: any;
-  };
-}
-
 export interface KubeRole extends KubeObjectInterface {
   rules: {
     apiGroups: string[];
