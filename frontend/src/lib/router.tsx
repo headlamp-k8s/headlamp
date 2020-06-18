@@ -74,7 +74,7 @@ export const ROUTES: {
     sidebar: 'namespaces',
     component: () => <NamespacesList />
   },
-  Namespace: {
+  namespace: {
     path: '/namespaces/:name',
     sidebar: 'namespaces',
     component: () => <NamespaceDetails />
