@@ -1,21 +1,17 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeDaemonSet } from '../../lib/k8s/cluster';
+import DaemonSet from '../../lib/k8s/daemonSet';
 import { ContainersSection, MainInfoSection, MetadataDictGrid, PageGrid } from '../common/Resource';
 
-export default function DaemonSet() {
+export default function DaemonSetDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState<KubeDaemonSet | null>(null);
+  const [item, setItem] = React.useState<DaemonSet | null>(null);
 
-  useConnectApi(
-    api.daemonSet.get.bind(null, namespace, name, setItem),
-  );
+  DaemonSet.useApiGet(setItem, name, namespace);
 
   return (
     <PageGrid>
       <MainInfoSection
-
         resource={item}
         extraInfo={item && [
           {

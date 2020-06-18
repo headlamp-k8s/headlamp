@@ -248,7 +248,7 @@ export interface KubeIngress extends KubeObjectInterface {
   };
 }
 
-interface LabelSelector {
+export interface LabelSelector {
   matchExpressions?: {
     key: string;
     operator: string;
@@ -256,19 +256,6 @@ interface LabelSelector {
   };
   matchLabels?: {
     [key: string]: string;
-  };
-}
-
-export interface KubeDaemonSet extends KubeObjectInterface {
-  spec: {
-    updateStrategy: {
-      type: string;
-      rollingUpdate: {
-        maxUnavailable: number;
-      };
-    };
-    selector: LabelSelector;
-    [otherProps: string]: any;
   };
 }
 

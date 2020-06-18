@@ -7,7 +7,7 @@ import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
 import CustomResourceDefinitionDetails from '../components/crd/Details';
 import CustomResourceDefinitionList from '../components/crd/List';
-import DaemonSet from '../components/daemonset/Details';
+import DaemonSetDetails from '../components/daemonset/Details';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import NamespaceDetails from '../components/namespace/Details';
@@ -142,7 +142,7 @@ export const ROUTES: {
     path: '/daemonsets/:namespace/:name',
     exact: true,
     sidebar: 'workloads',
-    component: () => <DaemonSet />
+    component: () => <DaemonSetDetails />
   },
   StatefulSet: {
     path: '/statefulsets/:namespace/:name',
