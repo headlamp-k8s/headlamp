@@ -1,6 +1,5 @@
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeIngress } from '../../lib/k8s/cluster';
+import Ingress from '../../lib/k8s/ingress';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
@@ -8,16 +7,10 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function IngressList() {
-  const [ingresses, setIngresses] = React.useState<KubeIngress[] | null>(null);
+  const [ingresses, setIngresses] = React.useState<Ingress[] | null>(null);
   const filterFunc = useFilterFunc();
 
-  function getHosts(ingress: KubeIngress) {
-    return ingress.spec.rules.map(({host}) => host).join(' | ');
-  }
-
-  useConnectApi(
-    api.ingress.list.bind(null, null, setIngresses),
-  );
+  Ingress.useApiList(setIngresses);
 
   return (
     <SectionBox
@@ -34,20 +27,15 @@ export default function IngressList() {
           {
             label: 'Name',
             getter: (ingress) =>
-              <Link
-                routeName="ingress"
-                params={{namespace: ingress.metadata.namespace, name: ingress.metadata.name}}
-              >
-                {ingress.metadata.name}
-              </Link>
+              <Link kubeObject={ingress} />
           },
           {
             label: 'Namespace',
-            getter: (ingress) => ingress.metadata.namespace
+            getter: (ingress) => ingress.getNamespace()
           },
           {
             label: 'Hosts',
-            getter: (ingress) => getHosts(ingress)
+            getter: (ingress) => ingress.getHosts()
           },
           {
             label: 'Age',

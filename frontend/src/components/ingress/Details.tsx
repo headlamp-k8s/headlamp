@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeIngress } from '../../lib/k8s/cluster';
+import Ingress from '../../lib/k8s/ingress';
 import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
@@ -9,11 +8,9 @@ import SimpleTable from '../common/SimpleTable';
 
 export default function IngressDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState<KubeIngress | null>(null);
+  const [item, setItem] = React.useState<Ingress | null>(null);
 
-  useConnectApi(
-    api.ingress.get.bind(null, namespace, name, setItem),
-  );
+  Ingress.useApiGet(setItem, name, namespace);
 
   function getHostsData() {
     const data: {
@@ -37,7 +34,6 @@ export default function IngressDetails() {
     !item ? <Loader /> :
     <PageGrid>
       <MainInfoSection
-
         resource={item}
       />
       <SectionBox title="Rules">
