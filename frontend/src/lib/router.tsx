@@ -37,6 +37,10 @@ import PersistentVolumeList from '../components/storage/VolumeList';
 import WorkloadDetails from '../components/workload/Details';
 import WorkloadOverview from '../components/workload/Overview';
 import store from '../redux/stores/store';
+import CronJob from './k8s/cronJob';
+import Deployment from './k8s/deployment';
+import Job from './k8s/job';
+import ReplicaSet from './k8s/replicaSet';
 import { getCluster, getClusterPrefixedPath } from './util';
 
 export interface Route {
@@ -154,19 +158,19 @@ export const ROUTES: {
     path: '/deployments/:namespace/:name',
     exact: true,
     sidebar: 'workloads',
-    component: () => <WorkloadDetails workloadKind="Deployment" />
+    component: () => <WorkloadDetails workloadKind={Deployment} />
   },
   Job: {
     path: '/jobs/:namespace/:name',
     exact: true,
     sidebar: 'workloads',
-    component: () => <WorkloadDetails workloadKind="Job" />
+    component: () => <WorkloadDetails workloadKind={Job} />
   },
   CronJob: {
     path: '/cronjobs/:namespace/:name',
     exact: true,
     sidebar: 'workloads',
-    component: () => <WorkloadDetails workloadKind="CronJob" />
+    component: () => <WorkloadDetails workloadKind={CronJob} />
   },
   pods: {
     path: '/pods',
@@ -218,7 +222,7 @@ export const ROUTES: {
     path: '/replicasets/:namespace/:name',
     exact: true,
     sidebar: 'ReplicaSets',
-    component: () => <WorkloadDetails workloadKind="ReplicaSet" />
+    component: () => <WorkloadDetails workloadKind={ReplicaSet} />
   },
   configMaps: {
     path: '/configmaps',

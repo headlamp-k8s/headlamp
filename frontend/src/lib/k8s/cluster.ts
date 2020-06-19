@@ -2,8 +2,12 @@ import { createRouteURL } from '../router';
 import { timeAgo } from '../util';
 import { useConnectApi } from './api';
 import { apiFactory, apiFactoryWithNamespace } from './apiProxy';
-import { KubeReplicaSet } from './replicaSet';
-import { KubeStatefulSet } from './statefulSet';
+import CronJob from './cronJob';
+import DaemonSet from './daemonSet';
+import Deployment from './deployment';
+import Job from './job';
+import ReplicaSet from './replicaSet';
+import StatefulSet from './statefulSet';
 
 export interface KubeObjectInterface {
   kind: string;
@@ -286,13 +290,4 @@ export interface KubeContainerStatus {
   };
 }
 
-export type KubeWorkload = KubeReplicaSet | KubeStatefulSet | (KubeObjectInterface & {
-  spec: {
-    selector?: LabelSelector;
-    strategy?: {
-      type: string;
-      [otherProps: string]: any;
-    };
-    [otherProps: string]: any;
-  };
-});
+export type Workload = DaemonSet | ReplicaSet | StatefulSet | Job | CronJob | Deployment;

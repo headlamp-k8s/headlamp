@@ -3,7 +3,7 @@ import en from 'javascript-time-ago/locale/en';
 import { matchPath } from 'react-router';
 import { FilterState } from '../redux/reducers/filter';
 import { useTypedSelector } from '../redux/reducers/reducers';
-import { KubeMetrics, KubeObjectInterface, KubeWorkload } from './k8s/cluster';
+import { KubeMetrics, KubeObjectInterface, Workload } from './k8s/cluster';
 import Node from './k8s/node';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 TimeAgo.addLocale(en);
@@ -32,11 +32,11 @@ export function getPercentStr(value: number, total: number) {
 
 }
 
-export function getReadyReplicas(item: KubeWorkload) {
+export function getReadyReplicas(item: Workload) {
   return (item.status.readyReplicas || item.status.numberReady || 0);
 }
 
-export function getTotalReplicas(item: KubeWorkload) {
+export function getTotalReplicas(item: Workload) {
   return (item.spec.replicas || item.status.currentNumberScheduled || 0);
 }
 
