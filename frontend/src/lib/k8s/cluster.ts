@@ -129,6 +129,19 @@ export function makeKubeObject<T extends KubeObjectInterface>(detailsRouteName: 
       const getCallback = onGet as (item: U) => void;
       useConnectApi(this.apiGet(getCallback, name, namespace));
     }
+
+    private _class() {
+      return (this.constructor as typeof KubeObject);
+    };
+
+    delete() {
+      const args: string[] = [this.getName()];
+      if (this._class().apiEndpoint.isNamespaced) {
+        args.unshift(this.getNamespace()!);
+      }
+
+      this._class().apiEndpoint.delete(...args);
+    }
   }
 
   return KubeObject;
