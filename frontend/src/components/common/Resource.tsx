@@ -21,6 +21,7 @@ import Loader from '../common/Loader';
 import { SectionBox } from '../common/SectionBox';
 import SectionHeader, { HeaderStyleProps } from '../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../common/SimpleTable';
+import DeleteButton from './DeleteButton';
 import Empty from './EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from './Label';
 import Link from './Link';
@@ -203,6 +204,7 @@ interface MainInfoSectionProps {
   extraInfo?: NameValueTableRow[] | null;
   actions?: React.ReactNode[] | null;
   headerStyle?: HeaderStyleProps['headerStyle'];
+  noDefaultActions?: boolean;
 }
 
 export function MainInfoSection(props: MainInfoSectionProps) {
@@ -213,11 +215,20 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     extraInfo = [],
     actions = [],
     headerStyle = 'main',
+    noDefaultActions = false,
   } = props;
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
 
   function getHeaderActions() {
     return Object.values(headerActions).map(action => action({item: resource}));
+  }
+
+  let defaultActions: MainInfoSectionProps['actions'] = [];
+
+  if (!noDefaultActions && resource) {
+    defaultActions = [
+      <DeleteButton item={resource} />
+    ];
   }
 
   return (
@@ -226,7 +237,10 @@ export function MainInfoSection(props: MainInfoSectionProps) {
         <SectionHeader
           title={title || (resource ? resource.kind : '')}
           headerStyle={headerStyle}
-          actions={React.Children.toArray(actions).concat(getHeaderActions())}
+          actions={
+            React.Children.toArray(actions).concat(defaultActions)
+              .concat(getHeaderActions())
+          }
         />
       }
     >
