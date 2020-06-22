@@ -6,26 +6,47 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import api from '../../lib/k8s/api';
-import { KubeObjectInterface } from '../../lib/k8s/cluster';
-import { CallbackAction, CallbackActionOptions, clusterAction } from '../../redux/actions/actions';
+import { KubeObject } from '../../lib/k8s/cluster';
+import { CallbackActionOptions, clusterAction } from '../../redux/actions/actions';
 import { ConfirmDialog } from './Dialog';
 
 interface DeleteButtonProps {
-  item?: KubeObjectInterface;
-  deletionCallback: CallbackAction['callback'];
+  item?: KubeObject;
   options?: CallbackActionOptions;
 }
 
 export default function DeleteButton(props: DeleteButtonProps) {
   const dispatch = useDispatch();
-  const { item, deletionCallback, options } = props;
+  const { item, options } = props;
   const [openAlert, setOpenAlert] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
   const location = useLocation();
 
+  const deleteFunc = React.useCallback(() => {
+    if (!item) {
+      return;
+    }
+
+    const callback = item!.delete;
+
+    callback && dispatch(clusterAction(callback.bind(item),
+      {
+        startMessage: `Deleting item ${item!.metadata.name}…`,
+        cancelledMessage: `Cancelled deletion of ${item!.metadata.name}.`,
+        successMessage: `Deleted item ${item!.metadata.name}.`,
+        cancelUrl: location.pathname,
+        startUrl: item!.getListLink(),
+        successOptions: {variant: 'success'},
+        ...options
+      }
+    ));
+  },
+  // eslint-disable-next-line
+  [item]);
+
   React.useEffect(() => {
     if (item && item.metadata) {
-      api.getAuthorization(item, 'delete').then(
+      api.getAuthorization(item.jsonData, 'delete').then(
         (result: any) => {
           if (result.status.allowed) {
             setVisible(true);
@@ -55,17 +76,7 @@ export default function DeleteButton(props: DeleteButtonProps) {
         title="Delete item"
         description="Are you sure you want to delete this item?"
         handleClose={() => setOpenAlert(false)}
-        onConfirm={() => {
-          dispatch(clusterAction(deletionCallback,
-            {
-              startMessage: `Deleting item ${item!.metadata.name}…`,
-              cancelledMessage: `Cancelled deleting ${item!.metadata.name}.`,
-              successMessage: `Deleted item ${item!.metadata.name}.`,
-              cancelUrl: location.pathname,
-              ...options
-            }
-          ));
-        }}
+        onConfirm={() => deleteFunc() }
       />
     </React.Fragment>
   );
