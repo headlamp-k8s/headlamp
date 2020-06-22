@@ -142,6 +142,14 @@ export function makeKubeObject<T extends KubeObjectInterface>(detailsRouteName: 
 
       this._class().apiEndpoint.delete(...args);
     }
+
+    update(data: KubeObjectInterface) {
+      this._class().put(data);
+    }
+
+    static put(data: KubeObjectInterface) {
+      this.apiEndpoint.put(data);
+    }
   }
 
   return KubeObject;
