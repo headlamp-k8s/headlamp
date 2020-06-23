@@ -47,8 +47,10 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
+type KubeObjectIsh = Partial<KubeObjectInterface>;
+
 interface EditorDialogProps extends DialogProps{
-  item: KubeObjectInterface | null;
+  item: KubeObjectIsh | null;
   onClose: () => void;
   onSave: ((...args: any[]) => void) | null;
 }
@@ -76,11 +78,15 @@ export default function EditorDialog(props: EditorDialogProps) {
       setOriginalCode(itemCode);
     }
 
+    if (!item.metadata) {
+      return;
+    }
+
     // Only change if the code hasn't been touched.
-    if (previousVersion !== item.metadata.resourceVersion || code === originalCode) {
+    if (previousVersion !== item.metadata!.resourceVersion || code === originalCode) {
       setCode(itemCode);
-      if (previousVersion !== item.metadata.resourceVersion) {
-        setPreviousVersion(item.metadata.resourceVersion);
+      if (previousVersion !== item.metadata!.resourceVersion) {
+        setPreviousVersion(item!.metadata!.resourceVersion);
       }
     }
   },
