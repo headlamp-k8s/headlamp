@@ -53,6 +53,7 @@ interface EditorDialogProps extends DialogProps{
   item: KubeObjectIsh | null;
   onClose: () => void;
   onSave: ((...args: any[]) => void) | null;
+  onEditorChanged?: ((newValue: string) => void) | null;
   errorMessage?: string;
   title?: string;
 }
@@ -62,6 +63,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     item,
     onClose,
     onSave,
+    onEditorChanged,
     errorMessage,
     title,
     ...other
@@ -110,6 +112,10 @@ export default function EditorDialog(props: EditorDialogProps) {
 
     if (error && getObjectFromCode(newValue)) {
       setError('');
+    }
+
+    if (onEditorChanged) {
+      onEditorChanged(newValue);
     }
   }
 
