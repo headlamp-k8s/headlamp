@@ -54,6 +54,7 @@ interface EditorDialogProps extends DialogProps{
   onClose: () => void;
   onSave: ((...args: any[]) => void) | null;
   onEditorChanged?: ((newValue: string) => void) | null;
+  saveLabel?: string;
   errorMessage?: string;
   title?: string;
 }
@@ -64,6 +65,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     onClose,
     onSave,
     onEditorChanged,
+    saveLabel,
     errorMessage,
     title,
     ...other
@@ -259,7 +261,7 @@ export default function EditorDialog(props: EditorDialogProps) {
               color="primary"
               disabled={originalCode === code || !!error}
             >
-              Save &amp; Apply
+              { saveLabel || 'Save & Apply'}
             </Button>
             }
           </DialogActions>
