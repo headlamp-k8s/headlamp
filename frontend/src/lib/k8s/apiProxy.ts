@@ -9,7 +9,8 @@
 
 import { getToken, logout } from '../auth';
 import { getCluster } from '../util';
-import { KubeObjectInterface } from './cluster';
+import { ResourceClasses } from '.';
+import { KubeObjectClass, KubeObjectInterface } from './cluster';
 
 const {host, href, hash, search} = window.location;
 const nonHashedUrl = href.replace(hash, '').replace(search, '');
@@ -373,4 +374,28 @@ function combinePath(base: string, path: string) {
   if (base.endsWith('/')) base = base.slice(0, -1); // eslint-disable-line no-param-reassign
   if (path.startsWith('/')) path = path.slice(1); // eslint-disable-line no-param-reassign
   return `${base}/${path}`;
+}
+
+export async function apply(body: KubeObjectInterface): Promise<JSON> {
+  const resourceName = body.kind;
+  let resourceClass: KubeObjectClass | null = null;
+
+  if (resourceName in ResourceClasses) {
+    resourceClass = ResourceClasses[resourceName];
+  }
+
+  if (!resourceClass) {
+    throw new Error(`Cannot handle unknown resource kind: ${body.kind}`);
+  }
+
+  try {
+    return await resourceClass!.apiEndpoint.post(body);
+  } catch (err) {
+    // Check to see if failed because the record already exists.
+    // If the failure isn't a 409 (i.e. Confilct), just rethrow.
+    if (err.status !== 409) throw err;
+
+    // We had a confilct. Try a PUT
+    return resourceClass!.apiEndpoint.put(body);
+  }
 }
