@@ -53,10 +53,17 @@ interface EditorDialogProps extends DialogProps{
   item: KubeObjectIsh | null;
   onClose: () => void;
   onSave: ((...args: any[]) => void) | null;
+  title?: string;
 }
 
 export default function EditorDialog(props: EditorDialogProps) {
-  const { item, onClose, onSave, ...other } = props;
+  const {
+    item,
+    onClose,
+    onSave,
+    title,
+    ...other
+  } = props;
   const editorOptions = {
     selectOnLineNumbers: true,
     readOnly: isReadOnly(),
@@ -162,6 +169,12 @@ export default function EditorDialog(props: EditorDialogProps) {
     );
   }
 
+  let dialogTitle = title;
+  if (!dialogTitle && item) {
+    dialogTitle = isReadOnly() ? `View: ${item.metadata?.name || 'New Object'}`
+      : `Edit: ${item.metadata?.name || 'New Object'}`;
+  }
+
   return (
     <Dialog
       maxWidth="lg"
@@ -175,11 +188,7 @@ export default function EditorDialog(props: EditorDialogProps) {
         :
         <React.Fragment>
           <DialogTitle>
-            {isReadOnly() ?
-              `View: ${item.metadata.name}`
-              :
-              `Edit: ${item.metadata.name}`
-            }
+            {dialogTitle}
           </DialogTitle>
           <DialogContent
             className={classes.dialogContent}
