@@ -34,6 +34,7 @@ import { SidebarEntry } from '../redux/reducers/ui';
 import store from '../redux/stores/store';
 import { ReactComponent as LogoLight } from '../resources/logo-light.svg';
 import { NameValueTable } from './common';
+import CreateButton from './common/CreateButton';
 
 export const drawerWidth = 330;
 
@@ -369,7 +370,10 @@ export default function Sidebar() {
           </List>
         </Grid>
         <Grid item>
-          <VersionButton />
+          <Box textAlign="center">
+            <CreateButton />
+            <VersionButton />
+          </Box>
         </Grid>
       </Grid>
     </Drawer>
