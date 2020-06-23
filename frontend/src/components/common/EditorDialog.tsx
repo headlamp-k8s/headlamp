@@ -53,6 +53,7 @@ interface EditorDialogProps extends DialogProps{
   item: KubeObjectIsh | null;
   onClose: () => void;
   onSave: ((...args: any[]) => void) | null;
+  errorMessage?: string;
   title?: string;
 }
 
@@ -61,6 +62,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     item,
     onClose,
     onSave,
+    errorMessage,
     title,
     ...other
   } = props;
@@ -169,6 +171,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     );
   }
 
+  const errorLabel = error || errorMessage;
   let dialogTitle = title;
   if (!dialogTitle && item) {
     dialogTitle = isReadOnly() ? `View: ${item.metadata?.name || 'New Object'}`
@@ -233,8 +236,8 @@ export default function EditorDialog(props: EditorDialogProps) {
             </ConfirmButton>
             }
             <div style={{flex: '1 0 0'}} />
-            { error &&
-            <Typography color="error">{error}</Typography>
+            { errorLabel &&
+            <Typography color="error">{errorLabel}</Typography>
             }
             <div style={{flex: '1 0 0'}} />
             <Button
