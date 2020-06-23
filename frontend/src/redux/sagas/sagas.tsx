@@ -1,6 +1,6 @@
 import { all, call, cancelled, delay, put, race, take, takeEvery } from 'redux-saga/effects';
 import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/util';
-import { Action, CallbackAction, CLUSTER_ACTION, CLUSTER_ACTION_CANCEL, updateClusterAction } from '../actions/actions';
+import { Action, CallbackAction, CLUSTER_ACTION, CLUSTER_ACTION_CANCEL, ClusterAction, updateClusterAction } from '../actions/actions';
 
 function newActionKey() {
   return (new Date().getTime() + Math.random()).toString();
@@ -29,10 +29,13 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
     successUrl,
     startMessage,
     cancelledMessage,
+    errorMessage,
+    errorUrl,
     successMessage,
     startOptions = {},
     cancelledOptions = {},
     successOptions = {},
+    errorOptions = {},
   } = action;
 
   try {
@@ -65,15 +68,35 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
       // Actually perform the action. This part is no longer cancellable,
       // so it's here instead of within the try block.
       // @todo: Handle exceptions.
-      yield call(callback);
+      let success = false;
+      try {
+        yield call(callback);
+        success = true;
+      } catch (err) {
 
-      yield put(updateClusterAction({
-        id: actionKey,
-        url:successUrl,
-        dismissSnackbar: actionKey,
-        message: successMessage,
-        snackbarProps: successOptions,
-      }));
+      }
+
+      let clusterAction: ClusterAction;
+
+      if (success) {
+        clusterAction = {
+          id: actionKey,
+          url: successUrl,
+          dismissSnackbar: actionKey,
+          message: successMessage,
+          snackbarProps: successOptions,
+        };
+      } else {
+        clusterAction = {
+          id: actionKey,
+          url: errorUrl,
+          dismissSnackbar: actionKey,
+          message: errorMessage,
+          snackbarProps: errorOptions,
+        };
+      }
+
+      yield put(updateClusterAction(clusterAction));
     }
 
     // Reset state if no other deletion happens
