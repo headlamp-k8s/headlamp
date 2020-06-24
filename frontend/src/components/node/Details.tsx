@@ -4,7 +4,6 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/k8s/api';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import { timeAgo } from '../../lib/util';
@@ -14,17 +13,13 @@ import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
-
 export default function NodeDetails() {
   const { name } = useParams();
   const [item, setItem] = React.useState<Node | null>(null);
-  const [nodeMetrics, setNodeMetrics] = React.useState(null);
+  const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
 
   Node.useApiGet(setItem, name);
-
-  useConnectApi(
-    api.metrics.nodes.bind(null, setNodeMetrics)
-  );
+  Node.useMetrics(setNodeMetrics);
 
   function getAddresses(item: Node) {
     return item.status.addresses.map(({type, address}) => {

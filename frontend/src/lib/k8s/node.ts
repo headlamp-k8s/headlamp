@@ -1,5 +1,6 @@
+import { metrics, useConnectApi } from './api';
 import { apiFactory } from './apiProxy';
-import { KubeCondition, KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeCondition, KubeMetrics, KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubeNode extends KubeObjectInterface {
   status: {
@@ -42,6 +43,10 @@ class Node extends makeKubeObject<KubeNode>('node') {
 
   get spec() {
     return this.jsonData!.spec;
+  }
+
+  static useMetrics(onMetrics: (metricsList: KubeMetrics[]) => void) {
+    useConnectApi(metrics.bind(null, '/apis/metrics.k8s.io/v1beta1/nodes', onMetrics));
   }
 }
 

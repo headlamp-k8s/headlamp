@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import { useFilterFunc } from '../../lib/util';
@@ -24,10 +23,7 @@ export default function NodeList() {
   const filterFunc = useFilterFunc();
 
   Node.useApiList(setNodes);
-
-  useConnectApi(
-    api.metrics.nodes.bind(null, setNodeMetrics)
-  );
+  Node.useMetrics(setNodeMetrics);
 
   return (
     <SectionBox

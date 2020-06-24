@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeEvent } from '../../lib/k8s/cluster';
+import { KubeEvent, KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo, useFilterFunc } from '../../lib/util';
@@ -19,14 +19,14 @@ export default function Overview() {
   const [pods, setPods] = React.useState<Pod[] | null>(null);
   const [events, setEvents] = React.useState(null);
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
-  const [nodeMetrics, setNodeMetrics] = React.useState(null);
+  const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
 
-  Node.useApiList(setNodes);
   Pod.useApiList(setPods);
+  Node.useApiList(setNodes);
+  Node.useMetrics(setNodeMetrics);
 
   useConnectApi(
     api.event.list.bind(null, null, setEvents),
-    api.metrics.nodes.bind(null, setNodeMetrics)
   );
 
   return (

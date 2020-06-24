@@ -172,7 +172,7 @@ function oidcFactory() {
   };
 }
 
-async function metrics(url: string, cb: (arg: KubeMetrics[]) => void) {
+export async function metrics(url: string, cb: (arg: KubeMetrics[]) => void) {
   const handel = setInterval(getMetrics, 10000);
   getMetrics();
 
