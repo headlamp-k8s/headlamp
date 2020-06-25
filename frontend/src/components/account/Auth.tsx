@@ -1,20 +1,18 @@
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Snackbar from '@material-ui/core/Snackbar';
-import { useTheme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Location } from 'history';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { setToken } from '../../lib/auth';
-import api from '../../lib/k8s/api';
+import api, { useClustersConf } from '../../lib/k8s/api';
 import { getCluster } from '../../lib/util';
+import { ClusterDialog } from '../cluster/Chooser';
 
 interface ReactRouterLocationStateIface {
   from?: Location;
@@ -26,8 +24,7 @@ function Auth() {
   const {from = { pathname: '/' }} = location.state as ReactRouterLocationStateIface;
   const [token, setToken] = React.useState('');
   const [showError, setShowError] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const clusters = useClustersConf();
 
   function onAuthClicked() {
     loginWithToken(token).then(code => {
@@ -43,10 +40,10 @@ function Auth() {
 
   return (
     <Box>
-      <Dialog
-        fullScreen={fullScreen}
-        open
-        aria-labelledby="authentication-dialog"
+      <ClusterDialog
+        useCover
+        disableEscapeKeyDown
+        disableBackdropClick
       >
         <DialogTitle id="responsive-dialog-title">{'Welcome'}</DialogTitle>
         <DialogContent>
@@ -65,11 +62,19 @@ function Auth() {
           />
         </DialogContent>
         <DialogActions>
+          {clusters.length > 1 &&
+            <>
+              <Button href="/" color="primary">
+                Cancel
+              </Button>
+              <div style={{flex: '1 0 0'}} />
+            </>
+          }
           <Button onClick={onAuthClicked} color="primary">
             Authenticate
           </Button>
         </DialogActions>
-      </Dialog>
+      </ClusterDialog>
       <Snackbar
         anchorOrigin={{
           vertical: 'bottom',
