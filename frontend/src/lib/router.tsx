@@ -69,7 +69,7 @@ export const ROUTES: {
     sidebar: null,
     noCluster: true,
     noAuthRequired: true,
-    component: () => <Chooser useCover />
+    component: () => <Chooser useCover open />
   },
   namespaces: {
     path: '/namespaces',

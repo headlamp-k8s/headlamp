@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Dialog from '@material-ui/core/Dialog';
+import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -13,7 +13,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { generatePath } from 'react-router';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useClustersConf } from '../../lib/k8s/api';
@@ -72,6 +72,13 @@ export function ClusterTitle() {
 const useStyles = makeStyles(theme => ({
   chooserDialog: {
     minWidth: 500,
+    '& .MuiTypography-h4': {
+      textAlign: 'center',
+      fontSize: '2.2rem',
+      color: theme.palette.common.black,
+      paddingTop: theme.spacing(3),
+      paddingBottom: theme.spacing(3),
+    }
   },
   chooserDialogCover: {
     background: theme.palette.common.black,
@@ -88,13 +95,6 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     display: 'flex',
   },
-  bigText: {
-    textAlign: 'center',
-    fontSize: '2.2rem',
-    color: theme.palette.common.black,
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-  }
 }));
 
 const useClusterButtonStyles = makeStyles({
@@ -160,35 +160,19 @@ function ClusterList(props: ClusterListProps) {
   );
 }
 
-interface ChooserProps {
+interface ClusterDialogProps extends PropsWithChildren<Omit<DialogProps, 'open' | 'onClose'>> {
   open?: boolean;
   onClose?: (() => void) | null;
   useCover?: boolean;
 }
 
-function Chooser(props: ChooserProps) {
+export function ClusterDialog(props: ClusterDialogProps) {
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const history = useHistory();
-  const clusters = useClustersConf();
-  const {open = true, onClose = null, useCover = false} = props;
+  const {open, onClose = null, useCover = false, children = [], ...otherProps} = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
-
-  React.useEffect(() => {
-    if (!open) {
-      return;
-    }
-
-    // If we only have one cluster configured, then we skip offering
-    // the choice to the user.
-    if (clusters.length === 1) {
-      handleButtonClick(clusters[0]);
-    }
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  [open, clusters]);
 
   function handleClose() {
     if (onClose !== null) {
@@ -197,23 +181,19 @@ function Chooser(props: ChooserProps) {
     }
 
     // Only use show if open is not provided
-    if (open === null) {
+    if (open === undefined) {
       setShow(false);
     }
-  }
-
-  function handleButtonClick(cluster: Cluster) {
-    history.push({pathname: generatePath(getClusterPrefixedPath(), {cluster: cluster.name})});
-    handleClose();
   }
 
   return (
     <Dialog
       fullScreen={fullScreen}
-      open={open !== null ? open : show}
+      open={open !== undefined ? open : show}
       onClose={handleClose}
       aria-labelledby="authentication-dialog"
       className={useCover ? classes.chooserDialogCover : ''}
+      {...otherProps}
     >
       <DialogTitle
         id="responsive-dialog-title"
@@ -229,29 +209,84 @@ function Chooser(props: ChooserProps) {
       <DialogContent
         className={classes.chooserDialog}
       >
-        {clusters.length === 0 ?
-          <React.Fragment>
-            <DialogContentText>
-              Wait while fetching clusters...
-            </DialogContentText>
-            <Loader />
-          </React.Fragment>
-          :
-          <React.Fragment>
-            <DialogContentText
-              variant="h4"
-              className={classes.bigText}
-            >
-              Choose a cluster
-            </DialogContentText>
-            <ClusterList
-              clusters={clusters}
-              onButtonClick={handleButtonClick}
-            />
-          </React.Fragment>
-        }
+        {children}
       </DialogContent>
     </Dialog>
+  );
+}
+
+function Chooser(props: ClusterDialogProps) {
+  const history = useHistory();
+  const clusters = useClustersConf();
+  const {open = null, onClose, ...otherProps} = props;
+  // Only used if open is not provided
+  const [show, setShow] = React.useState(props.open);
+
+  React.useEffect(() => {
+    if (open !== null && open !== show) {
+      setShow(open);
+      return;
+    }
+
+    // If we only have one cluster configured, then we skip offering
+    // the choice to the user.
+    if (clusters.length === 1) {
+      handleButtonClick(clusters[0]);
+    }
+  },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [open, show, clusters]);
+
+  function handleButtonClick(cluster: Cluster) {
+    if (cluster.name !== getCluster()) {
+      history.push({pathname: generatePath(getClusterPrefixedPath(), {cluster: cluster.name})});
+    }
+
+    setShow(false);
+
+    if (!!onClose) {
+      onClose();
+    }
+  }
+
+  function handleClose() {
+    if (open === null) {
+      setShow(false);
+    }
+
+    if (!!onClose) {
+      onClose();
+    }
+  }
+
+  return (
+    <ClusterDialog
+      open={show}
+      onClose={onClose || handleClose}
+      {...otherProps}
+    >
+      {clusters.length === 0 ?
+        <React.Fragment>
+          <DialogContentText>
+            Wait while fetching clusters…
+          </DialogContentText>
+          <Loader />
+        </React.Fragment>
+        :
+        <React.Fragment>
+          <DialogContentText
+            variant="h4"
+            // className={classes.bigText}
+          >
+            Choose a cluster
+          </DialogContentText>
+          <ClusterList
+            clusters={clusters}
+            onButtonClick={handleButtonClick}
+          />
+        </React.Fragment>
+      }
+    </ClusterDialog>
   );
 }
 
