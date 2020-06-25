@@ -5,6 +5,7 @@ import { apiFactory, apiFactoryWithNamespace } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
+import { KubeEvent } from './event';
 import Job from './job';
 import ReplicaSet from './replicaSet';
 import StatefulSet from './statefulSet';
@@ -31,7 +32,8 @@ export interface KubeMetadata {
   annotations?: StringDict;
 }
 
-export function makeKubeObject<T extends KubeObjectInterface>(detailsRouteName: string) {
+export function
+makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(detailsRouteName: string) {
   class KubeObject {
     static apiEndpoint: ReturnType<(typeof apiFactoryWithNamespace) | (typeof apiFactory)>;
     jsonData: T | null = null;
@@ -239,23 +241,6 @@ interface KubeContainerProbe {
   periodSeconds?: number;
   successThreshold?: number;
   failureThreshold?: number;
-}
-
-export interface KubeEvent {
-  type: string;
-  reason: string;
-  message: string;
-  metadata: KubeMetadata;
-  involvedObject: {
-    kind: string;
-    namespace: string;
-    name: string;
-    uid: string;
-    apiVersion: string;
-    resourceVersion: string;
-    fieldPath: string;
-  };
-  [otherProps: string]: any;
 }
 
 export interface LabelSelector {

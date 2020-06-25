@@ -2,8 +2,8 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import api, { useConnectApi } from '../../lib/k8s/api';
-import { KubeEvent, KubeMetrics } from '../../lib/k8s/cluster';
+import { KubeMetrics } from '../../lib/k8s/cluster';
+import Event from '../../lib/k8s/event';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo, useFilterFunc } from '../../lib/util';
@@ -17,17 +17,14 @@ import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './
 
 export default function Overview() {
   const [pods, setPods] = React.useState<Pod[] | null>(null);
-  const [events, setEvents] = React.useState(null);
+  const [events, setEvents] = React.useState<Event[] | null>(null);
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
   const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
 
   Pod.useApiList(setPods);
   Node.useApiList(setNodes);
   Node.useMetrics(setNodeMetrics);
-
-  useConnectApi(
-    api.event.list.bind(null, null, setEvents),
-  );
+  Event.useApiList(setEvents);
 
   return (
     <PageGrid>
@@ -69,12 +66,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function EventsSection(props: { events: KubeEvent[] | null }) {
+function EventsSection(props: { events: Event[] | null }) {
   const classes = useStyles();
   const { events } = props;
   const filterFunc = useFilterFunc();
 
-  function makeStatusLabel(event: KubeEvent) {
+  function makeStatusLabel(event: Event) {
     return (
       <StatusLabel status={event.type === 'Normal' ? '' : 'warning'}
         className={classes.eventLabel}
