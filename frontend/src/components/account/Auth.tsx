@@ -45,10 +45,10 @@ function Auth() {
         disableEscapeKeyDown
         disableBackdropClick
       >
-        <DialogTitle id="responsive-dialog-title">{'Welcome'}</DialogTitle>
+        <DialogTitle id="responsive-dialog-title">{`Authentication: ${getCluster()}`}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please paste your authentication token, in order to access the dashboard.
+            Please paste your authentication token.
           </DialogContentText>
           <TextField
             autoFocus
