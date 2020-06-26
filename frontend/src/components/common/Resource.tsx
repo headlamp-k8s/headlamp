@@ -1,8 +1,10 @@
+import chevronLeft from '@iconify/icons-mdi/chevron-left';
 import eyeIcon from '@iconify/icons-mdi/eye';
 import eyeOff from '@iconify/icons-mdi/eye-off';
 import menuDown from '@iconify/icons-mdi/menu-down';
 import menuUp from '@iconify/icons-mdi/menu-up';
 import { Icon } from '@iconify/react';
+import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps } from '@material-ui/core/Grid';
@@ -13,8 +15,9 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import _ from 'lodash';
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { KubeCondition, KubeContainer, KubeObject, KubeObjectInterface } from '../../lib/k8s/cluster';
-import { RouteURLProps } from '../../lib/router';
+import { createRouteURL, RouteURLProps } from '../../lib/router';
 import { localeDate } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import Loader from '../common/Loader';
@@ -234,30 +237,42 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   }
 
   return (
-    <SectionBox
-      title={
-        <SectionHeader
-          title={title || (resource ? resource.kind : '')}
-          headerStyle={headerStyle}
-          actions={
-            React.Children.toArray(actions).concat(defaultActions)
-              .concat(getHeaderActions())
-          }
-        />
+    <>
+      {resource &&
+        <Button
+          startIcon={<Icon icon={chevronLeft} />}
+          size="small"
+          component={RouterLink}
+          to={createRouteURL(resource.listRoute)}
+        >
+          <Typography style={{paddingTop: '3px'}}>Back</Typography>
+        </Button>
       }
-    >
-      {resource === null ?
-        <Loader />
-        :
-        <React.Fragment>
-          {headerSection}
-          <MetadataDisplay
-            resource={resource}
-            extraRows={extraInfo}
+      <SectionBox
+        title={
+          <SectionHeader
+            title={title || (resource ? resource.kind : '')}
+            headerStyle={headerStyle}
+            actions={
+              React.Children.toArray(actions).concat(defaultActions)
+                .concat(getHeaderActions())
+            }
           />
-        </React.Fragment>
-      }
-    </SectionBox>
+        }
+      >
+        {resource === null ?
+          <Loader />
+          :
+          <React.Fragment>
+            {headerSection}
+            <MetadataDisplay
+              resource={resource}
+              extraRows={extraInfo}
+            />
+          </React.Fragment>
+        }
+      </SectionBox>
+    </>
   );
 }
 
