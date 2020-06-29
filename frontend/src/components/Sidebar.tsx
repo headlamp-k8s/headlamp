@@ -84,10 +84,6 @@ const LIST_ITEMS: SidebarEntry[] = [
         label: 'CRDs'
       },
       {
-        name: 'roles',
-        label: 'Roles'
-      },
-      {
         name: 'configMaps',
         label: 'Config Maps'
       },
@@ -150,6 +146,10 @@ const LIST_ITEMS: SidebarEntry[] = [
       {
         name: 'serviceAccounts',
         label: 'Service Accounts'
+      },
+      {
+        name: 'roles',
+        label: 'Roles'
       },
       {
         name: 'roleBindings',
