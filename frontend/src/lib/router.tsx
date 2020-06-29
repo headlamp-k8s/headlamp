@@ -7,15 +7,15 @@ import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
 import CustomResourceDefinitionDetails from '../components/crd/Details';
 import CustomResourceDefinitionList from '../components/crd/List';
-import DaemonSet from '../components/daemonset/Details';
+import DaemonSetDetails from '../components/daemonset/Details';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import NamespaceDetails from '../components/namespace/Details';
 import NamespacesList from '../components/namespace/List';
 import NodeDetails from '../components/node/Details';
 import NodeList from '../components/node/List';
-import PodDetails from '../components/pods/Details';
-import PodList from '../components/pods/List';
+import PodDetails from '../components/pod/Details';
+import PodList from '../components/pod/List';
 import ReplicaSetList from '../components/replicaset/List';
 import RoleBindingDetails from '../components/role/BindingDetails';
 import RoleBindingList from '../components/role/BindingList';
@@ -27,7 +27,7 @@ import ServiceDetails from '../components/service/Details';
 import ServiceList from '../components/service/List';
 import ServiceAccountDetails from '../components/serviceaccount/Details';
 import ServiceAccountList from '../components/serviceaccount/List';
-import StatefulSet from '../components/statefulset/Details';
+import StatefulSetDetails from '../components/statefulset/Details';
 import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
 import StorageClassDetails from '../components/storage/ClassDetails';
@@ -37,6 +37,10 @@ import PersistentVolumeList from '../components/storage/VolumeList';
 import WorkloadDetails from '../components/workload/Details';
 import WorkloadOverview from '../components/workload/Overview';
 import store from '../redux/stores/store';
+import CronJob from './k8s/cronJob';
+import Deployment from './k8s/deployment';
+import Job from './k8s/job';
+import ReplicaSet from './k8s/replicaSet';
 import { getCluster, getClusterPrefixedPath } from './util';
 
 export interface Route {
@@ -65,7 +69,7 @@ export const ROUTES: {
     sidebar: null,
     noCluster: true,
     noAuthRequired: true,
-    component: () => <Chooser />
+    component: () => <Chooser useCover open />
   },
   namespaces: {
     path: '/namespaces',
@@ -74,7 +78,7 @@ export const ROUTES: {
     sidebar: 'namespaces',
     component: () => <NamespacesList />
   },
-  Namespace: {
+  namespace: {
     path: '/namespaces/:name',
     sidebar: 'namespaces',
     component: () => <NamespaceDetails />
@@ -86,7 +90,7 @@ export const ROUTES: {
     sidebar: 'nodes',
     component: () => <NodeList />
   },
-  Node: {
+  node: {
     path: '/nodes/:name',
     sidebar: 'nodes',
     component: () => <NodeDetails />
@@ -98,24 +102,24 @@ export const ROUTES: {
     name: 'Storage Classes',
     component: () => <StorageClassList />
   },
-  storageClassDetails: {
+  storageClass: {
     path: '/storage/classes/:name',
     name: 'Storage Classes',
     sidebar: 'storageClasses',
     component: () => <StorageClassDetails />
   },
-  storageVolumes: {
+  persistentVolumes: {
     path: '/storage/persistentvolumes',
     exact: true,
-    sidebar: 'storageVolumes',
-    name: 'Persistent Volumes',
+    sidebar: 'persistentVolumes',
+    name: 'Storage Volumes',
     component: () => <PersistentVolumeList />
   },
   persistentVolume: {
     path: '/storage/persistentvolumes/:name',
     exact: true,
-    sidebar: 'storageVolumes',
-    name: 'Persistent Volume',
+    sidebar: 'persistentVolumes',
+    name: 'Storage Volume',
     component: () => <PersistentVolumeDetails />
   },
   persistentVolumeClaims: {
@@ -142,31 +146,31 @@ export const ROUTES: {
     path: '/daemonsets/:namespace/:name',
     exact: true,
     sidebar: 'workloads',
-    component: () => <DaemonSet />
+    component: () => <DaemonSetDetails />
   },
   StatefulSet: {
     path: '/statefulsets/:namespace/:name',
     exact: true,
     sidebar: 'workloads',
-    component: () => <StatefulSet />
+    component: () => <StatefulSetDetails />
   },
   Deployment: {
     path: '/deployments/:namespace/:name',
     exact: true,
     sidebar: 'workloads',
-    component: () => <WorkloadDetails workloadKind="Deployment" />
+    component: () => <WorkloadDetails workloadKind={Deployment} />
   },
   Job: {
     path: '/jobs/:namespace/:name',
     exact: true,
     sidebar: 'workloads',
-    component: () => <WorkloadDetails workloadKind="Job" />
+    component: () => <WorkloadDetails workloadKind={Job} />
   },
   CronJob: {
     path: '/cronjobs/:namespace/:name',
     exact: true,
     sidebar: 'workloads',
-    component: () => <WorkloadDetails workloadKind="CronJob" />
+    component: () => <WorkloadDetails workloadKind={CronJob} />
   },
   pods: {
     path: '/pods',
@@ -207,18 +211,18 @@ export const ROUTES: {
     sidebar: 'ingresses',
     component: () => <IngressDetails />
   },
-  replicaSets: {
+  ReplicaSets: {
     path: '/replicasets',
     exact: true,
     name: 'Replica Sets',
-    sidebar: 'replicaSets',
+    sidebar: 'ReplicaSets',
     component: () => <ReplicaSetList />
   },
   ReplicaSet: {
     path: '/replicasets/:namespace/:name',
     exact: true,
-    sidebar: 'replicaSets',
-    component: () => <WorkloadDetails workloadKind="ReplicaSet" />
+    sidebar: 'ReplicaSets',
+    component: () => <WorkloadDetails workloadKind={ReplicaSet} />
   },
   configMaps: {
     path: '/configmaps',

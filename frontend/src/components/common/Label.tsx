@@ -27,11 +27,12 @@ const useStyles = makeStyles(theme => ({
   statusLabel: {
     color: theme.palette.primary.contrastText,
     fontSize: '1.1em',
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(.5),
     paddingBottom: theme.spacing(.5),
-    borderRadius: '5%',
+    display: 'inline-block',
+    textAlign: 'center',
   },
 }));
 
@@ -86,20 +87,23 @@ export interface StatusLabelProps {
 }
 
 export function StatusLabel(props: StatusLabelProps) {
-  const { status, ...other } = props;
+  const { status, className = '', ...other } = props;
   const classes = useStyles();
   const theme = useTheme();
 
   const statuses = ['success', 'warning', 'error'];
 
   // Assign to a status color if it exists.
-  const color = statuses.includes(status) ? theme.palette[status].main : theme.palette.grey['400'];
+  const bgColor =
+    statuses.includes(status) ? theme.palette[status].light : theme.palette.normalEventBg;
+  const color = statuses.includes(status) ? theme.palette[status].main : theme.palette.text.primary;
 
   return (
     <Typography
-      className={classes.statusLabel}
+      className={classes.statusLabel + ' ' + className}
       style={{
-        backgroundColor: color,
+        backgroundColor: bgColor,
+        color,
       }}
       component="span"
       {...other}

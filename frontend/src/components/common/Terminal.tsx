@@ -12,8 +12,8 @@ import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { Terminal as XTerminal } from 'xterm';
-import api from '../../lib/api';
-import { KubeContainer, KubeObject } from '../../lib/cluster';
+import api from '../../lib/k8s/api';
+import { KubeContainer, KubeObjectInterface } from '../../lib/k8s/cluster';
 
 const decoder = new TextDecoder('utf-8');
 const encoder = new TextEncoder();
@@ -29,7 +29,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 interface TerminalProps extends DialogProps {
-  item: KubeObject & {
+  item: KubeObjectInterface & {
     spec: {
       containers: KubeContainer[];
     };

@@ -3,7 +3,8 @@ import en from 'javascript-time-ago/locale/en';
 import { matchPath } from 'react-router';
 import { FilterState } from '../redux/reducers/filter';
 import { useTypedSelector } from '../redux/reducers/reducers';
-import { KubeMetrics, KubeNode, KubeObject, KubeWorkload } from './cluster';
+import { KubeMetrics, KubeObjectInterface, Workload } from './k8s/cluster';
+import Node from './k8s/node';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 TimeAgo.addLocale(en);
 
@@ -31,11 +32,11 @@ export function getPercentStr(value: number, total: number) {
 
 }
 
-export function getReadyReplicas(item: KubeWorkload) {
+export function getReadyReplicas(item: Workload) {
   return (item.status.readyReplicas || item.status.numberReady || 0);
 }
 
-export function getTotalReplicas(item: KubeWorkload) {
+export function getTotalReplicas(item: Workload) {
   return (item.spec.replicas || item.status.currentNumberScheduled || 0);
 }
 
@@ -49,14 +50,14 @@ export function getResourceStr(value: number, resourceType: 'cpu' | 'memory') {
   return `${valueInfo.value}${valueInfo.unit}`;
 }
 
-export function getResourceMetrics(item: KubeNode, metrics: KubeMetrics[], resourceType: 'cpu' | 'memory') {
+export function getResourceMetrics(item: Node, metrics: KubeMetrics[], resourceType: 'cpu' | 'memory') {
   const resourceParsers: any = {
     cpu: parseCpu,
     memory: parseRam,
   };
 
   const parser = resourceParsers[resourceType];
-  const itemMetrics = metrics.find(itemMetrics => itemMetrics.metadata.name === item.metadata.name);
+  const itemMetrics = metrics.find(itemMetrics => itemMetrics.metadata.name === item.getName());
 
   const used = parser(itemMetrics ? itemMetrics.usage[resourceType] : '0');
   const capacity = parser(item.status.capacity[resourceType]);
@@ -64,7 +65,7 @@ export function getResourceMetrics(item: KubeNode, metrics: KubeMetrics[], resou
   return [used, capacity];
 }
 
-export function filterResource(item: KubeObject, filter: FilterState) {
+export function filterResource(item: KubeObjectInterface, filter: FilterState) {
   let matches: boolean = true;
 
   if (item.metadata.namespace && filter.namespaces.size > 0) {
@@ -88,7 +89,7 @@ export function filterResource(item: KubeObject, filter: FilterState) {
 
 export function useFilterFunc() {
   const filter = useTypedSelector(state => state.filter);
-  return (item: KubeObject) => filterResource(item, filter);
+  return (item: KubeObjectInterface) => filterResource(item, filter);
 }
 
 export function getClusterPrefixedPath(path?: string | null) {

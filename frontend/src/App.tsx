@@ -2,6 +2,8 @@ import AppBar from '@material-ui/core/AppBar';
 import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
+import red from '@material-ui/core/colors/red';
+import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -44,18 +46,44 @@ const dashboardTheme = createMuiTheme({
       main: '#3DA3F5',
     },
     success: {
+      light: green['50'],
       main: green['500'],
       ...green
     },
     warning: {
-      main: orange['700'],
+      main: orange['500'],
+      light: orange['50'],
       ...orange
     },
     sidebarLink: {
       main: grey['500'],
       selectedBg: grey['800'],
     },
+    error: {
+      main: red['500'],
+      light: red['50'],
+    },
     sidebarBg: '#000',
+    normalEventBg: '#F0F0F0',
+    headerStyle: {
+      normal: {
+        '& h6': {
+          fontSize: '1.1rem',
+        },
+      },
+      main: {
+        '& h6': {
+          fontSize: '1.87rem',
+        },
+        minHeight: '64px',
+      },
+      subsection: {
+        fontSize: '1.2rem',
+      },
+    },
+    tables: {
+      headerText: '#474747',
+    },
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', ')
@@ -71,7 +99,7 @@ const useStyle = makeStyles(theme => ({
   },
   appBar: {
     background: '#fff',
-    width: `calc(100% - ${drawerWidth}px)`,
+    paddingLeft: `${drawerWidth}px`,
     marginLeft: drawerWidth,
   },
   content: {
@@ -122,7 +150,11 @@ function App() {
           <Router>
             <div className={classes.root}>
               <CssBaseline />
-              <AppBar position="fixed" className={classes.appBar}>
+              <AppBar
+                position="fixed"
+                className={classes.appBar}
+                elevation={1}
+              >
                 <Toolbar>
                   <div style={{flex: '1 0 0'}} />
                   <ClusterTitle />
@@ -132,7 +164,9 @@ function App() {
               <Sidebar />
               <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <RouteSwitcher />
+                <Container maxWidth="lg">
+                  <RouteSwitcher />
+                </Container>
               </main>
               <ActionsNotifier />
             </div>

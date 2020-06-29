@@ -1,26 +1,31 @@
+import chevronLeft from '@iconify/icons-mdi/chevron-left';
 import eyeIcon from '@iconify/icons-mdi/eye';
 import eyeOff from '@iconify/icons-mdi/eye-off';
 import menuDown from '@iconify/icons-mdi/menu-down';
 import menuUp from '@iconify/icons-mdi/menu-up';
 import { Icon } from '@iconify/react';
+import { Button } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps } from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Input, { InputProps } from '@material-ui/core/Input';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import _ from 'lodash';
 import React from 'react';
-import { KubeCondition, KubeContainer, KubeObject } from '../../lib/cluster';
-import { RouteURLProps } from '../../lib/router';
+import { Link as RouterLink } from 'react-router-dom';
+import { KubeCondition, KubeContainer, KubeObject, KubeObjectInterface } from '../../lib/k8s/cluster';
+import { createRouteURL, RouteURLProps } from '../../lib/router';
 import { localeDate } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import Loader from '../common/Loader';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
+import SectionHeader, { HeaderStyleProps } from '../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../common/SimpleTable';
+import DeleteButton from './DeleteButton';
+import EditButton from './EditButton';
 import Empty from './EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from './Label';
 import Link from './Link';
@@ -28,27 +33,27 @@ import { LightTooltip } from './Tooltip';
 
 const useStyles = makeStyles(theme => ({
   metadataValueLabel: {
-    color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.grey[400],
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.grey[300],
     fontSize: '1.1em',
     wordBreak: 'break-word',
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
-    borderRadius: '2px',
   },
 }));
 
 interface MetadataDisplayProps {
-  resource: KubeObject;
+  resource: KubeObjectInterface;
+  extraRows?: NameValueTableRow[] | null;
 }
 
 export function MetadataDisplay(props: MetadataDisplayProps) {
-  const { resource } = props;
+  const { resource, extraRows } = props;
 
-  const mainRows = [
+  const mainRows = ([
     {
       name: 'Name',
-      value: <Typography variant="h6" >{resource.metadata.name}</Typography>,
+      value: resource.metadata.name,
     },
     {
       name: 'Namespace',
@@ -74,7 +79,7 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
         <MetadataDictGrid dict={resource.metadata.annotations} />,
       hide: !resource.metadata.annotations,
     },
-  ];
+  ] as NameValueTableRow[]).concat(extraRows || []);
 
   return (
     <NameValueTable rows={mainRows}/>
@@ -94,7 +99,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
   const { dict, showKeys = true } = props;
   const [expanded, setExpanded] = React.useState(false);
 
-  const keys = Object.keys(dict);
+  const keys = Object.keys(dict || []);
 
   const MetadataEntry = React.forwardRef((props: TypographyProps, ref) => {
     return (
@@ -176,7 +181,7 @@ interface ResourceLinkProps {
   name?: string;
   routeName?: string;
   routeParams?: RouteURLProps;
-  resource: KubeObject;
+  resource: KubeObjectInterface;
 }
 
 export function ResourceLink(props: ResourceLinkProps) {
@@ -196,61 +201,78 @@ export function ResourceLink(props: ResourceLinkProps) {
   );
 }
 
-const useStyle = makeStyles(theme => ({
-  tinyDivider: {
-    margin: theme.spacing(1),
-    display: 'none',
-    [theme.breakpoints.down('md')]: {
-      display: 'block'
-    }
-  },
-  name: {
-    marginBottom: theme.spacing(1),
-  }
-}));
-
 interface MainInfoSectionProps {
   resource: KubeObject | null;
   headerSection?: React.ReactNode;
   title?: string;
   extraInfo?: NameValueTableRow[] | null;
   actions?: React.ReactNode[] | null;
+  headerStyle?: HeaderStyleProps['headerStyle'];
+  noDefaultActions?: boolean;
 }
 
 export function MainInfoSection(props: MainInfoSectionProps) {
-  const { resource, headerSection, title, extraInfo = [], actions = [] } = props;
+  const {
+    resource,
+    headerSection,
+    title,
+    extraInfo = [],
+    actions = [],
+    headerStyle = 'main',
+    noDefaultActions = false,
+  } = props;
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
 
   function getHeaderActions() {
     return Object.values(headerActions).map(action => action({item: resource}));
   }
 
+  let defaultActions: MainInfoSectionProps['actions'] = [];
+
+  if (!noDefaultActions && resource) {
+    defaultActions = [
+      <EditButton item={resource} />,
+      <DeleteButton item={resource} />
+    ];
+  }
+
   return (
-    <Paper>
-      <SectionHeader
-        title={title || (resource ? resource.kind : '')}
-        actions={React.Children.toArray(actions).concat(getHeaderActions())}
-      />
-      <SectionBox>
+    <>
+      {resource &&
+        <Button
+          startIcon={<Icon icon={chevronLeft} />}
+          size="small"
+          component={RouterLink}
+          to={createRouteURL(resource.listRoute)}
+        >
+          <Typography style={{paddingTop: '3px'}}>Back</Typography>
+        </Button>
+      }
+      <SectionBox
+        title={
+          <SectionHeader
+            title={title || (resource ? resource.kind : '')}
+            headerStyle={headerStyle}
+            actions={
+              React.Children.toArray(actions).concat(defaultActions)
+                .concat(getHeaderActions())
+            }
+          />
+        }
+      >
         {resource === null ?
           <Loader />
           :
           <React.Fragment>
             {headerSection}
-            <SectionGrid
-              useDivider
-              items={[
-                <MetadataDisplay resource={resource} />,
-                extraInfo &&
-                <NameValueTable
-                  rows={extraInfo}
-                />
-              ]}
+            <MetadataDisplay
+              resource={resource}
+              extraRows={extraInfo}
             />
           </React.Fragment>
         }
       </SectionBox>
-    </Paper>
+    </>
   );
 }
 
@@ -284,8 +306,7 @@ interface SectionGridProps {
 }
 
 export function SectionGrid(props: SectionGridProps) {
-  const classes = useStyle();
-  const { items, useDivider = false } = props;
+  const { items } = props;
   return (
     <Grid
       container
@@ -293,27 +314,14 @@ export function SectionGrid(props: SectionGridProps) {
     >
       {items.map((item, i) => {
         return (
-          <React.Fragment key={i}>
-            <Grid
-              item
-              lg
-              md={12}
-              xs={12}
-            >
-              {item}
-            </Grid>
-            {/* Only use a divider if required and this item is not the last one */}
-            {useDivider && (items.length - 1) !== i &&
-              <Grid
-                item
-                md={12}
-                xs={12}
-                className={classes.tinyDivider}
-              >
-                <Divider />
-              </Grid>
-            }
-          </React.Fragment>
+          <Grid
+            item
+            md={12}
+            xs={12}
+            key={i}
+          >
+            {item}
+          </Grid>
         );
       })}
     </Grid>
@@ -382,7 +390,7 @@ export function SecretField(props: InputProps) {
 }
 
 interface ConditionsTableProps {
-  resource: KubeObject | null;
+  resource: KubeObjectInterface | null;
   showLastUpdate?: boolean;
 }
 
@@ -498,22 +506,20 @@ export function ContainerInfo(props: {container: KubeContainer}) {
   }
 
   return (
-    <React.Fragment>
+    <Box py={1}>
       <SectionHeader
+        noPadding
         title={container.name}
+        headerStyle="normal"
       />
-      <SectionGrid
-        items={[
-          <NameValueTable
-            rows={containerRows()}
-          />
-        ]}
+      <NameValueTable
+        rows={containerRows()}
       />
-    </React.Fragment>
+    </Box>
   );
 }
 
-export function ContainersSection(props: {resource: KubeObject | null}) {
+export function ContainersSection(props: {resource: KubeObjectInterface | null}) {
   const { resource } = props;
 
   function getContainers() {
@@ -535,30 +541,27 @@ export function ContainersSection(props: {resource: KubeObject | null}) {
   }
 
   const containers = getContainers();
+  const numContainers = containers.length;
 
   return (
-    <Paper>
-      <SectionHeader
-        title="Containers"
-      />
-      {_.isEmpty(containers) ?
+    <SectionBox title="Containers">
+      {numContainers === 0 ?
         <Empty>No containers to show</Empty>
         :
         containers.map((container: any, i: number) => {
           return (
             <React.Fragment key={i}>
-              <SectionBox>
-                <ContainerInfo container={container} />
-              </SectionBox>
-              <Divider />
+              <ContainerInfo container={container} />
+              {/* Don't show the divider if this is the last container */}
+              { (i !== (numContainers - 1)) && <Divider /> }
             </React.Fragment>
           );
         })}
-    </Paper>
+    </SectionBox>
   );
 }
 
-export function ReplicasSection(props: {resource: KubeObject | null }) {
+export function ReplicasSection(props: {resource: KubeObjectInterface | null }) {
   const { resource } = props;
 
   if (!resource) {
@@ -566,13 +569,8 @@ export function ReplicasSection(props: {resource: KubeObject | null }) {
   }
 
   return (
-    <Paper>
-      <SectionHeader
-        title="Conditions"
-      />
-      <SectionBox>
-        <ConditionsTable resource={resource} />
-      </SectionBox>
-    </Paper>
+    <SectionBox title="Conditions">
+      <ConditionsTable resource={resource} />
+    </SectionBox>
   );
 }

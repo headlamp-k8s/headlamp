@@ -121,7 +121,7 @@ export function PercentageCircle(props: PercentageCircleProps) {
             // Start at the top
             startAngle={90}
             endAngle={-270}
-            fill={theme.palette.primary.main}
+            fill={theme.palette.common.black}
           >
             <Label
               value={label || ''}

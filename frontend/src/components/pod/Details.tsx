@@ -11,8 +11,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import _ from 'lodash';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubePod } from '../../lib/cluster';
+import api from '../../lib/k8s/api';
+import Pod from '../../lib/k8s/pod';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import { ContainersSection, MainInfoSection, PageGrid } from '../common/Resource';
 import Terminal from '../common/Terminal';
@@ -24,7 +24,7 @@ const useStyle = makeStyles({
 });
 
 interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
-  item: KubePod;
+  item: Pod;
 }
 
 function PodLogViewer(props: PodLogViewerProps) {
@@ -75,8 +75,8 @@ function PodLogViewer(props: PodLogViewerProps) {
 
   return (
     <LogViewer
-      title={`Logs: ${item.metadata.name}`}
-      downloadName={`${item.metadata.name}_${container}`}
+      title={`Logs: ${item.getName()}`}
+      downloadName={`${item.getName()}_${container}`}
       open={open}
       onClose={onClose}
       logs={logs}
@@ -119,13 +119,11 @@ function PodLogViewer(props: PodLogViewerProps) {
 
 export default function PodDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState<KubePod | null>(null);
+  const [item, setItem] = React.useState<Pod | null>(null);
   const [showLogs, setShowLogs] = React.useState(false);
   const [showTerminal, setShowTerminal] = React.useState(false);
 
-  useConnectApi(
-    api.pod.get.bind(null, namespace, name, setItem),
-  );
+  Pod.useApiGet(setItem, name, namespace);
 
   return (
     <React.Fragment>

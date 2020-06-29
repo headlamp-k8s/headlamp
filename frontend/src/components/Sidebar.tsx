@@ -24,8 +24,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
 import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from 'react-router-dom';
-import api from '../lib/api';
-import { StringDict } from '../lib/cluster';
+import api from '../lib/k8s/api';
+import { StringDict } from '../lib/k8s/cluster';
 import { createRouteURL, getRoute } from '../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../lib/util';
 import { setSidebarSelected } from '../redux/actions/actions';
@@ -34,7 +34,7 @@ import { SidebarEntry } from '../redux/reducers/ui';
 import store from '../redux/stores/store';
 import { ReactComponent as LogoLight } from '../resources/logo-light.svg';
 import { NameValueTable } from './common';
-
+import CreateButton from './common/CreateButton';
 
 export const drawerWidth = 330;
 
@@ -84,8 +84,8 @@ const LIST_ITEMS: SidebarEntry[] = [
         label: 'CRDs'
       },
       {
-        name: 'roles',
-        label: 'Roles'
+        name: 'configMaps',
+        label: 'Config Maps'
       },
     ]
   },
@@ -99,7 +99,7 @@ const LIST_ITEMS: SidebarEntry[] = [
         label: 'Pods'
       },
       {
-        name: 'replicaSets',
+        name: 'ReplicaSets',
         label: 'Replica Sets'
       },
     ]
@@ -114,7 +114,7 @@ const LIST_ITEMS: SidebarEntry[] = [
         label: 'Storage Classes'
       },
       {
-        name: 'storageVolumes',
+        name: 'persistentVolumes',
         label: 'Storage Volumes'
       },
       {
@@ -148,8 +148,8 @@ const LIST_ITEMS: SidebarEntry[] = [
         label: 'Service Accounts'
       },
       {
-        name: 'configMaps',
-        label: 'Config Maps'
+        name: 'roles',
+        label: 'Roles'
       },
       {
         name: 'roleBindings',
@@ -370,7 +370,10 @@ export default function Sidebar() {
           </List>
         </Grid>
         <Grid item>
-          <VersionButton />
+          <Box textAlign="center">
+            <CreateButton />
+            <VersionButton />
+          </Box>
         </Grid>
       </Grid>
     </Drawer>
@@ -444,7 +447,7 @@ function SidebarItem(props: SidebarItemProps) {
     useClusterURL = false,
     subList = [],
     selectedName,
-    hasParent=false,
+    hasParent = false,
     icon,
     ...other
   } = props;
@@ -499,7 +502,7 @@ function SidebarItem(props: SidebarItemProps) {
               <SidebarItem
                 key={i}
                 selectedName={selectedName}
-                hasParent={true}
+                hasParent
                 {...item}
               />
             )}

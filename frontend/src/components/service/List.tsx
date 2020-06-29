@@ -1,64 +1,52 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeService } from '../../lib/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import Service from '../../lib/k8s/service';
+import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceList() {
-  const [services, setServices] = React.useState<KubeService | null>(null);
+  const [services, setServices] = React.useState<Service | null>(null);
   const filterFunc = useFilterFunc();
 
-  useConnectApi(
-    api.service.list.bind(null, null, setServices),
-  );
+  Service.useApiList(setServices);
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Services"
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (service) =>
-                <Link
-                  routeName="service"
-                  params={{
-                    namespace: service.metadata.namespace,
-                    name: service.metadata.name,
-                  }}
-                >
-                  {service.metadata.name}
-                </Link>
-            },
-            {
-              label: 'Namespace',
-              getter: (service) => service.metadata.namespace
-            },
-            {
-              label: 'Type',
-              getter: (service) => service.spec.type
-            },
-            {
-              label: 'Cluster IP',
-              getter: (service) => service.spec.clusterIP
-            },
-            {
-              label: 'Age',
-              getter: (service) => timeAgo(service.metadata.creationTimestamp)
-            },
-          ]}
-          data={services}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Services"
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (service) => <Link kubeObject={service} />
+          },
+          {
+            label: 'Namespace',
+            getter: (service) => service.getNamespace()
+          },
+          {
+            label: 'Type',
+            getter: (service) => service.spec.type
+          },
+          {
+            label: 'Cluster IP',
+            getter: (service) => service.spec.clusterIP
+          },
+          {
+            label: 'Age',
+            getter: (service) => service.getAge()
+          },
+        ]}
+        data={services}
+      />
+    </SectionBox>
   );
 }

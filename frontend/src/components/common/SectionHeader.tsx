@@ -3,19 +3,35 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 
+type HeaderStyle = 'main' | 'subsection' | 'normal';
+
+export interface HeaderStyleProps {
+  noPadding?: boolean;
+  headerStyle?: HeaderStyle;
+}
+
 const useStyles = makeStyles(theme => ({
-  sectionHeader: {
-    padding: '1em',
+  sectionHeader: ({noPadding, headerStyle}: HeaderStyleProps) => ({
+    padding: theme.spacing(noPadding ? 0 : 2),
+    paddingTop: theme.spacing(noPadding ? 0 : 3),
+    paddingRight: '0',
+    ...theme.palette.headerStyle[headerStyle || 'normal']
+  }),
+  title: {
+    fontWeight: 'bold',
   },
 }));
 
 export interface SectionHeaderProps {
   title: string;
   actions?: React.ReactNode[] | null;
+  noPadding?: boolean;
+  headerStyle?: HeaderStyle;
 }
 
 export default function SectionHeader(props: SectionHeaderProps) {
-  const classes = useStyles();
+  const {noPadding = false, headerStyle = 'main'} = props;
+  const classes = useStyles({noPadding, headerStyle});
   const actions = props.actions || [];
 
   return (
@@ -23,27 +39,36 @@ export default function SectionHeader(props: SectionHeaderProps) {
       container
       alignItems="center"
       justify="space-between"
-      wrap="nowrap"
       className={classes.sectionHeader}
+      spacing={2}
     >
       {props.title &&
-        <Grid item md={6}>
-          <Typography variant="h5">{props.title}</Typography>
+        <Grid
+          item
+        >
+          <Typography
+            variant="h6"
+            className={classes.title}
+            noWrap
+          >
+            {props.title}
+          </Typography>
         </Grid>
       }
       {actions.length > 0 &&
-        <Grid
-          item
-          md={6}
-          container
-          alignItems="center"
-          justify="flex-end"
-        >
-          {actions.map((action, i) =>
-            <Grid item key={i}>
-              {action}
-            </Grid>
-          )}
+        <Grid item>
+          <Grid
+            item
+            container
+            alignItems="center"
+            justify="flex-end"
+          >
+            {actions.map((action, i) =>
+              <Grid item key={i}>
+                {action}
+              </Grid>
+            )}
+          </Grid>
         </Grid>
       }
     </Grid>

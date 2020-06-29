@@ -1,42 +1,33 @@
-import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeConfigMap } from '../../lib/cluster';
+import ConfigMap from '../../lib/k8s/configMap';
 import Empty from '../common/EmptyContent';
 import Loader from '../common/Loader';
 import { DataField, MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
-import SectionHeader from '../common/SectionHeader';
 
 export default function ConfigDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState<KubeConfigMap | null>(null);
+  const [item, setItem] = React.useState<ConfigMap | null>(null);
   const itemData = item?.data;
 
-  useConnectApi(
-    api.configMap.get.bind(null, namespace, name, setItem),
-  );
+  ConfigMap.useApiGet(setItem, name, namespace);
 
   return (
     !item ? <Loader /> :
-    <PageGrid
-      sections={[
-        <MainInfoSection resource={item} />,
-        <Paper>
-          <SectionHeader title="Data" />
-          {!itemData ?
-            <Empty>No data in this config map</Empty>
-            : Object.keys(itemData).map((key, i) =>
-              <React.Fragment key={i}>
-                <SectionBox marginBottom="2rem">
-                  <DataField label={key} value={itemData[key]} />
-                </SectionBox>
-              </React.Fragment>
-            )
-          }
-        </Paper>
-      ]}
-    />
+    <PageGrid>
+      <MainInfoSection resource={item} />
+      <SectionBox title="Data">
+        {!itemData ?
+          <Empty>No data in this config map</Empty>
+          : Object.keys(itemData).map((key, i) =>
+            <Box py={2} key={i}>
+              <DataField label={key} value={itemData[key]} />
+            </Box>
+          )
+        }
+      </SectionBox>
+    </PageGrid>
   );
 }

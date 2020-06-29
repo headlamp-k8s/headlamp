@@ -1,59 +1,56 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeReplicaSet } from '../../lib/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
-import { ResourceLink } from '../common/Resource';
+import ReplicaSet from '../../lib/k8s/replicaSet';
+import { useFilterFunc } from '../../lib/util';
+import { Link } from '../common';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ReplicaSetList() {
-  const [replicaSets, setReplicaSets] = React.useState<KubeReplicaSet | null>(null);
+  const [replicaSets, setReplicaSets] = React.useState<ReplicaSet | null>(null);
   const filterFunc = useFilterFunc();
 
-  function getReplicas(replicaSet: KubeReplicaSet) {
+  function getReplicas(replicaSet: ReplicaSet) {
     return `${replicaSet.spec.replicas} / ${replicaSet.status.replicas}`;
   }
 
-  useConnectApi(
-    api.replicaSet.list.bind(null, null, setReplicaSets),
-  );
+  ReplicaSet.useApiList(setReplicaSets);
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Replica Sets"
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (replicaSet) => <ResourceLink resource={replicaSet} />
-            },
-            {
-              label: 'Namespace',
-              getter: (replicaSet) => replicaSet.metadata.namespace
-            },
-            {
-              label: 'Generation',
-              getter: (replicaSet) => replicaSet.status.observedGeneration
-            },
-            {
-              label: 'Replicas',
-              getter: (replicaSet) => getReplicas(replicaSet)
-            },
-            {
-              label: 'Age',
-              getter: (replicaSet) => timeAgo(replicaSet.metadata.creationTimestamp)
-            },
-          ]}
-          data={replicaSets}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Replica Sets"
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (replicaSet) => <Link kubeObject={replicaSet} />
+          },
+          {
+            label: 'Namespace',
+            getter: (replicaSet) => replicaSet.getNamespace()
+          },
+          {
+            label: 'Generation',
+            getter: (replicaSet) => replicaSet.status.observedGeneration
+          },
+          {
+            label: 'Replicas',
+            getter: (replicaSet) => getReplicas(replicaSet)
+          },
+          {
+            label: 'Age',
+            getter: (replicaSet) => replicaSet.getAge()
+          },
+        ]}
+        data={replicaSets}
+      />
+    </SectionBox>
   );
 }

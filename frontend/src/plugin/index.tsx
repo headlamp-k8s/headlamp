@@ -17,7 +17,8 @@ declare global {
 }
 
 window.pluginLib = {
-  API: require('../lib/api'),
+  API: require('../lib/k8s/api'),
+  K8s: require('../lib/k8s'),
   CommonComponents: require('../components/common'),
   MuiCore: require('@material-ui/core'),
   MuiStyles: require('@material-ui/styles'),

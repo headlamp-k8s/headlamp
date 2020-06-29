@@ -4,7 +4,7 @@
 
 import { OpenAPIV2 } from 'openapi-types';
 import Swagger from 'swagger-parser';
-import apis from './api';
+import apis from './k8s/api';
 
 let docsPromise: ReturnType<typeof getDocs>;
 

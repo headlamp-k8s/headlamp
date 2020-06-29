@@ -36,13 +36,16 @@ export interface CallbackAction extends CallbackActionOptions {
 export interface CallbackActionOptions {
   startUrl?: string;
   cancelUrl?: string;
+  errorUrl?: string;
   successUrl?: string;
   startMessage?: string;
   cancelledMessage?: string;
+  errorMessage?: string;
   successMessage?: string;
   startOptions?: SnackbarProps;
   cancelledOptions?: SnackbarProps;
   successOptions?: SnackbarProps;
+  errorOptions?: SnackbarProps;
 }
 
 export interface Action {

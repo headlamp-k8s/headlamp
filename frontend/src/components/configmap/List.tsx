@@ -1,56 +1,45 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeConfigMap } from '../../lib/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import ConfigMap from '../../lib/k8s/configMap';
+import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ConfigMapList() {
-  const [configMaps, setConfigMaps] = React.useState<KubeConfigMap[] | null>(null);
+  const [configMaps, setConfigMaps] = React.useState<ConfigMap[] | null>(null);
   const filterFunc = useFilterFunc();
 
-  useConnectApi(
-    api.configMap.list.bind(null, null, setConfigMaps),
-  );
+  ConfigMap.useApiList(setConfigMaps);
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Config Maps"
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (configMap) =>
-                <Link
-                  routeName="configMap"
-                  params={{
-                    namespace: configMap.metadata.namespace,
-                    name: configMap.metadata.name
-                  }}
-                >
-                  {configMap.metadata.name}
-                </Link>
-            },
-            {
-              label: 'Namespace',
-              getter: (configMap) => configMap.metadata.namespace
-            },
-            {
-              label: 'Age',
-              getter: (configMap) => timeAgo(configMap.metadata.creationTimestamp)
-            },
-          ]}
-          data={configMaps}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Config Maps"
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (configMap) =>
+              <Link kubeObject={configMap} />
+          },
+          {
+            label: 'Namespace',
+            getter: (configMap) => configMap.getNamespace(),
+          },
+          {
+            label: 'Age',
+            getter: (configMap) => configMap.getAge(),
+          },
+        ]}
+        data={configMaps}
+      />
+    </SectionBox>
   );
 }

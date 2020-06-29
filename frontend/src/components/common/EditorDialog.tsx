@@ -15,8 +15,8 @@ import * as yaml from 'js-yaml';
 import _ from 'lodash';
 import React from 'react';
 import MonacoEditor from 'react-monaco-editor';
-import { KubeObject } from '../../lib/cluster';
 import getDocDefinitions from '../../lib/docs';
+import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import ConfirmButton from './ConfirmButton';
 import Empty from './EmptyContent';
 import Loader from './Loader';
@@ -47,14 +47,29 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
+type KubeObjectIsh = Partial<KubeObjectInterface>;
+
 interface EditorDialogProps extends DialogProps{
-  item: KubeObject | null;
+  item: KubeObjectIsh | null;
   onClose: () => void;
   onSave: ((...args: any[]) => void) | null;
+  onEditorChanged?: ((newValue: string) => void) | null;
+  saveLabel?: string;
+  errorMessage?: string;
+  title?: string;
 }
 
 export default function EditorDialog(props: EditorDialogProps) {
-  const { item, onClose, onSave, ...other } = props;
+  const {
+    item,
+    onClose,
+    onSave,
+    onEditorChanged,
+    saveLabel,
+    errorMessage,
+    title,
+    ...other
+  } = props;
   const editorOptions = {
     selectOnLineNumbers: true,
     readOnly: isReadOnly(),
@@ -76,11 +91,15 @@ export default function EditorDialog(props: EditorDialogProps) {
       setOriginalCode(itemCode);
     }
 
+    if (!item.metadata) {
+      return;
+    }
+
     // Only change if the code hasn't been touched.
-    if (previousVersion !== item.metadata.resourceVersion || code === originalCode) {
+    if (previousVersion !== item.metadata!.resourceVersion || code === originalCode) {
       setCode(itemCode);
-      if (previousVersion !== item.metadata.resourceVersion) {
-        setPreviousVersion(item.metadata.resourceVersion);
+      if (previousVersion !== item.metadata!.resourceVersion) {
+        setPreviousVersion(item!.metadata!.resourceVersion);
       }
     }
   },
@@ -96,9 +115,13 @@ export default function EditorDialog(props: EditorDialogProps) {
     if (error && getObjectFromCode(newValue)) {
       setError('');
     }
+
+    if (onEditorChanged) {
+      onEditorChanged(newValue);
+    }
   }
 
-  function getObjectFromCode(code: string): KubeObject | null {
+  function getObjectFromCode(code: string): KubeObjectInterface | null {
     let codeObj = {};
     try {
       codeObj = yaml.load(code);
@@ -106,7 +129,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       return null;
     }
 
-    return codeObj as KubeObject;
+    return codeObj as KubeObjectInterface;
   }
 
   function handleTabChange(tabIndex: number) {
@@ -117,7 +140,7 @@ export default function EditorDialog(props: EditorDialogProps) {
 
     const codeObj = getObjectFromCode(code);
 
-    const {kind, apiVersion} = (codeObj || {}) as KubeObject;
+    const {kind, apiVersion} = (codeObj || {}) as KubeObjectInterface;
     if (codeObj === null || (!!kind && !!apiVersion)) {
       setDocSpecs({
         error: codeObj === null,
@@ -156,6 +179,13 @@ export default function EditorDialog(props: EditorDialogProps) {
     );
   }
 
+  const errorLabel = error || errorMessage;
+  let dialogTitle = title;
+  if (!dialogTitle && item) {
+    dialogTitle = isReadOnly() ? `View: ${item.metadata?.name || 'New Object'}`
+      : `Edit: ${item.metadata?.name || 'New Object'}`;
+  }
+
   return (
     <Dialog
       maxWidth="lg"
@@ -169,11 +199,7 @@ export default function EditorDialog(props: EditorDialogProps) {
         :
         <React.Fragment>
           <DialogTitle>
-            {isReadOnly() ?
-              `View: ${item.metadata.name}`
-              :
-              `Edit: ${item.metadata.name}`
-            }
+            {dialogTitle}
           </DialogTitle>
           <DialogContent
             className={classes.dialogContent}
@@ -218,8 +244,8 @@ export default function EditorDialog(props: EditorDialogProps) {
             </ConfirmButton>
             }
             <div style={{flex: '1 0 0'}} />
-            { error &&
-            <Typography color="error">{error}</Typography>
+            { errorLabel &&
+            <Typography color="error">{errorLabel}</Typography>
             }
             <div style={{flex: '1 0 0'}} />
             <Button
@@ -235,7 +261,7 @@ export default function EditorDialog(props: EditorDialogProps) {
               color="primary"
               disabled={originalCode === code || !!error}
             >
-              Save &amp; Apply
+              { saveLabel || 'Save & Apply'}
             </Button>
             }
           </DialogActions>

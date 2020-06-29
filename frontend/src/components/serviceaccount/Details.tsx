@@ -1,25 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api, { useConnectApi } from '../../lib/api';
-import { KubeSecretAccount } from '../../lib/cluster';
-import { getRoute } from '../../lib/router';
-import DeleteButton from '../common/DeleteButton';
-import EditButton from '../common/EditButton';
+import ServiceAccount from '../../lib/k8s/serviceAccount';
 import { MainInfoSection } from '../common/Resource';
 
 export default function ServiceAccountDetails() {
   const { namespace, name } = useParams();
-  const [item, setItem] = React.useState<KubeSecretAccount | null>(null);
+  const [item, setItem] = React.useState<ServiceAccount | null>(null);
 
-  console.log(item);
-
-  useConnectApi(
-    api.serviceAccount.get.bind(null, namespace, name, setItem),
-  );
-
-  function handleApply(newItem: KubeSecretAccount) {
-    api.serviceAccount.put(newItem);
-  }
+  ServiceAccount.useApiGet(setItem, name, namespace);
 
   return (
     <MainInfoSection
@@ -29,23 +17,6 @@ export default function ServiceAccountDetails() {
           name: 'Secrets',
           value: item.secrets.map(({name}) => name).join(', ')
         }
-      ]}
-      actions={item && [
-        <EditButton
-          item={item}
-          applyCallback={handleApply}
-          options={{
-            successOptions: {variant: 'success'}
-          }}
-        />,
-        <DeleteButton
-          item={item}
-          deletionCallback={() => api.serviceAccount.delete(namespace, name)}
-          options={{
-            startUrl: getRoute('serviceAccounts').path,
-            successOptions: {variant: 'success'}
-          }}
-        />
       ]}
     />
   );

@@ -4,23 +4,22 @@ import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Dialog from '@material-ui/core/Dialog';
+import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import SvgIcon from '@material-ui/core/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { PropsWithChildren } from 'react';
 import { generatePath } from 'react-router';
 import { useHistory, useLocation } from 'react-router-dom';
-import api from '../../lib/api';
+import { useClustersConf } from '../../lib/k8s/api';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
-import { setConfig } from '../../redux/actions/actions';
 import { Cluster } from '../../redux/reducers/config';
-import { useTypedSelector } from '../../redux/reducers/reducers';
+import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
 import Loader from '../common/Loader';
 
 const useClusterTitleStyle = makeStyles(theme => ({
@@ -41,7 +40,7 @@ export function ClusterTitle() {
   useLocation();
 
   const cluster = getCluster();
-  const clusters = useTypedSelector(state => state.config.clusters);
+  const clusters = useClustersConf();
   const [showChooser, setShowChooser] = React.useState(false);
 
   if (!cluster) {
@@ -59,11 +58,10 @@ export function ClusterTitle() {
         >
           Cluster: {cluster}
         </Button>
-      :
+        :
         <Typography color="textPrimary">Cluster: {cluster}</Typography>
       }
       <Chooser
-        title="Clusters"
         open={showChooser}
         onClose={() => setShowChooser(false)}
       />
@@ -71,11 +69,33 @@ export function ClusterTitle() {
   );
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   chooserDialog: {
     minWidth: 500,
-  }
-});
+    '& .MuiTypography-h4': {
+      textAlign: 'center',
+      fontSize: '2.2rem',
+      color: theme.palette.common.black,
+      paddingTop: theme.spacing(3),
+      paddingBottom: theme.spacing(3),
+    }
+  },
+  chooserDialogCover: {
+    background: theme.palette.common.black,
+  },
+  logo: {
+    height: '24px',
+    width: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  chooserTitle: {
+    background: theme.palette.common.black,
+    textAlign: 'center',
+    alignItems: 'center',
+    display: 'flex',
+  },
+}));
 
 const useClusterButtonStyles = makeStyles({
   root: {
@@ -140,34 +160,71 @@ function ClusterList(props: ClusterListProps) {
   );
 }
 
-interface ChooserProps {
+interface ClusterDialogProps extends PropsWithChildren<Omit<DialogProps, 'open' | 'onClose'>> {
   open?: boolean;
-  title?: string;
   onClose?: (() => void) | null;
+  useCover?: boolean;
 }
 
-function Chooser(props: ChooserProps) {
+export function ClusterDialog(props: ClusterDialogProps) {
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const clusters = useTypedSelector(state => state.config.clusters);
-  const {open = true, title = 'Welcome', onClose = null} = props;
+  const {open, onClose = null, useCover = false, children = [], ...otherProps} = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
 
-  React.useEffect(() => {
-    if (!open) {
+  function handleClose() {
+    if (onClose !== null) {
+      onClose();
       return;
     }
 
-    if (clusters.length === 0) {
-      api.getConfig()
-        .then((config: object) => {
-          dispatch(setConfig(config));
-        })
-        .catch((err: Error) => console.error(err));
+    // Only use show if open is not provided
+    if (open === undefined) {
+      setShow(false);
+    }
+  }
+
+  return (
+    <Dialog
+      fullScreen={fullScreen}
+      open={open !== undefined ? open : show}
+      onClose={handleClose}
+      aria-labelledby="authentication-dialog"
+      className={useCover ? classes.chooserDialogCover : ''}
+      {...otherProps}
+    >
+      <DialogTitle
+        id="responsive-dialog-title"
+        className={classes.chooserTitle}
+        disableTypography
+      >
+        <SvgIcon
+          className={classes.logo}
+          component={LogoLight}
+          viewBox="0 0 175 32"
+        />
+      </DialogTitle>
+      <DialogContent
+        className={classes.chooserDialog}
+      >
+        {children}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function Chooser(props: ClusterDialogProps) {
+  const history = useHistory();
+  const clusters = useClustersConf();
+  const {open = null, onClose, ...otherProps} = props;
+  // Only used if open is not provided
+  const [show, setShow] = React.useState(props.open);
+
+  React.useEffect(() => {
+    if (open !== null && open !== show) {
+      setShow(open);
       return;
     }
 
@@ -178,56 +235,58 @@ function Chooser(props: ChooserProps) {
     }
   },
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  [open, clusters, dispatch]);
+  [open, show, clusters]);
 
-  function handleClose() {
-    if (onClose !== null) {
-      onClose();
-      return;
+  function handleButtonClick(cluster: Cluster) {
+    if (cluster.name !== getCluster()) {
+      history.push({pathname: generatePath(getClusterPrefixedPath(), {cluster: cluster.name})});
     }
 
-    // Only use show if open is not provided
+    setShow(false);
+
+    if (!!onClose) {
+      onClose();
+    }
+  }
+
+  function handleClose() {
     if (open === null) {
       setShow(false);
     }
-  }
 
-  function handleButtonClick(cluster: Cluster) {
-    history.push({pathname: generatePath(getClusterPrefixedPath(), {cluster: cluster.name})});
-    handleClose();
+    if (!!onClose) {
+      onClose();
+    }
   }
 
   return (
-    <Dialog
-      fullScreen={fullScreen}
-      open={open !== null ? open : show}
-      onClose={handleClose}
-      aria-labelledby="authentication-dialog"
+    <ClusterDialog
+      open={show}
+      onClose={onClose || handleClose}
+      {...otherProps}
     >
-      <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
-      <DialogContent
-        className={classes.chooserDialog}
-      >
-        {clusters.length === 0 ?
-          <React.Fragment>
-            <DialogContentText>
-              Wait while fetching clusters...
-            </DialogContentText>
-            <Loader />
-          </React.Fragment>
-          :
-          <React.Fragment>
-            <DialogContentText>
-              Choose a cluster
-            </DialogContentText>
-            <ClusterList
-              clusters={clusters}
-              onButtonClick={handleButtonClick}
-            />
-          </React.Fragment>
-        }
-      </DialogContent>
-    </Dialog>
+      {clusters.length === 0 ?
+        <React.Fragment>
+          <DialogContentText>
+            Wait while fetching clusters…
+          </DialogContentText>
+          <Loader />
+        </React.Fragment>
+        :
+        <React.Fragment>
+          <DialogContentText
+            variant="h4"
+            // className={classes.bigText}
+          >
+            Choose a cluster
+          </DialogContentText>
+          <ClusterList
+            clusters={clusters}
+            onButtonClick={handleButtonClick}
+          />
+        </React.Fragment>
+      }
+    </ClusterDialog>
   );
 }
 

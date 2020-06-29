@@ -5,7 +5,6 @@ import React from 'react';
 
 const useStyles = makeStyles({
   loaderContainer: {
-    margin: '30px auto',
     textAlign: 'center',
   }
 });
@@ -23,7 +22,7 @@ export default function Loader(props: LoaderProps & CircularProgressProps) {
     return progress;
 
   return (
-    <Box className={classes.loaderContainer}>
+    <Box className={classes.loaderContainer} py={3} px="auto">
       {progress}
     </Box>
   );

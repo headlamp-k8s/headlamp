@@ -1,60 +1,49 @@
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import api, { useConnectApi } from '../../lib/api';
-import { KubePersistentVolume } from '../../lib/cluster';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import PersistentVolume from '../../lib/k8s/persistentVolume';
+import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function VolumeList() {
-  const [volumes, setVolumes] = React.useState<KubePersistentVolume[] | null>(null);
+  const [volumes, setVolumes] = React.useState<PersistentVolume[] | null>(null);
   const filterFunc = useFilterFunc();
 
-  useConnectApi(
-    api.persistentVolume.list.bind(null, setVolumes),
-  );
+  PersistentVolume.useApiList(setVolumes);
 
   return (
-    <Paper>
-      <SectionFilterHeader
-        title="Persistent Volumes"
-        noNamespaceFilter
-      />
-      <SectionBox>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
-          filterFunction={filterFunc}
-          columns={[
-            {
-              label: 'Name',
-              getter: (volume) =>
-                <Link
-                  routeName="persistentVolume"
-                  params={{
-                    name: volume.metadata.name,
-                  }}
-                >
-                  {volume.metadata.name}
-                </Link>
-            },
-            {
-              label: 'Status',
-              getter: (volume) => volume.status.phase
-            },
-            {
-              label: 'Capacity',
-              getter: (volume) => volume.spec.capacity.storage
-            },
-            {
-              label: 'Age',
-              getter: (volume) => timeAgo(volume.metadata.creationTimestamp)
-            },
-          ]}
-          data={volumes}
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title="Persistent Volumes"
+          noNamespaceFilter
         />
-      </SectionBox>
-    </Paper>
+      }
+    >
+      <SimpleTable
+        rowsPerPage={[15, 25, 50]}
+        filterFunction={filterFunc}
+        columns={[
+          {
+            label: 'Name',
+            getter: (volume) => <Link kubeObject={volume} />
+          },
+          {
+            label: 'Status',
+            getter: (volume) => volume.status.phase
+          },
+          {
+            label: 'Capacity',
+            getter: (volume) => volume.spec.capacity.storage
+          },
+          {
+            label: 'Age',
+            getter: (volume) => volume.getAge()
+          },
+        ]}
+        data={volumes}
+      />
+    </SectionBox>
   );
 }
