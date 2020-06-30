@@ -12,8 +12,7 @@ import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { Terminal as XTerminal } from 'xterm';
-import api from '../../lib/k8s/api';
-import { KubeContainer, KubeObjectInterface } from '../../lib/k8s/cluster';
+import Pod from '../../lib/k8s/pod';
 
 const decoder = new TextDecoder('utf-8');
 const encoder = new TextEncoder();
@@ -29,11 +28,7 @@ const useStyle = makeStyles(theme => ({
 }));
 
 interface TerminalProps extends DialogProps {
-  item: KubeObjectInterface & {
-    spec: {
-      containers: KubeContainer[];
-    };
-  };
+  item: Pod;
   onClose?: () => void;
 }
 
@@ -114,10 +109,7 @@ export default function Terminal(props: TerminalProps) {
     const xterm = new XTerminal({rows: 40, cols: 80});
     xterm.writeln('Connecting…\n');
 
-    const exec = api.exec(item.metadata.namespace,
-                          item.metadata.name,
-                          container,
-                          (items: ArrayBuffer) => onData(xterm, items));
+    const exec = item.exec(container, (items: ArrayBuffer) => onData(xterm, items));
 
     setupTerminal(terminalContainerRef, xterm, exec);
 
