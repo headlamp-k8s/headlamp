@@ -1,7 +1,7 @@
 import { createRouteURL } from '../router';
 import { timeAgo } from '../util';
 import { useConnectApi } from './api';
-import { apiFactory, apiFactoryWithNamespace } from './apiProxy';
+import { apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
@@ -151,6 +151,32 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(detailsRouteName: st
 
     static put(data: KubeObjectInterface) {
       this.apiEndpoint.put(data);
+    }
+
+    async getAuthorization(verb: string) {
+      const resourceAttrs: {
+        name: string;
+        verb: string;
+        namespace?: string;
+      } = {
+        name: this.getName(),
+        verb
+      };
+
+      const namespace = this.getNamespace();
+      if (!!namespace) {
+        resourceAttrs['namespace'] = namespace;
+      }
+
+      const spec = {
+        resourceAttributes: resourceAttrs
+      };
+
+      return await post('/apis/authorization.k8s.io/v1beta1/selfsubjectaccessreviews', {
+        kind: 'SelfSubjectAccessReview',
+        apiVersion: 'authorization.k8s.io/v1beta1',
+        spec
+      }, false);
     }
   }
 
