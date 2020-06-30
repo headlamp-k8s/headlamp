@@ -4,12 +4,12 @@
 
 import { OpenAPIV2 } from 'openapi-types';
 import Swagger from 'swagger-parser';
-import apis from './k8s/api';
+import { request } from './k8s/apiProxy';
 
 let docsPromise: ReturnType<typeof getDocs>;
 
 async function getDocs() {
-  const docs = await apis.swagger();
+  const docs = await request('/openapi/v2');
   return Swagger.dereference(docs);
 }
 
