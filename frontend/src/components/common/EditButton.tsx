@@ -5,7 +5,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import api from '../../lib/k8s/api';
 import { KubeObject } from '../../lib/k8s/cluster';
 import { KubeServiceAccount } from '../../lib/k8s/serviceAccount';
 import { CallbackActionOptions, clusterAction } from '../../redux/actions/actions';
@@ -47,8 +46,8 @@ export default function EditButton(props: EditButtonProps) {
   }
 
   React.useEffect(() => {
-    if (item && item.metadata) {
-      api.getAuthorization(item, 'update').then(
+    if (item) {
+      item.getAuthorization('update').then(
         (result: any) => {
           if (result.status.allowed) {
             setVisible(true);

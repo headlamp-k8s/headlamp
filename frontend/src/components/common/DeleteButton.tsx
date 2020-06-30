@@ -5,7 +5,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import api from '../../lib/k8s/api';
 import { KubeObject } from '../../lib/k8s/cluster';
 import { CallbackActionOptions, clusterAction } from '../../redux/actions/actions';
 import { ConfirmDialog } from './Dialog';
@@ -45,8 +44,8 @@ export default function DeleteButton(props: DeleteButtonProps) {
   [item]);
 
   React.useEffect(() => {
-    if (item && item.metadata) {
-      api.getAuthorization(item.jsonData, 'delete').then(
+    if (item) {
+      item.getAuthorization('delete').then(
         (result: any) => {
           if (result.status.allowed) {
             setVisible(true);
