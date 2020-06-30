@@ -10,7 +10,7 @@
 import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import { apiFactory, apiFactoryWithNamespace, post, request, stream, StreamResultsCb } from './apiProxy';
-import { KubeMetrics, KubeObjectInterface } from './cluster';
+import { KubeObjectInterface } from './cluster';
 
 const configMap = apiFactoryWithNamespace('', 'v1', 'configmaps');
 const event = apiFactoryWithNamespace('', 'v1', 'events');
@@ -53,7 +53,6 @@ const apis: {
   logs,
   swagger,
   exec,
-  metrics: metricsFactory(),
   oidc: oidcFactory(),
 
   clusterRole,
@@ -139,47 +138,11 @@ async function apply(body: KubeObjectInterface) {
   }
 }
 
-type ApiListCb = (objsList: KubeObjectInterface[]) => void;
-type ApiMetricsListCb = (objsList: KubeMetrics[]) => void;
-
-function metricsFactory() {
-  return {
-    nodes: (cb: ApiMetricsListCb) => metrics('/apis/metrics.k8s.io/v1beta1/nodes', cb),
-    node: (name: string, cb: ApiMetricsListCb) => metrics(`/apis/metrics.k8s.io/v1beta1/nodes/${name}`, cb),
-    pods: (namespace: string, cb: ApiMetricsListCb) => metrics(url(namespace), cb),
-    pod: (namespace: string, name: string, cb: ApiMetricsListCb) => metrics(`/apis/metrics.k8s.io/v1beta1/namespaces/${namespace}/pods/${name}`, cb),
-  };
-
-  function url(namespace: string) {
-    return namespace ? `/apis/metrics.k8s.io/v1beta1/namespaces/${namespace}/pods` : '/apis/metrics.k8s.io/v1beta1/pods';
-  }
-}
-
 function oidcFactory() {
   return {
     get: () => request('/oidc'),
     post: (code: string, redirectUri: string) => post('/oidc', {code, redirectUri}),
   };
-}
-
-export async function metrics(url: string, cb: (arg: KubeMetrics[]) => void) {
-  const handel = setInterval(getMetrics, 10000);
-  getMetrics();
-
-  async function getMetrics() {
-    try {
-      const metric = await request(url);
-      cb(metric.items || metric);
-    } catch (err) {
-      console.error('No metrics', {err, url});
-    }
-  }
-
-  return cancel;
-
-  function cancel() {
-    clearInterval(handel);
-  }
 }
 
 function swagger() {

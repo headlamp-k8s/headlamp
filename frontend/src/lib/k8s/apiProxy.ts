@@ -10,7 +10,7 @@
 import { getToken, logout } from '../auth';
 import { getCluster } from '../util';
 import { ResourceClasses } from '.';
-import { KubeObjectClass, KubeObjectInterface } from './cluster';
+import { KubeMetrics, KubeObjectClass, KubeObjectInterface } from './cluster';
 
 const {host, href, hash, search} = window.location;
 const nonHashedUrl = href.replace(hash, '').replace(search, '');
@@ -398,4 +398,25 @@ export async function apply(body: KubeObjectInterface): Promise<JSON> {
     // We had a confilct. Try a PUT
     return resourceClass!.apiEndpoint.put(body);
   }
+}
+
+export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => void) {
+  const handel = setInterval(getMetrics, 10000);
+
+  async function getMetrics() {
+    try {
+      const metric = await request(url);
+      onMetrics(metric.items || metric);
+    } catch (err) {
+      console.error('No metrics', {err, url});
+    }
+  }
+
+  function cancel() {
+    clearInterval(handel);
+  }
+
+  getMetrics();
+
+  return cancel;
 }

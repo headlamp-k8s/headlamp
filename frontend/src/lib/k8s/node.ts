@@ -1,6 +1,5 @@
 import { useConnectApi } from '.';
-import { metrics } './api';
-import { apiFactory } from './apiProxy';
+import { apiFactory, metrics } from './apiProxy';
 import { KubeCondition, KubeMetrics, KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubeNode extends KubeObjectInterface {
