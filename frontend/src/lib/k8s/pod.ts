@@ -1,4 +1,4 @@
-import { apiFactoryWithNamespace } from './apiProxy';
+import { apiFactoryWithNamespace, stream, StreamResultsCb } from './apiProxy';
 import { KubeCondition, KubeContainer, KubeContainerStatus, KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubePod extends KubeObjectInterface {
@@ -27,6 +27,28 @@ class Pod extends makeKubeObject<KubePod>('pod') {
 
   get status() {
     return this.jsonData!.status;
+  }
+
+  getLogs(container: string, tailLines: number, showPrevious: boolean,
+          onLogs: StreamResultsCb) {
+    let logs: string[] = [];
+    const url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/log?container=${container}&previous=${showPrevious}&tailLines=${tailLines}&follow=true`;
+
+    function onResults(item: string) {
+      if (!item) {
+        return;
+      }
+
+      logs.push(Base64.decode(item));
+      onLogs(logs);
+    }
+
+    const { cancel } = stream(url, onResults,
+                              { isJson: false,
+                                connectCb: () => { logs = []; },
+                              });
+
+    return cancel;
   }
 }
 
