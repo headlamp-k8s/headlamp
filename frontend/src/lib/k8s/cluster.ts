@@ -1,6 +1,6 @@
 import { createRouteURL } from '../router';
 import { timeAgo } from '../util';
-import { useConnectApi } from './api';
+import { useConnectApi } from '.';
 import { apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';

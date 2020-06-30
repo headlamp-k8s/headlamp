@@ -1,4 +1,5 @@
-import { metrics, useConnectApi } from './api';
+import { useConnectApi } from '.';
+import { metrics } './api';
 import { apiFactory } from './apiProxy';
 import { KubeCondition, KubeMetrics, KubeObjectInterface, makeKubeObject } from './cluster';
 

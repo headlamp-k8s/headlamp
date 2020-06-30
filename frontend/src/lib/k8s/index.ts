@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { setConfig } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { request } from './apiProxy';
@@ -80,4 +81,27 @@ export function useClustersConf() {
 
 export function getVersion(): Promise<StringDict> {
   return request('/version');
+}
+
+type CancellablePromise = Promise<() => void>;
+
+export function useConnectApi(...apiCalls: (() => CancellablePromise)[]) {
+  // Use the location to make sure the API calls are changed, as they may depend on the cluster
+  // (defined in the URL ATM).
+  // @todo: Update this if the active cluster management is changed.
+  const location = useLocation();
+
+  React.useEffect(() => {
+    const cancellables = apiCalls.map(func => func());
+
+    return function cleanup() {
+      for (const cancellablePromise of cancellables) {
+        cancellablePromise.then(cancellable => cancellable());
+      }
+    };
+  },
+    // If we add the apiCalls to the dependency list, then it actually
+    // results in undesired reloads.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [location]);
 }
