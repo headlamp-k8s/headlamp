@@ -11,7 +11,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import _ from 'lodash';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import api from '../../lib/k8s/api';
 import Pod from '../../lib/k8s/pod';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import { ContainersSection, MainInfoSection, PageGrid } from '../common/Resource';
@@ -47,13 +46,9 @@ function PodLogViewer(props: PodLogViewerProps) {
 
   React.useEffect(() => {
     let callback: any = null;
+
     if (props.open) {
-      callback = api.logs(item.metadata.namespace,
-                          item.metadata.name,
-                          container,
-                          lines,
-                          false,
-                          debouncedSetState);
+      callback = item.getLogs(container, lines, false, debouncedSetState);
     }
 
     return function cleanup() {
