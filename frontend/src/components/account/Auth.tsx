@@ -11,7 +11,7 @@ import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { setToken } from '../../lib/auth';
 import { useClustersConf } from '../../lib/k8s';
-import api from '../../lib/k8s/api';
+import { post } from '../../lib/k8s/apiProxy';
 import { getCluster } from '../../lib/util';
 import { ClusterDialog } from '../cluster/Chooser';
 
@@ -102,7 +102,9 @@ async function loginWithToken(token: string) {
     }
 
     setToken(cluster, token);
-    await api.testAuth();
+
+    const spec = {namespace: 'default'};
+    await post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', {spec}, false);
 
     return 200;
   } catch (err) {
