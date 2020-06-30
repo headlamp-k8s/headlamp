@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setConfig } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { request } from './apiProxy';
-import { KubeObjectClass } from './cluster';
+import { KubeObjectClass, StringDict } from './cluster';
 import ClusterRole from './clusterRole';
 import ClusterRoleBinding from './clusterRoleBinding';
 import ConfigMap from './configMap';
@@ -76,4 +76,8 @@ export function useClustersConf() {
   [clusters, dispatch]);
 
   return clusters;
+}
+
+export function getVersion(): Promise<StringDict> {
+  return request('/version');
 }

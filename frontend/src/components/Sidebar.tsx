@@ -24,7 +24,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
 import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from 'react-router-dom';
-import api from '../lib/k8s/api';
+import { getVersion } from '../lib/k8s';
 import { StringDict } from '../lib/k8s/cluster';
 import { createRouteURL, getRoute } from '../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../lib/util';
@@ -236,7 +236,7 @@ function VersionButton() {
 
   React.useEffect(() => {
     if (!clusterVersion) {
-      api.getVersion()
+      getVersion()
         .then((results: StringDict) => setClusterVersion(results))
         .catch((error: Error) => console.error('Getting the cluster version:', error));
     }
