@@ -10,7 +10,8 @@ import { Location } from 'history';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { setToken } from '../../lib/auth';
-import api, { useClustersConf } from '../../lib/k8s/api';
+import { useClustersConf } from '../../lib/k8s';
+import api from '../../lib/k8s/api';
 import { getCluster } from '../../lib/util';
 import { ClusterDialog } from '../cluster/Chooser';
 

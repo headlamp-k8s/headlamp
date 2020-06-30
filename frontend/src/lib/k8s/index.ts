@@ -1,3 +1,8 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setConfig } from '../../redux/actions/actions';
+import { useTypedSelector } from '../../redux/reducers/reducers';
+import { request } from './apiProxy';
 import { KubeObjectClass } from './cluster';
 import ClusterRole from './clusterRole';
 import ClusterRoleBinding from './clusterRoleBinding';
@@ -52,3 +57,23 @@ classList.forEach(cls => {
 });
 
 export const ResourceClasses = resourceClassesDict;
+
+// Hook for getting or fetching the clusters configuration.
+export function useClustersConf() {
+  const dispatch = useDispatch();
+  const clusters = useTypedSelector(state => state.config.clusters);
+
+  React.useEffect(() => {
+    if (clusters.length === 0) {
+      request('/config', {}, false, false)
+        .then((config: object) => {
+          dispatch(setConfig(config));
+        })
+        .catch((err: Error) => console.error(err));
+      return;
+    }
+  },
+  [clusters, dispatch]);
+
+  return clusters;
+}

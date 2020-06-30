@@ -16,7 +16,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React, { PropsWithChildren } from 'react';
 import { generatePath } from 'react-router';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useClustersConf } from '../../lib/k8s/api';
+import { useClustersConf } from '../../lib/k8s';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { Cluster } from '../../redux/reducers/config';
 import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
