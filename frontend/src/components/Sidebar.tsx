@@ -348,7 +348,7 @@ export default function Sidebar() {
         <SvgIcon
           className={classes.logo}
           component={LogoLight}
-          viewBox="0 0 175 32"
+          viewBox="0 0 auto 32"
         />
       </div>
       <Grid
