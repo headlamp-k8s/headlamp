@@ -1,3 +1,4 @@
+import { Base64 } from 'js-base64';
 import { apiFactoryWithNamespace, stream, StreamResultsCb } from './apiProxy';
 import { KubeCondition, KubeContainer, KubeContainerStatus, KubeObjectInterface, makeKubeObject } from './cluster';
 
