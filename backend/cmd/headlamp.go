@@ -74,12 +74,6 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		config.addProxyForCluster(&cluster, r)
 	}
 
-	// This is a quick work-around just for compatibility with the frontend until we add multi-cluster support there too
-	if len(clusters) > 0 {
-		firstCluster := clusters[0]
-		firstCluster.Name = ""
-		config.addProxyForCluster(&firstCluster, r)
-	}
 
 	// Serve the frontend if needed
 	if config.staticDir != "" {
