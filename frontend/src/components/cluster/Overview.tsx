@@ -81,6 +81,17 @@ function EventsSection(props: { events: Event[] | null }) {
     );
   }
 
+  function sortFunc(event1: Event, event2: Event) {
+    if (event1.metadata.creationTimestamp < event2.metadata.creationTimestamp) {
+      return 1;
+    }
+    if (event2.metadata.creationTimestamp < event1.metadata.creationTimestamp) {
+      return -1;
+    }
+
+    return 0;
+  }
+
   return (
     <SectionBox
       title={
@@ -122,7 +133,7 @@ function EventsSection(props: { events: Event[] | null }) {
           :
           []
         }
-        data={events || []}
+        data={(events || []).sort(sortFunc)}
       />
     </SectionBox>
   );
