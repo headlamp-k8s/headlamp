@@ -22,6 +22,7 @@ interface ReactRouterLocationStateIface {
 function Auth() {
   const location = useLocation();
   const history = useHistory();
+  const clusterConf = useClustersConf();
   const {from = { pathname: '/' }} = location.state as ReactRouterLocationStateIface;
   const [token, setToken] = React.useState('');
   const [showError, setShowError] = React.useState(false);
@@ -46,7 +47,7 @@ function Auth() {
         disableEscapeKeyDown
         disableBackdropClick
       >
-        <DialogTitle id="responsive-dialog-title">{`Authentication: ${getCluster()}`}</DialogTitle>
+        <DialogTitle id="responsive-dialog-title">{clusterConf.length > 1 ? `Authentication: ${getCluster()}` : 'Authentication'}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please paste your authentication token.
