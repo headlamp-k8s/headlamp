@@ -74,6 +74,8 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		config.addProxyForCluster(&cluster, r)
 	}
 
+	// Configuration
+	r.HandleFunc("/config", clientConf.getConfig).Methods("GET")
 
 	// Serve the frontend if needed
 	if config.staticDir != "" {
@@ -82,9 +84,6 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	}
 
 	http.Handle("/", r)
-
-	// Configuration
-	r.HandleFunc("/config", clientConf.getConfig).Methods("GET")
 
 	var handler http.Handler
 
