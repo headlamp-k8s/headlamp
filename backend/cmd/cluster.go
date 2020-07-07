@@ -11,7 +11,7 @@ import (
 )
 
 // @todo: Use a different way to avoid name clashes with other clusters
-const OWN_CLUSTER_NAME = "_main_"
+const OWN_CLUSTER_NAME = "main"
 
 type Cluster struct {
 	Name   string `json:"name"`
