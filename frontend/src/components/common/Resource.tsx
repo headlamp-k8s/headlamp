@@ -98,6 +98,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
   const classes = useStyles();
   const { dict, showKeys = true } = props;
   const [expanded, setExpanded] = React.useState(false);
+  const defaultNumShown = 20;
 
   const keys = Object.keys(dict || []);
 
@@ -150,7 +151,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
       spacing={1}
       justify="flex-start"
     >
-      {keys.length > 2 &&
+      {keys.length > defaultNumShown &&
         <Grid item>
           <IconButton onClick={() => setExpanded(!expanded)} size="small">
             <Icon icon={expanded ? menuUp : menuDown} />
@@ -167,7 +168,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
         }}
       >
         {/* Limit the size to two entries until the user chooses to expand the whole section */}
-        {keys.slice(0, expanded ? keys.length : 2).map((key, i) =>
+        {keys.slice(0, expanded ? keys.length : defaultNumShown).map((key, i) =>
           <Grid key={i} item zeroMinWidth>
             {makeLabel(key)}
           </Grid>
