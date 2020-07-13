@@ -45,7 +45,7 @@ export default function Overview() {
   const workloads = [DaemonSet, Deployment, Job, CronJob, ReplicaSet, StatefulSet];
   workloads.forEach(workloadClass => {
     workloadClass.useApiList((items: InstanceType<(typeof workloadClass)>[]) =>
-      dispatch({items, kind: workloadClass.name})
+      dispatch({items, kind: workloadClass.className})
     );
   });
 
@@ -58,7 +58,7 @@ export default function Overview() {
           alignItems="flex-start"
           spacing={1}
         >
-          {workloads.map(({name}) =>
+          {workloads.map(({className: name}) =>
             <Grid
               item
               lg={2}

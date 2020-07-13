@@ -54,7 +54,7 @@ const resourceClassesDict: {
 } = {};
 
 classList.forEach(cls => {
-  resourceClassesDict[cls.name] = cls;
+  resourceClassesDict[cls.className] = cls;
 });
 
 export const ResourceClasses = resourceClassesDict;

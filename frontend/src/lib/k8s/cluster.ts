@@ -33,7 +33,7 @@ export interface KubeMetadata {
 }
 
 export function
-makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(detailsRouteName: string) {
+makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) {
   class KubeObject {
     static apiEndpoint: ReturnType<(typeof apiFactoryWithNamespace) | (typeof apiFactory)>;
     jsonData: T | null = null;
@@ -42,8 +42,12 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(detailsRouteName: st
       this.jsonData = json;
     }
 
+    static get className(): string {
+      return objectName;
+    }
+
     get detailsRoute(): string {
-      return detailsRouteName;
+      return this._class().className;
     }
 
     get listRoute(): string {
