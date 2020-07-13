@@ -76,6 +76,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
             InputLabelProps={{shrink: true}}
             placeholder="Filter"
             value={filter.search}
+            autoFocus
             onChange={event =>
               dispatch(setSearchFilter(event.target.value))
             }
