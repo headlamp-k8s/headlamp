@@ -24,7 +24,7 @@ interface ExecOptions {
   reconnectOnFailure?: boolean;
 }
 
-class Pod extends makeKubeObject<KubePod>('pod') {
+class Pod extends makeKubeObject<KubePod>('Pod') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'pods');
 
   get spec() {

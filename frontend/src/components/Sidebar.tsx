@@ -95,7 +95,7 @@ const LIST_ITEMS: SidebarEntry[] = [
     icon: circleSlice2,
     subList: [
       {
-        name: 'pods',
+        name: 'Pods',
         label: 'Pods'
       },
       {

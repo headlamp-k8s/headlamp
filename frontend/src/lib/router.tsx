@@ -172,17 +172,17 @@ export const ROUTES: {
     sidebar: 'workloads',
     component: () => <WorkloadDetails workloadKind={CronJob} />
   },
-  pods: {
+  Pods: {
     path: '/pods',
     exact: true,
     name: 'Pods',
-    sidebar: 'pods',
+    sidebar: 'Pods',
     component: () => <PodList />
   },
-  pod: {
+  Pod: {
     path: '/pods/:namespace/:name',
     exact: true,
-    sidebar: 'pods',
+    sidebar: 'Pods',
     component: () => <PodDetails />
   },
   services: {
