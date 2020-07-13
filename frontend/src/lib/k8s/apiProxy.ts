@@ -12,10 +12,9 @@ import { getCluster } from '../util';
 import { ResourceClasses } from '.';
 import { KubeMetrics, KubeObjectClass, KubeObjectInterface } from './cluster';
 
-const {host, href, hash, search} = window.location;
-const nonHashedUrl = href.replace(hash, '').replace(search, '');
+const {host, origin} = window.location;
 const isDev = process.env.NODE_ENV !== 'production';
-const BASE_HTTP_URL = (isDev && host === 'localhost:3000' ? 'http://localhost:4654/' : nonHashedUrl);
+const BASE_HTTP_URL = (isDev && host === 'localhost:3000' ? 'http://localhost:4654/' : origin);
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
