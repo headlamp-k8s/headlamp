@@ -41,7 +41,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint -c .eslintrc.yml --ext .js,.ts,.tsx src/"
+    "lint": "eslint -c .eslintrc.yml --ext .js,.ts,.tsx src/",
+    "lint:fix": "eslint -c .eslintrc.yml --fix 'src/**/*.{ts,tsx}'"
   },
   "browserslist": {
     "production": [
