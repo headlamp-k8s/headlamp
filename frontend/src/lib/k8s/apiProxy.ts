@@ -399,7 +399,8 @@ export async function apply(body: KubeObjectInterface): Promise<JSON> {
   }
 }
 
-export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => void) {
+export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => void,
+                              onError: (arg: Error) => void) {
   const handel = setInterval(getMetrics, 10000);
 
   async function getMetrics() {
@@ -407,6 +408,7 @@ export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => vo
       const metric = await request(url);
       onMetrics(metric.items || metric);
     } catch (err) {
+      onError(new Error('error in getting metrics, please make sure the metrics server is installed'));
       console.error('No metrics', {err, url});
     }
   }

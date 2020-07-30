@@ -17,9 +17,9 @@ export default function NodeDetails() {
   const { name } = useParams();
   const [item, setItem] = React.useState<Node | null>(null);
   const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
-
+  const [nodeMetricsError, setNodeMetricsError] = React.useState<Error | null>(null);
   Node.useApiGet(setItem, name);
-  Node.useMetrics(setNodeMetrics);
+  Node.useMetrics(setNodeMetrics, setNodeMetricsError);
 
   function getAddresses(item: Node) {
     return item.status.addresses.map(({type, address}) => {
@@ -36,7 +36,7 @@ export default function NodeDetails() {
       <MainInfoSection
 
         headerSection={
-          <ChartsSection node={item} metrics={nodeMetrics} />
+          <ChartsSection node={item} metrics={nodeMetrics} error={nodeMetricsError}/>
         }
         resource={item}
         extraInfo={item && [
@@ -59,10 +59,11 @@ export default function NodeDetails() {
 interface ChartsSectionProps {
   node: Node | null;
   metrics: KubeMetrics[] | null;
+  error: Error | null;
 }
 
 function ChartsSection(props: ChartsSectionProps) {
-  const { node, metrics } = props;
+  const { node, metrics, error } = props;
 
   function getUptime() {
     if (!node) {
@@ -96,12 +97,14 @@ function ChartsSection(props: ChartsSectionProps) {
           <CpuCircularChart
             items={node && [node]}
             itemsMetrics={metrics}
+            error={error}
           />
         </Grid>
         <Grid item>
           <MemoryCircularChart
             items={node && [node]}
             itemsMetrics={metrics}
+            error={error}
           />
         </Grid>
       </Grid>

@@ -45,8 +45,9 @@ class Node extends makeKubeObject<KubeNode>('node') {
     return this.jsonData!.spec;
   }
 
-  static useMetrics(onMetrics: (metricsList: KubeMetrics[]) => void) {
-    useConnectApi(metrics.bind(null, '/apis/metrics.k8s.io/v1beta1/nodes', onMetrics));
+  static useMetrics(onMetrics: (metricsList: KubeMetrics[]) => void,
+                    onError: (err: Error) => void) {
+    useConnectApi(metrics.bind(null, '/apis/metrics.k8s.io/v1beta1/nodes', onMetrics, onError));
   }
 }
 

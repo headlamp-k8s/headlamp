@@ -20,10 +20,10 @@ export default function Overview() {
   const [events, setEvents] = React.useState<Event[] | null>(null);
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
   const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
-
+  const [nodeMetricsError, setNodeMetricsError] = React.useState<Error | null>(null);
   Pod.useApiList(setPods);
   Node.useApiList(setNodes);
-  Node.useMetrics(setNodeMetrics);
+  Node.useMetrics(setNodeMetrics, setNodeMetricsError);
   Event.useApiList(setEvents);
 
   return (
@@ -34,16 +34,18 @@ export default function Overview() {
           justify="space-around"
           alignItems="flex-start"
         >
-          <Grid item>
+          <Grid item xs={4}>
             <CpuCircularChart
               items={nodes}
               itemsMetrics={nodeMetrics}
+              error={nodeMetricsError}
             />
           </Grid>
-          <Grid item>
+          <Grid item xs={4}>
             <MemoryCircularChart
               items={nodes}
               itemsMetrics={nodeMetrics}
+              error={nodeMetricsError}
             />
           </Grid>
           <Grid item>

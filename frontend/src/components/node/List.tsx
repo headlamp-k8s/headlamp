@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { KubeMetrics } from '../../lib/k8s/cluster';
@@ -20,10 +21,11 @@ export default function NodeList() {
   const classes = useStyle();
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
   const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
+  const [nodeMetricsError, setNodeMetricsError] = React.useState<Error | null>(null);
   const filterFunc = useFilterFunc();
 
   Node.useApiList(setNodes);
-  Node.useMetrics(setNodeMetrics);
+  Node.useMetrics(setNodeMetrics, setNodeMetricsError);
 
   return (
     <SectionBox
@@ -51,7 +53,10 @@ export default function NodeList() {
             cellProps: {
               className: classes.chartCell,
             },
-            getter: (node) =>
+            getter: (node) => nodeMetricsError ?
+              <Typography color="error" align="left">
+                {nodeMetricsError.message}
+              </Typography> :
               <UsageBarChart
                 node={node}
                 nodeMetrics={nodeMetrics}
@@ -63,7 +68,10 @@ export default function NodeList() {
             cellProps: {
               className: classes.chartCell,
             },
-            getter: (node) =>
+            getter: (node) => nodeMetricsError ?
+              <Typography color="error" align="left">
+                {nodeMetricsError.message}
+              </Typography> :
               <UsageBarChart
                 node={node}
                 nodeMetrics={nodeMetrics}

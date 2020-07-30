@@ -32,6 +32,7 @@ export interface ChartDataPoint {
 
 export interface PercentageCircleProps {
   data: ChartDataPoint[];
+  error?: Error | null;
   size?: number;
   dataKey?: string;
   label?: string | null;
@@ -48,6 +49,7 @@ export function PercentageCircle(props: PercentageCircleProps) {
   const classes = useStyle();
   const {
     data,
+    error,
     size = 200,
     dataKey = 'percentage',
     label = '',
@@ -100,38 +102,40 @@ export function PercentageCircle(props: PercentageCircleProps) {
       {title &&
         <Typography className={classes.title}>{title}</Typography>
       }
-      {isLoading ?
-        <Loader />
-        :
-        <PieChart
-          cx={size / 2}
-          cy={size / 2}
-          width={chartSize}
-          height={chartSize}
-          className={classes.chart}
-        >
-          <Pie
-            data={formatData()}
-            // Center the chart
-            cx={chartSize / 2}
-            cy={chartSize / 2}
-            innerRadius={chartSize * .35}
-            outerRadius={chartSize * .4}
-            dataKey={dataKey}
-            // Start at the top
-            startAngle={90}
-            endAngle={-270}
-            fill={theme.palette.common.black}
+      {error ?
+        <Typography color="error">{error.message}</Typography> :
+        isLoading ?
+          <Loader />
+          :
+          <PieChart
+            cx={size / 2}
+            cy={size / 2}
+            width={chartSize}
+            height={chartSize}
+            className={classes.chart}
           >
-            <Label
-              value={label || ''}
-              position="center"
-              style={{
-                fontSize: `${chartSize * .15}px`,
-              }}
-            />
-          </Pie>
-        </PieChart>
+            <Pie
+              data={formatData()}
+              // Center the chart
+              cx={chartSize / 2}
+              cy={chartSize / 2}
+              innerRadius={chartSize * .35}
+              outerRadius={chartSize * .4}
+              dataKey={dataKey}
+              // Start at the top
+              startAngle={90}
+              endAngle={-270}
+              fill={theme.palette.common.black}
+            >
+              <Label
+                value={label || ''}
+                position="center"
+                style={{
+                  fontSize: `${chartSize * .15}px`,
+                }}
+              />
+            </Pie>
+          </PieChart>
       }
       {!isLoading && legend !== null &&
         <Typography className={classes.legend}>{legend}</Typography>

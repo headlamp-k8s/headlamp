@@ -7,6 +7,7 @@ import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
 
 interface ResourceCircularChartProps extends Omit<PercentageCircleProps, 'data'> {
   items: KubeObjectInterface[] | null;
+  error: Error | null;
   itemsMetrics: any;
   resourceUsedGetter?: (node: KubeObjectInterface) => number;
   resourceAvailableGetter?: (node: KubeObjectInterface) => number;
