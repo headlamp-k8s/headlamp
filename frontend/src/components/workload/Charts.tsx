@@ -40,7 +40,7 @@ export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
 
   function getLegend() {
     if (total === 0) {
-      return null;
+      return '0 Running';
     }
     if (partial !== 0) {
       return `${partial} ${partialLabel} / ${total} ${totalLabel}`;
