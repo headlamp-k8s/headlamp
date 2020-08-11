@@ -1,13 +1,13 @@
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import React from 'react';
 
-export default function Empty(props: React.PropsWithChildren<{}>) {
+export default function Empty(props: React.PropsWithChildren<{color: TypographyProps['color']}>) {
   return (
     <Box padding={2}>
       {React.Children.map(props.children, child => {
         if (typeof child === 'string') {
-          return <Typography color="textSecondary" align="center">{child}</Typography>;
+          return <Typography color={props.color} align="center">{child}</Typography>;
         }
         return child;
       })
@@ -15,3 +15,5 @@ export default function Empty(props: React.PropsWithChildren<{}>) {
     </Box>
   );
 }
+
+Empty.defaultProps = { color: 'textSecondary' };
