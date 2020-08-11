@@ -293,15 +293,24 @@ function DocsViewer(props: {docSpecs: any}) {
   const { docSpecs } = props;
   const classes = useStyles();
   const [docs, setDocs] = React.useState<object | null>(null);
+  const [docsError, setDocsError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
+    if (docSpecs.error) {
+      setDocsError(`Cannot load documentation: ${docSpecs.error}`);
+      return;
+    }
     if (!docSpecs.apiVersion || !docSpecs.kind) {
+      setDocsError('Cannot load documentation: Please make sure the YAML is valid and has the kind and apiVersion set.');
       return;
     }
 
     getDocDefinitions(docSpecs.apiVersion, docSpecs.kind)
       .then(result => {
         setDocs(result?.properties || {});
+      })
+      .catch((err) => {
+        setDocsError(`Cannot load documentation: ${err}`);
       });
   },
   [docSpecs]);
@@ -333,13 +342,10 @@ function DocsViewer(props: {docSpecs: any}) {
   }
 
   return (
-    docSpecs.error ?
-      <Empty>
-        Error getting documentation!
-        Please make sure the YAML is valid and has the kind and apiVersion set.
-      </Empty>
-      : docs === null ?
-        <Loader />
+    docs === null && docsError === null ?
+      <Loader />
+      : !_.isEmpty(docsError) ?
+        <Empty color="error">{docsError}</Empty>
         : _.isEmpty(docs) ?
           <Empty>No documentation for type {docSpecs.kind.trim()}.</Empty>
           :
