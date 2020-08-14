@@ -1,3 +1,4 @@
+import loadScripts from './loadPlugins';
 import Registry from './registry';
 
 abstract class Plugin {
@@ -24,6 +25,8 @@ window.pluginLib = {
   React: require('react'),
   ReactRedux: require('react-redux'),
   Utils: require('../lib/util'),
+  Iconify: require('@iconify/react'),
+  Lodash: require('lodash')
 };
 
 window.plugins = {};
@@ -35,20 +38,14 @@ function registerPlugin(pluginId: string, pluginObj: Plugin) {
 window.registerPlugin = registerPlugin;
 
 export function initializePlugins() {
-  const context = require.context(
-    './plugins', // Context folder
-    true, // Include subdirectories
-    // Include one subdirectory level that has an index.js file
-    /^\.\/[a-zA-Z_\-0-9]+\/index.js$/
-  );
-
-  // Load the plugins
-  for (const module of context.keys()) {
-    context(module);
-  }
-
-  // Call initialize on every plugin
-  for (const plugin of Object.values(window.plugins)) {
-    plugin.initialize(new Registry());
-  }
+  fetch('/plugins/list')
+    .then((response) => response.json())
+    .then((pluginsScriptURLS) => {
+      loadScripts(pluginsScriptURLS || [], () => {
+      // Call initialize on every plugin
+        for (const plugin of Object.values(window.plugins)) {
+          plugin.initialize(new Registry());
+        }
+      });
+    });
 }
