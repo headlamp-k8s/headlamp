@@ -69,6 +69,7 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.4",
     "eslint-plugin-simple-import-sort": "^5.0.3",
+    "http-proxy-middleware": "^1.0.5",
     "monaco-editor-webpack-plugin": "^1.8.1"
   }
 }
