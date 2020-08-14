@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -24,6 +25,7 @@ type HeadlampConfig struct {
 	devMode        bool
 	staticDir      string
 	insecure       bool
+	pluginDir      string
 }
 
 type clientConfig struct {
@@ -108,6 +110,25 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	for _, cluster := range clusters {
 		config.addProxyForCluster(&cluster, r)
 	}
+
+	var pluginListURLS []string
+	files, err := ioutil.ReadDir(config.pluginDir)
+	if err != nil {
+		log.Println("Error: ", err)
+	}
+	for _, f := range files {
+		pluginFileURL := filepath.Join("plugins", f.Name(), "main.js")
+		pluginListURLS = append(pluginListURLS, pluginFileURL)
+	}
+	r.HandleFunc("/plugins/list", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		if err := json.NewEncoder(w).Encode(pluginListURLS); err != nil {
+			log.Println("Error encoding plugins list", err)
+		}
+	}).Methods("GET")
+
+	// Serve plugins
+	r.PathPrefix("/plugins/").Handler(http.StripPrefix("/plugins/", http.FileServer(http.Dir(config.pluginDir))))
 
 	// Configuration
 	r.HandleFunc("/config", clientConf.getConfig).Methods("GET")
