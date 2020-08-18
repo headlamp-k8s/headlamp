@@ -24,6 +24,7 @@
     "notistack": "^0.9.7",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-hotkeys-hook": "^2.2.2",
     "react-monaco-editor": "^0.32.1",
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
