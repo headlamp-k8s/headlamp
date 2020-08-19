@@ -14,6 +14,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React, { PropsWithChildren } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { generatePath } from 'react-router';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useClustersConf } from '../../lib/k8s';
@@ -42,6 +43,8 @@ export function ClusterTitle() {
   const cluster = getCluster();
   const clusters = useClustersConf();
   const [showChooser, setShowChooser] = React.useState(false);
+
+  useHotkeys('ctrl+l', () => setShowChooser(true));
 
   if (!cluster) {
     return null;
