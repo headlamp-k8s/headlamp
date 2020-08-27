@@ -12,9 +12,9 @@ import { getCluster } from '../util';
 import { ResourceClasses } from '.';
 import { KubeMetrics, KubeObjectClass, KubeObjectInterface } from './cluster';
 
-const {host, origin} = window.location;
+const backendServicesURL = (process.env.REACT_APP_BACKEND_SERVICES_URL as string);
 const isDev = process.env.NODE_ENV !== 'production';
-const BASE_HTTP_URL = (isDev && host === 'localhost:3000' ? 'http://localhost:4654/' : origin);
+const BASE_HTTP_URL = (isDev ? 'http://localhost:4654/' : backendServicesURL);
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
