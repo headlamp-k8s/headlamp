@@ -11,10 +11,11 @@ import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar, { drawerWidth, useSidebarItem } from './components/Sidebar';
+import { isElectron } from './helpers';
 import { getToken } from './lib/auth';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
 import { getCluster } from './lib/util';
@@ -132,6 +133,9 @@ function RouteSwitcher() {
 
 function App() {
   const classes = useStyle();
+  const Router = ({children} : React.PropsWithChildren<{}>) => isElectron() ?
+    <HashRouter>{children}</HashRouter> :
+    <BrowserRouter>{children}</BrowserRouter>;
 
   React.useEffect(() => {
     initializePlugins();

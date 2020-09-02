@@ -1,6 +1,7 @@
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import { matchPath } from 'react-router';
+import { isElectron } from '../helpers';
 import { FilterState } from '../redux/reducers/filter';
 import { useTypedSelector } from '../redux/reducers/reducers';
 import { KubeMetrics, KubeObjectInterface, Workload } from './k8s/cluster';
@@ -101,7 +102,8 @@ export function getClusterPrefixedPath(path?: string | null) {
 }
 
 export function getCluster(): string | null {
+  const urlPath = isElectron() ? window.location.hash.substr(1) : window.location.pathname;
   const clusterURLMatch =
-    matchPath<{cluster?: string}>(window.location.pathname, {path: getClusterPrefixedPath()});
+    matchPath<{cluster?: string}>(urlPath, {path: getClusterPrefixedPath()});
   return (!!clusterURLMatch && clusterURLMatch.params.cluster) || null;
 }
