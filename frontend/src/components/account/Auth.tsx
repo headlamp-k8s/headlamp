@@ -66,7 +66,7 @@ function Auth() {
         <DialogActions>
           {clusters.length > 1 &&
             <>
-              <Button href="/" color="primary">
+              <Button onClick = {() => history.replace('/')} color="primary">
                 Cancel
               </Button>
               <div style={{flex: '1 0 0'}} />
