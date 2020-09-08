@@ -4,16 +4,18 @@ import eyeOff from '@iconify/icons-mdi/eye-off';
 import menuDown from '@iconify/icons-mdi/menu-down';
 import menuUp from '@iconify/icons-mdi/menu-up';
 import { Icon } from '@iconify/react';
-import { Button } from '@material-ui/core';
+import { Button, InputLabel } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps } from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Input, { InputProps } from '@material-ui/core/Input';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField, { TextFieldProps } from '@material-ui/core/TextField';
+import { TextFieldProps } from '@material-ui/core/TextField';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
+import Editor from '@monaco-editor/react';
 import _ from 'lodash';
+import * as monaco from 'monaco-editor';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { KubeCondition, KubeContainer, KubeObject, KubeObjectInterface } from '../../lib/k8s/cluster';
@@ -330,24 +332,46 @@ export function SectionGrid(props: SectionGridProps) {
 }
 
 export function DataField(props: TextFieldProps) {
-  const { label, value, ...other } = props;
+  const { label, value } = props;
+  function handleEditorDidMount(_: () => {}, editor: monaco.editor.IStandaloneCodeEditor) {
+    const editorElement: HTMLElement | null = editor.getDomNode();
+    if (!editorElement) {
+      return;
+    }
+    const lineCount = editor.getModel()?.getLineCount() || 1;
+    if (lineCount <= 10) {
+      editorElement.style.height = '10vh';
+    } else {
+      editorElement.style.height = '40vh';
+    }
+    editor.layout();
+  }
+  let language = ((label as string).split('.').pop() as string);
+  if (language !== 'json') {
+    language = 'yaml';
+  }
   return (
-    <TextField
-      label={label}
-      InputProps={{
-        readOnly: true,
-      }}
-      InputLabelProps={{
-        shrink: true,
-        style: {fontSize: '1.3rem'}
-      }}
-      variant="outlined"
-      fullWidth
-      multiline
-      rowsMax="20"
-      value={value}
-      {...other}
-    />
+    <>
+      <Box borderTop={0} border={1}>
+        <Box display="flex">
+          <Box width="10%" borderTop={1} height={'1px'}>
+          </Box>
+          <Box pb={1} mt={-1} px={0.5}>
+            <InputLabel>{label}</InputLabel>
+          </Box>
+          <Box width="100%" borderTop={1} height={'1px'}>
+          </Box>
+        </Box>
+        <Box mt={1} px={1} pb={1}>
+          <Editor
+            value={value as string}
+            language={language}
+            editorDidMount={handleEditorDidMount}
+            options = {{'readOnly': true, 'lineNumbers': 'off'}}
+          />
+        </Box>
+      </Box>
+    </>
   );
 }
 
