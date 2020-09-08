@@ -133,7 +133,7 @@ function EventsSection(props: { events: Event[] | null }) {
           :
           []
         }
-        data={(events || []).sort(sortFunc)}
+        data={events ? events.sort(sortFunc) : null}
       />
     </SectionBox>
   );
