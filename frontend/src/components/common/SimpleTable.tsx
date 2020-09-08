@@ -1,5 +1,8 @@
+import refreshIcon from '@iconify/icons-mdi/refresh';
 import squareIcon from '@iconify/icons-mdi/square';
-import { InlineIcon } from '@iconify/react';
+import { Icon, InlineIcon } from '@iconify/react';
+import { Button } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -63,6 +66,7 @@ export interface SimpleTableProps {
 export default function SimpleTable(props: SimpleTableProps) {
   const {columns, data, filterFunction = null, emptyMessage = null} = props;
   const [page, setPage] = React.useState(0);
+  const [currentData, setCurrentData] = React.useState(data);
   const rowsPerPageOptions = props.rowsPerPage || [5, 10, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
   const classes = useTableStyle();
@@ -77,30 +81,55 @@ export default function SimpleTable(props: SimpleTableProps) {
   }
 
   React.useEffect(() => {
-    setPage(0);
+    if (currentData === data) {
+      if (page !== 0) {
+        setPage(0);
+      }
+      return;
+    }
+
+    // If the currentData is not up to date and we are in the first page, then update
+    // it directly. Otherwise it will require user's intervention.
+    if ((!currentData || currentData.length === 0) || page === 0) {
+      setCurrentData(data);
+    }
   },
-  [data]);
+  // eslint-disable-next-line
+  [data, currentData]);
 
   function getPagedRows() {
     const startIndex = page * rowsPerPage;
     return filteredData.slice(startIndex, startIndex + rowsPerPage);
   }
 
-  if (data === null) {
+  if (currentData === null) {
     return <Loader />;
   }
 
-  let filteredData = data;
+  let filteredData = currentData;
 
   if (filterFunction) {
-    filteredData = data.filter(filterFunction);
+    filteredData = currentData.filter(filterFunction);
   }
 
   return (
-    (!data || data.length === 0) ?
+    (!currentData || currentData.length === 0) ?
       <Empty>{emptyMessage || 'No data to be shown.'}</Empty>
       :
       <React.Fragment>
+        { // Show a refresh button if the data is not up to date, so we allow the user to keep
+          // reading the current data without "losing" it or being sent to the first page
+          (currentData !== data) &&
+          <Box textAlign="center" p={2}>
+            <Button
+              variant="contained"
+              startIcon={<Icon icon={refreshIcon} /> }
+              onClick={() => { setCurrentData(data); }}
+            >
+              Refresh
+            </Button>
+          </Box>
+        }
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
