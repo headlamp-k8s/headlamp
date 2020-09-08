@@ -115,11 +115,12 @@ Menu.setApplicationMenu(menu);
 const isDev = process.mainModule.filename.indexOf('app.asar') === -1 ||
     process.mainModule.filename.indexOf('app') === -1;
 
+let serverProcess = null;
 function createWindow () {
   let serverFilePath;
   if (!isDev) {
     serverFilePath = path.join(process.resourcesPath, './electron/server');
-    spawn(serverFilePath);
+    serverProcess = spawn(serverFilePath);
   }
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({
@@ -136,6 +137,10 @@ function createWindow () {
 
 app.on('ready', createWindow);
 app.on('window-all-closed', function () {
+  if (serverProcess) {
+    serverProcess.stdin.pause();
+    serverProcess.kill();
+  }
   if (process.platform !== 'darwin') {
     app.quit();
   }
