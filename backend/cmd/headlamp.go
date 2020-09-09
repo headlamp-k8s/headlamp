@@ -117,7 +117,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		log.Println("Error: ", err)
 	}
 	for _, f := range files {
-		pluginFileURL := filepath.Join("plugins", f.Name(), "main.js")
+		pluginFileURL := filepath.Join("/plugins", f.Name(), "main.js")
 		pluginListURLS = append(pluginListURLS, pluginFileURL)
 	}
 	r.HandleFunc("/plugins/list", func(w http.ResponseWriter, r *http.Request) {
