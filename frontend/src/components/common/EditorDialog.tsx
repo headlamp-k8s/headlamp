@@ -11,10 +11,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
+import {ControlledEditor} from '@monaco-editor/react';
 import * as yaml from 'js-yaml';
 import _ from 'lodash';
+import * as Monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import React from 'react';
-import MonacoEditor from 'react-monaco-editor';
 import getDocDefinitions from '../../lib/docs';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import ConfirmButton from './ConfirmButton';
@@ -109,16 +110,18 @@ export default function EditorDialog(props: EditorDialogProps) {
     return onSave === null;
   }
 
-  function onChange(newValue: string) {
-    setCode(newValue);
+  function onChange(ev: Monaco.editor.IModelContentChangedEvent,
+                    newValue: string | undefined): string | undefined {
+    setCode(newValue as string);
 
-    if (error && getObjectFromCode(newValue)) {
+    if (error && getObjectFromCode(newValue as string)) {
       setError('');
     }
 
     if (onEditorChanged) {
-      onEditorChanged(newValue);
+      onEditorChanged(newValue as string);
     }
+    return newValue;
   }
 
   function getObjectFromCode(code: string): KubeObjectInterface | null {
@@ -167,13 +170,13 @@ export default function EditorDialog(props: EditorDialogProps) {
   function makeEditor() {
     return (
       <Box paddingTop={2} height="100%">
-        <MonacoEditor
+        <ControlledEditor
           language="yaml"
           theme="vs-dark"
           value={code}
           options={editorOptions}
           onChange={onChange}
-          height="600"
+          height="600px"
         />
       </Box>
     );
