@@ -2,6 +2,8 @@
   "name": "headlamp",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
+  "productName": "Headlamp",
   "dependencies": {
     "@material-ui/core": "^4.7.2",
     "@material-ui/lab": "^4.0.0-alpha.38",
@@ -42,7 +44,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint -c .eslintrc.yml --ext .js,.ts,.tsx src/"
+    "lint": "eslint -c .eslintrc.yml --ext .js,.ts,.tsx src/ ../app/electron"
   },
   "browserslist": {
     "production": [
