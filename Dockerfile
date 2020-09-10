@@ -21,5 +21,8 @@ FROM $IMAGE_BASE
 COPY --from=base-build /headlamp/backend/server /headlamp/server
 COPY --from=base-build /headlamp/frontend/build /headlamp/frontend
 
+# Default plugins (may be empty)
+COPY --from=base-build /headlamp/backend/plugins /headlamp/plugins
+
 EXPOSE 4654
 ENTRYPOINT ["/headlamp/server", "-html-static-dir", "/headlamp/frontend"]
