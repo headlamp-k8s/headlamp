@@ -1,3 +1,6 @@
+import ArrowTopRightIcon from '@iconify/icons-mdi/arrow-top-right';
+import { InlineIcon } from '@iconify/react';
+import { Button } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
@@ -163,6 +166,14 @@ function App() {
                   <div style={{flex: '1 0 0'}} />
                   <ClusterTitle />
                   <div style={{flex: '1 0 0'}} />
+                  <Button
+                    href="http://grafana.demo-sesame.dev.lokomotive-k8s.net/"
+                    target="_blank"
+                    color="primary"
+                    endIcon={<InlineIcon icon={ArrowTopRightIcon} />}
+                  >
+                    Monitoring
+                  </Button>
                 </Toolbar>
               </AppBar>
               <Sidebar />

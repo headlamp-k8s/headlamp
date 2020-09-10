@@ -1,5 +1,6 @@
 import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
 import { Icon } from '@iconify/react';
+import { Box } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
@@ -87,8 +88,8 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.common.black,
   },
   logo: {
-    height: '24px',
-    width: 'auto',
+    height: '28px',
+    width: '100%',
     marginLeft: 'auto',
     marginRight: 'auto',
   },
@@ -150,9 +151,10 @@ function ClusterList(props: ClusterListProps) {
       container
       alignItems="center"
       justify="space-around"
+      spacing={2}
     >
       {clusters.map((cluster, i) =>
-        <Grid item key={cluster.name} xs={6} sm={3}>
+        <Grid item key={cluster.name}>
           <ClusterButton
             cluster={cluster}
             onClick={() => onButtonClick(cluster)}
@@ -283,10 +285,12 @@ function Chooser(props: ClusterDialogProps) {
           >
             Choose a cluster
           </DialogContentText>
-          <ClusterList
-            clusters={clusters}
-            onButtonClick={handleButtonClick}
-          />
+          <Box>
+            <ClusterList
+              clusters={clusters}
+              onButtonClick={handleButtonClick}
+            />
+          </Box>
         </React.Fragment>
       }
     </ClusterDialog>
