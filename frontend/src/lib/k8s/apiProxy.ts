@@ -7,14 +7,15 @@
  * Copyright © 2020 Kinvolk GmbH
  */
 
+import { isElectron } from '../../helpers';
 import { getToken, logout } from '../auth';
 import { getCluster } from '../util';
 import { ResourceClasses } from '.';
 import { KubeMetrics, KubeObjectClass, KubeObjectInterface } from './cluster';
 
-const backendServicesURL = (process.env.REACT_APP_BACKEND_SERVICES_URL as string);
 const isDev = process.env.NODE_ENV !== 'production';
-const BASE_HTTP_URL = (isDev ? 'http://localhost:4654/' : backendServicesURL);
+const backendServicesURL = isElectron() || isDev ? 'http://localhost:4654/' : window.location.origin;
+const BASE_HTTP_URL = backendServicesURL;
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
