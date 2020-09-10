@@ -299,6 +299,8 @@ function DocsViewer(props: {docSpecs: any}) {
   const [docsError, setDocsError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
+    setDocsError(null);
+
     if (docSpecs.error) {
       setDocsError(`Cannot load documentation: ${docSpecs.error}`);
       return;
