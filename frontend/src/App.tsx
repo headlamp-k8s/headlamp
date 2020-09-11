@@ -167,7 +167,7 @@ function App() {
                   <ClusterTitle />
                   <div style={{flex: '1 0 0'}} />
                   <Button
-                    href="http://grafana.demo-sesame.dev.lokomotive-k8s.net/"
+                    href="https://grafana.demo-sesame.dev.lokomotive-k8s.net/"
                     target="_blank"
                     color="primary"
                     endIcon={<InlineIcon icon={ArrowTopRightIcon} />}
