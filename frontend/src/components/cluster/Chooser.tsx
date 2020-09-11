@@ -150,9 +150,10 @@ function ClusterList(props: ClusterListProps) {
       container
       alignItems="center"
       justify="space-around"
+      spacing={2}
     >
       {clusters.map((cluster, i) =>
-        <Grid item key={cluster.name} xs={6} sm={3}>
+        <Grid item key={cluster.name}>
           <ClusterButton
             cluster={cluster}
             onClick={() => onButtonClick(cluster)}
