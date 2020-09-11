@@ -8,7 +8,7 @@
   "scripts": {
     "copy-server-binary": "cd ../ && make backend && cp -r ./backend/server ./app/electron/",
     "start": "npm run copy-server-binary && cd ../ && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
-    "build": "npm run copy-server-binary && cd ../frontend/ && npm run build && cp -r ../app/electron/. build/electron",
+    "build": "npm run copy-server-binary && cd ../frontend/ && export PUBLIC_URL='.' npm run build && cp -r ../app/electron/. build/electron",
     "package": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build --mac --win --linux -c.extraMetadata.main=build/electron/main.js --publish never",
     "serve-dev": "export ELECTRON_START_URL=http://localhost:3000 && electron ."
   },
