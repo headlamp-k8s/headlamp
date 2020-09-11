@@ -20,10 +20,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
 import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from 'react-router-dom';
+import semver from 'semver';
 import { getVersion } from '../lib/k8s';
 import { StringDict } from '../lib/k8s/cluster';
 import { createRouteURL, getRoute } from '../lib/router';
@@ -35,6 +37,9 @@ import store from '../redux/stores/store';
 import { ReactComponent as LogoLight } from '../resources/logo-light.svg';
 import { NameValueTable } from './common';
 import CreateButton from './common/CreateButton';
+
+const versionSnackbarHideTimeout = 5000; // ms
+const versionFetchInterval = 60000; // ms
 
 export const drawerWidth = 330;
 
@@ -199,7 +204,7 @@ const useVersionButtonStyle = makeStyles(theme => ({
 
 function VersionButton() {
   const location = useLocation();
-
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const classes = useVersionButtonStyle();
   const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
   const [cluster, setCluster] = React.useState(getCluster());
@@ -235,11 +240,45 @@ function VersionButton() {
   }
 
   React.useEffect(() => {
-    if (!clusterVersion) {
+    function fetchVersion() {
       getVersion()
-        .then((results: StringDict) => setClusterVersion(results))
+        .then((results: StringDict) => {
+          setClusterVersion(results);
+          let versionChange = 0;
+          if (clusterVersion && results && results.gitVersion) {
+            versionChange = semver.compare(results.gitVersion, clusterVersion.gitVersion);
+
+            let msg = '';
+            if (versionChange > 0) {
+              msg = `Cluster version upgraded to ${results.gitVersion}`;
+            } else if (versionChange < 0) {
+              msg = `Cluster version downgraded to ${results.gitVersion}`;
+            }
+
+            if (msg) {
+              enqueueSnackbar(msg, {
+                key: 'version',
+                preventDuplicate: true,
+                autoHideDuration: versionSnackbarHideTimeout,
+                variant: 'info',
+              });
+            }
+          }
+        })
         .catch((error: Error) => console.error('Getting the cluster version:', error));
     }
+
+    if (!clusterVersion) {
+      fetchVersion();
+    }
+
+    let intervalHandler = setInterval(() => {
+      fetchVersion();
+    }, versionFetchInterval);
+
+    return function cleanup() {
+      clearInterval(intervalHandler);
+    };
   },
   [clusterVersion]);
 
