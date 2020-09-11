@@ -87,8 +87,8 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.common.black,
   },
   logo: {
-    height: '24px',
-    width: 'auto',
+    height: '28px',
+    width: '100%',
     marginLeft: 'auto',
     marginRight: 'auto',
   },
