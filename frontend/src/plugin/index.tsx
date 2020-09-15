@@ -58,7 +58,7 @@ function loadDevPlugins() {
     './plugins', // Context folder
     true, // Include subdirectories
     // Include one subdirectory level that has an index.js file
-    /^\.\/[a-zA-Z_\-0-9]+\/index.js$/
+    /^\.\/[a-zA-Z_\-0-9]+\/index\.(js|ts|tsx)+$/
   );
 
   // Load the dev / local plugins
