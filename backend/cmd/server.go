@@ -12,7 +12,7 @@ func main() {
 	insecure := flag.Bool("insecure-ssl", false, "Accept/Ignore all server SSL certificates")
 	// @todo: Make this a uint and validate the values
 	port := flag.String("port", "4654", "Port to listen from")
-	pluginDir := flag.String("pluginDir", "./backend/plugins", "Specify the plugins directory to build the backend with")
+	pluginDir := flag.String("pluginDir", "./plugins", "Specify the plugins directory to build the backend with")
 
 	flag.Parse()
 
