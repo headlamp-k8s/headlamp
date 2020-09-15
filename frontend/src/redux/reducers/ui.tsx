@@ -24,7 +24,7 @@ export interface UIState {
   views: {
     details: {
       headerActions: {
-        [name: string]: (...args: any[]) => React.ReactNode | null;
+        [name: string]: HeaderActionFunc;
       };
     };
   };
