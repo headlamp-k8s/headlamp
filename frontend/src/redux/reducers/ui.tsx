@@ -84,7 +84,7 @@ function reducer(state = INITIAL_STATE, action: Action) {
     }
     case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
       const headerActions = {...newFilters.views.details.headerActions};
-      headerActions[action.actionName as string] = action.action;
+      headerActions[action.name as string] = action.action;
       newFilters.views.details.headerActions = headerActions;
       break;
     }
