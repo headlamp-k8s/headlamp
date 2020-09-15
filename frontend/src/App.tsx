@@ -131,6 +131,29 @@ function RouteSwitcher() {
   );
 }
 
+function TopBar() {
+  const classes = useStyle();
+  const appBarActions = useTypedSelector(state => state.ui.views.appBar.actions);
+
+  return (
+    <AppBar
+      position="fixed"
+      className={classes.appBar}
+      elevation={1}
+    >
+      <Toolbar>
+        <div style={{flex: '1 0 0'}} />
+        <ClusterTitle />
+        <div style={{flex: '1 0 0'}} />
+        { // @todo: Use a grid to compose the toolbar
+          Object.values(appBarActions).map((action, i) =>
+            <React.Fragment key={i}>{action()}</React.Fragment>)
+        }
+      </Toolbar>
+    </AppBar>
+  );
+}
+
 function App() {
   const classes = useStyle();
   const Router = ({children} : React.PropsWithChildren<{}>) => isElectron() ?
@@ -154,17 +177,7 @@ function App() {
           <Router>
             <div className={classes.root}>
               <CssBaseline />
-              <AppBar
-                position="fixed"
-                className={classes.appBar}
-                elevation={1}
-              >
-                <Toolbar>
-                  <div style={{flex: '1 0 0'}} />
-                  <ClusterTitle />
-                  <div style={{flex: '1 0 0'}} />
-                </Toolbar>
-              </AppBar>
+              <TopBar />
               <Sidebar />
               <main className={classes.content}>
                 <div className={classes.toolbar} />
