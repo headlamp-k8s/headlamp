@@ -1,4 +1,4 @@
-export default function loadScripts(array: string[], callback: () => void) {
+export default function loadScripts(array: string[], onLoadFinished: () => void) {
   var loader = function(src: string, handler: () => void) {
     const script: HTMLScriptElement = document.createElement('script');
     script.src = src;
@@ -13,7 +13,7 @@ export default function loadScripts(array: string[], callback: () => void) {
     if (array.length !== 0) {
       loader(array.shift() as string, run);
     } else {
-      callback && callback();
+      onLoadFinished && onLoadFinished();
     }
   })();
 }
