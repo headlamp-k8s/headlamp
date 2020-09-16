@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const webpack = require('webpack');
+const config = require('../lib/webpack.config');
+
+webpack(config, (err, stats) => {
+  if (err && err.message) {
+    console.log(err);
+  }
+
+  console.log(stats)
+});
