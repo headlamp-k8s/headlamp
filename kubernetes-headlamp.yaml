@@ -19,12 +19,12 @@ spec:
         args:
           - "-in-cluster"
         ports:
-        - containerPort: 4654
+        - containerPort: 4466
         livenessProbe:
           httpGet:
             scheme: HTTP
             path: /
-            port: 4654
+            port: 4466
           initialDelaySeconds: 30
           timeoutSeconds: 30
       nodeSelector:
@@ -39,6 +39,6 @@ metadata:
 spec:
   ports:
     - port: 80
-      targetPort: 4654
+      targetPort: 4466
   selector:
     k8s-app: headlamp

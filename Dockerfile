@@ -21,5 +21,5 @@ FROM $IMAGE_BASE
 COPY --from=base-build /headlamp/backend/server /headlamp/server
 COPY --from=base-build /headlamp/frontend/build /headlamp/frontend
 
-EXPOSE 4654
+EXPOSE 4466
 ENTRYPOINT ["/headlamp/server", "-html-static-dir", "/headlamp/frontend"]
