@@ -1,8 +1,11 @@
 package main
 
 import (
+	"context"
 	"log"
 
+	oidc "github.com/coreos/go-oidc"
+	"golang.org/x/oauth2"
 	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
@@ -13,6 +16,20 @@ type Context struct {
 	cluster  Cluster
 	authInfo *clientcmdapi.AuthInfo
 }
+
+type OauthConfig struct {
+	Config   *oauth2.Config
+	Verifier *oidc.IDTokenVerifier
+	Ctx      context.Context
+}
+
+type OidcConfig struct {
+	ClientID     string
+	ClientSecret string
+	IdpIssuerURL string
+}
+
+var oidcConfigCache = make(map[string]*OidcConfig)
 
 func GetContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 	config, err := clientcmd.LoadFromFile(kubeConfigPath)
@@ -30,7 +47,22 @@ func GetContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 		}
 
 		authInfo := config.AuthInfos[value.AuthInfo]
-		cluster := Cluster{key, clusterConfig.Server, clusterConfig}
+		authType := ""
+
+		authProvider := authInfo.AuthProvider
+		if authProvider != nil {
+			authType = "oidc"
+
+			var oidcConfig OidcConfig
+			oidcConfig.ClientID = authProvider.Config["client-id"]
+			oidcConfig.ClientSecret = authProvider.Config["client-secret"]
+			oidcConfig.IdpIssuerURL = authProvider.Config["idp-issuer-url"]
+
+			oidcConfigCache[key] = &oidcConfig
+		}
+
+		cluster := Cluster{key, clusterConfig.Server, clusterConfig, authType}
+
 		contexts = append(contexts, Context{key, cluster, authInfo})
 	}
 
@@ -73,8 +105,8 @@ func (c *Context) getClientKeyData() []byte {
 	return nil
 }
 
-func GetOwnContext() (*Context, error) {
-	cluster, err := GetOwnCluster()
+func GetOwnContext(config *HeadlampConfig) (*Context, error) {
+	cluster, err := GetOwnCluster(config)
 	if err != nil {
 		return nil, err
 	}

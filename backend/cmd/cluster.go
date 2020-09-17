@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 
@@ -13,15 +14,38 @@ import (
 const OwnClusterName = "main"
 
 type Cluster struct {
-	Name   string `json:"name"`
-	Server string `json:"server,omitempty"`
-	config *clientcmdapi.Cluster
+	Name     string `json:"name"`
+	Server   string `json:"server,omitempty"`
+	config   *clientcmdapi.Cluster
+	AuthType string `json:"auth_type"`
 }
 
-func GetOwnCluster() (*Cluster, error) {
+func GetClusterOidcConfig(clusterName string) (*OidcConfig, error) {
+	if oidcConfig, ok := oidcConfigCache[clusterName]; ok {
+		return oidcConfig, nil
+	}
+
+	return nil, fmt.Errorf("couln't find auth config for cluster %s", clusterName)
+}
+
+func GetOwnCluster(headlampConfig *HeadlampConfig) (*Cluster, error) {
 	config, err := rest.InClusterConfig()
 	if err != nil {
 		return nil, err
+	}
+
+	authProvider := ""
+
+	if headlampConfig.oidcIdpIssuerURL != "" {
+		authProvider = "oidc"
+
+		var oidcConfig OidcConfig
+
+		oidcConfig.ClientID = headlampConfig.oidcClientID
+		oidcConfig.ClientSecret = headlampConfig.oidcClientSecret
+		oidcConfig.IdpIssuerURL = headlampConfig.oidcIdpIssuerURL
+
+		oidcConfigCache[OwnClusterName] = &oidcConfig
 	}
 
 	cluster := &clientcmdapi.Cluster{
@@ -30,7 +54,7 @@ func GetOwnCluster() (*Cluster, error) {
 		CertificateAuthorityData: config.TLSClientConfig.CAData,
 	}
 
-	return &Cluster{Name: OwnClusterName, Server: config.Host, config: cluster}, nil
+	return &Cluster{Name: OwnClusterName, Server: config.Host, config: cluster, AuthType: authProvider}, nil
 }
 
 func (c *Cluster) getServer() *string {
