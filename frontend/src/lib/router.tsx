@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 import { generatePath } from 'react-router';
-import Auth from '../components/account/Auth';
+import AuthToken from '../components/account/Auth';
+import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
 import Overview from '../components/cluster/Overview';
 import ConfigDetails from '../components/configmap/Details';
@@ -15,6 +16,7 @@ import NamespaceDetails from '../components/namespace/Details';
 import NamespacesList from '../components/namespace/List';
 import NodeDetails from '../components/node/Details';
 import NodeList from '../components/node/List';
+import OIDCAuth from '../components/oidcauth';
 import PodDetails from '../components/pod/Details';
 import PodList from '../components/pod/List';
 import ReplicaSetList from '../components/replicaset/List';
@@ -315,13 +317,28 @@ export const ROUTES: {
     sidebar: 'secrets',
     component: () => <SecretDetails />
   },
+  token: {
+    path: '/token',
+    exact: true,
+    name: 'Token',
+    sidebar: null,
+    noAuthRequired: true,
+    component: () => <AuthToken/>
+  },
+  oidcAuth: {
+    path: '/auth',
+    name: 'OidcAuth',
+    sidebar: null,
+    noAuthRequired: true,
+    component: () => <OIDCAuth/>
+  },
   login: {
     path: '/login',
     exact: true,
     name: 'Login',
     sidebar: null,
     noAuthRequired: true,
-    component: () => <Auth />
+    component: () => <AuthChooser />
   },
   crds: {
     path: '/crds',
