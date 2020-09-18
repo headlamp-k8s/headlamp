@@ -137,7 +137,7 @@ export const ROUTES: {
     component: () => <PersistentVolumeClaimDetails />
   },
   workloads: {
-    path: '/workload',
+    path: '/workloads',
     exact: true,
     name: 'Workloads',
     sidebar: 'workloads',
