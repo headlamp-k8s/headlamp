@@ -54,7 +54,10 @@ const resourceClassesDict: {
 } = {};
 
 classList.forEach(cls => {
-  resourceClassesDict[cls.className] = cls;
+  // Ideally this should just be the class name, but until we ensure the class name is consistent
+  // (in what comes to the capitalization), we use this lazy approach.
+  const className: string = cls.className.charAt(0).toUpperCase() + cls.className.slice(1);
+  resourceClassesDict[className] = cls;
 });
 
 export const ResourceClasses = resourceClassesDict;
