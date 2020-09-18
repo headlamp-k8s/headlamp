@@ -25,6 +25,10 @@ class Deployment extends makeKubeObject<KubeDeployment>('Deployment') {
   get status() {
     return this.getValue('status');
   }
+
+  get listRoute() {
+    return 'workloads';
+  }
 }
 
 export default Deployment;

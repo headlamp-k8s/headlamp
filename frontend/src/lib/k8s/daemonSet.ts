@@ -27,6 +27,10 @@ class DaemonSet extends makeKubeObject<KubeDaemonSet>('DaemonSet') {
   get status() {
     return this.jsonData!.status;
   }
+
+  get listRoute() {
+    return 'workloads';
+  }
 }
 
 export default DaemonSet;

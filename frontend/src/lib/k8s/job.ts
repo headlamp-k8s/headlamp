@@ -21,6 +21,10 @@ class Job extends makeKubeObject<KubeJob>('Job') {
   get status() {
     return this.jsonData!.status;
   }
+
+  get listRoute() {
+    return 'workloads';
+  }
 }
 
 export default Job;
