@@ -1,4 +1,4 @@
-import { Action, UI_DETAILS_VIEW_SET_HEADER_ACTION, UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
+import { Action, HeaderActionFunc, UI_APP_BAR_SET_ACTION, UI_DETAILS_VIEW_SET_HEADER_ACTION, UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
 
 export interface SidebarEntry {
   name: string;
@@ -24,7 +24,12 @@ export interface UIState {
   views: {
     details: {
       headerActions: {
-        [name: string]: (...args: any[]) => React.ReactNode | null;
+        [name: string]: HeaderActionFunc;
+      };
+    };
+    appBar: {
+      actions: {
+        [name: string]: HeaderActionFunc;
       };
     };
   };
@@ -44,7 +49,12 @@ export const INITIAL_STATE: UIState = {
       headerActions: {
         // action-name -> action-callback
       }
-    }
+    },
+    appBar: {
+      actions: {
+        // action-name -> action-callback
+      },
+    },
   }
 };
 
@@ -84,8 +94,14 @@ function reducer(state = INITIAL_STATE, action: Action) {
     }
     case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
       const headerActions = {...newFilters.views.details.headerActions};
-      headerActions[action.actionName as string] = action.action;
+      headerActions[action.action as string] = action.action;
       newFilters.views.details.headerActions = headerActions;
+      break;
+    }
+    case UI_APP_BAR_SET_ACTION: {
+      const appBarActions = {...newFilters.views.appBar.actions};
+      appBarActions[action.name as string] = action.action;
+      newFilters.views.appBar.actions = appBarActions;
       break;
     }
     default:

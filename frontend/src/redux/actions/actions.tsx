@@ -13,6 +13,7 @@ export const UI_SIDEBAR_SET_VISIBLE = 'UI_SIDEBAR_SET_VISIBLE';
 export const UI_SIDEBAR_SET_ITEM = 'UI_SIDEBAR_SET_ITEM';
 export const UI_ROUTER_SET_ROUTE = 'UI_ROUTER_SET_ROUTE';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
+export const UI_APP_BAR_SET_ACTION = 'UI_APP_BAR_SET_ACTION';
 
 export interface ClusterActionButton {
   label: string;
@@ -100,6 +101,10 @@ export function setRoute(routeSpec: any) {
 
 export function setDetailsViewHeaderAction(actionName: string, actionFunc: HeaderActionFunc) {
   return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, name: actionName, action: actionFunc};
+}
+
+export function setAppBarAction(actionName: string, actionFunc: HeaderActionFunc) {
+  return { type: UI_APP_BAR_SET_ACTION, name: actionName, action: actionFunc};
 }
 
 export function setConfig(config: object) {
