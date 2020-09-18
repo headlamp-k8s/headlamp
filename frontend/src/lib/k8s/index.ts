@@ -21,6 +21,7 @@ import PersistentVolumeClaim from './persistentVolumeClaim';
 import Pod from './pod';
 import ReplicaSet from './replicaSet';
 import Role from './role';
+import RoleBinding from './roleBinding';
 import Service from './service';
 import ServiceAccount from './serviceAccount';
 import StatefulSet from './statefulSet';
@@ -43,6 +44,7 @@ const classList = [
   Pod,
   ReplicaSet,
   Role,
+  RoleBinding,
   Service,
   ServiceAccount,
   StatefulSet,
