@@ -14,7 +14,7 @@ import { ResourceClasses } from '.';
 import { KubeMetrics, KubeObjectClass, KubeObjectInterface } from './cluster';
 
 const isDev = process.env.NODE_ENV !== 'production';
-const backendServicesURL = isElectron() || isDev ? 'http://localhost:4654/' : window.location.origin;
+const backendServicesURL = isElectron() || isDev ? 'http://localhost:4466/' : window.location.origin;
 const BASE_HTTP_URL = backendServicesURL;
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
