@@ -368,6 +368,7 @@ export function DataField(props: TextFieldProps) {
             language={language}
             editorDidMount={handleEditorDidMount}
             options = {{'readOnly': true, 'lineNumbers': 'off'}}
+            theme="vs-dark"
           />
         </Box>
       </Box>
