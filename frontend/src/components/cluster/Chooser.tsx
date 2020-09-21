@@ -44,7 +44,7 @@ export function ClusterTitle() {
   const clusters = useClustersConf();
   const [showChooser, setShowChooser] = React.useState(false);
 
-  useHotkeys('ctrl+l', () => setShowChooser(true));
+  useHotkeys('ctrl+shift+l', () => setShowChooser(true));
 
   if (!cluster) {
     return null;

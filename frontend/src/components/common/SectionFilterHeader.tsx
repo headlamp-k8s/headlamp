@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import React from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { useDispatch } from 'react-redux';
 import { resetFilter, setSearchFilter } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -32,6 +33,12 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
     dispatch(resetFilter());
     setShowFilters(false);
   }
+
+  useHotkeys('ctrl+shift+f', () => {
+    if (!noSearch || !noNamespaceFilter) {
+      setShowFilters(true);
+    }
+  });
 
   React.useEffect(() => {
     // We don't want the search to be used globally, but we're using Redux with it because
