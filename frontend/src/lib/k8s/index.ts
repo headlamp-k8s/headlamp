@@ -21,6 +21,7 @@ import PersistentVolumeClaim from './persistentVolumeClaim';
 import Pod from './pod';
 import ReplicaSet from './replicaSet';
 import Role from './role';
+import RoleBinding from './roleBinding';
 import Service from './service';
 import ServiceAccount from './serviceAccount';
 import StatefulSet from './statefulSet';
@@ -43,6 +44,7 @@ const classList = [
   Pod,
   ReplicaSet,
   Role,
+  RoleBinding,
   Service,
   ServiceAccount,
   StatefulSet,
@@ -54,7 +56,10 @@ const resourceClassesDict: {
 } = {};
 
 classList.forEach(cls => {
-  resourceClassesDict[cls.className] = cls;
+  // Ideally this should just be the class name, but until we ensure the class name is consistent
+  // (in what comes to the capitalization), we use this lazy approach.
+  const className: string = cls.className.charAt(0).toUpperCase() + cls.className.slice(1);
+  resourceClassesDict[className] = cls;
 });
 
 export const ResourceClasses = resourceClassesDict;
