@@ -18,6 +18,7 @@ spec:
         image: joaquimrocha/headlamp:latest
         args:
           - "-in-cluster"
+          - "-plugin-dir=/headlamp/plugins"
         ports:
         - containerPort: 4466
         livenessProbe:
