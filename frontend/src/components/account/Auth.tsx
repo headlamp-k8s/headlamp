@@ -8,12 +8,15 @@ import Snackbar from '@material-ui/core/Snackbar';
 import TextField from '@material-ui/core/TextField';
 import { Location } from 'history';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { setToken } from '../../lib/auth';
 import { useClustersConf } from '../../lib/k8s';
-import { post } from '../../lib/k8s/apiProxy';
+import { testAuth } from '../../lib/k8s/apiProxy';
 import { getCluster } from '../../lib/util';
+import { setConfig } from '../../redux/actions/actions';
 import { ClusterDialog } from '../cluster/Chooser';
+import { Loader } from '../common';
 
 interface ReactRouterLocationStateIface {
   from?: Location;
@@ -21,11 +24,14 @@ interface ReactRouterLocationStateIface {
 
 function Auth() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const history = useHistory();
   const clusterConf = useClustersConf();
   const {from = { pathname: '/' }} = location.state as ReactRouterLocationStateIface;
   const [token, setToken] = React.useState('');
+  const [testingAuth, setTestingAuth] = React.useState(false);
   const [showError, setShowError] = React.useState(false);
+  const [needsToken, setNeedsToken] = React.useState<null | boolean>(null);
   const clusters = useClustersConf();
 
   function onAuthClicked() {
@@ -40,6 +46,40 @@ function Auth() {
     });
   }
 
+  React.useEffect(() => {
+    if (needsToken === null) {
+      const clusterName = getCluster();
+      if (!clusterName || testingAuth) {
+        return;
+      }
+
+      let cluster = clusterConf[clusterName];
+      console.log(clusterConf)
+      if (!cluster || testingAuth)
+        return;
+
+      setTestingAuth(true);
+      testAuth()
+        .then(() => {
+          console.log('SUCCESS')
+          setNeedsToken(false);
+          cluster!.useToken = false;
+          dispatch(setConfig({clusters: {...clusterConf}}))
+          history.replace(from);
+        })
+        .catch((err) => {
+          console.log('FAIL', err)
+          setNeedsToken(true);
+          cluster!.useToken = true;
+          dispatch(setConfig({clusters: {...clusterConf}}))
+        })
+        .finally(() => {
+          setTestingAuth(false);
+        });
+    }
+  },
+  [needsToken, clusterConf, testingAuth]);
+
   return (
     <Box>
       <ClusterDialog
@@ -47,7 +87,13 @@ function Auth() {
         disableEscapeKeyDown
         disableBackdropClick
       >
-        <DialogTitle id="responsive-dialog-title">{clusterConf.length > 1 ? `Authentication: ${getCluster()}` : 'Authentication'}</DialogTitle>
+        {needsToken === null ?
+          <Loader />
+        :
+        <>
+        <DialogTitle id="responsive-dialog-title">
+          {Object.keys(clusterConf).length > 1 ? `Authentication: ${getCluster()}` : 'Authentication'}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please paste your authentication token.
@@ -64,7 +110,7 @@ function Auth() {
           />
         </DialogContent>
         <DialogActions>
-          {clusters.length > 1 &&
+          {Object.keys(clusters).length > 1 &&
             <>
               <Button onClick = {() => history.replace('/')} color="primary">
                 Cancel
@@ -76,6 +122,8 @@ function Auth() {
             Authenticate
           </Button>
         </DialogActions>
+        </>
+        }
       </ClusterDialog>
       <Snackbar
         anchorOrigin={{
@@ -104,8 +152,7 @@ async function loginWithToken(token: string) {
 
     setToken(cluster, token);
 
-    const spec = {namespace: 'default'};
-    await post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', {spec}, false);
+    await testAuth();
 
     return 200;
   } catch (err) {

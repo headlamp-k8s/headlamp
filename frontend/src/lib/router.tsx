@@ -357,7 +357,7 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
     cluster = getCluster();
     if (!cluster) {
       const clusters = store.getState().config.clusters;
-      cluster = clusters.length > 0 ? clusters[0].name : null;
+      cluster = Object.keys(clusters).length > 0 ? clusters[0].name : null;
     }
   }
   const fullParams = {

@@ -7,10 +7,11 @@
  * Copyright © 2020 Kinvolk GmbH
  */
 
+import { ResourceClasses } from '.';
 import { isElectron } from '../../helpers';
+import store from '../../redux/stores/store';
 import { getToken, logout } from '../auth';
 import { getCluster } from '../util';
-import { ResourceClasses } from '.';
 import { KubeMetrics, KubeObjectClass, KubeObjectInterface } from './cluster';
 
 const isDev = process.env.NODE_ENV !== 'production';
@@ -320,9 +321,13 @@ function connectStream(path: string, cb: StreamResultsCb, onFail: () => void, is
   const cluster = getCluster();
   const token = getToken(cluster || '');
   const encodedToken = btoa(token).replace(/=/g, '');
+  const clusters = store.getState().config.clusters;
+
+  if (cluster && clusters[cluster].useToken) {
+    additionalProtocols.push(`base64url.bearer.authorization.k8s.io.${encodedToken}`);
+  }
 
   const protocols = [
-    `base64url.bearer.authorization.k8s.io.${encodedToken}`,
     'base64.binary.k8s.io',
     ...additionalProtocols,
   ];
@@ -419,4 +424,9 @@ export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => vo
   getMetrics();
 
   return cancel;
+}
+
+export async function testAuth() {
+  const spec = {namespace: 'default'};
+  return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', {spec}, false);
 }

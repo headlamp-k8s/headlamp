@@ -5,19 +5,21 @@ export interface Cluster {
   [propName: string]: any;
 }
 
-interface ConfigState {
-  clusters: Cluster[];
+export interface ConfigState {
+  clusters: {
+    [clusterName: string]: Cluster;
+  };
 }
 
 export const INITIAL_STATE: ConfigState = {
-  clusters: [],
+  clusters: {},
 };
 
 function reducer(state = INITIAL_STATE, action: Action) {
   const newState = {...state};
   switch (action.type) {
     case CONFIG_NEW:
-      newState.clusters = [...action.config.clusters];
+      newState.clusters = {...action.config.clusters};
       break;
     default:
       break;
