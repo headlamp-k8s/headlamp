@@ -6,7 +6,6 @@ import (
 
 	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
 	"k8s.io/client-go/rest"
-	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 )
 
@@ -17,28 +16,6 @@ type Cluster struct {
 	Name   string `json:"name"`
 	Server string `json:"server,omitempty"`
 	config *clientcmdapi.Cluster
-}
-
-func GetClustersFromKubeConfigFile(kubeConfigPath string) ([]Cluster, error) {
-	config, err := clientcmd.LoadFromFile(kubeConfigPath)
-	if err != nil {
-		return nil, err
-	}
-
-	clusters := []Cluster{}
-
-	for key, value := range config.Clusters {
-		if value.Server == "" {
-			log.Fatalf("Please make sure all configured clusters have a URL!")
-		}
-		// @todo: Create a name from the URL instead of failing here
-		if key == "" {
-			log.Fatalf("Please make sure the cluster with URL %v has a name configured!", value.Server)
-		}
-		clusters = append(clusters, Cluster{key, value.Server, value})
-	}
-
-	return clusters, nil
 }
 
 func GetOwnCluster() (*Cluster, error) {

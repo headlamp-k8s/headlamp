@@ -78,37 +78,42 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		kubeConfigPath = GetDefaultKubeConfigPath()
 	}
 
-	var clusters []Cluster
+	var contexts []Context
 
 	// In-cluster
 	if config.useInCluster {
-		cluster, err := GetOwnCluster()
+		context, err := GetOwnContext()
 		if err != nil {
 			log.Fatal("Failed to get in-cluster config", err)
 		}
 
-		clusters = append(clusters, *cluster)
+		contexts = append(contexts, *context)
 	}
 
 	// KubeConfig clusters
 	if kubeConfigPath != "" {
-		confClusters, err := GetClustersFromKubeConfigFile(kubeConfigPath)
+		var err error
+		contextsFound, err := GetContextsFromKubeConfigFile(kubeConfigPath)
 		if err != nil {
-			log.Fatal("Failed to get clusters from", kubeConfigPath, err)
+			log.Fatal("Failed to get contexts from", kubeConfigPath, err)
 		}
 
-		clusters = append(clusters, confClusters...)
+		contexts = append(contexts, contextsFound...)
+	}
+
+	clusters := make([]Cluster, 0, len(contexts))
+	for _, context := range contexts {
+		clusters = append(clusters, *context.getCluster())
 	}
 
 	clientConf := &clientConfig{clusters}
-
 	r := mux.NewRouter()
 
 	fmt.Println("*** Headlamp Server ***")
 	fmt.Println("  API Routers:")
 
-	for _, cluster := range clusters {
-		config.addProxyForCluster(&cluster, r)
+	for _, context := range contexts {
+		config.addProxyForContext(&context, r)
 	}
 
 	var pluginListURLS []string
@@ -155,7 +160,10 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	log.Fatal(http.ListenAndServe(":"+config.port, handler))
 }
 
-func (c *HeadlampConfig) addProxyForCluster(cluster *Cluster, r *mux.Router) {
+// @todo: Evaluate whether we should just spawn a kubectl proxy for each context
+// as it would handle already the certificates, etc.
+func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
+	cluster := context.getCluster()
 	name := cluster.getName()
 	server, err := url.Parse(*cluster.getServer())
 	if err != nil {
@@ -175,9 +183,40 @@ func (c *HeadlampConfig) addProxyForCluster(cluster *Cluster, r *mux.Router) {
 		}
 	}
 
+	var certs []tls.Certificate
+
+	// We allow the use of client certificates now, so let's try to load them
+	// if they exist.
+	clientCert := context.getClientCertificate()
+	if clientCert != "" {
+		clientKey := context.getClientKey()
+		if clientKey == "" {
+			log.Fatalf("Found a ClientCertificate entry for cluster %v, but not a ClientKey.", name)
+		} else {
+			cert, err := tls.LoadX509KeyPair(clientCert, clientKey)
+			if err == nil {
+				certs = append(certs, cert)
+			}
+		}
+	}
+
+	clientCertData := context.getClientCertificateData()
+	if clientCertData != nil {
+		clientKeyData := context.getClientKeyData()
+		if clientKeyData == nil {
+			log.Fatalf("Found a ClientCertificateData entry for cluster %v, but not a ClientKeyData.", name)
+		} else {
+			cert, err := tls.X509KeyPair(clientCertData, clientKeyData)
+			if err == nil {
+				certs = append(certs, cert)
+			}
+		}
+	}
+
 	tls := &tls.Config{
 		InsecureSkipVerify: shouldVerifyTLS,
 		RootCAs:            rootCAs,
+		Certificates:       certs,
 	}
 
 	tr := &http.Transport{TLSClientConfig: tls}
