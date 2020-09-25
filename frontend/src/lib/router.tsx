@@ -37,7 +37,6 @@ import PersistentVolumeDetails from '../components/storage/VolumeDetails';
 import PersistentVolumeList from '../components/storage/VolumeList';
 import WorkloadDetails from '../components/workload/Details';
 import WorkloadOverview from '../components/workload/Overview';
-import store from '../redux/stores/store';
 import CronJob from './k8s/cronJob';
 import Deployment from './k8s/deployment';
 import Job from './k8s/job';
@@ -356,8 +355,7 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   if (!route.noCluster) {
     cluster = getCluster();
     if (!cluster) {
-      const clusters = store.getState().config.clusters;
-      cluster = clusters.length > 0 ? clusters[0].name : null;
+      return '/';
     }
   }
   const fullParams = {

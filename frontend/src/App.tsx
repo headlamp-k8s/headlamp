@@ -205,7 +205,7 @@ interface AuthRouteProps {
 function AuthRoute(props: AuthRouteProps) {
   const { children, sidebar, requiresAuth = true, requiresCluster = true, ...other } = props;
   const clusters = useTypedSelector(state => state.config.clusters);
-  const redirectRoute = (!getCluster() || clusters.length === 0) ? 'chooser' : 'login';
+  const redirectRoute = (!getCluster() || Object.keys(clusters).length === 0) ? 'chooser' : 'login';
 
   useSidebarItem(sidebar);
 

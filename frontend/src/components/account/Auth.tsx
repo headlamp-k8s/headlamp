@@ -47,7 +47,7 @@ function Auth() {
         disableEscapeKeyDown
         disableBackdropClick
       >
-        <DialogTitle id="responsive-dialog-title">{clusterConf.length > 1 ? `Authentication: ${getCluster()}` : 'Authentication'}</DialogTitle>
+        <DialogTitle id="responsive-dialog-title">{Object.keys(clusterConf).length > 1 ? `Authentication: ${getCluster()}` : 'Authentication'}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please paste your authentication token.
@@ -64,7 +64,7 @@ function Auth() {
           />
         </DialogContent>
         <DialogActions>
-          {clusters.length > 1 &&
+          {Object.keys(clusters).length > 1 &&
             <>
               <Button onClick = {() => history.replace('/')} color="primary">
                 Cancel

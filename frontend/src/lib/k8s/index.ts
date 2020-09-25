@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setConfig } from '../../redux/actions/actions';
+import { Cluster, ConfigState } from '../../redux/reducers/config';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { request } from './apiProxy';
 import { KubeObjectClass, StringDict } from './cluster';
@@ -64,16 +65,29 @@ classList.forEach(cls => {
 
 export const ResourceClasses = resourceClassesDict;
 
+interface Config {
+  [prop: string]: any;
+}
+
 // Hook for getting or fetching the clusters configuration.
 export function useClustersConf() {
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
 
   React.useEffect(() => {
-    if (clusters.length === 0) {
+    if (Object.keys(clusters).length === 0) {
       request('/config', {}, false, false)
-        .then((config: object) => {
-          dispatch(setConfig(config));
+        .then((config: Config) => {
+          const clusters: ConfigState['clusters'] = {};
+          config?.clusters.forEach((cluster: Cluster) => {
+            clusters[cluster.name] = cluster;
+          });
+
+          const configToStore = {
+            ...config,
+            clusters
+          };
+          dispatch(setConfig(configToStore));
         })
         .catch((err: Error) => console.error(err));
       return;
