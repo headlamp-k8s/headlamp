@@ -319,10 +319,13 @@ function connectStream(path: string, cb: StreamResultsCb, onFail: () => void, is
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
   const cluster = getCluster();
   const token = getToken(cluster || '');
-  const encodedToken = btoa(token).replace(/=/g, '');
+
+  if (token) {
+    const encodedToken = btoa(token).replace(/=/g, '');
+    additionalProtocols.push(`base64url.bearer.authorization.k8s.io.${encodedToken}`);
+  }
 
   const protocols = [
-    `base64url.bearer.authorization.k8s.io.${encodedToken}`,
     'base64.binary.k8s.io',
     ...additionalProtocols,
   ];
@@ -419,4 +422,9 @@ export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => vo
   getMetrics();
 
   return cancel;
+}
+
+export async function testAuth() {
+  const spec = {namespace: 'default'};
+  return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', {spec}, false);
 }
