@@ -52,7 +52,7 @@ export function ClusterTitle() {
 
   return (
     <React.Fragment>
-      {(clusters.length > 1) ?
+      {(Object.keys(clusters).length > 1) ?
         <Button
           size="large"
           variant="contained"
@@ -234,8 +234,8 @@ function Chooser(props: ClusterDialogProps) {
 
     // If we only have one cluster configured, then we skip offering
     // the choice to the user.
-    if (clusters.length === 1) {
-      handleButtonClick(clusters[0]);
+    if (Object.keys(clusters).length === 1) {
+      handleButtonClick(Object.values(clusters)[0]);
     }
   },
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -263,13 +263,15 @@ function Chooser(props: ClusterDialogProps) {
     }
   }
 
+  const clusterList = Object.values(clusters);
+
   return (
     <ClusterDialog
       open={show}
       onClose={onClose || handleClose}
       {...otherProps}
     >
-      {clusters.length === 0 ?
+      {clusterList.length === 0 ?
         <React.Fragment>
           <DialogContentText>
             Wait while fetching clusters…
@@ -285,7 +287,7 @@ function Chooser(props: ClusterDialogProps) {
             Choose a cluster
           </DialogContentText>
           <ClusterList
-            clusters={clusters}
+            clusters={clusterList}
             onButtonClick={handleButtonClick}
           />
         </React.Fragment>

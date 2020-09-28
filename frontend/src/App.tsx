@@ -17,6 +17,7 @@ import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar, { drawerWidth, useSidebarItem } from './components/Sidebar';
 import { isElectron } from './helpers';
 import { getToken } from './lib/auth';
+import { useClustersConf } from './lib/k8s';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
 import { getCluster } from './lib/util';
 import { initializePlugins } from './plugin';
@@ -204,8 +205,8 @@ interface AuthRouteProps {
 
 function AuthRoute(props: AuthRouteProps) {
   const { children, sidebar, requiresAuth = true, requiresCluster = true, ...other } = props;
-  const clusters = useTypedSelector(state => state.config.clusters);
-  const redirectRoute = (!getCluster() || clusters.length === 0) ? 'chooser' : 'login';
+  const clusters = useClustersConf();
+  const redirectRoute = getCluster() ? 'login' : 'chooser';
 
   useSidebarItem(sidebar);
 
@@ -215,9 +216,13 @@ function AuthRoute(props: AuthRouteProps) {
     }
 
     if (requiresCluster) {
-      const cluster = getCluster();
-      if (!!cluster && !!getToken(cluster)) {
-        return children;
+      const clusterName = getCluster();
+      if (!!clusterName) {
+        const cluster = clusters[clusterName];
+        const requiresToken = (cluster?.useToken === undefined || cluster?.useToken);
+        if (!!getToken(clusterName) || !requiresToken) {
+          return children;
+        }
       }
     }
 
