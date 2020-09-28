@@ -222,13 +222,7 @@ func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
 	tr := &http.Transport{TLSClientConfig: tls}
 	proxy.Transport = tr
 
-	// @todo: Remove distinction when the frontend gets multi-cluster support
-	var prefix string
-	if *name == "" {
-		prefix = "/cluster"
-	} else {
-		prefix = "/clusters/" + *name
-	}
+	prefix := "/clusters/" + *name
 
 	r.HandleFunc(prefix+"/{api:.*}", proxyHandler(server, proxy))
 	fmt.Printf("\tlocalhost:%v%v/{api...} -> %v\n", c.port, prefix, *cluster.getServer())
