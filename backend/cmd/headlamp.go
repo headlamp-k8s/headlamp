@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -13,18 +15,15 @@ import (
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-
-	"crypto/tls"
-	"crypto/x509"
 )
 
 type HeadlampConfig struct {
 	useInCluster   bool
+	devMode        bool
+	insecure       bool
 	kubeConfigPath string
 	port           string
-	devMode        bool
 	staticDir      string
-	insecure       bool
 	pluginDir      string
 }
 
@@ -67,6 +66,7 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	http.FileServer(http.Dir(h.staticPath)).ServeHTTP(w, r)
 }
 
+// nolint:funlen
 func StartHeadlampServer(config *HeadlampConfig) {
 	kubeConfigPath := ""
 
@@ -93,6 +93,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	// KubeConfig clusters
 	if kubeConfigPath != "" {
 		var err error
+
 		contextsFound, err := GetContextsFromKubeConfigFile(kubeConfigPath)
 		if err != nil {
 			log.Fatal("Failed to get contexts from", kubeConfigPath, err)
@@ -112,19 +113,22 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	fmt.Println("*** Headlamp Server ***")
 	fmt.Println("  API Routers:")
 
-	for _, context := range contexts {
-		config.addProxyForContext(&context, r)
+	for i := range contexts {
+		config.addProxyForContext(&contexts[i], r)
 	}
 
-	var pluginListURLS []string
 	files, err := ioutil.ReadDir(config.pluginDir)
 	if err != nil {
 		log.Println("Error: ", err)
 	}
+
+	pluginListURLS := make([]string, 0, len(files))
+
 	for _, f := range files {
 		pluginFileURL := filepath.Join("/plugins", f.Name(), "main.js")
 		pluginListURLS = append(pluginListURLS, pluginFileURL)
 	}
+
 	r.HandleFunc("/plugins/list", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(pluginListURLS); err != nil {
@@ -165,6 +169,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
 	cluster := context.getCluster()
 	name := cluster.getName()
+
 	server, err := url.Parse(*cluster.getServer())
 	if err != nil {
 		log.Fatal("Failed to get URL from server", name, err)
@@ -192,11 +197,8 @@ func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
 		clientKey := context.getClientKey()
 		if clientKey == "" {
 			log.Fatalf("Found a ClientCertificate entry for cluster %v, but not a ClientKey.", name)
-		} else {
-			cert, err := tls.LoadX509KeyPair(clientCert, clientKey)
-			if err == nil {
-				certs = append(certs, cert)
-			}
+		} else if cert, err := tls.LoadX509KeyPair(clientCert, clientKey); err == nil {
+			certs = append(certs, cert)
 		}
 	}
 
@@ -205,22 +207,18 @@ func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
 		clientKeyData := context.getClientKeyData()
 		if clientKeyData == nil {
 			log.Fatalf("Found a ClientCertificateData entry for cluster %v, but not a ClientKeyData.", name)
-		} else {
-			cert, err := tls.X509KeyPair(clientCertData, clientKeyData)
-			if err == nil {
-				certs = append(certs, cert)
-			}
+		} else if cert, err := tls.X509KeyPair(clientCertData, clientKeyData); err == nil {
+			certs = append(certs, cert)
 		}
 	}
 
 	tls := &tls.Config{
-		InsecureSkipVerify: shouldVerifyTLS,
+		InsecureSkipVerify: shouldVerifyTLS, // nolint:gosec
 		RootCAs:            rootCAs,
 		Certificates:       certs,
 	}
 
-	tr := &http.Transport{TLSClientConfig: tls}
-	proxy.Transport = tr
+	proxy.Transport = &http.Transport{TLSClientConfig: tls}
 
 	prefix := "/clusters/" + *name
 
@@ -247,6 +245,7 @@ func GetDefaultKubeConfigPath() string {
 
 func (c *clientConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+
 	if err := json.NewEncoder(w).Encode(c); err != nil {
 		log.Println("Error encoding config", err)
 	}

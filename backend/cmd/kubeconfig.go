@@ -1,10 +1,11 @@
 package main
 
 import (
+	"log"
+
 	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
-	"log"
 )
 
 type Context struct {
@@ -27,6 +28,7 @@ func GetContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 			log.Printf("Not adding context %v because cluster doesn't exist!\n", key)
 			continue
 		}
+
 		authInfo := config.AuthInfos[value.AuthInfo]
 		cluster := Cluster{key, clusterConfig.Server, clusterConfig}
 		contexts = append(contexts, Context{key, cluster, authInfo})
@@ -43,6 +45,7 @@ func (c *Context) getClientCertificate() string {
 	if c.authInfo != nil {
 		return c.authInfo.ClientCertificate
 	}
+
 	return ""
 }
 
@@ -50,6 +53,7 @@ func (c *Context) getClientKey() string {
 	if c.authInfo != nil {
 		return c.authInfo.ClientKey
 	}
+
 	return ""
 }
 
@@ -57,6 +61,7 @@ func (c *Context) getClientCertificateData() []byte {
 	if c.authInfo != nil {
 		return c.authInfo.ClientCertificateData
 	}
+
 	return nil
 }
 
@@ -64,6 +69,7 @@ func (c *Context) getClientKeyData() []byte {
 	if c.authInfo != nil {
 		return c.authInfo.ClientKeyData
 	}
+
 	return nil
 }
 

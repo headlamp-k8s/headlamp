@@ -9,8 +9,8 @@ import (
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 )
 
-// @todo: Use a different way to avoid name clashes with other clusters
-const OWN_CLUSTER_NAME = "main"
+// @todo: Use a different way to avoid name clashes with other clusters.
+const OwnClusterName = "main"
 
 type Cluster struct {
 	Name   string `json:"name"`
@@ -30,7 +30,7 @@ func GetOwnCluster() (*Cluster, error) {
 		CertificateAuthorityData: config.TLSClientConfig.CAData,
 	}
 
-	return &Cluster{Name: OWN_CLUSTER_NAME, Server: config.Host, config: cluster}, nil
+	return &Cluster{Name: OwnClusterName, Server: config.Host, config: cluster}, nil
 }
 
 func (c *Cluster) getServer() *string {
@@ -43,11 +43,12 @@ func (c *Cluster) getName() *string {
 
 func (c *Cluster) getCAData() []byte {
 	if c.config.CertificateAuthority != "" {
-		if pemBytes, err := ioutil.ReadFile(c.config.CertificateAuthority); err == nil {
+		pemBytes, err := ioutil.ReadFile(c.config.CertificateAuthority)
+		if err == nil {
 			return pemBytes
-		} else {
-			log.Fatal("Failed to add certificate:", err)
 		}
+
+		log.Fatal("Failed to add certificate:", err)
 	}
 
 	if caData := c.config.CertificateAuthorityData; len(caData) > 0 {
