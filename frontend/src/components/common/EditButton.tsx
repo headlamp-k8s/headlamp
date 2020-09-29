@@ -23,7 +23,7 @@ export default function EditButton(props: EditButtonProps) {
   const location = useLocation();
 
   const applyFunc = React.useCallback((newItem: KubeServiceAccount) => {
-    item.update(newItem);
+    return item.update(newItem);
   },
   [item]);
 
