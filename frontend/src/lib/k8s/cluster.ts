@@ -1,5 +1,6 @@
+import React from 'react';
 import { createRouteURL } from '../router';
-import { timeAgo } from '../util';
+import { timeAgo, useErrorState } from '../util';
 import { useConnectApi } from '.';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
 import CronJob from './cronJob';
@@ -116,6 +117,16 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) 
                                             onError?: (err: ApiError) => void) {
       const listCallback = onList as (arg: U[]) => void;
       useConnectApi(this.apiList(listCallback, onError));
+    }
+
+    static useList<U extends KubeObject>(onList?: (...arg: any[]) => any) {
+      const [objList, setObjList] = React.useState<U[] | null>(null);
+      const [error, setError] = useErrorState(setObjList);
+      this.useApiList(setObjList, setError);
+
+      // Return getters and then the setters as the getters are more likely to be used with
+      // this function.
+      return [objList, error, setObjList, setError];
     }
 
     static create<U extends KubeObject>(this: new (arg: T) => U, item: T): U {
