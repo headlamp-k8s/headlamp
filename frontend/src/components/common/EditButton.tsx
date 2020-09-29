@@ -20,12 +20,30 @@ export default function EditButton(props: EditButtonProps) {
   const { item, options = {} } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState<string>('');
   const location = useLocation();
 
-  const applyFunc = React.useCallback((newItem: KubeServiceAccount) => {
-    return item.update(newItem);
-  },
-  [item]);
+  function makeErrorMessage(err: any) {
+    const status: number = err.status;
+    switch (status) {
+      case 408:
+        return 'Conflicts when trying to perform operation (code 408).';
+      default:
+        return `Failed to perform operation: code ${status}`;
+    }
+  }
+
+  async function updateFunc(newItem: KubeServiceAccount) {
+    try {
+      await item.update(newItem);
+    } catch (err) {
+      setErrorMessage(makeErrorMessage(err));
+      setOpenDialog(true);
+      throw err;
+    }
+  }
+
+  const applyFunc = React.useCallback(updateFunc, [item]);
 
   function handleSave(newItemDef: KubeServiceAccount) {
     const cancelUrl = location.pathname;
@@ -38,6 +56,7 @@ export default function EditButton(props: EditButtonProps) {
         successMessage: `Applied changes to ${item.metadata.name}.`,
         errorMessage: `Failed to apply changes to ${item.metadata.name}.`,
         cancelUrl,
+        errorUrl: cancelUrl,
         ...options
       }
     ));
@@ -75,6 +94,8 @@ export default function EditButton(props: EditButtonProps) {
         open={openDialog}
         onClose={() => setOpenDialog(false)}
         onSave={handleSave}
+        errorMessage={errorMessage}
+        onEditorChanged={() => setErrorMessage('')}
       />
     </React.Fragment>
   );
