@@ -7,6 +7,7 @@ import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { StatusLabel } from '../common';
+import Empty from '../common/EmptyContent';
 import { PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
@@ -24,37 +25,42 @@ export default function Overview() {
   const [nodeMetrics, metricsError] = Node.useMetrics();
 
   const noMetrics = metricsError?.status === 404;
+  const noPermissions = metricsError?.status === 403;
 
   return (
     <PageGrid>
       <SectionBox py={2}>
-        <Grid
-          container
-          justify="space-around"
-          alignItems="flex-start"
-        >
-          <Grid item>
-            <CpuCircularChart
-              items={nodes}
-              itemsMetrics={nodeMetrics}
-              noMetrics={noMetrics}
-            />
+        { noPermissions ?
+          <Empty color="error">No permissions to list pods.</Empty>
+          :
+          <Grid
+            container
+            justify="space-around"
+            alignItems="flex-start"
+          >
+            <Grid item>
+              <CpuCircularChart
+                items={nodes}
+                itemsMetrics={nodeMetrics}
+                noMetrics={noMetrics}
+              />
+            </Grid>
+            <Grid item>
+              <MemoryCircularChart
+                items={nodes}
+                itemsMetrics={nodeMetrics}
+                noMetrics={noMetrics}
+              />
+            </Grid>
+            <Grid item>
+              <PodsStatusCircleChart
+                items={pods}
+              />
+            </Grid>
           </Grid>
-          <Grid item>
-            <MemoryCircularChart
-              items={nodes}
-              itemsMetrics={nodeMetrics}
-              noMetrics={noMetrics}
-            />
-          </Grid>
-          <Grid item>
-            <PodsStatusCircleChart
-              items={pods}
-            />
-          </Grid>
-        </Grid>
+        }
       </SectionBox>
-      <EventsSection events={events} />
+      <EventsSection />
     </PageGrid>
   );
 }
@@ -67,10 +73,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function EventsSection(props: { events: Event[] | null }) {
+function EventsSection() {
   const classes = useStyles();
-  const { events } = props;
   const filterFunc = useFilterFunc();
+  const [events, error] = Event.useList();
 
   function makeStatusLabel(event: Event) {
     return (
@@ -106,6 +112,7 @@ function EventsSection(props: { events: Event[] | null }) {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={Event.getErrorMessage(error)}
         columns={events ? [
           {
             label: 'Type',
