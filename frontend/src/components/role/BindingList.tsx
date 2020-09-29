@@ -1,44 +1,67 @@
 import React from 'react';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
-import { useFilterFunc } from '../../lib/util';
+import { useErrorState, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 interface RoleBindingDict {
-  [kind: string]: RoleBinding[];
+  [kind: string]: RoleBinding[] | null;
 }
 
 export default function RoleBindingList() {
-  const [roleBindingsData, dispatch] = React.useReducer(setRoleBindings, {});
+  const [bindings, setBindings] = React.useState<RoleBindingDict | null>(null);
+  const [roleBindingError, onRoleBindingError] = useErrorState(setupRoleBindings);
+  const [clusterRoleBindingError, onClusterRoleBindingError] =
+    useErrorState(setupClusterRoleBindings);
   const filterFunc = useFilterFunc();
 
-  function setRoleBindings(roleBindings: RoleBindingDict, newRoleBindings: RoleBinding[]) {
-    const data = {...roleBindings};
+  function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
+    const currentBindings: RoleBindingDict = bindings || {};
+    const data = {...currentBindings};
 
-    newRoleBindings.forEach((item) => {
-      if (!(item.kind in data)) {
-        data[item.kind] = [];
-      }
+    data[kind] = newBindings;
 
-      data[item.kind].push(item);
-    });
+    setBindings(data);
+  }
 
-    return data;
+  function setupRoleBindings(newBindgins: RoleBinding[] | null) {
+    setRoleBindings(newBindgins, 'RoleBinding');
+  }
+
+  function setupClusterRoleBindings(newBindgins: RoleBinding[] | null) {
+    setRoleBindings(newBindgins, 'ClusterRoleBinding');
   }
 
   function getJointItems() {
-    let joint: RoleBinding[] = [];
-    for (const items of Object.values(roleBindingsData)) {
-      joint = joint.concat(items);
+    if (!bindings) {
+      return null;
     }
-    return joint;
+
+    let joint: RoleBinding[] = [];
+    let hasItems = false;
+    for (const items of Object.values(bindings as object)) {
+      if (items !== null) {
+        joint = joint.concat(items);
+        hasItems = true;
+      }
+    }
+
+    return hasItems ? joint : null;
   }
 
-  RoleBinding.useApiList(dispatch);
-  ClusterRoleBinding.useApiList(dispatch);
+  function getErrorMessage() {
+    if (getJointItems() === null) {
+      return RoleBinding.getErrorMessage(roleBindingError || clusterRoleBindingError);
+    }
+
+    return null;
+  }
+
+  RoleBinding.useApiList(setupRoleBindings, onRoleBindingError);
+  ClusterRoleBinding.useApiList(setupClusterRoleBindings, onClusterRoleBindingError);
 
   return (
     <SectionBox
@@ -51,6 +74,7 @@ export default function RoleBindingList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={getErrorMessage()}
         columns={[
           {
             label: 'Type',

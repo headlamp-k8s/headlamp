@@ -1,43 +1,66 @@
 import React from 'react';
 import ClusterRole from '../../lib/k8s/clusterRole';
 import Role from '../../lib/k8s/role';
-import { timeAgo, useFilterFunc } from '../../lib/util';
+import { timeAgo, useErrorState, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 interface RolesDict {
-  [kind: string]: Role[];
+  [kind: string]: Role[] | null;
 }
 
 export default function RoleList() {
-  const [rolesData, dispatch] = React.useReducer(setRoles, {});
+  const [roles, setRoles] = React.useState<RolesDict | null>(null);
+  const [roleError, setRolesError] = useErrorState(setupRoles);
+  const [clusterRoleError, setClusterRolesError] = useErrorState(setupClusterRoles);
   const filterFunc = useFilterFunc();
 
-  function setRoles(roles: RolesDict, newRoles: Role[]) {
-    const data = {...roles};
+  function setupRolesWithKind(newRoles: Role[] | null, kind: string) {
+    const currentRoles: RolesDict = roles || {};
+    const data = {...currentRoles};
 
-    newRoles.forEach((item) => {
-      if (!(item.kind in data)) {
-        data[item.kind] = [];
-      }
-      data[item.kind].push(item);
-    });
+    data[kind] = newRoles;
+    setRoles(data);
+  }
 
-    return data;
+  function setupRoles(roles: Role[] | null) {
+    setupRolesWithKind(roles, 'Role');
+  }
+
+  function setupClusterRoles(roles: ClusterRole[] | null) {
+    setupRolesWithKind(roles, 'ClusterRole');
   }
 
   function getJointItems() {
-    let joint: Role[] = [];
-    for (const items of Object.values(rolesData)) {
-      joint = joint.concat(items);
+    if (roles === null) {
+      return null;
     }
-    return joint;
+
+    let joint: Role[] = [];
+    let hasItems = false;
+
+    for (const items of Object.values(roles)) {
+      if (items !== null) {
+        joint = joint.concat(items);
+        hasItems = true;
+      }
+    }
+
+    return hasItems ? joint : null;
   }
 
-  Role.useApiList(dispatch);
-  ClusterRole.useApiList(dispatch);
+  function getErrorMessage() {
+    if (getJointItems() === null) {
+      return Role.getErrorMessage(roleError || clusterRoleError);
+    }
+
+    return null;
+  }
+
+  Role.useApiList(setupRoles, setRolesError);
+  ClusterRole.useApiList(setupClusterRoles, setClusterRolesError);
 
   return (
     <SectionBox
@@ -50,6 +73,7 @@ export default function RoleList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={getErrorMessage()}
         columns={[
           {
             label: 'Type',
