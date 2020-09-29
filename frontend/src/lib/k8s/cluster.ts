@@ -146,15 +146,15 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) 
         args.unshift(this.getNamespace()!);
       }
 
-      this._class().apiEndpoint.delete(...args);
+      return this._class().apiEndpoint.delete(...args);
     }
 
     update(data: KubeObjectInterface) {
-      this._class().put(data);
+      return this._class().put(data);
     }
 
     static put(data: KubeObjectInterface) {
-      this.apiEndpoint.put(data);
+      return this.apiEndpoint.put(data);
     }
 
     async getAuthorization(verb: string) {
