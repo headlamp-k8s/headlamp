@@ -7,10 +7,8 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceAccountList() {
-  const [serviceAccounts, setServiceAccounts] = React.useState<ServiceAccount[] | null>(null);
+  const [serviceAccounts, error] = ServiceAccount.useList();
   const filterFunc = useFilterFunc();
-
-  ServiceAccount.useApiList(setServiceAccounts);
 
   return (
     <SectionBox
@@ -23,6 +21,7 @@ export default function ServiceAccountList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={ServiceAccount.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

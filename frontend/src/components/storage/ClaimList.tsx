@@ -6,10 +6,8 @@ import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function VolumeClaimList() {
-  const [volumeClaim, setVolumeClaim] = React.useState<PersistentVolumeClaim[] | null>(null);
+  const [volumeClaim, error] = PersistentVolumeClaim.useList();
   const filterFunc = useFilterFunc();
-
-  PersistentVolumeClaim.useApiList(setVolumeClaim);
 
   return (
     <SectionBox
@@ -21,6 +19,7 @@ export default function VolumeClaimList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={PersistentVolumeClaim.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

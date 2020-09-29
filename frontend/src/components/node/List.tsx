@@ -17,11 +17,10 @@ const useStyle = makeStyles({
 
 export default function NodeList() {
   const classes = useStyle();
-  const [nodes, setNodes] = React.useState<Node[] | null>(null);
+  const [nodes, error] = Node.useList();
   const [nodeMetrics, metricsError] = Node.useMetrics();
   const filterFunc = useFilterFunc();
 
-  Node.useApiList(setNodes);
   const noMetrics = metricsError?.status === 404;
 
   return (
@@ -36,6 +35,7 @@ export default function NodeList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={Node.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

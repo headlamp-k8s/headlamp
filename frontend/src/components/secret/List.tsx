@@ -7,10 +7,8 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function SecretList() {
-  const [secrets, setSecrets] = React.useState<Secret[] | null>(null);
+  const [secrets, error] = Secret.useList();
   const filterFunc = useFilterFunc();
-
-  Secret.useApiList(setSecrets);
 
   return (
     <SectionBox
@@ -23,6 +21,7 @@ export default function SecretList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={Secret.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

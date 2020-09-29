@@ -7,10 +7,8 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function CustomResourceDefinitionList() {
-  const [crds, setCRDs] = React.useState<CRD[] | null>(null);
+  const [crds, error] = CRD.useList();
   const filterFunc = useFilterFunc();
-
-  CRD.useApiList(setCRDs);
 
   return (
     <SectionBox
@@ -24,6 +22,7 @@ export default function CustomResourceDefinitionList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={CRD.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

@@ -9,10 +9,8 @@ import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function PodList() {
-  const [pods, setPods] = React.useState<Pod[] | null>(null);
+  const [pods, error] = Pod.useList();
   const filterFunc = useFilterFunc();
-
-  Pod.useApiList(setPods);
 
   function getRestartCount(pod: Pod) {
     return _.sumBy(pod.status.containerStatuses, container => container.restartCount);
@@ -46,6 +44,7 @@ export default function PodList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={Pod.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

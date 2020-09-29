@@ -7,10 +7,8 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function VolumeList() {
-  const [volumes, setVolumes] = React.useState<PersistentVolume[] | null>(null);
+  const [volumes, error] = PersistentVolume.useList();
   const filterFunc = useFilterFunc();
-
-  PersistentVolume.useApiList(setVolumes);
 
   return (
     <SectionBox
@@ -24,6 +22,7 @@ export default function VolumeList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={PersistentVolume.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

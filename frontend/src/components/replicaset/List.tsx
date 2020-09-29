@@ -7,14 +7,12 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ReplicaSetList() {
-  const [replicaSets, setReplicaSets] = React.useState<ReplicaSet | null>(null);
+  const [replicaSets, error] = ReplicaSet.useList();
   const filterFunc = useFilterFunc();
 
   function getReplicas(replicaSet: ReplicaSet) {
     return `${replicaSet.spec.replicas} / ${replicaSet.status.replicas}`;
   }
-
-  ReplicaSet.useApiList(setReplicaSets);
 
   return (
     <SectionBox
@@ -27,6 +25,7 @@ export default function ReplicaSetList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={ReplicaSet.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

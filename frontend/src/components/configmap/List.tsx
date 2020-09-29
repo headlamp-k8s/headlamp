@@ -7,10 +7,8 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ConfigMapList() {
-  const [configMaps, setConfigMaps] = React.useState<ConfigMap[] | null>(null);
+  const [configMaps, error] = ConfigMap.useList();
   const filterFunc = useFilterFunc();
-
-  ConfigMap.useApiList(setConfigMaps);
 
   return (
     <SectionBox
@@ -23,6 +21,7 @@ export default function ConfigMapList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={ConfigMap.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

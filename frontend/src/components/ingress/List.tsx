@@ -7,10 +7,8 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function IngressList() {
-  const [ingresses, setIngresses] = React.useState<Ingress[] | null>(null);
+  const [ingresses, error] = Ingress.useList();
   const filterFunc = useFilterFunc();
-
-  Ingress.useApiList(setIngresses);
 
   return (
     <SectionBox
@@ -23,6 +21,7 @@ export default function IngressList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={Ingress.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

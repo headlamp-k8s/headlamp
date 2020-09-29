@@ -7,10 +7,8 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceList() {
-  const [services, setServices] = React.useState<Service | null>(null);
+  const [services, error] = Service.useList();
   const filterFunc = useFilterFunc();
-
-  Service.useApiList(setServices);
 
   return (
     <SectionBox
@@ -23,6 +21,7 @@ export default function ServiceList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={Service.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

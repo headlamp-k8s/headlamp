@@ -8,10 +8,8 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function NamespacesList() {
-  const [namespaces, setNamespaces] = React.useState<Namespace[] | null>(null);
+  const [namespaces, error] = Namespace.useList();
   const filterFunc = useFilterFunc();
-
-  Namespace.useApiList(setNamespaces);
 
   function makeStatusLabel(namespace: Namespace) {
     const status = namespace.status.phase;
@@ -35,6 +33,7 @@ export default function NamespacesList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={Namespace.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',

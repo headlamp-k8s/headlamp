@@ -7,10 +7,8 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ClassList() {
-  const [storageClassData, setStorageClassData] = React.useState<StorageClass[] | null>(null);
+  const [storageClasses, error] = StorageClass.useList();
   const filterFunc = useFilterFunc();
-
-  StorageClass.useApiList(setStorageClassData);
 
   return (
     <SectionBox
@@ -24,6 +22,7 @@ export default function ClassList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        errorMessage={StorageClass.getErrorMessage(error)}
         columns={[
           {
             label: 'Name',
@@ -42,7 +41,7 @@ export default function ClassList() {
             getter: (storageClass) => storageClass.getAge()
           },
         ]}
-        data={storageClassData}
+        data={storageClasses}
       />
     </SectionBox>
   );
