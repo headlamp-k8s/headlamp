@@ -1,7 +1,7 @@
 import { createRouteURL } from '../router';
 import { timeAgo } from '../util';
 import { useConnectApi } from '.';
-import { apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
+import { ApiError, apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
@@ -95,7 +95,8 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) 
       return this.jsonData!.kind;
     }
 
-    static apiList<U extends KubeObject>(onList: (arg: U[]) => void) {
+    static apiList<U extends KubeObject>(onList: (arg: U[]) => void,
+                                         onError?: (err: ApiError) => void) {
       const createInstance = (item: T) => this.create(item) as U;
 
       const args: any[] = [(list: T[]) => onList(list.map((item: T) => createInstance(item) as U))];
@@ -104,12 +105,17 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) 
         args.unshift(null);
       }
 
+      if (onError) {
+        args.push(onError);
+      }
+
       return this.apiEndpoint.list.bind(null, ...args);
     }
 
-    static useApiList<U extends KubeObject>(onList: (...arg: any[]) => any) {
+    static useApiList<U extends KubeObject>(onList: (...arg: any[]) => any,
+                                            onError?: (err: ApiError) => void) {
       const listCallback = onList as (arg: U[]) => void;
-      useConnectApi(this.apiList(listCallback));
+      useConnectApi(this.apiList(listCallback, onError));
     }
 
     static create<U extends KubeObject>(this: new (arg: T) => U, item: T): U {
