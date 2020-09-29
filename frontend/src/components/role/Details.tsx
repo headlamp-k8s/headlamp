@@ -30,11 +30,11 @@ export default function RoleDetails() {
           columns={[
             {
               label: 'API Groups',
-              getter: ({apiGroups}) => apiGroups.join(', ')
+              getter: ({apiGroups = []}) => apiGroups.join(', ')
             },
             {
               label: 'Resources',
-              getter: ({resources}) => resources.join(', ')
+              getter: ({resources = []}) => resources.join(', ')
             },
             {
               label: 'Non Resources',
@@ -42,7 +42,7 @@ export default function RoleDetails() {
             },
             {
               label: 'Verbs',
-              getter: ({verbs}) => verbs.join(', ')
+              getter: ({verbs = []}) => verbs.join(', ')
             }
           ]}
           data={item.rules}
