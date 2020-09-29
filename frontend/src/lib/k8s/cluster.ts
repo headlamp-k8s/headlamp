@@ -199,6 +199,21 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) 
         spec
       }, false);
     }
+
+    static getErrorMessage(err: ApiError | null) {
+      if (!err) {
+        return null;
+      }
+
+      switch (err.status) {
+        case 404:
+          return 'Error: Not found';
+        case 403:
+          return 'Error: No permissions';
+        default:
+          return 'Error';
+      }
+    }
   }
 
   return KubeObject;
