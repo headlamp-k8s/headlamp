@@ -1,3 +1,5 @@
+import React from 'react';
+import { useErrorState } from '../util';
 import { useConnectApi } from '.';
 import { apiFactory, metrics } from './apiProxy';
 import { KubeCondition, KubeMetrics, KubeObjectInterface, makeKubeObject } from './cluster';
@@ -45,8 +47,13 @@ class Node extends makeKubeObject<KubeNode>('node') {
     return this.jsonData!.spec;
   }
 
-  static useMetrics(onMetrics: (metricsList: KubeMetrics[]) => void) {
-    useConnectApi(metrics.bind(null, '/apis/metrics.k8s.io/v1beta1/nodes', onMetrics));
+  static useMetrics() {
+    const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
+    const [error, setError] = useErrorState(setNodeMetrics);
+
+    useConnectApi(metrics.bind(null, '/apis/metrics.k8s.io/v1beta1/nodes', setNodeMetrics, setError));
+
+    return [nodeMetrics, error];
   }
 }
 

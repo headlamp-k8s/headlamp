@@ -2,7 +2,6 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { KubeMetrics } from '../../lib/k8s/cluster';
 import Event from '../../lib/k8s/event';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
@@ -17,14 +16,14 @@ import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './
 
 export default function Overview() {
   const [pods, setPods] = React.useState<Pod[] | null>(null);
-  const [events, setEvents] = React.useState<Event[] | null>(null);
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
-  const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
 
   Pod.useApiList(setPods);
   Node.useApiList(setNodes);
-  Node.useMetrics(setNodeMetrics);
-  Event.useApiList(setEvents);
+
+  const [nodeMetrics, metricsError] = Node.useMetrics();
+
+  const noMetrics = metricsError?.status === 404;
 
   return (
     <PageGrid>
@@ -38,12 +37,14 @@ export default function Overview() {
             <CpuCircularChart
               items={nodes}
               itemsMetrics={nodeMetrics}
+              noMetrics={noMetrics}
             />
           </Grid>
           <Grid item>
             <MemoryCircularChart
               items={nodes}
               itemsMetrics={nodeMetrics}
+              noMetrics={noMetrics}
             />
           </Grid>
           <Grid item>

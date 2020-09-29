@@ -3,22 +3,28 @@ import _ from 'lodash';
 import React from 'react';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
+import { HeaderLabel } from '../common';
 import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
 
 interface ResourceCircularChartProps extends Omit<PercentageCircleProps, 'data'> {
   items: KubeObjectInterface[] | null;
   itemsMetrics: any;
+  noMetrics?: boolean;
   resourceUsedGetter?: (node: KubeObjectInterface) => number;
   resourceAvailableGetter?: (node: KubeObjectInterface) => number;
   getLegend?: (used: number, available: number) => string;
+  tooltip?: string | null;
 }
 
 export function ResourceCircularChart(props: ResourceCircularChartProps) {
   const {
     items,
     itemsMetrics,
+    noMetrics = false,
     resourceUsedGetter,
     resourceAvailableGetter,
+    title,
+    tooltip,
     ...others
   } = props;
 
@@ -63,9 +69,16 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
     ];
   }
 
-  return (
+  return (noMetrics ?
+    <HeaderLabel
+      label={title || ''}
+      value={props.getLegend!(used, available)}
+      tooltip={'Install the metrics-server to get usage data.'}
+    />
+    :
     <PercentageCircle
       {...others}
+      title={title}
       data={makeData()}
       total={available}
       label={getLabel()}
@@ -75,6 +88,8 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
 }
 
 export function MemoryCircularChart(props: ResourceCircularChartProps) {
+  const { noMetrics } = props;
+
   function memoryUsedGetter(item: KubeObjectInterface) {
     return parseRam(item.usage.memory) / TO_GB;
   }
@@ -88,7 +103,12 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
       return '';
     }
 
-    return `${used.toFixed(2)} / ${available.toFixed(2)} GB`;
+    const availableLabel = `${available.toFixed(2)} GB`;
+    if (noMetrics) {
+      return availableLabel;
+    }
+
+    return `${used.toFixed(2)} / ${availableLabel}`;
   }
 
   return (
@@ -96,13 +116,15 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
       getLegend={getLegend}
       resourceUsedGetter={memoryUsedGetter}
       resourceAvailableGetter={memoryAvailableGetter}
-      title="Memory usage"
+      title={noMetrics ? 'Memory' : 'Memory usage'}
       {...props}
     />
   );
 }
 
 export function CpuCircularChart(props: ResourceCircularChartProps) {
+  const { noMetrics } = props;
+
   function cpuUsedGetter(item: KubeObjectInterface) {
     return parseCpu(item.usage.cpu) / TO_ONE_CPU;
   }
@@ -116,7 +138,12 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
       return '';
     }
 
-    return `${used.toFixed(2)} / ${available} units`;
+    const availableLabel = `${available} units`;
+    if (noMetrics) {
+      return availableLabel;
+    }
+
+    return `${used.toFixed(2)} / ${availableLabel}`;
   }
 
   return (
@@ -124,7 +151,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
       getLegend={getLegend}
       resourceUsedGetter={cpuUsedGetter}
       resourceAvailableGetter={cpuAvailableGetter}
-      title="CPU usage"
+      title={noMetrics ? 'CPU' : 'CPU usage'}
       {...props}
     />
   );

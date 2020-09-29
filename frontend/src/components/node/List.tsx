@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import { useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
@@ -19,11 +18,11 @@ const useStyle = makeStyles({
 export default function NodeList() {
   const classes = useStyle();
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
-  const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
+  const [nodeMetrics, metricsError] = Node.useMetrics();
   const filterFunc = useFilterFunc();
 
   Node.useApiList(setNodes);
-  Node.useMetrics(setNodeMetrics);
+  const noMetrics = metricsError?.status === 404;
 
   return (
     <SectionBox
@@ -56,6 +55,7 @@ export default function NodeList() {
                 node={node}
                 nodeMetrics={nodeMetrics}
                 resourceType="cpu"
+                noMetrics={noMetrics}
               />
           },
           {
@@ -68,6 +68,7 @@ export default function NodeList() {
                 node={node}
                 nodeMetrics={nodeMetrics}
                 resourceType="memory"
+                noMetrics={noMetrics}
               />
           },
           {

@@ -16,10 +16,12 @@ import { NameValueTable } from '../common/SimpleTable';
 export default function NodeDetails() {
   const { name } = useParams();
   const [item, setItem] = React.useState<Node | null>(null);
-  const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
 
   Node.useApiGet(setItem, name);
-  Node.useMetrics(setNodeMetrics);
+
+  const [nodeMetrics, metricsError] = Node.useMetrics();
+
+  const noMetrics = metricsError?.status === 404;
 
   function getAddresses(item: Node) {
     return item.status.addresses.map(({type, address}) => {
@@ -36,7 +38,11 @@ export default function NodeDetails() {
       <MainInfoSection
 
         headerSection={
-          <ChartsSection node={item} metrics={nodeMetrics} />
+          <ChartsSection
+            node={item}
+            metrics={nodeMetrics}
+            noMetrics={noMetrics}
+          />
         }
         resource={item}
         extraInfo={item && [
@@ -59,10 +65,11 @@ export default function NodeDetails() {
 interface ChartsSectionProps {
   node: Node | null;
   metrics: KubeMetrics[] | null;
+  noMetrics?: boolean;
 }
 
 function ChartsSection(props: ChartsSectionProps) {
-  const { node, metrics } = props;
+  const { node, metrics, noMetrics } = props;
 
   function getUptime() {
     if (!node) {
@@ -96,12 +103,14 @@ function ChartsSection(props: ChartsSectionProps) {
           <CpuCircularChart
             items={node && [node]}
             itemsMetrics={metrics}
+            noMetrics={noMetrics}
           />
         </Grid>
         <Grid item>
           <MemoryCircularChart
             items={node && [node]}
             itemsMetrics={metrics}
+            noMetrics={noMetrics}
           />
         </Grid>
       </Grid>
