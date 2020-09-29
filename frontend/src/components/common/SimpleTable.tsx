@@ -61,10 +61,17 @@ export interface SimpleTableProps {
   filterFunction?: (...args: any[]) => boolean;
   rowsPerPage?: number[];
   emptyMessage?: string;
+  errorMessage?: string | null;
 }
 
 export default function SimpleTable(props: SimpleTableProps) {
-  const {columns, data, filterFunction = null, emptyMessage = null} = props;
+  const {
+    columns,
+    data,
+    filterFunction = null,
+    emptyMessage = null,
+    errorMessage = null,
+  } = props;
   const [page, setPage] = React.useState(0);
   const [currentData, setCurrentData] = React.useState(data);
   const rowsPerPageOptions = props.rowsPerPage || [5, 10, 50];
@@ -103,6 +110,12 @@ export default function SimpleTable(props: SimpleTableProps) {
   }
 
   if (currentData === null) {
+    if (!!errorMessage) {
+      return (
+        <Empty color="error">{errorMessage}</Empty>
+      );
+    }
+
     return <Loader />;
   }
 
