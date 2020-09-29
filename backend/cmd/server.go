@@ -23,5 +23,6 @@ func main() {
 		devMode:        *devMode,
 		staticDir:      *staticDir,
 		insecure:       *insecure,
-		pluginDir:      *pluginDir})
+		pluginDir:      *pluginDir,
+	})
 }
