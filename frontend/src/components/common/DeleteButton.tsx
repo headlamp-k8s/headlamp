@@ -33,8 +33,10 @@ export default function DeleteButton(props: DeleteButtonProps) {
         startMessage: `Deleting item ${item!.metadata.name}…`,
         cancelledMessage: `Cancelled deletion of ${item!.metadata.name}.`,
         successMessage: `Deleted item ${item!.metadata.name}.`,
+        errorMessage: `Error deleting item ${item!.metadata.name}.`,
         cancelUrl: location.pathname,
         startUrl: item!.getListLink(),
+        errorUrl: item!.getListLink(),
         ...options
       }
     ));
