@@ -40,7 +40,6 @@ frontend-fixlint:
 
 image:
 	$(DOCKER_CMD) build \
-	--no-cache \
 	--build-arg IMAGE_BASE=$(DOCKER_IMAGE_BASE) \
 	-t $(DOCKER_REPO)/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_VERSION) -f \
 	Dockerfile \
