@@ -34,8 +34,8 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
     successMessage,
     startOptions = {},
     cancelledOptions = {},
-    successOptions = {},
-    errorOptions = {},
+    successOptions = {variant: 'success'},
+    errorOptions = {variant: 'error'},
   } = action;
 
   try {

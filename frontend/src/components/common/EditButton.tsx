@@ -37,8 +37,6 @@ export default function EditButton(props: EditButtonProps) {
         cancelledMessage: `Cancelled changes to ${item.metadata.name}.`,
         successMessage: `Applied changes to ${item.metadata.name}.`,
         errorMessage: `Failed to apply changes to ${item.metadata.name}.`,
-        successOptions: {variant: 'success'},
-        errorOptions: {variant: 'error'},
         cancelUrl,
         ...options
       }

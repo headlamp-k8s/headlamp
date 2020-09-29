@@ -35,7 +35,6 @@ export default function DeleteButton(props: DeleteButtonProps) {
         successMessage: `Deleted item ${item!.metadata.name}.`,
         cancelUrl: location.pathname,
         startUrl: item!.getListLink(),
-        successOptions: {variant: 'success'},
         ...options
       }
     ));
