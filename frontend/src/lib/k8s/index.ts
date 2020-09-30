@@ -23,6 +23,7 @@ import Pod from './pod';
 import ReplicaSet from './replicaSet';
 import Role from './role';
 import RoleBinding from './roleBinding';
+import Secret from './secret';
 import Service from './service';
 import ServiceAccount from './serviceAccount';
 import StatefulSet from './statefulSet';
@@ -46,6 +47,7 @@ const classList = [
   ReplicaSet,
   Role,
   RoleBinding,
+  Secret,
   Service,
   ServiceAccount,
   StatefulSet,
