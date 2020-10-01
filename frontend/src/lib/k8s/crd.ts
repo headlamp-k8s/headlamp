@@ -18,6 +18,10 @@ export interface KubeCRD extends KubeObjectInterface {
 class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
   static apiEndpoint = apiFactory('apiextensions.k8s.io', 'v1beta1', 'customresourcedefinitions');
 
+  static get className(): string {
+    return 'CustomResourceDefinition';
+  }
+
   get spec() {
     return this.jsonData!.spec;
   }
