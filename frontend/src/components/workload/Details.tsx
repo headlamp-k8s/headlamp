@@ -34,8 +34,8 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
           },
         ]}
       />
-      <ReplicasSection resource={item} />
-      <ContainersSection resource={item} />
+      <ReplicasSection resource={item?.jsonData} />
+      <ContainersSection resource={item?.jsonData} />
     </PageGrid>
   );
 }

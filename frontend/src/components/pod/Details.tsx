@@ -158,7 +158,7 @@ export default function PodDetails() {
             }
           ]}
         />
-        {item && <ContainersSection resource={item} />}
+        {item && <ContainersSection resource={item?.jsonData} />}
       </PageGrid>
       {item &&
         [
