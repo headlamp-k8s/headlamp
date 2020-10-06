@@ -39,11 +39,11 @@ export interface KubeNode extends KubeObjectInterface {
 class Node extends makeKubeObject<KubeNode>('node') {
   static apiEndpoint = apiFactory('', 'v1', 'nodes');
 
-  get status() {
+  get status(): KubeNode['status'] {
     return this.jsonData!.status;
   }
 
-  get spec() {
+  get spec(): KubeNode['spec'] {
     return this.jsonData!.spec;
   }
 

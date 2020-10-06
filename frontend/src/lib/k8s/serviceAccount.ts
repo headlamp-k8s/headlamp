@@ -15,7 +15,7 @@ export interface KubeServiceAccount extends KubeObjectInterface {
 class ServiceAccount extends makeKubeObject<KubeServiceAccount>('serviceAccount') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'serviceaccounts');
 
-  get secrets() {
+  get secrets(): KubeServiceAccount['secrets'] {
     return this.jsonData!.secrets;
   }
 }

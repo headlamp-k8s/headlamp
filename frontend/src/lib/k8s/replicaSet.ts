@@ -21,11 +21,11 @@ export interface KubeReplicaSet extends KubeObjectInterface {
 class ReplicaSet extends makeKubeObject<KubeReplicaSet>('ReplicaSet') {
   static apiEndpoint = apiFactoryWithNamespace('apps', 'v1', 'replicasets', true);
 
-  get spec() {
+  get spec(): KubeReplicaSet['spec'] {
     return this.jsonData!.spec;
   }
 
-  get status() {
+  get status(): KubeReplicaSet['status'] {
     return this.jsonData!.status;
   }
 }

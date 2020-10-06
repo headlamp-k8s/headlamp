@@ -27,11 +27,11 @@ interface ExecOptions {
 class Pod extends makeKubeObject<KubePod>('Pod') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'pods');
 
-  get spec() {
+  get spec(): KubePod['spec'] {
     return this.jsonData!.spec;
   }
 
-  get status() {
+  get status(): KubePod['status'] {
     return this.jsonData!.status;
   }
 
