@@ -29,9 +29,9 @@ export default function RoleList() {
   }
 
   function getJointItems() {
-    let joint: Role[] = [];
+    let joint: Role[] | null = Object.values(rolesData).length > 0 ? [] : null;
     for (const items of Object.values(rolesData)) {
-      joint = joint.concat(items);
+      joint = (joint as Role[]).concat(items);
     }
     return joint;
   }

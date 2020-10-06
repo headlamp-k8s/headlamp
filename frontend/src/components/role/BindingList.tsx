@@ -30,9 +30,9 @@ export default function RoleBindingList() {
   }
 
   function getJointItems() {
-    let joint: RoleBinding[] = [];
+    let joint: RoleBinding[] | null = Object.values(roleBindingsData).length > 0 ? [] : null;
     for (const items of Object.values(roleBindingsData)) {
-      joint = joint.concat(items);
+      joint = (joint as RoleBinding[]).concat(items);
     }
     return joint;
   }
