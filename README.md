@@ -18,9 +18,13 @@ and a brief demo of it.
 
 ## Features
 
+Headlamp was created to be a Kubernetes web UI that has the traditional functionality of other
+web UIs/dashboards available (i.e. to list and view resources) as well as other features:
+
   * Vendor independent / Generic
   * Common ops for Kubernetes clusters
   * Multi-cluster
+  * To be run hosted (in-cluster) or locally (desktop app)
   * Extensible
   * Clean / modern UI
   * Read-write (actions based on permissions)
