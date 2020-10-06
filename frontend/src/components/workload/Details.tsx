@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { makeKubeObject, Workload } from '../../lib/k8s/cluster';
+import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import { ContainersSection, MainInfoSection, MetadataDictGrid, PageGrid, ReplicasSection } from '../common/Resource';
 
 interface WorkloadDetailsProps {
-  workloadKind: ReturnType<typeof makeKubeObject>;
+  workloadKind: KubeObject;
 }
 
 export default function WorkloadDetails(props: WorkloadDetailsProps) {
