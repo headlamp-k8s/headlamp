@@ -1,17 +1,17 @@
 import { useTheme } from '@material-ui/core/styles';
 import _ from 'lodash';
 import React from 'react';
-import { KubeObjectInterface } from '../../lib/k8s/cluster';
+import { KubeObject } from '../../lib/k8s/cluster';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
 import { HeaderLabel } from '../common';
 import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
 
 interface ResourceCircularChartProps extends Omit<PercentageCircleProps, 'data'> {
-  items: KubeObjectInterface[] | null;
+  items: KubeObject[] | null;
   itemsMetrics: any;
   noMetrics?: boolean;
-  resourceUsedGetter?: (node: KubeObjectInterface) => number;
-  resourceAvailableGetter?: (node: KubeObjectInterface) => number;
+  resourceUsedGetter?: (node: KubeObject) => number;
+  resourceAvailableGetter?: (node: KubeObject) => number;
   getLegend?: (used: number, available: number) => string;
   tooltip?: string | null;
 }
@@ -30,7 +30,7 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
 
   const [used, available] = getResourceUsage();
 
-  function filterMetrics(items: KubeObjectInterface[], metrics: any[]) {
+  function filterMetrics(items: KubeObject[], metrics: any[]) {
     if (!items || !metrics)
       return [];
 
@@ -90,11 +90,11 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
 export function MemoryCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
 
-  function memoryUsedGetter(item: KubeObjectInterface) {
+  function memoryUsedGetter(item: KubeObject) {
     return parseRam(item.usage.memory) / TO_GB;
   }
 
-  function memoryAvailableGetter(item: KubeObjectInterface) {
+  function memoryAvailableGetter(item: KubeObject) {
     return parseRam(item.status!.capacity.memory) / TO_GB;
   }
 
@@ -125,11 +125,11 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
 export function CpuCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
 
-  function cpuUsedGetter(item: KubeObjectInterface) {
+  function cpuUsedGetter(item: KubeObject) {
     return parseCpu(item.usage.cpu) / TO_ONE_CPU;
   }
 
-  function cpuAvailableGetter(item: KubeObjectInterface) {
+  function cpuAvailableGetter(item: KubeObject) {
     return parseCpu(item.status!.capacity.cpu) / TO_ONE_CPU;
   }
 
