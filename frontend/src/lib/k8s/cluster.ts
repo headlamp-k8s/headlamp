@@ -11,6 +11,12 @@ import Job from './job';
 import ReplicaSet from './replicaSet';
 import StatefulSet from './statefulSet';
 
+export interface Cluster {
+  name: string;
+  useToken?: boolean;
+  [propName: string]: any;
+}
+
 export interface KubeObjectInterface {
   kind: string;
   apiVersion?: string;
