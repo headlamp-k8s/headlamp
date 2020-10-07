@@ -7,7 +7,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { localeDate, timeAgo } from '../../lib/util';
-import { LightTooltip } from './Tooltip';
+import { LightTooltip, TooltipIcon } from './Tooltip';
 
 const useStyles = makeStyles(theme => ({
   nameLabel: {
@@ -134,11 +134,12 @@ const useHeaderLabelStyles = makeStyles(theme => ({
 interface HeaderLabelProps {
   label: string;
   value: string;
+  tooltip?: string | null;
 }
 
 export function HeaderLabel(props: HeaderLabelProps) {
   const classes = useHeaderLabelStyles();
-  const { value, label } = props;
+  const { value, label, tooltip } = props;
 
   return (
     <Grid
@@ -147,7 +148,10 @@ export function HeaderLabel(props: HeaderLabelProps) {
       direction="column"
     >
       <Grid item>
-        <Typography className={classes.label}>{label}</Typography>
+        <Typography className={classes.label} display="inline">{label}</Typography>
+        {!!tooltip &&
+          <TooltipIcon>{tooltip}</TooltipIcon>
+        }
       </Grid>
       <Grid
         item

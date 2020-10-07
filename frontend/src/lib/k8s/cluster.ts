@@ -1,7 +1,8 @@
+import React from 'react';
 import { createRouteURL } from '../router';
-import { timeAgo } from '../util';
+import { timeAgo, useErrorState } from '../util';
 import { useConnectApi } from '.';
-import { apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
+import { ApiError, apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
@@ -95,7 +96,8 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) 
       return this.jsonData!.kind;
     }
 
-    static apiList<U extends KubeObject>(onList: (arg: U[]) => void) {
+    static apiList<U extends KubeObject>(onList: (arg: U[]) => void,
+                                         onError?: (err: ApiError) => void) {
       const createInstance = (item: T) => this.create(item) as U;
 
       const args: any[] = [(list: T[]) => onList(list.map((item: T) => createInstance(item) as U))];
@@ -104,12 +106,27 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) 
         args.unshift(null);
       }
 
+      if (onError) {
+        args.push(onError);
+      }
+
       return this.apiEndpoint.list.bind(null, ...args);
     }
 
-    static useApiList<U extends KubeObject>(onList: (...arg: any[]) => any) {
+    static useApiList<U extends KubeObject>(onList: (...arg: any[]) => any,
+                                            onError?: (err: ApiError) => void) {
       const listCallback = onList as (arg: U[]) => void;
-      useConnectApi(this.apiList(listCallback));
+      useConnectApi(this.apiList(listCallback, onError));
+    }
+
+    static useList<U extends KubeObject>(onList?: (...arg: any[]) => any) {
+      const [objList, setObjList] = React.useState<U[] | null>(null);
+      const [error, setError] = useErrorState(setObjList);
+      this.useApiList(setObjList, setError);
+
+      // Return getters and then the setters as the getters are more likely to be used with
+      // this function.
+      return [objList, error, setObjList, setError];
     }
 
     static create<U extends KubeObject>(this: new (arg: T) => U, item: T): U {
@@ -181,6 +198,21 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) 
         apiVersion: 'authorization.k8s.io/v1beta1',
         spec
       }, false);
+    }
+
+    static getErrorMessage(err: ApiError | null) {
+      if (!err) {
+        return null;
+      }
+
+      switch (err.status) {
+        case 404:
+          return 'Error: Not found';
+        case 403:
+          return 'Error: No permissions';
+        default:
+          return 'Error';
+      }
     }
   }
 

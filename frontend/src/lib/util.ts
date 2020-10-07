@@ -1,9 +1,11 @@
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import React from 'react';
 import { matchPath } from 'react-router';
 import { isElectron } from '../helpers';
 import { FilterState } from '../redux/reducers/filter';
 import { useTypedSelector } from '../redux/reducers/reducers';
+import { ApiError } from './k8s/apiProxy';
 import { KubeMetrics, KubeObjectInterface, Workload } from './k8s/cluster';
 import Node from './k8s/node';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
@@ -106,4 +108,18 @@ export function getCluster(): string | null {
   const clusterURLMatch =
     matchPath<{cluster?: string}>(urlPath, {path: getClusterPrefixedPath()});
   return (!!clusterURLMatch && clusterURLMatch.params.cluster) || null;
+}
+
+export function useErrorState(dependentSetter?: (...args: any) => void) {
+  const [error, setError] = React.useState<ApiError | null>(null);
+
+  React.useEffect(() => {
+    if (!!error && !!dependentSetter) {
+      dependentSetter(null);
+    }
+  },
+  [error, dependentSetter]);
+
+  // Adding "as any" here because it was getting difficult to validate the setter type.
+  return [error, setError as any];
 }

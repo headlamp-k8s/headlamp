@@ -403,7 +403,12 @@ export async function apply(body: KubeObjectInterface): Promise<JSON> {
   }
 }
 
-export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => void) {
+export interface ApiError extends Error {
+  status: number;
+}
+
+export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => void,
+                              onError?: (err: ApiError) => void) {
   const handel = setInterval(getMetrics, 10000);
 
   async function getMetrics() {
@@ -411,7 +416,11 @@ export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => vo
       const metric = await request(url);
       onMetrics(metric.items || metric);
     } catch (err) {
-      console.error('No metrics', {err, url});
+      console.debug('No metrics', {err, url});
+
+      if (onError) {
+        onError(err);
+      }
     }
   }
 
