@@ -1,6 +1,6 @@
 import Registry from './registry';
 
-abstract class Plugin {
+export abstract class Plugin {
     abstract initialize(register: Registry): boolean;
 }
 
