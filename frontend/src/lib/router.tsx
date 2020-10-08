@@ -269,6 +269,12 @@ export const ROUTES: {
     sidebar: 'roles',
     component: () => <RoleDetails />
   },
+  clusterRoles: {
+    path: '/roles',
+    exact: true,
+    sidebar: 'roles',
+    component: () => <RoleList />
+  },
   roleBindings: {
     path: '/rolebindings',
     exact: true,
@@ -287,6 +293,12 @@ export const ROUTES: {
     path: '/clusterrolebinding/:name',
     exact: true,
     name: 'Role Binding',
+    sidebar: 'roleBindings',
+    component: () => <RoleBindingDetails />
+  },
+  clusterRoleBindings: {
+    path: '/rolebindings',
+    exact: true,
     sidebar: 'roleBindings',
     component: () => <RoleBindingDetails />
   },
