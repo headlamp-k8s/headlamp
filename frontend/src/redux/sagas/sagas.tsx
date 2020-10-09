@@ -34,8 +34,8 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
     successMessage,
     startOptions = {},
     cancelledOptions = {},
-    successOptions = {},
-    errorOptions = {},
+    successOptions = {variant: 'success'},
+    errorOptions = {variant: 'error'},
   } = action;
 
   try {
@@ -67,13 +67,13 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
     } else {
       // Actually perform the action. This part is no longer cancellable,
       // so it's here instead of within the try block.
-      // @todo: Handle exceptions.
       let success = false;
       try {
         yield call(callback);
         success = true;
       } catch (err) {
-
+        // @todo: It'd be interesting to make the errorMessage a callback and
+        // pass it the error when using the errorMessage below.
       }
 
       let clusterAction: ClusterAction;

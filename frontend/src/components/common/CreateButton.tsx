@@ -46,8 +46,6 @@ export default function CreateButton() {
         cancelledMessage: `Cancelled applying ${newItemDef.metadata.name}.`,
         successMessage: `Applied ${newItemDef.metadata.name}.`,
         errorMessage: `Failed to apply ${newItemDef.metadata.name}.`,
-        successOptions: {variant: 'success'},
-        errorOptions: {variant: 'error'},
         cancelUrl,
       }
     ));
