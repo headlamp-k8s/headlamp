@@ -26,7 +26,7 @@ import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
 import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from 'react-router-dom';
 import semver from 'semver';
-import { getVersion } from '../lib/k8s';
+import { getVersion, useCluster } from '../lib/k8s';
 import { StringDict } from '../lib/k8s/cluster';
 import { createRouteURL, getRoute } from '../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../lib/util';
@@ -203,11 +203,10 @@ const useVersionButtonStyle = makeStyles(theme => ({
 }));
 
 function VersionButton() {
-  const location = useLocation();
   const { enqueueSnackbar } = useSnackbar();
   const classes = useVersionButtonStyle();
   const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
-  const [cluster, setCluster] = React.useState(getCluster());
+  const cluster = useCluster();
   const [open, setOpen] = React.useState(false);
 
   function getVersionRows() {
@@ -287,13 +286,9 @@ function VersionButton() {
   // (defined in the URL ATM).
   // @todo: Update this if the active cluster management is changed.
   React.useEffect(() => {
-    const currentCluster = getCluster();
-    if (currentCluster !== cluster) {
-      setCluster(currentCluster);
-      setClusterVersion(null);
-    }
+    setClusterVersion(null);
   },
-  [location, cluster]);
+  [cluster]);
 
   function handleClose() {
     setOpen(false);
