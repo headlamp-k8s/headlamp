@@ -146,7 +146,15 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string):
       [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
       const [objList, setObjList] = React.useState<U[] | null>(null);
       const [error, setError] = useErrorState(setObjList);
-      this.useApiList(setObjList, setError);
+
+      function setList(items: U[] | null) {
+        setObjList(items);
+        if (items !== null) {
+          setError(null);
+        }
+      }
+
+      this.useApiList(setList, setError);
 
       // Return getters and then the setters as the getters are more likely to be used with
       // this function.
