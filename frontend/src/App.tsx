@@ -103,6 +103,9 @@ const useStyle = makeStyles(theme => ({
     background: '#fff',
     paddingLeft: `${drawerWidth}px`,
     marginLeft: drawerWidth,
+    '& > *': {
+      color: theme.palette.text.primary,
+    }
   },
   content: {
     flexGrow: 1,
