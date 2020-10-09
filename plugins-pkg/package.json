@@ -19,7 +19,8 @@
   },
   "files": [
     "bin",
-    "config"
+    "config",
+    "types"
   ],
   "keywords": [
     "headlamp",

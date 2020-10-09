@@ -21,7 +21,7 @@ export interface KubeIngress extends KubeObjectInterface {
 class Ingress extends makeKubeObject<KubeIngress>('ingress') {
   static apiEndpoint = apiFactoryWithNamespace('extensions', 'v1beta1', 'ingresses');
 
-  get spec() {
+  get spec(): KubeIngress['spec'] {
     return this.jsonData!.spec;
   }
 

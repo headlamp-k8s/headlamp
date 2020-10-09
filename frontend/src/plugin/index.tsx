@@ -1,7 +1,6 @@
-import loadScripts from './loadPlugins';
 import Registry from './registry';
 
-abstract class Plugin {
+export abstract class Plugin {
     abstract initialize(register: Registry): boolean;
 }
 
@@ -36,6 +35,26 @@ function registerPlugin(pluginId: string, pluginObj: Plugin) {
 }
 
 window.registerPlugin = registerPlugin;
+
+function loadScripts(array: string[], onLoadFinished: () => void) {
+  var loader = function(src: string, handler: () => void) {
+    const script: HTMLScriptElement = document.createElement('script');
+    script.src = src;
+    script.onload = (script as any).onreadystatechange = function() {
+      (script as any).onreadystatechange = script.onload = null;
+      handler();
+    };
+    const head = document.getElementsByTagName('head')[0];
+    (head || document.body).appendChild(script);
+  };
+  (function run() {
+    if (array.length !== 0) {
+      loader(array.shift() as string, run);
+    } else {
+      onLoadFinished && onLoadFinished();
+    }
+  })();
+}
 
 function loadExternalPlugins() {
   return new Promise(resolve => {

@@ -11,6 +11,12 @@ import Job from './job';
 import ReplicaSet from './replicaSet';
 import StatefulSet from './statefulSet';
 
+export interface Cluster {
+  name: string;
+  useToken?: boolean;
+  [propName: string]: any;
+}
+
 export interface KubeObjectInterface {
   kind: string;
   apiVersion?: string;
@@ -33,8 +39,25 @@ export interface KubeMetadata {
   annotations?: StringDict;
 }
 
+// We have to define a KubeObject implementation here because the KubeObject
+// class is defined within the function and therefore not inferable.
+export interface KubeObjectIface<T extends (KubeObjectInterface | KubeEvent)> {
+  apiList: (onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void) => any;
+  useApiList: (onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void,
+               onError?: (err: ApiError) => void) => any;
+  useApiGet: (onGet: (...args: any) => void, name: string,
+              namespace?: string, onError?: (err: ApiError) => void) => void;
+  useList: (onList?: (...arg: any[]) => any) => [any[], ApiError | null, (items: any[]) => void,
+           (err: ApiError | null) => void];
+  getErrorMessage: (err: ApiError | null) => string | null;
+  new(json: T): any;
+  className: string;
+  [prop: string]: any;
+}
+
 export function
-makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) {
+makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string):
+  KubeObjectIface<T> {
   class KubeObject {
     static apiEndpoint: ReturnType<(typeof apiFactoryWithNamespace) | (typeof apiFactory)>;
     jsonData: T | null = null;
@@ -119,7 +142,8 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) 
       useConnectApi(this.apiList(listCallback, onError));
     }
 
-    static useList<U extends KubeObject>(onList?: (...arg: any[]) => any) {
+    static useList<U extends KubeObject>(onList?: (...arg: any[]) => any):
+      [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
       const [objList, setObjList] = React.useState<U[] | null>(null);
       const [error, setError] = useErrorState(setObjList);
       this.useApiList(setObjList, setError);
@@ -216,7 +240,7 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string) 
     }
   }
 
-  return KubeObject;
+  return KubeObject as KubeObjectIface<T>;
 }
 
 export type KubeObjectClass = ReturnType<typeof makeKubeObject>;

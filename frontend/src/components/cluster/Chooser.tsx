@@ -18,8 +18,8 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { generatePath } from 'react-router';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useClustersConf } from '../../lib/k8s';
+import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
-import { Cluster } from '../../redux/reducers/config';
 import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
 import Loader from '../common/Loader';
 

@@ -1,9 +1,5 @@
+import { FilterState } from '../../lib/util';
 import { Action, FILTER_RESET, FILTER_SET_NAMESPACE, FILTER_SET_SEARCH } from '../actions/actions';
-
-export interface FilterState {
-  namespaces: Set<string>;
-  search: string;
-}
 
 export const INITIAL_STATE: FilterState = {
   namespaces: new Set(),

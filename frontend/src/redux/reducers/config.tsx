@@ -1,9 +1,5 @@
+import { Cluster } from '../../lib/k8s/cluster';
 import { Action, CONFIG_NEW } from '../actions/actions';
-
-export interface Cluster {
-  name: string;
-  [propName: string]: any;
-}
 
 export interface ConfigState {
   clusters: {

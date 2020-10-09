@@ -25,7 +25,7 @@ export default function DaemonSetDetails() {
         ]}
       />
       <ContainersSection
-        resource={item}
+        resource={item?.jsonData}
       />
     </PageGrid>
   );

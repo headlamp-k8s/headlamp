@@ -40,7 +40,7 @@ export default function CustomResourceDefinitionDetails() {
   React.useEffect(() => {
     let promise: Promise<any> | null = null;
     if (item) {
-      promise = getAPIForCRD(item).list(setObjects);
+      promise = getAPIForCRD(item.jsonData).list(setObjects);
     }
 
     return function cleanup () {
@@ -121,7 +121,7 @@ export default function CustomResourceDefinitionDetails() {
       </SectionBox>
       <SectionBox title="Conditions">
         <ConditionsTable
-          resource={item}
+          resource={item.jsonData}
           showLastUpdate={false}
         />
       </SectionBox>

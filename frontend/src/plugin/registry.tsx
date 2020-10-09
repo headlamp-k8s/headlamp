@@ -1,5 +1,5 @@
 import { Route } from '../lib/router';
-import { HeaderActionFunc, setAppBarAction, setDetailsViewHeaderAction, setRoute, setSidebarItem } from '../redux/actions/actions';
+import { setAppBarAction, setDetailsViewHeaderAction, setRoute, setSidebarItem } from '../redux/actions/actions';
 import store from '../redux/stores/store';
 
 export default class Registry {
@@ -19,11 +19,12 @@ export default class Registry {
     store.dispatch(setRoute(routeSpec));
   }
 
-  registerDetailsViewHeaderAction(actionName: string, actionFunc: HeaderActionFunc) {
+  registerDetailsViewHeaderAction(actionName: string,
+                                  actionFunc: (...args: any[]) => JSX.Element | null) {
     store.dispatch(setDetailsViewHeaderAction(actionName, actionFunc));
   }
 
-  registerAppBarAction(actionName: string, actionFunc: HeaderActionFunc) {
+  registerAppBarAction(actionName: string, actionFunc: (...args: any[]) => JSX.Element | null) {
     store.dispatch(setAppBarAction(actionName, actionFunc));
   }
 }

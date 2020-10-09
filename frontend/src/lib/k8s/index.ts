@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setConfig } from '../../redux/actions/actions';
-import { Cluster, ConfigState } from '../../redux/reducers/config';
+import { ConfigState } from '../../redux/reducers/config';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { request } from './apiProxy';
-import { KubeObjectClass, StringDict } from './cluster';
+import { Cluster, KubeObject, StringDict } from './cluster';
 import ClusterRole from './clusterRole';
 import ClusterRoleBinding from './clusterRoleBinding';
 import ConfigMap from './configMap';
@@ -55,7 +55,7 @@ const classList = [
 ];
 
 const resourceClassesDict: {
-  [className: string]: KubeObjectClass;
+  [className: string]: KubeObject;
 } = {};
 
 classList.forEach(cls => {
