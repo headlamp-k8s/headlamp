@@ -1,3 +1,6 @@
+import accountIcon from '@iconify/icons-mdi/account';
+import logoutIcon from '@iconify/icons-mdi/logout';
+import { Icon } from '@iconify/react';
 import AppBar from '@material-ui/core/AppBar';
 import green from '@material-ui/core/colors/green';
 import grey from '@material-ui/core/colors/grey';
@@ -5,19 +8,24 @@ import orange from '@material-ui/core/colors/orange';
 import red from '@material-ui/core/colors/red';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import IconButton from '@material-ui/core/IconButton';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, HashRouter, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Redirect, Route, RouteProps, Switch, useHistory } from 'react-router-dom';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import Sidebar, { drawerWidth, useSidebarItem } from './components/Sidebar';
 import { isElectron } from './helpers';
-import { getToken } from './lib/auth';
-import { useClustersConf } from './lib/k8s';
+import { getToken, setToken } from './lib/auth';
+import { useCluster, useClustersConf } from './lib/k8s';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
 import { getCluster } from './lib/util';
 import { initializePlugins } from './plugin';
@@ -138,6 +146,29 @@ function RouteSwitcher() {
 function TopBar() {
   const classes = useStyle();
   const appBarActions = useTypedSelector(state => state.ui.views.appBar.actions);
+  const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
+  const cluster = useCluster();
+  const history = useHistory();
+
+  function handleMenu(event: any) {
+    setMenuAnchorEl(event.currentTarget);
+  }
+
+  function handleClose() {
+    setMenuAnchorEl(null);
+  }
+
+  function hasToken() {
+    return !!cluster ? !!getToken(cluster) : false;
+  }
+
+  function logout() {
+    if (!!cluster) {
+      setToken(cluster, null);
+    }
+    setMenuAnchorEl(null);
+    history.push('/');
+  }
 
   return (
     <AppBar
@@ -153,6 +184,44 @@ function TopBar() {
           Object.values(appBarActions).map((action, i) =>
             <React.Fragment key={i}>{action()}</React.Fragment>)
         }
+        <IconButton
+          aria-label='User menu'
+          aria-controls='menu-appbar'
+          aria-haspopup='true'
+          onClick={handleMenu}
+          color='inherit'
+        >
+          <Icon icon={accountIcon} />
+        </IconButton>
+        <Menu
+          id='customized-menu'
+          anchorEl={menuAnchorEl}
+          open={!!menuAnchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          <MenuItem
+            component="a"
+            onClick={logout}
+            disabled={!hasToken()}
+            dense
+          >
+            <ListItemIcon>
+              <Icon icon={logoutIcon} />
+            </ListItemIcon>
+            <ListItemText
+              primary="Log out"
+              secondary={hasToken() ? null : '(No token set up)'}
+            />
+          </MenuItem>
+        </Menu>
       </Toolbar>
     </AppBar>
   );
