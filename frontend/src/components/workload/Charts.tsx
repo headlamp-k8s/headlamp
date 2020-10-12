@@ -54,7 +54,7 @@ export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
       data={makeData()}
       total={workloadData.length}
       totalProps={{
-        fill: theme.palette.primary.main
+        fill: theme.palette.common.black
       }}
       label={getLabel()}
       legend={getLegend()}
