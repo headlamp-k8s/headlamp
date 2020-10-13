@@ -2,6 +2,13 @@ const { app, BrowserWindow, Menu } = require('electron');
 const { spawn } = require('child_process');
 const path = require('path');
 const url = require('url');
+const { autoUpdater } = require('electron-updater');
+const log = require('electron-log');
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
+
 let mainWindow;
 
 const isMac = process.platform === 'darwin';
@@ -133,7 +140,31 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+  autoUpdater.checkForUpdatesAndNotify();
 }
+
+autoUpdater.autoDownload = true;
+
+function sendStatusToWindow(text) {
+  log.info(`Sending status to window: ${text}`);
+  mainWindow.webContents.send('message', text);
+}
+
+autoUpdater.on('update-not-available', (info) => {
+  sendStatusToWindow('Update not available.');
+});
+
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+});
+
+autoUpdater.on('update-available', () => {
+  sendStatusToWindow('Update is available');
+});
+
+autoUpdater.on('update-downloaded', () => {
+  sendStatusToWindow('Update downloaded');
+});
 
 app.on('ready', createWindow);
 app.on('window-all-closed', function () {

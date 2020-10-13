@@ -8,14 +8,23 @@
   "scripts": {
     "copy-server-binary": "cd ../ && make backend && cp -r ./backend/server ./app/electron/",
     "start": "npm run copy-server-binary && cd ../ && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
-    "build": "npm run copy-server-binary && cd ../frontend/ && export PUBLIC_URL='.' npm run build && cp -r ../app/electron/. build/electron",
-    "package": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build --mac --win --linux -c.extraMetadata.main=build/electron/main.js --publish never",
-    "serve-dev": "export ELECTRON_START_URL=http://localhost:3000 && electron ."
+    "build": "npm run copy-server-binary && cd ../frontend/ && PUBLIC_URL='./' npm run build && cp -r ../app/electron/. build/electron",
+    "package": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish never",
+    "serve-dev": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "publish": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish always"
   },
   "build": {
     "appId": "com.kinvolk.headlamp",
     "extraMetadata": {
       "main": "build/electron/main.js"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "executableName": "headlamp",
+      "artifactName": "${productName}.${ext}",
+      "maintainer": "Kinvolk <hello@kinvolk.io>"
     },
     "files": [
       "build/**/*",
@@ -31,9 +40,16 @@
     "extends": null
   },
   "keywords": [],
-  "author": "kinvolk",
+  "author": {
+    "name": "Kinvolk",
+    "email": "hello@kinvolk.io"
+  },
   "devDependencies": {
     "electron": "^10.1.2",
     "electron-builder": "^22.8.0"
+  },
+  "dependencies": {
+    "electron-log": "^4.2.4",
+    "electron-updater": "^4.3.5"
   }
 }
