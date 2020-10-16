@@ -143,7 +143,7 @@ function AuthChooser(){
               <Box m={2}>
                 <OauthPopup onCode={handleOidcAuth}
                   url={`${isDevMode || isElectron() ?
-                    'http://127.0.0.1:4466/' : '/'}oidc?dt=${Date()}&cluster=${getCluster()}`
+                    'http://localhost:4466/' : '/'}oidc?dt=${Date()}&cluster=${getCluster()}`
                   }
                   title="Headlamp Cluster Authentication"
                 >

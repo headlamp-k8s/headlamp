@@ -262,12 +262,8 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		handler = r
 	}
 
-	srv := &http.Server{
-		Handler: handler,
-		Addr:    "127.0.0.1:" + config.port,
-	}
 	// Start server
-	log.Fatal(srv.ListenAndServe())
+	log.Fatal(http.ListenAndServe(":"+config.port, handler))
 }
 
 // @todo: Evaluate whether we should just spawn a kubectl proxy for each context
