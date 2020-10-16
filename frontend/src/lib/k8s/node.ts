@@ -51,7 +51,15 @@ class Node extends makeKubeObject<KubeNode>('node') {
     const [nodeMetrics, setNodeMetrics] = React.useState<KubeMetrics[] | null>(null);
     const [error, setError] = useErrorState(setNodeMetrics);
 
-    useConnectApi(metrics.bind(null, '/apis/metrics.k8s.io/v1beta1/nodes', setNodeMetrics, setError));
+    function setMetrics(metrics: KubeMetrics[]) {
+      setNodeMetrics(metrics);
+
+      if (metrics !== null) {
+        setError(null);
+      }
+    }
+
+    useConnectApi(metrics.bind(null, '/apis/metrics.k8s.io/v1beta1/nodes', setMetrics, setError));
 
     return [nodeMetrics, error];
   }
