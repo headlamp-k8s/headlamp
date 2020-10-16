@@ -45,20 +45,20 @@ export function ClusterTitle() {
     return null;
   }
 
+  if (Object.keys(clusters).length <= 1) {
+    return null;
+  }
+
   return (
     <React.Fragment>
-      {(Object.keys(clusters).length > 1) ?
-        <Button
-          size="large"
-          variant="contained"
-          onClick={() => setShowChooser(true)}
-          className={classes.button}
-        >
-          Cluster: {cluster}
-        </Button>
-        :
-        <Typography color="textPrimary">Cluster: {cluster}</Typography>
-      }
+      <Button
+        size="large"
+        variant="contained"
+        onClick={() => setShowChooser(true)}
+        className={classes.button}
+      >
+        Cluster: {cluster}
+      </Button>
       <Chooser
         open={showChooser}
         onClose={() => setShowChooser(false)}
