@@ -167,11 +167,15 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		oidcConfig := &oidc.Config{
 			ClientID: oidcAuthConfig.ClientID,
 		}
-		var urlScheme string
-		if r.TLS != nil {
-			urlScheme = "https://"
-		} else {
-			urlScheme = "http://"
+
+		urlScheme := r.URL.Scheme
+		if urlScheme == "" {
+			// @todo: Find a better way to get the scheme for the URL.
+			if r.Host == "localhost:"+config.port {
+				urlScheme = "http"
+			} else {
+				urlScheme = "https"
+			}
 		}
 
 		verifier := provider.Verifier(oidcConfig)
@@ -179,7 +183,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 			ClientID:     oidcAuthConfig.ClientID,
 			ClientSecret: oidcAuthConfig.ClientSecret,
 			Endpoint:     provider.Endpoint(),
-			RedirectURL:  fmt.Sprintf("%1s%2s/oidc-callback", urlScheme, r.Host),
+			RedirectURL:  fmt.Sprintf("%1s://%2s/oidc-callback", urlScheme, r.Host),
 			Scopes:       []string{oidc.ScopeOpenID, "profile", "email", "groups"},
 		}
 
