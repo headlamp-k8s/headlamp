@@ -67,10 +67,6 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
       value: localeDate(resource.metadata.creationTimestamp),
     },
     {
-      name: 'UID',
-      value: resource.metadata.uid,
-    },
-    {
       name: 'Labels',
       value: resource.metadata.labels && <MetadataDictGrid dict={resource.metadata.labels} />,
       hide: !resource.metadata.labels,
