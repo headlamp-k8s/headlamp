@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/json"
@@ -13,18 +14,24 @@ import (
 	"os"
 	"path/filepath"
 
+	oidc "github.com/coreos/go-oidc"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+
+	"golang.org/x/oauth2"
 )
 
 type HeadlampConfig struct {
-	useInCluster   bool
-	devMode        bool
-	insecure       bool
-	kubeConfigPath string
-	port           string
-	staticDir      string
-	pluginDir      string
+	useInCluster     bool
+	devMode          bool
+	insecure         bool
+	kubeConfigPath   string
+	port             string
+	staticDir        string
+	pluginDir        string
+	oidcClientID     string
+	oidcClientSecret string
+	oidcIdpIssuerURL string
 }
 
 type clientConfig struct {
@@ -66,7 +73,7 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	http.FileServer(http.Dir(h.staticPath)).ServeHTTP(w, r)
 }
 
-// nolint:funlen
+// nolint:gocognit,funlen
 func StartHeadlampServer(config *HeadlampConfig) {
 	kubeConfigPath := ""
 
@@ -82,7 +89,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 
 	// In-cluster
 	if config.useInCluster {
-		context, err := GetOwnContext()
+		context, err := GetOwnContext(config)
 		if err != nil {
 			log.Fatal("Failed to get in-cluster config", err)
 		}
@@ -142,6 +149,101 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	// Configuration
 	r.HandleFunc("/config", clientConf.getConfig).Methods("GET")
 
+	oauthRequestMap := make(map[string]*OauthConfig)
+
+	r.HandleFunc("/oidc", func(w http.ResponseWriter, r *http.Request) {
+		ctx := context.Background()
+		cluster := r.URL.Query().Get("cluster")
+
+		oidcAuthConfig, err := GetClusterOidcConfig(cluster)
+		if err != nil {
+			log.Printf("Error getting %s cluster oidc config %s", cluster, err)
+		}
+		provider, err := oidc.NewProvider(ctx, oidcAuthConfig.IdpIssuerURL)
+		if err != nil {
+			log.Printf("Error while fetching the provider from %s error %s", oidcAuthConfig.IdpIssuerURL, err)
+		}
+
+		oidcConfig := &oidc.Config{
+			ClientID: oidcAuthConfig.ClientID,
+		}
+		var urlScheme string
+		if r.TLS != nil {
+			urlScheme = "https://"
+		} else {
+			urlScheme = "http://"
+		}
+
+		verifier := provider.Verifier(oidcConfig)
+		oauthConfig := &oauth2.Config{
+			ClientID:     oidcAuthConfig.ClientID,
+			ClientSecret: oidcAuthConfig.ClientSecret,
+			Endpoint:     provider.Endpoint(),
+			RedirectURL:  fmt.Sprintf("%1s%2s/oidc-callback", urlScheme, r.Host),
+			Scopes:       []string{oidc.ScopeOpenID, "profile", "email", "groups"},
+		}
+
+		state := cluster
+		if err != nil {
+			log.Printf("Error getting oauthConfig for cluster %s error %s", cluster, err)
+		}
+
+		oauthRequestMap[state] = &OauthConfig{Config: oauthConfig, Verifier: verifier, Ctx: ctx}
+
+		http.Redirect(w, r, oauthConfig.AuthCodeURL(state), http.StatusFound)
+	}).Queries("cluster", "{cluster}")
+
+	r.HandleFunc("/oidc-callback", func(w http.ResponseWriter, r *http.Request) {
+		state := r.URL.Query().Get("state")
+		if state == "" {
+			http.Error(w, "invalid request", http.StatusBadRequest)
+			return
+		}
+		// nolint: nestif
+		if oauthConfig, ok := oauthRequestMap[state]; ok {
+			oauth2Token, err := oauthConfig.Config.Exchange(oauthConfig.Ctx, r.URL.Query().Get("code"))
+			if err != nil {
+				http.Error(w, "Failed to exchange token: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			rawIDToken, ok := oauth2Token.Extra("id_token").(string)
+			if !ok {
+				http.Error(w, "No id_token field in oauth2 token.", http.StatusInternalServerError)
+				return
+			}
+
+			idToken, err := oauthConfig.Verifier.Verify(oauthConfig.Ctx, rawIDToken)
+			if err != nil {
+				http.Error(w, "Failed to verify ID Token: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			resp := struct {
+				OAuth2Token   *oauth2.Token
+				IDTokenClaims *json.RawMessage // ID Token payload is just JSON.
+			}{oauth2Token, new(json.RawMessage)}
+
+			if err := idToken.Claims(&resp.IDTokenClaims); err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			var redirectURL string
+			if config.devMode {
+				redirectURL = "http://localhost:3000/"
+			} else {
+				redirectURL = "/"
+			}
+
+			redirectURL += fmt.Sprintf("auth?cluster=%1s&token=%2s", state, oauth2Token.AccessToken)
+			http.Redirect(w, r, redirectURL, http.StatusSeeOther)
+		} else {
+			http.Error(w, "invalid request", http.StatusBadRequest)
+			return
+		}
+	})
+
 	// Serve the frontend if needed
 	spa := spaHandler{staticPath: config.staticDir, indexPath: "index.html"}
 	r.PathPrefix("/").Handler(spa)
@@ -160,8 +262,12 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		handler = r
 	}
 
+	srv := &http.Server{
+		Handler: handler,
+		Addr:    "127.0.0.1:" + config.port,
+	}
 	// Start server
-	log.Fatal(http.ListenAndServe(":"+config.port, handler))
+	log.Fatal(srv.ListenAndServe())
 }
 
 // @todo: Evaluate whether we should just spawn a kubectl proxy for each context
