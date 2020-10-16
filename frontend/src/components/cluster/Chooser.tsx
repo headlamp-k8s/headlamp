@@ -16,8 +16,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React, { PropsWithChildren } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { generatePath } from 'react-router';
-import { useHistory, useLocation } from 'react-router-dom';
-import { useClustersConf } from '../../lib/k8s';
+import { useHistory } from 'react-router-dom';
+import { useCluster, useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
@@ -35,12 +35,7 @@ const useClusterTitleStyle = makeStyles(theme => ({
 
 export function ClusterTitle() {
   const classes = useClusterTitleStyle();
-  // Use location is only added here in order for the component to be aware of
-  // a URL change which may indicate a cluster change.
-  // @todo: Update if the way to manage the current cluster changes.
-  useLocation();
-
-  const cluster = getCluster();
+  const cluster = useCluster();
   const clusters = useClustersConf();
   const [showChooser, setShowChooser] = React.useState(false);
 

@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { setConfig } from '../../redux/actions/actions';
 import { ConfigState } from '../../redux/reducers/config';
 import { useTypedSelector } from '../../redux/reducers/reducers';
+import { getCluster } from '../util';
 import { request } from './apiProxy';
 import { Cluster, KubeObject, StringDict } from './cluster';
 import ClusterRole from './clusterRole';
@@ -98,6 +99,24 @@ export function useClustersConf() {
   [clusters, dispatch]);
 
   return clusters;
+}
+
+export function useCluster() {
+  const [cluster, setCluster] = React.useState<string | null>(null);
+  // Make sure we update when changing clusters.
+  // @todo: We need a better way to do this.
+  const location = useLocation();
+  const clusters = useClustersConf();
+
+  React.useEffect(() => {
+    const currentCluster = getCluster();
+    if (cluster !== currentCluster) {
+      setCluster(getCluster());
+    }
+  },
+  [clusters, cluster, location]);
+
+  return cluster;
 }
 
 export function getVersion(): Promise<StringDict> {
