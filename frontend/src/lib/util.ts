@@ -122,7 +122,8 @@ export function useErrorState(dependentSetter?: (...args: any) => void) {
       dependentSetter(null);
     }
   },
-  [error, dependentSetter]);
+  // eslint-disable-next-line
+  [error]);
 
   // Adding "as any" here because it was getting difficult to validate the setter type.
   return [error, setError as any];
