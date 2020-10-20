@@ -27,12 +27,12 @@ export default function RoleBindingList() {
     setBindings(data);
   }
 
-  function setupRoleBindings(newBindgins: RoleBinding[] | null) {
-    setRoleBindings(newBindgins, 'RoleBinding');
+  function setupRoleBindings(newBindings: RoleBinding[] | null) {
+    setRoleBindings(newBindings, 'RoleBinding');
   }
 
-  function setupClusterRoleBindings(newBindgins: RoleBinding[] | null) {
-    setRoleBindings(newBindgins, 'ClusterRoleBinding');
+  function setupClusterRoleBindings(newBindings: RoleBinding[] | null) {
+    setRoleBindings(newBindings, 'ClusterRoleBinding');
   }
 
   function getJointItems() {
