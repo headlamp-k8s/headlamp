@@ -4,6 +4,14 @@ on:
     paths:
     - 'backend/**'
     - Makefile
+    - '.github/**'
+  push:
+    branches:
+      - master
+    paths:
+    - 'backend/**'
+    - Makefile
+    - '.github/**'
 
 jobs:
 
@@ -13,14 +21,14 @@ jobs:
 
     steps:
 
-    - name: Set up Go 1.13
-      uses: actions/setup-go@v1
+    - name: Set up Go
+      uses: actions/setup-go@v2.1.2
       with:
-        go-version: 1.13.x
+        go-version: '1.15.2'
       id: go
 
     - name: Check out code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2.3.3
 
     - name: Lint, Build & Check
       run: |
