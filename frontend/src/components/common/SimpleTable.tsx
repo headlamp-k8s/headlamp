@@ -1,7 +1,10 @@
+import menuDown from '@iconify/icons-mdi/menu-down';
+import menuSwap from '@iconify/icons-mdi/menu-swap';
+import menuUp from '@iconify/icons-mdi/menu-up';
 import refreshIcon from '@iconify/icons-mdi/refresh';
 import squareIcon from '@iconify/icons-mdi/square';
 import { Icon, InlineIcon } from '@iconify/react';
-import { Button } from '@material-ui/core';
+import { Button, IconButton } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -37,11 +40,14 @@ const useTableStyle = makeStyles(theme => ({
   }
 }));
 
+type sortFunction = (arg1: any, arg2: any) => number;
+
 interface SimpleTableColumn {
   label: string;
   cellProps?: {
     [propName: string]: any;
   };
+  sort?: sortFunction | boolean;
 }
 
 interface SimpleTableDatumColumn extends SimpleTableColumn {
@@ -62,6 +68,25 @@ export interface SimpleTableProps {
   rowsPerPage?: number[];
   emptyMessage?: string;
   errorMessage?: string | null;
+  defaultSortingColumn? : number;
+}
+
+interface ColumnSortButtonProps {
+   isDefaultSorted: boolean;
+   isIncreasingOrder: boolean;
+   clickHandler: (isIncreasingOrder: boolean) => void;
+}
+
+function ColumnSortButtons(props: ColumnSortButtonProps) {
+  const {isDefaultSorted, isIncreasingOrder, clickHandler} = props;
+  return isDefaultSorted ?
+    <IconButton size="small" onClick={() => clickHandler(!isIncreasingOrder)}>
+      <Icon icon={isIncreasingOrder ? menuUp : menuDown}/>
+    </IconButton>
+    :
+    <IconButton size="small" onClick={() => clickHandler(true)}>
+      <Icon icon={menuSwap}/>
+    </IconButton>;
 }
 
 export default function SimpleTable(props: SimpleTableProps) {
@@ -71,12 +96,19 @@ export default function SimpleTable(props: SimpleTableProps) {
     filterFunction = null,
     emptyMessage = null,
     errorMessage = null,
+    defaultSortingColumn
   } = props;
   const [page, setPage] = React.useState(0);
   const [currentData, setCurrentData] = React.useState(data);
+  const [displayData, setDisplayData] = React.useState(data);
   const rowsPerPageOptions = props.rowsPerPage || [5, 10, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
   const classes = useTableStyle();
+  const [isIncreasingOrder, setIsIncreasingOrder] =
+    React.useState(!defaultSortingColumn || defaultSortingColumn > 0);
+  // We use a -1 value here if no sorting should be done by default.
+  const [sortColIndex, setSortColIndex] =
+    React.useState(defaultSortingColumn ? Math.abs(defaultSortingColumn) - 1 : -1);
 
   function handleChangePage(_event: any, newPage: number) {
     setPage(newPage);
@@ -99,17 +131,70 @@ export default function SimpleTable(props: SimpleTableProps) {
     // it directly. Otherwise it will require user's intervention.
     if ((!currentData || currentData.length === 0) || page === 0) {
       setCurrentData(data);
+      setDisplayData(getSortData() || data);
     }
   },
   // eslint-disable-next-line
   [data, currentData]);
+
+  function defaultSortingFunction(column : SimpleTableGetterColumn) {
+    function defaultSortingReal(item1: any, item2: any) {
+      const value1 = column.getter(item1);
+      const value2 = column.getter(item2);
+
+      let compareValue = 0;
+      if (value1 < value2) {
+        compareValue = -1;
+      } else if (value1 > value2) {
+        compareValue = 1;
+      }
+
+      return compareValue * (isIncreasingOrder ? 1 : -1);
+    }
+
+    return defaultSortingReal;
+  }
+
+  function getSortData() {
+    if (!data || sortColIndex < 0) {
+      return null;
+    }
+    let applySort = undefined;
+    const columnAskingForSort = columns[sortColIndex];
+    const sortFunction = columnAskingForSort?.sort;
+
+    if (typeof sortFunction === 'boolean' && sortFunction){
+      setDisplayData(data.slice().sort(defaultSortingFunction(columnAskingForSort as
+        SimpleTableGetterColumn)));
+      return;
+    }
+
+    if (typeof sortFunction === 'function') {
+      applySort = (arg1: any, arg2: any) => {
+        const orderChanger = isIncreasingOrder ? 1 : -1;
+        return sortFunction(arg1, arg2) as number * orderChanger;
+      };
+      const sortedData = data.slice().sort(applySort);
+      return sortedData;
+    }
+  }
+
+  React.useEffect(() => {
+    const sortedData = getSortData();
+    if (!sortedData) {
+      return;
+    }
+    setDisplayData(sortedData);
+  },
+  // eslint-disable-next-line
+  [sortColIndex, isIncreasingOrder, currentData]);
 
   function getPagedRows() {
     const startIndex = page * rowsPerPage;
     return filteredData.slice(startIndex, startIndex + rowsPerPage);
   }
 
-  if (currentData === null) {
+  if (displayData === null) {
     if (!!errorMessage) {
       return (
         <Empty color="error">{errorMessage}</Empty>
@@ -119,10 +204,15 @@ export default function SimpleTable(props: SimpleTableProps) {
     return <Loader />;
   }
 
-  let filteredData = currentData;
+  let filteredData = displayData;
 
   if (filterFunction) {
-    filteredData = currentData.filter(filterFunction);
+    filteredData = displayData.filter(filterFunction);
+  }
+
+  function sortClickHandler(isIncreasingOrder: boolean, index: number) {
+    setIsIncreasingOrder(isIncreasingOrder);
+    setSortColIndex(index);
   }
 
   return (
@@ -146,7 +236,7 @@ export default function SimpleTable(props: SimpleTableProps) {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              {columns.map(({label, cellProps = {}}, i) => {
+              {columns.map(({label, cellProps = {}, sort}, i) => {
                 const {className = '', ...otherProps} = cellProps;
                 return (
                   <TableCell
@@ -155,6 +245,15 @@ export default function SimpleTable(props: SimpleTableProps) {
                     {...otherProps}
                   >
                     {label}
+                    {sort &&
+                    <ColumnSortButtons
+                      isIncreasingOrder={Boolean(isIncreasingOrder)}
+                      isDefaultSorted={sortColIndex === i}
+                      clickHandler={(isIncreasingOrder: boolean) =>
+                        sortClickHandler(isIncreasingOrder, i)
+                      }
+                    />
+                    }
                   </TableCell>
                 );
               })}
