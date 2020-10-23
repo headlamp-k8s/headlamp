@@ -92,50 +92,6 @@ the CI checks are passing for your PR.
 
 ## Commit guidelines
 
-The title of the commit message should be a brief _what_ the changes do.
-The body of the commit message should be about _why_ the change was needed,
-and it is needed almost all of the times, except for very obvious and small
-changes (typos, lint fixes, etc.).
-
-Keep commits atomic as much as possible, i.e. if there are changes that are
-unrelated to the _why_ explanation for the commit, they probably belong to
-another commit. This keeps things independent and easier to review (and
-"independent" changes are not lost when a commit has to be reverted).
-
-For anything that is not covered in this section, please refer to this
-[article](https://chris.beams.io/posts/git-commit/) on how to write very good
- commit messages.
-
-### Commit format
-
-```
-<area>: <Description of changes>
-
-Detailed information about the commit message goes here
-```
-
-The `<area>` part of the commit for now is either `backend`, `frontend`, or
-`docs`.
-
-The title and body of the commit message should not exceed 72 characters in
-length.
-
-Please wrap the body of commit message at 72 chars.
-
-Here are a few example commit messages:
-
-Bad:
-```
-Fix dialog
-
-Adds a cancel button to the dialog.
-```
-
-Good:
-```
-frontend: Add cancel button to the EditDialog
-
-The EditDialog should have an explicit way to cancel the changes, so
-these changes add a new button that will cancel the changes and close
-the mentioned dialog.
-```
+For the general guidelines on making PRs/commits easier to review, please check
+out Kinvolk's
+[contribution guidelines on git](https://github.com/kinvolk/contribution/tree/master/topics/git.md).
