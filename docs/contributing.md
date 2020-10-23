@@ -6,6 +6,10 @@ It assumes you have cloned this repository (or your own Github fork).
 Any contributions to the project are accepted under the terms of the project's
 license ([Apache 2.0](../LICENSE)).
 
+## Code of Conduct
+
+Please refer to the Kinvolk [Code of Conduct](https://github.com/kinvolk/contribution/blob/master/CODE_OF_CONDUCT.md).
+
 ## Filing an issue or feature request
 
 Please use the [project's issue tracker](https://github.com/kinvolk/headlamp/issues) for filing any bugs you find or features
