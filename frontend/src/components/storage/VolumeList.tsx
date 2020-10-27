@@ -26,7 +26,15 @@ export default function VolumeList() {
         columns={[
           {
             label: 'Name',
-            getter: (volume) => <Link kubeObject={volume} />
+            getter: (volume) => <Link kubeObject={volume} />,
+            sort: (pv1: PersistentVolume, pv2: PersistentVolume) => {
+              if (pv1.metadata.name < pv2.metadata.name) {
+                return -1;
+              } else if (pv1.metadata.name > pv2.metadata.name) {
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Status',
@@ -38,10 +46,14 @@ export default function VolumeList() {
           },
           {
             label: 'Age',
-            getter: (volume) => volume.getAge()
+            getter: (volume) => volume.getAge(),
+            sort: (pv1: PersistentVolume, pv2: PersistentVolume) =>
+              new Date(pv2.metadata.creationTimestamp).getTime() -
+              new Date(pv1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={volumes}
+        defaultSortingColumn={4}
       />
     </SectionBox>
   );

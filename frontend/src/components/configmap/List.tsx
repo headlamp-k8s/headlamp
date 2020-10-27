@@ -26,7 +26,15 @@ export default function ConfigMapList() {
           {
             label: 'Name',
             getter: (configMap) =>
-              <Link kubeObject={configMap} />
+              <Link kubeObject={configMap} />,
+            sort: (c1: ConfigMap, c2: ConfigMap) => {
+              if (c1.metadata.name < c2.metadata.name) {
+                return -1;
+              } else if (c1.metadata.name > c2.metadata.name) {
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Namespace',
@@ -35,9 +43,13 @@ export default function ConfigMapList() {
           {
             label: 'Age',
             getter: (configMap) => configMap.getAge(),
+            sort: (c1: ConfigMap, c2: ConfigMap) =>
+              new Date(c2.metadata.creationTimestamp).getTime() -
+              new Date(c1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={configMaps}
+        defaultSortingColumn={3}
       />
     </SectionBox>
   );

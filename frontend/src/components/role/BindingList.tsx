@@ -83,7 +83,15 @@ export default function RoleBindingList() {
           {
             label: 'Name',
             getter: (item) =>
-              <Link kubeObject={item} />
+              <Link kubeObject={item} />,
+            sort: (r1: RoleBinding, r2: RoleBinding) => {
+              if (r1.metadata.name < r2.metadata.name) {
+                return -1;
+              } else if (r1.metadata.name > r2.metadata.name) {
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Namespace',
@@ -91,10 +99,14 @@ export default function RoleBindingList() {
           },
           {
             label: 'Age',
-            getter: (item) => item.getAge()
+            getter: (item) => item.getAge(),
+            sort: (r1: RoleBinding, r2: RoleBinding) =>
+              new Date(r2.metadata.creationTimestamp).getTime() -
+              new Date(r1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={getJointItems()}
+        defaultSortingColumn={4}
       />
     </SectionBox>
   );

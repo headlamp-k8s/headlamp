@@ -38,7 +38,15 @@ export default function NamespacesList() {
           {
             label: 'Name',
             getter: (namespace) =>
-              <Link kubeObject={namespace} />
+              <Link kubeObject={namespace} />,
+            sort: (n1: Namespace, n2: Namespace) => {
+              if (n1.metadata.name < n2.metadata.name) {
+                return -1;
+              } else if (n1.metadata.name > n2.metadata.name) {
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Status',
@@ -46,10 +54,14 @@ export default function NamespacesList() {
           },
           {
             label: 'Age',
-            getter: (namespace) => namespace.getAge()
+            getter: (namespace) => namespace.getAge(),
+            sort: (n1: Namespace, n2: Namespace) =>
+              new Date(n2.metadata.creationTimestamp).getTime() -
+              new Date(n1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={namespaces}
+        defaultSortingColumn={3}
       />
     </SectionBox>
   );

@@ -90,7 +90,15 @@ export default function RoleList() {
                 }}
               >
                 {item.metadata.name}
-              </Link>
+              </Link>,
+            sort: (r1: Role, r2: Role) => {
+              if (r1.metadata.name < r2.metadata.name) {
+                return -1;
+              } else if (r1.metadata.name > r2.metadata.name) {
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Namespace',
@@ -98,10 +106,14 @@ export default function RoleList() {
           },
           {
             label: 'Age',
-            getter: (item) => timeAgo(item.metadata.creationTimestamp)
+            getter: (item) => timeAgo(item.metadata.creationTimestamp),
+            sort: (r1: Role, r2: Role) =>
+              new Date(r2.metadata.creationTimestamp).getTime() -
+              new Date(r1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={getJointItems()}
+        defaultSortingColumn={4}
       />
     </SectionBox>
   );

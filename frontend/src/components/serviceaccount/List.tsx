@@ -25,7 +25,15 @@ export default function ServiceAccountList() {
         columns={[
           {
             label: 'Name',
-            getter: (serviceAccount) => <Link kubeObject={serviceAccount} />
+            getter: (serviceAccount) => <Link kubeObject={serviceAccount} />,
+            sort: (s1: ServiceAccount, s2: ServiceAccount) => {
+              if (s1.metadata.name < s2.metadata.name) {
+                return -1;
+              } else if (s1.metadata.name > s2.metadata.name) {
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Namespace',
@@ -33,10 +41,14 @@ export default function ServiceAccountList() {
           },
           {
             label: 'Age',
-            getter: (serviceAccount) => serviceAccount.getAge()
+            getter: (serviceAccount) => serviceAccount.getAge(),
+            sort: (s1: ServiceAccount, s2: ServiceAccount) =>
+              new Date(s2.metadata.creationTimestamp).getTime() -
+              new Date(s1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={serviceAccounts}
+        defaultSortingColumn={3}
       />
     </SectionBox>
   );

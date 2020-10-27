@@ -26,7 +26,15 @@ export default function ClassList() {
         columns={[
           {
             label: 'Name',
-            getter: (storageClass) => <Link kubeObject={storageClass} />
+            getter: (storageClass) => <Link kubeObject={storageClass} />,
+            sort: (sc1: StorageClass, sc2: StorageClass) => {
+              if (sc1.metadata.name < sc2.metadata.name) {
+                return -1;
+              } else if (sc2.metadata.name > sc1.metadata.name) {
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Reclaim Policy',
@@ -38,10 +46,14 @@ export default function ClassList() {
           },
           {
             label: 'Age',
-            getter: (storageClass) => storageClass.getAge()
+            getter: (storageClass) => storageClass.getAge(),
+            sort: (sc1: StorageClass, sc2: StorageClass) =>
+              new Date(sc2.metadata.creationTimestamp).getTime() -
+              new Date(sc1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={storageClasses}
+        defaultSortingColumn={4}
       />
     </SectionBox>
   );

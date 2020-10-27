@@ -46,14 +46,26 @@ export default function CustomResourceDefinitionList() {
           },
           {
             label: 'Full name',
-            getter: (crd) => crd.metadata.name
+            getter: (crd) => crd.metadata.name,
+            sort: (c1: CRD, c2: CRD) => {
+              if (c1.metadata.name < c2.metadata.name) {
+                return -1;
+              } else if (c1.metadata.name > c2.metadata.name) {
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Age',
-            getter: (crd) => timeAgo(crd.metadata.creationTimestamp)
+            getter: (crd) => timeAgo(crd.metadata.creationTimestamp),
+            sort: (c1: CRD, c2:CRD) =>
+              new Date(c2.metadata.creationTimestamp).getTime() -
+              new Date(c1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={crds}
+        defaultSortingColumn={5}
       />
     </SectionBox>
   );

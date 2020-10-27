@@ -39,7 +39,15 @@ export default function NodeList() {
         columns={[
           {
             label: 'Name',
-            getter: (node) => <Link kubeObject={node} />
+            getter: (node) => <Link kubeObject={node} />,
+            sort: (n1: Node, n2: Node) => {
+              if (n1.metadata.name < n2.metadata.name) {
+                return -1;
+              } else if (n1.metadata.name > n2.metadata.name) {
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Ready',
@@ -73,10 +81,14 @@ export default function NodeList() {
           },
           {
             label: 'Age',
-            getter: (node) => node.getAge()
+            getter: (node) => node.getAge(),
+            sort: (n1: Node, n2:Node) =>
+              new Date(n2.metadata.creationTimestamp).getTime() -
+              new Date(n1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={nodes}
+        defaultSortingColumn={5}
       />
     </SectionBox>
   );
