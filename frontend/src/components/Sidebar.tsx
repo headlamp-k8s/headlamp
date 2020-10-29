@@ -5,6 +5,7 @@ import hexagonMultipleOutline from '@iconify/icons-mdi/hexagon-multiple-outline'
 import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
 import lockIcon from '@iconify/icons-mdi/lock';
 import { Icon } from '@iconify/react';
+import { Divider } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
@@ -24,20 +25,22 @@ import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { generatePath } from 'react-router';
+import { generatePath, useHistory } from 'react-router';
 import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from 'react-router-dom';
 import semver from 'semver';
 import { getVersion, useCluster } from '../lib/k8s';
 import { StringDict } from '../lib/k8s/cluster';
 import { createRouteURL, getRoute } from '../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../lib/util';
-import { setSidebarSelected } from '../redux/actions/actions';
+import { setSidebarSelected, setWhetherSidebarOpen } from '../redux/actions/actions';
 import { useTypedSelector } from '../redux/reducers/reducers';
 import { SidebarEntry } from '../redux/reducers/ui';
 import store from '../redux/stores/store';
-import { ReactComponent as LogoLight } from '../resources/logo-light.svg';
+import { ReactComponent as LogoLight } from '../resources/icon-light.svg';
+import { ReactComponent as LogoWithTextLight } from '../resources/logo-light.svg';
 import { NameValueTable } from './common';
 import CreateButton from './common/CreateButton';
+import Tabs from './common/Tab';
 
 const versionSnackbarHideTimeout = 5000; // ms
 const versionFetchInterval = 60000; // ms
@@ -77,7 +80,7 @@ const useStyle = makeStyles(theme => ({
   toolbar: {
     borderBottom: '1px solid #1e1e1e',
     paddingTop: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
+    paddingLeft: (isSidebarOpen: boolean) => isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
   sidebarGrid: {
@@ -348,6 +351,7 @@ function VersionButton() {
 interface ListItemLinkProps {
   primary: string;
   to: string;
+  name: string;
   icon?: object;
 }
 
@@ -381,11 +385,12 @@ function ListItemLink(props: ListItemLinkProps) {
 }
 
 export default function Sidebar() {
-  const classes = useStyle();
   const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const items = React.useMemo(() => prepareRoutes(), [sidebar.entries]);
   const [open, setOpen] = React.useState(false);
+  const classes = useStyle(open);
 
   // Use the location to make sure the sidebar is changed, as it depends on the cluster
   // (defined in the URL ATM).
@@ -410,10 +415,14 @@ export default function Sidebar() {
       }}
     >
       <div className={classes.toolbar}>
-        <Button onClick={() => setOpen(!open)}>
+        <Button onClick={() => {
+          dispatch(setWhetherSidebarOpen(!open));
+          setOpen(!open);
+        }}
+        >
           <SvgIcon
             className={classes.logo}
-            component={LogoLight}
+            component={open ? LogoWithTextLight : LogoLight}
             viewBox="0 0 auto 32"
           />
         </Button>
@@ -570,6 +579,7 @@ function SidebarItem(props: SidebarItemProps) {
         }}
         className={linkClass}
         icon={icon}
+        name={label}
         {...other}
       />
       {subList.length > 0 &&
@@ -598,4 +608,88 @@ export function useSidebarItem(itemName: string | null) {
   },
   // eslint-disable-next-line react-hooks/exhaustive-deps
   []);
+}
+
+function searchNameInSubList(sublist : SidebarEntry['subList'], name: string): boolean {
+  if (!sublist) {
+    return false;
+  }
+  for (let i = 0; i < sublist.length; i++) {
+    if (sublist[i].name === name){
+      return true;
+    }
+  }
+  return false;
+}
+
+function findParentOfSubList(list: SidebarEntry[], name: string | null): SidebarEntry | null{
+  if (!name) {
+    return null;
+  }
+
+  let parent = null;
+  for (let i = 0; i < list.length; i++) {
+    if (searchNameInSubList(list[i].subList, name)) {
+      parent = list[i];
+    }
+  }
+  return parent;
+}
+
+export function NavigationTabs() {
+  const history = useHistory();
+  const sidebar = useTypedSelector(state => state.ui.sidebar);
+  if (sidebar.isSidebarOpen) {
+    return null;
+  }
+
+  let defaultIndex = null;
+  const listItems = prepareRoutes();
+  let navigationItem = listItems.find((item) => item.name === sidebar.selected);
+  if (!navigationItem) {
+    const parent = findParentOfSubList(listItems, sidebar.selected);
+    if (!parent) {
+      return null;
+    }
+    navigationItem = parent;
+  }
+
+  const subList = navigationItem.subList;
+  if (!subList) {
+    return null;
+  }
+
+  function tabChangeHandler(index: number) {
+    if (!subList) {
+      return;
+    }
+    let pathname;
+
+    const url = subList[index].url;
+    if (url) {
+      pathname = generatePath(getClusterPrefixedPath(url), {cluster: getCluster()!});
+    } else {
+      pathname = createRouteURL(subList[index].name);
+    }
+    history.push({pathname});
+  }
+
+  if (createRouteURL(navigationItem.name)) {
+    subList.unshift(navigationItem);
+  }
+
+  const tabRoutes = subList.map((item: any) => {
+    return {'label': item.label, component: <></>};
+  });
+
+  defaultIndex = subList.findIndex((item) => item.name === sidebar.selected);
+  return (
+    <Box mb={2}>
+      <Tabs
+        tabs={tabRoutes}
+        onTabChanged={(index) => {tabChangeHandler(index);}}
+        defaultIndex={defaultIndex}
+      />
+      <Divider />
+    </Box>);
 }

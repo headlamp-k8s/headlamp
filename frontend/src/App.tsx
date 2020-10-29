@@ -21,7 +21,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, HashRouter, Redirect, Route, RouteProps, Switch, useHistory } from 'react-router-dom';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
-import Sidebar, { drawerWidth, useSidebarItem } from './components/Sidebar';
+import Sidebar, { drawerWidth, NavigationTabs, useSidebarItem } from './components/Sidebar';
 import { isElectron } from './helpers';
 import { getToken, setToken } from './lib/auth';
 import { useCluster, useClustersConf } from './lib/k8s';
@@ -216,7 +216,6 @@ function AppContainer(props: AppContainerProps) {
               <div style={{flex: '1 0 0'}} />
               <ClusterTitle />
               <div style={{flex: '1 0 0'}} />
-
               <ThemeChangeButton
                 onChange={(theme: string) => setThemeName(theme)}
               />
@@ -227,6 +226,7 @@ function AppContainer(props: AppContainerProps) {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <Container maxWidth="lg">
+              <NavigationTabs />
               <RouteSwitcher />
             </Container>
           </main>
