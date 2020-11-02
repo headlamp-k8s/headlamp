@@ -3,6 +3,7 @@ import logoutIcon from '@iconify/icons-mdi/logout';
 import darkIcon from '@iconify/icons-mdi/weather-night';
 import lightIcon from '@iconify/icons-mdi/weather-sunny';
 import { Icon } from '@iconify/react';
+import { Box } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,7 +12,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
@@ -33,9 +34,6 @@ import store from './redux/stores/store';
 
 const useStyle = makeStyles(theme => ({
   root: {
-    display: 'flex',
-  },
-  appBar: {
     background: theme.palette.background.default,
     paddingLeft: `${drawerWidth}px`,
     marginLeft: drawerWidth,
@@ -75,7 +73,6 @@ function RouteSwitcher() {
 }
 
 function TopBar() {
-  const classes = useStyle();
   const appBarActions = useTypedSelector(state => state.ui.views.appBar.actions);
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const cluster = useCluster();
@@ -102,60 +99,51 @@ function TopBar() {
   }
 
   return (
-    <AppBar
-      position="fixed"
-      className={classes.appBar}
-      elevation={1}
-    >
-      <Toolbar>
-        <div style={{flex: '1 0 0'}} />
-        <ClusterTitle />
-        <div style={{flex: '1 0 0'}} />
-        { // @todo: Use a grid to compose the toolbar
-          Object.values(appBarActions).map((action, i) =>
-            <React.Fragment key={i}>{action()}</React.Fragment>)
-        }
-        <IconButton
-          aria-label='User menu'
-          aria-controls='menu-appbar'
-          aria-haspopup='true'
-          onClick={handleMenu}
-          color='inherit'
+    <>
+      { // @todo: Use a grid to compose the toolbar
+        Object.values(appBarActions).map((action, i) =>
+          <React.Fragment key={i}>{action()}</React.Fragment>)
+      }
+      <IconButton
+        aria-label='User menu'
+        aria-controls='menu-appbar'
+        aria-haspopup='true'
+        onClick={handleMenu}
+        color='inherit'
+      >
+        <Icon icon={accountIcon} />
+      </IconButton>
+      <Menu
+        id='customized-menu'
+        anchorEl={menuAnchorEl}
+        open={!!menuAnchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <MenuItem
+          component="a"
+          onClick={logout}
+          disabled={!hasToken()}
+          dense
         >
-          <Icon icon={accountIcon} />
-        </IconButton>
-        <Menu
-          id='customized-menu'
-          anchorEl={menuAnchorEl}
-          open={!!menuAnchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-        >
-          <MenuItem
-            component="a"
-            onClick={logout}
-            disabled={!hasToken()}
-            dense
-          >
-            <ListItemIcon>
-              <Icon icon={logoutIcon} />
-            </ListItemIcon>
-            <ListItemText
-              primary="Log out"
-              secondary={hasToken() ? null : '(No token set up)'}
-            />
-          </MenuItem>
-        </Menu>
-      </Toolbar>
-    </AppBar>
-  )
+          <ListItemIcon>
+            <Icon icon={logoutIcon} />
+          </ListItemIcon>
+          <ListItemText
+            primary="Log out"
+            secondary={hasToken() ? null : '(No token set up)'}
+          />
+        </MenuItem>
+      </Menu>
+    </>
+  );
 }
 
 interface ThemeChangeButtonProps {
@@ -197,11 +185,59 @@ function ThemeChangeButton(props: ThemeChangeButtonProps) {
   );
 }
 
-function App() {
+interface AppContainerProps {
+  setThemeName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function AppContainer(props: AppContainerProps) {
   const classes = useStyle();
+  const {setThemeName} = props;
   const Router = ({children} : React.PropsWithChildren<{}>) => isElectron() ?
     <HashRouter>{children}</HashRouter> :
     <BrowserRouter>{children}</BrowserRouter>;
+
+  return (
+    <SnackbarProvider
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left',
+      }}
+    >
+      <Router>
+        <Box display="flex">
+          <CssBaseline />
+
+          <AppBar
+            position="fixed"
+            className={classes.root}
+            elevation={1}
+          >
+            <Toolbar>
+              <div style={{flex: '1 0 0'}} />
+              <ClusterTitle />
+              <div style={{flex: '1 0 0'}} />
+
+              <ThemeChangeButton
+                onChange={(theme: string) => setThemeName(theme)}
+              />
+              <TopBar />
+            </Toolbar>
+          </AppBar>
+          <Sidebar />
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Container maxWidth="lg">
+              <RouteSwitcher />
+            </Container>
+          </main>
+          <ActionsNotifier />
+        </Box>
+      </Router>
+    </SnackbarProvider>
+  );
+}
+
+function App() {
   const [themeName, setThemeName] = React.useState(getTheme());
 
   React.useEffect(() => {
@@ -210,48 +246,14 @@ function App() {
   [themeName]);
 
   React.useEffect(() => {
-    console.log(themeName)
+    console.log(themes[themeName]);
   },
   [themeName]);
 
   return (
     <Provider store={store}>
       <ThemeProvider theme={themes[themeName]}>
-        <SnackbarProvider
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-        >
-          <Router>
-            <div className={classes.root}>
-              <CssBaseline />
-              <TopBar />
-              <AppBar
-                position="fixed"
-                className={classes.appBar}
-                elevation={1}
-              >
-                <Toolbar>
-                  <div style={{flex: '1 0 0'}} />
-                  <ClusterTitle />
-                  <div style={{flex: '1 0 0'}} />
-                  <ThemeChangeButton
-                    onChange={(theme: string) => setThemeName(theme)}
-                  />
-                </Toolbar>
-              </AppBar>
-              <Sidebar />
-              <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Container maxWidth="lg">
-                  <RouteSwitcher />
-                </Container>
-              </main>
-              <ActionsNotifier />
-            </div>
-          </Router>
-        </SnackbarProvider>
+        <AppContainer setThemeName={setThemeName}/>
       </ThemeProvider>
     </Provider>
   );
