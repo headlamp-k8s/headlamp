@@ -336,16 +336,24 @@ function connectStream(path: string, cb: StreamResultsCb, onFail: () => void, is
   }
 
   const url = combinePath(BASE_WS_URL, fullPath);
-  const socket = new WebSocket(url, protocols);
-  socket.binaryType = 'arraybuffer';
-  socket.addEventListener('message', onMessage);
-  socket.addEventListener('close', onClose);
-  socket.addEventListener('error', onError);
+  let socket: WebSocket | null = null;
+  try {
+    socket = new WebSocket(url, protocols);
+    socket.binaryType = 'arraybuffer';
+    socket.addEventListener('message', onMessage);
+    socket.addEventListener('close', onClose);
+    socket.addEventListener('error', onError);
+  } catch (error) {
+    console.error(error);
+  }
 
   return {close, socket};
 
   function close() {
     isClosing = true;
+    if (!socket) {
+      return;
+    }
     socket.close();
   }
 
@@ -359,6 +367,9 @@ function connectStream(path: string, cb: StreamResultsCb, onFail: () => void, is
   function onClose(...args: any[]) {
     if (isClosing) return;
     isClosing = true;
+    if (!socket) {
+      return;
+    }
 
     socket.removeEventListener('message', onMessage);
     socket.removeEventListener('close', onClose);
