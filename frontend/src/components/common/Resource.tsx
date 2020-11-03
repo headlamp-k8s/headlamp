@@ -36,7 +36,7 @@ import { LightTooltip } from './Tooltip';
 const useStyles = makeStyles(theme => ({
   metadataValueLabel: {
     color: theme.palette.text.primary,
-    backgroundColor: theme.palette.grey[300],
+    backgroundColor: theme.palette.metadataBgColor,
     fontSize: '1.1em',
     wordBreak: 'break-word',
     paddingLeft: theme.spacing(1),

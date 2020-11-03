@@ -45,8 +45,16 @@ const commonRules = {
       main: red['500'],
       light: red['50'],
     },
+    resourceToolTip: {
+      color: 'rgba(0, 0, 0, 0.87)'
+    },
     sidebarBg: '#000',
     normalEventBg: '#F0F0F0',
+    chartStyles: {
+      defaultFillColor: grey['300'],
+      labelColor: '#000'
+    },
+    metadataBgColor: grey['300'],
     headerStyle: {
       normal: {
         '& h6': {
@@ -82,6 +90,16 @@ const darkTheme = createMuiTheme({
     ...commonRules.palette,
     tables: {
       headerText: '#9e9e9e',
+    },
+    chartStyles: {
+      defaultFillColor: 'rgba(20, 20, 20, 0.1)',
+      fillColor: '#3DA3F5',
+      labelColor: '#fff'
+    },
+    normalEventBg: '#333333',
+    metadataBgColor: '#333',
+    resourceToolTip: {
+      color: 'rgba(255, 255, 255, 0.87)'
     },
     type: 'dark',
   },
