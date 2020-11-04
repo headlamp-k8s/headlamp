@@ -131,7 +131,6 @@ export default function SimpleTable(props: SimpleTableProps) {
       location,
       tableName || ''
     );
-    setPage(newPage);
   }
 
   function handleChangeRowsPerPage(event: any) {
@@ -142,15 +141,19 @@ export default function SimpleTable(props: SimpleTableProps) {
       location,
       tableName || ''
     );
-    setRowsPerPage(+event.target.value);
-    setPage(0);
   }
 
   React.useEffect(
     () => {
       if (currentData === data) {
         if (page !== 0) {
-          setPage(0);
+          addQuery(
+            { page: '0', rowsPerPage: rowsPerPage.toString() },
+            queryParamDefaultObj,
+            history,
+            location,
+            tableName as string
+          );
         }
         return;
       }

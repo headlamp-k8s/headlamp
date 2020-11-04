@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
+import { addQuery } from '../../helpers';
 import Namespace from '../../lib/k8s/namespace';
 import { setNamespaceFilter } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -20,6 +22,9 @@ export function NamespacesAutocomplete() {
   const theme = useTheme();
   const filter = useTypedSelector(state => state.filter);
   const [namespaces, setNamespaces] = React.useState<Namespace[]>([]);
+  const queryParamDefaultObj = { namespace: '' };
+  const location = useLocation();
+  const history = useHistory();
 
   Namespace.useApiList(setNamespaces);
 
@@ -40,8 +45,15 @@ export function NamespacesAutocomplete() {
       id="namespaces-filter"
       autoComplete
       options={namespaces.map(namespace => namespace.metadata.name)}
-      defaultValue={[]}
       onChange={(event, newValue) => {
+        addQuery(
+          { namespace: newValue.join(',') },
+          queryParamDefaultObj,
+          history,
+          location,
+          '',
+          true
+        );
         dispatch(setNamespaceFilter(newValue));
         return [newValue];
       }}
