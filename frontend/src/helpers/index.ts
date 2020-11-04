@@ -40,7 +40,7 @@ export function getFilterValueByNameFromURL(key: string, location: any): string[
   if (!filterValue) {
     return [];
   }
-  return filterValue.split('~');
+  return filterValue.split(' ');
 }
 
 export function addQuery(
