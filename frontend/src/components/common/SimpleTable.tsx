@@ -14,6 +14,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { addQuery, getFilterValueByNameFromURL } from '../../helpers';
 import Empty from './EmptyContent';
 import { ValueLabel } from './Label';
 import Loader from './Loader';
@@ -69,6 +71,7 @@ export interface SimpleTableProps {
   emptyMessage?: string;
   errorMessage?: string | null;
   defaultSortingColumn?: number;
+  tableName?: string | null;
 }
 
 interface ColumnSortButtonProps {
@@ -98,6 +101,7 @@ export default function SimpleTable(props: SimpleTableProps) {
     emptyMessage = null,
     errorMessage = null,
     defaultSortingColumn,
+    tableName = null,
   } = props;
   const [page, setPage] = React.useState(0);
   const [currentData, setCurrentData] = React.useState(data);
@@ -112,12 +116,32 @@ export default function SimpleTable(props: SimpleTableProps) {
   const [sortColIndex, setSortColIndex] = React.useState(
     defaultSortingColumn ? Math.abs(defaultSortingColumn) - 1 : -1
   );
+  const history = useHistory();
+  const location = useLocation();
+  const queryParamDefaultObj: { [key: string]: string } = {
+    page: '0',
+    rowsPerPage: rowsPerPageOptions[0].toString(),
+  };
 
   function handleChangePage(_event: any, newPage: number) {
+    addQuery(
+      { page: newPage.toString(), rowsPerPage: rowsPerPage.toString() },
+      queryParamDefaultObj,
+      history,
+      location,
+      tableName || ''
+    );
     setPage(newPage);
   }
 
   function handleChangeRowsPerPage(event: any) {
+    addQuery(
+      { page: '0', rowsPerPage: event.target.value.toString() },
+      queryParamDefaultObj,
+      history,
+      location,
+      tableName || ''
+    );
     setRowsPerPage(+event.target.value);
     setPage(0);
   }
@@ -197,6 +221,34 @@ export default function SimpleTable(props: SimpleTableProps) {
     [sortColIndex, isIncreasingOrder, currentData]
   );
 
+  function refreshClickHandler(data: SimpleTableProps['data']) {
+    addQuery(
+      { page: '0', rowsPerPage: rowsPerPage.toString() },
+      queryParamDefaultObj,
+      history,
+      location,
+      tableName as string
+    );
+    setCurrentData(data);
+  }
+
+  React.useEffect(
+    () => {
+      const tableNameUrlParam = getFilterValueByNameFromURL('tableName', history) || null;
+      console.log(tableNameUrlParam);
+      if (tableNameUrlParam.length === 0 || tableNameUrlParam[0] === tableName) {
+        console.log(' i got inside');
+        const rowsPerPageUrlParam =
+          parseInt(getFilterValueByNameFromURL('rowsPerPage', location)[0]) ||
+          rowsPerPageOptions[0];
+        const pageUrlParam = parseInt(getFilterValueByNameFromURL('page', location)[0]) || 0;
+        setRowsPerPage(rowsPerPageUrlParam);
+        setPage(pageUrlParam);
+      }
+    },
+    // eslint-disable-next-line
+    [location]
+  );
   function getPagedRows() {
     const startIndex = page * rowsPerPage;
     return filteredData.slice(startIndex, startIndex + rowsPerPage);
@@ -234,7 +286,7 @@ export default function SimpleTable(props: SimpleTableProps) {
               variant="contained"
               startIcon={<Icon icon={refreshIcon} />}
               onClick={() => {
-                setCurrentData(data);
+                refreshClickHandler(data);
               }}
             >
               Refresh
