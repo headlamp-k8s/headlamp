@@ -96,6 +96,20 @@ const darkTheme = createMuiTheme({
       fillColor: '#3DA3F5',
       labelColor: '#fff'
     },
+    success: {
+      light: green['500'],
+      main: green['50'],
+      ...green
+    },
+    warning: {
+      main: orange['500'],
+      light: 'rgba(255, 152, 0, 0.15)',
+      ...orange
+    },
+    error: {
+      main: red['500'],
+      light: 'rgba(244, 67, 54, 0.2)',
+    },
     normalEventBg: '#333333',
     metadataBgColor: '#333',
     resourceToolTip: {
