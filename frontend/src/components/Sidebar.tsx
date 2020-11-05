@@ -235,11 +235,13 @@ const useVersionButtonStyle = makeStyles(theme => ({
     }
   },
   versionIcon: {
-    marginBottom: '3px',
+    marginTop: '5px',
+    marginRight: '5px'
   },
 }));
 
 function VersionButton() {
+  const sidebar = useTypedSelector(state => state.ui.sidebar);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useVersionButtonStyle();
   const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
@@ -338,9 +340,15 @@ function VersionButton() {
       <Button
         onClick={() => setOpen(true) }
         style={{textTransform: 'none', }}
-        startIcon={<Icon color="#adadad" icon={kubernetesIcon} className={classes.versionIcon} />}
       >
-        {clusterVersion.gitVersion}
+        <Box display={sidebar.isSidebarOpen ? 'flex' : 'block'} alignItems="center">
+          <Box>
+            <Icon color="#adadad" icon={kubernetesIcon} className={classes.versionIcon} />
+          </Box>
+          <Box>
+            {clusterVersion.gitVersion}
+          </Box>
+        </Box>
       </Button>
       <Dialog
         open={open}
