@@ -5,7 +5,7 @@ import hexagonMultipleOutline from '@iconify/icons-mdi/hexagon-multiple-outline'
 import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
 import lockIcon from '@iconify/icons-mdi/lock';
 import { Icon } from '@iconify/react';
-import { Divider } from '@material-ui/core';
+import { Divider, Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
@@ -19,7 +19,7 @@ import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
@@ -94,6 +94,18 @@ const useStyle = makeStyles(theme => ({
     width: 'auto',
   }
 }));
+
+const IconTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: '#474747',
+    color: '#fff',
+    minWidth: 60,
+    padding: '0.5rem',
+    fontSize: '0.8rem',
+    border: '1px solid #474747',
+    marginLeft: '1rem'
+  }
+}))(Tooltip);
 
 const LIST_ITEMS: SidebarEntry[] = [
   {
@@ -356,7 +368,7 @@ interface ListItemLinkProps {
 }
 
 function ListItemLink(props: ListItemLinkProps) {
-  const { primary, to, icon, ...other } = props;
+  const { primary, to, icon, name, ...other } = props;
 
   const renderLink = React.useMemo(
     () =>
@@ -365,6 +377,22 @@ function ListItemLink(props: ListItemLinkProps) {
       )),
     [to],
   );
+  let listItemLink = null;
+
+  if (icon) {
+    listItemLink =
+      <ListItemIcon>
+        <Icon icon={icon} width={30} height={30} />
+      </ListItemIcon>;
+  }
+
+  let listItemLinkContainer = listItemLink;
+  if (!primary) {
+    listItemLinkContainer = listItemLink &&
+    <IconTooltip title={name} placement="right-start">
+      {listItemLink}
+    </IconTooltip>;
+  }
 
   return (
     <li>
@@ -373,11 +401,7 @@ function ListItemLink(props: ListItemLinkProps) {
         component={renderLink}
         {...other}
       >
-        {icon &&
-          <ListItemIcon>
-            <Icon icon={icon} width={30} height={30} />
-          </ListItemIcon>
-        }
+        {listItemLinkContainer}
         <ListItemText primary={primary} />
       </ListItem>
     </li>
