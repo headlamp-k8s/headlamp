@@ -421,7 +421,7 @@ export default function Sidebar() {
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const items = React.useMemo(() => prepareRoutes(), [sidebar.entries]);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(sidebar.isSidebarOpen);
   const classes = useStyle(open);
 
   // Use the location to make sure the sidebar is changed, as it depends on the cluster
