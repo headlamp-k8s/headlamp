@@ -166,7 +166,7 @@ export default function SimpleTable(props: SimpleTableProps) {
       }
     },
     // eslint-disable-next-line
-    [data, currentData]
+    [data]
   );
 
   function defaultSortingFunction(column: SimpleTableGetterColumn) {
@@ -235,18 +235,42 @@ export default function SimpleTable(props: SimpleTableProps) {
     setCurrentData(data);
   }
 
+  function checkAndFixOutOfBoundsUrlParam(
+    data: SimpleTableProps['data'],
+    rowsPerPageUrlParam: number,
+    pageUrlParam: number
+  ): number[] {
+    if (data && data.length > 0 && data.length < rowsPerPageUrlParam * pageUrlParam) {
+      const page = Math.floor(data.length / rowsPerPageOptions[0]);
+
+      addQuery(
+        { page: page.toString(), rowsPerPage: rowsPerPageOptions[0].toString() },
+        queryParamDefaultObj,
+        history,
+        location,
+        tableName as string
+      );
+      return [page, rowsPerPageOptions[0]];
+    }
+    return [pageUrlParam, rowsPerPageUrlParam];
+  }
+
   React.useEffect(
     () => {
       const tableNameUrlParam = getFilterValueByNameFromURL('tableName', history) || null;
-      console.log(tableNameUrlParam);
       if (tableNameUrlParam.length === 0 || tableNameUrlParam[0] === tableName) {
-        console.log(' i got inside');
         const rowsPerPageUrlParam =
           parseInt(getFilterValueByNameFromURL('rowsPerPage', location)[0]) ||
           rowsPerPageOptions[0];
         const pageUrlParam = parseInt(getFilterValueByNameFromURL('page', location)[0]) || 0;
-        setRowsPerPage(rowsPerPageUrlParam);
-        setPage(pageUrlParam);
+        const fixedUrlParams = checkAndFixOutOfBoundsUrlParam(
+          data,
+          rowsPerPageUrlParam,
+          pageUrlParam
+        );
+
+        setPage(fixedUrlParams[0]);
+        setRowsPerPage(fixedUrlParams[1]);
       }
     },
     // eslint-disable-next-line
@@ -272,8 +296,17 @@ export default function SimpleTable(props: SimpleTableProps) {
   }
 
   function sortClickHandler(isIncreasingOrder: boolean, index: number) {
+    if (!displayData) {
+      return;
+    }
     setIsIncreasingOrder(isIncreasingOrder);
     setSortColIndex(index);
+    filteredData = displayData.filter(filterFunction);
+    const rowsPerPageUrlParam =
+      parseInt(getFilterValueByNameFromURL('rowsPerPage', location)[0]) || rowsPerPageOptions[0];
+    const pageUrlParam = parseInt(getFilterValueByNameFromURL('page', location)[0]) || 0;
+
+    checkAndFixOutOfBoundsUrlParam(filteredData, rowsPerPageUrlParam, pageUrlParam);
   }
 
   return !currentData || currentData.length === 0 ? (
