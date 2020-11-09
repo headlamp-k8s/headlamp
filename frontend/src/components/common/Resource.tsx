@@ -223,7 +223,8 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
 
   function getHeaderActions() {
-    return Object.values(headerActions).map(action => action({item: resource}));
+    return React.Children.toArray(Object.values(headerActions).map(action =>
+      action({item: resource})));
   }
 
   let defaultActions: MainInfoSectionProps['actions'] = [];
@@ -253,8 +254,8 @@ export function MainInfoSection(props: MainInfoSectionProps) {
             title={title || (resource ? resource.kind : '')}
             headerStyle={headerStyle}
             actions={
-              React.Children.toArray(actions).concat(defaultActions)
-                .concat(getHeaderActions())
+              getHeaderActions().concat(React.Children.toArray(actions))
+                .concat(defaultActions)
             }
           />
         }
