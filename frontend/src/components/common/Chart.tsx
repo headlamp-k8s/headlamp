@@ -76,14 +76,14 @@ export function PercentageCircle(props: PercentageCircleProps) {
         name: 'total',
         percentage: 100,
         value: total,
-        fill: theme.palette.grey['300'],
+        fill: theme.palette.chartStyles.defaultFillColor,
       }
       :
       {
         name: 'total',
         percentage: (total - filledValue) / total * 100,
         value: total,
-        fill: theme.palette.grey['300'],
+        fill: theme.palette.chartStyles.defaultFillColor,
         ...totalProps
       };
 
@@ -121,13 +121,15 @@ export function PercentageCircle(props: PercentageCircleProps) {
             // Start at the top
             startAngle={90}
             endAngle={-270}
-            fill={theme.palette.common.black}
+            stroke={theme.palette.chartStyles.defaultFillColor}
+            fill={theme.palette.chartStyles.fillColor || theme.palette.common.black}
           >
             <Label
               value={label || ''}
               position="center"
               style={{
                 fontSize: `${chartSize * .15}px`,
+                fill: theme.palette.chartStyles.labelColor
               }}
             />
           </Pie>

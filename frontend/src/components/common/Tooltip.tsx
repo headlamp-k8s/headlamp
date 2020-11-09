@@ -7,8 +7,8 @@ import React from 'react';
 
 const LightTooltip = withStyles(theme => ({
   tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.resourceToolTip.color,
     boxShadow: theme.shadows[1],
     fontSize: '1rem',
     whiteSpace: 'pre-line',

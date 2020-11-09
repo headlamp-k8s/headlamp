@@ -1,11 +1,10 @@
 import accountIcon from '@iconify/icons-mdi/account';
 import logoutIcon from '@iconify/icons-mdi/logout';
+import darkIcon from '@iconify/icons-mdi/weather-night';
+import lightIcon from '@iconify/icons-mdi/weather-sunny';
 import { Icon } from '@iconify/react';
+import { Box } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import green from '@material-ui/core/colors/green';
-import grey from '@material-ui/core/colors/grey';
-import orange from '@material-ui/core/colors/orange';
-import red from '@material-ui/core/colors/red';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,7 +12,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
@@ -27,88 +26,15 @@ import { isElectron } from './helpers';
 import { getToken, setToken } from './lib/auth';
 import { useCluster, useClustersConf } from './lib/k8s';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
+import themes, { getTheme, setTheme, ThemesConf } from './lib/themes';
 import { getCluster } from './lib/util';
 import { initializePlugins } from './plugin';
 import { useTypedSelector } from './redux/reducers/reducers';
 import store from './redux/stores/store';
 
-declare module '@material-ui/core/styles/createPalette.d' {
-  interface Palette {
-    success: object;
-    sidebarLink: {
-      [propName: string]: string;
-    };
-    [propName: string]: any;
-  }
-  interface PaletteOptions {
-    success: object;
-    sidebarLink: {
-      [propName: string]: string;
-    };
-    [propName: string]: any;
-  }
-}
-
-const dashboardTheme = createMuiTheme({
-  palette: {
-    primary: {
-      contrastText: '#fff',
-      main: '#3DA3F5',
-    },
-    success: {
-      light: green['50'],
-      main: green['500'],
-      ...green
-    },
-    warning: {
-      main: orange['500'],
-      light: orange['50'],
-      ...orange
-    },
-    sidebarLink: {
-      main: grey['500'],
-      selectedBg: grey['800'],
-    },
-    error: {
-      main: red['500'],
-      light: red['50'],
-    },
-    sidebarBg: '#000',
-    normalEventBg: '#F0F0F0',
-    headerStyle: {
-      normal: {
-        '& h6': {
-          fontSize: '1.1rem',
-        },
-      },
-      main: {
-        '& h6': {
-          fontSize: '1.87rem',
-        },
-        minHeight: '64px',
-      },
-      subsection: {
-        fontSize: '1.2rem',
-      },
-    },
-    tables: {
-      headerText: '#474747',
-    },
-  },
-  typography: {
-    fontFamily: ['Overpass', 'sans-serif'].join(', ')
-  },
-  shape: {
-    borderRadius: 0,
-  }
-});
-
 const useStyle = makeStyles(theme => ({
   root: {
-    display: 'flex',
-  },
-  appBar: {
-    background: '#fff',
+    background: theme.palette.background.default,
     paddingLeft: `${drawerWidth}px`,
     marginLeft: drawerWidth,
     '& > *': {
@@ -147,7 +73,6 @@ function RouteSwitcher() {
 }
 
 function TopBar() {
-  const classes = useStyle();
   const appBarActions = useTypedSelector(state => state.ui.views.appBar.actions);
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const cluster = useCluster();
@@ -174,97 +99,161 @@ function TopBar() {
   }
 
   return (
-    <AppBar
-      position="fixed"
-      className={classes.appBar}
-      elevation={1}
-    >
-      <Toolbar>
-        <div style={{flex: '1 0 0'}} />
-        <ClusterTitle />
-        <div style={{flex: '1 0 0'}} />
-        { // @todo: Use a grid to compose the toolbar
-          Object.values(appBarActions).map((action, i) =>
-            <React.Fragment key={i}>{action()}</React.Fragment>)
-        }
-        <IconButton
-          aria-label='User menu'
-          aria-controls='menu-appbar'
-          aria-haspopup='true'
-          onClick={handleMenu}
-          color='inherit'
+    <>
+      { // @todo: Use a grid to compose the toolbar
+        Object.values(appBarActions).map((action, i) =>
+          <React.Fragment key={i}>{action()}</React.Fragment>)
+      }
+      <IconButton
+        aria-label='User menu'
+        aria-controls='menu-appbar'
+        aria-haspopup='true'
+        onClick={handleMenu}
+        color='inherit'
+      >
+        <Icon icon={accountIcon} />
+      </IconButton>
+      <Menu
+        id='customized-menu'
+        anchorEl={menuAnchorEl}
+        open={!!menuAnchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <MenuItem
+          component="a"
+          onClick={logout}
+          disabled={!hasToken()}
+          dense
         >
-          <Icon icon={accountIcon} />
-        </IconButton>
-        <Menu
-          id='customized-menu'
-          anchorEl={menuAnchorEl}
-          open={!!menuAnchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-        >
-          <MenuItem
-            component="a"
-            onClick={logout}
-            disabled={!hasToken()}
-            dense
-          >
-            <ListItemIcon>
-              <Icon icon={logoutIcon} />
-            </ListItemIcon>
-            <ListItemText
-              primary="Log out"
-              secondary={hasToken() ? null : '(No token set up)'}
-            />
-          </MenuItem>
-        </Menu>
-      </Toolbar>
-    </AppBar>
+          <ListItemIcon>
+            <Icon icon={logoutIcon} />
+          </ListItemIcon>
+          <ListItemText
+            primary="Log out"
+            secondary={hasToken() ? null : '(No token set up)'}
+          />
+        </MenuItem>
+      </Menu>
+    </>
   );
 }
 
-function App() {
+interface ThemeChangeButtonProps {
+  onChange: (theme: string) => void;
+}
+
+function ThemeChangeButton(props: ThemeChangeButtonProps) {
+  const {onChange} = props;
+  type iconType = typeof darkIcon;
+
+  const counterIcons: {
+    [themeName in keyof ThemesConf]: iconType;
+  } = {
+    light: darkIcon,
+    dark: lightIcon,
+  };
+
+  const [icon, setIcon] = React.useState<iconType>(counterIcons[getTheme()]);
+
+  const themeNames = Object.keys(counterIcons);
+
+  function changeTheme() {
+    const idx = themeNames.indexOf(getTheme());
+    const newTheme = themeNames[(idx + 1) % themeNames.length];
+
+    setTheme(newTheme);
+    setIcon(counterIcons[newTheme]);
+
+    onChange(newTheme);
+  }
+
+  return (
+    <IconButton
+      aria-label="change-theme"
+      onClick={() => changeTheme()}
+    >
+      <Icon icon={icon} />
+    </IconButton>
+  );
+}
+
+interface AppContainerProps {
+  setThemeName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function AppContainer(props: AppContainerProps) {
   const classes = useStyle();
+  const {setThemeName} = props;
   const Router = ({children} : React.PropsWithChildren<{}>) => isElectron() ?
     <HashRouter>{children}</HashRouter> :
     <BrowserRouter>{children}</BrowserRouter>;
 
+  return (
+    <SnackbarProvider
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left',
+      }}
+    >
+      <Router>
+        <Box display="flex">
+          <CssBaseline />
+
+          <AppBar
+            position="fixed"
+            className={classes.root}
+            elevation={1}
+          >
+            <Toolbar>
+              <div style={{flex: '1 0 0'}} />
+              <ClusterTitle />
+              <div style={{flex: '1 0 0'}} />
+
+              <ThemeChangeButton
+                onChange={(theme: string) => setThemeName(theme)}
+              />
+              <TopBar />
+            </Toolbar>
+          </AppBar>
+          <Sidebar />
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Container maxWidth="lg">
+              <RouteSwitcher />
+            </Container>
+          </main>
+          <ActionsNotifier />
+        </Box>
+      </Router>
+    </SnackbarProvider>
+  );
+}
+
+function App() {
+  const [themeName, setThemeName] = React.useState(getTheme());
+
   React.useEffect(() => {
     initializePlugins();
   },
-  []);
+  [themeName]);
+
+  React.useEffect(() => {
+    console.log(themes[themeName]);
+  },
+  [themeName]);
 
   return (
     <Provider store={store}>
-      <ThemeProvider theme={dashboardTheme}>
-        <SnackbarProvider
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-        >
-          <Router>
-            <div className={classes.root}>
-              <CssBaseline />
-              <TopBar />
-              <Sidebar />
-              <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Container maxWidth="lg">
-                  <RouteSwitcher />
-                </Container>
-              </main>
-              <ActionsNotifier />
-            </div>
-          </Router>
-        </SnackbarProvider>
+      <ThemeProvider theme={themes[themeName]}>
+        <AppContainer setThemeName={setThemeName}/>
       </ThemeProvider>
     </Provider>
   );

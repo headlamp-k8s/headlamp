@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     '& .MuiTypography-h4': {
       textAlign: 'center',
       fontSize: '2.2rem',
-      color: theme.palette.common.black,
+      color: theme.palette.primaryColor,
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
     }
@@ -113,6 +113,7 @@ interface ClusterButtonProps {
 
 function ClusterButton(props: ClusterButtonProps) {
   const classes = useClusterButtonStyles();
+  const theme = useTheme();
   const {cluster, onClick = undefined} = props;
 
   return (
@@ -122,7 +123,7 @@ function ClusterButton(props: ClusterButtonProps) {
     >
       <Card className={classes.root}>
         <CardContent className={classes.content}>
-          <Icon icon={kubernetesIcon} width="50" height="50" color="#000" />
+          <Icon icon={kubernetesIcon} width="50" height="50" color={theme.palette.primaryColor} />
           <Typography color="textSecondary" gutterBottom>
             {cluster.name}
           </Typography>
@@ -277,7 +278,6 @@ function Chooser(props: ClusterDialogProps) {
         <React.Fragment>
           <DialogContentText
             variant="h4"
-            // className={classes.bigText}
           >
             Choose a cluster
           </DialogContentText>
