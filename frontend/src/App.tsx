@@ -35,7 +35,7 @@ import store from './redux/stores/store';
 const useStyle = makeStyles(theme => ({
   root: {
     background: theme.palette.background.default,
-    paddingLeft: `${drawerWidth}px`,
+    paddingLeft: (isSidebarOpen: boolean) => isSidebarOpen ? `${drawerWidth}px` : '0px',
     marginLeft: drawerWidth,
     '& > *': {
       color: theme.palette.text.primary,
@@ -190,7 +190,8 @@ interface AppContainerProps {
 }
 
 function AppContainer(props: AppContainerProps) {
-  const classes = useStyle();
+  const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
+  const classes = useStyle(isSidebarOpen);
   const {setThemeName} = props;
   const Router = ({children} : React.PropsWithChildren<{}>) => isElectron() ?
     <HashRouter>{children}</HashRouter> :
