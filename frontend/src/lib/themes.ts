@@ -27,6 +27,7 @@ const commonRules = {
       contrastText: '#fff',
       main: '#3DA3F5',
     },
+    primaryColor: '#000',
     success: {
       light: green['50'],
       main: green['500'],
@@ -91,6 +92,7 @@ const darkTheme = createMuiTheme({
     tables: {
       headerText: '#9e9e9e',
     },
+    primaryColor: '#fff',
     chartStyles: {
       defaultFillColor: 'rgba(20, 20, 20, 0.1)',
       fillColor: '#3DA3F5',
