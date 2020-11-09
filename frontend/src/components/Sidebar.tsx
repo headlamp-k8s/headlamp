@@ -79,7 +79,7 @@ const useStyle = makeStyles(theme => ({
   },
   toolbar: {
     borderBottom: '1px solid #1e1e1e',
-    paddingTop: theme.spacing(2),
+    paddingTop: theme.spacing(1.5),
     paddingLeft: (isSidebarOpen: boolean) => isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
