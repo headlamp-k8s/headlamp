@@ -11,6 +11,7 @@ export const CONFIG_NEW = 'CONFIG_NEW';
 export const UI_SIDEBAR_SET_SELECTED = 'UI_SIDEBAR_SET_SELECTED';
 export const UI_SIDEBAR_SET_VISIBLE = 'UI_SIDEBAR_SET_VISIBLE';
 export const UI_SIDEBAR_SET_ITEM = 'UI_SIDEBAR_SET_ITEM';
+export const UI_SIDEBAR_SET_EXPANDED = 'UI_SIDEBAR_SET_EXPANDED';
 export const UI_ROUTER_SET_ROUTE = 'UI_ROUTER_SET_ROUTE';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
 export const UI_APP_BAR_SET_ACTION = 'UI_APP_BAR_SET_ACTION';
@@ -80,6 +81,10 @@ export function updateClusterAction(actionOptions: ClusterAction) {
 
 export function setSidebarSelected(selected: SidebarType['selected']) {
   return { type: UI_SIDEBAR_SET_SELECTED, selected };
+}
+
+export function setWhetherSidebarOpen(isSidebarOpen: boolean) {
+  return { type: UI_SIDEBAR_SET_EXPANDED, isSidebarOpen};
 }
 
 export function setSidebarVisible(isVisible: SidebarType['isVisible']) {

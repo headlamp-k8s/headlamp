@@ -1,8 +1,9 @@
-import { Action, HeaderActionFunc, UI_APP_BAR_SET_ACTION, UI_DETAILS_VIEW_SET_HEADER_ACTION, UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
+import { Action, HeaderActionFunc, UI_APP_BAR_SET_ACTION, UI_DETAILS_VIEW_SET_HEADER_ACTION, UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_EXPANDED, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
 
 export interface SidebarEntry {
   name: string;
   label: string;
+  isParentAViewInItself?: boolean;
   parent?: string | null;
   url?: string;
   useClusterURL?: boolean;
@@ -14,6 +15,7 @@ export interface UIState {
   sidebar: {
     selected: string | null;
     isVisible: boolean;
+    isSidebarOpen: boolean;
     entries: {
       [propName: string]: SidebarEntry;
     };
@@ -39,6 +41,7 @@ export const INITIAL_STATE: UIState = {
   sidebar: {
     selected: null,
     isVisible: false,
+    isSidebarOpen: false,
     entries: {}
   },
   routes: {
@@ -72,7 +75,7 @@ function reducer(state = INITIAL_STATE, action: Action) {
     case UI_SIDEBAR_SET_VISIBLE: {
       newFilters.sidebar = {
         ...newFilters.sidebar,
-        isVisible: action.isVisible,
+        isVisible: action.isVisible
       };
       break;
     }
@@ -83,6 +86,13 @@ function reducer(state = INITIAL_STATE, action: Action) {
       newFilters.sidebar = {
         ...newFilters.sidebar,
         entries
+      };
+      break;
+    }
+    case UI_SIDEBAR_SET_EXPANDED: {
+      newFilters.sidebar = {
+        ...newFilters.sidebar,
+        isSidebarOpen: action.isSidebarOpen
       };
       break;
     }

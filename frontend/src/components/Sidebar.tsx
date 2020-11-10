@@ -5,6 +5,7 @@ import hexagonMultipleOutline from '@iconify/icons-mdi/hexagon-multiple-outline'
 import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
 import lockIcon from '@iconify/icons-mdi/lock';
 import { Icon } from '@iconify/react';
+import { Divider, Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
@@ -18,25 +19,28 @@ import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { generatePath } from 'react-router';
+import { generatePath, useHistory } from 'react-router';
 import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from 'react-router-dom';
 import semver from 'semver';
 import { getVersion, useCluster } from '../lib/k8s';
 import { StringDict } from '../lib/k8s/cluster';
 import { createRouteURL, getRoute } from '../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../lib/util';
-import { setSidebarSelected } from '../redux/actions/actions';
+import { setSidebarSelected, setWhetherSidebarOpen } from '../redux/actions/actions';
 import { useTypedSelector } from '../redux/reducers/reducers';
 import { SidebarEntry } from '../redux/reducers/ui';
 import store from '../redux/stores/store';
-import { ReactComponent as LogoLight } from '../resources/logo-light.svg';
+import { ReactComponent as LogoLight } from '../resources/icon-light.svg';
+import { ReactComponent as LogoWithTextLight } from '../resources/logo-light.svg';
 import { NameValueTable } from './common';
 import CreateButton from './common/CreateButton';
+import Tabs from './common/Tab';
 
 const versionSnackbarHideTimeout = 5000; // ms
 const versionFetchInterval = 60000; // ms
@@ -47,6 +51,27 @@ const useStyle = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    background: theme.palette.sidebarBg,
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    background: theme.palette.sidebarBg,
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9) + 1,
+    },
+    background: theme.palette.sidebarBg,
   },
   drawerPaper: {
     width: drawerWidth,
@@ -54,8 +79,8 @@ const useStyle = makeStyles(theme => ({
   },
   toolbar: {
     borderBottom: '1px solid #1e1e1e',
-    paddingTop: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
+    paddingTop: theme.spacing(1.5),
+    paddingLeft: (isSidebarOpen: boolean) => isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
   sidebarGrid: {
@@ -69,6 +94,18 @@ const useStyle = makeStyles(theme => ({
     width: 'auto',
   }
 }));
+
+const IconTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: '#474747',
+    color: '#fff',
+    minWidth: 60,
+    padding: '0.5rem',
+    fontSize: '0.8rem',
+    border: '1px solid #474747',
+    marginLeft: '1rem'
+  }
+}))(Tooltip);
 
 const LIST_ITEMS: SidebarEntry[] = [
   {
@@ -198,11 +235,13 @@ const useVersionButtonStyle = makeStyles(theme => ({
     }
   },
   versionIcon: {
-    marginBottom: '3px',
+    marginTop: '5px',
+    marginRight: '5px'
   },
 }));
 
 function VersionButton() {
+  const sidebar = useTypedSelector(state => state.ui.sidebar);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useVersionButtonStyle();
   const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
@@ -301,9 +340,15 @@ function VersionButton() {
       <Button
         onClick={() => setOpen(true) }
         style={{textTransform: 'none', }}
-        startIcon={<Icon color="#adadad" icon={kubernetesIcon} className={classes.versionIcon} />}
       >
-        {clusterVersion.gitVersion}
+        <Box display={sidebar.isSidebarOpen ? 'flex' : 'block'} alignItems="center">
+          <Box>
+            <Icon color="#adadad" icon={kubernetesIcon} className={classes.versionIcon} />
+          </Box>
+          <Box>
+            {clusterVersion.gitVersion}
+          </Box>
+        </Box>
       </Button>
       <Dialog
         open={open}
@@ -326,11 +371,12 @@ function VersionButton() {
 interface ListItemLinkProps {
   primary: string;
   to: string;
+  name: string;
   icon?: object;
 }
 
 function ListItemLink(props: ListItemLinkProps) {
-  const { primary, to, icon, ...other } = props;
+  const { primary, to, icon, name, ...other } = props;
 
   const renderLink = React.useMemo(
     () =>
@@ -339,6 +385,22 @@ function ListItemLink(props: ListItemLinkProps) {
       )),
     [to],
   );
+  let listItemLink = null;
+
+  if (icon) {
+    listItemLink =
+      <ListItemIcon>
+        <Icon icon={icon} width={30} height={30} />
+      </ListItemIcon>;
+  }
+
+  let listItemLinkContainer = listItemLink;
+  if (!primary) {
+    listItemLinkContainer = listItemLink &&
+    <IconTooltip title={name} placement="right-start">
+      {listItemLink}
+    </IconTooltip>;
+  }
 
   return (
     <li>
@@ -347,11 +409,7 @@ function ListItemLink(props: ListItemLinkProps) {
         component={renderLink}
         {...other}
       >
-        {icon &&
-          <ListItemIcon>
-            <Icon icon={icon} width={30} height={30} />
-          </ListItemIcon>
-        }
+        {listItemLinkContainer}
         <ListItemText primary={primary} />
       </ListItem>
     </li>
@@ -359,10 +417,13 @@ function ListItemLink(props: ListItemLinkProps) {
 }
 
 export default function Sidebar() {
-  const classes = useStyle();
   const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const items = React.useMemo(() => prepareRoutes(), [sidebar.entries]);
+  const [open, setOpen] = React.useState(sidebar.isSidebarOpen);
+  const classes = useStyle(open);
+
   // Use the location to make sure the sidebar is changed, as it depends on the cluster
   // (defined in the URL ATM).
   // @todo: Update this if the active cluster management is changed.
@@ -373,18 +434,30 @@ export default function Sidebar() {
 
   return (
     <Drawer
-      className={classes.drawer}
       variant="permanent"
+      className={clsx(classes.drawer, {
+        [classes.drawerOpen]: open,
+        [classes.drawerClose]: !open,
+      })}
       classes={{
-        paper: classes.drawerPaper,
+        paper: clsx({
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        }),
       }}
     >
       <div className={classes.toolbar}>
-        <SvgIcon
-          className={classes.logo}
-          component={LogoLight}
-          viewBox="0 0 auto 32"
-        />
+        <Button onClick={() => {
+          dispatch(setWhetherSidebarOpen(!open));
+          setOpen(!open);
+        }}
+        >
+          <SvgIcon
+            className={classes.logo}
+            component={open ? LogoWithTextLight : LogoLight}
+            viewBox="0 0 auto 32"
+          />
+        </Button>
       </div>
       <Grid
         className={classes.sidebarGrid}
@@ -399,6 +472,7 @@ export default function Sidebar() {
               <SidebarItem
                 key={i}
                 selectedName={sidebar.selected}
+                fullWidth={open}
                 {...item}
               />
             )}
@@ -418,7 +492,7 @@ export default function Sidebar() {
 const useItemStyle = makeStyles(theme => ({
   nested: {
     '& .MuiListItem-root': {
-      paddingLeft: theme.spacing(7),
+      paddingLeft: theme.spacing(9),
     }
   },
   linkMain: {
@@ -440,6 +514,7 @@ const useItemStyle = makeStyles(theme => ({
       minWidth: 0,
       marginRight: '12px',
     },
+    paddingLeft: '23px',
   },
   linkSelected: {
     color: theme.palette.primary.contrastText,
@@ -465,16 +540,18 @@ const useItemStyle = makeStyles(theme => ({
       fontSize: '1.2rem',
     },
   },
+  linkSmallWidth: {
+    backgroundColor: 'inherit !important',
+  },
 }));
 
 interface SidebarItemProps extends ListItemProps, SidebarEntry {
   selectedName?: string | null;
   hasParent?: boolean;
+  fullWidth?: boolean;
 }
 
 function SidebarItem(props: SidebarItemProps) {
-  const classes = useItemStyle();
-
   const {
     label,
     name,
@@ -484,8 +561,11 @@ function SidebarItem(props: SidebarItemProps) {
     selectedName,
     hasParent = false,
     icon,
+    fullWidth = true,
     ...other
   } = props;
+
+  const classes = useItemStyle({fullWidth});
 
   let fullURL = url;
   if (fullURL && useClusterURL && getCluster()) {
@@ -516,22 +596,26 @@ function SidebarItem(props: SidebarItemProps) {
   if (!hasParent) {
     linkClass += ' ' + classes.linkMain;
   }
+  if (!fullWidth) {
+    linkClass += ' ' + classes.linkSmallWidth;
+  }
 
   return (
     <React.Fragment>
       <ListItemLink
         selected={isSelected()}
         to={fullURL || ''}
-        primary={label}
+        primary={fullWidth ? label : ''}
         classes={{
           selected: classes.linkSelected,
         }}
         className={linkClass}
         icon={icon}
+        name={label}
         {...other}
       />
       {subList.length > 0 &&
-        <Collapse in={expanded}>
+        <Collapse in={fullWidth && expanded}>
           <List component="div" disablePadding className={classes.nested}>
             {subList.map((item, i) =>
               <SidebarItem
@@ -556,4 +640,88 @@ export function useSidebarItem(itemName: string | null) {
   },
   // eslint-disable-next-line react-hooks/exhaustive-deps
   []);
+}
+
+function searchNameInSubList(sublist : SidebarEntry['subList'], name: string): boolean {
+  if (!sublist) {
+    return false;
+  }
+  for (let i = 0; i < sublist.length; i++) {
+    if (sublist[i].name === name){
+      return true;
+    }
+  }
+  return false;
+}
+
+function findParentOfSubList(list: SidebarEntry[], name: string | null): SidebarEntry | null{
+  if (!name) {
+    return null;
+  }
+
+  let parent = null;
+  for (let i = 0; i < list.length; i++) {
+    if (searchNameInSubList(list[i].subList, name)) {
+      parent = list[i];
+    }
+  }
+  return parent;
+}
+
+export function NavigationTabs() {
+  const history = useHistory();
+  const sidebar = useTypedSelector(state => state.ui.sidebar);
+  if (sidebar.isSidebarOpen) {
+    return null;
+  }
+
+  let defaultIndex = null;
+  const listItems = prepareRoutes();
+  let navigationItem = listItems.find((item) => item.name === sidebar.selected);
+  if (!navigationItem) {
+    const parent = findParentOfSubList(listItems, sidebar.selected);
+    if (!parent) {
+      return null;
+    }
+    navigationItem = parent;
+  }
+
+  const subList = navigationItem.subList;
+  if (!subList) {
+    return null;
+  }
+
+  function tabChangeHandler(index: number) {
+    if (!subList) {
+      return;
+    }
+    let pathname;
+
+    const url = subList[index].url;
+    if (url) {
+      pathname = generatePath(getClusterPrefixedPath(url), {cluster: getCluster()!});
+    } else {
+      pathname = createRouteURL(subList[index].name);
+    }
+    history.push({pathname});
+  }
+
+  if (createRouteURL(navigationItem.name)) {
+    subList.unshift(navigationItem);
+  }
+
+  const tabRoutes = subList.map((item: any) => {
+    return {'label': item.label, component: <></>};
+  });
+
+  defaultIndex = subList.findIndex((item) => item.name === sidebar.selected);
+  return (
+    <Box mb={2}>
+      <Tabs
+        tabs={tabRoutes}
+        onTabChanged={(index) => {tabChangeHandler(index);}}
+        defaultIndex={defaultIndex}
+      />
+      <Divider />
+    </Box>);
 }

@@ -20,12 +20,19 @@ interface TabsProps {
   tabProps?: {
     [propName: string]: any;
   };
+  defaultIndex?: number | null | boolean;
   onTabChanged?: (tabIndex: number) => void;
 }
 
 export default function Tabs(props: TabsProps) {
-  const {tabs, tabProps = {}, onTabChanged = null} = props;
-  const [tabIndex, setTabIndex] = React.useState(0);
+  const {
+    tabs,
+    tabProps = {},
+    defaultIndex = 0,
+    onTabChanged = null
+  } = props;
+  const [tabIndex, setTabIndex] = React.useState<TabsProps['defaultIndex']>(
+    defaultIndex && Math.min(defaultIndex as number, 0));
 
   function handleTabChange(event: any, newValue: number) {
     setTabIndex(newValue);
@@ -34,6 +41,16 @@ export default function Tabs(props: TabsProps) {
       onTabChanged(newValue);
     }
   };
+
+  React.useEffect(() => {
+    if (defaultIndex === null) {
+      setTabIndex(false);
+      return;
+    }
+    setTabIndex(defaultIndex);
+  },
+  // eslint-disable-next-line
+  [defaultIndex])
 
   return (
     <React.Fragment>
@@ -56,7 +73,7 @@ export default function Tabs(props: TabsProps) {
       {tabs.map(({component}, i) =>
         <TabPanel
           key={i}
-          tabIndex={tabIndex}
+          tabIndex={Number(tabIndex)}
           index={i}
         >
           {component}
