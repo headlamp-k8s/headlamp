@@ -48,7 +48,15 @@ export default function PodList() {
         columns={[
           {
             label: 'Name',
-            getter: (pod) => <Link kubeObject={pod} />
+            getter: (pod) => <Link kubeObject={pod} />,
+            sort: (p1: Pod, p2: Pod) => {
+              if (p1.metadata.name < p2.metadata.name) {
+                return -1;
+              } else if (p1.metadata.name > p2.metadata.name) {
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Namespace',
@@ -64,10 +72,14 @@ export default function PodList() {
           },
           {
             label: 'Age',
-            getter: (pod: Pod) => pod.getAge()
+            getter: (pod: Pod) => pod.getAge(),
+            sort: (p1: Pod, p2: Pod) =>
+              new Date(p2.metadata.creationTimestamp).getTime() -
+              new Date(p1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={pods}
+        defaultSortingColumn={5}
       />
     </SectionBox>
   );

@@ -26,7 +26,15 @@ export default function IngressList() {
           {
             label: 'Name',
             getter: (ingress) =>
-              <Link kubeObject={ingress} />
+              <Link kubeObject={ingress} />,
+            sort: (i1: Ingress, i2: Ingress) => {
+              if (i1.metadata.name < i2.metadata.name) {
+                return -1;
+              } else if (i1.metadata.name > i2.metadata.name){
+                return 1;
+              }
+              return 0;
+            }
           },
           {
             label: 'Namespace',
@@ -38,10 +46,14 @@ export default function IngressList() {
           },
           {
             label: 'Age',
-            getter: (ingress) => timeAgo(ingress.metadata.creationTimestamp)
+            getter: (ingress) => timeAgo(ingress.metadata.creationTimestamp),
+            sort: (i1: Ingress, i2:Ingress) =>
+              new Date(i2.metadata.creationTimestamp).getTime() -
+              new Date(i1.metadata.creationTimestamp).getTime()
           },
         ]}
         data={ingresses}
+        defaultSortingColumn={4}
       />
     </SectionBox>
   );

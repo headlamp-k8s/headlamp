@@ -91,7 +91,15 @@ export default function Overview() {
             {
               label: 'Name',
               getter: (item) =>
-                <ResourceLink resource={item} />
+                <ResourceLink resource={item} />,
+              sort: (w1: Workload, w2: Workload) => {
+                if (w1.metadata.name < w2.metadata.name) {
+                  return -1;
+                } else if (w1.metadata.name > w2.metadata.name) {
+                  return 1;
+                }
+                return 0;
+              }
             },
             {
               label: 'Namespace',
@@ -103,10 +111,14 @@ export default function Overview() {
             },
             {
               label: 'Age',
-              getter: (item) => timeAgo(item.metadata.creationTimestamp)
+              getter: (item) => timeAgo(item.metadata.creationTimestamp),
+              sort: (w1: Workload, w2: Workload) =>
+                new Date(w2.metadata.creationTimestamp).getTime() -
+                new Date(w1.metadata.creationTimestamp).getTime()
             },
           ]}
           data={getJointItems()}
+          defaultSortingColumn={5}
         />
       </SectionBox>
     </PageGrid>

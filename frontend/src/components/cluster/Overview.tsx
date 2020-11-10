@@ -88,17 +88,6 @@ function EventsSection() {
     );
   }
 
-  function sortFunc(event1: Event, event2: Event) {
-    if (event1.metadata.creationTimestamp < event2.metadata.creationTimestamp) {
-      return 1;
-    }
-    if (event2.metadata.creationTimestamp < event1.metadata.creationTimestamp) {
-      return -1;
-    }
-
-    return 0;
-  }
-
   return (
     <SectionBox
       title={
@@ -116,15 +105,19 @@ function EventsSection() {
         columns={events ? [
           {
             label: 'Type',
-            getter: event => event.involvedObject.kind
+            getter: event => event.involvedObject.kind,
+            sort: true
           },
           {
             label: 'Name',
             getter: event => event.involvedObject.name,
+            sort: true
           },
           {
             label: 'Age',
             getter: event => timeAgo(event.metadata.creationTimestamp),
+            sort: (e1: Event, e2: Event) => new Date(e2.metadata.creationTimestamp).getTime() -
+              new Date(e1.metadata.creationTimestamp).getTime()
           },
           // @todo: Maybe the message should be shown on slide-down.
           {
@@ -135,13 +128,14 @@ function EventsSection() {
                 interactive
               >
                 <Box>{makeStatusLabel(event)}</Box>
-              </LightTooltip>,
+              </LightTooltip>
           },
         ]
           :
           []
         }
-        data={events ? events.sort(sortFunc) : null}
+        data={events}
+        defaultSortingColumn={3}
       />
     </SectionBox>
   );
