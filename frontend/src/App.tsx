@@ -197,6 +197,8 @@ function AppContainer(props: AppContainerProps) {
     <HashRouter>{children}</HashRouter> :
     <BrowserRouter>{children}</BrowserRouter>;
 
+  localStorage.setItem('sidebar', JSON.stringify({'shrink': isSidebarOpen}));
+
   return (
     <SnackbarProvider
       anchorOrigin={{
