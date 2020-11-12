@@ -37,11 +37,19 @@ export interface UIState {
   };
 }
 
+function getSidebarOpenStatus() {
+  const sidebar = localStorage.getItem('sidebar');
+  if (sidebar) {
+    return JSON.parse(sidebar).shrink;
+  }
+  return true;
+}
+
 export const INITIAL_STATE: UIState = {
   sidebar: {
     selected: null,
     isVisible: false,
-    isSidebarOpen: false,
+    isSidebarOpen: getSidebarOpenStatus(),
     entries: {}
   },
   routes: {
