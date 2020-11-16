@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: headlamp
-        image: joaquimrocha/headlamp:latest
+        image: quay.io/kinvolk/headlamp:latest
         args:
           - "-in-cluster"
           - "-plugin-dir=/headlamp/plugins"
