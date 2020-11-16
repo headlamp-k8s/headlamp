@@ -1,0 +1,24 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: headlamp
+  namespace: kube-system
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    kubernetes.io/ingress.class: contour
+spec:
+  tls:
+  - secretName: headlamp
+    hosts:
+    - __URL__
+  rules:
+  -
+    host: __URL__
+    http:
+      paths:
+      -
+        path: /
+        backend:
+          serviceName: headlamp
+          servicePort: 80

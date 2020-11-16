@@ -28,7 +28,7 @@ Assuming your URL is `headlamp.mydeployment.io`, getting the sample ingress
 file and changing the URL can quickly be done by:
 
 ```bash
-curl -s https://raw.githubusercontent.com/kinvolk/headlamp/jrocha/wip/delme/kubernetes-headlamp-ingress-sample.yaml | sed -e s/__URL__/headlamp.mydeployment.io/ > headlamp-ingress.yaml
+curl -s https://raw.githubusercontent.com/kinvolk/headlamp/master/kubernetes-headlamp-ingress-sample.yaml | sed -e s/__URL__/headlamp.mydeployment.io/ > headlamp-ingress.yaml
 ```
 
 and with that, you'll have a configured ingress file, so verify it and apply it:
