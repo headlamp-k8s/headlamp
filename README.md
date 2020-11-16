@@ -1,29 +1,50 @@
-# Headlamp
+# Headlamp <img align="right" width=384 src="docs/headlamp_light.svg">
 
-An easy-to-use and versatile dashboard for Kubernetes.
+Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
-*⚠️ IMPORTANT:* This is an early version of Headlamp, which is under active
-development and thus subject to frequent and, potentially, breaking changes.
-
-## Introduction / Demo
-
-Here is an introduction video with the motivation for creating headlamp
-and a brief demo of it.
+Headlamp was created to be a Kubernetes web UI that has the traditional functionality of other
+web UIs/dashboards available (i.e. to list and view resources) as well as other features.
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=cZEcdTOwV-A&feature=youtu.be&t=21609" target="_blank">
-    <img src="https://raw.githubusercontent.com/kinvolk/headlamp/media/screenshots/yt_intro.png" width="400px">
-  </a>
+  <img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/videos/headlamp_quick_run.gif" width="80%">
 </div>
 
 ## Features
 
-  * Vendor independent / Generic
-  * Common ops for Kubernetes clusters
+  * Vendor independent / generic Kubernetes UI
+  * UI controls reflecting user roles (no deletion/update if not allowed)
   * Multi-cluster
-  * Extensible
-  * Clean / modern UI
-  * Read-write (actions based on permissions)
+  * Extensible through plugins
+  * Clean & modern UI
+  * Works in-cluster, or locally as a desktop app
+  * Cancellable creation/update/deletion operations
+  * Logs, exec, and resource editor with documentation
+  * Read-write / interactive (actions based on permissions)
+
+## Screenshots
+
+<table>
+    <tr>
+        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/cluster_overview.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/cluster_chooser.png"></td>
+    </tr>
+    <tr>
+        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/nodes.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/resource_edition.png"></td>
+    </tr>
+    <tr>
+        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/editor_documentation.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/terminal.png"></td>
+    </tr>
+</table>
+
+## Quickstart
+
+If you want to deploy Headlamp in your cluster, check out the instructions on running it [in-cluster](./docs/installation/in-cluster.md).
+
+If you have a kube config already, you can quickly try Headlamp locally as a
+[desktop application](./docs/installation/desktop/_index.md).  **Make sure** you have a kube config
+set up with your favorite clusters and in the default path so Headlamp can use it.
 
 ## Get involved
 
