@@ -20,11 +20,27 @@
     },
     "linux": {
       "target": [
-        "AppImage"
+        "AppImage",
+        "tar.gz"
       ],
       "executableName": "headlamp",
       "artifactName": "${productName}.${ext}",
       "maintainer": "Kinvolk <hello@kinvolk.io>"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "tar.gz",
+        "zip",
+        "pkg"
+      ]
+    },
+    "win": {
+      "target": [
+        "zip",
+        "msi",
+        "nsis"
+      ]
     },
     "files": [
       "build/**/*",
