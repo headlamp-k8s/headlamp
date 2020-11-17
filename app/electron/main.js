@@ -127,7 +127,7 @@ function createWindow () {
   let serverFilePath;
   if (!isDev) {
     serverFilePath = path.join(process.resourcesPath, './electron/server');
-    serverProcess = spawn(serverFilePath);
+    serverProcess = spawn(serverFilePath, {shell: true});
   }
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({
