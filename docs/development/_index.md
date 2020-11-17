@@ -4,7 +4,7 @@ title: Development
 
 This is a quickstart guide for building and running Headlamp for development.
 
-Please make sure you read the [Contribution Guidelines](../contributing.md) as well
+Please make sure you read the [Contribution Guidelines](../contributing) as well
 before starting to contribute to the project.
 
 ## Build the code
