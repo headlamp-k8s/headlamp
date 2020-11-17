@@ -15,6 +15,16 @@ tools/golangci-lint: backend/go.mod backend/go.sum
 backend-lint: tools/golangci-lint
 	cd backend && ./tools/golangci-lint run
 
+.PHONY: app
+app: 
+	cd app && npm run build && npm run package  -- --win --linux --mac 
+app-win: 
+	cd app && npm run build && npm run package  -- --win
+app-linux: 
+	cd app && npm run build && npm run package  -- --linux
+app-mac: 
+	cd app && npm run build && npm run package  -- --mac
+
 .PHONY: backend
 backend:
 	cd backend && go build -o ./server ./cmd
