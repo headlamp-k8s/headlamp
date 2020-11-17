@@ -40,15 +40,15 @@ web UIs/dashboards available (i.e. to list and view resources) as well as other 
 
 ## Quickstart
 
-If you want to deploy Headlamp in your cluster, check out the instructions on running it [in-cluster](./docs/installation/in-cluster.md).
+If you want to deploy Headlamp in your cluster, check out the instructions on running it [in-cluster](https://kinvolk.io/docs/headlamp/latest/installation/in-cluster/).
 
 If you have a kube config already, you can quickly try Headlamp locally as a
-[desktop application](./docs/installation/desktop/_index.md).  **Make sure** you have a kube config
+[desktop application](https://kinvolk.io/docs/headlamp/latest/installation/desktop/). **Make sure** you have a kube config
 set up with your favorite clusters and in the default path so Headlamp can use it.
 
 ## Get involved
 
-Check out our [guidelines](./docs/contributing.md) on how to contribute to the project.
+Check out our [guidelines](https://kinvolk.io/docs/headlamp/latest/contributing/) on how to contribute to the project.
 
 ## Roadmap
 
