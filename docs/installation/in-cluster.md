@@ -38,7 +38,7 @@ kubectl apply -f ./headlamp-ingress.yaml
 
 ## Accessing using OIDC
 
-Headlamp supports OIDC for cluster users to effortlessly log in.
+Headlamp supports OIDC for cluster users to effortlessly log in using a "Sign in" button.
 
 ![screenshot the login dialog for a cluster](./oidc_button.png)
 
