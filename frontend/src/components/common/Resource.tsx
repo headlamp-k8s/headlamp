@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import Editor from '@monaco-editor/react';
+import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import * as monaco from 'monaco-editor';
 import React from 'react';
@@ -404,7 +405,7 @@ export function SecretField(props: InputProps) {
           fullWidth
           multiline={showPassword}
           rowsMax="20"
-          value={showPassword ? value : '******'}
+          value={showPassword ? Base64.decode(value as string) : '******'}
           {...other}
         />
       </Grid>
