@@ -18,7 +18,7 @@ spec:
         image: quay.io/kinvolk/headlamp:latest
         args:
           - "-in-cluster"
-          - "-plugin-dir=/headlamp/plugins"
+          - "-plugins-dir=/headlamp/plugins"
         ports:
         - containerPort: 4466
         livenessProbe:
