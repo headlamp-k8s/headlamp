@@ -1,7 +1,4 @@
----
-title: Desktop App Installation
-weight: 100
----
+# Desktop App Installation
 
 Headlamp can be run as a desktop application, for users who don't want to
 deploy it in cluster, or those who want to manage unrelated clusters locally.
