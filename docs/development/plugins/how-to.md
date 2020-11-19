@@ -89,5 +89,5 @@ Here is the result, running Headlamp with this plugin and using with a Minikube 
 
 ![screenshot showing a label on the top bar with the number of pods available](./podcounter_screenshot.png)
 
-Please refer to the [functionality](./functionality) section for learning about
+Please refer to the [functionality](./functionality.md) section for learning about
 the different functionality that is available to plugins by the registry.
