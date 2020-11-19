@@ -30,6 +30,8 @@ import ServiceAccount from './serviceAccount';
 import StatefulSet from './statefulSet';
 import StorageClass from './storageClass';
 
+const CLUSTER_FETCH_INTERVAL = 60 * 1000; // ms
+
 const classList = [
   ClusterRole,
   ClusterRoleBinding,
@@ -77,11 +79,10 @@ export function useClustersConf() {
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
 
-  React.useEffect(() => {
-    if (Object.keys(clusters).length === 0) {
-      request('/config', {}, false, false)
-        .then((config: Config) => {
-          const clusters: ConfigState['clusters'] = {};
+  function fetchConfig() {
+    request('/config', {}, false, false)
+      .then((config: Config) => {
+        const clusters: ConfigState['clusters'] = {};
           config?.clusters.forEach((cluster: Cluster) => {
             clusters[cluster.name] = cluster;
           });
@@ -91,12 +92,20 @@ export function useClustersConf() {
             clusters
           };
           dispatch(setConfig(configToStore));
-        })
-        .catch((err: Error) => console.error(err));
-      return;
+      })
+      .catch((err: Error) => {
+        console.error(err);
+        setInterval(fetchConfig, CLUSTER_FETCH_INTERVAL);
+      });
+  }
+
+  React.useEffect(() => {
+    if (Object.keys(clusters).length === 0) {
+      fetchConfig();
     }
   },
-  [clusters, dispatch]);
+  // eslint-disable-next-line
+  []);
 
   return clusters;
 }
