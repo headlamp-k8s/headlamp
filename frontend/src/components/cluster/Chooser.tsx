@@ -36,7 +36,7 @@ const useClusterTitleStyle = makeStyles(theme => ({
 export function ClusterTitle() {
   const classes = useClusterTitleStyle();
   const cluster = useCluster();
-  const clusters = useClustersConf();
+  const {clusters} = useClustersConf();
   const [showChooser, setShowChooser] = React.useState(false);
 
   useHotkeys('ctrl+shift+l', () => setShowChooser(true));
@@ -217,7 +217,7 @@ export function ClusterDialog(props: ClusterDialogProps) {
 
 function Chooser(props: ClusterDialogProps) {
   const history = useHistory();
-  const clusters = useClustersConf();
+  const {clusters, error} = useClustersConf();
   const {open = null, onClose, ...otherProps} = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(props.open);
@@ -270,9 +270,9 @@ function Chooser(props: ClusterDialogProps) {
       {clusterList.length === 0 ?
         <React.Fragment>
           <DialogContentText>
-            Wait while fetching clusters…
+            {error ? error : 'Wait while fetching clusters…'}
           </DialogContentText>
-          <Loader />
+          { !!error || <Loader /> }
         </React.Fragment>
         :
         <React.Fragment>

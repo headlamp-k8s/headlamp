@@ -34,7 +34,7 @@ interface ReactRouterLocationStateIface {
 function AuthChooser(){
   const history = useHistory();
   const location = useLocation();
-  const clusters = useClustersConf();
+  const {clusters} = useClustersConf();
   const dispatch = useDispatch();
   const isDevMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
   const [testingAuth, setTestingAuth] = React.useState(false);

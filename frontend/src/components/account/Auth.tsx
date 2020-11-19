@@ -21,10 +21,9 @@ interface ReactRouterLocationStateIface {
 
 function Auth() {
   const history = useHistory();
-  const clusterConf = useClustersConf();
   const [token, setToken] = React.useState('');
   const [showError, setShowError] = React.useState(false);
-  const clusters = useClustersConf();
+  const {clusters} = useClustersConf();
 
   function onAuthClicked() {
     loginWithToken(token).then(code => {
@@ -46,7 +45,7 @@ function Auth() {
         disableBackdropClick
       >
         <DialogTitle id="responsive-dialog-title">
-          {Object.keys(clusterConf).length > 1 ? `Authentication: ${getCluster()}` : 'Authentication'}
+          {Object.keys(clusters).length > 1 ? `Authentication: ${getCluster()}` : 'Authentication'}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>

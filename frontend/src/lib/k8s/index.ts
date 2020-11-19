@@ -77,7 +77,8 @@ interface Config {
 // Hook for getting or fetching the clusters configuration.
 export function useClustersConf() {
   const dispatch = useDispatch();
-  const clusters = useTypedSelector(state => state.config.clusters);
+  const clustersState = useTypedSelector(state => state.config);
+  const clusters = clustersState.clusters;
 
   function fetchConfig() {
     request('/config', {}, false, false)
@@ -107,7 +108,7 @@ export function useClustersConf() {
   // eslint-disable-next-line
   []);
 
-  return clusters;
+  return {...clustersState};
 }
 
 export function useCluster() {
@@ -115,7 +116,7 @@ export function useCluster() {
   // Make sure we update when changing clusters.
   // @todo: We need a better way to do this.
   const location = useLocation();
-  const clusters = useClustersConf();
+  const {clusters} = useClustersConf();
 
   React.useEffect(() => {
     const currentCluster = getCluster();
