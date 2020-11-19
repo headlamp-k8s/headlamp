@@ -36,6 +36,7 @@ type HeadlampConfig struct {
 
 type clientConfig struct {
 	Clusters []Cluster `json:"clusters"`
+	Error    string    `json:"error"`
 }
 
 type spaHandler struct {
@@ -77,6 +78,7 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func StartHeadlampServer(config *HeadlampConfig) {
 	kubeConfigPath := ""
 
+	var configError string
 	// If we don't have a specified kubeConfig path, and we are not running
 	// in-cluster, then use the default path.
 	if config.kubeConfigPath != "" {
@@ -91,7 +93,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	if config.useInCluster {
 		context, err := GetOwnContext(config)
 		if err != nil {
-			log.Println("Failed to get in-cluster config", err)
+			configError = "Failed to get in-cluster config"
 		}
 
 		contexts = append(contexts, *context)
@@ -103,7 +105,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 
 		contextsFound, err := GetContextsFromKubeConfigFile(kubeConfigPath)
 		if err != nil {
-			log.Println("Failed to get contexts from", kubeConfigPath, err)
+			configError = fmt.Sprintf("Failed to get contexts from %s", kubeConfigPath)
 		}
 
 		contexts = append(contexts, contextsFound...)
@@ -114,7 +116,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		clusters = append(clusters, *context.getCluster())
 	}
 
-	clientConf := &clientConfig{clusters}
+	clientConf := &clientConfig{clusters, configError}
 	r := mux.NewRouter()
 
 	fmt.Println("*** Headlamp Server ***")
