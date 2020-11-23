@@ -1,3 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: headlamp
+  namespace: kube-system
+spec:
+  ports:
+    - port: 80
+      targetPort: 4466
+  selector:
+    k8s-app: headlamp
+---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -30,16 +42,3 @@ spec:
           timeoutSeconds: 30
       nodeSelector:
         'beta.kubernetes.io/os': linux
-
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: headlamp
-  namespace: kube-system
-spec:
-  ports:
-    - port: 80
-      targetPort: 4466
-  selector:
-    k8s-app: headlamp
