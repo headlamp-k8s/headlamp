@@ -154,6 +154,13 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	r.HandleFunc("/oidc", func(w http.ResponseWriter, r *http.Request) {
 		ctx := context.Background()
 		cluster := r.URL.Query().Get("cluster")
+		if config.insecure {
+			tr := &http.Transport{
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // nolint:gosec
+			}
+			insecureClient := &http.Client{Transport: tr}
+			ctx = oidc.ClientContext(ctx, insecureClient)
+		}
 
 		oidcAuthConfig, err := GetClusterOidcConfig(cluster)
 		if err != nil {
