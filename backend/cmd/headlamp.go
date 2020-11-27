@@ -91,7 +91,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	if config.useInCluster {
 		context, err := GetOwnContext(config)
 		if err != nil {
-			log.Fatal("Failed to get in-cluster config", err)
+			log.Println("Failed to get in-cluster config", err)
 		}
 
 		contexts = append(contexts, *context)
@@ -103,7 +103,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 
 		contextsFound, err := GetContextsFromKubeConfigFile(kubeConfigPath)
 		if err != nil {
-			log.Fatal("Failed to get contexts from", kubeConfigPath, err)
+			log.Println("Failed to get contexts from", kubeConfigPath, err)
 		}
 
 		contexts = append(contexts, contextsFound...)

@@ -46,7 +46,7 @@ function Auth() {
         disableBackdropClick
       >
         <DialogTitle id="responsive-dialog-title">
-          {Object.keys(clusterConf).length > 1 ? `Authentication: ${getCluster()}` : 'Authentication'}
+          {Object.keys(clusterConf || {}).length > 1 ? `Authentication: ${getCluster()}` : 'Authentication'}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -64,7 +64,7 @@ function Auth() {
           />
         </DialogContent>
         <DialogActions>
-          {Object.keys(clusters).length > 1 &&
+          {Object.keys(clusters || {}).length > 1 &&
           <>
             <Button onClick = {() => history.replace('/')} color="primary">
               Cancel
