@@ -75,10 +75,10 @@ interface Config {
 }
 
 // Hook for getting or fetching the clusters configuration.
-export function useClustersConf() {
+export function useClustersConf(): ConfigState['clusters'] {
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
-  const [retry, setRetry] = React.useState(Object.keys(clusters).length === 0);
+  const [retry, setRetry] = React.useState(!clusters || Object.keys(clusters).length === 0);
 
   React.useEffect(() => {
     let retryHandler = 0;
@@ -98,7 +98,7 @@ export function useClustersConf() {
             clusters: clustersToConfig
           };
 
-          if (Object.keys(clusters).length !== 0 ||
+          if (!clusters || Object.keys(clusters).length !== 0 ||
               Object.keys(clustersToConfig).length !== 0) {
             dispatch(setConfig(configToStore));
           }

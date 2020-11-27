@@ -45,7 +45,7 @@ export function ClusterTitle() {
     return null;
   }
 
-  if (Object.keys(clusters).length <= 1) {
+  if (Object.keys(clusters || {}).length <= 1) {
     return null;
   }
 
@@ -230,7 +230,7 @@ function Chooser(props: ClusterDialogProps) {
 
     // If we only have one cluster configured, then we skip offering
     // the choice to the user.
-    if (Object.keys(clusters).length === 1) {
+    if (!!clusters && Object.keys(clusters).length === 1) {
       handleButtonClick(Object.values(clusters)[0]);
     }
   },
@@ -259,7 +259,7 @@ function Chooser(props: ClusterDialogProps) {
     }
   }
 
-  const clusterList = Object.values(clusters);
+  const clusterList = Object.values(clusters || {});
 
   return (
     <ClusterDialog
@@ -269,10 +269,23 @@ function Chooser(props: ClusterDialogProps) {
     >
       {clusterList.length === 0 ?
         <React.Fragment>
-          <DialogContentText>
-            Wait while fetching clusters…
-          </DialogContentText>
-          <Loader />
+          {clusters === null ?
+            <>
+              <DialogContentText>
+                Wait while fetching clusters…
+              </DialogContentText>
+              <Loader />
+            </>
+            :
+            <>
+              <DialogContentText>
+                There seems to be no clusters configured…
+              </DialogContentText>
+              <DialogContentText>
+                Please make sure you have at least one cluster configured.
+              </DialogContentText>
+            </>
+          }
         </React.Fragment>
         :
         <React.Fragment>

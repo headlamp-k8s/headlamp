@@ -285,7 +285,7 @@ function AuthRoute(props: AuthRouteProps) {
     if (requiresCluster) {
       const clusterName = getCluster();
       if (!!clusterName) {
-        const cluster = clusters[clusterName];
+        const cluster = clusters ? clusters[clusterName] : undefined;
         const requiresToken = (cluster?.useToken === undefined || cluster?.useToken);
         if (!!getToken(clusterName) || !requiresToken) {
           return children;

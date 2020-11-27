@@ -42,7 +42,7 @@ function AuthChooser(){
   const clusterName = getCluster() as string;
 
   let clusterAuthType = '';
-  if (clusters[clusterName]) {
+  if (clusters && clusters[clusterName]) {
     clusterAuthType = clusters[clusterName].auth_type;
   }
 
@@ -64,7 +64,7 @@ function AuthChooser(){
 
   React.useEffect(() => {
     const clusterName = getCluster();
-    if (!clusterName || testingAuth || Object.keys(clusters).length === 0) {
+    if (!clusterName || testingAuth || !clusters || Object.keys(clusters).length === 0) {
       return;
     }
 

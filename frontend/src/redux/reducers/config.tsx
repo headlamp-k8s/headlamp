@@ -4,11 +4,11 @@ import { Action, CONFIG_NEW } from '../actions/actions';
 export interface ConfigState {
   clusters: {
     [clusterName: string]: Cluster;
-  };
+  } | null;
 }
 
 export const INITIAL_STATE: ConfigState = {
-  clusters: {},
+  clusters: null,
 };
 
 function reducer(state = INITIAL_STATE, action: Action) {
