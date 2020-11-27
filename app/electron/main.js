@@ -167,17 +167,23 @@ autoUpdater.on('update-downloaded', () => {
 });
 
 app.on('ready', createWindow);
-app.on('window-all-closed', function () {
+
+app.on('quit', function () {
   if (serverProcess) {
     serverProcess.stdin.pause();
     serverProcess.kill();
-  }
-  if (process.platform !== 'darwin') {
-    app.quit();
+    serverProcess = null;
   }
 });
+
 app.on('activate', function () {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+app.once('window-all-closed', app.quit);
+
+app.once('before-quit', () => {
+  mainWindow.removeAllListeners('close');
 });
