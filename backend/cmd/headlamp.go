@@ -125,7 +125,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	}
 
 	files, err := ioutil.ReadDir(config.pluginDir)
-	if err != nil {
+	if !os.IsNotExist(err) {
 		log.Println("Error: ", err)
 	}
 
