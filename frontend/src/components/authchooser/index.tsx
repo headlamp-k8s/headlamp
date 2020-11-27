@@ -156,12 +156,14 @@ function AuthChooser(){
             <ColorButton onClick={handleTokenAuth}>Use A Token</ColorButton>
           </Box>
         </Box>
-        <Box m={2} display="flex" alignItems="center" style={{cursor: 'pointer'}} onClick={handleBackButtonPress}>
-          <Box pt={0.5}>
-            <InlineIcon icon={chevronLeft} height={20} width={20}/>
+        {!!clusters && Object.keys(clusters).length > 1 &&
+          <Box m={2} display="flex" alignItems="center" style={{cursor: 'pointer'}} onClick={handleBackButtonPress}>
+            <Box pt={0.5}>
+              <InlineIcon icon={chevronLeft} height={20} width={20}/>
+            </Box>
+            <Box fontSize={14}>BACK</Box>
           </Box>
-          <Box fontSize={14}>BACK</Box>
-        </Box>
+        }
       </Box>
       }
     </ClusterDialog>
