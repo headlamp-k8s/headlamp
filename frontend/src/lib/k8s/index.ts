@@ -30,6 +30,8 @@ import ServiceAccount from './serviceAccount';
 import StatefulSet from './statefulSet';
 import StorageClass from './storageClass';
 
+const CLUSTER_FETCH_INTERVAL = 60 * 1000; // ms
+
 const classList = [
   ClusterRole,
   ClusterRoleBinding,
@@ -76,27 +78,45 @@ interface Config {
 export function useClustersConf() {
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
+  const [retry, setRetry] = React.useState(Object.keys(clusters).length === 0);
 
   React.useEffect(() => {
-    if (Object.keys(clusters).length === 0) {
+    let retryHandler = 0;
+
+    if (retry) {
+      setRetry(false);
+
       request('/config', {}, false, false)
         .then((config: Config) => {
-          const clusters: ConfigState['clusters'] = {};
+          const clustersToConfig: ConfigState['clusters'] = {};
           config?.clusters.forEach((cluster: Cluster) => {
-            clusters[cluster.name] = cluster;
+            clustersToConfig[cluster.name] = cluster;
           });
 
           const configToStore = {
             ...config,
-            clusters
+            clusters: clustersToConfig
           };
-          dispatch(setConfig(configToStore));
+
+          if (Object.keys(clusters).length !== 0 ||
+              Object.keys(clustersToConfig).length !== 0) {
+            dispatch(setConfig(configToStore));
+          }
         })
-        .catch((err: Error) => console.error(err));
-      return;
+        .catch((err: Error) => {
+          console.error(err);
+          retryHandler = window.setInterval(() => setRetry(true), CLUSTER_FETCH_INTERVAL);
+        });
+
+      return function cleanup() {
+        if (retryHandler !== 0) {
+          window.clearInterval(retryHandler);
+          retryHandler = 0;
+        }
+      };
     }
   },
-  [clusters, dispatch]);
+  [clusters, dispatch, retry]);
 
   return clusters;
 }
