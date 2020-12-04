@@ -22,16 +22,20 @@ import (
 )
 
 type HeadlampConfig struct {
-	useInCluster     bool
-	devMode          bool
-	insecure         bool
-	kubeConfigPath   string
-	port             string
-	staticDir        string
-	pluginDir        string
-	oidcClientID     string
-	oidcClientSecret string
-	oidcIdpIssuerURL string
+	useInCluster          bool
+	devMode               bool
+	insecure              bool
+	sslClientCertRequired bool
+	kubeConfigPath        string
+	port                  string
+	staticDir             string
+	pluginDir             string
+	oidcClientID          string
+	oidcClientSecret      string
+	oidcIdpIssuerURL      string
+	sslCert               string
+	sslCertKey            string
+	sslCertCA             string
 }
 
 type clientConfig struct {
@@ -71,6 +75,36 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	// otherwise, use http.FileServer to serve the static dir
 	http.FileServer(http.Dir(h.staticPath)).ServeHTTP(w, r)
+}
+
+func ServeSSL(port, sslCert, sslCertKey, sslCertCA string, sslClientCertRequired bool) {
+	tlsConfig := &tls.Config{
+		ClientAuth: tls.VerifyClientCertIfGiven,
+		MinVersion: tls.VersionTLS13,
+	}
+	if sslClientCertRequired {
+		tlsConfig.ClientAuth = tls.RequireAndVerifyClientCert
+	}
+
+	if sslCertCA != "" {
+		cert, err := ioutil.ReadFile(sslCertCA)
+		if err != nil {
+			log.Fatalf("Unable to read CA certificate '%s' (%v)!\n", sslCertCA, err)
+		}
+
+		clientCAs := x509.NewCertPool()
+		if !clientCAs.AppendCertsFromPEM(cert) {
+			log.Fatalf("Unable to add CA certificate '%s' to the certificate pool!\n", sslCertCA)
+		}
+
+		tlsConfig.ClientCAs = clientCAs
+	}
+
+	server := &http.Server{
+		Addr:      ":" + port,
+		TLSConfig: tlsConfig,
+	}
+	log.Fatal(server.ListenAndServeTLS(sslCert, sslCertKey))
 }
 
 // nolint:gocognit,funlen
@@ -274,7 +308,11 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	}
 
 	// Start server
-	log.Fatal(http.ListenAndServe(":"+config.port, handler))
+	if config.sslCert != "" && config.sslCertKey != "" {
+		ServeSSL(config.port, config.sslCert, config.sslCertKey, config.sslCertCA, config.sslClientCertRequired)
+	} else {
+		log.Fatal(http.ListenAndServe(":"+config.port, handler))
+	}
 }
 
 // @todo: Evaluate whether we should just spawn a kubectl proxy for each context

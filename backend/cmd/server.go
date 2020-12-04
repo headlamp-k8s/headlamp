@@ -18,6 +18,10 @@ func main() {
 	oidcClientID := flag.String("oidc-client-id", "", "ClientID for OIDC")
 	oidcClientSecret := flag.String("oidc-client-secret", "", "ClientSecret for OIDC")
 	oidcIdpIssuerURL := flag.String("oidc-idp-issuer-url", "", "Identity provider issuer URL for oidc")
+	sslCert := flag.String("ssl-cert", "", "File with the SSL certificate")
+	sslCertKey := flag.String("ssl-cert-key", "", "File with the key for the SSL certificate")
+	sslCertCA := flag.String("ssl-cert-ca", "", "File with the ca certificate(s) for the SSL certificate")
+	sslClientCertRequired := flag.Bool("ssl-client-cert-required", false, "Require a valid client certificate")
 
 	flag.Parse()
 
@@ -28,15 +32,19 @@ func main() {
 	}
 
 	StartHeadlampServer(&HeadlampConfig{
-		useInCluster:     *inCluster,
-		kubeConfigPath:   *kubeconfig,
-		port:             *port,
-		devMode:          *devMode,
-		staticDir:        *staticDir,
-		insecure:         *insecure,
-		pluginDir:        *pluginDir,
-		oidcClientID:     *oidcClientID,
-		oidcClientSecret: *oidcClientSecret,
-		oidcIdpIssuerURL: *oidcIdpIssuerURL,
+		useInCluster:          *inCluster,
+		kubeConfigPath:        *kubeconfig,
+		port:                  *port,
+		devMode:               *devMode,
+		staticDir:             *staticDir,
+		insecure:              *insecure,
+		pluginDir:             *pluginDir,
+		oidcClientID:          *oidcClientID,
+		oidcClientSecret:      *oidcClientSecret,
+		oidcIdpIssuerURL:      *oidcIdpIssuerURL,
+		sslCert:               *sslCert,
+		sslCertKey:            *sslCertKey,
+		sslCertCA:             *sslCertCA,
+		sslClientCertRequired: *sslClientCertRequired,
 	})
 }
