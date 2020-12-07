@@ -12,6 +12,7 @@ import (
 	"net/http/httputil"
 	"net/url"
 	"os"
+	"os/user"
 	"path/filepath"
 
 	oidc "github.com/coreos/go-oidc"
@@ -353,7 +354,14 @@ func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.Response
 }
 
 func GetDefaultKubeConfigPath() string {
-	return filepath.Join(os.Getenv("HOME"), ".kube", "config")
+	user, err := user.Current()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	homeDirectory := user.HomeDir
+
+	return filepath.Join(homeDirectory, ".kube", "config")
 }
 
 func (c *clientConfig) getConfig(w http.ResponseWriter, r *http.Request) {
