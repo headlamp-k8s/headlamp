@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { generatePath } from 'react-router';
+import { patch } from 'semver';
 import AuthToken from '../components/account/Auth';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
@@ -9,9 +10,13 @@ import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
 import CustomResourceDefinitionDetails from '../components/crd/Details';
 import CustomResourceDefinitionList from '../components/crd/List';
+import CronJobList from '../components/cronjob/List';
 import DaemonSetDetails from '../components/daemonset/Details';
+import DaemonSetList from '../components/daemonset/List';
+import DeploymentsList from '../components/deployments/List';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
+import JobsList from '../components/job/List';
 import NamespaceDetails from '../components/namespace/Details';
 import NamespacesList from '../components/namespace/List';
 import NodeDetails from '../components/node/Details';
@@ -30,7 +35,9 @@ import ServiceDetails from '../components/service/Details';
 import ServiceList from '../components/service/List';
 import ServiceAccountDetails from '../components/serviceaccount/Details';
 import ServiceAccountList from '../components/serviceaccount/List';
+import Sidebar from '../components/Sidebar';
 import StatefulSetDetails from '../components/statefulset/Details';
+import StatefulSetList from '../components/statefulset/List';
 import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
 import PersistentVolumeClaimList from '../components/storage/ClaimList';
 import StorageClassDetails from '../components/storage/ClassDetails';
@@ -213,10 +220,45 @@ export const ROUTES: {
     sidebar: 'ingresses',
     component: () => <IngressDetails />
   },
+  DaemonSets: {
+    path: '/daemonsets',
+    exact: true,
+    sidebar: 'DaemonSets',
+    name: 'DaemonSets',
+    component: () => <DaemonSetList/>
+  },
+  Jobs: {
+    path: '/jobs',
+    exact: true,
+    sidebar: 'Jobs',
+    name: 'Jobs',
+    component: () => <JobsList/>
+  },
+  CronJobs: {
+    path: '/cronjobs',
+    exact: true,
+    sidebar: 'CronJobs',
+    name: 'CronJobs',
+    component: () => <CronJobList/>
+  },
+  Deployments: {
+    path: '/deployments',
+    exact: true,
+    sidebar: 'Deployments',
+    name: 'Deployments',
+    component: () => <DeploymentsList/>
+  },
+  StatefulSets: {
+    path: '/statefulsets',
+    exact: true,
+    sidebar: 'StatefulSets',
+    name: 'StatefulSets',
+    component: () => <StatefulSetList/>
+  },
   ReplicaSets: {
     path: '/replicasets',
     exact: true,
-    name: 'Replica Sets',
+    name: 'ReplicaSets',
     sidebar: 'ReplicaSets',
     component: () => <ReplicaSetList />
   },
