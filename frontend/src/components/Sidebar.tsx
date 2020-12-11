@@ -144,6 +144,27 @@ const LIST_ITEMS: SidebarEntry[] = [
         name: 'ReplicaSets',
         label: 'Replica Sets'
       },
+      {
+        name: 'DaemonSets',
+        label: 'Daemon Sets'
+      },
+      {
+        name: 'StatefulSets',
+        label: 'Stateful Sets'
+      },
+      {
+        name: 'Jobs',
+        label: 'Jobs'
+      },
+      {
+        name: 'Deployments',
+        label: 'Deployments'
+      },
+      {
+        name: 'CronJobs',
+        label: 'CronJobs'
+
+      }
     ]
   },
   {
