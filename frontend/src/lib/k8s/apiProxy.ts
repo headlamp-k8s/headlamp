@@ -74,7 +74,7 @@ export async function request(path: string, params: RequestParams = {},
       logout();
     }
 
-    let message = `Api request error: ${statusText}`;
+    let message = statusText;
     try {
       const json = await response.json();
       message += ` - ${json.message}`;
