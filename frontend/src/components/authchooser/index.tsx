@@ -64,7 +64,7 @@ function AuthChooser(){
 
   React.useEffect(() => {
     const clusterName = getCluster();
-    if (!clusterName || testingAuth || !clusters || Object.keys(clusters).length === 0) {
+    if (!clusterName || !clusters || Object.keys(clusters).length === 0) {
       return;
     }
 
@@ -72,6 +72,8 @@ function AuthChooser(){
     if (!cluster) {
       return;
     }
+
+    let cancelled = false;
 
     // If we haven't yet figured whether we need to use a token for the current
     // cluster, then we check here.
@@ -86,45 +88,49 @@ function AuthChooser(){
           useToken = false;
         })
         .catch((err) => {
-          console.debug('Requiring token as testing auth failed:', err);
-          useToken = true;
+          if (!cancelled) {
+            console.debug('Requiring token as testing auth failed:', err);
+            useToken = true;
+            setTestingAuth(false);
+          }
         })
         .finally(() => {
-          cluster.useToken = useToken;
-          dispatch(setConfig({clusters: {...clusters}}));
-          // If we don't require a token, then we just move to the attempted URL or root.
-          if (!useToken) {
-            history.replace(from);
+          if (!cancelled) {
+            cluster.useToken = useToken;
+            dispatch(setConfig({clusters: {...clusters}}));
+            // If we don't require a token, then we just move to the attempted URL or root.
+            if (!useToken) {
+              history.replace(from);
+            }
+
+            setTestingAuth(false);
+
+            // If we reach this point, then we know whether or not we need a token. If we don't,
+            // just redirect.
+            if (!cluster.useToken) {
+              history.replace(from);
+            } else if (!clusterAuthType){
+              // we know that it requires token and also doesn't have oidc configured
+              // so let's redirect to token page
+              history.replace({
+                pathname: generatePath(getClusterPrefixedPath('token'), {cluster: clusterName as string}),
+              });
+            }
           }
-
-          setTestingAuth(false);
-        });
-      if (!clusterAuthType && useToken){
-        history.replace({
-          pathname: generatePath(getClusterPrefixedPath('token'), {cluster: clusterName as string}),
-        });
-      }
-      return;
-    }
-
-    // If we reach this point, then we know whether or not we need a token. If we don't,
-    // just redirect.
-    if (!cluster.useToken) {
-      history.replace(from);
-    } else if (!clusterAuthType){
-      // we know that it requires token and also doesn't have oidc configured
-      // so let's redirect to token page
+        }
+        );
+    } else if (cluster.useToken) {
       history.replace({
         pathname: generatePath(getClusterPrefixedPath('token'), {cluster: clusterName as string}),
       });
     }
 
     return function cleanup () {
-      setTestingAuth(false);
+      cancelled = true;
     };
   },
   // eslint-disable-next-line
-  [clusters, testingAuth]);
+  [clusters]);
 
   return (
     <ClusterDialog
