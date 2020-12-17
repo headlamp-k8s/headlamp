@@ -19,8 +19,10 @@ const BASE_HTTP_URL = backendServicesURL;
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
+const DEFAULT_TIMEOUT = 2 * 60 * 1000; // ms
 
 interface RequestParams {
+  timeout?: number; // ms
   [prop: string]: any;
 }
 
@@ -30,7 +32,9 @@ export async function request(path: string, params: RequestParams = {},
     Authorization?: string;
     [otherHeader: string]: any;
   };
-  const opts: {headers: RequestHeaders} = Object.assign({headers: {}}, params);
+
+  const {timeout = DEFAULT_TIMEOUT, ...otherParams} = params;
+  const opts: {headers: RequestHeaders} = Object.assign({headers: {}}, otherParams);
 
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
   const cluster = getCluster();
@@ -45,8 +49,23 @@ export async function request(path: string, params: RequestParams = {},
     fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
   }
 
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
   const url = combinePath(BASE_HTTP_URL, fullPath);
-  const response = await fetch(url, opts);
+  let response: Response = new Response(undefined,
+                                        {status: 502, statusText: 'Unreachable'});
+
+  try {
+    response = await fetch(url, {signal: controller.signal, ...opts});
+  } catch (err) {
+    // AbortController sets the error code as 20
+    if (err.code === 20) {
+      response = new Response(undefined, {status: 408, statusText: 'Request timed-out'});
+    }
+  } finally {
+    clearTimeout(id);
+  };
 
   if (!response.ok) {
     const {status, statusText} = response;
@@ -55,7 +74,7 @@ export async function request(path: string, params: RequestParams = {},
       logout();
     }
 
-    let message = `Api request error: ${statusText}`;
+    let message = statusText;
     try {
       const json = await response.json();
       message += ` - ${json.message}`;
@@ -138,20 +157,21 @@ function apiScaleFactory(apiRoot: string, resource: string) {
 }
 
 export function post(url: string, json: JSON | object | KubeObjectInterface,
-                     autoLogoutOnAuthError = true) {
+                     autoLogoutOnAuthError = true, requestOptions = {}) {
   const body = JSON.stringify(json);
-  const opts = {method: 'POST', body, headers: JSON_HEADERS};
+  const opts = {method: 'POST', body, headers: JSON_HEADERS, ...requestOptions};
   return request(url, opts, autoLogoutOnAuthError);
 }
 
-export function put(url: string, json: KubeObjectInterface, autoLogoutOnAuthError = true) {
+export function put(url: string, json: KubeObjectInterface, autoLogoutOnAuthError = true,
+                    requestOptions = {}) {
   const body = JSON.stringify(json);
-  const opts = {method: 'PUT', body, headers: JSON_HEADERS};
+  const opts = {method: 'PUT', body, headers: JSON_HEADERS, ...requestOptions};
   return request(url, opts, autoLogoutOnAuthError);
 }
 
-export function remove(url: string) {
-  const opts = {method: 'DELETE', headers: JSON_HEADERS};
+export function remove(url: string, requestOptions = {}) {
+  const opts = {method: 'DELETE', headers: JSON_HEADERS, ...requestOptions};
   return request(url, opts);
 }
 
@@ -446,5 +466,5 @@ export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => vo
 
 export async function testAuth() {
   const spec = {namespace: 'default'};
-  return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', {spec}, false);
+  return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', {spec}, false, {timeout: 5 * 1000});
 }
