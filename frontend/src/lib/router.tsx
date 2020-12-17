@@ -154,31 +154,31 @@ export const ROUTES: {
   DaemonSet: {
     path: '/daemonsets/:namespace/:name',
     exact: true,
-    sidebar: 'workloads',
+    sidebar: 'DaemonSets',
     component: () => <DaemonSetDetails />
   },
   StatefulSet: {
     path: '/statefulsets/:namespace/:name',
     exact: true,
-    sidebar: 'workloads',
+    sidebar: 'StatefulSets',
     component: () => <StatefulSetDetails />
   },
   Deployment: {
     path: '/deployments/:namespace/:name',
     exact: true,
-    sidebar: 'workloads',
+    sidebar: 'Deployments',
     component: () => <WorkloadDetails workloadKind={Deployment} />
   },
   Job: {
     path: '/jobs/:namespace/:name',
     exact: true,
-    sidebar: 'workloads',
+    sidebar: 'Jobs',
     component: () => <WorkloadDetails workloadKind={Job} />
   },
   CronJob: {
     path: '/cronjobs/:namespace/:name',
     exact: true,
-    sidebar: 'workloads',
+    sidebar: 'CronJobs',
     component: () => <WorkloadDetails workloadKind={CronJob} />
   },
   Pods: {
