@@ -31,7 +31,7 @@ import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import Empty from './EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from './Label';
-import Link from './Link';
+import Link, { LinkProps } from './Link';
 import { LightTooltip } from './Tooltip';
 
 const useStyles = makeStyles(theme => ({
@@ -177,7 +177,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
   );
 }
 
-interface ResourceLinkProps {
+interface ResourceLinkProps extends Omit<LinkProps, 'routeName' | 'params'> {
   name?: string;
   routeName?: string;
   routeParams?: RouteURLProps;
@@ -189,12 +189,14 @@ export function ResourceLink(props: ResourceLinkProps) {
     routeName = props.resource.kind,
     routeParams = props.resource.metadata as RouteURLProps,
     name = props.resource.metadata.name,
+    state
   } = props;
 
   return (
     <Link
       routeName={routeName}
       params={routeParams}
+      state={state}
     >
       {name}
     </Link>
