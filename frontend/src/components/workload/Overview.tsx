@@ -1,5 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Workload } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import DaemonSet from '../../lib/k8s/daemonSet';
@@ -20,6 +21,7 @@ interface WorkloadDict {
 
 export default function Overview() {
   const [workloadsData, dispatch] = React.useReducer(setWorkloads, {});
+  const location = useLocation();
   const filterFunc = useFilterFunc();
 
   function setWorkloads(workloads: WorkloadDict,
@@ -91,7 +93,7 @@ export default function Overview() {
             {
               label: 'Name',
               getter: (item) =>
-                <ResourceLink resource={item} />,
+                <ResourceLink resource={item} state={{backLink: {...location}}} />,
               sort: (w1: Workload, w2: Workload) => {
                 if (w1.metadata.name < w2.metadata.name) {
                   return -1;

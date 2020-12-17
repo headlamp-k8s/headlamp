@@ -113,12 +113,6 @@ function EventsSection() {
             getter: event => event.involvedObject.name,
             sort: true
           },
-          {
-            label: 'Age',
-            getter: event => timeAgo(event.metadata.creationTimestamp),
-            sort: (e1: Event, e2: Event) => new Date(e2.metadata.creationTimestamp).getTime() -
-              new Date(e1.metadata.creationTimestamp).getTime()
-          },
           // @todo: Maybe the message should be shown on slide-down.
           {
             label: 'Reason',
@@ -129,6 +123,12 @@ function EventsSection() {
               >
                 <Box>{makeStatusLabel(event)}</Box>
               </LightTooltip>
+          },
+          {
+            label: 'Age',
+            getter: event => timeAgo(event.metadata.creationTimestamp),
+            sort: (e1: Event, e2: Event) => new Date(e2.metadata.creationTimestamp).getTime() -
+              new Date(e1.metadata.creationTimestamp).getTime()
           },
         ]
           :

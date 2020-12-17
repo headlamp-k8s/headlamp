@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLinkProps, useLocation, useParams } from 'react-router-dom';
 import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import { ContainersSection, MainInfoSection, MetadataDictGrid, PageGrid, ReplicasSection } from '../common/Resource';
 
@@ -9,6 +9,7 @@ interface WorkloadDetailsProps {
 
 export default function WorkloadDetails(props: WorkloadDetailsProps) {
   const { namespace, name } = useParams();
+  const location = useLocation<{backLink: NavLinkProps['location']}>();
   const { workloadKind } = props;
   const [item, setItem] = React.useState<Workload | null>(null);
 
@@ -17,7 +18,7 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
   return (
     <PageGrid>
       <MainInfoSection
-
+        backLink={location.state?.backLink}
         resource={item}
         extraInfo={item && [
           {
