@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { makeKubeObject } from '../../lib/k8s/cluster';
 import { createRouteURL, RouteURLProps } from '../../lib/router';
 
-interface LinkProps {
+export interface LinkProps {
   routeName: string;
   params?: RouteURLProps;
   search?: string;
