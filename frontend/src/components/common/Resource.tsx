@@ -18,7 +18,7 @@ import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import * as monaco from 'monaco-editor';
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { KubeCondition, KubeContainer, KubeObject, KubeObjectInterface } from '../../lib/k8s/cluster';
 import { createRouteURL, RouteURLProps } from '../../lib/router';
 import { localeDate } from '../../lib/util';
@@ -209,6 +209,7 @@ interface MainInfoSectionProps {
   actions?: React.ReactNode[] | null;
   headerStyle?: HeaderStyleProps['headerStyle'];
   noDefaultActions?: boolean;
+  backLink?: string | ReturnType<typeof useLocation> | null;
 }
 
 export function MainInfoSection(props: MainInfoSectionProps) {
@@ -220,6 +221,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     actions = [],
     headerStyle = 'main',
     noDefaultActions = false,
+    backLink,
   } = props;
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
 
@@ -244,7 +246,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
           startIcon={<Icon icon={chevronLeft} />}
           size="small"
           component={RouterLink}
-          to={createRouteURL(resource.listRoute)}
+          to={backLink || createRouteURL(resource.listRoute)}
         >
           <Typography style={{paddingTop: '3px'}}>Back</Typography>
         </Button>
