@@ -7,6 +7,10 @@ import { createRouteURL, RouteURLProps } from '../../lib/router';
 interface LinkProps {
   routeName: string;
   params?: RouteURLProps;
+  search?: string;
+  state?: {
+    [prop: string]: any;
+  };
 }
 
 interface LinkObjectProps {
@@ -23,9 +27,16 @@ export default function Link(props: React.PropsWithChildren<LinkProps | LinkObje
     );
   }
 
-  const { routeName, params = {} } = props as LinkProps;
+  const { routeName, params = {}, search, state } = props as LinkProps;
   return (
-    <MuiLink component={RouterLink} to={createRouteURL(routeName, params)}>
+    <MuiLink
+      component={RouterLink}
+      to={{
+        pathname: createRouteURL(routeName, params),
+        search,
+        state
+      }}
+    >
       {props.children}
     </MuiLink>
   );
