@@ -3,7 +3,7 @@ title: Plugins
 linkTitle: Plugins
 ---
 
-Plugins are one of the key features of Headlamp and allow to modify change what and how information is displayed, as well as other functionality. The ultimate goal of the plugins system is to allow vendors to build and deploy Headlamp with extra functionality without having to maintain a fork of the project.
+Plugins are one of the key features of Headlamp. They allow you to modify and change how and what information is displayed, as well as other functionality. The ultimate goal of the plugins system is to allow vendors to build and deploy Headlamp with extra functionality without having to maintain a fork of the project.
 
 # Developing Plugins
 
