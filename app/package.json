@@ -47,7 +47,7 @@
       "../frontend/node_modules/**/*",
       "node_modules/**/*"
     ],
-    "extraResources": "./electron/server",
+    "extraResources": ["./electron/server","./electron/server.exe"],
     "publish": {
       "provider": "github",
       "repo": "headlamp",

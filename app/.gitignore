@@ -2,4 +2,5 @@
 /dist
 /build
 /electron/server
+/electron/server.exe
 /electron-builder.yml

@@ -1,12 +1,16 @@
 GO111MODULE=on
 export GO111MODULE
 
+SERVER_EXE_EXT ?=
 DOCKER_CMD ?= docker
 DOCKER_REPO ?= docker.io/joaquim
 DOCKER_IMAGE_NAME ?= headlamp
 DOCKER_IMAGE_VERSION ?= $(shell git describe --tags --always --dirty)
 DOCKER_IMAGE_BASE ?= alpine:3.11.3
 
+ifeq ($(OS), Windows_NT)
+	SERVER_EXE_EXT = .exe
+endif
 all: backend frontend
 
 tools/golangci-lint: backend/go.mod backend/go.sum
@@ -27,7 +31,7 @@ app-mac:
 
 .PHONY: backend
 backend:
-	cd backend && go build -o ./server ./cmd
+	cd backend && go build -o ./server${SERVER_EXE_EXT} ./cmd
 
 frontend-install:
 	cd frontend && npm install
