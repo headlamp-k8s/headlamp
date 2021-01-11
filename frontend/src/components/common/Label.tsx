@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-interface InfoLabelProps {
+export interface InfoLabelProps {
   name: string;
   value?: string | null;
 }
@@ -131,7 +131,7 @@ const useHeaderLabelStyles = makeStyles(theme => ({
   },
 }));
 
-interface HeaderLabelProps {
+export interface HeaderLabelProps {
   label: string;
   value: string;
   tooltip?: string | null;
@@ -167,7 +167,7 @@ export function HeaderLabel(props: HeaderLabelProps) {
   );
 }
 
-interface HoverInfoLabelProps {
+export interface HoverInfoLabelProps {
   label: string;
   hoverInfo: string | JSX.Element | undefined;
   icon?: any;
@@ -195,7 +195,7 @@ export function HoverInfoLabel(props: HoverInfoLabelProps) {
   );
 }
 
-interface DateLabelProps {
+export interface DateLabelProps {
   date: number | string | Date;
 }
 
