@@ -6,7 +6,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
 
-interface ConfirmDialogProps extends DialogProps {
+export interface ConfirmDialogProps extends DialogProps {
   title: string;
   description: string;
   onConfirm: () => void;
