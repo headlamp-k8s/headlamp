@@ -4,12 +4,14 @@ const path = require('path');
 const url = require('url');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
+const open = require('open')
 
 const yargs = require('yargs');
 const args = yargs.option('headless', {
   describe: 'Open Headlamp in the default web browser instead of its app window'
 }).parse();
 const isHeadlessMode = args.headless;
+const defaultPort = 4466;
 
 function startServer(flags = []) {
   const serverFilePath = path.join(process.resourcesPath, './electron/server');
@@ -245,6 +247,9 @@ function attachServerEventHandlers (serverProcess) {
 if (isHeadlessMode) {
   serverProcess = startServer(['-html-static-dir', path.join(process.resourcesPath, './build')]);
   attachServerEventHandlers(serverProcess);
+  (async () => {
+    await open(`http://localhost:${defaultPort}`)
+  })()
 } else {
   startElecron();
 }

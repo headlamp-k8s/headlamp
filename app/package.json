@@ -73,6 +73,7 @@
   "dependencies": {
     "electron-log": "^4.2.4",
     "electron-updater": "^4.3.5",
-    "yargs": "^16.2.0"
+    "yargs": "^16.2.0",
+    "open": "^7.3.1"
   }
 }
