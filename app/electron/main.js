@@ -123,11 +123,47 @@ const isDev = process.mainModule.filename.indexOf('app.asar') === -1 ||
     process.mainModule.filename.indexOf('app') === -1;
 
 let serverProcess = null;
+let intentionalQuit = false;
+let serverProcessQuit = false;
+
+/**
+ * add some error handlers to the serverProcess.
+ * @param  {ChildProcess} serverProcess to attach the error handlers to.
+ */
+function attachServerEventHandlers (serverProcess) {
+  serverProcess.on('error', (err) => {
+    log.error(`server process failed to start: ${err}`);
+  });
+  serverProcess.stdout.on('data', (data) => {
+    log.info(`server process stdout: ${data}`);
+  });
+  serverProcess.stderr.on('data', (data) => {
+    const sterrMessage = `server process stderr: ${data}`;
+    if (data && data.indexOf && data.indexOf("Requesting") !== -1) {
+      // The server prints out urls it's getting, which aren't errors.
+      log.info(sterrMessage);
+    } else {
+      log.error(sterrMessage);
+    }
+  });
+  serverProcess.on('close', (code, signal) => {
+    const closeMessage = `server process process exited with code:${code} signal:${signal}`;
+    if (!intentionalQuit) {
+      // @todo: message mainWindow, or loadURL to an error url?
+      log.error(closeMessage);
+    } else {
+      log.info(closeMessage);
+    }
+    serverProcessQuit = true;
+  });
+}
+
 function createWindow () {
   let serverFilePath;
   if (!isDev) {
     serverFilePath = path.join(process.resourcesPath, './electron/server');
     serverProcess = spawn(serverFilePath, {shell: true});
+    attachServerEventHandlers(serverProcess);
   }
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({
@@ -170,8 +206,16 @@ app.on('ready', createWindow);
 
 app.on('quit', function () {
   if (serverProcess) {
-    serverProcess.stdin.pause();
-    serverProcess.kill();
+    if (serverProcessQuit) {
+      log.error('server process already not running');
+    } else {
+      intentionalQuit = true;
+      log.info('stopping server process...');
+      serverProcess.stdin.pause();
+      // @todo: should we try and end the process a bit more gracefully?
+      //       What happens if the kill signal doesn't kill it?
+      serverProcess.kill();
+    }
     serverProcess = null;
   }
 });
