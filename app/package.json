@@ -18,6 +18,7 @@
     "extraMetadata": {
       "main": "build/electron/main.js"
     },
+    "asar": false,
     "linux": {
       "target": [
         "AppImage",
