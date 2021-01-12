@@ -20,14 +20,16 @@ backend-lint: tools/golangci-lint
 	cd backend && ./tools/golangci-lint run
 
 .PHONY: app
-app: 
-	cd app && npm run build && npm run package  -- --win --linux --mac 
-app-win: 
-	cd app && npm run build && npm run package  -- --win
-app-linux: 
-	cd app && npm run build && npm run package  -- --linux
-app-mac: 
-	cd app && npm run build && npm run package  -- --mac
+app-build:
+	cd app && npm install && npm run build
+app: app-build
+	cd app && npm run package -- --win --linux --mac
+app-win: app-build
+	cd app && npm run package -- --win
+app-linux: app-build
+	cd app && npm run package -- --linux
+app-mac: app-build
+	cd app && npm run package -- --mac
 
 .PHONY: backend
 backend:
