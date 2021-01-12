@@ -4,7 +4,7 @@ const path = require('path');
 const url = require('url');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
-const open = require('open')
+const open = require('open');
 
 const yargs = require('yargs');
 const args = yargs.option('headless', {
@@ -248,8 +248,8 @@ if (isHeadlessMode) {
   serverProcess = startServer(['-html-static-dir', path.join(process.resourcesPath, './build')]);
   attachServerEventHandlers(serverProcess);
   (async () => {
-    await open(`http://localhost:${defaultPort}`)
-  })()
+    await open(`http://localhost:${defaultPort}`);
+  })();
 } else {
   startElecron();
 }
