@@ -139,7 +139,7 @@ function attachServerEventHandlers (serverProcess) {
   });
   serverProcess.stderr.on('data', (data) => {
     const sterrMessage = `server process stderr: ${data}`;
-    if (data && data.indexOf && data.indexOf("Requesting") !== -1) {
+    if (data && data.indexOf && data.indexOf('Requesting') !== -1) {
       // The server prints out urls it's getting, which aren't errors.
       log.info(sterrMessage);
     } else {
