@@ -48,6 +48,12 @@
       "node_modules/**/*"
     ],
     "extraResources": ["./electron/server","./electron/server.exe"],
+    "extraFiles": [
+      {
+        "from": "../frontend/build",
+        "to": "resources/build"
+      }
+    ],
     "publish": {
       "provider": "github",
       "repo": "headlamp",
@@ -66,6 +72,8 @@
   },
   "dependencies": {
     "electron-log": "^4.2.4",
-    "electron-updater": "^4.3.5"
+    "electron-updater": "^4.3.5",
+    "yargs": "^16.2.0",
+    "open": "^7.3.1"
   }
 }
