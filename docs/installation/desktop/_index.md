@@ -6,7 +6,7 @@ weight: 100
 Headlamp can be run as a desktop application, for users who don't want to
 deploy it in cluster, or those who want to manage unrelated clusters locally.
 
-Currently there are desktop apps for [Linux](./linux-installation.md) and [Mac](./mac-installation.md). A Windows version is coming soon too.
+Currently there are desktop apps for [Linux](./linux-installation.md), [Mac](./mac-installation.md), and [Windows](./win-installation.md).
 
 Please check the following guides for the installation in your desired platform.
 
