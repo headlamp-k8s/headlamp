@@ -1,6 +1,7 @@
 ---
 title: Mac OS Installation
 linktitle: Mac OS
+weight: 20
 ---
 
 For Mac OS we provide a _.dmg_ file, so you need to download it from the [releases page](https://github.com/kinvolk/headlamp/releases)

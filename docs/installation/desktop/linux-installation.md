@@ -1,6 +1,7 @@
 ---
 title: Linux Installation
 linktitle: Linux
+weight: 15
 ---
 
 Currently we ship a Linux desktop application as an AppImage file. So you
