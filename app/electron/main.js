@@ -137,8 +137,7 @@ function startElecron() {
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
-  const isDev = process.mainModule.filename.indexOf('app.asar') === -1 ||
-    process.mainModule.filename.indexOf('app') === -1;
+  const isDev = process.env.ELECTRON_DEV || false;
 
   function createWindow () {
     const startUrl = process.env.ELECTRON_START_URL || url.format({
