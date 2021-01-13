@@ -10,7 +10,7 @@
     "start": "npm run copy-server-binary && cd ../ && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
     "build": "npm run copy-server-binary && cd ../frontend/ && PUBLIC_URL='./' npm run build && cp -r ../app/electron/. build/electron",
     "package": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish never",
-    "serve-dev": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "serve-dev": "export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron .",
     "publish": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish always"
   },
   "build": {
@@ -48,7 +48,10 @@
       "../frontend/node_modules/**/*",
       "node_modules/**/*"
     ],
-    "extraResources": ["./electron/server","./electron/server.exe"],
+    "extraResources": [
+      "./electron/server",
+      "./electron/server.exe"
+    ],
     "extraFiles": [
       {
         "from": "../frontend/build",
