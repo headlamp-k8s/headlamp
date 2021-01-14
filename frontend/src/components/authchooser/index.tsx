@@ -49,22 +49,6 @@ function AuthChooser() {
     clusterAuthType = clusters[clusterName].auth_type;
   }
 
-  function handleTokenAuth() {
-    history.push({
-      pathname: generatePath(getRoutePath(getRoute('token')), { cluster: clusterName as string }),
-    });
-  }
-
-  function handleOidcAuth() {
-    history.replace({
-      pathname: generatePath(getClusterPrefixedPath(), { cluster: clusterName as string }),
-    });
-  }
-
-  function handleBackButtonPress() {
-    history.goBack();
-  }
-
   const numClusters = Object.keys(clusters || {}).length;
 
   React.useEffect(
@@ -161,28 +145,82 @@ function AuthChooser() {
   );
 
   return (
+    <PureAuthChooser
+      testingTitle={numClusters > 1 ? `Getting auth info: ${clusterName}` : 'Getting auth info'}
+      testingAuth={testingAuth}
+      title={numClusters > 1 ? `Authentication: ${clusterName}` : 'Authentication'}
+      haveClusters={!!clusters && Object.keys(clusters).length > 1}
+      error={error}
+      oauthUrl={`${
+        isDevMode || isElectron() ? 'http://localhost:4466/' : '/'
+      }oidc?dt=${Date()}&cluster=${getCluster()}`}
+      clusterAuthType={clusterAuthType}
+      handleTryAgain={() => setError(null)}
+      handleOidcAuth={() => {
+        history.replace({
+          pathname: generatePath(getClusterPrefixedPath(), {
+            cluster: clusterName as string,
+          }),
+        });
+      }}
+      handleBackButtonPress={() => {
+        history.goBack();
+      }}
+      handleTokenAuth={() => {
+        history.push({
+          pathname: generatePath(getRoutePath(getRoute('token')), {
+            cluster: clusterName as string,
+          }),
+        });
+      }}
+    />
+  );
+}
+
+export interface PureAuthChooserProps {
+  title: string;
+  testingTitle: string;
+  testingAuth: boolean;
+  error: Error | null;
+  oauthUrl: string;
+  clusterAuthType: string;
+  haveClusters: boolean;
+  handleOidcAuth: () => void;
+  handleTokenAuth: () => void;
+  handleTryAgain: () => void;
+  handleBackButtonPress: () => void;
+}
+
+export function PureAuthChooser({
+  title,
+  testingTitle,
+  testingAuth,
+  error,
+  oauthUrl,
+  clusterAuthType,
+  haveClusters,
+  handleOidcAuth,
+  handleTokenAuth,
+  handleTryAgain,
+  handleBackButtonPress,
+}: PureAuthChooserProps) {
+  return (
     <ClusterDialog useCover disableEscapeKeyDown disableBackdropClick>
       {testingAuth ? (
         <Box textAlign="center">
-          <DialogTitle>
-            {numClusters > 1 ? `Getting auth info: ${clusterName}` : 'Getting auth info'}
-          </DialogTitle>
+          <DialogTitle>{testingTitle}</DialogTitle>
           <Loader />
         </Box>
       ) : (
         <Box display="flex" flexDirection="column" alignItems="center">
-          <DialogTitle>
-            {numClusters > 1 ? `Authentication: ${clusterName}` : 'Authentication'}
-          </DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
           {!error ? (
             <Box>
               {clusterAuthType === 'oidc' ? (
                 <Box m={2}>
                   <OauthPopup
                     onCode={handleOidcAuth}
-                    url={`${
-                      isDevMode || isElectron() ? 'http://localhost:4466/' : '/'
-                    }oidc?dt=${Date()}&cluster=${getCluster()}`}
+                    url={oauthUrl}
                     title="Headlamp Cluster Authentication"
                   >
                     <ColorButton>Sign In</ColorButton>
@@ -198,12 +236,12 @@ function AuthChooser() {
               <Box m={2}>
                 <Empty>Failed to get authentication information: {error!.message}</Empty>
               </Box>
-              <ColorButton onClick={() => setError(null)}>Try Again</ColorButton>
+              <ColorButton onClick={handleTryAgain}>Try Again</ColorButton>
             </Box>
           )}
         </Box>
       )}
-      {!!clusters && Object.keys(clusters).length > 1 && (
+      {haveClusters && (
         <Box display="flex" flexDirection="column" alignItems="center">
           <Box
             m={2}
