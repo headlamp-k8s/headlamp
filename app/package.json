@@ -14,7 +14,7 @@
     "publish": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish always"
   },
   "build": {
-    "appId": "com.kinvolk.headlamp",
+    "appId": "io.kinvolk.Headlamp",
     "extraMetadata": {
       "main": "build/electron/main.js"
     },
