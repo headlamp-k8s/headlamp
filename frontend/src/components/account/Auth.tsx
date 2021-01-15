@@ -19,7 +19,7 @@ interface ReactRouterLocationStateIface {
   from?: Location;
 }
 
-function Auth() {
+export default function AuthToken() {
   const history = useHistory();
   const clusterConf = useClustersConf();
   const [token, setToken] = React.useState('');
@@ -27,10 +27,14 @@ function Auth() {
   const clusters = useClustersConf();
 
   function onAuthClicked() {
-    loginWithToken(token).then(code => {
+    loginWithToken(token).then((code) => {
       // If successful, redirect.
       if (code === 200) {
-        history.replace(generatePath(getClusterPrefixedPath(), {cluster: getCluster() as string}));
+        history.replace(
+          generatePath(getClusterPrefixedPath(), {
+            cluster: getCluster() as string,
+          })
+        );
       } else {
         setToken('');
         setShowError(true);
@@ -39,15 +43,59 @@ function Auth() {
   }
 
   return (
+    <PureAuthToken
+      onCancel={() => history.replace('/')}
+      title={
+        Object.keys(clusterConf || {}).length > 1
+          ? `Authentication: ${getCluster()}`
+          : 'Authentication'
+      }
+      token={token}
+      showError={showError}
+      showActions={Object.keys(clusters || {}).length > 1}
+      onChangeToken={(event: React.ChangeEvent<HTMLInputElement>) =>
+        setToken(event.target.value)
+      }
+      onAuthClicked={onAuthClicked}
+      onCloseError={() => {
+        setShowError(false);
+      }}
+    />
+  );
+}
+
+interface clickCallbackType {
+  (event: React.MouseEvent<HTMLElement>): void;
+}
+interface changeCallbackType {
+  (event: React.ChangeEvent<HTMLInputElement>): void;
+}
+
+export interface PureAuthTokenProps {
+  title: string;
+  token: string;
+  showActions: boolean;
+  showError: boolean;
+  onCancel: clickCallbackType;
+  onChangeToken: changeCallbackType;
+  onAuthClicked: clickCallbackType;
+  onCloseError: (event: React.SyntheticEvent<any, Event>, reason: string) => void;
+}
+
+export function PureAuthToken({
+  title,
+  token,
+  showActions,
+  showError,
+  onCancel,
+  onAuthClicked,
+  onChangeToken,
+  onCloseError,
+}: PureAuthTokenProps) {
+  return (
     <Box>
-      <ClusterDialog
-        useCover
-        disableEscapeKeyDown
-        disableBackdropClick
-      >
-        <DialogTitle id="responsive-dialog-title">
-          {Object.keys(clusterConf || {}).length > 1 ? `Authentication: ${getCluster()}` : 'Authentication'}
-        </DialogTitle>
+      <ClusterDialog useCover disableEscapeKeyDown disableBackdropClick>
+        <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please paste your authentication token.
@@ -59,19 +107,19 @@ function Auth() {
             label="ID token"
             type="password"
             value={token}
-            onChange={event => setToken(event.target.value)}
+            onChange={onChangeToken}
             fullWidth
           />
         </DialogContent>
         <DialogActions>
-          {Object.keys(clusters || {}).length > 1 &&
-          <>
-            <Button onClick = {() => history.replace('/')} color="primary">
-              Cancel
-            </Button>
-            <div style={{flex: '1 0 0'}} />
-          </>
-          }
+          {showActions && (
+            <>
+              <Button onClick={onCancel} color="primary">
+                Cancel
+              </Button>
+              <div style={{ flex: '1 0 0' }} />
+            </>
+          )}
           <Button onClick={onAuthClicked} color="primary">
             Authenticate
           </Button>
@@ -84,7 +132,7 @@ function Auth() {
         }}
         open={showError}
         autoHideDuration={5000}
-        onClose={() => { setShowError(false); }}
+        onClose={onCloseError}
         ContentProps={{
           'aria-describedby': 'message-id',
         }}
@@ -112,5 +160,3 @@ async function loginWithToken(token: string) {
     return err.status;
   }
 }
-
-export default Auth;

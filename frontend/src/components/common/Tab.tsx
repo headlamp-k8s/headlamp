@@ -15,7 +15,7 @@ export interface Tab {
   component: JSX.Element | JSX.Element[];
 }
 
-interface TabsProps {
+export interface TabsProps {
   tabs: Tab[];
   tabProps?: {
     [propName: string]: any;
