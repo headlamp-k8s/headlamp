@@ -53,14 +53,23 @@ import ReplicaSet from './k8s/replicaSet';
 import { getCluster, getClusterPrefixedPath } from './util';
 
 export interface Route {
+  /** Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands. */
   path: string;
+  /** When true, will only match if the path matches the location.pathname exactly. */
   exact?: boolean;
+  /** Human readable name. Capitalized and short. */
   name?: string;
+  /** In case this route does *not* need a cluster prefix and context. */
   noCluster?: boolean;
+  /** This route does not require Authentication. */
   noAuthRequired?: boolean;
+  /** The sidebar group this Route should be in, or null if it is in no group. */
   sidebar: string | null;
+  /** Shown component for this route. */
   component: () => JSX.Element;
 }
+
+// Note: Please update interface in plugins-pkg/types/lib/router.d.ts if you change Route.
 
 export const ROUTES: {
   [routeName: string]: Route;

@@ -1,14 +1,14 @@
 ---
-title: "Module: util"
-linkTitle: "util"
-slug: "util"
+title: "Module: lib/util"
+linkTitle: "lib/util"
+slug: "lib_util"
 ---
 
 ## Table of contents
 
 ### Interfaces
 
-- [FilterState](../interfaces/util.filterstate.md)
+- [FilterState](../interfaces/lib_util.filterstate.md)
 
 ## Variables
 
@@ -16,24 +16,24 @@ slug: "util"
 
 • `Const` **CLUSTER\_ACTION\_GRACE\_PERIOD**: *5000*= 5000
 
-Defined in: [util.ts:15](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L15)
+Defined in: lib/util.ts:18
 
 ## Functions
 
 ### filterResource
 
-▸ **filterResource**(`item`: KubeObjectInterface, `filter`: [*FilterState*](../interfaces/util.filterstate.md)): *boolean*
+▸ **filterResource**(`item`: KubeObjectInterface, `filter`: [*FilterState*](../interfaces/lib_util.filterstate.md)): *boolean*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
 `item` | KubeObjectInterface |
-`filter` | [*FilterState*](../interfaces/util.filterstate.md) |
+`filter` | [*FilterState*](../interfaces/lib_util.filterstate.md) |
 
 **Returns:** *boolean*
 
-Defined in: [util.ts:78](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L78)
+Defined in: lib/util.ts:81
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 **Returns:** *string* \| *null*
 
-Defined in: [util.ts:113](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L113)
+Defined in: lib/util.ts:116
 
 ___
 
@@ -59,7 +59,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [util.ts:105](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L105)
+Defined in: lib/util.ts:108
 
 ___
 
@@ -76,7 +76,7 @@ Name | Type |
 
 **Returns:** *null* \| *string*
 
-Defined in: [util.ts:27](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L27)
+Defined in: lib/util.ts:30
 
 ___
 
@@ -92,7 +92,7 @@ Name | Type |
 
 **Returns:** *any*
 
-Defined in: [util.ts:36](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L36)
+Defined in: lib/util.ts:39
 
 ___
 
@@ -110,7 +110,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [util.ts:54](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L54)
+Defined in: lib/util.ts:57
 
 ___
 
@@ -127,7 +127,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [util.ts:44](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L44)
+Defined in: lib/util.ts:47
 
 ___
 
@@ -143,7 +143,7 @@ Name | Type |
 
 **Returns:** *any*
 
-Defined in: [util.ts:40](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L40)
+Defined in: lib/util.ts:43
 
 ___
 
@@ -159,7 +159,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [util.ts:23](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L23)
+Defined in: lib/util.ts:26
 
 ___
 
@@ -175,7 +175,7 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [util.ts:19](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L19)
+Defined in: lib/util.ts:22
 
 ___
 
@@ -191,7 +191,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [util.ts:125](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L125)
+Defined in: lib/util.ts:128
 
 ___
 
@@ -201,4 +201,4 @@ ___
 
 **Returns:** (`item`: KubeObjectInterface) => *boolean*
 
-Defined in: [util.ts:100](https://github.com/kinvolk/headlamp/blob/b1d8df6/frontend/src/lib/util.ts#L100)
+Defined in: lib/util.ts:103
