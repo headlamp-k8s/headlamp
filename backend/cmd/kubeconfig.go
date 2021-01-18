@@ -49,6 +49,11 @@ func GetContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 		authInfo := config.AuthInfos[value.AuthInfo]
 		authType := ""
 
+		if authInfo == nil {
+			log.Printf("Not adding context %v because authInfo is nil!\n", key)
+			continue
+		}
+
 		authProvider := authInfo.AuthProvider
 		if authProvider != nil {
 			authType = "oidc"
