@@ -2,15 +2,16 @@
   "name": "headlamp",
   "version": "0.2.0",
   "description": "",
-  "main": "electron/main.js",
+  "main": "electron/src/main.js",
   "homepage": ".",
   "productName": "Headlamp",
   "scripts": {
+    "compile-electron": "babel electron --out-dir electron/src/ --extensions '.ts'",
     "copy-server-binary": "cd ../ && make backend && cp -r ./backend/server ./app/electron/",
     "start": "npm run copy-server-binary && cd ../ && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
-    "build": "npm run copy-server-binary && cd ../frontend/ && PUBLIC_URL='./' npm run build && cp -r ../app/electron/. build/electron",
+    "build": "npm run compile-electron && npm run copy-server-binary && cd ../frontend/ && PUBLIC_URL='./' npm run build && cp -r ../app/electron/src/. build/electron",
     "package": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish never",
-    "serve-dev": "export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "serve-dev": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron .",
     "publish": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish always"
   },
   "build": {
