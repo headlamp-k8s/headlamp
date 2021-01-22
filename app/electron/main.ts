@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, MenuItem } from 'electron';
+import { app, BrowserWindow, Menu, MenuItem, screen } from 'electron';
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 import path from 'path';
 import url from 'url';
@@ -145,7 +145,8 @@ function startElecron() {
       protocol: 'file:',
       slashes: true,
     });
-    mainWindow = new BrowserWindow({ width: 800, height: 600 });
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    mainWindow = new BrowserWindow({ width, height });
     mainWindow.loadURL(startUrl);
     mainWindow.on('closed', () => {
       mainWindow = null;
