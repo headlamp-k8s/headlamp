@@ -2,15 +2,16 @@
   "name": "headlamp",
   "version": "0.2.0",
   "description": "",
-  "main": "electron/main.js",
+  "main": "electron/src/main.js",
   "homepage": ".",
   "productName": "Headlamp",
   "scripts": {
+    "compile-electron": "babel electron --out-dir electron/src/ --extensions '.ts'",
     "copy-server-binary": "cd ../ && make backend && cp -r ./backend/server ./app/electron/",
     "start": "npm run copy-server-binary && cd ../ && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
-    "build": "npm run copy-server-binary && cd ../frontend/ && PUBLIC_URL='./' npm run build && cp -r ../app/electron/. build/electron",
+    "build": "npm run compile-electron && npm run copy-server-binary && cd ../frontend/ && PUBLIC_URL='./' npm run build && cp -r ../app/electron/src/. build/electron",
     "package": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish never",
-    "serve-dev": "export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "serve-dev": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron .",
     "publish": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish always"
   },
   "build": {
@@ -71,13 +72,20 @@
     "email": "hello@kinvolk.io"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
     "electron": "^10.1.2",
-    "electron-builder": "^22.8.0"
+    "electron-builder": "^22.8.0",
+    "typescript": "^4.1.3"
   },
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "electron-log": "^4.2.4",
     "electron-updater": "^4.3.5",
-    "yargs": "^16.2.0",
-    "open": "^7.3.1"
+    "open": "^7.3.1",
+    "yargs": "^16.2.0"
   }
 }

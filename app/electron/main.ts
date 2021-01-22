@@ -1,33 +1,33 @@
-const { app, BrowserWindow, Menu } = require('electron');
-const { spawn } = require('child_process');
-const path = require('path');
-const url = require('url');
-const { autoUpdater } = require('electron-updater');
-const log = require('electron-log');
-const open = require('open');
+import { app, BrowserWindow, Menu, MenuItem } from 'electron';
+import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
+import path from 'path';
+import url from 'url';
+import { autoUpdater } from 'electron-updater';
+import  log from 'electron-log';
+import open from 'open';
+import yargs from 'yargs';
+import { MenuItemConstructorOptions } from 'electron/main';
 
-const yargs = require('yargs');
 const args = yargs.option('headless', {
   describe: 'Open Headlamp in the default web browser instead of its app window'
 }).parse();
 const isHeadlessMode = args.headless;
 const defaultPort = 4466;
 
-function startServer(flags = []) {
+function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   const serverFilePath = path.join(process.resourcesPath, './electron/server');
   return spawn(serverFilePath, [...flags], {shell: true});
 }
 
-let serverProcess = null;
-let intentionalQuit = false;
-let serverProcessQuit = false;
+let serverProcess: ChildProcessWithoutNullStreams | null;
+let intentionalQuit: boolean;
+let serverProcessQuit: boolean;
 
 function startElecron() {
-  autoUpdater.logger = log;
-  autoUpdater.logger.transports.file.level = 'info';
+  log.transports.file.level = 'info';
   log.info('App starting...');
 
-  let mainWindow;
+  let mainWindow: BrowserWindow | null;
 
   const isMac = process.platform === 'darwin';
 
@@ -134,7 +134,7 @@ function startElecron() {
     }
   ];
 
-  const menu = Menu.buildFromTemplate(template);
+  const menu = Menu.buildFromTemplate(template as (MenuItemConstructorOptions | MenuItem)[]);
   Menu.setApplicationMenu(menu);
 
   const isDev = process.env.ELECTRON_DEV || false;
@@ -153,16 +153,17 @@ function startElecron() {
     autoUpdater.checkForUpdatesAndNotify();
 
     if (!isDev) {
-      serverFilePath = path.join(process.resourcesPath, './electron/server');
       serverProcess = startServer();
       attachServerEventHandlers(serverProcess);
     }
   }
   autoUpdater.autoDownload = true;
 
-  function sendStatusToWindow(text) {
+  function sendStatusToWindow(text: string) {
     log.info(`Sending status to window: ${text}`);
-    mainWindow.webContents.send('message', text);
+    if (mainWindow) {
+      mainWindow.webContents.send('message', text);
+    }
   }
 
   autoUpdater.on('update-not-available', (info) => {
@@ -191,7 +192,9 @@ function startElecron() {
   app.once('window-all-closed', app.quit);
 
   app.once('before-quit', () => {
-    mainWindow.removeAllListeners('close');
+    if (mainWindow) {
+      mainWindow.removeAllListeners('close');
+    }
   });
 }
 
@@ -202,7 +205,7 @@ app.on('quit', function () {
     } else {
       intentionalQuit = true;
       log.info('stopping server process...');
-      serverProcess.stdin.pause();
+      serverProcess.stdin.destroy();
       // @todo: should we try and end the process a bit more gracefully?
       //       What happens if the kill signal doesn't kill it?
       serverProcess.kill();
@@ -215,7 +218,7 @@ app.on('quit', function () {
  * add some error handlers to the serverProcess.
  * @param  {ChildProcess} serverProcess to attach the error handlers to.
  */
-function attachServerEventHandlers (serverProcess) {
+function attachServerEventHandlers (serverProcess: ChildProcessWithoutNullStreams) {
   serverProcess.on('error', (err) => {
     log.error(`server process failed to start: ${err}`);
   });
