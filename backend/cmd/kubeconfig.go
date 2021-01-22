@@ -49,16 +49,23 @@ func GetContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 		authInfo := config.AuthInfos[value.AuthInfo]
 		authType := ""
 
-		authProvider := authInfo.AuthProvider
-		if authProvider != nil {
-			authType = "oidc"
+		if authInfo == nil && value.AuthInfo != "" {
+			log.Printf("Not adding context: %v because user: %v could not be found!\n", key, value.AuthInfo)
+			continue
+		}
 
-			var oidcConfig OidcConfig
-			oidcConfig.ClientID = authProvider.Config["client-id"]
-			oidcConfig.ClientSecret = authProvider.Config["client-secret"]
-			oidcConfig.IdpIssuerURL = authProvider.Config["idp-issuer-url"]
+		if authInfo != nil {
+			authProvider := authInfo.AuthProvider
+			if authProvider != nil {
+				authType = "oidc"
 
-			oidcConfigCache[key] = &oidcConfig
+				var oidcConfig OidcConfig
+				oidcConfig.ClientID = authProvider.Config["client-id"]
+				oidcConfig.ClientSecret = authProvider.Config["client-secret"]
+				oidcConfig.IdpIssuerURL = authProvider.Config["idp-issuer-url"]
+
+				oidcConfigCache[key] = &oidcConfig
+			}
 		}
 
 		cluster := Cluster{key, clusterConfig.Server, clusterConfig, authType}
