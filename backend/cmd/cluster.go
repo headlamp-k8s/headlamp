@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"path"
+	"path/filepath"
 
 	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
 	"k8s.io/client-go/rest"
@@ -65,9 +67,25 @@ func (c *Cluster) getName() *string {
 	return &c.Name
 }
 
+// pathRelativeToBase returns either an absolute path, or a relative path prefixed with base.
+// Examples:
+//   pathRelativeToBase("/etc", "passwd") -> "/etc/passwd"
+//   pathRelativeToBase("/etc", "/etc/passwd") -> "/etc/passwd"
+func pathRelativeToBase(base string, dest string) string {
+	if filepath.IsAbs(dest) {
+		return dest
+	}
+
+	return path.Join(base, dest)
+}
+
 func (c *Cluster) getCAData() []byte {
 	if c.config.CertificateAuthority != "" {
-		pemBytes, err := ioutil.ReadFile(c.config.CertificateAuthority)
+		// paths inside the config are relative to the config.
+		configDir := filepath.Dir(c.config.LocationOfOrigin)
+		caPath := pathRelativeToBase(configDir, c.config.CertificateAuthority)
+
+		pemBytes, err := ioutil.ReadFile(caPath)
 		if err == nil {
 			return pemBytes
 		}
