@@ -1,12 +1,12 @@
+import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { app, BrowserWindow, Menu, MenuItem, screen } from 'electron';
-import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
+import log from 'electron-log';
+import { autoUpdater } from 'electron-updater';
+import { MenuItemConstructorOptions } from 'electron/main';
+import open from 'open';
 import path from 'path';
 import url from 'url';
-import { autoUpdater } from 'electron-updater';
-import  log from 'electron-log';
-import open from 'open';
 import yargs from 'yargs';
-import { MenuItemConstructorOptions } from 'electron/main';
 
 const args = yargs.option('headless', {
   describe: 'Open Headlamp in the default web browser instead of its app window'
