@@ -80,8 +80,10 @@ function AuthChooser(){
     let cancelled = false;
 
     // If we haven't yet figured whether we need to use a token for the current
-    // cluster, then we check here.
-    if (cluster.useToken === undefined) {
+    //   cluster, then we check here.
+    // With clusterAuthType == oidc,
+    //   they are presented with a choice of login or enter token.
+    if (clusterAuthType !== 'oidc' && cluster.useToken === undefined) {
       let useToken = true;
 
       setTestingAuth(true);
