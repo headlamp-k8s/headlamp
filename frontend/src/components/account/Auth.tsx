@@ -1,3 +1,4 @@
+import { Link } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -111,6 +112,20 @@ export function PureAuthToken({
             fullWidth
           />
         </DialogContent>
+        <DialogActions>
+          <Box ml={2}>
+            Check out how to generate a
+            <Link
+              style={{cursor: 'pointer', marginLeft: '0.4rem'}}
+              target="_blank"
+              href="https://kinvolk.io/docs/headlamp/latest/installation/#authentication--log-in"
+            >
+              service account token
+            </Link>
+            .
+          </Box>
+          <div style={{flex: '1 0 0'}}></div>
+        </DialogActions>
         <DialogActions>
           {showActions && (
             <>
