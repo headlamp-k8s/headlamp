@@ -17,7 +17,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/semver": "^7.3.4",
     "@types/webpack-env": "^1.15.2",
-    "ansi-to-react": "^5.1.0",
+    "ansi-to-react": "^6.1.4",
     "javascript-time-ago": "^2.0.4",
     "js-base64": "^2.5.1",
     "js-cookie": "^2.2.1",
