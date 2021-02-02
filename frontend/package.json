@@ -38,7 +38,7 @@
     "semver": "^7.3.4",
     "swagger-parser": "^8.0.3",
     "typescript": "^3.8.3",
-    "xterm": "^4.3.0"
+    "xterm": "^4.10.0"
   },
   "scripts": {
     "start": "react-scripts start",
