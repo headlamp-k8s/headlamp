@@ -2,8 +2,8 @@
  * This module was taken from the k8dash project.
  */
 
+import Swagger from '@apidevtools/swagger-parser';
 import { OpenAPIV2 } from 'openapi-types';
-import Swagger from 'swagger-parser';
 import { request } from './k8s/apiProxy';
 
 let docsPromise: ReturnType<typeof getDocs>;
