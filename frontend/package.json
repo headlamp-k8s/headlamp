@@ -33,7 +33,6 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^4.0.0",
-    "react-scroll": "^1.7.14",
     "recharts": "^2.0.4",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
