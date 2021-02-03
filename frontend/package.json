@@ -29,7 +29,7 @@
     "openapi-types": "^7.2.3",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-hotkeys-hook": "^2.2.2",
+    "react-hotkeys-hook": "^3.0.3",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.2",
