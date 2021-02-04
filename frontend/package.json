@@ -37,7 +37,7 @@
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
     "semver": "^7.3.4",
-    "typescript": "^3.8.3",
+    "typescript": "^4.1.3",
     "xterm": "^4.10.0"
   },
   "scripts": {
@@ -73,8 +73,8 @@
     "@storybook/react": "^6.1.17",
     "@types/js-base64": "^2.3.1",
     "@types/js-yaml": "^3.12.4",
-    "@typescript-eslint/eslint-plugin": "^3.1.0",
-    "@typescript-eslint/parser": "^3.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/parser": "^4.14.2",
     "eslint": "^7.19.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.22.0",

@@ -36,7 +36,7 @@ function registerPlugin(pluginId: string, pluginObj: Plugin) {
 
 window.registerPlugin = registerPlugin;
 
-function loadScripts(array: string[], onLoadFinished: () => void) {
+function loadScripts(array: string[], onLoadFinished: (value?: any) => void) {
   var loader = function(src: string, handler: () => void) {
     const script: HTMLScriptElement = document.createElement('script');
     script.src = src;
@@ -96,6 +96,6 @@ export async function initializePlugins() {
     for (const plugin of Object.values(window.plugins)) {
       plugin.initialize(new Registry());
     }
-    resolve();
+    resolve(undefined);
   });
 }

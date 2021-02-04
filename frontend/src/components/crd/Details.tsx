@@ -30,7 +30,7 @@ const useStyle = makeStyles({
 
 export default function CustomResourceDefinitionDetails() {
   const classes = useStyle();
-  const { name } = useParams();
+  const { name } = useParams<{ name: string }>();
   const [item, setItem] = React.useState<CRD | null>(null);
   const [objToShow, setObjToShow] = React.useState<KubeCRD | null>(null);
   const [objects, setObjects] = React.useState<KubeCRD[]>([]);

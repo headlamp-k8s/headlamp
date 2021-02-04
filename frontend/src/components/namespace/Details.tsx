@@ -5,7 +5,7 @@ import { StatusLabel } from '../common/Label';
 import { MainInfoSection } from '../common/Resource';
 
 export default function NamespaceDetails() {
-  const { name } = useParams();
+  const { name } = useParams<{ name: string }>();
   const [item, setItem] = React.useState<Namespace | null>(null);
 
   Namespace.useApiGet(setItem, name);

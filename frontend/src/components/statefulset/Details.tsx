@@ -5,7 +5,7 @@ import StatefulSet from '../../lib/k8s/statefulSet';
 import { MainInfoSection, MetadataDictGrid } from '../common/Resource';
 
 export default function StatefulSetDetails() {
-  const { namespace, name } = useParams();
+  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<StatefulSet | null>(null);
 
   StatefulSet.useApiGet(setItem, name, namespace);

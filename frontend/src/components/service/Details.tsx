@@ -10,7 +10,7 @@ import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceDetails() {
-  const { namespace, name } = useParams();
+  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<Service | null>(null);
 
   Service.useApiGet(setItem, name, namespace);

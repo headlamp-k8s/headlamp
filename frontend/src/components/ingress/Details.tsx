@@ -7,7 +7,7 @@ import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function IngressDetails() {
-  const { namespace, name } = useParams();
+  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<Ingress | null>(null);
 
   Ingress.useApiGet(setItem, name, namespace);

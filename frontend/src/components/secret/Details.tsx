@@ -5,7 +5,7 @@ import Secret from '../../lib/k8s/secret';
 import { MainInfoSection, SecretField } from '../common/Resource';
 
 export default function SecretDetails() {
-  const { namespace, name } = useParams();
+  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<Secret | null>(null);
 
   Secret.useApiGet(setItem, name, namespace);

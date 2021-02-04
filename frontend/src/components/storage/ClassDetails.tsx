@@ -4,7 +4,7 @@ import StorageClass from '../../lib/k8s/storageClass';
 import { MainInfoSection } from '../common/Resource';
 
 export default function StorageClassDetails() {
-  const { name } = useParams();
+  const { name } = useParams<{ name: string }>();
   const [item, setItem] = React.useState<StorageClass | null>(null);
 
   StorageClass.useApiGet(setItem, name);
