@@ -17,7 +17,7 @@
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
     "@types/semver": "^7.3.4",
-    "@types/webpack-env": "^1.15.2",
+    "@types/webpack-env": "^1.16.0",
     "ansi-to-react": "^6.1.4",
     "javascript-time-ago": "^2.3.4",
     "js-base64": "^3.6.0",
