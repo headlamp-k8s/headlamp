@@ -21,6 +21,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, HashRouter, Redirect, Route, RouteProps, Switch, useHistory } from 'react-router-dom';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
+import AlertNotification from './components/common/AlertNotification';
 import Sidebar, { drawerWidth, NavigationTabs, useSidebarItem } from './components/Sidebar';
 import { isElectron } from './helpers';
 import { getToken, setToken } from './lib/auth';
@@ -42,8 +43,7 @@ const useStyle = makeStyles(theme => ({
     }
   },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
+    flexGrow: 1
   },
   toolbar: theme.mixins.toolbar,
 }));
@@ -227,11 +227,14 @@ function AppContainer(props: AppContainerProps) {
           </AppBar>
           <Sidebar />
           <main className={classes.content}>
-            <div className={classes.toolbar} />
-            <Container maxWidth="lg">
-              <NavigationTabs />
-              <RouteSwitcher />
-            </Container>
+            <AlertNotification/>
+            <Box p={3}>
+              <div className={classes.toolbar} />
+              <Container maxWidth="lg">
+                <NavigationTabs />
+                <RouteSwitcher />
+              </Container>
+            </Box>
           </main>
           <ActionsNotifier />
         </Box>
