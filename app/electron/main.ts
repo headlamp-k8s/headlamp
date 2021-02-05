@@ -1,8 +1,8 @@
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { app, BrowserWindow, Menu, MenuItem, screen } from 'electron';
+import { MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
 import { autoUpdater } from 'electron-updater';
-import { MenuItemConstructorOptions } from 'electron/main';
 import open from 'open';
 import path from 'path';
 import url from 'url';
