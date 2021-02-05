@@ -3,17 +3,18 @@ import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
 import red from '@material-ui/core/colors/red';
 import { createMuiTheme, Theme } from '@material-ui/core/styles';
+import { PaletteColor, PaletteColorOptions } from '@material-ui/core/styles/createPalette';
 
 declare module '@material-ui/core/styles/createPalette.d' {
   interface Palette {
-    success: object;
+    success: PaletteColor;
     sidebarLink: {
       [propName: string]: string;
     };
     [propName: string]: any;
   }
   interface PaletteOptions {
-    success: object;
+    success?: PaletteColorOptions;
     sidebarLink: {
       [propName: string]: string;
     };

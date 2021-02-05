@@ -80,7 +80,9 @@ const useStyle = makeStyles(theme => ({
   toolbar: {
     borderBottom: '1px solid #1e1e1e',
     paddingTop: theme.spacing(1.5),
-    paddingLeft: (isSidebarOpen: boolean) => isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
+    paddingLeft: (
+      props: { isSidebarOpen: boolean }
+    ) => props.isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
   sidebarGrid: {
@@ -443,7 +445,7 @@ export default function Sidebar() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const items = React.useMemo(() => prepareRoutes(), [sidebar.entries]);
   const [open, setOpen] = React.useState(sidebar.isSidebarOpen);
-  const classes = useStyle(open);
+  const classes = useStyle({ isSidebarOpen: open });
 
   // Use the location to make sure the sidebar is changed, as it depends on the cluster
   // (defined in the URL ATM).

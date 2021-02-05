@@ -94,14 +94,14 @@ interface MetadataDictGridProps {
 }
 
 export function MetadataDictGrid(props: MetadataDictGridProps) {
-  const classes = useStyles();
+  const classes = useStyles({});
   const { dict, showKeys = true } = props;
   const [expanded, setExpanded] = React.useState(false);
   const defaultNumShown = 20;
 
   const keys = Object.keys(dict || []);
 
-  const MetadataEntry = React.forwardRef((props: TypographyProps, ref) => {
+  const MetadataEntry = React.forwardRef((props: TypographyProps, ref:any) => {
     return (
       <Typography
         noWrap

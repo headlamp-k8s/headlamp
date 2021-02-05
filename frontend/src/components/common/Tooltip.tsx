@@ -30,10 +30,10 @@ const useContainerStyles = makeStyles({
 });
 
 export function TooltipIcon(props: TooltipIconProps) {
-  const classes = useContainerStyles();
+  const classes = useContainerStyles({});
   const { children, icon = informationOutline } = props;
 
-  const IconReffed = React.forwardRef((props: IconifyIcon, ref) => {
+  const IconReffed = React.forwardRef((props: IconifyIcon, ref:any) => {
     return (
       <Container
         ref={ref}
