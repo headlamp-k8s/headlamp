@@ -10,20 +10,20 @@ export const INITIAL_STATE: ClusterState = {
 };
 
 function cluster(clusterActions = INITIAL_STATE, action: ClusterAction & Action) {
-  const {type, id, ...actionOptions} = action;
-  const newState = {...clusterActions};
+  const { type, id, ...actionOptions } = action;
+  const newState = { ...clusterActions };
   switch (type) {
     case CLUSTER_ACTION_UPDATE:
       if (_.isEmpty(actionOptions)) {
         delete newState[id];
       } else {
-        newState[id] = {...(action as ClusterAction)};
+        newState[id] = { ...(action as ClusterAction) };
       }
       break;
 
     default:
       break;
-  };
+  }
 
   return newState;
 }

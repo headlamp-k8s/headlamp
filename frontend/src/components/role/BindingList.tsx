@@ -14,13 +14,14 @@ interface RoleBindingDict {
 export default function RoleBindingList() {
   const [bindings, setBindings] = React.useState<RoleBindingDict | null>(null);
   const [roleBindingError, onRoleBindingError] = useErrorState(setupRoleBindings);
-  const [clusterRoleBindingError, onClusterRoleBindingError] =
-    useErrorState(setupClusterRoleBindings);
+  const [clusterRoleBindingError, onClusterRoleBindingError] = useErrorState(
+    setupClusterRoleBindings
+  );
   const filterFunc = useFilterFunc();
 
   function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
     const currentBindings: RoleBindingDict = bindings || {};
-    const data = {...currentBindings};
+    const data = { ...currentBindings };
 
     data[kind] = newBindings;
 
@@ -64,13 +65,7 @@ export default function RoleBindingList() {
   ClusterRoleBinding.useApiList(setupClusterRoleBindings, onClusterRoleBindingError);
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Role Bindings"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Role Bindings" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -78,12 +73,11 @@ export default function RoleBindingList() {
         columns={[
           {
             label: 'Type',
-            getter: (item) => item.kind
+            getter: item => item.kind,
           },
           {
             label: 'Name',
-            getter: (item) =>
-              <Link kubeObject={item} />,
+            getter: item => <Link kubeObject={item} />,
             sort: (r1: RoleBinding, r2: RoleBinding) => {
               if (r1.metadata.name < r2.metadata.name) {
                 return -1;
@@ -91,18 +85,18 @@ export default function RoleBindingList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (item) => item.getNamespace() || 'All namespaces'
+            getter: item => item.getNamespace() || 'All namespaces',
           },
           {
             label: 'Age',
-            getter: (item) => item.getAge(),
+            getter: item => item.getAge(),
             sort: (r1: RoleBinding, r2: RoleBinding) =>
               new Date(r2.metadata.creationTimestamp).getTime() -
-              new Date(r1.metadata.creationTimestamp).getTime()
+              new Date(r1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={getJointItems()}

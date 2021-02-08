@@ -8,9 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<InfoLabelProps> = (args) => (
-  <InfoLabelComponent {...args} />
-);
+const Template: Story<InfoLabelProps> = args => <InfoLabelComponent {...args} />;
 
 export const InfoLabel = Template.bind({});
 InfoLabel.args = {

@@ -15,22 +15,16 @@ export default function JobsList() {
   }
 
   function getCondition(job: Job) {
-    const {conditions} = job.status;
+    const { conditions } = job.status;
     if (!conditions) {
       return null;
     }
 
-    return conditions.find(({status}: {status: string}) => status === 'True').type;
+    return conditions.find(({ status }: { status: string }) => status === 'True').type;
   }
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Jobs"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Jobs" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -38,7 +32,7 @@ export default function JobsList() {
         columns={[
           {
             label: 'Name',
-            getter: (job) => <Link kubeObject={job} />,
+            getter: job => <Link kubeObject={job} />,
             sort: (j1: Job, j2: Job) => {
               if (j1.metadata.name < j2.metadata.name) {
                 return -1;
@@ -46,27 +40,27 @@ export default function JobsList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (job) => job.getNamespace()
+            getter: job => job.getNamespace(),
           },
           {
             label: 'Completions',
-            getter: (job) => getCompletions(job)
+            getter: job => getCompletions(job),
           },
           {
             label: 'Conditions',
-            getter: (job) => getCondition(job)
+            getter: job => getCondition(job),
           },
           {
             label: 'Age',
-            getter: (job) => job.getAge(),
+            getter: job => job.getAge(),
             sort: (j1: Job, j2: Job) =>
               new Date(j2.metadata.creationTimestamp).getTime() -
-              new Date(j1.metadata.creationTimestamp).getTime()
-          }
+              new Date(j1.metadata.creationTimestamp).getTime(),
+          },
         ]}
         data={jobs}
         defaultSortingColumn={5}

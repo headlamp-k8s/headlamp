@@ -13,9 +13,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<PureAuthTokenProps> = (args) => (
-  <PureAuthToken {...args} />
-);
+const Template: Story<PureAuthTokenProps> = args => <PureAuthToken {...args} />;
 
 export const ShowError = Template.bind({});
 ShowError.args = {

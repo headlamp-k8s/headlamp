@@ -15,26 +15,28 @@ export default function ServiceDetails() {
 
   Service.useApiGet(setItem, name, namespace);
 
-  return (
-    !item ? <Loader /> :
+  return !item ? (
+    <Loader />
+  ) : (
     <PageGrid>
       <MainInfoSection
-
         resource={item}
-        extraInfo={item && [
-          {
-            name: 'Type',
-            value: item.spec.type,
-          },
-          {
-            name: 'Cluster IP',
-            value: item.spec.clusterIP,
-          },
-          {
-            name: 'Selector',
-            value: <MetadataDictGrid dict={item.spec.selector} />,
-          },
-        ]}
+        extraInfo={
+          item && [
+            {
+              name: 'Type',
+              value: item.spec.type,
+            },
+            {
+              name: 'Cluster IP',
+              value: item.spec.clusterIP,
+            },
+            {
+              name: 'Selector',
+              value: <MetadataDictGrid dict={item.spec.selector} />,
+            },
+          ]
+        }
       />
       <SectionBox title="Ports">
         <SimpleTable
@@ -50,12 +52,13 @@ export default function ServiceDetails() {
             },
             {
               label: 'Ports',
-              getter: ({port, targetPort}) =>
+              getter: ({ port, targetPort }) => (
                 <React.Fragment>
                   <ValueLabel>{port}</ValueLabel>
                   <InlineIcon icon={chevronRight} />
                   <ValueLabel>{targetPort}</ValueLabel>
                 </React.Fragment>
+              ),
             },
           ]}
         />

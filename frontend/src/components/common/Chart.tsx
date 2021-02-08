@@ -3,7 +3,17 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { Bar, BarChart, Label, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  Bar,
+  BarChart,
+  Label,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import Loader from './Loader';
 
 const useStyle = makeStyles(theme => ({
@@ -21,7 +31,7 @@ const useStyle = makeStyles(theme => ({
   chart: {
     marginLeft: 'auto',
     marginRight: 'auto',
-  }
+  },
 }));
 
 export interface ChartDataPoint {
@@ -55,10 +65,10 @@ export function PercentageCircle(props: PercentageCircleProps) {
     title = '',
     legend = null,
     total = 100,
-    totalProps = {}
+    totalProps = {},
   } = props;
 
-  const chartSize = size * .8;
+  const chartSize = size * 0.8;
   const isLoading = total < 0;
 
   function formatData() {
@@ -67,43 +77,36 @@ export function PercentageCircle(props: PercentageCircleProps) {
       filledValue += item.value;
 
       return {
-        percentage: item.value / total * 100,
-        ...item
+        percentage: (item.value / total) * 100,
+        ...item,
       };
     });
 
-    const totalValue = total === 0 ?
-      {
-        name: 'total',
-        percentage: 100,
-        value: total,
-        fill: theme.palette.chartStyles.defaultFillColor,
-      }
-      :
-      {
-        name: 'total',
-        percentage: (total - filledValue) / total * 100,
-        value: total,
-        fill: theme.palette.chartStyles.defaultFillColor,
-        ...totalProps
-      };
+    const totalValue =
+      total === 0
+        ? {
+            name: 'total',
+            percentage: 100,
+            value: total,
+            fill: theme.palette.chartStyles.defaultFillColor,
+          }
+        : {
+            name: 'total',
+            percentage: ((total - filledValue) / total) * 100,
+            value: total,
+            fill: theme.palette.chartStyles.defaultFillColor,
+            ...totalProps,
+          };
 
     return formattedData.concat(totalValue);
   }
 
   return (
-    <Box
-      justifyContent="center"
-      alignItems="center"
-      alignContent="center"
-      mx="auto"
-    >
-      {title &&
-        <Typography className={classes.title}>{title}</Typography>
-      }
-      {isLoading ?
+    <Box justifyContent="center" alignItems="center" alignContent="center" mx="auto">
+      {title && <Typography className={classes.title}>{title}</Typography>}
+      {isLoading ? (
         <Loader />
-        :
+      ) : (
         <PieChart
           cx={size / 2}
           cy={size / 2}
@@ -116,8 +119,8 @@ export function PercentageCircle(props: PercentageCircleProps) {
             // Center the chart
             cx={chartSize / 2}
             cy={chartSize / 2}
-            innerRadius={chartSize * .35}
-            outerRadius={chartSize * .4}
+            innerRadius={chartSize * 0.35}
+            outerRadius={chartSize * 0.4}
             dataKey={dataKey}
             // Start at the top
             startAngle={90}
@@ -129,16 +132,16 @@ export function PercentageCircle(props: PercentageCircleProps) {
               value={label || ''}
               position="center"
               style={{
-                fontSize: `${chartSize * .15}px`,
-                fill: theme.palette.chartStyles.labelColor
+                fontSize: `${chartSize * 0.15}px`,
+                fill: theme.palette.chartStyles.labelColor,
               }}
             />
           </Pie>
         </PieChart>
-      }
-      {!isLoading && legend !== null &&
+      )}
+      {!isLoading && legend !== null && (
         <Typography className={classes.legend}>{legend}</Typography>
-      }
+      )}
     </Box>
   );
 }
@@ -163,17 +166,13 @@ export function PercentageBar(props: PercentageBarProps) {
   const classes = useBarStyle();
   const theme = useTheme();
 
-  const {
-    data,
-    total = 100,
-    tooltipFunc = null,
-  } = props;
+  const { data, total = 100, tooltipFunc = null } = props;
 
   function formatData() {
-    const dataItems: {[name: string]: number} = {};
+    const dataItems: { [name: string]: number } = {};
 
     data.forEach(item => {
-      dataItems[item.name] = item.value / total * 100;
+      dataItems[item.name] = (item.value / total) * 100;
     });
 
     return dataItems;
@@ -181,20 +180,8 @@ export function PercentageBar(props: PercentageBarProps) {
 
   return (
     <ResponsiveContainer width="95%" height={20} className={classes.container}>
-      <BarChart
-        layout="vertical"
-        maxBarSize={5}
-        data={[formatData()]}
-        className={classes.chart}
-      >
-        {tooltipFunc &&
-          <Tooltip content={
-            <PaperTooltip >
-              {tooltipFunc(data)}
-            </PaperTooltip>
-          }
-          />
-        }
+      <BarChart layout="vertical" maxBarSize={5} data={[formatData()]} className={classes.chart}>
+        {tooltipFunc && <Tooltip content={<PaperTooltip>{tooltipFunc(data)}</PaperTooltip>} />}
         <XAxis hide domain={[0, 100]} type="number" />
         <YAxis hide type="category" />
         {data.map((item, index) => {
@@ -205,7 +192,7 @@ export function PercentageBar(props: PercentageBarProps) {
               stackId="1"
               fill={item.fill || theme.palette.primary.main}
               layout="vertical"
-              background={{fill: theme.palette.grey['300']}}
+              background={{ fill: theme.palette.grey['300'] }}
             />
           );
         })}
@@ -217,9 +204,7 @@ export function PercentageBar(props: PercentageBarProps) {
 function PaperTooltip(props: React.PropsWithChildren<{}>) {
   return (
     <Paper className="custom-tooltip">
-      <Box m={1}>
-        {props.children}
-      </Box>
+      <Box m={1}>{props.children}</Box>
     </Paper>
   );
 }

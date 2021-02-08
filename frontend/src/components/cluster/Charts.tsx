@@ -31,10 +31,9 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
   const [used, available] = getResourceUsage();
 
   function filterMetrics(items: KubeObject[], metrics: any[]) {
-    if (!items || !metrics)
-      return [];
+    if (!items || !metrics) return [];
 
-    const names = items.map(({metadata}) => metadata.name);
+    const names = items.map(({ metadata }) => metadata.name);
     return metrics.filter(item => names.includes(item.metadata.name));
   }
 
@@ -42,12 +41,11 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
     if (available === 0) {
       return '…';
     }
-    return `${(used / available * 100).toFixed(1)} %`;
+    return `${((used / available) * 100).toFixed(1)} %`;
   }
 
   function getResourceUsage() {
-    if (!items)
-      return [-1, -1];
+    if (!items) return [-1, -1];
 
     const nodeMetrics = filterMetrics(items, itemsMetrics);
     const usedValue = _.sumBy(nodeMetrics, resourceUsedGetter);
@@ -65,17 +63,17 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
       {
         name: 'used',
         value: used,
-      }
+      },
     ];
   }
 
-  return (noMetrics ?
+  return noMetrics ? (
     <HeaderLabel
       label={title || ''}
       value={props.getLegend!(used, available)}
       tooltip={'Install the metrics-server to get usage data.'}
     />
-    :
+  ) : (
     <PercentageCircle
       {...others}
       title={title}
@@ -161,7 +159,9 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
   const theme = useTheme();
   const { items } = props;
 
-  const podsReady = (items || []).filter(pod => ['Running', 'Succeeded'].includes(pod.status!.phase));
+  const podsReady = (items || []).filter(pod =>
+    ['Running', 'Succeeded'].includes(pod.status!.phase)
+  );
 
   function getLegend() {
     if (items === null) {
@@ -174,7 +174,7 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
     if (items === null) {
       return '…';
     }
-    const percentage = (podsReady.length / items.length * 100).toFixed(1);
+    const percentage = ((podsReady.length / items.length) * 100).toFixed(1);
     return `${percentage} %`;
   }
 
@@ -186,13 +186,13 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
     return [
       {
         name: 'ready',
-        value: podsReady.length
+        value: podsReady.length,
       },
       {
         name: 'notReady',
         value: items.length - podsReady.length,
-        fill: theme.palette.error.main
-      }
+        fill: theme.palette.error.main,
+      },
     ];
   }
 

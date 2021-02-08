@@ -23,7 +23,7 @@ export default function VolumeClaimList() {
         columns={[
           {
             label: 'Name',
-            getter: (volumeClaim) => <Link kubeObject={volumeClaim} />,
+            getter: volumeClaim => <Link kubeObject={volumeClaim} />,
             sort: (v1: PersistentVolumeClaim, v2: PersistentVolumeClaim) => {
               if (v1.metadata.name < v2.metadata.name) {
                 return -1;
@@ -31,34 +31,34 @@ export default function VolumeClaimList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (volumeClaim) => volumeClaim.getNamespace()
+            getter: volumeClaim => volumeClaim.getNamespace(),
           },
           {
             label: 'Status',
-            getter: (volumeClaim) => volumeClaim.status.phase
+            getter: volumeClaim => volumeClaim.status.phase,
           },
           {
             label: 'Class Name',
-            getter: (volumeClaim) => volumeClaim.spec.storageClassName
+            getter: volumeClaim => volumeClaim.spec.storageClassName,
           },
           {
             label: 'Volume',
-            getter: (volumeClaim) => volumeClaim.spec.volumeName
+            getter: volumeClaim => volumeClaim.spec.volumeName,
           },
           {
             label: 'Capacity',
-            getter: (volumeClaim) => volumeClaim.status.capacity?.storage
+            getter: volumeClaim => volumeClaim.status.capacity?.storage,
           },
           {
             label: 'Age',
-            getter: (volumeClaim) => volumeClaim.getAge(),
+            getter: volumeClaim => volumeClaim.getAge(),
             sort: (v1: PersistentVolumeClaim, v2: PersistentVolumeClaim) =>
               new Date(v2.metadata.creationTimestamp).getTime() -
-              new Date(v1.metadata.creationTimestamp).getTime()
+              new Date(v1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={volumeClaim}

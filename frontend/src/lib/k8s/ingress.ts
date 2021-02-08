@@ -26,7 +26,7 @@ class Ingress extends makeKubeObject<KubeIngress>('ingress') {
   }
 
   getHosts() {
-    return this.spec!.rules.map(({host}) => host).join(' | ');
+    return this.spec!.rules.map(({ host }) => host).join(' | ');
   }
 
   get listRoute() {

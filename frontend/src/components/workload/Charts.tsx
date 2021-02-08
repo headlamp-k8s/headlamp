@@ -13,16 +13,11 @@ interface WorkloadCircleChartProps extends Omit<PercentageCircleProps, 'data'> {
 export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
   const theme = useTheme();
 
-  const {
-    workloadData,
-    partialLabel = '',
-    totalLabel = '',
-    ...other
-  } = props;
+  const { workloadData, partialLabel = '', totalLabel = '', ...other } = props;
 
   const total = workloadData.length;
-  const partial = workloadData.filter(item =>
-    getReadyReplicas(item) !== getTotalReplicas(item)).length;
+  const partial = workloadData.filter(item => getReadyReplicas(item) !== getTotalReplicas(item))
+    .length;
 
   function makeData() {
     return [
@@ -35,7 +30,7 @@ export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
   }
 
   function getLabel() {
-    return getPercentStr((total - partial), total);
+    return getPercentStr(total - partial, total);
   }
 
   function getLegend() {
@@ -54,7 +49,7 @@ export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
       data={makeData()}
       total={workloadData.length}
       totalProps={{
-        fill: theme.palette.chartStyles.fillColor || theme.palette.common.black
+        fill: theme.palette.chartStyles.fillColor || theme.palette.common.black,
       }}
       label={getLabel()}
       legend={getLegend()}

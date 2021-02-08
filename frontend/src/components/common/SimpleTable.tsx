@@ -21,7 +21,7 @@ import Loader from './Loader';
 const useTableStyle = makeStyles(theme => ({
   headerCell: {
     fontWeight: 'bold',
-    paddingBottom: theme.spacing(.5),
+    paddingBottom: theme.spacing(0.5),
   },
   table: {
     '& .MuiTableCell-root': {
@@ -32,12 +32,12 @@ const useTableStyle = makeStyles(theme => ({
         '& .MuiTableCell-root': {
           borderBottom: 'none',
         },
-      }
+      },
     },
     '& .MuiTableCell-head': {
       color: theme.palette.tables.headerText,
-    }
-  }
+    },
+  },
 }));
 
 type sortFunction = (arg1: any, arg2: any) => number;
@@ -68,25 +68,26 @@ export interface SimpleTableProps {
   rowsPerPage?: number[];
   emptyMessage?: string;
   errorMessage?: string | null;
-  defaultSortingColumn? : number;
+  defaultSortingColumn?: number;
 }
 
 interface ColumnSortButtonProps {
-   isDefaultSorted: boolean;
-   isIncreasingOrder: boolean;
-   clickHandler: (isIncreasingOrder: boolean) => void;
+  isDefaultSorted: boolean;
+  isIncreasingOrder: boolean;
+  clickHandler: (isIncreasingOrder: boolean) => void;
 }
 
 function ColumnSortButtons(props: ColumnSortButtonProps) {
-  const {isDefaultSorted, isIncreasingOrder, clickHandler} = props;
-  return isDefaultSorted ?
+  const { isDefaultSorted, isIncreasingOrder, clickHandler } = props;
+  return isDefaultSorted ? (
     <IconButton size="small" onClick={() => clickHandler(!isIncreasingOrder)}>
-      <Icon icon={isIncreasingOrder ? menuUp : menuDown}/>
+      <Icon icon={isIncreasingOrder ? menuUp : menuDown} />
     </IconButton>
-    :
+  ) : (
     <IconButton size="small" onClick={() => clickHandler(true)}>
-      <Icon icon={menuSwap}/>
-    </IconButton>;
+      <Icon icon={menuSwap} />
+    </IconButton>
+  );
 }
 
 export default function SimpleTable(props: SimpleTableProps) {
@@ -96,7 +97,7 @@ export default function SimpleTable(props: SimpleTableProps) {
     filterFunction = null,
     emptyMessage = null,
     errorMessage = null,
-    defaultSortingColumn
+    defaultSortingColumn,
   } = props;
   const [page, setPage] = React.useState(0);
   const [currentData, setCurrentData] = React.useState(data);
@@ -104,11 +105,13 @@ export default function SimpleTable(props: SimpleTableProps) {
   const rowsPerPageOptions = props.rowsPerPage || [5, 10, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
   const classes = useTableStyle();
-  const [isIncreasingOrder, setIsIncreasingOrder] =
-    React.useState(!defaultSortingColumn || defaultSortingColumn > 0);
+  const [isIncreasingOrder, setIsIncreasingOrder] = React.useState(
+    !defaultSortingColumn || defaultSortingColumn > 0
+  );
   // We use a -1 value here if no sorting should be done by default.
-  const [sortColIndex, setSortColIndex] =
-    React.useState(defaultSortingColumn ? Math.abs(defaultSortingColumn) - 1 : -1);
+  const [sortColIndex, setSortColIndex] = React.useState(
+    defaultSortingColumn ? Math.abs(defaultSortingColumn) - 1 : -1
+  );
 
   function handleChangePage(_event: any, newPage: number) {
     setPage(newPage);
@@ -119,25 +122,27 @@ export default function SimpleTable(props: SimpleTableProps) {
     setPage(0);
   }
 
-  React.useEffect(() => {
-    if (currentData === data) {
-      if (page !== 0) {
-        setPage(0);
+  React.useEffect(
+    () => {
+      if (currentData === data) {
+        if (page !== 0) {
+          setPage(0);
+        }
+        return;
       }
-      return;
-    }
 
-    // If the currentData is not up to date and we are in the first page, then update
-    // it directly. Otherwise it will require user's intervention.
-    if ((!currentData || currentData.length === 0) || page === 0) {
-      setCurrentData(data);
-      setDisplayData(getSortData() || data);
-    }
-  },
-  // eslint-disable-next-line
-  [data, currentData]);
+      // If the currentData is not up to date and we are in the first page, then update
+      // it directly. Otherwise it will require user's intervention.
+      if (!currentData || currentData.length === 0 || page === 0) {
+        setCurrentData(data);
+        setDisplayData(getSortData() || data);
+      }
+    },
+    // eslint-disable-next-line
+    [data, currentData]
+  );
 
-  function defaultSortingFunction(column : SimpleTableGetterColumn) {
+  function defaultSortingFunction(column: SimpleTableGetterColumn) {
     function defaultSortingReal(item1: any, item2: any) {
       const value1 = column.getter(item1);
       const value2 = column.getter(item2);
@@ -163,31 +168,34 @@ export default function SimpleTable(props: SimpleTableProps) {
     const columnAskingForSort = columns[sortColIndex];
     const sortFunction = columnAskingForSort?.sort;
 
-    if (typeof sortFunction === 'boolean' && sortFunction){
-      setDisplayData(data.slice().sort(defaultSortingFunction(columnAskingForSort as
-        SimpleTableGetterColumn)));
+    if (typeof sortFunction === 'boolean' && sortFunction) {
+      setDisplayData(
+        data.slice().sort(defaultSortingFunction(columnAskingForSort as SimpleTableGetterColumn))
+      );
       return;
     }
 
     if (typeof sortFunction === 'function') {
       applySort = (arg1: any, arg2: any) => {
         const orderChanger = isIncreasingOrder ? 1 : -1;
-        return sortFunction(arg1, arg2) as number * orderChanger;
+        return (sortFunction(arg1, arg2) as number) * orderChanger;
       };
       const sortedData = data.slice().sort(applySort);
       return sortedData;
     }
   }
 
-  React.useEffect(() => {
-    const sortedData = getSortData();
-    if (!sortedData) {
-      return;
-    }
-    setDisplayData(sortedData);
-  },
-  // eslint-disable-next-line
-  [sortColIndex, isIncreasingOrder, currentData]);
+  React.useEffect(
+    () => {
+      const sortedData = getSortData();
+      if (!sortedData) {
+        return;
+      }
+      setDisplayData(sortedData);
+    },
+    // eslint-disable-next-line
+    [sortColIndex, isIncreasingOrder, currentData]
+  );
 
   function getPagedRows() {
     const startIndex = page * rowsPerPage;
@@ -196,9 +204,7 @@ export default function SimpleTable(props: SimpleTableProps) {
 
   if (displayData === null) {
     if (!!errorMessage) {
-      return (
-        <Empty color="error">{errorMessage}</Empty>
-      );
+      return <Empty color="error">{errorMessage}</Empty>;
     }
 
     return <Loader />;
@@ -215,37 +221,40 @@ export default function SimpleTable(props: SimpleTableProps) {
     setSortColIndex(index);
   }
 
-  return (
-    (!currentData || currentData.length === 0) ?
-      <Empty>{emptyMessage || 'No data to be shown.'}</Empty>
-      :
-      <React.Fragment>
-        { // Show a refresh button if the data is not up to date, so we allow the user to keep
-          // reading the current data without "losing" it or being sent to the first page
-          (currentData !== data) &&
+  return !currentData || currentData.length === 0 ? (
+    <Empty>{emptyMessage || 'No data to be shown.'}</Empty>
+  ) : (
+    <React.Fragment>
+      {
+        // Show a refresh button if the data is not up to date, so we allow the user to keep
+        // reading the current data without "losing" it or being sent to the first page
+        currentData !== data && (
           <Box textAlign="center" p={2}>
             <Button
               variant="contained"
-              startIcon={<Icon icon={refreshIcon} /> }
-              onClick={() => { setCurrentData(data); }}
+              startIcon={<Icon icon={refreshIcon} />}
+              onClick={() => {
+                setCurrentData(data);
+              }}
             >
               Refresh
             </Button>
           </Box>
-        }
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              {columns.map(({label, cellProps = {}, sort}, i) => {
-                const {className = '', ...otherProps} = cellProps;
-                return (
-                  <TableCell
-                    key={`tabletitle_${i}`}
-                    className={classes.headerCell + ' ' + className}
-                    {...otherProps}
-                  >
-                    {label}
-                    {sort &&
+        )
+      }
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            {columns.map(({ label, cellProps = {}, sort }, i) => {
+              const { className = '', ...otherProps } = cellProps;
+              return (
+                <TableCell
+                  key={`tabletitle_${i}`}
+                  className={classes.headerCell + ' ' + className}
+                  {...otherProps}
+                >
+                  {label}
+                  {sort && (
                     <ColumnSortButtons
                       isIncreasingOrder={Boolean(isIncreasingOrder)}
                       isDefaultSorted={sortColIndex === i}
@@ -253,61 +262,56 @@ export default function SimpleTable(props: SimpleTableProps) {
                         sortClickHandler(isIncreasingOrder, i)
                       }
                     />
-                    }
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredData.length > 0 ?
-              getPagedRows().map((row: any, i: number) =>
-                <TableRow key={i}>
-                  {columns.map((col, i) =>
-                    <TableCell key={`cell_${i}`}>
-                      {i === 0 && row.color &&
+                  )}
+                </TableCell>
+              );
+            })}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {filteredData.length > 0 ? (
+            getPagedRows().map((row: any, i: number) => (
+              <TableRow key={i}>
+                {columns.map((col, i) => (
+                  <TableCell key={`cell_${i}`}>
+                    {i === 0 && row.color && (
                       <React.Fragment>
-                        <InlineIcon
-                          icon={squareIcon}
-                          color={row.color}
-                          height="15"
-                          width="15"
-                        />
+                        <InlineIcon icon={squareIcon} color={row.color} height="15" width="15" />
                         &nbsp;
                       </React.Fragment>
-                      }
-                      { ('datum' in col) ? row[col.datum] : col.getter(row) }
-                    </TableCell>
-                  )}
-                </TableRow>
-              )
-              :
-              <TableRow>
-                <TableCell colSpan={columns.length}>
-                  <Empty>No data matching the filter criteria.</Empty>
-                </TableCell>
+                    )}
+                    {'datum' in col ? row[col.datum] : col.getter(row)}
+                  </TableCell>
+                ))}
               </TableRow>
-            }
-          </TableBody>
-        </Table>
-        {filteredData.length > rowsPerPageOptions[0] &&
-          <TablePagination
-            rowsPerPageOptions={rowsPerPageOptions}
-            component="div"
-            count={filteredData.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            backIconButtonProps={{
-              'aria-label': 'previous page',
-            }}
-            nextIconButtonProps={{
-              'aria-label': 'next page',
-            }}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
-        }
-      </React.Fragment>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length}>
+                <Empty>No data matching the filter criteria.</Empty>
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+      {filteredData.length > rowsPerPageOptions[0] && (
+        <TablePagination
+          rowsPerPageOptions={rowsPerPageOptions}
+          component="div"
+          count={filteredData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          backIconButtonProps={{
+            'aria-label': 'previous page',
+          }}
+          nextIconButtonProps={{
+            'aria-label': 'next page',
+          }}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+      )}
+    </React.Fragment>
   );
 }
 
@@ -331,9 +335,9 @@ const useStyles = makeStyles(theme => ({
         '& .MuiTableCell-root': {
           borderBottom: 'none',
         },
-      }
-    }
-  }
+      },
+    },
+  },
 }));
 
 export interface NameValueTableRow {
@@ -353,20 +357,13 @@ export function NameValueTable(props: NameValueTableProps) {
   return (
     <Table className={classes.table}>
       <TableBody>
-        {rows.map(({name, value, hide = false}, i) => {
-          if (hide)
-            return null;
+        {rows.map(({ name, value, hide = false }, i) => {
+          if (hide) return null;
           return (
             <TableRow key={i}>
-              <TableCell className={classes.metadataNameCell}>
-                {name}
-              </TableCell>
+              <TableCell className={classes.metadataNameCell}>{name}</TableCell>
               <TableCell scope="row" className={classes.metadataCell}>
-                {(typeof value === 'string') ?
-                  <ValueLabel>{value}</ValueLabel>
-                  :
-                  value
-                }
+                {typeof value === 'string' ? <ValueLabel>{value}</ValueLabel> : value}
               </TableCell>
             </TableRow>
           );

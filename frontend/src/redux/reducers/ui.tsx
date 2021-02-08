@@ -1,4 +1,14 @@
-import { Action, HeaderActionFunc, UI_APP_BAR_SET_ACTION, UI_DETAILS_VIEW_SET_HEADER_ACTION, UI_ROUTER_SET_ROUTE, UI_SIDEBAR_SET_EXPANDED, UI_SIDEBAR_SET_ITEM, UI_SIDEBAR_SET_SELECTED, UI_SIDEBAR_SET_VISIBLE } from '../actions/actions';
+import {
+  Action,
+  HeaderActionFunc,
+  UI_APP_BAR_SET_ACTION,
+  UI_DETAILS_VIEW_SET_HEADER_ACTION,
+  UI_ROUTER_SET_ROUTE,
+  UI_SIDEBAR_SET_EXPANDED,
+  UI_SIDEBAR_SET_ITEM,
+  UI_SIDEBAR_SET_SELECTED,
+  UI_SIDEBAR_SET_VISIBLE,
+} from '../actions/actions';
 
 export interface SidebarEntry {
   name: string;
@@ -50,7 +60,7 @@ export const INITIAL_STATE: UIState = {
     selected: null,
     isVisible: false,
     isSidebarOpen: getSidebarOpenStatus(),
-    entries: {}
+    entries: {},
   },
   routes: {
     // path -> component
@@ -59,18 +69,18 @@ export const INITIAL_STATE: UIState = {
     details: {
       headerActions: {
         // action-name -> action-callback
-      }
+      },
     },
     appBar: {
       actions: {
         // action-name -> action-callback
       },
     },
-  }
+  },
 };
 
 function reducer(state = INITIAL_STATE, action: Action) {
-  const newFilters = {...state};
+  const newFilters = { ...state };
   switch (action.type) {
     case UI_SIDEBAR_SET_SELECTED: {
       newFilters.sidebar = {
@@ -83,48 +93,48 @@ function reducer(state = INITIAL_STATE, action: Action) {
     case UI_SIDEBAR_SET_VISIBLE: {
       newFilters.sidebar = {
         ...newFilters.sidebar,
-        isVisible: action.isVisible
+        isVisible: action.isVisible,
       };
       break;
     }
     case UI_SIDEBAR_SET_ITEM: {
-      const entries = {...newFilters.sidebar.entries};
+      const entries = { ...newFilters.sidebar.entries };
       entries[action.item.name] = action.item;
 
       newFilters.sidebar = {
         ...newFilters.sidebar,
-        entries
+        entries,
       };
       break;
     }
     case UI_SIDEBAR_SET_EXPANDED: {
       newFilters.sidebar = {
         ...newFilters.sidebar,
-        isSidebarOpen: action.isSidebarOpen
+        isSidebarOpen: action.isSidebarOpen,
       };
       break;
     }
     case UI_ROUTER_SET_ROUTE: {
-      const routes = {...newFilters.routes};
+      const routes = { ...newFilters.routes };
       routes[action.route.path] = action.route;
       newFilters.routes = routes;
       break;
     }
     case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
-      const headerActions = {...newFilters.views.details.headerActions};
+      const headerActions = { ...newFilters.views.details.headerActions };
       headerActions[action.action as string] = action.action;
       newFilters.views.details.headerActions = headerActions;
       break;
     }
     case UI_APP_BAR_SET_ACTION: {
-      const appBarActions = {...newFilters.views.appBar.actions};
+      const appBarActions = { ...newFilters.views.appBar.actions };
       appBarActions[action.name as string] = action.action;
       newFilters.views.appBar.actions = appBarActions;
       break;
     }
     default:
       return state;
-  };
+  }
 
   return newFilters;
 }

@@ -12,20 +12,20 @@ export default function NamespaceDetails() {
 
   function makeStatusLabel(namespace: Namespace | null) {
     const status = namespace?.status.phase;
-    return (
-      <StatusLabel status={status === 'Active' ? 'success' : 'error'}>
-        {status}
-      </StatusLabel>
-    );
+    return <StatusLabel status={status === 'Active' ? 'success' : 'error'}>{status}</StatusLabel>;
   }
 
   return (
     <MainInfoSection
       resource={item}
-      extraInfo={item && [{
-        name: 'Status',
-        value: makeStatusLabel(item),
-      }]}
+      extraInfo={
+        item && [
+          {
+            name: 'Status',
+            value: makeStatusLabel(item),
+          },
+        ]
+      }
     />
   );
 }

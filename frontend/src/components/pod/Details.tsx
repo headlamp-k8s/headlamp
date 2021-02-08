@@ -19,7 +19,7 @@ import Terminal from '../common/Terminal';
 const useStyle = makeStyles({
   containerFormControl: {
     minWidth: '11rem',
-  }
+  },
 });
 
 interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
@@ -34,31 +34,33 @@ function PodLogViewer(props: PodLogViewerProps) {
   const [logs, setLogs] = React.useState<string[]>([]);
 
   function getDefaultContainer() {
-    return (item.spec.containers.length > 0) ? item.spec.containers[0].name : '';
+    return item.spec.containers.length > 0 ? item.spec.containers[0].name : '';
   }
 
-  const options = {leading: true, trailing: true, maxWait: 1000};
+  const options = { leading: true, trailing: true, maxWait: 1000 };
   function setLogsDebounced(args: string[]) {
     setLogs([]);
     setLogs(args);
   }
   const debouncedSetState = _.debounce(setLogsDebounced, 500, options);
 
-  React.useEffect(() => {
-    let callback: any = null;
+  React.useEffect(
+    () => {
+      let callback: any = null;
 
-    if (props.open) {
-      callback = item.getLogs(container, lines, false, debouncedSetState);
-    }
-
-    return function cleanup() {
-      if (callback) {
-        callback();
+      if (props.open) {
+        callback = item.getLogs(container, lines, false, debouncedSetState);
       }
-    };
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  [container, lines, open]);
+
+      return function cleanup() {
+        if (callback) {
+          callback();
+        }
+      };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [container, lines, open]
+  );
 
   function handleContainerChange(event: any) {
     setContainer(event.target.value);
@@ -86,9 +88,12 @@ function PodLogViewer(props: PodLogViewerProps) {
             value={container}
             onChange={handleContainerChange}
           >
-            {item && item.spec.containers.map(({name}) =>
-              <MenuItem value={name} key={name}>{name}</MenuItem>
-            )}
+            {item &&
+              item.spec.containers.map(({ name }) => (
+                <MenuItem value={name} key={name}>
+                  {name}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>,
         <FormControl className={classes.containerFormControl}>
@@ -101,11 +106,13 @@ function PodLogViewer(props: PodLogViewerProps) {
             value={lines}
             onChange={handleLinesChange}
           >
-            {[100, 1000, 2500].map((i) =>
-              <MenuItem value={i} key={i}>{i}</MenuItem>
-            )}
+            {[100, 1000, 2500].map(i => (
+              <MenuItem value={i} key={i}>
+                {i}
+              </MenuItem>
+            ))}
           </Select>
-        </FormControl>
+        </FormControl>,
       ]}
       {...other}
     />
@@ -125,57 +132,48 @@ export default function PodDetails() {
       <PageGrid>
         <MainInfoSection
           resource={item}
-          actions={item && [
-            <Tooltip title="Show Logs">
-              <IconButton
-                aria-label="delete"
-                onClick={() => setShowLogs(true)}
-              >
-                <Icon icon={fileDocumentBoxOutline} />
-              </IconButton>
-            </Tooltip>,
-            <Tooltip title="Terminal / Exec">
-              <IconButton
-                aria-label="delete"
-                onClick={() => setShowTerminal(true)}
-              >
-                <Icon icon={consoleIcon} />
-              </IconButton>
-            </Tooltip>
-          ]}
-          extraInfo={item && [
-            {
-              name: 'State',
-              value: item.status.phase
-            },
-            {
-              name: 'Host IP',
-              value: item.status.hostIP,
-            },
-            {
-              name: 'Pod IP',
-              value: item.status.podIP,
-            }
-          ]}
+          actions={
+            item && [
+              <Tooltip title="Show Logs">
+                <IconButton aria-label="delete" onClick={() => setShowLogs(true)}>
+                  <Icon icon={fileDocumentBoxOutline} />
+                </IconButton>
+              </Tooltip>,
+              <Tooltip title="Terminal / Exec">
+                <IconButton aria-label="delete" onClick={() => setShowTerminal(true)}>
+                  <Icon icon={consoleIcon} />
+                </IconButton>
+              </Tooltip>,
+            ]
+          }
+          extraInfo={
+            item && [
+              {
+                name: 'State',
+                value: item.status.phase,
+              },
+              {
+                name: 'Host IP',
+                value: item.status.hostIP,
+              },
+              {
+                name: 'Pod IP',
+                value: item.status.podIP,
+              },
+            ]
+          }
         />
         {item && <ContainersSection resource={item?.jsonData} />}
       </PageGrid>
-      {item &&
-        [
-          <PodLogViewer
-            key="logs"
-            open={showLogs}
-            item={item}
-            onClose={ () => setShowLogs(false) }
-          />,
-          <Terminal
-            key="terminal"
-            open={showTerminal}
-            item={item}
-            onClose={ () => setShowTerminal(false) }
-          />
-        ]
-      }
+      {item && [
+        <PodLogViewer key="logs" open={showLogs} item={item} onClose={() => setShowLogs(false)} />,
+        <Terminal
+          key="terminal"
+          open={showTerminal}
+          item={item}
+          onClose={() => setShowTerminal(false)}
+        />,
+      ]}
     </React.Fragment>
   );
 }

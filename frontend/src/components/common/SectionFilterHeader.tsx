@@ -40,59 +40,50 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
     }
   });
 
-  React.useEffect(() => {
-    // We don't want the search to be used globally, but we're using Redux with it because
-    // this way we manage it the same way as with the other filters.
-    return function cleanup() {
-      dispatch(setSearchFilter(''));
-    };
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  []);
+  React.useEffect(
+    () => {
+      // We don't want the search to be used globally, but we're using Redux with it because
+      // this way we manage it the same way as with the other filters.
+      return function cleanup() {
+        dispatch(setSearchFilter(''));
+      };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const actions = [];
 
   if (!showFilters) {
     actions.push(
-      <IconButton
-        aria-label="show-filter"
-        onClick={() => setShowFilters(!showFilters)}
-      >
+      <IconButton aria-label="show-filter" onClick={() => setShowFilters(!showFilters)}>
         <Icon icon={filterIcon} />
       </IconButton>
     );
   } else {
     actions.push(
-      <Grid
-        container
-        alignItems="flex-end"
-        justify="flex-end"
-        spacing={1}
-        wrap="nowrap"
-      >
-        { !noNamespaceFilter &&
+      <Grid container alignItems="flex-end" justify="flex-end" spacing={1} wrap="nowrap">
+        {!noNamespaceFilter && (
           <Grid item>
             <NamespacesAutocomplete />
           </Grid>
-        }
+        )}
         <Grid item>
           <TextField
             id="standard-search"
             label="Search"
             type="search"
-            InputLabelProps={{shrink: true}}
+            InputLabelProps={{ shrink: true }}
             placeholder="Filter"
             value={filter.search}
             autoFocus
-            onChange={event =>
-              dispatch(setSearchFilter(event.target.value))
-            }
+            onChange={event => dispatch(setSearchFilter(event.target.value))}
           />
         </Grid>
         <Grid item>
           <Button
             variant="contained"
-            endIcon={<Icon icon={filterVariantRemove} /> }
+            endIcon={<Icon icon={filterVariantRemove} />}
             onClick={resetFilters}
           >
             Clear
@@ -106,20 +97,21 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
     <React.Fragment>
       <SectionHeader
         {...headerProps}
-        actions={actions.length <= 1 ? actions : [
-          <Box>
-            <Grid
-              container
-              spacing={1}
-            >
-              {actions.map((action, i) =>
-                <Grid item key={i}>
-                  {action}
-                </Grid>
-              )}
-            </Grid>
-          </Box>
-        ]}
+        actions={
+          actions.length <= 1
+            ? actions
+            : [
+                <Box>
+                  <Grid container spacing={1}>
+                    {actions.map((action, i) => (
+                      <Grid item key={i}>
+                        {action}
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>,
+              ]
+        }
       />
     </React.Fragment>
   );

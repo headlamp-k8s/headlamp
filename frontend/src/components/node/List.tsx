@@ -24,14 +24,7 @@ export default function NodeList() {
   const noMetrics = metricsError?.status === 404;
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Nodes"
-          noNamespaceFilter
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Nodes" noNamespaceFilter />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -39,7 +32,7 @@ export default function NodeList() {
         columns={[
           {
             label: 'Name',
-            getter: (node) => <Link kubeObject={node} />,
+            getter: node => <Link kubeObject={node} />,
             sort: (n1: Node, n2: Node) => {
               if (n1.metadata.name < n2.metadata.name) {
                 return -1;
@@ -47,44 +40,46 @@ export default function NodeList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Ready',
-            getter: (node) => <NodeReadyLabel node={node} />
+            getter: node => <NodeReadyLabel node={node} />,
           },
           {
             label: 'CPU',
             cellProps: {
               className: classes.chartCell,
             },
-            getter: (node) =>
+            getter: node => (
               <UsageBarChart
                 node={node}
                 nodeMetrics={nodeMetrics}
                 resourceType="cpu"
                 noMetrics={noMetrics}
               />
+            ),
           },
           {
             label: 'Memory',
             cellProps: {
               className: classes.chartCell,
             },
-            getter: (node) =>
+            getter: node => (
               <UsageBarChart
                 node={node}
                 nodeMetrics={nodeMetrics}
                 resourceType="memory"
                 noMetrics={noMetrics}
               />
+            ),
           },
           {
             label: 'Age',
-            getter: (node) => node.getAge(),
-            sort: (n1: Node, n2:Node) =>
+            getter: node => node.getAge(),
+            sort: (n1: Node, n2: Node) =>
               new Date(n2.metadata.creationTimestamp).getTime() -
-              new Date(n1.metadata.creationTimestamp).getTime()
+              new Date(n1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={nodes}

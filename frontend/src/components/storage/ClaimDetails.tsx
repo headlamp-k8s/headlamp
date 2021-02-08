@@ -12,38 +12,36 @@ export default function VolumeClaimDetails() {
 
   function makeStatusLabel(item: PersistentVolumeClaim) {
     const status = item.status!.phase;
-    return (
-      <StatusLabel status={status === 'Bound' ? 'success' : 'error'}>
-        {status}
-      </StatusLabel>
-    );
+    return <StatusLabel status={status === 'Bound' ? 'success' : 'error'}>{status}</StatusLabel>;
   }
 
   return (
     <MainInfoSection
       resource={item}
-      extraInfo={item && [
-        {
-          name: 'Status',
-          value: makeStatusLabel(item),
-        },
-        {
-          name: 'Capacity',
-          value: item.spec!.resources.requests.storage
-        },
-        {
-          name: 'Access Modes',
-          value: item.spec!.accessModes.join(', '),
-        },
-        {
-          name: 'Volume Mode',
-          value: item.spec!.volumeMode,
-        },
-        {
-          name: 'Storage Class',
-          value: item.spec!.storageClassName,
-        },
-      ]}
+      extraInfo={
+        item && [
+          {
+            name: 'Status',
+            value: makeStatusLabel(item),
+          },
+          {
+            name: 'Capacity',
+            value: item.spec!.resources.requests.storage,
+          },
+          {
+            name: 'Access Modes',
+            value: item.spec!.accessModes.join(', '),
+          },
+          {
+            name: 'Volume Mode',
+            value: item.spec!.volumeMode,
+          },
+          {
+            name: 'Storage Class',
+            value: item.spec!.storageClassName,
+          },
+        ]
+      }
     />
   );
 }

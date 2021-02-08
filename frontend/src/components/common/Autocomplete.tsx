@@ -31,9 +31,7 @@ export function NamespacesAutocomplete() {
       jointTags = jointTags.slice(0, 15) + '…';
     }
 
-    return (
-      <Typography>{jointTags}</Typography>
-    );
+    return <Typography>{jointTags}</Typography>;
   }
 
   return (
@@ -56,7 +54,8 @@ export function NamespacesAutocomplete() {
             icon={<Icon icon={checkboxBlankOutline} />}
             checkedIcon={<Icon icon={checkBoxOutline} />}
             style={{
-              color: selected ? theme.palette.primary.main : theme.palette.text.primary }}
+              color: selected ? theme.palette.primary.main : theme.palette.text.primary,
+            }}
             checked={selected}
           />
           {option}
@@ -70,8 +69,8 @@ export function NamespacesAutocomplete() {
             variant="standard"
             label="Namespaces"
             fullWidth
-            InputLabelProps={{shrink: true}}
-            style={{marginTop: 0}}
+            InputLabelProps={{ shrink: true }}
+            style={{ marginTop: 0 }}
             placeholder={[...filter.namespaces.values()].length > 0 ? '' : 'Filter'}
           />
         </Box>

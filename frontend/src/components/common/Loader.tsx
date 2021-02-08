@@ -6,7 +6,7 @@ import React from 'react';
 const useStyles = makeStyles({
   loaderContainer: {
     textAlign: 'center',
-  }
+  },
 });
 
 interface LoaderProps {
@@ -15,11 +15,10 @@ interface LoaderProps {
 
 export default function Loader(props: LoaderProps & CircularProgressProps) {
   const classes = useStyles();
-  const {noContainer = false, ...other} = props;
+  const { noContainer = false, ...other } = props;
   const progress = <CircularProgress {...other} />;
 
-  if (noContainer)
-    return progress;
+  if (noContainer) return progress;
 
   return (
     <Box className={classes.loaderContainer} py={3} px="auto">

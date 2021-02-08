@@ -8,9 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<{}> = (args) => (
-  <NameLabelComponent {...args}>A name label</NameLabelComponent>
-);
+const Template: Story<{}> = args => <NameLabelComponent {...args}>A name label</NameLabelComponent>;
 
 export const NameLabel = Template.bind({
   component: NameLabelComponent,

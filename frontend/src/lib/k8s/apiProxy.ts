@@ -14,11 +14,12 @@ import { ResourceClasses } from '.';
 import { KubeMetrics, KubeObjectClass, KubeObjectInterface } from './cluster';
 
 const isDev = process.env.NODE_ENV !== 'production';
-const backendServicesURL = isElectron() || isDev ? 'http://localhost:4466/' : window.location.origin;
+const backendServicesURL =
+  isElectron() || isDev ? 'http://localhost:4466/' : window.location.origin;
 const BASE_HTTP_URL = backendServicesURL;
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
-const JSON_HEADERS = {Accept: 'application/json', 'Content-Type': 'application/json'};
+const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
 const DEFAULT_TIMEOUT = 2 * 60 * 1000; // ms
 
 interface RequestParams {
@@ -26,15 +27,19 @@ interface RequestParams {
   [prop: string]: any;
 }
 
-export async function request(path: string, params: RequestParams = {},
-                              autoLogoutOnAuthError: boolean = true, useCluster: boolean = true) {
+export async function request(
+  path: string,
+  params: RequestParams = {},
+  autoLogoutOnAuthError: boolean = true,
+  useCluster: boolean = true
+) {
   interface RequestHeaders {
     Authorization?: string;
     [otherHeader: string]: any;
-  };
+  }
 
-  const {timeout = DEFAULT_TIMEOUT, ...otherParams} = params;
-  const opts: {headers: RequestHeaders} = Object.assign({headers: {}}, otherParams);
+  const { timeout = DEFAULT_TIMEOUT, ...otherParams } = params;
+  const opts: { headers: RequestHeaders } = Object.assign({ headers: {} }, otherParams);
 
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
   const cluster = getCluster();
@@ -53,24 +58,23 @@ export async function request(path: string, params: RequestParams = {},
   const id = setTimeout(() => controller.abort(), timeout);
 
   const url = combinePath(BASE_HTTP_URL, fullPath);
-  let response: Response = new Response(undefined,
-                                        {status: 502, statusText: 'Unreachable'});
+  let response: Response = new Response(undefined, { status: 502, statusText: 'Unreachable' });
 
   try {
-    response = await fetch(url, {signal: controller.signal, ...opts});
+    response = await fetch(url, { signal: controller.signal, ...opts });
   } catch (err) {
     // AbortController sets the error code as 20
     if (err.code === 20) {
-      response = new Response(undefined, {status: 408, statusText: 'Request timed-out'});
+      response = new Response(undefined, { status: 408, statusText: 'Request timed-out' });
     }
   } finally {
     clearTimeout(id);
-  };
+  }
 
   if (!response.ok) {
-    const {status, statusText} = response;
+    const { status, statusText } = response;
     if (autoLogoutOnAuthError && status === 401 && opts.headers.Authorization) {
-      console.error('Logging out due to auth error', {status, statusText, path});
+      console.error('Logging out due to auth error', { status, statusText, path });
       logout();
     }
 
@@ -79,10 +83,10 @@ export async function request(path: string, params: RequestParams = {},
       const json = await response.json();
       message += ` - ${json.message}`;
     } catch (err) {
-      console.error('Unable to parse error json', {err});
+      console.error('Unable to parse error json', { err });
     }
 
-    const error: Error & {status?: number} = new Error(message);
+    const error: Error & { status?: number } = new Error(message);
     error.status = status;
     throw error;
   }
@@ -97,10 +101,10 @@ export function apiFactory(group: string, version: string, resource: string) {
   const apiRoot = getApiRoot(group, version);
   const url = `${apiRoot}/${resource}`;
   return {
-    resource: {group, resource},
+    resource: { group, resource },
     list: (cb: StreamResultsCb, errCb: StreamErrCb) => streamResults(url, cb, errCb),
-    get: (name: string, cb: StreamResultsCb,
-          errCb: StreamErrCb) => streamResult(url, name, cb, errCb),
+    get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
+      streamResult(url, name, cb, errCb),
     post: (body: KubeObjectInterface) => post(url, body),
     put: (body: KubeObjectInterface) => put(`${url}/${body.metadata.name}`, body),
     delete: (name: string) => remove(`${url}/${name}`),
@@ -108,8 +112,12 @@ export function apiFactory(group: string, version: string, resource: string) {
   };
 }
 
-export function apiFactoryWithNamespace(group: string, version: string, resource: string,
-                                        includeScale: boolean = false) {
+export function apiFactoryWithNamespace(
+  group: string,
+  version: string,
+  resource: string,
+  includeScale: boolean = false
+) {
   const apiRoot = getApiRoot(group, version);
   const results: {
     resource: {
@@ -118,13 +126,14 @@ export function apiFactoryWithNamespace(group: string, version: string, resource
     };
     [other: string]: any;
   } = {
-    resource: {group, resource},
-    list: (namespace: string, cb: StreamResultsCb,
-           errCb: StreamErrCb) => streamResults(url(namespace), cb, errCb),
-    get: (namespace: string, name: string, cb: StreamResultsCb,
-          errCb: StreamErrCb) => streamResult(url(namespace), name, cb, errCb),
+    resource: { group, resource },
+    list: (namespace: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
+      streamResults(url(namespace), cb, errCb),
+    get: (namespace: string, name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
+      streamResult(url(namespace), name, cb, errCb),
     post: (body: KubeObjectInterface) => post(url(body.metadata.namespace as string), body),
-    put: (body: KubeObjectInterface) => put(`${url(body.metadata.namespace as string)}/${body.metadata.name}`, body),
+    put: (body: KubeObjectInterface) =>
+      put(`${url(body.metadata.namespace as string)}/${body.metadata.name}`, body),
     delete: (namespace: string, name: string) => remove(`${url(namespace)}/${name}`),
     isNamespaced: true,
   };
@@ -156,27 +165,39 @@ function apiScaleFactory(apiRoot: string, resource: string) {
   }
 }
 
-export function post(url: string, json: JSON | object | KubeObjectInterface,
-                     autoLogoutOnAuthError = true, requestOptions = {}) {
+export function post(
+  url: string,
+  json: JSON | object | KubeObjectInterface,
+  autoLogoutOnAuthError = true,
+  requestOptions = {}
+) {
   const body = JSON.stringify(json);
-  const opts = {method: 'POST', body, headers: JSON_HEADERS, ...requestOptions};
+  const opts = { method: 'POST', body, headers: JSON_HEADERS, ...requestOptions };
   return request(url, opts, autoLogoutOnAuthError);
 }
 
-export function put(url: string, json: KubeObjectInterface, autoLogoutOnAuthError = true,
-                    requestOptions = {}) {
+export function put(
+  url: string,
+  json: KubeObjectInterface,
+  autoLogoutOnAuthError = true,
+  requestOptions = {}
+) {
   const body = JSON.stringify(json);
-  const opts = {method: 'PUT', body, headers: JSON_HEADERS, ...requestOptions};
+  const opts = { method: 'PUT', body, headers: JSON_HEADERS, ...requestOptions };
   return request(url, opts, autoLogoutOnAuthError);
 }
 
 export function remove(url: string, requestOptions = {}) {
-  const opts = {method: 'DELETE', headers: JSON_HEADERS, ...requestOptions};
+  const opts = { method: 'DELETE', headers: JSON_HEADERS, ...requestOptions };
   return request(url, opts);
 }
 
-export async function streamResult(url: string, name: string, cb: StreamResultsCb,
-                                   errCb: StreamErrCb) {
+export async function streamResult(
+  url: string,
+  name: string,
+  cb: StreamResultsCb,
+  errCb: StreamErrCb
+) {
   let isCancelled = false;
   let socket: ReturnType<typeof stream>;
   run();
@@ -193,9 +214,9 @@ export async function streamResult(url: string, name: string, cb: StreamResultsC
       const fieldSelector = encodeURIComponent(`metadata.name=${name}`);
       const watchUrl = `${url}?watch=1&fieldSelector=${fieldSelector}`;
 
-      socket = stream(watchUrl, x => cb(x.object), {isJson: true});
+      socket = stream(watchUrl, x => cb(x.object), { isJson: true });
     } catch (err) {
-      console.error('Error in api request', {err, url});
+      console.error('Error in api request', { err, url });
       if (errCb) errCb(err);
     }
   }
@@ -220,16 +241,16 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
 
   async function run() {
     try {
-      const {kind, items, metadata} = await request(url);
+      const { kind, items, metadata } = await request(url);
 
       if (isCancelled) return;
 
       add(items, kind);
 
       const watchUrl = `${url}?watch=1&resourceVersion=${metadata.resourceVersion}`;
-      socket = stream(watchUrl, update, {isJson: true});
+      socket = stream(watchUrl, update, { isJson: true });
     } catch (err) {
-      console.error('Error in api request', {err, url});
+      console.error('Error in api request', { err, url });
       if (errCb) errCb(err);
     }
   }
@@ -251,7 +272,13 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
     push();
   }
 
-  function update({type, object}: {type: 'ADDED' | 'MODIFIED' | 'DELETED' | 'ERROR'; object: KubeObjectInterface}) {
+  function update({
+    type,
+    object,
+  }: {
+    type: 'ADDED' | 'MODIFIED' | 'DELETED' | 'ERROR';
+    object: KubeObjectInterface;
+  }) {
     object.actionType = type; // eslint-disable-line no-param-reassign
 
     switch (type) {
@@ -277,7 +304,7 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
         delete results[object.metadata.uid];
         break;
       case 'ERROR':
-        console.error('Error in update', {type, object});
+        console.error('Error in update', { type, object });
         break;
       default:
         console.error('Unknown update type', type);
@@ -302,11 +329,11 @@ interface StreamArgs {
 export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   let connection: ReturnType<typeof connectStream>;
   let isCancelled = false;
-  const {isJson = false, additionalProtocols, connectCb, reconnectOnFailure = true} = args;
+  const { isJson = false, additionalProtocols, connectCb, reconnectOnFailure = true } = args;
 
   connect();
 
-  return {cancel, getSocket};
+  return { cancel, getSocket };
 
   function getSocket() {
     return connection.socket;
@@ -326,14 +353,19 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
     if (isCancelled) return;
 
     if (reconnectOnFailure) {
-      console.log('Reconnecting in 3 seconds', {url});
+      console.log('Reconnecting in 3 seconds', { url });
       setTimeout(connect, 3000);
     }
   }
 }
 
-function connectStream(path: string, cb: StreamResultsCb, onFail: () => void, isJson: boolean,
-                       additionalProtocols: string[] = []) {
+function connectStream(
+  path: string,
+  cb: StreamResultsCb,
+  onFail: () => void,
+  isJson: boolean,
+  additionalProtocols: string[] = []
+) {
   let isClosing = false;
 
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
@@ -345,10 +377,7 @@ function connectStream(path: string, cb: StreamResultsCb, onFail: () => void, is
     additionalProtocols.push(`base64url.bearer.authorization.k8s.io.${encodedToken}`);
   }
 
-  const protocols = [
-    'base64.binary.k8s.io',
-    ...additionalProtocols,
-  ];
+  const protocols = ['base64.binary.k8s.io', ...additionalProtocols];
 
   let fullPath = path;
   if (cluster) {
@@ -367,7 +396,7 @@ function connectStream(path: string, cb: StreamResultsCb, onFail: () => void, is
     console.error(error);
   }
 
-  return {close, socket};
+  return { close, socket };
 
   function close() {
     isClosing = true;
@@ -395,12 +424,12 @@ function connectStream(path: string, cb: StreamResultsCb, onFail: () => void, is
     socket.removeEventListener('close', onClose);
     socket.removeEventListener('error', onError);
 
-    console.warn('Socket closed unexpectedly', {path, args});
+    console.warn('Socket closed unexpectedly', { path, args });
     onFail();
   }
 
   function onError(err: any) {
-    console.error('Error in api stream', {err, path});
+    console.error('Error in api stream', { err, path });
   }
 }
 
@@ -438,8 +467,11 @@ export interface ApiError extends Error {
   status: number;
 }
 
-export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => void,
-                              onError?: (err: ApiError) => void) {
+export async function metrics(
+  url: string,
+  onMetrics: (arg: KubeMetrics[]) => void,
+  onError?: (err: ApiError) => void
+) {
   const handel = setInterval(getMetrics, 10000);
 
   async function getMetrics() {
@@ -447,7 +479,7 @@ export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => vo
       const metric = await request(url);
       onMetrics(metric.items || metric);
     } catch (err) {
-      console.debug('No metrics', {err, url});
+      console.debug('No metrics', { err, url });
 
       if (onError) {
         onError(err);
@@ -465,6 +497,8 @@ export async function metrics(url: string, onMetrics: (arg: KubeMetrics[]) => vo
 }
 
 export async function testAuth() {
-  const spec = {namespace: 'default'};
-  return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', {spec}, false, {timeout: 5 * 1000});
+  const spec = { namespace: 'default' };
+  return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', { spec }, false, {
+    timeout: 5 * 1000,
+  });
 }

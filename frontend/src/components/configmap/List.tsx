@@ -11,13 +11,7 @@ export default function ConfigMapList() {
   const filterFunc = useFilterFunc();
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Config Maps"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Config Maps" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -25,8 +19,7 @@ export default function ConfigMapList() {
         columns={[
           {
             label: 'Name',
-            getter: (configMap) =>
-              <Link kubeObject={configMap} />,
+            getter: configMap => <Link kubeObject={configMap} />,
             sort: (c1: ConfigMap, c2: ConfigMap) => {
               if (c1.metadata.name < c2.metadata.name) {
                 return -1;
@@ -34,18 +27,18 @@ export default function ConfigMapList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (configMap) => configMap.getNamespace(),
+            getter: configMap => configMap.getNamespace(),
           },
           {
             label: 'Age',
-            getter: (configMap) => configMap.getAge(),
+            getter: configMap => configMap.getAge(),
             sort: (c1: ConfigMap, c2: ConfigMap) =>
               new Date(c2.metadata.creationTimestamp).getTime() -
-              new Date(c1.metadata.creationTimestamp).getTime()
+              new Date(c1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={configMaps}

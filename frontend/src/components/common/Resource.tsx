@@ -19,7 +19,12 @@ import _ from 'lodash';
 import * as monaco from 'monaco-editor';
 import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { KubeCondition, KubeContainer, KubeObject, KubeObjectInterface } from '../../lib/k8s/cluster';
+import {
+  KubeCondition,
+  KubeContainer,
+  KubeObject,
+  KubeObjectInterface,
+} from '../../lib/k8s/cluster';
 import { createRouteURL, RouteURLProps } from '../../lib/router';
 import { localeDate } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -61,7 +66,7 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
     {
       name: 'Namespace',
       value: resource.metadata.namespace && resource.metadata.namespace,
-      hide: !resource.metadata.namespace
+      hide: !resource.metadata.namespace,
     },
     {
       name: 'Creation',
@@ -74,15 +79,14 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
     },
     {
       name: 'Annotations',
-      value: resource.metadata.annotations &&
-        <MetadataDictGrid dict={resource.metadata.annotations} />,
+      value: resource.metadata.annotations && (
+        <MetadataDictGrid dict={resource.metadata.annotations} />
+      ),
       hide: !resource.metadata.annotations,
     },
   ] as NameValueTableRow[]).concat(extraRows || []);
 
-  return (
-    <NameValueTable rows={mainRows}/>
-  );
+  return <NameValueTable rows={mainRows} />;
 }
 
 interface MetadataDictGridProps {
@@ -101,15 +105,8 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
 
   const keys = Object.keys(dict || []);
 
-  const MetadataEntry = React.forwardRef((props: TypographyProps, ref:any) => {
-    return (
-      <Typography
-        noWrap
-        {...props}
-        className={classes.metadataValueLabel}
-        ref={ref}
-      />
-    );
+  const MetadataEntry = React.forwardRef((props: TypographyProps, ref: any) => {
+    return <Typography noWrap {...props} className={classes.metadataValueLabel} ref={ref} />;
   });
 
   function makeLabel(key: string | number) {
@@ -133,45 +130,35 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
     // If the full label is not being shown, use a tooltip to show the full text
     // to the user (so they select it, etc.).
     if (fullText.length !== shortText.length) {
-      labelComponent = (
-        <LightTooltip
-          title={fullText}
-          children={labelComponent}
-          interactive
-        />
-      );
+      labelComponent = <LightTooltip title={fullText} children={labelComponent} interactive />;
     }
     return labelComponent;
   }
 
   return (
-    <Grid
-      container
-      spacing={1}
-      justify="flex-start"
-    >
-      {keys.length > defaultNumShown &&
+    <Grid container spacing={1} justify="flex-start">
+      {keys.length > defaultNumShown && (
         <Grid item>
           <IconButton onClick={() => setExpanded(!expanded)} size="small">
             <Icon icon={expanded ? menuUp : menuDown} />
           </IconButton>
         </Grid>
-      }
+      )}
       <Grid
         container
         item
         justify="flex-start"
         spacing={1}
         style={{
-          maxWidth: '80%'
+          maxWidth: '80%',
         }}
       >
         {/* Limit the size to two entries until the user chooses to expand the whole section */}
-        {keys.slice(0, expanded ? keys.length : defaultNumShown).map((key, i) =>
+        {keys.slice(0, expanded ? keys.length : defaultNumShown).map((key, i) => (
           <Grid key={i} item zeroMinWidth>
             {makeLabel(key)}
           </Grid>
-        )}
+        ))}
       </Grid>
     </Grid>
   );
@@ -189,15 +176,11 @@ export function ResourceLink(props: ResourceLinkProps) {
     routeName = props.resource.kind,
     routeParams = props.resource.metadata as RouteURLProps,
     name = props.resource.metadata.name,
-    state
+    state,
   } = props;
 
   return (
-    <Link
-      routeName={routeName}
-      params={routeParams}
-      state={state}
-    >
+    <Link routeName={routeName} params={routeParams} state={state}>
       {name}
     </Link>
   );
@@ -228,54 +211,48 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
 
   function getHeaderActions() {
-    return React.Children.toArray(Object.values(headerActions).map(action =>
-      action({item: resource})));
+    return React.Children.toArray(
+      Object.values(headerActions).map(action => action({ item: resource }))
+    );
   }
 
   let defaultActions: MainInfoSectionProps['actions'] = [];
 
   if (!noDefaultActions && resource) {
-    defaultActions = [
-      <EditButton item={resource} />,
-      <DeleteButton item={resource} />
-    ];
+    defaultActions = [<EditButton item={resource} />, <DeleteButton item={resource} />];
   }
 
   return (
     <>
-      {resource &&
+      {resource && (
         <Button
           startIcon={<Icon icon={chevronLeft} />}
           size="small"
           component={RouterLink}
           to={backLink || createRouteURL(resource.listRoute)}
         >
-          <Typography style={{paddingTop: '3px'}}>Back</Typography>
+          <Typography style={{ paddingTop: '3px' }}>Back</Typography>
         </Button>
-      }
+      )}
       <SectionBox
         title={
           <SectionHeader
             title={title || (resource ? resource.kind : '')}
             headerStyle={headerStyle}
-            actions={
-              getHeaderActions().concat(React.Children.toArray(actions))
-                .concat(defaultActions)
-            }
+            actions={getHeaderActions()
+              .concat(React.Children.toArray(actions))
+              .concat(defaultActions)}
           />
         }
       >
-        {resource === null ?
+        {resource === null ? (
           <Loader />
-          :
+        ) : (
           <React.Fragment>
             {headerSection}
-            <MetadataDisplay
-              resource={resource}
-              extraRows={extraInfo}
-            />
+            <MetadataDisplay resource={resource} extraRows={extraInfo} />
           </React.Fragment>
-        }
+        )}
       </SectionBox>
     </>
   );
@@ -289,18 +266,12 @@ export function PageGrid(props: PageGridProps) {
   const { sections = [], children = [], ...other } = props;
   const childrenArray = React.Children.toArray(children).concat(sections);
   return (
-    <Grid
-      container
-      spacing={1}
-      justify="flex-start"
-      alignItems="stretch"
-      {...other}
-    >
-      {childrenArray.map((section, i) =>
+    <Grid container spacing={1} justify="flex-start" alignItems="stretch" {...other}>
+      {childrenArray.map((section, i) => (
         <Grid item key={i} xs={12}>
           {section}
         </Grid>
-      )}
+      ))}
     </Grid>
   );
 }
@@ -313,18 +284,10 @@ interface SectionGridProps {
 export function SectionGrid(props: SectionGridProps) {
   const { items } = props;
   return (
-    <Grid
-      container
-      justify="space-between"
-    >
+    <Grid container justify="space-between">
       {items.map((item, i) => {
         return (
-          <Grid
-            item
-            md={12}
-            xs={12}
-            key={i}
-          >
+          <Grid item md={12} xs={12} key={i}>
             {item}
           </Grid>
         );
@@ -349,7 +312,7 @@ export function DataField(props: TextFieldProps) {
     }
     editor.layout();
   }
-  let language = ((label as string).split('.').pop() as string);
+  let language = (label as string).split('.').pop() as string;
   if (language !== 'json') {
     language = 'yaml';
   }
@@ -357,20 +320,18 @@ export function DataField(props: TextFieldProps) {
     <>
       <Box borderTop={0} border={1}>
         <Box display="flex">
-          <Box width="10%" borderTop={1} height={'1px'}>
-          </Box>
+          <Box width="10%" borderTop={1} height={'1px'}></Box>
           <Box pb={1} mt={-1} px={0.5}>
             <InputLabel>{label}</InputLabel>
           </Box>
-          <Box width="100%" borderTop={1} height={'1px'}>
-          </Box>
+          <Box width="100%" borderTop={1} height={'1px'}></Box>
         </Box>
         <Box mt={1} px={1} pb={1}>
           <Editor
             value={value as string}
             language={language}
             onMount={handleEditorDidMount}
-            options = {{'readOnly': true, 'lineNumbers': 'off'}}
+            options={{ readOnly: true, lineNumbers: 'off' }}
             theme="vs-dark"
           />
         </Box>
@@ -388,11 +349,7 @@ export function SecretField(props: InputProps) {
   }
 
   return (
-    <Grid
-      container
-      alignItems="stretch"
-      spacing={2}
-    >
+    <Grid container alignItems="stretch" spacing={2}>
       <Grid item>
         <IconButton
           edge="end"
@@ -432,13 +389,7 @@ export function ConditionsTable(props: ConditionsTableProps) {
       status = condition.status === 'True' ? 'success' : 'error';
     }
 
-    return (
-      <StatusLabel
-        status={status}
-      >
-        {condition.type}
-      </StatusLabel>
-    );
+    return <StatusLabel status={status}>{condition.type}</StatusLabel>;
   }
 
   function getColumns() {
@@ -449,7 +400,7 @@ export function ConditionsTable(props: ConditionsTableProps) {
     }[] = [
       {
         label: 'Condition',
-        getter: makeStatusLabel
+        getter: makeStatusLabel,
       },
       {
         label: 'Status',
@@ -461,20 +412,19 @@ export function ConditionsTable(props: ConditionsTableProps) {
       },
       {
         label: 'Last Update',
-        getter: condition => condition.lastUpdateTime ? <DateLabel date={condition.lastUpdateTime as string} /> : '-',
-        hide: !showLastUpdate
+        getter: condition =>
+          condition.lastUpdateTime ? <DateLabel date={condition.lastUpdateTime as string} /> : '-',
+        hide: !showLastUpdate,
       },
       {
         label: 'Reason',
         getter: condition =>
-          condition.reason ?
-            <HoverInfoLabel
-              label={condition.reason}
-              hoverInfo={condition.message}
-            />
-            :
+          condition.reason ? (
+            <HoverInfoLabel label={condition.reason} hoverInfo={condition.message} />
+          ) : (
             '-'
-      }
+          ),
+      },
     ];
 
     // Allow to filter the columns by using a hide field
@@ -489,8 +439,8 @@ export function ConditionsTable(props: ConditionsTableProps) {
   );
 }
 
-export function ContainerInfo(props: {container: KubeContainer}) {
-  const {container} = props;
+export function ContainerInfo(props: { container: KubeContainer }) {
+  const { container } = props;
 
   function containerRows() {
     const env: { [name: string]: string } = {};
@@ -510,45 +460,40 @@ export function ContainerInfo(props: {container: KubeContainer}) {
       env[envVar.name] = value;
     });
 
-    return ([
+    return [
       {
         name: 'Image',
         value: container.image,
       },
       {
         name: 'Args',
-        value: container.args &&
-          <MetadataDictGrid dict={container.args as {[index: number]: string}} showKeys={false} />,
-        hide: !container.args
+        value: container.args && (
+          <MetadataDictGrid dict={container.args as { [index: number]: string }} showKeys={false} />
+        ),
+        hide: !container.args,
       },
       {
         name: 'Command',
         value: (container.command || []).join(' '),
-        hide: !container.command
+        hide: !container.command,
       },
       {
         name: 'Environment',
         value: <MetadataDictGrid dict={env} />,
         hide: _.isEmpty(env),
       },
-    ]);
+    ];
   }
 
   return (
     <Box py={1}>
-      <SectionHeader
-        noPadding
-        title={container.name}
-        headerStyle="normal"
-      />
-      <NameValueTable
-        rows={containerRows()}
-      />
+      <SectionHeader noPadding title={container.name} headerStyle="normal" />
+      <NameValueTable rows={containerRows()} />
     </Box>
   );
 }
 
-export function ContainersSection(props: {resource: KubeObjectInterface | null}) {
+export function ContainersSection(props: { resource: KubeObjectInterface | null }) {
   const { resource } = props;
 
   function getContainers() {
@@ -574,23 +519,24 @@ export function ContainersSection(props: {resource: KubeObjectInterface | null})
 
   return (
     <SectionBox title="Containers">
-      {numContainers === 0 ?
+      {numContainers === 0 ? (
         <Empty>No containers to show</Empty>
-        :
+      ) : (
         containers.map((container: any, i: number) => {
           return (
             <React.Fragment key={i}>
               <ContainerInfo container={container} />
               {/* Don't show the divider if this is the last container */}
-              { (i !== (numContainers - 1)) && <Divider /> }
+              {i !== numContainers - 1 && <Divider />}
             </React.Fragment>
           );
-        })}
+        })
+      )}
     </SectionBox>
   );
 }
 
-export function ReplicasSection(props: {resource: KubeObjectInterface | null }) {
+export function ReplicasSection(props: { resource: KubeObjectInterface | null }) {
   const { resource } = props;
 
   if (!resource) {

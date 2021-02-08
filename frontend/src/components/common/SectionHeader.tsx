@@ -11,11 +11,11 @@ export interface HeaderStyleProps {
 }
 
 const useStyles = makeStyles(theme => ({
-  sectionHeader: ({noPadding, headerStyle}: HeaderStyleProps) => ({
+  sectionHeader: ({ noPadding, headerStyle }: HeaderStyleProps) => ({
     padding: theme.spacing(noPadding ? 0 : 2),
     paddingTop: theme.spacing(noPadding ? 0 : 3),
     paddingRight: '0',
-    ...theme.palette.headerStyle[headerStyle || 'normal']
+    ...theme.palette.headerStyle[headerStyle || 'normal'],
   }),
   title: {
     fontWeight: 'bold',
@@ -30,8 +30,8 @@ export interface SectionHeaderProps {
 }
 
 export default function SectionHeader(props: SectionHeaderProps) {
-  const {noPadding = false, headerStyle = 'main'} = props;
-  const classes = useStyles({noPadding, headerStyle});
+  const { noPadding = false, headerStyle = 'main' } = props;
+  const classes = useStyles({ noPadding, headerStyle });
   const actions = props.actions || [];
 
   return (
@@ -42,35 +42,24 @@ export default function SectionHeader(props: SectionHeaderProps) {
       className={classes.sectionHeader}
       spacing={2}
     >
-      {props.title &&
-        <Grid
-          item
-        >
-          <Typography
-            variant="h6"
-            className={classes.title}
-            noWrap
-          >
+      {props.title && (
+        <Grid item>
+          <Typography variant="h6" className={classes.title} noWrap>
             {props.title}
           </Typography>
         </Grid>
-      }
-      {actions.length > 0 &&
+      )}
+      {actions.length > 0 && (
         <Grid item>
-          <Grid
-            item
-            container
-            alignItems="center"
-            justify="flex-end"
-          >
-            {actions.map((action, i) =>
+          <Grid item container alignItems="center" justify="flex-end">
+            {actions.map((action, i) => (
               <Grid item key={i}>
                 {action}
               </Grid>
-            )}
+            ))}
           </Grid>
         </Grid>
-      }
+      )}
     </Grid>
   );
 }

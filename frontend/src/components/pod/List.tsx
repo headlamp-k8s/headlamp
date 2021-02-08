@@ -26,21 +26,11 @@ export default function PodList() {
       status = 'success';
     }
 
-    return (
-      <StatusLabel status={status}>
-        {phase}
-      </StatusLabel>
-    );
+    return <StatusLabel status={status}>{phase}</StatusLabel>;
   }
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Pods"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Pods" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -48,7 +38,7 @@ export default function PodList() {
         columns={[
           {
             label: 'Name',
-            getter: (pod) => <Link kubeObject={pod} />,
+            getter: pod => <Link kubeObject={pod} />,
             sort: (p1: Pod, p2: Pod) => {
               if (p1.metadata.name < p2.metadata.name) {
                 return -1;
@@ -56,26 +46,26 @@ export default function PodList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (pod: Pod) => pod.getNamespace()
+            getter: (pod: Pod) => pod.getNamespace(),
           },
           {
             label: 'Restarts',
-            getter: (pod: Pod) => getRestartCount(pod)
+            getter: (pod: Pod) => getRestartCount(pod),
           },
           {
             label: 'Status',
-            getter: makeStatusLabel
+            getter: makeStatusLabel,
           },
           {
             label: 'Age',
             getter: (pod: Pod) => pod.getAge(),
             sort: (p1: Pod, p2: Pod) =>
               new Date(p2.metadata.creationTimestamp).getTime() -
-              new Date(p1.metadata.creationTimestamp).getTime()
+              new Date(p1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={pods}

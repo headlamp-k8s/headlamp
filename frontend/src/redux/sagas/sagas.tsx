@@ -1,6 +1,13 @@
 import { all, call, cancelled, delay, put, race, take, takeEvery } from 'redux-saga/effects';
 import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/util';
-import { Action, CallbackAction, CLUSTER_ACTION, CLUSTER_ACTION_CANCEL, ClusterAction, updateClusterAction } from '../actions/actions';
+import {
+  Action,
+  CallbackAction,
+  CLUSTER_ACTION,
+  CLUSTER_ACTION_CANCEL,
+  ClusterAction,
+  updateClusterAction,
+} from '../actions/actions';
 
 function newActionKey() {
   return (new Date().getTime() + Math.random()).toString();
@@ -34,36 +41,40 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
     successMessage,
     startOptions = {},
     cancelledOptions = {},
-    successOptions = {variant: 'success'},
-    errorOptions = {variant: 'error'},
+    successOptions = { variant: 'success' },
+    errorOptions = { variant: 'error' },
   } = action;
 
   try {
-    yield put(updateClusterAction({
-      key: actionKey,
-      id: actionKey,
-      message: startMessage,
-      url: startUrl,
-      buttons: [
-        {
-          label: 'Cancel',
-          actionToDispatch: uniqueCancelAction,
-        },
-      ],
-      snackbarProps: startOptions,
-    }));
+    yield put(
+      updateClusterAction({
+        key: actionKey,
+        id: actionKey,
+        message: startMessage,
+        url: startUrl,
+        buttons: [
+          {
+            label: 'Cancel',
+            actionToDispatch: uniqueCancelAction,
+          },
+        ],
+        snackbarProps: startOptions,
+      })
+    );
 
     yield delay(CLUSTER_ACTION_GRACE_PERIOD);
   } finally {
     // Check if it's been cancelled.
     if (yield cancelled()) {
-      yield put(updateClusterAction({
-        id: actionKey,
-        message: cancelledMessage,
-        dismissSnackbar: actionKey,
-        url: cancelUrl,
-        snackbarProps: cancelledOptions,
-      }));
+      yield put(
+        updateClusterAction({
+          id: actionKey,
+          message: cancelledMessage,
+          dismissSnackbar: actionKey,
+          url: cancelUrl,
+          snackbarProps: cancelledOptions,
+        })
+      );
     } else {
       // Actually perform the action. This part is no longer cancellable,
       // so it's here instead of within the try block.
@@ -100,22 +111,22 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
     }
 
     // Reset state if no other deletion happens
-    const {timeout} = yield race({
+    const { timeout } = yield race({
       newAction: take(CLUSTER_ACTION),
-      timeout: delay(3000)
+      timeout: delay(3000),
     });
 
     // Reset the cluster action
     if (timeout) {
-      yield put(updateClusterAction({
-        id: actionKey
-      }));
+      yield put(
+        updateClusterAction({
+          id: actionKey,
+        })
+      );
     }
   }
 }
 
 export default function* rootSaga() {
-  yield all([
-    watchClusterAction(),
-  ]);
+  yield all([watchClusterAction()]);
 }

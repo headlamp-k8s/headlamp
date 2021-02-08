@@ -13,23 +13,25 @@ export default function ServiceAccountDetails() {
   return (
     <MainInfoSection
       resource={item}
-      extraInfo={item && [
-        {
-          name: 'Secrets',
-          value: <React.Fragment>
-            {
-              item.secrets.map(({name}, index) =>
-                <React.Fragment key={`${name}__${index}`}>
-                  <Link routeName={'secret'} params={{namespace, name}}>
-                    {name}
-                  </Link>
-                  {index !== item.secrets.length - 1 && ','}
-                </React.Fragment>
-              )
-            }
-          </React.Fragment>
-        }
-      ]}
+      extraInfo={
+        item && [
+          {
+            name: 'Secrets',
+            value: (
+              <React.Fragment>
+                {item.secrets.map(({ name }, index) => (
+                  <React.Fragment key={`${name}__${index}`}>
+                    <Link routeName={'secret'} params={{ namespace, name }}>
+                      {name}
+                    </Link>
+                    {index !== item.secrets.length - 1 && ','}
+                  </React.Fragment>
+                ))}
+              </React.Fragment>
+            ),
+          },
+        ]
+      }
     />
   );
 }

@@ -8,9 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<PercentageCircleProps> = (args) => (
-  <PercentageCircle {...args} />
-);
+const Template: Story<PercentageCircleProps> = args => <PercentageCircle {...args} />;
 
 export const Percent100 = Template.bind({});
 Percent100.args = {

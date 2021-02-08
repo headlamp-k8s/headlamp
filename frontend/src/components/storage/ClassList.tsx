@@ -11,14 +11,7 @@ export default function ClassList() {
   const filterFunc = useFilterFunc();
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Storage Classes"
-          noNamespaceFilter
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Storage Classes" noNamespaceFilter />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -26,7 +19,7 @@ export default function ClassList() {
         columns={[
           {
             label: 'Name',
-            getter: (storageClass) => <Link kubeObject={storageClass} />,
+            getter: storageClass => <Link kubeObject={storageClass} />,
             sort: (sc1: StorageClass, sc2: StorageClass) => {
               if (sc1.metadata.name < sc2.metadata.name) {
                 return -1;
@@ -34,22 +27,22 @@ export default function ClassList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Reclaim Policy',
-            getter: (storageClass) => storageClass.reclaimPolicy
+            getter: storageClass => storageClass.reclaimPolicy,
           },
           {
             label: 'Volume Binding Mode',
-            getter: (storageClass) => storageClass.volumeBindingMode,
+            getter: storageClass => storageClass.volumeBindingMode,
           },
           {
             label: 'Age',
-            getter: (storageClass) => storageClass.getAge(),
+            getter: storageClass => storageClass.getAge(),
             sort: (sc1: StorageClass, sc2: StorageClass) =>
               new Date(sc2.metadata.creationTimestamp).getTime() -
-              new Date(sc1.metadata.creationTimestamp).getTime()
+              new Date(sc1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={storageClasses}

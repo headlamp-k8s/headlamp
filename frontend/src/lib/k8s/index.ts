@@ -95,11 +95,14 @@ export function useClustersConf(): ConfigState['clusters'] {
 
           const configToStore = {
             ...config,
-            clusters: clustersToConfig
+            clusters: clustersToConfig,
           };
 
-          if (!clusters || Object.keys(clusters).length !== 0 ||
-              Object.keys(clustersToConfig).length !== 0) {
+          if (
+            !clusters ||
+            Object.keys(clusters).length !== 0 ||
+            Object.keys(clustersToConfig).length !== 0
+          ) {
             dispatch(setConfig(configToStore));
           }
         })
@@ -115,8 +118,7 @@ export function useClustersConf(): ConfigState['clusters'] {
         }
       };
     }
-  },
-  [clusters, dispatch, retry]);
+  }, [clusters, dispatch, retry]);
 
   return clusters;
 }
@@ -133,8 +135,7 @@ export function useCluster() {
     if (cluster !== currentCluster) {
       setCluster(getCluster());
     }
-  },
-  [clusters, cluster, location]);
+  }, [clusters, cluster, location]);
 
   return cluster;
 }
@@ -151,17 +152,19 @@ export function useConnectApi(...apiCalls: (() => CancellablePromise)[]) {
   // @todo: Update this if the active cluster management is changed.
   const location = useLocation();
 
-  React.useEffect(() => {
-    const cancellables = apiCalls.map(func => func());
+  React.useEffect(
+    () => {
+      const cancellables = apiCalls.map(func => func());
 
-    return function cleanup() {
-      for (const cancellablePromise of cancellables) {
-        cancellablePromise.then(cancellable => cancellable());
-      }
-    };
-  },
+      return function cleanup() {
+        for (const cancellablePromise of cancellables) {
+          cancellablePromise.then(cancellable => cancellable());
+        }
+      };
+    },
     // If we add the apiCalls to the dependency list, then it actually
     // results in undesired reloads.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [location]);
+    [location]
+  );
 }

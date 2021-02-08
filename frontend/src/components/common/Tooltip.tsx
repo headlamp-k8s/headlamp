@@ -33,12 +33,9 @@ export function TooltipIcon(props: TooltipIconProps) {
   const classes = useContainerStyles({});
   const { children, icon = informationOutline } = props;
 
-  const IconReffed = React.forwardRef((props: IconifyIcon, ref:any) => {
+  const IconReffed = React.forwardRef((props: IconifyIcon, ref: any) => {
     return (
-      <Container
-        ref={ref}
-        className={classes.container}
-      >
+      <Container ref={ref} className={classes.container}>
         <Icon {...props} />
       </Container>
     );

@@ -12,9 +12,7 @@ const OIDCAuth: FunctionComponent<{}> = () => {
   localStorage.setItem('auth_status', 'success');
   setToken(cluster as string, token);
 
-  return (
-    <Typography color="textPrimary">Redirecting to main page.....</Typography>
-  );
+  return <Typography color="textPrimary">Redirecting to main page.....</Typography>;
 };
 
 export default OIDCAuth;

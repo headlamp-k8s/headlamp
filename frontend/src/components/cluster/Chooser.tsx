@@ -29,8 +29,8 @@ const useClusterTitleStyle = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
     '&:hover': {
       color: theme.palette.text.primary,
-    }
-  }
+    },
+  },
 }));
 
 export function ClusterTitle() {
@@ -59,10 +59,7 @@ export function ClusterTitle() {
       >
         Cluster: {cluster}
       </Button>
-      <Chooser
-        open={showChooser}
-        onClose={() => setShowChooser(false)}
-      />
+      <Chooser open={showChooser} onClose={() => setShowChooser(false)} />
     </React.Fragment>
   );
 }
@@ -76,7 +73,7 @@ const useStyles = makeStyles(theme => ({
       color: theme.palette.primaryColor,
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
-    }
+    },
   },
   chooserDialogCover: {
     background: theme.palette.common.black,
@@ -99,28 +96,25 @@ const useClusterButtonStyles = makeStyles({
   root: {
     width: 150,
     height: 160,
-    paddingTop: '15%'
+    paddingTop: '15%',
   },
   content: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
 });
 
 interface ClusterButtonProps {
   cluster: Cluster;
-  onClick?: ((...args: any[]) => void);
+  onClick?: (...args: any[]) => void;
 }
 
 function ClusterButton(props: ClusterButtonProps) {
   const classes = useClusterButtonStyles();
   const theme = useTheme();
-  const {cluster, onClick = undefined} = props;
+  const { cluster, onClick = undefined } = props;
 
   return (
-    <ButtonBase
-      focusRipple
-      onClick={onClick}
-    >
+    <ButtonBase focusRipple onClick={onClick}>
       <Card className={classes.root}>
         <CardContent className={classes.content}>
           <Icon icon={kubernetesIcon} width="50" height="50" color={theme.palette.primaryColor} />
@@ -139,23 +133,15 @@ interface ClusterListProps {
 }
 
 function ClusterList(props: ClusterListProps) {
-  const {clusters, onButtonClick} = props;
+  const { clusters, onButtonClick } = props;
 
   return (
-    <Grid
-      container
-      alignItems="center"
-      justify="space-around"
-      spacing={2}
-    >
-      {clusters.map((cluster, i) =>
+    <Grid container alignItems="center" justify="space-around" spacing={2}>
+      {clusters.map((cluster, i) => (
         <Grid item key={cluster.name}>
-          <ClusterButton
-            cluster={cluster}
-            onClick={() => onButtonClick(cluster)}
-          />
+          <ClusterButton cluster={cluster} onClick={() => onButtonClick(cluster)} />
         </Grid>
-      )}
+      ))}
     </Grid>
   );
 }
@@ -170,7 +156,7 @@ export function ClusterDialog(props: ClusterDialogProps) {
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const {open, onClose = null, useCover = false, children = [], ...otherProps} = props;
+  const { open, onClose = null, useCover = false, children = [], ...otherProps } = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
 
@@ -195,22 +181,10 @@ export function ClusterDialog(props: ClusterDialogProps) {
       className={useCover ? classes.chooserDialogCover : ''}
       {...otherProps}
     >
-      <DialogTitle
-        id="responsive-dialog-title"
-        className={classes.chooserTitle}
-        disableTypography
-      >
-        <SvgIcon
-          className={classes.logo}
-          component={LogoLight}
-          viewBox="0 0 175 32"
-        />
+      <DialogTitle id="responsive-dialog-title" className={classes.chooserTitle} disableTypography>
+        <SvgIcon className={classes.logo} component={LogoLight} viewBox="0 0 175 32" />
       </DialogTitle>
-      <DialogContent
-        className={classes.chooserDialog}
-      >
-        {children}
-      </DialogContent>
+      <DialogContent className={classes.chooserDialog}>{children}</DialogContent>
     </Dialog>
   );
 }
@@ -218,28 +192,30 @@ export function ClusterDialog(props: ClusterDialogProps) {
 function Chooser(props: ClusterDialogProps) {
   const history = useHistory();
   const clusters = useClustersConf();
-  const {open = null, onClose, ...otherProps} = props;
+  const { open = null, onClose, ...otherProps } = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(props.open);
 
-  React.useEffect(() => {
-    if (open !== null && open !== show) {
-      setShow(open);
-      return;
-    }
+  React.useEffect(
+    () => {
+      if (open !== null && open !== show) {
+        setShow(open);
+        return;
+      }
 
-    // If we only have one cluster configured, then we skip offering
-    // the choice to the user.
-    if (!!clusters && Object.keys(clusters).length === 1) {
-      handleButtonClick(Object.values(clusters)[0]);
-    }
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  [open, show, clusters]);
+      // If we only have one cluster configured, then we skip offering
+      // the choice to the user.
+      if (!!clusters && Object.keys(clusters).length === 1) {
+        handleButtonClick(Object.values(clusters)[0]);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [open, show, clusters]
+  );
 
   function handleButtonClick(cluster: Cluster) {
     if (cluster.name !== getCluster()) {
-      history.push({pathname: generatePath(getClusterPrefixedPath(), {cluster: cluster.name})});
+      history.push({ pathname: generatePath(getClusterPrefixedPath(), { cluster: cluster.name }) });
     }
 
     setShow(false);
@@ -262,44 +238,29 @@ function Chooser(props: ClusterDialogProps) {
   const clusterList = Object.values(clusters || {});
 
   return (
-    <ClusterDialog
-      open={show}
-      onClose={onClose || handleClose}
-      {...otherProps}
-    >
-      {clusterList.length === 0 ?
+    <ClusterDialog open={show} onClose={onClose || handleClose} {...otherProps}>
+      {clusterList.length === 0 ? (
         <React.Fragment>
-          {clusters === null ?
+          {clusters === null ? (
             <>
-              <DialogContentText>
-                Wait while fetching clusters…
-              </DialogContentText>
+              <DialogContentText>Wait while fetching clusters…</DialogContentText>
               <Loader />
             </>
-            :
+          ) : (
             <>
-              <DialogContentText>
-                There seems to be no clusters configured…
-              </DialogContentText>
+              <DialogContentText>There seems to be no clusters configured…</DialogContentText>
               <DialogContentText>
                 Please make sure you have at least one cluster configured.
               </DialogContentText>
             </>
-          }
+          )}
         </React.Fragment>
-        :
+      ) : (
         <React.Fragment>
-          <DialogContentText
-            variant="h4"
-          >
-            Choose a cluster
-          </DialogContentText>
-          <ClusterList
-            clusters={clusterList}
-            onButtonClick={handleButtonClick}
-          />
+          <DialogContentText variant="h4">Choose a cluster</DialogContentText>
+          <ClusterList clusters={clusterList} onButtonClick={handleButtonClick} />
         </React.Fragment>
-      }
+      )}
     </ClusterDialog>
   );
 }

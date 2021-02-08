@@ -21,41 +21,41 @@ export default function DeleteButton(props: DeleteButtonProps) {
   const [visible, setVisible] = React.useState(false);
   const location = useLocation();
 
-  const deleteFunc = React.useCallback(() => {
-    if (!item) {
-      return;
-    }
-
-    const callback = item!.delete;
-
-    callback && dispatch(clusterAction(callback.bind(item),
-      {
-        startMessage: `Deleting item ${item!.metadata.name}…`,
-        cancelledMessage: `Cancelled deletion of ${item!.metadata.name}.`,
-        successMessage: `Deleted item ${item!.metadata.name}.`,
-        errorMessage: `Error deleting item ${item!.metadata.name}.`,
-        cancelUrl: location.pathname,
-        startUrl: item!.getListLink(),
-        errorUrl: item!.getListLink(),
-        ...options
+  const deleteFunc = React.useCallback(
+    () => {
+      if (!item) {
+        return;
       }
-    ));
-  },
-  // eslint-disable-next-line
-  [item]);
+
+      const callback = item!.delete;
+
+      callback &&
+        dispatch(
+          clusterAction(callback.bind(item), {
+            startMessage: `Deleting item ${item!.metadata.name}…`,
+            cancelledMessage: `Cancelled deletion of ${item!.metadata.name}.`,
+            successMessage: `Deleted item ${item!.metadata.name}.`,
+            errorMessage: `Error deleting item ${item!.metadata.name}.`,
+            cancelUrl: location.pathname,
+            startUrl: item!.getListLink(),
+            errorUrl: item!.getListLink(),
+            ...options,
+          })
+        );
+    },
+    // eslint-disable-next-line
+    [item]
+  );
 
   React.useEffect(() => {
     if (item) {
-      item.getAuthorization('delete').then(
-        (result: any) => {
-          if (result.status.allowed) {
-            setVisible(true);
-          }
+      item.getAuthorization('delete').then((result: any) => {
+        if (result.status.allowed) {
+          setVisible(true);
         }
-      );
+      });
     }
-  },
-  [item]);
+  }, [item]);
 
   if (!visible) {
     return null;
@@ -64,10 +64,7 @@ export default function DeleteButton(props: DeleteButtonProps) {
   return (
     <React.Fragment>
       <Tooltip title="Delete">
-        <IconButton
-          aria-label="delete"
-          onClick={() => setOpenAlert(true)}
-        >
+        <IconButton aria-label="delete" onClick={() => setOpenAlert(true)}>
           <Icon icon={deleteIcon} />
         </IconButton>
       </Tooltip>
@@ -76,7 +73,7 @@ export default function DeleteButton(props: DeleteButtonProps) {
         title="Delete item"
         description="Are you sure you want to delete this item?"
         handleClose={() => setOpenAlert(false)}
-        onConfirm={() => deleteFunc() }
+        onConfirm={() => deleteFunc()}
       />
     </React.Fragment>
   );

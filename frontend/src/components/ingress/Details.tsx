@@ -21,21 +21,20 @@ export default function IngressDetails() {
         servicePort: string;
       };
     }[] = [];
-    item?.spec.rules.forEach(({host, http}) => {
+    item?.spec.rules.forEach(({ host, http }) => {
       http.paths.forEach(pathData => {
-        data.push({...pathData, host: host});
+        data.push({ ...pathData, host: host });
       });
     });
 
     return data;
   }
 
-  return (
-    !item ? <Loader /> :
+  return !item ? (
+    <Loader />
+  ) : (
     <PageGrid>
-      <MainInfoSection
-        resource={item}
-      />
+      <MainInfoSection resource={item} />
       <SectionBox title="Rules">
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
@@ -43,19 +42,19 @@ export default function IngressDetails() {
           columns={[
             {
               label: 'Host',
-              getter: (data) => data.host
+              getter: data => data.host,
             },
             {
               label: 'Path',
-              getter: (data) => data.path || ''
+              getter: data => data.path || '',
             },
             {
               label: 'Service',
-              getter: (data) => data.backend.serviceName
+              getter: data => data.backend.serviceName,
             },
             {
               label: 'Port',
-              getter: (data) => data.backend.servicePort
+              getter: data => data.backend.servicePort,
             },
           ]}
           data={getHostsData()}

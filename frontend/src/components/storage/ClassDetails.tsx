@@ -12,20 +12,22 @@ export default function StorageClassDetails() {
   return (
     <MainInfoSection
       resource={item}
-      extraInfo={item && [
-        {
-          name: 'Reclaim Policy',
-          value: item.reclaimPolicy,
-        },
-        {
-          name: 'Binding Mode',
-          value: item.volumeBindingMode,
-        },
-        {
-          name: 'Provisioner',
-          value: item.provisioner,
-        },
-      ]}
+      extraInfo={
+        item && [
+          {
+            name: 'Reclaim Policy',
+            value: item.reclaimPolicy,
+          },
+          {
+            name: 'Binding Mode',
+            value: item.volumeBindingMode,
+          },
+          {
+            name: 'Provisioner',
+            value: item.provisioner,
+          },
+        ]
+      }
     />
   );
 }

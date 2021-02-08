@@ -14,11 +14,7 @@ const initialState = {
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-  reducers,
-  initialState,
-  applyMiddleware(sagaMiddleware),
-);
+const store = createStore(reducers, initialState, applyMiddleware(sagaMiddleware));
 
 export default store;
 

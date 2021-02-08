@@ -24,7 +24,7 @@ const useStyle = makeStyles(theme => ({
   },
   containerFormControl: {
     minWidth: '11rem',
-  }
+  },
 }));
 
 interface TerminalProps extends DialogProps {
@@ -39,7 +39,7 @@ export default function Terminal(props: TerminalProps) {
   const [container, setContainer] = React.useState<string | null>(null);
 
   function getDefaultContainer() {
-    return (item.spec.containers.length > 0) ? item.spec.containers[0].name : '';
+    return item.spec.containers.length > 0 ? item.spec.containers[0].name : '';
   }
 
   // @todo: Give the real exec type when we have it.
@@ -94,63 +94,54 @@ export default function Terminal(props: TerminalProps) {
     xterm.write(text);
   }
 
-  React.useEffect(() => {
-    // We need a valid container ref for the terminal to add itself to it.
-    if (terminalContainerRef === null) {
-      return;
-    }
+  React.useEffect(
+    () => {
+      // We need a valid container ref for the terminal to add itself to it.
+      if (terminalContainerRef === null) {
+        return;
+      }
 
-    // Don't do anything until the pod's container is assigned. We used the pod's late
-    // assignment to prevent calling exec before the dialog is opened.
-    if (container === null) {
-      return;
-    }
+      // Don't do anything until the pod's container is assigned. We used the pod's late
+      // assignment to prevent calling exec before the dialog is opened.
+      if (container === null) {
+        return;
+      }
 
-    const xterm = new XTerminal({rows: 40, cols: 80});
-    xterm.writeln('Connecting…\n');
+      const xterm = new XTerminal({ rows: 40, cols: 80 });
+      xterm.writeln('Connecting…\n');
 
-    const exec = item.exec(container, (items: ArrayBuffer) => onData(xterm, items));
+      const exec = item.exec(container, (items: ArrayBuffer) => onData(xterm, items));
 
-    setupTerminal(terminalContainerRef, xterm, exec);
+      setupTerminal(terminalContainerRef, xterm, exec);
 
-    return function cleanup() {
-      xterm.dispose();
-      exec.cancel();
-    };
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  [container, terminalContainerRef]);
+      return function cleanup() {
+        xterm.dispose();
+        exec.cancel();
+      };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [container, terminalContainerRef]
+  );
 
-  React.useEffect(() => {
-    if (props.open && container === null) {
-      setContainer(getDefaultContainer());
-    }
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  [props.open]);
+  React.useEffect(
+    () => {
+      if (props.open && container === null) {
+        setContainer(getDefaultContainer());
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [props.open]
+  );
 
   function handleContainerChange(event: any) {
     setContainer(event.target.value);
   }
 
   return (
-    <Dialog
-      maxWidth="lg"
-      scroll="paper"
-      fullWidth
-      onBackdropClick={onClose}
-      keepMounted
-      {...other}
-    >
+    <Dialog maxWidth="lg" scroll="paper" fullWidth onBackdropClick={onClose} keepMounted {...other}>
       <DialogTitle>Terminal: {item.metadata.name}</DialogTitle>
-      <DialogContent
-        className={classes.dialogContent}
-      >
-        <Grid
-          container
-          direction="column"
-          spacing={1}
-        >
+      <DialogContent className={classes.dialogContent}>
+        <Grid container direction="column" spacing={1}>
           <Grid item>
             <FormControl className={classes.containerFormControl}>
               <InputLabel shrink id="container-name-chooser-label">
@@ -159,25 +150,25 @@ export default function Terminal(props: TerminalProps) {
               <Select
                 labelId="container-name-chooser-label"
                 id="container-name-chooser"
-                value={ container !== null ? container : getDefaultContainer() }
+                value={container !== null ? container : getDefaultContainer()}
                 onChange={handleContainerChange}
               >
-                {item && item.spec.containers.map(({name}) =>
-                  <MenuItem value={name} key={name}>{name}</MenuItem>
-                )}
+                {item &&
+                  item.spec.containers.map(({ name }) => (
+                    <MenuItem value={name} key={name}>
+                      {name}
+                    </MenuItem>
+                  ))}
               </Select>
             </FormControl>
           </Grid>
           <Grid item>
-            <div id='xterm' ref={x => setTerminalContainerRef(x)} className='terminal' />
+            <div id="xterm" ref={x => setTerminalContainerRef(x)} className="terminal" />
           </Grid>
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={onClose}
-          color="primary"
-        >
+        <Button onClick={onClose} color="primary">
           Close
         </Button>
       </DialogActions>

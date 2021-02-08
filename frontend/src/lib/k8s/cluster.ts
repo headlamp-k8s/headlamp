@@ -41,25 +41,32 @@ export interface KubeMetadata {
 
 // We have to define a KubeObject implementation here because the KubeObject
 // class is defined within the function and therefore not inferable.
-export interface KubeObjectIface<T extends (KubeObjectInterface | KubeEvent)> {
+export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
   apiList: (onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void) => any;
-  useApiList: (onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void,
-               onError?: (err: ApiError) => void) => any;
-  useApiGet: (onGet: (...args: any) => void, name: string,
-              namespace?: string, onError?: (err: ApiError) => void) => void;
-  useList: (onList?: (...arg: any[]) => any) => [any[], ApiError | null, (items: any[]) => void,
-           (err: ApiError | null) => void];
+  useApiList: (
+    onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void,
+    onError?: (err: ApiError) => void
+  ) => any;
+  useApiGet: (
+    onGet: (...args: any) => void,
+    name: string,
+    namespace?: string,
+    onError?: (err: ApiError) => void
+  ) => void;
+  useList: (
+    onList?: (...arg: any[]) => any
+  ) => [any[], ApiError | null, (items: any[]) => void, (err: ApiError | null) => void];
   getErrorMessage: (err: ApiError | null) => string | null;
-  new(json: T): any;
+  new (json: T): any;
   className: string;
   [prop: string]: any;
 }
 
-export function
-makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string):
-  KubeObjectIface<T> {
+export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
+  objectName: string
+): KubeObjectIface<T> {
   class KubeObject {
-    static apiEndpoint: ReturnType<(typeof apiFactoryWithNamespace) | (typeof apiFactory)>;
+    static apiEndpoint: ReturnType<typeof apiFactoryWithNamespace | typeof apiFactory>;
     jsonData: T | null = null;
 
     constructor(json: T) {
@@ -119,8 +126,10 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string):
       return this.jsonData!.kind;
     }
 
-    static apiList<U extends KubeObject>(onList: (arg: U[]) => void,
-                                         onError?: (err: ApiError) => void) {
+    static apiList<U extends KubeObject>(
+      onList: (arg: U[]) => void,
+      onError?: (err: ApiError) => void
+    ) {
       const createInstance = (item: T) => this.create(item) as U;
 
       const args: any[] = [(list: T[]) => onList(list.map((item: T) => createInstance(item) as U))];
@@ -136,14 +145,17 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string):
       return this.apiEndpoint.list.bind(null, ...args);
     }
 
-    static useApiList<U extends KubeObject>(onList: (...arg: any[]) => any,
-                                            onError?: (err: ApiError) => void) {
+    static useApiList<U extends KubeObject>(
+      onList: (...arg: any[]) => any,
+      onError?: (err: ApiError) => void
+    ) {
       const listCallback = onList as (arg: U[]) => void;
       useConnectApi(this.apiList(listCallback, onError));
     }
 
-    static useList<U extends KubeObject>(onList?: (...arg: any[]) => any):
-      [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
+    static useList<U extends KubeObject>(
+      onList?: (...arg: any[]) => any
+    ): [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
       const [objList, setObjList] = React.useState<U[] | null>(null);
       const [error, setError] = useErrorState(setObjList);
 
@@ -162,11 +174,14 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string):
     }
 
     static create<U extends KubeObject>(this: new (arg: T) => U, item: T): U {
-      return (new this(item)) as U;
+      return new this(item) as U;
     }
 
-    static apiGet<U extends KubeObject>(onGet: (...args: any) => void, name: string,
-                                        namespace?: string) {
+    static apiGet<U extends KubeObject>(
+      onGet: (...args: any) => void,
+      name: string,
+      namespace?: string
+    ) {
       const createInstance = (item: T) => this.create(item) as U;
       const args: any[] = [name, (obj: T) => onGet(createInstance(obj))];
 
@@ -177,8 +192,11 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string):
       return this.apiEndpoint.get.bind(null, ...args);
     }
 
-    static useApiGet<U extends KubeObject>(onGet: (...args: any) => any, name: string,
-                                           namespace?: string) {
+    static useApiGet<U extends KubeObject>(
+      onGet: (...args: any) => any,
+      name: string,
+      namespace?: string
+    ) {
       // We do the type conversion here because we want to be able to use hooks that may not have
       // the exact signature as get callbacks.
       const getCallback = onGet as (item: U) => void;
@@ -186,8 +204,8 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string):
     }
 
     private _class() {
-      return (this.constructor as typeof KubeObject);
-    };
+      return this.constructor as typeof KubeObject;
+    }
 
     delete() {
       const args: string[] = [this.getName()];
@@ -213,7 +231,7 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string):
         namespace?: string;
       } = {
         name: this.getName(),
-        verb
+        verb,
       };
 
       const namespace = this.getNamespace();
@@ -222,14 +240,18 @@ makeKubeObject<T extends (KubeObjectInterface | KubeEvent)>(objectName: string):
       }
 
       const spec = {
-        resourceAttributes: resourceAttrs
+        resourceAttributes: resourceAttrs,
       };
 
-      return await post('/apis/authorization.k8s.io/v1beta1/selfsubjectaccessreviews', {
-        kind: 'SelfSubjectAccessReview',
-        apiVersion: 'authorization.k8s.io/v1beta1',
-        spec
-      }, false);
+      return await post(
+        '/apis/authorization.k8s.io/v1beta1/selfsubjectaccessreviews',
+        {
+          kind: 'SelfSubjectAccessReview',
+          apiVersion: 'authorization.k8s.io/v1beta1',
+          spec,
+        },
+        false
+      );
     }
 
     static getErrorMessage(err: ApiError | null) {

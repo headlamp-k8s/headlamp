@@ -13,12 +13,13 @@ export default function SecretDetails() {
   return (
     <MainInfoSection
       resource={item}
-      extraInfo={item && _.map(item.data, (value, key) => (
-        {
+      extraInfo={
+        item &&
+        _.map(item.data, (value, key) => ({
           name: key,
-          value: <SecretField value={value} />
-        }
-      ))}
+          value: <SecretField value={value} />,
+        }))
+      }
     />
   );
 }

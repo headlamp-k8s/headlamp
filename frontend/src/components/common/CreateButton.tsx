@@ -40,24 +40,21 @@ export default function CreateButton() {
     }
 
     setOpenDialog(false);
-    dispatch(clusterAction(() => applyFunc(newItemDef),
-      {
+    dispatch(
+      clusterAction(() => applyFunc(newItemDef), {
         startMessage: `Applying ${newItemDef.metadata.name}…`,
         cancelledMessage: `Cancelled applying ${newItemDef.metadata.name}.`,
         successMessage: `Applied ${newItemDef.metadata.name}.`,
         errorMessage: `Failed to apply ${newItemDef.metadata.name}.`,
         cancelUrl,
-      }
-    ));
+      })
+    );
   }
 
   return (
     <React.Fragment>
       <Tooltip title="Create / Apply">
-        <IconButton
-          aria-label="apply"
-          onClick={() => setOpenDialog(true)}
-        >
+        <IconButton aria-label="apply" onClick={() => setOpenDialog(true)}>
           <Icon color="#adadad" icon={plusCircle} width="48" />
         </IconButton>
       </Tooltip>

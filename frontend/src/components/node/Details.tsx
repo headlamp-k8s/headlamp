@@ -24,7 +24,7 @@ export default function NodeDetails() {
   const noMetrics = metricsError?.status === 404;
 
   function getAddresses(item: Node) {
-    return item.status.addresses.map(({type, address}) => {
+    return item.status.addresses.map(({ type, address }) => {
       return {
         name: type,
         value: address,
@@ -32,30 +32,26 @@ export default function NodeDetails() {
     });
   }
 
-  return (
-    !item ? <Loader /> :
+  return !item ? (
+    <Loader />
+  ) : (
     <PageGrid>
       <MainInfoSection
-
-        headerSection={
-          <ChartsSection
-            node={item}
-            metrics={nodeMetrics}
-            noMetrics={noMetrics}
-          />
-        }
+        headerSection={<ChartsSection node={item} metrics={nodeMetrics} noMetrics={noMetrics} />}
         resource={item}
-        extraInfo={item && [
-          {
-            name: 'Ready',
-            value: <NodeReadyLabel node={item} />
-          },
-          {
-            name: 'Pod CIDR',
-            value: item.spec.podCIDR,
-          },
-          ...getAddresses(item)
-        ]}
+        extraInfo={
+          item && [
+            {
+              name: 'Ready',
+              value: <NodeReadyLabel node={item} />,
+            },
+            {
+              name: 'Pod CIDR',
+              value: item.spec.podCIDR,
+            },
+            ...getAddresses(item),
+          ]
+        }
       />
       <SystemInfoSection node={item} />
     </PageGrid>
@@ -76,9 +72,9 @@ function ChartsSection(props: ChartsSectionProps) {
       return '…';
     }
 
-    const readyInfo = node.status.conditions.find(({type}) => type === 'Ready');
+    const readyInfo = node.status.conditions.find(({ type }) => type === 'Ready');
     if (readyInfo) {
-      return timeAgo((readyInfo.lastTransitionTime as string));
+      return timeAgo(readyInfo.lastTransitionTime as string);
     }
 
     return 'Not ready yet!';
@@ -90,21 +86,14 @@ function ChartsSection(props: ChartsSectionProps) {
         container
         justify="space-around"
         style={{
-          marginBottom: '2rem'
+          marginBottom: '2rem',
         }}
       >
         <Grid item>
-          <HeaderLabel
-            value={getUptime()}
-            label="Uptime"
-          />
+          <HeaderLabel value={getUptime()} label="Uptime" />
         </Grid>
         <Grid item>
-          <CpuCircularChart
-            items={node && [node]}
-            itemsMetrics={metrics}
-            noMetrics={noMetrics}
-          />
+          <CpuCircularChart items={node && [node]} itemsMetrics={metrics} noMetrics={noMetrics} />
         </Grid>
         <Grid item>
           <MemoryCircularChart
@@ -146,15 +135,15 @@ function SystemInfoSection(props: SystemInfoSectionProps) {
         rows={[
           {
             name: 'Architecture',
-            value: node.status.nodeInfo.architecture
+            value: node.status.nodeInfo.architecture,
           },
           {
             name: 'Boot ID',
-            value: node.status.nodeInfo.bootID
+            value: node.status.nodeInfo.bootID,
           },
           {
             name: 'System UUID',
-            value: node.status.nodeInfo.systemUUID
+            value: node.status.nodeInfo.systemUUID,
           },
           {
             name: 'OS',
@@ -162,7 +151,7 @@ function SystemInfoSection(props: SystemInfoSectionProps) {
           },
           {
             name: 'Image',
-            value: node.status.nodeInfo.osImage
+            value: node.status.nodeInfo.osImage,
           },
           {
             name: 'Kernel Version',
@@ -174,15 +163,15 @@ function SystemInfoSection(props: SystemInfoSectionProps) {
           },
           {
             name: 'Kube Proxy Version',
-            value: node.status.nodeInfo.kubeProxyVersion
+            value: node.status.nodeInfo.kubeProxyVersion,
           },
           {
             name: 'Kubelet Version',
-            value: node.status.nodeInfo.kubeletVersion
+            value: node.status.nodeInfo.kubeletVersion,
           },
           {
             name: 'Container Runtime Version',
-            value: node.status.nodeInfo.containerRuntimeVersion
+            value: node.status.nodeInfo.containerRuntimeVersion,
           },
         ]}
       />
@@ -196,8 +185,9 @@ interface NodeReadyLabelProps {
 
 export function NodeReadyLabel(props: NodeReadyLabelProps) {
   const { node } = props;
-  const isReady = !!node.status.conditions
-    .find(condition => condition.type === 'Ready' && condition.status === 'True');
+  const isReady = !!node.status.conditions.find(
+    condition => condition.type === 'Ready' && condition.status === 'True'
+  );
 
   let status: StatusLabelProps['status'] = '';
   let label = null;
@@ -209,9 +199,5 @@ export function NodeReadyLabel(props: NodeReadyLabelProps) {
     label = 'No';
   }
 
-  return (
-    <StatusLabel status={status}>
-      {label}
-    </StatusLabel>
-  );
+  return <StatusLabel status={status}>{label}</StatusLabel>;
 }

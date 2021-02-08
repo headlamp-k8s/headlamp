@@ -8,7 +8,7 @@ export default {
   argTypes: { onTabChanged: { action: 'tab changed' } },
 } as Meta;
 
-const Template: Story<TabsProps> = (args) => <Tabs {...args} />;
+const Template: Story<TabsProps> = args => <Tabs {...args} />;
 
 export const BasicTabs = Template.bind({});
 BasicTabs.args = {

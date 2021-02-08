@@ -24,9 +24,11 @@ export default function Overview() {
   const location = useLocation();
   const filterFunc = useFilterFunc();
 
-  function setWorkloads(workloads: WorkloadDict,
-                        {items, kind}: {items: Workload[]; kind: string}) {
-    const data = {...workloads};
+  function setWorkloads(
+    workloads: WorkloadDict,
+    { items, kind }: { items: Workload[]; kind: string }
+  ) {
+    const data = { ...workloads };
     data[kind] = items;
 
     return data;
@@ -46,28 +48,17 @@ export default function Overview() {
 
   const workloads = [DaemonSet, Deployment, Job, CronJob, ReplicaSet, StatefulSet];
   workloads.forEach(workloadClass => {
-    workloadClass.useApiList((items: InstanceType<(typeof workloadClass)>[]) =>
-      dispatch({items, kind: workloadClass.className})
+    workloadClass.useApiList((items: InstanceType<typeof workloadClass>[]) =>
+      dispatch({ items, kind: workloadClass.className })
     );
   });
 
   return (
     <PageGrid>
       <SectionBox py={2}>
-        <Grid
-          container
-          justify="space-around"
-          alignItems="flex-start"
-          spacing={1}
-        >
-          {workloads.map(({className: name}) =>
-            <Grid
-              item
-              lg={2}
-              md={4}
-              xs={6}
-              key={name}
-            >
+        <Grid container justify="space-around" alignItems="flex-start" spacing={1}>
+          {workloads.map(({ className: name }) => (
+            <Grid item lg={2} md={4} xs={6} key={name}>
               <WorkloadCircleChart
                 workloadData={workloadsData[name] || []}
                 // @todo: Use a plural from from the class itself when we have it
@@ -76,24 +67,23 @@ export default function Overview() {
                 totalLabel="Running"
               />
             </Grid>
-          )}
+          ))}
         </Grid>
       </SectionBox>
-      <SectionBox
-        title={<SectionFilterHeader title="Workloads" />}
-      >
+      <SectionBox title={<SectionFilterHeader title="Workloads" />}>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
           filterFunction={filterFunc}
           columns={[
             {
               label: 'Type',
-              getter: (item) => item.kind
+              getter: item => item.kind,
             },
             {
               label: 'Name',
-              getter: (item) =>
-                <ResourceLink resource={item} state={{backLink: {...location}}} />,
+              getter: item => (
+                <ResourceLink resource={item} state={{ backLink: { ...location } }} />
+              ),
               sort: (w1: Workload, w2: Workload) => {
                 if (w1.metadata.name < w2.metadata.name) {
                   return -1;
@@ -101,22 +91,22 @@ export default function Overview() {
                   return 1;
                 }
                 return 0;
-              }
+              },
             },
             {
               label: 'Namespace',
-              getter: (item) => item.metadata.namespace
+              getter: item => item.metadata.namespace,
             },
             {
               label: 'Pods',
-              getter: (item) => item && getPods(item)
+              getter: item => item && getPods(item),
             },
             {
               label: 'Age',
-              getter: (item) => timeAgo(item.metadata.creationTimestamp),
+              getter: item => timeAgo(item.metadata.creationTimestamp),
               sort: (w1: Workload, w2: Workload) =>
                 new Date(w2.metadata.creationTimestamp).getTime() -
-                new Date(w1.metadata.creationTimestamp).getTime()
+                new Date(w1.metadata.creationTimestamp).getTime(),
             },
           ]}
           data={getJointItems()}
