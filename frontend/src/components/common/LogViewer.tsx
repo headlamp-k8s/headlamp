@@ -30,7 +30,7 @@ const useStyle = makeStyles(theme => ({
   },
   containerFormControl: {
     minWidth: '11rem',
-  }
+  },
 }));
 
 export interface LogViewerProps extends DialogProps {
@@ -42,20 +42,13 @@ export interface LogViewerProps extends DialogProps {
 }
 
 export function LogViewer(props: LogViewerProps) {
-  const {
-    logs,
-    title = '',
-    downloadName = 'log',
-    onClose,
-    topActions = [],
-    ...other
-  } = props;
+  const { logs, title = '', downloadName = 'log', onClose, topActions = [], ...other } = props;
   const classes = useStyle();
   const logsBottomRef = React.useRef<HTMLDivElement>(null);
 
   function downloadLog() {
     const element = document.createElement('a');
-    const file = new Blob(logs, {type: 'text/plain'});
+    const file = new Blob(logs, { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
     element.download = `${downloadName}.txt`;
     // Required for FireFox
@@ -68,44 +61,23 @@ export function LogViewer(props: LogViewerProps) {
     if (logsBottomRef && logsBottomRef.current) {
       logsBottomRef.current.scrollIntoView();
     }
-  },
-  [logs]);
+  }, [logs]);
 
   return (
-    <Dialog
-      maxWidth="lg"
-      scroll="paper"
-      fullWidth
-      onBackdropClick={onClose}
-      {...other}
-    >
+    <Dialog maxWidth="lg" scroll="paper" fullWidth onBackdropClick={onClose} {...other}>
       <DialogTitle>{title}</DialogTitle>
-      <DialogContent
-        className={classes.dialogContent}
-      >
-        <Grid
-          container
-          justify="space-between"
-          alignItems="center"
-          wrap="nowrap"
-        >
-          <Grid
-            item
-            container
-            spacing={1}
-          >
-            {topActions.map((component, i) =>
+      <DialogContent className={classes.dialogContent}>
+        <Grid container justify="space-between" alignItems="center" wrap="nowrap">
+          <Grid item container spacing={1}>
+            {topActions.map((component, i) => (
               <Grid item key={i}>
                 {component}
               </Grid>
-            )}
+            ))}
           </Grid>
           <Grid item xs>
             <Tooltip title="Download">
-              <IconButton
-                aria-label="download"
-                onClick={downloadLog}
-              >
+              <IconButton aria-label="download" onClick={downloadLog}>
                 <Icon icon={fileDownloadOutline} />
               </IconButton>
             </Tooltip>
@@ -113,18 +85,17 @@ export function LogViewer(props: LogViewerProps) {
         </Grid>
         <Box className={classes.terminal}>
           <pre>
-            {logs.map((item, i) =>
-              <Ansi className={classes.terminalCode} key={i} linkify={false}>{item}</Ansi>
-            )}
+            {logs.map((item, i) => (
+              <Ansi className={classes.terminalCode} key={i} linkify={false}>
+                {item}
+              </Ansi>
+            ))}
           </pre>
           <div ref={logsBottomRef} />
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={onClose}
-          color="primary"
-        >
+        <Button onClick={onClose} color="primary">
           Close
         </Button>
       </DialogActions>

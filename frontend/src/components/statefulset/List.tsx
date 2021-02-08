@@ -17,13 +17,7 @@ export default function StatefulSetList() {
   }
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Stateful Sets"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Stateful Sets" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -31,7 +25,7 @@ export default function StatefulSetList() {
         columns={[
           {
             label: 'Name',
-            getter: (statefulSet) => <Link kubeObject={statefulSet} />,
+            getter: statefulSet => <Link kubeObject={statefulSet} />,
             sort: (s1: StatefulSet, s2: StatefulSet) => {
               if (s1.metadata.name < s2.metadata.name) {
                 return -1;
@@ -39,26 +33,26 @@ export default function StatefulSetList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (statefulSet) => statefulSet.getNamespace()
+            getter: statefulSet => statefulSet.getNamespace(),
           },
           {
             label: 'Pods',
-            getter: (statefulSet) => renderPods(statefulSet)
+            getter: statefulSet => renderPods(statefulSet),
           },
           {
             label: 'Replicas',
-            getter: (statefulSet) => statefulSet.spec.replicas
+            getter: statefulSet => statefulSet.spec.replicas,
           },
           {
             label: 'Age',
-            getter: (statefulSet) => statefulSet.getAge(),
+            getter: statefulSet => statefulSet.getAge(),
             sort: (s1: StatefulSet, s2: StatefulSet) =>
               new Date(s2.metadata.creationTimestamp).getTime() -
-              new Date(s1.metadata.creationTimestamp).getTime()
+              new Date(s1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={statefulSets}

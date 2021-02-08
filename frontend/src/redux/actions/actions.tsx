@@ -71,12 +71,15 @@ export function resetFilter() {
   return { type: FILTER_RESET };
 }
 
-export function clusterAction(callback: CallbackAction['callback'], actionOptions: CallbackActionOptions = {}) {
-  return { type: CLUSTER_ACTION, callback, ...actionOptions};
+export function clusterAction(
+  callback: CallbackAction['callback'],
+  actionOptions: CallbackActionOptions = {}
+) {
+  return { type: CLUSTER_ACTION, callback, ...actionOptions };
 }
 
 export function updateClusterAction(actionOptions: ClusterAction) {
-  return { type: CLUSTER_ACTION_UPDATE, ...actionOptions};
+  return { type: CLUSTER_ACTION_UPDATE, ...actionOptions };
 }
 
 export function setSidebarSelected(selected: SidebarType['selected']) {
@@ -84,7 +87,7 @@ export function setSidebarSelected(selected: SidebarType['selected']) {
 }
 
 export function setWhetherSidebarOpen(isSidebarOpen: boolean) {
-  return { type: UI_SIDEBAR_SET_EXPANDED, isSidebarOpen};
+  return { type: UI_SIDEBAR_SET_EXPANDED, isSidebarOpen };
 }
 
 export function setSidebarVisible(isVisible: SidebarType['isVisible']) {
@@ -96,22 +99,22 @@ export function setSidebarItem(item: SidebarEntry) {
   if (item.parent === undefined) {
     item['parent'] = null;
   }
-  return { type: UI_SIDEBAR_SET_ITEM, item};
+  return { type: UI_SIDEBAR_SET_ITEM, item };
 }
 
 export function setRoute(routeSpec: any) {
   // @todo: Define routeSpec later.
-  return { type: UI_ROUTER_SET_ROUTE, route: routeSpec};
+  return { type: UI_ROUTER_SET_ROUTE, route: routeSpec };
 }
 
 export function setDetailsViewHeaderAction(actionName: string, actionFunc: HeaderActionFunc) {
-  return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, name: actionName, action: actionFunc};
+  return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, name: actionName, action: actionFunc };
 }
 
 export function setAppBarAction(actionName: string, actionFunc: HeaderActionFunc) {
-  return { type: UI_APP_BAR_SET_ACTION, name: actionName, action: actionFunc};
+  return { type: UI_APP_BAR_SET_ACTION, name: actionName, action: actionFunc };
 }
 
 export function setConfig(config: object) {
-  return { type: CONFIG_NEW, config};
+  return { type: CONFIG_NEW, config };
 }

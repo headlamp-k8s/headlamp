@@ -34,7 +34,7 @@ export default function Link(props: React.PropsWithChildren<LinkProps | LinkObje
       to={{
         pathname: createRouteURL(routeName, params),
         search,
-        state
+        state,
       }}
     >
       {props.children}

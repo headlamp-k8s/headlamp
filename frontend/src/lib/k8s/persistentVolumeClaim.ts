@@ -24,7 +24,9 @@ export interface KubePersistentVolumeClaim extends KubeObjectInterface {
   };
 }
 
-class PersistentVolumeClaim extends makeKubeObject<KubePersistentVolumeClaim>('persistentVolumeClaim') {
+class PersistentVolumeClaim extends makeKubeObject<KubePersistentVolumeClaim>(
+  'persistentVolumeClaim'
+) {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'persistentvolumeclaims');
 
   get spec() {

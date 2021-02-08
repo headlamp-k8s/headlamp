@@ -32,12 +32,12 @@ const commonRules = {
     success: {
       light: green['50'],
       main: green['500'],
-      ...green
+      ...green,
     },
     warning: {
       main: orange['500'],
       light: orange['50'],
-      ...orange
+      ...orange,
     },
     sidebarLink: {
       main: grey['500'],
@@ -48,13 +48,13 @@ const commonRules = {
       light: red['50'],
     },
     resourceToolTip: {
-      color: 'rgba(0, 0, 0, 0.87)'
+      color: 'rgba(0, 0, 0, 0.87)',
     },
     sidebarBg: '#000',
     normalEventBg: '#F0F0F0',
     chartStyles: {
       defaultFillColor: grey['300'],
-      labelColor: '#000'
+      labelColor: '#000',
     },
     metadataBgColor: grey['300'],
     headerStyle: {
@@ -78,7 +78,7 @@ const commonRules = {
     },
   },
   typography: {
-    fontFamily: ['Overpass', 'sans-serif'].join(', ')
+    fontFamily: ['Overpass', 'sans-serif'].join(', '),
   },
   shape: {
     borderRadius: 0,
@@ -97,17 +97,17 @@ const darkTheme = createMuiTheme({
     chartStyles: {
       defaultFillColor: 'rgba(20, 20, 20, 0.1)',
       fillColor: '#3DA3F5',
-      labelColor: '#fff'
+      labelColor: '#fff',
     },
     success: {
       light: green['500'],
       main: green['50'],
-      ...green
+      ...green,
     },
     warning: {
       main: orange['500'],
       light: 'rgba(255, 152, 0, 0.15)',
-      ...orange
+      ...orange,
     },
     error: {
       main: red['500'],
@@ -116,7 +116,7 @@ const darkTheme = createMuiTheme({
     normalEventBg: '#333333',
     metadataBgColor: '#333',
     resourceToolTip: {
-      color: 'rgba(255, 255, 255, 0.87)'
+      color: 'rgba(255, 255, 255, 0.87)',
     },
     type: 'dark',
   },
@@ -127,8 +127,8 @@ export interface ThemesConf {
 }
 
 const themesConf: ThemesConf = {
-  'light': lightTheme,
-  'dark': darkTheme,
+  light: lightTheme,
+  dark: darkTheme,
 };
 
 export default themesConf;

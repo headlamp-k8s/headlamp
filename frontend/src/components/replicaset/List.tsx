@@ -15,13 +15,7 @@ export default function ReplicaSetList() {
   }
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Replica Sets"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Replica Sets" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -29,7 +23,7 @@ export default function ReplicaSetList() {
         columns={[
           {
             label: 'Name',
-            getter: (replicaSet) => <Link kubeObject={replicaSet} />,
+            getter: replicaSet => <Link kubeObject={replicaSet} />,
             sort: (r1: ReplicaSet, r2: ReplicaSet) => {
               if (r1.metadata.name < r2.metadata.name) {
                 return -1;
@@ -37,26 +31,26 @@ export default function ReplicaSetList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (replicaSet) => replicaSet.getNamespace()
+            getter: replicaSet => replicaSet.getNamespace(),
           },
           {
             label: 'Generation',
-            getter: (replicaSet) => replicaSet.status.observedGeneration
+            getter: replicaSet => replicaSet.status.observedGeneration,
           },
           {
             label: 'Replicas',
-            getter: (replicaSet) => getReplicas(replicaSet)
+            getter: replicaSet => getReplicas(replicaSet),
           },
           {
             label: 'Age',
-            getter: (replicaSet) => replicaSet.getAge(),
+            getter: replicaSet => replicaSet.getAge(),
             sort: (r1: ReplicaSet, r2: ReplicaSet) =>
               new Date(r2.metadata.creationTimestamp).getTime() -
-              new Date(r1.metadata.creationTimestamp).getTime()
+              new Date(r1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={replicaSets}

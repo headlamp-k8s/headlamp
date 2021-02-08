@@ -11,13 +11,7 @@ export default function ServiceAccountList() {
   const filterFunc = useFilterFunc();
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Service Accounts"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Service Accounts" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -25,7 +19,7 @@ export default function ServiceAccountList() {
         columns={[
           {
             label: 'Name',
-            getter: (serviceAccount) => <Link kubeObject={serviceAccount} />,
+            getter: serviceAccount => <Link kubeObject={serviceAccount} />,
             sort: (s1: ServiceAccount, s2: ServiceAccount) => {
               if (s1.metadata.name < s2.metadata.name) {
                 return -1;
@@ -33,18 +27,18 @@ export default function ServiceAccountList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (serviceAccount) => serviceAccount.getNamespace()
+            getter: serviceAccount => serviceAccount.getNamespace(),
           },
           {
             label: 'Age',
-            getter: (serviceAccount) => serviceAccount.getAge(),
+            getter: serviceAccount => serviceAccount.getAge(),
             sort: (s1: ServiceAccount, s2: ServiceAccount) =>
               new Date(s2.metadata.creationTimestamp).getTime() -
-              new Date(s1.metadata.creationTimestamp).getTime()
+              new Date(s1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={serviceAccounts}

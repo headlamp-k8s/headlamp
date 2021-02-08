@@ -1,7 +1,7 @@
 import Registry from './registry';
 
 export abstract class Plugin {
-    abstract initialize(register: Registry): boolean;
+  abstract initialize(register: Registry): boolean;
 }
 
 declare global {
@@ -25,7 +25,7 @@ window.pluginLib = {
   ReactRedux: require('react-redux'),
   Utils: require('../lib/util'),
   Iconify: require('@iconify/react'),
-  Lodash: require('lodash')
+  Lodash: require('lodash'),
 };
 
 window.plugins = {};
@@ -37,10 +37,10 @@ function registerPlugin(pluginId: string, pluginObj: Plugin) {
 window.registerPlugin = registerPlugin;
 
 function loadScripts(array: string[], onLoadFinished: (value?: any) => void) {
-  var loader = function(src: string, handler: () => void) {
+  var loader = function (src: string, handler: () => void) {
     const script: HTMLScriptElement = document.createElement('script');
     script.src = src;
-    script.onload = (script as any).onreadystatechange = function() {
+    script.onload = (script as any).onreadystatechange = function () {
       (script as any).onreadystatechange = script.onload = null;
       handler();
     };
@@ -59,8 +59,8 @@ function loadScripts(array: string[], onLoadFinished: (value?: any) => void) {
 function loadExternalPlugins() {
   return new Promise(resolve => {
     fetch('/plugins/list')
-      .then((response) => response.json())
-      .then((pluginsScriptURLS) => {
+      .then(response => response.json())
+      .then(pluginsScriptURLS => {
         loadScripts(pluginsScriptURLS || [], resolve);
       });
   });

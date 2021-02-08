@@ -50,7 +50,7 @@ const useStyle = makeStyles(theme => ({
 
 type KubeObjectIsh = Partial<KubeObjectInterface>;
 
-interface EditorDialogProps extends DialogProps{
+interface EditorDialogProps extends DialogProps {
   item: KubeObjectIsh | null;
   onClose: () => void;
   onSave: ((...args: any[]) => void) | null;
@@ -103,15 +103,13 @@ export default function EditorDialog(props: EditorDialogProps) {
         setPreviousVersion(item!.metadata!.resourceVersion);
       }
     }
-  },
-  [item, previousVersion, originalCode, code]);
+  }, [item, previousVersion, originalCode, code]);
 
   function isReadOnly() {
     return onSave === null;
   }
 
-  function onChange(value: string | undefined,
-                    ev: Monaco.editor.IModelContentChangedEvent): void {
+  function onChange(value: string | undefined, ev: Monaco.editor.IModelContentChangedEvent): void {
     setCode(value as string);
 
     if (error && getObjectFromCode(value as string)) {
@@ -142,12 +140,12 @@ export default function EditorDialog(props: EditorDialogProps) {
 
     const codeObj = getObjectFromCode(code);
 
-    const {kind, apiVersion} = (codeObj || {}) as KubeObjectInterface;
+    const { kind, apiVersion } = (codeObj || {}) as KubeObjectInterface;
     if (codeObj === null || (!!kind && !!apiVersion)) {
       setDocSpecs({
         error: codeObj === null,
         kind,
-        apiVersion
+        apiVersion,
       });
     }
   }
@@ -184,31 +182,22 @@ export default function EditorDialog(props: EditorDialogProps) {
   const errorLabel = error || errorMessage;
   let dialogTitle = title;
   if (!dialogTitle && item) {
-    dialogTitle = isReadOnly() ? `View: ${item.metadata?.name || 'New Object'}`
+    dialogTitle = isReadOnly()
+      ? `View: ${item.metadata?.name || 'New Object'}`
       : `Edit: ${item.metadata?.name || 'New Object'}`;
   }
 
   return (
-    <Dialog
-      maxWidth="lg"
-      scroll="paper"
-      fullWidth
-      onBackdropClick={onClose}
-      {...other}
-    >
-      {!item ?
+    <Dialog maxWidth="lg" scroll="paper" fullWidth onBackdropClick={onClose} {...other}>
+      {!item ? (
         <Loader />
-        :
+      ) : (
         <React.Fragment>
-          <DialogTitle>
-            {dialogTitle}
-          </DialogTitle>
-          <DialogContent
-            className={classes.dialogContent}
-          >
-            {isReadOnly() ?
+          <DialogTitle>{dialogTitle}</DialogTitle>
+          <DialogContent className={classes.dialogContent}>
+            {isReadOnly() ? (
               makeEditor()
-              :
+            ) : (
               <Tabs
                 onTabChanged={handleTabChange}
                 tabProps={{
@@ -217,69 +206,57 @@ export default function EditorDialog(props: EditorDialogProps) {
                 tabs={[
                   {
                     label: 'Editor',
-                    component: makeEditor()
+                    component: makeEditor(),
                   },
                   {
                     label: 'Documentation',
-                    component:
-                <Box p={2} className={classes.scrollable} height="600px">
-                  <DocsViewer
-                    docSpecs={docSpecs}
-                  />
-                </Box>
+                    component: (
+                      <Box p={2} className={classes.scrollable} height="600px">
+                        <DocsViewer docSpecs={docSpecs} />
+                      </Box>
+                    ),
                   },
                 ]}
               />
-            }
+            )}
           </DialogContent>
           <DialogActions>
-            {!isReadOnly() &&
-            <ConfirmButton
-              disabled={originalCode === code}
-              color="secondary"
-              aria-label="undo"
-              onConfirm={onUndo}
-              confirmTitle="Are you sure?"
-              confirmDescription="This will discard your changes in the editor. Do you want to proceed?"
-            >
-              Undo Changes
-            </ConfirmButton>
-            }
-            <div style={{flex: '1 0 0'}} />
-            { errorLabel &&
-            <Typography color="error">{errorLabel}</Typography>
-            }
-            <div style={{flex: '1 0 0'}} />
-            <Button
-              onClick={onClose}
-              color="primary"
-              autoFocus
-            >
+            {!isReadOnly() && (
+              <ConfirmButton
+                disabled={originalCode === code}
+                color="secondary"
+                aria-label="undo"
+                onConfirm={onUndo}
+                confirmTitle="Are you sure?"
+                confirmDescription="This will discard your changes in the editor. Do you want to proceed?"
+              >
+                Undo Changes
+              </ConfirmButton>
+            )}
+            <div style={{ flex: '1 0 0' }} />
+            {errorLabel && <Typography color="error">{errorLabel}</Typography>}
+            <div style={{ flex: '1 0 0' }} />
+            <Button onClick={onClose} color="primary" autoFocus>
               Close
             </Button>
-            {!isReadOnly() &&
-            <Button
-              onClick={handleSave}
-              color="primary"
-              disabled={originalCode === code || !!error}
-            >
-              { saveLabel || 'Save & Apply'}
-            </Button>
-            }
+            {!isReadOnly() && (
+              <Button
+                onClick={handleSave}
+                color="primary"
+                disabled={originalCode === code || !!error}
+              >
+                {saveLabel || 'Save & Apply'}
+              </Button>
+            )}
           </DialogActions>
         </React.Fragment>
-      }
+      )}
     </Dialog>
   );
 }
 
 export function ViewDialog(props: Omit<EditorDialogProps, 'onSave'>) {
-  return (
-    <EditorDialog
-      {...props}
-      onSave={null}
-    />
-  );
+  return <EditorDialog {...props} onSave={null} />;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -291,7 +268,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 // @todo: Declare strict types.
-function DocsViewer(props: {docSpecs: any}) {
+function DocsViewer(props: { docSpecs: any }) {
   const { docSpecs } = props;
   const classes = useStyles();
   const [docs, setDocs] = React.useState<object | null>(null);
@@ -305,7 +282,9 @@ function DocsViewer(props: {docSpecs: any}) {
       return;
     }
     if (!docSpecs.apiVersion || !docSpecs.kind) {
-      setDocsError('Cannot load documentation: Please make sure the YAML is valid and has the kind and apiVersion set.');
+      setDocsError(
+        'Cannot load documentation: Please make sure the YAML is valid and has the kind and apiVersion set.'
+      );
       return;
     }
 
@@ -313,11 +292,10 @@ function DocsViewer(props: {docSpecs: any}) {
       .then(result => {
         setDocs(result?.properties || {});
       })
-      .catch((err) => {
+      .catch(err => {
         setDocsError(`Cannot load documentation: ${err}`);
       });
-  },
-  [docSpecs]);
+  }, [docSpecs]);
 
   function makeItems(name: string, value: any, key: string) {
     return (
@@ -327,11 +305,7 @@ function DocsViewer(props: {docSpecs: any}) {
         label={
           <div>
             <Typography display="inline">{name}</Typography>&nbsp;
-            <Typography
-              display="inline"
-              color="textSecondary"
-              variant="caption"
-            >
+            <Typography display="inline" color="textSecondary" variant="caption">
               ({value.type})
             </Typography>
           </div>
@@ -345,25 +319,22 @@ function DocsViewer(props: {docSpecs: any}) {
     );
   }
 
-  return (
-    docs === null && docsError === null ?
-      <Loader />
-      : !_.isEmpty(docsError) ?
-        <Empty color="error">{docsError}</Empty>
-        : _.isEmpty(docs) ?
-          <Empty>No documentation for type {docSpecs.kind.trim()}.</Empty>
-          :
-          <Box p={4}>
-            <Typography>Showing documentation for: {docSpecs.kind.trim()}</Typography>
-            <TreeView
-              className={classes.root}
-              defaultCollapseIcon={<Icon icon={chevronDown} />}
-              defaultExpandIcon={<Icon icon={chevronRight} />}
-            >
-              {Object.entries(docs || {})
-                .map(([name, value], i) => makeItems(name, value, i.toString()))
-              }
-            </TreeView>
-          </Box>
+  return docs === null && docsError === null ? (
+    <Loader />
+  ) : !_.isEmpty(docsError) ? (
+    <Empty color="error">{docsError}</Empty>
+  ) : _.isEmpty(docs) ? (
+    <Empty>No documentation for type {docSpecs.kind.trim()}.</Empty>
+  ) : (
+    <Box p={4}>
+      <Typography>Showing documentation for: {docSpecs.kind.trim()}</Typography>
+      <TreeView
+        className={classes.root}
+        defaultCollapseIcon={<Icon icon={chevronDown} />}
+        defaultExpandIcon={<Icon icon={chevronRight} />}
+      >
+        {Object.entries(docs || {}).map(([name, value], i) => makeItems(name, value, i.toString()))}
+      </TreeView>
+    </Box>
   );
 }

@@ -18,7 +18,15 @@ import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, HashRouter, Redirect, Route, RouteProps, Switch, useHistory } from 'react-router-dom';
+import {
+  BrowserRouter,
+  HashRouter,
+  Redirect,
+  Route,
+  RouteProps,
+  Switch,
+  useHistory,
+} from 'react-router-dom';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
@@ -36,14 +44,15 @@ import store from './redux/stores/store';
 const useStyle = makeStyles(theme => ({
   root: {
     background: theme.palette.background.default,
-    paddingLeft: (props: {isSidebarOpen: boolean}) => props.isSidebarOpen ? `${drawerWidth}px` : '0px',
+    paddingLeft: (props: { isSidebarOpen: boolean }) =>
+      props.isSidebarOpen ? `${drawerWidth}px` : '0px',
     marginLeft: drawerWidth,
     '& > *': {
       color: theme.palette.text.primary,
-    }
+    },
   },
   content: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   toolbar: theme.mixins.toolbar,
 }));
@@ -53,11 +62,12 @@ function RouteSwitcher() {
 
   return (
     <Switch>
-      {Object.values(ROUTES).concat(Object.values(routes))
+      {Object.values(ROUTES)
+        .concat(Object.values(routes))
         .map((route, index) =>
-          route.name === 'OidcAuth' ?
-            <Route path={route.path} component={() => <route.component/>} key={index}/>
-            :
+          route.name === 'OidcAuth' ? (
+            <Route path={route.path} component={() => <route.component />} key={index} />
+          ) : (
             <AuthRoute
               key={index}
               path={getRoutePath(route)}
@@ -67,6 +77,7 @@ function RouteSwitcher() {
               exact={!!route.exact}
               children={<route.component />}
             />
+          )
         )}
     </Switch>
   );
@@ -100,21 +111,23 @@ function TopBar() {
 
   return (
     <>
-      { // @todo: Use a grid to compose the toolbar
-        Object.values(appBarActions).map((action, i) =>
-          <React.Fragment key={i}>{action()}</React.Fragment>)
+      {
+        // @todo: Use a grid to compose the toolbar
+        Object.values(appBarActions).map((action, i) => (
+          <React.Fragment key={i}>{action()}</React.Fragment>
+        ))
       }
       <IconButton
-        aria-label='User menu'
-        aria-controls='menu-appbar'
-        aria-haspopup='true'
+        aria-label="User menu"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
         onClick={handleMenu}
-        color='inherit'
+        color="inherit"
       >
         <Icon icon={accountIcon} />
       </IconButton>
       <Menu
-        id='customized-menu'
+        id="customized-menu"
         anchorEl={menuAnchorEl}
         open={!!menuAnchorEl}
         onClose={handleClose}
@@ -127,19 +140,11 @@ function TopBar() {
           horizontal: 'right',
         }}
       >
-        <MenuItem
-          component="a"
-          onClick={logout}
-          disabled={!hasToken()}
-          dense
-        >
+        <MenuItem component="a" onClick={logout} disabled={!hasToken()} dense>
           <ListItemIcon>
             <Icon icon={logoutIcon} />
           </ListItemIcon>
-          <ListItemText
-            primary="Log out"
-            secondary={hasToken() ? null : '(No token set up)'}
-          />
+          <ListItemText primary="Log out" secondary={hasToken() ? null : '(No token set up)'} />
         </MenuItem>
       </Menu>
     </>
@@ -151,7 +156,7 @@ interface ThemeChangeButtonProps {
 }
 
 function ThemeChangeButton(props: ThemeChangeButtonProps) {
-  const {onChange} = props;
+  const { onChange } = props;
   type iconType = typeof darkIcon;
 
   const counterIcons: {
@@ -176,10 +181,7 @@ function ThemeChangeButton(props: ThemeChangeButtonProps) {
   }
 
   return (
-    <IconButton
-      aria-label="change-theme"
-      onClick={() => changeTheme()}
-    >
+    <IconButton aria-label="change-theme" onClick={() => changeTheme()}>
       <Icon icon={icon} />
     </IconButton>
   );
@@ -192,12 +194,11 @@ interface AppContainerProps {
 function AppContainer(props: AppContainerProps) {
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
   const classes = useStyle({ isSidebarOpen });
-  const {setThemeName} = props;
-  const Router = ({children} : React.PropsWithChildren<{}>) => isElectron() ?
-    <HashRouter>{children}</HashRouter> :
-    <BrowserRouter>{children}</BrowserRouter>;
+  const { setThemeName } = props;
+  const Router = ({ children }: React.PropsWithChildren<{}>) =>
+    isElectron() ? <HashRouter>{children}</HashRouter> : <BrowserRouter>{children}</BrowserRouter>;
 
-  localStorage.setItem('sidebar', JSON.stringify({'shrink': isSidebarOpen}));
+  localStorage.setItem('sidebar', JSON.stringify({ shrink: isSidebarOpen }));
 
   return (
     <SnackbarProvider
@@ -210,24 +211,18 @@ function AppContainer(props: AppContainerProps) {
         <Box display="flex">
           <CssBaseline />
 
-          <AppBar
-            position="fixed"
-            className={classes.root}
-            elevation={1}
-          >
+          <AppBar position="fixed" className={classes.root} elevation={1}>
             <Toolbar>
-              <div style={{flex: '1 0 0'}} />
+              <div style={{ flex: '1 0 0' }} />
               <ClusterTitle />
-              <div style={{flex: '1 0 0'}} />
-              <ThemeChangeButton
-                onChange={(theme: string) => setThemeName(theme)}
-              />
+              <div style={{ flex: '1 0 0' }} />
+              <ThemeChangeButton onChange={(theme: string) => setThemeName(theme)} />
               <TopBar />
             </Toolbar>
           </AppBar>
           <Sidebar />
           <main className={classes.content}>
-            <AlertNotification/>
+            <AlertNotification />
             <Box p={3}>
               <div className={classes.toolbar} />
               <Container maxWidth="lg">
@@ -248,18 +243,16 @@ function App() {
 
   React.useEffect(() => {
     initializePlugins();
-  },
-  [themeName]);
+  }, [themeName]);
 
   React.useEffect(() => {
     console.log(themes[themeName]);
-  },
-  [themeName]);
+  }, [themeName]);
 
   return (
     <Provider store={store}>
       <ThemeProvider theme={themes[themeName]}>
-        <AppContainer setThemeName={setThemeName}/>
+        <AppContainer setThemeName={setThemeName} />
       </ThemeProvider>
     </Provider>
   );
@@ -289,7 +282,7 @@ function AuthRoute(props: AuthRouteProps) {
       const clusterName = getCluster();
       if (!!clusterName) {
         const cluster = clusters ? clusters[clusterName] : undefined;
-        const requiresToken = (cluster?.useToken === undefined || cluster?.useToken);
+        const requiresToken = cluster?.useToken === undefined || cluster?.useToken;
         if (!!getToken(clusterName) || !requiresToken) {
           return children;
         }
@@ -300,7 +293,7 @@ function AuthRoute(props: AuthRouteProps) {
       <Redirect
         to={{
           pathname: createRouteURL(redirectRoute),
-          state: { from: location }
+          state: { from: location },
         }}
       />
     );
@@ -308,12 +301,7 @@ function AuthRoute(props: AuthRouteProps) {
 
   // If no auth is required for the view, or the token is set up, then
   // render the assigned component. Otherwise redirect to the login route.
-  return (
-    <Route
-      {...other}
-      render={getRenderer}
-    />
-  );
+  return <Route {...other} render={getRenderer} />;
 }
 
 export default App;

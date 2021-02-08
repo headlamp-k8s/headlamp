@@ -14,19 +14,21 @@ export default function ConfigDetails() {
 
   ConfigMap.useApiGet(setItem, name, namespace);
 
-  return (
-    !item ? <Loader /> :
+  return !item ? (
+    <Loader />
+  ) : (
     <PageGrid>
       <MainInfoSection resource={item} />
       <SectionBox title="Data">
-        {!itemData ?
+        {!itemData ? (
           <Empty>No data in this config map</Empty>
-          : Object.keys(itemData).map((key, i) =>
+        ) : (
+          Object.keys(itemData).map((key, i) => (
             <Box py={2} key={i}>
               <DataField label={key} value={itemData[key]} />
             </Box>
-          )
-        }
+          ))
+        )}
       </SectionBox>
     </PageGrid>
   );

@@ -19,7 +19,7 @@ export default function RoleList() {
 
   function setupRolesWithKind(newRoles: Role[] | null, kind: string) {
     const currentRoles: RolesDict = roles || {};
-    const data = {...currentRoles};
+    const data = { ...currentRoles };
 
     data[kind] = newRoles;
     setRoles(data);
@@ -63,13 +63,7 @@ export default function RoleList() {
   ClusterRole.useApiList(setupClusterRoles, setClusterRolesError);
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Roles"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Roles" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -77,20 +71,21 @@ export default function RoleList() {
         columns={[
           {
             label: 'Type',
-            getter: (item) => item.kind
+            getter: item => item.kind,
           },
           {
             label: 'Name',
-            getter: (item) =>
+            getter: item => (
               <Link
                 routeName={item.metadata.namespace ? 'role' : 'clusterrole'}
                 params={{
                   namespace: item.metadata.namespace || '',
-                  name: item.metadata.name
+                  name: item.metadata.name,
                 }}
               >
                 {item.metadata.name}
-              </Link>,
+              </Link>
+            ),
             sort: (r1: Role, r2: Role) => {
               if (r1.metadata.name < r2.metadata.name) {
                 return -1;
@@ -98,18 +93,18 @@ export default function RoleList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (item) => item.metadata.namespace
+            getter: item => item.metadata.namespace,
           },
           {
             label: 'Age',
-            getter: (item) => timeAgo(item.metadata.creationTimestamp),
+            getter: item => timeAgo(item.metadata.creationTimestamp),
             sort: (r1: Role, r2: Role) =>
               new Date(r2.metadata.creationTimestamp).getTime() -
-              new Date(r1.metadata.creationTimestamp).getTime()
+              new Date(r1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={getJointItems()}

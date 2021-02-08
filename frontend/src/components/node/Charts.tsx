@@ -9,7 +9,7 @@ import { PercentageBar } from '../common/Chart';
 interface UsageBarChartProps {
   node: Node;
   nodeMetrics: KubeMetrics[] | null;
-  resourceType: keyof (KubeMetrics['usage']);
+  resourceType: keyof KubeMetrics['usage'];
   noMetrics?: boolean;
 }
 
@@ -31,22 +31,18 @@ export function UsageBarChart(props: UsageBarChartProps) {
   function tooltipFunc() {
     return (
       <Typography>
-        {getResourceStr(used, resourceType)} of {getResourceStr(capacity, resourceType)}{' '}
-        ({getPercentStr(used, capacity)})
+        {getResourceStr(used, resourceType)} of {getResourceStr(capacity, resourceType)} (
+        {getPercentStr(used, capacity)})
       </Typography>
     );
   }
 
-  return ( noMetrics ?
+  return noMetrics ? (
     <>
-      <Typography display="inline" >{getResourceStr(capacity, resourceType)}</Typography>
+      <Typography display="inline">{getResourceStr(capacity, resourceType)}</Typography>
       <TooltipIcon>Install the metrics-server to get usage data.</TooltipIcon>
     </>
-    :
-    <PercentageBar
-      data={data}
-      total={capacity}
-      tooltipFunc={tooltipFunc}
-    />
+  ) : (
+    <PercentageBar data={data} total={capacity} tooltipFunc={tooltipFunc} />
   );
 }

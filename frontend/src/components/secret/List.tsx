@@ -11,13 +11,7 @@ export default function SecretList() {
   const filterFunc = useFilterFunc();
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Secrets"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Secrets" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -25,7 +19,7 @@ export default function SecretList() {
         columns={[
           {
             label: 'Name',
-            getter: (secret) => <Link kubeObject={secret} />,
+            getter: secret => <Link kubeObject={secret} />,
             sort: (s1: Secret, s2: Secret) => {
               if (s1.metadata.name < s2.metadata.name) {
                 return -1;
@@ -33,22 +27,22 @@ export default function SecretList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (secret) => secret.getNamespace()
+            getter: secret => secret.getNamespace(),
           },
           {
             label: 'Type',
-            getter: (secret) => secret.type
+            getter: secret => secret.type,
           },
           {
             label: 'Age',
-            getter: (secret) => secret.getAge(),
+            getter: secret => secret.getAge(),
             sort: (s1: Secret, s2: Secret) =>
               new Date(s2.metadata.creationTimestamp).getTime() -
-              new Date(s1.metadata.creationTimestamp).getTime()
+              new Date(s1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={secrets}

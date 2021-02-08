@@ -13,16 +13,18 @@ export default function StatefulSetDetails() {
   return (
     <MainInfoSection
       resource={item}
-      extraInfo={item && [
-        {
-          name: 'Update Strategy',
-          value: item.spec.updateStrategy.type,
-        },
-        {
-          name: 'Selector',
-          value: <MetadataDictGrid dict={item.spec.selector.matchLabels as StringDict} />,
-        },
-      ]}
+      extraInfo={
+        item && [
+          {
+            name: 'Update Strategy',
+            value: item.spec.updateStrategy.type,
+          },
+          {
+            name: 'Selector',
+            value: <MetadataDictGrid dict={item.spec.selector.matchLabels as StringDict} />,
+          },
+        ]
+      }
     />
   );
 }

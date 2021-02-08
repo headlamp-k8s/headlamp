@@ -13,20 +13,20 @@ export default function DaemonSetDetails() {
     <PageGrid>
       <MainInfoSection
         resource={item}
-        extraInfo={item && [
-          {
-            name: 'Update Strategy',
-            value: item?.spec.updateStrategy.type,
-          },
-          {
-            name: 'Selector',
-            value: <MetadataDictGrid dict={item.spec.selector.matchLabels || {}} />,
-          },
-        ]}
+        extraInfo={
+          item && [
+            {
+              name: 'Update Strategy',
+              value: item?.spec.updateStrategy.type,
+            },
+            {
+              name: 'Selector',
+              value: <MetadataDictGrid dict={item.spec.selector.matchLabels || {}} />,
+            },
+          ]
+        }
       />
-      <ContainersSection
-        resource={item?.jsonData}
-      />
+      <ContainersSection resource={item?.jsonData} />
     </PageGrid>
   );
 }

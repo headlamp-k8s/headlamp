@@ -8,10 +8,10 @@ import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function RoleDetails() {
-  const {
-    namespace = undefined,
-    name
-  } = useParams<{ namespace: string | undefined; name: string }>();
+  const { namespace = undefined, name } = useParams<{
+    namespace: string | undefined;
+    name: string;
+  }>();
   const [item, setItem] = React.useState<Role | null>(null);
 
   let cls = Role;
@@ -21,32 +21,30 @@ export default function RoleDetails() {
 
   cls.useApiGet(setItem, name!, namespace);
 
-  return (
-    !item ? <Loader /> :
+  return !item ? (
+    <Loader />
+  ) : (
     <PageGrid>
-      <MainInfoSection
-
-        resource={item}
-      />
+      <MainInfoSection resource={item} />
       <SectionBox title="Rules">
         <SimpleTable
           columns={[
             {
               label: 'API Groups',
-              getter: ({apiGroups = []}) => apiGroups.join(', ')
+              getter: ({ apiGroups = [] }) => apiGroups.join(', '),
             },
             {
               label: 'Resources',
-              getter: ({resources = []}) => resources.join(', ')
+              getter: ({ resources = [] }) => resources.join(', '),
             },
             {
               label: 'Non Resources',
-              getter: ({nonResources = []}) => nonResources.join(', ')
+              getter: ({ nonResources = [] }) => nonResources.join(', '),
             },
             {
               label: 'Verbs',
-              getter: ({verbs = []}) => verbs.join(', ')
-            }
+              getter: ({ verbs = [] }) => verbs.join(', '),
+            },
           ]}
           data={item.rules}
         />

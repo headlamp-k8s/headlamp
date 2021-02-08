@@ -12,12 +12,7 @@ export default function CustomResourceDefinitionList() {
 
   return (
     <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Custom Resource Definitions"
-          noNamespaceFilter
-        />
-      }
+      title={<SectionFilterHeader title="Custom Resource Definitions" noNamespaceFilter />}
     >
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
@@ -26,7 +21,7 @@ export default function CustomResourceDefinitionList() {
         columns={[
           {
             label: 'Name',
-            getter: (crd) =>
+            getter: crd => (
               <Link
                 routeName="crd"
                 params={{
@@ -35,18 +30,19 @@ export default function CustomResourceDefinitionList() {
               >
                 {crd.spec.names.kind}
               </Link>
+            ),
           },
           {
             label: 'Group',
-            getter: (crd) => crd.spec.group
+            getter: crd => crd.spec.group,
           },
           {
             label: 'Scope',
-            getter: (crd) => crd.spec.scope
+            getter: crd => crd.spec.scope,
           },
           {
             label: 'Full name',
-            getter: (crd) => crd.metadata.name,
+            getter: crd => crd.metadata.name,
             sort: (c1: CRD, c2: CRD) => {
               if (c1.metadata.name < c2.metadata.name) {
                 return -1;
@@ -54,14 +50,14 @@ export default function CustomResourceDefinitionList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Age',
-            getter: (crd) => timeAgo(crd.metadata.creationTimestamp),
-            sort: (c1: CRD, c2:CRD) =>
+            getter: crd => timeAgo(crd.metadata.creationTimestamp),
+            sort: (c1: CRD, c2: CRD) =>
               new Date(c2.metadata.creationTimestamp).getTime() -
-              new Date(c1.metadata.creationTimestamp).getTime()
+              new Date(c1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={crds}

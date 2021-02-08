@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const ValueLabelTemplate: Story<{}> = (args) => (
+const ValueLabelTemplate: Story<{}> = args => (
   <ValueLabelComponent {...args}>A ValueLabel is here</ValueLabelComponent>
 );
 

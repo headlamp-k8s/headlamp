@@ -24,8 +24,8 @@ function getAPIForCRD(item: KubeCRD) {
 
 const useStyle = makeStyles({
   link: {
-    cursor: 'pointer'
-  }
+    cursor: 'pointer',
+  },
 });
 
 export default function CustomResourceDefinitionDetails() {
@@ -43,39 +43,40 @@ export default function CustomResourceDefinitionDetails() {
       promise = getAPIForCRD(item.jsonData).list(setObjects);
     }
 
-    return function cleanup () {
+    return function cleanup() {
       if (promise) {
         promise.then((cancellable: () => void) => cancellable());
       }
     };
-  },
-  [item]);
+  }, [item]);
 
-  return (
-    !item ? <Loader /> :
+  return !item ? (
+    <Loader />
+  ) : (
     <PageGrid>
       <MainInfoSection
         resource={item}
-
-        extraInfo={item && [
-          {
-            name: 'Group',
-            value: item.spec.group,
-          },
-          {
-            name: 'Version',
-            value: item.spec.version,
-          },
-          {
-            name: 'Scope',
-            value: item.spec.scope,
-          },
-          {
-            name: 'Subresources',
-            value: item.spec.subresources && Object.keys(item.spec.subresources).join(' & '),
-            hide: !item.spec.subresources
-          },
-        ]}
+        extraInfo={
+          item && [
+            {
+              name: 'Group',
+              value: item.spec.group,
+            },
+            {
+              name: 'Version',
+              value: item.spec.version,
+            },
+            {
+              name: 'Scope',
+              value: item.spec.scope,
+            },
+            {
+              name: 'Subresources',
+              value: item.spec.subresources && Object.keys(item.spec.subresources).join(' & '),
+              hide: !item.spec.subresources,
+            },
+          ]
+        }
       />
       <SectionBox title="Accepted Names">
         <SimpleTable
@@ -83,7 +84,7 @@ export default function CustomResourceDefinitionDetails() {
           columns={[
             {
               label: 'Plural',
-              datum: 'plural'
+              datum: 'plural',
             },
             {
               label: 'Singular',
@@ -96,7 +97,7 @@ export default function CustomResourceDefinitionDetails() {
             {
               label: 'List Kind',
               datum: 'listKind',
-            }
+            },
           ]}
         />
       </SectionBox>
@@ -106,7 +107,7 @@ export default function CustomResourceDefinitionDetails() {
           columns={[
             {
               label: 'Name',
-              datum: 'name'
+              datum: 'name',
             },
             {
               label: 'Served',
@@ -115,15 +116,12 @@ export default function CustomResourceDefinitionDetails() {
             {
               label: 'Storage',
               getter: version => version.storage.toString(),
-            }
+            },
           ]}
         />
       </SectionBox>
       <SectionBox title="Conditions">
-        <ConditionsTable
-          resource={item.jsonData}
-          showLastUpdate={false}
-        />
+        <ConditionsTable resource={item.jsonData} showLastUpdate={false} />
       </SectionBox>
       <SectionBox title="Objects">
         <SimpleTable
@@ -131,13 +129,11 @@ export default function CustomResourceDefinitionDetails() {
           columns={[
             {
               label: 'Name',
-              getter: obj =>
-                <Link
-                  className={classes.link}
-                  onClick={() => setObjToShow(obj)}
-                >
+              getter: obj => (
+                <Link className={classes.link} onClick={() => setObjToShow(obj)}>
                   {obj.metadata.name}
                 </Link>
+              ),
             },
             {
               label: 'Namespace',
@@ -146,15 +142,11 @@ export default function CustomResourceDefinitionDetails() {
             {
               label: 'Created',
               getter: obj => timeAgo(obj.metadata.creationTimestamp),
-            }
+            },
           ]}
         />
       </SectionBox>
-      <ViewDialog
-        item={objToShow}
-        open={!!objToShow}
-        onClose={() => setObjToShow(null)}
-      />
+      <ViewDialog item={objToShow} open={!!objToShow} onClose={() => setObjToShow(null)} />
     </PageGrid>
   );
 }

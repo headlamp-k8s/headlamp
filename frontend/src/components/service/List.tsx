@@ -11,13 +11,7 @@ export default function ServiceList() {
   const filterFunc = useFilterFunc();
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Services"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Services" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -25,7 +19,7 @@ export default function ServiceList() {
         columns={[
           {
             label: 'Name',
-            getter: (service) => <Link kubeObject={service} />,
+            getter: service => <Link kubeObject={service} />,
             sort: (s1: Service, s2: Service) => {
               if (s1.metadata.name < s2.metadata.name) {
                 return -1;
@@ -33,26 +27,26 @@ export default function ServiceList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (service) => service.getNamespace()
+            getter: service => service.getNamespace(),
           },
           {
             label: 'Type',
-            getter: (service) => service.spec.type
+            getter: service => service.spec.type,
           },
           {
             label: 'Cluster IP',
-            getter: (service) => service.spec.clusterIP
+            getter: service => service.spec.clusterIP,
           },
           {
             label: 'Age',
-            getter: (service) => service.getAge(),
+            getter: service => service.getAge(),
             sort: (s1: Service, s2: Service) =>
               new Date(s2.metadata.creationTimestamp).getTime() -
-              new Date(s1.metadata.creationTimestamp).getTime()
+              new Date(s1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={services}

@@ -30,35 +30,21 @@ export default function Overview() {
   return (
     <PageGrid>
       <SectionBox py={2}>
-        { noPermissions ?
+        {noPermissions ? (
           <Empty color="error">No permissions to list pods.</Empty>
-          :
-          <Grid
-            container
-            justify="space-around"
-            alignItems="flex-start"
-          >
+        ) : (
+          <Grid container justify="space-around" alignItems="flex-start">
             <Grid item>
-              <CpuCircularChart
-                items={nodes}
-                itemsMetrics={nodeMetrics}
-                noMetrics={noMetrics}
-              />
+              <CpuCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
             </Grid>
             <Grid item>
-              <MemoryCircularChart
-                items={nodes}
-                itemsMetrics={nodeMetrics}
-                noMetrics={noMetrics}
-              />
+              <MemoryCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
             </Grid>
             <Grid item>
-              <PodsStatusCircleChart
-                items={pods}
-              />
+              <PodsStatusCircleChart items={pods} />
             </Grid>
           </Grid>
-        }
+        )}
       </SectionBox>
       <EventsSection />
     </PageGrid>
@@ -70,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       minWidth: '180px',
     },
-  }
+  },
 }));
 
 function EventsSection() {
@@ -80,9 +66,7 @@ function EventsSection() {
 
   function makeStatusLabel(event: Event) {
     return (
-      <StatusLabel status={event.type === 'Normal' ? '' : 'warning'}
-        className={classes.eventLabel}
-      >
+      <StatusLabel status={event.type === 'Normal' ? '' : 'warning'} className={classes.eventLabel}>
         {event.reason}
       </StatusLabel>
     );
@@ -102,37 +86,37 @@ function EventsSection() {
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={Event.getErrorMessage(error)}
-        columns={events ? [
-          {
-            label: 'Type',
-            getter: event => event.involvedObject.kind,
-            sort: true
-          },
-          {
-            label: 'Name',
-            getter: event => event.involvedObject.name,
-            sort: true
-          },
-          // @todo: Maybe the message should be shown on slide-down.
-          {
-            label: 'Reason',
-            getter: event =>
-              <LightTooltip
-                title={event.message}
-                interactive
-              >
-                <Box>{makeStatusLabel(event)}</Box>
-              </LightTooltip>
-          },
-          {
-            label: 'Age',
-            getter: event => timeAgo(event.metadata.creationTimestamp),
-            sort: (e1: Event, e2: Event) => new Date(e2.metadata.creationTimestamp).getTime() -
-              new Date(e1.metadata.creationTimestamp).getTime()
-          },
-        ]
-          :
-          []
+        columns={
+          events
+            ? [
+                {
+                  label: 'Type',
+                  getter: event => event.involvedObject.kind,
+                  sort: true,
+                },
+                {
+                  label: 'Name',
+                  getter: event => event.involvedObject.name,
+                  sort: true,
+                },
+                // @todo: Maybe the message should be shown on slide-down.
+                {
+                  label: 'Reason',
+                  getter: event => (
+                    <LightTooltip title={event.message} interactive>
+                      <Box>{makeStatusLabel(event)}</Box>
+                    </LightTooltip>
+                  ),
+                },
+                {
+                  label: 'Age',
+                  getter: event => timeAgo(event.metadata.creationTimestamp),
+                  sort: (e1: Event, e2: Event) =>
+                    new Date(e2.metadata.creationTimestamp).getTime() -
+                    new Date(e1.metadata.creationTimestamp).getTime(),
+                },
+              ]
+            : []
         }
         data={events}
         defaultSortingColumn={3}

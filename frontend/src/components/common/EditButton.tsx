@@ -49,31 +49,28 @@ export default function EditButton(props: EditButtonProps) {
     const cancelUrl = location.pathname;
 
     setOpenDialog(false);
-    dispatch(clusterAction(() => applyFunc(newItemDef),
-      {
+    dispatch(
+      clusterAction(() => applyFunc(newItemDef), {
         startMessage: `Applying changes to ${item.metadata.name}…`,
         cancelledMessage: `Cancelled changes to ${item.metadata.name}.`,
         successMessage: `Applied changes to ${item.metadata.name}.`,
         errorMessage: `Failed to apply changes to ${item.metadata.name}.`,
         cancelUrl,
         errorUrl: cancelUrl,
-        ...options
-      }
-    ));
+        ...options,
+      })
+    );
   }
 
   React.useEffect(() => {
     if (item) {
-      item.getAuthorization('update').then(
-        (result: any) => {
-          if (result.status.allowed) {
-            setVisible(true);
-          }
+      item.getAuthorization('update').then((result: any) => {
+        if (result.status.allowed) {
+          setVisible(true);
         }
-      );
+      });
     }
-  },
-  [item]);
+  }, [item]);
 
   if (!visible) {
     return null;
@@ -82,10 +79,7 @@ export default function EditButton(props: EditButtonProps) {
   return (
     <React.Fragment>
       <Tooltip title="Edit">
-        <IconButton
-          aria-label="edit"
-          onClick={() => setOpenDialog(true)}
-        >
+        <IconButton aria-label="edit" onClick={() => setOpenDialog(true)}>
           <Icon icon={pencilIcon} />
         </IconButton>
       </Tooltip>

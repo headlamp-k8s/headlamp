@@ -11,13 +11,7 @@ export default function DaemonSetList() {
   const filterFunc = useFilterFunc();
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Daemon Sets"
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Daemon Sets" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -25,7 +19,7 @@ export default function DaemonSetList() {
         columns={[
           {
             label: 'Name',
-            getter: (daemonSet) => <Link kubeObject={daemonSet} />,
+            getter: daemonSet => <Link kubeObject={daemonSet} />,
             sort: (d1: DaemonSet, d2: DaemonSet) => {
               if (d1.metadata.name < d2.metadata.name) {
                 return -1;
@@ -33,22 +27,22 @@ export default function DaemonSetList() {
                 return 1;
               }
               return 0;
-            }
+            },
           },
           {
             label: 'Namespace',
-            getter: (daemonSet) => daemonSet.getNamespace()
+            getter: daemonSet => daemonSet.getNamespace(),
           },
           {
             label: 'Pods',
-            getter: (daemonSet) => daemonSet.status.currentNumberScheduled
+            getter: daemonSet => daemonSet.status.currentNumberScheduled,
           },
           {
             label: 'Age',
-            getter: (daemonSet) => daemonSet.getAge(),
+            getter: daemonSet => daemonSet.getAge(),
             sort: (d1: DaemonSet, d2: DaemonSet) =>
               new Date(d2.metadata.creationTimestamp).getTime() -
-              new Date(d1.metadata.creationTimestamp).getTime()
+              new Date(d1.metadata.creationTimestamp).getTime(),
           },
         ]}
         data={daemonSets}

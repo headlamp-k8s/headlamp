@@ -18,7 +18,7 @@ export default async function getDocDefinitions(apiVersion: string, kind: string
     docsPromise = getDocs(); // Don't wait here. Just kick off the request
   }
 
-  const {definitions = {}} = (await docsPromise) as OpenAPIV2.Document;
+  const { definitions = {} } = (await docsPromise) as OpenAPIV2.Document;
 
   let [group, version] = apiVersion.split('/');
   if (!version) {
@@ -31,8 +31,6 @@ export default async function getDocDefinitions(apiVersion: string, kind: string
     .find(x => x['x-kubernetes-group-version-kind'].some(comparer));
 
   function comparer(info: OpenAPIV2.SchemaObject) {
-    return info.group === group
-            && info.version === version
-            && info.kind === kind;
+    return info.group === group && info.version === version && info.kind === kind;
   }
 }

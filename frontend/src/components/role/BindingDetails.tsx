@@ -8,10 +8,10 @@ import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function RoleBindingDetails() {
-  const {
-    namespace = undefined,
-    name
-  } = useParams<{ namespace: string | undefined; name: string }>();
+  const { namespace = undefined, name } = useParams<{
+    namespace: string | undefined;
+    name: string;
+  }>();
   const [item, setItem] = React.useState<RoleBinding | null>(null);
 
   let cls = RoleBinding;
@@ -21,11 +21,11 @@ export default function RoleBindingDetails() {
 
   cls.useApiGet(setItem, name, namespace);
 
-  return (
-    !item ? <Loader /> :
+  return !item ? (
+    <Loader />
+  ) : (
     <PageGrid>
       <MainInfoSection
-
         resource={item}
         extraInfo={[
           {
@@ -39,7 +39,7 @@ export default function RoleBindingDetails() {
           {
             name: 'Ref. API Group',
             value: item.roleRef.apiGroup,
-          }
+          },
         ]}
       />
       <SectionBox title="Binding Info">

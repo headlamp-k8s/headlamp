@@ -9,7 +9,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<SimpleTableProps> = (args) => <SimpleTable {...args} />;
+const Template: Story<SimpleTableProps> = args => <SimpleTable {...args} />;
 
 const fixtureData = {
   rowsPerPage: [15, 25, 50],

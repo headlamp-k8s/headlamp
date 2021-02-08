@@ -12,30 +12,23 @@ export function SectionBox(props: SectionBoxProps) {
   const {
     title,
     children,
-    headerProps = {noPadding: false, headerStyle: 'subsection'},
+    headerProps = { noPadding: false, headerStyle: 'subsection' },
     ...otherProps
   } = props;
 
   let titleElem: React.ReactNode;
 
   if (typeof title === 'string') {
-    titleElem =
-      <SectionHeader
-        title={title as string}
-        {...headerProps}
-      />;
+    titleElem = <SectionHeader title={title as string} {...headerProps} />;
   } else {
     titleElem = title as JSX.Element;
   }
 
   return (
     <Box py={0}>
-      { title && titleElem }
+      {title && titleElem}
       <Paper>
-        <Box
-          px={2}
-          {...otherProps}
-        >
+        <Box px={2} {...otherProps}>
           {React.Children.toArray(children)}
         </Box>
       </Paper>

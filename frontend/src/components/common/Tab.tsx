@@ -25,14 +25,10 @@ export interface TabsProps {
 }
 
 export default function Tabs(props: TabsProps) {
-  const {
-    tabs,
-    tabProps = {},
-    defaultIndex = 0,
-    onTabChanged = null
-  } = props;
+  const { tabs, tabProps = {}, defaultIndex = 0, onTabChanged = null } = props;
   const [tabIndex, setTabIndex] = React.useState<TabsProps['defaultIndex']>(
-    defaultIndex && Math.min(defaultIndex as number, 0));
+    defaultIndex && Math.min(defaultIndex as number, 0)
+  );
 
   function handleTabChange(event: any, newValue: number) {
     setTabIndex(newValue);
@@ -40,17 +36,19 @@ export default function Tabs(props: TabsProps) {
     if (onTabChanged !== null) {
       onTabChanged(newValue);
     }
-  };
+  }
 
-  React.useEffect(() => {
-    if (defaultIndex === null) {
-      setTabIndex(false);
-      return;
-    }
-    setTabIndex(defaultIndex);
-  },
-  // eslint-disable-next-line
-  [defaultIndex])
+  React.useEffect(
+    () => {
+      if (defaultIndex === null) {
+        setTabIndex(false);
+        return;
+      }
+      setTabIndex(defaultIndex);
+    },
+    // eslint-disable-next-line
+    [defaultIndex]
+  );
 
   return (
     <React.Fragment>
@@ -62,23 +60,15 @@ export default function Tabs(props: TabsProps) {
         aria-label="full width tabs example"
         {...tabProps}
       >
-        {tabs.map(({label}, i) =>
-          <Tab
-            key={i}
-            label={label}
-            {...a11yProps(i)}
-          />
-        )}
+        {tabs.map(({ label }, i) => (
+          <Tab key={i} label={label} {...a11yProps(i)} />
+        ))}
       </MuiTabs>
-      {tabs.map(({component}, i) =>
-        <TabPanel
-          key={i}
-          tabIndex={Number(tabIndex)}
-          index={i}
-        >
+      {tabs.map(({ component }, i) => (
+        <TabPanel key={i} tabIndex={Number(tabIndex)} index={i}>
           {component}
         </TabPanel>
-      )}
+      ))}
     </React.Fragment>
   );
 }

@@ -1,9 +1,6 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
-import {
-  ConfirmDialog as ConfirmDialogComponent,
-  ConfirmDialogProps,
-} from './Dialog';
+import { ConfirmDialog as ConfirmDialogComponent, ConfirmDialogProps } from './Dialog';
 
 // NOTE: Dialog.tsx should maybe be renamed ConfirmDialog.tsx
 
@@ -16,9 +13,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ConfirmDialogProps> = (args) => (
-  <ConfirmDialogComponent {...args} />
-);
+const Template: Story<ConfirmDialogProps> = args => <ConfirmDialogComponent {...args} />;
 
 export const ConfirmDialog = Template.bind({});
 ConfirmDialog.args = {

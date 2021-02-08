@@ -28,18 +28,17 @@ export function getPercentStr(value: number, total: number) {
   if (total === 0) {
     return null;
   }
-  const percentage = value / total * 100;
+  const percentage = (value / total) * 100;
   const decimals = percentage % 10 > 0 ? 1 : 0;
   return `${percentage.toFixed(decimals)} %`;
-
 }
 
 export function getReadyReplicas(item: Workload) {
-  return (item.status.readyReplicas || item.status.numberReady || 0);
+  return item.status.readyReplicas || item.status.numberReady || 0;
 }
 
 export function getTotalReplicas(item: Workload) {
-  return (item.spec.replicas || item.status.currentNumberScheduled || 0);
+  return item.spec.replicas || item.status.currentNumberScheduled || 0;
 }
 
 export function getResourceStr(value: number, resourceType: 'cpu' | 'memory') {
@@ -52,7 +51,11 @@ export function getResourceStr(value: number, resourceType: 'cpu' | 'memory') {
   return `${valueInfo.value}${valueInfo.unit}`;
 }
 
-export function getResourceMetrics(item: Node, metrics: KubeMetrics[], resourceType: 'cpu' | 'memory') {
+export function getResourceMetrics(
+  item: Node,
+  metrics: KubeMetrics[],
+  resourceType: 'cpu' | 'memory'
+) {
   const resourceParsers: any = {
     cpu: parseCpu,
     memory: parseRam,
@@ -109,21 +112,24 @@ export function getClusterPrefixedPath(path?: string | null) {
 
 export function getCluster(): string | null {
   const urlPath = isElectron() ? window.location.hash.substr(1) : window.location.pathname;
-  const clusterURLMatch =
-    matchPath<{cluster?: string}>(urlPath, {path: getClusterPrefixedPath()});
+  const clusterURLMatch = matchPath<{ cluster?: string }>(urlPath, {
+    path: getClusterPrefixedPath(),
+  });
   return (!!clusterURLMatch && clusterURLMatch.params.cluster) || null;
 }
 
 export function useErrorState(dependentSetter?: (...args: any) => void) {
   const [error, setError] = React.useState<ApiError | null>(null);
 
-  React.useEffect(() => {
-    if (!!error && !!dependentSetter) {
-      dependentSetter(null);
-    }
-  },
-  // eslint-disable-next-line
-  [error]);
+  React.useEffect(
+    () => {
+      if (!!error && !!dependentSetter) {
+        dependentSetter(null);
+      }
+    },
+    // eslint-disable-next-line
+    [error]
+  );
 
   // Adding "as any" here because it was getting difficult to validate the setter type.
   return [error, setError as any];

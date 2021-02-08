@@ -80,24 +80,23 @@ const useStyle = makeStyles(theme => ({
   toolbar: {
     borderBottom: '1px solid #1e1e1e',
     paddingTop: theme.spacing(1.5),
-    paddingLeft: (
-      props: { isSidebarOpen: boolean }
-    ) => props.isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
+    paddingLeft: (props: { isSidebarOpen: boolean }) =>
+      props.isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
   sidebarGrid: {
-    height: '100%'
+    height: '100%',
   },
   '.MuiListItemText-primary': {
-    color: 'red'
+    color: 'red',
   },
   logo: {
     height: '32px',
     width: 'auto',
-  }
+  },
 }));
 
-const IconTooltip = withStyles((theme) => ({
+const IconTooltip = withStyles(theme => ({
   tooltip: {
     backgroundColor: '#474747',
     color: '#fff',
@@ -105,8 +104,8 @@ const IconTooltip = withStyles((theme) => ({
     padding: '0.5rem',
     fontSize: '0.8rem',
     border: '1px solid #474747',
-    marginLeft: '1rem'
-  }
+    marginLeft: '1rem',
+  },
 }))(Tooltip);
 
 const LIST_ITEMS: SidebarEntry[] = [
@@ -117,21 +116,21 @@ const LIST_ITEMS: SidebarEntry[] = [
     subList: [
       {
         name: 'namespaces',
-        label: 'Namespaces'
+        label: 'Namespaces',
       },
       {
         name: 'nodes',
-        label: 'Nodes'
+        label: 'Nodes',
       },
       {
         name: 'crds',
-        label: 'CRDs'
+        label: 'CRDs',
       },
       {
         name: 'configMaps',
-        label: 'Config Maps'
+        label: 'Config Maps',
       },
-    ]
+    ],
   },
   {
     name: 'workloads',
@@ -140,34 +139,33 @@ const LIST_ITEMS: SidebarEntry[] = [
     subList: [
       {
         name: 'Pods',
-        label: 'Pods'
+        label: 'Pods',
       },
       {
         name: 'ReplicaSets',
-        label: 'Replica Sets'
+        label: 'Replica Sets',
       },
       {
         name: 'DaemonSets',
-        label: 'Daemon Sets'
+        label: 'Daemon Sets',
       },
       {
         name: 'StatefulSets',
-        label: 'Stateful Sets'
+        label: 'Stateful Sets',
       },
       {
         name: 'Jobs',
-        label: 'Jobs'
+        label: 'Jobs',
       },
       {
         name: 'Deployments',
-        label: 'Deployments'
+        label: 'Deployments',
       },
       {
         name: 'CronJobs',
-        label: 'CronJobs'
-
-      }
-    ]
+        label: 'CronJobs',
+      },
+    ],
   },
   {
     name: 'storage',
@@ -176,17 +174,17 @@ const LIST_ITEMS: SidebarEntry[] = [
     subList: [
       {
         name: 'storageClasses',
-        label: 'Storage Classes'
+        label: 'Storage Classes',
       },
       {
         name: 'persistentVolumes',
-        label: 'Storage Volumes'
+        label: 'Storage Volumes',
       },
       {
         name: 'persistentVolumeClaims',
-        label: 'Persistent Volume Claims'
+        label: 'Persistent Volume Claims',
       },
-    ]
+    ],
   },
   {
     name: 'network',
@@ -195,13 +193,13 @@ const LIST_ITEMS: SidebarEntry[] = [
     subList: [
       {
         name: 'services',
-        label: 'Services'
+        label: 'Services',
       },
       {
         name: 'ingresses',
-        label: 'Ingresses'
+        label: 'Ingresses',
       },
-    ]
+    ],
   },
   {
     name: 'security',
@@ -210,21 +208,21 @@ const LIST_ITEMS: SidebarEntry[] = [
     subList: [
       {
         name: 'serviceAccounts',
-        label: 'Service Accounts'
+        label: 'Service Accounts',
       },
       {
         name: 'roles',
-        label: 'Roles'
+        label: 'Roles',
       },
       {
         name: 'roleBindings',
-        label: 'Role Bindings'
+        label: 'Role Bindings',
       },
       {
         name: 'secrets',
-        label: 'Secrets'
+        label: 'Secrets',
       },
-    ]
+    ],
   },
 ];
 
@@ -234,7 +232,7 @@ function prepareRoutes() {
   const routes: SidebarEntry[] = JSON.parse(JSON.stringify(LIST_ITEMS));
 
   for (const item of Object.values(items)) {
-    const parent = item.parent ? routes.find(({name}) => name === item.parent) : null;
+    const parent = item.parent ? routes.find(({ name }) => name === item.parent) : null;
     let placement = routes;
     if (parent) {
       if (!parent['subList']) {
@@ -255,11 +253,11 @@ const useVersionButtonStyle = makeStyles(theme => ({
     textAlign: 'center',
     '& .MuiButton-label': {
       color: theme.palette.sidebarLink.main,
-    }
+    },
   },
   versionIcon: {
     marginTop: '5px',
-    marginRight: '5px'
+    marginRight: '5px',
   },
 }));
 
@@ -300,83 +298,74 @@ function VersionButton() {
     ];
   }
 
-  React.useEffect(() => {
-    function fetchVersion() {
-      getVersion()
-        .then((results: StringDict) => {
-          setClusterVersion(results);
-          let versionChange = 0;
-          if (clusterVersion && results && results.gitVersion) {
-            versionChange = semver.compare(results.gitVersion, clusterVersion.gitVersion);
+  React.useEffect(
+    () => {
+      function fetchVersion() {
+        getVersion()
+          .then((results: StringDict) => {
+            setClusterVersion(results);
+            let versionChange = 0;
+            if (clusterVersion && results && results.gitVersion) {
+              versionChange = semver.compare(results.gitVersion, clusterVersion.gitVersion);
 
-            let msg = '';
-            if (versionChange > 0) {
-              msg = `Cluster version upgraded to ${results.gitVersion}`;
-            } else if (versionChange < 0) {
-              msg = `Cluster version downgraded to ${results.gitVersion}`;
+              let msg = '';
+              if (versionChange > 0) {
+                msg = `Cluster version upgraded to ${results.gitVersion}`;
+              } else if (versionChange < 0) {
+                msg = `Cluster version downgraded to ${results.gitVersion}`;
+              }
+
+              if (msg) {
+                enqueueSnackbar(msg, {
+                  key: 'version',
+                  preventDuplicate: true,
+                  autoHideDuration: versionSnackbarHideTimeout,
+                  variant: 'info',
+                });
+              }
             }
+          })
+          .catch((error: Error) => console.error('Getting the cluster version:', error));
+      }
 
-            if (msg) {
-              enqueueSnackbar(msg, {
-                key: 'version',
-                preventDuplicate: true,
-                autoHideDuration: versionSnackbarHideTimeout,
-                variant: 'info',
-              });
-            }
-          }
-        })
-        .catch((error: Error) => console.error('Getting the cluster version:', error));
-    }
+      if (!clusterVersion) {
+        fetchVersion();
+      }
 
-    if (!clusterVersion) {
-      fetchVersion();
-    }
+      const intervalHandler = setInterval(() => {
+        fetchVersion();
+      }, versionFetchInterval);
 
-    const intervalHandler = setInterval(() => {
-      fetchVersion();
-    }, versionFetchInterval);
-
-    return function cleanup() {
-      clearInterval(intervalHandler);
-    };
-  },
-  // eslint-disable-next-line
-  [clusterVersion]);
+      return function cleanup() {
+        clearInterval(intervalHandler);
+      };
+    },
+    // eslint-disable-next-line
+    [clusterVersion]
+  );
 
   // Use the location to make sure the version is changed, as it depends on the cluster
   // (defined in the URL ATM).
   // @todo: Update this if the active cluster management is changed.
   React.useEffect(() => {
     setClusterVersion(null);
-  },
-  [cluster]);
+  }, [cluster]);
 
   function handleClose() {
     setOpen(false);
   }
 
-  return (!clusterVersion ?
-    null
-    :
+  return !clusterVersion ? null : (
     <Box mx="auto" py=".2em" className={classes.versionBox}>
-      <Button
-        onClick={() => setOpen(true) }
-        style={{textTransform: 'none', }}
-      >
+      <Button onClick={() => setOpen(true)} style={{ textTransform: 'none' }}>
         <Box display={sidebar.isSidebarOpen ? 'flex' : 'block'} alignItems="center">
           <Box>
             <Icon color="#adadad" icon={kubernetesIcon} className={classes.versionIcon} />
           </Box>
-          <Box>
-            {clusterVersion.gitVersion}
-          </Box>
+          <Box>{clusterVersion.gitVersion}</Box>
         </Box>
       </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Kubernetes Version</DialogTitle>
         <DialogContent>
           <NameValueTable rows={getVersionRows()} />
@@ -406,32 +395,30 @@ function ListItemLink(props: ListItemLinkProps) {
       React.forwardRef<any, Omit<RouterLinkProps, 'to'>>((itemProps, ref) => (
         <RouterLink to={to} ref={ref} {...itemProps} />
       )),
-    [to],
+    [to]
   );
   let listItemLink = null;
 
   if (icon) {
-    listItemLink =
+    listItemLink = (
       <ListItemIcon>
         <Icon icon={icon} width={30} height={30} />
-      </ListItemIcon>;
+      </ListItemIcon>
+    );
   }
 
   let listItemLinkContainer = listItemLink;
   if (!primary) {
-    listItemLinkContainer = listItemLink &&
-    <IconTooltip title={name} placement="right-start">
-      {listItemLink}
-    </IconTooltip>;
+    listItemLinkContainer = listItemLink && (
+      <IconTooltip title={name} placement="right-start">
+        {listItemLink}
+      </IconTooltip>
+    );
   }
 
   return (
     <li>
-      <ListItem
-        button
-        component={renderLink}
-        {...other}
-      >
+      <ListItem button component={renderLink} {...other}>
         {listItemLinkContainer}
         <ListItemText primary={primary} />
       </ListItem>
@@ -470,10 +457,11 @@ export default function Sidebar() {
       }}
     >
       <div className={classes.toolbar}>
-        <Button onClick={() => {
-          dispatch(setWhetherSidebarOpen(!open));
-          setOpen(!open);
-        }}
+        <Button
+          onClick={() => {
+            dispatch(setWhetherSidebarOpen(!open));
+            setOpen(!open);
+          }}
         >
           <SvgIcon
             className={classes.logo}
@@ -491,14 +479,9 @@ export default function Sidebar() {
       >
         <Grid item>
           <List>
-            {items.map((item, i) =>
-              <SidebarItem
-                key={i}
-                selectedName={sidebar.selected}
-                fullWidth={open}
-                {...item}
-              />
-            )}
+            {items.map((item, i) => (
+              <SidebarItem key={i} selectedName={sidebar.selected} fullWidth={open} {...item} />
+            ))}
           </List>
         </Grid>
         <Grid item>
@@ -516,7 +499,7 @@ const useItemStyle = makeStyles(theme => ({
   nested: {
     '& .MuiListItem-root': {
       paddingLeft: theme.spacing(9),
-    }
+    },
   },
   linkMain: {
     textTransform: 'uppercase',
@@ -552,7 +535,7 @@ const useItemStyle = makeStyles(theme => ({
     color: theme.palette.primary.contrastText,
     '&:hover': {
       backgroundColor: theme.palette.sidebarLink.selectedBg,
-      'svg': {
+      svg: {
         color: theme.palette.primary.contrastText,
       },
     },
@@ -588,11 +571,11 @@ function SidebarItem(props: SidebarItemProps) {
     ...other
   } = props;
 
-  const classes = useItemStyle({fullWidth});
+  const classes = useItemStyle({ fullWidth });
 
   let fullURL = url;
   if (fullURL && useClusterURL && getCluster()) {
-    fullURL = generatePath(getClusterPrefixedPath(url), {cluster: getCluster()!});
+    fullURL = generatePath(getClusterPrefixedPath(url), { cluster: getCluster()! });
   }
 
   if (!fullURL) {
@@ -637,20 +620,15 @@ function SidebarItem(props: SidebarItemProps) {
         name={label}
         {...other}
       />
-      {subList.length > 0 &&
+      {subList.length > 0 && (
         <Collapse in={fullWidth && expanded}>
           <List component="div" disablePadding className={classes.nested}>
-            {subList.map((item, i) =>
-              <SidebarItem
-                key={i}
-                selectedName={selectedName}
-                hasParent
-                {...item}
-              />
-            )}
+            {subList.map((item, i) => (
+              <SidebarItem key={i} selectedName={selectedName} hasParent {...item} />
+            ))}
           </List>
         </Collapse>
-      }
+      )}
     </React.Fragment>
   );
 }
@@ -658,26 +636,28 @@ function SidebarItem(props: SidebarItemProps) {
 export function useSidebarItem(itemName: string | null) {
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    dispatch(setSidebarSelected(itemName));
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  []);
+  React.useEffect(
+    () => {
+      dispatch(setSidebarSelected(itemName));
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 }
 
-function searchNameInSubList(sublist : SidebarEntry['subList'], name: string): boolean {
+function searchNameInSubList(sublist: SidebarEntry['subList'], name: string): boolean {
   if (!sublist) {
     return false;
   }
   for (let i = 0; i < sublist.length; i++) {
-    if (sublist[i].name === name){
+    if (sublist[i].name === name) {
       return true;
     }
   }
   return false;
 }
 
-function findParentOfSubList(list: SidebarEntry[], name: string | null): SidebarEntry | null{
+function findParentOfSubList(list: SidebarEntry[], name: string | null): SidebarEntry | null {
   if (!name) {
     return null;
   }
@@ -700,7 +680,7 @@ export function NavigationTabs() {
 
   let defaultIndex = null;
   const listItems = prepareRoutes();
-  let navigationItem = listItems.find((item) => item.name === sidebar.selected);
+  let navigationItem = listItems.find(item => item.name === sidebar.selected);
   if (!navigationItem) {
     const parent = findParentOfSubList(listItems, sidebar.selected);
     if (!parent) {
@@ -722,11 +702,11 @@ export function NavigationTabs() {
 
     const url = subList[index].url;
     if (url) {
-      pathname = generatePath(getClusterPrefixedPath(url), {cluster: getCluster()!});
+      pathname = generatePath(getClusterPrefixedPath(url), { cluster: getCluster()! });
     } else {
       pathname = createRouteURL(subList[index].name);
     }
-    history.push({pathname});
+    history.push({ pathname });
   }
 
   if (createRouteURL(navigationItem.name)) {
@@ -734,17 +714,20 @@ export function NavigationTabs() {
   }
 
   const tabRoutes = subList.map((item: any) => {
-    return {'label': item.label, component: <></>};
+    return { label: item.label, component: <></> };
   });
 
-  defaultIndex = subList.findIndex((item) => item.name === sidebar.selected);
+  defaultIndex = subList.findIndex(item => item.name === sidebar.selected);
   return (
     <Box mb={2}>
       <Tabs
         tabs={tabRoutes}
-        onTabChanged={(index) => {tabChangeHandler(index);}}
+        onTabChanged={index => {
+          tabChangeHandler(index);
+        }}
         defaultIndex={defaultIndex}
       />
       <Divider />
-    </Box>);
+    </Box>
+  );
 }

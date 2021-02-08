@@ -28,7 +28,7 @@ export default function AuthToken() {
   const clusters = useClustersConf();
 
   function onAuthClicked() {
-    loginWithToken(token).then((code) => {
+    loginWithToken(token).then(code => {
       // If successful, redirect.
       if (code === 200) {
         history.replace(
@@ -54,9 +54,7 @@ export default function AuthToken() {
       token={token}
       showError={showError}
       showActions={Object.keys(clusters || {}).length > 1}
-      onChangeToken={(event: React.ChangeEvent<HTMLInputElement>) =>
-        setToken(event.target.value)
-      }
+      onChangeToken={(event: React.ChangeEvent<HTMLInputElement>) => setToken(event.target.value)}
       onAuthClicked={onAuthClicked}
       onCloseError={() => {
         setShowError(false);
@@ -98,9 +96,7 @@ export function PureAuthToken({
       <ClusterDialog useCover disableEscapeKeyDown disableBackdropClick>
         <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Please paste your authentication token.
-          </DialogContentText>
+          <DialogContentText>Please paste your authentication token.</DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -116,7 +112,7 @@ export function PureAuthToken({
           <Box ml={2}>
             Check out how to generate a
             <Link
-              style={{cursor: 'pointer', marginLeft: '0.4rem'}}
+              style={{ cursor: 'pointer', marginLeft: '0.4rem' }}
               target="_blank"
               href="https://kinvolk.io/docs/headlamp/latest/installation/#authentication--log-in"
             >
@@ -124,7 +120,7 @@ export function PureAuthToken({
             </Link>
             .
           </Box>
-          <div style={{flex: '1 0 0'}}></div>
+          <div style={{ flex: '1 0 0' }}></div>
         </DialogActions>
         <DialogActions>
           {showActions && (

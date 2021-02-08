@@ -25,18 +25,18 @@ export default function ActionsNotifier() {
 
     const action = () => (
       <React.Fragment>
-        {(clusterAction.buttons || []).map(({label, actionToDispatch}, i) =>
+        {(clusterAction.buttons || []).map(({ label, actionToDispatch }, i) => (
           <Button
             key={i}
             color="secondary"
             size="small"
             onClick={() => {
-              dispatch({type: actionToDispatch});
+              dispatch({ type: actionToDispatch });
             }}
           >
             {label}
           </Button>
-        )}
+        ))}
       </React.Fragment>
     );
 
@@ -47,23 +47,25 @@ export default function ActionsNotifier() {
       closeSnackbar(clusterAction.dismissSnackbar);
     }
 
-    const {key, message, snackbarProps} = clusterAction;
+    const { key, message, snackbarProps } = clusterAction;
     enqueueSnackbar(message, {
       key,
       preventDuplicate: true,
       autoHideDuration: CLUSTER_ACTION_GRACE_PERIOD,
       action,
-      ...snackbarProps
+      ...snackbarProps,
     });
   }
 
-  React.useEffect(() => {
-    for (const clusterAction of Object.values(clusterActions)) {
-      handleAction(clusterAction);
-    }
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  [clusterActions]);
+  React.useEffect(
+    () => {
+      for (const clusterAction of Object.values(clusterActions)) {
+        handleAction(clusterAction);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [clusterActions]
+  );
 
   return null;
 }

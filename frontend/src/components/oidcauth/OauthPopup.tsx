@@ -15,34 +15,32 @@ const defaultOauthPopupProps = {
   width: 500,
   height: 500,
   url: '',
-  title: ''
+  title: '',
 };
 
-const OauthPopup: React.FC<OauthPopupProps> = (props) => {
+const OauthPopup: React.FC<OauthPopupProps> = props => {
   let externalWindow: Window | null;
 
-  React.useEffect(() => {
-    return () => {
-      if (externalWindow) {
-        externalWindow.close();
-      }
-    };
-  },
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  []);
+  React.useEffect(
+    () => {
+      return () => {
+        if (externalWindow) {
+          externalWindow.close();
+        }
+      };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const createPopup = () => {
-    const {url, title, width, height, onCode} = {...defaultOauthPopupProps, ...props};
-    const left = window.screenX + (window.outerWidth - width as number) / 2;
-    const top = window.screenY + (window.outerHeight - height as number) / 2.5;
+    const { url, title, width, height, onCode } = { ...defaultOauthPopupProps, ...props };
+    const left = window.screenX + ((window.outerWidth - width) as number) / 2;
+    const top = window.screenY + ((window.outerHeight - height) as number) / 2.5;
 
     const windowFeatures = `toolbar=0,scrollbars=1,status=1,resizable=0,location=1,menuBar=0,width=${width},height=${height},top=${top},left=${left}`;
 
-    externalWindow = window.open(
-        url,
-        title,
-        windowFeatures
-    );
+    externalWindow = window.open(url, title, windowFeatures);
 
     const storageListener = () => {
       try {
@@ -65,22 +63,22 @@ const OauthPopup: React.FC<OauthPopupProps> = (props) => {
 
     if (externalWindow) {
       try {
-        externalWindow.addEventListener('beforeunload', () => {
-          if (!!props.onClose){
-            props.onClose();
-          }
-        }, false);
-      } catch (e){
+        externalWindow.addEventListener(
+          'beforeunload',
+          () => {
+            if (!!props.onClose) {
+              props.onClose();
+            }
+          },
+          false
+        );
+      } catch (e) {
         console.log('error occured while adding beforeunload event listener');
       }
     }
   };
 
-  return (
-    <div onClick={createPopup}>
-      {props.children}
-    </div>
-  );
+  return <div onClick={createPopup}>{props.children}</div>;
 };
 
 export default OauthPopup;

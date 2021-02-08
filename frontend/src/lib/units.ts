@@ -32,18 +32,18 @@ function parseUnitsOfBytes(value: string): number {
 
   // number with exponent ex. 1e3
   if (groups[4] !== undefined) {
-    return number * (10 ** parseInt(groups[4], 10));
+    return number * 10 ** parseInt(groups[4], 10);
   }
 
   const unitIndex = _.indexOf(UNITS, groups[2]);
 
   // Unit + i ex. 1Ki
   if (groups[3] !== undefined) {
-    return number * (1024 ** unitIndex);
+    return number * 1024 ** unitIndex;
   }
 
   // Unit ex. 1K
-  return number * (1000 ** unitIndex);
+  return number * 1000 ** unitIndex;
 }
 
 export function unparseRam(value: number) {

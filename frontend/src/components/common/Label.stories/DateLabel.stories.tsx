@@ -10,9 +10,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<DateLabelProps> = (args) => (
-  <DateLabelComponent {...args} />
-);
+const Template: Story<DateLabelProps> = args => <DateLabelComponent {...args} />;
 
 export const DateLabelString = Template.bind({});
 DateLabelString.args = {
