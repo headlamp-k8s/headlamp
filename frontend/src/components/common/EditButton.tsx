@@ -9,6 +9,7 @@ import { KubeObject } from '../../lib/k8s/cluster';
 import { KubeServiceAccount } from '../../lib/k8s/serviceAccount';
 import { CallbackActionOptions, clusterAction } from '../../redux/actions/actions';
 import EditorDialog from './EditorDialog';
+import ViewButton from './ViewButton';
 
 interface EditButtonProps {
   item: KubeObject;
@@ -76,7 +77,7 @@ export default function EditButton(props: EditButtonProps) {
   [item]);
 
   if (!visible) {
-    return null;
+    return <ViewButton item={item}/>;
   }
 
   return (
