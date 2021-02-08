@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
-import {ControlledEditor} from '@monaco-editor/react';
+import Editor from '@monaco-editor/react';
 import * as yaml from 'js-yaml';
 import _ from 'lodash';
 import * as Monaco from 'monaco-editor/esm/vs/editor/editor.api';
@@ -110,18 +110,17 @@ export default function EditorDialog(props: EditorDialogProps) {
     return onSave === null;
   }
 
-  function onChange(ev: Monaco.editor.IModelContentChangedEvent,
-                    newValue: string | undefined): string | undefined {
-    setCode(newValue as string);
+  function onChange(value: string | undefined,
+                    ev: Monaco.editor.IModelContentChangedEvent): void {
+    setCode(value as string);
 
-    if (error && getObjectFromCode(newValue as string)) {
+    if (error && getObjectFromCode(value as string)) {
       setError('');
     }
 
     if (onEditorChanged) {
-      onEditorChanged(newValue as string);
+      onEditorChanged(value as string);
     }
-    return newValue;
   }
 
   function getObjectFromCode(code: string): KubeObjectInterface | null {
@@ -170,7 +169,7 @@ export default function EditorDialog(props: EditorDialogProps) {
   function makeEditor() {
     return (
       <Box paddingTop={2} height="100%">
-        <ControlledEditor
+        <Editor
           language="yaml"
           theme="vs-dark"
           value={code}

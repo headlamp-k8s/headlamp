@@ -113,7 +113,7 @@ function PodLogViewer(props: PodLogViewerProps) {
 }
 
 export default function PodDetails() {
-  const { namespace, name } = useParams();
+  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<Pod | null>(null);
   const [showLogs, setShowLogs] = React.useState(false);
   const [showTerminal, setShowTerminal] = React.useState(false);

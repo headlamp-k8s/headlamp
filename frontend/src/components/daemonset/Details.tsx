@@ -4,7 +4,7 @@ import DaemonSet from '../../lib/k8s/daemonSet';
 import { ContainersSection, MainInfoSection, MetadataDictGrid, PageGrid } from '../common/Resource';
 
 export default function DaemonSetDetails() {
-  const { namespace, name } = useParams();
+  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<DaemonSet | null>(null);
 
   DaemonSet.useApiGet(setItem, name, namespace);

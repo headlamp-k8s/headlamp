@@ -185,11 +185,13 @@ export function HoverInfoLabel(props: HoverInfoLabelProps) {
         {label}
       </Grid>
       <Grid item>
-        <LightTooltip title={hoverInfo}>
-          <Box>
-            <Icon icon={icon || informationOutline} width="1rem" height="1rem"/>
-          </Box>
-        </LightTooltip>
+        {hoverInfo &&
+          <LightTooltip title={hoverInfo}>
+            <Box>
+              <Icon icon={icon || informationOutline} width="1rem" height="1rem"/>
+            </Box>
+          </LightTooltip>
+        }
       </Grid>
     </Grid>
   );

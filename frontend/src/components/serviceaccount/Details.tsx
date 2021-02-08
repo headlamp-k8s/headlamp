@@ -5,7 +5,7 @@ import { Link } from '../common';
 import { MainInfoSection } from '../common/Resource';
 
 export default function ServiceAccountDetails() {
-  const { namespace, name } = useParams();
+  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<ServiceAccount | null>(null);
 
   ServiceAccount.useApiGet(setItem, name, namespace);

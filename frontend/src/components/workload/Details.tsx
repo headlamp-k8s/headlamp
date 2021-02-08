@@ -8,7 +8,7 @@ interface WorkloadDetailsProps {
 }
 
 export default function WorkloadDetails(props: WorkloadDetailsProps) {
-  const { namespace, name } = useParams();
+  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const location = useLocation<{backLink: NavLinkProps['location']}>();
   const { workloadKind } = props;
   const [item, setItem] = React.useState<Workload | null>(null);

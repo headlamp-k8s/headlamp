@@ -5,7 +5,7 @@ import { StatusLabel } from '../common/Label';
 import { MainInfoSection } from '../common/Resource';
 
 export default function VolumeClaimDetails() {
-  const { namespace, name } = useParams();
+  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<PersistentVolumeClaim | null>(null);
 
   PersistentVolumeClaim.useApiGet(setItem, name, namespace);

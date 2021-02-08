@@ -98,7 +98,6 @@ export function TabPanel(props: TabPanelProps) {
       hidden={tabIndex !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
-      {...other}
     >
       {children}
     </Typography>

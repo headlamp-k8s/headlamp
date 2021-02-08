@@ -14,7 +14,7 @@ import { MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
 export default function NodeDetails() {
-  const { name } = useParams();
+  const { name } = useParams<{ name: string }>();
   const [item, setItem] = React.useState<Node | null>(null);
 
   Node.useApiGet(setItem, name);

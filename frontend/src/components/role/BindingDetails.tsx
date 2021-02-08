@@ -8,7 +8,10 @@ import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
 export default function RoleBindingDetails() {
-  const { namespace = undefined, name } = useParams();
+  const {
+    namespace = undefined,
+    name
+  } = useParams<{ namespace: string | undefined; name: string }>();
   const [item, setItem] = React.useState<RoleBinding | null>(null);
 
   let cls = RoleBinding;

@@ -8,7 +8,7 @@ import { DataField, MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 
 export default function ConfigDetails() {
-  const { namespace, name } = useParams();
+  const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<ConfigMap | null>(null);
   const itemData = item?.data;
 

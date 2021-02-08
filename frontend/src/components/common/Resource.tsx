@@ -94,14 +94,14 @@ interface MetadataDictGridProps {
 }
 
 export function MetadataDictGrid(props: MetadataDictGridProps) {
-  const classes = useStyles();
+  const classes = useStyles({});
   const { dict, showKeys = true } = props;
   const [expanded, setExpanded] = React.useState(false);
   const defaultNumShown = 20;
 
   const keys = Object.keys(dict || []);
 
-  const MetadataEntry = React.forwardRef((props: TypographyProps, ref) => {
+  const MetadataEntry = React.forwardRef((props: TypographyProps, ref:any) => {
     return (
       <Typography
         noWrap
@@ -335,7 +335,8 @@ export function SectionGrid(props: SectionGridProps) {
 
 export function DataField(props: TextFieldProps) {
   const { label, value } = props;
-  function handleEditorDidMount(_: () => {}, editor: monaco.editor.IStandaloneCodeEditor) {
+
+  function handleEditorDidMount(editor: monaco.editor.IStandaloneCodeEditor) {
     const editorElement: HTMLElement | null = editor.getDomNode();
     if (!editorElement) {
       return;
@@ -368,7 +369,7 @@ export function DataField(props: TextFieldProps) {
           <Editor
             value={value as string}
             language={language}
-            editorDidMount={handleEditorDidMount}
+            onMount={handleEditorDidMount}
             options = {{'readOnly': true, 'lineNumbers': 'off'}}
             theme="vs-dark"
           />
