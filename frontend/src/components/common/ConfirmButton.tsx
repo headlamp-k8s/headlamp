@@ -2,7 +2,7 @@ import Button, { ButtonProps } from '@material-ui/core/Button';
 import React from 'react';
 import { ConfirmDialog } from './Dialog';
 
-interface ConfirmButtonProps extends ButtonProps {
+export interface ConfirmButtonProps extends ButtonProps {
   buttonComponent?: typeof Button;
   ariaLabel?: string;
   confirmTitle: string;
