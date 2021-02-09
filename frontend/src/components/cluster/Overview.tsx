@@ -73,15 +73,7 @@ function EventsSection() {
   }
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title="Events"
-          // Not filtering since we don't show a namespace column in the events table
-          noNamespaceFilter
-        />
-      }
-    >
+    <SectionBox title={<SectionFilterHeader title="Events" />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -98,6 +90,10 @@ function EventsSection() {
                   label: 'Name',
                   getter: event => event.involvedObject.name,
                   sort: true,
+                },
+                {
+                  label: 'Namespace',
+                  getter: event => event.metadata.namespace || '-',
                 },
                 // @todo: Maybe the message should be shown on slide-down.
                 {
