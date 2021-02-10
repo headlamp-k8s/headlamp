@@ -10,7 +10,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { addQuery } from '../../helpers';
+import { addQuery, getFilterValueByNameFromURL } from '../../helpers';
 import Namespace from '../../lib/k8s/namespace';
 import { setNamespaceFilter } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -25,6 +25,10 @@ export function NamespacesAutocomplete() {
   const queryParamDefaultObj = { namespace: '' };
   const location = useLocation();
   const history = useHistory();
+
+  React.useEffect(() => {
+    getFilterValueByNameFromURL('namespace', location);
+  }, []);
 
   Namespace.useApiList(setNamespaces);
 
