@@ -389,13 +389,15 @@ interface ListItemLinkProps {
 
 function ListItemLink(props: ListItemLinkProps) {
   const { primary, to, icon, name, ...other } = props;
+  const namespaces = useTypedSelector(state => state.filter.namespaces);
+  const namespaceURLString = namespaces.size !== 0 ? `?namespace=${[...namespaces].join(',')}` : '';
 
   const renderLink = React.useMemo(
     () =>
       React.forwardRef<any, Omit<RouterLinkProps, 'to'>>((itemProps, ref) => (
-        <RouterLink to={to} ref={ref} {...itemProps} />
+        <RouterLink to={{ pathname: to, search: namespaceURLString }} ref={ref} {...itemProps} />
       )),
-    [to]
+    [to, namespaceURLString]
   );
   let listItemLink = null;
 
