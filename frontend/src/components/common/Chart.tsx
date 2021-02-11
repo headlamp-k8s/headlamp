@@ -156,7 +156,7 @@ const useBarStyle = makeStyles(theme => ({
   },
 }));
 
-interface PercentageBarProps {
+export interface PercentageBarProps {
   data: ChartDataPoint[];
   total?: number;
   tooltipFunc?: ((data: any) => JSX.Element | string) | null;

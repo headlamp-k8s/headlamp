@@ -39,6 +39,7 @@ export interface LogViewerProps extends DialogProps {
   downloadName?: string;
   onClose: () => void;
   topActions?: JSX.Element[];
+  open: boolean;
 }
 
 export function LogViewer(props: LogViewerProps) {
