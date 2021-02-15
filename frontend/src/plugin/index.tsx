@@ -1,3 +1,4 @@
+import helpers from '../helpers';
 import Registry from './registry';
 
 export abstract class Plugin {
@@ -58,7 +59,7 @@ function loadScripts(array: string[], onLoadFinished: (value?: any) => void) {
 
 function loadExternalPlugins() {
   return new Promise(resolve => {
-    fetch('/plugins/list')
+    fetch(`${helpers.getAppUrl()}plugins/list`)
       .then(response => response.json())
       .then(pluginsScriptURLS => {
         loadScripts(pluginsScriptURLS || [], resolve);

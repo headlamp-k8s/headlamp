@@ -7,16 +7,13 @@
  * Copyright © 2020 Kinvolk GmbH
  */
 
-import { isElectron } from '../../helpers';
+import helpers from '../../helpers';
 import { getToken, logout } from '../auth';
 import { getCluster } from '../util';
 import { ResourceClasses } from '.';
 import { KubeMetrics, KubeObjectClass, KubeObjectInterface } from './cluster';
 
-const isDev = process.env.NODE_ENV !== 'production';
-const backendServicesURL =
-  isElectron() || isDev ? 'http://localhost:4466/' : window.location.origin;
-const BASE_HTTP_URL = backendServicesURL;
+const BASE_HTTP_URL = helpers.getAppUrl();
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
@@ -58,10 +55,10 @@ export async function request(
   const id = setTimeout(() => controller.abort(), timeout);
 
   const url = combinePath(BASE_HTTP_URL, fullPath);
+  const requestData = { signal: controller.signal, ...opts };
   let response: Response = new Response(undefined, { status: 502, statusText: 'Unreachable' });
-
   try {
-    response = await fetch(url, { signal: controller.signal, ...opts });
+    response = await fetch(url, requestData);
   } catch (err) {
     // AbortController sets the error code as 20
     if (err.code === 20) {
@@ -83,7 +80,13 @@ export async function request(
       const json = await response.json();
       message += ` - ${json.message}`;
     } catch (err) {
-      console.error('Unable to parse error json', { err });
+      console.error(
+        'Unable to parse error json at url:',
+        url,
+        { err },
+        'with request data:',
+        requestData
+      );
     }
 
     const error: Error & { status?: number } = new Error(message);

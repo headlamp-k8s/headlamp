@@ -1,8 +1,9 @@
-/* Note: This code is taken from https://github.com/cheton/is-electron/blob/master/index.js
-   Licence: MIT
-*/
-// helper method to determine whether app is running in electron environment
-export function isElectron(): boolean {
+/**
+ * Determines whether app is running in electron environment.
+ * Note: The isElectron code (Licence: MIT) is taken from
+ *   https://github.com/cheton/is-electron/blob/master/index.js
+ */
+function isElectron(): boolean {
   // Renderer process
   if (
     typeof window !== 'undefined' &&
@@ -71,3 +72,69 @@ export function addQuery(
     search: searchParams.toString(),
   });
 }
+
+/**
+ * @returns true if the app is in development mode.
+ */
+function isDevMode(): boolean {
+  return !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+}
+
+/**
+ * @returns URL depending on dev-mode/electron, base-url, and window.location.origin.
+ *
+ * @example isDevMode | isElectron returns 'http://localhost:4466/'
+ * @example base-url set as '/headlamp' returns '/headlamp/'
+ * @example isDevMode | isElectron and base-url is set
+ *          it returns 'http://localhost:4466/headlamp/'
+ * @example returns 'https://headlamp.example.com/'using the window.location.origin of browser
+ *
+ */
+function getAppUrl(): string {
+  let url =
+    exportFunctions.isDevMode() || exportFunctions.isElectron()
+      ? 'http://localhost:4466'
+      : window.location.origin;
+
+  const baseUrl = exportFunctions.getBaseUrl();
+  url += baseUrl ? baseUrl + '/' : '/';
+
+  return url;
+}
+
+declare global {
+  interface Window {
+    headlampBaseUrl?: string;
+  }
+}
+
+/**
+ * @returns the baseUrl for the app based on window.headlampBaseUrl or process.env.PUBLIC_URL
+ *
+ * This could be either '' meaning /, or something like '/headlamp'.
+ */
+function getBaseUrl(): string {
+  let baseUrl = '';
+  if (exportFunctions.isElectron()) {
+    return '';
+  }
+  if (window?.headlampBaseUrl !== undefined) {
+    baseUrl = window.headlampBaseUrl;
+  } else {
+    baseUrl = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : '';
+  }
+
+  if (baseUrl === './' || baseUrl === '.') {
+    baseUrl = '';
+  }
+  return baseUrl;
+}
+
+const exportFunctions = {
+  getBaseUrl,
+  isDevMode,
+  getAppUrl,
+  isElectron,
+};
+
+export default exportFunctions;
