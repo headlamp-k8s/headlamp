@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Label/StatusLabel Status Label 1`] = `
+<div
+  id="root"
+>
+  <span
+    class="MuiTypography-root makeStyles-statusLabel-107  MuiTypography-body1"
+    style="background-color: rgb(232, 245, 233); color: rgb(76, 175, 80);"
+  >
+    status
+  </span>
+</div>
+`;

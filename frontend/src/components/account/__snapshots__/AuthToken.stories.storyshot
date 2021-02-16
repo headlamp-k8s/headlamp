@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots AuthToken Show Actions 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root-7"
+  />
+</div>
+`;
+
+exports[`Storyshots AuthToken Show Error 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root-1"
+  >
+    <div
+      class="MuiSnackbar-root MuiSnackbar-anchorOriginBottomCenter"
+    >
+      <div
+        aria-describedby="message-id"
+        class="MuiPaper-root MuiSnackbarContent-root MuiPaper-elevation6"
+        direction="up"
+        role="alert"
+        style="opacity: 1; transform: scale(1, 1); transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+      >
+        <div
+          class="MuiSnackbarContent-message"
+        >
+          <span
+            id="message-id"
+          >
+            Error authenticating
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

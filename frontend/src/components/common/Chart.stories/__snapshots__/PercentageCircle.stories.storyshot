@@ -1,0 +1,200 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Charts/PercentageCircle No Data 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root-77"
+  >
+    <p
+      class="MuiTypography-root makeStyles-title-74 MuiTypography-body1"
+    >
+      CPU usage
+    </p>
+    <div
+      class="MuiBox-root MuiBox-root-79 makeStyles-loaderContainer-78"
+    >
+      <div
+        class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+        role="progressbar"
+        style="width: 40px; height: 40px;"
+      >
+        <svg
+          class="MuiCircularProgress-svg"
+          viewBox="22 22 44 44"
+        >
+          <circle
+            class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+            cx="44"
+            cy="44"
+            fill="none"
+            r="20.2"
+            stroke-width="3.6"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Charts/PercentageCircle Percent 50 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root-73"
+  >
+    <p
+      class="MuiTypography-root makeStyles-title-70 MuiTypography-body1"
+    >
+      Pods
+    </p>
+    <div
+      class="recharts-wrapper makeStyles-chart-72"
+      style="position: relative; cursor: default; width: 160px; height: 160px;"
+    >
+      <svg
+        class="recharts-surface"
+        cx="100"
+        cy="100"
+        height="160"
+        version="1.1"
+        viewBox="0 0 160 160"
+        width="160"
+      >
+        <defs>
+          <clippath
+            id="recharts7-clip"
+          >
+            <rect
+              height="150"
+              width="150"
+              x="5"
+              y="5"
+            />
+          </clippath>
+        </defs>
+        <g
+          class="recharts-layer recharts-pie"
+        >
+          <g
+            class="recharts-layer"
+          >
+            <g
+              class="recharts-layer recharts-pie-sector"
+            />
+            <g
+              class="recharts-layer recharts-pie-sector"
+            />
+            <g
+              class="recharts-layer recharts-pie-sector"
+            />
+          </g>
+          <text
+            class="recharts-text recharts-label"
+            offset="5"
+            style="font-size: 24px; fill: #000;"
+            text-anchor="middle"
+            x="85"
+            y="85"
+          >
+            <tspan
+              dy="0.355em"
+              x="85"
+            >
+              50.0 %
+            </tspan>
+          </text>
+        </g>
+      </svg>
+    </div>
+    <p
+      class="MuiTypography-root makeStyles-legend-71 MuiTypography-body1"
+    >
+      5 / 10 Requested
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Charts/PercentageCircle Percent 100 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root-69"
+  >
+    <p
+      class="MuiTypography-root makeStyles-title-66 MuiTypography-body1"
+    >
+      Pods
+    </p>
+    <div
+      class="recharts-wrapper makeStyles-chart-68"
+      style="position: relative; cursor: default; width: 160px; height: 160px;"
+    >
+      <svg
+        class="recharts-surface"
+        cx="100"
+        cy="100"
+        height="160"
+        version="1.1"
+        viewBox="0 0 160 160"
+        width="160"
+      >
+        <defs>
+          <clippath
+            id="recharts5-clip"
+          >
+            <rect
+              height="150"
+              width="150"
+              x="5"
+              y="5"
+            />
+          </clippath>
+        </defs>
+        <g
+          class="recharts-layer recharts-pie"
+        >
+          <g
+            class="recharts-layer"
+          >
+            <g
+              class="recharts-layer recharts-pie-sector"
+            />
+            <g
+              class="recharts-layer recharts-pie-sector"
+            />
+            <g
+              class="recharts-layer recharts-pie-sector"
+            />
+          </g>
+          <text
+            class="recharts-text recharts-label"
+            offset="5"
+            style="font-size: 24px; fill: #000;"
+            text-anchor="middle"
+            x="85"
+            y="85"
+          >
+            <tspan
+              dy="0.355em"
+              x="85"
+            >
+              100.0 %
+            </tspan>
+          </text>
+        </g>
+      </svg>
+    </div>
+    <p
+      class="MuiTypography-root makeStyles-legend-67 MuiTypography-body1"
+    >
+      9 / 9 Requested
+    </p>
+  </div>
+</div>
+`;

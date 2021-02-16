@@ -245,10 +245,6 @@ function App() {
     initializePlugins();
   }, [themeName]);
 
-  // React.useEffect(() => {
-  //   console.log(themes[themeName]);
-  // }, [themeName]);
-
   return (
     <Provider store={store}>
       <ThemeProvider theme={themes[themeName]}>

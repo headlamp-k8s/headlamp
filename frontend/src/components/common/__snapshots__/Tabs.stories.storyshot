@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Tabs Basic Tabs 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiTabs-root"
+  >
+    <div
+      class="MuiTabs-scroller MuiTabs-fixed"
+      style="overflow: hidden;"
+    >
+      <div
+        aria-label="full width tabs example"
+        class="MuiTabs-flexContainer"
+        role="tablist"
+      >
+        <button
+          aria-controls="full-width-tabpanel-0"
+          aria-selected="true"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected"
+          id="full-width-tab-0"
+          role="tab"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiTab-wrapper"
+          >
+            tab 1 label
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          aria-controls="full-width-tabpanel-1"
+          aria-selected="false"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary"
+          id="full-width-tab-1"
+          role="tab"
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="MuiTab-wrapper"
+          >
+            tab 2 label
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <span
+        class="PrivateTabIndicator-root-121 PrivateTabIndicator-colorPrimary-122 MuiTabs-indicator"
+        style="left: 0px; width: 0px;"
+      />
+    </div>
+  </div>
+  <div
+    aria-labelledby="full-width-tab-0"
+    class="MuiTypography-root MuiTypography-body1"
+    id="full-width-tabpanel-0"
+    role="tabpanel"
+  >
+    <p>
+      tab body 1
+    </p>
+  </div>
+  <div
+    aria-labelledby="full-width-tab-1"
+    class="MuiTypography-root MuiTypography-body1"
+    hidden=""
+    id="full-width-tabpanel-1"
+    role="tabpanel"
+  >
+    <p>
+      tab body 2
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Tabs Starting Tab 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiTabs-root"
+  >
+    <div
+      class="MuiTabs-scroller MuiTabs-fixed"
+      style="overflow: hidden;"
+    >
+      <div
+        aria-label="full width tabs example"
+        class="MuiTabs-flexContainer"
+        role="tablist"
+      >
+        <button
+          aria-controls="full-width-tabpanel-0"
+          aria-selected="false"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary"
+          id="full-width-tab-0"
+          role="tab"
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="MuiTab-wrapper"
+          >
+            tab 1 label
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          aria-controls="full-width-tabpanel-1"
+          aria-selected="true"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected"
+          id="full-width-tab-1"
+          role="tab"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiTab-wrapper"
+          >
+            tab 2 label
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <span
+        class="PrivateTabIndicator-root-125 PrivateTabIndicator-colorPrimary-126 MuiTabs-indicator"
+        style="left: 0px; width: 0px;"
+      />
+    </div>
+  </div>
+  <div
+    aria-labelledby="full-width-tab-0"
+    class="MuiTypography-root MuiTypography-body1"
+    hidden=""
+    id="full-width-tabpanel-0"
+    role="tabpanel"
+  >
+    <p>
+      tab body 1
+    </p>
+  </div>
+  <div
+    aria-labelledby="full-width-tab-1"
+    class="MuiTypography-root MuiTypography-body1"
+    id="full-width-tabpanel-1"
+    role="tabpanel"
+  >
+    <p>
+      We start on the second tab using defaultIndex=1
+    </p>
+  </div>
+</div>
+`;

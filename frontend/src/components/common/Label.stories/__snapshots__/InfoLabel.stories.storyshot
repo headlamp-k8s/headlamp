@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Label/InfoLabel Info Label 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
+  >
+    <div
+      class="MuiGrid-root makeStyles-nameLabelItem-97 MuiGrid-item MuiGrid-grid-xs-true"
+    >
+      <span
+        class="MuiTypography-root makeStyles-nameLabel-96 MuiTypography-body1"
+      >
+        name
+      </span>
+       
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true"
+    >
+      <span
+        class="MuiTypography-root makeStyles-valueLabel-98 MuiTypography-body1"
+      >
+        value
+      </span>
+    </div>
+  </div>
+</div>
+`;

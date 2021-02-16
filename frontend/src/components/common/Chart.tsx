@@ -56,7 +56,6 @@ export interface PercentageCircleProps {
 export function PercentageCircle(props: PercentageCircleProps) {
   const theme = useTheme();
   const classes = useStyle();
-  console.log('PercentageCircle', JSON.stringify(props));
   const {
     data,
     size = 200,

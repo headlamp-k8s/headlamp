@@ -3,7 +3,7 @@ import React from 'react';
 import { InfoLabel as InfoLabelComponent, InfoLabelProps } from '../Label';
 
 export default {
-  title: 'Label',
+  title: 'Label/InfoLabel',
   component: InfoLabelComponent,
   argTypes: {},
 } as Meta;

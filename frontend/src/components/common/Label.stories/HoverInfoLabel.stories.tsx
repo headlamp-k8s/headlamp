@@ -3,7 +3,7 @@ import React from 'react';
 import { HoverInfoLabel as HoverInfoLabelComponent, HoverInfoLabelProps } from '../Label';
 
 export default {
-  title: 'Label',
+  title: 'Label/HoverInfoLabel',
   component: HoverInfoLabelComponent,
   argTypes: {},
 } as Meta;

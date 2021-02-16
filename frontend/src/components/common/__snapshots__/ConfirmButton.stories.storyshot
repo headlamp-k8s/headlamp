@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots ConfirmButton Confirm 1`] = `
+<div
+  id="root"
+>
+  <button
+    aria-label="confirm undo"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      Confirm button
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+  <div />
+</div>
+`;
+
+exports[`Storyshots ConfirmButton Extends Button 1`] = `
+<div
+  id="root"
+>
+  <button
+    aria-label="confirm undo"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      Confirm button
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+  <div />
+</div>
+`;

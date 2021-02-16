@@ -5,7 +5,7 @@ import { DateLabel as DateLabelComponent, DateLabelProps } from '../Label';
 // NOTE: see TIMEAGO in frontend/src/lib/util.ts can pass options.now to format.
 
 export default {
-  title: 'Label',
+  title: 'Label/DateLabel',
   component: DateLabelComponent,
   argTypes: {},
 } as Meta;

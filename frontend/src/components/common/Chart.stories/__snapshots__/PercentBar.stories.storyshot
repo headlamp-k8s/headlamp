@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Charts/PercentageBar No Data 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="recharts-responsive-container makeStyles-container-63"
+    id="undefined"
+    style="width: 95%; height: 20px;"
+  />
+</div>
+`;
+
+exports[`Storyshots Charts/PercentageBar Percent 50 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="recharts-responsive-container makeStyles-container-61"
+    id="undefined"
+    style="width: 95%; height: 20px;"
+  />
+</div>
+`;
+
+exports[`Storyshots Charts/PercentageBar Percent 100 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="recharts-responsive-container makeStyles-container-59"
+    id="undefined"
+    style="width: 95%; height: 20px;"
+  />
+</div>
+`;
+
+exports[`Storyshots Charts/PercentageBar Tooltip 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="recharts-responsive-container makeStyles-container-65"
+    id="undefined"
+    style="width: 95%; height: 20px;"
+  />
+</div>
+`;
