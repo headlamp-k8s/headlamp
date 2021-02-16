@@ -245,9 +245,9 @@ function App() {
     initializePlugins();
   }, [themeName]);
 
-  React.useEffect(() => {
-    console.log(themes[themeName]);
-  }, [themeName]);
+  // React.useEffect(() => {
+  //   console.log(themes[themeName]);
+  // }, [themeName]);
 
   return (
     <Provider store={store}>

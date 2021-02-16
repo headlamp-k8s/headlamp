@@ -54,6 +54,9 @@ frontend-lint:
 frontend-fixlint:
 	cd frontend && npm run lint -- --fix
 
+frontend-test:
+	cd frontend && npm run test
+
 image:
 	$(DOCKER_CMD) build \
 	--build-arg IMAGE_BASE=$(DOCKER_IMAGE_BASE) \
