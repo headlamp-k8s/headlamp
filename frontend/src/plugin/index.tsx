@@ -87,10 +87,23 @@ function loadDevPlugins() {
   }
 }
 
+async function loadEnabledPlugins() {
+  // const enabledPlugins = await fetch('/plugins/enabled')
+  const enabledPlugins = ['greenify'];
+
+  for (const plugin of enabledPlugins) {
+    const aPlugin = await import(`./plugins-enabled/${plugin}`);
+    if ('initialize' in aPlugin) {
+      window.plugins[plugin] = aPlugin;
+    }
+  }
+}
+
 export async function initializePlugins() {
   // Load external plugins
   await loadExternalPlugins();
   await loadDevPlugins();
+  await loadEnabledPlugins();
 
   return new Promise(resolve => {
     // Initialize every plugin

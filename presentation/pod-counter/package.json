@@ -1,0 +1,15 @@
+{
+  "name": "pod-counter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gets the number of pods in the cluster and displays that information in the top bar",
+  "main": "index.js",
+  "scripts": {
+    "build": "headlamp-plugin"
+  },
+  "author": "",
+  "license": "private",
+  "devDependencies": {
+    "@kinvolk/headlamp-plugin": "^0.1.0"
+  }
+}
