@@ -3,7 +3,7 @@ import React from 'react';
 import { NameLabel as NameLabelComponent } from '../Label';
 
 export default {
-  title: 'Label',
+  title: 'Label/NameLabel',
   component: NameLabelComponent,
   argTypes: {},
 } as Meta;

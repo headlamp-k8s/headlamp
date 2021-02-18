@@ -7,14 +7,14 @@ import { KubeObject } from '../../lib/k8s/cluster';
 import EditorDialog from './EditorDialog';
 
 interface ViewButtonProps {
-    item: KubeObject;
+  item: KubeObject;
 }
 
 function ViewButton(props: ViewButtonProps) {
-  const {item} = props;
+  const { item } = props;
   const [toggle, setToggle] = React.useState(false);
   function handleButtonClick() {
-    setToggle((toggle) => !toggle);
+    setToggle(toggle => !toggle);
   }
   return (
     <>
@@ -31,7 +31,7 @@ function ViewButton(props: ViewButtonProps) {
       <EditorDialog
         item={item.jsonData}
         open={toggle}
-        onClose={() => setToggle((toggle) => !toggle)}
+        onClose={() => setToggle(toggle => !toggle)}
         onSave={null}
       />
     </>

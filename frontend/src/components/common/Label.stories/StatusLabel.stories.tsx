@@ -3,7 +3,7 @@ import React from 'react';
 import { StatusLabel as StatusLabelComponent, StatusLabelProps } from '../Label';
 
 export default {
-  title: 'Label',
+  title: 'Label/StatusLabel',
   component: StatusLabelComponent,
   argTypes: {},
 } as Meta;

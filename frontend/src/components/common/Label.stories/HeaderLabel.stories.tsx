@@ -3,7 +3,7 @@ import React from 'react';
 import { HeaderLabel as HeaderLabelComponent, HeaderLabelProps } from '../Label';
 
 export default {
-  title: 'Label',
+  title: 'Label/HeaderLabel',
   component: HeaderLabelComponent,
   argTypes: {},
 } as Meta;

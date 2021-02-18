@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Label/HeaderLabel Header Label 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <p
+        class="MuiTypography-root makeStyles-label-87 MuiTypography-body1 MuiTypography-displayInline"
+      >
+        name
+      </p>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-xs-center"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item"
+      >
+        <p
+          class="MuiTypography-root makeStyles-value-86 MuiTypography-body1"
+        >
+          value
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Label/HeaderLabel Header Label Tool Tip 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <p
+        class="MuiTypography-root makeStyles-label-89 MuiTypography-body1 MuiTypography-displayInline"
+      >
+        name
+      </p>
+      <div
+        class="MuiContainer-root makeStyles-container-90 MuiContainer-maxWidthLg"
+      >
+        <svg
+          class=""
+          focusable="false"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          style="transform: rotate(360deg);"
+          title="tooltip"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2v6z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-xs-center"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item"
+      >
+        <p
+          class="MuiTypography-root makeStyles-value-88 MuiTypography-body1"
+        >
+          value
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

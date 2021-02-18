@@ -74,7 +74,7 @@ export default function EditButton(props: EditButtonProps) {
   }, [item]);
 
   if (!visible) {
-    return <ViewButton item={item}/>;
+    return <ViewButton item={item} />;
   }
 
   return (
