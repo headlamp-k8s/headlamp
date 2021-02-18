@@ -1,4 +1,4 @@
-import Tab from '@material-ui/core/Tab';
+import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import React from 'react';
@@ -61,7 +61,7 @@ export default function Tabs(props: TabsProps) {
         {...tabProps}
       >
         {tabs.map(({ label }, i) => (
-          <Tab key={i} label={label} {...a11yProps(i)} />
+          <MuiTab key={i} label={label} {...a11yProps(i)} />
         ))}
       </MuiTabs>
       {tabs.map(({ component }, i) => (
@@ -79,7 +79,7 @@ interface TabPanelProps extends TypographyProps {
 }
 
 export function TabPanel(props: TabPanelProps) {
-  const { children, tabIndex, index, ...other } = props;
+  const { children, tabIndex, index } = props;
 
   return (
     <Typography

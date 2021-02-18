@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
-import Tabs, { TabsProps } from './Tab';
+import Tabs, { TabsProps } from './Tabs';
 
 export default {
   title: 'Tabs',

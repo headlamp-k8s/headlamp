@@ -40,7 +40,7 @@ import { ReactComponent as LogoLight } from '../resources/icon-light.svg';
 import { ReactComponent as LogoWithTextLight } from '../resources/logo-light.svg';
 import { NameValueTable } from './common';
 import CreateButton from './common/CreateButton';
-import Tabs from './common/Tab';
+import Tabs from './common/Tabs';
 
 const versionSnackbarHideTimeout = 5000; // ms
 const versionFetchInterval = 60000; // ms

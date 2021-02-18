@@ -21,7 +21,7 @@ import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import ConfirmButton from './ConfirmButton';
 import Empty from './EmptyContent';
 import Loader from './Loader';
-import Tabs from './Tab';
+import Tabs from './Tabs';
 
 const useStyle = makeStyles(theme => ({
   dialogContent: {
