@@ -88,6 +88,23 @@
       "prettier/react"
     ]
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/build/",
+      "!src/**/*.stories*.{js,jsx,ts,tsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 13,
+        "functions": 13,
+        "lines": 18,
+        "statements": 18
+      }
+    },
+    "coverageReporters": ["text"]
+  },
   "prettier": "@kinvolk/eslint-config/prettier-config",
   "devDependencies": {
     "@iconify/icons-mdi": "^1.1.10",
