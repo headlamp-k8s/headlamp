@@ -5,7 +5,7 @@ exports[`Storyshots SimpleTable Datum 1`] = `
   id="root"
 >
   <table
-    class="MuiTable-root makeStyles-table-120"
+    class="MuiTable-root makeStyles-table"
   >
     <thead
       class="MuiTableHead-root"
@@ -14,19 +14,19 @@ exports[`Storyshots SimpleTable Datum 1`] = `
         class="MuiTableRow-root MuiTableRow-head"
       >
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-119 "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
           scope="col"
         >
           Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-119 "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
           scope="col"
         >
           Status
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-119 "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
           scope="col"
         >
           Age
@@ -103,7 +103,7 @@ exports[`Storyshots SimpleTable Getter 1`] = `
   id="root"
 >
   <table
-    class="MuiTable-root makeStyles-table-118"
+    class="MuiTable-root makeStyles-table"
   >
     <thead
       class="MuiTableHead-root"
@@ -112,19 +112,19 @@ exports[`Storyshots SimpleTable Getter 1`] = `
         class="MuiTableRow-root MuiTableRow-head"
       >
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-117 "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
           scope="col"
         >
           Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-117 "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
           scope="col"
         >
           Status
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell-117 "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
           scope="col"
         >
           Age

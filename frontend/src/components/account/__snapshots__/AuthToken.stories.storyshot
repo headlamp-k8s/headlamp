@@ -5,7 +5,7 @@ exports[`Storyshots AuthToken Show Actions 1`] = `
   id="root"
 >
   <div
-    class="MuiBox-root MuiBox-root-7"
+    class="MuiBox-root MuiBox-root"
   />
 </div>
 `;
@@ -15,7 +15,7 @@ exports[`Storyshots AuthToken Show Error 1`] = `
   id="root"
 >
   <div
-    class="MuiBox-root MuiBox-root-1"
+    class="MuiBox-root MuiBox-root"
   >
     <div
       class="MuiSnackbar-root MuiSnackbar-anchorOriginBottomCenter"

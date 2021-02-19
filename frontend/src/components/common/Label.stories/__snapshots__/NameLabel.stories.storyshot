@@ -5,7 +5,7 @@ exports[`Storyshots Label/NameLabel Name Label 1`] = `
   id="root"
 >
   <span
-    class="MuiTypography-root makeStyles-nameLabel-100 MuiTypography-body1"
+    class="MuiTypography-root makeStyles-nameLabel MuiTypography-body1"
   >
     A name label
   </span>

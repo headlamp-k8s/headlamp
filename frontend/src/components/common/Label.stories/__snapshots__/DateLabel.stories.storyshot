@@ -16,7 +16,7 @@ exports[`Storyshots Label/DateLabel Date Label Date 1`] = `
       class="MuiGrid-root MuiGrid-item"
     >
       <div
-        class="MuiBox-root MuiBox-root-85"
+        class="MuiBox-root MuiBox-root"
         title="Invalid Date"
       >
         <svg
@@ -55,7 +55,7 @@ exports[`Storyshots Label/DateLabel Date Label Number 1`] = `
       class="MuiGrid-root MuiGrid-item"
     >
       <div
-        class="MuiBox-root MuiBox-root-83"
+        class="MuiBox-root MuiBox-root"
         title="Invalid Date"
       >
         <svg
@@ -94,7 +94,7 @@ exports[`Storyshots Label/DateLabel Date Label String 1`] = `
       class="MuiGrid-root MuiGrid-item"
     >
       <div
-        class="MuiBox-root MuiBox-root-81"
+        class="MuiBox-root MuiBox-root"
         title="12/17/2020, 12:00:00 AM"
       >
         <svg
