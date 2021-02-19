@@ -39,7 +39,7 @@ import store from '../redux/stores/store';
 import { ReactComponent as LogoLight } from '../resources/icon-light.svg';
 import { ReactComponent as LogoWithTextLight } from '../resources/logo-light.svg';
 import { NameValueTable } from './common';
-import CreateButton from './common/CreateButton';
+import CreateButton from './common/Resource/CreateButton';
 import Tabs from './common/Tabs';
 
 const versionSnackbarHideTimeout = 5000; // ms

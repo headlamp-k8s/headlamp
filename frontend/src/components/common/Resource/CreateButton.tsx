@@ -5,9 +5,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { apply } from '../../lib/k8s/apiProxy';
-import { KubeObjectInterface } from '../../lib/k8s/cluster';
-import { clusterAction } from '../../redux/actions/actions';
+import { apply } from '../../../lib/k8s/apiProxy';
+import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import { clusterAction } from '../../../redux/actions/actions';
 import EditorDialog from './EditorDialog';
 
 export default function CreateButton() {

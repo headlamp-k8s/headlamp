@@ -1,12 +1,11 @@
 import eyeIcon from '@iconify/icons-mdi/eye';
-import eyeOff from '@iconify/icons-mdi/eye-off';
 import Icon from '@iconify/react';
 import { IconButton, Tooltip } from '@material-ui/core';
 import React from 'react';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { KubeObject } from '../../../lib/k8s/cluster';
 import EditorDialog from './EditorDialog';
 
-interface ViewButtonProps {
+export interface ViewButtonProps {
   item: KubeObject;
 }
 

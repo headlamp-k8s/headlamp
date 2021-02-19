@@ -5,9 +5,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { KubeObject } from '../../lib/k8s/cluster';
-import { KubeServiceAccount } from '../../lib/k8s/serviceAccount';
-import { CallbackActionOptions, clusterAction } from '../../redux/actions/actions';
+import { KubeObject } from '../../../lib/k8s/cluster';
+import { KubeServiceAccount } from '../../../lib/k8s/serviceAccount';
+import { CallbackActionOptions, clusterAction } from '../../../redux/actions/actions';
 import EditorDialog from './EditorDialog';
 import ViewButton from './ViewButton';
 
