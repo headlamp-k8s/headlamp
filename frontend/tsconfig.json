@@ -22,5 +22,17 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "typedocOptions": {
+    "out": "../docs/development/api",
+    "entryPoints": ["src/lib/k8s/index.ts", "src/lib/util.ts"],
+    "theme": "./node_modules/typedoc-hugo-theme/dist",
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "hideBreadcrumbs": true,
+    "readme": "none",
+    "hideInPageTOC": true,
+    "indexTitle": "API"
+  }
 }

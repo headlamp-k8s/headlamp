@@ -63,3 +63,7 @@ image:
 	-t $(DOCKER_REPO)/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_VERSION) -f \
 	Dockerfile \
 	.
+
+.PHONY: docs
+docs:
+	cd frontend && npm install && npm run build-typedoc
