@@ -9,7 +9,9 @@ import TextField from '@material-ui/core/TextField';
 import React from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useDispatch } from 'react-redux';
-import { resetFilter, setSearchFilter } from '../../redux/actions/actions';
+import { useHistory, useLocation } from 'react-router-dom';
+import { addQuery, getFilterValueByNameFromURL } from '../../helpers';
+import { resetFilter, setNamespaceFilter, setSearchFilter } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { NamespacesAutocomplete } from './Autocomplete';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';
@@ -23,13 +25,15 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   const { noNamespaceFilter = false, noSearch = false, ...headerProps } = props;
   const filter = useTypedSelector(state => state.filter);
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  const history = useHistory();
   const hasNamespaceFilters = !noNamespaceFilter && filter.namespaces.size > 0;
   const hasSearch = !noSearch && !!filter.search;
 
   const [showFilters, setShowFilters] = React.useState<boolean>(hasNamespaceFilters || hasSearch);
 
   function resetFilters() {
+    addQuery({ namespace: '' }, { namespace: '' }, history, location);
     dispatch(resetFilter());
     setShowFilters(false);
   }
@@ -42,6 +46,21 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
 
   React.useEffect(
     () => {
+      const namespace = getFilterValueByNameFromURL('namespace', location);
+      if (namespace.length > 0) {
+        const namespaceFromStore = [...filter.namespaces].sort();
+        if (
+          namespace
+            .slice()
+            .sort()
+            .every((value: string, index: number) => value !== namespaceFromStore[index])
+        ) {
+          dispatch(setNamespaceFilter(namespace));
+          if (!noNamespaceFilter) {
+            setShowFilters(true);
+          }
+        }
+      }
       // We don't want the search to be used globally, but we're using Redux with it because
       // this way we manage it the same way as with the other filters.
       return function cleanup() {
