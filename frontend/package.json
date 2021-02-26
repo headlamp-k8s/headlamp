@@ -103,7 +103,9 @@
         "statements": 18
       }
     },
-    "coverageReporters": ["text"]
+    "coverageReporters": [
+      "text"
+    ]
   },
   "prettier": "@kinvolk/eslint-config/prettier-config",
   "devDependencies": {
