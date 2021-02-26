@@ -16,7 +16,7 @@ exports[`Storyshots Label/HoverInfoLabel Hover Info Label 1`] = `
       class="MuiGrid-root MuiGrid-item"
     >
       <div
-        class="MuiBox-root MuiBox-root-93"
+        class="MuiBox-root MuiBox-root"
         title="hover info"
       >
         <svg
@@ -55,7 +55,7 @@ exports[`Storyshots Label/HoverInfoLabel Hover Info Label Info 1`] = `
       class="MuiGrid-root MuiGrid-item"
     >
       <div
-        class="MuiBox-root MuiBox-root-95"
+        class="MuiBox-root MuiBox-root"
       >
         <svg
           focusable="false"

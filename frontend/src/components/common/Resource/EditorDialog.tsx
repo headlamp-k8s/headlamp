@@ -16,12 +16,12 @@ import * as yaml from 'js-yaml';
 import _ from 'lodash';
 import * as Monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import React from 'react';
-import getDocDefinitions from '../../lib/docs';
-import { KubeObjectInterface } from '../../lib/k8s/cluster';
-import ConfirmButton from './ConfirmButton';
-import Empty from './EmptyContent';
-import Loader from './Loader';
-import Tabs from './Tab';
+import getDocDefinitions from '../../../lib/docs';
+import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import ConfirmButton from '../ConfirmButton';
+import Empty from '../EmptyContent';
+import Loader from '../Loader';
+import Tabs from '../Tabs';
 
 const useStyle = makeStyles(theme => ({
   dialogContent: {

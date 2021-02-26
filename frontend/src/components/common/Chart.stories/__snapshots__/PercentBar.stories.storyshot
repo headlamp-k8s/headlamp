@@ -5,7 +5,7 @@ exports[`Storyshots Charts/PercentageBar No Data 1`] = `
   id="root"
 >
   <div
-    class="recharts-responsive-container makeStyles-container-63"
+    class="recharts-responsive-container makeStyles-container"
     id="undefined"
     style="width: 95%; height: 20px;"
   />
@@ -17,7 +17,7 @@ exports[`Storyshots Charts/PercentageBar Percent 50 1`] = `
   id="root"
 >
   <div
-    class="recharts-responsive-container makeStyles-container-61"
+    class="recharts-responsive-container makeStyles-container"
     id="undefined"
     style="width: 95%; height: 20px;"
   />
@@ -29,7 +29,7 @@ exports[`Storyshots Charts/PercentageBar Percent 100 1`] = `
   id="root"
 >
   <div
-    class="recharts-responsive-container makeStyles-container-59"
+    class="recharts-responsive-container makeStyles-container"
     id="undefined"
     style="width: 95%; height: 20px;"
   />
@@ -41,7 +41,7 @@ exports[`Storyshots Charts/PercentageBar Tooltip 1`] = `
   id="root"
 >
   <div
-    class="recharts-responsive-container makeStyles-container-65"
+    class="recharts-responsive-container makeStyles-container"
     id="undefined"
     style="width: 95%; height: 20px;"
   />

@@ -55,7 +55,7 @@ frontend-fixlint:
 	cd frontend && npm run lint -- --fix
 
 frontend-test:
-	cd frontend && npm run test
+	cd frontend && npm run test -- --coverage
 
 image:
 	$(DOCKER_CMD) build \

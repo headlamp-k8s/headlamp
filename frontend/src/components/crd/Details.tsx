@@ -5,9 +5,9 @@ import { useParams } from 'react-router-dom';
 import { apiFactory, apiFactoryWithNamespace } from '../../lib/k8s/apiProxy';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
 import { timeAgo } from '../../lib/util';
-import { ViewDialog } from '../common/EditorDialog';
 import Loader from '../common/Loader';
 import { ConditionsTable, MainInfoSection, PageGrid } from '../common/Resource';
+import { ViewDialog } from '../common/Resource/EditorDialog';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 

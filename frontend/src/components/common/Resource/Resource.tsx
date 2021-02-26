@@ -24,20 +24,20 @@ import {
   KubeContainer,
   KubeObject,
   KubeObjectInterface,
-} from '../../lib/k8s/cluster';
-import { createRouteURL, RouteURLProps } from '../../lib/router';
-import { localeDate } from '../../lib/util';
-import { useTypedSelector } from '../../redux/reducers/reducers';
-import Loader from '../common/Loader';
-import { SectionBox } from '../common/SectionBox';
-import SectionHeader, { HeaderStyleProps } from '../common/SectionHeader';
-import SimpleTable, { NameValueTable, NameValueTableRow } from '../common/SimpleTable';
+} from '../../../lib/k8s/cluster';
+import { createRouteURL, RouteURLProps } from '../../../lib/router';
+import { localeDate } from '../../../lib/util';
+import { useTypedSelector } from '../../../redux/reducers/reducers';
+import Loader from '../../common/Loader';
+import { SectionBox } from '../../common/SectionBox';
+import SectionHeader, { HeaderStyleProps } from '../../common/SectionHeader';
+import SimpleTable, { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
+import Empty from '../EmptyContent';
+import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from '../Label';
+import Link, { LinkProps } from '../Link';
+import { LightTooltip } from '../Tooltip';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
-import Empty from './EmptyContent';
-import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from './Label';
-import Link, { LinkProps } from './Link';
-import { LightTooltip } from './Tooltip';
 
 const useStyles = makeStyles(theme => ({
   metadataValueLabel: {

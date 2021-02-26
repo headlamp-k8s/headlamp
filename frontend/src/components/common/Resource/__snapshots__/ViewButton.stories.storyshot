@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Resource/ViewButton View 1`] = `
+<div
+  id="root"
+>
+  <button
+    aria-label="show yaml viewer"
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+    tabindex="0"
+    title="View YAML"
+    type="button"
+  >
+    <span
+      class="MuiIconButton-label"
+    >
+      <svg
+        focusable="false"
+        height="1em"
+        preserveAspectRatio="xMidYMid meet"
+        style="transform: rotate(360deg);"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`Storyshots Resource/ViewButton View Open 1`] = `
+<div
+  id="root"
+>
+  <button
+    aria-label="show yaml viewer"
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+    tabindex="0"
+    title="View YAML"
+    type="button"
+  >
+    <span
+      class="MuiIconButton-label"
+    >
+      <svg
+        focusable="false"
+        height="1em"
+        preserveAspectRatio="xMidYMid meet"
+        style="transform: rotate(360deg);"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`Storyshots ViewButton View Open 1`] = `
+<div
+  id="root"
+>
+  <button
+    aria-label="show yaml viewer"
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+    tabindex="0"
+    title="View YAML"
+    type="button"
+  >
+    <span
+      class="MuiIconButton-label"
+    >
+      <svg
+        focusable="false"
+        height="1em"
+        preserveAspectRatio="xMidYMid meet"
+        style="transform: rotate(360deg);"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;

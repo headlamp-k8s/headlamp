@@ -8,10 +8,10 @@ exports[`Storyshots Label/InfoLabel Info Label 1`] = `
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
   >
     <div
-      class="MuiGrid-root makeStyles-nameLabelItem-97 MuiGrid-item MuiGrid-grid-xs-true"
+      class="MuiGrid-root makeStyles-nameLabelItem MuiGrid-item MuiGrid-grid-xs-true"
     >
       <span
-        class="MuiTypography-root makeStyles-nameLabel-96 MuiTypography-body1"
+        class="MuiTypography-root makeStyles-nameLabel MuiTypography-body1"
       >
         name
       </span>
@@ -21,7 +21,7 @@ exports[`Storyshots Label/InfoLabel Info Label 1`] = `
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true"
     >
       <span
-        class="MuiTypography-root makeStyles-valueLabel-98 MuiTypography-body1"
+        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
       >
         value
       </span>

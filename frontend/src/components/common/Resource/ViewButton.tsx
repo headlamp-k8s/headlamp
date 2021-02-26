@@ -1,18 +1,19 @@
 import eyeIcon from '@iconify/icons-mdi/eye';
-import eyeOff from '@iconify/icons-mdi/eye-off';
 import Icon from '@iconify/react';
 import { IconButton, Tooltip } from '@material-ui/core';
 import React from 'react';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { KubeObject } from '../../../lib/k8s/cluster';
 import EditorDialog from './EditorDialog';
 
-interface ViewButtonProps {
+export interface ViewButtonProps {
+  /** The item we want to view */
   item: KubeObject;
+  /** If we want to have the view open by default */
+  initialToggle?: boolean;
 }
 
-function ViewButton(props: ViewButtonProps) {
-  const { item } = props;
-  const [toggle, setToggle] = React.useState(false);
+function ViewButton({ item, initialToggle = false }: ViewButtonProps) {
+  const [toggle, setToggle] = React.useState(initialToggle);
   function handleButtonClick() {
     setToggle(toggle => !toggle);
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import themesConf from '../src/lib/themes';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 
 const darkTheme = themesConf['dark'];
 const lightTheme = themesConf['light'];
@@ -10,11 +10,24 @@ const withThemeProvider = (Story, context) => {
     ? context.globals.backgrounds.value
     : 'light';
   const theme = backgroundColor !== 'dark' ? lightTheme : darkTheme;
-  return (
+
+  const ourThemeProvider = (
     <ThemeProvider theme={theme}>
       <Story {...context} />
     </ThemeProvider>
   );
+  if (process.env.NODE_ENV !== 'test') {
+    return ourThemeProvider;
+  } else {
+    const generateClassName = (rule, styleSheet) =>
+      `${styleSheet?.options.classNamePrefix}-${rule.key}`;
+
+    return (
+      <StylesProvider generateClassName={generateClassName}>
+        {ourThemeProvider}
+      </StylesProvider>
+    )
+  }
 };
 export const decorators = [withThemeProvider];
 

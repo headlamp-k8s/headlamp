@@ -5,15 +5,15 @@ exports[`Storyshots Charts/PercentageCircle No Data 1`] = `
   id="root"
 >
   <div
-    class="MuiBox-root MuiBox-root-77"
+    class="MuiBox-root MuiBox-root"
   >
     <p
-      class="MuiTypography-root makeStyles-title-74 MuiTypography-body1"
+      class="MuiTypography-root makeStyles-title MuiTypography-body1"
     >
       CPU usage
     </p>
     <div
-      class="MuiBox-root MuiBox-root-79 makeStyles-loaderContainer-78"
+      class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
     >
       <div
         class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
@@ -44,15 +44,15 @@ exports[`Storyshots Charts/PercentageCircle Percent 50 1`] = `
   id="root"
 >
   <div
-    class="MuiBox-root MuiBox-root-73"
+    class="MuiBox-root MuiBox-root"
   >
     <p
-      class="MuiTypography-root makeStyles-title-70 MuiTypography-body1"
+      class="MuiTypography-root makeStyles-title MuiTypography-body1"
     >
       Pods
     </p>
     <div
-      class="recharts-wrapper makeStyles-chart-72"
+      class="recharts-wrapper makeStyles-chart"
       style="position: relative; cursor: default; width: 160px; height: 160px;"
     >
       <svg
@@ -111,7 +111,7 @@ exports[`Storyshots Charts/PercentageCircle Percent 50 1`] = `
       </svg>
     </div>
     <p
-      class="MuiTypography-root makeStyles-legend-71 MuiTypography-body1"
+      class="MuiTypography-root makeStyles-legend MuiTypography-body1"
     >
       5 / 10 Requested
     </p>
@@ -124,15 +124,15 @@ exports[`Storyshots Charts/PercentageCircle Percent 100 1`] = `
   id="root"
 >
   <div
-    class="MuiBox-root MuiBox-root-69"
+    class="MuiBox-root MuiBox-root"
   >
     <p
-      class="MuiTypography-root makeStyles-title-66 MuiTypography-body1"
+      class="MuiTypography-root makeStyles-title MuiTypography-body1"
     >
       Pods
     </p>
     <div
-      class="recharts-wrapper makeStyles-chart-68"
+      class="recharts-wrapper makeStyles-chart"
       style="position: relative; cursor: default; width: 160px; height: 160px;"
     >
       <svg
@@ -191,7 +191,7 @@ exports[`Storyshots Charts/PercentageCircle Percent 100 1`] = `
       </svg>
     </div>
     <p
-      class="MuiTypography-root makeStyles-legend-67 MuiTypography-body1"
+      class="MuiTypography-root makeStyles-legend MuiTypography-body1"
     >
       9 / 9 Requested
     </p>
