@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"crypto/tls"
 	"crypto/x509"
@@ -13,7 +14,9 @@ import (
 	"net/url"
 	"os"
 	"os/user"
+	"path"
 	"path/filepath"
+	"strings"
 
 	oidc "github.com/coreos/go-oidc"
 	"github.com/gorilla/handlers"
@@ -33,6 +36,7 @@ type HeadlampConfig struct {
 	oidcClientID     string
 	oidcClientSecret string
 	oidcIdpIssuerURL string
+	baseURL          string
 }
 
 type clientConfig struct {
@@ -42,6 +46,7 @@ type clientConfig struct {
 type spaHandler struct {
 	staticPath string
 	indexPath  string
+	baseURL    string
 }
 
 func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -53,6 +58,8 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+
+	path = strings.TrimPrefix(path, h.baseURL)
 
 	// prepend the path with the path to the static directory
 	path = filepath.Join(h.staticPath, path)
@@ -70,8 +77,58 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// otherwise, use http.FileServer to serve the static dir
-	http.FileServer(http.Dir(h.staticPath)).ServeHTTP(w, r)
+	// The file does exist, so we serve that.
+	http.ServeFile(w, r, path)
+}
+
+// returns True if a file exists.
+func fileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+
+	return !info.IsDir()
+}
+
+// copy a file, whilst doing some search/replace on the data.
+func copyReplace(src string, dst string,
+	search []byte, replace []byte,
+	search2 []byte, replace2 []byte) {
+	data, err := ioutil.ReadFile(src)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	data1 := bytes.ReplaceAll(data, search, replace)
+	data2 := bytes.ReplaceAll(data1, search2, replace2)
+
+	err = ioutil.WriteFile(dst, data2, 0600)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+// make sure the base-url is updated in the index.html file.
+func baseURLReplace(staticDir string, baseURL string) {
+	indexBaseURL := path.Join(staticDir, "index.baseUrl.html")
+	index := path.Join(staticDir, "index.html")
+
+	replaceURL := baseURL
+	if baseURL == "" {
+		replaceURL = "."
+	}
+
+	if !fileExists(indexBaseURL) {
+		copyReplace(index, indexBaseURL, []byte(""), []byte(""), []byte(""), []byte(""))
+	}
+
+	copyReplace(indexBaseURL,
+		index,
+		[]byte("./"),
+		[]byte(baseURL+"/"),
+		[]byte("headlampBaseUrl=\".\""),
+		[]byte("headlampBaseUrl=\""+replaceURL+"\""))
 }
 
 // nolint:gocognit,funlen
@@ -116,7 +173,19 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	}
 
 	clientConf := &clientConfig{clusters}
-	r := mux.NewRouter()
+
+	if config.staticDir != "" {
+		baseURLReplace(config.staticDir, config.baseURL)
+	}
+
+	// For when using a base-url, like "/headlamp" with a reverse proxy.
+	var r *mux.Router
+	if config.baseURL == "" {
+		r = mux.NewRouter()
+	} else {
+		baseRoute := mux.NewRouter()
+		r = baseRoute.PathPrefix(config.baseURL).Subrouter()
+	}
 
 	fmt.Println("*** Headlamp Server ***")
 	fmt.Println("  API Routers:")
@@ -133,7 +202,11 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	pluginListURLS := make([]string, 0, len(files))
 
 	for _, f := range files {
-		pluginFileURL := filepath.Join("/plugins", f.Name(), "main.js")
+		if f.Name() == ".gitignore" {
+			continue
+		}
+
+		pluginFileURL := filepath.Join(config.baseURL, "plugins", f.Name(), "main.js")
 		pluginListURLS = append(pluginListURLS, pluginFileURL)
 	}
 
@@ -145,7 +218,8 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	}).Methods("GET")
 
 	// Serve plugins
-	r.PathPrefix("/plugins/").Handler(http.StripPrefix("/plugins/", http.FileServer(http.Dir(config.pluginDir))))
+	pluginHandler := http.StripPrefix(config.baseURL+"/plugins/", http.FileServer(http.Dir(config.pluginDir)))
+	r.PathPrefix("/plugins/").Handler(pluginHandler)
 
 	// Configuration
 	r.HandleFunc("/config", clientConf.getConfig).Methods("GET")
@@ -257,7 +331,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	})
 
 	// Serve the frontend if needed
-	spa := spaHandler{staticPath: config.staticDir, indexPath: "index.html"}
+	spa := spaHandler{staticPath: config.staticDir, indexPath: "index.html", baseURL: config.baseURL}
 	r.PathPrefix("/").Handler(spa)
 
 	http.Handle("/", r)
@@ -337,7 +411,7 @@ func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
 	prefix := "/clusters/" + *name
 
 	r.HandleFunc(prefix+"/{api:.*}", proxyHandler(server, proxy))
-	fmt.Printf("\tlocalhost:%v%v/{api...} -> %v\n", c.port, prefix, *cluster.getServer())
+	fmt.Printf("\tlocalhost:%v%v%v/{api...} -> %v\n", c.port, c.baseURL, prefix, *cluster.getServer())
 }
 
 func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.ResponseWriter, *http.Request) {

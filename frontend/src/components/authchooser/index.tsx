@@ -4,7 +4,7 @@ import { Box, Button, DialogTitle, withStyles } from '@material-ui/core';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { generatePath, useHistory, useLocation } from 'react-router-dom';
-import { isElectron } from '../../helpers';
+import helpers from '../../helpers';
 import { useClustersConf } from '../../lib/k8s';
 import { testAuth } from '../../lib/k8s/apiProxy';
 import { createRouteURL, getRoute, getRoutePath } from '../../lib/router';
@@ -37,7 +37,6 @@ function AuthChooser() {
   const location = useLocation();
   const clusters = useClustersConf();
   const dispatch = useDispatch();
-  const isDevMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
   const [testingAuth, setTestingAuth] = React.useState(false);
   const [error, setError] = React.useState<Error | null>(null);
   const { from = { pathname: createRouteURL('cluster') } } = (location.state ||
@@ -151,9 +150,7 @@ function AuthChooser() {
       title={numClusters > 1 ? `Authentication: ${clusterName}` : 'Authentication'}
       haveClusters={!!clusters && Object.keys(clusters).length > 1}
       error={error}
-      oauthUrl={`${
-        isDevMode || isElectron() ? 'http://localhost:4466/' : '/'
-      }oidc?dt=${Date()}&cluster=${getCluster()}`}
+      oauthUrl={`${helpers.getAppUrl()}oidc?dt=${Date()}&cluster=${getCluster()}`}
       clusterAuthType={clusterAuthType}
       handleTryAgain={() => setError(null)}
       handleOidcAuth={() => {

@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"log"
+	"strings"
 )
 
 func main() {
@@ -18,6 +19,7 @@ func main() {
 	oidcClientID := flag.String("oidc-client-id", "", "ClientID for OIDC")
 	oidcClientSecret := flag.String("oidc-client-secret", "", "ClientSecret for OIDC")
 	oidcIdpIssuerURL := flag.String("oidc-idp-issuer-url", "", "Identity provider issuer URL for oidc")
+	baseURL := flag.String("base-url", "", "Base URL path. eg. /headlamp")
 
 	flag.Parse()
 
@@ -25,6 +27,10 @@ func main() {
 		(*oidcClientID != "" || *oidcClientSecret != "" || *oidcIdpIssuerURL != "") {
 		log.Fatal(`oidc-client-id, oidc-client-secret, oidc-idp-issuer-url 
 		 flags are only meant to be used in inCluster mode`)
+	}
+
+	if *baseURL != "" && !strings.HasPrefix(*baseURL, "/") {
+		log.Fatal("base-url needs to start with a '/' or be empty")
 	}
 
 	StartHeadlampServer(&HeadlampConfig{
@@ -38,5 +44,6 @@ func main() {
 		oidcClientID:     *oidcClientID,
 		oidcClientSecret: *oidcClientSecret,
 		oidcIdpIssuerURL: *oidcIdpIssuerURL,
+		baseURL:          *baseURL,
 	})
 }

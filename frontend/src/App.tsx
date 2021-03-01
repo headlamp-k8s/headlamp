@@ -31,7 +31,7 @@ import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
 import Sidebar, { drawerWidth, NavigationTabs, useSidebarItem } from './components/Sidebar';
-import { isElectron } from './helpers';
+import helpers from './helpers';
 import { getToken, setToken } from './lib/auth';
 import { useCluster, useClustersConf } from './lib/k8s';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
@@ -196,7 +196,11 @@ function AppContainer(props: AppContainerProps) {
   const classes = useStyle({ isSidebarOpen });
   const { setThemeName } = props;
   const Router = ({ children }: React.PropsWithChildren<{}>) =>
-    isElectron() ? <HashRouter>{children}</HashRouter> : <BrowserRouter>{children}</BrowserRouter>;
+    helpers.isElectron() ? (
+      <HashRouter>{children}</HashRouter>
+    ) : (
+      <BrowserRouter basename={helpers.getBaseUrl()}>{children}</BrowserRouter>
+    );
 
   localStorage.setItem('sidebar', JSON.stringify({ shrink: isSidebarOpen }));
 
