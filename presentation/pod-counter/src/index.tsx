@@ -11,7 +11,7 @@ function PodCounter() {
   const msg = pods === null ? 'Loading…' : pods.length.toString();
 
   return (
-      <Typography color="textPrimary">{!error ? `# Pods: ${msg}` : 'Uh, pods!?'}</Typography>
+      <Typography color="textPrimary">QWER{!error ? `# Pods: ${msg}` : 'Uh, pods!?'}</Typography>
   );
 }
 

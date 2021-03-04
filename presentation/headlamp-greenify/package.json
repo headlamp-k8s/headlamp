@@ -24,7 +24,9 @@
     "eject": "react-scripts eject",
     "clean": "rimraf dist",
     "compile": "npm run clean && cross-env NODE_ENV=production babel src --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,stories.js,__snapshots__ --source-maps inline",
-    "watch": "cross-env NODE_ENV=development babel --watch src --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,stories.js,__snapshots__ --source-maps inline"
+    "watch": "cross-env NODE_ENV=development babel --watch src --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,stories.js,__snapshots__ --source-maps inline",
+    "xstart": "headlamp-plugin --watch",
+    "xbuild": "headlamp-plugin"
   },
   "eslintConfig": {
     "extends": [
@@ -46,9 +48,10 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.12.16",
+    "@kinvolk/headlamp-plugin": "^0.1.0",
+    "cross-env": "^7.0.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.2",
-    "cross-env": "^7.0.3"
+    "react-scripts": "4.0.2"
   }
 }

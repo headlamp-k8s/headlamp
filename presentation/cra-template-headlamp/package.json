@@ -1,5 +1,5 @@
 {
-  "name": "cra-template-typescript",
+  "name": "cra-template-headlamp",
   "version": "1.1.2",
   "keywords": [
     "react",
@@ -7,18 +7,18 @@
     "template",
     "typescript"
   ],
-  "description": "The base TypeScript template for Create React App.",
+  "description": "The base TypeScript template for Headlamp plugins.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/create-react-app.git",
-    "directory": "packages/cra-template-typescript"
+    "url": "https://github.com/kinvolk/headlamp.git",
+    "directory": "presentation/cra-template-headlamp"
   },
-  "license": "MIT",
+  "license": "Apache",
   "engines": {
     "node": ">=10"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/kinvolk/headlamp/issues"
   },
   "files": [
     "template",

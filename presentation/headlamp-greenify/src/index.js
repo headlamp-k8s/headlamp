@@ -18,11 +18,15 @@ const ReactGreenify = props => {
 const Thing = () => <ReactGreenify>meow cat</ReactGreenify>
 
 const initialize = (register) => {
-  console.log('headlamp-greenify');
+  console.log('headlamp-greenify initialize called');
+  register.registerAppBarAction('monitor', () =>
+    <Thing />
+  );
+}
 
-  // register.registerAppBarAction('monitor', () =>
-  //   <Thing />
-  // );
+if (window['registerPlugin']) {
+  console.log('registerPlugin in greenify called');
+  window['registerPlugin']('greenify', {initialize});
 }
 
 export { ReactGreenify, initialize };
