@@ -158,14 +158,13 @@ docs/
 
 ### Discoverable examples
 
-- repo, in a folder 'plugins' (maybe at the top level for better discovery, or linked from README)
+- plugins/ folder at top level of Headlamp repo
 - npm (labeled headlamp and headlamp-plugin)
 - github (labeled headlamp and headlamp-plugin)
 - documentation, generated from the repo/github/npm (official plugins, thirdparty ones)
 
 ---
 
-TODO: make a plugins/ folder with a readme and a plugin or 2 in there.
 
 
 ## Packing for Web browser, or packing as a npm package.
@@ -211,6 +210,12 @@ We don't have our APIs separated from the Headlamp app yet.
 ### Headlamp APIs
 
 
+TODO: extract lib/k8s, and some of components?
+
+- @kinvolk/headlamp/lib/k8s (`packages/headlamp-lib-k8s`)
+- @kinvolk/headlamp/components/common `packages/headlamp-components`
+
+TODO: but how do web-packaged-and-loaded packages use these components? peer-dependencies?
 
 
 ## Basic Simple Theme
@@ -234,6 +239,12 @@ export default create({
 
 --- 
 
-TODO: How to theme it?
+TODO: How to theme it? As a plugin.
+TODO: have a simple way to do the basics is useful, rather than a full blown MUI theme?
 
+
+## Plugin tests
+
+TODO: set up a test in an example plugin.
+TODO: should this include a component story?
 
