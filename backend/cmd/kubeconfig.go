@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"strings"
 
 	oidc "github.com/coreos/go-oidc"
 	"golang.org/x/oauth2"
@@ -27,6 +28,7 @@ type OidcConfig struct {
 	ClientID     string
 	ClientSecret string
 	IdpIssuerURL string
+	Scopes       []string
 }
 
 var oidcConfigCache = make(map[string]*OidcConfig)
@@ -63,6 +65,7 @@ func GetContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 				oidcConfig.ClientID = authProvider.Config["client-id"]
 				oidcConfig.ClientSecret = authProvider.Config["client-secret"]
 				oidcConfig.IdpIssuerURL = authProvider.Config["idp-issuer-url"]
+				oidcConfig.Scopes = strings.Split(authProvider.Config["extra-scopes"], ",")
 
 				oidcConfigCache[key] = &oidcConfig
 			}

@@ -46,6 +46,7 @@ func GetOwnCluster(headlampConfig *HeadlampConfig) (*Cluster, error) {
 		oidcConfig.ClientID = headlampConfig.oidcClientID
 		oidcConfig.ClientSecret = headlampConfig.oidcClientSecret
 		oidcConfig.IdpIssuerURL = headlampConfig.oidcIdpIssuerURL
+		oidcConfig.Scopes = headlampConfig.oidcScopes
 
 		oidcConfigCache[OwnClusterName] = &oidcConfig
 	}

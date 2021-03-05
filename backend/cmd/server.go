@@ -18,14 +18,18 @@ func main() {
 	// For inCluster config we need to get the oidc properties from the flags
 	oidcClientID := flag.String("oidc-client-id", "", "ClientID for OIDC")
 	oidcClientSecret := flag.String("oidc-client-secret", "", "ClientSecret for OIDC")
-	oidcIdpIssuerURL := flag.String("oidc-idp-issuer-url", "", "Identity provider issuer URL for oidc")
+	oidcIdpIssuerURL := flag.String("oidc-idp-issuer-url", "", "Identity provider issuer URL for OIDC")
+	// The profile and email scopes are default, but we keep them here for maximum control by the
+	// caller. groups is added here for retro-compatibility for now (since it was hardcoded before).
+	oidcScopes := flag.String("oidc-scopes", "profile,email,groups",
+		"A comma separated list of scopes needed from the OIDC provider")
 	baseURL := flag.String("base-url", "", "Base URL path. eg. /headlamp")
 
 	flag.Parse()
 
 	if !*inCluster &&
 		(*oidcClientID != "" || *oidcClientSecret != "" || *oidcIdpIssuerURL != "") {
-		log.Fatal(`oidc-client-id, oidc-client-secret, oidc-idp-issuer-url 
+		log.Fatal(`oidc-client-id, oidc-client-secret, oidc-idp-issuer-url
 		 flags are only meant to be used in inCluster mode`)
 	}
 
@@ -44,6 +48,7 @@ func main() {
 		oidcClientID:     *oidcClientID,
 		oidcClientSecret: *oidcClientSecret,
 		oidcIdpIssuerURL: *oidcIdpIssuerURL,
+		oidcScopes:       strings.Split(*oidcScopes, ","),
 		baseURL:          *baseURL,
 	})
 }
