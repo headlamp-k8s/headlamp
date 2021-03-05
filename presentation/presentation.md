@@ -188,3 +188,52 @@ server in dev mode, can automatically reload plugins that are npm installed
 
 
 
+
+## Weird imports, and Headlamp API packages
+
+TODO: how to get rid of these weird imports at the top of our plugins?
+
+```javascript
+import { Plugin } from '@kinvolk/headlamp-plugin/types/plugin/index.d';
+import Registry from '@kinvolk/headlamp-plugin/types/plugin/registry.d';
+
+const pluginLib = window.pluginLib;
+const React = window.pluginLib.React;
+const K8s = pluginLib.K8s.ResourceClasses;
+const { Typography } = pluginLib.MuiCore;
+```
+
+---
+
+We don't have our APIs separated from the Headlamp app yet.
+
+
+### Headlamp APIs
+
+
+
+
+## Basic Simple Theme
+
+- Logo, description, and URL.
+- Colors, fonts, and more.
+
+
+```javascript
+import { create } from '@kinvolk/headlamp/theming';
+// import logoUrl from '../../docs/headlamp_light.svg';
+
+export default create({
+  base: 'light',
+  brandTitle: 'Headlamp Kubernetes Web UI dashboard',
+  brandUrl: 'https://kinvolk.io/docs/headlamp/latest/development/',
+  // brandImage: logoUrl,
+  brandImage: 'https://example.com/logo.png',
+});
+```
+
+--- 
+
+TODO: How to theme it?
+
+
