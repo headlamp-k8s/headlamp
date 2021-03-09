@@ -35,6 +35,7 @@ type HeadlampConfig struct {
 	pluginDir        string
 	oidcClientID     string
 	oidcClientSecret string
+	oidcScopes       []string
 	oidcIdpIssuerURL string
 	baseURL          string
 }
@@ -266,7 +267,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 			ClientSecret: oidcAuthConfig.ClientSecret,
 			Endpoint:     provider.Endpoint(),
 			RedirectURL:  fmt.Sprintf("%1s://%2s/oidc-callback", urlScheme, r.Host),
-			Scopes:       []string{oidc.ScopeOpenID, "profile", "email", "groups"},
+			Scopes:       append([]string{oidc.ScopeOpenID}, oidcAuthConfig.Scopes...),
 		}
 
 		state := cluster
