@@ -6,8 +6,15 @@ linkTitle: Base URL
 Normally Headlamp runs at the root of the domain. Hower you can also ask 
 to run it at a base-url like "/headlamp" for example.
 
-- default at the root of the domain: `http://headlamp.example.com/`.
-- base-url `http://example.com/headlamp/` 
+- default at the root of the domain: `https://headlamp.example.com/`.
+- base-url `https://example.com/headlamp/` 
+
+
+## A warning about multiple apps on the same sub domain
+
+Hosting multiple websites (apps) on the [same origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) can lead to possible conflicts between the apps. Each app is able to access information and make requests of the other. Therefore each app needs to be **tested** together, **trusted**, and a compatible **[Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)** should be considered for each of them.
+
+If in doubt, host Headlamp on a separate origin (domain or port, don't use the `-base-url` option).
 
 
 ## How to use with a base-url
