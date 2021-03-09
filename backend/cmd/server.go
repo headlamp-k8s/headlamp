@@ -19,9 +19,8 @@ func main() {
 	oidcClientID := flag.String("oidc-client-id", "", "ClientID for OIDC")
 	oidcClientSecret := flag.String("oidc-client-secret", "", "ClientSecret for OIDC")
 	oidcIdpIssuerURL := flag.String("oidc-idp-issuer-url", "", "Identity provider issuer URL for OIDC")
-	// The profile and email scopes are default, but we keep them here for maximum control by the
-	// caller. groups is added here for retro-compatibility for now (since it was hardcoded before).
-	oidcScopes := flag.String("oidc-scopes", "profile,email,groups",
+	// The profile and email scopes are default, but we keep them here for maximum control by the caller.
+	oidcScopes := flag.String("oidc-scopes", "profile,email",
 		"A comma separated list of scopes needed from the OIDC provider")
 	baseURL := flag.String("base-url", "", "Base URL path. eg. /headlamp")
 
