@@ -21,14 +21,15 @@
     },
     "afterSign": "mac/scripts/notarize.js",
     "asar": false,
+    "artifactName": "${productName}-${version}-${os}-x64.${ext}",
     "linux": {
       "target": [
         "AppImage",
         "tar.gz"
       ],
       "executableName": "headlamp",
-      "artifactName": "${productName}.${ext}",
-      "maintainer": "Kinvolk <hello@kinvolk.io>"
+      "maintainer": "Kinvolk <hello@kinvolk.io>",
+      "category": "Network"
     },
     "mac": {
       "target": [
