@@ -47,9 +47,26 @@ For OIDC to be used, Headlamp needs to know how to configure it, so you have to 
  * the client ID: `-oidc-client-id`
  * the client secret: `-oidc-client-secret`
  * the issuer URL: `-oidc-idp-issuer-url`
+ * (optionally) the OpenId scopes: `-oidc-scopes`
 
 and you have to tell the OIDC provider about the callback URL, which in Headlamp it is your URL + the `/oidc-callback` path, e.g.:
-`https://YOUR_URL/oidc-callback`
+`https://YOUR_URL/oidc-callback`.
+
+### Scopes
+
+Besides the mandatory _openid_ scope, Headlamp also requests the optional
+_profile_ and _email_
+[scopes](https://openid.net/specs/openid-connect-basic-1_0.html#Scopes).
+Scopes can be overridden by using the `-oidc-scopes` option. Remember to
+include the default ones if you need them when using that option.
+For example, if you need to keep the default scopes and add Github's `repo`,
+then add them all to the option:
+
+  `-oidc-scopes=profile,email,repo`
+
+**Note:** Before Headlamp 0.3.0, a scope _groups_ was also included, as it's
+used by Dex and other services, but since it's not part of the default spec,
+it was removed in the mentioned version.
 
 ### Example: OIDC with Dex
 
@@ -60,3 +77,4 @@ then you have to:
   * Set `-oidc-client-id` as Dex's `staticClient.id`
   * Set `-oidc-client-secret` as Dex's `staticClient.secret`
   * Set `-oidc-idp-issuer-url` as Dex's URL (same as in `--oidc-issuer-url` in the Kubernetes APIServer)
+  * Set `-oidc-scopes` if needed, e.g. `-oidc-scopes=profile,email,groups`
