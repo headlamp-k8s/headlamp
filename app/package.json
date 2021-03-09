@@ -1,5 +1,5 @@
 {
-  "name": "headlamp",
+  "name": "Headlamp",
   "version": "0.2.1",
   "description": "",
   "main": "electron/src/main.js",
@@ -16,6 +16,7 @@
   },
   "build": {
     "appId": "com.kinvolk.headlamp",
+    "artifactName": "${name}.${ext}",
     "extraMetadata": {
       "main": "build/electron/main.js"
     },
