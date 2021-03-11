@@ -2,3 +2,4 @@
 /dist
 /build
 /electron/main.js
+/prod_deps

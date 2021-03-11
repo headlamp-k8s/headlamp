@@ -8,7 +8,8 @@
   "scripts": {
     "compile-electron": "babel electron --out-dir electron/ --extensions '.ts'",
     "start": "cd ../ && make backend && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
-    "build": "npm run compile-electron && electron-builder --dir --publish never",
+    "prod-deps": "mkdir -p prod_deps && cd ./prod_deps && cp ../package.json ../package-lock.json . && npm i --only=prod && rm -rf ./node_modules/.bin",
+    "build": "npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
     "package": "npm run compile-electron && electron-builder build --publish never",
     "serve-dev": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron ."
   },
@@ -60,16 +61,16 @@
       ]
     },
     "files": [
-      "electron/main.js"
+      "electron/main.js",
+      {
+        "from": "prod_deps/node_modules/",
+        "to": "node_modules/"
+      }
     ],
     "extraResources": [
       {
         "from": "../frontend/build",
         "to": "frontend"
-      },
-      {
-        "from": "../app/node_modules/",
-        "to": "node_modules/"
       }
     ],
     "publish": {
