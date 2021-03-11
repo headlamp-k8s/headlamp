@@ -167,6 +167,9 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		kubeConfigPath = GetDefaultKubeConfigPath()
 	}
 
+	config.pluginDir = defaultPluginDir(config.pluginDir)
+	log.Printf("plugins-dir: %s\n", config.pluginDir)
+
 	var contexts []Context
 
 	// In-cluster
