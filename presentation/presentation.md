@@ -19,7 +19,7 @@ We have a [Custom templates](https://create-react-app.dev/docs/custom-templates/
 in cra-template-headlamp. To test before it's published do:
 
 ```bash
-npx create-react-app headlamp-myfancy --template file:frontend/presentation/cra-template-headlamp
+npx create-react-app headlamp-myfancy --template file:plugins/cra-template-headlamp
 ```
 
 
@@ -167,16 +167,23 @@ docs/
 
 
 
-## Packing for Web browser, or packing as a npm package.
+## Packing for Web browser, or packing as a npm package?
+
+Both.
+
+```bash
+npm run build
+```
+
+- dist/main.js is for web plugins loaded by script
+- dist/index.js is for npm packages loaded by webpack
+
 
 ---
 
-TODO: We use the watch command from the previous way, but the build from the new way.
-TODO: list npm run xbuild watch/etc commands.
-TODO: main.js is the for web one, and index.js is the package one.
 
 
-
+## Server support for /plugins/enabled
 
 server in dev mode, can automatically reload plugins that are npm installed
 	looks for "headlampl-X"
@@ -190,7 +197,6 @@ server in dev mode, can automatically reload plugins that are npm installed
 
 ## Weird imports, and Headlamp API packages
 
-TODO: how to get rid of these weird imports at the top of our plugins?
 
 ```javascript
 import { Plugin } from '@kinvolk/headlamp-plugin/types/plugin/index.d';
@@ -203,6 +209,8 @@ const { Typography } = pluginLib.MuiCore;
 ```
 
 ---
+
+TODO: how to get rid of these weird imports at the top of our plugins?
 
 We don't have our APIs separated from the Headlamp app yet.
 
@@ -230,8 +238,8 @@ import { create } from '@kinvolk/headlamp/theming';
 
 export default create({
   base: 'light',
-  brandTitle: 'Headlamp Kubernetes Web UI dashboard',
-  brandUrl: 'https://kinvolk.io/docs/headlamp/latest/development/',
+  brandTitle: 'Example brand title',
+  brandUrl: 'https://example.com/',
   // brandImage: logoUrl,
   brandImage: 'https://example.com/logo.png',
 });
@@ -247,4 +255,22 @@ TODO: have a simple way to do the basics is useful, rather than a full blown MUI
 
 TODO: set up a test in an example plugin.
 TODO: should this include a component story?
+
+
+
+## Quickstart
+
+### Step 1
+
+```bash
+npx create-react-app headlamp-myfancy --template headlamp
+cd headlamp-myfancy
+npm run start
+```
+
+### Step 2
+
+Restart the Headlamp app.
+
+
 

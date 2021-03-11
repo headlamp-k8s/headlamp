@@ -18,15 +18,13 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "clean": "rimraf dist",
-    "compile": "npm run clean && cross-env NODE_ENV=production babel src --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,stories.js,__snapshots__ --source-maps inline",
-    "watch": "cross-env NODE_ENV=development babel --watch src --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,stories.js,__snapshots__ --source-maps inline",
+    "build": "npm run clean && npm run build:plugin && npm run build:module",
+    "build:module": "cross-env NODE_ENV=production babel src --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,stories.js,__snapshots__ --source-maps inline",
+    "start": "cross-env NODE_ENV=development babel --watch src --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,stories.js,__snapshots__ --source-maps inline",
     "xstart": "headlamp-plugin --watch",
-    "xbuild": "headlamp-plugin"
+    "build:plugin": "headlamp-plugin"
   },
   "eslintConfig": {
     "extends": [
