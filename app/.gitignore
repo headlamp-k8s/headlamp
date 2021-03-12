@@ -1,6 +1,5 @@
 /node_modules
 /dist
 /build
-/electron/server
-/electron/server.exe
-/electron-builder.yml
+/electron/main.js
+/prod_deps
