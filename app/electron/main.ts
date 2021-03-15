@@ -18,12 +18,42 @@ const defaultPort = 4466;
 
 function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   const serverFilePath = path.join(process.resourcesPath, './server');
-  return spawn(serverFilePath, [...flags], { shell: true });
+
+  const options = {shell: true, detached: false};
+  if (process.platform !== 'win32') {
+    // This makes the child processes a separate group, for easier killing.
+    options.detached = true;
+  }
+
+  return spawn(serverFilePath, [...flags], options);
 }
 
 let serverProcess: ChildProcessWithoutNullStreams | null;
 let intentionalQuit: boolean;
 let serverProcessQuit: boolean;
+
+function quitServerProcess() {
+  if (!serverProcess || serverProcessQuit) {
+    log.error('server process already not running');
+    return
+  }
+
+  intentionalQuit = true;
+  log.info('stopping server process...');
+  if (process.platform !== 'win32') {
+    // Negative pid because it should kill the whole group of processes:
+    //    https://azimi.me/2014/12/31/kill-child_process-node-js.html
+    process.kill(-serverProcess.pid);
+  }
+
+  serverProcess.stdin.destroy();
+  // @todo: should we try and end the process a bit more gracefully?
+  //       What happens if the kill signal doesn't kill it?
+  serverProcess.kill();
+
+  serverProcess = null;
+}
+
 
 function startElecron() {
   log.transports.file.level = 'info';
@@ -195,21 +225,7 @@ function startElecron() {
   });
 }
 
-app.on('quit', function () {
-  if (serverProcess) {
-    if (serverProcessQuit) {
-      log.error('server process already not running');
-    } else {
-      intentionalQuit = true;
-      log.info('stopping server process...');
-      serverProcess.stdin.destroy();
-      // @todo: should we try and end the process a bit more gracefully?
-      //       What happens if the kill signal doesn't kill it?
-      serverProcess.kill();
-    }
-    serverProcess = null;
-  }
-});
+app.on('quit', quitServerProcess);
 
 /**
  * add some error handlers to the serverProcess.
