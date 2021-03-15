@@ -16,6 +16,7 @@ import (
 	"os/user"
 	"path"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	oidc "github.com/coreos/go-oidc"
@@ -110,13 +111,35 @@ func copyReplace(src string, dst string,
 	}
 }
 
+func strInFile(str, filepath string) bool {
+	contents, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		panic(err)
+	}
+
+	isThere, err := regexp.Match(str, contents)
+	if err != nil {
+		panic(err)
+	}
+
+	return isThere
+}
+
 // make sure the base-url is updated in the index.html file.
 func baseURLReplace(staticDir string, baseURL string) {
 	indexBaseURL := path.Join(staticDir, "index.baseUrl.html")
 	index := path.Join(staticDir, "index.html")
 
+	if baseURL == "" && (!fileExists(indexBaseURL) || strInFile("headlampBaseUrl=\".\"", index)) {
+		// The index.html does not need resetting from a different baseURL.
+		return
+	}
+
 	replaceURL := baseURL
 	if baseURL == "" {
+		// We have to do the replace when baseURL == "" because of the case when
+		//   someone first does a different baseURL. If we didn't it would stay stuck
+		//   on that previous baseURL.
 		replaceURL = "."
 	}
 
