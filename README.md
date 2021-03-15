@@ -56,7 +56,10 @@ See the documentation on [how to easily get a Service Account token](https://kin
 
 ## Get involved
 
-Check out our [guidelines](https://kinvolk.io/docs/headlamp/latest/contributing/) on how to contribute to the project.
+Check out our [guidelines](https://kinvolk.io/docs/headlamp/latest/contributing/)
+and join the discussion on the
+[#headlamp](https://kubernetes.slack.com/messages/headlamp) channel
+in the Kubernetes Slack.
 
 ## Roadmap
 

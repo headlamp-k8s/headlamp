@@ -17,7 +17,7 @@ const isHeadlessMode = args.headless;
 const defaultPort = 4466;
 
 function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
-  const serverFilePath = path.join(process.resourcesPath, './electron/server');
+  const serverFilePath = path.join(process.resourcesPath, './server');
 
   const options = {shell: true, detached: false};
   if (process.platform !== 'win32') {
@@ -167,7 +167,7 @@ function startElecron() {
     const startUrl =
       process.env.ELECTRON_START_URL ||
       url.format({
-        pathname: path.join(__dirname, '../index.html'),
+        pathname: path.join(process.resourcesPath, 'frontend', 'index.html'),
         protocol: 'file:',
         slashes: true,
       });
@@ -260,7 +260,7 @@ function attachServerEventHandlers(serverProcess: ChildProcessWithoutNullStreams
 }
 
 if (isHeadlessMode) {
-  serverProcess = startServer(['-html-static-dir', path.join(process.resourcesPath, './build')]);
+  serverProcess = startServer(['-html-static-dir', path.join(process.resourcesPath, './frontend')]);
   attachServerEventHandlers(serverProcess);
   (async () => {
     await open(`http://localhost:${defaultPort}`);

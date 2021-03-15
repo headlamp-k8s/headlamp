@@ -2,33 +2,37 @@
   "name": "headlamp",
   "version": "0.2.1",
   "description": "",
-  "main": "electron/src/main.js",
+  "main": "electron/main.js",
   "homepage": ".",
   "productName": "Headlamp",
   "scripts": {
-    "compile-electron": "babel electron --out-dir electron/src/ --extensions '.ts'",
-    "copy-server-binary": "cd ../ && make backend && cp -r ./backend/server ./app/electron/",
-    "start": "npm run copy-server-binary && cd ../ && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
-    "build": "npm run compile-electron && npm run copy-server-binary && cd ../frontend/ && PUBLIC_URL='./' npm run build && cp -r ../app/electron/src/. build/electron",
-    "package": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish never",
-    "serve-dev": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron .",
-    "publish": "mkdir -p build && cp -r ../frontend/build/* ./build && electron-builder build -c.extraMetadata.main=build/electron/main.js --publish always"
+    "compile-electron": "babel electron --out-dir electron/ --extensions '.ts'",
+    "start": "cd ../ && make backend && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
+    "prod-deps": "mkdir -p prod_deps && cd ./prod_deps && cp ../package.json ../package-lock.json . && npm i --only=prod && rm -rf ./node_modules/.bin",
+    "build": "npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
+    "package": "npm run compile-electron && electron-builder build --publish never",
+    "serve-dev": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron ."
   },
   "build": {
     "appId": "com.kinvolk.headlamp",
-    "extraMetadata": {
-      "main": "build/electron/main.js"
-    },
+    "beforeBuild": "./scripts/build-backend.js",
+    "afterPack": "./scripts/after-pack.js",
     "afterSign": "mac/scripts/notarize.js",
     "asar": false,
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "linux": {
       "target": [
         "AppImage",
         "tar.gz"
       ],
       "executableName": "headlamp",
-      "artifactName": "${productName}.${ext}",
-      "maintainer": "Kinvolk <hello@kinvolk.io>"
+      "maintainer": "Kinvolk <hello@kinvolk.io>",
+      "category": "Network",
+      "extraResources": [
+        {
+          "from": "../backend/server"
+        }
+      ]
     },
     "mac": {
       "target": [
@@ -38,28 +42,32 @@
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "mac/entitlements.mac.plist",
-      "entitlementsInherit": "mac/entitlements.mac.plist"
+      "entitlementsInherit": "mac/entitlements.mac.plist",
+      "extraResources": [
+        {
+          "from": "../backend/server"
+        }
+      ]
     },
     "win": {
       "target": [
         "zip",
         "msi",
         "nsis"
+      ],
+      "extraResources": [
+        {
+          "from": "../backend/server.exe"
+        }
       ]
     },
     "files": [
-      "build/**/*",
-      "../frontend/node_modules/**/*",
-      "node_modules/**/*"
+      "electron/main.js"
     ],
     "extraResources": [
-      "./electron/server",
-      "./electron/server.exe"
-    ],
-    "extraFiles": [
       {
         "from": "../frontend/build",
-        "to": "resources/build"
+        "to": "frontend"
       }
     ],
     "publish": {
@@ -80,9 +88,10 @@
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-typescript": "^7.12.7",
-    "electron": "^10.2.0",
-    "electron-builder": "^22.8.0",
+    "electron": "^12.0.0",
+    "electron-builder": "^22.10.5",
     "electron-notarize": "^1.0.0",
+    "fs-extra": "^8.1.0",
     "typescript": "^4.1.3"
   },
   "dependencies": {

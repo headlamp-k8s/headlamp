@@ -10,3 +10,10 @@ web UIs/dashboards available (i.e. to list and view resources) as well as other 
 Headlamp can be used in-cluster, where it's accessed through a web browser,
 or as a desktop application (using the information defined in the user's
 kubeconfig).
+
+## Get involved
+
+Check out our [contributing](./contributing.md) section and join the
+discussion on the
+[#headlamp](https://kubernetes.slack.com/messages/headlamp) channel
+in the Kubernetes Slack.
