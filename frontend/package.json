@@ -57,7 +57,8 @@
     "lint": "eslint -c package.json --ext .js,.ts,.tsx src/ ../app/electron",
     "format": "prettier --config package.json --write src/ ../app/electron",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-typedoc": "npx typedoc",
+    "build-storybook": "build-storybook -s public -o ../docs/development/storybook"
   },
   "browserslist": {
     "production": [
@@ -133,6 +134,9 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "http-proxy-middleware": "^1.0.6",
-    "monaco-editor-webpack-plugin": "^2.1.0"
+    "monaco-editor-webpack-plugin": "^2.1.0",
+    "typedoc": "^0.20.28",
+    "typedoc-hugo-theme": "^0.2.0",
+    "typedoc-plugin-markdown": "^3.6.0"
   }
 }
