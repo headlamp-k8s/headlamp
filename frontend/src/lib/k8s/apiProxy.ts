@@ -68,6 +68,13 @@ export async function request(
     clearTimeout(id);
   }
 
+  // The backend signals through this header that it wants a reload.
+  // See plugins.go
+  const headerVal = response.headers.get('X-Reload');
+  if (headerVal && headerVal.indexOf('reload') !== -1) {
+    window.location.reload();
+  }
+
   if (!response.ok) {
     const { status, statusText } = response;
     if (autoLogoutOnAuthError && status === 401 && opts.headers.Authorization) {
