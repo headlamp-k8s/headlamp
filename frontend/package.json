@@ -23,18 +23,15 @@
     "@types/webpack-env": "^1.16.0",
     "ansi-to-react": "^6.1.4",
     "cross-env": "^7.0.3",
-    "husky": "^4.3.8",
     "if-env": "^1.0.4",
     "javascript-time-ago": "^2.3.4",
     "js-base64": "^3.6.0",
     "js-cookie": "^2.2.1",
     "js-yaml": "^3.14.0",
-    "lint-staged": "^10.5.4",
     "lodash": "^4.17.20",
     "monaco-editor": "^0.21.2",
     "notistack": "^1.0.3",
     "openapi-types": "^7.2.3",
-    "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hotkeys-hook": "^3.0.3",
@@ -137,6 +134,9 @@
     "monaco-editor-webpack-plugin": "^2.1.0",
     "typedoc": "^0.20.28",
     "typedoc-hugo-theme": "^0.2.0",
-    "typedoc-plugin-markdown": "^3.6.0"
+    "typedoc-plugin-markdown": "^3.6.0",
+    "prettier": "^2.2.1",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4"
   }
 }
