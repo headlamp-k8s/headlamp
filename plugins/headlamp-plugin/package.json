@@ -12,6 +12,8 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "env-paths": "^2.2.1",
+    "filemanager-webpack-plugin": "^4.0.0",
     "imports-loader": "^1.1.0",
     "typescript": "^3.2.1",
     "webpack": "^4.44.1",
