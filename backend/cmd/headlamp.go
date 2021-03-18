@@ -264,10 +264,14 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		oidcAuthConfig, err := GetClusterOidcConfig(cluster)
 		if err != nil {
 			log.Printf("Error getting %s cluster oidc config %s", cluster, err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		provider, err := oidc.NewProvider(ctx, oidcAuthConfig.IdpIssuerURL)
 		if err != nil {
 			log.Printf("Error while fetching the provider from %s error %s", oidcAuthConfig.IdpIssuerURL, err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 
 		oidcConfig := &oidc.Config{
@@ -293,14 +297,9 @@ func StartHeadlampServer(config *HeadlampConfig) {
 			Scopes:       append([]string{oidc.ScopeOpenID}, oidcAuthConfig.Scopes...),
 		}
 
-		state := cluster
-		if err != nil {
-			log.Printf("Error getting oauthConfig for cluster %s error %s", cluster, err)
-		}
+		oauthRequestMap[cluster] = &OauthConfig{Config: oauthConfig, Verifier: verifier, Ctx: ctx}
 
-		oauthRequestMap[state] = &OauthConfig{Config: oauthConfig, Verifier: verifier, Ctx: ctx}
-
-		http.Redirect(w, r, oauthConfig.AuthCodeURL(state), http.StatusFound)
+		http.Redirect(w, r, oauthConfig.AuthCodeURL(cluster), http.StatusFound)
 	}).Queries("cluster", "{cluster}")
 
 	r.HandleFunc("/oidc-callback", func(w http.ResponseWriter, r *http.Request) {
