@@ -2,3 +2,5 @@
 .git
 app
 backend/tools/
+docs/
+**/*.stories
