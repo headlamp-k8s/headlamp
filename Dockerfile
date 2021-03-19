@@ -16,16 +16,16 @@ RUN cd ./backend && go build -o ./server ./cmd/
 
 RUN cd ./frontend && npm install && npm run build
 
+RUN mkdir -p ./plugins
+
 # Backwards compatibility, move plugin folder to only copy matching plugins.
 RUN mv plugins plugins-old
 
-RUN mkdir -p ./plugins
-
 # Backwards compatibility, copy any matching plugins found inside "./plugins-old" into "./plugins".
 # They should match plugins-old/MyFolder/main.js, otherwise they are not copied.
-RUN find plugins-old -mindepth 2 -maxdepth 2 -type f  | grep -i main.js$ | xargs -i dirname {} | xargs -i cp -a {} ./plugins/
+RUN for i in $(find ./plugins-old/*/main.js); do plugin_name=$(echo $i|cut -d'/' -f3); mkdir -p plugins/$plugin_name; cp $i plugins/$plugin_name; done
 
-RUN find .plugins -mindepth 2 -maxdepth 2 -type f  | grep -i main.js$ | xargs -i dirname {} | xargs -i cp -a {} ./plugins/
+RUN for i in $(find ./.plugins/*/main.js); do plugin_name=$(echo $i|cut -d'/' -f3); mkdir -p plugins/$plugin_name; cp $i plugins/$plugin_name; done
 
 FROM $IMAGE_BASE
 
