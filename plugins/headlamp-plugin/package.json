@@ -1,6 +1,6 @@
 {
   "name": "@kinvolk/headlamp-plugin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The needed infrastructure for building Headlamp plugins.",
   "bin": "bin/headlamp-plugin.js",
   "dependencies": {
@@ -14,15 +14,18 @@
     "babel-loader": "^8.1.0",
     "env-paths": "^2.2.1",
     "filemanager-webpack-plugin": "^4.0.0",
+    "fs-extra": "^9.1.0",
     "imports-loader": "^1.1.0",
     "typescript": "^3.2.1",
+    "validate-npm-package-name": "^3.0.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   },
   "files": [
     "bin",
     "config",
-    "types"
+    "types",
+    "template"
   ],
   "keywords": [
     "headlamp",

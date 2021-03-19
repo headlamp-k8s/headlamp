@@ -6,10 +6,71 @@ const webpack = require('webpack');
 const config = require('../config/webpack.config');
 const args = require('minimist')(process.argv.slice(2))
 
-const fs = require('fs')
+const fs = require('fs-extra');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const envPaths = require('env-paths');
 
+const path = require('path');
+const child_process = require('child_process');
+const validate = require("validate-npm-package-name")
+
+
+/**
+ * Initializes a new plugin folder.
+ *
+ * Copies the files within template, and modifies a couple.
+ * Then runs npm install inside of the folder.
+ * 
+ * @param {string} name - name of package and output folder.
+ */
+function init(name) {
+  const dstFolder = name;
+  const templateFolder = path.resolve(__dirname, '..', 'template');
+  const indexPath = path.join(dstFolder, 'src', 'index.tsx');
+  const packagePath = path.join(dstFolder, 'package.json');
+
+  if (fs.existsSync(name)) {
+    console.error(`"${name}" already exists, not initializing`);
+    return 1;
+  }
+
+  const nameValid = validate(name);
+  if (!nameValid.validForNewPackages) {
+    console.error(`Invalid package name:"${name}":, not initializing`);
+    console.error(nameValid.errors);
+    return 2;
+  }
+
+
+  fs.copySync(templateFolder, dstFolder, {errorOnExist: true, overwrite: false});
+
+  function replaceFileVariables(path) {
+    fs.writeFileSync(
+      path,
+      fs.readFileSync(path, 'utf8').split('$${name}').join(name)
+    )
+  }
+
+  replaceFileVariables(packagePath);
+  replaceFileVariables(indexPath);
+
+  // @todo: this is to make testing locally easier. Remove before merge.
+  const proc1 = child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {cwd: dstFolder});
+
+  // Run npm install.
+  const proc = child_process.spawnSync('npm', ['install'], {cwd: dstFolder});
+  process.stdout.write(proc.stdout);
+  process.stderr.write(proc.stderr);
+  if (proc.status !== 0) {
+    console.error(`Problem running npm install inside of "${dstFolder}"`);
+    return 3;
+  }
+
+  console.log(`"${dstFolder}" created. Run the Headlamp app and:`);
+  console.log(`cd "${dstFolder}" ; npm run start`);
+
+  return 0;
+}
 
 /**
  * Copies the built plugin to the app config folder ~/.config/Headlamp/plugins/
@@ -34,17 +95,6 @@ function copyToPluginsFolder(config) {
       }
     }),
   ];
-}
-
-copyToPluginsFolder(config);
-
-
-if (args['watch']) {
-  config.watch = true;
-  config.mode = 'development';
-  process.env['BABEL_ENV'] = 'development';
-} else {
-  process.env['BABEL_ENV'] = 'production';
 }
 
 /**
@@ -75,4 +125,16 @@ function compile(err, stats) {
   }
 };
 
-webpack(config, compile);
+if (args['watch']) {
+  config.watch = true;
+  config.mode = 'development';
+  process.env['BABEL_ENV'] = 'development';
+  copyToPluginsFolder(config);
+  webpack(config, compile);
+} else if (args['_'][0] === 'init') {
+  process.exitCode = init(args['_'][1]);
+} else {
+  process.env['BABEL_ENV'] = 'production';
+  copyToPluginsFolder(config);
+  webpack(config, compile);
+}
