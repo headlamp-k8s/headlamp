@@ -208,5 +208,5 @@ a deployment of Headlamp using the Docker image can mount a plugins folder
 and point to it by using the mentioned option.
 
 An alternative is to build an image that ships some plugins in it. For that,
-just create a plugins folder in the Headlamp project directory as the Dockerfile
+just create a ".plugins" folder in the Headlamp project directory as the Dockerfile
 will include it and point to it by default.

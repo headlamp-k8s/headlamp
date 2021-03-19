@@ -6,7 +6,7 @@ linktitle: Building & Shipping
 ## Active development / In-tree build
 
 During development however, the workflow of 1. building the plugins outside
-of the project; 2. copying to a plugins folder; 3. running Headlamp pointing
+of the project; 2. copying to a ".plugins" folder; 3. running Headlamp pointing
 to that folder, is not a great development user-experience.
 
 While we are planning a smarter way to develop plugins outside of the project's tree
@@ -65,7 +65,7 @@ For example, if we have compiled 3 plugins called MyPlugin1, MyPlugin2, and
 MyPlugin3, they should be added to a directory in the following structure:
 
   ```
-  plugins/
+  .plugins/
     MyPlugin1/
       main.js
     MyPlugin2/
@@ -78,5 +78,5 @@ Then, when running Headlamp's server, the `-plugin-dir` option should point
 to the directory:
 
 ```bash
-./server -plugins-dir=/path/to/plugins/
+./server -plugins-dir=/path/to/.plugins/
 ```

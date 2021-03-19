@@ -167,6 +167,13 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		kubeConfigPath = GetDefaultKubeConfigPath()
 	}
 
+	log.Printf("plugins-dir: %s\n", config.pluginDir)
+
+	if !config.useInCluster {
+		// in-cluster mode is unlikely to want reloading plugins.
+		go watchForChanges(config.pluginDir)
+	}
+
 	var contexts []Context
 
 	// In-cluster
@@ -444,6 +451,8 @@ func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.Response
 		request.URL.Host = url.Host
 		request.URL.Path = mux.Vars(request)["api"]
 		request.URL.Scheme = url.Scheme
+
+		pluginReloadResponse(writer)
 
 		log.Println("Requesting ", request.URL.String())
 		proxy.ServeHTTP(writer, request)

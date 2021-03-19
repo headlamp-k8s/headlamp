@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/coreos/go-oidc v2.2.1+incompatible
+	github.com/fsnotify/fsnotify v1.4.9
 	github.com/golangci/golangci-lint v1.31.0 // indirect
 	github.com/gorilla/handlers v1.4.2
 	github.com/gorilla/mux v1.7.4

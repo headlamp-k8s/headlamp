@@ -50,7 +50,8 @@ function loadScripts(array: string[], onLoadFinished: (value?: any) => void) {
   };
   (function run() {
     if (array.length !== 0) {
-      loader(array.shift() as string, run);
+      const src = `${helpers.getAppUrl()}${array.shift()}`;
+      loader(src, run);
     } else {
       onLoadFinished && onLoadFinished();
     }

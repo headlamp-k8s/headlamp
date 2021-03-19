@@ -14,7 +14,7 @@ func main() {
 	insecure := flag.Bool("insecure-ssl", false, "Accept/Ignore all server SSL certificates")
 	// @todo: Make this a uint and validate the values
 	port := flag.String("port", "4466", "Port to listen from")
-	pluginDir := flag.String("plugins-dir", "./plugins", "Specify the plugins directory to build the backend with")
+	pluginDir := flag.String("plugins-dir", defaultPluginDir(), "Specify the plugins directory to build the backend with")
 	// For inCluster config we need to get the oidc properties from the flags
 	oidcClientID := flag.String("oidc-client-id", "", "ClientID for OIDC")
 	oidcClientSecret := flag.String("oidc-client-secret", "", "ClientSecret for OIDC")
