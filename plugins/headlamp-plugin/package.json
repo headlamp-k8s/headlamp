@@ -19,7 +19,8 @@
     "typescript": "^3.2.1",
     "validate-npm-package-name": "^3.0.0",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "yargs": "^16.2.0"
   },
   "files": [
     "bin",

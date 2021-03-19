@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Your Headlamp plugin",
   "scripts": {
-    "start": "headlamp-plugin --watch",
-    "build": "headlamp-plugin"
+    "start": "headlamp-plugin start",
+    "build": "headlamp-plugin build"
   },
   "keywords": [
     "headlamp",

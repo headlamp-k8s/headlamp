@@ -4,16 +4,13 @@
 
 const webpack = require('webpack');
 const config = require('../config/webpack.config');
-const args = require('minimist')(process.argv.slice(2))
-
 const fs = require('fs-extra');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const envPaths = require('env-paths');
-
 const path = require('path');
 const child_process = require('child_process');
-const validate = require("validate-npm-package-name")
-
+const validate = require("validate-npm-package-name");
+const yargs = require('yargs/yargs');
 
 /**
  * Initializes a new plugin folder.
@@ -125,16 +122,27 @@ function compile(err, stats) {
   }
 };
 
-if (args['watch']) {
-  config.watch = true;
-  config.mode = 'development';
-  process.env['BABEL_ENV'] = 'development';
-  copyToPluginsFolder(config);
-  webpack(config, compile);
-} else if (args['_'][0] === 'init') {
-  process.exitCode = init(args['_'][1]);
-} else {
-  process.env['BABEL_ENV'] = 'production';
-  copyToPluginsFolder(config);
-  webpack(config, compile);
-}
+
+const argv = yargs(process.argv.slice(2))
+  .command('build', 'Build the plugin', {}, (argv) => {
+    process.env['BABEL_ENV'] = 'production';
+    copyToPluginsFolder(config);
+    webpack(config, compile);
+  })
+  .command('start', 'Watch for changes and build the plugin', {}, (argv) => {
+    config.watch = true;
+    config.mode = 'development';
+    process.env['BABEL_ENV'] = 'development';
+    copyToPluginsFolder(config);
+    webpack(config, compile);
+  })
+  .command('init <name>', 'Initialize a new plugin folder with base code', (yargs) => {
+    yargs.positional('name', {
+      describe: 'Name of package',
+      type: 'string',
+    })
+  }, (argv) => {
+    process.exitCode = init(argv.name);
+  })
+  .help()
+  .argv
