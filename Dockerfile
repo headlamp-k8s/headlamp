@@ -16,10 +16,10 @@ RUN cd ./backend && go build -o ./server ./cmd/
 
 RUN cd ./frontend && npm install && npm run build
 
-RUN mkdir -p ./plugins
-
 # Backwards compatibility, move plugin folder to only copy matching plugins.
-RUN mv plugins plugins-old
+RUN mv plugins plugins-old || true
+
+RUN mkdir -p ./plugins
 
 # Backwards compatibility, copy any matching plugins found inside "./plugins-old" into "./plugins".
 # They should match plugins-old/MyFolder/main.js, otherwise they are not copied.
