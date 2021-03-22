@@ -14,7 +14,7 @@ WORKDIR /headlamp
 
 RUN cd ./backend && go build -o ./server ./cmd/
 
-RUN cd ./frontend && npm install && npm run build
+RUN cd ./frontend && npm install --only=prod && npm run build
 
 # Backwards compatibility, move plugin folder to only copy matching plugins.
 RUN mv plugins plugins-old || true
