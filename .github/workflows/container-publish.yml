@@ -1,0 +1,23 @@
+name: Publish container
+on:
+  push:
+    tags:
+    - '*'
+jobs:
+  push_to_registry:
+    name: Test building container image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Get tag
+      id: gettag
+      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+    - name: Build & Push image
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.QUAY_USERNAME }}
+        password: ${{ secrets.QUAY_PASSWORD }}
+        registry: quay.io
+        repository: kinvolk/headlamp
+        tags: "${{ steps.gettag.outputs.tag }},latest"
