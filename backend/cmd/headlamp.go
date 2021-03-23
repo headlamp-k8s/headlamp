@@ -225,20 +225,14 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		config.addProxyForContext(&contexts[i], r)
 	}
 
-	files, err := ioutil.ReadDir(config.pluginDir)
-	if !os.IsNotExist(err) {
-		log.Println("Error: ", err)
-	}
-
-	pluginListURLS := make([]string, 0, len(files))
-
-	for _, f := range files {
-		if f.Name() == ".gitignore" {
-			continue
+	pluginListURLs, err := config.getPluginListURLs()
+	if err != nil {
+		if !os.IsNotExist(err) {
+			log.Println("Error: ", err)
 		}
-
-		pluginFileURL := filepath.Join(config.baseURL, "plugins", f.Name(), "main.js")
-		pluginListURLS = append(pluginListURLS, pluginFileURL)
+		// There was error, but we don't want to keep checking the plugins
+		// again, until we deliberately do (so making the list an empty one).
+		pluginListURLs = make([]string, 0)
 	}
 
 	r.HandleFunc("/plugins/list", func(w http.ResponseWriter, r *http.Request) {

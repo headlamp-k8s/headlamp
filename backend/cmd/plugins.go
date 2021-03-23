@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -156,4 +157,24 @@ func watchSubfolders(path string) {
 			done <- struct{}{}
 		}()
 	}
+}
+
+func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
+	files, err := ioutil.ReadDir(c.pluginDir)
+	if err != nil && !os.IsNotExist(err) {
+		return nil, err
+	}
+
+	pluginListURLs := make([]string, 0, len(files))
+
+	for _, f := range files {
+		if f.Name() == ".gitignore" {
+			continue
+		}
+
+		pluginFileURL := filepath.Join(c.baseURL, "plugins", f.Name(), "main.js")
+		pluginListURLs = append(pluginListURLs, pluginFileURL)
+	}
+
+	return pluginListURLs, nil
 }
