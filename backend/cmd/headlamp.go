@@ -51,6 +51,12 @@ type spaHandler struct {
 	baseURL    string
 }
 
+var pluginListURLs []string
+
+func resetPlugins() {
+	pluginListURLs = nil
+}
+
 func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// get the absolute path to prevent directory traversal
 	path, err := filepath.Abs(r.URL.Path)
@@ -225,7 +231,9 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		config.addProxyForContext(&contexts[i], r)
 	}
 
-	pluginListURLs, err := config.getPluginListURLs()
+	var err error
+
+	pluginListURLs, err = config.getPluginListURLs()
 	if err != nil {
 		if !os.IsNotExist(err) {
 			log.Println("Error: ", err)
@@ -237,7 +245,12 @@ func StartHeadlampServer(config *HeadlampConfig) {
 
 	r.HandleFunc("/plugins/list", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		if err := json.NewEncoder(w).Encode(pluginListURLS); err != nil {
+		// The pluginListURLs should only be nil if we want to dynamically load it
+		// (and that's available only when not running in-cluster).
+		if !config.useInCluster && pluginListURLs == nil {
+			pluginListURLs, _ = config.getPluginListURLs()
+		}
+		if err := json.NewEncoder(w).Encode(pluginListURLs); err != nil {
 			log.Println("Error encoding plugins list", err)
 		}
 	}).Methods("GET")
@@ -438,6 +451,16 @@ func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
 	fmt.Printf("\tlocalhost:%v%v%v/{api...} -> %v\n", c.port, c.baseURL, prefix, *cluster.getServer())
 }
 
+func setPluginReloadHeader(writer http.ResponseWriter) {
+	// We signal back to the frontend through a header.
+	// See apiProxy.ts in the frontend for how it handles this.
+	log.Println("Sending reload plugins signal to frontend")
+
+	// Allow JavaScript access to X-Reload header. Because denied by default.
+	writer.Header().Set("Access-Control-Expose-Headers", "X-Reload")
+	writer.Header().Set("X-Reload", "reload")
+}
+
 func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.ResponseWriter, *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		request.Host = url.Host
@@ -446,7 +469,10 @@ func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.Response
 		request.URL.Path = mux.Vars(request)["api"]
 		request.URL.Scheme = url.Scheme
 
-		pluginReloadResponse(writer)
+		if pluginsChanged() {
+			resetPlugins()
+			setPluginReloadHeader(writer)
+		}
 
 		log.Println("Requesting ", request.URL.String())
 		proxy.ServeHTTP(writer, request)
