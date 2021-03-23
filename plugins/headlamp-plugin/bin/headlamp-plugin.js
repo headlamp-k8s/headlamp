@@ -122,6 +122,46 @@ function compile(err, stats) {
   }
 };
 
+/**
+ * Copies folders of packages in the form: packageName/dist/main.js to packageName/main.js
+ * 
+ * @returns exit code 0 on success, 1 or 2 on failure.
+ */
+function extract(pluginPackagesPath, outputPlugins) {
+  if (!fs.existsSync(pluginPackagesPath)) {
+    console.error(`"${pluginPackagesPath}" does not exist. Not extracting.`);
+    return 1;
+  }
+  if (!fs.existsSync(outputPlugins)) {
+    console.log(`"${outputPlugins}" did not exist.`);
+    fs.mkdirSync(outputPlugins);
+  }
+
+  const folders = fs.readdirSync(pluginPackagesPath, { withFileTypes: true })
+    .filter(fileName => {
+    return (
+      fileName.isDirectory() &&
+      fs.existsSync(path.join(pluginPackagesPath, fileName.name, 'dist', 'main.js'))
+    );
+  });
+
+  folders.forEach((folder) => {
+    const plugName = path.join(outputPlugins, folder.name);
+    const mainjs = path.join(plugName, 'main.js');
+    const inputMainJs = path.join(pluginPackagesPath, folder.name, 'dist', 'main.js');
+
+    if(!fs.existsSync(plugName)) {
+      console.log(`Making output folder "${plugName}".`);
+      fs.mkdirSync(plugName, true);
+    }
+
+    console.log(`Copying "${inputMainJs}" to "${mainjs}".`);
+    fs.copyFileSync(inputMainJs, mainjs);
+  });
+
+  return 0;
+}
+
 
 const argv = yargs(process.argv.slice(2))
   .command('build', 'Build the plugin', {}, (argv) => {
@@ -129,14 +169,14 @@ const argv = yargs(process.argv.slice(2))
     copyToPluginsFolder(config);
     webpack(config, compile);
   })
-  .command('start', 'Watch for changes and build the plugin', {}, (argv) => {
+  .command('start', 'Watch for changes and build plugin', {}, (argv) => {
     config.watch = true;
     config.mode = 'development';
     process.env['BABEL_ENV'] = 'development';
     copyToPluginsFolder(config);
     webpack(config, compile);
   })
-  .command('init <name>', 'Initialize a new plugin folder with base code', (yargs) => {
+  .command('create <name>', 'Create a new plugin folder', (yargs) => {
     yargs.positional('name', {
       describe: 'Name of package',
       type: 'string',
@@ -144,5 +184,26 @@ const argv = yargs(process.argv.slice(2))
   }, (argv) => {
     process.exitCode = init(argv.name);
   })
+  .command(
+    'extract <pluginPackages> <outputPlugins>',
+    ('Copies folders of packages from pluginPackages/packageName/dist/main.js ' +
+     'to outputPlugins/packageName/main.js'),
+    (yargs) => {
+    yargs.positional('pluginPackages', {
+      describe: 'A folder of plugin packages that have been built with dist/main.js in them.',
+      type: 'string',
+    })
+    yargs.positional('outputPlugins', {
+      describe: (
+        'A plugins folder (eg. ".plugins") to extract plugins to. ' +
+        'The output is a series of packageName/main.js. ' +
+        'Creates this folder if it does not exist.'
+      ),
+      type: 'string',
+    })
+  }, (argv) => {
+    process.exitCode = extract(argv.pluginPackages, argv.outputPlugins);
+  })
+  .demandCommand(1, '')
   .help()
   .argv
