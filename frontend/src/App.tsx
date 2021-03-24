@@ -118,6 +118,7 @@ function TopBar() {
           <React.Fragment key={i}>{action()}</React.Fragment>
         ))
       }
+      <ThemeChangeButton />
       <IconButton
         aria-label="User menu"
         aria-controls="menu-appbar"
@@ -209,7 +210,6 @@ function AppContainer() {
               <div style={{ flex: '1 0 0' }} />
               <ClusterTitle />
               <div style={{ flex: '1 0 0' }} />
-              <ThemeChangeButton />
               <TopBar />
             </Toolbar>
           </AppBar>
