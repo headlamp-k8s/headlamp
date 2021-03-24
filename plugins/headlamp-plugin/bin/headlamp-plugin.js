@@ -137,27 +137,57 @@ function extract(pluginPackagesPath, outputPlugins) {
     fs.mkdirSync(outputPlugins);
   }
 
-  const folders = fs.readdirSync(pluginPackagesPath, { withFileTypes: true })
-    .filter(fileName => {
-    return (
-      fileName.isDirectory() &&
-      fs.existsSync(path.join(pluginPackagesPath, fileName.name, 'dist', 'main.js'))
-    );
-  });
-
-  folders.forEach((folder) => {
-    const plugName = path.join(outputPlugins, folder.name);
-    const mainjs = path.join(plugName, 'main.js');
-    const inputMainJs = path.join(pluginPackagesPath, folder.name, 'dist', 'main.js');
-
+  function copyFiles(plugName, inputMainJs, mainjs) {
     if(!fs.existsSync(plugName)) {
       console.log(`Making output folder "${plugName}".`);
       fs.mkdirSync(plugName, true);
     }
 
     console.log(`Copying "${inputMainJs}" to "${mainjs}".`);
-    fs.copyFileSync(inputMainJs, mainjs);
-  });
+    fs.copyFileSync(inputMainJs, mainjs);    
+  }
+
+  /**
+   * pluginPackagesPath is a package folder, not a folder of packages.
+   */
+  function extractPackage() {
+    if (fs.existsSync(path.join(pluginPackagesPath, 'dist', 'main.js'))) {
+      const trimmedPath = (
+        pluginPackagesPath.slice(-1) == path.sep ? 
+        pluginPackagesPath.slice(0,-1) :
+        pluginPackagesPath
+      );
+      const folderName = trimmedPath.split(path.sep).splice(-1)[0];
+      const plugName = path.join(outputPlugins, folderName);
+      const mainjs = path.join(plugName, 'main.js');
+      const inputMainJs = path.join(pluginPackagesPath, 'dist', 'main.js');
+      copyFiles(plugName, inputMainJs, mainjs);
+      return true;
+    }
+    return false;
+  }
+
+  function extractFolderOfPackages() {
+    const folders = fs.readdirSync(pluginPackagesPath, { withFileTypes: true })
+      .filter(fileName => {
+      return (
+        fileName.isDirectory() &&
+        fs.existsSync(path.join(pluginPackagesPath, fileName.name, 'dist', 'main.js'))
+      );
+    });
+
+    folders.forEach((folder) => {
+      const plugName = path.join(outputPlugins, folder.name);
+      const mainjs = path.join(plugName, 'main.js');
+      const inputMainJs = path.join(pluginPackagesPath, folder.name, 'dist', 'main.js');
+      copyFiles(plugName, inputMainJs, mainjs);
+    });
+    return folders.length !== 0;
+  }
+
+  if (!(extractPackage() || extractFolderOfPackages())) {
+    console.error(`"${pluginPackagesPath}" does not contain packages. Not extracting.`);
+  };
 
   return 0;
 }
@@ -190,7 +220,10 @@ const argv = yargs(process.argv.slice(2))
      'to outputPlugins/packageName/main.js'),
     (yargs) => {
     yargs.positional('pluginPackages', {
-      describe: 'A folder of plugin packages that have been built with dist/main.js in them.',
+      describe: (
+        'A folder of plugin packages that have been built with dist/main.js in them.' +
+        'Can also be a single package folder.'
+      ),
       type: 'string',
     })
     yargs.positional('outputPlugins', {
