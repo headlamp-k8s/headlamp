@@ -51,8 +51,8 @@ function init(name) {
   replaceFileVariables(packagePath);
   replaceFileVariables(indexPath);
 
-  // @todo: this is to make testing locally easier. Remove before merge.
-  const proc1 = child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {cwd: dstFolder});
+  // This can be used to make testing locally easier.
+  // const proc1 = child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {cwd: dstFolder});
 
   // Run npm install.
   const proc = child_process.spawnSync('npm', ['install'], {cwd: dstFolder});
