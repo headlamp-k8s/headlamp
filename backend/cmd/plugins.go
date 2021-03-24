@@ -149,7 +149,15 @@ func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
 	pluginListURLs := make([]string, 0, len(files))
 
 	for _, f := range files {
-		if f.Name() == ".gitignore" {
+		if !f.IsDir() {
+			continue
+		}
+
+		pluginPath := filepath.Join(c.pluginDir, f.Name(), "main.js")
+
+		_, err := os.Stat(pluginPath)
+		if err != nil {
+			log.Printf("not including plugin path '%s': %s\n", pluginPath, err)
 			continue
 		}
 
