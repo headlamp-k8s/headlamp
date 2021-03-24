@@ -15,6 +15,7 @@ export const UI_SIDEBAR_SET_EXPANDED = 'UI_SIDEBAR_SET_EXPANDED';
 export const UI_ROUTER_SET_ROUTE = 'UI_ROUTER_SET_ROUTE';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
 export const UI_APP_BAR_SET_ACTION = 'UI_APP_BAR_SET_ACTION';
+export const UI_THEME_SET = 'UI_THEME_SET';
 
 export interface ClusterActionButton {
   label: string;
@@ -117,4 +118,8 @@ export function setAppBarAction(actionName: string, actionFunc: HeaderActionFunc
 
 export function setConfig(config: object) {
   return { type: CONFIG_NEW, config };
+}
+
+export function setTheme(name?: string) {
+  return { type: UI_THEME_SET, theme: { name } };
 }
