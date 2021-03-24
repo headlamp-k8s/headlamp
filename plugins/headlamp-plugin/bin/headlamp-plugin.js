@@ -205,5 +205,6 @@ const argv = yargs(process.argv.slice(2))
     process.exitCode = extract(argv.pluginPackages, argv.outputPlugins);
   })
   .demandCommand(1, '')
+  .strict()
   .help()
   .argv
