@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"path"
 	"path/filepath"
@@ -55,34 +55,16 @@ func defaultPluginDir() string {
 	return pluginsConfigDir
 }
 
-// Handles if the frontend should reload because of plugin changes.
-func pluginReloadResponse(writer http.ResponseWriter) {
-	if shouldReload() {
-		// We signal back to the frontend through a header.
-		// See apiProxy.ts in the frontend for how it handles this.
-		log.Println("Sending reload plugins signal to frontend")
-
-		// We have reloaded, and we only do this once per set of changes.
-		// Because many files could change at once.
-		doneReload()
-		// Allow JavaScript access to X-Reload header. Because denied by default.
-		writer.Header().Set("Access-Control-Expose-Headers", "X-Reload")
-		writer.Header().Set("X-Reload", "reload")
-	}
-}
-
 var watcher *fsnotify.Watcher
 
 var changeHappened = false
 
-// shouldReload asks if we should reload.
-func shouldReload() bool {
-	return changeHappened
-}
-
-// doneReload tells us that we will do a reload. Next call to shouldReload will be false.
-func doneReload() {
+// pluginsChanged asks if we should reload.
+func pluginsChanged() bool {
+	changed := changeHappened
 	changeHappened = false
+
+	return changed
 }
 
 // watchForChanges(path) looks for changes in the path, and signals that a change has happened.
@@ -156,4 +138,38 @@ func watchSubfolders(path string) {
 			done <- struct{}{}
 		}()
 	}
+}
+
+// getPluginListURLs gets a list of plugin URLs from the configured plugins folder.
+// Returns pluginListURLs, nil if there is no problem.
+// returns nil, err if there's an error.
+func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
+	files, err := ioutil.ReadDir(c.pluginDir)
+	if err != nil && !os.IsNotExist(err) {
+		return nil, err
+	}
+
+	pluginListURLs := make([]string, 0, len(files))
+
+	for _, f := range files {
+		if !f.IsDir() {
+			pluginPath := filepath.Join(c.pluginDir, f.Name())
+			log.Printf("Not including plugin path '%s' it is not a folder.\n", pluginPath)
+
+			continue
+		}
+
+		pluginPath := filepath.Join(c.pluginDir, f.Name(), "main.js")
+
+		_, err := os.Stat(pluginPath)
+		if err != nil {
+			log.Printf("Not including plugin path '%s': %s\n", pluginPath, err)
+			continue
+		}
+
+		pluginFileURL := filepath.Join(c.baseURL, "plugins", f.Name(), "main.js")
+		pluginListURLs = append(pluginListURLs, pluginFileURL)
+	}
+
+	return pluginListURLs, nil
 }
