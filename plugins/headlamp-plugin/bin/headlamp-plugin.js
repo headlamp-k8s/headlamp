@@ -13,14 +13,14 @@ const validate = require("validate-npm-package-name");
 const yargs = require('yargs/yargs');
 
 /**
- * Initializes a new plugin folder.
+ * Creates a new plugin folder.
  *
  * Copies the files within template, and modifies a couple.
  * Then runs npm install inside of the folder.
  * 
  * @param {string} name - name of package and output folder.
  */
-function init(name) {
+function create(name) {
   const dstFolder = name;
   const templateFolder = path.resolve(__dirname, '..', 'template');
   const indexPath = path.join(dstFolder, 'src', 'index.tsx');
@@ -212,7 +212,7 @@ const argv = yargs(process.argv.slice(2))
       type: 'string',
     })
   }, (argv) => {
-    process.exitCode = init(argv.name);
+    process.exitCode = create(argv.name);
   })
   .command(
     'extract <pluginPackages> <outputPlugins>',
