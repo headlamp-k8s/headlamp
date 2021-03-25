@@ -82,6 +82,7 @@ function copyToPluginsFolder(config) {
   //    and the load be fixed to use? What about namespace packages?
   const packageName = packageJson.name.split('/').splice(-1)[0];
   const paths = envPaths('Headlamp', {suffix: ''});
+  const configDir = fs.existsSync(paths.data) ? paths.data : paths.config;
 
   config.plugins = [
     new FileManagerPlugin({
@@ -89,7 +90,7 @@ function copyToPluginsFolder(config) {
         onEnd: {
           copy: [{
             source: './dist/*',
-            destination: `${paths.config}/plugins/${packageName}/`,
+            destination: path.join(configDir, 'plugins', packageName),
           }],
         },
       }
