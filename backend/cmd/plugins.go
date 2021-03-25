@@ -140,6 +140,9 @@ func watchSubfolders(path string) {
 	}
 }
 
+// getPluginListURLs gets a list of plugin URLs from the configured plugins folder.
+// Returns pluginListURLs, nil if there is no problem.
+// returns nil, err if there's an error.
 func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
 	files, err := ioutil.ReadDir(c.pluginDir)
 	if err != nil && !os.IsNotExist(err) {
@@ -150,6 +153,9 @@ func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
 
 	for _, f := range files {
 		if !f.IsDir() {
+			pluginPath := filepath.Join(c.pluginDir, f.Name())
+			log.Printf("Not including plugin path '%s' it is not a folder.\n", pluginPath)
+
 			continue
 		}
 
@@ -157,7 +163,7 @@ func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
 
 		_, err := os.Stat(pluginPath)
 		if err != nil {
-			log.Printf("not including plugin path '%s': %s\n", pluginPath, err)
+			log.Printf("Not including plugin path '%s': %s\n", pluginPath, err)
 			continue
 		}
 
