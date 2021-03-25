@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "description": "Example Headlamp (Kubernetes GUI) plugin. Gets the number of pods in the cluster and displays that information in the top bar.",
   "scripts": {
-    "start": "headlamp-plugin watch",
+    "start": "headlamp-plugin start",
     "build": "headlamp-plugin build"
   },
   "keywords": [
