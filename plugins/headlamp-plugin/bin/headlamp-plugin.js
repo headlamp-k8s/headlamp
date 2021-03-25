@@ -38,6 +38,7 @@ function create(name) {
     return 2;
   }
 
+  console.log(`Creating folder :${dstFolder}:`);
 
   fs.copySync(templateFolder, dstFolder, {errorOnExist: true, overwrite: false});
 
@@ -50,6 +51,8 @@ function create(name) {
 
   replaceFileVariables(packagePath);
   replaceFileVariables(indexPath);
+
+  console.log('Installing dependencies...');
 
   // This can be used to make testing locally easier.
   // const proc1 = child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {cwd: dstFolder});
@@ -64,7 +67,7 @@ function create(name) {
   }
 
   console.log(`"${dstFolder}" created. Run the Headlamp app and:`);
-  console.log(`cd "${dstFolder}" ; npm run start`);
+  console.log(`cd "${dstFolder}"\nnpm run start`);
 
   return 0;
 }
@@ -192,19 +195,38 @@ function extract(pluginPackagesPath, outputPlugins) {
   return 0;
 }
 
+/**
+ * Start watching for changes, and build again if there are changes.
+ */
+function start() {
+  console.log('Watching for changes to plugin...');
+  config.watch = true;
+  config.mode = 'development';
+  process.env['BABEL_ENV'] = 'development';
+  copyToPluginsFolder(config);
+  webpack(config, compile);
+
+  return 0;
+}
+
+/**
+ * Build the plugin for production.
+ */
+function build() {
+  console.log('Watching for changes to plugin...');
+  process.env['BABEL_ENV'] = 'production';
+  copyToPluginsFolder(config);
+  webpack(config, compile);
+
+  return 0;
+}
 
 const argv = yargs(process.argv.slice(2))
   .command('build', 'Build the plugin', {}, (argv) => {
-    process.env['BABEL_ENV'] = 'production';
-    copyToPluginsFolder(config);
-    webpack(config, compile);
+    process.exitCode = build();
   })
   .command('start', 'Watch for changes and build plugin', {}, (argv) => {
-    config.watch = true;
-    config.mode = 'development';
-    process.env['BABEL_ENV'] = 'development';
-    copyToPluginsFolder(config);
-    webpack(config, compile);
+    process.exitCode = start();
   })
   .command('create <name>', 'Create a new plugin folder', (yargs) => {
     yargs.positional('name', {
