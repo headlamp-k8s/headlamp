@@ -1,3 +1,4 @@
+import { getTheme, setTheme } from '../../lib/themes';
 import {
   Action,
   HeaderActionFunc,
@@ -8,6 +9,7 @@ import {
   UI_SIDEBAR_SET_ITEM,
   UI_SIDEBAR_SET_SELECTED,
   UI_SIDEBAR_SET_VISIBLE,
+  UI_THEME_SET,
 } from '../actions/actions';
 
 export interface SidebarEntry {
@@ -45,6 +47,9 @@ export interface UIState {
       };
     };
   };
+  theme: {
+    name: string;
+  };
 }
 
 function getSidebarOpenStatus() {
@@ -76,6 +81,9 @@ export const INITIAL_STATE: UIState = {
         // action-name -> action-callback
       },
     },
+  },
+  theme: {
+    name: getTheme(),
   },
 };
 
@@ -130,6 +138,11 @@ function reducer(state = INITIAL_STATE, action: Action) {
       const appBarActions = { ...newFilters.views.appBar.actions };
       appBarActions[action.name as string] = action.action;
       newFilters.views.appBar.actions = appBarActions;
+      break;
+    }
+    case UI_THEME_SET: {
+      newFilters.theme = action.theme;
+      setTheme(newFilters.theme.name);
       break;
     }
     default:

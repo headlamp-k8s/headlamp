@@ -14,10 +14,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import {
   BrowserRouter,
   HashRouter,
@@ -35,9 +35,10 @@ import helpers from './helpers';
 import { getToken, setToken } from './lib/auth';
 import { useCluster, useClustersConf } from './lib/k8s';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
-import themes, { getTheme, setTheme, ThemesConf } from './lib/themes';
+import themes, { getTheme, ThemesConf } from './lib/themes';
 import { getCluster } from './lib/util';
 import { initializePlugins } from './plugin';
+import { setTheme as setThemeRedux } from './redux/actions/actions';
 import { useTypedSelector } from './redux/reducers/reducers';
 import store from './redux/stores/store';
 
@@ -117,6 +118,7 @@ function TopBar() {
           <React.Fragment key={i}>{action()}</React.Fragment>
         ))
       }
+      <ThemeChangeButton />
       <IconButton
         aria-label="User menu"
         aria-controls="menu-appbar"
@@ -151,12 +153,8 @@ function TopBar() {
   );
 }
 
-interface ThemeChangeButtonProps {
-  onChange: (theme: string) => void;
-}
-
-function ThemeChangeButton(props: ThemeChangeButtonProps) {
-  const { onChange } = props;
+function ThemeChangeButton() {
+  const dispatch = useDispatch();
   type iconType = typeof darkIcon;
 
   const counterIcons: {
@@ -173,11 +171,8 @@ function ThemeChangeButton(props: ThemeChangeButtonProps) {
   function changeTheme() {
     const idx = themeNames.indexOf(getTheme());
     const newTheme = themeNames[(idx + 1) % themeNames.length];
-
-    setTheme(newTheme);
+    dispatch(setThemeRedux(newTheme));
     setIcon(counterIcons[newTheme]);
-
-    onChange(newTheme);
   }
 
   return (
@@ -187,14 +182,9 @@ function ThemeChangeButton(props: ThemeChangeButtonProps) {
   );
 }
 
-interface AppContainerProps {
-  setThemeName: React.Dispatch<React.SetStateAction<string>>;
-}
-
-function AppContainer(props: AppContainerProps) {
+function AppContainer() {
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
   const classes = useStyle({ isSidebarOpen });
-  const { setThemeName } = props;
   const Router = ({ children }: React.PropsWithChildren<{}>) =>
     helpers.isElectron() ? (
       <HashRouter>{children}</HashRouter>
@@ -220,7 +210,6 @@ function AppContainer(props: AppContainerProps) {
               <div style={{ flex: '1 0 0' }} />
               <ClusterTitle />
               <div style={{ flex: '1 0 0' }} />
-              <ThemeChangeButton onChange={(theme: string) => setThemeName(theme)} />
               <TopBar />
             </Toolbar>
           </AppBar>
@@ -242,18 +231,21 @@ function AppContainer(props: AppContainerProps) {
   );
 }
 
-function App() {
-  const [themeName, setThemeName] = React.useState(getTheme());
-
+function AppWithRedux(props: React.PropsWithChildren<{}>) {
+  const themeName = useTypedSelector(state => state.ui.theme.name);
   React.useEffect(() => {
     initializePlugins();
   }, [themeName]);
 
+  return <MuiThemeProvider theme={themes[themeName]}>{props.children}</MuiThemeProvider>;
+}
+
+function App() {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={themes[themeName]}>
-        <AppContainer setThemeName={setThemeName} />
-      </ThemeProvider>
+      <AppWithRedux>
+        <AppContainer />
+      </AppWithRedux>
     </Provider>
   );
 }
