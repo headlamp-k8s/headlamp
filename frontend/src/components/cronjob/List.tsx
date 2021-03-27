@@ -11,7 +11,7 @@ export default function CronJobList() {
   const filterFunc = useFilterFunc();
 
   function getSchedule(cronJob: CronJob) {
-    const { schedule } = cronJob.spec.schedule;
+    const { schedule } = cronJob.spec;
     if (!schedule.startsWith('@')) {
       return 'never';
     }
