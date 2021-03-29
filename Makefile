@@ -67,3 +67,7 @@ image:
 .PHONY: docs
 docs:
 	cd frontend && npm install && npm run build-typedoc
+
+.PHONY: storybook
+storybook:
+	cd frontend && npm install && npm run storybook
