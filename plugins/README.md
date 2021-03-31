@@ -10,5 +10,6 @@ Folder                   | Description
 ------                   | -----------
 examples/                | Exmaple folder
 examples/pod-counter     | Example plugin. Displays number of Pods in title bar.
+examples/monitor-link    | If Grafana is installed, shows a link in the top bar.
 headlamp-plugin          | headlamp-plugin script which plugins use.
 headlamp-plugin/template | Template for new Headlamp plugins.
