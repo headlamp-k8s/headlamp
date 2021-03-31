@@ -10,6 +10,9 @@ import Node from './k8s/node';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 TimeAgo.addLocale(en);
 
+
+// @todo: these are exported to window.pluginLib.
+
 const TIME_AGO = new TimeAgo();
 
 export const CLUSTER_ACTION_GRACE_PERIOD = 5000; // ms
