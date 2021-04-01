@@ -211,20 +211,74 @@ function start() {
 }
 
 /**
- * Build the plugin for production.
+ * Build the plugin package or folder of packages for production.
+ *
+ * @param packageFolder {string} - folder where the package, or folder of packages is.
  */
-function build() {
-  console.log('Watching for changes to plugin...');
+function build(packageFolder) {
+  if (!fs.existsSync(packageFolder)) {
+    console.error(`"${packageFolder}" does not exist. Not building.`);
+    return 1;
+  }
+
+  const oldCwd = process.cwd();
+  const oldBabelEnv = process.env['BABEL_ENV'];
   process.env['BABEL_ENV'] = 'production';
-  copyToPluginsFolder(config);
-  webpack(config, compile);
+
+  function buildPackage(folder) {
+    if (!fs.existsSync(path.join(folder, 'package.json'))) {
+      return false;
+    }
+
+    process.chdir(folder);
+    console.log(`Building "${folder}" for production...`);
+    webpack(config, compile);
+    console.log(`Done building: "${folder}".`);
+    process.chdir(oldCwd);
+    return true;
+  }
+
+  function buildFolderOfPackages() {
+    const folders = fs.readdirSync(packageFolder, { withFileTypes: true })
+      .filter(fileName => {
+      return (
+        fileName.isDirectory() &&
+        fs.existsSync(path.join(packageFolder, fileName.name, 'package.json'))
+      );
+    });
+
+    folders.forEach((folder) => {
+      const folderToBuild = path.join(packageFolder, folder.name);
+      if (!buildPackage(folderToBuild)) {
+        console.error(`"${folderToBuild}" does not contain a package. Not building.`);
+      }
+    });
+    return folders.length !== 0;
+  }
+
+
+  if (!(buildPackage(packageFolder) || buildFolderOfPackages())) {
+    console.error(`"${packageFolder}" does not contain a package or packages. Not building.`);
+  };
+
+  process.env['BABEL_ENV'] = oldBabelEnv;
 
   return 0;
 }
 
 const argv = yargs(process.argv.slice(2))
-  .command('build', 'Build the plugin', {}, (argv) => {
-    process.exitCode = build();
+  .command('build <package>', (
+    'Build the plugin, or folder of plugins. ' + 
+    '<package> defaults to current working directory.'
+  ),
+    (yargs) => {
+    yargs.positional('package', {
+      describe: 'Package or folder of packages to build',
+      type: 'string',
+      default: '.',
+    })
+  }, (argv) => {
+    process.exitCode = build(argv.package);
   })
   .command('start', 'Watch for changes and build plugin', {}, (argv) => {
     process.exitCode = start();

@@ -12,7 +12,9 @@ This package is published to the npm package index separately from Headlamp.
 
 ```
 headlamp-plugin --help
-headlamp-plugin build             Build the plugin
+headlamp-plugin build <package>   Build the plugin, or folder of
+                                  plugins. <package> defaults to
+                                  current working directory.
 headlamp-plugin start             Watch for changes and build the plugin
 headlamp-plugin create <name>     Create a new plugin folder with base code
 headlamp-plugin extract           Copies folders of packages from plug
