@@ -39,7 +39,7 @@ npm run build
 This will create a file with the bundled plugin in
 `headlamp-myfancy/dist/main.js`.
 
-### building a folder of packages at once
+### Building a folder of packages at once
 
 For convienience the `headlamp-plugin build` command can build a 
 package or folder of packages.
