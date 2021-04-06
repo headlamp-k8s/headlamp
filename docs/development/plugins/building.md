@@ -45,8 +45,8 @@ For convienience the `headlamp-plugin build` command can build a
 package or folder of packages.
 
 ```bash
-npx @kinvolk/headlamp-plugin build myplugins
 npx @kinvolk/headlamp-plugin build myplugins/headlamp-myfancy
+npx @kinvolk/headlamp-plugin build myplugins
 ```
 
 ## Shipping / Deploying Plugins
