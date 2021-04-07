@@ -161,6 +161,28 @@ func baseURLReplace(staticDir string, baseURL string) {
 		[]byte("headlampBaseUrl=\""+replaceURL+"\""))
 }
 
+func getOidcCallbackURL(r *http.Request, config *HeadlampConfig) string {
+	urlScheme := r.URL.Scheme
+	if urlScheme == "" {
+		// @todo: Find a better way to get the scheme for the URL.
+		if r.Host == "localhost:"+config.port {
+			urlScheme = "http"
+		} else {
+			urlScheme = "https"
+		}
+	}
+
+	// Clean up + add the base URL to the redirect URL
+	hostWithBaseURL := strings.Trim(r.Host, "/")
+	baseURL := strings.Trim(config.baseURL, "/")
+
+	if baseURL != "" {
+		hostWithBaseURL = hostWithBaseURL + "/" + baseURL
+	}
+
+	return fmt.Sprintf("%s://%s/oidc-callback", urlScheme, hostWithBaseURL)
+}
+
 // nolint:gocognit,funlen
 func StartHeadlampServer(config *HeadlampConfig) {
 	kubeConfigPath := ""
@@ -292,22 +314,12 @@ func StartHeadlampServer(config *HeadlampConfig) {
 			ClientID: oidcAuthConfig.ClientID,
 		}
 
-		urlScheme := r.URL.Scheme
-		if urlScheme == "" {
-			// @todo: Find a better way to get the scheme for the URL.
-			if r.Host == "localhost:"+config.port {
-				urlScheme = "http"
-			} else {
-				urlScheme = "https"
-			}
-		}
-
 		verifier := provider.Verifier(oidcConfig)
 		oauthConfig := &oauth2.Config{
 			ClientID:     oidcAuthConfig.ClientID,
 			ClientSecret: oidcAuthConfig.ClientSecret,
 			Endpoint:     provider.Endpoint(),
-			RedirectURL:  fmt.Sprintf("%1s://%2s/oidc-callback", urlScheme, r.Host),
+			RedirectURL:  getOidcCallbackURL(r, config),
 			Scopes:       append([]string{oidc.ScopeOpenID}, oidcAuthConfig.Scopes...),
 		}
 
