@@ -12,8 +12,12 @@ const args = yargs
   .option('headless', {
     describe: 'Open Headlamp in the default web browser instead of its app window',
   })
+  .option('disable-gpu', {
+    describe: 'Disable use of GPU. For people who may have buggy graphics drivers',
+  })
   .parse();
 const isHeadlessMode = args.headless;
+const disableGPU = args['disable-gpu']
 const defaultPort = 4466;
 
 function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
@@ -208,6 +212,11 @@ function startElecron() {
   autoUpdater.on('update-downloaded', () => {
     sendStatusToWindow('Update downloaded');
   });
+
+  if (disableGPU) {
+    log.info("Disabling GPU hardware acceleration.");
+    app.disableHardwareAcceleration();
+  }
 
   app.on('ready', createWindow);
   app.on('activate', function () {
