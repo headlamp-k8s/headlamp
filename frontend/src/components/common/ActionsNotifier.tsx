@@ -8,11 +8,14 @@ import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/util';
 import { ClusterAction } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
-export default function ActionsNotifier() {
+export interface PureActionsNotifierProps {
+  clusterActions: { [x: string]: ClusterAction };
+  dispatch: (action: { type: string }) => void;
+}
+
+function PureActionsNotifier({ dispatch, clusterActions }: PureActionsNotifierProps) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const dispatch = useDispatch();
   const history = useHistory();
-  const clusterActions = useTypedSelector(state => state.clusterAction);
 
   function handleAction(clusterAction: ClusterAction) {
     if (_.isEmpty(clusterAction)) {
@@ -68,4 +71,13 @@ export default function ActionsNotifier() {
   );
 
   return null;
+}
+
+export { PureActionsNotifier };
+
+export default function ActionsNotifier() {
+  const dispatch = useDispatch();
+  const clusterActions = useTypedSelector(state => state.clusterAction);
+
+  return <PureActionsNotifier dispatch={dispatch} clusterActions={clusterActions} />;
 }
