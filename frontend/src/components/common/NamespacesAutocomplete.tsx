@@ -15,45 +15,26 @@ import Namespace from '../../lib/k8s/namespace';
 import { setNamespaceFilter } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
-// @todo: This is using Autcomplete from Material-UI's lab, but we should instead replace it
-// by a fully custom solution, as getting the input to behave the way we intended proved difficult
-// and not worth of pulling the extra dependencies.
-export function NamespacesAutocomplete() {
+export interface PureNamespacesAutocompleteProps {
+  namespaceNames: string[];
+  onChange: (event: React.ChangeEvent<{}>, newValue: string[]) => void;
+  filter: { namespaces: Set<string>; search: string };
+}
+
+export function PureNamespacesAutocomplete({
+  namespaceNames,
+  onChange,
+  filter,
+}: PureNamespacesAutocompleteProps) {
   const theme = useTheme();
-  const filter = useTypedSelector(state => state.filter);
-  const [namespaces, setNamespaces] = React.useState<Namespace[]>([]);
-  const queryParamDefaultObj = { namespace: '' };
-  const location = useLocation();
-  const history = useHistory();
-
-  React.useEffect(() => {
-    getFilterValueByNameFromURL('namespace', location);
-  }, []);
-
-  Namespace.useApiList(setNamespaces);
-
-  const dispatch = useDispatch();
-
-  function renderTags(tags: string[]) {
-    let jointTags = tags.join(', ');
-    if (jointTags.length > 15) {
-      jointTags = jointTags.slice(0, 15) + '…';
-    }
-
-    return <Typography>{jointTags}</Typography>;
-  }
 
   return (
     <Autocomplete
       multiple
       id="namespaces-filter"
       autoComplete
-      options={namespaces.map(namespace => namespace.metadata.name)}
-      onChange={(event, newValue) => {
-        addQuery({ namespace: newValue.join(' ') }, queryParamDefaultObj, history, location, '');
-        dispatch(setNamespaceFilter(newValue));
-        return [newValue];
-      }}
+      options={namespaceNames}
+      onChange={onChange}
       // We reverse the namespaces so the last chosen appear as the first in the label. This
       // is useful since the label is ellipsized and this we get to see it change.
       value={[...filter.namespaces.values()].reverse()}
@@ -70,7 +51,14 @@ export function NamespacesAutocomplete() {
           {option}
         </React.Fragment>
       )}
-      renderTags={renderTags}
+      renderTags={(tags: string[]) => {
+        const joinedTags = tags.join(', ');
+        return (
+          <Typography>
+            {joinedTags.length > 15 ? joinedTags : joinedTags.slice(0, 15) + '…'}
+          </Typography>
+        );
+      }}
       renderInput={params => (
         <Box width="15rem">
           <TextField
@@ -84,6 +72,31 @@ export function NamespacesAutocomplete() {
           />
         </Box>
       )}
+    />
+  );
+}
+
+export function NamespacesAutocomplete() {
+  const history = useHistory();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const filter = useTypedSelector(state => state.filter);
+  const [namespaceNames, setNamespaceNames] = React.useState<string[]>([]);
+
+  Namespace.useApiList((namespaces: Namespace[]) => {
+    setNamespaceNames(namespaces.map(namespace => namespace.metadata.name));
+  });
+
+  const onChange = (event: React.ChangeEvent<{}>, newValue: string[]) => {
+    addQuery({ namespace: newValue.join(' ') }, { namespace: '' }, history, location, '');
+    dispatch(setNamespaceFilter(newValue));
+  };
+
+  return (
+    <PureNamespacesAutocomplete
+      namespaceNames={namespaceNames}
+      onChange={onChange}
+      filter={filter}
     />
   );
 }
