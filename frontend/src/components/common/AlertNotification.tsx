@@ -2,15 +2,24 @@ import { Box, useTheme } from '@material-ui/core';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { testAuth } from '../../lib/k8s/apiProxy';
-import { getRoutePath, ROUTES } from '../../lib/router';
+import { getRoutePath, Route, ROUTES } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
 const NOT_FOUND_ERROR_MESSAGES = ['Error: Api request error: Bad Gateway', 'Offline'];
 // in ms
 const NETWORK_STATUS_CHECK_TIME = 5000;
 
-export default function AlertNotification() {
-  const routes = useTypedSelector(state => state.ui.routes);
+export interface PureAlertNotificationProps {
+  routes: { [path: string]: any };
+  moreRoutes: { [routeName: string]: Route };
+  testAuth(): Promise<any>;
+}
+
+export function PureAlertNotification({
+  routes,
+  testAuth,
+  moreRoutes,
+}: PureAlertNotificationProps) {
   const [networkStatusCheckTimeFactor, setNetworkStatusCheckTimeFactor] = React.useState(0);
   const [error, setError] = React.useState<null | string | boolean>(null);
   const [intervalID, setIntervalID] = React.useState<NodeJS.Timeout | null>(null);
@@ -60,7 +69,7 @@ export default function AlertNotification() {
   );
 
   function checkWhetherInNoAuthRequireRoute(): boolean {
-    const noAuthRequiringRoutes = Object.values(ROUTES)
+    const noAuthRequiringRoutes = Object.values(moreRoutes)
       .concat(Object.values(routes))
       .filter(route => route.noAuthRequired);
 
@@ -118,4 +127,10 @@ export default function AlertNotification() {
       </Box>
     </Box>
   );
+}
+
+export default function AlertNotification() {
+  const routes = useTypedSelector(state => state.ui.routes);
+
+  return <PureAlertNotification routes={routes} testAuth={testAuth} moreRoutes={ROUTES} />;
 }
