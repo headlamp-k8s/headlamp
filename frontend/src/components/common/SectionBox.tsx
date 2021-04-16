@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';
 
-interface SectionBoxProps extends Omit<BoxProps, 'title'> {
+export interface SectionBoxProps extends Omit<BoxProps, 'title'> {
   title?: React.ReactNode;
   headerProps?: Omit<SectionHeaderProps, 'title'>;
 }
@@ -35,3 +35,5 @@ export function SectionBox(props: SectionBoxProps) {
     </Box>
   );
 }
+
+export default SectionBox;
