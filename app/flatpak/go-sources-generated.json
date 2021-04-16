@@ -1,0 +1,182 @@
+[
+    {
+        "type": "git",
+        "url": "https://github.com/coreos/go-oidc",
+        "tag": "v2.2.1",
+        "dest": "vendor/github.com/coreos/go-oidc"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/davecgh/go-spew",
+        "tag": "v1.1.1",
+        "dest": "vendor/github.com/davecgh/go-spew"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/fsnotify/fsnotify",
+        "tag": "v1.4.9",
+        "dest": "vendor/github.com/fsnotify/fsnotify"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/gogo/protobuf",
+        "dest": "vendor/github.com/gogo/protobuf",
+        "commit": "65acae22fc9d"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/golang/protobuf",
+        "tag": "v1.4.2",
+        "dest": "vendor/github.com/golang/protobuf"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/google/gofuzz",
+        "tag": "v1.0.0",
+        "dest": "vendor/github.com/google/gofuzz"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/gorilla/handlers",
+        "tag": "v1.4.2",
+        "dest": "vendor/github.com/gorilla/handlers"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/gorilla/mux",
+        "tag": "v1.7.4",
+        "dest": "vendor/github.com/gorilla/mux"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/imdario/mergo",
+        "tag": "v0.3.8",
+        "dest": "vendor/github.com/imdario/mergo"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/json-iterator/go",
+        "tag": "v1.1.8",
+        "dest": "vendor/github.com/json-iterator/go"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/modern-go/concurrent",
+        "dest": "vendor/github.com/modern-go/concurrent",
+        "commit": "bacd9c7ef1dd"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/modern-go/reflect2",
+        "tag": "v1.0.1",
+        "dest": "vendor/github.com/modern-go/reflect2"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/pquerna/cachecontrol",
+        "dest": "vendor/github.com/pquerna/cachecontrol",
+        "commit": "67c6ae64274f"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/spf13/pflag",
+        "tag": "v1.0.5",
+        "dest": "vendor/github.com/spf13/pflag"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/golang/crypto.git",
+        "dest": "vendor/golang.org/x/crypto",
+        "commit": "75b288015ac9"
+    },
+    {
+        "type": "git",
+        "url": "https://go.googlesource.com/net",
+        "dest": "vendor/golang.org/x/net",
+        "commit": "4c5254603344"
+    },
+    {
+        "type": "git",
+        "url": "https://go.googlesource.com/oauth2",
+        "dest": "vendor/golang.org/x/oauth2",
+        "commit": "bf48bf16ab8d"
+    },
+    {
+        "type": "git",
+        "url": "https://go.googlesource.com/sys",
+        "dest": "vendor/golang.org/x/sys",
+        "commit": "6fdc65e7d980"
+    },
+    {
+        "type": "git",
+        "url": "https://go.googlesource.com/text",
+        "tag": "v0.3.2",
+        "dest": "vendor/golang.org/x/text"
+    },
+    {
+        "type": "git",
+        "url": "https://go.googlesource.com/time",
+        "dest": "vendor/golang.org/x/time",
+        "commit": "555d28b269f0"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/golang/appengine.git",
+        "tag": "v1.6.1",
+        "dest": "vendor/google.golang.org/appengine"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/protocolbuffers/protobuf-go",
+        "tag": "v1.23.0",
+        "dest": "vendor/google.golang.org/protobuf"
+    },
+    {
+        "type": "git",
+        "url": "https://gopkg.in/inf.v0",
+        "tag": "v0.9.1",
+        "dest": "vendor/gopkg.in/inf.v0"
+    },
+    {
+        "type": "git",
+        "url": "https://gopkg.in/square/go-jose.v2",
+        "tag": "v2.5.1",
+        "dest": "vendor/gopkg.in/square/go-jose.v2"
+    },
+    {
+        "type": "git",
+        "url": "https://gopkg.in/yaml.v2",
+        "tag": "v2.3.0",
+        "dest": "vendor/gopkg.in/yaml.v2"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/kubernetes/apimachinery.git",
+        "tag": "v0.17.4",
+        "dest": "vendor/k8s.io/apimachinery"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/kubernetes/client-go",
+        "tag": "v0.17.0",
+        "dest": "vendor/k8s.io/client-go"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/kubernetes/klog",
+        "tag": "v1.0.0",
+        "dest": "vendor/k8s.io/klog"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/kubernetes/utils",
+        "dest": "vendor/k8s.io/utils",
+        "commit": "327a8059b905"
+    },
+    {
+        "type": "git",
+        "url": "https://github.com/kubernetes-sigs/yaml/",
+        "tag": "v1.1.0",
+        "dest": "vendor/sigs.k8s.io/yaml"
+    }
+]

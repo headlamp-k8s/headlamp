@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Headlamp
+GenericName=Headlamp
+Comment=An easy-to-use and extensible web UI for Kubernetes
+Icon=headlamp
+Exec=run-headlamp.sh
+Terminal=false
+Categories=Network;
+Keywords=kubernetes;ui;kube;minukube;

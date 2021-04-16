@@ -26,6 +26,7 @@
         "AppImage",
         "tar.gz"
       ],
+      "desktop": "./linux/headlamp.desktop",
       "executableName": "headlamp",
       "maintainer": "Kinvolk <hello@kinvolk.io>",
       "category": "Network",

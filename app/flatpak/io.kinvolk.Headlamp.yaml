@@ -1,0 +1,71 @@
+app-id: io.kinvolk.Headlamp
+runtime: org.freedesktop.Platform
+runtime-version: '20.08'
+branch: stable
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.golang
+  - org.freedesktop.Sdk.Extension.node12
+base: org.electronjs.Electron2.BaseApp
+base-version: '20.08'
+command: run-headlamp.sh
+separate-locales: false
+rename-desktop-file: headlamp.desktop
+rename-icon: headlamp
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=pulseaudio
+  - --share=network
+  - --filesystem=~/.kube/config:ro
+  - --filesystem=~/.minikube:ro
+  - --filesystem=~/.config/Headlamp:ro
+modules:
+  - name: headlamp
+    buildsystem: simple
+    build-options:
+      append-path: ":/usr/lib/sdk/node12/bin:/usr/lib/sdk/golang/bin:"
+      env:
+        XDG_CACHE_HOME: /run/build/headlamp/flatpak-node/cache
+        npm_config_cache: /run/build/headlamp/flatpak-node/npm-cache
+        npm_config_nodedir: /usr/lib/sdk/node12
+        npm_config_offline: 'true'
+        npm_config_no_save: 'true'
+        npm_config_loglevel: silly
+        GOPATH: /run/build/headlamp/
+        GO111MODULE: "auto"
+        GOFLAGS: "-mod=vendor"
+        DEBUG: electron-builder
+    sources:
+      - type: git
+        url: https://github.com/kinvolk/headlamp.git
+        branch: jrocha/flatpak
+      - generated-sources-app.json
+      - generated-sources.json
+      - go-sources-generated.json
+      - type: file
+        path: ../linux/headlamp.desktop
+      - type: shell
+        commands:
+        - install -Dm644 headlamp.desktop /app/share/applications/headlamp.desktop
+    build-commands:
+      - ". /usr/lib/sdk/golang/enable.sh && export GOPATH=$PWD; export GO111MODULE=off"
+      - cd frontend && npm install && npm run build
+      - cd backend && ln -s ../vendor
+      - cd app && npm install && npm run build && ls -la && cd ..
+      - mkdir -p /app/headlamp-app
+      - cp -r app/dist/linux-unpacked/* /app/headlamp-app
+      - install -Dm644 frontend/build/icon.svg /app/share/icons/hicolor/scalable/apps/headlamp.svg
+  - name: start-script
+    buildsystem: simple
+    sources:
+      - type: script
+        dest-filename: run-headlamp.sh
+        commands:
+          # Use zypak to call the electron binary to enable sandboxing and prevents no sandbox error
+          # Note the hyphen
+          - export TMPDIR=$XDG_RUNTIME_DIR/app/$FLATPAK_ID
+          - zypak-wrapper /app/headlamp-app/headlamp "$@"
+    build-commands:
+      # Install the wrapper script to start it.
+      - install -Dm 755 run-headlamp.sh /app/bin/run-headlamp.sh
