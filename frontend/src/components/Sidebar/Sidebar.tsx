@@ -2,17 +2,12 @@ import circleSlice2 from '@iconify/icons-mdi/circle-slice-2';
 import databaseIcon from '@iconify/icons-mdi/database';
 import folderNetworkOutline from '@iconify/icons-mdi/folder-network-outline';
 import hexagonMultipleOutline from '@iconify/icons-mdi/hexagon-multiple-outline';
-import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
 import lockIcon from '@iconify/icons-mdi/lock';
 import { Icon } from '@iconify/react';
 import { Divider, Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -22,14 +17,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import clsx from 'clsx';
-import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { generatePath, useHistory } from 'react-router';
 import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from 'react-router-dom';
-import semver from 'semver';
-import { getVersion, useCluster } from '../../lib/k8s';
-import { StringDict } from '../../lib/k8s/cluster';
 import { createRouteURL, getRoute } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
@@ -39,11 +30,8 @@ import store from '../../redux/stores/store';
 import { ReactComponent as LogoLight } from '../../resources/icon-light.svg';
 import { ReactComponent as LogoWithTextLight } from '../../resources/logo-light.svg';
 import CreateButton from '../common/Resource/CreateButton';
-import { NameValueTable } from '../common/SimpleTable';
 import Tabs from '../common/Tabs';
-
-const versionSnackbarHideTimeout = 5000; // ms
-const versionFetchInterval = 60000; // ms
+import VersionButton from './VersionButton';
 
 export const drawerWidth = 330;
 
@@ -246,138 +234,6 @@ function prepareRoutes() {
   }
 
   return routes;
-}
-
-const useVersionButtonStyle = makeStyles(theme => ({
-  versionBox: {
-    textAlign: 'center',
-    '& .MuiButton-label': {
-      color: theme.palette.sidebarLink.main,
-    },
-  },
-  versionIcon: {
-    marginTop: '5px',
-    marginRight: '5px',
-  },
-}));
-
-function VersionButton() {
-  const sidebar = useTypedSelector(state => state.ui.sidebar);
-  const { enqueueSnackbar } = useSnackbar();
-  const classes = useVersionButtonStyle();
-  const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
-  const cluster = useCluster();
-  const [open, setOpen] = React.useState(false);
-
-  function getVersionRows() {
-    if (!clusterVersion) {
-      return [];
-    }
-
-    return [
-      {
-        name: 'Git Version',
-        value: clusterVersion?.gitVersion,
-      },
-      {
-        name: 'Git Commit',
-        value: clusterVersion?.gitCommit,
-      },
-      {
-        name: 'Git Tree State',
-        value: clusterVersion?.gitTreeState,
-      },
-      {
-        name: 'Go Version',
-        value: clusterVersion?.goVersion,
-      },
-      {
-        name: 'Platform',
-        value: clusterVersion?.platform,
-      },
-    ];
-  }
-
-  React.useEffect(
-    () => {
-      function fetchVersion() {
-        getVersion()
-          .then((results: StringDict) => {
-            setClusterVersion(results);
-            let versionChange = 0;
-            if (clusterVersion && results && results.gitVersion) {
-              versionChange = semver.compare(results.gitVersion, clusterVersion.gitVersion);
-
-              let msg = '';
-              if (versionChange > 0) {
-                msg = `Cluster version upgraded to ${results.gitVersion}`;
-              } else if (versionChange < 0) {
-                msg = `Cluster version downgraded to ${results.gitVersion}`;
-              }
-
-              if (msg) {
-                enqueueSnackbar(msg, {
-                  key: 'version',
-                  preventDuplicate: true,
-                  autoHideDuration: versionSnackbarHideTimeout,
-                  variant: 'info',
-                });
-              }
-            }
-          })
-          .catch((error: Error) => console.error('Getting the cluster version:', error));
-      }
-
-      if (!clusterVersion) {
-        fetchVersion();
-      }
-
-      const intervalHandler = setInterval(() => {
-        fetchVersion();
-      }, versionFetchInterval);
-
-      return function cleanup() {
-        clearInterval(intervalHandler);
-      };
-    },
-    // eslint-disable-next-line
-    [clusterVersion]
-  );
-
-  // Use the location to make sure the version is changed, as it depends on the cluster
-  // (defined in the URL ATM).
-  // @todo: Update this if the active cluster management is changed.
-  React.useEffect(() => {
-    setClusterVersion(null);
-  }, [cluster]);
-
-  function handleClose() {
-    setOpen(false);
-  }
-
-  return !clusterVersion ? null : (
-    <Box mx="auto" py=".2em" className={classes.versionBox}>
-      <Button onClick={() => setOpen(true)} style={{ textTransform: 'none' }}>
-        <Box display={sidebar.isSidebarOpen ? 'flex' : 'block'} alignItems="center">
-          <Box>
-            <Icon color="#adadad" icon={kubernetesIcon} className={classes.versionIcon} />
-          </Box>
-          <Box>{clusterVersion.gitVersion}</Box>
-        </Box>
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Kubernetes Version</DialogTitle>
-        <DialogContent>
-          <NameValueTable rows={getVersionRows()} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Box>
-  );
 }
 
 interface ListItemLinkProps {
