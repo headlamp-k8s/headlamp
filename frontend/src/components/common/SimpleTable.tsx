@@ -80,11 +80,15 @@ interface ColumnSortButtonProps {
 function ColumnSortButtons(props: ColumnSortButtonProps) {
   const { isDefaultSorted, isIncreasingOrder, clickHandler } = props;
   return isDefaultSorted ? (
-    <IconButton size="small" onClick={() => clickHandler(!isIncreasingOrder)}>
+    <IconButton
+      aria-label={isIncreasingOrder ? 'sort up' : 'sort down'}
+      size="small"
+      onClick={() => clickHandler(!isIncreasingOrder)}
+    >
       <Icon icon={isIncreasingOrder ? menuUp : menuDown} />
     </IconButton>
   ) : (
-    <IconButton size="small" onClick={() => clickHandler(true)}>
+    <IconButton aria-label="sort swap" size="small" onClick={() => clickHandler(true)}>
       <Icon icon={menuSwap} />
     </IconButton>
   );
