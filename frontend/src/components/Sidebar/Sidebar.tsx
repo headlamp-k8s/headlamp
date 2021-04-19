@@ -28,19 +28,19 @@ import { useDispatch } from 'react-redux';
 import { generatePath, useHistory } from 'react-router';
 import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from 'react-router-dom';
 import semver from 'semver';
-import { getVersion, useCluster } from '../lib/k8s';
-import { StringDict } from '../lib/k8s/cluster';
-import { createRouteURL, getRoute } from '../lib/router';
-import { getCluster, getClusterPrefixedPath } from '../lib/util';
-import { setSidebarSelected, setWhetherSidebarOpen } from '../redux/actions/actions';
-import { useTypedSelector } from '../redux/reducers/reducers';
-import { SidebarEntry } from '../redux/reducers/ui';
-import store from '../redux/stores/store';
-import { ReactComponent as LogoLight } from '../resources/icon-light.svg';
-import { ReactComponent as LogoWithTextLight } from '../resources/logo-light.svg';
-import { NameValueTable } from './common';
-import CreateButton from './common/Resource/CreateButton';
-import Tabs from './common/Tabs';
+import { getVersion, useCluster } from '../../lib/k8s';
+import { StringDict } from '../../lib/k8s/cluster';
+import { createRouteURL, getRoute } from '../../lib/router';
+import { getCluster, getClusterPrefixedPath } from '../../lib/util';
+import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
+import { useTypedSelector } from '../../redux/reducers/reducers';
+import { SidebarEntry } from '../../redux/reducers/ui';
+import store from '../../redux/stores/store';
+import { ReactComponent as LogoLight } from '../../resources/icon-light.svg';
+import { ReactComponent as LogoWithTextLight } from '../../resources/logo-light.svg';
+import CreateButton from '../common/Resource/CreateButton';
+import { NameValueTable } from '../common/SimpleTable';
+import Tabs from '../common/Tabs';
 
 const versionSnackbarHideTimeout = 5000; // ms
 const versionFetchInterval = 60000; // ms
