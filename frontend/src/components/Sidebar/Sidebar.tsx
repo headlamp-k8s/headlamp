@@ -110,6 +110,7 @@ export default function Sidebar() {
             dispatch(setWhetherSidebarOpen(!open));
             setOpen(!open);
           }}
+          aria-label={open ? 'Shrink sidebar' : 'Expand sidebar'}
         >
           <SvgIcon
             className={classes.logo}
