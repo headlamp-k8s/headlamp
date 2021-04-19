@@ -135,13 +135,15 @@ export default function SidebarItem(props: SidebarItemProps) {
         {...other}
       />
       {subList.length > 0 && (
-        <Collapse in={fullWidth && expanded}>
-          <List component="div" disablePadding className={classes.nested}>
-            {subList.map((item, i) => (
-              <SidebarItem key={i} selectedName={selectedName} hasParent {...item} />
-            ))}
-          </List>
-        </Collapse>
+        <ListItem>
+          <Collapse in={fullWidth && expanded}>
+            <List component="ul" disablePadding className={classes.nested}>
+              {subList.map((item, i) => (
+                <SidebarItem key={i} selectedName={selectedName} hasParent {...item} />
+              ))}
+            </List>
+          </Collapse>
+        </ListItem>
       )}
     </React.Fragment>
   );
