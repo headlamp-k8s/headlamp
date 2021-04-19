@@ -122,34 +122,35 @@ function TopBar() {
       <ThemeChangeButton />
       <IconButton
         aria-label="User menu"
-        aria-controls="menu-appbar"
+        aria-controls="customized-menu"
         aria-haspopup="true"
         onClick={handleMenu}
         color="inherit"
       >
         <Icon icon={accountIcon} />
       </IconButton>
-      <Menu
-        id="customized-menu"
-        anchorEl={menuAnchorEl}
-        open={!!menuAnchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <MenuItem component="a" onClick={logout} disabled={!hasToken()} dense>
-          <ListItemIcon>
-            <Icon icon={logoutIcon} />
-          </ListItemIcon>
-          <ListItemText primary="Log out" secondary={hasToken() ? null : '(No token set up)'} />
-        </MenuItem>
-      </Menu>
+      <span id="customized-menu">
+        <Menu
+          anchorEl={menuAnchorEl}
+          open={!!menuAnchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          <MenuItem component="a" onClick={logout} disabled={!hasToken()} dense>
+            <ListItemIcon>
+              <Icon icon={logoutIcon} />
+            </ListItemIcon>
+            <ListItemText primary="Log out" secondary={hasToken() ? null : '(No token set up)'} />
+          </MenuItem>
+        </Menu>
+      </span>
     </>
   );
 }
