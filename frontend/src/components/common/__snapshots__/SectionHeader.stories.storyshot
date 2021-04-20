@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots SectionHeader Actions 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <h6
+        class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+      >
+        This one has actions
+      </h6>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-xs-flex-end"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item"
+        >
+          <button>
+            Edit
+          </button>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item"
+        >
+          <button>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SectionHeader Main 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <h6
+        class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+      >
+        This is a section title main
+      </h6>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SectionHeader Normal 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <h6
+        class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+      >
+        This is a section title normal
+      </h6>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SectionHeader Normal No Padding 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <h6
+        class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+      >
+        No padding on this normal title
+      </h6>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SectionHeader Subsection 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <h6
+        class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+      >
+        This is a section title subsection
+      </h6>
+    </div>
+  </div>
+</div>
+`;

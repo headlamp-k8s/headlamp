@@ -1,0 +1,24 @@
+import plusCircle from '@iconify/icons-mdi/plus-circle';
+import { Icon } from '@iconify/react';
+import IconButton from '@material-ui/core/IconButton';
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { SnackbarProvider } from 'notistack';
+import React from 'react';
+import TooltipLight, { TooltipLightProps } from './TooltipLight';
+
+export default {
+  title: 'Tooltip/TooltipLight',
+  component: TooltipLight,
+} as Meta;
+
+const Template: Story<TooltipLightProps> = args => <TooltipLight {...args} />;
+
+export const Add = Template.bind({});
+Add.args = {
+  title: 'Add',
+  children: (
+    <IconButton aria-label="add">
+      <Icon color="#adadad" icon={plusCircle} width="48" />
+    </IconButton>
+  ),
+};

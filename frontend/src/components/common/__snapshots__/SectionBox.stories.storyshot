@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots SectionBox Custom Title 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <h1>
+      custom title
+    </h1>
+    <div
+      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SectionBox Header Props 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item"
+      >
+        <h6
+          class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+        >
+          This is a section title with a main style
+        </h6>
+      </div>
+    </div>
+    <div
+      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SectionBox Titled 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item"
+      >
+        <h6
+          class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+        >
+          This is a section title default
+        </h6>
+      </div>
+    </div>
+    <div
+      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SectionBox Titled Children 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item"
+      >
+        <h6
+          class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+        >
+          This is a section title
+        </h6>
+      </div>
+    </div>
+    <div
+      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <p>
+          A child paragraph.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SectionBox With Children 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <p>
+          A child paragraph.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

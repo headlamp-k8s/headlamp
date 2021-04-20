@@ -5,15 +5,19 @@ import { makeKubeObject } from '../../lib/k8s/cluster';
 import { createRouteURL, RouteURLProps } from '../../lib/router';
 
 export interface LinkProps {
+  /** A key in the router.tsx ROUTES object. */
   routeName: string;
+  /** An object with corresponding params for the pattern to use. */
   params?: RouteURLProps;
+  /** A string representation of query parameters. */
   search?: string;
+  /** State to persist to the location. */
   state?: {
     [prop: string]: any;
   };
 }
 
-interface LinkObjectProps {
+export interface LinkObjectProps {
   kubeObject: InstanceType<ReturnType<typeof makeKubeObject>>;
 }
 

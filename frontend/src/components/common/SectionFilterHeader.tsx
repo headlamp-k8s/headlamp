@@ -13,7 +13,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { addQuery, getFilterValueByNameFromURL } from '../../helpers';
 import { resetFilter, setNamespaceFilter, setSearchFilter } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { NamespacesAutocomplete } from './Autocomplete';
+import { NamespacesAutocomplete } from './NamespacesAutocomplete';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';
 
 interface SectionFilterHeaderProps extends SectionHeaderProps {

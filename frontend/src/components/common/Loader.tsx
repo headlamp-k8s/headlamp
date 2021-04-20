@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   },
 });
 
-interface LoaderProps {
+export interface LoaderProps {
   noContainer?: boolean;
 }
 
