@@ -1,6 +1,6 @@
 'use strict';
 
-const { exec } = require("child_process");
+const { execSync } = require("child_process");
 
 exports.default = async context => {
   let arch = context.arch;
@@ -13,20 +13,12 @@ exports.default = async context => {
     osName = 'Windows_NT';
   }
 
-  await exec('make backend', {
+  execSync('make backend', {
     env: {
       ...process.env, // needed otherwise important vars like PATH and GOROOT are not set
       GOARCH: arch,
       OS: osName,
     },
     cwd: '..'
-  },
-  (error, stdout, stderr) => {
-    console.log(stdout);
-    console.log(stderr);
-
-    if (!!error) {
-      throw error;
-    }
   });
 };
