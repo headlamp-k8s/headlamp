@@ -103,6 +103,9 @@ export default function Sidebar() {
           [classes.drawerClose]: !open,
         }),
       }}
+      PaperProps={{
+        component: 'nav',
+      }}
     >
       <div className={classes.toolbar}>
         <Button
