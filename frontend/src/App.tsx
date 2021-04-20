@@ -9,6 +9,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
+import Link from '@material-ui/core/Link';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
@@ -57,6 +58,19 @@ const useStyle = makeStyles(theme => ({
     flexGrow: 1,
   },
   toolbar: theme.mixins.toolbar,
+  // importing visuallyHidden has typing issues at time of writing.
+  // import { visuallyHidden } from '@material-ui/utils';
+  visuallyHidden: {
+    border: 0,
+    clip: 'rect(0 0 0 0)',
+    height: '1px',
+    margin: -1,
+    overflow: 'hidden',
+    padding: 0,
+    position: 'absolute',
+    whiteSpace: 'nowrap',
+    width: '1px',
+  },
 }));
 
 function RouteSwitcher() {
@@ -204,6 +218,9 @@ function AppContainer() {
       }}
     >
       <Router>
+        <Link href="#main" className={classes.visuallyHidden}>
+          Skip to main content
+        </Link>
         <Box display="flex">
           <CssBaseline />
 
@@ -216,7 +233,7 @@ function AppContainer() {
             </Toolbar>
           </AppBar>
           <Sidebar />
-          <main className={classes.content}>
+          <main id="main" className={classes.content}>
             <AlertNotification />
             <Box p={3}>
               <div className={classes.toolbar} />
