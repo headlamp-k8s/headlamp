@@ -44,6 +44,20 @@ import { setTheme as setThemeRedux } from './redux/actions/actions';
 import { useTypedSelector } from './redux/reducers/reducers';
 import store from './redux/stores/store';
 
+function PageTitle({
+  title,
+  children,
+}: {
+  title: string | null | undefined;
+  children: React.ReactNode;
+}) {
+  React.useEffect(() => {
+    document.title = title || '';
+  }, [title]);
+
+  return <>{children}</>;
+}
+
 const useStyle = makeStyles(theme => ({
   root: {
     background: theme.palette.background.default,
@@ -82,7 +96,15 @@ function RouteSwitcher() {
         .concat(Object.values(routes))
         .map((route, index) =>
           route.name === 'OidcAuth' ? (
-            <Route path={route.path} component={() => <route.component />} key={index} />
+            <Route
+              path={route.path}
+              component={() => (
+                <PageTitle title={route.name ? route.name : route.sidebar}>
+                  <route.component />
+                </PageTitle>
+              )}
+              key={index}
+            />
           ) : (
             <AuthRoute
               key={index}
@@ -91,7 +113,11 @@ function RouteSwitcher() {
               requiresAuth={!route.noAuthRequired}
               requiresCluster={!route.noCluster}
               exact={!!route.exact}
-              children={<route.component />}
+              children={
+                <PageTitle title={route.name ? route.name : route.sidebar}>
+                  <route.component />
+                </PageTitle>
+              }
             />
           )
         )}
