@@ -47,7 +47,7 @@ modules:
         path: ../linux/headlamp.desktop
       - type: shell
         commands:
-        - install -Dm644 headlamp.desktop /app/share/applications/headlamp.desktop
+          - install -Dm644 headlamp.desktop /app/share/applications/headlamp.desktop
     build-commands:
       - ". /usr/lib/sdk/golang/enable.sh && export GOPATH=$PWD; export GO111MODULE=off"
       - cd frontend && npm install && npm run build

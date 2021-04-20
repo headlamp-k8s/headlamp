@@ -85,43 +85,43 @@
     },
     {
         "type": "git",
-        "url": "https://github.com/golang/crypto.git",
+        "url": "https://github.com/golang/crypto",
         "dest": "vendor/golang.org/x/crypto",
         "commit": "75b288015ac9"
     },
     {
         "type": "git",
-        "url": "https://go.googlesource.com/net",
+        "url": "https://github.com/golang/net",
         "dest": "vendor/golang.org/x/net",
         "commit": "4c5254603344"
     },
     {
         "type": "git",
-        "url": "https://go.googlesource.com/oauth2",
+        "url": "https://github.com/golang/oauth2",
         "dest": "vendor/golang.org/x/oauth2",
         "commit": "bf48bf16ab8d"
     },
     {
         "type": "git",
-        "url": "https://go.googlesource.com/sys",
+        "url": "https://github.com/golang/sys",
         "dest": "vendor/golang.org/x/sys",
         "commit": "6fdc65e7d980"
     },
     {
         "type": "git",
-        "url": "https://go.googlesource.com/text",
+        "url": "https://github.com/golang/text",
         "tag": "v0.3.2",
         "dest": "vendor/golang.org/x/text"
     },
     {
         "type": "git",
-        "url": "https://go.googlesource.com/time",
+        "url": "https://github.com/golang/time",
         "dest": "vendor/golang.org/x/time",
         "commit": "555d28b269f0"
     },
     {
         "type": "git",
-        "url": "https://github.com/golang/appengine.git",
+        "url": "https://github.com/golang/appengine",
         "tag": "v1.6.1",
         "dest": "vendor/google.golang.org/appengine"
     },
@@ -151,7 +151,7 @@
     },
     {
         "type": "git",
-        "url": "https://github.com/kubernetes/apimachinery.git",
+        "url": "https://github.com/kubernetes/apimachinery",
         "tag": "v0.17.4",
         "dest": "vendor/k8s.io/apimachinery"
     },
@@ -175,7 +175,7 @@
     },
     {
         "type": "git",
-        "url": "https://github.com/kubernetes-sigs/yaml/",
+        "url": "https://github.com/kubernetes-sigs/yaml",
         "tag": "v1.1.0",
         "dest": "vendor/sigs.k8s.io/yaml"
     }
