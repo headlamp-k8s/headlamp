@@ -6,7 +6,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from 'react-router-dom';
-import { useTypedSelector } from '../../redux/reducers/reducers';
 
 const IconTooltip = withStyles(theme => ({
   tooltip: {
@@ -22,22 +21,21 @@ const IconTooltip = withStyles(theme => ({
 
 interface ListItemLinkProps {
   primary: string;
-  to: string;
+  pathname: string;
+  search?: string;
   name: string;
   icon?: object;
 }
 
 export default function ListItemLink(props: ListItemLinkProps) {
-  const { primary, to, icon, name, ...other } = props;
-  const namespaces = useTypedSelector(state => state.filter.namespaces);
-  const namespaceURLString = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
+  const { primary, pathname, search, icon, name, ...other } = props;
 
   const renderLink = React.useMemo(
     () =>
       React.forwardRef<any, Omit<RouterLinkProps, 'to'>>((itemProps, ref) => (
-        <RouterLink to={{ pathname: to, search: namespaceURLString }} ref={ref} {...itemProps} />
+        <RouterLink to={{ pathname: pathname, search: search }} ref={ref} {...itemProps} />
       )),
-    [to, namespaceURLString]
+    [pathname, search]
   );
   let listItemLink = null;
 

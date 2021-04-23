@@ -76,11 +76,13 @@ const useStyle = makeStyles(theme => ({
 
 export default function Sidebar() {
   const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const namespaces = useTypedSelector(state => state.filter.namespaces);
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const items = React.useMemo(() => prepareRoutes(), [sidebar.entries]);
   const [open, setOpen] = React.useState(sidebar.isSidebarOpen);
-  const classes = useStyle({ isSidebarOpen: open });
+
+  const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
 
   // Use the location to make sure the sidebar is changed, as it depends on the cluster
   // (defined in the URL ATM).
@@ -89,6 +91,51 @@ export default function Sidebar() {
   if (!sidebar?.isVisible) {
     return null;
   }
+
+  return (
+    <PureSidebar
+      items={items}
+      open={open}
+      selectedName={sidebar?.selected}
+      search={search}
+      onToggleOpen={() => {
+        dispatch(setWhetherSidebarOpen(!open));
+        setOpen(!open);
+      }}
+      linkArea={
+        <>
+          <CreateButton />
+          <VersionButton />
+        </>
+      }
+    />
+  );
+}
+
+export interface PureSidebarProps {
+  /** If the sidebar is fully expanded open or shrunk. */
+  open: boolean;
+  /** To show in the sidebar. */
+  items: SidebarEntry[];
+  /** The selected route name of the sidebar open. */
+  selectedName: string | null;
+  /** Called when sidebar toggles between open and closed. */
+  onToggleOpen: () => void;
+  /** The search part of the url */
+  search?: string;
+  /** A place to put extra components below the links. */
+  linkArea: React.ReactNode;
+}
+
+export function PureSidebar({
+  open,
+  items,
+  selectedName,
+  onToggleOpen,
+  search,
+  linkArea,
+}: PureSidebarProps) {
+  const classes = useStyle({ isSidebarOpen: open });
 
   return (
     <Drawer
@@ -108,13 +155,7 @@ export default function Sidebar() {
       }}
     >
       <div className={classes.toolbar}>
-        <Button
-          onClick={() => {
-            dispatch(setWhetherSidebarOpen(!open));
-            setOpen(!open);
-          }}
-          aria-label={open ? 'Shrink sidebar' : 'Expand sidebar'}
-        >
+        <Button onClick={onToggleOpen} aria-label={open ? 'Shrink sidebar' : 'Expand sidebar'}>
           <SvgIcon
             className={classes.logo}
             component={open ? LogoWithTextLight : LogoLight}
@@ -132,15 +173,18 @@ export default function Sidebar() {
         <Grid item>
           <List>
             {items.map((item, i) => (
-              <SidebarItem key={i} selectedName={sidebar.selected} fullWidth={open} {...item} />
+              <SidebarItem
+                key={i}
+                selectedName={selectedName}
+                fullWidth={open}
+                search={search}
+                {...item}
+              />
             ))}
           </List>
         </Grid>
         <Grid item>
-          <Box textAlign="center">
-            <CreateButton />
-            <VersionButton />
-          </Box>
+          <Box textAlign="center">{linkArea}</Box>
         </Grid>
       </Grid>
     </Drawer>

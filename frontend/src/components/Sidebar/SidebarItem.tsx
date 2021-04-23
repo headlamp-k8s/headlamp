@@ -6,6 +6,7 @@ import React from 'react';
 import { generatePath, useHistory } from 'react-router';
 import { createRouteURL, getRoute } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SidebarEntry } from '../../redux/reducers/ui';
 import ListItemLink from './ListItemLink';
 
@@ -65,10 +66,15 @@ const useItemStyle = makeStyles(theme => ({
   },
 }));
 
-interface SidebarItemProps extends ListItemProps, SidebarEntry {
+export interface SidebarItemProps extends ListItemProps, SidebarEntry {
+  /** The route name which is selected. */
   selectedName?: string | null;
+  /** The navigation is a child. */
   hasParent?: boolean;
+  /** Displayed wide with icon and text, otherwise with just a small icon. */
   fullWidth?: boolean;
+  /** Search part of the URL. */
+  search?: string;
 }
 
 export default function SidebarItem(props: SidebarItemProps) {
@@ -76,6 +82,7 @@ export default function SidebarItem(props: SidebarItemProps) {
     label,
     name,
     url = null,
+    search,
     useClusterURL = false,
     subList = [],
     selectedName,
@@ -124,7 +131,7 @@ export default function SidebarItem(props: SidebarItemProps) {
     <React.Fragment>
       <ListItemLink
         selected={isSelected()}
-        to={fullURL || ''}
+        pathname={fullURL || ''}
         primary={fullWidth ? label : ''}
         classes={{
           selected: classes.linkSelected,
@@ -132,6 +139,7 @@ export default function SidebarItem(props: SidebarItemProps) {
         className={linkClass}
         icon={icon}
         name={label}
+        search={search}
         {...other}
       />
       {subList.length > 0 && (
