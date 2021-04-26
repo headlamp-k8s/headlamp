@@ -9,12 +9,26 @@ export default {
 } as Meta;
 
 const Template: Story<StatusLabelProps> = args => (
-  <StatusLabelComponent {...args}>status</StatusLabelComponent>
+  <StatusLabelComponent {...args}>{args.status}</StatusLabelComponent>
 );
 
-export const StatusLabel = Template.bind({
+export const Success = Template.bind({
   component: StatusLabelComponent,
 });
-StatusLabel.args = {
+Success.args = {
   status: 'success',
+};
+
+export const Error = Template.bind({
+  component: StatusLabelComponent,
+});
+Error.args = {
+  status: 'error',
+};
+
+export const Warning = Template.bind({
+  component: StatusLabelComponent,
+});
+Warning.args = {
+  status: 'warning',
 };
