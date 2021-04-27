@@ -26,7 +26,7 @@ const commonRules = {
   palette: {
     primary: {
       contrastText: '#fff',
-      main: '#3DA3F5',
+      main: '#2A79B9',
     },
     primaryColor: '#000',
     success: {
@@ -92,7 +92,11 @@ const darkTheme = createMuiTheme({
   palette: {
     ...commonRules.palette,
     tables: {
-      headerText: '#9e9e9e',
+      headerText: '#aeaeae',
+    },
+    primary: {
+      contrastText: '#fff',
+      main: '#6CB6F2',
     },
     primaryColor: '#fff',
     chartStyles: {

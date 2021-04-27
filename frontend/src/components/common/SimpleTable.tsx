@@ -26,6 +26,7 @@ const useTableStyle = makeStyles(theme => ({
   table: {
     '& .MuiTableCell-root': {
       paddingLeft: '0',
+      fontSize: '1rem',
     },
     '& .MuiTableBody-root': {
       '& .MuiTableRow-root:last-child': {
@@ -36,6 +37,7 @@ const useTableStyle = makeStyles(theme => ({
     },
     '& .MuiTableCell-head': {
       color: theme.palette.tables.headerText,
+      fontSize: '1.1rem',
     },
   },
 }));
@@ -323,8 +325,10 @@ const useStyles = makeStyles(theme => ({
   metadataCell: {
     width: '100%',
     verticalAlign: 'top',
+    fontSize: '1rem',
   },
   metadataNameCell: {
+    fontSize: '1rem',
     textAlign: 'left',
     maxWidth: '50%',
     minWidth: '10rem',
