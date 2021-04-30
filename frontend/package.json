@@ -89,7 +89,8 @@
     "extends": [
       "@kinvolk",
       "prettier",
-      "prettier/react"
+      "prettier/react",
+      "plugin:jsx-a11y/recommended"
     ]
   },
   "jest": {
@@ -130,6 +131,7 @@
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
