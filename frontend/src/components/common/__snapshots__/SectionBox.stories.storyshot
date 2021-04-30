@@ -34,11 +34,11 @@ exports[`Storyshots SectionBox Header Props 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h6
-          class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+        <h1
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
         >
           This is a section title with a main style
-        </h6>
+        </h1>
       </div>
     </div>
     <div
@@ -65,11 +65,11 @@ exports[`Storyshots SectionBox Titled 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h6
-          class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+        <h1
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
         >
           This is a section title default
-        </h6>
+        </h1>
       </div>
     </div>
     <div
@@ -96,11 +96,11 @@ exports[`Storyshots SectionBox Titled Children 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h6
-          class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+        <h1
+          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
         >
           This is a section title
-        </h6>
+        </h1>
       </div>
     </div>
     <div

@@ -79,6 +79,10 @@ const commonRules = {
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', '),
+    h1: {
+      fontWeight: 700,
+      fontSize: '1.87rem',
+    },
   },
   shape: {
     borderRadius: 0,
