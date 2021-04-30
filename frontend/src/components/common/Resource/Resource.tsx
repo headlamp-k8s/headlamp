@@ -106,6 +106,8 @@ export function MainInfoSection(props: MainInfoSectionProps) {
         </Button>
       )}
       <SectionBox
+        aria-busy={resource === null}
+        aria-live="polite"
         title={
           <SectionHeader
             title={title || (resource ? resource.kind : '')}

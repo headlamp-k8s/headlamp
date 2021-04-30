@@ -206,13 +206,27 @@ export default function EditorDialog(props: EditorDialogProps) {
       : `Edit: ${item.metadata?.name || 'New Object'}`;
   }
 
+  const focusedRef = React.useCallback(node => {
+    if (node !== null) {
+      node.setAttribute('tabindex', '-1');
+      node.focus();
+    }
+  }, []);
+
   return (
-    <Dialog maxWidth="lg" scroll="paper" fullWidth onBackdropClick={onClose} {...other}>
+    <Dialog
+      aria-busy={!item}
+      maxWidth="lg"
+      scroll="paper"
+      fullWidth
+      onBackdropClick={onClose}
+      {...other}
+    >
       {!item ? (
         <Loader />
       ) : (
         <React.Fragment>
-          <DialogTitle>{dialogTitle}</DialogTitle>
+          <DialogTitle ref={focusedRef}>{dialogTitle}</DialogTitle>
           <DialogContent className={classes.dialogContent}>
             {isReadOnly() ? (
               <OurEditor />
@@ -255,7 +269,7 @@ export default function EditorDialog(props: EditorDialogProps) {
             <div style={{ flex: '1 0 0' }} />
             {errorLabel && <Typography color="error">{errorLabel}</Typography>}
             <div style={{ flex: '1 0 0' }} />
-            <Button onClick={onClose} color="primary" autoFocus>
+            <Button onClick={onClose} color="primary">
               Close
             </Button>
             {!isReadOnly() && (

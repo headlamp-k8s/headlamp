@@ -44,6 +44,12 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
     }
   });
 
+  const focusedRef = React.useCallback(node => {
+    if (node !== null) {
+      node.focus();
+    }
+  }, []);
+
   React.useEffect(
     () => {
       const namespace = getFilterValueByNameFromURL('namespace', location);
@@ -95,8 +101,8 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
             InputLabelProps={{ shrink: true }}
             placeholder="Filter"
             value={filter.search}
-            autoFocus
             onChange={event => dispatch(setSearchFilter(event.target.value))}
+            ref={focusedRef}
           />
         </Grid>
         <Grid item>

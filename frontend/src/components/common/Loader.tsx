@@ -21,7 +21,7 @@ export default function Loader(props: LoaderProps & CircularProgressProps) {
   if (noContainer) return progress;
 
   return (
-    <Box className={classes.loaderContainer} py={3} px="auto">
+    <Box className={classes.loaderContainer} py={3} px="auto" aria-label="Loading" role="status">
       {progress}
     </Box>
   );

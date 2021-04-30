@@ -219,8 +219,9 @@ export function PureAuthChooser({
                     onCode={handleOidcAuth}
                     url={oauthUrl}
                     title="Headlamp Cluster Authentication"
+                    button={ColorButton as typeof Button}
                   >
-                    <ColorButton>Sign In</ColorButton>
+                    Sign In
                   </OauthPopup>
                 </Box>
               ) : null}

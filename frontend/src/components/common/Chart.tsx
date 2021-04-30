@@ -101,7 +101,14 @@ export function PercentageCircle(props: PercentageCircleProps) {
   }
 
   return (
-    <Box justifyContent="center" alignItems="center" alignContent="center" mx="auto">
+    <Box
+      aria-busy={isLoading}
+      aria-live="polite"
+      justifyContent="center"
+      alignItems="center"
+      alignContent="center"
+      mx="auto"
+    >
       {title && <Typography className={classes.title}>{title}</Typography>}
       {isLoading ? (
         <Loader />

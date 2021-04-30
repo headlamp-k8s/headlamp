@@ -5,7 +5,9 @@ exports[`Storyshots Loader With Container 1`] = `
   id="root"
 >
   <div
+    aria-label="Loading"
     class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+    role="status"
   >
     <div
       class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
