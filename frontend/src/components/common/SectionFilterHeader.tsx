@@ -99,6 +99,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
             label="Search"
             type="search"
             InputLabelProps={{ shrink: true }}
+            InputProps={{ role: 'search' }}
             placeholder="Filter"
             value={filter.search}
             onChange={event => dispatch(setSearchFilter(event.target.value))}
