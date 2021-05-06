@@ -82,7 +82,7 @@ export default function NavigationTabs() {
 
   defaultIndex = subList.findIndex(item => item.name === sidebar.selected);
   return (
-    <Box mb={2}>
+    <Box mb={2} component="nav">
       <Tabs
         tabs={tabRoutes}
         onTabChanged={index => {
