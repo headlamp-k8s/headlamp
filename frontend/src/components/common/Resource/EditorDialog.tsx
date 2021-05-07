@@ -8,7 +8,11 @@ import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 import Editor from '@monaco-editor/react';
 import { loader } from '@monaco-editor/react';
@@ -23,11 +27,12 @@ import Empty from '../EmptyContent';
 import Loader from '../Loader';
 import Tabs from '../Tabs';
 import DocsViewer from './DocsViewer';
+import SimpleEditor from './SimpleEditor';
 
 const useStyle = makeStyles(theme => ({
   dialogContent: {
     height: '80%',
-    minHeight: '600px',
+    // minHeight: '600px',
     overflowY: 'hidden',
   },
   terminalCode: {
@@ -82,6 +87,16 @@ export default function EditorDialog(props: EditorDialogProps) {
   const [previousVersion, setPreviousVersion] = React.useState('');
   const [error, setError] = React.useState('');
   const [docSpecs, setDocSpecs] = React.useState({});
+
+  const [useSimpleEditor, setUseSimpleEditorState] = React.useState(() => {
+    const localData = localStorage.getItem('useSimpleEditor');
+    return localData ? JSON.parse(localData) : true;
+  });
+
+  function setUseSimpleEditor(data: boolean) {
+    localStorage.setItem('useSimpleEditor', JSON.stringify(data));
+    setUseSimpleEditorState(data);
+  }
 
   React.useEffect(() => {
     if (!item) {
@@ -182,7 +197,11 @@ export default function EditorDialog(props: EditorDialogProps) {
       loader.config({ 'vs/nls': { availableLanguages: { '*': lang } } });
     }
 
-    return (
+    return useSimpleEditor ? (
+      <Box paddingTop={2} height="100%">
+        <SimpleEditor language="yaml" value={code} onChange={onChange} />
+      </Box>
+    ) : (
       <Box paddingTop={2} height="100%">
         <Editor
           language="yaml"
@@ -224,7 +243,30 @@ export default function EditorDialog(props: EditorDialogProps) {
         <Loader />
       ) : (
         <React.Fragment>
-          <DialogTitle ref={focusedRef}>{dialogTitle}</DialogTitle>
+          <Grid container spacing={0}>
+            <Grid item xs={6}>
+              <DialogTitle ref={focusedRef}>{dialogTitle}</DialogTitle>
+            </Grid>
+            <Grid xs={6} item>
+              <Box display="flex" flexDirection="row-reverse">
+                <Box p={1}>
+                  <FormGroup row>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={useSimpleEditor}
+                          onChange={() => setUseSimpleEditor(!useSimpleEditor)}
+                          name="useSimpleEditor"
+                        />
+                      }
+                      label="Use minimal editor"
+                    />
+                  </FormGroup>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+
           <DialogContent className={classes.dialogContent}>
             {isReadOnly() ? (
               <OurEditor />
