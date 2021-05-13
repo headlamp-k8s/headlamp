@@ -13,7 +13,7 @@ Assuming the have already downloaded and installed Headlamp on your desktop, you
 
 Example:
 
-  On Linux: `./Headlamp.AppImage --headless`
+  On Linux: `flatpak run io.kinvolk.Headlamp --headless` (or `./Headlamp.AppImage --headless` for AppImage)
 
   On MacOS: `./Headlamp --headless`
 
