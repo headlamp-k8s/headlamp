@@ -51,4 +51,4 @@ Once you have the Service Account token, paste it when prompted by Headlamp.
 
 ### Use OIDC
 
-For OpenIDConnect, please see the [in-cluster installation](./in-cluster.md#accessing-using-oidc) docs.
+For OpenIDConnect, please see the [in-cluster installation](./in-cluster/oidc.md#accessing-using-oidc) docs.
