@@ -13,12 +13,10 @@ spec:
     hosts:
     - __URL__
   rules:
-  -
-    host: __URL__
+  - host: __URL__
     http:
       paths:
-      -
-        path: /
+      - path: /
         backend:
           serviceName: headlamp
           servicePort: 80
