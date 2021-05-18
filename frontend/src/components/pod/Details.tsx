@@ -16,6 +16,7 @@ import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import { ContainersSection, MainInfoSection, PageGrid } from '../common/Resource';
 import Terminal from '../common/Terminal';
+import { makePodStatusLabel } from './List';
 
 const useStyle = makeStyles({
   containerFormControl: {
@@ -151,7 +152,7 @@ export default function PodDetails() {
             item && [
               {
                 name: 'State',
-                value: item.status.phase,
+                value: makePodStatusLabel(item),
               },
               {
                 name: 'Node',
