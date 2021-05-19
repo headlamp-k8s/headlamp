@@ -342,7 +342,7 @@ const useStyles = makeStyles(theme => ({
 
 export interface NameValueTableRow {
   name: string | JSX.Element;
-  value?: string | JSX.Element;
+  value?: string | JSX.Element | JSX.Element[];
   hide?: boolean;
 }
 
