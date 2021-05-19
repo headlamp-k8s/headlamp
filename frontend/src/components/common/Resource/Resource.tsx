@@ -19,11 +19,13 @@ import _ from 'lodash';
 import * as monaco from 'monaco-editor';
 import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { ResourceClasses } from '../../../lib/k8s';
 import {
   KubeCondition,
   KubeContainer,
   KubeObject,
   KubeObjectInterface,
+  KubeOwnerReference,
 } from '../../../lib/k8s/cluster';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { localeDate } from '../../../lib/util';
@@ -58,6 +60,33 @@ interface MetadataDisplayProps {
 export function MetadataDisplay(props: MetadataDisplayProps) {
   const { resource, extraRows } = props;
 
+  function makeOwnerReferences(ownerReferences: KubeOwnerReference[]) {
+    if (!resource || ownerReferences === undefined) {
+      return undefined;
+    }
+
+    const numItems = ownerReferences.length;
+    if (numItems === 0) {
+      return undefined;
+    }
+
+    return ownerReferences.map((ownerRef, i) => (
+      <>
+        {ownerRef.kind in ResourceClasses ? (
+          <Link
+            routeName={new ResourceClasses[ownerRef.kind]().detailsRoute}
+            params={{ name: ownerRef.name, namespace: resource.metadata.namespace }}
+          >
+            {ownerRef.kind}: {ownerRef.name}
+          </Link>
+        ) : (
+          `${ownerRef.kind}: ${ownerRef.name}`
+        )}
+        {i < numItems - 1 && <br />}
+      </>
+    ));
+  }
+
   const mainRows = ([
     {
       name: 'Name',
@@ -83,6 +112,14 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
         <MetadataDictGrid dict={resource.metadata.annotations} />
       ),
       hide: !resource.metadata.annotations,
+    },
+    {
+      name:
+        resource.metadata.ownerReferences && resource.metadata.ownerReferences.length > 1
+          ? 'Owner refs'
+          : 'Controlled by',
+      value: makeOwnerReferences(resource.metadata.ownerReferences || []),
+      hide: !resource.metadata.ownerReferences || resource.metadata.ownerReferences.length === 0,
     },
   ] as NameValueTableRow[]).concat(extraRows || []);
 
