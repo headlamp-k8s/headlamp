@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import { Divider, Tooltip } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
@@ -25,7 +25,7 @@ import store from '../../redux/stores/store';
 import { ReactComponent as LogoLight } from '../../resources/icon-light.svg';
 import { ReactComponent as LogoWithTextLight } from '../../resources/logo-light.svg';
 import CreateButton from '../common/Resource/CreateButton';
-import Tabs from '../common/Tabs';
+import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';
 import VersionButton from './VersionButton';
 
@@ -359,89 +359,4 @@ export function useSidebarItem(itemName: string | null) {
   );
 }
 
-function searchNameInSubList(sublist: SidebarEntry['subList'], name: string): boolean {
-  if (!sublist) {
-    return false;
-  }
-  for (let i = 0; i < sublist.length; i++) {
-    if (sublist[i].name === name) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function findParentOfSubList(list: SidebarEntry[], name: string | null): SidebarEntry | null {
-  if (!name) {
-    return null;
-  }
-
-  let parent = null;
-  for (let i = 0; i < list.length; i++) {
-    if (searchNameInSubList(list[i].subList, name)) {
-      parent = list[i];
-    }
-  }
-  return parent;
-}
-
-export function NavigationTabs() {
-  const history = useHistory();
-  const sidebar = useTypedSelector(state => state.ui.sidebar);
-  if (sidebar.isSidebarOpen) {
-    return null;
-  }
-
-  let defaultIndex = null;
-  const listItems = prepareRoutes();
-  let navigationItem = listItems.find(item => item.name === sidebar.selected);
-  if (!navigationItem) {
-    const parent = findParentOfSubList(listItems, sidebar.selected);
-    if (!parent) {
-      return null;
-    }
-    navigationItem = parent;
-  }
-
-  const subList = navigationItem.subList;
-  if (!subList) {
-    return null;
-  }
-
-  function tabChangeHandler(index: number) {
-    if (!subList) {
-      return;
-    }
-    let pathname;
-
-    const url = subList[index].url;
-    if (url) {
-      pathname = generatePath(getClusterPrefixedPath(url), { cluster: getCluster()! });
-    } else {
-      pathname = createRouteURL(subList[index].name);
-    }
-    history.push({ pathname });
-  }
-
-  if (createRouteURL(navigationItem.name)) {
-    subList.unshift(navigationItem);
-  }
-
-  const tabRoutes = subList.map((item: any) => {
-    return { label: item.label, component: <></> };
-  });
-
-  defaultIndex = subList.findIndex(item => item.name === sidebar.selected);
-  return (
-    <Box mb={2}>
-      <Tabs
-        tabs={tabRoutes}
-        onTabChanged={index => {
-          tabChangeHandler(index);
-        }}
-        defaultIndex={defaultIndex}
-      />
-      <Divider />
-    </Box>
-  );
-}
+export { NavigationTabs };
