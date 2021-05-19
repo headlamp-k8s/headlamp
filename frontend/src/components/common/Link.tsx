@@ -19,19 +19,20 @@ export interface LinkProps {
 
 export interface LinkObjectProps {
   kubeObject: InstanceType<ReturnType<typeof makeKubeObject>>;
+  [prop: string]: any;
 }
 
 export default function Link(props: React.PropsWithChildren<LinkProps | LinkObjectProps>) {
   if ((props as LinkObjectProps).kubeObject) {
-    const { kubeObject } = props as LinkObjectProps;
+    const { kubeObject, ...otherProps } = props as LinkObjectProps;
     return (
-      <MuiLink component={RouterLink} to={kubeObject.getDetailsLink()}>
+      <MuiLink component={RouterLink} to={kubeObject.getDetailsLink()} {...otherProps}>
         {props.children || kubeObject.getName()}
       </MuiLink>
     );
   }
 
-  const { routeName, params = {}, search, state } = props as LinkProps;
+  const { routeName, params = {}, search, state, ...otherProps } = props as LinkProps;
   return (
     <MuiLink
       component={RouterLink}
@@ -40,6 +41,7 @@ export default function Link(props: React.PropsWithChildren<LinkProps | LinkObje
         search,
         state,
       }}
+      {...otherProps}
     >
       {props.children}
     </MuiLink>
