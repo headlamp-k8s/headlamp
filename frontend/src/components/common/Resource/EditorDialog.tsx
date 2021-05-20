@@ -1,3 +1,4 @@
+import '../../../i18n/config';
 import chevronDown from '@iconify/icons-mdi/chevron-down';
 import chevronRight from '@iconify/icons-mdi/chevron-right';
 import { Icon } from '@iconify/react';
@@ -12,10 +13,12 @@ import Typography from '@material-ui/core/Typography';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 import Editor from '@monaco-editor/react';
+import { loader } from '@monaco-editor/react';
 import * as yaml from 'js-yaml';
 import _ from 'lodash';
 import * as Monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import getDocDefinitions from '../../../lib/docs';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
 import ConfirmButton from '../ConfirmButton';
@@ -164,7 +167,23 @@ export default function EditorDialog(props: EditorDialogProps) {
     onSave!(getObjectFromCode(code));
   }
 
-  function makeEditor() {
+  function OurEditor() {
+    const { i18n } = useTranslation();
+    const [lang, setLang] = React.useState(i18n.language);
+
+    React.useEffect(() => {
+      i18n.on('languageChanged', setLang);
+      return () => {
+        i18n.off('languageChanged', setLang);
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // @todo: monaco editor does not support pt, ta, hi amongst various other langs.
+    if (['de', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh-cn', 'zh-tw'].includes(lang)) {
+      loader.config({ 'vs/nls': { availableLanguages: { '*': lang } } });
+    }
+
     return (
       <Box paddingTop={2} height="100%">
         <Editor
@@ -196,7 +215,7 @@ export default function EditorDialog(props: EditorDialogProps) {
           <DialogTitle>{dialogTitle}</DialogTitle>
           <DialogContent className={classes.dialogContent}>
             {isReadOnly() ? (
-              makeEditor()
+              <OurEditor />
             ) : (
               <Tabs
                 onTabChanged={handleTabChange}
@@ -206,7 +225,7 @@ export default function EditorDialog(props: EditorDialogProps) {
                 tabs={[
                   {
                     label: 'Editor',
-                    component: makeEditor(),
+                    component: <OurEditor />,
                   },
                   {
                     label: 'Documentation',

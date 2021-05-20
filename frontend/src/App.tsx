@@ -1,3 +1,4 @@
+import './i18n/config';
 import accountIcon from '@iconify/icons-mdi/account';
 import logoutIcon from '@iconify/icons-mdi/logout';
 import darkIcon from '@iconify/icons-mdi/weather-night';
@@ -14,7 +15,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { Provider, useDispatch } from 'react-redux';
@@ -32,6 +32,7 @@ import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
 import Sidebar, { drawerWidth, NavigationTabs, useSidebarItem } from './components/Sidebar';
 import helpers from './helpers';
+import ThemeProviderNexti18n from './i18n/ThemeProviderNexti18n';
 import { getToken, setToken } from './lib/auth';
 import { useCluster, useClustersConf } from './lib/k8s';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
@@ -237,7 +238,7 @@ function AppWithRedux(props: React.PropsWithChildren<{}>) {
     initializePlugins();
   }, [themeName]);
 
-  return <MuiThemeProvider theme={themes[themeName]}>{props.children}</MuiThemeProvider>;
+  return <ThemeProviderNexti18n theme={themes[themeName]}>{props.children}</ThemeProviderNexti18n>;
 }
 
 function App() {

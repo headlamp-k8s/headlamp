@@ -1,6 +1,8 @@
+import '../../i18n/config';
 import { useTheme } from '@material-ui/core/styles';
 import _ from 'lodash';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../lib/k8s/cluster';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
 import { HeaderLabel } from '../common';
@@ -27,6 +29,7 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
     tooltip,
     ...others
   } = props;
+  const { t } = useTranslation(['cluster']);
 
   const [used, available] = getResourceUsage();
 
@@ -71,7 +74,7 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
     <HeaderLabel
       label={title || ''}
       value={props.getLegend!(used, available)}
-      tooltip={'Install the metrics-server to get usage data.'}
+      tooltip={t('cluster:Charts.ResourceCircularChart.tooltip')}
     />
   ) : (
     <PercentageCircle
@@ -87,6 +90,7 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
 
 export function MemoryCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
+  const { t } = useTranslation(['cluster']);
 
   function memoryUsedGetter(item: KubeObject) {
     return parseRam(item.usage.memory) / TO_GB;
@@ -114,7 +118,11 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
       getLegend={getLegend}
       resourceUsedGetter={memoryUsedGetter}
       resourceAvailableGetter={memoryAvailableGetter}
-      title={noMetrics ? 'Memory' : 'Memory usage'}
+      title={
+        noMetrics
+          ? t('cluster:Charts.MemoryCircularChart.titleNoMetrics')
+          : t('cluster:Charts.MemoryCircularChart.title')
+      }
       {...props}
     />
   );
@@ -122,6 +130,7 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
 
 export function CpuCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
+  const { t } = useTranslation(['cluster']);
 
   function cpuUsedGetter(item: KubeObject) {
     return parseCpu(item.usage.cpu) / TO_ONE_CPU;
@@ -149,7 +158,11 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
       getLegend={getLegend}
       resourceUsedGetter={cpuUsedGetter}
       resourceAvailableGetter={cpuAvailableGetter}
-      title={noMetrics ? 'CPU' : 'CPU usage'}
+      title={
+        noMetrics
+          ? t('cluster:Charts.CpuCircularChart.titleNoMetrics')
+          : t('cluster:Charts.CpuCircularChart.title')
+      }
       {...props}
     />
   );
@@ -158,6 +171,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
 export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'items'>) {
   const theme = useTheme();
   const { items } = props;
+  const { t } = useTranslation(['cluster']);
 
   const podsReady = (items || []).filter(pod =>
     ['Running', 'Succeeded'].includes(pod.status!.phase)
@@ -167,7 +181,10 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
     if (items === null) {
       return null;
     }
-    return `${podsReady.length} / ${items.length} Requested`;
+    return t('cluster:Charts.PodsStatusCircleChart.legend', {
+      numReady: podsReady.length,
+      numItems: items.length,
+    });
   }
 
   function getLabel() {
@@ -201,7 +218,7 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
       data={getData()}
       total={items !== null ? items.length : -1}
       label={getLabel()}
-      title="Pods"
+      title={t('cluster:Charts.PodsStatusCircleChart.title')}
       legend={getLegend()}
     />
   );

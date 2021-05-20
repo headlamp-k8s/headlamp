@@ -1,9 +1,15 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import App from './App';
 
-test('renders without crashing', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Wait while fetching clusters/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders without crashing', async () => {
+  const { getByText } = render(
+    <React.Suspense fallback="Loading...">
+      <App />
+    </React.Suspense>
+  );
+
+  await waitFor(() => {
+    expect(getByText(/Wait while fetching clusters/i)).toBeInTheDocument();
+  });
 });

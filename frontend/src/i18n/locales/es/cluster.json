@@ -1,0 +1,10 @@
+{
+  "Charts": {
+    "PodsStatusCircleChart": {
+      "title": "Pods"
+    },
+    "ResourceCircularChart": {
+      "tooltip": "Instala el \"metrics-server\" para obtener datos de uso."
+    }
+  }
+}
