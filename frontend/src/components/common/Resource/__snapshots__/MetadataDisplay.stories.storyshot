@@ -1,0 +1,446 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
+<div
+  id="root"
+>
+  <table
+    class="MuiTable-root makeStyles-table"
+  >
+    <tbody
+      class="MuiTableBody-root"
+    >
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Name
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            my-new-kind
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Namespace
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            kube-system
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Creation
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            6/2/2021, 12:00:00 AM
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Labels
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+              style="max-width: 80%;"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                >
+                  label1: My Label 1
+                </p>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                >
+                  label2: My Label 2
+                </p>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                >
+                  label3: My Label 3
+                </p>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
+<div
+  id="root"
+>
+  <table
+    class="MuiTable-root makeStyles-table"
+  >
+    <tbody
+      class="MuiTableBody-root"
+    >
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Name
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            my-new-kind
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Namespace
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            kube-system
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Creation
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            6/2/2021, 12:00:00 AM
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Labels
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+              style="max-width: 80%;"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                >
+                  label1: My Label 1
+                </p>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                >
+                  label2: My Label 2
+                </p>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                >
+                  label3: My Label 3
+                </p>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Some extra label 1
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            Some extra value 1
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Some extra label 2
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            Some extra value 2
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Some extra label 3
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            Some extra value 3
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
+<div
+  id="root"
+>
+  <table
+    class="MuiTable-root makeStyles-table"
+  >
+    <tbody
+      class="MuiTableBody-root"
+    >
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Name
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            my-new-kind
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Namespace
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            kube-system
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Creation
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          >
+            6/2/2021, 12:00:00 AM
+          </span>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Labels
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+              style="max-width: 80%;"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                >
+                  label1: My Label 1
+                </p>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                >
+                  label2: My Label 2
+                </p>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                >
+                  label3: My Label 3
+                </p>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr
+        class="MuiTableRow-root"
+      >
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+        >
+          Controlled by
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+          scope="row"
+        >
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            href="/"
+          >
+            Deployment
+            : 
+            kube-scheduler
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
