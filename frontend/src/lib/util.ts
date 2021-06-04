@@ -10,7 +10,6 @@ import Node from './k8s/node';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 TimeAgo.addLocale(en);
 
-
 // @todo: these are exported to window.pluginLib.
 
 const TIME_AGO = new TimeAgo();
@@ -24,7 +23,11 @@ export function timeAgo(date: DateParam) {
 }
 
 export function localeDate(date: DateParam) {
-  return new Date(date).toLocaleString();
+  if (process.env.TEST_TZ) {
+    return new Date(date).toLocaleString('en-US', { timeZone: 'UTC' });
+  } else {
+    return new Date(date).toLocaleString();
+  }
 }
 
 export function getPercentStr(value: number, total: number) {
