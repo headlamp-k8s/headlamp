@@ -49,7 +49,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "if-env PUBLIC_URL react-scripts build || cross-env PUBLIC_URL=./ react-scripts build --max_old_space_size=768 && rimraf build/frontend/index.baseUrl.html",
-    "test": "react-scripts test",
+    "test": "cross-env TEST_TZ=true react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint -c package.json --ext .js,.ts,.tsx src/ ../app/electron",
     "format": "prettier --config package.json --write src/ ../app/electron",
