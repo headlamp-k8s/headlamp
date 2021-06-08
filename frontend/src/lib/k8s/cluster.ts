@@ -37,6 +37,16 @@ export interface KubeMetadata {
   selfLink: string;
   labels?: StringDict;
   annotations?: StringDict;
+  ownerReferences?: KubeOwnerReference[];
+}
+
+export interface KubeOwnerReference {
+  apiVersion: string;
+  blockOwnerDeletion: boolean;
+  controller: boolean;
+  kind: string;
+  name: string;
+  uid: string;
 }
 
 // We have to define a KubeObject implementation here because the KubeObject

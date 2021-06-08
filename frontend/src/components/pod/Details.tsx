@@ -12,9 +12,11 @@ import _ from 'lodash';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Pod from '../../lib/k8s/pod';
+import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import { ContainersSection, MainInfoSection, PageGrid } from '../common/Resource';
 import Terminal from '../common/Terminal';
+import { makePodStatusLabel } from './List';
 
 const useStyle = makeStyles({
   containerFormControl: {
@@ -150,7 +152,17 @@ export default function PodDetails() {
             item && [
               {
                 name: 'State',
-                value: item.status.phase,
+                value: makePodStatusLabel(item),
+              },
+              {
+                name: 'Node',
+                value: item.spec.nodeName ? (
+                  <Link routeName="node" params={{ name: item.spec.nodeName }}>
+                    {item.spec.nodeName}
+                  </Link>
+                ) : (
+                  ''
+                ),
               },
               {
                 name: 'Host IP',

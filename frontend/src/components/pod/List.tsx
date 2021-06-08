@@ -8,25 +8,25 @@ import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
+export function makePodStatusLabel(pod: Pod) {
+  const phase = pod.status.phase;
+  let status: StatusLabelProps['status'] = '';
+
+  if (phase === 'Failed') {
+    status = 'error';
+  } else if (phase === 'Succeeded' || phase === 'Running') {
+    status = 'success';
+  }
+
+  return <StatusLabel status={status}>{phase}</StatusLabel>;
+}
+
 export default function PodList() {
   const [pods, error] = Pod.useList();
   const filterFunc = useFilterFunc();
 
   function getRestartCount(pod: Pod) {
     return _.sumBy(pod.status.containerStatuses, container => container.restartCount);
-  }
-
-  function makeStatusLabel(pod: Pod) {
-    const phase = pod.status.phase;
-    let status: StatusLabelProps['status'] = '';
-
-    if (phase === 'Failed') {
-      status = 'error';
-    } else if (phase === 'Succeeded' || phase === 'Running') {
-      status = 'success';
-    }
-
-    return <StatusLabel status={status}>{phase}</StatusLabel>;
   }
 
   return (
@@ -58,7 +58,7 @@ export default function PodList() {
           },
           {
             label: 'Status',
-            getter: makeStatusLabel,
+            getter: makePodStatusLabel,
           },
           {
             label: 'Age',
