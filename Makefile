@@ -6,7 +6,7 @@ DOCKER_CMD ?= docker
 DOCKER_REPO ?= quay.io/kinvolk
 DOCKER_IMAGE_NAME ?= headlamp
 DOCKER_IMAGE_VERSION ?= $(shell git describe --tags --always --dirty)
-DOCKER_IMAGE_BASE ?= alpine:3.11.3
+DOCKER_IMAGE_BASE ?= alpine:3.13.5
 
 ifeq ($(OS), Windows_NT)
 	SERVER_EXE_EXT = .exe
