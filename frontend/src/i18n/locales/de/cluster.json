@@ -1,0 +1,10 @@
+{
+  "Charts": {
+    "PodsStatusCircleChart": {
+      "title": "Podso"
+    },
+    "ResourceCircularChart": {
+      "tooltip": "Installieren Sie das \"metrics-server\", um Nutzungsdaten zu erhalten."
+    }
+  }
+}

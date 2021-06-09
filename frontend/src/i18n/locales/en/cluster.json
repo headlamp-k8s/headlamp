@@ -1,0 +1,19 @@
+{
+  "Charts": {
+    "PodsStatusCircleChart": {
+      "title": "Pods",
+      "legend": "{{numReady, number}} / {{numItems, number}} Requested"
+    },
+    "ResourceCircularChart": {
+      "tooltip": "Install the \"metrics-server\" to get usage data."
+    },
+    "MemoryCircularChart": {
+      "title": "Memory usage",
+      "titleNoMetrics": "Memory"
+    },
+    "CpuCircularChart": {
+      "title": "CPU usage",
+      "titleNoMetrics": "CPU"
+    }
+  }
+}

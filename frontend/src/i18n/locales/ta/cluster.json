@@ -1,0 +1,10 @@
+{
+  "Charts": {
+    "PodsStatusCircleChart": {
+      "title": "Pods"
+    },
+    "ResourceCircularChart": {
+      "tooltip": "பயன்பாட்டுத் தரவைப் பெற \"metrics-server\" நிறுவவும்."
+    }
+  }
+}

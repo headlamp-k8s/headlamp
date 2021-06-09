@@ -86,6 +86,7 @@ const commonRules = {
 };
 
 const lightTheme = createMuiTheme(commonRules);
+
 const darkTheme = createMuiTheme({
   ...commonRules,
   palette: {
