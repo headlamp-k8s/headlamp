@@ -58,6 +58,13 @@ permissions, you may not be able to view your cluster resources correctly.
 
 See the documentation on [how to easily get a Service Account token](https://kinvolk.io/docs/headlamp/latest/installation#create-a-service-account-token) for your cluster.
 
+## Tested platforms
+
+We maintain a list of the [Kubernetes platforms](./docs/platforms.md) we have
+tested Headlamp with, and invite you to add any missing platform you have
+tested, or comments if there are regressions in already filed platforms that
+should be consider.
+
 ## Get involved
 
 Check out our [guidelines](https://kinvolk.io/docs/headlamp/latest/contributing/)
