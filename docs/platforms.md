@@ -14,7 +14,7 @@ The "works" column refers to the overall Kubernetes related functionality when r
 
 Platform<div style="min-width: 300px"></div>    | Works | Comments
 ----------------------------------------------|:-----:|------------------------------------------------------------------------------------------
-[Amazon EKS](https://aws.amazon.com/eks/)                     | ❔    | - Have you tried Headlamp on this platform? Please report your experience.
+[Amazon EKS](https://aws.amazon.com/eks/)                     |  ✔️     | - As [reported](https://github.com/kinvolk/headlamp/issues/266)
 [DigitalOcean Kubernetes](https://www.digitalocean.com/products/kubernetes/)        | ❔    | - Have you tried Headlamp on this platform? Please report your experience.
 [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) | ❔    | - Have you tried Headlamp on this platform? Please report your experience.
 [K3s](https://k3s.io/)                                         | ✔️     | - Simple to install / expose with the regular [in-cluster instructions](https://kinvolk.io/docs/headlamp/latest/installation/in-cluster/).
