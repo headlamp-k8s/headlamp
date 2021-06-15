@@ -74,7 +74,7 @@ function DocsViewer(props: { docSpecs: any }) {
   }
 
   return docs === null && docsError === null ? (
-    <Loader />
+    <Loader title="Loading documentation" />
   ) : !_.isEmpty(docsError) ? (
     <Empty color="error">{docsError}</Empty>
   ) : _.isEmpty(docs) ? (

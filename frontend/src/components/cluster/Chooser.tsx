@@ -264,7 +264,7 @@ function Chooser(props: ClusterDialogProps) {
           {clusters === null ? (
             <>
               <DialogContentText>Wait while fetching clusters…</DialogContentText>
-              <Loader />
+              <Loader title="Loading cluster information" />
             </>
           ) : (
             <>

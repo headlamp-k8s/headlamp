@@ -220,7 +220,7 @@ export function PureAuthChooser({
           <DialogTitle ref={focusedRef} id="authchooser-dialog-title">
             {testingTitle}
           </DialogTitle>
-          <Loader />
+          <Loader title="Testing auth" />
         </Box>
       ) : (
         <Box display="flex" flexDirection="column" alignItems="center">

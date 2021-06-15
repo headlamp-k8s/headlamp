@@ -15,14 +15,13 @@ exports[`Storyshots Charts/PercentageCircle No Data 1`] = `
       CPU usage
     </p>
     <div
-      aria-label="Loading"
       class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
-      role="status"
     >
       <div
         class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
         role="progressbar"
         style="width: 40px; height: 40px;"
+        title="Loading data for CPU usage"
       >
         <svg
           class="MuiCircularProgress-svg"

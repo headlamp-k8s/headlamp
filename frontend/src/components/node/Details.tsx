@@ -33,7 +33,7 @@ export default function NodeDetails() {
   }
 
   return !item ? (
-    <Loader />
+    <Loader title="Loading node details" />
   ) : (
     <PageGrid>
       <MainInfoSection

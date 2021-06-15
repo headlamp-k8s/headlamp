@@ -119,7 +119,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
         }
       >
         {resource === null ? (
-          <Loader />
+          <Loader title="Loading resource data" />
         ) : (
           <React.Fragment>
             {headerSection}

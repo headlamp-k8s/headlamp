@@ -250,7 +250,13 @@ function AppContainer() {
         <Box display="flex">
           <CssBaseline />
 
-          <AppBar position="fixed" className={classes.root} elevation={1} component="nav">
+          <AppBar
+            position="fixed"
+            className={classes.root}
+            elevation={1}
+            component="nav"
+            title="Appbar Tools"
+          >
             <Toolbar>
               <div style={{ flex: '1 0 0' }} />
               <ClusterTitle />

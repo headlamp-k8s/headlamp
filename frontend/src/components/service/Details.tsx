@@ -16,7 +16,7 @@ export default function ServiceDetails() {
   Service.useApiGet(setItem, name, namespace);
 
   return !item ? (
-    <Loader />
+    <Loader title="Loading service details" />
   ) : (
     <PageGrid>
       <MainInfoSection

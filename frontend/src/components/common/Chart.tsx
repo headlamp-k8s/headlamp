@@ -111,7 +111,7 @@ export function PercentageCircle(props: PercentageCircleProps) {
     >
       {title && <Typography className={classes.title}>{title}</Typography>}
       {isLoading ? (
-        <Loader />
+        <Loader title={`Loading data for ${title}`} />
       ) : (
         <PieChart
           cx={size / 2}

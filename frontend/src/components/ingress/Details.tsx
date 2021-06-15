@@ -31,7 +31,7 @@ export default function IngressDetails() {
   }
 
   return !item ? (
-    <Loader />
+    <Loader title="Loading ingress details" />
   ) : (
     <PageGrid>
       <MainInfoSection resource={item} />

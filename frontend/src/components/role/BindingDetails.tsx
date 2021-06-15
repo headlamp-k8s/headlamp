@@ -22,7 +22,7 @@ export default function RoleBindingDetails() {
   cls.useApiGet(setItem, name, namespace);
 
   return !item ? (
-    <Loader />
+    <Loader title="Loading binding details" />
   ) : (
     <PageGrid>
       <MainInfoSection

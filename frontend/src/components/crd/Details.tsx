@@ -51,7 +51,7 @@ export default function CustomResourceDefinitionDetails() {
   }, [item]);
 
   return !item ? (
-    <Loader />
+    <Loader title="Loading resource definition details" />
   ) : (
     <PageGrid>
       <MainInfoSection

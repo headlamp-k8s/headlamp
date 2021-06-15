@@ -213,7 +213,7 @@ export default function SimpleTable(props: SimpleTableProps) {
       return <Empty color="error">{errorMessage}</Empty>;
     }
 
-    return <Loader />;
+    return <Loader title="Loading table data" />;
   }
 
   let filteredData = displayData;

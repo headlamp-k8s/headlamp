@@ -241,7 +241,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       aria-labelledby="editor-dialog-title"
     >
       {!item ? (
-        <Loader />
+        <Loader title="Loading editor" />
       ) : (
         <React.Fragment>
           <Grid container spacing={0}>
