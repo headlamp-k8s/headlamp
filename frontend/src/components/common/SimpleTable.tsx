@@ -14,6 +14,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Empty from './EmptyContent';
 import { ValueLabel } from './Label';
 import Loader from './Loader';
@@ -80,17 +81,18 @@ interface ColumnSortButtonProps {
 }
 
 function ColumnSortButtons(props: ColumnSortButtonProps) {
+  const { t } = useTranslation('frequent');
   const { isDefaultSorted, isIncreasingOrder, clickHandler } = props;
   return isDefaultSorted ? (
     <IconButton
-      aria-label={isIncreasingOrder ? 'sort up' : 'sort down'}
+      aria-label={isIncreasingOrder ? t('sort up') : t('sort down')}
       size="small"
       onClick={() => clickHandler(!isIncreasingOrder)}
     >
       <Icon icon={isIncreasingOrder ? menuUp : menuDown} />
     </IconButton>
   ) : (
-    <IconButton aria-label="sort swap" size="small" onClick={() => clickHandler(true)}>
+    <IconButton aria-label={t('sort swap')} size="small" onClick={() => clickHandler(true)}>
       <Icon icon={menuSwap} />
     </IconButton>
   );
@@ -118,6 +120,7 @@ export default function SimpleTable(props: SimpleTableProps) {
   const [sortColIndex, setSortColIndex] = React.useState(
     defaultSortingColumn ? Math.abs(defaultSortingColumn) - 1 : -1
   );
+  const { t } = useTranslation('resource');
 
   function handleChangePage(_event: any, newPage: number) {
     setPage(newPage);
@@ -213,7 +216,7 @@ export default function SimpleTable(props: SimpleTableProps) {
       return <Empty color="error">{errorMessage}</Empty>;
     }
 
-    return <Loader title="Loading table data" />;
+    return <Loader title={t('Loading table data')} />;
   }
 
   let filteredData = displayData;
@@ -228,7 +231,7 @@ export default function SimpleTable(props: SimpleTableProps) {
   }
 
   return !currentData || currentData.length === 0 ? (
-    <Empty>{emptyMessage || 'No data to be shown.'}</Empty>
+    <Empty>{emptyMessage || t('No data to be shown.')}</Empty>
   ) : (
     <React.Fragment>
       {
@@ -243,7 +246,7 @@ export default function SimpleTable(props: SimpleTableProps) {
                 setCurrentData(data);
               }}
             >
-              Refresh
+              {t('frequent|Refresh')}
             </Button>
           </Box>
         )
@@ -294,7 +297,7 @@ export default function SimpleTable(props: SimpleTableProps) {
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length}>
-                <Empty>No data matching the filter criteria.</Empty>
+                <Empty>{t('No data matching the filter criteria.')}</Empty>
               </TableCell>
             </TableRow>
           )}

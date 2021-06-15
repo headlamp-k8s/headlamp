@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { NavLinkProps, useLocation, useParams } from 'react-router-dom';
 import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import {
@@ -18,6 +19,7 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
   const { workloadKind } = props;
   const [item, setItem] = React.useState<Workload | null>(null);
+  const { t } = useTranslation('glossary');
 
   workloadKind.useApiGet(setItem, name, namespace);
 
@@ -29,12 +31,12 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
         extraInfo={
           item && [
             {
-              name: 'Strategy Type',
+              name: t('Strategy Type'),
               value: item.spec.strategy && item.spec.strategy.type,
               hide: !item.spec.strategy,
             },
             {
-              name: 'Selector',
+              name: t('Selector'),
               value: item.spec.selector && (
                 <MetadataDictGrid
                   dict={item.spec.selector.matchLabels as { [key: string]: string }}

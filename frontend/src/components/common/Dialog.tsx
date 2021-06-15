@@ -5,6 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface ConfirmDialogProps extends DialogProps {
   title: string;
@@ -15,6 +16,7 @@ export interface ConfirmDialogProps extends DialogProps {
 
 export function ConfirmDialog(props: ConfirmDialogProps) {
   const { onConfirm, open, handleClose, title, description } = props;
+  const { t } = useTranslation('frequent');
 
   function onConfirmationClicked() {
     handleClose();
@@ -42,10 +44,10 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            No
+            {t('No')}
           </Button>
           <Button onClick={onConfirmationClicked} color="primary">
-            Yes
+            {t('Yes')}
           </Button>
         </DialogActions>
       </Dialog>

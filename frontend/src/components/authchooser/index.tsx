@@ -2,6 +2,7 @@ import chevronLeft from '@iconify/icons-mdi/chevron-left';
 import { InlineIcon } from '@iconify/react';
 import { Box, Button, DialogTitle, withStyles } from '@material-ui/core';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { generatePath, useHistory, useLocation } from 'react-router-dom';
 import helpers from '../../helpers';
@@ -201,6 +202,8 @@ export function PureAuthChooser({
   handleTryAgain,
   handleBackButtonPress,
 }: PureAuthChooserProps) {
+  const { t } = useTranslation('auth');
+
   const focusedRef = React.useCallback(node => {
     if (node !== null) {
       node.setAttribute('tabindex', '-1');
@@ -220,7 +223,7 @@ export function PureAuthChooser({
           <DialogTitle ref={focusedRef} id="authchooser-dialog-title">
             {testingTitle}
           </DialogTitle>
-          <Loader title="Testing auth" />
+          <Loader title={t('Testing auth')} />
         </Box>
       ) : (
         <Box display="flex" flexDirection="column" alignItems="center">
@@ -234,23 +237,27 @@ export function PureAuthChooser({
                   <OauthPopup
                     onCode={handleOidcAuth}
                     url={oauthUrl}
-                    title="Headlamp Cluster Authentication"
+                    title={t('Headlamp Cluster Authentication')}
                     button={ColorButton as typeof Button}
                   >
-                    Sign In
+                    {t('Sign In') as string}
                   </OauthPopup>
                 </Box>
               ) : null}
               <Box m={2}>
-                <ColorButton onClick={handleTokenAuth}>Use A Token</ColorButton>
+                <ColorButton onClick={handleTokenAuth}>{t('Use A Token')}</ColorButton>
               </Box>
             </Box>
           ) : (
             <Box alignItems="center" textAlign="center">
               <Box m={2}>
-                <Empty>Failed to get authentication information: {error!.message}</Empty>
+                <Empty>
+                  {t('Failed to get authentication information: {{ errorMessage }}', {
+                    errorMessage: error!.message,
+                  })}
+                </Empty>
               </Box>
-              <ColorButton onClick={handleTryAgain}>Try Again</ColorButton>
+              <ColorButton onClick={handleTryAgain}>{t('frequent|Try Again')}</ColorButton>
             </Box>
           )}
         </Box>
@@ -268,7 +275,9 @@ export function PureAuthChooser({
             <Box pt={0.5}>
               <InlineIcon icon={chevronLeft} height={20} width={20} />
             </Box>
-            <Box fontSize={14}>BACK</Box>
+            <Box fontSize={14} style={{ textTransform: 'uppercase' }}>
+              {t('frequent|Back')}
+            </Box>
           </Box>
         </Box>
       )}

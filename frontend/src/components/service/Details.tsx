@@ -1,6 +1,7 @@
 import chevronRight from '@iconify/icons-mdi/chevron-right';
 import { InlineIcon } from '@iconify/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import Service from '../../lib/k8s/service';
 import { ValueLabel } from '../common/Label';
@@ -12,11 +13,12 @@ import SimpleTable from '../common/SimpleTable';
 export default function ServiceDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<Service | null>(null);
+  const { t } = useTranslation('glossary');
 
   Service.useApiGet(setItem, name, namespace);
 
   return !item ? (
-    <Loader title="Loading service details" />
+    <Loader title={'service|Loading service details'} />
   ) : (
     <PageGrid>
       <MainInfoSection
@@ -24,34 +26,34 @@ export default function ServiceDetails() {
         extraInfo={
           item && [
             {
-              name: 'Type',
+              name: t('Type'),
               value: item.spec.type,
             },
             {
-              name: 'Cluster IP',
+              name: t('Cluster IP'),
               value: item.spec.clusterIP,
             },
             {
-              name: 'Selector',
+              name: t('Selector'),
               value: <MetadataDictGrid dict={item.spec.selector} />,
             },
           ]
         }
       />
-      <SectionBox title="Ports">
+      <SectionBox title={t('Ports')}>
         <SimpleTable
           data={item.spec.ports}
           columns={[
             {
-              label: 'Protocol',
+              label: t('Protocol'),
               datum: 'protocol',
             },
             {
-              label: 'Name',
+              label: t('frequent|Name'),
               datum: 'name',
             },
             {
-              label: 'Ports',
+              label: t('Ports'),
               getter: ({ port, targetPort }) => (
                 <React.Fragment>
                   <ValueLabel>{port}</ValueLabel>

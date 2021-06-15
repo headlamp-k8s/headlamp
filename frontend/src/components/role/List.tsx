@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ClusterRole from '../../lib/k8s/clusterRole';
 import Role from '../../lib/k8s/role';
 import { timeAgo, useErrorState, useFilterFunc } from '../../lib/util';
@@ -15,6 +16,7 @@ export default function RoleList() {
   const [roles, setRoles] = React.useState<RolesDict | null>(null);
   const [roleError, setRolesError] = useErrorState(setupRoles);
   const [clusterRoleError, setClusterRolesError] = useErrorState(setupClusterRoles);
+  const { t } = useTranslation('glossary');
   const filterFunc = useFilterFunc();
 
   function setupRolesWithKind(newRoles: Role[] | null, kind: string) {
@@ -63,18 +65,18 @@ export default function RoleList() {
   ClusterRole.useApiList(setupClusterRoles, setClusterRolesError);
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Roles" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Roles')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={getErrorMessage()}
         columns={[
           {
-            label: 'Type',
+            label: t('Type'),
             getter: item => item.kind,
           },
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: item => (
               <Link
                 routeName={item.metadata.namespace ? 'role' : 'clusterrole'}
@@ -96,11 +98,11 @@ export default function RoleList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: item => item.metadata.namespace,
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: item => timeAgo(item.metadata.creationTimestamp),
             sort: (r1: Role, r2: Role) =>
               new Date(r2.metadata.creationTimestamp).getTime() -

@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ResourceClasses } from '../../../lib/k8s';
 import { KubeObjectInterface, KubeOwnerReference } from '../../../lib/k8s/cluster';
 import { localeDate } from '../../../lib/util';
@@ -31,6 +32,7 @@ export interface MetadataDisplayProps {
 
 export function MetadataDisplay(props: MetadataDisplayProps) {
   const { resource, extraRows } = props;
+  const { t } = useTranslation('resource');
 
   function makeOwnerReferences(ownerReferences: KubeOwnerReference[]) {
     if (!resource || ownerReferences === undefined) {
@@ -61,25 +63,25 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
 
   const mainRows = ([
     {
-      name: 'Name',
+      name: t('frequent|Name'),
       value: resource.metadata.name,
     },
     {
-      name: 'Namespace',
+      name: t('glossary|Namespace'),
       value: resource.metadata.namespace && resource.metadata.namespace,
       hide: !resource.metadata.namespace,
     },
     {
-      name: 'Creation',
+      name: t('Creation'),
       value: localeDate(resource.metadata.creationTimestamp),
     },
     {
-      name: 'Labels',
+      name: t('Labels'),
       value: resource.metadata.labels && <MetadataDictGrid dict={resource.metadata.labels} />,
       hide: !resource.metadata.labels,
     },
     {
-      name: 'Annotations',
+      name: t('Annotations'),
       value: resource.metadata.annotations && (
         <MetadataDictGrid dict={resource.metadata.annotations} />
       ),
@@ -88,8 +90,8 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
     {
       name:
         resource.metadata.ownerReferences && resource.metadata.ownerReferences.length > 1
-          ? 'Owner refs'
-          : 'Controlled by',
+          ? t('Owner refs')
+          : t('Controlled by'),
       value: makeOwnerReferences(resource.metadata.ownerReferences || []),
       hide: !resource.metadata.ownerReferences || resource.metadata.ownerReferences.length === 0,
     },

@@ -9,6 +9,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import TextField from '@material-ui/core/TextField';
 import { Location } from 'history';
 import React from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { generatePath, useHistory } from 'react-router-dom';
 import { setToken } from '../../lib/auth';
 import { useClustersConf } from '../../lib/k8s';
@@ -26,6 +27,7 @@ export default function AuthToken() {
   const [token, setToken] = React.useState('');
   const [showError, setShowError] = React.useState(false);
   const clusters = useClustersConf();
+  const { t } = useTranslation(['auth']);
 
   function onAuthClicked() {
     loginWithToken(token).then(code => {
@@ -48,8 +50,8 @@ export default function AuthToken() {
       onCancel={() => history.replace('/')}
       title={
         Object.keys(clusterConf || {}).length > 1
-          ? `Authentication: ${getCluster()}`
-          : 'Authentication'
+          ? t('Authentication: {{ clusterName }}', { clusterName: getCluster() })
+          : t('Authentication')
       }
       token={token}
       showError={showError}
@@ -91,6 +93,7 @@ export function PureAuthToken({
   onChangeToken,
   onCloseError,
 }: PureAuthTokenProps) {
+  const { t } = useTranslation('auth');
   const focusedRef = React.useCallback(node => {
     if (node !== null) {
       // node.setAttribute('tabindex', '-1');
@@ -108,11 +111,13 @@ export function PureAuthToken({
       >
         <DialogTitle id="authtoken-dialog-title">{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>Please paste your authentication token.</DialogContentText>
+          <DialogContentText>
+            <Trans ns="auth">Please paste your authentication token.</Trans>
+          </DialogContentText>
           <TextField
             margin="dense"
             id="token"
-            label="ID token"
+            label={t('ID token')}
             type="password"
             value={token}
             onChange={onChangeToken}
@@ -122,15 +127,17 @@ export function PureAuthToken({
         </DialogContent>
         <DialogActions>
           <Box ml={2}>
-            Check out how to generate a
-            <Link
-              style={{ cursor: 'pointer', marginLeft: '0.4rem' }}
-              target="_blank"
-              href="https://kinvolk.io/docs/headlamp/latest/installation/#authentication--log-in"
-            >
-              service account token
-            </Link>
-            .
+            <Trans ns="auth">
+              Check out how to generate a
+              <Link
+                style={{ cursor: 'pointer', marginLeft: '0.4rem' }}
+                target="_blank"
+                href="https://kinvolk.io/docs/headlamp/latest/installation/#authentication--log-in"
+              >
+                service account token
+              </Link>
+              .
+            </Trans>
           </Box>
           <div style={{ flex: '1 0 0' }}></div>
         </DialogActions>
@@ -138,13 +145,13 @@ export function PureAuthToken({
           {showActions && (
             <>
               <Button onClick={onCancel} color="primary">
-                Cancel
+                {t('frequent|Cancel')}
               </Button>
               <div style={{ flex: '1 0 0' }} />
             </>
           )}
           <Button onClick={onAuthClicked} color="primary">
-            Authenticate
+            {t('auth|Authenticate')}
           </Button>
         </DialogActions>
       </ClusterDialog>
@@ -159,7 +166,7 @@ export function PureAuthToken({
         ContentProps={{
           'aria-describedby': 'message-id',
         }}
-        message={<span id="message-id">Error authenticating</span>}
+        message={<span id="message-id">{t('auth|Error authenticating')}</span>}
       />
     </Box>
   );

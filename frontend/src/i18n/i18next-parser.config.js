@@ -10,6 +10,7 @@ module.exports = {
   lexers: {
     default: ['JsxLexer'],
   },
+  namespaceSeparator: '|',
   keySeparator: false,
   output: path.join(directoryPath, './$LOCALE/$NAMESPACE.json'),
   locales: currentLocales,

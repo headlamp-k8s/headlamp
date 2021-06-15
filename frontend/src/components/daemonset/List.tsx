@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import DaemonSet from '../../lib/k8s/daemonSet';
 import { useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
@@ -9,16 +10,17 @@ import SimpleTable from '../common/SimpleTable';
 export default function DaemonSetList() {
   const [daemonSets, error] = DaemonSet.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Daemon Sets" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Daemon Sets')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={DaemonSet.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: daemonSet => <Link kubeObject={daemonSet} />,
             sort: (d1: DaemonSet, d2: DaemonSet) => {
               if (d1.metadata.name < d2.metadata.name) {
@@ -30,15 +32,15 @@ export default function DaemonSetList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: daemonSet => daemonSet.getNamespace(),
           },
           {
-            label: 'Pods',
+            label: t('Pods'),
             getter: daemonSet => daemonSet.status.currentNumberScheduled,
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: daemonSet => daemonSet.getAge(),
             sort: (d1: DaemonSet, d2: DaemonSet) =>
               new Date(d2.metadata.creationTimestamp).getTime() -

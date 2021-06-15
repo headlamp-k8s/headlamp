@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Pod from '../../lib/k8s/pod';
 import { useFilterFunc } from '../../lib/util';
 import { SectionFilterHeader } from '../common';
@@ -24,20 +25,21 @@ export function makePodStatusLabel(pod: Pod) {
 export default function PodList() {
   const [pods, error] = Pod.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   function getRestartCount(pod: Pod) {
     return _.sumBy(pod.status.containerStatuses, container => container.restartCount);
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Pods" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Pods')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={Pod.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: pod => <Link kubeObject={pod} />,
             sort: (p1: Pod, p2: Pod) => {
               if (p1.metadata.name < p2.metadata.name) {
@@ -49,19 +51,19 @@ export default function PodList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: (pod: Pod) => pod.getNamespace(),
           },
           {
-            label: 'Restarts',
+            label: t('Restarts'),
             getter: (pod: Pod) => getRestartCount(pod),
           },
           {
-            label: 'Status',
+            label: t('Status'),
             getter: makePodStatusLabel,
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: (pod: Pod) => pod.getAge(),
             sort: (p1: Pod, p2: Pod) =>
               new Date(p2.metadata.creationTimestamp).getTime() -

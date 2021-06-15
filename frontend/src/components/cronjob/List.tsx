@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import CronJob from '../../lib/k8s/cronJob';
 import { useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
@@ -9,11 +10,12 @@ import SimpleTable from '../common/SimpleTable';
 export default function CronJobList() {
   const [cronJobs, error] = CronJob.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   function getSchedule(cronJob: CronJob) {
     const { schedule } = cronJob.spec;
     if (!schedule.startsWith('@')) {
-      return 'never';
+      return t('frequent|never');
     }
     return schedule;
   }
@@ -21,21 +23,23 @@ export default function CronJobList() {
   function getLastScheduleTime(cronJob: CronJob) {
     const { lastScheduleTime } = cronJob.status;
     if (!lastScheduleTime) {
-      return 'N/A';
+      return t('frequent|N/A');
     }
     const oneDay = 24 * 60 * 60 * 1000;
-    return `${new Date().getTime() - new Date(lastScheduleTime).getTime() / oneDay} days`;
+    return t('frequent|{{ age }} days', {
+      age: new Date().getTime() - new Date(lastScheduleTime).getTime() / oneDay,
+    });
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Cron Jobs" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Cron Jobs')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={CronJob.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: cronJob => <Link kubeObject={cronJob} />,
             sort: (c1: CronJob, c2: CronJob) => {
               if (c1.metadata.name < c2.metadata.name) {
@@ -47,23 +51,23 @@ export default function CronJobList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: cronJob => cronJob.getNamespace(),
           },
           {
-            label: 'Schedule',
+            label: t('Schedule'),
             getter: cronJob => getSchedule(cronJob),
           },
           {
-            label: 'Suspend',
+            label: t('Suspend'),
             getter: cronJob => cronJob.spec.schedule.toString(),
           },
           {
-            label: 'Last Schedule',
+            label: t('Last Schedule'),
             getter: cronJob => getLastScheduleTime(cronJob),
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: cronJob => cronJob.getAge(),
             sort: (c1: CronJob, c2: CronJob) =>
               new Date(c2.metadata.creationTimestamp).getTime() -

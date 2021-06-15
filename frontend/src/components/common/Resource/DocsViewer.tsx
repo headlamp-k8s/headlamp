@@ -6,9 +6,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
-import * as yaml from 'js-yaml';
 import _ from 'lodash';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import getDocDefinitions from '../../../lib/docs';
 import Empty from '../EmptyContent';
 import Loader from '../Loader';
@@ -27,17 +27,20 @@ function DocsViewer(props: { docSpecs: any }) {
   const classes = useStyles();
   const [docs, setDocs] = React.useState<object | null>(null);
   const [docsError, setDocsError] = React.useState<string | null>(null);
+  const { t } = useTranslation('resource');
 
   React.useEffect(() => {
     setDocsError(null);
 
     if (docSpecs.error) {
-      setDocsError(`Cannot load documentation: ${docSpecs.error}`);
+      t('Cannot load documentation: {{ docsError }}', { docsError: docSpecs.error });
       return;
     }
     if (!docSpecs.apiVersion || !docSpecs.kind) {
       setDocsError(
-        'Cannot load documentation: Please make sure the YAML is valid and has the kind and apiVersion set.'
+        t(
+          'Cannot load documentation: Please make sure the YAML is valid and has the kind and apiVersion set.'
+        )
       );
       return;
     }
@@ -47,7 +50,7 @@ function DocsViewer(props: { docSpecs: any }) {
         setDocs(result?.properties || {});
       })
       .catch(err => {
-        setDocsError(`Cannot load documentation: ${err}`);
+        setDocsError(t('Cannot load documentation: {{err}}', { err }));
       });
   }, [docSpecs]);
 
@@ -74,14 +77,20 @@ function DocsViewer(props: { docSpecs: any }) {
   }
 
   return docs === null && docsError === null ? (
-    <Loader title="Loading documentation" />
+    <Loader title={t('Loading documentation')} />
   ) : !_.isEmpty(docsError) ? (
     <Empty color="error">{docsError}</Empty>
   ) : _.isEmpty(docs) ? (
-    <Empty>No documentation for type {docSpecs.kind.trim()}.</Empty>
+    <Empty>
+      {t('No documentation for type {{ docsType }}.', { docsType: docSpecs.kind.trim() })}
+    </Empty>
   ) : (
     <Box p={4}>
-      <Typography>Showing documentation for: {docSpecs.kind.trim()}</Typography>
+      <Typography>
+        {t('Showing documentation for: {{ docsType }}', {
+          docsType: docSpecs.kind.trim(),
+        })}
+      </Typography>
       <TreeView
         className={classes.root}
         defaultCollapseIcon={<Icon icon={chevronDown} />}

@@ -2,6 +2,7 @@ import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 function a11yProps(index: number) {
   return {
@@ -29,6 +30,7 @@ export default function Tabs(props: TabsProps) {
   const [tabIndex, setTabIndex] = React.useState<TabsProps['defaultIndex']>(
     defaultIndex && Math.min(defaultIndex as number, 0)
   );
+  const { t } = useTranslation('glossary');
 
   function handleTabChange(event: any, newValue: number) {
     setTabIndex(newValue);
@@ -57,7 +59,7 @@ export default function Tabs(props: TabsProps) {
         onChange={handleTabChange}
         indicatorColor="primary"
         textColor="primary"
-        aria-label="full width tabs example"
+        aria-label={t('tabs')}
         {...tabProps}
       >
         {tabs.map(({ label }, i) => (

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import Namespace from '../../lib/k8s/namespace';
 import { StatusLabel } from '../common/Label';
@@ -7,6 +8,7 @@ import { MainInfoSection } from '../common/Resource';
 export default function NamespaceDetails() {
   const { name } = useParams<{ name: string }>();
   const [item, setItem] = React.useState<Namespace | null>(null);
+  const { t } = useTranslation('glossary');
 
   Namespace.useApiGet(setItem, name);
 
@@ -21,7 +23,7 @@ export default function NamespaceDetails() {
       extraInfo={
         item && [
           {
-            name: 'Status',
+            name: t('Status'),
             value: makeStatusLabel(item),
           },
         ]

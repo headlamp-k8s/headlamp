@@ -49,6 +49,7 @@ i18next
       useSuspense: false, // not needed unless loading from public/locales
       //   bindI18nStore: 'added'
     },
+    nsSeparator: '|',
     keySeparator: false,
   });
 

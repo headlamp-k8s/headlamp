@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ClusterRole from '../../lib/k8s/clusterRole';
 import Role from '../../lib/k8s/role';
@@ -13,6 +14,7 @@ export default function RoleDetails() {
     name: string;
   }>();
   const [item, setItem] = React.useState<Role | null>(null);
+  const { t } = useTranslation('glossary');
 
   let cls = Role;
   if (!namespace) {
@@ -22,27 +24,27 @@ export default function RoleDetails() {
   cls.useApiGet(setItem, name!, namespace);
 
   return !item ? (
-    <Loader title="Loading role details" />
+    <Loader title={'role|Loading role details'} />
   ) : (
     <PageGrid>
       <MainInfoSection resource={item} />
-      <SectionBox title="Rules">
+      <SectionBox title={t('Rules')}>
         <SimpleTable
           columns={[
             {
-              label: 'API Groups',
+              label: t('API Groups'),
               getter: ({ apiGroups = [] }) => apiGroups.join(', '),
             },
             {
-              label: 'Resources',
+              label: t('Resources'),
               getter: ({ resources = [] }) => resources.join(', '),
             },
             {
-              label: 'Non Resources',
+              label: t('Non Resources'),
               getter: ({ nonResources = [] }) => nonResources.join(', '),
             },
             {
-              label: 'Verbs',
+              label: t('Verbs'),
               getter: ({ verbs = [] }) => verbs.join(', '),
             },
           ]}

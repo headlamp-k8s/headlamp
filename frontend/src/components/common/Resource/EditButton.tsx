@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { KubeObject } from '../../../lib/k8s/cluster';
@@ -23,6 +24,7 @@ export default function EditButton(props: EditButtonProps) {
   const [visible, setVisible] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState<string>('');
   const location = useLocation();
+  const { t } = useTranslation('resource');
 
   function makeErrorMessage(err: any) {
     const status: number = err.status;
@@ -48,14 +50,15 @@ export default function EditButton(props: EditButtonProps) {
 
   function handleSave(newItemDef: KubeServiceAccount) {
     const cancelUrl = location.pathname;
+    const itemName = item.metadata.name;
 
     setOpenDialog(false);
     dispatch(
       clusterAction(() => applyFunc(newItemDef), {
-        startMessage: `Applying changes to ${item.metadata.name}…`,
-        cancelledMessage: `Cancelled changes to ${item.metadata.name}.`,
-        successMessage: `Applied changes to ${item.metadata.name}.`,
-        errorMessage: `Failed to apply changes to ${item.metadata.name}.`,
+        startMessage: t('Applying changes to {{ itemName }}…', { itemName }),
+        cancelledMessage: t('Cancelled changes to {{ itemName }}.', { itemName }),
+        successMessage: t('Applied changes to {{ itemName }}.', { itemName }),
+        errorMessage: t('Failed to apply changes to {{ itemName }}.', { itemName }),
         cancelUrl,
         errorUrl: cancelUrl,
         ...options,
@@ -79,8 +82,8 @@ export default function EditButton(props: EditButtonProps) {
 
   return (
     <React.Fragment>
-      <Tooltip title="Edit">
-        <IconButton aria-label="edit" onClick={() => setOpenDialog(true)}>
+      <Tooltip title={t('frequent|Edit') as string}>
+        <IconButton aria-label={t('frequent|edit')} onClick={() => setOpenDialog(true)}>
           <Icon icon={pencilIcon} />
         </IconButton>
       </Tooltip>

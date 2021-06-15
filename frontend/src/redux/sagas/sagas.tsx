@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import { all, call, cancelled, delay, put, race, take, takeEvery } from 'redux-saga/effects';
 import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/util';
 import {
@@ -54,7 +55,7 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
         url: startUrl,
         buttons: [
           {
-            label: 'Cancel',
+            label: i18next.t('frequent|Cancel'),
             actionToDispatch: uniqueCancelAction,
           },
         ],

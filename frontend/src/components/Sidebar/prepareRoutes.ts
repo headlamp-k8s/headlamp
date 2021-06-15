@@ -3,122 +3,123 @@ import databaseIcon from '@iconify/icons-mdi/database';
 import folderNetworkOutline from '@iconify/icons-mdi/folder-network-outline';
 import hexagonMultipleOutline from '@iconify/icons-mdi/hexagon-multiple-outline';
 import lockIcon from '@iconify/icons-mdi/lock';
+import i18next from 'i18next';
 import { SidebarEntry } from '../../redux/reducers/ui';
 import store from '../../redux/stores/store';
 
 const LIST_ITEMS: SidebarEntry[] = [
   {
     name: 'cluster',
-    label: 'Cluster',
+    label: i18next.t('glossary|Cluster'),
     icon: hexagonMultipleOutline,
     subList: [
       {
         name: 'namespaces',
-        label: 'Namespaces',
+        label: i18next.t('glossary|Namespaces'),
       },
       {
         name: 'nodes',
-        label: 'Nodes',
+        label: i18next.t('glossary|Nodes'),
       },
       {
         name: 'crds',
-        label: 'CRDs',
+        label: i18next.t('glossary|CRDs'),
       },
       {
         name: 'configMaps',
-        label: 'Config Maps',
+        label: i18next.t('glossary|Config Maps'),
       },
     ],
   },
   {
     name: 'workloads',
-    label: 'Workloads',
+    label: i18next.t('glossary|Workloads'),
     icon: circleSlice2,
     subList: [
       {
         name: 'Pods',
-        label: 'Pods',
+        label: i18next.t('glossary|Pods'),
       },
       {
         name: 'ReplicaSets',
-        label: 'Replica Sets',
+        label: i18next.t('glossary|Replica Sets'),
       },
       {
         name: 'DaemonSets',
-        label: 'Daemon Sets',
+        label: i18next.t('glossary|Daemon Sets'),
       },
       {
         name: 'StatefulSets',
-        label: 'Stateful Sets',
+        label: i18next.t('glossary|Stateful Sets'),
       },
       {
         name: 'Jobs',
-        label: 'Jobs',
+        label: i18next.t('glossary|Jobs'),
       },
       {
         name: 'Deployments',
-        label: 'Deployments',
+        label: i18next.t('glossary|Deployments'),
       },
       {
         name: 'CronJobs',
-        label: 'CronJobs',
+        label: i18next.t('glossary|CronJobs'),
       },
     ],
   },
   {
     name: 'storage',
-    label: 'Storage',
+    label: i18next.t('glossary|Storage'),
     icon: databaseIcon,
     subList: [
       {
         name: 'storageClasses',
-        label: 'Storage Classes',
+        label: i18next.t('glossary|Storage Classes'),
       },
       {
         name: 'persistentVolumes',
-        label: 'Storage Volumes',
+        label: i18next.t('glossary|Storage Volumes'),
       },
       {
         name: 'persistentVolumeClaims',
-        label: 'Persistent Volume Claims',
+        label: i18next.t('glossary|Persistent Volume Claims'),
       },
     ],
   },
   {
     name: 'network',
-    label: 'Network',
+    label: i18next.t('glossary|Network'),
     icon: folderNetworkOutline,
     subList: [
       {
         name: 'services',
-        label: 'Services',
+        label: i18next.t('glossary|Services'),
       },
       {
         name: 'ingresses',
-        label: 'Ingresses',
+        label: i18next.t('glossary|Ingresses'),
       },
     ],
   },
   {
     name: 'security',
-    label: 'Security',
+    label: i18next.t('glossary|Security'),
     icon: lockIcon,
     subList: [
       {
         name: 'serviceAccounts',
-        label: 'Service Accounts',
+        label: i18next.t('glossary|Service Accounts'),
       },
       {
         name: 'roles',
-        label: 'Roles',
+        label: i18next.t('glossary|Roles'),
       },
       {
         name: 'roleBindings',
-        label: 'Role Bindings',
+        label: i18next.t('glossary|Role Bindings'),
       },
       {
         name: 'secrets',
-        label: 'Secrets',
+        label: i18next.t('glossary|Secrets'),
       },
     ],
   },

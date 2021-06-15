@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import Ansi from 'ansi-to-react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const useStyle = makeStyles(theme => ({
   dialogContent: {
@@ -46,6 +47,7 @@ export function LogViewer(props: LogViewerProps) {
   const { logs, title = '', downloadName = 'log', onClose, topActions = [], ...other } = props;
   const classes = useStyle();
   const logsBottomRef = React.useRef<HTMLDivElement>(null);
+  const { t } = useTranslation('frequent');
 
   function downloadLog() {
     const element = document.createElement('a');
@@ -77,8 +79,8 @@ export function LogViewer(props: LogViewerProps) {
             ))}
           </Grid>
           <Grid item xs>
-            <Tooltip title="Download">
-              <IconButton aria-label="download" onClick={downloadLog}>
+            <Tooltip title={t('Download') as string}>
+              <IconButton aria-label={t('download')} onClick={downloadLog}>
                 <Icon icon={fileDownloadOutline} />
               </IconButton>
             </Tooltip>
@@ -97,7 +99,7 @@ export function LogViewer(props: LogViewerProps) {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
-          Close
+          {t('Close')}
         </Button>
       </DialogActions>
     </Dialog>

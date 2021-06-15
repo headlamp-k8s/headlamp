@@ -18,6 +18,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Provider, useDispatch } from 'react-redux';
 import {
   BrowserRouter,
@@ -130,6 +131,7 @@ function TopBar() {
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const cluster = useCluster();
   const history = useHistory();
+  const { t } = useTranslation('frequent');
 
   function handleMenu(event: any) {
     setMenuAnchorEl(event.currentTarget);
@@ -161,7 +163,7 @@ function TopBar() {
       }
       <ThemeChangeButton />
       <IconButton
-        aria-label="User menu"
+        aria-label={t('User menu')}
         aria-controls="customized-menu"
         aria-haspopup="true"
         onClick={handleMenu}
@@ -197,6 +199,7 @@ function TopBar() {
 
 function ThemeChangeButton() {
   const dispatch = useDispatch();
+  const { t } = useTranslation('frequent');
   type iconType = typeof darkIcon;
 
   const counterIcons: {
@@ -218,7 +221,7 @@ function ThemeChangeButton() {
   }
 
   return (
-    <IconButton aria-label="change-theme" onClick={() => changeTheme()}>
+    <IconButton aria-label={t('Change theme')} onClick={() => changeTheme()}>
       <Icon icon={icon} />
     </IconButton>
   );

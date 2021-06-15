@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Node from '../../lib/k8s/node';
 import { useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
@@ -20,18 +21,19 @@ export default function NodeList() {
   const [nodes, error] = Node.useList();
   const [nodeMetrics, metricsError] = Node.useMetrics();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   const noMetrics = metricsError?.status === 404;
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Nodes" noNamespaceFilter />}>
+    <SectionBox title={<SectionFilterHeader title={t('Nodes')} noNamespaceFilter />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={Node.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: node => <Link kubeObject={node} />,
             sort: (n1: Node, n2: Node) => {
               if (n1.metadata.name < n2.metadata.name) {
@@ -43,11 +45,11 @@ export default function NodeList() {
             },
           },
           {
-            label: 'Ready',
+            label: t('frequent|Ready'),
             getter: node => <NodeReadyLabel node={node} />,
           },
           {
-            label: 'CPU',
+            label: t('CPU'),
             cellProps: {
               className: classes.chartCell,
             },
@@ -61,7 +63,7 @@ export default function NodeList() {
             ),
           },
           {
-            label: 'Memory',
+            label: t('Memory'),
             cellProps: {
               className: classes.chartCell,
             },
@@ -75,7 +77,7 @@ export default function NodeList() {
             ),
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: node => node.getAge(),
             sort: (n1: Node, n2: Node) =>
               new Date(n2.metadata.creationTimestamp).getTime() -

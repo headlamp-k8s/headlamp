@@ -15,6 +15,7 @@ import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import * as monaco from 'monaco-editor';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
   KubeCondition,
@@ -80,6 +81,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     backLink,
   } = props;
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
+  const { t } = useTranslation('frequent');
 
   function getHeaderActions() {
     return React.Children.toArray(
@@ -102,7 +104,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
           component={RouterLink}
           to={backLink || createRouteURL(resource.listRoute)}
         >
-          <Typography style={{ paddingTop: '3px' }}>Back</Typography>
+          <Typography style={{ paddingTop: '3px' }}>{t('frequent|Back')}</Typography>
         </Button>
       )}
       <SectionBox
@@ -119,7 +121,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
         }
       >
         {resource === null ? (
-          <Loader title="Loading resource data" />
+          <Loader title={t('frequent|Loading resource data')} />
         ) : (
           <React.Fragment>
             {headerSection}
@@ -216,6 +218,7 @@ export function DataField(props: TextFieldProps) {
 export function SecretField(props: InputProps) {
   const { value, ...other } = props;
   const [showPassword, setShowPassword] = React.useState(false);
+  const { t } = useTranslation('frequent');
 
   function handleClickShowPassword() {
     setShowPassword(!showPassword);
@@ -226,7 +229,7 @@ export function SecretField(props: InputProps) {
       <Grid item>
         <IconButton
           edge="end"
-          aria-label="toggle field visibility"
+          aria-label={t('toggle field visibility')}
           onClick={handleClickShowPassword}
           onMouseDown={event => event.preventDefault()}
         >
@@ -255,6 +258,7 @@ interface ConditionsTableProps {
 
 export function ConditionsTable(props: ConditionsTableProps) {
   const { resource, showLastUpdate = true } = props;
+  const { t } = useTranslation('glossary');
 
   function makeStatusLabel(condition: KubeCondition) {
     let status: StatusLabelProps['status'] = '';
@@ -272,25 +276,25 @@ export function ConditionsTable(props: ConditionsTableProps) {
       hide?: boolean;
     }[] = [
       {
-        label: 'Condition',
+        label: t('Condition'),
         getter: makeStatusLabel,
       },
       {
-        label: 'Status',
+        label: t('Status'),
         getter: condition => condition.status,
       },
       {
-        label: 'Last Transition',
+        label: t('Last Transition'),
         getter: condition => <DateLabel date={condition.lastTransitionTime as string} />,
       },
       {
-        label: 'Last Update',
+        label: t('Last Update'),
         getter: condition =>
           condition.lastUpdateTime ? <DateLabel date={condition.lastUpdateTime as string} /> : '-',
         hide: !showLastUpdate,
       },
       {
-        label: 'Reason',
+        label: t('Reason'),
         getter: condition =>
           condition.reason ? (
             <HoverInfoLabel label={condition.reason} hoverInfo={condition.message} />
@@ -314,6 +318,7 @@ export function ConditionsTable(props: ConditionsTableProps) {
 
 export function ContainerInfo(props: { container: KubeContainer }) {
   const { container } = props;
+  const { t } = useTranslation('glossary');
 
   function containerRows() {
     const env: { [name: string]: string } = {};
@@ -335,23 +340,23 @@ export function ContainerInfo(props: { container: KubeContainer }) {
 
     return [
       {
-        name: 'Image',
+        name: t('Image'),
         value: container.image,
       },
       {
-        name: 'Args',
+        name: t('Args'),
         value: container.args && (
           <MetadataDictGrid dict={container.args as { [index: number]: string }} showKeys={false} />
         ),
         hide: !container.args,
       },
       {
-        name: 'Command',
+        name: t('Command'),
         value: (container.command || []).join(' '),
         hide: !container.command,
       },
       {
-        name: 'Environment',
+        name: t('Environment'),
         value: <MetadataDictGrid dict={env} />,
         hide: _.isEmpty(env),
       },
@@ -368,6 +373,7 @@ export function ContainerInfo(props: { container: KubeContainer }) {
 
 export function ContainersSection(props: { resource: KubeObjectInterface | null }) {
   const { resource } = props;
+  const { t } = useTranslation('glossary');
 
   function getContainers() {
     if (!resource) {
@@ -391,7 +397,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
   const numContainers = containers.length;
 
   return (
-    <SectionBox title="Containers">
+    <SectionBox title={t('Containers')}>
       {numContainers === 0 ? (
         <Empty>No containers to show</Empty>
       ) : (
@@ -411,13 +417,14 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
 export function ReplicasSection(props: { resource: KubeObjectInterface | null }) {
   const { resource } = props;
+  const { t } = useTranslation('glossary');
 
   if (!resource) {
     return null;
   }
 
   return (
-    <SectionBox title="Conditions">
+    <SectionBox title={t('Containers')}>
       <ConditionsTable resource={resource} />
     </SectionBox>
   );

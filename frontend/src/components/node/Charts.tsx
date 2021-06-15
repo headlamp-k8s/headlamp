@@ -1,5 +1,6 @@
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import { getPercentStr, getResourceMetrics, getResourceStr } from '../../lib/util';
@@ -15,6 +16,7 @@ interface UsageBarChartProps {
 
 export function UsageBarChart(props: UsageBarChartProps) {
   const { node, nodeMetrics, resourceType, noMetrics = false } = props;
+  const { t } = useTranslation('frequent');
   let [used, capacity] = [0, 0];
 
   if (node) {
@@ -23,7 +25,7 @@ export function UsageBarChart(props: UsageBarChartProps) {
 
   const data = [
     {
-      name: 'used',
+      name: t('used'),
       value: used,
     },
   ];
@@ -40,7 +42,7 @@ export function UsageBarChart(props: UsageBarChartProps) {
   return noMetrics ? (
     <>
       <Typography display="inline">{getResourceStr(capacity, resourceType)}</Typography>
-      <TooltipIcon>Install the metrics-server to get usage data.</TooltipIcon>
+      <TooltipIcon>{t('node|Install the metrics-server to get usage data.')}</TooltipIcon>
     </>
   ) : (
     <PercentageBar data={data} total={capacity} tooltipFunc={tooltipFunc} />

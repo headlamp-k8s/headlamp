@@ -55,7 +55,6 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               >
                 <div
                   class="MuiListItemIcon-root"
-                  title="Cluster"
                 >
                   <svg
                     focusable="false"
@@ -110,13 +109,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Namespaces
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -132,13 +125,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Nodes
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -154,13 +141,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              CRDs
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -176,13 +157,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Config Maps
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -203,7 +178,6 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               >
                 <div
                   class="MuiListItemIcon-root"
-                  title="Workloads"
                 >
                   <svg
                     focusable="false"
@@ -258,13 +232,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Pods
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -280,13 +248,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Replica Sets
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -302,13 +264,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Daemon Sets
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -324,13 +280,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Stateful Sets
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -346,13 +296,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Jobs
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -368,13 +312,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Deployments
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -390,13 +328,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              CronJobs
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -417,7 +349,6 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               >
                 <div
                   class="MuiListItemIcon-root"
-                  title="Storage"
                 >
                   <svg
                     focusable="false"
@@ -472,13 +403,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Storage Classes
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -494,13 +419,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Storage Volumes
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -516,13 +435,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Persistent Volume Claims
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -543,7 +456,6 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               >
                 <div
                   class="MuiListItemIcon-root"
-                  title="Network"
                 >
                   <svg
                     focusable="false"
@@ -598,13 +510,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Services
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -620,13 +526,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Ingresses
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -647,7 +547,6 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               >
                 <div
                   class="MuiListItemIcon-root"
-                  title="Security"
                 >
                   <svg
                     focusable="false"
@@ -702,13 +601,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Service Accounts
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -724,13 +617,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Roles
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -746,13 +633,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Role Bindings
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -768,13 +649,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Secrets
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -873,13 +748,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                 </div>
                 <div
                   class="MuiListItemText-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                  >
-                    Cluster
-                  </span>
-                </div>
+                />
                 <span
                   class="MuiTouchRipple-root"
                 />
@@ -911,13 +780,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Namespaces
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -933,13 +796,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Nodes
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -955,13 +812,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              CRDs
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -977,13 +828,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Config Maps
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1022,13 +867,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                 </div>
                 <div
                   class="MuiListItemText-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                  >
-                    Workloads
-                  </span>
-                </div>
+                />
                 <span
                   class="MuiTouchRipple-root"
                 />
@@ -1060,13 +899,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Pods
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1082,13 +915,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Replica Sets
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1104,13 +931,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Daemon Sets
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1126,13 +947,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Stateful Sets
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1148,13 +963,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Jobs
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1170,13 +979,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Deployments
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1192,13 +995,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              CronJobs
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1237,13 +1034,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                 </div>
                 <div
                   class="MuiListItemText-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                  >
-                    Storage
-                  </span>
-                </div>
+                />
                 <span
                   class="MuiTouchRipple-root"
                 />
@@ -1275,13 +1066,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Storage Classes
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1297,13 +1082,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Storage Volumes
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1319,13 +1098,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Persistent Volume Claims
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1364,13 +1137,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                 </div>
                 <div
                   class="MuiListItemText-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                  >
-                    Network
-                  </span>
-                </div>
+                />
                 <span
                   class="MuiTouchRipple-root"
                 />
@@ -1402,13 +1169,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Services
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1424,13 +1185,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Ingresses
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1469,13 +1224,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                 </div>
                 <div
                   class="MuiListItemText-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                  >
-                    Security
-                  </span>
-                </div>
+                />
                 <span
                   class="MuiTouchRipple-root"
                 />
@@ -1507,13 +1256,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Service Accounts
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1529,13 +1272,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Roles
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1551,13 +1288,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Role Bindings
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />
@@ -1573,13 +1304,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                         >
                           <div
                             class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Secrets
-                            </span>
-                          </div>
+                          />
                           <span
                             class="MuiTouchRipple-root"
                           />

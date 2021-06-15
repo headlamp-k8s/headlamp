@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import React from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { addQuery, getFilterValueByNameFromURL } from '../../helpers';
@@ -29,6 +30,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   const history = useHistory();
   const hasNamespaceFilters = !noNamespaceFilter && filter.namespaces.size > 0;
   const hasSearch = !noSearch && !!filter.search;
+  const { t } = useTranslation('frequent');
 
   const [showFilters, setShowFilters] = React.useState<boolean>(hasNamespaceFilters || hasSearch);
 
@@ -81,7 +83,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
 
   if (!showFilters) {
     actions.push(
-      <IconButton aria-label="show-filter" onClick={() => setShowFilters(!showFilters)}>
+      <IconButton aria-label={t('Show filter')} onClick={() => setShowFilters(!showFilters)}>
         <Icon icon={filterIcon} />
       </IconButton>
     );

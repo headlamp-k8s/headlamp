@@ -1,7 +1,4 @@
 import '../../../i18n/config';
-import chevronDown from '@iconify/icons-mdi/chevron-down';
-import chevronRight from '@iconify/icons-mdi/chevron-right';
-import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
@@ -14,16 +11,13 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
-import Editor from '@monaco-editor/react';
-import { loader } from '@monaco-editor/react';
+import Editor, { loader } from '@monaco-editor/react';
 import * as yaml from 'js-yaml';
 import * as Monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import getDocDefinitions from '../../../lib/docs';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
 import ConfirmButton from '../ConfirmButton';
-import Empty from '../EmptyContent';
 import Loader from '../Loader';
 import Tabs from '../Tabs';
 import DocsViewer from './DocsViewer';
@@ -87,6 +81,7 @@ export default function EditorDialog(props: EditorDialogProps) {
   const [previousVersion, setPreviousVersion] = React.useState('');
   const [error, setError] = React.useState('');
   const [docSpecs, setDocSpecs] = React.useState({});
+  const { t } = useTranslation('resource');
 
   const [useSimpleEditor, setUseSimpleEditorState] = React.useState(() => {
     const localData = localStorage.getItem('useSimpleEditor');
@@ -173,7 +168,7 @@ export default function EditorDialog(props: EditorDialogProps) {
   function handleSave() {
     // Verify the YAML even means anything before trying to use it.
     if (!getObjectFromCode(code)) {
-      setError("Error parsing the code. Please verify it's valid YAML!");
+      setError(t("Error parsing the code. Please verify it's valid YAML!"));
       return;
     }
 
@@ -218,9 +213,10 @@ export default function EditorDialog(props: EditorDialogProps) {
   const errorLabel = error || errorMessage;
   let dialogTitle = title;
   if (!dialogTitle && item) {
+    const itemName = item.metadata?.name || t('New Object');
     dialogTitle = isReadOnly()
-      ? `View: ${item.metadata?.name || 'New Object'}`
-      : `Edit: ${item.metadata?.name || 'New Object'}`;
+      ? t('resource|View: {{ itemName }}', { itemName })
+      : t('resource|Edit: {{ itemName }}', { itemName });
   }
 
   const focusedRef = React.useCallback(node => {
@@ -241,7 +237,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       aria-labelledby="editor-dialog-title"
     >
       {!item ? (
-        <Loader title="Loading editor" />
+        <Loader title={t('Loading editor')} />
       ) : (
         <React.Fragment>
           <Grid container spacing={0}>
@@ -281,11 +277,11 @@ export default function EditorDialog(props: EditorDialogProps) {
                 }}
                 tabs={[
                   {
-                    label: 'Editor',
+                    label: t('frequent|Editor'),
                     component: makeEditor(),
                   },
                   {
-                    label: 'Documentation',
+                    label: t('frequent|Documentation'),
                     component: (
                       <Box p={2} className={classes.scrollable} height="600px">
                         <DocsViewer docSpecs={docSpecs} />
@@ -301,20 +297,22 @@ export default function EditorDialog(props: EditorDialogProps) {
               <ConfirmButton
                 disabled={originalCode === code}
                 color="secondary"
-                aria-label="undo"
+                aria-label={t('frequent|Undo')}
                 onConfirm={onUndo}
-                confirmTitle="Are you sure?"
-                confirmDescription="This will discard your changes in the editor. Do you want to proceed?"
+                confirmTitle={t('frequent|Are you sure?')}
+                confirmDescription={t(
+                  'This will discard your changes in the editor. Do you want to proceed?'
+                )}
                 // @todo: aria-controls should point to the textarea id
               >
-                Undo Changes
+                {t('frequent|Undo Changes')}
               </ConfirmButton>
             )}
             <div style={{ flex: '1 0 0' }} />
             {errorLabel && <Typography color="error">{errorLabel}</Typography>}
             <div style={{ flex: '1 0 0' }} />
             <Button onClick={onClose} color="primary">
-              Close
+              {t('frequent|Close')}
             </Button>
             {!isReadOnly() && (
               <Button
@@ -323,7 +321,7 @@ export default function EditorDialog(props: EditorDialogProps) {
                 disabled={originalCode === code || !!error}
                 // @todo: aria-controls should point to the textarea id
               >
-                {saveLabel || 'Save & Apply'}
+                {saveLabel || t('frequent|Save & Apply')}
               </Button>
             )}
           </DialogActions>

@@ -1,5 +1,6 @@
 import { Box, useTheme } from '@material-ui/core';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useRouteMatch } from 'react-router-dom';
 import { testAuth } from '../../lib/k8s/apiProxy';
 import { getRoutePath, Route, ROUTES } from '../../lib/router';
@@ -23,11 +24,12 @@ export function PureAlertNotification({
   const [networkStatusCheckTimeFactor, setNetworkStatusCheckTimeFactor] = React.useState(0);
   const [error, setError] = React.useState<null | string | boolean>(null);
   const [intervalID, setIntervalID] = React.useState<NodeJS.Timeout | null>(null);
+  const { t } = useTranslation('resource');
 
   function registerSetInterval(): NodeJS.Timeout {
     return setInterval(() => {
       if (!window.navigator.onLine) {
-        setError('Offline');
+        setError(t('frequent|Offline') as string);
         return;
       }
       setError(null);
@@ -113,7 +115,9 @@ export function PureAlertNotification({
       top={'0'}
       height={'3.8vh'}
     >
-      <Box marginLeft={isErrorInNoAuthRequiredRoute ? '0%' : '-15%'}>Something Went Wrong.</Box>
+      <Box marginLeft={isErrorInNoAuthRequiredRoute ? '0%' : '-15%'}>
+        {t('Something Went Wrong.')}
+      </Box>
       <Box
         bgcolor={theme.palette.common.white}
         color="error.main"
@@ -123,7 +127,7 @@ export function PureAlertNotification({
         style={{ cursor: 'pointer' }}
         onClick={() => setNetworkStatusCheckTimeFactor(0)}
       >
-        Try Again
+        {t('frequent|Try Again')}
       </Box>
     </Box>
   );
