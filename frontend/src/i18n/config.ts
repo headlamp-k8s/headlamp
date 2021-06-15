@@ -42,12 +42,14 @@ i18next
         return value;
       },
     },
+    returnEmptyString: false,
     // https://react.i18next.com/latest/i18next-instance
     // https://www.i18next.com/overview/configuration-options
     react: {
       useSuspense: false, // not needed unless loading from public/locales
       //   bindI18nStore: 'added'
     },
+    keySeparator: false,
   });
 
 export default i18next;

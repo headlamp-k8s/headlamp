@@ -71,3 +71,6 @@ docs:
 .PHONY: storybook
 storybook:
 	cd frontend && npm install && npm run storybook
+
+i18n:
+	cd frontend && npm run i18n
