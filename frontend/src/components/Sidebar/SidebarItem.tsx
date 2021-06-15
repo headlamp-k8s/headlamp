@@ -64,6 +64,12 @@ const useItemStyle = makeStyles(theme => ({
   linkSmallWidth: {
     backgroundColor: 'inherit !important',
   },
+  fullWidth: {
+    width: '100%',
+  },
+  fullWidthList: {
+    padding: 0,
+  },
 }));
 
 export interface SidebarItemProps extends ListItemProps, SidebarEntry {
@@ -143,8 +149,8 @@ export default function SidebarItem(props: SidebarItemProps) {
         {...other}
       />
       {subList.length > 0 && (
-        <ListItem>
-          <Collapse in={fullWidth && expanded}>
+        <ListItem className={classes.fullWidthList}>
+          <Collapse in={fullWidth && expanded} className={classes.fullWidth}>
             <List component="ul" disablePadding className={classes.nested}>
               {subList.map((item, i) => (
                 <SidebarItem key={i} selectedName={selectedName} hasParent {...item} />

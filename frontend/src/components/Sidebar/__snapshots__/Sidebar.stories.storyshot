@@ -85,10 +85,10 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               </a>
             </li>
             <li
-              class="MuiListItem-root MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
             >
               <div
-                class="MuiCollapse-container MuiCollapse-hidden"
+                class="MuiCollapse-container makeStyles-fullWidth MuiCollapse-hidden"
                 style="min-height: 0px;"
               >
                 <div
@@ -233,10 +233,10 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               </a>
             </li>
             <li
-              class="MuiListItem-root MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
             >
               <div
-                class="MuiCollapse-container MuiCollapse-hidden"
+                class="MuiCollapse-container makeStyles-fullWidth MuiCollapse-hidden"
                 style="min-height: 0px;"
               >
                 <div
@@ -447,10 +447,10 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               </a>
             </li>
             <li
-              class="MuiListItem-root MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
             >
               <div
-                class="MuiCollapse-container MuiCollapse-hidden"
+                class="MuiCollapse-container makeStyles-fullWidth MuiCollapse-hidden"
                 style="min-height: 0px;"
               >
                 <div
@@ -573,10 +573,10 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               </a>
             </li>
             <li
-              class="MuiListItem-root MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
             >
               <div
-                class="MuiCollapse-container MuiCollapse-hidden"
+                class="MuiCollapse-container makeStyles-fullWidth MuiCollapse-hidden"
                 style="min-height: 0px;"
               >
                 <div
@@ -677,10 +677,10 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               </a>
             </li>
             <li
-              class="MuiListItem-root MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
             >
               <div
-                class="MuiCollapse-container MuiCollapse-hidden"
+                class="MuiCollapse-container makeStyles-fullWidth MuiCollapse-hidden"
                 style="min-height: 0px;"
               >
                 <div
@@ -886,10 +886,10 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
               </a>
             </li>
             <li
-              class="MuiListItem-root MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
             >
               <div
-                class="MuiCollapse-container MuiCollapse-entered"
+                class="MuiCollapse-container makeStyles-fullWidth MuiCollapse-entered"
                 style="min-height: 0px;"
               >
                 <div
@@ -1035,10 +1035,10 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
               </a>
             </li>
             <li
-              class="MuiListItem-root MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
             >
               <div
-                class="MuiCollapse-container MuiCollapse-hidden"
+                class="MuiCollapse-container makeStyles-fullWidth MuiCollapse-hidden"
                 style="min-height: 0px;"
               >
                 <div
@@ -1250,10 +1250,10 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
               </a>
             </li>
             <li
-              class="MuiListItem-root MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
             >
               <div
-                class="MuiCollapse-container MuiCollapse-hidden"
+                class="MuiCollapse-container makeStyles-fullWidth MuiCollapse-hidden"
                 style="min-height: 0px;"
               >
                 <div
@@ -1377,10 +1377,10 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
               </a>
             </li>
             <li
-              class="MuiListItem-root MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
             >
               <div
-                class="MuiCollapse-container MuiCollapse-hidden"
+                class="MuiCollapse-container makeStyles-fullWidth MuiCollapse-hidden"
                 style="min-height: 0px;"
               >
                 <div
@@ -1482,10 +1482,10 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
               </a>
             </li>
             <li
-              class="MuiListItem-root MuiListItem-gutters"
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
             >
               <div
-                class="MuiCollapse-container MuiCollapse-hidden"
+                class="MuiCollapse-container makeStyles-fullWidth MuiCollapse-hidden"
                 style="min-height: 0px;"
               >
                 <div
