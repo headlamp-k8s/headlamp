@@ -36,10 +36,8 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle ref={focusedRef} id="alert-dialog-title">
-          {title}
-        </DialogTitle>
-        <DialogContent>
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+        <DialogContent ref={focusedRef}>
           <DialogContentText id="alert-dialog-description">{description}</DialogContentText>
         </DialogContent>
         <DialogActions>

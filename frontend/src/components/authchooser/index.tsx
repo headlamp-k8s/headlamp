@@ -201,16 +201,32 @@ export function PureAuthChooser({
   handleTryAgain,
   handleBackButtonPress,
 }: PureAuthChooserProps) {
+  const focusedRef = React.useCallback(node => {
+    if (node !== null) {
+      node.setAttribute('tabindex', '-1');
+      node.focus();
+    }
+  }, []);
+
   return (
-    <ClusterDialog useCover disableEscapeKeyDown disableBackdropClick>
+    <ClusterDialog
+      useCover
+      disableEscapeKeyDown
+      disableBackdropClick
+      aria-labelledby="authchooser-dialog-title"
+    >
       {testingAuth ? (
         <Box textAlign="center">
-          <DialogTitle>{testingTitle}</DialogTitle>
+          <DialogTitle ref={focusedRef} id="authchooser-dialog-title">
+            {testingTitle}
+          </DialogTitle>
           <Loader />
         </Box>
       ) : (
         <Box display="flex" flexDirection="column" alignItems="center">
-          <DialogTitle>{title}</DialogTitle>
+          <DialogTitle ref={focusedRef} id="authchooser-dialog-title">
+            {title}
+          </DialogTitle>
           {!error ? (
             <Box>
               {clusterAuthType === 'oidc' ? (
@@ -247,6 +263,7 @@ export function PureAuthChooser({
             alignItems="center"
             style={{ cursor: 'pointer' }}
             onClick={handleBackButtonPress}
+            role="button"
           >
             <Box pt={0.5}>
               <InlineIcon icon={chevronLeft} height={20} width={20} />

@@ -238,6 +238,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       fullWidth
       onBackdropClick={onClose}
       {...other}
+      aria-labelledby="editor-dialog-title"
     >
       {!item ? (
         <Loader />
@@ -245,7 +246,9 @@ export default function EditorDialog(props: EditorDialogProps) {
         <React.Fragment>
           <Grid container spacing={0}>
             <Grid item xs={6}>
-              <DialogTitle ref={focusedRef}>{dialogTitle}</DialogTitle>
+              <DialogTitle id="editor-dialog-title" ref={focusedRef}>
+                {dialogTitle}
+              </DialogTitle>
             </Grid>
             <Grid xs={6} item>
               <Box display="flex" flexDirection="row-reverse">
@@ -302,6 +305,7 @@ export default function EditorDialog(props: EditorDialogProps) {
                 onConfirm={onUndo}
                 confirmTitle="Are you sure?"
                 confirmDescription="This will discard your changes in the editor. Do you want to proceed?"
+                // @todo: aria-controls should point to the textarea id
               >
                 Undo Changes
               </ConfirmButton>
@@ -317,6 +321,7 @@ export default function EditorDialog(props: EditorDialogProps) {
                 onClick={handleSave}
                 color="primary"
                 disabled={originalCode === code || !!error}
+                // @todo: aria-controls should point to the textarea id
               >
                 {saveLabel || 'Save & Apply'}
               </Button>

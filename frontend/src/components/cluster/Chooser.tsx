@@ -177,11 +177,10 @@ export function ClusterDialog(props: ClusterDialogProps) {
       fullScreen={fullScreen}
       open={open !== undefined ? open : show}
       onClose={handleClose}
-      aria-labelledby="authentication-dialog"
       className={useCover ? classes.chooserDialogCover : ''}
       {...otherProps}
     >
-      <DialogTitle id="responsive-dialog-title" className={classes.chooserTitle} disableTypography>
+      <DialogTitle className={classes.chooserTitle} disableTypography>
         <SvgIcon className={classes.logo} component={LogoLight} viewBox="0 0 175 32" />
       </DialogTitle>
       <DialogContent className={classes.chooserDialog}>{children}</DialogContent>
@@ -215,7 +214,11 @@ function Chooser(props: ClusterDialogProps) {
 
   function handleButtonClick(cluster: Cluster) {
     if (cluster.name !== getCluster()) {
-      history.push({ pathname: generatePath(getClusterPrefixedPath(), { cluster: cluster.name }) });
+      history.push({
+        pathname: generatePath(getClusterPrefixedPath(), {
+          cluster: cluster.name,
+        }),
+      });
     }
 
     setShow(false);
@@ -237,8 +240,25 @@ function Chooser(props: ClusterDialogProps) {
 
   const clusterList = Object.values(clusters || {});
 
+  const focusedRef = React.useCallback(node => {
+    if (node !== null) {
+      node.setAttribute('tabindex', '-1');
+      node.focus();
+    }
+  }, []);
+
   return (
-    <ClusterDialog open={show} onClose={onClose || handleClose} {...otherProps}>
+    <ClusterDialog
+      open={show}
+      onClose={onClose || handleClose}
+      aria-labelledby="chooser-dialog-title"
+      aria-busy={clusterList.length === 0 && clusters === null}
+      {...otherProps}
+    >
+      <DialogTitle id="chooser-dialog-title" ref={focusedRef}>
+        Choose a cluster
+      </DialogTitle>
+
       {clusterList.length === 0 ? (
         <React.Fragment>
           {clusters === null ? (
@@ -256,10 +276,7 @@ function Chooser(props: ClusterDialogProps) {
           )}
         </React.Fragment>
       ) : (
-        <React.Fragment>
-          <DialogContentText variant="h4">Choose a cluster</DialogContentText>
-          <ClusterList clusters={clusterList} onButtonClick={handleButtonClick} />
-        </React.Fragment>
+        <ClusterList clusters={clusterList} onButtonClick={handleButtonClick} />
       )}
     </ClusterDialog>
   );

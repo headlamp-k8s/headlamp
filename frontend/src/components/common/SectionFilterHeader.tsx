@@ -111,6 +111,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
             variant="contained"
             endIcon={<Icon icon={filterVariantRemove} />}
             onClick={resetFilters}
+            aria-controls="standard-search"
           >
             Clear
           </Button>
