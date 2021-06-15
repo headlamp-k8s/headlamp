@@ -90,7 +90,7 @@ export default function EditorDialog(props: EditorDialogProps) {
 
   const [useSimpleEditor, setUseSimpleEditorState] = React.useState(() => {
     const localData = localStorage.getItem('useSimpleEditor');
-    return localData ? JSON.parse(localData) : true;
+    return localData ? JSON.parse(localData) : false;
   });
 
   function setUseSimpleEditor(data: boolean) {
