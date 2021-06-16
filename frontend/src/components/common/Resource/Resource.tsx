@@ -424,7 +424,7 @@ export function ReplicasSection(props: { resource: KubeObjectInterface | null })
   }
 
   return (
-    <SectionBox title={t('Containers')}>
+    <SectionBox title={t('Conditions')}>
       <ConditionsTable resource={resource} />
     </SectionBox>
   );
