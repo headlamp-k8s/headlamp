@@ -34,6 +34,7 @@ import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
 import Sidebar, { drawerWidth, NavigationTabs, useSidebarItem } from './components/Sidebar';
 import helpers from './helpers';
+import LocaleSelect from './i18n/LocaleSelect/LocaleSelect';
 import ThemeProviderNexti18n from './i18n/ThemeProviderNexti18n';
 import { getToken, setToken } from './lib/auth';
 import { useCluster, useClustersConf } from './lib/k8s';
@@ -161,6 +162,7 @@ function TopBar() {
           <React.Fragment key={i}>{action()}</React.Fragment>
         ))
       }
+      <LocaleSelect />
       <ThemeChangeButton />
       <IconButton
         aria-label={t('User menu')}
@@ -171,6 +173,7 @@ function TopBar() {
       >
         <Icon icon={accountIcon} />
       </IconButton>
+
       <span id="customized-menu">
         <Menu
           anchorEl={menuAnchorEl}
