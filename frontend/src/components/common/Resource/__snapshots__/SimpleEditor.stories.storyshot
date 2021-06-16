@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Resource/SimpleEditor Simple 1`] = `
+<div
+  id="root"
+>
+  <textarea
+    aria-label="yaml Code"
+    class="makeStyles-editor"
+    spellcheck="false"
+  />
+</div>
+`;

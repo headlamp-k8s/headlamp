@@ -9,6 +9,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
+import Link from '@material-ui/core/Link';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
@@ -43,6 +44,20 @@ import { setTheme as setThemeRedux } from './redux/actions/actions';
 import { useTypedSelector } from './redux/reducers/reducers';
 import store from './redux/stores/store';
 
+function PageTitle({
+  title,
+  children,
+}: {
+  title: string | null | undefined;
+  children: React.ReactNode;
+}) {
+  React.useEffect(() => {
+    document.title = title || '';
+  }, [title]);
+
+  return <>{children}</>;
+}
+
 const useStyle = makeStyles(theme => ({
   root: {
     background: theme.palette.background.default,
@@ -57,6 +72,19 @@ const useStyle = makeStyles(theme => ({
     flexGrow: 1,
   },
   toolbar: theme.mixins.toolbar,
+  // importing visuallyHidden has typing issues at time of writing.
+  // import { visuallyHidden } from '@material-ui/utils';
+  visuallyHidden: {
+    border: 0,
+    clip: 'rect(0 0 0 0)',
+    height: '1px',
+    margin: -1,
+    overflow: 'hidden',
+    padding: 0,
+    position: 'absolute',
+    whiteSpace: 'nowrap',
+    width: '1px',
+  },
 }));
 
 function RouteSwitcher() {
@@ -68,7 +96,15 @@ function RouteSwitcher() {
         .concat(Object.values(routes))
         .map((route, index) =>
           route.name === 'OidcAuth' ? (
-            <Route path={route.path} component={() => <route.component />} key={index} />
+            <Route
+              path={route.path}
+              component={() => (
+                <PageTitle title={route.name ? route.name : route.sidebar}>
+                  <route.component />
+                </PageTitle>
+              )}
+              key={index}
+            />
           ) : (
             <AuthRoute
               key={index}
@@ -77,7 +113,11 @@ function RouteSwitcher() {
               requiresAuth={!route.noAuthRequired}
               requiresCluster={!route.noCluster}
               exact={!!route.exact}
-              children={<route.component />}
+              children={
+                <PageTitle title={route.name ? route.name : route.sidebar}>
+                  <route.component />
+                </PageTitle>
+              }
             />
           )
         )}
@@ -122,34 +162,35 @@ function TopBar() {
       <ThemeChangeButton />
       <IconButton
         aria-label="User menu"
-        aria-controls="menu-appbar"
+        aria-controls="customized-menu"
         aria-haspopup="true"
         onClick={handleMenu}
         color="inherit"
       >
         <Icon icon={accountIcon} />
       </IconButton>
-      <Menu
-        id="customized-menu"
-        anchorEl={menuAnchorEl}
-        open={!!menuAnchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <MenuItem component="a" onClick={logout} disabled={!hasToken()} dense>
-          <ListItemIcon>
-            <Icon icon={logoutIcon} />
-          </ListItemIcon>
-          <ListItemText primary="Log out" secondary={hasToken() ? null : '(No token set up)'} />
-        </MenuItem>
-      </Menu>
+      <span id="customized-menu">
+        <Menu
+          anchorEl={menuAnchorEl}
+          open={!!menuAnchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          <MenuItem component="a" onClick={logout} disabled={!hasToken()} dense>
+            <ListItemIcon>
+              <Icon icon={logoutIcon} />
+            </ListItemIcon>
+            <ListItemText primary="Log out" secondary={hasToken() ? null : '(No token set up)'} />
+          </MenuItem>
+        </Menu>
+      </span>
     </>
   );
 }
@@ -203,10 +244,19 @@ function AppContainer() {
       }}
     >
       <Router>
+        <Link href="#main" className={classes.visuallyHidden}>
+          Skip to main content
+        </Link>
         <Box display="flex">
           <CssBaseline />
 
-          <AppBar position="fixed" className={classes.root} elevation={1}>
+          <AppBar
+            position="fixed"
+            className={classes.root}
+            elevation={1}
+            component="nav"
+            title="Appbar Tools"
+          >
             <Toolbar>
               <div style={{ flex: '1 0 0' }} />
               <ClusterTitle />
@@ -215,7 +265,7 @@ function AppContainer() {
             </Toolbar>
           </AppBar>
           <Sidebar />
-          <main className={classes.content}>
+          <main id="main" className={classes.content}>
             <AlertNotification />
             <Box p={3}>
               <div className={classes.toolbar} />

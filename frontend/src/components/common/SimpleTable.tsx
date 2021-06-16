@@ -26,6 +26,7 @@ const useTableStyle = makeStyles(theme => ({
   table: {
     '& .MuiTableCell-root': {
       paddingLeft: '0',
+      fontSize: '1rem',
     },
     '& .MuiTableBody-root': {
       '& .MuiTableRow-root:last-child': {
@@ -36,6 +37,7 @@ const useTableStyle = makeStyles(theme => ({
     },
     '& .MuiTableCell-head': {
       color: theme.palette.tables.headerText,
+      fontSize: '1.1rem',
     },
   },
 }));
@@ -80,11 +82,15 @@ interface ColumnSortButtonProps {
 function ColumnSortButtons(props: ColumnSortButtonProps) {
   const { isDefaultSorted, isIncreasingOrder, clickHandler } = props;
   return isDefaultSorted ? (
-    <IconButton size="small" onClick={() => clickHandler(!isIncreasingOrder)}>
+    <IconButton
+      aria-label={isIncreasingOrder ? 'sort up' : 'sort down'}
+      size="small"
+      onClick={() => clickHandler(!isIncreasingOrder)}
+    >
       <Icon icon={isIncreasingOrder ? menuUp : menuDown} />
     </IconButton>
   ) : (
-    <IconButton size="small" onClick={() => clickHandler(true)}>
+    <IconButton aria-label="sort swap" size="small" onClick={() => clickHandler(true)}>
       <Icon icon={menuSwap} />
     </IconButton>
   );
@@ -207,7 +213,7 @@ export default function SimpleTable(props: SimpleTableProps) {
       return <Empty color="error">{errorMessage}</Empty>;
     }
 
-    return <Loader />;
+    return <Loader title="Loading table data" />;
   }
 
   let filteredData = displayData;
@@ -319,8 +325,10 @@ const useStyles = makeStyles(theme => ({
   metadataCell: {
     width: '100%',
     verticalAlign: 'top',
+    fontSize: '1rem',
   },
   metadataNameCell: {
+    fontSize: '1rem',
     textAlign: 'left',
     maxWidth: '50%',
     minWidth: '10rem',
@@ -361,8 +369,10 @@ export function NameValueTable(props: NameValueTableProps) {
           if (hide) return null;
           return (
             <TableRow key={i}>
-              <TableCell className={classes.metadataNameCell}>{name}</TableCell>
-              <TableCell scope="row" className={classes.metadataCell}>
+              <TableCell key="key" className={classes.metadataNameCell}>
+                {name}
+              </TableCell>
+              <TableCell key="value" scope="row" className={classes.metadataCell}>
                 {typeof value === 'string' ? <ValueLabel>{value}</ValueLabel> : value}
               </TableCell>
             </TableRow>

@@ -1,3 +1,4 @@
+import Button from '@material-ui/core/Button';
 import React, { ReactChild } from 'react';
 
 interface OauthPopupProps {
@@ -8,6 +9,7 @@ interface OauthPopupProps {
   onClose?: () => any;
   onCode: (params: any) => any;
   children?: ReactChild;
+  button: typeof Button;
 }
 
 const defaultOauthPopupProps = {
@@ -78,7 +80,7 @@ const OauthPopup: React.FC<OauthPopupProps> = props => {
     }
   };
 
-  return <div onClick={createPopup}>{props.children}</div>;
+  return <props.button onClick={createPopup}>{props.children}</props.button>;
 };
 
 export default OauthPopup;

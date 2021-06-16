@@ -10,11 +10,11 @@ exports[`Storyshots SectionHeader Actions 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h6
-        class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+      <h1
+        class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
       >
         This one has actions
-      </h6>
+      </h1>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item"
@@ -52,11 +52,11 @@ exports[`Storyshots SectionHeader Main 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h6
-        class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+      <h1
+        class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
       >
         This is a section title main
-      </h6>
+      </h1>
     </div>
   </div>
 </div>
@@ -72,11 +72,11 @@ exports[`Storyshots SectionHeader Normal 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h6
-        class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+      <h1
+        class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
       >
         This is a section title normal
-      </h6>
+      </h1>
     </div>
   </div>
 </div>
@@ -92,11 +92,11 @@ exports[`Storyshots SectionHeader Normal No Padding 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h6
-        class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+      <h1
+        class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
       >
         No padding on this normal title
-      </h6>
+      </h1>
     </div>
   </div>
 </div>
@@ -112,11 +112,11 @@ exports[`Storyshots SectionHeader Subsection 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h6
-        class="MuiTypography-root makeStyles-title MuiTypography-h6 MuiTypography-noWrap"
+      <h1
+        class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
       >
         This is a section title subsection
-      </h6>
+      </h1>
     </div>
   </div>
 </div>

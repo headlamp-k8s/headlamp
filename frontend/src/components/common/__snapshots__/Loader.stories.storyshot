@@ -11,6 +11,7 @@ exports[`Storyshots Loader With Container 1`] = `
       class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
       role="progressbar"
       style="width: 40px; height: 40px;"
+      title="Loading with a container"
     >
       <svg
         class="MuiCircularProgress-svg"
@@ -38,6 +39,7 @@ exports[`Storyshots Loader Without Container 1`] = `
     class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
     role="progressbar"
     style="width: 40px; height: 40px;"
+    title="Loading without a container"
   >
     <svg
       class="MuiCircularProgress-svg"

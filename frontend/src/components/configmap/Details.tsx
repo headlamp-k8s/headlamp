@@ -15,7 +15,7 @@ export default function ConfigDetails() {
   ConfigMap.useApiGet(setItem, name, namespace);
 
   return !item ? (
-    <Loader />
+    <Loader title="Loading config map details" />
   ) : (
     <PageGrid>
       <MainInfoSection resource={item} />

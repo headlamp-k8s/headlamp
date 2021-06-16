@@ -26,16 +26,16 @@ const commonRules = {
   palette: {
     primary: {
       contrastText: '#fff',
-      main: '#3DA3F5',
+      main: '#2774b3',
     },
     primaryColor: '#000',
     success: {
       light: green['50'],
-      main: green['500'],
+      main: green['800'],
       ...green,
     },
     warning: {
-      main: orange['500'],
+      main: 'rgb(196, 69, 0)', // orange
       light: orange['50'],
       ...orange,
     },
@@ -44,7 +44,7 @@ const commonRules = {
       selectedBg: grey['800'],
     },
     error: {
-      main: red['500'],
+      main: red['800'],
       light: red['50'],
     },
     resourceToolTip: {
@@ -79,6 +79,10 @@ const commonRules = {
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', '),
+    h1: {
+      fontWeight: 700,
+      fontSize: '1.87rem',
+    },
   },
   shape: {
     borderRadius: 0,
@@ -92,7 +96,11 @@ const darkTheme = createMuiTheme({
   palette: {
     ...commonRules.palette,
     tables: {
-      headerText: '#9e9e9e',
+      headerText: '#aeaeae',
+    },
+    primary: {
+      contrastText: '#fff',
+      main: '#6CB6F2',
     },
     primaryColor: '#fff',
     chartStyles: {
@@ -101,17 +109,17 @@ const darkTheme = createMuiTheme({
       labelColor: '#fff',
     },
     success: {
-      light: green['500'],
+      light: green['800'],
       main: green['50'],
       ...green,
     },
     warning: {
-      main: orange['500'],
+      main: 'rgb(196, 69, 0)', // orange
       light: 'rgba(255, 152, 0, 0.15)',
       ...orange,
     },
     error: {
-      main: red['500'],
+      main: red['800'],
       light: 'rgba(244, 67, 54, 0.2)',
     },
     normalEventBg: '#333333',

@@ -5,6 +5,8 @@ exports[`Storyshots Charts/PercentageCircle No Data 1`] = `
   id="root"
 >
   <div
+    aria-busy="true"
+    aria-live="polite"
     class="MuiBox-root MuiBox-root"
   >
     <p
@@ -19,6 +21,7 @@ exports[`Storyshots Charts/PercentageCircle No Data 1`] = `
         class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
         role="progressbar"
         style="width: 40px; height: 40px;"
+        title="Loading data for CPU usage"
       >
         <svg
           class="MuiCircularProgress-svg"
@@ -44,6 +47,8 @@ exports[`Storyshots Charts/PercentageCircle Percent 50 1`] = `
   id="root"
 >
   <div
+    aria-busy="false"
+    aria-live="polite"
     class="MuiBox-root MuiBox-root"
   >
     <p
@@ -124,6 +129,8 @@ exports[`Storyshots Charts/PercentageCircle Percent 100 1`] = `
   id="root"
 >
   <div
+    aria-busy="false"
+    aria-live="polite"
     class="MuiBox-root MuiBox-root"
   >
     <p

@@ -91,14 +91,25 @@ export function PureAuthToken({
   onChangeToken,
   onCloseError,
 }: PureAuthTokenProps) {
+  const focusedRef = React.useCallback(node => {
+    if (node !== null) {
+      // node.setAttribute('tabindex', '-1');
+      node.focus();
+    }
+  }, []);
+
   return (
     <Box>
-      <ClusterDialog useCover disableEscapeKeyDown disableBackdropClick>
-        <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
+      <ClusterDialog
+        useCover
+        disableEscapeKeyDown
+        disableBackdropClick
+        aria-labelledby="authtoken-dialog-title"
+      >
+        <DialogTitle id="authtoken-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>Please paste your authentication token.</DialogContentText>
           <TextField
-            autoFocus
             margin="dense"
             id="token"
             label="ID token"
@@ -106,6 +117,7 @@ export function PureAuthToken({
             value={token}
             onChange={onChangeToken}
             fullWidth
+            ref={focusedRef}
           />
         </DialogContent>
         <DialogActions>

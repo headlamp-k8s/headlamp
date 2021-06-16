@@ -21,6 +21,13 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     onConfirm();
   }
 
+  const focusedRef = React.useCallback(node => {
+    if (node !== null) {
+      node.setAttribute('tabindex', '-1');
+      node.focus();
+    }
+  }, []);
+
   return (
     <div>
       <Dialog
@@ -30,11 +37,11 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-        <DialogContent>
+        <DialogContent ref={focusedRef}>
           <DialogContentText id="alert-dialog-description">{description}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={handleClose} color="primary">
             No
           </Button>
           <Button onClick={onConfirmationClicked} color="primary">

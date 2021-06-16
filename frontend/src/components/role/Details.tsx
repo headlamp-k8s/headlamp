@@ -22,7 +22,7 @@ export default function RoleDetails() {
   cls.useApiGet(setItem, name!, namespace);
 
   return !item ? (
-    <Loader />
+    <Loader title="Loading role details" />
   ) : (
     <PageGrid>
       <MainInfoSection resource={item} />
