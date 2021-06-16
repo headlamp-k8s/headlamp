@@ -31,7 +31,7 @@ i18next
   .init({
     debug: process.env.NODE_ENV === 'development',
     fallbackLng: 'en',
-    supportedLngs: ['en', 'pt'],
+    supportedLngs: ['en', 'pt', 'es'],
     // nonExplicitSupportedLngs: true,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

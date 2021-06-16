@@ -37,10 +37,11 @@ export default function LocaleSelect(props: LocaleSelectProps) {
       <Select
         value={i18n.language ? i18n.language : 'en'}
         onChange={changeLng}
-        inputProps={{ 'aria-label': 'Select locale' }}
+        inputProps={{ 'aria-label': t('Select locale') }}
       >
         <MenuItem value={'en'}>en</MenuItem>
         <MenuItem value={'pt'}>pt</MenuItem>
+        <MenuItem value={'es'}>es</MenuItem>
       </Select>
     </FormControl>
   );

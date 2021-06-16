@@ -16,7 +16,7 @@
   "Cannot load documentation: {{ docsError }}": "No es posible cargar documentación: {{ docsError }}",
   "Cannot load documentation: Please make sure the YAML is valid and has the kind and apiVersion set.": "No es posible cargar documentación. Asegúrese de que el YAML es válido y tiene «kind» y «apiVersion» asignados.",
   "Cannot load documentation: {{err}}": "No es posible cargar documentación: {{ error }}",
-  "Loading documentation": "",
+  "Loading documentation": "Cargando documentación",
   "No documentation for type {{ docsType }}.": "Sin documentación para el tipo {{ docsType }}.",
   "Showing documentation for: {{ docsType }}": "Mostrando documentación para: {{ docsType }}",
   "Applying changes to {{ itemName }}…": "Aplicando cambios a {{ itemName }}…",
@@ -27,7 +27,7 @@
   "New Object": "Nuevo Objeto",
   "View: {{ itemName }}": "Ver: {{ itemName }}",
   "Edit: {{ itemName }}": "Editar: {{ itemName }}",
-  "Loading editor": "",
+  "Loading editor": "Cargando editor",
   "This will discard your changes in the editor. Do you want to proceed?": "Esto descartará sus cambios en el editor. ¿Desea avanzar?",
   "Creation": "Creación",
   "Labels": "Etiquetas",
@@ -44,5 +44,5 @@
   "No data matching the filter criteria.": "Sin datos que correspondan a los criterios de filtrado",
   "Connecting…": "Conectando…",
   "Terminal: {{ itemName }}": "Terminal: {{ itemName }}",
-  "Loading resource definition details": ""
+  "Loading resource definition details": "Cargando detalles de la definición del recurso"
 }
