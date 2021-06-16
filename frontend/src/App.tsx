@@ -261,7 +261,7 @@ function AppContainer() {
             className={classes.root}
             elevation={1}
             component="nav"
-            title="Appbar Tools"
+            aria-label="Appbar Tools"
           >
             <Toolbar>
               <div style={{ flex: '1 0 0' }} />

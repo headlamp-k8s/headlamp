@@ -77,9 +77,9 @@ export default function Sidebar() {
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const items = React.useMemo(() => prepareRoutes(), [sidebar.entries]);
+  const { t, i18n } = useTranslation();
+  const items = React.useMemo(() => prepareRoutes(t), [sidebar.entries, i18n.language]);
   const [open, setOpen] = React.useState(sidebar.isSidebarOpen);
-  const { t } = useTranslation('sidebar');
 
   const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
 
