@@ -103,18 +103,19 @@ const useClusterButtonStyles = makeStyles({
   },
 });
 
-interface ClusterButtonProps {
+interface ClusterButtonProps extends PropsWithChildren<{}> {
   cluster: Cluster;
   onClick?: (...args: any[]) => void;
+  focusedRef?: (node: any) => void;
 }
 
 function ClusterButton(props: ClusterButtonProps) {
   const classes = useClusterButtonStyles();
   const theme = useTheme();
-  const { cluster, onClick = undefined } = props;
+  const { cluster, onClick = undefined, focusedRef } = props;
 
   return (
-    <ButtonBase focusRipple onClick={onClick}>
+    <ButtonBase focusRipple ref={focusedRef} onClick={onClick}>
       <Card className={classes.root}>
         <CardContent className={classes.content}>
           <Icon icon={kubernetesIcon} width="50" height="50" color={theme.palette.primaryColor} />
@@ -134,12 +135,21 @@ interface ClusterListProps {
 
 function ClusterList(props: ClusterListProps) {
   const { clusters, onButtonClick } = props;
+  const focusedRef = React.useCallback(node => {
+    if (node !== null) {
+      node.focus();
+    }
+  }, []);
 
   return (
     <Grid container alignItems="center" justify="space-around" spacing={2}>
       {clusters.map((cluster, i) => (
         <Grid item key={cluster.name}>
-          <ClusterButton cluster={cluster} onClick={() => onButtonClick(cluster)} />
+          <ClusterButton
+            focusedRef={i === 0 ? focusedRef : undefined}
+            cluster={cluster}
+            onClick={() => onButtonClick(cluster)}
+          />
         </Grid>
       ))}
     </Grid>
@@ -240,13 +250,6 @@ function Chooser(props: ClusterDialogProps) {
 
   const clusterList = Object.values(clusters || {});
 
-  const focusedRef = React.useCallback(node => {
-    if (node !== null) {
-      node.setAttribute('tabindex', '-1');
-      node.focus();
-    }
-  }, []);
-
   return (
     <ClusterDialog
       open={show}
@@ -255,9 +258,7 @@ function Chooser(props: ClusterDialogProps) {
       aria-busy={clusterList.length === 0 && clusters === null}
       {...otherProps}
     >
-      <DialogTitle id="chooser-dialog-title" ref={focusedRef}>
-        Choose a cluster
-      </DialogTitle>
+      <DialogTitle id="chooser-dialog-title">Choose a cluster</DialogTitle>
 
       {clusterList.length === 0 ? (
         <React.Fragment>
