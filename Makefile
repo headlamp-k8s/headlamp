@@ -73,4 +73,5 @@ storybook:
 	cd frontend && npm install && npm run storybook
 
 i18n:
+	cd app && npm run i18n
 	cd frontend && npm run i18n
