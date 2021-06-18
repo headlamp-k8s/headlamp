@@ -180,7 +180,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     onSave!(getObjectFromCode(code));
   }
 
-  function OurEditor() {
+  function makeEditor() {
     const { i18n } = useTranslation();
     const [lang, setLang] = React.useState(i18n.language);
 
@@ -272,7 +272,7 @@ export default function EditorDialog(props: EditorDialogProps) {
 
           <DialogContent className={classes.dialogContent}>
             {isReadOnly() ? (
-              <OurEditor />
+              makeEditor()
             ) : (
               <Tabs
                 onTabChanged={handleTabChange}
@@ -282,7 +282,7 @@ export default function EditorDialog(props: EditorDialogProps) {
                 tabs={[
                   {
                     label: 'Editor',
-                    component: <OurEditor />,
+                    component: makeEditor(),
                   },
                   {
                     label: 'Documentation',
