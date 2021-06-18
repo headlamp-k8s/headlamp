@@ -22,6 +22,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import getDocDefinitions from '../../../lib/docs';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import { getThemeName } from '../../../lib/themes';
 import ConfirmButton from '../ConfirmButton';
 import Empty from '../EmptyContent';
 import Loader from '../Loader';
@@ -184,6 +185,8 @@ export default function EditorDialog(props: EditorDialogProps) {
     const { i18n } = useTranslation();
     const [lang, setLang] = React.useState(i18n.language);
 
+    const themeName = getThemeName();
+
     React.useEffect(() => {
       i18n.on('languageChanged', setLang);
       return () => {
@@ -205,7 +208,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       <Box paddingTop={2} height="100%">
         <Editor
           language="yaml"
-          theme="vs-dark"
+          theme={themeName === 'dark' ? 'vs-dark' : 'light'}
           value={code}
           options={editorOptions}
           onChange={onChange}

@@ -1,4 +1,4 @@
-import { getTheme, setTheme } from '../../lib/themes';
+import { getThemeName, setTheme } from '../../lib/themes';
 import {
   Action,
   HeaderActionFunc,
@@ -83,7 +83,7 @@ export const INITIAL_STATE: UIState = {
     },
   },
   theme: {
-    name: getTheme(),
+    name: '',
   },
 };
 

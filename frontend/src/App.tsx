@@ -37,7 +37,7 @@ import ThemeProviderNexti18n from './i18n/ThemeProviderNexti18n';
 import { getToken, setToken } from './lib/auth';
 import { useCluster, useClustersConf } from './lib/k8s';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
-import themes, { getTheme, ThemesConf } from './lib/themes';
+import themes, { getThemeName, ThemesConf, usePrefersColorScheme } from './lib/themes';
 import { getCluster } from './lib/util';
 import { initializePlugins } from './plugin';
 import { setTheme as setThemeRedux } from './redux/actions/actions';
@@ -196,6 +196,8 @@ function TopBar() {
 }
 
 function ThemeChangeButton() {
+  const themeName = getThemeName();
+
   const dispatch = useDispatch();
   type iconType = typeof darkIcon;
 
@@ -206,12 +208,12 @@ function ThemeChangeButton() {
     dark: lightIcon,
   };
 
-  const [icon, setIcon] = React.useState<iconType>(counterIcons[getTheme()]);
+  const [icon, setIcon] = React.useState<iconType>(counterIcons[themeName]);
 
   const themeNames = Object.keys(counterIcons);
 
   function changeTheme() {
-    const idx = themeNames.indexOf(getTheme());
+    const idx = themeNames.indexOf(themeName);
     const newTheme = themeNames[(idx + 1) % themeNames.length];
     dispatch(setThemeRedux(newTheme));
     setIcon(counterIcons[newTheme]);
@@ -283,7 +285,13 @@ function AppContainer() {
 }
 
 function AppWithRedux(props: React.PropsWithChildren<{}>) {
-  const themeName = useTypedSelector(state => state.ui.theme.name);
+  let themeName = useTypedSelector(state => state.ui.theme.name);
+  usePrefersColorScheme();
+
+  if (!themeName) {
+    themeName = getThemeName();
+  }
+
   React.useEffect(() => {
     initializePlugins();
   }, [themeName]);
