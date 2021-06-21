@@ -3,6 +3,7 @@ import { InlineIcon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
@@ -13,9 +14,11 @@ import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
+
 export default function NodeDetails() {
   const { name } = useParams<{ name: string }>();
   const [item, setItem] = React.useState<Node | null>(null);
+  const { t } = useTranslation('glossary');
 
   Node.useApiGet(setItem, name);
 
@@ -33,7 +36,7 @@ export default function NodeDetails() {
   }
 
   return !item ? (
-    <Loader title="Loading node details" />
+    <Loader title={t('node|Loading node details')} />
   ) : (
     <PageGrid>
       <MainInfoSection
@@ -42,11 +45,11 @@ export default function NodeDetails() {
         extraInfo={
           item && [
             {
-              name: 'Ready',
+              name: t('frequent|Ready'),
               value: <NodeReadyLabel node={item} />,
             },
             {
-              name: 'Pod CIDR',
+              name: t('Pod CIDR'),
               value: item.spec.podCIDR,
             },
             ...getAddresses(item),
@@ -66,6 +69,7 @@ interface ChartsSectionProps {
 
 function ChartsSection(props: ChartsSectionProps) {
   const { node, metrics, noMetrics } = props;
+  const { t } = useTranslation('glossary');
 
   function getUptime() {
     if (!node) {
@@ -77,7 +81,7 @@ function ChartsSection(props: ChartsSectionProps) {
       return timeAgo(readyInfo.lastTransitionTime as string);
     }
 
-    return 'Not ready yet!';
+    return t('frequent|Not ready yet!');
   }
 
   return (
@@ -90,7 +94,7 @@ function ChartsSection(props: ChartsSectionProps) {
         }}
       >
         <Grid item>
-          <HeaderLabel value={getUptime()} label="Uptime" />
+          <HeaderLabel value={getUptime()} label={t('Uptime')} />
         </Grid>
         <Grid item>
           <CpuCircularChart items={node && [node]} itemsMetrics={metrics} noMetrics={noMetrics} />
@@ -113,6 +117,7 @@ interface SystemInfoSectionProps {
 
 function SystemInfoSection(props: SystemInfoSectionProps) {
   const { node } = props;
+  const { t } = useTranslation('glossary');
 
   function getOSComponent(osName: string) {
     let icon = null;
@@ -130,47 +135,47 @@ function SystemInfoSection(props: SystemInfoSectionProps) {
   }
 
   return (
-    <SectionBox title="System Info">
+    <SectionBox title={t('System Info')}>
       <NameValueTable
         rows={[
           {
-            name: 'Architecture',
+            name: t('Architecture'),
             value: node.status.nodeInfo.architecture,
           },
           {
-            name: 'Boot ID',
+            name: t('Boot ID'),
             value: node.status.nodeInfo.bootID,
           },
           {
-            name: 'System UUID',
+            name: t('System UUID'),
             value: node.status.nodeInfo.systemUUID,
           },
           {
-            name: 'OS',
+            name: t('OS'),
             value: getOSComponent(node.status.nodeInfo.operatingSystem),
           },
           {
-            name: 'Image',
+            name: t('Image'),
             value: node.status.nodeInfo.osImage,
           },
           {
-            name: 'Kernel Version',
+            name: t('Kernel Version'),
             value: node.status.nodeInfo.kernelVersion,
           },
           {
-            name: 'Machine ID',
+            name: t('Machine ID'),
             value: node.status.nodeInfo.machineID,
           },
           {
-            name: 'Kube Proxy Version',
+            name: t('Kube Proxy Version'),
             value: node.status.nodeInfo.kubeProxyVersion,
           },
           {
-            name: 'Kubelet Version',
+            name: t('Kubelet Version'),
             value: node.status.nodeInfo.kubeletVersion,
           },
           {
-            name: 'Container Runtime Version',
+            name: t('Container Runtime Version'),
             value: node.status.nodeInfo.containerRuntimeVersion,
           },
         ]}
@@ -188,15 +193,16 @@ export function NodeReadyLabel(props: NodeReadyLabelProps) {
   const isReady = !!node.status.conditions.find(
     condition => condition.type === 'Ready' && condition.status === 'True'
   );
+  const { t } = useTranslation();
 
   let status: StatusLabelProps['status'] = '';
   let label = null;
   if (isReady) {
     status = 'success';
-    label = 'Yes';
+    label = t('frequent|Yes');
   } else {
     status = 'error';
-    label = 'No';
+    label = t('frequent|No');
   }
 
   return <StatusLabel status={status}>{label}</StatusLabel>;

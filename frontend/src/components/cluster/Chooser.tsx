@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React, { PropsWithChildren } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { Trans, useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { useCluster, useClustersConf } from '../../lib/k8s';
@@ -57,7 +58,7 @@ export function ClusterTitle() {
         onClick={() => setShowChooser(true)}
         className={classes.button}
       >
-        Cluster: {cluster}
+        <Trans ns="cluster">Cluster: {{ cluster }}</Trans>
       </Button>
       <Chooser open={showChooser} onClose={() => setShowChooser(false)} />
     </React.Fragment>
@@ -204,6 +205,7 @@ function Chooser(props: ClusterDialogProps) {
   const { open = null, onClose, ...otherProps } = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(props.open);
+  const { t } = useTranslation('cluster');
 
   React.useEffect(
     () => {
@@ -258,20 +260,22 @@ function Chooser(props: ClusterDialogProps) {
       aria-busy={clusterList.length === 0 && clusters === null}
       {...otherProps}
     >
-      <DialogTitle id="chooser-dialog-title">Choose a cluster</DialogTitle>
+      <DialogTitle id="chooser-dialog-title">{t('Choose a cluster')}</DialogTitle>
 
       {clusterList.length === 0 ? (
         <React.Fragment>
           {clusters === null ? (
             <>
-              <DialogContentText>Wait while fetching clusters…</DialogContentText>
-              <Loader title="Loading cluster information" />
+              <DialogContentText>{t('Wait while fetching clusters…')}</DialogContentText>
+              <Loader title={t('Loading cluster information')} />
             </>
           ) : (
             <>
-              <DialogContentText>There seems to be no clusters configured…</DialogContentText>
               <DialogContentText>
-                Please make sure you have at least one cluster configured.
+                {t('There seems to be no clusters configured…')}
+              </DialogContentText>
+              <DialogContentText>
+                {t('Please make sure you have at least one cluster configured.')}
               </DialogContentText>
             </>
           )}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ReplicaSet from '../../lib/k8s/replicaSet';
 import { useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
@@ -9,20 +10,21 @@ import SimpleTable from '../common/SimpleTable';
 export default function ReplicaSetList() {
   const [replicaSets, error] = ReplicaSet.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   function getReplicas(replicaSet: ReplicaSet) {
     return `${replicaSet.spec.replicas} / ${replicaSet.status.replicas}`;
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Replica Sets" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Replica Sets')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={ReplicaSet.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: replicaSet => <Link kubeObject={replicaSet} />,
             sort: (r1: ReplicaSet, r2: ReplicaSet) => {
               if (r1.metadata.name < r2.metadata.name) {
@@ -34,19 +36,19 @@ export default function ReplicaSetList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: replicaSet => replicaSet.getNamespace(),
           },
           {
-            label: 'Generation',
+            label: t('Generation'),
             getter: replicaSet => replicaSet.status.observedGeneration,
           },
           {
-            label: 'Replicas',
+            label: t('Replicas'),
             getter: replicaSet => getReplicas(replicaSet),
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: replicaSet => replicaSet.getAge(),
             sort: (r1: ReplicaSet, r2: ReplicaSet) =>
               new Date(r2.metadata.creationTimestamp).getTime() -

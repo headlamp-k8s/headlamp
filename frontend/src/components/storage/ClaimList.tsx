@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import PersistentVolumeClaim from '../../lib/k8s/persistentVolumeClaim';
 import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
@@ -8,10 +9,11 @@ import SimpleTable from '../common/SimpleTable';
 export default function VolumeClaimList() {
   const [volumeClaim, error] = PersistentVolumeClaim.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   return (
     <SectionBox
-      title="Volume Claims"
+      title={t('Volume Claims')}
       headerProps={{
         headerStyle: 'main',
       }}
@@ -22,7 +24,7 @@ export default function VolumeClaimList() {
         errorMessage={PersistentVolumeClaim.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: volumeClaim => <Link kubeObject={volumeClaim} />,
             sort: (v1: PersistentVolumeClaim, v2: PersistentVolumeClaim) => {
               if (v1.metadata.name < v2.metadata.name) {
@@ -34,27 +36,27 @@ export default function VolumeClaimList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: volumeClaim => volumeClaim.getNamespace(),
           },
           {
-            label: 'Status',
+            label: t('Status'),
             getter: volumeClaim => volumeClaim.status.phase,
           },
           {
-            label: 'Class Name',
+            label: t('Class Name'),
             getter: volumeClaim => volumeClaim.spec.storageClassName,
           },
           {
-            label: 'Volume',
+            label: t('Volume'),
             getter: volumeClaim => volumeClaim.spec.volumeName,
           },
           {
-            label: 'Capacity',
+            label: t('Capacity'),
             getter: volumeClaim => volumeClaim.status.capacity?.storage,
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: volumeClaim => volumeClaim.getAge(),
             sort: (v1: PersistentVolumeClaim, v2: PersistentVolumeClaim) =>
               new Date(v2.metadata.creationTimestamp).getTime() -

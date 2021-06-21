@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSnackbar } from 'notistack';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import semver from 'semver';
 import { getVersion, useCluster } from '../../lib/k8s';
 import { StringDict } from '../../lib/k8s/cluster';
@@ -38,6 +39,7 @@ export default function VersionButton() {
   const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
   const cluster = useCluster();
   const [open, setOpen] = React.useState(false);
+  const { t } = useTranslation('glossary');
 
   function getVersionRows() {
     if (!clusterVersion) {
@@ -46,23 +48,23 @@ export default function VersionButton() {
 
     return [
       {
-        name: 'Git Version',
+        name: t('Git Version'),
         value: clusterVersion?.gitVersion,
       },
       {
-        name: 'Git Commit',
+        name: t('Git Commit'),
         value: clusterVersion?.gitCommit,
       },
       {
-        name: 'Git Tree State',
+        name: t('Git Tree State'),
         value: clusterVersion?.gitTreeState,
       },
       {
-        name: 'Go Version',
+        name: t('Go Version'),
         value: clusterVersion?.goVersion,
       },
       {
-        name: 'Platform',
+        name: t('Platform'),
         value: clusterVersion?.platform,
       },
     ];
@@ -80,9 +82,13 @@ export default function VersionButton() {
 
               let msg = '';
               if (versionChange > 0) {
-                msg = `Cluster version upgraded to ${results.gitVersion}`;
+                msg = t('cluster|Cluster version upgraded to {{ gitVersion }}', {
+                  gitVersion: results.gitVersion,
+                });
               } else if (versionChange < 0) {
-                msg = `Cluster version downgraded to ${results.gitVersion}`;
+                msg = t('cluster|Cluster version downgraded to {{ gitVersion }}', {
+                  gitVersion: results.gitVersion,
+                });
               }
 
               if (msg) {
@@ -136,13 +142,13 @@ export default function VersionButton() {
         </Box>
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Kubernetes Version</DialogTitle>
+        <DialogTitle>{t('Kubernetes Version')}</DialogTitle>
         <DialogContent>
           <NameValueTable rows={getVersionRows()} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Close
+            {t('frequent|Close')}
           </Button>
         </DialogActions>
       </Dialog>

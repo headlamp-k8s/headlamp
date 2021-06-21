@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Secret from '../../lib/k8s/secret';
 import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
@@ -9,16 +10,17 @@ import SimpleTable from '../common/SimpleTable';
 export default function SecretList() {
   const [secrets, error] = Secret.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Secrets" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Secrets')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={Secret.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: secret => <Link kubeObject={secret} />,
             sort: (s1: Secret, s2: Secret) => {
               if (s1.metadata.name < s2.metadata.name) {
@@ -30,15 +32,15 @@ export default function SecretList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: secret => secret.getNamespace(),
           },
           {
-            label: 'Type',
+            label: t('Type'),
             getter: secret => secret.type,
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: secret => secret.getAge(),
             sort: (s1: Secret, s2: Secret) =>
               new Date(s2.metadata.creationTimestamp).getTime() -

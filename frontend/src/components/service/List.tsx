@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Service from '../../lib/k8s/service';
 import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
@@ -9,16 +10,17 @@ import SimpleTable from '../common/SimpleTable';
 export default function ServiceList() {
   const [services, error] = Service.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Services" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Services')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={Service.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: service => <Link kubeObject={service} />,
             sort: (s1: Service, s2: Service) => {
               if (s1.metadata.name < s2.metadata.name) {
@@ -30,19 +32,19 @@ export default function ServiceList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: service => service.getNamespace(),
           },
           {
-            label: 'Type',
+            label: t('Type'),
             getter: service => service.spec.type,
           },
           {
-            label: 'Cluster IP',
+            label: t('Cluster IP'),
             getter: service => service.spec.clusterIP,
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: service => service.getAge(),
             sort: (s1: Service, s2: Service) =>
               new Date(s2.metadata.creationTimestamp).getTime() -

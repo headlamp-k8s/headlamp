@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import PersistentVolumeClaim from '../../lib/k8s/persistentVolumeClaim';
 import { StatusLabel } from '../common/Label';
@@ -7,6 +8,7 @@ import { MainInfoSection } from '../common/Resource';
 export default function VolumeClaimDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<PersistentVolumeClaim | null>(null);
+  const { t } = useTranslation('glossary');
 
   PersistentVolumeClaim.useApiGet(setItem, name, namespace);
 
@@ -21,23 +23,23 @@ export default function VolumeClaimDetails() {
       extraInfo={
         item && [
           {
-            name: 'Status',
+            name: t('Status'),
             value: makeStatusLabel(item),
           },
           {
-            name: 'Capacity',
+            name: t('Capacity'),
             value: item.spec!.resources.requests.storage,
           },
           {
-            name: 'Access Modes',
+            name: t('Access Modes'),
             value: item.spec!.accessModes.join(', '),
           },
           {
-            name: 'Volume Mode',
+            name: t('Volume Mode'),
             value: item.spec!.volumeMode,
           },
           {
-            name: 'Storage Class',
+            name: t('Storage Class'),
             value: item.spec!.storageClassName,
           },
         ]

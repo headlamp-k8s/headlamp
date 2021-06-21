@@ -1,5 +1,6 @@
 import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Workload } from '../../lib/k8s/cluster';
 import { getPercentStr, getReadyReplicas, getTotalReplicas } from '../../lib/util';
 import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
@@ -12,6 +13,7 @@ interface WorkloadCircleChartProps extends Omit<PercentageCircleProps, 'data'> {
 
 export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
   const theme = useTheme();
+  const { t } = useTranslation('workload');
 
   const { workloadData, partialLabel = '', totalLabel = '', ...other } = props;
 
@@ -35,7 +37,7 @@ export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
 
   function getLegend() {
     if (total === 0) {
-      return '0 Running';
+      return t('0 Running');
     }
     if (partial !== 0) {
       return `${partial} ${partialLabel} / ${total} ${totalLabel}`;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ServiceAccount from '../../lib/k8s/serviceAccount';
 import { Link } from '../common';
@@ -7,6 +8,7 @@ import { MainInfoSection } from '../common/Resource';
 export default function ServiceAccountDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<ServiceAccount | null>(null);
+  const { t } = useTranslation('glossary');
 
   ServiceAccount.useApiGet(setItem, name, namespace);
 
@@ -16,7 +18,7 @@ export default function ServiceAccountDetails() {
       extraInfo={
         item && [
           {
-            name: 'Secrets',
+            name: t('Secrets'),
             value: (
               <React.Fragment>
                 {item.secrets.map(({ name }, index) => (

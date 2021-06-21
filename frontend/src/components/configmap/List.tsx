@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ConfigMap from '../../lib/k8s/configMap';
 import { useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
@@ -9,16 +10,17 @@ import SimpleTable from '../common/SimpleTable';
 export default function ConfigMapList() {
   const [configMaps, error] = ConfigMap.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Config Maps" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Config Maps')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={ConfigMap.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: configMap => <Link kubeObject={configMap} />,
             sort: (c1: ConfigMap, c2: ConfigMap) => {
               if (c1.metadata.name < c2.metadata.name) {
@@ -30,11 +32,11 @@ export default function ConfigMapList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: configMap => configMap.getNamespace(),
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: configMap => configMap.getAge(),
             sort: (c1: ConfigMap, c2: ConfigMap) =>
               new Date(c2.metadata.creationTimestamp).getTime() -

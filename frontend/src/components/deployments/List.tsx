@@ -1,5 +1,6 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Deployment from '../../lib/k8s/deployment';
 import { useFilterFunc } from '../../lib/util';
 import { Link, StatusLabel } from '../common';
@@ -10,6 +11,7 @@ import SimpleTable from '../common/SimpleTable';
 export default function DeploymentsList() {
   const [deployments, error] = Deployment.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   function renderPods(deployment: Deployment) {
     const { replicas, availableReplicas } = deployment.status;
@@ -48,14 +50,14 @@ export default function DeploymentsList() {
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Deployments" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Deployments')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={Deployment.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: deployment => <Link kubeObject={deployment} />,
             sort: (d1: Deployment, d2: Deployment) => {
               if (d1.metadata.name < d2.metadata.name) {
@@ -67,23 +69,23 @@ export default function DeploymentsList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: deployment => deployment.getNamespace(),
           },
           {
-            label: 'Pods',
+            label: t('Pods'),
             getter: deployment => renderPods(deployment),
           },
           {
-            label: 'Replicas',
+            label: t('Replicas'),
             getter: deployment => deployment.spec.replicas || 0,
           },
           {
-            label: 'Conditions',
+            label: t('Conditions'),
             getter: deployment => renderConditions(deployment),
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: deployment => deployment.getAge(),
             sort: (d1: Deployment, d2: Deployment) =>
               new Date(d2.metadata.creationTimestamp).getTime() -

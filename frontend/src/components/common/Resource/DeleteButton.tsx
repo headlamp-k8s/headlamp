@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { KubeObject } from '../../../lib/k8s/cluster';
@@ -20,6 +21,7 @@ export default function DeleteButton(props: DeleteButtonProps) {
   const [openAlert, setOpenAlert] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
   const location = useLocation();
+  const { t } = useTranslation('resource');
 
   const deleteFunc = React.useCallback(
     () => {
@@ -29,13 +31,15 @@ export default function DeleteButton(props: DeleteButtonProps) {
 
       const callback = item!.delete;
 
+      const itemName = item!.metadata.name;
+
       callback &&
         dispatch(
           clusterAction(callback.bind(item), {
-            startMessage: `Deleting item ${item!.metadata.name}…`,
-            cancelledMessage: `Cancelled deletion of ${item!.metadata.name}.`,
-            successMessage: `Deleted item ${item!.metadata.name}.`,
-            errorMessage: `Error deleting item ${item!.metadata.name}.`,
+            startMessage: t('Deleting item {{ itemName }}…', { itemName }),
+            cancelledMessage: t('Cancelled deletion of {{ itemName }}.', { itemName }),
+            successMessage: t('Deleted item {{ itemName }}.', { itemName }),
+            errorMessage: t('Error deleting item {{ itemName }}.', { itemName }),
             cancelUrl: location.pathname,
             startUrl: item!.getListLink(),
             errorUrl: item!.getListLink(),
@@ -63,15 +67,15 @@ export default function DeleteButton(props: DeleteButtonProps) {
 
   return (
     <React.Fragment>
-      <Tooltip title="Delete">
-        <IconButton aria-label="delete" onClick={() => setOpenAlert(true)}>
+      <Tooltip title={t('frequent|Delete') as string}>
+        <IconButton aria-label={t('frequent|delete')} onClick={() => setOpenAlert(true)}>
           <Icon icon={deleteIcon} />
         </IconButton>
       </Tooltip>
       <ConfirmDialog
         open={openAlert}
-        title="Delete item"
-        description="Are you sure you want to delete this item?"
+        title={t('Delete item')}
+        description={t('Are you sure you want to delete this item?')}
         handleClose={() => setOpenAlert(false)}
         onConfirm={() => deleteFunc()}
       />

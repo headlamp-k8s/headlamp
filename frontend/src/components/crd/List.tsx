@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import CRD from '../../lib/k8s/crd';
 import { timeAgo, useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
@@ -9,10 +10,11 @@ import SimpleTable from '../common/SimpleTable';
 export default function CustomResourceDefinitionList() {
   const [crds, error] = CRD.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   return (
     <SectionBox
-      title={<SectionFilterHeader title="Custom Resource Definitions" noNamespaceFilter />}
+      title={<SectionFilterHeader title={t('crd|Custom Resource Definitions')} noNamespaceFilter />}
     >
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
@@ -20,7 +22,7 @@ export default function CustomResourceDefinitionList() {
         errorMessage={CRD.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: crd => (
               <Link
                 routeName="crd"
@@ -33,15 +35,15 @@ export default function CustomResourceDefinitionList() {
             ),
           },
           {
-            label: 'Group',
+            label: t('frequent|Group'),
             getter: crd => crd.spec.group,
           },
           {
-            label: 'Scope',
+            label: t('Scope'),
             getter: crd => crd.spec.scope,
           },
           {
-            label: 'Full name',
+            label: t('frequent|Full name'),
             getter: crd => crd.metadata.name,
             sort: (c1: CRD, c2: CRD) => {
               if (c1.metadata.name < c2.metadata.name) {
@@ -53,7 +55,7 @@ export default function CustomResourceDefinitionList() {
             },
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: crd => timeAgo(crd.metadata.creationTimestamp),
             sort: (c1: CRD, c2: CRD) =>
               new Date(c2.metadata.creationTimestamp).getTime() -

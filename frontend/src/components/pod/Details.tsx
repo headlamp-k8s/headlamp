@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import _ from 'lodash';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import Pod from '../../lib/k8s/pod';
 import Link from '../common/Link';
@@ -34,6 +35,7 @@ function PodLogViewer(props: PodLogViewerProps) {
   const [container, setContainer] = React.useState(getDefaultContainer());
   const [lines, setLines] = React.useState<number>(100);
   const [logs, setLogs] = React.useState<string[]>([]);
+  const { t } = useTranslation('frequent');
 
   function getDefaultContainer() {
     return item.spec.containers.length > 0 ? item.spec.containers[0].name : '';
@@ -74,7 +76,7 @@ function PodLogViewer(props: PodLogViewerProps) {
 
   return (
     <LogViewer
-      title={`Logs: ${item.getName()}`}
+      title={t('glossary|Logs: {{ itemName }}', { itemName: item.getName() })}
       downloadName={`${item.getName()}_${container}`}
       open={open}
       onClose={onClose}
@@ -82,7 +84,7 @@ function PodLogViewer(props: PodLogViewerProps) {
       topActions={[
         <FormControl className={classes.containerFormControl}>
           <InputLabel shrink id="container-name-chooser-label">
-            Container
+            {t('glossary|Container')}
           </InputLabel>
           <Select
             labelId="container-name-chooser-label"
@@ -100,7 +102,7 @@ function PodLogViewer(props: PodLogViewerProps) {
         </FormControl>,
         <FormControl className={classes.containerFormControl}>
           <InputLabel shrink id="container-lines-chooser-label">
-            Lines
+            {t('frequent|Lines')}
           </InputLabel>
           <Select
             labelId="container-lines-chooser-label"
@@ -126,6 +128,7 @@ export default function PodDetails() {
   const [item, setItem] = React.useState<Pod | null>(null);
   const [showLogs, setShowLogs] = React.useState(false);
   const [showTerminal, setShowTerminal] = React.useState(false);
+  const { t } = useTranslation('glossary');
 
   Pod.useApiGet(setItem, name, namespace);
 
@@ -136,13 +139,16 @@ export default function PodDetails() {
           resource={item}
           actions={
             item && [
-              <Tooltip title="Show Logs">
-                <IconButton aria-label="delete" onClick={() => setShowLogs(true)}>
+              <Tooltip title={t('Show Logs') as string}>
+                <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
                   <Icon icon={fileDocumentBoxOutline} />
                 </IconButton>
               </Tooltip>,
-              <Tooltip title="Terminal / Exec">
-                <IconButton aria-label="delete" onClick={() => setShowTerminal(true)}>
+              <Tooltip title={t('Terminal / Exec') as string}>
+                <IconButton
+                  aria-label={t('terminal') as string}
+                  onClick={() => setShowTerminal(true)}
+                >
                   <Icon icon={consoleIcon} />
                 </IconButton>
               </Tooltip>,
@@ -151,11 +157,11 @@ export default function PodDetails() {
           extraInfo={
             item && [
               {
-                name: 'State',
+                name: t('State'),
                 value: makePodStatusLabel(item),
               },
               {
-                name: 'Node',
+                name: t('Node'),
                 value: item.spec.nodeName ? (
                   <Link routeName="node" params={{ name: item.spec.nodeName }}>
                     {item.spec.nodeName}
@@ -165,11 +171,11 @@ export default function PodDetails() {
                 ),
               },
               {
-                name: 'Host IP',
+                name: t('Host IP'),
                 value: item.status.hostIP,
               },
               {
-                name: 'Pod IP',
+                name: t('Pod IP'),
                 value: item.status.podIP,
               },
             ]

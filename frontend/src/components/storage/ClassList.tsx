@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import StorageClass from '../../lib/k8s/storageClass';
 import { useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
@@ -9,16 +10,17 @@ import SimpleTable from '../common/SimpleTable';
 export default function ClassList() {
   const [storageClasses, error] = StorageClass.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Storage Classes" noNamespaceFilter />}>
+    <SectionBox title={<SectionFilterHeader title={t('Storage Classes')} noNamespaceFilter />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={StorageClass.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: storageClass => <Link kubeObject={storageClass} />,
             sort: (sc1: StorageClass, sc2: StorageClass) => {
               if (sc1.metadata.name < sc2.metadata.name) {
@@ -30,15 +32,15 @@ export default function ClassList() {
             },
           },
           {
-            label: 'Reclaim Policy',
+            label: t('Reclaim Policy'),
             getter: storageClass => storageClass.reclaimPolicy,
           },
           {
-            label: 'Volume Binding Mode',
+            label: t('Volume Binding Mode'),
             getter: storageClass => storageClass.volumeBindingMode,
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: storageClass => storageClass.getAge(),
             sort: (sc1: StorageClass, sc2: StorageClass) =>
               new Date(sc2.metadata.creationTimestamp).getTime() -

@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { apply } from '../../../lib/k8s/apiProxy';
@@ -15,12 +16,13 @@ export default function CreateButton() {
   const [openDialog, setOpenDialog] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
   const location = useLocation();
+  const { t } = useTranslation('resource');
 
   const applyFunc = async (newItem: KubeObjectInterface) => {
     try {
       await apply(newItem);
     } catch (err) {
-      setErrorMessage(err.message || 'Something went wrong…');
+      setErrorMessage(err.message || t('Something went wrong…'));
       setOpenDialog(true);
       throw err;
     }
@@ -30,22 +32,24 @@ export default function CreateButton() {
     const cancelUrl = location.pathname;
 
     if (!newItemDef.metadata?.name) {
-      setErrorMessage('Please set a name to the resource!');
+      setErrorMessage(t('Please set a name to the resource!'));
       return;
     }
 
     if (!newItemDef.kind) {
-      setErrorMessage('Please set a kind to the resource!');
+      setErrorMessage(t('Please set a kind to the resource!'));
       return;
     }
+
+    const newItemName = newItemDef.metadata.name;
 
     setOpenDialog(false);
     dispatch(
       clusterAction(() => applyFunc(newItemDef), {
-        startMessage: `Applying ${newItemDef.metadata.name}…`,
-        cancelledMessage: `Cancelled applying ${newItemDef.metadata.name}.`,
-        successMessage: `Applied ${newItemDef.metadata.name}.`,
-        errorMessage: `Failed to apply ${newItemDef.metadata.name}.`,
+        startMessage: t('Applying {{ newItemName }}…', { newItemName }),
+        cancelledMessage: t('Cancelled applying {{ newItemName }}.', { newItemName }),
+        successMessage: t('Applied {{ newItemName }}.', { newItemName }),
+        errorMessage: t('Failed to apply {{ newItemName }}.', { newItemName }),
         cancelUrl,
       })
     );
@@ -53,8 +57,8 @@ export default function CreateButton() {
 
   return (
     <React.Fragment>
-      <Tooltip title="Create / Apply">
-        <IconButton aria-label="apply" onClick={() => setOpenDialog(true)}>
+      <Tooltip title={t('frequent|Create / Apply') as string}>
+        <IconButton aria-label={t('frequent|apply')} onClick={() => setOpenDialog(true)}>
           <Icon color="#adadad" icon={plusCircle} width="48" />
         </IconButton>
       </Tooltip>
@@ -63,10 +67,10 @@ export default function CreateButton() {
         open={openDialog}
         onClose={() => setOpenDialog(false)}
         onSave={handleSave}
-        saveLabel="Apply"
+        saveLabel={t('frequent|Apply')}
         errorMessage={errorMessage}
         onEditorChanged={() => setErrorMessage('')}
-        title="Create / Apply"
+        title={t('frequent|Create / Apply')}
       />
     </React.Fragment>
   );

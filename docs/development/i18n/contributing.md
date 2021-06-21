@@ -1,34 +1,17 @@
 ---
-title: i18n Internationalization / Localization
-linkTitle: Plugins
+title: Contributing to Internationalization
+linkTitle: Contributing
 ---
 
-# i18n Internationalization / Localization
+This section introduces some concepts for contributing translations, and is
+especially important when submitting a new language.
 
-Using the i18next and react-i18next libraries.
-
-## Default language, and locales
-
-We started with an international English, and that will be the fallback language.
-
-Now we're starting with locales familiar, and will accept
-translations through github.
-
-## Browser based language detection
-
-We use
-[i18next-browser-languagedetector](https://github.com/i18next/i18next-browser-languageDetector#readme)
-
-This can select the browser language through various means like through
-cookies, the html language tag and other ways.
-
-One way to change the locale is to use `?lng=en` in the URL.
-
-## Lazy load locale files
-
-Dynamic imports and the webpack code splitting feature we
-load locale files from `src/i18n/locales/{{lng}}/{{ns}}.json`
-where {{lng}} is the language code, and {{ns}} is the namespace.
+**Important:** If you are adding a new language, keep in mind that while all
+the specific Kubernetes components' names are translatable, it doesn't mean
+that all of them should have a corresponding name in your language. Please,
+refer to the [Kubernetes localized docs](https://kubernetes.io/docs/home/) in
+your language (if they exist) in order to understand which components should
+be translated and which should be left in the original form.
 
 ## Namespaces
 
@@ -36,6 +19,8 @@ where {{lng}} is the language code, and {{ns}} is the namespace.
 are useful to keep things modular.
 
 We have a namespace for each app section, and also some frequently used global parts.
+Namespaces are separated from the actual text by a `|` character.
+E.g. `t('mynamescapce|This will be the translated text')`.
 
 ### Frequent, and Glossary namespaces
 
@@ -63,16 +48,11 @@ Numbers are formatted in a locale specific way. For example in 'en'
 they are formatted like `1,000,000` but with 'de' they are formatted
 like `1.000.000`.
 
-Here is an example key which can use number formatting:
+Here is an example which can use number formatting:
 
-```
-legend: '{{numReady, number}} / {{numItems, number}} Requested',
-```
-
-Here is the corresponding t() function call.
 
 ```JavaScript
-    return t('cluster:Charts.PodsStatusCircleChart.legend', {
+    return t('cluster:{{numReady, number}} / {{numItems, number}} Requested', {
       numReady: podsReady.length,
       numItems: items.length,
     });
@@ -82,32 +62,30 @@ Number formatting is being done with [Intl.NumberFormat](https://developer.mozil
 
 ## Date formatting
 
-```
-title: 'When: {{date, date}}',
-```
-
 Here's an example of using date formatting:
 
 ```Javascript
-    return t('appsection:YourComponent.date', {
+    return t('appsection:When {{ date, date }}', {
       date: new Date(),
     });
 ```
 
 ## Adding a new component.
 
-First choose the namespace (common, cluster, etc).
-Then add a file for 'en' first. This is the fallback language.
+See the `frontend/src/i18n/locales/en/` folder for a complete list of namespaces.
+If you need a new namespace (e.g. when you're using a sentence that's very specific to
+a single/new component), use that namespace as you would if it already existed.
 
-See the src/i18n/locales/en/ folder for a complete list of namespaces.
+Then run `make i18n` and a new translation file for that namespace will show up in
+all locale folders.
 
 ## Adding a new language.
 
-Create a folder using the locale code here: `src/i18n/locales/`.
+Create a folder using the locale code in:
+`frontend/src/i18n/locales/` and `app/electron/locales`
 
-Base the structure off the en/ code since that should be 100% complete.
-
-There's a few places inside src/i18n that may need to be changed.
+Then run `make i18n`. This command parses the translatable strings in
+the project and creates the corresponding catalog files.
 
 Integrated components may need to be adjusted (MaterialUI/Monaco etc).
 
@@ -118,7 +96,7 @@ via a theme provider.
 
 See the Material UI
 [Localization Guide](https://material-ui.com/guides/localization/),
-and also `src/i18n/ThemeProviderNexti18n.tsx` where integration is done.
+and also `frontend/src/i18n/ThemeProviderNexti18n.tsx` where integration is done.
 
 ## Storybook integration
 
@@ -126,6 +104,6 @@ TODO: not implmented. There's no working addons that let you set a language easi
 
 ## Monaco editor integration
 
-See `src/components/common/Resource/EditorDialog.tsx`
+See `frontend/src/components/common/Resource/EditorDialog.tsx`
 
 Note, that Monaco editor does not support pt, ta and other languages.

@@ -2,6 +2,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Event from '../../lib/k8s/event';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
@@ -18,6 +19,7 @@ import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './
 export default function Overview() {
   const [pods, setPods] = React.useState<Pod[] | null>(null);
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
+  const { t } = useTranslation('cluster');
 
   Pod.useApiList(setPods);
   Node.useApiList(setNodes);
@@ -31,7 +33,7 @@ export default function Overview() {
     <PageGrid>
       <SectionBox py={2}>
         {noPermissions ? (
-          <Empty color="error">No permissions to list pods.</Empty>
+          <Empty color="error">{t('auth|No permissions to list pods.')}</Empty>
         ) : (
           <Grid container justify="space-around" alignItems="flex-start">
             <Grid item>
@@ -63,6 +65,7 @@ function EventsSection() {
   const classes = useStyles();
   const filterFunc = useFilterFunc();
   const [events, error] = Event.useList();
+  const { t } = useTranslation('glossary');
 
   function makeStatusLabel(event: Event) {
     return (
@@ -73,7 +76,7 @@ function EventsSection() {
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Events" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Events')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
@@ -82,22 +85,22 @@ function EventsSection() {
           events
             ? [
                 {
-                  label: 'Type',
+                  label: t('Type'),
                   getter: event => event.involvedObject.kind,
                   sort: true,
                 },
                 {
-                  label: 'Name',
+                  label: t('frequent|Name'),
                   getter: event => event.involvedObject.name,
                   sort: true,
                 },
                 {
-                  label: 'Namespace',
+                  label: t('glossary|Namespace'),
                   getter: event => event.metadata.namespace || '-',
                 },
                 // @todo: Maybe the message should be shown on slide-down.
                 {
-                  label: 'Reason',
+                  label: t('Reason'),
                   getter: event => (
                     <LightTooltip title={event.message} interactive>
                       <Box>{makeStatusLabel(event)}</Box>
@@ -105,7 +108,7 @@ function EventsSection() {
                   ),
                 },
                 {
-                  label: 'Age',
+                  label: t('frequent|Age'),
                   getter: event => timeAgo(event.metadata.creationTimestamp),
                   sort: (e1: Event, e2: Event) =>
                     new Date(e2.metadata.creationTimestamp).getTime() -

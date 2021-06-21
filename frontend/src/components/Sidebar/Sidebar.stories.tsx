@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { MemoryRouter } from 'react-router-dom';
 import prepareRoutes from './prepareRoutes';
 import { PureSidebar, PureSidebarProps } from './Sidebar';
@@ -24,21 +25,21 @@ export default {
 
 const Template: Story<PureSidebarProps> = args => {
   const [open, setOpenConfirm] = React.useState(args.open);
+  const { t } = useTranslation();
+  const items = prepareRoutes(t);
 
-  return <PureSidebar {...args} open={open} onToggleOpen={() => setOpenConfirm(!open)} />;
+  return (
+    <PureSidebar {...args} items={items} open={open} onToggleOpen={() => setOpenConfirm(!open)} />
+  );
 };
-
-const items = prepareRoutes();
 
 export const Open = Template.bind({});
 Open.args = {
   open: true,
-  items: items,
   selectedName: 'cluster',
 };
 export const Closed = Template.bind({});
 Closed.args = {
   open: false,
-  items: items,
   selectedName: 'cluster',
 };

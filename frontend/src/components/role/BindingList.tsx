@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
 import { useErrorState, useFilterFunc } from '../../lib/util';
@@ -17,6 +18,7 @@ export default function RoleBindingList() {
   const [clusterRoleBindingError, onClusterRoleBindingError] = useErrorState(
     setupClusterRoleBindings
   );
+  const { t } = useTranslation('glossary');
   const filterFunc = useFilterFunc();
 
   function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
@@ -65,18 +67,18 @@ export default function RoleBindingList() {
   ClusterRoleBinding.useApiList(setupClusterRoleBindings, onClusterRoleBindingError);
 
   return (
-    <SectionBox title={<SectionFilterHeader title="Role Bindings" />}>
+    <SectionBox title={<SectionFilterHeader title={t('Role Bindings')} />}>
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={getErrorMessage()}
         columns={[
           {
-            label: 'Type',
+            label: t('Type'),
             getter: item => item.kind,
           },
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: item => <Link kubeObject={item} />,
             sort: (r1: RoleBinding, r2: RoleBinding) => {
               if (r1.metadata.name < r2.metadata.name) {
@@ -88,11 +90,11 @@ export default function RoleBindingList() {
             },
           },
           {
-            label: 'Namespace',
+            label: t('glossary|Namespace'),
             getter: item => item.getNamespace() || 'All namespaces',
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: item => item.getAge(),
             sort: (r1: RoleBinding, r2: RoleBinding) =>
               new Date(r2.metadata.creationTimestamp).getTime() -

@@ -12,7 +12,7 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
       style="overflow: hidden;"
     >
       <div
-        aria-label="full width tabs example"
+        aria-label="tabs"
         class="MuiTabs-flexContainer"
         role="tablist"
       >
@@ -95,7 +95,7 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
       style="overflow: hidden;"
     >
       <div
-        aria-label="full width tabs example"
+        aria-label="tabs"
         class="MuiTabs-flexContainer"
         role="tablist"
       >

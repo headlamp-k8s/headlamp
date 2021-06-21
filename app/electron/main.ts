@@ -1,12 +1,14 @@
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
-import { app, BrowserWindow, Menu, MenuItem, screen } from 'electron';
-import { MenuItemConstructorOptions } from 'electron/main';
+import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen } from 'electron';
+import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
 import { autoUpdater } from 'electron-updater';
+import { i18n as I18n } from 'i18next';
 import open from 'open';
 import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
+import i18n from './i18next.config';
 
 const args = yargs
   .option('headless', {
@@ -58,14 +60,26 @@ function quitServerProcess() {
   serverProcess = null;
 }
 
-
-function startElecron() {
-  log.transports.file.level = 'info';
-  log.info('App starting...');
-
-  let mainWindow: BrowserWindow | null;
-
+function setMenu(i18n: I18n) {
   const isMac = process.platform === 'darwin';
+
+  const sep = { type: 'separator' };
+  const aboutMenu = {
+    label: i18n.t('About'),
+    role: 'about'
+  }
+  const quitMenu = {
+    label: i18n.t('Quit'),
+    role: 'quit'
+  };
+  const selectAllMenu = {
+    label: i18n.t('Select All'),
+    role: 'selectAll'
+  }
+  const deleteMenu = {
+    label: i18n.t('Delete'),
+    role: 'delete'
+  };
 
   const template = [
     // { role: 'appMenu' }
@@ -74,85 +88,164 @@ function startElecron() {
           {
             label: app.name,
             submenu: [
-              { role: 'about' },
-              { type: 'separator' },
-              { role: 'services' },
-              { type: 'separator' },
-              { role: 'hide' },
-              { role: 'hideothers' },
-              { role: 'unhide' },
-              { type: 'separator' },
-              { role: 'quit' },
+              aboutMenu,
+              sep,
+              {
+                label: i18n.t('Services'),
+                role: 'services'
+              },
+              sep,
+              {
+                label: i18n.t('Hide Headlamp'),
+                role: 'hide'
+              },
+              {
+                label: i18n.t('Hide Others'),
+                role: 'hideothers'
+              },
+              {
+                label: i18n.t('Show All'),
+                role: 'unhide'
+              },
+              sep,
+              quitMenu,
             ],
           },
         ]
       : []),
     // { role: 'fileMenu' }
     {
-      label: 'File',
-      submenu: [isMac ? { role: 'close' } : { role: 'quit' }],
+      label: i18n.t('File'),
+      submenu: [isMac ?
+        {
+          label: i18n.t('Close'),
+          role: 'close'
+        }
+      :
+        quitMenu
+      ],
     },
     // { role: 'editMenu' }
     {
-      label: 'Edit',
+      label: i18n.t('Edit'),
       submenu: [
-        { role: 'undo' },
-        { role: 'redo' },
-        { type: 'separator' },
-        { role: 'cut' },
-        { role: 'copy' },
-        { role: 'paste' },
+        {
+          label: i18n.t('Cut'),
+          role: 'cut'
+        },
+        {
+          label: i18n.t('Copy'),
+          role: 'copy'
+        },
+        {
+          label: i18n.t('Paste'),
+          role: 'paste'
+        },
         ...(isMac
           ? [
-              { role: 'pasteAndMatchStyle' },
-              { role: 'delete' },
-              { role: 'selectAll' },
-              { type: 'separator' },
               {
-                label: 'Speech',
-                submenu: [{ role: 'startspeaking' }, { role: 'stopspeaking' }],
+                label: i18n.t('Paste and Match Style'),
+                role: 'pasteAndMatchStyle'
+              },
+              deleteMenu,
+              selectAllMenu,
+              sep,
+              {
+                label: i18n.t('Speech'),
+                submenu: [
+                  {
+                    label: i18n.t('Start Speaking'),
+                    role: 'startspeaking'
+                  },
+                  {
+                    label: i18n.t('Stop Speaking'),
+                    role: 'stopspeaking'
+                  }],
               },
             ]
-          : [{ role: 'delete' }, { type: 'separator' }, { role: 'selectAll' }]),
+          : [
+              deleteMenu,
+              sep,
+              selectAllMenu
+            ]),
       ],
     },
     // { role: 'viewMenu' }
     {
-      label: 'View',
+      label: i18n.t('View'),
       submenu: [
-        { role: 'reload' },
-        { role: 'forcereload' },
-        { role: 'toggledevtools' },
-        { type: 'separator' },
-        { role: 'resetzoom' },
-        { role: 'zoomin' },
-        { role: 'zoomout' },
-        { type: 'separator' },
-        { role: 'togglefullscreen' },
+        {
+          label: i18n.t('Reload'),
+          role: 'forcereload'
+        },
+        {
+          label: i18n.t('Toggle Developer Tools'),
+          role: 'toggledevtools'
+        },
+        sep,
+        {
+          label: i18n.t('Reset Zoom'),
+          role: 'resetzoom'
+        },
+        {
+          label: i18n.t('Zoom In'),
+          role: 'zoomin'
+        },
+        {
+          label: i18n.t('Zoom Out'),
+          role: 'zoomout'
+        },
+        sep,
+        {
+          label: i18n.t('Toogle Fullscreen'),
+          role: 'togglefullscreen'
+        },
       ],
     },
-    // { role: 'windowMenu' }
     {
-      label: 'Window',
+      label: i18n.t('Window'),
       submenu: [
-        { role: 'minimize' },
+        {
+          label: i18n.t('Minimize'),
+          role: 'minimize'
+        },
         ...(isMac
-          ? [{ type: 'separator' }, { role: 'front' }, { type: 'separator' }, { role: 'window' }]
-          : [{ role: 'close' }]),
+          ? [
+              sep,
+              {
+                label: i18n.t('Bring All to Front'),
+                role: 'front'
+              },
+              sep,
+              {
+                label: i18n.t('Window'),
+                role: 'window' }
+              ]
+          : [{
+                label: i18n.t('Close'),
+                role: 'close'
+            }]),
       ],
     },
     {
       role: 'help',
       submenu: [
         {
-          label: 'Open an issue',
+          label: i18n.t('Documentation'),
+          click: async () => {
+            const { shell } = require('electron');
+            await shell.openExternal('https://kinvolk.io/docs/headlamp/latest');
+          },
+        },
+        {
+          label: i18n.t('Open an Issue'),
           click: async () => {
             const { shell } = require('electron');
             await shell.openExternal('https://github.com/kinvolk/headlamp/issues');
           },
         },
         {
-          label: 'About',
+          label: i18n.t('About'),
           click: async () => {
             const { shell } = require('electron');
             await shell.openExternal('https://github.com/kinvolk/headlamp');
@@ -164,8 +257,17 @@ function startElecron() {
 
   const menu = Menu.buildFromTemplate(template as (MenuItemConstructorOptions | MenuItem)[]);
   Menu.setApplicationMenu(menu);
+}
+
+function startElecron() {
+  log.transports.file.level = 'info';
+  log.info('App starting...');
+
+  let mainWindow: BrowserWindow | null;
 
   const isDev = process.env.ELECTRON_DEV || false;
+
+  setMenu(i18n);
 
   function createWindow() {
     const startUrl =
@@ -176,11 +278,27 @@ function startElecron() {
         slashes: true,
       });
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-    mainWindow = new BrowserWindow({ width, height });
+    mainWindow = new BrowserWindow({ width, height ,
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false
+      },
+    });
     mainWindow.loadURL(startUrl);
     mainWindow.on('closed', () => {
       mainWindow = null;
     });
+
+    i18n.on('languageChanged', () => {
+      setMenu(i18n);
+    })
+
+    ipcMain.on('locale', (event: IpcMainEvent, newLocale: string) => {
+      if (!!newLocale && i18n.language !== newLocale) {
+        i18n.changeLanguage(newLocale);
+      }
+    });
+
     autoUpdater.checkForUpdatesAndNotify();
 
     if (!isDev) {
@@ -228,6 +346,7 @@ function startElecron() {
   app.once('window-all-closed', app.quit);
 
   app.once('before-quit', () => {
+    i18n.off('languageChanged');
     if (mainWindow) {
       mainWindow.removeAllListeners('close');
     }

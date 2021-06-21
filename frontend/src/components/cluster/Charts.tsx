@@ -74,7 +74,7 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
     <HeaderLabel
       label={title || ''}
       value={props.getLegend!(used, available)}
-      tooltip={t('cluster:Charts.ResourceCircularChart.tooltip')}
+      tooltip={t('cluster|Install the metrics-server to get usage data.')}
     />
   ) : (
     <PercentageCircle
@@ -90,7 +90,7 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
 
 export function MemoryCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
-  const { t } = useTranslation(['cluster']);
+  const { t } = useTranslation(['cluster', 'glossary']);
 
   function memoryUsedGetter(item: KubeObject) {
     return parseRam(item.usage.memory) / TO_GB;
@@ -118,11 +118,7 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
       getLegend={getLegend}
       resourceUsedGetter={memoryUsedGetter}
       resourceAvailableGetter={memoryAvailableGetter}
-      title={
-        noMetrics
-          ? t('cluster:Charts.MemoryCircularChart.titleNoMetrics')
-          : t('cluster:Charts.MemoryCircularChart.title')
-      }
+      title={noMetrics ? t('glossary|Memory') : t('cluster|Memory Usage')}
       {...props}
     />
   );
@@ -130,7 +126,7 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
 
 export function CpuCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
-  const { t } = useTranslation(['cluster']);
+  const { t } = useTranslation(['cluster', 'glossary']);
 
   function cpuUsedGetter(item: KubeObject) {
     return parseCpu(item.usage.cpu) / TO_ONE_CPU;
@@ -145,7 +141,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
       return '';
     }
 
-    const availableLabel = `${available} units`;
+    const availableLabel = t('cluster|{{ available }} units', { available });
     if (noMetrics) {
       return availableLabel;
     }
@@ -158,11 +154,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
       getLegend={getLegend}
       resourceUsedGetter={cpuUsedGetter}
       resourceAvailableGetter={cpuAvailableGetter}
-      title={
-        noMetrics
-          ? t('cluster:Charts.CpuCircularChart.titleNoMetrics')
-          : t('cluster:Charts.CpuCircularChart.title')
-      }
+      title={noMetrics ? t('glossary|CPU') : t('cluster|CPU Usage')}
       {...props}
     />
   );
@@ -171,7 +163,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
 export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'items'>) {
   const theme = useTheme();
   const { items } = props;
-  const { t } = useTranslation(['cluster']);
+  const { t } = useTranslation(['cluster', 'glossary']);
 
   const podsReady = (items || []).filter(pod =>
     ['Running', 'Succeeded'].includes(pod.status!.phase)
@@ -181,7 +173,7 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
     if (items === null) {
       return null;
     }
-    return t('cluster:Charts.PodsStatusCircleChart.legend', {
+    return t('cluster|{{ numReady }} / {{ numItems }} Requested', {
       numReady: podsReady.length,
       numItems: items.length,
     });
@@ -218,7 +210,7 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
       data={getData()}
       total={items !== null ? items.length : -1}
       label={getLabel()}
-      title={t('cluster:Charts.PodsStatusCircleChart.title')}
+      title={t('glossary|Pods')}
       legend={getLegend()}
     />
   );

@@ -31,7 +31,7 @@ i18next
   .init({
     debug: process.env.NODE_ENV === 'development',
     fallbackLng: 'en',
-    supportedLngs: ['en'],
+    supportedLngs: ['en', 'pt', 'es'],
     // nonExplicitSupportedLngs: true,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
@@ -42,12 +42,15 @@ i18next
         return value;
       },
     },
+    returnEmptyString: false,
     // https://react.i18next.com/latest/i18next-instance
     // https://www.i18next.com/overview/configuration-options
     react: {
       useSuspense: false, // not needed unless loading from public/locales
       //   bindI18nStore: 'added'
     },
+    nsSeparator: '|',
+    keySeparator: false,
   });
 
 export default i18next;

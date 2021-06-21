@@ -2,7 +2,7 @@ import plusCircle from '@iconify/icons-mdi/plus-circle';
 import { Icon } from '@iconify/react';
 import IconButton from '@material-ui/core/IconButton';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { SnackbarProvider } from 'notistack';
+import i18next from 'i18next';
 import React from 'react';
 import TooltipLight, { TooltipLightProps } from './TooltipLight';
 
@@ -17,7 +17,7 @@ export const Add = Template.bind({});
 Add.args = {
   title: 'Add',
   children: (
-    <IconButton aria-label="add">
+    <IconButton aria-label={i18next.t('frequent|Add')}>
       <Icon color="#adadad" icon={plusCircle} width="48" />
     </IconButton>
   ),

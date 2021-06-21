@@ -1,5 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { Workload } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
@@ -23,6 +24,7 @@ export default function Overview() {
   const [workloadsData, dispatch] = React.useReducer(setWorkloads, {});
   const location = useLocation();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   function setWorkloads(
     workloads: WorkloadDict,
@@ -63,24 +65,24 @@ export default function Overview() {
                 workloadData={workloadsData[name] || []}
                 // @todo: Use a plural from from the class itself when we have it
                 title={name + 's'}
-                partialLabel="Failed"
-                totalLabel="Running"
+                partialLabel={t('frequent|Failed')}
+                totalLabel={t('frequent|Running')}
               />
             </Grid>
           ))}
         </Grid>
       </SectionBox>
-      <SectionBox title={<SectionFilterHeader title="Workloads" />}>
+      <SectionBox title={<SectionFilterHeader title={t('Workloads')} />}>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
           filterFunction={filterFunc}
           columns={[
             {
-              label: 'Type',
+              label: t('Type'),
               getter: item => item.kind,
             },
             {
-              label: 'Name',
+              label: t('frequent|Name'),
               getter: item => (
                 <ResourceLink resource={item} state={{ backLink: { ...location } }} />
               ),
@@ -94,15 +96,15 @@ export default function Overview() {
               },
             },
             {
-              label: 'Namespace',
+              label: t('glossary|Namespace'),
               getter: item => item.metadata.namespace,
             },
             {
-              label: 'Pods',
+              label: t('Pods'),
               getter: item => item && getPods(item),
             },
             {
-              label: 'Age',
+              label: t('frequent|Age'),
               getter: item => timeAgo(item.metadata.creationTimestamp),
               sort: (w1: Workload, w2: Workload) =>
                 new Date(w2.metadata.creationTimestamp).getTime() -

@@ -25,6 +25,11 @@ read those guidelines.
 Please use the [project's issue tracker](https://github.com/kinvolk/headlamp/issues) for filing any bugs you find or features
 you think are useful.
 
+## Translations
+
+If you want to contribute to the internationalization of Headlamp, please refer to the
+dedicated [i18n docs](./development/).
+
 ### Complex contributions
 
 If you have a complex contribution in mind (meaning changes in the architecture

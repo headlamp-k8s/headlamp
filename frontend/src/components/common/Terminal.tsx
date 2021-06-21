@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Terminal as XTerminal } from 'xterm';
 import Pod from '../../lib/k8s/pod';
 
@@ -37,6 +38,7 @@ export default function Terminal(props: TerminalProps) {
   const classes = useStyle();
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
   const [container, setContainer] = React.useState<string | null>(null);
+  const { t } = useTranslation('resource');
 
   function getDefaultContainer() {
     return item.spec.containers.length > 0 ? item.spec.containers[0].name : '';
@@ -108,7 +110,7 @@ export default function Terminal(props: TerminalProps) {
       }
 
       const xterm = new XTerminal({ rows: 40, cols: 80 });
-      xterm.writeln('Connecting…\n');
+      xterm.writeln(t('Connecting…') + '\n');
 
       const exec = item.exec(container, (items: ArrayBuffer) => onData(xterm, items));
 
@@ -139,13 +141,13 @@ export default function Terminal(props: TerminalProps) {
 
   return (
     <Dialog maxWidth="lg" scroll="paper" fullWidth onBackdropClick={onClose} keepMounted {...other}>
-      <DialogTitle>Terminal: {item.metadata.name}</DialogTitle>
+      <DialogTitle>{t('Terminal: {{ itemName }}', { itemName: item.metadata.name })}</DialogTitle>
       <DialogContent className={classes.dialogContent}>
         <Grid container direction="column" spacing={1}>
           <Grid item>
             <FormControl className={classes.containerFormControl}>
               <InputLabel shrink id="container-name-chooser-label">
-                Container
+                {t('glossary|Container')}
               </InputLabel>
               <Select
                 labelId="container-name-chooser-label"
@@ -169,7 +171,7 @@ export default function Terminal(props: TerminalProps) {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
-          Close
+          {t('frequent|Close')}
         </Button>
       </DialogActions>
     </Dialog>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import Ingress from '../../lib/k8s/ingress';
 import Loader from '../common/Loader';
@@ -9,6 +10,7 @@ import SimpleTable from '../common/SimpleTable';
 export default function IngressDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<Ingress | null>(null);
+  const { t } = useTranslation('glossary');
 
   Ingress.useApiGet(setItem, name, namespace);
 
@@ -31,29 +33,29 @@ export default function IngressDetails() {
   }
 
   return !item ? (
-    <Loader title="Loading ingress details" />
+    <Loader title={t('ingress|Loading ingress details')} />
   ) : (
     <PageGrid>
       <MainInfoSection resource={item} />
-      <SectionBox title="Rules">
+      <SectionBox title={t('Rules')}>
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
-          emptyMessage="No rules data to be shown."
+          emptyMessage={t('ingress|No rules data to be shown.')}
           columns={[
             {
-              label: 'Host',
+              label: t('Host'),
               getter: data => data.host,
             },
             {
-              label: 'Path',
+              label: t('Path'),
               getter: data => data.path || '',
             },
             {
-              label: 'Service',
+              label: t('Service'),
               getter: data => data.backend.serviceName,
             },
             {
-              label: 'Port',
+              label: t('Port'),
               getter: data => data.backend.servicePort,
             },
           ]}

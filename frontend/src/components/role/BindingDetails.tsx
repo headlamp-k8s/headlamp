@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
@@ -13,6 +14,7 @@ export default function RoleBindingDetails() {
     name: string;
   }>();
   const [item, setItem] = React.useState<RoleBinding | null>(null);
+  const { t } = useTranslation('glossary');
 
   let cls = RoleBinding;
   if (!namespace) {
@@ -22,40 +24,40 @@ export default function RoleBindingDetails() {
   cls.useApiGet(setItem, name, namespace);
 
   return !item ? (
-    <Loader title="Loading binding details" />
+    <Loader title={t('role|Loading binding details')} />
   ) : (
     <PageGrid>
       <MainInfoSection
         resource={item}
         extraInfo={[
           {
-            name: 'Reference Kind',
+            name: t('Reference Kind'),
             value: item.roleRef.kind,
           },
           {
-            name: 'Reference Name',
+            name: t('Reference Name'),
             value: item.roleRef.name,
           },
           {
-            name: 'Ref. API Group',
+            name: t('role|Ref. API Group'),
             value: item.roleRef.apiGroup,
           },
         ]}
       />
-      <SectionBox title="Binding Info">
+      <SectionBox title={t('Binding Info')}>
         <SimpleTable
           data={item.subjects}
           columns={[
             {
-              label: 'Kind',
+              label: t('Kind'),
               getter: item => item.kind,
             },
             {
-              label: 'Name',
+              label: t('frequent|Name'),
               getter: item => item.name,
             },
             {
-              label: 'Namespace',
+              label: t('Namespace'),
               getter: item => item.namespace,
             },
           ]}

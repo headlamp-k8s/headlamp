@@ -1,6 +1,7 @@
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { apiFactory, apiFactoryWithNamespace } from '../../lib/k8s/apiProxy';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
@@ -34,6 +35,7 @@ export default function CustomResourceDefinitionDetails() {
   const [item, setItem] = React.useState<CRD | null>(null);
   const [objToShow, setObjToShow] = React.useState<KubeCRD | null>(null);
   const [objects, setObjects] = React.useState<KubeCRD[]>([]);
+  const { t } = useTranslation('glossary');
 
   CRD.useApiGet(setItem, name);
 
@@ -51,7 +53,7 @@ export default function CustomResourceDefinitionDetails() {
   }, [item]);
 
   return !item ? (
-    <Loader title="Loading resource definition details" />
+    <Loader title={t('resource|Loading resource definition details')} />
   ) : (
     <PageGrid>
       <MainInfoSection
@@ -59,76 +61,76 @@ export default function CustomResourceDefinitionDetails() {
         extraInfo={
           item && [
             {
-              name: 'Group',
+              name: t('frequent|Group'),
               value: item.spec.group,
             },
             {
-              name: 'Version',
+              name: t('Version'),
               value: item.spec.version,
             },
             {
-              name: 'Scope',
+              name: t('Scope'),
               value: item.spec.scope,
             },
             {
-              name: 'Subresources',
+              name: t('Subresources'),
               value: item.spec.subresources && Object.keys(item.spec.subresources).join(' & '),
               hide: !item.spec.subresources,
             },
           ]
         }
       />
-      <SectionBox title="Accepted Names">
+      <SectionBox title={t('crd|Accepted Names')}>
         <SimpleTable
           data={[item.spec.names]}
           columns={[
             {
-              label: 'Plural',
+              label: t('Plural'),
               datum: 'plural',
             },
             {
-              label: 'Singular',
+              label: t('Singular'),
               datum: 'singular',
             },
             {
-              label: 'Kind',
+              label: t('glossary|Kind'),
               datum: 'kind',
             },
             {
-              label: 'List Kind',
+              label: t('List Kind'),
               datum: 'listKind',
             },
           ]}
         />
       </SectionBox>
-      <SectionBox title="Versions">
+      <SectionBox title={t('frequent|Versions')}>
         <SimpleTable
           data={item.spec.versions}
           columns={[
             {
-              label: 'Name',
+              label: t('frequent|Name'),
               datum: 'name',
             },
             {
-              label: 'Served',
+              label: t('Served'),
               getter: version => version.storage.toString(),
             },
             {
-              label: 'Storage',
+              label: t('Storage'),
               getter: version => version.storage.toString(),
             },
           ]}
         />
       </SectionBox>
-      <SectionBox title="Conditions">
+      <SectionBox title={t('Conditions')}>
         <ConditionsTable resource={item.jsonData} showLastUpdate={false} />
       </SectionBox>
-      <SectionBox title="Objects">
+      <SectionBox title={t('Objects')}>
         <SimpleTable
           data={objects}
           columns={[
             {
-              label: 'Name',
+              label: t('frequent|Name'),
               getter: obj => (
                 <Link className={classes.link} onClick={() => setObjToShow(obj)}>
                   {obj.metadata.name}
@@ -136,11 +138,11 @@ export default function CustomResourceDefinitionDetails() {
               ),
             },
             {
-              label: 'Namespace',
+              label: t('glossary|Namespace'),
               getter: obj => obj.metadata.namespace || '-',
             },
             {
-              label: 'Created',
+              label: t('Created'),
               getter: obj => timeAgo(obj.metadata.creationTimestamp),
             },
           ]}

@@ -1,5 +1,6 @@
 import { Divider } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import { useTranslation } from 'react-i18next';
 import { generatePath, useHistory } from 'react-router';
 import { createRouteURL } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
@@ -40,9 +41,10 @@ export default function NavigationTabs() {
   if (sidebar.isSidebarOpen) {
     return null;
   }
+  const { t } = useTranslation();
 
   let defaultIndex = null;
-  const listItems = prepareRoutes();
+  const listItems = prepareRoutes(t);
   let navigationItem = listItems.find(item => item.name === sidebar.selected);
   if (!navigationItem) {
     const parent = findParentOfSubList(listItems, sidebar.selected);

@@ -8,9 +8,10 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { addQuery, getFilterValueByNameFromURL } from '../../helpers';
+import { addQuery } from '../../helpers';
 import Namespace from '../../lib/k8s/namespace';
 import { setNamespaceFilter } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -27,6 +28,7 @@ export function PureNamespacesAutocomplete({
   filter,
 }: PureNamespacesAutocompleteProps) {
   const theme = useTheme();
+  const { t } = useTranslation('glossary');
 
   return (
     <Autocomplete
@@ -64,7 +66,7 @@ export function PureNamespacesAutocomplete({
           <TextField
             {...params}
             variant="standard"
-            label="Namespaces"
+            label={t('Namespaces')}
             fullWidth
             InputLabelProps={{ shrink: true }}
             style={{ marginTop: 0 }}

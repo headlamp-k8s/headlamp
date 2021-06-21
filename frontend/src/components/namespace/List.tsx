@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Namespace from '../../lib/k8s/namespace';
 import { useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
@@ -10,6 +11,7 @@ import SimpleTable from '../common/SimpleTable';
 export default function NamespacesList() {
   const [namespaces, error] = Namespace.useList();
   const filterFunc = useFilterFunc();
+  const { t } = useTranslation('glossary');
 
   function makeStatusLabel(namespace: Namespace) {
     const status = namespace.status.phase;
@@ -18,7 +20,7 @@ export default function NamespacesList() {
 
   return (
     <SectionBox
-      title={<SectionFilterHeader title="Namespaces" noNamespaceFilter headerStyle="main" />}
+      title={<SectionFilterHeader title={t('Namespaces')} noNamespaceFilter headerStyle="main" />}
     >
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
@@ -26,7 +28,7 @@ export default function NamespacesList() {
         errorMessage={Namespace.getErrorMessage(error)}
         columns={[
           {
-            label: 'Name',
+            label: t('frequent|Name'),
             getter: namespace => <Link kubeObject={namespace} />,
             sort: (n1: Namespace, n2: Namespace) => {
               if (n1.metadata.name < n2.metadata.name) {
@@ -38,11 +40,11 @@ export default function NamespacesList() {
             },
           },
           {
-            label: 'Status',
+            label: t('Status'),
             getter: makeStatusLabel,
           },
           {
-            label: 'Age',
+            label: t('frequent|Age'),
             getter: namespace => namespace.getAge(),
             sort: (n1: Namespace, n2: Namespace) =>
               new Date(n2.metadata.creationTimestamp).getTime() -

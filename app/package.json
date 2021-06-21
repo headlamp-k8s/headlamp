@@ -12,7 +12,8 @@
     "copy-icons": "mkdir -p build/icons && cp ../frontend/build/*.png ../frontend/build/*.ico ../frontend/build/*.icns ../frontend/build/*.svg build/icons",
     "build": "npm run copy-icons && npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
     "package": "npm run copy-icons && npm run compile-electron && electron-builder build --publish never",
-    "serve-dev": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron ."
+    "serve-dev": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "i18n": "npx --no-install i18next ./electron/main.ts -c ./electron/i18next-parser.config.js"
   },
   "build": {
     "appId": "com.kinvolk.headlamp",
@@ -75,7 +76,10 @@
       ]
     },
     "files": [
-      "electron/main.js"
+      "electron/main.js",
+      "electron/locales/",
+      "electron/i18next.config.js",
+      "electron/i18n-helper.js"
     ],
     "extraResources": [
       {
@@ -105,12 +109,15 @@
     "electron-builder": "^22.10.5",
     "electron-notarize": "^1.0.0",
     "fs-extra": "^8.1.0",
+    "i18next-parser": "^4.2.0",
     "typescript": "^4.1.3"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
     "electron-log": "^4.2.4",
     "electron-updater": "^4.3.5",
+    "i18next": "^20.3.2",
+    "i18next-node-fs-backend": "^2.1.3",
     "open": "^7.3.1",
     "yargs": "^16.2.0"
   }

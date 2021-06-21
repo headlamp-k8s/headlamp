@@ -1,10 +1,15 @@
 {
-  "Charts": {
-    "PodsStatusCircleChart": {
-      "title": "Pods"
-    },
-    "ResourceCircularChart": {
-      "tooltip": "Instala el \"metrics-server\" para obtener datos de uso."
-    }
-  }
+  "Install the metrics-server to get usage data.": "Instale el metrics-server para obtener datos de uso.",
+  "Memory Usage": "Uso de la memoria",
+  "{{ available }} units": "{{ available }} unidades",
+  "CPU Usage": "Uso da la CPU",
+  "{{ numReady }} / {{ numItems }} Requested": "{{ numReady }} / {{ numItems }} requeridos",
+  "Cluster: {{cluster}}": "Cluster: {{cluster}}",
+  "Choose a cluster": "Elija un cluster",
+  "Wait while fetching clusters…": "Espere mientras se obtienen los clusters…",
+  "Loading cluster information": "Cargando información de cluster",
+  "There seems to be no clusters configured…": "No parece haber clusters configurados…",
+  "Please make sure you have at least one cluster configured.": "Por favor asegúrese que tiene al menos un cluster configurado.",
+  "Cluster version upgraded to {{ gitVersion }}": "Versión del cluster actualizada a {{ gitVersion }}",
+  "Cluster version downgraded to {{ gitVersion }}": "Versión del cluster cambiada a {{ gitVersion }}"
 }
