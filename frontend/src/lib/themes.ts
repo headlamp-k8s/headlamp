@@ -4,6 +4,7 @@ import orange from '@material-ui/core/colors/orange';
 import red from '@material-ui/core/colors/red';
 import { createMuiTheme, Theme } from '@material-ui/core/styles';
 import { PaletteColor, PaletteColorOptions } from '@material-ui/core/styles/createPalette';
+import React from 'react';
 
 declare module '@material-ui/core/styles/createPalette.d' {
   interface Palette {
@@ -142,17 +143,52 @@ const themesConf: ThemesConf = {
 
 export default themesConf;
 
-export function getTheme(): string {
-  let theme: string = localStorage.theme;
-
-  if (!theme) {
-    theme = 'light';
-    setTheme(theme);
+export function usePrefersColorScheme() {
+  if (typeof window.matchMedia !== 'function') {
+    return 'light';
   }
 
-  return theme;
+  const mql = window.matchMedia('(prefers-color-scheme: dark)');
+  const [value, setValue] = React.useState(mql.matches);
+
+  React.useEffect(() => {
+    const handler = (x: MediaQueryListEvent | MediaQueryList) => setValue(x.matches);
+    mql.addListener(handler);
+    return () => mql.removeListener(handler);
+  }, []);
+
+  return value;
+}
+
+/**
+ * Hook gets theme based on user preference, and also OS/Browser preference.
+ * @returns 'light' | 'dark' theme name
+ */
+export function getThemeName(user = false): string {
+  const themePreference: string = localStorage.headlampThemePreference;
+
+  if (typeof window.matchMedia !== 'function') {
+    return 'light';
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+  let themeName = 'light';
+  if (themePreference) {
+    // A selected theme preference takes precedence.
+    themeName = themePreference;
+  } else {
+    if (prefersLight) {
+      themeName = 'light';
+    } else if (prefersDark) {
+      themeName = 'dark';
+    }
+  }
+
+  return themeName;
 }
 
 export function setTheme(themeName: string) {
-  localStorage.theme = themeName;
+  const selectedTheme: string = localStorage.headlampSelectedTheme;
+  localStorage.headlampThemePreference = themeName;
 }

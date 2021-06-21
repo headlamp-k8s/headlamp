@@ -17,6 +17,7 @@ import * as Monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import { getThemeName } from '../../../lib/themes';
 import ConfirmButton from '../ConfirmButton';
 import Loader from '../Loader';
 import Tabs from '../Tabs';
@@ -179,6 +180,8 @@ export default function EditorDialog(props: EditorDialogProps) {
     const { i18n } = useTranslation();
     const [lang, setLang] = React.useState(i18n.language);
 
+    const themeName = getThemeName();
+
     React.useEffect(() => {
       i18n.on('languageChanged', setLang);
       return () => {
@@ -200,7 +203,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       <Box paddingTop={2} height="100%">
         <Editor
           language="yaml"
-          theme="vs-dark"
+          theme={themeName === 'dark' ? 'vs-dark' : 'light'}
           value={code}
           options={editorOptions}
           onChange={onChange}
