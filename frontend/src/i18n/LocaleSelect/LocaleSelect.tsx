@@ -1,4 +1,5 @@
 import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
@@ -12,7 +13,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-export interface LocaleSelectProps {}
+export interface LocaleSelectProps {
+  showTitle?: boolean;
+}
 
 /**
  * A UI for selecting the locale with i18next
@@ -34,6 +37,7 @@ export default function LocaleSelect(props: LocaleSelectProps) {
 
   return (
     <FormControl className={classes.formControl}>
+      {props.showTitle && <FormLabel component="legend">{t('Select locale')}</FormLabel>}
       <Select
         value={i18n.language ? i18n.language : 'en'}
         onChange={changeLng}
