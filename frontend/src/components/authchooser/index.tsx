@@ -33,7 +33,11 @@ interface ReactRouterLocationStateIface {
   from?: Location;
 }
 
-function AuthChooser() {
+export interface AuthChooserProps {
+  children?: React.ReactNode;
+}
+
+function AuthChooser({ children }: AuthChooserProps) {
   const history = useHistory();
   const location = useLocation();
   const clusters = useClustersConf();
@@ -171,7 +175,9 @@ function AuthChooser() {
           }),
         });
       }}
-    />
+    >
+      {children}
+    </PureAuthChooser>
   );
 }
 
@@ -187,6 +193,7 @@ export interface PureAuthChooserProps {
   handleTokenAuth: () => void;
   handleTryAgain: () => void;
   handleBackButtonPress: () => void;
+  children?: React.ReactNode;
 }
 
 export function PureAuthChooser({
@@ -201,6 +208,7 @@ export function PureAuthChooser({
   handleTokenAuth,
   handleTryAgain,
   handleBackButtonPress,
+  children,
 }: PureAuthChooserProps) {
   const { t } = useTranslation('auth');
 
@@ -281,6 +289,7 @@ export function PureAuthChooser({
           </Box>
         </Box>
       )}
+      {children}
     </ClusterDialog>
   );
 }

@@ -394,7 +394,11 @@ export const ROUTES: {
     name: 'Login',
     sidebar: null,
     noAuthRequired: true,
-    component: () => <AuthChooser />,
+    component: () => (
+      <AuthChooser>
+        <LocaleSelect />
+      </AuthChooser>
+    ),
   },
   crds: {
     path: '/crds',
