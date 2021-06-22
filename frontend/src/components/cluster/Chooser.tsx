@@ -202,7 +202,7 @@ export function ClusterDialog(props: ClusterDialogProps) {
 function Chooser(props: ClusterDialogProps) {
   const history = useHistory();
   const clusters = useClustersConf();
-  const { open = null, onClose, ...otherProps } = props;
+  const { open = null, onClose, children = [], ...otherProps } = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(props.open);
   const { t } = useTranslation('cluster');
@@ -283,6 +283,7 @@ function Chooser(props: ClusterDialogProps) {
       ) : (
         <ClusterList clusters={clusterList} onButtonClick={handleButtonClick} />
       )}
+      {children}
     </ClusterDialog>
   );
 }

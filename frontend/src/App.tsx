@@ -34,6 +34,7 @@ import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
 import Sidebar, { drawerWidth, NavigationTabs, useSidebarItem } from './components/Sidebar';
 import helpers from './helpers';
+import { useElectronI18n } from './i18n/electronI18n';
 import LocaleSelect from './i18n/LocaleSelect/LocaleSelect';
 import ThemeProviderNexti18n from './i18n/ThemeProviderNexti18n';
 import { getToken, setToken } from './lib/auth';
@@ -293,6 +294,7 @@ function AppContainer() {
 function AppWithRedux(props: React.PropsWithChildren<{}>) {
   let themeName = useTypedSelector(state => state.ui.theme.name);
   usePrefersColorScheme();
+  useElectronI18n();
 
   if (!themeName) {
     themeName = getThemeName();

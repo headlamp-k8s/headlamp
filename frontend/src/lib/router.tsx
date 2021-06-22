@@ -46,6 +46,7 @@ import PersistentVolumeDetails from '../components/storage/VolumeDetails';
 import PersistentVolumeList from '../components/storage/VolumeList';
 import WorkloadDetails from '../components/workload/Details';
 import WorkloadOverview from '../components/workload/Overview';
+import LocaleSelect from '../i18n/LocaleSelect/LocaleSelect';
 import CronJob from './k8s/cronJob';
 import Deployment from './k8s/deployment';
 import Job from './k8s/job';
@@ -87,7 +88,11 @@ export const ROUTES: {
     sidebar: null,
     noCluster: true,
     noAuthRequired: true,
-    component: () => <Chooser useCover open />,
+    component: () => (
+      <Chooser useCover open>
+        <LocaleSelect />
+      </Chooser>
+    ),
   },
   namespaces: {
     path: '/namespaces',
