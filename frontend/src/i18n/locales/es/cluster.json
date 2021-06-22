@@ -2,7 +2,7 @@
   "Install the metrics-server to get usage data.": "Instale el metrics-server para obtener datos de uso.",
   "Memory Usage": "Uso de la memoria",
   "{{ available }} units": "{{ available }} unidades",
-  "CPU Usage": "Uso da la CPU",
+  "CPU Usage": "Uso de la CPU",
   "{{ numReady }} / {{ numItems }} Requested": "{{ numReady }} / {{ numItems }} requeridos",
   "Cluster: {{cluster}}": "Cluster: {{cluster}}",
   "Choose a cluster": "Elija un cluster",
