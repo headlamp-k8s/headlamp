@@ -39,9 +39,10 @@ export default function LocaleSelect(props: LocaleSelectProps) {
         onChange={changeLng}
         inputProps={{ 'aria-label': t('Select locale') }}
       >
-        <MenuItem value={'en'}>en</MenuItem>
-        <MenuItem value={'pt'}>pt</MenuItem>
-        <MenuItem value={'es'}>es</MenuItem>
+        {i18n?.options?.supportedLngs &&
+          i18n.options.supportedLngs
+            .filter(lng => lng !== 'cimode')
+            .map(lng => <MenuItem value={lng}>{lng}</MenuItem>)}
       </Select>
     </FormControl>
   );
