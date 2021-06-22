@@ -4,7 +4,6 @@ import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import helpers from '../../helpers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,15 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 export interface LocaleSelectProps {}
-
-// If we're running under electron, we need to communicate any language changes.
-const ipcRenderer = helpers.isElectron() ? window.require('electron').ipcRenderer : null;
-
-function tellAppAboutLanguage(lang: string) {
-  if (ipcRenderer) {
-    ipcRenderer.send('locale', lang);
-  }
-}
 
 /**
  * A UI for selecting the locale with i18next
@@ -34,19 +24,12 @@ export default function LocaleSelect(props: LocaleSelectProps) {
   const theme = useTheme();
   document.body.dir = i18n.dir();
 
-  React.useEffect(() => {
-    // Inform the app about the current locale as soon as we set it up.
-    tellAppAboutLanguage(i18n.language);
-  }, []);
-
   const changeLng = (event: React.ChangeEvent<{ value: unknown }>) => {
     const lng = event.target.value as string;
 
     i18n.changeLanguage(lng);
     document.body.dir = i18n.dir();
     theme.direction = i18n.dir();
-
-    tellAppAboutLanguage(lng);
   };
 
   return (
