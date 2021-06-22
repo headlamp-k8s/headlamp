@@ -11,14 +11,14 @@ exports[`Storyshots ActionsNotifier Some 1`] = `
   id="root"
 >
   <div
-    class="makeStyles-root makeStyles-bottom makeStyles-left makeStyles-bottom makeStyles-left makeStyles-reverseColumns"
+    class="makeStyles-bottom makeStyles-left makeStyles-root"
   >
     <div
-      class="MuiCollapse-container SnackbarItem-collapseContainer MuiCollapse-entered"
+      class="MuiCollapse-container MuiCollapse-entered"
       style="min-height: 0px;"
     >
       <div
-        class="MuiCollapse-wrapper SnackbarItem-collapseWrapper"
+        class="MuiCollapse-wrapper"
       >
         <div
           class="MuiCollapse-wrapperInner"

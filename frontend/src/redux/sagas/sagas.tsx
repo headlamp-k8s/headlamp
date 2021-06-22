@@ -66,6 +66,8 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
     yield delay(CLUSTER_ACTION_GRACE_PERIOD);
   } finally {
     // Check if it's been cancelled.
+    // @ts-ignore: TS7057
+    // @todo: Seems to be an bad-typing issue... this code is idiomatic and did check before.
     if (yield cancelled()) {
       yield put(
         updateClusterAction({
