@@ -361,6 +361,28 @@ interface NameValueTableProps {
   rows: NameValueTableRow[];
 }
 
+function Value({
+  value,
+}: {
+  value: string | JSX.Element | JSX.Element[] | undefined;
+}): JSX.Element | null {
+  if (typeof value === 'undefined') {
+    return null;
+  } else if (typeof value === 'string') {
+    return <ValueLabel>{value}</ValueLabel>;
+  } else if (Array.isArray(value)) {
+    return (
+      <>
+        {value.map((val, i) => (
+          <Value value={val} key={i} />
+        ))}
+      </>
+    );
+  } else {
+    return value;
+  }
+}
+
 export function NameValueTable(props: NameValueTableProps) {
   const classes = useStyles();
   const { rows } = props;
@@ -372,11 +394,9 @@ export function NameValueTable(props: NameValueTableProps) {
           if (hide) return null;
           return (
             <TableRow key={i}>
-              <TableCell key="key" className={classes.metadataNameCell}>
-                {name}
-              </TableCell>
-              <TableCell key="value" scope="row" className={classes.metadataCell}>
-                {typeof value === 'string' ? <ValueLabel>{value}</ValueLabel> : value}
+              <TableCell className={classes.metadataNameCell}>{name}</TableCell>
+              <TableCell scope="row" className={classes.metadataCell}>
+                <Value value={value} />
               </TableCell>
             </TableRow>
           );
