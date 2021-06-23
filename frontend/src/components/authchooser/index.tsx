@@ -47,6 +47,7 @@ function AuthChooser({ children }: AuthChooserProps) {
   const { from = { pathname: createRouteURL('cluster') } } = (location.state ||
     {}) as ReactRouterLocationStateIface;
   const clusterName = getCluster() as string;
+  const { t } = useTranslation('auth');
 
   let clusterAuthType = '';
   if (clusters && clusters[clusterName]) {
@@ -150,9 +151,17 @@ function AuthChooser({ children }: AuthChooserProps) {
 
   return (
     <PureAuthChooser
-      testingTitle={numClusters > 1 ? `Getting auth info: ${clusterName}` : 'Getting auth info'}
+      testingTitle={
+        numClusters > 1
+          ? t('Getting auth info: {{ clusterName }}', { clusterName })
+          : t('Getting auth info')
+      }
       testingAuth={testingAuth}
-      title={numClusters > 1 ? `Authentication: ${clusterName}` : 'Authentication'}
+      title={
+        numClusters > 1
+          ? t('Authentication: {{ clusterName }}', { clusterName })
+          : t('Authentication')
+      }
       haveClusters={!!clusters && Object.keys(clusters).length > 1}
       error={error}
       oauthUrl={`${helpers.getAppUrl()}oidc?dt=${Date()}&cluster=${getCluster()}`}
