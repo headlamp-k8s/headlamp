@@ -46,7 +46,11 @@ export default function LocaleSelect(props: LocaleSelectProps) {
         {i18n?.options?.supportedLngs &&
           i18n.options.supportedLngs
             .filter(lng => lng !== 'cimode')
-            .map(lng => <MenuItem value={lng}>{lng}</MenuItem>)}
+            .map(lng => (
+              <MenuItem value={lng} key={lng}>
+                {lng}
+              </MenuItem>
+            ))}
       </Select>
     </FormControl>
   );
