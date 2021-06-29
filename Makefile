@@ -19,8 +19,11 @@ tools/golangci-lint: backend/go.mod backend/go.sum
 backend-lint: tools/golangci-lint
 	cd backend && ./tools/golangci-lint run
 
+frontend/build:
+	make frontend
+
 .PHONY: app
-app-build:
+app-build: frontend/build
 	cd app && npm install && npm run build
 app: app-build
 	cd app && npm run package -- --win --linux --mac
