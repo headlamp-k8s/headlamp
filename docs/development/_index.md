@@ -89,13 +89,13 @@ make image
 
 ### Running the container image
 
-With docker you can run the Headlamp image(`quay.io/kinvolk/headlamp:latest`).
-Note, the mount arguments add folders that are referenced in the ~/.kube 
-folders - you may need to add other folders if your config refers 
+With docker you can run the Headlamp image(`ghcr.io/kinvolk/headlamp:latest`).
+Note, the mount arguments add folders that are referenced in the ~/.kube
+folders - you may need to add other folders if your config refers
 to more folders.
 
 ```bash
-docker run --network="host" -p 127.0.0.1:4466:4466/tcp --mount type=bind,source="/home/rene/.minikube",target=$HOME/.minikube --mount type=bind,source="$HOME/.kube",target=/root/.kube quay.io/kinvolk/headlamp:latest /headlamp/server -html-static-dir /headlamp/frontend -plugins-dir=/headlamp/plugins
+docker run --network="host" -p 127.0.0.1:4466:4466/tcp --mount type=bind,source="/home/rene/.minikube",target=$HOME/.minikube --mount type=bind,source="$HOME/.kube",target=/root/.kube ghcr.io/kinvolk/headlamp:latest /headlamp/server -html-static-dir /headlamp/frontend -plugins-dir=/headlamp/plugins
 ```
 
 If you want to make a new container image called `kinvolk/headlamp:development`

@@ -2,22 +2,35 @@ name: Publish container
 on:
   push:
     tags:
-    - '*'
+    - 'v*'
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: kinvolk/headlamp
 jobs:
   push_to_registry:
     name: Test building container image
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
-    - name: Get tag
-      id: gettag
-      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-    - name: Build & Push image
-      uses: docker/build-push-action@v1
+    - name: Log in to the Container registry
+      uses: docker/login-action@v1
       with:
-        username: ${{ secrets.QUAY_USERNAME }}
-        password: ${{ secrets.QUAY_PASSWORD }}
-        registry: quay.io
-        repository: kinvolk/headlamp
-        tags: "${{ steps.gettag.outputs.tag }},latest"
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v3
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
