@@ -2,7 +2,7 @@ name: Publish container
 on:
   push:
     tags:
-    - '*'
+    - 'v*'
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: kinvolk/headlamp
