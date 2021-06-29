@@ -58,3 +58,22 @@ jobs:
       run: |
         npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
         make app-win
+  build-mac:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2.3.3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - uses: actions/setup-go@v2
+      with:
+        go-version: ^1.15
+    - name: Dependencies
+      run: brew install make
+    - name: App Mac
+      run: |
+        make app-mac
