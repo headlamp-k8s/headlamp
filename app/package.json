@@ -44,13 +44,6 @@
             "x64",
             "arm64"
           ]
-        },
-        {
-          "target": "pkg",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
         }
       ],
       "hardenedRuntime": true,
@@ -65,9 +58,7 @@
     },
     "win": {
       "target": [
-        "zip",
-        "msi",
-        "nsis"
+        "msi"
       ],
       "extraResources": [
         {

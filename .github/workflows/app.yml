@@ -1,0 +1,79 @@
+name: Build App
+
+on:
+  pull_request:
+    paths:
+    - 'frontend/**'
+    - 'Makefile'
+    - '.github/**'
+    - 'app/**'
+    - 'backend/**'
+  push:
+    branches:
+      - master
+    paths:
+    - 'frontend/**'
+    - Makefile
+    - '.github/**'
+    - 'app/**'
+    - 'backend/**'
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2.3.3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - uses: actions/setup-go@v2
+      with:
+        go-version: ^1.15
+    - name: App linux
+      run: |
+        make app-linux
+  build-windows:
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2.3.3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - uses: actions/setup-go@v2
+      with:
+        go-version: ^1.15
+    - name: Dependencies
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install make
+    - name: App Windows
+      run: |
+        npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
+        make app-win
+  build-mac:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2.3.3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - uses: actions/setup-go@v2
+      with:
+        go-version: ^1.15
+    - name: Dependencies
+      run: brew install make
+    - name: App Mac
+      run: |
+        make app-mac
