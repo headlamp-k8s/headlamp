@@ -74,7 +74,7 @@ ___
 
 Add a Route for a component.
 
-**`see`** [Route examples](https://github.com/kinvolk/headlamp/blob/master/frontend/src/lib/router.tsx)
+**`see`** [Route examples](https://github.com/kinvolk/headlamp/blob/main/frontend/src/lib/router.tsx)
 
 **`example`** 
 

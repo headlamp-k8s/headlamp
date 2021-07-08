@@ -46,7 +46,7 @@ export default class Registry {
    *
    * @param routeSpec - details of URL, highlighted sidebar and component to use.
    *
-   * @see {@link https://github.com/kinvolk/headlamp/blob/master/frontend/src/lib/router.tsx Route examples}
+   * @see {@link https://github.com/kinvolk/headlamp/blob/main/frontend/src/lib/router.tsx Route examples}
    *
    * @example
    *
