@@ -8,7 +8,7 @@ on:
     - '.github/**'
   push:
     branches:
-      - master
+      - main
     paths:
     - 'frontend/**'
     - Makefile

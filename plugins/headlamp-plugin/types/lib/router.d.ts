@@ -1,6 +1,6 @@
 /// <reference types="react" />
 /**
- * @see {@link https://github.com/kinvolk/headlamp/blob/master/frontend/src/lib/router.tsx Route examples}
+ * @see {@link https://github.com/kinvolk/headlamp/blob/main/frontend/src/lib/router.tsx Route examples}
  */
 export interface Route {
     /** Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands. */

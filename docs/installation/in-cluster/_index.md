@@ -6,7 +6,7 @@ weight: 10
 A common use-case for any Kubernetes web UI is to deploy it in-cluster and
 set up an ingress server for having it available to users.
 
-We maintain a simple/vanilla [file](https://github.com/kinvolk/headlamp/blob/master/kubernetes-headlamp.yaml)
+We maintain a simple/vanilla [file](https://github.com/kinvolk/headlamp/blob/main/kubernetes-headlamp.yaml)
 for setting up a Headlamp deployment and service. Be sure to review it and change
 anything you need.
 
@@ -15,7 +15,7 @@ you have a running Kubernetes cluster and your `kubeconfig` pointing to it,
 you can run:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/kinvolk/headlamp/master/kubernetes-headlamp.yaml
+kubectl apply -f https://raw.githubusercontent.com/kinvolk/headlamp/main/kubernetes-headlamp.yaml
 ```
 
 ## Exposing Headlamp with an ingress server
@@ -31,7 +31,7 @@ Assuming your URL is `headlamp.mydeployment.io`, getting the sample ingress
 file and changing the URL can quickly be done by:
 
 ```bash
-curl -s https://raw.githubusercontent.com/kinvolk/headlamp/master/kubernetes-headlamp-ingress-sample.yaml | sed -e s/__URL__/headlamp.mydeployment.io/ > headlamp-ingress.yaml
+curl -s https://raw.githubusercontent.com/kinvolk/headlamp/main/kubernetes-headlamp-ingress-sample.yaml | sed -e s/__URL__/headlamp.mydeployment.io/ > headlamp-ingress.yaml
 ```
 
 and with that, you'll have a configured ingress file, so verify it and apply it:
