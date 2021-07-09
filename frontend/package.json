@@ -138,8 +138,8 @@
     "lint-staged": "^10.5.4",
     "monaco-editor-webpack-plugin": "^4.0.0",
     "prettier": "^2.3.2",
-    "typedoc": "^0.20.28",
-    "typedoc-hugo-theme": "^0.2.0",
-    "typedoc-plugin-markdown": "^3.6.0"
+    "typedoc": "^0.21.4",
+    "typedoc-hugo-theme": "^0.2.1",
+    "typedoc-plugin-markdown": "^3.10.3"
   }
 }
