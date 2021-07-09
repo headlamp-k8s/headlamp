@@ -26,11 +26,11 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/semver": "^7.3.4",
     "@types/webpack-env": "^1.16.0",
-    "@typescript-eslint/eslint-plugin": "^4.14.2",
-    "@typescript-eslint/parser": "^4.14.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
     "ansi-to-react": "^6.1.4",
     "cross-env": "^7.0.3",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
@@ -58,7 +58,7 @@
     "redux-saga": "^1.1.3",
     "rimraf": "^3.0.2",
     "semver": "^7.3.4",
-    "typescript": "^4.1.3",
+    "typescript": "^4.3.5",
     "xterm": "^4.10.0"
   },
   "scripts": {
@@ -102,7 +102,6 @@
     "extends": [
       "@kinvolk",
       "prettier",
-      "prettier/react",
       "plugin:jsx-a11y/recommended"
     ]
   },
@@ -135,13 +134,13 @@
     "@storybook/node-logger": "^6.3.0-rc.11",
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.3.0-rc.11",
-    "eslint": "^7.19.0",
+    "eslint": "^7.30.0",
     "http-proxy-middleware": "^1.0.6",
     "husky": "^4.3.8",
     "i18next-parser": "^4.2.0",
     "lint-staged": "^10.5.4",
     "monaco-editor-webpack-plugin": "^4.0.0",
-    "prettier": "^2.2.1",
+    "prettier": "^2.3.2",
     "typedoc": "^0.20.28",
     "typedoc-hugo-theme": "^0.2.0",
     "typedoc-plugin-markdown": "^3.6.0"
