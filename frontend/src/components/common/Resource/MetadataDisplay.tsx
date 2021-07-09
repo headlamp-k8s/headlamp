@@ -61,41 +61,43 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
     ));
   }
 
-  const mainRows = ([
-    {
-      name: t('frequent|Name'),
-      value: resource.metadata.name,
-    },
-    {
-      name: t('glossary|Namespace'),
-      value: resource.metadata.namespace && resource.metadata.namespace,
-      hide: !resource.metadata.namespace,
-    },
-    {
-      name: t('Creation'),
-      value: localeDate(resource.metadata.creationTimestamp),
-    },
-    {
-      name: t('Labels'),
-      value: resource.metadata.labels && <MetadataDictGrid dict={resource.metadata.labels} />,
-      hide: !resource.metadata.labels,
-    },
-    {
-      name: t('Annotations'),
-      value: resource.metadata.annotations && (
-        <MetadataDictGrid dict={resource.metadata.annotations} />
-      ),
-      hide: !resource.metadata.annotations,
-    },
-    {
-      name:
-        resource.metadata.ownerReferences && resource.metadata.ownerReferences.length > 1
-          ? t('Owner refs')
-          : t('Controlled by'),
-      value: makeOwnerReferences(resource.metadata.ownerReferences || []),
-      hide: !resource.metadata.ownerReferences || resource.metadata.ownerReferences.length === 0,
-    },
-  ] as NameValueTableRow[]).concat(extraRows || []);
+  const mainRows = (
+    [
+      {
+        name: t('frequent|Name'),
+        value: resource.metadata.name,
+      },
+      {
+        name: t('glossary|Namespace'),
+        value: resource.metadata.namespace && resource.metadata.namespace,
+        hide: !resource.metadata.namespace,
+      },
+      {
+        name: t('Creation'),
+        value: localeDate(resource.metadata.creationTimestamp),
+      },
+      {
+        name: t('Labels'),
+        value: resource.metadata.labels && <MetadataDictGrid dict={resource.metadata.labels} />,
+        hide: !resource.metadata.labels,
+      },
+      {
+        name: t('Annotations'),
+        value: resource.metadata.annotations && (
+          <MetadataDictGrid dict={resource.metadata.annotations} />
+        ),
+        hide: !resource.metadata.annotations,
+      },
+      {
+        name:
+          resource.metadata.ownerReferences && resource.metadata.ownerReferences.length > 1
+            ? t('Owner refs')
+            : t('Controlled by'),
+        value: makeOwnerReferences(resource.metadata.ownerReferences || []),
+        hide: !resource.metadata.ownerReferences || resource.metadata.ownerReferences.length === 0,
+      },
+    ] as NameValueTableRow[]
+  ).concat(extraRows || []);
 
   return <NameValueTable rows={mainRows} />;
 }

@@ -67,7 +67,7 @@
     "test": "cross-env TEST_TZ=true react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint -c package.json --ext .js,.ts,.tsx src/ ../app/electron",
-    "format": "prettier --config package.json --write src/ ../app/electron",
+    "format": "prettier --config package.json --write src ../app/electron",
     "storybook": "start-storybook -p 6006 -s public",
     "build-typedoc": "npx typedoc",
     "build-storybook": "build-storybook -s public -o ../docs/development/storybook",
