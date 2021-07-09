@@ -127,7 +127,7 @@
   },
   "prettier": "@kinvolk/eslint-config/prettier-config",
   "devDependencies": {
-    "@axe-core/react": "^4.2.1",
+    "@axe-core/react": "^4.2.2",
     "@storybook/addon-actions": "^6.3.0-rc.11",
     "@storybook/addon-essentials": "^6.3.0-rc.11",
     "@storybook/addon-links": "^6.3.0-rc.11",
