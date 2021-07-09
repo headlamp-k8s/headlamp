@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles(() => ({
   editor: {
     width: '100%',
     minHeight: '40vh',

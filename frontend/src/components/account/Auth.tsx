@@ -7,7 +7,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Snackbar from '@material-ui/core/Snackbar';
 import TextField from '@material-ui/core/TextField';
-import { Location } from 'history';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { generatePath, useHistory } from 'react-router-dom';
@@ -16,10 +15,6 @@ import { useClustersConf } from '../../lib/k8s';
 import { testAuth } from '../../lib/k8s/apiProxy';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { ClusterDialog } from '../cluster/Chooser';
-
-interface ReactRouterLocationStateIface {
-  from?: Location;
-}
 
 export default function AuthToken() {
   const history = useHistory();

@@ -1,8 +1,7 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import Link, { LinkObjectProps, LinkProps } from './Link';
+import Link, { LinkProps } from './Link';
 
 export default {
   title: 'Link',

@@ -13,7 +13,6 @@ import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 import Editor, { loader } from '@monaco-editor/react';
 import * as yaml from 'js-yaml';
-import * as Monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
@@ -62,16 +61,8 @@ interface EditorDialogProps extends DialogProps {
 }
 
 export default function EditorDialog(props: EditorDialogProps) {
-  const {
-    item,
-    onClose,
-    onSave,
-    onEditorChanged,
-    saveLabel,
-    errorMessage,
-    title,
-    ...other
-  } = props;
+  const { item, onClose, onSave, onEditorChanged, saveLabel, errorMessage, title, ...other } =
+    props;
   const editorOptions = {
     selectOnLineNumbers: true,
     readOnly: isReadOnly(),
@@ -121,7 +112,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     return onSave === null;
   }
 
-  function onChange(value: string | undefined, ev: Monaco.editor.IModelContentChangedEvent): void {
+  function onChange(value: string | undefined): void {
     setCode(value as string);
 
     if (error && getObjectFromCode(value as string)) {

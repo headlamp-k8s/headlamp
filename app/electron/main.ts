@@ -19,13 +19,13 @@ const args = yargs
   })
   .parse();
 const isHeadlessMode = args.headless;
-const disableGPU = args['disable-gpu']
+const disableGPU = args['disable-gpu'];
 const defaultPort = 4466;
 
 function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   const serverFilePath = path.join(process.resourcesPath, './server');
 
-  const options = {shell: true, detached: false};
+  const options = { shell: true, detached: false };
   if (process.platform !== 'win32') {
     // This makes the child processes a separate group, for easier killing.
     options.detached = true;
@@ -41,7 +41,7 @@ let serverProcessQuit: boolean;
 function quitServerProcess() {
   if (!serverProcess || serverProcessQuit) {
     log.error('server process already not running');
-    return
+    return;
   }
 
   intentionalQuit = true;
@@ -66,19 +66,19 @@ function setMenu(i18n: I18n) {
   const sep = { type: 'separator' };
   const aboutMenu = {
     label: i18n.t('About'),
-    role: 'about'
-  }
+    role: 'about',
+  };
   const quitMenu = {
     label: i18n.t('Quit'),
-    role: 'quit'
+    role: 'quit',
   };
   const selectAllMenu = {
     label: i18n.t('Select All'),
-    role: 'selectAll'
-  }
+    role: 'selectAll',
+  };
   const deleteMenu = {
     label: i18n.t('Delete'),
-    role: 'delete'
+    role: 'delete',
   };
 
   const template = [
@@ -92,20 +92,20 @@ function setMenu(i18n: I18n) {
               sep,
               {
                 label: i18n.t('Services'),
-                role: 'services'
+                role: 'services',
               },
               sep,
               {
                 label: i18n.t('Hide Headlamp'),
-                role: 'hide'
+                role: 'hide',
               },
               {
                 label: i18n.t('Hide Others'),
-                role: 'hideothers'
+                role: 'hideothers',
               },
               {
                 label: i18n.t('Show All'),
-                role: 'unhide'
+                role: 'unhide',
               },
               sep,
               quitMenu,
@@ -116,13 +116,13 @@ function setMenu(i18n: I18n) {
     // { role: 'fileMenu' }
     {
       label: i18n.t('File'),
-      submenu: [isMac ?
-        {
-          label: i18n.t('Close'),
-          role: 'close'
-        }
-      :
-        quitMenu
+      submenu: [
+        isMac
+          ? {
+              label: i18n.t('Close'),
+              role: 'close',
+            }
+          : quitMenu,
       ],
     },
     // { role: 'editMenu' }
@@ -131,21 +131,21 @@ function setMenu(i18n: I18n) {
       submenu: [
         {
           label: i18n.t('Cut'),
-          role: 'cut'
+          role: 'cut',
         },
         {
           label: i18n.t('Copy'),
-          role: 'copy'
+          role: 'copy',
         },
         {
           label: i18n.t('Paste'),
-          role: 'paste'
+          role: 'paste',
         },
         ...(isMac
           ? [
               {
                 label: i18n.t('Paste and Match Style'),
-                role: 'pasteAndMatchStyle'
+                role: 'pasteAndMatchStyle',
               },
               deleteMenu,
               selectAllMenu,
@@ -155,19 +155,16 @@ function setMenu(i18n: I18n) {
                 submenu: [
                   {
                     label: i18n.t('Start Speaking'),
-                    role: 'startspeaking'
+                    role: 'startspeaking',
                   },
                   {
                     label: i18n.t('Stop Speaking'),
-                    role: 'stopspeaking'
-                  }],
+                    role: 'stopspeaking',
+                  },
+                ],
               },
             ]
-          : [
-              deleteMenu,
-              sep,
-              selectAllMenu
-            ]),
+          : [deleteMenu, sep, selectAllMenu]),
       ],
     },
     // { role: 'viewMenu' }
@@ -176,29 +173,29 @@ function setMenu(i18n: I18n) {
       submenu: [
         {
           label: i18n.t('Reload'),
-          role: 'forcereload'
+          role: 'forcereload',
         },
         {
           label: i18n.t('Toggle Developer Tools'),
-          role: 'toggledevtools'
+          role: 'toggledevtools',
         },
         sep,
         {
           label: i18n.t('Reset Zoom'),
-          role: 'resetzoom'
+          role: 'resetzoom',
         },
         {
           label: i18n.t('Zoom In'),
-          role: 'zoomin'
+          role: 'zoomin',
         },
         {
           label: i18n.t('Zoom Out'),
-          role: 'zoomout'
+          role: 'zoomout',
         },
         sep,
         {
           label: i18n.t('Toogle Fullscreen'),
-          role: 'togglefullscreen'
+          role: 'togglefullscreen',
         },
       ],
     },
@@ -207,24 +204,27 @@ function setMenu(i18n: I18n) {
       submenu: [
         {
           label: i18n.t('Minimize'),
-          role: 'minimize'
+          role: 'minimize',
         },
         ...(isMac
           ? [
               sep,
               {
                 label: i18n.t('Bring All to Front'),
-                role: 'front'
+                role: 'front',
               },
               sep,
               {
                 label: i18n.t('Window'),
-                role: 'window' }
-              ]
-          : [{
+                role: 'window',
+              },
+            ]
+          : [
+              {
                 label: i18n.t('Close'),
-                role: 'close'
-            }]),
+                role: 'close',
+              },
+            ]),
       ],
     },
     {
@@ -278,10 +278,12 @@ function startElecron() {
         slashes: true,
       });
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-    mainWindow = new BrowserWindow({ width, height ,
+    mainWindow = new BrowserWindow({
+      width,
+      height,
       webPreferences: {
         nodeIntegration: true,
-        contextIsolation: false
+        contextIsolation: false,
       },
     });
     mainWindow.loadURL(startUrl);
@@ -291,7 +293,7 @@ function startElecron() {
 
     i18n.on('languageChanged', () => {
       setMenu(i18n);
-    })
+    });
 
     ipcMain.on('locale', (event: IpcMainEvent, newLocale: string) => {
       if (!!newLocale && i18n.language !== newLocale) {
@@ -315,7 +317,7 @@ function startElecron() {
     }
   }
 
-  autoUpdater.on('update-not-available', info => {
+  autoUpdater.on('update-not-available', () => {
     sendStatusToWindow('Update not available.');
   });
 
@@ -332,7 +334,7 @@ function startElecron() {
   });
 
   if (disableGPU) {
-    log.info("Disabling GPU hardware acceleration.");
+    log.info('Disabling GPU hardware acceleration.');
     app.disableHardwareAcceleration();
   }
 

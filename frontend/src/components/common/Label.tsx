@@ -112,7 +112,7 @@ export function makeStatusLabel(label: string, successStatusName: string) {
   );
 }
 
-const useHeaderLabelStyles = makeStyles(theme => ({
+const useHeaderLabelStyles = makeStyles(() => ({
   value: {
     fontSize: '3rem;',
   },

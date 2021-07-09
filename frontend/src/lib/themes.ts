@@ -164,7 +164,7 @@ export function usePrefersColorScheme() {
  * Hook gets theme based on user preference, and also OS/Browser preference.
  * @returns 'light' | 'dark' theme name
  */
-export function getThemeName(user = false): string {
+export function getThemeName(): string {
   const themePreference: string = localStorage.headlampThemePreference;
 
   if (typeof window.matchMedia !== 'function') {
@@ -189,6 +189,5 @@ export function getThemeName(user = false): string {
 }
 
 export function setTheme(themeName: string) {
-  const selectedTheme: string = localStorage.headlampSelectedTheme;
   localStorage.headlampThemePreference = themeName;
 }

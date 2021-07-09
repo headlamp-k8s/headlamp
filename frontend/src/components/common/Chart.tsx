@@ -16,7 +16,7 @@ import {
 } from 'recharts';
 import Loader from './Loader';
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles(() => ({
   title: {
     textAlign: 'center',
     fontSize: '1.2em',

@@ -3,10 +3,9 @@ import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { generatePath, useHistory } from 'react-router';
+import { generatePath } from 'react-router';
 import { createRouteURL, getRoute } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
-import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SidebarEntry } from '../../redux/reducers/ui';
 import ListItemLink from './ListItemLink';
 

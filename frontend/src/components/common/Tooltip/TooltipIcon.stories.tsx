@@ -1,8 +1,5 @@
 import minusCircle from '@iconify/icons-mdi/plus-circle';
-import { Icon } from '@iconify/react';
-import IconButton from '@material-ui/core/IconButton';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import TooltipIcon, { TooltipIconProps } from './TooltipIcon';
 

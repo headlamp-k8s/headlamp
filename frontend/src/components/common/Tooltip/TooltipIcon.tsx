@@ -2,7 +2,6 @@ import informationOutline from '@iconify/icons-mdi/information-outline';
 import { Icon, IconifyIcon } from '@iconify/react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import TooltipLight from './TooltipLight';
 

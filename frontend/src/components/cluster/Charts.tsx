@@ -26,7 +26,6 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
     resourceUsedGetter,
     resourceAvailableGetter,
     title,
-    tooltip,
     ...others
   } = props;
   const { t } = useTranslation(['cluster']);

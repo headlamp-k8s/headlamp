@@ -1,6 +1,5 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
-import Namespace from '../../lib/k8s/namespace';
 import {
   PureNamespacesAutocomplete,
   PureNamespacesAutocompleteProps,
@@ -17,11 +16,7 @@ const Template: Story<PureNamespacesAutocompleteProps> = args => {
     namespaces: new Set([]),
     search: '',
   });
-  const [namespaceNames, setNamespaceNames] = React.useState<string[]>([
-    'default',
-    'kube-system',
-    'kube-public',
-  ]);
+  const namespaceNames = React.useState<string[]>(['default', 'kube-system', 'kube-public'])[0];
 
   const onChange = (event: React.ChangeEvent<{}>, newValue: string[]) => {
     setFilter({

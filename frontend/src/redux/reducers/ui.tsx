@@ -1,4 +1,4 @@
-import { getThemeName, setTheme } from '../../lib/themes';
+import { setTheme } from '../../lib/themes';
 import {
   Action,
   HeaderActionFunc,

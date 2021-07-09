@@ -18,7 +18,7 @@ import Pod from '../../lib/k8s/pod';
 const decoder = new TextDecoder('utf-8');
 const encoder = new TextEncoder();
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles(() => ({
   dialogContent: {
     height: '80%',
     minHeight: '80%',
