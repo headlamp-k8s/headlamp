@@ -14,7 +14,6 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@types/javascript-time-ago": "^2.0.3",
-    "@types/js-base64": "^2.3.1",
     "@types/js-yaml": "^3.12.4",
     "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.25",
