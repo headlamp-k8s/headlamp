@@ -39,7 +39,6 @@
     "if-env": "^1.0.4",
     "javascript-time-ago": "^2.3.4",
     "js-base64": "^3.6.0",
-    "js-cookie": "^2.2.1",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.25.2",
