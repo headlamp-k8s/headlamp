@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
 import { generatePath } from 'react-router';
-import { patch } from 'semver';
 import AuthToken from '../components/account/Auth';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
@@ -35,7 +34,6 @@ import ServiceDetails from '../components/service/Details';
 import ServiceList from '../components/service/List';
 import ServiceAccountDetails from '../components/serviceaccount/Details';
 import ServiceAccountList from '../components/serviceaccount/List';
-import Sidebar from '../components/Sidebar';
 import StatefulSetDetails from '../components/statefulset/Details';
 import StatefulSetList from '../components/statefulset/List';
 import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';

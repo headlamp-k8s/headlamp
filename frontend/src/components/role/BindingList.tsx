@@ -15,9 +15,8 @@ interface RoleBindingDict {
 export default function RoleBindingList() {
   const [bindings, setBindings] = React.useState<RoleBindingDict | null>(null);
   const [roleBindingError, onRoleBindingError] = useErrorState(setupRoleBindings);
-  const [clusterRoleBindingError, onClusterRoleBindingError] = useErrorState(
-    setupClusterRoleBindings
-  );
+  const [clusterRoleBindingError, onClusterRoleBindingError] =
+    useErrorState(setupClusterRoleBindings);
   const { t } = useTranslation('glossary');
   const filterFunc = useFilterFunc();
 

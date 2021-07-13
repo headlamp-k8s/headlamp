@@ -163,9 +163,12 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       useConnectApi(this.apiList(listCallback, onError));
     }
 
-    static useList<U extends KubeObject>(
-      onList?: (...arg: any[]) => any
-    ): [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
+    static useList<U extends KubeObject>(): [
+      U[] | null,
+      ApiError | null,
+      (items: U[]) => void,
+      (err: ApiError | null) => void
+    ] {
       const [objList, setObjList] = React.useState<U[] | null>(null);
       const [error, setError] = useErrorState(setObjList);
 

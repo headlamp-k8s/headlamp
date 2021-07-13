@@ -1,5 +1,4 @@
 const path = require('path');
-const fs = require('fs');
 const helper = require('./i18n-helper');
 
 module.exports = {

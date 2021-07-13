@@ -18,8 +18,9 @@ export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
   const { workloadData, partialLabel = '', totalLabel = '', ...other } = props;
 
   const total = workloadData.length;
-  const partial = workloadData.filter(item => getReadyReplicas(item) !== getTotalReplicas(item))
-    .length;
+  const partial = workloadData.filter(
+    item => getReadyReplicas(item) !== getTotalReplicas(item)
+  ).length;
 
   function makeData() {
     return [

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../helpers';
 
@@ -15,7 +15,7 @@ function tellAppAboutLanguage(lang: string) {
 export function useElectronI18n() {
   const { i18n } = useTranslation();
 
-  useEffect(() => {
+  React.useEffect(() => {
     i18n.on('languageChanged', tellAppAboutLanguage);
     return () => {
       i18n.off('languageChanged', tellAppAboutLanguage);

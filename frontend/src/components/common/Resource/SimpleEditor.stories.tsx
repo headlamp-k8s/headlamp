@@ -12,12 +12,7 @@ export default {
 const Template: Story<SimpleEditorProps> = args => {
   const [value, setValue] = React.useState<string | undefined>('');
   return (
-    <SimpleEditor
-      {...args}
-      value={value}
-      onChange={(value, event) => setValue(value)}
-      language="yaml"
-    />
+    <SimpleEditor {...args} value={value} onChange={value => setValue(value)} language="yaml" />
   );
 };
 

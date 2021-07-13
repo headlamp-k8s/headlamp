@@ -1,6 +1,5 @@
 import { withStyles } from '@material-ui/core/styles';
 import Tooltip, { TooltipProps as TooltipLightProps } from '@material-ui/core/Tooltip';
-import React from 'react';
 
 const TooltipLight = withStyles(theme => ({
   tooltip: {

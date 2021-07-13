@@ -37,7 +37,7 @@ Error.args = {
 export const NoError = Template.bind({});
 NoError.args = {
   testAuth: () => {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve) {
       resolve('fine');
     });
   },

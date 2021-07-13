@@ -8,4 +8,3 @@ fs.readdirSync(directoryPath).forEach(file => currentLocales.push(file));
 
 export { currentLocales as CURRENT_LOCALES };
 export { directoryPath as LOCALES_DIR };
-
