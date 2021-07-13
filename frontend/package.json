@@ -50,7 +50,7 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
-    "recharts": "^2.0.4",
+    "recharts": "^2.0.10",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
     "rimraf": "^3.0.2",
