@@ -15,7 +15,7 @@
       "module": "ESNext",
       "moduleResolution": "node",
       "noFallthroughCasesInSwitch": true,
-      "outDir": "electron/src/",
+      "outDir": "electron/",
       "noEmit": true
     },
     "include": [
