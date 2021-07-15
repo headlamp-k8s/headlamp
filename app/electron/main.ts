@@ -1,8 +1,8 @@
+import { Octokit } from '@octokit/core';
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
-import { autoUpdater } from 'electron-updater';
 import { i18n as I18n } from 'i18next';
 import open from 'open';
 import path from 'path';
@@ -288,6 +288,27 @@ function startElecron() {
       },
     });
     mainWindow.loadURL(startUrl);
+
+    mainWindow.webContents.on('dom-ready', () => {
+      const octokit = new Octokit();
+      const appVersion = app.getVersion();
+
+      async function fetchLatestRelease() {
+        const response = await octokit.request('GET /repos/{owner}/{repo}/releases/latest', {
+          owner: 'kinvolk',
+          repo: 'headlamp',
+        });
+
+        if (response.data.name !== appVersion) {
+          mainWindow.webContents.send('update_available', {
+            downloadURL: response.data.html_url,
+            releaseNotes: response.data.body,
+          });
+        }
+      }
+      fetchLatestRelease();
+    });
+
     mainWindow.on('closed', () => {
       mainWindow = null;
     });
@@ -302,37 +323,11 @@ function startElecron() {
       }
     });
 
-    autoUpdater.checkForUpdatesAndNotify();
-
     if (!isDev) {
       serverProcess = startServer();
       attachServerEventHandlers(serverProcess);
     }
   }
-  autoUpdater.autoDownload = true;
-
-  function sendStatusToWindow(text: string) {
-    log.info(`Sending status to window: ${text}`);
-    if (mainWindow) {
-      mainWindow.webContents.send('message', text);
-    }
-  }
-
-  autoUpdater.on('update-not-available', () => {
-    sendStatusToWindow('Update not available.');
-  });
-
-  autoUpdater.on('checking-for-update', () => {
-    sendStatusToWindow('Checking for update...');
-  });
-
-  autoUpdater.on('update-available', () => {
-    sendStatusToWindow('Update is available');
-  });
-
-  autoUpdater.on('update-downloaded', () => {
-    sendStatusToWindow('Update downloaded');
-  });
 
   if (disableGPU) {
     log.info('Disabling GPU hardware acceleration.');
