@@ -282,8 +282,9 @@ function startElecron() {
       width,
       height,
       webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false,
+        nodeIntegration: false,
+        contextIsolation: true,
+        preload: `${__dirname}/preload.js`,
       },
     });
     mainWindow.loadURL(startUrl);
