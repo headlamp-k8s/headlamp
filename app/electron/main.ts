@@ -284,6 +284,7 @@ function startElecron() {
       webPreferences: {
         nodeIntegration: false,
         contextIsolation: true,
+        preload: `${__dirname}/preload.js`,
       },
     });
     mainWindow.loadURL(startUrl);

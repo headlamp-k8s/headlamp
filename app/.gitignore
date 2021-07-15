@@ -5,3 +5,4 @@
 /prod_deps
 /electron/i18next.config.js
 /electron/i18n-helper.js
+/electron/preload.js
