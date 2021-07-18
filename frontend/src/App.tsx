@@ -1,8 +1,6 @@
 import './i18n/config';
 import accountIcon from '@iconify/icons-mdi/account';
 import logoutIcon from '@iconify/icons-mdi/logout';
-import darkIcon from '@iconify/icons-mdi/weather-night';
-import lightIcon from '@iconify/icons-mdi/weather-sunny';
 import { Icon } from '@iconify/react';
 import { Box } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
@@ -19,7 +17,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Provider, useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
 import {
   BrowserRouter,
   HashRouter,
@@ -29,6 +27,7 @@ import {
   Switch,
   useHistory,
 } from 'react-router-dom';
+import ThemeChangeButton from './components/App/ThemeChangeButton';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
@@ -41,10 +40,9 @@ import ThemeProviderNexti18n from './i18n/ThemeProviderNexti18n';
 import { getToken, setToken } from './lib/auth';
 import { useCluster, useClustersConf } from './lib/k8s';
 import { createRouteURL, getRoutePath, ROUTES } from './lib/router';
-import themes, { getThemeName, ThemesConf, usePrefersColorScheme } from './lib/themes';
+import themes, { getThemeName, usePrefersColorScheme } from './lib/themes';
 import { getCluster } from './lib/util';
 import { initializePlugins } from './plugin';
-import { setTheme as setThemeRedux } from './redux/actions/actions';
 import { useTypedSelector } from './redux/reducers/reducers';
 import store from './redux/stores/store';
 
@@ -199,38 +197,6 @@ function TopBar() {
         </Menu>
       </span>
     </>
-  );
-}
-
-function ThemeChangeButton() {
-  const themeName = getThemeName();
-
-  const dispatch = useDispatch();
-  const { t } = useTranslation('frequent');
-  type iconType = typeof darkIcon;
-
-  const counterIcons: {
-    [themeName in keyof ThemesConf]: iconType;
-  } = {
-    light: darkIcon,
-    dark: lightIcon,
-  };
-
-  const [icon, setIcon] = React.useState<iconType>(counterIcons[themeName]);
-
-  const themeNames = Object.keys(counterIcons);
-
-  function changeTheme() {
-    const idx = themeNames.indexOf(themeName);
-    const newTheme = themeNames[(idx + 1) % themeNames.length];
-    dispatch(setThemeRedux(newTheme));
-    setIcon(counterIcons[newTheme]);
-  }
-
-  return (
-    <IconButton aria-label={t('Change theme')} onClick={() => changeTheme()}>
-      <Icon icon={icon} />
-    </IconButton>
   );
 }
 
