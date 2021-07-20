@@ -11,7 +11,7 @@ import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
 import Sidebar, { NavigationTabs } from '../Sidebar';
 import { drawerWidth } from '../Sidebar';
-// import HeadlampButton from '../Sidebar/HeadlampButton';
+import HeadlampButton from '../Sidebar/HeadlampButton';
 import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
 
@@ -47,9 +47,11 @@ const useStyle = makeStyles(theme => ({
 export interface LayoutProps {
   /** If the sidebar is fully expanded open or shrunk. */
   isSidebarOpen: boolean;
+  /** Called when sidebar toggles between open and closed. */
+  onToggleOpen: () => void;
 }
 
-export default function Layout({ isSidebarOpen }: LayoutProps) {
+export default function Layout({ isSidebarOpen, onToggleOpen }: LayoutProps) {
   const classes = useStyle({ isSidebarOpen });
 
   return (
@@ -68,7 +70,7 @@ export default function Layout({ isSidebarOpen }: LayoutProps) {
           aria-label="Appbar Tools"
         >
           <Toolbar>
-            {/*<HeadlampButton open={false} onToggleOpen={() => {}} />*/}
+            <HeadlampButton open={isSidebarOpen} mobileOnly onToggleOpen={onToggleOpen} />
             <div style={{ flex: '1 0 0' }} />
             <ClusterTitle />
             <div style={{ flex: '1 0 0' }} />
