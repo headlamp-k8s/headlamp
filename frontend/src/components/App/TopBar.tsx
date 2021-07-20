@@ -15,20 +15,13 @@ import { useCluster } from '../../lib/k8s';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import ThemeChangeButton from './ThemeChangeButton';
 
+// import Grid from '@material-ui/core/Grid';
+// import List from '@material-ui/core/List';
+
 export default function TopBar() {
   const appBarActions = useTypedSelector(state => state.ui.views.appBar.actions);
-  const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const cluster = useCluster();
   const history = useHistory();
-  const { t } = useTranslation('frequent');
-
-  function handleMenu(event: any) {
-    setMenuAnchorEl(event.currentTarget);
-  }
-
-  function handleClose() {
-    setMenuAnchorEl(null);
-  }
 
   function hasToken() {
     return !!cluster ? !!getToken(cluster) : false;
@@ -38,9 +31,24 @@ export default function TopBar() {
     if (!!cluster) {
       setToken(cluster, null);
     }
-    setMenuAnchorEl(null);
     history.push('/');
   }
+
+  return <PureTopBar appBarActions={appBarActions} logout={logout} hasToken={hasToken()} />;
+}
+
+export interface PureTopBarProps {
+  /** If the sidebar is fully expanded open or shrunk. */
+  appBarActions: {
+    [name: string]: (...args: any[]) => JSX.Element | null;
+  };
+  logout: () => void;
+  hasToken: boolean;
+}
+
+export function PureTopBar({ appBarActions, logout, hasToken }: PureTopBarProps) {
+  const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
+  const { t } = useTranslation('frequent');
 
   return (
     <>
@@ -56,7 +64,9 @@ export default function TopBar() {
         aria-label={t('User menu')}
         aria-controls="customized-menu"
         aria-haspopup="true"
-        onClick={handleMenu}
+        onClick={(event: any) => {
+          setMenuAnchorEl(event.currentTarget);
+        }}
         color="inherit"
       >
         <Icon icon={accountIcon} />
@@ -66,7 +76,7 @@ export default function TopBar() {
         <Menu
           anchorEl={menuAnchorEl}
           open={!!menuAnchorEl}
-          onClose={handleClose}
+          onClose={() => setMenuAnchorEl(null)}
           anchorOrigin={{
             vertical: 'top',
             horizontal: 'right',
@@ -76,11 +86,19 @@ export default function TopBar() {
             horizontal: 'right',
           }}
         >
-          <MenuItem component="a" onClick={logout} disabled={!hasToken()} dense>
+          <MenuItem
+            component="a"
+            onClick={() => {
+              logout();
+              setMenuAnchorEl(null);
+            }}
+            disabled={!hasToken}
+            dense
+          >
             <ListItemIcon>
               <Icon icon={logoutIcon} />
             </ListItemIcon>
-            <ListItemText primary="Log out" secondary={hasToken() ? null : '(No token set up)'} />
+            <ListItemText primary="Log out" secondary={hasToken ? null : '(No token set up)'} />
           </MenuItem>
         </Menu>
       </span>
