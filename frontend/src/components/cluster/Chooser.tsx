@@ -34,10 +34,17 @@ const useClusterTitleStyle = makeStyles(theme => ({
   },
 }));
 
-export function ClusterTitle() {
+export interface ClusterTitleProps {
+  clusters?: {
+    [clusterName: string]: Cluster;
+  };
+  cluster?: string;
+}
+
+export function ClusterTitle(props: ClusterTitleProps) {
   const classes = useClusterTitleStyle();
-  const cluster = useCluster();
-  const clusters = useClustersConf();
+  const cluster = props.cluster || useCluster();
+  const clusters = props.clusters || useClustersConf();
   const [showChooser, setShowChooser] = React.useState(false);
 
   useHotkeys('ctrl+shift+l', () => setShowChooser(true));

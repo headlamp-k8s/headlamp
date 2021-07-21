@@ -1,17 +1,13 @@
 import { Box } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
 import React from 'react';
-import { ClusterTitle } from '../cluster/Chooser';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
 import Sidebar, { NavigationTabs } from '../Sidebar';
 import { drawerWidth } from '../Sidebar';
-import HeadlampButton from '../Sidebar/HeadlampButton';
 import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
 
@@ -61,22 +57,7 @@ export default function Layout({ isSidebarOpen, onToggleOpen }: LayoutProps) {
       </Link>
       <Box display="flex">
         <CssBaseline />
-
-        <AppBar
-          position="fixed"
-          className={classes.root}
-          elevation={1}
-          component="nav"
-          aria-label="Appbar Tools"
-        >
-          <Toolbar>
-            <HeadlampButton open={isSidebarOpen} mobileOnly onToggleOpen={onToggleOpen} />
-            <div style={{ flex: '1 0 0' }} />
-            <ClusterTitle />
-            <div style={{ flex: '1 0 0' }} />
-            <TopBar />
-          </Toolbar>
-        </AppBar>
+        <TopBar isSidebarOpen={isSidebarOpen} onToggleOpen={onToggleOpen} />
         <Sidebar />
         <main id="main" className={classes.content}>
           <AlertNotification />

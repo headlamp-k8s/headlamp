@@ -1,11 +1,14 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import { PureTopBar, PureTopBarProps } from './TopBar';
 
 // eslint-disable-next-line no-unused-vars
-const store = createStore((state = [], action) => state);
+const store = createStore((state = { config: {} }, action) => state, {
+  config: {},
+});
 
 export default {
   title: 'TopBar',
@@ -14,9 +17,11 @@ export default {
   decorators: [
     Story => {
       return (
-        <Provider store={store}>
-          <Story />
-        </Provider>
+        <MemoryRouter>
+          <Provider store={store}>
+            <Story />
+          </Provider>
+        </MemoryRouter>
       );
     },
   ],
@@ -38,4 +43,22 @@ Token.args = {
   appBarActions: {},
   logout: () => {},
   hasToken: true,
+};
+
+export const OneCluster = Template.bind({});
+OneCluster.args = {
+  appBarActions: {},
+  logout: () => {},
+  hasToken: true,
+  cluster: 'ak8s-desktop',
+  clusters: { 'ak8s-desktop': '' },
+};
+
+export const TwoCluster = Template.bind({});
+TwoCluster.args = {
+  appBarActions: {},
+  logout: () => {},
+  hasToken: true,
+  cluster: 'ak8s-desktop',
+  clusters: { 'ak8s-desktop': '', 'ak8s-desktop2': '' },
 };
