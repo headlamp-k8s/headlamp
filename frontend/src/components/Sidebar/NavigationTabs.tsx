@@ -1,5 +1,6 @@
 import { Divider } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTranslation } from 'react-i18next';
 import { generatePath, useHistory } from 'react-router';
 import { createRouteURL } from '../../lib/router';
@@ -38,10 +39,12 @@ function findParentOfSubList(list: SidebarEntry[], name: string | null): Sidebar
 export default function NavigationTabs() {
   const history = useHistory();
   const sidebar = useTypedSelector(state => state.ui.sidebar);
-  if (sidebar.isSidebarOpen) {
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const { t } = useTranslation();
+
+  if (sidebar.isSidebarOpen || isMobile) {
     return null;
   }
-  const { t } = useTranslation();
 
   let defaultIndex = null;
   const listItems = prepareRoutes(t);
