@@ -31,6 +31,12 @@ exports[`Storyshots SimpleTable Datum 1`] = `
         >
           Age
         </th>
+        <th
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          scope="col"
+        >
+          Long Field Name
+        </th>
       </tr>
     </thead>
     <tbody
@@ -54,6 +60,11 @@ exports[`Storyshots SimpleTable Datum 1`] = `
         >
           some age0
         </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </td>
       </tr>
       <tr
         class="MuiTableRow-root"
@@ -73,6 +84,11 @@ exports[`Storyshots SimpleTable Datum 1`] = `
         >
           some age1
         </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </td>
       </tr>
       <tr
         class="MuiTableRow-root"
@@ -91,6 +107,11 @@ exports[`Storyshots SimpleTable Datum 1`] = `
           class="MuiTableCell-root MuiTableCell-body"
         >
           some age2
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </td>
       </tr>
     </tbody>
@@ -129,6 +150,18 @@ exports[`Storyshots SimpleTable Getter 1`] = `
         >
           Age
         </th>
+        <th
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          scope="col"
+        >
+          Long Field Name
+        </th>
+        <th
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          scope="col"
+        >
+          Number
+        </th>
       </tr>
     </thead>
     <tbody
@@ -152,6 +185,16 @@ exports[`Storyshots SimpleTable Getter 1`] = `
         >
           some age0
         </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body"
+        >
+          22
+        </td>
       </tr>
       <tr
         class="MuiTableRow-root"
@@ -171,6 +214,16 @@ exports[`Storyshots SimpleTable Getter 1`] = `
         >
           some age1
         </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body"
+        >
+          33
+        </td>
       </tr>
       <tr
         class="MuiTableRow-root"
@@ -189,6 +242,16 @@ exports[`Storyshots SimpleTable Getter 1`] = `
           class="MuiTableCell-root MuiTableCell-body"
         >
           some age2
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </td>
+        <td
+          class="MuiTableCell-root MuiTableCell-body"
+        >
+          44
         </td>
       </tr>
     </tbody>
