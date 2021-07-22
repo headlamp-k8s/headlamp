@@ -79,8 +79,8 @@ const useStyles = makeStyles((theme: Theme) =>
     appbar: {
       background: theme.palette.background.default,
       // When the draw is open, we move the app bar over.
-      paddingLeft: (props: { isSidebarOpen: boolean; isMobile: boolean }) =>
-        props.isSidebarOpen ? `${drawerWidth}px` : props.isMobile ? '0px' : '60px',
+      paddingLeft: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
+        props.isSidebarOpen ? `${drawerWidth}px` : props.isSmall ? '0px' : '60px',
       marginLeft: drawerWidth,
       '& > *': {
         color: theme.palette.text.primary,
@@ -107,8 +107,10 @@ export function PureTopBar({
   onToggleOpen,
 }: PureTopBarProps) {
   const { t } = useTranslation();
-  const isMobile = useMediaQuery('(max-width:960px)');
-  const classes = useStyles({ isSidebarOpen, isMobile });
+  const isSmall = useMediaQuery('(max-width:960px)');
+  const isMedium = useMediaQuery('(max-width:960px)');
+
+  const classes = useStyles({ isSidebarOpen, isSmall });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -213,12 +215,12 @@ export function PureTopBar({
         aria-label={t('Appbar Tools')}
       >
         <Toolbar className={classes.toolbar}>
-          {isMobile && (
+          {isMedium && (
             <HeadlampButton open={isSidebarOpen} mobileOnly onToggleOpen={onToggleOpen} />
           )}
 
           <div className={classes.grow} />
-          {!isMobile && (
+          {!isMedium && (
             <>
               <ClusterTitle cluster={cluster} clusters={clusters} />
               {Object.values(appBarActions).map((action, i) => (
@@ -240,7 +242,7 @@ export function PureTopBar({
               </IconButton>
             </>
           )}
-          {isMobile && (
+          {isMedium && (
             <IconButton
               aria-label={t('show more')}
               aria-controls={mobileMenuId}
@@ -254,7 +256,7 @@ export function PureTopBar({
         </Toolbar>
       </AppBar>
       {renderUserMenu}
-      {isMobile && renderMobileMenu}
+      {isMedium && renderMobileMenu}
     </>
   );
 }

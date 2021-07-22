@@ -7,22 +7,17 @@ import React from 'react';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
 import Sidebar, { NavigationTabs } from '../Sidebar';
-import { drawerWidth } from '../Sidebar';
+import { drawerWidthClosed } from '../Sidebar';
 import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
 
 const useStyle = makeStyles(theme => ({
-  root: {
-    background: theme.palette.background.default,
-    paddingLeft: (props: { isSidebarOpen: boolean }) =>
-      props.isSidebarOpen ? `${drawerWidth}px` : '0px',
-    marginLeft: drawerWidth,
-    '& > *': {
-      color: theme.palette.text.primary,
-    },
-  },
   content: {
     flexGrow: 1,
+    marginLeft: 'initial',
+    [theme.breakpoints.between('sm', 'md')]: {
+      marginLeft: drawerWidthClosed,
+    },
   },
   toolbar: theme.mixins.toolbar,
   // importing visuallyHidden has typing issues at time of writing.
@@ -37,6 +32,12 @@ const useStyle = makeStyles(theme => ({
     position: 'absolute',
     whiteSpace: 'nowrap',
     width: '1px',
+  },
+  wrapper: {
+    display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+    },
   },
 }));
 
@@ -55,13 +56,13 @@ export default function Layout({ isSidebarOpen, onToggleOpen }: LayoutProps) {
       <Link href="#main" className={classes.visuallyHidden}>
         Skip to main content
       </Link>
-      <Box display="flex">
+      <Box className={classes.wrapper}>
         <CssBaseline />
         <TopBar isSidebarOpen={isSidebarOpen} onToggleOpen={onToggleOpen} />
         <Sidebar />
         <main id="main" className={classes.content}>
           <AlertNotification />
-          <Box p={3}>
+          <Box p={[0, 3, 3]}>
             <div className={classes.toolbar} />
             <Container maxWidth="lg">
               <NavigationTabs />

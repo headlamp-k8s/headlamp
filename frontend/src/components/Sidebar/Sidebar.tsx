@@ -19,6 +19,7 @@ import SidebarItem from './SidebarItem';
 import VersionButton from './VersionButton';
 
 export const drawerWidth = 330;
+export const drawerWidthClosed = 64;
 
 const useStyle = makeStyles(theme => ({
   drawer: {
