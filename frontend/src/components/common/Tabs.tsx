@@ -60,6 +60,8 @@ export default function Tabs(props: TabsProps) {
         indicatorColor="primary"
         textColor="primary"
         aria-label={t('tabs')}
+        variant="scrollable"
+        scrollButtons="auto"
         {...tabProps}
       >
         {tabs.map(({ label }, i) => (
