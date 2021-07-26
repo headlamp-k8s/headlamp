@@ -1,3 +1,27 @@
 apiVersion: v1
-entries: {}
-generated: "2021-07-26T00:00:00Z"
+entries:
+  headlamp:
+  - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2021-07-26T15:38:37.515995377Z"
+    description: Headlamp is an easy-to-use and extensible Kubernetes web UI.
+    digest: a5e04e6231ce1e451e8276b1c4bcb2404bbc4e4d21af4d00078bbf34afdc4c93
+    home: https://github.com/kinvolk/headlamp/tree/main/deploy/helm
+    icon: https://raw.githubusercontent.com/kinvolk/headlamp/main/docs/headlamp_light.svg
+    keywords:
+    - kubernetes
+    - plugins
+    - kinvolk
+    - headlamp
+    maintainers:
+    - name: kinvolk
+      url: https://kinvolk.io/
+    name: headlamp
+    sources:
+    - https://github.com/kinvolk/headlamp
+    - https://kinvolk.io/
+    type: application
+    urls:
+    - https://github.com/kinvolk/headlamp/releases/download/headlamp-helm-0.1.1/headlamp-0.1.1.tgz
+    version: 0.1.1
+generated: "2021-07-26T15:38:37.516001578Z"
