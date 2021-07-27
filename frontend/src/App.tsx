@@ -4,7 +4,7 @@ import logoutIcon from '@iconify/icons-mdi/logout';
 import darkIcon from '@iconify/icons-mdi/weather-night';
 import lightIcon from '@iconify/icons-mdi/weather-sunny';
 import { Icon } from '@iconify/react';
-import { Box } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Snackbar from '@material-ui/core/Snackbar';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import { SnackbarProvider } from 'notistack';
@@ -233,6 +234,45 @@ function ThemeChangeButton() {
   );
 }
 
+function UpdatePopup() {
+  const [show, setShow] = React.useState(false);
+  const [updateDownloadURL, setUpdateDownloadURL] = React.useState<string | undefined>();
+  const { t } = useTranslation('frequent');
+  const { desktopApi } = window;
+  React.useEffect(() => {
+    desktopApi &&
+      desktopApi.receive('updateAvailable', (data: { downloadURL: string }) => {
+        setShow(true);
+        setUpdateDownloadURL(data.downloadURL);
+      });
+  }, []);
+
+  return (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      open={show}
+      autoHideDuration={100000}
+      ContentProps={{
+        'aria-describedby': 'updatePopup',
+      }}
+      message={t(`An update is available`)}
+      action={
+        <React.Fragment>
+          <Button color="secondary" href={`${updateDownloadURL}`} target="_blank">
+            {t('frequent|More')}
+          </Button>
+          <Button color="primary" onClick={() => setShow(false)}>
+            {t('frequent|Close')}
+          </Button>
+        </React.Fragment>
+      }
+    />
+  );
+}
+
 function AppContainer() {
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
   const classes = useStyle({ isSidebarOpen });
@@ -252,6 +292,7 @@ function AppContainer() {
         horizontal: 'left',
       }}
     >
+      <UpdatePopup />
       <Router>
         <Link href="#main" className={classes.visuallyHidden}>
           Skip to main content
