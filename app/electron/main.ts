@@ -3,6 +3,7 @@ import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
+import Store from 'electron-store';
 import { i18n as I18n } from 'i18next';
 import open from 'open';
 import path from 'path';
@@ -10,6 +11,8 @@ import url from 'url';
 import yargs from 'yargs';
 import i18n from './i18next.config';
 
+const appVersion = app.getVersion();
+const store = new Store();
 const args = yargs
   .option('headless', {
     describe: 'Open Headlamp in the default web browser instead of its app window',
@@ -291,7 +294,6 @@ function startElecron() {
 
     mainWindow.webContents.on('dom-ready', () => {
       const octokit = new Octokit();
-      const appVersion = app.getVersion();
 
       async function fetchLatestRelease() {
         const response = await octokit.request('GET /repos/{owner}/{repo}/releases/latest', {
@@ -302,8 +304,20 @@ function startElecron() {
         if (response.data.name !== appVersion) {
           mainWindow.webContents.send('update_available', {
             downloadURL: response.data.html_url,
-            releaseNotes: response.data.body,
           });
+        }
+        /*
+  check if there is already a version in store if it exists don't store the current version
+  this check will help us later in determining whether we are on the latest release or not
+  */
+        const storedAppVersion = store.get('app_version');
+        if (!storedAppVersion) {
+          store.set('app_version', appVersion);
+        } else if (storedAppVersion !== appVersion) {
+          mainWindow.webContents.send('showReleaseNotes', { releaseNotes: response.data.body });
+          // set the store version to latest so that we don't show release notes on
+          // every start of app
+          store.set('app_version', appVersion);
         }
       }
       fetchLatestRelease();
