@@ -37,10 +37,12 @@ export default function CustomResourceDefinitionList() {
           {
             label: t('frequent|Group'),
             getter: crd => crd.spec.group,
+            sort: true,
           },
           {
             label: t('Scope'),
             getter: crd => crd.spec.scope,
+            sort: true,
           },
           {
             label: t('frequent|Full name'),

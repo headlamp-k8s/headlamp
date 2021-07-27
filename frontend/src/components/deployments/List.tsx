@@ -19,6 +19,18 @@ export default function DeploymentsList() {
     return `${availableReplicas || 0}/${replicas || 0}`;
   }
 
+  function sortByPods(d1: Deployment, d2: Deployment) {
+    const { replicas: r1, availableReplicas: avail1 } = d1.status;
+    const { replicas: r2, availableReplicas: avail2 } = d2.status;
+
+    const availSorted = avail1 - avail2;
+    if (availSorted === 0) {
+      return r1 - r2;
+    }
+
+    return availSorted;
+  }
+
   function renderConditions(deployment: Deployment) {
     const { conditions } = deployment.status;
     if (!conditions) {
@@ -71,14 +83,17 @@ export default function DeploymentsList() {
           {
             label: t('glossary|Namespace'),
             getter: deployment => deployment.getNamespace(),
+            sort: true,
           },
           {
             label: t('Pods'),
             getter: deployment => renderPods(deployment),
+            sort: sortByPods,
           },
           {
             label: t('Replicas'),
             getter: deployment => deployment.spec.replicas || 0,
+            sort: true,
           },
           {
             label: t('Conditions'),

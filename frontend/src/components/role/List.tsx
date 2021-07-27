@@ -74,6 +74,7 @@ export default function RoleList() {
           {
             label: t('Type'),
             getter: item => item.kind,
+            sort: true,
           },
           {
             label: t('frequent|Name'),
@@ -100,6 +101,7 @@ export default function RoleList() {
           {
             label: t('glossary|Namespace'),
             getter: item => item.metadata.namespace,
+            sort: true,
           },
           {
             label: t('frequent|Age'),

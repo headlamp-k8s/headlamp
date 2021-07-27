@@ -16,6 +16,15 @@ export default function ReplicaSetList() {
     return `${replicaSet.spec.replicas} / ${replicaSet.status.replicas}`;
   }
 
+  function sortByReplicas(r1: ReplicaSet, r2: ReplicaSet) {
+    const totalReplicasDiff = r1.status.replicas - r2.status.replicas;
+    if (totalReplicasDiff === 0) {
+      return r1.spec.replicas - r2.spec.replicas;
+    }
+
+    return totalReplicasDiff;
+  }
+
   return (
     <SectionBox title={<SectionFilterHeader title={t('Replica Sets')} />}>
       <SimpleTable
@@ -38,14 +47,17 @@ export default function ReplicaSetList() {
           {
             label: t('glossary|Namespace'),
             getter: replicaSet => replicaSet.getNamespace(),
+            sort: true,
           },
           {
             label: t('Generation'),
             getter: replicaSet => replicaSet.status.observedGeneration,
+            sort: true,
           },
           {
             label: t('Replicas'),
             getter: replicaSet => getReplicas(replicaSet),
+            sort: sortByReplicas,
           },
           {
             label: t('frequent|Age'),

@@ -34,10 +34,12 @@ export default function SecretList() {
           {
             label: t('glossary|Namespace'),
             getter: secret => secret.getNamespace(),
+            sort: true,
           },
           {
             label: t('Type'),
             getter: secret => secret.type,
+            sort: true,
           },
           {
             label: t('frequent|Age'),

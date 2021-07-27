@@ -34,10 +34,12 @@ export default function ClassList() {
           {
             label: t('Reclaim Policy'),
             getter: storageClass => storageClass.reclaimPolicy,
+            sort: true,
           },
           {
             label: t('Volume Binding Mode'),
             getter: storageClass => storageClass.volumeBindingMode,
+            sort: true,
           },
           {
             label: t('frequent|Age'),

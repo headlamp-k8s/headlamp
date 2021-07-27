@@ -34,6 +34,7 @@ export default function ServiceAccountList() {
           {
             label: t('glossary|Namespace'),
             getter: serviceAccount => serviceAccount.getNamespace(),
+            sort: true,
           },
           {
             label: t('frequent|Age'),

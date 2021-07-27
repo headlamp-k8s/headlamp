@@ -34,10 +34,12 @@ export default function DaemonSetList() {
           {
             label: t('glossary|Namespace'),
             getter: daemonSet => daemonSet.getNamespace(),
+            sort: true,
           },
           {
             label: t('Pods'),
             getter: daemonSet => daemonSet.status.currentNumberScheduled,
+            sort: true,
           },
           {
             label: t('frequent|Age'),

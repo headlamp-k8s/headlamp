@@ -53,6 +53,7 @@ export default function CronJobList() {
           {
             label: t('glossary|Namespace'),
             getter: cronJob => cronJob.getNamespace(),
+            sort: true,
           },
           {
             label: t('Schedule'),
