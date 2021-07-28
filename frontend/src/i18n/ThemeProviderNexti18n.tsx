@@ -23,10 +23,18 @@ const ThemeProviderNexti18n: React.FunctionComponent<{ theme: Theme }> = props =
   const { i18n } = useTranslation();
   const [lang, setLang] = useState(i18n.language);
 
+  function changeLang(lng: string) {
+    if (lng) {
+      document.documentElement.lang = lng;
+      document.body.dir = i18n.dir();
+      setLang(lng);
+    }
+  }
+
   useEffect(() => {
-    i18n.on('languageChanged', setLang);
+    i18n.on('languageChanged', changeLang);
     return () => {
-      i18n.off('languageChanged', setLang);
+      i18n.off('languageChanged', changeLang);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
