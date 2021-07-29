@@ -42,6 +42,7 @@ export default function NamespacesList() {
           {
             label: t('Status'),
             getter: makeStatusLabel,
+            sort: (namespace: Namespace) => namespace.status.phase,
           },
           {
             label: t('frequent|Age'),

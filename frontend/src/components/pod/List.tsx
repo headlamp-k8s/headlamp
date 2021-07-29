@@ -28,6 +28,9 @@ export default function PodList() {
   const { t } = useTranslation('glossary');
 
   function getRestartCount(pod: Pod) {
+    if (!pod) {
+      return 0;
+    }
     return _.sumBy(pod.status.containerStatuses, container => container.restartCount);
   }
 
@@ -53,14 +56,17 @@ export default function PodList() {
           {
             label: t('glossary|Namespace'),
             getter: (pod: Pod) => pod.getNamespace(),
+            sort: true,
           },
           {
             label: t('Restarts'),
             getter: (pod: Pod) => getRestartCount(pod),
+            sort: true,
           },
           {
             label: t('Status'),
             getter: makePodStatusLabel,
+            sort: (pod: Pod) => pod?.status.phase,
           },
           {
             label: t('frequent|Age'),

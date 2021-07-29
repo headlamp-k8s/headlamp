@@ -16,6 +16,14 @@ export default function JobsList() {
     return `${job.spec.completions}/${job.spec.parallelism}`;
   }
 
+  function sortByCompletions(job1: Job, job2: Job) {
+    const parallelismSorted = job1.spec.parallelism - job2.spec.parallelism;
+    if (parallelismSorted === 0) {
+      return job1.spec.completions - job2.spec.completions;
+    }
+    return parallelismSorted;
+  }
+
   function getCondition(job: Job) {
     const { conditions } = job.status;
     if (!conditions) {
@@ -47,10 +55,12 @@ export default function JobsList() {
           {
             label: t('glossary|Namespace'),
             getter: job => job.getNamespace(),
+            sort: true,
           },
           {
             label: t('Completions'),
             getter: job => getCompletions(job),
+            sort: sortByCompletions,
           },
           {
             label: t('Conditions'),

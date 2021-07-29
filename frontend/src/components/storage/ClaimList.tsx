@@ -38,18 +38,22 @@ export default function VolumeClaimList() {
           {
             label: t('glossary|Namespace'),
             getter: volumeClaim => volumeClaim.getNamespace(),
+            sort: true,
           },
           {
             label: t('Status'),
             getter: volumeClaim => volumeClaim.status.phase,
+            sort: true,
           },
           {
             label: t('Class Name'),
             getter: volumeClaim => volumeClaim.spec.storageClassName,
+            sort: true,
           },
           {
             label: t('Volume'),
             getter: volumeClaim => volumeClaim.spec.volumeName,
+            sort: true,
           },
           {
             label: t('Capacity'),
