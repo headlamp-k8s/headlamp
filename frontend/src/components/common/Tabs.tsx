@@ -23,6 +23,7 @@ export interface TabsProps {
   };
   defaultIndex?: number | null | boolean;
   onTabChanged?: (tabIndex: number) => void;
+  className?: string;
 }
 
 export default function Tabs(props: TabsProps) {
@@ -62,6 +63,7 @@ export default function Tabs(props: TabsProps) {
         aria-label={t('tabs')}
         variant="scrollable"
         scrollButtons="auto"
+        className={props.className}
         {...tabProps}
       >
         {tabs.map(({ label }, i) => (
