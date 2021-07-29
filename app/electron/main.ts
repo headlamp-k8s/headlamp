@@ -1,6 +1,6 @@
 import { Octokit } from '@octokit/core';
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
-import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
 import Store from 'electron-store';
@@ -292,6 +292,16 @@ function startElecron() {
       },
     });
     mainWindow.loadURL(startUrl);
+
+    mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+      // allow all urls starting with app startUrl to open in electron
+      if (url.startsWith(startUrl)) {
+        return { action: 'allow' };
+      }
+      // otherwise open url in a browser and prevent default
+      shell.openExternal(url);
+      return { action: 'deny' };
+    });
 
     mainWindow.webContents.on('dom-ready', () => {
       const octokit = new Octokit();
