@@ -11,14 +11,23 @@ const useStyle = makeStyles(theme => ({
   toolbar: {
     borderBottom: '1px solid #1e1e1e',
     paddingTop: theme.spacing(1.5),
-    paddingLeft: (props: { isSidebarOpen: boolean }) =>
-      props.isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
+    paddingLeft: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
+      props.isSmall ? 0 : props.isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
     paddingBottom: theme.spacing(1),
     backgroundColor: '#000',
+    borderRadius: (props: { isSmall: boolean }) => (props.isSmall ? 40 : 0),
+    margin: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
+      props.isSmall && !props.isSidebarOpen ? 5 : 0,
   },
   logo: {
     height: '32px',
     width: 'auto',
+  },
+  button: {
+    padding: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
+      props.isSmall && !props.isSidebarOpen ? 0 : '6px 8px',
+    minWidth: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
+      props.isSmall && !props.isSidebarOpen ? 55 : 64,
   },
 }));
 
@@ -32,17 +41,21 @@ export interface HeadlampButtonProps {
 }
 
 export default function HeadlampButton({ open, onToggleOpen, mobileOnly }: HeadlampButtonProps) {
-  const classes = useStyle({ isSidebarOpen: open });
+  const isSmall = useMediaQuery('(max-width:600px)');
+  const classes = useStyle({ isSidebarOpen: open, isSmall: isSmall });
   const { t } = useTranslation('sidebar');
-  const isMobile = useMediaQuery('(max-width:600px)');
 
-  if (mobileOnly && (!isMobile || (isMobile && open))) {
+  if (mobileOnly && (!isSmall || (isSmall && open))) {
     return null;
   }
 
   return (
     <div className={classes.toolbar}>
-      <Button onClick={onToggleOpen} aria-label={open ? t('Shrink sidebar') : t('Expand sidebar')}>
+      <Button
+        onClick={onToggleOpen}
+        className={classes.button}
+        aria-label={open ? t('Shrink sidebar') : t('Expand sidebar')}
+      >
         <SvgIcon
           className={classes.logo}
           component={open ? LogoWithTextLight : LogoLight}

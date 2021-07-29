@@ -15,7 +15,7 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
       >
         <button
           aria-label="Expand sidebar"
-          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
           tabindex="0"
           type="button"
         >
@@ -815,7 +815,7 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
       >
         <button
           aria-label="Shrink sidebar"
-          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
           tabindex="0"
           type="button"
         >
