@@ -261,7 +261,7 @@ function UpdatePopup() {
       message={`There is an available update`}
       action={
         <React.Fragment>
-          <Button color="secondary" href={`${updateDownloadURL}`} target="_blank">
+          <Button color="secondary" onClick={() => window.open(updateDownloadURL)}>
             More
           </Button>
           <Button color="primary" onClick={() => setShow(false)}>
