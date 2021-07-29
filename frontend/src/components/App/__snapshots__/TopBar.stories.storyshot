@@ -12,7 +12,7 @@ exports[`Storyshots TopBar No Token 1`] = `
       class="MuiToolbar-root MuiToolbar-regular makeStyles-toolbar MuiToolbar-gutters"
     >
       <div
-        class="makeStyles-grow"
+        class="makeStyles-grow makeStyles-clusterTitle"
       />
       <div
         class="MuiFormControl-root makeStyles-formControl"
@@ -122,7 +122,7 @@ exports[`Storyshots TopBar One Cluster 1`] = `
       class="MuiToolbar-root MuiToolbar-regular makeStyles-toolbar MuiToolbar-gutters"
     >
       <div
-        class="makeStyles-grow"
+        class="makeStyles-grow makeStyles-clusterTitle"
       />
       <div
         class="MuiFormControl-root makeStyles-formControl"
@@ -232,7 +232,7 @@ exports[`Storyshots TopBar Token 1`] = `
       class="MuiToolbar-root MuiToolbar-regular makeStyles-toolbar MuiToolbar-gutters"
     >
       <div
-        class="makeStyles-grow"
+        class="makeStyles-grow makeStyles-clusterTitle"
       />
       <div
         class="MuiFormControl-root makeStyles-formControl"
@@ -342,22 +342,23 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
       class="MuiToolbar-root MuiToolbar-regular makeStyles-toolbar MuiToolbar-gutters"
     >
       <div
-        class="makeStyles-grow"
-      />
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button MuiButton-containedSizeLarge MuiButton-sizeLarge"
-        tabindex="0"
-        type="button"
+        class="makeStyles-grow makeStyles-clusterTitle"
       >
-        <span
-          class="MuiButton-label"
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button MuiButton-containedSizeLarge MuiButton-sizeLarge"
+          tabindex="0"
+          type="button"
         >
-          Cluster: ak8s-desktop
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
+          <span
+            class="MuiButton-label"
+          >
+            Cluster: ak8s-desktop
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
       <div
         class="MuiFormControl-root makeStyles-formControl"
       >

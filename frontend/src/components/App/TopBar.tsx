@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
@@ -93,6 +94,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     grow: {
       flexGrow: 1,
+    },
+    clusterTitle: {
+      display: 'flex',
+      justifyContent: 'center',
     },
   })
 );
@@ -219,10 +224,11 @@ export function PureTopBar({
             <HeadlampButton open={isSidebarOpen} mobileOnly onToggleOpen={onToggleOpen} />
           )}
 
-          <div className={classes.grow} />
           {!isMedium && (
             <>
-              <ClusterTitle cluster={cluster} clusters={clusters} />
+              <div className={clsx(classes.grow, classes.clusterTitle)}>
+                <ClusterTitle cluster={cluster} clusters={clusters} />
+              </div>
               {Object.values(appBarActions).map((action, i) => (
                 <MenuItem>
                   <React.Fragment key={i}>{action()}</React.Fragment>
@@ -243,15 +249,18 @@ export function PureTopBar({
             </>
           )}
           {isMedium && (
-            <IconButton
-              aria-label={t('show more')}
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <Icon icon={moreVertIcon} />
-            </IconButton>
+            <>
+              <div className={classes.grow} />
+              <IconButton
+                aria-label={t('show more')}
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <Icon icon={moreVertIcon} />
+              </IconButton>
+            </>
           )}
         </Toolbar>
       </AppBar>
