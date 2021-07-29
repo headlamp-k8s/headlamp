@@ -25,13 +25,11 @@ export default function LocaleSelect(props: LocaleSelectProps) {
 
   const { t, i18n } = useTranslation('frequent');
   const theme = useTheme();
-  document.body.dir = i18n.dir();
 
   const changeLng = (event: React.ChangeEvent<{ value: unknown }>) => {
     const lng = event.target.value as string;
 
     i18n.changeLanguage(lng);
-    document.body.dir = i18n.dir();
     theme.direction = i18n.dir();
   };
 
