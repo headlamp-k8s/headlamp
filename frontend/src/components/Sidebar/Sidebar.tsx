@@ -3,6 +3,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -128,24 +129,10 @@ export function PureSidebar({
   linkArea,
 }: PureSidebarProps) {
   const classes = useStyle();
+  const temporaryDrawer = useMediaQuery('(max-width:600px)');
 
-  return (
-    <Drawer
-      variant="permanent"
-      className={clsx(classes.drawer, {
-        [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open,
-      })}
-      classes={{
-        paper: clsx({
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        }),
-      }}
-      PaperProps={{
-        component: 'nav',
-      }}
-    >
+  const contents = (
+    <>
       <HeadlampButton open={open} onToggleOpen={onToggleOpen} />
       <Grid
         className={classes.sidebarGrid}
@@ -171,6 +158,65 @@ export function PureSidebar({
           <Box textAlign="center">{linkArea}</Box>
         </Grid>
       </Grid>
+    </>
+  );
+
+  if (temporaryDrawer) {
+    const toggleDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')
+      ) {
+        return;
+      }
+      onToggleOpen();
+    };
+
+    return (
+      <Drawer
+        variant="temporary"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
+        }}
+        PaperProps={{
+          component: 'nav',
+        }}
+        open={open}
+        onClose={onToggleOpen}
+      >
+        <div role="presentation" onClick={toggleDrawer} onKeyDown={toggleDrawer}>
+          {contents}
+        </div>
+      </Drawer>
+    );
+  }
+
+  return (
+    <Drawer
+      variant="permanent"
+      className={clsx(classes.drawer, {
+        [classes.drawerOpen]: open,
+        [classes.drawerClose]: !open,
+      })}
+      classes={{
+        paper: clsx({
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        }),
+      }}
+      PaperProps={{
+        component: 'nav',
+      }}
+    >
+      {contents}
     </Drawer>
   );
 }
