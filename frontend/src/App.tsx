@@ -264,6 +264,15 @@ function UpdatePopup() {
           <Button color="secondary" onClick={() => window.open(updateDownloadURL)}>
             More
           </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              desktopApi.send('disable_update_checking');
+              setShow(false);
+            }}
+          >
+            Do not notify again
+          </Button>
           <Button color="primary" onClick={() => setShow(false)}>
             Close
           </Button>
