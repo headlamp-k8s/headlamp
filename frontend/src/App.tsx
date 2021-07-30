@@ -265,6 +265,15 @@ function UpdatePopup() {
           <Button color="secondary" href={`${updateDownloadURL}`} target="_blank">
             {t('frequent|More')}
           </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              desktopApi.send('disableUpdateChecking');
+              setShow(false);
+            }}
+          >
+            {t('Do not notify again')}
+          </Button>
           <Button color="primary" onClick={() => setShow(false)}>
             {t('frequent|Close')}
           </Button>

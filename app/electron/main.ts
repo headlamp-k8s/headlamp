@@ -303,6 +303,10 @@ function startElecron() {
       return { action: 'deny' };
     });
 
+    ipcMain.on('disableUpdateChecking', () => {
+      store.set('disable_update_check', true);
+    });
+
     mainWindow.webContents.on('dom-ready', () => {
       const octokit = new Octokit();
 
@@ -344,7 +348,10 @@ function startElecron() {
           store.set('app_version', appVersion);
         }
       }
-      fetchRelease();
+      const isUpdateCheckingDisabled = store.get('disable_update_check');
+      if (!isUpdateCheckingDisabled) {
+        fetchRelease();
+      }
     });
 
     mainWindow.on('closed', () => {
