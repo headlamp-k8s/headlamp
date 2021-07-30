@@ -315,7 +315,7 @@ function startElecron() {
           owner: 'kinvolk',
           repo: 'headlamp',
         });
-        if (response.data.name !== appVersion) {
+        if (response.data.name >= appVersion && !response.data.name.startsWith('headlamp-helm')) {
           mainWindow.webContents.send('update_available', {
             downloadURL: response.data.html_url,
           });
@@ -334,7 +334,7 @@ function startElecron() {
             owner: 'kinvolk',
             repo: 'headlamp',
           });
-          mainWindow.webContents.send('show_release_notes', { releaseNotes: response.data.body });
+          mainWindow.webContents.send('show_release_notes', { releaseNotes: response.data.body, appVersion });
           // set the store version to latest so that we don't show release notes on
           // every start of app
           store.set('app_version', appVersion);

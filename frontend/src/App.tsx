@@ -287,6 +287,7 @@ function AppContainer() {
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
   const classes = useStyle({ isSidebarOpen });
   const [releaseNotes, setReleaseNotes] = React.useState<string>();
+  const [appVersion, setAppVersion] = React.useState('');
   const Router = ({ children }: React.PropsWithChildren<{}>) =>
     helpers.isElectron() ? (
       <HashRouter>{children}</HashRouter>
@@ -298,9 +299,13 @@ function AppContainer() {
 
   React.useEffect(() => {
     if (desktopApi) {
-      desktopApi.receive('show_release_notes', (data: { releaseNotes: string }) => {
-        setReleaseNotes(data.releaseNotes);
-      });
+      desktopApi.receive(
+        'show_release_notes',
+        (data: { releaseNotes: string; appVersion: string }) => {
+          setReleaseNotes(data.releaseNotes);
+          setAppVersion(data.appVersion);
+        }
+      );
     }
   }, []);
 
@@ -312,7 +317,7 @@ function AppContainer() {
       }}
     >
       <UpdatePopup />
-      {releaseNotes && <ReleaseNotesModal releaseNotes={releaseNotes} />}
+      {releaseNotes && <ReleaseNotesModal releaseNotes={releaseNotes} appVersion={appVersion} />}
       <Router>
         <Link href="#main" className={classes.visuallyHidden}>
           Skip to main content

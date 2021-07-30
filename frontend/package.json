@@ -33,6 +33,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^1.1.2",
+    "github-markdown-css": "^4.0.0",
     "i18next": "^20.2.4",
     "i18next-browser-languagedetector": "^6.1.1",
     "if-env": "^1.0.4",
