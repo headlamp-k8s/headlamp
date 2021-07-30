@@ -4,7 +4,7 @@ import logoutIcon from '@iconify/icons-mdi/logout';
 import darkIcon from '@iconify/icons-mdi/weather-night';
 import lightIcon from '@iconify/icons-mdi/weather-sunny';
 import { Icon } from '@iconify/react';
-import { Box, Button } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,7 +14,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Snackbar from '@material-ui/core/Snackbar';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import { SnackbarProvider } from 'notistack';
@@ -35,6 +34,7 @@ import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
 import ReleaseNotesModal from './components/releasenotes';
 import Sidebar, { drawerWidth, NavigationTabs, useSidebarItem } from './components/Sidebar';
+import UpdatePopup from './components/updatepopup';
 import helpers from './helpers';
 import { useElectronI18n } from './i18n/electronI18n';
 import LocaleSelect from './i18n/LocaleSelect/LocaleSelect';
@@ -232,54 +232,6 @@ function ThemeChangeButton() {
     <IconButton aria-label={t('Change theme')} onClick={() => changeTheme()}>
       <Icon icon={icon} />
     </IconButton>
-  );
-}
-
-function UpdatePopup() {
-  const [show, setShow] = React.useState(false);
-  const [updateDownloadURL, setUpdateDownloadURL] = React.useState<string | undefined>();
-  const { t } = useTranslation('frequent');
-  const { desktopApi } = window;
-  React.useEffect(() => {
-    desktopApi &&
-      desktopApi.receive('updateAvailable', (data: { downloadURL: string }) => {
-        setShow(true);
-        setUpdateDownloadURL(data.downloadURL);
-      });
-  }, []);
-
-  return (
-    <Snackbar
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right',
-      }}
-      open={show}
-      autoHideDuration={100000}
-      ContentProps={{
-        'aria-describedby': 'updatePopup',
-      }}
-      message={t(`An update is available`)}
-      action={
-        <React.Fragment>
-          <Button color="secondary" href={`${updateDownloadURL}`} target="_blank">
-            {t('frequent|More')}
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => {
-              desktopApi.send('disableUpdateChecking');
-              setShow(false);
-            }}
-          >
-            {t('Do not notify again')}
-          </Button>
-          <Button color="primary" onClick={() => setShow(false)}>
-            {t('frequent|Close')}
-          </Button>
-        </React.Fragment>
-      }
-    />
   );
 }
 

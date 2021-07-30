@@ -339,8 +339,9 @@ function startElecron() {
             owner: 'kinvolk',
             repo: 'headlamp',
           });
+          const [releaseNotes] = response.data.body.split('<!-- end-release-notes -->');
           mainWindow.webContents.send('showReleaseNotes', {
-            releaseNotes: response.data.body,
+            releaseNotes,
             appVersion,
           });
           // set the store version to latest so that we don't show release notes on
