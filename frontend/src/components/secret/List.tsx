@@ -18,6 +18,7 @@ export default function SecretList() {
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={Secret.getErrorMessage(error)}
+        advancedFilters={['type']}
         columns={[
           {
             label: t('frequent|Name'),

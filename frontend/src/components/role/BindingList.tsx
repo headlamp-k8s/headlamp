@@ -70,6 +70,7 @@ export default function RoleBindingList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        advancedFilters={['kind']}
         errorMessage={getErrorMessage()}
         columns={[
           {

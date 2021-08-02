@@ -17,6 +17,7 @@ export default function ServiceList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
+        advancedFilters={['spec.type']}
         errorMessage={Service.getErrorMessage(error)}
         columns={[
           {
