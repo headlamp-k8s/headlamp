@@ -34,14 +34,17 @@ export default function ServiceList() {
           {
             label: t('glossary|Namespace'),
             getter: service => service.getNamespace(),
+            sort: true,
           },
           {
             label: t('Type'),
             getter: service => service.spec.type,
+            sort: true,
           },
           {
             label: t('Cluster IP'),
             getter: service => service.spec.clusterIP,
+            sort: true,
           },
           {
             label: t('frequent|Age'),

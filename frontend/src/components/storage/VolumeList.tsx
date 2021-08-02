@@ -34,6 +34,7 @@ export default function VolumeList() {
           {
             label: t('Status'),
             getter: volume => volume.status.phase,
+            sort: true,
           },
           {
             label: t('Capacity'),

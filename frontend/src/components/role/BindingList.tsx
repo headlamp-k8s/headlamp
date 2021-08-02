@@ -75,6 +75,7 @@ export default function RoleBindingList() {
           {
             label: t('Type'),
             getter: item => item.kind,
+            sort: true,
           },
           {
             label: t('frequent|Name'),
@@ -91,6 +92,7 @@ export default function RoleBindingList() {
           {
             label: t('glossary|Namespace'),
             getter: item => item.getNamespace() || 'All namespaces',
+            sort: true,
           },
           {
             label: t('frequent|Age'),

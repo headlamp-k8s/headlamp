@@ -40,6 +40,15 @@ export default function Overview() {
     return `${getReadyReplicas(item)}/${getTotalReplicas(item)}`;
   }
 
+  function sortByReplicas(w1: Workload, w2: Workload) {
+    const totalReplicasDiff = getTotalReplicas(w1) - getTotalReplicas(w2);
+    if (totalReplicasDiff === 0) {
+      return getReadyReplicas(w1) - getReadyReplicas(w2);
+    }
+
+    return totalReplicasDiff;
+  }
+
   function getJointItems() {
     let joint: Workload[] = [];
     for (const items of Object.values(workloadsData)) {
@@ -80,6 +89,7 @@ export default function Overview() {
             {
               label: t('Type'),
               getter: item => item.kind,
+              sort: true,
             },
             {
               label: t('frequent|Name'),
@@ -98,10 +108,12 @@ export default function Overview() {
             {
               label: t('glossary|Namespace'),
               getter: item => item.metadata.namespace,
+              sort: true,
             },
             {
               label: t('Pods'),
               getter: item => item && getPods(item),
+              sort: sortByReplicas,
             },
             {
               label: t('frequent|Age'),

@@ -34,6 +34,7 @@ export default function ConfigMapList() {
           {
             label: t('glossary|Namespace'),
             getter: configMap => configMap.getNamespace(),
+            sort: true,
           },
           {
             label: t('frequent|Age'),

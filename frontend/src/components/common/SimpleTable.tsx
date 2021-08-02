@@ -44,13 +44,14 @@ const useTableStyle = makeStyles(theme => ({
 }));
 
 type sortFunction = (arg1: any, arg2: any) => number;
+type getterFunction = (arg: any) => any;
 
 interface SimpleTableColumn {
   label: string;
   cellProps?: {
     [propName: string]: any;
   };
-  sort?: sortFunction | boolean;
+  sort?: sortFunction | getterFunction | boolean;
 }
 
 interface SimpleTableDatumColumn extends SimpleTableColumn {
@@ -154,9 +155,14 @@ export default function SimpleTable(props: SimpleTableProps) {
   );
 
   function defaultSortingFunction(column: SimpleTableGetterColumn) {
+    const sort = column?.sort;
     function defaultSortingReal(item1: any, item2: any) {
-      const value1 = column.getter(item1);
-      const value2 = column.getter(item2);
+      let getterFunc = column.getter;
+      if (!!sort && typeof sort === 'function') {
+        getterFunc = sort;
+      }
+      const value1 = getterFunc(item1);
+      const value2 = getterFunc(item2);
 
       let compareValue = 0;
       if (value1 < value2) {
@@ -179,7 +185,10 @@ export default function SimpleTable(props: SimpleTableProps) {
     const columnAskingForSort = columns[sortColIndex];
     const sortFunction = columnAskingForSort?.sort;
 
-    if (typeof sortFunction === 'boolean' && sortFunction) {
+    if (
+      (typeof sortFunction === 'boolean' && sortFunction) ||
+      (typeof sortFunction === 'function' && sortFunction.length === 1)
+    ) {
       setDisplayData(
         data.slice().sort(defaultSortingFunction(columnAskingForSort as SimpleTableGetterColumn))
       );

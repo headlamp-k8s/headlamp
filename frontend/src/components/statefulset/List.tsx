@@ -40,14 +40,17 @@ export default function StatefulSetList() {
           {
             label: t('glossary|Namespace'),
             getter: statefulSet => statefulSet.getNamespace(),
+            sort: true,
           },
           {
             label: t('Pods'),
             getter: statefulSet => renderPods(statefulSet),
+            sort: true,
           },
           {
             label: t('Replicas'),
             getter: statefulSet => statefulSet.spec.replicas,
+            sort: true,
           },
           {
             label: t('frequent|Age'),
