@@ -13,7 +13,8 @@
     "build": "npm run copy-icons && npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
     "package": "npm run copy-icons && npm run compile-electron && electron-builder build --publish never",
     "serve-dev": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron .",
-    "i18n": "npx --no-install i18next ./electron/main.ts -c ./electron/i18next-parser.config.js"
+    "i18n": "npx --no-install i18next ./electron/main.ts -c ./electron/i18next-parser.config.js",
+    "publish": "npm run copy-icons && npm run compile-electron && electron-builder build --publish always"
   },
   "build": {
     "appId": "com.kinvolk.headlamp",
@@ -81,8 +82,8 @@
     ],
     "publish": {
       "provider": "github",
-      "repo": "headlamp",
-      "owner": "kinvolk"
+      "repo": "update-testing",
+      "owner": "ashu8912"
     },
     "extends": null
   },
