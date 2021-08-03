@@ -9,6 +9,7 @@ import open from 'open';
 import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
+import semver from 'semver';
 import i18n from './i18next.config';
 
 const appVersion = app.getVersion();
@@ -316,7 +317,7 @@ function startElecron() {
           repo: 'update-testing',
         });
         if (
-          response.data.name > appVersion &&
+          semver.gt(response.data.name, appVersion) &&
           !response.data.name.startsWith('headlamp-helm') &&
           !process.env.FLATPAK_ID
         ) {
@@ -329,9 +330,10 @@ function startElecron() {
   this check will help us later in determining whether we are on the latest release or not
   */
         const storedAppVersion = store.get('app_version');
+        console.log(parseInt(storedAppVersion as string))
         if (!storedAppVersion) {
           store.set('app_version', appVersion);
-        } else if (parseInt(storedAppVersion as string) < parseInt(appVersion)) {
+        } else if (semver.lt(storedAppVersion as string,appVersion)) {
           // get the release notes for the version with which the app was built with
           const githubReleaseURL = `GET /repos/{owner}/{repo}/releases/tags/v${appVersion}`;
           const response = await octokit.request(githubReleaseURL, {
