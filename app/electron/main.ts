@@ -316,7 +316,7 @@ function startElecron() {
           repo: 'update-testing',
         });
         if (
-          response.data.name >= appVersion &&
+          response.data.name > appVersion &&
           !response.data.name.startsWith('headlamp-helm') &&
           !process.env.FLATPAK_ID
         ) {
@@ -331,7 +331,7 @@ function startElecron() {
         const storedAppVersion = store.get('app_version');
         if (!storedAppVersion) {
           store.set('app_version', appVersion);
-        } else if (parseInt(storedAppVersion as string) <= parseInt(appVersion)) {
+        } else if (parseInt(storedAppVersion as string) < parseInt(appVersion)) {
           // get the release notes for the version with which the app was built with
           const githubReleaseURL = `GET /repos/{owner}/{repo}/releases/tags/v${appVersion}`;
           const response = await octokit.request(githubReleaseURL, {
