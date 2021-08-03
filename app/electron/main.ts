@@ -312,8 +312,8 @@ function startElecron() {
       async function fetchRelease() {
         const githubReleaseURL = `GET /repos/{owner}/{repo}/releases/latest`;
         const response = await octokit.request(githubReleaseURL, {
-          owner: 'kinvolk',
-          repo: 'headlamp',
+          owner: 'ashu8912',
+          repo: 'update-testing',
         });
         if (
           response.data.name >= appVersion &&
@@ -335,8 +335,8 @@ function startElecron() {
           // get the release notes for the version with which the app was built with
           const githubReleaseURL = `GET /repos/{owner}/{repo}/releases/tags/v${appVersion}`;
           const response = await octokit.request(githubReleaseURL, {
-            owner: 'kinvolk',
-            repo: 'headlamp',
+            owner: 'ashu8912',
+            repo: 'update-testing',
           });
           mainWindow.webContents.send('show_release_notes', {
             releaseNotes: response.data.body,
