@@ -1,5 +1,7 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
+import { Provider } from 'react-redux';
+import store from '../../redux/stores/store';
 import SimpleTable from './SimpleTable';
 import { SimpleTableProps } from './SimpleTable';
 
@@ -9,7 +11,11 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<SimpleTableProps> = args => <SimpleTable {...args} />;
+const Template: Story<SimpleTableProps> = args => (
+  <Provider store={store}>
+    <SimpleTable {...args} />
+  </Provider>
+);
 
 const fixtureData = {
   rowsPerPage: [15, 25, 50],
