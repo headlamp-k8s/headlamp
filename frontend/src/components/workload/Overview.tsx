@@ -85,6 +85,7 @@ export default function Overview() {
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
           filterFunction={filterFunc}
+          advancedFilters={['kind']}
           columns={[
             {
               label: t('Type'),
