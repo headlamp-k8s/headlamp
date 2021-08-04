@@ -130,10 +130,13 @@ export function PureSidebar({
 }: PureSidebarProps) {
   const classes = useStyle();
   const temporaryDrawer = useMediaQuery('(max-width:600px)');
+  const smallSideOnly = useMediaQuery('(max-width:960px) and (min-width:600px)');
+  // The large sidebar does not open in medium view (600-960px).
+  const largeSideBarOpen = (open && !smallSideOnly) || (open && temporaryDrawer);
 
   const contents = (
     <>
-      <HeadlampButton open={open} onToggleOpen={onToggleOpen} />
+      <HeadlampButton open={largeSideBarOpen} onToggleOpen={onToggleOpen} />
       <Grid
         className={classes.sidebarGrid}
         container
@@ -147,7 +150,7 @@ export function PureSidebar({
               <SidebarItem
                 key={i}
                 selectedName={selectedName}
-                fullWidth={open}
+                fullWidth={largeSideBarOpen}
                 search={search}
                 {...item}
               />
@@ -189,7 +192,7 @@ export function PureSidebar({
         PaperProps={{
           component: 'nav',
         }}
-        open={open}
+        open={largeSideBarOpen}
         onClose={onToggleOpen}
       >
         <div role="presentation" onClick={toggleDrawer} onKeyDown={toggleDrawer}>
@@ -203,13 +206,13 @@ export function PureSidebar({
     <Drawer
       variant="permanent"
       className={clsx(classes.drawer, {
-        [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open,
+        [classes.drawerOpen]: largeSideBarOpen,
+        [classes.drawerClose]: !largeSideBarOpen,
       })}
       classes={{
         paper: clsx({
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
+          [classes.drawerOpen]: largeSideBarOpen,
+          [classes.drawerClose]: !largeSideBarOpen,
         }),
       }}
       PaperProps={{
