@@ -88,7 +88,8 @@ export function setSidebarSelected(selected: SidebarType['selected']) {
 }
 
 export function setWhetherSidebarOpen(isSidebarOpen: boolean) {
-  return { type: UI_SIDEBAR_SET_EXPANDED, isSidebarOpen };
+  localStorage.setItem('sidebar', JSON.stringify({ shrink: !isSidebarOpen }));
+  return { type: UI_SIDEBAR_SET_EXPANDED, isSidebarOpen, isSidebarOpenUserSelected: isSidebarOpen };
 }
 
 export function setSidebarVisible(isVisible: SidebarType['isVisible']) {

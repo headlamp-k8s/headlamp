@@ -41,15 +41,10 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
-export interface LayoutProps {
-  /** If the sidebar is fully expanded open or shrunk. */
-  isSidebarOpen: boolean;
-  /** Called when sidebar toggles between open and closed. */
-  onToggleOpen: () => void;
-}
+export interface LayoutProps {}
 
-export default function Layout({ isSidebarOpen, onToggleOpen }: LayoutProps) {
-  const classes = useStyle({ isSidebarOpen });
+export default function Layout({}: LayoutProps) {
+  const classes = useStyle();
 
   return (
     <>
@@ -58,7 +53,7 @@ export default function Layout({ isSidebarOpen, onToggleOpen }: LayoutProps) {
       </Link>
       <Box className={classes.wrapper}>
         <CssBaseline />
-        <TopBar isSidebarOpen={isSidebarOpen} onToggleOpen={onToggleOpen} />
+        <TopBar />
         <Sidebar />
         <main id="main" className={classes.content}>
           <AlertNotification />

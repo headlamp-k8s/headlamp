@@ -14,25 +14,30 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import LocaleSelect from '../../i18n/LocaleSelect/LocaleSelect';
 import { getToken, setToken } from '../../lib/auth';
 import { useCluster } from '../../lib/k8s';
+import { setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import ThemeChangeButton from './ThemeChangeButton';
 
-export interface TopBarProps {
-  /** If the sidebar is fully expanded open or shrunk. */
-  isSidebarOpen: boolean;
-  /** Called when sidebar toggles between open and closed. */
-  onToggleOpen: () => void;
-}
+export interface TopBarProps {}
 
-export default function TopBar({ isSidebarOpen, onToggleOpen }: TopBarProps) {
+export default function TopBar({}: TopBarProps) {
   const appBarActions = useTypedSelector(state => state.ui.views.appBar.actions);
+  const dispatch = useDispatch();
+  const isMedium = useMediaQuery('(max-width:960px)');
+
+  const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
+  const isSidebarOpenUserSelected = useTypedSelector(
+    state => state.ui.sidebar.isSidebarOpenUserSelected
+  );
+
   const cluster = useCluster();
   const history = useHistory();
 
@@ -53,7 +58,18 @@ export default function TopBar({ isSidebarOpen, onToggleOpen }: TopBarProps) {
       logout={logout}
       hasToken={hasToken()}
       isSidebarOpen={isSidebarOpen}
-      onToggleOpen={onToggleOpen}
+      isSidebarOpenUserSelected={isSidebarOpenUserSelected}
+      onToggleOpen={() => {
+        // For medium view we default to closed if they have not made a selection.
+        // This handles the case when the user resizes the window from large to small.
+        // If they have not made a selection then the window size stays the default for
+        //   the size.
+
+        const openSideBar =
+          isMedium && isSidebarOpenUserSelected === undefined ? false : isSidebarOpen;
+
+        dispatch(setWhetherSidebarOpen(!openSideBar));
+      }}
     />
   );
 }
@@ -70,7 +86,9 @@ export interface PureTopBarProps {
     [clusterName: string]: any;
   };
   cluster?: string;
-  isSidebarOpen: boolean;
+  isSidebarOpen?: boolean;
+  isSidebarOpenUserSelected?: boolean;
+
   /** Called when sidebar toggles between open and closed. */
   onToggleOpen: () => void;
 }
@@ -80,7 +98,7 @@ const useStyles = makeStyles((theme: Theme) =>
     appbar: {
       background: theme.palette.background.default,
       // When the draw is open, we move the app bar over.
-      paddingLeft: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
+      paddingLeft: (props: { isSidebarOpen: boolean | undefined; isSmall: boolean }) =>
         props.isSidebarOpen ? `${drawerWidth}px` : props.isSmall ? '0px' : '60px',
       marginLeft: drawerWidth,
       '& > *': {
@@ -109,13 +127,17 @@ export function PureTopBar({
   cluster,
   clusters,
   isSidebarOpen,
+  isSidebarOpenUserSelected,
   onToggleOpen,
 }: PureTopBarProps) {
   const { t } = useTranslation();
   const isSmall = useMediaQuery('(max-width:960px)');
   const isMedium = useMediaQuery('(max-width:960px)');
 
-  const classes = useStyles({ isSidebarOpen, isSmall });
+  const openSideBar =
+    isMedium && !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
+
+  const classes = useStyles({ isSidebarOpen: openSideBar, isSmall });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -220,9 +242,7 @@ export function PureTopBar({
         aria-label={t('Appbar Tools')}
       >
         <Toolbar className={classes.toolbar}>
-          {isMedium && (
-            <HeadlampButton open={isSidebarOpen} mobileOnly onToggleOpen={onToggleOpen} />
-          )}
+          {isMedium && <HeadlampButton open={openSideBar} mobileOnly onToggleOpen={onToggleOpen} />}
 
           {!isMedium && (
             <>

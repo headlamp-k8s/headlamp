@@ -68,12 +68,16 @@ const useStyle = makeStyles(theme => ({
 
 export default function Sidebar() {
   const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
+  const isSidebarOpenUserSelected = useTypedSelector(
+    state => state.ui.sidebar.isSidebarOpenUserSelected
+  );
+
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t, i18n } = useTranslation();
   const items = React.useMemo(() => prepareRoutes(t), [sidebar.entries, i18n.language]);
-  const [open, setOpen] = React.useState(sidebar.isSidebarOpen);
 
   const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
 
@@ -88,12 +92,12 @@ export default function Sidebar() {
   return (
     <PureSidebar
       items={items}
-      open={open}
+      open={isSidebarOpen}
+      openUserSelected={isSidebarOpenUserSelected}
       selectedName={sidebar?.selected}
       search={search}
       onToggleOpen={() => {
-        dispatch(setWhetherSidebarOpen(!open));
-        setOpen(!open);
+        dispatch(setWhetherSidebarOpen(!sidebar.isSidebarOpen));
       }}
       linkArea={
         <>
@@ -107,7 +111,9 @@ export default function Sidebar() {
 
 export interface PureSidebarProps {
   /** If the sidebar is fully expanded open or shrunk. */
-  open: boolean;
+  open?: boolean;
+  /** If the user has selected to open/shrink the sidebar */
+  openUserSelected?: boolean;
   /** To show in the sidebar. */
   items: SidebarEntry[];
   /** The selected route name of the sidebar open. */
@@ -122,6 +128,7 @@ export interface PureSidebarProps {
 
 export function PureSidebar({
   open,
+  openUserSelected,
   items,
   selectedName,
   onToggleOpen,
@@ -131,8 +138,11 @@ export function PureSidebar({
   const classes = useStyle();
   const temporaryDrawer = useMediaQuery('(max-width:600px)');
   const smallSideOnly = useMediaQuery('(max-width:960px) and (min-width:600px)');
+  const temporarySideBarOpen = open === true && temporaryDrawer && openUserSelected === true;
+
   // The large sidebar does not open in medium view (600-960px).
-  const largeSideBarOpen = (open && !smallSideOnly) || (open && temporaryDrawer);
+  const largeSideBarOpen =
+    (open === true && !smallSideOnly) || (open === true && temporarySideBarOpen);
 
   const contents = (
     <>
@@ -180,19 +190,19 @@ export function PureSidebar({
       <Drawer
         variant="temporary"
         className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
+          [classes.drawerOpen]: temporarySideBarOpen,
+          [classes.drawerClose]: !temporarySideBarOpen,
         })}
         classes={{
           paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.drawerOpen]: temporarySideBarOpen,
+            [classes.drawerClose]: !temporarySideBarOpen,
           }),
         }}
         PaperProps={{
           component: 'nav',
         }}
-        open={largeSideBarOpen}
+        open={temporarySideBarOpen}
         onClose={onToggleOpen}
       >
         <div role="presentation" onClick={toggleDrawer} onKeyDown={toggleDrawer}>
