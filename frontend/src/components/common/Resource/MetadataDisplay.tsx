@@ -119,7 +119,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
   const keys = Object.keys(dict || []);
 
   const MetadataEntry = React.forwardRef((props: TypographyProps, ref: any) => {
-    return <Typography noWrap {...props} className={classes.metadataValueLabel} ref={ref} />;
+    return <Typography {...props} className={classes.metadataValueLabel} ref={ref} />;
   });
 
   function makeLabel(key: string | number) {
