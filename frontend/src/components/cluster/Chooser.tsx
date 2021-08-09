@@ -74,7 +74,9 @@ export function ClusterTitle(props: ClusterTitleProps) {
 
 const useStyles = makeStyles(theme => ({
   chooserDialog: {
-    minWidth: 500,
+    [theme.breakpoints.up('sm')]: {
+      minWidth: 500,
+    },
     '& .MuiTypography-h4': {
       textAlign: 'center',
       fontSize: '2.2rem',
