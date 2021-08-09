@@ -1,4 +1,5 @@
 import '../../../i18n/config';
+import { useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
@@ -11,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Editor, { loader } from '@monaco-editor/react';
 import * as yaml from 'js-yaml';
 import React from 'react';
@@ -68,6 +70,9 @@ export default function EditorDialog(props: EditorDialogProps) {
     readOnly: isReadOnly(),
   };
   const classes = useStyle();
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [originalCode, setOriginalCode] = React.useState('');
   const [code, setCode] = React.useState(originalCode);
   const [previousVersion, setPreviousVersion] = React.useState('');
@@ -224,6 +229,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       maxWidth="lg"
       scroll="paper"
       fullWidth
+      fullScreen={fullScreen}
       onBackdropClick={onClose}
       {...other}
       aria-labelledby="editor-dialog-title"
