@@ -144,6 +144,20 @@ export function PureSidebar({
   const largeSideBarOpen =
     (open === true && !smallSideOnly) || (open === true && temporarySideBarOpen);
 
+  /**
+   * For closing the sidebar if temporaryDrawer on mobile.
+   */
+  const toggleDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event.type === 'keydown' &&
+      ((event as React.KeyboardEvent).key === 'Tab' ||
+        (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+    onToggleOpen();
+  };
+
   const contents = (
     <>
       <HeadlampButton open={largeSideBarOpen} onToggleOpen={onToggleOpen} />
@@ -155,7 +169,10 @@ export function PureSidebar({
         wrap="nowrap"
       >
         <Grid item>
-          <List>
+          <List
+            onClick={temporaryDrawer ? toggleDrawer : undefined}
+            onKeyDown={temporaryDrawer ? toggleDrawer : undefined}
+          >
             {items.map((item, i) => (
               <SidebarItem
                 key={i}
@@ -175,17 +192,6 @@ export function PureSidebar({
   );
 
   if (temporaryDrawer) {
-    const toggleDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
-      ) {
-        return;
-      }
-      onToggleOpen();
-    };
-
     return (
       <Drawer
         variant="temporary"
@@ -205,9 +211,7 @@ export function PureSidebar({
         open={temporarySideBarOpen}
         onClose={onToggleOpen}
       >
-        <div role="presentation" onClick={toggleDrawer} onKeyDown={toggleDrawer}>
-          {contents}
-        </div>
+        {contents}
       </Drawer>
     );
   }
