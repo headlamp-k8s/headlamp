@@ -32,7 +32,9 @@ import {
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
+import ReleaseNotesModal from './components/releasenotes';
 import Sidebar, { drawerWidth, NavigationTabs, useSidebarItem } from './components/Sidebar';
+import UpdatePopup from './components/updatepopup';
 import helpers from './helpers';
 import { useElectronI18n } from './i18n/electronI18n';
 import LocaleSelect from './i18n/LocaleSelect/LocaleSelect';
@@ -234,8 +236,11 @@ function ThemeChangeButton() {
 }
 
 function AppContainer() {
+  const { desktopApi } = window;
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
   const classes = useStyle({ isSidebarOpen });
+  const [releaseNotes, setReleaseNotes] = React.useState<string>();
+  const [appVersion, setAppVersion] = React.useState('');
   const Router = ({ children }: React.PropsWithChildren<{}>) =>
     helpers.isElectron() ? (
       <HashRouter>{children}</HashRouter>
@@ -245,6 +250,18 @@ function AppContainer() {
 
   localStorage.setItem('sidebar', JSON.stringify({ shrink: isSidebarOpen }));
 
+  React.useEffect(() => {
+    if (desktopApi) {
+      desktopApi.receive(
+        'showReleaseNotes',
+        (data: { releaseNotes: string; appVersion: string }) => {
+          setReleaseNotes(data.releaseNotes);
+          setAppVersion(data.appVersion);
+        }
+      );
+    }
+  }, []);
+
   return (
     <SnackbarProvider
       anchorOrigin={{
@@ -252,6 +269,8 @@ function AppContainer() {
         horizontal: 'left',
       }}
     >
+      <UpdatePopup />
+      {releaseNotes && <ReleaseNotesModal releaseNotes={releaseNotes} appVersion={appVersion} />}
       <Router>
         <Link href="#main" className={classes.visuallyHidden}>
           Skip to main content
