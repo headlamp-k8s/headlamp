@@ -1,4 +1,3 @@
-import { Octokit } from '@octokit/core';
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
@@ -7,7 +6,6 @@ import Store from 'electron-store';
 import { i18n as I18n } from 'i18next';
 import open from 'open';
 import path from 'path';
-import semver from 'semver';
 import url from 'url';
 import yargs from 'yargs';
 import i18n from './i18next.config';
@@ -308,51 +306,7 @@ function startElecron() {
     });
 
     mainWindow.webContents.on('dom-ready', () => {
-      const octokit = new Octokit();
-
-      async function fetchRelease() {
-        const githubReleaseURL = `GET /repos/{owner}/{repo}/releases`;
-        // get me all the releases -> default decreasing order of releases
-        const response = await octokit.request(githubReleaseURL, {
-          owner: 'kinvolk',
-          repo: 'headlamp',
-        });
-        const latestRelease = response.data.find(
-          release => !release.name.startsWith('headlamp-helm')
-        );
-        if (semver.gt(latestRelease.name, appVersion) && !process.env.FLATPAK_ID) {
-          mainWindow.webContents.send('update_available', {
-            downloadURL: latestRelease.html_url,
-          });
-        }
-        /*
-  check if there is already a version in store if it exists don't store the current version
-  this check will help us later in determining whether we are on the latest release or not
-  */
-        const storedAppVersion = store.get('app_version');
-        if (!storedAppVersion) {
-          store.set('app_version', appVersion);
-        } else if (semver.lt(storedAppVersion as string, appVersion)) {
-          // get the release notes for the version with which the app was built with
-          const githubReleaseURL = `GET /repos/{owner}/{repo}/releases/tags/v${appVersion}`;
-          const response = await octokit.request(githubReleaseURL, {
-            owner: 'kinvolk',
-            repo: 'headlamp',
-          });
-          const [releaseNotes] = response.data.body.split('<!-- end-release-notes -->');
-          mainWindow.webContents.send('showReleaseNotes', {
-            releaseNotes,
-            appVersion,
-          });
-          // set the store version to latest so that we don't show release notes on
-          // every start of app
-          store.set('app_version', appVersion);
-        }
-      }
-      const isUpdateCheckingDisabled = store.get('disable_update_check');
-      if (!isUpdateCheckingDisabled) {
-        fetchRelease();
-      }
+      mainWindow.webContents.send('appVersion', appVersion);
     });
 
     mainWindow.on('closed', () => {

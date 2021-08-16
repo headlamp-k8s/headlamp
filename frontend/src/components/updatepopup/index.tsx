@@ -2,18 +2,10 @@ import { Button, Snackbar } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-function UpdatePopup() {
-  const [show, setShow] = React.useState(false);
-  const [updateDownloadURL, setUpdateDownloadURL] = React.useState<string | undefined>();
+function UpdatePopup(props: { releaseDownloadURL: string }) {
+  const [show, setShow] = React.useState(true);
+  const { releaseDownloadURL } = props;
   const { t } = useTranslation('frequent');
-  const { desktopApi } = window;
-  React.useEffect(() => {
-    desktopApi &&
-      desktopApi.receive('updateAvailable', (data: { downloadURL: string }) => {
-        setShow(true);
-        setUpdateDownloadURL(data.downloadURL);
-      });
-  }, []);
 
   return (
     <Snackbar
@@ -29,13 +21,13 @@ function UpdatePopup() {
       message={t('An update is available')}
       action={
         <React.Fragment>
-          <Button color="secondary" onClick={() => window.open(updateDownloadURL)}>
+          <Button color="secondary" onClick={() => window.open(releaseDownloadURL)}>
             {t('frequent|More')}
           </Button>
           <Button
             color="inherit"
             onClick={() => {
-              desktopApi.send('disableUpdateChecking');
+              localStorage.setItem('disable_update_check', 'true');
               setShow(false);
             }}
           >

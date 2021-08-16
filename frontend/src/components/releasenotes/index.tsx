@@ -9,11 +9,10 @@ import ReactMarkdown from 'react-markdown';
 
 interface ReleaseNotesModalProps {
   releaseNotes: string;
-  appVersion: string;
 }
 
 export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
-  const { releaseNotes, appVersion } = props;
+  const { releaseNotes } = props;
   const [showReleaseNotes, setShowReleaseNotes] = React.useState(Boolean(releaseNotes));
   const theme = useTheme();
   const { t } = useTranslation('frequent');
@@ -30,6 +29,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
     minHeight: '50%',
     overflow: 'auto',
   };
+  const appVersion = localStorage.getItem('app_version');
 
   return (
     <Modal open={showReleaseNotes} BackdropComponent={Backdrop} style={modalStyle}>

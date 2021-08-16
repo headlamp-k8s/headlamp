@@ -16,6 +16,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
+import { Octokit } from '@octokit/core';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -29,6 +30,7 @@ import {
   Switch,
   useHistory,
 } from 'react-router-dom';
+import semver from 'semver';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
@@ -240,7 +242,7 @@ function AppContainer() {
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
   const classes = useStyle({ isSidebarOpen });
   const [releaseNotes, setReleaseNotes] = React.useState<string>();
-  const [appVersion, setAppVersion] = React.useState('');
+  const [releaseDownlaodURL, setReleaseDownloadURL] = React.useState<string | null>(null);
   const Router = ({ children }: React.PropsWithChildren<{}>) =>
     helpers.isElectron() ? (
       <HashRouter>{children}</HashRouter>
@@ -252,13 +254,54 @@ function AppContainer() {
 
   React.useEffect(() => {
     if (desktopApi) {
-      desktopApi.receive(
-        'showReleaseNotes',
-        (data: { releaseNotes: string; appVersion: string }) => {
-          setReleaseNotes(data.releaseNotes);
-          setAppVersion(data.appVersion);
+      desktopApi.receive('appVersion', (currentBuildAppVersion: string) => {
+        const octokit = new Octokit();
+
+        async function fetchRelease() {
+          const githubReleaseURL = `GET /repos/{owner}/{repo}/releases`;
+          // get me all the releases -> default decreasing order of releases
+          const response = await octokit.request(githubReleaseURL, {
+            owner: 'kinvolk',
+            repo: 'headlamp',
+          });
+          const latestRelease = response.data.find(
+            release => !release.name?.startsWith('headlamp-helm')
+          );
+          if (
+            latestRelease &&
+            semver.gt(latestRelease.name as string, currentBuildAppVersion) &&
+            !process.env.FLATPAK_ID
+          ) {
+            setReleaseDownloadURL(latestRelease.html_url);
+          }
+          /*
+    check if there is already a version in store if it exists don't store the current version
+    this check will help us later in determining whether we are on the latest release or not
+    */
+          const storedAppVersion = localStorage.getItem('app_version');
+          if (!storedAppVersion) {
+            localStorage.setItem('app_version', currentBuildAppVersion);
+          } else if (semver.lt(storedAppVersion as string, currentBuildAppVersion)) {
+            // get the release notes for the version with which the app was built with
+            const githubReleaseURL = `GET /repos/{owner}/{repo}/releases/tags/v${currentBuildAppVersion}`;
+            const response = await octokit.request(githubReleaseURL, {
+              owner: 'kinvolk',
+              repo: 'headlamp',
+            });
+            const [releaseNotes] = response.data.body.split('<!-- end-release-notes -->');
+            setReleaseNotes(releaseNotes);
+            // set the store version to latest so that we don't show release notes on
+            // every start of app
+            localStorage.setItem('app_version', currentBuildAppVersion);
+          }
         }
-      );
+        const isUpdateCheckingDisabled = JSON.parse(
+          localStorage.getItem('disable_update_check') || 'false'
+        );
+        if (!isUpdateCheckingDisabled) {
+          fetchRelease();
+        }
+      });
     }
   }, []);
 
@@ -269,8 +312,8 @@ function AppContainer() {
         horizontal: 'left',
       }}
     >
-      <UpdatePopup />
-      {releaseNotes && <ReleaseNotesModal releaseNotes={releaseNotes} appVersion={appVersion} />}
+      {releaseDownlaodURL && <UpdatePopup releaseDownloadURL={releaseDownlaodURL} />}
+      {releaseNotes && <ReleaseNotesModal releaseNotes={releaseNotes} />}
       <Router>
         <Link href="#main" className={classes.visuallyHidden}>
           Skip to main content
