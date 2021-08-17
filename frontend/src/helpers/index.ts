@@ -129,12 +129,21 @@ function getBaseUrl(): string {
   }
   return baseUrl;
 }
+function getAppVersion() {
+  return localStorage.getItem('app_version');
+}
+
+function setAppVersion(value: string) {
+  localStorage.setItem('app_version', value);
+}
 
 const exportFunctions = {
   getBaseUrl,
   isDevMode,
   getAppUrl,
   isElectron,
+  getAppVersion,
+  setAppVersion,
 };
 
 export default exportFunctions;

@@ -278,9 +278,9 @@ function AppContainer() {
     check if there is already a version in store if it exists don't store the current version
     this check will help us later in determining whether we are on the latest release or not
     */
-          const storedAppVersion = localStorage.getItem('app_version');
+          const storedAppVersion = helpers.getAppVersion();
           if (!storedAppVersion) {
-            localStorage.setItem('app_version', currentBuildAppVersion);
+            helpers.setAppVersion(currentBuildAppVersion);
           } else if (semver.lt(storedAppVersion as string, currentBuildAppVersion)) {
             // get the release notes for the version with which the app was built with
             const githubReleaseURL = `GET /repos/{owner}/{repo}/releases/tags/v${currentBuildAppVersion}`;
@@ -292,7 +292,7 @@ function AppContainer() {
             setReleaseNotes(releaseNotes);
             // set the store version to latest so that we don't show release notes on
             // every start of app
-            localStorage.setItem('app_version', currentBuildAppVersion);
+            helpers.setAppVersion(currentBuildAppVersion);
           }
         }
         const isUpdateCheckingDisabled = JSON.parse(

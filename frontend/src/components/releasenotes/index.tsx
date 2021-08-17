@@ -6,6 +6,7 @@ import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
+import helpers from '../../helpers';
 
 interface ReleaseNotesModalProps {
   releaseNotes: string;
@@ -29,7 +30,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
     minHeight: '50%',
     overflow: 'auto',
   };
-  const appVersion = localStorage.getItem('app_version');
+  const appVersion = helpers.getAppVersion();
 
   return (
     <Modal open={showReleaseNotes} BackdropComponent={Backdrop} style={modalStyle}>
