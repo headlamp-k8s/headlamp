@@ -6,14 +6,14 @@ import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
+import helpers from '../../helpers';
 
 interface ReleaseNotesModalProps {
   releaseNotes: string;
-  appVersion: string;
 }
 
 export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
-  const { releaseNotes, appVersion } = props;
+  const { releaseNotes } = props;
   const [showReleaseNotes, setShowReleaseNotes] = React.useState(Boolean(releaseNotes));
   const theme = useTheme();
   const { t } = useTranslation('frequent');
@@ -30,6 +30,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
     minHeight: '50%',
     overflow: 'auto',
   };
+  const appVersion = helpers.getAppVersion();
 
   return (
     <Modal open={showReleaseNotes} BackdropComponent={Backdrop} style={modalStyle}>
