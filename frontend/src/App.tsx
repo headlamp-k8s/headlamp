@@ -16,7 +16,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import { Octokit } from '@octokit/core';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -30,12 +29,10 @@ import {
   Switch,
   useHistory,
 } from 'react-router-dom';
-import semver from 'semver';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
-import ReleaseNotesModal from './components/common/ReleaseNotes/ReleaseNotesModal';
-import UpdatePopup from './components/common/ReleaseNotes/UpdatePopup';
+import ReleaseNotes from './components/common/ReleaseNotes/ReleaseNotes';
 import Sidebar, { drawerWidth, NavigationTabs, useSidebarItem } from './components/Sidebar';
 import helpers from './helpers';
 import { useElectronI18n } from './i18n/electronI18n';
@@ -238,11 +235,8 @@ function ThemeChangeButton() {
 }
 
 function AppContainer() {
-  const { desktopApi } = window;
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
   const classes = useStyle({ isSidebarOpen });
-  const [releaseNotes, setReleaseNotes] = React.useState<string>();
-  const [releaseDownlaodURL, setReleaseDownloadURL] = React.useState<string | null>(null);
   const Router = ({ children }: React.PropsWithChildren<{}>) =>
     helpers.isElectron() ? (
       <HashRouter>{children}</HashRouter>
@@ -252,59 +246,6 @@ function AppContainer() {
 
   localStorage.setItem('sidebar', JSON.stringify({ shrink: isSidebarOpen }));
 
-  React.useEffect(() => {
-    if (desktopApi) {
-      desktopApi.receive('appVersion', (currentBuildAppVersion: string) => {
-        const octokit = new Octokit();
-
-        async function fetchRelease() {
-          const githubReleaseURL = `GET /repos/{owner}/{repo}/releases`;
-          // get me all the releases -> default decreasing order of releases
-          const response = await octokit.request(githubReleaseURL, {
-            owner: 'kinvolk',
-            repo: 'headlamp',
-          });
-          const latestRelease = response.data.find(
-            release => !release.name?.startsWith('headlamp-helm')
-          );
-          if (
-            latestRelease &&
-            semver.gt(latestRelease.name as string, currentBuildAppVersion) &&
-            !process.env.FLATPAK_ID
-          ) {
-            setReleaseDownloadURL(latestRelease.html_url);
-          }
-          /*
-    check if there is already a version in store if it exists don't store the current version
-    this check will help us later in determining whether we are on the latest release or not
-    */
-          const storedAppVersion = helpers.getAppVersion();
-          if (!storedAppVersion) {
-            helpers.setAppVersion(currentBuildAppVersion);
-          } else if (semver.lt(storedAppVersion as string, currentBuildAppVersion)) {
-            // get the release notes for the version with which the app was built with
-            const githubReleaseURL = `GET /repos/{owner}/{repo}/releases/tags/v${currentBuildAppVersion}`;
-            const response = await octokit.request(githubReleaseURL, {
-              owner: 'kinvolk',
-              repo: 'headlamp',
-            });
-            const [releaseNotes] = response.data.body.split('<!-- end-release-notes -->');
-            setReleaseNotes(releaseNotes);
-            // set the store version to latest so that we don't show release notes on
-            // every start of app
-            helpers.setAppVersion(currentBuildAppVersion);
-          }
-        }
-        const isUpdateCheckingDisabled = JSON.parse(
-          localStorage.getItem('disable_update_check') || 'false'
-        );
-        if (!isUpdateCheckingDisabled) {
-          fetchRelease();
-        }
-      });
-    }
-  }, []);
-
   return (
     <SnackbarProvider
       anchorOrigin={{
@@ -312,8 +253,6 @@ function AppContainer() {
         horizontal: 'left',
       }}
     >
-      {releaseDownlaodURL && <UpdatePopup releaseDownloadURL={releaseDownlaodURL} />}
-      {releaseNotes && <ReleaseNotesModal releaseNotes={releaseNotes} />}
       <Router>
         <Link href="#main" className={classes.visuallyHidden}>
           Skip to main content
@@ -349,6 +288,7 @@ function AppContainer() {
           <ActionsNotifier />
         </Box>
       </Router>
+      <ReleaseNotes />
     </SnackbarProvider>
   );
 }
