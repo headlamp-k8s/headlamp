@@ -34,7 +34,7 @@ import semver from 'semver';
 import { ClusterTitle } from './components/cluster/Chooser';
 import ActionsNotifier from './components/common/ActionsNotifier';
 import AlertNotification from './components/common/AlertNotification';
-import ReleaseNotesModal from './components/releasenotes';
+import ReleaseNotesModal from './components/common/ReleaseNotes/ReleaseNotesModal';
 import Sidebar, { drawerWidth, NavigationTabs, useSidebarItem } from './components/Sidebar';
 import UpdatePopup from './components/updatepopup';
 import helpers from './helpers';
