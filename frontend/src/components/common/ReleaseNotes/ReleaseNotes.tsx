@@ -40,12 +40,27 @@ export default function ReleaseNotes() {
           if (storedAppVersion && semver.lt(storedAppVersion as string, currentBuildAppVersion)) {
             // get the release notes for the version with which the app was built with
             const githubReleaseURL = `GET /repos/{owner}/{repo}/releases/tags/v${currentBuildAppVersion}`;
-            const response = await octokit.request(githubReleaseURL, {
-              owner: 'kinvolk',
-              repo: 'headlamp',
-            });
-            const [releaseNotes] = response.data.body.split('<!-- end-release-notes -->');
-            setReleaseNotes(releaseNotes);
+            let releaseNotes = '';
+            try {
+              const response = await octokit.request(githubReleaseURL, {
+                owner: 'kinvolk',
+                repo: 'headlamp',
+              });
+
+              const [notes] = response.data.body.split('<!-- end-release-notes -->');
+              if (!!notes) {
+                releaseNotes = notes;
+              }
+            } catch (err) {
+              console.error(
+                `Error getting release notes for version ${currentBuildAppVersion}:`,
+                err
+              );
+            }
+
+            if (!!releaseNotes) {
+              setReleaseNotes(releaseNotes);
+            }
           }
 
           // set the store version to the current so that we don't show release notes on
