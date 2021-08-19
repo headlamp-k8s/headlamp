@@ -10,7 +10,6 @@ import url from 'url';
 import yargs from 'yargs';
 import i18n from './i18next.config';
 
-const appVersion = app.getVersion();
 const store = new Store();
 const args = yargs
   .option('headless', {
@@ -268,6 +267,14 @@ function startElecron() {
   let mainWindow: BrowserWindow | null;
 
   const isDev = process.env.ELECTRON_DEV || false;
+
+  let appVersion: string;
+  if (isDev && process.env.HEADLAMP_APP_VERSION) {
+    appVersion = process.env.HEADLAMP_APP_VERSION;
+    console.debug(`Overridding app version to ${appVersion}`);
+  } else {
+    appVersion = app.getVersion();
+  }
 
   setMenu(i18n);
 
