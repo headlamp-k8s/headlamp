@@ -98,6 +98,12 @@
     ],
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --config package.json --write"
+    ],
+    "../app/**/*.{ts,tsx}": [
+      "eslint -c package.json --fix"
+    ],
+    "../app/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --config package.json --write"
     ]
   },
   "eslintConfig": {
