@@ -1,5 +1,7 @@
 import { Divider } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTranslation } from 'react-i18next';
 import { generatePath, useHistory } from 'react-router';
 import { createRouteURL } from '../../lib/router';
@@ -8,6 +10,12 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SidebarEntry } from '../../redux/reducers/ui';
 import Tabs from '../common/Tabs';
 import prepareRoutes from './prepareRoutes';
+
+const useStyle = makeStyles(() => ({
+  tabs: {
+    maxWidth: '85vw',
+  },
+}));
 
 function searchNameInSubList(sublist: SidebarEntry['subList'], name: string): boolean {
   if (!sublist) {
@@ -37,11 +45,14 @@ function findParentOfSubList(list: SidebarEntry[], name: string | null): Sidebar
 
 export default function NavigationTabs() {
   const history = useHistory();
+  const classes = useStyle();
   const sidebar = useTypedSelector(state => state.ui.sidebar);
-  if (sidebar.isSidebarOpen) {
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const { t } = useTranslation();
+
+  if (sidebar.isSidebarOpen || isMobile) {
     return null;
   }
-  const { t } = useTranslation();
 
   let defaultIndex = null;
   const listItems = prepareRoutes(t);
@@ -91,6 +102,7 @@ export default function NavigationTabs() {
           tabChangeHandler(index);
         }}
         defaultIndex={defaultIndex}
+        className={classes.tabs}
       />
       <Divider />
     </Box>

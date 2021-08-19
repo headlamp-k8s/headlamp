@@ -1,10 +1,9 @@
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,15 +12,15 @@ import { useLocation } from 'react-router-dom';
 import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SidebarEntry } from '../../redux/reducers/ui';
-import { ReactComponent as LogoLight } from '../../resources/icon-light.svg';
-import { ReactComponent as LogoWithTextLight } from '../../resources/logo-light.svg';
 import CreateButton from '../common/Resource/CreateButton';
+import HeadlampButton from './HeadlampButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';
 import SidebarItem from './SidebarItem';
 import VersionButton from './VersionButton';
 
 export const drawerWidth = 330;
+export const drawerWidthClosed = 64;
 
 const useStyle = makeStyles(theme => ({
   drawer: {
@@ -44,6 +43,12 @@ const useStyle = makeStyles(theme => ({
     }),
     overflowX: 'hidden',
     width: theme.spacing(7) + 1,
+    [theme.breakpoints.down('xs')]: {
+      background: 'initial',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: theme.spacing(0),
+    },
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
     },
@@ -53,33 +58,26 @@ const useStyle = makeStyles(theme => ({
     width: drawerWidth,
     background: theme.palette.sidebarBg,
   },
-  toolbar: {
-    borderBottom: '1px solid #1e1e1e',
-    paddingTop: theme.spacing(1.5),
-    paddingLeft: (props: { isSidebarOpen: boolean }) =>
-      props.isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
   sidebarGrid: {
     height: '100%',
   },
   '.MuiListItemText-primary': {
     color: 'red',
   },
-  logo: {
-    height: '32px',
-    width: 'auto',
-  },
 }));
 
 export default function Sidebar() {
   const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
+  const isSidebarOpenUserSelected = useTypedSelector(
+    state => state.ui.sidebar.isSidebarOpenUserSelected
+  );
+
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t, i18n } = useTranslation();
   const items = React.useMemo(() => prepareRoutes(t), [sidebar.entries, i18n.language]);
-  const [open, setOpen] = React.useState(sidebar.isSidebarOpen);
 
   const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
 
@@ -94,12 +92,12 @@ export default function Sidebar() {
   return (
     <PureSidebar
       items={items}
-      open={open}
+      open={isSidebarOpen}
+      openUserSelected={isSidebarOpenUserSelected}
       selectedName={sidebar?.selected}
       search={search}
       onToggleOpen={() => {
-        dispatch(setWhetherSidebarOpen(!open));
-        setOpen(!open);
+        dispatch(setWhetherSidebarOpen(!sidebar.isSidebarOpen));
       }}
       linkArea={
         <>
@@ -113,7 +111,9 @@ export default function Sidebar() {
 
 export interface PureSidebarProps {
   /** If the sidebar is fully expanded open or shrunk. */
-  open: boolean;
+  open?: boolean;
+  /** If the user has selected to open/shrink the sidebar */
+  openUserSelected?: boolean;
   /** To show in the sidebar. */
   items: SidebarEntry[];
   /** The selected route name of the sidebar open. */
@@ -128,44 +128,39 @@ export interface PureSidebarProps {
 
 export function PureSidebar({
   open,
+  openUserSelected,
   items,
   selectedName,
   onToggleOpen,
   search,
   linkArea,
 }: PureSidebarProps) {
-  const classes = useStyle({ isSidebarOpen: open });
-  const { t } = useTranslation('sidebar');
+  const classes = useStyle();
+  const temporaryDrawer = useMediaQuery('(max-width:600px)');
+  const smallSideOnly = useMediaQuery('(max-width:960px) and (min-width:600px)');
+  const temporarySideBarOpen = open === true && temporaryDrawer && openUserSelected === true;
 
-  return (
-    <Drawer
-      variant="permanent"
-      className={clsx(classes.drawer, {
-        [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open,
-      })}
-      classes={{
-        paper: clsx({
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        }),
-      }}
-      PaperProps={{
-        component: 'nav',
-      }}
-    >
-      <div className={classes.toolbar}>
-        <Button
-          onClick={onToggleOpen}
-          aria-label={open ? t('Shrink sidebar') : t('Expand sidebar')}
-        >
-          <SvgIcon
-            className={classes.logo}
-            component={open ? LogoWithTextLight : LogoLight}
-            viewBox="0 0 auto 32"
-          />
-        </Button>
-      </div>
+  // The large sidebar does not open in medium view (600-960px).
+  const largeSideBarOpen =
+    (open === true && !smallSideOnly) || (open === true && temporarySideBarOpen);
+
+  /**
+   * For closing the sidebar if temporaryDrawer on mobile.
+   */
+  const toggleDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event.type === 'keydown' &&
+      ((event as React.KeyboardEvent).key === 'Tab' ||
+        (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+    onToggleOpen();
+  };
+
+  const contents = (
+    <>
+      <HeadlampButton open={largeSideBarOpen} onToggleOpen={onToggleOpen} />
       <Grid
         className={classes.sidebarGrid}
         container
@@ -174,12 +169,15 @@ export function PureSidebar({
         wrap="nowrap"
       >
         <Grid item>
-          <List>
+          <List
+            onClick={temporaryDrawer ? toggleDrawer : undefined}
+            onKeyDown={temporaryDrawer ? toggleDrawer : undefined}
+          >
             {items.map((item, i) => (
               <SidebarItem
                 key={i}
                 selectedName={selectedName}
-                fullWidth={open}
+                fullWidth={largeSideBarOpen}
                 search={search}
                 {...item}
               />
@@ -190,6 +188,52 @@ export function PureSidebar({
           <Box textAlign="center">{linkArea}</Box>
         </Grid>
       </Grid>
+    </>
+  );
+
+  if (temporaryDrawer) {
+    return (
+      <Drawer
+        variant="temporary"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: temporarySideBarOpen,
+          [classes.drawerClose]: !temporarySideBarOpen,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: temporarySideBarOpen,
+            [classes.drawerClose]: !temporarySideBarOpen,
+          }),
+        }}
+        PaperProps={{
+          component: 'nav',
+        }}
+        open={temporarySideBarOpen}
+        onClose={onToggleOpen}
+      >
+        {contents}
+      </Drawer>
+    );
+  }
+
+  return (
+    <Drawer
+      variant="permanent"
+      className={clsx(classes.drawer, {
+        [classes.drawerOpen]: largeSideBarOpen,
+        [classes.drawerClose]: !largeSideBarOpen,
+      })}
+      classes={{
+        paper: clsx({
+          [classes.drawerOpen]: largeSideBarOpen,
+          [classes.drawerClose]: !largeSideBarOpen,
+        }),
+      }}
+      PaperProps={{
+        component: 'nav',
+      }}
+    >
+      {contents}
     </Drawer>
   );
 }

@@ -31,7 +31,7 @@ export default function Overview() {
 
   return (
     <PageGrid>
-      <SectionBox py={2}>
+      <SectionBox py={2} mt={[4, 0, 0]}>
         {noPermissions ? (
           <Empty color="error">{t('auth|No permissions to list pods.')}</Empty>
         ) : (

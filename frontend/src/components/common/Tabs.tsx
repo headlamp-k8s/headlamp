@@ -1,8 +1,15 @@
+import { makeStyles } from '@material-ui/core/styles';
 import MuiTab from '@material-ui/core/Tab';
 import MuiTabs from '@material-ui/core/Tabs';
 import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+const useStyle = makeStyles(() => ({
+  tab: {
+    minWidth: 150, // allows 8 tabs to show like on pods
+  },
+}));
 
 function a11yProps(index: number) {
   return {
@@ -23,6 +30,7 @@ export interface TabsProps {
   };
   defaultIndex?: number | null | boolean;
   onTabChanged?: (tabIndex: number) => void;
+  className?: string;
 }
 
 export default function Tabs(props: TabsProps) {
@@ -30,6 +38,7 @@ export default function Tabs(props: TabsProps) {
   const [tabIndex, setTabIndex] = React.useState<TabsProps['defaultIndex']>(
     defaultIndex && Math.min(defaultIndex as number, 0)
   );
+  const classes = useStyle();
   const { t } = useTranslation('glossary');
 
   function handleTabChange(event: any, newValue: number) {
@@ -60,10 +69,18 @@ export default function Tabs(props: TabsProps) {
         indicatorColor="primary"
         textColor="primary"
         aria-label={t('tabs')}
+        variant="scrollable"
+        scrollButtons="auto"
+        className={props.className}
         {...tabProps}
       >
         {tabs.map(({ label }, i) => (
-          <MuiTab key={i} label={label} {...a11yProps(i)} />
+          <MuiTab
+            key={i}
+            label={label}
+            className={tabs?.length > 7 ? classes.tab : ''}
+            {...a11yProps(i)}
+          />
         ))}
       </MuiTabs>
       {tabs.map(({ component }, i) => (

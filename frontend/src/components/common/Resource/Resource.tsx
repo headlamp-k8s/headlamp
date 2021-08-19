@@ -144,7 +144,7 @@ export function PageGrid(props: PageGridProps) {
     <Grid container spacing={1} justify="flex-start" alignItems="stretch" {...other}>
       {childrenArray.map((section, i) => (
         <Grid item key={i} xs={12}>
-          {section}
+          <Box mt={[4, 0, 0]}>{section}</Box>
         </Grid>
       ))}
     </Grid>

@@ -8,8 +8,12 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
     class="MuiTabs-root"
   >
     <div
-      class="MuiTabs-scroller MuiTabs-fixed"
-      style="overflow: hidden;"
+      class="MuiTabs-scrollable"
+      style="width: 99px; height: 99px; position: absolute; top: -9999px; overflow: scroll;"
+    />
+    <div
+      class="MuiTabs-scroller MuiTabs-scrollable"
+      style="margin-bottom: 0px;"
     >
       <div
         aria-label="tabs"
@@ -91,8 +95,12 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
     class="MuiTabs-root"
   >
     <div
-      class="MuiTabs-scroller MuiTabs-fixed"
-      style="overflow: hidden;"
+      class="MuiTabs-scrollable"
+      style="width: 99px; height: 99px; position: absolute; top: -9999px; overflow: scroll;"
+    />
+    <div
+      class="MuiTabs-scroller MuiTabs-scrollable"
+      style="margin-bottom: 0px;"
     >
       <div
         aria-label="tabs"

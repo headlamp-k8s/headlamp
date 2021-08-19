@@ -1,4 +1,4 @@
-import { setTheme } from '../../lib/themes';
+import themesConf, { setTheme } from '../../lib/themes';
 import {
   Action,
   HeaderActionFunc,
@@ -27,7 +27,9 @@ export interface UIState {
   sidebar: {
     selected: string | null;
     isVisible: boolean;
-    isSidebarOpen: boolean;
+    isSidebarOpen?: boolean;
+    /** This is only set to true/false based on a user interaction. */
+    isSidebarOpenUserSelected?: boolean;
     entries: {
       [propName: string]: SidebarEntry;
     };
@@ -52,19 +54,36 @@ export interface UIState {
   };
 }
 
-function getSidebarOpenStatus() {
-  const sidebar = localStorage.getItem('sidebar');
-  if (sidebar) {
-    return JSON.parse(sidebar).shrink;
+function setInitialSidebarOpen() {
+  let defaultOpen;
+
+  const openUserSelected = (function () {
+    const sidebar = localStorage?.getItem('sidebar');
+    if (sidebar) {
+      return !JSON.parse(sidebar).shrink;
+    }
+  })();
+  if (openUserSelected !== undefined) {
+    defaultOpen = openUserSelected;
+  } else {
+    // Have to use window.innerWidth because useMediaQuery is not initially correct.
+    //  useMediaQuery first is wrong, and then give a correct answer after.
+    defaultOpen = window?.innerWidth
+      ? window.innerWidth > themesConf.light.breakpoints.values.md
+      : true;
   }
-  return true;
+
+  return {
+    isSidebarOpen: defaultOpen,
+    isSidebarOpenUserSelected: undefined,
+  };
 }
 
 export const INITIAL_STATE: UIState = {
   sidebar: {
+    ...setInitialSidebarOpen(),
     selected: null,
     isVisible: false,
-    isSidebarOpen: getSidebarOpenStatus(),
     entries: {},
   },
   routes: {
@@ -119,6 +138,7 @@ function reducer(state = INITIAL_STATE, action: Action) {
       newFilters.sidebar = {
         ...newFilters.sidebar,
         isSidebarOpen: action.isSidebarOpen,
+        isSidebarOpenUserSelected: action.isSidebarOpenUserSelected,
       };
       break;
     }

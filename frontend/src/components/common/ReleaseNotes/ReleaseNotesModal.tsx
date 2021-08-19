@@ -6,7 +6,7 @@ import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-import helpers from '../../helpers';
+import helpers from '../../../helpers';
 
 interface ReleaseNotesModalProps {
   releaseNotes: string;

@@ -28,6 +28,10 @@ const useTableStyle = makeStyles(theme => ({
     paddingBottom: theme.spacing(0.5),
   },
   table: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+      overflowX: 'auto', // make it responsive
+    },
     '& .MuiTableCell-root': {
       paddingLeft: '0',
       fontSize: '1rem',

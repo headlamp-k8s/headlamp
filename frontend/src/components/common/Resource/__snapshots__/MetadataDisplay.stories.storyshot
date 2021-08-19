@@ -90,7 +90,7 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
                 class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
               >
                 <p
-                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
                 >
                   label1: My Label 1
                 </p>
@@ -99,7 +99,7 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
                 class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
               >
                 <p
-                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
                 >
                   label2: My Label 2
                 </p>
@@ -108,7 +108,7 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
                 class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
               >
                 <p
-                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
                 >
                   label3: My Label 3
                 </p>
@@ -212,7 +212,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
                 class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
               >
                 <p
-                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
                 >
                   label1: My Label 1
                 </p>
@@ -221,7 +221,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
                 class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
               >
                 <p
-                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
                 >
                   label2: My Label 2
                 </p>
@@ -230,7 +230,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
                 class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
               >
                 <p
-                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
                 >
                   label3: My Label 3
                 </p>
@@ -391,7 +391,7 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
                 class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
               >
                 <p
-                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
                 >
                   label1: My Label 1
                 </p>
@@ -400,7 +400,7 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
                 class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
               >
                 <p
-                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
                 >
                   label2: My Label 2
                 </p>
@@ -409,7 +409,7 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
                 class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
               >
                 <p
-                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-noWrap"
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
                 >
                   label3: My Label 3
                 </p>
