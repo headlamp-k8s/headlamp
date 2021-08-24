@@ -2,7 +2,6 @@ import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
-import Store from 'electron-store';
 import { i18n as I18n } from 'i18next';
 import open from 'open';
 import path from 'path';
@@ -10,7 +9,6 @@ import url from 'url';
 import yargs from 'yargs';
 import i18n from './i18next.config';
 
-const store = new Store();
 const args = yargs
   .option('headless', {
     describe: 'Open Headlamp in the default web browser instead of its app window',
@@ -306,10 +304,6 @@ function startElecron() {
       // otherwise open url in a browser and prevent default
       shell.openExternal(url);
       return { action: 'deny' };
-    });
-
-    ipcMain.on('disableUpdateChecking', () => {
-      store.set('disable_update_check', true);
     });
 
     mainWindow.webContents.on('dom-ready', () => {
