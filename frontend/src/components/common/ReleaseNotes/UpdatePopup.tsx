@@ -18,7 +18,7 @@ function UpdatePopup(props: { releaseDownloadURL: string }) {
       ContentProps={{
         'aria-describedby': 'updatePopup',
       }}
-      message={t('An update is available')}
+      message={t('release|An update is available')}
       action={
         <React.Fragment>
           <Button color="secondary" onClick={() => window.open(releaseDownloadURL)}>
