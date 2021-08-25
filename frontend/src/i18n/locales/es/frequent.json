@@ -1,5 +1,11 @@
 {
   "Cancel": "Cancelar",
+  "Change theme": "Cambiar tema",
+  "Log out": "Desconectar",
+  "(No token set up)": "(Ningún token asignado)",
+  "Account of current user": "Cuenta del usuario actual",
+  "Appbar Tools": "Herramientas de la barra de aplicación",
+  "show more": "mostrar más",
   "Try Again": "Intentar de nuevo",
   "Back": "Volver",
   "Name": "Nombre",
