@@ -30,7 +30,6 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
     minHeight: '50%',
     overflow: 'auto',
   };
-  const appVersion = helpers.getAppVersion();
 
   return (
     <Modal open={showReleaseNotes} BackdropComponent={Backdrop} style={modalStyle}>
@@ -38,7 +37,9 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
         <Box display="flex" justifyContent="center">
           <Box flexGrow={2}>
             <Typography variant="h4">
-              {t('Release Notes')}({appVersion}){' '}
+              {t('release|Release Notes ({{ appVersion }})', {
+                appVersion: helpers.getAppVersion(),
+              })}
             </Typography>
           </Box>
           <Button onClick={() => setShowReleaseNotes(false)}>
