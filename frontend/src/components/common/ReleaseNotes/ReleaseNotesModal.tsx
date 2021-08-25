@@ -46,12 +46,13 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
             <Icon icon={closeIcon} width="30" height="30" />
           </Button>
         </Box>
-        <div
+        <Box
+          mt={2}
           className="markdown-body"
           style={{ color: theme.palette.text.primary, fontFamily: 'inherit' }}
         >
           <ReactMarkdown>{releaseNotes}</ReactMarkdown>
-        </div>
+        </Box>
       </Paper>
     </Modal>
   );
