@@ -37,10 +37,11 @@ export default function ReleaseNotes() {
     this check will help us later in determining whether we are on the latest release or not
     */
           const storedAppVersion = helpers.getAppVersion();
+          let releaseNotes = '';
           if (storedAppVersion && semver.lt(storedAppVersion as string, currentBuildAppVersion)) {
             // get the release notes for the version with which the app was built with
+
             const githubReleaseURL = `GET /repos/{owner}/{repo}/releases/tags/v${currentBuildAppVersion}`;
-            let releaseNotes = '';
             try {
               const response = await octokit.request(githubReleaseURL, {
                 owner: 'kinvolk',
@@ -57,15 +58,17 @@ export default function ReleaseNotes() {
                 err
               );
             }
-
-            if (!!releaseNotes) {
-              setReleaseNotes(releaseNotes);
-            }
           }
 
           // set the store version to the current so that we don't show release notes on
           // every start of app
           helpers.setAppVersion(currentBuildAppVersion);
+
+          // Calling this after setting the version above, so the release notes have the right version
+          // set when they show it.
+          if (!!releaseNotes) {
+            setReleaseNotes(releaseNotes);
+          }
         }
         const isUpdateCheckingDisabled = JSON.parse(
           localStorage.getItem('disable_update_check') || 'false'

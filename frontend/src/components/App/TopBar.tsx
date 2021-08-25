@@ -130,7 +130,7 @@ export function PureTopBar({
   isSidebarOpenUserSelected,
   onToggleOpen,
 }: PureTopBarProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('frequent');
   const isSmall = useMediaQuery('(max-width:960px)');
   const isMedium = useMediaQuery('(max-width:960px)');
 
