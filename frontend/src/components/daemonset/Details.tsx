@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import DaemonSet from '../../lib/k8s/daemonSet';
 import { ContainersSection, MainInfoSection, MetadataDictGrid, PageGrid } from '../common/Resource';
 
@@ -29,6 +30,7 @@ export default function DaemonSetDetails() {
         }
       />
       <ContainersSection resource={item?.jsonData} />
+      <DetailsViewPluginRenderer resource={item} />
     </PageGrid>
   );
 }

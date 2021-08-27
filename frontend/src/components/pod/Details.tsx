@@ -12,6 +12,7 @@ import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import Pod from '../../lib/k8s/pod';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
@@ -182,6 +183,7 @@ export default function PodDetails() {
           }
         />
         {item && <ContainersSection resource={item?.jsonData} />}
+        <DetailsViewPluginRenderer resource={item} />
       </PageGrid>
       {item && [
         <PodLogViewer key="logs" open={showLogs} item={item} onClose={() => setShowLogs(false)} />,

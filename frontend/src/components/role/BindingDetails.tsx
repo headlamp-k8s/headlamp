@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
 import Loader from '../common/Loader';
@@ -63,6 +64,7 @@ export default function RoleBindingDetails() {
           ]}
         />
       </SectionBox>
+      <DetailsViewPluginRenderer resource={item} />
     </PageGrid>
   );
 }

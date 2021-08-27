@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import PersistentVolume from '../../lib/k8s/persistentVolume';
 import { StatusLabel } from '../common/Label';
-import { MainInfoSection } from '../common/Resource';
+import { MainInfoSection, PageGrid } from '../common/Resource';
 
 export default function VolumeDetails() {
   const { name } = useParams<{ namespace: string; name: string }>();
@@ -18,32 +19,35 @@ export default function VolumeDetails() {
   }
 
   return (
-    <MainInfoSection
-      resource={item}
-      extraInfo={
-        item && [
-          {
-            name: t('Status'),
-            value: makeStatusLabel(item),
-          },
-          {
-            name: t('Capacity'),
-            value: item.spec!.capacity.storage,
-          },
-          {
-            name: t('Access Modes'),
-            value: item.spec!.accessModes.join(', '),
-          },
-          {
-            name: t('Reclaim Policy'),
-            value: item.spec!.persistentVolumeReclaimPolicy,
-          },
-          {
-            name: t('Storage Class'),
-            value: item.spec!.storageClassName,
-          },
-        ]
-      }
-    />
+    <PageGrid>
+      <MainInfoSection
+        resource={item}
+        extraInfo={
+          item && [
+            {
+              name: t('Status'),
+              value: makeStatusLabel(item),
+            },
+            {
+              name: t('Capacity'),
+              value: item.spec!.capacity.storage,
+            },
+            {
+              name: t('Access Modes'),
+              value: item.spec!.accessModes.join(', '),
+            },
+            {
+              name: t('Reclaim Policy'),
+              value: item.spec!.persistentVolumeReclaimPolicy,
+            },
+            {
+              name: t('Storage Class'),
+              value: item.spec!.storageClassName,
+            },
+          ]
+        }
+      />
+      <DetailsViewPluginRenderer resource={item} />
+    </PageGrid>
   );
 }

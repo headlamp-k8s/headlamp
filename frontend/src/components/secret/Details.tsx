@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import Secret from '../../lib/k8s/secret';
 import { MainInfoSection, PageGrid, SecretField } from '../common/Resource';
 
@@ -22,6 +23,7 @@ export default function SecretDetails() {
           }))
         }
       />
+      <DetailsViewPluginRenderer resource={item} />
     </PageGrid>
   );
 }
