@@ -1,10 +1,12 @@
 import themesConf, { setTheme } from '../../lib/themes';
+import { sectionFunc } from '../../plugin/registry';
 import {
   Action,
   HeaderActionFunc,
   UI_APP_BAR_SET_ACTION,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
   UI_ROUTER_SET_ROUTE,
+  UI_SET_DETAILS_VIEW,
   UI_SIDEBAR_SET_EXPANDED,
   UI_SIDEBAR_SET_ITEM,
   UI_SIDEBAR_SET_SELECTED,
@@ -42,6 +44,10 @@ export interface UIState {
       headerActions: {
         [name: string]: HeaderActionFunc;
       };
+      pluginAppendedDetailViews: Array<{
+        sectionName: string;
+        sectionFunc: sectionFunc;
+      }>;
     };
     appBar: {
       actions: {
@@ -94,6 +100,7 @@ export const INITIAL_STATE: UIState = {
       headerActions: {
         // action-name -> action-callback
       },
+      pluginAppendedDetailViews: [],
     },
     appBar: {
       actions: {
@@ -152,6 +159,13 @@ function reducer(state = INITIAL_STATE, action: Action) {
       const headerActions = { ...newFilters.views.details.headerActions };
       headerActions[action.action as string] = action.action;
       newFilters.views.details.headerActions = headerActions;
+      break;
+    }
+    case UI_SET_DETAILS_VIEW: {
+      const { sectionName, action: sectionFunc } = action;
+      const detailViews = [...newFilters.views.details.pluginAppendedDetailViews];
+      detailViews.push({ sectionName, sectionFunc });
+      newFilters.views.details.pluginAppendedDetailViews = detailViews;
       break;
     }
     case UI_APP_BAR_SET_ACTION: {

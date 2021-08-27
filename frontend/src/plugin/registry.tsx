@@ -1,11 +1,20 @@
+import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
   setAppBarAction,
+  setDetailsView,
   setDetailsViewHeaderAction,
   setRoute,
   setSidebarItem,
 } from '../redux/actions/actions';
 import store from '../redux/stores/store';
+
+interface SectionFuncProps {
+  title: string;
+  component: (props: { resource: any }) => JSX.Element | null;
+}
+
+export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | undefined;
 
 export default class Registry {
   /**
@@ -100,5 +109,21 @@ export default class Registry {
    */
   registerAppBarAction(actionName: string, actionFunc: (...args: any[]) => JSX.Element | null) {
     store.dispatch(setAppBarAction(actionName, actionFunc));
+  }
+
+  /**
+   * Append the specified title and component to the details view.
+   * @param sectionName a unique name for it
+   * @param sectionFunc - a function that returns your detail view component with props
+   *                      passed into it and the section title
+   *
+   * @example
+   *
+   * ```JSX
+   * register.registerDetailsViewSection("biolatency", (resource: KubeObject) => { title: 'Block I/O Latency', component: (props) => <BioLatency {...props} resource={resource}/>});
+   * ```
+   */
+  registerDetailsViewSection(sectionName: string, sectionFunc: sectionFunc) {
+    store.dispatch(setDetailsView(sectionName, sectionFunc));
   }
 }
