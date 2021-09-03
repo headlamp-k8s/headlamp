@@ -164,10 +164,15 @@ func baseURLReplace(staticDir string, baseURL string) {
 func getOidcCallbackURL(r *http.Request, config *HeadlampConfig) string {
 	urlScheme := r.URL.Scheme
 	if urlScheme == "" {
-		// @todo: Find a better way to get the scheme for the URL.
-		if r.Host == "localhost:"+config.port {
+		// check proxy headers first
+		fwdProto := r.Header.Get("X-Forwarded-Proto")
+
+		switch {
+		case fwdProto != "":
+			urlScheme = fwdProto
+		case r.Host == "localhost:"+config.port:
 			urlScheme = "http"
-		} else {
+		default:
 			urlScheme = "https"
 		}
 	}
