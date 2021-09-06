@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import { timeAgo } from '../../lib/util';
@@ -57,6 +58,7 @@ export default function NodeDetails() {
         }
       />
       <SystemInfoSection node={item} />
+      <DetailsViewPluginRenderer resource={item} />
     </PageGrid>
   );
 }

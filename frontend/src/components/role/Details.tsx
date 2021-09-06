@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import ClusterRole from '../../lib/k8s/clusterRole';
 import Role from '../../lib/k8s/role';
 import Loader from '../common/Loader';
@@ -51,6 +52,7 @@ export default function RoleDetails() {
           data={item.rules}
         />
       </SectionBox>
+      <DetailsViewPluginRenderer resource={item} />
     </PageGrid>
   );
 }

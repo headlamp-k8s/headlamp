@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import Ingress from '../../lib/k8s/ingress';
 import Loader from '../common/Loader';
 import { MainInfoSection, PageGrid } from '../common/Resource';
@@ -62,6 +63,7 @@ export default function IngressDetails() {
           data={getHostsData()}
         />
       </SectionBox>
+      <DetailsViewPluginRenderer resource={item} />
     </PageGrid>
   );
 }

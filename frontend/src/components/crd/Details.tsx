@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import { apiFactory, apiFactoryWithNamespace } from '../../lib/k8s/apiProxy';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
 import { timeAgo } from '../../lib/util';
@@ -148,6 +149,7 @@ export default function CustomResourceDefinitionDetails() {
           ]}
         />
       </SectionBox>
+      <DetailsViewPluginRenderer resource={item} />
       <ViewDialog item={objToShow} open={!!objToShow} onClose={() => setObjToShow(null)} />
     </PageGrid>
   );

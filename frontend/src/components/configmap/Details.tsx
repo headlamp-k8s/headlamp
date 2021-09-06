@@ -2,6 +2,7 @@ import Box from '@material-ui/core/Box';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import ConfigMap from '../../lib/k8s/configMap';
 import Empty from '../common/EmptyContent';
 import Loader from '../common/Loader';
@@ -32,6 +33,7 @@ export default function ConfigDetails() {
           ))
         )}
       </SectionBox>
+      <DetailsViewPluginRenderer resource={item} />
     </PageGrid>
   );
 }
