@@ -99,6 +99,7 @@ declare global {
 }
 
 window.pluginLib = {
+  ApiProxy: require('../lib/k8s/apiProxy'),
   K8s: require('../lib/k8s'),
   CommonComponents: require('../components/common'),
   MuiCore: require('@material-ui/core'),
