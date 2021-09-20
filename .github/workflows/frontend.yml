@@ -47,3 +47,6 @@ jobs:
       run: |
         make frontend-build
 
+    - name: Test plugins
+      run: |
+        make plugins-test

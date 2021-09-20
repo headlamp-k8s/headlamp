@@ -71,6 +71,9 @@ frontend-tsc:
 frontend-test:
 	cd frontend && npm run test -- --coverage
 
+plugins-test:
+	cd plugins/headlamp-plugin && ./test-headlamp-plugin.sh
+
 image:
 	$(DOCKER_CMD) build \
 	--build-arg IMAGE_BASE=$(DOCKER_IMAGE_BASE) \
