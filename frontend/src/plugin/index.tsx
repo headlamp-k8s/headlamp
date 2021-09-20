@@ -99,11 +99,13 @@ declare global {
 }
 
 window.pluginLib = {
+  ApiProxy: require('../lib/k8s/apiProxy'),
   K8s: require('../lib/k8s'),
   CommonComponents: require('../components/common'),
   MuiCore: require('@material-ui/core'),
   MuiStyles: require('@material-ui/styles'),
   React: require('react'),
+  Recharts: require('recharts'),
   ReactRedux: require('react-redux'),
   Utils: require('../lib/util'),
   Iconify: require('@iconify/react'),
