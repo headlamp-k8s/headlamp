@@ -267,8 +267,8 @@ function build(packageFolder) {
 }
 
 const argv = yargs(process.argv.slice(2))
-  .command('build <package>', (
-    'Build the plugin, or folder of plugins. ' + 
+  .command('build [package]', (
+    'Build the plugin, or folder of plugins. ' +
     '<package> defaults to current working directory.'
   ),
     (yargs) => {
