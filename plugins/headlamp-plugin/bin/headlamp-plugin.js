@@ -19,8 +19,9 @@ const yargs = require('yargs/yargs');
  * Then runs npm install inside of the folder.
  * 
  * @param {string} name - name of package and output folder.
+ * @param {bool} link - if we link @kinvolk/headlamp-plugin for testing
  */
-function create(name) {
+function create(name, link) {
   const dstFolder = name;
   const templateFolder = path.resolve(__dirname, '..', 'template');
   const indexPath = path.join(dstFolder, 'src', 'index.tsx');
@@ -52,16 +53,24 @@ function create(name) {
   replaceFileVariables(packagePath);
   replaceFileVariables(indexPath);
 
-  console.log('Installing dependencies...');
-
   // This can be used to make testing locally easier.
-  // const proc1 = child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {cwd: dstFolder});
+  if (link) {
+    console.log('Linking @kinvolk/headlamp-plugin')
+    const proc1 = child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {cwd: dstFolder});
+  }
 
+  console.log('Installing dependencies...');
   // Run npm install.
-  const proc = child_process.spawnSync('npm', ['install'], {cwd: dstFolder});
-  process.stdout.write(proc.stdout);
-  process.stderr.write(proc.stderr);
-  if (proc.status !== 0) {
+  try {
+    child_process.execSync(
+        'npm install',
+        {
+          stdio: 'inherit',
+          cwd: dstFolder,
+          encoding : 'utf8',
+        }
+    );
+  } catch (e) {
     console.error(`Problem running npm install inside of "${dstFolder}"`);
     return 3;
   }
@@ -288,8 +297,12 @@ const argv = yargs(process.argv.slice(2))
       describe: 'Name of package',
       type: 'string',
     })
+    .option("link", {
+      describe: "For testing, use npm link @kinvolk/headlamp-plugin.",
+      type: "boolean",
+    })
   }, (argv) => {
-    process.exitCode = create(argv.name);
+    process.exitCode = create(argv.name, argv.link);
   })
   .command(
     'extract <pluginPackages> <outputPlugins>',
