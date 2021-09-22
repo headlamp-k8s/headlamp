@@ -12,6 +12,7 @@ import ClusterRoleBinding from './clusterRoleBinding';
 import ConfigMap from './configMap';
 import CustomResourceDefinition from './crd';
 import CronJob from './cronJob';
+import CustomResource from './customresource';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
 import Ingress from './ingress';
@@ -49,6 +50,7 @@ const classList = [
   Pod,
   ReplicaSet,
   Role,
+  CustomResource,
   RoleBinding,
   Secret,
   Service,

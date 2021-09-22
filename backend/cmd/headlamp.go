@@ -395,7 +395,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	// On dev mode we're loose about where connections come from
 	if config.devMode {
 		headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
-		methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "DELETE", "OPTIONS"})
+		methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "DELETE", "PATCH", "OPTIONS"})
 		origins := handlers.AllowedOrigins([]string{"*"})
 		handler = handlers.CORS(headers, methods, origins)(r)
 	} else {

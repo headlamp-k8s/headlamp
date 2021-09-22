@@ -7,6 +7,7 @@
  * Copyright © 2020 Kinvolk GmbH
  */
 
+import { OpPatch } from 'json-patch';
 import helpers from '../../helpers';
 import { getToken, logout } from '../auth';
 import { getCluster } from '../util';
@@ -98,7 +99,7 @@ export async function request(
 
     const error: Error & { status?: number } = new Error(message);
     error.status = status;
-    throw error;
+    return Promise.reject(error);
   }
 
   return response.json();
@@ -117,6 +118,7 @@ export function apiFactory(group: string, version: string, resource: string) {
       streamResult(url, name, cb, errCb),
     post: (body: KubeObjectInterface) => post(url, body),
     put: (body: KubeObjectInterface) => put(`${url}/${body.metadata.name}`, body),
+    patch: (body: OpPatch[], name: string) => patch(`${url}/${name}?pretty=true`, body),
     delete: (name: string) => remove(`${url}/${name}`),
     isNamespaced: false,
   };
@@ -142,6 +144,8 @@ export function apiFactoryWithNamespace(
     get: (namespace: string, name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
       streamResult(url(namespace), name, cb, errCb),
     post: (body: KubeObjectInterface) => post(url(body.metadata.namespace as string), body),
+    patch: (body: OpPatch[], namespace: string, name: string) =>
+      patch(`${url(namespace)}/${name}?pretty=true`, body),
     put: (body: KubeObjectInterface) =>
       put(`${url(body.metadata.namespace as string)}/${body.metadata.name}`, body),
     delete: (namespace: string, name: string) => remove(`${url(namespace)}/${name}`),
@@ -183,6 +187,17 @@ export function post(
 ) {
   const body = JSON.stringify(json);
   const opts = { method: 'POST', body, headers: JSON_HEADERS, ...requestOptions };
+  return request(url, opts, autoLogoutOnAuthError);
+}
+
+export function patch(url: string, json: any, autoLogoutOnAuthError = true, requestOptions = {}) {
+  const body = JSON.stringify(json);
+  const opts = {
+    method: 'PATCH',
+    body,
+    headers: { ...JSON_HEADERS, 'Content-Type': 'application/json-patch+json' },
+    ...requestOptions,
+  };
   return request(url, opts, autoLogoutOnAuthError);
 }
 
