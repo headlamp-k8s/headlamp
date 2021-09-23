@@ -53,11 +53,17 @@ export default function DeleteButton(props: DeleteButtonProps) {
 
   React.useEffect(() => {
     if (item) {
-      item.getAuthorization('delete').then((result: any) => {
-        if (result.status.allowed) {
-          setVisible(true);
-        }
-      });
+      item
+        .getAuthorization('delete')
+        .then((result: any) => {
+          if (result.status.allowed) {
+            setVisible(true);
+          }
+        })
+        .catch((err: Error) => {
+          console.error(`Error while getting authorization for delete button in ${item}:`, err);
+          setVisible(false);
+        });
     }
   }, [item]);
 
