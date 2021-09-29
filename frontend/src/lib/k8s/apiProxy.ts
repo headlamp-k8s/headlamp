@@ -112,7 +112,6 @@ export function apiFactory(group: string, version: string, resource: string) {
   const apiRoot = getApiRoot(group, version);
   const url = `${apiRoot}/${resource}`;
   return {
-    resource: { group, resource },
     list: (cb: StreamResultsCb, errCb: StreamErrCb) => streamResults(url, cb, errCb),
     get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
       streamResult(url, name, cb, errCb),
@@ -132,13 +131,8 @@ export function apiFactoryWithNamespace(
 ) {
   const apiRoot = getApiRoot(group, version);
   const results: {
-    resource: {
-      group: string;
-      resource: string;
-    };
     [other: string]: any;
   } = {
-    resource: { group, resource },
     list: (namespace: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
       streamResults(url(namespace), cb, errCb),
     get: (namespace: string, name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
