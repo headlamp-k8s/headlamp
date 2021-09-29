@@ -106,7 +106,7 @@ export async function request(
 }
 
 export type StreamResultsCb = (...args: any[]) => void;
-export type StreamErrCb = (err: Error) => void;
+export type StreamErrCb = (err: Error & { status?: number }, cancelStreamFunc?: () => void) => void;
 
 export function apiFactory(group: string, version: string, resource: string) {
   const apiRoot = getApiRoot(group, version);
@@ -236,7 +236,7 @@ export async function streamResult(
       socket = stream(watchUrl, x => cb(x.object), { isJson: true });
     } catch (err) {
       console.error('Error in api request', { err, url });
-      if (errCb) errCb(err);
+      if (errCb) errCb(err, cancel);
     }
   }
 
@@ -270,7 +270,7 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
       socket = stream(watchUrl, update, { isJson: true });
     } catch (err) {
       console.error('Error in api request', { err, url });
-      if (errCb) errCb(err);
+      if (errCb) errCb(err, cancel);
     }
   }
 
