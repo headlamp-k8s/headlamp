@@ -20,11 +20,7 @@ export default function RoleList() {
   const filterFunc = useFilterFunc();
 
   function setupRolesWithKind(newRoles: Role[] | null, kind: string) {
-    const currentRoles: RolesDict = roles || {};
-    const data = { ...currentRoles };
-
-    data[kind] = newRoles;
-    setRoles(data);
+    setRoles(oldRoles => ({ ...(oldRoles || {}), [kind]: newRoles }));
   }
 
   function setupRoles(roles: Role[] | null) {
