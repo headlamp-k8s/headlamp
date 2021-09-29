@@ -256,15 +256,26 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         resourceAttributes: resourceAttrs,
       };
 
-      return await post(
-        '/apis/authorization.k8s.io/v1beta1/selfsubjectaccessreviews',
-        {
-          kind: 'SelfSubjectAccessReview',
-          apiVersion: 'authorization.k8s.io/v1beta1',
-          spec,
-        },
-        false
-      );
+      const versions = ['v1', 'v1beta1'];
+      for (let i = 0; i < versions.length; i++) {
+        const version = versions[i];
+        try {
+          return await post(
+            `/apis/authorization.k8s.io/${version}/selfsubjectaccessreviews`,
+            {
+              kind: 'SelfSubjectAccessReview',
+              apiVersion: `authorization.k8s.io/${version}`,
+              spec,
+            },
+            false
+          );
+        } catch (err) {
+          // If this is the last attempt or the error is not 404, let it throw.
+          if (err.status !== 404 || i === versions.length - 1) {
+            throw err;
+          }
+        }
+      }
     }
 
     static getErrorMessage(err: ApiError | null) {
