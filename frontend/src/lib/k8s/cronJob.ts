@@ -11,7 +11,10 @@ export interface KubeCronJob extends KubeObjectInterface {
 }
 
 class CronJob extends makeKubeObject<KubeCronJob>('CronJob') {
-  static apiEndpoint = apiFactoryWithNamespace('batch', 'v1beta1', 'cronjobs');
+  static apiEndpoint = apiFactoryWithNamespace(
+    ['batch', 'v1', 'cronjobs'],
+    ['batch', 'v1beta1', 'cronjobs']
+  );
 
   get spec() {
     return this.getValue('spec');
