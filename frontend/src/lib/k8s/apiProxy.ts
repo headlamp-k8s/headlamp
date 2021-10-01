@@ -106,13 +106,106 @@ export async function request(
 }
 
 export type StreamResultsCb = (...args: any[]) => void;
-export type StreamErrCb = (err: Error) => void;
+export type StreamErrCb = (err: Error & { status?: number }, cancelStreamFunc?: () => void) => void;
 
-export function apiFactory(group: string, version: string, resource: string) {
+type ApiFactoryReturn = ReturnType<typeof apiFactory> | ReturnType<typeof apiFactoryWithNamespace>;
+
+async function repeatStreamFunc(
+  apiEndpoints: ApiFactoryReturn[],
+  funcName: keyof ApiFactoryReturn,
+  errCb: StreamErrCb,
+  ...args: any[]
+) {
+  let isCancelled = false;
+  let streamCancel = () => {};
+
+  function runStreamFunc(
+    endpointIndex: number,
+    funcName: string,
+    errCb: StreamErrCb,
+    ...args: any[]
+  ) {
+    const endpoint = apiEndpoints[endpointIndex];
+    return endpoint[funcName as keyof ApiFactoryReturn](...args, errCb);
+  }
+
+  let endpointIndex = 0;
+  const cancel: StreamErrCb = async (err, cancelStream) => {
+    if (isCancelled) {
+      return;
+    }
+    if (err.status === 404 && endpointIndex < apiEndpoints.length) {
+      // Cancel current stream
+      if (cancelStream) {
+        cancelStream();
+      }
+
+      streamCancel = await runStreamFunc(endpointIndex++, funcName, cancel, ...args);
+    } else {
+      errCb(err, streamCancel);
+    }
+  };
+
+  streamCancel = await runStreamFunc(endpointIndex++, funcName, cancel, ...args);
+
+  return () => {
+    isCancelled = true;
+    streamCancel();
+  };
+}
+
+function repeatFactoryMethod(apiEndpoints: ApiFactoryReturn[], funcName: keyof ApiFactoryReturn) {
+  return async (...args: Parameters<ApiFactoryReturn[typeof funcName]>) => {
+    for (let i = 0; i < apiEndpoints.length; i++) {
+      try {
+        const endpoint = apiEndpoints[i];
+        return await endpoint[funcName](...args);
+      } catch (err) {
+        // If the error is 404 and we still have other endpoints, then try the next one
+        if (err.status === 404 && i !== apiEndpoints.length - 1) {
+          continue;
+        }
+
+        throw err;
+      }
+    }
+  };
+}
+
+export function apiFactory(
+  ...args: Parameters<typeof singleApiFactory> | Parameters<typeof multipleApiFactory>
+) {
+  if (args[0] instanceof Array) {
+    return multipleApiFactory(...(args as Parameters<typeof multipleApiFactory>));
+  }
+
+  return singleApiFactory(...(args as Parameters<typeof singleApiFactory>));
+}
+
+function multipleApiFactory(
+  ...args: Parameters<typeof singleApiFactory>[]
+): ReturnType<typeof singleApiFactory> {
+  const apiEndpoints: ReturnType<typeof singleApiFactory>[] = args.map(apiArgs =>
+    singleApiFactory(...apiArgs)
+  );
+
+  return {
+    list: (cb: StreamResultsCb, errCb: StreamErrCb) =>
+      repeatStreamFunc(apiEndpoints, 'list', errCb, cb),
+    get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
+      repeatStreamFunc(apiEndpoints, 'get', errCb, name, cb),
+    post: repeatFactoryMethod(apiEndpoints, 'post'),
+    patch: repeatFactoryMethod(apiEndpoints, 'patch'),
+    put: repeatFactoryMethod(apiEndpoints, 'put'),
+    delete: repeatFactoryMethod(apiEndpoints, 'delete'),
+    isNamespaced: false,
+  };
+}
+
+function singleApiFactory(group: string, version: string, resource: string) {
   const apiRoot = getApiRoot(group, version);
   const url = `${apiRoot}/${resource}`;
   return {
-    resource: { group, resource },
     list: (cb: StreamResultsCb, errCb: StreamErrCb) => streamResults(url, cb, errCb),
     get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
       streamResult(url, name, cb, errCb),
@@ -125,6 +218,42 @@ export function apiFactory(group: string, version: string, resource: string) {
 }
 
 export function apiFactoryWithNamespace(
+  ...args:
+    | Parameters<typeof simpleApiFactoryWithNamespace>
+    | Parameters<typeof multipleApiFactoryWithNamespace>
+) {
+  if (args[0] instanceof Array) {
+    return multipleApiFactoryWithNamespace(
+      ...(args as Parameters<typeof multipleApiFactoryWithNamespace>)
+    );
+  }
+
+  return simpleApiFactoryWithNamespace(
+    ...(args as Parameters<typeof simpleApiFactoryWithNamespace>)
+  );
+}
+
+function multipleApiFactoryWithNamespace(
+  ...args: Parameters<typeof simpleApiFactoryWithNamespace>[]
+): ReturnType<typeof simpleApiFactoryWithNamespace> {
+  const apiEndpoints: ReturnType<typeof simpleApiFactoryWithNamespace>[] = args.map(apiArgs =>
+    simpleApiFactoryWithNamespace(...apiArgs)
+  );
+
+  return {
+    list: (namespace: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
+      repeatStreamFunc(apiEndpoints, 'list', errCb, namespace, cb),
+    get: (namespace: string, name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
+      repeatStreamFunc(apiEndpoints, 'get', errCb, namespace, name, cb),
+    post: repeatFactoryMethod(apiEndpoints, 'post'),
+    patch: repeatFactoryMethod(apiEndpoints, 'patch'),
+    put: repeatFactoryMethod(apiEndpoints, 'put'),
+    delete: repeatFactoryMethod(apiEndpoints, 'delete'),
+    isNamespaced: true,
+  };
+}
+
+function simpleApiFactoryWithNamespace(
   group: string,
   version: string,
   resource: string,
@@ -132,13 +261,8 @@ export function apiFactoryWithNamespace(
 ) {
   const apiRoot = getApiRoot(group, version);
   const results: {
-    resource: {
-      group: string;
-      resource: string;
-    };
     [other: string]: any;
   } = {
-    resource: { group, resource },
     list: (namespace: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
       streamResults(url(namespace), cb, errCb),
     get: (namespace: string, name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
@@ -242,7 +366,7 @@ export async function streamResult(
       socket = stream(watchUrl, x => cb(x.object), { isJson: true });
     } catch (err) {
       console.error('Error in api request', { err, url });
-      if (errCb) errCb(err);
+      if (errCb) errCb(err, cancel);
     }
   }
 
@@ -276,7 +400,7 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
       socket = stream(watchUrl, update, { isJson: true });
     } catch (err) {
       console.error('Error in api request', { err, url });
-      if (errCb) errCb(err);
+      if (errCb) errCb(err, cancel);
     }
   }
 

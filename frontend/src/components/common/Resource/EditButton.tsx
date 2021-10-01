@@ -68,11 +68,17 @@ export default function EditButton(props: EditButtonProps) {
 
   React.useEffect(() => {
     if (item) {
-      item.getAuthorization('update').then((result: any) => {
-        if (result.status.allowed) {
-          setVisible(true);
-        }
-      });
+      item
+        .getAuthorization('update')
+        .then((result: any) => {
+          if (result.status.allowed) {
+            setVisible(true);
+          }
+        })
+        .catch((err: Error) => {
+          console.error(`Error while getting authorization for edit button in ${item}:`, err);
+          setVisible(false);
+        });
     }
   }, [item]);
 
