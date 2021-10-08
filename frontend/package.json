@@ -44,7 +44,7 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.25.2",
-    "notistack": "^1.0.3",
+    "notistack": "^1.0.10",
     "openapi-types": "^9.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
