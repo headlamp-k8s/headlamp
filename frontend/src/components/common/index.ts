@@ -19,3 +19,5 @@ export { default as Tabs } from './Tabs';
 export * from './Terminal';
 export { default as Terminal } from './Terminal';
 export * from './Tooltip';
+export * from './Resource/EditorDialog';
+export { default as EditorDialog } from './Resource/EditorDialog';
