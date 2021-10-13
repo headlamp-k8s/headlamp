@@ -61,9 +61,10 @@ export async function request(
   try {
     response = await fetch(url, requestData);
   } catch (err) {
-    // AbortController sets the error code as 20
-    if (err.code === 20) {
-      response = new Response(undefined, { status: 408, statusText: 'Request timed-out' });
+    if (err instanceof Error) {
+      if (err.name === 'AbortError') {
+        response = new Response(undefined, { status: 408, statusText: 'Request timed-out' });
+      }
     }
   } finally {
     clearTimeout(id);
@@ -97,7 +98,7 @@ export async function request(
       );
     }
 
-    const error: Error & { status?: number } = new Error(message);
+    const error = new Error(message) as ApiError;
     error.status = status;
     return Promise.reject(error);
   }
@@ -162,7 +163,7 @@ function repeatFactoryMethod(apiEndpoints: ApiFactoryReturn[], funcName: keyof A
         return await endpoint[funcName](...args);
       } catch (err) {
         // If the error is 404 and we still have other endpoints, then try the next one
-        if (err.status === 404 && i !== apiEndpoints.length - 1) {
+        if ((err as ApiError).status === 404 && i !== apiEndpoints.length - 1) {
           continue;
         }
 
@@ -366,7 +367,7 @@ export async function streamResult(
       socket = stream(watchUrl, x => cb(x.object), { isJson: true });
     } catch (err) {
       console.error('Error in api request', { err, url });
-      if (errCb) errCb(err, cancel);
+      if (errCb) errCb(err as ApiError, cancel);
     }
   }
 
@@ -400,7 +401,7 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
       socket = stream(watchUrl, update, { isJson: true });
     } catch (err) {
       console.error('Error in api request', { err, url });
-      if (errCb) errCb(err, cancel);
+      if (errCb) errCb(err as ApiError, cancel);
     }
   }
 
@@ -605,7 +606,7 @@ export async function apply(body: KubeObjectInterface): Promise<JSON> {
   } catch (err) {
     // Check to see if failed because the record already exists.
     // If the failure isn't a 409 (i.e. Confilct), just rethrow.
-    if (err.status !== 409) throw err;
+    if ((err as ApiError).status !== 409) throw err;
 
     // We had a confilct. Try a PUT
     return resourceClass!.apiEndpoint.put(body);
@@ -631,7 +632,7 @@ export async function metrics(
       console.debug('No metrics', { err, url });
 
       if (onError) {
-        onError(err);
+        onError(err as ApiError);
       }
     }
   }
