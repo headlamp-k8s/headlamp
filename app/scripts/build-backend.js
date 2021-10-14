@@ -6,6 +6,8 @@ exports.default = async context => {
   let arch = context.arch;
   if (arch === 'x64') {
     arch = 'amd64';
+  } else if (arch === 'armv7l') {
+    arch = 'arm';
   }
 
   let osName = '';
