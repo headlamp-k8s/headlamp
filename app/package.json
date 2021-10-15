@@ -24,8 +24,22 @@
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "linux": {
       "target": [
-        "AppImage",
-        "tar.gz"
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "armv7l",
+            "arm64"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64",
+            "armv7l",
+            "arm64"
+          ]
+        }
       ],
       "executableName": "headlamp",
       "maintainer": "Kinvolk <hello@kinvolk.io>",
