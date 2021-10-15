@@ -22,7 +22,11 @@ export default function CreateButton() {
     try {
       await apply(newItem);
     } catch (err) {
-      setErrorMessage(err.message || t('Something went wrong…'));
+      let msg = t('Something went wrong…');
+      if (err instanceof Error) {
+        msg = err.message;
+      }
+      setErrorMessage(msg);
       setOpenDialog(true);
       throw err;
     }

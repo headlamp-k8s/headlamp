@@ -12,7 +12,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { generatePath, useHistory } from 'react-router-dom';
 import { setToken } from '../../lib/auth';
 import { useClustersConf } from '../../lib/k8s';
-import { testAuth } from '../../lib/k8s/apiProxy';
+import { ApiError, testAuth } from '../../lib/k8s/apiProxy';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { ClusterDialog } from '../cluster/Chooser';
 
@@ -182,6 +182,6 @@ async function loginWithToken(token: string) {
     return 200;
   } catch (err) {
     console.error(err);
-    return err.status;
+    return (err as ApiError).status;
   }
 }

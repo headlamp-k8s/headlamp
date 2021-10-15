@@ -271,7 +271,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
           );
         } catch (err) {
           // If this is the last attempt or the error is not 404, let it throw.
-          if (err.status !== 404 || i === versions.length - 1) {
+          if ((err as ApiError).status !== 404 || i === versions.length - 1) {
             throw err;
           }
         }
