@@ -67,6 +67,7 @@ interface MainInfoSectionProps {
   headerStyle?: HeaderStyleProps['headerStyle'];
   noDefaultActions?: boolean;
   backLink?: string | ReturnType<typeof useLocation> | null;
+  error?: string | Error | null;
 }
 
 export function MainInfoSection(props: MainInfoSectionProps) {
@@ -79,6 +80,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     headerStyle = 'main',
     noDefaultActions = false,
     backLink,
+    error = null,
   } = props;
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
   const { t } = useTranslation('frequent');
@@ -121,7 +123,11 @@ export function MainInfoSection(props: MainInfoSectionProps) {
         }
       >
         {resource === null ? (
-          <Loader title={t('frequent|Loading resource data')} />
+          !!error ? (
+            <Empty color="error">{error.toString()}</Empty>
+          ) : (
+            <Loader title={t('frequent|Loading resource data')} />
+          )
         ) : (
           <React.Fragment>
             {headerSection}
