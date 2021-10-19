@@ -10,18 +10,15 @@ import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import { timeAgo } from '../../lib/util';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
-import { HeaderLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../common/Label';
-import Loader from '../common/Loader';
-import { MainInfoSection, PageGrid } from '../common/Resource';
+import { StatusLabelProps } from '../common';
+import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
+import { DetailsGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
 
 export default function NodeDetails() {
   const { name } = useParams<{ name: string }>();
-  const [item, setItem] = React.useState<Node | null>(null);
   const { t } = useTranslation('glossary');
-
-  Node.useApiGet(setItem, name);
 
   const [nodeMetrics, metricsError] = Node.useMetrics();
 
@@ -36,30 +33,35 @@ export default function NodeDetails() {
     });
   }
 
-  return !item ? (
-    <Loader title={t('node|Loading node details')} />
-  ) : (
-    <PageGrid>
-      <MainInfoSection
-        headerSection={<ChartsSection node={item} metrics={nodeMetrics} noMetrics={noMetrics} />}
-        resource={item}
-        extraInfo={
-          item && [
-            {
-              name: t('frequent|Ready'),
-              value: <NodeReadyLabel node={item} />,
-            },
-            {
-              name: t('Pod CIDR'),
-              value: item.spec.podCIDR,
-            },
-            ...getAddresses(item),
-          ]
-        }
-      />
-      <SystemInfoSection node={item} />
-      <DetailsViewPluginRenderer resource={item} />
-    </PageGrid>
+  return (
+    <DetailsGrid
+      headerSection={item => (
+        <ChartsSection node={item} metrics={nodeMetrics} noMetrics={noMetrics} />
+      )}
+      resourceType={Node}
+      name={name}
+      extraInfo={item =>
+        item && [
+          {
+            name: t('frequent|Ready'),
+            value: <NodeReadyLabel node={item} />,
+          },
+          {
+            name: t('Pod CIDR'),
+            value: item.spec.podCIDR,
+          },
+          ...getAddresses(item),
+        ]
+      }
+      sectionsFunc={item =>
+        !!item && (
+          <>
+            <SystemInfoSection node={item} />
+            <DetailsViewPluginRenderer resource={item} />
+          </>
+        )
+      }
+    />
   );
 }
 
@@ -134,6 +136,10 @@ function SystemInfoSection(props: SystemInfoSectionProps) {
         <ValueLabel>{osName}</ValueLabel>
       </React.Fragment>
     );
+  }
+
+  if (!node) {
+    return null;
   }
 
   return (
