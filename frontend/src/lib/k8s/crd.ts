@@ -25,6 +25,10 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
     return 'CustomResourceDefinition';
   }
 
+  get listRoute(): string {
+    return 'crds';
+  }
+
   get spec() {
     return this.jsonData!.spec;
   }
