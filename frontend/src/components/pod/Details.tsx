@@ -12,11 +12,10 @@ import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import Pod from '../../lib/k8s/pod';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
-import { ContainersSection, MainInfoSection, PageGrid } from '../common/Resource';
+import { ContainersSection, DetailsGrid } from '../common/Resource';
 import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
 
@@ -126,74 +125,74 @@ function PodLogViewer(props: PodLogViewerProps) {
 
 export default function PodDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const [item, setItem] = React.useState<Pod | null>(null);
   const [showLogs, setShowLogs] = React.useState(false);
   const [showTerminal, setShowTerminal] = React.useState(false);
   const { t } = useTranslation('glossary');
 
-  Pod.useApiGet(setItem, name, namespace);
-
   return (
-    <React.Fragment>
-      <PageGrid>
-        <MainInfoSection
-          resource={item}
-          actions={
-            item && [
-              <Tooltip title={t('Show Logs') as string}>
-                <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
-                  <Icon icon={fileDocumentBoxOutline} />
-                </IconButton>
-              </Tooltip>,
-              <Tooltip title={t('Terminal / Exec') as string}>
-                <IconButton
-                  aria-label={t('terminal') as string}
-                  onClick={() => setShowTerminal(true)}
-                >
-                  <Icon icon={consoleIcon} />
-                </IconButton>
-              </Tooltip>,
-            ]
-          }
-          extraInfo={
-            item && [
-              {
-                name: t('State'),
-                value: makePodStatusLabel(item),
-              },
-              {
-                name: t('Node'),
-                value: item.spec.nodeName ? (
-                  <Link routeName="node" params={{ name: item.spec.nodeName }}>
-                    {item.spec.nodeName}
-                  </Link>
-                ) : (
-                  ''
-                ),
-              },
-              {
-                name: t('Host IP'),
-                value: item.status.hostIP,
-              },
-              {
-                name: t('Pod IP'),
-                value: item.status.podIP,
-              },
-            ]
-          }
-        />
-        {item && <ContainersSection resource={item?.jsonData} />}
-        <DetailsViewPluginRenderer resource={item} />
-      </PageGrid>
-      {item && [
-        <PodLogViewer key="logs" open={showLogs} item={item} onClose={() => setShowLogs(false)} />,
-        <Terminal
-          key="terminal"
-          open={showTerminal}
-          item={item}
-          onClose={() => setShowTerminal(false)}
-        />,
-      ]}
-    </React.Fragment>
+    <DetailsGrid
+      resourceType={Pod}
+      name={name}
+      namespace={namespace}
+      actions={item =>
+        item && [
+          <Tooltip title={t('Show Logs') as string}>
+            <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
+              <Icon icon={fileDocumentBoxOutline} />
+            </IconButton>
+          </Tooltip>,
+          <Tooltip title={t('Terminal / Exec') as string}>
+            <IconButton aria-label={t('terminal') as string} onClick={() => setShowTerminal(true)}>
+              <Icon icon={consoleIcon} />
+            </IconButton>
+          </Tooltip>,
+        ]
+      }
+      extraInfo={item =>
+        item && [
+          {
+            name: t('State'),
+            value: makePodStatusLabel(item),
+          },
+          {
+            name: t('Node'),
+            value: item.spec.nodeName ? (
+              <Link routeName="node" params={{ name: item.spec.nodeName }}>
+                {item.spec.nodeName}
+              </Link>
+            ) : (
+              ''
+            ),
+          },
+          {
+            name: t('Host IP'),
+            value: item.status.hostIP,
+          },
+          {
+            name: t('Pod IP'),
+            value: item.status.podIP,
+          },
+        ]
+      }
+      sectionsFunc={item =>
+        item && (
+          <>
+            <ContainersSection resource={item?.jsonData} />
+            <PodLogViewer
+              key="logs"
+              open={showLogs}
+              item={item}
+              onClose={() => setShowLogs(false)}
+            />
+            <Terminal
+              key="terminal"
+              open={showTerminal}
+              item={item}
+              onClose={() => setShowTerminal(false)}
+            />
+          </>
+        )
+      }
+    />
   );
 }
