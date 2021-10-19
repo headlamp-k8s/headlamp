@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
-import { apiFactory, apiFactoryWithNamespace } from '../../lib/k8s/apiProxy';
+import { ApiError, apiFactory, apiFactoryWithNamespace } from '../../lib/k8s/apiProxy';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
 import { timeAgo } from '../../lib/util';
 import Loader from '../common/Loader';
@@ -34,11 +34,12 @@ export default function CustomResourceDefinitionDetails() {
   const classes = useStyle();
   const { name } = useParams<{ name: string }>();
   const [item, setItem] = React.useState<CRD | null>(null);
+  const [error, setError] = React.useState<ApiError | null>(null);
   const [objToShow, setObjToShow] = React.useState<KubeCRD | null>(null);
   const [objects, setObjects] = React.useState<KubeCRD[]>([]);
   const { t } = useTranslation('glossary');
 
-  CRD.useApiGet(setItem, name);
+  CRD.useApiGet(setItem, name, undefined, setError);
 
   React.useEffect(() => {
     let promise: Promise<any> | null = null;
@@ -59,6 +60,7 @@ export default function CustomResourceDefinitionDetails() {
     <PageGrid>
       <MainInfoSection
         resource={item}
+        error={error}
         extraInfo={
           item && [
             {
