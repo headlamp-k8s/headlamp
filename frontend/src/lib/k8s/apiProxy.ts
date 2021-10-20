@@ -142,7 +142,7 @@ async function repeatStreamFunc(
       }
 
       streamCancel = await runStreamFunc(endpointIndex++, funcName, cancel, ...args);
-    } else {
+    } else if (!!errCb) {
       errCb(err, streamCancel);
     }
   };

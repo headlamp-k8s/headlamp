@@ -8,7 +8,7 @@ import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ResourceClasses } from '../../../lib/k8s';
-import { KubeObjectInterface, KubeOwnerReference } from '../../../lib/k8s/cluster';
+import { KubeObject, KubeObjectInterface, KubeOwnerReference } from '../../../lib/k8s/cluster';
 import { localeDate } from '../../../lib/util';
 import { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
 import Link from '../Link';
@@ -25,14 +25,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+type ExtraRowsFunc = (resource: KubeObjectInterface) => NameValueTableRow[] | null;
+
 export interface MetadataDisplayProps {
-  resource: KubeObjectInterface;
-  extraRows?: NameValueTableRow[] | null;
+  resource: KubeObject;
+  extraRows?: ExtraRowsFunc | NameValueTableRow[] | null;
 }
 
 export function MetadataDisplay(props: MetadataDisplayProps) {
   const { resource, extraRows } = props;
   const { t } = useTranslation('resource');
+  let makeExtraRows: ExtraRowsFunc;
 
   function makeOwnerReferences(ownerReferences: KubeOwnerReference[]) {
     if (!resource || ownerReferences === undefined) {
@@ -59,6 +62,14 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
         {i < numItems - 1 && <br />}
       </>
     ));
+  }
+
+  if (typeof extraRows === 'function') {
+    makeExtraRows = extraRows;
+  } else if (!extraRows) {
+    makeExtraRows = () => null;
+  } else {
+    makeExtraRows = () => extraRows as NameValueTableRow[];
   }
 
   const mainRows = (
@@ -97,7 +108,7 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
         hide: !resource.metadata.ownerReferences || resource.metadata.ownerReferences.length === 0,
       },
     ] as NameValueTableRow[]
-  ).concat(extraRows || []);
+  ).concat(makeExtraRows(resource) || []);
 
   return <NameValueTable rows={mainRows} />;
 }

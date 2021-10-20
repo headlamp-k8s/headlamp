@@ -14,9 +14,11 @@ import Editor from '@monaco-editor/react';
 import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import * as monaco from 'monaco-editor';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import DetailsViewPluginRenderer from '../../../helpers/renderHelpers';
+import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
   KubeCondition,
   KubeContainer,
@@ -60,13 +62,17 @@ export function ResourceLink(props: ResourceLinkProps) {
 
 interface MainInfoSectionProps {
   resource: KubeObject | null;
-  headerSection?: React.ReactNode;
+  headerSection?: ((resource: KubeObject | null) => React.ReactNode) | React.ReactNode;
   title?: string;
-  extraInfo?: NameValueTableRow[] | null;
-  actions?: React.ReactNode[] | null;
+  extraInfo?:
+    | ((resource: KubeObject | null) => NameValueTableRow[] | null)
+    | NameValueTableRow[]
+    | null;
+  actions?: ((resource: KubeObject | null) => React.ReactNode[] | null) | React.ReactNode[] | null;
   headerStyle?: HeaderStyleProps['headerStyle'];
   noDefaultActions?: boolean;
   backLink?: string | ReturnType<typeof useLocation> | null;
+  error?: string | Error | null;
 }
 
 export function MainInfoSection(props: MainInfoSectionProps) {
@@ -79,6 +85,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     headerStyle = 'main',
     noDefaultActions = false,
     backLink,
+    error = null,
   } = props;
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
   const { t } = useTranslation('frequent');
@@ -89,15 +96,24 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     );
   }
 
-  let defaultActions: MainInfoSectionProps['actions'] = [];
+  let defaultActions: React.ReactNode[] | null = [];
 
   if (!noDefaultActions && resource) {
     defaultActions = [<EditButton item={resource} />, <DeleteButton item={resource} />];
   }
 
+  const propsHeaderActions = typeof actions === 'function' ? actions(resource) || [] : actions;
+
+  let header: React.ReactNode = [];
+  if (typeof headerSection === 'function') {
+    header = headerSection(resource);
+  } else {
+    header = headerSection;
+  }
+
   return (
     <>
-      {resource && (
+      {(backLink || resource) && (
         <Button
           startIcon={<Icon icon={chevronLeft} />}
           size="small"
@@ -115,21 +131,73 @@ export function MainInfoSection(props: MainInfoSectionProps) {
             title={title || (resource ? resource.kind : '')}
             headerStyle={headerStyle}
             actions={getHeaderActions()
-              .concat(React.Children.toArray(actions))
+              .concat(React.Children.toArray(propsHeaderActions))
               .concat(defaultActions)}
           />
         }
       >
         {resource === null ? (
-          <Loader title={t('frequent|Loading resource data')} />
+          !!error ? (
+            <Empty color="error">{error.toString()}</Empty>
+          ) : (
+            <Loader title={t('frequent|Loading resource data')} />
+          )
         ) : (
           <React.Fragment>
-            {headerSection}
+            {header}
             <MetadataDisplay resource={resource} extraRows={extraInfo} />
           </React.Fragment>
         )}
       </SectionBox>
     </>
+  );
+}
+
+interface DetailsGridProps extends PropsWithChildren<Omit<MainInfoSectionProps, 'resource'>> {
+  resourceType: KubeObject;
+  name: string;
+  namespace?: string;
+  sectionsFunc?: (item: KubeObject) => React.ReactNode;
+}
+
+export function DetailsGrid(props: DetailsGridProps) {
+  const { sectionsFunc, resourceType, name, namespace, children, ...otherMainInfoSectionProps } =
+    props;
+  const [item, setItem] = React.useState<KubeObject | null>(null);
+  const [error, setError] = React.useState<ApiError | string | null>(null);
+
+  const backLink = React.useMemo(() => {
+    let route;
+    try {
+      route = new resourceType().listRoute;
+    } catch (err) {
+      console.error(
+        `Error creating route for details grid (resource type=${resourceType}): ${err}`
+      );
+
+      // Let the MainInfoSection handle it.
+      return undefined;
+    }
+
+    return createRouteURL(route);
+  }, []);
+
+  resourceType.useApiGet(setItem, name, namespace || undefined, (err: ApiError) =>
+    setError(err.message)
+  );
+
+  return (
+    <PageGrid>
+      <MainInfoSection
+        resource={item}
+        error={error}
+        backLink={!item ? backLink : undefined}
+        {...otherMainInfoSectionProps}
+      />
+      <>{!!sectionsFunc && sectionsFunc(item)}</>
+      {children}
+      <DetailsViewPluginRenderer resource={item} />
+    </PageGrid>
   );
 }
 

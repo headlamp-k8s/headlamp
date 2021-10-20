@@ -193,7 +193,8 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     static apiGet<U extends KubeObject>(
       onGet: (...args: any) => void,
       name: string,
-      namespace?: string
+      namespace?: string,
+      onError?: (err: ApiError | null) => void
     ) {
       const createInstance = (item: T) => this.create(item) as U;
       const args: any[] = [name, (obj: T) => onGet(createInstance(obj))];
@@ -202,18 +203,23 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         args.unshift(namespace);
       }
 
+      if (!!onError) {
+        args.push(onError);
+      }
+
       return this.apiEndpoint.get.bind(null, ...args);
     }
 
     static useApiGet<U extends KubeObject>(
       onGet: (...args: any) => any,
       name: string,
-      namespace?: string
+      namespace?: string,
+      onError?: (err: ApiError | null) => void
     ) {
       // We do the type conversion here because we want to be able to use hooks that may not have
       // the exact signature as get callbacks.
       const getCallback = onGet as (item: U) => void;
-      useConnectApi(this.apiGet(getCallback, name, namespace));
+      useConnectApi(this.apiGet(getCallback, name, namespace, onError));
     }
 
     private _class() {
