@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Terminal as XTerminal } from 'xterm';
+import { FitAddon } from 'xterm-addon-fit';
 import Pod from '../../lib/k8s/pod';
 
 const decoder = new TextDecoder('utf-8');
@@ -45,12 +46,18 @@ export default function Terminal(props: TerminalProps) {
   }
 
   // @todo: Give the real exec type when we have it.
-  function setupTerminal(containerRef: HTMLElement, xterm: XTerminal, exec: any) {
+  function setupTerminal(
+    containerRef: HTMLElement,
+    xterm: XTerminal,
+    fitAddon: FitAddon,
+    exec: any
+  ) {
     if (!containerRef) {
       return;
     }
 
     xterm.open(containerRef);
+    fitAddon.fit();
 
     xterm.onKey(event => {
       // For some reason, pressing a key can give us a "keydown" or "keypress" event...
@@ -109,12 +116,16 @@ export default function Terminal(props: TerminalProps) {
         return;
       }
 
-      const xterm = new XTerminal({ rows: 40, cols: 80 });
+      const xterm = new XTerminal();
+
+      const fitAddon = new FitAddon();
+      xterm.loadAddon(fitAddon);
+
       xterm.writeln(t('Connecting…') + '\n');
 
       const exec = item.exec(container, (items: ArrayBuffer) => onData(xterm, items));
 
-      setupTerminal(terminalContainerRef, xterm, exec);
+      setupTerminal(terminalContainerRef, xterm, fitAddon, exec);
 
       return function cleanup() {
         xterm.dispose();
