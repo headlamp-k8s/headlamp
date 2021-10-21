@@ -72,7 +72,7 @@
     },
     "win": {
       "target": [
-        "msi"
+        "nsis"
       ],
       "extraResources": [
         {
