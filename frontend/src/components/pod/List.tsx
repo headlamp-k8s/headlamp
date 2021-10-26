@@ -4,6 +4,7 @@ import { Box } from '@material-ui/core';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
 import { useFilterFunc } from '../../lib/util';
 import { LightTooltip, SectionFilterHeader } from '../common';
@@ -53,8 +54,13 @@ export function makePodStatusLabel(pod: Pod) {
   );
 }
 
-export default function PodList() {
-  const [pods, error] = Pod.useList();
+interface PodListProps {
+  pods: Pod[];
+  error: ApiError | null;
+}
+
+export function PodListRenderer(props: PodListProps) {
+  const { pods, error } = props;
   const filterFunc = useFilterFunc();
   const { t } = useTranslation('glossary');
 
@@ -112,4 +118,10 @@ export default function PodList() {
       />
     </SectionBox>
   );
+}
+
+export default function PodList() {
+  const [pods, error] = Pod.useList();
+
+  return <PodListRenderer pods={pods} error={error} />;
 }
