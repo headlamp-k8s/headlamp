@@ -28,13 +28,14 @@ import {
   KubeObject,
   KubeObjectInterface,
 } from '../../../lib/k8s/cluster';
-import { KubePod } from '../../../lib/k8s/pod';
+import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import Loader from '../../common/Loader';
 import { SectionBox } from '../../common/SectionBox';
 import SectionHeader, { HeaderStyleProps } from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
+import { PodListRenderer } from '../../pod/List';
 import { LightTooltip } from '..';
 import Empty from '../EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from '../Label';
@@ -617,6 +618,33 @@ export function ContainerInfo(props: ContainerInfoProps) {
   );
 }
 
+interface OwnedPodsSectionProps {
+  resource: KubeObjectInterface;
+  hideColumns?: PodListProps['hideColumns'];
+}
+
+export function OwnedPodsSection(props: OwnedPodsSectionProps) {
+  const { resource, hideColumns } = props;
+
+  const [pods, error] = Pod.useList();
+
+  function getOwnedPods() {
+    if (!pods) {
+      return null;
+    }
+    const resourceTemplateLabel = Object.values(resource?.spec?.template?.metadata?.labels || []);
+    if (!resourceTemplateLabel) {
+      return [];
+    }
+    return pods.filter(item =>
+      resourceTemplateLabel.every(elem => Object.values(item.metadata.labels).includes(elem))
+    );
+  }
+
+  const filteredPods = getOwnedPods();
+  console.log('filtered pods', filteredPods);
+  return <PodListRenderer hideColumns={hideColumns} pods={filteredPods} error={error} />;
+}
 export function ContainersSection(props: { resource: KubeObjectInterface | null }) {
   const { resource } = props;
   const { t } = useTranslation('glossary');

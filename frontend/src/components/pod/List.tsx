@@ -54,8 +54,8 @@ export function makePodStatusLabel(pod: Pod) {
   );
 }
 
-interface PodListProps {
-  pods: Pod[];
+export interface PodListProps {
+  pods: Pod[] | null;
   error: ApiError | null;
 }
 
