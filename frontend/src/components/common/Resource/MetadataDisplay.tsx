@@ -14,7 +14,7 @@ import { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
 import Link from '../Link';
 import { LightTooltip } from '../Tooltip';
 
-const useStyles = makeStyles(theme => ({
+export const useMetadataDisplayStyles = makeStyles(theme => ({
   metadataValueLabel: {
     color: theme.palette.text.primary,
     backgroundColor: theme.palette.metadataBgColor,
@@ -122,7 +122,7 @@ interface MetadataDictGridProps {
 }
 
 export function MetadataDictGrid(props: MetadataDictGridProps) {
-  const classes = useStyles({});
+  const classes = useMetadataDisplayStyles({});
   const { dict, showKeys = true } = props;
   const [expanded, setExpanded] = React.useState(false);
   const defaultNumShown = 20;
