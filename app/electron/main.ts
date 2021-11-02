@@ -293,6 +293,24 @@ function setMenu(i18n: I18n) {
   Menu.setApplicationMenu(menu);
 }
 
+function calculateWindowSize() {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  const [maxWidth, maxHeight] = [1920, 1080];
+  const pixelRatio = screen.getPrimaryDisplay().scaleFactor;
+
+  switch (pixelRatio) {
+    case 1:
+      if (width / pixelRatio > 1920) {
+        return { width: maxWidth, height: maxHeight };
+      }
+    case 2:
+      if (width / pixelRatio > 1000) {
+        return { width: maxWidth, height: maxHeight };
+      }
+  }
+  return { width, height };
+}
+
 function startElecron() {
   log.transports.file.level = 'info';
   log.info('App starting...');
@@ -324,7 +342,7 @@ function startElecron() {
         protocol: 'file:',
         slashes: true,
       });
-    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    const { width, height } = calculateWindowSize();
     mainWindow = new BrowserWindow({
       width,
       height,
