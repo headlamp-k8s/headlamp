@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { generatePath } from 'react-router';
+import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
@@ -412,6 +413,13 @@ export const ROUTES: {
     sidebar: 'crds',
     component: () => <CustomResourceDefinitionDetails />,
   },
+  wildRoute: {
+    path: '*',
+    exact: true,
+    component: () => <NotFoundComponent />,
+    sidebar: null,
+    noAuthRequired: true,
+  },
 };
 
 export function getRoute(routeName: string) {
@@ -419,6 +427,9 @@ export function getRoute(routeName: string) {
 }
 
 export function getRoutePath(route: Route) {
+  if (route.path === '*') {
+    return route.path;
+  }
   if (route.noCluster) {
     return route.path;
   }
