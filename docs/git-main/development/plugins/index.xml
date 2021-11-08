@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Plugins on Headlamp</title>
+    <link>/docs/git-main/development/plugins/</link>
+    <description>Recent content in Plugins on Headlamp</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="/docs/git-main/development/plugins/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Building and Shipping Plugins</title>
+      <link>/docs/git-main/development/plugins/building/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/git-main/development/plugins/building/</guid>
+      <description>This section explains how to start developing a Headlamp plugin, and how to ship it once finished.
+Creating a new plugin This is how to start a new plugin:
+npx @kinvolk/headlamp-plugin create headlamp-myfancy cd headlamp-myfancy npm run start Now run Headlamp (the desktop app or the development version ), and your plugin should be loaded.
+Using the above commands means that Headlamp will automatically reload whenever to make a change to the plugin.</description>
+    </item>
+    
+    <item>
+      <title>Plugins Functionality</title>
+      <link>/docs/git-main/development/plugins/functionality/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/git-main/development/plugins/functionality/</guid>
+      <description>Headlamp&amp;rsquo;s plugins exist for changing or adding functionlity related to the user interface and experience.
+Plugins Lib Headlamp exposes a pluginLib object in the global object window. A number of modules, both from Headlamp, or representing Headlamp&amp;rsquo;s common dependencies are included in the pluginLib.
+Thus, plugins should only use dependencies that are not yet provided by Headlamp.
+Modules External modules available currently in the pluginLib are:
+ React Iconify ReactRedux MuiCore (Material UI&amp;rsquo;s core module) MuiStyles (Material UI&amp;rsquo;s styles module) Lodash  Apart from the external modules above, the pluginLib contains of course modules that are related to Headlamp, so developers can use the cluster and web UI related functionality.</description>
+    </item>
+    
+    <item>
+      <title>How to create a Plugin</title>
+      <link>/docs/git-main/development/plugins/how-to/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/git-main/development/plugins/how-to/</guid>
+      <description>This section will walk you through a basic plugin development.
+Types If you are using Typescript for developing the plugin, the @kinvolk/headlamp-plugin package does ship some type declarations in @kinvolk/headlamp-plugin/types. Please notice that the whole external plugin mechanics are still in an early development phase and thus only the actual type declarations (and not the corresponding code) is shipped in this package at the moment.
+import { Plugin } from &amp;#39;@kinvolk/headlamp-plugin/types/plugin/index.</description>
+    </item>
+    
+  </channel>
+</rss>

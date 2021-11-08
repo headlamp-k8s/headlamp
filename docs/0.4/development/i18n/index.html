@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>i18n Internationalization / Localization | Headlamp</title>
+    <meta name="description" content="i18n Internationalization / Localization" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;600;700&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    
+    
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    
+
+    <link rel="canonical" href="/" />
+    <meta name="generator" content="Hugo 0.89.0" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Headlamp%!(EXTRA string= %s, string=i18n Internationalization / Localization)" />
+<meta property="og:description" content="Headlamp%!(EXTRA string= %s, string=i18n Internationalization / Localization)" />
+<meta property="og:url" content="/docs/0.4/development/i18n/" />
+<meta property="og:site_name" content="Headlamp" />
+<meta property="article:modified_time" content="2021-11-02T10:00:18Z" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="" />
+<meta name="twitter:creator" content="@MyTwitter111" />
+<meta name="twitter:site" content="@MyTwitter111" />
+    
+    
+    <link rel="stylesheet" href="/css/style.724e56882580c7a5e8d114be921789d6bd23a3a5538106fd514216130828cc1f.css" integrity="sha256-ck5WiCWAx6Xo0RS&#43;kheJ1r0jo6VTgQb9UUIWEwgozB8=">
+
+    
+    <link rel="shortcut icon" href="" />
+</head>
+
+<body class="docs section">
+
+    <title>i18n Internationalization / Localization | Headlamp</title>
+  </head>
+  <body class="td-section">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+    
+
+
+
+<header class="header  ">
+  
+  <div class="container">
+    <div class="row">
+      
+      <nav class="w-100 p-0 navbar navbar-expand-md justify-content-md-between ">
+
+        <a href="/" class="navbar-brand">
+            <img src="/media/logo.svg" alt="" >
+        </a><button aria-label="Toggle navigation bar" class="navbar-toggler p-0 mobile-menu" type="button" data-toggle="collapse" data-target="#navbarToggler">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="navbarToggler" class="collapse navbar-collapse justify-content-end header__navigation">
+                <ul class="navbar-nav align-items-center">
+      
+      
+          
+              <li class="nav-item">
+                  <a href="/blog"class="nav-link">Blog<span class="navbar__link-underline"></span>
+                  </a>
+              </li>
+          
+      
+          
+              <li class="nav-item">
+                  <a href="/releases"class="nav-link">Releases<span class="navbar__link-underline"></span>
+                  </a>
+              </li>
+          
+      
+          
+              <li class="nav-item">
+                  <a href="/docs"class="nav-link">Docs<span class="navbar__link-underline"></span>
+                  </a>
+              </li>
+          
+      
+          
+              <li class="nav-item">
+                  <a href="/faq"class="nav-link">FAQ<span class="navbar__link-underline"></span>
+                  </a>
+              </li>
+          
+      
+          
+              <li class="nav-item">
+                  <a href="/security"class="nav-link">Security<span class="navbar__link-underline"></span>
+                  </a>
+              </li>
+          
+      
+    </ul>
+
+        </div></nav>
+    </div>
+  </div>
+</header>
+
+
+    <main class="main docs-section">
+      
+
+
+
+
+  
+
+
+
+
+
+
+
+
+<section
+  class="banner "
+  style="background-color: #000; color: #fff"
+>
+  <div class="container">
+      <div class="row justify-content-between">
+          <div class="col-12">
+              
+              <h1>Documentation</h1>
+              <h2 ></h2>
+              
+          </div>
+      </div>
+  </div>
+</section>
+
+      <div class="container">
+        <div class="row flex-md-nowrap">
+          <div class="col-12 col-md-3 col-xl-3 td-sidebar d-print-none">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner"><div class="text-center mb-0 mx-4 d-none d-md-block">
+    
+<select class="custom-select custom-select-lg mb-3"
+  onchange="if (this.value) window.location.href=this.value"
+  title="Version"
+>
+  
+  
+    
+    <option
+      value=/docs/0.4/
+      selected
+    >
+      0.4
+    </option>
+  
+    
+    <option
+      value=/docs/git-main/
+      
+    >
+      git-main
+    </option>
+  
+</select>
+
+  </div>
+  <form class="td-sidebar__search d-flex align-items-center text-center">
+    
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+      <img src="/media/images/menu-swap-outline.svg" />
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    
+    
+    
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  <li class="p-0">
+  <ul class="collapse show" id="docs">
+    
+
+    
+      
+            
+            
+            
+            
+            
+              
+                
+                
+                
+                  
+                
+              
+            
+              
+                
+                
+                
+              
+            
+          
+          
+            <li class="p-0">
+              
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04" role=""  class="align-left pl-0 pr-2 td-sidebar-link ">
+      
+      
+        
+      
+
+      Headlamp
+      
+        <span style="margin-left: 1rem;" class="badge badge-pill badge-dark">0.4</span>
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse show" id="docs04">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="/docs/0.4/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04installation" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Installation
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docs04installation">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="/docs/0.4/installation/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04installationin-cluster" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      In-cluster Deployment
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docs04installationin-cluster">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="/docs/0.4/installation/in-cluster/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04installationin-clusteroidc"   href="/docs/0.4/installation/in-cluster/oidc/">
+                OIDC
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04installationdesktop" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Desktop App Installation
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docs04installationdesktop">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="/docs/0.4/installation/desktop/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04installationdesktoplinux-installation"   href="/docs/0.4/installation/desktop/linux-installation/">
+                Linux
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04installationdesktopmac-installation"   href="/docs/0.4/installation/desktop/mac-installation/">
+                Mac OS
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04installationdesktopwin-installation"   href="/docs/0.4/installation/desktop/win-installation/">
+                Windows
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04installationdesktopheadless"   href="/docs/0.4/installation/desktop/headless/">
+                Headless Mode
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04installationbase-url"   href="/docs/0.4/installation/base-url/">
+                Base URL
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04installationmetrics-server"   href="/docs/0.4/installation/metrics-server/">
+                Metrics Server
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04platforms"   href="/docs/0.4/platforms/">
+                Platforms
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04contributing"   href="/docs/0.4/contributing/">
+                Contributing
+              </a>
+            </li>
+            
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04development" role="" data-toggle="collapse" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Development
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse show" id="docs04development">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="/docs/0.4/development/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentbackend"   href="/docs/0.4/development/backend/">
+                Backend
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentfrontend"   href="/docs/0.4/development/frontend/">
+                Frontend
+              </a>
+            </li>
+            
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04developmentapi" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      API
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docs04developmentapi">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="/docs/0.4/development/api/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04developmentapiclasses" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Classes
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docs04developmentapiclasses">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="/docs/0.4/development/api/classes/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentapiclassesplugin_registrydefault"   href="/docs/0.4/development/api/classes/plugin_registry.default/">
+                default
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentapiclassespluginplugin-1"   href="/docs/0.4/development/api/classes/plugin.plugin-1/">
+                Plugin
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04developmentapiinterfaces" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Interfaces
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docs04developmentapiinterfaces">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="/docs/0.4/development/api/interfaces/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentapiinterfaceslib_utilfilterstate"   href="/docs/0.4/development/api/interfaces/lib_util.filterstate/">
+                FilterState
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04developmentapimodules" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Modules
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docs04developmentapimodules">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="/docs/0.4/development/api/modules/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentapimoduleslib_k8s"   href="/docs/0.4/development/api/modules/lib_k8s/">
+                lib/k8s
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentapimoduleslib_util"   href="/docs/0.4/development/api/modules/lib_util/">
+                lib/util
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentapimodulesplugin"   href="/docs/0.4/development/api/modules/plugin/">
+                plugin
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentapimodulesplugin_registry"   href="/docs/0.4/development/api/modules/plugin_registry/">
+                plugin/registry
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04developmenti18n" role="" data-toggle="collapse" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Internationalization
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse show" id="docs04developmenti18n">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page  active" href="/docs/0.4/development/i18n/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmenti18ncontributing"   href="/docs/0.4/development/i18n/contributing/">
+                Contributing
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docs04developmentplugins" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Plugins
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docs04developmentplugins">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="/docs/0.4/development/plugins/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentpluginsbuilding"   href="/docs/0.4/development/plugins/building/">
+                Building &amp; Shipping
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentpluginsfunctionality"   href="/docs/0.4/development/plugins/functionality/">
+                Functionality
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docs04developmentpluginshow-to"   href="/docs/0.4/development/plugins/how-to/">
+                How-to
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+            </li>
+          
+      
+    
+  </ul>
+  </li>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="col-12 col-md-9 col-xl-8 pl-md-5 docs-reader" role="main">
+            <div class="row mt-2">
+              <div class="col-12">
+                <div id="fastSearch">
+    <div class="search-contents">
+        <input id="searchInput" autocomplete="off" tabindex="0" data-search-version="0.4" placeholder="Search…"/>
+        <div id="searchResults">
+            <ul id="searchResultsList"></ul>
+        </div>
+    </div>
+</div>
+<script src="/js/fuse-6.4.6.min.js"></script>
+<script src="/js/lunr.js"></script>
+<script src="/js/fastsearch.js"></script>
+
+              </div>
+            </div>
+            <div class="row">
+              
+              
+              
+              <div class="col-12 col-lg-9 order-last order-lg-first">
+                <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	
+	
+	
+	
+	<a href="/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	
+	
+		
+	
+	
+	
+	<a href="/docs/0.4/">0.4</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	
+	
+	
+	
+	<a href="/docs/0.4/development/">Development</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	
+	
+	
+	
+	<a href="/docs/0.4/development/i18n/">Internationalization</a>
+</li>
+
+	</ol>
+</nav	>
+
+
+              </div>
+              
+              
+              <div class="d-block d-md-none col-12 offset-sm-6 col-sm-6 offset-lg-0 col-lg-3 order-first order-lg-last text-right">
+                
+<select class="custom-select custom-select-lg mb-3"
+  onchange="if (this.value) window.location.href=this.value"
+  title="Version"
+>
+  
+  
+    
+    <option
+      value=/docs/0.4/
+      selected
+    >
+      0.4
+    </option>
+  
+    
+    <option
+      value=/docs/git-main/
+      
+    >
+      git-main
+    </option>
+  
+</select>
+
+              </div>
+              
+
+            </div>
+            
+	<div class="td-content">
+		
+		
+		
+			
+				
+			
+		
+		
+			
+  <h1>i18n Internationalization / Localization</h1>
+  
+
+
+
+
+
+
+
+
+
+
+
+<p>Headlamp&rsquo;s internationalization uses the i18next, i18next-parser, and
+react-i18next libraries.</p>
+<h2 id="default-language-and-locales">Default language, and locales</h2>
+<p>We started with an international English, and that will be the fallback language.</p>
+<p>Now we&rsquo;re starting with locales familiar, and will accept
+translations through github.</p>
+<h2 id="browser-based-language-detection">Browser based language detection</h2>
+<p>We use
+
+
+
+<a href="https://github.com/i18next/i18next-browser-languageDetector#readme" target="_blank" rel="noopener">i18next-browser-languagedetector</a>
+</p>
+<p>This can select the browser language through various means like through
+cookies, the html language tag and other ways.</p>
+<p>One way to change the locale is to use <code>?lng=en</code> in the URL.</p>
+<h2 id="lazy-load-locale-files">Lazy load locale files</h2>
+<p>Dynamic imports and the webpack code splitting feature we
+load locale files from <code>src/i18n/locales/{{lng}}/{{ns}}.json</code>
+where {{lng}} is the language code, and {{ns}} is the namespace.</p>
+
+
+		
+		<div class="d-md-none">
+			<div class="section-index">
+    
+    
+    
+    
+    <hr class="panel-line">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+                
+                
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/0.4/development/i18n/contributing/">Contributing to Internationalization</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    
+</div>
+
+		</div>
+	</div>
+
+            
+
+            <div class="github-footer">
+              <hr class="panel-line" />
+              
+              
+                
+                
+                
+                
+                  
+                
+                
+                
+                <a
+                  href="https://github.com/kinvolk/headlamp/edit/master/docs/development/i18n/_index.md"
+                  class="btn btn-md mt-2"
+                  style="border: 2px solid #afafaf; padding: 4px 2px; font-weight: inherit;"
+                >
+                  <img src="/media/images/github.png" style="width: 20px; height: 20px; " alt="github" /> Edit this page
+                </a>
+              
+
+              
+              
+              <a
+                href="https://github.com/kinvolk/headlamp/issues/new"
+                class="btn btn-md mt-2"
+                style="border: 2px solid #afafaf; padding: 4px 2px; font-weight: inherit;"
+              >
+                <img src="/media/images/github.png" style="width: 20px; height: 20px; " alt="github" /> File documentation issue
+              </a>
+              
+            </div>
+
+            
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+
+
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#default-language-and-locales">Default language, and locales</a></li>
+    <li><a href="#browser-based-language-detection">Browser based language detection</a></li>
+    <li><a href="#lazy-load-locale-files">Lazy load locale files</a></li>
+  </ul>
+</nav>
+
+
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+  <div class="container">
+      <div class="container footer__navigation mb-3">
+        <div class="row justify-content-between d-flex flex-wrap w-100 px-3">
+          
+          
+        </div>
+    </div>
+    <div class="footer__copy row container p-0 align-items-center justify-content-between">
+      <div class="col-12 col-md-auto">
+        <div class="footer__brand">
+          <a href="/">
+            <img src="/media/logo.svg" alt="" >
+          </a>
+        </div>
+      </div>
+      <div class="footer__copyright col-12 col-md-6">
+        <p class="text-center">Copyright the Headlamp project contributors</p>
+      </div>
+      <div class="footer__socials col-12 col-md-auto text-center">
+        <ul class="list-inline socials__list">
+  <li class="list-inline-item socials__item">
+    <a href="https://twitter.com/MyTwitter111" class="socials__link" target="_blank" rel="noopener" aria-label="twitter">
+      <svg class="socials__icon twitter-icon" fill="none">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#twitter-icon"></use>
+      </svg>
+    </a>
+  </li>
+  
+  <li class="list-inline-item socials__item">
+    <a href="https://github.com/kinvolk/headlamp" class="socials__link" target="_blank" rel="noopener" aria-label="github">
+      <svg class="socials__icon github-icon" fill="none">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#github-icon"></use>
+      </svg>
+    </a>
+  </li>
+  
+</ul>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none">
+    <symbol id="github-icon" width="32" height="32" viewBox="0 0 20 20">
+        <path d="M19.4537 0H0.648509C0.363124 0 0.131836 0.231219 0.131836 0.516518V19.4835C0.131836 19.7688 0.363124 20 0.648509 20H6.89993V19.9955C7.18208 19.9922 7.39825 19.8343 7.40819 19.5671C7.43383 18.8726 7.41572 18.1766 7.41572 17.5052C6.91222 17.5287 6.43154 17.5923 5.95629 17.5649C4.90808 17.5045 4.10261 17.0574 3.68487 16.0313C3.43741 15.4234 3.06454 14.9035 2.48384 14.5565C2.3754 14.4917 2.28059 14.3962 2.19761 14.2992C2.08917 14.1727 2.10946 14.0428 2.2808 14.0081C2.45366 13.973 2.64251 13.9484 2.81297 13.9803C3.48246 14.1059 3.94542 14.5257 4.2998 15.084C5.00053 16.1885 6.07914 16.5267 7.29263 16.0166C7.36029 15.9881 7.44629 15.9192 7.45904 15.8563C7.55688 15.3673 7.73967 14.9215 8.10804 14.5306C7.6985 14.4548 7.31915 14.399 6.94713 14.3128C5.87585 14.065 4.91347 13.6191 4.20971 12.7337C3.63552 12.0114 3.37296 11.1659 3.25226 10.266C3.06324 8.85658 3.23244 7.53722 4.20066 6.41088C4.24958 6.35399 4.2761 6.23741 4.25433 6.16653C4.01185 5.37443 4.0489 4.58899 4.28924 3.80572C4.41536 3.39437 4.45047 3.37388 4.87036 3.4312C4.89604 3.43465 4.92101 3.4411 4.94647 3.44543C5.78815 3.58464 6.51262 3.99208 7.22628 4.42952C7.32222 4.48836 7.46834 4.52498 7.57375 4.49934C9.27828 4.08585 10.9796 4.08757 12.6839 4.50086C12.7828 4.52476 12.915 4.49072 13.0096 4.44118C13.3975 4.23841 13.7689 4.00268 14.1619 3.81044C14.619 3.587 15.1005 3.41892 15.6189 3.42817C15.7097 3.4299 15.85 3.51652 15.8804 3.59669C16.1923 4.42283 16.258 5.26472 16.0095 6.12449C15.983 6.21628 16.0224 6.34708 16.0718 6.43757C16.3171 6.88751 16.6596 7.30273 16.8148 7.77999C17.2879 9.23469 17.1155 10.6752 16.4714 12.0424C15.8813 13.2956 14.7867 13.9307 13.4911 14.2582C13.0535 14.3688 12.6052 14.436 12.1332 14.5287C12.7518 15.1747 12.8488 15.9631 12.8378 16.7888C12.8264 17.6406 12.8294 18.4926 12.829 19.3446C12.8287 19.7573 13.0089 19.9852 13.3234 19.9986C13.3232 19.9999 19.9702 19.9999 19.9702 19.9999V0.516518C19.9701 0.231219 19.7388 0 19.4537 0Z" />
+    </symbol>
+
+    <symbol id="facebook-icon" width="32" height="32" viewBox="0 0 21 20" viewBox="0 0 9 16">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 -0.000976562V19.999H20.006V-0.000976562H0ZM13.2349 5.50307H11.6712C11.3615 5.50307 11.0489 5.82307 11.0489 6.06113V7.65516H13.2318C13.1439 8.87744 12.9635 9.99516 12.9635 9.99516H11.0377V16.9221H8.16802V9.99441H6.77108V7.66346H8.16802V5.7577C8.16802 5.40922 8.09741 3.07599 11.1083 3.07599H13.2349V5.50307H13.2349Z" />
+    </symbol>
+
+    <symbol id="twitter-icon" width="32" height="32" viewBox="0 0 21 20">
+        <path d="M0.0117188 -0.000976562V19.999H20.0177V-0.000976562H0.0117188ZM14.8624 7.51277C14.8674 7.62027 14.8699 7.7284 14.8699 7.83715C14.8699 11.1403 12.356 14.9515 7.75341 14.9515C6.34048 14.9515 5.02697 14.539 3.91914 13.8284C4.11544 13.8503 4.31425 13.8628 4.51619 13.8628C5.68841 13.8628 6.76624 13.4634 7.62212 12.7928C6.52804 12.7728 5.60401 12.0503 5.28642 11.0578C5.43896 11.0871 5.59526 11.1015 5.75656 11.1015C5.98475 11.1015 6.20607 11.0709 6.41551 11.0121C5.27266 10.7828 4.40928 9.77277 4.40928 8.5609C4.40928 8.55027 4.40928 8.54027 4.40928 8.52965C4.74751 8.71715 5.13262 8.82902 5.54275 8.84215C4.87192 8.39402 4.43054 7.6284 4.43054 6.75965C4.43054 6.30277 4.5537 5.87215 4.76939 5.5034C6.00226 7.0159 7.84593 8.01277 9.92405 8.1159C9.88217 7.93277 9.85903 7.74215 9.85903 7.54652C9.85903 6.1659 10.9787 5.04652 12.361 5.04652C13.0781 5.04652 13.7289 5.34965 14.186 5.83652C14.7549 5.72402 15.2913 5.51527 15.7746 5.22965C15.587 5.81402 15.1906 6.30402 14.6748 6.61277C15.1812 6.55215 15.6626 6.41777 16.1109 6.21965C15.7752 6.72152 15.3513 7.1609 14.8624 7.51277Z" />
+    </symbol>
+
+    <symbol id="linkedin-icon" width="32" height="32" viewBox="0 0 21 20">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0361328 -0.000976562V19.999H20.0421V-0.000976562H0.0361328ZM6.25874 16.6145H3.29056V7.6872H6.25874V16.6145ZM4.77465 6.46874H4.75504C3.75935 6.46874 3.11397 5.78298 3.11397 4.92584C3.11397 4.04988 3.77822 3.38355 4.79408 3.38355C5.81016 3.38355 6.43457 4.04988 6.45401 4.92584C6.45401 5.78298 5.81016 6.46874 4.77465 6.46874ZM16.9643 16.6145H13.9953V11.8384C13.9953 10.6388 13.5663 9.8199 12.4918 9.8199C11.6711 9.8199 11.1835 10.3712 10.9686 10.9053C10.8905 11.0961 10.8701 11.3613 10.8701 11.6288V16.6145H7.90059C7.90059 16.6145 7.94038 8.52474 7.90059 7.68724H10.8701V8.95225C11.2647 8.34535 11.9688 7.47766 13.5459 7.47766C15.4998 7.47766 16.9643 8.75327 16.9643 11.4952V16.6145Z" />
+    </symbol>
+
+    <symbol id="youtube-icon" width="32" height="32" viewBox="0 0 21 20">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0234375 -0.000976562V19.999H20.0294V-0.000976562H0.0234375ZM16.7094 13.272C16.5397 14.0083 15.9372 14.5519 15.212 14.6329C13.4952 14.8243 11.7571 14.8255 10.0257 14.8243C8.29505 14.8255 6.5569 14.8243 4.83964 14.6329C4.11424 14.552 3.51182 14.0083 3.34293 13.272C3.10128 12.2238 3.10128 11.0786 3.10128 9.99898C3.10128 8.91933 3.10414 7.77467 3.34557 6.72645C3.51446 5.98948 4.1171 5.44654 4.84158 5.36562C6.55902 5.17375 8.29791 5.173 10.0286 5.17375C11.7591 5.17305 13.4974 5.17375 15.2147 5.36562C15.9401 5.44654 16.5425 5.98948 16.7121 6.72645C16.9537 7.77467 16.9516 8.91933 16.9516 9.99898C16.9516 11.0786 16.9509 12.2238 16.7094 13.272Z" />
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.23926 12.1482C9.71078 11.3853 11.1693 10.6288 12.6423 9.86546C11.165 9.09491 9.70669 8.33487 8.23926 7.56934V12.1482Z" />
+  </symbol>
+  </svg>
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+
+    
+      
+      
+    
+    <script src="/js/common.js"></script>
+    <script src="/js/anchor.js"></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>In-cluster Deployment on Headlamp</title>
+    <link>/docs/0.4/installation/in-cluster/</link>
+    <description>Recent content in In-cluster Deployment on Headlamp</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="/docs/0.4/installation/in-cluster/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Accessing using OpenID Connect</title>
+      <link>/docs/0.4/installation/in-cluster/oidc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/0.4/installation/in-cluster/oidc/</guid>
+      <description>Headlamp supports OIDC for cluster users to effortlessly log in using a &amp;ldquo;Sign in&amp;rdquo; button.
+For OIDC to be used, Headlamp needs to know how to configure it, so you have to provide the different OIDC-related arguments to Headlamp from your OIDC provider. Those are:
+ the client ID: -oidc-client-id the client secret: -oidc-client-secret the issuer URL: -oidc-idp-issuer-url (optionally) the OpenId scopes: -oidc-scopes  and you have to tell the OIDC provider about the callback URL, which in Headlamp it is your URL + the /oidc-callback path, e.</description>
+    </item>
+    
+  </channel>
+</rss>
