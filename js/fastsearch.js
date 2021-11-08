@@ -123,7 +123,7 @@ function loadSearch() {
     list.innerHTML = '<li class="no-results">Searching…</li>';
   }
 
-  fetchJSONFile('{{ .Site.BaseURL }}/index.json', function(data) {
+  fetchJSONFile('{{ $.Site.BaseURL }}/index.json', function(data) {
     index = data;
 
     function makeIndex(version, data) {
