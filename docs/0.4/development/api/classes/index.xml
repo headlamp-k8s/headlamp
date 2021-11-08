@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Classes on Headlamp</title>
+    <link>kinvolk.github.io/headlamp/docs/0.4/development/api/classes/</link>
+    <description>Recent content in Classes on Headlamp</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="kinvolk.github.io/headlamp/docs/0.4/development/api/classes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Class: default</title>
+      <link>kinvolk.github.io/headlamp/docs/0.4/development/api/classes/plugin_registry.default/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>kinvolk.github.io/headlamp/docs/0.4/development/api/classes/plugin_registry.default/</guid>
+      <description>plugin/registry .default
+Constructors constructor + new default(): default Returns: default Methods registerAppBarAction ▸ registerAppBarAction(actionName: string, actionFunc: (&amp;hellip;args: any[]) =&amp;gt; null | Element): void
+Add a component into the app bar (at the top of the app).
+example
+register.registerAppBarAction(&amp;#39;monitor&amp;#39;, () =&amp;gt; &amp;lt;MonitorLink /&amp;gt; ); Parameters:    Name Type Description     actionName string a unique name for it   actionFunc (&amp;hellip;args: any[]) =&amp;gt; null | Element a function that returns your component    Returns: void</description>
+    </item>
+    
+    <item>
+      <title>Class: Plugin</title>
+      <link>kinvolk.github.io/headlamp/docs/0.4/development/api/classes/plugin.plugin-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>kinvolk.github.io/headlamp/docs/0.4/development/api/classes/plugin.plugin-1/</guid>
+      <description>plugin .Plugin
+Plugins should call registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
+They will have their initialize(register) method called at plugin initialization time.
+Constructors constructor + new Plugin(): Plugin Returns: Plugin Methods initialize ▸ Abstractinitialize(register: default ): boolean
+initialize is called for each plugin with a Registry which gives the plugin methods for doing things.
+see Registry
+Parameters:    Name Type     register default     Returns: boolean</description>
+    </item>
+    
+  </channel>
+</rss>

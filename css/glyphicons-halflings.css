@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Glyphicons-Halflings-Regular'),
+    url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+    url('../fonts/glyphicons-halflings-regular.woff') format('woff'),
+    url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+    url('../fonts/glyphicons-halflings-regular.eot') format('embedded-opentype'),
+    url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflings') format('svg');
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdseXBoaWNvbnMtaGFsZmxpbmdzLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLG9DQUFvQztJQUNwQyxtQkFBbUI7SUFDbkIsaUJBQWlCO0lBQ2pCOzs7Ozt3RkFLb0Y7Q0FDdkYiLCJmaWxlIjoiZ2x5cGhpY29ucy1oYWxmbGluZ3MuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGZvbnQtZmFjZSB7XG4gICAgZm9udC1mYW1pbHk6ICdHbHlwaGljb25zIEhhbGZsaW5ncyc7XG4gICAgZm9udC1zdHlsZTogbm9ybWFsO1xuICAgIGZvbnQtd2VpZ2h0OiA0MDA7XG4gICAgc3JjOiBsb2NhbCgnR2x5cGhpY29ucy1IYWxmbGluZ3MtUmVndWxhcicpLFxuICAgIHVybCgnLi4vZm9udHMvZ2x5cGhpY29ucy1oYWxmbGluZ3MtcmVndWxhci50dGYnKSBmb3JtYXQoJ3RydWV0eXBlJyksXG4gICAgdXJsKCcuLi9mb250cy9nbHlwaGljb25zLWhhbGZsaW5ncy1yZWd1bGFyLndvZmYnKSBmb3JtYXQoJ3dvZmYnKSxcbiAgICB1cmwoJy4uL2ZvbnRzL2dseXBoaWNvbnMtaGFsZmxpbmdzLXJlZ3VsYXIud29mZjInKSBmb3JtYXQoJ3dvZmYyJyksXG4gICAgdXJsKCcuLi9mb250cy9nbHlwaGljb25zLWhhbGZsaW5ncy1yZWd1bGFyLmVvdCcpIGZvcm1hdCgnZW1iZWRkZWQtb3BlbnR5cGUnKSxcbiAgICB1cmwoJy4uL2ZvbnRzL2dseXBoaWNvbnMtaGFsZmxpbmdzLXJlZ3VsYXIuc3ZnI2dseXBoaWNvbnNfaGFsZmxpbmdzJykgZm9ybWF0KCdzdmcnKTtcbn1cbiJdfQ== */

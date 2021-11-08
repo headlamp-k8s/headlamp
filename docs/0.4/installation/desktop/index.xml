@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Desktop App Installation on Headlamp</title>
+    <link>kinvolk.github.io/headlamp/docs/0.4/installation/desktop/</link>
+    <description>Recent content in Desktop App Installation on Headlamp</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="kinvolk.github.io/headlamp/docs/0.4/installation/desktop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Installation</title>
+      <link>kinvolk.github.io/headlamp/docs/0.4/installation/desktop/linux-installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>kinvolk.github.io/headlamp/docs/0.4/installation/desktop/linux-installation/</guid>
+      <description>Currently we ship a Linux desktop application in two formats: Flatpak , and AppImage .
+Flatpak  Flatpak gives an isolated and bundled way of running Headlamp, with decoupled runtime updates (besides other benefits ).
+You need to make sure that Flatpak is installed in your Linux distro.
+For installing Headlamp as a Flatpak, follow the instructions in its Flathub page .
+For running it, just launch it as usually in your Linux desktop, or run:</description>
+    </item>
+    
+    <item>
+      <title>Mac OS Installation</title>
+      <link>kinvolk.github.io/headlamp/docs/0.4/installation/desktop/mac-installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>kinvolk.github.io/headlamp/docs/0.4/installation/desktop/mac-installation/</guid>
+      <description>For Mac OS we provide a .dmg file, so you need to download it from the releases page and than follow the below steps :
+ Double click the downloaded file to make its content available (name will show up in the Finder sidebar), usually a window opens showing the content as well Drag the application from the DMG window into /Applications to install wait for the copy process to finish.</description>
+    </item>
+    
+    <item>
+      <title>Windows Installation</title>
+      <link>kinvolk.github.io/headlamp/docs/0.4/installation/desktop/win-installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>kinvolk.github.io/headlamp/docs/0.4/installation/desktop/win-installation/</guid>
+      <description>For Windows we provide a .setup.exe installer, so you need to download it from the releases page and follow its installation steps (after the installation, you should see Headlamp&amp;rsquo;s icon on your desktop).
+Important: While running Headlamp, if Windows Defender prompts you about stopping the app because it&amp;rsquo;s from an unknown source, that happens because Headlamp&amp;rsquo;s Windows builds are not yet signed (we&amp;rsquo;re working on it). You can still run the app by choosing &amp;ldquo;Run Anyway&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Running in headless mode</title>
+      <link>kinvolk.github.io/headlamp/docs/0.4/installation/desktop/headless/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>kinvolk.github.io/headlamp/docs/0.4/installation/desktop/headless/</guid>
+      <description>Some users prefer running Headlamp using the desktop app, but directly in their web browser instead of the Electron&amp;rsquo;s environment as this allows them to leverage the browser&amp;rsquo;s functionality such as bookmarks, groups, etc.
+Running Headlamp in the system&amp;rsquo;s browser can be done by using the --headless CLI option. Assuming the have already downloaded and installed Headlamp on your desktop, you can run it in headless mode as follows:
+Example:</description>
+    </item>
+    
+  </channel>
+</rss>
