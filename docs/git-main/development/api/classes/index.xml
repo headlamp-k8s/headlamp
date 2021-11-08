@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Classes on Headlamp</title>
-    <link>kinvolk.github.io/headlamp/docs/git-main/development/api/classes/</link>
+    <link>https://kinvolk.github.io/headlamp/docs/git-main/development/api/classes/</link>
     <description>Recent content in Classes on Headlamp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="kinvolk.github.io/headlamp/docs/git-main/development/api/classes/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="https://kinvolk.github.io/headlamp/docs/git-main/development/api/classes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Class: default</title>
-      <link>kinvolk.github.io/headlamp/docs/git-main/development/api/classes/plugin_registry.default/</link>
+      <link>https://kinvolk.github.io/headlamp/docs/git-main/development/api/classes/plugin_registry.default/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>kinvolk.github.io/headlamp/docs/git-main/development/api/classes/plugin_registry.default/</guid>
+      <guid>https://kinvolk.github.io/headlamp/docs/git-main/development/api/classes/plugin_registry.default/</guid>
       <description>plugin/registry .default
 Constructors constructor • new default()
 Methods registerAppBarAction ▸ registerAppBarAction(actionName, actionFunc): void
@@ -23,10 +23,10 @@ register.registerAppBarAction(&amp;#39;monitor&amp;#39;, () =&amp;gt; &amp;lt;Mo
     
     <item>
       <title>Class: Plugin</title>
-      <link>kinvolk.github.io/headlamp/docs/git-main/development/api/classes/plugin.plugin/</link>
+      <link>https://kinvolk.github.io/headlamp/docs/git-main/development/api/classes/plugin.plugin/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>kinvolk.github.io/headlamp/docs/git-main/development/api/classes/plugin.plugin/</guid>
+      <guid>https://kinvolk.github.io/headlamp/docs/git-main/development/api/classes/plugin.plugin/</guid>
       <description>plugin .Plugin
 Plugins should call registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
 They will have their initialize(register) method called at plugin initialization time.

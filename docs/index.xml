@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Documentation on Headlamp</title>
-    <link>kinvolk.github.io/headlamp/docs/</link>
+    <link>https://kinvolk.github.io/headlamp/docs/</link>
     <description>Recent content in Documentation on Headlamp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="kinvolk.github.io/headlamp/docs/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="https://kinvolk.github.io/headlamp/docs/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
