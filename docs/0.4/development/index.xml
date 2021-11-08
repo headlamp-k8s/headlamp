@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Development on Headlamp</title>
-    <link>/docs/0.4/development/</link>
+    <link>kinvolk.github.io/headlamp/docs/0.4/development/</link>
     <description>Recent content in Development on Headlamp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="/docs/0.4/development/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="kinvolk.github.io/headlamp/docs/0.4/development/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Backend</title>
-      <link>/docs/0.4/development/backend/</link>
+      <link>kinvolk.github.io/headlamp/docs/0.4/development/backend/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/0.4/development/backend/</guid>
+      <guid>kinvolk.github.io/headlamp/docs/0.4/development/backend/</guid>
       <description>Headlamp&amp;rsquo;s backend is written in Go and is in charge of redirecting the client requests to the right clusters, as well as to return any available plugins for the client to use.
 The backend most basic and essential function is to read the cluster information from the given configuration, and set up proxies to the defined clusters as well as endpoints to them. This means that instead of having a set of endpoints related to the functionality available to the client, it simply redirects the requests to the defined proxies.</description>
     </item>
     
     <item>
       <title>Frontend</title>
-      <link>/docs/0.4/development/frontend/</link>
+      <link>kinvolk.github.io/headlamp/docs/0.4/development/frontend/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/0.4/development/frontend/</guid>
+      <guid>kinvolk.github.io/headlamp/docs/0.4/development/frontend/</guid>
       <description>The frontend is written in Typescript and React, as well as a few other important modules like:
  Material UI React Router Redux Redux Sagas  Building and running The frontend can be quickly built using:
 make frontend Once built, it can be run in development mode (auto-refresh) using:

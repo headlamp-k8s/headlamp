@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>i18n Internationalization / Localization on Headlamp</title>
-    <link>/docs/0.4/development/i18n/</link>
+    <link>kinvolk.github.io/headlamp/docs/0.4/development/i18n/</link>
     <description>Recent content in i18n Internationalization / Localization on Headlamp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="/docs/0.4/development/i18n/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="kinvolk.github.io/headlamp/docs/0.4/development/i18n/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Contributing to Internationalization</title>
-      <link>/docs/0.4/development/i18n/contributing/</link>
+      <link>kinvolk.github.io/headlamp/docs/0.4/development/i18n/contributing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/0.4/development/i18n/contributing/</guid>
+      <guid>kinvolk.github.io/headlamp/docs/0.4/development/i18n/contributing/</guid>
       <description>This section introduces some concepts for contributing translations, and is especially important when submitting a new language.
 Important: If you are adding a new language, keep in mind that while all the specific Kubernetes components&#39; names are translatable, it doesn&amp;rsquo;t mean that all of them should have a corresponding name in your language. Please, refer to the Kubernetes localized docs in your language (if they exist) in order to understand which components should be translated and which should be left in the original form.</description>
     </item>

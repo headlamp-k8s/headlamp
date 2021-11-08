@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Modules on Headlamp</title>
-    <link>/docs/0.4/development/api/modules/</link>
+    <link>kinvolk.github.io/headlamp/docs/0.4/development/api/modules/</link>
     <description>Recent content in Modules on Headlamp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="/docs/0.4/development/api/modules/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="kinvolk.github.io/headlamp/docs/0.4/development/api/modules/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Module: lib/k8s</title>
-      <link>/docs/0.4/development/api/modules/lib_k8s/</link>
+      <link>kinvolk.github.io/headlamp/docs/0.4/development/api/modules/lib_k8s/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/0.4/development/api/modules/lib_k8s/</guid>
+      <guid>kinvolk.github.io/headlamp/docs/0.4/development/api/modules/lib_k8s/</guid>
       <description>Variables ResourceClasses • Const ResourceClasses: object
 Type declaration: Defined in: lib/k8s/index.ts:71
 Functions getVersion ▸ getVersion(): Promise&amp;lt;StringDict&amp;gt;
@@ -30,10 +30,10 @@ Parameters:    Name Type     ...apiCalls () =&amp;gt; CancellablePromise[]    Re
     
     <item>
       <title>Module: lib/util</title>
-      <link>/docs/0.4/development/api/modules/lib_util/</link>
+      <link>kinvolk.github.io/headlamp/docs/0.4/development/api/modules/lib_util/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/0.4/development/api/modules/lib_util/</guid>
+      <guid>kinvolk.github.io/headlamp/docs/0.4/development/api/modules/lib_util/</guid>
       <description>Table of contents Interfaces   FilterState   Variables CLUSTER_ACTION_GRACE_PERIOD • Const CLUSTER_ACTION_GRACE_PERIOD: 5000= 5000
 Defined in: lib/util.ts:18
 Functions filterResource ▸ filterResource(item: KubeObjectInterface, filter: FilterState ): boolean
@@ -47,10 +47,10 @@ Defined in: lib/util.ts:116
     
     <item>
       <title>Module: plugin</title>
-      <link>/docs/0.4/development/api/modules/plugin/</link>
+      <link>kinvolk.github.io/headlamp/docs/0.4/development/api/modules/plugin/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/0.4/development/api/modules/plugin/</guid>
+      <guid>kinvolk.github.io/headlamp/docs/0.4/development/api/modules/plugin/</guid>
       <description>Table of contents Classes   Plugin   Functions initializePlugins ▸ initializePlugins(): Promise&amp;lt;unknown&amp;gt;
 Load external, then local plugins. Then initialize() them in order with a Registry.
 Returns: Promise&amp;lt;unknown&amp;gt;
@@ -59,10 +59,10 @@ Defined in: plugin/index.tsx:211</description>
     
     <item>
       <title>Module: plugin/registry</title>
-      <link>/docs/0.4/development/api/modules/plugin_registry/</link>
+      <link>kinvolk.github.io/headlamp/docs/0.4/development/api/modules/plugin_registry/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/0.4/development/api/modules/plugin_registry/</guid>
+      <guid>kinvolk.github.io/headlamp/docs/0.4/development/api/modules/plugin_registry/</guid>
       <description>Table of contents Classes   default   </description>
     </item>
     

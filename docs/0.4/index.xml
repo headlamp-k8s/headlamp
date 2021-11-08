@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Headlamp</title>
-    <link>/docs/0.4/</link>
+    <link>kinvolk.github.io/headlamp/docs/0.4/</link>
     <description>Recent content on Headlamp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="/docs/0.4/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="kinvolk.github.io/headlamp/docs/0.4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tested Kubernetes Platforms</title>
-      <link>/docs/0.4/platforms/</link>
+      <link>kinvolk.github.io/headlamp/docs/0.4/platforms/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/0.4/platforms/</guid>
+      <guid>kinvolk.github.io/headlamp/docs/0.4/platforms/</guid>
       <description>This section shows the different platforms where Headlamp has been tested (in-cluster) or is intended to be tested, and useful observations about it. If you have tested Headlamp on a different flavor or Kubernetes, please file a PR or issue to add your remarks to the list.
 The &amp;ldquo;works&amp;rdquo; column refers to the overall Kubernetes related functionality when running in the respective platform; it may have 3 different values:
  ✔️ : Has been tried and works fine to the extent of what has been tested ❌ : Has been tried and didn&amp;rsquo;t work or had issues that prevented a regular use of it ❔: Hasn&amp;rsquo;t been tried/reported yet     Platform Works Comments      Amazon EKS  ✔️ - As reported     DigitalOcean Kubernetes  ❔ - Have you tried Headlamp on this platform?</description>
@@ -20,10 +20,10 @@ The &amp;ldquo;works&amp;rdquo; column refers to the overall Kubernetes related 
     
     <item>
       <title>Contribution Guidelines</title>
-      <link>/docs/0.4/contributing/</link>
+      <link>kinvolk.github.io/headlamp/docs/0.4/contributing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/0.4/contributing/</guid>
+      <guid>kinvolk.github.io/headlamp/docs/0.4/contributing/</guid>
       <description>This section has information on how to contribute to Headlamp. It assumes you have cloned this repository (or your own Github fork).
 Any contributions to the project are accepted under the terms of the project&amp;rsquo;s license ( Apache 2.0 ).
 Code of Conduct Please refer to the Kinvolk Code of Conduct .
