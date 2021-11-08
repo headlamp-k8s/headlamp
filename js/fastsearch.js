@@ -122,7 +122,7 @@ function loadSearch() {
   if (!!searchTerms && !resultsAvailable) {
     list.innerHTML = '<li class="no-results">Searching…</li>';
   }
-
+  console.log("::::", window.location.origin, window.location)
   fetchJSONFile('/index.json', function(data) {
     index = data;
 
