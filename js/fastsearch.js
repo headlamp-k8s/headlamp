@@ -122,8 +122,7 @@ function loadSearch() {
   if (!!searchTerms && !resultsAvailable) {
     list.innerHTML = '<li class="no-results">Searching…</li>';
   }
-  console.log("::::", window.location.origin, window.location)
-  fetchJSONFile('/index.json', function(data) {
+  fetchJSONFile(window.location.baseurl || '' + '/index.json', function(data) {
     index = data;
 
     function makeIndex(version, data) {
