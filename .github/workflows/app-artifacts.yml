@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - rc-*
+    paths:
+      - "*"
 workflow_dispatch:
 jobs:
   build-linux:
