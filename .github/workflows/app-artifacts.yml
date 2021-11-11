@@ -1,4 +1,4 @@
-name: Build release artifact
+name: Build release app artifact
 
 on:
   push:
