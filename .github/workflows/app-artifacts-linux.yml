@@ -1,0 +1,44 @@
+name: Build and upload Linux app artifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      buildBranch:
+        description: 'Headlamp ref/branch/tag'
+        required: true
+        default: 'main'
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.3.3
+      with:
+        ref: ${{ github.event.inputs.buildBranch }}
+    - name: Setup nodejs
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16.x
+    - uses: actions/setup-go@v2
+      with:
+        go-version: ^1.15
+    - name: App linux
+      run: |
+        make app-linux
+    - name: Rename AppImage 64bit version
+      run: |
+        FILE_PATH=$(echo app/dist/Headlamp*x86_64*.AppImage); mv ${FILE_PATH} $(echo ${FILE_PATH}|sed s/x86_64/x64/)
+    - name: Upload Tarball artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Tarballs
+        path: ./app/dist/Headlamp*.tar.*
+        if-no-files-found: error
+        retention-days: 1
+    - name: Upload AppImage artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: AppImages
+        path: ./app/dist/Headlamp*.AppImage
+        if-no-files-found: error
+        retention-days: 1

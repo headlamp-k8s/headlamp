@@ -1,0 +1,38 @@
+name: Build and upload Mac app artifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      buildBranch:
+        description: 'Headlamp ref/branch/tag'
+        required: true
+        default: 'main'
+jobs:
+  build-mac:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2.3.3
+      with:
+        ref: ${{ github.event.inputs.buildBranch }}
+    - name: Setup nodejs
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16.x
+    - uses: actions/setup-go@v2
+      with:
+        go-version: ^1.15
+    - name: Dependencies
+      run: brew install make
+    - name: App Mac
+      run: |
+        make app-mac
+    - name: Rename Mac 64bit to include arch
+      run: |
+        FILE_PATH=$(echo app/dist/Headlamp*mac.dmg); mv ${FILE_PATH} $(echo ${FILE_PATH}|sed s/mac/mac-x64/)
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: DMGs
+        path: ./app/dist/Headlamp*.*
+        if-no-files-found: error
+        retention-days: 1
