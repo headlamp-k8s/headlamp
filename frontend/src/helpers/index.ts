@@ -124,7 +124,7 @@ function getBaseUrl(): string {
     baseUrl = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : '';
   }
 
-  if (baseUrl === './' || baseUrl === '.') {
+  if (baseUrl === './' || baseUrl === '.' || baseUrl === '/') {
     baseUrl = '';
   }
   return baseUrl;
