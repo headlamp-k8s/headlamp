@@ -1,0 +1,39 @@
+name: Build and upload Windows app artifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      buildBranch:
+        description: 'Headlamp ref/branch/tag'
+        required: true
+        default: 'main'
+
+jobs:
+  build-windows:
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2.3.3
+      with:
+        ref: ${{ github.event.inputs.buildBranch }}
+    - name: Setup nodejs
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16.x
+    - uses: actions/setup-go@v2
+      with:
+        go-version: ^1.15
+    - name: Dependencies
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install make
+    - name: App Windows
+      run: |
+        npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
+        make app-win
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Win exes
+        path: ./app/dist/Headlamp*.*
+        if-no-files-found: error
+        retention-days: 1
