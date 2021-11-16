@@ -72,7 +72,13 @@
     },
     "win": {
       "target": [
-        "nsis"
+        {
+          "artifactName": "${productName}-${version}-${os}-x64.${ext}",
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
       ],
       "extraResources": [
         {
