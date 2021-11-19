@@ -65,6 +65,11 @@ tested Headlamp with, and invite you to add any missing platform you have
 tested, or comments if there are regressions in already filed platforms that
 should be consider.
 
+## Extensions / Plugins
+
+If you are interested in tweaking Headlamp to fit your use-cases, you can check out
+our [plugin development guide](https://kinvolk.github.io/headlamp/docs/0.4/development/plugins/).
+
 ## Get involved
 
 Check out our [guidelines](https://kinvolk.github.io/headlamp/latest/contributing/)
