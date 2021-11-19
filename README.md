@@ -12,11 +12,11 @@ web UIs/dashboards available (i.e. to list and view resources) as well as other 
 ## Features
 
   * Vendor independent / generic Kubernetes UI
-  * UI controls reflecting user roles (no deletion/update if not allowed)
+  * Works in-cluster, or locally as a desktop app
   * Multi-cluster
   * Extensible through plugins
+  * UI controls reflecting user roles (no deletion/update if not allowed)
   * Clean & modern UI
-  * Works in-cluster, or locally as a desktop app
   * Cancellable creation/update/deletion operations
   * Logs, exec, and resource editor with documentation
   * Read-write / interactive (actions based on permissions)
