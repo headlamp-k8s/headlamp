@@ -432,7 +432,7 @@ export function getRoute(routeName: string) {
 }
 
 export function getRoutePath(route: Route) {
-  if (route.path === '*') {
+  if (route.path === NotFoundRoute.path) {
     return route.path;
   }
   if (route.noCluster) {
