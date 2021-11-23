@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route, RouteProps, Switch } from 'react-router-dom';
 import { getToken } from '../../lib/auth';
 import { useClustersConf } from '../../lib/k8s';
-import { createRouteURL, getRoutePath, ROUTES } from '../../lib/router';
+import { createRouteURL, getRoutePath, NotFoundRoute, ROUTES } from '../../lib/router';
 import { getCluster } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { useSidebarItem } from '../Sidebar';
@@ -14,6 +14,7 @@ export default function RouteSwitcher() {
     <Switch>
       {Object.values(ROUTES)
         .concat(Object.values(routes))
+        .concat(NotFoundRoute)
         .map((route, index) =>
           route.name === 'OidcAuth' ? (
             <Route

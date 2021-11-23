@@ -414,13 +414,17 @@ export const ROUTES: {
     sidebar: 'crds',
     component: () => <CustomResourceDefinitionDetails />,
   },
-  wildRoute: {
-    path: '*',
-    exact: true,
-    component: () => <NotFoundComponent />,
-    sidebar: null,
-    noAuthRequired: true,
-  },
+};
+
+// The NotFound route  needs to be considered always in the last place when used
+// with the router switch, as any routes added after this one will never be considered.
+// So we do not include it in the default routes in order to always "manually" consider it.
+export const NotFoundRoute = {
+  path: '*',
+  exact: true,
+  component: () => <NotFoundComponent />,
+  sidebar: null,
+  noAuthRequired: true,
 };
 
 export function getRoute(routeName: string) {
