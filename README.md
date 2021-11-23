@@ -12,11 +12,11 @@ web UIs/dashboards available (i.e. to list and view resources) as well as other 
 ## Features
 
   * Vendor independent / generic Kubernetes UI
-  * UI controls reflecting user roles (no deletion/update if not allowed)
+  * Works in-cluster, or locally as a desktop app
   * Multi-cluster
   * Extensible through plugins
+  * UI controls reflecting user roles (no deletion/update if not allowed)
   * Clean & modern UI
-  * Works in-cluster, or locally as a desktop app
   * Cancellable creation/update/deletion operations
   * Logs, exec, and resource editor with documentation
   * Read-write / interactive (actions based on permissions)
@@ -40,13 +40,13 @@ web UIs/dashboards available (i.e. to list and view resources) as well as other 
 
 ## Quickstart
 
-If you want to deploy Headlamp in your cluster, check out the instructions on running it [in-cluster](https://kinvolk.io/docs/headlamp/latest/installation/in-cluster/).
+If you want to deploy Headlamp in your cluster, check out the instructions on running it [in-cluster](https://kinvolk.github.io/headlamp/latest/installation/in-cluster/).
 
 If you have a kube config already, you can quickly try Headlamp locally as a
-[desktop application](https://kinvolk.io/docs/headlamp/latest/installation/desktop/),
-for [Linux](https://kinvolk.io/docs/headlamp/latest/installation/desktop/linux-installation),
-[Mac]((https://kinvolk.io/docs/headlamp/latest/installation/desktop/mac-installation)),
-or [Windows]((https://kinvolk.io/docs/headlamp/latest/installation/desktop/win-installation)).
+[desktop application](https://kinvolk.github.io/headlamp/latest/installation/desktop/),
+for [Linux](https://kinvolk.github.io/headlamp/latest/installation/desktop/linux-installation),
+[Mac]((https://kinvolk.github.io/headlamp/latest/installation/desktop/mac-installation)),
+or [Windows]((https://kinvolk.github.io/headlamp/latest/installation/desktop/win-installation)).
 **Make sure** you have a kubeconfig file set up with your favorite clusters and
 in the default path so Headlamp can use it.
 
@@ -56,7 +56,7 @@ Headlamp uses [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rba
 whether and how users can access resources. If you try Headlamp with a token that has very limited
 permissions, you may not be able to view your cluster resources correctly.
 
-See the documentation on [how to easily get a Service Account token](https://kinvolk.io/docs/headlamp/latest/installation#create-a-service-account-token) for your cluster.
+See the documentation on [how to easily get a Service Account token](https://kinvolk.github.io/headlamp/latest/installation#create-a-service-account-token) for your cluster.
 
 ## Tested platforms
 
@@ -65,9 +65,14 @@ tested Headlamp with, and invite you to add any missing platform you have
 tested, or comments if there are regressions in already filed platforms that
 should be consider.
 
+## Extensions / Plugins
+
+If you are interested in tweaking Headlamp to fit your use-cases, you can check out
+our [plugin development guide](https://kinvolk.github.io/headlamp/docs/0.4/development/plugins/).
+
 ## Get involved
 
-Check out our [guidelines](https://kinvolk.io/docs/headlamp/latest/contributing/)
+Check out our [guidelines](https://kinvolk.github.io/headlamp/latest/contributing/)
 and join the discussion on the
 [#headlamp](https://kubernetes.slack.com/messages/headlamp) channel
 in the Kubernetes Slack.
