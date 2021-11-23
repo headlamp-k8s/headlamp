@@ -106,6 +106,7 @@ window.pluginLib = {
   MuiStyles: require('@material-ui/styles'),
   React: require('react'),
   Recharts: require('recharts'),
+  ReactRouter: require('react-router-dom'),
   ReactRedux: require('react-redux'),
   Utils: require('../lib/util'),
   Iconify: require('@iconify/react'),

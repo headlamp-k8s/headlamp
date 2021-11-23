@@ -46,6 +46,7 @@ import PersistentVolumeList from '../components/storage/VolumeList';
 import WorkloadDetails from '../components/workload/Details';
 import WorkloadOverview from '../components/workload/Overview';
 import LocaleSelect from '../i18n/LocaleSelect/LocaleSelect';
+import store from '../redux/stores/store';
 import CronJob from './k8s/cronJob';
 import Deployment from './k8s/deployment';
 import Job from './k8s/job';
@@ -443,7 +444,8 @@ export interface RouteURLProps {
 }
 
 export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
-  const route = getRoute(routeName);
+  const storeRoutes = store.getState().ui.routes;
+  const route = getRoute(routeName) || (storeRoutes && storeRoutes[routeName]);
 
   if (!route) {
     return '';

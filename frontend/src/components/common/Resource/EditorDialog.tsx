@@ -52,7 +52,7 @@ const useStyle = makeStyles(theme => ({
 
 type KubeObjectIsh = Partial<KubeObjectInterface>;
 
-interface EditorDialogProps extends DialogProps {
+export interface EditorDialogProps extends DialogProps {
   item: KubeObjectIsh | null;
   onClose: () => void;
   onSave: ((...args: any[]) => void) | null;
