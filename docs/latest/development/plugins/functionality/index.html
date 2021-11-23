@@ -1,0 +1,1477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Plugins Functionality | Headlamp</title>
+    <meta name="description" content="Plugins Functionality" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;600;700&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    
+    
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    
+
+    <link rel="canonical" href="https://kinvolk.github.io/headlamp" />
+    <meta name="generator" content="Hugo 0.89.0" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Headlamp%!(EXTRA string= %s, string=Plugins Functionality)" />
+<meta property="og:description" content="Headlamp%!(EXTRA string= %s, string=Plugins Functionality)" />
+<meta property="og:url" content="https://kinvolk.github.io/headlamp/docs/latest/development/plugins/functionality/" />
+<meta property="og:site_name" content="Headlamp" />
+<meta property="article:modified_time" content="2021-11-02T10:00:18Z" /><link rel="stylesheet" href="https://kinvolk.github.io/headlamp/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://kinvolk.github.io/headlamp/css/style.9c9f82e49ae31554922b181cd65de49bbfc61c9bf1e15323b70bf2cebb3220ab.css" integrity="sha256-nJ&#43;C5JrjFVSSKxgc1l3km7/GHJvx4VMjtwvyzrsyIKs=">
+
+    
+    <link rel="shortcut icon" href="" />
+</head>
+<body class="docs page">
+
+    <title>Plugins Functionality | Headlamp</title>
+  </head>
+  <body class="td-page">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
+    
+
+
+
+<header class="header  ">
+  
+  <div class="container">
+    <div class="row">
+      
+      <nav class="w-100 p-0 navbar navbar-expand-md justify-content-md-between ">
+
+        <a href="https://kinvolk.github.io/headlamp" class="navbar-brand">
+            <img src="https://kinvolk.github.io/headlamp/media/logo.svg" alt="" >
+        </a><button aria-label="Toggle navigation bar" class="navbar-toggler p-0 mobile-menu" type="button" data-toggle="collapse" data-target="#navbarToggler">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="navbarToggler" class="collapse navbar-collapse justify-content-end header__navigation">
+                <ul class="navbar-nav align-items-center">
+      
+      
+          
+              <li class="nav-item">
+                  <a href="https://kinvolk.github.io/headlamp/"class="nav-link">Docs<span class="navbar__link-underline"></span>
+                  </a>
+              </li>
+          
+      
+          
+              <li class="nav-item">
+                  <a href="https://kinvolk.io/tags/headlamp/"title="blog"class="nav-link">Posts <i class="fas fa-external-link-alt"></i><span class="navbar__link-underline"></span>
+                  </a>
+              </li>
+          
+      
+          
+              <li class="nav-item">
+                  <a href="https://github.com/kinvolk/headlamp"title="github"class="nav-link">Github <i class="fab fa-github"></i><span class="navbar__link-underline"></span>
+                  </a>
+              </li>
+          
+      
+          
+              <li class="nav-item">
+                  <a href="https://kubernetes.slack.com/messages/headlamp"title="slack"class="nav-link">Slack <i class="fas fa-external-link-alt"></i><span class="navbar__link-underline"></span>
+                  </a>
+              </li>
+          
+      
+    </ul>
+
+        </div></nav>
+    </div>
+  </div>
+</header>
+
+
+    <main class="main docs-section">
+      
+
+
+
+
+  
+
+
+
+
+
+
+
+
+<section
+  class="banner "
+  style="background-color: #000; color: #fff"
+>
+  <div class="container">
+      <div class="row justify-content-between">
+          <div class="col-12">
+              
+              <h1>Documentation</h1>
+              <h2 ></h2>
+              
+          </div>
+      </div>
+  </div>
+</section>
+
+      <div class="container">
+        <div class="row flex-md-nowrap">
+          <div class="col-12 col-md-3 col-xl-3 td-sidebar d-print-none">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner"><div class="text-center mb-0 mx-4 d-none d-md-block">
+    
+<select class="custom-select custom-select-lg mb-3"
+  onchange="if (this.value) window.location.href=this.value"
+  title="Version"
+>
+  
+  
+    
+    <option
+      value=https://kinvolk.github.io/headlamp/docs/0.4/
+      
+    >
+      0.4
+    </option>
+  
+    
+    <option
+      value=https://kinvolk.github.io/headlamp/docs/latest/
+      selected
+    >
+      latest
+    </option>
+  
+</select>
+
+  </div>
+  <form class="td-sidebar__search d-flex align-items-center text-center">
+    
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+      <img src="https://kinvolk.github.io/headlamp/media/images/menu-swap-outline.svg" />
+    </button>
+  </form>
+  
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    
+    
+    
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  <li class="p-0">
+  <ul class="collapse show" id="docs">
+    
+
+    
+      
+            
+            
+            
+            
+            
+              
+                
+                
+                
+              
+            
+              
+                
+                
+                
+                  
+                
+              
+            
+          
+          
+            <li class="p-0">
+              
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatest" role=""  class="align-left pl-0 pr-2 td-sidebar-link ">
+      
+      
+        
+      
+
+      Headlamp
+      
+        <span style="margin-left: 1rem;" class="badge badge-pill badge-dark">latest</span>
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse show" id="docslatest">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatestinstallation" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Installation
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docslatestinstallation">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/installation/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatestinstallationin-cluster" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      In-cluster Deployment
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docslatestinstallationin-cluster">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/installation/in-cluster/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestinstallationin-clusteroidc"   href="https://kinvolk.github.io/headlamp/docs/latest/installation/in-cluster/oidc/">
+                OIDC
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatestinstallationdesktop" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Desktop App Installation
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docslatestinstallationdesktop">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/installation/desktop/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestinstallationdesktoplinux-installation"   href="https://kinvolk.github.io/headlamp/docs/latest/installation/desktop/linux-installation/">
+                Linux
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestinstallationdesktopmac-installation"   href="https://kinvolk.github.io/headlamp/docs/latest/installation/desktop/mac-installation/">
+                Mac OS
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestinstallationdesktopwin-installation"   href="https://kinvolk.github.io/headlamp/docs/latest/installation/desktop/win-installation/">
+                Windows
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestinstallationdesktopheadless"   href="https://kinvolk.github.io/headlamp/docs/latest/installation/desktop/headless/">
+                Headless Mode
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestinstallationbase-url"   href="https://kinvolk.github.io/headlamp/docs/latest/installation/base-url/">
+                Base URL
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestinstallationmetrics-server"   href="https://kinvolk.github.io/headlamp/docs/latest/installation/metrics-server/">
+                Metrics Server
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestplatforms"   href="https://kinvolk.github.io/headlamp/docs/latest/platforms/">
+                Platforms
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestcontributing"   href="https://kinvolk.github.io/headlamp/docs/latest/contributing/">
+                Contributing
+              </a>
+            </li>
+            
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatestdevelopment" role="" data-toggle="collapse" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Development
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse show" id="docslatestdevelopment">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/development/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentbackend"   href="https://kinvolk.github.io/headlamp/docs/latest/development/backend/">
+                Backend
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentfrontend"   href="https://kinvolk.github.io/headlamp/docs/latest/development/frontend/">
+                Frontend
+              </a>
+            </li>
+            
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatestdevelopmentapi" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      API
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docslatestdevelopmentapi">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/development/api/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatestdevelopmentapiclasses" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Classes
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docslatestdevelopmentapiclasses">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_registrydefault"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_registry.default/">
+                default
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassespluginplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin.plugin/">
+                Plugin
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatestdevelopmentapiinterfaces" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Interfaces
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docslatestdevelopmentapiinterfaces">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiinterfaceslib_utilfilterstate"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_util.filterstate/">
+                FilterState
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatestdevelopmentapimodules" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Modules
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docslatestdevelopmentapimodules">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimoduleslib_k8s"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s/">
+                lib/k8s
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimoduleslib_util"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util/">
+                lib/util
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimodulesplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/">
+                plugin
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimodulesplugin_registry"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_registry/">
+                plugin/registry
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatestdevelopmenti18n" role="" data-toggle="collapse" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Internationalization
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse " id="docslatestdevelopmenti18n">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/development/i18n/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmenti18ncontributing"   href="https://kinvolk.github.io/headlamp/docs/latest/development/i18n/contributing/">
+                Contributing
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+          
+              <li class="p-0">
+                
+
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section">
+  
+  
+  
+  
+  <li class="td-sidebar-nav__section-title">
+    <a  href="#docslatestdevelopmentplugins" role="" data-toggle="collapse" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">
+      
+      
+
+      Plugins
+      
+    </a>
+  </li>
+  
+  <li class="p-0">
+  <ul class="collapse show" id="docslatestdevelopmentplugins">
+    
+    <li class="show">
+      <a class="td-sidebar-link td-sidebar-link__page " href="https://kinvolk.github.io/headlamp/docs/latest/development/plugins/">
+        Overview
+      </a>
+    </li>
+    
+
+    
+      
+        
+        
+        
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentpluginsbuilding"   href="https://kinvolk.github.io/headlamp/docs/latest/development/plugins/building/">
+                Building &amp; Shipping
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docslatestdevelopmentpluginsfunctionality"   href="https://kinvolk.github.io/headlamp/docs/latest/development/plugins/functionality/">
+                Functionality
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentpluginshow-to"   href="https://kinvolk.github.io/headlamp/docs/latest/development/plugins/how-to/">
+                How-to
+              </a>
+            </li>
+            
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+              </li>
+          
+        
+      
+    
+  </ul>
+  </li>
+</ul>
+
+            </li>
+          
+      
+    
+  </ul>
+  </li>
+</ul>
+
+  </nav>
+</div>
+
+
+
+
+          </div>
+          <div class="col-12 col-md-9 col-xl-8 pl-md-5 docs-reader" role="main">
+            <div class="row mt-2">
+              <div class="col-12">
+                <div id="fastSearch">
+    <div class="search-contents">
+        <input id="searchInput" autocomplete="off" tabindex="0" data-search-version="latest" placeholder="Search…"/>
+        <div id="searchResults">
+            <ul id="searchResultsList"></ul>
+        </div>
+    </div>
+</div>
+<script>
+    window.location.origin="https:\/\/kinvolk.github.io\/headlamp";
+    window.location['baseurl']="https:\/\/kinvolk.github.io\/headlamp"
+</script>
+
+              </div>
+            </div>
+            <div class="row">
+              
+              
+              
+              <div class="col-12 col-lg-9 order-last order-lg-first">
+                <nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+	<ol class="breadcrumb spb-1">
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="breadcrumb-item" >
+	
+	
+	
+	
+	<a href="https://kinvolk.github.io/headlamp/docs/">Documentation</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	
+	
+		
+	
+	
+	
+	<a href="https://kinvolk.github.io/headlamp/docs/latest/">latest</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	
+	
+	
+	
+	<a href="https://kinvolk.github.io/headlamp/docs/latest/development/">Development</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item" >
+	
+	
+	
+	
+	<a href="https://kinvolk.github.io/headlamp/docs/latest/development/plugins/">Plugins</a>
+</li>
+
+
+
+
+<li class="breadcrumb-item active" aria-current="page">
+	
+	
+	
+	
+	<a href="https://kinvolk.github.io/headlamp/docs/latest/development/plugins/functionality/">Functionality</a>
+</li>
+
+	</ol>
+</nav	>
+
+
+              </div>
+              
+              
+              <div class="d-block d-md-none col-12 offset-sm-6 col-sm-6 offset-lg-0 col-lg-3 order-first order-lg-last text-right">
+                
+<select class="custom-select custom-select-lg mb-3"
+  onchange="if (this.value) window.location.href=this.value"
+  title="Version"
+>
+  
+  
+    
+    <option
+      value=https://kinvolk.github.io/headlamp/docs/0.4/
+      
+    >
+      0.4
+    </option>
+  
+    
+    <option
+      value=https://kinvolk.github.io/headlamp/docs/latest/
+      selected
+    >
+      latest
+    </option>
+  
+</select>
+
+              </div>
+              
+
+            </div>
+            
+    <div class="td-content">
+    
+  <h1>Plugins Functionality</h1>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+    
+  
+
+<p>Headlamp&rsquo;s plugins exist for changing or adding functionlity related to
+the user interface and experience.</p>
+<h2 id="plugins-lib">Plugins Lib</h2>
+<p>Headlamp exposes a <code>pluginLib</code> object in the global object <code>window</code>.
+A number of modules, both from Headlamp, or representing Headlamp&rsquo;s common
+dependencies are included in the <code>pluginLib</code>.</p>
+<p>Thus, plugins should only use dependencies that are not yet provided by Headlamp.</p>
+<h3 id="modules">Modules</h3>
+<p>External modules available currently in the <code>pluginLib</code> are:</p>
+<ul>
+<li>React</li>
+<li>Iconify</li>
+<li>ReactRedux</li>
+<li>MuiCore (Material UI&rsquo;s core module)</li>
+<li>MuiStyles (Material UI&rsquo;s styles module)</li>
+<li>Lodash</li>
+</ul>
+<p>Apart from the external modules above, the <code>pluginLib</code> contains of course
+modules that are related to Headlamp, so developers can use the cluster and
+web UI related functionality. Those modules are:</p>
+<ul>
+<li>K8s</li>
+<li>CommonComponents</li>
+</ul>
+<p>This means that you can just declare a <code>const React = window.pluginLib.React</code> in order to use
+React without having to import it.</p>
+<h3 id="registration">Registration</h3>
+<p>Apart from the modules mentioned above, Headlamp also adds an important method
+for registering plugins (<code>window.registerPlugin</code>).</p>
+<h2 id="funcionality">Funcionality</h2>
+<p>The plugin registers makes functionality available to plugins in an easy way.</p>
+<p>The idea is to make more and more functionality available to plugins. Here is
+what we have so far:</p>
+<h3 id="sidebar-items">Sidebar Items</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#a6e22e">registerSidebarItem</span>(<span style="color:#a6e22e">parentName</span>: <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">itemName</span>: <span style="color:#66d9ef">string</span>,
+                    <span style="color:#a6e22e">itemLabel</span>: <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">url</span>: <span style="color:#66d9ef">string</span>,
+                    <span style="color:#a6e22e">opts</span> <span style="color:#f92672">=</span> {<span style="color:#a6e22e">useClusterURL</span>: <span style="color:#66d9ef">true</span>})
+</code></pre></div><p>This method allows to set entries in the sidebar.</p>
+<p>The arguments are as follows:</p>
+<ul>
+<li><code>parentName</code>: The name of the parent entry. If the string is empty, then there is no parent,
+and that means the entry is a top-level one. For knowing which names exist
+already in the Sidebar, at the moment you have to check the configuration for that component, which can be found in Headlamp&rsquo;s <code>src/components/Sidebar.tsx</code>.</li>
+<li><code>itemName</code>: The logical name for the item, i.e. the name other sub-entries will use
+when setting this item as a parent.</li>
+<li><code>itemLabel</code>: The text to be displayed for the entry in the Sidebar.</li>
+<li><code>url</code>: The URL to go to when clicking this entry.</li>
+<li><code>opts</code>: The options related to registering this item. At the moment, only
+the <code>useClusterUrl</code> (defaults to <code>true</code>) can be used. This option indicates
+whether the URL we are using for this entry should be prefixed with the
+current cluster URL or not. Most cluster related actions should have URLs
+that are prefixed by the cluster name and that&rsquo;s managed automatically
+with this option.</li>
+</ul>
+<h3 id="routes">Routes</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#a6e22e">registerRoute</span>(<span style="color:#a6e22e">routeSpec</span>: <span style="color:#66d9ef">Route</span>)
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Route</span> {
+  <span style="color:#a6e22e">path</span>: <span style="color:#66d9ef">string</span>;
+  <span style="color:#a6e22e">exact?</span>: <span style="color:#66d9ef">boolean</span>;
+  <span style="color:#a6e22e">noCluster?</span>: <span style="color:#66d9ef">boolean</span>;
+  <span style="color:#a6e22e">noAuthRequired?</span>: <span style="color:#66d9ef">boolean</span>;
+  <span style="color:#a6e22e">sidebar</span>: <span style="color:#66d9ef">string</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">null</span>;
+  <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> () <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">JSX</span>.<span style="color:#a6e22e">Element</span>;
+}
+</code></pre></div><p>This method allows to register a route (i.e. a known URL that resolves to
+a component displayed in Headlamp&rsquo;s main area).</p>
+<p>The <code>routeSpec</code> is an object with the following members:</p>
+<ul>
+<li><code>path</code>: The URL path for the route.</li>
+<li><code>exact</code> (optional): There it should be an exact match between the URL&rsquo;s path and the
+one defined in the route spec (see 
+
+
+<a href="https://reactrouter.com/native/api/Route/exact-bool" target="_blank" rel="noopener">ReactRouter</a>
+&rsquo;s docs for more context). By default it is <code>false</code>.</li>
+<li><code>noCluster</code> (optional): Whether the route doesn&rsquo;t belongs to a cluster (in which
+case the URL produced for it will have the cluster prefix). By default it is <code>false</code>.</li>
+<li><code>noAuthRequired</code> (optional): Whether authentication is not required for this route
+(example, non-cluster routes such as settings). By default it is <code>false</code>.</li>
+<li><code>sidebar</code>: Which sidebar entry to select when this route is on (the value used should be an item
+name of the sidebar).</li>
+<li><code>component</code>: The component to render in Headlamp&rsquo;s main area.</li>
+</ul>
+<h3 id="details-views-header-actions">Details Views' Header Actions</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#a6e22e">registerDetailsViewHeaderAction</span>(<span style="color:#a6e22e">actionName</span>: <span style="color:#66d9ef">string</span>,
+                                <span style="color:#a6e22e">actionFunc</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">item</span>: <span style="color:#66d9ef">object</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">JSX</span>.<span style="color:#a6e22e">Element</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">null</span>)
+</code></pre></div><p>This method allows to add a component to the top right area of details views
+(in the area of the screenshot below that&rsquo;s highlighted as yellow).</p>
+<p><img src="https://kinvolk.github.io/headlamp/docs/latest/development/plugins/./header_actions_screenshot.png" alt="screenshot of the header showing two actions"></p>
+<p>Details views are the views used for displaying information about each
+cluster&rsquo;s resource.</p>
+<p>The arguments are as follows:</p>
+<ul>
+<li><code>actionName</code>: The name for this action.</li>
+<li><code>actionFunc</code>: A function that takes an item and returns an element (or null, if nothing should
+be done).</li>
+</ul>
+<h3 id="app-bar-actions">App Bar Actions</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#a6e22e">registerAppBarAction</span>(<span style="color:#a6e22e">actionName</span>: <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">actionFunc</span><span style="color:#f92672">:</span> () <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">JSX</span>.<span style="color:#a6e22e">Element</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">null</span>))
+</code></pre></div><p>This method allows to add a component to the top right area of the app bar
+(top bar).</p>
+<p>The arguments are as follows:</p>
+<ul>
+<li><code>actionName</code>: The name for this action.</li>
+<li><code>actionFunc</code>: A function that returns an element.</li>
+</ul>
+
+
+    </div>
+
+            
+
+            <div class="github-footer">
+              <hr class="panel-line" />
+              
+              
+                
+                
+                
+                
+                  
+                
+                
+                
+                <a
+                  href="https://github.com/kinvolk/headlamp/edit/main/docs/development/plugins/functionality.md"
+                  class="btn btn-md mt-2"
+                  style="border: 2px solid #afafaf; padding: 4px 2px; font-weight: inherit;"
+                >
+                  <i class="fab fa-github"></i> Edit this page
+                </a>
+              
+
+              
+              
+              <a
+                href="https://github.com/kinvolk/headlamp/issues/new"
+                class="btn btn-md mt-2"
+                style="border: 2px solid #afafaf; padding: 4px 2px; font-weight: inherit;"
+              >
+                <i class="fab fa-github"></i> File documentation issue
+              </a>
+              
+            </div>
+
+            
+          </div>
+          <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+            
+
+
+
+
+
+
+
+
+
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#plugins-lib">Plugins Lib</a>
+      <ul>
+        <li><a href="#modules">Modules</a></li>
+        <li><a href="#registration">Registration</a></li>
+      </ul>
+    </li>
+    <li><a href="#funcionality">Funcionality</a>
+      <ul>
+        <li><a href="#sidebar-items">Sidebar Items</a></li>
+        <li><a href="#routes">Routes</a></li>
+        <li><a href="#details-views-header-actions">Details Views' Header Actions</a></li>
+        <li><a href="#app-bar-actions">App Bar Actions</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+  <div class="container">
+      <div class="container footer__navigation mb-3">
+        <div class="row justify-content-between d-flex flex-wrap w-100 px-3">
+          
+          
+        </div>
+    </div>
+    <div class="footer__copy row container p-0 align-items-center justify-content-between">
+      <div class="col-12 col-md-auto">
+        <div class="footer__brand">
+          <a href="https://kinvolk.github.io/headlamp">
+            <img src="https://kinvolk.github.io/headlamp/media/logo.svg" alt="" >
+          </a>
+        </div>
+      </div>
+      <div class="footer__copyright col-12 col-md-6">
+        <p class="text-center">Copyright the Headlamp project contributors</p>
+      </div>
+      <div class="footer__socials col-12 col-md-auto text-center">
+        <ul class="list-inline socials__list">
+  <li class="list-inline-item socials__item">
+    <a href="https://github.com/kinvolk/headlamp" class="socials__link" target="_blank" rel="noopener" aria-label="github">
+      <i class="fab fa-github-square"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://kinvolk.github.io/headlamp/js/jquery-3.4.1.min.js"></script>
+<script src="https://kinvolk.github.io/headlamp/js/bootstrap.min.js"></script><script src="https://kinvolk.github.io/headlamp/js/common.js"></script>
+    <script src="https://kinvolk.github.io/headlamp/js/fastsearch.min.js"></script>
+    <script src="https://kinvolk.github.io/headlamp/js/lunr.min.js"></script>
+    <script src="https://kinvolk.github.io/headlamp/js/anchor.min.js"></script>
+    
+    
+  </body>
+</html>

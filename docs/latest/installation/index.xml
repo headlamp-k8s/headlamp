@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Installation / Deployment on Headlamp</title>
+    <link>https://kinvolk.github.io/headlamp/docs/latest/installation/</link>
+    <description>Recent content in Installation / Deployment on Headlamp</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="https://kinvolk.github.io/headlamp/docs/latest/installation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Run Headlamp with a base-url</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/installation/base-url/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/installation/base-url/</guid>
+      <description>Normally Headlamp runs at the root of the domain. Hower you can also ask to run it at a base-url like &amp;ldquo;/headlamp&amp;rdquo; for example.
+ default at the root of the domain: https://headlamp.example.com/. base-url https://example.com/headlamp/  A warning about multiple apps on the same sub domain Hosting multiple websites (apps) on the same origin can lead to possible conflicts between the apps. Each app is able to access information and make requests of the other.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes Metrics Server</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/installation/metrics-server/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/installation/metrics-server/</guid>
+      <description>Headlamp can show information for resources usage if the Metrics Server is installed. If the Metrics Server is not installed, then a related notice is displayed as shown in in the following screenshot:
+To read more about metrics server check out the metrics-server documentation .
+Minikube If you are running Minikube, then you can install the Metrics Server by enabling the respective add-on . i.e.:
+minikube addons enable metrics-server </description>
+    </item>
+    
+  </channel>
+</rss>

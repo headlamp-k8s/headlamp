@@ -1,0 +1,36 @@
+title: Headlamp
+copyright: Copyright the Headlamp project contributors
+
+params:
+  icon: https://github.com/kinvolk/headlamp/raw/main/frontend/public/logo-light.svg
+  github: kinvolk/headlamp
+  docs:
+    github_edit_url: https://github.com/kinvolk/headlamp/edit/main/docs
+    issues_url: https://github.com/kinvolk/headlamp/issues/new
+    external_docs:
+    - repo: https://github.com/kinvolk/headlamp.git
+      name: "latest"
+      branch: "main"
+      dir: "docs"
+    - repo: https://github.com/kinvolk/headlamp.git
+      name: "0.4"
+      branch: "v0.4.0"
+      dir: "docs"
+
+menu:
+  main:
+    - name: Docs
+      url: /
+      weight: -500
+    - pre: Posts <i class="fas fa-external-link-alt"></i>
+      name: blog
+      url: https://kinvolk.io/tags/headlamp/
+      weight: -200
+    - pre: Slack <i class="fas fa-external-link-alt"></i>
+      name: slack
+      url: https://kubernetes.slack.com/messages/headlamp
+      weight: -100
+    - pre: Github <i class="fab fa-github"></i>
+      name: github
+      url: https://github.com/kinvolk/headlamp
+      weight: -200
