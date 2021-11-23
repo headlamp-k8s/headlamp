@@ -8,13 +8,14 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import { useSidebarItem } from '../Sidebar';
 
 export default function RouteSwitcher() {
+  // The NotFoundRoute always has to be evaluated in the last place.
+  const defaultRoutes = Object.values(ROUTES).concat(NotFoundRoute);
   const routes = useTypedSelector(state => state.ui.routes);
 
   return (
     <Switch>
-      {Object.values(ROUTES)
-        .concat(Object.values(routes))
-        .concat(NotFoundRoute)
+      {Object.values(routes)
+        .concat(defaultRoutes)
         .map((route, index) =>
           route.name === 'OidcAuth' ? (
             <Route
