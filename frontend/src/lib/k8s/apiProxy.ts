@@ -11,8 +11,7 @@ import { OpPatch } from 'json-patch';
 import helpers from '../../helpers';
 import { getToken, logout } from '../auth';
 import { getCluster } from '../util';
-import { ResourceClasses } from '.';
-import { KubeMetrics, KubeObjectClass, KubeObjectInterface } from './cluster';
+import { KubeMetrics, KubeObjectInterface } from './cluster';
 
 const BASE_HTTP_URL = helpers.getAppUrl();
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
@@ -286,6 +285,31 @@ function simpleApiFactoryWithNamespace(
   function url(namespace: string) {
     return namespace ? `${apiRoot}/namespaces/${namespace}/${resource}` : `${apiRoot}/${resource}`;
   }
+}
+
+function resourceDefToApiFactory(resourceDef: KubeObjectInterface): ApiFactoryReturn {
+  if (!resourceDef.kind) {
+    throw new Error(`Cannot handle unknown resource kind: ${resourceDef.kind}`);
+  }
+
+  if (!resourceDef.apiVersion) {
+    throw new Error(`Definition has no apiVersion`);
+  }
+
+  let factoryFunc: typeof apiFactory | typeof apiFactoryWithNamespace = apiFactory;
+  if (!!resourceDef.metadata?.namespace) {
+    factoryFunc = apiFactoryWithNamespace;
+  }
+
+  const [apiGroup, apiVersion] = resourceDef.apiVersion.split('/');
+  if (!apiVersion) {
+    throw new Error(`apiVersion has no version string: ${resourceDef.apiVersion}`);
+  }
+
+  // This may not be a great way to get the resource plural, but allows us to
+  // skip checking the CRDs for it.
+  const resourcePlural = resourceDef.kind.toLowerCase() + 's';
+  return factoryFunc(apiGroup, apiVersion, resourcePlural);
 }
 
 function getApiRoot(group: string, version: string) {
@@ -590,26 +614,17 @@ function combinePath(base: string, path: string) {
 }
 
 export async function apply(body: KubeObjectInterface): Promise<JSON> {
-  const resourceName = body.kind;
-  let resourceClass: KubeObjectClass | null = null;
-
-  if (resourceName in ResourceClasses) {
-    resourceClass = ResourceClasses[resourceName];
-  }
-
-  if (!resourceClass) {
-    throw new Error(`Cannot handle unknown resource kind: ${body.kind}`);
-  }
+  const apiEndpoint = resourceDefToApiFactory(body);
 
   try {
-    return await resourceClass!.apiEndpoint.post(body);
+    return await apiEndpoint.post(body);
   } catch (err) {
     // Check to see if failed because the record already exists.
     // If the failure isn't a 409 (i.e. Confilct), just rethrow.
     if ((err as ApiError).status !== 409) throw err;
 
-    // We had a confilct. Try a PUT
-    return resourceClass!.apiEndpoint.put(body);
+    // We had a conflict. Try a PUT
+    return apiEndpoint.put(body);
   }
 }
 
