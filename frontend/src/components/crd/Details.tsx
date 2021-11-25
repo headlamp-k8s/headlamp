@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
-import { ApiError, apiFactory, apiFactoryWithNamespace } from '../../lib/k8s/apiProxy';
+import { ApiError, apiFactory } from '../../lib/k8s/apiProxy';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
 import { timeAgo } from '../../lib/util';
 import Loader from '../common/Loader';
@@ -16,12 +16,18 @@ import SimpleTable from '../common/SimpleTable';
 function getAPIForCRD(item: KubeCRD) {
   const group = item.spec.group;
   const version = item.spec.version;
-  const name = item.spec.names.plural;
+  const name = item.spec.names.plural as string;
 
-  if (item.spec.scope === 'Namespaced') {
-    return apiFactoryWithNamespace(group, version, name);
+  let versions: any[] = [];
+  if (!version && item.spec.versions.length > 0) {
+    item.spec.versions.map(versionItem => {
+      versions.unshift([group, versionItem.name, name]);
+    });
+  } else {
+    versions = [[group, version, name]];
   }
-  return apiFactory(group, version, name);
+
+  return apiFactory(...versions);
 }
 
 const useStyle = makeStyles({
@@ -36,7 +42,8 @@ export default function CustomResourceDefinitionDetails() {
   const [item, setItem] = React.useState<CRD | null>(null);
   const [error, setError] = React.useState<ApiError | null>(null);
   const [objToShow, setObjToShow] = React.useState<KubeCRD | null>(null);
-  const [objects, setObjects] = React.useState<KubeCRD[]>([]);
+  const [objects, setObjects] = React.useState<KubeCRD[] | null>([]);
+  const [objectsError, setObjectsError] = React.useState<string | null>(null);
   const { t } = useTranslation('glossary');
 
   CRD.useApiGet(setItem, name, undefined, setError);
@@ -44,7 +51,17 @@ export default function CustomResourceDefinitionDetails() {
   React.useEffect(() => {
     let promise: Promise<any> | null = null;
     if (item) {
-      promise = getAPIForCRD(item.jsonData).list(setObjects);
+      promise = getAPIForCRD(item.jsonData).list(
+        items => {
+          setObjectsError(null);
+          setObjects(items);
+        },
+        err => {
+          console.error(`Failed to get objects for CRD: ${item} . Error: ${err}`);
+          setObjectsError(t('crd|Failed to get objects'));
+          setObjects(null);
+        }
+      );
     }
 
     return function cleanup() {
@@ -131,6 +148,7 @@ export default function CustomResourceDefinitionDetails() {
       <SectionBox title={t('Objects')}>
         <SimpleTable
           data={objects}
+          errorMessage={objectsError}
           columns={[
             {
               label: t('frequent|Name'),

@@ -9,7 +9,7 @@ export interface KubeCRD extends KubeObjectInterface {
       name: string;
       served: boolean;
       storage: boolean;
-    };
+    }[];
     scope: string;
     [other: string]: any;
   };
