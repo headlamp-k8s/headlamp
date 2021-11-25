@@ -69,9 +69,12 @@ export default function EditorDialog(props: EditorDialogProps) {
     selectOnLineNumbers: true,
     readOnly: isReadOnly(),
   };
+  const { i18n } = useTranslation();
+  const [lang, setLang] = React.useState(i18n.language);
   const classes = useStyle();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const themeName = getThemeName();
 
   const [originalCode, setOriginalCode] = React.useState('');
   const [code, setCode] = React.useState(originalCode);
@@ -112,6 +115,14 @@ export default function EditorDialog(props: EditorDialogProps) {
       }
     }
   }, [item, previousVersion, originalCode, code]);
+
+  React.useEffect(() => {
+    i18n.on('languageChanged', setLang);
+    return () => {
+      i18n.off('languageChanged', setLang);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function isReadOnly() {
     return onSave === null;
@@ -171,19 +182,6 @@ export default function EditorDialog(props: EditorDialogProps) {
   }
 
   function makeEditor() {
-    const { i18n } = useTranslation();
-    const [lang, setLang] = React.useState(i18n.language);
-
-    const themeName = getThemeName();
-
-    React.useEffect(() => {
-      i18n.on('languageChanged', setLang);
-      return () => {
-        i18n.off('languageChanged', setLang);
-      };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     // @todo: monaco editor does not support pt, ta, hi amongst various other langs.
     if (['de', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh-cn', 'zh-tw'].includes(lang)) {
       loader.config({ 'vs/nls': { availableLanguages: { '*': lang } } });
