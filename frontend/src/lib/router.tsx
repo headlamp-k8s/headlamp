@@ -10,6 +10,7 @@ import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
 import CustomResourceDefinitionDetails from '../components/crd/Details';
 import CustomResourceDefinitionList from '../components/crd/List';
+import CustomResourceDetails from '../components/crd/ResourceDetails';
 import CronJobList from '../components/cronjob/List';
 import DaemonSetDetails from '../components/daemonset/Details';
 import DaemonSetList from '../components/daemonset/List';
@@ -413,6 +414,13 @@ export const ROUTES: {
     name: 'CRD',
     sidebar: 'crds',
     component: () => <CustomResourceDefinitionDetails />,
+  },
+  customresource: {
+    path: '/customresources/:crd/:namespace/:crName',
+    exact: true,
+    name: 'Custom Resource',
+    sidebar: 'crds',
+    component: () => <CustomResourceDetails />,
   },
 };
 
