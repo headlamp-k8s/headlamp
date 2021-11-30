@@ -10,6 +10,31 @@ Currently there are desktop apps for [Linux](./linux-installation.md), [Mac](./m
 
 Please check the following guides for the installation in your desired platform.
 
+## Use a non-default kube config file
+
+If you wish to use a non-default kube config file, then you can do it by
+providing it as an argument to Headlamp, e.g.:
+
+```bash
+/path/to/headlamp /my/different/kubeconfig
+```
+
+or by using an environment variable:
+
+```bash
+KUBECONFIG=/my/different/kubeconfig /path/to/headlamp
+```
+
+### Use several kube config files
+
+If you need to use more than one kube config file, please merge them into
+one and use the resulting one as indicated above.
+
+You can easily merge kubee config files the following way:
+```bash
+KUBECONFIG=kubeconfig1:kubeconfig2:kubeconfig3 kubectl config view --raw > mynewconfig
+```
+
 ## Access using OIDC
 
 OIDC has a feature makes more sense when
