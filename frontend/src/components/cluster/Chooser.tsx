@@ -18,6 +18,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { Trans, useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router';
 import { useHistory } from 'react-router-dom';
+import helpers from '../../helpers';
 import { useCluster, useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
@@ -286,6 +287,11 @@ function Chooser(props: ClusterDialogProps) {
               <DialogContentText>
                 {t('Please make sure you have at least one cluster configured.')}
               </DialogContentText>
+              {helpers.isElectron() && (
+                <DialogContentText>
+                  {t('Or try running Headlamp with a different kube config.')}
+                </DialogContentText>
+              )}
             </>
           )}
         </React.Fragment>
