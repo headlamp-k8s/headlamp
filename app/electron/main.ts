@@ -2,21 +2,31 @@ import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
+import fs from 'fs';
 import { i18n as I18n } from 'i18next';
 import open from 'open';
+import os from 'os';
 import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
 import i18n from './i18next.config';
 
 const args = yargs
-  .option('headless', {
-    describe: 'Open Headlamp in the default web browser instead of its app window',
+  .command('$0 [kubeconfig]', '', yargs => {
+    yargs
+      .option('headless', {
+        describe: 'Open Headlamp in the default web browser instead of its app window',
+      })
+      .option('disable-gpu', {
+        describe: 'Disable use of GPU. For people who may have buggy graphics drivers',
+      })
+      .positional('kubeconfig', {
+        describe:
+          'Path to the kube config file (uses the default kube config location if not specified)',
+        type: 'string',
+      });
   })
-  .option('disable-gpu', {
-    describe: 'Disable use of GPU. For people who may have buggy graphics drivers',
-  })
-  .parse();
+  .help().argv;
 const isHeadlessMode = args.headless;
 const disableGPU = args['disable-gpu'];
 const defaultPort = 4466;
@@ -30,7 +40,27 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
     options.detached = true;
   }
 
-  return spawn(serverFilePath, [...flags], options);
+  let serverArgs = [];
+  if (!!args.kubeconfig || !!process.env.KUBECONFIG) {
+    let fullPath = args.kubeconfig || process.env.KUBECONFIG;
+
+    // Resolve home dir if needed.
+    if (process.platform !== 'win32' && fullPath[0] === '~') {
+      fullPath = path.join(os.homedir(), fullPath.slice(1));
+    }
+
+    fullPath = path.resolve(fullPath);
+
+    if (!fs.existsSync(fullPath)) {
+      log.error(`Error reading kube config ${fullPath}: does not exist`);
+      process.exit(1);
+    }
+    serverArgs = serverArgs.concat(['--kubeconfig', fullPath]);
+  }
+
+  serverArgs.concat(flags);
+
+  return spawn(serverFilePath, serverArgs, options);
 }
 
 let serverProcess: ChildProcessWithoutNullStreams | null;
