@@ -31,11 +31,16 @@ const isHeadlessMode = args.headless;
 const disableGPU = args['disable-gpu'];
 const defaultPort = 4466;
 
+const isDev = process.env.ELECTRON_DEV || false;
+const useExternalServer = process.env.EXTERNAL_SERVER || false;
+
 function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
-  const serverFilePath = path.join(process.resourcesPath, './server');
+  const serverFilePath = isDev
+    ? path.resolve('../backend/server')
+    : path.join(process.resourcesPath, './server');
 
   const options = { shell: true, detached: false };
-  if (process.platform !== 'win32') {
+  if (process.platform !== 'win32' && !isDev) {
     // This makes the child processes a separate group, for easier killing.
     options.detached = true;
   }
@@ -294,8 +299,6 @@ function startElecron() {
 
   let mainWindow: BrowserWindow | null;
 
-  const isDev = process.env.ELECTRON_DEV || false;
-
   let appVersion: string;
   if (isDev && process.env.HEADLAMP_APP_VERSION) {
     appVersion = process.env.HEADLAMP_APP_VERSION;
@@ -354,7 +357,7 @@ function startElecron() {
       }
     });
 
-    if (!isDev) {
+    if (!useExternalServer) {
       serverProcess = startServer();
       attachServerEventHandlers(serverProcess);
     }
