@@ -310,10 +310,17 @@ function startElecron() {
   setMenu(i18n);
 
   function createWindow() {
+    let frontendPath = '';
+    if (isDev) {
+      frontendPath = path.resolve('..', 'frontend', 'build', 'index.html');
+    } else {
+      frontendPath = path.join(process.resourcesPath, 'frontend', 'index.html');
+    }
+
     const startUrl =
       process.env.ELECTRON_START_URL ||
       url.format({
-        pathname: path.join(process.resourcesPath, 'frontend', 'index.html'),
+        pathname: frontendPath,
         protocol: 'file:',
         slashes: true,
       });
