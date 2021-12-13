@@ -2,6 +2,7 @@ import { deDE, enUS, esES, hiIN, ptPT } from '@material-ui/core/locale';
 import { createTheme, Theme, ThemeProvider } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Loader } from '../components/common';
 
 function getLocale(locale: string): typeof enUS {
   const LOCALES = {
@@ -20,7 +21,9 @@ function getLocale(locale: string): typeof enUS {
  *  Because Material UI is localized as well.
  */
 const ThemeProviderNexti18n: React.FunctionComponent<{ theme: Theme }> = props => {
-  const { i18n } = useTranslation();
+  const { i18n, ready: isI18nReady } = useTranslation(['sidebar', 'frequent', 'glossary', 'auth'], {
+    useSuspense: false,
+  });
   const [lang, setLang] = useState(i18n.language);
 
   function changeLang(lng: string) {
@@ -41,7 +44,11 @@ const ThemeProviderNexti18n: React.FunctionComponent<{ theme: Theme }> = props =
 
   const theme = createTheme(props.theme, getLocale(lang));
 
-  return <ThemeProvider theme={theme}>{props.children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={theme}>
+      {!!isI18nReady ? props.children : <Loader title="Loading..." />}
+    </ThemeProvider>
+  );
 };
 
 export default ThemeProviderNexti18n;
