@@ -107,7 +107,7 @@ export function PureAuthToken({
         <DialogTitle id="authtoken-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <Trans ns="auth">Please paste your authentication token.</Trans>
+            <Trans t={t}>Please paste your authentication token.</Trans>
           </DialogContentText>
           <TextField
             margin="dense"
@@ -122,7 +122,7 @@ export function PureAuthToken({
         </DialogContent>
         <DialogActions>
           <Box ml={2}>
-            <Trans ns="auth">
+            <Trans t={t}>
               Check out how to generate a
               <Link
                 style={{ cursor: 'pointer', marginLeft: '0.4rem' }}
