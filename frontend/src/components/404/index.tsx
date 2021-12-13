@@ -16,7 +16,7 @@ export default function NotFoundComponent() {
         style={{ minHeight: '100vh' }}
       >
         <Grid item>
-          <img src={headlampBrokenImage} alt={t('404 broken headlamp')} />
+          <img src={headlampBrokenImage} alt="" />
         </Grid>
         <Grid item>
           <Typography variant="h4">{t(`Whoops! This page doesn't exist`)}</Typography>
