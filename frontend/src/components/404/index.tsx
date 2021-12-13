@@ -1,10 +1,10 @@
 import { Dialog, Grid, Typography } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import headlampBrokenImage from '../../assets/headlamp-404.svg';
 
 export default function NotFoundComponent() {
-  const { t } = useTranslation();
+  const { t } = useTranslation('frequent');
   return (
     <Dialog fullScreen open style={{ overflow: 'hidden' }}>
       <Grid
@@ -23,7 +23,9 @@ export default function NotFoundComponent() {
         </Grid>
         <Grid item>
           <Typography variant="h6">
-            {t('Not to worry, head back to')} <Link to="/">{t('Home')}</Link>
+            <Trans t={t}>
+              Head back <Link to="/">home</Link>.
+            </Trans>
           </Typography>
         </Grid>
       </Grid>
