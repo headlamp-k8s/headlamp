@@ -1,4 +1,6 @@
 {
+  "Whoops! This page doesn't exist": "",
+  "Head back <1>home</1>.": "Voltar ao <1>início</1>.",
   "Cancel": "Cancelar",
   "Change theme": "Mudar tema",
   "Log out": "Terminar sessão",
@@ -33,6 +35,9 @@
   "Save & Apply": "Guardar & Aplicar",
   "Loading resource data": "A carregar dados do recurso",
   "Show filter": "Mostrar filtro",
+  "sort up": "ordenar asc.",
+  "sort down": "ordenar desc.",
+  "sort swap": "trocar ordem",
   "Refresh": "Recarregar",
   "Add": "Adicionar",
   "Data": "Dados",
