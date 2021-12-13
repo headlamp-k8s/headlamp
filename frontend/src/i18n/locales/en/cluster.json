@@ -1,15 +1,15 @@
 {
-  "Install the metrics-server to get usage data.": "",
-  "Memory Usage": "",
-  "{{ available }} units": "",
-  "CPU Usage": "",
-  "{{ numReady }} / {{ numItems }} Requested": "",
+  "Install the metrics-server to get usage data.": "Install the metrics-server to get usage data.",
+  "Memory Usage": "Memory Usage",
+  "{{ available }} units": "{{ available }} units",
+  "CPU Usage": "CPU Usage",
+  "{{ numReady }} / {{ numItems }} Requested": "{{ numReady }} / {{ numItems }} Requested",
   "Cluster: {{cluster}}": "Cluster: {{cluster}}",
-  "Choose a cluster": "",
-  "Wait while fetching clusters…": "",
-  "Loading cluster information": "",
-  "There seems to be no clusters configured…": "",
-  "Please make sure you have at least one cluster configured.": "",
-  "Cluster version upgraded to {{ gitVersion }}": "",
-  "Cluster version downgraded to {{ gitVersion }}": ""
+  "Choose a cluster": "Choose a cluster",
+  "Wait while fetching clusters…": "Wait while fetching clusters…",
+  "Loading cluster information": "Loading cluster information",
+  "There seems to be no clusters configured…": "There seems to be no clusters configured…",
+  "Please make sure you have at least one cluster configured.": "Please make sure you have at least one cluster configured.",
+  "Cluster version upgraded to {{ gitVersion }}": "Cluster version upgraded to {{ gitVersion }}",
+  "Cluster version downgraded to {{ gitVersion }}": "Cluster version downgraded to {{ gitVersion }}"
 }
