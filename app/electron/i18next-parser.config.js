@@ -10,4 +10,7 @@ module.exports = {
   defaultNamespace: 'app',
   output: path.join(helper.LOCALES_DIR, './$LOCALE/$NAMESPACE.json'),
   locales: helper.CURRENT_LOCALES,
+  // The English catalog has "SomeKey": "SomeKey" so we stop warnings about
+  // missing values.
+  useKeysAsDefaultValue: locale => locale === 'en',
 };
