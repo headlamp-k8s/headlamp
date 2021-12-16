@@ -1,0 +1,311 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots crd/CustomResourceDetails Error Getting CR 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 MuiTypography-colorError MuiTypography-alignCenter"
+    >
+      Error getting custom resource nonexistentcustomresource: No mock custom resource for you
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots crd/CustomResourceDetails Error Getting CRD 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 MuiTypography-colorError MuiTypography-alignCenter"
+    >
+      Error getting custom resource definition error.crd.io: No mock CRD for you
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots crd/CustomResourceDetails Loading CRD 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+  >
+    <div
+      class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+      role="progressbar"
+      style="width: 40px; height: 40px;"
+      title="Loading custom resource details"
+    >
+      <svg
+        class="MuiCircularProgress-svg"
+        viewBox="22 22 44 44"
+      >
+        <circle
+          class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+          cx="44"
+          cy="44"
+          fill="none"
+          r="20.2"
+          stroke-width="3.6"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <svg
+                focusable="false"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                style="transform: rotate(360deg);"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6l6 6l1.41-1.42z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h1
+                class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
+              >
+                MyCustomResource
+              </h1>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="show yaml viewer"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    tabindex="0"
+                    title="View YAML"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <svg
+                        focusable="false"
+                        height="1em"
+                        preserveAspectRatio="xMidYMid meet"
+                        style="transform: rotate(360deg);"
+                        viewBox="0 0 24 24"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="false"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                    >
+                      Name
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      scope="row"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        mycustomresource
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                    >
+                      Namespace
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      scope="row"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        mynamespace
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                    >
+                      Creation
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      scope="row"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        12/15/2021, 2:57:13 PM
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                    >
+                      Test Col
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      scope="row"
+                    >
+                      <div
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                      >
+                        <div
+                          class="MuiGrid-root MuiGrid-item"
+                        >
+                          mycustomresource
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-item"
+                        >
+                          <div
+                            class="MuiBox-root MuiBox-root"
+                            title="My description"
+                          >
+                            <svg
+                              focusable="false"
+                              height="1rem"
+                              preserveAspectRatio="xMidYMid meet"
+                              style="transform: rotate(360deg);"
+                              viewBox="0 0 24 24"
+                              width="1rem"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2v6z"
+                                fill="currentColor"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+</div>
+`;

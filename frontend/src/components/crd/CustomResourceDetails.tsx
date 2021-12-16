@@ -3,31 +3,36 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
+import { ResourceClasses } from '../../lib/k8s';
 import { ApiError } from '../../lib/k8s/apiProxy';
-import CRD, { KubeCRD, makeCustomResourceClass } from '../../lib/k8s/crd';
+import CustomResourceDefinition, { KubeCRD, makeCustomResourceClass } from '../../lib/k8s/crd';
 import { localeDate } from '../../lib/util';
 import { HoverInfoLabel, NameValueTableRow, SectionBox } from '../common';
 import Empty from '../common/EmptyContent';
 import Loader from '../common/Loader';
 import { ConditionsTable, MainInfoSection, PageGrid } from '../common/Resource';
 
-/* istanbul ignore next */
-export default function CustomResourceDetails() {
-  const {
-    crd: crdName,
-    namespace: ns,
-    crName,
-  } = useParams<{
-    crd: string;
-    crName: string;
-    namespace: string;
-  }>();
-  const [crd, setCRD] = React.useState<CRD | null>(null);
+export default function CustomResourceDetailsFromURL() {
+  const params = useParams<CustomResourceDetailsProps>();
+
+  return <CustomResourceDetails {...params} />;
+}
+
+export interface CustomResourceDetailsProps {
+  crd: string;
+  crName: string;
+  namespace: string;
+}
+
+export function CustomResourceDetails(props: CustomResourceDetailsProps) {
+  const { crd: crdName, crName, namespace: ns } = props;
+  const [crd, setCRD] = React.useState<CustomResourceDefinition | null>(null);
   const [error, setError] = React.useState<ApiError | null>(null);
 
   const { t } = useTranslation('glossary');
 
   const namespace = ns === '-' ? undefined : ns;
+  const CRD = ResourceClasses.CustomResourceDefinition as CustomResourceDefinition;
 
   CRD.useApiGet(setCRD, crdName, undefined, setError);
 
@@ -46,15 +51,13 @@ export default function CustomResourceDetails() {
 
 type AdditionalPrinterColumns = KubeCRD['spec']['versions'][0]['additionalPrinterColumns'];
 
-/* istanbul ignore next */
-function getExtraColumns(crd: CRD, apiVersion: string) {
+function getExtraColumns(crd: CustomResourceDefinition, apiVersion: string) {
   const version = (crd.jsonData as KubeCRD).spec.versions.find(
     version => version.name === apiVersion
   );
   return version?.additionalPrinterColumns;
 }
 
-/* istanbul ignore next */
 function getExtraInfo(extraInfoSpec: AdditionalPrinterColumns, item: KubeCRD) {
   const extraInfo: NameValueTableRow[] = [];
   extraInfoSpec.forEach(spec => {
@@ -92,8 +95,13 @@ function getExtraInfo(extraInfoSpec: AdditionalPrinterColumns, item: KubeCRD) {
   return extraInfo;
 }
 
-/* istanbul ignore next */
-function CustomResourceDetailsRenderer(props: { crd: CRD; crName: string; namespace?: string }) {
+export interface CustomResourceDetailsRendererProps {
+  crd: CustomResourceDefinition;
+  crName: string;
+  namespace?: string;
+}
+
+function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps) {
   const { crd, crName, namespace } = props;
   const [item, setItem] = React.useState<KubeCRD | null>(null);
   const [error, setError] = React.useState<ApiError | null>(null);
@@ -114,7 +122,7 @@ function CustomResourceDetailsRenderer(props: { crd: CRD; crName: string; namesp
   return !item ? (
     !!error ? (
       <Empty color="error">
-        {t(`crd|Error getting custom resource1 ${crName}: ${error.message}`)}
+        {t(`crd|Error getting custom resource ${crName}: ${error.message}`)}
       </Empty>
     ) : (
       <Loader title={t('crd|Loading custom resource details')} />

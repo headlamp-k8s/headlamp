@@ -1,4 +1,5 @@
 import { createRouteURL } from '../router';
+import { ResourceClasses } from '.';
 import { apiFactory, apiFactoryWithNamespace } from './apiProxy';
 import { KubeObjectInterface, makeKubeObject } from './cluster';
 
@@ -6,6 +7,12 @@ export interface KubeCRD extends KubeObjectInterface {
   spec: {
     group: string;
     version: string;
+    names: {
+      plural: string;
+      singular: string;
+      kind: string;
+      listKind: string;
+    };
     versions: {
       name: string;
       served: boolean;
@@ -16,6 +23,7 @@ export interface KubeCRD extends KubeObjectInterface {
         jsonPath: string;
         description?: string;
         priority?: number;
+        format?: string;
       }[];
     }[];
     scope: string;
@@ -50,6 +58,12 @@ export function makeCustomResourceClass(
   args: [group: string, version: string, pluralName: string][],
   isNamespaced: boolean
 ) {
+  // Used for tests
+  const knownClass = ResourceClasses[args[0][2]];
+  if (!!knownClass) {
+    return knownClass;
+  }
+
   const apiFunc = !!isNamespaced ? apiFactoryWithNamespace : apiFactory;
   return class CRClass extends makeKubeObject<KubeCRD>('crd') {
     static apiEndpoint = apiFunc(...args);
