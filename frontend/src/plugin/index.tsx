@@ -111,6 +111,7 @@ window.pluginLib = {
   Utils: require('../lib/util'),
   Iconify: require('@iconify/react'),
   Lodash: require('lodash'),
+  Notistack: require('notistack'),
 };
 
 // @todo: should window.plugins be private?
