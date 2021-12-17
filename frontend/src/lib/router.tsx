@@ -8,6 +8,7 @@ import Chooser from '../components/cluster/Chooser';
 import Overview from '../components/cluster/Overview';
 import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
+import CustomResourceDetails from '../components/crd/CustomResourceDetails';
 import CustomResourceDefinitionDetails from '../components/crd/Details';
 import CustomResourceDefinitionList from '../components/crd/List';
 import CronJobList from '../components/cronjob/List';
@@ -413,6 +414,13 @@ export const ROUTES: {
     name: 'CRD',
     sidebar: 'crds',
     component: () => <CustomResourceDefinitionDetails />,
+  },
+  customresource: {
+    path: '/customresources/:crd/:namespace/:crName',
+    exact: true,
+    name: 'Custom Resource',
+    sidebar: 'crds',
+    component: () => <CustomResourceDetails />,
   },
 };
 

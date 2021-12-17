@@ -1,4 +1,3 @@
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,9 +6,9 @@ import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import { ApiError, apiFactory } from '../../lib/k8s/apiProxy';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
 import { timeAgo } from '../../lib/util';
+import { Link } from '../common';
 import Loader from '../common/Loader';
 import { ConditionsTable, MainInfoSection, PageGrid } from '../common/Resource';
-import { ViewDialog } from '../common/Resource/EditorDialog';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
@@ -36,12 +35,30 @@ const useStyle = makeStyles({
   },
 });
 
-export default function CustomResourceDefinitionDetails() {
+function CustomResourceLink(props: { resource: KubeCRD; crd: CRD; [otherProps: string]: any }) {
   const classes = useStyle();
+  const { resource, crd, ...otherProps } = props;
+
+  return (
+    <Link
+      className={classes.link}
+      routeName="customresource"
+      params={{
+        crName: resource.metadata.name,
+        crd: crd.metadata.name,
+        namespace: resource.metadata.namespace || '-',
+      }}
+      {...otherProps}
+    >
+      {resource.metadata.name}
+    </Link>
+  );
+}
+
+export default function CustomResourceDefinitionDetails() {
   const { name } = useParams<{ name: string }>();
   const [item, setItem] = React.useState<CRD | null>(null);
   const [error, setError] = React.useState<ApiError | null>(null);
-  const [objToShow, setObjToShow] = React.useState<KubeCRD | null>(null);
   const [objects, setObjects] = React.useState<KubeCRD[] | null>([]);
   const [objectsError, setObjectsError] = React.useState<string | null>(null);
   const { t } = useTranslation('glossary');
@@ -152,11 +169,7 @@ export default function CustomResourceDefinitionDetails() {
           columns={[
             {
               label: t('frequent|Name'),
-              getter: obj => (
-                <Link className={classes.link} onClick={() => setObjToShow(obj)}>
-                  {obj.metadata.name}
-                </Link>
-              ),
+              getter: obj => <CustomResourceLink resource={obj} crd={item} />,
             },
             {
               label: t('glossary|Namespace'),
@@ -170,7 +183,6 @@ export default function CustomResourceDefinitionDetails() {
         />
       </SectionBox>
       <DetailsViewPluginRenderer resource={item} />
-      <ViewDialog item={objToShow} open={!!objToShow} onClose={() => setObjToShow(null)} />
     </PageGrid>
   );
 }
