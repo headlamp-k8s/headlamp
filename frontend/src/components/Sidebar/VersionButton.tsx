@@ -72,9 +72,14 @@ export default function VersionButton() {
 
   React.useEffect(
     () => {
+      let stillAlive = true;
       function fetchVersion() {
         getVersion()
           .then((results: StringDict) => {
+            if (!stillAlive) {
+              return;
+            }
+
             setClusterVersion(results);
             let versionChange = 0;
             if (clusterVersion && results && results.gitVersion) {
@@ -113,6 +118,7 @@ export default function VersionButton() {
       }, versionFetchInterval);
 
       return function cleanup() {
+        stillAlive = false;
         clearInterval(intervalHandler);
       };
     },
