@@ -16,7 +16,7 @@ export default function RoleBindingDetails() {
 
   return (
     <DetailsGrid
-      resourceType={!namespace ? RoleBinding : ClusterRoleBinding}
+      resourceType={!!namespace ? RoleBinding : ClusterRoleBinding}
       name={name}
       extraInfo={item =>
         item && [
@@ -34,27 +34,29 @@ export default function RoleBindingDetails() {
           },
         ]
       }
-      sectionsFunc={item => (
-        <SectionBox title={t('Binding Info')}>
-          <SimpleTable
-            data={item.subjects}
-            columns={[
-              {
-                label: t('Kind'),
-                getter: item => item.kind,
-              },
-              {
-                label: t('frequent|Name'),
-                getter: item => item.name,
-              },
-              {
-                label: t('Namespace'),
-                getter: item => item.namespace,
-              },
-            ]}
-          />
-        </SectionBox>
-      )}
+      sectionsFunc={item =>
+        item && (
+          <SectionBox title={t('Binding Info')}>
+            <SimpleTable
+              data={item.subjects}
+              columns={[
+                {
+                  label: t('Kind'),
+                  getter: item => item.kind,
+                },
+                {
+                  label: t('frequent|Name'),
+                  getter: item => item.name,
+                },
+                {
+                  label: t('Namespace'),
+                  getter: item => item.namespace,
+                },
+              ]}
+            />
+          </SectionBox>
+        )
+      }
     />
   );
 }
