@@ -510,11 +510,6 @@ export function ContainerInfo(props: { container: KubeContainer }) {
         hide: _.isEmpty(env),
       },
       {
-        name: t('Volume Mounts'),
-        value: <VolumeMounts mounts={container.volumeMounts} />,
-        hide: _.isEmpty(container.volumeMounts),
-      },
-      {
         name: t('Liveness Probes'),
         value: <LivenessProbes liveness={container.livenessProbe} />,
         hide: _.isEmpty(container.livenessProbe),
@@ -526,6 +521,13 @@ export function ContainerInfo(props: { container: KubeContainer }) {
     <Box py={1}>
       <SectionHeader noPadding title={container.name} headerStyle="normal" />
       <NameValueTable rows={containerRows()} />
+      {!_.isEmpty(container.volumeMounts) && (
+        <>
+          <Divider />
+          <SectionHeader noPadding title={t('Volume Mounts')} headerStyle="label" />
+          <VolumeMounts mounts={container.volumeMounts} />
+        </>
+      )}
     </Box>
   );
 }
