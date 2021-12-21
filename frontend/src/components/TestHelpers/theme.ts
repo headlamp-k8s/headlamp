@@ -38,18 +38,20 @@ const commonRules = {
     metadataBgColor: grey['300'],
     headerStyle: {
       normal: {
-        '& h6': {
-          fontSize: '1.1rem',
-        },
+        fontSize: '1.8rem',
+        fontWeight: '700',
       },
       main: {
-        '& h6': {
-          fontSize: '1.87rem',
-        },
-        minHeight: '64px',
+        fontSize: '1.87rem',
+        fontWeight: '700',
       },
       subsection: {
-        fontSize: '1.2rem',
+        fontSize: '1.85rem',
+        fontWeight: '700',
+      },
+      label: {
+        fontSize: '1.6rem',
+        paddingTop: '1rem',
       },
     },
     tables: {

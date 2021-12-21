@@ -125,7 +125,7 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
               class="MuiGrid-root MuiGrid-item"
             >
               <h1
-                class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
               >
                 MyCustomResource
               </h1>

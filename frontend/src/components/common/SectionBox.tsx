@@ -6,6 +6,7 @@ import SectionHeader, { SectionHeaderProps } from './SectionHeader';
 export interface SectionBoxProps extends Omit<BoxProps, 'title'> {
   title?: React.ReactNode;
   headerProps?: Omit<SectionHeaderProps, 'title'>;
+  outterBoxProps?: Omit<BoxProps, 'title'>;
 }
 
 export function SectionBox(props: SectionBoxProps) {
@@ -13,6 +14,7 @@ export function SectionBox(props: SectionBoxProps) {
     title,
     children,
     headerProps = { noPadding: false, headerStyle: 'subsection' },
+    outterBoxProps = {},
     ...otherProps
   } = props;
 
@@ -25,7 +27,7 @@ export function SectionBox(props: SectionBoxProps) {
   }
 
   return (
-    <Box py={0}>
+    <Box py={0} {...outterBoxProps}>
       {title && titleElem}
       <Paper>
         <Box px={2} {...otherProps}>

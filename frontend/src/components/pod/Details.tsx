@@ -13,6 +13,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import Pod from '../../lib/k8s/pod';
+import { SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import { ContainersSection, DetailsGrid } from '../common/Resource';
@@ -123,6 +124,35 @@ function PodLogViewer(props: PodLogViewerProps) {
   );
 }
 
+export interface VolumeDetailsProps {
+  volumes: any[] | null;
+}
+
+export function VolumeDetails(props: VolumeDetailsProps) {
+  const { volumes } = props;
+  if (!volumes) {
+    return null;
+  }
+  const { t } = useTranslation();
+  return (
+    <SectionBox title={t('frequent|Volumes')}>
+      <SimpleTable
+        columns={[
+          {
+            label: t('frequent|Name'),
+            getter: data => data.name,
+          },
+          {
+            label: t('frequent|Type'),
+            getter: data => Object.keys(data)[1],
+          },
+        ]}
+        data={volumes}
+      />
+    </SectionBox>
+  );
+}
+
 export default function PodDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [showLogs, setShowLogs] = React.useState(false);
@@ -178,6 +208,7 @@ export default function PodDetails() {
         item && (
           <>
             <ContainersSection resource={item?.jsonData} />
+            <VolumeDetails volumes={item?.jsonData?.spec.volumes} />
             <PodLogViewer
               key="logs"
               open={showLogs}

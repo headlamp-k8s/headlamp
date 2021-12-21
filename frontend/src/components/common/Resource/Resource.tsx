@@ -34,6 +34,7 @@ import SimpleTable, { NameValueTable, NameValueTableRow } from '../../common/Sim
 import Empty from '../EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from '../Label';
 import Link, { LinkProps } from '../Link';
+import { useMetadataDisplayStyles } from '.';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import { MetadataDictGrid, MetadataDisplay } from './MetadataDisplay';
@@ -384,6 +385,86 @@ export function ConditionsTable(props: ConditionsTableProps) {
   );
 }
 
+interface VolumeMountsProps {
+  mounts?:
+    | {
+        mountPath: string;
+        name: string;
+        readOnly: boolean;
+      }[];
+}
+
+function VolumeMounts(props: VolumeMountsProps) {
+  const { mounts } = props;
+  const { t } = useTranslation();
+  if (!mounts) {
+    return null;
+  }
+
+  return (
+    <SimpleTable
+      columns={[
+        {
+          label: t('frequent|Mount Path'),
+          getter: (data: any) => data.mountPath,
+        },
+        {
+          label: t('frequent|from'),
+          getter: (data: any) => data.name,
+        },
+        {
+          label: t('frequent|I/O'),
+          getter: (data: any) => (data.readOnly ? 'ReadOnly' : 'ReadWrite'),
+        },
+      ]}
+      data={mounts}
+    />
+  );
+}
+
+function LivenessProbes(props: { liveness: KubeContainer['livenessProbe'] }) {
+  const classes = useMetadataDisplayStyles({});
+
+  const { liveness } = props;
+
+  function LivenessProbeItem(props: { children: React.ReactNode }) {
+    return props.children ? (
+      <Box p={0.5}>
+        <Typography className={classes.metadataValueLabel} display="inline">
+          {props.children}
+        </Typography>
+      </Box>
+    ) : null;
+  }
+
+  return (
+    <Box display="flex" flexDirection="column">
+      <LivenessProbeItem>
+        {`http-get, path: ${liveness?.httpGet?.path}, port: ${liveness?.httpGet?.port}, 
+    scheme: ${liveness?.httpGet?.scheme}`}
+      </LivenessProbeItem>
+      <LivenessProbeItem>
+        {liveness?.exec?.command && `exec[${liveness?.exec?.command.join(' ')}]`}
+      </LivenessProbeItem>
+      <LivenessProbeItem>
+        {liveness?.successThreshold && `success = ${liveness?.successThreshold}`}
+      </LivenessProbeItem>
+      <LivenessProbeItem>
+        {liveness?.failureThreshold && `failure = ${liveness?.failureThreshold}`}
+      </LivenessProbeItem>
+      <LivenessProbeItem>
+        {liveness?.initialDelaySeconds && `delay = ${liveness?.initialDelaySeconds}s`}
+      </LivenessProbeItem>
+      <LivenessProbeItem>
+        {liveness?.timeoutSeconds && `timeout = ${liveness?.timeoutSeconds}s`}
+      </LivenessProbeItem>
+      <LivenessProbeItem>
+        {liveness?.periodSeconds && `period = ${liveness?.periodSeconds}s`}
+      </LivenessProbeItem>
+    </Box>
+  );
+}
+
 export function ContainerInfo(props: { container: KubeContainer }) {
   const { container } = props;
   const { t } = useTranslation('glossary');
@@ -428,6 +509,11 @@ export function ContainerInfo(props: { container: KubeContainer }) {
         value: <MetadataDictGrid dict={env} />,
         hide: _.isEmpty(env),
       },
+      {
+        name: t('Liveness Probes'),
+        value: <LivenessProbes liveness={container.livenessProbe} />,
+        hide: _.isEmpty(container.livenessProbe),
+      },
     ];
   }
 
@@ -435,6 +521,13 @@ export function ContainerInfo(props: { container: KubeContainer }) {
     <Box py={1}>
       <SectionHeader noPadding title={container.name} headerStyle="normal" />
       <NameValueTable rows={containerRows()} />
+      {!_.isEmpty(container.volumeMounts) && (
+        <>
+          <Divider />
+          <SectionHeader noPadding title={t('Volume Mounts')} headerStyle="label" />
+          <VolumeMounts mounts={container.volumeMounts} />
+        </>
+      )}
     </Box>
   );
 }
@@ -465,21 +558,22 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
   const numContainers = containers.length;
 
   return (
-    <SectionBox title={t('Containers')}>
-      {numContainers === 0 ? (
-        <Empty>No containers to show</Empty>
-      ) : (
-        containers.map((container: any, i: number) => {
-          return (
-            <React.Fragment key={i}>
+    <>
+      <SectionBox title={t('Containers')} />
+      <>
+        {numContainers === 0 ? (
+          <SectionBox>
+            <Empty>No containers to show</Empty>
+          </SectionBox>
+        ) : (
+          containers.map((container: any, i: number) => (
+            <SectionBox key={i} outterBoxProps={{ pt: 1 }}>
               <ContainerInfo container={container} />
-              {/* Don't show the divider if this is the last container */}
-              {i !== numContainers - 1 && <Divider />}
-            </React.Fragment>
-          );
-        })
-      )}
-    </SectionBox>
+            </SectionBox>
+          ))
+        )}
+      </>
+    </>
   );
 }
 
