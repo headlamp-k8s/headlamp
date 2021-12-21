@@ -10,11 +10,11 @@ exports[`Storyshots SectionHeader Actions 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
+      <h3
+        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
       >
         This one has actions
-      </h1>
+      </h3>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item"
@@ -53,7 +53,7 @@ exports[`Storyshots SectionHeader Main 1`] = `
       class="MuiGrid-root MuiGrid-item"
     >
       <h1
-        class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
+        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
       >
         This is a section title main
       </h1>
@@ -72,11 +72,11 @@ exports[`Storyshots SectionHeader Normal 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
+      <h3
+        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
       >
         This is a section title normal
-      </h1>
+      </h3>
     </div>
   </div>
 </div>
@@ -92,11 +92,11 @@ exports[`Storyshots SectionHeader Normal No Padding 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
+      <h3
+        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
       >
         No padding on this normal title
-      </h1>
+      </h3>
     </div>
   </div>
 </div>
@@ -112,11 +112,11 @@ exports[`Storyshots SectionHeader Subsection 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
+      <h2
+        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
       >
         This is a section title subsection
-      </h1>
+      </h2>
     </div>
   </div>
 </div>

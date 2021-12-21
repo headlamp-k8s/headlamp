@@ -13,11 +13,11 @@ exports[`Storyshots pods/VolumeDetails Volume Details 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h1
-          class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap"
+        <h2
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
         >
           Volumes
-        </h1>
+        </h2>
       </div>
     </div>
     <div
