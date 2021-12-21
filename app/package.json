@@ -12,7 +12,8 @@
     "copy-icons": "mkdir -p build/icons && cp ../frontend/build/*.png ../frontend/build/*.ico ../frontend/build/*.icns ../frontend/build/*.svg build/icons",
     "build": "npm run copy-icons && npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
     "package": "npm run copy-icons && npm run compile-electron && electron-builder build --publish never",
-    "serve-dev": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "dev": "npm run compile-electron && export ELECTRON_DEV=1 && electron .",
+    "dev-only-app": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && export EXTERNAL_SERVER=true && electron .",
     "i18n": "npx --no-install i18next ./electron/main.ts -c ./electron/i18next-parser.config.js"
   },
   "build": {
