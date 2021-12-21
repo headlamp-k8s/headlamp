@@ -1249,7 +1249,18 @@ deploy it in cluster, or those who want to manage unrelated clusters locally.</p
 <a href="https://kinvolk.github.io/headlamp/docs/latest/installation/desktop/win-installation/">Windows</a>
 .</p>
 <p>Please check the following guides for the installation in your desired platform.</p>
-<h2 id="access-using-oidc">Access using OIDC</h2>
+<h2 id="use-a-non-default-kube-config-file">Use a non-default kube config file</h2>
+<p>If you wish to use a non-default kube config file, then you can do it by
+providing it as an argument to Headlamp, e.g.:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/path/to/headlamp /my/different/kubeconfig
+</code></pre></div><p>or by using an environment variable:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">KUBECONFIG<span style="color:#f92672">=</span>/my/different/kubeconfig /path/to/headlamp
+</code></pre></div><h3 id="use-several-kube-config-files">Use several kube config files</h3>
+<p>If you need to use more than one kube config file, please merge them into
+one and use the resulting one as indicated above.</p>
+<p>You can easily merge kubee config files the following way:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">KUBECONFIG<span style="color:#f92672">=</span>kubeconfig1:kubeconfig2:kubeconfig3 kubectl config view --raw &gt; mynewconfig
+</code></pre></div><h2 id="access-using-oidc">Access using OIDC</h2>
 <p>OIDC has a feature makes more sense when
 
 
@@ -1500,6 +1511,17 @@ to Dex&rsquo;s <code>staticClient.redirectURIs</code>: <code>http://localhost:66
 
 
 
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#use-a-non-default-kube-config-file">Use a non-default kube config file</a>
+      <ul>
+        <li><a href="#use-several-kube-config-files">Use several kube config files</a></li>
+      </ul>
+    </li>
+    <li><a href="#access-using-oidc">Access using OIDC</a></li>
+  </ul>
+</nav>
 
 
 
