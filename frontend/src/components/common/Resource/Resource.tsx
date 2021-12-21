@@ -1,3 +1,4 @@
+import alertIcon from '@iconify/icons-mdi/alert-outline';
 import chevronLeft from '@iconify/icons-mdi/chevron-left';
 import eyeIcon from '@iconify/icons-mdi/eye';
 import eyeOff from '@iconify/icons-mdi/eye-off';
@@ -22,15 +23,18 @@ import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
   KubeCondition,
   KubeContainer,
+  KubeContainerStatus,
   KubeObject,
   KubeObjectInterface,
 } from '../../../lib/k8s/cluster';
+import { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import Loader from '../../common/Loader';
 import { SectionBox } from '../../common/SectionBox';
 import SectionHeader, { HeaderStyleProps } from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
+import { LightTooltip } from '..';
 import Empty from '../EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from '../Label';
 import Link, { LinkProps } from '../Link';
@@ -384,9 +388,53 @@ export function ConditionsTable(props: ConditionsTableProps) {
   );
 }
 
-export function ContainerInfo(props: { container: KubeContainer }) {
-  const { container } = props;
+export interface ContainerInfoProps {
+  container: KubeContainer;
+  status?: Omit<KubePod['status']['KubeContainerStatus'], 'name'>;
+}
+
+export function ContainerInfo(props: ContainerInfoProps) {
+  const { container, status } = props;
   const { t } = useTranslation('glossary');
+
+  function getContainerStatusLabel() {
+    if (!status || !container) {
+      return undefined;
+    }
+
+    let state: KubeContainerStatus['state']['waiting' | 'terminated'] | null = null;
+    let label = t('frequent|Ready');
+    let statusType: StatusLabelProps['status'] = '';
+
+    if (!!status.state.waiting) {
+      state = status.state.waiting;
+      statusType = 'warning';
+      label = t('frequent|Waiting');
+    } else if (!!status.state.running) {
+      statusType = 'success';
+      label = t('frequent|Running');
+    } else if (!!status.state.terminated) {
+      statusType = status.state.terminated.exitCode === 0 ? '' : 'error';
+      label = t('frequent|Error');
+    }
+
+    const tooltipID = 'container-state-message-' + container.name;
+
+    return (
+      <>
+        <StatusLabel status={statusType} aria-describedby={tooltipID}>
+          {label + (state?.reason ? ` (${state.reason})` : '')}
+        </StatusLabel>
+        {!!state && state.message && (
+          <LightTooltip role="tooltip" title={state.message} interactive id={tooltipID}>
+            <Box aria-label="hidden" display="inline" px={1} style={{ verticalAlign: 'bottom' }}>
+              <Icon icon={alertIcon} width="1.3rem" height="1.3rem" aria-label="hidden" />
+            </Box>
+          </LightTooltip>
+        )}
+      </>
+    );
+  }
 
   function containerRows() {
     const env: { [name: string]: string } = {};
@@ -407,6 +455,11 @@ export function ContainerInfo(props: { container: KubeContainer }) {
     });
 
     return [
+      {
+        name: t('Status'),
+        value: getContainerStatusLabel(),
+        hide: !status,
+      },
       {
         name: t('Image'),
         value: container.image,
@@ -461,7 +514,25 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
     return containers;
   }
 
+  function getStatuses() {
+    if (!resource || resource.kind !== 'Pod') {
+      return {};
+    }
+
+    const statuses: {
+      [key: string]: ContainerInfoProps['status'];
+    } = {};
+
+    ((resource as KubePod).status.containerStatuses || []).forEach(containerStatus => {
+      const { name, ...status } = containerStatus;
+      statuses[name] = { ...status };
+    });
+
+    return statuses;
+  }
+
   const containers = getContainers();
+  const statuses = getStatuses();
   const numContainers = containers.length;
 
   return (
@@ -472,7 +543,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
         containers.map((container: any, i: number) => {
           return (
             <React.Fragment key={i}>
-              <ContainerInfo container={container} />
+              <ContainerInfo container={container} status={statuses[container.name]} />
               {/* Don't show the divider if this is the last container */}
               {i !== numContainers - 1 && <Divider />}
             </React.Fragment>
