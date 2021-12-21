@@ -3,7 +3,7 @@ import chevronLeft from '@iconify/icons-mdi/chevron-left';
 import eyeIcon from '@iconify/icons-mdi/eye';
 import eyeOff from '@iconify/icons-mdi/eye-off';
 import { Icon } from '@iconify/react';
-import { Button, InputLabel } from '@material-ui/core';
+import { Button, InputLabel, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps } from '@material-ui/core/Grid';
@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Input, { InputProps } from '@material-ui/core/Input';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles, useTheme } from '@material-ui/styles';
 import Editor from '@monaco-editor/react';
 import { Base64 } from 'js-base64';
 import _ from 'lodash';
@@ -388,6 +389,13 @@ export function ConditionsTable(props: ConditionsTableProps) {
   );
 }
 
+const useContainerInfoStyles = makeStyles((theme: Theme) => ({
+  imageID: {
+    paddingTop: theme.spacing(1),
+    fontSize: '.95rem',
+  },
+}));
+
 export interface ContainerInfoProps {
   container: KubeContainer;
   status?: Omit<KubePod['status']['KubeContainerStatus'], 'name'>;
@@ -395,6 +403,8 @@ export interface ContainerInfoProps {
 
 export function ContainerInfo(props: ContainerInfoProps) {
   const { container, status } = props;
+  const theme = useTheme();
+  const classes = useContainerInfoStyles(theme);
   const { t } = useTranslation('glossary');
 
   function getContainerStatusLabel() {
@@ -461,8 +471,30 @@ export function ContainerInfo(props: ContainerInfoProps) {
         hide: !status,
       },
       {
+        name: t('frequent|Restart Count'),
+        value: status?.restartCount,
+        hide: !status,
+      },
+      {
+        name: t('Container ID'),
+        value: status?.containerID,
+        hide: !status,
+      },
+      {
         name: t('Image'),
-        value: container.image,
+        value: (
+          <>
+            <Typography>{container.image}</Typography>
+            {status && (
+              <Typography className={classes.imageID}>
+                <Typography component="span" style={{ fontWeight: 'bold' }}>
+                  ID:
+                </Typography>{' '}
+                {status?.imageID}
+              </Typography>
+            )}
+          </>
+        ),
       },
       {
         name: t('Args'),
