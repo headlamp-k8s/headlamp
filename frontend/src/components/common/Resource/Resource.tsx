@@ -558,21 +558,22 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
   const numContainers = containers.length;
 
   return (
-    <SectionBox title={t('Containers')}>
-      {numContainers === 0 ? (
-        <Empty>No containers to show</Empty>
-      ) : (
-        containers.map((container: any, i: number) => {
-          return (
-            <React.Fragment key={i}>
+    <>
+      <SectionBox title={t('Containers')} />
+      <>
+        {numContainers === 0 ? (
+          <SectionBox>
+            <Empty>No containers to show</Empty>
+          </SectionBox>
+        ) : (
+          containers.map((container: any, i: number) => (
+            <SectionBox key={i} outterBoxProps={{ pt: 1 }}>
               <ContainerInfo container={container} />
-              {/* Don't show the divider if this is the last container */}
-              {i !== numContainers - 1 && <Divider />}
-            </React.Fragment>
-          );
-        })
-      )}
-    </SectionBox>
+            </SectionBox>
+          ))
+        )}
+      </>
+    </>
   );
 }
 
