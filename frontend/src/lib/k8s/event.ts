@@ -1,5 +1,6 @@
+import { ResourceClasses } from '.';
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeMetadata, makeKubeObject } from './cluster';
+import { KubeMetadata, KubeObject, makeKubeObject } from './cluster';
 
 export interface KubeEvent {
   type: string;
@@ -43,6 +44,26 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
 
   get message() {
     return this.getValue('message');
+  }
+
+  get involvedObjectInstance(): KubeObject | null {
+    if (!this.involvedObject) {
+      return null;
+    }
+
+    const InvolvedObjectClass = ResourceClasses[this.involvedObject.kind];
+    let objInstance: KubeObject | null = null;
+    if (!!InvolvedObjectClass) {
+      objInstance = new InvolvedObjectClass({
+        kind: this.involvedObject.kind,
+        metadata: {
+          name: this.involvedObject.name,
+          namespace: this.involvedObject.namespace,
+        },
+      });
+    }
+
+    return objInstance;
   }
 }
 
