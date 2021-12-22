@@ -666,7 +666,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
       <>
         {numContainers === 0 ? (
           <SectionBox>
-            <Empty>No containers to show</Empty>
+            <Empty>{t('resource|No data to be shown.')}</Empty>
           </SectionBox>
         ) : (
           containers.map((container: any, i: number) => (
