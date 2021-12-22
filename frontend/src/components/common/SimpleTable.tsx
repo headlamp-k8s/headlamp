@@ -13,11 +13,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { KubeObjectInterface } from '../../lib/k8s/cluster';
-import { useTypedSelector } from '../../redux/reducers/reducers';
 import Empty from './EmptyContent';
 import { ValueLabel } from './Label';
 import Loader from './Loader';
@@ -80,7 +77,6 @@ export interface SimpleTableProps {
   emptyMessage?: string;
   errorMessage?: string | null;
   defaultSortingColumn?: number;
-  advancedFilters?: [string];
 }
 
 interface ColumnSortButtonProps {
@@ -115,7 +111,6 @@ export default function SimpleTable(props: SimpleTableProps) {
     emptyMessage = null,
     errorMessage = null,
     defaultSortingColumn,
-    advancedFilters,
   } = props;
   const [page, setPage] = React.useState(0);
   const [currentData, setCurrentData] = React.useState(data);
@@ -123,7 +118,6 @@ export default function SimpleTable(props: SimpleTableProps) {
   const rowsPerPageOptions = props.rowsPerPage || [5, 10, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
   const classes = useTableStyle();
-  const filter = useTypedSelector(state => state.filter);
   const [isIncreasingOrder, setIsIncreasingOrder] = React.useState(
     !defaultSortingColumn || defaultSortingColumn > 0
   );
@@ -243,22 +237,8 @@ export default function SimpleTable(props: SimpleTableProps) {
   let filteredData = displayData;
   if (filterFunction) {
     filteredData = displayData.filter(filterFunction);
-    if (advancedFilters) {
-      for (let i = 0; i < advancedFilters.length; i++) {
-        // attach all data from previous filter so that we don't lose data from any filter
-        filteredData = filteredData.concat(
-          displayData.filter((item: KubeObjectInterface) =>
-            _.get(item, advancedFilters[i]).toLowerCase().includes(filter.search.toLowerCase())
-          )
-        );
-      }
-      //remove duplicate entries
-      filteredData = _.uniqBy(
-        filteredData as KubeObjectInterface[],
-        (val: KubeObjectInterface) => val.metadata.uid
-      );
-    }
   }
+
   function sortClickHandler(isIncreasingOrder: boolean, index: number) {
     setIsIncreasingOrder(isIncreasingOrder);
     setSortColIndex(index);

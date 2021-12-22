@@ -9,7 +9,7 @@ import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceList() {
   const [services, error] = Service.useList();
-  const filterFunc = useFilterFunc();
+  const filterFunc = useFilterFunc(['.jsonData.spec.type']);
   const { t } = useTranslation('glossary');
 
   return (
@@ -17,7 +17,6 @@ export default function ServiceList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
-        advancedFilters={['spec.type']}
         errorMessage={Service.getErrorMessage(error)}
         columns={[
           {

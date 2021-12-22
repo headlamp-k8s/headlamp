@@ -23,7 +23,7 @@ interface WorkloadDict {
 export default function Overview() {
   const [workloadsData, dispatch] = React.useReducer(setWorkloads, {});
   const location = useLocation();
-  const filterFunc = useFilterFunc();
+  const filterFunc = useFilterFunc(['.jsonData.kind']);
   const { t } = useTranslation('glossary');
 
   function setWorkloads(
@@ -85,7 +85,6 @@ export default function Overview() {
         <SimpleTable
           rowsPerPage={[15, 25, 50]}
           filterFunction={filterFunc}
-          advancedFilters={['kind']}
           columns={[
             {
               label: t('Type'),

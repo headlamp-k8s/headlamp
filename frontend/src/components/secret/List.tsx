@@ -9,7 +9,7 @@ import SimpleTable from '../common/SimpleTable';
 
 export default function SecretList() {
   const [secrets, error] = Secret.useList();
-  const filterFunc = useFilterFunc();
+  const filterFunc = useFilterFunc(['.jsonData.type']);
   const { t } = useTranslation('glossary');
 
   return (
@@ -18,7 +18,6 @@ export default function SecretList() {
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
         errorMessage={Secret.getErrorMessage(error)}
-        advancedFilters={['type']}
         columns={[
           {
             label: t('frequent|Name'),

@@ -18,7 +18,7 @@ export default function RoleBindingList() {
   const [clusterRoleBindingError, onClusterRoleBindingError] =
     useErrorState(setupClusterRoleBindings);
   const { t } = useTranslation('glossary');
-  const filterFunc = useFilterFunc();
+  const filterFunc = useFilterFunc(['.kind']);
 
   function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
     const currentBindings: RoleBindingDict = bindings || {};
@@ -70,7 +70,6 @@ export default function RoleBindingList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
-        advancedFilters={['kind']}
         errorMessage={getErrorMessage()}
         columns={[
           {
