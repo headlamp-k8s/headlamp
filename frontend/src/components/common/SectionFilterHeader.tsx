@@ -105,7 +105,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
             placeholder="Filter"
             value={filter.search}
             onChange={event => dispatch(setSearchFilter(event.target.value))}
-            ref={focusedRef}
+            inputRef={focusedRef}
           />
         </Grid>
         <Grid item>
