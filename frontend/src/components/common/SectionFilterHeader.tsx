@@ -98,14 +98,14 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
         <Grid item>
           <TextField
             id="standard-search"
-            label="Search"
+            label={t('Search')}
             type="search"
             InputLabelProps={{ shrink: true }}
             InputProps={{ role: 'search' }}
-            placeholder="Filter"
+            placeholder={t('Filter')}
             value={filter.search}
             onChange={event => dispatch(setSearchFilter(event.target.value))}
-            ref={focusedRef}
+            inputRef={focusedRef}
           />
         </Grid>
         <Grid item>
@@ -115,7 +115,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
             onClick={resetFilters}
             aria-controls="standard-search"
           >
-            Clear
+            {t('Clear')}
           </Button>
         </Grid>
       </Grid>
