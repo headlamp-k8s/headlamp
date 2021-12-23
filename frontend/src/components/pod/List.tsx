@@ -1,9 +1,12 @@
+import alertIcon from '@iconify/icons-mdi/alert-outline';
+import Icon from '@iconify/react';
+import { Box } from '@material-ui/core';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Pod from '../../lib/k8s/pod';
 import { useFilterFunc } from '../../lib/util';
-import { SectionFilterHeader } from '../common';
+import { LightTooltip, SectionFilterHeader } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import Link from '../common/Link';
 import { SectionBox } from '../common/SectionBox';
@@ -12,14 +15,42 @@ import SimpleTable from '../common/SimpleTable';
 export function makePodStatusLabel(pod: Pod) {
   const phase = pod.status.phase;
   let status: StatusLabelProps['status'] = '';
+  let tooltip = '';
 
   if (phase === 'Failed') {
     status = 'error';
   } else if (phase === 'Succeeded' || phase === 'Running') {
-    status = 'success';
+    const readyCondition = pod.status.conditions.find(condition => condition.type === 'Ready');
+    if (readyCondition?.status === 'True') {
+      status = 'success';
+    } else {
+      status = 'warning';
+      if (!!readyCondition?.reason) {
+        tooltip = `${readyCondition.reason}: ${readyCondition.message}`;
+      }
+    }
   }
 
-  return <StatusLabel status={status}>{phase}</StatusLabel>;
+  return (
+    <LightTooltip title={tooltip} interactive>
+      <Box display="inline">
+        <StatusLabel status={status}>
+          {phase}
+          {(status === 'warning' || status === 'error') && (
+            <Box
+              aria-label="hidden"
+              display="inline"
+              paddingTop={1}
+              paddingLeft={0.5}
+              style={{ verticalAlign: 'text-top' }}
+            >
+              <Icon icon={alertIcon} width="1.2rem" height="1.2rem" />
+            </Box>
+          )}
+        </StatusLabel>
+      </Box>
+    </LightTooltip>
+  );
 }
 
 export default function PodList() {

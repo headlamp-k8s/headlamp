@@ -1,8 +1,9 @@
+import alertIcon from '@iconify/icons-mdi/alert-outline';
 import chevronLeft from '@iconify/icons-mdi/chevron-left';
 import eyeIcon from '@iconify/icons-mdi/eye';
 import eyeOff from '@iconify/icons-mdi/eye-off';
 import { Icon } from '@iconify/react';
-import { Button, InputLabel } from '@material-ui/core';
+import { Button, InputLabel, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps } from '@material-ui/core/Grid';
@@ -10,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Input, { InputProps } from '@material-ui/core/Input';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles, useTheme } from '@material-ui/styles';
 import Editor from '@monaco-editor/react';
 import { Base64 } from 'js-base64';
 import _ from 'lodash';
@@ -22,15 +24,18 @@ import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
   KubeCondition,
   KubeContainer,
+  KubeContainerStatus,
   KubeObject,
   KubeObjectInterface,
 } from '../../../lib/k8s/cluster';
+import { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import Loader from '../../common/Loader';
 import { SectionBox } from '../../common/SectionBox';
 import SectionHeader, { HeaderStyleProps } from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
+import { LightTooltip } from '..';
 import Empty from '../EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from '../Label';
 import Link, { LinkProps } from '../Link';
@@ -465,9 +470,62 @@ function LivenessProbes(props: { liveness: KubeContainer['livenessProbe'] }) {
   );
 }
 
-export function ContainerInfo(props: { container: KubeContainer }) {
-  const { container } = props;
+const useContainerInfoStyles = makeStyles((theme: Theme) => ({
+  imageID: {
+    paddingTop: theme.spacing(1),
+    fontSize: '.95rem',
+  },
+}));
+
+export interface ContainerInfoProps {
+  container: KubeContainer;
+  status?: Omit<KubePod['status']['KubeContainerStatus'], 'name'>;
+}
+
+export function ContainerInfo(props: ContainerInfoProps) {
+  const { container, status } = props;
+  const theme = useTheme();
+  const classes = useContainerInfoStyles(theme);
   const { t } = useTranslation('glossary');
+
+  function getContainerStatusLabel() {
+    if (!status || !container) {
+      return undefined;
+    }
+
+    let state: KubeContainerStatus['state']['waiting' | 'terminated'] | null = null;
+    let label = t('frequent|Ready');
+    let statusType: StatusLabelProps['status'] = '';
+
+    if (!!status.state.waiting) {
+      state = status.state.waiting;
+      statusType = 'warning';
+      label = t('frequent|Waiting');
+    } else if (!!status.state.running) {
+      statusType = 'success';
+      label = t('frequent|Running');
+    } else if (!!status.state.terminated) {
+      statusType = status.state.terminated.exitCode === 0 ? '' : 'error';
+      label = t('frequent|Error');
+    }
+
+    const tooltipID = 'container-state-message-' + container.name;
+
+    return (
+      <>
+        <StatusLabel status={statusType} aria-describedby={tooltipID}>
+          {label + (state?.reason ? ` (${state.reason})` : '')}
+        </StatusLabel>
+        {!!state && state.message && (
+          <LightTooltip role="tooltip" title={state.message} interactive id={tooltipID}>
+            <Box aria-label="hidden" display="inline" px={1} style={{ verticalAlign: 'bottom' }}>
+              <Icon icon={alertIcon} width="1.3rem" height="1.3rem" aria-label="hidden" />
+            </Box>
+          </LightTooltip>
+        )}
+      </>
+    );
+  }
 
   function containerRows() {
     const env: { [name: string]: string } = {};
@@ -489,8 +547,35 @@ export function ContainerInfo(props: { container: KubeContainer }) {
 
     return [
       {
+        name: t('Status'),
+        value: getContainerStatusLabel(),
+        hide: !status,
+      },
+      {
+        name: t('frequent|Restart Count'),
+        value: status?.restartCount,
+        hide: !status,
+      },
+      {
+        name: t('Container ID'),
+        value: status?.containerID,
+        hide: !status,
+      },
+      {
         name: t('Image'),
-        value: container.image,
+        value: (
+          <>
+            <Typography>{container.image}</Typography>
+            {status && (
+              <Typography className={classes.imageID}>
+                <Typography component="span" style={{ fontWeight: 'bold' }}>
+                  ID:
+                </Typography>{' '}
+                {status?.imageID}
+              </Typography>
+            )}
+          </>
+        ),
       },
       {
         name: t('Args'),
@@ -554,7 +639,25 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
     return containers;
   }
 
+  function getStatuses() {
+    if (!resource || resource.kind !== 'Pod') {
+      return {};
+    }
+
+    const statuses: {
+      [key: string]: ContainerInfoProps['status'];
+    } = {};
+
+    ((resource as KubePod).status.containerStatuses || []).forEach(containerStatus => {
+      const { name, ...status } = containerStatus;
+      statuses[name] = { ...status };
+    });
+
+    return statuses;
+  }
+
   const containers = getContainers();
+  const statuses = getStatuses();
   const numContainers = containers.length;
 
   return (
@@ -563,12 +666,12 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
       <>
         {numContainers === 0 ? (
           <SectionBox>
-            <Empty>No containers to show</Empty>
+            <Empty>{t('resource|No data to be shown.')}</Empty>
           </SectionBox>
         ) : (
           containers.map((container: any, i: number) => (
             <SectionBox key={i} outterBoxProps={{ pt: 1 }}>
-              <ContainerInfo container={container} />
+              <ContainerInfo container={container} status={statuses[container.name]} />
             </SectionBox>
           ))
         )}
