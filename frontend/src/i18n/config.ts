@@ -46,8 +46,7 @@ i18next
     // https://react.i18next.com/latest/i18next-instance
     // https://www.i18next.com/overview/configuration-options
     react: {
-      useSuspense: false, // not needed unless loading from public/locales
-      //   bindI18nStore: 'added'
+      useSuspense: false, // not needed as we cannot use suspend due to issues with Storybook
     },
     nsSeparator: '|',
     keySeparator: false,

@@ -94,14 +94,18 @@ function ColumnSortButtons(props: ColumnSortButtonProps) {
   const { isDefaultSorted, isIncreasingOrder, clickHandler } = props;
   return isDefaultSorted ? (
     <IconButton
-      aria-label={isIncreasingOrder ? t('sort up') : t('sort down')}
+      aria-label={isIncreasingOrder ? t('frequent|sort up') : t('frequent|sort down')}
       size="small"
       onClick={() => clickHandler(!isIncreasingOrder)}
     >
       <Icon icon={isIncreasingOrder ? menuUp : menuDown} />
     </IconButton>
   ) : (
-    <IconButton aria-label={t('sort swap')} size="small" onClick={() => clickHandler(true)}>
+    <IconButton
+      aria-label={t('frequent|sort swap')}
+      size="small"
+      onClick={() => clickHandler(true)}
+    >
       <Icon icon={menuSwap} />
     </IconButton>
   );

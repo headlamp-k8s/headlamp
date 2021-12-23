@@ -3,11 +3,10 @@ import databaseIcon from '@iconify/icons-mdi/database';
 import folderNetworkOutline from '@iconify/icons-mdi/folder-network-outline';
 import hexagonMultipleOutline from '@iconify/icons-mdi/hexagon-multiple-outline';
 import lockIcon from '@iconify/icons-mdi/lock';
-import { TFunction } from 'react-i18next';
 import { SidebarEntry } from '../../redux/reducers/ui';
 import store from '../../redux/stores/store';
 
-function prepareRoutes(t: TFunction<'translation'>) {
+function prepareRoutes(t: (arg: string) => string) {
   const LIST_ITEMS: SidebarEntry[] = [
     {
       name: 'cluster',

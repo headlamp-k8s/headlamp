@@ -14,4 +14,7 @@ module.exports = {
   keySeparator: false,
   output: path.join(directoryPath, './$LOCALE/$NAMESPACE.json'),
   locales: currentLocales,
+  // The English catalog has "SomeKey": "SomeKey" so we stop warnings about
+  // missing values.
+  useKeysAsDefaultValue: locale => locale === 'en',
 };

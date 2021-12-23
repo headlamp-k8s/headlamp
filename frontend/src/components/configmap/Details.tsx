@@ -13,12 +13,12 @@ export default function ConfigDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const [item, setItem] = React.useState<ConfigMap | null>(null);
   const itemData = item?.data;
-  const { t } = useTranslation('configmap');
+  const { t } = useTranslation(['configmap', 'frequent']);
 
   ConfigMap.useApiGet(setItem, name, namespace);
 
   return !item ? (
-    <Loader title={t('Loading config map details')} />
+    <Loader title={t('frequent|Loading resource data')} />
   ) : (
     <PageGrid>
       <MainInfoSection resource={item} />

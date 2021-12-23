@@ -47,6 +47,7 @@ export function ClusterTitle(props: ClusterTitleProps) {
   const cluster = props.cluster || useCluster();
   const clusters = props.clusters || useClustersConf();
   const [showChooser, setShowChooser] = React.useState(false);
+  const { t } = useTranslation('cluster');
 
   useHotkeys('ctrl+shift+l', () => setShowChooser(true));
 
@@ -66,7 +67,7 @@ export function ClusterTitle(props: ClusterTitleProps) {
         onClick={() => setShowChooser(true)}
         className={classes.button}
       >
-        <Trans ns="cluster">Cluster: {{ cluster }}</Trans>
+        <Trans t={t}>Cluster: {{ cluster }}</Trans>
       </Button>
       <Chooser open={showChooser} onClose={() => setShowChooser(false)} />
     </React.Fragment>
