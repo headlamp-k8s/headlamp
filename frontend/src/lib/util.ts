@@ -1,5 +1,6 @@
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { JSONPath } from 'jsonpath-plus';
 import React from 'react';
 import { matchPath } from 'react-router';
 import helpers from '../helpers';
@@ -81,7 +82,11 @@ export interface FilterState {
   search: string;
 }
 
-export function filterResource(item: KubeObjectInterface, filter: FilterState) {
+export function filterResource(
+  item: KubeObjectInterface,
+  filter: FilterState,
+  matchCriteria?: string[]
+) {
   let matches: boolean = true;
 
   if (item.metadata.namespace && filter.namespaces.size > 0) {
@@ -90,22 +95,51 @@ export function filterResource(item: KubeObjectInterface, filter: FilterState) {
 
   if (matches && filter.search) {
     const filterString = filter.search.toLowerCase();
-    const matchCriteria = [
+    const usedMatchCriteria = [
       item.metadata.namespace ? item.metadata.namespace.toLowerCase() : '',
       item.metadata.name.toLowerCase(),
       ...Object.keys(item.metadata.labels || {}).map(item => item.toLowerCase()),
       ...Object.values(item.metadata.labels || {}).map(item => item.toLowerCase()),
     ];
 
-    matches = !!matchCriteria.find(item => item.includes(filterString));
+    // Use the custom matchCriteria if any
+    (matchCriteria || []).forEach(jsonPath => {
+      let values: any[];
+      try {
+        values = JSONPath({ path: '$' + jsonPath, json: item });
+      } catch (err) {
+        console.debug(
+          `Failed to get value from JSONPath when filtering ${jsonPath} on item ${item}; skipping criteria`
+        );
+        return;
+      }
+
+      // Include matches values in the criteria
+      values.forEach((value: any) => {
+        if (typeof value === 'string') {
+          // Don't use empty string, otherwise it'll match everything
+          if (value !== '') {
+            usedMatchCriteria.push(value.toLowerCase());
+          }
+        } else if (Array.isArray(value)) {
+          value.forEach((elem: any) => {
+            if (!!elem && typeof elem === 'string') {
+              usedMatchCriteria.push(elem.toLowerCase());
+            }
+          });
+        }
+      });
+    });
+
+    matches = !!usedMatchCriteria.find(item => item.includes(filterString));
   }
 
   return matches;
 }
 
-export function useFilterFunc() {
+export function useFilterFunc(matchCriteria?: string[]) {
   const filter = useTypedSelector(state => state.filter);
-  return (item: KubeObjectInterface) => filterResource(item, filter);
+  return (item: KubeObjectInterface) => filterResource(item, filter, matchCriteria);
 }
 
 export function getClusterPrefixedPath(path?: string | null) {

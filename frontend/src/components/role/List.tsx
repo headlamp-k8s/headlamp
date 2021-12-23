@@ -17,7 +17,7 @@ export default function RoleList() {
   const [roleError, setRolesError] = useErrorState(setupRoles);
   const [clusterRoleError, setClusterRolesError] = useErrorState(setupClusterRoles);
   const { t } = useTranslation('glossary');
-  const filterFunc = useFilterFunc();
+  const filterFunc = useFilterFunc(['.jsonData.kind']);
 
   function setupRolesWithKind(newRoles: Role[] | null, kind: string) {
     setRoles(oldRoles => ({ ...(oldRoles || {}), [kind]: newRoles }));
@@ -65,7 +65,6 @@ export default function RoleList() {
       <SimpleTable
         rowsPerPage={[15, 25, 50]}
         filterFunction={filterFunc}
-        advancedFilters={['kind']}
         errorMessage={getErrorMessage()}
         columns={[
           {
