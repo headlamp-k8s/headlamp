@@ -7,7 +7,7 @@ import Event from '../../lib/k8s/event';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo, useFilterFunc } from '../../lib/util';
-import { StatusLabel } from '../common';
+import { Link, StatusLabel } from '../common';
 import Empty from '../common/EmptyContent';
 import { PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
@@ -75,6 +75,15 @@ function EventsSection() {
     );
   }
 
+  function makeObjectLink(event: Event) {
+    const obj = event.involvedObjectInstance;
+    if (!!obj) {
+      return <Link kubeObject={obj} />;
+    }
+
+    return event.involvedObject.name;
+  }
+
   return (
     <SectionBox title={<SectionFilterHeader title={t('Events')} />}>
       <SimpleTable
@@ -91,7 +100,7 @@ function EventsSection() {
                 },
                 {
                   label: t('frequent|Name'),
-                  getter: event => event.involvedObject.name,
+                  getter: event => makeObjectLink(event),
                   sort: true,
                 },
                 {

@@ -445,7 +445,7 @@ function LivenessProbes(props: { liveness: KubeContainer['livenessProbe'] }) {
   return (
     <Box display="flex" flexDirection="column">
       <LivenessProbeItem>
-        {`http-get, path: ${liveness?.httpGet?.path}, port: ${liveness?.httpGet?.port}, 
+        {`http-get, path: ${liveness?.httpGet?.path}, port: ${liveness?.httpGet?.port},
     scheme: ${liveness?.httpGet?.scheme}`}
       </LivenessProbeItem>
       <LivenessProbeItem>
