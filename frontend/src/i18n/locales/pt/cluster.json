@@ -10,6 +10,7 @@
   "Loading cluster information": "A carregar informação de cluster",
   "There seems to be no clusters configured…": "Parece não haver clusters configurados…",
   "Please make sure you have at least one cluster configured.": "Por favor assegure-se de que tem pelo menos um cluster configurado.",
+  "Or try running Headlamp with a different kube config.": "Ou tente correr o Headlamp com um kube config diferente",
   "Cluster version upgraded to {{ gitVersion }}": "Versão do cluster actualizada para {{ gitVersion }}",
   "Cluster version downgraded to {{ gitVersion }}": "Versão do cluster mudada para {{ gitVersion }}"
 }
