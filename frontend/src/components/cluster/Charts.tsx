@@ -4,6 +4,7 @@ import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../lib/k8s/cluster';
+import Pod from '../../lib/k8s/pod';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
 import { HeaderLabel } from '../common';
 import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
@@ -164,9 +165,14 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
   const { items } = props;
   const { t } = useTranslation(['cluster', 'glossary']);
 
-  const podsReady = (items || []).filter(pod =>
-    ['Running', 'Succeeded'].includes(pod.status!.phase)
-  );
+  const podsReady = (items || []).filter((pod: Pod) => {
+    if (pod.status!.phase === 'Succeeded') {
+      return true;
+    }
+
+    const readyCondition = pod.status?.conditions.find(condition => condition.type === 'Ready');
+    return readyCondition?.status === 'True';
+  });
 
   function getLegend() {
     if (items === null) {
