@@ -87,7 +87,8 @@
       "electron/preload.js",
       "electron/locales/",
       "electron/i18next.config.js",
-      "electron/i18n-helper.js"
+      "electron/i18n-helper.js",
+      "electron/windowSize.js"
     ],
     "extraResources": [
       {
