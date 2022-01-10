@@ -34,7 +34,8 @@
     "bin",
     "config",
     "types",
-    "template"
+    "template",
+    "lib"
   ],
   "keywords": [
     "headlamp",
