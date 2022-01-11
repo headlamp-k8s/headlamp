@@ -4,6 +4,7 @@
   "description": "The needed infrastructure for building Headlamp plugins.",
   "bin": "bin/headlamp-plugin.js",
   "scripts": {
+    "prepack": "if test -z \"$(ls ./types/ -A -I .gitignore)\"; then echo 'types dir is empty. Remember to run `npm run build` before packing' && exit 1; fi",
     "build": "cd ../../frontend && tsc --build ./tsconfig.plugins.json"
   },
   "dependencies": {
