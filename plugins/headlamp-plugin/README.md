@@ -24,6 +24,11 @@ headlamp-plugin extract           Copies folders of packages from plug
 
 ## Development notes
 
+### Generate types
+
+`@kinvolk/headlamp-plugin` ships type declarations from the `frontend` module.
+To generate the declarations, run `npm run build`.
+
 ### How to test local changes
 
 To test the usage of `npx @kinvolk/headlamp-plugin create myplugin` with 
