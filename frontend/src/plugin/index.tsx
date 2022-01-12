@@ -73,7 +73,7 @@ import Registry from './registry';
 //        Because available in window.pluginLib.
 
 /**
- * Plugins should call registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
+ * Plugins should call Headlamp.registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
  *
  * They will have their initialize(register) method called at plugin initialization time.
  */
@@ -98,6 +98,16 @@ declare global {
   }
 }
 
+/**
+ * This class is a more convenient way for plugins to call registerPlugin in order to register
+ * themselves.
+ */
+export abstract class Headlamp {
+  static registerPlugin(pluginId: string, pluginObj: Plugin) {
+    window.registerPlugin(pluginId, pluginObj);
+  }
+}
+
 window.pluginLib = {
   ApiProxy: require('../lib/k8s/apiProxy'),
   K8s: require('../lib/k8s'),
@@ -112,6 +122,8 @@ window.pluginLib = {
   Iconify: require('@iconify/react'),
   Lodash: require('lodash'),
   Notistack: require('notistack'),
+  Headlamp,
+  Plugin,
 };
 
 // @todo: should window.plugins be private?
