@@ -13,6 +13,6 @@
     "plugins"
   ],
   "devDependencies": {
-    "@kinvolk/headlamp-plugin": "^0.3.0"
+    "@kinvolk/headlamp-plugin": "^$${headlamp-plugin-version}"
   }
 }
