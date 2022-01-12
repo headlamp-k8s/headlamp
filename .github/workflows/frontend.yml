@@ -50,3 +50,7 @@ jobs:
     - name: Test plugins
       run: |
         make plugins-test
+
+    - name: Build docs
+      run: |
+        make docs
