@@ -11,6 +11,7 @@ const path = require('path');
 const child_process = require('child_process');
 const validate = require("validate-npm-package-name");
 const yargs = require('yargs/yargs');
+const headlampPluginPkg = require('../package.json');
 
 /**
  * Creates a new plugin folder.
@@ -47,7 +48,7 @@ function create(name, link) {
   function replaceFileVariables(path) {
     fs.writeFileSync(
       path,
-      fs.readFileSync(path, 'utf8').split('$${name}').join(name)
+      fs.readFileSync(path, 'utf8').split('$${name}').join(name).split('$${headlamp-plugin-version}').join(headlampPluginPkg.version)
     )
   }
 
