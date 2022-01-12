@@ -103,8 +103,30 @@ declare global {
  * themselves.
  */
 export abstract class Headlamp {
+  /**
+   * Got a new plugin to add? Well, registerPlugin is your friend.
+   *
+   * @param pluginId - a unique id string for your plugin.
+   * @param pluginObj - the plugin being added.
+   *
+   * @example
+   *
+   * ```javascript
+   * const myPlugin = {
+   *   initialize: (register) => {
+   *     // do some stuff with register
+   *     // use some libraries in window.pluginLib
+   *     return true;
+   *   }
+   * }
+   *
+   * Headlamp.registerPlugin("aPluginIdString", myPlugin)
+   * ```
+   */
   static registerPlugin(pluginId: string, pluginObj: Plugin) {
-    window.registerPlugin(pluginId, pluginObj);
+    // @todo: what happens if this plugin exists? (and is already initialized?)
+    //        Should it raise an error? Silently keep going? Do we need quit() methods on plugins?
+    window.plugins[pluginId] = pluginObj;
   }
 }
 
@@ -130,32 +152,7 @@ window.pluginLib = {
 // @todo: Should all the plugin objects be in a single window.Headlamp object?
 window.plugins = {};
 
-/**
- * Got a new plugin to add? Well, registerPlugin is your friend.
- *
- * @param pluginId - a unique id string for your plugin.
- * @param pluginObj - the plugin being added.
- *
- * @example
- *
- * ```javascript
- * const myPlugin = {
- *   initialize: (register) => {
- *     // do some stuff with register
- *     // use some libraries in window.pluginLib
- *     return true;
- *   }
- * }
- * registerPlugin("aPluginIdString", myPlugin)
- * ```
- */
-function registerPlugin(pluginId: string, pluginObj: Plugin) {
-  // @todo: what happens if this plugin exists? (and is already initialized?)
-  //        Should it raise an error? Silently keep going? Do we need quit() methods on plugins?
-  window.plugins[pluginId] = pluginObj;
-}
-
-window.registerPlugin = registerPlugin;
+window.registerPlugin = Headlamp.registerPlugin;
 
 /**
  * Loads JavaScripts one at a time, in order, then calls onLoadFinished().
