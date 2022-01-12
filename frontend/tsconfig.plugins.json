@@ -24,7 +24,8 @@
   },
   "exclude": [
     "dist",
-    "./src/components/TestHelpers/**/*"
+    "./src/components/TestHelpers/**/*",
+    "./src/plugin/index.ts"
   ],
   "include": [
     "./src/lib/**/*",
