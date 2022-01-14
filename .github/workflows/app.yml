@@ -55,9 +55,7 @@ jobs:
       with:
         args: install make
     - name: App Windows
-      run: |
-        npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
-        make app-win
+      run: make app-win
   build-mac:
     runs-on: macos-latest
     strategy:
