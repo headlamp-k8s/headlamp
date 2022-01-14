@@ -4,11 +4,11 @@ import { NavLinkProps, useLocation, useParams } from 'react-router-dom';
 import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import { KubeObject } from '../../lib/k8s/cluster';
 import {
+  ConditionsSection,
   ContainersSection,
   DetailsGrid,
   MetadataDictGrid,
   OwnedPodsSection,
-  ReplicasSection,
 } from '../common/Resource';
 
 interface WorkloadDetailsProps {
@@ -46,7 +46,7 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
       }
       sectionsFunc={item => (
         <>
-          <ReplicasSection resource={item?.jsonData} />
+          <ConditionsSection resource={item?.jsonData} />
           {item && (
             <>
               <OwnedPodsSection resource={item?.jsonData} />

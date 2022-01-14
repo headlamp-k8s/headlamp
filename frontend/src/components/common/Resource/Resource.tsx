@@ -717,7 +717,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
   );
 }
 
-export function ReplicasSection(props: { resource: KubeObjectInterface | null }) {
+export function ConditionsSection(props: { resource: KubeObjectInterface | null }) {
   const { resource } = props;
   const { t } = useTranslation('glossary');
 
