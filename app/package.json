@@ -8,8 +8,8 @@
   "scripts": {
     "compile-electron": "babel electron --out-dir electron/ --extensions '.ts'",
     "start": "cd ../ && make backend && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
-    "prod-deps": "mkdir -p prod_deps && cd ./prod_deps && cp ../package.json ../package-lock.json . && npm i --only=prod && rm -rf ./node_modules/.bin",
-    "copy-icons": "mkdir -p build/icons && cp ../frontend/build/*.png ../frontend/build/*.ico ../frontend/build/*.icns ../frontend/build/*.svg build/icons",
+    "prod-deps": "mkdirp prod_deps && cd ./prod_deps && cp ../package.json ../package-lock.json . && npm i --only=prod && rm -rf ./node_modules/.bin",
+    "copy-icons": "mkdirp build/icons && cp ../frontend/build/*.png ../frontend/build/*.ico ../frontend/build/*.icns ../frontend/build/*.svg build/icons",
     "build": "npm run copy-icons && npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
     "package": "npm run copy-icons && npm run compile-electron && electron-builder build --publish never",
     "dev": "npm run compile-electron && cross-env ELECTRON_DEV=1 electron .",
@@ -126,6 +126,7 @@
     "electron-log": "^4.4.1",
     "i18next": "^20.6.1",
     "i18next-node-fs-backend": "^2.1.3",
+    "mkdirp": "^1.0.4",
     "open": "^7.4.2",
     "yargs": "^16.2.0"
   }
