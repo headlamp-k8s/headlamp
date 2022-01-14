@@ -2,7 +2,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import DaemonSet from '../../lib/k8s/daemonSet';
-import { ContainersSection, DetailsGrid, MetadataDictGrid } from '../common/Resource';
+import {
+  ContainersSection,
+  DetailsGrid,
+  MetadataDictGrid,
+  OwnedPodsSection,
+} from '../common/Resource';
 
 export default function DaemonSetDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
@@ -25,7 +30,16 @@ export default function DaemonSetDetails() {
           },
         ]
       }
-      sectionsFunc={item => <ContainersSection resource={item?.jsonData} />}
+      sectionsFunc={item => (
+        <>
+          {item && (
+            <>
+              <OwnedPodsSection resource={item?.jsonData} />
+              <ContainersSection resource={item?.jsonData} />
+            </>
+          )}
+        </>
+      )}
     />
   );
 }
