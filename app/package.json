@@ -6,7 +6,7 @@
   "homepage": ".",
   "productName": "Headlamp",
   "scripts": {
-    "compile-electron": "babel electron --out-dir electron/ --extensions '.ts'",
+    "compile-electron": "babel electron --out-dir electron/ --extensions .ts",
     "start": "cd ../ && make backend && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
     "prod-deps": "mkdirp prod_deps && cd ./prod_deps && cp ../package.json ../package-lock.json . && npm i --only=prod && rm -rf ./node_modules/.bin",
     "copy-icons": "mkdirp build/icons && cp ../frontend/build/*.png ../frontend/build/*.ico ../frontend/build/*.icns ../frontend/build/*.svg build/icons",
