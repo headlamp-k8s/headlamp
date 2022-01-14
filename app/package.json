@@ -12,8 +12,8 @@
     "copy-icons": "mkdir -p build/icons && cp ../frontend/build/*.png ../frontend/build/*.ico ../frontend/build/*.icns ../frontend/build/*.svg build/icons",
     "build": "npm run copy-icons && npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
     "package": "npm run copy-icons && npm run compile-electron && electron-builder build --publish never",
-    "dev": "npm run compile-electron && export ELECTRON_DEV=1 && electron .",
-    "dev-only-app": "npm run compile-electron && export ELECTRON_DEV=1 && export ELECTRON_START_URL=http://localhost:3000 && export EXTERNAL_SERVER=true && electron .",
+    "dev": "npm run compile-electron && cross-env ELECTRON_DEV=1 electron .",
+    "dev-only-app": "npm run compile-electron && cross-env ELECTRON_DEV=1 ELECTRON_START_URL=http://localhost:3000 EXTERNAL_SERVER=true electron .",
     "i18n": "npx --no-install i18next ./electron/main.ts -c ./electron/i18next-parser.config.js"
   },
   "build": {
@@ -122,6 +122,7 @@
   "dependencies": {
     "@babel/runtime": "^7.15.4",
     "@types/semver": "^7.3.8",
+    "cross-env": "^7.0.3",
     "electron-log": "^4.4.1",
     "i18next": "^20.6.1",
     "i18next-node-fs-backend": "^2.1.3",
