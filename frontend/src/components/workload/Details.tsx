@@ -47,12 +47,12 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
       sectionsFunc={item => (
         <>
           <ReplicasSection resource={item?.jsonData} />
-          {item &&
-            (item.jsonData.kind !== 'Deployment' ? (
-              <ContainersSection resource={item?.jsonData} />
-            ) : (
+          {item && (
+            <>
               <OwnedPodsSection resource={item?.jsonData} />
-            ))}
+              <ContainersSection resource={item?.jsonData} />
+            </>
+          )}
           <DetailsViewPluginRenderer resource={item} />
         </>
       )}
