@@ -649,6 +649,8 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
   const { resource } = props;
   const { t } = useTranslation('glossary');
 
+  let title = '…';
+
   function getContainers() {
     if (!resource) {
       return [];
@@ -658,8 +660,10 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
     if (resource.spec) {
       if (resource.spec.containers) {
+        title = t('Containers');
         containers = resource.spec.containers;
       } else if (resource.spec.template && resource.spec.template.spec) {
+        title = t('Container Spec');
         containers = resource.spec.template.spec.containers;
       }
     }
@@ -690,7 +694,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
   return (
     <>
-      <SectionBox title={t('Containers')} />
+      <SectionBox title={title} />
       <>
         {numContainers === 0 ? (
           <SectionBox>
