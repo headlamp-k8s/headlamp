@@ -632,6 +632,11 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
     if (!pods) {
       return null;
     }
+
+    if (resource.kind === 'Node') {
+      return pods.filter(item => item.spec.nodeName === resource.metadata.name);
+    }
+
     const resourceTemplateLabel = Object.values(resource?.spec?.template?.metadata?.labels || []);
     if (!resourceTemplateLabel) {
       return [];

@@ -12,7 +12,7 @@ import { timeAgo } from '../../lib/util';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
 import { StatusLabelProps } from '../common';
 import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
-import { DetailsGrid } from '../common/Resource';
+import { DetailsGrid, OwnedPodsSection } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
 
@@ -57,6 +57,7 @@ export default function NodeDetails() {
         !!item && (
           <>
             <SystemInfoSection node={item} />
+            <OwnedPodsSection resource={item?.jsonData} />
             <DetailsViewPluginRenderer resource={item} />
           </>
         )
