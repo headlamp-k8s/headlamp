@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLinkProps, useLocation, useParams } from 'react-router-dom';
 import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import {
   ConditionsSection,
   ContainersSection,
@@ -21,6 +21,22 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
   const { workloadKind } = props;
   const { t } = useTranslation('glossary');
 
+  function renderUpdateStrategy(item: Workload) {
+    if (!item?.spec?.strategy) {
+      return null;
+    }
+
+    if (item.spec.strategy.type === 'RollingUpdate') {
+      const rollingUpdate = item.spec.strategy.rollingUpdate;
+      return t('RollingUpdate. Max unavailable: {{ maxUnavailable }}, max surge: {{ maxSurge }}', {
+        maxUnavailable: rollingUpdate.maxUnavailable,
+        maxSurge: rollingUpdate.maxSurge,
+      });
+    }
+
+    return item.spec.strategy.type;
+  }
+
   return (
     <DetailsGrid
       resourceType={workloadKind}
@@ -31,7 +47,7 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
         item && [
           {
             name: t('Strategy Type'),
-            value: item.spec.strategy && item.spec.strategy.type,
+            value: renderUpdateStrategy(item),
             hide: !item.spec.strategy,
           },
           {
