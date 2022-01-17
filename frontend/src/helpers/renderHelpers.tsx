@@ -19,7 +19,7 @@ export default function DetailsViewPluginRenderer(props: { resource: KubeObject 
           );
         }
       }),
-    [detailViews]
+    [detailViews.length]
   );
   return <>{memoizedComponents}</>;
 }
