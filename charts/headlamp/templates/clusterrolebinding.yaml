@@ -16,5 +16,5 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: {{ include "headlamp.serviceAccountName" . }}
-  namespace: {{ .Release.Namespace | default "kube-system" }}
+  namespace: {{ .Release.Namespace }}
 {{- end }}
