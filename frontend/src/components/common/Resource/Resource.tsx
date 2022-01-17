@@ -637,6 +637,10 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
       return pods.filter(item => item.spec.nodeName === resource.metadata.name);
     }
 
+    if (resource.kind === 'Namespace') {
+      return pods.filter(item => item.metadata.namespace === resource.metadata.name);
+    }
+
     const resourceTemplateLabel = Object.values(resource?.spec?.template?.metadata?.labels || []);
     if (!resourceTemplateLabel) {
       return [];
