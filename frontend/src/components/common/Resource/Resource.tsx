@@ -35,7 +35,7 @@ import Loader from '../../common/Loader';
 import { SectionBox } from '../../common/SectionBox';
 import SectionHeader, { HeaderStyleProps } from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
-import { PodListRenderer } from '../../pod/List';
+import { PodListProps, PodListRenderer } from '../../pod/List';
 import { LightTooltip } from '..';
 import Empty from '../EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from '../Label';
@@ -647,7 +647,6 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
   }
 
   const filteredPods = getOwnedPods();
-  console.log('filtered pods', filteredPods);
   return <PodListRenderer hideColumns={hideColumns} pods={filteredPods} error={error} />;
 }
 export function ContainersSection(props: { resource: KubeObjectInterface | null }) {
