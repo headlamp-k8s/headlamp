@@ -163,8 +163,18 @@ function reducer(state = INITIAL_STATE, action: Action) {
     }
     case UI_SET_DETAILS_VIEW: {
       const { sectionName, action: sectionFunc } = action;
-      const detailViews = [...newFilters.views.details.pluginAppendedDetailViews];
-      detailViews.push({ sectionName, sectionFunc });
+      const pluginDetailViews = newFilters.views.details.pluginAppendedDetailViews;
+      const detailViews = [...pluginDetailViews];
+      // only push if it's a unique section
+      if (
+        detailViews.length === 0 ||
+        !detailViews.find(
+          (view: { sectionName: string; sectionFunc: sectionFunc }) =>
+            view.sectionName === sectionName
+        )
+      ) {
+        detailViews.push({ sectionName, sectionFunc });
+      }
       newFilters.views.details.pluginAppendedDetailViews = detailViews;
       break;
     }
