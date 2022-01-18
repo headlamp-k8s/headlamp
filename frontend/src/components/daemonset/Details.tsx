@@ -29,6 +29,10 @@ export default function DaemonSetDetails() {
             name: t('Selector'),
             value: <MetadataDictGrid dict={item.spec.selector.matchLabels || {}} />,
           },
+          {
+            name: t('Node Selector'),
+            value: <MetadataDictGrid dict={item.spec.template.spec.nodeSelector || {}} />,
+          },
         ]
       }
       sectionsFunc={item => (
