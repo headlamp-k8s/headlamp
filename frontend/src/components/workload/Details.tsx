@@ -37,6 +37,47 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
     return item.spec.strategy.type;
   }
 
+  function showReplicas(item: Workload) {
+    return (
+      item.kind === 'Deployment' &&
+      (item.spec?.status?.replicas !== undefined || item.spec?.replicas !== undefined)
+    );
+  }
+
+  function renderReplicas(item: Workload) {
+    if (!showReplicas(item)) {
+      return null;
+    }
+
+    let values: { [key: string]: string } = {
+      [t('Desired')]: item.spec.replicas,
+      [t('Ready')]: item.status.readyReplicas,
+      [t('Up to date')]: item.status.updatedReplicas,
+      [t('Available')]: item.status.availableReplicas,
+      [t('Total')]: item.status.replicas,
+    };
+
+    const validEntries = Object.entries(values).filter(
+      ([key]: string[]) => values[key] !== undefined
+    );
+    values = Object.fromEntries(validEntries);
+
+    if (Object.values(values).length === 0) {
+      return null;
+    }
+
+    return (
+      <MetadataDictGrid
+        dict={values}
+        gridProps={{
+          direction: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
+        }}
+      />
+    );
+  }
+
   return (
     <DetailsGrid
       resourceType={workloadKind}
@@ -57,6 +98,11 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
                 dict={item.spec.selector.matchLabels as { [key: string]: string }}
               />
             ),
+          },
+          {
+            name: t('Replicas'),
+            value: renderReplicas(item),
+            hide: !showReplicas(item),
           },
         ]
       }
