@@ -1,11 +1,60 @@
+import alertIcon from '@iconify/icons-mdi/alert-outline';
+import checkIcon from '@iconify/icons-mdi/check-bold';
+import pauseIcon from '@iconify/icons-mdi/pause';
+import Icon from '@iconify/react';
+import { Box } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Job from '../../lib/k8s/job';
 import { useFilterFunc } from '../../lib/util';
-import { Link } from '../common';
+import { LightTooltip, Link, StatusLabel, StatusLabelProps } from '../common';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
+
+export function makePodStatusLabel(job: Job) {
+  const condition = job.status.conditions.find(
+    ({ status }: { status: string }) => status === 'True'
+  );
+
+  const tooltip = '';
+
+  const conditionOptions = {
+    Failed: {
+      status: 'error',
+      icon: alertIcon,
+    },
+    Complete: {
+      status: 'success',
+      icon: checkIcon,
+    },
+    Suspended: {
+      status: '',
+      icon: pauseIcon,
+    },
+  };
+
+  const conditionInfo = conditionOptions[(condition.type as 'Complete' | 'Failed') || 'Suspended'];
+
+  return (
+    <LightTooltip title={tooltip} interactive>
+      <Box display="inline">
+        <StatusLabel status={conditionInfo.status as StatusLabelProps['status']}>
+          {condition.type}
+          <Box
+            aria-label="hidden"
+            display="inline"
+            paddingTop={1}
+            paddingLeft={0.5}
+            style={{ verticalAlign: 'text-top' }}
+          >
+            <Icon icon={conditionInfo.icon} width="1.2rem" height="1.2rem" />
+          </Box>
+        </StatusLabel>
+      </Box>
+    </LightTooltip>
+  );
+}
 
 export default function JobsList() {
   const [jobs, error] = Job.useList();
@@ -22,15 +71,6 @@ export default function JobsList() {
       return job1.spec.completions - job2.spec.completions;
     }
     return parallelismSorted;
-  }
-
-  function getCondition(job: Job) {
-    const { conditions } = job.status;
-    if (!conditions) {
-      return null;
-    }
-
-    return conditions.find(({ status }: { status: string }) => status === 'True').type;
   }
 
   return (
@@ -64,7 +104,7 @@ export default function JobsList() {
           },
           {
             label: t('Conditions'),
-            getter: job => getCondition(job),
+            getter: job => makePodStatusLabel(job),
           },
           {
             label: t('frequent|Age'),
