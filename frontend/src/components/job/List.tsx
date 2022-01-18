@@ -13,6 +13,10 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
 export function makePodStatusLabel(job: Job) {
+  if (!job?.status?.conditions) {
+    return null;
+  }
+
   const condition = job.status.conditions.find(
     ({ status }: { status: string }) => status === 'True'
   );
