@@ -12,14 +12,6 @@ export default function CronJobList() {
   const filterFunc = useFilterFunc();
   const { t } = useTranslation('glossary');
 
-  function getSchedule(cronJob: CronJob) {
-    const { schedule } = cronJob.spec;
-    if (!schedule.startsWith('@')) {
-      return t('frequent|never');
-    }
-    return schedule;
-  }
-
   function getLastScheduleTime(cronJob: CronJob) {
     const { lastScheduleTime } = cronJob.status;
     if (!lastScheduleTime) {
@@ -57,11 +49,11 @@ export default function CronJobList() {
           },
           {
             label: t('Schedule'),
-            getter: cronJob => getSchedule(cronJob),
+            getter: cronJob => cronJob.spec.schedule,
           },
           {
             label: t('Suspend'),
-            getter: cronJob => cronJob.spec.schedule.toString(),
+            getter: cronJob => cronJob.spec.suspend,
           },
           {
             label: t('Last Schedule'),
