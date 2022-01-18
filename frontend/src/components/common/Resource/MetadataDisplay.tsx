@@ -119,11 +119,14 @@ interface MetadataDictGridProps {
     [index: number]: string;
   };
   showKeys?: boolean;
+  gridProps?: {
+    [index: string]: any;
+  };
 }
 
 export function MetadataDictGrid(props: MetadataDictGridProps) {
   const classes = useMetadataDisplayStyles({});
-  const { dict, showKeys = true } = props;
+  const { dict, showKeys = true, gridProps } = props;
   const [expanded, setExpanded] = React.useState(false);
   const defaultNumShown = 20;
 
@@ -176,6 +179,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
         style={{
           maxWidth: '80%',
         }}
+        {...gridProps}
       >
         {/* Limit the size to two entries until the user chooses to expand the whole section */}
         {keys.slice(0, expanded ? keys.length : defaultNumShown).map((key, i) => (
