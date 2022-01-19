@@ -1,27 +1,31 @@
+import cronstrue from 'cronstrue/i18n';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import CronJob from '../../lib/k8s/cronJob';
 import { useFilterFunc } from '../../lib/util';
-import { Link } from '../common';
+import { DateLabel, HoverInfoLabel, Link } from '../common';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 import SimpleTable from '../common/SimpleTable';
 
+export function getSchedule(cronJob: CronJob, locale: string) {
+  const { schedule } = cronJob.spec;
+  const described = schedule.startsWith('@') ? '' : cronstrue.toString(schedule, { locale });
+  return <HoverInfoLabel label={schedule} hoverInfo={described} />;
+}
+
+export function getLastScheduleTime(cronJob: CronJob) {
+  const { lastScheduleTime } = cronJob.status;
+  if (!lastScheduleTime) {
+    return '';
+  }
+  return <DateLabel date={lastScheduleTime} />;
+}
+
 export default function CronJobList() {
   const [cronJobs, error] = CronJob.useList();
   const filterFunc = useFilterFunc();
-  const { t } = useTranslation('glossary');
-
-  function getLastScheduleTime(cronJob: CronJob) {
-    const { lastScheduleTime } = cronJob.status;
-    if (!lastScheduleTime) {
-      return t('frequent|N/A');
-    }
-    const oneDay = 24 * 60 * 60 * 1000;
-    return t('frequent|{{ age }} days', {
-      age: new Date().getTime() - new Date(lastScheduleTime).getTime() / oneDay,
-    });
-  }
+  const { t, i18n } = useTranslation('glossary');
 
   return (
     <SectionBox title={<SectionFilterHeader title={t('Cron Jobs')} />}>
@@ -49,11 +53,11 @@ export default function CronJobList() {
           },
           {
             label: t('Schedule'),
-            getter: cronJob => cronJob.spec.schedule,
+            getter: cronJob => getSchedule(cronJob, i18n.language),
           },
           {
             label: t('Suspend'),
-            getter: cronJob => cronJob.spec.suspend,
+            getter: cronJob => cronJob.spec.suspend.toString(),
           },
           {
             label: t('Last Schedule'),
