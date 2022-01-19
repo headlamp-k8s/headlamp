@@ -16,7 +16,7 @@ import Pod from '../../lib/k8s/pod';
 import { SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
-import { ContainersSection, DetailsGrid } from '../common/Resource';
+import { ConditionsSection, ContainersSection, DetailsGrid } from '../common/Resource';
 import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
 
@@ -207,6 +207,7 @@ export default function PodDetails() {
       sectionsFunc={item =>
         item && (
           <>
+            <ConditionsSection resource={item?.jsonData} />
             <ContainersSection resource={item?.jsonData} />
             <VolumeDetails volumes={item?.jsonData?.spec.volumes} />
             <PodLogViewer
