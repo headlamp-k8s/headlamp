@@ -301,7 +301,16 @@ function resourceDefToApiFactory(resourceDef: KubeObjectInterface): ApiFactoryRe
     factoryFunc = apiFactoryWithNamespace;
   }
 
-  const [apiGroup, apiVersion] = resourceDef.apiVersion.split('/');
+  let [apiGroup, apiVersion] = resourceDef.apiVersion.split('/');
+
+  // There may not be an API group [1], which means that the apiGroup variable will
+  // actually hold the apiVersion, so we switch them.
+  // [1] https://kubernetes.io/docs/reference/using-api/#api-groups
+  if (!!apiGroup && !apiVersion) {
+    apiVersion = apiGroup;
+    apiGroup = '';
+  }
+
   if (!apiVersion) {
     throw new Error(`apiVersion has no version string: ${resourceDef.apiVersion}`);
   }
