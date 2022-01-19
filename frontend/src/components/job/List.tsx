@@ -5,6 +5,7 @@ import Icon from '@iconify/react';
 import { Box } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { ApiError } from '../../lib/k8s/apiProxy';
 import Job from '../../lib/k8s/job';
 import { useFilterFunc } from '../../lib/util';
 import { LightTooltip, Link, StatusLabel, StatusLabelProps } from '../common';
@@ -62,8 +63,18 @@ export function makePodStatusLabel(job: Job) {
 
 export default function JobsList() {
   const [jobs, error] = Job.useList();
-  const filterFunc = useFilterFunc();
+  return <JobsListRenderer jobs={jobs} error={error} />;
+}
+
+export interface JobsListRendererProps {
+  jobs?: Job[] | null;
+  error?: ApiError | null;
+}
+
+export function JobsListRenderer(props: JobsListRendererProps) {
+  const { jobs = null, error } = props;
   const { t } = useTranslation('glossary');
+  const filterFunc = useFilterFunc();
 
   function getCompletions(job: Job) {
     return `${job.spec.completions}/${job.spec.parallelism}`;

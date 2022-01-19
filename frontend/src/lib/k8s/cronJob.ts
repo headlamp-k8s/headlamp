@@ -3,6 +3,12 @@ import { KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubeCronJob extends KubeObjectInterface {
   spec: {
+    suspend: boolean;
+    schedule: string;
+    startingDeadlineSeconds: string;
+    successfulJobsHistoryLimit: string;
+    failedJobsHistoryLimit: string;
+    concurrencyPolicy: string;
     [otherProps: string]: any;
   };
   status: {
