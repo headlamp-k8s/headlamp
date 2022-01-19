@@ -47,6 +47,14 @@ jobs:
       run: |
         make frontend-build
 
+    - name: Build headlamp-plugin
+      run: |
+        npm install
+        npm run build
+        # Check that we have no changes that should have been included
+        exit $(git diff-index --quiet HEAD --)
+      working-directory: plugins/headlamp-plugin
+
     - name: Test plugins
       run: |
         make plugins-test
