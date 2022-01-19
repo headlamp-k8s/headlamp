@@ -1,0 +1,303 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots pods/PodListRenderer Pods 1`] = `
+<div
+  id="root"
+>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item"
+      >
+        <h1
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        >
+          Pods
+        </h1>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <button
+              aria-label="Show filter"
+              class="MuiButtonBase-root MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <svg
+                  focusable="false"
+                  height="1em"
+                  preserveAspectRatio="xMidYMid meet"
+                  style="transform: rotate(360deg);"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 13h12v-2H6M3 6v2h18V6M10 18h4v-2h-4v2z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <table
+          class="MuiTable-root makeStyles-table"
+        >
+          <thead
+            class="MuiTableHead-root"
+          >
+            <tr
+              class="MuiTableRow-root MuiTableRow-head"
+            >
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                scope="col"
+              >
+                Name
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <svg
+                      focusable="false"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      style="transform: rotate(360deg);"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 6l-5 5h10l-5-5m-5 7l5 5l5-5H7z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                scope="col"
+              >
+                Namespace
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <svg
+                      focusable="false"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      style="transform: rotate(360deg);"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 6l-5 5h10l-5-5m-5 7l5 5l5-5H7z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                scope="col"
+              >
+                Restarts
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <svg
+                      focusable="false"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      style="transform: rotate(360deg);"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 6l-5 5h10l-5-5m-5 7l5 5l5-5H7z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                scope="col"
+              >
+                Status
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <svg
+                      focusable="false"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      style="transform: rotate(360deg);"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 6l-5 5h10l-5-5m-5 7l5 5l5-5H7z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                scope="col"
+              >
+                Age
+                <button
+                  aria-label="sort up"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <svg
+                      focusable="false"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      style="transform: rotate(360deg);"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 15l5-5l5 5H7z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="MuiTableBody-root"
+          >
+            <tr
+              class="MuiTableRow-root"
+            >
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  Dummy_POD
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                Dummy_Namespace
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                <div
+                  class="MuiBox-root MuiBox-root"
+                  title=""
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                    style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                  >
+                    
+                  </span>
+                </div>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                just now
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+`;

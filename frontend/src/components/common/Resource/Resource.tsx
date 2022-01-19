@@ -28,13 +28,14 @@ import {
   KubeObject,
   KubeObjectInterface,
 } from '../../../lib/k8s/cluster';
-import { KubePod } from '../../../lib/k8s/pod';
+import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import Loader from '../../common/Loader';
 import { SectionBox } from '../../common/SectionBox';
 import SectionHeader, { HeaderStyleProps } from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
+import { PodListProps, PodListRenderer } from '../../pod/List';
 import { LightTooltip } from '..';
 import Empty from '../EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from '../Label';
@@ -617,9 +618,46 @@ export function ContainerInfo(props: ContainerInfoProps) {
   );
 }
 
+interface OwnedPodsSectionProps {
+  resource: KubeObjectInterface;
+  hideColumns?: PodListProps['hideColumns'];
+}
+
+export function OwnedPodsSection(props: OwnedPodsSectionProps) {
+  const { resource, hideColumns } = props;
+
+  const [pods, error] = Pod.useList();
+
+  function getOwnedPods() {
+    if (!pods) {
+      return null;
+    }
+
+    if (resource.kind === 'Node') {
+      return pods.filter(item => item.spec.nodeName === resource.metadata.name);
+    }
+
+    if (resource.kind === 'Namespace') {
+      return pods.filter(item => item.metadata.namespace === resource.metadata.name);
+    }
+
+    const resourceTemplateLabel = Object.values(resource?.spec?.template?.metadata?.labels || []);
+    if (!resourceTemplateLabel) {
+      return [];
+    }
+    return pods.filter(item =>
+      resourceTemplateLabel.every(elem => Object.values(item.metadata.labels).includes(elem))
+    );
+  }
+
+  const filteredPods = getOwnedPods();
+  return <PodListRenderer hideColumns={hideColumns} pods={filteredPods} error={error} />;
+}
 export function ContainersSection(props: { resource: KubeObjectInterface | null }) {
   const { resource } = props;
   const { t } = useTranslation('glossary');
+
+  let title = '…';
 
   function getContainers() {
     if (!resource) {
@@ -630,8 +668,10 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
     if (resource.spec) {
       if (resource.spec.containers) {
+        title = t('Containers');
         containers = resource.spec.containers;
       } else if (resource.spec.template && resource.spec.template.spec) {
+        title = t('Container Spec');
         containers = resource.spec.template.spec.containers;
       }
     }
@@ -662,7 +702,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
   return (
     <>
-      <SectionBox title={t('Containers')} />
+      <SectionBox title={title} />
       <>
         {numContainers === 0 ? (
           <SectionBox>
@@ -680,7 +720,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
   );
 }
 
-export function ReplicasSection(props: { resource: KubeObjectInterface | null }) {
+export function ConditionsSection(props: { resource: KubeObjectInterface | null }) {
   const { resource } = props;
   const { t } = useTranslation('glossary');
 
