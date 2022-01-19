@@ -132,8 +132,6 @@ export abstract class Headlamp {
    * ```
    */
   static registerPlugin(pluginId: string, pluginObj: Plugin) {
-    // @todo: what happens if this plugin exists? (and is already initialized?)
-    //        Should it raise an error? Silently keep going? Do we need quit() methods on plugins?
     window.plugins[pluginId] = pluginObj;
   }
 }
