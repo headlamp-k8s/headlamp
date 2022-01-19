@@ -23,10 +23,6 @@ class CronJob extends makeKubeObject<KubeCronJob>('CronJob') {
   get status() {
     return this.getValue('status');
   }
-
-  get listRoute() {
-    return 'workloads';
-  }
 }
 
 export default CronJob;

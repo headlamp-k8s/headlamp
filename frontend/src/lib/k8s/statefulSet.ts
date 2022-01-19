@@ -27,10 +27,6 @@ class StatefulSet extends makeKubeObject<KubeStatefulSet>('StatefulSet') {
   get status() {
     return this.jsonData!.status;
   }
-
-  get listRoute() {
-    return 'workloads';
-  }
 }
 
 export default StatefulSet;

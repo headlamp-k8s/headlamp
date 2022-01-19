@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLinkProps, useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import { KubeObject } from '../../lib/k8s/cluster';
 import {
@@ -16,14 +16,12 @@ interface WorkloadDetailsProps {
 
 export default function WorkloadDetails(props: WorkloadDetailsProps) {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const location = useLocation<{ backLink: NavLinkProps['location'] }>();
   const { workloadKind } = props;
   const { t } = useTranslation('glossary');
 
   return (
     <DetailsGrid
       resourceType={workloadKind}
-      backLink={location.state?.backLink}
       name={name}
       namespace={namespace}
       extraInfo={item =>
