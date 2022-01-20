@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { FilterState } from '../../lib/util';
 import { Action, FILTER_RESET, FILTER_SET_NAMESPACE, FILTER_SET_SEARCH } from '../actions/actions';
 
@@ -6,7 +7,7 @@ export const INITIAL_STATE: FilterState = {
   search: '',
 };
 
-function filter(filters = INITIAL_STATE, action: Action) {
+function filter(filters = _.cloneDeep(INITIAL_STATE), action: Action) {
   let newFilters = { ...filters };
   switch (action.type) {
     case FILTER_SET_NAMESPACE:

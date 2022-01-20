@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import themesConf, { setTheme } from '../../lib/themes';
 import { sectionFunc } from '../../plugin/registry';
 import {
@@ -113,7 +114,7 @@ export const INITIAL_STATE: UIState = {
   },
 };
 
-function reducer(state = INITIAL_STATE, action: Action) {
+function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
   const newFilters = { ...state };
   switch (action.type) {
     case UI_SIDEBAR_SET_SELECTED: {

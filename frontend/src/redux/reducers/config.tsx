@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Cluster } from '../../lib/k8s/cluster';
 import { Action, CONFIG_NEW } from '../actions/actions';
 
@@ -11,7 +12,7 @@ export const INITIAL_STATE: ConfigState = {
   clusters: null,
 };
 
-function reducer(state = INITIAL_STATE, action: Action) {
+function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
   const newState = { ...state };
   switch (action.type) {
     case CONFIG_NEW:
