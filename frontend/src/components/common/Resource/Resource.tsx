@@ -30,6 +30,7 @@ import {
 } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
+import { getThemeName } from '../../../lib/themes';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import Loader from '../../common/Loader';
 import { SectionBox } from '../../common/SectionBox';
@@ -248,6 +249,9 @@ export function SectionGrid(props: SectionGridProps) {
 
 export function DataField(props: TextFieldProps) {
   const { label, value } = props;
+  // Make sure we reload after a theme change
+  useTheme();
+  const themeName = getThemeName();
 
   function handleEditorDidMount(editor: monaco.editor.IStandaloneCodeEditor) {
     const editorElement: HTMLElement | null = editor.getDomNode();
@@ -282,7 +286,7 @@ export function DataField(props: TextFieldProps) {
             language={language}
             onMount={handleEditorDidMount}
             options={{ readOnly: true, lineNumbers: 'off' }}
-            theme="vs-dark"
+            theme={themeName === 'dark' ? 'vs-dark' : 'light'}
           />
         </Box>
       </Box>
