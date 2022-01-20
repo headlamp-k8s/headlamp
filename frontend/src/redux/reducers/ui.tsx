@@ -6,6 +6,7 @@ import {
   HeaderActionFunc,
   UI_APP_BAR_SET_ACTION,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
+  UI_RESET_PLUGIN_VIEWS,
   UI_ROUTER_SET_ROUTE,
   UI_SET_DETAILS_VIEW,
   UI_SIDEBAR_SET_EXPANDED,
@@ -179,6 +180,12 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       newFilters.theme = action.theme;
       setTheme(newFilters.theme.name);
       break;
+    }
+    case UI_RESET_PLUGIN_VIEWS: {
+      const newState = _.cloneDeep(INITIAL_STATE);
+      // Keep the sidebar folding state in the current one
+      newState.sidebar = { ...newState.sidebar, ...setInitialSidebarOpen() };
+      return newState;
     }
     default:
       return state;

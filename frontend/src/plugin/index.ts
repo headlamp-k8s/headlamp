@@ -5,6 +5,8 @@
  */
 
 import helpers from '../helpers';
+import { UI_RESET_PLUGIN_VIEWS } from '../redux/actions/actions';
+import store from '../redux/stores/store';
 import { Headlamp, Plugin } from './lib';
 import Registry from './registry';
 
@@ -98,6 +100,11 @@ function loadDevPlugins() {
  * Load external, then local plugins. Then initialize() them in order with a Registry.
  */
 export async function initializePlugins() {
+  // Reset plugins before initializing, or we could end up with duplicated
+  // logic/views.
+  window.plugins = {};
+  store.dispatch({ type: UI_RESET_PLUGIN_VIEWS });
+
   await loadExternalPlugins();
   await loadDevPlugins();
 
