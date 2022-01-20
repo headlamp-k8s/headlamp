@@ -22,7 +22,7 @@ function AppWithRedux(props: React.PropsWithChildren<{}>) {
 
   React.useEffect(() => {
     initializePlugins();
-  }, [themeName]);
+  }, []);
 
   return (
     <I18nextProvider i18n={i18n}>
