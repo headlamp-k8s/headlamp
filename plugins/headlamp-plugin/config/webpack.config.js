@@ -29,7 +29,7 @@ module.exports = {
 
     // For cases like:
     // import Grid from '@material-ui/core/Grid' -> const Grid = pluginLib.MuiCore["Grid"];
-    for (let importModule of Object.keys(externalModules)) {
+    for (const importModule of Object.keys(externalModules)) {
       const modulePrefix = importModule + '/';
       if (request.startsWith(modulePrefix)) {
         const submodule = request.replace(modulePrefix, '').replace(/\/+/g, '');

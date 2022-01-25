@@ -59,7 +59,7 @@ function create(name, link) {
   // This can be used to make testing locally easier.
   if (link) {
     console.log('Linking @kinvolk/headlamp-plugin')
-    const proc1 = child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {cwd: dstFolder});
+    child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {cwd: dstFolder});
   }
 
   console.log('Installing dependencies...');
@@ -169,7 +169,7 @@ function extract(pluginPackagesPath, outputPlugins) {
   function extractPackage() {
     if (fs.existsSync(path.join(pluginPackagesPath, 'dist', 'main.js'))) {
       const trimmedPath = (
-        pluginPackagesPath.slice(-1) == path.sep ? 
+        pluginPackagesPath.slice(-1) === path.sep ?
         pluginPackagesPath.slice(0,-1) :
         pluginPackagesPath
       );
@@ -278,7 +278,7 @@ function build(packageFolder) {
   return 0;
 }
 
-const argv = yargs(process.argv.slice(2))
+yargs(process.argv.slice(2))
   .command('build [package]', (
     'Build the plugin, or folder of plugins. ' +
     '<package> defaults to current working directory.'
@@ -292,7 +292,7 @@ const argv = yargs(process.argv.slice(2))
   }, (argv) => {
     process.exitCode = build(argv.package);
   })
-  .command('start', 'Watch for changes and build plugin', {}, (argv) => {
+  .command('start', 'Watch for changes and build plugin', {}, () => {
     process.exitCode = start();
   })
   .command('create <name>', 'Create a new plugin folder', (yargs) => {
