@@ -5,12 +5,4 @@ import { Headlamp, Plugin } from '../types/plugin/lib';
 import Registry from '../types/plugin/registry';
 import * as CommonComponents from './CommonComponents';
 
-export {
-  ApiProxy,
-  K8s,
-  CommonComponents,
-  Utils,
-  Plugin,
-  Registry,
-  Headlamp
-};
+export { ApiProxy, K8s, CommonComponents, Utils, Plugin, Registry, Headlamp };
