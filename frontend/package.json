@@ -69,9 +69,9 @@
     "build": "if-env PUBLIC_URL react-scripts build || cross-env PUBLIC_URL=./ react-scripts build --max_old_space_size=768 && rimraf build/frontend/index.baseUrl.html",
     "test": "cross-env TEST_TZ=true react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint -c package.json --ext .js,.ts,.tsx src/ ../app/electron",
-    "format": "prettier --config package.json --write src ../app/electron",
-    "format-check": "prettier --config package.json --check src ../app/electron",
+    "lint": "eslint -c package.json --ext .js,.ts,.tsx src/ ../app/electron ../plugins/headlamp-plugin",
+    "format": "prettier --config package.json --write src ../app/electron ../plugins/headlamp-plugin",
+    "format-check": "prettier --config package.json --check src ../app/electron ../plugins/headlamp-plugin",
     "storybook": "start-storybook -p 6006 -s public",
     "build-typedoc": "npx typedoc",
     "build-storybook": "build-storybook -s public -o ../docs/development/storybook",
@@ -106,6 +106,18 @@
       "eslint -c package.json --fix"
     ],
     "../app/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --config package.json --write"
+    ],
+    "../plugins/headlamp-plugin/{bin,lib,template}/**/*.{ts,tsx}": [
+      "eslint -c package.json --fix"
+    ],
+    "../plugins/headlamp-plugin/{bin,lib,template}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --config package.json --write"
+    ],
+    "../plugins/examples/**/*.{ts,tsx}": [
+      "eslint -c package.json --fix"
+    ],
+    "../plugins/examples/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --config package.json --write"
     ]
   },
