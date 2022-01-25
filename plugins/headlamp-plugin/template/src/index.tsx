@@ -12,6 +12,8 @@ class MyPlugin extends Plugin {
     // registry.registerSidebarItem(...);
     // registry.registerRoute(...);
 
+    registry.registerAppBarAction('$${name}-hello', () => <span>Hello</span>);
+
     return true;
   }
 }
