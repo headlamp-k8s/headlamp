@@ -1,16 +1,21 @@
-import { Plugin } from '@kinvolk/headlamp-plugin/types/plugin/index.d';
-import Registry from '@kinvolk/headlamp-plugin/types/plugin/registry.d';
+import { Headlamp, Plugin, Registry } from '@kinvolk/headlamp-plugin/lib';
 
-// const pluginLib = window.pluginLib;
-// const React = window.pluginLib.React;
-// const K8s = pluginLib.K8s.ResourceClasses;
-// const { Typography } = pluginLib.MuiCore;
+// import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
+// import { K8s } from '@kinvolk/headlamp-plugin/lib/K8s';
+// import { Typography } from '@material-ui/core';
 
-class MyPlugin implements Plugin {
-  initialize(register: Registry) {
+class MyPlugin extends Plugin {
+  initialize(registry: Registry) {
     console.log('$${name} initialized');
+
+    // Register your plugin methods here, like:
+    // registry.registerSidebarItem(...);
+    // registry.registerRoute(...);
+
+    registry.registerAppBarAction('$${name}-hello', () => <span>Hello</span>);
+
     return true;
   }
 }
 
-window.registerPlugin('$${name}', new MyPlugin());
+Headlamp.registerPlugin('$${name}', new MyPlugin());

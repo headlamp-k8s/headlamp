@@ -9,15 +9,16 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const envPaths = require('env-paths');
 const path = require('path');
 const child_process = require('child_process');
-const validate = require("validate-npm-package-name");
+const validate = require('validate-npm-package-name');
 const yargs = require('yargs/yargs');
+const headlampPluginPkg = require('../package.json');
 
 /**
  * Creates a new plugin folder.
  *
  * Copies the files within template, and modifies a couple.
  * Then runs npm install inside of the folder.
- * 
+ *
  * @param {string} name - name of package and output folder.
  * @param {bool} link - if we link @kinvolk/headlamp-plugin for testing
  */
@@ -42,13 +43,18 @@ function create(name, link) {
 
   console.log(`Creating folder :${dstFolder}:`);
 
-  fs.copySync(templateFolder, dstFolder, {errorOnExist: true, overwrite: false});
+  fs.copySync(templateFolder, dstFolder, { errorOnExist: true, overwrite: false });
 
   function replaceFileVariables(path) {
     fs.writeFileSync(
       path,
-      fs.readFileSync(path, 'utf8').split('$${name}').join(name)
-    )
+      fs
+        .readFileSync(path, 'utf8')
+        .split('$${name}')
+        .join(name)
+        .split('$${headlamp-plugin-version}')
+        .join(headlampPluginPkg.version)
+    );
   }
 
   replaceFileVariables(packagePath);
@@ -57,21 +63,18 @@ function create(name, link) {
 
   // This can be used to make testing locally easier.
   if (link) {
-    console.log('Linking @kinvolk/headlamp-plugin')
-    const proc1 = child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {cwd: dstFolder});
+    console.log('Linking @kinvolk/headlamp-plugin');
+    child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], { cwd: dstFolder });
   }
 
   console.log('Installing dependencies...');
   // Run npm install.
   try {
-    child_process.execSync(
-        'npm install',
-        {
-          stdio: 'inherit',
-          cwd: dstFolder,
-          encoding : 'utf8',
-        }
-    );
+    child_process.execSync('npm install', {
+      stdio: 'inherit',
+      cwd: dstFolder,
+      encoding: 'utf8',
+    });
   } catch (e) {
     console.error(`Problem running npm install inside of "${dstFolder}"`);
     return 3;
@@ -87,24 +90,26 @@ function create(name, link) {
  * Copies the built plugin to the app config folder ~/.config/Headlamp/plugins/
  */
 function copyToPluginsFolder(config) {
-  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
+  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
-  // @todo: should the whole package name be used here, 
+  // @todo: should the whole package name be used here,
   //    and the load be fixed to use? What about namespace packages?
   const packageName = packageJson.name.split('/').splice(-1)[0];
-  const paths = envPaths('Headlamp', {suffix: ''});
+  const paths = envPaths('Headlamp', { suffix: '' });
   const configDir = fs.existsSync(paths.data) ? paths.data : paths.config;
 
   config.plugins = [
     new FileManagerPlugin({
       events: {
         onEnd: {
-          copy: [{
-            source: './dist/*',
-            destination: path.join(configDir, 'plugins', packageName),
-          }],
+          copy: [
+            {
+              source: './dist/*',
+              destination: path.join(configDir, 'plugins', packageName),
+            },
+          ],
         },
-      }
+      },
     }),
   ];
 }
@@ -119,8 +124,8 @@ function compile(err, stats) {
   }
   if (stats && stats.compilation) {
     const printList = {
-      'Warnings': stats.compilation.warnings,
-      'Errors': stats.compilation.errors,
+      Warnings: stats.compilation.warnings,
+      Errors: stats.compilation.errors,
     };
 
     Object.entries(printList).forEach(([key, value]) => {
@@ -135,11 +140,11 @@ function compile(err, stats) {
       }
     });
   }
-};
+}
 
 /**
  * Copies folders of packages in the form: packageName/dist/main.js to packageName/main.js
- * 
+ *
  * @returns exit code 0 on success, 1 or 2 on failure.
  */
 function extract(pluginPackagesPath, outputPlugins) {
@@ -153,13 +158,13 @@ function extract(pluginPackagesPath, outputPlugins) {
   }
 
   function copyFiles(plugName, inputMainJs, mainjs) {
-    if(!fs.existsSync(plugName)) {
+    if (!fs.existsSync(plugName)) {
       console.log(`Making output folder "${plugName}".`);
       fs.mkdirSync(plugName, true);
     }
 
     console.log(`Copying "${inputMainJs}" to "${mainjs}".`);
-    fs.copyFileSync(inputMainJs, mainjs);    
+    fs.copyFileSync(inputMainJs, mainjs);
   }
 
   /**
@@ -167,11 +172,10 @@ function extract(pluginPackagesPath, outputPlugins) {
    */
   function extractPackage() {
     if (fs.existsSync(path.join(pluginPackagesPath, 'dist', 'main.js'))) {
-      const trimmedPath = (
-        pluginPackagesPath.slice(-1) == path.sep ? 
-        pluginPackagesPath.slice(0,-1) :
-        pluginPackagesPath
-      );
+      const trimmedPath =
+        pluginPackagesPath.slice(-1) === path.sep
+          ? pluginPackagesPath.slice(0, -1)
+          : pluginPackagesPath;
       const folderName = trimmedPath.split(path.sep).splice(-1)[0];
       const plugName = path.join(outputPlugins, folderName);
       const mainjs = path.join(plugName, 'main.js');
@@ -183,15 +187,14 @@ function extract(pluginPackagesPath, outputPlugins) {
   }
 
   function extractFolderOfPackages() {
-    const folders = fs.readdirSync(pluginPackagesPath, { withFileTypes: true })
-      .filter(fileName => {
+    const folders = fs.readdirSync(pluginPackagesPath, { withFileTypes: true }).filter(fileName => {
       return (
         fileName.isDirectory() &&
         fs.existsSync(path.join(pluginPackagesPath, fileName.name, 'dist', 'main.js'))
       );
     });
 
-    folders.forEach((folder) => {
+    folders.forEach(folder => {
       const plugName = path.join(outputPlugins, folder.name);
       const mainjs = path.join(plugName, 'main.js');
       const inputMainJs = path.join(pluginPackagesPath, folder.name, 'dist', 'main.js');
@@ -202,7 +205,7 @@ function extract(pluginPackagesPath, outputPlugins) {
 
   if (!(extractPackage() || extractFolderOfPackages())) {
     console.error(`"${pluginPackagesPath}" does not contain packages. Not extracting.`);
-  };
+  }
 
   return 0;
 }
@@ -250,15 +253,14 @@ function build(packageFolder) {
   }
 
   function buildFolderOfPackages() {
-    const folders = fs.readdirSync(packageFolder, { withFileTypes: true })
-      .filter(fileName => {
+    const folders = fs.readdirSync(packageFolder, { withFileTypes: true }).filter(fileName => {
       return (
         fileName.isDirectory() &&
         fs.existsSync(path.join(packageFolder, fileName.name, 'package.json'))
       );
     });
 
-    folders.forEach((folder) => {
+    folders.forEach(folder => {
       const folderToBuild = path.join(packageFolder, folder.name);
       if (!buildPackage(folderToBuild)) {
         console.error(`"${folderToBuild}" does not contain a package. Not building.`);
@@ -267,69 +269,74 @@ function build(packageFolder) {
     return folders.length !== 0;
   }
 
-
   if (!(buildPackage(packageFolder) || buildFolderOfPackages())) {
     console.error(`"${packageFolder}" does not contain a package or packages. Not building.`);
-  };
+  }
 
   process.env['BABEL_ENV'] = oldBabelEnv;
 
   return 0;
 }
 
-const argv = yargs(process.argv.slice(2))
-  .command('build [package]', (
-    'Build the plugin, or folder of plugins. ' +
-    '<package> defaults to current working directory.'
-  ),
-    (yargs) => {
-    yargs.positional('package', {
-      describe: 'Package or folder of packages to build',
-      type: 'string',
-      default: '.',
-    })
-  }, (argv) => {
-    process.exitCode = build(argv.package);
-  })
-  .command('start', 'Watch for changes and build plugin', {}, (argv) => {
+yargs(process.argv.slice(2))
+  .command(
+    'build [package]',
+    'Build the plugin, or folder of plugins. ' + '<package> defaults to current working directory.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package or folder of packages to build',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = build(argv.package);
+    }
+  )
+  .command('start', 'Watch for changes and build plugin', {}, () => {
     process.exitCode = start();
   })
-  .command('create <name>', 'Create a new plugin folder', (yargs) => {
-    yargs.positional('name', {
-      describe: 'Name of package',
-      type: 'string',
-    })
-    .option("link", {
-      describe: "For testing, use npm link @kinvolk/headlamp-plugin.",
-      type: "boolean",
-    })
-  }, (argv) => {
-    process.exitCode = create(argv.name, argv.link);
-  })
+  .command(
+    'create <name>',
+    'Create a new plugin folder',
+    yargs => {
+      yargs
+        .positional('name', {
+          describe: 'Name of package',
+          type: 'string',
+        })
+        .option('link', {
+          describe: 'For testing, use npm link @kinvolk/headlamp-plugin.',
+          type: 'boolean',
+        });
+    },
+    argv => {
+      process.exitCode = create(argv.name, argv.link);
+    }
+  )
   .command(
     'extract <pluginPackages> <outputPlugins>',
-    ('Copies folders of packages from pluginPackages/packageName/dist/main.js ' +
-     'to outputPlugins/packageName/main.js'),
-    (yargs) => {
-    yargs.positional('pluginPackages', {
-      describe: (
-        'A folder of plugin packages that have been built with dist/main.js in them.' +
-        'Can also be a single package folder.'
-      ),
-      type: 'string',
-    })
-    yargs.positional('outputPlugins', {
-      describe: (
-        'A plugins folder (eg. ".plugins") to extract plugins to. ' +
-        'The output is a series of packageName/main.js. ' +
-        'Creates this folder if it does not exist.'
-      ),
-      type: 'string',
-    })
-  }, (argv) => {
-    process.exitCode = extract(argv.pluginPackages, argv.outputPlugins);
-  })
+    'Copies folders of packages from pluginPackages/packageName/dist/main.js ' +
+      'to outputPlugins/packageName/main.js',
+    yargs => {
+      yargs.positional('pluginPackages', {
+        describe:
+          'A folder of plugin packages that have been built with dist/main.js in them.' +
+          'Can also be a single package folder.',
+        type: 'string',
+      });
+      yargs.positional('outputPlugins', {
+        describe:
+          'A plugins folder (eg. ".plugins") to extract plugins to. ' +
+          'The output is a series of packageName/main.js. ' +
+          'Creates this folder if it does not exist.',
+        type: 'string',
+      });
+    },
+    argv => {
+      process.exitCode = extract(argv.pluginPackages, argv.outputPlugins);
+    }
+  )
   .demandCommand(1, '')
   .strict()
-  .help()
-  .argv
+  .help().argv;

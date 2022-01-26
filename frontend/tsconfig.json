@@ -25,7 +25,7 @@
   ],
   "typedocOptions": {
     "out": "../docs/development/api",
-    "entryPoints": ["src/lib/k8s/index.ts", "src/lib/util.ts", "src/plugin/index.tsx", "src/plugin/registry.tsx"],
+    "entryPoints": ["src/lib/k8s/index.ts", "src/lib/util.ts", "src/plugin/lib.ts", "src/plugin/registry.tsx"],
     "theme": "hugo",
     "excludeExternals": true,
     "excludePrivate": true,

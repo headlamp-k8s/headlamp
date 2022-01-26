@@ -1,10 +1,9 @@
 # @kinvolk/headlamp-plugin
 
-The needed infrastructure for building Headlamp plugins. 
+The needed infrastructure for building Headlamp plugins.
 Headlamp plugins depend on this package.
 
-See the [Headlamp plugins documentation on the web](
-https://kinvolk.io/docs/headlamp/latest/development/plugins/)
+See the [Headlamp plugins documentation on the web](https://kinvolk.io/docs/headlamp/latest/development/plugins/)
 
 This package is published to the npm package index separately from Headlamp.
 
@@ -24,19 +23,25 @@ headlamp-plugin extract           Copies folders of packages from plug
 
 ## Development notes
 
+### Generate types
+
+`@kinvolk/headlamp-plugin` ships type declarations from the `frontend` module.
+To generate the declarations, run `npm run build`.
+
 ### How to test local changes
 
-To test the usage of `npx @kinvolk/headlamp-plugin create myplugin` with 
+To test the usage of `npx @kinvolk/headlamp-plugin create myplugin` with
 local changes you not only need to `npm link` from inside the headlamp-plugin
 package folder. You need to modify the bin/headlamp-plugin.js@create
-function to call a `npm link @kinvolk/headlamp-plugin` before it 
-calls `npm install` (from inside `headlamp-plugin create`). 
+function to call a `npm link @kinvolk/headlamp-plugin` before it
+calls `npm install` (from inside `headlamp-plugin create`).
 Uncomment the line that looks like this:
 
 ```javascript
-const proc1 = child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {cwd: dstFolder});
+const proc1 = child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {
+  cwd: dstFolder,
+});
 ```
 
 Whilst npx uses linked packages by default, npm install requires that you first use
-`npm link packageName`. See the [npm link docs](
-https://docs.npmjs.com/cli/v7/commands/npm-link) for more info on npm link.
+`npm link packageName`. See the [npm link docs](https://docs.npmjs.com/cli/v7/commands/npm-link) for more info on npm link.
