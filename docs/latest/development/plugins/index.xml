@@ -26,10 +26,9 @@ npx @kinvolk/headlamp-plugin create headlamp-myfancy cd headlamp-myfancy npm run
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/plugins/functionality/</guid>
       <description>Headlamp&amp;rsquo;s plugins exist for changing or adding functionlity related to the user interface and experience.
-Plugins Lib Headlamp exposes a pluginLib object in the global object window. A number of modules, both from Headlamp, or representing Headlamp&amp;rsquo;s common dependencies are included in the pluginLib.
-Thus, plugins should only use dependencies that are not yet provided by Headlamp.
-Modules External modules available currently in the pluginLib are:
- React Iconify ReactRedux MuiCore (Material UI&amp;rsquo;s core module) MuiStyles (Material UI&amp;rsquo;s styles module) Lodash  Apart from the external modules above, the pluginLib contains of course modules that are related to Headlamp, so developers can use the cluster and web UI related functionality.</description>
+Plugins Lib The @kinvolk/headlamp-plugin module ships a library (@kinvolk/headlamp-plugin/lib) where all the Headlamp-related development modules can be found.
+The main ones are:
+ K8s: Kubernetes related functionality Registry: The plugin registry, used to register functionality Headlamp: To register plugins CommonComponents: React components commonly used in the Headlamp UI  Shared Modules Headlamp ships many of the common npm modules that should be shared by both the plugins and Headlamp itself, and includes the config files for editors like VS Code to find them.</description>
     </item>
     
     <item>

@@ -1249,32 +1249,46 @@
 <p>Headlamp&rsquo;s plugins exist for changing or adding functionlity related to
 the user interface and experience.</p>
 <h2 id="plugins-lib">Plugins Lib</h2>
-<p>Headlamp exposes a <code>pluginLib</code> object in the global object <code>window</code>.
-A number of modules, both from Headlamp, or representing Headlamp&rsquo;s common
-dependencies are included in the <code>pluginLib</code>.</p>
-<p>Thus, plugins should only use dependencies that are not yet provided by Headlamp.</p>
-<h3 id="modules">Modules</h3>
-<p>External modules available currently in the <code>pluginLib</code> are:</p>
+<p>The <code>@kinvolk/headlamp-plugin</code> module ships a library
+(<code>@kinvolk/headlamp-plugin/lib</code>) where all the Headlamp-related development
+modules can be found.</p>
+<p>The main ones are:</p>
 <ul>
-<li>React</li>
-<li>Iconify</li>
-<li>ReactRedux</li>
-<li>MuiCore (Material UI&rsquo;s core module)</li>
-<li>MuiStyles (Material UI&rsquo;s styles module)</li>
-<li>Lodash</li>
+<li>K8s: Kubernetes related functionality</li>
+<li>Registry: The plugin registry, used to register functionality</li>
+<li>Headlamp: To register plugins</li>
+<li>CommonComponents: React components commonly used in the Headlamp UI</li>
 </ul>
-<p>Apart from the external modules above, the <code>pluginLib</code> contains of course
-modules that are related to Headlamp, so developers can use the cluster and
-web UI related functionality. Those modules are:</p>
+<h3 id="shared-modules">Shared Modules</h3>
+<p>Headlamp ships many of the common npm modules that should be shared by both
+the plugins and Headlamp itself, and includes the config files for editors
+like VS Code to find them.</p>
+<p>These are:</p>
 <ul>
-<li>K8s</li>
-<li>CommonComponents</li>
+<li>react</li>
+<li>@iconify-react</li>
+<li>react-redux</li>
+<li>@material-ui/core</li>
+<li>@material-ui/styles</li>
+<li>lodash</li>
+<li>notistack</li>
+<li>recharts</li>
 </ul>
-<p>This means that you can just declare a <code>const React = window.pluginLib.React</code> in order to use
-React without having to import it.</p>
+<p>Thus, plugins only need to install dependencies that are not yet provided by Headlamp.
+Yet, if any dependencies already covered by Headlamp are intalled by the plugins, you
+just need to make sure they are te same version that Headlamp supports, as these will
+not be bundled when 
+
+
+<a href="../building.md">building the plugin</a>
+.
+Particularly, the mentioned modules will be replaced by their version that&rsquo;s included
+in a global objects called <code>pluginLib</code>.</p>
+<p>Older plugin development guides still asked developers to use e.g. React in the following
+way <code>const React = window.pluginLib.React</code>, but this is not longer needed.</p>
 <h3 id="registration">Registration</h3>
 <p>Apart from the modules mentioned above, Headlamp also adds an important method
-for registering plugins (<code>window.registerPlugin</code>).</p>
+for registering plugins (<code>Headlamp.registerPlugin</code>).</p>
 <h2 id="funcionality">Funcionality</h2>
 <p>The plugin registers makes functionality available to plugins in an easy way.</p>
 <p>The idea is to make more and more functionality available to plugins. Here is
@@ -1410,7 +1424,7 @@ be done).</li>
   <ul>
     <li><a href="#plugins-lib">Plugins Lib</a>
       <ul>
-        <li><a href="#modules">Modules</a></li>
+        <li><a href="#shared-modules">Shared Modules</a></li>
         <li><a href="#registration">Registration</a></li>
       </ul>
     </li>
