@@ -1,4 +1,4 @@
-import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
+import { ChildProcessWithoutNullStreams, exec, spawn } from 'child_process';
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
@@ -73,7 +73,7 @@ let intentionalQuit: boolean;
 let serverProcessQuit: boolean;
 
 function quitServerProcess() {
-  if (!serverProcess || serverProcessQuit) {
+  if ((!serverProcess || serverProcessQuit) && process.platform !== 'win32') {
     log.error('server process already not running');
     return;
   }
@@ -84,6 +84,9 @@ function quitServerProcess() {
     // Negative pid because it should kill the whole group of processes:
     //    https://azimi.me/2014/12/31/kill-child_process-node-js.html
     process.kill(-serverProcess.pid);
+  } else if (process.platform === 'win32' && serverProcess) {
+    // Otherwise on Windows the process will stick around.
+    exec('taskkill /pid ' + serverProcess.pid + ' /T /F');
   }
 
   serverProcess.stdin.destroy();
