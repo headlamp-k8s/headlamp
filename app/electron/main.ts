@@ -10,6 +10,7 @@ import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
 import i18n from './i18next.config';
+import windowSize from './windowSize';
 
 const args = yargs
   .command('$0 [kubeconfig]', '', yargs => {
@@ -66,6 +67,19 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   serverArgs.concat(flags);
 
   return spawn(serverFilePath, serverArgs, options);
+}
+
+/**
+ * Are we running inside WSL?
+ * @returns true if we are running inside WSL.
+ */
+function isWSL(): boolean {
+  try {
+    const data = fs.readFileSync('/proc/version', { encoding: 'utf8', flag: 'r' });
+    return data.indexOf('icrosoft') !== -1;
+  } catch {
+    return false;
+  }
 }
 
 let serverProcess: ChildProcessWithoutNullStreams | null;
@@ -327,7 +341,11 @@ function startElecron() {
         protocol: 'file:',
         slashes: true,
       });
-    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+
+    // WSL has a problem with full size window placement, so make it smaller.
+    const withMargin = isWSL();
+    const { width, height } = windowSize(screen.getPrimaryDisplay().workAreaSize, withMargin);
+
     mainWindow = new BrowserWindow({
       width,
       height,

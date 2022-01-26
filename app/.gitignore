@@ -6,3 +6,5 @@
 /electron/i18next.config.js
 /electron/i18n-helper.js
 /electron/preload.js
+/electron/windowSize.js
+electron/windowSize.test.js
