@@ -170,7 +170,7 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
       return true;
     }
 
-    const readyCondition = pod.status?.conditions.find(condition => condition.type === 'Ready');
+    const readyCondition = pod.status?.conditions?.find(condition => condition.type === 'Ready');
     return readyCondition?.status === 'True';
   });
 
