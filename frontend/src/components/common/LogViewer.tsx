@@ -67,7 +67,7 @@ export function LogViewer(props: LogViewerProps) {
   }, [logs]);
 
   return (
-    <Dialog maxWidth="lg" scroll="paper" fullWidth onBackdropClick={onClose} {...other}>
+    <Dialog maxWidth="lg" scroll="paper" fullWidth onClose={onClose} {...other}>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent className={classes.dialogContent}>
         <Grid container justifyContent="space-between" alignItems="center" wrap="nowrap">

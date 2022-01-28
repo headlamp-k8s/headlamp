@@ -228,7 +228,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       scroll="paper"
       fullWidth
       fullScreen={fullScreen}
-      onBackdropClick={onClose}
+      onClose={onClose}
       {...other}
       aria-labelledby="editor-dialog-title"
     >
