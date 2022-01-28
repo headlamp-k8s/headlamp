@@ -165,7 +165,7 @@ export function PureSidebar({
         className={classes.sidebarGrid}
         container
         direction="column"
-        justify="space-between"
+        justifyContent="space-between"
         wrap="nowrap"
       >
         <Grid item>

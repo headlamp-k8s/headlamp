@@ -154,7 +154,7 @@ function ClusterList(props: ClusterListProps) {
   }, []);
 
   return (
-    <Grid container alignItems="center" justify="space-around" spacing={2}>
+    <Grid container alignItems="center" justifyContent="space-around" spacing={2}>
       {clusters.map((cluster, i) => (
         <Grid item key={cluster.name}>
           <ClusterButton

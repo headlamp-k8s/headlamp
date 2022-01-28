@@ -93,7 +93,7 @@ function ChartsSection(props: ChartsSectionProps) {
     <Box py={2}>
       <Grid
         container
-        justify="space-around"
+        justifyContent="space-around"
         style={{
           marginBottom: '2rem',
         }}

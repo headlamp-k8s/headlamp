@@ -70,7 +70,7 @@ export function LogViewer(props: LogViewerProps) {
     <Dialog maxWidth="lg" scroll="paper" fullWidth onBackdropClick={onClose} {...other}>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent className={classes.dialogContent}>
-        <Grid container justify="space-between" alignItems="center" wrap="nowrap">
+        <Grid container justifyContent="space-between" alignItems="center" wrap="nowrap">
           <Grid item container spacing={1}>
             {topActions.map((component, i) => (
               <Grid item key={i}>

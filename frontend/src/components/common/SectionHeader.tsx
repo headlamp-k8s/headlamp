@@ -44,7 +44,7 @@ export default function SectionHeader(props: SectionHeaderProps) {
     <Grid
       container
       alignItems="center"
-      justify="space-between"
+      justifyContent="space-between"
       className={classes.sectionHeader}
       spacing={2}
     >
@@ -57,7 +57,7 @@ export default function SectionHeader(props: SectionHeaderProps) {
       )}
       {actions.length > 0 && (
         <Grid item>
-          <Grid item container alignItems="center" justify="flex-end">
+          <Grid item container alignItems="center" justifyContent="flex-end">
             {actions.map((action, i) => (
               <Grid item key={i}>
                 {action}

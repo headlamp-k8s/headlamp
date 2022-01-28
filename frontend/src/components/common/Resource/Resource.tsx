@@ -217,7 +217,7 @@ export function PageGrid(props: PageGridProps) {
   const { sections = [], children = [], ...other } = props;
   const childrenArray = React.Children.toArray(children).concat(sections);
   return (
-    <Grid container spacing={1} justify="flex-start" alignItems="stretch" {...other}>
+    <Grid container spacing={1} justifyContent="flex-start" alignItems="stretch" {...other}>
       {childrenArray.map((section, i) => (
         <Grid item key={i} xs={12}>
           <Box mt={[4, 0, 0]}>{section}</Box>
@@ -235,7 +235,7 @@ interface SectionGridProps {
 export function SectionGrid(props: SectionGridProps) {
   const { items } = props;
   return (
-    <Grid container justify="space-between">
+    <Grid container justifyContent="space-between">
       {items.map((item, i) => {
         return (
           <Grid item md={12} xs={12} key={i}>
