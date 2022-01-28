@@ -96,14 +96,13 @@ export function PureAuthToken({
     }
   }, []);
 
+  function onClose() {
+    // Do nothing because we're not supposed to close on backdrop click
+  }
+
   return (
     <Box>
-      <ClusterDialog
-        useCover
-        disableEscapeKeyDown
-        disableBackdropClick
-        aria-labelledby="authtoken-dialog-title"
-      >
+      <ClusterDialog useCover onClose={onClose} aria-labelledby="authtoken-dialog-title">
         <DialogTitle id="authtoken-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>
