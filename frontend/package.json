@@ -28,6 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "ansi-to-react": "^6.1.6",
+    "cronstrue": "^1.123.0",
     "cross-env": "^7.0.3",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",

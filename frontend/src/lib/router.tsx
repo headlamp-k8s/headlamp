@@ -11,6 +11,7 @@ import ConfigMapList from '../components/configmap/List';
 import CustomResourceDetails from '../components/crd/CustomResourceDetails';
 import CustomResourceDefinitionDetails from '../components/crd/Details';
 import CustomResourceDefinitionList from '../components/crd/List';
+import CronJobDetails from '../components/cronjob/Details';
 import CronJobList from '../components/cronjob/List';
 import DaemonSetDetails from '../components/daemonset/Details';
 import DaemonSetList from '../components/daemonset/List';
@@ -48,7 +49,6 @@ import WorkloadDetails from '../components/workload/Details';
 import WorkloadOverview from '../components/workload/Overview';
 import LocaleSelect from '../i18n/LocaleSelect/LocaleSelect';
 import store from '../redux/stores/store';
-import CronJob from './k8s/cronJob';
 import Deployment from './k8s/deployment';
 import Job from './k8s/job';
 import ReplicaSet from './k8s/replicaSet';
@@ -194,7 +194,7 @@ export const ROUTES: {
     path: '/cronjobs/:namespace/:name',
     exact: true,
     sidebar: 'CronJobs',
-    component: () => <WorkloadDetails workloadKind={CronJob} />,
+    component: () => <CronJobDetails />,
   },
   Pods: {
     path: '/pods',

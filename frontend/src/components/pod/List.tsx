@@ -22,7 +22,7 @@ export function makePodStatusLabel(pod: Pod) {
     status = 'error';
   } else if (phase === 'Succeeded' || phase === 'Running') {
     const readyCondition = pod.status.conditions.find(condition => condition.type === 'Ready');
-    if (readyCondition?.status === 'True') {
+    if (readyCondition?.status === 'True' || phase === 'Succeeded') {
       status = 'success';
     } else {
       status = 'warning';

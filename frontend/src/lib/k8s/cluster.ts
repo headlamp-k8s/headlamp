@@ -66,7 +66,7 @@ export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
   useList: (
     onList?: (...arg: any[]) => any
   ) => [any[], ApiError | null, (items: any[]) => void, (err: ApiError | null) => void];
-  getErrorMessage: (err: ApiError | null) => string | null;
+  getErrorMessage: (err?: ApiError | null) => string | null;
   new (json: T): any;
   className: string;
   [prop: string]: any;
