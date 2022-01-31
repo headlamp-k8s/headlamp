@@ -18,7 +18,7 @@ import _ from 'lodash';
 import * as monaco from 'monaco-editor';
 import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { generatePath, Link as RouterLink, NavLinkProps, useLocation } from 'react-router-dom';
 import DetailsViewPluginRenderer from '../../../helpers/renderHelpers';
 import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
@@ -173,8 +173,14 @@ export function DetailsGrid(props: DetailsGridProps) {
     props;
   const [item, setItem] = React.useState<KubeObject | null>(null);
   const [error, setError] = React.useState<ApiError | string | null>(null);
+  const location = useLocation<{ backLink: NavLinkProps['location'] }>();
 
-  const backLink = React.useMemo(() => {
+  const backLink: string | undefined = React.useMemo(() => {
+    const stateLink = location.state?.backLink || null;
+    if (!!stateLink) {
+      return generatePath(stateLink.pathname);
+    }
+
     let route;
     try {
       route = new resourceType().listRoute;
@@ -199,7 +205,7 @@ export function DetailsGrid(props: DetailsGridProps) {
       <MainInfoSection
         resource={item}
         error={error}
-        backLink={!item ? backLink : undefined}
+        backLink={backLink}
         {...otherMainInfoSectionProps}
       />
       <>{!!sectionsFunc && sectionsFunc(item)}</>
