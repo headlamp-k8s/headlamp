@@ -163,7 +163,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
   }
 
   return (
-    <Grid container spacing={1} justify="flex-start">
+    <Grid container spacing={1} justifyContent="flex-start">
       {keys.length > defaultNumShown && (
         <Grid item>
           <IconButton onClick={() => setExpanded(!expanded)} size="small">
@@ -174,7 +174,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
       <Grid
         container
         item
-        justify="flex-start"
+        justifyContent="flex-start"
         spacing={1}
         style={{
           maxWidth: '80%',

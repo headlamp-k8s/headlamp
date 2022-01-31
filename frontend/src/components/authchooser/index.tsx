@@ -228,13 +228,12 @@ export function PureAuthChooser({
     }
   }, []);
 
+  function onClose() {
+    // Do nothing because we're not supposed to close on backdrop click or escape.
+  }
+
   return (
-    <ClusterDialog
-      useCover
-      disableEscapeKeyDown
-      disableBackdropClick
-      aria-labelledby="authchooser-dialog-title"
-    >
+    <ClusterDialog useCover onClose={onClose} aria-labelledby="authchooser-dialog-title">
       {testingAuth ? (
         <Box textAlign="center">
           <DialogTitle ref={focusedRef} id="authchooser-dialog-title">

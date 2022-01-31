@@ -151,7 +151,7 @@ export default function Terminal(props: TerminalProps) {
   }
 
   return (
-    <Dialog maxWidth="lg" scroll="paper" fullWidth onBackdropClick={onClose} keepMounted {...other}>
+    <Dialog maxWidth="lg" scroll="paper" fullWidth onClose={onClose} keepMounted {...other}>
       <DialogTitle>{t('Terminal: {{ itemName }}', { itemName: item.metadata.name })}</DialogTitle>
       <DialogContent className={classes.dialogContent}>
         <Grid container direction="column" spacing={1}>

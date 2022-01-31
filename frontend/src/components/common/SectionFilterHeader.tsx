@@ -89,7 +89,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
     );
   } else {
     actions.push(
-      <Grid container alignItems="flex-end" justify="flex-end" spacing={1} wrap="nowrap">
+      <Grid container alignItems="flex-end" justifyContent="flex-end" spacing={1} wrap="nowrap">
         {!noNamespaceFilter && (
           <Grid item>
             <NamespacesAutocomplete />

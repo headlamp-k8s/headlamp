@@ -35,7 +35,7 @@ export default function Overview() {
         {noPermissions ? (
           <Empty color="error">{t('auth|No permissions to list pods.')}</Empty>
         ) : (
-          <Grid container justify="space-around" alignItems="flex-start">
+          <Grid container justifyContent="space-around" alignItems="flex-start">
             <Grid item>
               <CpuCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
             </Grid>
