@@ -117,7 +117,7 @@ const darkTheme = createTheme({
       ...green,
     },
     warning: {
-      main: 'rgb(196, 69, 0)', // orange
+      main: 'rgb(255 181 104)', // orange
       light: 'rgba(255, 152, 0, 0.15)',
       ...orange,
     },
