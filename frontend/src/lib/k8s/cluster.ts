@@ -1,6 +1,11 @@
+import _ from 'lodash';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { k8sDropListAction, k8sListAction } from '../../redux/actions/api';
+import { ApiState } from '../../redux/reducers/api';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { createRouteURL } from '../router';
-import { timeAgo, useErrorState } from '../util';
+import { getCluster, timeAgo } from '../util';
 import { useConnectApi } from '.';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
 import CronJob from './cronJob';
@@ -63,9 +68,10 @@ export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
     namespace?: string,
     onError?: (err: ApiError) => void
   ) => void;
-  useList: (
-    onList?: (...arg: any[]) => any
-  ) => [any[], ApiError | null, (items: any[]) => void, (err: ApiError | null) => void];
+  useList: (onList?: (...arg: any[]) => any) => [any[], ApiError | null];
+  // useList1: (
+  //   onList?: (...arg: any[]) => any
+  // ) => [any[], ApiError | null];
   getErrorMessage: (err?: ApiError | null) => string | null;
   new (json: T): any;
   className: string;
@@ -141,7 +147,6 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       onError?: (err: ApiError) => void
     ) {
       const createInstance = (item: T) => this.create(item) as U;
-
       const args: any[] = [(list: T[]) => onList(list.map((item: T) => createInstance(item) as U))];
 
       if (this.apiEndpoint.isNamespaced) {
@@ -163,27 +168,63 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       useConnectApi(this.apiList(listCallback, onError));
     }
 
-    static useList<U extends KubeObject>(): [
-      U[] | null,
-      ApiError | null,
-      (items: U[]) => void,
-      (err: ApiError | null) => void
-    ] {
-      const [objList, setObjList] = React.useState<U[] | null>(null);
-      const [error, setError] = useErrorState(setObjList);
+    static useList<U extends KubeObject>(): [U[] | null, ApiError | null] {
+      const dispatch = useDispatch();
+      const cluster = getCluster();
+      const { list, error } = useTypedSelector(
+        state => {
+          const apiState = state.api;
+          let resourceList: ApiState[string][string] = {
+            list: null,
+          };
+          let list = null;
+          if (!!cluster && !_.isEmpty(apiState)) {
+            resourceList = apiState[cluster][this.className] || resourceList;
+            if (!!resourceList.list) {
+              list = Object.values(resourceList.list);
+            }
+          }
 
-      function setList(items: U[] | null) {
-        setObjList(items);
-        if (items !== null) {
-          setError(null);
+          return { list, error: resourceList.error || null };
+        },
+        (a, b) => {
+          if (!a || !b) {
+            return a === b;
+          }
+
+          const [listA, listB] = [a.list, b.list];
+          if (!listA || !listB) {
+            return a === b;
+          }
+
+          // Compare the KubeObjects' UIDs in the same order, since that's enough to determine equality.
+          const [valuesA, valuesB]: [KubeObject[], KubeObject[]] = [
+            Object.values(listA),
+            Object.values(listB),
+          ];
+          if (valuesA.length === valuesB.length) {
+            for (const idx in valuesA) {
+              if (valuesB[idx].metadata.uid !== valuesA[idx].metadata.uid) {
+                return false;
+              }
+            }
+            return true;
+          }
+
+          return false;
         }
-      }
+      );
 
-      this.useApiList(setList, setError);
+      // Reference counting effect.
+      React.useEffect(() => {
+        dispatch(k8sListAction(this));
 
-      // Return getters and then the setters as the getters are more likely to be used with
-      // this function.
-      return [objList, error, setObjList, setError];
+        return () => {
+          dispatch(k8sDropListAction(this));
+        };
+      }, []);
+
+      return [list, error];
     }
 
     static create<U extends KubeObject>(this: new (arg: T) => U, item: T): U {
