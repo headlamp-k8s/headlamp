@@ -18,6 +18,7 @@ export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACT
 export const UI_SET_DETAILS_VIEW = 'UI_SET_DETAILS_VIEW';
 export const UI_APP_BAR_SET_ACTION = 'UI_APP_BAR_SET_ACTION';
 export const UI_THEME_SET = 'UI_THEME_SET';
+export const UI_RESET_PLUGIN_VIEWS = 'UI_RESET_PLUGIN_VIEWS';
 
 export interface ClusterActionButton {
   label: string;

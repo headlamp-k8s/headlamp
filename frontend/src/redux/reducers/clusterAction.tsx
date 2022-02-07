@@ -9,7 +9,7 @@ export const INITIAL_STATE: ClusterState = {
   // id: { message, ... } . See the ActionsNotifier.
 };
 
-function cluster(clusterActions = INITIAL_STATE, action: ClusterAction & Action) {
+function cluster(clusterActions = _.cloneDeep(INITIAL_STATE), action: ClusterAction & Action) {
   const { type, id, ...actionOptions } = action;
   const newState = { ...clusterActions };
   switch (type) {
