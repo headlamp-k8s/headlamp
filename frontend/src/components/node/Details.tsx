@@ -1,4 +1,3 @@
-import penguinIcon from '@iconify/icons-mdi/penguin';
 import { InlineIcon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -128,7 +127,7 @@ function SystemInfoSection(props: SystemInfoSectionProps) {
     let icon = null;
 
     if (osName.toLowerCase() === 'linux') {
-      icon = <InlineIcon icon={penguinIcon} />;
+      icon = <InlineIcon icon="mdi:penguin" />;
     }
 
     return (

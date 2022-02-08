@@ -1,5 +1,3 @@
-import consoleIcon from '@iconify/icons-mdi/console';
-import fileDocumentBoxOutline from '@iconify/icons-mdi/file-document-box-outline';
 import { Icon } from '@iconify/react';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
@@ -168,12 +166,12 @@ export default function PodDetails() {
         item && [
           <Tooltip title={t('Show Logs') as string}>
             <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
-              <Icon icon={fileDocumentBoxOutline} />
+              <Icon icon="mdi:file-document-box-outline" />
             </IconButton>
           </Tooltip>,
           <Tooltip title={t('Terminal / Exec') as string}>
             <IconButton aria-label={t('terminal') as string} onClick={() => setShowTerminal(true)}>
-              <Icon icon={consoleIcon} />
+              <Icon icon="mdi:console" />
             </IconButton>
           </Tooltip>,
         ]

@@ -1,4 +1,3 @@
-import hexagonMultipleOutline from '@iconify/icons-mdi/hexagon-multiple-outline';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import { Meta, Story } from '@storybook/react/types-6-0';
@@ -34,7 +33,7 @@ Selected.args = {
   selectedName: 'cluster',
   name: 'cluster',
   label: 'Cluster',
-  icon: hexagonMultipleOutline,
+  icon: 'mdi:hexagon-multiple-outline',
   fullWidth: true,
 };
 
@@ -43,7 +42,7 @@ Unselected.args = {
   selectedName: 'meow',
   name: 'cluster',
   label: 'Cluster',
-  icon: hexagonMultipleOutline,
+  icon: 'mdi:hexagon-multiple-outline',
   fullWidth: true,
 };
 
@@ -53,7 +52,7 @@ SublistExpanded.args = {
   name: 'cluster',
   label: 'Cluster',
   fullWidth: true,
-  icon: hexagonMultipleOutline,
+  icon: 'mdi:hexagon-multiple-outline',
   subList: [
     {
       selectedName: 'cluster',
@@ -70,7 +69,7 @@ Sublist.args = {
   name: 'cluster',
   label: 'Cluster',
   fullWidth: true,
-  icon: hexagonMultipleOutline,
+  icon: 'mdi:hexagon-multiple-outline',
   subList: [
     {
       selectedName: 'cluster',

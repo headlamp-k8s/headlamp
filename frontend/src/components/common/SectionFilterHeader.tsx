@@ -1,5 +1,3 @@
-import filterIcon from '@iconify/icons-mdi/filter-variant';
-import filterVariantRemove from '@iconify/icons-mdi/filter-variant-remove';
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -84,7 +82,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   if (!showFilters) {
     actions.push(
       <IconButton aria-label={t('Show filter')} onClick={() => setShowFilters(!showFilters)}>
-        <Icon icon={filterIcon} />
+        <Icon icon="mdi:filter-variant" />
       </IconButton>
     );
   } else {
@@ -111,7 +109,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
         <Grid item>
           <Button
             variant="contained"
-            endIcon={<Icon icon={filterVariantRemove} />}
+            endIcon={<Icon icon="mdi:filter-variant-remove" />}
             onClick={resetFilters}
             aria-controls="standard-search"
           >

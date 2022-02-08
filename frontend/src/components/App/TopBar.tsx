@@ -1,6 +1,3 @@
-import accountIcon from '@iconify/icons-mdi/account';
-import logoutIcon from '@iconify/icons-mdi/logout';
-import moreVertIcon from '@iconify/icons-mdi/more-vert';
 import { Icon } from '@iconify/react';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
@@ -186,7 +183,7 @@ export function PureTopBar({
         dense
       >
         <ListItemIcon>
-          <Icon icon={logoutIcon} />
+          <Icon icon="mdi:logout" />
         </ListItemIcon>
         <ListItemText primary={t('Log out')} secondary={hasToken ? null : t('(No token set up)')} />
       </MenuItem>
@@ -226,7 +223,7 @@ export function PureTopBar({
           color="inherit"
           onClick={handleProfileMenuOpen}
         >
-          <Icon icon={accountIcon} />
+          <Icon icon="mdi:account" />
         </IconButton>
       </MenuItem>
     </Menu>
@@ -264,7 +261,7 @@ export function PureTopBar({
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <Icon icon={accountIcon} />
+                <Icon icon="mdi:account" />
               </IconButton>
             </>
           )}
@@ -278,7 +275,7 @@ export function PureTopBar({
                 onClick={handleMobileMenuOpen}
                 color="inherit"
               >
-                <Icon icon={moreVertIcon} />
+                <Icon icon="mdi:more-vert" />
               </IconButton>
             </>
           )}

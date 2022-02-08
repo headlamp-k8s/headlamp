@@ -1,5 +1,4 @@
-import alertIcon from '@iconify/icons-mdi/alert-outline';
-import Icon from '@iconify/react';
+import { Icon } from '@iconify/react';
 import { Box } from '@material-ui/core';
 import _ from 'lodash';
 import React from 'react';
@@ -45,7 +44,7 @@ export function makePodStatusLabel(pod: Pod) {
               paddingLeft={0.5}
               style={{ verticalAlign: 'text-top' }}
             >
-              <Icon icon={alertIcon} width="1.2rem" height="1.2rem" />
+              <Icon icon="mdi:alert-outline" width="1.2rem" height="1.2rem" />
             </Box>
           )}
         </StatusLabel>

@@ -1,7 +1,3 @@
-import alertIcon from '@iconify/icons-mdi/alert-outline';
-import chevronLeft from '@iconify/icons-mdi/chevron-left';
-import eyeIcon from '@iconify/icons-mdi/eye';
-import eyeOff from '@iconify/icons-mdi/eye-off';
 import { Icon } from '@iconify/react';
 import { Button, InputLabel, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -123,7 +119,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     <>
       {(backLink || resource) && (
         <Button
-          startIcon={<Icon icon={chevronLeft} />}
+          startIcon={<Icon icon="mdi:chevron-left" />}
           size="small"
           component={RouterLink}
           to={backLink || createRouteURL(resource.listRoute)}
@@ -318,7 +314,7 @@ export function SecretField(props: InputProps) {
           onClick={handleClickShowPassword}
           onMouseDown={event => event.preventDefault()}
         >
-          <Icon icon={showPassword ? eyeOff : eyeIcon} />
+          <Icon icon={showPassword ? 'mdi:eye-off' : 'mdi:eye'} />
         </IconButton>
       </Grid>
       <Grid item xs>
@@ -530,7 +526,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
         {!!state && state.message && (
           <LightTooltip role="tooltip" title={state.message} interactive id={tooltipID}>
             <Box aria-label="hidden" display="inline" px={1} style={{ verticalAlign: 'bottom' }}>
-              <Icon icon={alertIcon} width="1.3rem" height="1.3rem" aria-label="hidden" />
+              <Icon icon="mdi:alert-outline" width="1.3rem" height="1.3rem" aria-label="hidden" />
             </Box>
           </LightTooltip>
         )}

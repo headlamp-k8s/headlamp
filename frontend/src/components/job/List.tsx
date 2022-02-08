@@ -1,7 +1,4 @@
-import alertIcon from '@iconify/icons-mdi/alert-outline';
-import checkIcon from '@iconify/icons-mdi/check-bold';
-import pauseIcon from '@iconify/icons-mdi/pause';
-import Icon from '@iconify/react';
+import { Icon } from '@iconify/react';
 import { Box } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -27,15 +24,15 @@ export function makePodStatusLabel(job: Job) {
   const conditionOptions = {
     Failed: {
       status: 'error',
-      icon: alertIcon,
+      icon: 'mdi:alert-outline',
     },
     Complete: {
       status: 'success',
-      icon: checkIcon,
+      icon: 'mdi:check-bold',
     },
     Suspended: {
       status: '',
-      icon: pauseIcon,
+      icon: 'mdi:pauseIcon',
     },
   };
 

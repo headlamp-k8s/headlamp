@@ -1,6 +1,5 @@
 import 'github-markdown-css';
-import closeIcon from '@iconify/icons-mdi/close';
-import Icon from '@iconify/react';
+import { Icon } from '@iconify/react';
 import { Backdrop, Box, Button, Modal, Paper, Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
@@ -43,7 +42,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
             </Typography>
           </Box>
           <Button onClick={() => setShowReleaseNotes(false)}>
-            <Icon icon={closeIcon} width="30" height="30" />
+            <Icon icon="mdi:close" width="30" height="30" />
           </Button>
         </Box>
         <Box

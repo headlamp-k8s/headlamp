@@ -1,4 +1,3 @@
-import pencilIcon from '@iconify/icons-mdi/pencil';
 import { Icon } from '@iconify/react';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -90,7 +89,7 @@ export default function EditButton(props: EditButtonProps) {
     <React.Fragment>
       <Tooltip title={t('frequent|Edit') as string}>
         <IconButton aria-label={t('frequent|edit')} onClick={() => setOpenDialog(true)}>
-          <Icon icon={pencilIcon} />
+          <Icon icon="mdi:pencil" />
         </IconButton>
       </Tooltip>
       <EditorDialog

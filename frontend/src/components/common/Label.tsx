@@ -1,5 +1,3 @@
-import calendarIcon from '@iconify/icons-mdi/calendar';
-import informationOutline from '@iconify/icons-mdi/information-outline';
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -167,7 +165,7 @@ export function HoverInfoLabel(props: HoverInfoLabelProps) {
         {hoverInfo && (
           <LightTooltip title={hoverInfo}>
             <Box>
-              <Icon icon={icon || informationOutline} width="1rem" height="1rem" />
+              <Icon icon={icon || 'mdi:information-outline'} width="1rem" height="1rem" />
             </Box>
           </LightTooltip>
         )}
@@ -182,5 +180,5 @@ export interface DateLabelProps {
 
 export function DateLabel(props: DateLabelProps) {
   const { date } = props;
-  return <HoverInfoLabel label={timeAgo(date)} hoverInfo={localeDate(date)} icon={calendarIcon} />;
+  return <HoverInfoLabel label={timeAgo(date)} hoverInfo={localeDate(date)} icon="mdi:calendar" />;
 }

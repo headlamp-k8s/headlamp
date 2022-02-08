@@ -1,5 +1,3 @@
-import checkBoxOutline from '@iconify/icons-mdi/check-box-outline';
-import checkboxBlankOutline from '@iconify/icons-mdi/checkbox-blank-outline';
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -43,8 +41,8 @@ export function PureNamespacesAutocomplete({
       renderOption={(option, { selected }) => (
         <React.Fragment>
           <Checkbox
-            icon={<Icon icon={checkboxBlankOutline} />}
-            checkedIcon={<Icon icon={checkBoxOutline} />}
+            icon={<Icon icon="mdi:checkbox-blank-outline" />}
+            checkedIcon={<Icon icon="mdi:check-box-outline" />}
             style={{
               color: selected ? theme.palette.primary.main : theme.palette.text.primary,
             }}

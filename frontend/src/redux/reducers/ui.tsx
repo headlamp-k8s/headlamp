@@ -1,3 +1,4 @@
+import { IconProps } from '@iconify/react';
 import _ from 'lodash';
 import themesConf, { setTheme } from '../../lib/themes';
 import { sectionFunc } from '../../plugin/registry';
@@ -24,7 +25,7 @@ export interface SidebarEntry {
   url?: string;
   useClusterURL?: boolean;
   subList?: this[];
-  icon?: object;
+  icon?: IconProps['icon'];
 }
 
 export interface UIState {
