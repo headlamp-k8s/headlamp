@@ -4,7 +4,8 @@
   "description": "Your Headlamp plugin",
   "scripts": {
     "start": "headlamp-plugin start",
-    "build": "headlamp-plugin build"
+    "build": "headlamp-plugin build",
+    "tsc": "tsc"
   },
   "keywords": [
     "headlamp",
