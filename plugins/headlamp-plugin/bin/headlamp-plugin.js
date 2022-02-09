@@ -80,8 +80,12 @@ function create(name, link) {
     return 3;
   }
 
-  console.log(`"${dstFolder}" created. Run the Headlamp app and:`);
-  console.log(`cd "${dstFolder}"\nnpm run start`);
+  console.log(`"${dstFolder}" created.`);
+  console.log(`1) Run the Headlamp app (so the plugin can be used).`);
+  console.log(`2) Open ${dstFolder}/src/index.tsx in your editor.`);
+  console.log(`3) Start development server of the plugin watching for plugin changes.`);
+  console.log(`  cd "${dstFolder}"\n  npm run start`);
+  console.log(`4) See the plugin inside Headlamp.`);
 
   return 0;
 }
@@ -306,7 +310,8 @@ yargs(process.argv.slice(2))
           type: 'string',
         })
         .option('link', {
-          describe: 'For testing, use npm link @kinvolk/headlamp-plugin.',
+          describe:
+            'For development of headlamp-plugin itself, so it uses npm link @kinvolk/headlamp-plugin.',
           type: 'boolean',
         });
     },
