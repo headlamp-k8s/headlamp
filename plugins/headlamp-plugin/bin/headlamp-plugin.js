@@ -80,6 +80,13 @@ function create(name, link) {
     return 3;
   }
 
+  // This can be used to make testing locally easier.
+  if (link) {
+    // Seems to require linking again with npm 7+
+    console.log('Linking @kinvolk/headlamp-plugin');
+    child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], { cwd: dstFolder });
+  }
+
   console.log(`"${dstFolder}" created.`);
   console.log(`1) Run the Headlamp app (so the plugin can be used).`);
   console.log(`2) Open ${dstFolder}/src/index.tsx in your editor.`);
