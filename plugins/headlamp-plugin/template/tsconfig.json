@@ -23,7 +23,8 @@
         "node_modules/@kinvolk/headlamp-plugin/types/src/components/common/*.d.ts"
       ]
     },
-    "rootDirs": ["node_modules/@kinvolk/headlamp-plugin/"]
+    "rootDirs": ["node_modules/@kinvolk/headlamp-plugin/"],
+    "skipLibCheck": true
   },
   "include": ["./src/**/*"]
 }
