@@ -17,10 +17,12 @@ get started.
 This is how to start a new plugin:
 
 ```bash
-npx @kinvolk/headlamp-plugin create headlamp-myfancy
+npx --yes @kinvolk/headlamp-plugin create headlamp-myfancy
 cd headlamp-myfancy
 npm run start
 ```
+
+There's some basic code inside src/index.tsx.
 
 Now run Headlamp (the desktop app or the
 [development version](../index.md##run-the-code)), and your plugin should be loaded.
