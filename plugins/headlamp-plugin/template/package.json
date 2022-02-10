@@ -5,6 +5,7 @@
   "scripts": {
     "start": "headlamp-plugin start",
     "build": "headlamp-plugin build",
+    "format": "headlamp-plugin format",
     "tsc": "tsc"
   },
   "keywords": [
@@ -13,6 +14,7 @@
     "kubernetes",
     "plugins"
   ],
+  "prettier": "@kinvolk/eslint-config/prettier-config",
   "devDependencies": {
     "@kinvolk/headlamp-plugin": "^$${headlamp-plugin-version}"
   }

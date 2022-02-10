@@ -289,6 +289,26 @@ function build(packageFolder) {
   return 0;
 }
 
+/**
+ * Format code with prettier.
+ *
+ * @param packageFolder {string} - folder where the package is.
+ */
+function format(packageFolder) {
+  try {
+    child_process.execSync('prettier --config package.json --write src', {
+      stdio: 'inherit',
+      cwd: packageFolder,
+      encoding: 'utf8',
+    });
+  } catch (e) {
+    console.error(`Problem running prettier inside of "${packageFolder}"`);
+    return 3;
+  }
+
+  return 0;
+}
+
 yargs(process.argv.slice(2))
   .command(
     'build [package]',
@@ -347,6 +367,20 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = extract(argv.pluginPackages, argv.outputPlugins);
+    }
+  )
+  .command(
+    'format [package]',
+    'format the plugin code with prettier. ' + '<package> defaults to current working directory.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to code format',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = format(argv.package);
     }
   )
   .demandCommand(1, '')
