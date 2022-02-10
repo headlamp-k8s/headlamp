@@ -48,18 +48,5 @@
     "plugins"
   ],
   "author": "Kinvolk GmbH",
-  "license": "Apache 2.0",
-  "peerDependencies": {
-    "@kinvolk/es-lint": "^0.20",
-    "typescript": "^3.2.1"
-  },
-  "peerDependenciesMeta": {
-    "@kinvolk/es-lint": {
-      "optional": true
-    },
-    "typescript": {
-      "optional": true
-    }
-  },
-  "devDependencies": {}
+  "license": "Apache 2.0"
 }
