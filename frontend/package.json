@@ -70,7 +70,7 @@
     "build": "if-env PUBLIC_URL react-scripts build || cross-env PUBLIC_URL=./ react-scripts build --max_old_space_size=768 && rimraf build/frontend/index.baseUrl.html",
     "test": "cross-env TEST_TZ=true react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint -c package.json --ext .js,.ts,.tsx src/ ../app/electron ../plugins/headlamp-plugin",
+    "lint": "eslint -c package.json --ext .js,.ts,.tsx src/ ../app/electron ../plugins/headlamp-plugin --ignore-pattern ../plugins/headlamp-plugin/template",
     "format": "prettier --config package.json --write src ../app/electron ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/lib ../plugins/headlamp-plugin/config",
     "format-check": "prettier --config package.json --check src ../app/electron ../plugins/headlamp-plugin",
     "storybook": "start-storybook -p 6006 -s public",

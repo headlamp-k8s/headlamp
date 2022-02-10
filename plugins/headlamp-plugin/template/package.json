@@ -6,6 +6,7 @@
     "start": "headlamp-plugin start",
     "build": "headlamp-plugin build",
     "format": "headlamp-plugin format",
+    "lint": "headlamp-plugin lint",
     "tsc": "tsc"
   },
   "keywords": [
@@ -15,6 +16,13 @@
     "plugins"
   ],
   "prettier": "@kinvolk/eslint-config/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@kinvolk",
+      "prettier",
+      "plugin:jsx-a11y/recommended"
+    ]
+  },
   "devDependencies": {
     "@kinvolk/headlamp-plugin": "^$${headlamp-plugin-version}"
   }

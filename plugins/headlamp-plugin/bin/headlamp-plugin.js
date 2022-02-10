@@ -316,6 +316,27 @@ function format(packageFolder) {
   return 0;
 }
 
+/**
+ * Lint code with eslint.
+ *
+ * @param packageFolder {string} - folder where the package is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ */
+function lint(packageFolder) {
+  try {
+    child_process.execSync('eslint -c package.json --ext .js,.ts,.tsx src/', {
+      stdio: 'inherit',
+      cwd: packageFolder,
+      encoding: 'utf8',
+    });
+  } catch (e) {
+    console.error(`Problem running prettier inside of "${packageFolder}"`);
+    return 1;
+  }
+
+  return 0;
+}
+
 yargs(process.argv.slice(2))
   .command(
     'build [package]',
@@ -388,6 +409,21 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = format(argv.package);
+    }
+  )
+  .command(
+    'lint [package]',
+    'Lint the plugin for coding issues with eslint. ' +
+      '<package> defaults to current working directory.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to lint',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = lint(argv.package);
     }
   )
   .demandCommand(1, '')

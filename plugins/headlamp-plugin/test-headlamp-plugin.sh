@@ -46,3 +46,6 @@ node bin/headlamp-plugin.js create headlamp-myfancy --link
 cd headlamp-myfancy
 npm install ../kinvolk-headlamp-plugin-*.tgz
 npm run format
+
+# test lint command and default code is lint free
+npm run lint 
