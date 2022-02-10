@@ -21,6 +21,7 @@ const headlampPluginPkg = require('../package.json');
  *
  * @param {string} name - name of package and output folder.
  * @param {bool} link - if we link @kinvolk/headlamp-plugin for testing
+ * @returns {0 | 1 | 2 | 3} Exit code, where 0 is success, 1, 2, and 3 are failures.
  */
 function create(name, link) {
   const dstFolder = name;
@@ -154,9 +155,12 @@ function compile(err, stats) {
 }
 
 /**
- * Copies folders of packages in the form: packageName/dist/main.js to packageName/main.js
+ * extract copies folders of packages in the form:
+ *   packageName/dist/main.js to packageName/main.js
  *
- * @returns exit code 0 on success, 1 or 2 on failure.
+ * @param {string} pluginPackagesPath - can be a package or a folder of packages.
+ * @param {string} outputPlugins - folder where the plugins are placed.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function extract(pluginPackagesPath, outputPlugins) {
   if (!fs.existsSync(pluginPackagesPath)) {
@@ -164,7 +168,7 @@ function extract(pluginPackagesPath, outputPlugins) {
     return 1;
   }
   if (!fs.existsSync(outputPlugins)) {
-    console.log(`"${outputPlugins}" did not exist.`);
+    console.log(`"${outputPlugins}" did not exist, making folder.`);
     fs.mkdirSync(outputPlugins);
   }
 
@@ -223,6 +227,7 @@ function extract(pluginPackagesPath, outputPlugins) {
 
 /**
  * Start watching for changes, and build again if there are changes.
+ * @returns {0} Exit code, where 0 is success.
  */
 function start() {
   console.log('Watching for changes to plugin...');
@@ -239,6 +244,7 @@ function start() {
  * Build the plugin package or folder of packages for production.
  *
  * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function build(packageFolder) {
   if (!fs.existsSync(packageFolder)) {
@@ -293,6 +299,7 @@ function build(packageFolder) {
  * Format code with prettier.
  *
  * @param packageFolder {string} - folder where the package is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function format(packageFolder) {
   try {
@@ -303,7 +310,7 @@ function format(packageFolder) {
     });
   } catch (e) {
     console.error(`Problem running prettier inside of "${packageFolder}"`);
-    return 3;
+    return 1;
   }
 
   return 0;
