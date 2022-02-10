@@ -34,6 +34,28 @@ whenever to make a change to the plugin.
 even if the plugins folder is changed. i.e. if you want to serve
 updated plugins, you need to restart the server.
 
+## Code Formatting, Linting, and Type Checking
+
+Your plugin has a few tools built in to help make development easier.
+
+#### Format code with prettier
+
+```bash
+npm run format
+```
+
+#### Find code lint issues with eslint
+
+```bash
+npm run lint
+```
+
+#### Run the type checker
+
+```bash
+npm run tsc
+```
+
 ## Building for production
 
 To build the previous plugin example for production, run the following
@@ -57,7 +79,7 @@ npx @kinvolk/headlamp-plugin build myplugins/headlamp-myfancy
 npx @kinvolk/headlamp-plugin build myplugins
 ```
 
-## Shipping / Deploying Plugins
+## Shipping and Deploying Plugins
 
 Once a plugin is ready to be shipped (built for production) it needs to
 be placed in a "plugins directory", for Headlamp to load them.
