@@ -28,7 +28,6 @@ function create(name, link) {
   const templateFolder = path.resolve(__dirname, '..', 'template');
   const indexPath = path.join(dstFolder, 'src', 'index.tsx');
   const packagePath = path.join(dstFolder, 'package.json');
-  const packageLockPath = path.join(dstFolder, 'package-lock.json');
 
   if (fs.existsSync(name)) {
     console.error(`"${name}" already exists, not initializing`);
@@ -59,7 +58,6 @@ function create(name, link) {
   }
 
   replaceFileVariables(packagePath);
-  replaceFileVariables(packageLockPath);
   replaceFileVariables(indexPath);
 
   // This can be used to make testing locally easier.
