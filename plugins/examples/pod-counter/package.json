@@ -6,20 +6,31 @@
   "description": "Example Headlamp (Kubernetes GUI) plugin. Gets the number of pods in the cluster and displays that information in the top bar.",
   "scripts": {
     "start": "headlamp-plugin start",
-    "build": "headlamp-plugin build"
+    "build": "headlamp-plugin build",
+    "format": "headlamp-plugin format",
+    "lint": "headlamp-plugin lint",
+    "tsc": "tsc"
   },
   "keywords": [
     "headlamp",
-    "kinvolk",
+    "headlamp-plugin",
     "kubernetes",
     "plugins"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kinvolk/headlamp.git",
-    "directory": "plugins/headlamp-plugin-counter"
+    "directory": "plugins/examples/pod-counter"
+  },
+  "prettier": "@kinvolk/eslint-config/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@kinvolk",
+      "prettier",
+      "plugin:jsx-a11y/recommended"
+    ]
   },
   "devDependencies": {
-    "@kinvolk/headlamp-plugin": "^0.3.0"
+    "@kinvolk/headlamp-plugin": "^0.4.1"
   }
 }
