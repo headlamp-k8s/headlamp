@@ -7,14 +7,16 @@ This section will walk you through a basic plugin development.
 
 ## Types
 
-If you are using Typescript for developing the plugin, the `@kinvolk/headlamp-plugin` package does
-ship some type declarations in `@kinvolk/headlamp-plugin/types`.
-Please notice that the whole external plugin mechanics are still in an early development phase
-and thus only the actual type declarations (and not the corresponding code) is shipped in this package at the moment.
+If you are using Typescript for developing the plugin, the 
+`@kinvolk/headlamp-plugin` package does ship some type declarations in
+`@kinvolk/headlamp-plugin/types`. Please notice that the whole external
+plugin mechanics are still in an early development phase and thus only the
+actual type declarations (and not the corresponding code) is shipped in this
+package at the moment.
 
 
 ```typescript
-import { Plugin } from '@kinvolk/headlamp-plugin/types/plugin/index.d';
+import { Headlamp, Plugin, Registry } from '@kinvolk/headlamp-plugin/lib';
 ```
 
 ## Plugin Class
@@ -25,28 +27,31 @@ A plugin class needs an `initialize` method which receives a `register`
 class that offers ways to register different types of actions in the web UI.
 
 Besides declaring the plugin, an instance of it needs to be registered using
-the `window.registerPlugin` method.
+the `Headlamp.registerPlugin` method.
 
 The following example will show a basic plugin declaration and registration
 in a file that should match the `src/index.tsx` structure explained in the
 [building](./building) section.
 
 
-```typescript
-import { Plugin } from '@kinvolk/headlamp-plugin/types/plugin/index.d';
-import Registry from '@kinvolk/headlamp-plugin/types/plugin/registry';
+```tsx
+import { Headlamp, Plugin, Registry } from '@kinvolk/headlamp-plugin/lib';
 
-class MyPlugin implements Plugin {
-  initialize(register: Registry) {
-    // Actual actions registration goes here
+class MyPlugin extends Plugin {
+  initialize(registry: Registry) {
+    console.log('my-plugin initialized');
 
-    // At the moment the return value is ignored, but it will be used
-    // to determine whether the plugin could be initialized.
+    // Register your plugin methods here, like:
+    // registry.registerSidebarItem(...);
+    // registry.registerRoute(...);
+
+    registry.registerAppBarAction('my-plugin-hello', () => <span>Hello</span>);
+
     return true;
   }
 }
 
-window.registerPlugin('my-plugin', new MyPlugin());
+Headlamp.registerPlugin('my-plugin', new MyPlugin());
 ```
 
 ## Plugin Example
@@ -55,13 +60,11 @@ Let's create a plugin that just gets the number of pods in the cluster and
 displays that information in the top bar (i.e. registers an "app bar action").
 
 ```tsx
-import { Plugin } from '@kinvolk/headlamp-plugin/types/plugin/index.d';
-import Registry from '@kinvolk/headlamp-plugin/types/plugin/registry.d';
+import { Headlamp, Plugin, Registry } from '@kinvolk/headlamp-plugin/lib';
+import { Typography } from '@material-ui/core';
 
-const pluginLib = window.pluginLib;
-const React = window.pluginLib.React;
-const K8s = pluginLib.K8s.ResourceClasses;
-const { Typography } = pluginLib.MuiCore;
+// import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
+// import { K8s } from '@kinvolk/headlamp-plugin/lib/K8s';
 
 function PodCounter() {
   const [pods, error] = K8s.Pod.useList();
@@ -72,9 +75,9 @@ function PodCounter() {
   );
 }
 
-class PodCounterPlugin implements Plugin {
-  initialize(register: Registry) {
-    register.registerAppBarAction('monitor', () =>
+class PodCounterPlugin extends Plugin {
+  initialize(registry: Registry) {
+    registry.registerAppBarAction('pod-counter-action', () =>
       <PodCounter />
     );
 
@@ -82,7 +85,7 @@ class PodCounterPlugin implements Plugin {
   }
 }
 
-window.registerPlugin('pod-counter', new PodCounterPlugin());
+Headlamp.registerPlugin('pod-counter', new PodCounterPlugin());
 ```
 
 Here is the result, running Headlamp with this plugin and using with a Minikube cluster:
