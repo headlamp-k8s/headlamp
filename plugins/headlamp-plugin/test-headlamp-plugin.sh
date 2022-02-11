@@ -49,3 +49,4 @@ npm run format
 
 # test lint command and default code is lint free
 npm run lint 
+npm run lint-fix

@@ -318,17 +318,19 @@ function format(packageFolder) {
  * Lint code with eslint.
  *
  * @param packageFolder {string} - folder where the package is.
+ * @param fix {boolean} - automatically fix problems.
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
-function lint(packageFolder) {
+function lint(packageFolder, fix) {
   try {
-    child_process.execSync('eslint -c package.json --ext .js,.ts,.tsx src/', {
+    const extra = fix ? ' --fix' : '';
+    child_process.execSync('eslint -c package.json --ext .js,.ts,.tsx src/' + extra, {
       stdio: 'inherit',
       cwd: packageFolder,
       encoding: 'utf8',
     });
   } catch (e) {
-    console.error(`Problem running prettier inside of "${packageFolder}"`);
+    console.error(`Problem running eslint inside of "${packageFolder}"`);
     return 1;
   }
 
@@ -414,11 +416,16 @@ yargs(process.argv.slice(2))
     'Lint the plugin for coding issues with eslint. ' +
       '<package> defaults to current working directory.',
     yargs => {
-      yargs.positional('package', {
-        describe: 'Package to lint',
-        type: 'string',
-        default: '.',
-      });
+      yargs
+        .positional('package', {
+          describe: 'Package to lint',
+          type: 'string',
+          default: '.',
+        })
+        .option('fix', {
+          describe: 'Automatically fix problems',
+          type: 'boolean',
+        });
     },
     argv => {
       process.exitCode = lint(argv.package);
