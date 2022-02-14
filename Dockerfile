@@ -1,4 +1,4 @@
-ARG IMAGE_BASE=alpine:3.53.0
+ARG IMAGE_BASE=alpine:3.15.0
 FROM $IMAGE_BASE as base-build
 
 ENV GOPATH=/go \
