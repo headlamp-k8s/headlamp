@@ -8,7 +8,7 @@ slug: "lib_k8s"
 
 ### ResourceClasses
 
-• `Const` **ResourceClasses**: `Object`
+• **ResourceClasses**: `Object` = `resourceClassesDict`
 
 #### Index signature
 
@@ -16,7 +16,7 @@ slug: "lib_k8s"
 
 #### Defined in
 
-lib/k8s/index.ts:71
+[lib/k8s/index.ts:73](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/k8s/index.ts#L73)
 
 ## Functions
 
@@ -30,7 +30,7 @@ lib/k8s/index.ts:71
 
 #### Defined in
 
-lib/k8s/index.ts:143
+[lib/k8s/index.ts:145](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/k8s/index.ts#L145)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-lib/k8s/index.ts:126
+[lib/k8s/index.ts:128](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/k8s/index.ts#L128)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-lib/k8s/index.ts:78
+[lib/k8s/index.ts:80](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/k8s/index.ts#L80)
 
 ___
 
@@ -78,4 +78,4 @@ ___
 
 #### Defined in
 
-lib/k8s/index.ts:149
+[lib/k8s/index.ts:151](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/k8s/index.ts#L151)
