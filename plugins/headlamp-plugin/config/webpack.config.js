@@ -58,6 +58,20 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(jpe?g|gif|png|svg)$/i,
+        use: [
+          {
+            loader: require.resolve('url-loader'),
+            options: {
+              limit: false,
+            },
+          },
+          {
+            loader: require.resolve('file-loader'),
+          },
+        ],
+      },
     ],
   },
 };
