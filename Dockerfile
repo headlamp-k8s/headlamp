@@ -8,7 +8,7 @@ ENV GOPATH=/go \
 RUN apk update && \
 	apk add git nodejs npm go ca-certificates make musl-dev bash icu-data
 
-FROM base-build as backend
+FROM base-build AS backend
 
 COPY ./backend /headlamp/backend
 
@@ -16,13 +16,18 @@ WORKDIR /headlamp
 
 RUN cd ./backend && go build -o ./server ./cmd/
 
-FROM base-build as frontend
+# Keep npm install separated so source changes don't trigger install
+FROM base-build AS frontendinstall
+COPY frontend/package*.json /headlamp/frontend/
+WORKDIR /headlamp
+RUN cd ./frontend && npm install --only=prod
 
+FROM frontendinstall AS frontend
 COPY ./frontend /headlamp/frontend
 
 WORKDIR /headlamp
 
-RUN cd ./frontend && npm install --only=prod && npm run build
+RUN cd ./frontend && npm run build
 
 # Backwards compatibility, move plugin folder to only copy matching plugins.
 RUN mv plugins plugins-old || true
