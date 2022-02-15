@@ -1,7 +1,9 @@
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
+  BrandingProps,
   setAppBarAction,
+  setBrandingAppLogoComponent,
   setDetailsView,
   setDetailsViewHeaderAction,
   setRoute,
@@ -125,5 +127,20 @@ export default class Registry {
    */
   registerDetailsViewSection(sectionName: string, sectionFunc: sectionFunc) {
     store.dispatch(setDetailsView(sectionName, sectionFunc));
+  }
+  /**
+   * @param component is a React Component that takes two required props ```JSX logoType``` which is a
+   * constant string literal that accepts either of the two values ```JSX small``` or ```JSX large``` depending on whether
+   * the sidebar is in shrink or expaned state so that you can change your logo from small to large and the other optional
+   * prop is the ```JSX themeName``` which is a string with two values 'light' and 'dark' base on which theme is selected.
+   *
+   *
+   * @example
+   * ```JSX
+   * register.registerAppLogo((props: { logoType: 'small' | 'large', themeName: string}) => <MY_CUSTOM_COMPONENT logoType={logoType}/>)
+   * ```
+   */
+  registerAppLogo(component: BrandingProps['logo']) {
+    store.dispatch(setBrandingAppLogoComponent(component));
   }
 }

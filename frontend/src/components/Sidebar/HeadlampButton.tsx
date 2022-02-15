@@ -1,11 +1,13 @@
+import { SvgIcon } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import SvgIcon from '@material-ui/core/SvgIcon';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { getThemeName } from '../../lib/themes';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ReactComponent as LogoLight } from '../../resources/icon-light.svg';
 import { ReactComponent as LogoWithTextLight } from '../../resources/logo-light.svg';
+import { EmptyContent } from '../common';
 
 const useStyle = makeStyles(theme => ({
   toolbar: {
@@ -44,6 +46,8 @@ export default function HeadlampButton({ open, onToggleOpen, mobileOnly }: Headl
   const isSmall = useMediaQuery('(max-width:600px)');
   const classes = useStyle({ isSidebarOpen: open, isSmall: isSmall });
   const { t } = useTranslation('sidebar');
+  const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
+  const PluginAppLogoComponent = useTypedSelector(state => state.ui.branding.logo);
 
   if (mobileOnly && (!isSmall || (isSmall && open))) {
     return null;
@@ -56,11 +60,24 @@ export default function HeadlampButton({ open, onToggleOpen, mobileOnly }: Headl
         className={classes.button}
         aria-label={open ? t('Shrink sidebar') : t('Expand sidebar')}
       >
-        <SvgIcon
-          className={classes.logo}
-          component={open ? LogoWithTextLight : LogoLight}
-          viewBox="0 0 auto 32"
-        />
+        {
+          // Till all plugins are not loaded show empty content for logo as we might have logo coming from a plugin
+          !arePluginsLoaded ? (
+            <EmptyContent />
+          ) : PluginAppLogoComponent ? (
+            <PluginAppLogoComponent
+              logoType={open ? 'large' : 'small'}
+              themeName={getThemeName()}
+              className={classes.logo}
+            />
+          ) : (
+            <SvgIcon
+              className={classes.logo}
+              component={open ? LogoWithTextLight : LogoLight}
+              viewBox="0 0 auto 32"
+            />
+          )
+        }
       </Button>
     </div>
   );

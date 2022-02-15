@@ -4,8 +4,10 @@ import themesConf, { setTheme } from '../../lib/themes';
 import { sectionFunc } from '../../plugin/registry';
 import {
   Action,
+  BrandingProps,
   HeaderActionFunc,
   UI_APP_BAR_SET_ACTION,
+  UI_BRANDING_SET_APP_LOGO,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
   UI_PLUGINS_LOADED,
   UI_RESET_PLUGIN_VIEWS,
@@ -62,6 +64,7 @@ export interface UIState {
   theme: {
     name: string;
   };
+  branding: BrandingProps;
   pluginsLoaded: boolean;
 }
 
@@ -116,7 +119,10 @@ export const INITIAL_STATE: UIState = {
   theme: {
     name: '',
   },
-  pluginsLoaded: false;
+  pluginsLoaded: false,
+  branding: {
+    logo: null,
+  },
 };
 
 function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
@@ -195,7 +201,12 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       newFilters.pluginsLoaded = action.pluginsLoadedState;
       break;
     }
-   default:
+    case UI_BRANDING_SET_APP_LOGO: {
+      const component = action.component;
+      newFilters.branding.logo = component;
+      break;
+    }
+    default:
       return state;
   }
 
