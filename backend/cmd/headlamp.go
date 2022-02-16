@@ -150,7 +150,7 @@ func getOidcCallbackURL(r *http.Request, config *HeadlampConfig) string {
 		switch {
 		case fwdProto != "":
 			urlScheme = fwdProto
-		case r.Host == "localhost:"+config.port:
+		case strings.HasPrefix(r.Host, "localhost:") || r.TLS == nil:
 			urlScheme = "http"
 		default:
 			urlScheme = "https"
