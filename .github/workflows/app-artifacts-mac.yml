@@ -26,9 +26,6 @@ jobs:
     - name: App Mac
       run: |
         make app-mac
-    - name: Rename Mac 64bit to include arch
-      run: |
-        FILE_PATH=$(echo app/dist/Headlamp*mac.dmg); mv ${FILE_PATH} $(echo ${FILE_PATH}|sed s/mac/mac-x64/)
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
