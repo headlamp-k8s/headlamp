@@ -8,8 +8,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Module: plugin | Headlamp</title>
-    <meta name="description" content="Module: plugin" />
+    <title>Module: plugin/lib | Headlamp</title>
+    <meta name="description" content="Module: plugin/lib" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;600;700&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
@@ -25,9 +25,9 @@
     <meta name="generator" content="Hugo 0.89.0" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Headlamp%!(EXTRA string= %s, string=Module: plugin)" />
-<meta property="og:description" content="Headlamp%!(EXTRA string= %s, string=Module: plugin)" />
-<meta property="og:url" content="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/" />
+<meta property="og:title" content="Headlamp%!(EXTRA string= %s, string=Module: plugin/lib)" />
+<meta property="og:description" content="Headlamp%!(EXTRA string= %s, string=Module: plugin/lib)" />
+<meta property="og:url" content="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/" />
 <meta property="og:site_name" content="Headlamp" />
 <meta property="article:modified_time" content="2021-11-02T10:00:18Z" /><link rel="stylesheet" href="https://kinvolk.github.io/headlamp/css/font-awesome.min.css">
 
@@ -38,7 +38,7 @@
 </head>
 <body class="docs page">
 
-    <title>Module: plugin | Headlamp</title>
+    <title>Module: plugin/lib | Headlamp</title>
   </head>
   <body class="td-page">
     <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
@@ -709,7 +709,21 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassespluginplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin.plugin/">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_libheadlamp"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/">
+                Headlamp
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_libplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/">
                 Plugin
               </a>
             </li>
@@ -865,8 +879,8 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docslatestdevelopmentapimodulesplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/">
-                plugin
+              <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docslatestdevelopmentapimodulesplugin_lib"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/">
+                plugin/lib
               </a>
             </li>
             
@@ -1197,7 +1211,7 @@
 	
 	
 	
-	<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/">plugin</a>
+	<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/">plugin/lib</a>
 </li>
 
 	</ol>
@@ -1240,7 +1254,7 @@
             
     <div class="td-content">
     
-  <h1>Module: plugin</h1>
+  <h1>Module: plugin/lib</h1>
   
 
 
@@ -1253,22 +1267,22 @@
 
 
 
+<p>The lib.ts file should carry the bits to be used by plugins whereas
+the index.ts should have the functions that Headlamp itself needs for
+loading the plugins.</p>
 <h2 id="classes">Classes</h2>
 <ul>
 <li>
 
 
-<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin.plugin/">Plugin</a>
+<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/">Headlamp</a>
+</li>
+<li>
+
+
+<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/">Plugin</a>
 </li>
 </ul>
-<h2 id="functions">Functions</h2>
-<h3 id="initializeplugins">initializePlugins</h3>
-<p>▸ <strong>initializePlugins</strong>(): <code>Promise</code>&lt;<code>unknown</code>&gt;</p>
-<p>Load external, then local plugins. Then initialize() them in order with a Registry.</p>
-<h4 id="returns">Returns</h4>
-<p><code>Promise</code>&lt;<code>unknown</code>&gt;</p>
-<h4 id="defined-in">Defined in</h4>
-<p>plugin/index.tsx:211</p>
 
 
     </div>
@@ -1288,7 +1302,7 @@
                 
                 
                 <a
-                  href="https://github.com/kinvolk/headlamp/edit/main/docs/development/api/modules/plugin.md"
+                  href="https://github.com/kinvolk/headlamp/edit/main/docs/development/api/modules/plugin_lib.md"
                   class="btn btn-md mt-2"
                   style="border: 2px solid #afafaf; padding: 4px 2px; font-weight: inherit;"
                 >
@@ -1322,17 +1336,6 @@
 
 
 
-
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#classes">Classes</a></li>
-    <li><a href="#functions">Functions</a>
-      <ul>
-        <li><a href="#initializeplugins">initializePlugins</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
 
 
 

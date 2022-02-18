@@ -13,19 +13,15 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s/</guid>
-      <description>Variables ResourceClasses • Const ResourceClasses: Object
+      <description>Variables ResourceClasses • ResourceClasses: Object = resourceClassesDict
 Index signature ▪ [className: string]: KubeObject
-Defined in lib/k8s/index.ts:71
-Functions getVersion ▸ getVersion(): Promise&amp;lt;StringDict&amp;gt;
+Defined in  lib/k8s/index.ts:73 Functions getVersion ▸ getVersion(): Promise&amp;lt;StringDict&amp;gt;
 Returns Promise&amp;lt;StringDict&amp;gt;
-Defined in lib/k8s/index.ts:143
- useCluster ▸ useCluster(): null | string
+Defined in  lib/k8s/index.ts:145  useCluster ▸ useCluster(): null | string
 Returns null | string
-Defined in lib/k8s/index.ts:126
- useClustersConf ▸ useClustersConf(): ConfigState[&amp;quot;clusters&amp;quot;]
+Defined in  lib/k8s/index.ts:128  useClustersConf ▸ useClustersConf(): ConfigState[&amp;quot;clusters&amp;quot;]
 Returns ConfigState[&amp;quot;clusters&amp;quot;]
-Defined in lib/k8s/index.ts:78
- useConnectApi ▸ useConnectApi(&amp;hellip;apiCalls): void
+Defined in  lib/k8s/index.ts:80  useConnectApi ▸ useConnectApi(&amp;hellip;apiCalls): void
 Parameters    Name Type     ...apiCalls () =&amp;gt; CancellablePromise[]    Returns void</description>
     </item>
     
@@ -35,28 +31,22 @@ Parameters    Name Type     ...apiCalls () =&amp;gt; CancellablePromise[]    Ret
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util/</guid>
-      <description>Interfaces   FilterState   Variables CLUSTER_ACTION_GRACE_PERIOD • Const CLUSTER_ACTION_GRACE_PERIOD: 5000
-Defined in lib/util.ts:17
-Functions filterResource ▸ filterResource(item, filter): boolean
-Parameters    Name Type     item KubeObjectInterface   filter FilterState     Returns boolean
-Defined in lib/util.ts:84
- getCluster ▸ getCluster(): string | null
+      <description>Interfaces   FilterState   Variables CLUSTER_ACTION_GRACE_PERIOD • CLUSTER_ACTION_GRACE_PERIOD: 5000
+Defined in  lib/util.ts:18 Functions filterResource ▸ filterResource(item, filter, matchCriteria?): boolean
+Parameters    Name Type     item KubeObjectInterface   filter FilterState    matchCriteria? string[]    Returns boolean
+Defined in  lib/util.ts:85  getCluster ▸ getCluster(): string | null
 Returns string | null
-Defined in lib/util.ts:119
- getClusterPrefixedPath ▸ getClusterPrefixedPath(path?): string
-Parameters    Name Type     path?</description>
+Defined in  lib/util.ts:153  getClusterPrefixedPath ▸ getClusterPrefixedPath(path?</description>
     </item>
     
     <item>
-      <title>Module: plugin</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/</link>
+      <title>Module: plugin/lib</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/</guid>
-      <description>Classes   Plugin   Functions initializePlugins ▸ initializePlugins(): Promise&amp;lt;unknown&amp;gt;
-Load external, then local plugins. Then initialize() them in order with a Registry.
-Returns Promise&amp;lt;unknown&amp;gt;
-Defined in plugin/index.tsx:211</description>
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/</guid>
+      <description>The lib.ts file should carry the bits to be used by plugins whereas the index.ts should have the functions that Headlamp itself needs for loading the plugins.
+Classes   Headlamp   Plugin   </description>
     </item>
     
     <item>
@@ -65,7 +55,10 @@ Defined in plugin/index.tsx:211</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_registry/</guid>
-      <description>Classes   default   </description>
+      <description>Classes   default   Type aliases sectionFunc Ƭ sectionFunc: (resource: KubeObject) =&amp;gt; SectionFuncProps | null | undefined
+Type declaration ▸ (resource): SectionFuncProps | null | undefined
+Parameters    Name Type     resource KubeObject    Returns SectionFuncProps | null | undefined
+Defined in  plugin/registry.tsx:17 </description>
     </item>
     
   </channel>

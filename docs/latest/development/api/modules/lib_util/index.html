@@ -709,7 +709,21 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassespluginplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin.plugin/">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_libheadlamp"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/">
+                Headlamp
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_libplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/">
                 Plugin
               </a>
             </li>
@@ -865,8 +879,8 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimodulesplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/">
-                plugin
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimodulesplugin_lib"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/">
+                plugin/lib
               </a>
             </li>
             
@@ -1263,12 +1277,16 @@
 </ul>
 <h2 id="variables">Variables</h2>
 <h3 id="cluster_action_grace_period">CLUSTER_ACTION_GRACE_PERIOD</h3>
-<p>• <code>Const</code> <strong>CLUSTER_ACTION_GRACE_PERIOD</strong>: <code>5000</code></p>
+<p>• <strong>CLUSTER_ACTION_GRACE_PERIOD</strong>: <code>5000</code></p>
 <h4 id="defined-in">Defined in</h4>
-<p>lib/util.ts:17</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L18" target="_blank" rel="noopener">lib/util.ts:18</a>
+</p>
 <h2 id="functions">Functions</h2>
 <h3 id="filterresource">filterResource</h3>
-<p>▸ <strong>filterResource</strong>(<code>item</code>, <code>filter</code>): <code>boolean</code></p>
+<p>▸ <strong>filterResource</strong>(<code>item</code>, <code>filter</code>, <code>matchCriteria?</code>): <code>boolean</code></p>
 <h4 id="parameters">Parameters</h4>
 <table>
 <thead>
@@ -1290,19 +1308,31 @@
 <a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_util.filterstate/"><code>FilterState</code></a>
 </td>
 </tr>
+<tr>
+<td style="text-align:left"><code>matchCriteria?</code></td>
+<td style="text-align:left"><code>string</code>[]</td>
+</tr>
 </tbody>
 </table>
 <h4 id="returns">Returns</h4>
 <p><code>boolean</code></p>
 <h4 id="defined-in-1">Defined in</h4>
-<p>lib/util.ts:84</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L85" target="_blank" rel="noopener">lib/util.ts:85</a>
+</p>
 <hr>
 <h3 id="getcluster">getCluster</h3>
 <p>▸ <strong>getCluster</strong>(): <code>string</code> | <code>null</code></p>
 <h4 id="returns-1">Returns</h4>
 <p><code>string</code> | <code>null</code></p>
 <h4 id="defined-in-2">Defined in</h4>
-<p>lib/util.ts:119</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L153" target="_blank" rel="noopener">lib/util.ts:153</a>
+</p>
 <hr>
 <h3 id="getclusterprefixedpath">getClusterPrefixedPath</h3>
 <p>▸ <strong>getClusterPrefixedPath</strong>(<code>path?</code>): <code>string</code></p>
@@ -1317,14 +1347,18 @@
 <tbody>
 <tr>
 <td style="text-align:left"><code>path?</code></td>
-<td style="text-align:left"><code>string</code> | <code>null</code></td>
+<td style="text-align:left"><code>null</code> | <code>string</code></td>
 </tr>
 </tbody>
 </table>
 <h4 id="returns-2">Returns</h4>
 <p><code>string</code></p>
 <h4 id="defined-in-3">Defined in</h4>
-<p>lib/util.ts:111</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L145" target="_blank" rel="noopener">lib/util.ts:145</a>
+</p>
 <hr>
 <h3 id="getpercentstr">getPercentStr</h3>
 <p>▸ <strong>getPercentStr</strong>(<code>value</code>, <code>total</code>): <code>null</code> | <code>string</code></p>
@@ -1350,7 +1384,11 @@
 <h4 id="returns-3">Returns</h4>
 <p><code>null</code> | <code>string</code></p>
 <h4 id="defined-in-4">Defined in</h4>
-<p>lib/util.ts:33</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L34" target="_blank" rel="noopener">lib/util.ts:34</a>
+</p>
 <hr>
 <h3 id="getreadyreplicas">getReadyReplicas</h3>
 <p>▸ <strong>getReadyReplicas</strong>(<code>item</code>): <code>any</code></p>
@@ -1372,7 +1410,11 @@
 <h4 id="returns-4">Returns</h4>
 <p><code>any</code></p>
 <h4 id="defined-in-5">Defined in</h4>
-<p>lib/util.ts:42</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L43" target="_blank" rel="noopener">lib/util.ts:43</a>
+</p>
 <hr>
 <h3 id="getresourcemetrics">getResourceMetrics</h3>
 <p>▸ <strong>getResourceMetrics</strong>(<code>item</code>, <code>metrics</code>, <code>resourceType</code>): <code>any</code>[]</p>
@@ -1402,7 +1444,11 @@
 <h4 id="returns-5">Returns</h4>
 <p><code>any</code>[]</p>
 <h4 id="defined-in-6">Defined in</h4>
-<p>lib/util.ts:60</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L61" target="_blank" rel="noopener">lib/util.ts:61</a>
+</p>
 <hr>
 <h3 id="getresourcestr">getResourceStr</h3>
 <p>▸ <strong>getResourceStr</strong>(<code>value</code>, <code>resourceType</code>): <code>string</code></p>
@@ -1428,7 +1474,11 @@
 <h4 id="returns-6">Returns</h4>
 <p><code>string</code></p>
 <h4 id="defined-in-7">Defined in</h4>
-<p>lib/util.ts:50</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L51" target="_blank" rel="noopener">lib/util.ts:51</a>
+</p>
 <hr>
 <h3 id="gettotalreplicas">getTotalReplicas</h3>
 <p>▸ <strong>getTotalReplicas</strong>(<code>item</code>): <code>any</code></p>
@@ -1450,7 +1500,11 @@
 <h4 id="returns-7">Returns</h4>
 <p><code>any</code></p>
 <h4 id="defined-in-8">Defined in</h4>
-<p>lib/util.ts:46</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L47" target="_blank" rel="noopener">lib/util.ts:47</a>
+</p>
 <hr>
 <h3 id="localedate">localeDate</h3>
 <p>▸ <strong>localeDate</strong>(<code>date</code>): <code>string</code></p>
@@ -1472,7 +1526,11 @@
 <h4 id="returns-8">Returns</h4>
 <p><code>string</code></p>
 <h4 id="defined-in-9">Defined in</h4>
-<p>lib/util.ts:25</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L26" target="_blank" rel="noopener">lib/util.ts:26</a>
+</p>
 <hr>
 <h3 id="timeago">timeAgo</h3>
 <p>▸ <strong>timeAgo</strong>(<code>date</code>): <code>string</code></p>
@@ -1494,7 +1552,11 @@
 <h4 id="returns-9">Returns</h4>
 <p><code>string</code></p>
 <h4 id="defined-in-10">Defined in</h4>
-<p>lib/util.ts:21</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L22" target="_blank" rel="noopener">lib/util.ts:22</a>
+</p>
 <hr>
 <h3 id="useerrorstate">useErrorState</h3>
 <p>▸ <strong>useErrorState</strong>(<code>dependentSetter?</code>): <code>any</code>[]</p>
@@ -1516,14 +1578,33 @@
 <h4 id="returns-10">Returns</h4>
 <p><code>any</code>[]</p>
 <h4 id="defined-in-11">Defined in</h4>
-<p>lib/util.ts:131</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L165" target="_blank" rel="noopener">lib/util.ts:165</a>
+</p>
 <hr>
 <h3 id="usefilterfunc">useFilterFunc</h3>
-<p>▸ <strong>useFilterFunc</strong>(): (<code>item</code>: <code>KubeObjectInterface</code>) =&gt; <code>boolean</code></p>
+<p>▸ <strong>useFilterFunc</strong>(<code>matchCriteria?</code>): (<code>item</code>: <code>KubeObjectInterface</code>) =&gt; <code>boolean</code></p>
+<h4 id="parameters-10">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>matchCriteria?</code></td>
+<td style="text-align:left"><code>string</code>[]</td>
+</tr>
+</tbody>
+</table>
 <h4 id="returns-11">Returns</h4>
 <p><code>fn</code></p>
 <p>▸ (<code>item</code>): <code>boolean</code></p>
-<h5 id="parameters-10">Parameters</h5>
+<h5 id="parameters-11">Parameters</h5>
 <table>
 <thead>
 <tr>
@@ -1541,7 +1622,11 @@
 <h5 id="returns-12">Returns</h5>
 <p><code>boolean</code></p>
 <h4 id="defined-in-12">Defined in</h4>
-<p>lib/util.ts:106</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L140" target="_blank" rel="noopener">lib/util.ts:140</a>
+</p>
 
 
     </div>

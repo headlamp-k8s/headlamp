@@ -709,7 +709,21 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassespluginplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin.plugin/">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_libheadlamp"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/">
+                Headlamp
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_libplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/">
                 Plugin
               </a>
             </li>
@@ -865,8 +879,8 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimodulesplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/">
-                plugin
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimodulesplugin_lib"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/">
+                plugin/lib
               </a>
             </li>
             
@@ -1248,17 +1262,19 @@
 
 <p>This section will walk you through a basic plugin development.</p>
 <h2 id="types">Types</h2>
-<p>If you are using Typescript for developing the plugin, the <code>@kinvolk/headlamp-plugin</code> package does
-ship some type declarations in <code>@kinvolk/headlamp-plugin/types</code>.
-Please notice that the whole external plugin mechanics are still in an early development phase
-and thus only the actual type declarations (and not the corresponding code) is shipped in this package at the moment.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Plugin</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@kinvolk/headlamp-plugin/types/plugin/index.d&#39;</span>;
+<p>If you are using Typescript for developing the plugin, the
+<code>@kinvolk/headlamp-plugin</code> package does ship some type declarations in
+<code>@kinvolk/headlamp-plugin/types</code>. Please notice that the whole external
+plugin mechanics are still in an early development phase and thus only the
+actual type declarations (and not the corresponding code) is shipped in this
+package at the moment.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Headlamp</span>, <span style="color:#a6e22e">Plugin</span>, <span style="color:#a6e22e">Registry</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@kinvolk/headlamp-plugin/lib&#39;</span>;
 </code></pre></div><h2 id="plugin-class">Plugin Class</h2>
 <p>Plugins are classes that register actions when they are initialized.</p>
 <p>A plugin class needs an <code>initialize</code> method which receives a <code>register</code>
 class that offers ways to register different types of actions in the web UI.</p>
 <p>Besides declaring the plugin, an instance of it needs to be registered using
-the <code>window.registerPlugin</code> method.</p>
+the <code>Headlamp.registerPlugin</code> method.</p>
 <p>The following example will show a basic plugin declaration and registration
 in a file that should match the <code>src/index.tsx</code> structure explained in the
 
@@ -1266,31 +1282,32 @@ in a file that should match the <code>src/index.tsx</code> structure explained i
 
 <a href="https://kinvolk.github.io/headlamp/docs/latest/development/plugins/building/">building</a>
  section.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Plugin</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@kinvolk/headlamp-plugin/types/plugin/index.d&#39;</span>;
-<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Registry</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@kinvolk/headlamp-plugin/types/plugin/registry&#39;</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Headlamp</span>, <span style="color:#a6e22e">Plugin</span>, <span style="color:#a6e22e">Registry</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@kinvolk/headlamp-plugin/lib&#39;</span>;
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyPlugin</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">Plugin</span> {
-  <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">register</span>: <span style="color:#66d9ef">Registry</span>) {
-    <span style="color:#75715e">// Actual actions registration goes here
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyPlugin</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Plugin</span> {
+  <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>: <span style="color:#66d9ef">Registry</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;my-plugin initialized&#39;</span>);
+
+    <span style="color:#75715e">// Register your plugin methods here, like:
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// registry.registerSidebarItem(...);
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// registry.registerRoute(...);
 </span><span style="color:#75715e"></span>
-    <span style="color:#75715e">// At the moment the return value is ignored, but it will be used
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// to determine whether the plugin could be initialized.
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+    <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerAppBarAction</span>(<span style="color:#e6db74">&#39;my-plugin-hello&#39;</span>, () <span style="color:#f92672">=&gt;</span> &lt;<span style="color:#f92672">span</span>&gt;<span style="color:#a6e22e">Hello</span>&lt;/<span style="color:#f92672">span</span>&gt;);
+
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
   }
 }
 
-window.<span style="color:#a6e22e">registerPlugin</span>(<span style="color:#e6db74">&#39;my-plugin&#39;</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">MyPlugin</span>());
+<span style="color:#a6e22e">Headlamp</span>.<span style="color:#a6e22e">registerPlugin</span>(<span style="color:#e6db74">&#39;my-plugin&#39;</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">MyPlugin</span>());
 </code></pre></div><h2 id="plugin-example">Plugin Example</h2>
 <p>Let&rsquo;s create a plugin that just gets the number of pods in the cluster and
 displays that information in the top bar (i.e. registers an &ldquo;app bar action&rdquo;).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Plugin</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@kinvolk/headlamp-plugin/types/plugin/index.d&#39;</span>;
-<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Registry</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@kinvolk/headlamp-plugin/types/plugin/registry.d&#39;</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Headlamp</span>, <span style="color:#a6e22e">Plugin</span>, <span style="color:#a6e22e">Registry</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@kinvolk/headlamp-plugin/lib&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Typography</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@material-ui/core&#39;</span>;
 
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pluginLib</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">pluginLib</span>;
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">React</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">pluginLib</span>.<span style="color:#a6e22e">React</span>;
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">K8s</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pluginLib</span>.<span style="color:#a6e22e">K8s</span>.<span style="color:#a6e22e">ResourceClasses</span>;
-<span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">Typography</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">pluginLib</span>.<span style="color:#a6e22e">MuiCore</span>;
-
+<span style="color:#75715e">// import { SectionBox } from &#39;@kinvolk/headlamp-plugin/lib/CommonComponents&#39;;
+</span><span style="color:#75715e">// import { K8s } from &#39;@kinvolk/headlamp-plugin/lib/K8s&#39;;
+</span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">PodCounter() {</span>
   <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">pods</span>, <span style="color:#a6e22e">error</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">K8s</span>.<span style="color:#a6e22e">Pod</span>.<span style="color:#a6e22e">useList</span>();
   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">msg</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pods</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;Loading…&#39;</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">pods</span>.<span style="color:#a6e22e">length</span>.<span style="color:#a6e22e">toString</span>();
@@ -1300,9 +1317,9 @@ displays that information in the top bar (i.e. registers an &ldquo;app bar actio
   );
 }
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PodCounterPlugin</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">Plugin</span> {
-  <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">register</span>: <span style="color:#66d9ef">Registry</span>) {
-    <span style="color:#a6e22e">register</span>.<span style="color:#a6e22e">registerAppBarAction</span>(<span style="color:#e6db74">&#39;monitor&#39;</span>, () <span style="color:#f92672">=&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PodCounterPlugin</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Plugin</span> {
+  <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>: <span style="color:#66d9ef">Registry</span>) {
+    <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerAppBarAction</span>(<span style="color:#e6db74">&#39;pod-counter-action&#39;</span>, () <span style="color:#f92672">=&gt;</span>
       &lt;<span style="color:#f92672">PodCounter</span> /&gt;
     );
 
@@ -1310,7 +1327,7 @@ displays that information in the top bar (i.e. registers an &ldquo;app bar actio
   }
 }
 
-window.<span style="color:#a6e22e">registerPlugin</span>(<span style="color:#e6db74">&#39;pod-counter&#39;</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PodCounterPlugin</span>());
+<span style="color:#a6e22e">Headlamp</span>.<span style="color:#a6e22e">registerPlugin</span>(<span style="color:#e6db74">&#39;pod-counter&#39;</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PodCounterPlugin</span>());
 </code></pre></div><p>Here is the result, running Headlamp with this plugin and using with a Minikube cluster:</p>
 <p><img src="https://kinvolk.github.io/headlamp/docs/latest/development/plugins/./podcounter_screenshot.png" alt="screenshot showing a label on the top bar with the number of pods available"></p>
 <p>Please refer to the 

@@ -709,7 +709,21 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassespluginplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin.plugin/">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_libheadlamp"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/">
+                Headlamp
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_libplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/">
                 Plugin
               </a>
             </li>
@@ -865,8 +879,8 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimodulesplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/">
-                plugin
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimodulesplugin_lib"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/">
+                plugin/lib
               </a>
             </li>
             
@@ -1292,7 +1306,11 @@
 <h4 id="returns">Returns</h4>
 <p><code>void</code></p>
 <h4 id="defined-in">Defined in</h4>
-<p>plugin/registry.tsx:101</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/registry.tsx#L110" target="_blank" rel="noopener">plugin/registry.tsx:110</a>
+</p>
 <hr>
 <h3 id="registerdetailsviewheaderaction">registerDetailsViewHeaderAction</h3>
 <p>▸ <strong>registerDetailsViewHeaderAction</strong>(<code>actionName</code>, <code>actionFunc</code>): <code>void</code></p>
@@ -1326,7 +1344,51 @@
 <h4 id="returns-1">Returns</h4>
 <p><code>void</code></p>
 <h4 id="defined-in-1">Defined in</h4>
-<p>plugin/registry.tsx:82</p>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/registry.tsx#L91" target="_blank" rel="noopener">plugin/registry.tsx:91</a>
+</p>
+<hr>
+<h3 id="registerdetailsviewsection">registerDetailsViewSection</h3>
+<p>▸ <strong>registerDetailsViewSection</strong>(<code>sectionName</code>, <code>sectionFunc</code>): <code>void</code></p>
+<p>Append the specified title and component to the details view.</p>
+<p><strong><code>example</code></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSX" data-lang="JSX"><span style="color:#a6e22e">register</span>.<span style="color:#a6e22e">registerDetailsViewSection</span>(<span style="color:#e6db74">&#34;biolatency&#34;</span>, (<span style="color:#a6e22e">resource</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">KubeObject</span>) =&gt; { <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Block I/O Latency&#39;</span>, <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">props</span>) =&gt; &lt;<span style="color:#f92672">BioLatency</span> {<span style="color:#a6e22e">...props</span>} <span style="color:#a6e22e">resource</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">resource</span>}/&gt;});
+</code></pre></div><h4 id="parameters-2">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>sectionName</code></td>
+<td style="text-align:left"><code>string</code></td>
+<td style="text-align:left">a unique name for it</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>sectionFunc</code></td>
+<td style="text-align:left">
+
+
+<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_registry/#sectionfunc"><code>sectionFunc</code></a>
+</td>
+<td style="text-align:left">a function that returns your detail view component with props                      passed into it and the section title</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-2">Returns</h4>
+<p><code>void</code></p>
+<h4 id="defined-in-2">Defined in</h4>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/registry.tsx#L126" target="_blank" rel="noopener">plugin/registry.tsx:126</a>
+</p>
 <hr>
 <h3 id="registerroute">registerRoute</h3>
 <p>▸ <strong>registerRoute</strong>(<code>routeSpec</code>): <code>void</code></p>
@@ -1344,7 +1406,7 @@
   <span style="color:#a6e22e">sidebar</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;traces&#39;</span>,
   <span style="color:#a6e22e">component</span><span style="color:#f92672">:</span> () =&gt; &lt;<span style="color:#f92672">TraceList</span> /&gt;
 });
-</code></pre></div><h4 id="parameters-2">Parameters</h4>
+</code></pre></div><h4 id="parameters-3">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -1361,17 +1423,21 @@
 </tr>
 </tbody>
 </table>
-<h4 id="returns-2">Returns</h4>
+<h4 id="returns-3">Returns</h4>
 <p><code>void</code></p>
-<h4 id="defined-in-2">Defined in</h4>
-<p>plugin/registry.tsx:63</p>
+<h4 id="defined-in-3">Defined in</h4>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/registry.tsx#L72" target="_blank" rel="noopener">plugin/registry.tsx:72</a>
+</p>
 <hr>
 <h3 id="registersidebaritem">registerSidebarItem</h3>
 <p>▸ <strong>registerSidebarItem</strong>(<code>parentName</code>, <code>itemName</code>, <code>itemLabel</code>, <code>url</code>, <code>opts?</code>): <code>void</code></p>
 <p>Add a SidebarItem.</p>
 <p><strong><code>example</code></strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">registerSidebarItem</span>(<span style="color:#e6db74">&#39;cluster&#39;</span>, <span style="color:#e6db74">&#39;traces&#39;</span>, <span style="color:#e6db74">&#39;Traces&#39;</span>, <span style="color:#e6db74">&#39;/traces&#39;</span>);
-</code></pre></div><h4 id="parameters-3">Parameters</h4>
+</code></pre></div><h4 id="parameters-4">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -1420,10 +1486,14 @@
 </tr>
 </tbody>
 </table>
-<h4 id="returns-3">Returns</h4>
+<h4 id="returns-4">Returns</h4>
 <p><code>void</code></p>
-<h4 id="defined-in-3">Defined in</h4>
-<p>plugin/registry.tsx:26</p>
+<h4 id="defined-in-4">Defined in</h4>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/registry.tsx#L35" target="_blank" rel="noopener">plugin/registry.tsx:35</a>
+</p>
 
 
     </div>
@@ -1489,6 +1559,7 @@
       <ul>
         <li><a href="#registerappbaraction">registerAppBarAction</a></li>
         <li><a href="#registerdetailsviewheaderaction">registerDetailsViewHeaderAction</a></li>
+        <li><a href="#registerdetailsviewsection">registerDetailsViewSection</a></li>
         <li><a href="#registerroute">registerRoute</a></li>
         <li><a href="#registersidebaritem">registerSidebarItem</a></li>
       </ul>

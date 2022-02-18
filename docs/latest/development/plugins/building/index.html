@@ -709,7 +709,21 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassespluginplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin.plugin/">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_libheadlamp"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/">
+                Headlamp
+              </a>
+            </li>
+            
+          
+        
+          
+            
+            
+            
+            
+            
+            <li class="show">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiclassesplugin_libplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/">
                 Plugin
               </a>
             </li>
@@ -865,8 +879,8 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimodulesplugin"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/">
-                plugin
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapimodulesplugin_lib"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/">
+                plugin/lib
               </a>
             </li>
             
@@ -1250,8 +1264,8 @@ Headlamp, you can watch this quick
 
 
 <a href="https://www.youtube.com/watch?v=vyki8c6AkeE" target="_blank" rel="noopener">video</a>
- to see how simple it is to
-get started.</p>
+
+to see how simple it is to get started.</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube-nocookie.com/embed/vyki8c6AkeE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
@@ -1259,21 +1273,33 @@ get started.</p>
 
 <h2 id="creating-a-new-plugin">Creating a new plugin</h2>
 <p>This is how to start a new plugin:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npx @kinvolk/headlamp-plugin create headlamp-myfancy
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npx --yes @kinvolk/headlamp-plugin create headlamp-myfancy
 cd headlamp-myfancy
 npm run start
-</code></pre></div><p>Now run Headlamp (the desktop app or the
+</code></pre></div><p>There&rsquo;s some basic code inside src/index.tsx.</p>
+<p>Now run Headlamp (the desktop app or the
 
 
 
 <a href="../index.md##run-the-code">development version</a>
-), and your plugin should be loaded.</p>
+),
+and your plugin should be loaded.</p>
 <p>Using the above commands means that Headlamp will <strong>automatically reload</strong>
 whenever to make a change to the plugin.</p>
 <p>ℹ️ This automatic reload does not happen when running in-cluster,
 even if the plugins folder is changed. i.e. if you want to serve
 updated plugins, you need to restart the server.</p>
-<h2 id="building-for-production">Building for production</h2>
+<h2 id="code-formatting-linting-and-type-checking">Code Formatting, Linting, and Type Checking</h2>
+<p>Your plugin has a few tools built in to help make development easier.</p>
+<h4 id="format-code-with-prettier">Format code with prettier</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm run format
+</code></pre></div><h4 id="find-code-lint-issues-with-eslint">Find code lint issues with eslint</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm run lint
+</code></pre></div><p>Eslint also allows you to try and automatically fix issues.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm run lint-fix
+</code></pre></div><h4 id="run-the-type-checker">Run the type checker</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm run tsc
+</code></pre></div><h2 id="building-for-production">Building for production</h2>
 <p>To build the previous plugin example for production, run the following
 command:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd headlamp-myfancy
@@ -1285,7 +1311,7 @@ npm run build
 package or folder of packages.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npx @kinvolk/headlamp-plugin build myplugins/headlamp-myfancy
 npx @kinvolk/headlamp-plugin build myplugins
-</code></pre></div><h2 id="shipping--deploying-plugins">Shipping / Deploying Plugins</h2>
+</code></pre></div><h2 id="shipping-and-deploying-plugins">Shipping and Deploying Plugins</h2>
 <p>Once a plugin is ready to be shipped (built for production) it needs to
 be placed in a &ldquo;plugins directory&rdquo;, for Headlamp to load them.</p>
 <p>For example, if we have built 3 plugins called MyPlugin1, MyPlugin2, and
@@ -1367,12 +1393,17 @@ or within the current folder as <code>.plugins</code> if the former doesn&rsquo;
 <nav id="TableOfContents">
   <ul>
     <li><a href="#creating-a-new-plugin">Creating a new plugin</a></li>
+    <li><a href="#code-formatting-linting-and-type-checking">Code Formatting, Linting, and Type Checking</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
     <li><a href="#building-for-production">Building for production</a>
       <ul>
         <li><a href="#building-a-folder-of-packages-at-once">Building a folder of packages at once</a></li>
       </ul>
     </li>
-    <li><a href="#shipping--deploying-plugins">Shipping / Deploying Plugins</a>
+    <li><a href="#shipping-and-deploying-plugins">Shipping and Deploying Plugins</a>
       <ul>
         <li><a href="#in-cluster-deployment-with-plugins">In-cluster deployment with plugins</a></li>
         <li><a href="#using-plugins-on-the-desktop-version">Using plugins on the desktop version</a></li>

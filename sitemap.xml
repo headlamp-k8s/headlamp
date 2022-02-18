@@ -96,6 +96,8 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/plugins/how-to/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/plugins/how-to/</loc>
@@ -126,11 +128,11 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/api/classes/plugin.plugin-1/</loc>
   </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin.plugin/</loc>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/api/modules/plugin/</loc>
   </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin/</loc>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/api/modules/plugin_registry/</loc>
   </url><url>

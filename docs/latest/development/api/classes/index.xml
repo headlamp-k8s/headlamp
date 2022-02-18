@@ -22,13 +22,28 @@ register.registerAppBarAction(&amp;#39;monitor&amp;#39;, () =&amp;gt; &amp;lt;Mo
     </item>
     
     <item>
-      <title>Class: Plugin</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin.plugin/</link>
+      <title>Class: Headlamp</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin.plugin/</guid>
-      <description>plugin .Plugin
-Plugins should call registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/</guid>
+      <description>plugin/lib .Headlamp
+This class is a more convenient way for plugins to call registerPlugin in order to register themselves.
+Constructors constructor • new Headlamp()
+Methods registerPlugin ▸ Static registerPlugin(pluginId, pluginObj): void
+Got a new plugin to add? Well, registerPlugin is your friend.
+example
+const myPlugin = { initialize: (register) =&amp;gt; { // do some stuff with register  // use some libraries in window.pluginLib  return true; } } Headlamp.</description>
+    </item>
+    
+    <item>
+      <title>Class: Plugin</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/</guid>
+      <description>plugin/lib .Plugin
+Plugins should call Headlamp.registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
 They will have their initialize(register) method called at plugin initialization time.
 Constructors constructor • new Plugin()
 Methods initialize ▸ Abstract initialize(register): boolean

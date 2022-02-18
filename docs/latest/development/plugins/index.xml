@@ -16,7 +16,7 @@
       <description>This section explains how to start developing a Headlamp plugin, and how to ship it once finished.
 Before you dive into the following sections on how to develop plugins for Headlamp, you can watch this quick video to see how simple it is to get started.
   Creating a new plugin This is how to start a new plugin:
-npx @kinvolk/headlamp-plugin create headlamp-myfancy cd headlamp-myfancy npm run start Now run Headlamp (the desktop app or the development version ), and your plugin should be loaded.</description>
+npx --yes @kinvolk/headlamp-plugin create headlamp-myfancy cd headlamp-myfancy npm run start There&amp;rsquo;s some basic code inside src/index.</description>
     </item>
     
     <item>
@@ -39,7 +39,7 @@ The main ones are:
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/plugins/how-to/</guid>
       <description>This section will walk you through a basic plugin development.
 Types If you are using Typescript for developing the plugin, the @kinvolk/headlamp-plugin package does ship some type declarations in @kinvolk/headlamp-plugin/types. Please notice that the whole external plugin mechanics are still in an early development phase and thus only the actual type declarations (and not the corresponding code) is shipped in this package at the moment.
-import { Plugin } from &amp;#39;@kinvolk/headlamp-plugin/types/plugin/index.</description>
+import { Headlamp, Plugin, Registry } from &amp;#39;@kinvolk/headlamp-plugin/lib&amp;#39;; Plugin Class Plugins are classes that register actions when they are initialized.</description>
     </item>
     
   </channel>
