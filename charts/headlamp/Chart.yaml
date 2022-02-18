@@ -15,5 +15,5 @@ sources:
 maintainers:
   - name: kinvolk
     url: https://kinvolk.io/
-version: 0.1.5
-appVersion: 0.6.0
+version: 0.2.0
+appVersion: 0.7.0
