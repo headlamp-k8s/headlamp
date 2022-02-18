@@ -50,4 +50,4 @@ Headlamp.registerPlugin("aPluginIdString", myPlugin)
 
 #### Defined in
 
-[plugin/lib.ts:134](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/lib.ts#L134)
+[plugin/lib.ts:134](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/plugin/lib.ts#L134)
