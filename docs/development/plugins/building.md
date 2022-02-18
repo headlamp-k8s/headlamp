@@ -7,8 +7,8 @@ This section explains how to start developing a Headlamp plugin, and how
 to ship it once finished.
 
 Before you dive into the following sections on how to develop plugins for
-Headlamp, you can watch this quick [video](https://www.youtube.com/watch?v=vyki8c6AkeE) to see how simple it is to
-get started.
+Headlamp, you can watch this quick [video](https://www.youtube.com/watch?v=vyki8c6AkeE)
+to see how simple it is to get started.
 
 {{< youtube "vyki8c6AkeE" >}}
 
@@ -17,13 +17,16 @@ get started.
 This is how to start a new plugin:
 
 ```bash
-npx @kinvolk/headlamp-plugin create headlamp-myfancy
+npx --yes @kinvolk/headlamp-plugin create headlamp-myfancy
 cd headlamp-myfancy
 npm run start
 ```
 
+There's some basic code inside src/index.tsx.
+
 Now run Headlamp (the desktop app or the
-[development version](../index.md##run-the-code)), and your plugin should be loaded.
+[development version](../index.md##run-the-code)),
+and your plugin should be loaded.
 
 Using the above commands means that Headlamp will **automatically reload**
 whenever to make a change to the plugin.
@@ -31,6 +34,34 @@ whenever to make a change to the plugin.
 ℹ️ This automatic reload does not happen when running in-cluster,
 even if the plugins folder is changed. i.e. if you want to serve
 updated plugins, you need to restart the server.
+
+## Code Formatting, Linting, and Type Checking
+
+Your plugin has a few tools built in to help make development easier.
+
+#### Format code with prettier
+
+```bash
+npm run format
+```
+
+#### Find code lint issues with eslint
+
+```bash
+npm run lint
+```
+
+Eslint also allows you to try and automatically fix issues.
+
+```bash
+npm run lint-fix
+```
+
+#### Run the type checker
+
+```bash
+npm run tsc
+```
 
 ## Building for production
 
@@ -55,7 +86,7 @@ npx @kinvolk/headlamp-plugin build myplugins/headlamp-myfancy
 npx @kinvolk/headlamp-plugin build myplugins
 ```
 
-## Shipping / Deploying Plugins
+## Shipping and Deploying Plugins
 
 Once a plugin is ready to be shipped (built for production) it needs to
 be placed in a "plugins directory", for Headlamp to load them.

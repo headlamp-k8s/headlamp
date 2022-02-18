@@ -12,17 +12,17 @@ slug: "lib_util"
 
 ### CLUSTER\_ACTION\_GRACE\_PERIOD
 
-• `Const` **CLUSTER\_ACTION\_GRACE\_PERIOD**: ``5000``
+• **CLUSTER\_ACTION\_GRACE\_PERIOD**: ``5000``
 
 #### Defined in
 
-lib/util.ts:17
+[lib/util.ts:18](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L18)
 
 ## Functions
 
 ### filterResource
 
-▸ **filterResource**(`item`, `filter`): `boolean`
+▸ **filterResource**(`item`, `filter`, `matchCriteria?`): `boolean`
 
 #### Parameters
 
@@ -30,6 +30,7 @@ lib/util.ts:17
 | :------ | :------ |
 | `item` | `KubeObjectInterface` |
 | `filter` | [`FilterState`](../interfaces/lib_util.FilterState.md) |
+| `matchCriteria?` | `string`[] |
 
 #### Returns
 
@@ -37,7 +38,7 @@ lib/util.ts:17
 
 #### Defined in
 
-lib/util.ts:84
+[lib/util.ts:85](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L85)
 
 ___
 
@@ -51,7 +52,7 @@ ___
 
 #### Defined in
 
-lib/util.ts:119
+[lib/util.ts:153](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L153)
 
 ___
 
@@ -63,7 +64,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `path?` | `string` \| ``null`` |
+| `path?` | ``null`` \| `string` |
 
 #### Returns
 
@@ -71,7 +72,7 @@ ___
 
 #### Defined in
 
-lib/util.ts:111
+[lib/util.ts:145](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L145)
 
 ___
 
@@ -92,7 +93,7 @@ ___
 
 #### Defined in
 
-lib/util.ts:33
+[lib/util.ts:34](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L34)
 
 ___
 
@@ -112,7 +113,7 @@ ___
 
 #### Defined in
 
-lib/util.ts:42
+[lib/util.ts:43](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L43)
 
 ___
 
@@ -134,7 +135,7 @@ ___
 
 #### Defined in
 
-lib/util.ts:60
+[lib/util.ts:61](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L61)
 
 ___
 
@@ -155,7 +156,7 @@ ___
 
 #### Defined in
 
-lib/util.ts:50
+[lib/util.ts:51](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L51)
 
 ___
 
@@ -175,7 +176,7 @@ ___
 
 #### Defined in
 
-lib/util.ts:46
+[lib/util.ts:47](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L47)
 
 ___
 
@@ -195,7 +196,7 @@ ___
 
 #### Defined in
 
-lib/util.ts:25
+[lib/util.ts:26](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L26)
 
 ___
 
@@ -215,7 +216,7 @@ ___
 
 #### Defined in
 
-lib/util.ts:21
+[lib/util.ts:22](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L22)
 
 ___
 
@@ -235,13 +236,19 @@ ___
 
 #### Defined in
 
-lib/util.ts:131
+[lib/util.ts:165](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L165)
 
 ___
 
 ### useFilterFunc
 
-▸ **useFilterFunc**(): (`item`: `KubeObjectInterface`) => `boolean`
+▸ **useFilterFunc**(`matchCriteria?`): (`item`: `KubeObjectInterface`) => `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `matchCriteria?` | `string`[] |
 
 #### Returns
 
@@ -261,4 +268,4 @@ ___
 
 #### Defined in
 
-lib/util.ts:106
+[lib/util.ts:140](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/lib/util.ts#L140)

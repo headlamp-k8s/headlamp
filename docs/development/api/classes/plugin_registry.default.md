@@ -39,7 +39,7 @@ register.registerAppBarAction('monitor', () => <MonitorLink /> );
 
 #### Defined in
 
-plugin/registry.tsx:101
+[plugin/registry.tsx:110](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/registry.tsx#L110)
 
 ___
 
@@ -70,7 +70,36 @@ register.registerDetailsViewHeaderAction('traces', (props) =>
 
 #### Defined in
 
-plugin/registry.tsx:82
+[plugin/registry.tsx:91](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/registry.tsx#L91)
+
+___
+
+### registerDetailsViewSection
+
+▸ **registerDetailsViewSection**(`sectionName`, `sectionFunc`): `void`
+
+Append the specified title and component to the details view.
+
+**`example`**
+
+```JSX
+register.registerDetailsViewSection("biolatency", (resource: KubeObject) => { title: 'Block I/O Latency', component: (props) => <BioLatency {...props} resource={resource}/>});
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `sectionName` | `string` | a unique name for it |
+| `sectionFunc` | [`sectionFunc`](../modules/plugin_registry.md#sectionfunc) | a function that returns your detail view component with props                      passed into it and the section title |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/registry.tsx:126](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/registry.tsx#L126)
 
 ___
 
@@ -106,7 +135,7 @@ register.registerRoute({
 
 #### Defined in
 
-plugin/registry.tsx:63
+[plugin/registry.tsx:72](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/registry.tsx#L72)
 
 ___
 
@@ -139,4 +168,4 @@ registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
 
 #### Defined in
 
-plugin/registry.tsx:26
+[plugin/registry.tsx:35](https://github.com/kinvolk/headlamp/blob/ab45ff9/frontend/src/plugin/registry.tsx#L35)

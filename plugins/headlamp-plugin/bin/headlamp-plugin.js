@@ -21,13 +21,13 @@ const headlampPluginPkg = require('../package.json');
  *
  * @param {string} name - name of package and output folder.
  * @param {bool} link - if we link @kinvolk/headlamp-plugin for testing
+ * @returns {0 | 1 | 2 | 3} Exit code, where 0 is success, 1, 2, and 3 are failures.
  */
 function create(name, link) {
   const dstFolder = name;
   const templateFolder = path.resolve(__dirname, '..', 'template');
   const indexPath = path.join(dstFolder, 'src', 'index.tsx');
   const packagePath = path.join(dstFolder, 'package.json');
-  const packageLockPath = path.join(dstFolder, 'package-lock.json');
 
   if (fs.existsSync(name)) {
     console.error(`"${name}" already exists, not initializing`);
@@ -58,7 +58,6 @@ function create(name, link) {
   }
 
   replaceFileVariables(packagePath);
-  replaceFileVariables(packageLockPath);
   replaceFileVariables(indexPath);
 
   // This can be used to make testing locally easier.
@@ -80,8 +79,19 @@ function create(name, link) {
     return 3;
   }
 
-  console.log(`"${dstFolder}" created. Run the Headlamp app and:`);
-  console.log(`cd "${dstFolder}"\nnpm run start`);
+  // This can be used to make testing locally easier.
+  if (link) {
+    // Seems to require linking again with npm 7+
+    console.log('Linking @kinvolk/headlamp-plugin');
+    child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], { cwd: dstFolder });
+  }
+
+  console.log(`"${dstFolder}" created.`);
+  console.log(`1) Run the Headlamp app (so the plugin can be used).`);
+  console.log(`2) Open ${dstFolder}/src/index.tsx in your editor.`);
+  console.log(`3) Start development server of the plugin watching for plugin changes.`);
+  console.log(`  cd "${dstFolder}"\n  npm run start`);
+  console.log(`4) See the plugin inside Headlamp.`);
 
   return 0;
 }
@@ -143,9 +153,12 @@ function compile(err, stats) {
 }
 
 /**
- * Copies folders of packages in the form: packageName/dist/main.js to packageName/main.js
+ * extract copies folders of packages in the form:
+ *   packageName/dist/main.js to packageName/main.js
  *
- * @returns exit code 0 on success, 1 or 2 on failure.
+ * @param {string} pluginPackagesPath - can be a package or a folder of packages.
+ * @param {string} outputPlugins - folder where the plugins are placed.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function extract(pluginPackagesPath, outputPlugins) {
   if (!fs.existsSync(pluginPackagesPath)) {
@@ -153,7 +166,7 @@ function extract(pluginPackagesPath, outputPlugins) {
     return 1;
   }
   if (!fs.existsSync(outputPlugins)) {
-    console.log(`"${outputPlugins}" did not exist.`);
+    console.log(`"${outputPlugins}" did not exist, making folder.`);
     fs.mkdirSync(outputPlugins);
   }
 
@@ -212,6 +225,7 @@ function extract(pluginPackagesPath, outputPlugins) {
 
 /**
  * Start watching for changes, and build again if there are changes.
+ * @returns {0} Exit code, where 0 is success.
  */
 function start() {
   console.log('Watching for changes to plugin...');
@@ -228,6 +242,7 @@ function start() {
  * Build the plugin package or folder of packages for production.
  *
  * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function build(packageFolder) {
   if (!fs.existsSync(packageFolder)) {
@@ -278,6 +293,50 @@ function build(packageFolder) {
   return 0;
 }
 
+/**
+ * Format code with prettier.
+ *
+ * @param packageFolder {string} - folder where the package is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ */
+function format(packageFolder) {
+  try {
+    child_process.execSync('prettier --config package.json --write src', {
+      stdio: 'inherit',
+      cwd: packageFolder,
+      encoding: 'utf8',
+    });
+  } catch (e) {
+    console.error(`Problem running prettier inside of "${packageFolder}"`);
+    return 1;
+  }
+
+  return 0;
+}
+
+/**
+ * Lint code with eslint.
+ *
+ * @param packageFolder {string} - folder where the package is.
+ * @param fix {boolean} - automatically fix problems.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ */
+function lint(packageFolder, fix) {
+  try {
+    const extra = fix ? ' --fix' : '';
+    child_process.execSync('eslint -c package.json --ext .js,.ts,.tsx src/' + extra, {
+      stdio: 'inherit',
+      cwd: packageFolder,
+      encoding: 'utf8',
+    });
+  } catch (e) {
+    console.error(`Problem running eslint inside of "${packageFolder}"`);
+    return 1;
+  }
+
+  return 0;
+}
+
 yargs(process.argv.slice(2))
   .command(
     'build [package]',
@@ -306,7 +365,8 @@ yargs(process.argv.slice(2))
           type: 'string',
         })
         .option('link', {
-          describe: 'For testing, use npm link @kinvolk/headlamp-plugin.',
+          describe:
+            'For development of headlamp-plugin itself, so it uses npm link @kinvolk/headlamp-plugin.',
           type: 'boolean',
         });
     },
@@ -335,6 +395,40 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = extract(argv.pluginPackages, argv.outputPlugins);
+    }
+  )
+  .command(
+    'format [package]',
+    'format the plugin code with prettier. ' + '<package> defaults to current working directory.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to code format',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = format(argv.package);
+    }
+  )
+  .command(
+    'lint [package]',
+    'Lint the plugin for coding issues with eslint. ' +
+      '<package> defaults to current working directory.',
+    yargs => {
+      yargs
+        .positional('package', {
+          describe: 'Package to lint',
+          type: 'string',
+          default: '.',
+        })
+        .option('fix', {
+          describe: 'Automatically fix problems',
+          type: 'boolean',
+        });
+    },
+    argv => {
+      process.exitCode = lint(argv.package);
     }
   )
   .demandCommand(1, '')

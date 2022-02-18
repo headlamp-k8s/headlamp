@@ -8,5 +8,5 @@ slug: "_index"
 
 - [lib/k8s](modules/lib_k8s.md)
 - [lib/util](modules/lib_util.md)
-- [plugin](modules/plugin.md)
+- [plugin/lib](modules/plugin_lib.md)
 - [plugin/registry](modules/plugin_registry.md)
