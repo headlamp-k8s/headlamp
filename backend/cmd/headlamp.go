@@ -356,7 +356,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 				redirectURL = "/"
 			}
 
-			redirectURL += fmt.Sprintf("auth?cluster=%1s&token=%2s", state, oauth2Token.AccessToken)
+			redirectURL += fmt.Sprintf("auth?cluster=%1s&token=%2s", state, rawIDToken)
 			http.Redirect(w, r, redirectURL, http.StatusSeeOther)
 		} else {
 			http.Error(w, "invalid request", http.StatusBadRequest)
