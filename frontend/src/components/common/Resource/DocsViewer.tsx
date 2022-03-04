@@ -1,5 +1,3 @@
-import chevronDown from '@iconify/icons-mdi/chevron-down';
-import chevronRight from '@iconify/icons-mdi/chevron-right';
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
@@ -93,8 +91,8 @@ function DocsViewer(props: { docSpecs: any }) {
       </Typography>
       <TreeView
         className={classes.root}
-        defaultCollapseIcon={<Icon icon={chevronDown} />}
-        defaultExpandIcon={<Icon icon={chevronRight} />}
+        defaultCollapseIcon={<Icon icon="mdi:chevron-down" />}
+        defaultExpandIcon={<Icon icon="mdi:chevron-right" />}
       >
         {Object.entries(docs || {}).map(([name, value], i) => makeItems(name, value, i.toString()))}
       </TreeView>

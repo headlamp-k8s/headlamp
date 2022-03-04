@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react';
+import { Icon, IconProps } from '@iconify/react';
 import { Tooltip } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -24,7 +24,7 @@ interface ListItemLinkProps {
   pathname: string;
   search?: string;
   name: string;
-  icon?: object;
+  icon?: IconProps['icon'];
 }
 
 export default function ListItemLink(props: ListItemLinkProps) {

@@ -1,4 +1,3 @@
-import chevronRight from '@iconify/icons-mdi/chevron-right';
 import { InlineIcon } from '@iconify/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -53,7 +52,7 @@ export default function ServiceDetails() {
                   getter: ({ port, targetPort }) => (
                     <React.Fragment>
                       <ValueLabel>{port}</ValueLabel>
-                      <InlineIcon icon={chevronRight} />
+                      <InlineIcon icon="mdi:chevron-right" />
                       <ValueLabel>{targetPort}</ValueLabel>
                     </React.Fragment>
                   ),

@@ -1,4 +1,3 @@
-import deleteIcon from '@iconify/icons-mdi/delete';
 import { Icon } from '@iconify/react';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -75,7 +74,7 @@ export default function DeleteButton(props: DeleteButtonProps) {
     <React.Fragment>
       <Tooltip title={t('frequent|Delete') as string}>
         <IconButton aria-label={t('frequent|delete')} onClick={() => setOpenAlert(true)}>
-          <Icon icon={deleteIcon} />
+          <Icon icon="mdi:delete" />
         </IconButton>
       </Tooltip>
       <ConfirmDialog

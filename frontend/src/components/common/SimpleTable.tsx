@@ -1,8 +1,3 @@
-import menuDown from '@iconify/icons-mdi/menu-down';
-import menuSwap from '@iconify/icons-mdi/menu-swap';
-import menuUp from '@iconify/icons-mdi/menu-up';
-import refreshIcon from '@iconify/icons-mdi/refresh';
-import squareIcon from '@iconify/icons-mdi/square';
 import { Icon, InlineIcon } from '@iconify/react';
 import { Button, IconButton } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -94,7 +89,7 @@ function ColumnSortButtons(props: ColumnSortButtonProps) {
       size="small"
       onClick={() => clickHandler(!isIncreasingOrder)}
     >
-      <Icon icon={isIncreasingOrder ? menuUp : menuDown} />
+      <Icon icon={isIncreasingOrder ? 'mdi:menu-up' : 'mdi:menu-down'} />
     </IconButton>
   ) : (
     <IconButton
@@ -102,7 +97,7 @@ function ColumnSortButtons(props: ColumnSortButtonProps) {
       size="small"
       onClick={() => clickHandler(true)}
     >
-      <Icon icon={menuSwap} />
+      <Icon icon="mdi:menu-swap" />
     </IconButton>
   );
 }
@@ -259,7 +254,7 @@ export default function SimpleTable(props: SimpleTableProps) {
           <Box textAlign="center" p={2}>
             <Button
               variant="contained"
-              startIcon={<Icon icon={refreshIcon} />}
+              startIcon={<Icon icon="mdi:refresh" />}
               onClick={() => {
                 setCurrentData(data);
               }}
@@ -303,7 +298,7 @@ export default function SimpleTable(props: SimpleTableProps) {
                   <TableCell key={`cell_${i}`}>
                     {i === 0 && row.color && (
                       <React.Fragment>
-                        <InlineIcon icon={squareIcon} color={row.color} height="15" width="15" />
+                        <InlineIcon icon="mdi:square" color={row.color} height="15" width="15" />
                         &nbsp;
                       </React.Fragment>
                     )}

@@ -1,4 +1,3 @@
-import fileDownloadOutline from '@iconify/icons-mdi/file-download-outline';
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -81,7 +80,7 @@ export function LogViewer(props: LogViewerProps) {
           <Grid item xs>
             <Tooltip title={t('Download') as string}>
               <IconButton aria-label={t('download')} onClick={downloadLog}>
-                <Icon icon={fileDownloadOutline} />
+                <Icon icon="mdi:file-download-outline" />
               </IconButton>
             </Tooltip>
           </Grid>

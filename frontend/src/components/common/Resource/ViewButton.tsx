@@ -1,5 +1,4 @@
-import eyeIcon from '@iconify/icons-mdi/eye';
-import Icon from '@iconify/react';
+import { Icon } from '@iconify/react';
 import { IconButton, Tooltip } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -29,7 +28,7 @@ function ViewButton({ item, initialToggle = false }: ViewButtonProps) {
           onClick={handleButtonClick}
           onMouseDown={event => event.preventDefault()}
         >
-          <Icon icon={eyeIcon} />
+          <Icon icon="mdi:eye" />
         </IconButton>
       </Tooltip>
       <EditorDialog

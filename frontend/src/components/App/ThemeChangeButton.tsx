@@ -1,5 +1,3 @@
-import darkIcon from '@iconify/icons-mdi/weather-night';
-import lightIcon from '@iconify/icons-mdi/weather-sunny';
 import { Icon } from '@iconify/react';
 import IconButton from '@material-ui/core/IconButton';
 import React from 'react';
@@ -13,7 +11,9 @@ export default function ThemeChangeButton() {
 
   const dispatch = useDispatch();
   const { t } = useTranslation('frequent');
-  type iconType = typeof darkIcon;
+  const darkIcon = 'mdi:weather-night';
+  const lightIcon = 'mdi:weather-sunny';
+  type iconType = typeof darkIcon | typeof lightIcon;
 
   const counterIcons: {
     [themeName in keyof ThemesConf]: iconType;

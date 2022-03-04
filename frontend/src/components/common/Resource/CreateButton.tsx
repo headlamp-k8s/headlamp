@@ -1,4 +1,3 @@
-import plusCircle from '@iconify/icons-mdi/plus-circle';
 import { Icon } from '@iconify/react';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -63,7 +62,7 @@ export default function CreateButton() {
     <React.Fragment>
       <Tooltip title={t('frequent|Create / Apply') as string}>
         <IconButton aria-label={t('frequent|apply')} onClick={() => setOpenDialog(true)}>
-          <Icon color="#adadad" icon={plusCircle} width="48" />
+          <Icon color="#adadad" icon="mdi:plus-circle" width="48" />
         </IconButton>
       </Tooltip>
       <EditorDialog

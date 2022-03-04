@@ -1,4 +1,3 @@
-import plusCircle from '@iconify/icons-mdi/plus-circle';
 import { Icon } from '@iconify/react';
 import IconButton from '@material-ui/core/IconButton';
 import { Meta, Story } from '@storybook/react/types-6-0';
@@ -18,7 +17,7 @@ Add.args = {
   title: 'Add',
   children: (
     <IconButton aria-label={i18next.t('frequent|Add')}>
-      <Icon color="#adadad" icon={plusCircle} width="48" />
+      <Icon color="#adadad" icon="mdi:plus-circle" width="48" />
     </IconButton>
   ),
 };

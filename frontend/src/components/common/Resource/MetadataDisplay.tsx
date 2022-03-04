@@ -1,5 +1,3 @@
-import menuDown from '@iconify/icons-mdi/menu-down';
-import menuUp from '@iconify/icons-mdi/menu-up';
 import { Icon } from '@iconify/react';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -167,7 +165,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
       {keys.length > defaultNumShown && (
         <Grid item>
           <IconButton onClick={() => setExpanded(!expanded)} size="small">
-            <Icon icon={expanded ? menuUp : menuDown} />
+            <Icon icon={expanded ? 'mdi:menu-up' : 'mdi:menu-down'} />
           </IconButton>
         </Grid>
       )}

@@ -1,4 +1,3 @@
-import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -142,7 +141,7 @@ export default function VersionButton() {
       <Button onClick={() => setOpen(true)} style={{ textTransform: 'none' }}>
         <Box display={sidebar.isSidebarOpen ? 'flex' : 'block'} alignItems="center">
           <Box>
-            <Icon color="#adadad" icon={kubernetesIcon} className={classes.versionIcon} />
+            <Icon color="#adadad" icon="mdi:kubernetes" className={classes.versionIcon} />
           </Box>
           <Box>{clusterVersion.gitVersion}</Box>
         </Box>

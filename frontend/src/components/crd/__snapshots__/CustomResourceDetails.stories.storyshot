@@ -89,20 +89,7 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
             <span
               class="MuiButton-startIcon MuiButton-iconSizeSmall"
             >
-              <svg
-                focusable="false"
-                height="1em"
-                preserveAspectRatio="xMidYMid meet"
-                style="transform: rotate(360deg);"
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6l6 6l1.41-1.42z"
-                  fill="currentColor"
-                />
-              </svg>
+              <span />
             </span>
             <p
               class="MuiTypography-root MuiTypography-body1"
@@ -149,20 +136,7 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                     <span
                       class="MuiIconButton-label"
                     >
-                      <svg
-                        focusable="false"
-                        height="1em"
-                        preserveAspectRatio="xMidYMid meet"
-                        style="transform: rotate(360deg);"
-                        viewBox="0 0 24 24"
-                        width="1em"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5z"
-                          fill="currentColor"
-                        />
-                      </svg>
+                      <span />
                     </span>
                     <span
                       class="MuiTouchRipple-root"
@@ -273,20 +247,7 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                             class="MuiBox-root MuiBox-root"
                             title="My description"
                           >
-                            <svg
-                              focusable="false"
-                              height="1rem"
-                              preserveAspectRatio="xMidYMid meet"
-                              style="transform: rotate(360deg);"
-                              viewBox="0 0 24 24"
-                              width="1rem"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2v6z"
-                                fill="currentColor"
-                              />
-                            </svg>
+                            <span />
                           </div>
                         </div>
                       </div>

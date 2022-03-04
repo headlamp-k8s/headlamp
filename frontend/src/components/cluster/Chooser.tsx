@@ -1,4 +1,3 @@
-import kubernetesIcon from '@iconify/icons-mdi/kubernetes';
 import { Icon } from '@iconify/react';
 import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -130,7 +129,7 @@ function ClusterButton(props: ClusterButtonProps) {
     <ButtonBase focusRipple ref={focusedRef} onClick={onClick}>
       <Card className={classes.root}>
         <CardContent className={classes.content}>
-          <Icon icon={kubernetesIcon} width="50" height="50" color={theme.palette.primaryColor} />
+          <Icon icon="mdi:kubernetes" width="50" height="50" color={theme.palette.primaryColor} />
           <Typography color="textSecondary" gutterBottom>
             {cluster.name}
           </Typography>

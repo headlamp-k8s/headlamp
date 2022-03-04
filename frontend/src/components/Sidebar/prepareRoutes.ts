@@ -1,8 +1,3 @@
-import circleSlice2 from '@iconify/icons-mdi/circle-slice-2';
-import databaseIcon from '@iconify/icons-mdi/database';
-import folderNetworkOutline from '@iconify/icons-mdi/folder-network-outline';
-import hexagonMultipleOutline from '@iconify/icons-mdi/hexagon-multiple-outline';
-import lockIcon from '@iconify/icons-mdi/lock';
 import { SidebarEntry } from '../../redux/reducers/ui';
 import store from '../../redux/stores/store';
 
@@ -11,7 +6,7 @@ function prepareRoutes(t: (arg: string) => string) {
     {
       name: 'cluster',
       label: t('glossary|Cluster'),
-      icon: hexagonMultipleOutline,
+      icon: 'mdi:hexagon-multiple-outline',
       subList: [
         {
           name: 'namespaces',
@@ -34,7 +29,7 @@ function prepareRoutes(t: (arg: string) => string) {
     {
       name: 'workloads',
       label: t('glossary|Workloads'),
-      icon: circleSlice2,
+      icon: 'mdi:circle-slice-2',
       subList: [
         {
           name: 'Pods',
@@ -69,7 +64,7 @@ function prepareRoutes(t: (arg: string) => string) {
     {
       name: 'storage',
       label: t('glossary|Storage'),
-      icon: databaseIcon,
+      icon: 'mdi:database',
       subList: [
         {
           name: 'storageClasses',
@@ -88,7 +83,7 @@ function prepareRoutes(t: (arg: string) => string) {
     {
       name: 'network',
       label: t('glossary|Network'),
-      icon: folderNetworkOutline,
+      icon: 'mdi:folder-network-outline',
       subList: [
         {
           name: 'services',
@@ -103,7 +98,7 @@ function prepareRoutes(t: (arg: string) => string) {
     {
       name: 'security',
       label: t('glossary|Security'),
-      icon: lockIcon,
+      icon: 'mdi:lock',
       subList: [
         {
           name: 'serviceAccounts',

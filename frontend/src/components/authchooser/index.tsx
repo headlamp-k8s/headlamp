@@ -1,4 +1,3 @@
-import chevronLeft from '@iconify/icons-mdi/chevron-left';
 import { InlineIcon } from '@iconify/react';
 import { Box, Button, DialogTitle, withStyles } from '@material-ui/core';
 import React from 'react';
@@ -289,7 +288,7 @@ export function PureAuthChooser({
             role="button"
           >
             <Box pt={0.5}>
-              <InlineIcon icon={chevronLeft} height={20} width={20} />
+              <InlineIcon icon="mdi:chevron-left" height={20} width={20} />
             </Box>
             <Box fontSize={14} style={{ textTransform: 'uppercase' }}>
               {t('frequent|Back')}
