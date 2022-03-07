@@ -43,6 +43,9 @@ function loadScripts(array: string[], onLoadFinished: (value?: any) => void) {
   var loader = function (src: string, handler: () => void) {
     const script: HTMLScriptElement = document.createElement('script');
     script.src = src;
+    if (process.env.NODE_ENV !== 'production') {
+      script.crossOrigin = 'anonymous';
+    }
     script.onload = (script as any).onreadystatechange = function () {
       (script as any).onreadystatechange = script.onload = null;
       handler();
