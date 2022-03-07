@@ -1,11 +1,11 @@
-import { Headlamp, Plugin, Registry } from '@kinvolk/headlamp-plugin/lib';
+import React from 'react';
+import { Headlamp, Plugin, Registry, K8s } from '@kinvolk/headlamp-plugin/lib';
 import { Typography } from '@material-ui/core';
 
 // import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
-// import { K8s } from '@kinvolk/headlamp-plugin/lib/K8s';
 
 function PodCounter() {
-  const [pods, error] = K8s.Pod.useList();
+  const [pods, error] = K8s.ResourceClasses.Pod.useList();
   const msg = pods === null ? 'Loading…' : pods.length.toString();
 
   return (
