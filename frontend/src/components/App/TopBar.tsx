@@ -21,6 +21,7 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
+import Notifications from './Notifications';
 import ThemeChangeButton from './ThemeChangeButton';
 
 export interface TopBarProps {}
@@ -210,6 +211,9 @@ export function PureTopBar({
         </MenuItem>
       ))}
       <MenuItem>
+        <Notifications />
+      </MenuItem>
+      <MenuItem>
         <LocaleSelect />
       </MenuItem>
       <MenuItem>
@@ -249,6 +253,7 @@ export function PureTopBar({
               {Object.values(appBarActions).map((action, i) => (
                 <React.Fragment key={i}>{action()}</React.Fragment>
               ))}
+              <Notifications />
               <LocaleSelect />
               <ThemeChangeButton />
               <IconButton
