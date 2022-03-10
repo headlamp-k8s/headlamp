@@ -1,4 +1,5 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
+import { Notification } from '../../lib/notification';
 import { sectionFunc } from '../../plugin/registry';
 import { SidebarEntry, UIState } from '../reducers/ui';
 
@@ -29,6 +30,8 @@ export interface BrandingProps {
     [key: string]: any;
   }> | null;
 }
+export const UI_SET_NOTIFICATIONS = 'UI_SET_NOTIFICATIONS';
+export const UI_UPDATE_NOTIFICATION = 'UI_UPDATE_NOTIFICATION';
 
 export interface ClusterActionButton {
   label: string;
@@ -150,6 +153,15 @@ export function setTheme(name?: string) {
 export function setPluginsLoadState(pluginsLoadedState: boolean) {
   return { type: UI_PLUGINS_LOADED, pluginsLoadedState };
 }
+
 export function setBrandingAppLogoComponent(component: BrandingProps['logo']) {
   return { type: UI_BRANDING_SET_APP_LOGO, component };
+}
+
+export function setUINotifications(notifications: Notification[] | Notification) {
+  return { type: UI_SET_NOTIFICATIONS, notifications };
+}
+
+export function updateUINotification(dispatchedNotification: Notification[] | Notification) {
+  return { type: UI_UPDATE_NOTIFICATION, dispatchedNotification };
 }

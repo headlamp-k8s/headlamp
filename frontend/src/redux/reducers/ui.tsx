@@ -1,5 +1,6 @@
 import { IconProps } from '@iconify/react';
 import _ from 'lodash';
+import { Notification } from '../../lib/notification';
 import themesConf, { setTheme } from '../../lib/themes';
 import { sectionFunc } from '../../plugin/registry';
 import {
@@ -13,11 +14,13 @@ import {
   UI_RESET_PLUGIN_VIEWS,
   UI_ROUTER_SET_ROUTE,
   UI_SET_DETAILS_VIEW,
+  UI_SET_NOTIFICATIONS,
   UI_SIDEBAR_SET_EXPANDED,
   UI_SIDEBAR_SET_ITEM,
   UI_SIDEBAR_SET_SELECTED,
   UI_SIDEBAR_SET_VISIBLE,
   UI_THEME_SET,
+  UI_UPDATE_NOTIFICATION,
 } from '../actions/actions';
 
 export interface SidebarEntry {
@@ -66,6 +69,7 @@ export interface UIState {
   };
   branding: BrandingProps;
   pluginsLoaded: boolean;
+  notifications: Notification[];
 }
 
 function setInitialSidebarOpen() {
@@ -123,6 +127,7 @@ export const INITIAL_STATE: UIState = {
   branding: {
     logo: null,
   },
+  notifications: [],
 };
 
 function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
@@ -204,6 +209,60 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
     case UI_BRANDING_SET_APP_LOGO: {
       const component = action.component;
       newFilters.branding.logo = component;
+      break;
+    }
+    case UI_SET_NOTIFICATIONS: {
+      const notifications = action.notifications;
+      /* There are two ways user can send notifications either a complete set of array or a single notification
+         when handling the array notifications we want to only have unique set of notifications pushed into the UI notifications config
+      */
+      if (Array.isArray(notifications)) {
+        const uniqueNotifications = _.uniqBy(
+          [...notifications].concat(newFilters.notifications),
+          function (item) {
+            return item.id;
+          }
+        );
+        newFilters.notifications = uniqueNotifications;
+      } else {
+        // check if this notification is already present if not add it
+        if (
+          newFilters.notifications.findIndex(
+            (notification: Notification) => notification.id === notifications.id
+          ) === -1
+        ) {
+          newFilters.notifications.push(notifications);
+          newFilters.notifications = [...newFilters.notifications];
+        }
+      }
+      // This way we make sure notifications are always in a consistent order
+      newFilters.notifications.sort((n1: Notification, n2: Notification) => {
+        return new Date(n2.date).getTime() - new Date(n1.date).getTime();
+      });
+      localStorage.setItem('notifications', JSON.stringify(newFilters.notifications));
+      break;
+    }
+    case UI_UPDATE_NOTIFICATION: {
+      const dispatchedNotification = action.dispatchedNotification;
+      // if we have an array of updated list of notifications, update the store notifications list with these updated notifications list.
+      if (Array.isArray(dispatchedNotification)) {
+        dispatchedNotification.forEach(notification => {
+          const index = newFilters.notifications.findIndex(
+            notificationItem => notificationItem.id === notification.id
+          );
+          if (index !== -1) {
+            newFilters.notifications[index] = notification;
+          }
+        });
+      } else {
+        newFilters.notifications = newFilters.notifications.map(notification => {
+          if (notification.id === dispatchedNotification.id) {
+            return dispatchedNotification;
+          }
+          return notification;
+        });
+      }
+      localStorage.setItem('notifications', JSON.stringify(newFilters.notifications));
       break;
     }
     default:
