@@ -5,7 +5,7 @@
  */
 
 import helpers from '../helpers';
-import { UI_RESET_PLUGIN_VIEWS, UI_SET_NOTIFICATIONS } from '../redux/actions/actions';
+import { UI_RESET_PLUGIN_VIEWS } from '../redux/actions/actions';
 import store from '../redux/stores/store';
 import { Headlamp, Plugin } from './lib';
 import Registry from './registry';
@@ -24,6 +24,7 @@ window.pluginLib = {
   Iconify: require('@iconify/react'),
   Lodash: require('lodash'),
   Notistack: require('notistack'),
+  Notification: require('../lib/notification'),
   Headlamp,
   Plugin,
 };

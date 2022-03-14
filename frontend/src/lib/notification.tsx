@@ -1,3 +1,6 @@
+import { setUINotifications } from '../redux/actions/actions';
+import store from '../redux/stores/store';
+
 export class Notification {
   message: string = '';
   id: string;
@@ -15,4 +18,8 @@ export class Notification {
     // generate the id based on the message and the date attached to a notification
     this.id = btoa(`${this.date},${this.message}`);
   }
+}
+
+export function setNotificationsInStore(notifications: Notification[] | Notification) {
+  store.dispatch(setUINotifications(notifications));
 }
