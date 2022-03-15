@@ -7,6 +7,7 @@ import {
   HeaderActionFunc,
   UI_APP_BAR_SET_ACTION,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
+  UI_PLUGINS_LOADED,
   UI_RESET_PLUGIN_VIEWS,
   UI_ROUTER_SET_ROUTE,
   UI_SET_DETAILS_VIEW,
@@ -61,6 +62,7 @@ export interface UIState {
   theme: {
     name: string;
   };
+  pluginsLoaded: boolean;
 }
 
 function setInitialSidebarOpen() {
@@ -114,6 +116,7 @@ export const INITIAL_STATE: UIState = {
   theme: {
     name: '',
   },
+  pluginsLoaded: false;
 };
 
 function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
@@ -188,7 +191,11 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       newState.sidebar = { ...newState.sidebar, ...setInitialSidebarOpen() };
       return newState;
     }
-    default:
+    case UI_PLUGINS_LOADED: {
+      newFilters.pluginsLoaded = action.pluginsLoadedState;
+      break;
+    }
+   default:
       return state;
   }
 
