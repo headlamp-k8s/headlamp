@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "node_modules/*.js",
+        "node_modules/*/index.js",
+        "node_modules/@kinvolk/headlamp-plugin/node_modules/*",
+        "node_modules/@kinvolk/headlamp-plugin/node_modules/*/index.js"
+      ],
+      "@iconify/react": [
+        "node_modules/@kinvolk/headlamp-plugin/node_modules/@iconify/react/src/icon.js"
+      ],
+      "@kinvolk/headlamp-plugin/lib/K8s": [
+        "node_modules/@kinvolk/headlamp-plugin/types/src/lib/k8s/index.d.ts"
+      ],
+      "@kinvolk/headlamp-plugin/lib/CommonComponents/*": [
+        "node_modules/@kinvolk/headlamp-plugin/types/src/components/common/*/index.d.ts",
+        "node_modules/@kinvolk/headlamp-plugin/types/src/components/common/*.d.ts"
+      ]
+    },
+    "rootDirs": ["node_modules/@kinvolk/headlamp-plugin/"],
+    "skipLibCheck": true
+  },
+  "include": ["./src/**/*"]
+}
