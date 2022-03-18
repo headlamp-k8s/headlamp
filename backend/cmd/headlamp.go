@@ -5,6 +5,7 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -307,16 +308,22 @@ func StartHeadlampServer(config *HeadlampConfig) {
 			RedirectURL:  getOidcCallbackURL(r, config),
 			Scopes:       append([]string{oidc.ScopeOpenID}, oidcAuthConfig.Scopes...),
 		}
-
-		oauthRequestMap[cluster] = &OauthConfig{Config: oauthConfig, Verifier: verifier, Ctx: ctx}
-
-		http.Redirect(w, r, oauthConfig.AuthCodeURL(cluster), http.StatusFound)
+		/* we encode the cluster to base64 and set it as state so that when getting redirected
+		by oidc we can use this state value to get cluster name
+		*/
+		state := base64.StdEncoding.EncodeToString([]byte(cluster))
+		oauthRequestMap[state] = &OauthConfig{Config: oauthConfig, Verifier: verifier, Ctx: ctx}
+		http.Redirect(w, r, oauthConfig.AuthCodeURL(state), http.StatusFound)
 	}).Queries("cluster", "{cluster}")
 
 	r.HandleFunc("/oidc-callback", func(w http.ResponseWriter, r *http.Request) {
 		state := r.URL.Query().Get("state")
+		decodedState, err := base64.StdEncoding.DecodeString(state)
+		if err != nil {
+			http.Error(w, "wrong state set, invalid request "+err.Error(), http.StatusBadRequest)
+		}
 		if state == "" {
-			http.Error(w, "invalid request", http.StatusBadRequest)
+			http.Error(w, "invalid request state is empty", http.StatusBadRequest)
 			return
 		}
 		// nolint: nestif
@@ -356,7 +363,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 				redirectURL = "/"
 			}
 
-			redirectURL += fmt.Sprintf("auth?cluster=%1s&token=%2s", state, rawIDToken)
+			redirectURL += fmt.Sprintf("auth?cluster=%1s&token=%2s", decodedState, rawIDToken)
 			http.Redirect(w, r, redirectURL, http.StatusSeeOther)
 		} else {
 			http.Error(w, "invalid request", http.StatusBadRequest)
