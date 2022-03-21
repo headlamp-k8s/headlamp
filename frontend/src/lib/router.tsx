@@ -457,7 +457,7 @@ export interface RouteURLProps {
 
 export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   const storeRoutes = store.getState().ui.routes;
-  const route = (storeRoutes && storeRoutes[routeName]) || getRoute(routeName);
+  const route = (storeRoutes && storeRoutes.get(routeName)) || getRoute(routeName);
 
   if (!route) {
     return '';

@@ -51,7 +51,7 @@ export default function TopBar({}: TopBarProps) {
 
   return (
     <PureTopBar
-      appBarActions={appBarActions}
+      appBarActions={[...appBarActions.values()]}
       logout={logout}
       hasToken={hasToken()}
       isSidebarOpen={isSidebarOpen}
@@ -73,9 +73,7 @@ export default function TopBar({}: TopBarProps) {
 
 export interface PureTopBarProps {
   /** If the sidebar is fully expanded open or shrunk. */
-  appBarActions: {
-    [name: string]: (...args: any[]) => JSX.Element | null;
-  };
+  appBarActions: ((...args: any[]) => JSX.Element | null)[];
   logout: () => void;
   hasToken: boolean;
 
@@ -204,7 +202,7 @@ export function PureTopBar({
       <MenuItem>
         <ClusterTitle cluster={cluster} clusters={clusters} />
       </MenuItem>
-      {Object.values(appBarActions).map((action, i) => (
+      {appBarActions.map((action, i) => (
         <MenuItem>
           <React.Fragment key={i}>{action()}</React.Fragment>
         </MenuItem>

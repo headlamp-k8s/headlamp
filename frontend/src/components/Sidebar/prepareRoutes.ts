@@ -124,7 +124,7 @@ function prepareRoutes(t: (arg: string) => string) {
   // @todo: Find a better way to avoid modifying the objects in LIST_ITEMS.
   const routes: SidebarEntry[] = JSON.parse(JSON.stringify(LIST_ITEMS));
 
-  for (const item of Object.values(items)) {
+  for (const item of items.values()) {
     const parent = item.parent ? routes.find(({ name }) => name === item.parent) : null;
     let placement = routes;
     if (parent) {

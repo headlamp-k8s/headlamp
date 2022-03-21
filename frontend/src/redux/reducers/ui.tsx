@@ -1,5 +1,6 @@
 import { IconProps } from '@iconify/react';
 import _ from 'lodash';
+import { Route } from '../../lib/router';
 import themesConf, { setTheme } from '../../lib/themes';
 import { sectionFunc } from '../../plugin/registry';
 import {
@@ -28,6 +29,8 @@ export interface SidebarEntry {
   icon?: IconProps['icon'];
 }
 
+class FunctionMap<T = any> extends Map<string, T> {}
+
 export interface UIState {
   sidebar: {
     selected: string | null;
@@ -35,27 +38,19 @@ export interface UIState {
     isSidebarOpen?: boolean;
     /** This is only set to true/false based on a user interaction. */
     isSidebarOpenUserSelected?: boolean;
-    entries: {
-      [propName: string]: SidebarEntry;
-    };
+    entries: FunctionMap<SidebarEntry>;
   };
-  routes: {
-    [path: string]: any;
-  };
+  routes: FunctionMap<Route>;
   views: {
     details: {
-      headerActions: {
-        [name: string]: HeaderActionFunc;
-      };
+      headerActions: FunctionMap<HeaderActionFunc>;
       pluginAppendedDetailViews: Array<{
         sectionName: string;
         sectionFunc: sectionFunc;
       }>;
     };
     appBar: {
-      actions: {
-        [name: string]: HeaderActionFunc;
-      };
+      actions: FunctionMap<HeaderActionFunc>;
     };
   };
   theme: {
@@ -93,22 +88,16 @@ export const INITIAL_STATE: UIState = {
     ...setInitialSidebarOpen(),
     selected: null,
     isVisible: false,
-    entries: {},
+    entries: new FunctionMap<SidebarEntry>(),
   },
-  routes: {
-    // path -> component
-  },
+  routes: new FunctionMap<Route>(),
   views: {
     details: {
-      headerActions: {
-        // action-name -> action-callback
-      },
+      headerActions: new FunctionMap<HeaderActionFunc>(),
       pluginAppendedDetailViews: [],
     },
     appBar: {
-      actions: {
-        // action-name -> action-callback
-      },
+      actions: new FunctionMap<HeaderActionFunc>(),
     },
   },
   theme: {
@@ -135,8 +124,8 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       break;
     }
     case UI_SIDEBAR_SET_ITEM: {
-      const entries = { ...newFilters.sidebar.entries };
-      entries[action.item.name] = action.item;
+      const entries = _.cloneDeep(newFilters.sidebar.entries);
+      entries.set(action.item.name, action.item);
 
       newFilters.sidebar = {
         ...newFilters.sidebar,
@@ -153,14 +142,14 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       break;
     }
     case UI_ROUTER_SET_ROUTE: {
-      const routes = { ...newFilters.routes };
-      routes[action.route.path] = action.route;
+      const routes = _.cloneDeep(newFilters.routes);
+      routes.set(action.route.path, action.route);
       newFilters.routes = routes;
       break;
     }
     case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
-      const headerActions = { ...newFilters.views.details.headerActions };
-      headerActions[action.action as string] = action.action;
+      const headerActions = _.cloneDeep(newFilters.views.details.headerActions);
+      headerActions.set(action.action, action.action);
       newFilters.views.details.headerActions = headerActions;
       break;
     }
@@ -172,8 +161,8 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       break;
     }
     case UI_APP_BAR_SET_ACTION: {
-      const appBarActions = { ...newFilters.views.appBar.actions };
-      appBarActions[action.name as string] = action.action;
+      const appBarActions = _.cloneDeep(newFilters.views.appBar.actions);
+      appBarActions.set(action.name as string, action.action);
       newFilters.views.appBar.actions = appBarActions;
       break;
     }

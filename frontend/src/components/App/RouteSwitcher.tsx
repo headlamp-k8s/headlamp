@@ -14,35 +14,33 @@ export default function RouteSwitcher() {
 
   return (
     <Switch>
-      {Object.values(routes)
-        .concat(defaultRoutes)
-        .map((route, index) =>
-          route.name === 'OidcAuth' ? (
-            <Route
-              path={route.path}
-              component={() => (
-                <PageTitle title={route.name ? route.name : route.sidebar}>
-                  <route.component />
-                </PageTitle>
-              )}
-              key={index}
-            />
-          ) : (
-            <AuthRoute
-              key={index}
-              path={getRoutePath(route)}
-              sidebar={route.sidebar}
-              requiresAuth={!route.noAuthRequired}
-              requiresCluster={!route.noCluster}
-              exact={!!route.exact}
-              children={
-                <PageTitle title={route.name ? route.name : route.sidebar}>
-                  <route.component />
-                </PageTitle>
-              }
-            />
-          )
-        )}
+      {[...routes.values()].concat(defaultRoutes).map((route, index) =>
+        route.name === 'OidcAuth' ? (
+          <Route
+            path={route.path}
+            component={() => (
+              <PageTitle title={route.name ? route.name : route.sidebar}>
+                <route.component />
+              </PageTitle>
+            )}
+            key={index}
+          />
+        ) : (
+          <AuthRoute
+            key={index}
+            path={getRoutePath(route)}
+            sidebar={route.sidebar}
+            requiresAuth={!route.noAuthRequired}
+            requiresCluster={!route.noCluster}
+            exact={!!route.exact}
+            children={
+              <PageTitle title={route.name ? route.name : route.sidebar}>
+                <route.component />
+              </PageTitle>
+            }
+          />
+        )
+      )}
     </Switch>
   );
 }
