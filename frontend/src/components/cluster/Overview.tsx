@@ -3,10 +3,13 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router';
 import Event from '../../lib/k8s/event';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo, useFilterFunc } from '../../lib/util';
+import { setSearchFilter } from '../../redux/actions/actions';
 import { Link, StatusLabel } from '../common';
 import Empty from '../common/EmptyContent';
 import { PageGrid } from '../common/Resource';
@@ -66,6 +69,18 @@ function EventsSection() {
   const filterFunc = useFilterFunc();
   const [events, error] = Event.useList();
   const { t } = useTranslation('glossary');
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const eventsFilter = queryParams.get('eventsFilter');
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (!eventsFilter) {
+      return;
+    }
+    // we want to consider search by id
+    dispatch(setSearchFilter(eventsFilter));
+  }, [eventsFilter]);
 
   function makeStatusLabel(event: Event) {
     return (

@@ -96,6 +96,7 @@ export function filterResource(
   if (matches && filter.search) {
     const filterString = filter.search.toLowerCase();
     const usedMatchCriteria = [
+      item.metadata.uid.toLowerCase(),
       item.metadata.namespace ? item.metadata.namespace.toLowerCase() : '',
       item.metadata.name.toLowerCase(),
       ...Object.keys(item.metadata.labels || {}).map(item => item.toLowerCase()),

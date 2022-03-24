@@ -32,6 +32,10 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
 
   const [showFilters, setShowFilters] = React.useState<boolean>(hasNamespaceFilters || hasSearch);
 
+  React.useEffect(() => {
+    setShowFilters(hasSearch);
+  }, [hasSearch]);
+
   function resetFilters() {
     addQuery({ namespace: '' }, { namespace: '' }, history, location);
     dispatch(resetFilter());
