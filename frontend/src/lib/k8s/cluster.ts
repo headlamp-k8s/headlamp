@@ -50,13 +50,18 @@ export interface KubeOwnerReference {
   uid: string;
 }
 
+export interface ApiListOptions {
+  namespace?: string;
+}
+
 // We have to define a KubeObject implementation here because the KubeObject
 // class is defined within the function and therefore not inferable.
 export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
   apiList: (onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void) => any;
   useApiList: (
     onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void,
-    onError?: (err: ApiError) => void
+    onError?: (err: ApiError) => void,
+    opts?: ApiListOptions
   ) => any;
   useApiGet: (
     onGet: (...args: any) => void,
@@ -65,7 +70,7 @@ export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
     onError?: (err: ApiError) => void
   ) => void;
   useList: (
-    onList?: (...arg: any[]) => any
+    opts?: ApiListOptions
   ) => [any[], ApiError | null, (items: any[]) => void, (err: ApiError | null) => void];
   getErrorMessage: (err?: ApiError | null) => string | null;
   new (json: T): any;
@@ -139,14 +144,15 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     static apiList<U extends KubeObject>(
       onList: (arg: U[]) => void,
-      onError?: (err: ApiError) => void
+      onError?: (err: ApiError) => void,
+      opts?: ApiListOptions
     ) {
       const createInstance = (item: T) => this.create(item) as U;
 
       const args: any[] = [(list: T[]) => onList(list.map((item: T) => createInstance(item) as U))];
 
       if (this.apiEndpoint.isNamespaced) {
-        args.unshift(null);
+        args.unshift(opts?.namespace || null);
       }
 
       if (onError) {
@@ -158,18 +164,16 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     static useApiList<U extends KubeObject>(
       onList: (...arg: any[]) => any,
-      onError?: (err: ApiError) => void
+      onError?: (err: ApiError) => void,
+      opts?: ApiListOptions
     ) {
       const listCallback = onList as (arg: U[]) => void;
-      useConnectApi(this.apiList(listCallback, onError));
+      useConnectApi(this.apiList(listCallback, onError, opts));
     }
 
-    static useList<U extends KubeObject>(): [
-      U[] | null,
-      ApiError | null,
-      (items: U[]) => void,
-      (err: ApiError | null) => void
-    ] {
+    static useList<U extends KubeObject>(
+      opts?: ApiListOptions
+    ): [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
       const [objList, setObjList] = React.useState<U[] | null>(null);
       const [error, setError] = useErrorState(setObjList);
 
@@ -180,7 +184,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         }
       }
 
-      this.useApiList(setList, setError);
+      this.useApiList(setList, setError, opts);
 
       // Return getters and then the setters as the getters are more likely to be used with
       // this function.
