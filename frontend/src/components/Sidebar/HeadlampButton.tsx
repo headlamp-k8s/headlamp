@@ -30,6 +30,8 @@ const useStyle = makeStyles(theme => ({
       props.isSmall && !props.isSidebarOpen ? 0 : '6px 8px',
     minWidth: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
       props.isSmall && !props.isSidebarOpen ? 55 : 64,
+    // Useful for when the button has text.
+    color: theme.palette.primary.contrastText,
   },
 }));
 
