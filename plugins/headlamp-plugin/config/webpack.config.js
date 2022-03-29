@@ -9,6 +9,7 @@ const externalModules = {
   lodash: 'pluginLib.Lodash',
   notistack: 'pluginLib.Notistack',
   '@kinvolk/headlamp-plugin/lib/CommonComponents': 'pluginLib.CommonComponents',
+  '@kinvolk/headlamp-plugin/lib/K8s': 'pluginLib.K8s',
   '@kinvolk/headlamp-plugin/lib': 'pluginLib',
 };
 
