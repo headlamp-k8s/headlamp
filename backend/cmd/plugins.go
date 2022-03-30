@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"path"
 	"path/filepath"
+	"runtime"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
@@ -29,12 +29,16 @@ func defaultPluginDir() string {
 	//  - "./.plugins" if it exists.
 	//  - ~/.config/Headlamp/plugins exists or it can be made
 	//  - "./.plugins" if the ~/.config/Headlamp/plugins can't be made.
+	// Windows: %APPDATA%\Headlamp\Config\plugins
+	//   (for example, C:\Users\USERNAME\AppData\Roaming\Headlamp\Config\plugins)
 	pluginDirDefault := "./.plugins"
 
 	if folderExists(pluginDirDefault) {
 		return pluginDirDefault
 	}
 
+	// https://www.npmjs.com/package/env-paths
+	// https://pkg.go.dev/os#UserConfigDir
 	userConfigDir, err := os.UserConfigDir()
 	if err != nil {
 		log.Printf("error getting user config dir: %s\n", err)
@@ -42,7 +46,12 @@ func defaultPluginDir() string {
 		return pluginDirDefault
 	}
 
-	pluginsConfigDir := path.Join(userConfigDir, "Headlamp", "plugins")
+	pluginsConfigDir := filepath.Join(userConfigDir, "Headlamp", "plugins")
+	if runtime.GOOS == "windows" {
+		// golang is wrong for config folder on windows.
+		// This matches env-paths and headlamp-plugin.
+		pluginsConfigDir = filepath.Join(userConfigDir, "Headlamp", "Config", "plugins")
+	}
 
 	err = os.MkdirAll(pluginsConfigDir, 0755)
 
