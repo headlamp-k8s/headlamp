@@ -1,3 +1,4 @@
+import { OpPatch } from 'json-patch';
 import React from 'react';
 import { createRouteURL } from '../router';
 import { timeAgo, useErrorState } from '../util';
@@ -241,6 +242,18 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     static put(data: KubeObjectInterface) {
       return this.apiEndpoint.put(data);
+    }
+
+    patch(body: OpPatch[]) {
+      const patchMethod = this._class().apiEndpoint.patch;
+      const args: Parameters<typeof patchMethod> = [body];
+
+      if (this._class().apiEndpoint.isNamespaced) {
+        args.push(this.getNamespace());
+      }
+
+      args.push(this.getName());
+      return this._class().apiEndpoint.patch(...args);
     }
 
     async getAuthorization(verb: string) {
