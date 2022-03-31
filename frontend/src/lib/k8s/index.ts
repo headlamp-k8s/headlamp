@@ -12,7 +12,6 @@ import ClusterRoleBinding from './clusterRoleBinding';
 import ConfigMap from './configMap';
 import CustomResourceDefinition from './crd';
 import CronJob from './cronJob';
-import CustomResource from './customresource';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
 import Ingress from './ingress';
@@ -50,7 +49,6 @@ const classList = [
   Pod,
   ReplicaSet,
   Role,
-  CustomResource,
   RoleBinding,
   Secret,
   Service,
@@ -178,7 +176,6 @@ export * as clusterRoleBinding from './clusterRoleBinding';
 export * as configMap from './configMap';
 export * as crd from './crd';
 export * as cronJob from './cronJob';
-export * as customresource from './customresource';
 export * as daemonSet from './daemonSet';
 export * as deployment from './deployment';
 export * as event from './event';
