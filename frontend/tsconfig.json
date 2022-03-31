@@ -25,7 +25,8 @@
   ],
   "typedocOptions": {
     "out": "../docs/development/api",
-    "entryPoints": ["src/lib/k8s/index.ts", "src/lib/util.ts", "src/plugin/lib.ts", "src/plugin/registry.tsx"],
+    "entryPoints": ["src/lib/k8s/", "src/redux/reducers/config.tsx",  "src/lib/k8s/cluster.ts", "src/lib/router.tsx", "src/lib/util.ts", "src/plugin/lib.ts", "src/plugin/registry.tsx"],
+    "entryPointStrategy": "expand",
     "theme": "hugo",
     "excludeExternals": true,
     "excludePrivate": true,

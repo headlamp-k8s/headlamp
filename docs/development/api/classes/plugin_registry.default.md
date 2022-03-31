@@ -39,7 +39,32 @@ register.registerAppBarAction('monitor', () => <MonitorLink /> );
 
 #### Defined in
 
-[plugin/registry.tsx:110](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/plugin/registry.tsx#L110)
+[plugin/registry.tsx:112](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L112)
+
+___
+
+### registerAppLogo
+
+▸ **registerAppLogo**(`component`): `void`
+
+**`example`**
+```JSX
+register.registerAppLogo((props: { logoType: 'small' | 'large', themeName: string}) => <MY_CUSTOM_COMPONENT logoType={logoType}/>)
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `component` | ``null`` \| `ComponentType`<{ `[key: string]`: `any`; `logoType`: ``"small"`` \| ``"large"`` ; `themeName`: `string`  }\> | is a React Component that takes two required props ```JSX logoType``` which is a constant string literal that accepts either of the two values ```JSX small``` or ```JSX large``` depending on whether the sidebar is in shrink or expaned state so that you can change your logo from small to large and the other optional prop is the ```JSX themeName``` which is a string with two values 'light' and 'dark' base on which theme is selected. |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/registry.tsx:143](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L143)
 
 ___
 
@@ -70,7 +95,7 @@ register.registerDetailsViewHeaderAction('traces', (props) =>
 
 #### Defined in
 
-[plugin/registry.tsx:91](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/plugin/registry.tsx#L91)
+[plugin/registry.tsx:93](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L93)
 
 ___
 
@@ -99,7 +124,7 @@ register.registerDetailsViewSection("biolatency", (resource: KubeObject) => { ti
 
 #### Defined in
 
-[plugin/registry.tsx:126](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/plugin/registry.tsx#L126)
+[plugin/registry.tsx:128](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L128)
 
 ___
 
@@ -127,7 +152,7 @@ register.registerRoute({
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `routeSpec` | `Route` | details of URL, highlighted sidebar and component to use. |
+| `routeSpec` | [`Route`](../interfaces/lib_router.Route.md) | details of URL, highlighted sidebar and component to use. |
 
 #### Returns
 
@@ -135,7 +160,7 @@ register.registerRoute({
 
 #### Defined in
 
-[plugin/registry.tsx:72](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/plugin/registry.tsx#L72)
+[plugin/registry.tsx:74](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L74)
 
 ___
 
@@ -168,4 +193,4 @@ registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
 
 #### Defined in
 
-[plugin/registry.tsx:35](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/plugin/registry.tsx#L35)
+[plugin/registry.tsx:37](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L37)

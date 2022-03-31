@@ -11,7 +11,7 @@ import {
 } from '../redux/actions/actions';
 import store from '../redux/stores/store';
 
-interface SectionFuncProps {
+export interface SectionFuncProps {
   title: string;
   component: (props: { resource: any }) => JSX.Element | null;
 }

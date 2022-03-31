@@ -146,7 +146,7 @@ export function getVersion(): Promise<StringDict> {
   return request('/version');
 }
 
-type CancellablePromise = Promise<() => void>;
+export type CancellablePromise = Promise<() => void>;
 
 export function useConnectApi(...apiCalls: (() => CancellablePromise)[]) {
   // Use the location to make sure the API calls are changed, as they may depend on the cluster

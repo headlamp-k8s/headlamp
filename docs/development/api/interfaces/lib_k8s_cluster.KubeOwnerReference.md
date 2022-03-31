@@ -1,0 +1,67 @@
+---
+title: "Interface: KubeOwnerReference"
+linkTitle: "KubeOwnerReference"
+slug: "lib_k8s_cluster.KubeOwnerReference"
+---
+
+[lib/k8s/cluster](../modules/lib_k8s_cluster.md).KubeOwnerReference
+
+## Properties
+
+### apiVersion
+
+• **apiVersion**: `string`
+
+#### Defined in
+
+[lib/k8s/cluster.ts:44](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L44)
+
+___
+
+### blockOwnerDeletion
+
+• **blockOwnerDeletion**: `boolean`
+
+#### Defined in
+
+[lib/k8s/cluster.ts:45](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L45)
+
+___
+
+### controller
+
+• **controller**: `boolean`
+
+#### Defined in
+
+[lib/k8s/cluster.ts:46](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L46)
+
+___
+
+### kind
+
+• **kind**: `string`
+
+#### Defined in
+
+[lib/k8s/cluster.ts:47](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L47)
+
+___
+
+### name
+
+• **name**: `string`
+
+#### Defined in
+
+[lib/k8s/cluster.ts:48](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L48)
+
+___
+
+### uid
+
+• **uid**: `string`
+
+#### Defined in
+
+[lib/k8s/cluster.ts:49](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L49)

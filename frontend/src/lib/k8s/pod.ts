@@ -26,7 +26,7 @@ export interface KubePod extends KubeObjectInterface {
   };
 }
 
-interface ExecOptions {
+export interface ExecOptions {
   command?: string[];
   reconnectOnFailure?: boolean;
 }

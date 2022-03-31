@@ -369,7 +369,7 @@ export interface KubeContainer {
   imagePullPolicy: string;
 }
 
-interface KubeContainerProbe {
+export interface KubeContainerProbe {
   httpGet?: {
     path?: string;
     port: number;

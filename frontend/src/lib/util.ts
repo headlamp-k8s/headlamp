@@ -17,7 +17,7 @@ const TIME_AGO = new TimeAgo();
 
 export const CLUSTER_ACTION_GRACE_PERIOD = 5000; // ms
 
-type DateParam = string | number | Date;
+export type DateParam = string | number | Date;
 
 export function timeAgo(date: DateParam) {
   return TIME_AGO.format(new Date(date), 'time');

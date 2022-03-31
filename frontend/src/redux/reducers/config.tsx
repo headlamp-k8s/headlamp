@@ -12,7 +12,13 @@ export const INITIAL_STATE: ConfigState = {
   clusters: null,
 };
 
-function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
+export interface ConfigAction extends Action {
+  config: {
+    clusters: ConfigState['clusters'];
+  };
+}
+
+function reducer(state = _.cloneDeep(INITIAL_STATE), action: ConfigAction) {
   const newState = { ...state };
   switch (action.type) {
     case CONFIG_NEW:
