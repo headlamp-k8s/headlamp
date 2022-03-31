@@ -1,5 +1,6 @@
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { INITIAL_STATE as API_INITIAL_STATE } from '../reducers/api';
 import { INITIAL_STATE as CONFIG_INITIAL_STATE } from '../reducers/config';
 import { INITIAL_STATE as FILTER_INITIAL_STATE } from '../reducers/filter';
 import reducers from '../reducers/reducers';
@@ -10,6 +11,7 @@ const initialState = {
   filter: FILTER_INITIAL_STATE,
   ui: UI_INITIAL_STATE,
   config: CONFIG_INITIAL_STATE,
+  api: API_INITIAL_STATE,
 };
 
 const sagaMiddleware = createSagaMiddleware();

@@ -137,6 +137,7 @@ export function PodListRenderer(props: PodListProps) {
 
 export default function PodList() {
   const [pods, error] = Pod.useList();
+  // Deployment.useList1();
 
   return <PodListRenderer pods={pods} error={error} />;
 }
