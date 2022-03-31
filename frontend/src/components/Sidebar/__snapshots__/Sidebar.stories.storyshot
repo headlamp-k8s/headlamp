@@ -22,14 +22,9 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
           <span
             class="MuiButton-label"
           >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root makeStyles-logo"
-              focusable="false"
-              viewBox="0 0 auto 32"
-            >
-              icon-light.svg
-            </svg>
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
           </span>
           <span
             class="MuiTouchRipple-root"
@@ -757,14 +752,9 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
           <span
             class="MuiButton-label"
           >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root makeStyles-logo"
-              focusable="false"
-              viewBox="0 0 auto 32"
-            >
-              logo-light.svg
-            </svg>
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
           </span>
           <span
             class="MuiTouchRipple-root"

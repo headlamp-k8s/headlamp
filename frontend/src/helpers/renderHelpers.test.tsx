@@ -50,6 +50,10 @@ describe('renders a detail view present in store', () => {
     theme: {
       name: '',
     },
+    branding: {
+      logo: null,
+    },
+    pluginsLoaded: true,
   };
   const mockStore = createStore(
     combineReducers({

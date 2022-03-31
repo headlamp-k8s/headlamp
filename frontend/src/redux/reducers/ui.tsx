@@ -4,9 +4,12 @@ import themesConf, { setTheme } from '../../lib/themes';
 import { sectionFunc } from '../../plugin/registry';
 import {
   Action,
+  BrandingProps,
   HeaderActionFunc,
   UI_APP_BAR_SET_ACTION,
+  UI_BRANDING_SET_APP_LOGO,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
+  UI_PLUGINS_LOADED,
   UI_RESET_PLUGIN_VIEWS,
   UI_ROUTER_SET_ROUTE,
   UI_SET_DETAILS_VIEW,
@@ -61,6 +64,8 @@ export interface UIState {
   theme: {
     name: string;
   };
+  branding: BrandingProps;
+  pluginsLoaded: boolean;
 }
 
 function setInitialSidebarOpen() {
@@ -113,6 +118,10 @@ export const INITIAL_STATE: UIState = {
   },
   theme: {
     name: '',
+  },
+  pluginsLoaded: false,
+  branding: {
+    logo: null,
   },
 };
 
@@ -187,6 +196,15 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       // Keep the sidebar folding state in the current one
       newState.sidebar = { ...newState.sidebar, ...setInitialSidebarOpen() };
       return newState;
+    }
+    case UI_PLUGINS_LOADED: {
+      newFilters.pluginsLoaded = action.pluginsLoadedState;
+      break;
+    }
+    case UI_BRANDING_SET_APP_LOGO: {
+      const component = action.component;
+      newFilters.branding.logo = component;
+      break;
     }
     default:
       return state;

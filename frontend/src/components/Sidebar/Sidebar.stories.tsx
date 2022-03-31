@@ -2,7 +2,9 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import store from '../../redux/stores/store';
 import prepareRoutes from './prepareRoutes';
 import { PureSidebar, PureSidebarProps } from './Sidebar';
 
@@ -29,7 +31,9 @@ const Template: Story<PureSidebarProps> = args => {
   const items = prepareRoutes(t);
 
   return (
-    <PureSidebar {...args} items={items} open={open} onToggleOpen={() => setOpenConfirm(!open)} />
+    <Provider store={store}>
+      <PureSidebar {...args} items={items} open={open} onToggleOpen={() => setOpenConfirm(!open)} />
+    </Provider>
   );
 };
 
