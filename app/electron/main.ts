@@ -358,8 +358,9 @@ function startElecron() {
     mainWindow.loadURL(startUrl);
 
     mainWindow.webContents.setWindowOpenHandler(({ url }) => {
-      // allow all urls starting with app startUrl to open in electron
-      if (url.startsWith(startUrl)) {
+      // Allow all app's domain URLs and also ones that are "about:blank"
+      // (so plugins can open e.g. popups for authentication).
+      if (url.startsWith(startUrl) || url === 'about:blank') {
         return { action: 'allow' };
       }
       // otherwise open url in a browser and prevent default
