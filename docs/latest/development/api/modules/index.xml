@@ -13,16 +13,265 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s/</guid>
-      <description>Variables ResourceClasses • ResourceClasses: Object = resourceClassesDict
-Index signature ▪ [className: string]: KubeObject
-Defined in  lib/k8s/index.ts:73 Functions getVersion ▸ getVersion(): Promise&amp;lt;StringDict&amp;gt;
-Returns Promise&amp;lt;StringDict&amp;gt;
+      <description>Type aliases CancellablePromise Ƭ CancellablePromise: Promise&amp;lt;() =&amp;gt; void&amp;gt;
+Defined in  lib/k8s/index.ts:149 Variables ResourceClasses • ResourceClasses: Object = resourceClassesDict
+Index signature ▪ [className: string]: KubeObject Defined in  lib/k8s/index.ts:73 Functions getVersion ▸ getVersion(): Promise&amp;lt; StringDict &amp;gt;
+Returns Promise&amp;lt; StringDict &amp;gt;
 Defined in  lib/k8s/index.ts:145  useCluster ▸ useCluster(): null | string
 Returns null | string
-Defined in  lib/k8s/index.ts:128  useClustersConf ▸ useClustersConf(): ConfigState[&amp;quot;clusters&amp;quot;]
-Returns ConfigState[&amp;quot;clusters&amp;quot;]
-Defined in  lib/k8s/index.ts:80  useConnectApi ▸ useConnectApi(&amp;hellip;apiCalls): void
-Parameters    Name Type     ...apiCalls () =&amp;gt; CancellablePromise[]    Returns void</description>
+Defined in  lib/k8s/index.ts:128  useClustersConf ▸ useClustersConf(): ConfigState [&amp;quot;clusters&amp;quot;]
+Returns  ConfigState [&amp;quot;clusters&amp;quot;]
+Defined in  lib/k8s/index.</description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/apiProxy</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_apiproxy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_apiproxy/</guid>
+      <description>Interfaces   ApiError   RequestParams   StreamArgs   Type aliases StreamErrCb Ƭ StreamErrCb: (err: Error &amp;amp; { status?: number }, cancelStreamFunc?: () =&amp;gt; void) =&amp;gt; void
+Type declaration ▸ (err, cancelStreamFunc?): void
+Parameters    Name Type     err Error &amp;amp; { status?: number }   cancelStreamFunc? () =&amp;gt; void    Returns void
+Defined in  lib/k8s/apiProxy.ts:109  StreamResultsCb Ƭ StreamResultsCb: (&amp;hellip;args: any[]) =&amp;gt; void</description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/cluster</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_cluster/</guid>
+      <description>References Cluster Re-exports Cluster  KubeCondition Re-exports KubeCondition  KubeContainer Re-exports KubeContainer  KubeContainerProbe Re-exports KubeContainerProbe  KubeContainerStatus Re-exports KubeContainerStatus  KubeMetadata Re-exports KubeMetadata  KubeMetrics Re-exports KubeMetrics  KubeObject Re-exports KubeObject  KubeObjectClass Re-exports KubeObjectClass  KubeObjectIface Re-exports KubeObjectIface  KubeObjectInterface Re-exports KubeObjectInterface  KubeOwnerReference Re-exports KubeOwnerReference  LabelSelector Re-exports LabelSelector  StringDict Re-exports StringDict  Workload Re-exports Workload  makeKubeObject Re-exports makeKubeObject </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/clusterRole</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_clusterrole/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_clusterrole/</guid>
+      <description>Classes   default   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/clusterRoleBinding</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_clusterrolebinding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_clusterrolebinding/</guid>
+      <description>Classes   default   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/configMap</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_configmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_configmap/</guid>
+      <description>Classes   default   Interfaces   KubeConfigMap   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/crd</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_crd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_crd/</guid>
+      <description>Classes   default   Interfaces   KubeCRD   Functions makeCustomResourceClass ▸ makeCustomResourceClass(args, isNamespaced): any
+Parameters    Name Type     args [group: string, version: string, pluralName: string][]   isNamespaced boolean    Returns any
+Defined in  lib/k8s/crd.ts:57 </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/cronJob</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_cronjob/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_cronjob/</guid>
+      <description>Classes   default   Interfaces   KubeCronJob   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/customresource</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_customresource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_customresource/</guid>
+      <description>Classes   default   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/daemonSet</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_daemonset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_daemonset/</guid>
+      <description>Classes   default   Interfaces   KubeDaemonSet   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/deployment</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_deployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_deployment/</guid>
+      <description>Classes   default   Interfaces   KubeDeployment   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/event</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_event/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_event/</guid>
+      <description>Classes   default   Interfaces   KubeEvent   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/ingress</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_ingress/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_ingress/</guid>
+      <description>Classes   default   Interfaces   KubeIngress   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/job</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_job/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_job/</guid>
+      <description>Classes   default   Interfaces   KubeJob   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/namespace</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_namespace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_namespace/</guid>
+      <description>Classes   default   Interfaces   KubeNamespace   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/node</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_node/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_node/</guid>
+      <description>Classes   default   Interfaces   KubeNode   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/persistentVolume</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_persistentvolume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_persistentvolume/</guid>
+      <description>Classes   default   Interfaces   KubePersistentVolume   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/persistentVolumeClaim</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_persistentvolumeclaim/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_persistentvolumeclaim/</guid>
+      <description>Classes   default   Interfaces   KubePersistentVolumeClaim   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/pod</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_pod/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_pod/</guid>
+      <description>Classes   default   Interfaces   ExecOptions   KubePod   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/replicaSet</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_replicaset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_replicaset/</guid>
+      <description>Classes   default   Interfaces   KubeReplicaSet   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/role</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_role/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_role/</guid>
+      <description>Classes   default   Interfaces   KubeRole   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/roleBinding</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_rolebinding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_rolebinding/</guid>
+      <description>Classes   default   Interfaces   KubeRoleBinding   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/secret</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_secret/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_secret/</guid>
+      <description>Classes   default   Interfaces   KubeSecret   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/service</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_service/</guid>
+      <description>Classes   default   Interfaces   KubeService   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/serviceAccount</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_serviceaccount/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_serviceaccount/</guid>
+      <description>Classes   default   Interfaces   KubeServiceAccount   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/statefulSet</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_statefulset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_statefulset/</guid>
+      <description>Classes   default   Interfaces   KubeStatefulSet   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/storageClass</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_storageclass/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_storageclass/</guid>
+      <description>Classes   default   Interfaces   KubeStorageClass   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/router</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_router/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_router/</guid>
+      <description>Interfaces   Route   RouteURLProps   Variables NotFoundRoute • NotFoundRoute: Object
+Type declaration    Name Type     component () =&amp;gt; Element   exact boolean   noAuthRequired boolean   path string   sidebar null    Defined in  lib/router.tsx:430  ROUTES • ROUTES: Object
+Index signature ▪ [routeName: string]: Route Defined in  lib/router.tsx:76 Functions createRouteURL ▸ createRouteURL(routeName, params?</description>
     </item>
     
     <item>
@@ -31,12 +280,11 @@ Parameters    Name Type     ...apiCalls () =&amp;gt; CancellablePromise[]    Ret
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util/</guid>
-      <description>Interfaces   FilterState   Variables CLUSTER_ACTION_GRACE_PERIOD • CLUSTER_ACTION_GRACE_PERIOD: 5000
+      <description>Interfaces   FilterState   Type aliases DateParam Ƭ DateParam: string | number | Date
+Defined in  lib/util.ts:20 Variables CLUSTER_ACTION_GRACE_PERIOD • CLUSTER_ACTION_GRACE_PERIOD: 5000
 Defined in  lib/util.ts:18 Functions filterResource ▸ filterResource(item, filter, matchCriteria?): boolean
-Parameters    Name Type     item KubeObjectInterface   filter FilterState    matchCriteria? string[]    Returns boolean
-Defined in  lib/util.ts:85  getCluster ▸ getCluster(): string | null
-Returns string | null
-Defined in  lib/util.ts:153  getClusterPrefixedPath ▸ getClusterPrefixedPath(path?</description>
+Parameters    Name Type     item KubeObjectInterface    filter FilterState    matchCriteria? string[]    Returns boolean
+Defined in  lib/util.ts:85  getCluster ▸ getCluster(): string | null</description>
     </item>
     
     <item>
@@ -55,10 +303,21 @@ Classes   Headlamp   Plugin   </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_registry/</guid>
-      <description>Classes   default   Type aliases sectionFunc Ƭ sectionFunc: (resource: KubeObject) =&amp;gt; SectionFuncProps | null | undefined
+      <description>Classes   default   Interfaces   SectionFuncProps   Type aliases sectionFunc Ƭ sectionFunc: (resource: KubeObject ) =&amp;gt; SectionFuncProps | null | undefined
 Type declaration ▸ (resource): SectionFuncProps | null | undefined
-Parameters    Name Type     resource KubeObject    Returns SectionFuncProps | null | undefined
-Defined in  plugin/registry.tsx:17 </description>
+Parameters    Name Type     resource KubeObject     Returns  SectionFuncProps | null | undefined
+Defined in  plugin/registry.tsx:19 </description>
+    </item>
+    
+    <item>
+      <title>Module: redux/reducers/config</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/redux_reducers_config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/redux_reducers_config/</guid>
+      <description>Interfaces   ConfigAction   ConfigState   Variables INITIAL_STATE • INITIAL_STATE: ConfigState Defined in  redux/reducers/config.tsx:11 Functions default ▸ default(state?, action): Object
+Parameters    Name Type     state ConfigState    action ConfigAction     Returns Object
+   Name Type     clusters null | { [clusterName: string]: Cluster ; }    Defined in  redux/reducers/config.</description>
     </item>
     
   </channel>
