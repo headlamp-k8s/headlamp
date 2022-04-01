@@ -12,7 +12,6 @@ import ClusterRoleBinding from './clusterRoleBinding';
 import ConfigMap from './configMap';
 import CustomResourceDefinition from './crd';
 import CronJob from './cronJob';
-import CustomResource from './customresource';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
 import Ingress from './ingress';
@@ -50,7 +49,6 @@ const classList = [
   Pod,
   ReplicaSet,
   Role,
-  CustomResource,
   RoleBinding,
   Secret,
   Service,
@@ -170,3 +168,29 @@ export function useConnectApi(...apiCalls: (() => CancellablePromise)[]) {
     [location]
   );
 }
+
+// Other exports that can be used by plugins:
+export * as cluster from './cluster';
+export * as clusterRole from './clusterRole';
+export * as clusterRoleBinding from './clusterRoleBinding';
+export * as configMap from './configMap';
+export * as crd from './crd';
+export * as cronJob from './cronJob';
+export * as daemonSet from './daemonSet';
+export * as deployment from './deployment';
+export * as event from './event';
+export * as ingress from './ingress';
+export * as job from './job';
+export * as namespace from './namespace';
+export * as node from './node';
+export * as persistentVolume from './persistentVolume';
+export * as persistentVolumeClaim from './persistentVolumeClaim';
+export * as pod from './pod';
+export * as replicaSet from './replicaSet';
+export * as role from './role';
+export * as roleBinding from './roleBinding';
+export * as secret from './secret';
+export * as service from './service';
+export * as serviceAccount from './serviceAccount';
+export * as statefulSet from './statefulSet';
+export * as storageClass from './storageClass';
