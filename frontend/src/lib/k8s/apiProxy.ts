@@ -19,7 +19,7 @@ const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
 const DEFAULT_TIMEOUT = 2 * 60 * 1000; // ms
 
-interface RequestParams {
+export interface RequestParams {
   timeout?: number; // ms
   [prop: string]: any;
 }
@@ -502,7 +502,7 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
   }
 }
 
-interface StreamArgs {
+export interface StreamArgs {
   isJson?: boolean;
   additionalProtocols?: string[];
   connectCb?: () => void;

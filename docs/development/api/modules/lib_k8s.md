@@ -4,6 +4,16 @@ linkTitle: "lib/k8s"
 slug: "lib_k8s"
 ---
 
+## Type aliases
+
+### CancellablePromise
+
+Ƭ **CancellablePromise**: `Promise`<() => `void`\>
+
+#### Defined in
+
+[lib/k8s/index.ts:149](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L149)
+
 ## Variables
 
 ### ResourceClasses
@@ -12,25 +22,25 @@ slug: "lib_k8s"
 
 #### Index signature
 
-▪ [className: `string`]: `KubeObject`
+▪ [className: `string`]: [`KubeObject`](lib_k8s_cluster.md#kubeobject)
 
 #### Defined in
 
-[lib/k8s/index.ts:73](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/lib/k8s/index.ts#L73)
+[lib/k8s/index.ts:73](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L73)
 
 ## Functions
 
 ### getVersion
 
-▸ **getVersion**(): `Promise`<`StringDict`\>
+▸ **getVersion**(): `Promise`<[`StringDict`](../interfaces/lib_k8s_cluster.StringDict.md)\>
 
 #### Returns
 
-`Promise`<`StringDict`\>
+`Promise`<[`StringDict`](../interfaces/lib_k8s_cluster.StringDict.md)\>
 
 #### Defined in
 
-[lib/k8s/index.ts:145](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/lib/k8s/index.ts#L145)
+[lib/k8s/index.ts:145](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L145)
 
 ___
 
@@ -44,21 +54,21 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:128](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/lib/k8s/index.ts#L128)
+[lib/k8s/index.ts:128](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L128)
 
 ___
 
 ### useClustersConf
 
-▸ **useClustersConf**(): `ConfigState`[``"clusters"``]
+▸ **useClustersConf**(): [`ConfigState`](../interfaces/redux_reducers_config.ConfigState.md)[``"clusters"``]
 
 #### Returns
 
-`ConfigState`[``"clusters"``]
+[`ConfigState`](../interfaces/redux_reducers_config.ConfigState.md)[``"clusters"``]
 
 #### Defined in
 
-[lib/k8s/index.ts:80](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/lib/k8s/index.ts#L80)
+[lib/k8s/index.ts:80](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L80)
 
 ___
 
@@ -70,7 +80,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `...apiCalls` | () => `CancellablePromise`[] |
+| `...apiCalls` | () => [`CancellablePromise`](lib_k8s.md#cancellablepromise)[] |
 
 #### Returns
 
@@ -78,4 +88,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:151](https://github.com/kinvolk/headlamp/blob/d0c9391/frontend/src/lib/k8s/index.ts#L151)
+[lib/k8s/index.ts:151](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L151)
