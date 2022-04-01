@@ -9,6 +9,7 @@ import {
   setRoute,
   setSidebarItem,
 } from '../redux/actions/actions';
+import { SidebarEntry } from '../redux/reducers/ui';
 import store from '../redux/stores/store';
 
 export interface SectionFuncProps {
@@ -26,7 +27,9 @@ export default class Registry {
    * @param itemName - name of this SidebarItem.
    * @param itemLabel - label to display.
    * @param url - the URL to go to, when this item is followed.
-   * @param opts - ... todo
+   * @param opts - may have `useClusterURL` (default=true) which indicates whether the URL should
+   * have the cluster prefix or not; and `icon` (an iconify string or icon object) that will be used
+   * for the sidebar's icon.
    *
    * @example
    *
@@ -39,15 +42,17 @@ export default class Registry {
     itemName: string,
     itemLabel: string,
     url: string,
-    opts = { useClusterURL: true }
+    opts: Pick<SidebarEntry, 'useClusterURL' | 'icon'> = { useClusterURL: true }
   ) {
+    const { useClusterURL = true, ...options } = opts;
     store.dispatch(
       setSidebarItem({
         name: itemName,
         label: itemLabel,
         url,
-        useClusterURL: !!opts.useClusterURL,
         parent: parentName,
+        useClusterURL,
+        ...options,
       })
     );
   }
