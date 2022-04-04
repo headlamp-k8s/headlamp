@@ -169,6 +169,13 @@ func getOidcCallbackURL(r *http.Request, config *HeadlampConfig) string {
 	return fmt.Sprintf("%s://%s/oidc-callback", urlScheme, hostWithBaseURL)
 }
 
+func serveWithNoCacheHeader(fs http.Handler) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add("Cache-Control", "no-cache")
+		fs.ServeHTTP(w, r)
+	}
+}
+
 // nolint:gocognit,funlen
 func StartHeadlampServer(config *HeadlampConfig) {
 	kubeConfigPath := ""
@@ -265,6 +272,12 @@ func StartHeadlampServer(config *HeadlampConfig) {
 
 	// Serve plugins
 	pluginHandler := http.StripPrefix(config.baseURL+"/plugins/", http.FileServer(http.Dir(config.pluginDir)))
+	// If we're running locally, then do not cache the plugins. This ensures that reloading them (development,
+	// update) will actually get the new content.
+	if !config.useInCluster {
+		pluginHandler = serveWithNoCacheHeader(pluginHandler)
+	}
+
 	r.PathPrefix("/plugins/").Handler(pluginHandler)
 
 	// Configuration
