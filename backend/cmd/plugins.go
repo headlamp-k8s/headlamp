@@ -1,15 +1,18 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
 	"runtime"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
+	"github.com/gorilla/mux"
 )
 
 // folderExists(path) returns true if the folder exists.
@@ -153,7 +156,16 @@ func watchSubfolders(path string) {
 // Returns pluginListURLs, nil if there is no problem.
 // returns nil, err if there's an error.
 func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
-	files, err := ioutil.ReadDir(c.pluginDir)
+	pluginListURL, err := pluginURLsForDir(c.pluginDir, filepath.Join(c.baseURL, "plugins"))
+	if err != nil {
+		return nil, err
+	}
+
+	return pluginListURL, nil
+}
+
+func pluginURLsForDir(pluginDir string, baseURL string) ([]string, error) {
+	files, err := ioutil.ReadDir(pluginDir)
 	if err != nil && !os.IsNotExist(err) {
 		return nil, err
 	}
@@ -162,13 +174,13 @@ func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
 
 	for _, f := range files {
 		if !f.IsDir() {
-			pluginPath := filepath.Join(c.pluginDir, f.Name())
+			pluginPath := filepath.Join(pluginDir, f.Name())
 			log.Printf("Not including plugin path '%s' it is not a folder.\n", pluginPath)
 
 			continue
 		}
 
-		pluginPath := filepath.Join(c.pluginDir, f.Name(), "main.js")
+		pluginPath := filepath.Join(pluginDir, f.Name(), "main.js")
 
 		_, err := os.Stat(pluginPath)
 		if err != nil {
@@ -176,9 +188,45 @@ func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
 			continue
 		}
 
-		pluginFileURL := filepath.Join(c.baseURL, "plugins", f.Name(), "main.js")
+		pluginFileURL := filepath.Join(baseURL, f.Name(), "main.js")
 		pluginListURLs = append(pluginListURLs, pluginFileURL)
 	}
 
 	return pluginListURLs, nil
+}
+
+func addPluginRoutes(config *HeadlampConfig, r *mux.Router) {
+	var err error
+
+	pluginListURLs, err = config.getPluginListURLs()
+	if err != nil {
+		if !os.IsNotExist(err) {
+			log.Println("Error: ", err)
+		}
+		// There was error, but we don't want to keep checking the plugins
+		// again, until we deliberately do (so making the list an empty one).
+		pluginListURLs = make([]string, 0)
+	}
+
+	r.HandleFunc("/plugins/list", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		// The pluginListURLs should only be nil if we want to dynamically load it
+		// (and that's available only when not running in-cluster).
+		if !config.useInCluster && pluginListURLs == nil {
+			pluginListURLs, _ = config.getPluginListURLs()
+		}
+		if err := json.NewEncoder(w).Encode(pluginListURLs); err != nil {
+			log.Println("Error encoding plugins list", err)
+		}
+	}).Methods("GET")
+
+	// Serve plugins
+	pluginHandler := http.StripPrefix(config.baseURL+"/plugins/", http.FileServer(http.Dir(config.pluginDir)))
+	// If we're running locally, then do not cache the plugins. This ensures that reloading them (development,
+	// update) will actually get the new content.
+	if !config.useInCluster {
+		pluginHandler = serveWithNoCacheHeader(pluginHandler)
+	}
+
+	r.PathPrefix("/plugins/").Handler(pluginHandler)
 }
