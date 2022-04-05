@@ -66,7 +66,7 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
 
   const secondPlugins = path.join(process.resourcesPath, '.plugins');
   if (fs.existsSync(secondPlugins)) {
-    serverArgs.concat(['-plugins-dir2', secondPlugins]);
+    serverArgs.concat(['-plugins-dir', secondPlugins]);
   }
 
   serverArgs.concat(flags);
