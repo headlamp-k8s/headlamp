@@ -64,6 +64,11 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
     serverArgs = serverArgs.concat(['--kubeconfig', fullPath]);
   }
 
+  const secondPlugins = path.join(process.resourcesPath, '.plugins');
+  if (fs.existsSync(secondPlugins)) {
+    serverArgs.concat(['-plugins-dir2', secondPlugins]);
+  }
+
   serverArgs.concat(flags);
 
   return spawn(serverFilePath, serverArgs, options);
