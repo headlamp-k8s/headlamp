@@ -15,6 +15,8 @@ func main() {
 	// @todo: Make this a uint and validate the values
 	port := flag.String("port", "4466", "Port to listen from")
 	pluginDir := flag.String("plugins-dir", defaultPluginDir(), "Specify the plugins directory to build the backend with")
+	pluginDir2 := flag.String("plugins-dir2", "", "An optional second plugins directory")
+
 	// For inCluster config we need to get the oidc properties from the flags
 	oidcClientID := flag.String("oidc-client-id", "", "ClientID for OIDC")
 	oidcClientSecret := flag.String("oidc-client-secret", "", "ClientSecret for OIDC")
@@ -44,6 +46,7 @@ func main() {
 		staticDir:        *staticDir,
 		insecure:         *insecure,
 		pluginDir:        *pluginDir,
+		pluginDir2:       *pluginDir2,
 		oidcClientID:     *oidcClientID,
 		oidcClientSecret: *oidcClientSecret,
 		oidcIdpIssuerURL: *oidcIdpIssuerURL,

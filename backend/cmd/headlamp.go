@@ -34,6 +34,7 @@ type HeadlampConfig struct {
 	port             string
 	staticDir        string
 	pluginDir        string
+	pluginDir2       string
 	oidcClientID     string
 	oidcClientSecret string
 	oidcScopes       []string
@@ -189,6 +190,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	}
 
 	log.Printf("plugins-dir: %s\n", config.pluginDir)
+	log.Printf("plugins-dir2: %s\n", config.pluginDir2)
 
 	if !config.useInCluster {
 		// in-cluster mode is unlikely to want reloading plugins.
@@ -246,39 +248,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		config.addProxyForContext(&contexts[i], r)
 	}
 
-	var err error
-
-	pluginListURLs, err = config.getPluginListURLs()
-	if err != nil {
-		if !os.IsNotExist(err) {
-			log.Println("Error: ", err)
-		}
-		// There was error, but we don't want to keep checking the plugins
-		// again, until we deliberately do (so making the list an empty one).
-		pluginListURLs = make([]string, 0)
-	}
-
-	r.HandleFunc("/plugins/list", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		// The pluginListURLs should only be nil if we want to dynamically load it
-		// (and that's available only when not running in-cluster).
-		if !config.useInCluster && pluginListURLs == nil {
-			pluginListURLs, _ = config.getPluginListURLs()
-		}
-		if err := json.NewEncoder(w).Encode(pluginListURLs); err != nil {
-			log.Println("Error encoding plugins list", err)
-		}
-	}).Methods("GET")
-
-	// Serve plugins
-	pluginHandler := http.StripPrefix(config.baseURL+"/plugins/", http.FileServer(http.Dir(config.pluginDir)))
-	// If we're running locally, then do not cache the plugins. This ensures that reloading them (development,
-	// update) will actually get the new content.
-	if !config.useInCluster {
-		pluginHandler = serveWithNoCacheHeader(pluginHandler)
-	}
-
-	r.PathPrefix("/plugins/").Handler(pluginHandler)
+	addPluginRoutes(config, r)
 
 	// Configuration
 	r.HandleFunc("/config", clientConf.getConfig).Methods("GET")
