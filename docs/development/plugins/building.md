@@ -130,3 +130,20 @@ the `-plugin-dir` option should point to the directory:
 The Headlamp desktop app will look for the plugins directory (in the format
 mentioned above) either under the user's Headlamp configuration folder,
 or within the current folder as `.plugins` if the former doesn't exist.
+
+### Bundling plugins with desktop version
+
+To build a Headlamp app with a set of plugins, first extract some plugins 
+into the .plugins folder in the root of the headlamp repo. To see more about
+how to extract files into there see "Shipping and Deploying Plugins" above.
+
+```bash
+cd plugins/examples/pod-counter
+npm install
+npm run build
+cd ../..
+
+npx @kinvolk/headlamp-plugin extract ./plugins/examples/ ./.plugins
+ls -la .plugins
+make app-linux
+```
