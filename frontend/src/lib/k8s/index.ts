@@ -17,6 +17,7 @@ import Deployment from './deployment';
 import Ingress from './ingress';
 import Job from './job';
 import Namespace from './namespace';
+import NetworkPolicy from './networkpolicy';
 import Node from './node';
 import PersistentVolume from './persistentVolume';
 import PersistentVolumeClaim from './persistentVolumeClaim';
@@ -43,6 +44,7 @@ const classList = [
   Ingress,
   Job,
   Namespace,
+  NetworkPolicy,
   Node,
   PersistentVolume,
   PersistentVolumeClaim,
