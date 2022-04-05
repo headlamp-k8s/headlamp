@@ -116,7 +116,7 @@
       "prettier --config package.json --write"
     ],
     "../plugins/examples/**/*.{ts,tsx}": [
-      "eslint -c package.json --fix"
+      "eslint -c package.json --fix --resolve-plugins-relative-to ."
     ],
     "../plugins/examples/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --config package.json --write"
