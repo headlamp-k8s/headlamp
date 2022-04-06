@@ -2652,6 +2652,19 @@ the <code>-plugin-dir</code> option should point to the directory:</p>
 <p>The Headlamp desktop app will look for the plugins directory (in the format
 mentioned above) either under the user&rsquo;s Headlamp configuration folder,
 or within the current folder as <code>.plugins</code> if the former doesn&rsquo;t exist.</p>
+<h3 id="bundling-plugins-with-desktop-version">Bundling plugins with desktop version</h3>
+<p>To build a Headlamp app with a set of plugins, first extract some plugins
+into the .plugins folder in the root of the &ldquo;headlamp&rdquo; repo.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd plugins/examples/pod-counter
+npm install
+npm run build
+cd ../..
+
+mkdir .plugins
+npx @kinvolk/headlamp-plugin extract ./plugins/examples/ ./.plugins
+ls -la .plugins
+make app-linux
+</code></pre></div><p>For more on how to extract files into there see &ldquo;Shipping and Deploying Plugins&rdquo; above.</p>
 
 
     </div>
@@ -2723,6 +2736,7 @@ or within the current folder as <code>.plugins</code> if the former doesn&rsquo;
       <ul>
         <li><a href="#in-cluster-deployment-with-plugins">In-cluster deployment with plugins</a></li>
         <li><a href="#using-plugins-on-the-desktop-version">Using plugins on the desktop version</a></li>
+        <li><a href="#bundling-plugins-with-desktop-version">Bundling plugins with desktop version</a></li>
       </ul>
     </li>
   </ul>
