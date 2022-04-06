@@ -1,6 +1,6 @@
 {
   "name": "headlamp",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "",
   "main": "electron/main.js",
   "homepage": ".",
