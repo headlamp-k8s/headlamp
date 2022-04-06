@@ -64,7 +64,18 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
     serverArgs = serverArgs.concat(['--kubeconfig', fullPath]);
   }
 
+  const bundledPlugins = path.join(process.resourcesPath, '.plugins');
+
+  function isEmpty(path) {
+    return fs.readdirSync(path).length === 0;
+  }
+
+  if (fs.existsSync(bundledPlugins) && !isEmpty(bundledPlugins)) {
+    serverArgs = serverArgs.concat(['-plugins-dir', bundledPlugins]);
+  }
+
   serverArgs.concat(flags);
+  console.log('arguments passed to backend server', serverArgs);
 
   return spawn(serverFilePath, serverArgs, options);
 }

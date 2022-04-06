@@ -14,7 +14,7 @@ On a Mac and Linux desktop, the plugins folder is by default:
 `$HOME/.config/Headlamp/plugins`
 
 On Windows, it is by default:
-`$APPDATA/Headlamp/plugins`
+`$APPDATA/Headlamp/Config/plugins`
 
 In the plugins directory, plugins should be in the following format:
 

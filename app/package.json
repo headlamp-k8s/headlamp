@@ -10,12 +10,13 @@
     "start": "cd ../ && make backend && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
     "prod-deps": "mkdirp prod_deps && cd ./prod_deps && cp ../package.json ../package-lock.json . && npm i --only=prod && rm -rf ./node_modules/.bin",
     "copy-icons": "mkdirp build/icons && cp ../frontend/build/*.png ../frontend/build/*.ico ../frontend/build/*.icns ../frontend/build/*.svg build/icons",
-    "build": "npm run copy-icons && npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
-    "package": "npm run copy-icons && npm run compile-electron && electron-builder build --publish never",
+    "build": "npm run copy-icons && npm run copy-plugins && npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
+    "package": "npm run copy-icons && npm run copy-plugins && npm run compile-electron && electron-builder build --publish never",
     "dev": "npm run compile-electron && cross-env ELECTRON_DEV=1 electron .",
     "dev-only-app": "npm run compile-electron && cross-env ELECTRON_DEV=1 ELECTRON_START_URL=http://localhost:3000 EXTERNAL_SERVER=true electron .",
     "i18n": "npx --no-install i18next ./electron/main.ts -c ./electron/i18next-parser.config.js",
-    "test": "jest"
+    "test": "jest",
+    "copy-plugins": "rm -rf build/.plugins && mkdirp build/.plugins && copyfiles ../.plugins build/.plugins"
   },
   "build": {
     "appId": "com.kinvolk.headlamp",
@@ -94,6 +95,10 @@
       {
         "from": "../frontend/build",
         "to": "frontend"
+      },
+      {
+        "from": "../.plugins",
+        "to": ".plugins"
       }
     ],
     "publish": {
@@ -125,6 +130,7 @@
   "dependencies": {
     "@babel/runtime": "^7.15.4",
     "@types/semver": "^7.3.8",
+    "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "electron-log": "^4.4.1",
     "i18next": "^20.6.1",
