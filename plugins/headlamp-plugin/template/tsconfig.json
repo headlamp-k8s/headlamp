@@ -1,3 +1,4 @@
 {
-  "extends": "./node_modules/@kinvolk/headlamp-plugin/config/plugins-tsconfig.json"
+  "extends": "./node_modules/@kinvolk/headlamp-plugin/config/plugins-tsconfig.json",
+  "include": ["./src/**/*"]
 }
