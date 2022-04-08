@@ -6,7 +6,7 @@ slug: "lib_k8s_configMap"
 
 ## Classes
 
-- [default](../classes/lib_k8s_configMap.default.md)
+- [ConfigMap](../classes/lib_k8s_configMap.ConfigMap.md)
 
 ## Interfaces
 

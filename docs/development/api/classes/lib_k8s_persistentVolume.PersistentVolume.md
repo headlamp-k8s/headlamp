@@ -1,36 +1,36 @@
 ---
-title: "Class: default"
-linkTitle: "default"
-slug: "lib_k8s_crd.default"
+title: "Class: PersistentVolume"
+linkTitle: "PersistentVolume"
+slug: "lib_k8s_persistentVolume.PersistentVolume"
 ---
 
-[lib/k8s/crd](../modules/lib_k8s_crd.md).default
+[lib/k8s/persistentVolume](../modules/lib_k8s_persistentVolume.md).PersistentVolume
 
 ## Hierarchy
 
 - `any`
 
-  ↳ **`default`**
+  ↳ **`PersistentVolume`**
 
 ## Constructors
 
 ### constructor
 
-• **new default**(`json`)
+• **new PersistentVolume**(`json`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `json` | [`KubeCRD`](../interfaces/lib_k8s_crd.KubeCRD.md) |
+| `json` | [`KubePersistentVolume`](../interfaces/lib_k8s_persistentVolume.KubePersistentVolume.md) |
 
 #### Inherited from
 
-makeKubeObject<KubeCRD\>('crd').constructor
+makeKubeObject<KubePersistentVolume\>('persistentVolume').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:70](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L70)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -52,37 +52,23 @@ makeKubeObject<KubeCRD\>('crd').constructor
 
 #### Defined in
 
-[lib/k8s/crd.ts:35](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/crd.ts#L35)
+[lib/k8s/persistentVolume.ts:19](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/persistentVolume.ts#L19)
+
+___
+
+### className
+
+▪ `Static` **className**: `string`
+
+#### Inherited from
+
+makeKubeObject<KubePersistentVolume\>('persistentVolume').className
+
+#### Defined in
+
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
-
-### detailsRoute
-
-• `get` **detailsRoute**(): `string`
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-[lib/k8s/crd.ts:48](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/crd.ts#L48)
-
-___
-
-### listRoute
-
-• `get` **listRoute**(): `string`
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-[lib/k8s/crd.ts:44](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/crd.ts#L44)
-
-___
 
 ### spec
 
@@ -94,25 +80,21 @@ ___
 
 #### Defined in
 
-[lib/k8s/crd.ts:52](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/crd.ts#L52)
+[lib/k8s/persistentVolume.ts:21](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/persistentVolume.ts#L21)
 
 ___
 
-### className
+### status
 
-• `Static` `get` **className**(): `string`
+• `get` **status**(): `any`
 
 #### Returns
 
-`string`
-
-#### Overrides
-
-makeKubeObject&lt;KubeCRD\&gt;(&#x27;crd&#x27;).className
+`any`
 
 #### Defined in
 
-[lib/k8s/crd.ts:40](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/crd.ts#L40)
+[lib/k8s/persistentVolume.ts:25](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/persistentVolume.ts#L25)
 
 ## Methods
 
@@ -132,11 +114,11 @@ makeKubeObject&lt;KubeCRD\&gt;(&#x27;crd&#x27;).className
 
 #### Inherited from
 
-makeKubeObject<KubeCRD\>('crd').apiList
+makeKubeObject<KubePersistentVolume\>('persistentVolume').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -156,11 +138,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeCRD\>('crd').getErrorMessage
+makeKubeObject<KubePersistentVolume\>('persistentVolume').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:69](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L69)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -183,17 +165,17 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeCRD\>('crd').useApiGet
+makeKubeObject<KubePersistentVolume\>('persistentVolume').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
 ### useApiList
 
-▸ `Static` **useApiList**(`onList`, `onError?`): `any`
+▸ `Static` **useApiList**(`onList`, `onError?`, `opts?`): `any`
 
 #### Parameters
 
@@ -201,6 +183,7 @@ ___
 | :------ | :------ |
 | `onList` | (`arg`: `any`[]) => `void` |
 | `onError?` | (`err`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -208,23 +191,23 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeCRD\>('crd').useApiList
+makeKubeObject<KubePersistentVolume\>('persistentVolume').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
 ### useList
 
-▸ `Static` **useList**(`onList?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
+▸ `Static` **useList**(`opts?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `onList?` | (...`arg`: `any`[]) => `any` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -232,8 +215,8 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeCRD\>('crd').useList
+makeKubeObject<KubePersistentVolume\>('persistentVolume').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)

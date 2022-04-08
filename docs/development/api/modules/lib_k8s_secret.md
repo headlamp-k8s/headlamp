@@ -6,7 +6,7 @@ slug: "lib_k8s_secret"
 
 ## Classes
 
-- [default](../classes/lib_k8s_secret.default.md)
+- [Secret](../classes/lib_k8s_secret.Secret.md)
 
 ## Interfaces
 

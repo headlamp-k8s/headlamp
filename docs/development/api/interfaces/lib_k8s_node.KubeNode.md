@@ -24,7 +24,7 @@ slug: "lib_k8s_node.KubeNode"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:22](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L22)
+[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L23)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:21](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L21)
+[lib/k8s/cluster.ts:22](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L22)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L23)
+[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L24)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/node.ts:33](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/node.ts#L33)
+[lib/k8s/node.ts:33](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/node.ts#L33)
 
 ___
 
@@ -103,4 +103,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/node.ts:8](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/node.ts#L8)
+[lib/k8s/node.ts:8](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/node.ts#L8)

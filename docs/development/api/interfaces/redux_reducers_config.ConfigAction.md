@@ -26,7 +26,7 @@ slug: "redux_reducers_config.ConfigAction"
 
 #### Defined in
 
-[redux/reducers/config.tsx:16](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/redux/reducers/config.tsx#L16)
+[redux/reducers/config.tsx:16](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/redux/reducers/config.tsx#L16)
 
 ___
 
@@ -40,4 +40,4 @@ Action.type
 
 #### Defined in
 
-[redux/actions/actions.tsx:68](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/redux/actions/actions.tsx#L68)
+[redux/actions/actions.tsx:68](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/redux/actions/actions.tsx#L68)

@@ -1,22 +1,22 @@
 ---
-title: "Class: default"
-linkTitle: "default"
-slug: "lib_k8s_clusterRole.default"
+title: "Class: ClusterRole"
+linkTitle: "ClusterRole"
+slug: "lib_k8s_clusterRole.ClusterRole"
 ---
 
-[lib/k8s/clusterRole](../modules/lib_k8s_clusterRole.md).default
+[lib/k8s/clusterRole](../modules/lib_k8s_clusterRole.md).ClusterRole
 
 ## Hierarchy
 
-- [`default`](lib_k8s_role.default.md)
+- [`Role`](lib_k8s_role.Role.md)
 
-  ↳ **`default`**
+  ↳ **`ClusterRole`**
 
 ## Constructors
 
 ### constructor
 
-• **new default**(`json`)
+• **new ClusterRole**(`json`)
 
 #### Parameters
 
@@ -26,11 +26,11 @@ slug: "lib_k8s_clusterRole.default"
 
 #### Inherited from
 
-[default](lib_k8s_role.default.md).[constructor](lib_k8s_role.default.md#constructor)
+[Role](lib_k8s_role.Role.md).[constructor](lib_k8s_role.Role.md#constructor)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:70](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L70)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -52,11 +52,11 @@ slug: "lib_k8s_clusterRole.default"
 
 #### Overrides
 
-[default](lib_k8s_role.default.md).[apiEndpoint](lib_k8s_role.default.md#apiendpoint)
+[Role](lib_k8s_role.Role.md).[apiEndpoint](lib_k8s_role.Role.md#apiendpoint)
 
 #### Defined in
 
-[lib/k8s/clusterRole.ts:5](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/clusterRole.ts#L5)
+[lib/k8s/clusterRole.ts:5](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/clusterRole.ts#L5)
 
 ___
 
@@ -66,11 +66,11 @@ ___
 
 #### Inherited from
 
-[default](lib_k8s_role.default.md).[className](lib_k8s_role.default.md#classname)
+[Role](lib_k8s_role.Role.md).[className](lib_k8s_role.Role.md#classname)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:71](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L71)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/clusterRole.ts:7](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/clusterRole.ts#L7)
+[lib/k8s/clusterRole.ts:7](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/clusterRole.ts#L7)
 
 ___
 
@@ -102,7 +102,7 @@ Role.rules
 
 #### Defined in
 
-[lib/k8s/role.ts:17](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/role.ts#L17)
+[lib/k8s/role.ts:17](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/role.ts#L17)
 
 ## Methods
 
@@ -122,11 +122,11 @@ Role.rules
 
 #### Inherited from
 
-[default](lib_k8s_role.default.md).[apiList](lib_k8s_role.default.md#apilist)
+[Role](lib_k8s_role.Role.md).[apiList](lib_k8s_role.Role.md#apilist)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -146,11 +146,11 @@ ___
 
 #### Inherited from
 
-[default](lib_k8s_role.default.md).[getErrorMessage](lib_k8s_role.default.md#geterrormessage)
+[Role](lib_k8s_role.Role.md).[getErrorMessage](lib_k8s_role.Role.md#geterrormessage)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:69](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L69)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -173,17 +173,17 @@ ___
 
 #### Inherited from
 
-[default](lib_k8s_role.default.md).[useApiGet](lib_k8s_role.default.md#useapiget)
+[Role](lib_k8s_role.Role.md).[useApiGet](lib_k8s_role.Role.md#useapiget)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
 ### useApiList
 
-▸ `Static` **useApiList**(`onList`, `onError?`): `any`
+▸ `Static` **useApiList**(`onList`, `onError?`, `opts?`): `any`
 
 #### Parameters
 
@@ -191,6 +191,7 @@ ___
 | :------ | :------ |
 | `onList` | (`arg`: `any`[]) => `void` |
 | `onError?` | (`err`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -198,23 +199,23 @@ ___
 
 #### Inherited from
 
-[default](lib_k8s_role.default.md).[useApiList](lib_k8s_role.default.md#useapilist)
+[Role](lib_k8s_role.Role.md).[useApiList](lib_k8s_role.Role.md#useapilist)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
 ### useList
 
-▸ `Static` **useList**(`onList?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
+▸ `Static` **useList**(`opts?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `onList?` | (...`arg`: `any`[]) => `any` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -222,8 +223,8 @@ ___
 
 #### Inherited from
 
-[default](lib_k8s_role.default.md).[useList](lib_k8s_role.default.md#uselist)
+[Role](lib_k8s_role.Role.md).[useList](lib_k8s_role.Role.md#uselist)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)

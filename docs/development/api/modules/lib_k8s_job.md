@@ -6,7 +6,7 @@ slug: "lib_k8s_job"
 
 ## Classes
 
-- [default](../classes/lib_k8s_job.default.md)
+- [Job](../classes/lib_k8s_job.Job.md)
 
 ## Interfaces
 

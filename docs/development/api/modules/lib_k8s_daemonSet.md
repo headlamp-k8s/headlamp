@@ -6,7 +6,7 @@ slug: "lib_k8s_daemonSet"
 
 ## Classes
 
-- [default](../classes/lib_k8s_daemonSet.default.md)
+- [DaemonSet](../classes/lib_k8s_daemonSet.DaemonSet.md)
 
 ## Interfaces
 

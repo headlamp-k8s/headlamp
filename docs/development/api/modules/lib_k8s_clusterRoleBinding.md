@@ -6,4 +6,4 @@ slug: "lib_k8s_clusterRoleBinding"
 
 ## Classes
 
-- [default](../classes/lib_k8s_clusterRoleBinding.default.md)
+- [ClusterRoleBinding](../classes/lib_k8s_clusterRoleBinding.ClusterRoleBinding.md)

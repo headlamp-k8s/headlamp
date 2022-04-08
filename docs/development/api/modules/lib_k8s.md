@@ -4,6 +4,150 @@ linkTitle: "lib/k8s"
 slug: "lib_k8s"
 ---
 
+## References
+
+### cluster
+
+Renames and re-exports [lib/k8s/cluster](lib_k8s_cluster.md)
+
+___
+
+### clusterRole
+
+Renames and re-exports [lib/k8s/clusterRole](lib_k8s_clusterRole.md)
+
+___
+
+### clusterRoleBinding
+
+Renames and re-exports [lib/k8s/clusterRoleBinding](lib_k8s_clusterRoleBinding.md)
+
+___
+
+### configMap
+
+Renames and re-exports [lib/k8s/configMap](lib_k8s_configMap.md)
+
+___
+
+### crd
+
+Renames and re-exports [lib/k8s/crd](lib_k8s_crd.md)
+
+___
+
+### cronJob
+
+Renames and re-exports [lib/k8s/cronJob](lib_k8s_cronJob.md)
+
+___
+
+### daemonSet
+
+Renames and re-exports [lib/k8s/daemonSet](lib_k8s_daemonSet.md)
+
+___
+
+### deployment
+
+Renames and re-exports [lib/k8s/deployment](lib_k8s_deployment.md)
+
+___
+
+### event
+
+Renames and re-exports [lib/k8s/event](lib_k8s_event.md)
+
+___
+
+### ingress
+
+Renames and re-exports [lib/k8s/ingress](lib_k8s_ingress.md)
+
+___
+
+### job
+
+Renames and re-exports [lib/k8s/job](lib_k8s_job.md)
+
+___
+
+### namespace
+
+Renames and re-exports [lib/k8s/namespace](lib_k8s_namespace.md)
+
+___
+
+### node
+
+Renames and re-exports [lib/k8s/node](lib_k8s_node.md)
+
+___
+
+### persistentVolume
+
+Renames and re-exports [lib/k8s/persistentVolume](lib_k8s_persistentVolume.md)
+
+___
+
+### persistentVolumeClaim
+
+Renames and re-exports [lib/k8s/persistentVolumeClaim](lib_k8s_persistentVolumeClaim.md)
+
+___
+
+### pod
+
+Renames and re-exports [lib/k8s/pod](lib_k8s_pod.md)
+
+___
+
+### replicaSet
+
+Renames and re-exports [lib/k8s/replicaSet](lib_k8s_replicaSet.md)
+
+___
+
+### role
+
+Renames and re-exports [lib/k8s/role](lib_k8s_role.md)
+
+___
+
+### roleBinding
+
+Renames and re-exports [lib/k8s/roleBinding](lib_k8s_roleBinding.md)
+
+___
+
+### secret
+
+Renames and re-exports [lib/k8s/secret](lib_k8s_secret.md)
+
+___
+
+### service
+
+Renames and re-exports [lib/k8s/service](lib_k8s_service.md)
+
+___
+
+### serviceAccount
+
+Renames and re-exports [lib/k8s/serviceAccount](lib_k8s_serviceAccount.md)
+
+___
+
+### statefulSet
+
+Renames and re-exports [lib/k8s/statefulSet](lib_k8s_statefulSet.md)
+
+___
+
+### storageClass
+
+Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
+
 ## Type aliases
 
 ### CancellablePromise
@@ -12,7 +156,7 @@ slug: "lib_k8s"
 
 #### Defined in
 
-[lib/k8s/index.ts:149](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L149)
+[lib/k8s/index.ts:149](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L149)
 
 ## Variables
 
@@ -26,7 +170,7 @@ slug: "lib_k8s"
 
 #### Defined in
 
-[lib/k8s/index.ts:73](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L73)
+[lib/k8s/index.ts:73](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L73)
 
 ## Functions
 
@@ -40,7 +184,7 @@ slug: "lib_k8s"
 
 #### Defined in
 
-[lib/k8s/index.ts:145](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L145)
+[lib/k8s/index.ts:145](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L145)
 
 ___
 
@@ -54,7 +198,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:128](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L128)
+[lib/k8s/index.ts:128](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L128)
 
 ___
 
@@ -68,7 +212,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:80](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L80)
+[lib/k8s/index.ts:80](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L80)
 
 ___
 
@@ -88,4 +232,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:151](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/index.ts#L151)
+[lib/k8s/index.ts:151](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L151)

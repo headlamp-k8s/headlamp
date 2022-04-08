@@ -6,7 +6,7 @@ slug: "lib_k8s_serviceAccount"
 
 ## Classes
 
-- [default](../classes/lib_k8s_serviceAccount.default.md)
+- [ServiceAccount](../classes/lib_k8s_serviceAccount.ServiceAccount.md)
 
 ## Interfaces
 

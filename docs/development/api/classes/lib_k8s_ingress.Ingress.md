@@ -1,22 +1,22 @@
 ---
-title: "Class: default"
-linkTitle: "default"
-slug: "lib_k8s_ingress.default"
+title: "Class: Ingress"
+linkTitle: "Ingress"
+slug: "lib_k8s_ingress.Ingress"
 ---
 
-[lib/k8s/ingress](../modules/lib_k8s_ingress.md).default
+[lib/k8s/ingress](../modules/lib_k8s_ingress.md).Ingress
 
 ## Hierarchy
 
 - `any`
 
-  ↳ **`default`**
+  ↳ **`Ingress`**
 
 ## Constructors
 
 ### constructor
 
-• **new default**(`json`)
+• **new Ingress**(`json`)
 
 #### Parameters
 
@@ -30,7 +30,7 @@ makeKubeObject<KubeIngress\>('ingress').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:70](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L70)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -44,7 +44,7 @@ makeKubeObject<KubeIngress\>('ingress').constructor
 
 #### Defined in
 
-[lib/k8s/ingress.ts:22](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/ingress.ts#L22)
+[lib/k8s/ingress.ts:22](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/ingress.ts#L22)
 
 ___
 
@@ -58,7 +58,7 @@ makeKubeObject<KubeIngress\>('ingress').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:71](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L71)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -72,7 +72,7 @@ makeKubeObject<KubeIngress\>('ingress').className
 
 #### Defined in
 
-[lib/k8s/ingress.ts:35](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/ingress.ts#L35)
+[lib/k8s/ingress.ts:35](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/ingress.ts#L35)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/ingress.ts:27](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/ingress.ts#L27)
+[lib/k8s/ingress.ts:27](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/ingress.ts#L27)
 
 ## Methods
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/ingress.ts:31](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/ingress.ts#L31)
+[lib/k8s/ingress.ts:31](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/ingress.ts#L31)
 
 ___
 
@@ -128,7 +128,7 @@ makeKubeObject<KubeIngress\>('ingress').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -152,7 +152,7 @@ makeKubeObject<KubeIngress\>('ingress').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:69](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L69)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -179,13 +179,13 @@ makeKubeObject<KubeIngress\>('ingress').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
 ### useApiList
 
-▸ `Static` **useApiList**(`onList`, `onError?`): `any`
+▸ `Static` **useApiList**(`onList`, `onError?`, `opts?`): `any`
 
 #### Parameters
 
@@ -193,6 +193,7 @@ ___
 | :------ | :------ |
 | `onList` | (`arg`: `any`[]) => `void` |
 | `onError?` | (`err`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -204,19 +205,19 @@ makeKubeObject<KubeIngress\>('ingress').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
 ### useList
 
-▸ `Static` **useList**(`onList?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
+▸ `Static` **useList**(`opts?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `onList?` | (...`arg`: `any`[]) => `any` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -228,4 +229,4 @@ makeKubeObject<KubeIngress\>('ingress').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)

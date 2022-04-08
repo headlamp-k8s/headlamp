@@ -1,22 +1,22 @@
 ---
-title: "Class: default"
-linkTitle: "default"
-slug: "lib_k8s_deployment.default"
+title: "Class: Deployment"
+linkTitle: "Deployment"
+slug: "lib_k8s_deployment.Deployment"
 ---
 
-[lib/k8s/deployment](../modules/lib_k8s_deployment.md).default
+[lib/k8s/deployment](../modules/lib_k8s_deployment.md).Deployment
 
 ## Hierarchy
 
 - `any`
 
-  ↳ **`default`**
+  ↳ **`Deployment`**
 
 ## Constructors
 
 ### constructor
 
-• **new default**(`json`)
+• **new Deployment**(`json`)
 
 #### Parameters
 
@@ -30,7 +30,7 @@ makeKubeObject<KubeDeployment\>('Deployment').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:70](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L70)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -44,7 +44,7 @@ makeKubeObject<KubeDeployment\>('Deployment').constructor
 
 #### Defined in
 
-[lib/k8s/deployment.ts:19](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/deployment.ts#L19)
+[lib/k8s/deployment.ts:19](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/deployment.ts#L19)
 
 ___
 
@@ -58,7 +58,7 @@ makeKubeObject<KubeDeployment\>('Deployment').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:71](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L71)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -72,7 +72,7 @@ makeKubeObject<KubeDeployment\>('Deployment').className
 
 #### Defined in
 
-[lib/k8s/deployment.ts:21](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/deployment.ts#L21)
+[lib/k8s/deployment.ts:21](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/deployment.ts#L21)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/deployment.ts:25](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/deployment.ts#L25)
+[lib/k8s/deployment.ts:25](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/deployment.ts#L25)
 
 ## Methods
 
@@ -110,7 +110,7 @@ makeKubeObject<KubeDeployment\>('Deployment').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -134,7 +134,7 @@ makeKubeObject<KubeDeployment\>('Deployment').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:69](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L69)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -161,13 +161,13 @@ makeKubeObject<KubeDeployment\>('Deployment').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
 ### useApiList
 
-▸ `Static` **useApiList**(`onList`, `onError?`): `any`
+▸ `Static` **useApiList**(`onList`, `onError?`, `opts?`): `any`
 
 #### Parameters
 
@@ -175,6 +175,7 @@ ___
 | :------ | :------ |
 | `onList` | (`arg`: `any`[]) => `void` |
 | `onError?` | (`err`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -186,19 +187,19 @@ makeKubeObject<KubeDeployment\>('Deployment').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
 ### useList
 
-▸ `Static` **useList**(`onList?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
+▸ `Static` **useList**(`opts?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `onList?` | (...`arg`: `any`[]) => `any` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -210,4 +211,4 @@ makeKubeObject<KubeDeployment\>('Deployment').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)

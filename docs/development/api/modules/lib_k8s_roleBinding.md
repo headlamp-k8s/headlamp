@@ -6,7 +6,7 @@ slug: "lib_k8s_roleBinding"
 
 ## Classes
 
-- [default](../classes/lib_k8s_roleBinding.default.md)
+- [RoleBinding](../classes/lib_k8s_roleBinding.RoleBinding.md)
 
 ## Interfaces
 

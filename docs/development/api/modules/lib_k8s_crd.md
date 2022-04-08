@@ -6,7 +6,7 @@ slug: "lib_k8s_crd"
 
 ## Classes
 
-- [default](../classes/lib_k8s_crd.default.md)
+- [CustomResourceDefinition](../classes/lib_k8s_crd.CustomResourceDefinition.md)
 
 ## Interfaces
 
@@ -31,4 +31,4 @@ slug: "lib_k8s_crd"
 
 #### Defined in
 
-[lib/k8s/crd.ts:57](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/crd.ts#L57)
+[lib/k8s/crd.ts:57](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/crd.ts#L57)

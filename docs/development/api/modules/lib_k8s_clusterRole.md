@@ -6,4 +6,4 @@ slug: "lib_k8s_clusterRole"
 
 ## Classes
 
-- [default](../classes/lib_k8s_clusterRole.default.md)
+- [ClusterRole](../classes/lib_k8s_clusterRole.ClusterRole.md)

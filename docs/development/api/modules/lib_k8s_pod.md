@@ -6,7 +6,7 @@ slug: "lib_k8s_pod"
 
 ## Classes
 
-- [default](../classes/lib_k8s_pod.default.md)
+- [Pod](../classes/lib_k8s_pod.Pod.md)
 
 ## Interfaces
 

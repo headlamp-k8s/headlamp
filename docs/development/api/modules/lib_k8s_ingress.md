@@ -6,7 +6,7 @@ slug: "lib_k8s_ingress"
 
 ## Classes
 
-- [default](../classes/lib_k8s_ingress.default.md)
+- [Ingress](../classes/lib_k8s_ingress.Ingress.md)
 
 ## Interfaces
 

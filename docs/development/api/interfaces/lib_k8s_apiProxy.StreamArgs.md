@@ -14,7 +14,7 @@ slug: "lib_k8s_apiProxy.StreamArgs"
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:507](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L507)
+[lib/k8s/apiProxy.ts:507](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L507)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:506](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L506)
+[lib/k8s/apiProxy.ts:506](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L506)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:509](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L509)
+[lib/k8s/apiProxy.ts:509](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L509)
 
 ## Methods
 
@@ -48,4 +48,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:508](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L508)
+[lib/k8s/apiProxy.ts:508](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L508)
