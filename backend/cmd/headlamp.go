@@ -353,10 +353,12 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	})
 
 	// Serve the frontend if needed
-	spa := spaHandler{staticPath: config.staticDir, indexPath: "index.html", baseURL: config.baseURL}
-	r.PathPrefix("/").Handler(spa)
+	if config.staticDir != "" {
+		spa := spaHandler{staticPath: config.staticDir, indexPath: "index.html", baseURL: config.baseURL}
+		r.PathPrefix("/").Handler(spa)
 
-	http.Handle("/", r)
+		http.Handle("/", r)
+	}
 
 	var handler http.Handler
 
