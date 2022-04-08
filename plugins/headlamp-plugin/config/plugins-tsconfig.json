@@ -27,5 +27,5 @@
     "rootDirs": ["node_modules/@kinvolk/headlamp-plugin/"],
     "skipLibCheck": true
   },
-  "include": ["./src/**/*"]
+  "include": ["./../../../../src/**/*"]
 }
