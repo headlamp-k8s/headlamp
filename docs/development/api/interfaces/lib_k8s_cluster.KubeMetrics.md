@@ -14,7 +14,7 @@ slug: "lib_k8s_cluster.KubeMetrics"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:404](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L404)
+[lib/k8s/cluster.ts:465](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L465)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:409](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L409)
+[lib/k8s/cluster.ts:470](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L470)
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:405](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L405)
+[lib/k8s/cluster.ts:466](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L466)

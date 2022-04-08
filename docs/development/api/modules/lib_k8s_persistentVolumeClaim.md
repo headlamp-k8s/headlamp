@@ -6,7 +6,7 @@ slug: "lib_k8s_persistentVolumeClaim"
 
 ## Classes
 
-- [default](../classes/lib_k8s_persistentVolumeClaim.default.md)
+- [PersistentVolumeClaim](../classes/lib_k8s_persistentVolumeClaim.PersistentVolumeClaim.md)
 
 ## Interfaces
 

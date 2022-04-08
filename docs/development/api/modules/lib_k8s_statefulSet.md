@@ -6,7 +6,7 @@ slug: "lib_k8s_statefulSet"
 
 ## Classes
 
-- [default](../classes/lib_k8s_statefulSet.default.md)
+- [StatefulSet](../classes/lib_k8s_statefulSet.StatefulSet.md)
 
 ## Interfaces
 

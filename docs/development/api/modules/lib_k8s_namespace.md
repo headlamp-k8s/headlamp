@@ -6,7 +6,7 @@ slug: "lib_k8s_namespace"
 
 ## Classes
 
-- [default](../classes/lib_k8s_namespace.default.md)
+- [Namespace](../classes/lib_k8s_namespace.Namespace.md)
 
 ## Interfaces
 

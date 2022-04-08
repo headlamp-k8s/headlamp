@@ -6,7 +6,7 @@ slug: "lib_k8s_cronJob"
 
 ## Classes
 
-- [default](../classes/lib_k8s_cronJob.default.md)
+- [CronJob](../classes/lib_k8s_cronJob.CronJob.md)
 
 ## Interfaces
 

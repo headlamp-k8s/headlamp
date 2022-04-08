@@ -6,7 +6,7 @@ slug: "lib_k8s_storageClass"
 
 ## Classes
 
-- [default](../classes/lib_k8s_storageClass.default.md)
+- [StorageClass](../classes/lib_k8s_storageClass.StorageClass.md)
 
 ## Interfaces
 

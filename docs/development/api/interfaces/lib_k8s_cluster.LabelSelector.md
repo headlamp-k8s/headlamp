@@ -22,7 +22,7 @@ slug: "lib_k8s_cluster.LabelSelector"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:393](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L393)
+[lib/k8s/cluster.ts:454](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L454)
 
 ___
 
@@ -36,4 +36,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:398](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L398)
+[lib/k8s/cluster.ts:459](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L459)

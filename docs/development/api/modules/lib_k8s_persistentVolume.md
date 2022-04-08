@@ -6,7 +6,7 @@ slug: "lib_k8s_persistentVolume"
 
 ## Classes
 
-- [default](../classes/lib_k8s_persistentVolume.default.md)
+- [PersistentVolume](../classes/lib_k8s_persistentVolume.PersistentVolume.md)
 
 ## Interfaces
 

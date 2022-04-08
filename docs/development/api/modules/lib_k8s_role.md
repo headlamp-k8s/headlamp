@@ -6,7 +6,7 @@ slug: "lib_k8s_role"
 
 ## Classes
 
-- [default](../classes/lib_k8s_role.default.md)
+- [Role](../classes/lib_k8s_role.Role.md)
 
 ## Interfaces
 

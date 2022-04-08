@@ -27,7 +27,7 @@ slug: "lib_router"
 
 #### Defined in
 
-[lib/router.tsx:430](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/router.tsx#L430)
+[lib/router.tsx:430](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L430)
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:76](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/router.tsx#L76)
+[lib/router.tsx:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L76)
 
 ## Functions
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:458](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/router.tsx#L458)
+[lib/router.tsx:458](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L458)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:438](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/router.tsx#L438)
+[lib/router.tsx:438](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L438)
 
 ___
 
@@ -102,4 +102,4 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:442](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/router.tsx#L442)
+[lib/router.tsx:442](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L442)

@@ -6,7 +6,7 @@ slug: "lib_k8s_node"
 
 ## Classes
 
-- [default](../classes/lib_k8s_node.default.md)
+- [Node](../classes/lib_k8s_node.Node.md)
 
 ## Interfaces
 

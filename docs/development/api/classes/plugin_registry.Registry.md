@@ -1,16 +1,16 @@
 ---
-title: "Class: default"
-linkTitle: "default"
-slug: "plugin_registry.default"
+title: "Class: Registry"
+linkTitle: "Registry"
+slug: "plugin_registry.Registry"
 ---
 
-[plugin/registry](../modules/plugin_registry.md).default
+[plugin/registry](../modules/plugin_registry.md).Registry
 
 ## Constructors
 
 ### constructor
 
-• **new default**()
+• **new Registry**()
 
 ## Methods
 
@@ -39,7 +39,7 @@ register.registerAppBarAction('monitor', () => <MonitorLink /> );
 
 #### Defined in
 
-[plugin/registry.tsx:112](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L112)
+[plugin/registry.tsx:117](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L117)
 
 ___
 
@@ -64,7 +64,7 @@ register.registerAppLogo((props: { logoType: 'small' | 'large', themeName: strin
 
 #### Defined in
 
-[plugin/registry.tsx:143](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L143)
+[plugin/registry.tsx:148](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L148)
 
 ___
 
@@ -95,7 +95,7 @@ register.registerDetailsViewHeaderAction('traces', (props) =>
 
 #### Defined in
 
-[plugin/registry.tsx:93](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L93)
+[plugin/registry.tsx:98](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L98)
 
 ___
 
@@ -124,7 +124,7 @@ register.registerDetailsViewSection("biolatency", (resource: KubeObject) => { ti
 
 #### Defined in
 
-[plugin/registry.tsx:128](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L128)
+[plugin/registry.tsx:133](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L133)
 
 ___
 
@@ -160,7 +160,7 @@ register.registerRoute({
 
 #### Defined in
 
-[plugin/registry.tsx:74](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L74)
+[plugin/registry.tsx:79](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L79)
 
 ___
 
@@ -178,14 +178,13 @@ registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
 
 #### Parameters
 
-| Name | Type | Default value | Description |
-| :------ | :------ | :------ | :------ |
-| `parentName` | `string` | `undefined` | the name of the parent SidebarItem. |
-| `itemName` | `string` | `undefined` | name of this SidebarItem. |
-| `itemLabel` | `string` | `undefined` | label to display. |
-| `url` | `string` | `undefined` | the URL to go to, when this item is followed. |
-| `opts` | `Object` | `undefined` | ... todo |
-| `opts.useClusterURL` | `boolean` | `true` | - |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `parentName` | `string` | the name of the parent SidebarItem. |
+| `itemName` | `string` | name of this SidebarItem. |
+| `itemLabel` | `string` | label to display. |
+| `url` | `string` | the URL to go to, when this item is followed. |
+| `opts` | `Pick`<`SidebarEntry`, ``"useClusterURL"`` \| ``"icon"``\> | may have `useClusterURL` (default=true) which indicates whether the URL should have the cluster prefix or not; and `icon` (an iconify string or icon object) that will be used for the sidebar's icon. |
 
 #### Returns
 
@@ -193,4 +192,4 @@ registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
 
 #### Defined in
 
-[plugin/registry.tsx:37](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L37)
+[plugin/registry.tsx:40](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L40)

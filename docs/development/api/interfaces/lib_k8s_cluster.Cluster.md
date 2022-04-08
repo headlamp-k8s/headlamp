@@ -18,7 +18,7 @@ slug: "lib_k8s_cluster.Cluster"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:15](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L15)
+[lib/k8s/cluster.ts:16](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L16)
 
 ___
 
@@ -28,4 +28,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:16](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L16)
+[lib/k8s/cluster.ts:17](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L17)

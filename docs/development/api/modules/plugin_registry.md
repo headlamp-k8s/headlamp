@@ -6,7 +6,7 @@ slug: "plugin_registry"
 
 ## Classes
 
-- [default](../classes/plugin_registry.default.md)
+- [Registry](../classes/plugin_registry.Registry.md)
 
 ## Interfaces
 
@@ -34,4 +34,4 @@ slug: "plugin_registry"
 
 #### Defined in
 
-[plugin/registry.tsx:19](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/plugin/registry.tsx#L19)
+[plugin/registry.tsx:20](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L20)

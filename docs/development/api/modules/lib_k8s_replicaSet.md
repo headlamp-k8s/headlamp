@@ -6,7 +6,7 @@ slug: "lib_k8s_replicaSet"
 
 ## Classes
 
-- [default](../classes/lib_k8s_replicaSet.default.md)
+- [ReplicaSet](../classes/lib_k8s_replicaSet.ReplicaSet.md)
 
 ## Interfaces
 

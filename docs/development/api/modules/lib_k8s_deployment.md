@@ -6,7 +6,7 @@ slug: "lib_k8s_deployment"
 
 ## Classes
 
-- [default](../classes/lib_k8s_deployment.default.md)
+- [Deployment](../classes/lib_k8s_deployment.Deployment.md)
 
 ## Interfaces
 

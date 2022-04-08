@@ -6,7 +6,7 @@ slug: "lib_k8s_service"
 
 ## Classes
 
-- [default](../classes/lib_k8s_service.default.md)
+- [Service](../classes/lib_k8s_service.Service.md)
 
 ## Interfaces
 

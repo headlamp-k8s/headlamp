@@ -14,7 +14,7 @@ slug: "lib_k8s_pod.ExecOptions"
 
 #### Defined in
 
-[lib/k8s/pod.ts:30](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/pod.ts#L30)
+[lib/k8s/pod.ts:30](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/pod.ts#L30)
 
 ___
 
@@ -24,4 +24,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/pod.ts:31](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/pod.ts#L31)
+[lib/k8s/pod.ts:31](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/pod.ts#L31)

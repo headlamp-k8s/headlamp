@@ -1,16 +1,16 @@
 ---
-title: "Interface: KubeCRD"
-linkTitle: "KubeCRD"
-slug: "lib_k8s_crd.KubeCRD"
+title: "Interface: KubeNetworkPolicy"
+linkTitle: "KubeNetworkPolicy"
+slug: "lib_k8s_networkpolicy.KubeNetworkPolicy"
 ---
 
-[lib/k8s/crd](../modules/lib_k8s_crd.md).KubeCRD
+[lib/k8s/networkpolicy](../modules/lib_k8s_networkpolicy.md).KubeNetworkPolicy
 
 ## Hierarchy
 
 - [`KubeObjectInterface`](lib_k8s_cluster.KubeObjectInterface.md)
 
-  ↳ **`KubeCRD`**
+  ↳ **`KubeNetworkPolicy`**
 
 ## Properties
 
@@ -25,6 +25,26 @@ slug: "lib_k8s_crd.KubeCRD"
 #### Defined in
 
 [lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L23)
+
+___
+
+### egress
+
+• **egress**: `NetworkPolicyEgressRule`[]
+
+#### Defined in
+
+[lib/k8s/networkpolicy.tsx:32](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/networkpolicy.tsx#L32)
+
+___
+
+### ingress
+
+• **ingress**: `NetworkPolicyIngressRule`[]
+
+#### Defined in
+
+[lib/k8s/networkpolicy.tsx:33](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/networkpolicy.tsx#L33)
 
 ___
 
@@ -56,28 +76,20 @@ ___
 
 ___
 
-### spec
+### podSelector
 
-• **spec**: `Object`
-
-#### Index signature
-
-▪ [other: `string`]: `any`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `group` | `string` |
-| `names` | { `kind`: `string` ; `listKind`: `string` ; `plural`: `string` ; `singular`: `string`  } |
-| `names.kind` | `string` |
-| `names.listKind` | `string` |
-| `names.plural` | `string` |
-| `names.singular` | `string` |
-| `scope` | `string` |
-| `version` | `string` |
-| `versions` | { `additionalPrinterColumns`: { `description?`: `string` ; `format?`: `string` ; `jsonPath`: `string` ; `name`: `string` ; `priority?`: `number` ; `type`: `string`  }[] ; `name`: `string` ; `served`: `boolean` ; `storage`: `boolean`  }[] |
+• **podSelector**: [`LabelSelector`](lib_k8s_cluster.LabelSelector.md)
 
 #### Defined in
 
-[lib/k8s/crd.ts:7](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/crd.ts#L7)
+[lib/k8s/networkpolicy.tsx:34](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/networkpolicy.tsx#L34)
+
+___
+
+### policyTypes
+
+• **policyTypes**: `string`[]
+
+#### Defined in
+
+[lib/k8s/networkpolicy.tsx:35](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/networkpolicy.tsx#L35)

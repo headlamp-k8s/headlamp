@@ -33,7 +33,7 @@ slug: "lib_k8s_apiProxy"
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:109](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L109)
+[lib/k8s/apiProxy.ts:109](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L109)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:108](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L108)
+[lib/k8s/apiProxy.ts:108](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L108)
 
 ## Functions
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:175](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L175)
+[lib/k8s/apiProxy.ts:175](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L175)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:220](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L220)
+[lib/k8s/apiProxy.ts:220](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L220)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:625](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L625)
+[lib/k8s/apiProxy.ts:625](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L625)
 
 ___
 
@@ -149,7 +149,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:644](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L644)
+[lib/k8s/apiProxy.ts:644](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L644)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:351](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L351)
+[lib/k8s/apiProxy.ts:351](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L351)
 
 ___
 
@@ -195,7 +195,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:340](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L340)
+[lib/k8s/apiProxy.ts:340](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L340)
 
 ___
 
@@ -218,7 +218,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:362](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L362)
+[lib/k8s/apiProxy.ts:362](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L362)
 
 ___
 
@@ -239,7 +239,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:373](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L373)
+[lib/k8s/apiProxy.ts:373](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L373)
 
 ___
 
@@ -262,7 +262,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:27](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L27)
+[lib/k8s/apiProxy.ts:27](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L27)
 
 ___
 
@@ -289,7 +289,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:512](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L512)
+[lib/k8s/apiProxy.ts:512](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L512)
 
 ___
 
@@ -312,7 +312,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:378](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L378)
+[lib/k8s/apiProxy.ts:378](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L378)
 
 ___
 
@@ -334,7 +334,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:415](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L415)
+[lib/k8s/apiProxy.ts:415](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L415)
 
 ___
 
@@ -348,4 +348,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:673](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/apiProxy.ts#L673)
+[lib/k8s/apiProxy.ts:673](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/apiProxy.ts#L673)

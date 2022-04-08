@@ -1,22 +1,22 @@
 ---
-title: "Class: default"
-linkTitle: "default"
-slug: "lib_k8s_clusterRoleBinding.default"
+title: "Class: ClusterRoleBinding"
+linkTitle: "ClusterRoleBinding"
+slug: "lib_k8s_clusterRoleBinding.ClusterRoleBinding"
 ---
 
-[lib/k8s/clusterRoleBinding](../modules/lib_k8s_clusterRoleBinding.md).default
+[lib/k8s/clusterRoleBinding](../modules/lib_k8s_clusterRoleBinding.md).ClusterRoleBinding
 
 ## Hierarchy
 
-- [`default`](lib_k8s_roleBinding.default.md)
+- [`RoleBinding`](lib_k8s_roleBinding.RoleBinding.md)
 
-  ↳ **`default`**
+  ↳ **`ClusterRoleBinding`**
 
 ## Constructors
 
 ### constructor
 
-• **new default**(`json`)
+• **new ClusterRoleBinding**(`json`)
 
 #### Parameters
 
@@ -26,11 +26,11 @@ slug: "lib_k8s_clusterRoleBinding.default"
 
 #### Inherited from
 
-[default](lib_k8s_roleBinding.default.md).[constructor](lib_k8s_roleBinding.default.md#constructor)
+[RoleBinding](lib_k8s_roleBinding.RoleBinding.md).[constructor](lib_k8s_roleBinding.RoleBinding.md#constructor)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:70](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L70)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -52,11 +52,11 @@ slug: "lib_k8s_clusterRoleBinding.default"
 
 #### Overrides
 
-[default](lib_k8s_roleBinding.default.md).[apiEndpoint](lib_k8s_roleBinding.default.md#apiendpoint)
+[RoleBinding](lib_k8s_roleBinding.RoleBinding.md).[apiEndpoint](lib_k8s_roleBinding.RoleBinding.md#apiendpoint)
 
 #### Defined in
 
-[lib/k8s/clusterRoleBinding.ts:5](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/clusterRoleBinding.ts#L5)
+[lib/k8s/clusterRoleBinding.ts:5](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/clusterRoleBinding.ts#L5)
 
 ## Accessors
 
@@ -70,7 +70,7 @@ slug: "lib_k8s_clusterRoleBinding.default"
 
 #### Defined in
 
-[lib/k8s/clusterRoleBinding.ts:11](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/clusterRoleBinding.ts#L11)
+[lib/k8s/clusterRoleBinding.ts:11](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/clusterRoleBinding.ts#L11)
 
 ___
 
@@ -88,7 +88,7 @@ RoleBinding.roleRef
 
 #### Defined in
 
-[lib/k8s/roleBinding.ts:21](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/roleBinding.ts#L21)
+[lib/k8s/roleBinding.ts:21](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/roleBinding.ts#L21)
 
 ___
 
@@ -106,7 +106,7 @@ RoleBinding.subjects
 
 #### Defined in
 
-[lib/k8s/roleBinding.ts:25](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/roleBinding.ts#L25)
+[lib/k8s/roleBinding.ts:25](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/roleBinding.ts#L25)
 
 ___
 
@@ -124,7 +124,7 @@ RoleBinding.className
 
 #### Defined in
 
-[lib/k8s/clusterRoleBinding.ts:7](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/clusterRoleBinding.ts#L7)
+[lib/k8s/clusterRoleBinding.ts:7](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/clusterRoleBinding.ts#L7)
 
 ## Methods
 
@@ -144,11 +144,11 @@ RoleBinding.className
 
 #### Inherited from
 
-[default](lib_k8s_roleBinding.default.md).[apiList](lib_k8s_roleBinding.default.md#apilist)
+[RoleBinding](lib_k8s_roleBinding.RoleBinding.md).[apiList](lib_k8s_roleBinding.RoleBinding.md#apilist)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -168,11 +168,11 @@ ___
 
 #### Inherited from
 
-[default](lib_k8s_roleBinding.default.md).[getErrorMessage](lib_k8s_roleBinding.default.md#geterrormessage)
+[RoleBinding](lib_k8s_roleBinding.RoleBinding.md).[getErrorMessage](lib_k8s_roleBinding.RoleBinding.md#geterrormessage)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:69](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L69)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -195,17 +195,17 @@ ___
 
 #### Inherited from
 
-[default](lib_k8s_roleBinding.default.md).[useApiGet](lib_k8s_roleBinding.default.md#useapiget)
+[RoleBinding](lib_k8s_roleBinding.RoleBinding.md).[useApiGet](lib_k8s_roleBinding.RoleBinding.md#useapiget)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
 ### useApiList
 
-▸ `Static` **useApiList**(`onList`, `onError?`): `any`
+▸ `Static` **useApiList**(`onList`, `onError?`, `opts?`): `any`
 
 #### Parameters
 
@@ -213,6 +213,7 @@ ___
 | :------ | :------ |
 | `onList` | (`arg`: `any`[]) => `void` |
 | `onError?` | (`err`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -220,23 +221,23 @@ ___
 
 #### Inherited from
 
-[default](lib_k8s_roleBinding.default.md).[useApiList](lib_k8s_roleBinding.default.md#useapilist)
+[RoleBinding](lib_k8s_roleBinding.RoleBinding.md).[useApiList](lib_k8s_roleBinding.RoleBinding.md#useapilist)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
 ### useList
 
-▸ `Static` **useList**(`onList?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
+▸ `Static` **useList**(`opts?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `onList?` | (...`arg`: `any`[]) => `any` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -244,8 +245,8 @@ ___
 
 #### Inherited from
 
-[default](lib_k8s_roleBinding.default.md).[useList](lib_k8s_roleBinding.default.md#uselist)
+[RoleBinding](lib_k8s_roleBinding.RoleBinding.md).[useList](lib_k8s_roleBinding.RoleBinding.md#uselist)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)

@@ -6,7 +6,7 @@ slug: "lib_k8s_event"
 
 ## Classes
 
-- [default](../classes/lib_k8s_event.default.md)
+- [Event](../classes/lib_k8s_event.Event.md)
 
 ## Interfaces
 

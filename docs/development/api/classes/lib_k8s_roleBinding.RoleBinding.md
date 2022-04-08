@@ -1,24 +1,24 @@
 ---
-title: "Class: default"
-linkTitle: "default"
-slug: "lib_k8s_roleBinding.default"
+title: "Class: RoleBinding"
+linkTitle: "RoleBinding"
+slug: "lib_k8s_roleBinding.RoleBinding"
 ---
 
-[lib/k8s/roleBinding](../modules/lib_k8s_roleBinding.md).default
+[lib/k8s/roleBinding](../modules/lib_k8s_roleBinding.md).RoleBinding
 
 ## Hierarchy
 
 - `any`
 
-  ↳ **`default`**
+  ↳ **`RoleBinding`**
 
-  ↳↳ [`default`](lib_k8s_clusterRoleBinding.default.md)
+  ↳↳ [`ClusterRoleBinding`](lib_k8s_clusterRoleBinding.ClusterRoleBinding.md)
 
 ## Constructors
 
 ### constructor
 
-• **new default**(`json`)
+• **new RoleBinding**(`json`)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:70](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L70)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -46,7 +46,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').constructor
 
 #### Defined in
 
-[lib/k8s/roleBinding.ts:19](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/roleBinding.ts#L19)
+[lib/k8s/roleBinding.ts:19](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/roleBinding.ts#L19)
 
 ___
 
@@ -60,7 +60,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:71](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L71)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -74,7 +74,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').className
 
 #### Defined in
 
-[lib/k8s/roleBinding.ts:21](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/roleBinding.ts#L21)
+[lib/k8s/roleBinding.ts:21](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/roleBinding.ts#L21)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/roleBinding.ts:25](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/roleBinding.ts#L25)
+[lib/k8s/roleBinding.ts:25](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/roleBinding.ts#L25)
 
 ## Methods
 
@@ -112,7 +112,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:55](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L55)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -136,7 +136,7 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:69](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L69)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -163,13 +163,13 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
 ### useApiList
 
-▸ `Static` **useApiList**(`onList`, `onError?`): `any`
+▸ `Static` **useApiList**(`onList`, `onError?`, `opts?`): `any`
 
 #### Parameters
 
@@ -177,6 +177,7 @@ ___
 | :------ | :------ |
 | `onList` | (`arg`: `any`[]) => `void` |
 | `onError?` | (`err`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -188,19 +189,19 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:56](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L56)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
 ### useList
 
-▸ `Static` **useList**(`onList?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
+▸ `Static` **useList**(`opts?`): [`any`[], ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`items`: `any`[]) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `onList?` | (...`arg`: `any`[]) => `any` |
+| `opts?` | [`ApiListOptions`](../interfaces/lib_k8s_cluster.ApiListOptions.md) |
 
 #### Returns
 
@@ -212,4 +213,4 @@ makeKubeObject<KubeRoleBinding\>('roleBinding').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/168f394/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)
