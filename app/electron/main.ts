@@ -74,7 +74,7 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
     serverArgs = serverArgs.concat(['-plugins-dir', bundledPlugins]);
   }
 
-  serverArgs.concat(flags);
+  serverArgs = serverArgs.concat(flags);
   console.log('arguments passed to backend server', serverArgs);
 
   return spawn(serverFilePath, serverArgs, options);
