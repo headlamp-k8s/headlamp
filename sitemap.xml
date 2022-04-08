@@ -56,6 +56,8 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_apiproxy.apierror/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.apilistoptions/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/installation/base-url/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/installation/base-url/</loc>
@@ -72,7 +74,13 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.cluster/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrole.clusterrole/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrolebinding.clusterrolebinding/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/redux_reducers_config.configaction/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_configmap.configmap/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/redux_reducers_config.configstate/</loc>
   </url><url>
@@ -84,61 +92,21 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/i18n/contributing/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_cronjob.cronjob/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_crd.customresourcedefinition/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_daemonset.daemonset/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/api/classes/plugin_registry.default/</loc>
   </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrole.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrolebinding.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_configmap.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_crd.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_cronjob.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_customresource.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_daemonset.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_deployment.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_event.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_ingress.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_job.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_namespace.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_node.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolume.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolumeclaim.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_pod.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_replicaset.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_role.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_rolebinding.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_secret.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_service.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_serviceaccount.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_statefulset.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_storageclass.default/</loc>
-  </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_registry.default/</loc>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_deployment.deployment/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_event.event/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_pod.execoptions/</loc>
   </url><url>
@@ -160,6 +128,8 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/plugins/how-to/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_ingress.ingress/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/api/interfaces/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/</loc>
@@ -167,6 +137,8 @@
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/i18n/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/i18n/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_job.job/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecondition/</loc>
   </url><url>
@@ -197,6 +169,8 @@
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemetrics/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_namespace.kubenamespace/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_networkpolicy.kubenetworkpolicy/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_node.kubenode/</loc>
   </url><url>
@@ -248,8 +222,6 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_cronjob/</loc>
   </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_customresource/</loc>
-  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_daemonset/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_deployment/</loc>
@@ -261,6 +233,8 @@
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_job/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_namespace/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_networkpolicy/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_node/</loc>
   </url><url>
@@ -300,6 +274,16 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_namespace.namespace/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_networkpolicy.networkpolicy/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_node.node/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolume.persistentvolume/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolumeclaim.persistentvolumeclaim/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/api/classes/plugin.plugin-1/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/</loc>
@@ -316,15 +300,35 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/plugins/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_pod.pod/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/redux_reducers_config/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_registry.registry/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_replicaset.replicaset/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_apiproxy.requestparams/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_role.role/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_rolebinding.rolebinding/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_router.route/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_router.routeurlprops/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_secret.secret/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.sectionfuncprops/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_service.service/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_serviceaccount.serviceaccount/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_statefulset.statefulset/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_storageclass.storageclass/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_apiproxy.streamargs/</loc>
   </url><url>

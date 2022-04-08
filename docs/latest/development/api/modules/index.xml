@@ -13,15 +13,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s/</guid>
-      <description>Type aliases CancellablePromise Ƭ CancellablePromise: Promise&amp;lt;() =&amp;gt; void&amp;gt;
-Defined in  lib/k8s/index.ts:149 Variables ResourceClasses • ResourceClasses: Object = resourceClassesDict
-Index signature ▪ [className: string]: KubeObject Defined in  lib/k8s/index.ts:73 Functions getVersion ▸ getVersion(): Promise&amp;lt; StringDict &amp;gt;
-Returns Promise&amp;lt; StringDict &amp;gt;
-Defined in  lib/k8s/index.ts:145  useCluster ▸ useCluster(): null | string
-Returns null | string
-Defined in  lib/k8s/index.ts:128  useClustersConf ▸ useClustersConf(): ConfigState [&amp;quot;clusters&amp;quot;]
-Returns  ConfigState [&amp;quot;clusters&amp;quot;]
-Defined in  lib/k8s/index.</description>
+      <description>References cluster Renames and re-exports lib/k8s/cluster  clusterRole Renames and re-exports lib/k8s/clusterRole  clusterRoleBinding Renames and re-exports lib/k8s/clusterRoleBinding  configMap Renames and re-exports lib/k8s/configMap  crd Renames and re-exports lib/k8s/crd  cronJob Renames and re-exports lib/k8s/cronJob  daemonSet Renames and re-exports lib/k8s/daemonSet  deployment Renames and re-exports lib/k8s/deployment  event Renames and re-exports lib/k8s/event  ingress Renames and re-exports lib/k8s/ingress  job Renames and re-exports lib/k8s/job  namespace Renames and re-exports lib/k8s/namespace  node Renames and re-exports lib/k8s/node  persistentVolume Renames and re-exports lib/k8s/persistentVolume  persistentVolumeClaim Renames and re-exports lib/k8s/persistentVolumeClaim  pod Renames and re-exports lib/k8s/pod  replicaSet Renames and re-exports lib/k8s/replicaSet  role Renames and re-exports lib/k8s/role  roleBinding Renames and re-exports lib/k8s/roleBinding  secret Renames and re-exports lib/k8s/secret  service Renames and re-exports lib/k8s/service  serviceAccount Renames and re-exports lib/k8s/serviceAccount  statefulSet Renames and re-exports lib/k8s/statefulSet  storageClass Renames and re-exports lib/k8s/storageClass Type aliases CancellablePromise Ƭ CancellablePromise: Promise&amp;lt;() =&amp;gt; void&amp;gt;</description>
     </item>
     
     <item>
@@ -42,7 +34,7 @@ Defined in  lib/k8s/apiProxy.ts:109  StreamResultsCb Ƭ StreamResultsCb: (&amp;h
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_cluster/</guid>
-      <description>References Cluster Re-exports Cluster  KubeCondition Re-exports KubeCondition  KubeContainer Re-exports KubeContainer  KubeContainerProbe Re-exports KubeContainerProbe  KubeContainerStatus Re-exports KubeContainerStatus  KubeMetadata Re-exports KubeMetadata  KubeMetrics Re-exports KubeMetrics  KubeObject Re-exports KubeObject  KubeObjectClass Re-exports KubeObjectClass  KubeObjectIface Re-exports KubeObjectIface  KubeObjectInterface Re-exports KubeObjectInterface  KubeOwnerReference Re-exports KubeOwnerReference  LabelSelector Re-exports LabelSelector  StringDict Re-exports StringDict  Workload Re-exports Workload  makeKubeObject Re-exports makeKubeObject </description>
+      <description>References ApiListOptions Re-exports ApiListOptions  Cluster Re-exports Cluster  KubeCondition Re-exports KubeCondition  KubeContainer Re-exports KubeContainer  KubeContainerProbe Re-exports KubeContainerProbe  KubeContainerStatus Re-exports KubeContainerStatus  KubeMetadata Re-exports KubeMetadata  KubeMetrics Re-exports KubeMetrics  KubeObject Re-exports KubeObject  KubeObjectClass Re-exports KubeObjectClass  KubeObjectIface Re-exports KubeObjectIface  KubeObjectInterface Re-exports KubeObjectInterface  KubeOwnerReference Re-exports KubeOwnerReference  LabelSelector Re-exports LabelSelector  StringDict Re-exports StringDict  Workload Re-exports Workload  makeKubeObject Re-exports makeKubeObject </description>
     </item>
     
     <item>
@@ -51,7 +43,7 @@ Defined in  lib/k8s/apiProxy.ts:109  StreamResultsCb Ƭ StreamResultsCb: (&amp;h
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_clusterrole/</guid>
-      <description>Classes   default   </description>
+      <description>Classes   ClusterRole   </description>
     </item>
     
     <item>
@@ -60,7 +52,7 @@ Defined in  lib/k8s/apiProxy.ts:109  StreamResultsCb Ƭ StreamResultsCb: (&amp;h
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_clusterrolebinding/</guid>
-      <description>Classes   default   </description>
+      <description>Classes   ClusterRoleBinding   </description>
     </item>
     
     <item>
@@ -69,7 +61,7 @@ Defined in  lib/k8s/apiProxy.ts:109  StreamResultsCb Ƭ StreamResultsCb: (&amp;h
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_configmap/</guid>
-      <description>Classes   default   Interfaces   KubeConfigMap   </description>
+      <description>Classes   ConfigMap   Interfaces   KubeConfigMap   </description>
     </item>
     
     <item>
@@ -78,7 +70,7 @@ Defined in  lib/k8s/apiProxy.ts:109  StreamResultsCb Ƭ StreamResultsCb: (&amp;h
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_crd/</guid>
-      <description>Classes   default   Interfaces   KubeCRD   Functions makeCustomResourceClass ▸ makeCustomResourceClass(args, isNamespaced): any
+      <description>Classes   CustomResourceDefinition   Interfaces   KubeCRD   Functions makeCustomResourceClass ▸ makeCustomResourceClass(args, isNamespaced): any
 Parameters    Name Type     args [group: string, version: string, pluralName: string][]   isNamespaced boolean    Returns any
 Defined in  lib/k8s/crd.ts:57 </description>
     </item>
@@ -89,16 +81,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_cronjob/</guid>
-      <description>Classes   default   Interfaces   KubeCronJob   </description>
-    </item>
-    
-    <item>
-      <title>Module: lib/k8s/customresource</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_customresource/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_customresource/</guid>
-      <description>Classes   default   </description>
+      <description>Classes   CronJob   Interfaces   KubeCronJob   </description>
     </item>
     
     <item>
@@ -107,7 +90,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_daemonset/</guid>
-      <description>Classes   default   Interfaces   KubeDaemonSet   </description>
+      <description>Classes   DaemonSet   Interfaces   KubeDaemonSet   </description>
     </item>
     
     <item>
@@ -116,7 +99,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_deployment/</guid>
-      <description>Classes   default   Interfaces   KubeDeployment   </description>
+      <description>Classes   Deployment   Interfaces   KubeDeployment   </description>
     </item>
     
     <item>
@@ -125,7 +108,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_event/</guid>
-      <description>Classes   default   Interfaces   KubeEvent   </description>
+      <description>Classes   Event   Interfaces   KubeEvent   </description>
     </item>
     
     <item>
@@ -134,7 +117,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_ingress/</guid>
-      <description>Classes   default   Interfaces   KubeIngress   </description>
+      <description>Classes   Ingress   Interfaces   KubeIngress   </description>
     </item>
     
     <item>
@@ -143,7 +126,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_job/</guid>
-      <description>Classes   default   Interfaces   KubeJob   </description>
+      <description>Classes   Job   Interfaces   KubeJob   </description>
     </item>
     
     <item>
@@ -152,7 +135,16 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_namespace/</guid>
-      <description>Classes   default   Interfaces   KubeNamespace   </description>
+      <description>Classes   Namespace   Interfaces   KubeNamespace   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/networkpolicy</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_networkpolicy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_networkpolicy/</guid>
+      <description>Classes   NetworkPolicy   Interfaces   KubeNetworkPolicy   </description>
     </item>
     
     <item>
@@ -161,7 +153,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_node/</guid>
-      <description>Classes   default   Interfaces   KubeNode   </description>
+      <description>Classes   Node   Interfaces   KubeNode   </description>
     </item>
     
     <item>
@@ -170,7 +162,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_persistentvolume/</guid>
-      <description>Classes   default   Interfaces   KubePersistentVolume   </description>
+      <description>Classes   PersistentVolume   Interfaces   KubePersistentVolume   </description>
     </item>
     
     <item>
@@ -179,7 +171,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_persistentvolumeclaim/</guid>
-      <description>Classes   default   Interfaces   KubePersistentVolumeClaim   </description>
+      <description>Classes   PersistentVolumeClaim   Interfaces   KubePersistentVolumeClaim   </description>
     </item>
     
     <item>
@@ -188,7 +180,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_pod/</guid>
-      <description>Classes   default   Interfaces   ExecOptions   KubePod   </description>
+      <description>Classes   Pod   Interfaces   ExecOptions   KubePod   </description>
     </item>
     
     <item>
@@ -197,7 +189,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_replicaset/</guid>
-      <description>Classes   default   Interfaces   KubeReplicaSet   </description>
+      <description>Classes   ReplicaSet   Interfaces   KubeReplicaSet   </description>
     </item>
     
     <item>
@@ -206,7 +198,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_role/</guid>
-      <description>Classes   default   Interfaces   KubeRole   </description>
+      <description>Classes   Role   Interfaces   KubeRole   </description>
     </item>
     
     <item>
@@ -215,7 +207,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_rolebinding/</guid>
-      <description>Classes   default   Interfaces   KubeRoleBinding   </description>
+      <description>Classes   RoleBinding   Interfaces   KubeRoleBinding   </description>
     </item>
     
     <item>
@@ -224,7 +216,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_secret/</guid>
-      <description>Classes   default   Interfaces   KubeSecret   </description>
+      <description>Classes   Secret   Interfaces   KubeSecret   </description>
     </item>
     
     <item>
@@ -233,7 +225,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_service/</guid>
-      <description>Classes   default   Interfaces   KubeService   </description>
+      <description>Classes   Service   Interfaces   KubeService   </description>
     </item>
     
     <item>
@@ -242,7 +234,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_serviceaccount/</guid>
-      <description>Classes   default   Interfaces   KubeServiceAccount   </description>
+      <description>Classes   ServiceAccount   Interfaces   KubeServiceAccount   </description>
     </item>
     
     <item>
@@ -251,7 +243,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_statefulset/</guid>
-      <description>Classes   default   Interfaces   KubeStatefulSet   </description>
+      <description>Classes   StatefulSet   Interfaces   KubeStatefulSet   </description>
     </item>
     
     <item>
@@ -260,7 +252,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_storageclass/</guid>
-      <description>Classes   default   Interfaces   KubeStorageClass   </description>
+      <description>Classes   StorageClass   Interfaces   KubeStorageClass   </description>
     </item>
     
     <item>
@@ -303,10 +295,10 @@ Classes   Headlamp   Plugin   </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_registry/</guid>
-      <description>Classes   default   Interfaces   SectionFuncProps   Type aliases sectionFunc Ƭ sectionFunc: (resource: KubeObject ) =&amp;gt; SectionFuncProps | null | undefined
+      <description>Classes   Registry   Interfaces   SectionFuncProps   Type aliases sectionFunc Ƭ sectionFunc: (resource: KubeObject ) =&amp;gt; SectionFuncProps | null | undefined
 Type declaration ▸ (resource): SectionFuncProps | null | undefined
 Parameters    Name Type     resource KubeObject     Returns  SectionFuncProps | null | undefined
-Defined in  plugin/registry.tsx:19 </description>
+Defined in  plugin/registry.tsx:20 </description>
     </item>
     
     <item>
@@ -315,7 +307,7 @@ Defined in  plugin/registry.tsx:19 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/redux_reducers_config/</guid>
-      <description>Interfaces   ConfigAction   ConfigState   Variables INITIAL_STATE • INITIAL_STATE: ConfigState Defined in  redux/reducers/config.tsx:11 Functions default ▸ default(state?, action): Object
+      <description>Interfaces   ConfigAction   ConfigState   Variables INITIAL_STATE • INITIAL_STATE: ConfigState Defined in  redux/reducers/config.tsx:11 Functions reducer ▸ reducer(state?, action): Object
 Parameters    Name Type     state ConfigState    action ConfigAction     Returns Object
    Name Type     clusters null | { [clusterName: string]: Cluster ; }    Defined in  redux/reducers/config.</description>
     </item>

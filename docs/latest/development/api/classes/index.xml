@@ -8,423 +8,134 @@
     <language>en-us</language>
     <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrole.default/</link>
+      <title>Class: ClusterRole</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrole.clusterrole/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrole.default/</guid>
-      <description>lib/k8s/clusterRole .default
-Hierarchy    default ↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeRole     Inherited from  default . constructor Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Overrides  default .</description>
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrole.clusterrole/</guid>
+      <description>lib/k8s/clusterRole .ClusterRole
+Hierarchy    Role ↳ ClusterRole
+  Constructors constructor • new ClusterRole(json)
+Parameters    Name Type     json KubeRole     Inherited from  Role . constructor Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Overrides  Role .</description>
     </item>
     
     <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrolebinding.default/</link>
+      <title>Class: ClusterRoleBinding</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrolebinding.clusterrolebinding/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrolebinding.default/</guid>
-      <description>lib/k8s/clusterRoleBinding .default
-Hierarchy    default ↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeRoleBinding     Inherited from  default . constructor Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Overrides  default .</description>
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrolebinding.clusterrolebinding/</guid>
+      <description>lib/k8s/clusterRoleBinding .ClusterRoleBinding
+Hierarchy    RoleBinding ↳ ClusterRoleBinding
+  Constructors constructor • new ClusterRoleBinding(json)
+Parameters    Name Type     json KubeRoleBinding     Inherited from  RoleBinding . constructor Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Overrides  RoleBinding .</description>
     </item>
     
     <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_configmap.default/</link>
+      <title>Class: ConfigMap</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_configmap.configmap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_configmap.default/</guid>
-      <description>lib/k8s/configMap .default
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_configmap.configmap/</guid>
+      <description>lib/k8s/configMap .ConfigMap
 Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
+↳ ConfigMap
+  Constructors constructor • new ConfigMap(json)
 Parameters    Name Type     json KubeConfigMap     Inherited from makeKubeObject&amp;lt;KubeConfigMap&amp;gt;(&amp;lsquo;configMap&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Defined in  lib/k8s/configMap.ts:9  className ▪ Static className: string
 Inherited from makeKubeObject&amp;lt;KubeConfigMap&amp;gt;(&amp;lsquo;configMap&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors data • get data(): any</description>
+Defined in  lib/k8s/cluster.ts:77 Accessors data • get data(): any</description>
     </item>
     
     <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_crd.default/</link>
+      <title>Class: CronJob</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_cronjob.cronjob/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_crd.default/</guid>
-      <description>lib/k8s/crd .default
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_cronjob.cronjob/</guid>
+      <description>lib/k8s/cronJob .CronJob
 Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
+↳ CronJob
+  Constructors constructor • new CronJob(json)
+Parameters    Name Type     json KubeCronJob     Inherited from makeKubeObject&amp;lt;KubeCronJob&amp;gt;(&amp;lsquo;CronJob&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/cronJob.ts:20  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeCronJob&amp;gt;(&amp;lsquo;CronJob&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors spec • get spec(): any</description>
+    </item>
+    
+    <item>
+      <title>Class: CustomResourceDefinition</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_crd.customresourcedefinition/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_crd.customresourcedefinition/</guid>
+      <description>lib/k8s/crd .CustomResourceDefinition
+Hierarchy   any
+↳ CustomResourceDefinition
+  Constructors constructor • new CustomResourceDefinition(json)
 Parameters    Name Type     json KubeCRD     Inherited from makeKubeObject&amp;lt;KubeCRD&amp;gt;(&amp;lsquo;crd&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/crd.</description>
     </item>
     
     <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_cronjob.default/</link>
+      <title>Class: DaemonSet</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_daemonset.daemonset/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_cronjob.default/</guid>
-      <description>lib/k8s/cronJob .default
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_daemonset.daemonset/</guid>
+      <description>lib/k8s/daemonSet .DaemonSet
 Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeCronJob     Inherited from makeKubeObject&amp;lt;KubeCronJob&amp;gt;(&amp;lsquo;CronJob&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/cronJob.ts:20  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeCronJob&amp;gt;(&amp;lsquo;CronJob&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors spec • get spec(): any</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_customresource.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_customresource.default/</guid>
-      <description>lib/k8s/customresource .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(group, version, resource)
-Parameters    Name Type     group string   version string   resource string    Overrides makeKubeObject&amp;lt;KubeObject&amp;amp;gt;(&#39;CustomResource&#39;).constructor
-Defined in  lib/k8s/customresource.ts:7 Properties apiEndpoint • apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/customresource.ts:6  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeObject&amp;gt;(&amp;lsquo;CustomResource&amp;rsquo;).</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_daemonset.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_daemonset.default/</guid>
-      <description>lib/k8s/daemonSet .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
+↳ DaemonSet
+  Constructors constructor • new DaemonSet(json)
 Parameters    Name Type     json KubeDaemonSet     Inherited from makeKubeObject&amp;lt;KubeDaemonSet&amp;gt;(&amp;lsquo;DaemonSet&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Defined in  lib/k8s/daemonSet.ts:21  className ▪ Static className: string
 Inherited from makeKubeObject&amp;lt;KubeDaemonSet&amp;gt;(&amp;lsquo;DaemonSet&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors spec • get spec(): any</description>
+Defined in  lib/k8s/cluster.ts:77 Accessors spec • get spec(): any</description>
     </item>
     
     <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_deployment.default/</link>
+      <title>Class: Deployment</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_deployment.deployment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_deployment.default/</guid>
-      <description>lib/k8s/deployment .default
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_deployment.deployment/</guid>
+      <description>lib/k8s/deployment .Deployment
 Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
+↳ Deployment
+  Constructors constructor • new Deployment(json)
 Parameters    Name Type     json KubeDeployment     Inherited from makeKubeObject&amp;lt;KubeDeployment&amp;gt;(&amp;lsquo;Deployment&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Defined in  lib/k8s/deployment.ts:19  className ▪ Static className: string
 Inherited from makeKubeObject&amp;lt;KubeDeployment&amp;gt;(&amp;lsquo;Deployment&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors spec • get spec(): any</description>
+Defined in  lib/k8s/cluster.ts:77 Accessors spec • get spec(): any</description>
     </item>
     
     <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_event.default/</link>
+      <title>Class: Event</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_event.event/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_event.default/</guid>
-      <description>lib/k8s/event .default
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_event.event/</guid>
+      <description>lib/k8s/event .Event
 Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
+↳ Event
+  Constructors constructor • new Event(json)
 Parameters    Name Type     json KubeEvent     Inherited from makeKubeObject&amp;lt;KubeEvent&amp;gt;(&amp;lsquo;Event&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Defined in  lib/k8s/event.ts:23  className ▪ Static className: string
 Inherited from makeKubeObject&amp;lt;KubeEvent&amp;gt;(&amp;lsquo;Event&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors involvedObject • get involvedObject(): any</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_ingress.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_ingress.default/</guid>
-      <description>lib/k8s/ingress .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeIngress     Inherited from makeKubeObject&amp;lt;KubeIngress&amp;gt;(&amp;lsquo;ingress&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/ingress.ts:22  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeIngress&amp;gt;(&amp;lsquo;ingress&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors listRoute • get listRoute(): string</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_job.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_job.default/</guid>
-      <description>lib/k8s/job .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeJob     Inherited from makeKubeObject&amp;lt;KubeJob&amp;gt;(&amp;lsquo;Job&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/job.ts:15  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeJob&amp;gt;(&amp;lsquo;Job&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors spec • get spec(): any</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_namespace.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_namespace.default/</guid>
-      <description>lib/k8s/namespace .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeNamespace     Inherited from makeKubeObject&amp;lt;KubeNamespace&amp;gt;(&amp;lsquo;namespace&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/namespace.</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_node.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_node.default/</guid>
-      <description>lib/k8s/node .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeNode     Inherited from makeKubeObject&amp;lt;KubeNode&amp;gt;(&amp;lsquo;node&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/node.</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolume.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolume.default/</guid>
-      <description>lib/k8s/persistentVolume .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubePersistentVolume     Inherited from makeKubeObject&amp;lt;KubePersistentVolume&amp;gt;(&amp;lsquo;persistentVolume&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/persistentVolume.</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolumeclaim.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolumeclaim.default/</guid>
-      <description>lib/k8s/persistentVolumeClaim .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubePersistentVolumeClaim     Inherited from makeKubeObject&amp;lt;KubePersistentVolumeClaim&amp;gt;( &amp;lsquo;persistentVolumeClaim&amp;rsquo; ).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/persistentVolumeClaim.ts:30  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubePersistentVolumeClaim&amp;gt;( &amp;lsquo;persistentVolumeClaim&amp;rsquo; ).className
-Defined in  lib/k8s/cluster.</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_pod.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_pod.default/</guid>
-      <description>lib/k8s/pod .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubePod     Inherited from makeKubeObject&amp;lt;KubePod&amp;gt;(&amp;lsquo;Pod&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/pod.ts:35  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubePod&amp;gt;(&amp;lsquo;Pod&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors spec • get spec(): Object</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_replicaset.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_replicaset.default/</guid>
-      <description>lib/k8s/replicaSet .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeReplicaSet     Inherited from makeKubeObject&amp;lt;KubeReplicaSet&amp;gt;(&amp;lsquo;ReplicaSet&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/replicaSet.ts:22  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeReplicaSet&amp;gt;(&amp;lsquo;ReplicaSet&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors spec • get spec(): Object</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_role.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_role.default/</guid>
-      <description>lib/k8s/role .default
-Hierarchy   any
-↳ default
-↳↳ default   Constructors constructor • new default(json)
-Parameters    Name Type     json KubeRole     Inherited from makeKubeObject&amp;lt;KubeRole&amp;gt;(&amp;lsquo;role&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/role.ts:15  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeRole&amp;gt;(&amp;lsquo;role&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors rules • get rules(): any</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_rolebinding.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_rolebinding.default/</guid>
-      <description>lib/k8s/roleBinding .default
-Hierarchy   any
-↳ default
-↳↳ default   Constructors constructor • new default(json)
-Parameters    Name Type     json KubeRoleBinding     Inherited from makeKubeObject&amp;lt;KubeRoleBinding&amp;gt;(&amp;lsquo;roleBinding&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/roleBinding.ts:19  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeRoleBinding&amp;gt;(&amp;lsquo;roleBinding&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors roleRef • get roleRef(): any</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_secret.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_secret.default/</guid>
-      <description>lib/k8s/secret .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeSecret     Inherited from makeKubeObject&amp;lt;KubeSecret&amp;gt;(&amp;lsquo;secret&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/secret.ts:10  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeSecret&amp;gt;(&amp;lsquo;secret&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors data • get data(): any</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_service.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_service.default/</guid>
-      <description>lib/k8s/service .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeService     Inherited from makeKubeObject&amp;lt;KubeService&amp;gt;(&amp;lsquo;service&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/service.ts:20  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeService&amp;gt;(&amp;lsquo;service&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors spec • get spec(): any</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_serviceaccount.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_serviceaccount.default/</guid>
-      <description>lib/k8s/serviceAccount .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeServiceAccount     Inherited from makeKubeObject&amp;lt;KubeServiceAccount&amp;gt;(&amp;lsquo;serviceAccount&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/serviceAccount.ts:16  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeServiceAccount&amp;gt;(&amp;lsquo;serviceAccount&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors secrets • get secrets(): { apiVersion: string ; fieldPath: string ; kind: string ; name: string ; namespace: string ; uid: string }[]</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_statefulset.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_statefulset.default/</guid>
-      <description>lib/k8s/statefulSet .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeStatefulSet     Inherited from makeKubeObject&amp;lt;KubeStatefulSet&amp;gt;(&amp;lsquo;StatefulSet&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Index signature ▪ [other: string]: any
-Defined in  lib/k8s/statefulSet.ts:21  className ▪ Static className: string
-Inherited from makeKubeObject&amp;lt;KubeStatefulSet&amp;gt;(&amp;lsquo;StatefulSet&amp;rsquo;).className
-Defined in  lib/k8s/cluster.ts:71 Accessors spec • get spec(): any</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_storageclass.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_storageclass.default/</guid>
-      <description>lib/k8s/storageClass .default
-Hierarchy   any
-↳ default
-  Constructors constructor • new default(json)
-Parameters    Name Type     json KubeStorageClass     Inherited from makeKubeObject&amp;lt;KubeStorageClass&amp;gt;(&amp;lsquo;storageClass&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:70 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/storageClass.</description>
-    </item>
-    
-    <item>
-      <title>Class: default</title>
-      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_registry.default/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_registry.default/</guid>
-      <description>plugin/registry .default
-Constructors constructor • new default()
-Methods registerAppBarAction ▸ registerAppBarAction(actionName, actionFunc): void
-Add a component into the app bar (at the top of the app).
-example
-register.registerAppBarAction(&amp;#39;monitor&amp;#39;, () =&amp;gt; &amp;lt;MonitorLink /&amp;gt; ); Parameters    Name Type Description     actionName string a unique name for it   actionFunc (&amp;hellip;args: any[]) =&amp;gt; null | Element a function that returns your component    Returns void</description>
+Defined in  lib/k8s/cluster.ts:77 Accessors involvedObject • get involvedObject(): any</description>
     </item>
     
     <item>
@@ -443,6 +154,123 @@ const myPlugin = { initialize: (register) =&amp;gt; { // do some stuff with regi
     </item>
     
     <item>
+      <title>Class: Ingress</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_ingress.ingress/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_ingress.ingress/</guid>
+      <description>lib/k8s/ingress .Ingress
+Hierarchy   any
+↳ Ingress
+  Constructors constructor • new Ingress(json)
+Parameters    Name Type     json KubeIngress     Inherited from makeKubeObject&amp;lt;KubeIngress&amp;gt;(&amp;lsquo;ingress&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/ingress.ts:22  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeIngress&amp;gt;(&amp;lsquo;ingress&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors listRoute • get listRoute(): string</description>
+    </item>
+    
+    <item>
+      <title>Class: Job</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_job.job/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_job.job/</guid>
+      <description>lib/k8s/job .Job
+Hierarchy   any
+↳ Job
+  Constructors constructor • new Job(json)
+Parameters    Name Type     json KubeJob     Inherited from makeKubeObject&amp;lt;KubeJob&amp;gt;(&amp;lsquo;Job&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/job.ts:15  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeJob&amp;gt;(&amp;lsquo;Job&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors spec • get spec(): any</description>
+    </item>
+    
+    <item>
+      <title>Class: Namespace</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_namespace.namespace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_namespace.namespace/</guid>
+      <description>lib/k8s/namespace .Namespace
+Hierarchy   any
+↳ Namespace
+  Constructors constructor • new Namespace(json)
+Parameters    Name Type     json KubeNamespace     Inherited from makeKubeObject&amp;lt;KubeNamespace&amp;gt;(&amp;lsquo;namespace&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/namespace.</description>
+    </item>
+    
+    <item>
+      <title>Class: NetworkPolicy</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_networkpolicy.networkpolicy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_networkpolicy.networkpolicy/</guid>
+      <description>lib/k8s/networkpolicy .NetworkPolicy
+Hierarchy   any
+↳ NetworkPolicy
+  Constructors constructor • new NetworkPolicy(json)
+Parameters    Name Type     json KubeNetworkPolicy     Inherited from makeKubeObject&amp;lt;KubeNetworkPolicy&amp;gt;(&amp;lsquo;NetworkPolicy&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/networkpolicy.tsx:39  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeNetworkPolicy&amp;gt;(&amp;lsquo;NetworkPolicy&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Methods apiList ▸ Static apiList(onList): any</description>
+    </item>
+    
+    <item>
+      <title>Class: Node</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_node.node/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_node.node/</guid>
+      <description>lib/k8s/node .Node
+Hierarchy   any
+↳ Node
+  Constructors constructor • new Node(json)
+Parameters    Name Type     json KubeNode     Inherited from makeKubeObject&amp;lt;KubeNode&amp;gt;(&amp;lsquo;node&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/node.</description>
+    </item>
+    
+    <item>
+      <title>Class: PersistentVolume</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolume.persistentvolume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolume.persistentvolume/</guid>
+      <description>lib/k8s/persistentVolume .PersistentVolume
+Hierarchy   any
+↳ PersistentVolume
+  Constructors constructor • new PersistentVolume(json)
+Parameters    Name Type     json KubePersistentVolume     Inherited from makeKubeObject&amp;lt;KubePersistentVolume&amp;gt;(&amp;lsquo;persistentVolume&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/persistentVolume.</description>
+    </item>
+    
+    <item>
+      <title>Class: PersistentVolumeClaim</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolumeclaim.persistentvolumeclaim/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_persistentvolumeclaim.persistentvolumeclaim/</guid>
+      <description>lib/k8s/persistentVolumeClaim .PersistentVolumeClaim
+Hierarchy   any
+↳ PersistentVolumeClaim
+  Constructors constructor • new PersistentVolumeClaim(json)
+Parameters    Name Type     json KubePersistentVolumeClaim     Inherited from makeKubeObject&amp;lt;KubePersistentVolumeClaim&amp;gt;( &amp;lsquo;persistentVolumeClaim&amp;rsquo; ).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/persistentVolumeClaim.ts:30  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubePersistentVolumeClaim&amp;gt;( &amp;lsquo;persistentVolumeClaim&amp;rsquo; ).className
+Defined in  lib/k8s/cluster.</description>
+    </item>
+    
+    <item>
       <title>Class: Plugin</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.plugin/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -455,7 +283,180 @@ Constructors constructor • new Plugin()
 Methods initialize ▸ Abstract initialize(register): boolean
 initialize is called for each plugin with a Registry which gives the plugin methods for doing things.
 see Registry
-Parameters    Name Type     register default     Returns boolean</description>
+Parameters    Name Type     register Registry     Returns boolean</description>
+    </item>
+    
+    <item>
+      <title>Class: Pod</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_pod.pod/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_pod.pod/</guid>
+      <description>lib/k8s/pod .Pod
+Hierarchy   any
+↳ Pod
+  Constructors constructor • new Pod(json)
+Parameters    Name Type     json KubePod     Inherited from makeKubeObject&amp;lt;KubePod&amp;gt;(&amp;lsquo;Pod&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/pod.ts:35  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubePod&amp;gt;(&amp;lsquo;Pod&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors spec • get spec(): Object</description>
+    </item>
+    
+    <item>
+      <title>Class: Registry</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_registry.registry/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_registry.registry/</guid>
+      <description>plugin/registry .Registry
+Constructors constructor • new Registry()
+Methods registerAppBarAction ▸ registerAppBarAction(actionName, actionFunc): void
+Add a component into the app bar (at the top of the app).
+example
+register.registerAppBarAction(&amp;#39;monitor&amp;#39;, () =&amp;gt; &amp;lt;MonitorLink /&amp;gt; ); Parameters    Name Type Description     actionName string a unique name for it   actionFunc (&amp;hellip;args: any[]) =&amp;gt; null | Element a function that returns your component    Returns void</description>
+    </item>
+    
+    <item>
+      <title>Class: ReplicaSet</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_replicaset.replicaset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_replicaset.replicaset/</guid>
+      <description>lib/k8s/replicaSet .ReplicaSet
+Hierarchy   any
+↳ ReplicaSet
+  Constructors constructor • new ReplicaSet(json)
+Parameters    Name Type     json KubeReplicaSet     Inherited from makeKubeObject&amp;lt;KubeReplicaSet&amp;gt;(&amp;lsquo;ReplicaSet&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/replicaSet.ts:22  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeReplicaSet&amp;gt;(&amp;lsquo;ReplicaSet&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors spec • get spec(): Object</description>
+    </item>
+    
+    <item>
+      <title>Class: Role</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_role.role/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_role.role/</guid>
+      <description>lib/k8s/role .Role
+Hierarchy   any
+↳ Role
+↳↳ ClusterRole   Constructors constructor • new Role(json)
+Parameters    Name Type     json KubeRole     Inherited from makeKubeObject&amp;lt;KubeRole&amp;gt;(&amp;lsquo;role&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/role.ts:15  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeRole&amp;gt;(&amp;lsquo;role&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors rules • get rules(): any</description>
+    </item>
+    
+    <item>
+      <title>Class: RoleBinding</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_rolebinding.rolebinding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_rolebinding.rolebinding/</guid>
+      <description>lib/k8s/roleBinding .RoleBinding
+Hierarchy   any
+↳ RoleBinding
+↳↳ ClusterRoleBinding   Constructors constructor • new RoleBinding(json)
+Parameters    Name Type     json KubeRoleBinding     Inherited from makeKubeObject&amp;lt;KubeRoleBinding&amp;gt;(&amp;lsquo;roleBinding&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/roleBinding.ts:19  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeRoleBinding&amp;gt;(&amp;lsquo;roleBinding&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors roleRef • get roleRef(): any</description>
+    </item>
+    
+    <item>
+      <title>Class: Secret</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_secret.secret/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_secret.secret/</guid>
+      <description>lib/k8s/secret .Secret
+Hierarchy   any
+↳ Secret
+  Constructors constructor • new Secret(json)
+Parameters    Name Type     json KubeSecret     Inherited from makeKubeObject&amp;lt;KubeSecret&amp;gt;(&amp;lsquo;secret&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/secret.ts:10  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeSecret&amp;gt;(&amp;lsquo;secret&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors data • get data(): any</description>
+    </item>
+    
+    <item>
+      <title>Class: Service</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_service.service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_service.service/</guid>
+      <description>lib/k8s/service .Service
+Hierarchy   any
+↳ Service
+  Constructors constructor • new Service(json)
+Parameters    Name Type     json KubeService     Inherited from makeKubeObject&amp;lt;KubeService&amp;gt;(&amp;lsquo;service&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/service.ts:20  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeService&amp;gt;(&amp;lsquo;service&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors spec • get spec(): any</description>
+    </item>
+    
+    <item>
+      <title>Class: ServiceAccount</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_serviceaccount.serviceaccount/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_serviceaccount.serviceaccount/</guid>
+      <description>lib/k8s/serviceAccount .ServiceAccount
+Hierarchy   any
+↳ ServiceAccount
+  Constructors constructor • new ServiceAccount(json)
+Parameters    Name Type     json KubeServiceAccount     Inherited from makeKubeObject&amp;lt;KubeServiceAccount&amp;gt;(&amp;lsquo;serviceAccount&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/serviceAccount.ts:16  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeServiceAccount&amp;gt;(&amp;lsquo;serviceAccount&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors secrets • get secrets(): { apiVersion: string ; fieldPath: string ; kind: string ; name: string ; namespace: string ; uid: string }[]</description>
+    </item>
+    
+    <item>
+      <title>Class: StatefulSet</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_statefulset.statefulset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_statefulset.statefulset/</guid>
+      <description>lib/k8s/statefulSet .StatefulSet
+Hierarchy   any
+↳ StatefulSet
+  Constructors constructor • new StatefulSet(json)
+Parameters    Name Type     json KubeStatefulSet     Inherited from makeKubeObject&amp;lt;KubeStatefulSet&amp;gt;(&amp;lsquo;StatefulSet&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Defined in  lib/k8s/statefulSet.ts:21  className ▪ Static className: string
+Inherited from makeKubeObject&amp;lt;KubeStatefulSet&amp;gt;(&amp;lsquo;StatefulSet&amp;rsquo;).className
+Defined in  lib/k8s/cluster.ts:77 Accessors spec • get spec(): any</description>
+    </item>
+    
+    <item>
+      <title>Class: StorageClass</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_storageclass.storageclass/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_storageclass.storageclass/</guid>
+      <description>lib/k8s/storageClass .StorageClass
+Hierarchy   any
+↳ StorageClass
+  Constructors constructor • new StorageClass(json)
+Parameters    Name Type     json KubeStorageClass     Inherited from makeKubeObject&amp;lt;KubeStorageClass&amp;gt;(&amp;lsquo;storageClass&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/storageClass.</description>
     </item>
     
   </channel>
