@@ -167,6 +167,7 @@
     "prettier": "^2.4.1",
     "typedoc": "^0.22.10",
     "typedoc-hugo-theme": "^1.0.0",
-    "typedoc-plugin-markdown": "^3.11.14"
+    "typedoc-plugin-markdown": "^3.11.14",
+    "typedoc-plugin-rename-defaults": "^0.4.0"
   }
 }
