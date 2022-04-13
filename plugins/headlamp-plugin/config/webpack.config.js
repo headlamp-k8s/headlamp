@@ -72,11 +72,8 @@ module.exports = {
           {
             loader: require.resolve('url-loader'),
             options: {
-              limit: false,
+              limit: 9999999999999,
             },
-          },
-          {
-            loader: require.resolve('file-loader'),
           },
         ],
       },
