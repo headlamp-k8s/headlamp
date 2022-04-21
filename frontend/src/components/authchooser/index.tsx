@@ -9,7 +9,7 @@ import { useClustersConf } from '../../lib/k8s';
 import { testAuth } from '../../lib/k8s/apiProxy';
 import { createRouteURL, getRoute, getRoutePath } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
-import { setConfig } from '../../redux/actions/actions';
+import { setClusters } from '../../redux/actions/actions';
 import { ClusterDialog } from '../cluster/Chooser';
 import { Loader } from '../common';
 import Empty from '../common/EmptyContent';
@@ -111,7 +111,7 @@ function AuthChooser({ children }: AuthChooserProps) {
               }
 
               cluster.useToken = useToken;
-              dispatch(setConfig({ clusters: { ...clusters } }));
+              dispatch(setClusters({ clusters: { ...clusters } }));
               // If we don't require a token, then we just move to the attempted URL or root.
               if (!useToken) {
                 history.replace(from);

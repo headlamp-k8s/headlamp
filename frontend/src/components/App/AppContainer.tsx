@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import helpers from '../../helpers';
 import ReleaseNotes from '../common/ReleaseNotes/ReleaseNotes';
+import Headless from './Headless';
 import Layout from './Layout';
 
 export default function AppContainer() {
@@ -20,6 +21,7 @@ export default function AppContainer() {
         horizontal: 'left',
       }}
     >
+      <Headless />
       <Router>
         <Layout />
       </Router>
