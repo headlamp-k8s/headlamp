@@ -23,7 +23,7 @@ If in doubt, host Headlamp on a separate origin (domain or port, don't use the `
 ### Dev mode
 
 ```bash
-./backend/server -dev -base-url /headlamp
+./backend/headlamp-server -dev -base-url /headlamp
 PUBLIC_URL="/headlamp" make run-frontend
 ```
 
@@ -34,7 +34,7 @@ Then go to http://localhost:3000/headlamp/ in your browser.
 
 ```bash
 cd frontend && npm install && npm run build && cd ..
-./backend/server -dev -base-url /headlamp -html-static-dir frontend/build
+./backend/headlamp-server -dev -base-url /headlamp -html-static-dir frontend/build
 ```
 
 Then go to http://localhost:4466/headlamp/ in your browser.
