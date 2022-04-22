@@ -39,6 +39,8 @@ type HeadlampConfig struct {
 	oidcScopes       []string
 	oidcIdpIssuerURL string
 	baseURL          string
+	// Holds: context-name -> (context, reverse-proxy)
+	contextProxies map[string]contextProxy
 }
 
 type clientConfig struct {
@@ -49,6 +51,11 @@ type spaHandler struct {
 	staticPath string
 	indexPath  string
 	baseURL    string
+}
+
+type contextProxy struct {
+	context *Context
+	proxy   *httputil.ReverseProxy
 }
 
 var pluginListURLs []string
@@ -239,14 +246,30 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		r = baseRoute.PathPrefix(config.baseURL).Subrouter()
 	}
 
+	config.contextProxies = make(map[string]contextProxy)
+
 	fmt.Println("*** Headlamp Server ***")
 	fmt.Println("  API Routers:")
 
 	for i := range contexts {
-		config.addProxyForContext(&contexts[i], r)
+		context := &contexts[i]
+		proxy, err := config.createProxyForContext(*context)
+
+		if err != nil {
+			log.Fatalf("Error setting up proxy for context %s: %s", context.Name, err)
+		}
+
+		fmt.Printf("\tlocalhost:%s%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name, *context.cluster.getServer())
+
+		config.contextProxies[context.Name] = contextProxy{
+			context,
+			proxy,
+		}
 	}
 
 	addPluginRoutes(config, r)
+
+	config.handleClusterRequests(r)
 
 	// Configuration
 	r.HandleFunc("/config", clientConf.getConfig).Methods("GET")
@@ -376,15 +399,34 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	log.Fatal(http.ListenAndServe(":"+config.port, handler))
 }
 
-// @todo: Evaluate whether we should just spawn a kubectl proxy for each context
-// as it would handle already the certificates, etc.
-func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
+func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
+	router.PathPrefix("/clusters/{clusterName}/{api:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		clusterName := mux.Vars(r)["clusterName"]
+		ctxtProxy, ok := c.contextProxies[clusterName]
+		if !ok {
+			http.NotFound(w, r)
+			return
+		}
+
+		server, err := url.Parse(*ctxtProxy.context.cluster.getServer())
+		if err != nil {
+			log.Printf("Error: failed to get valid URL from server %s: %s", server, err)
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+
+		handler := proxyHandler(server, ctxtProxy.proxy)
+		handler(w, r)
+	})
+}
+
+func (c *HeadlampConfig) createProxyForContext(context Context) (*httputil.ReverseProxy, error) {
 	cluster := context.getCluster()
 	name := cluster.getName()
 
 	server, err := url.Parse(*cluster.getServer())
 	if err != nil {
-		log.Fatal("Failed to get URL from server", name, err)
+		return nil, fmt.Errorf("failed to get URL from server %s: %w", *name, err)
 	}
 
 	// Create a reverse proxy to direct the API calls to the right server
@@ -408,7 +450,7 @@ func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
 	if clientCert != "" {
 		clientKey := context.getClientKey()
 		if clientKey == "" {
-			log.Fatalf("Found a ClientCertificate entry for cluster %v, but not a ClientKey.", name)
+			return nil, fmt.Errorf("found a ClientCertificate entry, but not a ClientKey")
 		} else if cert, err := tls.LoadX509KeyPair(clientCert, clientKey); err == nil {
 			certs = append(certs, cert)
 		}
@@ -418,7 +460,7 @@ func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
 	if clientCertData != nil {
 		clientKeyData := context.getClientKeyData()
 		if clientKeyData == nil {
-			log.Fatalf("Found a ClientCertificateData entry for cluster %v, but not a ClientKeyData.", name)
+			return nil, fmt.Errorf("found a ClientCertificateData entry, but not a ClientKeyData")
 		} else if cert, err := tls.X509KeyPair(clientCertData, clientKeyData); err == nil {
 			certs = append(certs, cert)
 		}
@@ -432,10 +474,7 @@ func (c *HeadlampConfig) addProxyForContext(context *Context, r *mux.Router) {
 
 	proxy.Transport = &http.Transport{TLSClientConfig: tls}
 
-	prefix := "/clusters/" + *name
-
-	r.HandleFunc(prefix+"/{api:.*}", proxyHandler(server, proxy))
-	fmt.Printf("\tlocalhost:%v%v%v/{api...} -> %v\n", c.port, c.baseURL, prefix, *cluster.getServer())
+	return proxy, nil
 }
 
 func setPluginReloadHeader(writer http.ResponseWriter) {
