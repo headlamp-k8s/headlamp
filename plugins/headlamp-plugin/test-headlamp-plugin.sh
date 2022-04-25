@@ -50,3 +50,6 @@ npm run format
 # test lint command and default code is lint free
 npm run lint 
 npm run lint-fix
+
+# test type script error checks
+npm run tsc

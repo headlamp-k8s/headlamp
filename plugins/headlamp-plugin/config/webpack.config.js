@@ -47,6 +47,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
@@ -68,11 +72,8 @@ module.exports = {
           {
             loader: require.resolve('url-loader'),
             options: {
-              limit: false,
+              limit: 9999999999999,
             },
-          },
-          {
-            loader: require.resolve('file-loader'),
           },
         ],
       },

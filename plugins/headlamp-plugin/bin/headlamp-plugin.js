@@ -324,11 +324,14 @@ function format(packageFolder) {
 function lint(packageFolder, fix) {
   try {
     const extra = fix ? ' --fix' : '';
-    child_process.execSync('eslint -c package.json --ext .js,.ts,.tsx src/' + extra, {
-      stdio: 'inherit',
-      cwd: packageFolder,
-      encoding: 'utf8',
-    });
+    child_process.execSync(
+      'eslint -c package.json --max-warnings 0 --ext .js,.ts,.tsx src/' + extra,
+      {
+        stdio: 'inherit',
+        cwd: packageFolder,
+        encoding: 'utf8',
+      }
+    );
   } catch (e) {
     console.error(`Problem running eslint inside of "${packageFolder}"`);
     return 1;
