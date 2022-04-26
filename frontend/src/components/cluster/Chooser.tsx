@@ -15,6 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import _ from 'lodash';
 import React, { PropsWithChildren } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { Trans, useTranslation } from 'react-i18next';
@@ -24,6 +25,7 @@ import helpers from '../../helpers';
 import { useCluster, useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
 import { DialogTitle } from '../common/Dialog';
 import Loader from '../common/Loader';
@@ -51,6 +53,8 @@ export function ClusterTitle(props: ClusterTitleProps) {
   const clusters = props.clusters || useClustersConf();
   const [showChooser, setShowChooser] = React.useState(false);
   const { t } = useTranslation('cluster');
+  const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
+  const ChooserButton = useTypedSelector(state => state.ui.clusterChooserButtonComponent);
 
   useHotkeys('ctrl+shift+l', () => setShowChooser(true));
 
@@ -62,16 +66,24 @@ export function ClusterTitle(props: ClusterTitleProps) {
     return null;
   }
 
+  if (!arePluginsLoaded || _.isNull(ChooserButton)) {
+    return null;
+  }
+
   return (
     <React.Fragment>
-      <Button
-        size="large"
-        variant="contained"
-        onClick={() => setShowChooser(true)}
-        className={classes.button}
-      >
-        <Trans t={t}>Cluster: {{ cluster }}</Trans>
-      </Button>
+      {ChooserButton ? (
+        <ChooserButton clickHandler={() => setShowChooser(true)} />
+      ) : (
+        <Button
+          size="large"
+          variant="contained"
+          onClick={() => setShowChooser(true)}
+          className={classes.button}
+        >
+          <Trans t={t}>Cluster: {{ cluster }}</Trans>
+        </Button>
+      )}
       <Chooser open={showChooser} onClose={() => setShowChooser(false)} />
     </React.Fragment>
   );
