@@ -226,13 +226,6 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		contexts = append(contexts, contextsFound...)
 	}
 
-	clusters := make([]Cluster, 0, len(contexts))
-	for _, context := range contexts {
-		clusters = append(clusters, *context.getCluster())
-	}
-
-	clientConf := &clientConfig{clusters}
-
 	if config.staticDir != "" {
 		baseURLReplace(config.staticDir, config.baseURL)
 	}
@@ -254,7 +247,6 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	for i := range contexts {
 		context := &contexts[i]
 		proxy, err := config.createProxyForContext(*context)
-
 		if err != nil {
 			log.Fatalf("Error setting up proxy for context %s: %s", context.Name, err)
 		}
@@ -272,7 +264,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	config.handleClusterRequests(r)
 
 	// Configuration
-	r.HandleFunc("/config", clientConf.getConfig).Methods("GET")
+	r.HandleFunc("/config", config.getConfig).Methods("GET")
 
 	oauthRequestMap := make(map[string]*OauthConfig)
 
@@ -420,6 +412,17 @@ func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 	})
 }
 
+func (c *HeadlampConfig) getClusters() []Cluster {
+	clusters := make([]Cluster, 0, len(c.contextProxies))
+
+	for _, contextProxy := range c.contextProxies {
+		context := contextProxy.context
+		clusters = append(clusters, *context.getCluster())
+	}
+
+	return clusters
+}
+
 func (c *HeadlampConfig) createProxyForContext(context Context) (*httputil.ReverseProxy, error) {
 	cluster := context.getCluster()
 	name := cluster.getName()
@@ -516,10 +519,12 @@ func GetDefaultKubeConfigPath() string {
 	return filepath.Join(homeDirectory, ".kube", "config")
 }
 
-func (c *clientConfig) getConfig(w http.ResponseWriter, r *http.Request) {
+func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	if err := json.NewEncoder(w).Encode(c); err != nil {
+	clientConfig := clientConfig{c.getClusters()}
+
+	if err := json.NewEncoder(w).Encode(&clientConfig); err != nil {
 		log.Println("Error encoding config", err)
 	}
 }
