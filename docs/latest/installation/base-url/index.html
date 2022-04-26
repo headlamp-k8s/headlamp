@@ -2602,12 +2602,12 @@ to run it at a base-url like &ldquo;/headlamp&rdquo; for example.</p>
 <p>If in doubt, host Headlamp on a separate origin (domain or port, don&rsquo;t use the <code>-base-url</code> option).</p>
 <h2 id="how-to-use-with-a-base-url">How to use with a base-url</h2>
 <h3 id="dev-mode">Dev mode</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./backend/server -dev -base-url /headlamp
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./backend/headlamp-server -dev -base-url /headlamp
 PUBLIC_URL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/headlamp&#34;</span> make run-frontend
 </code></pre></div><p>Then go to http://localhost:3000/headlamp/ in your browser.</p>
 <h3 id="static-build-mode">Static build mode</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd frontend <span style="color:#f92672">&amp;&amp;</span> npm install <span style="color:#f92672">&amp;&amp;</span> npm run build <span style="color:#f92672">&amp;&amp;</span> cd ..
-./backend/server -dev -base-url /headlamp -html-static-dir frontend/build
+./backend/headlamp-server -dev -base-url /headlamp -html-static-dir frontend/build
 </code></pre></div><p>Then go to http://localhost:4466/headlamp/ in your browser.</p>
 <h3 id="docker-mode">Docker mode</h3>
 <p>Append <code>--base-url /headlamp</code> to the docker run command. Note the extra &ldquo;-&rdquo;.</p>

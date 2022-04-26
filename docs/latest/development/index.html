@@ -2619,14 +2619,14 @@ options can be appended to the main command as arguments.</p>
 Note, the mount arguments add folders that are referenced in the ~/.kube
 folders - you may need to add other folders if your config refers
 to more folders.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --network<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;host&#34;</span> -p 127.0.0.1:4466:4466/tcp --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/home/rene/.minikube&#34;</span>,target<span style="color:#f92672">=</span>$HOME/.minikube --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.kube&#34;</span>,target<span style="color:#f92672">=</span>/root/.kube ghcr.io/kinvolk/headlamp:latest /headlamp/server -html-static-dir /headlamp/frontend -plugins-dir<span style="color:#f92672">=</span>/headlamp/plugins
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --network<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;host&#34;</span> -p 127.0.0.1:4466:4466/tcp --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/home/rene/.minikube&#34;</span>,target<span style="color:#f92672">=</span>$HOME/.minikube --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.kube&#34;</span>,target<span style="color:#f92672">=</span>/root/.kube ghcr.io/kinvolk/headlamp:latest /headlamp/headlamp-server -html-static-dir /headlamp/frontend -plugins-dir<span style="color:#f92672">=</span>/headlamp/plugins
 </code></pre></div><p>If you want to make a new container image called <code>kinvolk/headlamp:development</code>
 you can run it like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ DOCKER_IMAGE_VERSION<span style="color:#f92672">=</span>development make image
 ...
 Successfully tagged kinvolk/headlamp:development
 
-$ docker run --network<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;host&#34;</span> -p 127.0.0.1:4466:4466/tcp --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/home/rene/.minikube&#34;</span>,target<span style="color:#f92672">=</span>$HOME/.minikube --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.kube&#34;</span>,target<span style="color:#f92672">=</span>/root/.kube kinvolk/headlamp:development /headlamp/server -html-static-dir /headlamp/frontend -plugins-dir<span style="color:#f92672">=</span>/headlamp/plugins
+$ docker run --network<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;host&#34;</span> -p 127.0.0.1:4466:4466/tcp --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/home/rene/.minikube&#34;</span>,target<span style="color:#f92672">=</span>$HOME/.minikube --mount type<span style="color:#f92672">=</span>bind,source<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/.kube&#34;</span>,target<span style="color:#f92672">=</span>/root/.kube kinvolk/headlamp:development /headlamp/headlamp-server -html-static-dir /headlamp/frontend -plugins-dir<span style="color:#f92672">=</span>/headlamp/plugins
 </code></pre></div><p>Then go to https://localhost:4466 in your browser.</p>
 <h3 id="minikube-in-cluster">Minikube &ldquo;in-cluster&rdquo;</h3>
 <p>These instructions are for if you want to use Headlamp running &ldquo;in-cluster&rdquo;,
@@ -2640,7 +2640,7 @@ ones made in the local docker environment.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ eval <span style="color:#66d9ef">$(</span>minikube docker-env<span style="color:#66d9ef">)</span>
 $ DOCKER_IMAGE_VERSION<span style="color:#f92672">=</span>development make image
 </code></pre></div><h4 id="create-a-deployment-yaml">Create a deployment yaml.</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create deployment headlamp -n kube-system --image<span style="color:#f92672">=</span>kinvolk/headlamp:development -o yaml --dry-run -- /headlamp/server -html-static-dir /headlamp/frontend -in-cluster -plugins-dir<span style="color:#f92672">=</span>/headlamp/plugins &gt; minikube-headlamp.yaml
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create deployment headlamp -n kube-system --image<span style="color:#f92672">=</span>kinvolk/headlamp:development -o yaml --dry-run -- /headlamp/headlamp-server -html-static-dir /headlamp/frontend -in-cluster -plugins-dir<span style="color:#f92672">=</span>/headlamp/plugins &gt; minikube-headlamp.yaml
 </code></pre></div><p>To use the local container image we change the <code>imagePullPolicy</code> to Never.
 Making kubectl use local images - which is what you want in development.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
@@ -2665,7 +2665,7 @@ Making kubectl use local images - which is what you want in development.</p>
     <span style="color:#f92672">spec</span>:
       <span style="color:#f92672">containers</span>:
       - <span style="color:#f92672">command</span>:
-        - <span style="color:#ae81ff">/headlamp/server</span>
+        - <span style="color:#ae81ff">/headlamp/headlamp-server</span>
         - -<span style="color:#ae81ff">html-static-dir</span>
         - <span style="color:#ae81ff">/headlamp/frontend</span>
         - -<span style="color:#ae81ff">in-cluster</span>
