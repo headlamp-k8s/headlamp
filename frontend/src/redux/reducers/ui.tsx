@@ -2,7 +2,7 @@ import { IconProps } from '@iconify/react';
 import _ from 'lodash';
 import { Notification } from '../../lib/notification';
 import themesConf, { setTheme } from '../../lib/themes';
-import { sectionFunc } from '../../plugin/registry';
+import { clusterChooserButtonComponent, sectionFunc } from '../../plugin/registry';
 import {
   Action,
   BrandingProps,
@@ -13,6 +13,7 @@ import {
   UI_PLUGINS_LOADED,
   UI_RESET_PLUGIN_VIEWS,
   UI_ROUTER_SET_ROUTE,
+  UI_SET_CLUSTER_CHOOSER_BUTTON,
   UI_SET_DETAILS_VIEW,
   UI_SET_NOTIFICATIONS,
   UI_SIDEBAR_SET_EXPANDED,
@@ -70,6 +71,7 @@ export interface UIState {
   branding: BrandingProps;
   pluginsLoaded: boolean;
   notifications: Notification[];
+  clusterChooserButtonComponent?: clusterChooserButtonComponent | null;
 }
 
 function setInitialSidebarOpen() {
@@ -263,6 +265,11 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
         });
       }
       localStorage.setItem('notifications', JSON.stringify(newFilters.notifications));
+      break;
+    }
+    case UI_SET_CLUSTER_CHOOSER_BUTTON: {
+      const component = action.component;
+      newFilters.clusterChooserButtonComponent = component;
       break;
     }
     default:

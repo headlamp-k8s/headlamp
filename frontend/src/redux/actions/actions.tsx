@@ -1,6 +1,6 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
 import { Notification } from '../../lib/notification';
-import { sectionFunc } from '../../plugin/registry';
+import { clusterChooserButtonComponent, sectionFunc } from '../../plugin/registry';
 import { SidebarEntry, UIState } from '../reducers/ui';
 
 export const FILTER_RESET = 'FILTER_RESET';
@@ -22,6 +22,7 @@ export const UI_THEME_SET = 'UI_THEME_SET';
 export const UI_RESET_PLUGIN_VIEWS = 'UI_RESET_PLUGIN_VIEWS';
 export const UI_PLUGINS_LOADED = 'UI_PLUGINS_LOADED';
 export const UI_BRANDING_SET_APP_LOGO = 'UI_BRANDING_SET_APP_LOGO';
+export const UI_SET_CLUSTER_CHOOSER_BUTTON = 'UI_SET_CLUSTER_CHOOSER_BUTTON';
 
 export interface BrandingProps {
   logo: React.ComponentType<{
@@ -164,4 +165,7 @@ export function setUINotifications(notifications: Notification[] | Notification)
 
 export function updateUINotification(dispatchedNotification: Notification[] | Notification) {
   return { type: UI_UPDATE_NOTIFICATION, dispatchedNotification };
+}
+export function setClusterChooserButtonComponent(component: clusterChooserButtonComponent | null) {
+  return { type: UI_SET_CLUSTER_CHOOSER_BUTTON, component };
 }
