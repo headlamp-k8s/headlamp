@@ -23,6 +23,7 @@ func main() {
 	oidcScopes := flag.String("oidc-scopes", "profile,email",
 		"A comma separated list of scopes needed from the OIDC provider")
 	baseURL := flag.String("base-url", "", "Base URL path. eg. /headlamp")
+	headless := flag.Bool("headless", false, "Headlamp is running in headless mode")
 
 	flag.Parse()
 
@@ -43,6 +44,7 @@ func main() {
 		devMode:          *devMode,
 		staticDir:        *staticDir,
 		insecure:         *insecure,
+		headless:         *headless,
 		pluginDir:        *pluginDir,
 		oidcClientID:     *oidcClientID,
 		oidcClientSecret: *oidcClientSecret,

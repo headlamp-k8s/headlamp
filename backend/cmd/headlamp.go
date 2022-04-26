@@ -18,6 +18,7 @@ import (
 	"path"
 	"path/filepath"
 	"strings"
+	"time"
 
 	oidc "github.com/coreos/go-oidc"
 	"github.com/gorilla/handlers"
@@ -30,6 +31,7 @@ type HeadlampConfig struct {
 	useInCluster     bool
 	devMode          bool
 	insecure         bool
+	headless         bool
 	kubeConfigPath   string
 	port             string
 	staticDir        string
@@ -43,6 +45,7 @@ type HeadlampConfig struct {
 
 type clientConfig struct {
 	Clusters []Cluster `json:"clusters"`
+	Headless bool      `json:"headless"`
 }
 
 type spaHandler struct {
@@ -50,6 +53,58 @@ type spaHandler struct {
 	indexPath  string
 	baseURL    string
 }
+
+type quitCheck struct {
+	should       bool
+	signaled     bool
+	signaledTime time.Time
+}
+
+const (
+	timeToWaitForQuit     = 5 * time.Second
+	timeToWaitAfterSignal = 100 * time.Millisecond
+)
+
+// Called to check if the server should quit or not.
+func (quit *quitCheck) checkShouldQuit() {
+	if quit.signaled {
+		now := time.Now()
+		// We wait a bit because there could be other requests in flight.
+		quitTimePlus := quit.signaledTime.Add(timeToWaitAfterSignal)
+
+		if quitTimePlus.After(now) {
+			// we should not quit, since there is request activity.
+			quit.should = false
+			quit.signaled = false
+		}
+	}
+}
+
+// We have been asked to quit.
+func (quit *quitCheck) signalQuit() {
+	quit.should = true
+	quit.signaled = true
+	quit.signaledTime = time.Now()
+}
+
+func (quit *quitCheck) calledLaterToQuit() {
+	if quit.should {
+		os.Exit(0)
+	}
+}
+
+func (quit *quitCheck) handler(w http.ResponseWriter, r *http.Request) {
+	if err := json.NewEncoder(w).Encode(true); err != nil {
+		log.Println("Error with quitCheck handler", err)
+	}
+
+	quit.signalQuit()
+
+	// Wait for some time, and maybe we exit. See checkShouldQuit()
+	time.AfterFunc(timeToWaitForQuit, quit.calledLaterToQuit)
+}
+
+var quitChecker = &quitCheck{false, false, time.Now()}
 
 var pluginListURLs []string
 
@@ -224,7 +279,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		clusters = append(clusters, *context.getCluster())
 	}
 
-	clientConf := &clientConfig{clusters}
+	clientConf := &clientConfig{clusters, config.headless}
 
 	if config.staticDir != "" {
 		baseURLReplace(config.staticDir, config.baseURL)
@@ -250,6 +305,11 @@ func StartHeadlampServer(config *HeadlampConfig) {
 
 	// Configuration
 	r.HandleFunc("/config", clientConf.getConfig).Methods("GET")
+
+	if config.headless {
+		// Quit the backend server
+		r.HandleFunc("/quit", quitChecker.handler).Methods("POST")
+	}
 
 	oauthRequestMap := make(map[string]*OauthConfig)
 
@@ -460,6 +520,8 @@ func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.Response
 			resetPlugins()
 			setPluginReloadHeader(writer)
 		}
+
+		quitChecker.checkShouldQuit()
 
 		log.Println("Requesting ", request.URL.String())
 		proxy.ServeHTTP(writer, request)
