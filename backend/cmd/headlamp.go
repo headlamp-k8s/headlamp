@@ -22,6 +22,7 @@ import (
 	oidc "github.com/coreos/go-oidc"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 
 	"golang.org/x/oauth2"
 )
@@ -265,6 +266,8 @@ func StartHeadlampServer(config *HeadlampConfig) {
 
 	// Configuration
 	r.HandleFunc("/config", config.getConfig).Methods("GET")
+
+	config.addClusterSetupRoute(r)
 
 	oauthRequestMap := make(map[string]*OauthConfig)
 
@@ -527,4 +530,63 @@ func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	if err := json.NewEncoder(w).Encode(&clientConfig); err != nil {
 		log.Println("Error encoding config", err)
 	}
+}
+
+func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
+	// We do not support this feature when in-cluster
+	if c.useInCluster {
+		return
+	}
+
+	r.HandleFunc("/cluster", func(w http.ResponseWriter, r *http.Request) {
+		clusterReq := ClusterReq{}
+		if err := json.NewDecoder(r.Body).Decode(&clusterReq); err != nil {
+			fmt.Println(err)
+			http.Error(w, "Error decoding cluster info", http.StatusBadRequest)
+			return
+		}
+
+		if clusterReq.Name == "" || clusterReq.Server == "" {
+			http.Error(w, "Error creating cluster with invalid info; please provide a 'name' and 'server' fields at least.",
+				http.StatusBadRequest)
+			return
+		}
+
+		context := Context{
+			Name: clusterReq.Name,
+			cluster: Cluster{
+				Name:   clusterReq.Name,
+				Server: clusterReq.Server,
+				config: &clientcmdapi.Cluster{
+					Server:                   clusterReq.Server,
+					InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
+					CertificateAuthorityData: clusterReq.CertificateAuthorityData,
+				},
+			},
+		}
+
+		proxy, err := c.createProxyForContext(context)
+		if err != nil {
+			log.Printf("Error creating proxy for cluster %s: %s", clusterReq.Name, err)
+			http.Error(w, "Error setting up cluster", http.StatusBadRequest)
+			return
+		}
+
+		_, isReplacement := c.contextProxies[clusterReq.Name]
+
+		c.contextProxies[clusterReq.Name] = contextProxy{
+			&context,
+			proxy,
+		}
+
+		if isReplacement {
+			fmt.Printf("Replaced cluster \"%s\" proxy by:\n", context.Name)
+		} else {
+			fmt.Println("Created new cluster proxy:")
+		}
+		fmt.Printf("\tlocalhost:%s%s%s/{api...} -> %s\n", c.port, c.baseURL, "/clusters/"+context.Name, clusterReq.Server)
+
+		w.WriteHeader(http.StatusCreated)
+		c.getConfig(w, r)
+	}).Methods("POST")
 }
