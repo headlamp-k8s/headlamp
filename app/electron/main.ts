@@ -37,8 +37,8 @@ const useExternalServer = process.env.EXTERNAL_SERVER || false;
 
 function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   const serverFilePath = isDev
-    ? path.resolve('../backend/server')
-    : path.join(process.resourcesPath, './server');
+    ? path.resolve('../backend/headlamp-server')
+    : path.join(process.resourcesPath, './headlamp-server');
 
   const options = { shell: true, detached: false };
   if (process.platform !== 'win32' && !isDev) {

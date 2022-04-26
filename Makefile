@@ -36,7 +36,7 @@ app-mac: app-build
 
 .PHONY: backend
 backend:
-	cd backend && go build -o ./server${SERVER_EXE_EXT} ./cmd
+	cd backend && go build -o ./headlamp-server${SERVER_EXE_EXT} ./cmd
 
 frontend-install:
 	cd frontend && npm install
@@ -53,7 +53,7 @@ frontend-build:
 	cd frontend && npm run build
 
 run-backend:
-	./backend/server -dev
+	./backend/headlamp-server -dev
 
 run-frontend:
 	cd frontend && npm start

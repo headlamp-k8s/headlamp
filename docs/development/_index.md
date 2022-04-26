@@ -95,7 +95,7 @@ folders - you may need to add other folders if your config refers
 to more folders.
 
 ```bash
-docker run --network="host" -p 127.0.0.1:4466:4466/tcp --mount type=bind,source="/home/rene/.minikube",target=$HOME/.minikube --mount type=bind,source="$HOME/.kube",target=/root/.kube ghcr.io/kinvolk/headlamp:latest /headlamp/server -html-static-dir /headlamp/frontend -plugins-dir=/headlamp/plugins
+docker run --network="host" -p 127.0.0.1:4466:4466/tcp --mount type=bind,source="/home/rene/.minikube",target=$HOME/.minikube --mount type=bind,source="$HOME/.kube",target=/root/.kube ghcr.io/kinvolk/headlamp:latest /headlamp/headlamp-server -html-static-dir /headlamp/frontend -plugins-dir=/headlamp/plugins
 ```
 
 If you want to make a new container image called `kinvolk/headlamp:development`
@@ -106,7 +106,7 @@ $ DOCKER_IMAGE_VERSION=development make image
 ...
 Successfully tagged kinvolk/headlamp:development
 
-$ docker run --network="host" -p 127.0.0.1:4466:4466/tcp --mount type=bind,source="/home/rene/.minikube",target=$HOME/.minikube --mount type=bind,source="$HOME/.kube",target=/root/.kube kinvolk/headlamp:development /headlamp/server -html-static-dir /headlamp/frontend -plugins-dir=/headlamp/plugins
+$ docker run --network="host" -p 127.0.0.1:4466:4466/tcp --mount type=bind,source="/home/rene/.minikube",target=$HOME/.minikube --mount type=bind,source="$HOME/.kube",target=/root/.kube kinvolk/headlamp:development /headlamp/headlamp-server -html-static-dir /headlamp/frontend -plugins-dir=/headlamp/plugins
 ```
 
 Then go to https://localhost:4466 in your browser.
@@ -136,7 +136,7 @@ $ DOCKER_IMAGE_VERSION=development make image
 #### Create a deployment yaml.
 
 ```bash
-$ kubectl create deployment headlamp -n kube-system --image=kinvolk/headlamp:development -o yaml --dry-run -- /headlamp/server -html-static-dir /headlamp/frontend -in-cluster -plugins-dir=/headlamp/plugins > minikube-headlamp.yaml
+$ kubectl create deployment headlamp -n kube-system --image=kinvolk/headlamp:development -o yaml --dry-run -- /headlamp/headlamp-server -html-static-dir /headlamp/frontend -in-cluster -plugins-dir=/headlamp/plugins > minikube-headlamp.yaml
 ```
 
 To use the local container image we change the `imagePullPolicy` to Never.
@@ -166,7 +166,7 @@ spec:
     spec:
       containers:
       - command:
-        - /headlamp/server
+        - /headlamp/headlamp-server
         - -html-static-dir
         - /headlamp/frontend
         - -in-cluster

@@ -122,7 +122,7 @@ For in-cluster Headlamp deployments, when running Headlamp's server,
 the `-plugin-dir` option should point to the directory:
 
 ```bash
-./server -plugins-dir=.plugins
+./headlamp-server -plugins-dir=.plugins
 ```
 
 ### Using plugins on the desktop version
