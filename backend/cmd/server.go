@@ -36,9 +36,18 @@ func main() {
 		log.Fatal("base-url needs to start with a '/' or be empty")
 	}
 
+	kubeConfigPath := ""
+	// If we don't have a specified kubeConfig path, and we are not running
+	// in-cluster, then use the default path.
+	if *kubeconfig != "" {
+		kubeConfigPath = *kubeconfig
+	} else if !*inCluster {
+		kubeConfigPath = GetDefaultKubeConfigPath()
+	}
+
 	StartHeadlampServer(&HeadlampConfig{
 		useInCluster:     *inCluster,
-		kubeConfigPath:   *kubeconfig,
+		kubeConfigPath:   kubeConfigPath,
 		port:             *port,
 		devMode:          *devMode,
 		staticDir:        *staticDir,

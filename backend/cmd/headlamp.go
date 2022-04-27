@@ -185,16 +185,8 @@ func serveWithNoCacheHeader(fs http.Handler) http.HandlerFunc {
 }
 
 // nolint:gocognit,funlen
-func StartHeadlampServer(config *HeadlampConfig) {
-	kubeConfigPath := ""
-
-	// If we don't have a specified kubeConfig path, and we are not running
-	// in-cluster, then use the default path.
-	if config.kubeConfigPath != "" {
-		kubeConfigPath = config.kubeConfigPath
-	} else if !config.useInCluster {
-		kubeConfigPath = GetDefaultKubeConfigPath()
-	}
+func createHeadlampHandler(config *HeadlampConfig) http.Handler {
+	kubeConfigPath := config.kubeConfigPath
 
 	log.Printf("plugins-dir: %s\n", config.pluginDir)
 
@@ -378,17 +370,20 @@ func StartHeadlampServer(config *HeadlampConfig) {
 		http.Handle("/", r)
 	}
 
-	var handler http.Handler
-
 	// On dev mode we're loose about where connections come from
 	if config.devMode {
 		headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
 		methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "DELETE", "PATCH", "OPTIONS"})
 		origins := handlers.AllowedOrigins([]string{"*"})
-		handler = handlers.CORS(headers, methods, origins)(r)
-	} else {
-		handler = r
+
+		return handlers.CORS(headers, methods, origins)(r)
 	}
+
+	return r
+}
+
+func StartHeadlampServer(config *HeadlampConfig) {
+	handler := createHeadlampHandler(config)
 
 	// Start server
 	log.Fatal(http.ListenAndServe(":"+config.port, handler))
