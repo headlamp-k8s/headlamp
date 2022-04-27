@@ -50,3 +50,19 @@ From within the [Headlamp](https://github.com/kinvolk/headlamp/) repo run:
 ```bash
 make storybook
 ```
+
+
+## Accessibility (a11y)
+
+### Developer console warnings and errors
+
+axe-core is used to detect some a11y issues at runtime when running
+Headlamp in developer mode. This detects more issues than testing
+components via eslint or via unit tests.
+
+Any issues found are reported in the developer console.
+
+To disable the alert message during development, use the following:
+```bash
+REACT_APP_SKIP_A11Y=true make run-frontend
+```
