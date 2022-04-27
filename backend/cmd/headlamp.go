@@ -237,18 +237,23 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	fmt.Println("*** Headlamp Server ***")
 	fmt.Println("  API Routers:")
 
-	for i := range contexts {
-		context := &contexts[i]
-		proxy, err := config.createProxyForContext(*context)
-		if err != nil {
-			log.Fatalf("Error setting up proxy for context %s: %s", context.Name, err)
-		}
+	if len(contexts) == 0 {
+		log.Println("No contexts/clusters configured by default!")
+	} else {
+		for i := range contexts {
+			context := &contexts[i]
+			proxy, err := config.createProxyForContext(*context)
+			if err != nil {
+				log.Fatalf("Error setting up proxy for context %s: %s", context.Name, err)
+			}
 
-		fmt.Printf("\tlocalhost:%s%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name, *context.cluster.getServer())
+			fmt.Printf("\tlocalhost:%s%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name,
+				*context.cluster.getServer())
 
-		config.contextProxies[context.Name] = contextProxy{
-			context,
-			proxy,
+			config.contextProxies[context.Name] = contextProxy{
+				context,
+				proxy,
+			}
 		}
 	}
 
