@@ -1,3 +1,5 @@
+import { Cluster } from '../lib/k8s/cluster';
+
 /**
  * Determines whether app is running in electron environment.
  * Note: The isElectron code (Licence: MIT) is taken from
@@ -137,6 +139,19 @@ function setAppVersion(value: string) {
   localStorage.setItem('app_version', value);
 }
 
+const recentClustersStorageKey = 'recent_clusters';
+
+function setRecentCluster(cluster: Cluster) {
+  const currentClusters = getRecentClusters().filter(name => name !== cluster.name);
+  const newClusters = [cluster.name, ...currentClusters].slice(0, 3);
+  localStorage.setItem(recentClustersStorageKey, JSON.stringify(newClusters));
+}
+
+function getRecentClusters() {
+  const currentClustersStr = localStorage.getItem(recentClustersStorageKey) || '[]';
+  return JSON.parse(currentClustersStr) as string[];
+}
+
 const exportFunctions = {
   getBaseUrl,
   isDevMode,
@@ -144,6 +159,8 @@ const exportFunctions = {
   isElectron,
   getAppVersion,
   setAppVersion,
+  setRecentCluster,
+  getRecentClusters,
 };
 
 export default exportFunctions;
