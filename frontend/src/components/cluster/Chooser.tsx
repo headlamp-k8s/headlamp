@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Container from '@material-ui/core/Container';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -10,8 +11,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import React, { PropsWithChildren } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { Trans, useTranslation } from 'react-i18next';
@@ -105,12 +108,13 @@ const useStyles = makeStyles(theme => ({
 
 const useClusterButtonStyles = makeStyles({
   root: {
-    width: 150,
-    height: 160,
-    paddingTop: '15%',
+    width: 128,
+    height: 115,
+    paddingTop: '10%',
   },
   content: {
     textAlign: 'center',
+    paddingTop: 0,
   },
 });
 
@@ -146,6 +150,7 @@ interface ClusterListProps {
 
 function ClusterList(props: ClusterListProps) {
   const { clusters, onButtonClick } = props;
+  const theme = useTheme();
   const focusedRef = React.useCallback(node => {
     if (node !== null) {
       node.focus();
@@ -153,17 +158,45 @@ function ClusterList(props: ClusterListProps) {
   }, []);
 
   return (
-    <Grid container alignItems="center" justifyContent="space-around" spacing={2}>
-      {clusters.map((cluster, i) => (
-        <Grid item key={cluster.name}>
-          <ClusterButton
-            focusedRef={i === 0 ? focusedRef : undefined}
-            cluster={cluster}
-            onClick={() => onButtonClick(cluster)}
-          />
+    <Container style={{ maxWidth: '500px', paddingBottom: theme.spacing(2) }}>
+      <Grid
+        container
+        direction="column"
+        alignItems="stretch"
+        justifyContent="space-between"
+        spacing={4}
+      >
+        <Grid item container alignItems="center" justifyContent="space-between" spacing={2}>
+          {clusters.slice(0, 3).map((cluster, i) => (
+            <Grid item key={cluster.name}>
+              <ClusterButton
+                focusedRef={i === 0 ? focusedRef : undefined}
+                cluster={cluster}
+                onClick={() => onButtonClick(cluster)}
+              />
+            </Grid>
+          ))}
         </Grid>
-      ))}
-    </Grid>
+        {clusters.length > 3 && (
+          <Grid item xs={12}>
+            <Autocomplete
+              id="cluster-selector-autocomplete"
+              options={clusters}
+              getOptionLabel={option => option.name}
+              style={{ width: '100%' }}
+              disableClearable
+              autoComplete
+              includeInputInList
+              openOnFocus
+              renderInput={params => (
+                <TextField {...params} label="All clusters" variant="outlined" />
+              )}
+              onChange={(_event, cluster) => onButtonClick(cluster)}
+            />
+          </Grid>
+        )}
+      </Grid>
+    </Container>
   );
 }
 
