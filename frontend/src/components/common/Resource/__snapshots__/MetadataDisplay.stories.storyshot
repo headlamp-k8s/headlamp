@@ -13,14 +13,15 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Name
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -32,14 +33,15 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Namespace
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -51,14 +53,15 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Creation
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -70,14 +73,15 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Labels
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <div
             class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
@@ -135,14 +139,15 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Name
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -154,14 +159,15 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Namespace
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -173,14 +179,15 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Creation
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -192,14 +199,15 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Labels
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <div
             class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
@@ -242,14 +250,15 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Some extra label 1
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -261,14 +270,15 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Some extra label 2
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -280,14 +290,15 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Some extra label 3
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -314,14 +325,15 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Name
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -333,14 +345,15 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Namespace
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -352,14 +365,15 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Creation
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -371,14 +385,15 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Labels
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <div
             class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
@@ -421,14 +436,15 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
       <tr
         class="MuiTableRow-root"
       >
-        <td
+        <th
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+          role="cell"
+          scope="row"
         >
           Controlled by
-        </td>
+        </th>
         <td
           class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-          scope="row"
         >
           <a
             class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"

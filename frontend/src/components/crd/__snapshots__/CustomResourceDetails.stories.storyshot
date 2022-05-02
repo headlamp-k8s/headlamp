@@ -166,14 +166,15 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                   <tr
                     class="MuiTableRow-root"
                   >
-                    <td
+                    <th
                       class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
                     >
                       Name
-                    </td>
+                    </th>
                     <td
                       class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                      scope="row"
                     >
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -185,14 +186,15 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                   <tr
                     class="MuiTableRow-root"
                   >
-                    <td
+                    <th
                       class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
                     >
                       Namespace
-                    </td>
+                    </th>
                     <td
                       class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                      scope="row"
                     >
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -204,14 +206,15 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                   <tr
                     class="MuiTableRow-root"
                   >
-                    <td
+                    <th
                       class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
                     >
                       Creation
-                    </td>
+                    </th>
                     <td
                       class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                      scope="row"
                     >
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
@@ -223,14 +226,15 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                   <tr
                     class="MuiTableRow-root"
                   >
-                    <td
+                    <th
                       class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
                     >
                       Test Col
-                    </td>
+                    </th>
                     <td
                       class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                      scope="row"
                     >
                       <div
                         class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"

@@ -407,8 +407,10 @@ export function NameValueTable(props: NameValueTableProps) {
           if (hide) return null;
           return (
             <TableRow key={i}>
-              <TableCell className={classes.metadataNameCell}>{name}</TableCell>
-              <TableCell scope="row" className={classes.metadataCell}>
+              <TableCell component="th" scope="row" className={classes.metadataNameCell}>
+                {name}
+              </TableCell>
+              <TableCell className={classes.metadataCell}>
                 <Value value={value} />
               </TableCell>
             </TableRow>
