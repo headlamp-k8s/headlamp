@@ -52,6 +52,10 @@ frontend: frontend-install
 frontend-build:
 	cd frontend && npm run build
 
+.PHONY: frontend-build-storybook
+frontend-build-storybook:
+	cd frontend && npm run build-storybook
+
 run-backend:
 	./backend/headlamp-server -dev
 
