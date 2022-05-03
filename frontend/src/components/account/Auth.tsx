@@ -1,10 +1,9 @@
-import { Link } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Link from '@material-ui/core/Link';
 import Snackbar from '@material-ui/core/Snackbar';
 import TextField from '@material-ui/core/TextField';
 import React from 'react';
@@ -15,6 +14,7 @@ import { useClustersConf } from '../../lib/k8s';
 import { ApiError, testAuth } from '../../lib/k8s/apiProxy';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { ClusterDialog } from '../cluster/Chooser';
+import { DialogTitle } from '../common/Dialog';
 
 export default function AuthToken() {
   const history = useHistory();
@@ -101,7 +101,7 @@ export function PureAuthToken({
   }
 
   return (
-    <Box>
+    <Box component="main">
       <ClusterDialog useCover onClose={onClose} aria-labelledby="authtoken-dialog-title">
         <DialogTitle id="authtoken-dialog-title">{title}</DialogTitle>
         <DialogContent>
