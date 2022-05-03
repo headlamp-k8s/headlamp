@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
@@ -6,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -22,6 +22,7 @@ import { useCluster, useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
+import { DialogTitle } from '../common/Dialog';
 import Loader from '../common/Loader';
 
 const useClusterTitleStyle = makeStyles(theme => ({
@@ -261,45 +262,52 @@ function Chooser(props: ClusterDialogProps) {
   }
 
   const clusterList = Object.values(clusters || {});
+  if (!show) {
+    return null;
+  }
 
   return (
-    <ClusterDialog
-      open={show}
-      onClose={onClose || handleClose}
-      aria-labelledby="chooser-dialog-title"
-      aria-busy={clusterList.length === 0 && clusters === null}
-      {...otherProps}
-    >
-      <DialogTitle id="chooser-dialog-title">{t('Choose a cluster')}</DialogTitle>
+    <Box component="main">
+      <ClusterDialog
+        open={show}
+        onClose={onClose || handleClose}
+        aria-labelledby="chooser-dialog-title"
+        aria-busy={clusterList.length === 0 && clusters === null}
+        {...otherProps}
+      >
+        <DialogTitle id="chooser-dialog-title" focusTitle>
+          {t('Choose a cluster')}
+        </DialogTitle>
 
-      {clusterList.length === 0 ? (
-        <React.Fragment>
-          {clusters === null ? (
-            <>
-              <DialogContentText>{t('Wait while fetching clusters…')}</DialogContentText>
-              <Loader title={t('Loading cluster information')} />
-            </>
-          ) : (
-            <>
-              <DialogContentText>
-                {t('There seems to be no clusters configured…')}
-              </DialogContentText>
-              <DialogContentText>
-                {t('Please make sure you have at least one cluster configured.')}
-              </DialogContentText>
-              {helpers.isElectron() && (
+        {clusterList.length === 0 ? (
+          <React.Fragment>
+            {clusters === null ? (
+              <>
+                <DialogContentText>{t('Wait while fetching clusters…')}</DialogContentText>
+                <Loader title={t('Loading cluster information')} />
+              </>
+            ) : (
+              <>
                 <DialogContentText>
-                  {t('Or try running Headlamp with a different kube config.')}
+                  {t('There seems to be no clusters configured…')}
                 </DialogContentText>
-              )}
-            </>
-          )}
-        </React.Fragment>
-      ) : (
-        <ClusterList clusters={clusterList} onButtonClick={handleButtonClick} />
-      )}
-      {children}
-    </ClusterDialog>
+                <DialogContentText>
+                  {t('Please make sure you have at least one cluster configured.')}
+                </DialogContentText>
+                {helpers.isElectron() && (
+                  <DialogContentText>
+                    {t('Or try running Headlamp with a different kube config.')}
+                  </DialogContentText>
+                )}
+              </>
+            )}
+          </React.Fragment>
+        ) : (
+          <ClusterList clusters={clusterList} onButtonClick={handleButtonClick} />
+        )}
+        {children}
+      </ClusterDialog>
+    </Box>
   );
 }
 
