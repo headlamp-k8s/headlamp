@@ -2623,6 +2623,14 @@ committed to git, but is shown on the website at
 <a href="https://github.com/kinvolk/headlamp/" target="_blank" rel="noopener">Headlamp</a>
  repo run:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make storybook
+</code></pre></div><h2 id="accessibility-a11y">Accessibility (a11y)</h2>
+<h3 id="developer-console-warnings-and-errors">Developer console warnings and errors</h3>
+<p>axe-core is used to detect some a11y issues at runtime when running
+Headlamp in developer mode. This detects more issues than testing
+components via eslint or via unit tests.</p>
+<p>Any issues found are reported in the developer console.</p>
+<p>To disable the alert message during development, use the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">REACT_APP_SKIP_A11Y<span style="color:#f92672">=</span>true make run-frontend
 </code></pre></div>
 
     </div>
@@ -2682,6 +2690,11 @@ committed to git, but is shown on the website at
     <li><a href="#building-and-running">Building and running</a></li>
     <li><a href="#api-documentation">API documentation</a></li>
     <li><a href="#storybook">Storybook</a></li>
+    <li><a href="#accessibility-a11y">Accessibility (a11y)</a>
+      <ul>
+        <li><a href="#developer-console-warnings-and-errors">Developer console warnings and errors</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
