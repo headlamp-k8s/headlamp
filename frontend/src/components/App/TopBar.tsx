@@ -247,9 +247,7 @@ export function PureTopBar({
                 <ClusterTitle cluster={cluster} clusters={clusters} />
               </div>
               {Object.values(appBarActions).map((action, i) => (
-                <MenuItem>
-                  <React.Fragment key={i}>{action()}</React.Fragment>
-                </MenuItem>
+                <React.Fragment key={i}>{action()}</React.Fragment>
               ))}
               <LocaleSelect />
               <ThemeChangeButton />

@@ -56,3 +56,7 @@ jobs:
     - name: Build docs
       run: |
         make docs
+
+    - name: Build storybook
+      run: |
+        make frontend-build-storybook

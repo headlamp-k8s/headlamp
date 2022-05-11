@@ -430,6 +430,7 @@ export const ROUTES: {
 export const NotFoundRoute = {
   path: '*',
   exact: true,
+  name: `Whoops! This page doesn't exist`,
   component: () => <NotFoundComponent />,
   sidebar: null,
   noAuthRequired: true,

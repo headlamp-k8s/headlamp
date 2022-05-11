@@ -1,5 +1,5 @@
 import { InlineIcon } from '@iconify/react';
-import { Box, Button, DialogTitle, withStyles } from '@material-ui/core';
+import { Box, Button, withStyles } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -12,6 +12,7 @@ import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { setConfig } from '../../redux/actions/actions';
 import { ClusterDialog } from '../cluster/Chooser';
 import { Loader } from '../common';
+import { DialogTitle } from '../common/Dialog';
 import Empty from '../common/EmptyContent';
 import OauthPopup from '../oidcauth/OauthPopup';
 
@@ -220,13 +221,6 @@ export function PureAuthChooser({
 }: PureAuthChooserProps) {
   const { t } = useTranslation('auth');
 
-  const focusedRef = React.useCallback(node => {
-    if (node !== null) {
-      node.setAttribute('tabindex', '-1');
-      node.focus();
-    }
-  }, []);
-
   function onClose() {
     // Do nothing because we're not supposed to close on backdrop click or escape.
   }
@@ -234,15 +228,15 @@ export function PureAuthChooser({
   return (
     <ClusterDialog useCover onClose={onClose} aria-labelledby="authchooser-dialog-title">
       {testingAuth ? (
-        <Box textAlign="center">
-          <DialogTitle ref={focusedRef} id="authchooser-dialog-title">
+        <Box component="main" textAlign="center">
+          <DialogTitle id="authchooser-dialog-title" focusTitle>
             {testingTitle}
           </DialogTitle>
           <Loader title={t('Testing auth')} />
         </Box>
       ) : (
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <DialogTitle ref={focusedRef} id="authchooser-dialog-title">
+        <Box component="main" display="flex" flexDirection="column" alignItems="center">
+          <DialogTitle id="authchooser-dialog-title" focusTitle>
             {title}
           </DialogTitle>
           {!error ? (
