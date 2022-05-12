@@ -1,6 +1,6 @@
 import * as K8s from '../types/lib/k8s';
 import * as ApiProxy from '../types/lib/k8s/apiProxy';
-import * as Notification from '../types/lib/Notification';
+import * as Notification from '../types/lib/notification';
 import * as Router from '../types/lib/router';
 import * as Utils from '../types/lib/util';
 import { Headlamp, Plugin } from '../types/plugin/lib';
