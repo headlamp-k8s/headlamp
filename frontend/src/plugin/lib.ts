@@ -75,6 +75,7 @@
  * - K8s, frontend/src/lib/k8s
  * - Utils frontend/src/lib/util
  */
+import { ClusterRequest, setCluster } from '../lib/k8s/apiProxy';
 import Registry from './registry';
 
 // @todo: types for CommonComponents, K8s, and Utils should be put into plugins-pkg.
@@ -135,6 +136,21 @@ export abstract class Headlamp {
     // @todo: what happens if this plugin exists? (and is already initialized?)
     //        Should it raise an error? Silently keep going? Do we need quit() methods on plugins?
     window.plugins[pluginId] = pluginObj;
+  }
+
+  /**
+   * Configure (or update) a cluster that can then be used throughout Headlamp.
+   * If the request is succesful, successive calls to `K8s.useClustersConf()` will show the newly configured cluster.
+   *
+   * **Important:** This is only available in the desktop version and will result in a bad request when running in-cluster.
+   *
+   * @param clusterReq - the cluster to be added or updated.
+   * @returns a promise which completes to Headlamp's configuration (showing the list of configured clusters).
+   */
+  static setCluster(clusterReq: ClusterRequest) {
+    return setCluster(clusterReq).catch(e => {
+      console.error(e);
+    });
   }
 }
 

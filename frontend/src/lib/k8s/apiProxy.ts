@@ -24,6 +24,17 @@ export interface RequestParams {
   [prop: string]: any;
 }
 
+export interface ClusterRequest {
+  /** The name of the cluster (has to be unique, or it will override an existing cluster) */
+  name: string;
+  /** The cluster URL */
+  server: string;
+  /** Whether the server's certificate should not be checked for validity */
+  insecureTLSVerify?: boolean;
+  /** The certificate authority data */
+  certificateAuthorityData?: string;
+}
+
 export async function request(
   path: string,
   params: RequestParams = {},
@@ -675,4 +686,13 @@ export async function testAuth() {
   return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', { spec }, false, {
     timeout: 5 * 1000,
   });
+}
+
+export async function setCluster(clusterReq: ClusterRequest) {
+  return request(
+    '/cluster',
+    { method: 'POST', body: JSON.stringify(clusterReq), headers: JSON_HEADERS },
+    false,
+    false
+  );
 }
