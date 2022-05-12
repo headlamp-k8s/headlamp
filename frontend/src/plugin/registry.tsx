@@ -1,9 +1,11 @@
+import React from 'react';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
   BrandingProps,
   setAppBarAction,
   setBrandingAppLogoComponent,
+  setClusterChooserButtonComponent,
   setDetailsView,
   setDetailsViewHeaderAction,
   setRoute,
@@ -16,7 +18,9 @@ export interface SectionFuncProps {
   title: string;
   component: (props: { resource: any }) => JSX.Element | null;
 }
-
+export type clusterChooserButtonComponent = React.ComponentType<{
+  clickHandler: (event?: any) => void;
+}>;
 export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | undefined;
 
 export default class Registry {
@@ -147,5 +151,17 @@ export default class Registry {
    */
   registerAppLogo(component: BrandingProps['logo']) {
     store.dispatch(setBrandingAppLogoComponent(component));
+  }
+
+  /**
+   * @param component is a React Component that takes one required props ```JSX clickHandler``` which is the
+   * action handler that happens when the custom chooser button component click event occurs
+   * @example
+   * ```JSX
+   * registry.registerClusterChooserComponent((props: { clickHandler: () => {} }) => <MY_CUSTOM_COMPONENT onClick={clickHandler}/>)
+   * ```
+   */
+  registerClusterChooserComponent(component: clusterChooserButtonComponent | null) {
+    store.dispatch(setClusterChooserButtonComponent(component));
   }
 }
