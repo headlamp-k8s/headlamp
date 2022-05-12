@@ -28,7 +28,7 @@ npx --yes @kinvolk/headlamp-plugin create headlamp-myfancy cd headlamp-myfancy n
       <description>Headlamp&amp;rsquo;s plugins exist for changing or adding functionlity related to the user interface and experience.
 Plugins Lib The @kinvolk/headlamp-plugin module ships a library (@kinvolk/headlamp-plugin/lib) where all the Headlamp-related development modules can be found.
 The main ones are:
- K8s: Kubernetes related functionality Registry: The plugin registry, used to register functionality Headlamp: To register plugins CommonComponents: React components commonly used in the Headlamp UI  Shared Modules Headlamp ships many of the common npm modules that should be shared by both the plugins and Headlamp itself, and includes the config files for editors like VS Code to find them.</description>
+ K8s: Kubernetes related functionality Registry: The plugin registry, used to register functionality Headlamp: To register plugins CommonComponents: React components commonly used in the Headlamp UI Notification: This module contains two exported members one is Notification, a class which can be used to prepare notifications that are accepted by headlamp and the other one is setNotificationsInStore it is a dispatcher function which accepts a notification object prepared from the Notification class and when called it brings the notifications from plugin land to headlamp ecosystem so that headlamp can parse the notification and display it.</description>
     </item>
     
     <item>
