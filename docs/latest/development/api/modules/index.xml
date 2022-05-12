@@ -262,8 +262,8 @@ Defined in  lib/k8s/crd.ts:57 </description>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_router/</guid>
       <description>Interfaces   Route   RouteURLProps   Variables NotFoundRoute • NotFoundRoute: Object
-Type declaration    Name Type     component () =&amp;gt; Element   exact boolean   noAuthRequired boolean   path string   sidebar null    Defined in  lib/router.tsx:430  ROUTES • ROUTES: Object
-Index signature ▪ [routeName: string]: Route Defined in  lib/router.tsx:76 Functions createRouteURL ▸ createRouteURL(routeName, params?</description>
+Type declaration    Name Type     component () =&amp;gt; Element   exact boolean   name string   noAuthRequired boolean   path string   sidebar null    Defined in  lib/router.tsx:428 Functions createRouteURL ▸ createRouteURL(routeName, params?): string
+Parameters    Name Type     routeName string   params RouteURLProps     Returns string</description>
     </item>
     
     <item>
