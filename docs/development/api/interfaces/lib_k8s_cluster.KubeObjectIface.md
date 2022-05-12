@@ -30,7 +30,7 @@ slug: "lib_k8s_cluster.KubeObjectIface"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -40,7 +40,7 @@ slug: "lib_k8s_cluster.KubeObjectIface"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Methods
 
@@ -60,7 +60,7 @@ slug: "lib_k8s_cluster.KubeObjectIface"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -145,4 +145,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L72)

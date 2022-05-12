@@ -32,7 +32,7 @@ makeKubeObject<KubeRole\>('role').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -46,7 +46,7 @@ makeKubeObject<KubeRole\>('role').constructor
 
 #### Defined in
 
-[lib/k8s/role.ts:15](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/role.ts#L15)
+[lib/k8s/role.ts:15](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/role.ts#L15)
 
 ___
 
@@ -60,7 +60,7 @@ makeKubeObject<KubeRole\>('role').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -74,7 +74,7 @@ makeKubeObject<KubeRole\>('role').className
 
 #### Defined in
 
-[lib/k8s/role.ts:17](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/role.ts#L17)
+[lib/k8s/role.ts:17](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/role.ts#L17)
 
 ## Methods
 
@@ -98,7 +98,7 @@ makeKubeObject<KubeRole\>('role').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -122,7 +122,7 @@ makeKubeObject<KubeRole\>('role').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -149,7 +149,7 @@ makeKubeObject<KubeRole\>('role').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -175,7 +175,7 @@ makeKubeObject<KubeRole\>('role').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -199,4 +199,4 @@ makeKubeObject<KubeRole\>('role').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L72)

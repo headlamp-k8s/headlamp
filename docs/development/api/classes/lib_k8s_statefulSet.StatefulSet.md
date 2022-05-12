@@ -30,7 +30,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -44,7 +44,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').constructor
 
 #### Defined in
 
-[lib/k8s/statefulSet.ts:21](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/statefulSet.ts#L21)
+[lib/k8s/statefulSet.ts:21](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/statefulSet.ts#L21)
 
 ___
 
@@ -58,7 +58,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -72,7 +72,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').className
 
 #### Defined in
 
-[lib/k8s/statefulSet.ts:23](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/statefulSet.ts#L23)
+[lib/k8s/statefulSet.ts:23](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/statefulSet.ts#L23)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/statefulSet.ts:27](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/statefulSet.ts#L27)
+[lib/k8s/statefulSet.ts:27](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/statefulSet.ts#L27)
 
 ## Methods
 
@@ -110,7 +110,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -134,7 +134,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -161,7 +161,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -187,7 +187,7 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -211,4 +211,4 @@ makeKubeObject<KubeStatefulSet\>('StatefulSet').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L72)

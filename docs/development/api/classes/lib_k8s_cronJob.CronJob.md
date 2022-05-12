@@ -30,7 +30,7 @@ makeKubeObject<KubeCronJob\>('CronJob').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -44,7 +44,7 @@ makeKubeObject<KubeCronJob\>('CronJob').constructor
 
 #### Defined in
 
-[lib/k8s/cronJob.ts:20](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cronJob.ts#L20)
+[lib/k8s/cronJob.ts:20](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cronJob.ts#L20)
 
 ___
 
@@ -58,7 +58,7 @@ makeKubeObject<KubeCronJob\>('CronJob').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -72,7 +72,7 @@ makeKubeObject<KubeCronJob\>('CronJob').className
 
 #### Defined in
 
-[lib/k8s/cronJob.ts:25](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cronJob.ts#L25)
+[lib/k8s/cronJob.ts:25](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cronJob.ts#L25)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cronJob.ts:29](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cronJob.ts#L29)
+[lib/k8s/cronJob.ts:29](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cronJob.ts#L29)
 
 ## Methods
 
@@ -110,7 +110,7 @@ makeKubeObject<KubeCronJob\>('CronJob').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -134,7 +134,7 @@ makeKubeObject<KubeCronJob\>('CronJob').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -161,7 +161,7 @@ makeKubeObject<KubeCronJob\>('CronJob').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -187,7 +187,7 @@ makeKubeObject<KubeCronJob\>('CronJob').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -211,4 +211,4 @@ makeKubeObject<KubeCronJob\>('CronJob').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L72)

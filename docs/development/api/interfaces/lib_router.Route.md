@@ -16,7 +16,7 @@ When true, will only match if the path matches the location.pathname exactly.
 
 #### Defined in
 
-[lib/router.tsx:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L61)
+[lib/router.tsx:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L61)
 
 ___
 
@@ -28,7 +28,7 @@ Human readable name. Capitalized and short.
 
 #### Defined in
 
-[lib/router.tsx:63](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L63)
+[lib/router.tsx:63](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L63)
 
 ___
 
@@ -40,7 +40,7 @@ This route does not require Authentication.
 
 #### Defined in
 
-[lib/router.tsx:67](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L67)
+[lib/router.tsx:67](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L67)
 
 ___
 
@@ -52,7 +52,7 @@ In case this route does *not* need a cluster prefix and context.
 
 #### Defined in
 
-[lib/router.tsx:65](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L65)
+[lib/router.tsx:65](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L65)
 
 ___
 
@@ -64,7 +64,7 @@ Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands.
 
 #### Defined in
 
-[lib/router.tsx:59](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L59)
+[lib/router.tsx:59](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L59)
 
 ___
 
@@ -76,7 +76,7 @@ The sidebar group this Route should be in, or null if it is in no group.
 
 #### Defined in
 
-[lib/router.tsx:69](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L69)
+[lib/router.tsx:69](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L69)
 
 ## Methods
 
@@ -92,4 +92,4 @@ Shown component for this route.
 
 #### Defined in
 
-[lib/router.tsx:71](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L71)
+[lib/router.tsx:71](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L71)

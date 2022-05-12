@@ -14,7 +14,7 @@ slug: "lib_k8s_cluster.KubeContainerStatus"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:479](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L479)
+[lib/k8s/cluster.ts:479](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L479)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:480](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L480)
+[lib/k8s/cluster.ts:480](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L480)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:481](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L481)
+[lib/k8s/cluster.ts:481](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L481)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:482](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L482)
+[lib/k8s/cluster.ts:482](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L482)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:483](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L483)
+[lib/k8s/cluster.ts:483](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L483)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:484](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L484)
+[lib/k8s/cluster.ts:484](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L484)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:485](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L485)
+[lib/k8s/cluster.ts:485](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L485)
 
 ___
 
@@ -102,4 +102,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:486](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L486)
+[lib/k8s/cluster.ts:486](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L486)
