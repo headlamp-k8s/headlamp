@@ -39,7 +39,7 @@ register.registerAppBarAction('monitor', () => <MonitorLink /> );
 
 #### Defined in
 
-[plugin/registry.tsx:117](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L117)
+[plugin/registry.tsx:117](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L117)
 
 ___
 
@@ -64,7 +64,7 @@ register.registerAppLogo((props: { logoType: 'small' | 'large', themeName: strin
 
 #### Defined in
 
-[plugin/registry.tsx:148](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L148)
+[plugin/registry.tsx:148](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L148)
 
 ___
 
@@ -95,7 +95,7 @@ register.registerDetailsViewHeaderAction('traces', (props) =>
 
 #### Defined in
 
-[plugin/registry.tsx:98](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L98)
+[plugin/registry.tsx:98](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L98)
 
 ___
 
@@ -124,7 +124,7 @@ register.registerDetailsViewSection("biolatency", (resource: KubeObject) => { ti
 
 #### Defined in
 
-[plugin/registry.tsx:133](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L133)
+[plugin/registry.tsx:133](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L133)
 
 ___
 
@@ -160,7 +160,7 @@ register.registerRoute({
 
 #### Defined in
 
-[plugin/registry.tsx:79](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L79)
+[plugin/registry.tsx:79](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L79)
 
 ___
 
@@ -192,4 +192,4 @@ registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
 
 #### Defined in
 
-[plugin/registry.tsx:40](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L40)
+[plugin/registry.tsx:40](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L40)

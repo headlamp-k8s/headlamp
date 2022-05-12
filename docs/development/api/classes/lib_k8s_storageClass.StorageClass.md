@@ -30,7 +30,7 @@ makeKubeObject<KubeStorageClass\>('storageClass').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -52,7 +52,7 @@ makeKubeObject<KubeStorageClass\>('storageClass').constructor
 
 #### Defined in
 
-[lib/k8s/storageClass.ts:11](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/storageClass.ts#L11)
+[lib/k8s/storageClass.ts:11](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/storageClass.ts#L11)
 
 ___
 
@@ -66,7 +66,7 @@ makeKubeObject<KubeStorageClass\>('storageClass').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -80,7 +80,7 @@ makeKubeObject<KubeStorageClass\>('storageClass').className
 
 #### Defined in
 
-[lib/k8s/storageClass.ts:25](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/storageClass.ts#L25)
+[lib/k8s/storageClass.ts:25](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/storageClass.ts#L25)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/storageClass.ts:13](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/storageClass.ts#L13)
+[lib/k8s/storageClass.ts:13](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/storageClass.ts#L13)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/storageClass.ts:17](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/storageClass.ts#L17)
+[lib/k8s/storageClass.ts:17](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/storageClass.ts#L17)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/storageClass.ts:21](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/storageClass.ts#L21)
+[lib/k8s/storageClass.ts:21](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/storageClass.ts#L21)
 
 ## Methods
 
@@ -146,7 +146,7 @@ makeKubeObject<KubeStorageClass\>('storageClass').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -170,7 +170,7 @@ makeKubeObject<KubeStorageClass\>('storageClass').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -197,7 +197,7 @@ makeKubeObject<KubeStorageClass\>('storageClass').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -223,7 +223,7 @@ makeKubeObject<KubeStorageClass\>('storageClass').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -247,4 +247,4 @@ makeKubeObject<KubeStorageClass\>('storageClass').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L72)

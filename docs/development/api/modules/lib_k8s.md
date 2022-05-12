@@ -156,7 +156,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:149](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L149)
+[lib/k8s/index.ts:149](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/index.ts#L149)
 
 ## Variables
 
@@ -170,7 +170,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:73](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L73)
+[lib/k8s/index.ts:73](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/index.ts#L73)
 
 ## Functions
 
@@ -184,7 +184,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:145](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L145)
+[lib/k8s/index.ts:145](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/index.ts#L145)
 
 ___
 
@@ -198,7 +198,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:128](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L128)
+[lib/k8s/index.ts:128](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/index.ts#L128)
 
 ___
 
@@ -212,7 +212,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:80](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L80)
+[lib/k8s/index.ts:80](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/index.ts#L80)
 
 ___
 
@@ -232,4 +232,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:151](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/k8s/index.ts#L151)
+[lib/k8s/index.ts:151](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/index.ts#L151)

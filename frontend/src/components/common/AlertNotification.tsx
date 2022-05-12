@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouteMatch } from 'react-router-dom';
 import { testAuth } from '../../lib/k8s/apiProxy';
-import { getRoutePath, Route, ROUTES } from '../../lib/router';
+import { getDefaultRoutes, getRoutePath, Route } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
 const NOT_FOUND_ERROR_MESSAGES = ['Error: Api request error: Bad Gateway', 'Offline'];
@@ -136,5 +136,7 @@ export function PureAlertNotification({
 export default function AlertNotification() {
   const routes = useTypedSelector(state => state.ui.routes);
 
-  return <PureAlertNotification routes={routes} testAuth={testAuth} moreRoutes={ROUTES} />;
+  return (
+    <PureAlertNotification routes={routes} testAuth={testAuth} moreRoutes={getDefaultRoutes()} />
+  );
 }

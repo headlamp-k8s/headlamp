@@ -20,6 +20,7 @@ window.pluginLib = {
   Recharts: require('recharts'),
   ReactRouter: require('react-router-dom'),
   ReactRedux: require('react-redux'),
+  Router: require('../lib/router'),
   Utils: require('../lib/util'),
   Iconify: require('@iconify/react'),
   Lodash: require('lodash'),

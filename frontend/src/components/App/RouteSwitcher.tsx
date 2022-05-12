@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Redirect, Route, RouteProps, Switch } from 'react-router-dom';
 import { getToken } from '../../lib/auth';
 import { useClustersConf } from '../../lib/k8s';
-import { createRouteURL, getRoutePath, NotFoundRoute, ROUTES } from '../../lib/router';
+import { createRouteURL, getDefaultRoutes, getRoutePath, NotFoundRoute } from '../../lib/router';
 import { getCluster } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { useSidebarItem } from '../Sidebar';
@@ -12,7 +12,7 @@ export default function RouteSwitcher() {
   const { t } = useTranslation('frequent');
 
   // The NotFoundRoute always has to be evaluated in the last place.
-  const defaultRoutes = Object.values(ROUTES).concat(NotFoundRoute);
+  const defaultRoutes = Object.values(getDefaultRoutes()).concat(NotFoundRoute);
   const routes = useTypedSelector(state => state.ui.routes);
 
   return (

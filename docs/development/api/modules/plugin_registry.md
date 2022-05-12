@@ -34,4 +34,4 @@ slug: "plugin_registry"
 
 #### Defined in
 
-[plugin/registry.tsx:20](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/plugin/registry.tsx#L20)
+[plugin/registry.tsx:20](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L20)

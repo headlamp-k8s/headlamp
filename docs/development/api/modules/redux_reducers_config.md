@@ -17,7 +17,7 @@ slug: "redux_reducers_config"
 
 #### Defined in
 
-[redux/reducers/config.tsx:11](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/redux/reducers/config.tsx#L11)
+[redux/reducers/config.tsx:11](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/redux/reducers/config.tsx#L11)
 
 ## Functions
 
@@ -42,4 +42,4 @@ slug: "redux_reducers_config"
 
 #### Defined in
 
-[redux/reducers/config.tsx:21](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/redux/reducers/config.tsx#L21)
+[redux/reducers/config.tsx:21](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/redux/reducers/config.tsx#L21)

@@ -21,27 +21,14 @@ slug: "lib_router"
 | :------ | :------ |
 | `component` | () => `Element` |
 | `exact` | `boolean` |
+| `name` | `string` |
 | `noAuthRequired` | `boolean` |
 | `path` | `string` |
 | `sidebar` | ``null`` |
 
 #### Defined in
 
-[lib/router.tsx:430](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L430)
-
-___
-
-### ROUTES
-
-• **ROUTES**: `Object`
-
-#### Index signature
-
-▪ [routeName: `string`]: [`Route`](../interfaces/lib_router.Route.md)
-
-#### Defined in
-
-[lib/router.tsx:76](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L76)
+[lib/router.tsx:428](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L428)
 
 ## Functions
 
@@ -62,7 +49,21 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:458](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L458)
+[lib/router.tsx:457](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L457)
+
+___
+
+### getDefaultRoutes
+
+▸ **getDefaultRoutes**(): `Object`
+
+#### Returns
+
+`Object`
+
+#### Defined in
+
+[lib/router.tsx:487](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L487)
 
 ___
 
@@ -82,7 +83,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:438](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L438)
+[lib/router.tsx:437](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L437)
 
 ___
 
@@ -102,4 +103,4 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:442](https://github.com/kinvolk/headlamp/blob/490b989/frontend/src/lib/router.tsx#L442)
+[lib/router.tsx:441](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L441)
