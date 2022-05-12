@@ -79,6 +79,7 @@ const commonRules = {
     tables: {
       headerText: '#474747',
     },
+    notificationBorderColor: 'rgba(0,0,0,0.12)',
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', '),
@@ -130,6 +131,7 @@ const darkTheme = createTheme({
     resourceToolTip: {
       color: 'rgba(255, 255, 255, 0.87)',
     },
+    notificationBorderColor: 'rgba(255,255,255,0.12)',
     type: 'dark',
   },
 });

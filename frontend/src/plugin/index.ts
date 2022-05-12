@@ -24,6 +24,7 @@ window.pluginLib = {
   Iconify: require('@iconify/react'),
   Lodash: require('lodash'),
   Notistack: require('notistack'),
+  Notification: require('../lib/notification'),
   Headlamp,
   Plugin,
 };

@@ -6,8 +6,11 @@ import { createStore } from 'redux';
 import { PureTopBar, PureTopBarProps } from './TopBar';
 
 // eslint-disable-next-line no-unused-vars
-const store = createStore((state = { config: {} }, action) => state, {
+const store = createStore((state = { config: {}, ui: { notifications: [] } }, action) => state, {
   config: {},
+  ui: {
+    notifications: [],
+  },
 });
 
 export default {

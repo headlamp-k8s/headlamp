@@ -17,6 +17,7 @@ The main ones are:
 * Registry: The plugin registry, used to register functionality
 * Headlamp: To register plugins
 * CommonComponents: React components commonly used in the Headlamp UI
+* Notification: This module contains two exported members one is Notification, a class which can be used to prepare notifications that are accepted by headlamp and the other one is setNotificationsInStore it is a dispatcher function which accepts a notification object prepared from the Notification class and when called it brings the notifications from plugin land to headlamp ecosystem so that headlamp can parse the notification and display it.
 
 ### Shared Modules
 
