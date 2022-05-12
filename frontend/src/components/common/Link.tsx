@@ -5,7 +5,7 @@ import { makeKubeObject } from '../../lib/k8s/cluster';
 import { createRouteURL, RouteURLProps } from '../../lib/router';
 
 export interface LinkProps {
-  /** A key in the router.tsx ROUTES object. */
+  /** A key in the default routes object (given by router.tsx's getDefaultRoutes). */
   routeName: string;
   /** An object with corresponding params for the pattern to use. */
   params?: RouteURLProps;

@@ -71,9 +71,7 @@ export interface Route {
   component: () => JSX.Element;
 }
 
-// Note: Please update interface in plugins-pkg/types/lib/router.d.ts if you change Route.
-
-export const ROUTES: {
+const defaultRoutes: {
   [routeName: string]: Route;
 } = {
   cluster: {
@@ -437,7 +435,7 @@ export const NotFoundRoute = {
 };
 
 export function getRoute(routeName: string) {
-  return ROUTES[routeName];
+  return defaultRoutes[routeName];
 }
 
 export function getRoutePath(route: Route) {
@@ -480,8 +478,12 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   // if fullParams is empty it means it is a request for generating choser
   // route
   if (_.isEmpty(fullParams)) {
-    return generatePath(ROUTES['chooser'].path);
+    return generatePath(defaultRoutes['chooser'].path);
   }
   const url = getRoutePath(route);
   return generatePath(url, fullParams);
+}
+
+export function getDefaultRoutes() {
+  return defaultRoutes;
 }
