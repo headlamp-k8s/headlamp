@@ -12,6 +12,7 @@ export interface KubePod extends KubeObjectInterface {
   spec: {
     containers: KubeContainer[];
     nodeName: string;
+    [other: string]: any;
   };
   status: {
     conditions: KubeCondition[];
@@ -65,8 +66,8 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
     return cancel;
   }
 
-  exec(container: string, onExec: StreamResultsCb, options: ExecOptions = {}) {
-    const { command = ['sh'], reconnectOnFailure = undefined } = options;
+  exec(container: string, shell: string, onExec: StreamResultsCb, options: ExecOptions = {}) {
+    const { command = [shell], reconnectOnFailure = undefined } = options;
     const commandStr = command.map(item => '&command=' + encodeURIComponent(item)).join('');
     const url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/exec?container=${container}${commandStr}&stdin=1&stderr=1&stdout=1&tty=1`;
     const additionalProtocols = [
