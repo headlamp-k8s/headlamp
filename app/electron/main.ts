@@ -379,7 +379,9 @@ function startElecron() {
     });
 
     mainWindow.webContents.on('dom-ready', () => {
-      mainWindow.webContents.send('appVersion', appVersion);
+      setTimeout(() => {
+        mainWindow.webContents.send('appVersion', appVersion);
+      }, 5000);
     });
 
     mainWindow.on('closed', () => {
