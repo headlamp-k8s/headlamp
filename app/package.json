@@ -25,6 +25,12 @@
     "afterSign": "mac/scripts/notarize.js",
     "asar": false,
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "protocols": {
+      "name": "headlamp-protocol",
+      "schemes": [
+        "headlamp"
+      ]
+    },
     "linux": {
       "target": [
         {
