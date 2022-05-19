@@ -1,5 +1,5 @@
 import { ChildProcessWithoutNullStreams, exec, spawn } from 'child_process';
-import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
+import { app, BrowserWindow, dialog,ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
 import fs from 'fs';
@@ -321,6 +321,8 @@ function setMenu(i18n: I18n) {
   Menu.setApplicationMenu(menu);
 }
 
+app.setAsDefaultProtocolClient('headlamp');
+
 function startElecron() {
   log.transports.file.level = 'info';
   log.info('App starting...');
@@ -384,6 +386,42 @@ function startElecron() {
 
     mainWindow.on('closed', () => {
       mainWindow = null;
+    });
+
+    // Deep linked url
+    let deeplinkingUrl;
+
+    // Force Single Instance Application
+    const gotTheLock = app.requestSingleInstanceLock();
+    if (gotTheLock) {
+      app.on('second-instance', (e, argv) => {
+        // Someone tried to run a second instance, we should focus our window.
+
+        // Protocol handler for win32
+        // argv: An array of the second instance’s (command line / deep linked) arguments
+        if (process.platform == 'win32') {
+          // Keep only command line / deep linked arguments
+          deeplinkingUrl = argv.slice(1);
+        }
+        console.log('app.makeSingleInstance# ' + deeplinkingUrl);
+
+        if (mainWindow) {
+          if (mainWindow.isMinimized()) mainWindow.restore();
+          mainWindow.focus();
+        }
+      });
+    } else {
+      app.quit();
+      return;
+    }
+
+    mainWindow.webContents.on('will-navigate', (event, url) => {
+      shell.openExternal(url);
+    });
+
+    app.on('open-url', (event, url) => {
+      mainWindow.focus();
+      dialog.showErrorBox('Welcome Back', `You arrived from: ${url}`);
     });
 
     i18n.on('languageChanged', () => {
