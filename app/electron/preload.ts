@@ -4,13 +4,13 @@ import { contextBridge, ipcRenderer } from 'electron';
 contextBridge.exposeInMainWorld('desktopApi', {
   send: (channel, data) => {
     // allowed channels
-    const validChannels = ['locale', 'appVersion'];
+    const validChannels = ['locale', 'appVersion', 'auth_code', 'auth_token'];
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
     }
   },
   receive: (channel, func) => {
-    const validChannels = ['locale', 'appVersion'];
+    const validChannels = ['locale', 'appVersion', 'auth_code', 'auth_token'];
     if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`
       ipcRenderer.on(channel, ({}, ...args) => func(...args));

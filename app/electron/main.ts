@@ -1,5 +1,5 @@
 import { ChildProcessWithoutNullStreams, exec, spawn } from 'child_process';
-import { app, BrowserWindow, dialog,ipcMain, Menu, MenuItem, screen, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
 import fs from 'fs';
@@ -369,6 +369,7 @@ function startElecron() {
       },
     });
     mainWindow.loadURL(startUrl);
+    app.commandLine.appendSwitch('disable-http-cache');
 
     mainWindow.webContents.setWindowOpenHandler(({ url }) => {
       // allow all urls starting with app startUrl to open in electron
@@ -382,6 +383,12 @@ function startElecron() {
 
     mainWindow.webContents.on('dom-ready', () => {
       mainWindow.webContents.send('appVersion', appVersion);
+    });
+
+    mainWindow.webContents.once('will-navigate', (e, url) => {
+      if (url.startsWith('https://login.microsoftonline.com')) {
+        shell.openExternal(url);
+      }
     });
 
     mainWindow.on('closed', () => {
@@ -421,7 +428,22 @@ function startElecron() {
 
     app.on('open-url', (event, url) => {
       mainWindow.focus();
-      dialog.showErrorBox('Welcome Back', `You arrived from: ${url}`);
+      const urlObj = new URL(url);
+      const token = urlObj.searchParams.get('token');
+      if (token) {
+        mainWindow.webContents.send('auth_token', { token });
+      }
+      // for pkce oauth 2.0 we get the auth code
+      const authCode = urlObj.hash.split('&')[0];
+      if (authCode !== '') {
+        const code = authCode.split('#code=')[1];
+        if (code) {
+          mainWindow.webContents.send('auth_code', {
+            authCode: code,
+            clientInfo: urlObj.searchParams.get('client_info'),
+          });
+        }
+      }
     });
 
     i18n.on('languageChanged', () => {
