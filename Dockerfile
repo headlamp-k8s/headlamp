@@ -19,6 +19,7 @@ RUN cd ./backend && go build -o ./headlamp-server ./cmd/
 # Keep npm install separated so source changes don't trigger install
 FROM base-build AS frontendinstall
 COPY frontend/package*.json /headlamp/frontend/
+COPY frontend/patches/* /headlamp/frontend/patches/
 WORKDIR /headlamp
 RUN cd ./frontend && npm install --only=prod
 
