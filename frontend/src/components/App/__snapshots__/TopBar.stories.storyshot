@@ -15,6 +15,9 @@ exports[`Storyshots TopBar No Token 1`] = `
         class="makeStyles-grow makeStyles-clusterTitle"
       />
       <button
+        aria-controls="notification-menu"
+        aria-haspopup="true"
+        aria-label="Show notifications"
         class="MuiButtonBase-root MuiIconButton-root"
         tabindex="0"
         type="button"
@@ -127,6 +130,9 @@ exports[`Storyshots TopBar One Cluster 1`] = `
         class="makeStyles-grow makeStyles-clusterTitle"
       />
       <button
+        aria-controls="notification-menu"
+        aria-haspopup="true"
+        aria-label="Show notifications"
         class="MuiButtonBase-root MuiIconButton-root"
         tabindex="0"
         type="button"
@@ -239,6 +245,9 @@ exports[`Storyshots TopBar Token 1`] = `
         class="makeStyles-grow makeStyles-clusterTitle"
       />
       <button
+        aria-controls="notification-menu"
+        aria-haspopup="true"
+        aria-label="Show notifications"
         class="MuiButtonBase-root MuiIconButton-root"
         tabindex="0"
         type="button"
@@ -351,6 +360,9 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
         class="makeStyles-grow makeStyles-clusterTitle"
       />
       <button
+        aria-controls="notification-menu"
+        aria-haspopup="true"
+        aria-label="Show notifications"
         class="MuiButtonBase-root MuiIconButton-root"
         tabindex="0"
         type="button"

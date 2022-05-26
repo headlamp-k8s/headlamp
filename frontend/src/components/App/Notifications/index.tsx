@@ -52,7 +52,7 @@ function NotificationsList(props: {
   if (!notifications || notifications.length === 0) {
     return (
       <MenuItem onClick={() => clickEventHandler()} className={classes.notificationItem} disabled>
-        {t(`frequent|You don't have any notifications right now`)}
+        {t(`notifications|You don't have any notifications right now`)}
       </MenuItem>
     );
   }
@@ -190,9 +190,16 @@ export default function Notifications() {
   const areThereUnseenNotifications =
     notifications.filter(notification => notification.seen !== true).length > 0;
 
+  const notificationMenuId = 'notification-menu';
+
   return (
     <>
-      <IconButton onClick={handleClick}>
+      <IconButton
+        aria-label={t('notifications|Show notifications')}
+        aria-controls={notificationMenuId}
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
         {areThereUnseenNotifications ? (
           <Badge variant="dot" color="error">
             <Tooltip title={`${t('notifications|You have unread notifications')}`}>
@@ -219,6 +226,7 @@ export default function Notifications() {
           vertical: 'top',
           horizontal: 'left',
         }}
+        id={notificationMenuId}
       >
         <NotificationsList notifications={notifications} clickEventHandler={menuItemClickHandler} />
       </Menu>
