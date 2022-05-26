@@ -25,7 +25,7 @@ const useStyle = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     '& .xterm ': {
-      height: '500px', // So the terminal doesn't stay shrunk when shrinking vertically and maximizing again.
+      height: '100vh', // So the terminal doesn't stay shrunk when shrinking vertically and maximizing again.
       '& .xterm-viewport': {
         width: 'initial !important', // BugFix: https://github.com/xtermjs/xterm.js/issues/3564#issuecomment-1004417440
       },
