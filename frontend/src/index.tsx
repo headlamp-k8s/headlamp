@@ -6,7 +6,10 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(<App />, document.getElementById('root'));
 
 if (process.env.NODE_ENV !== 'production') {
-  const axe = require('@axe-core/react');
+  let axe = require('@axe-core/react');
+  if (axe.default) {
+    axe = axe.default; //changed to esm module sometimes?
+  }
   const axeCore = require('axe-core');
 
   if (process.env.REACT_APP_SKIP_A11Y !== 'true') {
