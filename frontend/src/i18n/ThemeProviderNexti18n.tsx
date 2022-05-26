@@ -22,7 +22,7 @@ function getLocale(locale: string): typeof enUS {
  */
 const ThemeProviderNexti18n: React.FunctionComponent<{ theme: Theme }> = props => {
   const { i18n, ready: isI18nReady } = useTranslation(
-    ['sidebar', 'frequent', 'glossary', 'auth', 'resource'],
+    ['sidebar', 'frequent', 'glossary', 'auth', 'resource', 'notifications'],
     {
       useSuspense: false,
     }
