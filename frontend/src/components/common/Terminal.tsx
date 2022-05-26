@@ -39,6 +39,9 @@ export default function Terminal(props: TerminalProps) {
   const classes = useStyle();
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
   const [container, setContainer] = React.useState<string | null>(null);
+  const execRef = React.useRef<any>(null);
+  const fitAddonRef = React.useRef<any>(null);
+  const xtermRef = React.useRef<any>(null);
   const { t } = useTranslation('resource');
 
   function getDefaultContainer() {
@@ -46,37 +49,38 @@ export default function Terminal(props: TerminalProps) {
   }
 
   // @todo: Give the real exec type when we have it.
-  function setupTerminal(
-    containerRef: HTMLElement,
-    xterm: XTerminal,
-    fitAddon: FitAddon,
-    exec: any
-  ) {
+  function setupTerminal(containerRef: HTMLElement, xterm: XTerminal, fitAddon: FitAddon) {
     if (!containerRef) {
       return;
     }
 
     xterm.open(containerRef);
-    fitAddon.fit();
 
-    xterm.onKey(event => {
-      // For some reason, pressing a key can give us a "keydown" or "keypress" event...
-      if (!['keydown', 'keypress'].includes(event.domEvent.type)) {
-        return;
-      }
-
-      // Send a newline when pressing enter
-      const code = event.domEvent.key === 'Enter' ? '\n' : event.key;
-
-      // We just send the key strokes to the socket; the actual writing into the
-      // terminal will be done when the data arrives.
-      send(code, exec);
+    xterm.onData(data => {
+      send(data);
     });
+
+    // Allow copy/paste in terminal
+    xterm.attachCustomKeyEventHandler(arg => {
+      if (arg.ctrlKey && arg.type === 'keydown') {
+        if (arg.code === 'KeyC') {
+          const selection = xterm.getSelection();
+          if (selection) {
+            return false;
+          }
+        }
+        if (arg.code === 'KeyV') {
+          return false;
+        }
+      }
+      return true;
+    });
+
+    fitAddon.fit();
   }
 
-  // @todo: Give the real exec type when we have it.
-  function send(data: string, exec: any) {
-    const socket = exec.getSocket();
+  function send(data: string) {
+    const socket = execRef.current.getSocket();
 
     // We should only send data if the socket is ready.
     if (!socket || socket.readyState !== 1) {
@@ -116,20 +120,36 @@ export default function Terminal(props: TerminalProps) {
         return;
       }
 
-      const xterm = new XTerminal();
+      if (xtermRef.current) {
+        xtermRef.current.dispose();
+        execRef.current?.cancel();
+      }
+      xtermRef.current = new XTerminal({
+        cursorBlink: true,
+        cursorStyle: 'underline',
+        scrollback: 10000,
+        rows: 30, // initial rows before fit
+      });
 
-      const fitAddon = new FitAddon();
-      xterm.loadAddon(fitAddon);
+      fitAddonRef.current = new FitAddon();
+      xtermRef.current.loadAddon(fitAddonRef.current);
+      (xtermRef.current as any).connected = false;
 
-      xterm.writeln(t('Connecting…') + '\n');
+      xtermRef.current.writeln(t('Connecting…') + '\n');
 
-      const exec = item.exec(container, (items: ArrayBuffer) => onData(xterm, items));
+      (async function () {
+        execRef.current = await item.exec(container, (items: ArrayBuffer) =>
+          onData(xtermRef.current, items)
+        );
 
-      setupTerminal(terminalContainerRef, xterm, fitAddon, exec);
+        setupTerminal(terminalContainerRef, xtermRef.current, fitAddonRef.current);
+      })();
 
       return function cleanup() {
-        xterm.dispose();
-        exec.cancel();
+        xtermRef.current.dispose();
+        if (execRef.current) {
+          execRef.current.cancel();
+        }
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
