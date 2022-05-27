@@ -12,6 +12,9 @@ export interface KubePod extends KubeObjectInterface {
   spec: {
     containers: KubeContainer[];
     nodeName: string;
+    nodeSelector?: {
+      [key: string]: string;
+    };
   };
   status: {
     conditions: KubeCondition[];
