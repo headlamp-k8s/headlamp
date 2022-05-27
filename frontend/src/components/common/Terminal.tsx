@@ -182,11 +182,15 @@ export default function Terminal(props: TerminalProps) {
   }
 
   function shellConnectFailed(xterm: XTerminal) {
+    const command = getCurrentShellCommand();
     if (isLastShell()) {
       xterm.clear();
-      xterm.write(t('Failed to connect…') + '\r\n');
+      if ((xterm as any).connected) {
+        xterm.write(t('Failed to run command "{{command}}"…', { command }) + '\r\n');
+      } else {
+        xterm.write(t('Failed to connect…') + '\r\n');
+      }
     } else {
-      const command = getCurrentShellCommand();
       xterm.write(t('Failed to run "{{ command }}"', { command }) + '\r\n');
       tryNextShell();
     }
