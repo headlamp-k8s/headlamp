@@ -157,15 +157,7 @@ export default function Terminal(props: TerminalProps) {
     }
 
     if (isShellNotFoundError(channel, text)) {
-      if (isLastShell()) {
-        xterm.clear();
-        xterm.write(t('Failed to connect…') + '\r\n');
-        return;
-      }
-
-      const command = getCurrentShellCommand();
-      xterm.write(t('Failed to run "{{ command }}"', { command }) + '\r\n');
-      tryNextShell();
+      shellConnectFailed(xterm);
       return;
     }
 
@@ -187,6 +179,17 @@ export default function Terminal(props: TerminalProps) {
 
   function getCurrentShellCommand() {
     return shells.available[shells.currentIdx];
+  }
+
+  function shellConnectFailed(xterm: XTerminal) {
+    if (isLastShell()) {
+      xterm.clear();
+      xterm.write(t('Failed to connect…') + '\r\n');
+    } else {
+      const command = getCurrentShellCommand();
+      xterm.write(t('Failed to run "{{ command }}"', { command }) + '\r\n');
+      tryNextShell();
+    }
   }
 
   React.useEffect(
@@ -225,7 +228,7 @@ export default function Terminal(props: TerminalProps) {
         execRef.current = await item.exec(
           container,
           (items: ArrayBuffer) => onData(xtermRef.current, items),
-          { command: [command] }
+          { command: [command], failCb: () => shellConnectFailed(xtermRef.current) }
         );
 
         setupTerminal(terminalContainerRef, xtermRef.current, fitAddonRef.current);
