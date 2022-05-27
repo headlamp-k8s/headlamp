@@ -64,6 +64,10 @@ export default function Terminal(props: TerminalProps) {
   const execRef = React.useRef<any>(null);
   const fitAddonRef = React.useRef<any>(null);
   const xtermRef = React.useRef<any>(null);
+  const [shells, setShells] = React.useState({
+    available: getAvailableShells(),
+    currentIdx: 0,
+  });
   const { t } = useTranslation('resource');
 
   function getDefaultContainer() {
@@ -152,7 +156,37 @@ export default function Terminal(props: TerminalProps) {
       console.debug('Terminal is now connected');
     }
 
+    if (isShellNotFoundError(channel, text)) {
+      if (isLastShell()) {
+        xterm.clear();
+        xterm.write(t('Failed to connect…') + '\r\n');
+        return;
+      }
+
+      const command = getCurrentShellCommand();
+      xterm.write(t('Failed to run "{{ command }}"', { command }) + '\r\n');
+      tryNextShell();
+      return;
+    }
+
     xterm.write(text);
+  }
+
+  function tryNextShell() {
+    if (shells.available.length > 0) {
+      setShells(currentShell => ({
+        ...currentShell,
+        currentIdx: (currentShell.currentIdx + 1) % currentShell.available.length,
+      }));
+    }
+  }
+
+  function isLastShell() {
+    return shells.currentIdx === shells.available.length - 1;
+  }
+
+  function getCurrentShellCommand() {
+    return shells.available[shells.currentIdx];
   }
 
   React.useEffect(
@@ -183,11 +217,15 @@ export default function Terminal(props: TerminalProps) {
       xtermRef.current.loadAddon(fitAddonRef.current);
       (xtermRef.current as any).connected = false;
 
-      xtermRef.current.writeln(t('Connecting…') + '\n');
+      const command = getCurrentShellCommand();
+
+      xtermRef.current.writeln(t('Trying to run "{{command}}"…', { command }) + '\n');
 
       (async function () {
-        execRef.current = await item.exec(container, (items: ArrayBuffer) =>
-          onData(xtermRef.current, items)
+        execRef.current = await item.exec(
+          container,
+          (items: ArrayBuffer) => onData(xtermRef.current, items),
+          { command: [command] }
         );
 
         setupTerminal(terminalContainerRef, xtermRef.current, fitAddonRef.current);
@@ -208,7 +246,7 @@ export default function Terminal(props: TerminalProps) {
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [container, terminalContainerRef]
+    [container, terminalContainerRef, shells]
   );
 
   React.useEffect(
@@ -221,8 +259,47 @@ export default function Terminal(props: TerminalProps) {
     [props.open]
   );
 
+  React.useEffect(() => {
+    if (shells.available.length === 0) {
+      setShells({
+        available: getAvailableShells(),
+        currentIdx: 0,
+      });
+    }
+  }, [item]);
+
+  function getAvailableShells() {
+    const selector = item.spec?.nodeSelector || {};
+    const os = selector['kubernetes.io/os'] || selector['beta.kubernetes.io/os'];
+    if (os === 'linux') {
+      return ['bash', '/bin/bash', 'sh', '/bin/sh'];
+    } else if (os === 'windows') {
+      return ['powershell.exe', 'cmd.exe'];
+    }
+    return ['bash', 'sh', 'powershell.exe', 'cmd.exe'];
+  }
+
   function handleContainerChange(event: any) {
     setContainer(event.target.value);
+  }
+
+  function isShellNotFoundError(channel: number, text: string): boolean {
+    // Linux container Error
+    if (channel === 3) {
+      try {
+        const error = JSON.parse(text);
+        if (error.code === 500 && error.status === 'Failure' && error.reason === 'InternalError') {
+          return true;
+        }
+      } catch {}
+    }
+    // Windows container Error
+    if (channel === 1) {
+      if (text.includes('The system cannot find the file specified')) {
+        return true;
+      }
+    }
+    return false;
   }
 
   return (
