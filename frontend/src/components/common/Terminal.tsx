@@ -56,14 +56,21 @@ interface TerminalProps extends DialogProps {
   onClose?: () => void;
 }
 
+interface XTerminalConnected {
+  xterm: XTerminal;
+  connected: boolean;
+}
+
+type execReturn = ReturnType<Pod['exec']>;
+
 export default function Terminal(props: TerminalProps) {
   const { item, onClose, ...other } = props;
   const classes = useStyle();
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
   const [container, setContainer] = React.useState<string | null>(null);
-  const execRef = React.useRef<any>(null);
-  const fitAddonRef = React.useRef<any>(null);
-  const xtermRef = React.useRef<any>(null);
+  const execRef = React.useRef<execReturn | null>(null);
+  const fitAddonRef = React.useRef<FitAddon | null>(null);
+  const xtermRef = React.useRef<XTerminalConnected | null>(null);
   const [shells, setShells] = React.useState({
     available: getAvailableShells(),
     currentIdx: 0,
@@ -110,7 +117,7 @@ export default function Terminal(props: TerminalProps) {
   }
 
   function send(channel: number, data: string) {
-    const socket = execRef.current.getSocket();
+    const socket = execRef.current!.getSocket();
 
     // We should only send data if the socket is ready.
     if (!socket || socket.readyState !== 1) {
@@ -130,7 +137,8 @@ export default function Terminal(props: TerminalProps) {
   // 2: stderr
   // 3: server error
   // 4: resize channel
-  function onData(xterm: XTerminal, bytes: ArrayBuffer) {
+  function onData(xtermc: XTerminalConnected, bytes: ArrayBuffer) {
+    const xterm = xtermc.xterm;
     // Only show data from stdout, stderr and server error channel.
     const channel = new Int8Array(bytes.slice(0, 1))[0];
     if (channel < 1 || channel > 3) {
@@ -147,17 +155,17 @@ export default function Terminal(props: TerminalProps) {
     }
 
     // Send resize command to server once connection is establised.
-    if (!(xterm as any).connected && !!text) {
+    if (!xtermc.connected && !!text) {
       xterm.clear();
       (async function () {
         send(4, `{"Width":${xterm.cols},"Height":${xterm.rows}}`);
       })();
-      (xterm as any).connected = true;
+      xtermc.connected = true;
       console.debug('Terminal is now connected');
     }
 
     if (isShellNotFoundError(channel, text)) {
-      shellConnectFailed(xterm);
+      shellConnectFailed(xtermc);
       return;
     }
 
@@ -181,11 +189,12 @@ export default function Terminal(props: TerminalProps) {
     return shells.available[shells.currentIdx];
   }
 
-  function shellConnectFailed(xterm: XTerminal) {
+  function shellConnectFailed(xtermc: XTerminalConnected) {
+    const xterm = xtermc.xterm;
     const command = getCurrentShellCommand();
     if (isLastShell()) {
       xterm.clear();
-      if ((xterm as any).connected) {
+      if (xtermc.connected) {
         xterm.write(t('Failed to run command "{{command}}"…', { command }) + '\r\n');
       } else {
         xterm.write(t('Failed to connect…') + '\r\n');
@@ -210,45 +219,45 @@ export default function Terminal(props: TerminalProps) {
       }
 
       if (xtermRef.current) {
-        xtermRef.current.dispose();
+        xtermRef.current.xterm.dispose();
         execRef.current?.cancel();
       }
-      xtermRef.current = new XTerminal({
-        cursorBlink: true,
-        cursorStyle: 'underline',
-        scrollback: 10000,
-        rows: 30, // initial rows before fit
-      });
+      xtermRef.current = {
+        xterm: new XTerminal({
+          cursorBlink: true,
+          cursorStyle: 'underline',
+          scrollback: 10000,
+          rows: 30, // initial rows before fit
+        }),
+        connected: false,
+      };
 
       fitAddonRef.current = new FitAddon();
-      xtermRef.current.loadAddon(fitAddonRef.current);
-      (xtermRef.current as any).connected = false;
+      xtermRef.current.xterm.loadAddon(fitAddonRef.current);
 
       const command = getCurrentShellCommand();
 
-      xtermRef.current.writeln(t('Trying to run "{{command}}"…', { command }) + '\n');
+      xtermRef.current.xterm.writeln(t('Trying to run "{{command}}"…', { command }) + '\n');
 
       (async function () {
         execRef.current = await item.exec(
           container,
-          (items: ArrayBuffer) => onData(xtermRef.current, items),
-          { command: [command], failCb: () => shellConnectFailed(xtermRef.current) }
+          (items: ArrayBuffer) => onData(xtermRef.current!, items),
+          { command: [command], failCb: () => shellConnectFailed(xtermRef.current!) }
         );
 
-        setupTerminal(terminalContainerRef, xtermRef.current, fitAddonRef.current);
+        setupTerminal(terminalContainerRef, xtermRef.current!.xterm, fitAddonRef.current!);
       })();
 
       const handler = () => {
-        fitAddonRef.current.fit();
+        fitAddonRef.current!.fit();
       };
 
       window.addEventListener('resize', handler);
 
       return function cleanup() {
-        xtermRef.current.dispose();
-        if (execRef.current) {
-          execRef.current.cancel();
-        }
+        xtermRef.current?.xterm.dispose();
+        execRef.current?.cancel();
         window.removeEventListener('resize', handler);
       };
     },
