@@ -1,5 +1,5 @@
 import { Base64 } from 'js-base64';
-import { apiFactoryWithNamespace, stream, StreamResultsCb } from './apiProxy';
+import { apiFactoryWithNamespace, stream, StreamArgs, StreamResultsCb } from './apiProxy';
 import {
   KubeCondition,
   KubeContainer,
@@ -29,9 +29,8 @@ export interface KubePod extends KubeObjectInterface {
   };
 }
 
-export interface ExecOptions {
+export interface ExecOptions extends StreamArgs {
   command?: string[];
-  reconnectOnFailure?: boolean;
 }
 
 class Pod extends makeKubeObject<KubePod>('Pod') {
@@ -69,7 +68,7 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
   }
 
   exec(container: string, onExec: StreamResultsCb, options: ExecOptions = {}) {
-    const { command = ['sh'], reconnectOnFailure = undefined } = options;
+    const { command = ['sh'], ...streamOpts } = options;
     const commandStr = command.map(item => '&command=' + encodeURIComponent(item)).join('');
     const url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/exec?container=${container}${commandStr}&stdin=1&stderr=1&stdout=1&tty=1`;
     const additionalProtocols = [
@@ -79,7 +78,7 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
       'channel.k8s.io',
     ];
 
-    return stream(url, onExec, { additionalProtocols, isJson: false, reconnectOnFailure });
+    return stream(url, onExec, { additionalProtocols, isJson: false, ...streamOpts });
   }
 }
 

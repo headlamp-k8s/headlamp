@@ -518,12 +518,15 @@ export interface StreamArgs {
   additionalProtocols?: string[];
   connectCb?: () => void;
   reconnectOnFailure?: boolean;
+  failCb?: () => void;
 }
 
 export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   let connection: ReturnType<typeof connectStream>;
   let isCancelled = false;
-  const { isJson = false, additionalProtocols, connectCb, reconnectOnFailure = true } = args;
+  const { failCb } = args;
+  // We only set reconnectOnFailure as true by default if the failCb has not been provided.
+  const { isJson = false, additionalProtocols, connectCb, reconnectOnFailure = !!failCb } = args;
 
   connect();
 
@@ -543,12 +546,22 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
     connection = connectStream(url, cb, onFail, isJson, additionalProtocols);
   }
 
-  function onFail() {
+  function retryOnFail() {
     if (isCancelled) return;
 
     if (reconnectOnFailure) {
       console.log('Reconnecting in 3 seconds', { url });
       setTimeout(connect, 3000);
+    }
+  }
+
+  function onFail() {
+    if (!!failCb) {
+      failCb();
+    }
+
+    if (reconnectOnFailure) {
+      retryOnFail();
     }
   }
 }
