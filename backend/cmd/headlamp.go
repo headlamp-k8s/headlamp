@@ -17,6 +17,7 @@ import (
 	"os/user"
 	"path"
 	"path/filepath"
+	"runtime"
 	"strings"
 
 	oidc "github.com/coreos/go-oidc"
@@ -209,14 +210,27 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 
 	// KubeConfig clusters
 	if kubeConfigPath != "" {
-		var err error
-
-		contextsFound, err := GetContextsFromKubeConfigFile(kubeConfigPath)
-		if err != nil {
-			log.Println("Failed to get contexts from", kubeConfigPath, err)
+		delimiter := ":"
+		if runtime.GOOS == "windows" {
+			delimiter = ";"
 		}
 
-		contexts = append(contexts, contextsFound...)
+		kubeConfigs := strings.Split(kubeConfigPath, delimiter)
+
+		for _, kubeConfig := range kubeConfigs {
+			kubeConfig, err := absPath(kubeConfig)
+			if err != nil {
+				log.Printf("Failed to resolve absolute path of :%s, error: %v\n", kubeConfig, err)
+				continue
+			}
+
+			contextsFound, err := GetContextsFromKubeConfigFile(kubeConfig)
+			if err != nil {
+				log.Println("Failed to get contexts from", kubeConfig, err)
+			}
+
+			contexts = append(contexts, contextsFound...)
+		}
 	}
 
 	if config.staticDir != "" {
@@ -589,4 +603,17 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 		w.WriteHeader(http.StatusCreated)
 		c.getConfig(w, r)
 	}).Methods("POST")
+}
+
+func absPath(path string) (string, error) {
+	if !strings.HasPrefix(path, "~/") {
+		return path, nil
+	}
+
+	currentUser, err := user.Current()
+	if err != nil {
+		return "", err
+	}
+
+	return filepath.Join(currentUser.HomeDir, path[2:]), nil
 }
