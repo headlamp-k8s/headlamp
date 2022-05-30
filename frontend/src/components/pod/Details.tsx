@@ -1,28 +1,35 @@
 import { Icon } from '@iconify/react';
 import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
+import Switch from '@material-ui/core/Switch';
 import Tooltip from '@material-ui/core/Tooltip';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
-import { SectionBox, SimpleTable } from '../common';
+import { LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import { ConditionsSection, ContainersSection, DetailsGrid } from '../common/Resource';
 import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
 
-const useStyle = makeStyles({
+const useStyle = makeStyles(theme => ({
   containerFormControl: {
     minWidth: '11rem',
   },
-});
+  switchControl: {
+    minWidth: '11rem',
+    paddingTop: theme.spacing(1),
+  },
+}));
 
 interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
   item: Pod;
@@ -32,6 +39,7 @@ function PodLogViewer(props: PodLogViewerProps) {
   const classes = useStyle();
   const { item, onClose, open, ...other } = props;
   const [container, setContainer] = React.useState(getDefaultContainer());
+  const [showPrevious, setShowPrevious] = React.useState<boolean>(false);
   const [lines, setLines] = React.useState<number>(100);
   const [logs, setLogs] = React.useState<string[]>([]);
   const { t } = useTranslation('frequent');
@@ -52,7 +60,7 @@ function PodLogViewer(props: PodLogViewerProps) {
       let callback: any = null;
 
       if (props.open) {
-        callback = item.getLogs(container, lines, false, debouncedSetState);
+        callback = item.getLogs(container, lines, showPrevious, debouncedSetState);
       }
 
       return function cleanup() {
@@ -62,7 +70,7 @@ function PodLogViewer(props: PodLogViewerProps) {
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [container, lines, open]
+    [container, lines, open, showPrevious]
   );
 
   function handleContainerChange(event: any) {
@@ -71,6 +79,21 @@ function PodLogViewer(props: PodLogViewerProps) {
 
   function handleLinesChange(event: any) {
     setLines(event.target.value);
+  }
+
+  function handlePreviousChange() {
+    setShowPrevious(previous => !previous);
+  }
+
+  function hasContainerRestarted() {
+    const cont = item.status.containerStatuses.find(
+      (c: KubeContainerStatus) => c.name === container
+    );
+    if (!cont) {
+      return false;
+    }
+
+    return cont.restartCount > 0;
   }
 
   return (
@@ -116,6 +139,27 @@ function PodLogViewer(props: PodLogViewerProps) {
             ))}
           </Select>
         </FormControl>,
+        <LightTooltip
+          title={
+            hasContainerRestarted()
+              ? t('logs|Show logs for previous instances of this container.')
+              : t('logs|You can only select this option for containers that have been restarted.')
+          }
+        >
+          <FormControlLabel
+            className={classes.switchControl}
+            label={t('logs|Show previous')}
+            disabled={!hasContainerRestarted()}
+            control={
+              <Switch
+                checked={showPrevious}
+                onChange={handlePreviousChange}
+                name="checkPrevious"
+                color="primary"
+              />
+            }
+          />
+        </LightTooltip>,
       ]}
       {...other}
     />
