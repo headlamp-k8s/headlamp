@@ -1,5 +1,17 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeCondition, KubeObjectInterface, makeKubeObject } from './cluster';
+
+export interface KubePortStatus {
+  error?: string;
+  port: number;
+  protocol: string;
+}
+
+export interface KubeLoadBalancerIngress {
+  hostname?: string;
+  ip?: string;
+  ports?: KubePortStatus[];
+}
 
 export interface KubeService extends KubeObjectInterface {
   spec: {
@@ -12,7 +24,14 @@ export interface KubeService extends KubeObjectInterface {
       targetPort: number | string;
     }[];
     type: string;
+    externalIPs: string[];
     [otherProps: string]: any;
+  };
+  status: {
+    conditions?: KubeCondition[];
+    loadBalancer?: {
+      ingress: KubeLoadBalancerIngress[];
+    };
   };
 }
 
@@ -21,6 +40,10 @@ class Service extends makeKubeObject<KubeService>('service') {
 
   get spec() {
     return this.jsonData!.spec;
+  }
+
+  get status() {
+    return this.jsonData!.status;
   }
 }
 
