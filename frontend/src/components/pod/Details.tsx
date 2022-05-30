@@ -60,7 +60,10 @@ function PodLogViewer(props: PodLogViewerProps) {
       let callback: any = null;
 
       if (props.open) {
-        callback = item.getLogs(container, lines, showPrevious, debouncedSetState);
+        callback = item.getLogs(container, debouncedSetState, {
+          tailLines: lines,
+          showPrevious: showPrevious,
+        });
       }
 
       return function cleanup() {
