@@ -5,7 +5,6 @@ import log from 'electron-log';
 import fs from 'fs';
 import { i18n as I18n } from 'i18next';
 import open from 'open';
-import os from 'os';
 import path from 'path';
 import url from 'url';
 import yargs from 'yargs';
@@ -47,21 +46,8 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   }
 
   let serverArgs = [];
-  if (!!args.kubeconfig || !!process.env.KUBECONFIG) {
-    let fullPath = args.kubeconfig || process.env.KUBECONFIG;
-
-    // Resolve home dir if needed.
-    if (process.platform !== 'win32' && fullPath[0] === '~') {
-      fullPath = path.join(os.homedir(), fullPath.slice(1));
-    }
-
-    fullPath = path.resolve(fullPath);
-
-    if (!fs.existsSync(fullPath)) {
-      log.error(`Error reading kube config ${fullPath}: does not exist`);
-      process.exit(1);
-    }
-    serverArgs = serverArgs.concat(['--kubeconfig', fullPath]);
+  if (!!args.kubeconfig) {
+    serverArgs = serverArgs.concat(['--kubeconfig', args.kubeconfig]);
   }
 
   const bundledPlugins = path.join(process.resourcesPath, '.plugins');

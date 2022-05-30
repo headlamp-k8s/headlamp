@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -37,12 +38,18 @@ func main() {
 	}
 
 	kubeConfigPath := ""
+
 	// If we don't have a specified kubeConfig path, and we are not running
 	// in-cluster, then use the default path.
 	if *kubeconfig != "" {
 		kubeConfigPath = *kubeconfig
 	} else if !*inCluster {
-		kubeConfigPath = GetDefaultKubeConfigPath()
+		kubeConfigEnv := os.Getenv("KUBECONFIG")
+		if kubeConfigEnv != "" {
+			kubeConfigPath = kubeConfigEnv
+		} else {
+			kubeConfigPath = GetDefaultKubeConfigPath()
+		}
 	}
 
 	StartHeadlampServer(&HeadlampConfig{
