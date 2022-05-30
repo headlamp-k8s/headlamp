@@ -40,6 +40,7 @@ function PodLogViewer(props: PodLogViewerProps) {
   const { item, onClose, open, ...other } = props;
   const [container, setContainer] = React.useState(getDefaultContainer());
   const [showPrevious, setShowPrevious] = React.useState<boolean>(false);
+  const [showTimestamps, setShowTimestamps] = React.useState<boolean>(true);
   const [lines, setLines] = React.useState<number>(100);
   const [logs, setLogs] = React.useState<string[]>([]);
   const { t } = useTranslation('frequent');
@@ -62,7 +63,8 @@ function PodLogViewer(props: PodLogViewerProps) {
       if (props.open) {
         callback = item.getLogs(container, debouncedSetState, {
           tailLines: lines,
-          showPrevious: showPrevious,
+          showPrevious,
+          showTimestamps,
         });
       }
 
@@ -73,7 +75,7 @@ function PodLogViewer(props: PodLogViewerProps) {
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [container, lines, open, showPrevious]
+    [container, lines, open, showPrevious, showTimestamps]
   );
 
   function handleContainerChange(event: any) {
@@ -97,6 +99,10 @@ function PodLogViewer(props: PodLogViewerProps) {
     }
 
     return cont.restartCount > 0;
+  }
+
+  function handleTimestampsChange() {
+    setShowTimestamps(timestamps => !timestamps);
   }
 
   return (
@@ -163,6 +169,18 @@ function PodLogViewer(props: PodLogViewerProps) {
             }
           />
         </LightTooltip>,
+        <FormControlLabel
+          className={classes.switchControl}
+          label={t('logs|Show Timestamps')}
+          control={
+            <Switch
+              checked={showTimestamps}
+              onChange={handleTimestampsChange}
+              name="checkTimestamps"
+              color="primary"
+            />
+          }
+        />,
       ]}
       {...other}
     />
