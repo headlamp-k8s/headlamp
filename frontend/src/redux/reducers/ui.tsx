@@ -218,6 +218,12 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       /* There are two ways user can send notifications either a complete set of array or a single notification
          when handling the array notifications we want to only have unique set of notifications pushed into the UI notifications config
       */
+      //if it's an empty array that means this is a request to clear notifications
+      if (notifications.length === 0) {
+        newFilters.notifications = [];
+        localStorage.setItem('notifications', JSON.stringify(newFilters.notifications));
+        break;
+      }
       if (Array.isArray(notifications)) {
         const uniqueNotifications = _.uniqBy(
           [...notifications].concat(newFilters.notifications),

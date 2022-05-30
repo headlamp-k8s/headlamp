@@ -1,7 +1,19 @@
 import bellIcon from '@iconify/icons-mdi/bell';
 import { Icon } from '@iconify/react';
-import { Badge, Grid, IconButton, makeStyles, Theme, Tooltip, Typography } from '@material-ui/core';
-import { Menu, MenuItem } from '@material-ui/core';
+import {
+  Badge,
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  makeStyles,
+  Menu,
+  MenuItem,
+  Theme,
+  Tooltip,
+  Typography,
+  useTheme,
+} from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -75,6 +87,11 @@ function NotificationsList(props: {
   function Row(props: ListChildComponentProps) {
     const { index, style } = props;
     const notification = notifications[index];
+
+    if (notification.deleted) {
+      return null;
+    }
+
     return (
       <MenuItem
         key={`${notification}__${index}`}
@@ -131,45 +148,59 @@ export default function Notifications() {
   const dispatch = useDispatch();
   const [events] = Event.useList();
   const { t } = useTranslation();
+  const theme = useTheme();
 
   useEffect(() => {
+    let notificationsToShow: Notification[] = [];
+    let currentNotifications = notifications;
+    let changed = false;
+
+    if (currentNotifications.length === 0) {
+      currentNotifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+      changed = currentNotifications.length > 0;
+    }
+
     if (events && events.length !== 0) {
-      const importantEvents: Notification[] = events
+      const eventIds = new Set<string>();
+      notificationsToShow = events
         .filter((event: KubeEvent) => event.type !== 'Normal')
         .map((event: KubeEvent) => {
-          const notificationIndexFromStore = notifications.findIndex(
+          const notificationIndexFromStore = currentNotifications.findIndex(
             notification => notification.id === event.metadata.uid
           );
           if (notificationIndexFromStore !== -1) {
-            return notifications[notificationIndexFromStore];
+            return currentNotifications[notificationIndexFromStore];
           }
+
+          eventIds.add(event.metadata.uid);
+
           const message = event.message;
           const date = new Date(event.metadata.creationTimestamp).getTime();
           const notification = new Notification(message, date);
           notification.id = event.metadata.uid;
           notification.url = createRouteURL('cluster') + `?eventsFilter=${notification.id}`;
+
+          changed = true;
+
           return notification;
         });
+
+      // Ensure that notifications which are not part of this stream of events are still shown
+      currentNotifications.forEach(notification => {
+        if (!eventIds.has(notification.id)) {
+          notificationsToShow.push(notification);
+        }
+      });
+    } else {
+      notificationsToShow = currentNotifications;
+    }
+
+    // It's important to dispatch only if something changed, otherwise we will get into an infinite loop.
+    if (changed) {
       // we are here means the events list changed and we have now new set of events, so we will notify the store about it
-      dispatch(setUINotifications(importantEvents));
+      dispatch(setUINotifications(notificationsToShow));
     }
-  }, [events]);
-
-  function handleNotificationsWithStorage() {
-    const notificationsInStorage = localStorage.getItem('notifications');
-    if (notificationsInStorage) {
-      const parsedNotifications = JSON.parse(notificationsInStorage);
-      dispatch(setUINotifications(parsedNotifications));
-    }
-  }
-
-  useEffect(() => {
-    handleNotificationsWithStorage();
-  }, []);
-
-  useEffect(() => {
-    handleNotificationsWithStorage();
-  }, [notifications.length]);
+  }, [events, notifications]);
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -178,6 +209,23 @@ export default function Notifications() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  function handleNotificationMarkAllRead() {
+    const massagedNotifications = notifications.map(notification => {
+      notification.seen = true;
+      return notification;
+    });
+    dispatch(setUINotifications(massagedNotifications));
+  }
+
+  function handleNotificationClear() {
+    const currentSetOfNotifications = notifications;
+    const massagedNotifications = currentSetOfNotifications.map(notification => {
+      notification.deleted = true;
+      return notification;
+    });
+    dispatch(setUINotifications(massagedNotifications));
+  }
 
   function menuItemClickHandler(notification?: Notification, closeMenu?: boolean) {
     if (notification) {
@@ -189,7 +237,8 @@ export default function Notifications() {
   }
   const areThereUnseenNotifications =
     notifications.filter(notification => notification.seen !== true).length > 0;
-
+  const areAllNotificationsInDeleteState =
+    notifications.filter(notification => !notification.deleted).length === 0;
   const notificationMenuId = 'notification-menu';
 
   return (
@@ -200,7 +249,7 @@ export default function Notifications() {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        {areThereUnseenNotifications ? (
+        {!areAllNotificationsInDeleteState && areThereUnseenNotifications ? (
           <Badge variant="dot" color="error">
             <Tooltip title={`${t('notifications|You have unread notifications')}`}>
               <Icon icon={bellIcon} />
@@ -228,7 +277,45 @@ export default function Notifications() {
         }}
         id={notificationMenuId}
       >
-        <NotificationsList notifications={notifications} clickEventHandler={menuItemClickHandler} />
+        <Box borderBottom={`1px solid ${theme.palette.notificationBorderColor}`} p={1}>
+          <Grid container justifyContent="space-between">
+            <Grid item>
+              <Box mx={1}>
+                <Typography style={{ fontWeight: 'bold' }}>
+                  {t('notifications|Notifications')}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item>
+              <Box display={'flex'} justifyContent="space-between">
+                <Box>
+                  <Button
+                    style={{ textTransform: 'none', paddingTop: 0 }}
+                    color="primary"
+                    onClick={handleNotificationMarkAllRead}
+                    disabled={areAllNotificationsInDeleteState || !areThereUnseenNotifications}
+                  >
+                    {t('notifications|Mark all as read')}
+                  </Button>
+                </Box>
+                <Box>
+                  <Button
+                    style={{ textTransform: 'none', paddingTop: 0 }}
+                    color="primary"
+                    onClick={handleNotificationClear}
+                    disabled={areAllNotificationsInDeleteState}
+                  >
+                    {t('frequent|Clear')}
+                  </Button>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+        <NotificationsList
+          notifications={areAllNotificationsInDeleteState ? [] : notifications}
+          clickEventHandler={menuItemClickHandler}
+        />
       </Menu>
     </>
   );
