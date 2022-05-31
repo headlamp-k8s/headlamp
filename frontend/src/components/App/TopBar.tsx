@@ -19,6 +19,7 @@ import { useCluster } from '../../lib/k8s';
 import { setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
+import PodCounter from '../podcounter';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import Notifications from './Notifications';
@@ -253,6 +254,7 @@ export function PureTopBar({
               {Object.values(appBarActions).map((action, i) => (
                 <React.Fragment key={i}>{action()}</React.Fragment>
               ))}
+              <PodCounter />
               <Notifications />
               <LocaleSelect />
               <ThemeChangeButton />

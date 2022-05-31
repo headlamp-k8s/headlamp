@@ -1,5 +1,5 @@
 import { ChildProcessWithoutNullStreams, exec, spawn } from 'child_process';
-import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
 import fs from 'fs';
@@ -429,12 +429,14 @@ function startElecron() {
     app.on('open-url', (event, url) => {
       mainWindow.focus();
       const urlObj = new URL(url);
+
       const token = urlObj.searchParams.get('token');
       if (token) {
         mainWindow.webContents.send('auth_token', { token });
       }
       // for pkce oauth 2.0 we get the auth code
       const authCode = urlObj.hash.split('&')[0];
+      dialog.showErrorBox('auth_code', authCode);
       if (authCode !== '') {
         const code = authCode.split('#code=')[1];
         if (code) {
