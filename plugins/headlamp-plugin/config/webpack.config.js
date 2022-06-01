@@ -5,6 +5,7 @@ const externalModules = {
   recharts: 'pluginLib.Recharts',
   'react-router': 'pluginLib.ReactRouter',
   'react-redux': 'pluginLib.ReactRedux',
+  'react-dom': 'pluginLib.ReactDOM',
   '@iconify/react': 'pluginLib.Iconify',
   lodash: 'pluginLib.Lodash',
   notistack: 'pluginLib.Notistack',
@@ -67,7 +68,27 @@ module.exports = {
         },
       },
       {
-        test: /\.(jpe?g|gif|png|svg)$/i,
+        test: /\.svg$/,
+        use: [
+          {
+            loader: require.resolve('@svgr/webpack'),
+            options: {
+              prettier: false,
+              svgo: false,
+              svgoConfig: {
+                plugins: [{ removeViewBox: false }],
+              },
+              titleProp: true,
+              ref: true,
+            },
+          },
+        ],
+        issuer: {
+          and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
+        },
+      },
+      {
+        test: /\.(jpe?g|gif|png)$/i,
         use: [
           {
             loader: require.resolve('url-loader'),
