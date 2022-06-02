@@ -152,6 +152,16 @@ function getRecentClusters() {
   return JSON.parse(currentClustersStr) as string[];
 }
 
+const tablesRowsPerPageKey = 'tables_rows_per_page';
+
+function getTablesRowsPerPage() {
+  return parseInt(localStorage.getItem(tablesRowsPerPageKey) || '5');
+}
+
+function setTablesRowsPerPage(perPage: number) {
+  localStorage.setItem(tablesRowsPerPageKey, perPage.toString());
+}
+
 const exportFunctions = {
   getBaseUrl,
   isDevMode,
@@ -161,6 +171,8 @@ const exportFunctions = {
   setAppVersion,
   setRecentCluster,
   getRecentClusters,
+  getTablesRowsPerPage,
+  setTablesRowsPerPage,
 };
 
 export default exportFunctions;

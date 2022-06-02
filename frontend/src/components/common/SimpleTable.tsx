@@ -10,6 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import helpers from '../../helpers';
 import Empty from './EmptyContent';
 import { ValueLabel } from './Label';
 import Loader from './Loader';
@@ -114,8 +115,10 @@ export default function SimpleTable(props: SimpleTableProps) {
   const [page, setPage] = React.useState(0);
   const [currentData, setCurrentData] = React.useState(data);
   const [displayData, setDisplayData] = React.useState(data);
-  const rowsPerPageOptions = props.rowsPerPage || [5, 10, 50];
-  const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
+  const rowsPerPageOptions = props.rowsPerPage || [15, 25, 50];
+  const [rowsPerPage, setRowsPerPage] = React.useState(
+    helpers.getTablesRowsPerPage() || rowsPerPageOptions[0]
+  );
   const classes = useTableStyle();
   const [isIncreasingOrder, setIsIncreasingOrder] = React.useState(
     !defaultSortingColumn || defaultSortingColumn > 0
@@ -133,7 +136,9 @@ export default function SimpleTable(props: SimpleTableProps) {
   function handleChangeRowsPerPage(
     event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>
   ) {
-    setRowsPerPage(+event.target.value);
+    const numRows = +event.target.value;
+    helpers.setTablesRowsPerPage(numRows);
+    setRowsPerPage(numRows);
     setPage(0);
   }
 
