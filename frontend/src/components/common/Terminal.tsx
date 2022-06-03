@@ -10,6 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
+import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Terminal as XTerminal } from 'xterm';
@@ -164,6 +165,18 @@ export default function Terminal(props: TerminalProps) {
       console.debug('Terminal is now connected');
     }
 
+    if (isSuccessfulExitError(channel, text)) {
+      if (!!onClose) {
+        onClose();
+      }
+
+      if (execRef.current) {
+        execRef.current?.cancel();
+      }
+
+      return;
+    }
+
     if (isShellNotFoundError(channel, text)) {
       shellConnectFailed(xtermc);
       return;
@@ -218,6 +231,11 @@ export default function Terminal(props: TerminalProps) {
         return;
       }
 
+      // Don't do anything if the dialog is not open.
+      if (!props.open) {
+        return;
+      }
+
       if (xtermRef.current) {
         xtermRef.current.xterm.dispose();
         execRef.current?.cancel();
@@ -262,7 +280,7 @@ export default function Terminal(props: TerminalProps) {
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [container, terminalContainerRef, shells]
+    [container, terminalContainerRef, shells, props.open]
   );
 
   React.useEffect(
@@ -297,6 +315,19 @@ export default function Terminal(props: TerminalProps) {
 
   function handleContainerChange(event: any) {
     setContainer(event.target.value);
+  }
+
+  function isSuccessfulExitError(channel: number, text: string): boolean {
+    // Linux container Error
+    if (channel === 3) {
+      try {
+        const error = JSON.parse(text);
+        if (_.isEmpty(error.metadata) && error.status === 'Success') {
+          return true;
+        }
+      } catch {}
+    }
+    return false;
   }
 
   function isShellNotFoundError(channel: number, text: string): boolean {
