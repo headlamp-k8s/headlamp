@@ -52,6 +52,8 @@ export interface KubeOwnerReference {
 
 export interface ApiListOptions {
   namespace?: string | string[];
+  labelSelector?: string;
+  fieldSelector?: string;
 }
 
 // We have to define a KubeObject implementation here because the KubeObject
@@ -145,21 +147,27 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     static apiList<U extends KubeObject>(
       onList: (arg: U[]) => void,
       onError?: (err: ApiError) => void,
-      opts?: {
-        namespace?: string;
-      }
+      opts?: ApiListOptions
     ) {
       const createInstance = (item: T) => this.create(item) as U;
 
-      const args: any[] = [(list: T[]) => onList(list.map((item: T) => createInstance(item) as U))];
+      const callback = (list: T[]) => onList(list.map((item: T) => createInstance(item) as U));
+      const args: any[] = [callback];
 
       if (this.apiEndpoint.isNamespaced) {
         args.unshift(opts?.namespace || null);
       }
 
-      if (onError) {
-        args.push(onError);
+      args.push(onError);
+
+      const queryParams: { [k: string]: string } = {};
+      if (opts?.labelSelector) {
+        queryParams['labelSelector'] = opts.labelSelector;
       }
+      if (opts?.fieldSelector) {
+        queryParams['fieldSelector'] = opts.fieldSelector;
+      }
+      args.push(queryParams);
 
       return this.apiEndpoint.list.bind(null, ...args);
     }
