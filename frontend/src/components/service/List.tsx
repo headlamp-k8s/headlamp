@@ -47,6 +47,11 @@ export default function ServiceList() {
             sort: true,
           },
           {
+            label: t('External IP'),
+            getter: service => service.getExternalAddresses(),
+            sort: true,
+          },
+          {
             label: t('frequent|Age'),
             getter: service => service.getAge(),
             sort: (s1: Service, s2: Service) =>

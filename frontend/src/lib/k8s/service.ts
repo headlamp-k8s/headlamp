@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeCondition, KubeObjectInterface, makeKubeObject } from './cluster';
 
@@ -44,6 +45,16 @@ class Service extends makeKubeObject<KubeService>('service') {
 
   get status() {
     return this.jsonData!.status;
+  }
+
+  getExternalAddresses() {
+    return _.uniq(
+      (
+        this.status?.loadBalancer?.ingress?.map(
+          (ingress: KubeLoadBalancerIngress) => ingress.hostname || ingress.ip
+        ) || []
+      ).concat(this.spec.externalIPs || [])
+    ).join(', ');
   }
 }
 
