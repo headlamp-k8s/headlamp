@@ -1,15 +1,16 @@
 import 'xterm/css/xterm.css';
+import { Box } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
+import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Terminal as XTerminal } from 'xterm';
@@ -19,13 +20,35 @@ import Pod from '../../lib/k8s/pod';
 const decoder = new TextDecoder('utf-8');
 const encoder = new TextEncoder();
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles(theme => ({
   dialogContent: {
-    height: '80%',
-    minHeight: '80%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    '& .xterm ': {
+      height: '100vh', // So the terminal doesn't stay shrunk when shrinking vertically and maximizing again.
+      '& .xterm-viewport': {
+        width: 'initial !important', // BugFix: https://github.com/xtermjs/xterm.js/issues/3564#issuecomment-1004417440
+      },
+    },
+    '& #xterm-container': {
+      overflow: 'hidden',
+      width: '100%',
+      '& .terminal.xterm': {
+        padding: 10,
+      },
+    },
   },
   containerFormControl: {
     minWidth: '11rem',
+  },
+  terminalBox: {
+    paddingTop: theme.spacing(1),
+    flex: 1,
+    width: '100%',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column-reverse',
   },
 }));
 
@@ -34,11 +57,25 @@ interface TerminalProps extends DialogProps {
   onClose?: () => void;
 }
 
+interface XTerminalConnected {
+  xterm: XTerminal;
+  connected: boolean;
+}
+
+type execReturn = ReturnType<Pod['exec']>;
+
 export default function Terminal(props: TerminalProps) {
   const { item, onClose, ...other } = props;
   const classes = useStyle();
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
   const [container, setContainer] = React.useState<string | null>(null);
+  const execRef = React.useRef<execReturn | null>(null);
+  const fitAddonRef = React.useRef<FitAddon | null>(null);
+  const xtermRef = React.useRef<XTerminalConnected | null>(null);
+  const [shells, setShells] = React.useState({
+    available: getAvailableShells(),
+    currentIdx: 0,
+  });
   const { t } = useTranslation('resource');
 
   function getDefaultContainer() {
@@ -46,51 +83,69 @@ export default function Terminal(props: TerminalProps) {
   }
 
   // @todo: Give the real exec type when we have it.
-  function setupTerminal(
-    containerRef: HTMLElement,
-    xterm: XTerminal,
-    fitAddon: FitAddon,
-    exec: any
-  ) {
+  function setupTerminal(containerRef: HTMLElement, xterm: XTerminal, fitAddon: FitAddon) {
     if (!containerRef) {
       return;
     }
 
     xterm.open(containerRef);
-    fitAddon.fit();
 
-    xterm.onKey(event => {
-      // For some reason, pressing a key can give us a "keydown" or "keypress" event...
-      if (!['keydown', 'keypress'].includes(event.domEvent.type)) {
-        return;
-      }
-
-      // Send a newline when pressing enter
-      const code = event.domEvent.key === 'Enter' ? '\n' : event.key;
-
-      // We just send the key strokes to the socket; the actual writing into the
-      // terminal will be done when the data arrives.
-      send(code, exec);
+    xterm.onData(data => {
+      send(0, data);
     });
+
+    xterm.onResize(size => {
+      send(4, `{"Width":${size.cols},"Height":${size.rows}}`);
+    });
+
+    // Allow copy/paste in terminal
+    xterm.attachCustomKeyEventHandler(arg => {
+      if (arg.ctrlKey && arg.type === 'keydown') {
+        if (arg.code === 'KeyC') {
+          const selection = xterm.getSelection();
+          if (selection) {
+            return false;
+          }
+        }
+        if (arg.code === 'KeyV') {
+          return false;
+        }
+      }
+      return true;
+    });
+
+    fitAddon.fit();
   }
 
-  // @todo: Give the real exec type when we have it.
-  function send(data: string, exec: any) {
-    const socket = exec.getSocket();
+  function send(channel: number, data: string) {
+    const socket = execRef.current!.getSocket();
 
     // We should only send data if the socket is ready.
     if (!socket || socket.readyState !== 1) {
-      console.debug('Socket not ready...', socket);
+      console.debug('Could not send data to exec: Socket not ready...', socket);
       return;
     }
 
     const encoded = encoder.encode(data);
-    const buffer = new Uint8Array([0, ...encoded]);
+    const buffer = new Uint8Array([channel, ...encoded]);
 
     socket.send(buffer);
   }
 
-  function onData(xterm: XTerminal, bytes: ArrayBuffer) {
+  // Channels:
+  // 0: stdin
+  // 1: stdout
+  // 2: stderr
+  // 3: server error
+  // 4: resize channel
+  function onData(xtermc: XTerminalConnected, bytes: ArrayBuffer) {
+    const xterm = xtermc.xterm;
+    // Only show data from stdout, stderr and server error channel.
+    const channel = new Int8Array(bytes.slice(0, 1))[0];
+    if (channel < 1 || channel > 3) {
+      return;
+    }
+
     // The first byte is discarded because it just identifies whether
     // this data is from stderr, stdout, or stdin.
     const data = bytes.slice(1);
@@ -100,7 +155,67 @@ export default function Terminal(props: TerminalProps) {
       return;
     }
 
+    // Send resize command to server once connection is establised.
+    if (!xtermc.connected && !!text) {
+      xterm.clear();
+      (async function () {
+        send(4, `{"Width":${xterm.cols},"Height":${xterm.rows}}`);
+      })();
+      xtermc.connected = true;
+      console.debug('Terminal is now connected');
+    }
+
+    if (isSuccessfulExitError(channel, text)) {
+      if (!!onClose) {
+        onClose();
+      }
+
+      if (execRef.current) {
+        execRef.current?.cancel();
+      }
+
+      return;
+    }
+
+    if (isShellNotFoundError(channel, text)) {
+      shellConnectFailed(xtermc);
+      return;
+    }
+
     xterm.write(text);
+  }
+
+  function tryNextShell() {
+    if (shells.available.length > 0) {
+      setShells(currentShell => ({
+        ...currentShell,
+        currentIdx: (currentShell.currentIdx + 1) % currentShell.available.length,
+      }));
+    }
+  }
+
+  function isLastShell() {
+    return shells.currentIdx === shells.available.length - 1;
+  }
+
+  function getCurrentShellCommand() {
+    return shells.available[shells.currentIdx];
+  }
+
+  function shellConnectFailed(xtermc: XTerminalConnected) {
+    const xterm = xtermc.xterm;
+    const command = getCurrentShellCommand();
+    if (isLastShell()) {
+      xterm.clear();
+      if (xtermc.connected) {
+        xterm.write(t('Failed to run command "{{command}}"…', { command }) + '\r\n');
+      } else {
+        xterm.write(t('Failed to connect…') + '\r\n');
+      }
+    } else {
+      xterm.write(t('Failed to run "{{ command }}"', { command }) + '\r\n');
+      tryNextShell();
+    }
   }
 
   React.useEffect(
@@ -116,24 +231,56 @@ export default function Terminal(props: TerminalProps) {
         return;
       }
 
-      const xterm = new XTerminal();
+      // Don't do anything if the dialog is not open.
+      if (!props.open) {
+        return;
+      }
 
-      const fitAddon = new FitAddon();
-      xterm.loadAddon(fitAddon);
+      if (xtermRef.current) {
+        xtermRef.current.xterm.dispose();
+        execRef.current?.cancel();
+      }
+      xtermRef.current = {
+        xterm: new XTerminal({
+          cursorBlink: true,
+          cursorStyle: 'underline',
+          scrollback: 10000,
+          rows: 30, // initial rows before fit
+        }),
+        connected: false,
+      };
 
-      xterm.writeln(t('Connecting…') + '\n');
+      fitAddonRef.current = new FitAddon();
+      xtermRef.current.xterm.loadAddon(fitAddonRef.current);
 
-      const exec = item.exec(container, (items: ArrayBuffer) => onData(xterm, items));
+      const command = getCurrentShellCommand();
 
-      setupTerminal(terminalContainerRef, xterm, fitAddon, exec);
+      xtermRef.current.xterm.writeln(t('Trying to run "{{command}}"…', { command }) + '\n');
+
+      (async function () {
+        execRef.current = await item.exec(
+          container,
+          (items: ArrayBuffer) => onData(xtermRef.current!, items),
+          { command: [command], failCb: () => shellConnectFailed(xtermRef.current!) }
+        );
+
+        setupTerminal(terminalContainerRef, xtermRef.current!.xterm, fitAddonRef.current!);
+      })();
+
+      const handler = () => {
+        fitAddonRef.current!.fit();
+      };
+
+      window.addEventListener('resize', handler);
 
       return function cleanup() {
-        xterm.dispose();
-        exec.cancel();
+        xtermRef.current?.xterm.dispose();
+        execRef.current?.cancel();
+        window.removeEventListener('resize', handler);
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [container, terminalContainerRef]
+    [container, terminalContainerRef, shells, props.open]
   );
 
   React.useEffect(
@@ -146,39 +293,93 @@ export default function Terminal(props: TerminalProps) {
     [props.open]
   );
 
+  React.useEffect(() => {
+    if (shells.available.length === 0) {
+      setShells({
+        available: getAvailableShells(),
+        currentIdx: 0,
+      });
+    }
+  }, [item]);
+
+  function getAvailableShells() {
+    const selector = item.spec?.nodeSelector || {};
+    const os = selector['kubernetes.io/os'] || selector['beta.kubernetes.io/os'];
+    if (os === 'linux') {
+      return ['bash', '/bin/bash', 'sh', '/bin/sh'];
+    } else if (os === 'windows') {
+      return ['powershell.exe', 'cmd.exe'];
+    }
+    return ['bash', 'sh', 'powershell.exe', 'cmd.exe'];
+  }
+
   function handleContainerChange(event: any) {
     setContainer(event.target.value);
+  }
+
+  function isSuccessfulExitError(channel: number, text: string): boolean {
+    // Linux container Error
+    if (channel === 3) {
+      try {
+        const error = JSON.parse(text);
+        if (_.isEmpty(error.metadata) && error.status === 'Success') {
+          return true;
+        }
+      } catch {}
+    }
+    return false;
+  }
+
+  function isShellNotFoundError(channel: number, text: string): boolean {
+    // Linux container Error
+    if (channel === 3) {
+      try {
+        const error = JSON.parse(text);
+        if (error.code === 500 && error.status === 'Failure' && error.reason === 'InternalError') {
+          return true;
+        }
+      } catch {}
+    }
+    // Windows container Error
+    if (channel === 1) {
+      if (text.includes('The system cannot find the file specified')) {
+        return true;
+      }
+    }
+    return false;
   }
 
   return (
     <Dialog maxWidth="lg" scroll="paper" fullWidth onClose={onClose} keepMounted {...other}>
       <DialogTitle>{t('Terminal: {{ itemName }}', { itemName: item.metadata.name })}</DialogTitle>
       <DialogContent className={classes.dialogContent}>
-        <Grid container direction="column" spacing={1}>
-          <Grid item>
-            <FormControl className={classes.containerFormControl}>
-              <InputLabel shrink id="container-name-chooser-label">
-                {t('glossary|Container')}
-              </InputLabel>
-              <Select
-                labelId="container-name-chooser-label"
-                id="container-name-chooser"
-                value={container !== null ? container : getDefaultContainer()}
-                onChange={handleContainerChange}
-              >
-                {item &&
-                  item.spec.containers.map(({ name }) => (
-                    <MenuItem value={name} key={name}>
-                      {name}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item>
-            <div id="xterm" ref={x => setTerminalContainerRef(x)} className="terminal" />
-          </Grid>
-        </Grid>
+        <Box>
+          <FormControl className={classes.containerFormControl}>
+            <InputLabel shrink id="container-name-chooser-label">
+              {t('glossary|Container')}
+            </InputLabel>
+            <Select
+              labelId="container-name-chooser-label"
+              id="container-name-chooser"
+              value={container !== null ? container : getDefaultContainer()}
+              onChange={handleContainerChange}
+            >
+              {item &&
+                item.spec.containers.map(({ name }) => (
+                  <MenuItem value={name} key={name}>
+                    {name}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+        </Box>
+        <Box className={classes.terminalBox}>
+          <div
+            id="xterm-container"
+            ref={x => setTerminalContainerRef(x)}
+            style={{ flex: 1, display: 'flex', flexDirection: 'column-reverse' }}
+          />
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
