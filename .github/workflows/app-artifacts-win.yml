@@ -27,8 +27,8 @@ jobs:
       with:
         args: install make
     - name: App Windows
+      shell: pwsh
       run: |
-        npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
         make app-win
     - name: Upload artifact
       uses: actions/upload-artifact@v2
