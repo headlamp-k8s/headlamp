@@ -1,4 +1,4 @@
-import { ChildProcessWithoutNullStreams, exec, spawn } from 'child_process';
+import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
@@ -97,7 +97,7 @@ function quitServerProcess() {
     process.kill(-serverProcess.pid);
   } else if (process.platform === 'win32' && serverProcess) {
     // Otherwise on Windows the process will stick around.
-    exec('taskkill /pid ' + serverProcess.pid + ' /T /F');
+    execSync('taskkill /pid ' + serverProcess.pid + ' /T /F');
   }
 
   serverProcess.stdin.destroy();
