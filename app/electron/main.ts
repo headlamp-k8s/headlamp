@@ -39,12 +39,6 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
     ? path.resolve('../backend/headlamp-server')
     : path.join(process.resourcesPath, './headlamp-server');
 
-  const options = { shell: true, detached: false };
-  if (process.platform !== 'win32' && !isDev) {
-    // This makes the child processes a separate group, for easier killing.
-    options.detached = true;
-  }
-
   let serverArgs = [];
   if (!!args.kubeconfig) {
     serverArgs = serverArgs.concat(['--kubeconfig', args.kubeconfig]);
@@ -62,6 +56,12 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
 
   serverArgs = serverArgs.concat(flags);
   console.log('arguments passed to backend server', serverArgs);
+
+  // We run detached but not in shell, otherwise it's hard to make sure the
+  // server process gets killed. When changing these options, please make sure
+  // to test quitting the app in the different platforms and making sure the
+  // server process has been correctly quit.
+  const options = { detached: true };
 
   return spawn(serverFilePath, serverArgs, options);
 }
