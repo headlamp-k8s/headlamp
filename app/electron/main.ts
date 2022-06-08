@@ -1,7 +1,7 @@
-import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
+import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
-import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
+import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import fs from 'fs';
 import { i18n as I18n } from 'i18next';
 import open from 'open';
@@ -91,14 +91,6 @@ function quitServerProcess() {
 
   intentionalQuit = true;
   log.info('stopping server process...');
-  if (process.platform !== 'win32') {
-    // Negative pid because it should kill the whole group of processes:
-    //    https://azimi.me/2014/12/31/kill-child_process-node-js.html
-    process.kill(-serverProcess.pid);
-  } else if (process.platform === 'win32' && serverProcess) {
-    // Otherwise on Windows the process will stick around.
-    execSync('taskkill /pid ' + serverProcess.pid + ' /T /F');
-  }
 
   serverProcess.stdin.destroy();
   // @todo: should we try and end the process a bit more gracefully?
