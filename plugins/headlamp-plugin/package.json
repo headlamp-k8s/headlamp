@@ -1,6 +1,6 @@
 {
   "name": "@kinvolk/headlamp-plugin",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "The needed infrastructure for building Headlamp plugins.",
   "bin": "bin/headlamp-plugin.js",
   "scripts": {
@@ -63,6 +63,8 @@
     "headlamp",
     "kinvolk",
     "kubernetes",
+    "kubernetes-ui",
+    "kubernetes-plugins",
     "plugins"
   ],
   "author": "Kinvolk GmbH",
