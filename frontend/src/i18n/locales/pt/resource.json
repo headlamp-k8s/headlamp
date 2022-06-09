@@ -39,7 +39,10 @@
   "show yaml viewer": "mostrar visualizador de YAML",
   "Loading table data": "A carregar dados da tabela",
   "No data matching the filter criteria.": "Sem dados que verifiquem os critérios de filtro.",
-  "Connecting…": "A ligar…",
+  "Failed to run command \"{{command}}\"…": "",
+  "Failed to connect…": "",
+  "Failed to run \"{{ command }}\"": "",
+  "Trying to run \"{{command}}\"…": "",
   "Terminal: {{ itemName }}": "Terminal: {{ itemName }}",
   "Loading resource definition details": "A carregar os detalhes de definição do recurso"
 }

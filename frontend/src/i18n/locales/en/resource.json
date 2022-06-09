@@ -39,7 +39,10 @@
   "show yaml viewer": "show yaml viewer",
   "Loading table data": "Loading table data",
   "No data matching the filter criteria.": "No data matching the filter criteria.",
-  "Connecting…": "Connecting…",
+  "Failed to run command \"{{command}}\"…": "Failed to run command \"{{command}}\"…",
+  "Failed to connect…": "Failed to connect…",
+  "Failed to run \"{{ command }}\"": "Failed to run \"{{ command }}\"",
+  "Trying to run \"{{command}}\"…": "Trying to run \"{{command}}\"…",
   "Terminal: {{ itemName }}": "Terminal: {{ itemName }}",
   "Loading resource definition details": "Loading resource definition details"
 }

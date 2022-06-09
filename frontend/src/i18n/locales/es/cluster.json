@@ -5,6 +5,8 @@
   "CPU Usage": "Uso de la CPU",
   "{{ numReady }} / {{ numItems }} Requested": "{{ numReady }} / {{ numItems }} requeridos",
   "Cluster: {{cluster}}": "Cluster: {{cluster}}",
+  "Recent clusters": "",
+  "All clusters": "",
   "Choose a cluster": "Elija un cluster",
   "Wait while fetching clusters…": "Espere mientras se obtienen los clusters…",
   "Loading cluster information": "Cargando información de cluster",
