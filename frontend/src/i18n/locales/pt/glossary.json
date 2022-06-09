@@ -93,6 +93,7 @@
   "Roles": "Roles",
   "Secrets": "Secrets",
   "Cluster IP": "IP do Cluster",
+  "External IP": "IP Externo",
   "Ports": "Ports",
   "Protocol": "Protocolo",
   "Services": "Services",

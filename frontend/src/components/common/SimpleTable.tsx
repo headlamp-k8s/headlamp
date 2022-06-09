@@ -370,9 +370,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export interface NameValueTableRow {
+  /** The name (key) for this row */
   name: string | JSX.Element;
+  /** The value for this row */
   value?: string | JSX.Element | JSX.Element[];
-  hide?: boolean;
+  /** Whether this row should be hidden (can be a boolean or a function that will take the
+   * @param value and return a boolean) */
+  hide?: boolean | ((value: NameValueTableRow['value']) => boolean);
 }
 
 interface NameValueTableProps {
@@ -409,7 +413,17 @@ export function NameValueTable(props: NameValueTableProps) {
     <Table className={classes.table}>
       <TableBody>
         {rows.map(({ name, value, hide = false }, i) => {
-          if (hide) return null;
+          let shouldHide = false;
+          if (typeof hide === 'function') {
+            shouldHide = hide(value);
+          } else {
+            shouldHide = hide;
+          }
+
+          if (shouldHide) {
+            return null;
+          }
+
           return (
             <TableRow key={i}>
               <TableCell component="th" scope="row" className={classes.metadataNameCell}>

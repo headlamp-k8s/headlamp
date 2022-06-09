@@ -1,4 +1,5 @@
 import { InlineIcon } from '@iconify/react';
+import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -26,6 +27,11 @@ export default function ServiceDetails() {
           {
             name: t('Cluster IP'),
             value: item.spec.clusterIP,
+          },
+          {
+            name: t('External IP'),
+            value: item.getExternalAddresses(),
+            hide: _.isEmpty,
           },
           {
             name: t('Selector'),
