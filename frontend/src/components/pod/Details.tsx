@@ -91,7 +91,7 @@ function PodLogViewer(props: PodLogViewerProps) {
   }
 
   function hasContainerRestarted() {
-    const cont = item.status.containerStatuses.find(
+    const cont = item?.status?.containerStatuses?.find(
       (c: KubeContainerStatus) => c.name === container
     );
     if (!cont) {
