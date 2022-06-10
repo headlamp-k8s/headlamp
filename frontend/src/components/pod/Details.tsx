@@ -87,11 +87,11 @@ function PodLogViewer(props: PodLogViewerProps) {
   }
 
   function handlePreviousChange() {
-    setShowPrevious(previous => !previous);
+    setShowPrevious((previous: boolean) => !previous);
   }
 
   function hasContainerRestarted() {
-    const cont = item.status.containerStatuses.find(
+    const cont = item?.status?.containerStatuses?.find(
       (c: KubeContainerStatus) => c.name === container
     );
     if (!cont) {
@@ -102,7 +102,7 @@ function PodLogViewer(props: PodLogViewerProps) {
   }
 
   function handleTimestampsChange() {
-    setShowTimestamps(timestamps => !timestamps);
+    setShowTimestamps((timestamps: boolean) => !timestamps);
   }
 
   return (
