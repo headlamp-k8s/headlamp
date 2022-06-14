@@ -24,12 +24,18 @@ export const UI_PLUGINS_LOADED = 'UI_PLUGINS_LOADED';
 export const UI_BRANDING_SET_APP_LOGO = 'UI_BRANDING_SET_APP_LOGO';
 export const UI_SET_CLUSTER_CHOOSER_BUTTON = 'UI_SET_CLUSTER_CHOOSER_BUTTON';
 
+export interface LogoProps {
+  /** The size of the logo. 'small' for in mobile view, and 'large' for tablet and desktop sizes. */
+  logoType: 'small' | 'large';
+  /** User selected theme. */
+  themeName: 'dark' | 'light';
+  /** A class to use on your SVG. */
+  className: string;
+  [key: string]: any;
+}
+
 export interface BrandingProps {
-  logo: React.ComponentType<{
-    logoType: 'small' | 'large';
-    themeName: string;
-    [key: string]: any;
-  }> | null;
+  logo: React.ComponentType<LogoProps> | null;
 }
 export const UI_SET_NOTIFICATIONS = 'UI_SET_NOTIFICATIONS';
 export const UI_UPDATE_NOTIFICATION = 'UI_UPDATE_NOTIFICATION';
@@ -155,7 +161,7 @@ export function setPluginsLoadState(pluginsLoadedState: boolean) {
   return { type: UI_PLUGINS_LOADED, pluginsLoadedState };
 }
 
-export function setBrandingAppLogoComponent(component: BrandingProps['logo']) {
+export function setBrandingAppLogoComponent(component: React.ComponentType<LogoProps> | null) {
   return { type: UI_BRANDING_SET_APP_LOGO, component };
 }
 
