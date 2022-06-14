@@ -2,7 +2,7 @@ import React from 'react';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
-  BrandingProps,
+  AppLogoProps,
   setAppBarAction,
   setBrandingAppLogoComponent,
   setClusterChooserButtonComponent,
@@ -22,6 +22,7 @@ export type clusterChooserButtonComponent = React.ComponentType<{
   clickHandler: (event?: any) => void;
 }>;
 export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | undefined;
+export type { AppLogoProps };
 
 export default class Registry {
   /**
@@ -143,13 +144,15 @@ export default class Registry {
    * the sidebar is in shrink or expaned state so that you can change your logo from small to large and the other optional
    * prop is the ```JSX themeName``` which is a string with two values 'light' and 'dark' base on which theme is selected.
    *
-   *
    * @example
    * ```JSX
-   * register.registerAppLogo((props: { logoType: 'small' | 'large', themeName: string}) => <MY_CUSTOM_COMPONENT logoType={logoType}/>)
+   * function MyLogo(props: AppLogoProps) {
+   *   return 'my logo';
+   * }
+   * register.registerAppLogo(MyLogo)
    * ```
    */
-  registerAppLogo(component: BrandingProps['logo']) {
+  registerAppLogo(component: React.ComponentType<AppLogoProps> | null) {
     store.dispatch(setBrandingAppLogoComponent(component));
   }
 
