@@ -1,6 +1,9 @@
 {
   "You don't have any notifications right now": "You don't have any notifications right now",
   "No message": "No message",
+  "Mark as read": "Mark as read",
   "Show notifications": "Show notifications",
-  "You have unread notifications": "You have unread notifications"
+  "You have unread notifications": "You have unread notifications",
+  "Notifications": "Notifications",
+  "Mark all as read": "Mark all as read"
 }

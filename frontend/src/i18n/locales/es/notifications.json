@@ -1,6 +1,9 @@
 {
   "You don't have any notifications right now": "No tienes ninguna notificación en este momento",
   "No message": "Ningún mensaje",
+  "Mark as read": "Marcar como leído",
   "Show notifications": "Mostrar notificaciones",
-  "You have unread notifications": "Tienes notificaciones sin leer"
+  "You have unread notifications": "Tienes notificaciones sin leer",
+  "Notifications": "Notificaciones",
+  "Mark all as read": "Marcar todo como leído"
 }
