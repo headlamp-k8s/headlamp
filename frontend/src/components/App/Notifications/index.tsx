@@ -25,6 +25,7 @@ import { createRouteURL } from '../../../lib/router';
 import { setUINotifications, updateUINotification } from '../../../redux/actions/actions';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { DateLabel } from '../../common';
+import Empty from '../../common/EmptyContent';
 
 const useStyles = makeStyles((theme: Theme) => ({
   notificationItem: {
@@ -62,11 +63,7 @@ function NotificationsList(props: {
   const classes = useStyles();
   const history = useHistory();
   if (!notifications || notifications.length === 0) {
-    return (
-      <MenuItem onClick={() => clickEventHandler()} className={classes.notificationItem} disabled>
-        {t(`notifications|You don't have any notifications right now`)}
-      </MenuItem>
-    );
+    return <Empty>{t(`notifications|You don't have any notifications right now`)}</Empty>;
   }
 
   function notificationSeenUnseenHandler(event: any, notification?: Notification) {
