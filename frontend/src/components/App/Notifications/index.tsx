@@ -6,9 +6,9 @@ import {
   Button,
   Grid,
   IconButton,
+  ListItem,
   makeStyles,
-  Menu,
-  MenuItem,
+  Popover,
   Theme,
   Tooltip,
   Typography,
@@ -52,6 +52,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.error,
     },
   },
+  notificationsBox: {
+    borderBottom: `1px solid ${theme.palette.notificationBorderColor}`,
+    padding: theme.spacing(1),
+  },
+  notificationButton: {
+    textTransform: 'none',
+    paddingTop: 0,
+  },
 }));
 
 function NotificationsList(props: {
@@ -62,6 +70,8 @@ function NotificationsList(props: {
   const { t } = useTranslation();
   const classes = useStyles();
   const history = useHistory();
+  const theme = useTheme();
+
   if (!notifications || notifications.length === 0) {
     return <Empty>{t(`notifications|You don't have any notifications right now`)}</Empty>;
   }
@@ -90,7 +100,8 @@ function NotificationsList(props: {
     }
 
     return (
-      <MenuItem
+      <ListItem
+        button
         key={`${notification}__${index}`}
         className={classes.notificationItem}
         style={style}
@@ -110,18 +121,21 @@ function NotificationsList(props: {
           </Grid>
           {!notification.seen && (
             <Grid item md={1}>
-              <Badge
-                variant="dot"
-                color="error"
-                onClick={e => notificationSeenUnseenHandler(e, notification)}
-              ></Badge>
+              <Tooltip title={t(`notifications|Mark as read`)}>
+                <IconButton
+                  onClick={e => notificationSeenUnseenHandler(e, notification)}
+                  aria-label={t(`notifications|Mark as read`)}
+                >
+                  <Icon icon="mdi:circle" color={theme.palette.error.main} height={12} width={12} />
+                </IconButton>
+              </Tooltip>
             </Grid>
           )}
           <Grid item md={12}>
             <DateLabel date={notification.date} />
           </Grid>
         </Grid>
-      </MenuItem>
+      </ListItem>
     );
   }
 
@@ -145,7 +159,6 @@ export default function Notifications() {
   const dispatch = useDispatch();
   const [events] = Event.useList();
   const { t } = useTranslation();
-  const theme = useTheme();
 
   useEffect(() => {
     let notificationsToShow: Notification[] = [];
@@ -256,14 +269,13 @@ export default function Notifications() {
           <Icon icon={bellIcon} />
         )}
       </IconButton>
-      <Menu
+      <Popover
         anchorEl={anchorEl}
         keepMounted={false}
         open={Boolean(anchorEl)}
         onClose={handleClose}
         className={classes.root}
         getContentAnchorEl={null}
-        PaperProps={{}}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
@@ -274,8 +286,8 @@ export default function Notifications() {
         }}
         id={notificationMenuId}
       >
-        <Box borderBottom={`1px solid ${theme.palette.notificationBorderColor}`} p={1}>
-          <Grid container justifyContent="space-between">
+        <Box className={classes.notificationsBox}>
+          <Grid container direction="row" justifyContent="space-between" alignItems="center">
             <Grid item>
               <Box mx={1}>
                 <Typography style={{ fontWeight: 'bold' }}>
@@ -284,28 +296,22 @@ export default function Notifications() {
               </Box>
             </Grid>
             <Grid item>
-              <Box display={'flex'} justifyContent="space-between">
-                <Box>
-                  <Button
-                    style={{ textTransform: 'none', paddingTop: 0 }}
-                    color="primary"
-                    onClick={handleNotificationMarkAllRead}
-                    disabled={areAllNotificationsInDeleteState || !areThereUnseenNotifications}
-                  >
-                    {t('notifications|Mark all as read')}
-                  </Button>
-                </Box>
-                <Box>
-                  <Button
-                    style={{ textTransform: 'none', paddingTop: 0 }}
-                    color="primary"
-                    onClick={handleNotificationClear}
-                    disabled={areAllNotificationsInDeleteState}
-                  >
-                    {t('frequent|Clear')}
-                  </Button>
-                </Box>
-              </Box>
+              <Button
+                className={classes.notificationButton}
+                color="primary"
+                onClick={handleNotificationMarkAllRead}
+                disabled={areAllNotificationsInDeleteState || !areThereUnseenNotifications}
+              >
+                {t('notifications|Mark all as read')}
+              </Button>
+              <Button
+                className={classes.notificationButton}
+                color="primary"
+                onClick={handleNotificationClear}
+                disabled={areAllNotificationsInDeleteState}
+              >
+                {t('frequent|Clear')}
+              </Button>
             </Grid>
           </Grid>
         </Box>
@@ -313,7 +319,7 @@ export default function Notifications() {
           notifications={areAllNotificationsInDeleteState ? [] : notifications}
           clickEventHandler={menuItemClickHandler}
         />
-      </Menu>
+      </Popover>
     </>
   );
 }
