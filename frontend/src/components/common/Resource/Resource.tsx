@@ -652,7 +652,7 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
       return [];
     }
     return pods.filter(item =>
-      resourceTemplateLabel.every(elem => Object.values(item.metadata.labels).includes(elem))
+      resourceTemplateLabel.every(elem => Object.values(item.metadata.labels || {}).includes(elem))
     );
   }
 
