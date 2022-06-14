@@ -2,7 +2,6 @@ import { Headlamp, K8s, Plugin, Registry } from '@kinvolk/headlamp-plugin/lib';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
-// import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
 
 const useStyle = makeStyles(() => ({
   pods: {

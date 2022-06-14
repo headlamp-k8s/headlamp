@@ -3,6 +3,7 @@ import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
   AppLogoProps,
+  ClusterChooserProps,
   setAppBarAction,
   setBrandingAppLogoComponent,
   setClusterChooserButtonComponent,
@@ -18,11 +19,9 @@ export interface SectionFuncProps {
   title: string;
   component: (props: { resource: any }) => JSX.Element | null;
 }
-export type clusterChooserButtonComponent = React.ComponentType<{
-  clickHandler: (event?: any) => void;
-}>;
 export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | undefined;
 export type { AppLogoProps };
+export type { ClusterChooserProps };
 
 export default class Registry {
   /**
@@ -39,11 +38,13 @@ export default class Registry {
    * @example
    *
    * ```javascript
-   * registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
+   * register.registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
    * ```
+   *
+   * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/podcounter/ podcounter example}
    */
   registerSidebarItem(
-    parentName: string,
+    parentName: string | null,
     itemName: string,
     itemLabel: string,
     url: string,
@@ -67,8 +68,6 @@ export default class Registry {
    *
    * @param routeSpec - details of URL, highlighted sidebar and component to use.
    *
-   * @see {@link https://github.com/kinvolk/headlamp/blob/main/frontend/src/lib/router.tsx Route examples}
-   *
    * @example
    *
    * ```JSX
@@ -80,6 +79,10 @@ export default class Registry {
    *   component: () => <TraceList />
    * });
    * ```
+   *
+   * @see {@link https://github.com/kinvolk/headlamp/blob/main/frontend/src/lib/router.tsx Route examples}
+   * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/sidebar/ sidebar example}
+   *
    */
   registerRoute(routeSpec: Route) {
     store.dispatch(setRoute(routeSpec));
@@ -125,6 +128,7 @@ export default class Registry {
 
   /**
    * Append the specified title and component to the details view.
+   *
    * @param sectionName a unique name for it
    * @param sectionFunc - a function that returns your detail view component with props
    *                      passed into it and the section title
@@ -132,39 +136,81 @@ export default class Registry {
    * @example
    *
    * ```JSX
-   * register.registerDetailsViewSection("biolatency", (resource: KubeObject) => { title: 'Block I/O Latency', component: (props) => <BioLatency {...props} resource={resource}/>});
+   * function myDetailView({resource: KubeObject}) {
+   *   return {
+   *    title: 'Block I/O Latency',
+   *    component: (props) => <BioLatency {...props} resource={resource}/>
+   *   }
+   * }
+   *
+   * register.registerDetailsViewSection("biolatency", myDetailView);
    * ```
    */
   registerDetailsViewSection(sectionName: string, sectionFunc: sectionFunc) {
     store.dispatch(setDetailsView(sectionName, sectionFunc));
   }
+
   /**
-   * @param component is a React Component that takes two required props ```JSX logoType``` which is a
-   * constant string literal that accepts either of the two values ```JSX small``` or ```JSX large``` depending on whether
-   * the sidebar is in shrink or expaned state so that you can change your logo from small to large and the other optional
-   * prop is the ```JSX themeName``` which is a string with two values 'light' and 'dark' base on which theme is selected.
+   * Add a logo for Headlamp to use instead of the default one.
+   *
+   * @param component is a React Component that takes two required props
+   * ```JSX logoType``` which is a constant string literal that accepts either
+   * of the two values ```JSX small``` or ```JSX large``` depending on whether
+   * the sidebar is in shrink or expaned state so that you can change your logo
+   * from small to large and the other optional prop is the ```JSX themeName```
+   * which is a string with two values 'light' and 'dark' base on which theme is selected.
    *
    * @example
    * ```JSX
+   * import { AppLogoProps } from '@kinvolk/headlamp-plugin/lib';
+   *
    * function MyLogo(props: AppLogoProps) {
    *   return 'my logo';
    * }
+   *
    * register.registerAppLogo(MyLogo)
    * ```
+   *
+   * There is a more complete logo example in plugins/examples/change-logo.
+   *
+   * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/change-logo/|change-logo-example}
+   *
    */
   registerAppLogo(component: React.ComponentType<AppLogoProps> | null) {
     store.dispatch(setBrandingAppLogoComponent(component));
   }
 
   /**
+   * Use a custom cluster chooser button
+   *
    * @param component is a React Component that takes one required props ```JSX clickHandler``` which is the
    * action handler that happens when the custom chooser button component click event occurs
+   *
    * @example
    * ```JSX
-   * registry.registerClusterChooserComponent((props: { clickHandler: () => {} }) => <MY_CUSTOM_COMPONENT onClick={clickHandler}/>)
+   * import { ClusterChooserProps } from '@kinvolk/headlamp-plugin/lib';
+   *
+   * function MyClusterChooser(props: ClusterChooserProps) {
+   *   return <button onClick={clickHandler}>my chooser</button>;
+   * }
+   *
+   * registry.registerClusterChooser(MyClusterChooser)
    * ```
+   *
+   * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/cluster-chooser/ cluster chooser example}
+   *
    */
-  registerClusterChooserComponent(component: clusterChooserButtonComponent | null) {
+  registerClusterChooser(component: React.ComponentType<ClusterChooserProps> | null) {
+    store.dispatch(setClusterChooserButtonComponent(component));
+  }
+
+  /**
+   * @deprecated Please use registerClusterChooser. This will be removed in headlamp-plugin 0.4.11.
+   */
+  registerClusterChooserComponent(component: React.ComponentType<ClusterChooserProps> | null) {
+    console.log(
+      'registerClusterChooserComponent is deprecated. Please use registerClusterChooser.'
+    );
     store.dispatch(setClusterChooserButtonComponent(component));
   }
 }

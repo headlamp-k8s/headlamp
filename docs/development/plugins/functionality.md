@@ -58,6 +58,11 @@ The plugin registers makes functionality available to plugins in an easy way.
 The idea is to make more and more functionality available to plugins. Here is
 what we have so far:
 
+### Changing The Logo
+
+- API reference for [registerAppLogo](../api/classes/plugin_registry.registry/#registerapplogo)
+- Example plugin shows [How To Change The Logo](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/change-logo)
+
 ### Sidebar Items
 
 ```typescript

@@ -1,6 +1,6 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
 import { Notification } from '../../lib/notification';
-import { clusterChooserButtonComponent, sectionFunc } from '../../plugin/registry';
+import { sectionFunc } from '../../plugin/registry';
 import { SidebarEntry, UIState } from '../reducers/ui';
 
 export const FILTER_RESET = 'FILTER_RESET';
@@ -32,6 +32,10 @@ export interface AppLogoProps {
   /** A class to use on your SVG. */
   className: string;
   [key: string]: any;
+}
+
+export interface ClusterChooserProps {
+  clickHandler: (event?: any) => void;
 }
 
 export interface BrandingProps {
@@ -172,6 +176,8 @@ export function setUINotifications(notifications: Notification[] | Notification)
 export function updateUINotification(dispatchedNotification: Notification[] | Notification) {
   return { type: UI_UPDATE_NOTIFICATION, dispatchedNotification };
 }
-export function setClusterChooserButtonComponent(component: clusterChooserButtonComponent | null) {
+export function setClusterChooserButtonComponent(
+  component: React.ComponentType<ClusterChooserProps> | null
+) {
   return { type: UI_SET_CLUSTER_CHOOSER_BUTTON, component };
 }

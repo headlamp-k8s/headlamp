@@ -2,7 +2,7 @@ import { IconProps } from '@iconify/react';
 import _ from 'lodash';
 import { Notification } from '../../lib/notification';
 import themesConf, { setTheme } from '../../lib/themes';
-import { clusterChooserButtonComponent, sectionFunc } from '../../plugin/registry';
+import { ClusterChooserProps, sectionFunc } from '../../plugin/registry';
 import {
   Action,
   BrandingProps,
@@ -71,7 +71,7 @@ export interface UIState {
   branding: BrandingProps;
   pluginsLoaded: boolean;
   notifications: Notification[];
-  clusterChooserButtonComponent?: clusterChooserButtonComponent | null;
+  clusterChooserButtonComponent?: React.ComponentType<ClusterChooserProps> | null;
 }
 
 function setInitialSidebarOpen() {

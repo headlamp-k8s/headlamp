@@ -1,10 +1,10 @@
 import { Headlamp, Plugin, Registry } from '@kinvolk/headlamp-plugin/lib';
 import React from 'react';
 
-class ClusterChooserButtonOverridePlugin extends Plugin {
+class ClusterChooser extends Plugin {
   initialize(registry: Registry) {
-    console.log('clusterbuttonoverride initialized');
-    registry.registerClusterChooserComponent((props: any) => {
+    console.log('clusterchooser initialized');
+    registry.registerClusterChooser((props: any) => {
       const { clickHandler } = props;
       return <button onClick={clickHandler}>Chooser</button>;
     });
@@ -12,4 +12,4 @@ class ClusterChooserButtonOverridePlugin extends Plugin {
   }
 }
 
-Headlamp.registerPlugin('clusterbuttonoverride', new ClusterChooserButtonOverridePlugin());
+Headlamp.registerPlugin('clusterchooser', new ClusterChooser());
