@@ -7,6 +7,7 @@ export class Notification {
   seen: boolean = false;
   url?: string;
   date: number | string = new Date().getTime();
+  deleted: boolean = false;
 
   constructor(message?: string, date?: number | string) {
     if (message) {
