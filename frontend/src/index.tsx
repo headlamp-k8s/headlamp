@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(<App />, document.getElementById('root'));
 
 if (process.env.NODE_ENV !== 'production') {
+  let alreadyWarned = false;
   let axe = require('@axe-core/react');
   if (axe.default) {
     axe = axe.default; //changed to esm module sometimes?
@@ -16,10 +17,13 @@ if (process.env.NODE_ENV !== 'production') {
     axe(React, ReactDOM, 500, undefined, undefined, (results: typeof axeCore.AxeResults) => {
       if (results.violations.length > 0) {
         console.error('axe results', results);
-        alert(
-          'Accessibility issues found. See developer console. ' +
-            '`REACT_APP_SKIP_A11Y=true make run-frontend` to disable alert.'
-        );
+        if (!alreadyWarned) {
+          alreadyWarned = true;
+          alert(
+            'Accessibility issues found. See developer console. ' +
+              '`REACT_APP_SKIP_A11Y=true make run-frontend` to disable alert.'
+          );
+        }
       }
     }).then(() => {
       // Show the logs at end of other console logs (and after the alert).
