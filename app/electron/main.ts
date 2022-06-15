@@ -363,7 +363,6 @@ function startElecron() {
         preload: `${__dirname}/preload.js`,
       },
     });
-    mainWindow.loadURL(startUrl);
 
     mainWindow.webContents.setWindowOpenHandler(({ url }) => {
       // allow all urls starting with app startUrl to open in electron
@@ -466,6 +465,9 @@ function startElecron() {
       serverProcess = startServer();
       attachServerEventHandlers(serverProcess);
     }
+
+    // Finally load the frontend
+    mainWindow.loadURL(startUrl);
   }
 
   if (disableGPU) {
