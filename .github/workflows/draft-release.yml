@@ -20,24 +20,24 @@ jobs:
           draft: true
           name: ${{ github.event.inputs.releaseName }}
           body: |
-            ## Enhancements:
+            ## ✨ Enhancements:
             * Feature 1
             * Feature 2
 
-            ## Bug fixes
+            ## 🐞 Bug fixes
             * Fix 1
             * Fix 2
 
-            ## Development
+            ## 💻 Development
             * Development experience related change 1
             * Development experience related change 2
 
-            ## Documentation
+            ## 📖 Documentation
             * Docs change 1
             * Docs change 2
 
             <!-- end-release-notes -->
-            **Container image:** :whale:  ghcr.io/kinvolk/headlamp:v${{ github.event.inputs.releaseName }}
+            **Container image:** :whale:  [ghcr.io/kinvolk/headlamp:v${{ github.event.inputs.releaseName }}](https://github.com/kinvolk/headlamp/pkgs/container/headlamp)
             **Desktop Apps:**
 
             :penguin:  [Flatpak / Linux (AMD64)](https://flathub.org/apps/details/io.kinvolk.Headlamp)
