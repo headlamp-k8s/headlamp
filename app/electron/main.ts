@@ -1,7 +1,8 @@
 import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
-import { app, BrowserWindow, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
+import find_process from 'find-process';
 import fs from 'fs';
 import { i18n as I18n } from 'i18next';
 import open from 'open';
@@ -39,12 +40,6 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
     ? path.resolve('../backend/headlamp-server')
     : path.join(process.resourcesPath, './headlamp-server');
 
-  const options = { shell: true, detached: false };
-  if (process.platform !== 'win32' && !isDev) {
-    // This makes the child processes a separate group, for easier killing.
-    options.detached = true;
-  }
-
   let serverArgs = [];
   if (!!args.kubeconfig) {
     serverArgs = serverArgs.concat(['--kubeconfig', args.kubeconfig]);
@@ -62,6 +57,12 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
 
   serverArgs = serverArgs.concat(flags);
   console.log('arguments passed to backend server', serverArgs);
+
+  // We run detached but not in shell, otherwise it's hard to make sure the
+  // server process gets killed. When changing these options, please make sure
+  // to test quitting the app in the different platforms and making sure the
+  // server process has been correctly quit.
+  const options = { detached: true };
 
   return spawn(serverFilePath, serverArgs, options);
 }
@@ -91,14 +92,6 @@ function quitServerProcess() {
 
   intentionalQuit = true;
   log.info('stopping server process...');
-  if (process.platform !== 'win32') {
-    // Negative pid because it should kill the whole group of processes:
-    //    https://azimi.me/2014/12/31/kill-child_process-node-js.html
-    process.kill(-serverProcess.pid);
-  } else if (process.platform === 'win32' && serverProcess) {
-    // Otherwise on Windows the process will stick around.
-    execSync('taskkill /pid ' + serverProcess.pid + ' /T /F');
-  }
 
   serverProcess.stdin.destroy();
   // @todo: should we try and end the process a bit more gracefully?
@@ -307,6 +300,24 @@ function setMenu(i18n: I18n) {
   Menu.setApplicationMenu(menu);
 }
 
+async function getRunningHeadlampPIDs() {
+  const processes = await find_process('name', 'headlamp-server.*');
+  if (processes.length === 0) {
+    return null;
+  }
+
+  return processes.map(pInfo => pInfo.pid);
+}
+
+function killProcess(pid: number) {
+  if (process.platform === 'win32') {
+    // Otherwise on Windows the process will stick around.
+    execSync('taskkill /pid ' + pid + ' /T /F');
+  } else {
+    process.kill(pid, 'SIGHUP');
+  }
+}
+
 function startElecron() {
   log.transports.file.level = 'info';
   log.info('App starting...');
@@ -323,7 +334,7 @@ function startElecron() {
 
   setMenu(i18n);
 
-  function createWindow() {
+  async function createWindow() {
     let frontendPath = '';
     if (isDev) {
       frontendPath = path.resolve('..', 'frontend', 'build', 'index.html');
@@ -352,7 +363,6 @@ function startElecron() {
         preload: `${__dirname}/preload.js`,
       },
     });
-    mainWindow.loadURL(startUrl);
 
     mainWindow.webContents.setWindowOpenHandler(({ url }) => {
       // allow all urls starting with app startUrl to open in electron
@@ -383,9 +393,81 @@ function startElecron() {
     });
 
     if (!useExternalServer) {
+      const runningHeadlamp = await getRunningHeadlampPIDs();
+      let shouldWaitForKill = true;
+
+      if (!!runningHeadlamp) {
+        const resp = dialog.showMessageBoxSync(mainWindow, {
+          // Avoiding mentioning Headlamp here because it may run under a different name depending on branding (plugins).
+          title: i18n.t('Another process is running'),
+          message: i18n.t(
+            'Looks like another process is already running. Continue by terminating that process automatically, or quit?'
+          ),
+          type: 'question',
+          buttons: [i18n.t('Continue'), i18n.t('Quit')],
+        });
+
+        if (resp === 0) {
+          runningHeadlamp.forEach(pid => {
+            try {
+              killProcess(pid);
+            } catch (e) {
+              console.log(`Failed to quit headlamp-servere:`, e.message);
+              shouldWaitForKill = false;
+            }
+          });
+        } else {
+          mainWindow.close();
+          return;
+        }
+      }
+
+      // If we reach here, then we attempted to kill headlamp-server. Let's make sure it's killed
+      // before starting our own, or else we may end up in a race condition (failing to start the
+      // new one before the existing one is fully killed).
+      if (!!runningHeadlamp && shouldWaitForKill) {
+        let stillRunning = true;
+        let timeWaited = 0;
+        const maxWaitTime = 3000; // ms
+        // @todo: Use an iterative back-off strategy for the wait (so we can start by waiting for shorter times).
+        for (let tries = 1; timeWaited < maxWaitTime && stillRunning; tries++) {
+          console.debug(
+            `Checking if Headlamp is still running after we asked it to be killed; ${tries} ${timeWaited}/${maxWaitTime}ms wait.`
+          );
+
+          // Wait (10 * powers of 2) ms with a max of 250 ms
+          const waitTime = Math.min(10 * tries ** 2, 250); // ms
+          await new Promise(f => setTimeout(f, waitTime));
+
+          timeWaited += waitTime;
+
+          stillRunning = !!(await getRunningHeadlampPIDs());
+          console.debug(stillRunning ? 'Still running...' : 'No longer running!');
+        }
+      }
+
+      // If we couldn't kill the process, warn the user and quit.
+      const processes = await getRunningHeadlampPIDs();
+      if (!!processes) {
+        dialog.showMessageBoxSync({
+          type: 'warning',
+          title: i18n.t('Failed to quit the other running process'),
+          message: i18n.t(
+            `Could not quit the other running process, PIDs: {{ process_list }}. Please stop that process and relaunch the app.`,
+            { process_list: processes }
+          ),
+        });
+
+        mainWindow.close();
+        return;
+      }
+
       serverProcess = startServer();
       attachServerEventHandlers(serverProcess);
     }
+
+    // Finally load the frontend
+    mainWindow.loadURL(startUrl);
   }
 
   if (disableGPU) {
