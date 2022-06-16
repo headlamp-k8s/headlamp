@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { SidebarEntry } from '../../redux/reducers/ui';
 import store from '../../redux/stores/store';
 
@@ -124,7 +125,8 @@ function prepareRoutes(t: (arg: string) => string) {
   // @todo: Find a better way to avoid modifying the objects in LIST_ITEMS.
   const routes: SidebarEntry[] = JSON.parse(JSON.stringify(LIST_ITEMS));
 
-  for (const item of Object.values(items)) {
+  for (const i of Object.values(items)) {
+    const item = _.cloneDeep(i);
     const parent = item.parent ? routes.find(({ name }) => name === item.parent) : null;
     let placement = routes;
     if (parent) {
