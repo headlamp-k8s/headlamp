@@ -1,16 +1,19 @@
-import { Typography } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import MuiDialog, { DialogProps as MuiDialogProps } from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import MuiDialogTitle, { DialogTitleProps } from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 export interface OurDialogTitleProps extends DialogTitleProps {
   /** true if you want the title focused in the dialog */
   focusTitle?: boolean;
+  buttons?: React.ReactNode[];
 }
 
 /**
@@ -22,7 +25,8 @@ export interface OurDialogTitleProps extends DialogTitleProps {
  * reading can begin.
  */
 export function DialogTitle(props: OurDialogTitleProps) {
-  const { children, focusTitle, ...other } = props;
+  const { children, focusTitle, buttons, ...other } = props;
+
   const focusedRef = React.useCallback(node => {
     if (node !== null) {
       if (focusTitle) {
@@ -33,18 +37,23 @@ export function DialogTitle(props: OurDialogTitleProps) {
   }, []);
 
   return (
-    <MuiDialogTitle disableTypography {...other}>
-      <Typography
-        ref={focusedRef}
-        variant="h1"
-        style={{
-          fontSize: '1.25rem',
-          fontWeight: 500,
-          lineHeight: 1.6,
-        }}
-      >
-        {children}
-      </Typography>
+    <MuiDialogTitle style={{ display: 'flex' }} disableTypography {...other}>
+      <Grid container justifyContent="space-between" alignItems="center">
+        <Grid item>
+          <Typography
+            ref={focusedRef}
+            variant="h1"
+            style={{
+              fontSize: '1.25rem',
+              fontWeight: 500,
+              lineHeight: 1.6,
+            }}
+          >
+            {children}
+          </Typography>
+        </Grid>
+        <Grid item>{buttons && buttons.length > 0 && <Box>{buttons}</Box>}</Grid>
+      </Grid>
     </MuiDialogTitle>
   );
 }
