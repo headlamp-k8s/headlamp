@@ -33,7 +33,7 @@ export function DialogTitle(props: OurDialogTitleProps) {
   }, []);
 
   return (
-    <MuiDialogTitle {...other}>
+    <MuiDialogTitle disableTypography {...other}>
       <Typography
         ref={focusedRef}
         variant="h1"
