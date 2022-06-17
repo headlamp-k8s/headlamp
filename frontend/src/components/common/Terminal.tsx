@@ -1,10 +1,7 @@
 import 'xterm/css/xterm.css';
 import { Box } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Dialog, { DialogProps } from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
+import { DialogProps } from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { Terminal as XTerminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import Pod from '../../lib/k8s/pod';
+import { Dialog } from './Dialog';
 
 const decoder = new TextDecoder('utf-8');
 const encoder = new TextEncoder();
@@ -350,8 +348,13 @@ export default function Terminal(props: TerminalProps) {
   }
 
   return (
-    <Dialog maxWidth="lg" scroll="paper" fullWidth onClose={onClose} keepMounted {...other}>
-      <DialogTitle>{t('Terminal: {{ itemName }}', { itemName: item.metadata.name })}</DialogTitle>
+    <Dialog
+      onClose={onClose}
+      keepMounted
+      withFullScreen
+      title={t('Terminal: {{ itemName }}', { itemName: item.metadata.name })}
+      {...other}
+    >
       <DialogContent className={classes.dialogContent}>
         <Box>
           <FormControl className={classes.containerFormControl}>
@@ -381,11 +384,6 @@ export default function Terminal(props: TerminalProps) {
           />
         </Box>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="primary">
-          {t('frequent|Close')}
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 }
