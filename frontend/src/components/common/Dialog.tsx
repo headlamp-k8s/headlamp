@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import MuiDialog, { DialogProps as MuiDialogProps } from '@material-ui/core/Dialog';
@@ -6,6 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import MuiDialogTitle, { DialogTitleProps } from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -103,5 +106,49 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
         </DialogActions>
       </MuiDialog>
     </div>
+  );
+}
+
+export interface DialogProps extends MuiDialogProps {
+  withFullScreen?: boolean;
+}
+
+export function Dialog(props: DialogProps) {
+  const { title, withFullScreen = false, children, ...other } = props;
+  const [fullScreen, setFullScreen] = React.useState(false);
+  const { t } = useTranslation('frequent');
+
+  function handleFullScreen() {
+    setFullScreen(fs => !fs);
+  }
+
+  function FullScreenButton() {
+    if (!withFullScreen) {
+      return null;
+    }
+
+    return (
+      <Tooltip title={t('Toggle fullscreen')}>
+        <IconButton aria-label={t('Toggle fullscreen')} onClick={handleFullScreen}>
+          <Icon icon={`mdi:${fullScreen ? 'fullscreen-exit' : 'fullscreen'}`} />
+        </IconButton>
+      </Tooltip>
+    );
+  }
+
+  return (
+    <MuiDialog
+      maxWidth="lg"
+      scroll="paper"
+      fullWidth
+      keepMounted
+      fullScreen={fullScreen}
+      {...other}
+    >
+      {(!!title || withFullScreen) && (
+        <DialogTitle buttons={[<FullScreenButton />]}>{title}</DialogTitle>
+      )}
+      {children}
+    </MuiDialog>
   );
 }
