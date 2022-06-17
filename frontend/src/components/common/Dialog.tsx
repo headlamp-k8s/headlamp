@@ -1,6 +1,6 @@
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Dialog, { DialogProps } from '@material-ui/core/Dialog';
+import MuiDialog, { DialogProps as MuiDialogProps } from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -49,7 +49,7 @@ export function DialogTitle(props: OurDialogTitleProps) {
   );
 }
 
-export interface ConfirmDialogProps extends DialogProps {
+export interface ConfirmDialogProps extends MuiDialogProps {
   title: string;
   description: string;
   onConfirm: () => void;
@@ -74,7 +74,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
 
   return (
     <div>
-      <Dialog
+      <MuiDialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
@@ -92,7 +92,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
             {t('Yes')}
           </Button>
         </DialogActions>
-      </Dialog>
+      </MuiDialog>
     </div>
   );
 }
