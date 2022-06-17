@@ -2,6 +2,7 @@ const externalModules = {
   '@material-ui/core': 'pluginLib.MuiCore',
   '@material-ui/styles': 'pluginLib.MuiStyles',
   react: 'pluginLib.React',
+  'react/jsx-runtime': 'pluginLib.ReactJSX',
   recharts: 'pluginLib.Recharts',
   'react-router': 'pluginLib.ReactRouter',
   'react-redux': 'pluginLib.ReactRedux',
@@ -57,13 +58,26 @@ module.exports = {
         use: {
           loader: require.resolve('babel-loader'),
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-typescript', '@babel/preset-react'].map(
-              require.resolve
-            ),
-            plugins: [
-              '@babel/plugin-proposal-class-properties',
-              '@babel/plugin-transform-react-jsx',
-            ].map(require.resolve),
+            presets: ["@babel/preset-env", "@babel/preset-typescript"]
+              .map(require.resolve)
+              .concat([
+                [
+                  require.resolve("@babel/preset-react"),
+                  {
+                    runtime: "automatic",
+                  },
+                ],
+              ]),
+            plugins: ["@babel/plugin-proposal-class-properties"]
+              .map(require.resolve)
+              .concat([
+                [
+                  require.resolve("@babel/plugin-transform-react-jsx"),
+                  {
+                    runtime: "automatic",
+                  },
+                ],
+              ]),
           },
         },
       },

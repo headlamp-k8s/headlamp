@@ -14,8 +14,6 @@ npm start
 
 The main code for the plugin is in [src/index.tsx](src/index.tsx).
 
-<img src="" />
-
 ## Further information
 
 See:

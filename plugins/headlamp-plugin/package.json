@@ -8,7 +8,7 @@
     "build": "cd ../../frontend && tsc --build ./tsconfig.plugins.json"
   },
   "dependencies": {
-    "@babel/cli": "^7.14.5",
+    "@babel/cli": "^7.17.10",
     "@babel/core": "^7.11.1",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-transform-react-jsx": "^7.10.4",
@@ -20,7 +20,7 @@
     "@material-ui/core": "^4.12.3",
     "@svgr/webpack": "^6.2.1",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "env-paths": "^2.2.1",
     "eslint": "^7.32.0",
