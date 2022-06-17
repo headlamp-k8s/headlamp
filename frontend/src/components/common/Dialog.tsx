@@ -136,6 +136,21 @@ export function Dialog(props: DialogProps) {
     );
   }
 
+  function CloseButton() {
+    return (
+      <Tooltip title={t('Close')}>
+        <IconButton
+          aria-label={t('fullscreen')}
+          onClick={() => {
+            props.onClose && props.onClose({}, 'escapeKeyDown');
+          }}
+        >
+          <Icon icon="mdi:close" />
+        </IconButton>
+      </Tooltip>
+    );
+  }
+
   return (
     <MuiDialog
       maxWidth="lg"
@@ -146,7 +161,7 @@ export function Dialog(props: DialogProps) {
       {...other}
     >
       {(!!title || withFullScreen) && (
-        <DialogTitle buttons={[<FullScreenButton />]}>{title}</DialogTitle>
+        <DialogTitle buttons={[<FullScreenButton />, <CloseButton />]}>{title}</DialogTitle>
       )}
       {children}
     </MuiDialog>
