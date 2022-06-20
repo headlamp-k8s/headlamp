@@ -1,4 +1,8 @@
-import { AppLogoProps, Headlamp, Plugin, Registry } from '@kinvolk/headlamp-plugin/lib';
+// If you just want a text logo, these two lines are all you need.
+// import { registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
+// registerAppLogo(() => <p>my logo</p>);
+
+import { AppLogoProps, registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
 import { SvgIcon } from '@material-ui/core';
 import React from 'react';
 import LogoWithTextLight from './icon-large-light.svg';
@@ -7,6 +11,9 @@ import LogoLight from './icon-small-light.svg';
 /**
  * A simple logo using two different SVG files.
  * One for the small logo (used in mobile view), and a larger one used in desktop view.
+ *
+ * The main benefit of a SVG logo is that
+ * it's easier to make it look good with light and dark themes.
  */
 function SimpleLogo(props: AppLogoProps) {
   const { logoType, className } = props;
@@ -35,24 +42,15 @@ function ReactiveLogo(props: AppLogoProps) {
     return <p>small light theme logo</p>;
   } else if (logoType === 'large' && themeName === 'dark') {
     // The large logo is shown on tablet and desktop views.
-    return <p>large light theme logo</p>;
+    return <p>large dark theme logo</p>;
   } else if (logoType === 'large' && themeName === 'light') {
     return <p>large light theme logo</p>;
   }
 }
 
-class MyPlugin extends Plugin {
-  initialize(registry: Registry) {
-    console.log('change-logo initialized');
-
-    const showSimple = true;
-    if (showSimple) {
-      registry.registerAppLogo(SimpleLogo);
-    } else {
-      registry.registerAppLogo(ReactiveLogo);
-    }
-    return true;
-  }
+const showSimple = true;
+if (showSimple) {
+  registerAppLogo(SimpleLogo);
+} else {
+  registerAppLogo(ReactiveLogo);
 }
-
-Headlamp.registerPlugin('change-logo', new MyPlugin());

@@ -58,26 +58,22 @@ module.exports = {
         use: {
           loader: require.resolve('babel-loader'),
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-typescript"]
-              .map(require.resolve)
-              .concat([
-                [
-                  require.resolve("@babel/preset-react"),
-                  {
-                    runtime: "automatic",
-                  },
-                ],
-              ]),
-            plugins: ["@babel/plugin-proposal-class-properties"]
-              .map(require.resolve)
-              .concat([
-                [
-                  require.resolve("@babel/plugin-transform-react-jsx"),
-                  {
-                    runtime: "automatic",
-                  },
-                ],
-              ]),
+            presets: ['@babel/preset-env', '@babel/preset-typescript'].map(require.resolve).concat([
+              [
+                require.resolve('@babel/preset-react'),
+                {
+                  runtime: 'automatic',
+                },
+              ],
+            ]),
+            plugins: ['@babel/plugin-proposal-class-properties'].map(require.resolve).concat([
+              [
+                require.resolve('@babel/plugin-transform-react-jsx'),
+                {
+                  runtime: 'automatic',
+                },
+              ],
+            ]),
           },
         },
       },

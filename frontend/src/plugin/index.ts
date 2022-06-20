@@ -8,7 +8,15 @@ import helpers from '../helpers';
 import { UI_RESET_PLUGIN_VIEWS } from '../redux/actions/actions';
 import store from '../redux/stores/store';
 import { Headlamp, Plugin } from './lib';
-import Registry, { registerAppLogo } from './registry';
+import Registry, {
+  registerAppBarAction,
+  registerAppLogo,
+  registerClusterChooser,
+  registerDetailsViewHeaderAction,
+  registerDetailsViewSection,
+  registerRoute,
+  registerSidebarItem,
+} from './registry';
 
 window.pluginLib = {
   ApiProxy: require('../lib/k8s/apiProxy'),
@@ -30,9 +38,13 @@ window.pluginLib = {
   Notification: require('../lib/notification'),
   Headlamp,
   Plugin,
-  Registry,
+  registerAppBarAction,
   registerAppLogo,
-  // registry: require('../lib/'),
+  registerClusterChooser,
+  registerDetailsViewHeaderAction,
+  registerDetailsViewSection,
+  registerRoute,
+  registerSidebarItem,
 };
 
 // @todo: should window.plugins be private?
