@@ -1,5 +1,6 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
 import React, { ReactElement } from 'react';
+import { AppLogoType } from '../../components/Sidebar/AppLogo';
 import { Notification } from '../../lib/notification';
 import { sectionFunc } from '../../plugin/registry';
 import { SidebarEntry, UIState } from '../reducers/ui';
@@ -25,22 +26,10 @@ export const UI_PLUGINS_LOADED = 'UI_PLUGINS_LOADED';
 export const UI_BRANDING_SET_APP_LOGO = 'UI_BRANDING_SET_APP_LOGO';
 export const UI_SET_CLUSTER_CHOOSER_BUTTON = 'UI_SET_CLUSTER_CHOOSER_BUTTON';
 
-export interface AppLogoProps {
-  /** The size of the logo. 'small' for in mobile view, and 'large' for tablet and desktop sizes. */
-  logoType: 'small' | 'large';
-  /** User selected theme. */
-  themeName: 'dark' | 'light';
-  /** A class to use on your SVG. */
-  className: string;
-  [key: string]: any;
-}
-
-export type AppLogoType = React.ComponentType<AppLogoProps> | ReactElement | null;
-
 export interface ClusterChooserProps {
   clickHandler: (event?: any) => void;
 }
-export type ClusterChooserType = React.ComponentType<AppLogoProps> | ReactElement | null;
+export type ClusterChooserType = React.ComponentType<ClusterChooserProps> | ReactElement | null;
 
 export interface BrandingProps {
   logo: AppLogoType;

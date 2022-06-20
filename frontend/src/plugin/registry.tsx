@@ -1,9 +1,8 @@
 import React from 'react';
+import { AppLogoProps, AppLogoType } from '../components/Sidebar/AppLogo';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
-  AppLogoProps,
-  AppLogoType,
   ClusterChooserProps,
   ClusterChooserType,
   setAppBarAction,
@@ -155,7 +154,7 @@ export default class Registry {
   /**
    * Add a logo for Headlamp to use instead of the default one.
    *
-   * @param component is a React Component that takes two required props
+   * @param logo is a React Component that takes two required props
    * `logoType` which is a constant string literal that accepts either
    * of the two values `small` or `large` depending on whether
    * the sidebar is in shrink or expanded state so that you can change your logo
@@ -172,8 +171,8 @@ export default class Registry {
    * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/change-logo/ Change Logo Example}
    *
    */
-  registerAppLogo(component: AppLogoType) {
-    store.dispatch(setBrandingAppLogoComponent(component));
+  registerAppLogo(logo: AppLogoType) {
+    store.dispatch(setBrandingAppLogoComponent(logo));
   }
 
   /**
@@ -343,7 +342,7 @@ export function registerDetailsViewSection(sectionName: string, sectionFunc: sec
 /**
  * Add a logo for Headlamp to use instead of the default one.
  *
- * @param component is a React Component that takes two required props
+ * @param logo is a React Component that takes two required props
  * `logoType` which is a constant string literal that accepts either
  * of the two values `small` or `large` depending on whether
  * the sidebar is in shrink or expanded state so that you can change your logo
@@ -360,8 +359,8 @@ export function registerDetailsViewSection(sectionName: string, sectionFunc: sec
  * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/change-logo/ Change Logo Example}
  *
  */
-export function registerAppLogo(component: AppLogoType) {
-  store.dispatch(setBrandingAppLogoComponent(component));
+export function registerAppLogo(logo: AppLogoType) {
+  store.dispatch(setBrandingAppLogoComponent(logo));
 }
 
 /**
@@ -381,19 +380,9 @@ export function registerAppLogo(component: AppLogoType) {
  * registry.registerClusterChooser(MyClusterChooser)
  * ```
  *
- * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/clusterchooser/ cluster chooser example}
+ * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/clusterchooser/ Cluster Chooser example}
  *
  */
 export function registerClusterChooser(component: React.ComponentType<ClusterChooserProps> | null) {
-  store.dispatch(setClusterChooserButtonComponent(component));
-}
-
-/**
- * @deprecated Please use registerClusterChooser. This will be removed in headlamp-plugin 0.4.11.
- */
-export function registerClusterChooserComponent(
-  component: React.ComponentType<ClusterChooserProps> | null
-) {
-  console.log('registerClusterChooserComponent is deprecated. Please use registerClusterChooser.');
   store.dispatch(setClusterChooserButtonComponent(component));
 }
