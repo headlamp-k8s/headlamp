@@ -1,4 +1,5 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
+import React, { ReactElement } from 'react';
 import { Notification } from '../../lib/notification';
 import { sectionFunc } from '../../plugin/registry';
 import { SidebarEntry, UIState } from '../reducers/ui';
@@ -34,12 +35,15 @@ export interface AppLogoProps {
   [key: string]: any;
 }
 
+export type AppLogoType = React.ComponentType<AppLogoProps> | ReactElement | null;
+
 export interface ClusterChooserProps {
   clickHandler: (event?: any) => void;
 }
+export type ClusterChooserType = React.ComponentType<AppLogoProps> | ReactElement | null;
 
 export interface BrandingProps {
-  logo: React.ComponentType<AppLogoProps> | null;
+  logo: AppLogoType;
 }
 export const UI_SET_NOTIFICATIONS = 'UI_SET_NOTIFICATIONS';
 export const UI_UPDATE_NOTIFICATION = 'UI_UPDATE_NOTIFICATION';
@@ -165,7 +169,7 @@ export function setPluginsLoadState(pluginsLoadedState: boolean) {
   return { type: UI_PLUGINS_LOADED, pluginsLoadedState };
 }
 
-export function setBrandingAppLogoComponent(component: React.ComponentType<AppLogoProps> | null) {
+export function setBrandingAppLogoComponent(component: AppLogoType) {
   return { type: UI_BRANDING_SET_APP_LOGO, component };
 }
 

@@ -3,7 +3,9 @@ import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
   AppLogoProps,
+  AppLogoType,
   ClusterChooserProps,
+  ClusterChooserType,
   setAppBarAction,
   setBrandingAppLogoComponent,
   setClusterChooserButtonComponent,
@@ -20,8 +22,8 @@ export interface SectionFuncProps {
   component: (props: { resource: any }) => JSX.Element | null;
 }
 export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | undefined;
-export type { AppLogoProps };
-export type { ClusterChooserProps };
+export type { AppLogoProps, AppLogoType };
+export type { ClusterChooserProps, ClusterChooserType };
 
 export default class Registry {
   /**
@@ -154,29 +156,23 @@ export default class Registry {
    * Add a logo for Headlamp to use instead of the default one.
    *
    * @param component is a React Component that takes two required props
-   * ```JSX logoType``` which is a constant string literal that accepts either
-   * of the two values ```JSX small``` or ```JSX large``` depending on whether
-   * the sidebar is in shrink or expaned state so that you can change your logo
-   * from small to large and the other optional prop is the ```JSX themeName```
+   * `logoType` which is a constant string literal that accepts either
+   * of the two values `small` or `large` depending on whether
+   * the sidebar is in shrink or expanded state so that you can change your logo
+   * from small to large and the other optional prop is the `themeName`
    * which is a string with two values 'light' and 'dark' base on which theme is selected.
    *
    * @example
-   * ```JSX
-   * import { AppLogoProps } from '@kinvolk/headlamp-plugin/lib';
-   *
-   * function MyLogo(props: AppLogoProps) {
-   *   return 'my logo';
-   * }
-   *
-   * register.registerAppLogo(MyLogo)
+   * ```tsx
+   * import { registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
+   * registerAppLogo(<p>my logo</p>)
    * ```
    *
-   * There is a more complete logo example in plugins/examples/change-logo.
-   *
-   * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/change-logo/|change-logo-example}
+   * More complete logo example in plugins/examples/change-logo:
+   * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/change-logo/ Change Logo Example}
    *
    */
-  registerAppLogo(component: React.ComponentType<AppLogoProps> | null) {
+  registerAppLogo(component: AppLogoType) {
     store.dispatch(setBrandingAppLogoComponent(component));
   }
 
@@ -348,29 +344,23 @@ export function registerDetailsViewSection(sectionName: string, sectionFunc: sec
  * Add a logo for Headlamp to use instead of the default one.
  *
  * @param component is a React Component that takes two required props
- * ```JSX logoType``` which is a constant string literal that accepts either
- * of the two values ```JSX small``` or ```JSX large``` depending on whether
- * the sidebar is in shrink or expaned state so that you can change your logo
- * from small to large and the other optional prop is the ```JSX themeName```
+ * `logoType` which is a constant string literal that accepts either
+ * of the two values `small` or `large` depending on whether
+ * the sidebar is in shrink or expanded state so that you can change your logo
+ * from small to large and the other optional prop is the `themeName`
  * which is a string with two values 'light' and 'dark' base on which theme is selected.
  *
  * @example
- * ```JSX
- * import { AppLogoProps } from '@kinvolk/headlamp-plugin/lib';
- *
- * function MyLogo(props: AppLogoProps) {
- *   return 'my logo';
- * }
- *
- * register.registerAppLogo(MyLogo)
+ * ```tsx
+ * import { registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
+ * registerAppLogo(<p>my logo</p>)
  * ```
  *
- * There is a more complete logo example in plugins/examples/change-logo.
- *
- * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/change-logo/|change-logo-example}
+ * More complete logo example in plugins/examples/change-logo:
+ * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/change-logo/ Change Logo Example}
  *
  */
-export function registerAppLogo(component: React.ComponentType<AppLogoProps> | null) {
+export function registerAppLogo(component: AppLogoType) {
   store.dispatch(setBrandingAppLogoComponent(component));
 }
 

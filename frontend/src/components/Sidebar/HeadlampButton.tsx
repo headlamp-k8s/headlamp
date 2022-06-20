@@ -2,6 +2,7 @@ import { SvgIcon } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { isValidElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getThemeName } from '../../lib/themes';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -67,11 +68,17 @@ export default function HeadlampButton({ open, onToggleOpen, mobileOnly }: Headl
           !arePluginsLoaded ? (
             <EmptyContent />
           ) : PluginAppLogoComponent ? (
-            <PluginAppLogoComponent
-              logoType={open ? 'large' : 'small'}
-              themeName={getThemeName()}
-              className={classes.logo}
-            />
+            isValidElement(PluginAppLogoComponent) ? (
+              // If it's an element, just use it.
+              PluginAppLogoComponent
+            ) : (
+              // It is a component, so we make it here.
+              <PluginAppLogoComponent
+                logoType={open ? 'large' : 'small'}
+                themeName={getThemeName()}
+                className={classes.logo}
+              />
+            )
           ) : (
             <SvgIcon
               className={classes.logo}

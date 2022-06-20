@@ -1,6 +1,7 @@
 // If you just want a text logo, these two lines are all you need.
+//
 // import { registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
-// registerAppLogo(() => <p>my logo</p>);
+// registerAppLogo(() => <p>My Logo</p>);
 
 import { AppLogoProps, registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
 import { SvgIcon } from '@material-ui/core';
@@ -48,9 +49,11 @@ function ReactiveLogo(props: AppLogoProps) {
   }
 }
 
-const showSimple = true;
-if (showSimple) {
+const show = 'simple';
+if (show === 'simple') {
   registerAppLogo(SimpleLogo);
+} else if (show === 'text') {
+  registerAppLogo(<p>My Logo</p>);
 } else {
   registerAppLogo(ReactiveLogo);
 }
