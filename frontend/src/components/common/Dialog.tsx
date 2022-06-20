@@ -64,15 +64,24 @@ export function DialogTitle(props: OurDialogTitleProps) {
 
 export interface DialogProps extends MuiDialogProps {
   withFullScreen?: boolean;
+  onFullScreenToggled?: (isFullScreen: boolean) => void;
 }
 
 export function Dialog(props: DialogProps) {
-  const { title, withFullScreen = false, children, ...other } = props;
+  const { title, withFullScreen = false, children, onFullScreenToggled, ...other } = props;
   const [fullScreen, setFullScreen] = React.useState(false);
   const { t } = useTranslation('frequent');
 
   function handleFullScreen() {
-    setFullScreen(fs => !fs);
+    setFullScreen(fs => {
+      const newFullScreenState = !fs;
+
+      if (!!onFullScreenToggled) {
+        onFullScreenToggled(newFullScreenState);
+      }
+
+      return newFullScreenState;
+    });
   }
 
   function FullScreenButton() {
