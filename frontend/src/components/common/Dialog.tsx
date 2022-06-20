@@ -1,10 +1,6 @@
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import MuiDialog, { DialogProps as MuiDialogProps } from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import MuiDialogTitle, { DialogTitleProps } from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,6 +8,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+// We export the ConfirmDialog from here because it was declared in this file before being
+// moved to its own.
+export { ConfirmDialog } from './ConfirmDialog';
+export type { ConfirmDialogProps } from './ConfirmDialog';
 
 export interface OurDialogTitleProps extends DialogTitleProps {
   /** true if you want the title focused in the dialog */
@@ -58,54 +59,6 @@ export function DialogTitle(props: OurDialogTitleProps) {
         <Grid item>{buttons && buttons.length > 0 && <Box>{buttons}</Box>}</Grid>
       </Grid>
     </MuiDialogTitle>
-  );
-}
-
-export interface ConfirmDialogProps extends MuiDialogProps {
-  title: string;
-  description: string;
-  onConfirm: () => void;
-  handleClose: () => void;
-}
-
-export function ConfirmDialog(props: ConfirmDialogProps) {
-  const { onConfirm, open, handleClose, title, description } = props;
-  const { t } = useTranslation('frequent');
-
-  function onConfirmationClicked() {
-    handleClose();
-    onConfirm();
-  }
-
-  const focusedRef = React.useCallback(node => {
-    if (node !== null) {
-      node.setAttribute('tabindex', '-1');
-      node.focus();
-    }
-  }, []);
-
-  return (
-    <div>
-      <MuiDialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-        <DialogContent ref={focusedRef}>
-          <DialogContentText id="alert-dialog-description">{description}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            {t('No')}
-          </Button>
-          <Button onClick={onConfirmationClicked} color="primary">
-            {t('Yes')}
-          </Button>
-        </DialogActions>
-      </MuiDialog>
-    </div>
   );
 }
 
