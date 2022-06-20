@@ -31,6 +31,13 @@
         "headlamp"
       ]
     },
+    "nsis": {
+      "deleteAppDataOnUninstall": true,
+      "runAfterFinish": true,
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    },
     "linux": {
       "target": [
         {
