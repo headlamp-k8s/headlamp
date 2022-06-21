@@ -1,10 +1,9 @@
 import React from 'react';
+import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
 import { AppLogoProps, AppLogoType } from '../components/Sidebar/AppLogo';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
-  ClusterChooserProps,
-  ClusterChooserType,
   setAppBarAction,
   setBrandingAppLogoComponent,
   setClusterChooserButtonComponent,

@@ -1,5 +1,5 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
-import React, { ReactElement } from 'react';
+import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
 import { AppLogoType } from '../../components/Sidebar/AppLogo';
 import { Notification } from '../../lib/notification';
 import { sectionFunc } from '../../plugin/registry';
@@ -25,11 +25,6 @@ export const UI_RESET_PLUGIN_VIEWS = 'UI_RESET_PLUGIN_VIEWS';
 export const UI_PLUGINS_LOADED = 'UI_PLUGINS_LOADED';
 export const UI_BRANDING_SET_APP_LOGO = 'UI_BRANDING_SET_APP_LOGO';
 export const UI_SET_CLUSTER_CHOOSER_BUTTON = 'UI_SET_CLUSTER_CHOOSER_BUTTON';
-
-export interface ClusterChooserProps {
-  clickHandler: (event?: any) => void;
-}
-export type ClusterChooserType = React.ComponentType<ClusterChooserProps> | ReactElement | null;
 
 export interface BrandingProps {
   logo: AppLogoType;
@@ -169,8 +164,6 @@ export function setUINotifications(notifications: Notification[] | Notification)
 export function updateUINotification(dispatchedNotification: Notification[] | Notification) {
   return { type: UI_UPDATE_NOTIFICATION, dispatchedNotification };
 }
-export function setClusterChooserButtonComponent(
-  component: React.ComponentType<ClusterChooserProps> | null
-) {
+export function setClusterChooserButtonComponent(component: ClusterChooserType) {
   return { type: UI_SET_CLUSTER_CHOOSER_BUTTON, component };
 }
