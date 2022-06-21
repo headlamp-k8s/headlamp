@@ -93,6 +93,10 @@ function quitServerProcess() {
   intentionalQuit = true;
   log.info('stopping server process...');
 
+  if (!serverProcess) {
+    return;
+  }
+
   serverProcess.stdin.destroy();
   // @todo: should we try and end the process a bit more gracefully?
   //       What happens if the kill signal doesn't kill it?
