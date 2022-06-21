@@ -1,9 +1,9 @@
+import helpers from '../helpers';
 /**
  * The lib.ts file should carry the bits to be used by plugins whereas
  * the index.ts should have the functions that Headlamp itself needs for
  * loading the plugins.
  */
-
 /**
  * ## Simple plugin example
  *
@@ -104,8 +104,25 @@ declare global {
       [pluginId: string]: Plugin;
     };
     registerPlugin: (pluginId: string, pluginObj: Plugin) => void;
+    desktopApi: any;
   }
 }
+
+/**
+ * The members of AppMenu should be the same as the options for the MenuItem in https://www.electronjs.org/docs/latest/api/menu-item
+ * except for the "submenu" (which is the AppMenu type) and "click" (which is not supported here, use the
+ * "url" field instead).
+ */
+export interface AppMenu {
+  /** A URL to open (if not starting with http, then it'll be opened in the external browser) */
+  url?: string;
+  /** The submenus of this menu */
+  submenu?: AppMenu[];
+  /** Any other members from Electron's MenuItem. */
+  [key: string]: any;
+}
+
+let currentAppMenus: AppMenu[] | null = null;
 
 /**
  * This class is a more convenient way for plugins to call registerPlugin in order to register
@@ -152,6 +169,28 @@ export abstract class Headlamp {
       console.error(e);
     });
   }
+
+  /**
+   * Changes the app menu.
+   * If Headlamp is not running as a desktop app, then this method prints an error and doesn't do anything.
+   *
+   * @param appMenuFunc A function that receives the current app menu configuration and a new one. If the function returns null, the menu is not changed.
+   */
+  static setAppMenu(appMenuFunc: (currentAppMenuSpec: AppMenu[] | null) => AppMenu[] | null) {
+    if (!helpers.isElectron()) {
+      console.error('Cannot set app menu: not running as a desktop app!');
+      return;
+    }
+
+    // Update our (renderer) local copy
+    currentAppMenus = appMenuFunc(currentAppMenus);
+    window.desktopApi.send('setMenu', currentAppMenus);
+  }
 }
+
+window.desktopApi?.receive('currentMenu', (currentMenus: AppMenu[]) => {
+  console.debug('Received current menu config from app', currentMenus);
+  currentAppMenus = currentMenus;
+});
 
 window.registerPlugin = Headlamp.registerPlugin;
