@@ -3,7 +3,7 @@ title: Plugins Functionality
 linktitle: Functionality
 ---
 
-Headlamp's plugins exist for changing or adding functionlity related to
+Headlamp's plugins exist for changing or adding functionality related to
 the user interface and experience.
 
 ## Plugins Lib
@@ -37,7 +37,7 @@ These are:
 * recharts
 
 Thus, plugins only need to install dependencies that are not yet provided by Headlamp.
-Yet, if any dependencies already covered by Headlamp are intalled by the plugins, you
+Yet, if any dependencies already covered by Headlamp are installed by the plugins, you
 just need to make sure they are te same version that Headlamp supports, as these will
 not be bundled when [building the plugin](../building.md).
 Particularly, the mentioned modules will be replaced by their version that's included
@@ -51,7 +51,7 @@ way `const React = window.pluginLib.React`, but this is not longer needed.
 Apart from the modules mentioned above, Headlamp also adds an important method
 for registering plugins (`Headlamp.registerPlugin`).
 
-## Funcionality
+## Functionality
 
 The plugin registers makes functionality available to plugins in an easy way.
 
@@ -60,7 +60,7 @@ what we have so far:
 
 ### Changing The Logo
 
-- API reference for [registerAppLogo](../api/classes/plugin_registry.registry/#registerapplogo)
+- API reference for [registerAppLogo](../api/modules/plugin_registry/#registerapplogo)
 - Example plugin shows [How To Change The Logo](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/change-logo)
 
 ### Sidebar Items
@@ -88,6 +88,10 @@ whether the URL we are using for this entry should be prefixed with the
 current cluster URL or not. Most cluster related actions should have URLs
 that are prefixed by the cluster name and that's managed automatically
 with this option.
+
+- API reference for [registerSidebarItem](../api/modules/plugin_registry/#registerSidebarItem)
+- Example plugin shows [How To add to the sidebar](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar)
+
 
 ### Routes
 
@@ -122,6 +126,9 @@ case the URL produced for it will have the cluster prefix). By default it is `fa
 name of the sidebar).
 * `component`: The component to render in Headlamp's main area.
 
+- API reference for [registerRoute](../api/modules/plugin_registry/#registerRoute)
+- Example plugin shows [How To Register a Route](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar)
+
 ### Details Views' Header Actions
 
 ```typescript
@@ -143,6 +150,9 @@ The arguments are as follows:
 * `actionFunc`: A function that takes an item and returns an element (or null, if nothing should
 be done).
 
+- API reference for [registerDetailsViewHeaderAction](../api/modules/plugin_registry/#registerDetailsViewHeaderAction)
+
+
 ### App Bar Actions
 
 ```typescript
@@ -156,3 +166,6 @@ The arguments are as follows:
 
 * `actionName`: The name for this action.
 * `actionFunc`: A function that returns an element.
+
+- API reference for [registerAppBarAction](../api/modules/plugin_registry/#registerAppBarAction)
+- Example plugin shows [How To Register an App Bar Action](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/pod-counter)
