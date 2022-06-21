@@ -1,15 +1,5 @@
-import { Headlamp, Plugin, Registry } from '@kinvolk/headlamp-plugin/lib';
-import React from 'react';
+import { ClusterChooserProps, registerClusterChooser } from '@kinvolk/headlamp-plugin/lib';
 
-class ClusterChooser extends Plugin {
-  initialize(registry: Registry) {
-    console.log('clusterchooser initialized');
-    registry.registerClusterChooser((props: any) => {
-      const { clickHandler } = props;
-      return <button onClick={clickHandler}>Chooser</button>;
-    });
-    return true;
-  }
-}
-
-Headlamp.registerPlugin('clusterchooser', new ClusterChooser());
+registerClusterChooser(({ clickHandler }: ClusterChooserProps) => {
+  return <button onClick={clickHandler}>Our very own Chooser</button>;
+});
