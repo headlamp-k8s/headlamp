@@ -186,6 +186,15 @@ export abstract class Headlamp {
     currentAppMenus = appMenuFunc(currentAppMenus);
     window.desktopApi.send('setMenu', currentAppMenus);
   }
+
+  /**
+   * Returns whether Headlamp is running as a desktop app.
+   *
+   * @returns true if Headlamp is running as a desktop app.
+   */
+  static isRunningAsApp() {
+    return helpers.isElectron();
+  }
 }
 
 window.desktopApi?.receive('currentMenu', (currentMenus: AppMenu[]) => {
