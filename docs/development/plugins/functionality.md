@@ -74,6 +74,16 @@ Change the logo (at the top left) with
 - Example plugin shows [How To Change The Logo](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/change-logo)
 - API reference for [registerAppLogo](../api/modules/plugin_registry.md#registerapplogo)
 
+### Cluster Chooser
+
+Change the Cluster Chooser button (in the middle top of the Headlamp app bar) with
+[registerClusterChooser](../api/modules/plugin_registry.md#registerClusterChooser).
+
+![screenshot of the cluster chooser button](./images/clusterchooser.png)
+
+- Example plugin shows [How To Register Cluster Chooser button](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/clusterchooser)
+- API reference for [registerClusterChooser](../api/modules/plugin_registry.md#registerClusterChooser)
+
 ### Details View Header Action
 
 Show a component to the top right area of a detail view

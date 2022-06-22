@@ -1,5 +1,5 @@
 {
-  "name": "@kinvolk/headlamp-cluster-chooser-button-overrider",
+  "name": "@kinvolk/clusterchooser",
   "author": "Kinvolk GmbH <oss@kinvolk.io>",
   "license": "Apache-2.0",
   "version": "0.0.1",
@@ -21,7 +21,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/kinvolk/headlamp.git",
-    "directory": "plugins/examples/pod-counter"
+    "directory": "plugins/examples/clusterchooser"
   },
   "prettier": "@kinvolk/eslint-config/prettier-config",
   "eslintConfig": {
@@ -32,6 +32,6 @@
     ]
   },
   "devDependencies": {
-    "@kinvolk/headlamp-plugin": "^0.4.8"
+    "@kinvolk/headlamp-plugin": "^0.4.9"
   }
 }
