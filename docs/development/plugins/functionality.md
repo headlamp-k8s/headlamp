@@ -14,7 +14,6 @@ modules can be found.
 
 The main ones are:
 * K8s: Kubernetes related functionality
-* Registry: The plugin registry, used to register functionality
 * Headlamp: To register plugins
 * CommonComponents: React components commonly used in the Headlamp UI
 * Notification: This module contains two exported members one is Notification, a class which can be used to prepare notifications that are accepted by headlamp and the other one is setNotificationsInStore it is a dispatcher function which accepts a notification object prepared from the Notification class and when called it brings the notifications from plugin land to headlamp ecosystem so that headlamp can parse the notification and display it.
@@ -45,11 +44,6 @@ in a global objects called `pluginLib`.
 
 Older plugin development guides still asked developers to use e.g. React in the following
 way `const React = window.pluginLib.React`, but this is not longer needed.
-
-### Registration
-
-Apart from the modules mentioned above, Headlamp also adds an important method
-for registering plugins (`Headlamp.registerPlugin`).
 
 ## Functionality
 
@@ -139,7 +133,7 @@ registerDetailsViewHeaderAction(actionName: string,
 This method allows to add a component to the top right area of details views
 (in the area of the screenshot below that's highlighted as yellow).
 
-![screenshot of the header showing two actions](./header_actions_screenshot.png)
+![screenshot of the header showing two actions](./images/header_actions_screenshot.png)
 
 Details views are the views used for displaying information about each
 cluster's resource.
