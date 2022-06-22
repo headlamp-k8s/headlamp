@@ -57,6 +57,9 @@ what we have so far:
 - API reference for [registerAppLogo](../api/modules/plugin_registry/#registerapplogo)
 - Example plugin shows [How To Change The Logo](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/change-logo)
 
+![screenshot of the logo being changed](./images/change-logo.png)
+
+
 ### Sidebar Items
 
 ```typescript
