@@ -14,6 +14,8 @@
     "headlamp",
     "headlamp-plugin",
     "kubernetes",
+    "kubernetes-ui",
+    "kubernetes-debugging",
     "plugins"
   ],
   "prettier": "@kinvolk/eslint-config/prettier-config",
