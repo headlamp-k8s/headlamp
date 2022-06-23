@@ -1,17 +1,26 @@
-# Set up clusters dynamically
+# Example Plugin: Set up clusters dynamically
 
-This is the official TypeScript template for [Headlamp Plugins](https://github.com/kinvolk/headlamp).
+Configure (or update) a cluster dynamically that can then be used throughout Headlamp.
 
-To use this template to start a new plugin with the npx command (comes with Node.js):
+Important: This plugin example only works in the desktop version.
+Dynamically setting up clusters can not be done when Headlamp is run in-cluster.
 
-```sh
-npx create-react-app headlamp-myfancy --template headlamp
+You will need to edit the source code of this plugin to add a cluster.
+
+To run the plugin with [node.js](https://nodejs.org/en/) installed:
+
+```bash
+git clone git@github.com:kinvolk/headlamp.git
+cd headlamp/plugins/examples/cluster-chooser/
+npm install
+npm start
 ```
 
-For more information, please refer to:
+The main code for the plugin is in [src/index.tsx](src/index.tsx).
 
-- [Create React App Custom Templates](https://create-react-app.dev/docs/custom-templates/)
-- [Getting Started](https://kinvolk.io/docs/headlamp/latest/development/plugins/), How to create a new Headlamp plugin.
-- [API Reference](https://kinvolk.io/docs/headlamp/latest/development/api/), API documentation for what you can do
-- [UI Component Storybook](https://kinvolk.io/docs/headlamp/latest/development/storybook/), pre-existing components you can use when creating your plugin.
-- [Plugin Examples](https://kinvolk.io/docs/headlamp/latest/development/plugins/examples/), Example plugins you can look at to see how it's done.
+## Further information
+
+See:
+
+- API documentation for [Headlamp.setCluster](https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/#setCluster)
+- The [getting started documentation for Headlamp plugin development](https://kinvolk.github.io/headlamp/docs/latest/development/plugins/building/)

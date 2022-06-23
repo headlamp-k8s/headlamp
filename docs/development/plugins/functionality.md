@@ -95,6 +95,14 @@ Show a component to the top right area of a detail view
 - No example yet for registerDetailsViewHeaderAction.
 - API reference for [registerDetailsViewHeaderAction](../api/modules/plugin_registry.md#registerDetailsViewHeaderAction)
 
+### Dynamic Clusters
+
+Set a cluster dynamically, rather than have the backend read it from configuration files.
+[Headlamp.setCluster](../api/classes/plugin_lib.headlamp/#setCluster).
+
+- Example plugin shows [How To Dynamically Set a Cluster](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/dynamic-clusters)
+- API reference for [Headlamp.setCluster](../api/classes/plugin_lib.headlamp/#setCluster)
+
 ### Route
 
 Show a component (in Headlamps main area) at a given URL with

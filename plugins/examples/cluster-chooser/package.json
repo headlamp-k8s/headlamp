@@ -1,5 +1,5 @@
 {
-  "name": "@kinvolk/clusterchooser",
+  "name": "@kinvolk/cluster-chooser",
   "author": "Kinvolk GmbH <oss@kinvolk.io>",
   "license": "Apache-2.0",
   "version": "0.0.1",
@@ -21,7 +21,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/kinvolk/headlamp.git",
-    "directory": "plugins/examples/clusterchooser"
+    "directory": "plugins/examples/cluster-chooser"
   },
   "prettier": "@kinvolk/eslint-config/prettier-config",
   "eslintConfig": {
