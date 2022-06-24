@@ -212,12 +212,13 @@ export function DetailsGrid(props: DetailsGridProps) {
 }
 
 interface PageGridProps extends GridProps {
-  sections?: React.ReactNode[];
+  sections?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export function PageGrid(props: PageGridProps) {
   const { sections = [], children = [], ...other } = props;
-  const childrenArray = React.Children.toArray(children).concat(sections);
+  const childrenArray = React.Children.toArray(children).concat(React.Children.toArray(sections));
   return (
     <Grid container spacing={1} justifyContent="flex-start" alignItems="stretch" {...other}>
       {childrenArray.map((section, i) => (
