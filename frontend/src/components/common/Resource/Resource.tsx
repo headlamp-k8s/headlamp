@@ -42,7 +42,7 @@ import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import { MetadataDictGrid, MetadataDisplay } from './MetadataDisplay';
 
-interface ResourceLinkProps extends Omit<LinkProps, 'routeName' | 'params'> {
+export interface ResourceLinkProps extends Omit<LinkProps, 'routeName' | 'params'> {
   name?: string;
   routeName?: string;
   routeParams?: RouteURLProps;
@@ -64,7 +64,7 @@ export function ResourceLink(props: ResourceLinkProps) {
   );
 }
 
-interface MainInfoSectionProps {
+export interface MainInfoSectionProps {
   resource: KubeObject | null;
   headerSection?: ((resource: KubeObject | null) => React.ReactNode) | React.ReactNode;
   title?: string;
@@ -157,7 +157,8 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   );
 }
 
-interface DetailsGridProps extends PropsWithChildren<Omit<MainInfoSectionProps, 'resource'>> {
+export interface DetailsGridProps
+  extends PropsWithChildren<Omit<MainInfoSectionProps, 'resource'>> {
   resourceType: KubeObject;
   name: string;
   namespace?: string;
@@ -211,13 +212,14 @@ export function DetailsGrid(props: DetailsGridProps) {
   );
 }
 
-interface PageGridProps extends GridProps {
-  sections?: React.ReactNode[];
+export interface PageGridProps extends GridProps {
+  sections?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export function PageGrid(props: PageGridProps) {
   const { sections = [], children = [], ...other } = props;
-  const childrenArray = React.Children.toArray(children).concat(sections);
+  const childrenArray = React.Children.toArray(children).concat(React.Children.toArray(sections));
   return (
     <Grid container spacing={1} justifyContent="flex-start" alignItems="stretch" {...other}>
       {childrenArray.map((section, i) => (
@@ -229,7 +231,7 @@ export function PageGrid(props: PageGridProps) {
   );
 }
 
-interface SectionGridProps {
+export interface SectionGridProps {
   items: React.ReactNode[];
   useDivider?: boolean;
 }
@@ -332,7 +334,7 @@ export function SecretField(props: InputProps) {
   );
 }
 
-interface ConditionsTableProps {
+export interface ConditionsTableProps {
   resource: KubeObjectInterface | null;
   showLastUpdate?: boolean;
 }
@@ -397,7 +399,7 @@ export function ConditionsTable(props: ConditionsTableProps) {
   );
 }
 
-interface VolumeMountsProps {
+export interface VolumeMountsProps {
   mounts?:
     | {
         mountPath: string;
@@ -406,7 +408,7 @@ interface VolumeMountsProps {
       }[];
 }
 
-function VolumeMounts(props: VolumeMountsProps) {
+export function VolumeMounts(props: VolumeMountsProps) {
   const { mounts } = props;
   const { t } = useTranslation();
   if (!mounts) {
@@ -434,7 +436,7 @@ function VolumeMounts(props: VolumeMountsProps) {
   );
 }
 
-function LivenessProbes(props: { liveness: KubeContainer['livenessProbe'] }) {
+export function LivenessProbes(props: { liveness: KubeContainer['livenessProbe'] }) {
   const classes = useMetadataDisplayStyles({});
 
   const { liveness } = props;
@@ -624,7 +626,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
   );
 }
 
-interface OwnedPodsSectionProps {
+export interface OwnedPodsSectionProps {
   resource: KubeObjectInterface;
   hideColumns?: PodListProps['hideColumns'];
 }
@@ -659,6 +661,7 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
   const filteredPods = getOwnedPods();
   return <PodListRenderer hideColumns={hideColumns} pods={filteredPods} error={error} />;
 }
+
 export function ContainersSection(props: { resource: KubeObjectInterface | null }) {
   const { resource } = props;
   const { t } = useTranslation('glossary');
