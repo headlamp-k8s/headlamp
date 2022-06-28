@@ -62,9 +62,10 @@
  *
  * Third party Libraries in window.pluginLib that can be used by plugins.
  *
- * - ReactRedux, {@link https://www.npmjs.com/package/@material-ui/core @material-ui/core}
+ * - MuiCore, {@link https://www.npmjs.com/package/@material-ui/core @material-ui/core}
  * - MuiStyles, {@link https://www.npmjs.com/package/@material-ui/styles @material-ui/styles}
  * - React, {@link https://www.npmjs.com/package/react react}
+ * - ReactDOM, {@link https://www.npmjs.com/package/react-dom react-dom}
  * - ReactRedux, {@link https://www.npmjs.com/package/react-redux react-redux}
  * - Iconify, {@link https://www.npmjs.com/package/@iconify/react @iconify/react}
  * - Lodash, {@link https://www.npmjs.com/package/lodash lodash}
@@ -77,9 +78,6 @@
  */
 import { ClusterRequest, setCluster } from '../lib/k8s/apiProxy';
 import Registry from './registry';
-
-// @todo: types for CommonComponents, K8s, and Utils should be put into plugins-pkg.
-//        Because available in window.pluginLib.
 
 /**
  * Plugins should call Headlamp.registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
