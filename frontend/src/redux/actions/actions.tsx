@@ -1,9 +1,11 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
+import { SidebarEntryProps } from '../../components/Sidebar';
 import { AppLogoType } from '../../components/Sidebar/AppLogo';
 import { Notification } from '../../lib/notification';
+import { Route } from '../../lib/router';
 import { sectionFunc } from '../../plugin/registry';
-import { SidebarEntry, UIState } from '../reducers/ui';
+import { UIState } from '../reducers/ui';
 
 export const FILTER_RESET = 'FILTER_RESET';
 export const FILTER_SET_NAMESPACE = 'FILTER_SET_NAMESPACE';
@@ -112,7 +114,7 @@ export function setSidebarVisible(isVisible: SidebarType['isVisible']) {
   return { type: UI_SIDEBAR_SET_VISIBLE, isVisible };
 }
 
-export function setSidebarItem(item: SidebarEntry) {
+export function setSidebarItem(item: SidebarEntryProps) {
   // @todo: Clarify the spec when we port this to Ts.
   if (item.parent === undefined) {
     item['parent'] = null;
@@ -120,8 +122,7 @@ export function setSidebarItem(item: SidebarEntry) {
   return { type: UI_SIDEBAR_SET_ITEM, item };
 }
 
-export function setRoute(routeSpec: any) {
-  // @todo: Define routeSpec later.
+export function setRoute(routeSpec: Route) {
   return { type: UI_ROUTER_SET_ROUTE, route: routeSpec };
 }
 

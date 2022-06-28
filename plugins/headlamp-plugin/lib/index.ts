@@ -13,7 +13,7 @@ import Registry, {
   registerDetailsViewHeaderAction,
   registerDetailsViewSection,
   registerRoute,
-  registerSidebarItem,
+  registerSidebarEntry,
 } from '../types/plugin/registry';
 import * as CommonComponents from './CommonComponents';
 
@@ -37,5 +37,5 @@ export {
   registerDetailsViewHeaderAction,
   registerDetailsViewSection,
   registerRoute,
-  registerSidebarItem,
+  registerSidebarEntry,
 };

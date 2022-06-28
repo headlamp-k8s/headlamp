@@ -11,12 +11,11 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { SidebarEntry } from '../../redux/reducers/ui';
 import CreateButton from '../common/Resource/CreateButton';
 import HeadlampButton from './HeadlampButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';
-import SidebarItem from './SidebarItem';
+import SidebarItem, { SidebarEntryProps } from './SidebarItem';
 import VersionButton from './VersionButton';
 
 export const drawerWidth = 330;
@@ -78,7 +77,6 @@ export default function Sidebar() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t, i18n } = useTranslation(['glossary', 'frequent']);
   const items = React.useMemo(() => prepareRoutes(t), [sidebar.entries, i18n.language]);
-
   const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
 
   // Use the location to make sure the sidebar is changed, as it depends on the cluster
@@ -115,7 +113,7 @@ export interface PureSidebarProps {
   /** If the user has selected to open/shrink the sidebar */
   openUserSelected?: boolean;
   /** To show in the sidebar. */
-  items: SidebarEntry[];
+  items: SidebarEntryProps[];
   /** The selected route name of the sidebar open. */
   selectedName: string | null;
   /** Called when sidebar toggles between open and closed. */
@@ -173,9 +171,9 @@ export function PureSidebar({
             onClick={temporaryDrawer ? toggleDrawer : undefined}
             onKeyDown={temporaryDrawer ? toggleDrawer : undefined}
           >
-            {items.map((item, i) => (
+            {items.map(item => (
               <SidebarItem
-                key={i}
+                key={item.name}
                 selectedName={selectedName}
                 fullWidth={largeSideBarOpen}
                 search={search}

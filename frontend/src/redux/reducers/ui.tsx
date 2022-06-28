@@ -1,6 +1,7 @@
-import { IconProps } from '@iconify/react';
 import _ from 'lodash';
+import { SidebarEntryProps } from '../../components/Sidebar';
 import { Notification } from '../../lib/notification';
+import { Route } from '../../lib/router';
 import themesConf, { setTheme } from '../../lib/themes';
 import { ClusterChooserType, sectionFunc } from '../../plugin/registry';
 import {
@@ -24,17 +25,6 @@ import {
   UI_UPDATE_NOTIFICATION,
 } from '../actions/actions';
 
-export interface SidebarEntry {
-  name: string;
-  label: string;
-  isParentAViewInItself?: boolean;
-  parent?: string | null;
-  url?: string;
-  useClusterURL?: boolean;
-  subList?: this[];
-  icon?: IconProps['icon'];
-}
-
 export interface UIState {
   sidebar: {
     selected: string | null;
@@ -43,11 +33,11 @@ export interface UIState {
     /** This is only set to true/false based on a user interaction. */
     isSidebarOpenUserSelected?: boolean;
     entries: {
-      [propName: string]: SidebarEntry;
+      [propName: string]: SidebarEntryProps;
     };
   };
   routes: {
-    [path: string]: any;
+    [path: string]: Route;
   };
   views: {
     details: {

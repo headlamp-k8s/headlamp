@@ -1,5 +1,6 @@
 import React from 'react';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
+import { SidebarEntryProps } from '../components/Sidebar';
 import { AppLogoProps, AppLogoType } from '../components/Sidebar/AppLogo';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
@@ -12,7 +13,6 @@ import {
   setRoute,
   setSidebarItem,
 } from '../redux/actions/actions';
-import { SidebarEntry } from '../redux/reducers/ui';
 import store from '../redux/stores/store';
 
 export interface SectionFuncProps {
@@ -22,6 +22,7 @@ export interface SectionFuncProps {
 export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | undefined;
 export type { AppLogoProps, AppLogoType };
 export type { ClusterChooserProps, ClusterChooserType };
+export type { SidebarEntryProps };
 
 export default class Registry {
   /**
@@ -42,14 +43,14 @@ export default class Registry {
    * registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
    * ```
    *
-   * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/podcounter/ Podcounter Example}
+   * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/sidebar/ Sidebar Example}
    */
   registerSidebarItem(
     parentName: string | null,
     itemName: string,
     itemLabel: string,
     url: string,
-    opts: Pick<SidebarEntry, 'useClusterURL' | 'icon'> = { useClusterURL: true }
+    opts: Pick<SidebarEntryProps, 'useClusterURL' | 'icon'> = { useClusterURL: true }
   ) {
     const { useClusterURL = true, ...options } = opts;
     store.dispatch(
@@ -207,7 +208,7 @@ export default class Registry {
    * @deprecated Please use registerClusterChooser. This will be removed in headlamp-plugin 0.4.11.
    */
   registerClusterChooserComponent(component: React.ComponentType<ClusterChooserProps> | null) {
-    console.log(
+    console.warn(
       'registerClusterChooserComponent is deprecated. Please use registerClusterChooser.'
     );
     store.dispatch(setClusterChooserButtonComponent(component));
@@ -215,41 +216,34 @@ export default class Registry {
 }
 
 /**
- * Add a SidebarItem.
- *
- * @param parentName - the name of the parent SidebarItem.
- * @param itemName - name of this SidebarItem.
- * @param itemLabel - label to display.
- * @param url - the URL to go to, when this item is followed.
- * @param opts - may have `useClusterURL` (default=true) which indicates whether the URL should
- * have the cluster prefix or not; and `icon` (an iconify string or icon object) that will be used
- * for the sidebar's icon.
+ * Add a Sidebar Entry to the menu (on the left side of Headlamp).
  *
  * @example
  *
  * ```tsx
- * import { registerSidebarItem } from '@kinvolk/headlamp-plugin/lib';
- * registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
+ * import { registerSidebarEntry } from '@kinvolk/headlamp-plugin/lib';
+ * registerSidebarEntry({ parent: 'cluster', name: 'traces', label: 'Traces', url: '/traces' });
+ *
  * ```
  *
- * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/podcounter/ Podcounter Example}
+ * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/sidebar/ Sidebar Example}
  */
-export function registerSidebarItem(
-  parentName: string | null,
-  itemName: string,
-  itemLabel: string,
-  url: string,
-  opts: Pick<SidebarEntry, 'useClusterURL' | 'icon'> = { useClusterURL: true }
-) {
-  const { useClusterURL = true, ...options } = opts;
+export function registerSidebarEntry({
+  parent,
+  name,
+  label,
+  url,
+  useClusterURL = true,
+  icon,
+}: SidebarEntryProps) {
   store.dispatch(
     setSidebarItem({
-      name: itemName,
-      label: itemLabel,
+      name,
+      label,
       url,
-      parent: parentName,
+      parent,
       useClusterURL,
-      ...options,
+      icon,
     })
   );
 }
