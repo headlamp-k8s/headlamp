@@ -41,6 +41,7 @@ import { useMetadataDisplayStyles } from '.';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import { MetadataDictGrid, MetadataDisplay } from './MetadataDisplay';
+import ScaleButton from './ScaleButton';
 
 export interface ResourceLinkProps extends Omit<LinkProps, 'routeName' | 'params'> {
   name?: string;
@@ -103,7 +104,11 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   let defaultActions: React.ReactNode[] | null = [];
 
   if (!noDefaultActions && resource) {
-    defaultActions = [<EditButton item={resource} />, <DeleteButton item={resource} />];
+    defaultActions = [
+      <ScaleButton item={resource} />,
+      <EditButton item={resource} />,
+      <DeleteButton item={resource} />,
+    ];
   }
 
   const propsHeaderActions = typeof actions === 'function' ? actions(resource) || [] : actions;
