@@ -12,7 +12,7 @@ import { decodeToken } from 'react-jwt';
 import helpers from '../../helpers';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
-import { KubeMetrics, KubeObjectInterface } from './cluster';
+import { KubeMetadata, KubeMetrics, KubeObjectInterface } from './cluster';
 import { KubeToken } from './token';
 
 const BASE_HTTP_URL = helpers.getAppUrl();
@@ -358,6 +358,7 @@ function simpleApiFactoryWithNamespace(
 ) {
   const apiRoot = getApiRoot(group, version);
   const results: {
+    scale?: ReturnType<typeof apiScaleFactory>;
     [other: string]: any;
   } = {
     list: (namespace: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
@@ -425,7 +426,7 @@ function getApiRoot(group: string, version: string) {
 function apiScaleFactory(apiRoot: string, resource: string) {
   return {
     get: (namespace: string, name: string) => request(url(namespace, name)),
-    put: (body: KubeObjectInterface) =>
+    put: (body: { metadata: KubeMetadata; spec: { replicas: number } }) =>
       put(url(body.metadata.namespace as string, body.metadata.name), body),
   };
 
@@ -458,7 +459,7 @@ export function patch(url: string, json: any, autoLogoutOnAuthError = true, requ
 
 export function put(
   url: string,
-  json: KubeObjectInterface,
+  json: Partial<KubeObjectInterface>,
   autoLogoutOnAuthError = true,
   requestOptions = {}
 ) {
