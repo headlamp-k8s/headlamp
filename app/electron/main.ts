@@ -93,6 +93,10 @@ function quitServerProcess() {
   intentionalQuit = true;
   log.info('stopping server process...');
 
+  if (!serverProcess) {
+    return;
+  }
+
   serverProcess.stdin.destroy();
   // @todo: should we try and end the process a bit more gracefully?
   //       What happens if the kill signal doesn't kill it?
@@ -101,7 +105,7 @@ function quitServerProcess() {
   serverProcess = null;
 }
 
-function setMenu(i18n: I18n) {
+function getDefaultAppMenu(i18n: I18n): AppMenu[] {
   const isMac = process.platform === 'darwin';
 
   const sep = { type: 'separator' };
@@ -122,7 +126,7 @@ function setMenu(i18n: I18n) {
     role: 'delete',
   };
 
-  const template = [
+  const appMenu = [
     // { role: 'appMenu' }
     ...(isMac
       ? [
@@ -273,31 +277,59 @@ function setMenu(i18n: I18n) {
       submenu: [
         {
           label: i18n.t('Documentation'),
-          click: async () => {
-            const { shell } = require('electron');
-            await shell.openExternal('https://kinvolk.io/docs/headlamp/latest');
-          },
+          url: 'https://kinvolk.io/docs/headlamp/latest',
         },
         {
           label: i18n.t('Open an Issue'),
-          click: async () => {
-            const { shell } = require('electron');
-            await shell.openExternal('https://github.com/kinvolk/headlamp/issues');
-          },
+          url: 'https://github.com/kinvolk/headlamp/issues',
         },
         {
           label: i18n.t('About'),
-          click: async () => {
-            const { shell } = require('electron');
-            await shell.openExternal('https://github.com/kinvolk/headlamp');
-          },
+          url: 'https://github.com/kinvolk/headlamp',
         },
       ],
     },
-  ];
+  ] as AppMenu[];
 
-  const menu = Menu.buildFromTemplate(template as (MenuItemConstructorOptions | MenuItem)[]);
+  return appMenu;
+}
+
+function setMenu(i18n: I18n) {
+  const appMenu = getDefaultAppMenu(i18n);
+  const menu = Menu.buildFromTemplate(
+    menusToTemplate(null, appMenu) as (MenuItemConstructorOptions | MenuItem)[]
+  );
   Menu.setApplicationMenu(menu);
+}
+
+export interface AppMenu extends Omit<Partial<MenuItemConstructorOptions>, 'click'> {
+  /** A URL to open (if not starting with http, then it'll be opened in the external browser) */
+  url?: string;
+}
+
+function menusToTemplate(mainWindow: BrowserWindow | null, menusFromPlugins: AppMenu[]) {
+  return menusFromPlugins.map(appMenu => {
+    const { url, ...otherProps } = appMenu;
+    const menu: MenuItemConstructorOptions = otherProps;
+
+    if (!!url) {
+      menu.click = async () => {
+        // Open external links in the external browser.
+        if (!!mainWindow && !url.startsWith('http')) {
+          mainWindow.webContents.loadURL(url);
+        } else {
+          await shell.openExternal(url);
+        }
+      };
+    }
+
+    // If the menu has a submenu, then recursively convert it.
+    if (Array.isArray(otherProps.submenu)) {
+      otherProps.submenu = menusToTemplate(mainWindow, otherProps.submenu);
+    }
+
+    return menu;
+  });
 }
 
 async function getRunningHeadlampPIDs() {
@@ -375,7 +407,8 @@ function startElecron() {
     });
 
     mainWindow.webContents.on('dom-ready', () => {
-      mainWindow.webContents.send('appVersion', appVersion);
+      mainWindow?.webContents.send('appVersion', appVersion);
+      mainWindow?.webContents.send('currentMenu', getDefaultAppMenu(i18n));
     });
 
     mainWindow.on('closed', () => {
@@ -384,6 +417,35 @@ function startElecron() {
 
     i18n.on('languageChanged', () => {
       setMenu(i18n);
+    });
+
+    ipcMain.on('setMenu', (event: IpcMainEvent, menus: any) => {
+      if (!mainWindow) {
+        return;
+      }
+
+      // We don't even process this call if we're running in headless mode.
+      if (isHeadlessMode) {
+        console.log('Ignoring menu change from plugins because of headless mode.');
+        return;
+      }
+
+      // Ignore the menu change if we received null.
+      if (!menus) {
+        console.log('Ignoring menu change from plugins because null was sent.');
+        return;
+      }
+
+      const template = menusToTemplate(mainWindow!, menus);
+      let newMenus: Menu;
+      try {
+        newMenus = Menu.buildFromTemplate(template);
+      } catch (e) {
+        console.error(`Failed to build menus from template ${menus}:`, e);
+        return;
+      }
+
+      Menu.setApplicationMenu(newMenus);
     });
 
     ipcMain.on('locale', (event: IpcMainEvent, newLocale: string) => {
