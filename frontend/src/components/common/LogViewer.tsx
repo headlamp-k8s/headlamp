@@ -1,10 +1,6 @@
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Dialog, { DialogProps } from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,18 +8,25 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Ansi from 'ansi-to-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Dialog, DialogProps } from './Dialog';
+
+interface styleProps {
+  isFullScreen: boolean;
+}
 
 const useStyle = makeStyles(theme => ({
   dialogContent: {
     height: '80%',
     minHeight: '80%',
+    display: 'flex',
+    flexDirection: 'column',
   },
   terminalCode: {
     color: theme.palette.common.white,
   },
   terminal: {
     backgroundColor: theme.palette.common.black,
-    height: '500px',
+    height: ({ isFullScreen }: styleProps) => (isFullScreen ? '100vh' : '500px'),
     width: '100%',
     overflow: 'scroll',
     marginTop: theme.spacing(3),
@@ -44,7 +47,8 @@ export interface LogViewerProps extends DialogProps {
 
 export function LogViewer(props: LogViewerProps) {
   const { logs, title = '', downloadName = 'log', onClose, topActions = [], ...other } = props;
-  const classes = useStyle();
+  const [isFullScreen, setIsFullScreen] = React.useState(false);
+  const classes = useStyle({ isFullScreen });
   const logsBottomRef = React.useRef<HTMLDivElement>(null);
   const { t } = useTranslation('frequent');
 
@@ -66,8 +70,13 @@ export function LogViewer(props: LogViewerProps) {
   }, [logs]);
 
   return (
-    <Dialog maxWidth="lg" scroll="paper" fullWidth onClose={onClose} {...other}>
-      <DialogTitle>{title}</DialogTitle>
+    <Dialog
+      title={title}
+      withFullScreen
+      onFullScreenToggled={setIsFullScreen}
+      onClose={onClose}
+      {...other}
+    >
       <DialogContent className={classes.dialogContent}>
         <Grid container justifyContent="space-between" alignItems="center" wrap="nowrap">
           <Grid item container spacing={1}>
@@ -96,11 +105,6 @@ export function LogViewer(props: LogViewerProps) {
           <div ref={logsBottomRef} />
         </Box>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="primary">
-          {t('Close')}
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 }

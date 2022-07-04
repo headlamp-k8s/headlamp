@@ -1,16 +1,23 @@
-import { Typography } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Dialog, { DialogProps } from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import { Icon } from '@iconify/react';
+import Box from '@material-ui/core/Box';
+import MuiDialog, { DialogProps as MuiDialogProps } from '@material-ui/core/Dialog';
 import MuiDialogTitle, { DialogTitleProps } from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+// We export the ConfirmDialog from here because it was declared in this file before being
+// moved to its own.
+export { ConfirmDialog } from './ConfirmDialog';
+export type { ConfirmDialogProps } from './ConfirmDialog';
 
 export interface OurDialogTitleProps extends DialogTitleProps {
   /** true if you want the title focused in the dialog */
   focusTitle?: boolean;
+  buttons?: React.ReactNode[];
 }
 
 /**
@@ -22,7 +29,8 @@ export interface OurDialogTitleProps extends DialogTitleProps {
  * reading can begin.
  */
 export function DialogTitle(props: OurDialogTitleProps) {
-  const { children, focusTitle, ...other } = props;
+  const { children, focusTitle, buttons, ...other } = props;
+
   const focusedRef = React.useCallback(node => {
     if (node !== null) {
       if (focusTitle) {
@@ -33,66 +41,91 @@ export function DialogTitle(props: OurDialogTitleProps) {
   }, []);
 
   return (
-    <MuiDialogTitle {...other}>
-      <Typography
-        ref={focusedRef}
-        variant="h1"
-        style={{
-          fontSize: '1.25rem',
-          fontWeight: 500,
-          lineHeight: 1.6,
-        }}
-      >
-        {children}
-      </Typography>
+    <MuiDialogTitle style={{ display: 'flex' }} disableTypography {...other}>
+      <Grid container justifyContent="space-between" alignItems="center">
+        <Grid item>
+          <Typography
+            ref={focusedRef}
+            variant="h1"
+            style={{
+              fontSize: '1.25rem',
+              fontWeight: 500,
+              lineHeight: 1.6,
+            }}
+          >
+            {children}
+          </Typography>
+        </Grid>
+        <Grid item>{buttons && buttons.length > 0 && <Box>{buttons}</Box>}</Grid>
+      </Grid>
     </MuiDialogTitle>
   );
 }
 
-export interface ConfirmDialogProps extends DialogProps {
-  title: string;
-  description: string;
-  onConfirm: () => void;
-  handleClose: () => void;
+export interface DialogProps extends MuiDialogProps {
+  withFullScreen?: boolean;
+  onFullScreenToggled?: (isFullScreen: boolean) => void;
 }
 
-export function ConfirmDialog(props: ConfirmDialogProps) {
-  const { onConfirm, open, handleClose, title, description } = props;
+export function Dialog(props: DialogProps) {
+  const { title, withFullScreen = false, children, onFullScreenToggled, ...other } = props;
+  const [fullScreen, setFullScreen] = React.useState(false);
   const { t } = useTranslation('frequent');
 
-  function onConfirmationClicked() {
-    handleClose();
-    onConfirm();
+  function handleFullScreen() {
+    setFullScreen(fs => {
+      const newFullScreenState = !fs;
+
+      if (!!onFullScreenToggled) {
+        onFullScreenToggled(newFullScreenState);
+      }
+
+      return newFullScreenState;
+    });
   }
 
-  const focusedRef = React.useCallback(node => {
-    if (node !== null) {
-      node.setAttribute('tabindex', '-1');
-      node.focus();
+  function FullScreenButton() {
+    if (!withFullScreen) {
+      return null;
     }
-  }, []);
+
+    return (
+      <Tooltip title={t('Toggle fullscreen')}>
+        <IconButton aria-label={t('Toggle fullscreen')} onClick={handleFullScreen}>
+          <Icon icon={`mdi:${fullScreen ? 'fullscreen-exit' : 'fullscreen'}`} />
+        </IconButton>
+      </Tooltip>
+    );
+  }
+
+  function CloseButton() {
+    return (
+      <Tooltip title={t('Close')}>
+        <IconButton
+          aria-label={t('fullscreen')}
+          onClick={() => {
+            props.onClose && props.onClose({}, 'escapeKeyDown');
+          }}
+        >
+          <Icon icon="mdi:close" />
+        </IconButton>
+      </Tooltip>
+    );
+  }
 
   return (
-    <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-        <DialogContent ref={focusedRef}>
-          <DialogContentText id="alert-dialog-description">{description}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            {t('No')}
-          </Button>
-          <Button onClick={onConfirmationClicked} color="primary">
-            {t('Yes')}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <MuiDialog
+      maxWidth="lg"
+      scroll="paper"
+      fullWidth
+      keepMounted
+      fullScreen={fullScreen}
+      {...other}
+    >
+      {(!!title || withFullScreen) && (
+        <DialogTitle buttons={[<FullScreenButton />, <CloseButton />]}>{title}</DialogTitle>
+      )}
+      {children}
+    </MuiDialog>
   );
 }

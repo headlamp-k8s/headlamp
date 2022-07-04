@@ -15,3 +15,27 @@ exports[`Storyshots Dialog Confirm Dialog Closed 1`] = `
   <div />
 </div>
 `;
+
+exports[`Storyshots Dialog Dialog 1`] = `
+<div
+  id="root"
+/>
+`;
+
+exports[`Storyshots Dialog Dialog Already In Full Screen 1`] = `
+<div
+  id="root"
+/>
+`;
+
+exports[`Storyshots Dialog Dialog With Close Button 1`] = `
+<div
+  id="root"
+/>
+`;
+
+exports[`Storyshots Dialog Dialog With Full Screen Button 1`] = `
+<div
+  id="root"
+/>
+`;

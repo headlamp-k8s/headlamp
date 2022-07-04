@@ -1,30 +1,44 @@
+import { DialogContent, Typography } from '@material-ui/core';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
-import { ConfirmDialog as ConfirmDialogComponent, ConfirmDialogProps } from './Dialog';
-
-// NOTE: Dialog.tsx should maybe be renamed ConfirmDialog.tsx
+import { Dialog as DialogComponent, DialogProps } from './Dialog';
 
 export default {
   title: 'Dialog',
-  component: ConfirmDialogComponent,
-  argTypes: {
-    onConfirm: { action: 'confirm clicked' },
-    handleClose: { action: 'closed' },
-  },
+  component: DialogComponent,
 } as Meta;
 
-const Template: Story<ConfirmDialogProps> = args => <ConfirmDialogComponent {...args} />;
+const Template: Story<DialogProps> = args => (
+  <DialogComponent {...args}>
+    <DialogContent>
+      <Typography>Some content here</Typography>
+    </DialogContent>
+  </DialogComponent>
+);
 
-export const ConfirmDialog = Template.bind({});
-ConfirmDialog.args = {
+export const Dialog = Template.bind({});
+Dialog.args = {
   open: true,
   title: 'A fine title',
-  description: 'A really good description.',
 };
 
-export const ConfirmDialogClosed = Template.bind({});
-ConfirmDialogClosed.args = {
-  open: false,
+export const DialogWithCloseButton = Template.bind({});
+DialogWithCloseButton.args = {
+  open: true,
   title: 'A fine title',
-  description: 'A really good description.',
+};
+
+export const DialogWithFullScreenButton = Template.bind({});
+DialogWithFullScreenButton.args = {
+  open: true,
+  title: 'A fine title',
+  withFullScreen: true,
+};
+
+export const DialogAlreadyInFullScreen = Template.bind({});
+DialogAlreadyInFullScreen.args = {
+  open: true,
+  title: 'A fine title',
+  withFullScreen: true,
+  fullScreen: true,
 };
