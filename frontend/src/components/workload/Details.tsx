@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import {
   ConditionsSection,
@@ -10,6 +9,7 @@ import {
   MetadataDictGrid,
   OwnedPodsSection,
 } from '../common/Resource';
+import DetailsViewSection from '../DetailsViewSection';
 
 interface WorkloadDetailsProps {
   workloadKind: KubeObject;
@@ -113,7 +113,7 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
               <ContainersSection resource={item?.jsonData} />
             </>
           )}
-          <DetailsViewPluginRenderer resource={item} />
+          <DetailsViewSection resource={item} />
         </>
       )}
     />

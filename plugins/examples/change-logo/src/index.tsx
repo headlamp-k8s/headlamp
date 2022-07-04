@@ -5,7 +5,6 @@
 
 import { AppLogoProps, registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
 import { SvgIcon } from '@material-ui/core';
-import React from 'react';
 import LogoWithTextLight from './icon-large-light.svg';
 import LogoLight from './icon-small-light.svg';
 

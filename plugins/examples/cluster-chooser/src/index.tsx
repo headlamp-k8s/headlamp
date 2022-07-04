@@ -1,5 +1,6 @@
 import { ClusterChooserProps, registerClusterChooser } from '@kinvolk/headlamp-plugin/lib';
+import { Button } from '@material-ui/core';
 
 registerClusterChooser(({ clickHandler, cluster }: ClusterChooserProps) => {
-  return <button onClick={clickHandler}>Our very own Chooser button. Cluster: {cluster}</button>;
+  return <Button onClick={clickHandler}>Our Cluster Chooser button. Cluster: {cluster}</Button>;
 });

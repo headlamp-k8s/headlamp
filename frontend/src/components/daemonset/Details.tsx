@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import DaemonSet from '../../lib/k8s/daemonSet';
 import { SectionBox, SimpleTable } from '../common';
 import {
@@ -10,6 +9,7 @@ import {
   MetadataDictGrid,
   OwnedPodsSection,
 } from '../common/Resource';
+import DetailsViewSection from '../DetailsViewSection';
 
 interface TolerationsSection {
   resource: DaemonSet;
@@ -99,7 +99,7 @@ export default function DaemonSetDetails() {
               <ContainersSection resource={item?.jsonData} />
             </>
           )}
-          <DetailsViewPluginRenderer resource={item} />
+          <DetailsViewSection resource={item} />
         </>
       )}
     />

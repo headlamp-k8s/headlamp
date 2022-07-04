@@ -22,4 +22,4 @@ function ClusterCreationButton() {
   );
 }
 
-registerAppBarAction('dynamic-clusters-create', () => <ClusterCreationButton />);
+registerAppBarAction(ClusterCreationButton);

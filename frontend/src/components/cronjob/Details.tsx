@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import CronJob from '../../lib/k8s/cronJob';
 import Job from '../../lib/k8s/job';
 import { DetailsGrid } from '../common/Resource';
+import DetailsViewSection from '../DetailsViewSection';
 import { JobsListRenderer } from '../job/List';
 import { getLastScheduleTime, getSchedule } from './List';
 
@@ -61,7 +61,7 @@ export default function CronJobDetails() {
       sectionsFunc={item => (
         <>
           {item && <JobsListRenderer jobs={ownedJobs} error={jobsError} />}
-          <DetailsViewPluginRenderer resource={item} />
+          <DetailsViewSection resource={item} />
         </>
       )}
     />

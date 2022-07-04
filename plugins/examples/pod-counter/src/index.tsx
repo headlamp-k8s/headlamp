@@ -20,4 +20,4 @@ function PodCounter() {
   );
 }
 
-registerAppBarAction('pod-counter-action', () => <PodCounter />);
+registerAppBarAction(PodCounter);

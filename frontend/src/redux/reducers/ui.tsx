@@ -7,7 +7,7 @@ import { ClusterChooserType, sectionFunc } from '../../plugin/registry';
 import {
   Action,
   BrandingProps,
-  HeaderActionFunc,
+  HeaderActionType,
   UI_APP_BAR_SET_ACTION,
   UI_BRANDING_SET_APP_LOGO,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
@@ -41,18 +41,11 @@ export interface UIState {
   };
   views: {
     details: {
-      headerActions: {
-        [name: string]: HeaderActionFunc;
-      };
-      pluginAppendedDetailViews: Array<{
-        sectionName: string;
-        sectionFunc: sectionFunc;
-      }>;
+      headerActions: HeaderActionType[];
+      pluginAppendedDetailViews: sectionFunc[];
     };
     appBar: {
-      actions: {
-        [name: string]: HeaderActionFunc;
-      };
+      actions: HeaderActionType[];
     };
   };
   theme: {
@@ -101,15 +94,11 @@ export const INITIAL_STATE: UIState = {
   },
   views: {
     details: {
-      headerActions: {
-        // action-name -> action-callback
-      },
+      headerActions: [],
       pluginAppendedDetailViews: [],
     },
     appBar: {
-      actions: {
-        // action-name -> action-callback
-      },
+      actions: [],
     },
   },
   theme: {
@@ -165,21 +154,19 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       break;
     }
     case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
-      const headerActions = { ...newFilters.views.details.headerActions };
-      headerActions[action.action as string] = action.action;
+      const headerActions = [...newFilters.views.details.headerActions, action.action];
       newFilters.views.details.headerActions = headerActions;
       break;
     }
     case UI_SET_DETAILS_VIEW: {
-      const { sectionName, action: sectionFunc } = action;
-      const detailViews = [...newFilters.views.details.pluginAppendedDetailViews];
-      detailViews.push({ sectionName, sectionFunc });
+      const { action: sectionFunc } = action;
+      const detailViews = [...newFilters.views.details.pluginAppendedDetailViews, sectionFunc];
       newFilters.views.details.pluginAppendedDetailViews = detailViews;
       break;
     }
     case UI_APP_BAR_SET_ACTION: {
-      const appBarActions = { ...newFilters.views.appBar.actions };
-      appBarActions[action.name as string] = action.action;
+      const appBarActions = [...newFilters.views.appBar.actions];
+      appBarActions.push(action.action);
       newFilters.views.appBar.actions = appBarActions;
       break;
     }

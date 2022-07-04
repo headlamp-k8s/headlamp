@@ -12,10 +12,9 @@ import Editor from '@monaco-editor/react';
 import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import * as monaco from 'monaco-editor';
-import React, { PropsWithChildren } from 'react';
+import React, { isValidElement, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link as RouterLink, NavLinkProps, useLocation } from 'react-router-dom';
-import DetailsViewPluginRenderer from '../../../helpers/renderHelpers';
 import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
   KubeCondition,
@@ -32,6 +31,7 @@ import Loader from '../../common/Loader';
 import { SectionBox } from '../../common/SectionBox';
 import SectionHeader, { HeaderStyleProps } from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
+import DetailsViewSection from '../../DetailsViewSection';
 import { PodListProps, PodListRenderer } from '../../pod/List';
 import { LightTooltip } from '..';
 import Empty from '../EmptyContent';
@@ -95,30 +95,37 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
   const { t } = useTranslation('frequent');
 
-  function getHeaderActions() {
+  const header = typeof headerSection === 'function' ? headerSection(resource) : headerSection;
+
+  const allActions = (function stateActions() {
     return React.Children.toArray(
-      Object.values(headerActions).map(action => action({ item: resource }))
+      headerActions.map(Action => {
+        if (isValidElement(Action) || Action === null) {
+          return Action;
+        } else {
+          return <Action item={resource} />;
+        }
+      })
     );
-  }
-
-  let defaultActions: React.ReactNode[] | null = [];
-
-  if (!noDefaultActions && resource) {
-    defaultActions = [
-      <ScaleButton item={resource} />,
-      <EditButton item={resource} />,
-      <DeleteButton item={resource} />,
-    ];
-  }
-
-  const propsHeaderActions = typeof actions === 'function' ? actions(resource) || [] : actions;
-
-  let header: React.ReactNode = [];
-  if (typeof headerSection === 'function') {
-    header = headerSection(resource);
-  } else {
-    header = headerSection;
-  }
+  })()
+    .concat(
+      (function propsActions() {
+        return React.Children.toArray(
+          typeof actions === 'function' ? actions(resource) || [] : actions
+        );
+      })()
+    )
+    .concat(
+      (function defaultActions() {
+        return !noDefaultActions && resource
+          ? [
+              <ScaleButton item={resource} />,
+              <EditButton item={resource} />,
+              <DeleteButton item={resource} />,
+            ]
+          : [];
+      })()
+    );
 
   return (
     <>
@@ -139,9 +146,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
           <SectionHeader
             title={title || (resource ? resource.kind : '')}
             headerStyle={headerStyle}
-            actions={getHeaderActions()
-              .concat(React.Children.toArray(propsHeaderActions))
-              .concat(defaultActions)}
+            actions={allActions}
           />
         }
       >
@@ -212,7 +217,7 @@ export function DetailsGrid(props: DetailsGridProps) {
       />
       <>{!!sectionsFunc && sectionsFunc(item)}</>
       {children}
-      <DetailsViewPluginRenderer resource={item} />
+      <DetailsViewSection resource={item} />
     </PageGrid>
   );
 }

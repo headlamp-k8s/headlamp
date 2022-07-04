@@ -1,10 +1,10 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
+import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
 import { AppLogoType } from '../../components/Sidebar/AppLogo';
 import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
-import { sectionFunc } from '../../plugin/registry';
 import { UIState } from '../reducers/ui';
 
 export const FILTER_RESET = 'FILTER_RESET';
@@ -75,8 +75,8 @@ export interface Action {
 
 type SidebarType = UIState['sidebar'];
 
-export type HeaderActionFunc = (...args: any[]) => JSX.Element | null;
-export type DetailsViewFunc = HeaderActionFunc;
+export type HeaderActionType = (...args: any[]) => JSX.Element | null;
+export type DetailsViewFunc = HeaderActionType;
 
 export function setNamespaceFilter(namespaces: string[]) {
   return { type: FILTER_SET_NAMESPACE, namespaces: namespaces };
@@ -126,20 +126,19 @@ export function setRoute(routeSpec: Route) {
   return { type: UI_ROUTER_SET_ROUTE, route: routeSpec };
 }
 
-export function setDetailsViewHeaderAction(actionName: string, actionFunc: HeaderActionFunc) {
-  return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, name: actionName, action: actionFunc };
+export function setDetailsViewHeaderAction(actionFunc: HeaderActionType) {
+  return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, action: actionFunc };
 }
 
-export function setDetailsView(sectionName: string, sectionFunc: sectionFunc) {
+export function setDetailsView(viewSection: DetailsViewSectionType) {
   return {
     type: UI_SET_DETAILS_VIEW,
-    sectionName,
-    action: sectionFunc,
+    action: viewSection,
   };
 }
 
-export function setAppBarAction(actionName: string, actionFunc: HeaderActionFunc) {
-  return { type: UI_APP_BAR_SET_ACTION, name: actionName, action: actionFunc };
+export function setAppBarAction(actionFunc: HeaderActionType) {
+  return { type: UI_APP_BAR_SET_ACTION, action: actionFunc };
 }
 
 export function setConfig(config: object) {
