@@ -1,3 +1,5 @@
+export * from './Chart';
+export * from '../cluster/Charts'
 export * from './Dialog';
 export * from './EmptyContent';
 export { default as EmptyContent } from './EmptyContent';
