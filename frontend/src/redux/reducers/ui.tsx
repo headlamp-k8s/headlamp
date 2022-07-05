@@ -3,7 +3,7 @@ import { SidebarEntryProps } from '../../components/Sidebar';
 import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import themesConf, { setTheme } from '../../lib/themes';
-import { ClusterChooserType, sectionFunc } from '../../plugin/registry';
+import { ClusterChooserType, DetailsViewSectionType } from '../../plugin/registry';
 import {
   Action,
   BrandingProps,
@@ -42,7 +42,7 @@ export interface UIState {
   views: {
     details: {
       headerActions: HeaderActionType[];
-      pluginAppendedDetailViews: sectionFunc[];
+      pluginAppendedDetailViews: DetailsViewSectionType[];
     };
     appBar: {
       actions: HeaderActionType[];

@@ -26,6 +26,7 @@ export interface SectionFuncProps {
 export type { AppLogoProps, AppLogoType };
 export type { ClusterChooserProps, ClusterChooserType };
 export type { SidebarEntryProps };
+export type { DetailsViewSectionProps, DetailsViewSectionType };
 
 /**
  * @deprecated please used DetailsViewSectionType and registerDetailViewSection

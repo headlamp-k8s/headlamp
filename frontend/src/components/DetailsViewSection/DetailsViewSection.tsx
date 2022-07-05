@@ -1,4 +1,4 @@
-import React, { ComponentType, ReactElement, useMemo } from 'react';
+import React, { ComponentType, isValidElement, ReactElement, useMemo } from 'react';
 import { KubeObject } from '../../lib/k8s/cluster';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
@@ -17,18 +17,18 @@ export default function DetailsViewSection(props: DetailsViewSectionProps) {
   const detailViews = useTypedSelector(state => state.ui.views.details.pluginAppendedDetailViews);
   const memoizedComponents = useMemo(
     () =>
-      detailViews.map((sectionFunc, index) => {
-        const pluginDetailsObj = sectionFunc(resource);
-        if (pluginDetailsObj) {
-          const { component: Component } = pluginDetailsObj;
-          return (
-            <React.Fragment key={index}>
-              <Component resource={resource} />
-            </React.Fragment>
-          );
+      detailViews.map((Component, index) => {
+        if (!resource || !Component) {
+          return null;
         }
+
+        return (
+          <React.Fragment key={index}>
+            {isValidElement(Component) ? Component : <Component resource={resource} />}
+          </React.Fragment>
+        );
       }),
-    [detailViews]
+    [detailViews, resource]
   );
   return <>{memoizedComponents}</>;
 }
