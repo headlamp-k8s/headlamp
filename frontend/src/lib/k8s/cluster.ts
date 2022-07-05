@@ -160,12 +160,12 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
       args.push(onError);
 
-      const queryParams: { [k: string]: string } = {};
-      if (opts?.labelSelector) {
-        queryParams['labelSelector'] = opts.labelSelector;
-      }
-      if (opts?.fieldSelector) {
-        queryParams['fieldSelector'] = opts.fieldSelector;
+      const queryParams: Omit<ApiListOptions, 'namespace'> = {};
+      const selectors: (keyof typeof queryParams)[] = ['labelSelector', 'fieldSelector'];
+      for (const selector of selectors) {
+        if (opts?.[selector]) {
+          queryParams[selector] = opts[selector];
+        }
       }
       args.push(queryParams);
 
@@ -199,25 +199,29 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       }
 
       const listCalls = [];
-      if (!!opts?.namespace) {
+      const { namespace, ...otherOpts } = opts || {};
+      if (!!namespace) {
         let namespaces: string[] = [];
-        if (typeof opts.namespace === 'string') {
-          namespaces = [opts.namespace];
-        } else if (Array.isArray(opts.namespace)) {
-          namespaces = opts.namespace as string[];
+        if (typeof namespace === 'string') {
+          namespaces = [namespace];
+        } else if (Array.isArray(namespace)) {
+          namespaces = namespace as string[];
         } else {
           throw Error('namespace should be a string or array of strings');
         }
 
-        for (const namespace of namespaces) {
+        for (const ns of namespaces) {
           listCalls.push(
-            this.apiList(objList => onObjs(namespace, objList as U[]), onError, { namespace })
+            this.apiList(objList => onObjs(ns, objList as U[]), onError, {
+              namespace: ns,
+              ...otherOpts,
+            })
           );
         }
       } else {
         // If we don't have a namespace set, then we only have one API call
         // response to set and we return it right away.
-        listCalls.push(this.apiList(listCallback, onError));
+        listCalls.push(this.apiList(listCallback, onError, otherOpts));
       }
 
       useConnectApi(...listCalls);

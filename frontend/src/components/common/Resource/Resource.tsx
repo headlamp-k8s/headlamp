@@ -15,8 +15,6 @@ import * as monaco from 'monaco-editor';
 import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link as RouterLink, NavLinkProps, useLocation } from 'react-router-dom';
-import { useMetadataDisplayStyles } from '.';
-import { LightTooltip } from '..';
 import DetailsViewPluginRenderer from '../../../helpers/renderHelpers';
 import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
@@ -24,7 +22,7 @@ import {
   KubeContainer,
   KubeContainerStatus,
   KubeObject,
-  KubeObjectInterface
+  KubeObjectInterface,
 } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
@@ -35,9 +33,11 @@ import { SectionBox } from '../../common/SectionBox';
 import SectionHeader, { HeaderStyleProps } from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
 import { PodListProps, PodListRenderer } from '../../pod/List';
+import { LightTooltip } from '..';
 import Empty from '../EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from '../Label';
 import Link, { LinkProps } from '../Link';
+import { useMetadataDisplayStyles } from '.';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import { MetadataDictGrid, MetadataDisplay } from './MetadataDisplay';
