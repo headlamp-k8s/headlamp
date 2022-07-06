@@ -1,4 +1,4 @@
-import '../../i18n/config';
+import '../../../i18n/config';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { KubeMetrics, KubeObject } from '../../../lib/k8s/cluster';
