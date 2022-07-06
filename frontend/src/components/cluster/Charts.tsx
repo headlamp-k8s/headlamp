@@ -1,9 +1,8 @@
 import '../../i18n/config';
 import { useTheme } from '@material-ui/core/styles';
 import _ from 'lodash';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { KubeMetrics, KubeObject } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
 import { HeaderLabel } from '../common';
@@ -11,7 +10,7 @@ import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
 
 interface ResourceCircularChartProps extends Omit<PercentageCircleProps, 'data'> {
   items: KubeObject[] | null;
-  itemsMetrics: any;
+  itemsMetrics: KubeMetrics[] | null;
   noMetrics?: boolean;
   resourceUsedGetter?: (node: KubeObject) => number;
   resourceAvailableGetter?: (node: KubeObject) => number;
@@ -33,7 +32,7 @@ export function ResourceCircularChart(props: ResourceCircularChartProps) {
 
   const [used, available] = getResourceUsage();
 
-  function filterMetrics(items: KubeObject[], metrics: any[]) {
+  function filterMetrics(items: KubeObject[], metrics: KubeMetrics[] | null) {
     if (!items || !metrics) return [];
 
     const names = items.map(({ metadata }) => metadata.name);
