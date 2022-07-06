@@ -1,91 +1,13 @@
 import '../../i18n/config';
 import { useTheme } from '@material-ui/core/styles';
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { KubeMetrics, KubeObject } from '../../lib/k8s/cluster';
+import { KubeObject } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
-import { HeaderLabel } from '../common';
-import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
-
-interface ResourceCircularChartProps extends Omit<PercentageCircleProps, 'data'> {
-  items: KubeObject[] | null;
-  itemsMetrics: KubeMetrics[] | null;
-  noMetrics?: boolean;
-  resourceUsedGetter?: (node: KubeObject) => number;
-  resourceAvailableGetter?: (node: KubeObject) => number;
-  getLegend?: (used: number, available: number) => string;
-  tooltip?: string | null;
-}
-
-export function ResourceCircularChart(props: ResourceCircularChartProps) {
-  const {
-    items,
-    itemsMetrics,
-    noMetrics = false,
-    resourceUsedGetter,
-    resourceAvailableGetter,
-    title,
-    ...others
-  } = props;
-  const { t } = useTranslation(['cluster']);
-
-  const [used, available] = getResourceUsage();
-
-  function filterMetrics(items: KubeObject[], metrics: KubeMetrics[] | null) {
-    if (!items || !metrics) return [];
-
-    const names = items.map(({ metadata }) => metadata.name);
-    return metrics.filter(item => names.includes(item.metadata.name));
-  }
-
-  function getLabel() {
-    if (available === 0) {
-      return '…';
-    }
-    return `${((used / available) * 100).toFixed(1)} %`;
-  }
-
-  function getResourceUsage() {
-    if (!items) return [-1, -1];
-
-    const nodeMetrics = filterMetrics(items, itemsMetrics);
-    const usedValue = _.sumBy(nodeMetrics, resourceUsedGetter);
-    const availableValue = _.sumBy(items, resourceAvailableGetter);
-
-    return [usedValue, availableValue];
-  }
-
-  function makeData() {
-    if (used === -1) {
-      return [];
-    }
-
-    return [
-      {
-        name: 'used',
-        value: used,
-      },
-    ];
-  }
-
-  return noMetrics ? (
-    <HeaderLabel
-      label={title || ''}
-      value={props.getLegend!(used, available)}
-      tooltip={t('cluster|Install the metrics-server to get usage data.')}
-    />
-  ) : (
-    <PercentageCircle
-      {...others}
-      title={title}
-      data={makeData()}
-      total={available}
-      label={getLabel()}
-      legend={props.getLegend!(used, available)}
-    />
-  );
-}
+import { PercentageCircle } from '../common/Chart';
+import ResourceCircularChart, {
+  CircularChartProps as ResourceCircularChartProps,
+} from '../common/Resource/CircularChart';
 
 export function MemoryCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
