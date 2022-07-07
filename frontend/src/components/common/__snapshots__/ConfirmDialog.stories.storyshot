@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots ConfirmDialog Confirm Dialog 1`] = `
+<div
+  id="root"
+>
+  <div />
+</div>
+`;
+
+exports[`Storyshots ConfirmDialog Confirm Dialog Closed 1`] = `
+<div
+  id="root"
+>
+  <div />
+</div>
+`;

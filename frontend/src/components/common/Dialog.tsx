@@ -1,13 +1,11 @@
-import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import MuiDialog, { DialogProps as MuiDialogProps } from '@material-ui/core/Dialog';
 import MuiDialogTitle, { DialogTitleProps } from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import ActionButton from './ActionButton';
 
 // We export the ConfirmDialog from here because it was declared in this file before being
 // moved to its own.
@@ -90,26 +88,23 @@ export function Dialog(props: DialogProps) {
     }
 
     return (
-      <Tooltip title={t('Toggle fullscreen')}>
-        <IconButton aria-label={t('Toggle fullscreen')} onClick={handleFullScreen}>
-          <Icon icon={`mdi:${fullScreen ? 'fullscreen-exit' : 'fullscreen'}`} />
-        </IconButton>
-      </Tooltip>
+      <ActionButton
+        description={t('Toggle fullscreen')}
+        onClick={handleFullScreen}
+        icon={`mdi:${fullScreen ? 'fullscreen-exit' : 'fullscreen'}`}
+      />
     );
   }
 
   function CloseButton() {
     return (
-      <Tooltip title={t('Close')}>
-        <IconButton
-          aria-label={t('fullscreen')}
-          onClick={() => {
-            props.onClose && props.onClose({}, 'escapeKeyDown');
-          }}
-        >
-          <Icon icon="mdi:close" />
-        </IconButton>
-      </Tooltip>
+      <ActionButton
+        description={t('Close')}
+        onClick={() => {
+          props.onClose && props.onClose({}, 'escapeKeyDown');
+        }}
+        icon={'mdi:close'}
+      />
     );
   }
 

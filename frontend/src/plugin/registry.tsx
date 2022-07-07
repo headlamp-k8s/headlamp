@@ -221,18 +221,16 @@ export function registerRoute(routeSpec: Route) {
  * @example
  *
  * ```tsx
- * import tracesIcon from '@iconify/icons-mdi/file-document-box-search-outline';
- * import { Icon } from '@iconify/react';
- * import { IconButton } from '@material-ui/core';
+ * import { ActionButton } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
  * import { registerDetailsViewHeaderAction } from '@kinvolk/headlamp-plugin/lib';
  *
  * function IconAction() {
  *   return (
- *     <IconButton
- *       onClick={() => console.log("Hello from IconAction!")}
- *     >
- *       <Icon icon={tracesIcon} />
- *     </IconButton>
+ *     <ActionButton
+ *      description="Launch"
+ *      icon="mdi:comment-quote"
+ *      onClick={() => console.log('Hello from IconAction!')}
+ *    />
  *   )
  * }
  *

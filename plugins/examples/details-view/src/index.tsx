@@ -1,17 +1,17 @@
-import { Icon } from '@iconify/react';
 import {
   DetailsViewSectionProps,
   registerDetailsViewHeaderAction,
   registerDetailsViewSection,
 } from '@kinvolk/headlamp-plugin/lib';
-import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
-import { IconButton } from '@material-ui/core';
+import { ActionButton, SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
 
 function IconAction() {
   return (
-    <IconButton onClick={() => console.log('Hello from IconAction!')}>
-      <Icon icon="mdi:comment-quote" />
-    </IconButton>
+    <ActionButton
+      description="Our action button"
+      icon="mdi:comment-quote"
+      onClick={() => console.log('Hello from IconAction!')}
+    />
   );
 }
 registerDetailsViewHeaderAction(IconAction);

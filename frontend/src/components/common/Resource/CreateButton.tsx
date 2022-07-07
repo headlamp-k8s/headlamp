@@ -1,6 +1,3 @@
-import { Icon } from '@iconify/react';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -8,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
 import { clusterAction } from '../../../redux/actions/actions';
+import ActionButton from '../ActionButton';
 import EditorDialog from './EditorDialog';
 
 export default function CreateButton() {
@@ -15,7 +13,7 @@ export default function CreateButton() {
   const [openDialog, setOpenDialog] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
   const location = useLocation();
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation(['resource', 'frequent']);
 
   const applyFunc = async (newItem: KubeObjectInterface) => {
     try {
@@ -60,11 +58,13 @@ export default function CreateButton() {
 
   return (
     <React.Fragment>
-      <Tooltip title={t('frequent|Create / Apply') as string}>
-        <IconButton aria-label={t('frequent|apply')} onClick={() => setOpenDialog(true)}>
-          <Icon color="#adadad" icon="mdi:plus-circle" width="48" />
-        </IconButton>
-      </Tooltip>
+      <ActionButton
+        description={t('frequent|Create / Apply')}
+        onClick={() => setOpenDialog(true)}
+        color="#adadad"
+        icon="mdi:plus-circle"
+        width="48"
+      />
       <EditorDialog
         item={{}}
         open={openDialog}

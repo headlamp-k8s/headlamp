@@ -1,6 +1,3 @@
-import { Icon } from '@iconify/react';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -8,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { KubeServiceAccount } from '../../../lib/k8s/serviceAccount';
 import { CallbackActionOptions, clusterAction } from '../../../redux/actions/actions';
+import ActionButton from '../ActionButton';
 import EditorDialog from './EditorDialog';
 import ViewButton from './ViewButton';
 
@@ -23,7 +21,7 @@ export default function EditButton(props: EditButtonProps) {
   const [visible, setVisible] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState<string>('');
   const location = useLocation();
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation(['frequent', 'resource']);
 
   function makeErrorMessage(err: any) {
     const status: number = err.status;
@@ -86,12 +84,12 @@ export default function EditButton(props: EditButtonProps) {
   }
 
   return (
-    <React.Fragment>
-      <Tooltip title={t('frequent|Edit') as string}>
-        <IconButton aria-label={t('frequent|edit')} onClick={() => setOpenDialog(true)}>
-          <Icon icon="mdi:pencil" />
-        </IconButton>
-      </Tooltip>
+    <>
+      <ActionButton
+        description={t('frequent|Edit')}
+        onClick={() => setOpenDialog(true)}
+        icon="mdi:pencil"
+      />
       <EditorDialog
         item={item.jsonData}
         open={openDialog}
@@ -100,6 +98,6 @@ export default function EditButton(props: EditButtonProps) {
         errorMessage={errorMessage}
         onEditorChanged={() => setErrorMessage('')}
       />
-    </React.Fragment>
+    </>
   );
 }
