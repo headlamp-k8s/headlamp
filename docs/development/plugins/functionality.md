@@ -92,8 +92,18 @@ Show a component to the top right area of a detail view
 
 ![screenshot of the header showing two actions](./images/header_actions_screenshot.png)
 
-- No example yet for registerDetailsViewHeaderAction.
+- Example plugin shows [How To set a Details View Header Action](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/details-view)
 - API reference for [registerDetailsViewHeaderAction](../api/modules/plugin_registry.md#registerDetailsViewHeaderAction)
+
+### Details View Section
+
+Show a component at the bottom of different details views.
+[registerDetailsViewSection](../api/modules/plugin_registry.md#registerDetailsViewSection).
+
+![screenshot of the appended Details View Section](./images/details-view.png)
+
+- Example plugin shows [How To set a Details View Section](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/details-view)
+- API reference for [registerDetailsViewSection](../api/modules/plugin_registry.md#registerDetailsViewSection)
 
 ### Dynamic Clusters
 
