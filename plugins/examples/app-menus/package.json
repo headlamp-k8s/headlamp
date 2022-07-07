@@ -1,7 +1,7 @@
 {
   "name": "app-menus",
   "version": "0.0.1",
-  "description": "Your Headlamp plugin",
+  "description": "Add menus when Headlamp is running as an app",
   "scripts": {
     "start": "headlamp-plugin start",
     "build": "headlamp-plugin build",
@@ -14,6 +14,8 @@
     "headlamp",
     "headlamp-plugin",
     "kubernetes",
+    "kubernetes-ui",
+    "kubernetes-debugging",
     "plugins"
   ],
   "prettier": "@kinvolk/eslint-config/prettier-config",
@@ -25,6 +27,6 @@
     ]
   },
   "devDependencies": {
-    "@kinvolk/headlamp-plugin": "^0.4.8"
+    "@kinvolk/headlamp-plugin": "^0.4.9"
   }
 }

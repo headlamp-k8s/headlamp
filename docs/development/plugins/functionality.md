@@ -74,6 +74,16 @@ Change the logo (at the top left) with
 - Example plugin shows [How To Change The Logo](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/change-logo)
 - API reference for [registerAppLogo](../api/modules/plugin_registry.md#registerapplogo)
 
+### App Menus
+
+Add menus when Headlamp is running as an app.
+[Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp/#setAppMenu)
+
+![screenshot of the logo being changed](./images/app-menus.png)
+
+- Example plugin shows [How To Add App Menus](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/app-menus)
+- API reference for [Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp/#setAppMenu)
+
 ### Cluster Chooser
 
 Change the Cluster Chooser button (in the middle top of the Headlamp app bar) with

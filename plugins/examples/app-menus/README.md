@@ -1,17 +1,20 @@
-# cra-template-headlamp
+# Example Plugin: App Menus
 
-This is the official TypeScript template for [Headlamp Plugins](https://github.com/kinvolk/headlamp).
+Add menus when Headlamp is running as an app.
 
-To use this template to start a new plugin with the npx command (comes with Node.js):
+![screenshot of the custom details view section and action button](../../../docs/development/plugins/images/app-menus.png)
 
-```sh
-npx create-react-app headlamp-myfancy --template headlamp
+To run the plugin:
+
+```bash
+cd plugins/examples/app-menus
+npm install
+npm start
+# See the menu in the app.
 ```
 
-For more information, please refer to:
+The main code for the example plugin is in [src/index.tsx](src/index.tsx).
 
-- [Create React App Custom Templates](https://create-react-app.dev/docs/custom-templates/)
-- [Getting Started](https://kinvolk.io/docs/headlamp/latest/development/plugins/), How to create a new Headlamp plugin.
-- [API Reference](https://kinvolk.io/docs/headlamp/latest/development/api/), API documentation for what you can do
-- [UI Component Storybook](https://kinvolk.io/docs/headlamp/latest/development/storybook/), pre-existing components you can use when creating your plugin.
-- [Plugin Examples](https://kinvolk.io/docs/headlamp/latest/development/plugins/examples/), Example plugins you can look at to see how it's done.
+See the API documentation for:
+
+- [Headlamp.setAppMenu](https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.Headlamp/#setAppMenu)
