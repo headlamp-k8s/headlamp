@@ -1,4 +1,5 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
+import { ReactElement } from 'react';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
 import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
@@ -75,7 +76,7 @@ export interface Action {
 
 type SidebarType = UIState['sidebar'];
 
-export type HeaderActionType = (...args: any[]) => JSX.Element | null;
+export type HeaderActionType = ((...args: any[]) => JSX.Element | null) | null | ReactElement;
 export type DetailsViewFunc = HeaderActionType;
 
 export function setNamespaceFilter(namespaces: string[]) {
