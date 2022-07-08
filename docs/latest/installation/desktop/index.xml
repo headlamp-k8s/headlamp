@@ -26,7 +26,8 @@ For running it, just launch it as usually in your Linux desktop, or run:</descri
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/installation/desktop/mac-installation/</guid>
-      <description>For Mac OS we provide a .dmg file, so you need to download it from the releases page and than follow the below steps :
+      <description>Install via brew Package Manager If you are using the Homebrew package manager , you can install the latest release like so:
+brew install --cask headlamp Install via GitHub Releases For Mac OS we provide a .dmg file, so you need to download it from the releases page and than follow the below steps :
  Double click the downloaded file to make its content available (name will show up in the Finder sidebar), usually a window opens showing the content as well Drag the application from the DMG window into /Applications to install wait for the copy process to finish.</description>
     </item>
     
