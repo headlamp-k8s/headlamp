@@ -121,6 +121,7 @@ function EventsSection() {
                 {
                   label: t('glossary|Namespace'),
                   getter: event => event.metadata.namespace || '-',
+                  sort: true,
                 },
                 // @todo: Maybe the message should be shown on slide-down.
                 {
@@ -130,6 +131,7 @@ function EventsSection() {
                       <Box>{makeStatusLabel(event)}</Box>
                     </LightTooltip>
                   ),
+                  sort: (e1: Event, e2: Event) => e1.reason.localeCompare(e2.reason),
                 },
                 {
                   label: t('frequent|Age'),
@@ -142,7 +144,7 @@ function EventsSection() {
             : []
         }
         data={events}
-        defaultSortingColumn={3}
+        defaultSortingColumn={5}
       />
     </SectionBox>
   );
