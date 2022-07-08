@@ -4,6 +4,16 @@ linktitle: Mac OS
 weight: 20
 ---
 
+## Install via brew Package Manager
+
+If you are using the [Homebrew package manager](https://brew.sh/), you can install the latest release like so:
+
+```sh
+brew install --cask headlamp
+```
+
+## Install via GitHub Releases
+
 For Mac OS we provide a _.dmg_ file, so you need to download it from the [releases page](https://github.com/kinvolk/headlamp/releases)
 and than follow the below steps :
 
