@@ -17,7 +17,7 @@ export class Notification {
       this.date = date;
     }
     // generate the id based on the message and the date attached to a notification
-    this.id = btoa(`${this.date},${this.message}`);
+    this.id = btoa(unescape(encodeURIComponent(`${this.date},${this.message}`)));
   }
 }
 
