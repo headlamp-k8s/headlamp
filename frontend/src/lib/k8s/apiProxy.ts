@@ -8,16 +8,21 @@
  */
 
 import { OpPatch } from 'json-patch';
+import { decodeToken } from 'react-jwt';
 import helpers from '../../helpers';
-import { getToken, logout } from '../auth';
+import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
 import { KubeMetrics, KubeObjectInterface } from './cluster';
+import { KubeToken } from './token';
 
 const BASE_HTTP_URL = helpers.getAppUrl();
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
 const CLUSTERS_PREFIX = 'clusters';
 const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
 const DEFAULT_TIMEOUT = 2 * 60 * 1000; // ms
+const MIN_LIFESPAN_FOR_TOKEN_REFRESH = 10; // sec
+
+let isTokenRefreshInProgress = false;
 
 export interface RequestParams {
   timeout?: number; // ms
@@ -33,6 +38,84 @@ export interface ClusterRequest {
   insecureTLSVerify?: boolean;
   /** The certificate authority data */
   certificateAuthorityData?: string;
+}
+
+//refreshToken checks if the token is about to expire and refreshes it if so.
+async function refreshToken(token: string | null) {
+  if (!token || isTokenRefreshInProgress) {
+    return;
+  }
+  // decode token
+  const decodedToken: any = decodeToken(token);
+
+  // return if the token doesn't have an expiry time
+  if (!decodedToken.exp) {
+    return;
+  }
+  // convert expiry seconds to date object
+  const expiry = decodedToken.exp;
+  const now = new Date().valueOf();
+  const expDate = new Date(0);
+  expDate.setUTCSeconds(expiry);
+
+  // calculate time to expiry in seconds
+  const diff = (expDate.valueOf() - now) / 1000;
+  // If the token is not about to expire return
+  // comparing the time to expiry with the minimum lifespan for a token both in seconds
+  if (diff > MIN_LIFESPAN_FOR_TOKEN_REFRESH) {
+    return;
+  }
+  const namespace =
+    (decodedToken && decodedToken['kubernetes.io'] && decodedToken['kubernetes.io']['namespace']) ||
+    '';
+  const serviceAccountName =
+    (decodedToken &&
+      decodedToken['kubernetes.io'] &&
+      decodedToken['kubernetes.io']['serviceaccount'] &&
+      decodedToken['kubernetes.io']['serviceaccount']['name']) ||
+    {};
+  const cluster = getCluster();
+  if (!cluster || namespace === '' || serviceAccountName === '') {
+    return;
+  }
+
+  console.debug('Refreshing token');
+  isTokenRefreshInProgress = true;
+
+  let tokenUrl = combinePath(BASE_HTTP_URL, `/${CLUSTERS_PREFIX}/${cluster}`);
+  tokenUrl = combinePath(
+    tokenUrl,
+    `api/v1/namespaces/${namespace}/serviceaccounts/${serviceAccountName}/token`
+  );
+  const tokenData = {
+    kind: 'TokenRequest',
+    apiVersion: 'authentication.k8s.io/v1',
+    metadata: { creationTimestamp: null },
+    spec: { expirationSeconds: 86400 },
+  };
+
+  try {
+    const response = await fetch(tokenUrl, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, ...JSON_HEADERS },
+      body: JSON.stringify(tokenData),
+    });
+
+    if (response.status === 201) {
+      const token: KubeToken = await response.json();
+      setToken(cluster, token.status.token);
+    }
+
+    // logout if token could not be refreshed
+    if (response.status === 401) {
+      console.debug('Token could not be refreshed, logging out');
+      logout();
+    }
+    isTokenRefreshInProgress = false;
+  } catch (err) {
+    console.error('Error refreshing token', err);
+    isTokenRefreshInProgress = false;
+  }
 }
 
 export async function request(
@@ -55,6 +138,9 @@ export async function request(
   let fullPath = path;
   if (useCluster && cluster) {
     const token = getToken(cluster);
+
+    await refreshToken(token);
+
     if (!!token) {
       opts.headers.Authorization = `Bearer ${token}`;
     }
