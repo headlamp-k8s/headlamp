@@ -17,6 +17,7 @@ export default function RoleBindingDetails() {
   return (
     <DetailsGrid
       resourceType={!!namespace ? RoleBinding : ClusterRoleBinding}
+      namespace={namespace}
       name={name}
       extraInfo={item =>
         item && [
