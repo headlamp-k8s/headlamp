@@ -21,12 +21,7 @@ export default function RoleBindingList() {
   const filterFunc = useFilterFunc(['.kind']);
 
   function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
-    const currentBindings: RoleBindingDict = bindings || {};
-    const data = { ...currentBindings };
-
-    data[kind] = newBindings;
-
-    setBindings(data);
+    setBindings(currentBindings => ({ ...currentBindings, [kind]: newBindings }));
   }
 
   function setupRoleBindings(newBindings: RoleBinding[] | null) {
