@@ -179,3 +179,7 @@ export function useErrorState(dependentSetter?: (...args: any) => void) {
   // Adding "as any" here because it was getting difficult to validate the setter type.
   return [error, setError as any];
 }
+
+// Make units available from here
+export * as auth from './auth';
+export * as units from './units';
