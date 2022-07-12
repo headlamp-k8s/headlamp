@@ -21,7 +21,12 @@
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:$CONTAINER_PORT
 {{- end }}
 {{- if .Values.clusterRoleBinding.create }}
+  {{- if and ( ge .Capabilities.KubeVersion.Major "1" ) ( ge .Capabilities.KubeVersion.Minor "24" ) }}
+2. Get the token using
+  kubectl create token {{ include "headlamp.serviceAccountName" . }} --namespace {{.Release.Namespace}}
+  {{- else }}
 2. Get the clusterrolebinding token using
   export SECRET=$(kubectl get secrets --namespace {{ .Release.Namespace }} -o custom-columns=":metadata.name" | grep "{{ include "headlamp.fullname" . }}-token")
   kubectl get secret $SECRET --namespace {{ .Release.Namespace }} --template=\{\{.data.token\}\} | base64 --decode
+  {{- end }}
 {{- end }}
