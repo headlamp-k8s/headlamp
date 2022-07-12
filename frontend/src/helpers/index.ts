@@ -154,8 +154,13 @@ function getRecentClusters() {
 
 const tablesRowsPerPageKey = 'tables_rows_per_page';
 
-function getTablesRowsPerPage() {
-  return parseInt(localStorage.getItem(tablesRowsPerPageKey) || '5');
+function getTablesRowsPerPage(defaultRowsPerPage: number = 5) {
+  const perPageStr = localStorage.getItem(tablesRowsPerPageKey);
+  if (!perPageStr) {
+    return defaultRowsPerPage;
+  }
+
+  return parseInt(perPageStr);
 }
 
 function setTablesRowsPerPage(perPage: number) {
