@@ -106,11 +106,6 @@ async function refreshToken(token: string | null) {
       setToken(cluster, token.status.token);
     }
 
-    // logout if token could not be refreshed
-    if (response.status === 401) {
-      console.debug('Token could not be refreshed, logging out');
-      logout();
-    }
     isTokenRefreshInProgress = false;
   } catch (err) {
     console.error('Error refreshing token', err);
