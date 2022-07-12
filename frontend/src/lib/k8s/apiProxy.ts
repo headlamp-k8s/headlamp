@@ -10,6 +10,7 @@
 import { OpPatch } from 'json-patch';
 import { decodeToken } from 'react-jwt';
 import helpers from '../../helpers';
+import store from '../../redux/stores/store';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
 import { KubeMetrics, KubeObjectInterface } from './cluster';
@@ -113,6 +114,13 @@ async function refreshToken(token: string | null) {
   }
 }
 
+// getClusterAuthType returns the auth type of the cluster.
+function getClusterAuthType(cluster: string): string {
+  const state = store.getState();
+  const authType: string = state.config?.clusters?.[cluster]?.['auth_type'] || '';
+  return authType;
+}
+
 export async function request(
   path: string,
   params: RequestParams = {},
@@ -134,7 +142,10 @@ export async function request(
   if (useCluster && cluster) {
     const token = getToken(cluster);
 
-    await refreshToken(token);
+    // Refresh service account token only if the cluster auth type is not OIDC
+    if (getClusterAuthType(cluster) !== 'oidc') {
+      await refreshToken(token);
+    }
 
     if (!!token) {
       opts.headers.Authorization = `Bearer ${token}`;
