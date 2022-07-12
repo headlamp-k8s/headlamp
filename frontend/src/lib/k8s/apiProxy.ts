@@ -10,6 +10,7 @@
 import { OpPatch } from 'json-patch';
 import { decodeToken } from 'react-jwt';
 import helpers from '../../helpers';
+import store from '../../redux/stores/store';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
 import { KubeMetadata, KubeMetrics, KubeObjectInterface } from './cluster';
@@ -106,16 +107,18 @@ async function refreshToken(token: string | null) {
       setToken(cluster, token.status.token);
     }
 
-    // logout if token could not be refreshed
-    if (response.status === 401) {
-      console.debug('Token could not be refreshed, logging out');
-      logout();
-    }
     isTokenRefreshInProgress = false;
   } catch (err) {
     console.error('Error refreshing token', err);
     isTokenRefreshInProgress = false;
   }
+}
+
+// getClusterAuthType returns the auth type of the cluster.
+function getClusterAuthType(cluster: string): string {
+  const state = store.getState();
+  const authType: string = state.config?.clusters?.[cluster]?.['auth_type'] || '';
+  return authType;
 }
 
 export async function request(
@@ -139,7 +142,10 @@ export async function request(
   if (useCluster && cluster) {
     const token = getToken(cluster);
 
-    await refreshToken(token);
+    // Refresh service account token only if the cluster auth type is not OIDC
+    if (getClusterAuthType(cluster) !== 'oidc') {
+      await refreshToken(token);
+    }
 
     if (!!token) {
       opts.headers.Authorization = `Bearer ${token}`;
