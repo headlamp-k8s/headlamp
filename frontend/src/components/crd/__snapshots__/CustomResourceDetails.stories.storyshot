@@ -125,6 +125,9 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
                 >
                   <button
                     aria-label="show yaml viewer"

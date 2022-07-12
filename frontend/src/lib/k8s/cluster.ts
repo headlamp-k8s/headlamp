@@ -292,6 +292,28 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       return this.apiEndpoint.put(data);
     }
 
+    scale(numReplicas: number) {
+      const hasScaleApi = Object.keys(this._class().apiEndpoint).includes('scale');
+      if (!hasScaleApi) {
+        throw new Error(`This class has no scale API: ${this._class().className}`);
+      }
+
+      const spec = {
+        replicas: numReplicas,
+      };
+
+      type ApiEndpointWithScale = {
+        scale: {
+          put: (data: { metadata: KubeMetadata; spec: { replicas: number } }) => Promise<any>;
+        };
+      };
+
+      return (this._class().apiEndpoint as ApiEndpointWithScale).scale.put({
+        metadata: this.metadata,
+        spec,
+      });
+    }
+
     patch(body: OpPatch[]) {
       const patchMethod = this._class().apiEndpoint.patch;
       const args: Parameters<typeof patchMethod> = [body];
