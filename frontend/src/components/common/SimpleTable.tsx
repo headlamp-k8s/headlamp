@@ -117,7 +117,7 @@ export default function SimpleTable(props: SimpleTableProps) {
   const [displayData, setDisplayData] = React.useState(data);
   const rowsPerPageOptions = props.rowsPerPage || [15, 25, 50];
   const [rowsPerPage, setRowsPerPage] = React.useState(
-    helpers.getTablesRowsPerPage() || rowsPerPageOptions[0]
+    helpers.getTablesRowsPerPage(rowsPerPageOptions[0])
   );
   const classes = useTableStyle();
   const [isIncreasingOrder, setIsIncreasingOrder] = React.useState(
