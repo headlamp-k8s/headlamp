@@ -1,5 +1,4 @@
 {
-  "Install the metrics-server to get usage data.": "Instale o metrics-server para obter dados sobre o uso.",
   "Memory Usage": "Uso da memória",
   "{{ available }} units": "{{ available }} unidades",
   "CPU Usage": "Uso do CPU",
@@ -13,6 +12,7 @@
   "There seems to be no clusters configured…": "Parece não haver clusters configurados…",
   "Please make sure you have at least one cluster configured.": "Por favor assegure-se de que tem pelo menos um cluster configurado.",
   "Or try running Headlamp with a different kube config.": "Ou tente correr o Headlamp com um kube config diferente",
+  "Install the metrics-server to get usage data.": "Instale o metrics-server para obter dados sobre o uso.",
   "Cluster version upgraded to {{ gitVersion }}": "Versão do cluster actualizada para {{ gitVersion }}",
   "Cluster version downgraded to {{ gitVersion }}": "Versão do cluster mudada para {{ gitVersion }}"
 }

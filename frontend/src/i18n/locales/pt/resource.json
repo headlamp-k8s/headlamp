@@ -35,6 +35,8 @@
   "Owner refs": "Ref. de proprietário",
   "Controlled by": "Controlado por",
   "No data to be shown.": "Sem dados para mostrar.",
+  "Current number of replicas: {{ numReplicas }}": "",
+  "Desired number of replicas:": "",
   "View YAML": "Ver YAML",
   "show yaml viewer": "mostrar visualizador de YAML",
   "Loading table data": "A carregar dados da tabela",
