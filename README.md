@@ -72,7 +72,7 @@ our [plugin development guide](https://kinvolk.github.io/headlamp/docs/latest/de
 
 ## Get involved
 
-Check out our [guidelines](https://kinvolk.github.io/headlamp/docs/latest/contributing/)
+Check out our [guidelines](https://kinvolk.github.io/headlamp/docs/latest/contributing/), including our [Code of Conduct](./CODE_OF_CONDUCT.md),
 and join the discussion on the
 [#headlamp](https://kubernetes.slack.com/messages/headlamp) channel
 in the Kubernetes Slack.
