@@ -1,16 +1,16 @@
 ---
-title: "Interface: KubeRole"
-linkTitle: "KubeRole"
-slug: "lib_k8s_role.KubeRole"
+title: "Interface: KubeToken"
+linkTitle: "KubeToken"
+slug: "lib_k8s_token.KubeToken"
 ---
 
-[lib/k8s/role](../modules/lib_k8s_role.md).KubeRole
+[lib/k8s/token](../modules/lib_k8s_token.md).KubeToken
 
 ## Hierarchy
 
 - [`KubeObjectInterface`](lib_k8s_cluster.KubeObjectInterface.md)
 
-  ↳ **`KubeRole`**
+  ↳ **`KubeToken`**
 
 ## Properties
 
@@ -56,20 +56,34 @@ ___
 
 ___
 
-### rules
+### spec
 
-• **rules**: `Object`
+• **spec**: `Object`
 
 #### Type declaration
 
 | Name | Type |
 | :------ | :------ |
-| `apiGroups` | `string`[] |
-| `nonResourceURLs` | `string`[] |
-| `resourceNames` | `string`[] |
-| `resources` | `string`[] |
-| `verbs` | `string`[] |
+| `audiences` | `string`[] |
+| `expirationSeconds` | `number` |
 
 #### Defined in
 
-[lib/k8s/role.ts:5](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/role.ts#L5)
+[lib/k8s/token.ts:8](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/token.ts#L8)
+
+___
+
+### status
+
+• **status**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `expirationTimestamp` | `string` |
+| `token` | `string` |
+
+#### Defined in
+
+[lib/k8s/token.ts:4](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/token.ts#L4)

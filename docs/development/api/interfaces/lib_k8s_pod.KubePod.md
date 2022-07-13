@@ -24,7 +24,7 @@ slug: "lib_k8s_pod.KubePod"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L23)
+[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L23)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:22](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L22)
+[lib/k8s/cluster.ts:22](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L22)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L24)
+[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L24)
 
 ___
 
@@ -66,10 +66,11 @@ ___
 | :------ | :------ |
 | `containers` | [`KubeContainer`](lib_k8s_cluster.KubeContainer.md)[] |
 | `nodeName` | `string` |
+| `nodeSelector?` | { `[key: string]`: `string`;  } |
 
 #### Defined in
 
-[lib/k8s/pod.ts:12](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/pod.ts#L12)
+[lib/k8s/pod.ts:12](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/pod.ts#L12)
 
 ___
 
@@ -96,4 +97,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/pod.ts:16](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/pod.ts#L16)
+[lib/k8s/pod.ts:19](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/pod.ts#L19)

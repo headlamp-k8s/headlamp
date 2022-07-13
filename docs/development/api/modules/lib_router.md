@@ -13,7 +13,7 @@ slug: "lib_router"
 
 ### NotFoundRoute
 
-• **NotFoundRoute**: `Object`
+• `Const` **NotFoundRoute**: `Object`
 
 #### Type declaration
 
@@ -28,7 +28,7 @@ slug: "lib_router"
 
 #### Defined in
 
-[lib/router.tsx:428](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L428)
+[lib/router.tsx:428](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/router.tsx#L428)
 
 ## Functions
 
@@ -49,7 +49,7 @@ slug: "lib_router"
 
 #### Defined in
 
-[lib/router.tsx:457](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L457)
+[lib/router.tsx:457](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/router.tsx#L457)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:487](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L487)
+[lib/router.tsx:487](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/router.tsx#L487)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:437](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L437)
+[lib/router.tsx:437](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/router.tsx#L437)
 
 ___
 
@@ -103,4 +103,4 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:441](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/router.tsx#L441)
+[lib/router.tsx:441](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/router.tsx#L441)

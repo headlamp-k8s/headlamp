@@ -30,7 +30,7 @@ makeKubeObject<KubeSecret\>('secret').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -42,9 +42,17 @@ makeKubeObject<KubeSecret\>('secret').constructor
 
 ▪ [other: `string`]: `any`
 
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `scale?` | { `get`: (`namespace`: `string`, `name`: `string`) => `Promise`<`any`\> ; `put`: (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }) => `Promise`<`any`\>  } |
+| `scale.get` | (`namespace`: `string`, `name`: `string`) => `Promise`<`any`\> |
+| `scale.put` | (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }) => `Promise`<`any`\> |
+
 #### Defined in
 
-[lib/k8s/secret.ts:10](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/secret.ts#L10)
+[lib/k8s/secret.ts:10](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/secret.ts#L10)
 
 ___
 
@@ -58,7 +66,7 @@ makeKubeObject<KubeSecret\>('secret').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -72,7 +80,7 @@ makeKubeObject<KubeSecret\>('secret').className
 
 #### Defined in
 
-[lib/k8s/secret.ts:12](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/secret.ts#L12)
+[lib/k8s/secret.ts:12](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/secret.ts#L12)
 
 ___
 
@@ -86,7 +94,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/secret.ts:16](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/secret.ts#L16)
+[lib/k8s/secret.ts:16](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/secret.ts#L16)
 
 ## Methods
 
@@ -110,7 +118,7 @@ makeKubeObject<KubeSecret\>('secret').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -134,7 +142,7 @@ makeKubeObject<KubeSecret\>('secret').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -161,7 +169,7 @@ makeKubeObject<KubeSecret\>('secret').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -187,7 +195,7 @@ makeKubeObject<KubeSecret\>('secret').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -211,4 +219,4 @@ makeKubeObject<KubeSecret\>('secret').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L72)

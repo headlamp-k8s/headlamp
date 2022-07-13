@@ -30,7 +30,7 @@ makeKubeObject<KubeNetworkPolicy\>('NetworkPolicy').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -42,9 +42,17 @@ makeKubeObject<KubeNetworkPolicy\>('NetworkPolicy').constructor
 
 ▪ [other: `string`]: `any`
 
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `scale?` | { `get`: (`namespace`: `string`, `name`: `string`) => `Promise`<`any`\> ; `put`: (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }) => `Promise`<`any`\>  } |
+| `scale.get` | (`namespace`: `string`, `name`: `string`) => `Promise`<`any`\> |
+| `scale.put` | (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }) => `Promise`<`any`\> |
+
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:39](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/networkpolicy.tsx#L39)
+[lib/k8s/networkpolicy.tsx:39](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/networkpolicy.tsx#L39)
 
 ___
 
@@ -58,7 +66,7 @@ makeKubeObject<KubeNetworkPolicy\>('NetworkPolicy').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Methods
 
@@ -82,7 +90,7 @@ makeKubeObject<KubeNetworkPolicy\>('NetworkPolicy').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -106,7 +114,7 @@ makeKubeObject<KubeNetworkPolicy\>('NetworkPolicy').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -133,7 +141,7 @@ makeKubeObject<KubeNetworkPolicy\>('NetworkPolicy').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -159,7 +167,7 @@ makeKubeObject<KubeNetworkPolicy\>('NetworkPolicy').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -183,4 +191,4 @@ makeKubeObject<KubeNetworkPolicy\>('NetworkPolicy').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L72)

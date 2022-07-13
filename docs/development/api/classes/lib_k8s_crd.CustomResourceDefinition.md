@@ -30,7 +30,7 @@ makeKubeObject<KubeCRD\>('crd').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -52,7 +52,7 @@ makeKubeObject<KubeCRD\>('crd').constructor
 
 #### Defined in
 
-[lib/k8s/crd.ts:35](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/crd.ts#L35)
+[lib/k8s/crd.ts:35](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/crd.ts#L35)
 
 ## Accessors
 
@@ -66,7 +66,7 @@ makeKubeObject<KubeCRD\>('crd').constructor
 
 #### Defined in
 
-[lib/k8s/crd.ts:48](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/crd.ts#L48)
+[lib/k8s/crd.ts:48](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/crd.ts#L48)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/crd.ts:44](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/crd.ts#L44)
+[lib/k8s/crd.ts:44](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/crd.ts#L44)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/crd.ts:52](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/crd.ts#L52)
+[lib/k8s/crd.ts:52](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/crd.ts#L52)
 
 ___
 
@@ -112,7 +112,7 @@ makeKubeObject&lt;KubeCRD\&gt;(&#x27;crd&#x27;).className
 
 #### Defined in
 
-[lib/k8s/crd.ts:40](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/crd.ts#L40)
+[lib/k8s/crd.ts:40](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/crd.ts#L40)
 
 ## Methods
 
@@ -136,7 +136,7 @@ makeKubeObject<KubeCRD\>('crd').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -160,7 +160,7 @@ makeKubeObject<KubeCRD\>('crd').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -187,7 +187,7 @@ makeKubeObject<KubeCRD\>('crd').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -213,7 +213,7 @@ makeKubeObject<KubeCRD\>('crd').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -237,4 +237,4 @@ makeKubeObject<KubeCRD\>('crd').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L72)

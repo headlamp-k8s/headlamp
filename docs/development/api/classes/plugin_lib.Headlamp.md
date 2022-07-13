@@ -6,8 +6,8 @@ slug: "plugin_lib.Headlamp"
 
 [plugin/lib](../modules/plugin_lib.md).Headlamp
 
-This class is a more convenient way for plugins to call registerPlugin in order to register
-themselves.
+This class is a more convenient way for plugins to call registerPlugin in
+order to register themselves.
 
 ## Constructors
 
@@ -16,6 +16,24 @@ themselves.
 • **new Headlamp**()
 
 ## Methods
+
+### isRunningAsApp
+
+▸ `Static` **isRunningAsApp**(): `boolean`
+
+Returns whether Headlamp is running as a desktop app.
+
+#### Returns
+
+`boolean`
+
+true if Headlamp is running as a desktop app.
+
+#### Defined in
+
+[plugin/lib.ts:149](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/lib.ts#L149)
+
+___
 
 ### registerPlugin
 
@@ -50,4 +68,56 @@ Headlamp.registerPlugin("aPluginIdString", myPlugin)
 
 #### Defined in
 
-[plugin/lib.ts:134](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/lib.ts#L134)
+[plugin/lib.ts:104](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/lib.ts#L104)
+
+___
+
+### setAppMenu
+
+▸ `Static` **setAppMenu**(`appMenuFunc`): `void`
+
+Changes the app menu.
+If Headlamp is not running as a desktop app, then this method prints an error and doesn't do anything.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `appMenuFunc` | (`currentAppMenuSpec`: ``null`` \| [`AppMenu`](../interfaces/plugin_lib.AppMenu.md)[]) => ``null`` \| [`AppMenu`](../interfaces/plugin_lib.AppMenu.md)[] | A function that receives the current app menu configuration and a new one. If the function returns null, the menu is not changed. |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/lib.ts:133](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/lib.ts#L133)
+
+___
+
+### setCluster
+
+▸ `Static` **setCluster**(`clusterReq`): `Promise`<`any`\>
+
+Configure (or update) a cluster that can then be used throughout Headlamp.
+If the request is successful, further calls to `K8s.useClustersConf()`
+will show the newly configured cluster.
+
+**Important:** This is only available in the desktop version and will result in a
+bad request when running in-cluster.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `clusterReq` | [`ClusterRequest`](../interfaces/lib_k8s_apiProxy.ClusterRequest.md) | the cluster to be added or updated. |
+
+#### Returns
+
+`Promise`<`any`\>
+
+a promise which completes to Headlamp's configuration (showing the list of configured clusters).
+
+#### Defined in
+
+[plugin/lib.ts:121](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/lib.ts#L121)

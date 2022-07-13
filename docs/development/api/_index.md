@@ -34,6 +34,7 @@ slug: "_index"
 - [lib/k8s/serviceAccount](modules/lib_k8s_serviceAccount.md)
 - [lib/k8s/statefulSet](modules/lib_k8s_statefulSet.md)
 - [lib/k8s/storageClass](modules/lib_k8s_storageClass.md)
+- [lib/k8s/token](modules/lib_k8s_token.md)
 - [lib/router](modules/lib_router.md)
 - [lib/util](modules/lib_util.md)
 - [plugin/lib](modules/plugin_lib.md)

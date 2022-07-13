@@ -30,7 +30,7 @@ makeKubeObject<KubeNamespace\>('namespace').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -52,7 +52,7 @@ makeKubeObject<KubeNamespace\>('namespace').constructor
 
 #### Defined in
 
-[lib/k8s/namespace.ts:11](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/namespace.ts#L11)
+[lib/k8s/namespace.ts:11](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/namespace.ts#L11)
 
 ___
 
@@ -66,7 +66,7 @@ makeKubeObject<KubeNamespace\>('namespace').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -80,7 +80,7 @@ makeKubeObject<KubeNamespace\>('namespace').className
 
 #### Defined in
 
-[lib/k8s/namespace.ts:13](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/namespace.ts#L13)
+[lib/k8s/namespace.ts:13](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/namespace.ts#L13)
 
 ## Methods
 
@@ -104,7 +104,7 @@ makeKubeObject<KubeNamespace\>('namespace').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -128,7 +128,7 @@ makeKubeObject<KubeNamespace\>('namespace').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -155,7 +155,7 @@ makeKubeObject<KubeNamespace\>('namespace').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -181,7 +181,7 @@ makeKubeObject<KubeNamespace\>('namespace').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -205,4 +205,4 @@ makeKubeObject<KubeNamespace\>('namespace').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L72)
