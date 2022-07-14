@@ -6,12 +6,6 @@ linktitle: Building & Shipping
 This section explains how to start developing a Headlamp plugin, and how
 to ship it once finished.
 
-Before you dive into the following sections on how to develop plugins for
-Headlamp, you can watch this quick [video](https://www.youtube.com/watch?v=vyki8c6AkeE)
-to see how simple it is to get started.
-
-{{< youtube "vyki8c6AkeE" >}}
-
 ## Creating a new plugin
 
 This is how to start a new plugin:
