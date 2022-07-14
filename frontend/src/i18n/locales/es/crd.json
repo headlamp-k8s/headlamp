@@ -1,5 +1,7 @@
 {
+  "Error getting custom resource definition {{ crName }}: {{ errorMessage }}": "",
   "Loading custom resource details": "Cargando detalles de la \"custom resource\"",
+  "Error getting custom resource {{ crName }}: {{ errorMessage }}": "",
   "Failed to get objects": "Fallo al obtener objetos",
   "Accepted Names": "Nombres Aceptados",
   "Custom Resource Definitions": "Custom Resource Definitions"
