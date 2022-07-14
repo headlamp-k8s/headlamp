@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import { SidebarEntry } from '../../redux/reducers/ui';
 import store from '../../redux/stores/store';
+import { SidebarItemProps } from '../Sidebar';
 
 function prepareRoutes(t: (arg: string) => string) {
-  const LIST_ITEMS: SidebarEntry[] = [
+  const LIST_ITEMS: SidebarItemProps[] = [
     {
       name: 'cluster',
       label: t('glossary|Cluster'),
@@ -123,7 +123,7 @@ function prepareRoutes(t: (arg: string) => string) {
 
   const items = store.getState().ui.sidebar.entries;
   // @todo: Find a better way to avoid modifying the objects in LIST_ITEMS.
-  const routes: SidebarEntry[] = JSON.parse(JSON.stringify(LIST_ITEMS));
+  const routes: SidebarItemProps[] = JSON.parse(JSON.stringify(LIST_ITEMS));
 
   for (const i of Object.values(items)) {
     const item = _.cloneDeep(i);

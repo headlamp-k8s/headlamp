@@ -16,7 +16,7 @@ import { useHistory } from 'react-router-dom';
 import LocaleSelect from '../../i18n/LocaleSelect/LocaleSelect';
 import { getToken, setToken } from '../../lib/auth';
 import { useCluster } from '../../lib/k8s';
-import { setWhetherSidebarOpen } from '../../redux/actions/actions';
+import { HeaderActionType, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
 import { drawerWidth } from '../Sidebar';
@@ -74,9 +74,7 @@ export default function TopBar({}: TopBarProps) {
 
 export interface PureTopBarProps {
   /** If the sidebar is fully expanded open or shrunk. */
-  appBarActions: {
-    [name: string]: (...args: any[]) => JSX.Element | null;
-  };
+  appBarActions: HeaderActionType[];
   logout: () => void;
   hasToken: boolean;
 
@@ -117,6 +115,31 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[] }) {
+  return (
+    <>
+      {appBarActions.map((action, i) => (
+        <MenuItem>
+          <React.Fragment key={i}>
+            {React.isValidElement(action) ? action : action ? action() : null}
+          </React.Fragment>
+        </MenuItem>
+      ))}
+    </>
+  );
+}
+function AppBarActions({ appBarActions }: { appBarActions: HeaderActionType[] }) {
+  return (
+    <>
+      {appBarActions.map((action, i) => (
+        <React.Fragment key={i}>
+          {React.isValidElement(action) ? action : action ? action() : null}
+        </React.Fragment>
+      ))}
+    </>
+  );
+}
 
 export function PureTopBar({
   appBarActions,
@@ -205,11 +228,7 @@ export function PureTopBar({
       <MenuItem>
         <ClusterTitle cluster={cluster} clusters={clusters} />
       </MenuItem>
-      {Object.values(appBarActions).map((action, i) => (
-        <MenuItem>
-          <React.Fragment key={i}>{action()}</React.Fragment>
-        </MenuItem>
-      ))}
+      <AppBarActionsMenu appBarActions={appBarActions} />
       <MenuItem>
         <Notifications />
       </MenuItem>
@@ -250,9 +269,7 @@ export function PureTopBar({
               <div className={clsx(classes.grow, classes.clusterTitle)}>
                 <ClusterTitle cluster={cluster} clusters={clusters} />
               </div>
-              {Object.values(appBarActions).map((action, i) => (
-                <React.Fragment key={i}>{action()}</React.Fragment>
-              ))}
+              <AppBarActions appBarActions={appBarActions} />
               <Notifications />
               <LocaleSelect />
               <ThemeChangeButton />

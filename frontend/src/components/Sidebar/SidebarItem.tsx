@@ -1,3 +1,4 @@
+import { IconProps } from '@iconify/react';
 import Collapse from '@material-ui/core/Collapse';
 import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
@@ -6,7 +7,6 @@ import React from 'react';
 import { generatePath } from 'react-router';
 import { createRouteURL, getRoute } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
-import { SidebarEntry } from '../../redux/reducers/ui';
 import ListItemLink from './ListItemLink';
 
 const useItemStyle = makeStyles(theme => ({
@@ -71,7 +71,42 @@ const useItemStyle = makeStyles(theme => ({
   },
 }));
 
-export interface SidebarItemProps extends ListItemProps, SidebarEntry {
+/**
+ * Represents an entry in the sidebar menu.
+ */
+export interface SidebarEntryProps {
+  /**
+   * Name of this SidebarItem.
+   */
+  name: string;
+  /**
+   * Label to display.
+   */
+  label: string;
+  /**
+   * Name of the parent SidebarEntry.
+   */
+  parent?: string | null;
+  /**
+   * URL to go to when this item is followed.
+   */
+  url?: string;
+  /**
+   * Should URL have the cluster prefix? (default=true)
+   */
+  useClusterURL?: boolean;
+  /**
+   * An iconify string or icon object that will be used for the sidebar's icon
+   *
+   * @see https://icon-sets.iconify.design/mdi/ for icons.
+   */
+  icon?: IconProps['icon'];
+}
+
+/**
+ * Adds onto SidebarEntryProps for the display of the sidebars.
+ */
+export interface SidebarItemProps extends ListItemProps, SidebarEntryProps {
   /** The route name which is selected. */
   selectedName?: string | null;
   /** The navigation is a child. */
@@ -80,6 +115,8 @@ export interface SidebarItemProps extends ListItemProps, SidebarEntry {
   fullWidth?: boolean;
   /** Search part of the URL. */
   search?: string;
+  /** If a menu item has sub menu items, they will be in here. */
+  subList?: this[];
 }
 
 export default function SidebarItem(props: SidebarItemProps) {
@@ -96,7 +133,6 @@ export default function SidebarItem(props: SidebarItemProps) {
     fullWidth = true,
     ...other
   } = props;
-
   const classes = useItemStyle({ fullWidth });
 
   let fullURL = url;
@@ -151,8 +187,8 @@ export default function SidebarItem(props: SidebarItemProps) {
         <ListItem className={classes.fullWidthList}>
           <Collapse in={fullWidth && expanded} className={classes.fullWidth}>
             <List component="ul" disablePadding className={classes.nested}>
-              {subList.map((item, i) => (
-                <SidebarItem key={i} selectedName={selectedName} hasParent {...item} />
+              {subList.map((item: SidebarItemProps) => (
+                <SidebarItem key={item.name} selectedName={selectedName} hasParent {...item} />
               ))}
             </List>
           </Collapse>

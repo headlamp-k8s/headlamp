@@ -24,7 +24,7 @@ export default function RouteSwitcher() {
             <Route
               path={route.path}
               component={() => (
-                <PageTitle title={t(route.name ? route.name : route.sidebar)}>
+                <PageTitle title={t(route.name ? route.name : route.sidebar ? route.sidebar : '')}>
                   <route.component />
                 </PageTitle>
               )}
@@ -39,7 +39,7 @@ export default function RouteSwitcher() {
               requiresCluster={!route.noCluster}
               exact={!!route.exact}
               children={
-                <PageTitle title={route.name ? route.name : route.sidebar}>
+                <PageTitle title={t(route.name ? route.name : route.sidebar ? route.sidebar : '')}>
                   <route.component />
                 </PageTitle>
               }

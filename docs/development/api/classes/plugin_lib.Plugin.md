@@ -6,7 +6,7 @@ slug: "plugin_lib.Plugin"
 
 [plugin/lib](../modules/plugin_lib.md).Plugin
 
-Plugins should call Headlamp.registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
+Plugins may call Headlamp.registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
 
 They will have their initialize(register) method called at plugin initialization time.
 
@@ -38,4 +38,4 @@ initialize is called for each plugin with a Registry which gives the plugin meth
 
 #### Defined in
 
-[plugin/lib.ts:94](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/lib.ts#L94)
+[plugin/lib.ts:47](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/lib.ts#L47)

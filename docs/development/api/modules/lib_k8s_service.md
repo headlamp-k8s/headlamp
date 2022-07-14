@@ -10,4 +10,6 @@ slug: "lib_k8s_service"
 
 ## Interfaces
 
+- [KubeLoadBalancerIngress](../interfaces/lib_k8s_service.KubeLoadBalancerIngress.md)
+- [KubePortStatus](../interfaces/lib_k8s_service.KubePortStatus.md)
 - [KubeService](../interfaces/lib_k8s_service.KubeService.md)

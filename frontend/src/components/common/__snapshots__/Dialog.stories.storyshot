@@ -1,21 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Dialog Confirm Dialog 1`] = `
-<div
-  id="root"
->
-  <div />
-</div>
-`;
-
-exports[`Storyshots Dialog Confirm Dialog Closed 1`] = `
-<div
-  id="root"
->
-  <div />
-</div>
-`;
-
 exports[`Storyshots Dialog Dialog 1`] = `
 <div
   id="root"

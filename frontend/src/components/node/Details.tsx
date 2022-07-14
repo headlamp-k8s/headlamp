@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import { timeAgo } from '../../lib/util';
@@ -14,6 +13,7 @@ import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
 import { DetailsGrid, OwnedPodsSection } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
+import DetailsViewSection from '../DetailsViewSection';
 
 export default function NodeDetails() {
   const { name } = useParams<{ name: string }>();
@@ -57,7 +57,7 @@ export default function NodeDetails() {
           <>
             <SystemInfoSection node={item} />
             <OwnedPodsSection resource={item?.jsonData} />
-            <DetailsViewPluginRenderer resource={item} />
+            <DetailsViewSection resource={item} />
           </>
         )
       }

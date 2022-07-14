@@ -1,8 +1,6 @@
-import { Headlamp, K8s, Plugin, Registry } from '@kinvolk/headlamp-plugin/lib';
+import { K8s, registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import React from 'react';
-// import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
 
 const useStyle = makeStyles(() => ({
   pods: {
@@ -22,11 +20,4 @@ function PodCounter() {
   );
 }
 
-class PodCounterPlugin extends Plugin {
-  initialize(registry: Registry) {
-    registry.registerAppBarAction('pod-counter-action', () => <PodCounter />);
-    return true;
-  }
-}
-
-Headlamp.registerPlugin('pod-counter', new PodCounterPlugin());
+registerAppBarAction(PodCounter);

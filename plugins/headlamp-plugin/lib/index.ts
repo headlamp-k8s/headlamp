@@ -4,7 +4,18 @@ import * as Notification from '../types/lib/notification';
 import * as Router from '../types/lib/router';
 import * as Utils from '../types/lib/util';
 import { Headlamp, Plugin } from '../types/plugin/lib';
-import Registry from '../types/plugin/registry';
+import Registry, {
+  AppLogoProps,
+  ClusterChooserProps,
+  DetailsViewSectionProps,
+  registerAppBarAction,
+  registerAppLogo,
+  registerClusterChooser,
+  registerDetailsViewHeaderAction,
+  registerDetailsViewSection,
+  registerRoute,
+  registerSidebarEntry,
+} from '../types/plugin/registry';
 import * as CommonComponents from './CommonComponents';
 
 // We export k8s (lowercase) since someone may use it as we do in the Headlamp source code.
@@ -19,4 +30,14 @@ export {
   Registry,
   Headlamp,
   Notification,
+  AppLogoProps,
+  ClusterChooserProps,
+  DetailsViewSectionProps,
+  registerAppLogo,
+  registerAppBarAction,
+  registerClusterChooser,
+  registerDetailsViewHeaderAction,
+  registerDetailsViewSection,
+  registerRoute,
+  registerSidebarEntry,
 };

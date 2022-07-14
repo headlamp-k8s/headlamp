@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import Namespace from '../../lib/k8s/namespace';
 import { StatusLabel } from '../common/Label';
 import { ConditionsSection, DetailsGrid, OwnedPodsSection } from '../common/Resource';
+import DetailsViewSection from '../DetailsViewSection';
 
 export default function NamespaceDetails() {
   const { name } = useParams<{ name: string }>();
@@ -32,7 +32,7 @@ export default function NamespaceDetails() {
           <>
             {item.status?.conditions && <ConditionsSection resource={item} />}
             <OwnedPodsSection hideColumns={['namespace']} resource={item?.jsonData} />
-            <DetailsViewPluginRenderer resource={item} />
+            <DetailsViewSection resource={item} />
           </>
         )
       }

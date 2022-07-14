@@ -1,8 +1,13 @@
 import React from 'react';
+import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
+import { SectionBox } from '../components/common/SectionBox';
+import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/DetailsViewSection';
+import { SidebarEntryProps } from '../components/Sidebar';
+import { AppLogoProps, AppLogoType } from '../components/Sidebar/AppLogo';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
-  BrandingProps,
+  HeaderActionType,
   setAppBarAction,
   setBrandingAppLogoComponent,
   setClusterChooserButtonComponent,
@@ -11,43 +16,44 @@ import {
   setRoute,
   setSidebarItem,
 } from '../redux/actions/actions';
-import { SidebarEntry } from '../redux/reducers/ui';
 import store from '../redux/stores/store';
 
 export interface SectionFuncProps {
   title: string;
   component: (props: { resource: any }) => JSX.Element | null;
 }
-export type clusterChooserButtonComponent = React.ComponentType<{
-  clickHandler: (event?: any) => void;
-}>;
+
+export type { AppLogoProps, AppLogoType };
+export type { ClusterChooserProps, ClusterChooserType };
+export type { SidebarEntryProps };
+export type { DetailsViewSectionProps, DetailsViewSectionType };
+
+/**
+ * @deprecated please used DetailsViewSectionType and registerDetailViewSection
+ */
 export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | undefined;
+
+// @todo: these might be better with a more well defined interface.
+//        So that things like importing material-ui stuff,
+//        tooltips and a11y stuff can be done.
+//        Maybe in a ResourceAction component? That is used by Headlamp too.
+// @todo: these should also have a *Props
+// @todo: HeaderActionType should be deprecated.
+export type DetailsViewHeaderActionType = HeaderActionType;
+export type AppBarActionType = HeaderActionType;
 
 export default class Registry {
   /**
-   * Add a SidebarItem.
-   *
-   * @param parentName - the name of the parent SidebarItem.
-   * @param itemName - name of this SidebarItem.
-   * @param itemLabel - label to display.
-   * @param url - the URL to go to, when this item is followed.
-   * @param opts - may have `useClusterURL` (default=true) which indicates whether the URL should
-   * have the cluster prefix or not; and `icon` (an iconify string or icon object) that will be used
-   * for the sidebar's icon.
-   *
-   * @example
-   *
-   * ```javascript
-   * registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
-   * ```
+   * @deprecated Registry.registerSidebarItem is deprecated. Please use registerSidebarItem.
    */
   registerSidebarItem(
-    parentName: string,
+    parentName: string | null,
     itemName: string,
     itemLabel: string,
     url: string,
-    opts: Pick<SidebarEntry, 'useClusterURL' | 'icon'> = { useClusterURL: true }
+    opts: Pick<SidebarEntryProps, 'useClusterURL' | 'icon'> = { useClusterURL: true }
   ) {
+    console.warn('Registry.registerSidebarItem is deprecated. Please use registerSidebarItem.');
     const { useClusterURL = true, ...options } = opts;
     store.dispatch(
       setSidebarItem({
@@ -62,106 +68,280 @@ export default class Registry {
   }
 
   /**
-   * Add a Route for a component.
-   *
-   * @param routeSpec - details of URL, highlighted sidebar and component to use.
-   *
-   * @see {@link https://github.com/kinvolk/headlamp/blob/main/frontend/src/lib/router.tsx Route examples}
-   *
-   * @example
-   *
-   * ```JSX
-   * // Add a route that will display the given component and select
-   * // the "traces" sidebar item.
-   * register.registerRoute({
-   *   path: '/traces',
-   *   sidebar: 'traces',
-   *   component: () => <TraceList />
-   * });
-   * ```
+   * @deprecated Registry.registerRoute is deprecated. Please use registerRoute.
    */
   registerRoute(routeSpec: Route) {
-    store.dispatch(setRoute(routeSpec));
+    console.warn('Registry.registerRoute is deprecated. Please use registerRoute.');
+    return registerRoute(routeSpec);
   }
 
   /**
-   * Add a component into the details view header.
-   *
-   * @param actionName - a unique name for it
-   * @param actionFunc - a function that returns your component
-   *                     with props to pass into it.
-   *
-   * @example
-   *
-   * ```JSX
-   * register.registerDetailsViewHeaderAction('traces', (props) =>
-   *   <TraceIcon {...props} />
-   * );
-   * ```
+   * @deprecated Registry.registerDetailsViewHeaderAction is deprecated. Please use registerDetailsViewHeaderAction.
    */
-  registerDetailsViewHeaderAction(
-    actionName: string,
-    actionFunc: (...args: any[]) => JSX.Element | null
-  ) {
-    store.dispatch(setDetailsViewHeaderAction(actionName, actionFunc));
+  registerDetailsViewHeaderAction(actionName: string, actionFunc: HeaderActionType) {
+    console.warn(
+      'Registry.registerDetailsViewHeaderAction is deprecated. Please use registerDetailsViewHeaderAction.'
+    );
+    store.dispatch(setDetailsViewHeaderAction(actionFunc));
   }
 
   /**
-   * Add a component into the app bar (at the top of the app).
-   *
-   * @param actionName - a unique name for it
-   * @param actionFunc - a function that returns your component
-   *
-   * @example
-   *
-   * ```JSX
-   * register.registerAppBarAction('monitor', () => <MonitorLink /> );
-   * ```
+   * @deprecated Registry.registerAppBarAction is deprecated. Please use registerAppBarAction.
    */
   registerAppBarAction(actionName: string, actionFunc: (...args: any[]) => JSX.Element | null) {
-    store.dispatch(setAppBarAction(actionName, actionFunc));
+    console.warn('Registry.registerAppBarAction is deprecated. Please use registerAppBarAction.');
+    return registerAppBarAction(actionFunc);
   }
 
   /**
-   * Append the specified title and component to the details view.
-   * @param sectionName a unique name for it
-   * @param sectionFunc - a function that returns your detail view component with props
-   *                      passed into it and the section title
+   * @deprecated Registry.registerDetailsViewSection is deprecated. Please use registerDetailsViewSection.
    *
-   * @example
+   * ```tsx
    *
-   * ```JSX
-   * register.registerDetailsViewSection("biolatency", (resource: KubeObject) => { title: 'Block I/O Latency', component: (props) => <BioLatency {...props} resource={resource}/>});
+   * register.registerDetailsViewSection('biolatency', resource => {
+   *   if (resource?.kind === 'Node') {
+   *     return {
+   *       title: 'Block I/O Latency',
+   *       component: () => <CustomComponent />,
+   *     };
+   *   }
+   *   return null;
+   * });
+   *
    * ```
    */
-  registerDetailsViewSection(sectionName: string, sectionFunc: sectionFunc) {
-    store.dispatch(setDetailsView(sectionName, sectionFunc));
-  }
-  /**
-   * @param component is a React Component that takes two required props ```JSX logoType``` which is a
-   * constant string literal that accepts either of the two values ```JSX small``` or ```JSX large``` depending on whether
-   * the sidebar is in shrink or expaned state so that you can change your logo from small to large and the other optional
-   * prop is the ```JSX themeName``` which is a string with two values 'light' and 'dark' base on which theme is selected.
-   *
-   *
-   * @example
-   * ```JSX
-   * register.registerAppLogo((props: { logoType: 'small' | 'large', themeName: string}) => <MY_CUSTOM_COMPONENT logoType={logoType}/>)
-   * ```
-   */
-  registerAppLogo(component: BrandingProps['logo']) {
-    store.dispatch(setBrandingAppLogoComponent(component));
+  registerDetailsViewSection(
+    sectionName: string,
+    sectionFunc: (props: { resource: any }) => SectionFuncProps | null
+  ) {
+    console.warn(
+      'Registry.registerDetailsViewSection is deprecated. Please use registerDetailsViewSection.'
+    );
+
+    function OurComponent({ resource }: DetailsViewSectionProps) {
+      const res = sectionFunc(resource);
+      if (res === null) {
+        return null;
+      }
+
+      return (
+        <SectionBox title={sectionName}>
+          <res.component resource={resource} />
+        </SectionBox>
+      );
+    }
+
+    return registerDetailsViewSection(OurComponent);
   }
 
   /**
-   * @param component is a React Component that takes one required props ```JSX clickHandler``` which is the
-   * action handler that happens when the custom chooser button component click event occurs
-   * @example
-   * ```JSX
-   * registry.registerClusterChooserComponent((props: { clickHandler: () => {} }) => <MY_CUSTOM_COMPONENT onClick={clickHandler}/>)
-   * ```
+   * @deprecated Registry.registerAppLogo is deprecated. Please use registerAppLogo.
    */
-  registerClusterChooserComponent(component: clusterChooserButtonComponent | null) {
-    store.dispatch(setClusterChooserButtonComponent(component));
+  registerAppLogo(logo: AppLogoType) {
+    console.warn('Registry.registerAppLogo is deprecated. Please use registerAppLogo.');
+    return registerAppLogo(logo);
   }
+
+  /**
+   * @deprecated Registry.registerClusterChooserComponent is deprecated. Please use registerClusterChooser.
+   */
+  registerClusterChooserComponent(component: React.ComponentType<ClusterChooserProps> | null) {
+    console.warn(
+      'Registry.registerClusterChooserComponent is deprecated. Please use registerClusterChooser.'
+    );
+    return registerClusterChooser(component);
+  }
+}
+
+/**
+ * Add a Sidebar Entry to the menu (on the left side of Headlamp).
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerSidebarEntry } from '@kinvolk/headlamp-plugin/lib';
+ * registerSidebarEntry({ parent: 'cluster', name: 'traces', label: 'Traces', url: '/traces' });
+ *
+ * ```
+ *
+ * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/sidebar/ Sidebar Example}
+ */
+export function registerSidebarEntry({
+  parent,
+  name,
+  label,
+  url,
+  useClusterURL = true,
+  icon,
+}: SidebarEntryProps) {
+  store.dispatch(
+    setSidebarItem({
+      name,
+      label,
+      url,
+      parent,
+      useClusterURL,
+      icon,
+    })
+  );
+}
+
+/**
+ * Add a Route for a component.
+ *
+ * @param routeSpec - details of URL, highlighted sidebar and component to use.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerRoute } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * // Add a route that will display the given component and select
+ * // the "traces" sidebar item.
+ * registerRoute({
+ *   path: '/traces',
+ *   sidebar: 'traces',
+ *   component: () => <TraceList />
+ * });
+ * ```
+ *
+ * @see {@link https://github.com/kinvolk/headlamp/blob/main/frontend/src/lib/router.tsx Route examples}
+ * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/sidebar/ Sidebar Example}
+ *
+ */
+export function registerRoute(routeSpec: Route) {
+  store.dispatch(setRoute(routeSpec));
+}
+
+/**
+ * Add a component into the details view header.
+ *
+ * @param headerAction - The action (link) to put in the app bar.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { ActionButton } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
+ * import { registerDetailsViewHeaderAction } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * function IconAction() {
+ *   return (
+ *     <ActionButton
+ *      description="Launch"
+ *      icon="mdi:comment-quote"
+ *      onClick={() => console.log('Hello from IconAction!')}
+ *    />
+ *   )
+ * }
+ *
+ * registerDetailsViewHeaderAction(IconAction);
+ * ```
+ */
+export function registerDetailsViewHeaderAction(headerAction: DetailsViewHeaderActionType) {
+  store.dispatch(setDetailsViewHeaderAction(headerAction));
+}
+
+/**
+ * Add a component into the app bar (at the top of the app).
+ *
+ * @param headerAction - The action (link) to put in the app bar.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
+ * import { Button } from '@material-ui/core';
+ *
+ * function ConsoleLogger() {
+ *   return (
+ *     <Button
+ *       onClick={() => {
+ *         console.log('Hello from ConsoleLogger!')
+ *       }}
+ *     >
+ *       Print Log
+ *     </Button>
+ *   );
+ * }
+ *
+ * registerAppBarAction(ConsoleLogger);
+ * ```
+ */
+export function registerAppBarAction(headerAction: AppBarActionType) {
+  store.dispatch(setAppBarAction(headerAction));
+}
+
+/**
+ * Append a component to the details view for a given resource.
+ *
+ * @param viewSection - The section to add on different view screens.
+ *
+ * @example
+ *
+ * ```tsx
+ * import {
+ *   registerDetailsViewSection,
+ *   DetailsViewSectionProps
+ * } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
+ *   if (resource.kind === 'Pod') {
+ *     return (
+ *       <SectionBox title="A very fine section title">
+ *         The body of our Section for {resource.kind}
+ *       </SectionBox>
+ *     );
+ *   }
+ * });
+ * ```
+ */
+export function registerDetailsViewSection(viewSection: DetailsViewSectionType) {
+  store.dispatch(setDetailsView(viewSection));
+}
+
+/**
+ * Add a logo for Headlamp to use instead of the default one.
+ *
+ * @param logo is a React Component that takes two required props
+ * `logoType` which is a constant string literal that accepts either
+ * of the two values `small` or `large` depending on whether
+ * the sidebar is in shrink or expanded state so that you can change your logo
+ * from small to large and the other optional prop is the `themeName`
+ * which is a string with two values 'light' and 'dark' base on which theme is selected.
+ *
+ * @example
+ * ```tsx
+ * import { registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * registerAppLogo(<p>my logo</p>)
+ * ```
+ *
+ * More complete logo example in plugins/examples/change-logo:
+ * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/change-logo/ Change Logo Example}
+ *
+ */
+export function registerAppLogo(logo: AppLogoType) {
+  store.dispatch(setBrandingAppLogoComponent(logo));
+}
+
+/**
+ * Use a custom cluster chooser button
+ *
+ * @param chooser is a React Component that takes one required props ```clickHandler``` which is the
+ * action handler that happens when the custom chooser button component click event occurs
+ *
+ * @example
+ * ```tsx
+ * import { ClusterChooserProps, registerClusterChooser } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * registerClusterChooser(({ clickHandler, cluster }: ClusterChooserProps) => {
+ *   return <button onClick={clickHandler}>my chooser Current cluster: {cluster}</button>;
+ * })
+ * ```
+ *
+ * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/cluster-chooser/ Cluster Chooser example}
+ *
+ */
+export function registerClusterChooser(chooser: ClusterChooserType) {
+  store.dispatch(setClusterChooserButtonComponent(chooser));
 }

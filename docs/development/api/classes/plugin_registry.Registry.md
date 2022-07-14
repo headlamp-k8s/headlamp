@@ -18,20 +18,14 @@ slug: "plugin_registry.Registry"
 
 ▸ **registerAppBarAction**(`actionName`, `actionFunc`): `void`
 
-Add a component into the app bar (at the top of the app).
-
-**`example`**
-
-```JSX
-register.registerAppBarAction('monitor', () => <MonitorLink /> );
-```
+**`deprecated`** Registry.registerAppBarAction is deprecated. Please use registerAppBarAction.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `actionName` | `string` | a unique name for it |
-| `actionFunc` | (...`args`: `any`[]) => ``null`` \| `Element` | a function that returns your component |
+| Name | Type |
+| :------ | :------ |
+| `actionName` | `string` |
+| `actionFunc` | (...`args`: `any`[]) => ``null`` \| `Element` |
 
 #### Returns
 
@@ -39,24 +33,21 @@ register.registerAppBarAction('monitor', () => <MonitorLink /> );
 
 #### Defined in
 
-[plugin/registry.tsx:117](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L117)
+[plugin/registry.tsx:91](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L91)
 
 ___
 
 ### registerAppLogo
 
-▸ **registerAppLogo**(`component`): `void`
+▸ **registerAppLogo**(`logo`): `void`
 
-**`example`**
-```JSX
-register.registerAppLogo((props: { logoType: 'small' | 'large', themeName: string}) => <MY_CUSTOM_COMPONENT logoType={logoType}/>)
-```
+**`deprecated`** Registry.registerAppLogo is deprecated. Please use registerAppLogo.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `component` | ``null`` \| `ComponentType`<{ `[key: string]`: `any`; `logoType`: ``"small"`` \| ``"large"`` ; `themeName`: `string`  }\> | is a React Component that takes two required props ```JSX logoType``` which is a constant string literal that accepts either of the two values ```JSX small``` or ```JSX large``` depending on whether the sidebar is in shrink or expaned state so that you can change your logo from small to large and the other optional prop is the ```JSX themeName``` which is a string with two values 'light' and 'dark' base on which theme is selected. |
+| Name | Type |
+| :------ | :------ |
+| `logo` | [`AppLogoType`](../modules/plugin_registry.md#applogotype) |
 
 #### Returns
 
@@ -64,7 +55,29 @@ register.registerAppLogo((props: { logoType: 'small' | 'large', themeName: strin
 
 #### Defined in
 
-[plugin/registry.tsx:148](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L148)
+[plugin/registry.tsx:140](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L140)
+
+___
+
+### registerClusterChooserComponent
+
+▸ **registerClusterChooserComponent**(`component`): `void`
+
+**`deprecated`** Registry.registerClusterChooserComponent is deprecated. Please use registerClusterChooser.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `component` | ``null`` \| `ComponentType`<[`ClusterChooserProps`](../interfaces/plugin_registry.ClusterChooserProps.md)\> |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/registry.tsx:148](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L148)
 
 ___
 
@@ -72,22 +85,14 @@ ___
 
 ▸ **registerDetailsViewHeaderAction**(`actionName`, `actionFunc`): `void`
 
-Add a component into the details view header.
-
-**`example`**
-
-```JSX
-register.registerDetailsViewHeaderAction('traces', (props) =>
-  <TraceIcon {...props} />
-);
-```
+**`deprecated`** Registry.registerDetailsViewHeaderAction is deprecated. Please use registerDetailsViewHeaderAction.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `actionName` | `string` | a unique name for it |
-| `actionFunc` | (...`args`: `any`[]) => ``null`` \| `Element` | a function that returns your component                     with props to pass into it. |
+| Name | Type |
+| :------ | :------ |
+| `actionName` | `string` |
+| `actionFunc` | `HeaderActionType` |
 
 #### Returns
 
@@ -95,7 +100,7 @@ register.registerDetailsViewHeaderAction('traces', (props) =>
 
 #### Defined in
 
-[plugin/registry.tsx:98](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L98)
+[plugin/registry.tsx:81](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L81)
 
 ___
 
@@ -103,20 +108,28 @@ ___
 
 ▸ **registerDetailsViewSection**(`sectionName`, `sectionFunc`): `void`
 
-Append the specified title and component to the details view.
+**`deprecated`** Registry.registerDetailsViewSection is deprecated. Please use registerDetailsViewSection.
 
-**`example`**
+```tsx
 
-```JSX
-register.registerDetailsViewSection("biolatency", (resource: KubeObject) => { title: 'Block I/O Latency', component: (props) => <BioLatency {...props} resource={resource}/>});
+register.registerDetailsViewSection('biolatency', resource => {
+  if (resource?.kind === 'Node') {
+    return {
+      title: 'Block I/O Latency',
+      component: () => <CustomComponent />,
+    };
+  }
+  return null;
+});
+
 ```
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `sectionName` | `string` | a unique name for it |
-| `sectionFunc` | [`sectionFunc`](../modules/plugin_registry.md#sectionfunc) | a function that returns your detail view component with props                      passed into it and the section title |
+| Name | Type |
+| :------ | :------ |
+| `sectionName` | `string` |
+| `sectionFunc` | (`props`: { `resource`: `any`  }) => ``null`` \| [`SectionFuncProps`](../interfaces/plugin_registry.SectionFuncProps.md) |
 
 #### Returns
 
@@ -124,7 +137,7 @@ register.registerDetailsViewSection("biolatency", (resource: KubeObject) => { ti
 
 #### Defined in
 
-[plugin/registry.tsx:133](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L133)
+[plugin/registry.tsx:113](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L113)
 
 ___
 
@@ -132,27 +145,13 @@ ___
 
 ▸ **registerRoute**(`routeSpec`): `void`
 
-Add a Route for a component.
-
-**`see`** [Route examples](https://github.com/kinvolk/headlamp/blob/main/frontend/src/lib/router.tsx)
-
-**`example`**
-
-```JSX
-// Add a route that will display the given component and select
-// the "traces" sidebar item.
-register.registerRoute({
-  path: '/traces',
-  sidebar: 'traces',
-  component: () => <TraceList />
-});
-```
+**`deprecated`** Registry.registerRoute is deprecated. Please use registerRoute.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `routeSpec` | [`Route`](../interfaces/lib_router.Route.md) | details of URL, highlighted sidebar and component to use. |
+| Name | Type |
+| :------ | :------ |
+| `routeSpec` | [`Route`](../interfaces/lib_router.Route.md) |
 
 #### Returns
 
@@ -160,7 +159,7 @@ register.registerRoute({
 
 #### Defined in
 
-[plugin/registry.tsx:79](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L79)
+[plugin/registry.tsx:73](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L73)
 
 ___
 
@@ -168,23 +167,17 @@ ___
 
 ▸ **registerSidebarItem**(`parentName`, `itemName`, `itemLabel`, `url`, `opts?`): `void`
 
-Add a SidebarItem.
-
-**`example`**
-
-```javascript
-registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
-```
+**`deprecated`** Registry.registerSidebarItem is deprecated. Please use registerSidebarItem.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `parentName` | `string` | the name of the parent SidebarItem. |
-| `itemName` | `string` | name of this SidebarItem. |
-| `itemLabel` | `string` | label to display. |
-| `url` | `string` | the URL to go to, when this item is followed. |
-| `opts` | `Pick`<`SidebarEntry`, ``"useClusterURL"`` \| ``"icon"``\> | may have `useClusterURL` (default=true) which indicates whether the URL should have the cluster prefix or not; and `icon` (an iconify string or icon object) that will be used for the sidebar's icon. |
+| Name | Type |
+| :------ | :------ |
+| `parentName` | ``null`` \| `string` |
+| `itemName` | `string` |
+| `itemLabel` | `string` |
+| `url` | `string` |
+| `opts` | `Pick`<[`SidebarEntryProps`](../interfaces/plugin_registry.SidebarEntryProps.md), ``"useClusterURL"`` \| ``"icon"``\> |
 
 #### Returns
 
@@ -192,4 +185,4 @@ registerSidebarItem('cluster', 'traces', 'Traces', '/traces');
 
 #### Defined in
 
-[plugin/registry.tsx:40](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/plugin/registry.tsx#L40)
+[plugin/registry.tsx:49](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L49)

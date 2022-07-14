@@ -4,6 +4,11 @@ linkTitle: "lib/util"
 slug: "lib_util"
 ---
 
+## Namespaces
+
+- [auth](lib_util.auth.md)
+- [units](lib_util.units.md)
+
 ## Interfaces
 
 - [FilterState](../interfaces/lib_util.FilterState.md)
@@ -16,17 +21,17 @@ slug: "lib_util"
 
 #### Defined in
 
-[lib/util.ts:20](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L20)
+[lib/util.ts:20](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L20)
 
 ## Variables
 
 ### CLUSTER\_ACTION\_GRACE\_PERIOD
 
-• **CLUSTER\_ACTION\_GRACE\_PERIOD**: ``5000``
+• `Const` **CLUSTER\_ACTION\_GRACE\_PERIOD**: ``5000``
 
 #### Defined in
 
-[lib/util.ts:18](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L18)
+[lib/util.ts:18](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L18)
 
 ## Functions
 
@@ -48,7 +53,7 @@ slug: "lib_util"
 
 #### Defined in
 
-[lib/util.ts:85](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L85)
+[lib/util.ts:85](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L85)
 
 ___
 
@@ -62,7 +67,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:154](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L154)
+[lib/util.ts:154](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L154)
 
 ___
 
@@ -82,7 +87,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:146](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L146)
+[lib/util.ts:146](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L146)
 
 ___
 
@@ -103,7 +108,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:34](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L34)
+[lib/util.ts:34](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L34)
 
 ___
 
@@ -123,7 +128,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:43](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L43)
+[lib/util.ts:43](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L43)
 
 ___
 
@@ -145,7 +150,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L61)
+[lib/util.ts:61](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L61)
 
 ___
 
@@ -166,7 +171,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:51](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L51)
+[lib/util.ts:51](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L51)
 
 ___
 
@@ -186,7 +191,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:47](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L47)
+[lib/util.ts:47](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L47)
 
 ___
 
@@ -206,7 +211,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:26](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L26)
+[lib/util.ts:26](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L26)
 
 ___
 
@@ -226,7 +231,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:22](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L22)
+[lib/util.ts:22](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L22)
 
 ___
 
@@ -246,7 +251,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:166](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L166)
+[lib/util.ts:166](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L166)
 
 ___
 
@@ -278,4 +283,4 @@ ___
 
 #### Defined in
 
-[lib/util.ts:141](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/util.ts#L141)
+[lib/util.ts:141](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L141)

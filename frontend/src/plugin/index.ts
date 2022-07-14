@@ -8,7 +8,15 @@ import helpers from '../helpers';
 import { UI_RESET_PLUGIN_VIEWS } from '../redux/actions/actions';
 import store from '../redux/stores/store';
 import { Headlamp, Plugin } from './lib';
-import Registry from './registry';
+import Registry, {
+  registerAppBarAction,
+  registerAppLogo,
+  registerClusterChooser,
+  registerDetailsViewHeaderAction,
+  registerDetailsViewSection,
+  registerRoute,
+  registerSidebarEntry,
+} from './registry';
 
 window.pluginLib = {
   ApiProxy: require('../lib/k8s/apiProxy'),
@@ -17,6 +25,7 @@ window.pluginLib = {
   MuiCore: require('@material-ui/core'),
   MuiStyles: require('@material-ui/styles'),
   React: require('react'),
+  ReactJSX: require('react/jsx-runtime'),
   ReactDOM: require('react-dom'),
   Recharts: require('recharts'),
   ReactRouter: require('react-router-dom'),
@@ -29,6 +38,13 @@ window.pluginLib = {
   Notification: require('../lib/notification'),
   Headlamp,
   Plugin,
+  registerAppBarAction,
+  registerAppLogo,
+  registerClusterChooser,
+  registerDetailsViewHeaderAction,
+  registerDetailsViewSection,
+  registerRoute,
+  registerSidebarEntry,
 };
 
 // @todo: should window.plugins be private?

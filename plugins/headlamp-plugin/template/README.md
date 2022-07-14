@@ -1,16 +1,14 @@
-# cra-template-headlamp
+# $${name}
 
-This is the official TypeScript template for [Headlamp Plugins](https://github.com/kinvolk/headlamp).
+This is the default template README for [Headlamp Plugins](https://github.com/kinvolk/headlamp).
 
-To use this template to start a new plugin with the npx command (comes with Node.js):
+- The description of your plugin should go here.
+- You should also edit the package.json file meta data (like name and description).
 
-```sh
-npx create-react-app headlamp-myfancy --template headlamp
-```
+## Developing Headlamp plugins
 
-For more information, please refer to:
+For more information on developing Headlamp plugins, please refer to:
 
-- [Create React App Custom Templates](https://create-react-app.dev/docs/custom-templates/)
 - [Getting Started](https://kinvolk.io/docs/headlamp/latest/development/plugins/), How to create a new Headlamp plugin.
 - [API Reference](https://kinvolk.io/docs/headlamp/latest/development/api/), API documentation for what you can do
 - [UI Component Storybook](https://kinvolk.io/docs/headlamp/latest/development/storybook/), pre-existing components you can use when creating your plugin.

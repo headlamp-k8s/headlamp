@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import { ApiError, apiFactory } from '../../lib/k8s/apiProxy';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
 import { timeAgo } from '../../lib/util';
@@ -11,6 +10,7 @@ import Loader from '../common/Loader';
 import { ConditionsTable, MainInfoSection, PageGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
+import DetailsViewSection from '../DetailsViewSection';
 
 function getAPIForCRD(item: KubeCRD) {
   const group = item.spec.group;
@@ -182,7 +182,7 @@ export default function CustomResourceDefinitionDetails() {
           ]}
         />
       </SectionBox>
-      <DetailsViewPluginRenderer resource={item} />
+      <DetailsViewSection resource={item} />
     </PageGrid>
   );
 }

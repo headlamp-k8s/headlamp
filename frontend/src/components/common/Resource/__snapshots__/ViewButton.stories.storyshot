@@ -5,7 +5,7 @@ exports[`Storyshots Resource/ViewButton View 1`] = `
   id="root"
 >
   <button
-    aria-label="show yaml viewer"
+    aria-label="View YAML"
     class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
     tabindex="0"
     title="View YAML"
@@ -28,7 +28,7 @@ exports[`Storyshots Resource/ViewButton View Open 1`] = `
   id="root"
 >
   <button
-    aria-label="show yaml viewer"
+    aria-label="View YAML"
     class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
     tabindex="0"
     title="View YAML"

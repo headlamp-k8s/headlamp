@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import { StringDict } from '../../lib/k8s/cluster';
 import StatefulSet from '../../lib/k8s/statefulSet';
 import {
@@ -10,6 +9,7 @@ import {
   MetadataDictGrid,
   OwnedPodsSection,
 } from '../common/Resource';
+import DetailsViewSection from '../DetailsViewSection';
 
 export default function StatefulSetDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
@@ -40,7 +40,7 @@ export default function StatefulSetDetails() {
               <ContainersSection resource={item?.jsonData} />
             </>
           )}
-          <DetailsViewPluginRenderer resource={item} />
+          <DetailsViewSection resource={item} />
         </>
       )}
     />

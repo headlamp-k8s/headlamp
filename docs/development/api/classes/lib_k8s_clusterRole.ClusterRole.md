@@ -30,7 +30,7 @@ slug: "lib_k8s_clusterRole.ClusterRole"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -56,7 +56,7 @@ slug: "lib_k8s_clusterRole.ClusterRole"
 
 #### Defined in
 
-[lib/k8s/clusterRole.ts:5](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/clusterRole.ts#L5)
+[lib/k8s/clusterRole.ts:5](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/clusterRole.ts#L5)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/clusterRole.ts:7](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/clusterRole.ts#L7)
+[lib/k8s/clusterRole.ts:7](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/clusterRole.ts#L7)
 
 ___
 
@@ -102,7 +102,7 @@ Role.rules
 
 #### Defined in
 
-[lib/k8s/role.ts:17](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/role.ts#L17)
+[lib/k8s/role.ts:17](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/role.ts#L17)
 
 ## Methods
 
@@ -126,7 +126,7 @@ Role.rules
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -203,7 +203,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -227,4 +227,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L72)

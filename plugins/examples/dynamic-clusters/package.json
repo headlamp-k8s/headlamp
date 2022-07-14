@@ -1,7 +1,7 @@
 {
-  "name": "dynamic-clusters",
+  "name": "@kinvolk/dynamic-clusters",
   "version": "0.0.1",
-  "description": "A Headlamp (the extensible Kubernetes web UI) plugin that shows how to set up clusters dynamically",
+  "description": "A Headlamp (the extensible Kubernetes web UI) plugin that shows how to set up Kubernetes clusters dynamically",
   "scripts": {
     "start": "headlamp-plugin start",
     "build": "headlamp-plugin build",
@@ -12,6 +12,8 @@
   },
   "keywords": [
     "headlamp",
+    "headlamp-ui",
+    "headlamp-debugging",
     "headlamp-plugin",
     "kubernetes",
     "plugins"
@@ -25,6 +27,6 @@
     ]
   },
   "devDependencies": {
-    "@kinvolk/headlamp-plugin": "^0.4.8"
+    "@kinvolk/headlamp-plugin": "^0.4.9"
   }
 }

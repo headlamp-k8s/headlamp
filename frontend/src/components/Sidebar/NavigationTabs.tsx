@@ -7,8 +7,8 @@ import { generatePath, useHistory } from 'react-router';
 import { createRouteURL } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { SidebarEntry } from '../../redux/reducers/ui';
 import Tabs from '../common/Tabs';
+import { SidebarItemProps } from '../Sidebar';
 import prepareRoutes from './prepareRoutes';
 
 const useStyle = makeStyles(() => ({
@@ -17,7 +17,7 @@ const useStyle = makeStyles(() => ({
   },
 }));
 
-function searchNameInSubList(sublist: SidebarEntry['subList'], name: string): boolean {
+function searchNameInSubList(sublist: SidebarItemProps['subList'], name: string): boolean {
   if (!sublist) {
     return false;
   }
@@ -29,7 +29,10 @@ function searchNameInSubList(sublist: SidebarEntry['subList'], name: string): bo
   return false;
 }
 
-function findParentOfSubList(list: SidebarEntry[], name: string | null): SidebarEntry | null {
+function findParentOfSubList(
+  list: SidebarItemProps[],
+  name: string | null
+): SidebarItemProps | null {
   if (!name) {
     return null;
   }

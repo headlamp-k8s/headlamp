@@ -1,16 +1,13 @@
 import { Headlamp, Plugin } from '@kinvolk/headlamp-plugin/lib';
-// import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
-// import { K8s } from '@kinvolk/headlamp-plugin/lib/K8s';
-// import { Typography } from '@material-ui/core';
 
-class MyPlugin extends Plugin {
+class AppMenuDemo extends Plugin {
   static warnedOnce = false;
 
   initialize() {
     console.log('app-menus plugin initialized');
 
-    if (!MyPlugin.warnedOnce && !Headlamp.isRunningAsApp()) {
-      MyPlugin.warnedOnce = true;
+    if (!AppMenuDemo.warnedOnce && !Headlamp.isRunningAsApp()) {
+      AppMenuDemo.warnedOnce = true;
       window.alert(
         'app-menus plugin: Headland is running as an app. This plugin will not do anything!'
       );
@@ -44,4 +41,4 @@ class MyPlugin extends Plugin {
   }
 }
 
-Headlamp.registerPlugin('app-menus', new MyPlugin());
+Headlamp.registerPlugin('app-menus', new AppMenuDemo());

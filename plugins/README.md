@@ -6,9 +6,12 @@ or in this repo at
 [../docs/development/plugins/](../docs/development/plugins/).
 
 
-Folder                   | Description
-------                   | -----------
-examples/                | Exmaple folder
-examples/pod-counter     | Example plugin. Displays number of Pods in title bar.
-headlamp-plugin          | headlamp-plugin script which plugins use.
-headlamp-plugin/template | Template for new Headlamp plugins.
+Folder                                               | Description
+------                                               | -----------
+[examples/](examples)                                | Examples folder.
+[examples/pod-counter](examples/pod-counter)         | Display number of Pods in title bar.
+[examples/change-logo](examples/change-logo)         | Change the logo.
+[examples/sidebar](examples/sidebar)                 | Change the side bar menu.
+[examples/cluster-chooser](examples/cluster-chooser) | Override the default chooser button.
+headlamp-plugin                                      | headlamp-plugin script which plugins use.
+headlamp-plugin/template                             | Template for new Headlamp plugins.

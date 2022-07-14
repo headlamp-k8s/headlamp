@@ -31,4 +31,4 @@ slug: "lib_k8s_crd"
 
 #### Defined in
 
-[lib/k8s/crd.ts:57](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/crd.ts#L57)
+[lib/k8s/crd.ts:57](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/crd.ts#L57)

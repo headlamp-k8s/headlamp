@@ -1,12 +1,10 @@
-import { Icon } from '@iconify/react';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { CallbackActionOptions, clusterAction } from '../../../redux/actions/actions';
+import ActionButton from '../ActionButton';
 import { ConfirmDialog } from '../Dialog';
 
 interface DeleteButtonProps {
@@ -20,7 +18,7 @@ export default function DeleteButton(props: DeleteButtonProps) {
   const [openAlert, setOpenAlert] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
   const location = useLocation();
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation(['frequent', 'resource']);
 
   const deleteFunc = React.useCallback(
     () => {
@@ -72,11 +70,11 @@ export default function DeleteButton(props: DeleteButtonProps) {
 
   return (
     <React.Fragment>
-      <Tooltip title={t('frequent|Delete') as string}>
-        <IconButton aria-label={t('frequent|delete')} onClick={() => setOpenAlert(true)}>
-          <Icon icon="mdi:delete" />
-        </IconButton>
-      </Tooltip>
+      <ActionButton
+        description={t('frequent|Delete')}
+        onClick={() => setOpenAlert(true)}
+        icon="mdi:delete"
+      />
       <ConfirmDialog
         open={openAlert}
         title={t('Delete item')}

@@ -36,21 +36,21 @@ const Template: Story<PureTopBarProps> = args => {
 
 export const NoToken = Template.bind({});
 NoToken.args = {
-  appBarActions: {},
+  appBarActions: [],
   logout: () => {},
   hasToken: false,
 };
 
 export const Token = Template.bind({});
 Token.args = {
-  appBarActions: {},
+  appBarActions: [],
   logout: () => {},
   hasToken: true,
 };
 
 export const OneCluster = Template.bind({});
 OneCluster.args = {
-  appBarActions: {},
+  appBarActions: [],
   logout: () => {},
   hasToken: true,
   cluster: 'ak8s-desktop',
@@ -59,7 +59,7 @@ OneCluster.args = {
 
 export const TwoCluster = Template.bind({});
 TwoCluster.args = {
-  appBarActions: {},
+  appBarActions: [],
   logout: () => {},
   hasToken: true,
   cluster: 'ak8s-desktop',

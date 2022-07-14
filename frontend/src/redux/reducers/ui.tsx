@@ -1,12 +1,13 @@
-import { IconProps } from '@iconify/react';
 import _ from 'lodash';
+import { SidebarEntryProps } from '../../components/Sidebar';
 import { Notification } from '../../lib/notification';
+import { Route } from '../../lib/router';
 import themesConf, { setTheme } from '../../lib/themes';
-import { clusterChooserButtonComponent, sectionFunc } from '../../plugin/registry';
+import { ClusterChooserType, DetailsViewSectionType } from '../../plugin/registry';
 import {
   Action,
   BrandingProps,
-  HeaderActionFunc,
+  HeaderActionType,
   UI_APP_BAR_SET_ACTION,
   UI_BRANDING_SET_APP_LOGO,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
@@ -24,17 +25,6 @@ import {
   UI_UPDATE_NOTIFICATION,
 } from '../actions/actions';
 
-export interface SidebarEntry {
-  name: string;
-  label: string;
-  isParentAViewInItself?: boolean;
-  parent?: string | null;
-  url?: string;
-  useClusterURL?: boolean;
-  subList?: this[];
-  icon?: IconProps['icon'];
-}
-
 export interface UIState {
   sidebar: {
     selected: string | null;
@@ -43,26 +33,19 @@ export interface UIState {
     /** This is only set to true/false based on a user interaction. */
     isSidebarOpenUserSelected?: boolean;
     entries: {
-      [propName: string]: SidebarEntry;
+      [propName: string]: SidebarEntryProps;
     };
   };
   routes: {
-    [path: string]: any;
+    [path: string]: Route;
   };
   views: {
     details: {
-      headerActions: {
-        [name: string]: HeaderActionFunc;
-      };
-      pluginAppendedDetailViews: Array<{
-        sectionName: string;
-        sectionFunc: sectionFunc;
-      }>;
+      headerActions: HeaderActionType[];
+      pluginAppendedDetailViews: DetailsViewSectionType[];
     };
     appBar: {
-      actions: {
-        [name: string]: HeaderActionFunc;
-      };
+      actions: HeaderActionType[];
     };
   };
   theme: {
@@ -71,7 +54,7 @@ export interface UIState {
   branding: BrandingProps;
   pluginsLoaded: boolean;
   notifications: Notification[];
-  clusterChooserButtonComponent?: clusterChooserButtonComponent | null;
+  clusterChooserButtonComponent?: ClusterChooserType;
 }
 
 function setInitialSidebarOpen() {
@@ -111,15 +94,11 @@ export const INITIAL_STATE: UIState = {
   },
   views: {
     details: {
-      headerActions: {
-        // action-name -> action-callback
-      },
+      headerActions: [],
       pluginAppendedDetailViews: [],
     },
     appBar: {
-      actions: {
-        // action-name -> action-callback
-      },
+      actions: [],
     },
   },
   theme: {
@@ -175,21 +154,19 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       break;
     }
     case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
-      const headerActions = { ...newFilters.views.details.headerActions };
-      headerActions[action.action as string] = action.action;
+      const headerActions = [...newFilters.views.details.headerActions, action.action];
       newFilters.views.details.headerActions = headerActions;
       break;
     }
     case UI_SET_DETAILS_VIEW: {
-      const { sectionName, action: sectionFunc } = action;
-      const detailViews = [...newFilters.views.details.pluginAppendedDetailViews];
-      detailViews.push({ sectionName, sectionFunc });
+      const { action: sectionFunc } = action;
+      const detailViews = [...newFilters.views.details.pluginAppendedDetailViews, sectionFunc];
       newFilters.views.details.pluginAppendedDetailViews = detailViews;
       break;
     }
     case UI_APP_BAR_SET_ACTION: {
-      const appBarActions = { ...newFilters.views.appBar.actions };
-      appBarActions[action.name as string] = action.action;
+      const appBarActions = [...newFilters.views.appBar.actions];
+      appBarActions.push(action.action);
       newFilters.views.appBar.actions = appBarActions;
       break;
     }

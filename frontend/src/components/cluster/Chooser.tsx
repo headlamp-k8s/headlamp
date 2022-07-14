@@ -1,6 +1,5 @@
 import { Icon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -16,9 +15,9 @@ import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import _ from 'lodash';
-import React, { PropsWithChildren } from 'react';
+import React, { isValidElement, PropsWithChildren } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
@@ -29,16 +28,7 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
 import { DialogTitle } from '../common/Dialog';
 import Loader from '../common/Loader';
-
-const useClusterTitleStyle = makeStyles(theme => ({
-  button: {
-    backgroundColor: theme.palette.sidebarBg,
-    color: theme.palette.primary.contrastText,
-    '&:hover': {
-      color: theme.palette.text.primary,
-    },
-  },
-}));
+import ClusterChooser from './ClusterChooser';
 
 export interface ClusterTitleProps {
   clusters?: {
@@ -48,11 +38,9 @@ export interface ClusterTitleProps {
 }
 
 export function ClusterTitle(props: ClusterTitleProps) {
-  const classes = useClusterTitleStyle();
   const cluster = props.cluster || useCluster();
   const clusters = props.clusters || useClustersConf();
   const [showChooser, setShowChooser] = React.useState(false);
-  const { t } = useTranslation('cluster');
   const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
   const ChooserButton = useTypedSelector(state => state.ui.clusterChooserButtonComponent);
 
@@ -73,16 +61,13 @@ export function ClusterTitle(props: ClusterTitleProps) {
   return (
     <React.Fragment>
       {ChooserButton ? (
-        <ChooserButton clickHandler={() => setShowChooser(true)} />
+        isValidElement(ChooserButton) ? (
+          ChooserButton
+        ) : (
+          <ChooserButton clickHandler={() => setShowChooser(true)} cluster={cluster} />
+        )
       ) : (
-        <Button
-          size="large"
-          variant="contained"
-          onClick={() => setShowChooser(true)}
-          className={classes.button}
-        >
-          <Trans t={t}>Cluster: {{ cluster }}</Trans>
-        </Button>
+        <ClusterChooser clickHandler={() => setShowChooser(true)} cluster={cluster} />
       )}
       <Chooser open={showChooser} onClose={() => setShowChooser(false)} />
     </React.Fragment>

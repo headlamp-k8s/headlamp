@@ -7,22 +7,12 @@ import helpers from '../helpers';
 /**
  * ## Simple plugin example
  *
- *
  * @example
- * // Here's a very simple JavaScript plugin example, that does nothing.
- * import { Headlamp } from '@kinvolk/headlamp-plugin/lib';
  *
- * const myPlugin = {
- *   initialize: (register) => {
- *     // do some stuff with register (see below)
- *     // use some libraries in window.pluginLib (see below)
- *     alert('myPlugin initialized!')
- *     return true;
- *   }
- * }
- *
- * Headlamp.registerPlugin("My Plugin ID String", myPlugin)
- *
+ * ```tsx
+ * import { registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
+ * registerAppBarAction(<span>Hello Kubernetes</span>);
+ * ```
  *
  * ## Entry point
  *
@@ -35,54 +25,18 @@ import helpers from '../helpers';
  *
  * Local in-development plugins are then loaded from the "frontend/src/plugin/plugins/" folder.
  *
- * Each of these JavaScripts are required to register plugins with
- * Headlamp.registerPlugin(pluginId, plugin)
+ * To see more on what plugins can do, please see the plugin functionality.md documentation.
  *
- * @see Plugin
- * @see registerPlugin
- *
- *
- * ## Initialize Plugin(s)
- *
- * Each Plugin should have an initialize(registry) method.
- * When they are initialized, they are given an Registry API object.
- *
- * @see Registry
- *
- *
- * ## Functions available to plugins.
- *
- * ### APIs added to the browser window object.
- *
- * Some attributes are added to the browser "window" global for use by plugins.
- *
- * - window.registerPlugin, so plugins can register themselves.
- * - window.plugins, a collection of plugins keyed by name.
- * - window.pluginLib, some libraries exposed to use by plugins.
- *
- * Third party Libraries in window.pluginLib that can be used by plugins.
- *
- * - MuiCore, {@link https://www.npmjs.com/package/@material-ui/core @material-ui/core}
- * - MuiStyles, {@link https://www.npmjs.com/package/@material-ui/styles @material-ui/styles}
- * - React, {@link https://www.npmjs.com/package/react react}
- * - ReactDOM, {@link https://www.npmjs.com/package/react-dom react-dom}
- * - ReactRedux, {@link https://www.npmjs.com/package/react-redux react-redux}
- * - Iconify, {@link https://www.npmjs.com/package/@iconify/react @iconify/react}
- * - Lodash, {@link https://www.npmjs.com/package/lodash lodash}
- *
- * Headlamp libraries in window.pluginLib
- *
- * - CommonComponents, components/common, see `npm run storybook` in the headlamp/frontend repo.
- * - K8s, frontend/src/lib/k8s
- * - Utils frontend/src/lib/util
+ * @see {@link https://kinvolk.github.io/headlamp/docs/latest/development/plugins/functionality/ Plugin functionality}
  */
 import { ClusterRequest, setCluster } from '../lib/k8s/apiProxy';
 import Registry from './registry';
 
 /**
- * Plugins should call Headlamp.registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
+ * Plugins may call Headlamp.registerPlugin(pluginId: string, pluginObj: Plugin) to register themselves.
  *
  * They will have their initialize(register) method called at plugin initialization time.
+ *
  */
 export abstract class Plugin {
   /**
@@ -123,8 +77,8 @@ export interface AppMenu {
 let currentAppMenus: AppMenu[] | null = null;
 
 /**
- * This class is a more convenient way for plugins to call registerPlugin in order to register
- * themselves.
+ * This class is a more convenient way for plugins to call registerPlugin in
+ * order to register themselves.
  */
 export abstract class Headlamp {
   /**
@@ -155,9 +109,11 @@ export abstract class Headlamp {
 
   /**
    * Configure (or update) a cluster that can then be used throughout Headlamp.
-   * If the request is succesful, successive calls to `K8s.useClustersConf()` will show the newly configured cluster.
+   * If the request is successful, further calls to `K8s.useClustersConf()`
+   * will show the newly configured cluster.
    *
-   * **Important:** This is only available in the desktop version and will result in a bad request when running in-cluster.
+   * **Important:** This is only available in the desktop version and will result in a
+   * bad request when running in-cluster.
    *
    * @param clusterReq - the cluster to be added or updated.
    * @returns a promise which completes to Headlamp's configuration (showing the list of configured clusters).

@@ -2,7 +2,6 @@ import { JSONPath } from 'jsonpath-plus';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import DetailsViewPluginRenderer from '../../helpers/renderHelpers';
 import { ResourceClasses } from '../../lib/k8s';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import CustomResourceDefinition, { KubeCRD, makeCustomResourceClass } from '../../lib/k8s/crd';
@@ -11,6 +10,7 @@ import { HoverInfoLabel, NameValueTableRow, SectionBox } from '../common';
 import Empty from '../common/EmptyContent';
 import Loader from '../common/Loader';
 import { ConditionsTable, MainInfoSection, PageGrid } from '../common/Resource';
+import DetailsViewSection from '../DetailsViewSection';
 
 export default function CustomResourceDetailsFromURL() {
   const params = useParams<CustomResourceDetailsProps>();
@@ -145,7 +145,7 @@ function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps
           <ConditionsTable resource={item.jsonData} showLastUpdate={false} />
         </SectionBox>
       )}
-      <DetailsViewPluginRenderer resource={item} />
+      <DetailsViewSection resource={item} />
     </PageGrid>
   );
 }

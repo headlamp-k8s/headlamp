@@ -24,7 +24,7 @@ slug: "lib_k8s_service.KubeService"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L23)
+[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L23)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:22](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L22)
+[lib/k8s/cluster.ts:22](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L22)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/cluster.ts#L24)
+[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L24)
 
 ___
 
@@ -69,9 +69,28 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `clusterIP` | `string` |
+| `externalIPs` | `string`[] |
 | `ports` | { `name`: `string` ; `nodePort`: `number` ; `port`: `number` ; `protocol`: `string` ; `targetPort`: `string` \| `number`  }[] |
 | `type` | `string` |
 
 #### Defined in
 
-[lib/k8s/service.ts:5](https://github.com/kinvolk/headlamp/blob/2fb68817/frontend/src/lib/k8s/service.ts#L5)
+[lib/k8s/service.ts:18](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/service.ts#L18)
+
+___
+
+### status
+
+• **status**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `conditions?` | [`KubeCondition`](lib_k8s_cluster.KubeCondition.md)[] |
+| `loadBalancer?` | { `ingress`: [`KubeLoadBalancerIngress`](lib_k8s_service.KubeLoadBalancerIngress.md)[]  } |
+| `loadBalancer.ingress` | [`KubeLoadBalancerIngress`](lib_k8s_service.KubeLoadBalancerIngress.md)[] |
+
+#### Defined in
+
+[lib/k8s/service.ts:31](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/service.ts#L31)
