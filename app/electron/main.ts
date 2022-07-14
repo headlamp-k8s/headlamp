@@ -415,6 +415,55 @@ function startElecron() {
       mainWindow = null;
     });
 
+    // Force Single Instance Application
+    const gotTheLock = app.requestSingleInstanceLock();
+    if (gotTheLock) {
+      app.on('second-instance', () => {
+        // Someone tried to run a second instance, we should focus our window.
+        if (mainWindow) {
+          if (mainWindow.isMinimized()) mainWindow.restore();
+          mainWindow.focus();
+        }
+      });
+    } else {
+      app.quit();
+      return;
+    }
+
+    /*
+    if a library is trying to open a url other than app url in electron take it 
+    to the default browser
+    */
+    mainWindow.webContents.on('will-navigate', (event, url) => {
+      if (url.startsWith(startUrl)) {
+        return;
+      }
+      shell.openExternal(url);
+    });
+
+    app.on('open-url', (event, url) => {
+      mainWindow?.focus();
+      let urlObj;
+      try {
+        urlObj = new URL(url);
+      } catch (e) {
+        dialog.showErrorBox(
+          i18n.t('Invalid URL'),
+          i18n.t('Application opened with an invalid URL: {{ url }}', { url })
+        );
+        return;
+      }
+
+      const urlParam = urlObj.hostname;
+      let baseUrl = startUrl;
+      // this check helps us to avoid adding multiple / to the startUrl when appending the incoming url to it
+      if (baseUrl.endsWith('/')) {
+        baseUrl = baseUrl.slice(0, startUrl.length - 1);
+      }
+      // load the index.html from build and route to the hostname received in the protocol handler url
+      mainWindow?.loadURL(baseUrl + '#' + urlParam + urlObj.search);
+    });
+
     i18n.on('languageChanged', () => {
       setMenu(i18n);
     });
