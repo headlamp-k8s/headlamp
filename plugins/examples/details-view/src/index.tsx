@@ -24,4 +24,5 @@ registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
       </SectionBox>
     );
   }
+  return null;
 });
