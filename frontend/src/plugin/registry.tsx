@@ -292,6 +292,7 @@ export function registerAppBarAction(headerAction: AppBarActionType) {
  *       </SectionBox>
  *     );
  *   }
+ *   return null;
  * });
  * ```
  */
