@@ -25,10 +25,10 @@ npx --yes @kinvolk/headlamp-plugin create headlamp-myfancy cd headlamp-myfancy n
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/plugins/functionality/</guid>
-      <description>Headlamp&amp;rsquo;s plugins exist for changing or adding functionlity related to the user interface and experience.
+      <description>Headlamp&amp;rsquo;s plugins exist for changing or adding functionality related to the user interface and experience.
 Plugins Lib The @kinvolk/headlamp-plugin module ships a library (@kinvolk/headlamp-plugin/lib) where all the Headlamp-related development modules can be found.
 The main ones are:
- K8s: Kubernetes related functionality Registry: The plugin registry, used to register functionality Headlamp: To register plugins CommonComponents: React components commonly used in the Headlamp UI Notification: This module contains two exported members one is Notification, a class which can be used to prepare notifications that are accepted by headlamp and the other one is setNotificationsInStore it is a dispatcher function which accepts a notification object prepared from the Notification class and when called it brings the notifications from plugin land to headlamp ecosystem so that headlamp can parse the notification and display it.</description>
+ K8s: Kubernetes related functionality Headlamp: To register plugins CommonComponents: React components commonly used in the Headlamp UI Notification: This module contains two exported members one is Notification, a class which can be used to prepare notifications that are accepted by headlamp and the other one is setNotificationsInStore it is a dispatcher function which accepts a notification object prepared from the Notification class and when called it brings the notifications from plugin land to headlamp ecosystem so that headlamp can parse the notification and display it.</description>
     </item>
     
     <item>
@@ -39,7 +39,7 @@ The main ones are:
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/plugins/how-to/</guid>
       <description>This section will walk you through a basic plugin development.
 Types If you are using Typescript for developing the plugin, the @kinvolk/headlamp-plugin package does ship some type declarations in @kinvolk/headlamp-plugin/types. Please notice that the whole external plugin mechanics are still in an early development phase and thus only the actual type declarations (and not the corresponding code) is shipped in this package at the moment.
-import { Headlamp, Plugin, Registry } from &amp;#39;@kinvolk/headlamp-plugin/lib&amp;#39;; Plugin Class Plugins are classes that register actions when they are initialized.</description>
+Hello Kubernetes The following example will show a basic plugin declaration and registration in a file that should match the src/index.</description>
     </item>
     
   </channel>

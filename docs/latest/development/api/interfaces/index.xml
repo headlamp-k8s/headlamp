@@ -17,7 +17,7 @@
 Hierarchy   Error
 ↳ ApiError
   Properties status • status: number
-Defined in  lib/k8s/apiProxy.ts:641 </description>
+Defined in  lib/k8s/apiProxy.ts:758 </description>
     </item>
     
     <item>
@@ -29,6 +29,38 @@ Defined in  lib/k8s/apiProxy.ts:641 </description>
       <description> lib/k8s/cluster .ApiListOptions
 Properties namespace • Optional namespace: string | string[]
 Defined in  lib/k8s/cluster.ts:54 </description>
+    </item>
+    
+    <item>
+      <title>Interface: AppLogoProps</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.applogoprops/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.applogoprops/</guid>
+      <description> plugin/registry .AppLogoProps
+Indexable ▪ [key: string]: any
+Properties className • className: string
+A class to use on your SVG.
+Defined in  components/Sidebar/AppLogo.tsx:12  logoType • logoType: &amp;quot;small&amp;quot; | &amp;quot;large&amp;quot;
+The size of the logo. &amp;lsquo;small&amp;rsquo; for in mobile view, and &amp;lsquo;large&amp;rsquo; for tablet and desktop sizes.
+Defined in  components/Sidebar/AppLogo.tsx:8  themeName • Optional themeName: &amp;quot;dark&amp;quot; | &amp;quot;light&amp;quot;
+User selected theme.
+Defined in  components/Sidebar/AppLogo.tsx:10 </description>
+    </item>
+    
+    <item>
+      <title>Interface: AppMenu</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_lib.appmenu/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_lib.appmenu/</guid>
+      <description>plugin/lib .AppMenu
+The members of AppMenu should be the same as the options for the MenuItem in https://www.electronjs.org/docs/latest/api/menu-item except for the &amp;ldquo;submenu&amp;rdquo; (which is the AppMenu type) and &amp;ldquo;click&amp;rdquo; (which is not supported here, use the &amp;ldquo;url&amp;rdquo; field instead).
+Indexable ▪ [key: string]: any
+Any other members from Electron&amp;rsquo;s MenuItem.
+Properties submenu • Optional submenu: AppMenu []
+The submenus of this menu
+Defined in  plugin/lib.ts:72  url • Optional url: string</description>
     </item>
     
     <item>
@@ -45,6 +77,36 @@ Defined in  lib/k8s/cluster.ts:17 </description>
     </item>
     
     <item>
+      <title>Interface: ClusterChooserProps</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.clusterchooserprops/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.clusterchooserprops/</guid>
+      <description> plugin/registry .ClusterChooserProps
+Properties cluster • Optional cluster: string
+Defined in  components/cluster/ClusterChooser.tsx:8 Methods clickHandler ▸ clickHandler(event?): void
+Parameters    Name Type     event? any    Returns void
+Defined in  components/cluster/ClusterChooser.tsx:7 </description>
+    </item>
+    
+    <item>
+      <title>Interface: ClusterRequest</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_apiproxy.clusterrequest/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_apiproxy.clusterrequest/</guid>
+      <description>lib/k8s/apiProxy .ClusterRequest
+Properties certificateAuthorityData • Optional certificateAuthorityData: string
+The certificate authority data
+Defined in  lib/k8s/apiProxy.ts:41  insecureTLSVerify • Optional insecureTLSVerify: boolean
+Whether the server&amp;rsquo;s certificate should not be checked for validity
+Defined in  lib/k8s/apiProxy.ts:39  name • name: string
+The name of the cluster (has to be unique, or it will override an existing cluster)
+Defined in  lib/k8s/apiProxy.ts:35  server • server: string
+The cluster URL</description>
+    </item>
+    
+    <item>
       <title>Interface: ConfigAction</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/redux_reducers_config.configaction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -56,7 +118,7 @@ Hierarchy   Action
   Properties config • config: Object
 Type declaration    Name Type     clusters null | { [clusterName: string]: Cluster ; }    Defined in  redux/reducers/config.tsx:16  type • type: string
 Inherited from Action.type
-Defined in  redux/actions/actions.tsx:71 </description>
+Defined in  redux/actions/actions.tsx:73 </description>
     </item>
     
     <item>
@@ -71,15 +133,29 @@ Defined in  redux/reducers/config.tsx:6 </description>
     </item>
     
     <item>
+      <title>Interface: DetailsViewSectionProps</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.detailsviewsectionprops/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.detailsviewsectionprops/</guid>
+      <description> plugin/registry .DetailsViewSectionProps
+Properties resource • resource: any
+Defined in  components/DetailsViewSection/DetailsViewSection.tsx:6 </description>
+    </item>
+    
+    <item>
       <title>Interface: ExecOptions</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_pod.execoptions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_pod.execoptions/</guid>
-      <description> lib/k8s/pod .ExecOptions
-Properties command • Optional command: string[]
-Defined in  lib/k8s/pod.ts:30  reconnectOnFailure • Optional reconnectOnFailure: boolean
-Defined in  lib/k8s/pod.ts:31 </description>
+      <description>lib/k8s/pod .ExecOptions
+Hierarchy    StreamArgs ↳ ExecOptions
+  Properties additionalProtocols • Optional additionalProtocols: string[]
+Inherited from  StreamArgs . additionalProtocols Defined in  lib/k8s/apiProxy.ts:611  command • Optional command: string[]
+Defined in  lib/k8s/pod.ts:33  isJson • Optional isJson: boolean
+Inherited from  StreamArgs . isJson Defined in  lib/k8s/apiProxy.ts:610  reconnectOnFailure • Optional reconnectOnFailure: boolean
+Inherited from  StreamArgs . reconnectOnFailure Defined in  lib/k8s/apiProxy.ts:613 Methods connectCb ▸ Optional connectCb(): void</description>
     </item>
     
     <item>
@@ -102,13 +178,13 @@ Defined in  lib/util.ts:82 </description>
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecondition/</guid>
       <description> lib/k8s/cluster .KubeCondition
 Properties lastProbeTime • lastProbeTime: number
-Defined in  lib/k8s/cluster.ts:373  lastTransitionTime • Optional lastTransitionTime: string
-Defined in  lib/k8s/cluster.ts:374  lastUpdateTime • Optional lastUpdateTime: string
-Defined in  lib/k8s/cluster.ts:375  message • Optional message: string
-Defined in  lib/k8s/cluster.ts:377  reason • Optional reason: string
-Defined in  lib/k8s/cluster.ts:376  status • status: string
-Defined in  lib/k8s/cluster.ts:372  type • type: string
-Defined in  lib/k8s/cluster.ts:371 </description>
+Defined in  lib/k8s/cluster.ts:395  lastTransitionTime • Optional lastTransitionTime: string
+Defined in  lib/k8s/cluster.ts:396  lastUpdateTime • Optional lastUpdateTime: string
+Defined in  lib/k8s/cluster.ts:397  message • Optional message: string
+Defined in  lib/k8s/cluster.ts:399  reason • Optional reason: string
+Defined in  lib/k8s/cluster.ts:398  status • status: string
+Defined in  lib/k8s/cluster.ts:394  type • type: string
+Defined in  lib/k8s/cluster.ts:393 </description>
     </item>
     
     <item>
@@ -132,9 +208,9 @@ Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  me
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainer/</guid>
       <description>lib/k8s/cluster .KubeContainer
 Properties args • Optional args: string[]
-Defined in  lib/k8s/cluster.ts:384  command • Optional command: string[]
-Defined in  lib/k8s/cluster.ts:383  env • Optional env: { name: string ; value?: string ; valueFrom?: { configMapKeyRef?: { key: string ; name: string } ; fieldRef?: { apiVersion: string ; fieldPath: string } ; secretKeyRef?: { key: string ; name: string } } }[]
-Defined in  lib/k8s/cluster.ts:400  envFrom • Optional envFrom: { configMapRef?</description>
+Defined in  lib/k8s/cluster.ts:406  command • Optional command: string[]
+Defined in  lib/k8s/cluster.ts:405  env • Optional env: { name: string ; value?: string ; valueFrom?: { configMapKeyRef?: { key: string ; name: string } ; fieldRef?: { apiVersion: string ; fieldPath: string } ; secretKeyRef?: { key: string ; name: string } } }[]
+Defined in  lib/k8s/cluster.ts:422  envFrom • Optional envFrom: { configMapRef?</description>
     </item>
     
     <item>
@@ -145,8 +221,8 @@ Defined in  lib/k8s/cluster.ts:400  envFrom • Optional envFrom: { configMapRef
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainerprobe/</guid>
       <description>lib/k8s/cluster .KubeContainerProbe
 Properties exec • Optional exec: Object
-Type declaration    Name Type     command string[]    Defined in  lib/k8s/cluster.ts:440  failureThreshold • Optional failureThreshold: number
-Defined in  lib/k8s/cluster.ts:450  httpGet • Optional httpGet: Object
+Type declaration    Name Type     command string[]    Defined in  lib/k8s/cluster.ts:462  failureThreshold • Optional failureThreshold: number
+Defined in  lib/k8s/cluster.ts:472  httpGet • Optional httpGet: Object
 Type declaration    Name Type     host? string   path? string   port number   scheme string    Defined in  lib/k8s/cluster.</description>
     </item>
     
@@ -158,13 +234,13 @@ Type declaration    Name Type     host? string   path? string   port number   sc
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainerstatus/</guid>
       <description>lib/k8s/cluster .KubeContainerStatus
 Properties containerID • containerID: string
-Defined in  lib/k8s/cluster.ts:479  image • image: string
-Defined in  lib/k8s/cluster.ts:480  imageID • imageID: string
-Defined in  lib/k8s/cluster.ts:481  lastState • lastState: string
-Defined in  lib/k8s/cluster.ts:482  name • name: string
-Defined in  lib/k8s/cluster.ts:483  ready • ready: boolean
-Defined in  lib/k8s/cluster.ts:484  restartCount • restartCount: number
-Defined in  lib/k8s/cluster.ts:485  state • state: Object</description>
+Defined in  lib/k8s/cluster.ts:501  image • image: string
+Defined in  lib/k8s/cluster.ts:502  imageID • imageID: string
+Defined in  lib/k8s/cluster.ts:503  lastState • lastState: string
+Defined in  lib/k8s/cluster.ts:504  name • name: string
+Defined in  lib/k8s/cluster.ts:505  ready • ready: boolean
+Defined in  lib/k8s/cluster.ts:506  restartCount • restartCount: number
+Defined in  lib/k8s/cluster.ts:507  state • state: Object</description>
     </item>
     
     <item>
@@ -270,6 +346,19 @@ Type declaration    Name Type     selector LabelSelector     Defined in  lib/k8s
     </item>
     
     <item>
+      <title>Interface: KubeLoadBalancerIngress</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_service.kubeloadbalanceringress/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_service.kubeloadbalanceringress/</guid>
+      <description> lib/k8s/service .KubeLoadBalancerIngress
+Properties hostname • Optional hostname: string
+Defined in  lib/k8s/service.ts:12  ip • Optional ip: string
+Defined in  lib/k8s/service.ts:13  ports • Optional ports: KubePortStatus []
+Defined in  lib/k8s/service.ts:14 </description>
+    </item>
+    
+    <item>
       <title>Interface: KubeMetadata</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemetadata/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -291,8 +380,8 @@ Defined in  lib/k8s/cluster.</description>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemetrics/</guid>
       <description>lib/k8s/cluster .KubeMetrics
-Properties metadata • metadata: KubeMetadata Defined in  lib/k8s/cluster.ts:465  status • status: Object
-Type declaration    Name Type     capacity { cpu: string ; memory: string }   capacity.cpu string   capacity.memory string    Defined in  lib/k8s/cluster.ts:470  usage • usage: Object
+Properties metadata • metadata: KubeMetadata Defined in  lib/k8s/cluster.ts:487  status • status: Object
+Type declaration    Name Type     capacity { cpu: string ; memory: string }   capacity.cpu string   capacity.memory string    Defined in  lib/k8s/cluster.ts:492  usage • usage: Object
 Type declaration    Name Type     cpu string   memory string    Defined in  lib/k8s/cluster.</description>
     </item>
     
@@ -362,7 +451,7 @@ Parameters    Name Type     onList (arg: any[]) =&amp;gt; void    Returns any</d
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubeobjectinterface/</guid>
       <description>lib/k8s/cluster .KubeObjectInterface
 Hierarchy   KubeObjectInterface
-↳ KubeConfigMap ↳ KubeCRD ↳ KubeCronJob ↳ KubeDaemonSet ↳ KubeDeployment ↳ KubeIngress ↳ KubeJob ↳ KubeNamespace ↳ KubeNetworkPolicy ↳ KubeNode ↳ KubePersistentVolume ↳ KubePersistentVolumeClaim ↳ KubePod ↳ KubeReplicaSet ↳ KubeRole ↳ KubeRoleBinding ↳ KubeSecret ↳ KubeService ↳ KubeServiceAccount ↳ KubeStatefulSet ↳ KubeStorageClass   Indexable ▪ [otherProps: string]: any
+↳ KubeConfigMap ↳ KubeCRD ↳ KubeCronJob ↳ KubeDaemonSet ↳ KubeDeployment ↳ KubeIngress ↳ KubeJob ↳ KubeNamespace ↳ KubeNetworkPolicy ↳ KubeNode ↳ KubePersistentVolume ↳ KubePersistentVolumeClaim ↳ KubePod ↳ KubeReplicaSet ↳ KubeRole ↳ KubeRoleBinding ↳ KubeSecret ↳ KubeService ↳ KubeServiceAccount ↳ KubeStatefulSet ↳ KubeStorageClass ↳ KubeToken   Indexable ▪ [otherProps: string]: any
 Properties apiVersion • Optional apiVersion: string
 Defined in  lib/k8s/cluster.ts:23  kind • kind: string</description>
     </item>
@@ -424,7 +513,20 @@ Hierarchy    KubeObjectInterface ↳ KubePod
   Properties apiVersion • Optional apiVersion: string
 Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
 Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
-Type declaration    Name Type     containers KubeContainer []   nodeName string    Defined in  lib/k8s/pod.</description>
+Type declaration    Name Type     containers KubeContainer []   nodeName string   nodeSelector?</description>
+    </item>
+    
+    <item>
+      <title>Interface: KubePortStatus</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_service.kubeportstatus/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_service.kubeportstatus/</guid>
+      <description> lib/k8s/service .KubePortStatus
+Properties error • Optional error: string
+Defined in  lib/k8s/service.ts:6  port • port: number
+Defined in  lib/k8s/service.ts:7  protocol • protocol: string
+Defined in  lib/k8s/service.ts:8 </description>
     </item>
     
     <item>
@@ -495,7 +597,7 @@ Hierarchy    KubeObjectInterface ↳ KubeService
 Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
 Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
 Index signature ▪ [otherProps: string]: any
-Type declaration    Name Type     clusterIP string   ports { name: string ; nodePort: number ; port: number ; protocol: string ; targetPort: string | number }[]   type string    Defined in  lib/k8s/service.</description>
+Type declaration    Name Type     clusterIP string   externalIPs string[]   ports { name: string ; nodePort: number ; port: number ; protocol: string ; targetPort: string | number }[]   type string    Defined in  lib/k8s/service.</description>
     </item>
     
     <item>
@@ -541,6 +643,20 @@ Defined in  lib/k8s/storageClass.ts:5  reclaimPolicy • reclaimPolicy: string</
     </item>
     
     <item>
+      <title>Interface: KubeToken</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_token.kubetoken/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_token.kubetoken/</guid>
+      <description>lib/k8s/token .KubeToken
+Hierarchy    KubeObjectInterface ↳ KubeToken
+  Properties apiVersion • Optional apiVersion: string
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Type declaration    Name Type     audiences string[]   expirationSeconds number    Defined in  lib/k8s/token.</description>
+    </item>
+    
+    <item>
       <title>Interface: LabelSelector</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.labelselector/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -548,9 +664,9 @@ Defined in  lib/k8s/storageClass.ts:5  reclaimPolicy • reclaimPolicy: string</
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.labelselector/</guid>
       <description> lib/k8s/cluster .LabelSelector
 Properties matchExpressions • Optional matchExpressions: Object
-Type declaration    Name Type     key string   operator string   values string[]    Defined in  lib/k8s/cluster.ts:454  matchLabels • Optional matchLabels: Object
+Type declaration    Name Type     key string   operator string   values string[]    Defined in  lib/k8s/cluster.ts:476  matchLabels • Optional matchLabels: Object
 Index signature ▪ [key: string]: string
-Defined in  lib/k8s/cluster.ts:459 </description>
+Defined in  lib/k8s/cluster.ts:481 </description>
     </item>
     
     <item>
@@ -562,7 +678,7 @@ Defined in  lib/k8s/cluster.ts:459 </description>
       <description> lib/k8s/apiProxy .RequestParams
 Indexable ▪ [prop: string]: any
 Properties timeout • Optional timeout: number
-Defined in  lib/k8s/apiProxy.ts:23 </description>
+Defined in  lib/k8s/apiProxy.ts:29 </description>
     </item>
     
     <item>
@@ -602,9 +718,27 @@ Defined in  lib/router.tsx:453 </description>
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.sectionfuncprops/</guid>
       <description> plugin/registry .SectionFuncProps
 Properties title • title: string
-Defined in  plugin/registry.tsx:16 Methods component ▸ component(props): null | Element
+Defined in  plugin/registry.tsx:22 Methods component ▸ component(props): null | Element
 Parameters    Name Type     props Object   props.resource any    Returns null | Element
-Defined in  plugin/registry.tsx:17 </description>
+Defined in  plugin/registry.tsx:23 </description>
+    </item>
+    
+    <item>
+      <title>Interface: SidebarEntryProps</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.sidebarentryprops/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.sidebarentryprops/</guid>
+      <description>plugin/registry .SidebarEntryProps
+Represents an entry in the sidebar menu.
+Properties icon • Optional icon: string | IconifyIcon
+An iconify string or icon object that will be used for the sidebar&amp;rsquo;s icon
+see https://icon-sets.iconify.design/mdi/ for icons.
+Defined in  components/Sidebar/SidebarItem.tsx:103  label • label: string
+Label to display.
+Defined in  components/Sidebar/SidebarItem.tsx:85  name • name: string
+Name of this SidebarItem.
+Defined in  components/Sidebar/SidebarItem.tsx:81  parent • Optional parent: null | string</description>
     </item>
     
     <item>
@@ -614,12 +748,15 @@ Defined in  plugin/registry.tsx:17 </description>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_apiproxy.streamargs/</guid>
       <description> lib/k8s/apiProxy .StreamArgs
-Properties additionalProtocols • Optional additionalProtocols: string[]
-Defined in  lib/k8s/apiProxy.ts:507  isJson • Optional isJson: boolean
-Defined in  lib/k8s/apiProxy.ts:506  reconnectOnFailure • Optional reconnectOnFailure: boolean
-Defined in  lib/k8s/apiProxy.ts:509 Methods connectCb ▸ Optional connectCb(): void
+Hierarchy   StreamArgs
+↳ ExecOptions   Properties additionalProtocols • Optional additionalProtocols: string[]
+Defined in  lib/k8s/apiProxy.ts:611  isJson • Optional isJson: boolean
+Defined in  lib/k8s/apiProxy.ts:610  reconnectOnFailure • Optional reconnectOnFailure: boolean
+Defined in  lib/k8s/apiProxy.ts:613 Methods connectCb ▸ Optional connectCb(): void
 Returns void
-Defined in  lib/k8s/apiProxy.ts:508 </description>
+Defined in  lib/k8s/apiProxy.ts:612  failCb ▸ Optional failCb(): void
+Returns void
+Defined in  lib/k8s/apiProxy.ts:614 </description>
     </item>
     
     <item>

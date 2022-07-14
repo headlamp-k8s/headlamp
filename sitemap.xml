@@ -58,6 +58,12 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.apilistoptions/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.applogoprops/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_lib.appmenu/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util.auth/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/installation/base-url/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/installation/base-url/</loc>
@@ -73,6 +79,10 @@
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.cluster/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.clusterchooserprops/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_apiproxy.clusterrequest/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_clusterrole.clusterrole/</loc>
   </url><url>
@@ -101,6 +111,8 @@
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/api/classes/plugin_registry.default/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_deployment.deployment/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.detailsviewsectionprops/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/</loc>
   </url><url>
@@ -164,6 +176,8 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_job.kubejob/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_service.kubeloadbalanceringress/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemetadata/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemetrics/</loc>
@@ -186,6 +200,8 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_pod.kubepod/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_service.kubeportstatus/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_replicaset.kubereplicaset/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_role.kuberole/</loc>
@@ -201,6 +217,8 @@
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_statefulset.kubestatefulset/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_storageclass.kubestorageclass/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_token.kubetoken/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.labelselector/</loc>
   </url><url>
@@ -260,6 +278,8 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_storageclass/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_token/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_router/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/api/modules/lib_util/</loc>
@@ -272,9 +292,9 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/0.4/development/api/modules/</loc>
   </url><url>
-    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/</loc>
-  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_namespace.namespace/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_networkpolicy.networkpolicy/</loc>
   </url><url>
@@ -326,6 +346,8 @@
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_serviceaccount.serviceaccount/</loc>
   </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.sidebarentryprops/</loc>
+  </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_statefulset.statefulset/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_storageclass.storageclass/</loc>
@@ -335,5 +357,7 @@
     <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.stringdict/</loc>
   </url><url>
     <loc>https://kinvolk.github.io/headlamp/tags/</loc>
+  </url><url>
+    <loc>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util.units/</loc>
   </url>
 </urlset>

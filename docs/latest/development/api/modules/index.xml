@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Modules on Headlamp</title>
+    <title>Namespaces on Headlamp</title>
     <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/</link>
-    <description>Recent content in Modules on Headlamp</description>
+    <description>Recent content in Namespaces on Headlamp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright the Headlamp project contributors</copyright><atom:link href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Namespace: auth</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util.auth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util.auth/</guid>
+      <description>lib/util .auth
+Functions deleteTokens ▸ deleteTokens(): void
+Returns void
+Defined in  lib/auth.ts:28  getToken ▸ getToken(cluster): any
+Parameters    Name Type     cluster string    Returns any
+Defined in  lib/auth.ts:5  getUserInfo ▸ getUserInfo(cluster): any
+Parameters    Name Type     cluster string    Returns any
+Defined in  lib/auth.ts:9  hasToken ▸ hasToken(cluster): boolean</description>
+    </item>
+    
     <item>
       <title>Module: lib/k8s</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s/</link>
@@ -22,10 +38,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_apiproxy/</guid>
-      <description>Interfaces   ApiError   RequestParams   StreamArgs   Type aliases StreamErrCb Ƭ StreamErrCb: (err: Error &amp;amp; { status?: number }, cancelStreamFunc?: () =&amp;gt; void) =&amp;gt; void
+      <description>Interfaces   ApiError   ClusterRequest   RequestParams   StreamArgs   Type aliases StreamErrCb Ƭ StreamErrCb: (err: Error &amp;amp; { status?: number }, cancelStreamFunc?: () =&amp;gt; void) =&amp;gt; void
 Type declaration ▸ (err, cancelStreamFunc?): void
 Parameters    Name Type     err Error &amp;amp; { status?: number }   cancelStreamFunc? () =&amp;gt; void    Returns void
-Defined in  lib/k8s/apiProxy.ts:109  StreamResultsCb Ƭ StreamResultsCb: (&amp;hellip;args: any[]) =&amp;gt; void</description>
+Defined in  lib/k8s/apiProxy.</description>
     </item>
     
     <item>
@@ -225,7 +241,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_service/</guid>
-      <description>Classes   Service   Interfaces   KubeService   </description>
+      <description>Classes   Service   Interfaces   KubeLoadBalancerIngress   KubePortStatus   KubeService   </description>
     </item>
     
     <item>
@@ -256,12 +272,21 @@ Defined in  lib/k8s/crd.ts:57 </description>
     </item>
     
     <item>
+      <title>Module: lib/k8s/token</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_token/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_token/</guid>
+      <description>Interfaces   KubeToken   </description>
+    </item>
+    
+    <item>
       <title>Module: lib/router</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_router/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_router/</guid>
-      <description>Interfaces   Route   RouteURLProps   Variables NotFoundRoute • NotFoundRoute: Object
+      <description>Interfaces   Route   RouteURLProps   Variables NotFoundRoute • Const NotFoundRoute: Object
 Type declaration    Name Type     component () =&amp;gt; Element   exact boolean   name string   noAuthRequired boolean   path string   sidebar null    Defined in  lib/router.tsx:428 Functions createRouteURL ▸ createRouteURL(routeName, params?): string
 Parameters    Name Type     routeName string   params RouteURLProps     Returns string</description>
     </item>
@@ -272,11 +297,10 @@ Parameters    Name Type     routeName string   params RouteURLProps     Returns 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util/</guid>
-      <description>Interfaces   FilterState   Type aliases DateParam Ƭ DateParam: string | number | Date
-Defined in  lib/util.ts:20 Variables CLUSTER_ACTION_GRACE_PERIOD • CLUSTER_ACTION_GRACE_PERIOD: 5000
+      <description>Namespaces   auth   units   Interfaces   FilterState   Type aliases DateParam Ƭ DateParam: string | number | Date
+Defined in  lib/util.ts:20 Variables CLUSTER_ACTION_GRACE_PERIOD • Const CLUSTER_ACTION_GRACE_PERIOD: 5000
 Defined in  lib/util.ts:18 Functions filterResource ▸ filterResource(item, filter, matchCriteria?): boolean
-Parameters    Name Type     item KubeObjectInterface    filter FilterState    matchCriteria? string[]    Returns boolean
-Defined in  lib/util.ts:85  getCluster ▸ getCluster(): string | null</description>
+Parameters    Name Type     item KubeObjectInterface    filter FilterState    matchCriteria? string[]    Returns boolean</description>
     </item>
     
     <item>
@@ -285,8 +309,7 @@ Defined in  lib/util.ts:85  getCluster ▸ getCluster(): string | null</descript
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_lib/</guid>
-      <description>The lib.ts file should carry the bits to be used by plugins whereas the index.ts should have the functions that Headlamp itself needs for loading the plugins.
-Classes   Headlamp   Plugin   </description>
+      <description>Classes   Headlamp   Plugin   Interfaces   AppMenu   </description>
     </item>
     
     <item>
@@ -295,10 +318,11 @@ Classes   Headlamp   Plugin   </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_registry/</guid>
-      <description>Classes   Registry   Interfaces   SectionFuncProps   Type aliases sectionFunc Ƭ sectionFunc: (resource: KubeObject ) =&amp;gt; SectionFuncProps | null | undefined
-Type declaration ▸ (resource): SectionFuncProps | null | undefined
-Parameters    Name Type     resource KubeObject     Returns  SectionFuncProps | null | undefined
-Defined in  plugin/registry.tsx:20 </description>
+      <description>Classes   Registry   Interfaces   AppLogoProps   ClusterChooserProps   DetailsViewSectionProps   SectionFuncProps   SidebarEntryProps   Type aliases AppBarActionType Ƭ AppBarActionType: HeaderActionType
+Defined in  plugin/registry.tsx:43  AppLogoType Ƭ AppLogoType: React.ComponentType&amp;lt; AppLogoProps &amp;gt; | ReactElement | null
+Defined in  components/Sidebar/AppLogo.tsx:16  ClusterChooserType Ƭ ClusterChooserType: React.ComponentType&amp;lt; ClusterChooserProps &amp;gt; | ReactElement | null
+Defined in  components/cluster/ClusterChooser.tsx:10  DetailsViewHeaderActionType Ƭ DetailsViewHeaderActionType: HeaderActionType
+Defined in  plugin/registry.</description>
     </item>
     
     <item>
@@ -307,9 +331,25 @@ Defined in  plugin/registry.tsx:20 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/redux_reducers_config/</guid>
-      <description>Interfaces   ConfigAction   ConfigState   Variables INITIAL_STATE • INITIAL_STATE: ConfigState Defined in  redux/reducers/config.tsx:11 Functions reducer ▸ reducer(state?, action): Object
+      <description>Interfaces   ConfigAction   ConfigState   Variables INITIAL_STATE • Const INITIAL_STATE: ConfigState Defined in  redux/reducers/config.tsx:11 Functions reducer ▸ reducer(state?, action): Object
 Parameters    Name Type     state ConfigState    action ConfigAction     Returns Object
    Name Type     clusters null | { [clusterName: string]: Cluster ; }    Defined in  redux/reducers/config.</description>
+    </item>
+    
+    <item>
+      <title>Namespace: units</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util.units/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util.units/</guid>
+      <description>lib/util .units
+Variables TO_GB • Const TO_GB: number
+Defined in  lib/units.ts:10  TO_ONE_CPU • Const TO_ONE_CPU: 1000000000
+Defined in  lib/units.ts:12  TO_ONE_M_CPU • Const TO_ONE_M_CPU: 1000000
+Defined in  lib/units.ts:11 Functions parseCpu ▸ parseCpu(value): number
+Parameters    Name Type     value string    Returns number
+Defined in  lib/units.ts:62  parseDiskSpace ▸ parseDiskSpace(value): number
+Parameters    Name Type     value string    Returns number</description>
     </item>
     
   </channel>
