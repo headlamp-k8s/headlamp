@@ -89,7 +89,7 @@ Add menus when Headlamp is running as an app.
 Change the Cluster Chooser button (in the middle top of the Headlamp app bar) with
 [registerClusterChooser](../api/modules/plugin_registry.md#registerClusterChooser).
 
-![screenshot of the cluster chooser button](./images/clusterchooser.png)
+![screenshot of the cluster chooser button](./images/cluster-chooser.png)
 
 - Example plugin shows [How To Register Cluster Chooser button](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/clusterchooser)
 - API reference for [registerClusterChooser](../api/modules/plugin_registry.md#registerClusterChooser)
