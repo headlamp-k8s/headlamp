@@ -11,7 +11,7 @@ export default function NamespaceDetails() {
   const { t } = useTranslation('glossary');
 
   function makeStatusLabel(namespace: Namespace | null) {
-    const status = namespace?.status.phase;
+    const status = namespace?.jsonData?.status.phase;
     return <StatusLabel status={status === 'Active' ? 'success' : 'error'}>{status}</StatusLabel>;
   }
 

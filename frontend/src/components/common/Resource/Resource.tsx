@@ -52,9 +52,9 @@ export interface ResourceLinkProps extends Omit<LinkProps, 'routeName' | 'params
 
 export function ResourceLink(props: ResourceLinkProps) {
   const {
-    routeName = props.resource.kind,
+    routeName = props.resource.kind || '',
     routeParams = props.resource.metadata as RouteURLProps,
-    name = props.resource.metadata.name,
+    name = props.resource?.metadata?.name || '',
     state,
   } = props;
 
@@ -655,11 +655,11 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
     }
 
     if (resource.kind === 'Node') {
-      return pods.filter(item => item.spec.nodeName === resource.metadata.name);
+      return pods.filter(item => item.spec.nodeName === resource?.metadata?.name);
     }
 
     if (resource.kind === 'Namespace') {
-      return pods.filter(item => item.metadata.namespace === resource.metadata.name);
+      return pods.filter(item => item.metadata.namespace === resource?.metadata?.name);
     }
 
     const resourceTemplateLabel = Object.values(resource?.spec?.template?.metadata?.labels || []);

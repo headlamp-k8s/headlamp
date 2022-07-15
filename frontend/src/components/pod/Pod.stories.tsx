@@ -44,7 +44,7 @@ Pods.args = {
       metadata: {
         uid: 'Dummy_UID',
         resourceVersion: 'v1',
-        creationTimestamp: new Date().toISOString(),
+        creationTimestamp: new Date(),
         selfLink: 'https://',
         name: 'Dummy_POD',
         namespace: 'Dummy_Namespace',

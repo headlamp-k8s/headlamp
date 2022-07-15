@@ -89,18 +89,18 @@ export function filterResource(
 ) {
   let matches: boolean = true;
 
-  if (item.metadata.namespace && filter.namespaces.size > 0) {
-    matches = filter.namespaces.has(item.metadata.namespace);
+  if (item?.metadata?.namespace && filter.namespaces.size > 0) {
+    matches = filter.namespaces.has(item?.metadata?.namespace);
   }
 
   if (matches && filter.search) {
     const filterString = filter.search.toLowerCase();
     const usedMatchCriteria = [
-      item.metadata.uid.toLowerCase(),
-      item.metadata.namespace ? item.metadata.namespace.toLowerCase() : '',
-      item.metadata.name.toLowerCase(),
-      ...Object.keys(item.metadata.labels || {}).map(item => item.toLowerCase()),
-      ...Object.values(item.metadata.labels || {}).map(item => item.toLowerCase()),
+      item?.metadata?.uid?.toLowerCase(),
+      item?.metadata?.namespace ? item.metadata.namespace.toLowerCase() : '',
+      item?.metadata?.name?.toLowerCase(),
+      ...Object.keys(item?.metadata?.labels || {}).map(item => item.toLowerCase()),
+      ...Object.values(item?.metadata?.labels || {}).map(item => item.toLowerCase()),
     ];
 
     // Use the custom matchCriteria if any
@@ -132,7 +132,7 @@ export function filterResource(
       });
     });
 
-    matches = !!usedMatchCriteria.find(item => item.includes(filterString));
+    matches = !!usedMatchCriteria.find(item => item?.includes(filterString));
   }
 
   return matches;

@@ -16,7 +16,7 @@ const MOCK_CRD_JSON: { [crdName: string]: KubeCRD | null } = {
     metadata: {
       name: 'mydefinition.phonyresources.io',
       uid: 'phony',
-      creationTimestamp: new Date('2021-12-15T14:57:13Z').toString(),
+      creationTimestamp: new Date('2021-12-15T14:57:13Z'),
       resourceVersion: '1',
       selfLink: '1',
     },

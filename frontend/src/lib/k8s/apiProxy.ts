@@ -313,7 +313,7 @@ function singleApiFactory(group: string, version: string, resource: string) {
     get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
       streamResult(url, name, cb, errCb),
     post: (body: KubeObjectInterface) => post(url, body),
-    put: (body: KubeObjectInterface) => put(`${url}/${body.metadata.name}`, body),
+    put: (body: KubeObjectInterface) => put(`${url}/${body?.metadata?.name}`, body),
     patch: (body: OpPatch[], name: string) => patch(`${url}/${name}?pretty=true`, body),
     delete: (name: string) => remove(`${url}/${name}`),
     isNamespaced: false,
@@ -371,11 +371,11 @@ function simpleApiFactoryWithNamespace(
       streamResults(url(namespace), cb, errCb),
     get: (namespace: string, name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
       streamResult(url(namespace), name, cb, errCb),
-    post: (body: KubeObjectInterface) => post(url(body.metadata.namespace as string), body),
+    post: (body: KubeObjectInterface) => post(url(body?.metadata?.namespace as string), body),
     patch: (body: OpPatch[], namespace: string, name: string) =>
       patch(`${url(namespace)}/${name}?pretty=true`, body),
     put: (body: KubeObjectInterface) =>
-      put(`${url(body.metadata.namespace as string)}/${body.metadata.name}`, body),
+      put(`${url(body?.metadata?.namespace as string)}/${body?.metadata?.name}`, body),
     delete: (namespace: string, name: string) => remove(`${url(namespace)}/${name}`),
     isNamespaced: true,
   };
@@ -433,7 +433,7 @@ function apiScaleFactory(apiRoot: string, resource: string) {
   return {
     get: (namespace: string, name: string) => request(url(namespace, name)),
     put: (body: { metadata: KubeMetadata; spec: { replicas: number } }) =>
-      put(url(body.metadata.namespace as string, body.metadata.name), body),
+      put(url(body.metadata.namespace as string, body.metadata?.name || ''), body),
   };
 
   function url(namespace: string, name: string) {
@@ -553,7 +553,7 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
     const fixedKind = kind.slice(0, -4); // Trim off the word "List" from the end of the string
     for (const item of items) {
       item.kind = fixedKind;
-      results[item.metadata.uid] = item;
+      results[item.metadata?.uid || ''] = item;
     }
 
     push();
@@ -570,25 +570,25 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
 
     switch (type) {
       case 'ADDED':
-        results[object.metadata.uid] = object;
+        results[object.metadata?.uid || ''] = object;
         break;
       case 'MODIFIED': {
-        const existing = results[object.metadata.uid];
+        const existing = results[object.metadata?.uid || ''];
 
         if (existing) {
-          const currentVersion = parseInt(existing.metadata.resourceVersion, 10);
-          const newVersion = parseInt(object.metadata.resourceVersion, 10);
+          const currentVersion = parseInt(existing.metadata?.resourceVersion || '', 10);
+          const newVersion = parseInt(object.metadata?.resourceVersion || '', 10);
           if (currentVersion < newVersion) {
             Object.assign(existing, object);
           }
         } else {
-          results[object.metadata.uid] = object;
+          results[object.metadata?.uid || ''] = object;
         }
 
         break;
       }
       case 'DELETED':
-        delete results[object.metadata.uid];
+        delete results[object.metadata?.uid || ''];
         break;
       case 'ERROR':
         console.error('Error in update', { type, object });

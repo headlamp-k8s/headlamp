@@ -44,13 +44,13 @@ function CustomResourceLink(props: { resource: KubeCRD; crd: CRD; [otherProps: s
       className={classes.link}
       routeName="customresource"
       params={{
-        crName: resource.metadata.name,
+        crName: resource?.metadata?.name,
         crd: crd.metadata.name,
-        namespace: resource.metadata.namespace || '-',
+        namespace: resource?.metadata?.namespace || '-',
       }}
       {...otherProps}
     >
-      {resource.metadata.name}
+      {resource?.metadata?.name}
     </Link>
   );
 }

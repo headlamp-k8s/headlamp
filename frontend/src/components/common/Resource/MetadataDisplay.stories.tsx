@@ -29,7 +29,7 @@ const mockResource: KubeObjectInterface = {
     namespace: 'kube-system',
     uid: '123',
     resourceVersion: '216658365',
-    creationTimestamp: '2021-06-02',
+    creationTimestamp: new Date(),
     selfLink: '',
     labels: {
       label1: 'My Label 1',

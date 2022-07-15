@@ -111,7 +111,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     if (previousVersion !== item.metadata!.resourceVersion || code === originalCode) {
       setCode(itemCode);
       if (previousVersion !== item.metadata!.resourceVersion) {
-        setPreviousVersion(item!.metadata!.resourceVersion);
+        setPreviousVersion(item!.metadata!.resourceVersion || '');
       }
     }
   }, [item, previousVersion, originalCode, code]);

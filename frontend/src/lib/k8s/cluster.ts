@@ -8,6 +8,8 @@ import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
 import { KubeEvent } from './event';
+import { IoK8sApiCoreV1Namespace } from './gen/model/IoK8sApiCoreV1Namespace';
+import { IoK8sApimachineryPkgApisMetaV1ObjectMeta } from './gen/model/IoK8sApimachineryPkgApisMetaV1ObjectMeta';
 import Job from './job';
 import ReplicaSet from './replicaSet';
 import StatefulSet from './statefulSet';
@@ -19,9 +21,9 @@ export interface Cluster {
 }
 
 export interface KubeObjectInterface {
-  kind: string;
+  kind?: string;
   apiVersion?: string;
-  metadata: KubeMetadata;
+  metadata?: KubeMetadata;
   [otherProps: string]: any;
 }
 
@@ -29,17 +31,7 @@ export interface StringDict {
   [key: string]: string;
 }
 
-export interface KubeMetadata {
-  uid: string;
-  name: string;
-  namespace?: string;
-  creationTimestamp: string;
-  resourceVersion: string;
-  selfLink: string;
-  labels?: StringDict;
-  annotations?: StringDict;
-  ownerReferences?: KubeOwnerReference[];
-}
+export interface KubeMetadata extends IoK8sApimachineryPkgApisMetaV1ObjectMeta {}
 
 export interface KubeOwnerReference {
   apiVersion: string;
@@ -56,7 +48,9 @@ export interface ApiListOptions {
 
 // We have to define a KubeObject implementation here because the KubeObject
 // class is defined within the function and therefore not inferable.
-export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
+export interface KubeObjectIface<
+  T extends KubeObjectInterface | KubeEvent | IoK8sApiCoreV1Namespace
+> {
   apiList: (onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void) => any;
   useApiList: (
     onList: (arg: InstanceType<KubeObjectIface<T>>[]) => void,
@@ -78,7 +72,7 @@ export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
   [prop: string]: any;
 }
 
-export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
+export function makeKubeObject<T extends KubeObjectInterface | KubeEvent | IoK8sApiCoreV1Namespace>(
   objectName: string
 ): KubeObjectIface<T> {
   class KubeObject {
@@ -115,26 +109,27 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
 
     getName() {
-      return this.metadata.name;
+      return this.metadata?.name || '';
     }
 
     getNamespace() {
-      return this.metadata.namespace;
+      return this.metadata?.namespace || '';
     }
 
     getCreationTs() {
-      return this.metadata.creationTimestamp;
+      return this.metadata?.creationTimestamp || '';
     }
 
     getAge() {
-      return timeAgo(this.getCreationTs());
+      return timeAgo(this.getCreationTs() || '');
     }
 
     getValue(prop: string) {
-      return this.jsonData![prop];
+      return prop;
+      // return this.jsonData![prop];
     }
 
-    get metadata() {
+    get metadata(): any {
       return this.jsonData!.metadata;
     }
 

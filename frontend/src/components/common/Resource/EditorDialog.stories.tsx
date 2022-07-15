@@ -17,7 +17,7 @@ const Template: Story<EditorDialogProps> = args => {
           uid: 'UNIQUE_ID',
           resourceVersion: '0.0.0',
           selfLink: 'https://',
-          creationTimestamp: '10/12/2021',
+          creationTimestamp: new Date(),
         },
         kind: 'DUMMY_KUBE_KIND',
       }}

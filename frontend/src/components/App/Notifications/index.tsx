@@ -182,12 +182,12 @@ export default function Notifications() {
             return currentNotifications[notificationIndexFromStore];
           }
 
-          eventIds.add(event.metadata.uid);
+          eventIds.add(event.metadata?.uid || '');
 
           const message = event.message;
-          const date = new Date(event.metadata.creationTimestamp).getTime();
+          const date = new Date(event.metadata?.creationTimestamp || '').getTime();
           const notification = new Notification(message, date);
-          notification.id = event.metadata.uid;
+          notification.id = event.metadata?.uid || '';
           notification.url = createRouteURL('cluster') + `?eventsFilter=${notification.id}`;
 
           changed = true;
