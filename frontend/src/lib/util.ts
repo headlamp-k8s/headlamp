@@ -61,11 +61,15 @@ export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
 }
 
 export function localeDate(date: DateParam) {
+  const options: Intl.DateTimeFormatOptions = { timeZoneName: 'short' };
+
   if (process.env.TEST_TZ) {
-    return new Date(date).toLocaleString('en-US', { timeZone: 'UTC' });
+    options.timeZone = 'UTC';
   } else {
-    return new Date(date).toLocaleString();
+    options.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
+
+  return new Date(date).toLocaleString(undefined, options);
 }
 
 export function getPercentStr(value: number, total: number) {
