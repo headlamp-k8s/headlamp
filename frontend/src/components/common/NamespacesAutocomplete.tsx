@@ -26,7 +26,8 @@ export function PureNamespacesAutocomplete({
   filter,
 }: PureNamespacesAutocompleteProps) {
   const theme = useTheme();
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'frequent']);
+  const maxNamespacesChars = 12;
 
   return (
     <Autocomplete
@@ -52,10 +53,33 @@ export function PureNamespacesAutocomplete({
         </React.Fragment>
       )}
       renderTags={(tags: string[]) => {
-        const joinedTags = tags.join(', ');
+        if (tags.length === 0) {
+          return <Typography variant="body2">{t('frequent|All namespaces')}</Typography>;
+        }
+
+        let namespacesToShow = tags[0];
+        const joiner = ', ';
+        const joinerLength = joiner.length;
+        let joinnedNamespaces = 1;
+
+        tags.slice(1).forEach(tag => {
+          if (namespacesToShow.length + tag.length + joinerLength <= maxNamespacesChars) {
+            namespacesToShow += joiner + tag;
+            joinnedNamespaces++;
+          }
+        });
+
         return (
-          <Typography>
-            {joinedTags.length > 15 ? joinedTags : joinedTags.slice(0, 15) + '…'}
+          <Typography style={{ overflowWrap: 'anywhere' }}>
+            {namespacesToShow.length > maxNamespacesChars
+              ? namespacesToShow.slice(0, maxNamespacesChars) + '…'
+              : namespacesToShow}
+            {tags.length > joinnedNamespaces && (
+              <>
+                <span>,&nbsp;</span>
+                <b>{`+${tags.length - joinnedNamespaces}`}</b>
+              </>
+            )}
           </Typography>
         );
       }}
