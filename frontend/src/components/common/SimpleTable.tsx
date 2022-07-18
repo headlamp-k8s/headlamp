@@ -299,17 +299,20 @@ export default function SimpleTable(props: SimpleTableProps) {
           {filteredData.length > 0 ? (
             getPagedRows().map((row: any, i: number) => (
               <TableRow key={i}>
-                {columns.map((col, i) => (
-                  <TableCell key={`cell_${i}`}>
-                    {i === 0 && row.color && (
-                      <React.Fragment>
-                        <InlineIcon icon="mdi:square" color={row.color} height="15" width="15" />
-                        &nbsp;
-                      </React.Fragment>
-                    )}
-                    {'datum' in col ? row[col.datum] : col.getter(row)}
-                  </TableCell>
-                ))}
+                {columns.map((col, i) => {
+                  const { cellProps = {} } = col;
+                  return (
+                    <TableCell key={`cell_${i}`} {...cellProps}>
+                      {i === 0 && row.color && (
+                        <React.Fragment>
+                          <InlineIcon icon="mdi:square" color={row.color} height="15" width="15" />
+                          &nbsp;
+                        </React.Fragment>
+                      )}
+                      {'datum' in col ? row[col.datum] : col.getter(row)}
+                    </TableCell>
+                  );
+                })}
               </TableRow>
             ))
           ) : (

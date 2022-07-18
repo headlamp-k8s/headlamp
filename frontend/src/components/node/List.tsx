@@ -1,12 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Node from '../../lib/k8s/node';
-import { useFilterFunc } from '../../lib/util';
-import { Link } from '../common';
+import ResourceTable from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
-import SimpleTable from '../common/SimpleTable';
 import { UsageBarChart } from './Charts';
 import { NodeReadyLabel } from './Details';
 
@@ -18,32 +15,17 @@ const useStyle = makeStyles({
 
 export default function NodeList() {
   const classes = useStyle();
-  const [nodes, error] = Node.useList();
   const [nodeMetrics, metricsError] = Node.useMetrics();
-  const filterFunc = useFilterFunc();
   const { t } = useTranslation('glossary');
 
   const noMetrics = metricsError?.status === 404;
 
   return (
     <SectionBox title={<SectionFilterHeader title={t('Nodes')} noNamespaceFilter />}>
-      <SimpleTable
-        rowsPerPage={[15, 25, 50]}
-        filterFunction={filterFunc}
-        errorMessage={Node.getErrorMessage(error)}
+      <ResourceTable
+        resourceClass={Node}
         columns={[
-          {
-            label: t('frequent|Name'),
-            getter: node => <Link kubeObject={node} />,
-            sort: (n1: Node, n2: Node) => {
-              if (n1.metadata.name < n2.metadata.name) {
-                return -1;
-              } else if (n1.metadata.name > n2.metadata.name) {
-                return 1;
-              }
-              return 0;
-            },
-          },
+          'name',
           {
             label: t('frequent|Ready'),
             getter: node => <NodeReadyLabel node={node} />,
@@ -76,16 +58,8 @@ export default function NodeList() {
               />
             ),
           },
-          {
-            label: t('frequent|Age'),
-            getter: node => node.getAge(),
-            sort: (n1: Node, n2: Node) =>
-              new Date(n2.metadata.creationTimestamp).getTime() -
-              new Date(n1.metadata.creationTimestamp).getTime(),
-          },
+          'age',
         ]}
-        data={nodes}
-        defaultSortingColumn={5}
       />
     </SectionBox>
   );

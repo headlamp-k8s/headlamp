@@ -3,10 +3,9 @@ import { useTranslation } from 'react-i18next';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
 import { useErrorState, useFilterFunc } from '../../lib/util';
-import Link from '../common/Link';
+import ResourceTable from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
-import SimpleTable from '../common/SimpleTable';
 
 interface RoleBindingDict {
   [kind: string]: RoleBinding[] | null;
@@ -62,43 +61,20 @@ export default function RoleBindingList() {
 
   return (
     <SectionBox title={<SectionFilterHeader title={t('Role Bindings')} />}>
-      <SimpleTable
-        rowsPerPage={[15, 25, 50]}
+      <ResourceTable
         filterFunction={filterFunc}
         errorMessage={getErrorMessage()}
         columns={[
-          {
-            label: t('Type'),
-            getter: item => item.kind,
-            sort: true,
-          },
-          {
-            label: t('frequent|Name'),
-            getter: item => <Link kubeObject={item} />,
-            sort: (r1: RoleBinding, r2: RoleBinding) => {
-              if (r1.metadata.name < r2.metadata.name) {
-                return -1;
-              } else if (r1.metadata.name > r2.metadata.name) {
-                return 1;
-              }
-              return 0;
-            },
-          },
+          'type',
+          'name',
           {
             label: t('glossary|Namespace'),
             getter: item => item.getNamespace() || t('frequent|All namespaces'),
             sort: true,
           },
-          {
-            label: t('frequent|Age'),
-            getter: item => item.getAge(),
-            sort: (r1: RoleBinding, r2: RoleBinding) =>
-              new Date(r2.metadata.creationTimestamp).getTime() -
-              new Date(r1.metadata.creationTimestamp).getTime(),
-          },
+          'age',
         ]}
         data={getJointItems()}
-        defaultSortingColumn={4}
       />
     </SectionBox>
   );

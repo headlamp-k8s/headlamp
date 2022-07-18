@@ -1,8 +1,9 @@
+import { useTheme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../../lib/k8s/cluster';
+import { DateLabel } from '../Label';
 import Link from '../Link';
 import SimpleTable, { SimpleTableProps } from '../SimpleTable';
-import { AgeLabel } from './AgeLabel';
 
 type SimpleTableColumn = SimpleTableProps['columns'][number];
 
@@ -38,6 +39,7 @@ function TableFromResourceClass(props: ResourceTableFromResourceClassProps) {
 function Table(props: ResourceTableProps) {
   const { columns, defaultSortingColumn, ...otherProps } = props;
   const { t } = useTranslation(['glossary', 'frequent']);
+  const theme = useTheme();
 
   let sortingColumn = defaultSortingColumn;
 
@@ -67,7 +69,13 @@ function Table(props: ResourceTableProps) {
         return {
           label: t('frequent|Age'),
           cellProps: { style: { textAlign: 'right' } },
-          getter: resource => <AgeLabel resource={resource} format="mini" />,
+          getter: resource => (
+            <DateLabel
+              date={resource.metadata.creationTimestamp}
+              format="mini"
+              iconProps={{ color: theme.palette.grey.A700 }}
+            />
+          ),
           sort: (n1: KubeObject, n2: KubeObject) =>
             new Date(n2.metadata.creationTimestamp).getTime() -
             new Date(n1.metadata.creationTimestamp).getTime(),

@@ -150,8 +150,8 @@ export function HeaderLabel(props: HeaderLabelProps) {
 }
 
 export interface HoverInfoLabelProps {
-  label: string;
-  hoverInfo: string | JSX.Element | undefined;
+  label: React.ReactNode;
+  hoverInfo?: React.ReactNode;
   icon?: any;
 }
 
@@ -159,18 +159,18 @@ export function HoverInfoLabel(props: HoverInfoLabelProps) {
   const { label, hoverInfo, icon = null } = props;
 
   return (
-    <Grid container spacing={1}>
-      <Grid item>{label}</Grid>
-      <Grid item>
-        {hoverInfo && (
-          <LightTooltip title={hoverInfo}>
+    <LightTooltip title={hoverInfo || ''}>
+      <Grid container spacing={1}>
+        <Grid item>{label}</Grid>
+        <Grid item>
+          {hoverInfo && (
             <Box>
               <Icon icon={icon || 'mdi:information-outline'} width="1rem" height="1rem" />
             </Box>
-          </LightTooltip>
-        )}
+          )}
+        </Grid>
       </Grid>
-    </Grid>
+    </LightTooltip>
   );
 }
 

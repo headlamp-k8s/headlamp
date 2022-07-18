@@ -1,25 +1,19 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import CRD from '../../lib/k8s/crd';
-import { timeAgo, useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
+import ResourceTable from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
-import SimpleTable from '../common/SimpleTable';
 
 export default function CustomResourceDefinitionList() {
-  const [crds, error] = CRD.useList();
-  const filterFunc = useFilterFunc();
   const { t } = useTranslation('glossary');
 
   return (
     <SectionBox
       title={<SectionFilterHeader title={t('crd|Custom Resource Definitions')} noNamespaceFilter />}
     >
-      <SimpleTable
-        rowsPerPage={[15, 25, 50]}
-        filterFunction={filterFunc}
-        errorMessage={CRD.getErrorMessage(error)}
+      <ResourceTable
+        resourceClass={CRD}
         columns={[
           {
             label: t('frequent|Name'),
@@ -56,16 +50,8 @@ export default function CustomResourceDefinitionList() {
               return 0;
             },
           },
-          {
-            label: t('frequent|Age'),
-            getter: crd => timeAgo(crd.metadata.creationTimestamp),
-            sort: (c1: CRD, c2: CRD) =>
-              new Date(c2.metadata.creationTimestamp).getTime() -
-              new Date(c1.metadata.creationTimestamp).getTime(),
-          },
+          'age',
         ]}
-        data={crds}
-        defaultSortingColumn={5}
       />
     </SectionBox>
   );
