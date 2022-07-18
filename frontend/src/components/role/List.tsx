@@ -2,11 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ClusterRole from '../../lib/k8s/clusterRole';
 import Role from '../../lib/k8s/role';
-import { timeAgo, useErrorState, useFilterFunc } from '../../lib/util';
+import { useErrorState, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
+import ResourceTable from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
-import SimpleTable from '../common/SimpleTable';
 
 interface RolesDict {
   [kind: string]: Role[] | null;
@@ -62,16 +62,11 @@ export default function RoleList() {
 
   return (
     <SectionBox title={<SectionFilterHeader title={t('Roles')} />}>
-      <SimpleTable
-        rowsPerPage={[15, 25, 50]}
+      <ResourceTable
         filterFunction={filterFunc}
         errorMessage={getErrorMessage()}
         columns={[
-          {
-            label: t('Type'),
-            getter: item => item.kind,
-            sort: true,
-          },
+          'type',
           {
             label: t('frequent|Name'),
             getter: item => (
@@ -94,21 +89,10 @@ export default function RoleList() {
               return 0;
             },
           },
-          {
-            label: t('glossary|Namespace'),
-            getter: item => item.metadata.namespace,
-            sort: true,
-          },
-          {
-            label: t('frequent|Age'),
-            getter: item => timeAgo(item.metadata.creationTimestamp),
-            sort: (r1: Role, r2: Role) =>
-              new Date(r2.metadata.creationTimestamp).getTime() -
-              new Date(r1.metadata.creationTimestamp).getTime(),
-          },
+          'namespace',
+          'age',
         ]}
         data={getJointItems()}
-        defaultSortingColumn={4}
       />
     </SectionBox>
   );

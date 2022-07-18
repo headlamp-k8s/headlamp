@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { ApiError, apiFactory } from '../../lib/k8s/apiProxy';
 import CRD, { KubeCRD } from '../../lib/k8s/crd';
-import { timeAgo } from '../../lib/util';
 import { Link } from '../common';
 import Loader from '../common/Loader';
 import { ConditionsTable, MainInfoSection, PageGrid } from '../common/Resource';
+import ResourceTable from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 import DetailsViewSection from '../DetailsViewSection';
@@ -163,7 +163,7 @@ export default function CustomResourceDefinitionDetails() {
         <ConditionsTable resource={item.jsonData} showLastUpdate={false} />
       </SectionBox>
       <SectionBox title={t('Objects')}>
-        <SimpleTable
+        <ResourceTable
           data={objects}
           errorMessage={objectsError}
           columns={[
@@ -175,10 +175,7 @@ export default function CustomResourceDefinitionDetails() {
               label: t('glossary|Namespace'),
               getter: obj => obj.metadata.namespace || '-',
             },
-            {
-              label: t('Created'),
-              getter: obj => timeAgo(obj.metadata.creationTimestamp),
-            },
+            'age',
           ]}
         />
       </SectionBox>

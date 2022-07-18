@@ -1,14 +1,11 @@
 import { Icon } from '@iconify/react';
 import { Box } from '@material-ui/core';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ApiError } from '../../lib/k8s/apiProxy';
 import Job from '../../lib/k8s/job';
-import { useFilterFunc } from '../../lib/util';
-import { LightTooltip, Link, StatusLabel, StatusLabelProps } from '../common';
+import { LightTooltip, StatusLabel, StatusLabelProps } from '../common';
+import ResourceTable from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
-import SimpleTable from '../common/SimpleTable';
 
 export function makePodStatusLabel(job: Job) {
   if (!job?.status?.conditions) {
@@ -60,18 +57,17 @@ export function makePodStatusLabel(job: Job) {
 
 export default function JobsList() {
   const [jobs, error] = Job.useList();
-  return <JobsListRenderer jobs={jobs} error={error} />;
+  return <JobsListRenderer jobs={jobs} error={Job.getErrorMessage(error)} />;
 }
 
 export interface JobsListRendererProps {
   jobs?: Job[] | null;
-  error?: ApiError | null;
+  error?: string | null;
 }
 
 export function JobsListRenderer(props: JobsListRendererProps) {
   const { jobs = null, error } = props;
   const { t } = useTranslation('glossary');
-  const filterFunc = useFilterFunc();
 
   function getCompletions(job: Job) {
     return `${job.spec.completions}/${job.spec.parallelism}`;
@@ -87,28 +83,11 @@ export function JobsListRenderer(props: JobsListRendererProps) {
 
   return (
     <SectionBox title={<SectionFilterHeader title={t('Jobs')} />}>
-      <SimpleTable
-        rowsPerPage={[15, 25, 50]}
-        filterFunction={filterFunc}
-        errorMessage={Job.getErrorMessage(error)}
+      <ResourceTable
+        errorMessage={error}
         columns={[
-          {
-            label: t('frequent|Name'),
-            getter: job => <Link kubeObject={job} />,
-            sort: (j1: Job, j2: Job) => {
-              if (j1.metadata.name < j2.metadata.name) {
-                return -1;
-              } else if (j1.metadata.name > j2.metadata.name) {
-                return 1;
-              }
-              return 0;
-            },
-          },
-          {
-            label: t('glossary|Namespace'),
-            getter: job => job.getNamespace(),
-            sort: true,
-          },
+          'name',
+          'namespace',
           {
             label: t('Completions'),
             getter: job => getCompletions(job),
@@ -118,16 +97,9 @@ export function JobsListRenderer(props: JobsListRendererProps) {
             label: t('Conditions'),
             getter: job => makePodStatusLabel(job),
           },
-          {
-            label: t('frequent|Age'),
-            getter: job => job.getAge(),
-            sort: (j1: Job, j2: Job) =>
-              new Date(j2.metadata.creationTimestamp).getTime() -
-              new Date(j1.metadata.creationTimestamp).getTime(),
-          },
+          'age',
         ]}
         data={jobs}
-        defaultSortingColumn={5}
       />
     </SectionBox>
   );
