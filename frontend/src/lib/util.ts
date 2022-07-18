@@ -11,12 +11,49 @@ import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 
 // @todo: these are exported to window.pluginLib.
 
+const humanize = humanizeDuration.humanizer();
+humanize.languages['en-mini'] = {
+  y: () => 'y',
+  mo: () => 'mo',
+  w: () => 'w',
+  d: () => 'd',
+  h: () => 'h',
+  m: () => 'm',
+  s: () => 's',
+  ms: () => 'ms',
+};
+
 export const CLUSTER_ACTION_GRACE_PERIOD = 5000; // ms
 
 export type DateParam = string | number | Date;
 
-export function timeAgo(date: DateParam) {
-  return humanizeDuration(new Date().getTime() - new Date(date).getTime(), {
+export type DateFormatOptions = 'brief' | 'mini';
+
+export interface TimeAgoOptions {
+  format?: DateFormatOptions;
+}
+
+/**
+ * Show the time passed since the given date, in the desired format.
+ *
+ * @param date - The date since which to calculate the duration.
+ * @param options - `format` takes "brief" or "mini". "brief" rounds the date and uses the largest suitable unit (e.g. "4 weeks"). "mini" uses something like "4w" (for 4 weeks).
+ * @returns The formatted date.
+ */
+export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
+  const { format = 'brief' } = options;
+
+  if (format === 'brief') {
+    return humanize(new Date().getTime() - new Date(date).getTime(), {
+      fallbacks: ['en'],
+      round: true,
+      largest: 1,
+    });
+  }
+
+  return humanize(new Date().getTime() - new Date(date).getTime(), {
+    language: 'en-mini',
+    spacer: '',
     fallbacks: ['en'],
     round: true,
     largest: 1,
