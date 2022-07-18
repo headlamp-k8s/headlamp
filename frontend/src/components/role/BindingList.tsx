@@ -17,7 +17,7 @@ export default function RoleBindingList() {
   const [roleBindingError, onRoleBindingError] = useErrorState(setupRoleBindings);
   const [clusterRoleBindingError, onClusterRoleBindingError] =
     useErrorState(setupClusterRoleBindings);
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'frequent']);
   const filterFunc = useFilterFunc(['.kind']);
 
   function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
@@ -86,7 +86,7 @@ export default function RoleBindingList() {
           },
           {
             label: t('glossary|Namespace'),
-            getter: item => item.getNamespace() || 'All namespaces',
+            getter: item => item.getNamespace() || t('frequent|All namespaces'),
             sort: true,
           },
           {
