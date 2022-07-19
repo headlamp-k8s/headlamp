@@ -4,25 +4,13 @@ exports[`Storyshots Label/HoverInfoLabel Hover Info Label 1`] = `
 <div
   id="root"
 >
-  <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  <p
+    class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+    title="hover info"
   >
-    <div
-      class="MuiGrid-root MuiGrid-item"
-    >
-      Some label
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item"
-    >
-      <div
-        class="MuiBox-root MuiBox-root"
-        title="hover info"
-      >
-        <span />
-      </div>
-    </div>
-  </div>
+    Some label
+    <span />
+  </p>
 </div>
 `;
 
@@ -30,23 +18,11 @@ exports[`Storyshots Label/HoverInfoLabel Hover Info Label Info 1`] = `
 <div
   id="root"
 >
-  <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  <p
+    class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
   >
-    <div
-      class="MuiGrid-root MuiGrid-item"
-    >
-      Some label
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item"
-    >
-      <div
-        class="MuiBox-root MuiBox-root"
-      >
-        <span />
-      </div>
-    </div>
-  </div>
+    Some label
+    <span />
+  </p>
 </div>
 `;
