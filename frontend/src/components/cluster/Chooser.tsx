@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
-import { useCluster, useClustersConf } from '../../lib/k8s';
+import { useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -37,8 +37,8 @@ export interface ClusterTitleProps {
 }
 
 export function ClusterTitle(props: ClusterTitleProps) {
-  const cluster = props.cluster || useCluster();
-  const clusters = props.clusters || useClustersConf();
+  const cluster = props.cluster;
+  const clusters = props.clusters;
   const [showChooser, setShowChooser] = React.useState(false);
   const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
   const ChooserButton = useTypedSelector(state => state.ui.clusterChooserButtonComponent);
