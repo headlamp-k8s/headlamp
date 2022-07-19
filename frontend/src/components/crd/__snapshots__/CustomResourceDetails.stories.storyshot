@@ -222,7 +222,7 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                       >
-                        12/15/2021, 2:57:13 PM
+                        12/15/2021, 2:57:13 PM UTC
                       </span>
                     </td>
                   </tr>
@@ -239,25 +239,13 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
                     >
-                      <div
-                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="My description"
                       >
-                        <div
-                          class="MuiGrid-root MuiGrid-item"
-                        >
-                          mycustomresource
-                        </div>
-                        <div
-                          class="MuiGrid-root MuiGrid-item"
-                        >
-                          <div
-                            class="MuiBox-root MuiBox-root"
-                            title="My description"
-                          >
-                            <span />
-                          </div>
-                        </div>
-                      </div>
+                        mycustomresource
+                        <span />
+                      </p>
                     </td>
                   </tr>
                 </tbody>
