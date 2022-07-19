@@ -10,6 +10,6 @@ test('renders without crashing', async () => {
   );
 
   await waitFor(() => {
-    expect(getByText(/Wait while fetching clusters/i)).toBeInTheDocument();
+    expect(getByText(/Skip to main content/i)).toBeInTheDocument();
   });
 });

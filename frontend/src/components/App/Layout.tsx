@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
+import { useTypedSelector } from '../../redux/reducers/reducers';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
 import Sidebar, { NavigationTabs } from '../Sidebar';
@@ -44,6 +45,7 @@ export interface LayoutProps {}
 
 export default function Layout({}: LayoutProps) {
   const classes = useStyle();
+  const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
 
   return (
     <>
@@ -60,7 +62,7 @@ export default function Layout({}: LayoutProps) {
             <div className={classes.toolbar} />
             <Container maxWidth="lg">
               <NavigationTabs />
-              <RouteSwitcher />
+              {arePluginsLoaded && <RouteSwitcher />}
             </Container>
           </Box>
         </main>
