@@ -19,6 +19,7 @@ import { useCluster } from '../../lib/k8s';
 import { HeaderActionType, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
+import ErrorBoundary from '../common/ErrorBoundary';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import Notifications from './Notifications';
@@ -117,28 +118,52 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[] }) {
-  return (
-    <>
-      {appBarActions.map((action, i) => (
-        <MenuItem>
-          <React.Fragment key={i}>
-            {React.isValidElement(action) ? action : action ? action() : null}
-          </React.Fragment>
-        </MenuItem>
-      ))}
-    </>
-  );
+  const actions = (function stateActions() {
+    return React.Children.toArray(
+      appBarActions.map(Action => {
+        if (React.isValidElement(Action)) {
+          return (
+            <ErrorBoundary>
+              <MenuItem>{Action}</MenuItem>
+            </ErrorBoundary>
+          );
+        } else if (Action === null) {
+          return null;
+        } else {
+          return (
+            <ErrorBoundary>
+              <MenuItem>
+                <Action />
+              </MenuItem>
+            </ErrorBoundary>
+          );
+        }
+      })
+    );
+  })();
+
+  return <>{actions}</>;
 }
 function AppBarActions({ appBarActions }: { appBarActions: HeaderActionType[] }) {
-  return (
-    <>
-      {appBarActions.map((action, i) => (
-        <React.Fragment key={i}>
-          {React.isValidElement(action) ? action : action ? action() : null}
-        </React.Fragment>
-      ))}
-    </>
-  );
+  const actions = (function stateActions() {
+    return React.Children.toArray(
+      appBarActions.map(Action => {
+        if (React.isValidElement(Action)) {
+          return <ErrorBoundary>{Action}</ErrorBoundary>;
+        } else if (Action === null) {
+          return null;
+        } else {
+          return (
+            <ErrorBoundary>
+              <Action />
+            </ErrorBoundary>
+          );
+        }
+      })
+    );
+  })();
+
+  return <>{actions}</>;
 }
 
 export function PureTopBar({

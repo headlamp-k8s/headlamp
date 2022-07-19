@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { getThemeName } from '../../lib/themes';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { EmptyContent } from '../common';
+import ErrorBoundary from '../common/ErrorBoundary';
 import AppLogo from './AppLogo';
 
 const useStyle = makeStyles(theme => ({
@@ -61,26 +62,28 @@ export default function HeadlampButton({ open, onToggleOpen, mobileOnly }: Headl
         className={classes.button}
         aria-label={open ? t('Shrink sidebar') : t('Expand sidebar')}
       >
-        {
-          // Till all plugins are not loaded show empty content for logo as we might have logo coming from a plugin
-          !arePluginsLoaded ? (
-            <EmptyContent />
-          ) : PluginAppLogoComponent ? (
-            isValidElement(PluginAppLogoComponent) ? (
-              // If it's an element, just use it.
-              PluginAppLogoComponent
+        <ErrorBoundary>
+          {
+            // Till all plugins are not loaded show empty content for logo as we might have logo coming from a plugin
+            !arePluginsLoaded ? (
+              <EmptyContent />
+            ) : PluginAppLogoComponent ? (
+              isValidElement(PluginAppLogoComponent) ? (
+                // If it's an element, just use it.
+                PluginAppLogoComponent
+              ) : (
+                // It is a component, so we make it here.
+                <PluginAppLogoComponent
+                  logoType={open ? 'large' : 'small'}
+                  themeName={getThemeName()}
+                  className={classes.logo}
+                />
+              )
             ) : (
-              // It is a component, so we make it here.
-              <PluginAppLogoComponent
-                logoType={open ? 'large' : 'small'}
-                themeName={getThemeName()}
-                className={classes.logo}
-              />
+              <AppLogo logoType={open ? 'large' : 'small'} className={classes.logo} />
             )
-          ) : (
-            <AppLogo logoType={open ? 'large' : 'small'} className={classes.logo} />
-          )
-        }
+          }
+        </ErrorBoundary>
       </Button>
     </div>
   );
