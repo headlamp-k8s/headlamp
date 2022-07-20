@@ -33,7 +33,6 @@ exports[`Storyshots common/ActionButton Large And Colorful 1`] = `
     tabindex="0"
     title="Some label"
     type="button"
-    width="95"
   >
     <span
       class="MuiIconButton-label"
@@ -57,7 +56,6 @@ exports[`Storyshots common/ActionButton Long Description 1`] = `
     tabindex="0"
     title="Although this is Some label, there is more to it than meets the eye."
     type="button"
-    width="95"
   >
     <span
       class="MuiIconButton-label"

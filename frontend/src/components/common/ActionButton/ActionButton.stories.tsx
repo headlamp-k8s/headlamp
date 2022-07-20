@@ -21,7 +21,7 @@ LargeAndColorful.args = {
   description: 'Some label',
   icon: 'mdi:pencil',
   width: '95',
-  color: '#adadad',
+  color: '#FF0000',
 };
 
 export const LongDescription = Template.bind({});
@@ -29,6 +29,4 @@ LongDescription.args = {
   description: 'Some label',
   longDescription: 'Although this is Some label, there is more to it than meets the eye.',
   icon: 'mdi:pencil',
-  width: '95',
-  color: '#adadad',
 };
