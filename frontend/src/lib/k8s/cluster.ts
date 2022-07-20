@@ -94,7 +94,18 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
 
     get detailsRoute(): string {
-      return this._class().className;
+      return this.pluralName;
+    }
+
+    static get pluralName(): string {
+      // This is a naive way to get the plural name of the object by default. It will
+      // work in most cases, but for exceptions (like Ingress), we must override this.
+      return this.className.toLowerCase() + 's';
+    }
+
+    get pluralName(): string {
+      // In case we need to override the plural name in instances.
+      return this._class().pluralName;
     }
 
     get listRoute(): string {
