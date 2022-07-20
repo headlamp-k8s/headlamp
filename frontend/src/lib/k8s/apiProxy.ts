@@ -13,6 +13,7 @@ import helpers from '../../helpers';
 import store from '../../redux/stores/store';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
+import { ResourceClasses } from '.';
 import { KubeMetadata, KubeMetrics, KubeObjectInterface } from './cluster';
 import { KubeToken } from './token';
 
@@ -419,9 +420,11 @@ function resourceDefToApiFactory(resourceDef: KubeObjectInterface): ApiFactoryRe
     throw new Error(`apiVersion has no version string: ${resourceDef.apiVersion}`);
   }
 
-  // This may not be a great way to get the resource plural, but allows us to
-  // skip checking the CRDs for it.
-  const resourcePlural = resourceDef.kind.toLowerCase() + 's';
+  // Try to use a known resource class to get the plural from, otherwise fall back to
+  // generating a plural from the kind (which is very naive).
+  const knownResource = ResourceClasses[resourceDef.kind];
+  const resourcePlural = knownResource?.pluralName || resourceDef.kind.toLowerCase() + 's';
+
   return factoryFunc(apiGroup, apiVersion, resourcePlural);
 }
 
