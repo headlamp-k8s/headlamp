@@ -12,7 +12,9 @@ export default function ReleaseNotes() {
 
   React.useEffect(() => {
     if (desktopApi) {
-      desktopApi.receive('appVersion', (currentBuildAppVersion: string) => {
+      desktopApi.receive('appConfig', (config: { appVersion: string }) => {
+        const { appVersion: currentBuildAppVersion } = config;
+
         const octokit = new Octokit();
 
         async function fetchRelease() {
@@ -81,7 +83,7 @@ export default function ReleaseNotes() {
   }, []);
 
   React.useEffect(() => {
-    desktopApi?.send('appVersion');
+    desktopApi?.send('appConfig');
   }, []);
 
   return (
