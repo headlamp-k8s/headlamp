@@ -467,9 +467,10 @@ function startElecron() {
       setMenu(i18n);
     });
 
-    // Send the app version when requested.
-    ipcMain.on('appVersion', () => {
-      mainWindow?.webContents.send('appVersion', appVersion);
+    ipcMain.on('appConfig', () => {
+      mainWindow?.webContents.send('appConfig', {
+        appVersion,
+      });
     });
 
     ipcMain.on('setMenu', (event: IpcMainEvent, menus: any) => {
