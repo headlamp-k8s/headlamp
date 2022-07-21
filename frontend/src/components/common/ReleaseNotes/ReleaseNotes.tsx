@@ -32,10 +32,9 @@ export default function ReleaseNotes() {
           ) {
             setReleaseDownloadURL(latestRelease.html_url);
           }
-          /*
-    check if there is already a version in store if it exists don't store the current version
-    this check will help us later in determining whether we are on the latest release or not
-    */
+
+          // check if there is already a version in store if it exists don't store the current version
+          // this check will help us later in determining whether we are on the latest release or not.
           const storedAppVersion = helpers.getAppVersion();
           let releaseNotes = '';
           if (storedAppVersion && semver.lt(storedAppVersion as string, currentBuildAppVersion)) {
@@ -70,6 +69,7 @@ export default function ReleaseNotes() {
             setReleaseNotes(releaseNotes);
           }
         }
+
         const isUpdateCheckingDisabled = JSON.parse(
           localStorage.getItem('disable_update_check') || 'false'
         );
@@ -78,6 +78,10 @@ export default function ReleaseNotes() {
         }
       });
     }
+  }, []);
+
+  React.useEffect(() => {
+    desktopApi?.send('appVersion');
   }, []);
 
   return (
