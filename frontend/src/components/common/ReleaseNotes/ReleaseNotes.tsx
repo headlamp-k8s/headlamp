@@ -80,6 +80,10 @@ export default function ReleaseNotes() {
     }
   }, []);
 
+  React.useEffect(() => {
+    desktopApi?.send('appVersion');
+  }, []);
+
   return (
     <>
       {releaseDownloadURL && <UpdatePopup releaseDownloadURL={releaseDownloadURL} />}
