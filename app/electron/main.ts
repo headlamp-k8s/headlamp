@@ -407,7 +407,6 @@ function startElecron() {
     });
 
     mainWindow.webContents.on('dom-ready', () => {
-      mainWindow?.webContents.send('appVersion', appVersion);
       mainWindow?.webContents.send('currentMenu', getDefaultAppMenu(i18n));
     });
 
@@ -466,6 +465,11 @@ function startElecron() {
 
     i18n.on('languageChanged', () => {
       setMenu(i18n);
+    });
+
+    // Send the app version when requested.
+    ipcMain.on('appVersion', () => {
+      mainWindow?.webContents.send('appVersion', appVersion);
     });
 
     ipcMain.on('setMenu', (event: IpcMainEvent, menus: any) => {
