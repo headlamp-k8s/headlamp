@@ -14,7 +14,16 @@ exports.default = async context => {
 
   try {
     fse.copySync('./prod_deps/node_modules', dest);
-  } catch(err) {
+  } catch (err) {
     console.error('Failed to copy node_modules after pack:', err);
+  }
+
+  if (fse.existsSync('.env')) {
+    console.info('Copying .env file to app resources directory!');
+    try {
+      fse.copySync('./.env', path.join(context.appOutDir, 'resources', '.env'));
+    } catch (err) {
+      console.error('Failed to copy .env after pack:', err);
+    }
   }
 };
