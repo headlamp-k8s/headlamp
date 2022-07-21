@@ -40,15 +40,8 @@ export default function ActionButton({
 }: ActionButtonProps) {
   return (
     <Tooltip title={longDescription || description}>
-      <IconButton
-        aria-label={description}
-        onClick={onClick}
-        // @ts-ignore
-        color={color}
-        width={width}
-        edge={edge}
-      >
-        <Icon icon={icon} />
+      <IconButton aria-label={description} onClick={onClick} edge={edge}>
+        <Icon icon={icon} color={color} width={width} />
       </IconButton>
     </Tooltip>
   );
