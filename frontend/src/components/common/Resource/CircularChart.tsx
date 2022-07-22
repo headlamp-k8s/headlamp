@@ -30,6 +30,7 @@ export function CircularChart(props: CircularChartProps) {
     resourceUsedGetter,
     resourceAvailableGetter,
     title,
+    getLegend,
     ...others
   } = props;
   const { t } = useTranslation(['cluster']);
@@ -76,17 +77,17 @@ export function CircularChart(props: CircularChartProps) {
   return noMetrics ? (
     <HeaderLabel
       label={title || ''}
-      value={props.getLegend!(used, available)}
+      value={!!getLegend ? getLegend(used, available) : ''}
       tooltip={t('cluster|Install the metrics-server to get usage data.')}
     />
   ) : (
     <PercentageCircle
-      {...others}
       title={title}
       data={makeData()}
       total={available}
       label={getLabel()}
-      legend={props.getLegend!(used, available)}
+      legend={!!getLegend ? getLegend(used, available) : ''}
+      {...others}
     />
   );
 }
