@@ -9,7 +9,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import SvgIcon from '@material-ui/core/SvgIcon';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -89,12 +88,6 @@ const useStyles = makeStyles(theme => ({
   },
   chooserDialogCover: {
     background: theme.palette.common.black,
-  },
-  logo: {
-    height: '28px',
-    width: '100%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
   },
   chooserTitle: {
     background: theme.palette.common.black,
@@ -274,7 +267,7 @@ export function ClusterDialog(props: ClusterDialogProps) {
       {...otherProps}
     >
       <DialogTitle className={classes.chooserTitle} disableTypography>
-        <SvgIcon className={classes.logo} component={LogoLight} viewBox="0 0 175 32" />
+        <LogoLight />
       </DialogTitle>
       <DialogContent className={classes.chooserDialog}>{children}</DialogContent>
     </Dialog>
