@@ -22,7 +22,7 @@ export interface CircularChartProps extends Omit<PercentageCircleProps, 'data'> 
   tooltip?: string | null;
 }
 
-export default function CircularChart(props: CircularChartProps) {
+export function CircularChart(props: CircularChartProps) {
   const {
     items,
     itemsMetrics,
@@ -90,3 +90,5 @@ export default function CircularChart(props: CircularChartProps) {
     />
   );
 }
+
+export default CircularChart;
