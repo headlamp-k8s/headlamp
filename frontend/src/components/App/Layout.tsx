@@ -14,7 +14,7 @@ const useStyle = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     marginLeft: 'initial',
-    [theme.breakpoints.between('sm', 'md')]: {
+    [theme.breakpoints.only('sm')]: {
       marginLeft: drawerWidthClosed,
     },
   },
