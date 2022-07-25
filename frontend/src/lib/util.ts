@@ -63,7 +63,7 @@ export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
 export function localeDate(date: DateParam) {
   const options: Intl.DateTimeFormatOptions = { timeZoneName: 'short' };
 
-  if (process.env.TEST_TZ) {
+  if (process.env.HEADLAMP_TEST) {
     options.timeZone = 'UTC';
   } else {
     options.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
