@@ -43,15 +43,17 @@ export interface TimeAgoOptions {
 export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
   const { format = 'brief' } = options;
 
+  const now = !!process.env.HEADLAMP_TEST ? new Date('2022-07-25') : new Date();
+
   if (format === 'brief') {
-    return humanize(new Date().getTime() - new Date(date).getTime(), {
+    return humanize(now.getTime() - new Date(date).getTime(), {
       fallbacks: ['en'],
       round: true,
       largest: 1,
     });
   }
 
-  return humanize(new Date().getTime() - new Date(date).getTime(), {
+  return humanize(now.getTime() - new Date(date).getTime(), {
     language: 'en-mini',
     spacer: '',
     fallbacks: ['en'],
