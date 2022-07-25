@@ -347,6 +347,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     verticalAlign: 'top',
     fontSize: '1rem',
+    overflowWrap: 'anywhere',
   },
   metadataNameCell: {
     fontSize: '1rem',
