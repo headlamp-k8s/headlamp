@@ -210,3 +210,18 @@ and point to it by using the mentioned option.
 An alternative is to build an image that ships some plugins in it. For that,
 just create a ".plugins" folder in the Headlamp project directory as the Dockerfile
 will include it and point to it by default.
+
+## Special Build Options
+
+Here are some options that can be used when building Headlamp, to change its default behavior.
+
+### Update Checks
+
+When in the **desktop app**, by default, Headlamp will check for new versions from its Github page and warn the user about it,
+as well as showing the release notes after updating to a new version.
+
+This behavior can be turned off by adding a the following to a `.env` file in the `app/` folder:
+
+```
+HEADLAMP_CHECK_FOR_UPDATES=false
+```
