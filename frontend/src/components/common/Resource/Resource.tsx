@@ -596,7 +596,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
         value: (
           <>
             <Typography>{container.image}</Typography>
-            {status && (
+            {status?.imageID && (
               <Typography className={classes.imageID}>
                 <Typography component="span" style={{ fontWeight: 'bold' }}>
                   ID:
