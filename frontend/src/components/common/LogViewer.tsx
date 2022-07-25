@@ -49,6 +49,8 @@ export function LogViewer(props: LogViewerProps) {
   const classes = useStyle({ isFullScreen });
   const logsBottomRef = React.useRef<HTMLDivElement>(null);
   const { t } = useTranslation('frequent');
+  const [isScrolledUp, setIsScrolledUp] = React.useState(false);
+  const scrollMargin = 15;
 
   function downloadLog() {
     const element = document.createElement('a');
@@ -61,11 +63,32 @@ export function LogViewer(props: LogViewerProps) {
   }
 
   React.useEffect(() => {
-    // @todo: Only scroll down automatically if the view hasn't been scrolled up by the user yet.
-    if (logsBottomRef && logsBottomRef.current) {
+    if (logsBottomRef?.current && !isScrolledUp) {
       logsBottomRef.current.scrollIntoView();
     }
   }, [logs]);
+
+  function handleScroll(event: any) {
+    if (logsBottomRef?.current) {
+      /* 
+        - By default the log viewer shows the logs as they happen, scrolling to the bottom automatically like a terminal view
+        - If the user scrolls the view up, even the tiniest bit, it should remain showing that portion of the log even if more logs arrive
+        - If the user scrolls down to the bottom again, then new updates will keep the view at the bottom (i.e. it will show the latest contents)
+      */
+      const wrapperPosition = logsBottomRef.current.getBoundingClientRect().bottom;
+      const scrollPosition = event.target.getBoundingClientRect().bottom + scrollMargin;
+      /*  compare if the terminal wrapper bottom is in the scroll limit then the user is at 
+          the bottom of the screen
+      */
+      const scrollAtBottom = Math.trunc(wrapperPosition) < Math.trunc(scrollPosition);
+      if (scrollAtBottom) {
+        setIsScrolledUp(false);
+        return;
+      }
+    }
+
+    setIsScrolledUp(true);
+  }
 
   return (
     <Dialog
@@ -92,7 +115,7 @@ export function LogViewer(props: LogViewerProps) {
             />
           </Grid>
         </Grid>
-        <Box className={classes.terminal}>
+        <Box className={classes.terminal} onScroll={handleScroll}>
           <pre>
             {logs.map((item, i) => (
               <Ansi className={classes.terminalCode} key={i} linkify={false}>
