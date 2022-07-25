@@ -494,9 +494,6 @@ const useContainerInfoStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(1),
     fontSize: '.95rem',
   },
-  preventOverflow: {
-    overflowWrap: 'anywhere',
-  },
 }));
 
 export interface ContainerInfoProps {
@@ -587,7 +584,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
         name: t('Image'),
         value: (
           <>
-            <Typography className={classes.preventOverflow}>{container.image}</Typography>
+            <Typography>{container.image}</Typography>
             {status && (
               <Typography className={classes.imageID}>
                 <Typography component="span" style={{ fontWeight: 'bold' }}>
