@@ -588,6 +588,10 @@ export function ContainerInfo(props: ContainerInfoProps) {
         hide: !status,
       },
       {
+        name: t('Image Pull Policy'),
+        value: container.imagePullPolicy,
+      },
+      {
         name: t('Image'),
         value: (
           <>
