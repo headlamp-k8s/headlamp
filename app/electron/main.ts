@@ -1,4 +1,5 @@
 import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
+import dotenv from 'dotenv';
 import { app, BrowserWindow, dialog, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
@@ -11,6 +12,8 @@ import url from 'url';
 import yargs from 'yargs';
 import i18n from './i18next.config';
 import windowSize from './windowSize';
+
+dotenv.config({ path: path.join(process.resourcesPath, '.env') });
 
 const args = yargs
   .command('$0 [kubeconfig]', '', yargs => {
@@ -34,6 +37,7 @@ const defaultPort = 4466;
 
 const isDev = process.env.ELECTRON_DEV || false;
 const useExternalServer = process.env.EXTERNAL_SERVER || false;
+const shouldCheckForUpdates = process.env.HEADLAMP_CHECK_FOR_UPDATES !== 'false';
 
 function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   const serverFilePath = isDev
@@ -364,6 +368,8 @@ function startElecron() {
     appVersion = app.getVersion();
   }
 
+  console.log('Check for updates: ', shouldCheckForUpdates);
+
   setMenu(i18n);
 
   async function createWindow() {
@@ -467,9 +473,11 @@ function startElecron() {
       setMenu(i18n);
     });
 
-    // Send the app version when requested.
-    ipcMain.on('appVersion', () => {
-      mainWindow?.webContents.send('appVersion', appVersion);
+    ipcMain.on('appConfig', () => {
+      mainWindow?.webContents.send('appConfig', {
+        checkForUpdates: shouldCheckForUpdates,
+        appVersion,
+      });
     });
 
     ipcMain.on('setMenu', (event: IpcMainEvent, menus: any) => {
