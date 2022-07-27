@@ -76,6 +76,12 @@ service:
   # -- Kubernetes Service port
   port: 80
 
+# -- Headlamp containers volume mounts
+volumeMounts: []
+
+# -- Headlamp pod's volumes
+volumes: []
+
 ingress:
   # -- Enable ingress controller resource
   enabled: false
