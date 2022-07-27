@@ -86,7 +86,10 @@
     "xterm-addon-fit": "^0.5.0"
   },
   "scripts": {
+    "setup-env": "echo REACT_APP_HEADLAMP_VERSION=$(node --eval=\"process.stdout.write(require('../app/package.json').version)\") > .env; echo REACT_APP_HEADLAMP_GIT_VERSION=$(git rev-parse --verify HEAD) >> .env; echo REACT_APP_HEADLAMP_PRODUCT_NAME=$(node --eval=\"process.stdout.write(require('../app/package.json').productName)\") >> .env",
+    "prestart": "npm run setup-env",
     "start": "react-scripts start",
+    "prebuild": "npm run setup-env",
     "build": "if-env PUBLIC_URL react-scripts build || cross-env PUBLIC_URL=./ react-scripts build --max_old_space_size=768 && rimraf build/frontend/index.baseUrl.html",
     "test": "cross-env TEST_TZ=true react-scripts test",
     "eject": "react-scripts eject",

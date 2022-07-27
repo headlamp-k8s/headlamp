@@ -14,7 +14,7 @@ COPY ./backend /headlamp/backend
 
 WORKDIR /headlamp
 
-RUN cd ./backend && go build -o ./headlamp-server ./cmd/
+RUN cd ./backend && make backend
 
 # Keep npm install separated so source changes don't trigger install
 FROM base-build AS frontendinstall

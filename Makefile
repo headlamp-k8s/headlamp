@@ -5,13 +5,20 @@ SERVER_EXE_EXT ?=
 DOCKER_CMD ?= docker
 DOCKER_REPO ?= ghcr.io/kinvolk
 DOCKER_IMAGE_NAME ?= headlamp
-DOCKER_IMAGE_VERSION ?= $(shell git describe --tags --always --dirty)
+GIT_VERSION ?= $(shell git describe --tags --always --dirty)
+DOCKER_IMAGE_VERSION ?= ${GIT_VERSION}
 DOCKER_IMAGE_BASE ?= alpine:3.15.4
 
 ifeq ($(OS), Windows_NT)
 	SERVER_EXE_EXT = .exe
 endif
 all: backend frontend
+
+headlamp-version:
+	@node --eval="process.stdout.write(require('./app/package.json').version)"
+
+git-version:
+	@git rev-parse --verify HEAD
 
 tools/golangci-lint: backend/go.mod backend/go.sum
 	cd backend && go build -o ./tools/golangci-lint github.com/golangci/golangci-lint/cmd/golangci-lint
@@ -76,7 +83,7 @@ frontend-test:
 	cd frontend && npm run test -- --coverage
 
 plugins-test:
-	cd plugins/headlamp-plugin && npm install && ./test-headlamp-plugin.sh 
+	cd plugins/headlamp-plugin && npm install && ./test-headlamp-plugin.sh
 	cd plugins/headlamp-plugin && ./test-plugins-examples.sh
 
 image:

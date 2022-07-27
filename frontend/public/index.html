@@ -14,6 +14,10 @@
       name="description"
       content="Headlamp: Kubernetes Web UI"
     />
+    <meta
+      name="headlamp-version"
+      content="%REACT_APP_HEADLAMP_VERSION%;%REACT_APP_HEADLAMP_GIT_VERSION%"
+    />
     <!-- Custom font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Overpass&display=swap">
 
@@ -32,7 +36,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Headlamp</title>
+    <title>%REACT_APP_HEADLAMP_PRODUCT_NAME%</title>
     <script>headlampBaseUrl='%PUBLIC_URL%';</script>
   </head>
   <body>

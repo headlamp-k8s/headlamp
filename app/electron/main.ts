@@ -298,6 +298,8 @@ function getDefaultAppMenu(i18n: I18n): AppMenu[] {
   return appMenu;
 }
 
+console.log('>>>>>>>>>>>>>', process.env)
+
 function setMenu(i18n: I18n) {
   const appMenu = getDefaultAppMenu(i18n);
   const menu = Menu.buildFromTemplate(
@@ -436,7 +438,7 @@ function startElecron() {
     }
 
     /*
-    if a library is trying to open a url other than app url in electron take it 
+    if a library is trying to open a url other than app url in electron take it
     to the default browser
     */
     mainWindow.webContents.on('will-navigate', (event, url) => {

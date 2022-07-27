@@ -1,6 +1,6 @@
 {
   "short_name": "Headlamp",
-  "name": "Headlamp Kubernetes Dashboard",
+  "name": "Headlamp Kubernetes UI",
   "icons": [
     {
       "src": "favicon.ico",

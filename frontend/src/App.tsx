@@ -11,6 +11,12 @@ import Plugins from './plugin/Plugins';
 import { useTypedSelector } from './redux/reducers/reducers';
 import store from './redux/stores/store';
 
+window.config = {
+  HEADLAMP_VERSION: process.env.REACT_APP_HEADLAMP_VERSION,
+  HEADLAMP_GIT_VERSION: process.env.REACT_APP_HEADLAMP_GIT_VERSION,
+  HEADLAMP_PRODUCT_NAME: process.env.REACT_APP_HEADLAMP_PRODUCT_NAME,
+};
+
 function AppWithRedux(props: React.PropsWithChildren<{}>) {
   let themeName = useTypedSelector(state => state.ui.theme.name);
   usePrefersColorScheme();

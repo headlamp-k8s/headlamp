@@ -373,6 +373,11 @@ function Chooser(props: ClusterDialogProps) {
         )}
         {children}
       </ClusterDialog>
+      {window.config.HEADLAMP_VERSION && (
+        <Typography variant="body2" color="textSecondary" align="right">
+          {window.config.HEADLAMP_PRODUCT_NAME} {window.config.HEADLAMP_VERSION}
+        </Typography>
+      )}
     </Box>
   );
 }

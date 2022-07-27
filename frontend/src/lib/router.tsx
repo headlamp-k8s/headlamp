@@ -1,5 +1,5 @@
+import { Box, Typography } from '@material-ui/core';
 import _ from 'lodash';
-import React from 'react';
 import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
@@ -74,6 +74,23 @@ export interface Route {
 const defaultRoutes: {
   [routeName: string]: Route;
 } = {
+  version: {
+    path: '/version',
+    name: 'Version',
+    sidebar: null,
+    exact: true,
+    noCluster: true,
+    noAuthRequired: true,
+    component: () => (
+      <Box>
+        <Typography>Name: {process.env.REACT_APP_HEADLAMP_PRODUCT_NAME}</Typography>
+        <Typography>
+          Version: {process.env.REACT_APP_HEADLAMP_VERSION} ;{' '}
+          {process.env.REACT_APP_HEADLAMP_GIT_VERSION}
+        </Typography>
+      </Box>
+    ),
+  },
   cluster: {
     path: '/',
     exact: true,

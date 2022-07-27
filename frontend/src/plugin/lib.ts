@@ -57,6 +57,9 @@ declare global {
     };
     registerPlugin: (pluginId: string, pluginObj: Plugin) => void;
     desktopApi: any;
+    config: {
+      [key: string]: any;
+    };
   }
 }
 
