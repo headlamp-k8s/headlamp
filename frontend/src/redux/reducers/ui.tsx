@@ -11,8 +11,8 @@ import {
   UI_APP_BAR_SET_ACTION,
   UI_BRANDING_SET_APP_LOGO,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
+  UI_INITIALIZE_PLUGIN_VIEWS,
   UI_PLUGINS_LOADED,
-  UI_RESET_PLUGIN_VIEWS,
   UI_ROUTER_SET_ROUTE,
   UI_SET_CLUSTER_CHOOSER_BUTTON,
   UI_SET_DETAILS_VIEW,
@@ -175,7 +175,7 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       setTheme(newFilters.theme.name);
       break;
     }
-    case UI_RESET_PLUGIN_VIEWS: {
+    case UI_INITIALIZE_PLUGIN_VIEWS: {
       const newState = _.cloneDeep(INITIAL_STATE);
       // Keep the sidebar folding state in the current one
       newState.sidebar = { ...newState.sidebar, ...setInitialSidebarOpen() };

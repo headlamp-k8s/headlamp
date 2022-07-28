@@ -12,6 +12,7 @@ const avoidCheck = [
   'AlertNotification',
   'ConfirmButton',
   'NamespacesAutocomplete',
+  'ErrorBoundary',
 ];
 
 const checkExports = [

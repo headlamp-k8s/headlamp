@@ -35,6 +35,7 @@ import DetailsViewSection from '../../DetailsViewSection';
 import { PodListProps, PodListRenderer } from '../../pod/List';
 import { LightTooltip } from '..';
 import Empty from '../EmptyContent';
+import ErrorBoundary from '../ErrorBoundary';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from '../Label';
 import Link, { LinkProps } from '../Link';
 import { useMetadataDisplayStyles } from '.';
@@ -100,10 +101,16 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   const allActions = (function stateActions() {
     return React.Children.toArray(
       headerActions.map(Action => {
-        if (isValidElement(Action) || Action === null) {
-          return Action;
+        if (isValidElement(Action)) {
+          return <ErrorBoundary>{Action}</ErrorBoundary>;
+        } else if (Action === null) {
+          return null;
         } else {
-          return <Action item={resource} />;
+          return (
+            <ErrorBoundary>
+              <Action item={resource} />
+            </ErrorBoundary>
+          );
         }
       })
     );

@@ -1,6 +1,7 @@
-import React, { ComponentType, isValidElement, ReactElement, useMemo } from 'react';
+import { ComponentType, isValidElement, ReactElement, useMemo } from 'react';
 import { KubeObject } from '../../lib/k8s/cluster';
 import { useTypedSelector } from '../../redux/reducers/reducers';
+import ErrorBoundary from '../common/ErrorBoundary';
 
 export interface DetailsViewSectionProps {
   resource: KubeObject;
@@ -23,9 +24,9 @@ export default function DetailsViewSection(props: DetailsViewSectionProps) {
         }
 
         return (
-          <React.Fragment key={index}>
+          <ErrorBoundary key={index}>
             {isValidElement(Component) ? Component : <Component resource={resource} />}
-          </React.Fragment>
+          </ErrorBoundary>
         );
       }),
     [detailViews, resource]

@@ -26,6 +26,7 @@ import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
 import { DialogTitle } from '../common/Dialog';
+import ErrorBoundary from '../common/ErrorBoundary';
 import Loader from '../common/Loader';
 import ClusterChooser from './ClusterChooser';
 
@@ -58,7 +59,7 @@ export function ClusterTitle(props: ClusterTitleProps) {
   }
 
   return (
-    <React.Fragment>
+    <ErrorBoundary>
       {ChooserButton ? (
         isValidElement(ChooserButton) ? (
           ChooserButton
@@ -69,7 +70,7 @@ export function ClusterTitle(props: ClusterTitleProps) {
         <ClusterChooser clickHandler={() => setShowChooser(true)} cluster={cluster} />
       )}
       <Chooser open={showChooser} onClose={() => setShowChooser(false)} />
-    </React.Fragment>
+    </ErrorBoundary>
   );
 }
 
