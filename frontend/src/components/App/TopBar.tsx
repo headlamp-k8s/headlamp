@@ -20,7 +20,7 @@ import { useCluster, useClustersConf } from '../../lib/k8s';
 import {
   HeaderActionType,
   setVersionDialogOpen,
-  setWhetherSidebarOpen
+  setWhetherSidebarOpen,
 } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
@@ -200,10 +200,9 @@ export function PureTopBar({
   const isMedium = useMediaQuery(theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
 
-  const openSideBar =
-    isMedium && !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
+  const openSideBar = !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
 
-  const classes = useStyles({ isSidebarOpen: openSideBar, isSmall });
+  const classes = useStyles({ isSidebarOpen, isSmall });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
