@@ -5,7 +5,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
@@ -20,7 +20,7 @@ import { useCluster, useClustersConf } from '../../lib/k8s';
 import {
   HeaderActionType,
   setVersionDialogOpen,
-  setWhetherSidebarOpen,
+  setWhetherSidebarOpen
 } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
@@ -195,8 +195,9 @@ export function PureTopBar({
   onToggleOpen,
 }: PureTopBarProps) {
   const { t } = useTranslation('frequent');
-  const isSmall = useMediaQuery('(max-width:960px)');
-  const isMedium = useMediaQuery('(max-width:960px)');
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMedium = useMediaQuery(theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
 
   const openSideBar =
