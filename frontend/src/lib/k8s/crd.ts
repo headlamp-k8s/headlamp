@@ -52,6 +52,10 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
   get spec() {
     return this.jsonData!.spec;
   }
+
+  get plural(): string {
+    return this.spec().names.plural;
+  }
 }
 
 export function makeCustomResourceClass(

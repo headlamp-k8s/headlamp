@@ -35,6 +35,10 @@ class Ingress extends makeKubeObject<KubeIngress>('ingress') {
   get listRoute() {
     return 'ingresses';
   }
+
+  static get pluralName() {
+    return 'ingresses';
+  }
 }
 
 export default Ingress;
