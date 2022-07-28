@@ -37,7 +37,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - "-in-cluster"
-            - "-plugins-dir=/headlamp/plugins"
+            {{- with .Values.config.pluginsDir}}
+            - "-plugins-dir={{ . }}"
+            {{- end }}
             {{- with .Values.config.oidc.clientID }}
             - "-oidc-client-id={{ . }}"
             {{- end }}

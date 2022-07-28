@@ -37,6 +37,7 @@ config:
     issuerURL: ""
     # -- OIDC scopes to be used
     scopes: ""
+  pluginsDir: "/headlamp/plugins"
 
 serviceAccount:
   # -- Specifies whether a service account should be created
