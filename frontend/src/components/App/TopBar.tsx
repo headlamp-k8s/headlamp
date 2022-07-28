@@ -197,7 +197,6 @@ export function PureTopBar({
   const { t } = useTranslation('frequent');
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-  const isMedium = useMediaQuery(theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
 
   const openSideBar = !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
@@ -320,9 +319,9 @@ export function PureTopBar({
         aria-label={t('Appbar Tools')}
       >
         <Toolbar className={classes.toolbar}>
-          {isMedium && <HeadlampButton open={openSideBar} mobileOnly onToggleOpen={onToggleOpen} />}
+          {isSmall && <HeadlampButton open={openSideBar} mobileOnly onToggleOpen={onToggleOpen} />}
 
-          {!isMedium && (
+          {!isSmall && (
             <>
               <div className={clsx(classes.grow, classes.clusterTitle)}>
                 <ClusterTitle cluster={cluster} clusters={clusters} />
@@ -343,7 +342,7 @@ export function PureTopBar({
               </IconButton>
             </>
           )}
-          {isMedium && (
+          {isSmall && (
             <>
               <div className={classes.grow} />
               <IconButton
@@ -360,7 +359,7 @@ export function PureTopBar({
         </Toolbar>
       </AppBar>
       {renderUserMenu}
-      {isMedium && renderMobileMenu}
+      {isSmall && renderMobileMenu}
     </>
   );
 }
