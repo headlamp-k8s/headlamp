@@ -82,6 +82,23 @@ volumeMounts: []
 # -- Headlamp pod's volumes
 volumes: []
 
+persitentVolumeClaim:
+  # -- Enable Persistent Volume Claim
+  enabled: false
+  # -- Annotations to add to the persistent volume claim (if enabled)
+  annotations:
+    {}
+  # -- accessModes for the persistent volume claim, eg: ReadWriteOnce, ReadOnlyMany, ReadWriteMany etc.
+  accessModes: []
+  # -- size of the persistent volume claim, eg: 10Gi. Required if enabled is true.
+  size: ""
+  # -- storageClassName for the persistent volume claim.
+  storageClassName: ""
+  # -- selector for the persistent volume claim.
+  selector: {}
+  # -- volumeMode for the persistent volume claim, eg: Filesystem, Block.
+  volumeMode: ""
+
 ingress:
   # -- Enable ingress controller resource
   enabled: false
