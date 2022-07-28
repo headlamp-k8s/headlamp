@@ -1,6 +1,6 @@
 import { Divider } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTranslation } from 'react-i18next';
 import { generatePath, useHistory } from 'react-router';
@@ -50,10 +50,13 @@ export default function NavigationTabs() {
   const history = useHistory();
   const classes = useStyle();
   const sidebar = useTypedSelector(state => state.ui.sidebar);
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isSmallSideBar = useMediaQuery(theme.breakpoints.only('sm'));
   const { t } = useTranslation();
 
-  if (sidebar.isSidebarOpen || isMobile) {
+  // Always show the navigation tabs when the sidebar is the small version
+  if (!isSmallSideBar && (sidebar.isSidebarOpen || isMobile)) {
     return null;
   }
 
