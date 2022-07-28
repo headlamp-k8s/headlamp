@@ -25,6 +25,10 @@ class StorageClass extends makeKubeObject<KubeStorageClass>('storageClass') {
   get listRoute() {
     return 'storageClasses';
   }
+
+  static get pluralName() {
+    return 'storageclasses';
+  }
 }
 
 export default StorageClass;
