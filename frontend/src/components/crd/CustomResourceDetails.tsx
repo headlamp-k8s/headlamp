@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { ResourceClasses } from '../../lib/k8s';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import CustomResourceDefinition, { KubeCRD, makeCustomResourceClass } from '../../lib/k8s/crd';
+import { createRouteURL } from '../../lib/router';
 import { localeDate } from '../../lib/util';
 import { HoverInfoLabel, NameValueTableRow, SectionBox } from '../common';
 import Empty from '../common/EmptyContent';
@@ -137,7 +138,7 @@ function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps
     <PageGrid>
       <MainInfoSection
         resource={item}
-        backLink={crd.detailsRoute}
+        backLink={createRouteURL(crd.detailsRoute, { name: crd.metadata.name })}
         extraInfo={getExtraInfo(extraColumns, item!.jsonData)}
       />
       {item!.jsonData.status?.conditions && (

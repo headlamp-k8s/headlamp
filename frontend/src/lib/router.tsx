@@ -462,8 +462,8 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
     return '';
   }
 
-  let cluster: string | null = null;
-  if (!route.noCluster) {
+  let cluster: string | null = params.cluster || null;
+  if (!cluster && !route.noCluster) {
     cluster = getCluster();
     if (!cluster) {
       return '/';
@@ -472,7 +472,9 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   const fullParams = {
     ...params,
   };
-  if (cluster) {
+
+  // Add cluster to the params if it is not already there
+  if (!fullParams.cluster && !!cluster) {
     fullParams.cluster = cluster;
   }
   // if fullParams is empty it means it is a request for generating choser

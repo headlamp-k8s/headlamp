@@ -94,7 +94,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
 
     get detailsRoute(): string {
-      return this.pluralName;
+      return this._class().className;
     }
 
     static get pluralName(): string {
