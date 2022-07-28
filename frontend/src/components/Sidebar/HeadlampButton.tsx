@@ -41,9 +41,16 @@ export interface HeadlampButtonProps {
   mobileOnly?: boolean;
   /** Called when sidebar toggles between open and closed. */
   onToggleOpen: () => void;
+  /** Whether the button is to be disabled or not. */
+  disabled?: boolean;
 }
 
-export default function HeadlampButton({ open, onToggleOpen, mobileOnly }: HeadlampButtonProps) {
+export default function HeadlampButton({
+  open,
+  onToggleOpen,
+  mobileOnly,
+  disabled = false,
+}: HeadlampButtonProps) {
   const isSmall = useMediaQuery('(max-width:600px)');
   const classes = useStyle({ isSidebarOpen: open, isSmall: isSmall });
   const { t } = useTranslation('sidebar');
@@ -60,6 +67,7 @@ export default function HeadlampButton({ open, onToggleOpen, mobileOnly }: Headl
         onClick={onToggleOpen}
         className={classes.button}
         aria-label={open ? t('Shrink sidebar') : t('Expand sidebar')}
+        disabled={disabled}
       >
         {
           // Till all plugins are not loaded show empty content for logo as we might have logo coming from a plugin

@@ -158,7 +158,11 @@ export function PureSidebar({
 
   const contents = (
     <>
-      <HeadlampButton open={largeSideBarOpen} onToggleOpen={onToggleOpen} />
+      <HeadlampButton
+        open={largeSideBarOpen}
+        onToggleOpen={onToggleOpen}
+        disabled={smallSideOnly}
+      />
       <Grid
         className={classes.sidebarGrid}
         container
