@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
   }),
   sectionTitle: ({ headerStyle }: HeaderStyleProps) => ({
     ...theme.palette.headerStyle[headerStyle || 'normal'],
+    whiteSpace: 'pre-wrap',
   }),
 }));
 
