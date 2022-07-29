@@ -36,7 +36,7 @@ import { PodListProps, PodListRenderer } from '../../pod/List';
 import { LightTooltip } from '..';
 import Empty from '../EmptyContent';
 import ErrorBoundary from '../ErrorBoundary';
-import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps } from '../Label';
+import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
 import Link, { LinkProps } from '../Link';
 import { useMetadataDisplayStyles } from '.';
 import DeleteButton from './DeleteButton';
@@ -588,11 +588,15 @@ export function ContainerInfo(props: ContainerInfoProps) {
         hide: !status,
       },
       {
+        name: t('Image Pull Policy'),
+        value: container.imagePullPolicy,
+      },
+      {
         name: t('Image'),
         value: (
           <>
             <Typography>{container.image}</Typography>
-            {status && (
+            {status?.imageID && (
               <Typography className={classes.imageID}>
                 <Typography component="span" style={{ fontWeight: 'bold' }}>
                   ID:
@@ -624,6 +628,20 @@ export function ContainerInfo(props: ContainerInfoProps) {
         name: t('Liveness Probes'),
         value: <LivenessProbes liveness={container.livenessProbe} />,
         hide: _.isEmpty(container.livenessProbe),
+      },
+      {
+        name: t('Ports'),
+        value: (
+          <Grid container>
+            {container.ports?.map(({ containerPort, protocol }, index) => (
+              <Grid item xs={12} key={`port_line_${index}`}>
+                <ValueLabel>{`${protocol}:`}</ValueLabel>
+                <ValueLabel>{containerPort}</ValueLabel>
+              </Grid>
+            ))}
+          </Grid>
+        ),
+        hide: _.isEmpty(container.ports),
       },
     ];
   }
