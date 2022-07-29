@@ -16,7 +16,11 @@ import { useHistory } from 'react-router-dom';
 import LocaleSelect from '../../i18n/LocaleSelect/LocaleSelect';
 import { getToken, setToken } from '../../lib/auth';
 import { useCluster } from '../../lib/k8s';
-import { HeaderActionType, setWhetherSidebarOpen } from '../../redux/actions/actions';
+import {
+  HeaderActionType,
+  setVersionDialogOpen,
+  setWhetherSidebarOpen,
+} from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
@@ -24,6 +28,7 @@ import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import Notifications from './Notifications';
 import ThemeChangeButton from './ThemeChangeButton';
+import { HeadlampVersionLink } from './VersionDialog';
 
 export interface TopBarProps {}
 
@@ -179,6 +184,7 @@ export function PureTopBar({
   const { t } = useTranslation('frequent');
   const isSmall = useMediaQuery('(max-width:960px)');
   const isMedium = useMediaQuery('(max-width:960px)');
+  const dispatch = useDispatch();
 
   const openSideBar =
     isMedium && !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
@@ -236,6 +242,19 @@ export function PureTopBar({
         </ListItemIcon>
         <ListItemText primary={t('Log out')} secondary={hasToken ? null : t('(No token set up)')} />
       </MenuItem>
+      <MenuItem
+        component="a"
+        onClick={() => {
+          dispatch(setVersionDialogOpen(true));
+          handleMenuClose();
+        }}
+        dense
+      >
+        <ListItemIcon />
+        <ListItemText>
+          {window.config.HEADLAMP_PRODUCT_NAME} {window.config.HEADLAMP_VERSION}
+        </ListItemText>
+      </MenuItem>
     </Menu>
   );
 
@@ -273,6 +292,9 @@ export function PureTopBar({
         >
           <Icon icon="mdi:account" />
         </IconButton>
+      </MenuItem>
+      <MenuItem>
+        <HeadlampVersionLink />
       </MenuItem>
     </Menu>
   );

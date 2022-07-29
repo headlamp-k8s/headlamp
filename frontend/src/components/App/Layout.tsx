@@ -55,6 +55,7 @@ export default function Layout({}: LayoutProps) {
         {t('Skip to main content')}
       </Link>
       <Box className={classes.wrapper}>
+        <VersionDialog />
         <CssBaseline />
         <TopBar />
         <Sidebar />
@@ -69,7 +70,6 @@ export default function Layout({}: LayoutProps) {
           </Box>
         </main>
         <ActionsNotifier />
-        <VersionDialog />
       </Box>
     </>
   );
