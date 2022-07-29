@@ -21,6 +21,7 @@ import (
 	"strings"
 
 	oidc "github.com/coreos/go-oidc"
+	"github.com/gobwas/glob"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
@@ -43,6 +44,7 @@ type HeadlampConfig struct {
 	baseURL          string
 	// Holds: context-name -> (context, reverse-proxy)
 	contextProxies map[string]contextProxy
+	proxyURLs      []string
 }
 
 type clientConfig struct {
@@ -185,7 +187,7 @@ func serveWithNoCacheHeader(fs http.Handler) http.HandlerFunc {
 	}
 }
 
-// nolint:gocognit,funlen
+// nolint:gocognit,funlen,gocyclo
 func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	kubeConfigPath := config.kubeConfigPath
 
@@ -274,6 +276,32 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	addPluginRoutes(config, r)
 
 	config.handleClusterRequests(r)
+
+	r.HandleFunc("/externalproxy", func(w http.ResponseWriter, r *http.Request) {
+		url, err := url.Parse(r.Header.Get("proxy-to"))
+		if err != nil {
+			log.Fatal("Failed to get URL from server", err)
+		}
+		isURLContainedInProxyURLs := false
+		for _, proxyURL := range config.proxyURLs {
+			g := glob.MustCompile(proxyURL)
+			if g.Match(url.String()) {
+				isURLContainedInProxyURLs = true
+				break
+			}
+		}
+		if !isURLContainedInProxyURLs {
+			http.Error(w, "no allowed proxy url match, request denied ", http.StatusBadRequest)
+		}
+		proxy := httputil.NewSingleHostReverseProxy(url)
+		r.Host = url.Host
+		r.URL.Host = url.Host
+		r.URL.Scheme = url.Scheme
+		r.RequestURI = url.RequestURI()
+
+		log.Println("Requesting ", r.URL.String())
+		proxy.ServeHTTP(w, r)
+	})
 
 	// Configuration
 	r.HandleFunc("/config", config.getConfig).Methods("GET")

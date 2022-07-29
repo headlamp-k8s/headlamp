@@ -24,6 +24,7 @@ func main() {
 	oidcScopes := flag.String("oidc-scopes", "profile,email",
 		"A comma separated list of scopes needed from the OIDC provider")
 	baseURL := flag.String("base-url", "", "Base URL path. eg. /headlamp")
+	proxyURLs := flag.String("proxy-urls", "", "Allow proxy requests to specified URLs")
 
 	flag.Parse()
 
@@ -65,5 +66,6 @@ func main() {
 		oidcIdpIssuerURL: *oidcIdpIssuerURL,
 		oidcScopes:       strings.Split(*oidcScopes, ","),
 		baseURL:          *baseURL,
+		proxyURLs:        strings.Split(*proxyURLs, ","),
 	})
 }
