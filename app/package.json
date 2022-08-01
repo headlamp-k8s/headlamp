@@ -1,7 +1,7 @@
 {
   "name": "headlamp",
   "version": "0.11.0",
-  "description": "",
+  "description": "Easy-to-use and extensible Kubernetes web UI",
   "main": "electron/main.js",
   "homepage": ".",
   "productName": "Headlamp",
