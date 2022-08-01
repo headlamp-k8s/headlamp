@@ -1,6 +1,15 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { PureAuthChooser, PureAuthChooserProps } from './index';
+
+// eslint-disable-next-line no-unused-vars
+const store = createStore((state = { config: {}, ui: { notifications: [] } }, action) => state, {
+  config: {},
+  ui: {
+    notifications: [],
+  },
+});
 
 export default {
   title: 'AuthChooser',
@@ -11,6 +20,15 @@ export default {
     handleTryAgain: { action: 'try again clicked' },
     handleBackButtonPress: { action: 'back button clicked' },
   },
+  decorators: [
+    Story => {
+      return (
+        <Provider store={store}>
+          <Story />
+        </Provider>
+      );
+    },
+  ],
 } as Meta;
 
 const Template: Story<PureAuthChooserProps> = args => <PureAuthChooser {...args} />;

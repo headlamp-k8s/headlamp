@@ -167,6 +167,17 @@ function setTablesRowsPerPage(perPage: number) {
   localStorage.setItem(tablesRowsPerPageKey, perPage.toString());
 }
 
+function getVersion() {
+  return {
+    VERSION: process.env.REACT_APP_HEADLAMP_VERSION,
+    GIT_VERSION: process.env.REACT_APP_HEADLAMP_GIT_VERSION,
+  };
+}
+
+function getProductName() {
+  return process.env.REACT_APP_HEADLAMP_PRODUCT_NAME;
+}
+
 const exportFunctions = {
   getBaseUrl,
   isDevMode,
@@ -178,6 +189,8 @@ const exportFunctions = {
   getRecentClusters,
   getTablesRowsPerPage,
   setTablesRowsPerPage,
+  getVersion,
+  getProductName,
 };
 
 export default exportFunctions;

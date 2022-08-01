@@ -26,6 +26,7 @@ export const UI_APP_BAR_SET_ACTION = 'UI_APP_BAR_SET_ACTION';
 export const UI_THEME_SET = 'UI_THEME_SET';
 export const UI_INITIALIZE_PLUGIN_VIEWS = 'UI_INITIALIZE_PLUGIN_VIEWS';
 export const UI_PLUGINS_LOADED = 'UI_PLUGINS_LOADED';
+export const UI_VERSION_DIALOG_OPEN = 'UI_VERSION_DIALOG_OPEN';
 export const UI_BRANDING_SET_APP_LOGO = 'UI_BRANDING_SET_APP_LOGO';
 export const UI_SET_CLUSTER_CHOOSER_BUTTON = 'UI_SET_CLUSTER_CHOOSER_BUTTON';
 
@@ -167,4 +168,8 @@ export function updateUINotification(dispatchedNotification: Notification[] | No
 }
 export function setClusterChooserButtonComponent(component: ClusterChooserType) {
   return { type: UI_SET_CLUSTER_CHOOSER_BUTTON, component };
+}
+
+export function setVersionDialogOpen(isVersionDialogOpen: boolean) {
+  return { type: UI_VERSION_DIALOG_OPEN, isVersionDialogOpen };
 }

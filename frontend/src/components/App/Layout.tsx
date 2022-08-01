@@ -6,10 +6,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
-import Sidebar, { NavigationTabs } from '../Sidebar';
-import { drawerWidthClosed } from '../Sidebar';
+import Sidebar, { drawerWidthClosed, NavigationTabs } from '../Sidebar';
 import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
+import VersionDialog from './VersionDialog';
 
 const useStyle = makeStyles(theme => ({
   content: {
@@ -53,6 +53,7 @@ export default function Layout({}: LayoutProps) {
         Skip to main content
       </Link>
       <Box className={classes.wrapper}>
+        <VersionDialog />
         <CssBaseline />
         <TopBar />
         <Sidebar />
