@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
@@ -47,10 +48,11 @@ export default function Layout({}: LayoutProps) {
   const classes = useStyle();
   const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
 
+  const { t } = useTranslation('frequent');
   return (
     <>
       <Link href="#main" className={classes.visuallyHidden}>
-        Skip to main content
+        {t('Skip to main content')}
       </Link>
       <Box className={classes.wrapper}>
         <VersionDialog />
