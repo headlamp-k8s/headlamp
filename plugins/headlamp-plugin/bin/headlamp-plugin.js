@@ -44,7 +44,10 @@ function create(name, link) {
 
   console.log(`Creating folder :${dstFolder}:`);
 
-  fs.copySync(templateFolder, dstFolder, { errorOnExist: true, overwrite: false });
+  fs.copySync(templateFolder, dstFolder, {
+    errorOnExist: true,
+    overwrite: false,
+  });
 
   function replaceFileVariables(path) {
     fs.writeFileSync(
@@ -65,7 +68,9 @@ function create(name, link) {
   // This can be used to make testing locally easier.
   if (link) {
     console.log('Linking @kinvolk/headlamp-plugin');
-    child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], { cwd: dstFolder });
+    child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {
+      cwd: dstFolder,
+    });
   }
 
   console.log('Installing dependencies...');
@@ -85,7 +90,9 @@ function create(name, link) {
   if (link) {
     // Seems to require linking again with npm 7+
     console.log('Linking @kinvolk/headlamp-plugin');
-    child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], { cwd: dstFolder });
+    child_process.spawnSync('npm', ['link', '@kinvolk/headlamp-plugin'], {
+      cwd: dstFolder,
+    });
   }
 
   console.log(`"${dstFolder}" created.`);
@@ -99,37 +106,9 @@ function create(name, link) {
 }
 
 /**
- * Copies the built plugin to the app config folder ~/.config/Headlamp/plugins/
+ * Compile callback for webpack to show any warnings + errors.
  */
-function copyToPluginsFolder(config) {
-  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-
-  // @todo: should the whole package name be used here,
-  //    and the load be fixed to use? What about namespace packages?
-  const packageName = packageJson.name.split('/').splice(-1)[0];
-  const paths = envPaths('Headlamp', { suffix: '' });
-  const configDir = fs.existsSync(paths.data) ? paths.data : paths.config;
-
-  config.plugins = [
-    new FileManagerPlugin({
-      events: {
-        onEnd: {
-          copy: [
-            {
-              source: './dist/*',
-              destination: path.join(configDir, 'plugins', packageName),
-            },
-          ],
-        },
-      },
-    }),
-  ];
-}
-
-/**
- * Compile and show any warnings + errors
- */
-function compile(err, stats) {
+function compileMessages(err, stats) {
   if (err && err.message) {
     console.log(err);
     return;
@@ -230,12 +209,62 @@ function extract(pluginPackagesPath, outputPlugins) {
  * @returns {0} Exit code, where 0 is success.
  */
 function start() {
+  /**
+   * Copies the built plugin to the app config folder ~/.config/Headlamp/plugins/
+   *
+   * Adds a webpack config plugin for copying the folder.
+   */
+  function copyToPluginsFolder(webpackConfig) {
+    const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+
+    // @todo: should the whole package name be used here,
+    //    and the load be fixed to use? What about namespace packages?
+    const packageName = packageJson.name.split('/').splice(-1)[0];
+    const paths = envPaths('Headlamp', { suffix: '' });
+    const configDir = fs.existsSync(paths.data) ? paths.data : paths.config;
+
+    webpackConfig.plugins = [
+      new FileManagerPlugin({
+        events: {
+          onEnd: {
+            copy: [
+              {
+                source: './dist/*',
+                destination: path.join(configDir, 'plugins', packageName),
+              },
+            ],
+          },
+        },
+      }),
+    ];
+  }
+
+  /**
+   * Inform if @kinvolk/headlamp-plugin is outdated.
+   */
+  function informIfOutdated() {
+    console.log('Checking if headlamp-plugin is up to date...');
+    const outdated = getNpmOutdated();
+    if ('@kinvolk/headlamp-plugin' in outdated) {
+      const url = `https://github.com/kinvolk/headlamp/releases`;
+      console.warn(
+        '    @kinvolk/headlamp-plugin is out of date. Run the following command to upgrade \n' +
+          `    See release notes here: ${url}` +
+          '    npx @kinvolk/headlamp-plugin upgrade'
+      );
+    } else {
+      console.log('    @kinvolk/headlamp-plugin is up to date.');
+    }
+  }
+
+  informIfOutdated();
+
   console.log('Watching for changes to plugin...');
   config.watch = true;
   config.mode = 'development';
   process.env['BABEL_ENV'] = 'development';
   copyToPluginsFolder(config);
-  webpack(config, compile);
+  webpack(config, compileMessages);
 
   return 0;
 }
@@ -263,7 +292,7 @@ function build(packageFolder) {
 
     process.chdir(folder);
     console.log(`Building "${folder}" for production...`);
-    webpack(config, compile);
+    webpack(config, compileMessages);
     console.log(`Done building: "${folder}".`);
     process.chdir(oldCwd);
     return true;
@@ -302,6 +331,7 @@ function build(packageFolder) {
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function format(packageFolder) {
+  // @todo: this should work on a folder of packages
   try {
     child_process.execSync('prettier --config package.json --write src', {
       stdio: 'inherit',
@@ -311,6 +341,207 @@ function format(packageFolder) {
   } catch (e) {
     console.error(`Problem running prettier inside of "${packageFolder}"`);
     return 1;
+  }
+
+  return 0;
+}
+
+/**
+ * Use `npm outdated` to find which dependencies are not up to date.
+ *
+ * @returns a dict keyed by package name
+ *
+ * @see https://docs.npmjs.com/cli/v8/commands/npm-outdated
+ *
+ * #### Example
+ * ```js
+ *  {
+ *    "@kinvolk/headlamp-plugin": {
+ *      "current": "0.5.0",
+ *      "wanted": "0.5.1",
+ *      "latest": "0.5.1",
+ *      "dependent": "pod-counter",
+ *      "location": "/home/rene/dev/headlamp/plugins/examples/pod-counter/node_modules/@kinvolk/headlamp-plugin"
+ *    }
+ *  }
+ * ```
+ *
+ * #### Example: Nothing needs updating?
+ * ```js
+ *  {}
+ * ```
+ */
+function getNpmOutdated() {
+  let result = null;
+  try {
+    result = child_process.execSync('npm outdated --json', {
+      encoding: 'utf8',
+    });
+  } catch (error) {
+    // npm outdated exit codes 1 when something is not up to date.
+    result = error.stdout.toString();
+  }
+  return JSON.parse(result);
+}
+
+/**
+ * Upgrade package automatically, updating headlamp-plugin version.
+ *
+ * In the future this could be used for other upgrade tasks.
+ *
+ * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ */
+function upgrade(packageFolder, skipPackageUpdates) {
+  /**
+   * Files from the template might not be there.
+   *
+   * Either because they created the package themselves,
+   *   or used an old version headlamp-plugin create.
+   *
+   * Assumes we are in the package folder.
+   */
+  function addMissingTemplateFiles() {
+    const missingFiles = [
+      path.join('src', 'headlamp-plugin.d.ts'),
+      'tsconfig.json',
+      'jsconfig.json',
+    ];
+    const templateFolder = path.resolve(__dirname, '..', 'template');
+
+    missingFiles.forEach(pathToCheck => {
+      const from = path.join(templateFolder, pathToCheck);
+      const to = path.join('.', pathToCheck);
+
+      // only copy it if it doesn't exist
+      if (!fs.existsSync(to)) {
+        console.log(`Adding missing file: "${to}"`);
+        fs.copyFileSync(from, to);
+      }
+    });
+  }
+
+  /**
+   * Adds missing config into package.json
+   */
+  function addMissingConfiguration() {
+    const templateFolder = path.resolve(__dirname, '..', 'template');
+    const packageJsonPath = path.join('.', 'package.json');
+    const templatePackageJson = JSON.parse(
+      fs.readFileSync(path.join(templateFolder, 'package.json'), 'utf8')
+    );
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+
+    let changed = false;
+
+    if (packageJson?.scripts?.tsc !== templatePackageJson['scripts']['tsc']) {
+      packageJson['scripts']['tsc'] = templatePackageJson['scripts']['tsc'];
+      changed = true;
+      console.log(`Updated package.json field "scripts.tsc"`);
+    }
+
+    const checkKeys = ['eslintConfig', 'prettier'];
+    checkKeys.forEach(key => {
+      if (JSON.stringify(packageJson[key]) !== JSON.stringify(templatePackageJson[key])) {
+        packageJson[key] = templatePackageJson[key];
+        changed = true;
+        console.log(`Updated package.json field "${key}"`);
+      }
+    });
+
+    if (changed) {
+      fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, '  ') + '\n');
+    }
+  }
+
+  /**
+   * Upgrades "@kinvolk/headlamp-plugin" dependency to latest version.
+   *
+   * @returns true unless there is a problem with the upgrade.
+   */
+  function upgradeHeadlampPlugin() {
+    const outDated = getNpmOutdated();
+    if ('@kinvolk/headlamp-plugin' in outDated) {
+      // Upgrade the @kinvolk/headlamp-plugin
+
+      const cmd = 'npm install @kinvolk/headlamp-plugin@latest --save';
+      try {
+        child_process.execSync(cmd, {
+          stdio: 'inherit',
+          encoding: 'utf8',
+        });
+      } catch (e) {
+        console.error(`Problem running ${cmd}`);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Upgrade a single package in a folder.
+   *
+   * @param {string} folder - where the package is.
+   * @param {boolean | undefined} - If true do not update packages.
+   * @returns true if it is successful
+   */
+  function upgradePackage(folder, skipPackageUpdates) {
+    if (!fs.existsSync(path.join(folder, 'package.json'))) {
+      return false;
+    }
+
+    const oldCwd = process.cwd();
+
+    process.chdir(folder);
+    console.log(`Upgrading "${folder}"...`);
+
+    addMissingTemplateFiles();
+    addMissingConfiguration();
+
+    if (skipPackageUpdates !== true && !upgradeHeadlampPlugin(skipPackageUpdates)) {
+      return false;
+    }
+
+    console.log(`Done upgrading: "${folder}".`);
+    process.chdir(oldCwd);
+    return true;
+  }
+
+  /**
+   * Upgrade each package inside the folder.
+   *
+   * @param {boolean | undefined} - If true do not update packages.
+   * @returns true if all of them are upgraded successfully.
+   */
+  function upgradeFolderOfPackages(skipPackageUpdates) {
+    const folders = fs.readdirSync(packageFolder, { withFileTypes: true }).filter(fileName => {
+      return (
+        fileName.isDirectory() &&
+        fs.existsSync(path.join(packageFolder, fileName.name, 'package.json'))
+      );
+    });
+
+    folders.forEach(folder => {
+      const folderToBuild = path.join(packageFolder, folder.name);
+      if (!upgradePackage(folderToBuild, skipPackageUpdates)) {
+        console.error(`"${folderToBuild}" does not contain a package. Not upgrading.`);
+      }
+    });
+    return folders.length !== 0;
+  }
+
+  if (!fs.existsSync(packageFolder)) {
+    console.error(`"${packageFolder}" does not exist. Not upgrading.`);
+    return 1;
+  }
+
+  if (
+    !(
+      upgradePackage(packageFolder, skipPackageUpdates) ||
+      upgradeFolderOfPackages(skipPackageUpdates)
+    )
+  ) {
+    console.error(`"${packageFolder}" does not contain a package or packages. Not upgrading.`);
   }
 
   return 0;
@@ -434,6 +665,26 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = lint(argv.package);
+    }
+  )
+  .command(
+    'upgrade [package]',
+    'upgrade the plugin to latest headlamp-plugin. ' +
+      '<package> defaults to current working directory.',
+    yargs => {
+      yargs
+        .positional('package', {
+          describe: 'Package to code format',
+          type: 'string',
+          default: '.',
+        })
+        .option('skip-package-updates', {
+          describe: 'For development of headlamp-plugin itself, so it does not do package updates.',
+          type: 'boolean',
+        });
+    },
+    argv => {
+      process.exitCode = upgrade(argv.package, argv.skipPackageUpdates);
     }
   )
   .demandCommand(1, '')
