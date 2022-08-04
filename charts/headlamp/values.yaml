@@ -37,6 +37,7 @@ config:
     issuerURL: ""
     # -- OIDC scopes to be used
     scopes: ""
+  # -- directory to look for plugins
   pluginsDir: "/headlamp/plugins"
 
 serviceAccount:
@@ -56,7 +57,7 @@ clusterRoleBinding:
 # -- Annotations to add to the pod
 podAnnotations: {}
 
-# -- Headlamp pods' Security Context
+# -- Headlamp pod's Security Context
 podSecurityContext:
   {}
   # fsGroup: 2000
