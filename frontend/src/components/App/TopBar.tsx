@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import LocaleSelect from '../../i18n/LocaleSelect/LocaleSelect';
 import { getToken, setToken } from '../../lib/auth';
-import { useCluster } from '../../lib/k8s';
+import { useCluster, useClustersConf } from '../../lib/k8s';
 import { HeaderActionType, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
@@ -37,6 +37,7 @@ export default function TopBar({}: TopBarProps) {
     state => state.ui.sidebar.isSidebarOpenUserSelected
   );
 
+  const clustersConfig = useClustersConf();
   const cluster = useCluster();
   const history = useHistory();
 
@@ -69,6 +70,8 @@ export default function TopBar({}: TopBarProps) {
 
         dispatch(setWhetherSidebarOpen(!openSideBar));
       }}
+      cluster={cluster || undefined}
+      clusters={clustersConfig || undefined}
     />
   );
 }
