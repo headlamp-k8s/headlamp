@@ -1,0 +1,49 @@
+# For testing headlamp in CI.
+kind: Service
+apiVersion: v1
+metadata:
+  name: headlamp
+  namespace: kube-system
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 4466
+  selector:
+    k8s-app: headlamp
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: headlamp
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: headlamp
+  template:
+    metadata:
+      labels:
+        k8s-app: headlamp
+    spec:
+      containers:
+      - name: headlamp
+        imagePullPolicy: Never
+        image: ghcr.io/kinvolk/headlamp:latest
+        args:
+          - "-in-cluster"
+          - "-plugins-dir=/headlamp/plugins"
+        ports:
+        - containerPort: 4466
+      nodeSelector:
+        'kubernetes.io/os': linux
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: headlamp-admin
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: "headlamp-admin"
+type: kubernetes.io/service-account-token
