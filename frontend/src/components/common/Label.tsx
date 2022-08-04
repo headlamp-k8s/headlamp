@@ -1,10 +1,9 @@
-import { Icon } from '@iconify/react';
-import Box from '@material-ui/core/Box';
+import { Icon, IconProps } from '@iconify/react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { localeDate, timeAgo } from '../../lib/util';
+import { DateFormatOptions, localeDate, timeAgo } from '../../lib/util';
 import { LightTooltip, TooltipIcon } from './Tooltip';
 
 const useStyles = makeStyles(theme => ({
@@ -150,35 +149,58 @@ export function HeaderLabel(props: HeaderLabelProps) {
 }
 
 export interface HoverInfoLabelProps {
-  label: string;
-  hoverInfo: string | JSX.Element | undefined;
-  icon?: any;
+  label: React.ReactNode;
+  hoverInfo?: React.ReactNode;
+  icon?: IconProps['icon'];
+  iconProps?: Omit<IconProps, 'icon'>;
 }
 
+const useHoverInfoLabelStyles = makeStyles({
+  noWrap: {
+    whiteSpace: 'nowrap',
+  },
+  icon: {
+    marginRight: '0.2rem',
+    marginLeft: '0.2rem',
+  },
+});
+
 export function HoverInfoLabel(props: HoverInfoLabelProps) {
-  const { label, hoverInfo, icon = null } = props;
+  const { label, hoverInfo, icon = null, iconProps = {} } = props;
+  const classes = useHoverInfoLabelStyles();
 
   return (
-    <Grid container spacing={1}>
-      <Grid item>{label}</Grid>
-      <Grid item>
+    <LightTooltip title={hoverInfo || ''}>
+      <Typography className={classes.noWrap}>
+        {label}
         {hoverInfo && (
-          <LightTooltip title={hoverInfo}>
-            <Box>
-              <Icon icon={icon || 'mdi:information-outline'} width="1rem" height="1rem" />
-            </Box>
-          </LightTooltip>
+          <Icon
+            icon={icon || 'mdi:information-outline'}
+            width="1rem"
+            height="1rem"
+            className={classes.icon}
+            {...iconProps}
+          />
         )}
-      </Grid>
-    </Grid>
+      </Typography>
+    </LightTooltip>
   );
 }
 
 export interface DateLabelProps {
   date: number | string | Date;
+  format?: DateFormatOptions;
+  iconProps?: Omit<IconProps, 'icon'>;
 }
 
 export function DateLabel(props: DateLabelProps) {
-  const { date } = props;
-  return <HoverInfoLabel label={timeAgo(date)} hoverInfo={localeDate(date)} icon="mdi:calendar" />;
+  const { date, format = 'brief', iconProps = {} } = props;
+  return (
+    <HoverInfoLabel
+      label={timeAgo(date, { format })}
+      hoverInfo={localeDate(date)}
+      icon="mdi:calendar"
+      iconProps={iconProps}
+    />
+  );
 }

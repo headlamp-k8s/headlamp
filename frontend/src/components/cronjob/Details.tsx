@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import CronJob from '../../lib/k8s/cronJob';
@@ -60,7 +59,7 @@ export default function CronJobDetails() {
       }
       sectionsFunc={item => (
         <>
-          {item && <JobsListRenderer jobs={ownedJobs} error={jobsError} />}
+          {item && <JobsListRenderer jobs={ownedJobs} error={CronJob.getErrorMessage(jobsError)} />}
           <DetailsViewSection resource={item} />
         </>
       )}

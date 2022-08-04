@@ -9,11 +9,11 @@ import Deployment from '../../lib/k8s/deployment';
 import Job from '../../lib/k8s/job';
 import ReplicaSet from '../../lib/k8s/replicaSet';
 import StatefulSet from '../../lib/k8s/statefulSet';
-import { getReadyReplicas, getTotalReplicas, timeAgo, useFilterFunc } from '../../lib/util';
+import { getReadyReplicas, getTotalReplicas, useFilterFunc } from '../../lib/util';
 import { PageGrid, ResourceLink } from '../common/Resource';
+import ResourceTable from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
-import SimpleTable from '../common/SimpleTable';
 import { WorkloadCircleChart } from './Charts';
 
 interface WorkloadDict {
@@ -82,15 +82,10 @@ export default function Overview() {
         </Grid>
       </SectionBox>
       <SectionBox title={<SectionFilterHeader title={t('Workloads')} />}>
-        <SimpleTable
-          rowsPerPage={[15, 25, 50]}
+        <ResourceTable
           filterFunction={filterFunc}
           columns={[
-            {
-              label: t('Type'),
-              getter: item => item.kind,
-              sort: true,
-            },
+            'kind',
             {
               label: t('frequent|Name'),
               getter: item => (
@@ -105,26 +100,15 @@ export default function Overview() {
                 return 0;
               },
             },
-            {
-              label: t('glossary|Namespace'),
-              getter: item => item.metadata.namespace,
-              sort: true,
-            },
+            'namespace',
             {
               label: t('Pods'),
               getter: item => item && getPods(item),
               sort: sortByReplicas,
             },
-            {
-              label: t('frequent|Age'),
-              getter: item => timeAgo(item.metadata.creationTimestamp),
-              sort: (w1: Workload, w2: Workload) =>
-                new Date(w2.metadata.creationTimestamp).getTime() -
-                new Date(w1.metadata.creationTimestamp).getTime(),
-            },
+            'age',
           ]}
           data={getJointItems()}
-          defaultSortingColumn={5}
         />
       </SectionBox>
     </PageGrid>

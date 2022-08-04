@@ -1,16 +1,13 @@
 import { Icon } from '@iconify/react';
 import { Box } from '@material-ui/core';
 import _ from 'lodash';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
-import { useFilterFunc } from '../../lib/util';
 import { LightTooltip, SectionFilterHeader } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
-import Link from '../common/Link';
+import ResourceTable, { ResourceTableProps } from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
-import SimpleTable, { SimpleTableProps } from '../common/SimpleTable';
 
 export function makePodStatusLabel(pod: Pod) {
   const phase = pod.status.phase;
@@ -61,7 +58,6 @@ export interface PodListProps {
 
 export function PodListRenderer(props: PodListProps) {
   const { pods, error, hideColumns = [] } = props;
-  const filterFunc = useFilterFunc();
   const { t } = useTranslation('glossary');
 
   function getRestartCount(pod: Pod) {
@@ -72,42 +68,20 @@ export function PodListRenderer(props: PodListProps) {
   }
 
   function getDataCols() {
-    const dataCols: SimpleTableProps['columns'] = [
-      {
-        label: t('frequent|Name'),
-        getter: (pod: Pod) => <Link kubeObject={pod} />,
-        sort: (p1: Pod, p2: Pod) => {
-          if (p1.metadata.name < p2.metadata.name) {
-            return -1;
-          } else if (p1.metadata.name > p2.metadata.name) {
-            return 1;
-          }
-          return 0;
-        },
-      },
-
+    const dataCols: ResourceTableProps['columns'] = [
+      'name',
       {
         label: t('Status'),
         getter: makePodStatusLabel,
         sort: (pod: Pod) => pod?.status.phase,
       },
-      {
-        label: t('frequent|Age'),
-        getter: (pod: Pod) => pod.getAge(),
-        sort: (p1: Pod, p2: Pod) =>
-          new Date(p2.metadata.creationTimestamp).getTime() -
-          new Date(p1.metadata.creationTimestamp).getTime(),
-      },
+      'age',
     ];
 
     let insertIndex = 1;
 
     if (!hideColumns.includes('namespace')) {
-      dataCols.splice(insertIndex++, 0, {
-        label: t('glossary|Namespace'),
-        getter: (pod: Pod) => pod.getNamespace(),
-        sort: true,
-      });
+      dataCols.splice(insertIndex++, 0, 'namespace');
     }
 
     if (!hideColumns.includes('restarts')) {
@@ -123,13 +97,10 @@ export function PodListRenderer(props: PodListProps) {
 
   return (
     <SectionBox title={<SectionFilterHeader title={t('Pods')} />}>
-      <SimpleTable
-        rowsPerPage={[15, 25, 50]}
-        filterFunction={filterFunc}
+      <ResourceTable
         errorMessage={Pod.getErrorMessage(error)}
         columns={getDataCols()}
         data={pods}
-        defaultSortingColumn={5}
       />
     </SectionBox>
   );

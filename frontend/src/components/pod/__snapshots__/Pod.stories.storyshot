@@ -149,6 +149,7 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
               <th
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
                 scope="col"
+                style="text-align: right;"
               >
                 Age
                 <button
@@ -212,8 +213,15 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
+                style="text-align: right;"
               >
-                just now
+                <p
+                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  title="4/25/2022, 12:00:00 AM UTC"
+                >
+                  3mo
+                  <span />
+                </p>
               </td>
             </tr>
           </tbody>

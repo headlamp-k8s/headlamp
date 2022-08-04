@@ -8,14 +8,13 @@ import { useLocation } from 'react-router';
 import Event from '../../lib/k8s/event';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
-import { timeAgo, useFilterFunc } from '../../lib/util';
 import { setSearchFilter } from '../../redux/actions/actions';
 import { Link, StatusLabel } from '../common';
 import Empty from '../common/EmptyContent';
 import { PageGrid } from '../common/Resource';
+import ResourceTable from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
-import SimpleTable from '../common/SimpleTable';
 import { LightTooltip } from '../common/Tooltip';
 import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './Charts';
 
@@ -66,8 +65,6 @@ const useStyles = makeStyles(theme => ({
 
 function EventsSection() {
   const classes = useStyles();
-  const filterFunc = useFilterFunc();
-  const [events, error] = Event.useList();
   const { t } = useTranslation('glossary');
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -101,50 +98,36 @@ function EventsSection() {
 
   return (
     <SectionBox title={<SectionFilterHeader title={t('Events')} />}>
-      <SimpleTable
-        rowsPerPage={[15, 25, 50]}
-        filterFunction={filterFunc}
-        errorMessage={Event.getErrorMessage(error)}
-        columns={
-          events
-            ? [
-                {
-                  label: t('Type'),
-                  getter: event => event.involvedObject.kind,
-                  sort: true,
-                },
-                {
-                  label: t('frequent|Name'),
-                  getter: event => makeObjectLink(event),
-                  sort: true,
-                },
-                {
-                  label: t('glossary|Namespace'),
-                  getter: event => event.metadata.namespace || '-',
-                  sort: true,
-                },
-                // @todo: Maybe the message should be shown on slide-down.
-                {
-                  label: t('Reason'),
-                  getter: event => (
-                    <LightTooltip title={event.message} interactive>
-                      <Box>{makeStatusLabel(event)}</Box>
-                    </LightTooltip>
-                  ),
-                  sort: (e1: Event, e2: Event) => e1.reason.localeCompare(e2.reason),
-                },
-                {
-                  label: t('frequent|Age'),
-                  getter: event => timeAgo(event.metadata.creationTimestamp),
-                  sort: (e1: Event, e2: Event) =>
-                    new Date(e2.metadata.creationTimestamp).getTime() -
-                    new Date(e1.metadata.creationTimestamp).getTime(),
-                },
-              ]
-            : []
-        }
-        data={events}
-        defaultSortingColumn={5}
+      <ResourceTable
+        resourceClass={Event}
+        columns={[
+          {
+            label: t('Type'),
+            getter: event => event.involvedObject.kind,
+            sort: true,
+          },
+          {
+            label: t('frequent|Name'),
+            getter: event => makeObjectLink(event),
+            cellProps: {
+              scope: 'row',
+              component: 'th',
+            },
+            sort: true,
+          },
+          'namespace',
+          // @todo: Maybe the message should be shown on slide-down.
+          {
+            label: t('Reason'),
+            getter: event => (
+              <LightTooltip title={event.message} interactive>
+                <Box>{makeStatusLabel(event)}</Box>
+              </LightTooltip>
+            ),
+            sort: (e1: Event, e2: Event) => e1.reason.localeCompare(e2.reason),
+          },
+          'age',
+        ]}
       />
     </SectionBox>
   );
