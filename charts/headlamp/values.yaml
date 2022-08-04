@@ -83,7 +83,7 @@ volumeMounts: []
 # -- Headlamp pod's volumes
 volumes: []
 
-persitentVolumeClaim:
+persistentVolumeClaim:
   # -- Enable Persistent Volume Claim
   enabled: false
   # -- Annotations to add to the persistent volume claim (if enabled)
