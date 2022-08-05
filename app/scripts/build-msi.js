@@ -8,6 +8,7 @@ const info = require('../package.json');
 const APP_DIR = path.resolve(__dirname, '../dist/win-unpacked');
 const OUT_DIR = path.resolve(__dirname, '../dist');
 const ARCH = 'x64';
+const APP_UUID = 'b5678886-26a5-4a15-8513-17d67aaeaf68';
 
 const nameOptions = {
   productName: info.productName,
@@ -29,10 +30,13 @@ const msiOptions = {
   outputDirectory: OUT_DIR,
   description: info.description,
   exe: info.name, // Name of the executable to launch the app, not the final installer.
+  arch: ARCH,
   name: info.productName,
+  shortName: info.shortName || info.productName, // Needs to be a name without spaces!
   manufacturer: info.author.name,
   version: info.version,
   appIconPath: path.resolve(__dirname, '../build/icons/icon.ico'),
+  upgradeCode: APP_UUID,
   ui: {
     chooseDirectory: true,
   },
