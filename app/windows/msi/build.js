@@ -1,12 +1,11 @@
-// You need to install wix tool set first
-// Reference https://ourcodeworld.com/articles/read/927/how-to-create-a-msi-installer-in-windows-for-an-electron-framework-application
+// Be sure to have the wix tool set installed.
 const { MSICreator } = require('electron-wix-msi');
 const fs = require('fs');
 const path = require('path');
-const info = require('../package.json');
+const info = require('../../package.json');
 
-const APP_DIR = path.resolve(__dirname, '../dist/win-unpacked');
-const OUT_DIR = path.resolve(__dirname, '../dist');
+const APP_DIR = path.resolve(__dirname, '../../dist/win-unpacked');
+const OUT_DIR = path.resolve(__dirname, '../../dist');
 const ARCH = 'x64';
 const APP_UUID = 'b5678886-26a5-4a15-8513-17d67aaeaf68';
 
@@ -35,8 +34,8 @@ const msiOptions = {
   shortName: info.shortName || info.productName, // Needs to be a name without spaces!
   manufacturer: info.author.name,
   version: info.version,
-  appIconPath: path.resolve(__dirname, '../build/icons/icon.ico'),
   upgradeCode: APP_UUID,
+  appIconPath: path.resolve(__dirname, '../../build/icons/icon.ico'),
   ui: {
     chooseDirectory: true,
   },
