@@ -306,6 +306,7 @@ function getDefaultAppMenu(): AppMenu[] {
       ],
     },
     {
+      label: i18n.t('Help'),
       role: 'help',
       id: 'original-help',
       submenu: [
