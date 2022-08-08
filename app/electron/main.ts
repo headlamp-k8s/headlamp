@@ -308,6 +308,10 @@ function setMenu() {
 export interface AppMenu extends Omit<Partial<MenuItemConstructorOptions>, 'click'> {
   /** A URL to open (if not starting with http, then it'll be opened in the external browser) */
   url?: string;
+  /** The submenus of this menu */
+  submenu?: AppMenu[];
+  /** A string identifying this menu */
+  id: string;
 }
 
 function menusToTemplate(mainWindow: BrowserWindow | null, menusFromPlugins: AppMenu[]) {
