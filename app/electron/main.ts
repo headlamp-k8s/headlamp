@@ -297,11 +297,22 @@ function getDefaultAppMenu(): AppMenu[] {
   return appMenu;
 }
 
-function setMenu() {
-  const appMenu = getDefaultAppMenu();
-  const menu = Menu.buildFromTemplate(
-    menusToTemplate(null, appMenu) as (MenuItemConstructorOptions | MenuItem)[]
-  );
+function setMenu(appWindow: BrowserWindow | null, newAppMenu: AppMenu[] = []) {
+  let appMenu = newAppMenu;
+  if (appMenu?.length === 0) {
+    appMenu = getDefaultAppMenu();
+  }
+
+  let menu: Electron.Menu;
+  try {
+    const menuTemplate: (MenuItemConstructorOptions | MenuItem)[] =
+      menusToTemplate(appWindow, appMenu) || [];
+    menu = Menu.buildFromTemplate(menuTemplate);
+  } catch (e) {
+    console.error(`Failed to build menus from template ${appMenu}:`, e);
+    return;
+  }
+
   Menu.setApplicationMenu(menu);
 }
 
@@ -373,8 +384,6 @@ function startElecron() {
 
   console.log('Check for updates: ', shouldCheckForUpdates);
 
-  setMenu();
-
   async function createWindow() {
     let frontendPath = '';
     if (isDev) {
@@ -404,6 +413,8 @@ function startElecron() {
         preload: `${__dirname}/preload.js`,
       },
     });
+
+    setMenu(mainWindow, currentMenu);
 
     mainWindow.webContents.setWindowOpenHandler(({ url }) => {
       // allow all urls starting with app startUrl to open in electron
@@ -439,7 +450,7 @@ function startElecron() {
     }
 
     /*
-    if a library is trying to open a url other than app url in electron take it 
+    if a library is trying to open a url other than app url in electron take it
     to the default browser
     */
     mainWindow.webContents.on('will-navigate', (event, url) => {
@@ -473,7 +484,7 @@ function startElecron() {
     });
 
     i18n.on('languageChanged', () => {
-      setMenu();
+      setMenu(mainWindow);
     });
 
     ipcMain.on('appConfig', () => {
@@ -500,16 +511,7 @@ function startElecron() {
         return;
       }
 
-      const template = menusToTemplate(mainWindow!, menus);
-      let newMenus: Menu;
-      try {
-        newMenus = Menu.buildFromTemplate(template);
-      } catch (e) {
-        console.error(`Failed to build menus from template ${menus}:`, e);
-        return;
-      }
-
-      Menu.setApplicationMenu(newMenus);
+      setMenu(mainWindow, menus);
     });
 
     ipcMain.on('locale', (event: IpcMainEvent, newLocale: string) => {
