@@ -115,18 +115,22 @@ function getDefaultAppMenu(): AppMenu[] {
   const aboutMenu = {
     label: i18n.t('About'),
     role: 'about',
+    id: 'original-about',
   };
   const quitMenu = {
     label: i18n.t('Quit'),
     role: 'quit',
+    id: 'original-quit',
   };
   const selectAllMenu = {
     label: i18n.t('Select All'),
     role: 'selectAll',
+    id: 'original-select-all',
   };
   const deleteMenu = {
     label: i18n.t('Delete'),
     role: 'delete',
+    id: 'original-delete',
   };
 
   const appMenu = [
@@ -141,19 +145,23 @@ function getDefaultAppMenu(): AppMenu[] {
               {
                 label: i18n.t('Services'),
                 role: 'services',
+                id: 'original-services',
               },
               sep,
               {
                 label: i18n.t('Hide'),
                 role: 'hide',
+                id: 'original-hide',
               },
               {
                 label: i18n.t('Hide Others'),
                 role: 'hideothers',
+                id: 'original-hide-others',
               },
               {
                 label: i18n.t('Show All'),
                 role: 'unhide',
+                id: 'original-show-all',
               },
               sep,
               quitMenu,
@@ -164,11 +172,13 @@ function getDefaultAppMenu(): AppMenu[] {
     // { role: 'fileMenu' }
     {
       label: i18n.t('File'),
+      id: 'original-file',
       submenu: [
         isMac
           ? {
               label: i18n.t('Close'),
               role: 'close',
+              id: 'original-close',
             }
           : quitMenu,
       ],
@@ -176,38 +186,46 @@ function getDefaultAppMenu(): AppMenu[] {
     // { role: 'editMenu' }
     {
       label: i18n.t('Edit'),
+      id: 'original-edit',
       submenu: [
         {
           label: i18n.t('Cut'),
           role: 'cut',
+          id: 'original-cut',
         },
         {
           label: i18n.t('Copy'),
           role: 'copy',
+          id: 'original-copy',
         },
         {
           label: i18n.t('Paste'),
           role: 'paste',
+          id: 'original-paste',
         },
         ...(isMac
           ? [
               {
                 label: i18n.t('Paste and Match Style'),
                 role: 'pasteAndMatchStyle',
+                id: 'original-paste-and-match-style',
               },
               deleteMenu,
               selectAllMenu,
               sep,
               {
                 label: i18n.t('Speech'),
+                id: 'original-speech',
                 submenu: [
                   {
                     label: i18n.t('Start Speaking'),
                     role: 'startspeaking',
+                    id: 'original-start-speaking',
                   },
                   {
                     label: i18n.t('Stop Speaking'),
                     role: 'stopspeaking',
+                    id: 'original-stop-speaking',
                   },
                 ],
               },
@@ -218,41 +236,50 @@ function getDefaultAppMenu(): AppMenu[] {
     // { role: 'viewMenu' }
     {
       label: i18n.t('View'),
+      id: 'original-view',
       submenu: [
         {
           label: i18n.t('Reload'),
           role: 'forcereload',
+          id: 'original-force-reload',
         },
         {
           label: i18n.t('Toggle Developer Tools'),
           role: 'toggledevtools',
+          id: 'original-toggle-dev-tools',
         },
         sep,
         {
           label: i18n.t('Reset Zoom'),
           role: 'resetzoom',
+          id: 'original-reset-zoom',
         },
         {
           label: i18n.t('Zoom In'),
           role: 'zoomin',
+          id: 'original-zoom-in',
         },
         {
           label: i18n.t('Zoom Out'),
           role: 'zoomout',
+          id: 'original-zoom-out',
         },
         sep,
         {
           label: i18n.t('Toogle Fullscreen'),
           role: 'togglefullscreen',
+          id: 'original-toggle-fullscreen',
         },
       ],
     },
     {
       label: i18n.t('Window'),
+      id: 'original-window',
       submenu: [
         {
           label: i18n.t('Minimize'),
           role: 'minimize',
+          id: 'original-minimize',
         },
         ...(isMac
           ? [
@@ -260,34 +287,41 @@ function getDefaultAppMenu(): AppMenu[] {
               {
                 label: i18n.t('Bring All to Front'),
                 role: 'front',
+                id: 'original-front',
               },
               sep,
               {
                 label: i18n.t('Window'),
                 role: 'window',
+                id: 'original-window',
               },
             ]
           : [
               {
                 label: i18n.t('Close'),
                 role: 'close',
+                id: 'original-close',
               },
             ]),
       ],
     },
     {
       role: 'help',
+      id: 'original-help',
       submenu: [
         {
           label: i18n.t('Documentation'),
+          id: 'original-documentation',
           url: 'https://kinvolk.io/docs/headlamp/latest',
         },
         {
           label: i18n.t('Open an Issue'),
+          id: 'original-open-issue',
           url: 'https://github.com/kinvolk/headlamp/issues',
         },
         {
           label: i18n.t('About'),
+          id: 'original-about',
           url: 'https://github.com/kinvolk/headlamp',
         },
       ],
@@ -296,6 +330,8 @@ function getDefaultAppMenu(): AppMenu[] {
 
   return appMenu;
 }
+
+let currentMenu: AppMenu[] = [];
 
 function setMenu(appWindow: BrowserWindow | null, newAppMenu: AppMenu[] = []) {
   let appMenu = newAppMenu;
@@ -313,7 +349,48 @@ function setMenu(appWindow: BrowserWindow | null, newAppMenu: AppMenu[] = []) {
     return;
   }
 
+  currentMenu = appMenu;
   Menu.setApplicationMenu(menu);
+}
+
+function updateMenuLabels(menus: AppMenu[]) {
+  let menusToProcess = getDefaultAppMenu();
+  const defaultMenusObj: { [key: string]: AppMenu } = {};
+
+  // Add all default menus in top levels and in submenus to an object:
+  // id -> menu.
+  while (menusToProcess.length > 0) {
+    const menu = menusToProcess.shift()!;
+    // Do not process menus that have no ids, otherwise we cannot be
+    // sure which one is which.
+    if (!menu.id) {
+      continue;
+    }
+    defaultMenusObj[menu.id] = menu;
+    if (menu.submenu) {
+      menusToProcess = [...menusToProcess, ...menu.submenu];
+    }
+  }
+
+  // Add all current menus in top levels and in submenus to a list.
+  menusToProcess = [...menus];
+  const menusList: AppMenu[] = [];
+  while (menusToProcess.length > 0) {
+    const menu = menusToProcess.shift()!;
+    menusList.push(menu);
+
+    if (menu.submenu) {
+      menusToProcess = [...menusToProcess, ...menu.submenu];
+    }
+  }
+
+  // Replace all labels with default labels if the default and current
+  // menu ids are the same.
+  menusList.forEach(menu => {
+    if (!!menu.label && defaultMenusObj[menu.id]) {
+      menu.label = defaultMenusObj[menu.id].label;
+    }
+  });
 }
 
 export interface AppMenu extends Omit<Partial<MenuItemConstructorOptions>, 'click'> {
@@ -484,7 +561,8 @@ function startElecron() {
     });
 
     i18n.on('languageChanged', () => {
-      setMenu(mainWindow);
+      updateMenuLabels(currentMenu);
+      setMenu(mainWindow, currentMenu);
     });
 
     ipcMain.on('appConfig', () => {
@@ -511,6 +589,9 @@ function startElecron() {
         return;
       }
 
+      // We update the menu labels here in case the language changed between the time
+      // the original menu was sent to the renderer and the time it was received here.
+      updateMenuLabels(menus);
       setMenu(mainWindow, menus);
     });
 
