@@ -116,6 +116,7 @@ function getDefaultAppMenu(): AppMenu[] {
     label: i18n.t('About'),
     role: 'about',
     id: 'original-about',
+    afterPlugins: true,
   };
   const quitMenu = {
     label: i18n.t('Quit'),
@@ -309,6 +310,7 @@ function getDefaultAppMenu(): AppMenu[] {
       label: i18n.t('Help'),
       role: 'help',
       id: 'original-help',
+      afterPlugins: true,
       submenu: [
         {
           label: i18n.t('Documentation'),
@@ -332,6 +334,7 @@ function getDefaultAppMenu(): AppMenu[] {
   return appMenu;
 }
 
+let loadFullMenu = false;
 let currentMenu: AppMenu[] = [];
 
 function setMenu(appWindow: BrowserWindow | null, newAppMenu: AppMenu[] = []) {
@@ -401,12 +404,20 @@ export interface AppMenu extends Omit<Partial<MenuItemConstructorOptions>, 'clic
   submenu?: AppMenu[];
   /** A string identifying this menu */
   id: string;
+  /** Whether to render this menu only after plugins are loaded (to give it time for the plugins
+   * to override the menu) */
+  afterPlugins?: boolean;
 }
 
 function menusToTemplate(mainWindow: BrowserWindow | null, menusFromPlugins: AppMenu[]) {
-  return menusFromPlugins.map(appMenu => {
-    const { url, ...otherProps } = appMenu;
+  const menusToDisplay: MenuItemConstructorOptions[] = [];
+  menusFromPlugins.forEach(appMenu => {
+    const { url, afterPlugins = false, ...otherProps } = appMenu;
     const menu: MenuItemConstructorOptions = otherProps;
+
+    if (!loadFullMenu && !!afterPlugins) {
+      return;
+    }
 
     if (!!url) {
       menu.click = async () => {
@@ -424,8 +435,10 @@ function menusToTemplate(mainWindow: BrowserWindow | null, menusFromPlugins: App
       otherProps.submenu = menusToTemplate(mainWindow, otherProps.submenu);
     }
 
-    return menu;
+    menusToDisplay.push(menu);
   });
+
+  return menusToDisplay;
 }
 
 async function getRunningHeadlampPIDs() {
@@ -571,6 +584,12 @@ function startElecron() {
         checkForUpdates: shouldCheckForUpdates,
         appVersion,
       });
+    });
+
+    ipcMain.on('pluginsLoaded', () => {
+      loadFullMenu = true;
+      console.info('Plugins are loaded. Loading full menu.');
+      setMenu(mainWindow, currentMenu);
     });
 
     ipcMain.on('setMenu', (event: IpcMainEvent, menus: any) => {

@@ -4,7 +4,7 @@ import { contextBridge, ipcRenderer } from 'electron';
 contextBridge.exposeInMainWorld('desktopApi', {
   send: (channel, data) => {
     // allowed channels
-    const validChannels = ['setMenu', 'locale', 'appConfig'];
+    const validChannels = ['setMenu', 'locale', 'appConfig', 'pluginsLoaded'];
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
     }
