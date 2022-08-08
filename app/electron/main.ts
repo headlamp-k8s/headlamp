@@ -5,7 +5,6 @@ import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
 import log from 'electron-log';
 import find_process from 'find-process';
 import fs from 'fs';
-import { i18n as I18n } from 'i18next';
 import open from 'open';
 import path from 'path';
 import url from 'url';
@@ -109,7 +108,7 @@ function quitServerProcess() {
   serverProcess = null;
 }
 
-function getDefaultAppMenu(i18n: I18n): AppMenu[] {
+function getDefaultAppMenu(): AppMenu[] {
   const isMac = process.platform === 'darwin';
 
   const sep = { type: 'separator' };
@@ -298,8 +297,8 @@ function getDefaultAppMenu(i18n: I18n): AppMenu[] {
   return appMenu;
 }
 
-function setMenu(i18n: I18n) {
-  const appMenu = getDefaultAppMenu(i18n);
+function setMenu() {
+  const appMenu = getDefaultAppMenu();
   const menu = Menu.buildFromTemplate(
     menusToTemplate(null, appMenu) as (MenuItemConstructorOptions | MenuItem)[]
   );
@@ -370,7 +369,7 @@ function startElecron() {
 
   console.log('Check for updates: ', shouldCheckForUpdates);
 
-  setMenu(i18n);
+  setMenu();
 
   async function createWindow() {
     let frontendPath = '';
@@ -413,7 +412,7 @@ function startElecron() {
     });
 
     mainWindow.webContents.on('dom-ready', () => {
-      mainWindow?.webContents.send('currentMenu', getDefaultAppMenu(i18n));
+      mainWindow?.webContents.send('currentMenu', getDefaultAppMenu());
     });
 
     mainWindow.on('closed', () => {
@@ -470,7 +469,7 @@ function startElecron() {
     });
 
     i18n.on('languageChanged', () => {
-      setMenu(i18n);
+      setMenu();
     });
 
     ipcMain.on('appConfig', () => {
