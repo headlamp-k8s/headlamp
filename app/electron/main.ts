@@ -144,7 +144,7 @@ function getDefaultAppMenu(): AppMenu[] {
               },
               sep,
               {
-                label: i18n.t('Hide Headlamp'),
+                label: i18n.t('Hide'),
                 role: 'hide',
               },
               {
