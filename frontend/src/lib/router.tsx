@@ -84,6 +84,7 @@ const defaultRoutes: {
   chooser: {
     path: '/',
     exact: true,
+    name: 'Choose a cluster',
     sidebar: null,
     noCluster: true,
     noAuthRequired: true,
