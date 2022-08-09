@@ -2807,7 +2807,14 @@ and point to it by using the mentioned option.</p>
 <p>An alternative is to build an image that ships some plugins in it. For that,
 just create a &ldquo;.plugins&rdquo; folder in the Headlamp project directory as the Dockerfile
 will include it and point to it by default.</p>
-
+<h2 id="special-build-options">Special Build Options</h2>
+<p>Here are some options that can be used when building Headlamp, to change its default behavior.</p>
+<h3 id="update-checks">Update Checks</h3>
+<p>When in the <strong>desktop app</strong>, by default, Headlamp will check for new versions from its Github page and warn the user about it,
+as well as showing the release notes after updating to a new version.</p>
+<p>This behavior can be turned off by adding a the following to a <code>.env</code> file in the <code>app/</code> folder:</p>
+<pre tabindex="0"><code>HEADLAMP_CHECK_FOR_UPDATES=false
+</code></pre>
 
 		
 		<div class="d-md-none">
@@ -3281,6 +3288,11 @@ will include it and point to it by default.</p>
         <li><a href="#running-the-container-image">Running the container image</a></li>
         <li><a href="#minikube-in-cluster">Minikube &ldquo;in-cluster&rdquo;</a></li>
         <li><a href="#shipping-plugins-in-the-docker-image">Shipping plugins in the Docker image</a></li>
+      </ul>
+    </li>
+    <li><a href="#special-build-options">Special Build Options</a>
+      <ul>
+        <li><a href="#update-checks">Update Checks</a></li>
       </ul>
     </li>
   </ul>
