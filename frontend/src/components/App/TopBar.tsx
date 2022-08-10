@@ -5,7 +5,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
@@ -195,14 +195,13 @@ export function PureTopBar({
   onToggleOpen,
 }: PureTopBarProps) {
   const { t } = useTranslation('frequent');
-  const isSmall = useMediaQuery('(max-width:960px)');
-  const isMedium = useMediaQuery('(max-width:960px)');
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
 
-  const openSideBar =
-    isMedium && !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
+  const openSideBar = !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
 
-  const classes = useStyles({ isSidebarOpen: openSideBar, isSmall });
+  const classes = useStyles({ isSidebarOpen, isSmall });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -320,9 +319,9 @@ export function PureTopBar({
         aria-label={t('Appbar Tools')}
       >
         <Toolbar className={classes.toolbar}>
-          {isMedium && <HeadlampButton open={openSideBar} mobileOnly onToggleOpen={onToggleOpen} />}
+          {isSmall && <HeadlampButton open={openSideBar} mobileOnly onToggleOpen={onToggleOpen} />}
 
-          {!isMedium && (
+          {!isSmall && (
             <>
               <div className={clsx(classes.grow, classes.clusterTitle)}>
                 <ClusterTitle cluster={cluster} clusters={clusters} />
@@ -343,7 +342,7 @@ export function PureTopBar({
               </IconButton>
             </>
           )}
-          {isMedium && (
+          {isSmall && (
             <>
               <div className={classes.grow} />
               <IconButton
@@ -360,7 +359,7 @@ export function PureTopBar({
         </Toolbar>
       </AppBar>
       {renderUserMenu}
-      {isMedium && renderMobileMenu}
+      {isSmall && renderMobileMenu}
     </>
   );
 }
