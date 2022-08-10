@@ -58,7 +58,11 @@ export function DialogTitle(props: OurDialogTitleProps) {
             </Typography>
           )}
         </Grid>
-        <Grid item>{buttons && buttons.length > 0 && <Box>{buttons}</Box>}</Grid>
+        {buttons && buttons.length > 0 && (
+          <Grid item>
+            <Box>{buttons}</Box>
+          </Grid>
+        )}
       </Grid>
     </MuiDialogTitle>
   );

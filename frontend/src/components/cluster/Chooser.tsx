@@ -1,4 +1,5 @@
-import { Icon } from '@iconify/react';
+import { Icon, InlineIcon } from '@iconify/react';
+import { IconButton } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
@@ -17,12 +18,14 @@ import _ from 'lodash';
 import React, { isValidElement, PropsWithChildren } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
+import { setVersionDialogOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
 import { DialogTitle } from '../common/Dialog';
@@ -242,10 +245,12 @@ interface ClusterDialogProps extends PropsWithChildren<Omit<DialogProps, 'open' 
 export function ClusterDialog(props: ClusterDialogProps) {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation('cluster');
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const { open, onClose = null, useCover = false, children = [], ...otherProps } = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
+  const dispatch = useDispatch();
 
   function handleClose() {
     if (onClose !== null) {
@@ -267,7 +272,25 @@ export function ClusterDialog(props: ClusterDialogProps) {
       className={useCover ? classes.chooserDialogCover : ''}
       {...otherProps}
     >
-      <DialogTitle className={classes.chooserTitle} disableTypography>
+      <DialogTitle
+        className={classes.chooserTitle}
+        disableTypography
+        buttons={[
+          <IconButton
+            aria-label={t('Show build information')}
+            onClick={() => {
+              handleClose();
+              dispatch(setVersionDialogOpen(true));
+            }}
+            size="small"
+          >
+            <InlineIcon
+              icon={'mdi:information-outline'}
+              color={theme.palette.primary.contrastText}
+            />
+          </IconButton>,
+        ]}
+      >
         <LogoLight />
       </DialogTitle>
       <DialogContent className={classes.chooserDialog}>{children}</DialogContent>

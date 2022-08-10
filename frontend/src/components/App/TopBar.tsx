@@ -13,10 +13,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import helpers from '../../helpers';
 import LocaleSelect from '../../i18n/LocaleSelect/LocaleSelect';
 import { getToken, setToken } from '../../lib/auth';
 import { useCluster, useClustersConf } from '../../lib/k8s';
-import { HeaderActionType, setWhetherSidebarOpen } from '../../redux/actions/actions';
+import {
+  HeaderActionType,
+  setVersionDialogOpen,
+  setWhetherSidebarOpen,
+} from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
@@ -117,6 +122,16 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       justifyContent: 'center',
     },
+    versionLink: {
+      backgroundColor: theme.palette.background.default,
+      color: theme.palette.text.primary,
+      textAlign: 'center',
+    },
+    userMenu: {
+      '& .MuiMenu-list': {
+        paddingBottom: 0,
+      },
+    },
   })
 );
 
@@ -182,6 +197,7 @@ export function PureTopBar({
   const { t } = useTranslation('frequent');
   const isSmall = useMediaQuery('(max-width:960px)');
   const isMedium = useMediaQuery('(max-width:960px)');
+  const dispatch = useDispatch();
 
   const openSideBar =
     isMedium && !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
@@ -224,6 +240,7 @@ export function PureTopBar({
         handleMobileMenuClose();
       }}
       style={{ zIndex: 1400 }}
+      className={classes.userMenu}
     >
       <MenuItem
         component="a"
@@ -238,6 +255,19 @@ export function PureTopBar({
           <Icon icon="mdi:logout" />
         </ListItemIcon>
         <ListItemText primary={t('Log out')} secondary={hasToken ? null : t('(No token set up)')} />
+      </MenuItem>
+      <MenuItem
+        component="a"
+        onClick={() => {
+          dispatch(setVersionDialogOpen(true));
+          handleMenuClose();
+        }}
+        dense
+        className={classes.versionLink}
+      >
+        <ListItemText>
+          {helpers.getProductName()} {helpers.getVersion()['VERSION']}
+        </ListItemText>
       </MenuItem>
     </Menu>
   );

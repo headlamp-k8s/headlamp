@@ -23,6 +23,7 @@ import {
   UI_SIDEBAR_SET_VISIBLE,
   UI_THEME_SET,
   UI_UPDATE_NOTIFICATION,
+  UI_VERSION_DIALOG_OPEN,
 } from '../actions/actions';
 
 export interface UIState {
@@ -53,6 +54,7 @@ export interface UIState {
   };
   branding: BrandingProps;
   pluginsLoaded: boolean;
+  isVersionDialogOpen: boolean;
   notifications: Notification[];
   clusterChooserButtonComponent?: ClusterChooserType;
 }
@@ -105,6 +107,7 @@ export const INITIAL_STATE: UIState = {
     name: '',
   },
   pluginsLoaded: false,
+  isVersionDialogOpen: false,
   branding: {
     logo: null,
   },
@@ -253,6 +256,10 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
     case UI_SET_CLUSTER_CHOOSER_BUTTON: {
       const component = action.component;
       newFilters.clusterChooserButtonComponent = component;
+      break;
+    }
+    case UI_VERSION_DIALOG_OPEN: {
+      newFilters.isVersionDialogOpen = action.isVersionDialogOpen;
       break;
     }
     default:
