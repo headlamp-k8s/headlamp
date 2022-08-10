@@ -432,7 +432,7 @@ function menusToTemplate(mainWindow: BrowserWindow | null, menusFromPlugins: App
 
     // If the menu has a submenu, then recursively convert it.
     if (Array.isArray(otherProps.submenu)) {
-      otherProps.submenu = menusToTemplate(mainWindow, otherProps.submenu);
+      menu.submenu = menusToTemplate(mainWindow, otherProps.submenu);
     }
 
     menusToDisplay.push(menu);
