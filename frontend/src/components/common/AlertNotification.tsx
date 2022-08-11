@@ -1,7 +1,7 @@
 import { Box, useTheme } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRouteMatch } from 'react-router-dom';
+import { matchPath, useLocation } from 'react-router-dom';
 import { testAuth } from '../../lib/k8s/apiProxy';
 import { getDefaultRoutes, getRoutePath, Route } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -25,6 +25,8 @@ export function PureAlertNotification({
   const [error, setError] = React.useState<null | string | boolean>(null);
   const [intervalID, setIntervalID] = React.useState<NodeJS.Timeout | null>(null);
   const { t } = useTranslation('resource');
+  const theme = useTheme();
+  const { pathname } = useLocation();
 
   function registerSetInterval(): NodeJS.Timeout {
     return setInterval(() => {
@@ -41,7 +43,7 @@ export function PureAlertNotification({
           const error = new Error(err);
           setError(error.message);
           setNetworkStatusCheckTimeFactor(
-            networkStatusCheckTimeFactor => networkStatusCheckTimeFactor + 1
+            (networkStatusCheckTimeFactor: number) => networkStatusCheckTimeFactor + 1
           );
         });
     }, (networkStatusCheckTimeFactor + 1) * NETWORK_STATUS_CHECK_TIME);
@@ -76,11 +78,11 @@ export function PureAlertNotification({
       .filter(route => route.noAuthRequired);
 
     for (const route of noAuthRequiringRoutes) {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const routeMatch = useRouteMatch({
+      const routeMatch = matchPath(pathname, {
         path: getRoutePath(route),
         strict: true,
       });
+
       if (routeMatch && routeMatch.isExact) {
         return true;
       }
@@ -93,7 +95,6 @@ export function PureAlertNotification({
   if (whetherInNoAuthRoute) {
     isErrorInNoAuthRequiredRoute = true;
   }
-  const theme = useTheme();
   if (!error) {
     return null;
   }
