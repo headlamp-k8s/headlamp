@@ -79,10 +79,15 @@ export async function initializePlugins() {
 
   // Initialize every plugin in the order they were loaded.
   return new Promise(resolve => {
-    for (const plugin of Object.values(window.plugins)) {
-      // @todo: what should happen if this fails?
-      // @todo: The return code is not checked? What is it for?
-      plugin.initialize(new Registry());
+    for (const pluginName of Object.keys(window.plugins)) {
+      const plugin = window.plugins[pluginName];
+      try {
+        // @todo: what should happen if this fails?
+        // @todo: The return code is not checked? What is it for?
+        plugin.initialize(new Registry());
+      } catch (e) {
+        console.error(`Plugin initialize() error in ${pluginName}:`, e);
+      }
     }
     resolve(undefined);
   });
