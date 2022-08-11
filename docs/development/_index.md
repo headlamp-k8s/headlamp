@@ -66,14 +66,30 @@ make app-linux
 ```
 
 ```bash
-make app-windows
-```
-
-```bash
 make app-mac
 ```
 
-See the generated app files in app/dist/
+```bash
+make app-win
+```
+
+For Windows, by default it will produce an installer using [NSIS (Nullsoft Scriptable Install System)](https://sourceforge.net/projects/nsis/).
+
+If you prefer an `.msi` installer, then be sure to install the [WiX Toolset](https://wixtoolset.org/) and have its `light.exe` and `candle.exe` in the Windows path.
+E.g. if you are using WiX Toolset version 3.11, this can be done by running the following command,
+before the one above:
+
+```bash
+set PATH=%PATH%;C:\Program Files (x86)\WiX Toolset v3.11\bin
+```
+
+Then run the following command to generate the `.msi` installer:
+
+```bash
+make app-win-msi
+```
+
+See the generated app files in app/dist/ .
 
 
 ## Build a container image

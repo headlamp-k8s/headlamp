@@ -29,6 +29,8 @@ app: app-build
 	cd app && npm run package -- --win --linux --mac
 app-win: app-build
 	cd app && npm run package -- --win
+app-win-msi: app-build
+	cd app && npm run package-msi
 app-linux: app-build
 	cd app && npm run package -- --linux
 app-mac: app-build
