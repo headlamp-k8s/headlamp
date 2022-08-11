@@ -30,8 +30,9 @@ export default function ReleaseNotes() {
               owner: 'kinvolk',
               repo: 'headlamp',
             });
+            // Get the latest release that is not headlamp-plugin or headlamp-helm.
             const latestRelease = response.data.find(
-              release => !release.name?.startsWith('headlamp-helm')
+              release => !release.name?.startsWith('headlamp-')
             );
             if (
               latestRelease &&
