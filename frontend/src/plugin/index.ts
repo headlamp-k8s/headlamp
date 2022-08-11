@@ -75,8 +75,6 @@ function loadDevPlugins() {
  * Load external, then local plugins. Then initialize() them in order with a Registry.
  */
 export async function initializePlugins() {
-  window.plugins = {};
-
   await loadDevPlugins();
 
   // Initialize every plugin in the order they were loaded.
