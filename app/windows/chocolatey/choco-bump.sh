@@ -101,3 +101,8 @@ echo "Checksum is $CHECKSUM"
 sed -i "s/<version>.*<\/version>/<version>${PKG_VERSION}<\/version>/" ./headlamp.nuspec
 sed -i "s!^\$headlampVersion = '.*'!\$headlampVersion = '${VERSION}'!" ./tools/chocolateyinstall.ps1
 sed -i "s/^\$checksum = '.*'/\$checksum = '${CHECKSUM}'/" ./tools/chocolateyinstall.ps1
+
+echo ""
+echo "You can test this package by running the following command from an Windows admin shell, in this directory:"
+echo " choco pack"
+echo " choco install headlamp -d -v -s ."
