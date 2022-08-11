@@ -2718,9 +2718,24 @@ and the linux app on a linux box.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make backend frontend
 </code></pre></div><p>Then choose the relevant command.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make app-linux
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make app-windows
 </code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make app-mac
-</code></pre></div><p>See the generated app files in app/dist/</p>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make app-win
+</code></pre></div><p>For Windows, by default it will produce an installer using 
+
+
+<a href="https://sourceforge.net/projects/nsis/" target="_blank" rel="noopener">NSIS (Nullsoft Scriptable Install System)</a>
+.</p>
+<p>If you prefer an <code>.msi</code> installer, then be sure to install the 
+
+
+<a href="https://wixtoolset.org/" target="_blank" rel="noopener">WiX Toolset</a>
+ and have its <code>light.exe</code> and <code>candle.exe</code> in the Windows path.
+E.g. if you are using WiX Toolset version 3.11, this can be done by running the following command,
+before the one above:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set PATH<span style="color:#f92672">=</span>%PATH%;C:<span style="color:#ae81ff">\P</span>rogram Files <span style="color:#f92672">(</span>x86<span style="color:#f92672">)</span><span style="color:#ae81ff">\W</span>iX Toolset v3.11<span style="color:#ae81ff">\b</span>in
+</code></pre></div><p>Then run the following command to generate the <code>.msi</code> installer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make app-win-msi
+</code></pre></div><p>See the generated app files in app/dist/ .</p>
 <h2 id="build-a-container-image">Build a container image</h2>
 <p>The following command builds a container image for Headlamp from the current
 source. It will run the <code>frontend</code> from a <code>backend</code>&rsquo;s static server, and
