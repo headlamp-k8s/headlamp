@@ -43,15 +43,24 @@ export interface TimeAgoOptions {
 export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
   const { format = 'brief' } = options;
 
+  const fromDate = new Date(date);
+  let now = new Date();
+
+  if (!!process.env.TEST_TZ) {
+    // For testing, we consider the current moment to be 3 months from the dates we are testing.
+    const days = 24 * 3600 * 1000; // in ms
+    now = new Date(fromDate.getTime() + 90 * days);
+  }
+
   if (format === 'brief') {
-    return humanize(new Date().getTime() - new Date(date).getTime(), {
+    return humanize(now.getTime() - fromDate.getTime(), {
       fallbacks: ['en'],
       round: true,
       largest: 1,
     });
   }
 
-  return humanize(new Date().getTime() - new Date(date).getTime(), {
+  return humanize(now.getTime() - fromDate.getTime(), {
     language: 'en-mini',
     spacer: '',
     fallbacks: ['en'],
