@@ -61,8 +61,15 @@ export interface Route {
   exact?: boolean;
   /** Human readable name. Capitalized and short. */
   name?: string;
-  /** In case this route does *not* need a cluster prefix and context. */
+  /**
+   * In case this route does *not* need a cluster prefix and context.
+   * @deprecated please use useClusterURL.
+   */
   noCluster?: boolean;
+  /**
+   * Should URL have the cluster prefix? (default=true)
+   */
+  useClusterURL?: boolean;
   /** This route does not require Authentication. */
   noAuthRequired?: boolean;
   /** The sidebar group this Route should be in, or null if it is in no group. */
@@ -86,7 +93,7 @@ const defaultRoutes: {
     exact: true,
     name: 'Choose a cluster',
     sidebar: null,
-    noCluster: true,
+    useClusterURL: false,
     noAuthRequired: true,
     component: () => (
       <Chooser useCover open>
@@ -439,11 +446,30 @@ export function getRoute(routeName: string) {
   return defaultRoutes[routeName];
 }
 
+/**
+ * Should the route use a cluster URL?
+ *
+ * @param route
+ * @returns true when a cluster URL contains cluster in the URL. eg. /c/minikube/my-url
+ *   false, the URL does not contain the cluster. eg. /my-url
+ */
+export function getRouteUseClusterURL(route: Route): boolean {
+  if (route.useClusterURL === undefined && route.noCluster !== undefined) {
+    console.warn('Route.noCluster is deprecated. Please use route.useClusterURL instead.');
+    return route.noCluster;
+  }
+  if (route.useClusterURL === undefined) {
+    // default is true, so undefined === true.
+    return true;
+  }
+  return route.useClusterURL;
+}
+
 export function getRoutePath(route: Route) {
   if (route.path === NotFoundRoute.path) {
     return route.path;
   }
-  if (route.noCluster) {
+  if (!getRouteUseClusterURL(route)) {
     return route.path;
   }
 
@@ -464,7 +490,7 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   }
 
   let cluster: string | null = params.cluster || null;
-  if (!cluster && !route.noCluster) {
+  if (!cluster && getRouteUseClusterURL(route)) {
     cluster = getCluster();
     if (!cluster) {
       return '/';
