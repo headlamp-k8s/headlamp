@@ -3,38 +3,37 @@
 exports[`Storyshots Sidebar/SidebarItem Selected 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-item"
+    class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     style="background-color: rgba(0, 0, 0, 0.87);"
   >
     <ul
-      class="MuiList-root MuiList-padding"
+      class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
     >
       <li
         class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
       >
         <a
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button MuiListItem-selected"
+          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button Mui-selected css-sayhe9-MuiButtonBase-root-MuiListItem-root"
           href="/"
           role="button"
           tabindex="0"
         >
           <div
-            class="MuiListItemIcon-root makeStyles-icon"
+            class="MuiListItemIcon-root makeStyles-icon css-cveggr-MuiListItemIcon-root"
           >
             <span />
           </div>
           <div
-            class="MuiListItemText-root"
+            class="MuiListItemText-root css-tlelie-MuiListItemText-root"
           >
             <span
-              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
             >
               Cluster
             </span>
           </div>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </a>
       </li>
@@ -46,78 +45,76 @@ exports[`Storyshots Sidebar/SidebarItem Selected 1`] = `
 exports[`Storyshots Sidebar/SidebarItem Sublist 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-item"
+    class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     style="background-color: rgba(0, 0, 0, 0.87);"
   >
     <ul
-      class="MuiList-root MuiList-padding"
+      class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
     >
       <li
         class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
       >
         <a
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
           href="/"
           role="button"
           tabindex="0"
         >
           <div
-            class="MuiListItemIcon-root makeStyles-icon"
+            class="MuiListItemIcon-root makeStyles-icon css-cveggr-MuiListItemIcon-root"
           >
             <span />
           </div>
           <div
-            class="MuiListItemText-root"
+            class="MuiListItemText-root css-tlelie-MuiListItemText-root"
           >
             <span
-              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
             >
               Cluster
             </span>
           </div>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </a>
       </li>
       <li
-        class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+        class="MuiListItem-root MuiListItem-gutters MuiListItem-padding makeStyles-fullWidthList css-19sz5b9-MuiListItem-root"
       >
         <div
-          class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+          class="MuiCollapse-root MuiCollapse-vertical makeStyles-fullWidth MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
           style="min-height: 0px;"
         >
           <div
-            class="MuiCollapse-wrapper"
+            class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
           >
             <div
-              class="MuiCollapse-wrapperInner"
+              class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
             >
               <ul
-                class="MuiList-root makeStyles-nested"
+                class="MuiList-root makeStyles-nested css-1mk9mw3-MuiList-root"
               >
                 <li
                   class="makeStyles-link makeStyles-link"
                 >
                   <a
-                    aria-disabled="false"
-                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
                     href="/"
                     role="button"
                     tabindex="0"
                   >
                     <div
-                      class="MuiListItemText-root"
+                      class="MuiListItemText-root css-tlelie-MuiListItemText-root"
                     >
                       <span
-                        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                        class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                       >
                         Namespaces
                       </span>
                     </div>
                     <span
-                      class="MuiTouchRipple-root"
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                     />
                   </a>
                 </li>
@@ -134,78 +131,76 @@ exports[`Storyshots Sidebar/SidebarItem Sublist 1`] = `
 exports[`Storyshots Sidebar/SidebarItem Sublist Expanded 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-item"
+    class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     style="background-color: rgba(0, 0, 0, 0.87);"
   >
     <ul
-      class="MuiList-root MuiList-padding"
+      class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
     >
       <li
         class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
       >
         <a
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button MuiListItem-selected"
+          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button Mui-selected css-sayhe9-MuiButtonBase-root-MuiListItem-root"
           href="/"
           role="button"
           tabindex="0"
         >
           <div
-            class="MuiListItemIcon-root makeStyles-icon"
+            class="MuiListItemIcon-root makeStyles-icon css-cveggr-MuiListItemIcon-root"
           >
             <span />
           </div>
           <div
-            class="MuiListItemText-root"
+            class="MuiListItemText-root css-tlelie-MuiListItemText-root"
           >
             <span
-              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
             >
               Cluster
             </span>
           </div>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </a>
       </li>
       <li
-        class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+        class="MuiListItem-root MuiListItem-gutters MuiListItem-padding makeStyles-fullWidthList css-19sz5b9-MuiListItem-root"
       >
         <div
-          class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-entered"
+          class="MuiCollapse-root MuiCollapse-vertical makeStyles-fullWidth MuiCollapse-entered css-pwcg7p-MuiCollapse-root"
           style="min-height: 0px;"
         >
           <div
-            class="MuiCollapse-wrapper"
+            class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
           >
             <div
-              class="MuiCollapse-wrapperInner"
+              class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
             >
               <ul
-                class="MuiList-root makeStyles-nested"
+                class="MuiList-root makeStyles-nested css-1mk9mw3-MuiList-root"
               >
                 <li
                   class="makeStyles-link makeStyles-link"
                 >
                   <a
-                    aria-disabled="false"
-                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
                     href="/"
                     role="button"
                     tabindex="0"
                   >
                     <div
-                      class="MuiListItemText-root"
+                      class="MuiListItemText-root css-tlelie-MuiListItemText-root"
                     >
                       <span
-                        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                        class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                       >
                         Namespaces
                       </span>
                     </div>
                     <span
-                      class="MuiTouchRipple-root"
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                     />
                   </a>
                 </li>
@@ -222,38 +217,37 @@ exports[`Storyshots Sidebar/SidebarItem Sublist Expanded 1`] = `
 exports[`Storyshots Sidebar/SidebarItem Unselected 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-item"
+    class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     style="background-color: rgba(0, 0, 0, 0.87);"
   >
     <ul
-      class="MuiList-root MuiList-padding"
+      class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
     >
       <li
         class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
       >
         <a
-          aria-disabled="false"
-          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
           href="/"
           role="button"
           tabindex="0"
         >
           <div
-            class="MuiListItemIcon-root makeStyles-icon"
+            class="MuiListItemIcon-root makeStyles-icon css-cveggr-MuiListItemIcon-root"
           >
             <span />
           </div>
           <div
-            class="MuiListItemText-root"
+            class="MuiListItemText-root css-tlelie-MuiListItemText-root"
           >
             <span
-              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+              class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
             >
               Cluster
             </span>
           </div>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </a>
       </li>

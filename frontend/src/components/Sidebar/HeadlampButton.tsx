@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Button from '@mui/material/Button';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import makeStyles from '@mui/styles/makeStyles';
 import { useTranslation } from 'react-i18next';
 import { getThemeName } from '../../lib/themes';
 import { AppLogo } from '../App/AppLogo';

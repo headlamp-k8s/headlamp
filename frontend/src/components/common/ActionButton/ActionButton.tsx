@@ -1,6 +1,6 @@
 import { Icon, IconifyIcon, IconProps } from '@iconify/react';
-import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import React from 'react';
 
 export interface ActionButtonProps {
@@ -44,7 +44,13 @@ export default function ActionButton({
 }: ActionButtonProps) {
   return (
     <Tooltip title={longDescription || description}>
-      <IconButton aria-label={description} onClick={onClick} edge={edge} {...iconButtonProps}>
+      <IconButton
+        aria-label={description}
+        onClick={onClick}
+        edge={edge}
+        size="large"
+        {...iconButtonProps}
+      >
         <Icon icon={icon} color={color} width={width} {...iconProps} />
       </IconButton>
     </Tooltip>

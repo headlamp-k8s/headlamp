@@ -1,4 +1,4 @@
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import _ from 'lodash';
 import { useSnackbar } from 'notistack';
 import React from 'react';

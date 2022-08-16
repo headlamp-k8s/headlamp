@@ -7,13 +7,13 @@ import {
   Grid,
   IconButton,
   ListItem,
-  makeStyles,
   Popover,
   Theme,
   Tooltip,
   Typography,
   useTheme,
-} from '@material-ui/core';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -129,6 +129,7 @@ function NotificationsList(props: {
                 <IconButton
                   onClick={e => notificationSeenUnseenHandler(e, notification)}
                   aria-label={t('translation|Mark as read')}
+                  size="large"
                 >
                   <Icon icon="mdi:circle" color={theme.palette.error.main} height={12} width={12} />
                 </IconButton>
@@ -283,6 +284,7 @@ export default function Notifications() {
         aria-controls={show ? notificationMenuId : ''}
         aria-haspopup="true"
         onClick={handleClick}
+        size="large"
       >
         {!areAllNotificationsInDeleteState && areThereUnseenNotifications ? (
           <Badge variant="dot" color="error">
@@ -300,7 +302,6 @@ export default function Notifications() {
         open={show}
         onClose={handleClose}
         className={classes.root}
-        getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',

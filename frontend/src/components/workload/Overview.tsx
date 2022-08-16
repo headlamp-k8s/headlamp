@@ -1,4 +1,4 @@
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
@@ -47,6 +47,7 @@ export default function Overview() {
     return totalReplicasDiff;
   }
 
+  // Get all items except the pods since those shouldn't be shown in the table (only the chart).
   function getJointItems() {
     let joint: Workload[] = [];
 

@@ -3,13 +3,13 @@
 exports[`Storyshots SectionBox Custom Title 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-j1fy4m"
   >
     <h1>
       custom title
     </h1>
     <div
-      class="MuiBox-root MuiBox-root makeStyles-box"
+      class="makeStyles-box MuiBox-root css-0"
     />
   </div>
 </div>
@@ -18,30 +18,30 @@ exports[`Storyshots SectionBox Custom Title 1`] = `
 exports[`Storyshots SectionBox Header Props 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
     >
       <div
-        class="MuiGrid-root MuiGrid-item"
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
       >
         <div
-          class="MuiBox-root MuiBox-root"
+          class="MuiBox-root css-70qvj9"
         >
           <h1
-            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
           >
             This is a section title with a main style
           </h1>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root css-ldp2l3"
           />
         </div>
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root makeStyles-box"
+      class="makeStyles-box MuiBox-root css-0"
     />
   </div>
 </div>
@@ -50,30 +50,30 @@ exports[`Storyshots SectionBox Header Props 1`] = `
 exports[`Storyshots SectionBox Titled 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
     >
       <div
-        class="MuiGrid-root MuiGrid-item"
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
       >
         <div
-          class="MuiBox-root MuiBox-root"
+          class="MuiBox-root css-70qvj9"
         >
           <h2
-            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+            class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
           >
             This is a section title default
           </h2>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root css-ldp2l3"
           />
         </div>
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root makeStyles-box"
+      class="makeStyles-box MuiBox-root css-0"
     />
   </div>
 </div>
@@ -82,30 +82,30 @@ exports[`Storyshots SectionBox Titled 1`] = `
 exports[`Storyshots SectionBox Titled Children 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
     >
       <div
-        class="MuiGrid-root MuiGrid-item"
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
       >
         <div
-          class="MuiBox-root MuiBox-root"
+          class="MuiBox-root css-70qvj9"
         >
           <h2
-            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+            class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
           >
             This is a section title
           </h2>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root css-ldp2l3"
           />
         </div>
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root makeStyles-box"
+      class="makeStyles-box MuiBox-root css-0"
     >
       <p>
         A child paragraph.
@@ -118,10 +118,10 @@ exports[`Storyshots SectionBox Titled Children 1`] = `
 exports[`Storyshots SectionBox With Children 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiBox-root MuiBox-root makeStyles-box"
+      class="makeStyles-box MuiBox-root css-0"
     >
       <p>
         A child paragraph.

@@ -1,7 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles';
-import MuiTab from '@material-ui/core/Tab';
-import MuiTabs from '@material-ui/core/Tabs';
-import Typography, { TypographyProps } from '@material-ui/core/Typography';
+import MuiTab from '@mui/material/Tab';
+import MuiTabs from '@mui/material/Tabs';
+import Typography, { TypographyProps } from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 
 const useStyle = makeStyles(() => ({

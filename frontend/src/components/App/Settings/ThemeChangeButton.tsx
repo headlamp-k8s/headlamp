@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react';
-import { Button, ButtonGroup, makeStyles, Theme } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
+import { Button, ButtonGroup, Theme } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';

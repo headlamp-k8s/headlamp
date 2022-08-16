@@ -1,8 +1,10 @@
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { setToken } from '../../lib/auth';
+
+//@todo: needs cleanup.
 
 const OIDCAuth: FunctionComponent<{}> = () => {
   const location = useLocation();

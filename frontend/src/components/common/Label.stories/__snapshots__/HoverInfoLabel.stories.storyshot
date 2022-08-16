@@ -3,8 +3,9 @@
 exports[`Storyshots Label/HoverInfoLabel Hover Info Label 1`] = `
 <div>
   <p
-    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-    title="hover info"
+    aria-label="hover info"
+    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+    data-mui-internal-clone-element="true"
   >
     Some label
     <span />
@@ -15,7 +16,8 @@ exports[`Storyshots Label/HoverInfoLabel Hover Info Label 1`] = `
 exports[`Storyshots Label/HoverInfoLabel Hover Info Label Info 1`] = `
 <div>
   <p
-    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+    data-mui-internal-clone-element="true"
   >
     Some label
     <span />
@@ -26,7 +28,8 @@ exports[`Storyshots Label/HoverInfoLabel Hover Info Label Info 1`] = `
 exports[`Storyshots Label/HoverInfoLabel Icon Position 1`] = `
 <div>
   <p
-    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+    data-mui-internal-clone-element="true"
   >
     <span />
     Some label
@@ -37,7 +40,8 @@ exports[`Storyshots Label/HoverInfoLabel Icon Position 1`] = `
 exports[`Storyshots Label/HoverInfoLabel Label Props 1`] = `
 <div>
   <p
-    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body2"
+    class="MuiTypography-root MuiTypography-body2 makeStyles-noWrap makeStyles-display css-ab4e19-MuiTypography-root"
+    data-mui-internal-clone-element="true"
   >
     Some label
     <span />

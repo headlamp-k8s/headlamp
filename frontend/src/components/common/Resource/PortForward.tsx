@@ -1,8 +1,8 @@
 import { InlineIcon } from '@iconify/react';
-import { Box, Button, CircularProgress, Tooltip, Typography } from '@material-ui/core';
-import grey from '@material-ui/core/colors/grey';
-import MuiLink from '@material-ui/core/Link';
-import { Alert } from '@material-ui/lab';
+import { Box, Button, CircularProgress, Tooltip, Typography } from '@mui/material';
+import { Alert } from '@mui/material';
+import { grey } from '@mui/material/colors';
+import MuiLink from '@mui/material/Link';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';

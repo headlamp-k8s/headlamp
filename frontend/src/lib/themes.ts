@@ -1,11 +1,8 @@
-import green from '@material-ui/core/colors/green';
-import grey from '@material-ui/core/colors/grey';
-import orange from '@material-ui/core/colors/orange';
-import red from '@material-ui/core/colors/red';
-import { createTheme, Theme } from '@material-ui/core/styles';
+import { green, grey, orange, red } from '@mui/material/colors';
+import { createTheme, Theme } from '@mui/material/styles';
 import React from 'react';
 
-declare module '@material-ui/core/styles/createPalette.d' {
+declare module '@mui/material/styles/createPalette.d' {
   interface Palette {
     success: PaletteColor;
     sidebarLink: {
@@ -23,6 +20,16 @@ declare module '@material-ui/core/styles/createPalette.d' {
 }
 
 const commonRules = {
+  // @todo: Remove this once we have tested and fixed the theme for the new breakpoints.
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
   palette: {
     primary: {
       contrastText: '#fff',
@@ -143,40 +150,67 @@ const commonRules = {
   shape: {
     borderRadius: 4,
   },
-  overrides: {
+  components: {
     MuiCssBaseline: {
-      '@global': {
-        '@media (prefers-reduced-motion: reduce)': {
-          '*': {
-            animationDuration: '0.01ms !important',
-            animationIterationCount: '1 !important',
-            transitionDuration: '0.01ms !important',
-            scrollBehavior: 'auto !important',
+      styleOverrides: {
+        '@global': {
+          '@media (prefers-reduced-motion: reduce)': {
+            '*': {
+              animationDuration: '0.01ms !important',
+              animationIterationCount: '1 !important',
+              transitionDuration: '0.01ms !important',
+              scrollBehavior: 'auto !important',
+            },
           },
         },
       },
     },
+    MuiSelect: {
+      defaultProps: {
+        variant: 'standard' as 'filled' | 'outlined' | 'standard',
+      },
+    },
+    MuiFormControl: {
+      defaultProps: {
+        variant: 'standard' as 'filled' | 'outlined' | 'standard',
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        variant: 'standard' as 'filled' | 'outlined' | 'standard',
+      },
+    },
     MuiTooltip: {
-      tooltip: {
-        fontSize: '1.3em',
-        color: '#fff',
-        backgroundColor: '#000',
-        // opacity: '1.0',
+      styleOverrides: {
+        tooltip: {
+          fontSize: '1.3em',
+          color: '#fff',
+          backgroundColor: '#000',
+        },
       },
     },
     MuiAppBar: {
-      colorPrimary: {
-        backgroundColor: '#f5f5f5',
+      styleOverrides: {
+        colorPrimary: {
+          backgroundColor: '#f5f5f5',
+        },
       },
     },
     MuiIconButton: {
-      colorPrimary: {
-        color: '#000',
+      styleOverrides: {
+        colorPrimary: {
+          color: '#000',
+        },
       },
     },
     MuiLink: {
-      root: {
-        color: '#0078D4',
+      styleOverrides: {
+        root: {
+          color: '#0078D4',
+        },
+      },
+      defaultProps: {
+        underline: 'hover' as 'always' | 'hover' | 'none',
       },
     },
   },
@@ -256,55 +290,78 @@ const darkTheme = createTheme({
     },
     sidebarBg: '#000',
     notificationBorderColor: 'rgba(255,255,255,0.12)',
-    type: 'dark',
+    mode: 'dark',
+    // type: 'dark',
     background: {
       default: '#1f1f1f',
       paper: '#1f1f1f',
     },
   },
-  overrides: {
-    ...commonRules.overrides,
+  components: {
+    ...commonRules.components,
     MuiTooltip: {
-      tooltip: {
-        fontSize: '1.3em',
-        color: '#fff',
-        backgroundColor: '#000',
-        opacity: 1,
+      styleOverrides: {
+        tooltip: {
+          ...commonRules.components.MuiTooltip.styleOverrides.tooltip,
+          backgroundColor: '#000',
+        },
       },
     },
     MuiAppBar: {
-      colorPrimary: {
-        backgroundColor: '#000',
+      styleOverrides: {
+        root: {
+          colorPrimary: {
+            backgroundColor: '#000',
+          },
+        },
       },
     },
+
     MuiIconButton: {
-      colorPrimary: {
-        color: '#fff',
+      styleOverrides: {
+        colorPrimary: {
+          color: '#fff',
+        },
       },
     },
     MuiLink: {
-      root: {
-        color: '#6CB6F2',
+      styleOverrides: {
+        root: {
+          color: '#6CB6F2',
+        },
+      },
+      defaultProps: {
+        underline: 'hover' as 'always' | 'hover' | 'none',
       },
     },
     MuiSwitch: {
-      colorPrimary: {
-        '&&.Mui-checked': {
-          color: '#4b99ee',
+      styleOverrides: {
+        root: {
+          colorPrimary: {
+            '&&.Mui-checked': {
+              color: '#4b99ee',
+            },
+          },
         },
       },
     },
     MuiTab: {
-      textColorPrimary: {
-        '&&.Mui-selected': {
-          color: '#fff',
-          borderBottomColor: '#fff',
+      styleOverrides: {
+        textColorPrimary: {
+          '&&.Mui-selected': {
+            color: '#fff',
+            borderBottomColor: '#fff',
+          },
         },
       },
     },
     MuiTabs: {
-      indicator: {
-        backgroundColor: '#fff',
+      styleOverrides: {
+        root: {
+          indicator: {
+            backgroundColor: '#fff',
+          },
+        },
       },
     },
   },

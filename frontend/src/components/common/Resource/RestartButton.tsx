@@ -8,7 +8,7 @@ import {
   DialogTitle,
   IconButton,
   Tooltip,
-} from '@material-ui/core';
+} from '@mui/material';
 import _ from 'lodash';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';

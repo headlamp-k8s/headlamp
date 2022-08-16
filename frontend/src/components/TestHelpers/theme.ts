@@ -1,5 +1,5 @@
-import { createTheme } from '@material-ui/core';
-import { green, grey, orange, red } from '@material-ui/core/colors';
+import { createTheme } from '@mui/material';
+import { green, grey, orange, red } from '@mui/material/colors';
 
 const commonRules = {
   palette: {

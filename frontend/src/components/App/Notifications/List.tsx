@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
-import { Box, IconButton, Menu, MenuItem, Tooltip, Typography, useTheme } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Box, IconButton, Menu, MenuItem, Tooltip, Typography, useTheme } from '@mui/material';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -18,11 +18,11 @@ export default function NotificationList() {
   const search = useTypedSelector(state => state.filter.search);
   const history = useHistory();
 
-  const allNotificationsAreDeleted = React.useMemo(() => {
+  const allNotificationsAreDeleted = useMemo(() => {
     return !notifications.find(notification => !notification.deleted);
   }, [notifications]);
 
-  const hasUnseenNotifications = React.useMemo(() => {
+  const hasUnseenNotifications = useMemo(() => {
     return !!notifications.find(notification => !notification.deleted && !notification.seen);
   }, [notifications]);
 
@@ -157,6 +157,7 @@ export default function NotificationList() {
                     <IconButton
                       onClick={e => notificationSeenUnseenHandler(e, notification)}
                       aria-label={t(`translation|Mark as read`)}
+                      size="large"
                     >
                       <Icon
                         icon="mdi:circle"

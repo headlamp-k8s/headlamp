@@ -1,3 +1,10 @@
+
+import { Theme } from '@mui/material/styles';
+
+declare module "@mui/private-theming" {
+  interface DefaultTheme extends Theme {}
+}
+
 import * as CommonComponents from './components/common';
 import * as K8s from './lib/k8s';
 import * as ApiProxy from './lib/k8s/apiProxy';

@@ -3,69 +3,65 @@
 exports[`Storyshots RuntimeClass/DetailsView Runtime Class Detail 1`] = `
 <div>
   <div
-    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
   >
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
           <span
-            class="MuiButton-label"
+            class="MuiButton-startIcon MuiButton-iconSizeSmall css-y6rp3m-MuiButton-startIcon"
           >
-            <span
-              class="MuiButton-startIcon MuiButton-iconSizeSmall"
-            >
-              <span />
-            </span>
-            <p
-              class="MuiTypography-root MuiTypography-body1"
-              style="padding-top: 3px;"
-            >
-              Back
-            </p>
+            <span />
           </span>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
+            style="padding-top: 3px;"
+          >
+            Back
+          </p>
           <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>
     </div>
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiBox-root css-p0cik4"
       >
         <div
-          class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
         >
           <div
-            class="MuiGrid-root MuiGrid-item"
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           />
           <div
-            class="MuiGrid-root MuiGrid-item"
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           >
             <div
-              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
             >
               <div
-                class="MuiGrid-root MuiGrid-item"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               />
               <div
-                class="MuiGrid-root MuiGrid-item"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               />
               <div
-                class="MuiGrid-root MuiGrid-item"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               />
               <div
-                class="MuiGrid-root MuiGrid-item"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               />
             </div>
           </div>
@@ -73,26 +69,26 @@ exports[`Storyshots RuntimeClass/DetailsView Runtime Class Detail 1`] = `
       </div>
     </div>
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiBox-root css-p0cik4"
       >
         <div
-          class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+          class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
         >
-          <div
-            class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          <span
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
             role="progressbar"
             style="width: 40px; height: 40px;"
             title="Loading resource data"
           >
             <svg
-              class="MuiCircularProgress-svg"
+              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
               viewBox="22 22 44 44"
             >
               <circle
-                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                 cx="44"
                 cy="44"
                 fill="none"
@@ -100,7 +96,7 @@ exports[`Storyshots RuntimeClass/DetailsView Runtime Class Detail 1`] = `
                 stroke-width="3.6"
               />
             </svg>
-          </div>
+          </span>
         </div>
       </div>
     </div>

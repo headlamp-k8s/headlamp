@@ -3,10 +3,10 @@
 exports[`Storyshots common/GenericError Component Message 1`] = `
 <div>
   <div
-    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+    class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column makeStyles-root css-l6hioc-MuiGrid-root"
   >
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
     >
       <img
         alt=""
@@ -14,15 +14,15 @@ exports[`Storyshots common/GenericError Component Message 1`] = `
         src="headlamp-broken.svg"
       />
       <h1
-        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+        class="MuiTypography-root MuiTypography-h1 makeStyles-h1 css-1kazmbo-MuiTypography-root"
       >
         Uh-oh! Something went wrong.
       </h1>
       <h2
-        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+        class="MuiTypography-root MuiTypography-h2 makeStyles-h2 css-1lpv617-MuiTypography-root"
       >
         <h3
-          class="MuiTypography-root MuiTypography-h3"
+          class="MuiTypography-root MuiTypography-h3 css-3hjpok-MuiTypography-root"
         >
           Not sure what to do!
         </h3>
@@ -35,10 +35,10 @@ exports[`Storyshots common/GenericError Component Message 1`] = `
 exports[`Storyshots common/GenericError Component Title 1`] = `
 <div>
   <div
-    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+    class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column makeStyles-root css-l6hioc-MuiGrid-root"
   >
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
     >
       <img
         alt=""
@@ -46,29 +46,25 @@ exports[`Storyshots common/GenericError Component Title 1`] = `
         src="headlamp-broken.svg"
       />
       <h1
-        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+        class="MuiTypography-root MuiTypography-h1 makeStyles-h1 css-1kazmbo-MuiTypography-root"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1gp6czg-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
+          Oh no!
           <span
-            class="MuiButton-label"
-          >
-            Oh no!
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </h1>
       <h2
-        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+        class="MuiTypography-root MuiTypography-h2 makeStyles-h2 css-1lpv617-MuiTypography-root"
       >
         Head back 
         <a
-          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
           href="/"
         >
           home
@@ -83,10 +79,10 @@ exports[`Storyshots common/GenericError Component Title 1`] = `
 exports[`Storyshots common/GenericError Default 1`] = `
 <div>
   <div
-    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+    class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column makeStyles-root css-l6hioc-MuiGrid-root"
   >
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
     >
       <img
         alt=""
@@ -94,16 +90,16 @@ exports[`Storyshots common/GenericError Default 1`] = `
         src="headlamp-broken.svg"
       />
       <h1
-        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+        class="MuiTypography-root MuiTypography-h1 makeStyles-h1 css-1kazmbo-MuiTypography-root"
       >
         Uh-oh! Something went wrong.
       </h1>
       <h2
-        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+        class="MuiTypography-root MuiTypography-h2 makeStyles-h2 css-1lpv617-MuiTypography-root"
       >
         Head back 
         <a
-          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
           href="/"
         >
           home
@@ -118,10 +114,10 @@ exports[`Storyshots common/GenericError Default 1`] = `
 exports[`Storyshots common/GenericError Different Image 1`] = `
 <div>
   <div
-    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+    class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column makeStyles-root css-l6hioc-MuiGrid-root"
   >
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
     >
       <img
         alt=""
@@ -129,16 +125,16 @@ exports[`Storyshots common/GenericError Different Image 1`] = `
         src="headlamp-404.svg"
       />
       <h1
-        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+        class="MuiTypography-root MuiTypography-h1 makeStyles-h1 css-1kazmbo-MuiTypography-root"
       >
         Uh-oh! Something went wrong.
       </h1>
       <h2
-        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+        class="MuiTypography-root MuiTypography-h2 makeStyles-h2 css-1lpv617-MuiTypography-root"
       >
         Head back 
         <a
-          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
           href="/"
         >
           home
@@ -153,23 +149,23 @@ exports[`Storyshots common/GenericError Different Image 1`] = `
 exports[`Storyshots common/GenericError Number Graphic 1`] = `
 <div>
   <div
-    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+    class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column makeStyles-root css-l6hioc-MuiGrid-root"
   >
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
     >
       404
       <h1
-        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+        class="MuiTypography-root MuiTypography-h1 makeStyles-h1 css-1kazmbo-MuiTypography-root"
       >
         Uh-oh! Something went wrong.
       </h1>
       <h2
-        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+        class="MuiTypography-root MuiTypography-h2 makeStyles-h2 css-1lpv617-MuiTypography-root"
       >
         Head back 
         <a
-          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
           href="/"
         >
           home
@@ -184,10 +180,10 @@ exports[`Storyshots common/GenericError Number Graphic 1`] = `
 exports[`Storyshots common/GenericError String Graphic 1`] = `
 <div>
   <div
-    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+    class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column makeStyles-root css-l6hioc-MuiGrid-root"
   >
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
     >
       <img
         alt=""
@@ -195,16 +191,16 @@ exports[`Storyshots common/GenericError String Graphic 1`] = `
         src="Oh no!"
       />
       <h1
-        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+        class="MuiTypography-root MuiTypography-h1 makeStyles-h1 css-1kazmbo-MuiTypography-root"
       >
         Uh-oh! Something went wrong.
       </h1>
       <h2
-        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+        class="MuiTypography-root MuiTypography-h2 makeStyles-h2 css-1lpv617-MuiTypography-root"
       >
         Head back 
         <a
-          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
           href="/"
         >
           home
@@ -219,10 +215,10 @@ exports[`Storyshots common/GenericError String Graphic 1`] = `
 exports[`Storyshots common/GenericError String Message 1`] = `
 <div>
   <div
-    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+    class="MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column makeStyles-root css-l6hioc-MuiGrid-root"
   >
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
     >
       <img
         alt=""
@@ -230,12 +226,12 @@ exports[`Storyshots common/GenericError String Message 1`] = `
         src="headlamp-broken.svg"
       />
       <h1
-        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+        class="MuiTypography-root MuiTypography-h1 makeStyles-h1 css-1kazmbo-MuiTypography-root"
       >
         Uh-oh! Something went wrong.
       </h1>
       <h2
-        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+        class="MuiTypography-root MuiTypography-h2 makeStyles-h2 css-1lpv617-MuiTypography-root"
       >
         Not sure what to do!
       </h2>

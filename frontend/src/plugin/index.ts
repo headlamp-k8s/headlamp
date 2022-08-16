@@ -20,9 +20,9 @@ window.pluginLib = {
   // avoid circular dependencies' issues.
   Crd: require('../lib/k8s/crd'),
   CommonComponents: require('../components/common'),
-  MuiCore: require('@material-ui/core'),
-  MuiStyles: require('@material-ui/styles'),
-  MuiLab: require('@material-ui/lab'),
+  MuiCore: require('@mui/material'),
+  MuiStyles: require('@mui/styles'),
+  MuiLab: require('@mui/lab'),
   React: require('react'),
   ReactJSX: require('react/jsx-runtime'),
   ReactDOM: require('react-dom'),

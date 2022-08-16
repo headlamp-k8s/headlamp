@@ -1,4 +1,4 @@
-import { Box, Link, Typography } from '@material-ui/core';
+import { Box, Link, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import Ingress, { IngressBackend, IngressRule } from '../../lib/k8s/ingress';

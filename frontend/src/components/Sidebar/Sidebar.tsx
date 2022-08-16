@@ -1,11 +1,11 @@
 import { InlineIcon } from '@iconify/react';
-import { Button } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Drawer from '@material-ui/core/Drawer';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Grid from '@mui/material/Grid';
+import List from '@mui/material/List';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -55,7 +55,7 @@ const useStyle = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
+    width: '56px',
     [theme.breakpoints.down('xs')]: {
       background: 'initial',
     },
@@ -63,7 +63,7 @@ const useStyle = makeStyles(theme => ({
       width: theme.spacing(0),
     },
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
+      width: '72px',
     },
     background: theme.palette.sidebarBg,
   },

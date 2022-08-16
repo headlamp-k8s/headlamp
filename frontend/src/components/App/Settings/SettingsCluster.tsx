@@ -1,6 +1,7 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Box, Chip, IconButton, TextField } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Box, Chip, IconButton, TextField } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -249,6 +250,7 @@ export default function SettingsCluster() {
                             storeNewAllowedNamespace(newAllowedNamespace);
                           }}
                           disabled={!newAllowedNamespace}
+                          size="large"
                         >
                           <InlineIcon icon="mdi:plus-circle" />
                         </IconButton>

@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { matchExpressionSimplifier, matchLabelsSimplifier } from '../../../lib/k8s';
 import { LabelSelector } from '../../../lib/k8s/cluster';
 import { useMetadataDisplayStyles } from '.';

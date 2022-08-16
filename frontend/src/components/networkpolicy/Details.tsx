@@ -1,4 +1,4 @@
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { matchExpressionSimplifier, matchLabelsSimplifier } from '../../lib/k8s';

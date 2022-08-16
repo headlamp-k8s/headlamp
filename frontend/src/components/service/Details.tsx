@@ -1,5 +1,5 @@
 import { InlineIcon } from '@iconify/react';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';

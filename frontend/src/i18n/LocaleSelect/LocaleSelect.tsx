@@ -1,8 +1,10 @@
-import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import FormControl, { FormControlProps } from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Theme, useTheme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { supportedLanguages } from '../config';
@@ -36,7 +38,7 @@ export default function LocaleSelect(props: LocaleSelectProps) {
     return getFullNames();
   }, [showFullNames]);
 
-  const changeLng = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const changeLng = (event: SelectChangeEvent<string>) => {
     const lng = event.target.value as string;
 
     i18n.changeLanguage(lng);
@@ -60,13 +62,17 @@ export default function LocaleSelect(props: LocaleSelectProps) {
     return fullNames;
   }
 
+  // Select has a problem with aria-controls not being stable under test.
+  const extraInputProps = process.env.UNDER_TEST ? { 'aria-controls': 'under-test' } : {};
+
   return (
     <FormControl className={classes.formControl} {...formControlProps}>
       {props.showTitle && <FormLabel component="legend">{t('Select locale')}</FormLabel>}
       <Select
         value={i18n.language ? i18n.language : 'en'}
         onChange={changeLng}
-        inputProps={{ 'aria-label': t('Select locale') }}
+        SelectDisplayProps={extraInputProps}
+        inputProps={{ 'aria-label': t('Select locale'), ...extraInputProps }}
       >
         {(i18n?.options?.supportedLngs || [])
           .filter(lng => lng !== 'cimode')

@@ -3,67 +3,59 @@
 exports[`Storyshots Tabs Basic Tabs 1`] = `
 <div>
   <div
-    class="MuiTabs-root"
+    class="MuiTabs-root css-1ujnqem-MuiTabs-root"
   >
     <div
-      class="MuiTabs-scrollable"
+      class="MuiTabs-scrollableX MuiTabs-hideScrollbar css-oqr85h"
       style="width: 99px; height: 99px; position: absolute; top: -9999px; overflow: scroll;"
     />
     <div
-      class="MuiTabs-scroller MuiTabs-scrollable"
+      class="MuiTabs-scroller MuiTabs-hideScrollbar MuiTabs-scrollableX css-69z67c-MuiTabs-scroller"
       style="margin-bottom: 0px;"
     >
       <div
         aria-label="Basic Tabs"
-        class="MuiTabs-flexContainer"
+        class="MuiTabs-flexContainer css-heg063-MuiTabs-flexContainer"
         role="tablist"
       >
         <button
           aria-controls="full-width-tabpanel-0-BasicTabs"
           aria-selected="true"
-          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary MuiTab-selected"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-1qhanmh-MuiButtonBase-root-MuiTab-root"
           id="full-width-tab-0-BasicTabs"
           role="tab"
           tabindex="0"
           type="button"
         >
+          tab 1 label
           <span
-            class="MuiTab-wrapper"
-          >
-            tab 1 label
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
         <button
           aria-controls="full-width-tabpanel-1-BasicTabs"
           aria-selected="false"
-          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1qhanmh-MuiButtonBase-root-MuiTab-root"
           id="full-width-tab-1-BasicTabs"
           role="tab"
           tabindex="-1"
           type="button"
         >
+          tab 2 label
           <span
-            class="MuiTab-wrapper"
-          >
-            tab 2 label
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>
       <span
-        class="PrivateTabIndicator-root PrivateTabIndicator-colorPrimary MuiTabs-indicator"
+        class="MuiTabs-indicator css-fgn50m-MuiTabs-indicator"
         style="left: 0px; width: 0px;"
       />
     </div>
   </div>
   <div
     aria-labelledby="full-width-tab-0-BasicTabs"
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
     id="full-width-tabpanel-0-BasicTabs"
     role="tabpanel"
   >
@@ -73,7 +65,7 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
   </div>
   <div
     aria-labelledby="full-width-tab-1-BasicTabs"
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
     hidden=""
     id="full-width-tabpanel-1-BasicTabs"
     role="tabpanel"
@@ -88,67 +80,59 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
 exports[`Storyshots Tabs Starting Tab 1`] = `
 <div>
   <div
-    class="MuiTabs-root"
+    class="MuiTabs-root css-1ujnqem-MuiTabs-root"
   >
     <div
-      class="MuiTabs-scrollable"
+      class="MuiTabs-scrollableX MuiTabs-hideScrollbar css-oqr85h"
       style="width: 99px; height: 99px; position: absolute; top: -9999px; overflow: scroll;"
     />
     <div
-      class="MuiTabs-scroller MuiTabs-scrollable"
+      class="MuiTabs-scroller MuiTabs-hideScrollbar MuiTabs-scrollableX css-69z67c-MuiTabs-scroller"
       style="margin-bottom: 0px;"
     >
       <div
         aria-label="Starting Tabs"
-        class="MuiTabs-flexContainer"
+        class="MuiTabs-flexContainer css-heg063-MuiTabs-flexContainer"
         role="tablist"
       >
         <button
           aria-controls="full-width-tabpanel-0-StartingTabs"
           aria-selected="false"
-          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1qhanmh-MuiButtonBase-root-MuiTab-root"
           id="full-width-tab-0-StartingTabs"
           role="tab"
           tabindex="-1"
           type="button"
         >
+          tab 1 label
           <span
-            class="MuiTab-wrapper"
-          >
-            tab 1 label
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
         <button
           aria-controls="full-width-tabpanel-1-StartingTabs"
           aria-selected="true"
-          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary MuiTab-selected"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-1qhanmh-MuiButtonBase-root-MuiTab-root"
           id="full-width-tab-1-StartingTabs"
           role="tab"
           tabindex="0"
           type="button"
         >
+          tab 2 label
           <span
-            class="MuiTab-wrapper"
-          >
-            tab 2 label
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </div>
       <span
-        class="PrivateTabIndicator-root PrivateTabIndicator-colorPrimary MuiTabs-indicator"
+        class="MuiTabs-indicator css-fgn50m-MuiTabs-indicator"
         style="left: 0px; width: 0px;"
       />
     </div>
   </div>
   <div
     aria-labelledby="full-width-tab-0-StartingTabs"
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
     hidden=""
     id="full-width-tabpanel-0-StartingTabs"
     role="tabpanel"
@@ -159,7 +143,7 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
   </div>
   <div
     aria-labelledby="full-width-tab-1-StartingTabs"
-    class="MuiTypography-root MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
     id="full-width-tabpanel-1-StartingTabs"
     role="tabpanel"
   >

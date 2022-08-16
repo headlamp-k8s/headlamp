@@ -8,7 +8,7 @@ import {
   DialogTitle,
   Input,
   InputLabel,
-} from '@material-ui/core';
+} from '@mui/material';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';

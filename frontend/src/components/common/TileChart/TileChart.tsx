@@ -1,5 +1,6 @@
 import '../../../i18n/config';
-import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Box, Paper, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { PercentageCircle, PercentageCircleProps } from '../Chart';
 import { TooltipIcon } from '../Tooltip';
 
