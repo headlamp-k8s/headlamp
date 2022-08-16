@@ -56,6 +56,8 @@ export default function Plugins() {
     fetchAndExecute()
       .finally(() => {
         dispatch(setPluginsLoadState(true));
+        // Warn the app (if we're in app mode).
+        window.desktopApi?.send('pluginsLoaded');
       })
       .catch(console.error);
   }, []);
