@@ -21,6 +21,7 @@ window.pluginLib = {
   CommonComponents: require('../components/common'),
   MuiCore: require('@material-ui/core'),
   MuiStyles: require('@material-ui/styles'),
+  MuiLab: require('@material-ui/lab'),
   React: require('react'),
   ReactJSX: require('react/jsx-runtime'),
   ReactDOM: require('react-dom'),

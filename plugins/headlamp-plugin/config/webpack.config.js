@@ -1,5 +1,6 @@
 const externalModules = {
   '@material-ui/core': 'pluginLib.MuiCore',
+  '@material-ui/lab': 'pluginLib.MuiLab',
   '@material-ui/styles': 'pluginLib.MuiStyles',
   react: 'pluginLib.React',
   'react/jsx-runtime': 'pluginLib.ReactJSX',
