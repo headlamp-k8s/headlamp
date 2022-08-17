@@ -45,21 +45,35 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
       return undefined;
     }
 
-    return ownerReferences.map((ownerRef, i) => (
-      <>
-        {ownerRef.kind in ResourceClasses ? (
-          <Link
-            routeName={new ResourceClasses[ownerRef.kind]().detailsRoute}
-            params={{ name: ownerRef.name, namespace: resource.metadata.namespace }}
-          >
-            {ownerRef.kind}: {ownerRef.name}
-          </Link>
-        ) : (
-          `${ownerRef.kind}: ${ownerRef.name}`
-        )}
-        {i < numItems - 1 && <br />}
-      </>
-    ));
+    return ownerReferences
+      .map((ownerRef, i) => {
+        if (ownerRef.kind in ResourceClasses) {
+          let routeName;
+          try {
+            routeName = new ResourceClasses[ownerRef.kind]().detailsRoute;
+          } catch (e) {
+            console.error(`Error getting routeName for {ownerRef.kind}`, e);
+            return null;
+          }
+          return (
+            <>
+              <Link
+                routeName={routeName}
+                params={{ name: ownerRef.name, namespace: resource.metadata.namespace }}
+              >
+                {ownerRef.kind}: {ownerRef.name}
+              </Link>
+              {i < numItems - 1 && <br />}
+            </>
+          );
+        }
+        return (
+          <>
+            `${ownerRef.kind}: ${ownerRef.name}`{i < numItems - 1 && <br />}
+          </>
+        );
+      })
+      .filter(element => element !== null);
   }
 
   if (typeof extraRows === 'function') {
