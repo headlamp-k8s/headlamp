@@ -3,7 +3,7 @@
   "version": "0.11.0",
   "description": "Easy-to-use and extensible Kubernetes web UI",
   "main": "electron/main.js",
-  "homepage": ".",
+  "homepage": "https://github.com/kinvolk/headlamp/#readme",
   "productName": "Headlamp",
   "scripts": {
     "compile-electron": "babel electron --out-dir electron/ --extensions .ts",
