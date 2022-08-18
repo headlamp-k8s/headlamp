@@ -18,6 +18,12 @@ RUN cd ./backend && go build -o ./headlamp-server ./cmd/
 
 # Keep npm install separated so source changes don't trigger install
 FROM base-build AS frontendinstall
+
+# We need .git and app/ in order to get the version and git version for the frontend/.env file
+# that's generated when building the frontend.
+COPY ./.git /headlamp/.git
+COPY app/package.json /headlamp/app/package.json
+
 COPY frontend/package*.json /headlamp/frontend/
 COPY frontend/patches/* /headlamp/frontend/patches/
 WORKDIR /headlamp
@@ -29,6 +35,9 @@ COPY ./frontend /headlamp/frontend
 WORKDIR /headlamp
 
 RUN cd ./frontend && npm run build
+
+RUN echo "*** Built Headlamp with version: ***"
+RUN cat ./frontend/.env
 
 # Backwards compatibility, move plugin folder to only copy matching plugins.
 RUN mv plugins plugins-old || true

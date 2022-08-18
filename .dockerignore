@@ -1,6 +1,4 @@
 **/node_modules
-.git
-app
 backend/tools/
 docs/
 **/*.stories.*
