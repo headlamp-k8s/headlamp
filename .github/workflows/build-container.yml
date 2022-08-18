@@ -6,6 +6,7 @@ on:
     - 'frontend/**'
     - Makefile
     - '.github/**'
+    - Dockerfile
 
 jobs:
   build:

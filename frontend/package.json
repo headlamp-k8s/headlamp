@@ -86,7 +86,9 @@
     "xterm-addon-fit": "^0.5.0"
   },
   "scripts": {
+    "prestart": "npm run make-version",
     "start": "react-scripts start",
+    "prebuild": "npm run make-version",
     "build": "if-env PUBLIC_URL react-scripts build || cross-env PUBLIC_URL=./ react-scripts build --max_old_space_size=768 && rimraf build/frontend/index.baseUrl.html",
     "test": "cross-env TEST_TZ=true react-scripts test",
     "eject": "react-scripts eject",
@@ -98,6 +100,7 @@
     "build-storybook": "build-storybook -s public -o ../docs/development/storybook",
     "i18n": "npx --no-install i18next ./src/**/ts* ./src/**/**/*.ts* ./src/**/**/**/*.ts* -c ./src/i18n/i18next-parser.config.js",
     "tsc": "tsc",
+    "make-version": "node ./make-env.js",
     "postinstall": "patch-package"
   },
   "browserslist": {
