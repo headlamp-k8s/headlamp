@@ -1,6 +1,6 @@
 {
   "name": "@kinvolk/headlamp-plugin",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "The needed infrastructure for building Headlamp plugins.",
   "bin": "bin/headlamp-plugin.js",
   "scripts": {
