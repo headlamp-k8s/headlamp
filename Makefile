@@ -78,7 +78,7 @@ frontend-test:
 	cd frontend && npm run test -- --coverage
 
 plugins-test:
-	cd plugins/headlamp-plugin && npm install && ./test-headlamp-plugin.sh 
+	cd plugins/headlamp-plugin && npm install && ./test-headlamp-plugin.js
 	cd plugins/headlamp-plugin && ./test-plugins-examples.sh
 
 image:
