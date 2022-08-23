@@ -34,7 +34,9 @@ Developing headlamp-plugin itself? Want to test your changes?
 
 #### Integration tests
 
-See test-headlamp-plugin.sh for some basic integration tests.
+See test-headlamp-plugin.js for some basic integration tests.
+
+See test-headlamp-plugin-published.js for testing published packages.
 
 #### linking to use local version of headlamp-plugin
 
