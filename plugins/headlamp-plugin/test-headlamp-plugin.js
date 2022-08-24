@@ -59,6 +59,35 @@ function testHeadlampPlugin() {
 
   // test type script error checks
   run('npm run tsc');
+
+  // test upgrade adds missing files
+  const filesToRemove = ['jsconfig.json', 'tsconfig.json', join('src', 'headlamp-plugin.d.ts')];
+  filesToRemove.forEach(file => {
+    fs.rmSync(join(curDir, file), { recursive: true });
+  });
+  run(`node ${join('..', 'bin', 'headlamp-plugin.js')} upgrade --skip-package-updates`);
+  checkFileExists(join(curDir, 'jsconfig.json'));
+  checkFileExists(join(curDir, 'tsconfig.json'));
+  checkFileExists(join(curDir, 'src', 'headlamp-plugin.d.ts'));
+
+  // Does it upgrade "@kinvolk/headlamp-plugin" from an old version?
+  // change @kinvolk/headlamp-plugin version in package.json to an old one "^0.4.9"
+  const packageJsonPath = join(curDir, 'package.json');
+  const packageJson = fs.readFileSync(packageJsonPath, 'utf8');
+  const changedJson = packageJson
+    .split('\n')
+    .map(line =>
+      line.includes('"@kinvolk/headlamp-plugin"') ? '"@kinvolk/headlamp-plugin": "^0.4.9"\n' : line
+    )
+    .join('\n');
+  fs.writeFileSync(packageJsonPath, changedJson);
+
+  // test upgrade updates the package line, and the old version is not in there
+  run(`node ${join('..', 'bin', 'headlamp-plugin.js')} upgrade`);
+  const oldVersion = '0.4.9';
+  if (fs.readFileSync(packageJsonPath, 'utf8').includes(oldVersion)) {
+    exit(`Error: old version still in ${packageJsonPath}`);
+  }
 }
 
 const fs = require('fs');
@@ -91,17 +120,18 @@ function run(cmd) {
       encoding: 'utf8',
     });
   } catch (e) {
-    console.error(`Error: Problem running "${cmd}" inside of "${curDir}"`);
-    cleanup();
-    process.exit(1);
+    exit(`Error: Problem running "${cmd}" inside of "${curDir}"`);
   }
 }
 function checkFileExists(fname) {
   if (!fs.existsSync(fname)) {
-    console.error(`Error: ${fname} does not exist.`);
-    cleanup();
-    process.exit(1);
+    exit(`Error: ${fname} does not exist.`);
   }
+}
+function exit(message) {
+  console.error(message);
+  cleanup();
+  process.exit(1);
 }
 
 (function () {

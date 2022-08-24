@@ -7,6 +7,7 @@ on:
     - 'Makefile'
     - '.github/**'
     - 'app/**'
+    - 'plugins/**'
   push:
     branches:
       - main
@@ -15,6 +16,7 @@ on:
     - Makefile
     - '.github/**'
     - 'app/**'
+    - 'plugins/**'
 
 jobs:
   build:
