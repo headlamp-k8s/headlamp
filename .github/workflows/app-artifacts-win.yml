@@ -63,6 +63,7 @@ jobs:
         if ("${{ inputs.signBinaries }}" -eq "true") {
           $env:ESRP_PATH="$(Get-Location)\..\Microsoft.EsrpClient.1.2.80\tools\EsrpClient.exe"
           $env:HEADLAMP_WINDOWS_CLIENT_ID="${{ secrets.WINDOWS_CLIENT_ID }}"
+          $env:HEADLAMP_WINDOWS_SIGN_EMAIL="${{ secrets.WINDOWS_SIGN_EMAIL }}"
         } else {
           echo "Not signing binaries"
         }
