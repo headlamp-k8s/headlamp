@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const SIGN_JSON_TEMPLATE = {
   Version: '1.0.0',
-  DriEmail: ['hello@kinvolk.io'],
+  DriEmail: [`${process.env.HEADLAMP_WINDOWS_SIGN_EMAIL}`],
   GroupId: null,
   CorrelationVector: null,
   SignBatches: [],
