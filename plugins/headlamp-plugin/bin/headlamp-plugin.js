@@ -664,7 +664,7 @@ yargs(process.argv.slice(2))
         });
     },
     argv => {
-      process.exitCode = lint(argv.package);
+      process.exitCode = lint(argv.package, argv.fix);
     }
   )
   .command(
