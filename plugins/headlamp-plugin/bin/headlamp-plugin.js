@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+// @ts-check
 'use strict';
 
 const webpack = require('webpack');
@@ -20,7 +20,7 @@ const headlampPluginPkg = require('../package.json');
  * Then runs npm install inside of the folder.
  *
  * @param {string} name - name of package and output folder.
- * @param {bool} link - if we link @kinvolk/headlamp-plugin for testing
+ * @param {boolean} link - if we link @kinvolk/headlamp-plugin for testing
  * @returns {0 | 1 | 2 | 3} Exit code, where 0 is success, 1, 2, and 3 are failures.
  */
 function create(name, link) {
@@ -154,7 +154,7 @@ function extract(pluginPackagesPath, outputPlugins) {
   function copyFiles(plugName, inputMainJs, mainjs) {
     if (!fs.existsSync(plugName)) {
       console.log(`Making output folder "${plugName}".`);
-      fs.mkdirSync(plugName, true);
+      fs.mkdirSync(plugName);
     }
 
     console.log(`Copying "${inputMainJs}" to "${mainjs}".`);
@@ -455,6 +455,27 @@ function upgrade(packageFolder, skipPackageUpdates) {
   }
 
   /**
+   * Runs the command (more conveniently than node).
+   *
+   * @param {string} cmd - that you want to run.
+   * @param {string} folder = folder to run inside.
+   * @returns status code, so 0 on success and failure otherwise.
+   */
+  function runCmd(cmd, folder) {
+    console.log(`Running cmd:"${cmd}" inside of ${folder}`);
+    try {
+      child_process.execSync(cmd, {
+        stdio: 'inherit',
+        encoding: 'utf8',
+      });
+    } catch (e) {
+      console.error(`Problem running ${cmd}`);
+      return e.status;
+    }
+    return 0;
+  }
+
+  /**
    * Upgrades "@kinvolk/headlamp-plugin" dependency to latest version.
    *
    * @returns true unless there is a problem with the upgrade.
@@ -465,13 +486,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
       // Upgrade the @kinvolk/headlamp-plugin
 
       const cmd = 'npm install @kinvolk/headlamp-plugin@latest --save';
-      try {
-        child_process.execSync(cmd, {
-          stdio: 'inherit',
-          encoding: 'utf8',
-        });
-      } catch (e) {
-        console.error(`Problem running ${cmd}`);
+      if (runCmd(cmd, '.')) {
         return false;
       }
     }
@@ -482,14 +497,10 @@ function upgrade(packageFolder, skipPackageUpdates) {
    * Upgrade a single package in a folder.
    *
    * @param {string} folder - where the package is.
-   * @param {boolean | undefined} - If true do not update packages.
-   * @returns true if it is successful
+   * @param {boolean | undefined} skipPackageUpdates - If true do not update packages.
+   * @returns {boolean} - true if it is successful upgrading
    */
   function upgradePackage(folder, skipPackageUpdates) {
-    if (!fs.existsSync(path.join(folder, 'package.json'))) {
-      return false;
-    }
-
     const oldCwd = process.cwd();
 
     process.chdir(folder);
@@ -498,36 +509,62 @@ function upgrade(packageFolder, skipPackageUpdates) {
     addMissingTemplateFiles();
     addMissingConfiguration();
 
-    if (skipPackageUpdates !== true && !upgradeHeadlampPlugin(skipPackageUpdates)) {
-      return false;
+    let failed = false;
+    let reason = '';
+    if (skipPackageUpdates !== true) {
+      if (!upgradeHeadlampPlugin()) {
+        failed = true;
+        reason = 'upgrading @kinvolk/headlamp-plugin failed.';
+      }
+      if (!failed && runCmd('npm audit fix', folder)) {
+        failed = true;
+        reason = '"npm audit fix" failed.';
+      }
+      if (!failed && runCmd('npm run format', folder)) {
+        failed = true;
+        reason = '"npm run format" failed.';
+      }
+      if (!failed && runCmd('npm run lint', folder)) {
+        failed = true;
+        reason = '"npm run lint" failed.';
+      }
+      if (!failed && runCmd('npm run tsc', folder)) {
+        failed = true;
+        reason = '"npm run tsc" failed';
+      }
     }
-
-    console.log(`Done upgrading: "${folder}".`);
+    if (failed) {
+      console.error(`Failed upgrading: "${folder}". Reason: ${reason}`);
+    } else {
+      console.log(`Successfully upgraded: "${folder}".`);
+    }
     process.chdir(oldCwd);
-    return true;
+    return !failed;
   }
 
   /**
    * Upgrade each package inside the folder.
    *
-   * @param {boolean | undefined} - If true do not update packages.
-   * @returns true if all of them are upgraded successfully.
+   * @param {fs.Dirent[]} packageFolders - folders to upgrade.
+   * @param {boolean | undefined} skipPackageUpdates - If true do not update packages.
+   * @returns {boolean} - true if all of them are upgraded successfully.
    */
-  function upgradeFolderOfPackages(skipPackageUpdates) {
-    const folders = fs.readdirSync(packageFolder, { withFileTypes: true }).filter(fileName => {
-      return (
-        fileName.isDirectory() &&
-        fs.existsSync(path.join(packageFolder, fileName.name, 'package.json'))
-      );
-    });
+  function upgradeFolderOfPackages(packageFolders, skipPackageUpdates) {
+    let failed = '';
 
-    folders.forEach(folder => {
-      const folderToBuild = path.join(packageFolder, folder.name);
-      if (!upgradePackage(folderToBuild, skipPackageUpdates)) {
-        console.error(`"${folderToBuild}" does not contain a package. Not upgrading.`);
+    for (const folder of packageFolders) {
+      if (failed) {
+        console.error(
+          `Skipping "${folder.name}", because "${failed}" did not upgrade successfully.`
+        );
+        continue;
       }
-    });
-    return folders.length !== 0;
+      const folderToUpgrade = path.join(packageFolder, folder.name);
+      if (!upgradePackage(folderToUpgrade, skipPackageUpdates)) {
+        failed = folderToUpgrade;
+      }
+    }
+    return !failed;
   }
 
   if (!fs.existsSync(packageFolder)) {
@@ -535,13 +572,26 @@ function upgrade(packageFolder, skipPackageUpdates) {
     return 1;
   }
 
-  if (
-    !(
-      upgradePackage(packageFolder, skipPackageUpdates) ||
-      upgradeFolderOfPackages(skipPackageUpdates)
-    )
-  ) {
-    console.error(`"${packageFolder}" does not contain a package or packages. Not upgrading.`);
+  if (fs.existsSync(path.join(packageFolder, 'package.json'))) {
+    if (!upgradePackage(packageFolder, skipPackageUpdates)) {
+      return 1;
+    }
+  } else {
+    const packageFolders = fs
+      .readdirSync(packageFolder, { withFileTypes: true })
+      .filter(fileName => {
+        return (
+          fileName.isDirectory() &&
+          fs.existsSync(path.join(packageFolder, fileName.name, 'package.json'))
+        );
+      });
+    if (packageFolders.length === 0) {
+      console.error(`"${packageFolder}" does not contain a package or packages. Not upgrading.`);
+      return 1;
+    }
+    if (!upgradeFolderOfPackages(packageFolders, skipPackageUpdates)) {
+      return 1;
+    }
   }
 
   return 0;
@@ -552,7 +602,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
  *
  * @param packageFolder {string} - folder where the package is.
  * @param fix {boolean} - automatically fix problems.
- * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
  */
 function lint(packageFolder, fix) {
   try {
@@ -669,12 +719,12 @@ yargs(process.argv.slice(2))
   )
   .command(
     'upgrade [package]',
-    'upgrade the plugin to latest headlamp-plugin. ' +
-      '<package> defaults to current working directory.',
+    'Upgrade the plugin to latest headlamp-plugin; audits, formats, lints and type checks.' +
+      '<package> defaults to current working directory. Can also be a folder of packages.',
     yargs => {
       yargs
         .positional('package', {
-          describe: 'Package to code format',
+          describe: 'Package to upgrade',
           type: 'string',
           default: '.',
         })
