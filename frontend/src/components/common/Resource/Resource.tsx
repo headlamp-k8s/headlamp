@@ -410,7 +410,7 @@ export function ConditionsTable(props: ConditionsTableProps) {
 
   return (
     <SimpleTable
-      data={(resource && resource.status && resource.status.conditions) || {}}
+      data={(resource && resource.status && resource.status.conditions) || []}
       columns={getColumns()}
     />
   );
