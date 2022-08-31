@@ -122,6 +122,7 @@ function prepareRoutes(t: (arg: string) => string) {
   ];
 
   const items = store.getState().ui.sidebar.entries;
+  const filters = store.getState().ui.sidebar.filters;
   // @todo: Find a better way to avoid modifying the objects in LIST_ITEMS.
   const routes: SidebarItemProps[] = JSON.parse(JSON.stringify(LIST_ITEMS));
 
@@ -139,8 +140,24 @@ function prepareRoutes(t: (arg: string) => string) {
 
     placement.push(item);
   }
+  // Filter the routes, if we have any filters.
+  const filteredRoutes = [];
+  for (const route of routes) {
+    const routeFiltered =
+      filters.length > 0 && filters.filter(f => f(route)).length !== filters.length;
+    if (routeFiltered) {
+      continue;
+    }
 
-  return routes;
+    const newSubList = route.subList?.filter(
+      subRoute =>
+        !(filters.length > 0 && filters.filter(f => f(subRoute)).length !== filters.length)
+    );
+    route.subList = newSubList;
+
+    filteredRoutes.push(route);
+  }
+  return filteredRoutes;
 }
 
 export default prepareRoutes;

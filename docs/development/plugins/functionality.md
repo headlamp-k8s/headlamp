@@ -128,15 +128,19 @@ Set a cluster dynamically, rather than have the backend read it from configurati
 Show a component (in Headlamps main area) at a given URL with
 [registerRoute](../api/modules/plugin_registry.md#registerRoute).
 
-- Example plugin shows [How To Register a Route](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar)
+- Example plugin shows [How To Register a Route](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar), and how to remove a route.
 - API reference for [registerRoute](../api/modules/plugin_registry.md#registerRoute)
+- API reference for [registerRouteFilter](../api/modules/plugin_registry.md#registerRouteFilter)
+
 
 ### Sidebar Item
 
 Add sidebar items (menu on the left) with
-[registerSidebarItem](../api/modules/plugin_registry.md#registerSidebarItem).
+[registerSidebarEntry](../api/modules/plugin_registry.md#registerSidebarEntry).
+Remove sidebar items with [registerSidebarEntryFilter](../api/modules/plugin_registry.md#registerSidebarEntryFilter).
 
-![screenshot of the logo being changed](./images/sidebar.png)
+![screenshot of the sidebar being changed](./images/sidebar.png)
 
-- Example plugin shows [How To add items to the sidebar](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar)
-- API reference for [registerSidebarItem](../api/modules/plugin_registry.md#registerSidebarItem)
+- Example plugin shows [How To add items to the sidebar](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar), and also how to remove sidebar items.
+- API reference for [registerSidebarEntry](../api/modules/plugin_registry.md#registerSidebarEntry)
+- API reference for [registerSidebarEntryFilter](../api/modules/plugin_registry.md#registerSidebarEntryFilter)

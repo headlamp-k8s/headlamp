@@ -14,7 +14,9 @@ import Registry, {
   registerDetailsViewHeaderAction,
   registerDetailsViewSection,
   registerRoute,
+  registerRouteFilter,
   registerSidebarEntry,
+  registerSidebarEntryFilter,
 } from '../types/plugin/registry';
 import * as CommonComponents from './CommonComponents';
 
@@ -39,5 +41,7 @@ export {
   registerDetailsViewHeaderAction,
   registerDetailsViewSection,
   registerRoute,
+  registerRouteFilter,
   registerSidebarEntry,
+  registerSidebarEntryFilter,
 };

@@ -18,8 +18,10 @@ export const CONFIG_NEW = 'CONFIG_NEW';
 export const UI_SIDEBAR_SET_SELECTED = 'UI_SIDEBAR_SET_SELECTED';
 export const UI_SIDEBAR_SET_VISIBLE = 'UI_SIDEBAR_SET_VISIBLE';
 export const UI_SIDEBAR_SET_ITEM = 'UI_SIDEBAR_SET_ITEM';
+export const UI_SIDEBAR_SET_ITEM_FILTER = 'UI_SIDEBAR_SET_ITEM_FILTER';
 export const UI_SIDEBAR_SET_EXPANDED = 'UI_SIDEBAR_SET_EXPANDED';
 export const UI_ROUTER_SET_ROUTE = 'UI_ROUTER_SET_ROUTE';
+export const UI_ROUTER_SET_ROUTE_FILTER = 'UI_ROUTER_SET_ROUTE_FILTER';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
 export const UI_SET_DETAILS_VIEW = 'UI_SET_DETAILS_VIEW';
 export const UI_APP_BAR_SET_ACTION = 'UI_APP_BAR_SET_ACTION';
@@ -124,8 +126,18 @@ export function setSidebarItem(item: SidebarEntryProps) {
   return { type: UI_SIDEBAR_SET_ITEM, item };
 }
 
+export function setSidebarItemFilter(
+  filterFunc: (entry: SidebarEntryProps) => SidebarEntryProps | null
+) {
+  return { type: UI_SIDEBAR_SET_ITEM_FILTER, filterFunc };
+}
+
 export function setRoute(routeSpec: Route) {
   return { type: UI_ROUTER_SET_ROUTE, route: routeSpec };
+}
+
+export function setRouteFilter(filterFunc: (entry: Route) => Route | null) {
+  return { type: UI_ROUTER_SET_ROUTE_FILTER, filterFunc };
 }
 
 export function setDetailsViewHeaderAction(actionFunc: HeaderActionType) {

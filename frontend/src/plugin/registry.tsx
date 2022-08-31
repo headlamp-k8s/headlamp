@@ -14,7 +14,9 @@ import {
   setDetailsView,
   setDetailsViewHeaderAction,
   setRoute,
+  setRouteFilter,
   setSidebarItem,
+  setSidebarItemFilter,
 } from '../redux/actions/actions';
 import store from '../redux/stores/store';
 
@@ -184,6 +186,42 @@ export function registerSidebarEntry({
       icon,
     })
   );
+}
+
+/**
+ * Remove sidebar menu items.
+ *
+ * @param filterFunc - a function for filtering sidebar entries.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerSidebarEntryFilter } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * registerSidebarEntryFilter(entry => (entry.name === 'workloads' ? null : entry));
+ * ```
+ */
+export function registerSidebarEntryFilter(
+  filterFunc: (entry: SidebarEntryProps) => SidebarEntryProps | null
+) {
+  store.dispatch(setSidebarItemFilter(filterFunc));
+}
+
+/**
+ * Remove routes.
+ *
+ * @param filterFunc - a function for filtering routes.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerRouteFilter } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * registerRouteFilter(route => (route.path === '/workloads' ? null : route));
+ * ```
+ */
+export function registerRouteFilter(filterFunc: (entry: Route) => Route | null) {
+  store.dispatch(setRouteFilter(filterFunc));
 }
 
 /**

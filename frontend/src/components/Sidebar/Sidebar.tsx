@@ -71,12 +71,16 @@ export default function Sidebar() {
   const isSidebarOpenUserSelected = useTypedSelector(
     state => state.ui.sidebar.isSidebarOpenUserSelected
   );
+  const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
 
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t, i18n } = useTranslation(['glossary', 'frequent']);
-  const items = React.useMemo(() => prepareRoutes(t), [sidebar.entries, i18n.language]);
+  const items = React.useMemo(
+    () => prepareRoutes(t),
+    [sidebar.entries, i18n.language, arePluginsLoaded]
+  );
   const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
 
   // Use the location to make sure the sidebar is changed, as it depends on the cluster

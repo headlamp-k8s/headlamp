@@ -12,7 +12,9 @@ import Registry, {
   registerDetailsViewHeaderAction,
   registerDetailsViewSection,
   registerRoute,
+  registerRouteFilter,
   registerSidebarEntry,
+  registerSidebarEntryFilter,
 } from './registry';
 
 window.pluginLib = {
@@ -42,7 +44,9 @@ window.pluginLib = {
   registerDetailsViewHeaderAction,
   registerDetailsViewSection,
   registerRoute,
+  registerRouteFilter,
   registerSidebarEntry,
+  registerSidebarEntryFilter,
 };
 
 // @todo: should window.plugins be private?
