@@ -14,17 +14,22 @@ import {
   UI_INITIALIZE_PLUGIN_VIEWS,
   UI_PLUGINS_LOADED,
   UI_ROUTER_SET_ROUTE,
+  UI_ROUTER_SET_ROUTE_FILTER,
   UI_SET_CLUSTER_CHOOSER_BUTTON,
   UI_SET_DETAILS_VIEW,
   UI_SET_NOTIFICATIONS,
   UI_SIDEBAR_SET_EXPANDED,
   UI_SIDEBAR_SET_ITEM,
+  UI_SIDEBAR_SET_ITEM_FILTER,
   UI_SIDEBAR_SET_SELECTED,
   UI_SIDEBAR_SET_VISIBLE,
   UI_THEME_SET,
   UI_UPDATE_NOTIFICATION,
   UI_VERSION_DIALOG_OPEN,
 } from '../actions/actions';
+
+type SidebarEntryFilterFuncType = (entry: SidebarEntryProps) => SidebarEntryProps | null;
+type RouteFilterFuncType = (entry: Route) => Route | null;
 
 export interface UIState {
   sidebar: {
@@ -36,10 +41,12 @@ export interface UIState {
     entries: {
       [propName: string]: SidebarEntryProps;
     };
+    filters: SidebarEntryFilterFuncType[];
   };
   routes: {
     [path: string]: Route;
   };
+  routeFilters: RouteFilterFuncType[];
   views: {
     details: {
       headerActions: HeaderActionType[];
@@ -90,10 +97,12 @@ export const INITIAL_STATE: UIState = {
     selected: null,
     isVisible: false,
     entries: {},
+    filters: [],
   },
   routes: {
-    // path -> component
+    // path -> Route
   },
+  routeFilters: [],
   views: {
     details: {
       headerActions: [],
@@ -135,10 +144,17 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
     case UI_SIDEBAR_SET_ITEM: {
       const entries = { ...newFilters.sidebar.entries };
       entries[action.item.name] = action.item;
-
       newFilters.sidebar = {
         ...newFilters.sidebar,
         entries,
+      };
+      break;
+    }
+    case UI_SIDEBAR_SET_ITEM_FILTER: {
+      const filters = [...newFilters.sidebar.filters, action.filterFunc];
+      newFilters.sidebar = {
+        ...newFilters.sidebar,
+        filters,
       };
       break;
     }
@@ -154,6 +170,11 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       const routes = { ...newFilters.routes };
       routes[action.route.path] = action.route;
       newFilters.routes = routes;
+      break;
+    }
+    case UI_ROUTER_SET_ROUTE_FILTER: {
+      const routeFilters = [...newFilters.routeFilters, action.filterFunc];
+      newFilters.routeFilters = routeFilters;
       break;
     }
     case UI_DETAILS_VIEW_SET_HEADER_ACTION: {

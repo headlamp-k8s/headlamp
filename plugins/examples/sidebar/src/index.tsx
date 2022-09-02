@@ -1,4 +1,9 @@
-import { registerRoute, registerSidebarEntry } from '@kinvolk/headlamp-plugin/lib';
+import {
+  registerRoute,
+  registerRouteFilter,
+  registerSidebarEntry,
+  registerSidebarEntryFilter,
+} from '@kinvolk/headlamp-plugin/lib';
 import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
 import Typography from '@material-ui/core/Typography';
 
@@ -119,3 +124,13 @@ registerRoute({
     </SectionBox>
   ),
 });
+
+// Remove "Workloads" top level sidebar menu item
+registerSidebarEntryFilter(entry => (entry.name === 'workloads' ? null : entry));
+// Remove "/workloads" route
+registerRouteFilter(route => (route.path === '/workloads' ? null : route));
+
+// Remove "Namespaces" second level sidebar menu item
+registerSidebarEntryFilter(entry => (entry.name === 'namespaces' ? null : entry));
+// Remove "/namespaces" route
+registerRouteFilter(route => (route.path === '/namespaces' ? null : route));

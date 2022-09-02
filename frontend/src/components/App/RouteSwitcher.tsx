@@ -20,38 +20,46 @@ export default function RouteSwitcher() {
   // The NotFoundRoute always has to be evaluated in the last place.
   const defaultRoutes = Object.values(getDefaultRoutes()).concat(NotFoundRoute);
   const routes = useTypedSelector(state => state.ui.routes);
+  const routeFilters = useTypedSelector(state => state.ui.routeFilters);
+  const filteredRoutes = Object.values(routes)
+    .concat(defaultRoutes)
+    .filter(
+      route =>
+        !(
+          routeFilters.length > 0 &&
+          routeFilters.filter(f => f(route)).length !== routeFilters.length
+        )
+    );
 
   return (
     <Switch>
-      {Object.values(routes)
-        .concat(defaultRoutes)
-        .map((route, index) =>
-          route.name === 'OidcAuth' ? (
-            <Route
-              path={route.path}
-              component={() => (
-                <PageTitle title={t(route.name ? route.name : route.sidebar ? route.sidebar : '')}>
-                  <route.component />
-                </PageTitle>
-              )}
-              key={index}
-            />
-          ) : (
-            <AuthRoute
-              key={index}
-              path={getRoutePath(route)}
-              sidebar={route.sidebar}
-              requiresAuth={!route.noAuthRequired}
-              requiresCluster={getRouteUseClusterURL(route)}
-              exact={!!route.exact}
-              children={
-                <PageTitle title={t(route.name ? route.name : route.sidebar ? route.sidebar : '')}>
-                  <route.component />
-                </PageTitle>
-              }
-            />
-          )
-        )}
+      {filteredRoutes.map((route, index) =>
+        route.name === 'OidcAuth' ? (
+          <Route
+            path={route.path}
+            component={() => (
+              <PageTitle title={t(route.name ? route.name : route.sidebar ? route.sidebar : '')}>
+                <route.component />
+              </PageTitle>
+            )}
+            key={index}
+          />
+        ) : (
+          <AuthRoute
+            key={index}
+            path={getRoutePath(route)}
+            sidebar={route.sidebar}
+            requiresAuth={!route.noAuthRequired}
+            requiresCluster={getRouteUseClusterURL(route)}
+            exact={!!route.exact}
+            children={
+              <PageTitle title={t(route.name ? route.name : route.sidebar ? route.sidebar : '')}>
+                <route.component />
+              </PageTitle>
+            }
+          />
+        )
+      )}
     </Switch>
   );
 }
