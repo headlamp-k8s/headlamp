@@ -260,7 +260,8 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			context := &contexts[i]
 			proxy, err := config.createProxyForContext(*context)
 			if err != nil {
-				log.Fatalf("Error setting up proxy for context %s: %s", context.Name, err)
+				log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
+				continue
 			}
 
 			fmt.Printf("\tlocalhost:%s%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name,
@@ -485,9 +486,12 @@ func (c *HeadlampConfig) createProxyForContext(context Context) (*httputil.Rever
 
 	shouldVerifyTLS := !c.insecure || cluster.shouldVerifyTLS()
 	if shouldVerifyTLS {
-		if certificate := cluster.getCAData(); certificate != nil {
-			rootCAs.AppendCertsFromPEM(certificate)
+		certificate, err := cluster.getCAData()
+		if err != nil {
+			return nil, err
 		}
+
+		rootCAs.AppendCertsFromPEM(certificate)
 	}
 
 	var certs []tls.Certificate
