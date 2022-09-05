@@ -92,7 +92,7 @@ func pathRelativeToBase(base string, dest string) string {
 	return path.Join(base, dest)
 }
 
-func (c *Cluster) getCAData() []byte {
+func (c *Cluster) getCAData() ([]byte, error) {
 	if c.config.CertificateAuthority != "" {
 		// paths inside the config are relative to the config.
 		configDir := filepath.Dir(c.config.LocationOfOrigin)
@@ -100,17 +100,19 @@ func (c *Cluster) getCAData() []byte {
 
 		pemBytes, err := ioutil.ReadFile(caPath)
 		if err == nil {
-			return pemBytes
+			return pemBytes, nil
 		}
 
-		log.Fatal("Failed to add certificate:", err)
+		log.Println("Failed to add certificate:", err)
+
+		return nil, fmt.Errorf("failed to add certificate for cluster %q: %w", c.Name, err)
 	}
 
 	if caData := c.config.CertificateAuthorityData; len(caData) > 0 {
-		return caData
+		return caData, nil
 	}
 
-	return nil
+	return nil, fmt.Errorf("no certificate authority data found for cluster %s", c.Name)
 }
 
 func (c *Cluster) shouldVerifyTLS() bool {
