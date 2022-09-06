@@ -1,0 +1,50 @@
+name: Build and publish docker extension
+on:
+  push:
+    tags:
+    - 'v*'
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: kinvolk/headlamp-extension
+jobs:
+  build_and_push_docker_extension:
+    name: Build docker extension
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install docker 
+      uses: docker-practice/actions-setup-docker@master
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Check out the repo
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Update docker image tags 
+      run: |
+        lastTag=$(git tag --list --sort=version:refname 'v*' | tail -2 | head -1)
+        latestTag=$(git tag --list --sort=version:refname 'v*' | tail -1)
+        echo "replacing ${lastTag} with ${latestTag}"
+        sed -i "s/$lastTag/$latestTag/g" ./docker-extension/Dockerfile
+        sed -i "s/$lastTag/$latestTag/g" ./docker-extension/docker-compose.yml
+    - name: Bump headlamp version and push the docker image
+      run: |
+          docker buildx create --use
+          user=${{github.actor}}
+          if [ -z $user ]; then
+            user=yolossn
+          fi
+          git config --global user.name "$user"
+          git config --global user.email "$user@users.noreply.github.com"
+          git diff
+          git add ./docker-extension/Dockerfile
+          git add ./docker-extension/docker-compose.yml
+          git status
+          lastTag=$(git tag --list --sort=version:refname 'v*' | tail -2 | head -1)
+          latestTag=$(git tag --list --sort=version:refname 'v*' | tail -1)
+          git commit --signoff -m "docker-ext: Bump Headlamp version from $lastTag to $latestTag"
+          make docker-ext
+          git log -1
+          git push origin main
