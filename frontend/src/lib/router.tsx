@@ -76,6 +76,8 @@ export interface Route {
   sidebar: string | null;
   /** Shown component for this route. */
   component: () => JSX.Element;
+  /** Hide the appbar at the top. */
+  hideAppBar?: boolean;
 }
 
 const defaultRoutes: {
