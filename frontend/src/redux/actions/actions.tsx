@@ -31,6 +31,7 @@ export const UI_PLUGINS_LOADED = 'UI_PLUGINS_LOADED';
 export const UI_VERSION_DIALOG_OPEN = 'UI_VERSION_DIALOG_OPEN';
 export const UI_BRANDING_SET_APP_LOGO = 'UI_BRANDING_SET_APP_LOGO';
 export const UI_SET_CLUSTER_CHOOSER_BUTTON = 'UI_SET_CLUSTER_CHOOSER_BUTTON';
+export const UI_HIDE_APP_BAR = 'UI_HIDE_APP_BAR';
 
 export interface BrandingProps {
   logo: AppLogoType;
@@ -112,6 +113,10 @@ export function setSidebarSelected(selected: SidebarType['selected']) {
 export function setWhetherSidebarOpen(isSidebarOpen: boolean) {
   localStorage.setItem('sidebar', JSON.stringify({ shrink: !isSidebarOpen }));
   return { type: UI_SIDEBAR_SET_EXPANDED, isSidebarOpen, isSidebarOpenUserSelected: isSidebarOpen };
+}
+
+export function setHideAppBar(hideAppBar: boolean | undefined) {
+  return { type: UI_HIDE_APP_BAR, hideAppBar };
 }
 
 export function setSidebarVisible(isVisible: SidebarType['isVisible']) {

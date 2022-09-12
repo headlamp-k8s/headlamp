@@ -41,6 +41,7 @@ export default function TopBar({}: TopBarProps) {
   const isSidebarOpenUserSelected = useTypedSelector(
     state => state.ui.sidebar.isSidebarOpenUserSelected
   );
+  const hideAppBar = useTypedSelector(state => state.ui.hideAppBar);
 
   const clustersConfig = useClustersConf();
   const cluster = useCluster();
@@ -57,6 +58,9 @@ export default function TopBar({}: TopBarProps) {
     history.push('/');
   }
 
+  if (hideAppBar) {
+    return null;
+  }
   return (
     <PureTopBar
       appBarActions={appBarActions}

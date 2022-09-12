@@ -11,6 +11,7 @@ import {
   UI_APP_BAR_SET_ACTION,
   UI_BRANDING_SET_APP_LOGO,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
+  UI_HIDE_APP_BAR,
   UI_INITIALIZE_PLUGIN_VIEWS,
   UI_PLUGINS_LOADED,
   UI_ROUTER_SET_ROUTE,
@@ -64,6 +65,7 @@ export interface UIState {
   isVersionDialogOpen: boolean;
   notifications: Notification[];
   clusterChooserButtonComponent?: ClusterChooserType;
+  hideAppBar?: boolean;
 }
 
 function setInitialSidebarOpen() {
@@ -121,6 +123,7 @@ export const INITIAL_STATE: UIState = {
     logo: null,
   },
   notifications: [],
+  hideAppBar: false,
 };
 
 function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
@@ -164,6 +167,10 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
         isSidebarOpen: action.isSidebarOpen,
         isSidebarOpenUserSelected: action.isSidebarOpenUserSelected,
       };
+      break;
+    }
+    case UI_HIDE_APP_BAR: {
+      newFilters.hideAppBar = action.hideAppBar;
       break;
     }
     case UI_ROUTER_SET_ROUTE: {

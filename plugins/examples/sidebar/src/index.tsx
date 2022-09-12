@@ -98,6 +98,7 @@ registerRoute({
       <Typography>Other feedback forms go here.</Typography>
     </SectionBox>
   ),
+  hideAppBar: true, // hide the top AppBar with this.
 });
 
 // The sidebar link URL is: /no-cluster-link
@@ -111,6 +112,7 @@ registerSidebarEntry({
 });
 
 // This component rendered at URL: /no-cluster-link
+// The AppBar at the top of the screen will not be shown for this route.
 registerRoute({
   path: '/no-cluster-link',
   sidebar: null,
@@ -123,6 +125,7 @@ registerRoute({
       <Typography>Your component here</Typography>
     </SectionBox>
   ),
+  hideAppBar: true, // hide the top AppBar with this.
 });
 
 // Remove "Workloads" top level sidebar menu item
