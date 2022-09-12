@@ -238,12 +238,15 @@ export default function Terminal(props: TerminalProps) {
         xtermRef.current.xterm.dispose();
         execRef.current?.cancel();
       }
+
+      const isWindows = ['Windows', 'Win16', 'Win32', 'WinCE'].indexOf(navigator?.platform) >= 0;
       xtermRef.current = {
         xterm: new XTerminal({
           cursorBlink: true,
           cursorStyle: 'underline',
           scrollback: 10000,
           rows: 30, // initial rows before fit
+          windowsMode: isWindows,
         }),
         connected: false,
       };
