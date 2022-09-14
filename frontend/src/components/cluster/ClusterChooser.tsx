@@ -16,6 +16,13 @@ const useClusterTitleStyle = makeStyles(theme => ({
     '&:hover': {
       color: theme.palette.text.primary,
     },
+    maxWidth: '20em',
+  },
+  clusterName: {
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    display: 'block',
   },
 }));
 
@@ -25,7 +32,9 @@ export default function ClusterChooser({ clickHandler, cluster }: ClusterChooser
 
   return (
     <Button size="large" variant="contained" onClick={clickHandler} className={classes.button}>
-      <Trans t={t}>Cluster: {{ cluster }}</Trans>
+      <span className={classes.clusterName} title={cluster}>
+        <Trans t={t}>Cluster: {{ cluster }}</Trans>
+      </span>
     </Button>
   );
 }
