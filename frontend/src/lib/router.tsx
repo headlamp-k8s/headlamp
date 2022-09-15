@@ -445,7 +445,17 @@ export const NotFoundRoute = {
 };
 
 export function getRoute(routeName: string) {
-  return defaultRoutes[routeName];
+  let routeKey = routeName;
+  for (const key in defaultRoutes) {
+    if (key.toLowerCase() === routeName.toLowerCase()) {
+      if (key !== routeName) {
+        console.warn(`Route name ${routeName} and ${key} are not matching`);
+      }
+      routeKey = key;
+      break;
+    }
+  }
+  return defaultRoutes[routeKey];
 }
 
 /**
