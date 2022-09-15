@@ -111,6 +111,12 @@ const useClusterButtonStyles = makeStyles({
     textAlign: 'center',
     paddingTop: 0,
   },
+  clusterName: {
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    display: 'block',
+  },
 });
 
 interface ClusterButtonProps extends PropsWithChildren<{}> {
@@ -129,7 +135,12 @@ function ClusterButton(props: ClusterButtonProps) {
       <Card className={classes.root}>
         <CardContent className={classes.content}>
           <Icon icon="mdi:kubernetes" width="50" height="50" color={theme.palette.primaryColor} />
-          <Typography color="textSecondary" gutterBottom>
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            className={classes.clusterName}
+            title={cluster.name}
+          >
             {cluster.name}
           </Typography>
         </CardContent>
