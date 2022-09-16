@@ -1,0 +1,220 @@
+package config
+
+import (
+	"errors"
+	"flag"
+	"fmt"
+	"io/fs"
+	"log"
+	"os"
+	"os/user"
+	"path/filepath"
+	"runtime"
+	"strings"
+
+	"github.com/knadh/koanf"
+	"github.com/knadh/koanf/providers/basicflag"
+	"github.com/knadh/koanf/providers/env"
+)
+
+const defaultPort = 4466
+
+type Config struct {
+	InCluster        bool   `koanf:"in-cluster"`
+	DevMode          bool   `koanf:"dev"`
+	InsecureSsl      bool   `koanf:"insecure-ssl"`
+	KubeConfigPath   string `koanf:"kubeconfig"`
+	StaticDir        string `koanf:"html-static-dir"`
+	PluginsDir       string `koanf:"plugins-dir"`
+	BaseURL          string `koanf:"base-url"`
+	Port             uint   `koanf:"port"`
+	ProxyURLs        string `koanf:"proxy-urls"`
+	OidcClientID     string `koanf:"oidc-client-id"`
+	OidcClientSecret string `koanf:"oidc-client-secret"`
+	OidcIdpIssuerURL string `koanf:"oidc-idp-issuer-url"`
+	OidcScopes       string `koanf:"oidc-scopes"`
+}
+
+func (c *Config) Validate() error {
+	if !c.InCluster && (c.OidcClientID != "" || c.OidcClientSecret != "" || c.OidcIdpIssuerURL != "") {
+		return errors.New(`oidc-client-id, oidc-client-secret, oidc-idp-issuer-url flags 
+		are only meant to be used in inCluster mode`)
+	}
+
+	if c.BaseURL != "" && !strings.HasPrefix(c.BaseURL, "/") {
+		return errors.New("base-url needs to start with a '/' or be empty")
+	}
+
+	return nil
+}
+
+// Parse Loads the config from flags and env.
+// env vars should start with HEADLAMP_CONFIG_ and use _ as separator
+// If a value is set both in flags and env then flag takes priority.
+// eg:
+// export HEADLAMP_CONFIG_PORT=2344
+// go run ./cmd --port=3456
+// the value of port will be 3456.
+
+//nolint:funlen
+func Parse(args []string) (*Config, error) {
+	var config Config
+
+	f := flagset()
+
+	k := koanf.New(".")
+
+	if args == nil {
+		args = []string{}
+	} else if len(args) > 0 {
+		args = args[1:]
+	}
+
+	// First Load default args from flags
+	if err := k.Load(basicflag.Provider(f, "."), nil); err != nil {
+		return nil, fmt.Errorf("error loading default config from flags: %w", err)
+	}
+
+	// Parse args
+	if err := f.Parse(args); err != nil {
+		return nil, fmt.Errorf("error parsing flags: %w", err)
+	}
+
+	// Load config from env
+	if err := k.Load(env.Provider("HEADLAMP_CONFIG_", ".", func(s string) string {
+		return strings.ReplaceAll(strings.ToLower(strings.TrimPrefix(s, "HEADLAMP_CONFIG_")), "_", "-")
+	}), nil); err != nil {
+		return nil, fmt.Errorf("error loading config from env: %w", err)
+	}
+
+	// Load only the flags that were set
+	if err := k.Load(basicflag.ProviderWithValue(f, ".", func(key string, value string) (string, interface{}) {
+		flagSet := false
+		f.Visit(func(f *flag.Flag) {
+			if f.Name == key {
+				flagSet = true
+			}
+		})
+		if flagSet {
+			return key, value
+		}
+		return "", nil
+	}), nil); err != nil {
+		return nil, fmt.Errorf("error loading config from flags: %w", err)
+	}
+
+	if err := k.Unmarshal("", &config); err != nil {
+		return nil, fmt.Errorf("error unmarshal config: %w", err)
+	}
+
+	// Validate parsed config
+	if err := config.Validate(); err != nil {
+		return nil, err
+	}
+
+	kubeConfigPath := ""
+
+	// If we don't have a specified kubeConfig path, and we are not running
+	// in-cluster, then use the default path.
+	if config.KubeConfigPath != "" {
+		kubeConfigPath = config.KubeConfigPath
+	} else if !config.InCluster {
+		kubeConfigEnv := os.Getenv("KUBECONFIG")
+		if kubeConfigEnv != "" {
+			kubeConfigPath = kubeConfigEnv
+		} else {
+			kubeConfigPath = GetDefaultKubeConfigPath()
+		}
+	}
+
+	config.KubeConfigPath = kubeConfigPath
+
+	return &config, nil
+}
+
+func flagset() *flag.FlagSet {
+	f := flag.NewFlagSet("config", flag.ContinueOnError)
+
+	f.Bool("in-cluster", false, "Set when running from a k8s cluster")
+	f.Bool("dev", false, "Allow connections from other origins")
+	f.Bool("insecure-ssl", false, "Accept/Ignore all server SSL certificates")
+
+	f.String("kubeconfig", "", "Absolute path to the kubeconfig file")
+	f.String("html-static-dir", "", "Static HTML directory to serve")
+	f.String("plugins-dir", defaultPluginDir(), "Specify the plugins directory to build the backend with")
+	f.String("base-url", "", "Base URL path. eg. /headlamp")
+	f.Uint("port", defaultPort, "Port to listen from")
+	f.String("proxy-urls", "", "Allow proxy requests to specified URLs")
+
+	f.String("oidc-client-id", "", "ClientID for OIDC")
+	f.String("oidc-client-secret", "", "ClientSecret for OIDC")
+	f.String("oidc-idp-issuer-url", "", "Identity provider issuer URL for OIDC")
+	f.String("oidc-scopes", "profile,email",
+		"A comma separated list of scopes needed from the OIDC provider")
+
+	return f
+}
+
+// Gets the default plugins-dir depending on platform.
+func defaultPluginDir() string {
+	// These are the folders we use for the default plugin-dir.
+	//  - the passed in pluginDir if it's not empty.
+	//  - "./.plugins" if it exists.
+	//  - ~/.config/Headlamp/plugins exists or it can be made
+	//  - "./.plugins" if the ~/.config/Headlamp/plugins can't be made.
+	// Windows: %APPDATA%\Headlamp\Config\plugins
+	//   (for example, C:\Users\USERNAME\AppData\Roaming\Headlamp\Config\plugins)
+	pluginDirDefault := "./.plugins"
+
+	if folderExists(pluginDirDefault) {
+		return pluginDirDefault
+	}
+
+	// https://www.npmjs.com/package/env-paths
+	// https://pkg.go.dev/os#UserConfigDir
+	userConfigDir, err := os.UserConfigDir()
+	if err != nil {
+		log.Printf("error getting user config dir: %s\n", err)
+
+		return pluginDirDefault
+	}
+
+	pluginsConfigDir := filepath.Join(userConfigDir, "Headlamp", "plugins")
+	if runtime.GOOS == "windows" {
+		// golang is wrong for config folder on windows.
+		// This matches env-paths and headlamp-plugin.
+		pluginsConfigDir = filepath.Join(userConfigDir, "Headlamp", "Config", "plugins")
+	}
+
+	fileMode := 0755
+	err = os.MkdirAll(pluginsConfigDir, fs.FileMode(fileMode))
+
+	if err != nil {
+		log.Printf("error creating plugins directory: %s\n", err)
+
+		return pluginDirDefault
+	}
+
+	return pluginsConfigDir
+}
+
+// folderExists(path) returns true if the folder exists.
+func folderExists(path string) bool {
+	info, err := os.Stat(path)
+	if os.IsNotExist(err) {
+		return false
+	}
+
+	return info.IsDir()
+}
+
+func GetDefaultKubeConfigPath() string {
+	user, err := user.Current()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	homeDirectory := user.HomeDir
+
+	return filepath.Join(homeDirectory, ".kube", "config")
+}

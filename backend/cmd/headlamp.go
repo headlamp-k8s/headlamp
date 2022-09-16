@@ -34,7 +34,7 @@ type HeadlampConfig struct {
 	devMode          bool
 	insecure         bool
 	kubeConfigPath   string
-	port             string
+	port             uint
 	staticDir        string
 	pluginDir        string
 	oidcClientID     string
@@ -264,7 +264,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 				continue
 			}
 
-			fmt.Printf("\tlocalhost:%s%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name,
+			fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name,
 				*context.cluster.getServer())
 
 			config.contextProxies[context.Name] = contextProxy{
@@ -434,7 +434,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	handler := createHeadlampHandler(config)
 
 	// Start server
-	log.Fatal(http.ListenAndServe(":"+config.port, handler))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.port), handler))
 }
 
 func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
@@ -557,17 +557,6 @@ func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.Response
 	}
 }
 
-func GetDefaultKubeConfigPath() string {
-	user, err := user.Current()
-	if err != nil {
-		log.Fatalf(err.Error())
-	}
-
-	homeDirectory := user.HomeDir
-
-	return filepath.Join(homeDirectory, ".kube", "config")
-}
-
 func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -630,7 +619,7 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 		} else {
 			fmt.Println("Created new cluster proxy:")
 		}
-		fmt.Printf("\tlocalhost:%s%s%s/{api...} -> %s\n", c.port, c.baseURL, "/clusters/"+context.Name, clusterReq.Server)
+		fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", c.port, c.baseURL, "/clusters/"+context.Name, clusterReq.Server)
 
 		w.WriteHeader(http.StatusCreated)
 		c.getConfig(w, r)
