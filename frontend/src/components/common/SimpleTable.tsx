@@ -64,10 +64,12 @@ interface SimpleTableGetterColumn extends SimpleTableColumn {
 
 export interface SimpleTableProps {
   columns: (SimpleTableGetterColumn | SimpleTableDatumColumn)[];
-  data: {
-    [dataProp: string]: any;
-    [dataProp: number]: any;
-  } | null;
+  data:
+    | {
+        [dataProp: string]: any;
+        [dataProp: number]: any;
+      }[]
+    | null;
   filterFunction?: (...args: any[]) => boolean;
   rowsPerPage?: number[];
   emptyMessage?: string;
