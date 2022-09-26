@@ -4,6 +4,7 @@ export GO111MODULE
 SERVER_EXE_EXT ?=
 DOCKER_CMD ?= docker
 DOCKER_REPO ?= ghcr.io/kinvolk
+DOCKER_EXT_REPO ?= docker.io/kinvolk
 DOCKER_IMAGE_NAME ?= headlamp
 DOCKER_IMAGE_VERSION ?= $(shell git describe --tags --always --dirty)
 DOCKER_IMAGE_BASE ?= alpine:3.15.4
@@ -87,6 +88,16 @@ image:
 	-t $(DOCKER_REPO)/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_VERSION) -f \
 	Dockerfile \
 	.
+
+docker-ext:
+	$(eval LATEST_TAG=$(shell git tag --list --sort=version:refname 'v*' | tail -1))
+	$(DOCKER_CMD) buildx build \
+	--platform=linux/amd64,linux/arm64 \
+	--push \
+	-t $(DOCKER_EXT_REPO)/$(DOCKER_IMAGE_NAME)-dd-extension:${LATEST_TAG} \
+	-t $(DOCKER_EXT_REPO)/$(DOCKER_IMAGE_NAME)-dd-extension:latest -f \
+	./docker-extension/Dockerfile \
+	./docker-extension 
 
 .PHONY: docs
 docs:
