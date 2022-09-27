@@ -1,8 +1,8 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
+import { Link } from '../common';
 import { DetailsGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
@@ -47,7 +47,20 @@ export default function RoleBindingDetails() {
                 },
                 {
                   label: t('frequent|Name'),
-                  getter: item => item.name,
+                  getter: item =>
+                    // item can hold a reference to non kube Objects
+                    // such as user and group names, in that case
+                    // dont create a link.
+                    !item?.apiGroup ? (
+                      <Link
+                        routeName={item.kind}
+                        params={{ namespace: item.namespace || namespace, name: item.name }}
+                      >
+                        {item.name}
+                      </Link>
+                    ) : (
+                      item.name
+                    ),
                 },
                 {
                   label: t('Namespace'),
