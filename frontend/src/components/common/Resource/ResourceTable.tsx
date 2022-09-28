@@ -1,6 +1,7 @@
 import { useTheme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../../lib/k8s/cluster';
+import { useFilterFunc } from '../../../lib/util';
 import { DateLabel } from '../Label';
 import Link from '../Link';
 import SimpleTable, { SimpleTableProps } from '../SimpleTable';
@@ -103,6 +104,7 @@ function Table(props: ResourceTableProps) {
       columns={cols}
       rowsPerPage={[15, 25, 50]}
       defaultSortingColumn={sortingColumn}
+      filterFunction={useFilterFunc()}
       {...otherProps}
     />
   );
