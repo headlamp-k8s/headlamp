@@ -12,8 +12,6 @@ jobs:
     name: Build docker extension
     runs-on: ubuntu-latest
     steps:
-    - name: Install docker 
-      uses: docker-practice/actions-setup-docker@master
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
