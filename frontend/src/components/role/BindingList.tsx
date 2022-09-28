@@ -17,7 +17,7 @@ export default function RoleBindingList() {
   const [clusterRoleBindingError, onClusterRoleBindingError] =
     useErrorState(setupClusterRoleBindings);
   const { t } = useTranslation(['glossary', 'frequent']);
-  const filterFunc = useFilterFunc(['.kind']);
+  const filterFunc = useFilterFunc(['.jsonData.kind']);
 
   function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
     setBindings(currentBindings => ({ ...currentBindings, [kind]: newBindings }));
