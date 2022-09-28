@@ -82,8 +82,9 @@ func (c *Cluster) getName() *string {
 
 // pathRelativeToBase returns either an absolute path, or a relative path prefixed with base.
 // Examples:
-//   pathRelativeToBase("/etc", "passwd") -> "/etc/passwd"
-//   pathRelativeToBase("/etc", "/etc/passwd") -> "/etc/passwd"
+//
+//	pathRelativeToBase("/etc", "passwd") -> "/etc/passwd"
+//	pathRelativeToBase("/etc", "/etc/passwd") -> "/etc/passwd"
 func pathRelativeToBase(base string, dest string) string {
 	if filepath.IsAbs(dest) {
 		return dest

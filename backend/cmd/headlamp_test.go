@@ -1,4 +1,4 @@
-package main //nolint:testpackage
+package main
 
 import (
 	"bytes"
@@ -111,7 +111,7 @@ func getResponse(handler http.Handler, method, url string, body interface{}) (*h
 	return rr, nil
 }
 
-// nolint:gocognit,funlen
+//nolint:gocognit,funlen
 func TestDynamicClusters(t *testing.T) {
 	tests := []struct {
 		name                string

@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-
 	conf, err := config.Parse(os.Args)
 	if err != nil {
 		log.Fatalf("Error fetching config:%v", err)
