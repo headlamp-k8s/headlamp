@@ -1,8 +1,9 @@
 name: Build and publish docker extension
 on:
-  push:
-    tags:
-    - 'v*'
+ workflow_run:
+    workflows: ["Publish container"]
+    types:
+      - completed
 env:
   REGISTRY: docker.io
   IMAGE_NAME: kinvolk/headlamp-extension
