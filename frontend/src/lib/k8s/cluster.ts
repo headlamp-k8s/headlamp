@@ -153,6 +153,14 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       return this.jsonData!.kind;
     }
 
+    get isNamespaced() {
+      return this._class().isNamespaced;
+    }
+
+    static get isNamespaced() {
+      return this.apiEndpoint.isNamespaced;
+    }
+
     static apiList<U extends KubeObject>(
       onList: (arg: U[]) => void,
       onError?: (err: ApiError) => void,
@@ -288,7 +296,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
     delete() {
       const args: string[] = [this.getName()];
-      if (this._class().apiEndpoint.isNamespaced) {
+      if (this.isNamespaced) {
         args.unshift(this.getNamespace()!);
       }
 
@@ -329,7 +337,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       const patchMethod = this._class().apiEndpoint.patch;
       const args: Parameters<typeof patchMethod> = [body];
 
-      if (this._class().apiEndpoint.isNamespaced) {
+      if (this.isNamespaced) {
         args.push(this.getNamespace());
       }
 

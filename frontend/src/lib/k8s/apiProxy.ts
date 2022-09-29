@@ -8,6 +8,7 @@
  */
 
 import { OpPatch } from 'json-patch';
+import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
 import helpers from '../../helpers';
 import store from '../../redux/stores/store';
@@ -743,17 +744,30 @@ function combinePath(base: string, path: string) {
 }
 
 export async function apply(body: KubeObjectInterface): Promise<JSON> {
-  const apiEndpoint = resourceDefToApiFactory(body);
+  let bodyToApply = body;
+  // Check if the default namespace is needed. And we need to do this before
+  // getting the apiEndpoint because it will affect the endpoint itself.
+  const { namespace } = body.metadata;
+  if (!namespace) {
+    const knownResource = ResourceClasses[body.kind];
+    if (knownResource?.isNamespaced) {
+      // Clone the param to avoid modifying the original object.
+      bodyToApply = _.cloneDeep(body);
+      bodyToApply.metadata.namespace = 'default';
+    }
+  }
+
+  const apiEndpoint = resourceDefToApiFactory(bodyToApply);
 
   try {
-    return await apiEndpoint.post(body);
+    return await apiEndpoint.post(bodyToApply);
   } catch (err) {
     // Check to see if failed because the record already exists.
     // If the failure isn't a 409 (i.e. Confilct), just rethrow.
     if ((err as ApiError).status !== 409) throw err;
 
     // We had a conflict. Try a PUT
-    return apiEndpoint.put(body);
+    return apiEndpoint.put(bodyToApply);
   }
 }
 
