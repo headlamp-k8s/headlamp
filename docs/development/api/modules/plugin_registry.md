@@ -24,7 +24,7 @@ slug: "plugin_registry"
 
 #### Defined in
 
-[plugin/registry.tsx:43](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L43)
+[plugin/registry.tsx:45](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L45)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[components/Sidebar/AppLogo.tsx:16](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/components/Sidebar/AppLogo.tsx#L16)
+[components/Sidebar/AppLogo.tsx:16](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/Sidebar/AppLogo.tsx#L16)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[components/cluster/ClusterChooser.tsx:10](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/components/cluster/ClusterChooser.tsx#L10)
+[components/cluster/ClusterChooser.tsx:10](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/cluster/ClusterChooser.tsx#L10)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:42](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L42)
+[plugin/registry.tsx:44](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L44)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/DetailsViewSection.tsx:8](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L8)
+[components/DetailsViewSection/DetailsViewSection.tsx:9](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L9)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:34](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L34)
+[plugin/registry.tsx:36](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L36)
 
 ## Functions
 
@@ -133,7 +133,7 @@ registerAppBarAction(ConsoleLogger);
 
 #### Defined in
 
-[plugin/registry.tsx:270](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L270)
+[plugin/registry.tsx:308](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L308)
 
 ___
 
@@ -166,7 +166,7 @@ More complete logo example in plugins/examples/change-logo:
 
 #### Defined in
 
-[plugin/registry.tsx:323](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L323)
+[plugin/registry.tsx:362](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L362)
 
 ___
 
@@ -199,7 +199,7 @@ registerClusterChooser(({ clickHandler, cluster }: ClusterChooserProps) => {
 
 #### Defined in
 
-[plugin/registry.tsx:345](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L345)
+[plugin/registry.tsx:384](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L384)
 
 ___
 
@@ -240,7 +240,7 @@ registerDetailsViewHeaderAction(IconAction);
 
 #### Defined in
 
-[plugin/registry.tsx:240](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L240)
+[plugin/registry.tsx:278](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L278)
 
 ___
 
@@ -266,6 +266,7 @@ registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
       </SectionBox>
     );
   }
+  return null;
 });
 ```
 
@@ -281,7 +282,7 @@ registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
 
 #### Defined in
 
-[plugin/registry.tsx:298](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L298)
+[plugin/registry.tsx:337](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L337)
 
 ___
 
@@ -321,7 +322,37 @@ registerRoute({
 
 #### Defined in
 
-[plugin/registry.tsx:212](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L212)
+[plugin/registry.tsx:250](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L250)
+
+___
+
+### registerRouteFilter
+
+▸ **registerRouteFilter**(`filterFunc`): `void`
+
+Remove routes.
+
+**`example`**
+
+```tsx
+import { registerRouteFilter } from '@kinvolk/headlamp-plugin/lib';
+
+registerRouteFilter(route => (route.path === '/workloads' ? null : route));
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `filterFunc` | (`entry`: [`Route`](../interfaces/lib_router.Route.md)) => ``null`` \| [`Route`](../interfaces/lib_router.Route.md) | a function for filtering routes. |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/registry.tsx:223](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L223)
 
 ___
 
@@ -353,4 +384,34 @@ registerSidebarEntry({ parent: 'cluster', name: 'traces', label: 'Traces', url: 
 
 #### Defined in
 
-[plugin/registry.tsx:169](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/registry.tsx#L169)
+[plugin/registry.tsx:171](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L171)
+
+___
+
+### registerSidebarEntryFilter
+
+▸ **registerSidebarEntryFilter**(`filterFunc`): `void`
+
+Remove sidebar menu items.
+
+**`example`**
+
+```tsx
+import { registerSidebarEntryFilter } from '@kinvolk/headlamp-plugin/lib';
+
+registerSidebarEntryFilter(entry => (entry.name === 'workloads' ? null : entry));
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `filterFunc` | (`entry`: [`SidebarEntryProps`](../interfaces/plugin_registry.SidebarEntryProps.md)) => ``null`` \| [`SidebarEntryProps`](../interfaces/plugin_registry.SidebarEntryProps.md) | a function for filtering sidebar entries. |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/registry.tsx:204](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L204)

@@ -14,4 +14,4 @@ slug: "lib_k8s_cluster.ApiListOptions"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:54](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L54)
+[lib/k8s/cluster.ts:54](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L54)

@@ -30,7 +30,7 @@ makeKubeObject<KubeService\>('service').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -52,7 +52,7 @@ makeKubeObject<KubeService\>('service').constructor
 
 #### Defined in
 
-[lib/k8s/service.ts:40](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/service.ts#L40)
+[lib/k8s/service.ts:40](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/service.ts#L40)
 
 ___
 
@@ -66,7 +66,7 @@ makeKubeObject<KubeService\>('service').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -80,7 +80,7 @@ makeKubeObject<KubeService\>('service').className
 
 #### Defined in
 
-[lib/k8s/service.ts:42](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/service.ts#L42)
+[lib/k8s/service.ts:42](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/service.ts#L42)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/service.ts:46](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/service.ts#L46)
+[lib/k8s/service.ts:46](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/service.ts#L46)
 
 ## Methods
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/service.ts:50](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/service.ts#L50)
+[lib/k8s/service.ts:50](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/service.ts#L50)
 
 ___
 
@@ -132,7 +132,7 @@ makeKubeObject<KubeService\>('service').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -156,7 +156,7 @@ makeKubeObject<KubeService\>('service').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -183,7 +183,7 @@ makeKubeObject<KubeService\>('service').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -209,7 +209,7 @@ makeKubeObject<KubeService\>('service').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -233,4 +233,4 @@ makeKubeObject<KubeService\>('service').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L72)

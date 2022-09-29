@@ -14,4 +14,4 @@ slug: "redux_reducers_config.ConfigState"
 
 #### Defined in
 
-[redux/reducers/config.tsx:6](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/redux/reducers/config.tsx#L6)
+[redux/reducers/config.tsx:6](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/redux/reducers/config.tsx#L6)

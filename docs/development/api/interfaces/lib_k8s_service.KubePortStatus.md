@@ -14,7 +14,7 @@ slug: "lib_k8s_service.KubePortStatus"
 
 #### Defined in
 
-[lib/k8s/service.ts:6](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/service.ts#L6)
+[lib/k8s/service.ts:6](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/service.ts#L6)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/service.ts:7](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/service.ts#L7)
+[lib/k8s/service.ts:7](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/service.ts#L7)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/service.ts:8](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/service.ts#L8)
+[lib/k8s/service.ts:8](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/service.ts#L8)

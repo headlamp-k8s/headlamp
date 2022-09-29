@@ -14,4 +14,4 @@ slug: "plugin_registry.DetailsViewSectionProps"
 
 #### Defined in
 
-[components/DetailsViewSection/DetailsViewSection.tsx:6](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L6)
+[components/DetailsViewSection/DetailsViewSection.tsx:7](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L7)
