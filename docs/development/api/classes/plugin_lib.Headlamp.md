@@ -31,7 +31,7 @@ true if Headlamp is running as a desktop app.
 
 #### Defined in
 
-[plugin/lib.ts:149](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/lib.ts#L149)
+[plugin/lib.ts:149](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/lib.ts#L149)
 
 ___
 
@@ -68,7 +68,7 @@ Headlamp.registerPlugin("aPluginIdString", myPlugin)
 
 #### Defined in
 
-[plugin/lib.ts:104](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/lib.ts#L104)
+[plugin/lib.ts:104](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/lib.ts#L104)
 
 ___
 
@@ -91,7 +91,7 @@ If Headlamp is not running as a desktop app, then this method prints an error an
 
 #### Defined in
 
-[plugin/lib.ts:133](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/lib.ts#L133)
+[plugin/lib.ts:133](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/lib.ts#L133)
 
 ___
 
@@ -120,4 +120,4 @@ a promise which completes to Headlamp's configuration (showing the list of confi
 
 #### Defined in
 
-[plugin/lib.ts:121](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/plugin/lib.ts#L121)
+[plugin/lib.ts:121](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/lib.ts#L121)

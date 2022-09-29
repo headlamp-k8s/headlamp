@@ -12,8 +12,19 @@ slug: "lib_util"
 ## Interfaces
 
 - [FilterState](../interfaces/lib_util.FilterState.md)
+- [TimeAgoOptions](../interfaces/lib_util.TimeAgoOptions.md)
 
 ## Type aliases
+
+### DateFormatOptions
+
+Ƭ **DateFormatOptions**: ``"brief"`` \| ``"mini"``
+
+#### Defined in
+
+[lib/util.ts:30](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L30)
+
+___
 
 ### DateParam
 
@@ -21,7 +32,7 @@ slug: "lib_util"
 
 #### Defined in
 
-[lib/util.ts:20](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L20)
+[lib/util.ts:28](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L28)
 
 ## Variables
 
@@ -31,7 +42,7 @@ slug: "lib_util"
 
 #### Defined in
 
-[lib/util.ts:18](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L18)
+[lib/util.ts:26](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L26)
 
 ## Functions
 
@@ -53,7 +64,7 @@ slug: "lib_util"
 
 #### Defined in
 
-[lib/util.ts:85](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L85)
+[lib/util.ts:135](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L135)
 
 ___
 
@@ -67,7 +78,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:154](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L154)
+[lib/util.ts:204](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L204)
 
 ___
 
@@ -87,7 +98,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:146](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L146)
+[lib/util.ts:196](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L196)
 
 ___
 
@@ -108,7 +119,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:34](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L34)
+[lib/util.ts:84](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L84)
 
 ___
 
@@ -128,7 +139,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:43](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L43)
+[lib/util.ts:93](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L93)
 
 ___
 
@@ -150,7 +161,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:61](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L61)
+[lib/util.ts:111](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L111)
 
 ___
 
@@ -171,7 +182,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:51](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L51)
+[lib/util.ts:101](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L101)
 
 ___
 
@@ -191,7 +202,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:47](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L47)
+[lib/util.ts:97](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L97)
 
 ___
 
@@ -211,27 +222,32 @@ ___
 
 #### Defined in
 
-[lib/util.ts:26](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L26)
+[lib/util.ts:72](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L72)
 
 ___
 
 ### timeAgo
 
-▸ **timeAgo**(`date`): `string`
+▸ **timeAgo**(`date`, `options?`): `string`
+
+Show the time passed since the given date, in the desired format.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `date` | [`DateParam`](lib_util.md#dateparam) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `date` | [`DateParam`](lib_util.md#dateparam) | The date since which to calculate the duration. |
+| `options` | [`TimeAgoOptions`](../interfaces/lib_util.TimeAgoOptions.md) | `format` takes "brief" or "mini". "brief" rounds the date and uses the largest suitable unit (e.g. "4 weeks"). "mini" uses something like "4w" (for 4 weeks). |
 
 #### Returns
 
 `string`
 
+The formatted date.
+
 #### Defined in
 
-[lib/util.ts:22](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L22)
+[lib/util.ts:43](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L43)
 
 ___
 
@@ -251,7 +267,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:166](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L166)
+[lib/util.ts:216](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L216)
 
 ___
 
@@ -283,4 +299,4 @@ ___
 
 #### Defined in
 
-[lib/util.ts:141](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/util.ts#L141)
+[lib/util.ts:191](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L191)

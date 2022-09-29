@@ -20,7 +20,7 @@ An iconify string or icon object that will be used for the sidebar's icon
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:103](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/components/Sidebar/SidebarItem.tsx#L103)
+[components/Sidebar/SidebarItem.tsx:103](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/Sidebar/SidebarItem.tsx#L103)
 
 ___
 
@@ -32,7 +32,7 @@ Label to display.
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:85](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/components/Sidebar/SidebarItem.tsx#L85)
+[components/Sidebar/SidebarItem.tsx:85](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/Sidebar/SidebarItem.tsx#L85)
 
 ___
 
@@ -44,7 +44,7 @@ Name of this SidebarItem.
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:81](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/components/Sidebar/SidebarItem.tsx#L81)
+[components/Sidebar/SidebarItem.tsx:81](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/Sidebar/SidebarItem.tsx#L81)
 
 ___
 
@@ -56,7 +56,7 @@ Name of the parent SidebarEntry.
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:89](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/components/Sidebar/SidebarItem.tsx#L89)
+[components/Sidebar/SidebarItem.tsx:89](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/Sidebar/SidebarItem.tsx#L89)
 
 ___
 
@@ -68,7 +68,7 @@ URL to go to when this item is followed.
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:93](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/components/Sidebar/SidebarItem.tsx#L93)
+[components/Sidebar/SidebarItem.tsx:93](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/Sidebar/SidebarItem.tsx#L93)
 
 ___
 
@@ -80,4 +80,4 @@ Should URL have the cluster prefix? (default=true)
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:97](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/components/Sidebar/SidebarItem.tsx#L97)
+[components/Sidebar/SidebarItem.tsx:97](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/Sidebar/SidebarItem.tsx#L97)

@@ -30,7 +30,7 @@ makeKubeObject<KubeConfigMap\>('configMap').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L76)
 
 ## Properties
 
@@ -52,7 +52,7 @@ makeKubeObject<KubeConfigMap\>('configMap').constructor
 
 #### Defined in
 
-[lib/k8s/configMap.ts:9](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/configMap.ts#L9)
+[lib/k8s/configMap.ts:9](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/configMap.ts#L9)
 
 ___
 
@@ -66,7 +66,7 @@ makeKubeObject<KubeConfigMap\>('configMap').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L77)
 
 ## Accessors
 
@@ -80,7 +80,7 @@ makeKubeObject<KubeConfigMap\>('configMap').className
 
 #### Defined in
 
-[lib/k8s/configMap.ts:11](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/configMap.ts#L11)
+[lib/k8s/configMap.ts:11](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/configMap.ts#L11)
 
 ## Methods
 
@@ -104,7 +104,7 @@ makeKubeObject<KubeConfigMap\>('configMap').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L60)
 
 ___
 
@@ -128,7 +128,7 @@ makeKubeObject<KubeConfigMap\>('configMap').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L75)
 
 ___
 
@@ -155,7 +155,7 @@ makeKubeObject<KubeConfigMap\>('configMap').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L66)
 
 ___
 
@@ -181,7 +181,7 @@ makeKubeObject<KubeConfigMap\>('configMap').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L61)
 
 ___
 
@@ -205,4 +205,4 @@ makeKubeObject<KubeConfigMap\>('configMap').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L72)
