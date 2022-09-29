@@ -88,7 +88,7 @@ Defined in  lib/k8s/apiProxy.</description>
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_crd/</guid>
       <description>Classes   CustomResourceDefinition   Interfaces   KubeCRD   Functions makeCustomResourceClass ▸ makeCustomResourceClass(args, isNamespaced): any
 Parameters    Name Type     args [group: string, version: string, pluralName: string][]   isNamespaced boolean    Returns any
-Defined in  lib/k8s/crd.ts:57 </description>
+Defined in  lib/k8s/crd.ts:56 </description>
     </item>
     
     <item>
@@ -287,7 +287,7 @@ Defined in  lib/k8s/crd.ts:57 </description>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_router/</guid>
       <description>Interfaces   Route   RouteURLProps   Variables NotFoundRoute • Const NotFoundRoute: Object
-Type declaration    Name Type     component () =&amp;gt; Element   exact boolean   name string   noAuthRequired boolean   path string   sidebar null    Defined in  lib/router.tsx:428 Functions createRouteURL ▸ createRouteURL(routeName, params?): string
+Type declaration    Name Type     component () =&amp;gt; Element   exact boolean   name string   noAuthRequired boolean   path string   sidebar null    Defined in  lib/router.tsx:438 Functions createRouteURL ▸ createRouteURL(routeName, params?): string
 Parameters    Name Type     routeName string   params RouteURLProps     Returns string</description>
     </item>
     
@@ -297,10 +297,11 @@ Parameters    Name Type     routeName string   params RouteURLProps     Returns 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util/</guid>
-      <description>Namespaces   auth   units   Interfaces   FilterState   Type aliases DateParam Ƭ DateParam: string | number | Date
-Defined in  lib/util.ts:20 Variables CLUSTER_ACTION_GRACE_PERIOD • Const CLUSTER_ACTION_GRACE_PERIOD: 5000
-Defined in  lib/util.ts:18 Functions filterResource ▸ filterResource(item, filter, matchCriteria?): boolean
-Parameters    Name Type     item KubeObjectInterface    filter FilterState    matchCriteria? string[]    Returns boolean</description>
+      <description>Namespaces   auth   units   Interfaces   FilterState   TimeAgoOptions   Type aliases DateFormatOptions Ƭ DateFormatOptions: &amp;quot;brief&amp;quot; | &amp;quot;mini&amp;quot;
+Defined in  lib/util.ts:30  DateParam Ƭ DateParam: string | number | Date
+Defined in  lib/util.ts:28 Variables CLUSTER_ACTION_GRACE_PERIOD • Const CLUSTER_ACTION_GRACE_PERIOD: 5000
+Defined in  lib/util.ts:26 Functions filterResource ▸ filterResource(item, filter, matchCriteria?): boolean
+Parameters    Name Type     item KubeObjectInterface    filter FilterState    matchCriteria?</description>
     </item>
     
     <item>
@@ -319,7 +320,7 @@ Parameters    Name Type     item KubeObjectInterface    filter FilterState    ma
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/plugin_registry/</guid>
       <description>Classes   Registry   Interfaces   AppLogoProps   ClusterChooserProps   DetailsViewSectionProps   SectionFuncProps   SidebarEntryProps   Type aliases AppBarActionType Ƭ AppBarActionType: HeaderActionType
-Defined in  plugin/registry.tsx:43  AppLogoType Ƭ AppLogoType: React.ComponentType&amp;lt; AppLogoProps &amp;gt; | ReactElement | null
+Defined in  plugin/registry.tsx:45  AppLogoType Ƭ AppLogoType: React.ComponentType&amp;lt; AppLogoProps &amp;gt; | ReactElement | null
 Defined in  components/Sidebar/AppLogo.tsx:16  ClusterChooserType Ƭ ClusterChooserType: React.ComponentType&amp;lt; ClusterChooserProps &amp;gt; | ReactElement | null
 Defined in  components/cluster/ClusterChooser.tsx:10  DetailsViewHeaderActionType Ƭ DetailsViewHeaderActionType: HeaderActionType
 Defined in  plugin/registry.</description>

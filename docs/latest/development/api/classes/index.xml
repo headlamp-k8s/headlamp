@@ -297,7 +297,7 @@ Constructors constructor • new Registry()
 Methods registerAppBarAction ▸ registerAppBarAction(actionName, actionFunc): void
 deprecated Registry.registerAppBarAction is deprecated. Please use registerAppBarAction.
 Parameters    Name Type     actionName string   actionFunc (&amp;hellip;args: any[]) =&amp;gt; null | Element    Returns void
-Defined in  plugin/registry.tsx:91  registerAppLogo ▸ registerAppLogo(logo): void
+Defined in  plugin/registry.tsx:93  registerAppLogo ▸ registerAppLogo(logo): void
 deprecated Registry.registerAppLogo is deprecated. Please use registerAppLogo.
 Parameters    Name Type     logo AppLogoType     Returns void</description>
     </item>

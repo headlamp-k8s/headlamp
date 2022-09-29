@@ -2778,7 +2778,7 @@
 <p>
 
 
-<a href="https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/router.tsx#L428" target="_blank" rel="noopener">lib/router.tsx:428</a>
+<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L438" target="_blank" rel="noopener">lib/router.tsx:438</a>
 </p>
 <h2 id="functions">Functions</h2>
 <h3 id="createrouteurl">createRouteURL</h3>
@@ -2812,7 +2812,7 @@
 <p>
 
 
-<a href="https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/router.tsx#L457" target="_blank" rel="noopener">lib/router.tsx:457</a>
+<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L496" target="_blank" rel="noopener">lib/router.tsx:496</a>
 </p>
 <hr>
 <h3 id="getdefaultroutes">getDefaultRoutes</h3>
@@ -2823,7 +2823,7 @@
 <p>
 
 
-<a href="https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/router.tsx#L487" target="_blank" rel="noopener">lib/router.tsx:487</a>
+<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L528" target="_blank" rel="noopener">lib/router.tsx:528</a>
 </p>
 <hr>
 <h3 id="getroute">getRoute</h3>
@@ -2857,7 +2857,7 @@
 <p>
 
 
-<a href="https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/router.tsx#L437" target="_blank" rel="noopener">lib/router.tsx:437</a>
+<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L447" target="_blank" rel="noopener">lib/router.tsx:447</a>
 </p>
 <hr>
 <h3 id="getroutepath">getRoutePath</h3>
@@ -2887,7 +2887,40 @@
 <p>
 
 
-<a href="https://github.com/kinvolk/headlamp/blob/f70c8787/frontend/src/lib/router.tsx#L441" target="_blank" rel="noopener">lib/router.tsx:441</a>
+<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L480" target="_blank" rel="noopener">lib/router.tsx:480</a>
+</p>
+<hr>
+<h3 id="getrouteuseclusterurl">getRouteUseClusterURL</h3>
+<p>▸ <strong>getRouteUseClusterURL</strong>(<code>route</code>): <code>boolean</code></p>
+<p>Should the route use a cluster URL?</p>
+<h4 id="parameters-3">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>route</code></td>
+<td style="text-align:left">
+
+
+<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_router.route/"><code>Route</code></a>
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="returns-4">Returns</h4>
+<p><code>boolean</code></p>
+<p>true when a cluster URL contains cluster in the URL. eg. /c/minikube/my-url
+false, the URL does not contain the cluster. eg. /my-url</p>
+<h4 id="defined-in-5">Defined in</h4>
+<p>
+
+
+<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L468" target="_blank" rel="noopener">lib/router.tsx:468</a>
 </p>
 
 
@@ -2957,6 +2990,7 @@
         <li><a href="#getdefaultroutes">getDefaultRoutes</a></li>
         <li><a href="#getroute">getRoute</a></li>
         <li><a href="#getroutepath">getRoutePath</a></li>
+        <li><a href="#getrouteuseclusterurl">getRouteUseClusterURL</a></li>
       </ul>
     </li>
   </ul>

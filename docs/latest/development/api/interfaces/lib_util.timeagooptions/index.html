@@ -8,8 +8,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Interface: KubeContainer | Headlamp</title>
-    <meta name="description" content="Interface: KubeContainer" />
+    <title>Interface: TimeAgoOptions | Headlamp</title>
+    <meta name="description" content="Interface: TimeAgoOptions" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;600;700&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
@@ -25,9 +25,9 @@
     <meta name="generator" content="Hugo 0.89.0" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Headlamp%!(EXTRA string= %s, string=Interface: KubeContainer)" />
-<meta property="og:description" content="Headlamp%!(EXTRA string= %s, string=Interface: KubeContainer)" />
-<meta property="og:url" content="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainer/" />
+<meta property="og:title" content="Headlamp%!(EXTRA string= %s, string=Interface: TimeAgoOptions)" />
+<meta property="og:description" content="Headlamp%!(EXTRA string= %s, string=Interface: TimeAgoOptions)" />
+<meta property="og:url" content="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_util.timeagooptions/" />
 <meta property="og:site_name" content="Headlamp" />
 <meta property="article:modified_time" content="2021-11-02T10:00:18Z" /><link rel="stylesheet" href="https://kinvolk.github.io/headlamp/css/font-awesome.min.css">
 
@@ -38,7 +38,7 @@
 </head>
 <body class="docs page">
 
-    <title>Interface: KubeContainer | Headlamp</title>
+    <title>Interface: TimeAgoOptions | Headlamp</title>
   </head>
   <body class="td-page">
     <a class="sr-only sr-only-focusable" href="#content">Skip to content</a>
@@ -1319,7 +1319,7 @@
             
             
             <li class="show">
-              <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docslatestdevelopmentapiinterfaceslib_k8s_clusterkubecontainer"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainer/">
+              <a class="td-sidebar-link td-sidebar-link__page " id="m-docslatestdevelopmentapiinterfaceslib_k8s_clusterkubecontainer"   href="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainer/">
                 KubeContainer
               </a>
             </li>
@@ -2667,7 +2667,7 @@
 	
 	
 	
-	<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainer/">KubeContainer</a>
+	<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_util.timeagooptions/">TimeAgoOptions</a>
 </li>
 
 	</ol>
@@ -2710,7 +2710,7 @@
             
     <div class="td-content">
     
-  <h1>Interface: KubeContainer</h1>
+  <h1>Interface: TimeAgoOptions</h1>
   
 
 
@@ -2726,158 +2726,20 @@
 <p>
 
 
-<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_cluster/">lib/k8s/cluster</a>
-.KubeContainer</p>
+<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util/">lib/util</a>
+.TimeAgoOptions</p>
 <h2 id="properties">Properties</h2>
-<h3 id="args">args</h3>
-<p>• <code>Optional</code> <strong>args</strong>: <code>string</code>[]</p>
+<h3 id="format">format</h3>
+<p>• <code>Optional</code> <strong>format</strong>: 
+
+
+<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_util/#dateformatoptions"><code>DateFormatOptions</code></a>
+</p>
 <h4 id="defined-in">Defined in</h4>
 <p>
 
 
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L425" target="_blank" rel="noopener">lib/k8s/cluster.ts:425</a>
-</p>
-<hr>
-<h3 id="command">command</h3>
-<p>• <code>Optional</code> <strong>command</strong>: <code>string</code>[]</p>
-<h4 id="defined-in-1">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L424" target="_blank" rel="noopener">lib/k8s/cluster.ts:424</a>
-</p>
-<hr>
-<h3 id="env">env</h3>
-<p>• <code>Optional</code> <strong>env</strong>: { <code>name</code>: <code>string</code> ; <code>value?</code>: <code>string</code> ; <code>valueFrom?</code>: { <code>configMapKeyRef?</code>: { <code>key</code>: <code>string</code> ; <code>name</code>: <code>string</code>  } ; <code>fieldRef?</code>: { <code>apiVersion</code>: <code>string</code> ; <code>fieldPath</code>: <code>string</code>  } ; <code>secretKeyRef?</code>: { <code>key</code>: <code>string</code> ; <code>name</code>: <code>string</code>  }  }  }[]</p>
-<h4 id="defined-in-2">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L441" target="_blank" rel="noopener">lib/k8s/cluster.ts:441</a>
-</p>
-<hr>
-<h3 id="envfrom">envFrom</h3>
-<p>• <code>Optional</code> <strong>envFrom</strong>: { <code>configMapRef?</code>: { <code>name</code>: <code>string</code>  }  }[]</p>
-<h4 id="defined-in-3">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L459" target="_blank" rel="noopener">lib/k8s/cluster.ts:459</a>
-</p>
-<hr>
-<h3 id="image">image</h3>
-<p>• <strong>image</strong>: <code>string</code></p>
-<h4 id="defined-in-4">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L423" target="_blank" rel="noopener">lib/k8s/cluster.ts:423</a>
-</p>
-<hr>
-<h3 id="imagepullpolicy">imagePullPolicy</h3>
-<p>• <strong>imagePullPolicy</strong>: <code>string</code></p>
-<h4 id="defined-in-5">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L471" target="_blank" rel="noopener">lib/k8s/cluster.ts:471</a>
-</p>
-<hr>
-<h3 id="livenessprobe">livenessProbe</h3>
-<p>• <code>Optional</code> <strong>livenessProbe</strong>: 
-
-
-<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainerprobe/"><code>KubeContainerProbe</code></a>
-</p>
-<h4 id="defined-in-6">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L469" target="_blank" rel="noopener">lib/k8s/cluster.ts:469</a>
-</p>
-<hr>
-<h3 id="name">name</h3>
-<p>• <strong>name</strong>: <code>string</code></p>
-<h4 id="defined-in-7">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L422" target="_blank" rel="noopener">lib/k8s/cluster.ts:422</a>
-</p>
-<hr>
-<h3 id="ports">ports</h3>
-<p>• <strong>ports</strong>: { <code>containerPort</code>: <code>number</code> ; <code>name?</code>: <code>string</code> ; <code>protocol</code>: <code>string</code>  }[]</p>
-<h4 id="defined-in-8">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L426" target="_blank" rel="noopener">lib/k8s/cluster.ts:426</a>
-</p>
-<hr>
-<h3 id="readinessprobe">readinessProbe</h3>
-<p>• <code>Optional</code> <strong>readinessProbe</strong>: 
-
-
-<a href="https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainerprobe/"><code>KubeContainerProbe</code></a>
-</p>
-<h4 id="defined-in-9">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L470" target="_blank" rel="noopener">lib/k8s/cluster.ts:470</a>
-</p>
-<hr>
-<h3 id="resources">resources</h3>
-<p>• <code>Optional</code> <strong>resources</strong>: <code>Object</code></p>
-<h4 id="type-declaration">Type declaration</h4>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>limits</code></td>
-<td style="text-align:left">{ <code>cpu</code>: <code>string</code> ; <code>memory</code>: <code>string</code>  }</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>limits.cpu</code></td>
-<td style="text-align:left"><code>string</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>limits.memory</code></td>
-<td style="text-align:left"><code>string</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>requests</code></td>
-<td style="text-align:left">{ <code>cpu</code>: <code>string</code> ; <code>memory</code>: <code>string</code>  }</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>requests.cpu</code></td>
-<td style="text-align:left"><code>string</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>requests.memory</code></td>
-<td style="text-align:left"><code>string</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="defined-in-10">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L431" target="_blank" rel="noopener">lib/k8s/cluster.ts:431</a>
-</p>
-<hr>
-<h3 id="volumemounts">volumeMounts</h3>
-<p>• <code>Optional</code> <strong>volumeMounts</strong>: { <code>mountPath</code>: <code>string</code> ; <code>name</code>: <code>string</code> ; <code>readOnly</code>: <code>boolean</code>  }[]</p>
-<h4 id="defined-in-11">Defined in</h4>
-<p>
-
-
-<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L464" target="_blank" rel="noopener">lib/k8s/cluster.ts:464</a>
+<a href="https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L33" target="_blank" rel="noopener">lib/util.ts:33</a>
 </p>
 
 
@@ -2898,7 +2760,7 @@
                 
                 
                 <a
-                  href="https://github.com/kinvolk/headlamp/edit/main/docs/development/api/interfaces/lib_k8s_cluster.KubeContainer.md"
+                  href="https://github.com/kinvolk/headlamp/edit/main/docs/development/api/interfaces/lib_util.TimeAgoOptions.md"
                   class="btn btn-md mt-2"
                   style="border: 2px solid #afafaf; padding: 4px 2px; font-weight: inherit;"
                 >
@@ -2932,27 +2794,6 @@
 
 
 
-
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#properties">Properties</a>
-      <ul>
-        <li><a href="#args">args</a></li>
-        <li><a href="#command">command</a></li>
-        <li><a href="#env">env</a></li>
-        <li><a href="#envfrom">envFrom</a></li>
-        <li><a href="#image">image</a></li>
-        <li><a href="#imagepullpolicy">imagePullPolicy</a></li>
-        <li><a href="#livenessprobe">livenessProbe</a></li>
-        <li><a href="#name">name</a></li>
-        <li><a href="#ports">ports</a></li>
-        <li><a href="#readinessprobe">readinessProbe</a></li>
-        <li><a href="#resources">resources</a></li>
-        <li><a href="#volumemounts">volumeMounts</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
 
 
 

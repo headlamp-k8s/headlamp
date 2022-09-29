@@ -17,7 +17,7 @@
 Hierarchy   Error
 ↳ ApiError
   Properties status • status: number
-Defined in  lib/k8s/apiProxy.ts:758 </description>
+Defined in  lib/k8s/apiProxy.ts:775 </description>
     </item>
     
     <item>
@@ -98,11 +98,11 @@ Defined in  components/cluster/ClusterChooser.tsx:7 </description>
       <description>lib/k8s/apiProxy .ClusterRequest
 Properties certificateAuthorityData • Optional certificateAuthorityData: string
 The certificate authority data
-Defined in  lib/k8s/apiProxy.ts:41  insecureTLSVerify • Optional insecureTLSVerify: boolean
+Defined in  lib/k8s/apiProxy.ts:43  insecureTLSVerify • Optional insecureTLSVerify: boolean
 Whether the server&amp;rsquo;s certificate should not be checked for validity
-Defined in  lib/k8s/apiProxy.ts:39  name • name: string
+Defined in  lib/k8s/apiProxy.ts:41  name • name: string
 The name of the cluster (has to be unique, or it will override an existing cluster)
-Defined in  lib/k8s/apiProxy.ts:35  server • server: string
+Defined in  lib/k8s/apiProxy.ts:37  server • server: string
 The cluster URL</description>
     </item>
     
@@ -118,7 +118,7 @@ Hierarchy   Action
   Properties config • config: Object
 Type declaration    Name Type     clusters null | { [clusterName: string]: Cluster ; }    Defined in  redux/reducers/config.tsx:16  type • type: string
 Inherited from Action.type
-Defined in  redux/actions/actions.tsx:73 </description>
+Defined in  redux/actions/actions.tsx:77 </description>
     </item>
     
     <item>
@@ -140,7 +140,7 @@ Defined in  redux/reducers/config.tsx:6 </description>
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.detailsviewsectionprops/</guid>
       <description> plugin/registry .DetailsViewSectionProps
 Properties resource • resource: any
-Defined in  components/DetailsViewSection/DetailsViewSection.tsx:6 </description>
+Defined in  components/DetailsViewSection/DetailsViewSection.tsx:7 </description>
     </item>
     
     <item>
@@ -152,10 +152,10 @@ Defined in  components/DetailsViewSection/DetailsViewSection.tsx:6 </description
       <description>lib/k8s/pod .ExecOptions
 Hierarchy    StreamArgs ↳ ExecOptions
   Properties additionalProtocols • Optional additionalProtocols: string[]
-Inherited from  StreamArgs . additionalProtocols Defined in  lib/k8s/apiProxy.ts:611  command • Optional command: string[]
+Inherited from  StreamArgs . additionalProtocols Defined in  lib/k8s/apiProxy.ts:615  command • Optional command: string[]
 Defined in  lib/k8s/pod.ts:33  isJson • Optional isJson: boolean
-Inherited from  StreamArgs . isJson Defined in  lib/k8s/apiProxy.ts:610  reconnectOnFailure • Optional reconnectOnFailure: boolean
-Inherited from  StreamArgs . reconnectOnFailure Defined in  lib/k8s/apiProxy.ts:613 Methods connectCb ▸ Optional connectCb(): void</description>
+Inherited from  StreamArgs . isJson Defined in  lib/k8s/apiProxy.ts:614  reconnectOnFailure • Optional reconnectOnFailure: boolean
+Inherited from  StreamArgs . reconnectOnFailure Defined in  lib/k8s/apiProxy.ts:617 Methods connectCb ▸ Optional connectCb(): void</description>
     </item>
     
     <item>
@@ -166,8 +166,8 @@ Inherited from  StreamArgs . reconnectOnFailure Defined in  lib/k8s/apiProxy.ts:
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_util.filterstate/</guid>
       <description> lib/util .FilterState
 Properties namespaces • namespaces: Set&amp;lt;string&amp;gt;
-Defined in  lib/util.ts:81  search • search: string
-Defined in  lib/util.ts:82 </description>
+Defined in  lib/util.ts:131  search • search: string
+Defined in  lib/util.ts:132 </description>
     </item>
     
     <item>
@@ -178,13 +178,13 @@ Defined in  lib/util.ts:82 </description>
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecondition/</guid>
       <description> lib/k8s/cluster .KubeCondition
 Properties lastProbeTime • lastProbeTime: number
-Defined in  lib/k8s/cluster.ts:395  lastTransitionTime • Optional lastTransitionTime: string
-Defined in  lib/k8s/cluster.ts:396  lastUpdateTime • Optional lastUpdateTime: string
-Defined in  lib/k8s/cluster.ts:397  message • Optional message: string
-Defined in  lib/k8s/cluster.ts:399  reason • Optional reason: string
-Defined in  lib/k8s/cluster.ts:398  status • status: string
-Defined in  lib/k8s/cluster.ts:394  type • type: string
-Defined in  lib/k8s/cluster.ts:393 </description>
+Defined in  lib/k8s/cluster.ts:414  lastTransitionTime • Optional lastTransitionTime: string
+Defined in  lib/k8s/cluster.ts:415  lastUpdateTime • Optional lastUpdateTime: string
+Defined in  lib/k8s/cluster.ts:416  message • Optional message: string
+Defined in  lib/k8s/cluster.ts:418  reason • Optional reason: string
+Defined in  lib/k8s/cluster.ts:417  status • status: string
+Defined in  lib/k8s/cluster.ts:413  type • type: string
+Defined in  lib/k8s/cluster.ts:412 </description>
     </item>
     
     <item>
@@ -208,9 +208,9 @@ Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  me
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainer/</guid>
       <description>lib/k8s/cluster .KubeContainer
 Properties args • Optional args: string[]
-Defined in  lib/k8s/cluster.ts:406  command • Optional command: string[]
-Defined in  lib/k8s/cluster.ts:405  env • Optional env: { name: string ; value?: string ; valueFrom?: { configMapKeyRef?: { key: string ; name: string } ; fieldRef?: { apiVersion: string ; fieldPath: string } ; secretKeyRef?: { key: string ; name: string } } }[]
-Defined in  lib/k8s/cluster.ts:422  envFrom • Optional envFrom: { configMapRef?</description>
+Defined in  lib/k8s/cluster.ts:425  command • Optional command: string[]
+Defined in  lib/k8s/cluster.ts:424  env • Optional env: { name: string ; value?: string ; valueFrom?: { configMapKeyRef?: { key: string ; name: string } ; fieldRef?: { apiVersion: string ; fieldPath: string } ; secretKeyRef?: { key: string ; name: string } } }[]
+Defined in  lib/k8s/cluster.ts:441  envFrom • Optional envFrom: { configMapRef?</description>
     </item>
     
     <item>
@@ -221,8 +221,8 @@ Defined in  lib/k8s/cluster.ts:422  envFrom • Optional envFrom: { configMapRef
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainerprobe/</guid>
       <description>lib/k8s/cluster .KubeContainerProbe
 Properties exec • Optional exec: Object
-Type declaration    Name Type     command string[]    Defined in  lib/k8s/cluster.ts:462  failureThreshold • Optional failureThreshold: number
-Defined in  lib/k8s/cluster.ts:472  httpGet • Optional httpGet: Object
+Type declaration    Name Type     command string[]    Defined in  lib/k8s/cluster.ts:481  failureThreshold • Optional failureThreshold: number
+Defined in  lib/k8s/cluster.ts:491  httpGet • Optional httpGet: Object
 Type declaration    Name Type     host? string   path? string   port number   scheme string    Defined in  lib/k8s/cluster.</description>
     </item>
     
@@ -234,13 +234,13 @@ Type declaration    Name Type     host? string   path? string   port number   sc
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainerstatus/</guid>
       <description>lib/k8s/cluster .KubeContainerStatus
 Properties containerID • containerID: string
-Defined in  lib/k8s/cluster.ts:501  image • image: string
-Defined in  lib/k8s/cluster.ts:502  imageID • imageID: string
-Defined in  lib/k8s/cluster.ts:503  lastState • lastState: string
-Defined in  lib/k8s/cluster.ts:504  name • name: string
-Defined in  lib/k8s/cluster.ts:505  ready • ready: boolean
-Defined in  lib/k8s/cluster.ts:506  restartCount • restartCount: number
-Defined in  lib/k8s/cluster.ts:507  state • state: Object</description>
+Defined in  lib/k8s/cluster.ts:520  image • image: string
+Defined in  lib/k8s/cluster.ts:521  imageID • imageID: string
+Defined in  lib/k8s/cluster.ts:522  lastState • lastState: string
+Defined in  lib/k8s/cluster.ts:523  name • name: string
+Defined in  lib/k8s/cluster.ts:524  ready • ready: boolean
+Defined in  lib/k8s/cluster.ts:525  restartCount • restartCount: number
+Defined in  lib/k8s/cluster.ts:526  state • state: Object</description>
     </item>
     
     <item>
@@ -380,8 +380,8 @@ Defined in  lib/k8s/cluster.</description>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemetrics/</guid>
       <description>lib/k8s/cluster .KubeMetrics
-Properties metadata • metadata: KubeMetadata Defined in  lib/k8s/cluster.ts:487  status • status: Object
-Type declaration    Name Type     capacity { cpu: string ; memory: string }   capacity.cpu string   capacity.memory string    Defined in  lib/k8s/cluster.ts:492  usage • usage: Object
+Properties metadata • metadata: KubeMetadata Defined in  lib/k8s/cluster.ts:506  status • status: Object
+Type declaration    Name Type     capacity { cpu: string ; memory: string }   capacity.cpu string   capacity.memory string    Defined in  lib/k8s/cluster.ts:511  usage • usage: Object
 Type declaration    Name Type     cpu string   memory string    Defined in  lib/k8s/cluster.</description>
     </item>
     
@@ -664,9 +664,9 @@ Type declaration    Name Type     audiences string[]   expirationSeconds number 
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.labelselector/</guid>
       <description> lib/k8s/cluster .LabelSelector
 Properties matchExpressions • Optional matchExpressions: Object
-Type declaration    Name Type     key string   operator string   values string[]    Defined in  lib/k8s/cluster.ts:476  matchLabels • Optional matchLabels: Object
+Type declaration    Name Type     key string   operator string   values string[]    Defined in  lib/k8s/cluster.ts:495  matchLabels • Optional matchLabels: Object
 Index signature ▪ [key: string]: string
-Defined in  lib/k8s/cluster.ts:481 </description>
+Defined in  lib/k8s/cluster.ts:500 </description>
     </item>
     
     <item>
@@ -678,7 +678,7 @@ Defined in  lib/k8s/cluster.ts:481 </description>
       <description> lib/k8s/apiProxy .RequestParams
 Indexable ▪ [prop: string]: any
 Properties timeout • Optional timeout: number
-Defined in  lib/k8s/apiProxy.ts:29 </description>
+Defined in  lib/k8s/apiProxy.ts:31 </description>
     </item>
     
     <item>
@@ -690,12 +690,13 @@ Defined in  lib/k8s/apiProxy.ts:29 </description>
       <description>lib/router .Route
 Properties exact • Optional exact: boolean
 When true, will only match if the path matches the location.pathname exactly.
-Defined in  lib/router.tsx:61  name • Optional name: string
+Defined in  lib/router.tsx:61  hideAppBar • Optional hideAppBar: boolean
+Hide the appbar at the top.
+Defined in  lib/router.tsx:80  name • Optional name: string
 Human readable name. Capitalized and short.
 Defined in  lib/router.tsx:63  noAuthRequired • Optional noAuthRequired: boolean
 This route does not require Authentication.
-Defined in  lib/router.tsx:67  noCluster • Optional noCluster: boolean
-In case this route does not need a cluster prefix and context.</description>
+Defined in  lib/router.</description>
     </item>
     
     <item>
@@ -707,7 +708,7 @@ In case this route does not need a cluster prefix and context.</description>
       <description> lib/router .RouteURLProps
 Indexable ▪ [prop: string]: any
 Properties cluster • Optional cluster: string
-Defined in  lib/router.tsx:453 </description>
+Defined in  lib/router.tsx:492 </description>
     </item>
     
     <item>
@@ -718,9 +719,9 @@ Defined in  lib/router.tsx:453 </description>
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.sectionfuncprops/</guid>
       <description> plugin/registry .SectionFuncProps
 Properties title • title: string
-Defined in  plugin/registry.tsx:22 Methods component ▸ component(props): null | Element
+Defined in  plugin/registry.tsx:24 Methods component ▸ component(props): null | Element
 Parameters    Name Type     props Object   props.resource any    Returns null | Element
-Defined in  plugin/registry.tsx:23 </description>
+Defined in  plugin/registry.tsx:25 </description>
     </item>
     
     <item>
@@ -750,13 +751,13 @@ Defined in  components/Sidebar/SidebarItem.tsx:81  parent • Optional parent: n
       <description> lib/k8s/apiProxy .StreamArgs
 Hierarchy   StreamArgs
 ↳ ExecOptions   Properties additionalProtocols • Optional additionalProtocols: string[]
-Defined in  lib/k8s/apiProxy.ts:611  isJson • Optional isJson: boolean
-Defined in  lib/k8s/apiProxy.ts:610  reconnectOnFailure • Optional reconnectOnFailure: boolean
-Defined in  lib/k8s/apiProxy.ts:613 Methods connectCb ▸ Optional connectCb(): void
+Defined in  lib/k8s/apiProxy.ts:615  isJson • Optional isJson: boolean
+Defined in  lib/k8s/apiProxy.ts:614  reconnectOnFailure • Optional reconnectOnFailure: boolean
+Defined in  lib/k8s/apiProxy.ts:617 Methods connectCb ▸ Optional connectCb(): void
 Returns void
-Defined in  lib/k8s/apiProxy.ts:612  failCb ▸ Optional failCb(): void
+Defined in  lib/k8s/apiProxy.ts:616  failCb ▸ Optional failCb(): void
 Returns void
-Defined in  lib/k8s/apiProxy.ts:614 </description>
+Defined in  lib/k8s/apiProxy.ts:618 </description>
     </item>
     
     <item>
@@ -767,6 +768,16 @@ Defined in  lib/k8s/apiProxy.ts:614 </description>
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.stringdict/</guid>
       <description>lib/k8s/cluster .StringDict
 Indexable ▪ [key: string]: string</description>
+    </item>
+    
+    <item>
+      <title>Interface: TimeAgoOptions</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_util.timeagooptions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_util.timeagooptions/</guid>
+      <description> lib/util .TimeAgoOptions
+Properties format • Optional format: DateFormatOptions Defined in  lib/util.ts:33 </description>
     </item>
     
   </channel>
