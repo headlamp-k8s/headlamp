@@ -1,18 +1,13 @@
 import '../../../i18n/config';
-import { useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
-import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Editor, { loader } from '@monaco-editor/react';
 import * as yaml from 'js-yaml';
 import React from 'react';
@@ -20,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
 import { getThemeName } from '../../../lib/themes';
 import ConfirmButton from '../ConfirmButton';
+import { Dialog, DialogProps } from '../Dialog';
 import Loader from '../Loader';
 import Tabs from '../Tabs';
 import DocsViewer from './DocsViewer';
@@ -72,8 +68,6 @@ export default function EditorDialog(props: EditorDialogProps) {
   const { i18n } = useTranslation();
   const [lang, setLang] = React.useState(i18n.language);
   const classes = useStyle();
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const themeName = getThemeName();
 
   const [originalCode, setOriginalCode] = React.useState('');
@@ -214,20 +208,14 @@ export default function EditorDialog(props: EditorDialogProps) {
       : t('resource|Edit: {{ itemName }}', { itemName });
   }
 
-  const focusedRef = React.useCallback(node => {
-    if (node !== null) {
-      node.setAttribute('tabindex', '-1');
-      node.focus();
-    }
-  }, []);
-
   return (
     <Dialog
+      title={dialogTitle}
       aria-busy={!item}
       maxWidth="lg"
       scroll="paper"
       fullWidth
-      fullScreen={fullScreen}
+      withFullScreen
       onClose={onClose}
       {...other}
       aria-labelledby="editor-dialog-title"
@@ -236,33 +224,23 @@ export default function EditorDialog(props: EditorDialogProps) {
         <Loader title={t('Loading editor')} />
       ) : (
         <React.Fragment>
-          <Grid container spacing={0}>
-            <Grid item xs={6}>
-              <DialogTitle id="editor-dialog-title" ref={focusedRef}>
-                {dialogTitle}
-              </DialogTitle>
-            </Grid>
-            <Grid xs={6} item>
-              <Box display="flex" flexDirection="row-reverse">
-                <Box p={1}>
-                  <FormGroup row>
-                    <FormControlLabel
-                      control={
-                        <Switch
-                          checked={useSimpleEditor}
-                          onChange={() => setUseSimpleEditor(!useSimpleEditor)}
-                          name="useSimpleEditor"
-                        />
-                      }
-                      label="Use minimal editor"
-                    />
-                  </FormGroup>
-                </Box>
-              </Box>
-            </Grid>
-          </Grid>
-
           <DialogContent className={classes.dialogContent}>
+            <Box display="flex" flexDirection="row-reverse">
+              <Box p={1}>
+                <FormGroup row>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={useSimpleEditor}
+                        onChange={() => setUseSimpleEditor(!useSimpleEditor)}
+                        name="useSimpleEditor"
+                      />
+                    }
+                    label="Use minimal editor"
+                  />
+                </FormGroup>
+              </Box>
+            </Box>
             {isReadOnly() ? (
               makeEditor()
             ) : (
