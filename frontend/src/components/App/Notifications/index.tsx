@@ -71,6 +71,7 @@ function NotificationsList(props: {
   const classes = useStyles();
   const history = useHistory();
   const theme = useTheme();
+  const config = useTypedSelector(state => state.config);
 
   if (!notifications || notifications.length === 0) {
     return <Empty>{t(`notifications|You don't have any notifications right now`)}</Empty>;
@@ -132,7 +133,21 @@ function NotificationsList(props: {
             </Grid>
           )}
           <Grid item md={12}>
-            <DateLabel date={notification.date} />
+            <Box display={'flex'} alignItems="center">
+              {Object.entries(config?.clusters || {}).length > 1 && notification.cluster && (
+                <Box
+                  border={1}
+                  p={0.5}
+                  mr={1}
+                  textOverflow="ellipsis"
+                  overflow={'hidden'}
+                  whiteSpace="nowrap"
+                >
+                  {notification.cluster}
+                </Box>
+              )}
+              <DateLabel date={notification.date} />
+            </Box>
           </Grid>
         </Grid>
       </ListItem>
@@ -186,7 +201,7 @@ export default function Notifications() {
 
           const message = event.message;
           const date = new Date(event.metadata.creationTimestamp).getTime();
-          const notification = new Notification(message, date);
+          const notification = new Notification({ message, date });
           notification.id = event.metadata.uid;
           notification.url = createRouteURL('cluster') + `?eventsFilter=${notification.id}`;
 
