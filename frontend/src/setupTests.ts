@@ -10,3 +10,6 @@ if (typeof TextDecoder === 'undefined' && typeof require !== 'undefined') {
 if (typeof TextEncoder === 'undefined' && typeof require !== 'undefined') {
   (global as any).TextEncoder = require('util').TextEncoder;
 }
+if (typeof ResizeObserver === 'undefined' && typeof require !== 'undefined') {
+  (global as any).ResizeObserver = require('resize-observer-polyfill');
+}
