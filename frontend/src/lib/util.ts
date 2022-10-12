@@ -167,10 +167,10 @@ export function filterResource(
 
       // Include matches values in the criteria
       values.forEach((value: any) => {
-        if (typeof value === 'string') {
+        if (typeof value === 'string' || typeof value === 'number') {
           // Don't use empty string, otherwise it'll match everything
           if (value !== '') {
-            usedMatchCriteria.push(value.toLowerCase());
+            usedMatchCriteria.push(value.toString().toLowerCase());
           }
         } else if (Array.isArray(value)) {
           value.forEach((elem: any) => {

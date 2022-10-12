@@ -200,6 +200,7 @@ const podData = {
         selfLink: '0',
         namespace: 'MyNamespace0',
       },
+      someNumber: 0,
     },
     {
       kind: 'CustomResourceDefinition',
@@ -215,6 +216,7 @@ const podData = {
           mylabel1: 'myvalue1',
         },
       },
+      someNumber: 10,
     },
     {
       kind: 'CustomResourceDefinition',
@@ -230,6 +232,7 @@ const podData = {
           mykey2: 'mylabel',
         },
       },
+      someNumber: 20,
     },
     {
       kind: 'CustomResourceDefinition',
@@ -245,6 +248,7 @@ const podData = {
           mykey3: 'myvalue3',
         },
       },
+      someNumber: 30,
     },
   ],
   defaultSortingColumn: 1,
@@ -278,6 +282,29 @@ export const NamespaceSelect = TemplateWithFilter.bind({});
 NamespaceSelect.args = {
   simpleTableArgs: podData,
   namespaces: ['MyNamespace0', 'MyNamespace1'],
+};
+
+export const NumberSearch = TemplateWithFilter.bind({});
+NumberSearch.args = {
+  simpleTableArgs: {
+    ...podData,
+    matchCriteria: ['.someNumber'],
+    columns: [
+      {
+        label: 'Name',
+        getter: (item: KubeObjectInterface) => item.metadata.name,
+      },
+      {
+        label: 'Namespace',
+        getter: (item: KubeObjectInterface) => item.metadata.namespace,
+      },
+      {
+        label: 'Number',
+        datum: 'someNumber',
+      },
+    ],
+  },
+  search: '30',
 };
 
 // emptyMessage
