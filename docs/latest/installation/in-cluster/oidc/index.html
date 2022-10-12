@@ -2720,10 +2720,10 @@
 <p><img src="https://kinvolk.github.io/headlamp/docs/latest/installation/in-cluster/./oidc_button.png" alt="screenshot the login dialog for a cluster"></p>
 <p>For OIDC to be used, Headlamp needs to know how to configure it, so you have to provide the different OIDC-related arguments to Headlamp from your OIDC provider. Those are:</p>
 <ul>
-<li>the client ID: <code>-oidc-client-id</code></li>
-<li>the client secret: <code>-oidc-client-secret</code></li>
-<li>the issuer URL: <code>-oidc-idp-issuer-url</code></li>
-<li>(optionally) the OpenId scopes: <code>-oidc-scopes</code></li>
+<li>the client ID: <code>-oidc-client-id</code> or env var <code>HEADLAMP_CONFIG_OIDC_CLIENT_ID</code></li>
+<li>the client secret: <code>-oidc-client-secret</code> or env var <code>HEADLAMP_CONFIG_OIDC_CLIENT_SECRET</code></li>
+<li>the issuer URL: <code>-oidc-idp-issuer-url</code> or env var <code>HEADLAMP_CONFIG_OIDC_IDP_ISSUER_URL</code></li>
+<li>(optionally) the OpenId scopes: <code>-oidc-scopes</code> or env var <code>HEADLAMP_CONFIG_OIDC_SCOPES</code></li>
 </ul>
 <p>and you have to tell the OIDC provider about the callback URL, which in Headlamp it is your URL + the <code>/oidc-callback</code> path, e.g.:
 <code>https://YOUR_URL/oidc-callback</code>.</p>
