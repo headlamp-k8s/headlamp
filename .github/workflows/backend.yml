@@ -30,8 +30,13 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2.3.3
 
+    - name: setup and run golangci-lint 
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: v1.49.0
+        working-directory: backend
+
     - name: Lint, Build & Check
       run: |
         cd $GITHUB_WORKSPACE
-        make backend-lint
         make backend

@@ -8,6 +8,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"io/fs"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -34,7 +35,7 @@ type HeadlampConfig struct {
 	devMode          bool
 	insecure         bool
 	kubeConfigPath   string
-	port             string
+	port             uint
 	staticDir        string
 	pluginDir        string
 	oidcClientID     string
@@ -113,7 +114,8 @@ func fileExists(filename string) bool {
 // copy a file, whilst doing some search/replace on the data.
 func copyReplace(src string, dst string,
 	search []byte, replace []byte,
-	search2 []byte, replace2 []byte) {
+	search2 []byte, replace2 []byte,
+) {
 	data, err := ioutil.ReadFile(src)
 	if err != nil {
 		log.Fatal(err)
@@ -121,8 +123,9 @@ func copyReplace(src string, dst string,
 
 	data1 := bytes.ReplaceAll(data, search, replace)
 	data2 := bytes.ReplaceAll(data1, search2, replace2)
+	fileMode := 0600
 
-	err = ioutil.WriteFile(dst, data2, 0600)
+	err = ioutil.WriteFile(dst, data2, fs.FileMode(fileMode))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -187,7 +190,7 @@ func serveWithNoCacheHeader(fs http.Handler) http.HandlerFunc {
 	}
 }
 
-// nolint:gocognit,funlen,gocyclo
+//nolint:gocognit,funlen,gocyclo
 func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	kubeConfigPath := config.kubeConfigPath
 
@@ -264,7 +267,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 				continue
 			}
 
-			fmt.Printf("\tlocalhost:%s%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name,
+			fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name,
 				*context.cluster.getServer())
 
 			config.contextProxies[context.Name] = contextProxy{
@@ -316,7 +319,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		cluster := r.URL.Query().Get("cluster")
 		if config.insecure {
 			tr := &http.Transport{
-				TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // nolint:gosec
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, //nolint:gosec
 			}
 			insecureClient := &http.Client{Transport: tr}
 			ctx = oidc.ClientContext(ctx, insecureClient)
@@ -365,7 +368,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			http.Error(w, "invalid request state is empty", http.StatusBadRequest)
 			return
 		}
-		// nolint: nestif
+		//nolint:nestif
 		if oauthConfig, ok := oauthRequestMap[state]; ok {
 			oauth2Token, err := oauthConfig.Config.Exchange(oauthConfig.Ctx, r.URL.Query().Get("code"))
 			if err != nil {
@@ -434,7 +437,7 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	handler := createHeadlampHandler(config)
 
 	// Start server
-	log.Fatal(http.ListenAndServe(":"+config.port, handler))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.port), handler)) //nolint:gosec
 }
 
 func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
@@ -519,7 +522,7 @@ func (c *HeadlampConfig) createProxyForContext(context Context) (*httputil.Rever
 	}
 
 	tls := &tls.Config{
-		InsecureSkipVerify: shouldVerifyTLS, // nolint:gosec
+		InsecureSkipVerify: shouldVerifyTLS, //nolint:gosec
 		RootCAs:            rootCAs,
 		Certificates:       certs,
 	}
@@ -555,17 +558,6 @@ func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.Response
 		log.Println("Requesting ", request.URL.String())
 		proxy.ServeHTTP(writer, request)
 	}
-}
-
-func GetDefaultKubeConfigPath() string {
-	user, err := user.Current()
-	if err != nil {
-		log.Fatalf(err.Error())
-	}
-
-	homeDirectory := user.HomeDir
-
-	return filepath.Join(homeDirectory, ".kube", "config")
 }
 
 func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
@@ -630,7 +622,7 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 		} else {
 			fmt.Println("Created new cluster proxy:")
 		}
-		fmt.Printf("\tlocalhost:%s%s%s/{api...} -> %s\n", c.port, c.baseURL, "/clusters/"+context.Name, clusterReq.Server)
+		fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", c.port, c.baseURL, "/clusters/"+context.Name, clusterReq.Server)
 
 		w.WriteHeader(http.StatusCreated)
 		c.getConfig(w, r)
