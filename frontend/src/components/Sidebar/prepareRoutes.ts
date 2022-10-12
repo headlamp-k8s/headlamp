@@ -91,6 +91,10 @@ function prepareRoutes(t: (arg: string) => string) {
           label: t('glossary|Services'),
         },
         {
+          name: 'endpoints',
+          label: t('glossary|Endpoints'),
+        },
+        {
           name: 'ingresses',
           label: t('glossary|Ingresses'),
         },
