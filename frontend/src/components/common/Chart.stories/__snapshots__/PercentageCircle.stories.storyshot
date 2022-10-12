@@ -69,6 +69,8 @@ exports[`Storyshots Charts/PercentageCircle Percent 50 1`] = `
         viewBox="0 0 160 160"
         width="160"
       >
+        <title />
+        <desc />
         <defs>
           <clippath
             id="recharts7-clip"
@@ -151,6 +153,8 @@ exports[`Storyshots Charts/PercentageCircle Percent 100 1`] = `
         viewBox="0 0 160 160"
         width="160"
       >
+        <title />
+        <desc />
         <defs>
           <clippath
             id="recharts5-clip"
