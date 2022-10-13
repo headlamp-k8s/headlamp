@@ -517,8 +517,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
         reason = 'upgrading @kinvolk/headlamp-plugin failed.';
       }
       if (!failed && runCmd('npm audit fix', folder)) {
-        failed = true;
-        reason = '"npm audit fix" failed.';
+        console.warn('"npm audit fix" failed. You may need to inspect your dependencies manually.');
       }
       if (!failed && runCmd('npm run format', folder)) {
         failed = true;
