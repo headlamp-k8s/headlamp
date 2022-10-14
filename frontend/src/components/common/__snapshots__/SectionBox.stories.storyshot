@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots SectionBox Custom Title 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root"
   >
@@ -22,9 +20,7 @@ exports[`Storyshots SectionBox Custom Title 1`] = `
 `;
 
 exports[`Storyshots SectionBox Header Props 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root"
   >
@@ -53,9 +49,7 @@ exports[`Storyshots SectionBox Header Props 1`] = `
 `;
 
 exports[`Storyshots SectionBox Titled 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root"
   >
@@ -84,9 +78,7 @@ exports[`Storyshots SectionBox Titled 1`] = `
 `;
 
 exports[`Storyshots SectionBox Titled Children 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root"
   >
@@ -119,9 +111,7 @@ exports[`Storyshots SectionBox Titled Children 1`] = `
 `;
 
 exports[`Storyshots SectionBox With Children 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root"
   >

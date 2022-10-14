@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Label/InfoLabel Info Label 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
   >

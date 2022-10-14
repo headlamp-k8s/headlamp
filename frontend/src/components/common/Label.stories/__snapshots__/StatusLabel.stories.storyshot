@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Label/StatusLabel Error 1`] = `
-<div
-  id="root"
->
+<div>
   <span
     class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
     style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
@@ -14,9 +12,7 @@ exports[`Storyshots Label/StatusLabel Error 1`] = `
 `;
 
 exports[`Storyshots Label/StatusLabel Success 1`] = `
-<div
-  id="root"
->
+<div>
   <span
     class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
     style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
@@ -27,9 +23,7 @@ exports[`Storyshots Label/StatusLabel Success 1`] = `
 `;
 
 exports[`Storyshots Label/StatusLabel Warning 1`] = `
-<div
-  id="root"
->
+<div>
   <span
     class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
     style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"

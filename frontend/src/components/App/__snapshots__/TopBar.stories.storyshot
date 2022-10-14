@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots TopBar No Token 1`] = `
-<div
-  id="root"
->
+<div>
   <nav
     aria-label="Appbar Tools"
     class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar makeStyles-appbar mui-fixed MuiPaper-elevation1"
@@ -116,9 +114,7 @@ exports[`Storyshots TopBar No Token 1`] = `
 `;
 
 exports[`Storyshots TopBar One Cluster 1`] = `
-<div
-  id="root"
->
+<div>
   <nav
     aria-label="Appbar Tools"
     class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar makeStyles-appbar mui-fixed MuiPaper-elevation1"
@@ -231,9 +227,7 @@ exports[`Storyshots TopBar One Cluster 1`] = `
 `;
 
 exports[`Storyshots TopBar Token 1`] = `
-<div
-  id="root"
->
+<div>
   <nav
     aria-label="Appbar Tools"
     class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar makeStyles-appbar mui-fixed MuiPaper-elevation1"
@@ -346,9 +340,7 @@ exports[`Storyshots TopBar Token 1`] = `
 `;
 
 exports[`Storyshots TopBar Two Cluster 1`] = `
-<div
-  id="root"
->
+<div>
   <nav
     aria-label="Appbar Tools"
     class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar makeStyles-appbar mui-fixed MuiPaper-elevation1"

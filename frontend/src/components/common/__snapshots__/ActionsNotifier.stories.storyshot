@@ -1,15 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots ActionsNotifier None 1`] = `
-<div
-  id="root"
-/>
-`;
+exports[`Storyshots ActionsNotifier None 1`] = `<div />`;
 
 exports[`Storyshots ActionsNotifier Some 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="makeStyles-bottom makeStyles-left makeStyles-root"
   >

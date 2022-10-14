@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Tabs Basic Tabs 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiTabs-root"
   >
@@ -88,9 +86,7 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
 `;
 
 exports[`Storyshots Tabs Starting Tab 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiTabs-root"
   >

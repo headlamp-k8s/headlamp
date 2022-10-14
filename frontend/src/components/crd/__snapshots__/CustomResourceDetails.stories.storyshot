@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots crd/CustomResourceDetails Error Getting CR 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root"
   >
@@ -17,9 +15,7 @@ exports[`Storyshots crd/CustomResourceDetails Error Getting CR 1`] = `
 `;
 
 exports[`Storyshots crd/CustomResourceDetails Error Getting CRD 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root"
   >
@@ -33,9 +29,7 @@ exports[`Storyshots crd/CustomResourceDetails Error Getting CRD 1`] = `
 `;
 
 exports[`Storyshots crd/CustomResourceDetails Loading CRD 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
   >
@@ -64,9 +58,7 @@ exports[`Storyshots crd/CustomResourceDetails Loading CRD 1`] = `
 `;
 
 exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
   >
@@ -89,7 +81,22 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
             <span
               class="MuiButton-startIcon MuiButton-iconSizeSmall"
             >
-              <span />
+              <svg
+                aria-hidden="true"
+                class="iconify iconify--mdi"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <path
+                  d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6l6 6l1.41-1.42Z"
+                  fill="currentColor"
+                />
+              </svg>
             </span>
             <p
               class="MuiTypography-root MuiTypography-body1"
@@ -130,10 +137,45 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                   class="MuiGrid-root MuiGrid-item"
                 >
                   <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    aria-label="Edit"
+                    class="MuiButtonBase-root MuiIconButton-root"
                     tabindex="0"
-                    title="View YAML"
+                    title="Edit"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="iconify iconify--mdi"
+                        height="1em"
+                        preserveAspectRatio="xMidYMid meet"
+                        role="img"
+                        viewBox="0 0 24 24"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                      >
+                        <path
+                          d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="Delete"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Delete"
                     type="button"
                   >
                     <span
@@ -145,10 +187,8 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                       class="MuiTouchRipple-root"
                     />
                   </button>
+                  <div />
                 </div>
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
               </div>
             </div>
           </div>
@@ -244,7 +284,22 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                         title="My description"
                       >
                         mycustomresource
-                        <span />
+                        <svg
+                          aria-hidden="true"
+                          class="makeStyles-icon iconify iconify--mdi"
+                          height="1rem"
+                          preserveAspectRatio="xMidYMid meet"
+                          role="img"
+                          viewBox="0 0 24 24"
+                          width="1rem"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                        >
+                          <path
+                            d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2v6Z"
+                            fill="currentColor"
+                          />
+                        </svg>
                       </p>
                     </td>
                   </tr>

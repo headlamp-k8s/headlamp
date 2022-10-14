@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots pods/PodListRenderer Pods 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root"
   >
@@ -37,7 +35,22 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
               <span
                 class="MuiIconButton-label"
               >
-                <span />
+                <svg
+                  aria-hidden="true"
+                  class="iconify iconify--mdi"
+                  height="1em"
+                  preserveAspectRatio="xMidYMid meet"
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <path
+                    d="M6 13h12v-2H6M3 6v2h18V6M10 18h4v-2h-4v2Z"
+                    fill="currentColor"
+                  />
+                </svg>
               </span>
               <span
                 class="MuiTouchRipple-root"
@@ -76,7 +89,22 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
                   <span
                     class="MuiIconButton-label"
                   >
-                    <span />
+                    <svg
+                      aria-hidden="true"
+                      class="iconify iconify--mdi"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      role="img"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <path
+                        d="m12 6l-5 5h10l-5-5m-5 7l5 5l5-5H7Z"
+                        fill="currentColor"
+                      />
+                    </svg>
                   </span>
                   <span
                     class="MuiTouchRipple-root"
@@ -97,7 +125,22 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
                   <span
                     class="MuiIconButton-label"
                   >
-                    <span />
+                    <svg
+                      aria-hidden="true"
+                      class="iconify iconify--mdi"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      role="img"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <path
+                        d="m12 6l-5 5h10l-5-5m-5 7l5 5l5-5H7Z"
+                        fill="currentColor"
+                      />
+                    </svg>
                   </span>
                   <span
                     class="MuiTouchRipple-root"
@@ -118,7 +161,22 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
                   <span
                     class="MuiIconButton-label"
                   >
-                    <span />
+                    <svg
+                      aria-hidden="true"
+                      class="iconify iconify--mdi"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      role="img"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <path
+                        d="m12 6l-5 5h10l-5-5m-5 7l5 5l5-5H7Z"
+                        fill="currentColor"
+                      />
+                    </svg>
                   </span>
                   <span
                     class="MuiTouchRipple-root"
@@ -139,7 +197,22 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
                   <span
                     class="MuiIconButton-label"
                   >
-                    <span />
+                    <svg
+                      aria-hidden="true"
+                      class="iconify iconify--mdi"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      role="img"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <path
+                        d="m12 6l-5 5h10l-5-5m-5 7l5 5l5-5H7Z"
+                        fill="currentColor"
+                      />
+                    </svg>
                   </span>
                   <span
                     class="MuiTouchRipple-root"
@@ -161,7 +234,22 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
                   <span
                     class="MuiIconButton-label"
                   >
-                    <span />
+                    <svg
+                      aria-hidden="true"
+                      class="iconify iconify--mdi"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      role="img"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <path
+                        d="m7 15l5-5l5 5H7Z"
+                        fill="currentColor"
+                      />
+                    </svg>
                   </span>
                   <span
                     class="MuiTouchRipple-root"
@@ -220,7 +308,23 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
                   title="4/25/2022, 12:00:00 AM UTC"
                 >
                   3mo
-                  <span />
+                  <svg
+                    aria-hidden="true"
+                    class="makeStyles-icon iconify iconify--mdi"
+                    height="1rem"
+                    preserveAspectRatio="xMidYMid meet"
+                    role="img"
+                    style="color: rgb(97, 97, 97);"
+                    viewBox="0 0 24 24"
+                    width="1rem"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                  >
+                    <path
+                      d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"
+                      fill="currentColor"
+                    />
+                  </svg>
                 </p>
               </td>
             </tr>

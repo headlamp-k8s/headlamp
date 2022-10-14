@@ -1,33 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots common/ErrorBoundary Broken Fallback 1`] = `
-<div
-  id="root"
->
+<div>
   disabled under test to avoid console spam
 </div>
 `;
 
 exports[`Storyshots common/ErrorBoundary Broken Fallback Element 1`] = `
-<div
-  id="root"
->
+<div>
   disabled under test to avoid console spam
 </div>
 `;
 
 exports[`Storyshots common/ErrorBoundary Broken No Fallback 1`] = `
-<div
-  id="root"
->
+<div>
   disabled under test to avoid console spam
 </div>
 `;
 
 exports[`Storyshots common/ErrorBoundary No Problem 1`] = `
-<div
-  id="root"
->
+<div>
   <i>
     This is not failing.
   </i>

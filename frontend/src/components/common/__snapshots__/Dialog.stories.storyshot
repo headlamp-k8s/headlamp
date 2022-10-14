@@ -2,24 +2,24 @@
 
 exports[`Storyshots Dialog Dialog 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 />
 `;
 
 exports[`Storyshots Dialog Dialog Already In Full Screen 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 />
 `;
 
 exports[`Storyshots Dialog Dialog With Close Button 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 />
 `;
 
 exports[`Storyshots Dialog Dialog With Full Screen Button 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 />
 `;

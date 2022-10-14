@@ -2,30 +2,30 @@
 
 exports[`Storyshots AuthChooser An Error 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 />
 `;
 
 exports[`Storyshots AuthChooser Auth Typeoidc 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 />
 `;
 
 exports[`Storyshots AuthChooser Basic Auth Chooser 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 />
 `;
 
 exports[`Storyshots AuthChooser Have Clusters 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 />
 `;
 
 exports[`Storyshots AuthChooser Testing 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 />
 `;
