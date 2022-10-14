@@ -5,3 +5,9 @@ exports[`Storyshots Resource/EditorDialog Editor Dialog With Resource 1`] = `
   id="root"
 />
 `;
+
+exports[`Storyshots Resource/EditorDialog Editor Dialog With Resource Closed 1`] = `
+<div
+  id="root"
+/>
+`;

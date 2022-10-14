@@ -26,3 +26,11 @@ const Template: Story<EditorDialogProps> = args => {
 };
 
 export const EditorDialogWithResource = Template.bind({});
+EditorDialogWithResource.args = {
+  open: true,
+};
+
+export const EditorDialogWithResourceClosed = Template.bind({});
+EditorDialogWithResourceClosed.args = {
+  open: false,
+};
