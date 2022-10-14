@@ -4,22 +4,24 @@ exports[`Storyshots common/ErrorBoundary Broken Fallback 1`] = `
 <div
   id="root"
 >
-  <p>
-    A simple element
-  </p>
+  disabled under test to avoid console spam
 </div>
 `;
 
 exports[`Storyshots common/ErrorBoundary Broken Fallback Element 1`] = `
 <div
   id="root"
-/>
+>
+  disabled under test to avoid console spam
+</div>
 `;
 
 exports[`Storyshots common/ErrorBoundary Broken No Fallback 1`] = `
 <div
   id="root"
-/>
+>
+  disabled under test to avoid console spam
+</div>
 `;
 
 exports[`Storyshots common/ErrorBoundary No Problem 1`] = `

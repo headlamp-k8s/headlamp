@@ -19,30 +19,42 @@ const Template: Story<ErrorBoundaryProps> = args => (
     <i>This is not failing.</i>
   </ErrorBoundary>
 );
-export const NoProblem = Template.bind({});
+const NoProblem = Template.bind({});
 NoProblem.args = {};
 
-const BrokenTemplate: Story<ErrorBoundaryProps> = args => (
-  <ErrorBoundary {...args}>
-    <BrokenComponent />
-  </ErrorBoundary>
-);
-export const BrokenNoFallback = BrokenTemplate.bind({});
-BrokenNoFallback.args = {};
+// Do not run these under test, because they emit lots of console.error logs.
+// It's still useful to run them in the storybook, to see and test them manually.
+type StoryOrNull = Story<ErrorBoundaryProps> | (() => void);
+let BrokenNoFallback: StoryOrNull = () => 'disabled under test to avoid console spam';
+let BrokenFallback: StoryOrNull = () => 'disabled under test to avoid console spam';
+let BrokenFallbackElement: StoryOrNull = () => 'disabled under test to avoid console spam';
 
-const BrokenFallbackTemplate: Story<ErrorBoundaryProps> = args => (
-  <ErrorBoundary {...args}>
-    <BrokenComponent />
-  </ErrorBoundary>
-);
-export const BrokenFallback = BrokenFallbackTemplate.bind({});
-BrokenFallback.args = {
-  fallback: ({ error }: { error: Error }) => {
-    return <div>This is a fallback. Error msg: "{error}"</div>;
-  },
-};
+if (process.env.UNDER_TEST !== 'true') {
+  // These are only seen in the storybook, not under test.
+  const BrokenTemplate: Story<ErrorBoundaryProps> = args => (
+    <ErrorBoundary {...args}>
+      <BrokenComponent />
+    </ErrorBoundary>
+  );
+  BrokenNoFallback = BrokenTemplate.bind({});
+  BrokenNoFallback.args = {};
 
-export const BrokenFallbackElement = BrokenFallbackTemplate.bind({});
-BrokenFallback.args = {
-  fallback: <p>A simple element</p>,
-};
+  const BrokenFallbackTemplate: Story<ErrorBoundaryProps> = args => (
+    <ErrorBoundary {...args}>
+      <BrokenComponent />
+    </ErrorBoundary>
+  );
+  BrokenFallback = BrokenFallbackTemplate.bind({});
+  BrokenFallback.args = {
+    fallback: ({ error }: { error: Error }) => {
+      return <div>This is a fallback. Error msg: "{error}"</div>;
+    },
+  };
+
+  BrokenFallbackElement = BrokenFallbackTemplate.bind({});
+  BrokenFallback.args = {
+    fallback: <p>A simple element</p>,
+  };
+}
+
+export { NoProblem, BrokenNoFallback, BrokenFallback, BrokenFallbackElement };

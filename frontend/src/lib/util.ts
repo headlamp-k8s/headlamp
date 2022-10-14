@@ -46,7 +46,7 @@ export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
   const fromDate = new Date(date);
   let now = new Date();
 
-  if (!!process.env.TEST_TZ) {
+  if (process.env.UNDER_TEST === 'true') {
     // For testing, we consider the current moment to be 3 months from the dates we are testing.
     const days = 24 * 3600 * 1000; // in ms
     now = new Date(fromDate.getTime() + 90 * days);
@@ -72,7 +72,7 @@ export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
 export function localeDate(date: DateParam) {
   const options: Intl.DateTimeFormatOptions = { timeZoneName: 'short' };
 
-  if (process.env.TEST_TZ) {
+  if (process.env.UNDER_TEST === 'true') {
     options.timeZone = 'UTC';
   } else {
     options.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
