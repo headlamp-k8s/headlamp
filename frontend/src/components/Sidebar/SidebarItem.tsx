@@ -168,6 +168,12 @@ export default function SidebarItem(props: SidebarItemProps) {
     linkClass += ' ' + classes.linkSmallWidth;
   }
 
+  function handleSpecificClickForBackSidebarOption() {
+    if (name === 'back') {
+      // todo: Handle the case when there is no history present
+      window.history.back();
+    }
+  }
   return (
     <React.Fragment>
       <ListItemLink
@@ -181,6 +187,7 @@ export default function SidebarItem(props: SidebarItemProps) {
         icon={icon}
         name={label}
         search={search}
+        onClick={handleSpecificClickForBackSidebarOption}
         {...other}
       />
       {subList.length > 0 && (

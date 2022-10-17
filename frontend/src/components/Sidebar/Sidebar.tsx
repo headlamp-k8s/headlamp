@@ -65,26 +65,33 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
-const specialSidebarOptions: SidebarItemProps[] = [
-  {
-    name: 'notifications',
-    icon: 'mdi:bell',
-    label: 'Notifications',
-    url: '/notifications',
-  },
-];
 export default function Sidebar() {
+  const { t, i18n } = useTranslation(['glossary', 'frequent']);
+  const specialSidebarOptions: SidebarItemProps[] = [
+    {
+      name: t('frequent|back'),
+      icon: 'mdi:arrow-left',
+      label: t('frequent|Back'),
+    },
+    {
+      name: t('frequent|notifications'),
+      icon: 'mdi:bell',
+      label: t('frequent|Notifications'),
+      url: '/notifications',
+    },
+  ];
+
   const sidebar = useTypedSelector(state => state.ui.sidebar);
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
   const isSidebarOpenUserSelected = useTypedSelector(
     state => state.ui.sidebar.isSidebarOpenUserSelected
   );
+  const location = useLocation();
   const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const [isSpecialSidebarOpen, setSpecialSidebarOpen] = React.useState(false);
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const { t, i18n } = useTranslation(['glossary', 'frequent']);
   const items = React.useMemo(
     () => (isSpecialSidebarOpen ? specialSidebarOptions : prepareRoutes(t)),
     [sidebar.entries, i18n.language, arePluginsLoaded, isSpecialSidebarOpen]
