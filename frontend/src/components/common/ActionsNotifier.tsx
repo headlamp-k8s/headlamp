@@ -77,7 +77,7 @@ export { PureActionsNotifier };
 
 export default function ActionsNotifier() {
   const dispatch = useDispatch();
-  const clusterActions = useTypedSelector(state => state.clusterAction);
+  const clusterActions = useTypedSelector(state => state.clusterAction, _.isEqual);
 
   return <PureActionsNotifier dispatch={dispatch} clusterActions={clusterActions} />;
 }
