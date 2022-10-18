@@ -17,7 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     name: build discover and deploy
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
     - name: Start cluster
       uses: medyagh/setup-minikube@master
       # now you can run kubectl to see the pods in the cluster
@@ -46,3 +49,18 @@ jobs:
         export SERVICE_URL=$(minikube service headlamp -n kube-system --url | tail -1)
         echo -n $SERVICE_URL
         curl -L $SERVICE_URL | grep -q "Headlamp: Kubernetes Web UI"
+
+        export SECRET=$(kubectl get secrets --namespace headlamp -o custom-columns=":metadata.name" | grep "headlamp-token")
+        export HEADLAMP_TOKEN=$(kubectl get secret $SECRET --namespace headlamp --template=\{\{.data.token\}\} | base64 --decode)
+        echo $HEADLAMP_TOKEN
+        echo -n "------------------Running playwright e2e tests------------------"
+        cd e2e-tests
+        npm ci
+        npx playwright install --with-deps
+        HEADLAMP_TEST_URL=$SERVICE_URL npx playwright test
+    - uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: e2e-tests-report
+        path: e2e-tests/playwright-report/
+        retention-days: 30
