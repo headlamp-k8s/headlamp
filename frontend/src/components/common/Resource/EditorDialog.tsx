@@ -104,7 +104,11 @@ export default function EditorDialog(props: EditorDialogProps) {
 
     // Only change if the code hasn't been touched.
     if (previousVersion !== item.metadata!.resourceVersion || code.code === originalCode.code) {
-      setCode({ code: itemCode, format: originalCode.format });
+      // Prevent updating to the same code, which would lead to an infinite loop.
+      if (code.code !== itemCode) {
+        setCode({ code: itemCode, format: originalCode.format });
+      }
+
       if (previousVersion !== item.metadata!.resourceVersion) {
         setPreviousVersion(item!.metadata!.resourceVersion);
       }
