@@ -3,7 +3,7 @@ import React from 'react';
 import { createRouteURL } from '../router';
 import { timeAgo, useErrorState } from '../util';
 import { useConnectApi } from '.';
-import { ApiError, apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
+import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
@@ -52,6 +52,8 @@ export interface KubeOwnerReference {
 
 export interface ApiListOptions {
   namespace?: string | string[];
+  labelSelector?: string;
+  fieldSelector?: string;
 }
 
 // We have to define a KubeObject implementation here because the KubeObject
@@ -164,9 +166,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     static apiList<U extends KubeObject>(
       onList: (arg: U[]) => void,
       onError?: (err: ApiError) => void,
-      opts?: {
-        namespace?: string;
-      }
+      opts?: ApiListOptions
     ) {
       const createInstance = (item: T) => this.create(item) as U;
 
@@ -179,6 +179,15 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       if (onError) {
         args.push(onError);
       }
+
+      const queryParams: QueryParameters = {};
+      if (opts?.labelSelector) {
+        queryParams['labelSelector'] = opts.labelSelector;
+      }
+      if (opts?.fieldSelector) {
+        queryParams['fieldSelector'] = opts.fieldSelector;
+      }
+      args.push(queryParams);
 
       return this.apiEndpoint.list.bind(null, ...args);
     }

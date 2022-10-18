@@ -43,6 +43,12 @@ export interface ClusterRequest {
   certificateAuthorityData?: string;
 }
 
+export interface QueryParameters {
+  labelSelector?: string;
+  fieldSelector?: string;
+  [prop: string]: any;
+}
+
 //refreshToken checks if the token is about to expire and refreshes it if so.
 async function refreshToken(token: string | null) {
   if (!token || isTokenRefreshInProgress) {
@@ -311,13 +317,18 @@ function singleApiFactory(group: string, version: string, resource: string) {
   const apiRoot = getApiRoot(group, version);
   const url = `${apiRoot}/${resource}`;
   return {
-    list: (cb: StreamResultsCb, errCb: StreamErrCb) => streamResults(url, cb, errCb),
-    get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
-      streamResult(url, name, cb, errCb),
-    post: (body: KubeObjectInterface) => post(url, body),
-    put: (body: KubeObjectInterface) => put(`${url}/${body.metadata.name}`, body),
-    patch: (body: OpPatch[], name: string) => patch(`${url}/${name}?pretty=true`, body),
-    delete: (name: string) => remove(`${url}/${name}`),
+    list: (cb: StreamResultsCb, errCb: StreamErrCb, queryParams?: QueryParameters) =>
+      streamResults(url, queryParams, cb, errCb),
+    get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb, queryParams?: QueryParameters) =>
+      streamResult(url, name, queryParams, cb, errCb),
+    post: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
+      post(url + asQuery(queryParams), body),
+    put: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
+      put(`${url}/${body.metadata.name}` + asQuery(queryParams), body),
+    patch: (body: OpPatch[], name: string, queryParams?: QueryParameters) =>
+      patch(url + asQuery({ ...queryParams, ...{ pretty: 'true' } }), body),
+    delete: (name: string, queryParams?: QueryParameters) =>
+      remove(`${url}/${name}` + asQuery(queryParams)),
     isNamespaced: false,
   };
 }
@@ -369,16 +380,30 @@ function simpleApiFactoryWithNamespace(
     scale?: ReturnType<typeof apiScaleFactory>;
     [other: string]: any;
   } = {
-    list: (namespace: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
-      streamResults(url(namespace), cb, errCb),
-    get: (namespace: string, name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
-      streamResult(url(namespace), name, cb, errCb),
-    post: (body: KubeObjectInterface) => post(url(body.metadata.namespace as string), body),
-    patch: (body: OpPatch[], namespace: string, name: string) =>
-      patch(`${url(namespace)}/${name}?pretty=true`, body),
-    put: (body: KubeObjectInterface) =>
-      put(`${url(body.metadata.namespace as string)}/${body.metadata.name}`, body),
-    delete: (namespace: string, name: string) => remove(`${url(namespace)}/${name}`),
+    list: (
+      namespace: string,
+      cb: StreamResultsCb,
+      errCb: StreamErrCb,
+      queryParams?: QueryParameters
+    ) => streamResults(url(namespace), queryParams, cb, errCb),
+    get: (
+      namespace: string,
+      name: string,
+      cb: StreamResultsCb,
+      errCb: StreamErrCb,
+      queryParams?: QueryParameters
+    ) => streamResult(url(namespace), name, queryParams, cb, errCb),
+    post: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
+      post(url(body.metadata.namespace as string) + asQuery(queryParams), body),
+    patch: (body: OpPatch[], namespace: string, name: string, queryParams?: QueryParameters) =>
+      patch(`${url(namespace)}/${name}` + asQuery({ ...queryParams, ...{ pretty: 'true' } }), body),
+    put: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
+      put(
+        `${url(body.metadata.namespace as string)}/${body.metadata.name}` + asQuery(queryParams),
+        body
+      ),
+    delete: (namespace: string, name: string, queryParams?: QueryParameters) =>
+      remove(`${url(namespace)}/${name}` + asQuery(queryParams)),
     isNamespaced: true,
   };
 
@@ -391,6 +416,10 @@ function simpleApiFactoryWithNamespace(
   function url(namespace: string) {
     return namespace ? `${apiRoot}/namespaces/${namespace}/${resource}` : `${apiRoot}/${resource}`;
   }
+}
+
+function asQuery(queryParams?: QueryParameters): string {
+  return '?' + new URLSearchParams(queryParams).toString();
 }
 
 function resourceDefToApiFactory(resourceDef: KubeObjectInterface): ApiFactoryReturn {
@@ -486,6 +515,7 @@ export function remove(url: string, requestOptions = {}) {
 export async function streamResult(
   url: string,
   name: string,
+  queryParams: QueryParameters | undefined,
   cb: StreamResultsCb,
   errCb: StreamErrCb
 ) {
@@ -497,13 +527,14 @@ export async function streamResult(
 
   async function run() {
     try {
-      const item = await request(`${url}/${name}`);
+      const item = await request(`${url}/${name}` + asQuery(queryParams));
 
       if (isCancelled) return;
       cb(item);
 
-      const fieldSelector = encodeURIComponent(`metadata.name=${name}`);
-      const watchUrl = `${url}?watch=1&fieldSelector=${fieldSelector}`;
+      const watchUrl =
+        url +
+        asQuery({ ...queryParams, ...{ watch: '1', fieldSelector: `metadata.name=${name}` } });
 
       socket = stream(watchUrl, x => cb(x.object), { isJson: true });
     } catch (err) {
@@ -520,7 +551,12 @@ export async function streamResult(
   }
 }
 
-export async function streamResults(url: string, cb: StreamResultsCb, errCb: StreamErrCb) {
+export async function streamResults(
+  url: string,
+  queryParams: QueryParameters | undefined,
+  cb: StreamResultsCb,
+  errCb: StreamErrCb
+) {
   const results: {
     [uid: string]: KubeObjectInterface;
   } = {};
@@ -532,13 +568,15 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
 
   async function run() {
     try {
-      const { kind, items, metadata } = await request(url);
+      const { kind, items, metadata } = await request(url + asQuery(queryParams));
 
       if (isCancelled) return;
 
       add(items, kind);
 
-      const watchUrl = `${url}?watch=1&resourceVersion=${metadata.resourceVersion}`;
+      const watchUrl =
+        url +
+        asQuery({ ...queryParams, ...{ watch: '1', resourceVersion: metadata.resourceVersion } });
       socket = stream(watchUrl, update, { isJson: true });
     } catch (err) {
       console.error('Error in api request', { err, url });
