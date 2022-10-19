@@ -69,6 +69,11 @@ export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
   });
 }
 
+export function timeAgoByDate(date: Date) {
+  const milliseconds = new Date().getTime() - date.getTime();
+  return humanDuration(milliseconds);
+}
+
 export function localeDate(date: DateParam) {
   const options: Intl.DateTimeFormatOptions = { timeZoneName: 'short' };
 
@@ -228,6 +233,59 @@ export function useErrorState(dependentSetter?: (...args: any) => void) {
 
   // Adding "as any" here because it was getting difficult to validate the setter type.
   return [error, setError as any];
+}
+
+// Source Code: https://github.com/kubernetes/kubernetes/blob/2f275b72b2248bb7c522327115acb17223b8387b/staging/src/k8s.io/apimachinery/pkg/util/duration/duration.go#L48
+export function humanDuration(milliseconds: number): string {
+  const seconds = int(milliseconds / 1000);
+  if (seconds < -1) {
+    return '<invalid>';
+  } else if (seconds < 0) {
+    return '0s';
+  } else if (seconds < 60 * 2) {
+    return `${seconds}s`;
+  }
+
+  const minutes = int(seconds / 60);
+  if (minutes < 10) {
+    const s = seconds % 60;
+    if (s === 0) {
+      return `${minutes}m`;
+    }
+    return `${minutes}m${s}s`;
+  } else if (minutes < 60 * 3) {
+    return `${minutes}m`;
+  }
+
+  const hours = int(minutes / 60);
+  if (hours < 8) {
+    const m = minutes % 60;
+    if (m === 0) {
+      return `${hours}h`;
+    }
+    return `${hours}h${m}m`;
+  } else if (hours < 48) {
+    return `${hours}h`;
+  } else if (hours < 24 * 8) {
+    const h = hours % 24;
+    if (h === 0) {
+      return `${int(hours / 24)}d`;
+    }
+    return `${int(hours / 24)}d${h}h`;
+  } else if (hours < 24 * 365 * 2) {
+    return `${int(hours / 24)}d`;
+  } else if (hours < 24 * 365 * 8) {
+    const dy = int(hours / 24) % 365;
+    if (dy === 0) {
+      return `${int(hours / 24 / 365)}y`;
+    }
+    return `${int(hours / 24 / 365)}y${dy}d`;
+  }
+  return `${int(hours / 24 / 365)}y`;
+}
+
+function int(num: number): number {
+  return Math.floor(num);
 }
 
 // Make units available from here

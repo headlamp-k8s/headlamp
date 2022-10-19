@@ -34,6 +34,7 @@ export interface KubeMetadata {
   name: string;
   namespace?: string;
   creationTimestamp: string;
+  deletionTimestamp?: string;
   resourceVersion: string;
   selfLink: string;
   labels?: StringDict;
@@ -516,32 +517,34 @@ export interface KubeMetrics {
   };
 }
 
+export interface ContainerStateApplyConfiguration {
+  running: {
+    startedAt: number;
+  };
+  terminated: {
+    containerID: string;
+    exitCode: number;
+    finishedAt: number;
+    message: string;
+    reason: string;
+    signal: number;
+    startedAt: number;
+  };
+  waiting: {
+    message: string;
+    reason: string;
+  };
+}
+
 export interface KubeContainerStatus {
   containerID: string;
   image: string;
   imageID: string;
-  lastState: string;
   name: string;
   ready: boolean;
   restartCount: number;
-  state: {
-    running: {
-      startedAt: number;
-    };
-    terminated: {
-      containerID: string;
-      exitCode: number;
-      finishedAt: number;
-      message: string;
-      reason: string;
-      signal: number;
-      startedAt: number;
-    };
-    waiting: {
-      message: string;
-      reason: string;
-    };
-  };
+  lastState: ContainerStateApplyConfiguration; // aka: lastTerminationState
+  state: ContainerStateApplyConfiguration;
 }
 
 export type Workload = DaemonSet | ReplicaSet | StatefulSet | Job | CronJob | Deployment;
