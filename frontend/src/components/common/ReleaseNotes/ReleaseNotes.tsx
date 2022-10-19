@@ -21,7 +21,9 @@ export default function ReleaseNotes() {
             return;
           }
 
-          const octokit = new Octokit();
+          const octokit = new Octokit({
+            timeout: 5000,
+          });
 
           async function fetchRelease() {
             const githubReleaseURL = `GET /repos/{owner}/{repo}/releases`;
