@@ -14,6 +14,7 @@ import CustomResourceDefinition from './crd';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
+import HorizontalPodAutoscaler from './horizontalPodAutoscaler';
 import Ingress from './ingress';
 import Job from './job';
 import Namespace from './namespace';
@@ -22,7 +23,9 @@ import Node from './node';
 import PersistentVolume from './persistentVolume';
 import PersistentVolumeClaim from './persistentVolumeClaim';
 import Pod from './pod';
+import PodDisruptionBudget from './podDisruptionBudget';
 import ReplicaSet from './replicaSet';
+import ResourceQuota from './resourceQuota';
 import Role from './role';
 import RoleBinding from './roleBinding';
 import Secret from './secret';
@@ -41,6 +44,7 @@ const classList = [
   CronJob,
   DaemonSet,
   Deployment,
+  HorizontalPodAutoscaler,
   Ingress,
   Job,
   Namespace,
@@ -49,7 +53,9 @@ const classList = [
   PersistentVolume,
   PersistentVolumeClaim,
   Pod,
+  PodDisruptionBudget,
   ReplicaSet,
+  ResourceQuota,
   Role,
   RoleBinding,
   Secret,
@@ -181,6 +187,7 @@ export * as cronJob from './cronJob';
 export * as daemonSet from './daemonSet';
 export * as deployment from './deployment';
 export * as event from './event';
+export * as horizontalPodAutoscaler from './horizontalPodAutoscaler';
 export * as ingress from './ingress';
 export * as job from './job';
 export * as namespace from './namespace';
@@ -188,7 +195,9 @@ export * as node from './node';
 export * as persistentVolume from './persistentVolume';
 export * as persistentVolumeClaim from './persistentVolumeClaim';
 export * as pod from './pod';
+export * as podDisruptionBudget from './podDisruptionBudget';
 export * as replicaSet from './replicaSet';
+export * as resourceQuota from './resourceQuota';
 export * as role from './role';
 export * as roleBinding from './roleBinding';
 export * as secret from './secret';

@@ -16,6 +16,8 @@ import CronJobList from '../components/cronjob/List';
 import DaemonSetDetails from '../components/daemonset/Details';
 import DaemonSetList from '../components/daemonset/List';
 import DeploymentsList from '../components/deployments/List';
+import HorizontalPodAutoscalerDetails from '../components/horizontalpodautoscalers/Details';
+import HorizontalPodAutoscalerList from '../components/horizontalpodautoscalers/List';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import JobsList from '../components/job/List';
@@ -26,7 +28,11 @@ import NodeList from '../components/node/List';
 import OIDCAuth from '../components/oidcauth';
 import PodDetails from '../components/pod/Details';
 import PodList from '../components/pod/List';
+import PodDisruptionBudgetDetails from '../components/poddisruptionbudgets/Details';
+import PodDisruptionBudgetList from '../components/poddisruptionbudgets/List';
 import ReplicaSetList from '../components/replicaset/List';
+import ResourceQuotaDetails from '../components/resourcequotas/Details';
+import ResourceQuotaList from '../components/resourcequotas/List';
 import RoleBindingDetails from '../components/role/BindingDetails';
 import RoleBindingList from '../components/role/BindingList';
 import RoleDetails from '../components/role/Details';
@@ -429,6 +435,48 @@ const defaultRoutes: {
     name: 'Custom Resource',
     sidebar: 'crds',
     component: () => <CustomResourceDetails />,
+  },
+  horizontalPodAutoscalers: {
+    path: '/horizontalpodautoscalers',
+    exact: true,
+    name: 'HPAs',
+    sidebar: 'horizontalPodAutoscalers',
+    component: () => <HorizontalPodAutoscalerList />,
+  },
+  horizontalPodAutoscaler: {
+    path: '/horizontalpodautoscaler/:namespace/:name',
+    exact: true,
+    name: 'HPA',
+    sidebar: 'horizontalPodAutoscalers',
+    component: () => <HorizontalPodAutoscalerDetails />,
+  },
+  podDisruptionBudgets: {
+    path: '/poddisruptionbudgets',
+    exact: true,
+    name: 'PDBs',
+    sidebar: 'podDisruptionBudgets',
+    component: () => <PodDisruptionBudgetList />,
+  },
+  podDisruptionBudget: {
+    path: '/poddisruptionbudget/:namespace/:name',
+    exact: true,
+    name: 'PDBs',
+    sidebar: 'podDisruptionBudgets',
+    component: () => <PodDisruptionBudgetDetails />,
+  },
+  resourceQuotas: {
+    path: '/resourcequotas',
+    exact: true,
+    name: 'Resource Quotas',
+    sidebar: 'resourceQuotas',
+    component: () => <ResourceQuotaList />,
+  },
+  resourceQuota: {
+    path: '/resourcequota/:namespace/:name',
+    exact: true,
+    name: 'Resource Quotas',
+    sidebar: 'resourceQuotas',
+    component: () => <ResourceQuotaDetails />,
   },
 };
 

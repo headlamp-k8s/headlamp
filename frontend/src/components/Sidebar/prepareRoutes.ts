@@ -25,6 +25,18 @@ function prepareRoutes(t: (arg: string) => string) {
           name: 'configMaps',
           label: t('glossary|Config Maps'),
         },
+        {
+          name: 'horizontalPodAutoscalers',
+          label: 'HPA',
+        },
+        {
+          name: 'podDisruptionBudgets',
+          label: 'PDB',
+        },
+        {
+          name: 'resourceQuotas',
+          label: 'Resource Quotas',
+        },
       ],
     },
     {

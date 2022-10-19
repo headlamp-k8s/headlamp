@@ -532,11 +532,11 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
 
   async function run() {
     try {
-      const { kind, items, metadata } = await request(url);
+      const { apiVersion, kind, items, metadata } = await request(url);
 
       if (isCancelled) return;
 
-      add(items, kind);
+      add(items, kind, apiVersion);
 
       const watchUrl = `${url}?watch=1&resourceVersion=${metadata.resourceVersion}`;
       socket = stream(watchUrl, update, { isJson: true });
@@ -553,10 +553,11 @@ export async function streamResults(url: string, cb: StreamResultsCb, errCb: Str
     if (socket) socket.cancel();
   }
 
-  function add(items: KubeObjectInterface[], kind: string) {
+  function add(items: KubeObjectInterface[], kind: string, apiVersion: string) {
     const fixedKind = kind.slice(0, -4); // Trim off the word "List" from the end of the string
     for (const item of items) {
       item.kind = fixedKind;
+      item.apiVersion = apiVersion;
       results[item.metadata.uid] = item;
     }
 
