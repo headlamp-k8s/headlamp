@@ -14,6 +14,7 @@ import CustomResourceDefinition from './crd';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
+import Endpoints from './endpoints';
 import Ingress from './ingress';
 import Job from './job';
 import Namespace from './namespace';
@@ -41,6 +42,7 @@ const classList = [
   CronJob,
   DaemonSet,
   Deployment,
+  Endpoints,
   Ingress,
   Job,
   Namespace,

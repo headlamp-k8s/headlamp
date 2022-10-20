@@ -15,7 +15,6 @@ import * as monaco from 'monaco-editor';
 import React, { isValidElement, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link as RouterLink, NavLinkProps, useLocation } from 'react-router-dom';
-import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
   KubeCondition,
   KubeContainer,
@@ -185,8 +184,6 @@ export interface DetailsGridProps
 export function DetailsGrid(props: DetailsGridProps) {
   const { sectionsFunc, resourceType, name, namespace, children, ...otherMainInfoSectionProps } =
     props;
-  const [item, setItem] = React.useState<KubeObject | null>(null);
-  const [error, setError] = React.useState<ApiError | string | null>(null);
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
 
   const backLink: string | undefined = React.useMemo(() => {
@@ -210,9 +207,7 @@ export function DetailsGrid(props: DetailsGridProps) {
     return createRouteURL(route);
   }, []);
 
-  resourceType.useApiGet(setItem, name, namespace || undefined, (err: ApiError) =>
-    setError(err.message)
-  );
+  const [item, error] = resourceType.useGet(name, namespace);
 
   return (
     <PageGrid>

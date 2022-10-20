@@ -40,7 +40,7 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
     return 'CustomResourceDefinition';
   }
 
-  get detailsRoute(): string {
+  static get detailsRoute(): string {
     return 'crd';
   }
 

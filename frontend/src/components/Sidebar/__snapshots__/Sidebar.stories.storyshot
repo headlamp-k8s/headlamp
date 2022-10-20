@@ -567,6 +567,28 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                             <span
                               class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                             >
+                              Endpoints
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
                               Ingresses
                             </span>
                           </div>
@@ -1280,6 +1302,28 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                               class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                             >
                               Services
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Endpoints
                             </span>
                           </div>
                           <span

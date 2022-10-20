@@ -164,12 +164,18 @@ export default function SimpleTable(props: SimpleTableProps) {
     [data, currentData]
   );
 
-  function defaultSortingFunction(column: SimpleTableGetterColumn) {
+  function defaultSortingFunction(column: SimpleTableDatumColumn | SimpleTableGetterColumn) {
     const sort = column?.sort;
     function defaultSortingReal(item1: any, item2: any) {
-      let getterFunc = column.getter;
+      let getterFunc = (column as SimpleTableGetterColumn).getter;
       if (!!sort && typeof sort === 'function') {
         getterFunc = sort;
+      }
+      // If instead of a getter function, we have a datum, then we use it to fetch the values for
+      // comparison.
+      const datum = (column as SimpleTableDatumColumn).datum;
+      if (!getterFunc && !!datum) {
+        getterFunc = (item: any) => item[datum];
       }
       const value1 = getterFunc(item1);
       const value2 = getterFunc(item2);
@@ -199,9 +205,7 @@ export default function SimpleTable(props: SimpleTableProps) {
       (typeof sortFunction === 'boolean' && sortFunction) ||
       (typeof sortFunction === 'function' && sortFunction.length === 1)
     ) {
-      setDisplayData(
-        data.slice().sort(defaultSortingFunction(columnAskingForSort as SimpleTableGetterColumn))
-      );
+      setDisplayData(data.slice().sort(defaultSortingFunction(columnAskingForSort)));
       return;
     }
 

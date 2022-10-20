@@ -72,6 +72,10 @@ export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
   useList: (
     opts?: ApiListOptions
   ) => [any[], ApiError | null, (items: any[]) => void, (err: ApiError | null) => void];
+  useGet: (
+    name: string,
+    namespace?: string
+  ) => [any, ApiError | null, (item: any) => void, (err: ApiError | null) => void];
   getErrorMessage: (err?: ApiError | null) => string | null;
   new (json: T): any;
   className: string;
@@ -94,7 +98,11 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
 
     get detailsRoute(): string {
-      return this._class().className;
+      return this._class().detailsRoute;
+    }
+
+    static get detailsRoute(): string {
+      return this.className;
     }
 
     static get pluralName(): string {
@@ -109,6 +117,10 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     }
 
     get listRoute(): string {
+      return this._class().listRoute;
+    }
+
+    static get listRoute(): string {
       return this.detailsRoute + 's';
     }
 
@@ -288,6 +300,27 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       // the exact signature as get callbacks.
       const getCallback = onGet as (item: U) => void;
       useConnectApi(this.apiGet(getCallback, name, namespace, onError));
+    }
+
+    static useGet<U extends KubeObject>(
+      name: string,
+      namespace?: string
+    ): [U | null, ApiError | null, (items: U) => void, (err: ApiError | null) => void] {
+      const [obj, setObj] = React.useState<U | null>(null);
+      const [error, setError] = useErrorState(setObj);
+
+      function onGet(item: U | null) {
+        setObj(item);
+        if (item !== null) {
+          setError(null);
+        }
+      }
+
+      this.useApiGet(onGet, name, namespace, setError);
+
+      // Return getters and then the setters as the getters are more likely to be used with
+      // this function.
+      return [obj, error, setObj, setError];
     }
 
     private _class() {

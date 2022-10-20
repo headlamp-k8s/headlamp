@@ -16,6 +16,8 @@ import CronJobList from '../components/cronjob/List';
 import DaemonSetDetails from '../components/daemonset/Details';
 import DaemonSetList from '../components/daemonset/List';
 import DeploymentsList from '../components/deployments/List';
+import EndpointDetails from '../components/endpoints/Details';
+import EndpointList from '../components/endpoints/List';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import JobsList from '../components/job/List';
@@ -229,6 +231,19 @@ const defaultRoutes: {
     exact: true,
     sidebar: 'services',
     component: () => <ServiceDetails />,
+  },
+  endpoints: {
+    path: '/endpoints',
+    exact: true,
+    name: 'Endpoints',
+    sidebar: 'endpoints',
+    component: () => <EndpointList />,
+  },
+  endpoint: {
+    path: '/endpoints/:namespace/:name',
+    exact: true,
+    sidebar: 'endpoints',
+    component: () => <EndpointDetails />,
   },
   ingresses: {
     path: '/ingresses',
