@@ -15,6 +15,7 @@ import * as monaco from 'monaco-editor';
 import React, { isValidElement, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link as RouterLink, NavLinkProps, useLocation } from 'react-router-dom';
+import { labelSelectorToQuery } from '../../../lib/k8s';
 import {
   KubeCondition,
   KubeContainer,
@@ -666,76 +667,13 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
 
   const queryData = {
     namespace: resource.kind === 'Namespace' ? resource.metadata.name : undefined,
-    labelSelector: getLabelSelector(resource),
+    labelSelector: labelSelectorToQuery(resource?.spec?.selector),
     fieldSelector: resource.kind === 'Node' ? `spec.nodeName=${resource.metadata.name}` : undefined,
   };
 
   const [pods, error] = Pod.useList(queryData);
 
   return <PodListRenderer hideColumns={hideColumns} pods={pods} error={error} />;
-}
-
-// Label selector examples: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#list-and-watch-filtering
-// deployment selector example: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
-// Possible operators: https://github.com/kubernetes/apimachinery/blob/be3a79b26814a8d7637d70f4d434a4626ee1c1e7/pkg/selection/operator.go#L24
-// Format rule for expressions: https://github.com/kubernetes/apimachinery/blob/be3a79b26814a8d7637d70f4d434a4626ee1c1e7/pkg/labels/selector.go#L305
-function getLabelSelector(item: KubeObjectInterface): string | undefined {
-  const segments: string[] = [];
-
-  const matchLabels = item?.spec?.selector?.matchLabels ?? {};
-  for (const k in matchLabels) {
-    segments.push(`${k}=${matchLabels[k]}`);
-  }
-
-  const matchExpressions = item?.spec?.selector?.matchExpressions ?? [];
-  for (const expr of matchExpressions) {
-    let segment = '';
-    if (expr.operator === 'DoesNotExist') {
-      segment += '!';
-    }
-
-    segment += expr.key;
-    switch (expr.operator) {
-      case 'Equals':
-        segment += '=';
-        break;
-      case 'DoubleEquals':
-        segment += '==';
-        break;
-      case 'NotEquals':
-        segment += '!=';
-        break;
-      case 'In':
-        segment += ' in ';
-        break;
-      case 'NotIn':
-        segment += ' notin ';
-        break;
-      case 'GreaterThan':
-        segment += '>';
-        break;
-      case 'LessThan':
-        segment += '<';
-        break;
-      case 'Exists':
-      case 'DoesNotExist':
-        segments.push(segment);
-        continue;
-    }
-
-    let sorted = [...(expr.values ?? [])].sort().join(',');
-    if (expr.operator === 'In' || expr.operator === 'NotIn') {
-      sorted = '(' + sorted + ')';
-    }
-    segment += sorted;
-    segments.push(segment);
-  }
-
-  if (segments.length === 0) {
-    return undefined;
-  }
-
-  return segments.join(',');
 }
 
 export function ContainersSection(props: { resource: KubeObjectInterface | null }) {
