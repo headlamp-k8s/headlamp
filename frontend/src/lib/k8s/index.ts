@@ -194,45 +194,63 @@ export function labelSelectorToQuery(labelSelector: LabelSelector) {
       segment += '!';
     }
 
+    let needsParensWrap = false;
+    const NoLengthLimits = -1;
+    let expectedValuesLength = NoLengthLimits;
+
     segment += expr.key;
     switch (expr.operator) {
       case 'Equals':
         segment += '=';
+        expectedValuesLength = 1;
         break;
       case 'DoubleEquals':
         segment += '==';
+        expectedValuesLength = 1;
         break;
       case 'NotEquals':
         segment += '!=';
+        expectedValuesLength = 1;
         break;
       case 'In':
         segment += ' in ';
+        needsParensWrap = true;
         break;
       case 'NotIn':
         segment += ' notin ';
+        needsParensWrap = true;
         break;
       case 'GreaterThan':
         segment += '>';
+        expectedValuesLength = 1;
         break;
       case 'LessThan':
         segment += '<';
+        expectedValuesLength = 1;
         break;
       case 'Exists':
       case 'DoesNotExist':
-        segments.push(segment);
-        continue;
+        expectedValuesLength = 0;
+        break;
     }
 
-    let sorted = [...(expr.values ?? [])].sort().join(',');
-    if (expr.operator === 'In' || expr.operator === 'NotIn') {
-      sorted = '(' + sorted + ')';
+    let values = '';
+
+    if (expectedValuesLength === 1) {
+      values = expr.values[0] ?? '';
+    } else if (expectedValuesLength === NoLengthLimits) {
+      values = [...(expr.values ?? [])].sort().join(',');
+      if (needsParensWrap) {
+        values = '(' + values + ')';
+      }
     }
-    segment += sorted;
+
+    segment += values;
     segments.push(segment);
   }
 
   if (segments.length === 0) {
-    return undefined;
+    return '';
   }
 
   return segments.join(',');
