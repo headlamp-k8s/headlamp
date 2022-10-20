@@ -45,15 +45,14 @@ jobs:
         minikube logs | tail -10
         kubectl wait deployment -n kube-system headlamp --for condition=Available=True --timeout=10s
         minikube service headlamp -n kube-system --url
-        echo -n "------------------opening the service------------------"
+        echo "------------------opening the service------------------"
         export SERVICE_URL=$(minikube service headlamp -n kube-system --url | tail -1)
-        echo -n $SERVICE_URL
-        curl -L $SERVICE_URL | grep -q "Headlamp: Kubernetes Web UI"
-
-        export SECRET=$(kubectl get secrets --namespace headlamp -o custom-columns=":metadata.name" | grep "headlamp-token")
-        export HEADLAMP_TOKEN=$(kubectl get secret $SECRET --namespace headlamp --template=\{\{.data.token\}\} | base64 --decode)
-        echo $HEADLAMP_TOKEN
-        echo -n "------------------Running playwright e2e tests------------------"
+        echo $SERVICE_URL
+        curl -L $SERVICE_URL | grep -q "Headlamp: Kubernetes Web UI"        
+        echo "------------------Getting HEADLAMP_TOKEN------------------"
+        kubectl create serviceaccount headlamp-admin --namespace kube-system
+        export HEADLAMP_TOKEN=$(kubectl create token headlamp-admin --duration 24h -n kube-system)
+        echo "------------------Running playwright e2e tests------------------"
         cd e2e-tests
         npm ci
         npx playwright install --with-deps
