@@ -2,7 +2,7 @@ version: '3'
 
 services:
   headlamp:
-    image: ghcr.io/kinvolk/headlamp:v0.12.1
+    image: ghcr.io/kinvolk/headlamp:v0.13.0
     command: ["--kubeconfig","/headlamp/config/config"]
     restart: unless-stopped
     volumes:

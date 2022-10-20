@@ -1,4 +1,4 @@
-FROM ghcr.io/kinvolk/headlamp:v0.12.1 as headlamp
+FROM ghcr.io/kinvolk/headlamp:v0.13.0 as headlamp
 
 FROM scratch 
 
