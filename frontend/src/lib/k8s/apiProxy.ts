@@ -676,12 +676,11 @@ function connectStream(
   const cluster = getCluster();
   const token = getToken(cluster || '');
 
+  const protocols = ['base64.binary.k8s.io', ...additionalProtocols];
   if (token) {
     const encodedToken = btoa(token).replace(/=/g, '');
-    additionalProtocols.push(`base64url.bearer.authorization.k8s.io.${encodedToken}`);
+    protocols.push(`base64url.bearer.authorization.k8s.io.${encodedToken}`);
   }
-
-  const protocols = ['base64.binary.k8s.io', ...additionalProtocols];
 
   let fullPath = path;
   if (cluster) {
