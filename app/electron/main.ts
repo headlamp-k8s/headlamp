@@ -37,6 +37,8 @@ const defaultPort = 4466;
 const isDev = process.env.ELECTRON_DEV || false;
 const useExternalServer = process.env.EXTERNAL_SERVER || false;
 const shouldCheckForUpdates = process.env.HEADLAMP_CHECK_FOR_UPDATES !== 'false';
+// make it global so that it doesn't get garbage collected
+let mainWindow: BrowserWindow | null;
 
 function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   const serverFilePath = isDev
@@ -462,8 +464,6 @@ function killProcess(pid: number) {
 function startElecron() {
   log.transports.file.level = 'info';
   log.info('App starting...');
-
-  let mainWindow: BrowserWindow | null;
 
   let appVersion: string;
   if (isDev && process.env.HEADLAMP_APP_VERSION) {
