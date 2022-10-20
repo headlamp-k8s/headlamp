@@ -70,8 +70,9 @@ export default function EditorDialog(props: EditorDialogProps) {
   const classes = useStyle();
   const themeName = getThemeName();
 
-  const [originalCode, setOriginalCode] = React.useState('');
+  const [originalCode, setOriginalCode] = React.useState({ code: '', format: item ? 'yaml' : '' });
   const [code, setCode] = React.useState(originalCode);
+  const [lastCodeCheckHandler, setLastCodeCheckHandler] = React.useState(0);
   const [previousVersion, setPreviousVersion] = React.useState('');
   const [error, setError] = React.useState('');
   const [docSpecs, setDocSpecs] = React.useState({});
@@ -92,9 +93,9 @@ export default function EditorDialog(props: EditorDialogProps) {
       return;
     }
 
-    const itemCode = yaml.dump(item);
-    if (itemCode !== originalCode) {
-      setOriginalCode(itemCode);
+    const itemCode = originalCode.format === 'json' ? JSON.stringify(item) : yaml.dump(item);
+    if (itemCode !== originalCode.code) {
+      setOriginalCode({ code: itemCode, format: originalCode.format });
     }
 
     if (!item.metadata) {
@@ -102,8 +103,12 @@ export default function EditorDialog(props: EditorDialogProps) {
     }
 
     // Only change if the code hasn't been touched.
-    if (previousVersion !== item.metadata!.resourceVersion || code === originalCode) {
-      setCode(itemCode);
+    if (previousVersion !== item.metadata!.resourceVersion || code.code === originalCode.code) {
+      // Prevent updating to the same code, which would lead to an infinite loop.
+      if (code.code !== itemCode) {
+        setCode({ code: itemCode, format: originalCode.format });
+      }
+
       if (previousVersion !== item.metadata!.resourceVersion) {
         setPreviousVersion(item!.metadata!.resourceVersion);
       }
@@ -113,6 +118,9 @@ export default function EditorDialog(props: EditorDialogProps) {
   React.useEffect(() => {
     i18n.on('languageChanged', setLang);
     return () => {
+      // Stop the timeout from trying to use the component after it's been unmounted.
+      clearTimeout(lastCodeCheckHandler);
+
       i18n.off('languageChanged', setLang);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -123,24 +131,77 @@ export default function EditorDialog(props: EditorDialogProps) {
   }
 
   function onChange(value: string | undefined): void {
-    setCode(value as string);
+    // Clear any ongoing attempts to check the code.
+    window.clearTimeout(lastCodeCheckHandler);
 
-    if (error && getObjectFromCode(value as string)) {
-      setError('');
-    }
+    // Only check the code for errors after the user has stopped typing for a moment.
+    setLastCodeCheckHandler(
+      window.setTimeout(() => {
+        const { error: err, format } = getObjectFromCode({
+          code: value || '',
+          format: originalCode.format,
+        });
+        if (code.format !== format) {
+          setCode({ code: value || '', format });
+        }
+
+        if (error !== (err?.message || '')) {
+          setError(err?.message || '');
+        }
+      }, 500) // ms
+    );
+
+    setCode({ code: value as string, format: code.format });
 
     if (onEditorChanged) {
       onEditorChanged(value as string);
     }
   }
 
-  function getObjectFromCode(code: string): KubeObjectInterface | null {
-    try {
-      const codeObj = yaml.load(code);
-      return codeObj as KubeObjectInterface;
-    } catch (e) {
-      return null;
+  function getObjectFromCode(codeInfo: typeof originalCode) {
+    function looksLikeJson(code: string) {
+      const trimmedCode = code.trimRight();
+      const lastChar = !!trimmedCode ? trimmedCode[trimmedCode.length - 1] : '';
+      const firstChar = !!trimmedCode ? trimmedCode[0] : '';
+      if (['{', '['].includes(firstChar) || ['}', ']'].includes(lastChar)) {
+        return true;
+      }
+
+      return false;
     }
+
+    const { code, format } = codeInfo;
+    const res: { obj: KubeObjectInterface | null; format: string; error: Error | null } = {
+      obj: null,
+      format,
+      error: null,
+    };
+
+    if (!res.obj) {
+      res.format = 'yaml';
+      try {
+        res.obj = yaml.load(code) as KubeObjectInterface;
+        return res;
+      } catch (e) {
+        res.error = new Error((e as Error).message || t('Invalid YAML'));
+      }
+    }
+
+    if (!format || (!res.obj && looksLikeJson(code))) {
+      res.format = 'json';
+      try {
+        res.obj = JSON.parse(code) as KubeObjectInterface;
+        return res;
+      } catch (e) {
+        res.error = new Error((e as Error).message || t('Invalid JSON'));
+      }
+    }
+
+    if (!!res.obj) {
+      res.error = null;
+    }
+
+    return res;
   }
 
   function handleTabChange(tabIndex: number) {
@@ -149,7 +210,7 @@ export default function EditorDialog(props: EditorDialogProps) {
       return;
     }
 
-    const codeObj = getObjectFromCode(code);
+    const { obj: codeObj } = getObjectFromCode(code);
 
     const { kind, apiVersion } = (codeObj || {}) as KubeObjectInterface;
     if (codeObj === null || (!!kind && !!apiVersion)) {
@@ -166,13 +227,17 @@ export default function EditorDialog(props: EditorDialogProps) {
   }
 
   function handleSave() {
-    // Verify the YAML even means anything before trying to use it.
-    if (!getObjectFromCode(code)) {
-      setError(t("Error parsing the code. Please verify it's valid YAML!"));
+    // Verify the YAML / JSON even means anything before trying to use it.
+    const { obj, format, error } = getObjectFromCode(code);
+    if (!!error) {
+      setError(t('Error parsing the code: {{error}}', { error: error.message }));
       return;
     }
 
-    onSave!(getObjectFromCode(code));
+    if (format !== code.format) {
+      setCode({ code: code.code, format });
+    }
+    onSave!(obj);
   }
 
   function makeEditor() {
@@ -183,14 +248,18 @@ export default function EditorDialog(props: EditorDialogProps) {
 
     return useSimpleEditor ? (
       <Box paddingTop={2} height="100%">
-        <SimpleEditor language="yaml" value={code} onChange={onChange} />
+        <SimpleEditor
+          language={originalCode.format || 'yaml'}
+          value={code.code}
+          onChange={onChange}
+        />
       </Box>
     ) : (
       <Box paddingTop={2} height="100%">
         <Editor
-          language="yaml"
+          language={originalCode.format || 'yaml'}
           theme={themeName === 'dark' ? 'vs-dark' : 'light'}
-          value={code}
+          value={code.code}
           options={editorOptions}
           onChange={onChange}
           height="600px"
@@ -269,7 +338,7 @@ export default function EditorDialog(props: EditorDialogProps) {
           <DialogActions>
             {!isReadOnly() && (
               <ConfirmButton
-                disabled={originalCode === code}
+                disabled={originalCode.code === code.code}
                 color="secondary"
                 aria-label={t('frequent|Undo')}
                 onConfirm={onUndo}
@@ -292,7 +361,7 @@ export default function EditorDialog(props: EditorDialogProps) {
               <Button
                 onClick={handleSave}
                 color="primary"
-                disabled={originalCode === code || !!error}
+                disabled={originalCode.code === code.code || !!error}
                 // @todo: aria-controls should point to the textarea id
               >
                 {saveLabel || t('frequent|Save & Apply')}
