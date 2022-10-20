@@ -545,7 +545,7 @@ export interface LabelSelector {
     key: string;
     operator: string;
     values: string[];
-  };
+  }[];
   matchLabels?: {
     [key: string]: string;
   };
