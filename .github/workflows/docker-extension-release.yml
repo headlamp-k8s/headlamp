@@ -32,20 +32,27 @@ jobs:
           sed -i "s/$lastTag/$latestTag/g" ./docker-extension/docker-compose.yml
       - name: Bump headlamp version and push the docker image
         run: |
-          docker buildx create --use
           user=${{github.actor}}
           if [ -z $user ]; then
             user=yolossn
           fi
-          git config --global user.name "$user"
-          git config --global user.email "$user@users.noreply.github.com"
-          git diff
-          git add ./docker-extension/Dockerfile
-          git add ./docker-extension/docker-compose.yml
-          git status
-          lastTag=$(git tag --list --sort=version:refname 'v*' | tail -2 | head -1)
-          latestTag=$(git tag --list --sort=version:refname 'v*' | tail -1)
-          git commit --signoff -m "docker-ext: Bump Headlamp version from $lastTag to $latestTag"
+          if [[${{github.event_name}} != "workflow_dispatch"]]; then  
+            git config --global user.name "$user"
+            git config --global user.email "$user@users.noreply.github.com"
+            git diff
+            git add ./docker-extension/Dockerfile
+            git add ./docker-extension/docker-compose.yml
+            git status
+            lastTag=$(git tag --list --sort=version:refname 'v*' | tail -2 | head -1)
+            latestTag=$(git tag --list --sort=version:refname 'v*' | tail -1)
+            git commit --signoff -m "docker-ext: Bump Headlamp version from $lastTag to $latestTag"
+            git log -1
+            git push origin main
+          else
+            echo "Manual trigger so skipping git push"
+          fi
+      - name: Build and Publish extension to DockerHub
+        run: | 
+          docker buildx create --use
           make docker-ext
-          git log -1
-          git push origin main
+          
