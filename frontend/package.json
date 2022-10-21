@@ -191,6 +191,8 @@
     "husky": "^4.3.8",
     "i18next-parser": "^4.7.0",
     "lint-staged": "^10.5.4",
+    "msw": "^0.47.4",
+    "msw-storybook-addon": "^1.6.3",
     "prettier": "^2.4.1",
     "resize-observer-polyfill": "^1.5.1",
     "typedoc": "^0.22.10",

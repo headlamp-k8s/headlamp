@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
   >
@@ -428,9 +426,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
 `;
 
 exports[`Storyshots endpoints/EndpointsDetailsView Error 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
   >
@@ -523,9 +519,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Error 1`] = `
 `;
 
 exports[`Storyshots endpoints/EndpointsDetailsView No Item Yet 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
   >
