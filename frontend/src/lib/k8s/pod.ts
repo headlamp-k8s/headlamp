@@ -16,10 +16,12 @@ export interface KubePod extends KubeObjectInterface {
     nodeSelector?: {
       [key: string]: string;
     };
+    initContainers?: any[];
   };
   status: {
     conditions: KubeCondition[];
     containerStatuses: KubeContainerStatus[];
+    initContainerStatuses?: KubeContainerStatus[];
     hostIP: string;
     message?: string;
     phase: string;
@@ -57,6 +59,15 @@ type newGetLogs = (
   onLogs: StreamResultsCb,
   logsOptions: LogOptions
 ) => () => void;
+
+type PodDetailedStatus = {
+  restarts: number;
+  reason: string;
+  message: string;
+  totalContainers: number;
+  readyContainers: number;
+  lastRestartDate: Date;
+};
 
 class Pod extends makeKubeObject<KubePod>('Pod') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'pods');
@@ -117,6 +128,136 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
     ];
 
     return stream(url, onExec, { additionalProtocols, isJson: false, ...streamOpts });
+  }
+
+  private getLastRestartDate(container: KubeContainerStatus, lastRestartDate: Date): Date {
+    if (!!container.lastState?.terminated) {
+      const terminatedDate = new Date(container.lastState.terminated.finishedAt);
+      if (lastRestartDate.getTime() < terminatedDate.getTime()) {
+        return terminatedDate;
+      }
+    }
+
+    return lastRestartDate;
+  }
+
+  private hasPodReadyCondition(conditions: any): boolean {
+    for (const condition of conditions) {
+      if (condition.type === 'Ready' && condition.Status === 'True') {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Implementation based on: https://github.com/kubernetes/kubernetes/blob/7b6293b6b6a5662fc37f440e839cf5da8b96e935/pkg/printers/internalversion/printers.go#L759
+  getDetailedStatus(): PodDetailedStatus {
+    // We cache this data to avoid going through all this logic when nothing has changed
+    if (
+      !!this.detailedStatusCache.details &&
+      this.detailedStatusCache.resourceVersion === this.jsonData.metadata.resourceVersion
+    ) {
+      return this.detailedStatusCache.details;
+    }
+
+    let restarts = 0;
+    const totalContainers = (this.spec.containers ?? []).length;
+    let readyContainers = 0;
+    let message = '';
+    let lastRestartDate = new Date(0);
+
+    let reason = this.status.reason || this.status.phase;
+
+    let initializing = false;
+    for (const i in this.status.initContainerStatuses ?? []) {
+      const container = this.status.initContainerStatuses![i];
+      restarts += container.restartCount;
+      lastRestartDate = this.getLastRestartDate(container, lastRestartDate);
+
+      switch (true) {
+        case container.state.terminated?.exitCode === 0:
+          continue;
+        case !!container.state.terminated:
+          if (!container.state.terminated!.reason) {
+            if (container.state.terminated!.signal !== 0) {
+              reason = `Init:Signal:${container.state.terminated!.signal}`;
+            } else {
+              reason = `Init:ExitCode:${container.state.terminated!.exitCode}`;
+            }
+          } else {
+            reason = 'Init:' + container.state.terminated!.reason;
+          }
+          message = container.state.terminated!.message || '';
+          initializing = true;
+          break;
+        case !!container.state.waiting?.reason &&
+          container.state.waiting.reason !== 'PodInitializing':
+          reason = 'Init:' + container.state.waiting!.reason;
+          initializing = true;
+          message = container.state.waiting!.message || '';
+          break;
+        default:
+          reason = `Init:${i}/${(this.spec.initContainers || []).length}`;
+          initializing = true;
+      }
+      break;
+    }
+
+    if (!initializing) {
+      restarts = 0;
+      let hasRunning = false;
+      for (let i = (this.status?.containerStatuses?.length || 0) - 1; i >= 0; i--) {
+        const container = this.status?.containerStatuses[i];
+
+        restarts += container.restartCount;
+        lastRestartDate = this.getLastRestartDate(container, lastRestartDate);
+
+        if (!!container.state.waiting?.reason) {
+          reason = container.state.waiting.reason;
+          message = container.state.waiting.message || '';
+        } else if (!!container.state.terminated?.reason) {
+          reason = container.state.terminated.reason;
+          message = container.state.terminated.message || '';
+        } else if (container.state.terminated?.reason === '') {
+          if (container.state.terminated.signal !== 0) {
+            reason = `Signal:${container.state.terminated.signal}`;
+          } else {
+            reason = `ExitCode:${container.state.terminated.exitCode}`;
+          }
+          message = container.state.terminated.message || '';
+        } else if (container.ready && !!container.state.running) {
+          hasRunning = true;
+          readyContainers++;
+        }
+      }
+
+      // change pod status back to "Running" if there is at least one container still reporting as "Running" status
+      if (reason === 'Completed' && hasRunning) {
+        if (this.hasPodReadyCondition(this.status?.conditions)) {
+          reason = 'Running';
+        } else {
+          reason = 'NotReady';
+        }
+      }
+    }
+
+    // Instead of `pod.deletionTimestamp`. Important!
+    const deletionTimestamp = this.metadata.deletionTimestamp;
+
+    if (!!deletionTimestamp && this.status?.reason === 'NodeLost') {
+      reason = 'Unknown';
+    } else if (!!deletionTimestamp) {
+      reason = 'Terminating';
+    }
+
+    return {
+      restarts,
+      totalContainers,
+      readyContainers,
+      reason,
+      lastRestartDate,
+      message,
+    };
   }
 }
 

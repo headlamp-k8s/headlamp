@@ -1,8 +1,8 @@
 import { OpPatch } from 'json-patch';
 import React from 'react';
-import { useConnectApi } from '.';
 import { createRouteURL } from '../router';
 import { timeAgo, useErrorState } from '../util';
+import { useConnectApi } from '.';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
@@ -34,6 +34,7 @@ export interface KubeMetadata {
   name: string;
   namespace?: string;
   creationTimestamp: string;
+  deletionTimestamp?: string;
   resourceVersion: string;
   selfLink?: string;
   labels?: StringDict;
@@ -567,32 +568,35 @@ export interface KubeMetrics {
   };
 }
 
+export interface ContainerState {
+  running: {
+    startedAt: string;
+  };
+  terminated: {
+    containerID: string;
+    exitCode: number;
+    finishedAt: string;
+    message?: string;
+    reason: string;
+    signal?: number;
+    startedAt: string;
+  };
+  waiting: {
+    message?: string;
+    reason: string;
+  };
+}
+
 export interface KubeContainerStatus {
   containerID?: string;
   image: string;
   imageID: string;
-  lastState: string;
   name: string;
   ready: boolean;
   restartCount: number;
-  state: {
-    running: {
-      startedAt: number;
-    };
-    terminated: {
-      containerID: string;
-      exitCode: number;
-      finishedAt: number;
-      message: string;
-      reason: string;
-      signal: number;
-      startedAt: number;
-    };
-    waiting: {
-      message: string;
-      reason: string;
-    };
-  };
+  lastState: Partial<ContainerState>;
+  state: Partial<ContainerState>;
+  started?: boolean;
 }
 
 export type Workload = DaemonSet | ReplicaSet | StatefulSet | Job | CronJob | Deployment;

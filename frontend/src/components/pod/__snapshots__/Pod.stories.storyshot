@@ -127,6 +127,12 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
                 scope="col"
               >
+                Ready
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                scope="col"
+              >
                 Status
                 <button
                   aria-label="sort swap"
@@ -193,6 +199,11 @@ exports[`Storyshots pods/PodListRenderer Pods 1`] = `
                 class="MuiTableCell-root MuiTableCell-body"
               >
                 0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                0/0
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"

@@ -1,9 +1,9 @@
 import { Icon } from '@iconify/react';
 import { Box } from '@material-ui/core';
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
+import { timeAgo } from '../../lib/util';
 import { LightTooltip, SectionFilterHeader } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import ResourceTable, { ResourceTableProps } from '../common/Resource/ResourceTable';
@@ -12,7 +12,8 @@ import { SectionBox } from '../common/SectionBox';
 export function makePodStatusLabel(pod: Pod) {
   const phase = pod.status.phase;
   let status: StatusLabelProps['status'] = '';
-  let tooltip = '';
+
+  const { reason, message: tooltip } = pod.getDetailedStatus();
 
   if (phase === 'Failed') {
     status = 'error';
@@ -22,9 +23,6 @@ export function makePodStatusLabel(pod: Pod) {
       status = 'success';
     } else {
       status = 'warning';
-      if (!!readyCondition?.reason) {
-        tooltip = `${readyCondition.reason}: ${readyCondition.message}`;
-      }
     }
   }
 
@@ -32,7 +30,7 @@ export function makePodStatusLabel(pod: Pod) {
     <LightTooltip title={tooltip} interactive>
       <Box display="inline">
         <StatusLabel status={status}>
-          {phase}
+          {reason}
           {(status === 'warning' || status === 'error') && (
             <Box
               aria-label="hidden"
@@ -60,20 +58,23 @@ export function PodListRenderer(props: PodListProps) {
   const { pods, error, hideColumns = [] } = props;
   const { t } = useTranslation('glossary');
 
-  function getRestartCount(pod: Pod) {
-    if (!pod) {
-      return 0;
-    }
-    return _.sumBy(pod.status.containerStatuses, container => container.restartCount);
-  }
-
   function getDataCols() {
     const dataCols: ResourceTableProps['columns'] = [
       'name',
       {
+        label: t('frequent|Ready'),
+        getter: (pod: Pod) => {
+          const podRow = pod.getDetailedStatus();
+          return `${podRow.readyContainers}/${podRow.totalContainers}`;
+        },
+      },
+      {
         label: t('Status'),
         getter: makePodStatusLabel,
-        sort: (pod: Pod) => pod?.status.phase,
+        sort: (pod: Pod) => {
+          const podRow = pod.getDetailedStatus();
+          return podRow.reason;
+        },
       },
       'age',
     ];
@@ -87,7 +88,15 @@ export function PodListRenderer(props: PodListProps) {
     if (!hideColumns.includes('restarts')) {
       dataCols.splice(insertIndex++, 0, {
         label: t('Restarts'),
-        getter: (pod: Pod) => getRestartCount(pod),
+        getter: (pod: Pod) => {
+          const { restarts, lastRestartDate } = pod.getDetailedStatus();
+          return lastRestartDate.getTime() !== 0
+            ? t('{{ restarts }} ({{ abbrevTime }} ago)', {
+                restarts: restarts,
+                abbrevTime: timeAgo(lastRestartDate, { format: 'mini' }),
+              })
+            : restarts;
+        },
         sort: true,
       });
     }
