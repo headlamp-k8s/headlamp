@@ -46,6 +46,7 @@ jobs:
           repository: kinvolk/minikube
           path: minikube
           token: ${{ secrets. KINVOLK_REPOS_TOKEN }}
+          fetch-depth: 0
       - name: Update headlamp version in minikube 
         run: |
           user=${{github.actor}}
@@ -56,7 +57,15 @@ jobs:
           LATEST_HEADLAMP_SHA=$(gh api \
           "/orgs/kinvolk/packages/container/headlamp/versions" --jq "map(select(.metadata.container.tags[] | contains(\"$LATEST_HEADLAMP_TAG\"))) | .[].name")
           echo $LATEST_HEADLAMP_SHA
-          cd minikube    
+          cd minikube
+          if git branch -l | grep -q "update_headlamp_$HEADLAMP_VERSION"; then
+            echo "deleting old branch from local to avoid conflict"
+            git branch -D "update_headlamp_$HEADLAMP_VERSION"
+          fi
+          if git branch -a | grep -q "origin/update_headlamp_$HEADLAMP_VERSION"; then
+            echo "deleting old branch from remote to avoid conflict"
+            git push origin --delete "update_headlamp_$HEADLAMP_VERSION"
+          fi 
           git checkout -b "update_headlamp_$HEADLAMP_VERSION" 
           sed -i "s/kinvolk\/headlamp:v.*/kinvolk\/headlamp:$LATEST_HEADLAMP_TAG@$LATEST_HEADLAMP_SHA\",/g" ./pkg/minikube/assets/addons.go
           git diff

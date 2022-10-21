@@ -44,6 +44,7 @@ jobs:
           repository: kinvolk/homebrew-cask
           path: homebrew-cask
           token: ${{ secrets. KINVOLK_REPOS_TOKEN }}
+          fetch-depth: 0
       - name: Update headlamp version in homebrew-cask
         run: |
           user=${{github.actor}}
@@ -51,6 +52,14 @@ jobs:
             user=yolossn
           fi
           cd homebrew-cask
+          if git branch -l | grep -q "update_headlamp_$HEADLAMP_VERSION"; then
+            echo "deleting old branch from local to avoid conflict"
+            git branch -D "update_headlamp_$HEADLAMP_VERSION"
+          fi
+          if git branch -a | grep -q "origin/update_headlamp_$HEADLAMP_VERSION"; then
+            echo "deleting old branch from remote to avoid conflict"
+            git push origin --delete "update_headlamp_$HEADLAMP_VERSION"
+          fi 
           HEADLAMP_VERSION=${LATEST_HEADLAMP_TAG:1}
           wget "https://github.com/kinvolk/headlamp/releases/download/$LATEST_HEADLAMP_TAG/checksums.txt"
           ARM_SHA=$(cat checksums.txt | grep .arm64.dmg | awk -F" " '{print $1}')
