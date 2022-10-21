@@ -42,3 +42,10 @@ jobs:
         path: ./app/dist/Headlamp*.AppImage
         if-no-files-found: error
         retention-days: 1
+    - name: Upload Debian artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Debian
+        path: ./app/dist/headlamp*.deb
+        if-no-files-found: error
+        retention-days: 1
