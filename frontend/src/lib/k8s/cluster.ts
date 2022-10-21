@@ -457,12 +457,14 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 export type KubeObjectClass = ReturnType<typeof makeKubeObject>;
 export type KubeObject = InstanceType<KubeObjectClass>;
 
+export type Time = number | string | null;
+
 export interface KubeCondition {
   type: string;
   status: string;
-  lastProbeTime: number;
-  lastTransitionTime?: string;
-  lastUpdateTime?: string;
+  lastProbeTime: Time;
+  lastTransitionTime?: Time;
+  lastUpdateTime?: Time;
   reason?: string;
   message?: string;
 }

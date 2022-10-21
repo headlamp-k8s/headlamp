@@ -6,6 +6,7 @@ import {
   KubeContainerStatus,
   KubeObjectInterface,
   makeKubeObject,
+  Time,
 } from './cluster';
 
 export interface KubePod extends KubeObjectInterface {
@@ -24,7 +25,7 @@ export interface KubePod extends KubeObjectInterface {
     phase: string;
     qosClass: string;
     reason: string;
-    startTime: number;
+    startTime: Time;
     [other: string]: any;
   };
 }
