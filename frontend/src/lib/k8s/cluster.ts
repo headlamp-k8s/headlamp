@@ -1,8 +1,8 @@
 import { OpPatch } from 'json-patch';
 import React from 'react';
+import { useConnectApi } from '.';
 import { createRouteURL } from '../router';
 import { timeAgo, useErrorState } from '../util';
-import { useConnectApi } from '.';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
@@ -35,7 +35,7 @@ export interface KubeMetadata {
   namespace?: string;
   creationTimestamp: string;
   resourceVersion: string;
-  selfLink: string;
+  selfLink?: string;
   labels?: StringDict;
   annotations?: StringDict;
   ownerReferences?: KubeOwnerReference[];
@@ -474,19 +474,19 @@ export interface KubeContainer {
   image: string;
   command?: string[];
   args?: string[];
-  ports: {
+  ports?: {
     name?: string;
     containerPort: number;
     protocol: string;
   }[];
   resources?: {
-    limits: {
-      cpu: string;
-      memory: string;
+    limits?: {
+      cpu?: string;
+      memory?: string;
     };
-    requests: {
-      cpu: string;
-      memory: string;
+    requests?: {
+      cpu?: string;
+      memory?: string;
     };
   };
   env?: {
@@ -568,7 +568,7 @@ export interface KubeMetrics {
 }
 
 export interface KubeContainerStatus {
-  containerID: string;
+  containerID?: string;
   image: string;
   imageID: string;
   lastState: string;

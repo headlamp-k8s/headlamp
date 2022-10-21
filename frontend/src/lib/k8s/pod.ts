@@ -21,10 +21,10 @@ export interface KubePod extends KubeObjectInterface {
     conditions: KubeCondition[];
     containerStatuses: KubeContainerStatus[];
     hostIP: string;
-    message: string;
+    message?: string;
     phase: string;
-    qosClass: string;
-    reason: string;
+    qosClass?: string;
+    reason?: string;
     startTime: Time;
     [other: string]: any;
   };
