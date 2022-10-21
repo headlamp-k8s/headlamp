@@ -71,6 +71,12 @@ type PodDetailedStatus = {
 
 class Pod extends makeKubeObject<KubePod>('Pod') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'pods');
+  protected detailedStatusCache: Partial<{ resourceVersion: string; details: PodDetailedStatus }>;
+
+  constructor(jsonData: KubePod) {
+    super(jsonData);
+    this.detailedStatusCache = {};
+  }
 
   get spec(): KubePod['spec'] {
     return this.jsonData!.spec;
@@ -152,6 +158,14 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
 
   // Implementation based on: https://github.com/kubernetes/kubernetes/blob/7b6293b6b6a5662fc37f440e839cf5da8b96e935/pkg/printers/internalversion/printers.go#L759
   getDetailedStatus(): PodDetailedStatus {
+    // We cache this data to avoid going through all this logic when nothing has changed
+    if (
+      !!this.detailedStatusCache.details &&
+      this.detailedStatusCache.resourceVersion === this.jsonData.metadata.resourceVersion
+    ) {
+      return this.detailedStatusCache.details;
+    }
+
     // We cache this data to avoid going through all this logic when nothing has changed
     if (
       !!this.detailedStatusCache.details &&
@@ -250,7 +264,7 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
       reason = 'Terminating';
     }
 
-    return {
+    const newDetails = {
       restarts,
       totalContainers,
       readyContainers,
@@ -258,6 +272,13 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
       lastRestartDate,
       message,
     };
+
+    this.detailedStatusCache = {
+      resourceVersion: this.jsonData.metadata.resourceVersion,
+      details: newDetails,
+    };
+
+    return newDetails;
   }
 }
 
