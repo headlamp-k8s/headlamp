@@ -127,7 +127,7 @@ interface PodTableRow {
   lastRestartDate: Date;
 }
 
-// Source Code: https://github.com/kubernetes/kubernetes/blob/33bf8a8ebd33eae0d45c18feb1c05baa6a055cde/pkg/printers/internalversion/printers.go#L558
+// Source Code: https://github.com/kubernetes/kubernetes/blob/master/pkg/printers/internalversion/printers.go#L759
 function getPodTableInfo(pod: KubePod): PodTableRow {
   let restarts = 0;
   const totalContainers = (pod.spec.containers ?? []).length;
