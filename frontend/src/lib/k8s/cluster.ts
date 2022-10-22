@@ -165,7 +165,10 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     static apiList<U extends KubeObject>(
       onList: (arg: U[]) => void,
       onError?: (err: ApiError) => void,
-      opts?: ApiListOptions
+      opts?: {
+        namespace?: string;
+        queryParams?: QueryParameters;
+      }
     ) {
       const createInstance = (item: T) => this.create(item) as U;
 
@@ -180,11 +183,11 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       }
 
       const queryParams: QueryParameters = {};
-      if (opts?.labelSelector) {
-        queryParams['labelSelector'] = opts.labelSelector;
+      if (opts?.queryParams?.labelSelector) {
+        queryParams['labelSelector'] = opts.queryParams.labelSelector;
       }
-      if (opts?.fieldSelector) {
-        queryParams['fieldSelector'] = opts.fieldSelector;
+      if (opts?.queryParams?.fieldSelector) {
+        queryParams['fieldSelector'] = opts.queryParams.fieldSelector;
       }
       args.push(queryParams);
 
@@ -234,14 +237,14 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
           listCalls.push(
             this.apiList(objList => onObjs(namespace, objList as U[]), onError, {
               namespace,
-              ...queryParams,
+              queryParams,
             })
           );
         }
       } else {
         // If we don't have a namespace set, then we only have one API call
         // response to set and we return it right away.
-        listCalls.push(this.apiList(listCallback, onError, { ...queryParams }));
+        listCalls.push(this.apiList(listCallback, onError, { queryParams }));
       }
 
       useConnectApi(...listCalls);
