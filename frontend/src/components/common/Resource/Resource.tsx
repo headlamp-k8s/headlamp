@@ -728,19 +728,11 @@ function getLabelSelector(item: KubeObjectInterface): string | undefined {
         continue;
     }
 
-    switch (expr.operator) {
-      case 'In':
-      case 'NotIn':
-        segment += '(';
+    let sorted = [...(expr.values ?? [])].sort().join(',');
+    if (expr.operator == 'In' || expr.operator == 'NotIn') {
+      sorted = '(' + sorted + ')';
     }
-    const sorted = [...(expr.values ?? [])].sort();
-    segment += sorted.join(',');
-    switch (expr.operator) {
-      case 'In':
-      case 'NotIn':
-        segment += ')';
-    }
-
+    segment += sorted;
     segments.push(segment);
   }
 
