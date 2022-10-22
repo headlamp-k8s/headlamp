@@ -681,7 +681,7 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
 }
 
 // Label selector examples: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#list-and-watch-filtering
-// deployment selector example: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#list-and-watch-filtering
+// deployment selector example: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
 // Possible operators: https://github.com/kubernetes/apimachinery/blob/be3a79b26814a8d7637d70f4d434a4626ee1c1e7/pkg/selection/operator.go#L24
 // Format rule for expressions: https://github.com/kubernetes/apimachinery/blob/be3a79b26814a8d7637d70f4d434a4626ee1c1e7/pkg/labels/selector.go#L305
 function getLabelSelector(item: KubeObjectInterface): string | undefined {

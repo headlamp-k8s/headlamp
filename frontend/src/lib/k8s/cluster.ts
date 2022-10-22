@@ -1,4 +1,5 @@
 import { OpPatch } from 'json-patch';
+import { unset } from 'lodash';
 import React from 'react';
 import { createRouteURL } from '../router';
 import { timeAgo, useErrorState } from '../util';
@@ -50,10 +51,8 @@ export interface KubeOwnerReference {
   uid: string;
 }
 
-export interface ApiListOptions {
+export interface ApiListOptions extends QueryParameters {
   namespace?: string | string[];
-  labelSelector?: string;
-  fieldSelector?: string;
 }
 
 // We have to define a KubeObject implementation here because the KubeObject
@@ -219,6 +218,8 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       }
 
       const listCalls = [];
+      const queryParams = opts;
+      unset(queryParams, 'namespace');
       if (!!opts?.namespace) {
         let namespaces: string[] = [];
         if (typeof opts.namespace === 'string') {
@@ -231,13 +232,16 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
         for (const namespace of namespaces) {
           listCalls.push(
-            this.apiList(objList => onObjs(namespace, objList as U[]), onError, { namespace })
+            this.apiList(objList => onObjs(namespace, objList as U[]), onError, {
+              namespace,
+              ...queryParams,
+            })
           );
         }
       } else {
         // If we don't have a namespace set, then we only have one API call
         // response to set and we return it right away.
-        listCalls.push(this.apiList(listCallback, onError));
+        listCalls.push(this.apiList(listCallback, onError, { ...queryParams }));
       }
 
       useConnectApi(...listCalls);

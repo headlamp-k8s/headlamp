@@ -318,9 +318,9 @@ function singleApiFactory(group: string, version: string, resource: string) {
   const url = `${apiRoot}/${resource}`;
   return {
     list: (cb: StreamResultsCb, errCb: StreamErrCb, queryParams?: QueryParameters) =>
-      streamResults(url, queryParams, cb, errCb),
+      streamResults(url, cb, errCb, queryParams),
     get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb, queryParams?: QueryParameters) =>
-      streamResult(url, name, queryParams, cb, errCb),
+      streamResult(url, name, cb, errCb, queryParams),
     post: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
       post(url + asQuery(queryParams), body),
     put: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
@@ -385,14 +385,14 @@ function simpleApiFactoryWithNamespace(
       cb: StreamResultsCb,
       errCb: StreamErrCb,
       queryParams?: QueryParameters
-    ) => streamResults(url(namespace), queryParams, cb, errCb),
+    ) => streamResults(url(namespace), cb, errCb, queryParams),
     get: (
       namespace: string,
       name: string,
       cb: StreamResultsCb,
       errCb: StreamErrCb,
       queryParams?: QueryParameters
-    ) => streamResult(url(namespace), name, queryParams, cb, errCb),
+    ) => streamResult(url(namespace), name, cb, errCb, queryParams),
     post: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
       post(url(body.metadata.namespace as string) + asQuery(queryParams), body),
     patch: (body: OpPatch[], namespace: string, name: string, queryParams?: QueryParameters) =>
@@ -419,7 +419,9 @@ function simpleApiFactoryWithNamespace(
 }
 
 function asQuery(queryParams?: QueryParameters): string {
-  return '?' + new URLSearchParams(queryParams).toString();
+  return !!queryParams && !!Object.keys(queryParams).length
+    ? '?' + new URLSearchParams(queryParams).toString()
+    : '';
 }
 
 function resourceDefToApiFactory(resourceDef: KubeObjectInterface): ApiFactoryReturn {
@@ -515,9 +517,9 @@ export function remove(url: string, requestOptions = {}) {
 export async function streamResult(
   url: string,
   name: string,
-  queryParams: QueryParameters | undefined,
   cb: StreamResultsCb,
-  errCb: StreamErrCb
+  errCb: StreamErrCb,
+  queryParams?: QueryParameters
 ) {
   let isCancelled = false;
   let socket: ReturnType<typeof stream>;
@@ -553,9 +555,9 @@ export async function streamResult(
 
 export async function streamResults(
   url: string,
-  queryParams: QueryParameters | undefined,
   cb: StreamResultsCb,
-  errCb: StreamErrCb
+  errCb: StreamErrCb,
+  queryParams: QueryParameters | undefined
 ) {
   const results: {
     [uid: string]: KubeObjectInterface;
