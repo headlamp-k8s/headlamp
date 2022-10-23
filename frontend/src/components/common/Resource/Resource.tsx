@@ -729,7 +729,7 @@ function getLabelSelector(item: KubeObjectInterface): string | undefined {
     }
 
     let sorted = [...(expr.values ?? [])].sort().join(',');
-    if (expr.operator == 'In' || expr.operator == 'NotIn') {
+    if (expr.operator === 'In' || expr.operator === 'NotIn') {
       sorted = '(' + sorted + ')';
     }
     segment += sorted;
