@@ -51,7 +51,7 @@ class Service extends makeKubeObject<KubeService>('service') {
     return _.uniq(
       (
         this.status?.loadBalancer?.ingress?.map(
-          (ingress: KubeLoadBalancerIngress) => ingress.hostname || ingress.ip
+          (ingress: KubeLoadBalancerIngress) => ingress?.hostname || ingress?.ip
         ) || []
       ).concat(this.spec.externalIPs || [])
     ).join(', ');
