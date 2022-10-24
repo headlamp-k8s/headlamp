@@ -623,7 +623,7 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   let isCancelled = false;
   const { failCb } = args;
   // We only set reconnectOnFailure as true by default if the failCb has not been provided.
-  const { isJson = false, additionalProtocols, connectCb, reconnectOnFailure = !!failCb } = args;
+  const { isJson = false, additionalProtocols, connectCb, reconnectOnFailure = !failCb } = args;
 
   connect();
 
