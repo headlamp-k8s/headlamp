@@ -1,7 +1,6 @@
 import initStoryshots, { Stories2SnapsConverter } from '@storybook/addon-storyshots';
 import * as rtl from '@testing-library/react';
 import path from 'path';
-import React from 'react';
 
 /**
  * The storyshot addon has some bug where the path is src/
@@ -19,17 +18,31 @@ class OurConverter extends Stories2SnapsConverter {
 
 initStoryshots({
   stories2snapsConverter: new OurConverter(),
-
-  test: ({ story: { storyFn: Story }, context }) => {
+  asyncJest: true,
+  test: async ({ story, context, done }) => {
     // We use React Testing library here, and our custom converter.
     const converter = new OurConverter();
     const snapshotFilename = converter.getSnapshotFileName(context);
-    const rendered = rtl.render(
-      <div id="root">
-        <Story {...context} />
-      </div>
-    );
-    expect(rendered).toMatchSpecificSnapshot(snapshotFilename);
+
+    // Re-render for state changes:
+    // https://github.com/storybookjs/storybook/issues/7745#issuecomment-801940326
+    // Difference to above is we do everything within an act(),
+    //   so that the initial render is also within an act.
+    const jsx = story.render();
+    await rtl.act(async () => {
+      const { unmount, rerender, container } = await rtl.render(jsx);
+      // wait for state changes
+      await rtl.act(() => new Promise(resolve => setTimeout(resolve)));
+
+      await rtl.act(async () => {
+        await rerender(jsx);
+      });
+      expect(container).toMatchSpecificSnapshot(snapshotFilename);
+
+      unmount();
+    });
+
+    done!();
   },
   snapshotSerializers: [
     {

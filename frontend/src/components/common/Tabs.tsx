@@ -70,6 +70,7 @@ export default function Tabs(props: TabsProps) {
         textColor="primary"
         aria-label={t('tabs')}
         variant="scrollable"
+        centered={false}
         scrollButtons="auto"
         className={props.className}
         {...tabProps}

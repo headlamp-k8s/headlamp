@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots crd/CustomResourceDetails Error Getting CR 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root"
   >
@@ -17,9 +15,7 @@ exports[`Storyshots crd/CustomResourceDetails Error Getting CR 1`] = `
 `;
 
 exports[`Storyshots crd/CustomResourceDetails Error Getting CRD 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root"
   >
@@ -33,9 +29,7 @@ exports[`Storyshots crd/CustomResourceDetails Error Getting CRD 1`] = `
 `;
 
 exports[`Storyshots crd/CustomResourceDetails Loading CRD 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
   >
@@ -64,9 +58,7 @@ exports[`Storyshots crd/CustomResourceDetails Loading CRD 1`] = `
 `;
 
 exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
   >
@@ -130,10 +122,10 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                   class="MuiGrid-root MuiGrid-item"
                 >
                   <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    aria-label="Edit"
+                    class="MuiButtonBase-root MuiIconButton-root"
                     tabindex="0"
-                    title="View YAML"
+                    title="Edit"
                     type="button"
                   >
                     <span
@@ -148,7 +140,25 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                 </div>
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                />
+                >
+                  <button
+                    aria-label="Delete"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Delete"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                  <div />
+                </div>
               </div>
             </div>
           </div>

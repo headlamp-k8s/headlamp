@@ -2,6 +2,6 @@
 
 exports[`Storyshots Version Dialog Version Dialog 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 />
 `;

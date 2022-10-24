@@ -2,7 +2,7 @@
 
 exports[`Storyshots AuthToken Show Actions 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 >
   <main
     class="MuiBox-root MuiBox-root"
@@ -12,7 +12,7 @@ exports[`Storyshots AuthToken Show Actions 1`] = `
 
 exports[`Storyshots AuthToken Show Error 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 >
   <main
     class="MuiBox-root MuiBox-root"

@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Link Basic 1`] = `
-<div
-  id="root"
->
+<div>
   <a
     class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
     href="/"
@@ -14,9 +12,7 @@ exports[`Storyshots Link Basic 1`] = `
 `;
 
 exports[`Storyshots Link Params 1`] = `
-<div
-  id="root"
->
+<div>
   <a
     class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
     href="/"

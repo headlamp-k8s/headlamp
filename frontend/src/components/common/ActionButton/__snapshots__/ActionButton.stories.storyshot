@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots common/ActionButton Basic 1`] = `
-<div
-  id="root"
->
+<div>
   <button
     aria-label="Some label"
     class="MuiButtonBase-root MuiIconButton-root"
@@ -24,9 +22,7 @@ exports[`Storyshots common/ActionButton Basic 1`] = `
 `;
 
 exports[`Storyshots common/ActionButton Large And Colorful 1`] = `
-<div
-  id="root"
->
+<div>
   <button
     aria-label="Some label"
     class="MuiButtonBase-root MuiIconButton-root"
@@ -47,9 +43,7 @@ exports[`Storyshots common/ActionButton Large And Colorful 1`] = `
 `;
 
 exports[`Storyshots common/ActionButton Long Description 1`] = `
-<div
-  id="root"
->
+<div>
   <button
     aria-label="Some label"
     class="MuiButtonBase-root MuiIconButton-root"

@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Tooltip/TooltipIcon Just Text 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiContainer-root makeStyles-container MuiContainer-maxWidthLg"
   >
@@ -13,9 +11,7 @@ exports[`Storyshots Tooltip/TooltipIcon Just Text 1`] = `
 `;
 
 exports[`Storyshots Tooltip/TooltipIcon With Icon 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiContainer-root makeStyles-container MuiContainer-maxWidthLg"
   >

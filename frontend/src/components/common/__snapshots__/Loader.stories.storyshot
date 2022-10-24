@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Loader With Container 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
   >
@@ -32,9 +30,7 @@ exports[`Storyshots Loader With Container 1`] = `
 `;
 
 exports[`Storyshots Loader Without Container 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
     role="progressbar"

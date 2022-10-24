@@ -315,9 +315,6 @@ export default function EditorDialog(props: EditorDialogProps) {
             ) : (
               <Tabs
                 onTabChanged={handleTabChange}
-                tabProps={{
-                  centered: true,
-                }}
                 tabs={[
                   {
                     label: t('frequent|Editor'),

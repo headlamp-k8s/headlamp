@@ -2,16 +2,14 @@
 
 exports[`Storyshots ConfirmDialog Confirm Dialog 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 >
   <div />
 </div>
 `;
 
 exports[`Storyshots ConfirmDialog Confirm Dialog Closed 1`] = `
-<div
-  id="root"
->
+<div>
   <div />
 </div>
 `;

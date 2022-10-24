@@ -60,7 +60,11 @@ export function DialogTitle(props: OurDialogTitleProps) {
         </Grid>
         {buttons && buttons.length > 0 && (
           <Grid item>
-            <Box>{buttons}</Box>
+            <Box>
+              {buttons.map((button, index) => {
+                return <React.Fragment key={index}>{button}</React.Fragment>;
+              })}
+            </Box>
           </Grid>
         )}
       </Grid>

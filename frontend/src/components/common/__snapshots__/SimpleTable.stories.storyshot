@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots SimpleTable Datum 1`] = `
-<div
-  id="root"
->
+<div>
   <table
     class="MuiTable-root makeStyles-table"
   >
@@ -120,9 +118,7 @@ exports[`Storyshots SimpleTable Datum 1`] = `
 `;
 
 exports[`Storyshots SimpleTable Getter 1`] = `
-<div
-  id="root"
->
+<div>
   <table
     class="MuiTable-root makeStyles-table"
   >
@@ -260,9 +256,7 @@ exports[`Storyshots SimpleTable Getter 1`] = `
 `;
 
 exports[`Storyshots SimpleTable Label Search 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
   >
@@ -534,9 +528,7 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
 `;
 
 exports[`Storyshots SimpleTable Name Search 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
   >
@@ -784,9 +776,7 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
 `;
 
 exports[`Storyshots SimpleTable Namespace Search 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
   >
@@ -1034,9 +1024,7 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
 `;
 
 exports[`Storyshots SimpleTable Namespace Select 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
   >
@@ -1318,9 +1306,7 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
 `;
 
 exports[`Storyshots SimpleTable Number Search 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
   >
@@ -1557,9 +1543,7 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
 `;
 
 exports[`Storyshots SimpleTable UID Search 1`] = `
-<div
-  id="root"
->
+<div>
   <div
     class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
   >

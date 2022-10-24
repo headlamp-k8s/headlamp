@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots Resource/ViewButton View 1`] = `
-<div
-  id="root"
->
+<div>
   <button
     aria-label="View YAML"
     class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
@@ -25,7 +23,7 @@ exports[`Storyshots Resource/ViewButton View 1`] = `
 
 exports[`Storyshots Resource/ViewButton View Open 1`] = `
 <div
-  id="root"
+  aria-hidden="true"
 >
   <button
     aria-label="View YAML"

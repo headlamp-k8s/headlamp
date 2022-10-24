@@ -463,9 +463,9 @@ export function getRoute(routeName: string) {
   let routeKey = routeName;
   for (const key in defaultRoutes) {
     if (key.toLowerCase() === routeName.toLowerCase()) {
-      if (key !== routeName) {
-        console.warn(`Route name ${routeName} and ${key} are not matching`);
-      }
+      // if (key !== routeName) {
+      //   console.warn(`Route name ${routeName} and ${key} are not matching`);
+      // }
       routeKey = key;
       break;
     }
