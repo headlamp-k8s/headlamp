@@ -24,6 +24,7 @@ import PersistentVolume from './persistentVolume';
 import PersistentVolumeClaim from './persistentVolumeClaim';
 import Pod from './pod';
 import ReplicaSet from './replicaSet';
+import ResourceQuota from './resourceQuota';
 import Role from './role';
 import RoleBinding from './roleBinding';
 import Secret from './secret';
@@ -43,6 +44,7 @@ const classList = [
   DaemonSet,
   Deployment,
   Endpoints,
+  ResourceQuota,
   Ingress,
   Job,
   Namespace,

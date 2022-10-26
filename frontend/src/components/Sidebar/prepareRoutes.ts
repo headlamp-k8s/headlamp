@@ -25,6 +25,10 @@ function prepareRoutes(t: (arg: string) => string) {
           name: 'configMaps',
           label: t('glossary|Config Maps'),
         },
+        {
+          name: 'resourceQuotas',
+          label: t('glossary|Resource Quotas'),
+        },
       ],
     },
     {
