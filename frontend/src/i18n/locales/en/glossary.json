@@ -133,5 +133,7 @@
   "Available": "Available",
   "Total": "Total",
   "Strategy Type": "Strategy Type",
-  "Resource Quotas": "Resource Quotas"
+  "HPAs": "HPAs",
+  "Resource Quotas": "Resource Quotas",
+  "Horizontal Pod Autoscalers": "Horizontal Pod Autoscalers"
 }

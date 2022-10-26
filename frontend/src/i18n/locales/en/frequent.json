@@ -77,5 +77,13 @@
   "Volumes": "Volumes",
   "Type": "Type",
   "Failed": "Failed",
-  "Select locale": "Select locale"
+  "Select locale": "Select locale",
+  "Status": "Status",
+  "Reason": "Reason",
+  "Message": "Message",
+  "Events": "Events",
+  "From": "From",
+  "<unknown>": "<unknown>",
+  "N/A": "N/A",
+  "more...": "more..."
 }

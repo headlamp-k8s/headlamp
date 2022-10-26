@@ -26,3 +26,5 @@ export { default as Tabs } from './Tabs';
 export * from './Terminal';
 export { default as Terminal } from './Terminal';
 export * from './Tooltip';
+export * from './ObjectEventList';
+export { default as ObjectEventList } from './ObjectEventList';

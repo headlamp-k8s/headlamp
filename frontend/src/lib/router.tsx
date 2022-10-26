@@ -18,6 +18,8 @@ import DaemonSetList from '../components/daemonset/List';
 import DeploymentsList from '../components/deployments/List';
 import EndpointDetails from '../components/endpoints/Details';
 import EndpointList from '../components/endpoints/List';
+import HpaDetails from '../components/horizontalPodAutoscaler/Details';
+import HpaList from '../components/horizontalPodAutoscaler/List';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import JobsList from '../components/job/List';
@@ -398,6 +400,20 @@ const defaultRoutes: {
     exact: true,
     sidebar: 'secrets',
     component: () => <SecretDetails />,
+  },
+  horizontalPodAutoscalers: {
+    path: '/horizontalpodautoscalers',
+    exact: true,
+    name: 'Horizontal Pod Autoscalers',
+    sidebar: 'horizontalPodAutoscalers',
+    component: () => <HpaList />,
+  },
+  horizontalPodAutoscaler: {
+    path: '/horizontalpodautoscalers/:namespace/:name',
+    exact: true,
+    name: 'Horizontal Pod Autoscaler',
+    sidebar: 'horizontalPodAutoscalers',
+    component: () => <HpaDetails />,
   },
   resourceQuotas: {
     path: '/resourcequotas',

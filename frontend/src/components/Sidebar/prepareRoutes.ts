@@ -26,6 +26,10 @@ function prepareRoutes(t: (arg: string) => string) {
           label: t('glossary|Config Maps'),
         },
         {
+          name: 'horizontalPodAutoscalers',
+          label: t('glossary|HPAs'),
+        },
+        {
           name: 'resourceQuotas',
           label: t('glossary|Resource Quotas'),
         },

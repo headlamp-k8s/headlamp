@@ -15,6 +15,7 @@ import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
 import Endpoints from './endpoints';
+import HPA from './hpa';
 import Ingress from './ingress';
 import Job from './job';
 import Namespace from './namespace';
@@ -45,6 +46,7 @@ const classList = [
   Deployment,
   Endpoints,
   ResourceQuota,
+  HPA,
   Ingress,
   Job,
   Namespace,

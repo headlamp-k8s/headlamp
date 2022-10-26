@@ -33,6 +33,7 @@ const checkExports = [
   'Tabs',
   'Terminal',
   'Tooltip',
+  'ObjectEventList',
 ];
 
 function getFilesToVerify() {

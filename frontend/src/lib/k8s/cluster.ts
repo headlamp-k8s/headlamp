@@ -41,6 +41,7 @@ export interface KubeMetadata {
   labels?: StringDict;
   annotations?: StringDict;
   ownerReferences?: KubeOwnerReference[];
+  managedFields?: KubeManagedFields[];
 }
 
 export interface KubeOwnerReference {
@@ -54,6 +55,16 @@ export interface KubeOwnerReference {
 
 export interface ApiListOptions extends QueryParameters {
   namespace?: string | string[];
+}
+
+export interface KubeManagedFields {
+  apiVersion: string;
+  fieldsType: string;
+  fieldsV1: object;
+  manager: string;
+  operation: string;
+  subresource: string;
+  timestamp: string;
 }
 
 // We have to define a KubeObject implementation here because the KubeObject

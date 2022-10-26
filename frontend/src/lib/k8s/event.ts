@@ -1,5 +1,6 @@
 import { ResourceClasses } from '.';
 import { apiFactoryWithNamespace } from './apiProxy';
+import { request } from './apiProxy';
 import { KubeMetadata, KubeObject, makeKubeObject } from './cluster';
 
 export interface KubeEvent {
@@ -44,6 +45,36 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
 
   get message() {
     return this.getValue('message');
+  }
+
+  static async objectEvents(object: KubeObject) {
+    const namespace = object.metadata.namespace;
+    const name = object.metadata.name;
+    const objectKind = object.kind;
+
+    let path = '/api/v1/events';
+    const fieldSelector: { [key: string]: string } = {
+      'involvedObject.kind': objectKind,
+      'involvedObject.name': name,
+    };
+
+    if (namespace) {
+      path = `/api/v1/namespaces/${namespace}/events`;
+      fieldSelector['involvedObject.namespace'] = namespace;
+    }
+
+    const queryParams = {
+      fieldSelector: Object.keys(fieldSelector)
+        .map(function (k) {
+          return `${k}=${fieldSelector[k]}`;
+        })
+        .join(','),
+      limit: '500',
+    };
+
+    const response = await request(path, {}, true, true, queryParams);
+
+    return response.items;
   }
 
   get involvedObjectInstance(): KubeObject | null {
