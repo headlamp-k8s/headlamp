@@ -32,6 +32,8 @@ import PodDetails from '../components/pod/Details';
 import PodList from '../components/pod/List';
 import PDBDetails from '../components/podDisruptionBudget/Details';
 import PDBList from '../components/podDisruptionBudget/List';
+import PriorityClassDetails from '../components/priorityClass/Details';
+import PriorityClassList from '../components/priorityClass/List';
 import ReplicaSetList from '../components/replicaset/List';
 import ResourceQuotaDetails from '../components/resourceQuota/Details';
 import ResourceQuotaList from '../components/resourceQuota/List';
@@ -430,6 +432,20 @@ const defaultRoutes: {
     name: 'Pod Disruption Budget',
     sidebar: 'podDisruptionBudgets',
     component: () => <PDBDetails />,
+  },
+  priorityclasses: {
+    path: '/priorityclasses',
+    exact: true,
+    name: 'Priority Classes',
+    sidebar: 'priorityClasses',
+    component: () => <PriorityClassList />,
+  },
+  priorityClass: {
+    path: '/priorityclasses/:name',
+    exact: true,
+    name: 'PriorityClass',
+    sidebar: 'priorityClasses',
+    component: () => <PriorityClassDetails />,
   },
   resourceQuotas: {
     path: '/resourcequotas',
