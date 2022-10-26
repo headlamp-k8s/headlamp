@@ -30,6 +30,8 @@ import NodeList from '../components/node/List';
 import OIDCAuth from '../components/oidcauth';
 import PodDetails from '../components/pod/Details';
 import PodList from '../components/pod/List';
+import PDBDetails from '../components/podDisruptionBudget/Details';
+import PDBList from '../components/podDisruptionBudget/List';
 import ReplicaSetList from '../components/replicaset/List';
 import ResourceQuotaDetails from '../components/resourceQuota/Details';
 import ResourceQuotaList from '../components/resourceQuota/List';
@@ -414,6 +416,20 @@ const defaultRoutes: {
     name: 'Horizontal Pod Autoscaler',
     sidebar: 'horizontalPodAutoscalers',
     component: () => <HpaDetails />,
+  },
+  podDisruptionBudgets: {
+    path: '/poddisruptionbudgets',
+    exact: true,
+    name: 'Pod Disruption Budgets',
+    sidebar: 'podDisruptionBudgets',
+    component: () => <PDBList />,
+  },
+  podDisruptionBudget: {
+    path: '/poddisruptionbudgets/:namespace/:name',
+    exact: true,
+    name: 'Pod Disruption Budget',
+    sidebar: 'podDisruptionBudgets',
+    component: () => <PDBDetails />,
   },
   resourceQuotas: {
     path: '/resourcequotas',

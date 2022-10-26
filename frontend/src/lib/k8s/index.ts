@@ -24,6 +24,7 @@ import Node from './node';
 import PersistentVolume from './persistentVolume';
 import PersistentVolumeClaim from './persistentVolumeClaim';
 import Pod from './pod';
+import PodDisruptionBudget from './podDisruptionBudget';
 import ReplicaSet from './replicaSet';
 import ResourceQuota from './resourceQuota';
 import Role from './role';
@@ -47,6 +48,7 @@ const classList = [
   Endpoints,
   ResourceQuota,
   HPA,
+  PodDisruptionBudget,
   Ingress,
   Job,
   Namespace,

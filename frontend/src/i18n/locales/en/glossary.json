@@ -134,6 +134,7 @@
   "Total": "Total",
   "Strategy Type": "Strategy Type",
   "HPAs": "HPAs",
+  "Horizontal Pod Autoscalers": "Horizontal Pod Autoscalers",
   "Resource Quotas": "Resource Quotas",
-  "Horizontal Pod Autoscalers": "Horizontal Pod Autoscalers"
+  "Pod Disruption Budget": "Pod Disruption Budget"
 }

@@ -33,6 +33,10 @@ function prepareRoutes(t: (arg: string) => string) {
           name: 'resourceQuotas',
           label: t('glossary|Resource Quotas'),
         },
+        {
+          name: 'podDisruptionBudgets',
+          label: t('glossary|Pod Disruption Budgets'),
+        },
       ],
     },
     {
