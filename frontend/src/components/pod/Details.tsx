@@ -216,9 +216,14 @@ export function VolumeDetails(props: VolumeDetailsProps) {
   );
 }
 
-export default function PodDetails() {
+export interface PodDetailsProps {
+  showLogsDefault?: boolean;
+}
+
+export default function PodDetails(props: PodDetailsProps) {
+  const { showLogsDefault } = props;
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const [showLogs, setShowLogs] = React.useState(false);
+  const [showLogs, setShowLogs] = React.useState(!!showLogsDefault);
   const [showTerminal, setShowTerminal] = React.useState(false);
   const { t } = useTranslation('glossary');
 
