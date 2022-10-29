@@ -2,9 +2,10 @@ import Box from '@material-ui/core/Box';
 import DialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Ansi from 'ansi-to-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { ITerminalOptions, Terminal as XTerminal } from 'xterm';
+import { FitAddon } from 'xterm-addon-fit';
 import ActionButton from './ActionButton';
 import { Dialog, DialogProps } from './Dialog';
 
@@ -18,6 +19,28 @@ const useStyle = makeStyles(theme => ({
     minHeight: '80%',
     display: 'flex',
     flexDirection: 'column',
+    '& .xterm ': {
+      height: '100vh', // So the terminal doesn't stay shrunk when shrinking vertically and maximizing again.
+      '& .xterm-viewport': {
+        width: 'initial !important', // BugFix: https://github.com/xtermjs/xterm.js/issues/3564#issuecomment-1004417440
+      },
+    },
+    '& #xterm-container': {
+      overflow: 'hidden',
+      width: '100%',
+      height: '100%',
+      '& .terminal.xterm': {
+        padding: 10,
+      },
+    },
+  },
+  logBox: {
+    paddingTop: theme.spacing(1),
+    flex: 1,
+    width: '100%',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column-reverse',
   },
   terminalCode: {
     color: theme.palette.common.white,
@@ -47,10 +70,17 @@ export function LogViewer(props: LogViewerProps) {
   const { logs, title = '', downloadName = 'log', onClose, topActions = [], ...other } = props;
   const [isFullScreen, setIsFullScreen] = React.useState(false);
   const classes = useStyle({ isFullScreen });
-  const logsBottomRef = React.useRef<HTMLDivElement>(null);
   const { t } = useTranslation('frequent');
-  const [isScrolledUp, setIsScrolledUp] = React.useState(false);
-  const scrollMargin = 15;
+  const xtermRef = React.useRef<XTerminal | null>(null);
+  const fitAddonRef = React.useRef<any>(null);
+  const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
+
+  const XterminalReadonlyConfig: ITerminalOptions = {
+    cursorStyle: 'bar',
+    scrollback: 10000,
+    rows: 30, // initial rows before fit
+    lineHeight: 1.21,
+  };
 
   function downloadLog() {
     const element = document.createElement('a');
@@ -63,31 +93,45 @@ export function LogViewer(props: LogViewerProps) {
   }
 
   React.useEffect(() => {
-    if (logsBottomRef?.current && !isScrolledUp) {
-      logsBottomRef.current.scrollIntoView();
-    }
-  }, [logs]);
-
-  function handleScroll(event: any) {
-    if (logsBottomRef?.current) {
-      /* 
-        - By default the log viewer shows the logs as they happen, scrolling to the bottom automatically like a terminal view
-        - If the user scrolls the view up, even the tiniest bit, it should remain showing that portion of the log even if more logs arrive
-        - If the user scrolls down to the bottom again, then new updates will keep the view at the bottom (i.e. it will show the latest contents)
-      */
-      const wrapperPosition = logsBottomRef.current.getBoundingClientRect().bottom;
-      const scrollPosition = event.target.getBoundingClientRect().bottom + scrollMargin;
-      /*  compare if the terminal wrapper bottom is in the scroll limit then the user is at 
-          the bottom of the screen
-      */
-      const scrollAtBottom = Math.trunc(wrapperPosition) < Math.trunc(scrollPosition);
-      if (scrollAtBottom) {
-        setIsScrolledUp(false);
-        return;
-      }
+    if (!terminalContainerRef || !!xtermRef.current) {
+      return;
     }
 
-    setIsScrolledUp(true);
+    fitAddonRef.current = new FitAddon();
+    xtermRef.current = new XTerminal(XterminalReadonlyConfig);
+    xtermRef.current.loadAddon(fitAddonRef.current);
+
+    xtermRef.current.open(terminalContainerRef!);
+
+    fitAddonRef.current!.fit();
+
+    xtermRef.current?.write(getJointLogs());
+
+    const pageResizeHandler = () => {
+      fitAddonRef.current!.fit();
+      console.debug('resize');
+    };
+    window.addEventListener('resize', pageResizeHandler);
+
+    return function cleanup() {
+      window.removeEventListener('resize', pageResizeHandler);
+      xtermRef.current?.dispose();
+      xtermRef.current = null;
+    };
+  }, [terminalContainerRef, xtermRef.current]);
+
+  React.useEffect(() => {
+    if (!xtermRef.current) {
+      return;
+    }
+
+    xtermRef.current?.write(getJointLogs());
+
+    return function cleanup() {};
+  }, [logs, xtermRef]);
+
+  function getJointLogs() {
+    return logs?.join('').replaceAll('\n', '\r\n');
   }
 
   return (
@@ -115,15 +159,12 @@ export function LogViewer(props: LogViewerProps) {
             />
           </Grid>
         </Grid>
-        <Box className={classes.terminal} onScroll={handleScroll}>
-          <pre>
-            {logs.map((item, i) => (
-              <Ansi className={classes.terminalCode} key={i} linkify={false}>
-                {item}
-              </Ansi>
-            ))}
-          </pre>
-          <div ref={logsBottomRef} />
+        <Box className={classes.logBox}>
+          <div
+            id="xterm-container"
+            ref={ref => setTerminalContainerRef(ref)}
+            style={{ flex: 1, display: 'flex', flexDirection: 'column-reverse' }}
+          />
         </Box>
       </DialogContent>
     </Dialog>

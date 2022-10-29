@@ -29,7 +29,6 @@
     "@types/webpack-env": "^1.16.2",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
-    "ansi-to-react": "^6.1.6",
     "buffer": "^6.0.3",
     "console-browserify": "^1.2.0",
     "cronstrue": "^1.123.0",
