@@ -66,7 +66,7 @@ function getLogs(container: string, onLogs: StreamResultsCb, logsOptions: LogOpt
     for (let i = 0; i < linesToShow; i++) {
       logs.push(
         `${
-          showTimestamps ? `2020-01-01 16:00:00.${i % 1000}` + ' ' : ''
+          showTimestamps ? new Date().toISOString() + ' ' : ''
         }(log #${i}): from container ${container} log line log line log line log line log line log line log line log line log line\n`
       );
     }
@@ -74,14 +74,14 @@ function getLogs(container: string, onLogs: StreamResultsCb, logsOptions: LogOpt
     return logs;
   }
 
-  // Simulate a stream by continuously generating new logs.
+  // Simulate a stream by continuously generating new logs (only if not under unattended testing).
   // It's purposedly triggering at a fast pace so we see if the UI can handle it.
   const logsHandle = setInterval(() => {
     onLogs(generateLogs());
   }, 100); // ms
 
   return () => {
-    clearInterval(logsHandle);
+    clearInterval(logsHandle as NodeJS.Timeout);
   };
 }
 

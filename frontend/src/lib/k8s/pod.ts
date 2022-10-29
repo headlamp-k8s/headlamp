@@ -36,7 +36,7 @@ export interface ExecOptions extends StreamArgs {
   command?: string[];
 }
 
-interface LogOptions {
+export interface LogOptions {
   /** The number of lines to display from the end side of the log */
   tailLines?: number;
   /** Whether to show the logs from previous runs of the container (only for restarted containers) */
