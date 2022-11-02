@@ -105,6 +105,7 @@ export function LogViewer(props: LogViewerProps) {
     xtermRef.current = new XTerminal(XterminalReadonlyConfig);
     xtermRef.current.loadAddon(fitAddonRef.current);
     xtermRef.current.loadAddon(searchAddonRef.current);
+    enableCopyPasteInXterm(xtermRef.current);
 
     xtermRef.current.open(terminalContainerRef!);
 
@@ -187,6 +188,21 @@ export function LogViewer(props: LogViewerProps) {
       </DialogContent>
     </Dialog>
   );
+}
+
+function enableCopyPasteInXterm(xterm: XTerminal) {
+  xterm.attachCustomKeyEventHandler(arg => {
+    if (arg.ctrlKey && arg.code === 'KeyC' && arg.type === 'keydown') {
+      const selection = xterm.getSelection();
+      if (selection) {
+        return false;
+      }
+    }
+    if (arg.ctrlKey && arg.code === 'KeyV' && arg.type === 'keydown') {
+      return false;
+    }
+    return true;
+  });
 }
 
 const useSearchBoxStyle = makeStyles(theme => {
