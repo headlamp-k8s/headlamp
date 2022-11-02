@@ -45,6 +45,7 @@ function PodLogViewer(props: PodLogViewerProps) {
   const [container, setContainer] = React.useState(getDefaultContainer());
   const [showPrevious, setShowPrevious] = React.useState<boolean>(false);
   const [showTimestamps, setShowTimestamps] = React.useState<boolean>(true);
+  const [follow, setFollow] = React.useState<boolean>(true);
   const [lines, setLines] = React.useState<number>(100);
   const [logs, setLogs] = React.useState<string[]>([]);
   const { t } = useTranslation('frequent');
@@ -69,6 +70,7 @@ function PodLogViewer(props: PodLogViewerProps) {
           tailLines: lines,
           showPrevious,
           showTimestamps,
+          follow,
         });
       }
 
@@ -79,7 +81,7 @@ function PodLogViewer(props: PodLogViewerProps) {
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [container, lines, open, showPrevious, showTimestamps]
+    [container, lines, open, showPrevious, showTimestamps, follow]
   );
 
   function handleContainerChange(event: any) {
@@ -107,6 +109,10 @@ function PodLogViewer(props: PodLogViewerProps) {
 
   function handleTimestampsChange() {
     setShowTimestamps(timestamps => !timestamps);
+  }
+
+  function handleFollowChange() {
+    setFollow(follow => !follow);
   }
 
   return (
@@ -182,6 +188,19 @@ function PodLogViewer(props: PodLogViewerProps) {
               checked={showTimestamps}
               onChange={handleTimestampsChange}
               name="checkTimestamps"
+              color="primary"
+              size="small"
+            />
+          }
+        />,
+        <FormControlLabel
+          className={classes.switchControl}
+          label={t('logs|Follow')}
+          control={
+            <Switch
+              checked={follow}
+              onChange={handleFollowChange}
+              name="follow"
               color="primary"
               size="small"
             />
