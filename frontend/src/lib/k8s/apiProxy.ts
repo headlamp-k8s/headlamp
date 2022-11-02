@@ -394,14 +394,11 @@ function simpleApiFactoryWithNamespace(
       queryParams?: QueryParameters
     ) => streamResult(url(namespace), name, cb, errCb, queryParams),
     post: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
-      post(url(body.metadata.namespace as string) + asQuery(queryParams), body),
+      post(url(body.metadata.namespace!) + asQuery(queryParams), body),
     patch: (body: OpPatch[], namespace: string, name: string, queryParams?: QueryParameters) =>
       patch(`${url(namespace)}/${name}` + asQuery({ ...queryParams, ...{ pretty: 'true' } }), body),
     put: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
-      put(
-        `${url(body.metadata.namespace as string)}/${body.metadata.name}` + asQuery(queryParams),
-        body
-      ),
+      put(`${url(body.metadata.namespace!)}/${body.metadata.name}` + asQuery(queryParams), body),
     delete: (namespace: string, name: string, queryParams?: QueryParameters) =>
       remove(`${url(namespace)}/${name}` + asQuery(queryParams)),
     isNamespaced: true,
@@ -468,7 +465,7 @@ function apiScaleFactory(apiRoot: string, resource: string) {
   return {
     get: (namespace: string, name: string) => request(url(namespace, name)),
     put: (body: { metadata: KubeMetadata; spec: { replicas: number } }) =>
-      put(url(body.metadata.namespace as string, body.metadata.name), body),
+      put(url(body.metadata.namespace!, body.metadata.name), body),
   };
 
   function url(namespace: string, name: string) {
