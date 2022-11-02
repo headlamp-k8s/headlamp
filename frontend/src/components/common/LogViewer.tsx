@@ -1,11 +1,10 @@
-import Box from '@material-ui/core/Box';
-import DialogContent from '@material-ui/core/DialogContent';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import { Box, DialogContent, Grid, InputBase, makeStyles, Paper } from '@material-ui/core';
+import _ from 'lodash';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ITerminalOptions, Terminal as XTerminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
+import { ISearchOptions, SearchAddon } from 'xterm-addon-search';
 import ActionButton from './ActionButton';
 import { Dialog, DialogProps } from './Dialog';
 
@@ -41,6 +40,7 @@ const useStyle = makeStyles(theme => ({
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column-reverse',
+    position: 'relative',
   },
   terminalCode: {
     color: theme.palette.common.white,
@@ -73,7 +73,9 @@ export function LogViewer(props: LogViewerProps) {
   const { t } = useTranslation('frequent');
   const xtermRef = React.useRef<XTerminal | null>(null);
   const fitAddonRef = React.useRef<any>(null);
+  const searchAddonRef = React.useRef<any>(null);
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
+  const [showSearch, setShowSearch] = React.useState(false);
 
   const XterminalReadonlyConfig: ITerminalOptions = {
     cursorStyle: 'bar',
@@ -98,8 +100,11 @@ export function LogViewer(props: LogViewerProps) {
     }
 
     fitAddonRef.current = new FitAddon();
+    searchAddonRef.current = new SearchAddon();
+
     xtermRef.current = new XTerminal(XterminalReadonlyConfig);
     xtermRef.current.loadAddon(fitAddonRef.current);
+    xtermRef.current.loadAddon(searchAddonRef.current);
 
     xtermRef.current.open(terminalContainerRef!);
 
@@ -116,6 +121,7 @@ export function LogViewer(props: LogViewerProps) {
     return function cleanup() {
       window.removeEventListener('resize', pageResizeHandler);
       xtermRef.current?.dispose();
+      searchAddonRef.current?.dispose();
       xtermRef.current = null;
     };
   }, [terminalContainerRef, xtermRef.current]);
@@ -153,6 +159,13 @@ export function LogViewer(props: LogViewerProps) {
           </Grid>
           <Grid item xs>
             <ActionButton
+              description={t('frequent|Find')}
+              onClick={() => setShowSearch(show => !show)}
+              icon="mdi:magnify"
+            />
+          </Grid>
+          <Grid item xs>
+            <ActionButton
               description={t('Download')}
               onClick={downloadLog}
               icon="mdi:file-download-outline"
@@ -165,8 +178,263 @@ export function LogViewer(props: LogViewerProps) {
             ref={ref => setTerminalContainerRef(ref)}
             style={{ flex: 1, display: 'flex', flexDirection: 'column-reverse' }}
           />
+          <SearchPopover
+            open={showSearch}
+            onClose={() => setShowSearch(false)}
+            searchAddonRef={searchAddonRef}
+          />
         </Box>
       </DialogContent>
     </Dialog>
+  );
+}
+
+const useSearchBoxStyle = makeStyles(theme => {
+  const baseGray = '#cccccc';
+  const grayText = {
+    color: baseGray,
+  };
+  const redText = {
+    color: '#f48771',
+  };
+
+  //@todo: This style should match the theme being used.
+  return {
+    grayText,
+    redText,
+    root: {
+      position: 'absolute',
+      background: '#252526',
+      top: 8,
+      right: 15,
+      padding: '4px 8px',
+      zIndex: theme.zIndex.modal,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderLeft: `2px solid #555`,
+      '& .SearchTextArea': {
+        background: '#3c3c3c',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: '1px 4px 2px 0',
+        width: 240,
+        '& .MuiInputBase-root': {
+          color: baseGray,
+          fontSize: '0.85rem',
+          border: '1px solid rgba(0,0,0,0)',
+          '&.Mui-focused': {
+            border: `1px solid #007fd4`,
+          },
+          '&>input': {
+            padding: '2px 4px',
+          },
+        },
+        '& .MuiIconButton-root': {
+          margin: '0 1px',
+          padding: theme.spacing(0.5),
+          fontSize: '1.05rem',
+          color: baseGray,
+          borderRadius: 4,
+          '&.checked': {
+            background: '#245779',
+          },
+        },
+      },
+      '& .search-results': {
+        width: 70,
+        marginLeft: 8,
+        fontSize: '0.8rem',
+      },
+      '& .search-actions': {
+        '& .MuiIconButton-root': {
+          padding: 2,
+          fontSize: '1.05rem',
+          color: baseGray,
+          '&.Mui-disabled': {
+            color: '#767677',
+          },
+        },
+      },
+    },
+  };
+});
+
+interface SearchPopoverProps {
+  searchAddonRef: { current: SearchAddon | null };
+  open: boolean;
+  onClose: () => void;
+}
+
+export function SearchPopover(props: SearchPopoverProps) {
+  const { searchAddonRef, open, onClose } = props;
+  const classes = useSearchBoxStyle();
+  const [searchResult, setSearchResult] = React.useState<
+    { resultIndex: number; resultCount: number } | undefined
+  >(undefined);
+  const [searchText, setSearchText] = React.useState<string>('');
+  const [caseSensitiveChecked, setCaseSensitiveChecked] = React.useState<boolean>(false);
+  const [wholeWordMatchChecked, setWholeWordMatchChecked] = React.useState<boolean>(false);
+  const [regexChecked, setRegexChecked] = React.useState<boolean>(false);
+  const { t } = useTranslation(['search', 'frequent']);
+  const focusedRef = React.useCallback(
+    node => {
+      if (open && !!node) {
+        node.focus();
+        node.select();
+      }
+    },
+    [open]
+  );
+
+  const randomId = _.uniqueId('search-input-');
+
+  const searchAddonTextDecorationOptions: ISearchOptions['decorations'] = {
+    matchBackground: '#6d402a',
+    activeMatchBackground: '#515c6a',
+    matchOverviewRuler: '#f00',
+    activeMatchColorOverviewRuler: '#515c6a',
+  };
+
+  useEffect(() => {
+    if (!open) {
+      searchAddonRef.current?.clearDecorations();
+      searchAddonRef.current?.clearActiveDecoration();
+      return;
+    }
+
+    try {
+      searchAddonRef.current?.findNext(searchText, {
+        regex: regexChecked,
+        caseSensitive: caseSensitiveChecked,
+        wholeWord: wholeWordMatchChecked,
+        decorations: searchAddonTextDecorationOptions,
+      });
+    } catch (e) {
+      // Catch invalid regular expression error
+      console.log('Error searching logs: ', e);
+      searchAddonRef.current?.findNext('');
+    }
+
+    searchAddonRef.current?.onDidChangeResults(args => {
+      setSearchResult(args);
+    });
+
+    return function cleanup() {
+      searchAddonRef.current?.findNext('');
+    };
+  }, [searchText, caseSensitiveChecked, wholeWordMatchChecked, regexChecked, open]);
+
+  const handleFindNext = () => {
+    searchAddonRef.current?.findNext(searchText, {
+      regex: regexChecked,
+      caseSensitive: caseSensitiveChecked,
+      wholeWord: wholeWordMatchChecked,
+      decorations: searchAddonTextDecorationOptions,
+    });
+  };
+
+  const handleFindPrevious = () => {
+    searchAddonRef.current?.findPrevious(searchText, {
+      regex: regexChecked,
+      caseSensitive: caseSensitiveChecked,
+      wholeWord: wholeWordMatchChecked,
+      decorations: searchAddonTextDecorationOptions,
+    });
+  };
+
+  const handleClose = () => {
+    onClose();
+  };
+
+  const onSearchTextChange = (event: any) => {
+    setSearchText(event.target.value);
+  };
+
+  const handleInputKeyDown = (event: any) => {
+    if (event.key === 'Enter') {
+      if (event.shiftKey) {
+        handleFindPrevious();
+      } else {
+        handleFindNext();
+      }
+    }
+  };
+
+  const searchResults = () => {
+    let className = classes.grayText;
+    let msg = '';
+    if (!searchText) {
+      msg = t('search|No results');
+    } else if (!searchResult) {
+      msg = t('search|Too many matches');
+      className = classes.redText;
+    } else {
+      if (searchResult.resultCount === 0) {
+        msg = t('search|No results');
+        className = classes.redText;
+      } else {
+        msg = t('search|{{ currentIndex }} of {{ totalResults }}', {
+          currentIndex:
+            searchResult?.resultIndex !== undefined ? searchResult?.resultIndex + 1 : '?',
+          totalResults:
+            searchResult?.resultCount === undefined ? '999+' : searchResult?.resultCount,
+        });
+      }
+    }
+
+    return <span className={className}>{msg}</span>;
+  };
+
+  return !open ? (
+    <></>
+  ) : (
+    <Paper className={classes.root}>
+      <Box className="SearchTextArea">
+        <InputBase
+          value={searchText}
+          onChange={onSearchTextChange}
+          placeholder={t('frequent|Find')}
+          inputProps={{ autoComplete: 'off', type: 'text', name: randomId, id: randomId }}
+          onKeyDown={handleInputKeyDown}
+          inputRef={focusedRef}
+        />
+        <ActionButton
+          icon="mdi:format-letter-case"
+          onClick={() => setCaseSensitiveChecked(!caseSensitiveChecked)}
+          description={t('search|Match case')}
+          className={caseSensitiveChecked ? 'checked' : ''}
+        />
+        <ActionButton
+          icon="mdi:format-letter-matches"
+          onClick={() => setWholeWordMatchChecked(!wholeWordMatchChecked)}
+          description={t('search|Match whole word')}
+          className={wholeWordMatchChecked ? 'checked' : ''}
+        />
+        <ActionButton
+          icon="mdi:regex"
+          onClick={() => setRegexChecked(!regexChecked)}
+          description={t('search|Use regular expression')}
+          className={regexChecked ? 'checked' : ''}
+        />
+      </Box>
+      <div className="search-results">{searchResults()}</div>
+      <div className="search-actions">
+        <ActionButton
+          icon="mdi:arrow-up"
+          onClick={handleFindPrevious}
+          description={t('search|Previous Match (Shift+Enter)')}
+          disabled={!searchResult?.resultCount && searchResult?.resultCount !== undefined}
+        />
+        <ActionButton
+          icon="mdi:arrow-down"
+          onClick={handleFindNext}
+          description={t('search|Next Match (Enter)')}
+          disabled={!searchResult?.resultCount && searchResult?.resultCount !== undefined}
+        />
+        <ActionButton icon="mdi:close" onClick={handleClose} description={t('frequent|Close')} />
+      </div>
+    </Paper>
   );
 }
