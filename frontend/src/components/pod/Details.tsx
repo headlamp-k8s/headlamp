@@ -25,9 +25,13 @@ const useStyle = makeStyles(theme => ({
   containerFormControl: {
     minWidth: '11rem',
   },
+  linesFormControl: {
+    minWidth: '6rem',
+  },
   switchControl: {
-    minWidth: '11rem',
-    paddingTop: theme.spacing(1),
+    margin: 0,
+    paddingTop: theme.spacing(2),
+    paddingRight: theme.spacing(2),
   },
 }));
 
@@ -131,7 +135,7 @@ function PodLogViewer(props: PodLogViewerProps) {
               ))}
           </Select>
         </FormControl>,
-        <FormControl className={classes.containerFormControl}>
+        <FormControl className={classes.linesFormControl}>
           <InputLabel shrink id="container-lines-chooser-label">
             {t('frequent|Lines')}
           </InputLabel>
@@ -165,19 +169,21 @@ function PodLogViewer(props: PodLogViewerProps) {
                 onChange={handlePreviousChange}
                 name="checkPrevious"
                 color="primary"
+                size="small"
               />
             }
           />
         </LightTooltip>,
         <FormControlLabel
           className={classes.switchControl}
-          label={t('logs|Show Timestamps')}
+          label={t('logs|Timestamps')}
           control={
             <Switch
               checked={showTimestamps}
               onChange={handleTimestampsChange}
               name="checkTimestamps"
               color="primary"
+              size="small"
             />
           }
         />,
