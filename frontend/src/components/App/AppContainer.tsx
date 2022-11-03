@@ -4,6 +4,7 @@ import { BrowserRouter, HashRouter } from 'react-router-dom';
 import helpers from '../../helpers';
 import ReleaseNotes from '../common/ReleaseNotes/ReleaseNotes';
 import Layout from './Layout';
+import { PreviousRouteProvider } from './RouteSwitcher';
 
 export default function AppContainer() {
   const Router = ({ children }: React.PropsWithChildren<{}>) =>
@@ -21,7 +22,9 @@ export default function AppContainer() {
       }}
     >
       <Router>
-        <Layout />
+        <PreviousRouteProvider>
+          <Layout />
+        </PreviousRouteProvider>
       </Router>
       <ReleaseNotes />
     </SnackbarProvider>
