@@ -64,10 +64,19 @@ export interface LogViewerProps extends DialogProps {
   onClose: () => void;
   topActions?: JSX.Element[];
   open: boolean;
+  xtermRef?: React.MutableRefObject<XTerminal | null>;
 }
 
 export function LogViewer(props: LogViewerProps) {
-  const { logs, title = '', downloadName = 'log', onClose, topActions = [], ...other } = props;
+  const {
+    logs,
+    title = '',
+    downloadName = 'log',
+    xtermRef: outXtermRef,
+    onClose,
+    topActions = [],
+    ...other
+  } = props;
   const [isFullScreen, setIsFullScreen] = React.useState(false);
   const classes = useStyle({ isFullScreen });
   const { t } = useTranslation('frequent');
@@ -103,6 +112,11 @@ export function LogViewer(props: LogViewerProps) {
     searchAddonRef.current = new SearchAddon();
 
     xtermRef.current = new XTerminal(XterminalReadonlyConfig);
+
+    if (!!outXtermRef) {
+      outXtermRef.current = xtermRef.current;
+    }
+
     xtermRef.current.loadAddon(fitAddonRef.current);
     xtermRef.current.loadAddon(searchAddonRef.current);
     enableCopyPasteInXterm(xtermRef.current);
@@ -132,6 +146,12 @@ export function LogViewer(props: LogViewerProps) {
       return;
     }
 
+    // We're delegating to external xterm ref.
+    if (!!outXtermRef) {
+      return;
+    }
+
+    xtermRef.current?.clear();
     xtermRef.current?.write(getJointLogs());
 
     return function cleanup() {};
