@@ -79,6 +79,16 @@ function PodLogViewer(props: PodLogViewerProps) {
         lastLineShown: logLines.length - 1,
       };
     });
+    // If we stopped following the logs and we have logs already,
+    // then we don't need to fetch them again.
+    if (!follow && logs.logs.length > 0) {
+      xtermRef.current?.write(
+        '\n\n' +
+          t('logs|Logs are paused. Click the follow button to resume following them.') +
+          '\r\n'
+      );
+      return;
+    }
   }
   const debouncedSetState = _.debounce(setLogsDebounced, 500, options);
 
