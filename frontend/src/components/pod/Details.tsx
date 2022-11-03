@@ -12,6 +12,7 @@ import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { Terminal as XTerminal } from 'xterm';
 import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
 import { LightTooltip, SectionBox, SimpleTable } from '../common';
@@ -47,7 +48,11 @@ function PodLogViewer(props: PodLogViewerProps) {
   const [showTimestamps, setShowTimestamps] = React.useState<boolean>(true);
   const [follow, setFollow] = React.useState<boolean>(true);
   const [lines, setLines] = React.useState<number>(100);
-  const [logs, setLogs] = React.useState<string[]>([]);
+  const [logs, setLogs] = React.useState<{ logs: string[]; lastLineShown: number }>({
+    logs: [],
+    lastLineShown: -1,
+  });
+  const xtermRef = React.useRef<XTerminal | null>(null);
   const { t } = useTranslation('frequent');
 
   function getDefaultContainer() {
@@ -55,9 +60,25 @@ function PodLogViewer(props: PodLogViewerProps) {
   }
 
   const options = { leading: true, trailing: true, maxWait: 1000 };
-  function setLogsDebounced(args: string[]) {
-    setLogs([]);
-    setLogs(args);
+  function setLogsDebounced(logLines: string[]) {
+    setLogs(current => {
+      if (current.lastLineShown >= logLines.length) {
+        xtermRef.current?.clear();
+        xtermRef.current?.write(logLines.join('').replaceAll('\n', '\r\n'));
+      } else {
+        xtermRef.current?.write(
+          logLines
+            .slice(current.lastLineShown + 1)
+            .join('')
+            .replaceAll('\n', '\r\n')
+        );
+      }
+
+      return {
+        logs: logLines,
+        lastLineShown: logLines.length - 1,
+      };
+    });
   }
   const debouncedSetState = _.debounce(setLogsDebounced, 500, options);
 
@@ -66,6 +87,9 @@ function PodLogViewer(props: PodLogViewerProps) {
       let callback: any = null;
 
       if (props.open) {
+        xtermRef.current?.clear();
+        setLogs({ logs: [], lastLineShown: -1 });
+
         callback = item.getLogs(container, debouncedSetState, {
           tailLines: lines,
           showPrevious,
@@ -121,7 +145,8 @@ function PodLogViewer(props: PodLogViewerProps) {
       downloadName={`${item.getName()}_${container}`}
       open={open}
       onClose={onClose}
-      logs={logs}
+      logs={logs.logs}
+      xtermRef={xtermRef}
       topActions={[
         <FormControl className={classes.containerFormControl}>
           <InputLabel shrink id="container-name-chooser-label">
