@@ -1,6 +1,7 @@
 import { Box, DialogContent, Grid, InputBase, makeStyles, Paper } from '@material-ui/core';
 import _ from 'lodash';
 import React, { useEffect } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { useTranslation } from 'react-i18next';
 import { ITerminalOptions, Terminal as XTerminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
@@ -85,6 +86,10 @@ export function LogViewer(props: LogViewerProps) {
   const searchAddonRef = React.useRef<any>(null);
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
   const [showSearch, setShowSearch] = React.useState(false);
+
+  useHotkeys('ctrl+shift+f', () => {
+    setShowSearch(true);
+  });
 
   const XterminalReadonlyConfig: ITerminalOptions = {
     cursorStyle: 'bar',
