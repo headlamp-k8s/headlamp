@@ -310,13 +310,29 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       const [error, setError] = useErrorState(setObj);
 
       function onGet(item: U | null) {
+        // Only set the object if we have we have a different one.
+        if (!!obj && !!item && obj.metadata.resourceVersion === item.metadata.resourceVersion) {
+          return;
+        }
+
         setObj(item);
         if (item !== null) {
           setError(null);
         }
       }
 
-      this.useApiGet(onGet, name, namespace, setError);
+      function onError(err: ApiError | null) {
+        if (
+          error === err ||
+          (!!error && !!err && error.message === err.message && error.status === err.status)
+        ) {
+          return;
+        }
+
+        setError(err);
+      }
+
+      this.useApiGet(onGet, name, namespace, onError);
 
       // Return getters and then the setters as the getters are more likely to be used with
       // this function.
