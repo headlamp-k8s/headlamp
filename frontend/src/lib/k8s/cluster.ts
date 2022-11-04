@@ -52,6 +52,8 @@ export interface KubeOwnerReference {
 
 export interface ApiListOptions {
   namespace?: string | string[];
+  labelSelector?: string;
+  fieldSelector?: string;
 }
 
 // We have to define a KubeObject implementation here because the KubeObject
@@ -176,21 +178,27 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     static apiList<U extends KubeObject>(
       onList: (arg: U[]) => void,
       onError?: (err: ApiError) => void,
-      opts?: {
-        namespace?: string;
-      }
+      opts?: ApiListOptions
     ) {
       const createInstance = (item: T) => this.create(item) as U;
 
-      const args: any[] = [(list: T[]) => onList(list.map((item: T) => createInstance(item) as U))];
+      const callback = (list: T[]) => onList(list.map((item: T) => createInstance(item) as U));
+      const args: any[] = [callback];
 
       if (this.apiEndpoint.isNamespaced) {
         args.unshift(opts?.namespace || null);
       }
 
-      if (onError) {
-        args.push(onError);
+      args.push(onError);
+
+      const queryParams: Omit<ApiListOptions, 'namespace'> = {};
+      const selectors: (keyof typeof queryParams)[] = ['labelSelector', 'fieldSelector'];
+      for (const selector of selectors) {
+        if (opts?.[selector]) {
+          queryParams[selector] = opts[selector];
+        }
       }
+      args.push(queryParams);
 
       return this.apiEndpoint.list.bind(null, ...args);
     }
@@ -222,25 +230,29 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       }
 
       const listCalls = [];
-      if (!!opts?.namespace) {
+      const { namespace, ...otherOpts } = opts || {};
+      if (!!namespace) {
         let namespaces: string[] = [];
-        if (typeof opts.namespace === 'string') {
-          namespaces = [opts.namespace];
-        } else if (Array.isArray(opts.namespace)) {
-          namespaces = opts.namespace as string[];
+        if (typeof namespace === 'string') {
+          namespaces = [namespace];
+        } else if (Array.isArray(namespace)) {
+          namespaces = namespace as string[];
         } else {
           throw Error('namespace should be a string or array of strings');
         }
 
-        for (const namespace of namespaces) {
+        for (const ns of namespaces) {
           listCalls.push(
-            this.apiList(objList => onObjs(namespace, objList as U[]), onError, { namespace })
+            this.apiList(objList => onObjs(ns, objList as U[]), onError, {
+              namespace: ns,
+              ...otherOpts,
+            })
           );
         }
       } else {
         // If we don't have a namespace set, then we only have one API call
         // response to set and we return it right away.
-        listCalls.push(this.apiList(listCallback, onError));
+        listCalls.push(this.apiList(listCallback, onError, otherOpts));
       }
 
       useConnectApi(...listCalls);
