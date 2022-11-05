@@ -195,7 +195,13 @@ export default function SidebarItem(props: SidebarItemProps) {
           <Collapse in={fullWidth && expanded} className={classes.fullWidth}>
             <List component="ul" disablePadding className={classes.nested}>
               {subList.map((item: SidebarItemProps) => (
-                <SidebarItem key={item.name} selectedName={selectedName} hasParent {...item} />
+                <SidebarItem
+                  key={item.name}
+                  selectedName={selectedName}
+                  hasParent
+                  search={search}
+                  {...item}
+                />
               ))}
             </List>
           </Collapse>
