@@ -20,7 +20,7 @@ export default function ServiceAccountDetails() {
             name: t('Secrets'),
             value: (
               <React.Fragment>
-                {item.secrets.map(({ name }, index) => (
+                {item.secrets?.map(({ name }, index) => (
                   <React.Fragment key={`${name}__${index}`}>
                     <Link routeName={'secret'} params={{ namespace, name }}>
                       {name}
