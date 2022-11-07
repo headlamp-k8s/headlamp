@@ -15,6 +15,7 @@ import * as monaco from 'monaco-editor';
 import React, { isValidElement, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link as RouterLink, NavLinkProps, useLocation } from 'react-router-dom';
+import { labelSelectorToQuery } from '../../../lib/k8s';
 import {
   KubeCondition,
   KubeContainer,
@@ -664,32 +665,15 @@ export interface OwnedPodsSectionProps {
 export function OwnedPodsSection(props: OwnedPodsSectionProps) {
   const { resource, hideColumns } = props;
 
-  const [pods, error] = Pod.useList();
+  const queryData = {
+    namespace: resource.kind === 'Namespace' ? resource.metadata.name : undefined,
+    labelSelector: labelSelectorToQuery(resource?.spec?.selector),
+    fieldSelector: resource.kind === 'Node' ? `spec.nodeName=${resource.metadata.name}` : undefined,
+  };
 
-  function getOwnedPods() {
-    if (!pods) {
-      return null;
-    }
+  const [pods, error] = Pod.useList(queryData);
 
-    if (resource.kind === 'Node') {
-      return pods.filter(item => item.spec.nodeName === resource.metadata.name);
-    }
-
-    if (resource.kind === 'Namespace') {
-      return pods.filter(item => item.metadata.namespace === resource.metadata.name);
-    }
-
-    const resourceTemplateLabel = Object.values(resource?.spec?.template?.metadata?.labels || []);
-    if (!resourceTemplateLabel) {
-      return [];
-    }
-    return pods.filter(item =>
-      resourceTemplateLabel.every(elem => Object.values(item.metadata.labels || {}).includes(elem))
-    );
-  }
-
-  const filteredPods = getOwnedPods();
-  return <PodListRenderer hideColumns={hideColumns} pods={filteredPods} error={error} />;
+  return <PodListRenderer hideColumns={hideColumns} pods={pods} error={error} />;
 }
 
 export function ContainersSection(props: { resource: KubeObjectInterface | null }) {

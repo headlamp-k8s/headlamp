@@ -1,9 +1,10 @@
 import { OpPatch } from 'json-patch';
+import { unset } from 'lodash';
 import React from 'react';
 import { createRouteURL } from '../router';
 import { timeAgo, useErrorState } from '../util';
 import { useConnectApi } from '.';
-import { ApiError, apiFactory, apiFactoryWithNamespace, post } from './apiProxy';
+import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
@@ -50,7 +51,7 @@ export interface KubeOwnerReference {
   uid: string;
 }
 
-export interface ApiListOptions {
+export interface ApiListOptions extends QueryParameters {
   namespace?: string | string[];
 }
 
@@ -178,6 +179,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       onError?: (err: ApiError) => void,
       opts?: {
         namespace?: string;
+        queryParams?: QueryParameters;
       }
     ) {
       const createInstance = (item: T) => this.create(item) as U;
@@ -191,6 +193,15 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       if (onError) {
         args.push(onError);
       }
+
+      const queryParams: QueryParameters = {};
+      if (opts?.queryParams?.labelSelector) {
+        queryParams['labelSelector'] = opts.queryParams.labelSelector;
+      }
+      if (opts?.queryParams?.fieldSelector) {
+        queryParams['fieldSelector'] = opts.queryParams.fieldSelector;
+      }
+      args.push(queryParams);
 
       return this.apiEndpoint.list.bind(null, ...args);
     }
@@ -222,6 +233,8 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       }
 
       const listCalls = [];
+      const queryParams = opts;
+      unset(queryParams, 'namespace');
       if (!!opts?.namespace) {
         let namespaces: string[] = [];
         if (typeof opts.namespace === 'string') {
@@ -234,13 +247,16 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
         for (const namespace of namespaces) {
           listCalls.push(
-            this.apiList(objList => onObjs(namespace, objList as U[]), onError, { namespace })
+            this.apiList(objList => onObjs(namespace, objList as U[]), onError, {
+              namespace,
+              queryParams,
+            })
           );
         }
       } else {
         // If we don't have a namespace set, then we only have one API call
         // response to set and we return it right away.
-        listCalls.push(this.apiList(listCallback, onError));
+        listCalls.push(this.apiList(listCallback, onError, { queryParams }));
       }
 
       useConnectApi(...listCalls);
@@ -545,7 +561,7 @@ export interface LabelSelector {
     key: string;
     operator: string;
     values: string[];
-  };
+  }[];
   matchLabels?: {
     [key: string]: string;
   };

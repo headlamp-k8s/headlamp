@@ -1,6 +1,6 @@
 import { createRouteURL } from '../router';
-import { ResourceClasses } from '.';
-import { KubeObjectClass } from './cluster';
+import { labelSelectorToQuery, ResourceClasses } from '.';
+import { KubeObjectClass, LabelSelector } from './cluster';
 
 // Remove NetworkPolicy since we don't use it.
 const k8sClassesToTest = Object.values(ResourceClasses).filter(
@@ -53,5 +53,150 @@ describe('Class tests', () => {
       expect(route).not.toBe('');
       expect(route).not.toBe('/');
     });
+  });
+});
+
+const labelSelector: LabelSelector = {
+  matchLabels: {
+    app: 'test',
+    label1: 'value1',
+  },
+};
+
+describe('Label selector', () => {
+  test('Match labels alone', () => {
+    const query = labelSelectorToQuery(labelSelector);
+    expect(query).toBe('app=test,label1=value1');
+  });
+
+  test('Match labels and match expressions', () => {
+    const query = labelSelectorToQuery({
+      ...labelSelector,
+      matchExpressions: [
+        {
+          key: 'label2',
+          operator: 'In',
+          values: ['value2', 'value3'],
+        },
+      ],
+    });
+    expect(query).toBe('app=test,label1=value1,label2 in (value2,value3)');
+  });
+
+  test('Match expression In', () => {
+    const query = labelSelectorToQuery({
+      matchExpressions: [
+        {
+          key: 'label2',
+          operator: 'In',
+          values: ['value2', 'value3'],
+        },
+      ],
+    });
+    expect(query).toBe('label2 in (value2,value3)');
+  });
+
+  test('Match expression NotIn', () => {
+    const query = labelSelectorToQuery({
+      matchExpressions: [
+        {
+          key: 'label2',
+          operator: 'NotIn',
+          values: ['value2', 'value3'],
+        },
+      ],
+    });
+    expect(query).toBe('label2 notin (value2,value3)');
+  });
+
+  test('Match expression Equals', () => {
+    const query = labelSelectorToQuery({
+      matchExpressions: [
+        {
+          key: 'label2',
+          operator: 'Equals',
+          values: ['value2'],
+        },
+      ],
+    });
+    expect(query).toBe('label2=value2');
+  });
+
+  test('Match expression DoubleEquals', () => {
+    const query = labelSelectorToQuery({
+      matchExpressions: [
+        {
+          key: 'label2',
+          operator: 'DoubleEquals',
+          values: ['value2'],
+        },
+      ],
+    });
+    expect(query).toBe('label2==value2');
+  });
+
+  test('Match expression NotEquals', () => {
+    const query = labelSelectorToQuery({
+      matchExpressions: [
+        {
+          key: 'label2',
+          operator: 'NotEquals',
+          values: ['value2'],
+        },
+      ],
+    });
+    expect(query).toBe('label2!=value2');
+  });
+
+  test('Match expression GreaterThan', () => {
+    const query = labelSelectorToQuery({
+      matchExpressions: [
+        {
+          key: 'label2',
+          operator: 'GreaterThan',
+          values: ['value2'],
+        },
+      ],
+    });
+    expect(query).toBe('label2>value2');
+  });
+
+  test('Match expression LessThan', () => {
+    const query = labelSelectorToQuery({
+      matchExpressions: [
+        {
+          key: 'label2',
+          operator: 'LessThan',
+          values: ['value2'],
+        },
+      ],
+    });
+    expect(query).toBe('label2<value2');
+  });
+
+  test('Match expression Exists', () => {
+    const query = labelSelectorToQuery({
+      matchExpressions: [
+        {
+          key: 'label2',
+          operator: 'Exists',
+          values: [],
+        },
+      ],
+    });
+    expect(query).toBe('label2');
+  });
+
+  test('Match expression DoesNotExist', () => {
+    const query = labelSelectorToQuery({
+      matchExpressions: [
+        {
+          key: 'label2',
+          operator: 'DoesNotExist',
+          values: [],
+        },
+      ],
+    });
+    expect(query).toBe('!label2');
   });
 });
