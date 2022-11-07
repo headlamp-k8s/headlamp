@@ -6,8 +6,9 @@
       "dom.iterable",
       "esnext"
     ],
+    "outDir": "../plugins/headlamp-plugin/lib/",
     "declaration": true,
-    "declarationDir": "../plugins/headlamp-plugin/types/",
+    "declarationDir": "../plugins/headlamp-plugin/lib/",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,12 +21,13 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": false
   },
   "exclude": [
     "dist",
     "./src/components/TestHelpers/**/*",
-    "./src/plugin/index.ts"
+    "./src/plugin/index.ts",
+    "./src/plugin/headlamp-plugin/**/*"
   ],
   "include": [
     "./src/lib/**/*",
