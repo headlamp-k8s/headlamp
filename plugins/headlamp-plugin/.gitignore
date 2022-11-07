@@ -1,1 +1,3 @@
-node_modules/
+node_modules
+kinvolk-headlamp-plugin-*.tgz
+kinvolk-headlamp-plugin-*.tar.gz
