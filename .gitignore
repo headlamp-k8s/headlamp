@@ -4,3 +4,4 @@ backend/tools
 app/electron/src/*
 docs/development/storybook/
 .plugins
+node_modules
