@@ -62,12 +62,11 @@ function testHeadlampPlugin() {
   run('npm run tsc');
 
   // test upgrade adds missing files
-  const filesToRemove = ['jsconfig.json', 'tsconfig.json', join('src', 'headlamp-plugin.d.ts')];
+  const filesToRemove = ['tsconfig.json', join('src', 'headlamp-plugin.d.ts')];
   filesToRemove.forEach(file => {
     fs.rmSync(join(curDir, file), { recursive: true });
   });
   run(`node ${join('..', 'bin', 'headlamp-plugin.js')} upgrade --skip-package-updates`);
-  checkFileExists(join(curDir, 'jsconfig.json'));
   checkFileExists(join(curDir, 'tsconfig.json'));
   checkFileExists(join(curDir, 'src', 'headlamp-plugin.d.ts'));
 

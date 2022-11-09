@@ -420,11 +420,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
    * Assumes we are in the package folder.
    */
   function addMissingTemplateFiles() {
-    const missingFiles = [
-      path.join('src', 'headlamp-plugin.d.ts'),
-      'tsconfig.json',
-      'jsconfig.json',
-    ];
+    const missingFiles = [path.join('src', 'headlamp-plugin.d.ts'), 'tsconfig.json'];
     const templateFolder = path.resolve(__dirname, '..', 'template');
 
     missingFiles.forEach(pathToCheck => {
@@ -435,6 +431,23 @@ function upgrade(packageFolder, skipPackageUpdates) {
       if (!fs.existsSync(to)) {
         console.log(`Adding missing file: "${to}"`);
         fs.copyFileSync(from, to);
+      }
+    });
+  }
+
+  /**
+   * Some files should not be there anymore.
+   *
+   * Assumes we are in the package folder.
+   */
+  function removeFiles() {
+    const filesToRemove = ['jsconfig.json'];
+
+    filesToRemove.forEach(pathToCheck => {
+      const removePath = path.join('.', pathToCheck);
+      if (fs.existsSync(removePath)) {
+        console.log(`Removing file: "${removePath}"`);
+        fs.unlinkSync(removePath);
       }
     });
   }
@@ -452,18 +465,25 @@ function upgrade(packageFolder, skipPackageUpdates) {
 
     let changed = false;
 
-    if (packageJson?.scripts?.tsc !== templatePackageJson['scripts']['tsc']) {
-      packageJson['scripts']['tsc'] = templatePackageJson['scripts']['tsc'];
-      changed = true;
-      console.log(`Updated package.json field "scripts.tsc"`);
-    }
+    const scriptKeys = ['tsc', 'storybook'];
+    scriptKeys.forEach(key => {
+      if (packageJson['scripts'][key] !== templatePackageJson['scripts'][key]) {
+        packageJson['scripts'][key] = templatePackageJson['scripts'][key];
+        changed = true;
+        console.log(
+          `Updated package.json field scripts.${key}: ${JSON.stringify(
+            packageJson['scripts'][key]
+          )}`
+        );
+      }
+    });
 
     const checkKeys = ['eslintConfig', 'prettier'];
     checkKeys.forEach(key => {
       if (JSON.stringify(packageJson[key]) !== JSON.stringify(templatePackageJson[key])) {
         packageJson[key] = templatePackageJson[key];
         changed = true;
-        console.log(`Updated package.json field "${key}"`);
+        console.log(`Updated package.json field "${key}": ${JSON.stringify(packageJson[key])}`);
       }
     });
 
@@ -526,6 +546,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
 
     addMissingTemplateFiles();
     addMissingConfiguration();
+    removeFiles();
 
     let failed = false;
     let reason = '';

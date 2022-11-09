@@ -9,7 +9,8 @@
     "build": "headlamp-plugin build",
     "format": "headlamp-plugin format",
     "lint": "headlamp-plugin lint",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "storybook": "headlamp-plugin storybook"
   },
   "keywords": [
     "headlamp",
