@@ -1,0 +1,4568 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Pod/PodDetailsView Error 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="logs"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Show Logs"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="terminal"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Terminal / Exec"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="View YAML"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    tabindex="0"
+                    title="View YAML"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="false"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Name
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        terminated
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Namespace
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        default
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Creation
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        1/1/2022, 12:00:00 AM UTC
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      State
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title=""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
+                        >
+                          Error
+                          <div
+                            aria-label="hidden"
+                            class="MuiBox-root MuiBox-root"
+                            style="vertical-align: text-top;"
+                          >
+                            <span />
+                          </div>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Node
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        my-node
+                      </a>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Host IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.1
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Pod IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.2
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Conditions
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <thead
+                  class="MuiTableHead-root"
+                >
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Condition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Transition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Update
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Initialized
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Ready
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title=""
+                      >
+                        PodFailed
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        ContainersReady
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title=""
+                      >
+                        PodFailed
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        PodScheduled
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Containers
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <div
+                  class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <h3
+                      class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                    >
+                      terminated
+                    </h3>
+                  </div>
+                </div>
+                <table
+                  class="MuiTable-root makeStyles-table"
+                >
+                  <tbody
+                    class="MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Status
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          aria-describedby="container-state-message-terminated"
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
+                        >
+                          Error
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Restart Count
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        0
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Container ID
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          containerd://007cdc266ae70e22e73a077c1c31b71b6c407b3f3817c84da10608dd3b7a82bd
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image Pull Policy
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          IfNotPresent
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          alpine:3.4
+                        </p>
+                        <p
+                          class="MuiTypography-root makeStyles-imageID MuiTypography-body1"
+                        >
+                          <span
+                            class="MuiTypography-root MuiTypography-body1"
+                            style="font-weight: bold;"
+                          >
+                            ID:
+                          </span>
+                           
+                          docker.io/library/alpine@sha256:b733d4a32c4da6a00a84df2ca32791bb03df95400243648d8c539e7b4cce329c
+                        </p>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Command
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          /bin/sh -c exit 1
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+  ;
+</div>
+`;
+
+exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="logs"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Show Logs"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="terminal"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Terminal / Exec"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="View YAML"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    tabindex="0"
+                    title="View YAML"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="false"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Name
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        initializing
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Namespace
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        default
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Creation
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        1/1/2022, 12:00:00 AM UTC
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      State
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title=""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                        >
+                          Init:0/2
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Node
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        my-node
+                      </a>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Host IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.1
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Pod IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.2
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Conditions
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <thead
+                  class="MuiTableHead-root"
+                >
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Condition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Transition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Update
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Initialized
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="containers with incomplete status: [init-myservice init-mydb]"
+                      >
+                        ContainersNotInitialized
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Ready
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="containers with unready status: [myapp-container]"
+                      >
+                        ContainersNotReady
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        ContainersReady
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="containers with unready status: [myapp-container]"
+                      >
+                        ContainersNotReady
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        PodScheduled
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Containers
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <div
+                  class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <h3
+                      class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                    >
+                      myapp-container
+                    </h3>
+                  </div>
+                </div>
+                <table
+                  class="MuiTable-root makeStyles-table"
+                >
+                  <tbody
+                    class="MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Status
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          aria-describedby="container-state-message-myapp-container"
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                        >
+                          Waiting (PodInitializing)
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Restart Count
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        0
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Container ID
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      />
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image Pull Policy
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          Always
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          busybox
+                        </p>
+                        
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Command
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          sh -c echo The app is running! && sleep 3600
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+  ;
+</div>
+`;
+
+exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="logs"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Show Logs"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="terminal"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Terminal / Exec"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="View YAML"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    tabindex="0"
+                    title="View YAML"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="false"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Name
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        liveness-http
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Namespace
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        default
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Creation
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        1/1/2022, 12:00:00 AM UTC
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      State
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title="back-off 5m0s restarting failed container=liveness pod=liveness-http_default(4f8b71a3-f99c-41c2-9523-83edc1de02ce)"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                        >
+                          CrashLoopBackOff
+                          <div
+                            aria-label="hidden"
+                            class="MuiBox-root MuiBox-root"
+                            style="vertical-align: text-top;"
+                          >
+                            <span />
+                          </div>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Node
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        my-node
+                      </a>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Host IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.1
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Pod IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.2
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Conditions
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <thead
+                  class="MuiTableHead-root"
+                >
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Condition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Transition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Update
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Initialized
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Ready
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="containers with unready status: [liveness]"
+                      >
+                        ContainersNotReady
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        ContainersReady
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="containers with unready status: [liveness]"
+                      >
+                        ContainersNotReady
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        PodScheduled
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Containers
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <div
+                  class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <h3
+                      class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                    >
+                      liveness
+                    </h3>
+                  </div>
+                </div>
+                <table
+                  class="MuiTable-root makeStyles-table"
+                >
+                  <tbody
+                    class="MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Status
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          aria-describedby="container-state-message-liveness"
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                        >
+                          Waiting (CrashLoopBackOff)
+                        </span>
+                        <div
+                          aria-label="hidden"
+                          class="MuiBox-root MuiBox-root"
+                          role="tooltip"
+                          style="vertical-align: bottom;"
+                          title="back-off 5m0s restarting failed container=liveness pod=liveness-http_default(4f8b71a3-f99c-41c2-9523-83edc1de02ce)"
+                        >
+                          <span />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Restart Count
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        337
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Container ID
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          containerd://29f9695acc1968213087b71914dde17337b142aa63603113a4d03feabba1514c
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image Pull Policy
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          Always
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          registry.k8s.io/liveness
+                        </p>
+                        <p
+                          class="MuiTypography-root makeStyles-imageID MuiTypography-body1"
+                        >
+                          <span
+                            class="MuiTypography-root MuiTypography-body1"
+                            style="font-weight: bold;"
+                          >
+                            ID:
+                          </span>
+                           
+                          sha256:554cfcf2aa85635c0b1ae9506f36f50118419766221651e70dfdc94631317b4d
+                        </p>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Args
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <div
+                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                        >
+                          <div
+                            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                            style="max-width: 80%;"
+                          >
+                            <div
+                              class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                            >
+                              <p
+                                class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                              >
+                                /server
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Liveness Probes
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <div
+                          class="MuiBox-root MuiBox-root"
+                        >
+                          <div
+                            class="MuiBox-root MuiBox-root"
+                          >
+                            <p
+                              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                            >
+                              http-get, path: /healthz, port: 8080,
+    scheme: HTTP
+                            </p>
+                          </div>
+                          <div
+                            class="MuiBox-root MuiBox-root"
+                          >
+                            <p
+                              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                            >
+                              success = 1
+                            </p>
+                          </div>
+                          <div
+                            class="MuiBox-root MuiBox-root"
+                          >
+                            <p
+                              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                            >
+                              failure = 3
+                            </p>
+                          </div>
+                          <div
+                            class="MuiBox-root MuiBox-root"
+                          >
+                            <p
+                              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                            >
+                              delay = 3s
+                            </p>
+                          </div>
+                          <div
+                            class="MuiBox-root MuiBox-root"
+                          >
+                            <p
+                              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                            >
+                              timeout = 1s
+                            </p>
+                          </div>
+                          <div
+                            class="MuiBox-root MuiBox-root"
+                          >
+                            <p
+                              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                            >
+                              period = 3s
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+  ;
+</div>
+`;
+
+exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="logs"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Show Logs"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="terminal"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Terminal / Exec"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="View YAML"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    tabindex="0"
+                    title="View YAML"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="false"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Name
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        imagepullbackoff
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Namespace
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        default
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Creation
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        1/1/2022, 12:00:00 AM UTC
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      State
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title="Back-off pulling image \\"doesnotexist:nover\\""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                        >
+                          ImagePullBackOff
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Node
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        my-node
+                      </a>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Host IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.1
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Pod IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.2
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Conditions
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <thead
+                  class="MuiTableHead-root"
+                >
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Condition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Transition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Update
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Initialized
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Ready
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="containers with unready status: [imagepullbackoff]"
+                      >
+                        ContainersNotReady
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        ContainersReady
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="containers with unready status: [imagepullbackoff]"
+                      >
+                        ContainersNotReady
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        PodScheduled
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Containers
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <div
+                  class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <h3
+                      class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                    >
+                      imagepullbackoff
+                    </h3>
+                  </div>
+                </div>
+                <table
+                  class="MuiTable-root makeStyles-table"
+                >
+                  <tbody
+                    class="MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Status
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          aria-describedby="container-state-message-imagepullbackoff"
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                        >
+                          Waiting (ImagePullBackOff)
+                        </span>
+                        <div
+                          aria-label="hidden"
+                          class="MuiBox-root MuiBox-root"
+                          role="tooltip"
+                          style="vertical-align: bottom;"
+                          title="Back-off pulling image \\"doesnotexist:nover\\""
+                        >
+                          <span />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Restart Count
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        0
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Container ID
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      />
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image Pull Policy
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          IfNotPresent
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          doesnotexist:nover
+                        </p>
+                        
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+  ;
+</div>
+`;
+
+exports[`Storyshots Pod/PodDetailsView Running 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="logs"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Show Logs"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="terminal"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Terminal / Exec"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="View YAML"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    tabindex="0"
+                    title="View YAML"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="false"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Name
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        running
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Namespace
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        default
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Creation
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        1/1/2022, 12:00:00 AM UTC
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      State
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title=""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                        >
+                          Running
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Node
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        my-node
+                      </a>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Host IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.1
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Pod IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.2
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Conditions
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <thead
+                  class="MuiTableHead-root"
+                >
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Condition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Transition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Update
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Initialized
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Ready
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        ContainersReady
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        PodScheduled
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Containers
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <div
+                  class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <h3
+                      class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                    >
+                      nginx
+                    </h3>
+                  </div>
+                </div>
+                <table
+                  class="MuiTable-root makeStyles-table"
+                >
+                  <tbody
+                    class="MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Status
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          aria-describedby="container-state-message-nginx"
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                        >
+                          Running
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Restart Count
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        0
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Container ID
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          containerd://f8eb12a25a065d170b68cee522d431f4920fe083bf9cf53a4a576d60b8641584
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image Pull Policy
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          IfNotPresent
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          nginx:1.14.2
+                        </p>
+                        <p
+                          class="MuiTypography-root makeStyles-imageID MuiTypography-body1"
+                        >
+                          <span
+                            class="MuiTypography-root MuiTypography-body1"
+                            style="font-weight: bold;"
+                          >
+                            ID:
+                          </span>
+                           
+                          docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
+                        </p>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Ports
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <div
+                          class="MuiGrid-root MuiGrid-container"
+                        >
+                          <div
+                            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+                          >
+                            <span
+                              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                            >
+                              TCP:
+                            </span>
+                            <span
+                              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                            >
+                              80
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+  ;
+</div>
+`;
+
+exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="logs"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Show Logs"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="terminal"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Terminal / Exec"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="View YAML"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    tabindex="0"
+                    title="View YAML"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="false"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Name
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        successful
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Namespace
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        default
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Creation
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        1/1/2022, 12:00:00 AM UTC
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      State
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title=""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                        >
+                          Completed
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Node
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        my-node
+                      </a>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Host IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.1
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Pod IP
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        0.0.0.2
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Conditions
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <thead
+                  class="MuiTableHead-root"
+                >
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Condition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Transition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Last Update
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Initialized
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title=""
+                      >
+                        PodCompleted
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        Ready
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title=""
+                      >
+                        PodCompleted
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        ContainersReady
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title=""
+                      >
+                        PodCompleted
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        PodScheduled
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="1/1/2022, 12:05:00 AM UTC"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h2
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              >
+                Containers
+              </h2>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <div
+                  class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <h3
+                      class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                    >
+                      successful
+                    </h3>
+                  </div>
+                </div>
+                <table
+                  class="MuiTable-root makeStyles-table"
+                >
+                  <tbody
+                    class="MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Status
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          aria-describedby="container-state-message-successful"
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                        >
+                          Error
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Restart Count
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        0
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Container ID
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          containerd://d64ce854c96f53b2aaa00a975d026ffe5d7b862370a95abe88f2c033e01ae843
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image Pull Policy
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          IfNotPresent
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          alpine:3.4
+                        </p>
+                        <p
+                          class="MuiTypography-root makeStyles-imageID MuiTypography-body1"
+                        >
+                          <span
+                            class="MuiTypography-root MuiTypography-body1"
+                            style="font-weight: bold;"
+                          >
+                            ID:
+                          </span>
+                           
+                          docker.io/library/alpine@sha256:b733d4a32c4da6a00a84df2ca32791bb03df95400243648d8c539e7b4cce329c
+                        </p>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Command
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          /bin/sh -c echo Succeeded
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+  ;
+</div>
+`;

@@ -35,8 +35,9 @@ export interface KubeMetadata {
   name: string;
   namespace?: string;
   creationTimestamp: string;
+  deletionTimestamp?: string;
   resourceVersion: string;
-  selfLink: string;
+  selfLink?: string;
   labels?: StringDict;
   annotations?: StringDict;
   ownerReferences?: KubeOwnerReference[];
@@ -473,12 +474,14 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 export type KubeObjectClass = ReturnType<typeof makeKubeObject>;
 export type KubeObject = InstanceType<KubeObjectClass>;
 
+export type Time = number | string | null;
+
 export interface KubeCondition {
   type: string;
   status: string;
-  lastProbeTime: number;
-  lastTransitionTime?: string;
-  lastUpdateTime?: string;
+  lastProbeTime: Time;
+  lastTransitionTime?: Time;
+  lastUpdateTime?: Time;
   reason?: string;
   message?: string;
 }
@@ -488,19 +491,19 @@ export interface KubeContainer {
   image: string;
   command?: string[];
   args?: string[];
-  ports: {
+  ports?: {
     name?: string;
     containerPort: number;
     protocol: string;
   }[];
   resources?: {
-    limits: {
-      cpu: string;
-      memory: string;
+    limits?: {
+      cpu?: string;
+      memory?: string;
     };
-    requests: {
-      cpu: string;
-      memory: string;
+    requests?: {
+      cpu?: string;
+      memory?: string;
     };
   };
   env?: {
@@ -581,32 +584,35 @@ export interface KubeMetrics {
   };
 }
 
+export interface ContainerState {
+  running: {
+    startedAt: string;
+  };
+  terminated: {
+    containerID: string;
+    exitCode: number;
+    finishedAt: string;
+    message?: string;
+    reason: string;
+    signal?: number;
+    startedAt: string;
+  };
+  waiting: {
+    message?: string;
+    reason: string;
+  };
+}
+
 export interface KubeContainerStatus {
-  containerID: string;
+  containerID?: string;
   image: string;
   imageID: string;
-  lastState: string;
   name: string;
   ready: boolean;
   restartCount: number;
-  state: {
-    running: {
-      startedAt: number;
-    };
-    terminated: {
-      containerID: string;
-      exitCode: number;
-      finishedAt: number;
-      message: string;
-      reason: string;
-      signal: number;
-      startedAt: number;
-    };
-    waiting: {
-      message: string;
-      reason: string;
-    };
-  };
+  lastState: Partial<ContainerState>;
+  state: Partial<ContainerState>;
+  started?: boolean;
 }
 
 export type Workload = DaemonSet | ReplicaSet | StatefulSet | Job | CronJob | Deployment;
