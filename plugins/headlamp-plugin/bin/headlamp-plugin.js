@@ -640,6 +640,30 @@ function lint(packageFolder, fix) {
   return 0;
 }
 
+/**
+ * Start storybook.
+ *
+ * @param packageFolder {string} - folder where the package is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ */
+function storybook(packageFolder) {
+  try {
+    child_process.execSync(
+      './node_modules/.bin/start-storybook -p 6007 -c node_modules/@kinvolk/headlamp-plugin/config/.storybook',
+      {
+        stdio: 'inherit',
+        cwd: packageFolder,
+        encoding: 'utf8',
+      }
+    );
+  } catch (e) {
+    console.error(`Problem running start-storybook inside of "${packageFolder}"`);
+    return 1;
+  }
+
+  return 0;
+}
+
 yargs(process.argv.slice(2))
   .command(
     'build [package]',
@@ -732,6 +756,20 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = lint(argv.package, argv.fix);
+    }
+  )
+  .command(
+    'storybook [package]',
+    'Start storybook. ' + '<package> defaults to current working directory.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to start storybook for',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = storybook(argv.package);
     }
   )
   .command(
