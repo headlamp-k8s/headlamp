@@ -108,6 +108,7 @@ function getAppUrl(): string {
 declare global {
   interface Window {
     headlampBaseUrl?: string;
+    Buffer: typeof Buffer;
   }
 }
 
