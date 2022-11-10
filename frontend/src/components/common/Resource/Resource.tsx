@@ -667,7 +667,7 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
 
   const queryData = {
     namespace: resource.kind === 'Namespace' ? resource.metadata.name : undefined,
-    labelSelector: labelSelectorToQuery(resource?.spec?.selector),
+    labelSelector: resource?.spec?.selector ? labelSelectorToQuery(resource?.spec?.selector) : '',
     fieldSelector: resource.kind === 'Node' ? `spec.nodeName=${resource.metadata.name}` : undefined,
   };
 
