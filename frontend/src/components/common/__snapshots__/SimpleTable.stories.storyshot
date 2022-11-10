@@ -1701,7 +1701,7 @@ exports[`Storyshots SimpleTable Reflect In URL 1`] = `
         />
         <p
           class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
-          id="mui-79816"
+          id="mui-91190"
         >
           Rows per page:
         </p>
@@ -1710,9 +1710,9 @@ exports[`Storyshots SimpleTable Reflect In URL 1`] = `
         >
           <div
             aria-haspopup="listbox"
-            aria-labelledby="mui-79816 mui-20938"
+            aria-labelledby="mui-91190 mui-5731"
             class="MuiSelect-root MuiSelect-select MuiTablePagination-select MuiSelect-selectMenu MuiInputBase-input"
-            id="mui-20938"
+            id="mui-5731"
             role="button"
             tabindex="0"
           >
@@ -1957,7 +1957,7 @@ exports[`Storyshots SimpleTable Reflect In URL With Prefix 1`] = `
         />
         <p
           class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
-          id="mui-9125"
+          id="mui-23930"
         >
           Rows per page:
         </p>
@@ -1966,9 +1966,9 @@ exports[`Storyshots SimpleTable Reflect In URL With Prefix 1`] = `
         >
           <div
             aria-haspopup="listbox"
-            aria-labelledby="mui-9125 mui-53741"
+            aria-labelledby="mui-23930 mui-5413"
             class="MuiSelect-root MuiSelect-select MuiTablePagination-select MuiSelect-selectMenu MuiInputBase-input"
-            id="mui-53741"
+            id="mui-5413"
             role="button"
             tabindex="0"
           >

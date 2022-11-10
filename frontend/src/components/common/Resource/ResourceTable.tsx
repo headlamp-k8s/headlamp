@@ -105,6 +105,7 @@ function Table(props: ResourceTableProps) {
       rowsPerPage={[15, 25, 50]}
       defaultSortingColumn={sortingColumn}
       filterFunction={useFilterFunc()}
+      reflectInURL
       {...otherProps}
     />
   );
