@@ -1542,6 +1542,518 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
 </div>
 `;
 
+exports[`Storyshots SimpleTable Reflect In URL 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1"
+    >
+      Test changing the page and rows per page.
+    </p>
+    <p
+      class="MuiTypography-root MuiTypography-body1"
+    >
+      <b>
+        Current URL search:
+      </b>
+       
+      
+    </p>
+    <table
+      class="MuiTable-root makeStyles-table"
+    >
+      <thead
+        class="MuiTableHead-root"
+      >
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
+        >
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            scope="col"
+          >
+            Namespace
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            scope="col"
+          >
+            Number
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
+      >
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Name 0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Namespace 0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Wed Dec 15 2021 14:57:13 GMT+0000 (Western European Standard Time)
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Name 1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Namespace 1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Wed Dec 15 2021 14:57:13 GMT+0000 (Western European Standard Time)
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Name 2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Namespace 2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Wed Dec 15 2021 14:57:13 GMT+0000 (Western European Standard Time)
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Name 3
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Namespace 3
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Wed Dec 15 2021 14:57:13 GMT+0000 (Western European Standard Time)
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Name 4
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Namespace 4
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Wed Dec 15 2021 14:57:13 GMT+0000 (Western European Standard Time)
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      class="MuiTablePagination-root"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-regular MuiTablePagination-toolbar MuiToolbar-gutters"
+      >
+        <div
+          class="MuiTablePagination-spacer"
+        />
+        <p
+          class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
+          id="mui-79816"
+        >
+          Rows per page:
+        </p>
+        <div
+          class="MuiInputBase-root MuiTablePagination-input MuiTablePagination-selectRoot"
+        >
+          <div
+            aria-haspopup="listbox"
+            aria-labelledby="mui-79816 mui-20938"
+            class="MuiSelect-root MuiSelect-select MuiTablePagination-select MuiSelect-selectMenu MuiInputBase-input"
+            id="mui-20938"
+            role="button"
+            tabindex="0"
+          >
+            5
+          </div>
+          <input
+            aria-hidden="true"
+            class="MuiSelect-nativeInput"
+            tabindex="-1"
+            value="5"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSelect-icon MuiTablePagination-selectIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
+        <p
+          class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
+        >
+          1-5 of 50
+        </p>
+        <div
+          class="MuiTablePagination-actions"
+        >
+          <button
+            aria-label="previous page"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-disabled MuiButtonBase-disabled"
+            disabled=""
+            tabindex="-1"
+            title="Previous page"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            aria-label="next page"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+            tabindex="0"
+            title="Next page"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"
+                />
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SimpleTable Reflect In URL With Prefix 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1"
+    >
+      Test changing the page and rows per page.
+    </p>
+    <p
+      class="MuiTypography-root MuiTypography-body1"
+    >
+      <b>
+        Current URL search:
+      </b>
+       
+      
+    </p>
+    <table
+      class="MuiTable-root makeStyles-table"
+    >
+      <thead
+        class="MuiTableHead-root"
+      >
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
+        >
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            scope="col"
+          >
+            Namespace
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            scope="col"
+          >
+            Number
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
+      >
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Name 0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Namespace 0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Wed Dec 15 2021 14:57:13 GMT+0000 (Western European Standard Time)
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Name 1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Namespace 1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Wed Dec 15 2021 14:57:13 GMT+0000 (Western European Standard Time)
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Name 2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Namespace 2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Wed Dec 15 2021 14:57:13 GMT+0000 (Western European Standard Time)
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Name 3
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Namespace 3
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Wed Dec 15 2021 14:57:13 GMT+0000 (Western European Standard Time)
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
+        >
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Name 4
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Namespace 4
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body"
+          >
+            Wed Dec 15 2021 14:57:13 GMT+0000 (Western European Standard Time)
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      class="MuiTablePagination-root"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-regular MuiTablePagination-toolbar MuiToolbar-gutters"
+      >
+        <div
+          class="MuiTablePagination-spacer"
+        />
+        <p
+          class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
+          id="mui-9125"
+        >
+          Rows per page:
+        </p>
+        <div
+          class="MuiInputBase-root MuiTablePagination-input MuiTablePagination-selectRoot"
+        >
+          <div
+            aria-haspopup="listbox"
+            aria-labelledby="mui-9125 mui-53741"
+            class="MuiSelect-root MuiSelect-select MuiTablePagination-select MuiSelect-selectMenu MuiInputBase-input"
+            id="mui-53741"
+            role="button"
+            tabindex="0"
+          >
+            5
+          </div>
+          <input
+            aria-hidden="true"
+            class="MuiSelect-nativeInput"
+            tabindex="-1"
+            value="5"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSelect-icon MuiTablePagination-selectIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
+        <p
+          class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
+        >
+          1-5 of 50
+        </p>
+        <div
+          class="MuiTablePagination-actions"
+        >
+          <button
+            aria-label="previous page"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-disabled MuiButtonBase-disabled"
+            disabled=""
+            tabindex="-1"
+            title="Previous page"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            aria-label="next page"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+            tabindex="0"
+            title="Next page"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"
+                />
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots SimpleTable UID Search 1`] = `
 <div>
   <div

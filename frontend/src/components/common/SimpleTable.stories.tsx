@@ -1,6 +1,7 @@
+import { Box, Typography } from '@material-ui/core';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import { createStore } from 'redux';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { useFilterFunc } from '../../lib/util';
@@ -14,10 +15,27 @@ export default {
   argTypes: {},
 } as Meta;
 
+function TestSimpleTable(props: SimpleTableProps) {
+  const location = useLocation();
+  if (!!props.reflectInURL) {
+    return (
+      <Box>
+        <Typography>Test changing the page and rows per page.</Typography>
+        <Typography>
+          <b>Current URL search:</b> {`${location.search || ''}`}
+        </Typography>
+        <SimpleTable {...props} />
+      </Box>
+    );
+  }
+
+  return <SimpleTable {...props} />;
+}
+
 const Template: Story<SimpleTableProps> = args => (
   <MemoryRouter>
     <Provider store={store}>
-      <SimpleTable {...args} />
+      <TestSimpleTable {...args} />
     </Provider>
   </MemoryRouter>
 );
@@ -129,6 +147,59 @@ Datum.args = {
       datum: 'longField',
     },
   ],
+};
+
+export const ReflectInURL = Template.bind({});
+const lotsOfData = (() => {
+  const data = [];
+  for (let i = 0; i < 50; i++) {
+    data.push({
+      name: `Name ${i}`,
+      namespace: `Namespace ${i}`,
+      creationDate: new Date('2021-12-15T14:57:13Z').toString(),
+    });
+  }
+  return data;
+})();
+ReflectInURL.args = {
+  data: lotsOfData,
+  columns: [
+    {
+      label: 'Name',
+      datum: 'name',
+    },
+    {
+      label: 'Namespace',
+      datum: 'namespace',
+    },
+    {
+      label: 'Number',
+      datum: 'creationDate',
+    },
+  ],
+  rowsPerPage: [5, 10, 15],
+  reflectInURL: true,
+};
+
+export const ReflectInURLWithPrefix = Template.bind({});
+ReflectInURLWithPrefix.args = {
+  data: lotsOfData,
+  columns: [
+    {
+      label: 'Name',
+      datum: 'name',
+    },
+    {
+      label: 'Namespace',
+      datum: 'namespace',
+    },
+    {
+      label: 'Number',
+      datum: 'creationDate',
+    },
+  ],
+  rowsPerPage: [5, 10, 15],
+  reflectInURL: 'mySuperTable',
 };
 
 // filter Function

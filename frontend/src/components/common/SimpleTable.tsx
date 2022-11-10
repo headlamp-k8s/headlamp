@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../helpers';
+import { useURLState } from '../../lib/util';
 import Empty from './EmptyContent';
 import { ValueLabel } from './Label';
 import Loader from './Loader';
@@ -75,6 +76,11 @@ export interface SimpleTableProps {
   emptyMessage?: string;
   errorMessage?: string | null;
   defaultSortingColumn?: number;
+  /** Whether to reflect the page/perPage properties in the URL.
+   * If assigned to a string, it will be the prefix for the page/perPage parameters.
+   * If true or '', it'll reflect the parameters without a prefix.
+   * By default, no parameters are reflected in the URL. */
+  reflectInURL?: string | boolean;
 }
 
 interface ColumnSortButtonProps {
@@ -113,14 +119,26 @@ export default function SimpleTable(props: SimpleTableProps) {
     emptyMessage = null,
     errorMessage = null,
     defaultSortingColumn,
+    reflectInURL,
   } = props;
-  const [page, setPage] = React.useState(0);
+  const shouldReflectInURL = reflectInURL !== undefined && reflectInURL !== false;
+  const prefix = reflectInURL === true ? '' : reflectInURL || '';
+  const [page, setPage] = useURLState(shouldReflectInURL ? 'p' : '', {
+    defaultValue: 0,
+    isOneIndexed: true,
+    prefix,
+  });
   const [currentData, setCurrentData] = React.useState(data);
   const [displayData, setDisplayData] = React.useState(data);
   const rowsPerPageOptions = props.rowsPerPage || [15, 25, 50];
-  const [rowsPerPage, setRowsPerPage] = React.useState(
-    helpers.getTablesRowsPerPage(rowsPerPageOptions[0])
+  const defaultRowsPerPage = React.useMemo(
+    () => helpers.getTablesRowsPerPage(rowsPerPageOptions[0]),
+    []
   );
+  const [rowsPerPage, setRowsPerPage] = useURLState(shouldReflectInURL ? 'perPage' : '', {
+    defaultValue: defaultRowsPerPage,
+    prefix,
+  });
   const classes = useTableStyle();
   const [isIncreasingOrder, setIsIncreasingOrder] = React.useState(
     !defaultSortingColumn || defaultSortingColumn > 0
@@ -135,6 +153,18 @@ export default function SimpleTable(props: SimpleTableProps) {
     setPage(newPage);
   }
 
+  // Protect against invalid page values
+  React.useEffect(() => {
+    if (page < 0) {
+      setPage(0);
+      return;
+    }
+
+    if (displayData && page * rowsPerPage > displayData.length) {
+      setPage(Math.floor(displayData.length / rowsPerPage));
+    }
+  }, [page, displayData, rowsPerPage]);
+
   function handleChangeRowsPerPage(
     event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>
   ) {
@@ -147,9 +177,6 @@ export default function SimpleTable(props: SimpleTableProps) {
   React.useEffect(
     () => {
       if (currentData === data) {
-        if (page !== 0) {
-          setPage(0);
-        }
         return;
       }
 
@@ -268,6 +295,7 @@ export default function SimpleTable(props: SimpleTableProps) {
               startIcon={<Icon icon="mdi:refresh" />}
               onClick={() => {
                 setCurrentData(data);
+                setPage(0);
               }}
             >
               {t('frequent|Refresh')}
