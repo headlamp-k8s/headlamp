@@ -120,7 +120,7 @@ function usePageURLState(
   initialPage: number
 ): ReturnType<typeof useURLState> {
   const [page, setPage] = useURLState(key, { defaultValue: initialPage + 1, prefix });
-  const [zeroIndexPage, setZeroIndexPage] = React.useState(initialPage);
+  const [zeroIndexPage, setZeroIndexPage] = React.useState(page - 1);
 
   React.useEffect(() => {
     setZeroIndexPage((zeroIndexPage: number) => {
