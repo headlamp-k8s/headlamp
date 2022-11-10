@@ -70,6 +70,7 @@ export default function EndpointDetails() {
                           },
                         },
                       ]}
+                      reflectInURL="addresses"
                     />
                     <SectionHeader noPadding title={t('Ports')} headerStyle="label" />
                     <SimpleTable
@@ -92,6 +93,7 @@ export default function EndpointDetails() {
                         },
                       ]}
                       defaultSortingColumn={1}
+                      reflectInURL="ports"
                     />
                   </SectionBox>
                 ))

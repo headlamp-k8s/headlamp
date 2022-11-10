@@ -74,6 +74,7 @@ export default function ServiceDetails() {
                     ),
                   },
                 ]}
+                reflectInURL="ports"
               />
             </SectionBox>
             <SectionBox title={t('Endpoints')}>
@@ -93,6 +94,7 @@ export default function ServiceDetails() {
                       cellProps: { style: { width: '40%', maxWidth: '40%' } },
                     },
                   ]}
+                  reflectInURL="endpoints"
                 />
               )}
             </SectionBox>

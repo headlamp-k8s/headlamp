@@ -42,6 +42,7 @@ export default function RoleDetails() {
                 },
               ]}
               data={item.rules}
+              reflectInURL="rules"
             />
           </SectionBox>
         )

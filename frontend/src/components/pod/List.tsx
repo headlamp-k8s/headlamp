@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo } from '../../lib/util';
-import { LightTooltip, SectionFilterHeader } from '../common';
+import { LightTooltip, SectionFilterHeader, SimpleTableProps } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import ResourceTable, { ResourceTableProps } from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
@@ -52,10 +52,11 @@ export interface PodListProps {
   pods: Pod[] | null;
   error: ApiError | null;
   hideColumns?: ('namespace' | 'restarts')[];
+  reflectTableInURL?: SimpleTableProps['reflectInURL'];
 }
 
 export function PodListRenderer(props: PodListProps) {
-  const { pods, error, hideColumns = [] } = props;
+  const { pods, error, hideColumns = [], reflectTableInURL = 'pods' } = props;
   const { t } = useTranslation('glossary');
 
   function getDataCols() {
@@ -110,6 +111,7 @@ export function PodListRenderer(props: PodListProps) {
         errorMessage={Pod.getErrorMessage(error)}
         columns={getDataCols()}
         data={pods}
+        reflectInURL={reflectTableInURL}
       />
     </SectionBox>
   );
@@ -118,5 +120,5 @@ export function PodListRenderer(props: PodListProps) {
 export default function PodList() {
   const [pods, error] = Pod.useList();
 
-  return <PodListRenderer pods={pods} error={error} />;
+  return <PodListRenderer pods={pods} error={error} reflectTableInURL />;
 }

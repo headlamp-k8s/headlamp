@@ -271,6 +271,7 @@ export function VolumeDetails(props: VolumeDetailsProps) {
           },
         ]}
         data={volumes}
+        reflectInURL="volumes"
       />
     </SectionBox>
   );

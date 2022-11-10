@@ -89,7 +89,11 @@ const Template: Story = (args: MockerStory) => {
     Endpoints.useList = args.useList;
   }
 
-  return <EndpointDetails />;
+  return (
+    <TestContext>
+      <EndpointDetails />
+    </TestContext>
+  );
 };
 
 export const Default = Template.bind({});

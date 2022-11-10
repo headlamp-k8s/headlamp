@@ -57,6 +57,7 @@ export default function IngressDetails() {
               },
             ]}
             data={getHostsData(item)}
+            reflectInURL="rules"
           />
         </SectionBox>
       )}
