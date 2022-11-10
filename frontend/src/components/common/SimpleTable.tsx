@@ -82,6 +82,10 @@ export interface SimpleTableProps {
    * If true or '', it'll reflect the parameters without a prefix.
    * By default, no parameters are reflected in the URL. */
   reflectInURL?: string | boolean;
+  /** The page number to show by default (by default it's the first page). */
+  page?: number;
+  /** Whether to show the pagination component */
+  showPagination?: boolean;
 }
 
 interface ColumnSortButtonProps {
@@ -145,6 +149,8 @@ export default function SimpleTable(props: SimpleTableProps) {
     data,
     filterFunction = null,
     emptyMessage = null,
+    page: initialPage = 0,
+    showPagination = true,
     errorMessage = null,
     defaultSortingColumn,
     noTableHeader = false,
@@ -152,7 +158,7 @@ export default function SimpleTable(props: SimpleTableProps) {
   } = props;
   const shouldReflectInURL = reflectInURL !== undefined && reflectInURL !== false;
   const prefix = reflectInURL === true ? '' : reflectInURL || '';
-  const [page, setPage] = usePageURLState(shouldReflectInURL ? 'p' : '', prefix, 0);
+  const [page, setPage] = usePageURLState(shouldReflectInURL ? 'p' : '', prefix, initialPage);
   const [currentData, setCurrentData] = React.useState(data);
   const [displayData, setDisplayData] = React.useState(data);
   const rowsPerPageOptions = props.rowsPerPage || [15, 25, 50];
@@ -385,7 +391,7 @@ export default function SimpleTable(props: SimpleTableProps) {
           )}
         </TableBody>
       </Table>
-      {filteredData.length > rowsPerPageOptions[0] && (
+      {filteredData.length > rowsPerPageOptions[0] && showPagination && (
         <TablePagination
           rowsPerPageOptions={rowsPerPageOptions}
           component="div"
