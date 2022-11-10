@@ -143,3 +143,44 @@ make app-linux
 ```
 
 For more on how to extract files into there see "Shipping and Deploying Plugins" above.
+
+
+### Writing storybook stories
+
+What is a storybook story? 
+
+From https://storybook.js.org/docs/web-components/get-started/introduction
+
+> Storybook is a tool for UI development. It makes development faster and 
+> easier by isolating components. This allows you to work on one component
+> at a time. You can develop entire UIs without needing to start up a
+> complex dev stack, force certain data into your database,
+> or navigate around your application.
+
+See an example in your browser:
+
+```bash
+$ cd plugins/examples/pod-counter
+$ ls src
+headlamp-plugin.d.ts  index.tsx  Message.stories.tsx  Message.tsx
+$ npm install
+$ npm run storybook
+```
+
+Your browser should open and show you a Message component with three
+different states the component can be in. 
+
+Notices that there is a Message.stories.tsx to go along with the Message.tsx
+which has the `<Message>` component defined within it. See that file for an
+example of how to write a story.
+
+Another benefit of writing storybook stories is that they can act as 
+unit tests for regression testing. With storyshots it will save snapshots 
+of html for the different states that a component can be in. See the 
+[Snapshot tests](https://storybook.js.org/docs/react/writing-tests/snapshot-testing)
+guide in the storybook documentation for more information.
+
+This is in addition to the benefit of making sure your components can be 
+manually tested and developed quickly in isolation.
+
+See the [storybook documentation](https://storybook.js.org/docs/)
