@@ -138,6 +138,7 @@ export default function CustomResourceDefinitionDetails() {
               datum: 'listKind',
             },
           ]}
+          reflectInURL="acceptedNames"
         />
       </SectionBox>
       <SectionBox title={t('frequent|Versions')}>
@@ -157,6 +158,7 @@ export default function CustomResourceDefinitionDetails() {
               getter: version => version.storage.toString(),
             },
           ]}
+          reflectInURL="versions"
         />
       </SectionBox>
       <SectionBox title={t('Conditions')}>
@@ -177,6 +179,7 @@ export default function CustomResourceDefinitionDetails() {
             },
             'age',
           ]}
+          reflectInURL="objects"
         />
       </SectionBox>
       <DetailsViewSection resource={item} />
