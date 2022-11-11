@@ -323,7 +323,7 @@ export default function EditorDialog(props: EditorDialogProps) {
                   {
                     label: t('frequent|Documentation'),
                     component: (
-                      <Box p={2} className={classes.scrollable} height="600px">
+                      <Box p={2} className={classes.scrollable} maxHeight={600} height={600}>
                         <DocsViewer docSpecs={docSpecs} />
                       </Box>
                     ),
