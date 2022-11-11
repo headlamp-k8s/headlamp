@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
-import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import getDocDefinitions from '../../../lib/docs';
@@ -22,32 +21,53 @@ const useStyles = makeStyles(() => ({
 function DocsViewer(props: { docSpecs: any }) {
   const { docSpecs } = props;
   const classes = useStyles();
-  const [docs, setDocs] = React.useState<object | null>(null);
-  const [docsError, setDocsError] = React.useState<string | null>(null);
+  const [docs, setDocs] = React.useState<
+    (
+      | {
+          data: null;
+          error: any;
+          kind: string;
+        }
+      | {
+          data: any;
+          error: null;
+          kind: string;
+        }
+      | undefined
+    )[]
+  >([]);
+  const [docsLoading, setDocsLoading] = React.useState(false);
   const { t } = useTranslation('resource');
 
   React.useEffect(() => {
-    setDocsError(null);
-
-    if (docSpecs.error) {
-      t('Cannot load documentation: {{ docsError }}', { docsError: docSpecs.error });
-      return;
-    }
-    if (!docSpecs.apiVersion || !docSpecs.kind) {
-      setDocsError(
-        t(
-          'Cannot load documentation: Please make sure the YAML is valid and has the kind and apiVersion set.'
-        )
-      );
-      return;
-    }
-
-    getDocDefinitions(docSpecs.apiVersion, docSpecs.kind)
-      .then(result => {
-        setDocs(result?.properties || {});
+    setDocsLoading(true);
+    // fetch docSpecs for all the resources specified
+    Promise.allSettled(
+      docSpecs.map((docSpec: { apiVersion: string; kind: string }) => {
+        return getDocDefinitions(docSpec.apiVersion, docSpec.kind);
+      }) as PromiseSettledResult<any>[]
+    )
+      .then(values => {
+        const docSpecsFromApi = values.map((value, index) => {
+          if (value.status === 'fulfilled') {
+            return {
+              data: value.value,
+              error: null,
+              kind: docSpecs[index].kind,
+            };
+          } else if (value.status === 'rejected') {
+            return {
+              data: null,
+              error: value.reason,
+              kind: docSpecs[index].kind,
+            };
+          }
+        });
+        setDocsLoading(false);
+        setDocs(docSpecsFromApi);
       })
-      .catch(err => {
-        setDocsError(t('Cannot load documentation: {{err}}', { err }));
+      .catch(() => {
+        setDocsLoading(false);
       });
   }, [docSpecs]);
 
@@ -73,29 +93,45 @@ function DocsViewer(props: { docSpecs: any }) {
     );
   }
 
-  return docs === null && docsError === null ? (
-    <Loader title={t('Loading documentation')} />
-  ) : !_.isEmpty(docsError) ? (
-    <Empty color="error">{docsError}</Empty>
-  ) : _.isEmpty(docs) ? (
-    <Empty>
-      {t('No documentation for type {{ docsType }}.', { docsType: docSpecs.kind.trim() })}
-    </Empty>
-  ) : (
-    <Box p={4}>
-      <Typography>
-        {t('Showing documentation for: {{ docsType }}', {
-          docsType: docSpecs.kind.trim(),
-        })}
-      </Typography>
-      <TreeView
-        className={classes.root}
-        defaultCollapseIcon={<Icon icon="mdi:chevron-down" />}
-        defaultExpandIcon={<Icon icon="mdi:chevron-right" />}
-      >
-        {Object.entries(docs || {}).map(([name, value], i) => makeItems(name, value, i.toString()))}
-      </TreeView>
-    </Box>
+  return (
+    <>
+      {docsLoading ? (
+        <Loader title={t('Loading documentation')} />
+      ) : (
+        docs.map((docSpec: any) => {
+          if (!docSpec.error && !docSpec.data) {
+            return (
+              <Empty>
+                {t('No documentation for type {{ docsType }}.', { docsType: docSpec.kind.trim() })}
+              </Empty>
+            );
+          }
+          if (docSpec.error) {
+            return <Empty color="error">{docSpec.error.message}</Empty>;
+          }
+          if (docSpec.data) {
+            return (
+              <Box p={2}>
+                <Typography>
+                  {t('Showing documentation for: {{ docsType }}', {
+                    docsType: docSpec.kind.trim(),
+                  })}
+                </Typography>
+                <TreeView
+                  className={classes.root}
+                  defaultCollapseIcon={<Icon icon="mdi:chevron-down" />}
+                  defaultExpandIcon={<Icon icon="mdi:chevron-right" />}
+                >
+                  {Object.entries(docSpec.data.properties || {}).map(([name, value], i) =>
+                    makeItems(name, value, i.toString())
+                  )}
+                </TreeView>
+              </Box>
+            );
+          }
+        })
+      )}
+    </>
   );
 }
 

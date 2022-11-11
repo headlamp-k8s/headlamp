@@ -15,42 +15,57 @@ export default function CreateButton() {
   const location = useLocation();
   const { t } = useTranslation(['resource', 'frequent']);
 
-  const applyFunc = async (newItem: KubeObjectInterface) => {
-    try {
-      await apply(newItem);
-    } catch (err) {
-      let msg = t('Something went wrong…');
-      if (err instanceof Error) {
-        msg = err.message;
-      }
-      setErrorMessage(msg);
-      setOpenDialog(true);
-      throw err;
-    }
+  const applyFunc = async (newItems: KubeObjectInterface[]) => {
+    await Promise.allSettled(newItems.map(newItem => apply(newItem))).then((values: any) => {
+      values.forEach((value: any, index: number) => {
+        if (value.status === 'rejected') {
+          let msg;
+          const kind = newItems[index].kind;
+          const name = newItems[index].metadata.name;
+          const apiVersion = newItems[index].apiVersion;
+          if (newItems.length === 1) {
+            msg = t('Failed to create {{ kind }} {{ name }}.', { kind, name });
+          } else {
+            msg = t('Failed to create {{ kind }} {{ name }} in {{ apiVersion }}.', {
+              kind,
+              name,
+              apiVersion,
+            });
+          }
+          setErrorMessage(msg);
+          setOpenDialog(true);
+          throw msg;
+        }
+      });
+    });
   };
 
-  function handleSave(newItemDef: KubeObjectInterface) {
+  function handleSave(newItemDefs: KubeObjectInterface[]) {
     const cancelUrl = location.pathname;
-
-    if (!newItemDef.metadata?.name) {
-      setErrorMessage(t('Please set a name to the resource!'));
-      return;
+    // check if all yaml objects are valid
+    for (let i = 0; i < newItemDefs.length; i++) {
+      if (!newItemDefs[i].metadata?.name) {
+        setErrorMessage(t(`Invalid: One or more of the resource doesn't have a name property`));
+        return;
+      }
+      if (!newItemDefs[i].kind) {
+        setErrorMessage(t('Invalid: Please set a kind to the resource!'));
+        return;
+      }
     }
-
-    if (!newItemDef.kind) {
-      setErrorMessage(t('Please set a kind to the resource!'));
-      return;
-    }
-
-    const newItemName = newItemDef.metadata.name;
-
+    // all resources name
+    const resourceNames = newItemDefs.map(newItemDef => newItemDef.metadata.name);
     setOpenDialog(false);
     dispatch(
-      clusterAction(() => applyFunc(newItemDef), {
-        startMessage: t('Applying {{ newItemName }}…', { newItemName }),
-        cancelledMessage: t('Cancelled applying {{ newItemName }}.', { newItemName }),
-        successMessage: t('Applied {{ newItemName }}.', { newItemName }),
-        errorMessage: t('Failed to apply {{ newItemName }}.', { newItemName }),
+      clusterAction(() => applyFunc(newItemDefs), {
+        startMessage: t('Applying {{ newItemName }}…', { newItemName: resourceNames.join(',') }),
+        cancelledMessage: t('Cancelled applying {{ newItemName }}.', {
+          newItemName: resourceNames.join(','),
+        }),
+        successMessage: t('Applied {{ newItemName }}.', { newItemName: resourceNames.join(',') }),
+        errorMessage: t('Failed to apply {{ newItemName }}.', {
+          newItemName: resourceNames.join(','),
+        }),
         cancelUrl,
       })
     );

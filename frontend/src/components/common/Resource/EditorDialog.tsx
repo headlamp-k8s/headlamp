@@ -75,7 +75,9 @@ export default function EditorDialog(props: EditorDialogProps) {
   const [lastCodeCheckHandler, setLastCodeCheckHandler] = React.useState(0);
   const [previousVersion, setPreviousVersion] = React.useState('');
   const [error, setError] = React.useState('');
-  const [docSpecs, setDocSpecs] = React.useState({});
+  const [docSpecs, setDocSpecs] = React.useState<
+    KubeObjectInterface | KubeObjectInterface[] | null
+  >([]);
   const { t } = useTranslation('resource');
 
   const [useSimpleEditor, setUseSimpleEditorState] = React.useState(() => {
@@ -130,6 +132,16 @@ export default function EditorDialog(props: EditorDialogProps) {
     return onSave === null;
   }
 
+  function looksLikeJson(code: string) {
+    const trimmedCode = code.trimRight();
+    const lastChar = !!trimmedCode ? trimmedCode[trimmedCode.length - 1] : '';
+    const firstChar = !!trimmedCode ? trimmedCode[0] : '';
+    if (['{', '['].includes(firstChar) || ['}', ']'].includes(lastChar)) {
+      return true;
+    }
+    return false;
+  }
+
   function onChange(value: string | undefined): void {
     // Clear any ongoing attempts to check the code.
     window.clearTimeout(lastCodeCheckHandler);
@@ -137,7 +149,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     // Only check the code for errors after the user has stopped typing for a moment.
     setLastCodeCheckHandler(
       window.setTimeout(() => {
-        const { error: err, format } = getObjectFromCode({
+        const { error: err, format } = getObjectsFromCode({
           code: value || '',
           format: originalCode.format,
         });
@@ -152,48 +164,51 @@ export default function EditorDialog(props: EditorDialogProps) {
     );
 
     setCode({ code: value as string, format: code.format });
+    if (error && getObjectsFromCode({ code: value as string, format: originalCode.format })) {
+      setError('');
+    }
 
     if (onEditorChanged) {
       onEditorChanged(value as string);
     }
   }
 
-  function getObjectFromCode(codeInfo: typeof originalCode) {
-    function looksLikeJson(code: string) {
-      const trimmedCode = code.trimRight();
-      const lastChar = !!trimmedCode ? trimmedCode[trimmedCode.length - 1] : '';
-      const firstChar = !!trimmedCode ? trimmedCode[0] : '';
-      if (['{', '['].includes(firstChar) || ['}', ']'].includes(lastChar)) {
-        return true;
-      }
-
-      return false;
-    }
-
+  function getObjectsFromCode(codeInfo: typeof originalCode): {
+    obj: KubeObjectInterface[] | null;
+    format: string;
+    error: Error | null;
+  } {
     const { code, format } = codeInfo;
-    const res: { obj: KubeObjectInterface | null; format: string; error: Error | null } = {
+    const res: { obj: KubeObjectInterface[] | null; format: string; error: Error | null } = {
       obj: null,
       format,
       error: null,
     };
 
-    if (!res.obj) {
-      res.format = 'yaml';
-      try {
-        res.obj = yaml.load(code) as KubeObjectInterface;
-        return res;
-      } catch (e) {
-        res.error = new Error((e as Error).message || t('Invalid YAML'));
-      }
-    }
-
     if (!format || (!res.obj && looksLikeJson(code))) {
       res.format = 'json';
       try {
-        res.obj = JSON.parse(code) as KubeObjectInterface;
+        let helperArr = [];
+        const parsedCode = JSON.parse(code);
+        if (!Array.isArray(parsedCode)) {
+          helperArr.push(parsedCode);
+        } else {
+          helperArr = parsedCode;
+        }
+        res.obj = helperArr;
         return res;
       } catch (e) {
         res.error = new Error((e as Error).message || t('Invalid JSON'));
+      }
+    }
+
+    if (!res.obj) {
+      res.format = 'yaml';
+      try {
+        res.obj = yaml.loadAll(code) as KubeObjectInterface[];
+        return res;
+      } catch (e) {
+        res.error = new Error((e as Error).message || t('Invalid YAML'));
       }
     }
 
@@ -210,16 +225,8 @@ export default function EditorDialog(props: EditorDialogProps) {
       return;
     }
 
-    const { obj: codeObj } = getObjectFromCode(code);
-
-    const { kind, apiVersion } = (codeObj || {}) as KubeObjectInterface;
-    if (codeObj === null || (!!kind && !!apiVersion)) {
-      setDocSpecs({
-        error: codeObj === null,
-        kind,
-        apiVersion,
-      });
-    }
+    const { obj: codeObjs } = getObjectsFromCode(code);
+    setDocSpecs(codeObjs);
   }
 
   function onUndo() {
@@ -227,8 +234,8 @@ export default function EditorDialog(props: EditorDialogProps) {
   }
 
   function handleSave() {
-    // Verify the YAML / JSON even means anything before trying to use it.
-    const { obj, format, error } = getObjectFromCode(code);
+    // Verify the YAML even means anything before trying to use it.
+    const { obj, format, error } = getObjectsFromCode(code);
     if (!!error) {
       setError(t('Error parsing the code: {{error}}', { error: error.message }));
       return;
@@ -236,6 +243,11 @@ export default function EditorDialog(props: EditorDialogProps) {
 
     if (format !== code.format) {
       setCode({ code: code.code, format });
+    }
+
+    if (!getObjectsFromCode(code)) {
+      setError(t("Error parsing the code. Please verify it's valid YAML or JSON!"));
+      return;
     }
     onSave!(obj);
   }
