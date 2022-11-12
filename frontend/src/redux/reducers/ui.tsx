@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { SidebarEntryProps } from '../../components/Sidebar';
+import helpers from '../../helpers';
 import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import themesConf, { setTheme } from '../../lib/themes';
@@ -229,7 +230,7 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       //if it's an empty array that means this is a request to clear notifications
       if (notifications.length === 0) {
         newFilters.notifications = [];
-        localStorage.setItem('notifications', JSON.stringify(newFilters.notifications));
+        helpers.storeNotifications(newFilters.notifications);
         break;
       }
       if (Array.isArray(notifications)) {
@@ -255,7 +256,7 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       newFilters.notifications.sort((n1: Notification, n2: Notification) => {
         return new Date(n2.date).getTime() - new Date(n1.date).getTime();
       });
-      localStorage.setItem('notifications', JSON.stringify(newFilters.notifications));
+      helpers.storeNotifications(newFilters.notifications);
       break;
     }
     case UI_UPDATE_NOTIFICATION: {
@@ -278,7 +279,7 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
           return notification;
         });
       }
-      localStorage.setItem('notifications', JSON.stringify(newFilters.notifications));
+      helpers.storeNotifications(newFilters.notifications);
       break;
     }
     case UI_SET_CLUSTER_CHOOSER_BUTTON: {

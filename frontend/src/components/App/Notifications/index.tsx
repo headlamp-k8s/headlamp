@@ -19,6 +19,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
+import helpers from '../../../helpers';
 import Event, { KubeEvent } from '../../../lib/k8s/event';
 import { Notification } from '../../../lib/notification';
 import { createRouteURL } from '../../../lib/router';
@@ -181,7 +182,7 @@ export default function Notifications() {
     let changed = false;
 
     if (currentNotifications.length === 0) {
-      currentNotifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+      currentNotifications = helpers.loadNotifications();
       changed = currentNotifications.length > 0;
     }
 

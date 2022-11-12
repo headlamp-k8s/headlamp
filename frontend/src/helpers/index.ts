@@ -1,4 +1,5 @@
 import { Cluster } from '../lib/k8s/cluster';
+import { Notification } from '../lib/notification';
 
 /**
  * Determines whether app is running in electron environment.
@@ -178,6 +179,19 @@ function getProductName() {
   return process.env.REACT_APP_HEADLAMP_PRODUCT_NAME;
 }
 
+const defaultMaxNotificationsStored = 200;
+type NotificationStoreOptions = {
+  max?: number;
+};
+function storeNotifications(notifications: Notification[], options: NotificationStoreOptions = {}) {
+  const { max = defaultMaxNotificationsStored } = options;
+  localStorage.setItem('notifications', JSON.stringify(notifications.slice(0, max)));
+}
+
+function loadNotifications(): Notification[] {
+  return JSON.parse(localStorage.getItem('notifications') || '[]');
+}
+
 const exportFunctions = {
   getBaseUrl,
   isDevMode,
@@ -191,6 +205,9 @@ const exportFunctions = {
   setTablesRowsPerPage,
   getVersion,
   getProductName,
+  storeNotifications,
+  loadNotifications,
+  defaultMaxNotificationsStored,
 };
 
 export default exportFunctions;
