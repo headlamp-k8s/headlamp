@@ -266,6 +266,7 @@ export default function Notifications() {
   const areAllNotificationsInDeleteState =
     notifications.filter(notification => !notification.deleted).length === 0;
   const notificationMenuId = 'notification-menu';
+  const maxNotificationsInPopup = 50;
 
   return (
     <>
@@ -332,7 +333,9 @@ export default function Notifications() {
           </Grid>
         </Box>
         <NotificationsList
-          notifications={areAllNotificationsInDeleteState ? [] : notifications}
+          notifications={
+            areAllNotificationsInDeleteState ? [] : notifications.slice(0, maxNotificationsInPopup)
+          }
           clickEventHandler={menuItemClickHandler}
         />
       </Popover>
