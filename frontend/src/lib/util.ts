@@ -74,6 +74,7 @@ export function localeDate(date: DateParam) {
 
   if (process.env.UNDER_TEST === 'true') {
     options.timeZone = 'UTC';
+    options.hour12 = true;
   } else {
     options.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
