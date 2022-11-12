@@ -14,7 +14,7 @@ type NotificationMessageString = string;
 type OldNotificationDateArg = number | string;
 
 export class Notification {
-  message: string = '';
+  private _message: string = '';
   id: string;
   seen: boolean = false;
   url?: string;
@@ -54,6 +54,18 @@ export class Notification {
     }
     // generate the id based on the message and the date attached to a notification
     this.id = btoa(unescape(encodeURIComponent(`${this.date},${this.message},${this.cluster}`)));
+  }
+
+  set message(message: string) {
+    this._message = message;
+    if (this._message.length > 250) {
+      // I am not sure if this applies well to all languages, but it should be good enough for now.
+      this._message = this._message.slice(0, 249) + '…';
+    }
+  }
+
+  get message() {
+    return this._message;
   }
 }
 

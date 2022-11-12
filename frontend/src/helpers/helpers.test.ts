@@ -91,6 +91,15 @@ describe('notifications', () => {
     }));
   });
 
+  test('messageLimits', () => {
+    // Verify that the message limits are set correctly.
+    const notification = new Notification({
+      message: 'm'.repeat(251),
+    });
+
+    expect(notification.message.length).toBe(250);
+  });
+
   test('store', () => {
     const notifications: Notification[] = [];
 
