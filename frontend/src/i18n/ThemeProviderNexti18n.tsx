@@ -1,4 +1,4 @@
-import { deDE, enUS, esES, hiIN, ptPT } from '@material-ui/core/locale';
+import { deDE, enUS, esES, frFR, hiIN, ptPT } from '@material-ui/core/locale';
 import { createTheme, Theme, ThemeProvider } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,8 +12,9 @@ function getLocale(locale: string): typeof enUS {
     de: deDE,
     ta: enUS, // @todo: material ui needs a translation for this.
     hi: hiIN,
+    fr: frFR,
   };
-  type LocalesType = 'en' | 'pt' | 'es' | 'ta' | 'de' | 'hi';
+  type LocalesType = 'en' | 'pt' | 'es' | 'ta' | 'de' | 'hi' | 'fr';
   return locale in LOCALES ? LOCALES[locale as LocalesType] : LOCALES['en'];
 }
 

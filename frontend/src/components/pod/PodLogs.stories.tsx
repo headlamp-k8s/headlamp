@@ -32,6 +32,8 @@ const phonyGetAuthorization: KubeObjectClass['getAuthorization'] = async (
   });
 };
 
+// @todo: There is no "PodLogs" component. Stories should be named after the component.
+
 export default {
   title: 'Pod/PodLogs',
   component: PodDetails,

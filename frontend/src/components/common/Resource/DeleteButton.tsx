@@ -63,8 +63,8 @@ export default function DeleteButton(props: DeleteButtonProps) {
       />
       <ConfirmDialog
         open={openAlert}
-        title={t('Delete item')}
-        description={t('Are you sure you want to delete this item?')}
+        title={t('resource|Delete item')}
+        description={t('resource|Are you sure you want to delete this item?')}
         handleClose={() => setOpenAlert(false)}
         onConfirm={() => deleteFunc()}
       />

@@ -328,7 +328,7 @@ export default function Notifications() {
                 onClick={handleNotificationClear}
                 disabled={areAllNotificationsInDeleteState}
               >
-                {t('frequent|Clear')}
+                {t('notifications|Clear')}
               </Button>
             </Grid>
           </Grid>
@@ -348,7 +348,7 @@ export default function Notifications() {
           }}
           style={{ textTransform: 'none' }}
         >
-          {t('View all Notifications')}
+          {t('notifications|View all notifications')}
         </Button>
       </Popover>
     </>

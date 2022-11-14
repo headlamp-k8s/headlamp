@@ -53,10 +53,10 @@ export default function EditButton(props: EditButtonProps) {
     setOpenDialog(false);
     dispatch(
       clusterAction(() => applyFunc(newItemDef), {
-        startMessage: t('Applying changes to {{ itemName }}…', { itemName }),
-        cancelledMessage: t('Cancelled changes to {{ itemName }}.', { itemName }),
-        successMessage: t('Applied changes to {{ itemName }}.', { itemName }),
-        errorMessage: t('Failed to apply changes to {{ itemName }}.', { itemName }),
+        startMessage: t('resource|Applying changes to {{ itemName }}…', { itemName }),
+        cancelledMessage: t('resource|Cancelled changes to {{ itemName }}.', { itemName }),
+        successMessage: t('resource|Applied changes to {{ itemName }}.', { itemName }),
+        errorMessage: t('resource|Failed to apply changes to {{ itemName }}.', { itemName }),
         cancelUrl,
         errorUrl: cancelUrl,
         ...options,
