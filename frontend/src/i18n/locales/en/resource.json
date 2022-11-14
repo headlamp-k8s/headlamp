@@ -46,5 +46,6 @@
   "Failed to run \"{{ command }}\"": "Failed to run \"{{ command }}\"",
   "Trying to run \"{{command}}\"…": "Trying to run \"{{command}}\"…",
   "Terminal: {{ itemName }}": "Terminal: {{ itemName }}",
-  "Loading resource definition details": "Loading resource definition details"
+  "Loading resource definition details": "Loading resource definition details",
+  "Use minimal editor": "Use minimal editor"
 }

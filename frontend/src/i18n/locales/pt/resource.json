@@ -46,5 +46,6 @@
   "Failed to run \"{{ command }}\"": "Falha ao executar \"{{ command }}\"",
   "Trying to run \"{{command}}\"…": "A tentar executar \"{{command}}\"…",
   "Terminal: {{ itemName }}": "Terminal: {{ itemName }}",
-  "Loading resource definition details": "A carregar os detalhes de definição do recurso"
+  "Loading resource definition details": "A carregar os detalhes de definição do recurso",
+  "Use minimal editor": "Usar editor mínimo"
 }
