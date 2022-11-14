@@ -353,6 +353,11 @@ export default function Terminal(props: TerminalProps) {
   return (
     <Dialog
       onClose={onClose}
+      onFullScreenToggled={() => {
+        setTimeout(() => {
+          fitAddonRef.current!.fit();
+        }, 1);
+      }}
       keepMounted
       withFullScreen
       title={t('Terminal: {{ itemName }}', { itemName: item.metadata.name })}
