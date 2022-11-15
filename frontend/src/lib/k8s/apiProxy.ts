@@ -133,7 +133,8 @@ export async function request(
   path: string,
   params: RequestParams = {},
   autoLogoutOnAuthError: boolean = true,
-  useCluster: boolean = true
+  useCluster: boolean = true,
+  queryParams?: QueryParameters
 ) {
   interface RequestHeaders {
     Authorization?: string;
@@ -165,7 +166,8 @@ export async function request(
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
 
-  const url = combinePath(BASE_HTTP_URL, fullPath);
+  let url = combinePath(BASE_HTTP_URL, fullPath);
+  url += asQuery(queryParams);
   const requestData = { signal: controller.signal, ...opts };
   let response: Response = new Response(undefined, { status: 502, statusText: 'Unreachable' });
   try {

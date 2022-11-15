@@ -1,0 +1,494 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                ResourceQuota
+              </h1>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="View YAML"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    tabindex="0"
+                    title="View YAML"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="false"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <table
+                class="MuiTable-root makeStyles-table"
+              >
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Name
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        test-cpu-quota
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Namespace
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        test
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Creation
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                      >
+                        10/25/2022, 11:48:48 AM UTC
+                      </span>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Annotations
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <div
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                      >
+                        <div
+                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                          style="max-width: 80%;"
+                        >
+                          <div
+                            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                          >
+                            <p
+                              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                              title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ResourceQuota\\",\\"metadata\\":{\\"annotations\\":{},\\"name\\":\\"test-cpu-quota\\",\\"namespace\\":\\"test\\"},\\"spec\\":{\\"hard\\":{\\"limits.cpu\\":\\"300m\\",\\"requests.cpu\\":\\"200m\\"}}}
+"
+                            >
+                              kubectl.kubernetes.io/last-applied-configuration: …
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                      role="cell"
+                      scope="row"
+                    >
+                      Status
+                    </th>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    >
+                      <table
+                        class="MuiTable-root makeStyles-table"
+                      >
+                        <thead
+                          class="MuiTableHead-root"
+                        >
+                          <tr
+                            class="MuiTableRow-root MuiTableRow-head"
+                          >
+                            <th
+                              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                              scope="col"
+                            >
+                              Resource
+                            </th>
+                            <th
+                              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                              scope="col"
+                            >
+                              Used
+                            </th>
+                            <th
+                              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                              scope="col"
+                            >
+                              Hard
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody
+                          class="MuiTableBody-root"
+                        >
+                          <tr
+                            class="MuiTableRow-root"
+                          >
+                            <td
+                              class="MuiTableCell-root MuiTableCell-body"
+                            >
+                              limits.cpu
+                            </td>
+                            <td
+                              class="MuiTableCell-root MuiTableCell-body"
+                            >
+                              0
+                            </td>
+                            <td
+                              class="MuiTableCell-root MuiTableCell-body"
+                            >
+                              300m
+                            </td>
+                          </tr>
+                          <tr
+                            class="MuiTableRow-root"
+                          >
+                            <td
+                              class="MuiTableCell-root MuiTableCell-body"
+                            >
+                              requests.cpu
+                            </td>
+                            <td
+                              class="MuiTableCell-root MuiTableCell-body"
+                            >
+                              500m
+                            </td>
+                            <td
+                              class="MuiTableCell-root MuiTableCell-body"
+                            >
+                              200m
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Error 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="true"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <p
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-colorError MuiTypography-alignCenter"
+                >
+                  Phony error is phony!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView No Item Yet 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          href="/"
+          role="button"
+          tabindex="0"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="true"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+              >
+                <div
+                  class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+                  role="progressbar"
+                  style="width: 40px; height: 40px;"
+                  title="Loading resource data"
+                >
+                  <svg
+                    class="MuiCircularProgress-svg"
+                    viewBox="22 22 44 44"
+                  >
+                    <circle
+                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                      cx="44"
+                      cy="44"
+                      fill="none"
+                      r="20.2"
+                      stroke-width="3.6"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+</div>
+`;

@@ -132,5 +132,9 @@
   "Up to date": "Up to date",
   "Available": "Available",
   "Total": "Total",
-  "Strategy Type": "Strategy Type"
+  "Strategy Type": "Strategy Type",
+  "HPAs": "HPAs",
+  "Horizontal Pod Autoscalers": "Horizontal Pod Autoscalers",
+  "Resource Quotas": "Resource Quotas",
+  "Pod Disruption Budget": "Pod Disruption Budget"
 }

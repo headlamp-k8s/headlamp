@@ -15,6 +15,7 @@ import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
 import Endpoints from './endpoints';
+import HPA from './hpa';
 import Ingress from './ingress';
 import Job from './job';
 import Namespace from './namespace';
@@ -23,7 +24,10 @@ import Node from './node';
 import PersistentVolume from './persistentVolume';
 import PersistentVolumeClaim from './persistentVolumeClaim';
 import Pod from './pod';
+import PodDisruptionBudget from './podDisruptionBudget';
+import PriorityClasses from './priorityClasses';
 import ReplicaSet from './replicaSet';
+import ResourceQuota from './resourceQuota';
 import Role from './role';
 import RoleBinding from './roleBinding';
 import Secret from './secret';
@@ -43,6 +47,10 @@ const classList = [
   DaemonSet,
   Deployment,
   Endpoints,
+  ResourceQuota,
+  HPA,
+  PodDisruptionBudget,
+  PriorityClasses,
   Ingress,
   Job,
   Namespace,

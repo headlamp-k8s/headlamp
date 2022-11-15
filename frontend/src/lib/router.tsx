@@ -18,6 +18,8 @@ import DaemonSetList from '../components/daemonset/List';
 import DeploymentsList from '../components/deployments/List';
 import EndpointDetails from '../components/endpoints/Details';
 import EndpointList from '../components/endpoints/List';
+import HpaDetails from '../components/horizontalPodAutoscaler/Details';
+import HpaList from '../components/horizontalPodAutoscaler/List';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import JobsList from '../components/job/List';
@@ -28,7 +30,13 @@ import NodeList from '../components/node/List';
 import OIDCAuth from '../components/oidcauth';
 import PodDetails from '../components/pod/Details';
 import PodList from '../components/pod/List';
+import PDBDetails from '../components/podDisruptionBudget/Details';
+import PDBList from '../components/podDisruptionBudget/List';
+import PriorityClassDetails from '../components/priorityClass/Details';
+import PriorityClassList from '../components/priorityClass/List';
 import ReplicaSetList from '../components/replicaset/List';
+import ResourceQuotaDetails from '../components/resourceQuota/Details';
+import ResourceQuotaList from '../components/resourceQuota/List';
 import RoleBindingDetails from '../components/role/BindingDetails';
 import RoleBindingList from '../components/role/BindingList';
 import RoleDetails from '../components/role/Details';
@@ -396,6 +404,62 @@ const defaultRoutes: {
     exact: true,
     sidebar: 'secrets',
     component: () => <SecretDetails />,
+  },
+  horizontalPodAutoscalers: {
+    path: '/horizontalpodautoscalers',
+    exact: true,
+    name: 'Horizontal Pod Autoscalers',
+    sidebar: 'horizontalPodAutoscalers',
+    component: () => <HpaList />,
+  },
+  horizontalPodAutoscaler: {
+    path: '/horizontalpodautoscalers/:namespace/:name',
+    exact: true,
+    name: 'Horizontal Pod Autoscaler',
+    sidebar: 'horizontalPodAutoscalers',
+    component: () => <HpaDetails />,
+  },
+  podDisruptionBudgets: {
+    path: '/poddisruptionbudgets',
+    exact: true,
+    name: 'Pod Disruption Budgets',
+    sidebar: 'podDisruptionBudgets',
+    component: () => <PDBList />,
+  },
+  podDisruptionBudget: {
+    path: '/poddisruptionbudgets/:namespace/:name',
+    exact: true,
+    name: 'Pod Disruption Budget',
+    sidebar: 'podDisruptionBudgets',
+    component: () => <PDBDetails />,
+  },
+  priorityclasses: {
+    path: '/priorityclasses',
+    exact: true,
+    name: 'Priority Classes',
+    sidebar: 'priorityClasses',
+    component: () => <PriorityClassList />,
+  },
+  priorityClass: {
+    path: '/priorityclasses/:name',
+    exact: true,
+    name: 'PriorityClass',
+    sidebar: 'priorityClasses',
+    component: () => <PriorityClassDetails />,
+  },
+  resourceQuotas: {
+    path: '/resourcequotas',
+    exact: true,
+    name: 'Resource Quotas',
+    sidebar: 'resourceQuotas',
+    component: () => <ResourceQuotaList />,
+  },
+  resourceQuota: {
+    path: '/resourcequotas/:namespace/:name',
+    exact: true,
+    name: 'Resource Quota',
+    sidebar: 'resourceQuotas',
+    component: () => <ResourceQuotaDetails />,
   },
   token: {
     path: '/token',
