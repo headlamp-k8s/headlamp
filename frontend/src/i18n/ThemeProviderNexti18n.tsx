@@ -39,6 +39,10 @@ const ThemeProviderNexti18n: React.FunctionComponent<{ theme: Theme }> = props =
 
   useEffect(() => {
     i18n.on('languageChanged', changeLang);
+    if (i18n.language) {
+      // Set the lang when the page loads too.
+      changeLang(i18n.language);
+    }
     return () => {
       i18n.off('languageChanged', changeLang);
     };
