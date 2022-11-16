@@ -305,7 +305,7 @@ export default function EditorDialog(props: EditorDialogProps) {
                         name="useSimpleEditor"
                       />
                     }
-                    label="Use minimal editor"
+                    label={t('Use minimal editor')}
                   />
                 </FormGroup>
               </Box>
