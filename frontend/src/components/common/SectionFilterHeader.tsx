@@ -21,7 +21,12 @@ interface SectionFilterHeaderProps extends SectionHeaderProps {
 }
 
 export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
-  const { noNamespaceFilter = false, noSearch = false, ...headerProps } = props;
+  const {
+    noNamespaceFilter = false,
+    noSearch = false,
+    actions: propsActions = [],
+    ...headerProps
+  } = props;
   const filter = useTypedSelector(state => state.filter);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -77,7 +82,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
     []
   );
 
-  const actions = [];
+  let actions: React.ReactNode[] = [];
 
   if (!showFilters) {
     actions.push(
@@ -118,6 +123,10 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
         </Grid>
       </Grid>
     );
+  }
+
+  if (!!propsActions) {
+    actions = actions.concat(propsActions);
   }
 
   return (
