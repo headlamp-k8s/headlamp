@@ -540,7 +540,7 @@ export async function streamResult(
       socket = stream(watchUrl, x => cb(x.object), { isJson: true });
     } catch (err) {
       console.error('Error in api request', { err, url });
-      if (errCb) errCb(err as ApiError, cancel);
+      if (errCb && typeof errCb === 'function') errCb(err as ApiError, cancel);
     }
   }
 
@@ -581,7 +581,9 @@ export async function streamResults(
       socket = stream(watchUrl, update, { isJson: true });
     } catch (err) {
       console.error('Error in api request', { err, url });
-      if (errCb) errCb(err as ApiError, cancel);
+      if (errCb && typeof errCb === 'function') {
+        errCb(err as ApiError, cancel);
+      }
     }
   }
 
