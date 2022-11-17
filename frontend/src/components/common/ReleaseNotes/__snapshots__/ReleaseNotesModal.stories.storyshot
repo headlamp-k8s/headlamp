@@ -9,13 +9,3 @@ exports[`Storyshots common/ReleaseNotes/ReleaseNotesModal Show 1`] = `
 `;
 
 exports[`Storyshots common/ReleaseNotes/ReleaseNotesModal Show No Notes 1`] = `<div />`;
-
-exports[`Storyshots common/ReleaseNotesModal Closed 1`] = `<div />`;
-
-exports[`Storyshots common/ReleaseNotesModal Show 1`] = `
-<div
-  aria-hidden="true"
-/>
-`;
-
-exports[`Storyshots common/ReleaseNotesModal Show No Notes 1`] = `<div />`;

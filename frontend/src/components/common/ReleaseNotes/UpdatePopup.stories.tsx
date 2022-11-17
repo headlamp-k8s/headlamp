@@ -1,6 +1,5 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
-import UpdatePopup, { UpdatePopupProps } from './UpdatePopup';
+import UpdatePopup from './UpdatePopup';
 
 export default {
   title: 'common/ReleaseNotes/UpdatePopup',
@@ -8,7 +7,12 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<UpdatePopupProps> = args => <UpdatePopup {...args} />;
+const Template: Story<{
+  releaseDownloadURL?: string | null;
+  fetchingRelease?: boolean;
+  releaseFetchFailed?: boolean;
+  skipUpdateHandler: () => void;
+}> = args => <UpdatePopup {...args} />;
 
 export const Show = Template.bind({});
 Show.args = {
@@ -18,5 +22,4 @@ Show.args = {
 export const Closed = Template.bind({});
 Closed.args = {
   releaseDownloadURL: 'https://example.com',
-  open: false,
 };
