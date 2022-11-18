@@ -15,7 +15,7 @@ import CreateButton from '../common/Resource/CreateButton';
 import HeadlampButton from './HeadlampButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';
-import SidebarItem, { SidebarEntryProps } from './SidebarItem';
+import SidebarItem, { SidebarEntryProps, SidebarItemProps } from './SidebarItem';
 import VersionButton from './VersionButton';
 
 export const drawerWidth = 330;
@@ -65,6 +65,14 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
+const specialSidebarOptions: SidebarItemProps[] = [
+  {
+    name: 'notifications',
+    icon: 'mdi:bell',
+    label: 'Notifications',
+    url: '/notifications',
+  },
+];
 export default function Sidebar() {
   const sidebar = useTypedSelector(state => state.ui.sidebar);
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
@@ -72,16 +80,24 @@ export default function Sidebar() {
     state => state.ui.sidebar.isSidebarOpenUserSelected
   );
   const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
-
   const namespaces = useTypedSelector(state => state.filter.namespaces);
+  const [isSpecialSidebarOpen, setSpecialSidebarOpen] = React.useState(false);
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { t, i18n } = useTranslation(['glossary', 'frequent']);
   const items = React.useMemo(
-    () => prepareRoutes(t),
-    [sidebar.entries, i18n.language, arePluginsLoaded]
+    () => (isSpecialSidebarOpen ? specialSidebarOptions : prepareRoutes(t)),
+    [sidebar.entries, i18n.language, arePluginsLoaded, isSpecialSidebarOpen]
   );
   const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
+
+  React.useEffect(() => {
+    if (specialSidebarOptions.map(item => item.name).includes(location.pathname.split('/')[1])) {
+      setSpecialSidebarOpen(true);
+    } else {
+      setSpecialSidebarOpen(false);
+    }
+  }, [location]);
 
   // Use the location to make sure the sidebar is changed, as it depends on the cluster
   // (defined in the URL ATM).
