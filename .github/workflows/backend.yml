@@ -17,14 +17,14 @@ jobs:
 
   build:
     name: Lint & Build
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     steps:
 
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.17
+        go-version: 1.19
       id: go
 
     - name: Check out code
@@ -33,8 +33,9 @@ jobs:
     - name: setup and run golangci-lint 
       uses: golangci/golangci-lint-action@v3
       with:
-        version: v1.49.0
+        version: v1.50.1
         working-directory: backend
+        skip-cache: true
 
     - name: Lint, Build & Check
       run: |
