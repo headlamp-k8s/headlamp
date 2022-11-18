@@ -75,6 +75,7 @@ export interface SimpleTableProps {
   emptyMessage?: string;
   errorMessage?: string | null;
   defaultSortingColumn?: number;
+  noTableHeader?: boolean;
 }
 
 interface ColumnSortButtonProps {
@@ -113,6 +114,7 @@ export default function SimpleTable(props: SimpleTableProps) {
     emptyMessage = null,
     errorMessage = null,
     defaultSortingColumn,
+    noTableHeader = false,
   } = props;
   const [page, setPage] = React.useState(0);
   const [currentData, setCurrentData] = React.useState(data);
@@ -276,31 +278,33 @@ export default function SimpleTable(props: SimpleTableProps) {
         )
       }
       <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            {columns.map(({ label, cellProps = {}, sort }, i) => {
-              const { className = '', ...otherProps } = cellProps;
-              return (
-                <TableCell
-                  key={`tabletitle_${i}`}
-                  className={classes.headerCell + ' ' + className}
-                  {...otherProps}
-                >
-                  {label}
-                  {sort && (
-                    <ColumnSortButtons
-                      isIncreasingOrder={Boolean(isIncreasingOrder)}
-                      isDefaultSorted={sortColIndex === i}
-                      clickHandler={(isIncreasingOrder: boolean) =>
-                        sortClickHandler(isIncreasingOrder, i)
-                      }
-                    />
-                  )}
-                </TableCell>
-              );
-            })}
-          </TableRow>
-        </TableHead>
+        {!noTableHeader && (
+          <TableHead>
+            <TableRow>
+              {columns.map(({ label, cellProps = {}, sort }, i) => {
+                const { className = '', ...otherProps } = cellProps;
+                return (
+                  <TableCell
+                    key={`tabletitle_${i}`}
+                    className={classes.headerCell + ' ' + className}
+                    {...otherProps}
+                  >
+                    {label}
+                    {sort && (
+                      <ColumnSortButtons
+                        isIncreasingOrder={Boolean(isIncreasingOrder)}
+                        isDefaultSorted={sortColIndex === i}
+                        clickHandler={(isIncreasingOrder: boolean) =>
+                          sortClickHandler(isIncreasingOrder, i)
+                        }
+                      />
+                    )}
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          </TableHead>
+        )}
         <TableBody>
           {filteredData.length > 0 ? (
             getPagedRows().map((row: any, i: number) => (

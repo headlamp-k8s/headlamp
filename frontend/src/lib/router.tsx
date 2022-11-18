@@ -3,6 +3,7 @@ import React from 'react';
 import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
+import NotificationList from '../components/App/Notifications/List';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
 import Overview from '../components/cluster/Overview';
@@ -508,6 +509,15 @@ const defaultRoutes: {
     name: 'Custom Resource',
     sidebar: 'crds',
     component: () => <CustomResourceDetails />,
+  },
+  notifications: {
+    path: '/notifications',
+    exact: true,
+    useClusterURL: false,
+    name: 'Notifications',
+    sidebar: 'notifications',
+    noAuthRequired: true,
+    component: () => <NotificationList />,
   },
 };
 

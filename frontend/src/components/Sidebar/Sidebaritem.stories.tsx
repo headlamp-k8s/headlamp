@@ -2,7 +2,9 @@ import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import store from '../../redux/stores/store';
 import SidebarItem, { SidebarItemProps } from './SidebarItem';
 
 export default {
@@ -20,11 +22,13 @@ export default {
 
 const Template: Story<SidebarItemProps> = args => {
   return (
-    <Grid item style={{ backgroundColor: 'rgba(0, 0, 0, 0.87)' }}>
-      <List>
-        <SidebarItem {...args} />
-      </List>
-    </Grid>
+    <Provider store={store}>
+      <Grid item style={{ backgroundColor: 'rgba(0, 0, 0, 0.87)' }}>
+        <List>
+          <SidebarItem {...args} />
+        </List>
+      </Grid>
+    </Provider>
   );
 };
 

@@ -175,6 +175,7 @@ export default function Notifications() {
   const dispatch = useDispatch();
   const [events] = Event.useList();
   const { t } = useTranslation();
+  const history = useHistory();
 
   useEffect(() => {
     let notificationsToShow: Notification[] = [];
@@ -338,6 +339,17 @@ export default function Notifications() {
           }
           clickEventHandler={menuItemClickHandler}
         />
+        <Button
+          fullWidth
+          color="primary"
+          onClick={() => {
+            history.push('/notifications');
+            setAnchorEl(null);
+          }}
+          style={{ textTransform: 'none' }}
+        >
+          {t('View all Notifications')}
+        </Button>
       </Popover>
     </>
   );
