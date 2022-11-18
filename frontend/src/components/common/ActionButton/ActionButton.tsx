@@ -15,7 +15,7 @@ export interface ActionButtonProps {
   /** The icon color. */
   color?: string | 'inherit' | 'primary' | 'secondary' | 'default';
   /** The icon width. */
-  width?: string;
+  width?: IconProps['width'];
   /**
    * If given, uses a negative margin to counteract the padding on one side
    * (this is often helpful for aligning the left or right side of the icon

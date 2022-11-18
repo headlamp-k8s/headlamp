@@ -454,7 +454,7 @@ export function SearchPopover(props: SearchPopoverProps) {
           onClick={() => setWholeWordMatchChecked(!wholeWordMatchChecked)}
           description={t('search|Match whole word')}
           iconButtonProps={{
-            className: wholeWordMatchChecked ? 'checked' : ''
+            className: wholeWordMatchChecked ? 'checked' : '',
           }}
         />
         <ActionButton
@@ -462,7 +462,7 @@ export function SearchPopover(props: SearchPopoverProps) {
           onClick={() => setRegexChecked(!regexChecked)}
           description={t('search|Use regular expression')}
           iconButtonProps={{
-            className: regexChecked ? 'checked' : ''
+            className: regexChecked ? 'checked' : '',
           }}
         />
       </Box>
@@ -473,7 +473,7 @@ export function SearchPopover(props: SearchPopoverProps) {
           onClick={handleFindPrevious}
           description={t('search|Previous Match (Shift+Enter)')}
           iconButtonProps={{
-            disabled: !searchResult?.resultCount && searchResult?.resultCount !== undefined
+            disabled: !searchResult?.resultCount && searchResult?.resultCount !== undefined,
           }}
         />
         <ActionButton
@@ -481,7 +481,7 @@ export function SearchPopover(props: SearchPopoverProps) {
           onClick={handleFindNext}
           description={t('search|Next Match (Enter)')}
           iconButtonProps={{
-            disabled: !searchResult?.resultCount && searchResult?.resultCount !== undefined
+            disabled: !searchResult?.resultCount && searchResult?.resultCount !== undefined,
           }}
         />
         <ActionButton icon="mdi:close" onClick={handleClose} description={t('frequent|Close')} />
