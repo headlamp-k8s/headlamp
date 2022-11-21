@@ -11,12 +11,10 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -36,7 +34,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -765,12 +763,10 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -790,7 +786,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -1503,12 +1499,10 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -1528,7 +1522,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -2355,12 +2349,10 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -2380,7 +2372,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -3076,12 +3068,10 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -3101,7 +3091,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -3826,12 +3816,10 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -3851,7 +3839,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >

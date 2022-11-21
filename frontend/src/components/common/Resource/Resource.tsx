@@ -9,12 +9,13 @@ import { TextFieldProps } from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import Editor from '@monaco-editor/react';
+import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import * as monaco from 'monaco-editor';
 import React, { isValidElement, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, Link as RouterLink, NavLinkProps, useLocation } from 'react-router-dom';
+import { generatePath, NavLinkProps, useHistory, useLocation } from 'react-router-dom';
 import { labelSelectorToQuery } from '../../../lib/k8s';
 import {
   KubeCondition,
@@ -27,6 +28,7 @@ import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
+import { useHasPreviousRoute } from '../../App/RouteSwitcher';
 import Loader from '../../common/Loader';
 import { SectionBox } from '../../common/SectionBox';
 import SectionHeader, { HeaderStyleProps } from '../../common/SectionHeader';
@@ -77,6 +79,7 @@ export interface MainInfoSectionProps {
   actions?: ((resource: KubeObject | null) => React.ReactNode[] | null) | React.ReactNode[] | null;
   headerStyle?: HeaderStyleProps['headerStyle'];
   noDefaultActions?: boolean;
+  /** The route or location to go to. If it's an empty string, then the "browser back" function is used. If null, no back button will be shown. */
   backLink?: string | ReturnType<typeof useLocation> | null;
   error?: string | Error | null;
 }
@@ -95,6 +98,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   } = props;
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
   const { t } = useTranslation('frequent');
+  const history = useHistory();
 
   const header = typeof headerSection === 'function' ? headerSection(resource) : headerSection;
 
@@ -136,12 +140,23 @@ export function MainInfoSection(props: MainInfoSectionProps) {
 
   return (
     <>
-      {(backLink || resource) && (
+      {(backLink || backLink === '' || resource) && (
         <Button
           startIcon={<Icon icon="mdi:chevron-left" />}
           size="small"
-          component={RouterLink}
-          to={backLink || createRouteURL(resource.listRoute)}
+          onClick={() => {
+            // Empty string means go back using the history.
+            if (backLink === '') {
+              history.goBack();
+              return;
+            }
+            if (typeof backLink === 'string') {
+              history.push(backLink);
+              return;
+            }
+
+            history.push(backLink || createRouteURL(resource.listRoute));
+          }}
         >
           <Typography style={{ paddingTop: '3px' }}>{t('frequent|Back')}</Typography>
         </Button>
@@ -186,11 +201,17 @@ export function DetailsGrid(props: DetailsGridProps) {
   const { sectionsFunc, resourceType, name, namespace, children, ...otherMainInfoSectionProps } =
     props;
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
+  const hasPreviousRoute = useHasPreviousRoute();
 
-  const backLink: string | undefined = React.useMemo(() => {
+  const backLink: string | Location | undefined = React.useMemo(() => {
     const stateLink = location.state?.backLink || null;
     if (!!stateLink) {
       return generatePath(stateLink.pathname);
+    }
+
+    if (!!hasPreviousRoute) {
+      // Will make it go back to the previous route
+      return '';
     }
 
     let route;

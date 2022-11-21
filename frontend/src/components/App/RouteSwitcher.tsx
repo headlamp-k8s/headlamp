@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { Redirect, Route, RouteProps, Switch } from 'react-router-dom';
+import { Redirect, Route, RouteProps, Switch, useHistory } from 'react-router-dom';
 import { getToken } from '../../lib/auth';
 import { useClustersConf } from '../../lib/k8s';
 import {
@@ -125,4 +125,30 @@ function AuthRoute(props: AuthRouteProps) {
   // If no auth is required for the view, or the token is set up, then
   // render the assigned component. Otherwise redirect to the login route.
   return <Route {...other} render={getRenderer} />;
+}
+
+const PreviousRouteContext = React.createContext<number>(0);
+
+export function PreviousRouteProvider({ children }: React.PropsWithChildren<{}>) {
+  const history = useHistory();
+  const [locationInfo, setLocationInfo] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    history.listen((location, action) => {
+      if (action === 'PUSH') {
+        setLocationInfo(levels => levels + 1);
+      } else if (action === 'POP') {
+        setLocationInfo(levels => levels - 1);
+      }
+    });
+  }, []);
+
+  return (
+    <PreviousRouteContext.Provider value={locationInfo}>{children}</PreviousRouteContext.Provider>
+  );
+}
+
+export function useHasPreviousRoute() {
+  const routeLevels = React.useContext(PreviousRouteContext);
+  return routeLevels > 1;
 }
