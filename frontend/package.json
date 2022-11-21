@@ -29,7 +29,6 @@
     "@types/webpack-env": "^1.16.2",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
-    "ansi-to-react": "^6.1.6",
     "buffer": "^6.0.3",
     "console-browserify": "^1.2.0",
     "cronstrue": "^1.123.0",
@@ -82,8 +81,9 @@
     "util": "^0.12.4",
     "vfile": "^5.3.0",
     "webpack": "^5.66.0",
-    "xterm": "^4.14.1",
-    "xterm-addon-fit": "^0.5.0"
+    "xterm": "^4.19.0",
+    "xterm-addon-fit": "^0.5.0",
+    "xterm-addon-search": "^0.9.0"
   },
   "scripts": {
     "prestart": "npm run make-version",
@@ -173,7 +173,8 @@
     ],
     "transformIgnorePatterns": [
       "/node_modules/(?!d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference)"
-    ]
+    ],
+    "resetMocks": false
   },
   "prettier": "@kinvolk/eslint-config/prettier-config",
   "devDependencies": {
@@ -190,6 +191,7 @@
     "http-proxy-middleware": "^2.0.1",
     "husky": "^4.3.8",
     "i18next-parser": "^4.7.0",
+    "jest-canvas-mock": "^2.4.0",
     "lint-staged": "^10.5.4",
     "msw": "^0.47.4",
     "msw-storybook-addon": "^1.6.3",

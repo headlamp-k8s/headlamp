@@ -1,9 +1,9 @@
 import { Icon, IconifyIcon } from '@iconify/react';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 
-export interface ActionButtonProps {
+export interface ActionButtonProps extends Omit<IconButtonProps, 'children' | 'color'> {
   /** A short description of the action. */
   description: string;
   /** Either a string icon, or imported icon. */
@@ -29,18 +29,11 @@ export interface ActionButtonProps {
  *
  * So we implement them consistently and encapsulate the implementation.
  */
-export default function ActionButton({
-  description,
-  longDescription,
-  icon,
-  onClick,
-  color,
-  width,
-  edge,
-}: ActionButtonProps) {
+export default function ActionButton(props: ActionButtonProps) {
+  const { description, longDescription, icon, onClick, color, width, edge, ...otherProps } = props;
   return (
     <Tooltip title={longDescription || description}>
-      <IconButton aria-label={description} onClick={onClick} edge={edge}>
+      <IconButton aria-label={description} onClick={onClick} edge={edge} {...otherProps}>
         <Icon icon={icon} color={color} width={width} />
       </IconButton>
     </Tooltip>

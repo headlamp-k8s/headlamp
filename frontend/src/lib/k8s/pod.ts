@@ -36,13 +36,15 @@ export interface ExecOptions extends StreamArgs {
   command?: string[];
 }
 
-interface LogOptions {
+export interface LogOptions {
   /** The number of lines to display from the end side of the log */
   tailLines?: number;
   /** Whether to show the logs from previous runs of the container (only for restarted containers) */
   showPrevious?: boolean;
   /** Whether to show the timestamps in the logs */
   showTimestamps?: boolean;
+  /** Whether to follow the log stream */
+  follow?: boolean;
 }
 
 /**@deprecated
@@ -99,9 +101,14 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
     }
 
     const [container, onLogs, logsOptions] = args as Parameters<newGetLogs>;
-    const { tailLines = 100, showPrevious = false, showTimestamps = false } = logsOptions;
+    const {
+      tailLines = 100,
+      showPrevious = false,
+      showTimestamps = false,
+      follow = true,
+    } = logsOptions;
     let logs: string[] = [];
-    const url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/log?container=${container}&previous=${showPrevious}&tailLines=${tailLines}&timestamps=${showTimestamps}&follow=true`;
+    const url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/log?container=${container}&previous=${showPrevious}&tailLines=${tailLines}&timestamps=${showTimestamps}&follow=${follow}`;
 
     function onResults(item: string) {
       if (!item) {
@@ -117,6 +124,7 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
       connectCb: () => {
         logs = [];
       },
+      reconnectOnFailure: follow,
     });
 
     return cancel;
