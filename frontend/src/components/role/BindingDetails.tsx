@@ -67,6 +67,7 @@ export default function RoleBindingDetails() {
                   getter: item => item.namespace,
                 },
               ]}
+              reflectInURL="bindingInfo"
             />
           </SectionBox>
         )

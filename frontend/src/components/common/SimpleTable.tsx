@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../helpers';
+import { useURLState } from '../../lib/util';
 import Empty from './EmptyContent';
 import { ValueLabel } from './Label';
 import Loader from './Loader';
@@ -76,6 +77,15 @@ export interface SimpleTableProps {
   errorMessage?: string | null;
   defaultSortingColumn?: number;
   noTableHeader?: boolean;
+  /** Whether to reflect the page/perPage properties in the URL.
+   * If assigned to a string, it will be the prefix for the page/perPage parameters.
+   * If true or '', it'll reflect the parameters without a prefix.
+   * By default, no parameters are reflected in the URL. */
+  reflectInURL?: string | boolean;
+  /** The page number to show by default (by default it's the first page). */
+  page?: number;
+  /** Whether to show the pagination component */
+  showPagination?: boolean;
 }
 
 interface ColumnSortButtonProps {
@@ -106,23 +116,60 @@ function ColumnSortButtons(props: ColumnSortButtonProps) {
   );
 }
 
+// Use a zero-indexed "useURLState" hook, so pages are shown in the URL as 1-indexed
+// but internally are 0-indexed.
+function usePageURLState(
+  key: string,
+  prefix: string,
+  initialPage: number
+): ReturnType<typeof useURLState> {
+  const [page, setPage] = useURLState(key, { defaultValue: initialPage + 1, prefix });
+  const [zeroIndexPage, setZeroIndexPage] = React.useState(page - 1);
+
+  React.useEffect(() => {
+    setZeroIndexPage((zeroIndexPage: number) => {
+      if (page - 1 !== zeroIndexPage) {
+        return page - 1;
+      }
+
+      return zeroIndexPage;
+    });
+  }, [page]);
+
+  React.useEffect(() => {
+    setPage(zeroIndexPage + 1);
+  }, [zeroIndexPage]);
+
+  return [zeroIndexPage, setZeroIndexPage];
+}
+
 export default function SimpleTable(props: SimpleTableProps) {
   const {
     columns,
     data,
     filterFunction = null,
     emptyMessage = null,
+    page: initialPage = 0,
+    showPagination = true,
     errorMessage = null,
     defaultSortingColumn,
     noTableHeader = false,
+    reflectInURL,
   } = props;
-  const [page, setPage] = React.useState(0);
+  const shouldReflectInURL = reflectInURL !== undefined && reflectInURL !== false;
+  const prefix = reflectInURL === true ? '' : reflectInURL || '';
+  const [page, setPage] = usePageURLState(shouldReflectInURL ? 'p' : '', prefix, initialPage);
   const [currentData, setCurrentData] = React.useState(data);
   const [displayData, setDisplayData] = React.useState(data);
   const rowsPerPageOptions = props.rowsPerPage || [15, 25, 50];
-  const [rowsPerPage, setRowsPerPage] = React.useState(
-    helpers.getTablesRowsPerPage(rowsPerPageOptions[0])
+  const defaultRowsPerPage = React.useMemo(
+    () => helpers.getTablesRowsPerPage(rowsPerPageOptions[0]),
+    []
   );
+  const [rowsPerPage, setRowsPerPage] = useURLState(shouldReflectInURL ? 'perPage' : '', {
+    defaultValue: defaultRowsPerPage,
+    prefix,
+  });
   const classes = useTableStyle();
   const [isIncreasingOrder, setIsIncreasingOrder] = React.useState(
     !defaultSortingColumn || defaultSortingColumn > 0
@@ -137,6 +184,18 @@ export default function SimpleTable(props: SimpleTableProps) {
     setPage(newPage);
   }
 
+  // Protect against invalid page values
+  React.useEffect(() => {
+    if (page < 0) {
+      setPage(0);
+      return;
+    }
+
+    if (displayData && page * rowsPerPage > displayData.length) {
+      setPage(Math.floor(displayData.length / rowsPerPage));
+    }
+  }, [page, displayData, rowsPerPage]);
+
   function handleChangeRowsPerPage(
     event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>
   ) {
@@ -149,9 +208,6 @@ export default function SimpleTable(props: SimpleTableProps) {
   React.useEffect(
     () => {
       if (currentData === data) {
-        if (page !== 0) {
-          setPage(0);
-        }
         return;
       }
 
@@ -270,6 +326,7 @@ export default function SimpleTable(props: SimpleTableProps) {
               startIcon={<Icon icon="mdi:refresh" />}
               onClick={() => {
                 setCurrentData(data);
+                setPage(0);
               }}
             >
               {t('frequent|Refresh')}
@@ -334,7 +391,7 @@ export default function SimpleTable(props: SimpleTableProps) {
           )}
         </TableBody>
       </Table>
-      {filteredData.length > rowsPerPageOptions[0] && (
+      {filteredData.length > rowsPerPageOptions[0] && showPagination && (
         <TablePagination
           rowsPerPageOptions={rowsPerPageOptions}
           component="div"

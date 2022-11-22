@@ -1,10 +1,12 @@
+import { Box, Typography } from '@material-ui/core';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import { createStore } from 'redux';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { useFilterFunc } from '../../lib/util';
 import store from '../../redux/stores/store';
+import { TestContext, TestContextProps } from '../../test';
 import SectionFilterHeader from './SectionFilterHeader';
 import SimpleTable, { SimpleTableProps } from './SimpleTable';
 
@@ -14,10 +16,27 @@ export default {
   argTypes: {},
 } as Meta;
 
+function TestSimpleTable(props: SimpleTableProps) {
+  const location = useLocation();
+  if (!!props.reflectInURL) {
+    return (
+      <Box>
+        <Typography>Test changing the page and rows per page.</Typography>
+        <Typography>
+          <b>Current URL search:</b> {`${location.search || ''}`}
+        </Typography>
+        <SimpleTable {...props} />
+      </Box>
+    );
+  }
+
+  return <SimpleTable {...props} />;
+}
+
 const Template: Story<SimpleTableProps> = args => (
   <MemoryRouter>
     <Provider store={store}>
-      <SimpleTable {...args} />
+      <TestSimpleTable {...args} />
     </Provider>
   </MemoryRouter>
 );
@@ -129,6 +148,83 @@ Datum.args = {
       datum: 'longField',
     },
   ],
+};
+
+const TemplateWithURLReflection: Story<{
+  simpleTableProps: SimpleTableProps;
+  testContextProps: TestContextProps;
+}> = args => {
+  const { testContextProps, simpleTableProps } = args;
+  return (
+    <TestContext {...testContextProps}>
+      <TestSimpleTable {...simpleTableProps} />
+    </TestContext>
+  );
+};
+
+export const ReflectInURL = TemplateWithURLReflection.bind({});
+const lotsOfData = (() => {
+  const data = [];
+  for (let i = 0; i < 50; i++) {
+    data.push({
+      name: `Name ${i}`,
+      namespace: `Namespace ${i}`,
+      number: i,
+    });
+  }
+  return data;
+})();
+ReflectInURL.args = {
+  simpleTableProps: {
+    data: lotsOfData,
+    columns: [
+      {
+        label: 'Name',
+        datum: 'name',
+      },
+      {
+        label: 'Namespace',
+        datum: 'namespace',
+      },
+      {
+        label: 'Number',
+        datum: 'number',
+      },
+    ],
+    rowsPerPage: [5, 10, 15],
+    reflectInURL: true,
+    showPagination: !process.env.UNDER_TEST, // Disable for snapshots: The pagination uses useId so snapshots will fail.
+  },
+  testContextProps: {
+    urlSearchParams: { p: '2' }, // 2nd page
+  },
+};
+
+export const ReflectInURLWithPrefix = TemplateWithURLReflection.bind({});
+ReflectInURLWithPrefix.args = {
+  simpleTableProps: {
+    data: lotsOfData,
+    columns: [
+      {
+        label: 'Name',
+        datum: 'name',
+      },
+      {
+        label: 'Namespace',
+        datum: 'namespace',
+      },
+      {
+        label: 'Number',
+        datum: 'creationDate',
+      },
+    ],
+    rowsPerPage: [5, 10, 15],
+    reflectInURL: 'mySuperTable',
+    showPagination: !process.env.UNDER_TEST, // Disable for snapshots: The pagination uses useId so snapshots will fail.
+  },
+  testContextProps: {
+    urlSearchParams: { p: '2' }, // 2nd page
+  },
 };
 
 // filter Function

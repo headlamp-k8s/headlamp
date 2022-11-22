@@ -51,6 +51,15 @@ From within the [Headlamp](https://github.com/kinvolk/headlamp/) repo run:
 make storybook
 ```
 
+If you are adding new stories, please wrap your story components with the `TestContext` helper
+component as it sets up the store, memory router, and other utilities that may be needed for
+current or future stories:
+
+```jsx
+<TestContext>
+  <YourComponentTheStoryIsAbout />
+</TestContext>
+```
 
 ## Accessibility (a11y)
 

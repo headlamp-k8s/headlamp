@@ -60,6 +60,7 @@ function TolerationsSection(props: TolerationsSection) {
             sort: true,
           },
         ]}
+        reflectInURL="tolerations"
       />
     </SectionBox>
   );
