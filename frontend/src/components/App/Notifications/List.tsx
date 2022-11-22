@@ -97,7 +97,7 @@ export default function NotificationList() {
       ) : (
         <SimpleTable
           filterFunction={(notification: Notification) =>
-            (notification?.message || '').includes(search)
+            (notification?.message?.toLowerCase() || '').includes(search.toLowerCase())
           }
           columns={[
             {
