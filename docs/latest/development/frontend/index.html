@@ -2735,6 +2735,12 @@ committed to git, but is shown on the website at
 <a href="https://github.com/kinvolk/headlamp/" target="_blank" rel="noopener">Headlamp</a>
  repo run:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make storybook
+</code></pre></div><p>If you are adding new stories, please wrap your story components with the <code>TestContext</code> helper
+component as it sets up the store, memory router, and other utilities that may be needed for
+current or future stories:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">&lt;<span style="color:#f92672">TestContext</span>&gt;
+  &lt;<span style="color:#f92672">YourComponentTheStoryIsAbout</span> /&gt;
+&lt;/<span style="color:#f92672">TestContext</span>&gt;
 </code></pre></div><h2 id="accessibility-a11y">Accessibility (a11y)</h2>
 <h3 id="developer-console-warnings-and-errors">Developer console warnings and errors</h3>
 <p>axe-core is used to detect some a11y issues at runtime when running
