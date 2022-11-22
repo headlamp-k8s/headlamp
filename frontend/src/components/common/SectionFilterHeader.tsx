@@ -35,17 +35,29 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   const hasSearch = !noSearch && !!filter.search;
   const { t } = useTranslation('frequent');
 
-  const [showFilters, setShowFilters] = React.useState<boolean>(hasNamespaceFilters || hasSearch);
+  // When the user moves to a different route, the search filter is reset (to an empty string), but
+  // this goes through redux, so when the new route is rendered, the search filter is still the old
+  // one. Eventually, the redux state will be updated, but at this point we already have the filter
+  // being shown (when it should actually be shown). OTOH, if we always hide the filter when the
+  // search (and namespace) are empty, it will also hide when the user deletes the whole string, and
+  // that's not desireable (because they may want to keep writing and at that point the filter has
+  // been hidden and input is lost).
+  // To solve this, we keep track of whether the filter has been shown by the user, in which case we
+  // don't hide it even when the search is empty.
+  const [showFilters, setShowFilters] = React.useState<{ show: boolean; userTriggered: boolean }>({
+    show: hasNamespaceFilters || hasSearch,
+    userTriggered: false,
+  });
 
   function resetFilters() {
     addQuery({ namespace: '' }, { namespace: '' }, history, location);
     dispatch(resetFilter());
-    setShowFilters(false);
+    setShowFilters({ show: false, userTriggered: true });
   }
 
   useHotkeys('ctrl+shift+f', () => {
     if (!noSearch || !noNamespaceFilter) {
-      setShowFilters(true);
+      setShowFilters({ show: true, userTriggered: true });
     }
   });
 
@@ -68,7 +80,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
         ) {
           dispatch(setNamespaceFilter(namespace));
           if (!noNamespaceFilter) {
-            setShowFilters(true);
+            setShowFilters({ show: true, userTriggered: false });
           }
         }
       }
@@ -82,11 +94,23 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
     []
   );
 
+  React.useEffect(() => {
+    setShowFilters(state => {
+      return {
+        show: hasSearch || hasNamespaceFilters || state.userTriggered,
+        userTriggered: state.userTriggered,
+      };
+    });
+  }, [hasSearch]);
+
   let actions: React.ReactNode[] = [];
 
-  if (!showFilters) {
+  if (!showFilters.show) {
     actions.push(
-      <IconButton aria-label={t('Show filter')} onClick={() => setShowFilters(!showFilters)}>
+      <IconButton
+        aria-label={t('Show filter')}
+        onClick={() => setShowFilters({ show: true, userTriggered: true })}
+      >
         <Icon icon="mdi:filter-variant" />
       </IconButton>
     );
@@ -107,7 +131,10 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
             InputProps={{ role: 'search' }}
             placeholder={t('Filter')}
             value={filter.search}
-            onChange={event => dispatch(setSearchFilter(event.target.value))}
+            onChange={event => {
+              dispatch(setSearchFilter(event.target.value));
+              setShowFilters({ show: true, userTriggered: true });
+            }}
             inputRef={focusedRef}
           />
         </Grid>
