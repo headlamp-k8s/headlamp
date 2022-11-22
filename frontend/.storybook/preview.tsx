@@ -72,6 +72,15 @@ export const parameters = {
       rest.post('http://localhost/apis/authorization.k8s.io/v1/selfsubjectaccessreviews', (_req, res, ctx) => {
         return res(ctx.json({status: 200}));
       }),
+      rest.get('http://localhost:4466/api/v1/namespaces', (_req, res, ctx) => {
+        return res(ctx.json({}));
+      }),
+      rest.get('http://localhost:4466/api/v1/events', (_req, res, ctx) => {
+        return res(ctx.json({}));
+      }),
+      rest.post('http://localhost:4466/apis/authorization.k8s.io/v1/selfsubjectaccessreviews', (_req, res, ctx) => {
+        return res(ctx.json({status: 200}));
+      }),
     ]
   },
 };
