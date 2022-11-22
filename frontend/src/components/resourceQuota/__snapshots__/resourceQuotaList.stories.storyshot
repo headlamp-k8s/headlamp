@@ -61,7 +61,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
               >
                 Name
@@ -82,7 +82,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
               >
                 Namespace
@@ -103,19 +103,19 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                 scope="col"
               >
                 Request
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                 scope="col"
               >
                 Limit
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
                 style="text-align: right;"
               >

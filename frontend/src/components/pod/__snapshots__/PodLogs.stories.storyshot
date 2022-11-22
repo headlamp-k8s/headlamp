@@ -333,31 +333,31 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Condition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Status
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Transition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Update
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Reason

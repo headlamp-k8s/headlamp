@@ -34,13 +34,13 @@ exports[`Storyshots pods/VolumeDetails Volume Details 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                 scope="col"
               >
                 Name
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                 scope="col"
               >
                 Type

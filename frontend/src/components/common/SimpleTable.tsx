@@ -8,6 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../helpers';
@@ -20,6 +21,9 @@ const useTableStyle = makeStyles(theme => ({
   headerCell: {
     fontWeight: 'bold',
     paddingBottom: theme.spacing(0.5),
+  },
+  sortCell: {
+    whiteSpace: 'nowrap',
   },
   table: {
     [theme.breakpoints.down('sm')]: {
@@ -343,7 +347,7 @@ export default function SimpleTable(props: SimpleTableProps) {
                 return (
                   <TableCell
                     key={`tabletitle_${i}`}
-                    className={classes.headerCell + ' ' + className}
+                    className={clsx(classes.headerCell, className, sort ? classes.sortCell : '')}
                     {...otherProps}
                   >
                     {label}

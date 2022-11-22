@@ -202,19 +202,19 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       IP
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Hostname
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Target
@@ -293,7 +293,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                       scope="col"
                     >
                       Name
@@ -314,7 +314,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                       </button>
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                       scope="col"
                     >
                       Port
@@ -335,7 +335,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                       </button>
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                       scope="col"
                     >
                       Protocol
