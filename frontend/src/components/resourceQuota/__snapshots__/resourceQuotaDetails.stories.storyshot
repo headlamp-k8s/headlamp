@@ -11,12 +11,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -36,7 +34,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -319,12 +317,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Error 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -344,7 +340,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Error 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -404,12 +400,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView No Item Yet 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -429,7 +423,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView No Item Yet 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >

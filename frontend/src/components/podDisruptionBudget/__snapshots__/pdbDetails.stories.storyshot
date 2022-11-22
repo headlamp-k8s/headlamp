@@ -11,12 +11,10 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -36,7 +34,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -372,12 +370,10 @@ exports[`Storyshots pdb/PDBDetailsView Error 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -397,7 +393,7 @@ exports[`Storyshots pdb/PDBDetailsView Error 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -457,12 +453,10 @@ exports[`Storyshots pdb/PDBDetailsView No Item Yet 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <a
-          aria-disabled="false"
+        <button
           class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
-          href="/"
-          role="button"
           tabindex="0"
+          type="button"
         >
           <span
             class="MuiButton-label"
@@ -482,7 +476,7 @@ exports[`Storyshots pdb/PDBDetailsView No Item Yet 1`] = `
           <span
             class="MuiTouchRipple-root"
           />
-        </a>
+        </button>
         <div
           class="MuiBox-root MuiBox-root"
         >
