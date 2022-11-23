@@ -340,7 +340,7 @@ export function useURLState<T extends string | number | undefined = string>(
     }
 
     if (shouldUpdateURL) {
-      history.replace({ ...location, search: urlParams.toString() });
+      history.replace({ search: urlParams.toString() });
     }
   }, [value]);
 
