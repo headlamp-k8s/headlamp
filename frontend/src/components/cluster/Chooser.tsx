@@ -24,13 +24,15 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
+import { getThemeName } from '../../lib/themes';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { setVersionDialogOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { ReactComponent as LogoLight } from '../../resources/logo-light.svg';
+import { EmptyContent } from '../common';
 import { DialogTitle } from '../common/Dialog';
 import ErrorBoundary from '../common/ErrorBoundary';
 import Loader from '../common/Loader';
+import AppLogo from '../Sidebar/AppLogo';
 import ClusterChooser from './ClusterChooser';
 
 export interface ClusterTitleProps {
@@ -98,6 +100,10 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     alignItems: 'center',
     display: 'flex',
+  },
+  logo: {
+    height: '32px',
+    width: 'auto',
   },
 }));
 
@@ -262,6 +268,8 @@ export function ClusterDialog(props: ClusterDialogProps) {
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
   const dispatch = useDispatch();
+  const arePluginsLoaded = useTypedSelector(state => state?.ui?.pluginsLoaded);
+  const PluginAppLogoComponent = useTypedSelector(state => state?.ui?.branding?.logo);
 
   function handleClose() {
     if (onClose !== null) {
@@ -302,7 +310,28 @@ export function ClusterDialog(props: ClusterDialogProps) {
           </IconButton>,
         ]}
       >
-        <LogoLight />
+        <ErrorBoundary>
+          {
+            // Till all plugins are not loaded show empty content for logo as we might have logo coming from a plugin
+            !arePluginsLoaded ? (
+              <EmptyContent />
+            ) : PluginAppLogoComponent ? (
+              isValidElement(PluginAppLogoComponent) ? (
+                // If it's an element, just use it.
+                PluginAppLogoComponent
+              ) : (
+                // It is a component, so we make it here.
+                <PluginAppLogoComponent
+                  logoType={'large'}
+                  themeName={getThemeName()}
+                  className={classes.logo}
+                />
+              )
+            ) : (
+              <AppLogo logoType={'large'} className={classes.logo} />
+            )
+          }
+        </ErrorBoundary>
       </DialogTitle>
       <DialogContent className={classes.chooserDialog}>{children}</DialogContent>
     </Dialog>
