@@ -445,19 +445,25 @@ export function SearchPopover(props: SearchPopoverProps) {
           icon="mdi:format-letter-case"
           onClick={() => setCaseSensitiveChecked(!caseSensitiveChecked)}
           description={t('search|Match case')}
-          className={caseSensitiveChecked ? 'checked' : ''}
+          iconButtonProps={{
+            className: caseSensitiveChecked ? 'checked' : '',
+          }}
         />
         <ActionButton
           icon="mdi:format-letter-matches"
           onClick={() => setWholeWordMatchChecked(!wholeWordMatchChecked)}
           description={t('search|Match whole word')}
-          className={wholeWordMatchChecked ? 'checked' : ''}
+          iconButtonProps={{
+            className: wholeWordMatchChecked ? 'checked' : '',
+          }}
         />
         <ActionButton
           icon="mdi:regex"
           onClick={() => setRegexChecked(!regexChecked)}
           description={t('search|Use regular expression')}
-          className={regexChecked ? 'checked' : ''}
+          iconButtonProps={{
+            className: regexChecked ? 'checked' : '',
+          }}
         />
       </Box>
       <div className="search-results">{searchResults()}</div>
@@ -466,13 +472,17 @@ export function SearchPopover(props: SearchPopoverProps) {
           icon="mdi:arrow-up"
           onClick={handleFindPrevious}
           description={t('search|Previous Match (Shift+Enter)')}
-          disabled={!searchResult?.resultCount && searchResult?.resultCount !== undefined}
+          iconButtonProps={{
+            disabled: !searchResult?.resultCount && searchResult?.resultCount !== undefined,
+          }}
         />
         <ActionButton
           icon="mdi:arrow-down"
           onClick={handleFindNext}
           description={t('search|Next Match (Enter)')}
-          disabled={!searchResult?.resultCount && searchResult?.resultCount !== undefined}
+          iconButtonProps={{
+            disabled: !searchResult?.resultCount && searchResult?.resultCount !== undefined,
+          }}
         />
         <ActionButton icon="mdi:close" onClick={handleClose} description={t('frequent|Close')} />
       </div>
