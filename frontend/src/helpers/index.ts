@@ -37,6 +37,26 @@ function isElectron(): boolean {
   return false;
 }
 
+declare global {
+  interface Window {
+    ddClient: any | undefined;
+  }
+}
+
+/**
+ * isDockerDesktop checks if ddClient is available in the window object
+ * if it is available then it is running in docker desktop
+ *
+ *
+ * @returns true if Headlamp is running inside docker desktop
+ */
+function isDockerDesktop(): boolean {
+  if (window?.ddClient === undefined) {
+    return false;
+  }
+  return true;
+}
+
 export function getFilterValueByNameFromURL(key: string, location: any): string[] {
   const searchParams = new URLSearchParams(location.search);
 
@@ -84,9 +104,10 @@ function isDevMode(): boolean {
 }
 
 /**
- * @returns URL depending on dev-mode/electron, base-url, and window.location.origin.
+ * @returns URL depending on dev-mode/electron/docker desktop, base-url, and window.location.origin.
  *
  * @example isDevMode | isElectron returns 'http://localhost:4466/'
+ * @example isDockerDesktop returns 'http://localhost:64446/'
  * @example base-url set as '/headlamp' returns '/headlamp/'
  * @example isDevMode | isElectron and base-url is set
  *          it returns 'http://localhost:4466/headlamp/'
@@ -98,6 +119,9 @@ function getAppUrl(): string {
     exportFunctions.isDevMode() || exportFunctions.isElectron()
       ? 'http://localhost:4466'
       : window.location.origin;
+  if (exportFunctions.isDockerDesktop()) {
+    url = 'http://localhost:64446';
+  }
 
   const baseUrl = exportFunctions.getBaseUrl();
   url += baseUrl ? baseUrl + '/' : '/';
@@ -198,6 +222,7 @@ const exportFunctions = {
   isDevMode,
   getAppUrl,
   isElectron,
+  isDockerDesktop,
   getAppVersion,
   setAppVersion,
   setRecentCluster,
