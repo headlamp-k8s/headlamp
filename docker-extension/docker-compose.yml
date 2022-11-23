@@ -3,9 +3,9 @@ version: '3'
 services:
   headlamp:
     image: ghcr.io/kinvolk/headlamp:v0.13.0
-    command: ["--kubeconfig","/headlamp/config/config"]
+    command: ["--kubeconfig","/headlamp/config/config", "--port","64446"]
     restart: unless-stopped
     volumes:
       - ~/.kube/:/headlamp/config:ro
     ports:
-      - 4466:4466
+      - 64446:64446
