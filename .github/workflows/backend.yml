@@ -36,6 +36,7 @@ jobs:
         version: v1.50.1
         working-directory: backend
         skip-cache: true
+        args: --timeout 3m
 
     - name: Lint, Build & Check
       run: |
