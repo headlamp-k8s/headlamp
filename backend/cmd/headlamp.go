@@ -94,9 +94,18 @@ type spaHandler struct {
 	baseURL    string
 }
 
+const (
+	KubeConfig     = "KUBECONFIG"
+	DynamicCluster = "DYNAMIC_CLUSTER"
+	InCluster      = "IN_CLUSTER"
+)
+
+// Source can be kubeconfig or dynamic cluster or incluster.
+// Acceptable values are KUBECONFIG,DYNAMIC_CLUSTER,IN_CLUSTER.
 type contextProxy struct {
 	context *Context
 	proxy   *httputil.ReverseProxy
+	source  string
 }
 
 var pluginListURLs []string
@@ -307,38 +316,17 @@ func serveWithNoCacheHeader(fs http.Handler) http.HandlerFunc {
 	}
 }
 
-//nolint:gocognit,funlen,gocyclo
-func createHeadlampHandler(config *HeadlampConfig) http.Handler {
-	kubeConfigPath := config.kubeConfigPath
-
-	log.Printf("plugins-dir: %s\n", config.pluginDir)
-
-	if !config.useInCluster {
-		// in-cluster mode is unlikely to want reloading plugins.
-		go watchForChanges(config.pluginDir)
-	}
-
+// getContextFromKubeConfigs returns the contexts from the kubeconfig files.
+func getContextFromKubeConfigs(path string) []Context {
 	var contexts []Context
 
-	// In-cluster
-	if config.useInCluster {
-		context, err := GetOwnContext(config)
-		if err != nil {
-			log.Println("Failed to get in-cluster config", err)
-		}
-
-		contexts = append(contexts, *context)
-	}
-
-	// KubeConfig clusters
-	if kubeConfigPath != "" {
+	if path != "" {
 		delimiter := ":"
 		if runtime.GOOS == "windows" {
 			delimiter = ";"
 		}
 
-		kubeConfigs := strings.Split(kubeConfigPath, delimiter)
-
+		kubeConfigs := strings.Split(path, delimiter)
 		for _, kubeConfig := range kubeConfigs {
 			kubeConfig, err := absPath(kubeConfig)
 			if err != nil {
@@ -355,6 +343,46 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		}
 	}
 
+	return contexts
+}
+
+//nolint:gocognit,funlen,gocyclo
+func createHeadlampHandler(config *HeadlampConfig) http.Handler {
+	kubeConfigPath := config.kubeConfigPath
+
+	log.Printf("plugins-dir: %s\n", config.pluginDir)
+
+	if !config.useInCluster {
+		// in-cluster mode is unlikely to want reloading plugins.
+		go watchForChanges(config.pluginDir)
+	}
+
+	var contexts []Context
+
+	config.contextProxies = make(map[string]contextProxy)
+
+	// In-cluster
+	if config.useInCluster {
+		context, err := GetOwnContext(config)
+		if err != nil {
+			log.Println("Failed to get in-cluster config", err)
+		}
+
+		proxy, err := config.createProxyForContext(*context)
+		if err != nil {
+			log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
+		}
+
+		config.contextProxies[context.Name] = contextProxy{
+			context,
+			proxy,
+			InCluster,
+		}
+	}
+
+	// KubeConfig clusters
+	contexts = append(contexts, getContextFromKubeConfigs(kubeConfigPath)...)
+
 	if config.staticDir != "" {
 		baseURLReplace(config.staticDir, config.baseURL)
 	}
@@ -367,8 +395,6 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		baseRoute := mux.NewRouter()
 		r = baseRoute.PathPrefix(config.baseURL).Subrouter()
 	}
-
-	config.contextProxies = make(map[string]contextProxy)
 
 	fmt.Println("*** Headlamp Server ***")
 	fmt.Println("  API Routers:")
@@ -390,6 +416,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			config.contextProxies[context.Name] = contextProxy{
 				context,
 				proxy,
+				KubeConfig,
 			}
 		}
 	}
@@ -423,6 +450,43 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		log.Println("Requesting ", r.URL.String())
 		proxy.ServeHTTP(w, r)
 	})
+
+	// the endpoint removes all the cluster contexts created from the KubeConfig,
+	// and reloads the contexts from the KubeConfig file.
+	// This is useful when the KubeConfig file is updated.
+	r.HandleFunc("/config/clusters/refresh", func(w http.ResponseWriter, r *http.Request) {
+		contexts := getContextFromKubeConfigs(config.kubeConfigPath)
+
+		refreshedClusterProxies := 0
+
+		for key, contextProxy := range config.contextProxies {
+			if contextProxy.source == KubeConfig {
+				log.Printf("Removing cluster %q from contextProxies\n", key)
+				delete(config.contextProxies, key)
+			}
+		}
+
+		for _, context := range contexts {
+			context := context
+			log.Printf("Setting up proxy for context %s\n", context.Name)
+			proxy, err := config.createProxyForContext(context)
+			if err != nil {
+				log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
+				continue
+			}
+
+			fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name,
+				*context.cluster.getServer())
+
+			config.contextProxies[context.Name] = contextProxy{
+				&context,
+				proxy,
+				KubeConfig,
+			}
+			refreshedClusterProxies++
+		}
+		config.getConfig(w, r)
+	}).Methods("POST")
 
 	// Configuration
 	r.HandleFunc("/config", config.getConfig).Methods("GET")
@@ -1001,6 +1065,7 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 		c.contextProxies[clusterReq.Name] = contextProxy{
 			&context,
 			proxy,
+			DynamicCluster,
 		}
 
 		if isReplacement {
