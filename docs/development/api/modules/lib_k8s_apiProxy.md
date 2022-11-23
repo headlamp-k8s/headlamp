@@ -8,6 +8,7 @@ slug: "lib_k8s_apiProxy"
 
 - [ApiError](../interfaces/lib_k8s_apiProxy.ApiError.md)
 - [ClusterRequest](../interfaces/lib_k8s_apiProxy.ClusterRequest.md)
+- [QueryParameters](../interfaces/lib_k8s_apiProxy.QueryParameters.md)
 - [RequestParams](../interfaces/lib_k8s_apiProxy.RequestParams.md)
 - [StreamArgs](../interfaces/lib_k8s_apiProxy.StreamArgs.md)
 
@@ -34,7 +35,7 @@ slug: "lib_k8s_apiProxy"
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:214](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L214)
+[lib/k8s/apiProxy.ts:222](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L222)
 
 ___
 
@@ -58,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:213](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L213)
+[lib/k8s/apiProxy.ts:221](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L221)
 
 ## Functions
 
@@ -78,17 +79,17 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `delete` | (`name`: `string`) => `Promise`<`any`\> |
-| `get` | (`name`: `string`, `cb`: [`StreamResultsCb`](lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](lib_k8s_apiProxy.md#streamerrcb)) => `Promise`<() => `void`\> |
+| `delete` | (`name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
+| `get` | (`name`: `string`, `cb`: [`StreamResultsCb`](lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<() => `void`\> |
 | `isNamespaced` | `boolean` |
-| `list` | (`cb`: [`StreamResultsCb`](lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](lib_k8s_apiProxy.md#streamerrcb)) => `Promise`<() => `void`\> |
-| `patch` | (`body`: `OpPatch`[], `name`: `string`) => `Promise`<`any`\> |
-| `post` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md)) => `Promise`<`any`\> |
-| `put` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md)) => `Promise`<`any`\> |
+| `list` | (`cb`: [`StreamResultsCb`](lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<() => `void`\> |
+| `patch` | (`body`: `OpPatch`[], `name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
+| `post` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
+| `put` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:280](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L280)
+[lib/k8s/apiProxy.ts:288](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L288)
 
 ___
 
@@ -114,7 +115,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:325](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L325)
+[lib/k8s/apiProxy.ts:338](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L338)
 
 ___
 
@@ -134,7 +135,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:746](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L746)
+[lib/k8s/apiProxy.ts:788](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L788)
 
 ___
 
@@ -156,7 +157,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:778](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L778)
+[lib/k8s/apiProxy.ts:820](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L820)
 
 ___
 
@@ -179,7 +180,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:459](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L459)
+[lib/k8s/apiProxy.ts:489](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L489)
 
 ___
 
@@ -202,7 +203,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:448](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L448)
+[lib/k8s/apiProxy.ts:478](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L478)
 
 ___
 
@@ -225,7 +226,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:470](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L470)
+[lib/k8s/apiProxy.ts:500](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L500)
 
 ___
 
@@ -246,13 +247,13 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:481](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L481)
+[lib/k8s/apiProxy.ts:511](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L511)
 
 ___
 
 ### request
 
-▸ **request**(`path`, `params?`, `autoLogoutOnAuthError?`, `useCluster?`): `Promise`<`any`\>
+▸ **request**(`path`, `params?`, `autoLogoutOnAuthError?`, `useCluster?`, `queryParams?`): `Promise`<`any`\>
 
 #### Parameters
 
@@ -262,6 +263,7 @@ ___
 | `params` | [`RequestParams`](../interfaces/lib_k8s_apiProxy.RequestParams.md) | `{}` |
 | `autoLogoutOnAuthError` | `boolean` | `true` |
 | `useCluster` | `boolean` | `true` |
+| `queryParams?` | [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md) | `undefined` |
 
 #### Returns
 
@@ -269,7 +271,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:126](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L126)
+[lib/k8s/apiProxy.ts:132](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L132)
 
 ___
 
@@ -289,7 +291,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:814](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L814)
+[lib/k8s/apiProxy.ts:856](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L856)
 
 ___
 
@@ -316,13 +318,13 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:621](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L621)
+[lib/k8s/apiProxy.ts:664](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L664)
 
 ___
 
 ### streamResult
 
-▸ **streamResult**(`url`, `name`, `cb`, `errCb`): `Promise`<() => `void`\>
+▸ **streamResult**(`url`, `name`, `cb`, `errCb`, `queryParams?`): `Promise`<() => `void`\>
 
 #### Parameters
 
@@ -332,6 +334,7 @@ ___
 | `name` | `string` |
 | `cb` | [`StreamResultsCb`](lib_k8s_apiProxy.md#streamresultscb) |
 | `errCb` | [`StreamErrCb`](lib_k8s_apiProxy.md#streamerrcb) |
+| `queryParams?` | [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md) |
 
 #### Returns
 
@@ -339,13 +342,13 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:486](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L486)
+[lib/k8s/apiProxy.ts:516](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L516)
 
 ___
 
 ### streamResults
 
-▸ **streamResults**(`url`, `cb`, `errCb`): `Promise`<() => `void`\>
+▸ **streamResults**(`url`, `cb`, `errCb`, `queryParams`): `Promise`<() => `void`\>
 
 #### Parameters
 
@@ -354,6 +357,7 @@ ___
 | `url` | `string` |
 | `cb` | [`StreamResultsCb`](lib_k8s_apiProxy.md#streamresultscb) |
 | `errCb` | [`StreamErrCb`](lib_k8s_apiProxy.md#streamerrcb) |
+| `queryParams` | `undefined` \| [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md) |
 
 #### Returns
 
@@ -361,7 +365,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:523](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L523)
+[lib/k8s/apiProxy.ts:557](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L557)
 
 ___
 
@@ -375,4 +379,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:807](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L807)
+[lib/k8s/apiProxy.ts:849](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L849)

@@ -22,7 +22,7 @@ slug: "lib_util"
 
 #### Defined in
 
-[lib/util.ts:30](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L30)
+[lib/util.ts:30](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L30)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:28](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L28)
+[lib/util.ts:28](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L28)
 
 ## Variables
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:26](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L26)
+[lib/util.ts:26](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L26)
 
 ## Functions
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:135](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L135)
+[lib/util.ts:139](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L139)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:204](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L204)
+[lib/util.ts:208](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L208)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:196](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L196)
+[lib/util.ts:200](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L200)
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:84](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L84)
+[lib/util.ts:88](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L88)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:93](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L93)
+[lib/util.ts:97](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L97)
 
 ___
 
@@ -161,7 +161,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:111](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L111)
+[lib/util.ts:115](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L115)
 
 ___
 
@@ -182,7 +182,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:101](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L101)
+[lib/util.ts:105](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L105)
 
 ___
 
@@ -202,7 +202,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:97](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L97)
+[lib/util.ts:101](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L101)
 
 ___
 
@@ -222,7 +222,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:72](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L72)
+[lib/util.ts:72](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L72)
 
 ___
 
@@ -247,7 +247,7 @@ The formatted date.
 
 #### Defined in
 
-[lib/util.ts:43](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L43)
+[lib/util.ts:43](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L43)
 
 ___
 
@@ -267,7 +267,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:216](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L216)
+[lib/util.ts:220](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L220)
 
 ___
 
@@ -299,4 +299,46 @@ ___
 
 #### Defined in
 
-[lib/util.ts:191](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L191)
+[lib/util.ts:195](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L195)
+
+___
+
+### useURLState
+
+▸ **useURLState**(`key`, `defaultValue`): [`number`, `React.Dispatch`<`React.SetStateAction`<`number`\>\>]
+
+A hook to manage a state variable that is also stored in the URL.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `key` | `string` | The name of the key in the URL. If empty, then the hook behaves like useState. |
+| `defaultValue` | `number` | - |
+
+#### Returns
+
+[`number`, `React.Dispatch`<`React.SetStateAction`<`number`\>\>]
+
+#### Defined in
+
+[lib/util.ts:245](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L245)
+
+▸ **useURLState**(`key`, `valueOrParams`): [`number`, `React.Dispatch`<`React.SetStateAction`<`number`\>\>]
+
+A hook to manage a state variable that is also stored in the URL.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `key` | `string` | The name of the key in the URL. If empty, then the hook behaves like useState. |
+| `valueOrParams` | `number` \| `URLStateParams`<`number`\> | - |
+
+#### Returns
+
+[`number`, `React.Dispatch`<`React.SetStateAction`<`number`\>\>]
+
+#### Defined in
+
+[lib/util.ts:249](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L249)

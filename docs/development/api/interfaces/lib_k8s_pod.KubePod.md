@@ -24,7 +24,7 @@ slug: "lib_k8s_pod.KubePod"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L23)
+[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L24)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:22](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L22)
+[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L23)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L24)
+[lib/k8s/cluster.ts:25](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L25)
 
 ___
 
@@ -65,12 +65,13 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `containers` | [`KubeContainer`](lib_k8s_cluster.KubeContainer.md)[] |
+| `initContainers?` | `any`[] |
 | `nodeName` | `string` |
 | `nodeSelector?` | { `[key: string]`: `string`;  } |
 
 #### Defined in
 
-[lib/k8s/pod.ts:12](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/pod.ts#L12)
+[lib/k8s/pod.ts:13](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/pod.ts#L13)
 
 ___
 
@@ -89,12 +90,13 @@ ___
 | `conditions` | [`KubeCondition`](lib_k8s_cluster.KubeCondition.md)[] |
 | `containerStatuses` | [`KubeContainerStatus`](lib_k8s_cluster.KubeContainerStatus.md)[] |
 | `hostIP` | `string` |
-| `message` | `string` |
+| `initContainerStatuses?` | [`KubeContainerStatus`](lib_k8s_cluster.KubeContainerStatus.md)[] |
+| `message?` | `string` |
 | `phase` | `string` |
-| `qosClass` | `string` |
-| `reason` | `string` |
-| `startTime` | `number` |
+| `qosClass?` | `string` |
+| `reason?` | `string` |
+| `startTime` | [`Time`](../modules/lib_k8s_cluster.md#time) |
 
 #### Defined in
 
-[lib/k8s/pod.ts:19](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/pod.ts#L19)
+[lib/k8s/pod.ts:21](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/pod.ts#L21)

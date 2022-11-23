@@ -18,6 +18,12 @@ Re-exports [Cluster](../interfaces/lib_k8s_cluster.Cluster.md)
 
 ___
 
+### ContainerState
+
+Re-exports [ContainerState](../interfaces/lib_k8s_cluster.ContainerState.md)
+
+___
+
 ### KubeCondition
 
 Re-exports [KubeCondition](../interfaces/lib_k8s_cluster.KubeCondition.md)
@@ -39,6 +45,12 @@ ___
 ### KubeContainerStatus
 
 Re-exports [KubeContainerStatus](../interfaces/lib_k8s_cluster.KubeContainerStatus.md)
+
+___
+
+### KubeManagedFields
+
+Re-exports [KubeManagedFields](../interfaces/lib_k8s_cluster.KubeManagedFields.md)
 
 ___
 
@@ -93,6 +105,12 @@ ___
 ### StringDict
 
 Re-exports [StringDict](../interfaces/lib_k8s_cluster.StringDict.md)
+
+___
+
+### Time
+
+Re-exports [Time](lib_k8s_cluster.md#time)
 
 ___
 

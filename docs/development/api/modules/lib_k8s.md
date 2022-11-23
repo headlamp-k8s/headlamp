@@ -156,7 +156,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:149](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/index.ts#L149)
+[lib/k8s/index.ts:159](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L159)
 
 ## Variables
 
@@ -170,7 +170,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:73](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/index.ts#L73)
+[lib/k8s/index.ts:83](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L83)
 
 ## Functions
 
@@ -184,7 +184,32 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:145](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/index.ts#L145)
+[lib/k8s/index.ts:155](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L155)
+
+___
+
+### labelSelectorToQuery
+
+▸ **labelSelectorToQuery**(`labelSelector`): `string`
+
+See [Label selector examples](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#list-and-watch-filtering),
+[deployment selector example](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements),
+[possible operators](https://github.com/kubernetes/apimachinery/blob/be3a79b26814a8d7637d70f4d434a4626ee1c1e7/pkg/selection/operator.go#L24), and
+[Format rule for expressions](https://github.com/kubernetes/apimachinery/blob/be3a79b26814a8d7637d70f4d434a4626ee1c1e7/pkg/labels/selector.go#L305).
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `labelSelector` | [`LabelSelector`](../interfaces/lib_k8s_cluster.LabelSelector.md) |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[lib/k8s/index.ts:190](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L190)
 
 ___
 
@@ -198,7 +223,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:128](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/index.ts#L128)
+[lib/k8s/index.ts:138](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L138)
 
 ___
 
@@ -212,7 +237,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:80](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/index.ts#L80)
+[lib/k8s/index.ts:90](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L90)
 
 ___
 
@@ -232,4 +257,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:151](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/index.ts#L151)
+[lib/k8s/index.ts:161](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L161)

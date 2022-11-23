@@ -20,7 +20,7 @@ A class to use on your SVG.
 
 #### Defined in
 
-[components/Sidebar/AppLogo.tsx:12](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/Sidebar/AppLogo.tsx#L12)
+[components/Sidebar/AppLogo.tsx:12](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/Sidebar/AppLogo.tsx#L12)
 
 ___
 
@@ -32,7 +32,7 @@ The size of the logo. 'small' for in mobile view, and 'large' for tablet and des
 
 #### Defined in
 
-[components/Sidebar/AppLogo.tsx:8](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/Sidebar/AppLogo.tsx#L8)
+[components/Sidebar/AppLogo.tsx:8](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/Sidebar/AppLogo.tsx#L8)
 
 ___
 
@@ -44,4 +44,4 @@ User selected theme.
 
 #### Defined in
 
-[components/Sidebar/AppLogo.tsx:10](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/components/Sidebar/AppLogo.tsx#L10)
+[components/Sidebar/AppLogo.tsx:10](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/Sidebar/AppLogo.tsx#L10)

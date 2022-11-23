@@ -16,7 +16,7 @@ When true, will only match if the path matches the location.pathname exactly.
 
 #### Defined in
 
-[lib/router.tsx:61](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L61)
+[lib/router.tsx:72](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L72)
 
 ___
 
@@ -28,7 +28,7 @@ Hide the appbar at the top.
 
 #### Defined in
 
-[lib/router.tsx:80](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L80)
+[lib/router.tsx:91](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L91)
 
 ___
 
@@ -40,7 +40,7 @@ Human readable name. Capitalized and short.
 
 #### Defined in
 
-[lib/router.tsx:63](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L63)
+[lib/router.tsx:74](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L74)
 
 ___
 
@@ -52,7 +52,7 @@ This route does not require Authentication.
 
 #### Defined in
 
-[lib/router.tsx:74](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L74)
+[lib/router.tsx:85](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L85)
 
 ___
 
@@ -66,7 +66,7 @@ In case this route does *not* need a cluster prefix and context.
 
 #### Defined in
 
-[lib/router.tsx:68](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L68)
+[lib/router.tsx:79](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L79)
 
 ___
 
@@ -78,7 +78,7 @@ Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands.
 
 #### Defined in
 
-[lib/router.tsx:59](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L59)
+[lib/router.tsx:70](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L70)
 
 ___
 
@@ -90,7 +90,7 @@ The sidebar group this Route should be in, or null if it is in no group.
 
 #### Defined in
 
-[lib/router.tsx:76](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L76)
+[lib/router.tsx:87](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L87)
 
 ___
 
@@ -102,7 +102,7 @@ Should URL have the cluster prefix? (default=true)
 
 #### Defined in
 
-[lib/router.tsx:72](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L72)
+[lib/router.tsx:83](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L83)
 
 ## Methods
 
@@ -118,4 +118,4 @@ Shown component for this route.
 
 #### Defined in
 
-[lib/router.tsx:78](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L78)
+[lib/router.tsx:89](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L89)

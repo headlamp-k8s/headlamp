@@ -30,7 +30,7 @@ makeKubeObject<KubeEvent\>('Event').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:93](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L93)
 
 ## Properties
 
@@ -52,7 +52,7 @@ makeKubeObject<KubeEvent\>('Event').constructor
 
 #### Defined in
 
-[lib/k8s/event.ts:23](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/event.ts#L23)
+[lib/k8s/event.ts:24](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/event.ts#L24)
 
 ___
 
@@ -66,7 +66,7 @@ makeKubeObject<KubeEvent\>('Event').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:94](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L94)
 
 ## Accessors
 
@@ -80,7 +80,7 @@ makeKubeObject<KubeEvent\>('Event').className
 
 #### Defined in
 
-[lib/k8s/event.ts:33](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/event.ts#L33)
+[lib/k8s/event.ts:34](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/event.ts#L34)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:49](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/event.ts#L49)
+[lib/k8s/event.ts:80](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/event.ts#L80)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:45](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/event.ts#L45)
+[lib/k8s/event.ts:46](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/event.ts#L46)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:41](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/event.ts#L41)
+[lib/k8s/event.ts:42](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/event.ts#L42)
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:25](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/event.ts#L25)
+[lib/k8s/event.ts:26](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/event.ts#L26)
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:29](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/event.ts#L29)
+[lib/k8s/event.ts:30](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/event.ts#L30)
 
 ___
 
@@ -164,7 +164,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:37](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/event.ts#L37)
+[lib/k8s/event.ts:38](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/event.ts#L38)
 
 ## Methods
 
@@ -188,7 +188,7 @@ makeKubeObject<KubeEvent\>('Event').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:73](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L73)
 
 ___
 
@@ -212,7 +212,27 @@ makeKubeObject<KubeEvent\>('Event').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:92](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L92)
+
+___
+
+### objectEvents
+
+▸ `Static` **objectEvents**(`object`): `Promise`<`any`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `object` | `any` |
+
+#### Returns
+
+`Promise`<`any`\>
+
+#### Defined in
+
+[lib/k8s/event.ts:50](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/event.ts#L50)
 
 ___
 
@@ -239,7 +259,7 @@ makeKubeObject<KubeEvent\>('Event').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:79](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L79)
 
 ___
 
@@ -265,7 +285,32 @@ makeKubeObject<KubeEvent\>('Event').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:74](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L74)
+
+___
+
+### useGet
+
+▸ `Static` **useGet**(`name`, `namespace?`): [`any`, ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`item`: `any`) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `namespace?` | `string` |
+
+#### Returns
+
+[`any`, ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`item`: `any`) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
+
+#### Inherited from
+
+makeKubeObject<KubeEvent\>('Event').useGet
+
+#### Defined in
+
+[lib/k8s/cluster.ts:88](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L88)
 
 ___
 
@@ -289,4 +334,4 @@ makeKubeObject<KubeEvent\>('Event').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:85](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L85)

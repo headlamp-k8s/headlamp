@@ -10,31 +10,31 @@ slug: "lib_k8s_cluster.KubeCondition"
 
 ### lastProbeTime
 
-• **lastProbeTime**: `number`
+• **lastProbeTime**: [`Time`](../modules/lib_k8s_cluster.md#time)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:414](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L414)
+[lib/k8s/cluster.ts:493](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L493)
 
 ___
 
 ### lastTransitionTime
 
-• `Optional` **lastTransitionTime**: `string`
+• `Optional` **lastTransitionTime**: [`Time`](../modules/lib_k8s_cluster.md#time)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:415](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L415)
+[lib/k8s/cluster.ts:494](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L494)
 
 ___
 
 ### lastUpdateTime
 
-• `Optional` **lastUpdateTime**: `string`
+• `Optional` **lastUpdateTime**: [`Time`](../modules/lib_k8s_cluster.md#time)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:416](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L416)
+[lib/k8s/cluster.ts:495](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L495)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:418](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L418)
+[lib/k8s/cluster.ts:497](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L497)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:417](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L417)
+[lib/k8s/cluster.ts:496](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L496)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:413](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L413)
+[lib/k8s/cluster.ts:492](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L492)
 
 ___
 
@@ -74,4 +74,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:412](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L412)
+[lib/k8s/cluster.ts:491](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L491)

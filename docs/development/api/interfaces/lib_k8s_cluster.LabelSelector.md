@@ -10,19 +10,11 @@ slug: "lib_k8s_cluster.LabelSelector"
 
 ### matchExpressions
 
-• `Optional` **matchExpressions**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `key` | `string` |
-| `operator` | `string` |
-| `values` | `string`[] |
+• `Optional` **matchExpressions**: { `key`: `string` ; `operator`: `string` ; `values`: `string`[]  }[]
 
 #### Defined in
 
-[lib/k8s/cluster.ts:495](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L495)
+[lib/k8s/cluster.ts:574](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L574)
 
 ___
 
@@ -36,4 +28,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:500](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L500)
+[lib/k8s/cluster.ts:579](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L579)

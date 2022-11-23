@@ -10,11 +10,11 @@ slug: "lib_k8s_cluster.KubeContainerStatus"
 
 ### containerID
 
-• **containerID**: `string`
+• `Optional` **containerID**: `string`
 
 #### Defined in
 
-[lib/k8s/cluster.ts:520](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L520)
+[lib/k8s/cluster.ts:618](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L618)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:521](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L521)
+[lib/k8s/cluster.ts:619](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L619)
 
 ___
 
@@ -34,17 +34,17 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:522](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L522)
+[lib/k8s/cluster.ts:620](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L620)
 
 ___
 
 ### lastState
 
-• **lastState**: `string`
+• **lastState**: `Partial`<[`ContainerState`](lib_k8s_cluster.ContainerState.md)\>
 
 #### Defined in
 
-[lib/k8s/cluster.ts:523](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L523)
+[lib/k8s/cluster.ts:624](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L624)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:524](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L524)
+[lib/k8s/cluster.ts:621](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L621)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:525](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L525)
+[lib/k8s/cluster.ts:622](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L622)
 
 ___
 
@@ -74,32 +74,24 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:526](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L526)
+[lib/k8s/cluster.ts:623](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L623)
+
+___
+
+### started
+
+• `Optional` **started**: `boolean`
+
+#### Defined in
+
+[lib/k8s/cluster.ts:626](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L626)
 
 ___
 
 ### state
 
-• **state**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `running` | { `startedAt`: `number`  } |
-| `running.startedAt` | `number` |
-| `terminated` | { `containerID`: `string` ; `exitCode`: `number` ; `finishedAt`: `number` ; `message`: `string` ; `reason`: `string` ; `signal`: `number` ; `startedAt`: `number`  } |
-| `terminated.containerID` | `string` |
-| `terminated.exitCode` | `number` |
-| `terminated.finishedAt` | `number` |
-| `terminated.message` | `string` |
-| `terminated.reason` | `string` |
-| `terminated.signal` | `number` |
-| `terminated.startedAt` | `number` |
-| `waiting` | { `message`: `string` ; `reason`: `string`  } |
-| `waiting.message` | `string` |
-| `waiting.reason` | `string` |
+• **state**: `Partial`<[`ContainerState`](lib_k8s_cluster.ContainerState.md)\>
 
 #### Defined in
 
-[lib/k8s/cluster.ts:527](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L527)
+[lib/k8s/cluster.ts:625](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L625)
