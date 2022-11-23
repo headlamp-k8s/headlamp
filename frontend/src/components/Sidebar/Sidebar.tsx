@@ -125,10 +125,12 @@ export default function Sidebar() {
         dispatch(setWhetherSidebarOpen(!sidebar.isSidebarOpen));
       }}
       linkArea={
-        <>
-          <CreateButton />
-          <VersionButton />
-        </>
+        !isSpecialSidebarOpen && (
+          <>
+            <CreateButton />
+            <VersionButton />
+          </>
+        )
       }
     />
   );
