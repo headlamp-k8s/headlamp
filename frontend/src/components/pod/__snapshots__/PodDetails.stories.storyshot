@@ -3771,16 +3771,24 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                           <div
                             class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
                           >
-                            <span
-                              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                            <div
+                              class="MuiBox-root MuiBox-root"
                             >
-                              TCP:
-                            </span>
-                            <span
-                              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                            >
-                              80
-                            </span>
+                              <div
+                                class="MuiBox-root MuiBox-root"
+                              >
+                                <span
+                                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                                >
+                                  TCP:
+                                </span>
+                                <span
+                                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                                >
+                                  80
+                                </span>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </td>

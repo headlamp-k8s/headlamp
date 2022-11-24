@@ -44,6 +44,7 @@ import { useMetadataDisplayStyles } from '.';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import { MetadataDictGrid, MetadataDisplay } from './MetadataDisplay';
+import PortForward from './PortForward';
 import ScaleButton from './ScaleButton';
 
 export interface ResourceLinkProps extends Omit<LinkProps, 'routeName' | 'params'> {
@@ -522,11 +523,12 @@ const useContainerInfoStyles = makeStyles((theme: Theme) => ({
 
 export interface ContainerInfoProps {
   container: KubeContainer;
+  resource?: KubeObjectInterface | null;
   status?: Omit<KubePod['status']['KubeContainerStatus'], 'name'>;
 }
 
 export function ContainerInfo(props: ContainerInfoProps) {
-  const { container, status } = props;
+  const { container, status, resource } = props;
   const theme = useTheme();
   const classes = useContainerInfoStyles(theme);
   const { t } = useTranslation('glossary');
@@ -651,10 +653,30 @@ export function ContainerInfo(props: ContainerInfoProps) {
         value: (
           <Grid container>
             {container.ports?.map(({ containerPort, protocol }, index) => (
-              <Grid item xs={12} key={`port_line_${index}`}>
-                <ValueLabel>{`${protocol}:`}</ValueLabel>
-                <ValueLabel>{containerPort}</ValueLabel>
-              </Grid>
+              <>
+                <Grid item xs={12} key={`port_line_${index}`}>
+                  <Box display="flex" alignItems={'center'}>
+                    <Box px={0.5} minWidth={120}>
+                      <ValueLabel>{`${protocol}:`}</ValueLabel>
+                      <ValueLabel>{containerPort}</ValueLabel>
+                    </Box>
+                    <PortForward
+                      isPod
+                      containerPort={containerPort}
+                      name={resource?.metadata.name}
+                      namespace={resource?.metadata.namespace}
+                      isPodRunning={resource?.status.phase !== 'Failed'}
+                    />
+                  </Box>
+                </Grid>
+                {index < container.ports!.length - 1 && (
+                  <Grid item xs={12}>
+                    <Box mt={2} mb={2}>
+                      <Divider />
+                    </Box>
+                  </Grid>
+                )}
+              </>
             ))}
           </Grid>
         ),
@@ -755,7 +777,11 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
         ) : (
           containers.map((container: any, i: number) => (
             <SectionBox key={i} outterBoxProps={{ pt: 1 }}>
-              <ContainerInfo container={container} status={statuses[container.name]} />
+              <ContainerInfo
+                resource={resource}
+                container={container}
+                status={statuses[container.name]}
+              />
             </SectionBox>
           ))
         )}
