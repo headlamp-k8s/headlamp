@@ -330,8 +330,10 @@ export function useURLState<T extends string | number | undefined = string>(
     let shouldUpdateURL = false;
 
     if ((value === null || value === defaultValue) && hideDefault) {
-      urlParams.delete(fullKey);
-      shouldUpdateURL = true;
+      if (urlParams.has(fullKey)) {
+        urlParams.delete(fullKey);
+        shouldUpdateURL = true;
+      }
     } else if (value !== undefined) {
       const urlValue = value as NonNullable<T>;
 
@@ -340,7 +342,7 @@ export function useURLState<T extends string | number | undefined = string>(
     }
 
     if (shouldUpdateURL) {
-      history.replace({ ...location, search: urlParams.toString() });
+      history.replace({ search: urlParams.toString() });
     }
   }, [value]);
 
