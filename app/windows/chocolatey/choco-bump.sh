@@ -63,20 +63,20 @@ while true; do
   esac
 done
 
-if (( $# != 2 )) && [ -z ${FILE_NAME} ]; then
+if (( $# != 2 )) && [ -z "${FILE_NAME}" ]; then
     echo "Error: Please provide a VERSION and CHECKSUM, or a file"
     echo ""
     usage
     exit 1
 fi
 
-if [ -z ${FILE_NAME} ]; then
+if [ -z "${FILE_NAME}" ]; then
     VERSION=$1
     CHECKSUM=$2
 else
-    basename=$(basename ${FILE_NAME})
+    basename=$(basename "${FILE_NAME}")
     VERSION=$(echo ${basename} | sed -n 's/^.*Headlamp-\(.*\)-win.*\.exe/\1/p')
-    CHECKSUM=$(sha256sum ${FILE_NAME} | awk '{print $1}')
+    CHECKSUM=$(sha256sum "${FILE_NAME}" | awk '{print $1}')
 fi
 
 if [ -z "$VERSION" ]; then
