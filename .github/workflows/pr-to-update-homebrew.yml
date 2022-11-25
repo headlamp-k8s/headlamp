@@ -48,6 +48,7 @@ jobs:
       - name: Update headlamp version in homebrew-cask
         run: |
           user=${{github.actor}}
+          HEADLAMP_VERSION=${LATEST_HEADLAMP_TAG:1}
           if [ -z $user ]; then
             user=yolossn
           fi
@@ -60,7 +61,6 @@ jobs:
             echo "deleting old branch from remote to avoid conflict"
             git push origin --delete "update_headlamp_$HEADLAMP_VERSION"
           fi 
-          HEADLAMP_VERSION=${LATEST_HEADLAMP_TAG:1}
           wget "https://github.com/kinvolk/headlamp/releases/download/$LATEST_HEADLAMP_TAG/checksums.txt"
           ARM_SHA=$(cat checksums.txt | grep .arm64.dmg | awk -F" " '{print $1}')
           INTEL_SHA=$(cat checksums.txt | grep .x64.dmg | awk -F" " '{print $1}')
