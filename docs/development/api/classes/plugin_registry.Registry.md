@@ -33,7 +33,7 @@ slug: "plugin_registry.Registry"
 
 #### Defined in
 
-[plugin/registry.tsx:93](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L93)
+[plugin/registry.tsx:93](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L93)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:142](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L142)
+[plugin/registry.tsx:142](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L142)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:150](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L150)
+[plugin/registry.tsx:150](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L150)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:83](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L83)
+[plugin/registry.tsx:83](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L83)
 
 ___
 
@@ -137,7 +137,7 @@ register.registerDetailsViewSection('biolatency', resource => {
 
 #### Defined in
 
-[plugin/registry.tsx:115](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L115)
+[plugin/registry.tsx:115](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L115)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:75](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L75)
+[plugin/registry.tsx:75](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L75)
 
 ___
 
@@ -185,4 +185,4 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:51](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/plugin/registry.tsx#L51)
+[plugin/registry.tsx:51](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L51)

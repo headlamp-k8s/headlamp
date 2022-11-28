@@ -24,7 +24,7 @@ slug: "lib_k8s_daemonSet.KubeDaemonSet"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L23)
+[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L24)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:22](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L22)
+[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L23)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L24)
+[lib/k8s/cluster.ts:25](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L25)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/daemonSet.ts:5](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/daemonSet.ts#L5)
+[lib/k8s/daemonSet.ts:5](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/daemonSet.ts#L5)
 
 ___
 
@@ -90,4 +90,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/daemonSet.ts:15](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/daemonSet.ts#L15)
+[lib/k8s/daemonSet.ts:15](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/daemonSet.ts#L15)

@@ -30,7 +30,7 @@ makeKubeObject<KubeNamespace\>('namespace').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:76](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L76)
+[lib/k8s/cluster.ts:93](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L93)
 
 ## Properties
 
@@ -42,17 +42,17 @@ makeKubeObject<KubeNamespace\>('namespace').constructor
 
 | Name | Type |
 | :------ | :------ |
-| `delete` | (`name`: `string`) => `Promise`<`any`\> |
-| `get` | (`name`: `string`, `cb`: [`StreamResultsCb`](../modules/lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](../modules/lib_k8s_apiProxy.md#streamerrcb)) => `Promise`<() => `void`\> |
+| `delete` | (`name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
+| `get` | (`name`: `string`, `cb`: [`StreamResultsCb`](../modules/lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](../modules/lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<() => `void`\> |
 | `isNamespaced` | `boolean` |
-| `list` | (`cb`: [`StreamResultsCb`](../modules/lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](../modules/lib_k8s_apiProxy.md#streamerrcb)) => `Promise`<() => `void`\> |
-| `patch` | (`body`: `OpPatch`[], `name`: `string`) => `Promise`<`any`\> |
-| `post` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md)) => `Promise`<`any`\> |
-| `put` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md)) => `Promise`<`any`\> |
+| `list` | (`cb`: [`StreamResultsCb`](../modules/lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](../modules/lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<() => `void`\> |
+| `patch` | (`body`: `OpPatch`[], `name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
+| `post` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
+| `put` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
 
 #### Defined in
 
-[lib/k8s/namespace.ts:11](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/namespace.ts#L11)
+[lib/k8s/namespace.ts:11](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/namespace.ts#L11)
 
 ___
 
@@ -66,7 +66,7 @@ makeKubeObject<KubeNamespace\>('namespace').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:77](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L77)
+[lib/k8s/cluster.ts:94](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L94)
 
 ## Accessors
 
@@ -80,7 +80,7 @@ makeKubeObject<KubeNamespace\>('namespace').className
 
 #### Defined in
 
-[lib/k8s/namespace.ts:13](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/namespace.ts#L13)
+[lib/k8s/namespace.ts:13](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/namespace.ts#L13)
 
 ## Methods
 
@@ -104,7 +104,7 @@ makeKubeObject<KubeNamespace\>('namespace').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:60](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L60)
+[lib/k8s/cluster.ts:73](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L73)
 
 ___
 
@@ -128,7 +128,7 @@ makeKubeObject<KubeNamespace\>('namespace').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:75](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L75)
+[lib/k8s/cluster.ts:92](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L92)
 
 ___
 
@@ -155,7 +155,7 @@ makeKubeObject<KubeNamespace\>('namespace').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:66](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L66)
+[lib/k8s/cluster.ts:79](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L79)
 
 ___
 
@@ -181,7 +181,32 @@ makeKubeObject<KubeNamespace\>('namespace').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:61](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L61)
+[lib/k8s/cluster.ts:74](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L74)
+
+___
+
+### useGet
+
+▸ `Static` **useGet**(`name`, `namespace?`): [`any`, ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`item`: `any`) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `namespace?` | `string` |
+
+#### Returns
+
+[`any`, ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md), (`item`: `any`) => `void`, (`err`: ``null`` \| [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void`]
+
+#### Inherited from
+
+makeKubeObject<KubeNamespace\>('namespace').useGet
+
+#### Defined in
+
+[lib/k8s/cluster.ts:88](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L88)
 
 ___
 
@@ -205,4 +230,4 @@ makeKubeObject<KubeNamespace\>('namespace').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:72](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L72)
+[lib/k8s/cluster.ts:85](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L85)

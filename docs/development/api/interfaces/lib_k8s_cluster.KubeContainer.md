@@ -14,7 +14,7 @@ slug: "lib_k8s_cluster.KubeContainer"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:425](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L425)
+[lib/k8s/cluster.ts:504](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L504)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:424](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L424)
+[lib/k8s/cluster.ts:503](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L503)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:441](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L441)
+[lib/k8s/cluster.ts:520](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L520)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:459](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L459)
+[lib/k8s/cluster.ts:538](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L538)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:423](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L423)
+[lib/k8s/cluster.ts:502](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L502)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:471](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L471)
+[lib/k8s/cluster.ts:550](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L550)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:469](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L469)
+[lib/k8s/cluster.ts:548](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L548)
 
 ___
 
@@ -84,17 +84,17 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:422](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L422)
+[lib/k8s/cluster.ts:501](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L501)
 
 ___
 
 ### ports
 
-• **ports**: { `containerPort`: `number` ; `name?`: `string` ; `protocol`: `string`  }[]
+• `Optional` **ports**: { `containerPort`: `number` ; `name?`: `string` ; `protocol`: `string`  }[]
 
 #### Defined in
 
-[lib/k8s/cluster.ts:426](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L426)
+[lib/k8s/cluster.ts:505](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L505)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:470](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L470)
+[lib/k8s/cluster.ts:549](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L549)
 
 ___
 
@@ -116,16 +116,16 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `limits` | { `cpu`: `string` ; `memory`: `string`  } |
-| `limits.cpu` | `string` |
-| `limits.memory` | `string` |
-| `requests` | { `cpu`: `string` ; `memory`: `string`  } |
-| `requests.cpu` | `string` |
-| `requests.memory` | `string` |
+| `limits?` | { `cpu?`: `string` ; `memory?`: `string`  } |
+| `limits.cpu?` | `string` |
+| `limits.memory?` | `string` |
+| `requests?` | { `cpu?`: `string` ; `memory?`: `string`  } |
+| `requests.cpu?` | `string` |
+| `requests.memory?` | `string` |
 
 #### Defined in
 
-[lib/k8s/cluster.ts:431](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L431)
+[lib/k8s/cluster.ts:510](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L510)
 
 ___
 
@@ -135,4 +135,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:464](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L464)
+[lib/k8s/cluster.ts:543](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L543)

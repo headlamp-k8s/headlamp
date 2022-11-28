@@ -20,6 +20,10 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
 
   ↳ [`KubeDeployment`](lib_k8s_deployment.KubeDeployment.md)
 
+  ↳ [`KubeEndpoint`](lib_k8s_endpoints.KubeEndpoint.md)
+
+  ↳ [`KubeHPA`](lib_k8s_hpa.KubeHPA.md)
+
   ↳ [`KubeIngress`](lib_k8s_ingress.KubeIngress.md)
 
   ↳ [`KubeJob`](lib_k8s_job.KubeJob.md)
@@ -36,7 +40,13 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
 
   ↳ [`KubePod`](lib_k8s_pod.KubePod.md)
 
+  ↳ [`KubePDB`](lib_k8s_podDisruptionBudget.KubePDB.md)
+
+  ↳ [`KubePriorityClasses`](lib_k8s_priorityClasses.KubePriorityClasses.md)
+
   ↳ [`KubeReplicaSet`](lib_k8s_replicaSet.KubeReplicaSet.md)
+
+  ↳ [`KubeResourceQuota`](lib_k8s_resourceQuota.KubeResourceQuota.md)
 
   ↳ [`KubeRole`](lib_k8s_role.KubeRole.md)
 
@@ -66,7 +76,7 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L23)
+[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L24)
 
 ___
 
@@ -76,7 +86,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:22](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L22)
+[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L23)
 
 ___
 
@@ -86,4 +96,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L24)
+[lib/k8s/cluster.ts:25](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L25)

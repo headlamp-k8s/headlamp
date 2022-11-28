@@ -16,7 +16,7 @@ The certificate authority data
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:43](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L43)
+[lib/k8s/apiProxy.ts:43](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L43)
 
 ___
 
@@ -28,7 +28,7 @@ Whether the server's certificate should not be checked for validity
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:41](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L41)
+[lib/k8s/apiProxy.ts:41](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L41)
 
 ___
 
@@ -40,7 +40,7 @@ The name of the cluster (has to be unique, or it will override an existing clust
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:37](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L37)
+[lib/k8s/apiProxy.ts:37](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L37)
 
 ___
 
@@ -52,4 +52,4 @@ The cluster URL
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:39](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/apiProxy.ts#L39)
+[lib/k8s/apiProxy.ts:39](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L39)

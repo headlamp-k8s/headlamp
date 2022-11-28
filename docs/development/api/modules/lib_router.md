@@ -28,7 +28,7 @@ slug: "lib_router"
 
 #### Defined in
 
-[lib/router.tsx:438](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L438)
+[lib/router.tsx:527](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L527)
 
 ## Functions
 
@@ -49,7 +49,7 @@ slug: "lib_router"
 
 #### Defined in
 
-[lib/router.tsx:496](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L496)
+[lib/router.tsx:585](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L585)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:528](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L528)
+[lib/router.tsx:617](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L617)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:447](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L447)
+[lib/router.tsx:536](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L536)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:480](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L480)
+[lib/router.tsx:569](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L569)
 
 ___
 
@@ -128,4 +128,4 @@ true when a cluster URL contains cluster in the URL. eg. /c/minikube/my-url
 
 #### Defined in
 
-[lib/router.tsx:468](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L468)
+[lib/router.tsx:557](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L557)

@@ -14,7 +14,7 @@ slug: "lib_util.FilterState"
 
 #### Defined in
 
-[lib/util.ts:131](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L131)
+[lib/util.ts:135](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L135)
 
 ___
 
@@ -24,4 +24,4 @@ ___
 
 #### Defined in
 
-[lib/util.ts:132](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/util.ts#L132)
+[lib/util.ts:136](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L136)

@@ -18,4 +18,4 @@ slug: "lib_router.RouteURLProps"
 
 #### Defined in
 
-[lib/router.tsx:492](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/router.tsx#L492)
+[lib/router.tsx:581](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L581)

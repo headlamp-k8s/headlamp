@@ -24,7 +24,7 @@ slug: "lib_k8s_networkpolicy.KubeNetworkPolicy"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L23)
+[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L24)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:32](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/networkpolicy.tsx#L32)
+[lib/k8s/networkpolicy.tsx:32](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/networkpolicy.tsx#L32)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:33](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/networkpolicy.tsx#L33)
+[lib/k8s/networkpolicy.tsx:33](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/networkpolicy.tsx#L33)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:22](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L22)
+[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L23)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/cluster.ts#L24)
+[lib/k8s/cluster.ts:25](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L25)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:34](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/networkpolicy.tsx#L34)
+[lib/k8s/networkpolicy.tsx:34](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/networkpolicy.tsx#L34)
 
 ___
 
@@ -92,4 +92,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:35](https://github.com/kinvolk/headlamp/blob/ba073244/frontend/src/lib/k8s/networkpolicy.tsx#L35)
+[lib/k8s/networkpolicy.tsx:35](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/networkpolicy.tsx#L35)
