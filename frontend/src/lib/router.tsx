@@ -17,6 +17,7 @@ import CronJobList from '../components/cronjob/List';
 import DaemonSetDetails from '../components/daemonset/Details';
 import DaemonSetList from '../components/daemonset/List';
 import DeploymentsList from '../components/deployments/List';
+import DockerDesktopSetup from '../components/DockerDesktopSetup';
 import EndpointDetails from '../components/endpoints/Details';
 import EndpointList from '../components/endpoints/List';
 import HpaDetails from '../components/horizontalPodAutoscaler/Details';
@@ -113,6 +114,15 @@ const defaultRoutes: {
         <LocaleSelect />
       </Chooser>
     ),
+  },
+  dockerDesktopSetup: {
+    path: '/docker-desktop-setup',
+    exact: true,
+    name: 'Docker Desktop Setup',
+    sidebar: null,
+    useClusterURL: false,
+    noAuthRequired: true,
+    component: () => <DockerDesktopSetup />,
   },
   namespaces: {
     path: '/namespaces',

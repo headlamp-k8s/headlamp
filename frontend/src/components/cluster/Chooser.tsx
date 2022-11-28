@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
 import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import helpers from '../../helpers';
 import { useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
@@ -395,6 +396,14 @@ function Chooser(props: ClusterDialogProps) {
     return null;
   }
 
+  if (
+    clusterList.length === 0 &&
+    clusters === null &&
+    getCluster === null &&
+    helpers.isDockerDesktop()
+  ) {
+    return <Redirect to={'/docker-desktop-setup'} />;
+  }
   return (
     <Box component="main">
       <ClusterDialog

@@ -1,0 +1,13 @@
+{
+  "Enable Kubernetes in Docker Desktop to continue": "Enable Kubernetes in Docker Desktop to continue",
+  "Go to Docker Desktop Settings": "Go to Docker Desktop Settings",
+  "From the Docker Dashboard, select the Setting icon": "From the Docker Dashboard, select the Setting icon.",
+  "Select Kubernetes": "Select Kubernetes",
+  "Select Kubernetes from the left menu": "Select Kubernetes from the left menu.",
+  "Enable Kubernetes": "Enable Kubernetes",
+  "Next to Enable Kubernetes, select the checkbox.": "Next to Enable Kubernetes, select the checkbox.",
+  "Apply Changes": "Apply Changes",
+  "Click Apply & Restart to apply the changes.": "Click Apply & Restart to apply the changes.",
+  "Click Install": "Click Install",
+  "In the popup dialog click Install.": "In the popup dialog click Install."
+}

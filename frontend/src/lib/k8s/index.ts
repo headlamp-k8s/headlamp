@@ -6,6 +6,7 @@ import { ConfigState } from '../../redux/reducers/config';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { getCluster } from '../util';
 import { request } from './apiProxy';
+import { post } from './apiProxy';
 import { Cluster, KubeObject, LabelSelector, StringDict } from './cluster';
 import ClusterRole from './clusterRole';
 import ClusterRoleBinding from './clusterRoleBinding';
@@ -133,6 +134,18 @@ export function useClustersConf(): ConfigState['clusters'] {
   }, [clusters, dispatch, retry]);
 
   return clusters;
+}
+
+export async function refreshConfig() {
+  try {
+    const response = await post('/config/clusters/refresh', {}, false, {
+      timeout: 5 * 1000,
+    });
+    return response as ConfigState['clusters'];
+  } catch (err) {
+    console.log('refreshConfig error: ', err);
+    return null;
+  }
 }
 
 export function useCluster() {
