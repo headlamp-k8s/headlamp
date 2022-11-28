@@ -16,8 +16,8 @@
       <description>lib/k8s/clusterRole .ClusterRole
 Hierarchy    Role ↳ ClusterRole
   Constructors constructor • new ClusterRole(json)
-Parameters    Name Type     json KubeRole     Inherited from  Role . constructor Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Overrides  Role .</description>
+Parameters    Name Type     json KubeRole     Inherited from  Role . constructor Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string, queryParams?: QueryParameters ) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb , queryParams?</description>
     </item>
     
     <item>
@@ -29,8 +29,8 @@ Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt
       <description>lib/k8s/clusterRoleBinding .ClusterRoleBinding
 Hierarchy    RoleBinding ↳ ClusterRoleBinding
   Constructors constructor • new ClusterRoleBinding(json)
-Parameters    Name Type     json KubeRoleBinding     Inherited from  RoleBinding . constructor Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Overrides  RoleBinding .</description>
+Parameters    Name Type     json KubeRoleBinding     Inherited from  RoleBinding . constructor Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string, queryParams?: QueryParameters ) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb , queryParams?</description>
     </item>
     
     <item>
@@ -44,7 +44,7 @@ Hierarchy   any
 ↳ ConfigMap
   Constructors constructor • new ConfigMap(json)
 Parameters    Name Type     json KubeConfigMap     Inherited from makeKubeObject&amp;lt;KubeConfigMap&amp;gt;(&amp;lsquo;configMap&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -60,7 +60,7 @@ Hierarchy   any
 ↳ CronJob
   Constructors constructor • new CronJob(json)
 Parameters    Name Type     json KubeCronJob     Inherited from makeKubeObject&amp;lt;KubeCronJob&amp;gt;(&amp;lsquo;CronJob&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -76,8 +76,8 @@ Hierarchy   any
 ↳ CustomResourceDefinition
   Constructors constructor • new CustomResourceDefinition(json)
 Parameters    Name Type     json KubeCRD     Inherited from makeKubeObject&amp;lt;KubeCRD&amp;gt;(&amp;lsquo;crd&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/crd.</description>
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string, queryParams?: QueryParameters ) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb , queryParams?</description>
     </item>
     
     <item>
@@ -91,7 +91,7 @@ Hierarchy   any
 ↳ DaemonSet
   Constructors constructor • new DaemonSet(json)
 Parameters    Name Type     json KubeDaemonSet     Inherited from makeKubeObject&amp;lt;KubeDaemonSet&amp;gt;(&amp;lsquo;DaemonSet&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -107,7 +107,23 @@ Hierarchy   any
 ↳ Deployment
   Constructors constructor • new Deployment(json)
 Parameters    Name Type     json KubeDeployment     Inherited from makeKubeObject&amp;lt;KubeDeployment&amp;gt;(&amp;lsquo;Deployment&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
+    </item>
+    
+    <item>
+      <title>Class: Endpoints</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_endpoints.endpoints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_endpoints.endpoints/</guid>
+      <description>lib/k8s/endpoints .Endpoints
+Hierarchy   any
+↳ Endpoints
+  Constructors constructor • new Endpoints(json)
+Parameters    Name Type     json KubeEndpoint     Inherited from makeKubeObject&amp;lt;KubeEndpoint&amp;gt;(&amp;lsquo;endpoint&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -123,7 +139,7 @@ Hierarchy   any
 ↳ Event
   Constructors constructor • new Event(json)
 Parameters    Name Type     json KubeEvent     Inherited from makeKubeObject&amp;lt;KubeEvent&amp;gt;(&amp;lsquo;Event&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -146,6 +162,22 @@ Got a new plugin to add? Well, registerPlugin is your friend.</description>
     </item>
     
     <item>
+      <title>Class: HPA</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_hpa.hpa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_hpa.hpa/</guid>
+      <description>lib/k8s/hpa .HPA
+Hierarchy   any
+↳ HPA
+  Constructors constructor • new HPA(json)
+Parameters    Name Type     json KubeHPA     Inherited from makeKubeObject&amp;lt;KubeHPA&amp;gt;(&amp;lsquo;horizontalPodAutoscaler&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
+    </item>
+    
+    <item>
       <title>Class: Ingress</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_ingress.ingress/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -156,7 +188,7 @@ Hierarchy   any
 ↳ Ingress
   Constructors constructor • new Ingress(json)
 Parameters    Name Type     json KubeIngress     Inherited from makeKubeObject&amp;lt;KubeIngress&amp;gt;(&amp;lsquo;ingress&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -172,7 +204,7 @@ Hierarchy   any
 ↳ Job
   Constructors constructor • new Job(json)
 Parameters    Name Type     json KubeJob     Inherited from makeKubeObject&amp;lt;KubeJob&amp;gt;(&amp;lsquo;Job&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -188,8 +220,8 @@ Hierarchy   any
 ↳ Namespace
   Constructors constructor • new Namespace(json)
 Parameters    Name Type     json KubeNamespace     Inherited from makeKubeObject&amp;lt;KubeNamespace&amp;gt;(&amp;lsquo;namespace&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/namespace.</description>
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string, queryParams?: QueryParameters ) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb , queryParams?</description>
     </item>
     
     <item>
@@ -203,7 +235,7 @@ Hierarchy   any
 ↳ NetworkPolicy
   Constructors constructor • new NetworkPolicy(json)
 Parameters    Name Type     json KubeNetworkPolicy     Inherited from makeKubeObject&amp;lt;KubeNetworkPolicy&amp;gt;(&amp;lsquo;NetworkPolicy&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -219,8 +251,24 @@ Hierarchy   any
 ↳ Node
   Constructors constructor • new Node(json)
 Parameters    Name Type     json KubeNode     Inherited from makeKubeObject&amp;lt;KubeNode&amp;gt;(&amp;lsquo;node&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/node.</description>
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string, queryParams?: QueryParameters ) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb , queryParams?</description>
+    </item>
+    
+    <item>
+      <title>Class: PDB</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_poddisruptionbudget.pdb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_poddisruptionbudget.pdb/</guid>
+      <description>lib/k8s/podDisruptionBudget .PDB
+Hierarchy   any
+↳ PDB
+  Constructors constructor • new PDB(json)
+Parameters    Name Type     json KubePDB     Inherited from makeKubeObject&amp;lt;KubePDB&amp;gt;(&amp;lsquo;podDisruptionBudget&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
     
     <item>
@@ -234,8 +282,8 @@ Hierarchy   any
 ↳ PersistentVolume
   Constructors constructor • new PersistentVolume(json)
 Parameters    Name Type     json KubePersistentVolume     Inherited from makeKubeObject&amp;lt;KubePersistentVolume&amp;gt;(&amp;lsquo;persistentVolume&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/persistentVolume.</description>
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string, queryParams?: QueryParameters ) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb , queryParams?</description>
     </item>
     
     <item>
@@ -249,7 +297,7 @@ Hierarchy   any
 ↳ PersistentVolumeClaim
   Constructors constructor • new PersistentVolumeClaim(json)
 Parameters    Name Type     json KubePersistentVolumeClaim     Inherited from makeKubeObject&amp;lt;KubePersistentVolumeClaim&amp;gt;( &amp;lsquo;persistentVolumeClaim&amp;rsquo; ).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -279,9 +327,25 @@ Parameters    Name Type     register Registry     Returns boolean</description>
       <description>lib/k8s/pod .Pod
 Hierarchy   any
 ↳ Pod
-  Constructors constructor • new Pod(json)
-Parameters    Name Type     json KubePod     Inherited from makeKubeObject&amp;lt;KubePod&amp;gt;(&amp;lsquo;Pod&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+  Constructors constructor • new Pod(jsonData)
+Parameters    Name Type     jsonData KubePod     Overrides makeKubeObject&amp;lt;KubePod&amp;amp;gt;(&#39;Pod&#39;).constructor
+Defined in  lib/k8s/pod.ts:78 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
+    </item>
+    
+    <item>
+      <title>Class: PriorityClasses</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_priorityclasses.priorityclasses/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_priorityclasses.priorityclasses/</guid>
+      <description>lib/k8s/priorityClasses .PriorityClasses
+Hierarchy   any
+↳ PriorityClasses
+  Constructors constructor • new PriorityClasses(json)
+Parameters    Name Type     json KubePriorityClasses     Inherited from makeKubeObject&amp;lt;KubePriorityClasses&amp;gt;(&amp;lsquo;priorityClass&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -313,7 +377,23 @@ Hierarchy   any
 ↳ ReplicaSet
   Constructors constructor • new ReplicaSet(json)
 Parameters    Name Type     json KubeReplicaSet     Inherited from makeKubeObject&amp;lt;KubeReplicaSet&amp;gt;(&amp;lsquo;ReplicaSet&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Index signature ▪ [other: string]: any
+Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
+    </item>
+    
+    <item>
+      <title>Class: ResourceQuota</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_resourcequota.resourcequota/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/lib_k8s_resourcequota.resourcequota/</guid>
+      <description>lib/k8s/resourceQuota .ResourceQuota
+Hierarchy   any
+↳ ResourceQuota
+  Constructors constructor • new ResourceQuota(json)
+Parameters    Name Type     json KubeResourceQuota     Inherited from makeKubeObject&amp;lt;KubeResourceQuota&amp;gt;(&amp;lsquo;resourceQuota&amp;rsquo;).constructor
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -329,7 +409,7 @@ Hierarchy   any
 ↳ Role
 ↳↳ ClusterRole   Constructors constructor • new Role(json)
 Parameters    Name Type     json KubeRole     Inherited from makeKubeObject&amp;lt;KubeRole&amp;gt;(&amp;lsquo;role&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -345,7 +425,7 @@ Hierarchy   any
 ↳ RoleBinding
 ↳↳ ClusterRoleBinding   Constructors constructor • new RoleBinding(json)
 Parameters    Name Type     json KubeRoleBinding     Inherited from makeKubeObject&amp;lt;KubeRoleBinding&amp;gt;(&amp;lsquo;roleBinding&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -361,7 +441,7 @@ Hierarchy   any
 ↳ Secret
   Constructors constructor • new Secret(json)
 Parameters    Name Type     json KubeSecret     Inherited from makeKubeObject&amp;lt;KubeSecret&amp;gt;(&amp;lsquo;secret&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -377,7 +457,7 @@ Hierarchy   any
 ↳ Service
   Constructors constructor • new Service(json)
 Parameters    Name Type     json KubeService     Inherited from makeKubeObject&amp;lt;KubeService&amp;gt;(&amp;lsquo;service&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -393,7 +473,7 @@ Hierarchy   any
 ↳ ServiceAccount
   Constructors constructor • new ServiceAccount(json)
 Parameters    Name Type     json KubeServiceAccount     Inherited from makeKubeObject&amp;lt;KubeServiceAccount&amp;gt;(&amp;lsquo;serviceAccount&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -409,7 +489,7 @@ Hierarchy   any
 ↳ StatefulSet
   Constructors constructor • new StatefulSet(json)
 Parameters    Name Type     json KubeStatefulSet     Inherited from makeKubeObject&amp;lt;KubeStatefulSet&amp;gt;(&amp;lsquo;StatefulSet&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     scale? { get: (namespace: string, name: string) =&amp;gt; Promise&amp;lt;any&amp;gt; ; put: (body: { metadata: KubeMetadata ; spec: { replicas: number } }) =&amp;gt; Promise&amp;lt;any&amp;gt; }   scale.</description>
     </item>
@@ -425,8 +505,8 @@ Hierarchy   any
 ↳ StorageClass
   Constructors constructor • new StorageClass(json)
 Parameters    Name Type     json KubeStorageClass     Inherited from makeKubeObject&amp;lt;KubeStorageClass&amp;gt;(&amp;lsquo;storageClass&amp;rsquo;).constructor
-Defined in  lib/k8s/cluster.ts:76 Properties apiEndpoint ▪ Static apiEndpoint: Object
-Type declaration    Name Type     delete (name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   isNamespaced boolean   list (cb: StreamResultsCb , errCb: StreamErrCb ) =&amp;gt; Promise&amp;lt;() =&amp;gt; void&amp;gt;   patch (body: OpPatch[], name: string) =&amp;gt; Promise&amp;lt;any&amp;gt;   post (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;   put (body: KubeObjectInterface ) =&amp;gt; Promise&amp;lt;any&amp;gt;    Defined in  lib/k8s/storageClass.</description>
+Defined in  lib/k8s/cluster.ts:93 Properties apiEndpoint ▪ Static apiEndpoint: Object
+Type declaration    Name Type     delete (name: string, queryParams?: QueryParameters ) =&amp;gt; Promise&amp;lt;any&amp;gt;   get (name: string, cb: StreamResultsCb , errCb: StreamErrCb , queryParams?</description>
     </item>
     
   </channel>

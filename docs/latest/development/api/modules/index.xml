@@ -38,10 +38,9 @@ Defined in  lib/auth.ts:9  hasToken ▸ hasToken(cluster): boolean</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_apiproxy/</guid>
-      <description>Interfaces   ApiError   ClusterRequest   RequestParams   StreamArgs   Type aliases StreamErrCb Ƭ StreamErrCb: (err: Error &amp;amp; { status?: number }, cancelStreamFunc?: () =&amp;gt; void) =&amp;gt; void
+      <description>Interfaces   ApiError   ClusterRequest   QueryParameters   RequestParams   StreamArgs   Type aliases StreamErrCb Ƭ StreamErrCb: (err: Error &amp;amp; { status?: number }, cancelStreamFunc?: () =&amp;gt; void) =&amp;gt; void
 Type declaration ▸ (err, cancelStreamFunc?): void
-Parameters    Name Type     err Error &amp;amp; { status?: number }   cancelStreamFunc? () =&amp;gt; void    Returns void
-Defined in  lib/k8s/apiProxy.</description>
+Parameters    Name Type     err Error &amp;amp; { status?: number }   cancelStreamFunc? () =&amp;gt; void    Returns void</description>
     </item>
     
     <item>
@@ -50,7 +49,7 @@ Defined in  lib/k8s/apiProxy.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_cluster/</guid>
-      <description>References ApiListOptions Re-exports ApiListOptions  Cluster Re-exports Cluster  KubeCondition Re-exports KubeCondition  KubeContainer Re-exports KubeContainer  KubeContainerProbe Re-exports KubeContainerProbe  KubeContainerStatus Re-exports KubeContainerStatus  KubeMetadata Re-exports KubeMetadata  KubeMetrics Re-exports KubeMetrics  KubeObject Re-exports KubeObject  KubeObjectClass Re-exports KubeObjectClass  KubeObjectIface Re-exports KubeObjectIface  KubeObjectInterface Re-exports KubeObjectInterface  KubeOwnerReference Re-exports KubeOwnerReference  LabelSelector Re-exports LabelSelector  StringDict Re-exports StringDict  Workload Re-exports Workload  makeKubeObject Re-exports makeKubeObject </description>
+      <description>References ApiListOptions Re-exports ApiListOptions  Cluster Re-exports Cluster  ContainerState Re-exports ContainerState  KubeCondition Re-exports KubeCondition  KubeContainer Re-exports KubeContainer  KubeContainerProbe Re-exports KubeContainerProbe  KubeContainerStatus Re-exports KubeContainerStatus  KubeManagedFields Re-exports KubeManagedFields  KubeMetadata Re-exports KubeMetadata  KubeMetrics Re-exports KubeMetrics  KubeObject Re-exports KubeObject  KubeObjectClass Re-exports KubeObjectClass  KubeObjectIface Re-exports KubeObjectIface  KubeObjectInterface Re-exports KubeObjectInterface  KubeOwnerReference Re-exports KubeOwnerReference  LabelSelector Re-exports LabelSelector  StringDict Re-exports StringDict  Time Re-exports Time  Workload Re-exports Workload  makeKubeObject Re-exports makeKubeObject </description>
     </item>
     
     <item>
@@ -119,12 +118,30 @@ Defined in  lib/k8s/crd.ts:56 </description>
     </item>
     
     <item>
+      <title>Module: lib/k8s/endpoints</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_endpoints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_endpoints/</guid>
+      <description>Classes   Endpoints   Interfaces   KubeEndpoint   KubeEndpointAddress   KubeEndpointPort   KubeEndpointSubset   </description>
+    </item>
+    
+    <item>
       <title>Module: lib/k8s/event</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_event/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_event/</guid>
       <description>Classes   Event   Interfaces   KubeEvent   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/hpa</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_hpa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_hpa/</guid>
+      <description>Classes   HPA   Interfaces   CrossVersionObjectReference   KubeHPA   </description>
     </item>
     
     <item>
@@ -196,7 +213,25 @@ Defined in  lib/k8s/crd.ts:56 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_pod/</guid>
-      <description>Classes   Pod   Interfaces   ExecOptions   KubePod   </description>
+      <description>Classes   Pod   Interfaces   ExecOptions   KubePod   LogOptions   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/podDisruptionBudget</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_poddisruptionbudget/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_poddisruptionbudget/</guid>
+      <description>Classes   PDB   Interfaces   KubePDB   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/priorityClasses</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_priorityclasses/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_priorityclasses/</guid>
+      <description>Classes   PriorityClasses   Interfaces   KubePriorityClasses   </description>
     </item>
     
     <item>
@@ -206,6 +241,15 @@ Defined in  lib/k8s/crd.ts:56 </description>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_replicaset/</guid>
       <description>Classes   ReplicaSet   Interfaces   KubeReplicaSet   </description>
+    </item>
+    
+    <item>
+      <title>Module: lib/k8s/resourceQuota</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_resourcequota/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_k8s_resourcequota/</guid>
+      <description>Classes   ResourceQuota   Interfaces   KubeResourceQuota   </description>
     </item>
     
     <item>
@@ -287,7 +331,7 @@ Defined in  lib/k8s/crd.ts:56 </description>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/modules/lib_router/</guid>
       <description>Interfaces   Route   RouteURLProps   Variables NotFoundRoute • Const NotFoundRoute: Object
-Type declaration    Name Type     component () =&amp;gt; Element   exact boolean   name string   noAuthRequired boolean   path string   sidebar null    Defined in  lib/router.tsx:438 Functions createRouteURL ▸ createRouteURL(routeName, params?): string
+Type declaration    Name Type     component () =&amp;gt; Element   exact boolean   name string   noAuthRequired boolean   path string   sidebar null    Defined in  lib/router.tsx:527 Functions createRouteURL ▸ createRouteURL(routeName, params?): string
 Parameters    Name Type     routeName string   params RouteURLProps     Returns string</description>
     </item>
     

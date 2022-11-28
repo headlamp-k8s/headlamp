@@ -17,7 +17,7 @@
 Hierarchy   Error
 ↳ ApiError
   Properties status • status: number
-Defined in  lib/k8s/apiProxy.ts:775 </description>
+Defined in  lib/k8s/apiProxy.ts:817 </description>
     </item>
     
     <item>
@@ -27,8 +27,11 @@ Defined in  lib/k8s/apiProxy.ts:775 </description>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.apilistoptions/</guid>
       <description> lib/k8s/cluster .ApiListOptions
-Properties namespace • Optional namespace: string | string[]
-Defined in  lib/k8s/cluster.ts:54 </description>
+Hierarchy    QueryParameters ↳ ApiListOptions
+  Properties fieldSelector • Optional fieldSelector: string
+Inherited from  QueryParameters . fieldSelector Defined in  lib/k8s/apiProxy.ts:48  labelSelector • Optional labelSelector: string
+Inherited from  QueryParameters . labelSelector Defined in  lib/k8s/apiProxy.ts:47  namespace • Optional namespace: string | string[]
+Defined in  lib/k8s/cluster.ts:57 </description>
     </item>
     
     <item>
@@ -72,8 +75,8 @@ Defined in  plugin/lib.ts:72  url • Optional url: string</description>
       <description> lib/k8s/cluster .Cluster
 Indexable ▪ [propName: string]: any
 Properties name • name: string
-Defined in  lib/k8s/cluster.ts:16  useToken • Optional useToken: boolean
-Defined in  lib/k8s/cluster.ts:17 </description>
+Defined in  lib/k8s/cluster.ts:17  useToken • Optional useToken: boolean
+Defined in  lib/k8s/cluster.ts:18 </description>
     </item>
     
     <item>
@@ -133,6 +136,31 @@ Defined in  redux/reducers/config.tsx:6 </description>
     </item>
     
     <item>
+      <title>Interface: ContainerState</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.containerstate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.containerstate/</guid>
+      <description>lib/k8s/cluster .ContainerState
+Properties running • running: Object
+Type declaration    Name Type     startedAt string    Defined in  lib/k8s/cluster.ts:599  terminated • terminated: Object
+Type declaration    Name Type     containerID string   exitCode number   finishedAt string   message? string   reason string   signal? number   startedAt string    Defined in  lib/k8s/cluster.</description>
+    </item>
+    
+    <item>
+      <title>Interface: CrossVersionObjectReference</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_hpa.crossversionobjectreference/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_hpa.crossversionobjectreference/</guid>
+      <description> lib/k8s/hpa .CrossVersionObjectReference
+Properties apiVersion • apiVersion: string
+Defined in  lib/k8s/hpa.ts:5  kind • kind: string
+Defined in  lib/k8s/hpa.ts:6  name • name: string
+Defined in  lib/k8s/hpa.ts:7 </description>
+    </item>
+    
+    <item>
       <title>Interface: DetailsViewSectionProps</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/plugin_registry.detailsviewsectionprops/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -152,10 +180,10 @@ Defined in  components/DetailsViewSection/DetailsViewSection.tsx:7 </description
       <description>lib/k8s/pod .ExecOptions
 Hierarchy    StreamArgs ↳ ExecOptions
   Properties additionalProtocols • Optional additionalProtocols: string[]
-Inherited from  StreamArgs . additionalProtocols Defined in  lib/k8s/apiProxy.ts:615  command • Optional command: string[]
-Defined in  lib/k8s/pod.ts:33  isJson • Optional isJson: boolean
-Inherited from  StreamArgs . isJson Defined in  lib/k8s/apiProxy.ts:614  reconnectOnFailure • Optional reconnectOnFailure: boolean
-Inherited from  StreamArgs . reconnectOnFailure Defined in  lib/k8s/apiProxy.ts:617 Methods connectCb ▸ Optional connectCb(): void</description>
+Inherited from  StreamArgs . additionalProtocols Defined in  lib/k8s/apiProxy.ts:658  command • Optional command: string[]
+Defined in  lib/k8s/pod.ts:36  isJson • Optional isJson: boolean
+Inherited from  StreamArgs . isJson Defined in  lib/k8s/apiProxy.ts:657  reconnectOnFailure • Optional reconnectOnFailure: boolean
+Inherited from  StreamArgs . reconnectOnFailure Defined in  lib/k8s/apiProxy.ts:660 Methods connectCb ▸ Optional connectCb(): void</description>
     </item>
     
     <item>
@@ -166,8 +194,8 @@ Inherited from  StreamArgs . reconnectOnFailure Defined in  lib/k8s/apiProxy.ts:
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_util.filterstate/</guid>
       <description> lib/util .FilterState
 Properties namespaces • namespaces: Set&amp;lt;string&amp;gt;
-Defined in  lib/util.ts:131  search • search: string
-Defined in  lib/util.ts:132 </description>
+Defined in  lib/util.ts:135  search • search: string
+Defined in  lib/util.ts:136 </description>
     </item>
     
     <item>
@@ -177,14 +205,11 @@ Defined in  lib/util.ts:132 </description>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecondition/</guid>
       <description> lib/k8s/cluster .KubeCondition
-Properties lastProbeTime • lastProbeTime: number
-Defined in  lib/k8s/cluster.ts:414  lastTransitionTime • Optional lastTransitionTime: string
-Defined in  lib/k8s/cluster.ts:415  lastUpdateTime • Optional lastUpdateTime: string
-Defined in  lib/k8s/cluster.ts:416  message • Optional message: string
-Defined in  lib/k8s/cluster.ts:418  reason • Optional reason: string
-Defined in  lib/k8s/cluster.ts:417  status • status: string
-Defined in  lib/k8s/cluster.ts:413  type • type: string
-Defined in  lib/k8s/cluster.ts:412 </description>
+Properties lastProbeTime • lastProbeTime: Time Defined in  lib/k8s/cluster.ts:493  lastTransitionTime • Optional lastTransitionTime: Time Defined in  lib/k8s/cluster.ts:494  lastUpdateTime • Optional lastUpdateTime: Time Defined in  lib/k8s/cluster.ts:495  message • Optional message: string
+Defined in  lib/k8s/cluster.ts:497  reason • Optional reason: string
+Defined in  lib/k8s/cluster.ts:496  status • status: string
+Defined in  lib/k8s/cluster.ts:492  type • type: string
+Defined in  lib/k8s/cluster.ts:491 </description>
     </item>
     
     <item>
@@ -196,8 +221,8 @@ Defined in  lib/k8s/cluster.ts:412 </description>
       <description> lib/k8s/configMap .KubeConfigMap
 Hierarchy    KubeObjectInterface ↳ KubeConfigMap
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  data • data: StringDict Defined in  lib/k8s/configMap.ts:5  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24 </description>
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  data • data: StringDict Defined in  lib/k8s/configMap.ts:5  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25 </description>
     </item>
     
     <item>
@@ -208,9 +233,9 @@ Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  me
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainer/</guid>
       <description>lib/k8s/cluster .KubeContainer
 Properties args • Optional args: string[]
-Defined in  lib/k8s/cluster.ts:425  command • Optional command: string[]
-Defined in  lib/k8s/cluster.ts:424  env • Optional env: { name: string ; value?: string ; valueFrom?: { configMapKeyRef?: { key: string ; name: string } ; fieldRef?: { apiVersion: string ; fieldPath: string } ; secretKeyRef?: { key: string ; name: string } } }[]
-Defined in  lib/k8s/cluster.ts:441  envFrom • Optional envFrom: { configMapRef?</description>
+Defined in  lib/k8s/cluster.ts:504  command • Optional command: string[]
+Defined in  lib/k8s/cluster.ts:503  env • Optional env: { name: string ; value?: string ; valueFrom?: { configMapKeyRef?: { key: string ; name: string } ; fieldRef?: { apiVersion: string ; fieldPath: string } ; secretKeyRef?: { key: string ; name: string } } }[]
+Defined in  lib/k8s/cluster.ts:520  envFrom • Optional envFrom: { configMapRef?</description>
     </item>
     
     <item>
@@ -221,8 +246,8 @@ Defined in  lib/k8s/cluster.ts:441  envFrom • Optional envFrom: { configMapRef
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainerprobe/</guid>
       <description>lib/k8s/cluster .KubeContainerProbe
 Properties exec • Optional exec: Object
-Type declaration    Name Type     command string[]    Defined in  lib/k8s/cluster.ts:481  failureThreshold • Optional failureThreshold: number
-Defined in  lib/k8s/cluster.ts:491  httpGet • Optional httpGet: Object
+Type declaration    Name Type     command string[]    Defined in  lib/k8s/cluster.ts:560  failureThreshold • Optional failureThreshold: number
+Defined in  lib/k8s/cluster.ts:570  httpGet • Optional httpGet: Object
 Type declaration    Name Type     host? string   path? string   port number   scheme string    Defined in  lib/k8s/cluster.</description>
     </item>
     
@@ -233,14 +258,14 @@ Type declaration    Name Type     host? string   path? string   port number   sc
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubecontainerstatus/</guid>
       <description>lib/k8s/cluster .KubeContainerStatus
-Properties containerID • containerID: string
-Defined in  lib/k8s/cluster.ts:520  image • image: string
-Defined in  lib/k8s/cluster.ts:521  imageID • imageID: string
-Defined in  lib/k8s/cluster.ts:522  lastState • lastState: string
-Defined in  lib/k8s/cluster.ts:523  name • name: string
-Defined in  lib/k8s/cluster.ts:524  ready • ready: boolean
-Defined in  lib/k8s/cluster.ts:525  restartCount • restartCount: number
-Defined in  lib/k8s/cluster.ts:526  state • state: Object</description>
+Properties containerID • Optional containerID: string
+Defined in  lib/k8s/cluster.ts:618  image • image: string
+Defined in  lib/k8s/cluster.ts:619  imageID • imageID: string
+Defined in  lib/k8s/cluster.ts:620  lastState • lastState: Partial&amp;lt; ContainerState &amp;gt;
+Defined in  lib/k8s/cluster.ts:624  name • name: string
+Defined in  lib/k8s/cluster.ts:621  ready • ready: boolean
+Defined in  lib/k8s/cluster.ts:622  restartCount • restartCount: number
+Defined in  lib/k8s/cluster.ts:623  started • Optional started: boolean</description>
     </item>
     
     <item>
@@ -252,8 +277,8 @@ Defined in  lib/k8s/cluster.ts:526  state • state: Object</description>
       <description>lib/k8s/crd .KubeCRD
 Hierarchy    KubeObjectInterface ↳ KubeCRD
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     group string   names { kind: string ; listKind: string ; plural: string ; singular: string }   names.</description>
     </item>
@@ -267,8 +292,8 @@ Type declaration    Name Type     group string   names { kind: string ; listKind
       <description>lib/k8s/cronJob .KubeCronJob
 Hierarchy    KubeObjectInterface ↳ KubeCronJob
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [otherProps: string]: any
 Type declaration    Name Type     concurrencyPolicy string   failedJobsHistoryLimit string   schedule string   startingDeadlineSeconds string   successfulJobsHistoryLimit string   suspend boolean    Defined in  lib/k8s/cronJob.</description>
     </item>
@@ -282,8 +307,8 @@ Type declaration    Name Type     concurrencyPolicy string   failedJobsHistoryLi
       <description>lib/k8s/daemonSet .KubeDaemonSet
 Hierarchy    KubeObjectInterface ↳ KubeDaemonSet
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [otherProps: string]: any
 Type declaration    Name Type     selector LabelSelector    updateStrategy { rollingUpdate: { maxUnavailable: number } ; type: string }   updateStrategy.</description>
     </item>
@@ -297,10 +322,65 @@ Type declaration    Name Type     selector LabelSelector    updateStrategy { rol
       <description>lib/k8s/deployment .KubeDeployment
 Hierarchy    KubeObjectInterface ↳ KubeDeployment
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [otherProps: string]: any
 Type declaration    Name Type     selector?</description>
+    </item>
+    
+    <item>
+      <title>Interface: KubeEndpoint</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_endpoints.kubeendpoint/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_endpoints.kubeendpoint/</guid>
+      <description> lib/k8s/endpoints .KubeEndpoint
+Hierarchy    KubeObjectInterface ↳ KubeEndpoint
+  Properties apiVersion • Optional apiVersion: string
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  subsets • subsets: KubeEndpointSubset []
+Defined in  lib/k8s/endpoints.ts:28 </description>
+    </item>
+    
+    <item>
+      <title>Interface: KubeEndpointAddress</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_endpoints.kubeendpointaddress/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_endpoints.kubeendpointaddress/</guid>
+      <description> lib/k8s/endpoints .KubeEndpointAddress
+Properties hostname • hostname: string
+Defined in  lib/k8s/endpoints.ts:12  ip • ip: string
+Defined in  lib/k8s/endpoints.ts:13  nodeName • Optional nodeName: string
+Defined in  lib/k8s/endpoints.ts:14  targetRef • Optional targetRef: Pick&amp;lt; KubeObjectInterface , &amp;quot;kind&amp;quot; | &amp;quot;apiVersion&amp;quot;&amp;gt; &amp;amp; Pick&amp;lt; KubeMetadata , &amp;quot;name&amp;quot; | &amp;quot;namespace&amp;quot; | &amp;quot;resourceVersion&amp;quot; | &amp;quot;uid&amp;quot;&amp;gt; &amp;amp; { fieldPath: string }
+Defined in  lib/k8s/endpoints.ts:15 </description>
+    </item>
+    
+    <item>
+      <title>Interface: KubeEndpointPort</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_endpoints.kubeendpointport/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_endpoints.kubeendpointport/</guid>
+      <description> lib/k8s/endpoints .KubeEndpointPort
+Properties appProtocol • appProtocol: string
+Defined in  lib/k8s/endpoints.ts:6  name • Optional name: string
+Defined in  lib/k8s/endpoints.ts:5  port • port: number
+Defined in  lib/k8s/endpoints.ts:7  protocol • protocol: string
+Defined in  lib/k8s/endpoints.ts:8 </description>
+    </item>
+    
+    <item>
+      <title>Interface: KubeEndpointSubset</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_endpoints.kubeendpointsubset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_endpoints.kubeendpointsubset/</guid>
+      <description> lib/k8s/endpoints .KubeEndpointSubset
+Properties addresses • Optional addresses: KubeEndpointAddress []
+Defined in  lib/k8s/endpoints.ts:22  notReadyAddresses • Optional notReadyAddresses: KubeEndpointAddress []
+Defined in  lib/k8s/endpoints.ts:23  ports • Optional ports: KubeEndpointPort []
+Defined in  lib/k8s/endpoints.ts:24 </description>
     </item>
     
     <item>
@@ -312,8 +392,22 @@ Type declaration    Name Type     selector?</description>
       <description>lib/k8s/event .KubeEvent
 Indexable ▪ [otherProps: string]: any
 Properties involvedObject • involvedObject: Object
-Type declaration    Name Type     apiVersion string   fieldPath string   kind string   name string   namespace string   resourceVersion string   uid string    Defined in  lib/k8s/event.ts:10  message • message: string
-Defined in  lib/k8s/event.ts:8  metadata • metadata: KubeMetadata Defined in  lib/k8s/event.</description>
+Type declaration    Name Type     apiVersion string   fieldPath string   kind string   name string   namespace string   resourceVersion string   uid string    Defined in  lib/k8s/event.ts:11  message • message: string
+Defined in  lib/k8s/event.ts:9  metadata • metadata: KubeMetadata Defined in  lib/k8s/event.</description>
+    </item>
+    
+    <item>
+      <title>Interface: KubeHPA</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_hpa.kubehpa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_hpa.kubehpa/</guid>
+      <description>lib/k8s/hpa .KubeHPA
+Hierarchy    KubeObjectInterface ↳ KubeHPA
+  Properties apiVersion • Optional apiVersion: string
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: HpaSpec
+Defined in  lib/k8s/hpa.ts:158  status • status: HpaStatus</description>
     </item>
     
     <item>
@@ -325,8 +419,8 @@ Defined in  lib/k8s/event.ts:8  metadata • metadata: KubeMetadata Defined in  
       <description>lib/k8s/ingress .KubeIngress
 Hierarchy    KubeObjectInterface ↳ KubeIngress
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Type declaration    Name Type     rules { host: string ; http: { paths: { backend: { serviceName: string ; servicePort: string } ; path: string }[] } }[]    Defined in  lib/k8s/ingress.</description>
     </item>
     
@@ -339,8 +433,8 @@ Type declaration    Name Type     rules { host: string ; http: { paths: { backen
       <description>lib/k8s/job .KubeJob
 Hierarchy    KubeObjectInterface ↳ KubeJob
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [otherProps: string]: any
 Type declaration    Name Type     selector LabelSelector     Defined in  lib/k8s/job.</description>
     </item>
@@ -359,17 +453,34 @@ Defined in  lib/k8s/service.ts:14 </description>
     </item>
     
     <item>
+      <title>Interface: KubeManagedFields</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemanagedfields/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemanagedfields/</guid>
+      <description> lib/k8s/cluster .KubeManagedFields
+Properties apiVersion • apiVersion: string
+Defined in  lib/k8s/cluster.ts:61  fieldsType • fieldsType: string
+Defined in  lib/k8s/cluster.ts:62  fieldsV1 • fieldsV1: object
+Defined in  lib/k8s/cluster.ts:63  manager • manager: string
+Defined in  lib/k8s/cluster.ts:64  operation • operation: string
+Defined in  lib/k8s/cluster.ts:65  subresource • subresource: string
+Defined in  lib/k8s/cluster.ts:66  timestamp • timestamp: string
+Defined in  lib/k8s/cluster.ts:67 </description>
+    </item>
+    
+    <item>
       <title>Interface: KubeMetadata</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemetadata/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemetadata/</guid>
       <description>lib/k8s/cluster .KubeMetadata
-Properties annotations • Optional annotations: StringDict Defined in  lib/k8s/cluster.ts:40  creationTimestamp • creationTimestamp: string
-Defined in  lib/k8s/cluster.ts:36  labels • Optional labels: StringDict Defined in  lib/k8s/cluster.ts:39  name • name: string
-Defined in  lib/k8s/cluster.ts:34  namespace • Optional namespace: string
-Defined in  lib/k8s/cluster.ts:35  ownerReferences • Optional ownerReferences: KubeOwnerReference []
-Defined in  lib/k8s/cluster.ts:41  resourceVersion • resourceVersion: string
+Properties annotations • Optional annotations: StringDict Defined in  lib/k8s/cluster.ts:42  creationTimestamp • creationTimestamp: string
+Defined in  lib/k8s/cluster.ts:37  deletionTimestamp • Optional deletionTimestamp: string
+Defined in  lib/k8s/cluster.ts:38  labels • Optional labels: StringDict Defined in  lib/k8s/cluster.ts:41  managedFields • Optional managedFields: KubeManagedFields []
+Defined in  lib/k8s/cluster.ts:44  name • name: string
+Defined in  lib/k8s/cluster.ts:35  namespace • Optional namespace: string
 Defined in  lib/k8s/cluster.</description>
     </item>
     
@@ -380,8 +491,8 @@ Defined in  lib/k8s/cluster.</description>
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubemetrics/</guid>
       <description>lib/k8s/cluster .KubeMetrics
-Properties metadata • metadata: KubeMetadata Defined in  lib/k8s/cluster.ts:506  status • status: Object
-Type declaration    Name Type     capacity { cpu: string ; memory: string }   capacity.cpu string   capacity.memory string    Defined in  lib/k8s/cluster.ts:511  usage • usage: Object
+Properties metadata • metadata: KubeMetadata Defined in  lib/k8s/cluster.ts:585  status • status: Object
+Type declaration    Name Type     capacity { cpu: string ; memory: string }   capacity.cpu string   capacity.memory string    Defined in  lib/k8s/cluster.ts:590  usage • usage: Object
 Type declaration    Name Type     cpu string   memory string    Defined in  lib/k8s/cluster.</description>
     </item>
     
@@ -394,8 +505,8 @@ Type declaration    Name Type     cpu string   memory string    Defined in  lib/
       <description>lib/k8s/namespace .KubeNamespace
 Hierarchy    KubeObjectInterface ↳ KubeNamespace
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  status • status: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  status • status: Object
 Type declaration    Name Type     phase string    Defined in  lib/k8s/namespace.</description>
     </item>
     
@@ -408,10 +519,10 @@ Type declaration    Name Type     phase string    Defined in  lib/k8s/namespace.
       <description>lib/k8s/networkpolicy .KubeNetworkPolicy
 Hierarchy    KubeObjectInterface ↳ KubeNetworkPolicy
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  egress • egress: NetworkPolicyEgressRule[]
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  egress • egress: NetworkPolicyEgressRule[]
 Defined in  lib/k8s/networkpolicy.tsx:32  ingress • ingress: NetworkPolicyIngressRule[]
 Defined in  lib/k8s/networkpolicy.tsx:33  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface .</description>
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface .</description>
     </item>
     
     <item>
@@ -423,8 +534,8 @@ Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  me
       <description>lib/k8s/node .KubeNode
 Hierarchy    KubeObjectInterface ↳ KubeNode
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [otherProps: string]: any
 Type declaration    Name Type     podCIDR string    Defined in  lib/k8s/node.</description>
     </item>
@@ -438,8 +549,8 @@ Type declaration    Name Type     podCIDR string    Defined in  lib/k8s/node.</d
       <description>lib/k8s/cluster .KubeObjectIface
 Type parameters    Name Type     T extends KubeObjectInterface | KubeEvent     Indexable ▪ [prop: string]: any
 Constructors constructor • new KubeObjectIface(json)
-Parameters    Name Type     json T    Defined in  lib/k8s/cluster.ts:76 Properties className • className: string
-Defined in  lib/k8s/cluster.ts:77 Methods apiList ▸ apiList(onList): any
+Parameters    Name Type     json T    Defined in  lib/k8s/cluster.ts:93 Properties className • className: string
+Defined in  lib/k8s/cluster.ts:94 Methods apiList ▸ apiList(onList): any
 Parameters    Name Type     onList (arg: any[]) =&amp;gt; void    Returns any</description>
     </item>
     
@@ -451,9 +562,8 @@ Parameters    Name Type     onList (arg: any[]) =&amp;gt; void    Returns any</d
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubeobjectinterface/</guid>
       <description>lib/k8s/cluster .KubeObjectInterface
 Hierarchy   KubeObjectInterface
-↳ KubeConfigMap ↳ KubeCRD ↳ KubeCronJob ↳ KubeDaemonSet ↳ KubeDeployment ↳ KubeIngress ↳ KubeJob ↳ KubeNamespace ↳ KubeNetworkPolicy ↳ KubeNode ↳ KubePersistentVolume ↳ KubePersistentVolumeClaim ↳ KubePod ↳ KubeReplicaSet ↳ KubeRole ↳ KubeRoleBinding ↳ KubeSecret ↳ KubeService ↳ KubeServiceAccount ↳ KubeStatefulSet ↳ KubeStorageClass ↳ KubeToken   Indexable ▪ [otherProps: string]: any
-Properties apiVersion • Optional apiVersion: string
-Defined in  lib/k8s/cluster.ts:23  kind • kind: string</description>
+↳ KubeConfigMap ↳ KubeCRD ↳ KubeCronJob ↳ KubeDaemonSet ↳ KubeDeployment ↳ KubeEndpoint ↳ KubeHPA ↳ KubeIngress ↳ KubeJob ↳ KubeNamespace ↳ KubeNetworkPolicy ↳ KubeNode ↳ KubePersistentVolume ↳ KubePersistentVolumeClaim ↳ KubePod ↳ KubePDB ↳ KubePriorityClasses ↳ KubeReplicaSet ↳ KubeResourceQuota ↳ KubeRole ↳ KubeRoleBinding ↳ KubeSecret ↳ KubeService ↳ KubeServiceAccount ↳ KubeStatefulSet ↳ KubeStorageClass ↳ KubeToken   Indexable ▪ [otherProps: string]: any
+Properties apiVersion • Optional apiVersion: string</description>
     </item>
     
     <item>
@@ -464,12 +574,26 @@ Defined in  lib/k8s/cluster.ts:23  kind • kind: string</description>
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.kubeownerreference/</guid>
       <description> lib/k8s/cluster .KubeOwnerReference
 Properties apiVersion • apiVersion: string
-Defined in  lib/k8s/cluster.ts:45  blockOwnerDeletion • blockOwnerDeletion: boolean
-Defined in  lib/k8s/cluster.ts:46  controller • controller: boolean
-Defined in  lib/k8s/cluster.ts:47  kind • kind: string
-Defined in  lib/k8s/cluster.ts:48  name • name: string
-Defined in  lib/k8s/cluster.ts:49  uid • uid: string
-Defined in  lib/k8s/cluster.ts:50 </description>
+Defined in  lib/k8s/cluster.ts:48  blockOwnerDeletion • blockOwnerDeletion: boolean
+Defined in  lib/k8s/cluster.ts:49  controller • controller: boolean
+Defined in  lib/k8s/cluster.ts:50  kind • kind: string
+Defined in  lib/k8s/cluster.ts:51  name • name: string
+Defined in  lib/k8s/cluster.ts:52  uid • uid: string
+Defined in  lib/k8s/cluster.ts:53 </description>
+    </item>
+    
+    <item>
+      <title>Interface: KubePDB</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_poddisruptionbudget.kubepdb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_poddisruptionbudget.kubepdb/</guid>
+      <description>lib/k8s/podDisruptionBudget .KubePDB
+Hierarchy    KubeObjectInterface ↳ KubePDB
+  Properties apiVersion • Optional apiVersion: string
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
+Type declaration    Name Type     maxUnavailable?</description>
     </item>
     
     <item>
@@ -481,8 +605,8 @@ Defined in  lib/k8s/cluster.ts:50 </description>
       <description>lib/k8s/persistentVolume .KubePersistentVolume
 Hierarchy    KubeObjectInterface ↳ KubePersistentVolume
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     capacity { storage: string }   capacity.</description>
     </item>
@@ -496,8 +620,8 @@ Type declaration    Name Type     capacity { storage: string }   capacity.</desc
       <description>lib/k8s/persistentVolumeClaim .KubePersistentVolumeClaim
 Hierarchy    KubeObjectInterface ↳ KubePersistentVolumeClaim
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     accessModes string[]   resources { limits: object ; requests: { [other: string]: any; storage?</description>
     </item>
@@ -511,9 +635,9 @@ Type declaration    Name Type     accessModes string[]   resources { limits: obj
       <description>lib/k8s/pod .KubePod
 Hierarchy    KubeObjectInterface ↳ KubePod
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
-Type declaration    Name Type     containers KubeContainer []   nodeName string   nodeSelector?</description>
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
+Type declaration    Name Type     containers KubeContainer []   initContainers?</description>
     </item>
     
     <item>
@@ -530,6 +654,21 @@ Defined in  lib/k8s/service.ts:8 </description>
     </item>
     
     <item>
+      <title>Interface: KubePriorityClasses</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_priorityclasses.kubepriorityclasses/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_priorityclasses.kubepriorityclasses/</guid>
+      <description>lib/k8s/priorityClasses .KubePriorityClasses
+Hierarchy    KubeObjectInterface ↳ KubePriorityClasses
+  Properties apiVersion • Optional apiVersion: string
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  description • description: string
+Defined in  lib/k8s/priorityClasses.ts:8  globalDefault • Optional globalDefault: boolean
+Defined in  lib/k8s/priorityClasses.ts:7  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface .</description>
+    </item>
+    
+    <item>
       <title>Interface: KubeReplicaSet</title>
       <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_replicaset.kubereplicaset/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -538,10 +677,24 @@ Defined in  lib/k8s/service.ts:8 </description>
       <description>lib/k8s/replicaSet .KubeReplicaSet
 Hierarchy    KubeObjectInterface ↳ KubeReplicaSet
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     minReadySeconds number   replicas number   selector LabelSelector     Defined in  lib/k8s/replicaSet.</description>
+    </item>
+    
+    <item>
+      <title>Interface: KubeResourceQuota</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_resourcequota.kuberesourcequota/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_resourcequota.kuberesourcequota/</guid>
+      <description>lib/k8s/resourceQuota .KubeResourceQuota
+Hierarchy    KubeObjectInterface ↳ KubeResourceQuota
+  Properties apiVersion • Optional apiVersion: string
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: spec
+Defined in  lib/k8s/resourceQuota.ts:28  status • status: status</description>
     </item>
     
     <item>
@@ -553,8 +706,8 @@ Type declaration    Name Type     minReadySeconds number   replicas number   sel
       <description>lib/k8s/role .KubeRole
 Hierarchy    KubeObjectInterface ↳ KubeRole
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  rules • rules: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  rules • rules: Object
 Type declaration    Name Type     apiGroups string[]   nonResourceURLs string[]   resourceNames string[]   resources string[]   verbs string[]    Defined in  lib/k8s/role.</description>
     </item>
     
@@ -567,8 +720,8 @@ Type declaration    Name Type     apiGroups string[]   nonResourceURLs string[] 
       <description>lib/k8s/roleBinding .KubeRoleBinding
 Hierarchy    KubeObjectInterface ↳ KubeRoleBinding
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  roleRef • roleRef: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  roleRef • roleRef: Object
 Type declaration    Name Type     apiGroup string   kind string   name string    Defined in  lib/k8s/roleBinding.</description>
     </item>
     
@@ -581,8 +734,8 @@ Type declaration    Name Type     apiGroup string   kind string   name string   
       <description>lib/k8s/secret .KubeSecret
 Hierarchy    KubeObjectInterface ↳ KubeSecret
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  data • data: StringDict Defined in  lib/k8s/secret.ts:5  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  type • type: string</description>
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  data • data: StringDict Defined in  lib/k8s/secret.ts:5  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  type • type: string</description>
     </item>
     
     <item>
@@ -594,8 +747,8 @@ Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  me
       <description>lib/k8s/service .KubeService
 Hierarchy    KubeObjectInterface ↳ KubeService
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [otherProps: string]: any
 Type declaration    Name Type     clusterIP string   externalIPs string[]   ports { name: string ; nodePort: number ; port: number ; protocol: string ; targetPort: string | number }[]   type string    Defined in  lib/k8s/service.</description>
     </item>
@@ -609,8 +762,8 @@ Type declaration    Name Type     clusterIP string   externalIPs string[]   port
       <description>lib/k8s/serviceAccount .KubeServiceAccount
 Hierarchy    KubeObjectInterface ↳ KubeServiceAccount
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  secrets • secrets: { apiVersion: string ; fieldPath: string ; kind: string ; name: string ; namespace: string ; uid: string }[]</description>
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  secrets • secrets: { apiVersion: string ; fieldPath: string ; kind: string ; name: string ; namespace: string ; uid: string }[]</description>
     </item>
     
     <item>
@@ -622,8 +775,8 @@ Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  me
       <description>lib/k8s/statefulSet .KubeStatefulSet
 Hierarchy    KubeObjectInterface ↳ KubeStatefulSet
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Index signature ▪ [other: string]: any
 Type declaration    Name Type     selector LabelSelector    updateStrategy { rollingUpdate: { partition: number } ; type: string }   updateStrategy.</description>
     </item>
@@ -637,8 +790,8 @@ Type declaration    Name Type     selector LabelSelector    updateStrategy { rol
       <description>lib/k8s/storageClass .KubeStorageClass
 Hierarchy    KubeObjectInterface ↳ KubeStorageClass
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  provisioner • provisioner: string
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  provisioner • provisioner: string
 Defined in  lib/k8s/storageClass.ts:5  reclaimPolicy • reclaimPolicy: string</description>
     </item>
     
@@ -651,8 +804,8 @@ Defined in  lib/k8s/storageClass.ts:5  reclaimPolicy • reclaimPolicy: string</
       <description>lib/k8s/token .KubeToken
 Hierarchy    KubeObjectInterface ↳ KubeToken
   Properties apiVersion • Optional apiVersion: string
-Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:23  kind • kind: string
-Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:22  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:24  spec • spec: Object
+Inherited from  KubeObjectInterface . apiVersion Defined in  lib/k8s/cluster.ts:24  kind • kind: string
+Inherited from  KubeObjectInterface . kind Defined in  lib/k8s/cluster.ts:23  metadata • metadata: KubeMetadata Inherited from  KubeObjectInterface . metadata Defined in  lib/k8s/cluster.ts:25  spec • spec: Object
 Type declaration    Name Type     audiences string[]   expirationSeconds number    Defined in  lib/k8s/token.</description>
     </item>
     
@@ -663,10 +816,41 @@ Type declaration    Name Type     audiences string[]   expirationSeconds number 
       
       <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_cluster.labelselector/</guid>
       <description> lib/k8s/cluster .LabelSelector
-Properties matchExpressions • Optional matchExpressions: Object
-Type declaration    Name Type     key string   operator string   values string[]    Defined in  lib/k8s/cluster.ts:495  matchLabels • Optional matchLabels: Object
+Properties matchExpressions • Optional matchExpressions: { key: string ; operator: string ; values: string[] }[]
+Defined in  lib/k8s/cluster.ts:574  matchLabels • Optional matchLabels: Object
 Index signature ▪ [key: string]: string
-Defined in  lib/k8s/cluster.ts:500 </description>
+Defined in  lib/k8s/cluster.ts:579 </description>
+    </item>
+    
+    <item>
+      <title>Interface: LogOptions</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_pod.logoptions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_pod.logoptions/</guid>
+      <description>lib/k8s/pod .LogOptions
+Properties follow • Optional follow: boolean
+Whether to follow the log stream
+Defined in  lib/k8s/pod.ts:47  showPrevious • Optional showPrevious: boolean
+Whether to show the logs from previous runs of the container (only for restarted containers)
+Defined in  lib/k8s/pod.ts:43  showTimestamps • Optional showTimestamps: boolean
+Whether to show the timestamps in the logs
+Defined in  lib/k8s/pod.ts:45  tailLines • Optional tailLines: number
+The number of lines to display from the end side of the log</description>
+    </item>
+    
+    <item>
+      <title>Interface: QueryParameters</title>
+      <link>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_apiproxy.queryparameters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kinvolk.github.io/headlamp/docs/latest/development/api/interfaces/lib_k8s_apiproxy.queryparameters/</guid>
+      <description> lib/k8s/apiProxy .QueryParameters
+Hierarchy   QueryParameters
+↳ ApiListOptions   Indexable ▪ [prop: string]: any
+Properties fieldSelector • Optional fieldSelector: string
+Defined in  lib/k8s/apiProxy.ts:48  labelSelector • Optional labelSelector: string
+Defined in  lib/k8s/apiProxy.ts:47 </description>
     </item>
     
     <item>
@@ -690,11 +874,11 @@ Defined in  lib/k8s/apiProxy.ts:31 </description>
       <description>lib/router .Route
 Properties exact • Optional exact: boolean
 When true, will only match if the path matches the location.pathname exactly.
-Defined in  lib/router.tsx:61  hideAppBar • Optional hideAppBar: boolean
+Defined in  lib/router.tsx:72  hideAppBar • Optional hideAppBar: boolean
 Hide the appbar at the top.
-Defined in  lib/router.tsx:80  name • Optional name: string
+Defined in  lib/router.tsx:91  name • Optional name: string
 Human readable name. Capitalized and short.
-Defined in  lib/router.tsx:63  noAuthRequired • Optional noAuthRequired: boolean
+Defined in  lib/router.tsx:74  noAuthRequired • Optional noAuthRequired: boolean
 This route does not require Authentication.
 Defined in  lib/router.</description>
     </item>
@@ -708,7 +892,7 @@ Defined in  lib/router.</description>
       <description> lib/router .RouteURLProps
 Indexable ▪ [prop: string]: any
 Properties cluster • Optional cluster: string
-Defined in  lib/router.tsx:492 </description>
+Defined in  lib/router.tsx:581 </description>
     </item>
     
     <item>
@@ -751,13 +935,13 @@ Defined in  components/Sidebar/SidebarItem.tsx:81  parent • Optional parent: n
       <description> lib/k8s/apiProxy .StreamArgs
 Hierarchy   StreamArgs
 ↳ ExecOptions   Properties additionalProtocols • Optional additionalProtocols: string[]
-Defined in  lib/k8s/apiProxy.ts:615  isJson • Optional isJson: boolean
-Defined in  lib/k8s/apiProxy.ts:614  reconnectOnFailure • Optional reconnectOnFailure: boolean
-Defined in  lib/k8s/apiProxy.ts:617 Methods connectCb ▸ Optional connectCb(): void
+Defined in  lib/k8s/apiProxy.ts:658  isJson • Optional isJson: boolean
+Defined in  lib/k8s/apiProxy.ts:657  reconnectOnFailure • Optional reconnectOnFailure: boolean
+Defined in  lib/k8s/apiProxy.ts:660 Methods connectCb ▸ Optional connectCb(): void
 Returns void
-Defined in  lib/k8s/apiProxy.ts:616  failCb ▸ Optional failCb(): void
+Defined in  lib/k8s/apiProxy.ts:659  failCb ▸ Optional failCb(): void
 Returns void
-Defined in  lib/k8s/apiProxy.ts:618 </description>
+Defined in  lib/k8s/apiProxy.ts:661 </description>
     </item>
     
     <item>
