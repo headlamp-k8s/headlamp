@@ -88,7 +88,6 @@ export async function initializePlugins() {
       const plugin = window.plugins[pluginName];
       try {
         // @todo: what should happen if this fails?
-        // @todo: The return code is not checked? What is it for?
         plugin.initialize(new Registry());
       } catch (e) {
         console.error(`Plugin initialize() error in ${pluginName}:`, e);

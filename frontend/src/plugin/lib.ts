@@ -42,9 +42,11 @@ export abstract class Plugin {
   /**
    * initialize is called for each plugin with a Registry which gives the plugin methods for doing things.
    *
+   * @returns The return code is not used, but used to be required.
+   *
    * @see Registry
    */
-  abstract initialize(register: Registry): boolean;
+  abstract initialize(register: Registry): boolean | void;
 }
 
 declare global {
