@@ -17,11 +17,6 @@ interface PortForwardProps {
   isPodRunning?: boolean;
 }
 
-const PODS_BACKEND_PORTFORWARD_KEY = 'pods';
-const SERVICE_BACKEND_PORTFORWARD_KEY = 'services';
-const PORTFORWARD_STORAGE_KEY_FOR_PODS = 'portforward-pods';
-const PORTFORWARD_STORAGE_KEY_FOR_SERVICES = 'portforward-services';
-
 export interface PortForwardState {
   id: string;
   namespace: string;
@@ -59,20 +54,6 @@ export default function PortForward(props: PortForwardProps) {
         setLoading(false);
         setPortForward(data);
         setIsCurrentPodOrServicePortForwarding(true);
-        const portForwards = localStorage.getItem(
-          isPod ? PORTFORWARD_STORAGE_KEY_FOR_PODS : PORTFORWARD_STORAGE_KEY_FOR_SERVICES
-        );
-        if (!portForwards) {
-          const portForwardsList = [];
-          portForwardsList.push(JSON.stringify(data));
-          return;
-        }
-        const parsedPortForwards = JSON.parse(portForwards);
-        parsedPortForwards.push(data);
-        localStorage.setItem(
-          isPod ? PORTFORWARD_STORAGE_KEY_FOR_PODS : PORTFORWARD_STORAGE_KEY_FOR_SERVICES,
-          JSON.stringify(parsedPortForwards)
-        );
       })
       .catch(() => {
         setPortForward(null);
@@ -83,27 +64,9 @@ export default function PortForward(props: PortForwardProps) {
     if (!portForward || !cluster) {
       return;
     }
-    deletePortForward(
-      cluster,
-      portForward.id,
-      isPod ? PODS_BACKEND_PORTFORWARD_KEY : SERVICE_BACKEND_PORTFORWARD_KEY
-    )
+    deletePortForward(cluster, portForward.id)
       .then(() => {
         setPortForward(null);
-        const id = portForward.id;
-        const portForwards = localStorage.getItem(
-          isPod ? PORTFORWARD_STORAGE_KEY_FOR_PODS : PORTFORWARD_STORAGE_KEY_FOR_SERVICES
-        );
-        if (!portForwards) {
-          return;
-        }
-        const parsedPortForwards = JSON.parse(portForwards);
-        const filteredPortForwards = parsedPortForwards.filter((item: any) => item.id !== id);
-
-        localStorage.setItem(
-          isPod ? PORTFORWARD_STORAGE_KEY_FOR_PODS : PORTFORWARD_STORAGE_KEY_FOR_SERVICES,
-          JSON.stringify(filteredPortForwards)
-        );
       })
       .catch(() => {
         setPortForward(null);
@@ -114,10 +77,7 @@ export default function PortForward(props: PortForwardProps) {
     if (!cluster) {
       return;
     }
-    listPortForward(
-      cluster,
-      isPod ? PODS_BACKEND_PORTFORWARD_KEY : SERVICE_BACKEND_PORTFORWARD_KEY
-    ).then(result => {
+    listPortForward(cluster).then(result => {
       const portforwards = result;
       if (!portforwards || Object.entries(portforwards).length === 0) {
         return;

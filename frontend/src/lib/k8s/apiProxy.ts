@@ -891,13 +891,12 @@ export function startPortForward(
     });
   });
 }
-export function deletePortForward(cluster: string, id: string, podOrService: string = 'pods') {
+export function deletePortForward(cluster: string, id: string) {
   return fetch(`${helpers.getAppUrl()}portforward`, {
     method: 'DELETE',
     body: JSON.stringify({
       cluster,
       id,
-      podOrService,
     }),
   }).then(response =>
     response.text().then(data => {
@@ -909,8 +908,8 @@ export function deletePortForward(cluster: string, id: string, podOrService: str
   );
 }
 
-export function listPortForward(cluster: string, podOrService: string = 'pods') {
-  return fetch(
-    `${helpers.getAppUrl()}portforward/list?cluster=${cluster}&podOrService=${podOrService}`
-  ).then(response => response.json());
+export function listPortForward(cluster: string) {
+  return fetch(`${helpers.getAppUrl()}portforward/list?cluster=${cluster}`).then(response =>
+    response.json()
+  );
 }
