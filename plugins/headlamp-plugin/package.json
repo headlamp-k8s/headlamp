@@ -5,7 +5,8 @@
   "bin": "bin/headlamp-plugin.js",
   "scripts": {
     "prepack": "(node -e \"if (! require('fs').existsSync('./lib/components')) {process.exit(1)} \" || (echo 'lib dir is empty. Remember to run `npm run build` before packing' && exit 1))",
-    "build": "cd ../../frontend && tsc --build ./tsconfig.plugins.json && cd ../plugins/headlamp-plugin && npx shx cp -r ../../frontend/src/assets lib/ && npx shx cp -r ../../frontend/src/resources lib/ && npx shx cp -r ../../frontend/src/i18n/locales lib/i18n"
+    "build": "cd ../../frontend && tsc --build ./tsconfig.plugins.json && cd ../plugins/headlamp-plugin && npx shx cp -r ../../frontend/src/assets lib/ && npx shx cp -r ../../frontend/src/resources lib/ && npx shx cp -r ../../frontend/src/i18n/locales lib/i18n",
+    "update-dependencies": "node bin/update-dependencies.js"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
@@ -18,6 +19,7 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
+    "@iconify/icons-mdi": "^1.2.9",
     "@iconify/react": "^1.1.4",
     "@kinvolk/eslint-config": "^0.5.0",
     "@material-ui/core": "^4.12.3",
@@ -52,7 +54,6 @@
     "@types/webpack-env": "^1.16.2",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.33.0",
-    "ansi-to-react": "^6.1.6",
     "babel-loader": "^8.2.5",
     "base64-arraybuffer": "^1.0.2",
     "buffer": "^6.0.3",
@@ -82,6 +83,7 @@
     "i18next-parser": "^4.7.0",
     "if-env": "^1.0.4",
     "imports-loader": "^1.1.0",
+    "jest-canvas-mock": "^2.4.0",
     "js-base64": "^3.7.2",
     "js-yaml": "^4.1.0",
     "jsonpath-plus": "^6.0.1",
@@ -128,6 +130,7 @@
     "webpack-cli": "^4.9.0",
     "xterm": "^4.14.1",
     "xterm-addon-fit": "^0.5.0",
+    "xterm-addon-search": "^0.9.0",
     "yargs": "^16.2.0"
   },
   "types": "./lib/additional.d.ts",

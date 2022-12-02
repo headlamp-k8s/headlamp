@@ -69,3 +69,11 @@ you can call the script directly.
 cd plugins/headlamp-plugin
 node ./bin/headlamp-plugin.js create myplugin --link
 ```
+
+### Keep the dependencies in sync with the frontend/
+
+Run `npm run update-dependencies` so the packages are kept up to date with there.
+
+A lot of the packages are shared between the two, but some are not. See
+bin/update-dependencies.js for lists of dependencies which are shared/not-shared.
+You may need to update these lists when adding/removing packages.
