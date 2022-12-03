@@ -61,7 +61,7 @@ exports[`Storyshots PriorityClasses/PriorityClassesListView Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
               >
                 Name
@@ -82,19 +82,19 @@ exports[`Storyshots PriorityClasses/PriorityClassesListView Items 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                 scope="col"
               >
                 Value
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                 scope="col"
               >
                 Global Default
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
                 style="text-align: right;"
               >

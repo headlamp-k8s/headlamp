@@ -61,7 +61,7 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
               >
                 Name
@@ -82,7 +82,7 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
               >
                 Namespace
@@ -103,7 +103,7 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
               >
                 Min Available
@@ -124,19 +124,19 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                 scope="col"
               >
                 Max Unavailable
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                 scope="col"
               >
                 Allowed Disruptions
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
                 style="text-align: right;"
               >

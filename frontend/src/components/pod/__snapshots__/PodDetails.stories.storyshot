@@ -338,31 +338,31 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Condition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Status
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Transition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Update
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Reason
@@ -1083,31 +1083,31 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Condition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Status
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Transition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Update
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Reason
@@ -1826,31 +1826,31 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Condition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Status
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Transition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Update
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Reason
@@ -2669,31 +2669,31 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Condition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Status
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Transition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Update
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Reason
@@ -3388,31 +3388,31 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Condition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Status
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Transition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Update
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Reason
@@ -4144,31 +4144,31 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Condition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Status
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Transition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Last Update
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                       scope="col"
                     >
                       Reason

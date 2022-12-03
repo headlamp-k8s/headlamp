@@ -217,19 +217,19 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
                             class="MuiTableRow-root MuiTableRow-head"
                           >
                             <th
-                              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                               scope="col"
                             >
                               Resource
                             </th>
                             <th
-                              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                               scope="col"
                             >
                               Used
                             </th>
                             <th
-                              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+                              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
                               scope="col"
                             >
                               Hard

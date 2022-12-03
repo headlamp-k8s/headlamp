@@ -12,25 +12,25 @@ exports[`Storyshots SimpleTable Datum 1`] = `
         class="MuiTableRow-root MuiTableRow-head"
       >
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Status
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Age
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Long Field Name
@@ -129,31 +129,31 @@ exports[`Storyshots SimpleTable Getter 1`] = `
         class="MuiTableRow-root MuiTableRow-head"
       >
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Status
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Age
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Long Field Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Number
@@ -446,25 +446,25 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
         class="MuiTableRow-root MuiTableRow-head"
       >
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Namespace
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           UID
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Labels
@@ -718,25 +718,25 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
         class="MuiTableRow-root MuiTableRow-head"
       >
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Namespace
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           UID
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Labels
@@ -966,25 +966,25 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
         class="MuiTableRow-root MuiTableRow-head"
       >
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Namespace
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           UID
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Labels
@@ -1226,25 +1226,25 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
         class="MuiTableRow-root MuiTableRow-head"
       >
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Namespace
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           UID
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Labels
@@ -1496,19 +1496,19 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
         class="MuiTableRow-root MuiTableRow-head"
       >
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Namespace
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Number
@@ -1571,19 +1571,19 @@ exports[`Storyshots SimpleTable Reflect In URL 1`] = `
           class="MuiTableRow-root MuiTableRow-head"
         >
           <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
             scope="col"
           >
             Name
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
             scope="col"
           >
             Namespace
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
             scope="col"
           >
             Number
@@ -1723,19 +1723,19 @@ exports[`Storyshots SimpleTable Reflect In URL With Prefix 1`] = `
           class="MuiTableRow-root MuiTableRow-head"
         >
           <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
             scope="col"
           >
             Name
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
             scope="col"
           >
             Namespace
           </th>
           <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
             scope="col"
           >
             Number
@@ -2027,25 +2027,25 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
         class="MuiTableRow-root MuiTableRow-head"
       >
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Name
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Namespace
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           UID
         </th>
         <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell "
+          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
           scope="col"
         >
           Labels
