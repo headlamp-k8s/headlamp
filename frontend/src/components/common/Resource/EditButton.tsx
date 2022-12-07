@@ -2,8 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { KubeObject } from '../../../lib/k8s/cluster';
-import { KubeServiceAccount } from '../../../lib/k8s/serviceAccount';
+import { KubeObject, KubeObjectInterface } from '../../../lib/k8s/cluster';
 import { CallbackActionOptions, clusterAction } from '../../../redux/actions/actions';
 import ActionButton from '../ActionButton';
 import EditorDialog from './EditorDialog';
@@ -33,7 +32,7 @@ export default function EditButton(props: EditButtonProps) {
     }
   }
 
-  async function updateFunc(newItem: KubeServiceAccount) {
+  async function updateFunc(newItem: KubeObjectInterface) {
     try {
       await item.update(newItem);
     } catch (err) {
@@ -45,7 +44,8 @@ export default function EditButton(props: EditButtonProps) {
 
   const applyFunc = React.useCallback(updateFunc, [item]);
 
-  function handleSave(newItemDef: KubeServiceAccount) {
+  function handleSave(items: KubeObjectInterface[]) {
+    const newItemDef = Array.isArray(items) ? items[0] : items;
     const cancelUrl = location.pathname;
     const itemName = item.metadata.name;
 
