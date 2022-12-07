@@ -36,8 +36,6 @@ class AppMenuDemo extends Plugin {
       }
       return menus;
     });
-
-    return true;
   }
 }
 
