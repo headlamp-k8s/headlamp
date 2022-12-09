@@ -8,7 +8,17 @@ import SectionFilterHeader from '../common/SectionFilterHeader';
 
 export function getSchedule(cronJob: CronJob, locale: string) {
   const { schedule } = cronJob.spec;
-  const described = schedule.startsWith('@') ? '' : cronstrue.toString(schedule, { locale });
+  let described = '';
+  if (!schedule.startsWith('@')) {
+    try {
+      described = cronstrue.toString(schedule, { locale });
+    } catch (e) {
+      console.debug(
+        `Could not describe cron "${schedule}" for cronJob ${cronJob.metadata.namespace}/${cronJob.metadata.name}:`,
+        e
+      );
+    }
+  }
   return <HoverInfoLabel label={schedule} hoverInfo={described} />;
 }
 
