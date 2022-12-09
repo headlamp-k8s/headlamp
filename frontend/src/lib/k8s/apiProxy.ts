@@ -866,8 +866,9 @@ export function startPortForward(
   cluster: string,
   namespace: string,
   podname: string,
-  containerPort: number,
-  service: string
+  containerPort: number | string,
+  service: string,
+  serviceNamespace: string
 ) {
   return fetch(`${helpers.getAppUrl()}portforward`, {
     method: 'POST',
@@ -881,6 +882,7 @@ export function startPortForward(
       pod: podname,
       service,
       targetPort: containerPort.toString(),
+      serviceNamespace,
     }),
   }).then((response: Response) => {
     return response.json().then(data => {

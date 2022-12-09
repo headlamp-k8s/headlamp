@@ -6,12 +6,16 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
 import { deletePortForward, listPortForward, startPortForward } from '../../../lib/k8s/apiProxy';
+import { KubeContainer } from '../../../lib/k8s/cluster';
+import Pod from '../../../lib/k8s/pod';
+import Service from '../../../lib/k8s/service';
 import { getCluster } from '../../../lib/util';
 import ActionButton from '../ActionButton';
 
 interface PortForwardProps {
   isPod: boolean;
-  containerPort: number;
+  containerPort: number | string;
+  service?: Service;
   namespace?: string;
   name?: string;
   isPodRunning?: boolean;
@@ -24,36 +28,105 @@ export interface PortForwardState {
   port: string;
 }
 
+function getPortNumberFromPortName(containers: KubeContainer[], namedPort: string) {
+  let portNumber = 0;
+  containers.every((container: KubeContainer) => {
+    container.ports?.find((port: any) => {
+      if (port.name === namedPort) {
+        portNumber = port.containerPort;
+        return false;
+      }
+    });
+    return true;
+  });
+  return portNumber;
+}
+
+function getPodsSelectorFilter(service?: Service) {
+  if (!service) {
+    return '';
+  }
+  const selector = service?.jsonData.spec?.selector;
+  if (selector) {
+    return Object.keys(service?.jsonData.spec?.selector)
+      .map(item => `${item}=${selector[item]}`)
+      .join(',');
+  }
+  return '';
+}
+
 export default function PortForward(props: PortForwardProps) {
-  const { isPod, containerPort, namespace, name, isPodRunning } = props;
-  const [isCurrentPodOrServicePortForwarding, setIsCurrentPodOrServicePortForwarding] =
-    React.useState(false);
+  const { isPod, containerPort, namespace, name, isPodRunning, service } = props;
   const [error, setError] = React.useState(null);
   const [portForward, setPortForward] = React.useState<PortForwardState | null>(null);
   const [loading, setLoading] = React.useState(false);
   const cluster = getCluster();
   const { t } = useTranslation('frequent');
+  const [pods, podsFetchError] = Pod.useList({ labelSelector: getPodsSelectorFilter(service) });
+
+  React.useEffect(() => {
+    if (!cluster) {
+      return;
+    }
+    listPortForward(cluster).then(result => {
+      const portforwards = result;
+      if (!portforwards || Object.entries(portforwards).length === 0) {
+        return;
+      }
+      for (const key in portforwards) {
+        const item = portforwards[key];
+        if (
+          (item.namespace === namespace || item.serviceNamespace === namespace) &&
+          (item.pod === name || item.service === name) &&
+          item.cluster === cluster
+        ) {
+          setPortForward(portforwards[key]);
+          return;
+        }
+      }
+    });
+  }, []);
 
   if (!helpers.isElectron()) {
     return null;
   }
 
+  if (!isPod && podsFetchError) {
+    return null;
+  }
+
+  if (!isPod && (!pods || pods.length === 0)) {
+    return null;
+  }
+
   function handlePortForward() {
-    if (!namespace || !containerPort || !cluster) {
+    if (!namespace || !cluster) {
       return;
     }
 
     setError(null);
 
     const massagedResourceName = name || '';
+    const massagedResourceNamespace = isPod ? namespace : pods[0].metadata.namespace;
+    const serviceNamespace = namespace;
     const serviceName = !isPod ? massagedResourceName : '';
-    const podName = isPod ? massagedResourceName : '';
+    const podName = isPod ? massagedResourceName : pods[0].metadata.name;
+    const massagedContainerPort =
+      typeof containerPort === 'string' && isNaN(parseInt(containerPort))
+        ? getPortNumberFromPortName(pods[0].spec.containers, containerPort)
+        : containerPort;
     setLoading(true);
-    startPortForward(cluster, namespace, podName, containerPort, serviceName)
+    startPortForward(
+      cluster,
+      massagedResourceNamespace,
+      podName,
+      massagedContainerPort,
+      serviceName,
+      serviceNamespace
+    )
       .then((data: any) => {
         setLoading(false);
         setPortForward(data);
-        setIsCurrentPodOrServicePortForwarding(true);
       })
       .catch(() => {
         setPortForward(null);
@@ -72,30 +145,6 @@ export default function PortForward(props: PortForwardProps) {
         setPortForward(null);
       });
   }
-
-  React.useEffect(() => {
-    if (!cluster) {
-      return;
-    }
-    listPortForward(cluster).then(result => {
-      const portforwards = result;
-      if (!portforwards || Object.entries(portforwards).length === 0) {
-        return;
-      }
-      for (const key in portforwards) {
-        const item = portforwards[key];
-        if (
-          item.namespace === namespace &&
-          (item.pod === name || item.service === name) &&
-          item.cluster === cluster
-        ) {
-          setIsCurrentPodOrServicePortForwarding(true);
-          setPortForward(portforwards[key]);
-          return;
-        }
-      }
-    });
-  }, []);
 
   if (isPod && !isPodRunning) {
     return null;
@@ -139,8 +188,6 @@ export default function PortForward(props: PortForwardProps) {
       )}
     </Box>
   ) : (
-    <>
-      {isCurrentPodOrServicePortForwarding && (
         <Box>
           <MuiLink href={`${forwardBaseURL}:${portForward.port}`} target="_blank" color="primary">
             {`${forwardBaseURL}:${portForward.port}`}
@@ -157,7 +204,5 @@ export default function PortForward(props: PortForwardProps) {
             width={'25'}
           />
         </Box>
-      )}
-    </>
   );
 }

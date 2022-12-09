@@ -9,6 +9,7 @@ import { Link } from '../common';
 import Empty from '../common/EmptyContent';
 import { ValueLabel } from '../common/Label';
 import { DetailsGrid, MetadataDictGrid } from '../common/Resource';
+import PortForward from '../common/Resource/PortForward';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
@@ -70,6 +71,13 @@ export default function ServiceDetails() {
                         <ValueLabel>{port}</ValueLabel>
                         <InlineIcon icon="mdi:chevron-right" />
                         <ValueLabel>{targetPort}</ValueLabel>
+                        <PortForward
+                          containerPort={targetPort}
+                          service={item}
+                          isPod={false}
+                          name={item.metadata.name}
+                          namespace={item.metadata.namespace}
+                        />
                       </React.Fragment>
                     ),
                   },
