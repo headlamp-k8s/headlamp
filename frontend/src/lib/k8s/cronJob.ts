@@ -5,9 +5,9 @@ export interface KubeCronJob extends KubeObjectInterface {
   spec: {
     suspend: boolean;
     schedule: string;
-    startingDeadlineSeconds: string;
-    successfulJobsHistoryLimit: string;
-    failedJobsHistoryLimit: string;
+    startingDeadlineSeconds?: number;
+    successfulJobsHistoryLimit: number;
+    failedJobsHistoryLimit: number;
     concurrencyPolicy: string;
     [otherProps: string]: any;
   };
