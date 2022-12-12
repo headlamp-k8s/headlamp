@@ -58,6 +58,7 @@ interface TerminalProps extends DialogProps {
 interface XTerminalConnected {
   xterm: XTerminal;
   connected: boolean;
+  reconnectOnEnter: boolean;
 }
 
 type execReturn = ReturnType<Pod['exec']>;
@@ -109,6 +110,18 @@ export default function Terminal(props: TerminalProps) {
           return false;
         }
       }
+
+      if (arg.type === 'keydown' && arg.code === 'Enter') {
+        if (xtermRef.current?.reconnectOnEnter) {
+          setShells(shells => ({
+            ...shells,
+            currentIdx: 0,
+          }));
+          xtermRef.current!.reconnectOnEnter = false;
+          return false;
+        }
+      }
+
       return true;
     });
 
@@ -210,6 +223,11 @@ export default function Terminal(props: TerminalProps) {
       } else {
         xterm.write(t('Failed to connect…') + '\r\n');
       }
+
+      xterm.write('\r\n' + t('Press the enter key to reconnect.') + '\r\n');
+      if (xtermRef.current) {
+        xtermRef.current.reconnectOnEnter = true;
+      }
     } else {
       xterm.write(t('Failed to run "{{ command }}"', { command }) + '\r\n');
       tryNextShell();
@@ -249,6 +267,7 @@ export default function Terminal(props: TerminalProps) {
           windowsMode: isWindows,
         }),
         connected: false,
+        reconnectOnEnter: false,
       };
 
       fitAddonRef.current = new FitAddon();
