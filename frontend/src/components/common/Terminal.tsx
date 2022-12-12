@@ -172,8 +172,11 @@ export default function Terminal(props: TerminalProps) {
       (async function () {
         send(4, `{"Width":${xterm.cols},"Height":${xterm.rows}}`);
       })();
-      xtermc.connected = true;
-      console.debug('Terminal is now connected');
+      // On server error, don't set it as connected
+      if (channel !== 3) {
+        xtermc.connected = true;
+        console.debug('Terminal is now connected');
+      }
     }
 
     if (isSuccessfulExitError(channel, text)) {
