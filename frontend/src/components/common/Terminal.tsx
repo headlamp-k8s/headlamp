@@ -333,7 +333,7 @@ export default function Terminal(props: TerminalProps) {
     } else if (os === 'windows') {
       return ['powershell.exe', 'cmd.exe'];
     }
-    return ['bash', 'sh', 'powershell.exe', 'cmd.exe'];
+    return ['bash', '/bin/bash', 'sh', '/bin/sh', 'powershell.exe', 'cmd.exe'];
   }
 
   function handleContainerChange(event: any) {
