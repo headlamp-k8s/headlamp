@@ -18,6 +18,14 @@ import { Dialog } from './Dialog';
 const decoder = new TextDecoder('utf-8');
 const encoder = new TextEncoder();
 
+enum Channel {
+  StdIn = 0,
+  StdOut,
+  StdErr,
+  ServerError,
+  Resize,
+}
+
 const useStyle = makeStyles(theme => ({
   dialogContent: {
     height: '100%',
@@ -143,17 +151,11 @@ export default function Terminal(props: TerminalProps) {
     socket.send(buffer);
   }
 
-  // Channels:
-  // 0: stdin
-  // 1: stdout
-  // 2: stderr
-  // 3: server error
-  // 4: resize channel
   function onData(xtermc: XTerminalConnected, bytes: ArrayBuffer) {
     const xterm = xtermc.xterm;
     // Only show data from stdout, stderr and server error channel.
-    const channel = new Int8Array(bytes.slice(0, 1))[0];
-    if (channel < 1 || channel > 3) {
+    const channel: Channel = new Int8Array(bytes.slice(0, 1))[0];
+    if (channel < Channel.StdOut || channel > Channel.ServerError) {
       return;
     }
 
@@ -173,7 +175,7 @@ export default function Terminal(props: TerminalProps) {
         send(4, `{"Width":${xterm.cols},"Height":${xterm.rows}}`);
       })();
       // On server error, don't set it as connected
-      if (channel !== 3) {
+      if (channel !== Channel.ServerError) {
         xtermc.connected = true;
         console.debug('Terminal is now connected');
       }
