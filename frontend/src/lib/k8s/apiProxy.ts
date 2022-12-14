@@ -328,7 +328,7 @@ function singleApiFactory(group: string, version: string, resource: string) {
     put: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
       put(`${url}/${body.metadata.name}` + asQuery(queryParams), body),
     patch: (body: OpPatch[], name: string, queryParams?: QueryParameters) =>
-      patch(url + asQuery({ ...queryParams, ...{ pretty: 'true' } }), body),
+      patch(`${url}/${name}` + asQuery({ ...queryParams, ...{ pretty: 'true' } }), body),
     delete: (name: string, queryParams?: QueryParameters) =>
       remove(`${url}/${name}` + asQuery(queryParams)),
     isNamespaced: false,
