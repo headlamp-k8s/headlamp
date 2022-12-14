@@ -19,6 +19,7 @@ import { LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import { ConditionsSection, ContainersSection, DetailsGrid } from '../common/Resource';
+import AuthVisible from '../common/Resource/AuthVisible';
 import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
 
@@ -295,16 +296,23 @@ export default function PodDetails(props: PodDetailsProps) {
       namespace={namespace}
       actions={item =>
         item && [
-          <Tooltip title={t('Show Logs') as string}>
-            <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
-              <Icon icon="mdi:file-document-box-outline" />
-            </IconButton>
-          </Tooltip>,
-          <Tooltip title={t('Terminal / Exec') as string}>
-            <IconButton aria-label={t('terminal') as string} onClick={() => setShowTerminal(true)}>
-              <Icon icon="mdi:console" />
-            </IconButton>
-          </Tooltip>,
+          <AuthVisible item={item} authVerb="get" subresource="log">
+            <Tooltip title={t('Show Logs') as string}>
+              <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
+                <Icon icon="mdi:file-document-box-outline" />
+              </IconButton>
+            </Tooltip>
+          </AuthVisible>,
+          <AuthVisible item={item} authVerb="get" subresource="exec">
+            <Tooltip title={t('Terminal / Exec') as string}>
+              <IconButton
+                aria-label={t('terminal') as string}
+                onClick={() => setShowTerminal(true)}
+              >
+                <Icon icon="mdi:console" />
+              </IconButton>
+            </Tooltip>
+          </AuthVisible>,
         ]
       }
       extraInfo={item =>
