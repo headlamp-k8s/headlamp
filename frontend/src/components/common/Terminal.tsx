@@ -18,6 +18,14 @@ import { Dialog } from './Dialog';
 const decoder = new TextDecoder('utf-8');
 const encoder = new TextEncoder();
 
+enum Channel {
+  StdIn = 0,
+  StdOut,
+  StdErr,
+  ServerError,
+  Resize,
+}
+
 const useStyle = makeStyles(theme => ({
   dialogContent: {
     height: '100%',
@@ -58,6 +66,7 @@ interface TerminalProps extends DialogProps {
 interface XTerminalConnected {
   xterm: XTerminal;
   connected: boolean;
+  reconnectOnEnter: boolean;
 }
 
 type execReturn = ReturnType<Pod['exec']>;
@@ -109,6 +118,18 @@ export default function Terminal(props: TerminalProps) {
           return false;
         }
       }
+
+      if (arg.type === 'keydown' && arg.code === 'Enter') {
+        if (xtermRef.current?.reconnectOnEnter) {
+          setShells(shells => ({
+            ...shells,
+            currentIdx: 0,
+          }));
+          xtermRef.current!.reconnectOnEnter = false;
+          return false;
+        }
+      }
+
       return true;
     });
 
@@ -130,17 +151,11 @@ export default function Terminal(props: TerminalProps) {
     socket.send(buffer);
   }
 
-  // Channels:
-  // 0: stdin
-  // 1: stdout
-  // 2: stderr
-  // 3: server error
-  // 4: resize channel
   function onData(xtermc: XTerminalConnected, bytes: ArrayBuffer) {
     const xterm = xtermc.xterm;
     // Only show data from stdout, stderr and server error channel.
-    const channel = new Int8Array(bytes.slice(0, 1))[0];
-    if (channel < 1 || channel > 3) {
+    const channel: Channel = new Int8Array(bytes.slice(0, 1))[0];
+    if (channel < Channel.StdOut || channel > Channel.ServerError) {
       return;
     }
 
@@ -159,8 +174,11 @@ export default function Terminal(props: TerminalProps) {
       (async function () {
         send(4, `{"Width":${xterm.cols},"Height":${xterm.rows}}`);
       })();
-      xtermc.connected = true;
-      console.debug('Terminal is now connected');
+      // On server error, don't set it as connected
+      if (channel !== Channel.ServerError) {
+        xtermc.connected = true;
+        console.debug('Terminal is now connected');
+      }
     }
 
     if (isSuccessfulExitError(channel, text)) {
@@ -204,11 +222,16 @@ export default function Terminal(props: TerminalProps) {
     const xterm = xtermc.xterm;
     const command = getCurrentShellCommand();
     if (isLastShell()) {
-      xterm.clear();
       if (xtermc.connected) {
-        xterm.write(t('Failed to run command "{{command}}"…', { command }) + '\r\n');
+        xterm.write(t('Failed to run "{{command}}"…', { command }) + '\r\n');
       } else {
+        xterm.clear();
         xterm.write(t('Failed to connect…') + '\r\n');
+      }
+
+      xterm.write('\r\n' + t('Press the enter key to reconnect.') + '\r\n');
+      if (xtermRef.current) {
+        xtermRef.current.reconnectOnEnter = true;
       }
     } else {
       xterm.write(t('Failed to run "{{ command }}"', { command }) + '\r\n');
@@ -249,6 +272,7 @@ export default function Terminal(props: TerminalProps) {
           windowsMode: isWindows,
         }),
         connected: false,
+        reconnectOnEnter: false,
       };
 
       fitAddonRef.current = new FitAddon();
@@ -311,7 +335,7 @@ export default function Terminal(props: TerminalProps) {
     } else if (os === 'windows') {
       return ['powershell.exe', 'cmd.exe'];
     }
-    return ['bash', 'sh', 'powershell.exe', 'cmd.exe'];
+    return ['bash', '/bin/bash', 'sh', '/bin/sh', 'powershell.exe', 'cmd.exe'];
   }
 
   function handleContainerChange(event: any) {
