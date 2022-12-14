@@ -120,10 +120,10 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                   class="MuiGrid-root MuiGrid-item"
                 >
                   <button
-                    aria-label="Edit"
-                    class="MuiButtonBase-root MuiIconButton-root"
+                    aria-label="View YAML"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
                     tabindex="0"
-                    title="Edit"
+                    title="View YAML"
                     type="button"
                   >
                     <span

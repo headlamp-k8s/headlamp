@@ -6,6 +6,7 @@ import { KubeObject } from '../../../lib/k8s/cluster';
 import { CallbackActionOptions, clusterAction } from '../../../redux/actions/actions';
 import ActionButton from '../ActionButton';
 import { ConfirmDialog } from '../Dialog';
+import AuthVisible from './AuthVisible';
 
 interface DeleteButtonProps {
   item?: KubeObject;
@@ -16,7 +17,6 @@ export default function DeleteButton(props: DeleteButtonProps) {
   const dispatch = useDispatch();
   const { item, options } = props;
   const [openAlert, setOpenAlert] = React.useState(false);
-  const [visible, setVisible] = React.useState(false);
   const location = useLocation();
   const { t } = useTranslation(['frequent', 'resource']);
 
@@ -48,28 +48,14 @@ export default function DeleteButton(props: DeleteButtonProps) {
     [item]
   );
 
-  React.useEffect(() => {
-    if (item) {
-      item
-        .getAuthorization('delete')
-        .then((result: any) => {
-          if (result.status.allowed) {
-            setVisible(true);
-          }
-        })
-        .catch((err: Error) => {
-          console.error(`Error while getting authorization for delete button in ${item}:`, err);
-          setVisible(false);
-        });
-    }
-  }, [item]);
-
-  if (!visible) {
-    return null;
-  }
-
   return (
-    <React.Fragment>
+    <AuthVisible
+      item={item}
+      authVerb="delete"
+      onError={(err: Error) => {
+        console.error(`Error while getting authorization for delete button in ${item}:`, err);
+      }}
+    >
       <ActionButton
         description={t('frequent|Delete')}
         onClick={() => setOpenAlert(true)}
@@ -82,6 +68,6 @@ export default function DeleteButton(props: DeleteButtonProps) {
         handleClose={() => setOpenAlert(false)}
         onConfirm={() => deleteFunc()}
       />
-    </React.Fragment>
+    </AuthVisible>
   );
 }
