@@ -4,6 +4,7 @@ copyright: Copyright the Headlamp project contributors
 params:
   icon: https://github.com/kinvolk/headlamp/raw/main/frontend/public/logo-light.svg
   github: kinvolk/headlamp
+  redirect_url: https://headlamp.dev
   docs:
     github_edit_url: https://github.com/kinvolk/headlamp/edit/main/docs
     issues_url: https://github.com/kinvolk/headlamp/issues/new
