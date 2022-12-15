@@ -11,7 +11,7 @@
       const ghSplit = u.split('github.io/')
       let repoName = '';
       if (ghSplit.length > 1) {
-        repoName = ghSplit[1].split('/')[0];
+        repoName = ghSplit[1].split('/')[0] + '/';
       }
       let origin = window.location.origin;
       if (origin[origin.length - 1] === '/') {
