@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head><noscript>
-      <meta http-equiv="refresh" content="0; url='https://kinvolk.github.io/headlamp/docs/latest'" />
-    </noscript>
-    <script>
-      window.location.replace("https:\/\/kinvolk.github.io\/headlamp\/docs\/latest" + window.location.hash);
+      <meta http-equiv="refresh" content="0; url='https://headlamp.dev'" />
+    </noscript><script>
+      let redirectURL = 'https:\/\/headlamp.dev';
+      if (redirectURL[redirectURL.length - 1] !== '/') {
+        redirectURL += '/';
+      }
+      const u = window.location.href;
+      const ghSplit = u.split('github.io/')
+      let repoName = '';
+      if (ghSplit.length > 1) {
+        repoName = ghSplit[1].split('/')[0];
+      }
+      let origin = window.location.origin;
+      if (origin[origin.length - 1] === '/') {
+        origin = origin.slice(0, -1);
+      }
+      const finalRedirect = u.replace(origin + '/' + repoName, redirectURL);
+      if ((new URL(finalRedirect)).origin !== window.location.origin) {
+        window.location.replace(finalRedirect);
+      }
     </script></head>
-  <body><p>Please follow <a href="https://kinvolk.github.io/headlamp/docs/latest">this link</a>.</p></body>
+  <body><p>Please follow <a href="https://headlamp.dev">this link</a>.</p></body>
 </html>
