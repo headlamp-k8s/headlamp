@@ -80,24 +80,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                 </div>
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="terminal"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Terminal / Exec"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />

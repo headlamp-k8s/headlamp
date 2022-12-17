@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { KubeObject, KubeObjectInterface } from '../../../lib/k8s/cluster';
 import { CallbackActionOptions, clusterAction } from '../../../redux/actions/actions';
 import ActionButton from '../ActionButton';
+import AuthVisible from './AuthVisible';
 import EditorDialog from './EditorDialog';
 import ViewButton from './ViewButton';
 
@@ -17,7 +18,7 @@ export default function EditButton(props: EditButtonProps) {
   const dispatch = useDispatch();
   const { item, options = {} } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
-  const [visible, setVisible] = React.useState(false);
+  const [isReadOnly, setIsReadOnly] = React.useState(true);
   const [errorMessage, setErrorMessage] = React.useState<string>('');
   const location = useLocation();
   const { t } = useTranslation(['frequent', 'resource']);
@@ -63,28 +64,22 @@ export default function EditButton(props: EditButtonProps) {
     );
   }
 
-  React.useEffect(() => {
-    if (item) {
-      item
-        .getAuthorization('update')
-        .then((result: any) => {
-          if (result.status.allowed) {
-            setVisible(true);
-          }
-        })
-        .catch((err: Error) => {
-          console.error(`Error while getting authorization for edit button in ${item}:`, err);
-          setVisible(false);
-        });
-    }
-  }, [item]);
-
-  if (!visible) {
+  if (isReadOnly) {
     return <ViewButton item={item} />;
   }
 
   return (
-    <>
+    <AuthVisible
+      item={item}
+      authVerb="update"
+      onError={(err: Error) => {
+        console.error(`Error while getting authorization for edit button in ${item}:`, err);
+        setIsReadOnly(true);
+      }}
+      onUnauthorized={() => {
+        setIsReadOnly(true);
+      }}
+    >
       <ActionButton
         description={t('frequent|Edit')}
         onClick={() => setOpenDialog(true)}
@@ -98,6 +93,6 @@ export default function EditButton(props: EditButtonProps) {
         errorMessage={errorMessage}
         onEditorChanged={() => setErrorMessage('')}
       />
-    </>
+    </AuthVisible>
   );
 }

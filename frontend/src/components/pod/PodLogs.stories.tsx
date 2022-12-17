@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { StreamResultsCb } from '../../lib/k8s/apiProxy';
-import { KubeObjectClass } from '../../lib/k8s/cluster';
+import { AuthRequestResourceAttrs, KubeObjectClass } from '../../lib/k8s/cluster';
 import Pod, { KubePod, LogOptions } from '../../lib/k8s/pod';
 import { TestContext } from '../../test';
 import PodDetails, { PodDetailsProps } from './Details';
@@ -17,6 +17,19 @@ const usePhonyGet: KubeObjectClass['useGet'] = (name, namespace) => {
     () => {},
     () => {},
   ] as any;
+};
+
+const phonyGetAuthorization: KubeObjectClass['getAuthorization'] = async (
+  verb: string,
+  resourceAttrs?: AuthRequestResourceAttrs
+) => {
+  return new Promise(exec => {
+    exec({
+      status: {
+        allowed: resourceAttrs?.subresource === 'log',
+      },
+    });
+  });
 };
 
 export default {
@@ -88,6 +101,7 @@ function getLogs(container: string, onLogs: StreamResultsCb, logsOptions: LogOpt
 export const Logs = Template.bind({});
 Logs.args = {
   useGet: usePhonyGet,
+  'prototype.getAuthorization': phonyGetAuthorization,
   'prototype.getLogs': getLogs,
   podName: 'running',
   detailsProps: {

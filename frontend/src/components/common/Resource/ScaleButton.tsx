@@ -18,6 +18,7 @@ import { useLocation } from 'react-router-dom';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { CallbackActionOptions, clusterAction } from '../../../redux/actions/actions';
 import { LightTooltip } from '../Tooltip';
+import AuthVisible from './AuthVisible';
 
 interface ScaleButtonProps {
   item: KubeObject;
@@ -28,7 +29,6 @@ export default function ScaleButton(props: ScaleButtonProps) {
   const dispatch = useDispatch();
   const { item, options = {} } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
-  const [visible, setVisible] = React.useState(false);
   const location = useLocation();
   const { t } = useTranslation('resource');
 
@@ -66,35 +66,25 @@ export default function ScaleButton(props: ScaleButtonProps) {
     setOpenDialog(false);
   }
 
-  React.useEffect(() => {
-    if (item) {
-      item
-        .getAuthorization('update')
-        .then((result: any) => {
-          if (result.status.allowed) {
-            setVisible(true);
-          }
-        })
-        .catch((err: Error) => {
-          console.error(`Error while getting authorization for edit button in ${item}:`, err);
-          setVisible(false);
-        });
-    }
-  }, [item]);
-
-  if (!visible || !['Deployment', 'StatefulSet', 'ReplicaSet'].includes(item.kind)) {
+  if (!['Deployment', 'StatefulSet', 'ReplicaSet'].includes(item.kind)) {
     return null;
   }
 
   return (
-    <>
+    <AuthVisible
+      item={item}
+      authVerb="update"
+      onError={(err: Error) => {
+        console.error(`Error while getting authorization for scaling button in ${item}:`, err);
+      }}
+    >
       <Tooltip title={t('frequent|Scale') as string}>
         <IconButton aria-label={t('frequent|scale')} onClick={() => setOpenDialog(true)}>
           <Icon icon="mdi:content-copy" />
         </IconButton>
       </Tooltip>
       <ScaleDialog resource={item} open={openDialog} onClose={handleClose} onSave={handleSave} />
-    </>
+    </AuthVisible>
   );
 }
 

@@ -58,44 +58,10 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="logs"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Show Logs"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="terminal"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Terminal / Exec"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -810,44 +776,10 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="logs"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Show Logs"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="terminal"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Terminal / Exec"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -1546,44 +1478,10 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="logs"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Show Logs"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="terminal"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Terminal / Exec"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -2396,44 +2294,10 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="logs"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Show Logs"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="terminal"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Terminal / Exec"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -3115,44 +2979,10 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="logs"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Show Logs"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="terminal"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Terminal / Exec"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -3871,44 +3701,10 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="logs"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Show Logs"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="terminal"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Terminal / Exec"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />

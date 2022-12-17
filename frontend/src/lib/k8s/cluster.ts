@@ -93,6 +93,14 @@ export interface KubeObjectIface<T extends KubeObjectInterface | KubeEvent> {
   new (json: T): any;
   className: string;
   [prop: string]: any;
+  getAuthorization?: (arg: string, resourceAttrs?: AuthRequestResourceAttrs) => any;
+}
+
+export interface AuthRequestResourceAttrs {
+  name?: string;
+  resource?: string;
+  subresource?: string;
+  namespace?: string;
 }
 
 export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
@@ -422,19 +430,23 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       return this._class().apiEndpoint.patch(...args);
     }
 
-    async getAuthorization(verb: string) {
-      const resourceAttrs: {
+    async getAuthorization(verb: string, reqResourseAttrs?: AuthRequestResourceAttrs) {
+      const resourceAttrs: AuthRequestResourceAttrs & {
         name: string;
         verb: string;
-        namespace?: string;
       } = {
         name: this.getName(),
         verb,
+        ...reqResourseAttrs,
       };
 
       const namespace = this.getNamespace();
-      if (!!namespace) {
+      if (!resourceAttrs.namespace && !!namespace) {
         resourceAttrs['namespace'] = namespace;
+      }
+
+      if (!resourceAttrs.resource) {
+        resourceAttrs['resource'] = this.pluralName;
       }
 
       const spec = {
