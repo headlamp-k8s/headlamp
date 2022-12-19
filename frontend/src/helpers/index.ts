@@ -109,6 +109,7 @@ declare global {
   interface Window {
     headlampBaseUrl?: string;
     Buffer: typeof Buffer;
+    clusterConfigFetchHandler: ReturnType<typeof setInterval>;
   }
 }
 

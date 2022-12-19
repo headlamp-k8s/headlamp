@@ -277,7 +277,7 @@ export function useSidebarItem(itemName: string | null) {
       dispatch(setSidebarSelected(itemName));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [itemName]
   );
 }
 
