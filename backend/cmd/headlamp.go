@@ -19,7 +19,6 @@ import (
 	"os/user"
 	"path"
 	"path/filepath"
-	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -94,9 +93,16 @@ type spaHandler struct {
 	baseURL    string
 }
 
+const (
+	KubeConfig = 1 << iota
+	DynamicCluster
+	InCluster
+)
+
 type contextProxy struct {
 	context *Context
 	proxy   *httputil.ReverseProxy
+	source  int // Source indicates if contextProxy is configured from kubeconfig or dynamic cluster or incluster.
 }
 
 var pluginListURLs []string
@@ -316,9 +322,13 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	if !config.useInCluster {
 		// in-cluster mode is unlikely to want reloading plugins.
 		go watchForChanges(config.pluginDir)
+		// in-cluster mode is unlikely to want reloading kubeconfig.
+		go watchForKubeConfigChanges(config)
 	}
 
 	var contexts []Context
+
+	config.contextProxies = make(map[string]contextProxy)
 
 	// In-cluster
 	if config.useInCluster {
@@ -327,33 +337,20 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			log.Println("Failed to get in-cluster config", err)
 		}
 
-		contexts = append(contexts, *context)
+		proxy, err := config.createProxyForContext(*context)
+		if err != nil {
+			log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
+		}
+
+		config.contextProxies[context.Name] = contextProxy{
+			context,
+			proxy,
+			InCluster,
+		}
 	}
 
 	// KubeConfig clusters
-	if kubeConfigPath != "" {
-		delimiter := ":"
-		if runtime.GOOS == "windows" {
-			delimiter = ";"
-		}
-
-		kubeConfigs := strings.Split(kubeConfigPath, delimiter)
-
-		for _, kubeConfig := range kubeConfigs {
-			kubeConfig, err := absPath(kubeConfig)
-			if err != nil {
-				log.Printf("Failed to resolve absolute path of :%s, error: %v\n", kubeConfig, err)
-				continue
-			}
-
-			contextsFound, err := GetContextsFromKubeConfigFile(kubeConfig)
-			if err != nil {
-				log.Println("Failed to get contexts from", kubeConfig, err)
-			}
-
-			contexts = append(contexts, contextsFound...)
-		}
-	}
+	contexts = append(contexts, getContextFromKubeConfigs(kubeConfigPath)...)
 
 	if config.staticDir != "" {
 		baseURLReplace(config.staticDir, config.baseURL)
@@ -367,8 +364,6 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		baseRoute := mux.NewRouter()
 		r = baseRoute.PathPrefix(config.baseURL).Subrouter()
 	}
-
-	config.contextProxies = make(map[string]contextProxy)
 
 	fmt.Println("*** Headlamp Server ***")
 	fmt.Println("  API Routers:")
@@ -390,6 +385,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			config.contextProxies[context.Name] = contextProxy{
 				context,
 				proxy,
+				KubeConfig,
 			}
 		}
 	}
@@ -1001,6 +997,7 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 		c.contextProxies[clusterReq.Name] = contextProxy{
 			&context,
 			proxy,
+			DynamicCluster,
 		}
 
 		if isReplacement {
