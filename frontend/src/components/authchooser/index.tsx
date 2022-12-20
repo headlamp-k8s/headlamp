@@ -261,9 +261,14 @@ export function PureAuthChooser({
             <Box alignItems="center" textAlign="center">
               <Box m={2}>
                 <Empty>
-                  {t('Failed to get authentication information: {{ errorMessage }}', {
-                    errorMessage: error!.message,
-                  })}
+                  {error && error.message === 'Bad Gateway'
+                    ? t(
+                        'Failed to connect. Please make sure the Kubernetes cluster is running and accessible. Error: {{ errorMessage }}',
+                        { errorMessage: error!.message }
+                      )
+                    : t('Failed to get authentication information: {{ errorMessage }}', {
+                        errorMessage: error!.message,
+                      })}
                 </Empty>
               </Box>
               <ColorButton onClick={handleTryAgain}>{t('frequent|Try Again')}</ColorButton>
