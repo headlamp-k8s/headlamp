@@ -16,12 +16,22 @@
         "node_modules/@kinvolk/headlamp-plugin/node_modules/@iconify/react/src/icon.js"
       ],
       "@kinvolk/headlamp-plugin/lib/K8s/*": [
-        "node_modules/@kinvolk/headlamp-plugin/lib/lib/k8s/*/index.d.ts",
-        "node_modules/@kinvolk/headlamp-plugin/lib/lib/k8s/*.d.ts"
+        "node_modules/@kinvolk/headlamp-plugin/dist/lib/k8s/*/index.d.ts",
+        "node_modules/@kinvolk/headlamp-plugin/dist/lib/k8s/*.d.ts"
+      ],
+      "@kinvolk/headlamp-plugin/lib/*": [
+        "node_modules/@kinvolk/headlamp-plugin/dist/lib/*/index.d.ts",
+        "node_modules/@kinvolk/headlamp-plugin/dist/lib/*.d.ts"
+      ],
+      "@kinvolk/headlamp-plugin/lib": [
+        "node_modules/@kinvolk/headlamp-plugin/dist/lib/index.d.ts"
+      ],
+      "@kinvolk/headlamp-plugin/lib/CommonComponents": [
+        "node_modules/@kinvolk/headlamp-plugin/dist/components/common/index.d.ts"
       ],
       "@kinvolk/headlamp-plugin/lib/CommonComponents/*": [
-        "node_modules/@kinvolk/headlamp-plugin/lib/components/common/*/index.d.ts",
-        "node_modules/@kinvolk/headlamp-plugin/lib/components/common/*.d.ts"
+        "node_modules/@kinvolk/headlamp-plugin/dist/components/common/*/index.d.ts",
+        "node_modules/@kinvolk/headlamp-plugin/dist/components/common/*.d.ts"
       ]
     },
     "rootDirs": ["node_modules/@kinvolk/headlamp-plugin/"],

@@ -6,3 +6,4 @@ lib/
 plugin/
 redux/
 resources/
+react-app-env.d.ts

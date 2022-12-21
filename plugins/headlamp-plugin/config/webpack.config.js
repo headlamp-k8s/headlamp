@@ -19,6 +19,7 @@ const externalModules = {
   // how it's used in Headlamp's source code.
   '@kinvolk/headlamp-plugin/lib/k8s': 'pluginLib.K8s',
   '@kinvolk/headlamp-plugin/lib': 'pluginLib',
+  '@kinvolk/headlamp-plugin/lib/components/common': 'pluginLib.K8s',
 };
 
 module.exports = {
