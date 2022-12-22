@@ -64,5 +64,10 @@ COPY --from=backend-build --link /headlamp/backend/headlamp-server /headlamp/hea
 COPY --from=frontend --link /headlamp/frontend/build /headlamp/frontend
 COPY --from=frontend --link /headlamp/plugins /headlamp/plugins
 
+RUN addgroup -S headlamp && adduser -S headlamp -G headlamp
+RUN chown -R headlamp:headlamp /headlamp
+USER headlamp
+
 EXPOSE 4466
+
 ENTRYPOINT ["/headlamp/headlamp-server", "-html-static-dir", "/headlamp/frontend"]
