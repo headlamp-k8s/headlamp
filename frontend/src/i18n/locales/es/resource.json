@@ -47,5 +47,9 @@
   "Trying to run \"{{command}}\"…": "Intentando ejecutar \"{{command}}\"…",
   "Terminal: {{ itemName }}": "Terminal: {{ itemName }}",
   "Loading resource definition details": "Cargando detalles de la definición del recurso",
-  "Use minimal editor": "Usar editor minimalista"
+  "Use minimal editor": "Usar editor minimalista",
+  "Failed to create {{ kind }} {{ name }}.": "",
+  "Failed to create {{ kind }} {{ name }} in {{ apiVersion }}.": "",
+  "Invalid: One or more of the resource doesn't have a name property": "",
+  "Invalid: Please set a kind to the resource": ""
 }

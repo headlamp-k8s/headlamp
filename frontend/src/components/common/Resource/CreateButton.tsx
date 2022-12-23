@@ -24,9 +24,9 @@ export default function CreateButton() {
           const name = newItems[index].metadata.name;
           const apiVersion = newItems[index].apiVersion;
           if (newItems.length === 1) {
-            msg = t('Failed to create {{ kind }} {{ name }}.', { kind, name });
+            msg = t('resource|Failed to create {{ kind }} {{ name }}.', { kind, name });
           } else {
-            msg = t('Failed to create {{ kind }} {{ name }} in {{ apiVersion }}.', {
+            msg = t('resource|Failed to create {{ kind }} {{ name }} in {{ apiVersion }}.', {
               kind,
               name,
               apiVersion,
@@ -45,11 +45,13 @@ export default function CreateButton() {
     // check if all yaml objects are valid
     for (let i = 0; i < newItemDefs.length; i++) {
       if (!newItemDefs[i].metadata?.name) {
-        setErrorMessage(t(`Invalid: One or more of the resource doesn't have a name property`));
+        setErrorMessage(
+          t(`resource|Invalid: One or more of the resource doesn't have a name property`)
+        );
         return;
       }
       if (!newItemDefs[i].kind) {
-        setErrorMessage(t('Invalid: Please set a kind to the resource!'));
+        setErrorMessage(t('resource|Invalid: Please set a kind to the resource'));
         return;
       }
     }
@@ -58,12 +60,16 @@ export default function CreateButton() {
     setOpenDialog(false);
     dispatch(
       clusterAction(() => applyFunc(newItemDefs), {
-        startMessage: t('Applying {{ newItemName }}…', { newItemName: resourceNames.join(',') }),
-        cancelledMessage: t('Cancelled applying {{ newItemName }}.', {
+        startMessage: t('resource|plying {{ newItemName }}…', {
           newItemName: resourceNames.join(','),
         }),
-        successMessage: t('Applied {{ newItemName }}.', { newItemName: resourceNames.join(',') }),
-        errorMessage: t('Failed to apply {{ newItemName }}.', {
+        cancelledMessage: t('resource|Cancelled applying {{ newItemName }}.', {
+          newItemName: resourceNames.join(','),
+        }),
+        successMessage: t('resource|Applied {{ newItemName }}.', {
+          newItemName: resourceNames.join(','),
+        }),
+        errorMessage: t('resource|Failed to apply {{ newItemName }}.', {
           newItemName: resourceNames.join(','),
         }),
         cancelUrl,
