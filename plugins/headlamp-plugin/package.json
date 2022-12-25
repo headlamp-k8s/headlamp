@@ -1,13 +1,13 @@
 {
   "name": "@kinvolk/headlamp-plugin",
-  "version": "0.6.0-alpha.2",
+  "version": "0.6.0-alpha.4",
   "description": "The needed infrastructure for building Headlamp plugins.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "bin": "bin/headlamp-plugin.js",
   "scripts": {
     "prepack": "(node -e \"if (! require('fs').existsSync('./dist/components')) {process.exit(1)} \" || (echo 'dist dir is empty. Remember to run `npm run build` before packing' && exit 1))",
-    "build": "npx shx rm -rf dist lib/assets lib/components lib/helpers lib/i18n lib/lib lib/plugin lib/redux lib/resources && npx shx cp -r ../../frontend/src/react-app-env.d.ts ../../frontend/src/assets ../../frontend/src/components ../../frontend/src/helpers ../../frontend/src/i18n ../../frontend/src/lib ../../frontend/src/plugin ../../frontend/src/redux ../../frontend/src/resources lib/ && tsc --build ./tsconfig.json",
+    "build": "npx shx rm -rf dist lib/assets lib/components lib/helpers lib/i18n lib/lib lib/plugin lib/redux lib/resources && npx shx cp -r ../../frontend/src/react-app-env.d.ts ../../frontend/src/assets ../../frontend/src/components ../../frontend/src/helpers ../../frontend/src/i18n ../../frontend/src/lib ../../frontend/src/plugin ../../frontend/src/redux ../../frontend/src/resources lib/ && tsc --build ./tsconfig.json && npx shx cp -r ../../frontend/src/assets dist/ && npx shx cp -r ../../frontend/src/resources dist/ && npx shx cp -r ../../frontend/src/i18n/locales dist/i18n",
     "update-dependencies": "node bin/update-dependencies.js"
   },
   "dependencies": {
@@ -122,6 +122,7 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "style-loader": "^3.3.1",
+    "tsconfig-paths-webpack-plugin": "^4.0.0",
     "typescript": "^4.4.3",
     "url": "^0.11.0",
     "url-loader": "^4.1.1",

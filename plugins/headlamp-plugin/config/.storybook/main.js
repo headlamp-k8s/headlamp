@@ -1,3 +1,5 @@
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
 module.exports = {
   stories: [
     '../../../../../src/**/*.stories.mdx',
@@ -13,8 +15,9 @@ module.exports = {
     builder: 'webpack5',
     disableTelemetry: true,
   },
-  webpackFinal: config => {
-    return {
+
+  webpackFinal: async config => {
+    let newConfig = {
       ...config,
       resolve: {
         ...config.resolve,
@@ -28,5 +31,9 @@ module.exports = {
         },
       },
     };
+
+    newConfig.resolve.plugins = [...(config.resolve.plugins || []), new TsconfigPathsPlugin()];
+
+    return newConfig;
   },
 };

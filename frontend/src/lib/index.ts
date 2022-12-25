@@ -1,8 +1,4 @@
-import * as ApiProxy from './k8s/apiProxy';
-import * as K8s from './k8s';
-import * as Notification from './notification';
-import * as Router from './router';
-import * as Utils from './util';
+import * as CommonComponents from '../components/common';
 import { Headlamp, Plugin } from '../plugin/lib';
 import Registry, {
   AppLogoProps,
@@ -22,8 +18,11 @@ import Registry, {
   registerSidebarEntry,
   registerSidebarEntryFilter,
 } from '../plugin/registry';
-
-import * as CommonComponents from '../components/common';
+import * as K8s from './k8s';
+import * as ApiProxy from './k8s/apiProxy';
+import * as Notification from './notification';
+import * as Router from './router';
+import * as Utils from './util';
 
 // We export k8s (lowercase) since someone may use it as we do in the Headlamp source code.
 export {
@@ -55,8 +54,4 @@ export {
   registerGetTokenFunction,
 };
 
-export type {
-  AppLogoProps,
-  ClusterChooserProps,
-  DetailsViewSectionProps,
-};
+export type { AppLogoProps, ClusterChooserProps, DetailsViewSectionProps };
