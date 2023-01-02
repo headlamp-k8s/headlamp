@@ -1,6 +1,16 @@
-import { Button, Snackbar } from '@material-ui/core';
+import { Icon } from '@iconify/react';
+import { Box, Button, makeStyles, Snackbar } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    '& .MuiSnackbarContent-root': {
+      backgroundColor: 'rgb(49, 49, 49)',
+      color: '#fff',
+    },
+  },
+}));
 
 function UpdatePopup(props: {
   releaseDownloadURL?: string | null;
@@ -8,13 +18,15 @@ function UpdatePopup(props: {
   releaseFetchFailed?: boolean;
   skipUpdateHandler: () => void;
 }) {
+  const classes = useStyles();
   const [show, setShow] = React.useState(true);
   const { releaseDownloadURL, fetchingRelease, releaseFetchFailed, skipUpdateHandler } = props;
   const { t } = useTranslation('frequent');
 
-  if (fetchingRelease) {
+  if (fetchingRelease && !releaseDownloadURL) {
     return (
       <Snackbar
+        className={classes.root}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
@@ -28,7 +40,9 @@ function UpdatePopup(props: {
         action={
           <React.Fragment>
             <Button
-              color="primary"
+              style={{
+                color: 'rgb(255, 242, 0)',
+              }}
               onClick={() => {
                 skipUpdateHandler();
               }}
@@ -41,9 +55,10 @@ function UpdatePopup(props: {
     );
   }
 
-  if (releaseFetchFailed) {
+  if (releaseFetchFailed && !releaseDownloadURL) {
     return (
       <Snackbar
+        className={classes.root}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
@@ -68,6 +83,7 @@ function UpdatePopup(props: {
         vertical: 'bottom',
         horizontal: 'right',
       }}
+      className={classes.root}
       open={show}
       autoHideDuration={100000}
       ContentProps={{
@@ -76,21 +92,42 @@ function UpdatePopup(props: {
       message={t('release|An update is available')}
       action={
         <React.Fragment>
-          <Button color="secondary" onClick={() => window.open(releaseDownloadURL)}>
-            {t('frequent|More')}
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => {
-              localStorage.setItem('disable_update_check', 'true');
-              setShow(false);
-            }}
-          >
-            {t('Do not notify again')}
-          </Button>
-          <Button color="primary" onClick={() => setShow(false)}>
-            {t('frequent|Close')}
-          </Button>
+          <Box display={'flex'} alignItems="center">
+            <Box ml={-1}>
+              <Button
+                onClick={() => window.open(releaseDownloadURL)}
+                style={{
+                  color: 'inherit',
+                  textTransform: 'none',
+                }}
+              >
+                {t('frequent|Read more')}
+              </Button>
+            </Box>
+            <Box mb={0.5}>
+              <Button
+                style={{
+                  color: 'rgb(255, 242, 0)',
+                }}
+                onClick={() => {
+                  localStorage.setItem('disable_update_check', 'true');
+                  setShow(false);
+                }}
+              >
+                <Icon icon={'mdi:bell-off-outline'} width="20" />
+              </Button>
+            </Box>
+            <Box>
+              <Button
+                style={{
+                  color: 'rgb(255, 242, 0)',
+                }}
+                onClick={() => setShow(false)}
+              >
+                {t('frequent|Dismiss')}
+              </Button>
+            </Box>
+          </Box>
         </React.Fragment>
       }
     />
