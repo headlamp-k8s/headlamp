@@ -15,6 +15,7 @@ module.exports = {
     builder: 'webpack5',
     disableTelemetry: true,
   },
+  // framework: '@storybook/react',
 
   webpackFinal: async config => {
     let newConfig = {

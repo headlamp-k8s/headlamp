@@ -6,9 +6,9 @@
         "dom.iterable",
         "esnext"
       ],
-      "outDir": "./dist/",
+      "outDir": "./lib/",
       "declaration": true,
-      "declarationDir": "./dist/",
+      "declarationDir": "./lib/",
       "allowJs": true,
       "skipLibCheck": true,
       "esModuleInterop": true,
@@ -24,15 +24,15 @@
       "emitDeclarationOnly": false
     },
     "exclude": [
-      "./lib/components/TestHelpers/**/*",
-      "./lib/plugin/index.ts",
-      "./lib/plugin/headlamp-plugin/**/*"
+      "./src/components/TestHelpers/**/*",
+      "./src/plugin/index.ts",
+      "./src/plugin/headlamp-plugin/**/*"
     ],
     "include": [
-      "./lib/*.ts",
-      "./lib/lib/**/*",
-      "./lib/plugin/**/*",
-      "./lib/react-app-env.d.ts"
+      "./src/*.ts",
+      "./src/lib/**/*",
+      "./src/plugin/**/*",
+      "./src/react-app-env.d.ts"
     ]
   }
   

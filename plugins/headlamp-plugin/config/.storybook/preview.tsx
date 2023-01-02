@@ -1,5 +1,5 @@
 import React from 'react';
-import themesConf from '@kinvolk/headlamp-plugin/dist/lib/themes';
+import themesConf from '@kinvolk/headlamp-plugin/lib/lib/themes';
 import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 // import { initialize, mswDecorator } from 'msw-storybook-addon';
 // import { rest } from 'msw'
