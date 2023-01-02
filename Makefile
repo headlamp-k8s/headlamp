@@ -7,7 +7,7 @@ DOCKER_REPO ?= ghcr.io/kinvolk
 DOCKER_EXT_REPO ?= docker.io/kinvolk
 DOCKER_IMAGE_NAME ?= headlamp
 DOCKER_IMAGE_VERSION ?= $(shell git describe --tags --always --dirty)
-DOCKER_IMAGE_BASE ?= alpine:3.15.4
+DOCKER_IMAGE_BASE ?= alpine:3.17.0
 
 ifeq ($(OS), Windows_NT)
 	SERVER_EXE_EXT = .exe
