@@ -23,6 +23,7 @@ export const UI_SIDEBAR_SET_EXPANDED = 'UI_SIDEBAR_SET_EXPANDED';
 export const UI_ROUTER_SET_ROUTE = 'UI_ROUTER_SET_ROUTE';
 export const UI_ROUTER_SET_ROUTE_FILTER = 'UI_ROUTER_SET_ROUTE_FILTER';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
+export const UI_DETAILS_VIEW_SET_HEADER_ACTION_FILTER = 'UI_DETAILS_VIEW_SET_HEADER_ACTION_FILTER';
 export const UI_SET_DETAILS_VIEW = 'UI_SET_DETAILS_VIEW';
 export const UI_APP_BAR_SET_ACTION = 'UI_APP_BAR_SET_ACTION';
 export const UI_THEME_SET = 'UI_THEME_SET';
@@ -147,6 +148,12 @@ export function setRouteFilter(filterFunc: (entry: Route) => Route | null) {
 
 export function setDetailsViewHeaderAction(actionFunc: HeaderActionType) {
   return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, action: actionFunc };
+}
+
+export function setDetailsViewHeaderActionFilter(
+  actionFunc: (actions: HeaderActionType[]) => HeaderActionType[]
+) {
+  return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION_FILTER, action: actionFunc };
 }
 
 export function setDetailsView(viewSection: DetailsViewSectionType) {

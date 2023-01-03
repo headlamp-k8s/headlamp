@@ -13,6 +13,7 @@ import {
   setClusterChooserButtonComponent,
   setDetailsView,
   setDetailsViewHeaderAction,
+  setDetailsViewHeaderActionFilter,
   setRoute,
   setRouteFilter,
   setSidebarItem,
@@ -277,6 +278,12 @@ export function registerRoute(routeSpec: Route) {
  */
 export function registerDetailsViewHeaderAction(headerAction: DetailsViewHeaderActionType) {
   store.dispatch(setDetailsViewHeaderAction(headerAction));
+}
+
+export function registerDetailsViewHeaderActionFilter(
+  actionFilter: (headerActions: DetailsViewHeaderActionType[]) => DetailsViewHeaderActionType[]
+) {
+  store.dispatch(setDetailsViewHeaderActionFilter(actionFilter));
 }
 
 /**

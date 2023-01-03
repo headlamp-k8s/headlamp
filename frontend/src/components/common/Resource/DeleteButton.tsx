@@ -13,7 +13,7 @@ interface DeleteButtonProps {
   options?: CallbackActionOptions;
 }
 
-export default function DeleteButton(props: DeleteButtonProps) {
+function DeleteButton(props: DeleteButtonProps) {
   const dispatch = useDispatch();
   const { item, options } = props;
   const [openAlert, setOpenAlert] = React.useState(false);
@@ -71,3 +71,7 @@ export default function DeleteButton(props: DeleteButtonProps) {
     </AuthVisible>
   );
 }
+
+DeleteButton.displayName = 'DeleteButton';
+
+export default DeleteButton;

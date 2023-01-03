@@ -12,6 +12,7 @@ import {
   UI_APP_BAR_SET_ACTION,
   UI_BRANDING_SET_APP_LOGO,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
+  UI_DETAILS_VIEW_SET_HEADER_ACTION_FILTER,
   UI_HIDE_APP_BAR,
   UI_INITIALIZE_PLUGIN_VIEWS,
   UI_PLUGINS_LOADED,
@@ -52,6 +53,7 @@ export interface UIState {
   views: {
     details: {
       headerActions: HeaderActionType[];
+      headerActionsFilter?: (headerActions: HeaderActionType[]) => HeaderActionType[];
       pluginAppendedDetailViews: DetailsViewSectionType[];
     };
     appBar: {
@@ -188,6 +190,10 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
     case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
       const headerActions = [...newFilters.views.details.headerActions, action.action];
       newFilters.views.details.headerActions = headerActions;
+      break;
+    }
+    case UI_DETAILS_VIEW_SET_HEADER_ACTION_FILTER: {
+      newFilters.views.details.headerActionsFilter = action.action;
       break;
     }
     case UI_SET_DETAILS_VIEW: {

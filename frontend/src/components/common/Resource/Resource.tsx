@@ -27,6 +27,7 @@ import {
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
+import { HeaderActionType } from '../../../redux/actions/actions';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
 import Loader from '../../common/Loader';
@@ -97,11 +98,38 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     backLink,
     error = null,
   } = props;
-  const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
+  let headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
+  const headerActionsFilter = useTypedSelector(state => state.ui.views.details.headerActionsFilter);
   const { t } = useTranslation('frequent');
   const history = useHistory();
 
   const header = typeof headerSection === 'function' ? headerSection(resource) : headerSection;
+
+  // WIP
+  headerActions = headerActions.concat(
+    ((typeof actions === 'function' ? actions(resource) || [] : actions) || [])?.map(i =>
+      !!i ? (Object.keys(i).includes('type') ? (i as any).type : i) : i
+    ) as HeaderActionType[]
+  );
+
+  if (!noDefaultActions && !!resource) {
+    // REPEATING FUNCTIONS JUST FOR DEV PURPOSES
+    headerActions = headerActions.concat([
+      ScaleButton,
+      EditButton,
+      DeleteButton,
+      () => <EditButton item={resource} />,
+      function MyDelete() {
+        return <DeleteButton item={resource} />;
+      },
+    ]);
+  }
+
+  if (!!headerActionsFilter) {
+    headerActions = headerActionsFilter(headerActions as any);
+  }
+
+  console.log('>>>>>----', actions, headerActions);
 
   const allActions = (function stateActions() {
     return React.Children.toArray(
@@ -119,25 +147,26 @@ export function MainInfoSection(props: MainInfoSectionProps) {
         }
       })
     );
-  })()
-    .concat(
-      (function propsActions() {
-        return React.Children.toArray(
-          typeof actions === 'function' ? actions(resource) || [] : actions
-        );
-      })()
-    )
-    .concat(
-      (function defaultActions() {
-        return !noDefaultActions && resource
-          ? [
-              <ScaleButton item={resource} />,
-              <EditButton item={resource} />,
-              <DeleteButton item={resource} />,
-            ]
-          : [];
-      })()
-    );
+  })();
+  // .concat(
+  //   (function propsActions() {
+  //     return React.Children.toArray(
+  //       typeof actions === 'function' ? actions(resource) || [] : actions
+  //     );
+  //   })()
+  // );
+  // .concat(
+  //   (function defaultActions() {
+  //     return !noDefaultActions && resource
+  //       ? [
+  //           <ScaleButton item={resource} />,
+  //           <EditButton item={resource} />,
+  //           <DeleteButton item={resource} />,
+  //         ]
+  //       : [];
+  //   })()
+  // );
+  console.log('>>>>>', headerActionsFilter);
 
   return (
     <>

@@ -14,7 +14,7 @@ interface EditButtonProps {
   options?: CallbackActionOptions;
 }
 
-export default function EditButton(props: EditButtonProps) {
+function EditButton(props: EditButtonProps) {
   const dispatch = useDispatch();
   const { item, options = {} } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
@@ -96,3 +96,7 @@ export default function EditButton(props: EditButtonProps) {
     </AuthVisible>
   );
 }
+
+EditButton.displayName = 'EditButton';
+
+export default EditButton;
