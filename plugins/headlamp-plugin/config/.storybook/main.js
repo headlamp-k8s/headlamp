@@ -15,7 +15,12 @@ module.exports = {
     builder: 'webpack5',
     disableTelemetry: true,
   },
-  // framework: '@storybook/react',
+  framework: '@storybook/react',
+
+  // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
+  typescript: {
+    check: false,
+  },
 
   webpackFinal: async config => {
     let newConfig = {
@@ -29,11 +34,12 @@ module.exports = {
           https: require.resolve('https-browserify'),
           path: require.resolve('path-browserify'),
           stream: require.resolve('stream-browserify'),
-          vm: require.resolve("vm-browserify"),
+          vm: require.resolve('vm-browserify'),
         },
       },
     };
 
+    // To find and use the tsconfig inside the plugin.
     newConfig.resolve.plugins = [...(config.resolve.plugins || []), new TsconfigPathsPlugin()];
 
     return newConfig;
