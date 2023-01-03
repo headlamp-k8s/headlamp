@@ -10,6 +10,7 @@
     "build": "npx shx rm -rf lib types lib/assets lib/components lib/helpers lib/i18n lib/lib lib/plugin lib/redux lib/resources && npx shx cp -r ../../frontend/src/react-app-env.d.ts ../../frontend/src/assets ../../frontend/src/components ../../frontend/src/helpers ../../frontend/src/i18n ../../frontend/src/lib ../../frontend/src/plugin ../../frontend/src/redux ../../frontend/src/resources src/ && tsc --build ./tsconfig.json && npx shx cp -r ../../frontend/src/assets lib/ && npx shx cp -r ../../frontend/src/resources lib/ && npx shx cp -r ../../frontend/src/i18n/locales lib/i18n",
     "update-dependencies": "node bin/update-dependencies.js"
   },
+  "prettier": "@kinvolk/eslint-config/prettier-config",
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@apidevtools/swagger-parser": "^10.0.3",
