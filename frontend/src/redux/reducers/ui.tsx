@@ -8,10 +8,12 @@ import { ClusterChooserType, DetailsViewSectionType } from '../../plugin/registr
 import {
   Action,
   BrandingProps,
+  FunctionsToOverride,
   HeaderActionType,
   UI_APP_BAR_SET_ACTION,
   UI_BRANDING_SET_APP_LOGO,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
+  UI_FUNCTIONS_OVERRIDE,
   UI_HIDE_APP_BAR,
   UI_INITIALIZE_PLUGIN_VIEWS,
   UI_PLUGINS_LOADED,
@@ -67,6 +69,7 @@ export interface UIState {
   notifications: Notification[];
   clusterChooserButtonComponent?: ClusterChooserType;
   hideAppBar?: boolean;
+  functionsToOverride: FunctionsToOverride;
 }
 
 function setInitialSidebarOpen() {
@@ -125,6 +128,7 @@ export const INITIAL_STATE: UIState = {
   },
   notifications: [],
   hideAppBar: false,
+  functionsToOverride: {},
 };
 
 function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
@@ -289,6 +293,15 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
     }
     case UI_VERSION_DIALOG_OPEN: {
       newFilters.isVersionDialogOpen = action.isVersionDialogOpen;
+      break;
+    }
+    case UI_FUNCTIONS_OVERRIDE: {
+      const functionToOverride = action.override;
+      for (const key in functionToOverride) {
+        if (functionToOverride.hasOwnProperty(key)) {
+          newFilters.functionsToOverride[key] = functionToOverride[key];
+        }
+      }
       break;
     }
     default:
