@@ -986,6 +986,7 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 					InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
 					CertificateAuthorityData: clusterReq.CertificateAuthorityData,
 				},
+				Metadata: clusterReq.Metadata,
 			},
 		}
 
