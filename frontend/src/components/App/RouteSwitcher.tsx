@@ -30,7 +30,7 @@ export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
         !(
           routeFilters.length > 0 &&
           routeFilters.filter(f => f(route)).length !== routeFilters.length
-        )
+        ) && !route.disabled
     );
 
   return (

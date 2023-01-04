@@ -117,6 +117,8 @@ export interface SidebarItemProps extends ListItemProps, SidebarEntryProps {
   search?: string;
   /** If a menu item has sub menu items, they will be in here. */
   subList?: this[];
+  /** Whether to hide the sidebar item. */
+  hide?: boolean;
 }
 
 export default function SidebarItem(props: SidebarItemProps) {
@@ -131,10 +133,10 @@ export default function SidebarItem(props: SidebarItemProps) {
     hasParent = false,
     icon,
     fullWidth = true,
+    hide,
     ...other
   } = props;
   const classes = useItemStyle({ fullWidth });
-
   let fullURL = url;
   if (fullURL && useClusterURL && getCluster()) {
     fullURL = generatePath(getClusterPrefixedPath(url), { cluster: getCluster()! });
@@ -174,7 +176,7 @@ export default function SidebarItem(props: SidebarItemProps) {
       window.history.back();
     }
   }
-  return (
+  return hide ? null : (
     <React.Fragment>
       <ListItemLink
         selected={isSelected()}
