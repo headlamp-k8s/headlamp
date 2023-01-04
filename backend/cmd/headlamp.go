@@ -952,65 +952,91 @@ func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
+	clusterReq := ClusterReq{}
+	if err := json.NewDecoder(r.Body).Decode(&clusterReq); err != nil {
+		fmt.Println(err)
+		http.Error(w, "Error decoding cluster info", http.StatusBadRequest)
+
+		return
+	}
+
+	if clusterReq.Name == "" || clusterReq.Server == "" {
+		http.Error(w, "Error creating cluster with invalid info; please provide a 'name' and 'server' fields at least.",
+			http.StatusBadRequest)
+		return
+	}
+
+	context := Context{
+		Name: clusterReq.Name,
+		cluster: Cluster{
+			Name:   clusterReq.Name,
+			Server: clusterReq.Server,
+			config: &clientcmdapi.Cluster{
+				Server:                   clusterReq.Server,
+				InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
+				CertificateAuthorityData: clusterReq.CertificateAuthorityData,
+			},
+			Metadata: clusterReq.Metadata,
+		},
+	}
+
+	proxy, err := c.createProxyForContext(context)
+	if err != nil {
+		log.Printf("Error creating proxy for cluster %s: %s", clusterReq.Name, err)
+		http.Error(w, "Error setting up cluster", http.StatusBadRequest)
+
+		return
+	}
+
+	_, isReplacement := c.contextProxies[clusterReq.Name]
+
+	c.contextProxies[clusterReq.Name] = contextProxy{
+		&context,
+		proxy,
+		DynamicCluster,
+	}
+
+	if isReplacement {
+		fmt.Printf("Replaced cluster \"%s\" proxy by:\n", context.Name)
+	} else {
+		fmt.Println("Created new cluster proxy:")
+	}
+
+	fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", c.port, c.baseURL, "/clusters/"+context.Name, clusterReq.Server)
+
+	w.WriteHeader(http.StatusCreated)
+	c.getConfig(w, r)
+}
+
+func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
+	name := mux.Vars(r)["name"]
+	if _, ok := c.contextProxies[name]; !ok {
+		http.Error(w, "Cluster not found", http.StatusNotFound)
+		return
+	}
+
+	if c.contextProxies[name].source != DynamicCluster {
+		http.Error(w, "Cannot delete a static cluster", http.StatusForbidden)
+		return
+	}
+
+	delete(c.contextProxies, name)
+	fmt.Printf("Removed cluster \"%s\" proxy\n", name)
+
+	c.getConfig(w, r)
+}
+
 func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 	// We do not support this feature when in-cluster
 	if c.useInCluster {
 		return
 	}
 
-	r.HandleFunc("/cluster", func(w http.ResponseWriter, r *http.Request) {
-		clusterReq := ClusterReq{}
-		if err := json.NewDecoder(r.Body).Decode(&clusterReq); err != nil {
-			fmt.Println(err)
-			http.Error(w, "Error decoding cluster info", http.StatusBadRequest)
-			return
-		}
+	r.HandleFunc("/cluster", c.addCluster).Methods("POST")
 
-		if clusterReq.Name == "" || clusterReq.Server == "" {
-			http.Error(w, "Error creating cluster with invalid info; please provide a 'name' and 'server' fields at least.",
-				http.StatusBadRequest)
-			return
-		}
-
-		context := Context{
-			Name: clusterReq.Name,
-			cluster: Cluster{
-				Name:   clusterReq.Name,
-				Server: clusterReq.Server,
-				config: &clientcmdapi.Cluster{
-					Server:                   clusterReq.Server,
-					InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
-					CertificateAuthorityData: clusterReq.CertificateAuthorityData,
-				},
-				Metadata: clusterReq.Metadata,
-			},
-		}
-
-		proxy, err := c.createProxyForContext(context)
-		if err != nil {
-			log.Printf("Error creating proxy for cluster %s: %s", clusterReq.Name, err)
-			http.Error(w, "Error setting up cluster", http.StatusBadRequest)
-			return
-		}
-
-		_, isReplacement := c.contextProxies[clusterReq.Name]
-
-		c.contextProxies[clusterReq.Name] = contextProxy{
-			&context,
-			proxy,
-			DynamicCluster,
-		}
-
-		if isReplacement {
-			fmt.Printf("Replaced cluster \"%s\" proxy by:\n", context.Name)
-		} else {
-			fmt.Println("Created new cluster proxy:")
-		}
-		fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", c.port, c.baseURL, "/clusters/"+context.Name, clusterReq.Server)
-
-		w.WriteHeader(http.StatusCreated)
-		c.getConfig(w, r)
-	}).Methods("POST")
+	// Delete a cluster
+	r.HandleFunc("/cluster/{name}", c.deleteCluster).Methods("DELETE")
 }
 
 func absPath(path string) (string, error) {
