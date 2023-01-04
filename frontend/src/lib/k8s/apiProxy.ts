@@ -897,12 +897,14 @@ export function startPortForward(
     });
   });
 }
-export function deletePortForward(cluster: string, id: string) {
+
+export function stopOrDeletePortForward(cluster: string, id: string, stopOrDelete: boolean = true) {
   return fetch(`${helpers.getAppUrl()}portforward`, {
     method: 'DELETE',
     body: JSON.stringify({
       cluster,
       id,
+      stopOrDelete,
     }),
   }).then(response =>
     response.text().then(data => {

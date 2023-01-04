@@ -32,6 +32,7 @@ import PodDetails from '../components/pod/Details';
 import PodList from '../components/pod/List';
 import PDBDetails from '../components/podDisruptionBudget/Details';
 import PDBList from '../components/podDisruptionBudget/List';
+import PortForwardingList from '../components/portforward';
 import PriorityClassDetails from '../components/priorityClass/Details';
 import PriorityClassList from '../components/priorityClass/List';
 import ReplicaSetList from '../components/replicaset/List';

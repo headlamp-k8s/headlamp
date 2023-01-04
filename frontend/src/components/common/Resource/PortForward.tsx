@@ -1,11 +1,16 @@
 import { InlineIcon } from '@iconify/react';
 import { Box, Button, CircularProgress, Tooltip, Typography } from '@material-ui/core';
+import grey from '@material-ui/core/colors/grey';
 import MuiLink from '@material-ui/core/Link';
 import { Alert } from '@material-ui/lab';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
-import { deletePortForward, listPortForward, startPortForward } from '../../../lib/k8s/apiProxy';
+import {
+  listPortForward,
+  startPortForward,
+  stopOrDeletePortForward,
+} from '../../../lib/k8s/apiProxy';
 import { KubeContainer } from '../../../lib/k8s/cluster';
 import Pod from '../../../lib/k8s/pod';
 import Service from '../../../lib/k8s/service';
@@ -26,7 +31,12 @@ export interface PortForwardState {
   namespace: string;
   cluster: string;
   port: string;
+  status: string;
 }
+
+export const PORT_FORWARDS_STORAGE_KEY = 'portforwards';
+export const PORT_FORWARD_STOP_STATUS = 'Stopped';
+export const PORT_FORWARD_RUNNING_STATUS = 'Running';
 
 function getPortNumberFromPortName(containers: KubeContainer[], namedPort: string) {
   let portNumber = 0;
@@ -61,29 +71,44 @@ export default function PortForward(props: PortForwardProps) {
   const [portForward, setPortForward] = React.useState<PortForwardState | null>(null);
   const [loading, setLoading] = React.useState(false);
   const cluster = getCluster();
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation(['frequent', 'resource']);
   const [pods, podsFetchError] = Pod.useList({ labelSelector: getPodsSelectorFilter(service) });
+  const massagedContainerPort =
+    typeof containerPort === 'string' && isNaN(parseInt(containerPort))
+      ? getPortNumberFromPortName(pods[0].spec.containers, containerPort)
+      : containerPort;
 
   React.useEffect(() => {
     if (!cluster) {
       return;
     }
     listPortForward(cluster).then(result => {
-      const portforwards = result;
-      if (!portforwards || Object.entries(portforwards).length === 0) {
+      const portForwards = result;
+      if (!portForwards || portForwards.length === 0) {
         return;
       }
-      for (const key in portforwards) {
-        const item = portforwards[key];
+      for (const item of portForwards) {
         if (
           (item.namespace === namespace || item.serviceNamespace === namespace) &&
           (item.pod === name || item.service === name) &&
-          item.cluster === cluster
+          item.cluster === cluster &&
+          item.targetPort === massagedContainerPort.toString()
         ) {
-          setPortForward(portforwards[key]);
+          setPortForward(item);
           return;
         }
       }
+      const massagedPortForwards = [...portForwards];
+      const portForwardsInStorage = localStorage.getItem(PORT_FORWARDS_STORAGE_KEY);
+      const parsedPortForwards = JSON.parse(portForwardsInStorage || '[]');
+      parsedPortForwards.forEach((portforward: any) => {
+        const isPortForwardInStorage = portForwards.find((pf: any) => pf.id === portforward.id);
+        if (!isPortForwardInStorage) {
+          portforward.status = PORT_FORWARD_STOP_STATUS;
+          massagedPortForwards.push(portforward);
+        }
+      });
+      localStorage.setItem(PORT_FORWARDS_STORAGE_KEY, JSON.stringify(massagedPortForwards));
     });
   }, []);
 
@@ -111,10 +136,7 @@ export default function PortForward(props: PortForwardProps) {
     const serviceNamespace = namespace;
     const serviceName = !isPod ? massagedResourceName : '';
     const podName = isPod ? massagedResourceName : pods[0].metadata.name;
-    const massagedContainerPort =
-      typeof containerPort === 'string' && isNaN(parseInt(containerPort))
-        ? getPortNumberFromPortName(pods[0].spec.containers, containerPort)
-        : containerPort;
+
     setLoading(true);
     startPortForward(
       cluster,
@@ -122,11 +144,19 @@ export default function PortForward(props: PortForwardProps) {
       podName,
       massagedContainerPort,
       serviceName,
-      serviceNamespace
+      serviceNamespace,
+      portForward?.port,
+      portForward?.id
     )
       .then((data: any) => {
         setLoading(false);
         setPortForward(data);
+
+        // append this new started portforward to storage
+        const portForwardsInStorage = localStorage.getItem(PORT_FORWARDS_STORAGE_KEY);
+        const parsedPortForwards = JSON.parse(portForwardsInStorage || '[]');
+        parsedPortForwards.push(data);
+        localStorage.setItem(PORT_FORWARDS_STORAGE_KEY, JSON.stringify(parsedPortForwards));
       })
       .catch(() => {
         setPortForward(null);
@@ -137,13 +167,39 @@ export default function PortForward(props: PortForwardProps) {
     if (!portForward || !cluster) {
       return;
     }
-    deletePortForward(cluster, portForward.id)
+    setLoading(true);
+    stopOrDeletePortForward(cluster, portForward.id, true)
       .then(() => {
-        setPortForward(null);
+        portForward.status = PORT_FORWARD_STOP_STATUS;
+        setPortForward(portForward);
       })
       .catch(() => {
         setPortForward(null);
+      })
+      .finally(() => {
+        setLoading(false);
       });
+  }
+
+  function deletePortForwardHandler() {
+    const id = portForward?.id;
+    const cluster = getCluster();
+    setLoading(true);
+    if (!cluster || !id) {
+      return;
+    }
+    stopOrDeletePortForward(cluster, id, false).finally(() => {
+      setLoading(false);
+      // remove portforward from storage too
+      const portforwardInStorage = localStorage.getItem(PORT_FORWARDS_STORAGE_KEY);
+      const parsedPortForwards = JSON.parse(portforwardInStorage || '[]');
+      const index = parsedPortForwards.findIndex((pf: any) => pf.id === id);
+      if (index !== -1) {
+        parsedPortForwards.splice(index, 1);
+      }
+      localStorage.setItem(PORT_FORWARDS_STORAGE_KEY, JSON.stringify(parsedPortForwards));
+      setPortForward(null);
+    });
   }
 
   if (isPod && !isPodRunning) {
@@ -159,15 +215,16 @@ export default function PortForward(props: PortForwardProps) {
       ) : (
         <Button
           onClick={handlePortForward}
-          aria-label="start portforward"
+          aria-label={t('resource|Start port forward')}
           color="primary"
           variant="outlined"
           style={{
             textTransform: 'none',
           }}
+          disabled={loading}
         >
           <InlineIcon icon="mdi:fast-forward" width={20} />
-          <Typography>{t('frequent|Forward port')}</Typography>
+          <Typography>{t('resource|Forward port')}</Typography>
         </Button>
       )}
       {error && (
@@ -179,7 +236,7 @@ export default function PortForward(props: PortForwardProps) {
                 setError(null);
               }}
             >
-              <Tooltip title={error}>
+              <Tooltip title="error">
                 <Box style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{error}</Box>
               </Tooltip>
             </Alert>
@@ -189,20 +246,61 @@ export default function PortForward(props: PortForwardProps) {
     </Box>
   ) : (
         <Box>
-          <MuiLink href={`${forwardBaseURL}:${portForward.port}`} target="_blank" color="primary">
-            {`${forwardBaseURL}:${portForward.port}`}
-          </MuiLink>
-          <ActionButton
-            onClick={portForwardStopHandler}
-            description={t('frequent|Stop forwarding')}
-            color="primary"
-            icon="mdi:stop-circle-outline"
-            iconButtonProps={{
-              size: 'small',
-              color: 'primary',
-            }}
-            width={'25'}
-          />
+          {portForward.status === PORT_FORWARD_STOP_STATUS ? (
+            <Box display={'flex'} alignItems="center">
+              <Typography
+                style={{
+                  color: grey[500],
+                }}
+              >{`${forwardBaseURL}:${portForward.port}`}</Typography>
+              <ActionButton
+                onClick={handlePortForward}
+                description={t('resource|Start port forward')}
+                color="primary"
+                icon="mdi:fast-forward"
+                iconButtonProps={{
+                  size: 'small',
+                  color: 'primary',
+                  disabled: loading,
+                }}
+                width={'25'}
+              />
+              <ActionButton
+                onClick={deletePortForwardHandler}
+                description={t('resource|Delete port forward')}
+                color="primary"
+                icon="mdi:delete-outline"
+                iconButtonProps={{
+                  size: 'small',
+                  color: 'primary',
+                  disabled: loading,
+                }}
+                width={'25'}
+              />
+            </Box>
+          ) : (
+            <>
+              <MuiLink
+                href={`${forwardBaseURL}:${portForward.port}`}
+                target="_blank"
+                color="primary"
+              >
+                {`${forwardBaseURL}:${portForward.port}`}
+              </MuiLink>
+              <ActionButton
+                onClick={portForwardStopHandler}
+                description={t('resource|Stop port forward')}
+                color="primary"
+                icon="mdi:stop-circle-outline"
+                iconButtonProps={{
+                  size: 'small',
+                  color: 'primary',
+                  disabled: loading,
+                }}
+                width={'25'}
+              />
+            </>
+          )}
         </Box>
   );
 }
