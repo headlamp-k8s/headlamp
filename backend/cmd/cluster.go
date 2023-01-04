@@ -19,7 +19,8 @@ type Cluster struct {
 	Name     string `json:"name"`
 	Server   string `json:"server,omitempty"`
 	config   *clientcmdapi.Cluster
-	AuthType string `json:"auth_type"`
+	AuthType string                 `json:"auth_type"`
+	Metadata map[string]interface{} `json:"meta_data"`
 }
 
 type ClusterReq struct {
