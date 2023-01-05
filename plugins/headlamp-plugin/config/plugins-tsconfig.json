@@ -5,13 +5,16 @@
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "baseUrl": "../../../../",
+    "esModuleInterop": true,
+    "types": ["lodash"],
     "paths": {
       "*": [
         "node_modules/@kinvolk/headlamp-plugin/node_modules/*",
         "node_modules/@kinvolk/headlamp-plugin/node_modules/*/index.js",
+        "node_modules/@types/*",
         "node_modules/*.js",
         "node_modules/*/es6/index.js",
-        "node_modules/@types/*"
+        "node_modules/*/index.js"
       ],
       "@iconify/react": [
         "node_modules/@kinvolk/headlamp-plugin/node_modules/@iconify/react/src/icon.js"
