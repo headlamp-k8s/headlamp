@@ -19,7 +19,8 @@ type Cluster struct {
 	Name     string `json:"name"`
 	Server   string `json:"server,omitempty"`
 	config   *clientcmdapi.Cluster
-	AuthType string `json:"auth_type"`
+	AuthType string                 `json:"auth_type"`
+	Metadata map[string]interface{} `json:"meta_data"`
 }
 
 type ClusterReq struct {
@@ -31,7 +32,8 @@ type ClusterReq struct {
 	InsecureSkipTLSVerify bool `json:"insecure-skip-tls-verify,omitempty"`
 	// CertificateAuthorityData contains PEM-encoded certificate authority certificates. Overrides CertificateAuthority
 	// +optional
-	CertificateAuthorityData []byte `json:"certificate-authority-data,omitempty"`
+	CertificateAuthorityData []byte                 `json:"certificate-authority-data,omitempty"`
+	Metadata                 map[string]interface{} `json:"meta_data"`
 }
 
 func GetClusterOidcConfig(clusterName string) (*OidcConfig, error) {

@@ -71,7 +71,7 @@ func GetContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 			}
 		}
 
-		cluster := Cluster{key, clusterConfig.Server, clusterConfig, authType}
+		cluster := Cluster{key, clusterConfig.Server, clusterConfig, authType, nil}
 
 		contexts = append(contexts, Context{key, cluster, authInfo})
 	}
