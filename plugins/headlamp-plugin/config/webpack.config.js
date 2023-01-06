@@ -14,7 +14,6 @@ const externalModules = {
   lodash: 'pluginLib.Lodash',
   notistack: 'pluginLib.Notistack',
   '@kinvolk/headlamp-plugin/lib/ApiProxy': 'pluginLib.ApiProxy',
-  '@kinvolk/headlamp-plugin/lib/ApiProxy': 'pluginLib.Crd',
   '@kinvolk/headlamp-plugin/lib/Crd': 'pluginLib.Crd',
   '@kinvolk/headlamp-plugin/lib/lib/k8s/crd': 'pluginLib.Crd',
   '@kinvolk/headlamp-plugin/lib/k8s/crd': 'pluginLib.Crd',
