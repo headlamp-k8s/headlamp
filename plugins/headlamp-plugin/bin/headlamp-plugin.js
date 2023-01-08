@@ -465,7 +465,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
 
     let changed = false;
 
-    const scriptKeys = ['tsc', 'storybook'];
+    const scriptKeys = ['tsc', 'storybook', 'test'];
     scriptKeys.forEach(key => {
       if (packageJson['scripts'][key] !== templatePackageJson['scripts'][key]) {
         packageJson['scripts'][key] = templatePackageJson['scripts'][key];
