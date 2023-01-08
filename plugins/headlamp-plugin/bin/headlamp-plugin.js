@@ -685,6 +685,30 @@ function storybook(packageFolder) {
   return 0;
 }
 
+/**
+ * Run tests.
+ *
+ * @param packageFolder {string} - folder where the package is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ */
+function test(packageFolder) {
+  try {
+    child_process.execSync(
+      './node_modules/.bin/react-scripts test --transformIgnorePatterns "/node_modules/(?!d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference|@kinvolk/headlamp-plugin)"',
+      {
+        stdio: 'inherit',
+        cwd: packageFolder,
+        encoding: 'utf8',
+      }
+    );
+  } catch (e) {
+    console.error(`Problem running start-storybook inside of "${packageFolder}"`);
+    return 1;
+  }
+
+  return 0;
+}
+
 yargs(process.argv.slice(2))
   .command(
     'build [package]',
@@ -811,6 +835,20 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = upgrade(argv.package, argv.skipPackageUpdates);
+    }
+  )
+  .command(
+    'test [package]',
+    'Test. ' + '<package> defaults to current working directory.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to test',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = test(argv.package);
     }
   )
   .demandCommand(1, '')
