@@ -463,21 +463,36 @@ function upgrade(packageFolder, skipPackageUpdates) {
     );
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
+    /** If we change some config. */
     let changed = false;
 
-    const scriptKeys = ['tsc', 'storybook', 'test'];
-    scriptKeys.forEach(key => {
-      if (packageJson['scripts'][key] !== templatePackageJson['scripts'][key]) {
-        packageJson['scripts'][key] = templatePackageJson['scripts'][key];
-        changed = true;
-        console.log(
-          `Updated package.json field scripts.${key}: ${JSON.stringify(
-            packageJson['scripts'][key]
-          )}`
-        );
-      }
-    });
+    /**
+     * Replaces mested config keys with ones in the template.
+     *
+     * It only replaces the properties specified, and does so if they
+     * are missing or not equal to the ones in the template.
+     *
+     * @param {string} keyName top level key to do the replacement in
+     * @param {string[]} subProperties properties for keyName to replace
+     */
+    function replaceNestedKeys(keyName, subProperties) {
+      subProperties.forEach(key => {
+        if (packageJson[keyName][key] !== templatePackageJson[keyName][key]) {
+          packageJson[keyName][key] = templatePackageJson[keyName][key];
+          changed = true;
+          console.log(
+            `Updated package.json field ${keyName}.${key}: ${JSON.stringify(
+              packageJson[keyName][key]
+            )}`
+          );
+        }
+      });
+    }
 
+    replaceNestedKeys('scripts', ['tsc', 'storybook', 'test']);
+    replaceNestedKeys('devDependencies', ['react', 'react-dom', '@storybook/addon-storyshots']);
+
+    // replace top level keys
     const checkKeys = ['eslintConfig', 'prettier'];
     checkKeys.forEach(key => {
       if (JSON.stringify(packageJson[key]) !== JSON.stringify(templatePackageJson[key])) {

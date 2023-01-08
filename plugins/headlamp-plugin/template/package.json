@@ -29,6 +29,9 @@
     ]
   },
   "devDependencies": {
-    "@kinvolk/headlamp-plugin": "^$${headlamp-plugin-version}"
+    "@kinvolk/headlamp-plugin": "^$${headlamp-plugin-version}",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "@storybook/addon-storyshots": "6.4.13"
   }
 }
