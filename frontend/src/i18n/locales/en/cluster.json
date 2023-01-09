@@ -14,5 +14,13 @@
   "Or try running Headlamp with a different kube config.": "Or try running Headlamp with a different kube config.",
   "Install the metrics-server to get usage data.": "Install the metrics-server to get usage data.",
   "Cluster version upgraded to {{ gitVersion }}": "Cluster version upgraded to {{ gitVersion }}",
-  "Cluster version downgraded to {{ gitVersion }}": "Cluster version downgraded to {{ gitVersion }}"
+  "Cluster version downgraded to {{ gitVersion }}": "Cluster version downgraded to {{ gitVersion }}",
+  "Couldn't read kubeconfig file": "Couldn't read kubeconfig file",
+  "Upload a valid kubeconfig": "Upload a valid kubeconfig",
+  "Drag&Drop your kubeconfig file here": "Drag&Drop your kubeconfig file here",
+  "Upload File": "Upload File",
+  "Select Clusters": "Select Clusters",
+  "Setting up cluster": "Setting up cluster",
+  "Cluster setup successfully!": "Cluster setup successfully!",
+  "Error setting up cluster, please upload a valid kubeconfig file": "Error setting up cluster, please upload a valid kubeconfig file"
 }
