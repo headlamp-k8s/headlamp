@@ -34,13 +34,15 @@ export interface RequestParams {
 
 export interface ClusterRequest {
   /** The name of the cluster (has to be unique, or it will override an existing cluster) */
-  name: string;
+  name?: string;
   /** The cluster URL */
-  server: string;
+  server?: string;
   /** Whether the server's certificate should not be checked for validity */
   insecureTLSVerify?: boolean;
   /** The certificate authority data */
   certificateAuthorityData?: string;
+  /** KubeConfig (base64 encoded)*/
+  kubeconfig?: string;
 }
 
 export interface QueryParameters {
