@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import { TestContext } from '../../../test';
 import {
   MetadataDisplay as MetadataDisplayComponent,
   MetadataDisplayProps,
@@ -12,9 +11,9 @@ export default {
   component: MetadataDisplayComponent,
   decorators: [
     Story => (
-      <MemoryRouter>
+      <TestContext>
         <Story />
-      </MemoryRouter>
+      </TestContext>
     ),
   ],
 } as Meta;

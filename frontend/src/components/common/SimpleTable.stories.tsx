@@ -1,7 +1,6 @@
 import { Box, Typography } from '@material-ui/core';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { Provider } from 'react-redux';
-import { MemoryRouter, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { createStore } from 'redux';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { useFilterFunc } from '../../lib/util';
@@ -34,11 +33,9 @@ function TestSimpleTable(props: SimpleTableProps) {
 }
 
 const Template: Story<SimpleTableProps> = args => (
-  <MemoryRouter>
-    <Provider store={store}>
-      <TestSimpleTable {...args} />
-    </Provider>
-  </MemoryRouter>
+  <TestContext store={store}>
+    <TestSimpleTable {...args} />
+  </TestContext>
 );
 
 const fixtureData = {
@@ -243,23 +240,31 @@ const TemplateWithFilter: Story<{
 }> = args => {
   const { simpleTableArgs, search, namespaces = [] } = args;
 
-  const storeWithFilter = createStore(
-    (state = { filter: { namespaces: new Set<string>(), search: '' } }) => state,
+  const storeWithFilterAndSettings = createStore(
+    (
+      state = {
+        filter: { namespaces: new Set<string>(), search: '' },
+        ui: { settings: { tableRowsPerPageOptions: [10, 20, 50, 100] } },
+      }
+    ) => state,
     {
       filter: {
         namespaces: new Set(namespaces),
         search,
       },
+      ui: {
+        settings: {
+          tableRowsPerPageOptions: [10, 20, 50, 100],
+        },
+      },
     }
   );
 
   return (
-    <MemoryRouter>
-      <Provider store={storeWithFilter}>
-        <SectionFilterHeader title="Test" />
-        <SimpleTableWithFilter {...simpleTableArgs} />
-      </Provider>
-    </MemoryRouter>
+    <TestContext store={storeWithFilterAndSettings}>
+      <SectionFilterHeader title="Test" />
+      <SimpleTableWithFilter {...simpleTableArgs} />
+    </TestContext>
   );
 };
 

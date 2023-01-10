@@ -1,9 +1,8 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
+import { TestContext } from '../../../test';
 import ResourceTable, { ResourceTableFromResourceClassProps } from './ResourceTable';
 
 export default {
@@ -19,22 +18,30 @@ const TemplateWithFilter: Story<{
 }> = args => {
   const { resourceTableArgs, search, namespaces = [] } = args;
 
-  const storeWithFilter = createStore(
-    (state = { filter: { namespaces: new Set<string>(), search: '' } }) => state,
+  const storeWithFilterAndSettings = createStore(
+    (
+      state = {
+        filter: { namespaces: new Set<string>(), search: '' },
+        ui: { settings: { tableRowsPerPageOptions: [10, 20, 50, 100] } },
+      }
+    ) => state,
     {
       filter: {
         namespaces: new Set(namespaces),
         search,
       },
+      ui: {
+        settings: {
+          tableRowsPerPageOptions: [10, 20, 50, 100],
+        },
+      },
     }
   );
 
   return (
-    <MemoryRouter>
-      <Provider store={storeWithFilter}>
-        <ResourceTable {...resourceTableArgs} />
-      </Provider>
-    </MemoryRouter>
+    <TestContext store={storeWithFilterAndSettings}>
+      <ResourceTable {...resourceTableArgs} />
+    </TestContext>
   );
 };
 

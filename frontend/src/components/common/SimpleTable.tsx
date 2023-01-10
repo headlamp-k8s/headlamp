@@ -13,6 +13,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../helpers';
 import { useURLState } from '../../lib/util';
+import { useSettings } from '../App/settings/hook';
 import Empty from './EmptyContent';
 import { ValueLabel } from './Label';
 import Loader from './Loader';
@@ -165,7 +166,8 @@ export default function SimpleTable(props: SimpleTableProps) {
   const [page, setPage] = usePageURLState(shouldReflectInURL ? 'p' : '', prefix, initialPage);
   const [currentData, setCurrentData] = React.useState(data);
   const [displayData, setDisplayData] = React.useState(data);
-  const rowsPerPageOptions = props.rowsPerPage || [15, 25, 50];
+  const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
+  const rowsPerPageOptions = props.rowsPerPage || storeRowsPerPageOptions;
   const defaultRowsPerPage = React.useMemo(
     () => helpers.getTablesRowsPerPage(rowsPerPageOptions[0]),
     []

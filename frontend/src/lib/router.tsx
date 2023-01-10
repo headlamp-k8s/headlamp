@@ -4,6 +4,7 @@ import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import NotificationList from '../components/App/Notifications/List';
+import AppSettings from '../components/App/settings';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
 import Overview from '../components/cluster/Overview';
@@ -518,6 +519,15 @@ const defaultRoutes: {
     sidebar: 'notifications',
     noAuthRequired: true,
     component: () => <NotificationList />,
+  },
+  settings: {
+    path: '/settings',
+    exact: true,
+    name: 'Settings',
+    sidebar: 'settings',
+    useClusterURL: false,
+    noAuthRequired: true,
+    component: () => <AppSettings />,
   },
 };
 
