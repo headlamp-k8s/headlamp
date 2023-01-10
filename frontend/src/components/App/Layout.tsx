@@ -93,6 +93,7 @@ export default function Layout({}: LayoutProps) {
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
   const { t } = useTranslation('frequent');
+  const clusterInURL = getCluster();
 
   useEffect(() => {
     window.clusterConfigFetchHandler = setInterval(
@@ -177,9 +178,7 @@ export default function Layout({}: LayoutProps) {
         <TopBar />
         <Sidebar />
         <main id="main" className={classes.content}>
-          {clusters &&
-          !Object.keys(clusters).includes(getCluster() || '') &&
-          window.location.pathname !== '/' ? (
+          {clusters && !!clusterInURL && !Object.keys(clusters).includes(getCluster() || '') ? (
             <ClusterNotFoundPopup />
           ) : (
             ''
