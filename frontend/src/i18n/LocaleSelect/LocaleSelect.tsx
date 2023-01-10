@@ -5,6 +5,7 @@ import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { supportedLanguages } from '../config';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export interface LocaleSelectProps {
   showTitle?: boolean;
+  showFullNames?: boolean;
   formControlProps?: FormControlProps;
 }
 
@@ -22,11 +24,17 @@ export interface LocaleSelectProps {
  * A UI for selecting the locale with i18next
  */
 export default function LocaleSelect(props: LocaleSelectProps) {
-  const { formControlProps } = props;
+  const { formControlProps, showFullNames } = props;
   const classes = useStyles();
-
   const { t, i18n } = useTranslation('frequent');
   const theme = useTheme();
+  const fullNames = React.useMemo(() => {
+    if (!showFullNames) {
+      return {};
+    }
+
+    return getFullNames();
+  }, [showFullNames]);
 
   const changeLng = (event: React.ChangeEvent<{ value: unknown }>) => {
     const lng = event.target.value as string;
@@ -34,6 +42,23 @@ export default function LocaleSelect(props: LocaleSelectProps) {
     i18n.changeLanguage(lng);
     theme.direction = i18n.dir();
   };
+
+  function getFullNames() {
+    if (!i18n?.options?.supportedLngs) {
+      return {};
+    }
+
+    const fullNames: { [langCore: string]: string } = {};
+    i18n?.options?.supportedLngs.forEach((lng: string) => {
+      if (!lng) {
+        return;
+      }
+
+      fullNames[lng] = supportedLanguages[lng] || lng;
+    });
+
+    return fullNames;
+  }
 
   return (
     <FormControl className={classes.formControl} {...formControlProps}>
@@ -43,14 +68,13 @@ export default function LocaleSelect(props: LocaleSelectProps) {
         onChange={changeLng}
         inputProps={{ 'aria-label': t('Select locale') }}
       >
-        {i18n?.options?.supportedLngs &&
-          i18n.options.supportedLngs
-            .filter(lng => lng !== 'cimode')
-            .map(lng => (
-              <MenuItem value={lng} key={lng}>
-                {lng}
-              </MenuItem>
-            ))}
+        {(i18n?.options?.supportedLngs || [])
+          .filter(lng => lng !== 'cimode')
+          .map(lng => (
+            <MenuItem value={lng} key={lng}>
+              {showFullNames ? fullNames[lng] : lng}
+            </MenuItem>
+          ))}
       </Select>
     </FormControl>
   );

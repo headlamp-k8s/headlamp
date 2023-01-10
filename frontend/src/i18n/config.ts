@@ -4,6 +4,13 @@ import { initReactI18next } from 'react-i18next';
 
 const en = {}; // To keep TS happy.
 
+export const supportedLanguages: { [langCode: string]: string } = {
+  en: 'English',
+  es: 'Español',
+  fr: 'Français',
+  pt: 'Português',
+};
+
 i18next
   // detect user language https://github.com/i18next/i18next-browser-languageDetector
   .use(LanguageDetector)
@@ -31,7 +38,7 @@ i18next
   .init({
     debug: process.env.NODE_ENV === 'development',
     fallbackLng: 'en',
-    supportedLngs: ['en', 'pt', 'es', 'fr'],
+    supportedLngs: Object.keys(supportedLanguages),
     // nonExplicitSupportedLngs: true,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
