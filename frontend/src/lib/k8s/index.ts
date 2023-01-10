@@ -1,12 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setConfig } from '../../redux/actions/actions';
 import { ConfigState } from '../../redux/reducers/config';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { getCluster } from '../util';
 import { request } from './apiProxy';
-import { Cluster, KubeObject, LabelSelector, StringDict } from './cluster';
+import { KubeObject, LabelSelector, StringDict } from './cluster';
 import ClusterRole from './clusterRole';
 import ClusterRoleBinding from './clusterRoleBinding';
 import ConfigMap from './configMap';
@@ -35,8 +33,6 @@ import Service from './service';
 import ServiceAccount from './serviceAccount';
 import StatefulSet from './statefulSet';
 import StorageClass from './storageClass';
-
-const CLUSTER_FETCH_INTERVAL = 60 * 1000; // ms
 
 const classList = [
   ClusterRole,
@@ -82,56 +78,9 @@ classList.forEach(cls => {
 
 export const ResourceClasses = resourceClassesDict;
 
-interface Config {
-  [prop: string]: any;
-}
-
 // Hook for getting or fetching the clusters configuration.
 export function useClustersConf(): ConfigState['clusters'] {
-  const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
-  const [retry, setRetry] = React.useState(!clusters || Object.keys(clusters).length === 0);
-
-  React.useEffect(() => {
-    let retryHandler = 0;
-
-    if (retry) {
-      setRetry(false);
-
-      request('/config', {}, false, false)
-        .then((config: Config) => {
-          const clustersToConfig: ConfigState['clusters'] = {};
-          config?.clusters.forEach((cluster: Cluster) => {
-            clustersToConfig[cluster.name] = cluster;
-          });
-
-          const configToStore = {
-            ...config,
-            clusters: clustersToConfig,
-          };
-
-          if (
-            !clusters ||
-            Object.keys(clusters).length !== 0 ||
-            Object.keys(clustersToConfig).length !== 0
-          ) {
-            dispatch(setConfig(configToStore));
-          }
-        })
-        .catch((err: Error) => {
-          console.error(err);
-          retryHandler = window.setInterval(() => setRetry(true), CLUSTER_FETCH_INTERVAL);
-        });
-
-      return function cleanup() {
-        if (retryHandler !== 0) {
-          window.clearInterval(retryHandler);
-          retryHandler = 0;
-        }
-      };
-    }
-  }, [clusters, dispatch, retry]);
-
   return clusters;
 }
 

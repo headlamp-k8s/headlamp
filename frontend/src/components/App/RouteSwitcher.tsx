@@ -17,11 +17,12 @@ import { setHideAppBar } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { useSidebarItem } from '../Sidebar';
 
-export default function RouteSwitcher() {
+export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
   // The NotFoundRoute always has to be evaluated in the last place.
   const routes = useTypedSelector(state => state.ui.routes);
   const routeFilters = useTypedSelector(state => state.ui.routeFilters);
   const defaultRoutes = Object.values(getDefaultRoutes()).concat(NotFoundRoute);
+  const clusters = useClustersConf();
   const filteredRoutes = Object.values(routes)
     .concat(defaultRoutes)
     .filter(
@@ -44,8 +45,10 @@ export default function RouteSwitcher() {
             requiresAuth={!route.noAuthRequired}
             requiresCluster={getRouteUseClusterURL(route)}
             exact={!!route.exact}
-            children={<RouteComponent route={route} />}
-            key={index}
+            clusters={clusters}
+            requiresToken={props.requiresToken}
+            children={<RouteComponent route={route} key={getCluster()} />}
+            key={`${getCluster()}`}
           />
         )
       )}
@@ -86,14 +89,20 @@ interface AuthRouteProps {
   sidebar: string | null;
   requiresAuth: boolean;
   requiresCluster: boolean;
+  requiresToken: () => boolean;
   [otherProps: string]: any;
 }
 
 function AuthRoute(props: AuthRouteProps) {
-  const { children, sidebar, requiresAuth = true, requiresCluster = true, ...other } = props;
-  const clusters = useClustersConf();
+  const {
+    children,
+    sidebar,
+    requiresAuth = true,
+    requiresCluster = true,
+    requiresToken,
+    ...other
+  } = props;
   const redirectRoute = getCluster() ? 'login' : 'chooser';
-
   useSidebarItem(sidebar);
 
   function getRenderer({ location }: RouteProps) {
@@ -104,9 +113,7 @@ function AuthRoute(props: AuthRouteProps) {
     if (requiresCluster) {
       const clusterName = getCluster();
       if (!!clusterName) {
-        const cluster = clusters ? clusters[clusterName] : undefined;
-        const requiresToken = cluster?.useToken === undefined || cluster?.useToken;
-        if (!!getToken(clusterName) || !requiresToken) {
+        if (!!getToken(clusterName) || !requiresToken()) {
           return children;
         }
       }
