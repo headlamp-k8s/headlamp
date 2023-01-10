@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
+import TableCell, { TableCellProps } from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
@@ -456,6 +456,7 @@ export interface NameValueTableRow {
 
 interface NameValueTableProps {
   rows: NameValueTableRow[];
+  valueCellProps?: TableCellProps;
 }
 
 function Value({
@@ -482,7 +483,7 @@ function Value({
 
 export function NameValueTable(props: NameValueTableProps) {
   const classes = useStyles();
-  const { rows } = props;
+  const { rows, valueCellProps } = props;
 
   return (
     <Table className={classes.table}>
@@ -504,7 +505,7 @@ export function NameValueTable(props: NameValueTableProps) {
               <TableCell component="th" scope="row" className={classes.metadataNameCell}>
                 {name}
               </TableCell>
-              <TableCell className={classes.metadataCell}>
+              <TableCell className={classes.metadataCell} {...valueCellProps}>
                 <Value value={value} />
               </TableCell>
             </TableRow>
