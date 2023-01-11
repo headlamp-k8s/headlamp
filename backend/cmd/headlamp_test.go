@@ -3,13 +3,16 @@ package main
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const staticTestPath = "headlamp_testdata/static_files/"
@@ -113,6 +116,15 @@ func getResponse(handler http.Handler, method, url string, body interface{}) (*h
 
 //nolint:gocognit,funlen
 func TestDynamicClusters(t *testing.T) {
+	var (
+		newCluster        = "mynewcluster"
+		newClusterServer  = "https://mysupercluster.io"
+		newCluster2       = "mynewcluster-2"
+		newCluster2Server = "https://mysupercluster2.io"
+		newCluster3       = "mynewcluster-3"
+		newCluster3Server = "https://mysupercluster3.io"
+	)
+
 	tests := []struct {
 		name                string
 		clusters            []ClusterReq
@@ -123,17 +135,19 @@ func TestDynamicClusters(t *testing.T) {
 			name: "create",
 			clusters: []ClusterReq{
 				{
-					Name:   "mynewcluster",
-					Server: "https://mysupercluster.io",
+					Name:                     &newCluster,
+					Server:                   &newClusterServer,
+					CertificateAuthorityData: []byte("abcde"),
 				},
 				{
-					Name:                  "mynewcluster-2",
-					Server:                "https://mysupercluster2.io",
-					InsecureSkipTLSVerify: true,
+					Name:                     &newCluster2,
+					Server:                   &newCluster2Server,
+					InsecureSkipTLSVerify:    true,
+					CertificateAuthorityData: []byte("abcde"),
 				},
 				{
-					Name:                     "mynewcluster-3",
-					Server:                   "https://mysupercluster3.io",
+					Name:                     &newCluster3,
+					Server:                   &newCluster3Server,
 					CertificateAuthorityData: []byte("abcde"),
 				},
 			},
@@ -144,12 +158,14 @@ func TestDynamicClusters(t *testing.T) {
 			name: "override",
 			clusters: []ClusterReq{
 				{
-					Name:   "mynewcluster",
-					Server: "https://mysupercluster.io",
+					Name:                     &newCluster,
+					Server:                   &newClusterServer,
+					CertificateAuthorityData: []byte("abcde"),
 				},
 				{
-					Name:   "mynewcluster", // same name will override
-					Server: "https://my-new-supercluster-url.io",
+					Name:                     &newCluster, // same name will override
+					Server:                   &newCluster2Server,
+					CertificateAuthorityData: []byte("abcde"),
 				},
 			},
 			expectedState:       http.StatusCreated,
@@ -159,12 +175,14 @@ func TestDynamicClusters(t *testing.T) {
 			name: "invalid",
 			clusters: []ClusterReq{
 				{
-					Name:   "",
-					Server: "https://mysupercluster.io",
+					Name:                     nil,
+					Server:                   &newClusterServer,
+					CertificateAuthorityData: []byte("abcde"),
 				},
 				{
-					Name:   "myinvalid",
-					Server: "",
+					Name:                     &newCluster,
+					Server:                   nil,
+					CertificateAuthorityData: []byte("abcde"),
 				},
 			},
 			expectedState:       http.StatusBadRequest,
@@ -197,15 +215,15 @@ func TestDynamicClusters(t *testing.T) {
 
 					// Get cluster we created
 					for i, val := range configuredClusters {
-						if val.Name == clusterReq.Name {
+						if val.Name == *clusterReq.Name {
 							cluster = &configuredClusters[i]
 							break
 						}
 					}
 
 					assert.NotNil(t, cluster)
-					assert.Equal(t, clusterReq.Name, cluster.Name)
-					assert.Equal(t, clusterReq.Server, cluster.Server)
+					assert.Equal(t, *clusterReq.Name, cluster.Name)
+					assert.Equal(t, *clusterReq.Server, cluster.Server)
 					assert.Equal(t, clusterReq.InsecureSkipTLSVerify, cluster.config.InsecureSkipTLSVerify)
 					assert.Equal(t, clusterReq.CertificateAuthorityData, cluster.config.CertificateAuthorityData)
 				}
@@ -220,16 +238,45 @@ func TestDynamicClusters(t *testing.T) {
 			}
 
 			if resp.Code == http.StatusCreated {
-				assert.Equal(t, resp.Body, configResp.Body)
-
-				var config clientConfig
-				err = json.Unmarshal(resp.Body.Bytes(), &config)
+				var clusterConfig clientConfig
+				err = json.Unmarshal(resp.Body.Bytes(), &clusterConfig)
 				if err != nil {
 					t.Fatal(err)
 				}
+				var config clientConfig
+				err = json.Unmarshal(configResp.Body.Bytes(), &config)
+				if err != nil {
+					t.Fatal(err)
+				}
+
+				assert.Equal(t, clusterConfig, config)
 			}
 
 			assert.Equal(t, len(c.getClusters()), tc.expectedNumClusters)
 		})
 	}
+}
+
+func TestDynamicClustersKubeConfig(t *testing.T) {
+	kubeConfigByte, err := ioutil.ReadFile("./headlamp_testdata/kubeconfig")
+	require.NoError(t, err)
+
+	kubeConfig := base64.StdEncoding.EncodeToString(kubeConfigByte)
+	req := ClusterReq{
+		KubeConfig: &kubeConfig,
+	}
+
+	c := HeadlampConfig{
+		useInCluster:   false,
+		kubeConfigPath: "",
+	}
+	handler := createHeadlampHandler(&c)
+
+	r, err := getResponse(handler, "POST", "/cluster", req)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	assert.Equal(t, r.Code, http.StatusCreated)
+	assert.Equal(t, 2, len(c.getClusters()))
 }

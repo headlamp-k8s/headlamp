@@ -25,8 +25,8 @@ type Cluster struct {
 }
 
 type ClusterReq struct {
-	Name   string `json:"name"`
-	Server string `json:"server"`
+	Name   *string `json:"name"`
+	Server *string `json:"server"`
 	// InsecureSkipTLSVerify skips the validity check for the server's certificate.
 	// This will make your HTTPS connections insecure.
 	// +optional
@@ -35,6 +35,7 @@ type ClusterReq struct {
 	// +optional
 	CertificateAuthorityData []byte                 `json:"certificate-authority-data,omitempty"`
 	Metadata                 map[string]interface{} `json:"meta_data"`
+	KubeConfig               *string                `json:"kubeconfig,omitempty"`
 }
 
 func GetClusterOidcConfig(clusterName string) (*OidcConfig, error) {

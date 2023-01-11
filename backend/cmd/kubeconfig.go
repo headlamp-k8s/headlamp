@@ -5,12 +5,14 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"time"
 
 	oidc "github.com/coreos/go-oidc"
 	"github.com/fsnotify/fsnotify"
+	"github.com/pkg/errors"
 	"golang.org/x/oauth2"
 	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
 	"k8s.io/client-go/tools/clientcmd"
@@ -44,6 +46,10 @@ func GetContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 		return nil, err
 	}
 
+	return GetContextsFromKubeConfig(config)
+}
+
+func GetContextsFromKubeConfig(config *clientcmdapi.Config) ([]Context, error) {
 	contexts := []Context{}
 
 	for key, value := range config.Contexts {
@@ -189,6 +195,15 @@ func refreshHeadlampConfig(config *HeadlampConfig) {
 	}
 }
 
+func joinKubeConfigPaths(paths ...string) string {
+	delimiter := ":"
+	if runtime.GOOS == "windows" {
+		delimiter = ";"
+	}
+
+	return strings.Join(paths, delimiter)
+}
+
 func splitKubeConfigPath(path string) []string {
 	delimiter := ":"
 	if runtime.GOOS == "windows" {
@@ -269,4 +284,36 @@ func handleWatchEvents(watcher *fsnotify.Watcher, config *HeadlampConfig) {
 			log.Println("error:", err)
 		}
 	}
+}
+
+func writeKubeConfig(config clientcmdapi.Config, path string) error {
+	configFile := filepath.Join(path, "config")
+	now := time.Now().Format("20060102150405")
+	// check if config file exists
+	if _, err := os.Stat(configFile); err == nil {
+		// if it exists, write a new config file with a timestamp
+		fileName := "config_" + now + ".yaml"
+
+		newKubeConfigFile := filepath.Join(path, fileName)
+		err = clientcmd.WriteToFile(config, newKubeConfigFile)
+
+		if err != nil {
+			return errors.Wrap(err, "failed to write new kubeconfig file")
+		}
+
+		defer os.Remove(newKubeConfigFile)
+
+		load := clientcmd.ClientConfigLoadingRules{
+			Precedence: []string{configFile, newKubeConfigFile},
+		}
+
+		mergedConfig, err := load.Load()
+		if err != nil {
+			return errors.Wrap(err, "failed to load merged kubeconfig")
+		}
+
+		config = *mergedConfig
+	}
+
+	return clientcmd.WriteToFile(config, configFile)
 }

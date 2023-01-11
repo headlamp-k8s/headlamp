@@ -20,19 +20,20 @@ import (
 const defaultPort = 4466
 
 type Config struct {
-	InCluster        bool   `koanf:"in-cluster"`
-	DevMode          bool   `koanf:"dev"`
-	InsecureSsl      bool   `koanf:"insecure-ssl"`
-	KubeConfigPath   string `koanf:"kubeconfig"`
-	StaticDir        string `koanf:"html-static-dir"`
-	PluginsDir       string `koanf:"plugins-dir"`
-	BaseURL          string `koanf:"base-url"`
-	Port             uint   `koanf:"port"`
-	ProxyURLs        string `koanf:"proxy-urls"`
-	OidcClientID     string `koanf:"oidc-client-id"`
-	OidcClientSecret string `koanf:"oidc-client-secret"`
-	OidcIdpIssuerURL string `koanf:"oidc-idp-issuer-url"`
-	OidcScopes       string `koanf:"oidc-scopes"`
+	InCluster                bool   `koanf:"in-cluster"`
+	DevMode                  bool   `koanf:"dev"`
+	InsecureSsl              bool   `koanf:"insecure-ssl"`
+	KubeConfigPath           string `koanf:"kubeconfig"`
+	KubeConfigPersistenceDir string `koanf:"kubeconfig-persistence-dir"`
+	StaticDir                string `koanf:"html-static-dir"`
+	PluginsDir               string `koanf:"plugins-dir"`
+	BaseURL                  string `koanf:"base-url"`
+	Port                     uint   `koanf:"port"`
+	ProxyURLs                string `koanf:"proxy-urls"`
+	OidcClientID             string `koanf:"oidc-client-id"`
+	OidcClientSecret         string `koanf:"oidc-client-secret"`
+	OidcIdpIssuerURL         string `koanf:"oidc-idp-issuer-url"`
+	OidcScopes               string `koanf:"oidc-scopes"`
 }
 
 func (c *Config) Validate() error {
@@ -141,6 +142,8 @@ func flagset() *flag.FlagSet {
 
 	f.String("kubeconfig", "", "Absolute path to the kubeconfig file")
 	f.String("html-static-dir", "", "Static HTML directory to serve")
+	f.String("kubeconfig-persistence-dir", defaultKubeConfigPersistenceDir(),
+		"Directory to persist the kubeconfigs that are loaded in Headlamp.")
 	f.String("plugins-dir", defaultPluginDir(), "Specify the plugins directory to build the backend with")
 	f.String("base-url", "", "Base URL path. eg. /headlamp")
 	f.Uint("port", defaultPort, "Port to listen from")
@@ -153,6 +156,46 @@ func flagset() *flag.FlagSet {
 		"A comma separated list of scopes needed from the OIDC provider")
 
 	return f
+}
+
+// defaultKubeConfigPersistenceDir returns the default directory to store kubeconfig
+// files of clusters that are loaded in Headlamp.
+func defaultKubeConfigPersistenceDir() string {
+	// These are the folders we use for the default kubeconfig-dir.
+	//  - the passed in kubeconfig-dir if it's not empty.
+	//  - "./.kubeconfigs" if it exists.
+	//  - ~/.config/Headlamp/kubeconfigs exists or it can be made
+	//  - "./.kubeconfigs" if the ~/.config/Headlamp/kubeconfigs can't be made.
+	// Windows: %APPDATA%\Headlamp\Config\kubeconfigs
+	//   (for example, C:\Users\USERNAME\AppData\Roaming\Headlamp\Config\plugins)
+	kubeConfigsDirDefault := "./.kubeconfigs"
+	if folderExists(kubeConfigsDirDefault) {
+		return kubeConfigsDirDefault
+	}
+
+	userConfigDir, err := os.UserConfigDir()
+	if err != nil {
+		log.Printf("error getting user config dir: %s\n", err)
+		return kubeConfigsDirDefault
+	}
+
+	kubeConfigDir := filepath.Join(userConfigDir, "Headlamp", "kubeconfigs")
+	if runtime.GOOS == "windows" {
+		// golang is wrong for config folder on windows.
+		// This matches env-paths and headlamp-plugin.
+		kubeConfigDir = filepath.Join(userConfigDir, "Headlamp", "Config", "kubeconfigs")
+	}
+
+	fileMode := 0755
+
+	err = os.MkdirAll(kubeConfigDir, fs.FileMode(fileMode))
+	if err != nil {
+		log.Printf("error creating plugins directory: %s\n", err)
+
+		return kubeConfigsDirDefault
+	}
+
+	return kubeConfigDir
 }
 
 // Gets the default plugins-dir depending on platform.
