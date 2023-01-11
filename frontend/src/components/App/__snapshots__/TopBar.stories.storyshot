@@ -43,43 +43,11 @@ exports[`Storyshots TopBar No Token 1`] = `
           class="MuiTouchRipple-root"
         />
       </button>
-      <div
-        class="MuiFormControl-root makeStyles-formControl"
-      >
-        <div
-          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
-        >
-          <div
-            aria-haspopup="listbox"
-            aria-label="Select locale"
-            class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
-            role="button"
-            tabindex="0"
-          >
-            en
-          </div>
-          <input
-            aria-hidden="true"
-            class="MuiSelect-nativeInput"
-            tabindex="-1"
-            value="en"
-          />
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root MuiSelect-icon"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M7 10l5 5 5-5z"
-            />
-          </svg>
-        </div>
-      </div>
       <button
-        aria-label="Change theme"
+        aria-label="Settings"
         class="MuiButtonBase-root MuiIconButton-root"
         tabindex="0"
+        title="Settings"
         type="button"
       >
         <span
@@ -156,43 +124,11 @@ exports[`Storyshots TopBar One Cluster 1`] = `
           class="MuiTouchRipple-root"
         />
       </button>
-      <div
-        class="MuiFormControl-root makeStyles-formControl"
-      >
-        <div
-          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
-        >
-          <div
-            aria-haspopup="listbox"
-            aria-label="Select locale"
-            class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
-            role="button"
-            tabindex="0"
-          >
-            en
-          </div>
-          <input
-            aria-hidden="true"
-            class="MuiSelect-nativeInput"
-            tabindex="-1"
-            value="en"
-          />
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root MuiSelect-icon"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M7 10l5 5 5-5z"
-            />
-          </svg>
-        </div>
-      </div>
       <button
-        aria-label="Change theme"
+        aria-label="Settings"
         class="MuiButtonBase-root MuiIconButton-root"
         tabindex="0"
+        title="Settings"
         type="button"
       >
         <span
@@ -269,43 +205,11 @@ exports[`Storyshots TopBar Token 1`] = `
           class="MuiTouchRipple-root"
         />
       </button>
-      <div
-        class="MuiFormControl-root makeStyles-formControl"
-      >
-        <div
-          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
-        >
-          <div
-            aria-haspopup="listbox"
-            aria-label="Select locale"
-            class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
-            role="button"
-            tabindex="0"
-          >
-            en
-          </div>
-          <input
-            aria-hidden="true"
-            class="MuiSelect-nativeInput"
-            tabindex="-1"
-            value="en"
-          />
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root MuiSelect-icon"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M7 10l5 5 5-5z"
-            />
-          </svg>
-        </div>
-      </div>
       <button
-        aria-label="Change theme"
+        aria-label="Settings"
         class="MuiButtonBase-root MuiIconButton-root"
         tabindex="0"
+        title="Settings"
         type="button"
       >
         <span
@@ -382,43 +286,11 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
           class="MuiTouchRipple-root"
         />
       </button>
-      <div
-        class="MuiFormControl-root makeStyles-formControl"
-      >
-        <div
-          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
-        >
-          <div
-            aria-haspopup="listbox"
-            aria-label="Select locale"
-            class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
-            role="button"
-            tabindex="0"
-          >
-            en
-          </div>
-          <input
-            aria-hidden="true"
-            class="MuiSelect-nativeInput"
-            tabindex="-1"
-            value="en"
-          />
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root MuiSelect-icon"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M7 10l5 5 5-5z"
-            />
-          </svg>
-        </div>
-      </div>
       <button
-        aria-label="Change theme"
+        aria-label="Settings"
         class="MuiButtonBase-root MuiIconButton-root"
         tabindex="0"
+        title="Settings"
         type="button"
       >
         <span
