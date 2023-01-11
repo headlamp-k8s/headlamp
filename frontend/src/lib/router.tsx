@@ -1,5 +1,3 @@
-import _ from 'lodash';
-import React from 'react';
 import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
@@ -615,11 +613,7 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   if (!fullParams.cluster && !!cluster) {
     fullParams.cluster = cluster;
   }
-  // if fullParams is empty it means it is a request for generating choser
-  // route
-  if (_.isEmpty(fullParams)) {
-    return generatePath(defaultRoutes['chooser'].path);
-  }
+
   const url = getRoutePath(route);
   return generatePath(url, fullParams);
 }
