@@ -16,9 +16,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import helpers from '../../../helpers';
 import LocaleSelect from '../../../i18n/LocaleSelect/LocaleSelect';
-import { setUISettings } from '../../../redux/actions/actions';
+import { setUISettings, setVersionDialogOpen } from '../../../redux/actions/actions';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
-import { NameValueTable, SectionBox } from '../../common';
+import { ActionButton, NameValueTable, SectionBox } from '../../common';
 import TimezoneSelect from '../../common/TimezoneSelect';
 import ThemeChangeButton from '../ThemeChangeButton';
 import { DefaultRowsPerPageOptions } from './config';
@@ -213,7 +213,21 @@ export default function Settings() {
   }, [selectedTimezone]);
 
   return (
-    <SectionBox title={t('General')}>
+    <SectionBox
+      title={t('General')}
+      headerProps={{
+        actions: [
+          <ActionButton
+            key="version"
+            icon="mdi:information-outline"
+            description={t('Version')}
+            onClick={() => {
+              dispatch(setVersionDialogOpen(true));
+            }}
+          />,
+        ],
+      }}
+    >
       <NameValueTable
         valueCellProps={{ className: classes.valueCol }}
         rows={[
