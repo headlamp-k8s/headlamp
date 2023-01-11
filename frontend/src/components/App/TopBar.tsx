@@ -225,6 +225,7 @@ export function PureTopBar({
   const classes = useStyles({ isSidebarOpen, isSmall });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const isClusterContext = !!cluster;
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -247,7 +248,7 @@ export function PureTopBar({
   };
 
   const userMenuId = 'primary-user-menu';
-  const renderUserMenu = (
+  const renderUserMenu = !!isClusterContext && (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -303,9 +304,11 @@ export function PureTopBar({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <ClusterTitle cluster={cluster} clusters={clusters} />
-      </MenuItem>
+      {isClusterContext && (
+        <MenuItem>
+          <ClusterTitle cluster={cluster} clusters={clusters} />
+        </MenuItem>
+      )}
       <AppBarActionsMenu appBarActions={appBarActions} />
       <MenuItem>
         <Notifications />
@@ -313,6 +316,19 @@ export function PureTopBar({
       <MenuItem>
         <SettingsButton onClickExtra={handleMenuClose} />
       </MenuItem>
+      {!!isClusterContext && (
+        <MenuItem>
+          <IconButton
+            aria-label={t('Account of current user')}
+            aria-controls={userMenuId}
+            aria-haspopup="true"
+            color="inherit"
+            onClick={handleProfileMenuOpen}
+          >
+            <Icon icon="mdi:account" />
+          </IconButton>
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -336,16 +352,18 @@ export function PureTopBar({
               <AppBarActions appBarActions={appBarActions} />
               <Notifications />
               <SettingsButton />
-              <IconButton
-                edge="end"
-                aria-label={t('Account of current user')}
-                aria-controls={userMenuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <Icon icon="mdi:account" />
-              </IconButton>
+              {!!isClusterContext && (
+                <IconButton
+                  edge="end"
+                  aria-label={t('Account of current user')}
+                  aria-controls={userMenuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <Icon icon="mdi:account" />
+                </IconButton>
+              )}
             </>
           )}
           {isSmall && (
