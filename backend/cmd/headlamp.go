@@ -32,6 +32,7 @@ import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
+	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 	"k8s.io/client-go/tools/portforward"
 	"k8s.io/client-go/transport/spdy"
@@ -313,6 +314,32 @@ func serveWithNoCacheHeader(fs http.Handler) http.HandlerFunc {
 	}
 }
 
+func setupProxyForContext(context *Context, config *HeadlampConfig, source int) error {
+	proxy, err := config.createProxyForContext(*context)
+	if err != nil {
+		log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
+		return err
+	}
+
+	_, isReplacement := config.contextProxies[context.Name]
+	if isReplacement {
+		fmt.Printf("Replaced cluster \"%s\" proxy by:\n", context.Name)
+	} else {
+		fmt.Println("Created new cluster proxy:")
+	}
+
+	fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name,
+		*context.cluster.getServer())
+
+	config.contextProxies[context.Name] = contextProxy{
+		context,
+		proxy,
+		source,
+	}
+
+	return nil
+}
+
 //nolint:gocognit,funlen,gocyclo
 func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	kubeConfigPath := config.kubeConfigPath
@@ -371,21 +398,11 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	if len(contexts) == 0 {
 		log.Println("No contexts/clusters configured by default!")
 	} else {
-		for i := range contexts {
-			context := &contexts[i]
-			proxy, err := config.createProxyForContext(*context)
+		for _, context := range contexts {
+			context := context
+			err := setupProxyForContext(&context, config, KubeConfig)
 			if err != nil {
 				log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
-				continue
-			}
-
-			fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name,
-				*context.cluster.getServer())
-
-			config.contextProxies[context.Name] = contextProxy{
-				context,
-				proxy,
-				KubeConfig,
 			}
 		}
 	}
@@ -952,28 +969,69 @@ func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//nolint:funlen,nestif
 func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 	clusterReq := ClusterReq{}
 	if err := json.NewDecoder(r.Body).Decode(&clusterReq); err != nil {
-		fmt.Println(err)
 		http.Error(w, "Error decoding cluster info", http.StatusBadRequest)
-
 		return
 	}
 
-	if clusterReq.Name == "" || clusterReq.Server == "" {
+	if clusterReq.KubeConfig != nil {
+		kubeConfigByte, err := base64.StdEncoding.DecodeString(*clusterReq.KubeConfig)
+		if err != nil {
+			http.Error(w, "Error decoding kubeconfig", http.StatusBadRequest)
+			return
+		}
+
+		config, err := clientcmd.Load(kubeConfigByte)
+		if err != nil {
+			http.Error(w, "Error loading kubeconfig", http.StatusBadRequest)
+			return
+		}
+
+		contexts, err := GetContextsFromKubeConfig(config)
+		if err != nil {
+			http.Error(w, "Error getting contexts from kubeconfig", http.StatusBadRequest)
+			return
+		}
+
+		var setupErrors []error
+
+		for _, context := range contexts {
+			context := context
+			context.cluster.Metadata = clusterReq.Metadata
+
+			err := setupProxyForContext(&context, c, DynamicCluster)
+			if err != nil {
+				setupErrors = append(setupErrors, err)
+			}
+		}
+
+		if len(setupErrors) > 0 {
+			http.Error(w, "Error setting up contexts from kubeconfig", http.StatusBadRequest)
+
+			return
+		}
+
+		w.WriteHeader(http.StatusCreated)
+		c.getConfig(w, r)
+
+		return
+	} else if clusterReq.Name == nil || clusterReq.Server == nil {
 		http.Error(w, "Error creating cluster with invalid info; please provide a 'name' and 'server' fields at least.",
 			http.StatusBadRequest)
+
 		return
 	}
 
 	context := Context{
-		Name: clusterReq.Name,
+		Name: *clusterReq.Name,
 		cluster: Cluster{
-			Name:   clusterReq.Name,
-			Server: clusterReq.Server,
+			Name:   *clusterReq.Name,
+			Server: *clusterReq.Server,
 			config: &clientcmdapi.Cluster{
-				Server:                   clusterReq.Server,
+				Server:                   *clusterReq.Server,
 				InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
 				CertificateAuthorityData: clusterReq.CertificateAuthorityData,
 			},
@@ -981,29 +1039,13 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	proxy, err := c.createProxyForContext(context)
+	err := setupProxyForContext(&context, c, DynamicCluster)
 	if err != nil {
-		log.Printf("Error creating proxy for cluster %s: %s", clusterReq.Name, err)
+		log.Printf("Error creating proxy for cluster %s: %s", *clusterReq.Name, err)
 		http.Error(w, "Error setting up cluster", http.StatusBadRequest)
 
 		return
 	}
-
-	_, isReplacement := c.contextProxies[clusterReq.Name]
-
-	c.contextProxies[clusterReq.Name] = contextProxy{
-		&context,
-		proxy,
-		DynamicCluster,
-	}
-
-	if isReplacement {
-		fmt.Printf("Replaced cluster \"%s\" proxy by:\n", context.Name)
-	} else {
-		fmt.Println("Created new cluster proxy:")
-	}
-
-	fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", c.port, c.baseURL, "/clusters/"+context.Name, clusterReq.Server)
 
 	w.WriteHeader(http.StatusCreated)
 	c.getConfig(w, r)

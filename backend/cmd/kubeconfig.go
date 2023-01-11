@@ -44,6 +44,10 @@ func GetContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 		return nil, err
 	}
 
+	return GetContextsFromKubeConfig(config)
+}
+
+func GetContextsFromKubeConfig(config *clientcmdapi.Config) ([]Context, error) {
 	contexts := []Context{}
 
 	for key, value := range config.Contexts {
