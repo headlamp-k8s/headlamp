@@ -1,5 +1,5 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { IconButton } from '@material-ui/core';
+import { DialogActions, IconButton } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
@@ -434,7 +434,17 @@ function Chooser(props: ClusterDialogProps) {
         ) : (
           <ClusterList clusters={clusterList} onButtonClick={handleButtonClick} />
         )}
-        {children}
+        {React.Children.toArray(children).length > 0 && (
+          <DialogActions>
+            <Grid container direction="row" justifyContent="space-between" alignItems="center">
+              {React.Children.toArray(children).map((child, index) => (
+                <Grid item key={index}>
+                  {child}
+                </Grid>
+              ))}
+            </Grid>
+          </DialogActions>
+        )}
       </ClusterDialog>
     </Box>
   );
