@@ -2,7 +2,7 @@ import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import NotificationList from '../components/App/Notifications/List';
-import AppSettings from '../components/App/settings';
+import AppSettings, { SettingsButton } from '../components/App/settings';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
 import Overview from '../components/cluster/Overview';
@@ -110,6 +110,7 @@ const defaultRoutes: {
     component: () => (
       <Chooser useCover open>
         <LocaleSelect />
+        <SettingsButton />
       </Chooser>
     ),
   },

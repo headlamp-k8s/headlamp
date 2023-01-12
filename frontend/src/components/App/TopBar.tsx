@@ -16,7 +16,6 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { getToken, setToken } from '../../lib/auth';
 import { useCluster, useClustersConf } from '../../lib/k8s';
-import { createRouteURL } from '../../lib/router';
 import {
   HeaderActionType,
   setVersionDialogOpen,
@@ -24,11 +23,11 @@ import {
 } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ClusterTitle } from '../cluster/Chooser';
-import { ActionButton } from '../common';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import Notifications from './Notifications';
+import { SettingsButton } from './settings';
 
 export interface TopBarProps {}
 
@@ -186,23 +185,6 @@ function AppBarActions({ appBarActions }: { appBarActions: HeaderActionType[] })
   })();
 
   return <>{actions}</>;
-}
-
-function SettingsButton(props: { onClickExtra?: () => void }) {
-  const { onClickExtra } = props;
-  const { t } = useTranslation(['glossary']);
-  const history = useHistory();
-
-  return (
-    <ActionButton
-      icon="mdi:cog"
-      description={t('glossary|Settings')}
-      onClick={() => {
-        history.push(createRouteURL('settings'));
-        onClickExtra && onClickExtra();
-      }}
-    />
-  );
 }
 
 export function PureTopBar({

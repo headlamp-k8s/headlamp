@@ -14,8 +14,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import helpers from '../../../helpers';
 import LocaleSelect from '../../../i18n/LocaleSelect/LocaleSelect';
+import { createRouteURL } from '../../../lib/router';
 import { setUISettings, setVersionDialogOpen } from '../../../redux/actions/actions';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { ActionButton, NameValueTable, SectionBox } from '../../common';
@@ -261,5 +263,22 @@ export default function Settings() {
         ]}
       />
     </SectionBox>
+  );
+}
+
+export function SettingsButton(props: { onClickExtra?: () => void }) {
+  const { onClickExtra } = props;
+  const { t } = useTranslation(['glossary']);
+  const history = useHistory();
+
+  return (
+    <ActionButton
+      icon="mdi:cog"
+      description={t('glossary|Settings')}
+      onClick={() => {
+        history.push(createRouteURL('settings'));
+        onClickExtra && onClickExtra();
+      }}
+    />
   );
 }
