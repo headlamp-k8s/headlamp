@@ -447,15 +447,17 @@ function Chooser(props: ClusterDialogProps) {
               ) : (
                 <ClusterList clusters={clusterList} onButtonClick={handleButtonClick} />
               )}
-              <Box style={{ justifyContent: 'center', display: 'flex' }}>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  onClick={() => setLoadFromKubeConfig(true)}
-                >
-                  {t('Load from a file')}
-                </Button>
-              </Box>
+              {helpers.isElectron() || helpers.isDevMode() ? (
+                <Box style={{ justifyContent: 'center', display: 'flex' }}>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={() => setLoadFromKubeConfig(true)}
+                  >
+                    {t('Load from a file')}
+                  </Button>
+                </Box>
+              ) : null}
             </DialogContent>
           </>
         ) : (
