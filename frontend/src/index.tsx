@@ -1,4 +1,3 @@
-import * as buffer from 'buffer';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -13,8 +12,6 @@ if (process.env.NODE_ENV !== 'production') {
     axe = axe.default; //changed to esm module sometimes?
   }
   const axeCore = require('axe-core');
-  // Buffer class is not polyffiled with CRA(v5) so we manually do it here
-  window.Buffer = buffer.Buffer;
 
   if (process.env.REACT_APP_SKIP_A11Y !== 'true') {
     axe(React, ReactDOM, 500, undefined, undefined, (results: typeof axeCore.AxeResults) => {

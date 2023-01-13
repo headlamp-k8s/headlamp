@@ -4,11 +4,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
+import * as buffer from 'buffer';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import getDocDefinitions from '../../../lib/docs';
 import Empty from '../EmptyContent';
 import Loader from '../Loader';
+
+// Buffer class is not polyffiled with CRA(v5) so we manually do it here
+window.Buffer = buffer.Buffer;
 
 const useStyles = makeStyles(() => ({
   root: {
