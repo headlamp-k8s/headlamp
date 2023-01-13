@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { createStore } from 'redux';
+import { KubeObject } from '../lib/k8s/cluster';
 import defaultStore from '../redux/stores/store';
 
 export type TestContextProps = PropsWithChildren<{
@@ -34,4 +35,15 @@ export function TestContext(props: TestContextProps) {
       </MemoryRouter>
     </Provider>
   );
+}
+
+export function overrideKubeObject(
+  kubeObject: KubeObject,
+  propsToOverride: { [method: keyof KubeObject]: KubeObject[keyof KubeObject] | undefined }
+) {
+  for (const [key, value] of Object.entries(propsToOverride)) {
+    if (value !== undefined) {
+      kubeObject[key] = value;
+    }
+  }
 }
