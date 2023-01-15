@@ -185,7 +185,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="1/1/2020, 12:00:00 AM UTC"
+                  title="2020-01-01T00:00:00.000Z"
                 >
                   3mo
                   <span />
@@ -236,7 +236,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="1/1/2020, 12:00:00 AM UTC"
+                  title="2020-01-01T00:00:00.000Z"
                 >
                   3mo
                   <span />
@@ -287,7 +287,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="1/1/2020, 12:00:00 AM UTC"
+                  title="2020-01-01T00:00:00.000Z"
                 >
                   3mo
                   <span />
@@ -338,7 +338,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="1/1/2020, 12:00:00 AM UTC"
+                  title="2020-01-01T00:00:00.000Z"
                 >
                   3mo
                   <span />
@@ -389,7 +389,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="1/1/2020, 12:00:00 AM UTC"
+                  title="2020-01-01T00:00:00.000Z"
                 >
                   3mo
                   <span />

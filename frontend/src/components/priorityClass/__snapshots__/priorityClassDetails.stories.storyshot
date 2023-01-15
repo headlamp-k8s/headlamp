@@ -135,7 +135,7 @@ exports[`Storyshots PriorityClasses/PriorityClassesDetailsView Default 1`] = `
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                       >
-                        10/26/2022, 1:46:17 PM UTC
+                        2022-10-26T13:46:17.000Z
                       </span>
                     </td>
                   </tr>

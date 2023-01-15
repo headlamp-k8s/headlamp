@@ -155,7 +155,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                       >
-                        10/20/2022, 11:10:58 AM UTC
+                        2022-10-20T11:10:58.000Z
                       </span>
                     </td>
                   </tr>

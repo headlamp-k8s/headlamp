@@ -129,7 +129,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                       >
-                        4/25/2020, 12:00:00 AM UTC
+                        2020-04-25T00:00:00.000Z
                       </span>
                     </td>
                   </tr>

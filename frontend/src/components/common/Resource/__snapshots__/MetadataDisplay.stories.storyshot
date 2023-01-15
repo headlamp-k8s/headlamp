@@ -64,7 +64,7 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            6/2/2021, 12:00:00 AM UTC
+            2021-06-02T00:00:00.000Z
           </span>
         </td>
       </tr>
@@ -188,7 +188,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            6/2/2021, 12:00:00 AM UTC
+            2021-06-02T00:00:00.000Z
           </span>
         </td>
       </tr>
@@ -372,7 +372,7 @@ exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
           <span
             class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            6/2/2021, 12:00:00 AM UTC
+            2021-06-02T00:00:00.000Z
           </span>
         </td>
       </tr>
