@@ -41,26 +41,33 @@ export default function CreateButton() {
   };
 
   function handleSave(newItemDefs: KubeObjectInterface[]) {
+    let massagedNewItemDefs = newItemDefs;
     const cancelUrl = location.pathname;
+
     // check if all yaml objects are valid
-    for (let i = 0; i < newItemDefs.length; i++) {
-      if (!newItemDefs[i].metadata?.name) {
+    for (let i = 0; i < massagedNewItemDefs.length; i++) {
+      if (massagedNewItemDefs[i].kind === 'List') {
+        // flatten this List kind with the items that it has which is a list of valid k8s resources
+        const deletedItem = massagedNewItemDefs.splice(i, 1);
+        massagedNewItemDefs = massagedNewItemDefs.concat(deletedItem[0].items);
+      }
+      if (!massagedNewItemDefs[i].metadata?.name) {
         setErrorMessage(
           t(`resource|Invalid: One or more of the resource doesn't have a name property`)
         );
         return;
       }
-      if (!newItemDefs[i].kind) {
+      if (!massagedNewItemDefs[i].kind) {
         setErrorMessage(t('resource|Invalid: Please set a kind to the resource'));
         return;
       }
     }
     // all resources name
-    const resourceNames = newItemDefs.map(newItemDef => newItemDef.metadata.name);
+    const resourceNames = massagedNewItemDefs.map(newItemDef => newItemDef.metadata.name);
     setOpenDialog(false);
     dispatch(
-      clusterAction(() => applyFunc(newItemDefs), {
-        startMessage: t('resource|plying {{ newItemName }}…', {
+      clusterAction(() => applyFunc(massagedNewItemDefs), {
+        startMessage: t('resource|Applying {{ newItemName }}…', {
           newItemName: resourceNames.join(','),
         }),
         cancelledMessage: t('resource|Cancelled applying {{ newItemName }}.', {
