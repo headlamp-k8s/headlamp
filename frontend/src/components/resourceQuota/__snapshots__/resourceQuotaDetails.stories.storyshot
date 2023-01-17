@@ -155,7 +155,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                       >
-                        10/25/2022, 11:48:48 AM UTC
+                        2022-10-25T11:48:48.000Z
                       </span>
                     </td>
                   </tr>

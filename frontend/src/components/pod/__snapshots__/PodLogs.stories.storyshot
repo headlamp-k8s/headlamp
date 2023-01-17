@@ -180,7 +180,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                       >
-                        1/1/2022, 12:00:00 AM UTC
+                        2022-01-01T00:00:00.000Z
                       </span>
                     </td>
                   </tr>
@@ -373,7 +373,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="1/1/2022, 12:05:00 AM UTC"
+                        title="2022-01-01T00:05:00.000Z"
                       >
                         3 months
                         <span />
@@ -413,7 +413,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="1/1/2022, 12:05:00 AM UTC"
+                        title="2022-01-01T00:05:00.000Z"
                       >
                         3 months
                         <span />
@@ -453,7 +453,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="1/1/2022, 12:05:00 AM UTC"
+                        title="2022-01-01T00:05:00.000Z"
                       >
                         3 months
                         <span />
@@ -493,7 +493,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="1/1/2022, 12:05:00 AM UTC"
+                        title="2022-01-01T00:05:00.000Z"
                       >
                         3 months
                         <span />

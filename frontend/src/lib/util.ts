@@ -78,6 +78,7 @@ export function localeDate(date: DateParam) {
     options.timeZone = 'UTC';
     options.hour12 = true;
     locale = 'en-US';
+    return new Date(date).toISOString();
   } else {
     options.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   }

@@ -155,7 +155,7 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                       >
-                        1/1/2022, 12:00:00 AM UTC
+                        2022-01-01T00:00:00.000Z
                       </span>
                     </td>
                   </tr>
@@ -476,7 +476,7 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                       >
-                        1/1/2022, 12:00:00 AM UTC
+                        2022-01-01T00:00:00.000Z
                       </span>
                     </td>
                   </tr>

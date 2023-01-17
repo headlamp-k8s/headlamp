@@ -155,7 +155,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                       >
-                        10/6/2022, 5:17:14 AM UTC
+                        2022-10-06T05:17:14.000Z
                       </span>
                     </td>
                   </tr>

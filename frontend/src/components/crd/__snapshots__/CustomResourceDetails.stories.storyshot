@@ -230,7 +230,7 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                       <span
                         class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                       >
-                        12/15/2021, 2:57:13 PM UTC
+                        2021-12-15T14:57:13.000Z
                       </span>
                     </td>
                   </tr>
