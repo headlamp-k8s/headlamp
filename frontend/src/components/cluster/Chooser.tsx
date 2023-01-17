@@ -1,6 +1,7 @@
 import { Icon, InlineIcon } from '@iconify/react';
 import { DialogActions, IconButton } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -22,6 +23,7 @@ import { useDispatch } from 'react-redux';
 import { generatePath } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
+import LocaleSelect from '../../i18n/LocaleSelect/LocaleSelect';
 import { useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getThemeName } from '../../lib/themes';
@@ -74,7 +76,9 @@ export function ClusterTitle(props: ClusterTitleProps) {
       ) : (
         <ClusterChooser clickHandler={() => setShowChooser(true)} cluster={cluster} />
       )}
-      <Chooser open={showChooser} onClose={() => setShowChooser(false)} />
+      <Chooser open={showChooser} onClose={() => setShowChooser(false)}>
+        <LocaleSelect />
+      </Chooser>
     </ErrorBoundary>
   );
 }
@@ -338,6 +342,23 @@ export function ClusterDialog(props: ClusterDialogProps) {
   );
 }
 
+export function AzureLogin() {
+  const AZURE_LOGIN = 'https://CHANGETHIS';
+  return (
+    <Button
+      variant="outlined"
+      color="primary"
+      startIcon={<InlineIcon icon="mdi:microsoft-azure" />}
+      size="small"
+      onClick={() => {
+        window.open(AZURE_LOGIN, '_blank');
+      }}
+    >
+      Add from Azure
+    </Button>
+  );
+}
+
 function Chooser(props: ClusterDialogProps) {
   const history = useHistory();
   const clusters = useClustersConf();
@@ -442,6 +463,9 @@ function Chooser(props: ClusterDialogProps) {
                   {child}
                 </Grid>
               ))}
+              <Grid item>
+                <AzureLogin />
+              </Grid>
             </Grid>
           </DialogActions>
         )}
