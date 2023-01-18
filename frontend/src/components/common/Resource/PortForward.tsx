@@ -11,19 +11,15 @@ import {
   startPortForward,
   stopOrDeletePortForward,
 } from '../../../lib/k8s/apiProxy';
-import { KubeContainer } from '../../../lib/k8s/cluster';
+import { KubeContainer, KubeObject } from '../../../lib/k8s/cluster';
 import Pod from '../../../lib/k8s/pod';
 import Service from '../../../lib/k8s/service';
 import { getCluster } from '../../../lib/util';
 import ActionButton from '../ActionButton';
 
 interface PortForwardProps {
-  isPod: boolean;
   containerPort: number | string;
-  service?: Service;
-  namespace?: string;
-  name?: string;
-  isPodRunning?: boolean;
+  resource?: KubeObject;
 }
 
 export interface PortForwardState {
@@ -66,7 +62,11 @@ function getPodsSelectorFilter(service?: Service) {
 }
 
 export default function PortForward(props: PortForwardProps) {
-  const { isPod, containerPort, namespace, name, isPodRunning, service } = props;
+  const { containerPort, resource } = props;
+  const isPod = resource?.metadata?.kind !== 'Service';
+  const service = !isPod ? (resource as Service) : undefined;
+  const namespace = resource?.metadata?.namespace;
+  const name = resource?.metadata?.name;
   const [error, setError] = React.useState(null);
   const [portForward, setPortForward] = React.useState<PortForwardState | null>(null);
   const [loading, setLoading] = React.useState(false);
@@ -202,7 +202,7 @@ export default function PortForward(props: PortForwardProps) {
     });
   }
 
-  if (isPod && !isPodRunning) {
+  if (isPod && (!resource || resource.status.phase === 'Failed')) {
     return null;
   }
 

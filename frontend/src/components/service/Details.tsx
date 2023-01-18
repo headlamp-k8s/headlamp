@@ -71,13 +71,7 @@ export default function ServiceDetails() {
                         <ValueLabel>{port}</ValueLabel>
                         <InlineIcon icon="mdi:chevron-right" />
                         <ValueLabel>{targetPort}</ValueLabel>
-                        <PortForward
-                          containerPort={targetPort}
-                          service={item}
-                          isPod={false}
-                          name={item.metadata.name}
-                          namespace={item.metadata.namespace}
-                        />
+                        <PortForward containerPort={targetPort} resource={item} />
                       </React.Fragment>
                     ),
                   },

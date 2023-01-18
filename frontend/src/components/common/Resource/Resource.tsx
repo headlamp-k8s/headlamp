@@ -660,13 +660,9 @@ export function ContainerInfo(props: ContainerInfoProps) {
                       <ValueLabel>{`${protocol}:`}</ValueLabel>
                       <ValueLabel>{containerPort}</ValueLabel>
                     </Box>
-                    <PortForward
-                      isPod
-                      containerPort={containerPort}
-                      name={resource?.metadata.name}
-                      namespace={resource?.metadata.namespace}
-                      isPodRunning={resource?.status.phase !== 'Failed'}
-                    />
+                    {!!resource && ['Service', 'Pod'].includes(resource.kind) && (
+                      <PortForward containerPort={containerPort} resource={resource} />
+                    )}
                   </Box>
                 </Grid>
                 {index < container.ports!.length - 1 && (
