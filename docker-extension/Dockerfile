@@ -12,7 +12,7 @@ LABEL org.opencontainers.image.title="Headlamp" \
     com.docker.extension.additional-urls="https://github.com/kinvolk/headlamp" \
     com.docker.extension.changelog="Please visit https://github.com/kinvolk/headlamp/releases for detailed changelog" \
     com.docker.desktop.extension.icon="https://raw.githubusercontent.com/kinvolk/headlamp/main/frontend/public/apple-touch-icon.png" \
-    com.docker.extension.additional-urls='[{"title":"Repository","url":"https://github.com/kinvolk/headlamp"},{"title":"Documentation","url":"https://kinvolk.github.io/headlamp/docs/latest/"}]'
+    com.docker.extension.additional-urls='[{"title":"Repository","url":"https://github.com/kinvolk/headlamp"},{"title":"Documentation","url":"https://headlamp.dev/docs/latest/"}]'
 
 COPY headlamp.svg .
 COPY metadata.json .

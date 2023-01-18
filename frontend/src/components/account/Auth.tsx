@@ -126,7 +126,7 @@ export function PureAuthToken({
               <Link
                 style={{ cursor: 'pointer', marginLeft: '0.4rem' }}
                 target="_blank"
-                href="https://kinvolk.github.io/headlamp/docs/latest/installation/#create-a-service-account-token"
+                href="https://headlamp.dev/docs/latest/installation/#create-a-service-account-token"
               >
                 service account token
               </Link>

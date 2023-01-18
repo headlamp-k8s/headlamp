@@ -27,7 +27,7 @@ import helpers from '../helpers';
  *
  * To see more on what plugins can do, please see the plugin functionality.md documentation.
  *
- * @see {@link https://kinvolk.github.io/headlamp/docs/latest/development/plugins/functionality/ Plugin functionality}
+ * @see {@link https://headlamp.dev/docs/latest/development/plugins/functionality/ Plugin functionality}
  */
 import { ClusterRequest, setCluster } from '../lib/k8s/apiProxy';
 import Registry from './registry';
