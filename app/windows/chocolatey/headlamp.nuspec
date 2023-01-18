@@ -12,7 +12,7 @@
     <licenseUrl>https://github.com/kinvolk/headlamp/blob/main/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <projectSourceUrl>https://github.com/kinvolk/headlamp/</projectSourceUrl>
-    <docsUrl>https://kinvolk.github.io/headlamp/docs/latest/</docsUrl>
+    <docsUrl>https://headlamp.dev/docs/latest/</docsUrl>
     <bugTrackerUrl>https://github.com/kinvolk/headlamp/issues</bugTrackerUrl>
     <tags>headlamp kubernetes ui gui dashboard devops</tags>
     <summary>An easy-to-use and extensible graphical UI for Kubernetes.</summary>
@@ -42,7 +42,7 @@ Headlamp uses [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rba
 whether and how users can access resources. If you try Headlamp with a token that has very limited
 permissions, you may not be able to view your cluster resources correctly.
 
-See the documentation on [how to easily get a Service Account token](https://kinvolk.github.io/headlamp/docs/latest/installation#create-a-service-account-token) for your cluster.
+See the documentation on [how to easily get a Service Account token](https://headlamp.dev/docs/latest/installation#create-a-service-account-token) for your cluster.
 ]]></description>
     <releaseNotes>See release notes at the [Github releases page](https://github.com/kinvolk/headlamp/releases)</releaseNotes>
   </metadata>

@@ -23,4 +23,4 @@ The main code for the example plugin is in [src/index.tsx](src/index.tsx).
 
 See the API documentation for:
 
-- [registerAppLogo](https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_registry.registry/#registerapplogo)
+- [registerAppLogo](https://headlamp.dev/docs/latest/development/api/classes/plugin_registry.registry/#registerapplogo)

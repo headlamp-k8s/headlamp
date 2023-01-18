@@ -22,5 +22,5 @@ The main code for the plugin is in [src/index.tsx](src/index.tsx).
 
 See:
 
-- API documentation for [Headlamp.setCluster](https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.headlamp/#setCluster)
-- The [getting started documentation for Headlamp plugin development](https://kinvolk.github.io/headlamp/docs/latest/development/plugins/building/)
+- API documentation for [Headlamp.setCluster](https://headlamp.dev/docs/latest/development/api/classes/plugin_lib.headlamp/#setCluster)
+- The [getting started documentation for Headlamp plugin development](https://headlamp.dev/docs/latest/development/plugins/building/)

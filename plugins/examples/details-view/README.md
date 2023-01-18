@@ -18,5 +18,5 @@ The main code for the example plugin is in [src/index.tsx](src/index.tsx).
 
 See the API documentation for:
 
-- [registerDetailsViewSection](https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_registry.registry/#registerDetailsViewSection)
-- [registerDetailsViewHeaderAction](https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_registry.registry/#registerDetailsViewHeaderAction)
+- [registerDetailsViewSection](https://headlamp.dev/docs/latest/development/api/classes/plugin_registry.registry/#registerDetailsViewSection)
+- [registerDetailsViewHeaderAction](https://headlamp.dev/docs/latest/development/api/classes/plugin_registry.registry/#registerDetailsViewHeaderAction)

@@ -17,4 +17,4 @@ The main code for the example plugin is in [src/index.tsx](src/index.tsx).
 
 See the API documentation for:
 
-- [Headlamp.setAppMenu](https://kinvolk.github.io/headlamp/docs/latest/development/api/classes/plugin_lib.Headlamp/#setAppMenu)
+- [Headlamp.setAppMenu](https://headlamp.dev/docs/latest/development/api/classes/plugin_lib.Headlamp/#setAppMenu)
