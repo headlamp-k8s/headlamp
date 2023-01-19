@@ -16,11 +16,15 @@ export interface ConfigState {
   };
 }
 
+function defaultTimezone() {
+  return process.env.UNDER_TEST ? 'UTC' : Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
+
 export const INITIAL_STATE: ConfigState = {
   clusters: null,
   settings: {
     tableRowsPerPageOptions: storedSettings.tableRowsPerPageOptions || DefaultRowsPerPageOptions,
-    timezone: storedSettings.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
+    timezone: storedSettings.timezone || defaultTimezone(),
   },
 };
 
