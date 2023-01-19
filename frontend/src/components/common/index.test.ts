@@ -17,6 +17,7 @@ const avoidCheck = [
 
 const checkExports = [
   'ActionButton',
+  'BackLink',
   'Chart',
   'ConfirmDialog',
   'Dialog',
