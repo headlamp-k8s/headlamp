@@ -13,6 +13,7 @@ import {
   setClusterChooserButtonComponent,
   setDetailsView,
   setDetailsViewHeaderAction,
+  setFunctionsToOverride,
   setRoute,
   setRouteFilter,
   setSidebarItem,
@@ -383,4 +384,34 @@ export function registerAppLogo(logo: AppLogoType) {
  */
 export function registerClusterChooser(chooser: ClusterChooserType) {
   store.dispatch(setClusterChooserButtonComponent(chooser));
+}
+
+/**
+ * Override headlamp setToken method
+ * @param override - The setToken override method to use.
+ *
+ * @example
+ * ```ts
+ * registerSetTokenFunction((cluster: string, token: string | null) => {
+ * // set token logic here
+ * });
+ */
+export function registerSetTokenFunction(
+  override: (cluster: string, token: string | null) => void
+) {
+  store.dispatch(setFunctionsToOverride({ setToken: override }));
+}
+
+/**
+ * Override headlamp getToken method
+ * @param override - The getToken override method to use.
+ *
+ * @example
+ * ```ts
+ * registerGetTokenFunction(() => {
+ * // set token logic here
+ * });
+ */
+export function registerGetTokenFunction(override: (cluster: string) => string | undefined) {
+  store.dispatch(setFunctionsToOverride({ getToken: override }));
 }

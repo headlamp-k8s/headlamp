@@ -2,8 +2,16 @@
  * This module was taken from the k8dash project.
  */
 
+import store from '../redux/stores/store';
+
 export function getToken(cluster: string) {
-  return getTokens()[cluster];
+  const getTokenMethodToUse = store.getState().ui.functionsToOverride.getToken;
+  const tokenMethodToUse =
+    getTokenMethodToUse ||
+    function () {
+      return getTokens()[cluster];
+    };
+  return tokenMethodToUse(cluster);
 }
 
 export function getUserInfo(cluster: string) {
@@ -20,9 +28,14 @@ function getTokens() {
 }
 
 export function setToken(cluster: string, token: string | null) {
-  const tokens = getTokens();
-  tokens[cluster] = token;
-  localStorage.tokens = JSON.stringify(tokens);
+  const setTokenMethodToUse = store.getState().ui.functionsToOverride.setToken;
+  if (setTokenMethodToUse) {
+    setTokenMethodToUse(cluster, token);
+  } else {
+    const tokens = getTokens();
+    tokens[cluster] = token;
+    localStorage.tokens = JSON.stringify(tokens);
+  }
 }
 
 export function deleteTokens() {
