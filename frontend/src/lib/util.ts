@@ -81,7 +81,7 @@ export function localeDate(date: DateParam) {
     locale = 'en-US';
     return new Date(date).toISOString();
   } else {
-    options.timeZone = store.getState().ui.settings.timezone;
+    options.timeZone = store.getState().config.settings.timezone;
   }
 
   return new Date(date).toLocaleString(locale, options);

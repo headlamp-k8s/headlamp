@@ -244,7 +244,7 @@ const TemplateWithFilter: Story<{
     (
       state = {
         filter: { namespaces: new Set<string>(), search: '' },
-        ui: { settings: { tableRowsPerPageOptions: [10, 20, 50, 100] } },
+        config: { settings: { tableRowsPerPageOptions: [10, 20, 50, 100] } },
       }
     ) => state,
     {
@@ -252,7 +252,7 @@ const TemplateWithFilter: Story<{
         namespaces: new Set(namespaces),
         search,
       },
-      ui: {
+      config: {
         settings: {
           tableRowsPerPageOptions: [10, 20, 50, 100],
         },
