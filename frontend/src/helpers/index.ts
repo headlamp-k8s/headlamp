@@ -191,7 +191,9 @@ function storeNotifications(notifications: Notification[], options: Notification
 }
 
 function loadNotifications(): Notification[] {
-  return JSON.parse(localStorage.getItem('notifications') || '[]');
+  const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+  // Ensure we return real Notification objects.
+  return notifications.map((n: any) => Notification.fromJSON(n));
 }
 
 const exportFunctions = {
