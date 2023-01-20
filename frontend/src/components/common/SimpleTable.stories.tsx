@@ -190,7 +190,6 @@ ReflectInURL.args = {
     ],
     rowsPerPage: [5, 10, 15],
     reflectInURL: true,
-    showPagination: !process.env.UNDER_TEST, // Disable for snapshots: The pagination uses useId so snapshots will fail.
   },
   testContextProps: {
     urlSearchParams: { p: '2' }, // 2nd page
@@ -217,7 +216,6 @@ ReflectInURLWithPrefix.args = {
     ],
     rowsPerPage: [5, 10, 15],
     reflectInURL: 'mySuperTable',
-    showPagination: !process.env.UNDER_TEST, // Disable for snapshots: The pagination uses useId so snapshots will fail.
   },
   testContextProps: {
     urlSearchParams: { p: '2' }, // 2nd page
