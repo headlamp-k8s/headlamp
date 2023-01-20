@@ -284,7 +284,7 @@ export function useURLState<T extends string | number | undefined = string>(
     let newValue: string | number = urlValue;
     if (typeof defaultValue === 'number') {
       newValue = Number(urlValue);
-      if (newValue === NaN) {
+      if (Number.isNaN(newValue)) {
         return null;
       }
     }
