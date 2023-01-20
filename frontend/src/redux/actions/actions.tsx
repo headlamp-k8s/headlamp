@@ -33,6 +33,7 @@ export const UI_BRANDING_SET_APP_LOGO = 'UI_BRANDING_SET_APP_LOGO';
 export const UI_SET_CLUSTER_CHOOSER_BUTTON = 'UI_SET_CLUSTER_CHOOSER_BUTTON';
 export const UI_HIDE_APP_BAR = 'UI_HIDE_APP_BAR';
 export const UI_FUNCTIONS_OVERRIDE = 'UI_FUNCTIONS_OVERRIDE';
+export const UI_SET_SETTINGS = 'UI_SET_SETTINGS';
 
 export interface BrandingProps {
   logo: AppLogoType;
@@ -198,4 +199,8 @@ export type FunctionsToOverride = {
 
 export function setFunctionsToOverride(override: FunctionsToOverride) {
   return { type: UI_FUNCTIONS_OVERRIDE, override };
+}
+
+export function setUISettings(settings: { [key: string]: any }) {
+  return { type: UI_SET_SETTINGS, settings };
 }

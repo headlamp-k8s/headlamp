@@ -2,6 +2,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { useFilterFunc } from '../../../lib/util';
+import { useSettings } from '../../App/settings/hook';
 import { DateLabel } from '../Label';
 import Link from '../Link';
 import SimpleTable, { SimpleTableProps } from '../SimpleTable';
@@ -41,6 +42,7 @@ function Table(props: ResourceTableProps) {
   const { columns, defaultSortingColumn, ...otherProps } = props;
   const { t } = useTranslation(['glossary', 'frequent']);
   const theme = useTheme();
+  const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
 
   let sortingColumn = defaultSortingColumn;
 
@@ -102,7 +104,7 @@ function Table(props: ResourceTableProps) {
   return (
     <SimpleTable
       columns={cols}
-      rowsPerPage={[15, 25, 50]}
+      rowsPerPage={storeRowsPerPageOptions}
       defaultSortingColumn={sortingColumn}
       filterFunction={useFilterFunc()}
       reflectInURL

@@ -32,6 +32,7 @@ const checkExports = [
   'SimpleTable',
   'Tabs',
   'Terminal',
+  'TimezoneSelect',
   'Tooltip',
   'ObjectEventList',
 ];

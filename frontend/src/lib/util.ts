@@ -4,6 +4,7 @@ import React from 'react';
 import { matchPath, useHistory } from 'react-router';
 import helpers from '../helpers';
 import { useTypedSelector } from '../redux/reducers/reducers';
+import store from '../redux/stores/store';
 import { ApiError } from './k8s/apiProxy';
 import { KubeMetrics, KubeObjectInterface, Workload } from './k8s/cluster';
 import Node from './k8s/node';
@@ -80,7 +81,7 @@ export function localeDate(date: DateParam) {
     locale = 'en-US';
     return new Date(date).toISOString();
   } else {
-    options.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    options.timeZone = store.getState().ui.settings.timezone;
   }
 
   return new Date(date).toLocaleString(locale, options);

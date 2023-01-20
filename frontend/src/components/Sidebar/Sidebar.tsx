@@ -79,6 +79,12 @@ export default function Sidebar() {
       label: t('frequent|Notifications'),
       url: '/notifications',
     },
+    {
+      name: t('frequent|settings'),
+      icon: 'mdi:cog',
+      label: t('frequent|Settings'),
+      url: '/settings',
+    },
   ];
 
   const sidebar = useTypedSelector(state => state.ui.sidebar);

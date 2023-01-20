@@ -14,7 +14,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
-import LocaleSelect from '../../i18n/LocaleSelect/LocaleSelect';
 import { getToken, setToken } from '../../lib/auth';
 import { useCluster, useClustersConf } from '../../lib/k8s';
 import {
@@ -28,7 +27,7 @@ import ErrorBoundary from '../common/ErrorBoundary';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import Notifications from './Notifications';
-import ThemeChangeButton from './ThemeChangeButton';
+import { SettingsButton } from './settings';
 
 export interface TopBarProps {}
 
@@ -208,6 +207,7 @@ export function PureTopBar({
   const classes = useStyles({ isSidebarOpen, isSmall });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const isClusterContext = !!cluster;
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -230,7 +230,7 @@ export function PureTopBar({
   };
 
   const userMenuId = 'primary-user-menu';
-  const renderUserMenu = (
+  const renderUserMenu = !!isClusterContext && (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -286,30 +286,31 @@ export function PureTopBar({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <ClusterTitle cluster={cluster} clusters={clusters} />
-      </MenuItem>
+      {isClusterContext && (
+        <MenuItem>
+          <ClusterTitle cluster={cluster} clusters={clusters} />
+        </MenuItem>
+      )}
       <AppBarActionsMenu appBarActions={appBarActions} />
       <MenuItem>
         <Notifications />
       </MenuItem>
       <MenuItem>
-        <LocaleSelect />
+        <SettingsButton onClickExtra={handleMenuClose} />
       </MenuItem>
-      <MenuItem>
-        <ThemeChangeButton />
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          aria-label={t('Account of current user')}
-          aria-controls={userMenuId}
-          aria-haspopup="true"
-          color="inherit"
-          onClick={handleProfileMenuOpen}
-        >
-          <Icon icon="mdi:account" />
-        </IconButton>
-      </MenuItem>
+      {!!isClusterContext && (
+        <MenuItem>
+          <IconButton
+            aria-label={t('Account of current user')}
+            aria-controls={userMenuId}
+            aria-haspopup="true"
+            color="inherit"
+            onClick={handleProfileMenuOpen}
+          >
+            <Icon icon="mdi:account" />
+          </IconButton>
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -332,18 +333,19 @@ export function PureTopBar({
               </div>
               <AppBarActions appBarActions={appBarActions} />
               <Notifications />
-              <LocaleSelect />
-              <ThemeChangeButton />
-              <IconButton
-                edge="end"
-                aria-label={t('Account of current user')}
-                aria-controls={userMenuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <Icon icon="mdi:account" />
-              </IconButton>
+              <SettingsButton />
+              {!!isClusterContext && (
+                <IconButton
+                  edge="end"
+                  aria-label={t('Account of current user')}
+                  aria-controls={userMenuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <Icon icon="mdi:account" />
+                </IconButton>
+              )}
             </>
           )}
           {isSmall && (

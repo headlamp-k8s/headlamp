@@ -1,9 +1,8 @@
-import _ from 'lodash';
-import React from 'react';
 import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import NotificationList from '../components/App/Notifications/List';
+import AppSettings, { SettingsButton } from '../components/App/settings';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
 import Overview from '../components/cluster/Overview';
@@ -111,6 +110,7 @@ const defaultRoutes: {
     component: () => (
       <Chooser useCover open>
         <LocaleSelect />
+        <SettingsButton />
       </Chooser>
     ),
   },
@@ -519,6 +519,15 @@ const defaultRoutes: {
     noAuthRequired: true,
     component: () => <NotificationList />,
   },
+  settings: {
+    path: '/settings',
+    exact: true,
+    name: 'Settings',
+    sidebar: 'settings',
+    useClusterURL: false,
+    noAuthRequired: true,
+    component: () => <AppSettings />,
+  },
 };
 
 // The NotFound route  needs to be considered always in the last place when used
@@ -605,11 +614,7 @@ export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
   if (!fullParams.cluster && !!cluster) {
     fullParams.cluster = cluster;
   }
-  // if fullParams is empty it means it is a request for generating choser
-  // route
-  if (_.isEmpty(fullParams)) {
-    return generatePath(defaultRoutes['chooser'].path);
-  }
+
   const url = getRoutePath(route);
   return generatePath(url, fullParams);
 }
