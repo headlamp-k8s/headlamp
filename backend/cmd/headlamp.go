@@ -875,6 +875,17 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 	return clusters
 }
 
+func getTransportProxy(cluster *Cluster) func(*http.Request) (*url.URL, error) {
+	var transportProxy func(*http.Request) (*url.URL, error)
+
+	if cluster.ProxyURL != "" {
+		proxyURL, _ := url.Parse(cluster.ProxyURL)
+		transportProxy = http.ProxyURL(proxyURL)
+	}
+
+	return transportProxy
+}
+
 func (c *HeadlampConfig) createProxyForContext(context Context) (*httputil.ReverseProxy, error) {
 	cluster := context.getCluster()
 	name := cluster.getName()
@@ -930,7 +941,10 @@ func (c *HeadlampConfig) createProxyForContext(context Context) (*httputil.Rever
 		Certificates:       certs,
 	}
 
-	proxy.Transport = &http.Transport{TLSClientConfig: tls}
+	proxy.Transport = &http.Transport{
+		Proxy:           getTransportProxy(cluster),
+		TLSClientConfig: tls,
+	}
 
 	return proxy, nil
 }
