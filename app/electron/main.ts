@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
 import dotenv from 'dotenv';
 import { app, BrowserWindow, dialog, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
