@@ -61,19 +61,35 @@ function getPodsSelectorFilter(service?: Service) {
   return '';
 }
 
+function checkIfPodPortForwarding(portforwardParam: {
+  item: any;
+  namespace: string;
+  name: string;
+  cluster: string;
+  numericContainerPort: string | number;
+}) {
+  const { item, namespace, name, cluster, numericContainerPort } = portforwardParam;
+  return (
+    (item.namespace === namespace || item.serviceNamespace === namespace) &&
+    (item.pod === name || item.service === name) &&
+    item.cluster === cluster &&
+    item.targetPort === numericContainerPort.toString()
+  );
+}
+
 export default function PortForward(props: PortForwardProps) {
   const { containerPort, resource } = props;
   const isPod = resource?.metadata?.kind !== 'Service';
   const service = !isPod ? (resource as Service) : undefined;
-  const namespace = resource?.metadata?.namespace;
-  const name = resource?.metadata?.name;
+  const namespace = resource?.metadata?.namespace || '';
+  const name = resource?.metadata?.name || '';
   const [error, setError] = React.useState(null);
   const [portForward, setPortForward] = React.useState<PortForwardState | null>(null);
   const [loading, setLoading] = React.useState(false);
   const cluster = getCluster();
   const { t } = useTranslation(['frequent', 'resource']);
   const [pods, podsFetchError] = Pod.useList({ labelSelector: getPodsSelectorFilter(service) });
-  const massagedContainerPort =
+  const numericContainerPort =
     typeof containerPort === 'string' && isNaN(parseInt(containerPort))
       ? getPortNumberFromPortName(pods[0].spec.containers, containerPort)
       : containerPort;
@@ -83,32 +99,36 @@ export default function PortForward(props: PortForwardProps) {
       return;
     }
     listPortForward(cluster).then(result => {
-      const portForwards = result;
-      if (!portForwards || portForwards.length === 0) {
-        return;
-      }
-      for (const item of portForwards) {
-        if (
-          (item.namespace === namespace || item.serviceNamespace === namespace) &&
-          (item.pod === name || item.service === name) &&
-          item.cluster === cluster &&
-          item.targetPort === massagedContainerPort.toString()
-        ) {
-          setPortForward(item);
-          return;
-        }
-      }
-      const massagedPortForwards = [...portForwards];
+      const portForwards = result || [];
+      const serverAndStoragePortForwards = [...portForwards];
       const portForwardsInStorage = localStorage.getItem(PORT_FORWARDS_STORAGE_KEY);
       const parsedPortForwards = JSON.parse(portForwardsInStorage || '[]');
+
       parsedPortForwards.forEach((portforward: any) => {
-        const isPortForwardInStorage = portForwards.find((pf: any) => pf.id === portforward.id);
-        if (!isPortForwardInStorage) {
+        const isStoragePortForwardAvailableInServer = portForwards.find(
+          (pf: any) => pf.id === portforward.id
+        );
+        if (!isStoragePortForwardAvailableInServer) {
           portforward.status = PORT_FORWARD_STOP_STATUS;
-          massagedPortForwards.push(portforward);
+          serverAndStoragePortForwards.push(portforward);
         }
       });
-      localStorage.setItem(PORT_FORWARDS_STORAGE_KEY, JSON.stringify(massagedPortForwards));
+
+      for (const item of serverAndStoragePortForwards) {
+        if (
+          checkIfPodPortForwarding({
+            item,
+            namespace,
+            name,
+            cluster,
+            numericContainerPort,
+          })
+        ) {
+          setPortForward(item);
+        }
+      }
+
+      localStorage.setItem(PORT_FORWARDS_STORAGE_KEY, JSON.stringify(serverAndStoragePortForwards));
     });
   }, []);
 
@@ -131,18 +151,18 @@ export default function PortForward(props: PortForwardProps) {
 
     setError(null);
 
-    const massagedResourceName = name || '';
-    const massagedResourceNamespace = isPod ? namespace : pods[0].metadata.namespace;
+    const resourceName = name || '';
+    const podNamespace = isPod ? namespace : pods[0].metadata.namespace;
     const serviceNamespace = namespace;
-    const serviceName = !isPod ? massagedResourceName : '';
-    const podName = isPod ? massagedResourceName : pods[0].metadata.name;
+    const serviceName = !isPod ? resourceName : '';
+    const podName = isPod ? resourceName : pods[0].metadata.name;
 
     setLoading(true);
     startPortForward(
       cluster,
-      massagedResourceNamespace,
+      podNamespace,
       podName,
-      massagedContainerPort,
+      numericContainerPort,
       serviceName,
       serviceNamespace,
       portForward?.port,
@@ -245,62 +265,58 @@ export default function PortForward(props: PortForwardProps) {
       )}
     </Box>
   ) : (
-        <Box>
-          {portForward.status === PORT_FORWARD_STOP_STATUS ? (
-            <Box display={'flex'} alignItems="center">
-              <Typography
-                style={{
-                  color: grey[500],
-                }}
-              >{`${forwardBaseURL}:${portForward.port}`}</Typography>
-              <ActionButton
-                onClick={handlePortForward}
-                description={t('resource|Start port forward')}
-                color="primary"
-                icon="mdi:fast-forward"
-                iconButtonProps={{
-                  size: 'small',
-                  color: 'primary',
-                  disabled: loading,
-                }}
-                width={'25'}
-              />
-              <ActionButton
-                onClick={deletePortForwardHandler}
-                description={t('resource|Delete port forward')}
-                color="primary"
-                icon="mdi:delete-outline"
-                iconButtonProps={{
-                  size: 'small',
-                  color: 'primary',
-                  disabled: loading,
-                }}
-                width={'25'}
-              />
-            </Box>
-          ) : (
-            <>
-              <MuiLink
-                href={`${forwardBaseURL}:${portForward.port}`}
-                target="_blank"
-                color="primary"
-              >
-                {`${forwardBaseURL}:${portForward.port}`}
-              </MuiLink>
-              <ActionButton
-                onClick={portForwardStopHandler}
-                description={t('resource|Stop port forward')}
-                color="primary"
-                icon="mdi:stop-circle-outline"
-                iconButtonProps={{
-                  size: 'small',
-                  color: 'primary',
-                  disabled: loading,
-                }}
-                width={'25'}
-              />
-            </>
-          )}
+    <Box>
+      {portForward.status === PORT_FORWARD_STOP_STATUS ? (
+        <Box display={'flex'} alignItems="center">
+          <Typography
+            style={{
+              color: grey[500],
+            }}
+          >{`${forwardBaseURL}:${portForward.port}`}</Typography>
+          <ActionButton
+            onClick={handlePortForward}
+            description={t('resource|Start port forward')}
+            color="primary"
+            icon="mdi:fast-forward"
+            iconButtonProps={{
+              size: 'small',
+              color: 'primary',
+              disabled: loading,
+            }}
+            width={'25'}
+          />
+          <ActionButton
+            onClick={deletePortForwardHandler}
+            description={t('resource|Delete port forward')}
+            color="primary"
+            icon="mdi:delete-outline"
+            iconButtonProps={{
+              size: 'small',
+              color: 'primary',
+              disabled: loading,
+            }}
+            width={'25'}
+          />
         </Box>
+      ) : (
+        <>
+          <MuiLink href={`${forwardBaseURL}:${portForward.port}`} target="_blank" color="primary">
+            {`${forwardBaseURL}:${portForward.port}`}
+          </MuiLink>
+          <ActionButton
+            onClick={portForwardStopHandler}
+            description={t('resource|Stop port forward')}
+            color="primary"
+            icon="mdi:stop-circle-outline"
+            iconButtonProps={{
+              size: 'small',
+              color: 'primary',
+              disabled: loading,
+            }}
+            width={'25'}
+          />
+        </>
+      )}
+    </Box>
   );
 }
