@@ -1,0 +1,222 @@
+import { InteractiveBrowserCredential, InteractiveBrowserCredentialInBrowserOptions } from "@azure/identity";
+import { SubscriptionClient } from '@azure/arm-subscriptions';
+import { Button } from '@material-ui/core';
+import { registerAppBarAction, registerRoute } from '@kinvolk/headlamp-plugin/lib';
+
+
+
+// const clientId = "e1dd57e8-1b05-4cd0-849b-a51a3eaa4438";
+// const tenantId = "common";
+const props: InteractiveBrowserCredentialInBrowserOptions = {
+    tenantId: "common",
+    clientId: "6db1ca90-3080-4288-80e5-da0c3c63a89f", // personal new
+    // clientId: "e1dd57e8-1b05-4cd0-849b-a51a3eaa4438", // personal old
+    // clientId:"96be48dd-500d-46d6-8b3b-ea9b005fb67d",
+    loginStyle: "popup",
+    // redirectUri: "http://localhost:3000/azure/callback",
+}
+const credentials = new InteractiveBrowserCredential(props)
+// const credentials = new InteractiveBrowserCredential({ clientId, tenantId });
+
+
+
+
+// import { DefaultAzureCredential } from '@azure/identity';
+// import { registerAppBarAction, registerRoute } from '@kinvolk/headlamp-plugin/lib';
+// import { Button } from '@material-ui/core';
+// // import {SubscriptionClient} from '@azure/arm-subscriptions';
+// // import { useMsal, useMsalAuthentication } from '@azure/msal-react';
+// // import { LogLevel } from "@azure/msal-browser";
+
+// // Below are some imports you may want to use.
+// //   See README.md for links to plugin development documentation.
+// // import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
+// // import { K8s } from '@kinvolk/headlamp-plugin/lib/K8s';
+// // import { Typography } from '@material-ui/core';
+
+// const credentials = new DefaultAzureCredential();
+// console.log("credentials",credentials)
+
+// // export const msalConfig = {
+// //     auth:{
+// //         clientId: 'e1dd57e8-1b05-4cd0-849b-a51a3eaa4438',
+// //         authority: 'https://login.microsoftonline.com/common',
+// //         redirectUri: 'http://localhost:3000/azure/callback',
+// //         postLogoutRedirectUri: 'http://localhost:3000/',
+// //     },
+// //     cache:{
+// //         cacheLocation: 'sessionStorage',
+// //         storeAuthStateInCookie: false,
+// //     },
+// //     system: {
+// //         /**
+// //          * Below you can configure MSAL.js logs. For more information, visit:
+// //          * https://docs.microsoft.com/azure/active-directory/develop/msal-logging-js
+// //          */
+// //         loggerOptions: {
+// //             loggerCallback: (level, message, containsPii) => {
+// //                 if (containsPii) {
+// //                     return;
+// //                 }
+// //                 switch (level) {
+// //                     case LogLevel.Error:
+// //                         console.error(message);
+// //                         return;
+// //                     case LogLevel.Info:
+// //                         console.info(message);
+// //                         return;
+// //                     case LogLevel.Verbose:
+// //                         console.debug(message);
+// //                         return;
+// //                     case LogLevel.Warning:
+// //                         console.warn(message);
+// //                         return;
+// //                 }
+// //             },
+// //         },
+// //     },
+// // }
+
+// function fetchToken(code:string){
+//     const clientId = 'e1dd57e8-1b05-4cd0-849b-a51a3eaa4438';
+//     const scope = 'https://management.core.windows.net/.default';
+//     const grantType = 'authorization_code';
+//     const codeVerifier = 'szBvEb_4BIAqMvhz69GbVJF3YuapKId6oZXENblaPDN_bnOp~_vF7CejCHkETShnyeol0VQX_cOUxaKnwgf.iZ5fIECHeVnMiNH_AHUUWWrb6~w1XS4BsoZwGbqhqoDj';
+//     const tenantId = 'common';
+//     const formData = new FormData();
+//     formData.append('client_id', clientId);
+//     formData.append('scope', scope);
+//     formData.append('grant_type', grantType);
+//     formData.append('code', code);
+//     formData.append('state', 'test')
+//     formData.append('code_verifier', codeVerifier);
+//     formData.append('redirect_uri', 'http://localhost:3000/azure/callback');
+//     const url = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
+//     const response =fetch(url, {
+//         method: 'POST',
+//         body: formData,
+//     }).then(response =>{console.log("response",response.json())})
+//     return response
+// }
+
+async function listSubscriptions() {
+    try {
+        // use credential to authenticate with Azure SDKs
+        console.log("debug: listing subscriptions")
+        const client = new SubscriptionClient(credentials);
+        console.log("debug: client for subscriptions: ", client)
+        // get details of each subscription
+        for await (const item of client.subscriptions.list()) {
+            const subscriptionDetails = await client.subscriptions.get(
+                item.subscriptionId
+            );
+            /* 
+              Each item looks like:
+            
+              {
+                id: '/subscriptions/123456',
+                subscriptionId: '123456',
+                displayName: 'YOUR-SUBSCRIPTION-NAME',
+                state: 'Enabled',
+                subscriptionPolicies: {
+                  locationPlacementId: 'Internal_2014-09-01',
+                  quotaId: 'Internal_2014-09-01',
+                  spendingLimit: 'Off'
+                },
+                authorizationSource: 'RoleBased'
+              },
+          */
+            console.log("debug details:", subscriptionDetails);
+        }
+    } catch (err) {
+        console.log("debug error:", err)
+        console.error(JSON.stringify(err));
+    }
+}
+
+
+function MsalCallback() {
+    // parse the url and get the code
+    try {
+        const code = new URLSearchParams(window.location.search).get('code');
+        // const token = fetchToken(code)
+        console.log("debug: In redirect page", window.location, code)
+        console.log("debug: credentials", credentials)
+        // credentials.getToken("https://management.azure.com/.default").then((resp)=>{
+        //     console.log("debug: token",resp)
+        // })
+        listSubscriptions().then(() => {
+            console.log("done");
+        });
+    } catch (err) {
+        console.log("debug: error", err)
+    }
+
+    return (<h1> welcome to redirect page</h1>)
+}
+
+
+function SubscriptionList(){
+
+    
+    return (<Button onClick={listSubscriptions}>Subscription List</Button>)
+}
+
+// if (credentials.authenticate.) {
+    
+// }
+registerAppBarAction(<AzureLogin />);
+registerAppBarAction(<SubscriptionList/>)
+registerRoute({
+    path: '/azure/callback',
+    name: 'Azure Callback',
+    exact: true,
+    noAuthRequired: true,
+    useClusterURL: false,
+    sidebar: null,
+    hideAppBar: true,
+    component: () => <MsalCallback />,
+});
+
+
+function AzureLogin() {
+
+    console.log("debug: authlogin:", credentials, credentials.authenticate.toString())
+
+    function login() {
+        console.log("debug: In login",)
+        try {
+            credentials.authenticate(["https://management.azure.com/user_impersonation"]).then((resp) => {
+                console.log("debug: authenticated", resp)
+            })
+            // credentials.getToken(["http://graph.microsoft.com/.default"]).then((resp) => {
+            //     console.log("debug: token", resp)
+            // })
+            // credentials.getToken(["https://management.core.windows.net/.default"]).then((resp) => {
+            //     console.log("debug: token management", resp)
+            // })
+        } catch (err) {
+            console.log("debug: error", err)
+        }
+
+    }
+    return (<Button onClick={login}>Login with Azure</Button>)
+    // const queryParams = new URLSearchParams();
+    // const scope = 'https://management.core.windows.net/.default';
+    // queryParams.append('scope', scope);
+    // queryParams.append('response_type', 'code');
+    // queryParams.append('client_id', 'e1dd57e8-1b05-4cd0-849b-a51a3eaa4438');
+    // // queryParams.append('redirect_uri', 'headlamp://azure/callback');
+    // queryParams.append('redirect_uri', 'http://localhost:3000/azure/callback');
+    // queryParams.append('prompt', 'select_account');
+    // queryParams.append('sso_reload', 'true');
+    // queryParams.append('state', 'test');
+    // queryParams.append('code_challenge', 'j6xg4T4BOnAqXZEiclkZe_h1wgwFdzV88y1WLy14Wn8');
+    // queryParams.append('code_challenge_method', 'S256');
+
+    // const url = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?${queryParams.toString()}`
+
+
+    // return ( <Button href={url}> Login with Azure</Button> );
+}
+

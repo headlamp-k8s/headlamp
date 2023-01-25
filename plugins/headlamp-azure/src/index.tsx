@@ -1,12 +1,12 @@
-// import { registerAppBarAction, registerRoute } from '@kinvolk/headlamp-plugin/lib';;
-import { registerRoute } from '@kinvolk/headlamp-plugin/lib';;
+import { registerAppBarAction, registerRoute } from '@kinvolk/headlamp-plugin/lib';;
+// import { registerRoute } from '@kinvolk/headlamp-plugin/lib';;
 import { AzureCallback } from './components/AzureCallback';
-// import { AzureLogin } from './components/AzureLogin';
+import { AzureLogin } from './components/AzureLogin';
 import { SubscriptionList } from './components/SubscriptionList';
 
 
 
-// registerAppBarAction(AzureLogin);
+registerAppBarAction(AzureLogin);
 
 registerRoute({
     path: '/azure/callback',

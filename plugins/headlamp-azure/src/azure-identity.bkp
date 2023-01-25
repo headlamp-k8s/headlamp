@@ -1,0 +1,111 @@
+import { InteractiveBrowserCredential, InteractiveBrowserCredentialInBrowserOptions } from "@azure/identity";
+import { SubscriptionClient } from '@azure/arm-subscriptions';
+import { Button } from '@material-ui/core';
+import { registerAppBarAction, registerRoute } from '@kinvolk/headlamp-plugin/lib';
+
+
+const props: InteractiveBrowserCredentialInBrowserOptions = {
+    tenantId: "common",
+    clientId: "6db1ca90-3080-4288-80e5-da0c3c63a89f", // personal new
+    // clientId: "e1dd57e8-1b05-4cd0-849b-a51a3eaa4438", // personal old
+    // clientId:"96be48dd-500d-46d6-8b3b-ea9b005fb67d",
+    loginStyle: "popup",
+
+}
+const credentials = new InteractiveBrowserCredential(props)
+
+async function listSubscriptions() {
+    try {
+        // use credential to authenticate with Azure SDKs
+        console.log("debug: listing subscriptions")
+        const client = new SubscriptionClient(credentials);
+        console.log("debug: client for subscriptions: ", client)
+        // get details of each subscription
+        for await (const item of client.subscriptions.list()) {
+            const subscriptionDetails = await client.subscriptions.get(
+                item.subscriptionId
+            );
+            /* 
+              Each item looks like:
+            
+              {
+                id: '/subscriptions/123456',
+                subscriptionId: '123456',
+                displayName: 'YOUR-SUBSCRIPTION-NAME',
+                state: 'Enabled',
+                subscriptionPolicies: {
+                  locationPlacementId: 'Internal_2014-09-01',
+                  quotaId: 'Internal_2014-09-01',
+                  spendingLimit: 'Off'
+                },
+                authorizationSource: 'RoleBased'
+              },
+          */
+            console.log("debug details:", subscriptionDetails);
+        }
+    } catch (err) {
+        console.log("debug error:", err)
+        console.error(JSON.stringify(err));
+    }
+}
+
+
+function MsalCallback() {
+    // parse the url and get the code
+    try {
+        const code = new URLSearchParams(window.location.search).get('code');
+        // const token = fetchToken(code)
+        console.log("debug: In redirect page", window.location, code)
+        console.log("debug: credentials", credentials)
+        // credentials.getToken("https://management.azure.com/.default").then((resp)=>{
+        //     console.log("debug: token",resp)
+        // })
+        listSubscriptions().then(() => {
+            console.log("done");
+        });
+    } catch (err) {
+        console.log("debug: error", err)
+    }
+
+    return (<h1> welcome to redirect page</h1>)
+}
+
+
+function SubscriptionList(){
+
+    
+    return (<Button onClick={listSubscriptions}>Subscription List</Button>)
+}
+
+registerAppBarAction(<AzureLogin />);
+registerAppBarAction(<SubscriptionList/>)
+registerRoute({
+    path: '/azure/callback',
+    name: 'Azure Callback',
+    exact: true,
+    noAuthRequired: true,
+    useClusterURL: false,
+    sidebar: null,
+    hideAppBar: true,
+    component: () => <MsalCallback />,
+});
+
+
+function AzureLogin() {
+
+    console.log("debug: authlogin:", credentials, credentials.authenticate.toString())
+
+    function login() {
+        console.log("debug: In login",)
+        try {
+            credentials.authenticate([]).then((resp) => {
+                console.log("debug: authenticated", resp)
+            })
+        } catch (err) {
+            console.log("debug: error", err)
+        }
+
+    }
+    return (<Button onClick={login}>Login with Azure</Button>)
+}
+

@@ -3,9 +3,38 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useState } from 'react';
 import { clientId, redirectUri } from './utils';
+import { withMsal,useIsAuthenticated } from "@azure/msal-react";
+import { Configuration,  PublicClientApplication,RedirectRequest } from "@azure/msal-browser";
 
 
+const config:Configuration ={
+    auth:{
+        clientId: clientId,
+        authority: "https://login.microsoftonline.com/common",
+        redirectUri: redirectUri,
+        
+    },
+}
 
+function login(){
+    const isAuthenticated = useIsAuthenticated()
+    console.log("debug: isAuthenticated", isAuthenticated)
+    const msalInstance = new PublicClientApplication(config)
+
+    const loginRequest:RedirectRequest = {
+        redirectUri: redirectUri,
+        prompt: "select_account",
+        scopes:["openid","profile","User.Read"],
+    }
+
+    return <button onClick={()=>msalInstance.loginRedirect(loginRequest)}>Login</button>
+}
+
+export function AzureLogin(){
+    return login()
+}
+
+/*
 function loginUrl(): string {
     const queryParams = new URLSearchParams();
     queryParams.append('response_type', 'code');
@@ -36,6 +65,7 @@ function isLoggedIn(): boolean {
 function logout() {
     localStorage.removeItem("azure_creds")
 }
+
 
 
 export function AzureLogin() {
@@ -74,3 +104,4 @@ export function AzureLogin() {
         </>
     )
 }
+*/
