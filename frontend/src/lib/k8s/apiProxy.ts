@@ -866,8 +866,11 @@ export function startPortForward(
   cluster: string,
   namespace: string,
   podname: string,
-  containerPort: number,
-  service: string
+  containerPort: number | string,
+  service: string,
+  serviceNamespace: string,
+  port?: string,
+  id: string = ''
 ) {
   return fetch(`${helpers.getAppUrl()}portforward`, {
     method: 'POST',
@@ -881,6 +884,9 @@ export function startPortForward(
       pod: podname,
       service,
       targetPort: containerPort.toString(),
+      serviceNamespace,
+      id: id,
+      port,
     }),
   }).then((response: Response) => {
     return response.json().then(data => {
@@ -891,13 +897,14 @@ export function startPortForward(
     });
   });
 }
-export function deletePortForward(cluster: string, id: string, podOrService: string = 'pods') {
+
+export function stopOrDeletePortForward(cluster: string, id: string, stopOrDelete: boolean = true) {
   return fetch(`${helpers.getAppUrl()}portforward`, {
     method: 'DELETE',
     body: JSON.stringify({
       cluster,
       id,
-      podOrService,
+      stopOrDelete,
     }),
   }).then(response =>
     response.text().then(data => {
@@ -909,8 +916,8 @@ export function deletePortForward(cluster: string, id: string, podOrService: str
   );
 }
 
-export function listPortForward(cluster: string, podOrService: string = 'pods') {
-  return fetch(
-    `${helpers.getAppUrl()}portforward/list?cluster=${cluster}&podOrService=${podOrService}`
-  ).then(response => response.json());
+export function listPortForward(cluster: string) {
+  return fetch(`${helpers.getAppUrl()}portforward/list?cluster=${cluster}`).then(response =>
+    response.json()
+  );
 }

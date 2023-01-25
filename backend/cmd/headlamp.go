@@ -7,6 +7,7 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/fs"
 	"io/ioutil"
@@ -21,6 +22,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"syscall"
 	"time"
 
 	oidc "github.com/coreos/go-oidc"
@@ -59,28 +61,34 @@ type HeadlampConfig struct {
 
 const PodAvailabilityCheckTimer = 5 // seconds
 
+const (
+	RUNNING = "Running"
+	STOPPED = "Stopped"
+)
+
 type PortForward struct {
-	ID        string `json:"id"`
-	closeChan chan struct{}
-	Pod       string `json:"pod"`
-	Service   string `json:"service"`
-	Namespace string `json:"namespace"`
-	Cluster   string `json:"cluster"`
-	Port      string `json:"port"`
-	Out       *bytes.Buffer
-	ErrOut    *bytes.Buffer
-	OutString string `json:"outString"`
-	ErrString string `json:"errString"`
+	ID               string `json:"id"`
+	closeChan        chan struct{}
+	Pod              string `json:"pod"`
+	Service          string `json:"service"`
+	ServiceNamespace string `json:"serviceNamespace"`
+	Namespace        string `json:"namespace"`
+	Cluster          string `json:"cluster"`
+	Port             string `json:"port"`
+	TargetPort       string `json:"targetPort"`
+	Status           string `json:"status"`
+	Error            string `json:"error"`
 }
 
 type PortForwardPayload struct {
-	ID         string `json:"id"`
-	Namespace  string `json:"namespace"`
-	Pod        string `json:"pod"`
-	Service    string `json:"service"`
-	TargetPort string `json:"targetPort"`
-	Cluster    string `json:"cluster"`
-	Port       string `json:"port"`
+	ID               string `json:"id"`
+	Namespace        string `json:"namespace"`
+	Pod              string `json:"pod"`
+	Service          string `json:"service"`
+	ServiceNamespace string `json:"serviceNamespace"`
+	TargetPort       string `json:"targetPort"`
+	Cluster          string `json:"cluster"`
+	Port             string `json:"port"`
 }
 
 type clientConfig struct {
@@ -111,41 +119,32 @@ func resetPlugins() {
 	pluginListURLs = nil
 }
 
-const (
-	PODS     = "pods"
-	SERVICES = "services"
-)
-
-var portForwards = make(map[string]map[string]map[string]PortForward)
+var portForwards = make(map[string][]PortForward)
 
 func portforwardstore(p PortForward) {
-	if portForwards[p.Cluster] == nil {
-		portForwards[p.Cluster] = make(map[string]map[string]PortForward)
+	// check if we already have a portforward with the same id if yes update it
+	for index, v := range portForwards[p.Cluster] {
+		if v.ID == p.ID {
+			portForwards[p.Cluster][index] = p
+			return
+		}
 	}
 
-	if p.Service != "" {
-		if portForwards[p.Cluster][SERVICES] == nil {
-			portForwards[p.Cluster][SERVICES] = make(map[string]PortForward)
-		}
-
-		portForwards[p.Cluster][SERVICES][p.ID] = p
-	} else if p.Pod != "" {
-		if portForwards[p.Cluster][PODS] == nil {
-			portForwards[p.Cluster][PODS] = make(map[string]PortForward)
-		}
-
-		portForwards[p.Cluster][PODS][p.ID] = p
-	}
+	portForwards[p.Cluster] = append(portForwards[p.Cluster], p)
 }
 
-func deletePortForward(cluster string, id string, podOrService string) error {
-	clusterPortForwardsForPodsOrService, ok := portForwards[cluster][podOrService]
+func stopOrDeletePortForward(cluster string, id string, isStopRequest bool) error {
+	clusterPortForwards, ok := portForwards[cluster]
 	if ok {
-		for key, v := range clusterPortForwardsForPodsOrService {
+		for index, v := range clusterPortForwards {
 			if v.ID == id {
-				v.closeChan <- struct{}{}
-
-				delete(clusterPortForwardsForPodsOrService, key)
+				if !isStopRequest {
+					portForwards[cluster] = append(clusterPortForwards[:index], clusterPortForwards[index+1:]...)
+				} else {
+					v.Status = STOPPED
+					v.closeChan <- struct{}{}
+					clusterPortForwards[index] = v
+				}
 
 				return nil
 			}
@@ -155,12 +154,12 @@ func deletePortForward(cluster string, id string, podOrService string) error {
 	return fmt.Errorf("PortForward not found")
 }
 
-func getPortForwardList(cluster string, podOrService string) map[string]PortForward {
-	return portForwards[cluster][podOrService]
+func getPortForwardList(cluster string) []PortForward {
+	return portForwards[cluster]
 }
 
-func getPortForwardByID(cluster string, id string, podOrService string) PortForward {
-	val, ok := portForwards[cluster][podOrService]
+func getPortForwardByID(cluster string, id string) PortForward {
+	val, ok := portForwards[cluster]
 	if ok {
 		for _, v := range val {
 			if v.ID == id {
@@ -473,14 +472,16 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 
 	r.HandleFunc("/portforward", func(w http.ResponseWriter, r *http.Request) {
 		var p PortForwardPayload
-		id := uuid.New().String()
-		p.ID = id
 		err := json.NewDecoder(r.Body).Decode(&p)
 		if err != nil {
-			log.Printf("Error decoding portforward payload %s", err)
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			http.Error(w, "invalid request "+err.Error(), http.StatusBadRequest)
 			return
 		}
+		if p.ID == "" {
+			id := uuid.New().String()
+			p.ID = id
+		}
+
 		reqToken := r.Header.Get("Authorization")
 		splitToken := strings.Split(reqToken, "Bearer ")
 		var token string
@@ -503,16 +504,25 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 				p.Port = strconv.Itoa(freePort)
 			}
 		}
-		jsonPayload, err := json.Marshal(p)
+
 		if err != nil {
 			http.Error(w, "failed to marshal port forward payload "+err.Error(), http.StatusInternalServerError)
 			return
 		}
+
 		err = config.startPortForward(p, token)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
+
+		jsonPayload, err := json.Marshal(p)
+		if err != nil {
+			log.Printf("Error decoding portforward payload %s", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
 		w.Header().Set("Content-Type", "application/json")
 		if _, err = w.Write(jsonPayload); err != nil {
 			http.Error(w, "failed to write json payload to response write "+err.Error(), http.StatusInternalServerError)
@@ -523,7 +533,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		type deletePayload struct {
 			ID           string `json:"id"`
 			Cluster      string `json:"cluster"`
-			PodOrService string `json:"podOrService"`
+			StopOrDelete bool   `json:"stopOrDelete"`
 		}
 		var dp deletePayload
 		err := json.NewDecoder(r.Body).Decode(&dp)
@@ -540,9 +550,9 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			http.Error(w, "cluster is required", http.StatusBadRequest)
 			return
 		}
-		err = deletePortForward(dp.Cluster, dp.ID, dp.PodOrService)
+		err = stopOrDeletePortForward(dp.Cluster, dp.ID, dp.StopOrDelete)
 		if err == nil {
-			if _, err := w.Write([]byte("deleted")); err != nil {
+			if _, err := w.Write([]byte("stopped")); err != nil {
 				http.Error(w, "failed to write response "+err.Error(), http.StatusInternalServerError)
 			}
 			return
@@ -552,17 +562,12 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 
 	r.HandleFunc("/portforward/list", func(w http.ResponseWriter, r *http.Request) {
 		cluster := r.URL.Query().Get("cluster")
-		podOrService := r.URL.Query().Get("podOrService")
 		if cluster == "" {
 			http.Error(w, "cluster is required", http.StatusBadRequest)
 			return
 		}
-		ports := getPortForwardList(cluster, podOrService)
+		ports := getPortForwardList(cluster)
 
-		for _, v := range ports {
-			v.ErrString = v.ErrOut.String()
-			v.OutString = v.Out.String()
-		}
 		jsonPayload, err := json.Marshal(ports)
 		if err != nil {
 			http.Error(w, "failed to marshal port forward list "+err.Error(), http.StatusInternalServerError)
@@ -577,7 +582,6 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	r.HandleFunc("/portforward", func(w http.ResponseWriter, r *http.Request) {
 		id := r.URL.Query().Get("id")
 		cluster := r.URL.Query().Get("cluster")
-		podOrService := r.URL.Query().Get("podOrService")
 		if cluster == "" {
 			http.Error(w, "cluster is required", http.StatusBadRequest)
 			return
@@ -586,7 +590,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			http.Error(w, "id is required", http.StatusBadRequest)
 			return
 		}
-		p := getPortForwardByID(cluster, id, podOrService)
+		p := getPortForwardByID(cluster, id)
 		if p.ID == "" {
 			http.Error(w, "no portforward running with id "+id, http.StatusNotFound)
 			return
@@ -769,9 +773,27 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 		return fmt.Errorf("portforward request: failed to create portforward: %v", err)
 	}
 
+	portForwardToStore := PortForward{
+		ID:               p.ID,
+		closeChan:        stopChan,
+		Pod:              p.Pod,
+		Cluster:          p.Cluster,
+		Namespace:        p.Namespace,
+		Service:          p.Service,
+		ServiceNamespace: p.ServiceNamespace,
+		TargetPort:       p.TargetPort,
+		Status:           RUNNING,
+		Port:             p.Port,
+		Error:            "",
+	}
+
 	go func() {
 		if err = forwarder.ForwardPorts(); err != nil { // Locks until stopChan is closed.
 			log.Printf("Error: failed to forward ports: %s", err)
+			stopChan <- struct{}{}
+
+			portForwardToStore.Error = err.Error()
+			portforwardstore(portForwardToStore)
 		}
 	}()
 
@@ -781,18 +803,7 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 	}
 
 	if errOut.String() == "" {
-		p := PortForward{
-			ID:        p.ID,
-			closeChan: stopChan,
-			Pod:       p.Pod,
-			Cluster:   p.Cluster,
-			Namespace: p.Namespace,
-			Service:   p.Service,
-			Port:      p.Port,
-			Out:       out,
-			ErrOut:    errOut,
-		}
-		portforwardstore(p)
+		portforwardstore(portForwardToStore)
 	}
 
 	/* check every PodAvailabilityCheckTimer seconds if the pod for which we started a portforward is running
@@ -805,8 +816,14 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 			ctx := context.Background()
 
 			pod, err := clientset.CoreV1().Pods(p.Namespace).Get(ctx, p.Pod, v1.GetOptions{})
-			if err != nil {
+			if errors.Is(err, syscall.ECONNREFUSED) {
+				continue
+			} else if err != nil {
 				log.Printf("portforward: failed to get pod: %s", err)
+				stopChan <- struct{}{}
+				portForwardToStore.Error = err.Error()
+				portforwardstore(portForwardToStore)
+				ticker.Stop()
 				break
 			}
 
@@ -814,7 +831,11 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 				// close the channel if this pod is not running
 				stopChan <- struct{}{}
 
+				portForwardToStore.Error = "Pod is not running"
+				portforwardstore(portForwardToStore)
 				ticker.Stop()
+
+				break
 			}
 		}
 	}()

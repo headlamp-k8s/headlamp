@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import helpers from '../../helpers';
 import store from '../../redux/stores/store';
 import { SidebarItemProps } from '../Sidebar';
 
@@ -113,6 +114,11 @@ function prepareRoutes(t: (arg: string) => string) {
         {
           name: 'ingresses',
           label: t('glossary|Ingresses'),
+        },
+        {
+          name: 'portforwards',
+          label: t('glossary|Port Forwards'),
+          hide: !helpers.isElectron(),
         },
       ],
     },

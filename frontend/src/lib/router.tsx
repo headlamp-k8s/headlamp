@@ -32,6 +32,7 @@ import PodDetails from '../components/pod/Details';
 import PodList from '../components/pod/List';
 import PDBDetails from '../components/podDisruptionBudget/Details';
 import PDBList from '../components/podDisruptionBudget/List';
+import PortForwardingList from '../components/portforward';
 import PriorityClassDetails from '../components/priorityClass/Details';
 import PriorityClassList from '../components/priorityClass/List';
 import ReplicaSetList from '../components/replicaset/List';
@@ -57,6 +58,7 @@ import PersistentVolumeDetails from '../components/storage/VolumeDetails';
 import PersistentVolumeList from '../components/storage/VolumeList';
 import WorkloadDetails from '../components/workload/Details';
 import WorkloadOverview from '../components/workload/Overview';
+import helpers from '../helpers';
 import LocaleSelect from '../i18n/LocaleSelect/LocaleSelect';
 import store from '../redux/stores/store';
 import Deployment from './k8s/deployment';
@@ -88,6 +90,8 @@ export interface Route {
   component: () => JSX.Element;
   /** Hide the appbar at the top. */
   hideAppBar?: boolean;
+  /** Whether the route should be disabled (not registered). */
+  disabled?: boolean;
 }
 
 const defaultRoutes: {
@@ -527,6 +531,14 @@ const defaultRoutes: {
     useClusterURL: false,
     noAuthRequired: true,
     component: () => <AppSettings />,
+  },
+  portforwards: {
+    path: '/portforwards',
+    exact: true,
+    name: 'PortForwards',
+    sidebar: 'portforwards',
+    disabled: !helpers.isElectron(),
+    component: () => <PortForwardingList />,
   },
 };
 
