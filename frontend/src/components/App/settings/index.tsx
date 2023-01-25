@@ -229,6 +229,7 @@ export default function Settings() {
           />,
         ],
       }}
+      backLink
     >
       <NameValueTable
         valueCellProps={{ className: classes.valueCol }}

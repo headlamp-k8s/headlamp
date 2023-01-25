@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import { Button, InputLabel, Theme } from '@material-ui/core';
+import { InputLabel, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps } from '@material-ui/core/Grid';
@@ -15,7 +15,7 @@ import _ from 'lodash';
 import * as monaco from 'monaco-editor';
 import React, { isValidElement, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, NavLinkProps, useHistory, useLocation } from 'react-router-dom';
+import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
 import { labelSelectorToQuery } from '../../../lib/k8s';
 import {
   KubeCondition,
@@ -99,8 +99,6 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   } = props;
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
   const { t } = useTranslation('frequent');
-  const history = useHistory();
-
   const header = typeof headerSection === 'function' ? headerSection(resource) : headerSection;
 
   const allActions = (function stateActions() {
@@ -139,54 +137,42 @@ export function MainInfoSection(props: MainInfoSectionProps) {
       })()
     );
 
-  return (
-    <>
-      {(backLink || backLink === '' || resource) && (
-        <Button
-          startIcon={<Icon icon="mdi:chevron-left" />}
-          size="small"
-          onClick={() => {
-            // Empty string means go back using the history.
-            if (backLink === '') {
-              history.goBack();
-              return;
-            }
-            if (typeof backLink === 'string') {
-              history.push(backLink);
-              return;
-            }
+  function getBackLink() {
+    if (!!backLink || backLink === '') {
+      return backLink;
+    }
 
-            history.push(backLink || createRouteURL(resource.listRoute));
-          }}
-        >
-          <Typography style={{ paddingTop: '3px' }}>{t('frequent|Back')}</Typography>
-        </Button>
-      )}
-      <SectionBox
-        aria-busy={resource === null}
-        aria-live="polite"
-        title={
-          <SectionHeader
-            title={title || (resource ? resource.kind : '')}
-            headerStyle={headerStyle}
-            actions={allActions}
-          />
-        }
-      >
-        {resource === null ? (
-          !!error ? (
-            <Empty color="error">{error.toString()}</Empty>
-          ) : (
-            <Loader title={t('frequent|Loading resource data')} />
-          )
+    if (!!resource) {
+      return createRouteURL(resource.listRoute);
+    }
+  }
+
+  return (
+    <SectionBox
+      aria-busy={resource === null}
+      aria-live="polite"
+      title={
+        <SectionHeader
+          title={title || (resource ? resource.kind : '')}
+          headerStyle={headerStyle}
+          actions={allActions}
+        />
+      }
+      backLink={getBackLink()}
+    >
+      {resource === null ? (
+        !!error ? (
+          <Empty color="error">{error.toString()}</Empty>
         ) : (
-          <React.Fragment>
-            {header}
-            <MetadataDisplay resource={resource} extraRows={extraInfo} />
-          </React.Fragment>
-        )}
-      </SectionBox>
-    </>
+          <Loader title={t('frequent|Loading resource data')} />
+        )
+      ) : (
+        <React.Fragment>
+          {header}
+          <MetadataDisplay resource={resource} extraRows={extraInfo} />
+        </React.Fragment>
+      )}
+    </SectionBox>
   );
 }
 

@@ -70,8 +70,9 @@ export default function Sidebar() {
   const specialSidebarOptions: SidebarItemProps[] = [
     {
       name: t('frequent|back'),
-      icon: 'mdi:arrow-left',
-      label: t('frequent|Back'),
+      icon: 'mdi:hexagon-multiple',
+      label: t('glossary|Cluster'),
+      url: '/',
     },
     {
       name: t('frequent|notifications'),

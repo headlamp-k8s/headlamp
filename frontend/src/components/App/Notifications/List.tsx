@@ -91,6 +91,7 @@ export default function NotificationList() {
           actions={[<NotificationActionMenu />]}
         />
       }
+      backLink
     >
       {checkIfAllNotificationsDeleted() ? (
         <Empty>{t(`notifications|You don't have any notifications right now`)}</Empty>
