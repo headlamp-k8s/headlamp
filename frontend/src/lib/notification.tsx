@@ -67,6 +67,24 @@ export class Notification {
   get message() {
     return this._message;
   }
+
+  static fromJSON(json: any) {
+    return Object.assign(new Notification(), json);
+  }
+
+  // Avoid marshalling the entire object to JSON, as well as
+  // private properties with the _ prefix.
+  toJSON() {
+    return {
+      id: this.id,
+      seen: this.seen,
+      url: this.url,
+      date: this.date,
+      deleted: this.deleted,
+      cluster: this.cluster,
+      message: this.message,
+    };
+  }
 }
 
 export function setNotificationsInStore(notifications: Notification[] | Notification) {
