@@ -2,8 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { ApiError, apiFactory } from '../../lib/k8s/apiProxy';
-import CRD, { KubeCRD } from '../../lib/k8s/crd';
+import { ApiError } from '../../lib/k8s/apiProxy';
+import CRD, { KubeCRD, makeCustomResourceClass } from '../../lib/k8s/crd';
 import { Link } from '../common';
 import Loader from '../common/Loader';
 import { ConditionsTable, MainInfoSection, PageGrid } from '../common/Resource';
@@ -12,7 +12,7 @@ import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 import DetailsViewSection from '../DetailsViewSection';
 
-function getAPIForCRD(item: KubeCRD) {
+function getAPIGroups(item: KubeCRD) {
   const group = item.spec.group;
   const version = item.spec.version;
   const name = item.spec.names.plural as string;
@@ -26,7 +26,7 @@ function getAPIForCRD(item: KubeCRD) {
     versions = [[group, version, name]];
   }
 
-  return apiFactory(...versions);
+  return versions;
 }
 
 const useStyle = makeStyles({
@@ -59,34 +59,9 @@ export default function CustomResourceDefinitionDetails() {
   const { name } = useParams<{ name: string }>();
   const [item, setItem] = React.useState<CRD | null>(null);
   const [error, setError] = React.useState<ApiError | null>(null);
-  const [objects, setObjects] = React.useState<KubeCRD[] | null>([]);
-  const [objectsError, setObjectsError] = React.useState<string | null>(null);
   const { t } = useTranslation('glossary');
 
   CRD.useApiGet(setItem, name, undefined, setError);
-
-  React.useEffect(() => {
-    let promise: Promise<any> | null = null;
-    if (item) {
-      promise = getAPIForCRD(item.jsonData).list(
-        items => {
-          setObjectsError(null);
-          setObjects(items);
-        },
-        err => {
-          console.error(`Failed to get objects for CRD: ${item} . Error: ${err}`);
-          setObjectsError(t('crd|Failed to get objects'));
-          setObjects(null);
-        }
-      );
-    }
-
-    return function cleanup() {
-      if (promise) {
-        promise.then((cancellable: () => void) => cancellable());
-      }
-    };
-  }, [item]);
 
   return !item ? (
     <Loader title={t('resource|Loading resource definition details')} />
@@ -165,24 +140,38 @@ export default function CustomResourceDefinitionDetails() {
         <ConditionsTable resource={item.jsonData} showLastUpdate={false} />
       </SectionBox>
       <SectionBox title={t('Objects')}>
-        <ResourceTable
-          data={objects}
-          errorMessage={objectsError}
-          columns={[
-            {
-              label: t('frequent|Name'),
-              getter: obj => <CustomResourceLink resource={obj} crd={item} />,
-            },
-            {
-              label: t('glossary|Namespace'),
-              getter: obj => obj.metadata.namespace || '-',
-            },
-            'age',
-          ]}
-          reflectInURL="objects"
-        />
+        <CRObjectsTable crd={item} />
       </SectionBox>
       <DetailsViewSection resource={item} />
     </PageGrid>
+  );
+}
+
+interface CRObjectsTableProps {
+  crd: CRD;
+}
+
+function CRObjectsTable(props: CRObjectsTableProps) {
+  const { crd } = props;
+  const { t } = useTranslation('glossary');
+
+  const CRClass = makeCustomResourceClass(getAPIGroups(crd.jsonData), crd.metadata.namespace);
+
+  return (
+    <ResourceTable
+      resourceClass={CRClass}
+      columns={[
+        {
+          label: t('frequent|Name'),
+          getter: obj => <CustomResourceLink resource={obj} crd={crd} />,
+        },
+        {
+          label: t('glossary|Namespace'),
+          getter: obj => obj.metadata.namespace || '-',
+        },
+        'age',
+      ]}
+      reflectInURL="objects"
+    />
   );
 }
