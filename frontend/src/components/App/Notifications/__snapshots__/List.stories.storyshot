@@ -1,7 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Notifications Version Dialog 1`] = `
+exports[`Storyshots Notifications List 1`] = `
 <div>
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      <span
+        class="MuiButton-startIcon MuiButton-iconSizeSmall"
+      >
+        <span />
+      </span>
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+        style="padding-top: 3px;"
+      >
+        Back
+      </p>
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
   <div
     class="MuiBox-root MuiBox-root"
   >
@@ -119,7 +143,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.899Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -178,7 +202,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -237,7 +261,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -296,7 +320,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -355,7 +379,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -414,7 +438,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -473,7 +497,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -532,7 +556,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -591,7 +615,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -650,7 +674,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -709,7 +733,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -768,7 +792,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -827,7 +851,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -886,7 +910,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -945,7 +969,7 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2023-01-19T08:41:09.901Z"
+                  title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
                   <span />
@@ -974,110 +998,6 @@ exports[`Storyshots Notifications Version Dialog 1`] = `
             </tr>
           </tbody>
         </table>
-        <div
-          class="MuiTablePagination-root"
-        >
-          <div
-            class="MuiToolbar-root MuiToolbar-regular MuiTablePagination-toolbar MuiToolbar-gutters"
-          >
-            <div
-              class="MuiTablePagination-spacer"
-            />
-            <p
-              class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
-              id="mui-66118"
-            >
-              Rows per page:
-            </p>
-            <div
-              class="MuiInputBase-root MuiTablePagination-input MuiTablePagination-selectRoot"
-            >
-              <div
-                aria-haspopup="listbox"
-                aria-labelledby="mui-66118 mui-98515"
-                class="MuiSelect-root MuiSelect-select MuiTablePagination-select MuiSelect-selectMenu MuiInputBase-input"
-                id="mui-98515"
-                role="button"
-                tabindex="0"
-              >
-                15
-              </div>
-              <input
-                aria-hidden="true"
-                class="MuiSelect-nativeInput"
-                tabindex="-1"
-                value="15"
-              />
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root MuiSelect-icon MuiTablePagination-selectIcon"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7 10l5 5 5-5z"
-                />
-              </svg>
-            </div>
-            <p
-              class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
-            >
-              1-15 of 100
-            </p>
-            <div
-              class="MuiTablePagination-actions"
-            >
-              <button
-                aria-label="previous page"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-disabled MuiButtonBase-disabled"
-                disabled=""
-                tabindex="-1"
-                title="Previous page"
-                type="button"
-              >
-                <span
-                  class="MuiIconButton-label"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="MuiSvgIcon-root"
-                    focusable="false"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"
-                    />
-                  </svg>
-                </span>
-              </button>
-              <button
-                aria-label="next page"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
-                tabindex="0"
-                title="Next page"
-                type="button"
-              >
-                <span
-                  class="MuiIconButton-label"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="MuiSvgIcon-root"
-                    focusable="false"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"
-                    />
-                  </svg>
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
