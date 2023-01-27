@@ -28,3 +28,9 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: jest.fn(),
   })),
 });
+
+beforeEach(() => {
+  // Clears the database and adds some testing data.
+  // Jest will wait for this promise to resolve before running tests.
+  localStorage.clear();
+});

@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { DefaultRowsPerPageOptions } from '../../components/App/settings/config';
 import { SidebarEntryProps } from '../../components/Sidebar';
 import helpers from '../../helpers';
 import { Notification } from '../../lib/notification';
@@ -23,7 +22,6 @@ import {
   UI_SET_CLUSTER_CHOOSER_BUTTON,
   UI_SET_DETAILS_VIEW,
   UI_SET_NOTIFICATIONS,
-  UI_SET_SETTINGS,
   UI_SIDEBAR_SET_EXPANDED,
   UI_SIDEBAR_SET_ITEM,
   UI_SIDEBAR_SET_ITEM_FILTER,
@@ -72,9 +70,6 @@ export interface UIState {
   clusterChooserButtonComponent?: ClusterChooserType;
   hideAppBar?: boolean;
   functionsToOverride: FunctionsToOverride;
-  settings: {
-    [key: string]: any;
-  };
 }
 
 function setInitialSidebarOpen() {
@@ -101,8 +96,6 @@ function setInitialSidebarOpen() {
     isSidebarOpenUserSelected: undefined,
   };
 }
-
-const storedSettings = JSON.parse(localStorage.getItem('settings') || '{}');
 
 export const INITIAL_STATE: UIState = {
   sidebar: {
@@ -136,10 +129,6 @@ export const INITIAL_STATE: UIState = {
   notifications: [],
   hideAppBar: false,
   functionsToOverride: {},
-  settings: {
-    tableRowsPerPageOptions: storedSettings.tableRowsPerPageOptions || DefaultRowsPerPageOptions,
-    timezone: storedSettings.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
-  },
 };
 
 function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
@@ -313,16 +302,6 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
           newFilters.functionsToOverride[key] = functionToOverride[key];
         }
       }
-      break;
-    }
-    case UI_SET_SETTINGS: {
-      const keys = Object.keys(action.settings);
-      keys.forEach(key => {
-        if (Object.keys(newFilters.settings).includes(key)) {
-          newFilters.settings[key] = action.settings[key];
-        }
-      });
-      localStorage.setItem('settings', JSON.stringify(newFilters.settings));
       break;
     }
     default:

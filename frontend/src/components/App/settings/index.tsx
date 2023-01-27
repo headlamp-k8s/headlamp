@@ -18,12 +18,12 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../../helpers';
 import LocaleSelect from '../../../i18n/LocaleSelect/LocaleSelect';
 import { createRouteURL } from '../../../lib/router';
-import { setUISettings, setVersionDialogOpen } from '../../../redux/actions/actions';
-import { useTypedSelector } from '../../../redux/reducers/reducers';
+import { setAppSettings, setVersionDialogOpen } from '../../../redux/actions/actions';
 import { ActionButton, NameValueTable, SectionBox } from '../../common';
 import TimezoneSelect from '../../common/TimezoneSelect';
 import ThemeChangeButton from '../ThemeChangeButton';
 import { DefaultRowsPerPageOptions } from './config';
+import { useSettings } from './hook';
 
 function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) {
   const { t } = useTranslation(['frequent', 'settings']);
@@ -56,7 +56,7 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setUISettings({ tableRowsPerPageOptions: options }));
+    dispatch(setAppSettings({ tableRowsPerPageOptions: options }));
   }, [options]);
 
   // Make sure we update the value in the localStorage when the user selects a new value.
@@ -198,7 +198,7 @@ const useStyles = makeStyles(theme => ({
 export default function Settings() {
   const classes = useStyles();
   const { t } = useTranslation(['settings']);
-  const settingsObj = useTypedSelector(state => state.ui.settings);
+  const settingsObj = useSettings();
   const storedTimezone = settingsObj.timezone;
   const storedRowsPerPageOptions = settingsObj.tableRowsPerPageOptions;
   const [selectedTimezone, setSelectedTimezone] = useState<string>(
@@ -208,7 +208,7 @@ export default function Settings() {
 
   useEffect(() => {
     dispatch(
-      setUISettings({
+      setAppSettings({
         timezone: selectedTimezone,
       })
     );
