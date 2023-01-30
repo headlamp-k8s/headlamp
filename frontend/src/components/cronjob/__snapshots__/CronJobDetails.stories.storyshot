@@ -61,24 +61,7 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
                 />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
-                    tabindex="0"
-                    title="View YAML"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -382,24 +365,7 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
                 />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
-                    tabindex="0"
-                    title="View YAML"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />

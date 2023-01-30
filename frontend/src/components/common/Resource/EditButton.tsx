@@ -18,7 +18,7 @@ export default function EditButton(props: EditButtonProps) {
   const dispatch = useDispatch();
   const { item, options = {} } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
-  const [isReadOnly, setIsReadOnly] = React.useState(true);
+  const [isReadOnly, setIsReadOnly] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState<string>('');
   const location = useLocation();
   const { t } = useTranslation(['frequent', 'resource']);
