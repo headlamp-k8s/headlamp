@@ -2,6 +2,7 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { createStore } from 'redux';
 import helpers from '../../../helpers';
 import { Notification } from '../../../lib/notification';
+import { INITIAL_STATE as CONFIG_INITIAL_STATE } from '../../../redux/reducers/config';
 import { INITIAL_STATE as FILTER_INITIAL_STATE } from '../../../redux/reducers/filter';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';
 import { TestContext } from '../../../test';
@@ -25,8 +26,17 @@ createNotifications();
 
 // eslint-disable-next-line no-unused-vars
 const store = createStore(
-  (state = { filter: { ...FILTER_INITIAL_STATE }, ui: { ...UI_INITIAL_STATE } }) => state,
+  (
+    state = {
+      filter: { ...FILTER_INITIAL_STATE },
+      config: { ...CONFIG_INITIAL_STATE },
+      ui: { ...UI_INITIAL_STATE },
+    }
+  ) => state,
   {
+    config: {
+      ...CONFIG_INITIAL_STATE,
+    },
     filter: { ...FILTER_INITIAL_STATE },
     ui: {
       ...UI_INITIAL_STATE,

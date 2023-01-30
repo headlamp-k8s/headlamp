@@ -2,6 +2,30 @@
 
 exports[`Storyshots Settings General 1`] = `
 <div>
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      <span
+        class="MuiButton-startIcon MuiButton-iconSizeSmall"
+      >
+        <span />
+      </span>
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+        style="padding-top: 3px;"
+      >
+        Back
+      </p>
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
   <div
     class="MuiBox-root MuiBox-root"
   >
