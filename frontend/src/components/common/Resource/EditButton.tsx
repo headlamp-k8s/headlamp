@@ -76,8 +76,8 @@ export default function EditButton(props: EditButtonProps) {
         console.error(`Error while getting authorization for edit button in ${item}:`, err);
         setIsReadOnly(true);
       }}
-      onUnauthorized={() => {
-        setIsReadOnly(true);
+      onAuthResult={({ allowed }) => {
+        setIsReadOnly(!allowed);
       }}
     >
       <ActionButton
