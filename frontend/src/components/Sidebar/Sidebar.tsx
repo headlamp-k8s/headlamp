@@ -69,19 +69,19 @@ export default function Sidebar() {
   const { t, i18n } = useTranslation(['glossary', 'frequent']);
   const specialSidebarOptions: SidebarItemProps[] = [
     {
-      name: t('frequent|back'),
+      name: 'clusters',
       icon: 'mdi:hexagon-multiple',
       label: t('glossary|Cluster'),
       url: '/',
     },
     {
-      name: t('frequent|notifications'),
+      name: 'notifications',
       icon: 'mdi:bell',
       label: t('frequent|Notifications'),
       url: '/notifications',
     },
     {
-      name: t('frequent|settings'),
+      name: 'settings',
       icon: 'mdi:cog',
       label: t('frequent|Settings'),
       url: '/settings',
