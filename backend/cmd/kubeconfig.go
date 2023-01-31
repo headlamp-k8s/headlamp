@@ -76,7 +76,7 @@ func GetContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 			}
 		}
 
-		cluster := Cluster{key, clusterConfig.Server, clusterConfig, authType, nil}
+		cluster := Cluster{key, clusterConfig.Server, clusterConfig, authType, nil, clusterConfig.ProxyURL}
 
 		contexts = append(contexts, Context{key, cluster, authInfo})
 	}
