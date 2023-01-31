@@ -738,12 +738,26 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 		Host:        ctxtProxy.context.cluster.config.Server,
 		BearerToken: token,
 		TLSClientConfig: rest.TLSClientConfig{
-			CAData:   caData,
-			KeyFile:  ctxtProxy.context.authInfo.ClientKey,
-			CertFile: ctxtProxy.context.authInfo.ClientCertificate,
-			KeyData:  ctxtProxy.context.authInfo.ClientKeyData,
-			CertData: ctxtProxy.context.authInfo.ClientCertificateData,
+			CAData: caData,
 		},
+	}
+
+	if ctxtProxy.context.authInfo != nil {
+		if ctxtProxy.context.authInfo.ClientKey != "" {
+			rConf.TLSClientConfig.KeyFile = ctxtProxy.context.authInfo.ClientKey
+		}
+
+		if ctxtProxy.context.authInfo.ClientCertificate != "" {
+			rConf.TLSClientConfig.CertFile = ctxtProxy.context.authInfo.ClientCertificate
+		}
+
+		if ctxtProxy.context.authInfo.ClientKeyData != nil {
+			rConf.TLSClientConfig.KeyData = ctxtProxy.context.authInfo.ClientKeyData
+		}
+
+		if ctxtProxy.context.authInfo.ClientCertificateData != nil {
+			rConf.TLSClientConfig.CertData = ctxtProxy.context.authInfo.ClientCertificateData
+		}
 	}
 
 	clientset, err := kubernetes.NewForConfig(rConf)
