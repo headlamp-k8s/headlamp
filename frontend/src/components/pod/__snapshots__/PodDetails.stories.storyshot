@@ -67,24 +67,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                 />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
-                    tabindex="0"
-                    title="View YAML"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -785,24 +768,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                 />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
-                    tabindex="0"
-                    title="View YAML"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -1487,24 +1453,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                 />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
-                    tabindex="0"
-                    title="View YAML"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -2303,24 +2252,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                 />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
-                    tabindex="0"
-                    title="View YAML"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -2988,24 +2920,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                 />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
-                    tabindex="0"
-                    title="View YAML"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -3710,24 +3625,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                 />
                 <div
                   class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
-                    tabindex="0"
-                    title="View YAML"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />

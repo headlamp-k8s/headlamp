@@ -12,15 +12,17 @@ export interface AuthVisibleProps extends React.PropsWithChildren<{}> {
    * @param err The error that occurred.
    */
   onError?: (err: Error) => void;
-  /** Callback for when the user is not authorized to perform the action. */
-  onUnauthorized?: () => void;
+  /** Callback for when the authorization is checked.
+   * @param result The result of the authorization check. Its `allowed` member will be true if the user is authorized to perform the specified action on the given resource; false otherwise. The `reason` member will contain a string explaining why the user is authorized or not.
+   */
+  onAuthResult?: (result: { allowed: boolean; reason: string }) => void;
 }
 
 /** A component that will only render its children if the user is authorized to perform the specified action on the given resource.
  * @param props The props for the component.
  */
 export default function AuthVisible(props: AuthVisibleProps) {
-  const { item, authVerb, subresource, onError, onUnauthorized, children } = props;
+  const { item, authVerb, subresource, onError, onAuthResult, children } = props;
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -33,8 +35,11 @@ export default function AuthVisible(props: AuthVisibleProps) {
             if (result.status?.allowed !== visible) {
               setVisible(!!result.status?.allowed);
             }
-            if (!!onUnauthorized) {
-              onUnauthorized();
+            if (!!onAuthResult) {
+              onAuthResult({
+                allowed: result.status?.allowed,
+                reason: result.status?.reason || '',
+              });
             }
           }
         })
