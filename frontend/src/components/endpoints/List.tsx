@@ -6,7 +6,7 @@ import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 
 export default function EndpointList() {
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'frequent']);
   const filterFunc = useFilterFunc([
     '.jsonData.subsets[*].addresses[*].ip',
     '.jsonData.subsets[*].ports[*].port',
@@ -14,7 +14,7 @@ export default function EndpointList() {
   ]);
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Endpoints')} />}>
+    <SectionBox title={<SectionFilterHeader title={t('glossary|Endpoints')} />}>
       <ResourceTable
         resourceClass={Endpoints}
         filterFunction={filterFunc}
@@ -22,7 +22,7 @@ export default function EndpointList() {
           'name',
           'namespace',
           {
-            label: t('Addresses'),
+            label: t('frequent|Addresses'),
             getter: endpoint => endpoint.getAddressesText(),
             cellProps: { style: { width: '40%', maxWidth: '40%' } },
           },
