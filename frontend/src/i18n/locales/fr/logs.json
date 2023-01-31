@@ -1,4 +1,5 @@
 {
+  "Logs are paused. Click the follow button to resume following them.": "",
   "Show logs for previous instances of this container.": "Afficher les journaux des instances précédentes de ce conteneur.",
   "You can only select this option for containers that have been restarted.": "Vous ne pouvez sélectionner cette option que pour les conteneurs qui ont été redémarrés.",
   "Show previous": "Montrer le précédent",

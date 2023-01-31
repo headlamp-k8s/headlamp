@@ -1,1 +1,3 @@
-{ "No data in this config map": "Aucune donnée pour cette configuration" }
+{
+  "No data in this config map": "Aucune donnée pour cette configuration"
+}

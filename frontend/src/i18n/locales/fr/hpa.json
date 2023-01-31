@@ -1,0 +1,14 @@
+{
+  "Reference": "",
+  "Metrics": "",
+  "(Current/Target)": "",
+  "MinReplicas": "",
+  "MaxReplicas": "",
+  "Deployment pods": "",
+  "{{ currentReplicas }} current / {{ desiredReplicas }} desired": "",
+  "Targets": "",
+  "\"{{metricName}}\" on {{objectKind}}/{{objectName}} {{metricTarget}}": "",
+  "\"{{metricName}}\" on pods": "",
+  "resource {{resourceName}} on pods": "",
+  "resource {{resourceName}} of container {{containerName}} on pods": ""
+}

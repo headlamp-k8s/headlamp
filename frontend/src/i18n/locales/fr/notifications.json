@@ -7,5 +7,8 @@
   "Notifications": "Notifications",
   "Mark all as read": "Marquer toutes les notifications comme lues",
   "Clear": "Effacer",
-  "View all notifications": "Voir toutes les notifications"
+  "View all notifications": "Voir toutes les notifications",
+  "Clear all": "",
+  "Message": "",
+  "Visible": ""
 }
