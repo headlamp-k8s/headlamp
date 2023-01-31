@@ -41,6 +41,7 @@ export default function PortForwardingList() {
   const [portForwardInAction, setPortForwardInAction] = React.useState<any>(null);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
+  const cluster = getCluster();
   const { t, i18n } = useTranslation(['resource', 'frequent', 'glossary']);
   const optionsTranslated = React.useMemo(
     () => ({
@@ -277,7 +278,7 @@ export default function PortForwardingList() {
             },
           },
         ]}
-        data={portforwards}
+        data={portforwards.filter((pf: any) => pf.cluster === cluster)}
       />
     </SectionBox>
   );
