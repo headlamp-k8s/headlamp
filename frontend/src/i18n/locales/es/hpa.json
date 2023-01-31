@@ -1,0 +1,14 @@
+{
+  "Reference": "Referencia",
+  "Metrics": "Métrica",
+  "(Current/Target)": "(Actual/Objetivo)",
+  "MinReplicas": "MinReplicas",
+  "MaxReplicas": "MaxReplicas",
+  "Deployment pods": "Pods de despliegue",
+  "{{ currentReplicas }} current / {{ desiredReplicas }} desired": "{{ currentReplicas }} actuales / {{ desiredReplicas }} deseados",
+  "Targets": "Objetivos",
+  "\"{{metricName}}\" on {{objectKind}}/{{objectName}} {{metricTarget}}": "\"{{metricName}}\" en {{objectKind}}/{{objectName}} {{metricTarget}}",
+  "\"{{metricName}}\" on pods": "\"{{metricName}}\" en pods",
+  "resource {{resourceName}} on pods": "recurso {{resourceName}} en pods",
+  "resource {{resourceName}} of container {{containerName}} on pods": "recurso {{resourceName}} del contenedor {{containerName}} en pods"
+}

@@ -1,4 +1,5 @@
 {
+  "Logs are paused. Click the follow button to resume following them.": "Logs are paused. Click the follow button to resume following them.",
   "Show logs for previous instances of this container.": "Show logs for previous instances of this container.",
   "You can only select this option for containers that have been restarted.": "You can only select this option for containers that have been restarted.",
   "Show previous": "Show previous",
