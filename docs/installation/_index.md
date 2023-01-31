@@ -35,16 +35,17 @@ restrictive permissions):
 kubectl create clusterrolebinding headlamp-admin --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
 ```
 
-3. Get the secret:
+3. If you are running Headlamp in a Kubernetes cluster with version greater than 1.24, create the token using the following command:
 
 ```shell
-kubectl -n kube-system get secrets | grep headlamp-admin
+kubectl create token headlamp-admin -n kube-system
 ```
 
-4. Get the associated token:
+Otherwise, run the following command to get the token associated with the service account:
 
 ```shell
-kubectl -n kube-system describe secret headlamp-admin-token-XXXXX
+export HEADLAMP_SECRET=$(kubectl get secrets --namespace kube-system -o custom-columns=":metadata.name" | grep "headlamp-admin-token")
+kubectl get secret $HEADLAMP_SECRET --namespace kube-system --template=\{\{.data.token\}\} | base64 --decode
 ```
 
 Once you have the Service Account token, paste it when prompted by Headlamp.
