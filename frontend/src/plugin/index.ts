@@ -19,6 +19,7 @@ import Registry, {
 
 window.pluginLib = {
   ApiProxy: require('../lib/k8s/apiProxy'),
+  Crd: require('../lib/k8s/crd'),
   K8s: require('../lib/k8s'),
   CommonComponents: require('../components/common'),
   MuiCore: require('@material-ui/core'),
