@@ -13,7 +13,7 @@ const path = require('path');
 const process = require('process');
 const yargs = require('yargs');
 
-const owner = 'kinvolk';
+const owner = 'headlamp-k8s';
 const repo = 'headlamp';
 const client = new octokit.Octokit({ auth: process.env.GITHUB_TOKEN });
 
