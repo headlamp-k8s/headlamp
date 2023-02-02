@@ -4,7 +4,7 @@ import { SectionBox, SectionFilterHeader, StatusLabel } from '../common';
 import ResourceTable from '../common/Resource/ResourceTable';
 
 export default function ResourceQuotaList() {
-  const { t } = useTranslation(['resourceQuota', 'glossary']);
+  const { t } = useTranslation(['frequent', 'glossary']);
   return (
     <SectionBox title={<SectionFilterHeader title={t('glossary|Resource Quotas')} />}>
       <ResourceTable
@@ -13,7 +13,7 @@ export default function ResourceQuotaList() {
           'name',
           'namespace',
           {
-            label: t('resourceQuota|Request'),
+            label: t('frequent|Request'),
             getter: (item: ResourceQuota) => {
               const requests: JSX.Element[] = [];
               item.requests.forEach((request: string) => {
@@ -23,7 +23,7 @@ export default function ResourceQuotaList() {
             },
           },
           {
-            label: t('resourceQuota|Limit'),
+            label: t('frequent|Limit'),
             getter: (item: ResourceQuota) => {
               const limits: JSX.Element[] = [];
               item.limits.forEach((limit: string) => {

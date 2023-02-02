@@ -20,7 +20,7 @@ export default function PDBDetails() {
     return values;
   }
 
-  const { t } = useTranslation(['pdb', 'frequent']);
+  const { t } = useTranslation(['pdb', 'frequent', 'glossary']);
   return (
     <DetailsGrid
       resourceType={PDB}
@@ -29,7 +29,7 @@ export default function PDBDetails() {
       extraInfo={item =>
         item && [
           {
-            name: t('pdb|Selector'),
+            name: t('glossary|Selector'),
             value: <>{selectorsToJSX(item.selectors)}</>,
           },
           {

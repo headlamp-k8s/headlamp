@@ -53,7 +53,7 @@ export default function CreateButton() {
       }
       if (!massagedNewItemDefs[i].metadata?.name) {
         setErrorMessage(
-          t(`resource|Invalid: One or more of the resource doesn't have a name property`)
+          t(`resource|Invalid: One or more of resources doesn't have a name property`)
         );
         return;
       }

@@ -1,0 +1,7 @@
+{
+  "Enter a value between {{ minRows }} and {{ maxRows }}.": "Introduzca un valor entre {{ minRows }} y {{ maxRows }}.",
+  "Custom row value": "Núm. de líneas personalizado",
+  "Number of rows for tables": "Núm. de líneas para las tablas",
+  "Timezone to display for dates": "Huso horario para mostrar en fechas",
+  "Timezone": "Huso horario"
+}

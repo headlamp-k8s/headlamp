@@ -5,7 +5,7 @@ import { DetailsGrid, SimpleTable } from '../common';
 
 export default function ResourceQuotaDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const { t } = useTranslation(['frequent', 'resourceQuota']);
+  const { t } = useTranslation(['frequent', 'glossary', 'resourceQuota']);
 
   return (
     <DetailsGrid
@@ -21,7 +21,7 @@ export default function ResourceQuotaDetails() {
                 data={item.resourceStats}
                 columns={[
                   {
-                    label: t('resourceQuota|Resource'),
+                    label: t('glossary|Resource'),
                     getter: item => item.name,
                   },
                   {

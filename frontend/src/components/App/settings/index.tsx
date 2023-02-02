@@ -197,7 +197,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Settings() {
   const classes = useStyles();
-  const { t } = useTranslation(['settings']);
+  const { t } = useTranslation(['settings', 'frequent']);
   const settingsObj = useSettings();
   const storedTimezone = settingsObj.timezone;
   const storedRowsPerPageOptions = settingsObj.tableRowsPerPageOptions;
@@ -216,7 +216,7 @@ export default function Settings() {
 
   return (
     <SectionBox
-      title={t('General')}
+      title={t('frequent|General')}
       headerProps={{
         actions: [
           <ActionButton
@@ -235,15 +235,15 @@ export default function Settings() {
         valueCellProps={{ className: classes.valueCol }}
         rows={[
           {
-            name: t('Language'),
+            name: t('frequent|Language'),
             value: <LocaleSelect showFullNames formControlProps={{ className: '' }} />,
           },
           {
-            name: t('Theme'),
+            name: t('frequent|Theme'),
             value: <ThemeChangeButton showBothIcons />,
           },
           {
-            name: t('Number of rows for tables'),
+            name: t('settings|Number of rows for tables'),
             value: (
               <NumberOfRowsForTablesInputComponent
                 defaultValue={storedRowsPerPageOptions || DefaultRowsPerPageOptions}
@@ -251,7 +251,7 @@ export default function Settings() {
             ),
           },
           {
-            name: t('Timezone to display for dates'),
+            name: t('settings|Timezone to display for dates'),
             value: (
               <Box maxWidth="350px">
                 <TimezoneSelect
@@ -275,7 +275,7 @@ export function SettingsButton(props: { onClickExtra?: () => void }) {
   return (
     <ActionButton
       icon="mdi:cog"
-      description={t('glossary|Settings')}
+      description={t('frequent|Settings')}
       onClick={() => {
         history.push(createRouteURL('settings'));
         onClickExtra && onClickExtra();

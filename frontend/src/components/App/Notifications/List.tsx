@@ -13,7 +13,7 @@ import Empty from '../../common/EmptyContent';
 export default function NotificationList() {
   const notifications = useTypedSelector(state => state.ui.notifications);
   const config = useTypedSelector(state => state.config);
-  const { t } = useTranslation();
+  const { t } = useTranslation(['notifications', 'glossary', 'frequent']);
   const dispatch = useDispatch();
   const theme = useTheme();
   const search = useTypedSelector(state => state.filter.search);
@@ -72,10 +72,10 @@ export default function NotificationList() {
         </IconButton>
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
           <MenuItem onClick={markAllAsRead}>
-            <Typography color={'primary'}>{t('Mark all as read')}</Typography>
+            <Typography color={'primary'}>{t('notifications|Mark all as read')}</Typography>
           </MenuItem>
           <MenuItem onClick={clearAllNotifications}>
-            <Typography color="primary">{t('Clear all')}</Typography>
+            <Typography color="primary">{t('notifications|Clear all')}</Typography>
           </MenuItem>
         </Menu>
       </>
@@ -86,7 +86,7 @@ export default function NotificationList() {
     <SectionBox
       title={
         <SectionFilterHeader
-          title={t('Notifications')}
+          title={t('frequent|Notifications')}
           noNamespaceFilter
           actions={[<NotificationActionMenu />]}
         />
@@ -94,7 +94,7 @@ export default function NotificationList() {
       backLink
     >
       {checkIfAllNotificationsDeleted() ? (
-        <Empty>{t(`notifications|You don't have any notifications right now`)}</Empty>
+        <Empty>{t("notifications|You don't have any notifications right now")}</Empty>
       ) : (
         <SimpleTable
           filterFunction={(notification: Notification) =>
@@ -106,7 +106,7 @@ export default function NotificationList() {
               getter: (notification: Notification) => (
                 <Box width={'30vw'}>
                   <Tooltip
-                    title={`${t(`notifications|${notification.message}`)}`}
+                    title={notification.message || t('notifications|No message')}
                     disableHoverListener={!notification.message}
                   >
                     <Typography
@@ -124,7 +124,7 @@ export default function NotificationList() {
               ),
             },
             {
-              label: t('Cluster'),
+              label: t('glossary|Cluster'),
               getter: (notification: Notification) => (
                 <Box display={'flex'} alignItems="center">
                   {Object.entries(config?.clusters || {}).length > 1 && notification.cluster && (
@@ -143,7 +143,7 @@ export default function NotificationList() {
               ),
             },
             {
-              label: t('Date'),
+              label: t('frequent|Date'),
               getter: (notification: Notification) => <DateLabel date={notification.date} />,
             },
             {

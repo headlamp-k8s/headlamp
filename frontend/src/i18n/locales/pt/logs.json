@@ -1,7 +1,8 @@
 {
-  "Show logs for previous instances of this container.": "",
-  "You can only select this option for containers that have been restarted.": "",
-  "Show previous": "",
-  "Timestamps": "",
-  "Follow": ""
+  "Logs are paused. Click the follow button to resume following them.": "Os \"logs\" estão pausados. Clique no seguinte botão para voltar a segui-los.",
+  "Show logs for previous instances of this container.": "Mostrar \"logs\" para instâncias anteriores deste \"container\".",
+  "You can only select this option for containers that have been restarted.": "Só pode escolher esta opção para \"containers\" que tenham sido reiniciados.",
+  "Show previous": "Mostrar anteriores",
+  "Timestamps": "Marcações de tempo",
+  "Follow": "Seguir"
 }

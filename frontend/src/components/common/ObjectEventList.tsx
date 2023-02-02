@@ -23,7 +23,7 @@ export default function ObjectEventList(props: ObjectEventListProps) {
   }, []);
 
   return (
-    <SectionBox title={t('frequent|Events')}>
+    <SectionBox title={t('glossary|Events')}>
       <SimpleTable
         columns={[
           {

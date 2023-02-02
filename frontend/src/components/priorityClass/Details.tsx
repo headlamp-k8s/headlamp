@@ -26,7 +26,7 @@ export default function PriorityClassDetails() {
             value: item.preemptionPolicy,
           },
           {
-            name: t('priorityClasses|Description'),
+            name: t('frequent|Description'),
             value: item.description,
           },
         ]

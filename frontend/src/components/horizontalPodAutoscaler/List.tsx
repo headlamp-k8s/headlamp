@@ -40,7 +40,7 @@ export default function HpaList() {
                 if (hpa.metrics.length > 1) {
                   value.push(
                     <StatusLabel key="more..." status="">
-                      {metrics.length - 1} {t('frequent|more...')}
+                      {metrics.length - 1} {t('frequent|more…')}
                     </StatusLabel>
                   );
                 }

@@ -115,18 +115,18 @@ function NotificationsList(props: {
           onClick={() => notificationItemClickHandler(notification)}
         >
           <Grid item md={notification.seen ? 11 : 10}>
-            <Tooltip title={`${t(`notifications|${notification.message}`)}`}>
+            <Tooltip title={notification.message || t('notifications|No message')}>
               <Typography style={{ fontWeight: notification.seen ? 'normal' : 'bold' }} noWrap>
-                {`${notification.message || t(`notifications|No message`)}`}
+                {`${notification.message || t('notifications|No message')}`}
               </Typography>
             </Tooltip>
           </Grid>
           {!notification.seen && (
             <Grid item md={1}>
-              <Tooltip title={t(`notifications|Mark as read`)}>
+              <Tooltip title={t('notifications|Mark as read')}>
                 <IconButton
                   onClick={e => notificationSeenUnseenHandler(e, notification)}
-                  aria-label={t(`notifications|Mark as read`)}
+                  aria-label={t('notifications|Mark as read')}
                 >
                   <Icon icon="mdi:circle" color={theme.palette.error.main} height={12} width={12} />
                 </IconButton>

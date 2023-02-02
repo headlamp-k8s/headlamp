@@ -44,7 +44,10 @@ export default function HpaDetails() {
           },
           {
             name: t('hpa|Deployment pods'),
-            value: `${item.status.currentReplicas} current / ${item.status.desiredReplicas} desired`,
+            value: t(`hpa|{{ currentReplicas }} current / {{ desiredReplicas }} desired`, {
+              currentReplicas: item.status.currentReplicas,
+              desiredReplicas: item.status.desiredReplicas,
+            }),
           },
         ]
       }
