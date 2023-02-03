@@ -5,7 +5,7 @@ on:
     - 'v*'
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: kinvolk/headlamp
+  IMAGE_NAME: headlamp-k8s/headlamp
 jobs:
   push_to_registry:
     name: Test building container image
