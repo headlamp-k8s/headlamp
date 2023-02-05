@@ -223,6 +223,7 @@ export function DetailsGrid(props: DetailsGridProps) {
       <MainInfoSection
         resource={item}
         error={error}
+        actions={otherMainInfoSectionProps.actions}
         backLink={backLink}
         {...otherMainInfoSectionProps}
       />
