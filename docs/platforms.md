@@ -1,8 +1,10 @@
 ---
-title: Tested Kubernetes Platforms
+title: Tested Kubernetes, Desktop and Browser Platforms
 linkTitle: Platforms
 weight: 300
 ---
+
+## Tested Kubernetes Platforms
 
 This section shows the different platforms where Headlamp has been tested (in-cluster) or is intended to be tested, and useful observations about it.
 If you have tested Headlamp on a different flavor or Kubernetes, please file a PR or [issue](https://github.com/kinvolk/headlamp/issues/new/choose) to add your remarks to the list.
@@ -24,3 +26,27 @@ Platform<div style="min-width: 300px"></div>    | Works | Comments
 [Minikube](https://minikube.sigs.k8s.io/)                     | ✔️     | - For exposing with an ingress, enable ingresses with `minikube addons enable ingress` <br> - There are docs about the [development](../development/) with Minikube.|
 [Vultr Kubernetes Engine](https://www.vultr.com/kubernetes/)                     |  ✔️     |  - Simple to install / expose with the regular [in-cluster instructions](https://kinvolk.io/docs/headlamp/latest/installation/in-cluster/).
 
+
+## Tested Browsers
+
+We mostly test with 'modern browsers' defined as the latest version and two older versions. But we try to make Headlamp work with web standards, so it's quite likely other standards conforming browsers will also work.
+
+Platform<div style="min-width: 300px"></div>    | Works | Comments
+----------------------------------------------|:-----:|------------------------------------------------------------------------------------------
+Edge                     |  ✔️     |
+Safari        | ✔️    |
+Firefox                     |  ✔️     |
+Chrome                     |  ✔️     |
+Internet Explorer 11                     |  ❌     |
+
+
+## Tested Desktop OS, for App version
+
+We test on MacOS, various flavours of linux, and Windows. Headlamp runs in the browser, but also as an App.
+
+Platform<div style="min-width: 300px"></div>    | Works | Comments
+----------------------------------------------|:-----:|------------------------------------------------------------------------------------------
+Windows 10, 11 (including in WSL2)                     |  ✔️     | 
+MacOS (arm, x86)        | ✔️    |
+Ubuntu 20.04, 22.04, 22.10        | ✔️    |
+Fedora                     |  ✔️     | 
