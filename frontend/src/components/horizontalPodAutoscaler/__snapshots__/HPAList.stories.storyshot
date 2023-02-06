@@ -11,11 +11,18 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h1
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          Horizontal Pod Autoscalers
-        </h1>
+          <h1
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+          >
+            Horizontal Pod Autoscalers
+          </h1>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
       <div
         class="MuiGrid-root MuiGrid-item"

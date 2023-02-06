@@ -18,6 +18,7 @@ import SectionHeader, { SectionHeaderProps } from './SectionHeader';
 interface SectionFilterHeaderProps extends SectionHeaderProps {
   noNamespaceFilter?: boolean;
   noSearch?: boolean;
+  preRenderFromFilterActions?: React.ReactNode[];
 }
 
 export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
@@ -25,6 +26,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
     noNamespaceFilter = false,
     noSearch = false,
     actions: propsActions = [],
+    preRenderFromFilterActions,
     ...headerProps
   } = props;
   const filter = useTypedSelector(state => state.filter);
@@ -104,6 +106,9 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   }, [hasSearch]);
 
   let actions: React.ReactNode[] = [];
+  if (preRenderFromFilterActions && !showFilters.show) {
+    actions.push(...preRenderFromFilterActions);
+  }
 
   if (!showFilters.show) {
     actions.push(
@@ -165,7 +170,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
             ? actions
             : [
                 <Box>
-                  <Grid container spacing={1}>
+                  <Grid container spacing={1} alignItems="center">
                     {actions.map((action, i) => (
                       <Grid item key={i}>
                         {action}

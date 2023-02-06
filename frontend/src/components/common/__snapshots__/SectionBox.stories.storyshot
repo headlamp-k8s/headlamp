@@ -30,11 +30,18 @@ exports[`Storyshots SectionBox Header Props 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h1
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          This is a section title with a main style
-        </h1>
+          <h1
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+          >
+            This is a section title with a main style
+          </h1>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
     </div>
     <div
@@ -59,11 +66,18 @@ exports[`Storyshots SectionBox Titled 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h2
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          This is a section title default
-        </h2>
+          <h2
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+          >
+            This is a section title default
+          </h2>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
     </div>
     <div
@@ -88,11 +102,18 @@ exports[`Storyshots SectionBox Titled Children 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h2
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          This is a section title
-        </h2>
+          <h2
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+          >
+            This is a section title
+          </h2>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
     </div>
     <div

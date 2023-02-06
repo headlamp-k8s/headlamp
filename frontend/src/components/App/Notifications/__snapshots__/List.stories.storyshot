@@ -35,11 +35,18 @@ exports[`Storyshots Notifications List 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h1
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          Notifications
-        </h1>
+          <h1
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+          >
+            Notifications
+          </h1>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
       <div
         class="MuiGrid-root MuiGrid-item"
@@ -54,7 +61,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiBox-root MuiBox-root"
             >
               <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-align-items-xs-center"
               >
                 <div
                   class="MuiGrid-root MuiGrid-item"

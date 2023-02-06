@@ -8,11 +8,18 @@ exports[`Storyshots SectionHeader Actions 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h3
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        This one has actions
-      </h3>
+        <h3
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+        >
+          This one has actions
+        </h3>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item"
@@ -48,11 +55,18 @@ exports[`Storyshots SectionHeader Main 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        This is a section title main
-      </h1>
+        <h1
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        >
+          This is a section title main
+        </h1>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -66,11 +80,18 @@ exports[`Storyshots SectionHeader Normal 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h3
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        This is a section title normal
-      </h3>
+        <h3
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+        >
+          This is a section title normal
+        </h3>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -84,11 +105,18 @@ exports[`Storyshots SectionHeader Normal No Padding 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h3
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        No padding on this normal title
-      </h3>
+        <h3
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+        >
+          No padding on this normal title
+        </h3>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -102,11 +130,18 @@ exports[`Storyshots SectionHeader Subsection 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h2
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        This is a section title subsection
-      </h2>
+        <h2
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+        >
+          This is a section title subsection
+        </h2>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
   </div>
 </div>

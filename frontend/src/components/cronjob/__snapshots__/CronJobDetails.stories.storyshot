@@ -35,11 +35,18 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h1
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          CronJob
-        </h1>
+          <h1
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+          >
+            CronJob
+          </h1>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
       <div
         class="MuiGrid-root MuiGrid-item"
@@ -210,11 +217,18 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h1
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          Jobs
-        </h1>
+          <h1
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+          >
+            Jobs
+          </h1>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
       <div
         class="MuiGrid-root MuiGrid-item"
@@ -315,11 +329,18 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h1
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          CronJob
-        </h1>
+          <h1
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+          >
+            CronJob
+          </h1>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
       <div
         class="MuiGrid-root MuiGrid-item"
@@ -490,11 +511,18 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h1
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          Jobs
-        </h1>
+          <h1
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+          >
+            Jobs
+          </h1>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
       <div
         class="MuiGrid-root MuiGrid-item"

@@ -44,11 +44,18 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h1
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                CustomResourceDefinition
-              </h1>
+                <h1
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+                >
+                  CustomResourceDefinition
+                </h1>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
             <div
               class="MuiGrid-root MuiGrid-item"
@@ -204,11 +211,18 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Accepted Names
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Accepted Names
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -301,11 +315,18 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Versions
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Versions
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -387,11 +408,18 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Conditions
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Conditions
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -429,11 +457,18 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Objects
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Objects
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -581,11 +616,18 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h1
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          Custom Resource Definitions
-        </h1>
+          <h1
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+          >
+            Custom Resource Definitions
+          </h1>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
       <div
         class="MuiGrid-root MuiGrid-item"

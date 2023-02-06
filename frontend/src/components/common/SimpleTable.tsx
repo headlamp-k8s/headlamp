@@ -76,7 +76,8 @@ export interface SimpleTableProps {
         [dataProp: number]: any;
       }[]
     | null;
-  filterFunction?: (...args: any[]) => boolean;
+  filterFunction?: ((...args: any[]) => boolean) | null;
+  actionFilterFunction?: ((...args: any[]) => boolean) | null;
   rowsPerPage?: number[];
   emptyMessage?: string;
   errorMessage?: string | null;
@@ -153,6 +154,7 @@ export default function SimpleTable(props: SimpleTableProps) {
     columns,
     data,
     filterFunction = null,
+    actionFilterFunction = null,
     emptyMessage = null,
     page: initialPage = 0,
     // @todo: This is a workaround due to how the pagination is built by default.
@@ -312,6 +314,10 @@ export default function SimpleTable(props: SimpleTableProps) {
   let filteredData = displayData;
   if (filterFunction) {
     filteredData = displayData.filter(filterFunction);
+  }
+
+  if (actionFilterFunction) {
+    filteredData = filteredData.filter(actionFilterFunction);
   }
 
   function sortClickHandler(isIncreasingOrder: boolean, index: number) {

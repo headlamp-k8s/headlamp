@@ -263,11 +263,18 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        Test
-      </h1>
+        <h1
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        >
+          Test
+        </h1>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item"
@@ -535,11 +542,18 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        Test
-      </h1>
+        <h1
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        >
+          Test
+        </h1>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item"
@@ -783,11 +797,18 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        Test
-      </h1>
+        <h1
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        >
+          Test
+        </h1>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item"
@@ -1031,11 +1052,18 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        Test
-      </h1>
+        <h1
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        >
+          Test
+        </h1>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item"
@@ -1313,11 +1341,18 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        Test
-      </h1>
+        <h1
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        >
+          Test
+        </h1>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item"
@@ -1844,11 +1879,18 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
     <div
       class="MuiGrid-root MuiGrid-item"
     >
-      <h1
-        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+      <div
+        class="MuiBox-root MuiBox-root"
       >
-        Test
-      </h1>
+        <h1
+          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        >
+          Test
+        </h1>
+        <div
+          class="MuiBox-root MuiBox-root"
+        />
+      </div>
     </div>
     <div
       class="MuiGrid-root MuiGrid-item"
