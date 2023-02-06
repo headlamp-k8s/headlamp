@@ -3,6 +3,8 @@ on:
   push:
     tags:
     - 'v*'
+  workflow_dispatch:
+  
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: headlamp-k8s/headlamp
