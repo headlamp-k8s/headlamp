@@ -7,10 +7,20 @@ This is a quickstart guide for building and running Headlamp for development.
 Please make sure you read the [Contribution Guidelines](../contributing.md) as well
 before starting to contribute to the project.
 
+See [platforms](../platforms.md) to find out which browsers, OS and flavours of Kubernetes we support.
+
+## Dependencies to get started
+
+These are the required dependencies to get started. Other dependencies are pulled in by the golang or node package managers (see frontend/package.json, app/package.json, backend/go.mod and Dockerfile).
+
+- [Node.js](https://nodejs.org/en/download/) Latest LTS (18.14 at time of writing). Many of us use [nvm](https://github.com/nvm-sh/nvm) for installing multiple versions of Node.
+- [Go](https://go.dev/doc/install), (1.19 at time of writing)
+- [Make](https://www.gnu.org/software/make/) (GNU). Often installed by default. On Windows this can be installed with the "chocolatey" package manager that is installed with node.
+- [Kubernetes](https://kubernetes.io/), we suggest [minikube](https://minikube.sigs.k8s.io/docs/) as one good K8s installation for testing locally. Other k8s installations are supported (see [platforms](../platforms.md)).
 
 ## Build the code
 
-Headlamp is composed by a `backend` and a `frontend`.
+Headlamp is composed of a `backend` and a `frontend`.
 
 You can build both the `backend` and `frontend` by running.
 
@@ -30,7 +40,6 @@ and
 make frontend
 ```
 
-
 ## Run the code
 
 The quickest way to get the `backend` and `frontend` running for development is
@@ -46,15 +55,15 @@ and in a different terminal instance:
 make run-frontend
 ```
 
-
 ## Build the app
 
 You can build the app for Linux, Windows or Mac.
 
-Do so on the platform you are building for. That is build the mac app on a Mac, 
+Do so on the platform you are building for. That is build the mac app on a Mac,
 and the linux app on a linux box.
 
-First we need to 
+First we need to
+
 ```bash
 make backend frontend
 ```
@@ -91,7 +100,6 @@ make app-win-msi
 
 See the generated app files in app/dist/ .
 
-
 ## Build a container image
 
 The following command builds a container image for Headlamp from the current
@@ -101,7 +109,6 @@ options can be appended to the main command as arguments.
 ```bash
 make image
 ```
-
 
 ### Running the container image
 
@@ -127,7 +134,6 @@ $ docker run --network="host" -p 127.0.0.1:4466:4466/tcp --mount type=bind,sourc
 
 Then go to https://localhost:4466 in your browser.
 
-
 ### Minikube "in-cluster"
 
 These instructions are for if you want to use Headlamp running "in-cluster",
@@ -135,7 +141,6 @@ and test it locally on minikube with a local container image.
 
 We assume you've already setup a minikube
 (probably with `minikube start --driver=docker`).
-
 
 #### Container image in the minikub docker environment
 
@@ -148,7 +153,6 @@ $ eval $(minikube docker-env)
 $ DOCKER_IMAGE_VERSION=development make image
 ```
 
-
 #### Create a deployment yaml.
 
 ```bash
@@ -157,7 +161,6 @@ $ kubectl create deployment headlamp -n kube-system --image=kinvolk/headlamp:dev
 
 To use the local container image we change the `imagePullPolicy` to Never.
 Making kubectl use local images - which is what you want in development.
-
 
 ```yaml
 apiVersion: apps/v1
@@ -181,16 +184,16 @@ spec:
         app: headlamp
     spec:
       containers:
-      - command:
-        - /headlamp/headlamp-server
-        - -html-static-dir
-        - /headlamp/frontend
-        - -in-cluster
-        - -plugins-dir=/headlamp/plugins
-        image: kinvolk/headlamp:development
-        name: headlamp
-        imagePullPolicy: Never
-        resources: {}
+        - command:
+            - /headlamp/headlamp-server
+            - -html-static-dir
+            - /headlamp/frontend
+            - -in-cluster
+            - -plugins-dir=/headlamp/plugins
+          image: kinvolk/headlamp:development
+          name: headlamp
+          imagePullPolicy: Never
+          resources: {}
 status: {}
 ```
 
@@ -215,7 +218,6 @@ http://192.168.49.2:30342
 ```
 
 Go to the URL printed by minikube in your browser, and get your token to login.
-
 
 ### Shipping plugins in the Docker image
 
