@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       buildTag:
-        description: 'Headlamp tag' 
+        description: 'Headlamp tag (with the "v" prefix)' 
         required: true
         type: string
   
