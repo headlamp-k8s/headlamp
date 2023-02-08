@@ -10,7 +10,8 @@
     "format": "headlamp-plugin format",
     "lint": "headlamp-plugin lint",
     "tsc": "tsc --noEmit",
-    "storybook": "headlamp-plugin storybook"
+    "storybook": "headlamp-plugin storybook",
+    "test": "headlamp-plugin test"
   },
   "keywords": [
     "headlamp",
@@ -32,6 +33,9 @@
     ]
   },
   "devDependencies": {
-    "@kinvolk/headlamp-plugin": "^0.5.6"
+    "@kinvolk/headlamp-plugin": "^0.6.0-alpha.15",
+    "@storybook/addon-storyshots": "6.4.13",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   }
 }
