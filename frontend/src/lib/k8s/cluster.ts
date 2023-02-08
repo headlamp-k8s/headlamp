@@ -36,7 +36,7 @@ export interface KubeMetadata {
   namespace?: string;
   creationTimestamp: string;
   deletionTimestamp?: string;
-  resourceVersion: string;
+  resourceVersion?: string;
   selfLink?: string;
   labels?: StringDict;
   annotations?: StringDict;

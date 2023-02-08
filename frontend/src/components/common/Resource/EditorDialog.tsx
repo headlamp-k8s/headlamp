@@ -112,7 +112,9 @@ export default function EditorDialog(props: EditorDialogProps) {
       }
 
       if (previousVersion !== item.metadata!.resourceVersion) {
-        setPreviousVersion(item!.metadata!.resourceVersion);
+        if (item.metadata!.resourceVersion) {
+          setPreviousVersion(item!.metadata!.resourceVersion);
+        }
       }
     }
   }, [item, previousVersion, originalCode, code]);
