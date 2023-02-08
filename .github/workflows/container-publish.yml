@@ -4,6 +4,11 @@ on:
     tags:
     - 'v*'
   workflow_dispatch:
+    inputs:
+      buildTag:
+        description: 'Headlamp tag' 
+        required: true
+        type: string
   
 env:
   REGISTRY: ghcr.io
@@ -16,8 +21,22 @@ jobs:
       contents: read
       packages: write
     steps:
+    - name: Figure out the tag based on event trigger
+      env:
+        TRIGGER: ${{ github.event_name }}
+      run: | 
+        if [ "$TRIGGER" == "workflow_dispatch" ]; then
+          echo "TRIGGERED_BY_WORKFLOW_DISPATCH with build tag ${{ github.event.inputs.buildTag }}"
+          BUILD_TAG=${{ github.event.inputs.buildTag }}
+        else
+          BUILD_TAG=${{ steps.meta.outputs.tags }}
+        fi
+        echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_ENV
+        echo "using build tag ${{ env.BUILD_TAG }}"
     - name: Check out the repo
       uses: actions/checkout@v2
+      with:
+        ref: ${{ env.BUILD_TAG }}
     - name: Log in to the Container registry
       uses: docker/login-action@v1
       with:
@@ -34,5 +53,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: ${{ env.BUILD_TAG }}
         labels: ${{ steps.meta.outputs.labels }}
