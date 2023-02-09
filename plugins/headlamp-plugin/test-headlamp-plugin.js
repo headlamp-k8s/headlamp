@@ -94,6 +94,7 @@ const fs = require('fs');
 const child_process = require('child_process');
 const path = require('path');
 const join = path.join;
+const resolve = path.resolve;
 let curDir;
 
 function cleanup() {
@@ -112,7 +113,7 @@ function cleanup() {
 
 function run(cmd) {
   console.log('');
-  console.log(`Running cmd:${cmd} inside of cwd:${curDir}`);
+  console.log(`Running cmd:${cmd} inside of cwd:${curDir} abs: "${resolve(curDir)}"`);
   console.log('');
   try {
     child_process.execSync(cmd, {
@@ -121,7 +122,7 @@ function run(cmd) {
       encoding: 'utf8',
     });
   } catch (e) {
-    exit(`Error: Problem running "${cmd}" inside of "${curDir}"`);
+    exit(`Error: Problem running "${cmd}" inside of "${curDir}" abs: "${resolve(curDir)}"`);
   }
 }
 function checkFileExists(fname) {
