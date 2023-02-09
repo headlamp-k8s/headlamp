@@ -77,7 +77,7 @@ function testHeadlampPlugin() {
   const changedJson = packageJson
     .split('\n')
     .map(line =>
-      line.includes('"@kinvolk/headlamp-plugin"') ? '"@kinvolk/headlamp-plugin": "^0.4.9"\n' : line
+      line.includes('"@kinvolk/headlamp-plugin"') ? '"@kinvolk/headlamp-plugin": "^0.4.9",\n' : line
     )
     .join('\n');
   fs.writeFileSync(packageJsonPath, changedJson);
@@ -104,6 +104,7 @@ function cleanup() {
     .forEach(file => fs.rmSync(file));
 
   const foldersToRemove = [path.join('.plugins', PACKAGE_NAME), PACKAGE_NAME];
+  console.log('Temp foldersToRemove', foldersToRemove);
   foldersToRemove
     .filter(folder => fs.existsSync(folder))
     .forEach(folder => fs.rmSync(folder, { recursive: true }));
