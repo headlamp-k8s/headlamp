@@ -146,116 +146,6 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                           />
                         </a>
                       </li>
-                      <li>
-                        <a
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
-                          href="/"
-                          role="button"
-                          tabindex="0"
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Config Maps
-                            </span>
-                          </div>
-                          <span
-                            class="MuiTouchRipple-root"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
-                          href="/"
-                          role="button"
-                          tabindex="0"
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              HPAs
-                            </span>
-                          </div>
-                          <span
-                            class="MuiTouchRipple-root"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
-                          href="/"
-                          role="button"
-                          tabindex="0"
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Resource Quotas
-                            </span>
-                          </div>
-                          <span
-                            class="MuiTouchRipple-root"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
-                          href="/"
-                          role="button"
-                          tabindex="0"
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Pod Disruption Budgets
-                            </span>
-                          </div>
-                          <span
-                            class="MuiTouchRipple-root"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
-                          href="/"
-                          role="button"
-                          tabindex="0"
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Priority Classes
-                            </span>
-                          </div>
-                          <span
-                            class="MuiTouchRipple-root"
-                          />
-                        </a>
-                      </li>
                     </ul>
                   </div>
                 </div>
@@ -796,6 +686,75 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                           />
                         </a>
                       </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                href="/"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root"
+                  title="Configuration"
+                >
+                  <span />
+                </div>
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  />
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+            </li>
+            <li
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+            >
+              <div
+                class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                style="min-height: 0px;"
+              >
+                <div
+                  class="MuiCollapse-wrapper"
+                >
+                  <div
+                    class="MuiCollapse-wrapperInner"
+                  >
+                    <ul
+                      class="MuiList-root makeStyles-nested"
+                    >
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Config Maps
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
                       <li>
                         <a
                           aria-disabled="false"
@@ -811,6 +770,94 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                               class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                             >
                               Secrets
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              HPAs
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Resource Quotas
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Pod Disruption Budgets
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Priority Classes
                             </span>
                           </div>
                           <span
@@ -978,116 +1025,6 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                               class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                             >
                               CRDs
-                            </span>
-                          </div>
-                          <span
-                            class="MuiTouchRipple-root"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
-                          href="/"
-                          role="button"
-                          tabindex="0"
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Config Maps
-                            </span>
-                          </div>
-                          <span
-                            class="MuiTouchRipple-root"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
-                          href="/"
-                          role="button"
-                          tabindex="0"
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              HPAs
-                            </span>
-                          </div>
-                          <span
-                            class="MuiTouchRipple-root"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
-                          href="/"
-                          role="button"
-                          tabindex="0"
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Resource Quotas
-                            </span>
-                          </div>
-                          <span
-                            class="MuiTouchRipple-root"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
-                          href="/"
-                          role="button"
-                          tabindex="0"
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Pod Disruption Budgets
-                            </span>
-                          </div>
-                          <span
-                            class="MuiTouchRipple-root"
-                          />
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
-                          href="/"
-                          role="button"
-                          tabindex="0"
-                        >
-                          <div
-                            class="MuiListItemText-root"
-                          >
-                            <span
-                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                            >
-                              Priority Classes
                             </span>
                           </div>
                           <span
@@ -1639,6 +1576,76 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                           />
                         </a>
                       </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a
+                aria-disabled="false"
+                class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                href="/"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="MuiListItemIcon-root"
+                >
+                  <span />
+                </div>
+                <div
+                  class="MuiListItemText-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                  >
+                    Configuration
+                  </span>
+                </div>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </a>
+            </li>
+            <li
+              class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+            >
+              <div
+                class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                style="min-height: 0px;"
+              >
+                <div
+                  class="MuiCollapse-wrapper"
+                >
+                  <div
+                    class="MuiCollapse-wrapperInner"
+                  >
+                    <ul
+                      class="MuiList-root makeStyles-nested"
+                    >
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Config Maps
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
                       <li>
                         <a
                           aria-disabled="false"
@@ -1654,6 +1661,94 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                               class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                             >
                               Secrets
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              HPAs
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Resource Quotas
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Pod Disruption Budgets
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Priority Classes
                             </span>
                           </div>
                           <span

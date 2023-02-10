@@ -22,26 +22,6 @@ function prepareRoutes(t: (arg: string) => string) {
           name: 'crds',
           label: t('glossary|CRDs'),
         },
-        {
-          name: 'configMaps',
-          label: t('glossary|Config Maps'),
-        },
-        {
-          name: 'horizontalPodAutoscalers',
-          label: t('glossary|HPAs'),
-        },
-        {
-          name: 'resourceQuotas',
-          label: t('glossary|Resource Quotas'),
-        },
-        {
-          name: 'podDisruptionBudgets',
-          label: t('glossary|Pod Disruption Budgets'),
-        },
-        {
-          name: 'priorityClasses',
-          label: t('glossary|Priority Classes'),
-        },
       ],
     },
     {
@@ -139,9 +119,36 @@ function prepareRoutes(t: (arg: string) => string) {
           name: 'roleBindings',
           label: t('glossary|Role Bindings'),
         },
+      ],
+    },
+    {
+      name: 'config',
+      label: t('glossary|Configuration'),
+      icon: 'mdi:format-list-checks',
+      subList: [
+        {
+          name: 'configMaps',
+          label: t('glossary|Config Maps'),
+        },
         {
           name: 'secrets',
           label: t('glossary|Secrets'),
+        },
+        {
+          name: 'horizontalPodAutoscalers',
+          label: t('glossary|HPAs'),
+        },
+        {
+          name: 'resourceQuotas',
+          label: t('glossary|Resource Quotas'),
+        },
+        {
+          name: 'podDisruptionBudgets',
+          label: t('glossary|Pod Disruption Budgets'),
+        },
+        {
+          name: 'priorityClasses',
+          label: t('glossary|Priority Classes'),
         },
       ],
     },
