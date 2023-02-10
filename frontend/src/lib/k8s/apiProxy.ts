@@ -623,6 +623,10 @@ export async function streamResults(
         const existing = results[object.metadata.uid];
 
         if (existing) {
+          if (!existing.metadata.resourceVersion || !object.metadata.resourceVersion) {
+            console.error('Missing resourceVersion in object', object);
+            break;
+          }
           const currentVersion = parseInt(existing.metadata.resourceVersion, 10);
           const newVersion = parseInt(object.metadata.resourceVersion, 10);
           if (currentVersion < newVersion) {
@@ -786,28 +790,30 @@ function combinePath(base: string, path: string) {
 }
 
 export async function apply(body: KubeObjectInterface): Promise<JSON> {
-  let bodyToApply = body;
+  const bodyToApply = _.cloneDeep(body);
   // Check if the default namespace is needed. And we need to do this before
   // getting the apiEndpoint because it will affect the endpoint itself.
   const { namespace } = body.metadata;
   if (!namespace) {
     const knownResource = ResourceClasses[body.kind];
     if (knownResource?.isNamespaced) {
-      // Clone the param to avoid modifying the original object.
-      bodyToApply = _.cloneDeep(body);
       bodyToApply.metadata.namespace = 'default';
     }
   }
 
   const apiEndpoint = resourceDefToApiFactory(bodyToApply);
+  const resourceVersion = bodyToApply.metadata.resourceVersion;
 
   try {
+    delete bodyToApply.metadata.resourceVersion;
     return await apiEndpoint.post(bodyToApply);
   } catch (err) {
     // Check to see if failed because the record already exists.
     // If the failure isn't a 409 (i.e. Confilct), just rethrow.
     if ((err as ApiError).status !== 409) throw err;
 
+    // Preserve the resourceVersion if its an update request
+    bodyToApply.metadata.resourceVersion = resourceVersion;
     // We had a conflict. Try a PUT
     return apiEndpoint.put(bodyToApply);
   }
