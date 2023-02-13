@@ -11,7 +11,7 @@
   "Applied {{ newItemName }}.": "Appliqué {{ newItemName }}.",
   "Failed to apply {{ newItemName }}.": "Échec de l'application de {{ newItemName }}.",
   "Delete item": "Supprimer un élément",
-  "Are you sure you want to delete this item?": "Êtes-vous sûr de vouloir supprimer cet élément ?",
+  "Are you sure you want to delete this item?": "Voulez-vous vraiment supprimer cet élément ?",
   "Loading documentation": "Chargement de la documentation",
   "No documentation for type {{ docsType }}.": "Pas de documentation pour le type {{ docsType }}.",
   "Showing documentation for: {{ docsType }}": "Afficher la documentation pour : {{ docsType }}",
