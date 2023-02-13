@@ -22,7 +22,7 @@ read those guidelines.
 
 ## Filing an issue or feature request
 
-Please use the [project's issue tracker](https://github.com/kinvolk/headlamp/issues) for filing any bugs you find or features
+Please use the [project's issue tracker](https://github.com/headlamp-k8s/headlamp/issues) for filing any bugs you find or features
 you think are useful.
 
 ## Translations

@@ -1,6 +1,6 @@
 # $${name}
 
-This is the default template README for [Headlamp Plugins](https://github.com/kinvolk/headlamp).
+This is the default template README for [Headlamp Plugins](https://github.com/headlamp-k8s/headlamp).
 
 - The description of your plugin should go here.
 - You should also edit the package.json file meta data (like name and description).

@@ -4,7 +4,7 @@
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
-**Homepage:** <https://github.com/kinvolk/headlamp/tree/main/charts/headlamp>
+**Homepage:** <https://github.com/headlamp-k8s/headlamp/tree/main/charts/headlamp>
 
 ## TL;DR
 
@@ -22,7 +22,7 @@ $ helm install my-headlamp headlamp/headlamp --namespace kube-system
 
 ## Source Code
 
-* <https://github.com/kinvolk/headlamp>
+* <https://github.com/headlamp-k8s/headlamp>
 * <https://kinvolk.io/>
 
 ### Headlamp parameters
@@ -35,7 +35,7 @@ $ helm install my-headlamp headlamp/headlamp --namespace kube-system
 | fullnameOverride | string | `""` | Overrides the full name of the chart |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. One of Always, Never, IfNotPresent |
 | image.registry | string | `"ghcr.io"` | Container image registry |
-| image.repository | string | `"kinvolk/headlamp"` | Container image name |
+| image.repository | string | `"headlamp-k8s/headlamp"` | Container image name |
 | image.tag | string | `""` | Container image tag, If "" uses appVersion in Chart.yaml |
 | imagePullSecrets | list | `[]` | An optional list of references to secrets in the same namespace to use for pulling any of the images used |
 | ingress.annotations | object | `{}` | Annotations for Ingress resource |

@@ -323,12 +323,12 @@ function getDefaultAppMenu(): AppMenu[] {
         {
           label: i18n.t('Open an Issue'),
           id: 'original-open-issue',
-          url: 'https://github.com/kinvolk/headlamp/issues',
+          url: 'https://github.com/headlamp-k8s/headlamp/issues',
         },
         {
           label: i18n.t('About'),
           id: 'original-about',
-          url: 'https://github.com/kinvolk/headlamp',
+          url: 'https://github.com/headlamp-k8s/headlamp',
         },
       ],
     },

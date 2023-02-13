@@ -6,7 +6,7 @@ Headlamp was created to be a Kubernetes web UI that has the traditional function
 web UIs/dashboards available (i.e. to list and view resources) as well as other features.
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/videos/headlamp_quick_run.gif" width="80%">
+  <img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/videos/headlamp_quick_run.gif" width="80%">
 </div>
 
 ## Features
@@ -25,16 +25,16 @@ web UIs/dashboards available (i.e. to list and view resources) as well as other 
 
 <table>
     <tr>
-        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/cluster_overview.png"></td>
-        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/cluster_chooser.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/cluster_overview.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/cluster_chooser.png"></td>
     </tr>
     <tr>
-        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/nodes.png"></td>
-        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/resource_edition.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/nodes.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/resource_edition.png"></td>
     </tr>
     <tr>
-        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/editor_documentation.png"></td>
-        <td width="33%"><img src="https://raw.githubusercontent.com/kinvolk/headlamp/screenshots/screenshots/terminal.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/editor_documentation.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/terminal.png"></td>
     </tr>
 </table>
 
@@ -80,7 +80,7 @@ in the Kubernetes Slack.
 ## Roadmap
 
 If you are interested in the direction of the project, we maintain a
-[Roadmap](https://github.com/kinvolk/headlamp/projects/2) for it with the
+[Roadmap](https://github.com/headlamp-k8s/headlamp/projects/2) for it with the
 biggest changes planned so far.
 
 ## License
