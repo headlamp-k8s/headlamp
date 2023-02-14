@@ -3,7 +3,7 @@ export GO111MODULE
 
 SERVER_EXE_EXT ?=
 DOCKER_CMD ?= docker
-DOCKER_REPO ?= ghcr.io/kinvolk
+DOCKER_REPO ?= ghcr.io/headlamp-k8s
 DOCKER_EXT_REPO ?= docker.io/kinvolk
 DOCKER_IMAGE_NAME ?= headlamp
 DOCKER_IMAGE_VERSION ?= $(shell git describe --tags --always --dirty)

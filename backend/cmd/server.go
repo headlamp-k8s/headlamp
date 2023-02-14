@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/kinvolk/headlamp/backend/pkg/config"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
 )
 
 func main() {

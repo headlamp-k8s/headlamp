@@ -1,4 +1,4 @@
-module github.com/kinvolk/headlamp/backend
+module github.com/headlamp-k8s/headlamp/backend
 
 go 1.12
 

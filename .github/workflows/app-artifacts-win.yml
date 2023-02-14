@@ -21,7 +21,7 @@ jobs:
         path: build-helper
     - uses: actions/checkout@v2.3.3
       with:
-        repository: kinvolk/headlamp
+        repository: headlamp-k8s/headlamp
         ref: ${{ github.event.inputs.buildBranch }}
         path: headlamp
     - name: Setup nodejs
