@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/kinvolk/headlamp/backend/pkg/config"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
