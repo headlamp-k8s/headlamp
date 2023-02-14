@@ -12,6 +12,7 @@ export default function SecretDetails() {
       resourceType={Secret}
       name={name}
       namespace={namespace}
+      withEvents
       extraInfo={item =>
         item &&
         _.map(item.data, (value, key) => ({

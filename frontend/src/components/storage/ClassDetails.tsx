@@ -12,6 +12,7 @@ export default function StorageClassDetails() {
     <DetailsGrid
       resourceType={StorageClass}
       name={name}
+      withEvents
       extraInfo={item =>
         item && [
           {

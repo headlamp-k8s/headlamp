@@ -19,6 +19,7 @@ export default function RoleDetails() {
       resourceType={!namespace ? ClusterRole : Role}
       name={name}
       namespace={namespace}
+      withEvents
       sectionsFunc={item =>
         item && (
           <SectionBox title={t('Rules')}>

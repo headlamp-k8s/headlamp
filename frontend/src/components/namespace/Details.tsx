@@ -19,6 +19,7 @@ export default function NamespaceDetails() {
     <DetailsGrid
       resourceType={Namespace}
       name={name}
+      withEvents
       extraInfo={item =>
         item && [
           {

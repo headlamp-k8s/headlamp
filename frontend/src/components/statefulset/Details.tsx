@@ -20,6 +20,7 @@ export default function StatefulSetDetails() {
       resourceType={StatefulSet}
       name={name}
       namespace={namespace}
+      withEvents
       extraInfo={item =>
         item && [
           {

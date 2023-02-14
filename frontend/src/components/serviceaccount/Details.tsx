@@ -14,6 +14,7 @@ export default function ServiceAccountDetails() {
       resourceType={ServiceAccount}
       name={name}
       namespace={namespace}
+      withEvents
       extraInfo={(item: ServiceAccount) =>
         item && [
           {

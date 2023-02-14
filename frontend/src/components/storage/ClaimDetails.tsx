@@ -19,6 +19,7 @@ export default function VolumeClaimDetails() {
       resourceType={PersistentVolumeClaim}
       name={name}
       namespace={namespace}
+      withEvents
       extraInfo={item =>
         item && [
           {

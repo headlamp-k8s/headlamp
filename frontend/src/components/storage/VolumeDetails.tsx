@@ -18,6 +18,7 @@ export default function VolumeDetails() {
     <DetailsGrid
       resourceType={PersistentVolume}
       name={name}
+      withEvents
       extraInfo={item =>
         item && [
           {

@@ -12,6 +12,7 @@ export default function ResourceQuotaDetails() {
       resourceType={ResourceQuota}
       name={name}
       namespace={namespace}
+      withEvents
       extraInfo={item =>
         item && [
           {

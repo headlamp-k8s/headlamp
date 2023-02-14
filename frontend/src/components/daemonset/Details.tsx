@@ -75,6 +75,7 @@ export default function DaemonSetDetails() {
       resourceType={DaemonSet}
       name={name}
       namespace={namespace}
+      withEvents
       extraInfo={item =>
         item && [
           {

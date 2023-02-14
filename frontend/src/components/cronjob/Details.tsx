@@ -7,7 +7,7 @@ import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import Job from '../../lib/k8s/job';
 import { clusterAction } from '../../redux/actions/actions';
-import { ActionButton } from '../common';
+import { ActionButton, ObjectEventList } from '../common';
 import { MainInfoSection } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
 import DetailsViewSection from '../DetailsViewSection';
@@ -138,6 +138,7 @@ export default function CronJobDetails() {
       />
       {cronJob && <JobsListRenderer jobs={ownedJobs} error={CronJob.getErrorMessage(jobsError)} />}
       <DetailsViewSection resource={cronJob} />
+      {cronJob && <ObjectEventList object={cronJob} />}
     </>
   );
 }

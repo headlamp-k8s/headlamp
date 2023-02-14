@@ -81,6 +81,7 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
     <DetailsGrid
       resourceType={workloadKind}
       name={name}
+      withEvents
       namespace={namespace}
       extraInfo={item =>
         item && [

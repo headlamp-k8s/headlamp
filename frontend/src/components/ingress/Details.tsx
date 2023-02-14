@@ -35,6 +35,7 @@ export default function IngressDetails() {
       resourceType={Ingress}
       name={name}
       namespace={namespace}
+      withEvents
       sectionsFunc={item => (
         <SectionBox title={t('Rules')}>
           <SimpleTable

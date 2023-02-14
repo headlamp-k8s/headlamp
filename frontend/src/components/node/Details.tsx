@@ -39,6 +39,7 @@ export default function NodeDetails() {
       )}
       resourceType={Node}
       name={name}
+      withEvents
       extraInfo={item =>
         item && [
           {

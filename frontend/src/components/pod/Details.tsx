@@ -294,6 +294,7 @@ export default function PodDetails(props: PodDetailsProps) {
       resourceType={Pod}
       name={name}
       namespace={namespace}
+      withEvents
       actions={item =>
         item && [
           <AuthVisible item={item} authVerb="get" subresource="log">
