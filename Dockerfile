@@ -1,4 +1,4 @@
-ARG IMAGE_BASE=alpine:3.17.0
+ARG IMAGE_BASE=alpine:3.17.2
 FROM $IMAGE_BASE as base-build
 
 RUN apk update && \
