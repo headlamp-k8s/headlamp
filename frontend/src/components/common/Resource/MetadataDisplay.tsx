@@ -69,7 +69,8 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
         }
         return (
           <>
-            `${ownerRef.kind}: ${ownerRef.name}`{i < numItems - 1 && <br />}
+            {`${ownerRef.kind}: ${ownerRef.name}`}
+            {i < numItems - 1 && <br />}
           </>
         );
       })
