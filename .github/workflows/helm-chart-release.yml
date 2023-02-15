@@ -7,9 +7,12 @@ on:
     paths:
       - charts/**
       - '!charts/**/README.md'
-
+  # For manual dispatch
+  workflow_dispatch:
 jobs:
   release:
+    permissions:
+      contents: write
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
