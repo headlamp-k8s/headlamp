@@ -79,7 +79,7 @@ function checkIfPodPortForwarding(portforwardParam: {
 
 export default function PortForward(props: PortForwardProps) {
   const { containerPort, resource } = props;
-  const isPod = resource?.metadata?.kind !== 'Service';
+  const isPod = resource?.kind !== 'Service';
   const service = !isPod ? (resource as Service) : undefined;
   const namespace = resource?.metadata?.namespace || '';
   const name = resource?.metadata?.name || '';
@@ -88,10 +88,20 @@ export default function PortForward(props: PortForwardProps) {
   const [loading, setLoading] = React.useState(false);
   const cluster = getCluster();
   const { t } = useTranslation(['frequent', 'resource']);
-  const [pods, podsFetchError] = Pod.useList({ labelSelector: getPodsSelectorFilter(service) });
+  const [pods, podsFetchError] = Pod.useList({
+    namespace,
+    labelSelector: getPodsSelectorFilter(service),
+  });
+
+  if (service && podsFetchError && !pods) {
+    return null;
+  }
+
   const numericContainerPort =
     typeof containerPort === 'string' && isNaN(parseInt(containerPort))
-      ? getPortNumberFromPortName(pods[0].spec.containers, containerPort)
+      ? !pods || pods.length === 0
+        ? 0
+        : getPortNumberFromPortName(pods[0].spec.containers, containerPort)
       : containerPort;
 
   React.useEffect(() => {
