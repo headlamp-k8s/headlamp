@@ -72,7 +72,7 @@ export default function RoleBindingList() {
             label: t('glossary|Namespace'),
             getter: item =>
               item.getNamespace() ? (
-                <Link routeName={'namespace'} params={{ name: item.getNamespace() }}>
+                <Link routeName="namespace" params={{ name: item.getNamespace() }}>
                   {item.getNamespace()}
                 </Link>
               ) : (

@@ -58,7 +58,6 @@ export default function RoleBindingDetails() {
                         params={{ namespace: item.namespace || namespace, name: item.name }}
                       >
                         {item.name}
-                        {'WEX'}
                       </Link>
                     ) : (
                       item.name
