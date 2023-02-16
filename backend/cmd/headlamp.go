@@ -873,6 +873,14 @@ func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 			return
 		}
 
+		// Try to add the Authorization header if it's not already set from the client.
+		if r.Header.Get("Authorization") == "" {
+			token := c.contextProxies[clusterName].context.authInfo.Token
+			if token != "" {
+				r.Header.Add("Authorization", "Bearer "+token)
+			}
+		}
+
 		handler := proxyHandler(server, ctxtProxy.proxy)
 		handler(w, r)
 	})
