@@ -185,7 +185,12 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                kube-system
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  kube-system
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -231,7 +236,12 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                kube-system
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  kube-system
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -277,7 +287,12 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                kube-system
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  kube-system
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -323,7 +338,12 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                kube-system
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  kube-system
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -369,7 +389,12 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                kube-system
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  kube-system
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"

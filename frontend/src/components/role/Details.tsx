@@ -7,9 +7,10 @@ import { DetailsGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
 
+// maybe?
 export default function RoleDetails() {
-  const { namespace = undefined, name } = useParams<{
-    namespace: string | undefined;
+  const { namespace, name } = useParams<{
+    namespace: string;
     name: string;
   }>();
   const { t } = useTranslation('glossary');
