@@ -198,9 +198,9 @@
     "msw-storybook-addon": "^1.6.3",
     "prettier": "^2.4.1",
     "resize-observer-polyfill": "^1.5.1",
-    "typedoc": "^0.22.10",
-    "typedoc-hugo-theme": "^1.0.0",
-    "typedoc-plugin-markdown": "^3.11.14",
-    "typedoc-plugin-rename-defaults": "^0.4.0"
+    "typedoc": "0.22.10",
+    "typedoc-hugo-theme": "1.0.0",
+    "typedoc-plugin-markdown": "3.11.14",
+    "typedoc-plugin-rename-defaults": "0.4.0"
   }
 }
