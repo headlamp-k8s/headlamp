@@ -38,6 +38,7 @@ jobs:
         kubectl apply -f e2e-tests/kubernetes-headlamp-ci.yaml
     - name: Test service URLs
       run: |
+        kubectl config view
         minikube service list
         minikube service headlamp -n kube-system --url
         sleep 2
