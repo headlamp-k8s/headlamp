@@ -24,21 +24,25 @@ jobs:
       contents: read
       packages: write
     steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
     - name: Figure out the tag based on event trigger
       env:
         TRIGGER: ${{ github.event_name }}
       run: |
+        CONTAINER_TAGS=${{ github.event.inputs.containerTags }}
         if [ "$TRIGGER" == "workflow_dispatch" ]; then
           echo "TRIGGERED_BY_WORKFLOW_DISPATCH with build tag ${{ github.event.inputs.buildTag }}"
           BUILD_TAG=${{ github.event.inputs.buildTag }}
+          if [ -z $CONTAINER_TAGS ]; then
+            CONTAINER_TAGS=$BUILD_TAG
+          fi
         else
           # on push to a tag, use the latest tag starting with v and latest as the build tag
-          BUILD_TAG="$(git tag --list --sort=version:refname 'v*' | tail -1),latest"
-        fi
-
-        CONTAINER_TAGS=${{ github.event.inputs.containerTags }}
-        if [ -z $CONTAINER_TAGS ]; then
-          CONTAINER_TAGS=$BUILD_TAG
+          BUILD_TAG="$(git tag --list --sort=version:refname 'v*' | tail -1)"
+          if [ -z $CONTAINER_TAGS ]; then
+            CONTAINER_TAGS="$BUILD_TAG,latest"
+          fi
         fi
 
         # Join all tags with the image name
@@ -56,10 +60,9 @@ jobs:
       run: |
         echo "BUILD_TAG=${{ env.BUILD_TAG }}"
         echo "CONTAINER_TAGS=${{ env.CONTAINER_TAGS }}"
-    - name: Check out the repo
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ env.BUILD_TAG }}
+    - name: checkout to build branch 
+      run: |
+        git checkout ${{ env.BUILD_TAG }}
     - name: Log in to the Container registry
       uses: docker/login-action@v2
       with:
