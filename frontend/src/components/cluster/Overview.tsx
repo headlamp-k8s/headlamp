@@ -6,7 +6,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
-import Event from '../../lib/k8s/event';
+import Event, { KubeEvent } from '../../lib/k8s/event';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { useFilterFunc } from '../../lib/util';
@@ -74,10 +74,23 @@ function EventsSection() {
   const eventsFilter = queryParams.get('eventsFilter');
   const dispatch = useDispatch();
   const filterFunc = useFilterFunc(['.jsonData.involvedObject.kind']);
-  const warningActionFilterFunc = (event: Event) => event.jsonData.type === 'Warning';
   const [isWarningEventSwitchChecked, setIsWarningEventSwitchChecked] = React.useState(
     Boolean(localStorage.getItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY))
   );
+
+  const warningActionFilterFunc = (event: KubeEvent) => {
+    if (!filterFunc(event)) {
+      return false;
+    }
+
+    if (isWarningEventSwitchChecked) {
+      return event.jsonData.type === 'Warning';
+    }
+
+    // Return true because if we reach this point, it means we're only filtering by
+    // the default filterFunc (and its result was 'true').
+    return true;
+  };
 
   React.useEffect(() => {
     if (!eventsFilter) {
@@ -153,8 +166,7 @@ function EventsSection() {
           },
           'age',
         ]}
-        filterFunction={filterFunc}
-        actionFilterFunction={isWarningEventSwitchChecked ? warningActionFilterFunc : null}
+        filterFunction={warningActionFilterFunc}
       />
     </SectionBox>
   );

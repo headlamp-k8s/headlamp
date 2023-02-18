@@ -739,11 +739,18 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Events
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -1581,11 +1588,18 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Events
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -2537,11 +2551,18 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Events
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -3362,11 +3383,18 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Events
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -4224,11 +4252,18 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Events
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -5080,11 +5115,18 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Events
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
