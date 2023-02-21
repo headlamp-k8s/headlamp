@@ -48,8 +48,8 @@ const dependenciesToNotCopy = [
 
 const yargs = require('yargs/yargs');
 const fs = require('fs-extra');
-const headlampPluginPkg = require('../package.json');
-const frontendPkg = require('../../../frontend/package.json');
+const headlampPluginPkg = require('./package.json');
+const frontendPkg = require('../../frontend/package.json');
 
 /**
  * Update dependencies from frontend/package.json into headlamp-plugin/packages.json
@@ -116,7 +116,7 @@ function updateDependencies(packageJsonPath, checkOnly) {
       }
       console.warn(
         'If you want to add these dependencies to headlamp-plugin, ' +
-          'please add them to the dependenciesFrontDoesNotHave list inside update-dependencies.js'
+          'please add them to the dependenciesFrontDoesNotHave list inside dependencies-sync.js'
       );
     }
   }
@@ -138,7 +138,7 @@ function updateDependencies(packageJsonPath, checkOnly) {
       );
       console.warn(
         'If you want to prevent adding these dependencies to headlamp-plugin, ' +
-          'please add them to the dependenciesToNotCopy list inside update-dependencies.js'
+          'please add them to the dependenciesToNotCopy list inside dependencies-sync.js'
       );
     }
   }
@@ -151,9 +151,7 @@ function updateDependencies(packageJsonPath, checkOnly) {
   if (checkOnly) {
     if (changed) {
       console.log('\nSome frontend/package.json dependencies changed.');
-      console.log(
-        'Please run "./bin/update-dependencies.js update" to sync dependencies from frontend/.'
-      );
+      console.log('Please run "npm run update-dependencies" to sync dependencies from frontend/.');
       return 1;
     } else {
       return 0;
