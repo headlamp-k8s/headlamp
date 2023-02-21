@@ -494,7 +494,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
       });
     }
 
-    replaceNestedKeys('scripts', ['tsc', 'storybook', 'test']);
+    replaceNestedKeys('scripts', ['tsc', 'storybook', 'test', 'storybook-build']);
     replaceNestedKeys('devDependencies', ['react', 'react-dom', '@storybook/addon-storyshots']);
 
     // replace top level keys
@@ -712,6 +712,34 @@ function storybook(packageFolder) {
 }
 
 /**
+ * Build storybook.
+ *
+ * @param packageFolder {string} - folder where the package is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ */
+function storybook_build(packageFolder) {
+  try {
+    child_process.execSync(
+      './node_modules/.bin/build-storybook -c node_modules/@kinvolk/headlamp-plugin/config/.storybook',
+      {
+        stdio: 'inherit',
+        cwd: packageFolder,
+        encoding: 'utf8',
+      }
+    );
+  } catch (e) {
+    console.error(
+      `Problem running build-storybook inside of "${packageFolder}" abs: "${resolve(
+        packageFolder
+      )}"`
+    );
+    return 1;
+  }
+
+  return 0;
+}
+
+/**
  * Run tests.
  *
  * @param packageFolder {string} - folder where the package is.
@@ -845,6 +873,20 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = storybook(argv.package);
+    }
+  )
+  .command(
+    'storybook-build [package]',
+    'Build static storybook. ' + '<package> defaults to current working directory.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to build storybook for',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = storybook_build(argv.package);
     }
   )
   .command(

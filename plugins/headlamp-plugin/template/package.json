@@ -10,6 +10,7 @@
     "lint-fix": "headlamp-plugin lint --fix",
     "tsc": "tsc --noEmit",
     "storybook": "headlamp-plugin storybook",
+    "storybook-build": "headlamp-plugin storybook-build",
     "test": "headlamp-plugin test"
   },
   "keywords": [
