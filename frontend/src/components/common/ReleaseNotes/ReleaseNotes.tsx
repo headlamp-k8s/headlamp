@@ -99,7 +99,9 @@ export default function ReleaseNotes() {
   return (
     <>
       {releaseDownloadURL && <UpdatePopup releaseDownloadURL={releaseDownloadURL} />}
-      {releaseNotes && <ReleaseNotesModal releaseNotes={releaseNotes} />}
+      {releaseNotes && (
+        <ReleaseNotesModal appVersion={helpers.getAppVersion()} releaseNotes={releaseNotes} />
+      )}
     </>
   );
 }
