@@ -57,6 +57,12 @@ npm run lint-fix
 npm run tsc
 ```
 
+#### Run the tests
+
+```bash
+npm run test
+```
+
 ## Building for production
 
 To build the previous plugin example for production, run the following
@@ -145,7 +151,7 @@ make app-linux
 For more on how to extract files into there see "Shipping and Deploying Plugins" above.
 
 
-### Writing storybook stories
+## Writing storybook stories
 
 What is a storybook story? 
 
@@ -184,3 +190,49 @@ This is in addition to the benefit of making sure your components can be
 manually tested and developed quickly in isolation.
 
 See the [storybook documentation](https://storybook.js.org/docs/)
+
+
+## Running tests on a github action
+
+A workflow for testing your plugin on github with actions.
+
+Below is based on the [Building and testing Node.js](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs) docs from GitHub.
+
+Place this in a file named something like `.github/workflows/myplugin.yaml` in the root of your repo.
+
+```yaml
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./your-plugin-folder
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run lint
+      - run: npm run format
+      - run: npm run tsc
+      - run: npm run test
+```
+
+Please see the github documentation for further details on workflows and actions.
