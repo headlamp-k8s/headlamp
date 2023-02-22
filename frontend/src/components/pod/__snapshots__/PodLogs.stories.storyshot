@@ -46,11 +46,18 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h1
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Pod
-              </h1>
+                <h1
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+                >
+                  Pod
+                </h1>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
             <div
               class="MuiGrid-root MuiGrid-item"
@@ -293,11 +300,18 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Conditions
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Conditions
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -524,11 +538,18 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Containers
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Containers
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div
@@ -557,11 +578,18 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                   <div
                     class="MuiGrid-root MuiGrid-item"
                   >
-                    <h3
-                      class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                    <div
+                      class="MuiBox-root MuiBox-root"
                     >
-                      nginx
-                    </h3>
+                      <h3
+                        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                      >
+                        nginx
+                      </h3>
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                      />
+                    </div>
                   </div>
                 </div>
                 <table

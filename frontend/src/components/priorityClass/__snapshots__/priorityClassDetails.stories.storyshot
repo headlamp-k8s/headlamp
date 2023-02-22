@@ -44,11 +44,18 @@ exports[`Storyshots PriorityClasses/PriorityClassesDetailsView Default 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h1
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                PriorityClass
-              </h1>
+                <h1
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+                >
+                  PriorityClass
+                </h1>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
             <div
               class="MuiGrid-root MuiGrid-item"
@@ -255,11 +262,18 @@ exports[`Storyshots PriorityClasses/PriorityClassesDetailsView Default 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Events
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div

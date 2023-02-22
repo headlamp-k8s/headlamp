@@ -1,3 +1,4 @@
+import { Box } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Variant } from '@material-ui/core/styles/createTypography';
@@ -28,6 +29,7 @@ export interface SectionHeaderProps {
   actions?: React.ReactNode[] | null;
   noPadding?: boolean;
   headerStyle?: HeaderStyle;
+  titleSideActions?: React.ReactNode[];
 }
 
 export default function SectionHeader(props: SectionHeaderProps) {
@@ -50,11 +52,20 @@ export default function SectionHeader(props: SectionHeaderProps) {
       spacing={2}
     >
       {props.title && (
-        <Grid item>
-          <Typography variant={titleVariants[headerStyle]} noWrap className={classes.sectionTitle}>
-            {props.title}
-          </Typography>
-        </Grid>
+        <>
+          <Grid item>
+            <Box display="flex">
+              <Typography
+                variant={titleVariants[headerStyle]}
+                noWrap
+                className={classes.sectionTitle}
+              >
+                {props.title}
+              </Typography>
+              <Box ml={1}>{props.titleSideActions}</Box>
+            </Box>
+          </Grid>
+        </>
       )}
       {actions.length > 0 && (
         <Grid item>

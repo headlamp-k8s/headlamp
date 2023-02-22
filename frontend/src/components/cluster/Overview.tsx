@@ -1,3 +1,4 @@
+import { FormControlLabel, Switch } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -65,6 +66,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function EventsSection() {
+  const EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY = 'EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY';
   const classes = useStyles();
   const { t } = useTranslation('glossary');
   const location = useLocation();
@@ -72,6 +74,10 @@ function EventsSection() {
   const eventsFilter = queryParams.get('eventsFilter');
   const dispatch = useDispatch();
   const filterFunc = useFilterFunc(['.jsonData.involvedObject.kind']);
+  const warningActionFilterFunc = (event: Event) => event.jsonData.type === 'Warning';
+  const [isWarningEventSwitchChecked, setIsWarningEventSwitchChecked] = React.useState(
+    Boolean(localStorage.getItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY))
+  );
 
   React.useEffect(() => {
     if (!eventsFilter) {
@@ -99,7 +105,24 @@ function EventsSection() {
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Events')} />}>
+    <SectionBox
+      title={
+        <SectionFilterHeader
+          title={t('Events')}
+          titleSideActions={[
+            <FormControlLabel
+              checked={isWarningEventSwitchChecked}
+              label={t('Warnings')}
+              control={<Switch color="primary" />}
+              onChange={(event, checked) => {
+                localStorage.setItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY, checked.toString());
+                setIsWarningEventSwitchChecked(checked);
+              }}
+            />,
+          ]}
+        />
+      }
+    >
       <ResourceTable
         resourceClass={Event}
         columns={[
@@ -131,6 +154,7 @@ function EventsSection() {
           'age',
         ]}
         filterFunction={filterFunc}
+        actionFilterFunction={isWarningEventSwitchChecked ? warningActionFilterFunc : null}
       />
     </SectionBox>
   );

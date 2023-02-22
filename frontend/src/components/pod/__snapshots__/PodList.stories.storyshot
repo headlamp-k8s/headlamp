@@ -11,11 +11,18 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
       <div
         class="MuiGrid-root MuiGrid-item"
       >
-        <h1
-          class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          Pods
-        </h1>
+          <h1
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+          >
+            Pods
+          </h1>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
       </div>
       <div
         class="MuiGrid-root MuiGrid-item"

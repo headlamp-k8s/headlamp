@@ -44,11 +44,18 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h1
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                ResourceQuota
-              </h1>
+                <h1
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+                >
+                  ResourceQuota
+                </h1>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
             <div
               class="MuiGrid-root MuiGrid-item"
