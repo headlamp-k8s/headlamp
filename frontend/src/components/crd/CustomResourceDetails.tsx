@@ -7,7 +7,7 @@ import { ApiError } from '../../lib/k8s/apiProxy';
 import CustomResourceDefinition, { KubeCRD, makeCustomResourceClass } from '../../lib/k8s/crd';
 import { createRouteURL } from '../../lib/router';
 import { localeDate } from '../../lib/util';
-import { HoverInfoLabel, NameValueTableRow, SectionBox } from '../common';
+import { HoverInfoLabel, NameValueTableRow, ObjectEventList, SectionBox } from '../common';
 import Empty from '../common/EmptyContent';
 import Loader from '../common/Loader';
 import { ConditionsTable, MainInfoSection, PageGrid } from '../common/Resource';
@@ -147,6 +147,7 @@ function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps
         </SectionBox>
       )}
       <DetailsViewSection resource={item} />
+      {item && <ObjectEventList object={item} />}
     </PageGrid>
   );
 }

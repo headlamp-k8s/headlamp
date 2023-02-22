@@ -35,7 +35,7 @@ import SectionHeader, { HeaderStyleProps } from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
 import DetailsViewSection from '../../DetailsViewSection';
 import { PodListProps, PodListRenderer } from '../../pod/List';
-import { LightTooltip } from '..';
+import { LightTooltip, ObjectEventList } from '..';
 import Empty from '../EmptyContent';
 import ErrorBoundary from '../ErrorBoundary';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
@@ -182,11 +182,19 @@ export interface DetailsGridProps
   name: string;
   namespace?: string;
   sectionsFunc?: (item: KubeObject) => React.ReactNode;
+  withEvents?: boolean;
 }
 
 export function DetailsGrid(props: DetailsGridProps) {
-  const { sectionsFunc, resourceType, name, namespace, children, ...otherMainInfoSectionProps } =
-    props;
+  const {
+    sectionsFunc,
+    resourceType,
+    name,
+    namespace,
+    children,
+    withEvents,
+    ...otherMainInfoSectionProps
+  } = props;
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
   const hasPreviousRoute = useHasPreviousRoute();
 
@@ -230,6 +238,7 @@ export function DetailsGrid(props: DetailsGridProps) {
       <>{!!sectionsFunc && sectionsFunc(item)}</>
       {children}
       <DetailsViewSection resource={item} />
+      {withEvents && item && <ObjectEventList object={item} />}
     </PageGrid>
   );
 }

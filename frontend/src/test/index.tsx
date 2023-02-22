@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { createStore } from 'redux';
 import { KubeObject } from '../lib/k8s/cluster';
+import Event from '../lib/k8s/event';
 import defaultStore from '../redux/stores/store';
 
 export type TestContextProps = PropsWithChildren<{
@@ -27,6 +28,21 @@ export function TestContext(props: TestContextProps) {
   if (!!urlSearchParams) {
     url += '?' + new URLSearchParams(urlSearchParams).toString();
   }
+
+  // override Event.objectEvents to return phony events array
+  Event.objectEvents = jest.fn().mockResolvedValue([
+    {
+      type: 'Normal',
+      reason: 'Created',
+      message: 'Created',
+      source: {
+        component: 'kubelet',
+      },
+      firstTimestamp: '2021-03-01T00:00:00Z',
+      lastTimestamp: '2021-03-01T00:00:00Z',
+      count: 1,
+    },
+  ]);
 
   return (
     <Provider store={store || defaultStore}>

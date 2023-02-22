@@ -19,6 +19,7 @@ export default function EndpointDetails() {
       name={name}
       namespace={namespace}
       title={t('Endpoint')}
+      withEvents
       sectionsFunc={(item: KubeEndpoint | null) =>
         item && (
           <>

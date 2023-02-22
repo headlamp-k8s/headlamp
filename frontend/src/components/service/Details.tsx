@@ -28,6 +28,7 @@ export default function ServiceDetails() {
       resourceType={Service}
       name={name}
       namespace={namespace}
+      withEvents
       extraInfo={item =>
         item && [
           {

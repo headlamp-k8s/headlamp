@@ -12,6 +12,7 @@ export default function HpaDetails() {
       resourceType={HPA}
       name={name}
       namespace={namespace}
+      withEvents
       extraInfo={item =>
         item && [
           {

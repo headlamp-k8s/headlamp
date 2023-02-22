@@ -19,6 +19,7 @@ export default function RoleBindingDetails() {
       resourceType={!!namespace ? RoleBinding : ClusterRoleBinding}
       namespace={namespace}
       name={name}
+      withEvents
       extraInfo={item =>
         item && [
           {

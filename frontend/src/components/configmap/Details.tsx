@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ConfigMap from '../../lib/k8s/configMap';
+import { ObjectEventList } from '../common';
 import Empty from '../common/EmptyContent';
 import Loader from '../common/Loader';
 import { DataField, MainInfoSection, PageGrid } from '../common/Resource';
@@ -34,6 +35,7 @@ export default function ConfigDetails() {
         )}
       </SectionBox>
       <DetailsViewSection resource={item} />
+      {item && <ObjectEventList object={item} />}
     </PageGrid>
   );
 }
