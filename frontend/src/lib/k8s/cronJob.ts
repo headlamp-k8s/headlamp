@@ -1,6 +1,13 @@
 import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeObjectInterface, makeKubeObject } from './cluster';
 
+/**
+ * CronJob structure returned by the k8s API.
+ *
+ * @see {@link https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/cron-job-v1/} Kubernetes API reference for CronJob
+ *
+ * @see {@link https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/} Kubernetes definition for CronJob
+ */
 export interface KubeCronJob extends KubeObjectInterface {
   spec: {
     suspend: boolean;
