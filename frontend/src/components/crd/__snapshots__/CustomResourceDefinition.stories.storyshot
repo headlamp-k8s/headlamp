@@ -616,11 +616,18 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <h2
-                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Events
-              </h2>
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
             </div>
           </div>
           <div

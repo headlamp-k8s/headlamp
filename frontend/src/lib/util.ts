@@ -7,6 +7,7 @@ import { useTypedSelector } from '../redux/reducers/reducers';
 import store from '../redux/stores/store';
 import { ApiError } from './k8s/apiProxy';
 import { KubeMetrics, KubeObjectInterface, Workload } from './k8s/cluster';
+import { KubeEvent } from './k8s/event';
 import Node from './k8s/node';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 
@@ -139,7 +140,7 @@ export interface FilterState {
 }
 
 export function filterResource(
-  item: KubeObjectInterface,
+  item: KubeObjectInterface | KubeEvent,
   filter: FilterState,
   matchCriteria?: string[]
 ) {
@@ -196,7 +197,7 @@ export function filterResource(
 
 export function useFilterFunc(matchCriteria?: string[]) {
   const filter = useTypedSelector(state => state.filter);
-  return (item: KubeObjectInterface) => filterResource(item, filter, matchCriteria);
+  return (item: KubeObjectInterface | KubeEvent) => filterResource(item, filter, matchCriteria);
 }
 
 export function getClusterPrefixedPath(path?: string | null) {
