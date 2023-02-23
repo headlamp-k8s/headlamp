@@ -395,6 +395,9 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 
 	r.HandleFunc("/externalproxy", func(w http.ResponseWriter, r *http.Request) {
 		url, err := url.Parse(r.Header.Get("proxy-to"))
+		if r.Header.Get("Forward-To") != "" {
+			url, err = url.Parse(r.Header.Get("Forward-To"))
+		}
 		if err != nil {
 			log.Fatal("Failed to get URL from server", err)
 		}
@@ -412,6 +415,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		proxy := httputil.NewSingleHostReverseProxy(url)
 		r.Host = url.Host
 		r.URL.Host = url.Host
+		r.URL.Path = ""
 		r.URL.Scheme = url.Scheme
 		r.RequestURI = url.RequestURI()
 
@@ -684,7 +688,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 
 	// On dev mode we're loose about where connections come from
 	if config.devMode {
-		headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
+		headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization", "Forward-To"})
 		methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "DELETE", "PATCH", "OPTIONS"})
 		origins := handlers.AllowedOrigins([]string{"*"})
 
