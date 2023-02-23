@@ -394,9 +394,18 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	config.handleClusterRequests(r)
 
 	r.HandleFunc("/externalproxy", func(w http.ResponseWriter, r *http.Request) {
-		url, err := url.Parse(r.Header.Get("proxy-to"))
+		proxyURL := r.Header.Get("proxy-to")
+		if proxyURL == "" && r.Header.Get("Forward-to") != "" {
+			proxyURL = r.Header.Get("Forward-to")
+		}
+		if proxyURL == "" {
+			http.Error(w, "proxy URL is empty", http.StatusBadRequest)
+			return
+		}
+		url, err := url.Parse(proxyURL)
 		if err != nil {
-			log.Fatal("Failed to get URL from server", err)
+			http.Error(w, fmt.Sprintf("The provided proxy URL is invalid: %v", err), http.StatusBadRequest)
+			return
 		}
 		isURLContainedInProxyURLs := false
 		for _, proxyURL := range config.proxyURLs {
@@ -412,6 +421,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		proxy := httputil.NewSingleHostReverseProxy(url)
 		r.Host = url.Host
 		r.URL.Host = url.Host
+		r.URL.Path = ""
 		r.URL.Scheme = url.Scheme
 		r.RequestURI = url.RequestURI()
 
@@ -684,7 +694,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 
 	// On dev mode we're loose about where connections come from
 	if config.devMode {
-		headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
+		headers := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization", "Forward-To"})
 		methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "DELETE", "PATCH", "OPTIONS"})
 		origins := handlers.AllowedOrigins([]string{"*"})
 
