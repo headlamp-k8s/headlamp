@@ -1,11 +1,21 @@
 import { Button, Snackbar } from '@material-ui/core';
 import React from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-function UpdatePopup(props: { releaseDownloadURL: string }) {
-  const [show, setShow] = React.useState(true);
-  const { releaseDownloadURL } = props;
+export interface UpdatePopupProps {
+  releaseDownloadURL: string;
+  open: boolean;
+}
+
+function UpdatePopup(props: UpdatePopupProps) {
+  const { releaseDownloadURL, open } = props;
   const { t } = useTranslation('frequent');
+  const [show, setShow] = useState(open);
+
+  useEffect(() => {
+    setShow(open);
+  }, [open]);
 
   return (
     <Snackbar
@@ -41,5 +51,9 @@ function UpdatePopup(props: { releaseDownloadURL: string }) {
     />
   );
 }
+
+UpdatePopup.defaultProps = {
+  open: true,
+};
 
 export default UpdatePopup;
