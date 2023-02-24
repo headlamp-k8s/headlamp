@@ -200,7 +200,12 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                default
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  default
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -256,7 +261,12 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                default
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  default
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -312,7 +322,12 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                default
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  default
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -368,7 +383,12 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                default
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  default
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -431,7 +451,12 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                default
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  default
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -494,7 +519,12 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                default
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  default
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"

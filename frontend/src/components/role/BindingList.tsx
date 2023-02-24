@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
 import { useErrorState, useFilterFunc } from '../../lib/util';
+import { Link } from '../common';
 import ResourceTable from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
@@ -69,7 +70,14 @@ export default function RoleBindingList() {
           'name',
           {
             label: t('glossary|Namespace'),
-            getter: item => item.getNamespace() || t('frequent|All namespaces'),
+            getter: item =>
+              item.getNamespace() ? (
+                <Link routeName="namespace" params={{ name: item.getNamespace() }}>
+                  {item.getNamespace()}
+                </Link>
+              ) : (
+                t('frequent|All namespaces')
+              ),
             sort: true,
           },
           'age',

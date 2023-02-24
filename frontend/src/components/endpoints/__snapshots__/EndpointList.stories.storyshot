@@ -159,7 +159,12 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                my-namespace
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  my-namespace
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -196,7 +201,12 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                my-namespace
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  my-namespace
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -233,7 +243,12 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                my-namespace
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  my-namespace
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -270,7 +285,12 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                my-namespace
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  my-namespace
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -307,7 +327,12 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                my-namespace
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  my-namespace
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"

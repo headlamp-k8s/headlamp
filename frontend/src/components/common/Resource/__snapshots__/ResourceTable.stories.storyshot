@@ -96,7 +96,12 @@ exports[`Storyshots ResourceTable Name Search 1`] = `
         <td
           class="MuiTableCell-root MuiTableCell-body"
         >
-          MyNamespace3
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            href="/"
+          >
+            MyNamespace3
+          </a>
         </td>
         <td
           class="MuiTableCell-root MuiTableCell-body"
@@ -212,7 +217,12 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
         <td
           class="MuiTableCell-root MuiTableCell-body"
         >
-          MyNamespace0
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            href="/"
+          >
+            MyNamespace0
+          </a>
         </td>
         <td
           class="MuiTableCell-root MuiTableCell-body"
@@ -243,7 +253,12 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
         <td
           class="MuiTableCell-root MuiTableCell-body"
         >
-          MyNamespace1
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            href="/"
+          >
+            MyNamespace1
+          </a>
         </td>
         <td
           class="MuiTableCell-root MuiTableCell-body"
@@ -274,7 +289,12 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
         <td
           class="MuiTableCell-root MuiTableCell-body"
         >
-          MyNamespace2
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            href="/"
+          >
+            MyNamespace2
+          </a>
         </td>
         <td
           class="MuiTableCell-root MuiTableCell-body"
@@ -305,7 +325,12 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
         <td
           class="MuiTableCell-root MuiTableCell-body"
         >
-          MyNamespace3
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+            href="/"
+          >
+            MyNamespace3
+          </a>
         </td>
         <td
           class="MuiTableCell-root MuiTableCell-body"

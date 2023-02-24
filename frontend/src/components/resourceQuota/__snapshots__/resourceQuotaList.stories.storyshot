@@ -164,7 +164,12 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                test
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -215,7 +220,12 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                test
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -266,7 +276,12 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                test
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -317,7 +332,12 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                test
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -368,7 +388,12 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                test
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test
+                </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"

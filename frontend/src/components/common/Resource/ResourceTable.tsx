@@ -86,7 +86,14 @@ function Table(props: ResourceTableProps) {
       case 'namespace':
         return {
           label: t('glossary|Namespace'),
-          getter: (resource: KubeObject) => resource.getNamespace(),
+          getter: (resource: KubeObject) =>
+            resource.getNamespace() ? (
+              <Link routeName="namespace" params={{ name: resource.getNamespace() }}>
+                {resource.getNamespace()}
+              </Link>
+            ) : (
+              ''
+            ),
           sort: true,
         };
       case 'type':
