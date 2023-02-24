@@ -71,7 +71,9 @@ components via eslint or via unit tests.
 
 Any issues found are reported in the developer console.
 
-To disable the alert message during development, use the following:
+To enable the alert message during development, use the following:
 ```bash
-REACT_APP_SKIP_A11Y=true make run-frontend
+REACT_APP_SKIP_A11Y=false make run-frontend
 ```
+
+This shows an alert when an a11y issue is detected.

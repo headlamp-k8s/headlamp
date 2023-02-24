@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
   }
   const axeCore = require('axe-core');
 
-  if (process.env.REACT_APP_SKIP_A11Y !== 'true') {
+  if (process.env.REACT_APP_SKIP_A11Y === 'false') {
     axe(React, ReactDOM, 500, undefined, undefined, (results: typeof axeCore.AxeResults) => {
       if (results.violations.length > 0) {
         console.error('axe results', results);
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
           alreadyWarned = true;
           alert(
             'Accessibility issues found. See developer console. ' +
-              '`REACT_APP_SKIP_A11Y=true make run-frontend` to disable alert.'
+              '`REACT_APP_SKIP_A11Y=false make run-frontend` to enable alert.'
           );
         }
       }
