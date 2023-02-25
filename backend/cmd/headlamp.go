@@ -394,12 +394,18 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	config.handleClusterRequests(r)
 
 	r.HandleFunc("/externalproxy", func(w http.ResponseWriter, r *http.Request) {
-		url, err := url.Parse(r.Header.Get("proxy-to"))
-		if r.Header.Get("Forward-To") != "" {
-			url, err = url.Parse(r.Header.Get("Forward-To"))
+		proxyURL := r.Header.Get("proxy-to")
+		if proxyURL == "" && r.Header.Get("Forward-to") != "" {
+			proxyURL = r.Header.Get("Forward-to")
 		}
+		if proxyURL == "" {
+			http.Error(w, "proxy URL is empty", http.StatusBadRequest)
+			return
+		}
+		url, err := url.Parse(proxyURL)
 		if err != nil {
-			log.Fatal("Failed to get URL from server", err)
+			http.Error(w, fmt.Sprintf("The provided proxy URL is invalid: %v", err), http.StatusBadRequest)
+			return
 		}
 		isURLContainedInProxyURLs := false
 		for _, proxyURL := range config.proxyURLs {
