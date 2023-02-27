@@ -27,6 +27,7 @@ function testHeadlampPluginPublished(pluginVersion) {
   // test extraction works
   run('npx @kinvolk/headlamp-plugin extract ./ .plugins');
   checkFileExists(path.join(curDir, '.plugins', 'headlamp-myfancy', 'main.js'));
+  // checkFileExists(path.join(curDir, '.plugins', 'headlamp-myfancy', 'package.json'));
 
   // test format command and that default code is formatted correctly
   fs.rmSync(path.join(tmpDir, 'headlamp-myfancy'), { recursive: true });
