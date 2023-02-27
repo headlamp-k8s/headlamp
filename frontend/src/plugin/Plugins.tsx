@@ -28,13 +28,13 @@ export default function Plugins() {
      *   .initialize() plugins that register (not all do).
      */
     async function fetchAndExecute() {
-      const pluginsScriptPaths = (await fetch(`${helpers.getAppUrl()}plugins/list`).then(resp =>
+      const pluginsScriptPaths = (await fetch(`${helpers.getAppUrl()}plugins`).then(resp =>
         resp.json()
       )) as string[];
 
       const sources = await Promise.all(
         pluginsScriptPaths.map(path =>
-          fetch(`${helpers.getAppUrl()}${path}`).then(resp => resp.text())
+          fetch(`${helpers.getAppUrl()}${path}/main.js`).then(resp => resp.text())
         )
       );
 
