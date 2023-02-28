@@ -3,7 +3,7 @@
 The needed infrastructure for building Headlamp plugins.
 Headlamp plugins depend on this package.
 
-See the [Headlamp plugins documentation on the web](https://kinvolk.io/docs/headlamp/latest/development/plugins/)
+See the [Headlamp plugins documentation on the web](https://headlamp.dev/docs/latest/development/plugins/)
 
 This package is published to the npm package index separately from Headlamp.
 

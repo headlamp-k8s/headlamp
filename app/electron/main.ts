@@ -318,7 +318,7 @@ function getDefaultAppMenu(): AppMenu[] {
         {
           label: i18n.t('Documentation'),
           id: 'original-documentation',
-          url: 'https://kinvolk.io/docs/headlamp/latest',
+          url: 'https://headlamp.dev/docs/latest/',
         },
         {
           label: i18n.t('Open an Issue'),

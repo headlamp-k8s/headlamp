@@ -7,6 +7,6 @@ import logoUrl from '../../docs/headlamp_light.svg';
 export default create({
   base: 'light',
   brandTitle: 'Headlamp Kubernetes Web UI dashboard',
-  brandUrl: 'https://kinvolk.io/docs/headlamp/latest/development/',
+  brandUrl: 'https://headlamp.dev/docs/latest/development/',
   brandImage: logoUrl,
 });

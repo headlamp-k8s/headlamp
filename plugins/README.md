@@ -1,7 +1,7 @@
 # Plugins
 
 See the [Headlamp plugins documentation on the web](
-https://kinvolk.io/docs/headlamp/latest/development/plugins/) 
+https://headlamp.dev/docs/latest/development/plugins/) 
 or in this repo at 
 [../docs/development/plugins/](../docs/development/plugins/).
 
