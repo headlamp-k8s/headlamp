@@ -5,14 +5,14 @@ import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-import helpers from '../../../helpers';
 
-interface ReleaseNotesModalProps {
-  releaseNotes: string;
+export interface ReleaseNotesModalProps {
+  releaseNotes?: string;
+  appVersion: string | null;
 }
 
 export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
-  const { releaseNotes } = props;
+  const { releaseNotes, appVersion } = props;
   const [showReleaseNotes, setShowReleaseNotes] = React.useState(Boolean(releaseNotes));
   const theme = useTheme();
   const { t } = useTranslation('frequent');
@@ -37,7 +37,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
           <Box flexGrow={2}>
             <Typography variant="h4">
               {t('release|Release Notes ({{ appVersion }})', {
-                appVersion: helpers.getAppVersion(),
+                appVersion: appVersion,
               })}
             </Typography>
           </Box>
@@ -50,7 +50,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
           className="markdown-body"
           style={{ color: theme.palette.text.primary, fontFamily: 'inherit' }}
         >
-          <ReactMarkdown>{releaseNotes}</ReactMarkdown>
+          {releaseNotes && <ReactMarkdown>{releaseNotes}</ReactMarkdown>}
         </Box>
       </Paper>
     </Modal>
