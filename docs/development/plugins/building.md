@@ -180,6 +180,8 @@ Notices that there is a Message.stories.tsx to go along with the Message.tsx
 which has the `<Message>` component defined within it. See that file for an
 example of how to write a story.
 
+### Snapshot testing
+
 Another benefit of writing storybook stories is that they can act as 
 unit tests for regression testing. With storyshots it will save snapshots 
 of html for the different states that a component can be in. See the 
@@ -189,8 +191,8 @@ guide in the storybook documentation for more information.
 This is in addition to the benefit of making sure your components can be 
 manually tested and developed quickly in isolation.
 
-See the [storybook documentation](https://storybook.js.org/docs/)
-
+See the [storybook documentation](https://storybook.js.org/docs/) for full
+details on storybook.
 
 ## Running tests on a github action
 
