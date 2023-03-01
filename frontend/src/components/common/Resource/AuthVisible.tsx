@@ -2,12 +2,14 @@ import React from 'react';
 import { KubeObject } from '../../../lib/k8s/cluster';
 
 export interface AuthVisibleProps extends React.PropsWithChildren<{}> {
-  /** The item for which auth will be checked. */
+  /** The item for which auth will be checked or a resource class (e.g. Job). */
   item: KubeObject;
   /** The verb associated with the permissions being verifying. See https://kubernetes.io/docs/reference/access-authn-authz/authorization/#determine-the-request-verb . */
   authVerb: string;
   /** The subresource for which the permissions are being verifyied (e.g. "log" when checking for a pod's log). */
   subresource?: string;
+  /** The namespace for which we're checking the permission, if applied. This is mostly useful when checking "creation" using a resource class, instead of an instance. */
+  namespace?: string;
   /** Callback for when an error occurs.
    * @param err The error that occurred.
    */
@@ -22,14 +24,14 @@ export interface AuthVisibleProps extends React.PropsWithChildren<{}> {
  * @param props The props for the component.
  */
 export default function AuthVisible(props: AuthVisibleProps) {
-  const { item, authVerb, subresource, onError, onAuthResult, children } = props;
+  const { item, authVerb, subresource, namespace, onError, onAuthResult, children } = props;
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
     let isMounted = true;
     if (!!item) {
       item
-        .getAuthorization(authVerb, { subresource })
+        .getAuthorization(authVerb, { subresource, namespace })
         .then((result: any) => {
           if (isMounted) {
             if (result.status?.allowed !== visible) {
