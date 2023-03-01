@@ -77,6 +77,14 @@ const useButtonStyle = makeStyles({
 
 export default function Sidebar() {
   const { t, i18n } = useTranslation(['glossary', 'frequent']);
+
+  const settingsMenu: SidebarItemProps = {
+    name: 'settings',
+    icon: 'mdi:cog',
+    label: t('frequent|Settings'),
+    url: '/settings',
+  };
+
   const specialSidebarOptions: SidebarItemProps[] = [
     {
       name: 'clusters',
@@ -90,13 +98,17 @@ export default function Sidebar() {
       label: t('frequent|Notifications'),
       url: '/notifications',
     },
-    {
-      name: 'settings',
-      icon: 'mdi:cog',
-      label: t('frequent|Settings'),
-      url: '/settings',
-    },
   ];
+
+  specialSidebarOptions.push(settingsMenu);
+
+  /** Only adds settings menu when running as an App*/
+  // DISABLED FOR NOW UNTIL DATA IS HOOKED UP
+  if (helpers.isElectron() === true) {
+    settingsMenu.subList = [
+      { name: 'plugins', label: t('settings|Plugins'), url: '/settings/plugins' },
+    ];
+  }
 
   const sidebar = useTypedSelector(state => state.ui.sidebar);
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);

@@ -5,6 +5,7 @@
   "Enter a value between {{ minRows }} and {{ maxRows }}.": "",
   "Custom row value": "",
   "Number of rows for tables": "",
+  "Plugins": "",
   "Timezone to display for dates": "",
   "Timezone": ""
 }
