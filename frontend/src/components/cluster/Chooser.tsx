@@ -24,11 +24,13 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
+import { createRouteURL } from '../../lib/router';
 import { getThemeName } from '../../lib/themes';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { setVersionDialogOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { EmptyContent } from '../common';
+import ActionButton from '../common/ActionButton';
 import { DialogTitle } from '../common/Dialog';
 import ErrorBoundary from '../common/ErrorBoundary';
 import Loader from '../common/Loader';
@@ -444,6 +446,15 @@ function Chooser(props: ClusterDialogProps) {
         ) : (
           <ClusterList clusters={clusterList} onButtonClick={handleButtonClick} />
         )}
+        {helpers.isElectron() ? (
+          <Box style={{ justifyContent: 'center', display: 'flex' }}>
+            <ActionButton
+              description={t('Load from a file')}
+              onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+              icon="mdi:plus"
+            />
+          </Box>
+        ) : null}
         {React.Children.toArray(children).length > 0 && (
           <DialogActions>
             <Grid container direction="row" justifyContent="space-between" alignItems="center">

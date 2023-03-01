@@ -5,6 +5,7 @@ import NotificationList from '../components/App/Notifications/List';
 import AppSettings, { SettingsButton } from '../components/App/settings';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
+import KubeConfigLoader from '../components/cluster/KubeConfigLoader';
 import Overview from '../components/cluster/Overview';
 import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
@@ -539,6 +540,16 @@ const defaultRoutes: {
     sidebar: 'portforwards',
     disabled: !helpers.isElectron(),
     component: () => <PortForwardingList />,
+  },
+  loadKubeConfig: {
+    path: '/loadKubeConfig',
+    exact: true,
+    name: 'Load KubeConfig',
+    sidebar: null,
+    useClusterURL: false,
+    noAuthRequired: true,
+    disabled: !helpers.isElectron(),
+    component: () => <KubeConfigLoader />,
   },
 };
 
