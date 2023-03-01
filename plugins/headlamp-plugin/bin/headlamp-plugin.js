@@ -770,7 +770,7 @@ function test(packageFolder) {
 yargs(process.argv.slice(2))
   .command(
     'build [package]',
-    'Build the plugin, or folder of plugins. ' + '<package> defaults to current working directory.',
+    'Build the plugin, or folder of plugins. <package> defaults to current working directory.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package or folder of packages to build',
@@ -829,7 +829,7 @@ yargs(process.argv.slice(2))
   )
   .command(
     'format [package]',
-    'format the plugin code with prettier. ' + '<package> defaults to current working directory.',
+    'format the plugin code with prettier. <package> defaults to current working directory.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package to code format',
@@ -863,7 +863,7 @@ yargs(process.argv.slice(2))
   )
   .command(
     'storybook [package]',
-    'Start storybook. ' + '<package> defaults to current working directory.',
+    'Start storybook. <package> defaults to current working directory.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package to start storybook for',
@@ -877,7 +877,7 @@ yargs(process.argv.slice(2))
   )
   .command(
     'storybook-build [package]',
-    'Build static storybook. ' + '<package> defaults to current working directory.',
+    'Build static storybook. <package> defaults to current working directory.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package to build storybook for',
@@ -911,7 +911,7 @@ yargs(process.argv.slice(2))
   )
   .command(
     'test [package]',
-    'Test. ' + '<package> defaults to current working directory.',
+    'Test. <package> defaults to current working directory.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package to test',
