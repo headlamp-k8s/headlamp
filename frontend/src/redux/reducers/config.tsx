@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { DefaultRowsPerPageOptions } from '../../components/App/settings/config';
 import { Cluster } from '../../lib/k8s/cluster';
 import { Action, CONFIG_NEW, CONFIG_SET_SETTINGS } from '../actions/actions';
 
@@ -16,6 +15,8 @@ export interface ConfigState {
   };
 }
 
+export const defaultTableRowsPerPageOptions = [15, 25, 50];
+
 function defaultTimezone() {
   return process.env.UNDER_TEST ? 'UTC' : Intl.DateTimeFormat().resolvedOptions().timeZone;
 }
@@ -23,7 +24,8 @@ function defaultTimezone() {
 export const INITIAL_STATE: ConfigState = {
   clusters: null,
   settings: {
-    tableRowsPerPageOptions: storedSettings.tableRowsPerPageOptions || DefaultRowsPerPageOptions,
+    tableRowsPerPageOptions:
+      storedSettings.tableRowsPerPageOptions || defaultTableRowsPerPageOptions,
     timezone: storedSettings.timezone || defaultTimezone(),
   },
 };

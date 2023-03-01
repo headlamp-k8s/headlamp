@@ -19,11 +19,11 @@ import helpers from '../../../helpers';
 import LocaleSelect from '../../../i18n/LocaleSelect/LocaleSelect';
 import { createRouteURL } from '../../../lib/router';
 import { setAppSettings, setVersionDialogOpen } from '../../../redux/actions/actions';
+import { defaultTableRowsPerPageOptions } from '../../../redux/reducers/config';
 import { ActionButton, NameValueTable, SectionBox } from '../../common';
 import TimezoneSelect from '../../common/TimezoneSelect';
-import ThemeChangeButton from '../ThemeChangeButton';
-import { DefaultRowsPerPageOptions } from './config';
 import { useSettings } from './hook';
+import ThemeChangeButton from './ThemeChangeButton';
 
 function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) {
   const { t } = useTranslation(['frequent', 'settings']);
@@ -40,13 +40,13 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
     if (options.includes(val)) {
       return val;
     }
-    return DefaultRowsPerPageOptions[0];
+    return defaultTableRowsPerPageOptions[0];
   }, []);
   const [selectedValue, setSelectedValue] = useState(defaultRowsPerPageValue);
   const storedCustomValue = useMemo(() => {
-    const val = options.find(val => !DefaultRowsPerPageOptions.includes(val));
+    const val = options.find(val => !defaultTableRowsPerPageOptions.includes(val));
     if (!val) {
-      return DefaultRowsPerPageOptions[0];
+      return defaultTableRowsPerPageOptions[0];
     }
     return val;
   }, []);
@@ -124,7 +124,7 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
               if (customValue === undefined) {
                 return;
               }
-              const newOptions = [...new Set([...DefaultRowsPerPageOptions, customValue])];
+              const newOptions = [...new Set([...defaultTableRowsPerPageOptions, customValue])];
               newOptions.sort((a, b) => a - b);
               setOptions(newOptions);
               setSelectedValue(customValue);
@@ -135,8 +135,8 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
           <IconButton
             aria-label={t('frequent|Delete')}
             onClick={() => {
-              setOptions(DefaultRowsPerPageOptions);
-              setSelectedValue(DefaultRowsPerPageOptions[0]);
+              setOptions(defaultTableRowsPerPageOptions);
+              setSelectedValue(defaultTableRowsPerPageOptions[0]);
             }}
           >
             <Icon icon="mdi:delete" />
@@ -155,7 +155,7 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
           renderValue={value => `${value}`}
         >
           {options.map(option => {
-            const isCustom = !DefaultRowsPerPageOptions.includes(option);
+            const isCustom = !defaultTableRowsPerPageOptions.includes(option);
             return (
               <MenuItem key={option} value={option}>
                 <ListItemText primary={option} />
@@ -165,8 +165,8 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
                       size="small"
                       aria-label={t('frequent|Delete')}
                       onClick={() => {
-                        setOptions(DefaultRowsPerPageOptions);
-                        setSelectedValue(DefaultRowsPerPageOptions[0]);
+                        setOptions(defaultTableRowsPerPageOptions);
+                        setSelectedValue(defaultTableRowsPerPageOptions[0]);
                         setIsSelectOpen(false);
                       }}
                     >
@@ -246,7 +246,7 @@ export default function Settings() {
             name: t('settings|Number of rows for tables'),
             value: (
               <NumberOfRowsForTablesInputComponent
-                defaultValue={storedRowsPerPageOptions || DefaultRowsPerPageOptions}
+                defaultValue={storedRowsPerPageOptions || defaultTableRowsPerPageOptions}
               />
             ),
           },

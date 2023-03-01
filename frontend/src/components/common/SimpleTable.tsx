@@ -13,7 +13,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../helpers';
 import { useURLState } from '../../lib/util';
-import { useSettings } from '../App/settings/hook';
+import { useSettings } from '../App/Settings/hook';
 import Empty from './EmptyContent';
 import { ValueLabel } from './Label';
 import Loader from './Loader';

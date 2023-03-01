@@ -2,7 +2,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { useFilterFunc } from '../../../lib/util';
-import { useSettings } from '../../App/settings/hook';
+import { useSettings } from '../../App/Settings/hook';
 import { DateLabel } from '../Label';
 import Link from '../Link';
 import SimpleTable, { SimpleTableProps } from '../SimpleTable';

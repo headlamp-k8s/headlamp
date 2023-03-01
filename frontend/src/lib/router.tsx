@@ -2,8 +2,8 @@ import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import NotificationList from '../components/App/Notifications/List';
-import AppSettings, { SettingsButton } from '../components/App/settings';
-import { ClusterSettings, ClustersSettings } from '../components/App/settings/clusters';
+import Settings, { SettingsButton } from '../components/App/Settings';
+import { ClusterSettings, ClustersSettings } from '../components/App/Settings/clusters';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
 import KubeConfigLoader from '../components/cluster/KubeConfigLoader';
@@ -580,7 +580,7 @@ const defaultRoutes: {
     sidebar: 'settings',
     useClusterURL: false,
     noAuthRequired: true,
-    component: () => <AppSettings />,
+    component: () => <Settings />,
   },
   settingsClusters: {
     path: '/settings/clusters',

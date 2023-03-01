@@ -4,8 +4,8 @@ import IconButton from '@material-ui/core/IconButton';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { getThemeName, ThemesConf } from '../../lib/themes';
-import { setTheme as setThemeRedux } from '../../redux/actions/actions';
+import { getThemeName, ThemesConf } from '../../../lib/themes';
+import { setTheme as setThemeRedux } from '../../../redux/actions/actions';
 
 const useStyles = makeStyles((theme: Theme) => ({
   buttonGroup: {
