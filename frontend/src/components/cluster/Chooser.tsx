@@ -257,6 +257,7 @@ interface ClusterDialogProps extends PropsWithChildren<Omit<DialogProps, 'open' 
   open?: boolean;
   onClose?: (() => void) | null;
   useCover?: boolean;
+  showInfoButton?: boolean;
 }
 
 export function ClusterDialog(props: ClusterDialogProps) {
@@ -264,7 +265,14 @@ export function ClusterDialog(props: ClusterDialogProps) {
   const theme = useTheme();
   const { t } = useTranslation('cluster');
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const { open, onClose = null, useCover = false, children = [], ...otherProps } = props;
+  const {
+    open,
+    onClose = null,
+    useCover = false,
+    showInfoButton = true,
+    children = [],
+    ...otherProps
+  } = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
   const dispatch = useDispatch();
@@ -295,19 +303,21 @@ export function ClusterDialog(props: ClusterDialogProps) {
         className={classes.chooserTitle}
         disableTypography
         buttons={[
-          <IconButton
-            aria-label={t('Show build information')}
-            onClick={() => {
-              handleClose();
-              dispatch(setVersionDialogOpen(true));
-            }}
-            size="small"
-          >
-            <InlineIcon
-              icon={'mdi:information-outline'}
-              color={theme.palette.primary.contrastText}
-            />
-          </IconButton>,
+          showInfoButton && (
+            <IconButton
+              aria-label={t('Show build information')}
+              onClick={() => {
+                handleClose();
+                dispatch(setVersionDialogOpen(true));
+              }}
+              size="small"
+            >
+              <InlineIcon
+                icon={'mdi:information-outline'}
+                color={theme.palette.primary.contrastText}
+              />
+            </IconButton>
+          ),
         ]}
       >
         <ErrorBoundary>
