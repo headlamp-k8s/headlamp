@@ -467,12 +467,10 @@ function upgrade(packageFolder, skipPackageUpdates) {
       fs.readFileSync(path.join(templateFolder, 'package.json'), 'utf8')
     );
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-
-    /** If we change some config. */
-    let changed = false;
+    let configChanged = false;
 
     /**
-     * Replaces mested config keys with ones in the template.
+     * Replaces nested config keys with ones in the template.
      *
      * It only replaces the properties specified, and does so if they
      * are missing or not equal to the ones in the template.
@@ -484,7 +482,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
       subProperties.forEach(key => {
         if (packageJson[keyName][key] !== templatePackageJson[keyName][key]) {
           packageJson[keyName][key] = templatePackageJson[keyName][key];
-          changed = true;
+          configChanged = true;
           console.log(
             `Updated package.json field ${keyName}.${key}: ${JSON.stringify(
               packageJson[keyName][key]
@@ -502,12 +500,12 @@ function upgrade(packageFolder, skipPackageUpdates) {
     checkKeys.forEach(key => {
       if (JSON.stringify(packageJson[key]) !== JSON.stringify(templatePackageJson[key])) {
         packageJson[key] = templatePackageJson[key];
-        changed = true;
+        configChanged = true;
         console.log(`Updated package.json field "${key}": ${JSON.stringify(packageJson[key])}`);
       }
     });
 
-    if (changed) {
+    if (configChanged) {
       fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, '  ') + '\n');
     }
   }
