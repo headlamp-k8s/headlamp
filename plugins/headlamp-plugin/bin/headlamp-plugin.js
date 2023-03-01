@@ -782,12 +782,12 @@ yargs(process.argv.slice(2))
       process.exitCode = build(argv.package);
     }
   )
-  .command('start', 'Watch for changes and build plugin', {}, () => {
+  .command('start', 'Watch for changes and build plugin.', {}, () => {
     process.exitCode = start();
   })
   .command(
     'create <name>',
-    'Create a new plugin folder',
+    'Create a new plugin folder.',
     yargs => {
       yargs
         .positional('name', {
@@ -807,7 +807,7 @@ yargs(process.argv.slice(2))
   .command(
     'extract <pluginPackages> <outputPlugins>',
     'Copies folders of packages from pluginPackages/packageName/dist/main.js ' +
-      'to outputPlugins/packageName/main.js',
+      'to outputPlugins/packageName/main.js.',
     yargs => {
       yargs.positional('pluginPackages', {
         describe:
