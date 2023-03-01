@@ -23,12 +23,12 @@ import {
   setWhetherSidebarOpen,
 } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
+import { SettingsButton } from '../App/Settings';
 import { ClusterTitle } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import Notifications from './Notifications';
-import { SettingsButton } from './settings';
 
 export interface TopBarProps {}
 
