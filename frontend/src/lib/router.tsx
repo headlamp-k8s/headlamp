@@ -2,6 +2,7 @@ import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import NotificationList from '../components/App/Notifications/List';
+// import PluginSettings from '../components/App/PluginSettings';
 import Settings, { SettingsButton } from '../components/App/Settings';
 import SettingsCluster from '../components/App/Settings/SettingsCluster';
 import SettingsClusters from '../components/App/Settings/SettingsClusters';
@@ -592,6 +593,7 @@ const defaultRoutes: {
       </PageGrid>
     ),
   },
+
   settingsClusters: {
     path: '/settings/clusters',
     exact: true,
@@ -616,6 +618,17 @@ const defaultRoutes: {
         <SettingsCluster />
       </PageGrid>
     ),
+  },
+  // DISABLED UNTIL DATA HOOK UP
+  plugins: {
+    path: '/settings/plugins',
+    exact: true,
+    name: 'Plugins',
+    sidebar: 'plugins',
+    useClusterURL: false,
+    noAuthRequired: true,
+    disabled: !helpers.isElectron(),
+    component: () => <PluginSettings />,
   },
   portforwards: {
     path: '/portforwards',

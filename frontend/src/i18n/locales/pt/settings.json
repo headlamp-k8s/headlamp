@@ -5,6 +5,7 @@
   "Enter a value between {{ minRows }} and {{ maxRows }}.": "Introduza um valor entre {{ minRows }} e {{ maxRows }}.",
   "Custom row value": "Núm. de linhas personalizado",
   "Number of rows for tables": "Núm. de linhas para as tabelas",
+  "Plugins": "",
   "Timezone to display for dates": "Fuso horário para mostrar em datas",
   "Timezone": "Fuso horário"
 }
