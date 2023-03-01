@@ -119,7 +119,6 @@
     "recharts": "^2.1.14",
     "redux-saga": "^1.1.3",
     "resize-observer-polyfill": "^1.5.1",
-    "rimraf": "^3.0.2",
     "semver": "^7.3.5",
     "shx": "^0.3.4",
     "spacetime": "^7.4.0",
