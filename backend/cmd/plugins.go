@@ -99,11 +99,11 @@ func watchSubfolders(path string) {
 	}
 }
 
-// getPluginListURLs gets a list of plugin URLs from the configured plugins folder.
+// getPluginListBasePaths gets a list of plugin URLs from the configured plugins folder.
 // Returns pluginListURLs, nil if there is no problem.
 // returns nil, err if there's an error.
-func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
-	pluginListURL, err := pluginURLsForDir(c.pluginDir, filepath.Join(c.baseURL, "plugins"))
+func (c *HeadlampConfig) getPluginListBasePaths() ([]string, error) {
+	pluginListURL, err := pluginBasePathListForDir(c.pluginDir, filepath.Join(c.baseURL, "plugins"))
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ func (c *HeadlampConfig) getPluginListURLs() ([]string, error) {
 	return pluginListURL, nil
 }
 
-func pluginURLsForDir(pluginDir string, baseURL string) ([]string, error) {
+func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error) {
 	files, err := ioutil.ReadDir(pluginDir)
 	if err != nil && !os.IsNotExist(err) {
 		return nil, err
@@ -135,7 +135,15 @@ func pluginURLsForDir(pluginDir string, baseURL string) ([]string, error) {
 			continue
 		}
 
-		pluginFileURL := filepath.Join(baseURL, f.Name(), "main.js")
+		packageJSONPath := filepath.Join(pluginDir, f.Name(), "package.json")
+
+		_, err = os.Stat(packageJSONPath)
+		if err != nil {
+			log.Printf("Warning, package.json not found at '%s': %s\n", packageJSONPath, err)
+			log.Printf("Please run 'headlamp-plugin extract' again with headlamp-plugin >= 0.6.0")
+		}
+
+		pluginFileURL := filepath.Join(baseURL, f.Name())
 		pluginListURLs = append(pluginListURLs, pluginFileURL)
 	}
 
@@ -145,7 +153,7 @@ func pluginURLsForDir(pluginDir string, baseURL string) ([]string, error) {
 func addPluginRoutes(config *HeadlampConfig, r *mux.Router) {
 	var err error
 
-	pluginListURLs, err = config.getPluginListURLs()
+	pluginListURLs, err = config.getPluginListBasePaths()
 	if err != nil {
 		if !os.IsNotExist(err) {
 			log.Println("Error: ", err)
@@ -155,15 +163,15 @@ func addPluginRoutes(config *HeadlampConfig, r *mux.Router) {
 		pluginListURLs = make([]string, 0)
 	}
 
-	r.HandleFunc("/plugins/list", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/plugins", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		// The pluginListURLs should only be nil if we want to dynamically load it
 		// (and that's available only when not running in-cluster).
 		if !config.useInCluster && pluginListURLs == nil {
-			pluginListURLs, _ = config.getPluginListURLs()
+			pluginListURLs, _ = config.getPluginListBasePaths()
 		}
 		if err := json.NewEncoder(w).Encode(pluginListURLs); err != nil {
-			log.Println("Error encoding plugins list", err)
+			log.Println("Error encoding plugins base paths list", err)
 		}
 	}).Methods("GET")
 

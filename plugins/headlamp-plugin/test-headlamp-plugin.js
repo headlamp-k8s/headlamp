@@ -45,6 +45,7 @@ function testHeadlampPlugin() {
   // test extraction works
   run(`node bin/headlamp-plugin.js extract . .plugins`);
   checkFileExists(join('.plugins', PACKAGE_NAME, 'main.js'));
+  checkFileExists(join('.plugins', PACKAGE_NAME, 'package.json'));
 
   // test format command and that default code is formatted correctly
   fs.rmSync(PACKAGE_NAME, { recursive: true });

@@ -23,22 +23,68 @@ export default function Plugins() {
 
     /**
      * Get the list of plugins,
-     *   download all the plugins,
+     *   download all the plugin source,
+     *   download all the plugin package.json files,
      *   execute the plugins,
      *   .initialize() plugins that register (not all do).
      */
     async function fetchAndExecute() {
-      const pluginsScriptPaths = (await fetch(`${helpers.getAppUrl()}plugins/list`).then(resp =>
+      const pluginPaths = (await fetch(`${helpers.getAppUrl()}plugins`).then(resp =>
         resp.json()
       )) as string[];
 
-      const sources = await Promise.all(
-        pluginsScriptPaths.map(path =>
-          fetch(`${helpers.getAppUrl()}${path}`).then(resp => resp.text())
+      const sourcesPromise = Promise.all(
+        pluginPaths.map(path =>
+          fetch(`${helpers.getAppUrl()}${path}/main.js`).then(resp => resp.text())
         )
       );
 
-      sources.forEach((source, index) => {
+      // fetch the packages. But if there is a problem,
+      const packageInfosPromise = await Promise.all<{}[]>(
+        pluginPaths.map(path =>
+          fetch(`${helpers.getAppUrl()}${path}/package.json`).then(resp => {
+            if (!resp.ok) {
+              if (resp.status !== 404) {
+                return Promise.reject(resp);
+              }
+              {
+                console.warn(
+                  'Missing package.json. ' +
+                    `Please upgrade the plugin ${path}` +
+                    ' by running "headlamp-plugin extract" again.' +
+                    ' Please use headlamp-plugin >= 0.6.0'
+                );
+                return {
+                  name: path.split('/').slice(-1)[0],
+                  version: '0.0.0',
+                  author: 'unknown',
+                  description: '',
+                };
+              }
+            }
+            return resp.json();
+          })
+        )
+      );
+
+      const sources = await sourcesPromise;
+      const packageInfos = await packageInfosPromise;
+
+      /**
+       * This can be used to filter out which of the plugins we should execute.
+       *
+       * @param sources array of source to execute
+       * @param packageInfos array of package.json contents
+       * @returns array of source to execute
+       */
+      // eslint-disable-next-line no-unused-vars
+      function getSourcesToExecute(sources: string[], packageInfos: {}[]) {
+        //@todo: filter out plugins which are not enabled.
+        //@todo: packageInfos and some info from plugin-settings will be used for this.
+        return sources;
+      }
+
+      getSourcesToExecute(sources, packageInfos).forEach((source, index) => {
         // Execute plugins inside a context (not in global/window)
         (function (str: string) {
           try {
@@ -46,7 +92,7 @@ export default function Plugins() {
             return result;
           } catch (e) {
             // We just continue if there is an error.
-            console.error(`Plugin execution error in ${pluginsScriptPaths[index]}:`, e);
+            console.error(`Plugin execution error in ${pluginPaths[index]}:`, e);
           }
         }.call({}, source));
       });

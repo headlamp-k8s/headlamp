@@ -136,6 +136,7 @@ function compileMessages(err, stats) {
 /**
  * extract copies folders of packages in the form:
  *   packageName/dist/main.js to packageName/main.js
+ *   packageName/package.json to packageName/package.json
  *
  * @param {string} pluginPackagesPath - can be a package or a folder of packages.
  * @param {string} outputPlugins - folder where the plugins are placed.
@@ -172,9 +173,16 @@ function extract(pluginPackagesPath, outputPlugins) {
           : pluginPackagesPath;
       const folderName = trimmedPath.split(path.sep).splice(-1)[0];
       const plugName = path.join(outputPlugins, folderName);
-      const mainjs = path.join(plugName, 'main.js');
+
       const inputMainJs = path.join(pluginPackagesPath, 'dist', 'main.js');
-      copyFiles(plugName, inputMainJs, mainjs);
+      const outputMainjs = path.join(plugName, 'main.js');
+      copyFiles(plugName, inputMainJs, outputMainjs);
+
+      const inputPackageJson = path.join(pluginPackagesPath, 'package.json');
+      const outputPackageJson = path.join(plugName, 'package.json');
+      console.log(`Copying "${inputPackageJson}" to "${outputPackageJson}".`);
+      fs.copyFileSync(inputPackageJson, outputPackageJson);
+
       return true;
     }
     return false;
@@ -190,9 +198,15 @@ function extract(pluginPackagesPath, outputPlugins) {
 
     folders.forEach(folder => {
       const plugName = path.join(outputPlugins, folder.name);
-      const mainjs = path.join(plugName, 'main.js');
+
       const inputMainJs = path.join(pluginPackagesPath, folder.name, 'dist', 'main.js');
-      copyFiles(plugName, inputMainJs, mainjs);
+      const outputMainjs = path.join(plugName, 'main.js');
+      copyFiles(plugName, inputMainJs, outputMainjs);
+
+      const inputPackageJson = path.join(pluginPackagesPath, folder.name, 'package.json');
+      const outputPackageJson = path.join(plugName, 'package.json');
+      console.log(`Copying "${inputPackageJson}" to "${outputPackageJson}".`);
+      fs.copyFileSync(inputPackageJson, outputPackageJson);
     });
     return folders.length !== 0;
   }
