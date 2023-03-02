@@ -72,6 +72,9 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
               </div>
             </div>
           </div>

@@ -430,20 +430,13 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       return this._class().apiEndpoint.patch(...args);
     }
 
-    async getAuthorization(verb: string, reqResourseAttrs?: AuthRequestResourceAttrs) {
+    static async getAuthorization(verb: string, reqResourseAttrs?: AuthRequestResourceAttrs) {
       const resourceAttrs: AuthRequestResourceAttrs & {
-        name: string;
         verb: string;
       } = {
-        name: this.getName(),
         verb,
         ...reqResourseAttrs,
       };
-
-      const namespace = this.getNamespace();
-      if (!resourceAttrs.namespace && !!namespace) {
-        resourceAttrs['namespace'] = namespace;
-      }
 
       if (!resourceAttrs.resource) {
         resourceAttrs['resource'] = this.pluralName;
@@ -473,6 +466,24 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
           }
         }
       }
+    }
+
+    async getAuthorization(verb: string, reqResourseAttrs?: AuthRequestResourceAttrs) {
+      const resourceAttrs: AuthRequestResourceAttrs & {
+        name: string;
+        verb: string;
+      } = {
+        name: this.getName(),
+        verb,
+        ...reqResourseAttrs,
+      };
+
+      const namespace = this.getNamespace();
+      if (!resourceAttrs.namespace && !!namespace) {
+        resourceAttrs['namespace'] = namespace;
+      }
+
+      return this._class().getAuthorization(verb, resourceAttrs);
     }
 
     static getErrorMessage(err: ApiError | null) {

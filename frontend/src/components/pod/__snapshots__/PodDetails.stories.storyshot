@@ -78,6 +78,9 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
               </div>
             </div>
           </div>
@@ -943,6 +946,9 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
               </div>
             </div>
           </div>
@@ -1777,6 +1783,9 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
               <div
                 class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
               >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -2755,6 +2764,9 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
               </div>
             </div>
           </div>
@@ -3572,6 +3584,9 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
               <div
                 class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
               >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />
@@ -4441,6 +4456,9 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
               <div
                 class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
               >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
                 <div
                   class="MuiGrid-root MuiGrid-item"
                 />

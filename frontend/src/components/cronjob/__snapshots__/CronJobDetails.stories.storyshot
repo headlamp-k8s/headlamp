@@ -66,6 +66,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
           <div
             class="MuiGrid-root MuiGrid-item"
           />
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          />
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          />
         </div>
       </div>
     </div>
@@ -476,6 +482,12 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
         <div
           class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
         >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          />
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          />
           <div
             class="MuiGrid-root MuiGrid-item"
           />

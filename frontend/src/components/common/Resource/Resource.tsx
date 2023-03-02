@@ -45,6 +45,7 @@ import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import { MetadataDictGrid, MetadataDisplay } from './MetadataDisplay';
 import PortForward from './PortForward';
+import { RestartButton } from './RestartButton';
 import ScaleButton from './ScaleButton';
 
 export interface ResourceLinkProps extends Omit<LinkProps, 'routeName' | 'params'> {
@@ -129,6 +130,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
       (function defaultActions() {
         return !noDefaultActions && resource
           ? [
+              <RestartButton item={resource} />,
               <ScaleButton item={resource} />,
               <EditButton item={resource} />,
               <DeleteButton item={resource} />,
