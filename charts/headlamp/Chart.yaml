@@ -11,7 +11,7 @@ keywords:
   - headlamp
 sources:
   - https://github.com/headlamp-k8s/headlamp
-  - https://kinvolk.io/
+  - https://headlamp.dev/
 maintainers:
   - name: kinvolk
     url: https://kinvolk.io/

@@ -23,7 +23,7 @@ $ helm install my-headlamp headlamp/headlamp --namespace kube-system
 ## Source Code
 
 * <https://github.com/headlamp-k8s/headlamp>
-* <https://kinvolk.io/>
+* <https://headlamp.dev/>
 
 ### Headlamp parameters
 

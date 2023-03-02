@@ -38,7 +38,7 @@ make docs
 
 The API output mardown is generated in docs/development/api and is not 
 committed to git, but is shown on the website at
-[headlamp/latest/development/api](https://kinvolk.io/docs/headlamp/latest/development/api/)
+[headlamp/latest/development/api](https://headlamp.dev/docs/latest/development/api/)
 
 
 ## Storybook
