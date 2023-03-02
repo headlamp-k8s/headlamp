@@ -24,11 +24,13 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { useClustersConf } from '../../lib/k8s';
 import { Cluster } from '../../lib/k8s/cluster';
+import { createRouteURL } from '../../lib/router';
 import { getThemeName } from '../../lib/themes';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { setVersionDialogOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { EmptyContent } from '../common';
+import ActionButton from '../common/ActionButton';
 import { DialogTitle } from '../common/Dialog';
 import ErrorBoundary from '../common/ErrorBoundary';
 import Loader from '../common/Loader';
@@ -257,6 +259,7 @@ interface ClusterDialogProps extends PropsWithChildren<Omit<DialogProps, 'open' 
   open?: boolean;
   onClose?: (() => void) | null;
   useCover?: boolean;
+  showInfoButton?: boolean;
 }
 
 export function ClusterDialog(props: ClusterDialogProps) {
@@ -264,7 +267,14 @@ export function ClusterDialog(props: ClusterDialogProps) {
   const theme = useTheme();
   const { t } = useTranslation('cluster');
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const { open, onClose = null, useCover = false, children = [], ...otherProps } = props;
+  const {
+    open,
+    onClose = null,
+    useCover = false,
+    showInfoButton = true,
+    children = [],
+    ...otherProps
+  } = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
   const dispatch = useDispatch();
@@ -295,19 +305,21 @@ export function ClusterDialog(props: ClusterDialogProps) {
         className={classes.chooserTitle}
         disableTypography
         buttons={[
-          <IconButton
-            aria-label={t('Show build information')}
-            onClick={() => {
-              handleClose();
-              dispatch(setVersionDialogOpen(true));
-            }}
-            size="small"
-          >
-            <InlineIcon
-              icon={'mdi:information-outline'}
-              color={theme.palette.primary.contrastText}
-            />
-          </IconButton>,
+          showInfoButton && (
+            <IconButton
+              aria-label={t('Show build information')}
+              onClick={() => {
+                handleClose();
+                dispatch(setVersionDialogOpen(true));
+              }}
+              size="small"
+            >
+              <InlineIcon
+                icon={'mdi:information-outline'}
+                color={theme.palette.primary.contrastText}
+              />
+            </IconButton>
+          ),
         ]}
       >
         <ErrorBoundary>
@@ -434,6 +446,15 @@ function Chooser(props: ClusterDialogProps) {
         ) : (
           <ClusterList clusters={clusterList} onButtonClick={handleButtonClick} />
         )}
+        {helpers.isElectron() ? (
+          <Box style={{ justifyContent: 'center', display: 'flex' }}>
+            <ActionButton
+              description={t('Load from a file')}
+              onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+              icon="mdi:plus"
+            />
+          </Box>
+        ) : null}
         {React.Children.toArray(children).length > 0 && (
           <DialogActions>
             <Grid container direction="row" justifyContent="space-between" alignItems="center">
