@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
 export interface ReleaseNotesModalProps {
-  releaseNotes?: string;
+  releaseNotes: string;
   appVersion: string | null;
 }
 
@@ -28,6 +28,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
     minWidth: '50%',
     minHeight: '50%',
     overflow: 'auto',
+    maxWidth: '80%',
   };
 
   return (
@@ -50,7 +51,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
           className="markdown-body"
           style={{ color: theme.palette.text.primary, fontFamily: 'inherit' }}
         >
-          {releaseNotes && <ReactMarkdown>{releaseNotes}</ReactMarkdown>}
+          <ReactMarkdown>{releaseNotes}</ReactMarkdown>
         </Box>
       </Paper>
     </Modal>
