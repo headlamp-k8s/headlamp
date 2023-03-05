@@ -101,7 +101,7 @@ export default function Sidebar() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const items = React.useMemo(
     () => (isSpecialSidebarOpen ? specialSidebarOptions : prepareRoutes(t)),
-    [sidebar.entries, i18n.language, arePluginsLoaded, isSpecialSidebarOpen]
+    [sidebar.entries, sidebar.filters, i18n.language, arePluginsLoaded, isSpecialSidebarOpen]
   );
   const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
 
