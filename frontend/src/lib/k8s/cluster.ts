@@ -1,8 +1,9 @@
 import { OpPatch } from 'json-patch';
 import { unset } from 'lodash';
 import React from 'react';
+import helpers from '../../helpers';
 import { createRouteURL } from '../router';
-import { timeAgo, useErrorState } from '../util';
+import { getCluster, timeAgo, useErrorState } from '../util';
 import { useConnectApi } from '.';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import CronJob from './cronJob';
@@ -12,6 +13,18 @@ import { KubeEvent } from './event';
 import Job from './job';
 import ReplicaSet from './replicaSet';
 import StatefulSet from './statefulSet';
+
+export const HEADLAMP_ALLOWED_NAMESPACES = 'headlamp.allowed-namespaces';
+
+function getAllowedNamespaces() {
+  const cluster = getCluster();
+  if (!cluster) {
+    return [];
+  }
+
+  const clusterSettings = helpers.loadClusterSettings(cluster);
+  return clusterSettings.allowedNamespaces || [];
+}
 
 export interface Cluster {
   name: string;
@@ -235,28 +248,27 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       const listCallback = onList as (arg: U[]) => void;
 
       function onObjs(namespace: string, objList: U[]) {
-        if (objList.length > 0) {
-          let newObjs: typeof objs = {};
-          // Set the objects so we have them for the next API response...
-          setObjs(previousObjs => {
-            newObjs = { ...previousObjs, [namespace || '']: objList };
-            return newObjs;
-          });
+        let newObjs: typeof objs = {};
+        // Set the objects so we have them for the next API response...
+        setObjs(previousObjs => {
+          newObjs = { ...previousObjs, [namespace || '']: objList };
+          return newObjs;
+        });
 
-          let allObjs: U[] = [];
-          Object.values(newObjs).map(currentObjs => {
-            allObjs = allObjs.concat(currentObjs);
-          });
+        let allObjs: U[] = [];
+        Object.values(newObjs).map(currentObjs => {
+          allObjs = allObjs.concat(currentObjs);
+        });
 
-          listCallback(allObjs);
-        }
+        listCallback(allObjs);
       }
 
       const listCalls = [];
       const queryParams = opts;
+      let namespaces: string[] = [];
       unset(queryParams, 'namespace');
+
       if (!!opts?.namespace) {
-        let namespaces: string[] = [];
         if (typeof opts.namespace === 'string') {
           namespaces = [opts.namespace];
         } else if (Array.isArray(opts.namespace)) {
@@ -264,7 +276,17 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         } else {
           throw Error('namespace should be a string or array of strings');
         }
+      }
 
+      // If the request itself has no namespaces set, we check whether to apply the
+      // allowed namespaces.
+      if (namespaces.length === 0 && this.isNamespaced) {
+        namespaces = getAllowedNamespaces();
+      }
+
+      if (namespaces.length > 0) {
+        // If we have a namespace set, then we have to make an API call for each
+        // namespace and then set the objects once we have all of the responses.
         for (const namespace of namespaces) {
           listCalls.push(
             this.apiList(objList => onObjs(namespace, objList as U[]), onError, {
