@@ -110,7 +110,7 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
       return '…';
     }
     const percentage = ((podsReady.length / items.length) * 100).toFixed(1);
-    return `${percentage} %`;
+    return `${items.length === 0 ? 0 : percentage} %`;
   }
 
   function getData() {
