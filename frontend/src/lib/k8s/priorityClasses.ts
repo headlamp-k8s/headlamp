@@ -1,4 +1,4 @@
-import { apiFactoryWithNamespace } from './apiProxy';
+import { apiFactory } from './apiProxy';
 import { KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubePriorityClasses extends KubeObjectInterface {
@@ -9,7 +9,7 @@ export interface KubePriorityClasses extends KubeObjectInterface {
 }
 
 class PriorityClasses extends makeKubeObject<KubePriorityClasses>('priorityClass') {
-  static apiEndpoint = apiFactoryWithNamespace('scheduling.k8s.io', 'v1', 'priorityclasses');
+  static apiEndpoint = apiFactory('scheduling.k8s.io', 'v1', 'priorityclasses');
 
   static get pluralName(): string {
     return 'priorityclasses';
