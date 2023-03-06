@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { getToken, setToken } from '../../lib/auth';
 import { useCluster, useClustersConf } from '../../lib/k8s';
+import { createRouteURL } from '../../lib/router';
 import {
   HeaderActionType,
   setVersionDialogOpen,
@@ -201,6 +202,7 @@ export function PureTopBar({
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const openSideBar = !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
 
@@ -252,7 +254,6 @@ export function PureTopBar({
           handleMenuClose();
         }}
         disabled={!hasToken}
-        dense
       >
         <ListItemIcon>
           <Icon icon="mdi:logout" />
@@ -262,12 +263,25 @@ export function PureTopBar({
       <MenuItem
         component="a"
         onClick={() => {
+          history.push(createRouteURL('settingsCluster', { cluster: cluster! }));
+          handleMenuClose();
+        }}
+      >
+        <ListItemIcon>
+          <Icon icon="mdi:cog-box" />
+        </ListItemIcon>
+        <ListItemText>{t('settings|Cluster settings')}</ListItemText>
+      </MenuItem>
+      <MenuItem
+        component="a"
+        onClick={() => {
           dispatch(setVersionDialogOpen(true));
           handleMenuClose();
         }}
-        dense
-        className={classes.versionLink}
       >
+        <ListItemIcon>
+          <Icon icon="mdi:information-outline" />
+        </ListItemIcon>
         <ListItemText>
           {helpers.getProductName()} {helpers.getVersion()['VERSION']}
         </ListItemText>

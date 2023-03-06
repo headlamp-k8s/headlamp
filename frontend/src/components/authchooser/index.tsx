@@ -11,7 +11,7 @@ import { createRouteURL, getRoute, getRoutePath } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { setConfig } from '../../redux/actions/actions';
 import { ClusterDialog } from '../cluster/Chooser';
-import { Loader } from '../common';
+import { Link, Loader } from '../common';
 import { DialogTitle } from '../common/Dialog';
 import Empty from '../common/EmptyContent';
 import OauthPopup from '../oidcauth/OauthPopup';
@@ -151,6 +151,7 @@ function AuthChooser({ children }: AuthChooserProps) {
 
   return (
     <PureAuthChooser
+      clusterName={clusterName}
       testingTitle={
         numClusters > 1
           ? t('Getting auth info: {{ clusterName }}', { clusterName })
@@ -203,6 +204,7 @@ export interface PureAuthChooserProps {
   handleTryAgain: () => void;
   handleBackButtonPress: () => void;
   children?: React.ReactNode;
+  clusterName: string;
 }
 
 export function PureAuthChooser({
@@ -218,6 +220,7 @@ export function PureAuthChooser({
   handleTryAgain,
   handleBackButtonPress,
   children,
+  clusterName,
 }: PureAuthChooserProps) {
   const { t } = useTranslation('auth');
 
@@ -270,6 +273,9 @@ export function PureAuthChooser({
                         errorMessage: error!.message,
                       })}
                 </Empty>
+                <Link routeName="settingsCluster" params={{ clusterID: clusterName }}>
+                  {t('settings|Cluster settings')}
+                </Link>
               </Box>
               <ColorButton onClick={handleTryAgain}>{t('frequent|Try Again')}</ColorButton>
             </Box>

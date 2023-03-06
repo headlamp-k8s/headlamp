@@ -1,0 +1,267 @@
+import { Icon, InlineIcon } from '@iconify/react';
+import { Box, Chip, IconButton, TextField } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import helpers, { ClusterSettings as ClusterSettingsType } from '../../../helpers';
+import { useCluster, useClustersConf } from '../../../lib/k8s';
+import { Link, NameValueTable, SectionBox, SimpleTable } from '../../common';
+
+export function ClustersSettings() {
+  const clusterConf = useClustersConf();
+  const { t } = useTranslation(['settings', 'frequent']);
+
+  return (
+    <SectionBox title="Cluster Settings">
+      <SimpleTable
+        columns={[
+          {
+            label: t('frequent|Name'),
+            getter: cluster => (
+              <Link routeName="settingsCluster" params={{ cluster: cluster.name }}>
+                {cluster.name}
+              </Link>
+            ),
+          },
+          {
+            label: t('frequent|Server'),
+            datum: 'server',
+          },
+        ]}
+        data={Object.values(clusterConf || {})}
+      />
+    </SectionBox>
+  );
+}
+
+const useStyles = makeStyles(theme => ({
+  chipBox: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(0.5),
+    },
+    marginTop: theme.spacing(1),
+  },
+  input: {
+    maxWidth: 250,
+  },
+}));
+
+function isValidNamespaceFormat(namespace: string) {
+  // We allow empty strings just because that's the default value in our case.
+  if (!namespace) {
+    return true;
+  }
+
+  // Validates that the namespace is a valid DNS-1123 label and returns a boolean.
+  // https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-label-names
+  const regex = new RegExp('^[a-z0-9]([-a-z0-9]*[a-z0-9])?$');
+  return regex.test(namespace);
+}
+
+export function ClusterSettings() {
+  const cluster = useCluster();
+  const clusterConf = useClustersConf();
+  const { t } = useTranslation(['settings', 'frequent', 'cluster']);
+  const [defaultNamespace, setDefaultNamespace] = React.useState('');
+  const [newAllowedNamespace, setNewAllowedNamespace] = React.useState('');
+  const [clusterSettings, setClusterSettings] = React.useState<ClusterSettingsType | null>(null);
+  const classes = useStyles();
+  const theme = useTheme();
+
+  React.useEffect(() => {
+    setClusterSettings(!!cluster ? helpers.loadClusterSettings(cluster || '') : null);
+  }, [cluster]);
+
+  React.useEffect(() => {
+    if (clusterSettings?.defaultNamespace !== defaultNamespace) {
+      setDefaultNamespace(clusterSettings?.defaultNamespace || '');
+    }
+
+    // Avoid re-initializing settings as {} just because the cluster is not yet set.
+    if (clusterSettings !== null) {
+      helpers.storeClusterSettings(cluster || '', clusterSettings);
+    }
+  }, [cluster, clusterSettings]);
+
+  React.useEffect(() => {
+    let timeoutHandle: NodeJS.Timeout | null = null;
+
+    if (isEditingDefaultNamespace()) {
+      // We store the namespace after a timeout.
+      timeoutHandle = setTimeout(() => {
+        if (isValidNamespaceFormat(defaultNamespace)) {
+          storeNewDefaultNamespace(defaultNamespace);
+        }
+      }, 1000);
+    }
+
+    return () => {
+      if (timeoutHandle) {
+        clearTimeout(timeoutHandle);
+        timeoutHandle = null;
+      }
+    };
+  }, [defaultNamespace]);
+
+  function isEditingDefaultNamespace() {
+    return clusterSettings?.defaultNamespace !== defaultNamespace;
+  }
+
+  if (!cluster) {
+    return null;
+  }
+
+  function storeNewAllowedNamespace(namespace: string) {
+    setNewAllowedNamespace('');
+    setClusterSettings((settings: ClusterSettingsType | null) => {
+      const newSettings = { ...(settings || {}) };
+      newSettings.allowedNamespaces = newSettings.allowedNamespaces || [];
+      newSettings.allowedNamespaces.push(namespace);
+      // Sort and avoid duplicates
+      newSettings.allowedNamespaces = [...new Set(newSettings.allowedNamespaces)].sort();
+      return newSettings;
+    });
+  }
+
+  function storeNewDefaultNamespace(namespace: string) {
+    let actualNamespace = namespace;
+    if (namespace === 'default') {
+      actualNamespace = '';
+      setDefaultNamespace(actualNamespace);
+    }
+
+    setClusterSettings((settings: ClusterSettingsType | null) => {
+      const newSettings = { ...(settings || {}) };
+      if (isValidNamespaceFormat(namespace)) {
+        newSettings.defaultNamespace = actualNamespace;
+      }
+      return newSettings;
+    });
+  }
+
+  const isValidDefaultNamespace = isValidNamespaceFormat(defaultNamespace);
+  const isValidNewAllowedNamespace = isValidNamespaceFormat(newAllowedNamespace);
+  const invalidNamespaceMessage = t(
+    "cluster|Namespaces must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character."
+  );
+
+  return (
+    <SectionBox
+      title={
+        Object.keys(clusterConf || {}).length > 1
+          ? t('settings|Cluster Settings ({{ clusterName }})', { clusterName: cluster || '' })
+          : t('settings|Cluster Settings')
+      }
+      backLink
+    >
+      <NameValueTable
+        rows={[
+          {
+            name: t('cluster|Default namespace'),
+            value: (
+              <TextField
+                onChange={event => {
+                  let value = event.target.value;
+                  value = value.replace(' ', '');
+                  setDefaultNamespace(value);
+                }}
+                value={defaultNamespace}
+                placeholder="default"
+                error={!isValidDefaultNamespace}
+                helperText={
+                  isValidDefaultNamespace
+                    ? t(
+                        'cluster|The default namespace for e.g. when applying resources (when not specified directly).'
+                      )
+                    : invalidNamespaceMessage
+                }
+                InputProps={{
+                  endAdornment: isEditingDefaultNamespace() ? (
+                    <Icon
+                      width={24}
+                      color={theme.palette.text.secondary}
+                      icon="mdi:progress-check"
+                    />
+                  ) : (
+                    <Icon width={24} icon="mdi:check-bold" />
+                  ),
+                  className: classes.input,
+                }}
+              />
+            ),
+          },
+          {
+            name: t('cluster|Allowed namespaces'),
+            value: (
+              <>
+                <TextField
+                  onChange={event => {
+                    let value = event.target.value;
+                    value = value.replace(' ', '');
+                    setNewAllowedNamespace(value);
+                  }}
+                  placeholder="namespace"
+                  error={!isValidNewAllowedNamespace}
+                  value={newAllowedNamespace}
+                  helperText={
+                    isValidNewAllowedNamespace
+                      ? t(
+                          'cluster|The list of namespaces you are allowed to access in this cluster.'
+                        )
+                      : invalidNamespaceMessage
+                  }
+                  autoComplete="off"
+                  inputProps={{
+                    form: {
+                      autocomplete: 'off',
+                    },
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton
+                        onClick={() => {
+                          storeNewAllowedNamespace(newAllowedNamespace);
+                        }}
+                        disabled={!newAllowedNamespace}
+                      >
+                        <InlineIcon icon="mdi:plus-circle" />
+                      </IconButton>
+                    ),
+                    onKeyPress: event => {
+                      if (event.key === 'Enter') {
+                        storeNewAllowedNamespace(newAllowedNamespace);
+                      }
+                    },
+                    autoComplete: 'off',
+                    className: classes.input,
+                  }}
+                />
+                <Box className={classes.chipBox} aria-label={t('cluster|Allowed namespaces')}>
+                  {((clusterSettings || {}).allowedNamespaces || []).map(namespace => (
+                    <Chip
+                      key={namespace}
+                      label={namespace}
+                      size="small"
+                      clickable={false}
+                      onDelete={() => {
+                        setClusterSettings(settings => {
+                          const newSettings = { ...settings };
+                          newSettings.allowedNamespaces = newSettings.allowedNamespaces?.filter(
+                            ns => ns !== namespace
+                          );
+                          return newSettings;
+                        });
+                      }}
+                    />
+                  ))}
+                </Box>
+              </>
+            ),
+          },
+        ]}
+      />
+    </SectionBox>
+  );
+}

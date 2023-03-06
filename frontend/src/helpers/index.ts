@@ -215,6 +215,26 @@ function loadNotifications(): Notification[] {
   return notifications.map((n: any) => Notification.fromJSON(n));
 }
 
+export interface ClusterSettings {
+  defaultNamespace?: string;
+  allowedNamespaces?: string[];
+}
+
+function storeClusterSettings(clusterName: string, settings: ClusterSettings) {
+  if (!clusterName) {
+    return;
+  }
+  localStorage.setItem(`cluster_settings.${clusterName}`, JSON.stringify(settings));
+}
+
+function loadClusterSettings(clusterName: string): ClusterSettings {
+  if (!clusterName) {
+    return {};
+  }
+  const settings = JSON.parse(localStorage.getItem(`cluster_settings.${clusterName}`) || '{}');
+  return settings;
+}
+
 const exportFunctions = {
   getBaseUrl,
   isDevMode,
@@ -232,6 +252,8 @@ const exportFunctions = {
   storeNotifications,
   loadNotifications,
   defaultMaxNotificationsStored,
+  storeClusterSettings,
+  loadClusterSettings,
 };
 
 export default exportFunctions;

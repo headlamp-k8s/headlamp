@@ -15,6 +15,7 @@ import { ApiError, testAuth } from '../../lib/k8s/apiProxy';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import { ClusterDialog } from '../cluster/Chooser';
 import { DialogTitle } from '../common/Dialog';
+import HeadlampLink from '../common/Link';
 
 export default function AuthToken() {
   const history = useHistory();
@@ -89,6 +90,7 @@ export function PureAuthToken({
   onCloseError,
 }: PureAuthTokenProps) {
   const { t } = useTranslation('auth');
+  const cluster = getCluster();
   const focusedRef = React.useCallback(node => {
     if (node !== null) {
       // node.setAttribute('tabindex', '-1');
@@ -135,6 +137,11 @@ export function PureAuthToken({
           </Box>
           <div style={{ flex: '1 0 0' }}></div>
         </DialogActions>
+        <Box overflow="hidden" textAlign="center">
+          <HeadlampLink routeName="settingsCluster" params={{ clusterID: cluster || '' }}>
+            {t('settings|Cluster settings')}
+          </HeadlampLink>
+        </Box>
         <DialogActions>
           {showActions && (
             <>
