@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"strings"
 	"testing"
 
@@ -279,4 +280,92 @@ func TestDynamicClustersKubeConfig(t *testing.T) {
 
 	assert.Equal(t, r.Code, http.StatusCreated)
 	assert.Equal(t, 2, len(c.getClusters()))
+}
+
+//nolint:funlen
+func TestExternalProxy(t *testing.T) {
+	// Create a new server for testing
+	proxyServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		_, err := w.Write([]byte("OK"))
+		if err != nil {
+			t.Fatal(err)
+		}
+	}))
+	defer proxyServer.Close()
+
+	type test struct {
+		handler             http.Handler
+		useForwardedHeaders bool
+		useNoProxyURL       bool
+		useProxyURL         bool
+	}
+
+	// get the proxyServer URL
+	proxyURL, err := url.Parse(proxyServer.URL)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	tests := []test{
+		{
+			handler: createHeadlampHandler(&HeadlampConfig{
+				useInCluster: false,
+				proxyURLs:    []string{proxyURL.String()},
+			}),
+			useForwardedHeaders: true,
+		},
+		{
+			handler: createHeadlampHandler(&HeadlampConfig{
+				useInCluster: false, proxyURLs: []string{},
+			}),
+			useNoProxyURL: true,
+		},
+		{
+			handler: createHeadlampHandler(&HeadlampConfig{
+				useInCluster: false,
+				proxyURLs:    []string{proxyURL.String()},
+			}),
+			useProxyURL: true,
+		},
+	}
+
+	for _, tc := range tests {
+		ctx := context.Background()
+
+		req, err := http.NewRequestWithContext(ctx, "GET", "/externalproxy", nil)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if tc.useForwardedHeaders {
+			// Test with Forward-to header
+			req.Header.Set("Forward-to", proxyURL.String())
+		} else if tc.useProxyURL || tc.useNoProxyURL {
+			// Test with proxy-to header
+			req.Header.Set("proxy-to", proxyURL.String())
+		}
+
+		rr := httptest.NewRecorder()
+		tc.handler.ServeHTTP(rr, req)
+
+		if tc.useNoProxyURL {
+			if status := rr.Code; status != http.StatusBadRequest {
+				t.Errorf("handler returned wrong status code: got %v want %v",
+					status, http.StatusBadRequest)
+			}
+
+			continue
+		}
+
+		if status := rr.Code; status != http.StatusOK {
+			t.Errorf("handler returned wrong status code: got %v want %v",
+				status, http.StatusOK)
+		}
+
+		if rr.Body.String() != "OK" {
+			t.Errorf("handler returned unexpected body: got %v want %v",
+				rr.Body.String(), "OK")
+		}
+	}
 }
