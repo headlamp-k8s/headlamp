@@ -703,8 +703,14 @@ function startElecron() {
 
   if (disableGPU) {
     log.info('Disabling GPU hardware acceleration. Reason: related flag is set.');
-  } else if (process.platform === 'linux' && ['arm64', 'arm'].includes(process.arch)) {
-    log.info('Disabling GPU hardware acceleration. Reason: known graphical issues in Linux on ARM.');
+  } else if (
+    disableGPU === undefined &&
+    process.platform === 'linux' &&
+    ['arm', 'arm64'].includes(process.arch)
+  ) {
+    log.info(
+      'Disabling GPU hardware acceleration. Reason: known graphical issues in Linux on ARM (use --disable-gpu=false to force it if needed).'
+    );
     disableGPU = true;
   }
 
