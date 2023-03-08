@@ -151,7 +151,7 @@ function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[
           );
         } else if (Action === null) {
           return null;
-        } else {
+        } else if (typeof Action === 'function') {
           return (
             <ErrorBoundary>
               <MenuItem>
@@ -174,7 +174,7 @@ function AppBarActions({ appBarActions }: { appBarActions: HeaderActionType[] })
           return <ErrorBoundary>{Action}</ErrorBoundary>;
         } else if (Action === null) {
           return null;
-        } else {
+        } else if (typeof Action === 'function') {
           return (
             <ErrorBoundary>
               <Action />

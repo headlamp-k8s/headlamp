@@ -48,6 +48,10 @@ export default function DeleteButton(props: DeleteButtonProps) {
     [item]
   );
 
+  if (!item) {
+    return null;
+  }
+
   return (
     <AuthVisible
       item={item}

@@ -6,10 +6,12 @@
 
 import { Headlamp, Plugin } from './lib';
 import Registry, {
+  DetailsViewDefaultHeaderActions,
   registerAppBarAction,
   registerAppLogo,
   registerClusterChooser,
   registerDetailsViewHeaderAction,
+  registerDetailsViewHeaderActionsProcessor,
   registerDetailsViewSection,
   registerGetTokenFunction,
   registerRoute,
@@ -54,6 +56,8 @@ window.pluginLib = {
   registerSidebarEntry,
   registerSidebarEntryFilter,
   registerGetTokenFunction,
+  registerDetailsViewHeaderActionsProcessor,
+  DetailsViewDefaultHeaderActions,
 };
 
 // @todo: should window.plugins be private?

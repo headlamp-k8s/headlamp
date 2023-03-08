@@ -1,9 +1,10 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
 import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
 import { AppLogoType } from '../../components/Sidebar/AppLogo';
+import { KubeObject } from '../../lib/k8s/cluster';
 import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import { UIState } from '../reducers/ui';
@@ -23,6 +24,8 @@ export const UI_SIDEBAR_SET_EXPANDED = 'UI_SIDEBAR_SET_EXPANDED';
 export const UI_ROUTER_SET_ROUTE = 'UI_ROUTER_SET_ROUTE';
 export const UI_ROUTER_SET_ROUTE_FILTER = 'UI_ROUTER_SET_ROUTE_FILTER';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
+export const UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR =
+  'UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR';
 export const UI_SET_DETAILS_VIEW = 'UI_SET_DETAILS_VIEW';
 export const UI_APP_BAR_SET_ACTION = 'UI_APP_BAR_SET_ACTION';
 export const UI_THEME_SET = 'UI_THEME_SET';
@@ -82,8 +85,31 @@ export interface Action {
 
 type SidebarType = UIState['sidebar'];
 
-export type HeaderActionType = ((...args: any[]) => JSX.Element | null) | null | ReactElement;
+export type HeaderActionType =
+  | ((...args: any[]) => JSX.Element | null | ReactNode)
+  | null
+  | ReactElement
+  | ReactNode;
 export type DetailsViewFunc = HeaderActionType;
+
+export type HeaderAction = {
+  id: string;
+  action?: HeaderActionType;
+};
+
+export enum DefaultHeaderAction {
+  RESTART = 'RESTART',
+  DELETE = 'DELETE',
+  EDIT = 'EDIT',
+  SCALE = 'SCALE',
+  POD_LOGS = 'POD_LOGS',
+  POD_TERMINAL = 'POD_TERMINAL',
+}
+
+export type HeaderActionsProcessor = {
+  id: string;
+  processor: (resource: KubeObject | null, actions: HeaderAction[]) => HeaderAction[];
+};
 
 export function setNamespaceFilter(namespaces: string[]) {
   return { type: FILTER_SET_NAMESPACE, namespaces: namespaces };
@@ -147,8 +173,29 @@ export function setRouteFilter(filterFunc: (entry: Route) => Route | null) {
   return { type: UI_ROUTER_SET_ROUTE_FILTER, filterFunc };
 }
 
-export function setDetailsViewHeaderAction(actionFunc: HeaderActionType) {
-  return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, action: actionFunc };
+export function setDetailsViewHeaderAction(action: HeaderActionType | HeaderAction) {
+  let headerAction = action as HeaderAction;
+  if (headerAction.id === undefined) {
+    if (headerAction.action === undefined) {
+      headerAction = { id: '', action: action as HeaderActionType };
+    } else {
+      headerAction = { id: '', action: headerAction.action };
+    }
+  }
+  return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, action: headerAction };
+}
+
+export function addDetailsViewHeaderActionsProcessor(
+  actionProcessor: HeaderActionsProcessor | HeaderActionsProcessor['processor']
+) {
+  let headerActionsProcessor = actionProcessor as HeaderActionsProcessor;
+  if (headerActionsProcessor.id === undefined && typeof actionProcessor === 'function') {
+    headerActionsProcessor = {
+      id: '',
+      processor: actionProcessor,
+    };
+  }
+  return { type: UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR, action: headerActionsProcessor };
 }
 
 export function setDetailsView(viewSection: DetailsViewSectionType) {
