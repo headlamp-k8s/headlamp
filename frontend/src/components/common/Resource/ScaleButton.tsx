@@ -66,7 +66,7 @@ export default function ScaleButton(props: ScaleButtonProps) {
     setOpenDialog(false);
   }
 
-  if (!['Deployment', 'StatefulSet', 'ReplicaSet'].includes(item.kind)) {
+  if (!item || !['Deployment', 'StatefulSet', 'ReplicaSet'].includes(item.kind)) {
     return null;
   }
 

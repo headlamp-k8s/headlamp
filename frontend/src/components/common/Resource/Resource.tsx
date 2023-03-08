@@ -26,6 +26,7 @@ import {
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
+import { DefaultHeaderAction, HeaderAction } from '../../../redux/actions/actions';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
 import Loader from '../../common/Loader';
@@ -77,7 +78,11 @@ export interface MainInfoSectionProps {
     | ((resource: KubeObject | null) => NameValueTableRow[] | null)
     | NameValueTableRow[]
     | null;
-  actions?: ((resource: KubeObject | null) => React.ReactNode[] | null) | React.ReactNode[] | null;
+  actions?:
+    | ((resource: KubeObject | null) => React.ReactNode[] | null)
+    | React.ReactNode[]
+    | null
+    | HeaderAction[];
   headerStyle?: HeaderStyleProps['headerStyle'];
   noDefaultActions?: boolean;
   /** The route or location to go to. If it's an empty string, then the "browser back" function is used. If null, no back button will be shown. */
@@ -98,45 +103,90 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     error = null,
   } = props;
   const headerActions = useTypedSelector(state => state.ui.views.details.headerActions);
+  const headerActionsProcessors = useTypedSelector(
+    state => state.ui.views.details.headerActionsProcessors
+  );
   const { t } = useTranslation('frequent');
   const header = typeof headerSection === 'function' ? headerSection(resource) : headerSection;
 
-  const allActions = (function stateActions() {
-    return React.Children.toArray(
-      headerActions.map(Action => {
-        if (isValidElement(Action)) {
-          return <ErrorBoundary>{Action}</ErrorBoundary>;
-        } else if (Action === null) {
-          return null;
-        } else {
-          return (
-            <ErrorBoundary>
-              <Action item={resource} />
-            </ErrorBoundary>
-          );
-        }
-      })
-    );
-  })()
-    .concat(
-      (function propsActions() {
-        return React.Children.toArray(
-          typeof actions === 'function' ? actions(resource) || [] : actions
-        );
-      })()
-    )
-    .concat(
-      (function defaultActions() {
-        return !noDefaultActions && resource
-          ? [
-              <RestartButton item={resource} />,
-              <ScaleButton item={resource} />,
-              <EditButton item={resource} />,
-              <DeleteButton item={resource} />,
-            ]
-          : [];
-      })()
-    );
+  function setupAction(headerAction: HeaderAction) {
+    let Action = headerAction.action;
+    if (!Action && !noDefaultActions) {
+      switch (headerAction.id) {
+        case DefaultHeaderAction.RESTART:
+          Action = RestartButton;
+          break;
+        case DefaultHeaderAction.SCALE:
+          Action = ScaleButton;
+          break;
+        case DefaultHeaderAction.EDIT:
+          Action = EditButton;
+          break;
+        case DefaultHeaderAction.DELETE:
+          Action = DeleteButton;
+          break;
+        default:
+          break;
+      }
+    }
+
+    if (!Action) {
+      return null;
+    }
+
+    if (isValidElement(Action)) {
+      return <ErrorBoundary>{Action}</ErrorBoundary>;
+    } else if (Action === null) {
+      return null;
+    } else if (typeof Action === 'function') {
+      return (
+        <ErrorBoundary>
+          <Action item={resource} />
+        </ErrorBoundary>
+      );
+    }
+  }
+
+  const defaultActions = [
+    {
+      id: DefaultHeaderAction.RESTART,
+    },
+    {
+      id: DefaultHeaderAction.SCALE,
+    },
+    {
+      id: DefaultHeaderAction.EDIT,
+    },
+    {
+      id: DefaultHeaderAction.DELETE,
+    },
+  ];
+
+  let hAccs: HeaderAction[] = [];
+  const accs = typeof actions === 'function' ? actions(resource) || [] : actions;
+  if (accs !== null) {
+    hAccs = [...accs].map((action, i) => {
+      if ((action as HeaderAction).id !== undefined) {
+        return action as HeaderAction;
+      } else {
+        return { id: `gen-${i}`, action: () => action };
+      }
+    });
+  }
+
+  let actionsProcessed = [...headerActions, ...hAccs, ...defaultActions];
+  if (headerActionsProcessors.length > 0) {
+    for (const headerProcessor of headerActionsProcessors) {
+      actionsProcessed = headerProcessor.processor(resource, actionsProcessed);
+    }
+  }
+
+  const allActions = React.Children.toArray(
+    (function propsActions() {
+      const pluginAddedActions = actionsProcessed.map(setupAction);
+      return React.Children.toArray(pluginAddedActions);
+    })()
+  );
 
   function getBackLink() {
     if (!!backLink || backLink === '') {

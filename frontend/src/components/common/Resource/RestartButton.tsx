@@ -64,7 +64,7 @@ export function RestartButton(props: RestartButtonProps) {
     );
   }
 
-  if (!['Deployment', 'StatefulSet', 'DaemonSet'].includes(item.kind)) {
+  if (!item || !['Deployment', 'StatefulSet', 'DaemonSet'].includes(item.kind)) {
     return null;
   }
 
