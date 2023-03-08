@@ -65,7 +65,7 @@
   "Resumed CronJob {{ newItemName }}.": "",
   "Failed to suspend CronJob {{ newItemName }}.": "",
   "Failed to resume CronJob {{ newItemName }}.": "",
-  "Loading port forwards": "Cargango redireccionamientos de puerto",
+  "Loading port forwarding": "Cargango redireccionamientos de puerto",
   "Pod Port": "Puerto del Pod",
   "Local Port": "Perto Local"
 }

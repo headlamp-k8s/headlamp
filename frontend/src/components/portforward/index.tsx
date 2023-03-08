@@ -57,7 +57,7 @@ export default function PortForwardingList() {
     const cluster = getCluster();
     if (!cluster) return;
 
-    // fetch port forwards
+    // fetch port forwarding list
     listPortForward(cluster).then(portforwards => {
       const massagedPortForwards = portforwards === null ? [] : portforwards;
       massagedPortForwards.forEach((portforward: any) => {
@@ -169,7 +169,7 @@ export default function PortForwardingList() {
 
   function prepareStatusLabel(portforward: any) {
     if (portForwardInAction?.id === portforward.id && portForwardInAction.loading) {
-      return <Loader noContainer title={t('resource|Loading port forwards')} size={30} />;
+      return <Loader noContainer title={t('resource|Loading port forwarding')} size={30} />;
     }
     const error = portforward.error;
     if (error) {
@@ -183,7 +183,7 @@ export default function PortForwardingList() {
   }
 
   return (
-    <SectionBox title={t('glossary|Port Forwards')}>
+    <SectionBox title={t('glossary|Port Forwarding')}>
       <SimpleTable
         columns={[
           {
