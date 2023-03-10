@@ -65,7 +65,7 @@
   "Resumed CronJob {{ newItemName }}.": "Resumed CronJob {{ newItemName }}.",
   "Failed to suspend CronJob {{ newItemName }}.": "Failed to suspend CronJob {{ newItemName }}.",
   "Failed to resume CronJob {{ newItemName }}.": "Failed to resume CronJob {{ newItemName }}.",
-  "Loading port forwards": "Loading port forwards",
+  "Loading port forwarding": "Loading port forwarding",
   "Pod Port": "Pod Port",
   "Local Port": "Local Port"
 }

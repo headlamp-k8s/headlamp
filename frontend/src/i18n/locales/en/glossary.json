@@ -92,7 +92,7 @@
   "Restarts": "Restarts",
   "{{ restarts }} ({{ abbrevTime }} ago)": "{{ restarts }} ({{ abbrevTime }} ago)",
   "Pod Disruption Budget": "Pod Disruption Budget",
-  "Port Forwards": "Port Forwards",
+  "Port Forwarding": "Port Forwarding",
   "PriorityClass": "PriorityClass",
   "Replica Sets": "Replica Sets",
   "Generation": "Generation",

@@ -97,7 +97,7 @@ function prepareRoutes(t: (arg: string) => string) {
         },
         {
           name: 'portforwards',
-          label: t('glossary|Port Forwards'),
+          label: t('glossary|Port Forwarding'),
           hide: !helpers.isElectron(),
         },
       ],
