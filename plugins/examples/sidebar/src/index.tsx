@@ -6,6 +6,7 @@ import {
 } from '@kinvolk/headlamp-plugin/lib';
 import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
 import Typography from '@material-ui/core/Typography';
+import React from 'react';
 
 // A top level item in the sidebar.
 // The sidebar link URL is: /c/mycluster/feedback
@@ -60,6 +61,14 @@ registerSidebarEntry({
   url: '/feedback4',
 });
 
+registerSidebarEntry({
+  parent: null,
+  name: 'nothing-to-see-here',
+  label: 'Click me and I will disappear',
+  url: '/feedback2',
+  icon: 'mdi:glasses',
+});
+
 // Add components and routes for the three different side bar items.
 // This component rendered at URL: /c/mycluster/feedback2
 registerRoute({
@@ -67,11 +76,18 @@ registerRoute({
   sidebar: 'feedback2',
   name: 'feedback2',
   exact: true,
-  component: () => (
-    <SectionBox title="Diff Feedback" textAlign="center" paddingTop={2}>
-      <Typography>Different feedback forms go here.</Typography>
-    </SectionBox>
-  ),
+  component: () => {
+    React.useEffect(() => {
+      // This filter removes the "Click me and I will disappear" sidebar entry.
+      registerSidebarEntryFilter(entry => (entry.name === 'nothing-to-see-here' ? null : entry));
+    }, []);
+
+    return (
+      <SectionBox title="Diff Feedback" textAlign="center" paddingTop={2}>
+        <Typography>Different feedback forms go here.</Typography>
+      </SectionBox>
+    );
+  },
 });
 
 // This component rendered at URL: /c/mycluster/feedback3
