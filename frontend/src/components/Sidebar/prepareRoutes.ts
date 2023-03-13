@@ -172,8 +172,7 @@ function prepareRoutes(t: (arg: string) => string) {
 
   const items = store.getState().ui.sidebar.entries;
   const filters = store.getState().ui.sidebar.filters;
-  // @todo: Find a better way to avoid modifying the objects in LIST_ITEMS.
-  const routes: SidebarItemProps[] = JSON.parse(JSON.stringify(LIST_ITEMS));
+  const routes: SidebarItemProps[] = _.cloneDeep(LIST_ITEMS);
 
   for (const i of Object.values(items)) {
     const item = _.cloneDeep(i);
