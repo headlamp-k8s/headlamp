@@ -149,7 +149,7 @@
     "i18next-parser": "^5.0.0",
     "jest": "^27.4.7",
     "mime-types": "^2.1.35",
-    "octokit": "^2.0.7",
+    "octokit": "^2.0.14",
     "typescript": "^4.4.3"
   },
   "dependencies": {
