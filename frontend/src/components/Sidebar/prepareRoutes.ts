@@ -150,6 +150,10 @@ function prepareRoutes(t: (arg: string) => string) {
           name: 'priorityClasses',
           label: t('glossary|Priority Classes'),
         },
+        {
+          name: 'leases',
+          label: t('glossary|Leases'),
+        },
       ],
     },
   ];
