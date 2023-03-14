@@ -158,6 +158,10 @@ function prepareRoutes(t: (arg: string) => string) {
           name: 'runtimeClasses',
           label: t('glossary|Runtime Classes'),
         },
+        {
+          name: 'limitRanges',
+          label: t('glossary|Limit Ranges'),
+        },
       ],
     },
   ];
