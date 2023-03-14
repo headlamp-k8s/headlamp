@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 import { CURRENT_LOCALES } from './i18n-helper';
-const i18nextBackend = require('i18next-node-fs-backend');
+const i18nextBackend = require('i18next-fs-backend');
 
 const en = {}; // To keep TS happy.
 
