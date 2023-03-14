@@ -25,6 +25,8 @@ import HpaList from '../components/horizontalPodAutoscaler/List';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import JobsList from '../components/job/List';
+import { LeaseDetails } from '../components/lease/Details';
+import { LeaseList } from '../components/lease/List';
 import NamespaceDetails from '../components/namespace/Details';
 import NamespacesList from '../components/namespace/List';
 import NodeDetails from '../components/node/Details';
@@ -467,6 +469,20 @@ const defaultRoutes: {
     name: 'Resource Quota',
     sidebar: 'resourceQuotas',
     component: () => <ResourceQuotaDetails />,
+  },
+  leases: {
+    path: '/leases',
+    exact: true,
+    name: 'Leases',
+    sidebar: 'leases',
+    component: () => <LeaseList />,
+  },
+  lease: {
+    path: '/leases/:namespace/:name',
+    exact: true,
+    name: 'Lease',
+    sidebar: 'leases',
+    component: () => <LeaseDetails />,
   },
   token: {
     path: '/token',
