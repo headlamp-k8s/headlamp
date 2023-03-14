@@ -154,6 +154,10 @@ function prepareRoutes(t: (arg: string) => string) {
           name: 'leases',
           label: t('glossary|Leases'),
         },
+        {
+          name: 'runtimeClasses',
+          label: t('glossary|Runtime Classes'),
+        },
       ],
     },
   ];

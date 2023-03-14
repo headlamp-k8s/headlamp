@@ -46,6 +46,8 @@ import RoleBindingDetails from '../components/role/BindingDetails';
 import RoleBindingList from '../components/role/BindingList';
 import RoleDetails from '../components/role/Details';
 import RoleList from '../components/role/List';
+import { RuntimeClassDetails } from '../components/runtimeClass/Details';
+import { RuntimeClassList } from '../components/runtimeClass/List';
 import SecretDetails from '../components/secret/Details';
 import SecretList from '../components/secret/List';
 import ServiceDetails from '../components/service/Details';
@@ -483,6 +485,20 @@ const defaultRoutes: {
     name: 'Lease',
     sidebar: 'leases',
     component: () => <LeaseDetails />,
+  },
+  runtimeClasses: {
+    path: '/runtimeclasses',
+    exact: true,
+    name: 'Runtime Classes',
+    sidebar: 'runtimeClasses',
+    component: () => <RuntimeClassList />,
+  },
+  runtimeClass: {
+    path: '/runtimeclasses/:name',
+    exact: true,
+    name: 'Runtime Class',
+    sidebar: 'runtimeClasses',
+    component: () => <RuntimeClassDetails />,
   },
   token: {
     path: '/token',
