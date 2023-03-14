@@ -23,6 +23,7 @@ const args = yargs
       })
       .option('disable-gpu', {
         describe: 'Disable use of GPU. For people who may have buggy graphics drivers',
+        type: 'boolean',
       })
       .positional('kubeconfig', {
         describe:
@@ -32,7 +33,7 @@ const args = yargs
   })
   .help().argv;
 const isHeadlessMode = args.headless;
-const disableGPU = args['disable-gpu'];
+let disableGPU = args['disable-gpu'];
 const defaultPort = 4466;
 
 const isDev = process.env.ELECTRON_DEV || false;
@@ -701,7 +702,19 @@ function startElecron() {
   }
 
   if (disableGPU) {
-    log.info('Disabling GPU hardware acceleration.');
+    log.info('Disabling GPU hardware acceleration. Reason: related flag is set.');
+  } else if (
+    disableGPU === undefined &&
+    process.platform === 'linux' &&
+    ['arm', 'arm64'].includes(process.arch)
+  ) {
+    log.info(
+      'Disabling GPU hardware acceleration. Reason: known graphical issues in Linux on ARM (use --disable-gpu=false to force it if needed).'
+    );
+    disableGPU = true;
+  }
+
+  if (disableGPU) {
     app.disableHardwareAcceleration();
   }
 
