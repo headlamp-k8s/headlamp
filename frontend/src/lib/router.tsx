@@ -3,6 +3,7 @@ import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import NotificationList from '../components/App/Notifications/List';
 import AppSettings, { SettingsButton } from '../components/App/settings';
+import { ClusterSettings, ClustersSettings } from '../components/App/settings/clusters';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
 import KubeConfigLoader from '../components/cluster/KubeConfigLoader';
@@ -532,6 +533,23 @@ const defaultRoutes: {
     useClusterURL: false,
     noAuthRequired: true,
     component: () => <AppSettings />,
+  },
+  settingsClusters: {
+    path: '/settings/clusters',
+    exact: true,
+    name: 'Clusters',
+    sidebar: 'settingsClusters',
+    useClusterURL: false,
+    noAuthRequired: true,
+    component: () => <ClustersSettings />,
+  },
+  settingsCluster: {
+    path: '/settings',
+    exact: true,
+    name: 'Cluster Settings',
+    sidebar: 'settingsCluster',
+    noAuthRequired: true,
+    component: () => <ClusterSettings />,
   },
   portforwards: {
     path: '/portforwards',

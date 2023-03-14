@@ -799,7 +799,15 @@ export async function apply(body: KubeObjectInterface): Promise<JSON> {
   if (!namespace) {
     const knownResource = ResourceClasses[body.kind];
     if (knownResource?.isNamespaced) {
-      bodyToApply.metadata.namespace = 'default';
+      let defaultNamespace = 'default';
+
+      const cluster = getCluster();
+      if (!!cluster) {
+        const clusterSettings = helpers.loadClusterSettings(cluster);
+        defaultNamespace = clusterSettings?.defaultNamespace || defaultNamespace;
+      }
+
+      bodyToApply.metadata.namespace = defaultNamespace;
     }
   }
 

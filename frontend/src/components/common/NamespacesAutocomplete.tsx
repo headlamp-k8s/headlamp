@@ -9,7 +9,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { addQuery } from '../../helpers';
+import helpers, { addQuery } from '../../helpers';
+import { useCluster } from '../../lib/k8s';
 import Namespace from '../../lib/k8s/namespace';
 import { setNamespaceFilter } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -105,22 +106,41 @@ export function NamespacesAutocomplete() {
   const location = useLocation();
   const dispatch = useDispatch();
   const filter = useTypedSelector(state => state.filter);
+  const cluster = useCluster();
   const [namespaceNames, setNamespaceNames] = React.useState<string[]>([]);
 
-  Namespace.useApiList((namespaces: Namespace[]) => {
-    setNamespaceNames(namespaces.map(namespace => namespace.metadata.name));
-  });
+  React.useEffect(() => {
+    const settings = helpers.loadClusterSettings(cluster || '');
+    const allowedNamespaces = settings?.allowedNamespaces || [];
+    if (allowedNamespaces.length > 0) {
+      setNamespaceNames(allowedNamespaces);
+    }
+  }, [cluster]);
 
   const onChange = (event: React.ChangeEvent<{}>, newValue: string[]) => {
     addQuery({ namespace: newValue.join(' ') }, { namespace: '' }, history, location, '');
     dispatch(setNamespaceFilter(newValue));
   };
 
-  return (
+  return namespaceNames.length > 0 ? (
     <PureNamespacesAutocomplete
       namespaceNames={namespaceNames}
       onChange={onChange}
       filter={filter}
     />
+  ) : (
+    <NamespacesFromClusterAutocomplete onChange={onChange} filter={filter} />
   );
+}
+
+function NamespacesFromClusterAutocomplete(
+  props: Omit<PureNamespacesAutocompleteProps, 'namespaceNames'>
+) {
+  const [namespaceNames, setNamespaceNames] = React.useState<string[]>([]);
+
+  Namespace.useApiList((namespaces: Namespace[]) => {
+    setNamespaceNames(namespaces.map(namespace => namespace.metadata.name));
+  });
+
+  return <PureNamespacesAutocomplete namespaceNames={namespaceNames} {...props} />;
 }

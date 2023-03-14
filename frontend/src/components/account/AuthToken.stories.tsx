@@ -1,15 +1,6 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { TestContext } from '../../test';
 import { PureAuthToken, PureAuthTokenProps } from './Auth';
-
-// eslint-disable-next-line no-unused-vars
-const store = createStore((state = { config: {}, ui: { notifications: [] } }, action) => state, {
-  config: {},
-  ui: {
-    notifications: [],
-  },
-});
 
 export default {
   title: 'AuthToken',
@@ -23,9 +14,9 @@ export default {
   decorators: [
     Story => {
       return (
-        <Provider store={store}>
+        <TestContext>
           <Story />
-        </Provider>
+        </TestContext>
       );
     },
   ],
