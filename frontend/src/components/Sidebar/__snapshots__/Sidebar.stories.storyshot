@@ -865,6 +865,72 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
                           />
                         </a>
                       </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Leases
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Runtime Classes
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Limit Ranges
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -1749,6 +1815,72 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
                               class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                             >
                               Priority Classes
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Leases
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Runtime Classes
+                            </span>
+                          </div>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          aria-disabled="false"
+                          class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                          href="/"
+                          role="button"
+                          tabindex="0"
+                        >
+                          <div
+                            class="MuiListItemText-root"
+                          >
+                            <span
+                              class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                            >
+                              Limit Ranges
                             </span>
                           </div>
                           <span
