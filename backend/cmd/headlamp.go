@@ -1213,13 +1213,25 @@ func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if c.contextProxies[name].source != DynamicCluster {
-		http.Error(w, "Cannot delete a static cluster", http.StatusForbidden)
+	delete(c.contextProxies, name)
+
+	kubeConfigPersistenceFile, err := defaultKubeConfigPersistenceFile()
+	if err != nil {
+		http.Error(w, "Error getting default kubeconfig persistence file", http.StatusInternalServerError)
 		return
 	}
 
-	delete(c.contextProxies, name)
-	fmt.Printf("Removed cluster \"%s\" proxy\n", name)
+	log.Println("Removing cluster from kubeconfig", name, kubeConfigPersistenceFile)
+
+	err = removeContextFromKubeConfigFile(name, kubeConfigPersistenceFile)
+	if err != nil {
+		log.Printf("Error removing cluster from kubeconfig: %v\n", err)
+		http.Error(w, "Error removing cluster from kubeconfig", http.StatusInternalServerError)
+
+		return
+	}
+
+	log.Printf("Removed cluster \"%s\" proxy\n", name)
 
 	c.getConfig(w, r)
 }
