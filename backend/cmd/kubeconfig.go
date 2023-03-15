@@ -195,15 +195,6 @@ func refreshHeadlampConfig(config *HeadlampConfig) {
 	}
 }
 
-func joinKubeConfigPaths(paths ...string) string {
-	delimiter := ":"
-	if runtime.GOOS == "windows" {
-		delimiter = ";"
-	}
-
-	return strings.Join(paths, delimiter)
-}
-
 func splitKubeConfigPath(path string) []string {
 	delimiter := ":"
 	if runtime.GOOS == "windows" {
