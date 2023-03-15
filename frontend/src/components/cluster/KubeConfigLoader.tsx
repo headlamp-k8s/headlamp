@@ -176,7 +176,7 @@ function KubeConfigLoader() {
             }
           })
           .catch(() => {
-            setError(t('cluster|Error setting up clusters, please upload a valid kubeconfig file'));
+            setError(t('cluster|Error setting up clusters, please load a valid kubeconfig file'));
           });
       }
       loadClusters();
@@ -201,7 +201,7 @@ function KubeConfigLoader() {
         const doc = yaml.load(data) as kubeconfig;
         setFileContent(doc);
       } catch (err) {
-        setError(t('cluster|Upload a valid kubeconfig'));
+        setError(t('cluster|Load a valid kubeconfig'));
         return;
       }
     };
