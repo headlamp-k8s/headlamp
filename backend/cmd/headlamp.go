@@ -109,6 +109,20 @@ const (
 	InCluster
 )
 
+// configSourceToString returns a string representation of the source of the config.
+func configSourceToString(source int) string {
+	switch source {
+	case KubeConfig:
+		return "kubeconfig"
+	case DynamicCluster:
+		return "dynamic_cluster"
+	case InCluster:
+		return "incluster"
+	default:
+		return "unknown"
+	}
+}
+
 type contextProxy struct {
 	context *Context
 	proxy   *httputil.ReverseProxy
@@ -973,6 +987,14 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 
 	for _, contextProxy := range c.contextProxies {
 		context := contextProxy.context
+
+		cluster := context.getCluster()
+		if cluster.Metadata == nil {
+			cluster.Metadata = make(map[string]interface{})
+		}
+
+		cluster.Metadata["source"] = configSourceToString(contextProxy.source)
+
 		clusters = append(clusters, *context.getCluster())
 	}
 
