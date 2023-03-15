@@ -39,6 +39,7 @@
   "Delete port forward": "",
   "Stop port forward": "",
   "No data to be shown.": "Aucune donnée à montrer.",
+  "Init Containers": "",
   "Current number of replicas: {{ numReplicas }}": "Nombre actuel de réplique(s) : {{ numReplicas }}",
   "Desired number of replicas:": "Nombre souhaité de réplique(s) :",
   "View YAML": "Voir YAML",
@@ -65,7 +66,7 @@
   "Resumed CronJob {{ newItemName }}.": "",
   "Failed to suspend CronJob {{ newItemName }}.": "",
   "Failed to resume CronJob {{ newItemName }}.": "",
-  "Loading port forwards": "",
+  "Loading port forwarding": "",
   "Pod Port": "",
   "Local Port": ""
 }

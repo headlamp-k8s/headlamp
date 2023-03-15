@@ -39,6 +39,7 @@
   "Delete port forward": "Eliminar redir. de porta",
   "Stop port forward": "Parar redir. de porta",
   "No data to be shown.": "Sem dados para mostrar.",
+  "Init Containers": "Containers de Inicialização",
   "Current number of replicas: {{ numReplicas }}": "Número atual de replicas: {{ numReplicas }}",
   "Desired number of replicas:": "Número desejado de replicas:",
   "View YAML": "Ver YAML",

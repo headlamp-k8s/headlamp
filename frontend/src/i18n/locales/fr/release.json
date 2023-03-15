@@ -1,4 +1,6 @@
 {
   "Release Notes ({{ appVersion }})": "Notes de version ({{ appVersion }})",
+  "Fetching release information…": "",
+  "Failed to fetch release information": "",
   "An update is available": "Une mise à jour est disponible"
 }
