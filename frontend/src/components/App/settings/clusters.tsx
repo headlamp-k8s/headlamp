@@ -3,9 +3,14 @@ import { Box, Chip, IconButton, TextField } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import helpers, { ClusterSettings as ClusterSettingsType } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
+import { deleteCluster } from '../../../lib/k8s/apiProxy';
+import { setConfig } from '../../../redux/actions/actions';
 import { Link, NameValueTable, SectionBox, SimpleTable } from '../../common';
+import ConfirmButton from '../../common/ConfirmButton';
 
 export function ClustersSettings() {
   const clusterConf = useClustersConf();
@@ -46,6 +51,14 @@ const useStyles = makeStyles(theme => ({
   input: {
     maxWidth: 250,
   },
+  blackButton: {
+    backgroundColor: theme.palette.sidebarBg,
+    color: theme.palette.primary.contrastText,
+    '&:hover': {
+      opacity: '0.8',
+      backgroundColor: theme.palette.sidebarBg,
+    },
+  },
 }));
 
 function isValidNamespaceFormat(namespace: string) {
@@ -69,6 +82,32 @@ export function ClusterSettings() {
   const [clusterSettings, setClusterSettings] = React.useState<ClusterSettingsType | null>(null);
   const classes = useStyles();
   const theme = useTheme();
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const removeCluster = () => {
+    deleteCluster(cluster || '')
+      .then(config => {
+        dispatch(setConfig(config));
+        history.push('/');
+      })
+      .catch((err: Error) => {
+        if (err.message === 'Not Found') {
+          // TODO: create notification with error message
+        }
+      });
+  };
+
+  // check if cluster was loaded by user
+  const removableCluster = React.useMemo(() => {
+    if (!cluster) {
+      return false;
+    }
+
+    const clusterInfo = (clusterConf && clusterConf[cluster]) || null;
+    return clusterInfo?.meta_data?.source === 'dynamic_cluster';
+  }, [cluster, clusterConf]);
 
   React.useEffect(() => {
     setClusterSettings(!!cluster ? helpers.loadClusterSettings(cluster || '') : null);
@@ -148,120 +187,137 @@ export function ClusterSettings() {
   );
 
   return (
-    <SectionBox
-      title={
-        Object.keys(clusterConf || {}).length > 1
-          ? t('settings|Cluster Settings ({{ clusterName }})', { clusterName: cluster || '' })
-          : t('settings|Cluster Settings')
-      }
-      backLink
-    >
-      <NameValueTable
-        rows={[
-          {
-            name: t('cluster|Default namespace'),
-            value: (
-              <TextField
-                onChange={event => {
-                  let value = event.target.value;
-                  value = value.replace(' ', '');
-                  setDefaultNamespace(value);
-                }}
-                value={defaultNamespace}
-                placeholder="default"
-                error={!isValidDefaultNamespace}
-                helperText={
-                  isValidDefaultNamespace
-                    ? t(
-                        'cluster|The default namespace for e.g. when applying resources (when not specified directly).'
-                      )
-                    : invalidNamespaceMessage
-                }
-                InputProps={{
-                  endAdornment: isEditingDefaultNamespace() ? (
-                    <Icon
-                      width={24}
-                      color={theme.palette.text.secondary}
-                      icon="mdi:progress-check"
-                    />
-                  ) : (
-                    <Icon width={24} icon="mdi:check-bold" />
-                  ),
-                  className: classes.input,
-                }}
-              />
-            ),
-          },
-          {
-            name: t('cluster|Allowed namespaces'),
-            value: (
-              <>
+    <>
+      <SectionBox
+        title={
+          Object.keys(clusterConf || {}).length > 1
+            ? t('settings|Cluster Settings ({{ clusterName }})', { clusterName: cluster || '' })
+            : t('settings|Cluster Settings')
+        }
+        backLink
+      >
+        <NameValueTable
+          rows={[
+            {
+              name: t('cluster|Default namespace'),
+              value: (
                 <TextField
                   onChange={event => {
                     let value = event.target.value;
                     value = value.replace(' ', '');
-                    setNewAllowedNamespace(value);
+                    setDefaultNamespace(value);
                   }}
-                  placeholder="namespace"
-                  error={!isValidNewAllowedNamespace}
-                  value={newAllowedNamespace}
+                  value={defaultNamespace}
+                  placeholder="default"
+                  error={!isValidDefaultNamespace}
                   helperText={
-                    isValidNewAllowedNamespace
+                    isValidDefaultNamespace
                       ? t(
-                          'cluster|The list of namespaces you are allowed to access in this cluster.'
+                          'cluster|The default namespace for e.g. when applying resources (when not specified directly).'
                         )
                       : invalidNamespaceMessage
                   }
-                  autoComplete="off"
-                  inputProps={{
-                    form: {
-                      autocomplete: 'off',
-                    },
-                  }}
                   InputProps={{
-                    endAdornment: (
-                      <IconButton
-                        onClick={() => {
-                          storeNewAllowedNamespace(newAllowedNamespace);
-                        }}
-                        disabled={!newAllowedNamespace}
-                      >
-                        <InlineIcon icon="mdi:plus-circle" />
-                      </IconButton>
+                    endAdornment: isEditingDefaultNamespace() ? (
+                      <Icon
+                        width={24}
+                        color={theme.palette.text.secondary}
+                        icon="mdi:progress-check"
+                      />
+                    ) : (
+                      <Icon width={24} icon="mdi:check-bold" />
                     ),
-                    onKeyPress: event => {
-                      if (event.key === 'Enter') {
-                        storeNewAllowedNamespace(newAllowedNamespace);
-                      }
-                    },
-                    autoComplete: 'off',
                     className: classes.input,
                   }}
                 />
-                <Box className={classes.chipBox} aria-label={t('cluster|Allowed namespaces')}>
-                  {((clusterSettings || {}).allowedNamespaces || []).map(namespace => (
-                    <Chip
-                      key={namespace}
-                      label={namespace}
-                      size="small"
-                      clickable={false}
-                      onDelete={() => {
-                        setClusterSettings(settings => {
-                          const newSettings = { ...settings };
-                          newSettings.allowedNamespaces = newSettings.allowedNamespaces?.filter(
-                            ns => ns !== namespace
-                          );
-                          return newSettings;
-                        });
-                      }}
-                    />
-                  ))}
-                </Box>
-              </>
-            ),
-          },
-        ]}
-      />
-    </SectionBox>
+              ),
+            },
+            {
+              name: t('cluster|Allowed namespaces'),
+              value: (
+                <>
+                  <TextField
+                    onChange={event => {
+                      let value = event.target.value;
+                      value = value.replace(' ', '');
+                      setNewAllowedNamespace(value);
+                    }}
+                    placeholder="namespace"
+                    error={!isValidNewAllowedNamespace}
+                    value={newAllowedNamespace}
+                    helperText={
+                      isValidNewAllowedNamespace
+                        ? t(
+                            'cluster|The list of namespaces you are allowed to access in this cluster.'
+                          )
+                        : invalidNamespaceMessage
+                    }
+                    autoComplete="off"
+                    inputProps={{
+                      form: {
+                        autocomplete: 'off',
+                      },
+                    }}
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton
+                          onClick={() => {
+                            storeNewAllowedNamespace(newAllowedNamespace);
+                          }}
+                          disabled={!newAllowedNamespace}
+                        >
+                          <InlineIcon icon="mdi:plus-circle" />
+                        </IconButton>
+                      ),
+                      onKeyPress: event => {
+                        if (event.key === 'Enter') {
+                          storeNewAllowedNamespace(newAllowedNamespace);
+                        }
+                      },
+                      autoComplete: 'off',
+                      className: classes.input,
+                    }}
+                  />
+                  <Box className={classes.chipBox} aria-label={t('cluster|Allowed namespaces')}>
+                    {((clusterSettings || {}).allowedNamespaces || []).map(namespace => (
+                      <Chip
+                        key={namespace}
+                        label={namespace}
+                        size="small"
+                        clickable={false}
+                        onDelete={() => {
+                          setClusterSettings(settings => {
+                            const newSettings = { ...settings };
+                            newSettings.allowedNamespaces = newSettings.allowedNamespaces?.filter(
+                              ns => ns !== namespace
+                            );
+                            return newSettings;
+                          });
+                        }}
+                      />
+                    ))}
+                  </Box>
+                </>
+              ),
+            },
+          ]}
+        />
+      </SectionBox>
+      {removableCluster && helpers.isElectron() && (
+        <Box pt={2} textAlign="right">
+          <ConfirmButton
+            color="secondary"
+            onConfirm={() => removeCluster()}
+            confirmTitle={t('cluster|Remove Cluster')}
+            confirmDescription={t(
+              'cluster|Are you sure you want to remove the cluster "{{ clusterName }}"?',
+              { clusterName: cluster }
+            )}
+          >
+            {t('cluster|Remove Cluster')}
+          </ConfirmButton>
+        </Box>
+      )}
+    </>
   );
 }

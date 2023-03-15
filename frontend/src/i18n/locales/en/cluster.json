@@ -24,5 +24,6 @@
   "Setting up cluster": "Setting up cluster",
   "Cluster setup successfully!": "Cluster setup successfully!",
   "Error setting up cluster, please upload a valid kubeconfig file": "Error setting up cluster, please upload a valid kubeconfig file",
-  "Load from KubeConfig": "Load from KubeConfig"
+  "Load from KubeConfig": "Load from KubeConfig",
+  "Remove cluster": "Remove cluster"
 }
