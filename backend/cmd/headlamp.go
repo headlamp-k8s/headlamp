@@ -20,6 +20,7 @@ import (
 	"os/user"
 	"path"
 	"path/filepath"
+	"runtime"
 	"strconv"
 	"strings"
 	"syscall"
@@ -43,19 +44,18 @@ import (
 )
 
 type HeadlampConfig struct {
-	useInCluster             bool
-	devMode                  bool
-	insecure                 bool
-	kubeConfigPath           string
-	kubeConfigPersistenceDir string
-	port                     uint
-	staticDir                string
-	pluginDir                string
-	oidcClientID             string
-	oidcClientSecret         string
-	oidcScopes               []string
-	oidcIdpIssuerURL         string
-	baseURL                  string
+	useInCluster     bool
+	devMode          bool
+	insecure         bool
+	kubeConfigPath   string
+	port             uint
+	staticDir        string
+	pluginDir        string
+	oidcClientID     string
+	oidcClientSecret string
+	oidcScopes       []string
+	oidcIdpIssuerURL string
+	baseURL          string
 	// Holds: context-name -> (context, reverse-proxy)
 	contextProxies map[string]contextProxy
 	proxyURLs      []string
@@ -108,6 +108,20 @@ const (
 	DynamicCluster
 	InCluster
 )
+
+// configSourceToString returns a string representation of the source of the config.
+func configSourceToString(source int) string {
+	switch source {
+	case KubeConfig:
+		return "kubeconfig"
+	case DynamicCluster:
+		return "dynamic_cluster"
+	case InCluster:
+		return "incluster"
+	default:
+		return "unknown"
+	}
+}
 
 type contextProxy struct {
 	context *Context
@@ -340,6 +354,45 @@ func setupProxyForContext(context *Context, config *HeadlampConfig, source int) 
 	return nil
 }
 
+// defaultKubeConfigPersistenceDir returns the default directory to store kubeconfig
+// files of clusters that are loaded in Headlamp.
+func defaultKubeConfigPersistenceDir() (string, error) {
+	userConfigDir, err := os.UserConfigDir()
+	if err == nil {
+		kubeConfigDir := filepath.Join(userConfigDir, "Headlamp", "kubeconfigs")
+		if runtime.GOOS == "windows" {
+			// golang is wrong for config folder on windows.
+			// This matches env-paths and headlamp-plugin.
+			kubeConfigDir = filepath.Join(userConfigDir, "Headlamp", "Config", "kubeconfigs")
+		}
+
+		// Create the directory if it doesn't exist.
+		fileMode := 0755
+
+		err = os.MkdirAll(kubeConfigDir, fs.FileMode(fileMode))
+		if err == nil {
+			return kubeConfigDir, nil
+		}
+	}
+
+	// if any error occurred, fallback to the current directory.
+	ex, err := os.Executable()
+	if err == nil {
+		return filepath.Dir(ex), nil
+	}
+
+	return "", fmt.Errorf("failed to get default kubeconfig persistence directory: %v", err)
+}
+
+func defaultKubeConfigPersistenceFile() (string, error) {
+	kubeConfigDir, err := defaultKubeConfigPersistenceDir()
+	if err != nil {
+		return "", err
+	}
+
+	return filepath.Join(kubeConfigDir, "config"), nil
+}
+
 //nolint:gocognit,funlen,gocyclo
 func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	kubeConfigPath := config.kubeConfigPath
@@ -376,9 +429,6 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		}
 	}
 
-	// KubeConfig clusters
-	contexts = append(contexts, getContextFromKubeConfigs(kubeConfigPath)...)
-
 	if config.staticDir != "" {
 		baseURLReplace(config.staticDir, config.baseURL)
 	}
@@ -395,6 +445,8 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	fmt.Println("*** Headlamp Server ***")
 	fmt.Println("  API Routers:")
 
+	// KubeConfig clusters
+	contexts = append(contexts, getContextFromKubeConfigs(kubeConfigPath)...)
 	if len(contexts) == 0 {
 		log.Println("No contexts/clusters configured by default!")
 	} else {
@@ -403,6 +455,30 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			err := setupProxyForContext(&context, config, KubeConfig)
 			if err != nil {
 				log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
+			}
+		}
+	}
+
+	// Dynamic clusters
+	var dynamicContexts []Context
+
+	kubeConfigPersistenceFile, err := defaultKubeConfigPersistenceFile()
+	if err != nil {
+		log.Printf("Error getting default kubeconfig persistence directory: %v", err)
+	}
+
+	if kubeConfigPersistenceFile != "" {
+		dynamicContexts = append(dynamicContexts, getContextFromKubeConfigs(kubeConfigPersistenceFile)...)
+
+		if len(contexts) == 0 {
+			log.Println("No contexts/clusters configured from config!")
+		} else {
+			for _, dynamicContext := range dynamicContexts {
+				context := dynamicContext
+				err := setupProxyForContext(&context, config, DynamicCluster)
+				if err != nil {
+					log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
+				}
 			}
 		}
 	}
@@ -911,6 +987,14 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 
 	for _, contextProxy := range c.contextProxies {
 		context := contextProxy.context
+
+		cluster := context.getCluster()
+		if cluster.Metadata == nil {
+			cluster.Metadata = make(map[string]interface{})
+		}
+
+		cluster.Metadata["source"] = configSourceToString(contextProxy.source)
+
 		clusters = append(clusters, *context.getCluster())
 	}
 
@@ -1050,7 +1134,12 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		err = writeKubeConfig(*config, c.kubeConfigPersistenceDir)
+		kubeConfigPersistenceDir, err := defaultKubeConfigPersistenceDir()
+		if err != nil {
+			http.Error(w, "Error getting default kubeconfig persistence dir", http.StatusInternalServerError)
+		}
+
+		err = writeKubeConfig(*config, kubeConfigPersistenceDir)
 		if err != nil {
 			http.Error(w, "Error writing kubeconfig", http.StatusBadRequest)
 			return
@@ -1124,13 +1213,25 @@ func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if c.contextProxies[name].source != DynamicCluster {
-		http.Error(w, "Cannot delete a static cluster", http.StatusForbidden)
+	delete(c.contextProxies, name)
+
+	kubeConfigPersistenceFile, err := defaultKubeConfigPersistenceFile()
+	if err != nil {
+		http.Error(w, "Error getting default kubeconfig persistence file", http.StatusInternalServerError)
 		return
 	}
 
-	delete(c.contextProxies, name)
-	fmt.Printf("Removed cluster \"%s\" proxy\n", name)
+	log.Println("Removing cluster from kubeconfig", name, kubeConfigPersistenceFile)
+
+	err = removeContextFromKubeConfigFile(name, kubeConfigPersistenceFile)
+	if err != nil {
+		log.Printf("Error removing cluster from kubeconfig: %v\n", err)
+		http.Error(w, "Error removing cluster from kubeconfig", http.StatusInternalServerError)
+
+		return
+	}
+
+	log.Printf("Removed cluster \"%s\" proxy\n", name)
 
 	c.getConfig(w, r)
 }

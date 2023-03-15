@@ -878,6 +878,10 @@ export async function setCluster(clusterReq: ClusterRequest) {
   );
 }
 
+export async function deleteCluster(cluster: string) {
+  return request(`/cluster/${cluster}`, { method: 'DELETE' }, false, false);
+}
+
 export function startPortForward(
   cluster: string,
   namespace: string,

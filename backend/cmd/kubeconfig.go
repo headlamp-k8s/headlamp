@@ -195,15 +195,6 @@ func refreshHeadlampConfig(config *HeadlampConfig) {
 	}
 }
 
-func joinKubeConfigPaths(paths ...string) string {
-	delimiter := ":"
-	if runtime.GOOS == "windows" {
-		delimiter = ";"
-	}
-
-	return strings.Join(paths, delimiter)
-}
-
 func splitKubeConfigPath(path string) []string {
 	delimiter := ":"
 	if runtime.GOOS == "windows" {
@@ -316,4 +307,57 @@ func writeKubeConfig(config clientcmdapi.Config, path string) error {
 	}
 
 	return clientcmd.WriteToFile(config, configFile)
+}
+
+// removeContextFromKubeConfigFile removes the given context and its related
+// cluster and user from the kubeconfig file.
+func removeContextFromKubeConfigFile(context string, path string) error {
+	config, err := clientcmd.LoadFromFile(path)
+	if err != nil {
+		return errors.Wrap(err, "failed to load kubeconfig file")
+	}
+
+	// remove the context from the config
+	contextConfig, ok := config.Contexts[context]
+	if !ok {
+		return errors.New("context not found in kubeconfig")
+	}
+
+	clusterToRemove := contextConfig.Cluster
+
+	userToRemove := contextConfig.AuthInfo
+
+	delete(config.Contexts, context)
+
+	// check if cluster is used in other contexts
+	clusterUsed := false
+
+	for _, contextConfig := range config.Contexts {
+		if contextConfig.Cluster == clusterToRemove {
+			clusterUsed = true
+			break
+		}
+	}
+
+	// remove the cluster from the config
+	if !clusterUsed {
+		delete(config.Clusters, clusterToRemove)
+	}
+
+	// check if user is used in other contexts
+	userUsed := false
+
+	for _, contextConfig := range config.Contexts {
+		if contextConfig.AuthInfo == userToRemove {
+			userUsed = true
+			break
+		}
+	}
+
+	// remove the user from the config
+	if !userUsed {
+		delete(config.AuthInfos, userToRemove)
+	}
+
+	return clientcmd.WriteToFile(*config, path)
 }
