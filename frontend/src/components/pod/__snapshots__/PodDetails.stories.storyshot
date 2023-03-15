@@ -1570,6 +1570,245 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
         </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Init Containers
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <div
+                  class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <div
+                      class="MuiBox-root MuiBox-root"
+                    >
+                      <h3
+                        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                      >
+                        init-myservice
+                      </h3>
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <table
+                  class="MuiTable-root makeStyles-table"
+                >
+                  <tbody
+                    class="MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image Pull Policy
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          Always
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          busybox
+                        </p>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Command
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          sh -c until nslookup myservice; do echo waiting for myservice; sleep 2; done;
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <div
+                  class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <div
+                      class="MuiBox-root MuiBox-root"
+                    >
+                      <h3
+                        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                      >
+                        init-mydb
+                      </h3>
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <table
+                  class="MuiTable-root makeStyles-table"
+                >
+                  <tbody
+                    class="MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image Pull Policy
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          Always
+                        </span>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Image
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          busybox
+                        </p>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <th
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
+                        role="cell"
+                        scope="row"
+                      >
+                        Command
+                      </th>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                        >
+                          sh -c until nslookup mydb; do echo waiting for mydb; sleep 2; done;
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div

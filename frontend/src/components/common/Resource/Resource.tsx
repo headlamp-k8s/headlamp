@@ -739,6 +739,10 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
     return containers;
   }
 
+  function getInitContainers() {
+    return resource?.spec?.initContainers || [];
+  }
+
   function getStatuses() {
     if (!resource || resource.kind !== 'Pod') {
       return {};
@@ -757,6 +761,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
   }
 
   const containers = getContainers();
+  const initContainers = getInitContainers();
   const statuses = getStatuses();
   const numContainers = containers.length;
 
@@ -780,6 +785,21 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
           ))
         )}
       </>
+
+      {initContainers.length > 0 && (
+        <>
+          <SectionBox title={t('resource|Init Containers')} />
+          {initContainers.map((initContainer: KubeContainer, i: number) => (
+            <SectionBox key={`init_container_${i}`} outterBoxProps={{ pt: 1 }}>
+              <ContainerInfo
+                resource={resource}
+                container={initContainer}
+                status={statuses[initContainer.name]}
+              />
+            </SectionBox>
+          ))}
+        </>
+      )}
     </>
   );
 }
