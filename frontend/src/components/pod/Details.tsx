@@ -288,6 +288,7 @@ export default function PodDetails(props: PodDetailsProps) {
   const [showLogs, setShowLogs] = React.useState(!!showLogsDefault);
   const [showTerminal, setShowTerminal] = React.useState(false);
   const { t } = useTranslation('glossary');
+  const [isAttached, setIsAttached] = React.useState(false);
 
   return (
     <DetailsGrid
@@ -311,6 +312,13 @@ export default function PodDetails(props: PodDetailsProps) {
                 onClick={() => setShowTerminal(true)}
               >
                 <Icon icon="mdi:console" />
+              </IconButton>
+            </Tooltip>
+          </AuthVisible>,
+          <AuthVisible item={item} authVerb="get" subresource="attach">
+            <Tooltip title={t('Attach') as string}>
+              <IconButton aria-label={t('attach') as string} onClick={() => setIsAttached(true)}>
+                <Icon icon="mdi:connection" />
               </IconButton>
             </Tooltip>
           </AuthVisible>,
@@ -356,9 +364,13 @@ export default function PodDetails(props: PodDetailsProps) {
             />
             <Terminal
               key="terminal"
-              open={showTerminal}
+              open={showTerminal || isAttached}
               item={item}
-              onClose={() => setShowTerminal(false)}
+              onClose={() => {
+                setShowTerminal(false);
+                setIsAttached(false);
+              }}
+              isAttach={isAttached}
             />
           </>
         )

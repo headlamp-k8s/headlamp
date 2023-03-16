@@ -96,6 +96,9 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                 />
                 <div
                   class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
                 >
                   <button
                     aria-label="View YAML"
