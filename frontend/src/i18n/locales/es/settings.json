@@ -1,4 +1,7 @@
 {
+  "Cluster settings": "Configuración del cluster",
+  "Cluster Settings ({{ clusterName }})": "Configuración del cluster ({{ clusterName }})",
+  "Cluster Settings": "Configuración del cluster",
   "Enter a value between {{ minRows }} and {{ maxRows }}.": "Introduzca un valor entre {{ minRows }} y {{ maxRows }}.",
   "Custom row value": "Núm. de líneas personalizado",
   "Number of rows for tables": "Núm. de líneas para las tablas",

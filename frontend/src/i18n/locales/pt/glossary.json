@@ -5,6 +5,7 @@
   "CPU": "CPU",
   "Pods": "Pods",
   "Events": "Eventos",
+  "Warnings": "Avisos",
   "Type": "Tipo",
   "Reason": "Razão",
   "Namespaces": "Namespaces",

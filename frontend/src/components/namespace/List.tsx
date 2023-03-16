@@ -10,7 +10,7 @@ import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
 
 export default function NamespacesList() {
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'frequent']);
   const cluster = useCluster();
   const [allowedNamespaces, setAllowedNamespaces] = React.useState<{ namespace: string }[]>([]);
   let renderResource = null;
@@ -32,7 +32,7 @@ export default function NamespacesList() {
       <SimpleTable
         columns={[
           {
-            label: t('Name'),
+            label: t('frequent|Name'),
             getter: ({ namespace }) => (
               <Link
                 routeName={'namespace'}
@@ -45,11 +45,11 @@ export default function NamespacesList() {
             ),
           },
           {
-            label: t('Status'),
+            label: t('frequent|Status'),
             getter: () => 'Unknown',
           },
           {
-            label: t('Age'),
+            label: t('frequent|Age'),
             getter: () => 'Unknown',
           },
         ]}
@@ -63,7 +63,7 @@ export default function NamespacesList() {
         columns={[
           'name',
           {
-            label: t('Status'),
+            label: t('frequent|Status'),
             getter: makeStatusLabel,
             sort: (namespace: Namespace) => namespace.status.phase,
           },
