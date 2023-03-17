@@ -10,6 +10,7 @@ import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 import Editor, { loader } from '@monaco-editor/react';
 import * as yaml from 'js-yaml';
+import * as monaco from 'monaco-editor';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
@@ -256,7 +257,9 @@ export default function EditorDialog(props: EditorDialogProps) {
   function makeEditor() {
     // @todo: monaco editor does not support pt, ta, hi amongst various other langs.
     if (['de', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh-cn', 'zh-tw'].includes(lang)) {
-      loader.config({ 'vs/nls': { availableLanguages: { '*': lang } } });
+      loader.config({ 'vs/nls': { availableLanguages: { '*': lang } }, monaco });
+    } else {
+      loader.config({ monaco });
     }
 
     return useSimpleEditor ? (
