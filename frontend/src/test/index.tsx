@@ -30,19 +30,20 @@ export function TestContext(props: TestContextProps) {
   }
 
   // override Event.objectEvents to return phony events array
-  Event.objectEvents = jest.fn().mockResolvedValue([
-    {
-      type: 'Normal',
-      reason: 'Created',
-      message: 'Created',
-      source: {
-        component: 'kubelet',
+  Event.objectEvents = () =>
+    Promise.resolve([
+      {
+        type: 'Normal',
+        reason: 'Created',
+        message: 'Created',
+        source: {
+          component: 'kubelet',
+        },
+        firstTimestamp: '2021-03-01T00:00:00Z',
+        lastTimestamp: '2021-03-01T00:00:00Z',
+        count: 1,
       },
-      firstTimestamp: '2021-03-01T00:00:00Z',
-      lastTimestamp: '2021-03-01T00:00:00Z',
-      count: 1,
-    },
-  ]);
+    ]);
 
   return (
     <Provider store={store || defaultStore}>
