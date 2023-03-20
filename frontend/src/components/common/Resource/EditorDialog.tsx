@@ -10,7 +10,6 @@ import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 import Editor, { loader } from '@monaco-editor/react';
 import * as yaml from 'js-yaml';
-import * as monaco from 'monaco-editor';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
@@ -21,6 +20,16 @@ import Loader from '../Loader';
 import Tabs from '../Tabs';
 import DocsViewer from './DocsViewer';
 import SimpleEditor from './SimpleEditor';
+
+// Jest does not work with esm modules and 'monaco-editor' properly
+// It says it can't find the module when running the tests.
+let monaco: any;
+if (process.env.NODE_ENV === 'test') {
+  monaco = require('monaco-editor/esm/vs/editor/editor.api.js');
+} else {
+  // const monaco = monacoEditor;
+  monaco = require('monaco-editor');
+}
 
 const useStyle = makeStyles(theme => ({
   dialogContent: {
