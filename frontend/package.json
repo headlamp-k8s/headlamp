@@ -175,7 +175,7 @@
       "text"
     ],
     "transformIgnorePatterns": [
-      "/node_modules/(?!d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference|spacetime)"
+      "/node_modules/(?!d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference|spacetime|monaco-editor.+|react-monaco-editor|@monaco-editor/react)"
     ],
     "resetMocks": false
   },

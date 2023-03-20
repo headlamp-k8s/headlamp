@@ -12,7 +12,7 @@ import Editor from '@monaco-editor/react';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _ from 'lodash';
-import * as monaco from 'monaco-editor';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import React, { isValidElement, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';

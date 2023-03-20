@@ -10,7 +10,7 @@ import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 import Editor, { loader } from '@monaco-editor/react';
 import * as yaml from 'js-yaml';
-import * as monaco from 'monaco-editor';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
