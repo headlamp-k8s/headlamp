@@ -104,6 +104,7 @@ export enum DefaultHeaderAction {
   SCALE = 'SCALE',
   POD_LOGS = 'POD_LOGS',
   POD_TERMINAL = 'POD_TERMINAL',
+  POD_ATTACH = 'POD_ATTACH',
 }
 
 export type HeaderActionsProcessor = {
