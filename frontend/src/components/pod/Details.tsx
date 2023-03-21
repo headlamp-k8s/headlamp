@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom';
 import { Terminal as XTerminal } from 'xterm';
 import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
+import { DefaultHeaderAction } from '../../redux/actions/actions';
 import { LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
@@ -298,30 +299,48 @@ export default function PodDetails(props: PodDetailsProps) {
       withEvents
       actions={item =>
         item && [
-          <AuthVisible item={item} authVerb="get" subresource="log">
-            <Tooltip title={t('Show Logs') as string}>
-              <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
-                <Icon icon="mdi:file-document-box-outline" />
-              </IconButton>
-            </Tooltip>
-          </AuthVisible>,
-          <AuthVisible item={item} authVerb="get" subresource="exec">
-            <Tooltip title={t('Terminal / Exec') as string}>
-              <IconButton
-                aria-label={t('terminal') as string}
-                onClick={() => setShowTerminal(true)}
-              >
-                <Icon icon="mdi:console" />
-              </IconButton>
-            </Tooltip>
-          </AuthVisible>,
-          <AuthVisible item={item} authVerb="get" subresource="attach">
-            <Tooltip title={t('Attach') as string}>
-              <IconButton aria-label={t('attach') as string} onClick={() => setIsAttached(true)}>
-                <Icon icon="mdi:connection" />
-              </IconButton>
-            </Tooltip>
-          </AuthVisible>,
+          {
+            id: DefaultHeaderAction.POD_LOGS,
+            action: (
+              <AuthVisible item={item} authVerb="get" subresource="log">
+                <Tooltip title={t('Show Logs') as string}>
+                  <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
+                    <Icon icon="mdi:file-document-box-outline" />
+                  </IconButton>
+                </Tooltip>
+              </AuthVisible>
+            ),
+          },
+          {
+            id: DefaultHeaderAction.POD_TERMINAL,
+            action: (
+              <AuthVisible item={item} authVerb="get" subresource="exec">
+                <Tooltip title={t('Terminal / Exec') as string}>
+                  <IconButton
+                    aria-label={t('terminal') as string}
+                    onClick={() => setShowTerminal(true)}
+                  >
+                    <Icon icon="mdi:console" />
+                  </IconButton>
+                </Tooltip>
+              </AuthVisible>
+            ),
+          },
+          {
+            id: DefaultHeaderAction.POD_ATTACH,
+            action: (
+              <AuthVisible item={item} authVerb="get" subresource="attach">
+                <Tooltip title={t('Attach') as string}>
+                  <IconButton
+                    aria-label={t('attach') as string}
+                    onClick={() => setIsAttached(true)}
+                  >
+                    <Icon icon="mdi:connection" />
+                  </IconButton>
+                </Tooltip>
+              </AuthVisible>
+            ),
+          },
         ]
       }
       extraInfo={item =>
