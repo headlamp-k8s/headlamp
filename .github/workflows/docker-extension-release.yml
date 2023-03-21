@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: headlamp-k8s/headlamp-extension
+  IMAGE_NAME: headlamp/headlamp-docker-extension
 jobs:
   build_and_push_docker_extension:
     name: Build docker extension
