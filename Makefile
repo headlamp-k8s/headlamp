@@ -90,7 +90,7 @@ image:
 	.
 
 docker-ext:
-	$(eval LATEST_TAG=$(shell git tag --list --sort=version:refname 'v*' | tail -1))
+	$(eval LATEST_TAG=$(shell git tag --list --sort=version:refname 'v*' | tail -1 | sed 's/^.//'))
 	$(DOCKER_CMD) buildx build \
 	--platform=linux/amd64,linux/arm64 \
 	--push \
