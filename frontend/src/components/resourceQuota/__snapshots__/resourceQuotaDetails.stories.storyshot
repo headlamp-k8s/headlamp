@@ -211,12 +211,12 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
                         <td
                           class="MuiTableCell-root MuiTableCell-body"
                         >
-                          0
+                          0 core
                         </td>
                         <td
                           class="MuiTableCell-root MuiTableCell-body"
                         >
-                          300m
+                          300m (0.3 cores)
                         </td>
                       </tr>
                       <tr
@@ -230,12 +230,12 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
                         <td
                           class="MuiTableCell-root MuiTableCell-body"
                         >
-                          500m
+                          500m (0.5 cores)
                         </td>
                         <td
                           class="MuiTableCell-root MuiTableCell-body"
                         >
-                          200m
+                          200m (0.2 cores)
                         </td>
                       </tr>
                     </tbody>
