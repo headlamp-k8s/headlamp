@@ -1,9 +1,24 @@
+import { Chip, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import ResourceQuota from '../../lib/k8s/resourceQuota';
-import { SectionBox, SectionFilterHeader, StatusLabel } from '../common';
+import { SectionBox, SectionFilterHeader } from '../common';
 import ResourceTable from '../common/Resource/ResourceTable';
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      justifyContent: 'left',
+      flexWrap: 'wrap',
+      '& > *': {
+        margin: theme.spacing(0.5),
+      },
+    },
+  })
+);
+
 export default function ResourceQuotaList() {
+  const classes = useStyles();
   const { t } = useTranslation(['frequent', 'glossary']);
   return (
     <SectionBox title={<SectionFilterHeader title={t('glossary|Resource Quotas')} />}>
@@ -17,9 +32,9 @@ export default function ResourceQuotaList() {
             getter: (item: ResourceQuota) => {
               const requests: JSX.Element[] = [];
               item.requests.forEach((request: string) => {
-                requests.push(<StatusLabel status="">{request}</StatusLabel>);
+                requests.push(<Chip label={request} variant="outlined" />);
               });
-              return <>{requests}</>;
+              return <div className={classes.root}>{requests}</div>;
             },
           },
           {
@@ -27,13 +42,9 @@ export default function ResourceQuotaList() {
             getter: (item: ResourceQuota) => {
               const limits: JSX.Element[] = [];
               item.limits.forEach((limit: string) => {
-                limits.push(
-                  <StatusLabel key={limit} status="">
-                    {limit}
-                  </StatusLabel>
-                );
+                limits.push(<Chip label={limit} variant="outlined" />);
               });
-              return <>{limits}</>;
+              return <div className={classes.root}>{limits}</div>;
             },
           },
           'age',
