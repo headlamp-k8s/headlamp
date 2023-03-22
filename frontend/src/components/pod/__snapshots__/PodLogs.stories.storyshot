@@ -128,161 +128,115 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
               aria-live="polite"
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <dl
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
               >
-                <tbody
-                  class="MuiTableBody-root"
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Name
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        running
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    running
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Namespace
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Namespace
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        default
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    default
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Creation
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        2022-01-01T00:00:00.000Z
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    2022-01-01T00:00:00.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  State
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                    title=""
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
+                    <span
+                      class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                      style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                     >
-                      State
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <div
-                        class="MuiBox-root MuiBox-root"
-                        title=""
-                      >
-                        <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                          style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
-                        >
-                          Running
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                      Running
+                    </span>
+                  </div>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Node
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Node
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <a
-                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                        href="/"
-                      >
-                        my-node
-                      </a>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    my-node
+                  </a>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Host IP
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Host IP
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        0.0.0.1
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    0.0.0.1
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Pod IP
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Pod IP
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        0.0.0.2
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    0.0.0.2
+                  </span>
+                </dd>
+              </dl>
             </div>
           </div>
         </div>
@@ -595,165 +549,125 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                     </div>
                   </div>
                 </div>
-                <table
-                  class="MuiTable-root makeStyles-table"
+                <dl
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
                 >
-                  <tbody
-                    class="MuiTableBody-root"
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                   >
-                    <tr
-                      class="MuiTableRow-root"
+                    Status
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    <span
+                      aria-describedby="container-state-message-nginx"
+                      class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                      style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                     >
-                      <th
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                        role="cell"
-                        scope="row"
-                      >
-                        Status
-                      </th>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                      >
-                        <span
-                          aria-describedby="container-state-message-nginx"
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                          style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
-                        >
-                          Running
-                        </span>
-                      </td>
-                    </tr>
-                    <tr
-                      class="MuiTableRow-root"
+                      Running
+                    </span>
+                  </dd>
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Restart Count
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    0
+                  </dd>
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Container ID
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    <span
+                      class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                     >
-                      <th
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                        role="cell"
-                        scope="row"
-                      >
-                        Restart Count
-                      </th>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                      >
-                        0
-                      </td>
-                    </tr>
-                    <tr
-                      class="MuiTableRow-root"
+                      containerd://f8eb12a25a065d170b68cee522d431f4920fe083bf9cf53a4a576d60b8641584
+                    </span>
+                  </dd>
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Image Pull Policy
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    <span
+                      class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                     >
-                      <th
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                        role="cell"
-                        scope="row"
-                      >
-                        Container ID
-                      </th>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                      >
-                        <span
-                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                        >
-                          containerd://f8eb12a25a065d170b68cee522d431f4920fe083bf9cf53a4a576d60b8641584
-                        </span>
-                      </td>
-                    </tr>
-                    <tr
-                      class="MuiTableRow-root"
+                      IfNotPresent
+                    </span>
+                  </dd>
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Image
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1"
                     >
-                      <th
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                        role="cell"
-                        scope="row"
-                      >
-                        Image Pull Policy
-                      </th>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                      >
-                        <span
-                          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                        >
-                          IfNotPresent
-                        </span>
-                      </td>
-                    </tr>
-                    <tr
-                      class="MuiTableRow-root"
+                      nginx:1.14.2
+                    </p>
+                    <p
+                      class="MuiTypography-root makeStyles-imageID MuiTypography-body1"
                     >
-                      <th
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                        role="cell"
-                        scope="row"
+                      <span
+                        class="MuiTypography-root MuiTypography-body1"
+                        style="font-weight: bold;"
                       >
-                        Image
-                      </th>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                      >
-                        <p
-                          class="MuiTypography-root MuiTypography-body1"
-                        >
-                          nginx:1.14.2
-                        </p>
-                        <p
-                          class="MuiTypography-root makeStyles-imageID MuiTypography-body1"
-                        >
-                          <span
-                            class="MuiTypography-root MuiTypography-body1"
-                            style="font-weight: bold;"
-                          >
-                            ID:
-                          </span>
-                           
-                          docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
-                        </p>
-                      </td>
-                    </tr>
-                    <tr
-                      class="MuiTableRow-root"
+                        ID:
+                      </span>
+                       
+                      docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
+                    </p>
+                  </dd>
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Ports
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    <div
+                      class="MuiGrid-root MuiGrid-container"
                     >
-                      <th
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                        role="cell"
-                        scope="row"
-                      >
-                        Ports
-                      </th>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                      <div
+                        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
                       >
                         <div
-                          class="MuiGrid-root MuiGrid-container"
+                          class="MuiBox-root MuiBox-root"
                         >
                           <div
-                            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+                            class="MuiBox-root MuiBox-root"
                           >
-                            <div
-                              class="MuiBox-root MuiBox-root"
+                            <span
+                              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                             >
-                              <div
-                                class="MuiBox-root MuiBox-root"
-                              >
-                                <span
-                                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                                >
-                                  TCP:
-                                </span>
-                                <span
-                                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                                >
-                                  80
-                                </span>
-                              </div>
-                            </div>
+                              TCP:
+                            </span>
+                            <span
+                              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                            >
+                              80
+                            </span>
                           </div>
                         </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                      </div>
+                    </div>
+                  </dd>
+                </dl>
               </div>
             </div>
           </div>

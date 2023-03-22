@@ -1,10 +1,10 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Button, IconButton } from '@material-ui/core';
+import { Button, Grid, GridProps, IconButton } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell, { TableCellProps } from '@material-ui/core/TableCell';
+import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
@@ -420,21 +420,49 @@ export default function SimpleTable(props: SimpleTableProps) {
 }
 
 const useStyles = makeStyles(theme => ({
-  metadataCell: {
-    width: '100%',
-    verticalAlign: 'top',
-    fontSize: '1rem',
-    overflowWrap: 'anywhere',
-  },
   metadataNameCell: {
     fontSize: '1rem',
     textAlign: 'left',
-    maxWidth: '50%',
+    maxWidth: '100%',
     minWidth: '10rem',
     verticalAlign: 'top',
     paddingLeft: '0',
     paddingRight: '0',
     color: theme.palette.text.secondary,
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    [theme.breakpoints.down('sm')]: {
+      color: theme.palette.text.primary,
+      fontSize: '1.5rem',
+      minWidth: '100%',
+      width: '100%',
+      maxWidth: '100%',
+      display: 'block',
+      borderTop: `1px solid ${theme.palette.divider}`,
+      borderBottom: `none`,
+    },
+  },
+  metadataCell: {
+    width: '100%',
+    verticalAlign: 'top',
+    fontSize: '1rem',
+    overflowWrap: 'anywhere',
+    paddingBottom: '3.5rem',
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    [theme.breakpoints.down('sm')]: {
+      color: theme.palette.text.secondary,
+      minWidth: '100%',
+      width: '100%',
+      maxWidth: '100%',
+      display: 'block',
+      marginBottom: '2rem',
+      borderBottom: `none`,
+    },
+  },
+  metadataRow: {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  metadataLast: {
+    borderBottom: 'none',
   },
   table: {
     '& .MuiTableBody-root': {
@@ -459,7 +487,7 @@ export interface NameValueTableRow {
 
 interface NameValueTableProps {
   rows: NameValueTableRow[];
-  valueCellProps?: TableCellProps;
+  valueCellProps?: GridProps;
 }
 
 function Value({
@@ -489,32 +517,59 @@ export function NameValueTable(props: NameValueTableProps) {
   const { rows, valueCellProps } = props;
 
   return (
-    <Table className={classes.table}>
-      <TableBody>
-        {rows.map(({ name, value, hide = false }, i) => {
-          let shouldHide = false;
-          if (typeof hide === 'function') {
-            shouldHide = hide(value);
-          } else {
-            shouldHide = hide;
-          }
+    <Grid
+      container
+      component="dl" // mount a Definition List
+      spacing={3}
+    >
+      {rows.map(({ name, value, hide = false }, i) => {
+        let shouldHide = false;
+        if (typeof hide === 'function') {
+          shouldHide = hide(value);
+        } else {
+          shouldHide = hide;
+        }
 
-          if (shouldHide) {
-            return null;
-          }
+        if (shouldHide) {
+          return null;
+        }
 
-          return (
-            <TableRow key={i}>
-              <TableCell component="th" scope="row" className={classes.metadataNameCell}>
-                {name}
-              </TableCell>
-              <TableCell className={classes.metadataCell} {...valueCellProps}>
-                <Value value={value} />
-              </TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+        const last = rows.length === i + 1;
+
+        const { className, ...otherValueCellProps } = valueCellProps || {};
+
+        return (
+          <>
+            <Grid
+              item
+              key={i}
+              xs={12}
+              sm={4}
+              spacing={2}
+              component="dt"
+              className={clsx(last ? classes.metadataLast : '', classes.metadataNameCell)}
+            >
+              {name}
+            </Grid>
+            <Grid
+              item
+              key={i + 10000}
+              xs={12}
+              sm={8}
+              spacing={2}
+              component="dd"
+              className={clsx(
+                last ? classes.metadataLast : '',
+                classes.metadataCell,
+                className ? className : ''
+              )}
+              {...otherValueCellProps}
+            >
+              <Value value={value} />
+            </Grid>
+          </>
+        );
+      })}
+    </Grid>
   );
 }
