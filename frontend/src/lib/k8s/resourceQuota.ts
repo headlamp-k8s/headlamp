@@ -42,43 +42,46 @@ class ResourceQuota extends makeKubeObject<KubeResourceQuota>('resourceQuota') {
 
   get requests(): string[] {
     const req: string[] = [];
-    Object.keys(this.spec.hard).forEach(key => {
-      if (key.startsWith('requests.')) {
-        req.push(
-          `${key}: ${this.normalizeUnit(key, this.status.used[key])}/${this.normalizeUnit(
-            key,
-            this.spec.hard[key]
-          )}`
-        );
-      }
-    });
+    this.spec.hard &&
+      Object.keys(this.spec.hard).forEach(key => {
+        if (key.startsWith('requests.')) {
+          req.push(
+            `${key}: ${this.normalizeUnit(key, this.status.used[key])}/${this.normalizeUnit(
+              key,
+              this.spec.hard[key]
+            )}`
+          );
+        }
+      });
     return req;
   }
 
   get limits(): string[] {
     const limits: string[] = [];
-    Object.keys(this.spec.hard).forEach(key => {
-      if (key.startsWith('limits.')) {
-        limits.push(
-          `${key}: ${this.normalizeUnit(key, this.status.used[key])}/${this.normalizeUnit(
-            key,
-            this.spec.hard[key]
-          )}`
-        );
-      }
-    });
+    this.spec.hard &&
+      Object.keys(this.spec.hard).forEach(key => {
+        if (key.startsWith('limits.')) {
+          limits.push(
+            `${key}: ${this.normalizeUnit(key, this.status.used[key])}/${this.normalizeUnit(
+              key,
+              this.spec.hard[key]
+            )}`
+          );
+        }
+      });
     return limits;
   }
 
   get resourceStats() {
     const stats: { name: string; hard: string; used: string }[] = [];
-    Object.keys(this.status.hard).forEach(key => {
-      stats.push({
-        name: key,
-        hard: this.status.hard[key],
-        used: this.status.used[key],
+    this.status.hard &&
+      Object.keys(this.status.hard).forEach(key => {
+        stats.push({
+          name: key,
+          hard: `${this.normalizeUnit(key, this.status.hard[key])} (${this.status.hard[key]})`,
+          used: `${this.normalizeUnit(key, this.status.used[key])} (${this.status.used[key]})`,
+        });
       });
-    });
     return stats;
   }
 
@@ -133,7 +136,7 @@ class ResourceQuota extends makeKubeObject<KubeResourceQuota>('resourceQuota') {
           normalizedQuantity = '0 Bytes';
         } else {
           const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-          const k = 1024;
+          const k = 1000;
             const dm = 2;
           const i = Math.floor(Math.log(bytes) / Math.log(k));
           normalizedQuantity = parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
