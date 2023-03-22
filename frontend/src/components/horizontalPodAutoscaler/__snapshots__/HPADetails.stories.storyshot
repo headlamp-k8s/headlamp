@@ -303,7 +303,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                 <h2
                   class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
                 >
-                  Events
+                  Conditions
                 </h2>
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -317,15 +317,190 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <div
-                class="MuiBox-root MuiBox-root"
+              <table
+                class="MuiTable-root makeStyles-table"
               >
-                <p
-                  class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+                <thead
+                  class="MuiTableHead-root"
                 >
-                  No data to be shown.
-                </p>
-              </div>
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      scope="col"
+                    >
+                      Condition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      scope="col"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      scope="col"
+                    >
+                      Last Transition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      scope="col"
+                    >
+                      Last Update
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        AbleToScale
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-10-20T11:11:01.000Z"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="the HPA controller was able to get the target's current scale"
+                      >
+                        SucceededGetScale
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        ScalingActive
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-10-26T12:53:22.000Z"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="the HPA was unable to compute the replica count: failed to get memory utilization: unable to get metrics for resource memory: no metrics returned from resource metrics API"
+                      >
+                        FailedGetResourceMetric
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        ScalingLimited
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-10-20T11:11:01.000Z"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="the desired count is within the acceptable range"
+                      >
+                        DesiredWithinRange
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
