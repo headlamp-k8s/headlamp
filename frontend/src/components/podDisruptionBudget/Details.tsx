@@ -29,6 +29,10 @@ export default function PDBDetails() {
       extraInfo={item =>
         item && [
           {
+            name: t('glossary|Max Unavailable'),
+            value: <>{item.spec.maxUnavailable}</>,
+          },
+          {
             name: t('glossary|Selector'),
             value: <>{selectorsToJSX(item.selectors)}</>,
           },
