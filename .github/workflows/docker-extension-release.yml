@@ -36,7 +36,9 @@ jobs:
           if [ -z $user ]; then
             user=yolossn
           fi
-          if [[${{github.event_name}} != "workflow_dispatch"]]; then  
+          if [ "${{github.event_name}}" == "workflow_dispatch" ]; then  
+              echo "Manual trigger so skipping git push"
+          else
             git config --global user.name "$user"
             git config --global user.email "$user@users.noreply.github.com"
             git diff
@@ -48,8 +50,6 @@ jobs:
             git commit --signoff -m "docker-ext: Bump Headlamp version from $lastTag to $latestTag"
             git log -1
             git push origin main
-          else
-            echo "Manual trigger so skipping git push"
           fi
       - name: Build and Publish extension to DockerHub
         run: | 
