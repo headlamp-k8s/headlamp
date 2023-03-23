@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"crypto/tls"
-	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
 	"errors"
@@ -1001,17 +1000,6 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 	return clusters
 }
 
-func getTransportProxy(cluster *Cluster) func(*http.Request) (*url.URL, error) {
-	var transportProxy func(*http.Request) (*url.URL, error)
-
-	if cluster.ProxyURL != "" {
-		proxyURL, _ := url.Parse(cluster.ProxyURL)
-		transportProxy = http.ProxyURL(proxyURL)
-	}
-
-	return transportProxy
-}
-
 func (c *HeadlampConfig) createProxyForContext(context Context) (*httputil.ReverseProxy, error) {
 	cluster := context.getCluster()
 	name := cluster.getName()
@@ -1024,52 +1012,12 @@ func (c *HeadlampConfig) createProxyForContext(context Context) (*httputil.Rever
 	// Create a reverse proxy to direct the API calls to the right server
 	proxy := httputil.NewSingleHostReverseProxy(server)
 
-	// Set up certificates for TLS
-	rootCAs := x509.NewCertPool()
-
-	shouldVerifyTLS := !c.insecure || cluster.shouldVerifyTLS()
-	if shouldVerifyTLS {
-		certificate, err := cluster.getCAData()
-		if err != nil {
-			return nil, err
+	restConfig, err := context.restConfig()
+	if err == nil {
+		roundTripper, err := rest.TransportFor(restConfig)
+		if err == nil {
+			proxy.Transport = roundTripper
 		}
-
-		rootCAs.AppendCertsFromPEM(certificate)
-	}
-
-	var certs []tls.Certificate
-
-	// We allow the use of client certificates now, so let's try to load them
-	// if they exist.
-	clientCert := context.getClientCertificate()
-	if clientCert != "" {
-		clientKey := context.getClientKey()
-		if clientKey == "" {
-			return nil, fmt.Errorf("found a ClientCertificate entry, but not a ClientKey")
-		} else if cert, err := tls.LoadX509KeyPair(clientCert, clientKey); err == nil {
-			certs = append(certs, cert)
-		}
-	}
-
-	clientCertData := context.getClientCertificateData()
-	if clientCertData != nil {
-		clientKeyData := context.getClientKeyData()
-		if clientKeyData == nil {
-			return nil, fmt.Errorf("found a ClientCertificateData entry, but not a ClientKeyData")
-		} else if cert, err := tls.X509KeyPair(clientCertData, clientKeyData); err == nil {
-			certs = append(certs, cert)
-		}
-	}
-
-	tls := &tls.Config{
-		InsecureSkipVerify: shouldVerifyTLS, //nolint:gosec
-		RootCAs:            rootCAs,
-		Certificates:       certs,
-	}
-
-	proxy.Transport = &http.Transport{
-		Proxy:           getTransportProxy(cluster),
-		TLSClientConfig: tls,
 	}
 
 	return proxy, nil

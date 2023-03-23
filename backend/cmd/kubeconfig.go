@@ -15,6 +15,7 @@ import (
 	"github.com/pkg/errors"
 	"golang.org/x/oauth2"
 	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
+	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 )
@@ -23,6 +24,31 @@ type Context struct {
 	Name     string
 	cluster  Cluster
 	authInfo *clientcmdapi.AuthInfo
+}
+
+func (c *Context) restConfig() (*rest.Config, error) {
+	if c.authInfo == nil {
+		c.authInfo = &clientcmdapi.AuthInfo{}
+	}
+
+	conf := clientcmdapi.Config{
+		Clusters: map[string]*clientcmdapi.Cluster{
+			c.cluster.Name: c.cluster.config,
+		},
+		AuthInfos: map[string]*clientcmdapi.AuthInfo{
+			c.cluster.Name: c.authInfo,
+		},
+		Contexts: map[string]*clientcmdapi.Context{
+			c.Name: {
+				Cluster:  c.cluster.Name,
+				AuthInfo: c.cluster.Name,
+			},
+		},
+	}
+
+	clientConfig := clientcmd.NewInteractiveClientConfig(conf, c.Name, nil, nil, nil)
+
+	return clientConfig.ClientConfig()
 }
 
 type OauthConfig struct {
@@ -94,45 +120,15 @@ func (c *Context) getCluster() *Cluster {
 	return &c.cluster
 }
 
-func (c *Context) getClientCertificate() string {
-	if c.authInfo != nil {
-		return c.authInfo.ClientCertificate
-	}
-
-	return ""
-}
-
-func (c *Context) getClientKey() string {
-	if c.authInfo != nil {
-		return c.authInfo.ClientKey
-	}
-
-	return ""
-}
-
-func (c *Context) getClientCertificateData() []byte {
-	if c.authInfo != nil {
-		return c.authInfo.ClientCertificateData
-	}
-
-	return nil
-}
-
-func (c *Context) getClientKeyData() []byte {
-	if c.authInfo != nil {
-		return c.authInfo.ClientKeyData
-	}
-
-	return nil
-}
-
 func GetOwnContext(config *HeadlampConfig) (*Context, error) {
 	cluster, err := GetOwnCluster(config)
 	if err != nil {
 		return nil, err
 	}
 
-	return &Context{cluster.Name, *cluster, nil}, nil
+	authInfo := &clientcmdapi.AuthInfo{}
+
+	return &Context{cluster.Name, *cluster, authInfo}, nil
 }
 
 // getContextFromKubeConfigs returns the contexts from the kubeconfig files.

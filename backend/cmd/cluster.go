@@ -119,7 +119,3 @@ func (c *Cluster) getCAData() ([]byte, error) {
 
 	return nil, fmt.Errorf("no certificate authority data found for cluster %s", c.Name)
 }
-
-func (c *Cluster) shouldVerifyTLS() bool {
-	return !c.config.InsecureSkipTLSVerify
-}
