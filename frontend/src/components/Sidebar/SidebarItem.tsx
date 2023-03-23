@@ -8,6 +8,7 @@ import { generatePath } from 'react-router';
 import { createRouteURL, getRoute } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import ListItemLink from './ListItemLink';
+import { DefaultSidebars } from './Sidebar';
 
 const useItemStyle = makeStyles(theme => ({
   nested: {
@@ -101,6 +102,9 @@ export interface SidebarEntryProps {
    * @see https://icon-sets.iconify.design/mdi/ for icons.
    */
   icon?: IconProps['icon'];
+  /** The sidebar to display this item in. If not specified, it will be displayed in the default sidebar.
+   */
+  sidebar?: DefaultSidebars | string;
 }
 
 /**
@@ -116,7 +120,7 @@ export interface SidebarItemProps extends ListItemProps, SidebarEntryProps {
   /** Search part of the URL. */
   search?: string;
   /** If a menu item has sub menu items, they will be in here. */
-  subList?: this[];
+  subList?: Omit<this, 'sidebar'>[];
   /** Whether to hide the sidebar item. */
   hide?: boolean;
 }

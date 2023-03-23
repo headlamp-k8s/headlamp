@@ -10,8 +10,9 @@ import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
+import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -24,6 +25,11 @@ import VersionButton from './VersionButton';
 
 export const drawerWidth = 330;
 export const drawerWidthClosed = 64;
+
+export enum DefaultSidebars {
+  HOME = 'HOME',
+  IN_CLUSTER = 'IN-CLUSTER',
+}
 
 const useStyle = makeStyles(theme => ({
   drawer: {
@@ -103,7 +109,6 @@ export default function Sidebar() {
   specialSidebarOptions.push(settingsMenu);
 
   /** Only adds settings menu when running as an App*/
-  // DISABLED FOR NOW UNTIL DATA IS HOOKED UP
   if (helpers.isElectron() === true) {
     settingsMenu.subList = [
       { name: 'plugins', label: t('settings|Plugins'), url: '/settings/plugins' },
@@ -115,32 +120,18 @@ export default function Sidebar() {
   const isSidebarOpenUserSelected = useTypedSelector(
     state => state.ui.sidebar.isSidebarOpenUserSelected
   );
-  const location = useLocation();
   const history = useHistory();
   const buttonClasses = useButtonStyle();
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const namespaces = useTypedSelector(state => state.filter.namespaces);
-  const [isSpecialSidebarOpen, setSpecialSidebarOpen] = React.useState(false);
   const dispatch = useDispatch();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const cluster = useCluster();
   const items = React.useMemo(
-    () => (isSpecialSidebarOpen ? specialSidebarOptions : prepareRoutes(t)),
-    [sidebar.entries, sidebar.filters, i18n.language, arePluginsLoaded, isSpecialSidebarOpen]
+    () => prepareRoutes(t, sidebar.selected.sidebar || ''),
+    [cluster, sidebar.selected, sidebar.entries, sidebar.filters, i18n.language, arePluginsLoaded]
   );
   const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
 
-  React.useEffect(() => {
-    if (specialSidebarOptions.map(item => item.name).includes(location.pathname.split('/')[1])) {
-      setSpecialSidebarOpen(true);
-    } else {
-      setSpecialSidebarOpen(false);
-    }
-  }, [location]);
-
-  // Use the location to make sure the sidebar is changed, as it depends on the cluster
-  // (defined in the URL ATM).
-  // @todo: Update this if the active cluster management is changed.
-  useLocation();
   if (!sidebar?.isVisible) {
     return null;
   }
@@ -150,30 +141,30 @@ export default function Sidebar() {
       items={items}
       open={isSidebarOpen}
       openUserSelected={isSidebarOpenUserSelected}
-      selectedName={sidebar?.selected}
+      selectedName={sidebar?.selected.item}
       search={search}
       onToggleOpen={() => {
         dispatch(setWhetherSidebarOpen(!sidebar.isSidebarOpen));
       }}
       linkArea={
-        isSpecialSidebarOpen ? (
-          helpers.isElectron() && (
-            <Box pb={2}>
-              <Button
-                className={buttonClasses.button}
-                onClick={() => history.push(createRouteURL('loadKubeConfig'))}
-                startIcon={<InlineIcon icon="mdi:plus" />}
-              >
-                {t('frequent|Add Cluster')}
-              </Button>
-            </Box>
-          )
-        ) : (
-          <>
-            <CreateButton />
-            <VersionButton />
-          </>
-        )
+        sidebar.selected.sidebar === DefaultSidebars.HOME
+          ? helpers.isElectron() && (
+              <Box pb={2}>
+                <Button
+                  className={buttonClasses.button}
+                  onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+                  startIcon={<InlineIcon icon="mdi:plus" />}
+                >
+                  {t('frequent|Add Cluster')}
+                </Button>
+              </Box>
+            )
+          : sidebar.selected.sidebar === DefaultSidebars.IN_CLUSTER && (
+              <>
+                <CreateButton />
+                <VersionButton />
+              </>
+            )
       }
     />
   );
@@ -311,12 +302,25 @@ export function PureSidebar({
   );
 }
 
-export function useSidebarItem(itemName: string | null) {
+export function useSidebarItem(
+  sidebarDesc: string | null | { item: string | null; sidebar?: string }
+) {
+  let itemName: string | null = null;
+  let sidebar: DefaultSidebars | string = DefaultSidebars.IN_CLUSTER;
+  if (typeof sidebarDesc === 'string') {
+    itemName = sidebarDesc;
+  } else if (!!sidebarDesc) {
+    itemName = sidebarDesc.item;
+    if (!!sidebarDesc.sidebar) {
+      sidebar = sidebarDesc.sidebar || DefaultSidebars.IN_CLUSTER;
+    }
+  }
+
   const dispatch = useDispatch();
 
   React.useEffect(
     () => {
-      dispatch(setSidebarSelected(itemName));
+      dispatch(setSidebarSelected(itemName, sidebar));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [itemName]
