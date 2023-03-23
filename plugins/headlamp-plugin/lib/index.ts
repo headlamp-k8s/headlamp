@@ -39,10 +39,7 @@ export {
   AppLogoProps,
   ClusterChooserProps,
   DetailsViewSectionProps,
-<<<<<<< HEAD
   DetailsViewDefaultHeaderActions,
-=======
->>>>>>> b7851247 (frontend: Improve how different sidebars are used)
   DefaultSidebars,
   registerAppLogo,
   registerAppBarAction,
