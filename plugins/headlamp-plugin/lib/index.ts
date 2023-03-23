@@ -39,7 +39,10 @@ export {
   AppLogoProps,
   ClusterChooserProps,
   DetailsViewSectionProps,
+
   DetailsViewDefaultHeaderActions,
+
+
   DefaultSidebars,
   registerAppLogo,
   registerAppBarAction,
@@ -53,3 +56,4 @@ export {
   registerDetailsViewHeaderActionsProcessor,
   registerGetTokenFunction,
 };
+

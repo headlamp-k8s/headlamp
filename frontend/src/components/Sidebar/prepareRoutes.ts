@@ -25,6 +25,14 @@ function prepareRoutes(
       icon: 'mdi:cog',
       label: t('frequent|Settings'),
       url: '/settings',
+      subList: [
+        {
+          name: 'plugins',
+          label: t('settings|Plugins'),
+          url: '/settings/plugins',
+          hide: !helpers.isElectron(),
+        },
+      ],
     },
   ];
   const inClusterItems: SidebarItemProps[] = [
