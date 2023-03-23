@@ -19,9 +19,9 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import CreateButton from '../common/Resource/CreateButton';
 import HeadlampButton from './HeadlampButton';
 import NavigationTabs from './NavigationTabs';
-import prepareRoutes from './prepareRoutes';
 import SidebarItem, { SidebarEntryProps } from './SidebarItem';
 import VersionButton from './VersionButton';
+import prepareRoutes from './prepareRoutes';
 
 export const drawerWidth = 330;
 export const drawerWidthClosed = 64;
