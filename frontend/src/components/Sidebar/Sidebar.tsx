@@ -149,22 +149,22 @@ export default function Sidebar() {
       linkArea={
         sidebar.selected.sidebar === DefaultSidebars.HOME
           ? helpers.isElectron() && (
-              <Box pb={2}>
-                <Button
-                  className={buttonClasses.button}
-                  onClick={() => history.push(createRouteURL('loadKubeConfig'))}
-                  startIcon={<InlineIcon icon="mdi:plus" />}
-                >
-                  {t('frequent|Add Cluster')}
-                </Button>
-              </Box>
-            )
+            <Box pb={2}>
+              <Button
+                className={buttonClasses.button}
+                onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+                startIcon={<InlineIcon icon="mdi:plus" />}
+              >
+                {t('frequent|Add Cluster')}
+              </Button>
+            </Box>
+          )
           : sidebar.selected.sidebar === DefaultSidebars.IN_CLUSTER && (
-              <>
-                <CreateButton />
-                <VersionButton />
-              </>
-            )
+            <>
+              <CreateButton />
+              <VersionButton />
+            </>
+          )
       }
     />
   );
