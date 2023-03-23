@@ -57,11 +57,11 @@ export function ClusterTitle(props: ClusterTitleProps) {
     return null;
   }
 
-  if (Object.keys(clusters || {}).length <= 1) {
+  if (!arePluginsLoaded || _.isNull(ChooserButton)) {
     return null;
   }
 
-  if (!arePluginsLoaded || _.isNull(ChooserButton)) {
+  if (!ChooserButton && Object.keys(clusters || {}).length <= 1) {
     return null;
   }
 
