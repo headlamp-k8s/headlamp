@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { SidebarEntryProps } from '../../components/Sidebar';
+import { DefaultSidebars, SidebarEntryProps } from '../../components/Sidebar';
 import helpers from '../../helpers';
 import { KubeObject } from '../../lib/k8s/cluster';
 import { Notification } from '../../lib/notification';
@@ -43,7 +43,10 @@ type HeaderActionsProcessor = {
 
 export interface UIState {
   sidebar: {
-    selected: string | null;
+    selected: {
+      item: string | null;
+      sidebar: string | DefaultSidebars | null;
+    };
     isVisible: boolean;
     isSidebarOpen?: boolean;
     /** This is only set to true/false based on a user interaction. */
@@ -106,7 +109,10 @@ function setInitialSidebarOpen() {
 export const INITIAL_STATE: UIState = {
   sidebar: {
     ...setInitialSidebarOpen(),
-    selected: null,
+    selected: {
+      item: null,
+      sidebar: null,
+    },
     isVisible: false,
     entries: {},
     filters: [],
@@ -143,7 +149,7 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
     case UI_SIDEBAR_SET_SELECTED: {
       newFilters.sidebar = {
         ...newFilters.sidebar,
-        selected: action.selected,
+        selected: { ...action.selected },
         isVisible: !!action.selected,
       };
       break;

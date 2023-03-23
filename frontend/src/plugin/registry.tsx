@@ -2,7 +2,7 @@ import React from 'react';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
 import { SectionBox } from '../components/common/SectionBox';
 import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/DetailsViewSection';
-import { SidebarEntryProps } from '../components/Sidebar';
+import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
 import { AppLogoProps, AppLogoType } from '../components/Sidebar/AppLogo';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
@@ -31,7 +31,7 @@ export interface SectionFuncProps {
 
 export type { AppLogoProps, AppLogoType };
 export type { ClusterChooserProps, ClusterChooserType };
-export type { SidebarEntryProps };
+export type { SidebarEntryProps, DefaultSidebars };
 export type { DetailsViewSectionProps, DetailsViewSectionType };
 export const DetailsViewDefaultHeaderActions = DefaultHeaderAction;
 
@@ -59,7 +59,7 @@ export default class Registry {
     itemName: string,
     itemLabel: string,
     url: string,
-    opts: Pick<SidebarEntryProps, 'useClusterURL' | 'icon'> = { useClusterURL: true }
+    opts: Pick<SidebarEntryProps, 'sidebar' | 'useClusterURL' | 'icon'> = { useClusterURL: true }
   ) {
     console.warn('Registry.registerSidebarItem is deprecated. Please use registerSidebarItem.');
     const { useClusterURL = true, ...options } = opts;
@@ -181,6 +181,7 @@ export function registerSidebarEntry({
   url,
   useClusterURL = true,
   icon,
+  sidebar,
 }: SidebarEntryProps) {
   store.dispatch(
     setSidebarItem({
@@ -190,6 +191,7 @@ export function registerSidebarEntry({
       parent,
       useClusterURL,
       icon,
+      sidebar,
     })
   );
 }
