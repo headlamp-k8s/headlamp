@@ -7,6 +7,7 @@ import { Headlamp, Plugin } from '../types/plugin/lib';
 import Registry, {
   AppLogoProps,
   ClusterChooserProps,
+  DefaultSidebars,
   DetailsViewSectionProps,
   registerAppBarAction,
   registerAppLogo,
@@ -35,6 +36,7 @@ export {
   AppLogoProps,
   ClusterChooserProps,
   DetailsViewSectionProps,
+  DefaultSidebars,
   registerAppLogo,
   registerAppBarAction,
   registerClusterChooser,

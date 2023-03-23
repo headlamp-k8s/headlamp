@@ -58,6 +58,7 @@ import ServiceDetails from '../components/service/Details';
 import ServiceList from '../components/service/List';
 import ServiceAccountDetails from '../components/serviceaccount/Details';
 import ServiceAccountList from '../components/serviceaccount/List';
+import { DefaultSidebars } from '../components/Sidebar';
 import StatefulSetDetails from '../components/statefulset/Details';
 import StatefulSetList from '../components/statefulset/List';
 import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
@@ -94,8 +95,8 @@ export interface Route {
   useClusterURL?: boolean;
   /** This route does not require Authentication. */
   noAuthRequired?: boolean;
-  /** The sidebar group this Route should be in, or null if it is in no group. */
-  sidebar: string | null;
+  /** The sidebar entry this Route should enable, or null if it shouldn't enable any. If an object is passed with item and sidebar, it will try to enable the given sidebar and the given item. */
+  sidebar: string | null | { item: string | null; sidebar: string | DefaultSidebars };
   /** Shown component for this route. */
   component: () => JSX.Element;
   /** Hide the appbar at the top. */
@@ -571,7 +572,10 @@ const defaultRoutes: {
     exact: true,
     useClusterURL: false,
     name: 'Notifications',
-    sidebar: 'notifications',
+    sidebar: {
+      item: 'notifications',
+      sidebar: DefaultSidebars.HOME,
+    },
     noAuthRequired: true,
     component: () => (
       <PageGrid>
@@ -583,7 +587,10 @@ const defaultRoutes: {
     path: '/settings',
     exact: true,
     name: 'Settings',
-    sidebar: 'settings',
+    sidebar: {
+      item: 'settings',
+      sidebar: DefaultSidebars.HOME,
+    },
     useClusterURL: false,
     noAuthRequired: true,
     component: () => (

@@ -64,7 +64,15 @@ function RouteComponent({ route }: { route: RouteType }) {
   }, [route.hideAppBar]);
 
   return (
-    <PageTitle title={t(route.name ? route.name : route.sidebar ? route.sidebar : '')}>
+    <PageTitle
+      title={t(
+        route.name
+          ? route.name
+          : typeof route.sidebar === 'string'
+          ? route.sidebar
+          : route.sidebar?.item || ''
+      )}
+    >
       <route.component />
     </PageTitle>
   );
@@ -86,7 +94,7 @@ function PageTitle({
 
 interface AuthRouteProps {
   children: React.ReactNode | JSX.Element;
-  sidebar: string | null;
+  sidebar: RouteType['sidebar'];
   requiresAuth: boolean;
   requiresCluster: boolean;
   requiresToken: () => boolean;

@@ -108,8 +108,8 @@ export function updateClusterAction(actionOptions: ClusterAction) {
   return { type: CLUSTER_ACTION_UPDATE, ...actionOptions };
 }
 
-export function setSidebarSelected(selected: SidebarType['selected']) {
-  return { type: UI_SIDEBAR_SET_SELECTED, selected };
+export function setSidebarSelected(selected: string | null, sidebar = '') {
+  return { type: UI_SIDEBAR_SET_SELECTED, selected: { item: selected, sidebar } };
 }
 
 export function setWhetherSidebarOpen(isSidebarOpen: boolean) {

@@ -61,10 +61,10 @@ export default function NavigationTabs() {
   }
 
   let defaultIndex = null;
-  const listItems = prepareRoutes(t);
-  let navigationItem = listItems.find(item => item.name === sidebar.selected);
+  const listItems = prepareRoutes(t, sidebar.selected.sidebar || '');
+  let navigationItem = listItems.find(item => item.name === sidebar.selected.item);
   if (!navigationItem) {
-    const parent = findParentOfSubList(listItems, sidebar.selected);
+    const parent = findParentOfSubList(listItems, sidebar.selected.item);
     if (!parent) {
       return null;
     }
@@ -99,7 +99,7 @@ export default function NavigationTabs() {
     return { label: item.label, component: <></> };
   });
 
-  defaultIndex = subList.findIndex(item => item.name === sidebar.selected);
+  defaultIndex = subList.findIndex(item => item.name === sidebar.selected.item);
   return (
     <Box mb={2} component="nav">
       <Tabs
