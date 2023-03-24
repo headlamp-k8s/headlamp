@@ -27,12 +27,17 @@ KUBECONFIG=/my/different/kubeconfig /path/to/headlamp
 
 ### Use several kube config files
 
-If you need to use more than one kube config file, please merge them into
-one and use the resulting one as indicated above.
+If you need to use more than one kube config file at the same time, you can list
+each config file path with a separator.
 
-You can easily merge kubee config files the following way:
+On unix:
 ```bash
-KUBECONFIG=kubeconfig1:kubeconfig2:kubeconfig3 kubectl config view --raw > mynewconfig
+KUBECONFIG=kubeconfig1:kubeconfig2:kubeconfig3 /path/to/headlamp
+```
+
+On windows cmd/PowerShell:
+```
+KUBECONFIG=kubeconfig1;kubeconfig2;kubeconfig3 /path/to/headlamp
 ```
 
 ## Access using OIDC
