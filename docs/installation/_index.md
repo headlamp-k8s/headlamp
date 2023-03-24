@@ -4,10 +4,10 @@ linktitle: Installation
 weight: 2
 ---
 
-Headlamp can be deployed in a Kubernetes cluster, or run as a desktop application.
+Headlamp can be deployed in a Kubernetes [cluster](./in-cluster), or run as a [desktop](./desktop/) application.
 
-Please check the guides in this section for installing the desktop application
-or deploying Headlamp in your cluster.
+Please check the guides in this section for [installing the desktop application](./desktop/)
+or deploying Headlamp [in your cluster](./in-cluster/).
 
 ## Authentication / Log-in
 
