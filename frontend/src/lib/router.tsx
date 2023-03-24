@@ -3,7 +3,8 @@ import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import NotificationList from '../components/App/Notifications/List';
 import Settings, { SettingsButton } from '../components/App/Settings';
-import { ClusterSettings, ClustersSettings } from '../components/App/Settings/clusters';
+import SettingsCluster from '../components/App/Settings/SettingsCluster';
+import SettingsClusters from '../components/App/Settings/SettingsClusters';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
 import KubeConfigLoader from '../components/cluster/KubeConfigLoader';
@@ -600,7 +601,7 @@ const defaultRoutes: {
     noAuthRequired: true,
     component: () => (
       <PageGrid>
-        <ClustersSettings />
+        <SettingsClusters />
       </PageGrid>
     ),
   },
@@ -612,7 +613,7 @@ const defaultRoutes: {
     noAuthRequired: true,
     component: () => (
       <PageGrid>
-        <ClusterSettings />
+        <SettingsCluster />
       </PageGrid>
     ),
   },

@@ -5,39 +5,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import helpers, { ClusterSettings as ClusterSettingsType } from '../../../helpers';
+import helpers, { ClusterSettings } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
 import { deleteCluster } from '../../../lib/k8s/apiProxy';
 import { setConfig } from '../../../redux/actions/actions';
-import { Link, NameValueTable, SectionBox, SimpleTable } from '../../common';
+import { NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
-
-export function ClustersSettings() {
-  const clusterConf = useClustersConf();
-  const { t } = useTranslation(['settings', 'frequent']);
-
-  return (
-    <SectionBox title="Cluster Settings">
-      <SimpleTable
-        columns={[
-          {
-            label: t('frequent|Name'),
-            getter: cluster => (
-              <Link routeName="settingsCluster" params={{ cluster: cluster.name }}>
-                {cluster.name}
-              </Link>
-            ),
-          },
-          {
-            label: t('frequent|Server'),
-            datum: 'server',
-          },
-        ]}
-        data={Object.values(clusterConf || {})}
-      />
-    </SectionBox>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   chipBox: {
@@ -73,13 +46,13 @@ function isValidNamespaceFormat(namespace: string) {
   return regex.test(namespace);
 }
 
-export function ClusterSettings() {
+export default function SettingsCluster() {
   const cluster = useCluster();
   const clusterConf = useClustersConf();
   const { t } = useTranslation(['settings', 'frequent', 'cluster']);
   const [defaultNamespace, setDefaultNamespace] = React.useState('');
   const [newAllowedNamespace, setNewAllowedNamespace] = React.useState('');
-  const [clusterSettings, setClusterSettings] = React.useState<ClusterSettingsType | null>(null);
+  const [clusterSettings, setClusterSettings] = React.useState<ClusterSettings | null>(null);
   const classes = useStyles();
   const theme = useTheme();
 
@@ -154,7 +127,7 @@ export function ClusterSettings() {
 
   function storeNewAllowedNamespace(namespace: string) {
     setNewAllowedNamespace('');
-    setClusterSettings((settings: ClusterSettingsType | null) => {
+    setClusterSettings((settings: ClusterSettings | null) => {
       const newSettings = { ...(settings || {}) };
       newSettings.allowedNamespaces = newSettings.allowedNamespaces || [];
       newSettings.allowedNamespaces.push(namespace);
@@ -171,7 +144,7 @@ export function ClusterSettings() {
       setDefaultNamespace(actualNamespace);
     }
 
-    setClusterSettings((settings: ClusterSettingsType | null) => {
+    setClusterSettings((settings: ClusterSettings | null) => {
       const newSettings = { ...(settings || {}) };
       if (isValidNamespaceFormat(namespace)) {
         newSettings.defaultNamespace = actualNamespace;
