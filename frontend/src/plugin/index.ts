@@ -21,7 +21,9 @@ window.pluginLib = {
   ApiProxy: require('../lib/k8s/apiProxy'),
   Crd: require('../lib/k8s/crd'),
   ReactMonacoEditor: require('@monaco-editor/react'),
-  MonacoEditor: require('monaco-editor'),
+  MonacoEditor: require(process.env.NODE_ENV === 'test'
+    ? 'monaco-editor/esm/vs/editor/editor.api.js'
+    : 'monaco-editor'),
   K8s: require('../lib/k8s'),
   CommonComponents: require('../components/common'),
   MuiCore: require('@material-ui/core'),

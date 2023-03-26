@@ -12,7 +12,6 @@ import Editor from '@monaco-editor/react';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _ from 'lodash';
-import * as monaco from 'monaco-editor';
 import React, { isValidElement, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
@@ -290,7 +289,7 @@ export function DataField(props: TextFieldProps) {
   useTheme();
   const themeName = getThemeName();
 
-  function handleEditorDidMount(editor: monaco.editor.IStandaloneCodeEditor) {
+  function handleEditorDidMount(editor: any) {
     const editorElement: HTMLElement | null = editor.getDomNode();
     if (!editorElement) {
       return;
