@@ -1,3 +1,6 @@
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import Switch from '@mui/material/Switch';
 import { Meta, StoryFn } from '@storybook/react';
 import { EditorDialog, EditorDialogProps } from '..';
 
@@ -33,4 +36,14 @@ EditorDialogWithResource.args = {
 export const EditorDialogWithResourceClosed = Template.bind({});
 EditorDialogWithResourceClosed.args = {
   open: false,
+};
+
+export const ExtraActions = Template.bind({});
+ExtraActions.args = {
+  open: true,
+  actions: [
+    <FormGroup row>
+      <FormControlLabel control={<Switch checked onChange={() => {}} />} label="Switch" />
+    </FormGroup>,
+  ],
 };
