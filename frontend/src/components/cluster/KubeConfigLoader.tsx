@@ -253,7 +253,7 @@ function KubeConfigLoader() {
               </FormControl>
             </Box>
             <Box style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button onClick={() => history.push('/')} className={classes.wideButton}>
+              <Button onClick={() => history.goBack()} className={classes.wideButton}>
                 {t('frequent|Back')}
               </Button>
             </Box>
