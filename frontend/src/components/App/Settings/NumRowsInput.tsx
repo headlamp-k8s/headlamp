@@ -10,22 +10,14 @@ import {
   Select,
   TextField,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import helpers from '../../../helpers';
-import LocaleSelect from '../../../i18n/LocaleSelect/LocaleSelect';
-import { createRouteURL } from '../../../lib/router';
-import { setAppSettings, setVersionDialogOpen } from '../../../redux/actions/actions';
-import { ActionButton, NameValueTable, SectionBox } from '../../common';
-import TimezoneSelect from '../../common/TimezoneSelect';
-import ThemeChangeButton from '../ThemeChangeButton';
-import { DefaultRowsPerPageOptions } from './config';
-import { useSettings } from './hook';
+import { setAppSettings } from '../../../redux/actions/actions';
+import { defaultTableRowsPerPageOptions } from '../../../redux/reducers/config';
 
-function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) {
+export default function NumRowsInput(props: { defaultValue: number[] }) {
   const { t } = useTranslation(['frequent', 'settings']);
   const { defaultValue } = props;
   const [isSelectOpen, setIsSelectOpen] = useState(false);
@@ -40,13 +32,13 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
     if (options.includes(val)) {
       return val;
     }
-    return DefaultRowsPerPageOptions[0];
+    return defaultTableRowsPerPageOptions[0];
   }, []);
   const [selectedValue, setSelectedValue] = useState(defaultRowsPerPageValue);
   const storedCustomValue = useMemo(() => {
-    const val = options.find(val => !DefaultRowsPerPageOptions.includes(val));
+    const val = options.find(val => !defaultTableRowsPerPageOptions.includes(val));
     if (!val) {
-      return DefaultRowsPerPageOptions[0];
+      return defaultTableRowsPerPageOptions[0];
     }
     return val;
   }, []);
@@ -124,7 +116,7 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
               if (customValue === undefined) {
                 return;
               }
-              const newOptions = [...new Set([...DefaultRowsPerPageOptions, customValue])];
+              const newOptions = [...new Set([...defaultTableRowsPerPageOptions, customValue])];
               newOptions.sort((a, b) => a - b);
               setOptions(newOptions);
               setSelectedValue(customValue);
@@ -135,8 +127,8 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
           <IconButton
             aria-label={t('frequent|Delete')}
             onClick={() => {
-              setOptions(DefaultRowsPerPageOptions);
-              setSelectedValue(DefaultRowsPerPageOptions[0]);
+              setOptions(defaultTableRowsPerPageOptions);
+              setSelectedValue(defaultTableRowsPerPageOptions[0]);
             }}
           >
             <Icon icon="mdi:delete" />
@@ -155,7 +147,7 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
           renderValue={value => `${value}`}
         >
           {options.map(option => {
-            const isCustom = !DefaultRowsPerPageOptions.includes(option);
+            const isCustom = !defaultTableRowsPerPageOptions.includes(option);
             return (
               <MenuItem key={option} value={option}>
                 <ListItemText primary={option} />
@@ -165,8 +157,8 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
                       size="small"
                       aria-label={t('frequent|Delete')}
                       onClick={() => {
-                        setOptions(DefaultRowsPerPageOptions);
-                        setSelectedValue(DefaultRowsPerPageOptions[0]);
+                        setOptions(defaultTableRowsPerPageOptions);
+                        setSelectedValue(defaultTableRowsPerPageOptions[0]);
                         setIsSelectOpen(false);
                       }}
                     >
@@ -183,103 +175,5 @@ function NumberOfRowsForTablesInputComponent(props: { defaultValue: number[] }) 
         </Select>
       </FormControl>
     )
-  );
-}
-
-const useStyles = makeStyles(theme => ({
-  valueCol: {
-    width: '60%',
-    [theme.breakpoints.down('sm')]: {
-      width: 'unset',
-    },
-  },
-}));
-
-export default function Settings() {
-  const classes = useStyles();
-  const { t } = useTranslation(['settings', 'frequent']);
-  const settingsObj = useSettings();
-  const storedTimezone = settingsObj.timezone;
-  const storedRowsPerPageOptions = settingsObj.tableRowsPerPageOptions;
-  const [selectedTimezone, setSelectedTimezone] = useState<string>(
-    storedTimezone || Intl.DateTimeFormat().resolvedOptions().timeZone
-  );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(
-      setAppSettings({
-        timezone: selectedTimezone,
-      })
-    );
-  }, [selectedTimezone]);
-
-  return (
-    <SectionBox
-      title={t('frequent|General')}
-      headerProps={{
-        actions: [
-          <ActionButton
-            key="version"
-            icon="mdi:information-outline"
-            description={t('Version')}
-            onClick={() => {
-              dispatch(setVersionDialogOpen(true));
-            }}
-          />,
-        ],
-      }}
-      backLink
-    >
-      <NameValueTable
-        valueCellProps={{ className: classes.valueCol }}
-        rows={[
-          {
-            name: t('frequent|Language'),
-            value: <LocaleSelect showFullNames formControlProps={{ className: '' }} />,
-          },
-          {
-            name: t('frequent|Theme'),
-            value: <ThemeChangeButton showBothIcons />,
-          },
-          {
-            name: t('settings|Number of rows for tables'),
-            value: (
-              <NumberOfRowsForTablesInputComponent
-                defaultValue={storedRowsPerPageOptions || DefaultRowsPerPageOptions}
-              />
-            ),
-          },
-          {
-            name: t('settings|Timezone to display for dates'),
-            value: (
-              <Box maxWidth="350px">
-                <TimezoneSelect
-                  initialTimezone={selectedTimezone}
-                  onChange={name => setSelectedTimezone(name)}
-                />
-              </Box>
-            ),
-          },
-        ]}
-      />
-    </SectionBox>
-  );
-}
-
-export function SettingsButton(props: { onClickExtra?: () => void }) {
-  const { onClickExtra } = props;
-  const { t } = useTranslation(['glossary']);
-  const history = useHistory();
-
-  return (
-    <ActionButton
-      icon="mdi:cog"
-      description={t('frequent|Settings')}
-      onClick={() => {
-        history.push(createRouteURL('settings'));
-        onClickExtra && onClickExtra();
-      }}
-    />
   );
 }

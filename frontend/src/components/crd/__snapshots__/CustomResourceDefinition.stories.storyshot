@@ -86,114 +86,80 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
               aria-live="polite"
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <dl
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
               >
-                <tbody
-                  class="MuiTableBody-root"
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Name
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        mydefinition.phonyresources.io
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    mydefinition.phonyresources.io
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Creation
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        2021-12-15T14:57:13.000Z
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    2021-12-15T14:57:13.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Group
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Group
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        my.phonyresources.io
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    my.phonyresources.io
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Version
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Version
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        v1
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    v1
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Scope
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Scope
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        Namespaced
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    Namespaced
+                  </span>
+                </dd>
+              </dl>
             </div>
           </div>
         </div>

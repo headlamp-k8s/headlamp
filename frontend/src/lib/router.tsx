@@ -2,12 +2,14 @@ import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import NotificationList from '../components/App/Notifications/List';
-import AppSettings, { SettingsButton } from '../components/App/settings';
-import { ClusterSettings, ClustersSettings } from '../components/App/settings/clusters';
+import Settings, { SettingsButton } from '../components/App/Settings';
+import SettingsCluster from '../components/App/Settings/SettingsCluster';
+import SettingsClusters from '../components/App/Settings/SettingsClusters';
 import AuthChooser from '../components/authchooser';
 import Chooser from '../components/cluster/Chooser';
 import KubeConfigLoader from '../components/cluster/KubeConfigLoader';
 import Overview from '../components/cluster/Overview';
+import { PageGrid } from '../components/common/Resource/Resource';
 import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
 import CustomResourceDetails from '../components/crd/CustomResourceDetails';
@@ -571,7 +573,11 @@ const defaultRoutes: {
     name: 'Notifications',
     sidebar: 'notifications',
     noAuthRequired: true,
-    component: () => <NotificationList />,
+    component: () => (
+      <PageGrid>
+        <NotificationList />
+      </PageGrid>
+    ),
   },
   settings: {
     path: '/settings',
@@ -580,7 +586,11 @@ const defaultRoutes: {
     sidebar: 'settings',
     useClusterURL: false,
     noAuthRequired: true,
-    component: () => <AppSettings />,
+    component: () => (
+      <PageGrid>
+        <Settings />
+      </PageGrid>
+    ),
   },
   settingsClusters: {
     path: '/settings/clusters',
@@ -589,7 +599,11 @@ const defaultRoutes: {
     sidebar: 'settingsClusters',
     useClusterURL: false,
     noAuthRequired: true,
-    component: () => <ClustersSettings />,
+    component: () => (
+      <PageGrid>
+        <SettingsClusters />
+      </PageGrid>
+    ),
   },
   settingsCluster: {
     path: '/settings',
@@ -597,7 +611,11 @@ const defaultRoutes: {
     name: 'Cluster Settings',
     sidebar: 'settingsCluster',
     noAuthRequired: true,
-    component: () => <ClusterSettings />,
+    component: () => (
+      <PageGrid>
+        <SettingsCluster />
+      </PageGrid>
+    ),
   },
   portforwards: {
     path: '/portforwards',

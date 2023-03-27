@@ -86,165 +86,119 @@ exports[`Storyshots PriorityClasses/PriorityClassesDetailsView Default 1`] = `
               aria-live="polite"
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <dl
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
               >
-                <tbody
-                  class="MuiTableBody-root"
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Name
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        high-priority-apps
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    high-priority-apps
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Creation
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        2022-10-26T13:46:17.000Z
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    2022-10-26T13:46:17.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Annotations
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Annotations
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
+                    <div
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                      style="max-width: 80%;"
                     >
                       <div
-                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                       >
-                        <div
-                          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-                          style="max-width: 80%;"
-                        >
-                          <div
-                            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-                          >
-                            <p
-                              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
-                              title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"scheduling.k8s.io/v1\\",\\"description\\":\\"Mission Critical apps.\\",\\"globalDefault\\":false,\\"kind\\":\\"PriorityClass\\",\\"metadata\\":{\\"annotations\\":{},\\"name\\":\\"high-priority-apps\\"},\\"preemptionPolicy\\":\\"PreemptLowerPriority\\",\\"value\\":1000000}
+                        <p
+                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"scheduling.k8s.io/v1\\",\\"description\\":\\"Mission Critical apps.\\",\\"globalDefault\\":false,\\"kind\\":\\"PriorityClass\\",\\"metadata\\":{\\"annotations\\":{},\\"name\\":\\"high-priority-apps\\"},\\"preemptionPolicy\\":\\"PreemptLowerPriority\\",\\"value\\":1000000}
 "
-                            >
-                              kubectl.kubernetes.io/last-applied-configuration: …
-                            </p>
-                          </div>
-                        </div>
+                        >
+                          kubectl.kubernetes.io/last-applied-configuration: …
+                        </p>
                       </div>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    </div>
+                  </div>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Value
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  1000000
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Global Default
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Value
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      1000000
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    False
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Preemption Policy
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Global Default
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        False
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                    PreemptLowerPriority
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Description
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Preemption Policy
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        PreemptLowerPriority
-                      </span>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataNameCell"
-                      role="cell"
-                      scope="row"
-                    >
-                      Description
-                    </th>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body makeStyles-metadataCell"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                      >
-                        Mission Critical apps.
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    Mission Critical apps.
+                  </span>
+                </dd>
+              </dl>
             </div>
           </div>
         </div>
