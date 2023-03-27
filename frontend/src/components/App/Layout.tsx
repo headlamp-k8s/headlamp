@@ -178,10 +178,8 @@ export default function Layout({}: LayoutProps) {
         <TopBar />
         <Sidebar />
         <main id="main" className={classes.content}>
-          {clusters && !!clusterInURL && !Object.keys(clusters).includes(getCluster() || '') ? (
+          {clusters && !!clusterInURL && !Object.keys(clusters).includes(getCluster() || '') && (
             <ClusterNotFoundPopup />
-          ) : (
-            ''
           )}
           <AlertNotification />
           <Box p={[0, 3, 3]}>
