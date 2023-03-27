@@ -21,6 +21,16 @@ import Tabs from '../Tabs';
 import DocsViewer from './DocsViewer';
 import SimpleEditor from './SimpleEditor';
 
+// Jest does not work with esm modules and 'monaco-editor' properly
+// It says it can't find the module when running the tests.
+let monaco: any;
+if (process.env.NODE_ENV === 'test') {
+  monaco = require('monaco-editor/esm/vs/editor/editor.api.js');
+} else {
+  // const monaco = monacoEditor;
+  monaco = require('monaco-editor');
+}
+
 const useStyle = makeStyles(theme => ({
   dialogContent: {
     height: '80%',
@@ -256,7 +266,9 @@ export default function EditorDialog(props: EditorDialogProps) {
   function makeEditor() {
     // @todo: monaco editor does not support pt, ta, hi amongst various other langs.
     if (['de', 'es', 'fr', 'it', 'ja', 'ko', 'ru', 'zh-cn', 'zh-tw'].includes(lang)) {
-      loader.config({ 'vs/nls': { availableLanguages: { '*': lang } } });
+      loader.config({ 'vs/nls': { availableLanguages: { '*': lang } }, monaco });
+    } else {
+      loader.config({ monaco });
     }
 
     return useSimpleEditor ? (
