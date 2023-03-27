@@ -626,7 +626,7 @@ const defaultRoutes: {
     component: () => <PortForwardingList />,
   },
   loadKubeConfig: {
-    path: '/loadKubeConfig',
+    path: '/load-kube-config',
     exact: true,
     name: 'Load KubeConfig',
     sidebar: null,

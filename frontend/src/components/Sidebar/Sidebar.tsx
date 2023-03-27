@@ -1,3 +1,5 @@
+import { InlineIcon } from '@iconify/react';
+import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
@@ -8,7 +10,9 @@ import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import helpers from '../../helpers';
+import { createRouteURL } from '../../lib/router';
 import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import CreateButton from '../common/Resource/CreateButton';
@@ -65,6 +69,12 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
+const useButtonStyle = makeStyles({
+  button: {
+    color: '#adadad',
+  },
+});
+
 export default function Sidebar() {
   const { t, i18n } = useTranslation(['glossary', 'frequent']);
   const specialSidebarOptions: SidebarItemProps[] = [
@@ -94,6 +104,8 @@ export default function Sidebar() {
     state => state.ui.sidebar.isSidebarOpenUserSelected
   );
   const location = useLocation();
+  const history = useHistory();
+  const buttonClasses = useButtonStyle();
   const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const [isSpecialSidebarOpen, setSpecialSidebarOpen] = React.useState(false);
@@ -132,7 +144,19 @@ export default function Sidebar() {
         dispatch(setWhetherSidebarOpen(!sidebar.isSidebarOpen));
       }}
       linkArea={
-        !isSpecialSidebarOpen && (
+        isSpecialSidebarOpen ? (
+          helpers.isElectron() && (
+            <Box pb={2}>
+              <Button
+                className={buttonClasses.button}
+                onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+                startIcon={<InlineIcon icon="mdi:plus" />}
+              >
+                {t('frequent|Add Cluster')}
+              </Button>
+            </Box>
+          )
+        ) : (
           <>
             <CreateButton />
             <VersionButton />
