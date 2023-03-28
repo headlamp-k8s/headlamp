@@ -22,6 +22,7 @@ BasicTabs.args = {
       component: <p>tab body 2</p>,
     },
   ],
+  ariaLabel: 'Basic Tabs',
 };
 
 export const StartingTab = Template.bind({});
@@ -37,4 +38,5 @@ StartingTab.args = {
       component: <p>We start on the second tab using defaultIndex=1</p>,
     },
   ],
+  ariaLabel: 'Starting Tabs',
 };

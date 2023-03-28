@@ -340,6 +340,7 @@ export default function EditorDialog(props: EditorDialogProps) {
             ) : (
               <Tabs
                 onTabChanged={handleTabChange}
+                ariaLabel={t('frequent|Editor')}
                 tabs={[
                   {
                     label: t('frequent|Editor'),
