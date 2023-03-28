@@ -15,6 +15,9 @@ if (process.env.NODE_ENV !== 'production') {
 
   if (process.env.REACT_APP_SKIP_A11Y === 'false') {
     axe(React, ReactDOM, 500, undefined, undefined, (results: typeof axeCore.AxeResults) => {
+      // React changes the dom quickly, but axe-core notices missing main in between rendering
+      results.violations = results.violations.filter((v: any) => v.id !== 'landmark-one-main');
+
       if (results.violations.length > 0) {
         console.error('axe results', results);
         if (!alreadyWarned) {
