@@ -111,6 +111,7 @@ export default function NavigationTabs() {
         }}
         defaultIndex={defaultIndex}
         className={classes.tabs}
+        ariaLabel={t('frequent|Navigation')}
       />
       <Divider />
     </Box>

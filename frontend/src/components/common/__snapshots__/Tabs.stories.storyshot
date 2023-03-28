@@ -14,15 +14,15 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
       style="margin-bottom: 0px;"
     >
       <div
-        aria-label="tabs"
+        aria-label="Basic Tabs"
         class="MuiTabs-flexContainer"
         role="tablist"
       >
         <button
-          aria-controls="full-width-tabpanel-0"
+          aria-controls="full-width-tabpanel-0-BasicTabs"
           aria-selected="true"
           class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary MuiTab-selected"
-          id="full-width-tab-0"
+          id="full-width-tab-0-BasicTabs"
           role="tab"
           tabindex="0"
           type="button"
@@ -37,10 +37,10 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
           />
         </button>
         <button
-          aria-controls="full-width-tabpanel-1"
+          aria-controls="full-width-tabpanel-1-BasicTabs"
           aria-selected="false"
           class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary"
-          id="full-width-tab-1"
+          id="full-width-tab-1-BasicTabs"
           role="tab"
           tabindex="-1"
           type="button"
@@ -62,9 +62,9 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
     </div>
   </div>
   <div
-    aria-labelledby="full-width-tab-0"
+    aria-labelledby="full-width-tab-0-BasicTabs"
     class="MuiTypography-root MuiTypography-body1"
-    id="full-width-tabpanel-0"
+    id="full-width-tabpanel-0-BasicTabs"
     role="tabpanel"
   >
     <p>
@@ -72,10 +72,10 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
     </p>
   </div>
   <div
-    aria-labelledby="full-width-tab-1"
+    aria-labelledby="full-width-tab-1-BasicTabs"
     class="MuiTypography-root MuiTypography-body1"
     hidden=""
-    id="full-width-tabpanel-1"
+    id="full-width-tabpanel-1-BasicTabs"
     role="tabpanel"
   >
     <p>
@@ -99,15 +99,15 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
       style="margin-bottom: 0px;"
     >
       <div
-        aria-label="tabs"
+        aria-label="Starting Tabs"
         class="MuiTabs-flexContainer"
         role="tablist"
       >
         <button
-          aria-controls="full-width-tabpanel-0"
+          aria-controls="full-width-tabpanel-0-StartingTabs"
           aria-selected="false"
           class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary"
-          id="full-width-tab-0"
+          id="full-width-tab-0-StartingTabs"
           role="tab"
           tabindex="-1"
           type="button"
@@ -122,10 +122,10 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
           />
         </button>
         <button
-          aria-controls="full-width-tabpanel-1"
+          aria-controls="full-width-tabpanel-1-StartingTabs"
           aria-selected="true"
           class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary MuiTab-selected"
-          id="full-width-tab-1"
+          id="full-width-tab-1-StartingTabs"
           role="tab"
           tabindex="0"
           type="button"
@@ -147,10 +147,10 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
     </div>
   </div>
   <div
-    aria-labelledby="full-width-tab-0"
+    aria-labelledby="full-width-tab-0-StartingTabs"
     class="MuiTypography-root MuiTypography-body1"
     hidden=""
-    id="full-width-tabpanel-0"
+    id="full-width-tabpanel-0-StartingTabs"
     role="tabpanel"
   >
     <p>
@@ -158,9 +158,9 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
     </p>
   </div>
   <div
-    aria-labelledby="full-width-tab-1"
+    aria-labelledby="full-width-tab-1-StartingTabs"
     class="MuiTypography-root MuiTypography-body1"
-    id="full-width-tabpanel-1"
+    id="full-width-tabpanel-1-StartingTabs"
     role="tabpanel"
   >
     <p>
