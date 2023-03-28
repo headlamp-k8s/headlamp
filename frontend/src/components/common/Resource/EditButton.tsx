@@ -85,14 +85,16 @@ export default function EditButton(props: EditButtonProps) {
         onClick={() => setOpenDialog(true)}
         icon="mdi:pencil"
       />
-      <EditorDialog
-        item={item.jsonData}
-        open={openDialog}
-        onClose={() => setOpenDialog(false)}
-        onSave={handleSave}
-        errorMessage={errorMessage}
-        onEditorChanged={() => setErrorMessage('')}
-      />
+      {openDialog && (
+        <EditorDialog
+          item={item.jsonData}
+          open={openDialog}
+          onClose={() => setOpenDialog(false)}
+          onSave={handleSave}
+          errorMessage={errorMessage}
+          onEditorChanged={() => setErrorMessage('')}
+        />
+      )}
     </AuthVisible>
   );
 }
