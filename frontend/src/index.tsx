@@ -24,6 +24,13 @@ if (process.env.NODE_ENV !== 'production') {
       results.violations = results.violations.filter(
         (v: any) => !(v.id === 'landmark-unique' && v.nodes[0].html.indexOf('monaco-status') !== -1)
       );
+
+      // tooltips have role="tooltip", but should be in a landmark.
+      //  This would need to be fixed within Material UI ToolTip component.
+      results.violations = results.violations.filter(
+        (v: any) => !(v.id === 'region' && v.nodes[0].html.indexOf('role="tooltip"') !== -1)
+      );
+
       return results;
     }
     axe(React, ReactDOM, 500, undefined, undefined, (results: typeof axeCore.AxeResults) => {
