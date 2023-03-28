@@ -14,12 +14,23 @@ if (process.env.NODE_ENV !== 'production') {
   const axeCore = require('axe-core');
 
   if (process.env.REACT_APP_SKIP_A11Y === 'false') {
-    axe(React, ReactDOM, 500, undefined, undefined, (results: typeof axeCore.AxeResults) => {
+    function filterFalsePositives(results: typeof axeCore.AxeResults) {
       // React changes the dom quickly, but axe-core notices missing main in between rendering
       results.violations = results.violations.filter((v: any) => v.id !== 'landmark-one-main');
 
-      if (results.violations.length > 0) {
-        console.error('axe results', results);
+      // Monaco has an issue with duplicate status.
+      // Apparently they've tested it's not an issue in practice.
+      // https://github.com/microsoft/monaco-editor/issues/2448
+      results.violations = results.violations.filter(
+        (v: any) => !(v.id === 'landmark-unique' && v.nodes[0].html.indexOf('monaco-status') !== -1)
+      );
+      return results;
+    }
+    axe(React, ReactDOM, 500, undefined, undefined, (results: typeof axeCore.AxeResults) => {
+      const filteredResults = filterFalsePositives(results);
+
+      if (filteredResults.violations.length > 0) {
+        console.error('axe results', filteredResults);
         if (!alreadyWarned) {
           alreadyWarned = true;
           alert(
