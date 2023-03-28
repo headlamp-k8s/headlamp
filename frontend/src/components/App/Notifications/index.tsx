@@ -268,12 +268,13 @@ export default function Notifications() {
     notifications.filter(notification => !notification.deleted).length === 0;
   const notificationMenuId = 'notification-menu';
   const maxNotificationsInPopup = 50;
+  const show = Boolean(anchorEl);
 
   return (
     <>
       <IconButton
         aria-label={t('notifications|Show notifications')}
-        aria-controls={notificationMenuId}
+        aria-controls={show ? notificationMenuId : ''}
         aria-haspopup="true"
         onClick={handleClick}
       >
@@ -290,7 +291,7 @@ export default function Notifications() {
       <Popover
         anchorEl={anchorEl}
         keepMounted={false}
-        open={Boolean(anchorEl)}
+        open={show}
         onClose={handleClose}
         className={classes.root}
         getContentAnchorEl={null}
