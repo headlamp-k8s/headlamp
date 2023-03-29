@@ -1,21 +1,21 @@
-import { Icon, InlineIcon } from '@iconify/react';
-import { IconButton, Tooltip } from '@material-ui/core';
+import { InlineIcon } from '@iconify/react';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import _ from 'lodash';
-import React from 'react';
+import { useSnackbar } from 'notistack';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { apply } from '../../lib/k8s/apiProxy';
+import { apply, drainNode, drainNodeStatus } from '../../lib/k8s/apiProxy';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
-import { timeAgo } from '../../lib/util';
+import { getCluster, timeAgo } from '../../lib/util';
 import { clusterAction } from '../../redux/actions/actions';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
-import { StatusLabelProps } from '../common';
+import { ActionButton, ObjectEventList, StatusLabelProps } from '../common';
 import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
-import { DetailsGrid, OwnedPodsSection } from '../common/Resource';
+import { MainInfoSection, OwnedPodsSection } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
@@ -34,12 +34,20 @@ function NodeConditionsLabel(props: { node: Node }) {
 
 export default function NodeDetails() {
   const { name } = useParams<{ name: string }>();
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['node', 'glossary']);
   const dispatch = useDispatch();
 
+  const { enqueueSnackbar } = useSnackbar();
   const [nodeMetrics, metricsError] = Node.useMetrics();
-
+  const [isupdatingNodeScheduleProperty, setisUpdatingNodeScheduleProperty] = React.useState(false);
+  const [isNodeDrainInProgress, setisNodeDrainInProgress] = React.useState(false);
+  const [nodeFromAPI, nodeError] = Node.useGet(name);
+  const [node, setNode] = useState(nodeFromAPI);
   const noMetrics = metricsError?.status === 404;
+
+  useEffect(() => {
+    setNode(nodeFromAPI);
+  }, [nodeFromAPI]);
 
   function getAddresses(item: Node) {
     return item.status.addresses.map(({ type, address }) => {
@@ -51,77 +59,159 @@ export default function NodeDetails() {
   }
 
   function handleNodeScheduleState(node: Node, cordon: boolean) {
+    setisUpdatingNodeScheduleProperty(true);
     const cloneNode = _.cloneDeep(node);
 
     cloneNode.spec.unschedulable = !cordon;
     dispatch(
-      clusterAction(() => apply(cloneNode.jsonData), {
-        startMessage: cordon
-          ? t('Uncordoning node {{name}}...', {
-              name: node.metadata.name,
+      clusterAction(
+        () =>
+          apply(cloneNode.jsonData)
+            .then(() => {
+              setNode(cloneNode);
             })
-          : t('Cordoning node {{name}}…', { name: node.metadata.name }),
-        successMessage: cordon
-          ? t('Uncordoned node {{name}}.', { name: node.metadata.name })
-          : t('Cordoned node {{name}}.', { name: node.metadata.name }),
-        errorMessage: cordon
-          ? t('Failed to uncordon node {{name}}.', { name: node.metadata.name })
-          : t('Failed to cordon node {{name}}.', { name: node.metadata.name }),
-      })
+            .finally(() => {
+              setisUpdatingNodeScheduleProperty(false);
+            }),
+        {
+          startMessage: cordon
+            ? t('Uncordoning node {{name}}...', {
+                name: node.metadata.name,
+              })
+            : t('Cordoning node {{name}}…', { name: node.metadata.name }),
+          successMessage: cordon
+            ? t('Uncordoned node {{name}}.', { name: node.metadata.name })
+            : t('Cordoned node {{name}}.', { name: node.metadata.name }),
+          errorMessage: cordon
+            ? t('Failed to uncordon node {{name}}.', { name: node.metadata.name })
+            : t('Failed to cordon node {{name}}.', { name: node.metadata.name }),
+        }
+      )
+    );
+  }
+
+  function getDrainNodeStatus(cluster: string, nodeName: string) {
+    setTimeout(() => {
+      drainNodeStatus(cluster, nodeName)
+        .then(data => {
+          if (data && data.id.startsWith('error')) {
+            enqueueSnackbar(data.id, { variant: 'error' });
+            return;
+          }
+          if (data && data.id !== 'success') {
+            getDrainNodeStatus(cluster, nodeName);
+            return;
+          }
+          const cloneNode = _.cloneDeep(node);
+
+          cloneNode.spec.unschedulable = !node.spec.unschedulable;
+          setNode(cloneNode);
+        })
+        .catch(error => {
+          enqueueSnackbar(error.message, { variant: 'error' });
+        });
+    }, 1000);
+  }
+
+  function handleNodeDrain(node: Node) {
+    const cluster = getCluster();
+    if (!cluster) return;
+
+    setisNodeDrainInProgress(true);
+    dispatch(
+      clusterAction(
+        () =>
+          drainNode(cluster, node.metadata.name)
+            .then(() => {
+              getDrainNodeStatus(cluster, node.metadata.name);
+            })
+            .catch(error => {
+              enqueueSnackbar(error.message, { variant: 'error' });
+            })
+            .finally(() => {
+              setisNodeDrainInProgress(false);
+            }),
+        {
+          startMessage: t('Draining node {{name}}…', { name: node.metadata.name }),
+          successMessage: t('Drained node {{name}}.', { name: node.metadata.name }),
+          errorMessage: t('Failed to drain node {{name}}.', { name: node.metadata.name }),
+        }
+      )
     );
   }
 
   return (
-    <DetailsGrid
-      headerSection={item => (
-        <ChartsSection node={item} metrics={nodeMetrics} noMetrics={noMetrics} />
+    <>
+      <MainInfoSection
+        error={nodeError}
+        headerSection={item => (
+          <ChartsSection node={item} metrics={nodeMetrics} noMetrics={noMetrics} />
+        )}
+        resource={node}
+        actions={item => {
+          const cordon = item?.jsonData?.spec?.unschedulable;
+          const cordonOrUncordon = cordon ? t('Uncordon') : t('Cordon');
+
+          return [
+            {
+              id: 'headlamp-node-togglecordon',
+              action: (
+                <AuthVisible item={item} authVerb="update">
+                  <ActionButton
+                    description={cordonOrUncordon}
+                    icon={cordon ? 'mdi:check-circle-outline' : 'mdi:cancel'}
+                    onClick={() => handleNodeScheduleState(item, cordon)}
+                    iconButtonProps={{
+                      disabled: isupdatingNodeScheduleProperty,
+                    }}
+                  />
+                </AuthVisible>
+              ),
+            },
+            {
+              id: 'headlamp-node-togglecordon',
+              action: (
+                <AuthVisible item={item} authVerb="delete">
+                  <ActionButton
+                    description={t('Drain')}
+                    icon="mdi:delete-variant"
+                    onClick={() => handleNodeDrain(item)}
+                    iconButtonProps={{
+                      disabled: isNodeDrainInProgress,
+                    }}
+                  />
+                </AuthVisible>
+              ),
+            },
+          ];
+        }}
+        extraInfo={item =>
+          item && [
+            {
+              name: t('frequent|Ready'),
+              value: <NodeReadyLabel node={item} />,
+            },
+            {
+              name: t('frequent|Conditions'),
+              value: <NodeConditionsLabel node={item} />,
+            },
+            {
+              name: t('Pod CIDR'),
+              value: item.spec.podCIDR,
+            },
+            ...getAddresses(item),
+          ]
+        }
+      />
+      {!!node && (
+        <>
+          <SystemInfoSection node={node} />
+          <OwnedPodsSection resource={node?.jsonData} />
+          <DetailsViewSection resource={node} />
+          {node && <ObjectEventList object={node} />}
+        </>
       )}
-      resourceType={Node}
-      name={name}
-      withEvents
-      actions={item => {
-        const cordon = item?.jsonData?.spec?.unschedulable;
-        const cordonOrUncordon = cordon ? t('Uncordon') : t('Cordon');
-        return [
-          <AuthVisible item={item} authVerb="update">
-            <Tooltip title={cordonOrUncordon as string}>
-              <IconButton
-                aria-label={cordonOrUncordon}
-                onClick={() => handleNodeScheduleState(item, cordon)}
-              >
-                {cordon ? <Icon icon="mdi:check-circle-outline" /> : <Icon icon="mdi:cancel" />}
-              </IconButton>
-            </Tooltip>
-          </AuthVisible>,
-        ];
-      }}
-      extraInfo={item =>
-        item && [
-          {
-            name: t('frequent|Ready'),
-            value: <NodeReadyLabel node={item} />,
-          },
-          {
-            name: t('frequent|Conditions'),
-            value: <NodeConditionsLabel node={item} />,
-          },
-          {
-            name: t('Pod CIDR'),
-            value: item.spec.podCIDR,
-          },
-          ...getAddresses(item),
-        ]
-      }
-      sectionsFunc={item =>
-        !!item && (
-          <>
-            <SystemInfoSection node={item} />
-            <OwnedPodsSection resource={item?.jsonData} />
-            <DetailsViewSection resource={item} />
-          </>
-        )
-      }
-    />
+    </>
   );
 }
 
