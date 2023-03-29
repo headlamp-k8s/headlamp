@@ -54,14 +54,18 @@ func (c *Context) restConfig() (*rest.Config, error) {
 	return c.getClientConfig().ClientConfig()
 }
 
-func (c *Context) getClientSetToInteractWithKubernetesApiServer(token string) (clientset *kubernetes.Clientset, err error) {
+func (c *Context) getClientSetToInteractWithKubernetesAPIServer(token string) (clientset *kubernetes.Clientset,
+	err error,
+) {
 	restConf, err := c.restConfig()
 	if err != nil {
 		return nil, err
 	}
+
 	if token != "" {
 		restConf.BearerToken = token
 	}
+
 	return kubernetes.NewForConfig(restConf)
 }
 
