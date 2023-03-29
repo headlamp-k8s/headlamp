@@ -2,13 +2,13 @@
   "Reference": "Referenz",
   "Metrics": "Metriken",
   "(Current/Target)": "(Aktuell/Ziel)",
-  "MinReplicas": "MinReplicas",
-  "MaxReplicas": "MaxReplicas",
-  "Deployment pods": "Einsatz-Pods",
-  "{{ currentReplicas }} current / {{ desiredReplicas }} desired": "{{ currentReplicas }} current / {{ desiredReplicas }} desired",
+  "MinReplicas": "MinReplikas",
+  "MaxReplicas": "MaxReplikas",
+  "Deployment pods": "Deployment-Pods",
+  "{{ currentReplicas }} current / {{ desiredReplicas }} desired": "{{ currentReplicas }} momentan / {{ desiredReplicas }} gewünscht",
   "Targets": "Ziele",
   "\"{{metricName}}\" on {{objectKind}}/{{objectName}} {{metricTarget}}": "\"{{metricName}}\" auf {{objectKind}}/{{objectName}} {{metricTarget}}",
   "\"{{metricName}}\" on pods": "\"{{metricName}}\" auf Pods",
-  "resource {{resourceName}} on pods": "Ressource {{RessourcenName}} auf Pods",
-  "resource {{resourceName}} of container {{containerName}} on pods": "Ressource {{RessourceName}} des Containers {{ContainerName}} auf Pods"
+  "resource {{resourceName}} on pods": "Ressource {{resourceName}} auf Pods",
+  "resource {{resourceName}} of container {{containerName}} on pods": "Ressource {{resourceName}} des Containers {{containerName}} auf Pods"
 }

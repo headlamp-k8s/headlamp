@@ -1,6 +1,6 @@
 {
   "Release Notes ({{ appVersion }})": "Versionshinweise ({{ appVersion }})",
-  "Fetching release information…": "Abrufen von Freigabeinformationen…",
-  "Failed to fetch release information": "Freigabeinformationen konnten nicht abgerufen werden",
+  "Fetching release information…": "Abrufen von Versionsinformationen…",
+  "Failed to fetch release information": "Versionsinformationen konnten nicht abgerufen werden",
   "An update is available": "Ein Update ist verfügbar"
 }
