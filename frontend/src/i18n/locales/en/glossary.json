@@ -150,5 +150,7 @@
   "Up to date": "Up to date",
   "Available": "Available",
   "Total": "Total",
-  "Strategy Type": "Strategy Type"
+  "Strategy Type": "Strategy Type",
+  "Runtime Classes": "Runtime Classes",
+  "Limit Ranges": "Limit Ranges"
 }
