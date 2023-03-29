@@ -91,6 +91,16 @@ const commonRules = {
   shape: {
     borderRadius: 0,
   },
+  overrides: {
+    MuiTooltip: {
+      tooltip: {
+        fontSize: '1.3em',
+        color: '#fff',
+        backgroundColor: '#000',
+        // opacity: '1.0',
+      },
+    },
+  },
 };
 
 const lightTheme = createTheme(commonRules);
@@ -133,6 +143,16 @@ const darkTheme = createTheme({
     },
     notificationBorderColor: 'rgba(255,255,255,0.12)',
     type: 'dark',
+  },
+  overrides: {
+    MuiTooltip: {
+      tooltip: {
+        fontSize: '1.3em',
+        color: '#fff',
+        backgroundColor: '#000',
+        opacity: 1,
+      },
+    },
   },
 });
 
