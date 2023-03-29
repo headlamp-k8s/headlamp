@@ -31,6 +31,14 @@ if (process.env.NODE_ENV !== 'production') {
         (v: any) => !(v.id === 'region' && v.nodes[0].html.indexOf('role="tooltip"') !== -1)
       );
 
+      // Tooltips do an opacity transition, which causes a color contrast issue.
+      // But it's not an issue in practice, because the animation is quick.
+      // The final tooltip contrast is fine.
+      results.violations = results.violations.filter(
+        (v: any) =>
+          !(v.id === 'color-contrast' && v.nodes[0].html.indexOf('MuiTooltip-tooltip') !== -1)
+      );
+
       return results;
     }
     axe(React, ReactDOM, 500, undefined, undefined, (results: typeof axeCore.AxeResults) => {
