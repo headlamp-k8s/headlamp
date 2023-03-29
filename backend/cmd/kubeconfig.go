@@ -14,6 +14,7 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/pkg/errors"
 	"golang.org/x/oauth2"
+	"k8s.io/client-go/kubernetes"
 	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
@@ -26,7 +27,7 @@ type Context struct {
 	authInfo *clientcmdapi.AuthInfo
 }
 
-func (c *Context) clientConfig() clientcmd.ClientConfig {
+func (c *Context) getClientConfig() clientcmd.ClientConfig {
 	if c.authInfo == nil {
 		c.authInfo = &clientcmdapi.AuthInfo{}
 	}
@@ -50,8 +51,18 @@ func (c *Context) clientConfig() clientcmd.ClientConfig {
 }
 
 func (c *Context) restConfig() (*rest.Config, error) {
-	clientConfig := c.clientConfig()
-	return clientConfig.ClientConfig()
+	return c.getClientConfig().ClientConfig()
+}
+
+func (c *Context) getClientSetToInteractWithKubernetesApiServer(token string) (clientset *kubernetes.Clientset, err error) {
+	restConf, err := c.restConfig()
+	if err != nil {
+		return nil, err
+	}
+	if token != "" {
+		restConf.BearerToken = token
+	}
+	return kubernetes.NewForConfig(restConf)
 }
 
 type OauthConfig struct {

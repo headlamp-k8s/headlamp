@@ -1024,7 +1024,7 @@ func getHelmHandler(c *HeadlampConfig, w http.ResponseWriter, r *http.Request) (
 
 	namespace := r.URL.Query().Get("namespace")
 
-	helmHandler, err := helm.NewHandler(context.context.clientConfig(), c.cache, namespace)
+	helmHandler, err := helm.NewHandler(context.context.getClientConfig(), c.cache, namespace)
 	if err != nil {
 		log.Printf("Error: failed to create helm handler: %s", err)
 		http.Error(w, "failed to create helm handler", http.StatusInternalServerError)
