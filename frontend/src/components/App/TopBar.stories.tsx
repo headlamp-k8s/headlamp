@@ -1,15 +1,17 @@
+import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { createStore } from 'redux';
 import { PureTopBar, PureTopBarProps } from './TopBar';
 
-// eslint-disable-next-line no-unused-vars
-const store = createStore((state = { config: {}, ui: { notifications: [] } }, action) => state, {
-  config: {},
-  ui: {
-    notifications: [],
+const store = configureStore({
+  reducer: (state = { config: {}, ui: { notifications: [] } }) => state,
+  preloadedState: {
+    config: {},
+    ui: {
+      notifications: [],
+    },
   },
 });
 
