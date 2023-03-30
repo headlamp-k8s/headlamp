@@ -1,7 +1,7 @@
 import { useTheme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../../lib/k8s/cluster';
-import { useFilterFunc } from '../../../lib/util';
+import { getClusterGroup, useFilterFunc } from '../../../lib/util';
 import { useSettings } from '../../App/Settings/hook';
 import { DateLabel } from '../Label';
 import Link from '../Link';
@@ -9,7 +9,7 @@ import SimpleTable, { SimpleTableProps } from '../SimpleTable';
 
 type SimpleTableColumn = SimpleTableProps['columns'][number];
 
-type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind';
+type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind' | 'cluster';
 
 export interface ResourceTableProps extends Omit<SimpleTableProps, 'columns'> {
   /** The columns to be rendered, like used in SimpleTable, or by name */
@@ -43,10 +43,15 @@ function Table(props: ResourceTableProps) {
   const { t } = useTranslation(['glossary', 'frequent']);
   const theme = useTheme();
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
+  const clusters = getClusterGroup();
 
   let sortingColumn = defaultSortingColumn;
 
-  const cols: SimpleTableColumn[] = columns.map((col, index) => {
+  function removeClusterColIfNeeded(cols: typeof columns) {
+    return cols.filter(col => clusters.length > 1 || col !== 'cluster');
+  }
+
+  const cols: SimpleTableColumn[] = removeClusterColIfNeeded(columns).map((col, index) => {
     if (typeof col !== 'string') {
       return col;
     }
@@ -94,6 +99,12 @@ function Table(props: ResourceTableProps) {
             ) : (
               ''
             ),
+          sort: true,
+        };
+      case 'cluster':
+        return {
+          label: t('glossary|Cluster'),
+          getter: (resource: KubeObject) => resource.cluster,
           sort: true,
         };
       case 'type':
