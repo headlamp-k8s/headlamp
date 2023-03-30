@@ -46,14 +46,14 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
 }
 
 export function CpuCircularChart(props: ResourceCircularChartProps) {
-  const { noMetrics } = props;
+  const { noMetrics, resourceAvailableGetter } = props;
   const { t } = useTranslation(['cluster', 'glossary']);
 
   function cpuUsedGetter(item: KubeObject) {
     return parseCpu(item.usage.cpu) / TO_ONE_CPU;
   }
 
-  function cpuAvailableGetter(item: KubeObject) {
+  function defaultCpuAvailableGetter(item: KubeObject) {
     return parseCpu(item.status!.capacity.cpu) / TO_ONE_CPU;
   }
 
@@ -74,7 +74,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
     <ResourceCircularChart
       getLegend={getLegend}
       resourceUsedGetter={cpuUsedGetter}
-      resourceAvailableGetter={cpuAvailableGetter}
+      resourceAvailableGetter={resourceAvailableGetter || defaultCpuAvailableGetter}
       title={noMetrics ? t('glossary|CPU') : t('cluster|CPU Usage')}
       {...props}
     />
