@@ -1,5 +1,6 @@
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { combineReducers } from 'redux';
+import pluginsReducer from '../../plugin/pluginsSlice';
 import clusterAction from './clusterAction';
 import config from './config';
 import filter from './filter';
@@ -10,6 +11,7 @@ const reducers = combineReducers({
   ui: uiReducer,
   clusterAction: clusterAction,
   config: config,
+  plugins: pluginsReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;

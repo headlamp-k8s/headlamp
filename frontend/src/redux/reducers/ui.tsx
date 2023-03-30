@@ -19,7 +19,6 @@ import {
   UI_FUNCTIONS_OVERRIDE,
   UI_HIDE_APP_BAR,
   UI_INITIALIZE_PLUGIN_VIEWS,
-  UI_PLUGINS_LOADED,
   UI_ROUTER_SET_ROUTE,
   UI_ROUTER_SET_ROUTE_FILTER,
   UI_SET_CLUSTER_CHOOSER_BUTTON,
@@ -72,7 +71,6 @@ export interface UIState {
     name: string;
   };
   branding: BrandingProps;
-  pluginsLoaded: boolean;
   isVersionDialogOpen: boolean;
   notifications: Notification[];
   clusterChooserButtonComponent?: ClusterChooserType;
@@ -130,7 +128,6 @@ export const INITIAL_STATE: UIState = {
   theme: {
     name: '',
   },
-  pluginsLoaded: false,
   isVersionDialogOpen: false,
   branding: {
     logo: null,
@@ -240,10 +237,6 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       // Keep the sidebar folding state in the current one
       newState.sidebar = { ...newState.sidebar, ...setInitialSidebarOpen() };
       return newState;
-    }
-    case UI_PLUGINS_LOADED: {
-      newFilters.pluginsLoaded = action.pluginsLoadedState;
-      break;
     }
     case UI_BRANDING_SET_APP_LOGO: {
       const component = action.component;
