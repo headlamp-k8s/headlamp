@@ -9,7 +9,10 @@ export default function ServiceAccountList() {
 
   return (
     <SectionBox title={<SectionFilterHeader title={t('Service Accounts')} />}>
-      <ResourceTable resourceClass={ServiceAccount} columns={['name', 'namespace', 'age']} />
+      <ResourceTable
+        resourceClass={ServiceAccount}
+        columns={['name', 'namespace', 'cluster', 'age']}
+      />
     </SectionBox>
   );
 }

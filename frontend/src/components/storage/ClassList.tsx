@@ -13,6 +13,7 @@ export default function ClassList() {
         resourceClass={StorageClass}
         columns={[
           'name',
+          'cluster',
           {
             label: t('Reclaim Policy'),
             getter: storageClass => storageClass.reclaimPolicy,

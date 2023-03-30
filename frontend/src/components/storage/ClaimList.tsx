@@ -18,6 +18,7 @@ export default function VolumeClaimList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('Status'),
             getter: volumeClaim => volumeClaim.status.phase,

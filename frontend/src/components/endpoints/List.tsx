@@ -21,6 +21,7 @@ export default function EndpointList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('frequent|Addresses'),
             getter: endpoint => endpoint.getAddressesText(),

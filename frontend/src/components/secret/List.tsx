@@ -17,6 +17,7 @@ export default function SecretList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('Type'),
             getter: secret => secret.type,
