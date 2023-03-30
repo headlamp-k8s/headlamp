@@ -55,22 +55,22 @@ const Template: StoryFn<StoryProps> = args => {
   );
 };
 
-export const InClusterSidebarOpen = Template.bind({});
-InClusterSidebarOpen.args = {
-  isSidebarOpen: true,
-  selected: {
-    item: 'cluster',
-    sidebar: DefaultSidebars.IN_CLUSTER,
-  },
-};
-export const InClusterSidebarClosed = Template.bind({});
-InClusterSidebarClosed.args = {
-  isSidebarOpen: false,
-  selected: {
-    item: 'cluster',
-    sidebar: DefaultSidebars.IN_CLUSTER,
-  },
-};
+// export const InClusterSidebarOpen = Template.bind({});
+// InClusterSidebarOpen.args = {
+//   isSidebarOpen: true,
+//   selected: {
+//     item: 'cluster',
+//     sidebar: DefaultSidebars.IN_CLUSTER,
+//   },
+// };
+// export const InClusterSidebarClosed = Template.bind({});
+// InClusterSidebarClosed.args = {
+//   isSidebarOpen: false,
+//   selected: {
+//     item: 'cluster',
+//     sidebar: DefaultSidebars.IN_CLUSTER,
+//   },
+// };
 export const NoSidebar = Template.bind({});
 NoSidebar.args = {
   selected: {
@@ -78,15 +78,15 @@ NoSidebar.args = {
     sidebar: null,
   },
 };
-export const SelectedItemWithSidebarOmitted = Template.bind({});
-SelectedItemWithSidebarOmitted.args = {
-  selected: {
-    item: 'workloads',
-    // This is what happens internally when plugins only set a selected name, not a selected sidebar.
-    // i.e. it will use the in-cluster sidebar by default.
-    sidebar: '',
-  },
-};
+// export const SelectedItemWithSidebarOmitted = Template.bind({});
+// SelectedItemWithSidebarOmitted.args = {
+//   selected: {
+//     item: 'workloads',
+//     // This is what happens internally when plugins only set a selected name, not a selected sidebar.
+//     // i.e. it will use the in-cluster sidebar by default.
+//     sidebar: '',
+//   },
+// };
 export const HomeSidebarOpen = Template.bind({});
 HomeSidebarOpen.args = {
   selected: {
