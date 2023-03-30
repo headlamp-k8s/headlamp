@@ -1,4 +1,4 @@
-import { applyMiddleware, compose, createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { INITIAL_STATE as CONFIG_INITIAL_STATE } from '../reducers/config';
 import { INITIAL_STATE as FILTER_INITIAL_STATE } from '../reducers/filter';
@@ -14,13 +14,15 @@ const initialState = {
 
 const sagaMiddleware = createSagaMiddleware();
 
-const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(
-  reducers,
-  initialState,
-  composeEnhancers(applyMiddleware(sagaMiddleware))
-);
+const store = configureStore({
+  reducer: reducers,
+  preloadedState: initialState,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+      thunk: false,
+    }).concat(sagaMiddleware),
+});
 
 export default store;
 

@@ -1,7 +1,7 @@
 import { Box, Typography } from '@material-ui/core';
+import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { useLocation } from 'react-router-dom';
-import { createStore } from 'redux';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { useFilterFunc } from '../../lib/util';
 import store from '../../redux/stores/store';
@@ -238,14 +238,14 @@ const TemplateWithFilter: Story<{
 }> = args => {
   const { simpleTableArgs, search, namespaces = [] } = args;
 
-  const storeWithFilterAndSettings = createStore(
-    (
+  const storeWithFilterAndSettings = configureStore({
+    reducer: (
       state = {
         filter: { namespaces: new Set<string>(), search: '' },
         config: { settings: { tableRowsPerPageOptions: [10, 20, 50, 100] } },
       }
     ) => state,
-    {
+    preloadedState: {
       filter: {
         namespaces: new Set(namespaces),
         search,
@@ -255,8 +255,8 @@ const TemplateWithFilter: Story<{
           tableRowsPerPageOptions: [10, 20, 50, 100],
         },
       },
-    }
-  );
+    },
+  });
 
   return (
     <TestContext store={storeWithFilterAndSettings}>
