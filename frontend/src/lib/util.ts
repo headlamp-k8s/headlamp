@@ -242,6 +242,69 @@ export function useErrorState(dependentSetter?: (...args: any) => void) {
   return [error, setError as any];
 }
 
+/**
+ * This function joins a list of items per cluster into a single list of items.
+ *
+ * @param args The list of objects per cluster to join.
+ * @returns The joined list of items, or null if there are no items.
+ */
+export function flattenClusterListItems<T = any>(
+  ...args: ({ [cluster: string]: T[] | null } | null)[]
+): T[] | null {
+  const flatItems: T[] = [];
+
+  let hasItems = false;
+  for (const clusterItems of Object.values(args)) {
+    if (clusterItems === null) {
+      continue;
+    }
+    for (const items of Object.values(clusterItems)) {
+      if (items === null) {
+        continue;
+      }
+
+      hasItems = true;
+      flatItems.push(...items);
+    }
+  }
+
+  if (!hasItems) {
+    return null;
+  }
+
+  return flatItems;
+}
+
+/**
+ * This function combines a list of errors per cluster.
+ *
+ * @param args The list of errors per cluster to join.
+ * @returns The joint list of errors, or null if there are no errors.
+ */
+export function combineClusterListErrors(
+  ...args: ({ [cluster: string]: ApiError | null } | null)[]
+): { [cluster: string]: ApiError | null } | null {
+  const errors: { [key: string]: ApiError | null } = {};
+  let hasErrors = false;
+  for (const clusterErrors of args) {
+    if (clusterErrors === null) {
+      continue;
+    }
+    hasErrors = true;
+    for (const [cluster, error] of Object.entries(clusterErrors)) {
+      if (error !== null) {
+        errors[cluster] = error;
+      }
+    }
+  }
+
+  if (!hasErrors) {
+    return null;
+  }
+
+  return errors;
+}
+
 type URLStateParams<T> = {
   /** The defaultValue for the URL state. */
   defaultValue: T;
