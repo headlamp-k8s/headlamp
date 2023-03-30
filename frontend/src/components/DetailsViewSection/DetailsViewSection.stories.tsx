@@ -1,8 +1,8 @@
+import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { createStore } from 'redux';
 import { SectionBox } from '../common';
 import DetailsViewSection, { DetailsViewSectionProps } from './DetailsViewSection';
 
@@ -40,7 +40,12 @@ export default {
     Story => {
       return (
         <MemoryRouter>
-          <Provider store={createStore((state = ourState) => state, ourState)}>
+          <Provider
+            store={configureStore({
+              reducer: (state = ourState) => state,
+              preloadedState: ourState,
+            })}
+          >
             <Story />
           </Provider>
         </MemoryRouter>

@@ -1,13 +1,15 @@
+import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import helpers from '../../helpers';
 import VersionDialogComponent from './VersionDialog';
 
-// eslint-disable-next-line no-unused-vars
-const store = createStore((state = { ui: { isVersionDialogOpen: false } }, action) => state, {
-  ui: {
-    isVersionDialogOpen: true,
+const store = configureStore({
+  reducer: (state = { ui: { isVersionDialogOpen: false } }) => state,
+  preloadedState: {
+    ui: {
+      isVersionDialogOpen: true,
+    },
   },
 });
 
