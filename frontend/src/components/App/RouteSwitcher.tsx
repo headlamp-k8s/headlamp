@@ -12,7 +12,7 @@ import {
   NotFoundRoute,
   Route as RouteType,
 } from '../../lib/router';
-import { getCluster } from '../../lib/util';
+import { getCluster, getClusterGroup } from '../../lib/util';
 import { setHideAppBar } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { useSidebarItem } from '../Sidebar';
@@ -120,6 +120,10 @@ function AuthRoute(props: AuthRouteProps) {
 
     if (requiresCluster) {
       const clusterName = getCluster();
+      if (getClusterGroup().length > 1) {
+        return children;
+      }
+
       if (!!clusterName) {
         if (!!getToken(clusterName) || !requiresToken()) {
           return children;
