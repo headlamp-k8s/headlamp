@@ -13,6 +13,7 @@ export default function VolumeList() {
         resourceClass={PersistentVolume}
         columns={[
           'name',
+          'cluster',
           {
             label: t('Status'),
             getter: volume => volume.status.phase,

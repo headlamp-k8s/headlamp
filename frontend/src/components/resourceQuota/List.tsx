@@ -12,6 +12,7 @@ export default function ResourceQuotaList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('frequent|Request'),
             getter: (item: ResourceQuota) => {
