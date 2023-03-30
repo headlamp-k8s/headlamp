@@ -1,8 +1,12 @@
+import { Box } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { ApiError } from '../../../lib/k8s/apiProxy';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { getClusterGroup, useFilterFunc } from '../../../lib/util';
 import { useSettings } from '../../App/Settings/hook';
+import { ClusterGroupErrorMessage } from '../../cluster/ClusterGroupErrorMessage';
 import { DateLabel } from '../Label';
 import Link from '../Link';
 import SimpleTable, { SimpleTableProps } from '../SimpleTable';
@@ -14,6 +18,8 @@ type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind' | 'cluster';
 export interface ResourceTableProps extends Omit<SimpleTableProps, 'columns'> {
   /** The columns to be rendered, like used in SimpleTable, or by name */
   columns: (SimpleTableColumn | ColumnType)[];
+  /** Any errors per cluster (useful when using the table a in a multi-cluster listing) */
+  clusterErrors?: { [cluster: string]: ApiError | null } | null;
 }
 
 export interface ResourceTableFromResourceClassProps extends Omit<ResourceTableProps, 'data'> {
@@ -27,19 +33,26 @@ export default function ResourceTable(
     const { resourceClass, ...otherProps } = props as ResourceTableFromResourceClassProps;
     return <TableFromResourceClass resourceClass={resourceClass!} {...otherProps} />;
   }
-
   return <Table {...(props as ResourceTableProps)} />;
 }
 
 function TableFromResourceClass(props: ResourceTableFromResourceClassProps) {
   const { resourceClass, ...otherProps } = props;
-  const [items, error] = resourceClass.useList();
+  const isMultiCluster = getClusterGroup().length > 0;
+  const [items, error, , , errorsPerCluster] = resourceClass.useList();
 
-  return <Table errorMessage={resourceClass.getErrorMessage(error)} {...otherProps} data={items} />;
+  return (
+    <Table
+      errorMessage={resourceClass.getErrorMessage(error)}
+      {...otherProps}
+      clusterErrors={isMultiCluster ? errorsPerCluster : undefined}
+      data={items}
+    />
+  );
 }
 
 function Table(props: ResourceTableProps) {
-  const { columns, defaultSortingColumn, ...otherProps } = props;
+  const { columns, defaultSortingColumn, clusterErrors, ...otherProps } = props;
   const { t } = useTranslation(['glossary', 'frequent']);
   const theme = useTheme();
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
@@ -119,14 +132,38 @@ function Table(props: ResourceTableProps) {
     }
   });
 
+  // Remove clusters whose errors are null.
+  function cleanNullErrors(errors: typeof clusterErrors) {
+    if (!errors) {
+      return {};
+    }
+    const cleanedErrors: typeof clusterErrors = {};
+    Object.entries(errors).forEach(([cluster, error]) => {
+      if (error !== null) {
+        cleanedErrors[cluster] = error;
+      }
+    });
+
+    return cleanedErrors;
+  }
+
+  const cleanedErrors = React.useMemo(() => cleanNullErrors(clusterErrors), [clusterErrors]);
+
   return (
-    <SimpleTable
-      columns={cols}
-      rowsPerPage={storeRowsPerPageOptions}
-      defaultSortingColumn={sortingColumn}
-      filterFunction={useFilterFunc()}
-      reflectInURL
-      {...otherProps}
-    />
+    <>
+      {Object.keys(cleanedErrors).length > 0 && (
+        <Box pt={2}>
+          <ClusterGroupErrorMessage clusters={cleanedErrors} />
+        </Box>
+      )}
+      <SimpleTable
+        columns={cols.filter(col => col !== null) as SimpleTableColumn[]}
+        rowsPerPage={storeRowsPerPageOptions}
+        defaultSortingColumn={sortingColumn}
+        filterFunction={useFilterFunc()}
+        reflectInURL
+        {...otherProps}
+      />
+    </>
   );
 }
