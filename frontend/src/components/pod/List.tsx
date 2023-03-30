@@ -53,10 +53,11 @@ export interface PodListProps {
   error: ApiError | null;
   hideColumns?: ('namespace' | 'restarts')[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
+  clusterErrors?: ResourceTableProps['clusterErrors'];
 }
 
 export function PodListRenderer(props: PodListProps) {
-  const { pods, error, hideColumns = [], reflectTableInURL = 'pods' } = props;
+  const { pods, error, hideColumns = [], reflectTableInURL = 'pods', clusterErrors } = props;
   const { t } = useTranslation('glossary');
 
   function getDataCols() {
@@ -96,6 +97,8 @@ export function PodListRenderer(props: PodListProps) {
       dataCols.splice(insertIndex++, 0, 'namespace');
     }
 
+    dataCols.splice(insertIndex++, 0, 'cluster');
+
     if (!hideColumns.includes('restarts')) {
       dataCols.splice(insertIndex++, 0, {
         label: t('Restarts'),
@@ -122,13 +125,16 @@ export function PodListRenderer(props: PodListProps) {
         columns={getDataCols()}
         data={pods}
         reflectInURL={reflectTableInURL}
+        clusterErrors={clusterErrors}
       />
     </SectionBox>
   );
 }
 
 export default function PodList() {
-  const [pods, error] = Pod.useList();
+  const [pods, error, , , errorsPerCluster] = Pod.useList();
 
-  return <PodListRenderer pods={pods} error={error} reflectTableInURL />;
+  return (
+    <PodListRenderer pods={pods} error={error} clusterErrors={errorsPerCluster} reflectTableInURL />
+  );
 }
