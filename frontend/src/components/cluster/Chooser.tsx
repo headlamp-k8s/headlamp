@@ -48,7 +48,7 @@ export function ClusterTitle(props: ClusterTitleProps) {
   const cluster = props.cluster;
   const clusters = props.clusters;
   const [showChooser, setShowChooser] = React.useState(false);
-  const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
+  const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const ChooserButton = useTypedSelector(state => state.ui.clusterChooserButtonComponent);
 
   useHotkeys('ctrl+shift+l', () => setShowChooser(true));
@@ -278,7 +278,7 @@ export function ClusterDialog(props: ClusterDialogProps) {
   // Only used if open is not provided
   const [show, setShow] = React.useState(true);
   const dispatch = useDispatch();
-  const arePluginsLoaded = useTypedSelector(state => state?.ui?.pluginsLoaded);
+  const arePluginsLoaded = useTypedSelector(state => state?.plugins?.loaded);
   const PluginAppLogoComponent = useTypedSelector(state => state?.ui?.branding?.logo);
 
   function handleClose() {

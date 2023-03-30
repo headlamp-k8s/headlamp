@@ -89,7 +89,7 @@ function ClusterNotFoundPopup() {
 
 export default function Layout({}: LayoutProps) {
   const classes = useStyle();
-  const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
+  const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
   const { t } = useTranslation('frequent');
