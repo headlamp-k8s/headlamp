@@ -88,6 +88,7 @@ export function JobsListRenderer(props: JobsListRendererProps) {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('Completions'),
             getter: job => getCompletions(job),

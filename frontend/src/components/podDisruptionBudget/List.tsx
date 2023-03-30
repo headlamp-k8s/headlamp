@@ -13,6 +13,7 @@ export default function PDBList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('pdb|Min Available'),
             getter: (item: PDB) => item.spec.minAvailable || t('frequent|N/A'),

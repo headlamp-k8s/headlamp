@@ -14,6 +14,7 @@ export default function IngressList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('Hosts'),
             getter: ingress => ingress.getHosts(),

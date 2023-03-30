@@ -12,6 +12,7 @@ export default function PriorityClassList() {
         resourceClass={PriorityClass}
         columns={[
           'name',
+          'cluster',
           {
             label: t('frequent|Value'),
             getter: item => item.value,
