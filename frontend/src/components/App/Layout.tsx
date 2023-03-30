@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { request } from '../../lib/k8s/apiProxy';
 import { Cluster } from '../../lib/k8s/cluster';
-import { getCluster } from '../../lib/util';
+import { getCluster, getClusterGroup } from '../../lib/util';
 import { setConfig } from '../../redux/actions/actions';
 import { ConfigState } from '../../redux/reducers/config';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -93,7 +93,7 @@ export default function Layout({}: LayoutProps) {
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
   const { t } = useTranslation('frequent');
-  const clusterInURL = getCluster();
+  const clusterGroup = getClusterGroup();
 
   useEffect(() => {
     window.clusterConfigFetchHandler = setInterval(
@@ -178,9 +178,13 @@ export default function Layout({}: LayoutProps) {
         <TopBar />
         <Sidebar />
         <main id="main" className={classes.content}>
-          {clusters && !!clusterInURL && !Object.keys(clusters).includes(getCluster() || '') && (
-            <ClusterNotFoundPopup />
-          )}
+          {
+            // Check if none of the clusters in the URL are known.
+            clusters &&
+              clusterGroup.length > 0 &&
+              clusterGroup.filter(cluster => Object.keys(clusters).includes(cluster)).length ===
+                0 && <ClusterNotFoundPopup />
+          }
           <AlertNotification />
           <Box p={[0, 3, 3]}>
             <div className={classes.toolbar} />
