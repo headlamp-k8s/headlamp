@@ -94,14 +94,14 @@ function AuthChooser({ children }: AuthChooserProps) {
 
         console.debug('Testing auth at authchooser');
 
-        testAuth()
+        testAuth(clusterName)
           .then(() => {
             console.debug('Not requiring token as testing auth succeeded');
             useToken = false;
           })
           .catch(err => {
             if (!cancelledRef.current) {
-              console.debug('Requiring token as testing auth failed:', err);
+              console.debug(`Requiring token for ${clusterName} as testing auth failed:`, err);
 
               // Ideally we'd only not assign the error if it was 401 or 403 (so we let the logic
               // proceed to request a token), but let's first check whether this is all we get
