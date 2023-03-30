@@ -170,10 +170,6 @@ export function setTheme(name?: string) {
   return { type: UI_THEME_SET, theme: { name } };
 }
 
-export function setPluginsLoadState(pluginsLoadedState: boolean) {
-  return { type: UI_PLUGINS_LOADED, pluginsLoadedState };
-}
-
 export function setBrandingAppLogoComponent(component: AppLogoType) {
   return { type: UI_BRANDING_SET_APP_LOGO, component };
 }

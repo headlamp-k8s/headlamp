@@ -12,6 +12,9 @@ const store = configureStore({
     ui: {
       notifications: [],
     },
+    plugins: {
+      loaded: true,
+    },
   },
 });
 
