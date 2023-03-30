@@ -22,12 +22,14 @@ export default function CustomResourceDefinitionList() {
                 routeName="crd"
                 params={{
                   name: crd.metadata.name,
+                  cluster: crd.cluster,
                 }}
               >
                 {crd.spec.names.kind}
               </Link>
             ),
           },
+          'cluster',
           {
             label: t('frequent|Group'),
             getter: crd => crd.spec.group,

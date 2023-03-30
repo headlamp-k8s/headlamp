@@ -40,6 +40,7 @@ export default function CronJobList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('Schedule'),
             getter: cronJob => getSchedule(cronJob, i18n.language),

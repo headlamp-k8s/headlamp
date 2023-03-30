@@ -13,6 +13,7 @@ export default function HpaList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('hpa|Reference'),
             getter: item => (

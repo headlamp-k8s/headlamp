@@ -20,6 +20,7 @@ export default function StatefulSetList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('Pods'),
             getter: statefulSet => renderPods(statefulSet),

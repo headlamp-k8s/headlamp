@@ -14,6 +14,7 @@ export default function ServiceList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('Type'),
             getter: service => service.spec.type,
