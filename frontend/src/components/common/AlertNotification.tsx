@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
 import { testAuth } from '../../lib/k8s/apiProxy';
 import { getDefaultRoutes, getRoutePath, Route } from '../../lib/router';
+import { getClusterGroup } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
 const NOT_FOUND_ERROR_MESSAGES = ['Error: Api request error: Bad Gateway', 'Offline'];
@@ -13,7 +14,7 @@ const NETWORK_STATUS_CHECK_TIME = 5000;
 export interface PureAlertNotificationProps {
   routes: { [path: string]: any };
   moreRoutes: { [routeName: string]: Route };
-  testAuth(): Promise<any>;
+  testAuth(cluster?: string): Promise<any>;
 }
 
 export function PureAlertNotification({
@@ -35,17 +36,28 @@ export function PureAlertNotification({
         return;
       }
       setError(null);
-      testAuth()
-        .then(() => {
-          setError(false);
-        })
-        .catch(err => {
-          const error = new Error(err);
-          setError(error.message);
-          setNetworkStatusCheckTimeFactor(
-            (networkStatusCheckTimeFactor: number) => networkStatusCheckTimeFactor + 1
-          );
-        });
+
+      const clusters = getClusterGroup(['']);
+      let authErr: any;
+      for (let i = 0; i < clusters.length; i++) {
+        testAuth(clusters[i])
+          .catch(err => {
+            authErr = err;
+          })
+          .finally(() => {
+            if (i === clusters.length - 1) {
+              if (!authErr) {
+                setError(false);
+              } else {
+                const error = new Error(authErr);
+                setError(error.message);
+                setNetworkStatusCheckTimeFactor(
+                  (networkStatusCheckTimeFactor: number) => networkStatusCheckTimeFactor + 1
+                );
+              }
+            }
+          });
+      }
     }, (networkStatusCheckTimeFactor + 1) * NETWORK_STATUS_CHECK_TIME);
   }
 

@@ -205,7 +205,9 @@ export default function Notifications() {
           const date = new Date(event.metadata.creationTimestamp).getTime();
           const notification = new Notification({ message, date });
           notification.id = event.metadata.uid;
-          notification.url = createRouteURL('cluster') + `?eventsFilter=${notification.id}`;
+          notification.url =
+            createRouteURL('cluster', { cluster: event.cluster }) +
+            `?eventsFilter=${notification.id}`;
 
           changed = true;
 
