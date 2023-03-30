@@ -26,7 +26,7 @@ type Context struct {
 	authInfo *clientcmdapi.AuthInfo
 }
 
-func (c *Context) restConfig() (*rest.Config, error) {
+func (c *Context) clientConfig() clientcmd.ClientConfig {
 	if c.authInfo == nil {
 		c.authInfo = &clientcmdapi.AuthInfo{}
 	}
@@ -46,8 +46,11 @@ func (c *Context) restConfig() (*rest.Config, error) {
 		},
 	}
 
-	clientConfig := clientcmd.NewInteractiveClientConfig(conf, c.Name, nil, nil, nil)
+	return clientcmd.NewInteractiveClientConfig(conf, c.Name, nil, nil, nil)
+}
 
+func (c *Context) restConfig() (*rest.Config, error) {
+	clientConfig := c.clientConfig()
 	return clientConfig.ClientConfig()
 }
 

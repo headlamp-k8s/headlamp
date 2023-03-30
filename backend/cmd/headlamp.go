@@ -30,6 +30,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/helm"
 	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
@@ -961,6 +962,46 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 }
 
 func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
+
+	router.PathPrefix("/clusters/{clusterName}/{helm:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		clusterName := mux.Vars(r)["clusterName"]
+		context, ok := c.contextProxies[clusterName]
+		if !ok {
+			http.NotFound(w, r)
+			return
+		}
+
+		namespace := r.URL.Query().Get("namespace")
+
+		helmAction, err := helm.NewActionConfig(context.context.clientConfig(), namespace)
+		if err != nil {
+			log.Printf("Error: failed to create helm action config: %s", err)
+			http.Error(w, "failed to create helm action config", http.StatusInternalServerError)
+		}
+		helmHandler := helm.HelmHandler{Configuration: helmAction}
+
+		path := r.URL.Path
+		if strings.HasSuffix(path, "/releases/list") && r.Method == http.MethodGet {
+			helmHandler.ListRelease(w, r)
+		}
+		if strings.HasSuffix(path, "/release/install") && r.Method == http.MethodPost {
+			helmHandler.InstallRelease(w, r)
+		}
+		if strings.HasSuffix(path, "/release/history") && r.Method == http.MethodGet {
+			helmHandler.GetReleaseHistory(w, r)
+		}
+		if strings.HasSuffix(path, "/releases/uninstall") && r.Method == http.MethodDelete {
+			helmHandler.UninstallRelease(w, r)
+		}
+		if strings.HasSuffix(path, "/releases/rollback") && r.Method == http.MethodPut {
+			helmHandler.RollbackRelease(w, r)
+		}
+		if strings.HasSuffix(path, "/releases") && r.Method == http.MethodGet {
+			helmHandler.GetRelease(w, r)
+		}
+		return
+	})
+
 	router.PathPrefix("/clusters/{clusterName}/{api:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		clusterName := mux.Vars(r)["clusterName"]
 		ctxtProxy, ok := c.contextProxies[clusterName]
