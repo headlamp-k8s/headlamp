@@ -102,8 +102,16 @@ export function useCluster() {
   return cluster;
 }
 
-export function getVersion(): Promise<StringDict> {
-  return request('/version');
+export function getVersion(cluster = ''): Promise<StringDict> {
+  return request('/version', { cluster });
+}
+
+export function getVersionForCluster(cluster = ''): Promise<[string, StringDict]> {
+  return new Promise((resolve, reject) => {
+    request('/version', { cluster })
+      .then(versionInfo => resolve([cluster, versionInfo]))
+      .catch(e => reject({ cluster: e }));
+  });
 }
 
 export type CancellablePromise = Promise<() => void>;
