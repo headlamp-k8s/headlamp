@@ -106,7 +106,7 @@ export default function Sidebar() {
   const location = useLocation();
   const history = useHistory();
   const buttonClasses = useButtonStyle();
-  const arePluginsLoaded = useTypedSelector(state => state.ui.pluginsLoaded);
+  const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const [isSpecialSidebarOpen, setSpecialSidebarOpen] = React.useState(false);
   const dispatch = useDispatch();
