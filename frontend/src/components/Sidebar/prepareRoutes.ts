@@ -100,6 +100,10 @@ function prepareRoutes(t: (arg: string) => string) {
           label: t('glossary|Port Forwarding'),
           hide: !helpers.isElectron(),
         },
+        {
+          name: 'NetworkPolicies',
+          label: t('glossary|Network Policies'),
+        },
       ],
     },
     {

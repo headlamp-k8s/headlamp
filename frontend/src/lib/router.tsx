@@ -33,6 +33,8 @@ import { LimitRangeDetails } from '../components/limitRange/Details';
 import { LimitRangeList } from '../components/limitRange/List';
 import NamespaceDetails from '../components/namespace/Details';
 import NamespacesList from '../components/namespace/List';
+import { NetworkPolicyDetails } from '../components/networkpolicy/Details';
+import { NetworkPolicyList } from '../components/networkpolicy/List';
 import NodeDetails from '../components/node/Details';
 import NodeList from '../components/node/List';
 import OIDCAuth from '../components/oidcauth';
@@ -280,6 +282,18 @@ const defaultRoutes: {
     exact: true,
     sidebar: 'ingresses',
     component: () => <IngressDetails />,
+  },
+  networkPolicies: {
+    path: '/networkpolicies',
+    exact: true,
+    sidebar: 'NetworkPolicies',
+    component: () => <NetworkPolicyList />,
+  },
+  networkPolicy: {
+    path: '/networkpolicies/:namespace/:name',
+    exact: true,
+    sidebar: 'NetworkPolicies',
+    component: () => <NetworkPolicyDetails />,
   },
   DaemonSets: {
     path: '/daemonsets',
