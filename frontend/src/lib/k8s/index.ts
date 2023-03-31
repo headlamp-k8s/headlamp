@@ -139,12 +139,44 @@ export function useConnectApi(...apiCalls: (() => CancellablePromise)[]) {
 export function labelSelectorToQuery(labelSelector: LabelSelector) {
   const segments: string[] = [];
 
-  const matchLabels = labelSelector.matchLabels ?? {};
-  for (const k in matchLabels) {
-    segments.push(`${k}=${matchLabels[k]}`);
-  }
+  segments.push(...matchLabelsSimplifier(labelSelector.matchLabels, true));
 
   const matchExpressions = labelSelector.matchExpressions ?? [];
+
+  segments.push(...matchExpressionSimplifier(matchExpressions));
+  if (segments.length === 0) {
+    return '';
+  }
+
+  return segments.join(',');
+}
+
+export function matchLabelsSimplifier(
+  matchLabels: LabelSelector['matchLabels'],
+  isEqualSeperator = false
+) {
+  if (!matchLabels) {
+    return '';
+  }
+
+  const segments: string[] = [];
+  for (const k in matchLabels) {
+    if (isEqualSeperator) {
+      segments.push(`${k}=${matchLabels[k]}`);
+      continue;
+    }
+    segments.push(`${k}: ${matchLabels[k]}`);
+  }
+
+  return segments;
+}
+
+export function matchExpressionSimplifier(matchExpressions: LabelSelector['matchExpressions']) {
+  if (!matchExpressions) {
+    return '';
+  }
+
+  const segments: string[] = [];
   for (const expr of matchExpressions) {
     let segment = '';
     if (expr.operator === 'DoesNotExist') {
@@ -206,11 +238,7 @@ export function labelSelectorToQuery(labelSelector: LabelSelector) {
     segments.push(segment);
   }
 
-  if (segments.length === 0) {
-    return '';
-  }
-
-  return segments.join(',');
+  return segments;
 }
 
 // Other exports that can be used by plugins:
