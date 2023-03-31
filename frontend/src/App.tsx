@@ -1,4 +1,5 @@
 import './i18n/config';
+// import './components/common/IconBundles';
 import React from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
