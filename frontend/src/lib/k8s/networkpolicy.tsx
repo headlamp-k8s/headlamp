@@ -1,29 +1,29 @@
 import { apiFactoryWithNamespace } from './apiProxy';
 import { KubeObjectInterface, LabelSelector, makeKubeObject } from './cluster';
 
-interface NetworkPolicyPort {
+export interface NetworkPolicyPort {
   port?: string | number;
   protocol?: string;
   endPort?: number;
 }
 
-interface IPBlock {
+export interface IPBlock {
   cidr: string;
-  except: string;
+  except: string[];
 }
 
-interface NetworkPolicyPeer {
+export interface NetworkPolicyPeer {
   ipBlock?: IPBlock;
   namespaceSelector?: LabelSelector;
   podSelector?: LabelSelector;
 }
 
-interface NetworkPolicyEgressRule {
+export interface NetworkPolicyEgressRule {
   ports: NetworkPolicyPort[];
   to: NetworkPolicyPeer[];
 }
 
-interface NetworkPolicyIngressRule {
+export interface NetworkPolicyIngressRule {
   ports: NetworkPolicyPort[];
   from: NetworkPolicyPeer[];
 }
