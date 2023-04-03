@@ -5,7 +5,7 @@ import helpers from '../../helpers';
 import { createRouteURL } from '../router';
 import { getCluster, getClusterGroup, timeAgo, useErrorState } from '../util';
 import { useConnectApi } from '.';
-import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
+import { ApiError, apiFactory, apiFactoryWithNamespace, post,QueryParameters } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';
@@ -275,10 +275,13 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       // Keep a copy of the options so we can re-run the API call if the options change more
       // efficiently.
       const [apiListOpts, setApiListOpts] = React.useState<ApiListOptions | undefined>(opts);
+      const [gotResults, setGotResults] = React.useState(false);
 
       const includeCluster = !!opts?.clusters;
-
       function onObjs(cluster: string, namespace: string, objList: U[]) {
+        if (!gotResults) {
+          setGotResults(true);
+        }
         // Set the objects so we have them for the next API response...
         setObjs(clusters => {
           const newClusters = { ...clusters };
@@ -305,12 +308,13 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
 
       React.useEffect(() => {
         // Avoid triggering more API calls if the options haven't changed.
-        if (!_.isEqual(opts, apiListOpts)) {
+        if (!gotResults || !_.isEqual(opts, apiListOpts)) {
           setApiListOpts(opts);
         }
       }, [opts]);
 
       const onErrForCluster = (err: ApiError, cluster?: string) => {
+        setGotResults(true);
         onError && onError(err, cluster);
       };
 
@@ -377,6 +381,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       opts?: ApiListOptions
     ): [{ [clusterName: string]: U[] | null }, { [clusterName: string]: null | ApiError }] {
       const clusters = opts?.clusters || getClusterGroup(['']);
+
       const [objList, setObjList] = React.useState<{ [clusterName: string]: U[] | null }>(() => {
         const clusterObjects: { [clusterName: string]: U[] | null } = {};
         for (const cluster of clusters) {

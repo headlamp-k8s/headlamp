@@ -1,13 +1,14 @@
 import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
-import AuthToken from '../components/account/Auth';
+import MultiClusterOverview from '../components/App/Home';
 import NotificationList from '../components/App/Notifications/List';
 import PluginSettings from '../components/App/PluginSettings';
-import Settings, { SettingsButton } from '../components/App/Settings';
+import Settings from '../components/App/Settings';
 import SettingsCluster from '../components/App/Settings/SettingsCluster';
 import SettingsClusters from '../components/App/Settings/SettingsClusters';
+import { DefaultSidebars } from '../components/Sidebar';
+import AuthToken from '../components/account/Auth';
 import AuthChooser from '../components/authchooser';
-import Chooser from '../components/cluster/Chooser';
 import KubeConfigLoader from '../components/cluster/KubeConfigLoader';
 import Overview from '../components/cluster/Overview';
 import { PageGrid } from '../components/common/Resource/Resource';
@@ -61,7 +62,6 @@ import ServiceDetails from '../components/service/Details';
 import ServiceList from '../components/service/List';
 import ServiceAccountDetails from '../components/serviceaccount/Details';
 import ServiceAccountList from '../components/serviceaccount/List';
-import { DefaultSidebars } from '../components/Sidebar';
 import StatefulSetDetails from '../components/statefulset/Details';
 import StatefulSetList from '../components/statefulset/List';
 import PersistentVolumeClaimDetails from '../components/storage/ClaimDetails';
@@ -122,15 +122,13 @@ const defaultRoutes: {
     path: '/',
     exact: true,
     name: 'Choose a cluster',
-    sidebar: null,
+    sidebar: {
+      item: 'clusters',
+      sidebar: DefaultSidebars.HOME,
+    },
     useClusterURL: false,
     noAuthRequired: true,
-    component: () => (
-      <Chooser useCover open>
-        <LocaleSelect />
-        <SettingsButton />
-      </Chooser>
-    ),
+    component: () => <MultiClusterOverview />,
   },
   namespaces: {
     path: '/namespaces',
