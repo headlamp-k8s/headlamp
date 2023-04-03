@@ -983,22 +983,53 @@ func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 		path := r.URL.Path
 		if strings.HasSuffix(path, "/releases/list") && r.Method == http.MethodGet {
 			helmHandler.ListRelease(w, r)
+			return
 		}
 		if strings.HasSuffix(path, "/release/install") && r.Method == http.MethodPost {
 			helmHandler.InstallRelease(w, r)
+			return
 		}
 		if strings.HasSuffix(path, "/release/history") && r.Method == http.MethodGet {
 			helmHandler.GetReleaseHistory(w, r)
+			return
 		}
 		if strings.HasSuffix(path, "/releases/uninstall") && r.Method == http.MethodDelete {
 			helmHandler.UninstallRelease(w, r)
+			return
 		}
 		if strings.HasSuffix(path, "/releases/rollback") && r.Method == http.MethodPut {
 			helmHandler.RollbackRelease(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/releases/upgrade") && r.Method == http.MethodPut {
+			helmHandler.UpgradeRelease(w, r)
+			return
 		}
 		if strings.HasSuffix(path, "/releases") && r.Method == http.MethodGet {
 			helmHandler.GetRelease(w, r)
+			return
 		}
+		if strings.HasSuffix(path, "/repositories") && r.Method == http.MethodGet {
+			helmHandler.ListRepo(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/repositories") && r.Method == http.MethodPost {
+			helmHandler.AddRepo(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/repositories/remove") && r.Method == http.MethodDelete {
+			helmHandler.RemoveRepo(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/repositories/update") && r.Method == http.MethodPut {
+			helmHandler.UpdateRepository(w, r)
+			return
+		}
+		// if strings.HasSuffix(path, "/charts") && r.Method == http.MethodGet {
+		// 	helmHandler.ListAllCharts(w, r)
+		// 	return
+		// }
+		w.WriteHeader(http.StatusNotFound)
 		return
 	})
 
