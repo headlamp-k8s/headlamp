@@ -2,7 +2,7 @@ import { generatePath } from 'react-router';
 import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import NotificationList from '../components/App/Notifications/List';
-// import PluginSettings from '../components/App/PluginSettings';
+import PluginSettings from '../components/App/PluginSettings';
 import Settings, { SettingsButton } from '../components/App/Settings';
 import SettingsCluster from '../components/App/Settings/SettingsCluster';
 import SettingsClusters from '../components/App/Settings/SettingsClusters';
