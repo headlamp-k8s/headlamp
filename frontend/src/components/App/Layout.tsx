@@ -16,7 +16,7 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import store from '../../redux/stores/store';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
-import Sidebar, { drawerWidthClosed, NavigationTabs } from '../Sidebar';
+import Sidebar, { drawerWidthClosed,NavigationTabs } from '../Sidebar';
 import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
 import VersionDialog from './VersionDialog';
@@ -94,6 +94,7 @@ export default function Layout({}: LayoutProps) {
   const clusters = useTypedSelector(state => state.config.clusters);
   const { t } = useTranslation('frequent');
   const clusterGroup = getClusterGroup();
+  let lastFetchTime = 0;
 
   useEffect(() => {
     window.clusterConfigFetchHandler = setInterval(
@@ -117,6 +118,10 @@ export default function Layout({}: LayoutProps) {
    */
   const fetchConfig = () => {
     const clusters = store.getState().config.clusters;
+    if (Date.now() - lastFetchTime < CLUSTER_FETCH_INTERVAL) {
+      return;
+    }
+    lastFetchTime = Date.now();
     request('/config', {}, false, false)
       .then((config: Config) => {
         const clustersToConfig: ConfigState['clusters'] = {};

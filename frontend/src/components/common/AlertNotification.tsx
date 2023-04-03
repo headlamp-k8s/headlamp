@@ -2,9 +2,9 @@ import { Box, useTheme } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
+import { useClustersConf } from '../../lib/k8s';
 import { testAuth } from '../../lib/k8s/apiProxy';
 import { getDefaultRoutes, getRoutePath, Route } from '../../lib/router';
-import { getClusterGroup } from '../../lib/util';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
 const NOT_FOUND_ERROR_MESSAGES = ['Error: Api request error: Bad Gateway', 'Offline'];
@@ -15,12 +15,14 @@ export interface PureAlertNotificationProps {
   routes: { [path: string]: any };
   moreRoutes: { [routeName: string]: Route };
   testAuth(cluster?: string): Promise<any>;
+  clusters: string[];
 }
 
 export function PureAlertNotification({
   routes,
   testAuth,
   moreRoutes,
+  clusters,
 }: PureAlertNotificationProps) {
   const [networkStatusCheckTimeFactor, setNetworkStatusCheckTimeFactor] = React.useState(0);
   const [error, setError] = React.useState<null | string | boolean>(null);
@@ -37,7 +39,6 @@ export function PureAlertNotification({
       }
       setError(null);
 
-      const clusters = getClusterGroup(['']);
       let authErr: any;
       for (let i = 0; i < clusters.length; i++) {
         testAuth(clusters[i])
@@ -148,8 +149,14 @@ export function PureAlertNotification({
 
 export default function AlertNotification() {
   const routes = useTypedSelector(state => state.ui.routes);
+  const clusters = useClustersConf() || {};
 
   return (
-    <PureAlertNotification routes={routes} testAuth={testAuth} moreRoutes={getDefaultRoutes()} />
+    <PureAlertNotification
+      clusters={Object.keys(clusters)}
+      routes={routes}
+      testAuth={testAuth}
+      moreRoutes={getDefaultRoutes()}
+    />
   );
 }
