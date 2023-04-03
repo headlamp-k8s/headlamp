@@ -963,7 +963,7 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 
 func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 
-	router.PathPrefix("/clusters/{clusterName}/{helm:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	router.PathPrefix("/clusters/{clusterName}/helm/{.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		clusterName := mux.Vars(r)["clusterName"]
 		context, ok := c.contextProxies[clusterName]
 		if !ok {
@@ -1029,8 +1029,8 @@ func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 		// 	helmHandler.ListAllCharts(w, r)
 		// 	return
 		// }
-		w.WriteHeader(http.StatusNotFound)
-		return
+		// w.WriteHeader(http.StatusNotFound)
+		// return
 	})
 
 	router.PathPrefix("/clusters/{clusterName}/{api:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
