@@ -86,6 +86,12 @@ class Node extends makeKubeObject<KubeNode>('node') {
 
     return [nodeMetrics, errors];
   }
+
+  isReady() {
+    return this.status.conditions.find(
+      condition => condition.type === 'Ready' && condition.status === 'True'
+    );
+  }
 }
 
 export default Node;
