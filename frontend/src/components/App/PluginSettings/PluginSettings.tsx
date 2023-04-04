@@ -65,6 +65,8 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
   const classes = useStyles();
   const { t } = useTranslation(['frequent', 'settings']);
 
+  const settingsPlugins = useTypedSelector(state => state.config.settings.plugins);
+
   /** Plugin arr to be rendered to the page from prop data */
   const pluginArr: any = props.plugins ? props.plugins : [];
 
@@ -166,6 +168,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
           data={pluginChanges}
         />
       </SectionBox>
+      <div>{settingsPlugins.length}</div>
       {enableSave && (
         <Box className={classes.saveButtonBox}>
           <Button

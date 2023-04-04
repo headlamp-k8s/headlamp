@@ -38,7 +38,7 @@ export const pluginsSlice = createSlice({
   name: 'plugins',
   initialState,
   reducers: {
-    pluginsLoaded(state) {
+    pluginsLoaded(state: { loaded: boolean }) {
       state.loaded = true;
     },
   },

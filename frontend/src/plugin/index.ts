@@ -147,11 +147,16 @@ export function filterSources(
 }
 
 export function updateSettingsPackages(
+  // XN: the plugins from the backend, the first list
   backendPlugins: PluginInfo[],
+  // XN: the plugins from the client that will be sent as a change
   settingsPlugins: PluginInfo[]
 ): PluginInfo[] {
+  // XN: if the backend plugins list is empty, no installed plugins so return
   if (backendPlugins.length === 0) return [];
 
+  // XN: return new array, builds the plugin item and sets it to false if the plugin item does not exist
+  //     adds the plugin item, then returns the one plugin item which adds it to the array if it does exist.
   return backendPlugins.map(plugin => {
     const index = settingsPlugins.findIndex(x => x.name === plugin.name);
     if (index === -1) {
