@@ -1,6 +1,7 @@
 import { Icon, InlineIcon } from '@iconify/react';
 import {
   Box,
+  Button,
   Grid,
   IconButton,
   ListItemText,
@@ -134,7 +135,7 @@ function MultiClusterOverviewList({ clusters }: { clusters: { [kye: string]: any
         <Grid container justifyContent="space-around" alignItems="flex-start">
           <Grid item>
             <PercentageCircle
-              title={t('frequent|Clusters')}
+              title={t('frequent|Clusters & Groups')}
               data={[
                 {
                   name: t('frequent|Healthy'),
@@ -192,7 +193,22 @@ function MultiClusterOverviewList({ clusters }: { clusters: { [kye: string]: any
           </Grid>
         </Grid>
       </SectionBox>
-      <SectionHeader title={t('All clusters')} />
+      <SectionHeader
+        title={t('All clusters')}
+        titleSideActions={[
+          <Button
+            variant="outlined"
+            color="primary"
+            size="small"
+            startIcon={<InlineIcon icon="mdi:group" />}
+            onClick={() => {
+              console.log('GROUPS!');
+            }}
+          >
+            {t('frequent|Add group')}
+          </Button>,
+        ]}
+      />
       <Paper>
         <Box px={2}>
           <SimpleTable
