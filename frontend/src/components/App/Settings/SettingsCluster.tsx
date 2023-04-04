@@ -8,9 +8,11 @@ import { useHistory } from 'react-router-dom';
 import helpers, { ClusterSettings } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
 import { deleteCluster } from '../../../lib/k8s/apiProxy';
+import { getClusterGroupInfo } from '../../../lib/util';
 import { setConfig } from '../../../redux/actions/actions';
 import { NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
+import SettingsClusterGroup from './SettingsClusterGroup';
 
 const useStyles = makeStyles(theme => ({
   chipBox: {
@@ -47,6 +49,17 @@ function isValidNamespaceFormat(namespace: string) {
 }
 
 export default function SettingsCluster() {
+  const clusterGroup = getClusterGroupInfo();
+
+  // Check if we have a simple cluster, not a cluster group.
+  if (clusterGroup === null || (!clusterGroup?.name && clusterGroup?.clusters.length === 1)) {
+    return <ActualSettingsCluster />;
+  }
+
+  return <SettingsClusterGroup />;
+}
+
+function ActualSettingsCluster() {
   const cluster = useCluster();
   const clusterConf = useClustersConf();
   const { t } = useTranslation(['settings', 'frequent', 'cluster']);

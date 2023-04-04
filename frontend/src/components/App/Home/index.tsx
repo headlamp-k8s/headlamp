@@ -89,6 +89,7 @@ function MultiClusterOverviewList({ clusters }: { clusters: { [kye: string]: any
   const [eventsPerCluster, eventsErrorsPerCluster] = Event.useListPerCluster({
     clusters: Object.keys(clusters),
   });
+  const history = useHistory();
 
   const [healthyClusters, unhealthyClusters] = React.useMemo(() => {
     const healthyClusters: string[] = [];
@@ -202,7 +203,7 @@ function MultiClusterOverviewList({ clusters }: { clusters: { [kye: string]: any
             size="small"
             startIcon={<InlineIcon icon="mdi:group" />}
             onClick={() => {
-              console.log('GROUPS!');
+              history.push(createRouteURL('settingsClusterGroupCreate'));
             }}
           >
             {t('frequent|Add group')}

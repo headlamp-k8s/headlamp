@@ -5,6 +5,7 @@ import NotificationList from '../components/App/Notifications/List';
 import PluginSettings from '../components/App/PluginSettings';
 import Settings from '../components/App/Settings';
 import SettingsCluster from '../components/App/Settings/SettingsCluster';
+import SettingsClusterGroup from '../components/App/Settings/SettingsClusterGroup';
 import SettingsClusters from '../components/App/Settings/SettingsClusters';
 import { DefaultSidebars } from '../components/Sidebar';
 import AuthToken from '../components/account/Auth';
@@ -623,6 +624,37 @@ const defaultRoutes: {
     component: () => (
       <PageGrid>
         <SettingsClusters />
+      </PageGrid>
+    ),
+  },
+  settingsClusterGroupCreate: {
+    path: '/new-group',
+    exact: true,
+    name: 'Group',
+    sidebar: {
+      item: '',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: false,
+    noAuthRequired: true,
+    component: () => (
+      <PageGrid>
+        <SettingsClusterGroup isCreate />
+      </PageGrid>
+    ),
+  },
+  settingsClusterGroup: {
+    path: '/group',
+    exact: true,
+    name: 'Group',
+    sidebar: {
+      item: '',
+      sidebar: DefaultSidebars.HOME,
+    },
+    noAuthRequired: true,
+    component: () => (
+      <PageGrid>
+        <SettingsClusterGroup />
       </PageGrid>
     ),
   },

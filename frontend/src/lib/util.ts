@@ -5,6 +5,7 @@ import { matchPath, useHistory } from 'react-router';
 import helpers from '../helpers';
 import { useTypedSelector } from '../redux/reducers/reducers';
 import store from '../redux/stores/store';
+import { loadGroupSettings } from './clusterAroup';
 import { ApiError } from './k8s/apiProxy';
 import { KubeMetrics, KubeObjectInterface, Workload } from './k8s/cluster';
 import { KubeEvent } from './k8s/event';
@@ -222,7 +223,37 @@ export function getCluster(): string | null {
 
 export function getClusterGroup(returnWhenNoClusters: string[] = []): string[] {
   const clusterFromURL = getCluster();
-  return clusterFromURL?.split('+') || returnWhenNoClusters;
+  const clusterList = clusterFromURL?.split('+');
+  if (!clusterList) {
+    return returnWhenNoClusters;
+  }
+
+  // Verify if it's a named cluster group.
+  if (clusterList.length === 1) {
+    const groupInfo = loadGroupSettings(clusterList[0]);
+    if (groupInfo) {
+      return groupInfo.clusters;
+    }
+  }
+
+  return clusterList;
+}
+
+export function getClusterGroupInfo(groupName = ''): { name: string; clusters: string[] } | null {
+  const clusterName = groupName || getCluster();
+  if (!clusterName) {
+    return null;
+  }
+
+  // Check if this is an unnamed group
+  if (clusterName.includes('+')) {
+    return {
+      name: '',
+      clusters: clusterName.split('+'),
+    };
+  }
+
+  return loadGroupSettings(clusterName);
 }
 
 export function useErrorState(dependentSetter?: (...args: any) => void) {
