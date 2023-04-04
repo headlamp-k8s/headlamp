@@ -91,6 +91,9 @@ export interface SimpleTableProps {
   page?: number;
   /** Whether to show the pagination component */
   showPagination?: boolean;
+  /** Whether to show a button for the user to refresh the table when new data is
+   * available. If false, it won't be shown. By default it's true. */
+  askForRefreshOnDataChange?: boolean;
 }
 
 interface ColumnSortButtonProps {
@@ -161,6 +164,7 @@ export default function SimpleTable(props: SimpleTableProps) {
     defaultSortingColumn,
     noTableHeader = false,
     reflectInURL,
+    askForRefreshOnDataChange = true,
   } = props;
   const shouldReflectInURL = reflectInURL !== undefined && reflectInURL !== false;
   const prefix = reflectInURL === true ? '' : reflectInURL || '';
@@ -220,7 +224,7 @@ export default function SimpleTable(props: SimpleTableProps) {
 
       // If the currentData is not up to date and we are in the first page, then update
       // it directly. Otherwise it will require user's intervention.
-      if (!currentData || currentData.length === 0 || page === 0) {
+      if (!askForRefreshOnDataChange || !currentData || currentData.length === 0 || page === 0) {
         setCurrentData(data);
         setDisplayData(getSortData() || data);
       }
@@ -326,7 +330,7 @@ export default function SimpleTable(props: SimpleTableProps) {
       {
         // Show a refresh button if the data is not up to date, so we allow the user to keep
         // reading the current data without "losing" it or being sent to the first page
-        currentData !== data && (
+        askForRefreshOnDataChange && currentData !== data && (
           <Box textAlign="center" p={2}>
             <Button
               variant="contained"
