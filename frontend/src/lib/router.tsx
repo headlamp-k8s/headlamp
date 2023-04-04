@@ -5,6 +5,7 @@ import MultiClusterOverview from '../components/App/Home';
 import NotificationList from '../components/App/Notifications/List';
 import Settings from '../components/App/Settings';
 import SettingsCluster from '../components/App/Settings/SettingsCluster';
+import SettingsClusterGroup from '../components/App/Settings/SettingsClusterGroup';
 import SettingsClusters from '../components/App/Settings/SettingsClusters';
 import AuthChooser from '../components/authchooser';
 import KubeConfigLoader from '../components/cluster/KubeConfigLoader';
@@ -607,6 +608,37 @@ const defaultRoutes: {
     component: () => (
       <PageGrid>
         <SettingsClusters />
+      </PageGrid>
+    ),
+  },
+  settingsClusterGroupCreate: {
+    path: '/new-group',
+    exact: true,
+    name: 'Group',
+    sidebar: {
+      item: '',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: false,
+    noAuthRequired: true,
+    component: () => (
+      <PageGrid>
+        <SettingsClusterGroup isCreate />
+      </PageGrid>
+    ),
+  },
+  settingsClusterGroup: {
+    path: '/group',
+    exact: true,
+    name: 'Group',
+    sidebar: {
+      item: '',
+      sidebar: DefaultSidebars.HOME,
+    },
+    noAuthRequired: true,
+    component: () => (
+      <PageGrid>
+        <SettingsClusterGroup />
       </PageGrid>
     ),
   },
