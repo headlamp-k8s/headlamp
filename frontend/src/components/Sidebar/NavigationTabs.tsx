@@ -95,9 +95,11 @@ export default function NavigationTabs() {
     subList.unshift(navigationItem);
   }
 
-  const tabRoutes = subList.map((item: any) => {
-    return { label: item.label, component: <></> };
-  });
+  const tabRoutes = subList
+    .filter(item => !item.hide)
+    .map((item: SidebarItemProps) => {
+      return { label: item.label, component: <></> };
+    });
 
   defaultIndex = subList.findIndex(item => item.name === sidebar.selected);
   return (
