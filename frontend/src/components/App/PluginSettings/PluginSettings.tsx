@@ -4,6 +4,10 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { PluginInfo, reloadPluginPage } from '../../../plugin/pluginsSlice';
+import { setAppSettings } from '../../../redux/actions/actions';
+import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { SectionBox, SimpleTable } from '../../common';
 
 /**
@@ -40,32 +44,10 @@ export interface PluginSettingsPureProps {
 /** PluginSettingsProp intentially left empty to remain malleable */
 export interface PluginSettingsProps {}
 
-/** PluginInfo is the shape of the metadata information for individual plugin objects. */
-type PluginInfo = {
-  /**
-   * The "name" field contains the plugin's name,
-   * and must be lowercase and one word, and may contain hyphens and underscores.
-   *
-   * @see https://docs.npmjs.com/creating-a-package-json-file#required-name-and-version-fields
-   */
-  name: string;
-  /** description text of the plugin from npm with same restrictions as package.json description
-   *
-   * @see https://docs.npmjs.com/cli/v9/configuring-npm/package-json?v=true#description
-   */
-  description: string;
-  /** homepage is the URL link address for the plugin defined from the package.json */
-  homepage: string;
-  /** isEnable is true when the plugin is enabled */
-  isEnabled: boolean;
-};
-
 /** PluginSettingsPure is the main component to where we render the plugin data. */
 export function PluginSettingsPure(props: PluginSettingsPureProps) {
   const classes = useStyles();
   const { t } = useTranslation(['frequent', 'settings']);
-
-  const settingsPlugins = useTypedSelector(state => state.config.settings.plugins);
 
   /** Plugin arr to be rendered to the page from prop data */
   const pluginArr: any = props.plugins ? props.plugins : [];
@@ -109,10 +91,17 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
 
   /**
    * onSaveButton function to be called once the user clicks the Save button.
-   * This function then takes the current state of the pluginChanges array and inputs it to the onSave prop function.
+   * Usage - This function then takes the current state of the pluginChanges array, saves them to local storage,
+   * then immediately retrieves them for use in the props.onSave method, doing so is now
+   * allowing the newest changes to be saved in local storage which will be used by the prop on page reload.
+   *
+   * NOTE: ONLY WAY TO HAVE A WORKING PAGE RELOAD AFTER USER SAVES PLUGINS.
    */
   function onSaveButtonHandler() {
-    props.onSave(pluginChanges);
+    localStorage.setItem('localPlugins', JSON.stringify(pluginChanges));
+    const localPlugins: any = localStorage.getItem('localPlugins');
+    const parsePlugins = JSON.parse(localPlugins);
+    props.onSave(parsePlugins);
   }
 
   /**
@@ -168,7 +157,6 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
           data={pluginChanges}
         />
       </SectionBox>
-      <div>{settingsPlugins.length}</div>
       {enableSave && (
         <Box className={classes.saveButtonBox}>
           <Button
@@ -187,11 +175,32 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
 
 /** Container function for the PluginSettingsPure, onSave prop returns plugins */
 export default function PluginSettings() {
+  const dispatch = useDispatch();
+
+  /**
+   * On first load, if there is no items in local storage, default to the current state.
+   * Else, pull the existing item from local storage, which are the previous changes, and use them.
+   */
+  let settingsPlugins;
+  if (!localStorage.getItem('localPlugins')) {
+    settingsPlugins = useTypedSelector(state => state.config.settings.plugins);
+    console.log('BACKEND', settingsPlugins);
+  } else {
+    const localPlugins: any = localStorage.getItem('localPlugins');
+    settingsPlugins = JSON.parse(localPlugins);
+    console.log('LOCAL STORAGE', settingsPlugins);
+  }
+
   return (
     <PluginSettingsPure
-      plugins={[]}
+      plugins={settingsPlugins}
       onSave={plugins => {
-        plugins;
+        dispatch(
+          setAppSettings({
+            plugins: plugins,
+          })
+        );
+        dispatch(reloadPluginPage());
       }}
     />
   );

@@ -41,9 +41,12 @@ export const pluginsSlice = createSlice({
     pluginsLoaded(state: { loaded: boolean }) {
       state.loaded = true;
     },
+    reloadPluginPage() {
+      window.location.reload();
+    },
   },
 });
 
-export const { pluginsLoaded } = pluginsSlice.actions;
+export const { pluginsLoaded, reloadPluginPage } = pluginsSlice.actions;
 
 export default pluginsSlice.reducer;
