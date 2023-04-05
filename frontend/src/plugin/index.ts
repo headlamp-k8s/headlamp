@@ -156,10 +156,20 @@ export function updateSettingsPackages(
     const index = settingsPlugins.findIndex(x => x.name === plugin.name);
     if (index === -1) {
       // It's a new one settings doesn't know about so we do not enable it by default
-      return {
-        ...plugin,
-        isEnabled: false,
-      };
+
+      /** If the plugin url is not readily available, reach through the repository field if exists. */
+      if (plugin.repository) {
+        return {
+          ...plugin,
+          homepage: plugin.repository.url,
+          isEnabled: false,
+        };
+      } else {
+        return {
+          ...plugin,
+          isEnabled: false,
+        };
+      }
     }
     return settingsPlugins[index];
   });

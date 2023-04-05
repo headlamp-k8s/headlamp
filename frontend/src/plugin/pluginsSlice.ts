@@ -18,6 +18,8 @@ export type PluginInfo = {
   description: string;
   /** homepage is the URL link address for the plugin defined from the package.json */
   homepage: string;
+  /** repository optional field, repository is an object which some plugins nest their URL link within this object. */
+  repository?: any;
   /** isEnable is true when the plugin is enabled */
   isEnabled?: boolean;
 
