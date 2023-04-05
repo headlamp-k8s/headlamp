@@ -259,6 +259,17 @@ func (h *HelmHandler) RollbackRelease(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+
+	response := map[string]string{
+		"message": "rollback successful",
+	}
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Println(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 type CommonInstallUpdateRequest struct {

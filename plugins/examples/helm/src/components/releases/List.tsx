@@ -1,16 +1,18 @@
 import {
+  DateLabel,
   Link,
   SectionBox,
   SimpleTable,
   StatusLabel,
 } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
+// import { getCluster } from '@kinvolk/headlamp-plugin/lib/util';
 import { Box } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { listReleases } from '../../api/releases';
 
 export default function ReleaseList() {
-  const [releases, setReleases] = useState([]);
+  const [releases, setReleases] = useState(null);
 
   useEffect(() => {
     listReleases().then(response => {
@@ -36,7 +38,12 @@ export default function ReleaseList() {
                   />
                 </Box>
                 <Box ml={1}>
-                  <Link routeName={'helm'}>{release.name}</Link>
+                  <Link
+                    routeName="/helm/:namespace/releases/:releaseName"
+                    params={{ releaseName: release.name, namespace: release.namespace }}
+                  >
+                    {release.name}
+                  </Link>
                 </Box>
               </Box>
             ),
@@ -50,8 +57,9 @@ export default function ReleaseList() {
             getter: release => release.chart.metadata.appVersion,
           },
           {
-            label: 'Chart Version',
-            getter: release => release.chart.metadata.version,
+            label: 'Version',
+            getter: release => release.version,
+            sort: true,
           },
           {
             label: 'Status',
@@ -60,6 +68,10 @@ export default function ReleaseList() {
                 {release.info.status}
               </StatusLabel>
             ),
+          },
+          {
+            label: 'Updated',
+            getter: release => <DateLabel date={release.info.last_deployed} format="mini" />,
           },
         ]}
         data={releases}

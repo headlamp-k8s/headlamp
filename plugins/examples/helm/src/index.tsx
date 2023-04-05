@@ -1,6 +1,7 @@
 import { registerRoute, registerSidebarEntry } from '@kinvolk/headlamp-plugin/lib';
 import ChartDetails from './components/charts/Details';
 import { ChartsList } from './components/charts/List';
+import ReleaseDetail from './components/releases/Detail';
 import ReleaseList from './components/releases/List';
 
 registerSidebarEntry({
@@ -34,6 +35,14 @@ registerRoute({
   name: 'Releases',
   exact: true,
   component: () => <ReleaseList />,
+});
+
+registerRoute({
+  path: '/helm/:namespace/releases/:releaseName',
+  sidebar: 'Releases',
+  name: 'Release Detail',
+  exact: true,
+  component: () => <ReleaseDetail />,
 });
 
 registerRoute({
