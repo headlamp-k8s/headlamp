@@ -511,6 +511,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		}
 		if !isURLContainedInProxyURLs {
 			http.Error(w, "no allowed proxy url match, request denied ", http.StatusBadRequest)
+			return
 		}
 		proxy := httputil.NewSingleHostReverseProxy(url)
 		r.Host = url.Host
