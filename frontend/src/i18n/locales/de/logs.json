@@ -1,0 +1,8 @@
+{
+  "Logs are paused. Click the follow button to resume following them.": "Ereignisprotokolle wurden angehalten. Klicken Sie auf die Schaltfläche \"Verfolgen\", um die Protokollanzeige fortzusetzen.",
+  "Show logs for previous instances of this container.": "Ereignisprotokolle für frühere Instanzen dieses Containers anzeigen.",
+  "You can only select this option for containers that have been restarted.": "Sie können diese Option nur für Container wählen, die neu gestartet wurden.",
+  "Show previous": "Vorherige anzeigen",
+  "Timestamps": "Zeitstempel anzeigen",
+  "Follow": "Verfolgen"
+}

@@ -1,0 +1,11 @@
+{
+  "Download": "Herunterladen",
+  "No results": "Keine Ergebnisse",
+  "Too many matches": "Zu viele Treffer",
+  "{{ currentIndex }} of {{ totalResults }}": "{{ currentIndex }} von {{ totalResults }}",
+  "Match case": "Groß/Kleinschreibung beachten",
+  "Match whole word": "Ganzes Wort suchen",
+  "Use regular expression": "Regulären Ausdruck verwenden",
+  "Previous Match (Shift+Enter)": "Vorheriger Treffer (Umschalt+Eingabe)",
+  "Next Match (Enter)": "Nächster Treffer (Eingabe)"
+}
