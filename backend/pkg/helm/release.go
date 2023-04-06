@@ -3,12 +3,12 @@ package helm
 import (
 	"encoding/base64"
 	"encoding/json"
-	"fmt"
-	"log"
+	"errors"
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gorilla/schema"
+	zlog "github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v2"
 	"helm.sh/helm/v3/pkg/action"
 	"helm.sh/helm/v3/pkg/chart/loader"
@@ -46,7 +46,7 @@ func (h *HelmHandler) ListRelease(w http.ResponseWriter, r *http.Request) {
 	var decoder = schema.NewDecoder()
 	err := decoder.Decode(&req, r.URL.Query())
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("request", "list_releases").Msg("Failed to parse request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -94,7 +94,7 @@ func (h *HelmHandler) ListRelease(w http.ResponseWriter, r *http.Request) {
 
 	releases, err := listClient.Run()
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("request", "list_releases").Msg("Failed to list releases")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -103,13 +103,13 @@ func (h *HelmHandler) ListRelease(w http.ResponseWriter, r *http.Request) {
 	res := ListReleaseResponse{
 		Releases: releases,
 	}
-	w.Header().Set("Content-Type", "application/json")
 	err = json.NewEncoder(w).Encode(res)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("request", "list_releases").Msg("Failed to encode response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	w.Header().Set("Content-Type", "application/json")
 }
 
 type GetReleaseRequest struct {
@@ -124,27 +124,36 @@ func (h *HelmHandler) GetRelease(w http.ResponseWriter, r *http.Request) {
 	var decoder = schema.NewDecoder()
 	err := decoder.Decode(&req, r.URL.Query())
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("request", "get_release").Msg("failed to parse request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// check if release exists
+	_, err = h.Configuration.Releases.Deployed(req.Name)
+	if err == driver.ErrReleaseNotFound {
+		zlog.Error().Err(err).Str("releaseName", req.Name).
+			Str("request", "get_release").Msg("release not found")
+		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
 
 	getClient := action.NewGet(h.Configuration)
 	result, err := getClient.Run(req.Name)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("request", "get_release").Str("releaseName", req.Name).Msg("failed to get release")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	err = json.NewEncoder(w).Encode(result)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("request", "get_release").Str("releaseName", req.Name).Msg("failed to encode response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	w.Header().Set("Content-Type", "application/json")
 }
 
 type GetReleaseHistoryRequest struct {
@@ -163,30 +172,39 @@ func (h *HelmHandler) GetReleaseHistory(w http.ResponseWriter, r *http.Request) 
 	var decoder = schema.NewDecoder()
 	err := decoder.Decode(&req, r.URL.Query())
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("request", "get_release_history").Msg("error decoding request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// check if release exists
+	_, err = h.Configuration.Releases.Deployed(req.Name)
+	if err == driver.ErrReleaseNotFound {
+		zlog.Error().Err(err).Str("releaseName", req.Name).
+			Str("request", "get_release_history").Msg("release not found")
+		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
 
 	getClient := action.NewHistory(h.Configuration)
 	result, err := getClient.Run(req.Name)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("request", "get_release_history").Str("releaseName", req.Name).Msg("failed to get release history")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
 
 	resp := GetReleaseHistoryResponse{
 		Releases: result,
 	}
+	w.WriteHeader(http.StatusOK)
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("request", "get_release_history").Str("releaseName", req.Name).Msg("failed to encode response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	w.Header().Set("Content-Type", "application/json")
 }
 
 type UninstallReleaseRequest struct {
@@ -196,29 +214,55 @@ type UninstallReleaseRequest struct {
 
 func (h *HelmHandler) UninstallRelease(w http.ResponseWriter, r *http.Request) {
 
-	log.Println("uninstall release")
 	// Parse request
 	var req UninstallReleaseRequest
 
 	var decoder = schema.NewDecoder()
 	err := decoder.Decode(&req, r.URL.Query())
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "uninstall").Msg("failed to parse request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	// Get uninstall client
-	uninstallClient := action.NewUninstall(h.Configuration)
-	_, err = uninstallClient.Run(req.Name)
-	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	// check if release exists
+	_, err = h.Configuration.Releases.Deployed(req.Name)
+	if err == driver.ErrReleaseNotFound {
+		zlog.Error().Err(err).Str("releaseName", req.Name).
+			Str("action", "uninstall").Msg("release not found")
+		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
 
-	// Return response
-	w.WriteHeader(http.StatusOK)
+	go func(h *HelmHandler) {
+		actionState.SetStatus("uninstall", req.Name, "processing", nil)
+		h.uninstallRelease(req)
+	}(h)
+
+	response := map[string]string{
+		"message": "uninstall request accepted",
+	}
+	w.WriteHeader(http.StatusAccepted)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		zlog.Error().Err(err).Str("action", "uninstall").Msg("failed to encode response")
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+}
+
+func (h *HelmHandler) uninstallRelease(req UninstallReleaseRequest) {
+
+	// Get uninstall client
+	uninstallClient := action.NewUninstall(h.Configuration)
+	_, err := uninstallClient.Run(req.Name)
+	if err != nil {
+		zlog.Error().Err(err).Str("releaseName", req.Name).Str("namespace", req.Namespace).Msg("failed to uninstall release")
+		actionState.SetStatus("uninstall", req.Name, "failed", err)
+		return
+	}
+	actionState.SetStatus("uninstall", req.Name, "success", err)
 }
 
 type RollbackReleaseRequest struct {
@@ -238,38 +282,56 @@ func (h *HelmHandler) RollbackRelease(w http.ResponseWriter, r *http.Request) {
 	var req RollbackReleaseRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	err = req.Validate()
-	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "rollback").Msg("failed to parse request body")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
+	err = req.Validate()
+	if err != nil {
+		zlog.Error().Err(err).Str("action", "rollback").Msg("failed to validate request body")
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// check if release exists
+	_, err = h.Configuration.Releases.Deployed(req.Name)
+	if err == driver.ErrReleaseNotFound {
+		zlog.Error().Err(err).Str("releaseName", req.Name).
+			Str("action", "rollback").Msg("release not found")
+		http.Error(w, err.Error(), http.StatusNotFound)
+		return
+	}
+
+	go func(h *HelmHandler) {
+		actionState.SetStatus("rollback", req.Name, "processing", nil)
+		h.rollbackRelease(req)
+	}(h)
+
+	response := map[string]string{
+		"message": "rollback request accepted",
+	}
+	w.WriteHeader(http.StatusAccepted)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		zlog.Error().Err(err).Str("action", "rollback").Msg("failed to encode response")
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+}
+
+func (h *HelmHandler) rollbackRelease(req RollbackReleaseRequest) {
 	rollbackClient := action.NewRollback(h.Configuration)
 	rollbackClient.Version = req.Revision
 
-	err = rollbackClient.Run(req.Name)
+	err := rollbackClient.Run(req.Name)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Err(err).Str("release", req.Name).Msg("failed to rollback release")
+		actionState.SetStatus("rollback", req.Name, "failed", err)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-Type", "application/json")
-
-	response := map[string]string{
-		"message": "rollback successful",
-	}
-	err = json.NewEncoder(w).Encode(response)
-	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	actionState.SetStatus("rollback", req.Name, "success", nil)
 }
 
 type CommonInstallUpdateRequest struct {
@@ -292,11 +354,32 @@ func (h *HelmHandler) InstallRelease(w http.ResponseWriter, r *http.Request) {
 	var req InstallRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "install").Msg("failed to parse request body")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
+	go func(h *HelmHandler) {
+		actionState.SetStatus("install", req.Name, "processing", nil)
+		h.installRelease(req)
+	}(h)
+
+	// Return response
+	var response = map[string]string{
+		"message": "install request accepted",
+	}
+	w.WriteHeader(http.StatusAccepted)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		zlog.Error().Err(err).Str("releaseName", req.Name).
+			Str("action", "install").Str("chart", req.Chart).Str("action", "install").Msg("failed to encode response")
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+}
+
+func (h *HelmHandler) installRelease(req InstallRequest) {
 	// Get install client
 	installClient := action.NewInstall(h.Configuration)
 	installClient.ReleaseName = req.Name
@@ -307,23 +390,26 @@ func (h *HelmHandler) InstallRelease(w http.ResponseWriter, r *http.Request) {
 	// locate chart
 	chartPath, err := installClient.ChartPathOptions.LocateChart(req.Chart, settings)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Err(err).Str("chart", req.Chart).
+			Str("action", "install").Str("releaseName", req.Name).Msg("failed to locate chart")
+		actionState.SetStatus("install", req.Name, "failed", err)
 		return
 	}
 
 	// load chart
 	chart, err := loader.Load(chartPath)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Err(err).Str("chart", req.Chart).
+			Str("action", "install").Str("releaseName", req.Name).Msg("failed to load chart")
+		actionState.SetStatus("install", req.Name, "failed", err)
 		return
 	}
 
 	// chart is installable only if it is of type application or empty
 	if chart.Metadata.Type != "" && chart.Metadata.Type != "application" {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Str("chart", req.Chart).
+			Str("action", "install").Str("releaseName", req.Name).Msg("chart is not installable")
+		actionState.SetStatus("install", req.Name, "failed", err)
 		return
 	}
 
@@ -341,8 +427,10 @@ func (h *HelmHandler) InstallRelease(w http.ResponseWriter, r *http.Request) {
 			}
 			err = manager.Update()
 			if err != nil {
-				log.Println(err)
-				http.Error(w, err.Error(), http.StatusInternalServerError)
+				zlog.Error().Err(err).Str("chart", req.Chart).
+					Str("action", "install").Str("releaseName", req.Name).
+					Msg("failed to update dependencies")
+				actionState.SetStatus("install", req.Name, "failed", err)
 				return
 			}
 		}
@@ -351,27 +439,35 @@ func (h *HelmHandler) InstallRelease(w http.ResponseWriter, r *http.Request) {
 	values := make(map[string]interface{})
 	valuesStr, err := base64.StdEncoding.DecodeString(req.Values)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Err(err).Str("chart", req.Chart).
+			Str("action", "install").Str("releaseName", req.Name).
+			Msg("failed to decode values")
+		actionState.SetStatus("install", req.Name, "failed", err)
 		return
 	}
 	err = yaml.Unmarshal([]byte(valuesStr), &values)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Err(err).Str("chart", req.Chart).
+			Str("action", "install").Str("releaseName", req.Name).
+			Msg("failed to unmarshal values")
+		actionState.SetStatus("install", req.Name, "failed", err)
 		return
 	}
 
 	// Install chart
-	result, err := installClient.Run(chart, values)
+	_, err = installClient.Run(chart, values)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Err(err).Str("chart", req.Chart).
+			Str("action", "install").Str("releaseName", req.Name).
+			Msg("failed to install chart")
+		actionState.SetStatus("install", req.Name, "failed", err)
 		return
 	}
-	fmt.Println(result)
-	// Return response
-	w.WriteHeader(http.StatusOK)
+
+	zlog.Info().Str("chart", req.Chart).Str("action", "install").
+		Str("releaseName", req.Name).Msg("chart installed successfully")
+
+	actionState.SetStatus("install", req.Name, "success", nil)
 }
 
 type UpgradeReleaseRequest struct {
@@ -389,13 +485,16 @@ func (h *HelmHandler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 	var req UpgradeReleaseRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("releaseName", req.Name).
+			Str("action", "upgrade").Msg("failed to parse request for upgrade release")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+
 	err = req.Validate()
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("releaseName", req.Name).
+			Str("action", "upgrade").Msg("failed to validate request for upgrade release")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -403,33 +502,62 @@ func (h *HelmHandler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 	// check if release exists
 	_, err = h.Configuration.Releases.Deployed(req.Name)
 	if err == driver.ErrReleaseNotFound {
-		log.Println(err)
+		zlog.Error().Err(err).Str("releaseName", req.Name).
+			Str("action", "upgrade").Str("chart", req.Chart).Msg("release not found")
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
+
+	go func(h *HelmHandler) {
+		actionState.SetStatus("upgrade", req.Name, "processing", nil)
+		h.upgradeRelease(req)
+	}(h)
+
+	// Return response
+	var response = map[string]string{
+		"message": "upgrade request accepted",
+	}
+	w.WriteHeader(http.StatusAccepted)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		zlog.Error().Err(err).Str("releaseName", req.Name).
+			Str("action", "upgrade").Str("chart", req.Chart).Msg("failed to encode response")
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+}
+
+func (h *HelmHandler) upgradeRelease(req UpgradeReleaseRequest) {
 
 	// find chart
 	upgradeClient := action.NewUpgrade(h.Configuration)
 
 	chartPath, err := upgradeClient.ChartPathOptions.LocateChart(req.Chart, settings)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Err(err).Str("chart", req.Chart).
+			Str("action", "upgrade").Str("releaseName", req.Name).
+			Msg("failed to locate chart")
+		actionState.SetStatus("upgrade", req.Name, "failed", err)
 		return
 	}
 
 	// load chart
 	chart, err := loader.Load(chartPath)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Err(err).Str("chart", req.Chart).
+			Str("action", "upgrade").Str("releaseName", req.Name).
+			Msg("failed to load chart")
+		actionState.SetStatus("upgrade", req.Name, "failed", err)
 		return
 	}
 
 	// chart is installable only if it is of type application or empty
 	if chart.Metadata.Type != "" && chart.Metadata.Type != "application" {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Str("chart", req.Chart).
+			Str("action", "upgrade").Str("releaseName", req.Name).
+			Msg("chart is not upgradeable")
+		actionState.SetStatus("upgrade", req.Name, "failed", err)
 		return
 	}
 
@@ -447,8 +575,10 @@ func (h *HelmHandler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 			}
 			err = manager.Update()
 			if err != nil {
-				log.Println(err)
-				http.Error(w, err.Error(), http.StatusInternalServerError)
+				zlog.Error().Str("chart", req.Chart).
+					Str("action", "upgrade").Str("releaseName", req.Name).
+					Msg("chart dependencies update failed")
+				actionState.SetStatus("upgrade", req.Name, "failed", err)
 				return
 			}
 		}
@@ -457,26 +587,92 @@ func (h *HelmHandler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 	values := make(map[string]interface{})
 	valuesStr, err := base64.StdEncoding.DecodeString(req.Values)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Str("chart", req.Chart).
+			Str("action", "upgrade").Str("releaseName", req.Name).
+			Msg("values decoding failed")
+		actionState.SetStatus("upgrade", req.Name, "failed", err)
 		return
 	}
 	err = yaml.Unmarshal([]byte(valuesStr), &values)
 	if err != nil {
-		log.Println(err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		zlog.Error().Str("chart", req.Chart).
+			Str("action", "upgrade").Str("releaseName", req.Name).
+			Msg("values unmarshalling failed")
+		actionState.SetStatus("upgrade", req.Name, "failed", err)
 		return
 	}
 
 	// Upgrade chart
-	result, err := upgradeClient.Run(req.Name, chart, values)
+	_, err = upgradeClient.Run(req.Name, chart, values)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Str("chart", req.Chart).
+			Str("action", "upgrade").Str("releaseName", req.Name).
+			Msg("chart upgrade failed")
+		actionState.SetStatus("upgrade", req.Name, "failed", err)
+		return
+	}
+	zlog.Info().Str("chart", req.Chart).
+		Str("action", "upgrade").Str("releaseName", req.Name).
+		Msg("chart upgradeable is successful")
+
+	actionState.SetStatus("upgrade", req.Name, "success", nil)
+}
+
+type ActionStatusRequest struct {
+	Name   string `json:"name" validate:"required"`
+	Action string `json:"action" validate:"required"`
+}
+
+func (a *ActionStatusRequest) Validate() error {
+	validate := validator.New()
+	err := validate.Struct(a)
+	if err != nil {
+		return err
+	}
+	if a.Action != "install" && a.Action != "upgrade" && a.Action != "uninstall" && a.Action != "rollback" {
+		return errors.New("invalid action")
+	}
+	return nil
+}
+
+func (h *HelmHandler) GetActionStatus(w http.ResponseWriter, r *http.Request) {
+
+	var request ActionStatusRequest
+
+	err := schema.NewDecoder().Decode(&request, r.URL.Query())
+	if err != nil {
+		zlog.Error().Err(err).Msg("failed to parse request for status")
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	err = request.Validate()
+	if err != nil {
+		zlog.Error().Err(err).Msg("failed to validate request for status")
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	status, err := actionState.GetStatus(request.Action, request.Name)
+
+	var response = map[string]string{
+		"status": status,
+	}
+
+	if status == "success" {
+		response["message"] = "action completed successfully"
+	}
+
+	if status == "failed" {
+		response["message"] = "action failed with error: " + err.Error()
+	}
+
+	w.WriteHeader(http.StatusAccepted)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		zlog.Error().Err(err).Msg("failed to encode response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	fmt.Println(result)
-
-	// Return response
-	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
 }

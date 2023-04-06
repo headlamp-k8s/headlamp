@@ -1,7 +1,11 @@
 package helm
 
 import (
-	"log"
+	"fmt"
+	"sync"
+	"time"
+
+	"github.com/rs/zerolog/log"
 
 	"helm.sh/helm/v3/pkg/action"
 	"helm.sh/helm/v3/pkg/cli"
@@ -17,6 +21,70 @@ import (
 var _ genericclioptions.RESTClientGetter = &restConfigGetter{}
 var settings = cli.New()
 
+// key of the object is action_name + "_" + release_name
+// action_name is the name of the action, e.g. install, upgrade, delete
+// status is one of the following: in_progress, success, failed
+type actionStatus struct {
+	store map[string]struct {
+		status    string
+		updatedAt time.Time
+		err       error
+	}
+	sync.Mutex
+}
+
+var actionState *actionStatus
+
+func (a *actionStatus) GetStatus(actionName, releaseName string) (string, error) {
+	a.Lock()
+	defer a.Unlock()
+	key := actionName + "_" + releaseName
+	if _, ok := a.store[key]; !ok {
+		return "", nil
+	}
+	return a.store[key].status, a.store[key].err
+}
+
+func (a *actionStatus) SetStatus(actionName, releaseName, status string, err error) {
+	a.Lock()
+	defer a.Unlock()
+	key := actionName + "_" + releaseName
+	a.store[key] = struct {
+		status    string
+		updatedAt time.Time
+		err       error
+	}{
+		status:    status,
+		updatedAt: time.Now(),
+		err:       err,
+	}
+}
+
+func (a *actionStatus) RemoveStaleStatus() {
+	a.Lock()
+	defer a.Unlock()
+	for key, value := range a.store {
+		if time.Since(value.updatedAt) > 5*time.Minute {
+			delete(a.store, key)
+		}
+	}
+}
+
+func init() {
+	actionState = &actionStatus{}
+	actionState.store = make(map[string]struct {
+		status    string
+		updatedAt time.Time
+		err       error
+	})
+	go func() {
+		for {
+			actionState.RemoveStaleStatus()
+			time.Sleep(time.Minute)
+		}
+	}()
+}
+
 type HelmHandler struct {
 	*action.Configuration
 }
@@ -28,7 +96,7 @@ func NewActionConfig(clientConfig clientcmd.ClientConfig, namespace string) (*ac
 		namespace:    namespace,
 	}
 	logger := func(format string, a ...interface{}) {
-		log.Printf(format+"\n", a...)
+		log.Info().Str("namespace", namespace).Msg(format + "\n" + fmt.Sprintf("%v", a))
 	}
 	err := actionConfig.Init(restConfGetter, namespace, "secret", logger)
 	if err != nil {

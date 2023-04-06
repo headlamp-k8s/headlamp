@@ -17,6 +17,7 @@ require (
 	github.com/knadh/koanf v1.4.4
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pkg/errors v0.9.1
+	github.com/rs/zerolog v1.29.0 // indirect
 	github.com/stretchr/testify v1.8.2
 	golang.org/x/oauth2 v0.3.0
 	golang.org/x/time v0.3.0 // indirect

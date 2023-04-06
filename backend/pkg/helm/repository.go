@@ -2,9 +2,9 @@ package helm
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 
+	zlog "github.com/rs/zerolog/log"
 	"helm.sh/helm/v3/pkg/getter"
 	"helm.sh/helm/v3/pkg/repo"
 )
@@ -25,7 +25,7 @@ func (h *HelmHandler) AddRepo(w http.ResponseWriter, r *http.Request) {
 	var request AddUpdateRepoRequest
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "add_repository").Msg("failed to parse request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -35,7 +35,7 @@ func (h *HelmHandler) AddRepo(w http.ResponseWriter, r *http.Request) {
 	// read repo file
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "add_repository").Msg("failed to read repo file")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -48,7 +48,7 @@ func (h *HelmHandler) AddRepo(w http.ResponseWriter, r *http.Request) {
 
 	repo, err := repo.NewChartRepository(newRepo, getter.All(settings))
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "add_repository").Msg("failed to create chart repository")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -56,7 +56,7 @@ func (h *HelmHandler) AddRepo(w http.ResponseWriter, r *http.Request) {
 	// download chart repo index
 	_, err = repo.DownloadIndexFile()
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "add_repository").Msg("failed to download index file")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -65,12 +65,23 @@ func (h *HelmHandler) AddRepo(w http.ResponseWriter, r *http.Request) {
 	repoFile.Update(newRepo)
 	err = repoFile.WriteFile(settings.RepositoryConfig, 0644)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "add_repository").Msg("failed to write repo file")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
+	// response
+	var response = map[string]string{
+		"message": "success",
+	}
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		zlog.Error().Err(err).Str("action", "add_repository").Msg("failed to encode response")
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 // list repository
@@ -86,7 +97,7 @@ func (h *HelmHandler) ListRepo(w http.ResponseWriter, r *http.Request) {
 	// read repo file
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "list_repository").Msg("failed to read repo file")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -109,7 +120,7 @@ func (h *HelmHandler) ListRepo(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "list_repository").Msg("failed to encode response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -121,14 +132,14 @@ func (h *HelmHandler) RemoveRepo(w http.ResponseWriter, r *http.Request) {
 	name := r.URL.Query().Get("name")
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "remove_repository").Msg("failed to read repo file")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	isRemoved := repoFile.Remove(name)
 	if !isRemoved {
-		log.Println("repository not found")
+		zlog.Error().Err(err).Str("action", "remove_repository").Msg("repository not found")
 		http.Error(w, "repository not found", http.StatusNotFound)
 		return
 	}
@@ -136,7 +147,7 @@ func (h *HelmHandler) RemoveRepo(w http.ResponseWriter, r *http.Request) {
 	// write repo file
 	err = repoFile.WriteFile(settings.RepositoryConfig, 0644)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "remove_repository").Msg("failed to write repo file")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -151,13 +162,13 @@ func (h *HelmHandler) UpdateRepository(w http.ResponseWriter, r *http.Request) {
 	var request AddUpdateRepoRequest
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to parse request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to read repo file")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -169,7 +180,7 @@ func (h *HelmHandler) UpdateRepository(w http.ResponseWriter, r *http.Request) {
 
 	err = repoFile.WriteFile(settings.RepositoryConfig, 0644)
 	if err != nil {
-		log.Println(err)
+		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to write repo file")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

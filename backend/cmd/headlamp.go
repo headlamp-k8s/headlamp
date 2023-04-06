@@ -1025,12 +1025,10 @@ func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 			helmHandler.UpdateRepository(w, r)
 			return
 		}
-		// if strings.HasSuffix(path, "/charts") && r.Method == http.MethodGet {
-		// 	helmHandler.ListAllCharts(w, r)
-		// 	return
-		// }
-		// w.WriteHeader(http.StatusNotFound)
-		// return
+		if strings.HasSuffix(path, "/action/status") && r.Method == http.MethodGet {
+			helmHandler.GetActionStatus(w, r)
+			return
+		}
 	})
 
 	router.PathPrefix("/clusters/{clusterName}/{api:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
