@@ -74,5 +74,10 @@ jobs:
       with:
         context: .
         push: true
+        pull: true
+        platforms: linux/amd64,linux/arm64
         tags: ${{ env.CONTAINER_TAGS }}
         labels: ${{ steps.meta.outputs.labels }}
+        provenance: true
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
