@@ -75,10 +75,18 @@ export function DialogTitle(props: OurDialogTitleProps) {
 export interface DialogProps extends MuiDialogProps {
   withFullScreen?: boolean;
   onFullScreenToggled?: (isFullScreen: boolean) => void;
+  titleProps?: OurDialogTitleProps;
 }
 
 export function Dialog(props: DialogProps) {
-  const { title, withFullScreen = false, children, onFullScreenToggled, ...other } = props;
+  const {
+    title,
+    withFullScreen = false,
+    children,
+    onFullScreenToggled,
+    titleProps,
+    ...other
+  } = props;
   const [fullScreen, setFullScreen] = React.useState(false);
   const { t } = useTranslation('frequent');
 
@@ -130,7 +138,9 @@ export function Dialog(props: DialogProps) {
       {...other}
     >
       {(!!title || withFullScreen) && (
-        <DialogTitle buttons={[<FullScreenButton />, <CloseButton />]}>{title}</DialogTitle>
+        <DialogTitle buttons={[<FullScreenButton />, <CloseButton />]} {...titleProps}>
+          {title}
+        </DialogTitle>
       )}
       {children}
     </MuiDialog>
