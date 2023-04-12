@@ -11,6 +11,7 @@ import Registry, {
   registerClusterChooser,
   registerDetailsViewHeaderAction,
   registerDetailsViewSection,
+  registerGetTokenFunction,
   registerRoute,
   registerRouteFilter,
   registerSidebarEntry,
@@ -52,6 +53,7 @@ window.pluginLib = {
   registerRouteFilter,
   registerSidebarEntry,
   registerSidebarEntryFilter,
+  registerGetTokenFunction,
 };
 
 // @todo: should window.plugins be private?
