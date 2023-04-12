@@ -120,5 +120,8 @@
   "Limit": "Limit",
   "Failed": "Failed",
   "Select locale": "Select locale",
-  "<unknown>": "<unknown>"
+  "<unknown>": "<unknown>",
+  "Navigation": "Navigation Tabs",
+  "Navigation Tabs": "Navigation Tabs",
+  "Main Navigation": "Main Navigation"
 }
