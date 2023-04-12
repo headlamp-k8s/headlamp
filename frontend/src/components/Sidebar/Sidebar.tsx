@@ -194,6 +194,7 @@ export function PureSidebar({
   linkArea,
 }: PureSidebarProps) {
   const classes = useStyle();
+  const { t } = useTranslation(['frequent']);
   const temporaryDrawer = useMediaQuery('(max-width:600px)');
   const smallSideOnly = useMediaQuery('(max-width:960px) and (min-width:600px)');
   const temporarySideBarOpen = open === true && temporaryDrawer && openUserSelected === true;
@@ -255,48 +256,46 @@ export function PureSidebar({
 
   if (temporaryDrawer) {
     return (
-      <Drawer
-        variant="temporary"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: temporarySideBarOpen,
-          [classes.drawerClose]: !temporarySideBarOpen,
-        })}
-        classes={{
-          paper: clsx({
+      <Box component="nav" aria-label={t('frequent|Navigation')}>
+        <Drawer
+          variant="temporary"
+          className={clsx(classes.drawer, {
             [classes.drawerOpen]: temporarySideBarOpen,
             [classes.drawerClose]: !temporarySideBarOpen,
-          }),
-        }}
-        PaperProps={{
-          component: 'nav',
-        }}
-        open={temporarySideBarOpen}
-        onClose={onToggleOpen}
-      >
-        {contents}
-      </Drawer>
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: temporarySideBarOpen,
+              [classes.drawerClose]: !temporarySideBarOpen,
+            }),
+          }}
+          open={temporarySideBarOpen}
+          onClose={onToggleOpen}
+        >
+          {contents}
+        </Drawer>
+      </Box>
     );
   }
 
   return (
-    <Drawer
-      variant="permanent"
-      className={clsx(classes.drawer, {
-        [classes.drawerOpen]: largeSideBarOpen,
-        [classes.drawerClose]: !largeSideBarOpen,
-      })}
-      classes={{
-        paper: clsx({
+    <Box component="nav" aria-label={t('frequent|Navigation')}>
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
           [classes.drawerOpen]: largeSideBarOpen,
           [classes.drawerClose]: !largeSideBarOpen,
-        }),
-      }}
-      PaperProps={{
-        component: 'nav',
-      }}
-    >
-      {contents}
-    </Drawer>
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: largeSideBarOpen,
+            [classes.drawerClose]: !largeSideBarOpen,
+          }),
+        }}
+      >
+        {contents}
+      </Drawer>
+    </Box>
   );
 }
 
