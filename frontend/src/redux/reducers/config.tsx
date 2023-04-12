@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { Cluster } from '../../lib/k8s/cluster';
-import { PluginInfo } from '../../plugin/pluginsSlice';
 import { Action, CONFIG_NEW, CONFIG_SET_SETTINGS } from '../actions/actions';
 
 const storedSettings = JSON.parse(localStorage.getItem('settings') || '{}');
@@ -12,11 +11,6 @@ export interface ConfigState {
   settings: {
     tableRowsPerPageOptions: number[];
     timezone: string;
-
-    /** Plugin info including isEnabled for each plugin.
-     * Used by PluginSettings, and the pluginsSlice.
-     */
-    plugins: PluginInfo[];
     [key: string]: any;
   };
 }
@@ -33,7 +27,6 @@ export const INITIAL_STATE: ConfigState = {
     tableRowsPerPageOptions:
       storedSettings.tableRowsPerPageOptions || defaultTableRowsPerPageOptions,
     timezone: storedSettings.timezone || defaultTimezone(),
-    plugins: [],
   },
 };
 

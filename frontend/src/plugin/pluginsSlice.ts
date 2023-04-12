@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 /**
  * PluginInfo is the shape of the metadata information for individual plugin objects.
@@ -32,11 +32,14 @@ export type PluginInfo = {
 export interface PluginsState {
   /** Have plugins finished executing? */
   loaded: boolean;
+  /** Information stored by settings about plugins. */
+  pluginSettings: PluginInfo[];
 }
-
 const initialState: PluginsState = {
   /** Once the plugins have been fetched and executed. */
   loaded: false,
+  /** If plugin settings are saved use those. */
+  pluginSettings: JSON.parse(localStorage.getItem('headlampPluginSettings') || '[]'),
 };
 
 export const pluginsSlice = createSlice({
@@ -46,9 +49,16 @@ export const pluginsSlice = createSlice({
     pluginsLoaded(state) {
       state.loaded = true;
     },
+    /**
+     * Save the plugin settings. To both the store, and localStorage.
+     */
+    setPluginSettings(state, action: PayloadAction<PluginInfo[]>) {
+      state.pluginSettings = action.payload;
+      localStorage.setItem('headlampPluginSettings', JSON.stringify(action.payload));
+    },
   },
 });
 
-export const { pluginsLoaded } = pluginsSlice.actions;
+export const { pluginsLoaded, setPluginSettings } = pluginsSlice.actions;
 
 export default pluginsSlice.reducer;
