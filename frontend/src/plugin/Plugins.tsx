@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setAppSettings, UI_INITIALIZE_PLUGIN_VIEWS } from '../redux/actions/actions';
+import { UI_INITIALIZE_PLUGIN_VIEWS } from '../redux/actions/actions';
 import { useTypedSelector } from '../redux/reducers/reducers';
 // import { useAppDispatch } from '../redux/hooks';
 import { fetchAndExecutePlugins } from './index';
-import { pluginsLoaded } from './pluginsSlice';
+import { pluginsLoaded, setPluginSettings } from './pluginsSlice';
 
 /**
  * For discovering and executing plugins.
@@ -18,18 +18,14 @@ import { pluginsLoaded } from './pluginsSlice';
  */
 export default function Plugins() {
   const dispatch = useDispatch();
-  const settingsPlugins = useTypedSelector(state => state.config.settings.plugins);
+  const settingsPlugins = useTypedSelector(state => state.plugins.pluginSettings);
 
   // only run on first load
   useEffect(() => {
     dispatch({ type: UI_INITIALIZE_PLUGIN_VIEWS });
 
     fetchAndExecutePlugins(settingsPlugins, updatedSettingsPackages => {
-      dispatch(
-        setAppSettings({
-          plugins: updatedSettingsPackages,
-        })
-      );
+      dispatch(setPluginSettings(updatedSettingsPackages));
     })
       .finally(() => {
         dispatch(pluginsLoaded());
