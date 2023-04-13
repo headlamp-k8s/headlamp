@@ -4,6 +4,9 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
+import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { SectionBox, SimpleTable } from '../../common';
 
 /**
@@ -39,26 +42,6 @@ export interface PluginSettingsPureProps {
 
 /** PluginSettingsProp intentially left empty to remain malleable */
 export interface PluginSettingsProps {}
-
-/** PluginInfo is the shape of the metadata information for individual plugin objects. */
-type PluginInfo = {
-  /**
-   * The "name" field contains the plugin's name,
-   * and must be lowercase and one word, and may contain hyphens and underscores.
-   *
-   * @see https://docs.npmjs.com/creating-a-package-json-file#required-name-and-version-fields
-   */
-  name: string;
-  /** description text of the plugin from npm with same restrictions as package.json description
-   *
-   * @see https://docs.npmjs.com/cli/v9/configuring-npm/package-json?v=true#description
-   */
-  description: string;
-  /** homepage is the URL link address for the plugin defined from the package.json */
-  homepage: string;
-  /** isEnable is true when the plugin is enabled */
-  isEnabled: boolean;
-};
 
 /** PluginSettingsPure is the main component to where we render the plugin data. */
 export function PluginSettingsPure(props: PluginSettingsPureProps) {
@@ -184,11 +167,16 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
 
 /** Container function for the PluginSettingsPure, onSave prop returns plugins */
 export default function PluginSettings() {
+  const dispatch = useDispatch();
+
+  const pluginSettings = useTypedSelector(state => state.plugins.pluginSettings);
+
   return (
     <PluginSettingsPure
-      plugins={[]}
+      plugins={pluginSettings}
       onSave={plugins => {
-        plugins;
+        dispatch(setPluginSettings(plugins));
+        dispatch(reloadPage());
       }}
     />
   );
