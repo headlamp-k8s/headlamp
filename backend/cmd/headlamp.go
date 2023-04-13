@@ -513,15 +513,38 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			http.Error(w, "no allowed proxy url match, request denied ", http.StatusBadRequest)
 			return
 		}
-		proxy := httputil.NewSingleHostReverseProxy(url)
-		r.Host = url.Host
-		r.URL.Host = url.Host
-		r.URL.Path = ""
-		r.URL.Scheme = url.Scheme
-		r.RequestURI = url.RequestURI()
 
-		log.Println("Requesting ", r.URL.String())
-		proxy.ServeHTTP(w, r)
+		proxyReq, err := http.NewRequest(r.Method, proxyURL, r.Body)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		// We may want to filter some headers, otherwise we could just use a shallow copy
+		// proxyReq.Header = req.Header
+		proxyReq.Header = make(http.Header)
+		for h, val := range r.Header {
+			proxyReq.Header[h] = val
+		}
+
+		// Disable caching
+		w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
+		w.Header().Set("Expires", time.Unix(0, 0).Format(http.TimeFormat))
+		w.Header().Set("Pragma", "no-cache")
+		w.Header().Set("X-Accel-Expires", "0")
+
+		client := http.Client{}
+		resp, err := client.Do(proxyReq)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadGateway)
+			return
+		}
+		respBody, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadGateway)
+			return
+		}
+		w.Write(respBody)
+		defer resp.Body.Close()
 	})
 
 	// Configuration
