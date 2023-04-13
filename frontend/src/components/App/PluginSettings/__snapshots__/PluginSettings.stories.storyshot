@@ -85,7 +85,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-0
+                https://example.com/plugin-link-0
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -138,7 +138,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-1
+                https://example.com/plugin-link-1
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -190,7 +190,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-2
+                https://example.com/plugin-link-2
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -243,7 +243,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-3
+                https://example.com/plugin-link-3
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -295,7 +295,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-4
+                https://example.com/plugin-link-4
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -359,6 +359,52 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
 `;
 
 exports[`Storyshots Settings/PluginSettings Empty 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-item"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <h2
+            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+          >
+            Plugins
+          </h2>
+          <div
+            class="MuiBox-root MuiBox-root"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+          >
+            No data to be shown.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
 <div>
   <div
     class="MuiBox-root MuiBox-root"
@@ -489,7 +535,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-0
+                https://example.com/plugin-link-0
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -542,7 +588,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-1
+                https://example.com/plugin-link-1
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -594,7 +640,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-2
+                https://example.com/plugin-link-2
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -647,7 +693,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-3
+                https://example.com/plugin-link-3
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -699,7 +745,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-4
+                https://example.com/plugin-link-4
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -829,7 +875,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-0
+                https://example.com/plugin-link-0
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -882,7 +928,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-1
+                https://example.com/plugin-link-1
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -934,7 +980,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-2
+                https://example.com/plugin-link-2
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -987,7 +1033,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-3
+                https://example.com/plugin-link-3
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1039,7 +1085,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-4
+                https://example.com/plugin-link-4
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1092,7 +1138,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-5
+                https://example.com/plugin-link-5
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1144,7 +1190,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-6
+                https://example.com/plugin-link-6
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1197,7 +1243,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-7
+                https://example.com/plugin-link-7
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1249,7 +1295,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-8
+                https://example.com/plugin-link-8
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1302,7 +1348,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-9
+                https://example.com/plugin-link-9
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1354,7 +1400,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-10
+                https://example.com/plugin-link-10
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1407,7 +1453,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-11
+                https://example.com/plugin-link-11
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1459,7 +1505,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-12
+                https://example.com/plugin-link-12
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1512,7 +1558,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-13
+                https://example.com/plugin-link-13
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1564,7 +1610,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-14
+                https://example.com/plugin-link-14
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1694,7 +1740,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-0
+                https://example.com/plugin-link-0
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1747,7 +1793,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-1
+                https://example.com/plugin-link-1
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1799,7 +1845,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-2
+                https://example.com/plugin-link-2
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1852,7 +1898,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-3
+                https://example.com/plugin-link-3
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1904,7 +1950,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-4
+                https://example.com/plugin-link-4
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -1957,7 +2003,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-5
+                https://example.com/plugin-link-5
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -2009,7 +2055,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-6
+                https://example.com/plugin-link-6
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -2062,7 +2108,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-7
+                https://example.com/plugin-link-7
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -2114,7 +2160,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-8
+                https://example.com/plugin-link-8
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -2167,7 +2213,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-9
+                https://example.com/plugin-link-9
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -2219,7 +2265,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-10
+                https://example.com/plugin-link-10
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -2272,7 +2318,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-11
+                https://example.com/plugin-link-11
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -2324,7 +2370,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-12
+                https://example.com/plugin-link-12
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -2377,7 +2423,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-13
+                https://example.com/plugin-link-13
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -2429,7 +2475,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                https://plugin-link-14
+                https://example.com/plugin-link-14
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"

@@ -19,19 +19,25 @@ const Template: Story<PluginSettingsPureProps> = args => (
  * createDemoData function will create example data objects to act as plugin data.
  * The function will return an array of demo data objects based on the number specified.
  */
-function createDemoData(arrSize: number) {
+function createDemoData(arrSize: number, homepage?: boolean) {
   /** Static list of plugins */
   const pluginArr: any = [];
 
   for (let i = 0; i < arrSize; i++) {
-    const newPlugin = {
+    let newPlugin: any = {
       name: `plugin a ${i}`,
       description: `This is a plugin for this project PLUGIN A${i}`,
-      homepage: `https://plugin-link-${i}`,
       isEnabled: i % 2 === 0,
     };
+
+    if (homepage) {
+      newPlugin = { ...newPlugin, homepage: `https://example.com/plugin-link-${i}` };
+    } else {
+      newPlugin = { ...newPlugin, repository: { url: `https://example.com/plugin-link-${i}` } };
+    }
     pluginArr.push(newPlugin);
   }
+
   return pluginArr;
 }
 
@@ -39,10 +45,11 @@ function createDemoData(arrSize: number) {
  * Creation of data arrays ranging from 0 to 50 to demo state of empty, few, many, and large numbers of data objects.
  * NOTE: The numbers used are up to the users preference.
  */
-const demoFew = createDemoData(5);
-const demoFewSaveEnable = createDemoData(5);
-const demoMany = createDemoData(15);
-const demoMore = createDemoData(50);
+const demoFew = createDemoData(5, true);
+const demoFewSaveEnable = createDemoData(5, true);
+const demoMany = createDemoData(15, true);
+const demoMore = createDemoData(50, true);
+const demoHomepageEmpty = createDemoData(5, false);
 const demoEmpty = createDemoData(0);
 
 /** NOTE: Use console inspect to track console log messages. */
@@ -77,6 +84,14 @@ MoreItems.args = {
   plugins: demoMore,
   onSave: plugins => {
     console.log('demo more', plugins);
+  },
+};
+
+export const EmptyHomepageItems = Template.bind({});
+demoHomepageEmpty.args = {
+  plugins: demoHomepageEmpty,
+  onSave: (plugins: any) => {
+    console.log('Empty Homepage', plugins);
   },
 };
 

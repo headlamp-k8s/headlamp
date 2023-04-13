@@ -129,7 +129,9 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
             },
             {
               label: 'Homepage',
-              datum: 'homepage',
+              getter: plugin => {
+                return plugin.homepage ? plugin.homepage : plugin?.repository?.url;
+              },
             },
             {
               label: 'Enable',
