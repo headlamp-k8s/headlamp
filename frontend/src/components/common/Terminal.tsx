@@ -60,6 +60,7 @@ const useStyle = makeStyles(theme => ({
 
 interface TerminalProps extends DialogProps {
   item: Pod;
+  isAttach?: boolean;
   onClose?: () => void;
 }
 
@@ -72,11 +73,11 @@ interface XTerminalConnected {
 type execReturn = ReturnType<Pod['exec']>;
 
 export default function Terminal(props: TerminalProps) {
-  const { item, onClose, ...other } = props;
+  const { item, onClose, isAttach, ...other } = props;
   const classes = useStyle();
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
   const [container, setContainer] = React.useState<string | null>(null);
-  const execRef = React.useRef<execReturn | null>(null);
+  const execOrAttachRef = React.useRef<execReturn | null>(null);
   const fitAddonRef = React.useRef<FitAddon | null>(null);
   const xtermRef = React.useRef<XTerminalConnected | null>(null);
   const [shells, setShells] = React.useState({
@@ -119,7 +120,7 @@ export default function Terminal(props: TerminalProps) {
         }
       }
 
-      if (arg.type === 'keydown' && arg.code === 'Enter') {
+      if (!isAttach && arg.type === 'keydown' && arg.code === 'Enter') {
         if (xtermRef.current?.reconnectOnEnter) {
           setShells(shells => ({
             ...shells,
@@ -137,7 +138,7 @@ export default function Terminal(props: TerminalProps) {
   }
 
   function send(channel: number, data: string) {
-    const socket = execRef.current!.getSocket();
+    const socket = execOrAttachRef.current!.getSocket();
 
     // We should only send data if the socket is ready.
     if (!socket || socket.readyState !== 1) {
@@ -162,14 +163,12 @@ export default function Terminal(props: TerminalProps) {
     // The first byte is discarded because it just identifies whether
     // this data is from stderr, stdout, or stdin.
     const data = bytes.slice(1);
-    const text = decoder.decode(data);
+    let text = decoder.decode(data);
 
-    if (bytes.byteLength < 2) {
-      return;
-    }
-
+    // to check if we are connecting to the socket for the first time
+    let firstConnect = false;
     // Send resize command to server once connection is establised.
-    if (!xtermc.connected && !!text) {
+    if (!xtermc.connected) {
       xterm.clear();
       (async function () {
         send(4, `{"Width":${xterm.cols},"Height":${xterm.rows}}`);
@@ -177,6 +176,7 @@ export default function Terminal(props: TerminalProps) {
       // On server error, don't set it as connected
       if (channel !== Channel.ServerError) {
         xtermc.connected = true;
+        firstConnect = true;
         console.debug('Terminal is now connected');
       }
     }
@@ -186,8 +186,8 @@ export default function Terminal(props: TerminalProps) {
         onClose();
       }
 
-      if (execRef.current) {
-        execRef.current?.cancel();
+      if (execOrAttachRef.current) {
+        execOrAttachRef.current?.cancel();
       }
 
       return;
@@ -197,12 +197,22 @@ export default function Terminal(props: TerminalProps) {
       shellConnectFailed(xtermc);
       return;
     }
-
+    if (isAttach) {
+      // in case of attach if we didn't recieve any data from the process we should notify the user that if any data comes
+      // we will be showing it in the terminal
+      if (firstConnect && !text) {
+        text =
+          t(
+            "Any new output for this container's process should be shown below. In case it doesn't show up, press enter…"
+          ) + '\r\n';
+      }
+      text = text.replace(/\r\n/g, '\n').replace(/\n/g, '\r\n');
+    }
     xterm.write(text);
   }
 
   function tryNextShell() {
-    if (shells.available.length > 0) {
+    if (!isAttach && shells.available.length > 0) {
       setShells(currentShell => ({
         ...currentShell,
         currentIdx: (currentShell.currentIdx + 1) % currentShell.available.length,
@@ -259,7 +269,7 @@ export default function Terminal(props: TerminalProps) {
 
       if (xtermRef.current) {
         xtermRef.current.xterm.dispose();
-        execRef.current?.cancel();
+        execOrAttachRef.current?.cancel();
       }
 
       const isWindows = ['Windows', 'Win16', 'Win32', 'WinCE'].indexOf(navigator?.platform) >= 0;
@@ -278,17 +288,28 @@ export default function Terminal(props: TerminalProps) {
       fitAddonRef.current = new FitAddon();
       xtermRef.current.xterm.loadAddon(fitAddonRef.current);
 
-      const command = getCurrentShellCommand();
-
-      xtermRef.current.xterm.writeln(t('Trying to run "{{command}}"…', { command }) + '\n');
-
       (async function () {
-        execRef.current = await item.exec(
-          container,
-          (items: ArrayBuffer) => onData(xtermRef.current!, items),
-          { command: [command], failCb: () => shellConnectFailed(xtermRef.current!) }
-        );
+        if (isAttach) {
+          xtermRef?.current?.xterm.writeln(
+            t('Trying to attach to the container {{ container }}…', { container }) + '\n'
+          );
 
+          execOrAttachRef.current = await item.attach(
+            container,
+            (items: ArrayBuffer) => onData(xtermRef.current!, items),
+            { failCb: () => shellConnectFailed(xtermRef.current!) }
+          );
+        } else {
+          const command = getCurrentShellCommand();
+
+          xtermRef?.current?.xterm.writeln(t('Trying to run "{{command}}"…', { command }) + '\n');
+
+          execOrAttachRef.current = await item.exec(
+            container,
+            (items: ArrayBuffer) => onData(xtermRef.current!, items),
+            { command: [command], failCb: () => shellConnectFailed(xtermRef.current!) }
+          );
+        }
         setupTerminal(terminalContainerRef, xtermRef.current!.xterm, fitAddonRef.current!);
       })();
 
@@ -300,7 +321,7 @@ export default function Terminal(props: TerminalProps) {
 
       return function cleanup() {
         xtermRef.current?.xterm.dispose();
-        execRef.current?.cancel();
+        execOrAttachRef.current?.cancel();
         window.removeEventListener('resize', handler);
       };
     },
@@ -319,7 +340,7 @@ export default function Terminal(props: TerminalProps) {
   );
 
   React.useEffect(() => {
-    if (shells.available.length === 0) {
+    if (!isAttach && shells.available.length === 0) {
       setShells({
         available: getAvailableShells(),
         currentIdx: 0,
@@ -384,7 +405,11 @@ export default function Terminal(props: TerminalProps) {
       }}
       keepMounted
       withFullScreen
-      title={t('Terminal: {{ itemName }}', { itemName: item.metadata.name })}
+      title={
+        isAttach
+          ? t('Attach: {{ itemName }}', { itemName: item.metadata.name })
+          : t('Terminal: {{ itemName }}', { itemName: item.metadata.name })
+      }
       {...other}
     >
       <DialogContent className={classes.dialogContent}>

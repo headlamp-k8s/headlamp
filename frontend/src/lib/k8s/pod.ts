@@ -130,6 +130,18 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
     return cancel;
   }
 
+  attach(container: string, onAttach: StreamResultsCb, options: StreamArgs = {}) {
+    const url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/attach?container=${container}&stdin=true&stderr=true&stdout=true&tty=true`;
+    const additionalProtocols = [
+      'v4.channel.k8s.io',
+      'v3.channel.k8s.io',
+      'v2.channel.k8s.io',
+      'channel.k8s.io',
+    ];
+
+    return stream(url, onAttach, { additionalProtocols, isJson: false, ...options });
+  }
+
   exec(container: string, onExec: StreamResultsCb, options: ExecOptions = {}) {
     const { command = ['sh'], ...streamOpts } = options;
     const commandStr = command.map(item => '&command=' + encodeURIComponent(item)).join('');
