@@ -36,3 +36,22 @@ export function rollbackRelease(namespace: string, releaseName: string, version:
     }),
   });
 }
+
+export function createRelease(name: string, namespace: string, value: string, chart: string) {
+  return request(`/helm/release/install?namespace=${namespace}`, {
+    method: 'POST',
+    body: JSON.stringify({
+      name: name,
+      namespace: namespace,
+      //@todo fix this
+      value: value,
+      chart: chart,
+    }),
+  });
+}
+
+export function getActionStatus(name: string, action: string) {
+  return request(`/helm/action/status?name=${name}&action=${action}`, {
+    method: 'GET',
+  });
+}

@@ -1,3 +1,4 @@
+// import { getCluster } from '@kinvolk/headlamp-plugin/lib/util';
 import {
   DateLabel,
   Link,
@@ -5,7 +6,6 @@ import {
   SimpleTable,
   StatusLabel,
 } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
-// import { getCluster } from '@kinvolk/headlamp-plugin/lib/util';
 import { Box } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -16,7 +16,6 @@ export default function ReleaseList() {
 
   useEffect(() => {
     listReleases().then(response => {
-      console.log('response is', response);
       setReleases(response.releases);
     });
   }, []);

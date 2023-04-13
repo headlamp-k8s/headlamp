@@ -28,5 +28,12 @@
   },
   "devDependencies": {
     "@kinvolk/headlamp-plugin": "^0.5.4"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.5.0",
+    "@types/js-yaml": "^4.0.5",
+    "js-yaml": "^4.1.0",
+    "react-markdown": "^8.0.7",
+    "react-syntax-highlighter": "^15.5.0"
   }
 }

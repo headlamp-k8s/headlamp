@@ -8,14 +8,14 @@ registerSidebarEntry({
   name: 'Helm',
   url: '/helm/releases',
   icon: 'simple-icons:helm',
-  parent: null,
+  parent: '',
   label: 'Helm',
 });
 
 registerSidebarEntry({
   name: 'Releases',
   url: '/helm/releases',
-  icon: null,
+  icon: '',
   parent: 'Helm',
   label: 'Releases',
 });
@@ -23,7 +23,7 @@ registerSidebarEntry({
 registerSidebarEntry({
   name: 'Charts',
   url: '/helm/charts',
-  icon: null,
+  icon: '',
   parent: 'Helm',
   label: 'Charts',
 });
@@ -54,7 +54,7 @@ registerRoute({
 });
 
 registerRoute({
-  path: '/helm/charts/:chartName',
+  path: '/helm/:repoName/charts/:chartName',
   sidebar: 'Charts',
   name: 'Charts',
   exact: true,

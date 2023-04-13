@@ -1,20 +1,37 @@
+import { Router } from '@kinvolk/headlamp-plugin/lib';
 import {
   ActionButton,
-  ConfirmDialog,
   DateLabel,
-  Dialog,
   NameValueTable,
   SectionBox,
   SectionHeader,
   SimpleTable,
   StatusLabel,
 } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
-import { Button, DialogActions, DialogContent, MenuItem, Select } from '@material-ui/core';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  MenuItem,
+  Select,
+} from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router';
-import { deleteRelease, getRelease, getReleaseHistory, rollbackRelease } from '../../api/releases';
+import { useHistory,useParams } from 'react-router';
+import {
+  deleteRelease,
+  getActionStatus,
+  getRelease,
+  getReleaseHistory,
+  rollbackRelease,
+} from '../../api/releases';
+import { EditorDialog } from './EditorDialog';
 
+const { createRouteURL } = Router;
 export default function ReleaseDetail() {
   const [update, setUpdate] = useState<boolean>(false);
   const { namespace, releaseName } = useParams<{ namespace: string; releaseName: string }>();
@@ -23,33 +40,69 @@ export default function ReleaseDetail() {
   const [openDeleteAlert, setOpenDeleteAlert] = useState<boolean>(false);
   const [rollbackPopup, setRollbackPopup] = useState<boolean>(false);
   const [revertVersion, setRevertVersion] = useState<string>('');
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
+
   useEffect(() => {
     getRelease(namespace, releaseName).then(response => {
-      console.log('response is', response);
       setRelease(response);
     });
   }, [update]);
 
   useEffect(() => {
     getReleaseHistory(namespace, releaseName).then(response => {
-      console.log('response is', response);
       setReleaseHistory(response);
     });
   }, [update]);
 
+  function checkDeleteReleaseStatus(name: string) {
+    getActionStatus(name, 'uninstall').then(response => {
+      if (response.status === 'processing') {
+        setTimeout(() => checkDeleteReleaseStatus(name), 1000);
+      } else if (response.status !== 'success') {
+        enqueueSnackbar(`Failed to delete release ${name}` + response.message, {
+          variant: 'error',
+        });
+      } else {
+        enqueueSnackbar(`Successfully deleted release ${name}`, { variant: 'success' });
+        setOpenDeleteAlert(false);
+        history.replace(createRouteURL('/helm/releases'));
+        setIsDeleting(false);
+      }
+    });
+  }
+
   return (
     <>
-      <ConfirmDialog
-        open={openDeleteAlert}
-        title="Uninstall Release"
-        description="Are you sure you want to uninstall this release?"
-        handleClose={() => setOpenDeleteAlert(false)}
-        onConfirm={() => {
-          deleteRelease(namespace, releaseName).then(() => {
-            // TODO:redirect to releases list
-          });
-        }}
+      <EditorDialog
+        openEditor={isEditorOpen}
+        handleEditor={open => setIsEditorOpen(open)}
+        release={release}
+        releaseName={release?.name}
+        releaseNamespace={release?.namespace}
       />
+      <Dialog open={openDeleteAlert} maxWidth="sm">
+        <DialogTitle>Uninstall Release</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Are you sure you want to uninstall this release?</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDeleteAlert(false)}>No</Button>
+          <Button
+            disabled={isDeleting}
+            onClick={() => {
+              deleteRelease(namespace, releaseName).then(() => {
+                setIsDeleting(true);
+                checkDeleteReleaseStatus(releaseName);
+              });
+            }}
+          >
+            {isDeleting ? 'Deleting' : 'Yes'}
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Dialog
         open={rollbackPopup}
         maxWidth="sm"
@@ -60,13 +113,13 @@ export default function ReleaseDetail() {
           <Select
             style={{ minWidth: '240px' }}
             value={revertVersion}
-            onChange={event => setRevertVersion(event.target.value)}
+            onChange={event => setRevertVersion(event.target.value as string)}
           >
             {releaseHistory &&
               releaseHistory.releases.map((release: any) => {
                 return (
-                  <MenuItem value={release.version}>
-                    {release.version} . {release.info.description}
+                  <MenuItem value={release?.version}>
+                    {release?.version} . {release?.info.description}
                   </MenuItem>
                 );
               })}
@@ -75,7 +128,7 @@ export default function ReleaseDetail() {
         <DialogActions>
           <Button
             onClick={() => {
-              rollbackRelease(release.name, release.namespace, revertVersion).then(() => {
+              rollbackRelease(release.namespace, release.name, revertVersion).then(() => {
                 setRollbackPopup(false);
                 setUpdate(!update);
               });
@@ -94,20 +147,20 @@ export default function ReleaseDetail() {
               actions={[
                 <ActionButton
                   description={'Values'}
-                  onClick={() => console.log('values')}
+                  onClick={() => setIsEditorOpen(true)}
                   icon="mdi:file-document-box-outline"
                 />,
-                <ActionButton
-                  description={'Upgrade'}
-                  onClick={() => console.log('upgrade')}
-                  icon="mdi:arrow-up-bold"
-                />,
-                <ActionButton
-                  description={'Rollback'}
-                  onClick={() => setRollbackPopup(true)}
-                  icon="mdi:undo"
-                  iconButtonProps={{ disabled: release.version === 1 }}
-                />,
+                // <ActionButton
+                //   description={'Upgrade'}
+                //   onClick={() => console.log('upgrade')}
+                //   icon="mdi:arrow-up-bold"
+                // />,
+                // <ActionButton
+                //   description={'Rollback'}
+                //   onClick={() => setRollbackPopup(true)}
+                //   icon="mdi:undo"
+                //   iconButtonProps={{ disabled: release.version === 1 }}
+                // />,
                 <ActionButton
                   description={'Delete'}
                   onClick={() => setOpenDeleteAlert(true)}
@@ -142,8 +195,8 @@ export default function ReleaseDetail() {
               {
                 name: 'Status',
                 value: (
-                  <StatusLabel status={release.info.status === 'deployed' ? 'success' : 'error'}>
-                    {release.info.status}
+                  <StatusLabel status={release?.info.status === 'deployed' ? 'success' : 'error'}>
+                    {release?.info.status}
                   </StatusLabel>
                 ),
               },
@@ -170,7 +223,7 @@ export default function ReleaseDetail() {
               {
                 label: 'Status',
                 getter: data => (
-                  <StatusLabel status={release.info.status === 'deployed' ? 'success' : 'error'}>
+                  <StatusLabel status={release?.info.status === 'deployed' ? 'success' : 'error'}>
                     {data.info.status}
                   </StatusLabel>
                 ),
