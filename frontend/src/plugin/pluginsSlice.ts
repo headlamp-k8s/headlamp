@@ -56,9 +56,13 @@ export const pluginsSlice = createSlice({
       state.pluginSettings = action.payload;
       localStorage.setItem('headlampPluginSettings', JSON.stringify(action.payload));
     },
+    /** Reloads the browser page */
+    reloadPage() {
+      window.location.reload();
+    },
   },
 });
 
-export const { pluginsLoaded, setPluginSettings } = pluginsSlice.actions;
+export const { pluginsLoaded, setPluginSettings, reloadPage } = pluginsSlice.actions;
 
 export default pluginsSlice.reducer;
