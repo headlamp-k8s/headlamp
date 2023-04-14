@@ -45,6 +45,32 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
               <li>
                 <a
                   aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                    title="Overview"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
                   class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
                   href="/"
                   role="button"
@@ -1020,6 +1046,33 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
             <ul
               class="MuiList-root MuiList-padding"
             >
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Overview
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
               <li>
                 <a
                   aria-disabled="false"
