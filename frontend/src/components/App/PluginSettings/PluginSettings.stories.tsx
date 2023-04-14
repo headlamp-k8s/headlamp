@@ -19,7 +19,7 @@ const Template: Story<PluginSettingsPureProps> = args => (
  * createDemoData function will create example data objects to act as plugin data.
  * The function will return an array of demo data objects based on the number specified.
  */
-function createDemoData(arrSize: number, homepage?: boolean) {
+function createDemoData(arrSize: number, useHomepage?: boolean) {
   /** Static list of plugins */
   const pluginArr: any = [];
 
@@ -30,7 +30,7 @@ function createDemoData(arrSize: number, homepage?: boolean) {
       isEnabled: i % 2 === 0,
     };
 
-    if (homepage) {
+    if (useHomepage) {
       newPlugin = { ...newPlugin, homepage: `https://example.com/plugin-link-${i}` };
     } else {
       newPlugin = { ...newPlugin, repository: { url: `https://example.com/plugin-link-${i}` } };
@@ -45,10 +45,10 @@ function createDemoData(arrSize: number, homepage?: boolean) {
  * Creation of data arrays ranging from 0 to 50 to demo state of empty, few, many, and large numbers of data objects.
  * NOTE: The numbers used are up to the users preference.
  */
-const demoFew = createDemoData(5, true);
-const demoFewSaveEnable = createDemoData(5, true);
-const demoMany = createDemoData(15, true);
-const demoMore = createDemoData(50, true);
+const demoFew = createDemoData(5);
+const demoFewSaveEnable = createDemoData(5);
+const demoMany = createDemoData(15);
+const demoMore = createDemoData(50);
 const demoHomepageEmpty = createDemoData(5, false);
 const demoEmpty = createDemoData(0);
 
@@ -59,6 +59,11 @@ FewItems.args = {
   onSave: plugins => {
     console.log('demo few', plugins);
   },
+};
+
+export const Empty = Template.bind({});
+Empty.args = {
+  plugins: demoEmpty,
 };
 
 /** NOTE: The save button will load by default on plugin page regardless of data */
@@ -88,14 +93,9 @@ MoreItems.args = {
 };
 
 export const EmptyHomepageItems = Template.bind({});
-demoHomepageEmpty.args = {
+EmptyHomepageItems.args = {
   plugins: demoHomepageEmpty,
   onSave: (plugins: any) => {
     console.log('Empty Homepage', plugins);
   },
-};
-
-export const Empty = Template.bind({});
-Empty.args = {
-  plugins: demoEmpty,
 };
