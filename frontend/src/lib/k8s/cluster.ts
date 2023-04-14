@@ -5,7 +5,7 @@ import helpers from '../../helpers';
 import { createRouteURL } from '../router';
 import { getCluster, getClusterGroup, timeAgo, useErrorState } from '../util';
 import { useConnectApi } from '.';
-import { ApiError, apiFactory, apiFactoryWithNamespace, post,QueryParameters } from './apiProxy';
+import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
 import Deployment from './deployment';

@@ -16,7 +16,7 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import store from '../../redux/stores/store';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
-import Sidebar, { drawerWidthClosed,NavigationTabs } from '../Sidebar';
+import Sidebar, { drawerWidthClosed, NavigationTabs } from '../Sidebar';
 import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
 import VersionDialog from './VersionDialog';

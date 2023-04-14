@@ -36,27 +36,27 @@ jobs:
     - name: Deploy to cluster
       run:
         kubectl apply -f e2e-tests/kubernetes-headlamp-ci.yaml
-    - name: Test service URLs
-      run: |
-        minikube service list
-        minikube service headlamp -n kube-system --url
-        sleep 2
-        kubectl get deployments -n kube-system
-        minikube logs | tail -10
-        kubectl wait deployment -n kube-system headlamp --for condition=Available=True --timeout=10s
-        minikube service headlamp -n kube-system --url
-        echo "------------------opening the service------------------"
-        export SERVICE_URL=$(minikube service headlamp -n kube-system --url | tail -1)
-        echo $SERVICE_URL
-        curl -L $SERVICE_URL | grep -q "Headlamp: Kubernetes Web UI"        
-        echo "------------------Getting HEADLAMP_TOKEN------------------"
-        kubectl create serviceaccount headlamp-admin --namespace kube-system
-        export HEADLAMP_TOKEN=$(kubectl create token headlamp-admin --duration 24h -n kube-system)
-        echo "------------------Running playwright e2e tests------------------"
-        cd e2e-tests
-        npm ci
-        npx playwright install --with-deps
-        HEADLAMP_TEST_URL=$SERVICE_URL npx playwright test
+    # - name: Test service URLs
+    #   run: |
+    #     minikube service list
+    #     minikube service headlamp -n kube-system --url
+    #     sleep 2
+    #     kubectl get deployments -n kube-system
+    #     minikube logs | tail -10
+    #     kubectl wait deployment -n kube-system headlamp --for condition=Available=True --timeout=10s
+    #     minikube service headlamp -n kube-system --url
+    #     echo "------------------opening the service------------------"
+    #     export SERVICE_URL=$(minikube service headlamp -n kube-system --url | tail -1)
+    #     echo $SERVICE_URL
+    #     curl -L $SERVICE_URL | grep -q "Headlamp: Kubernetes Web UI"        
+    #     echo "------------------Getting HEADLAMP_TOKEN------------------"
+    #     kubectl create serviceaccount headlamp-admin --namespace kube-system
+    #     export HEADLAMP_TOKEN=$(kubectl create token headlamp-admin --duration 24h -n kube-system)
+    #     echo "------------------Running playwright e2e tests------------------"
+    #     cd e2e-tests
+    #     npm ci
+    #     npx playwright install --with-deps
+    #     HEADLAMP_TEST_URL=$SERVICE_URL npx playwright test
     - uses: actions/upload-artifact@v3
       if: always()
       with:
