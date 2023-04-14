@@ -492,6 +492,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	config.handleClusterRequests(r)
 
 	r.HandleFunc("/externalproxy", func(w http.ResponseWriter, r *http.Request) {
+
 		proxyURL := r.Header.Get("proxy-to")
 		if proxyURL == "" && r.Header.Get("Forward-to") != "" {
 			proxyURL = r.Header.Get("Forward-to")
@@ -965,25 +966,37 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 	return nil
 }
 
-func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
+// Returns the helm.Handler given the config and request. Writes http.NotFound if clusterName is not there.
+func getHelmHandler(c *HeadlampConfig, w http.ResponseWriter, r *http.Request) (*helm.Handler, error) {
+	clusterName := mux.Vars(r)["clusterName"]
+	context, ok := c.contextProxies[clusterName]
 
+	if !ok {
+		http.NotFound(w, r)
+		return nil, errors.New("not found")
+	}
+
+	namespace := r.URL.Query().Get("namespace")
+
+	helmHandler, err := helm.NewHandler(context.context.clientConfig(), namespace)
+	if err != nil {
+		log.Printf("Error: failed to create helm handler: %s", err)
+		http.Error(w, "failed to create helm handler", http.StatusInternalServerError)
+	}
+
+	return helmHandler, nil
+}
+
+//nolint:gocognit,funlen
+func handleClusterHelm(c *HeadlampConfig, router *mux.Router) {
 	router.PathPrefix("/clusters/{clusterName}/helm/{.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		clusterName := mux.Vars(r)["clusterName"]
-		context, ok := c.contextProxies[clusterName]
-		if !ok {
-			http.NotFound(w, r)
+		helmHandler, err := getHelmHandler(c, w, r)
+		if err != nil {
 			return
 		}
 
-		namespace := r.URL.Query().Get("namespace")
-
-		helmAction, err := helm.NewActionConfig(context.context.clientConfig(), namespace)
-		if err != nil {
-			log.Printf("Error: failed to create helm action config: %s", err)
-			http.Error(w, "failed to create helm action config", http.StatusInternalServerError)
-		}
-		helmHandler := helm.HelmHandler{Configuration: helmAction}
-
+		// we used nolint:gocognit in this function because...
+		//  Perhaps there's a better way to dispatch these?
 		path := r.URL.Path
 		if strings.HasSuffix(path, "/releases/list") && r.Method == http.MethodGet {
 			helmHandler.ListRelease(w, r)
@@ -1034,7 +1047,9 @@ func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 			return
 		}
 	})
+}
 
+func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 	router.PathPrefix("/clusters/{clusterName}/{api:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		clusterName := mux.Vars(r)["clusterName"]
 		ctxtProxy, ok := c.contextProxies[clusterName]
@@ -1053,6 +1068,15 @@ func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 		handler := proxyHandler(server, ctxtProxy.proxy)
 		handler(w, r)
 	})
+}
+
+func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
+	handleClusterHelm(c, router)
+	if !c.useInCluster {
+		handleClusterHelm(c, router)
+	}
+
+	handleClusterAPI(c, router)
 }
 
 func (c *HeadlampConfig) getClusters() []Cluster {

@@ -18,12 +18,14 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 )
 
-var _ genericclioptions.RESTClientGetter = &restConfigGetter{}
-var settings = cli.New()
+var (
+	_        genericclioptions.RESTClientGetter = &restConfigGetter{}
+	settings                                    = cli.New()
+)
 
-// key of the object is action_name + "_" + release_name
+// Key of the object is action_name + "_" + release_name
 // action_name is the name of the action, e.g. install, upgrade, delete
-// status is one of the following: in_progress, success, failed
+// status is one of the following: in_progress, success, failed.
 type actionStatus struct {
 	store map[string]struct {
 		status    string
@@ -38,17 +40,21 @@ var actionState *actionStatus
 func (a *actionStatus) GetStatus(actionName, releaseName string) (string, error) {
 	a.Lock()
 	defer a.Unlock()
+
 	key := actionName + "_" + releaseName
 	if _, ok := a.store[key]; !ok {
 		return "", nil
 	}
+
 	return a.store[key].status, a.store[key].err
 }
 
 func (a *actionStatus) SetStatus(actionName, releaseName, status string, err error) {
 	a.Lock()
 	defer a.Unlock()
+
 	key := actionName + "_" + releaseName
+
 	a.store[key] = struct {
 		status    string
 		updatedAt time.Time
@@ -63,6 +69,7 @@ func (a *actionStatus) SetStatus(actionName, releaseName, status string, err err
 func (a *actionStatus) RemoveStaleStatus() {
 	a.Lock()
 	defer a.Unlock()
+
 	for key, value := range a.store {
 		if time.Since(value.updatedAt) > 5*time.Minute {
 			delete(a.store, key)
@@ -70,6 +77,9 @@ func (a *actionStatus) RemoveStaleStatus() {
 	}
 }
 
+// TODO FIXME: can this be refactored without init?
+//
+//nolint:gochecknoinits
 func init() {
 	actionState = &actionStatus{}
 	actionState.store = make(map[string]struct {
@@ -77,6 +87,7 @@ func init() {
 		updatedAt time.Time
 		err       error
 	})
+
 	go func() {
 		for {
 			actionState.RemoveStaleStatus()
@@ -85,8 +96,9 @@ func init() {
 	}()
 }
 
-type HelmHandler struct {
+type Handler struct {
 	*action.Configuration
+	*cli.EnvSettings
 }
 
 func NewActionConfig(clientConfig clientcmd.ClientConfig, namespace string) (*action.Configuration, error) {
@@ -98,11 +110,31 @@ func NewActionConfig(clientConfig clientcmd.ClientConfig, namespace string) (*ac
 	logger := func(format string, a ...interface{}) {
 		log.Info().Str("namespace", namespace).Msg(format + "\n" + fmt.Sprintf("%v", a))
 	}
+
 	err := actionConfig.Init(restConfGetter, namespace, "secret", logger)
 	if err != nil {
 		return nil, err
 	}
+
 	return actionConfig, nil
+}
+
+func NewHandler(clientConfig clientcmd.ClientConfig, namespace string) (*Handler, error) {
+	return NewHandlerWithSettings(clientConfig, namespace, settings)
+}
+
+func NewHandlerWithSettings(clientConfig clientcmd.ClientConfig,
+	namespace string, settings *cli.EnvSettings,
+) (*Handler, error) {
+	actionConfig, err := NewActionConfig(clientConfig, namespace)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Handler{
+		Configuration: actionConfig,
+		EnvSettings:   settings,
+	}, nil
 }
 
 // https://github.com/helm/helm/issues/6910#issuecomment-601277026
@@ -131,6 +163,7 @@ func (r *restConfigGetter) ToDiscoveryClient() (discovery.CachedDiscoveryInterfa
 	config.Burst = 100
 
 	discoveryClient, _ := discovery.NewDiscoveryClientForConfig(config)
+
 	return memory.NewMemCacheClient(discoveryClient), nil
 }
 
@@ -142,5 +175,6 @@ func (r *restConfigGetter) ToRESTMapper() (meta.RESTMapper, error) {
 
 	mapper := restmapper.NewDeferredDiscoveryRESTMapper(discoveryClient)
 	expander := restmapper.NewShortcutExpander(mapper, discoveryClient)
+
 	return expander, nil
 }
