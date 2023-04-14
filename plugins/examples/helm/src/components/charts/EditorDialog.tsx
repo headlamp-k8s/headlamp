@@ -70,7 +70,7 @@ export function EditorDialog(props: {
     function checkInstallStatus(releaseName: string) {
       setTimeout(() => {
         getActionStatus(releaseName, 'install').then((response: any) => {
-          if (response.status === 'pending') {
+          if (response.status === 'processing') {
             checkInstallStatus(releaseName);
           } else if (!response.status || response.status !== 'success') {
             enqueueSnackbar(`Error creating release ${response.message}`, {
@@ -190,6 +190,11 @@ export function EditorDialog(props: {
               }
               setChartValues(value);
             }}
+            onMount={editor => {
+              setInstallLoading(false);
+              editor.focus();
+              setReleaseName('');
+            }}
             language="yaml"
             height="500px"
             options={{
@@ -217,9 +222,11 @@ export function EditorDialog(props: {
           </Box>
           <Box>
             {installLoading || chartValuesLoading || !!chartValuesFetchError ? (
-              <Button disabled variant="contained">
-                Install{installLoading && 'ing'}
-              </Button>
+              <>
+                <Button disabled variant="contained">
+                  Install{installLoading && 'ing'}
+                </Button>
+              </>
             ) : (
               <Button
                 onClick={() => {

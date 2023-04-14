@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { listReleases } from '../../api/releases';
 
 export default function ReleaseList() {
-  const [releases, setReleases] = useState(null);
+  const [releases, setReleases] = useState([]);
 
   useEffect(() => {
     listReleases().then(response => {
