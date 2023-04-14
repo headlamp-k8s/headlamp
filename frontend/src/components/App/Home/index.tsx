@@ -1,7 +1,7 @@
 import { Icon, InlineIcon } from '@iconify/react';
 import {
   Box,
-  Button,
+  // Button,
   Grid,
   IconButton,
   ListItemText,
@@ -195,19 +195,19 @@ function MultiClusterOverviewList({ clusters }: { clusters: { [kye: string]: any
       </SectionBox>
       <SectionHeader
         title={t('All clusters')}
-        titleSideActions={[
-          <Button
-            variant="outlined"
-            color="primary"
-            size="small"
-            startIcon={<InlineIcon icon="mdi:group" />}
-            onClick={() => {
-              console.log('GROUPS!');
-            }}
-          >
-            {t('frequent|Add group')}
-          </Button>,
-        ]}
+        // titleSideActions={[
+        //   <Button
+        //     variant="outlined"
+        //     color="primary"
+        //     size="small"
+        //     startIcon={<InlineIcon icon="mdi:group" />}
+        //     onClick={() => {
+        //       console.log('GROUPS!');
+        //     }}
+        //   >
+        //     {t('frequent|Add group')}
+        //   </Button>,
+        // ]}
       />
       <Paper>
         <Box px={2}>
