@@ -3,6 +3,8 @@ package helm
 import (
 	"encoding/json"
 	"net/http"
+	"os"
+	"path/filepath"
 
 	zlog "github.com/rs/zerolog/log"
 	"helm.sh/helm/v3/pkg/getter"
@@ -93,7 +95,23 @@ type ListRepoResponse struct {
 	Repositories []repositoryInfo `json:"repositories"`
 }
 
+// Create a full path, including directories if it does not exist.
+func createFullPath(p string) (*os.File, error) {
+	if err := os.MkdirAll(filepath.Dir(p), 0770); err != nil {
+		return nil, err
+	}
+	return os.Create(p)
+}
+
 func (h *HelmHandler) ListRepo(w http.ResponseWriter, r *http.Request) {
+
+	// hack: Add empty settings.RepositoryConfig if it is not there.
+	_, err := os.Stat(settings.RepositoryConfig)
+	if os.IsNotExist(err) {
+		// create changes
+		_, _ = createFullPath(settings.RepositoryConfig)
+	}
+
 	// read repo file
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
