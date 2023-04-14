@@ -32,6 +32,16 @@ func (h *HelmHandler) AddRepo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// hack: Add empty settings.RepositoryConfig if it is not there.
+	_, err = os.Stat(settings.RepositoryConfig)
+	if os.IsNotExist(err) {
+		// create changes
+		_, err = createFullPath(settings.RepositoryConfig)
+		if err != nil {
+			zlog.Error().Err(err).Str("action", "list_repository").Msg("failed to create empty repo file")
+		}
+	}
+
 	// TODO: Lock repo file
 
 	// read repo file
@@ -109,7 +119,10 @@ func (h *HelmHandler) ListRepo(w http.ResponseWriter, r *http.Request) {
 	_, err := os.Stat(settings.RepositoryConfig)
 	if os.IsNotExist(err) {
 		// create changes
-		_, _ = createFullPath(settings.RepositoryConfig)
+		_, err = createFullPath(settings.RepositoryConfig)
+		if err != nil {
+			zlog.Error().Err(err).Str("action", "list_repository").Msg("failed to create empty repo file")
+		}
 	}
 
 	// read repo file
@@ -147,6 +160,16 @@ func (h *HelmHandler) ListRepo(w http.ResponseWriter, r *http.Request) {
 // remove repository
 func (h *HelmHandler) RemoveRepo(w http.ResponseWriter, r *http.Request) {
 
+	// hack: Add empty settings.RepositoryConfig if it is not there.
+	_, err := os.Stat(settings.RepositoryConfig)
+	if os.IsNotExist(err) {
+		// create changes
+		_, err = createFullPath(settings.RepositoryConfig)
+		if err != nil {
+			zlog.Error().Err(err).Str("action", "list_repository").Msg("failed to create empty repo file")
+		}
+	}
+
 	name := r.URL.Query().Get("name")
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
@@ -176,9 +199,19 @@ func (h *HelmHandler) RemoveRepo(w http.ResponseWriter, r *http.Request) {
 // update repository
 func (h *HelmHandler) UpdateRepository(w http.ResponseWriter, r *http.Request) {
 
+	// hack: Add empty settings.RepositoryConfig if it is not there.
+	_, err := os.Stat(settings.RepositoryConfig)
+	if os.IsNotExist(err) {
+		// create changes
+		_, err = createFullPath(settings.RepositoryConfig)
+		if err != nil {
+			zlog.Error().Err(err).Str("action", "list_repository").Msg("failed to create empty repo file")
+		}
+	}
+
 	// parse request
 	var request AddUpdateRepoRequest
-	err := json.NewDecoder(r.Body).Decode(&request)
+	err = json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to parse request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
