@@ -313,6 +313,9 @@ export default function EditorDialog(props: EditorDialogProps) {
       onClose={onClose}
       {...other}
       aria-labelledby="editor-dialog-title"
+      titleProps={{
+        id: 'editor-dialog-title',
+      }}
     >
       {!item ? (
         <Loader title={t('Loading editor')} />
@@ -340,6 +343,7 @@ export default function EditorDialog(props: EditorDialogProps) {
             ) : (
               <Tabs
                 onTabChanged={handleTabChange}
+                ariaLabel={t('frequent|Editor')}
                 tabs={[
                   {
                     label: t('frequent|Editor'),
