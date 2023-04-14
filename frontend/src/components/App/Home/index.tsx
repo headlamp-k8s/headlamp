@@ -280,6 +280,21 @@ function MultiClusterOverviewList({ clusters }: { clusters: { [kye: string]: any
           />
         </Box>
       </Paper>
+      <Box></Box>
+      <Box></Box>
+      <Link
+        routeName="cluster"
+        params={{
+          cluster: Object.values(clusters)
+            .map(cluster => cluster.name)
+            .join('+'),
+        }}
+        style={{
+          fontWeight: 'bold',
+        }}
+      >
+        Show all clusters
+      </Link>
     </PageGrid>
   );
 }
