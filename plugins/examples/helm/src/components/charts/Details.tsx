@@ -5,7 +5,7 @@ import {
   SectionBox,
   SectionHeader,
 } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
-import { Box, Button,Link } from '@material-ui/core';
+import { Box, Button, Link } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router';

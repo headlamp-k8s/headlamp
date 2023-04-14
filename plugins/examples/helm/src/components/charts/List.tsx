@@ -16,7 +16,7 @@ import {
   Tooltip,
   Typography,
 } from '@material-ui/core';
-import { Autocomplete,Pagination } from '@material-ui/lab';
+import { Autocomplete, Pagination } from '@material-ui/lab';
 import { useEffect, useState } from 'react';
 //import { jsonToYAML, yamlToJSON } from '../../helpers';
 import { fetchChartsFromArtifact } from '../../api/charts';

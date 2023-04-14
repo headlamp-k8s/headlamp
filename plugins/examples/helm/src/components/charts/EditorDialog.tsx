@@ -1,6 +1,6 @@
 import { K8s } from '@kinvolk/headlamp-plugin/lib';
 import { Loader } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
-import { Box, Button,Dialog, DialogActions, TextField } from '@material-ui/core';
+import { Box, Button, Dialog, DialogActions, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import MonacoEditor from '@monaco-editor/react';
 import _ from 'lodash';
