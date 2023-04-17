@@ -1,31 +1,36 @@
-ARG IMAGE_BASE=alpine:3.17.2
-FROM $IMAGE_BASE as base-build
+# syntax=docker/dockerfile:1
+FROM --platform=${BUILDPLATFORM} golang:1.19 as backend-build
 
-RUN apk update && \
-	apk add git nodejs npm go ca-certificates make musl-dev bash icu-data
+WORKDIR /headlamp
 
-FROM golang:1.19 as backend-build
-
+ARG TARGETOS
+ARG TARGETARCH
 ENV GOPATH=/go \
     GOPROXY=https://proxy.golang.org \
 	GO111MODULE=on\
 	CGO_ENABLED=0\ 
-	GOOS=linux 
+	GOOS=${TARGETOS}\
+	GOARCH=${TARGETARCH}
+
+# Keep go mod download separated so source changes don't trigger install
+COPY ./backend/go.* /headlamp/backend/
+RUN --mount=type=cache,target=/go/pkg/mod \
+    cd ./backend && go mod download
 
 COPY ./backend /headlamp/backend
 
-WORKDIR /headlamp
+RUN --mount=type=cache,target=/root/.cache/go-build \
+    --mount=type=cache,target=/go/pkg/mod \
+    cd ./backend && go build -o ./headlamp-server ./cmd/
 
-RUN cd ./backend && go build -o ./headlamp-server ./cmd/
-
-# Keep npm install separated so source changes don't trigger install
-FROM base-build as frontend-build
+FROM --platform=${BUILDPLATFORM} node:18 as frontend-build
 
 # We need .git and app/ in order to get the version and git version for the frontend/.env file
 # that's generated when building the frontend.
 COPY ./.git /headlamp/.git
 COPY app/package.json /headlamp/app/package.json
 
+# Keep npm install separated so source changes don't trigger install
 COPY frontend/package*.json /headlamp/frontend/
 COPY frontend/patches/* /headlamp/frontend/patches/
 WORKDIR /headlamp
@@ -53,14 +58,11 @@ RUN for i in $(find ./plugins-old/*/main.js); do plugin_name=$(echo $i|cut -d'/'
 RUN for i in $(find ./.plugins/*/main.js); do plugin_name=$(echo $i|cut -d'/' -f3); mkdir -p plugins/$plugin_name; cp $i plugins/$plugin_name; done
 
 # Final container image
-FROM $IMAGE_BASE
+FROM alpine:3.17
 
-COPY --from=backend-build /headlamp/backend/headlamp-server /headlamp/headlamp-server
-COPY --from=frontend /headlamp/frontend/build /headlamp/frontend
-COPY --from=frontend /headlamp/plugins /headlamp/plugins
-# Create a symlink so we support any attempts to run "/headlamp/server", from before we
-# renamed it as "headlamp-server".
-RUN cd /headlamp && ln -s ./headlamp-server ./server
+COPY --from=backend-build --link /headlamp/backend/headlamp-server /headlamp/headlamp-server
+COPY --from=frontend --link /headlamp/frontend/build /headlamp/frontend
+COPY --from=frontend --link /headlamp/plugins /headlamp/plugins
 
 EXPOSE 4466
 ENTRYPOINT ["/headlamp/headlamp-server", "-html-static-dir", "/headlamp/frontend"]

@@ -7,7 +7,7 @@ DOCKER_REPO ?= ghcr.io/headlamp-k8s
 DOCKER_EXT_REPO ?= docker.io/headlamp
 DOCKER_IMAGE_NAME ?= headlamp
 DOCKER_IMAGE_VERSION ?= $(shell git describe --tags --always --dirty)
-DOCKER_IMAGE_BASE ?= alpine:3.17.0
+DOCKER_PLATFORM ?= local
 
 ifeq ($(OS), Windows_NT)
 	SERVER_EXE_EXT = .exe
@@ -83,8 +83,9 @@ plugins-test:
 	cd plugins/headlamp-plugin && ./test-plugins-examples.sh
 
 image:
-	$(DOCKER_CMD) build \
-	--build-arg IMAGE_BASE=$(DOCKER_IMAGE_BASE) \
+	$(DOCKER_CMD) buildx build \
+	--pull \
+	--platform=$(DOCKER_PLATFORM) \
 	-t $(DOCKER_REPO)/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_VERSION) -f \
 	Dockerfile \
 	.
