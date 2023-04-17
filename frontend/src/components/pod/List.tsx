@@ -77,6 +77,16 @@ export function PodListRenderer(props: PodListProps) {
           return podRow.reason;
         },
       },
+      {
+        label: t('frequent|Pod IP'),
+        getter: (pod: Pod) => pod.status.podIP,
+        sort: true,
+      },
+      {
+        label: t('frequent|Node Name'),
+        getter: (pod: Pod) => pod.spec.nodeName,
+        sort: true,
+      },
       'age',
     ];
 

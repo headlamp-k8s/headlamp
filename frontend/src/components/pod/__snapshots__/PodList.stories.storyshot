@@ -160,6 +160,48 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <th
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
+              >
+                Pod IP
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                scope="col"
+              >
+                Node Name
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                scope="col"
                 style="text-align: right;"
               >
                 Age
@@ -234,6 +276,16 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
+              >
+                0.0.0.2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                my-node
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
                 style="text-align: right;"
               >
                 <p
@@ -295,6 +347,16 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
+              >
+                0.0.0.2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                my-node
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
                 style="text-align: right;"
               >
                 <p
@@ -353,6 +415,16 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                     Init:0/2
                   </span>
                 </div>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                0.0.0.2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                my-node
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -424,6 +496,16 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
+              >
+                0.0.0.2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                my-node
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
                 style="text-align: right;"
               >
                 <p
@@ -492,6 +574,16 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
+              >
+                0.0.0.2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                my-node
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
                 style="text-align: right;"
               >
                 <p
@@ -550,6 +642,16 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                     Running
                   </span>
                 </div>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                0.0.0.2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body"
+              >
+                my-node
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
