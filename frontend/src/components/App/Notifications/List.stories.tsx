@@ -1,5 +1,5 @@
+import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { createStore } from 'redux';
 import helpers from '../../../helpers';
 import { Notification } from '../../../lib/notification';
 import { INITIAL_STATE as CONFIG_INITIAL_STATE } from '../../../redux/reducers/config';
@@ -24,16 +24,15 @@ function createNotifications() {
 
 createNotifications();
 
-// eslint-disable-next-line no-unused-vars
-const store = createStore(
-  (
+const store = configureStore({
+  reducer: (
     state = {
       filter: { ...FILTER_INITIAL_STATE },
       config: { ...CONFIG_INITIAL_STATE },
       ui: { ...UI_INITIAL_STATE },
     }
   ) => state,
-  {
+  preloadedState: {
     config: {
       ...CONFIG_INITIAL_STATE,
     },
@@ -42,8 +41,8 @@ const store = createStore(
       ...UI_INITIAL_STATE,
       notifications: helpers.loadNotifications(),
     },
-  }
-);
+  },
+});
 
 export default {
   title: 'Notifications',

@@ -1,5 +1,5 @@
+import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { createStore } from 'redux';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { TestContext } from '../../../test';
@@ -18,14 +18,14 @@ const TemplateWithFilter: Story<{
 }> = args => {
   const { resourceTableArgs, search, namespaces = [] } = args;
 
-  const storeWithFilterAndSettings = createStore(
-    (
+  const storeWithFilterAndSettings = configureStore({
+    reducer: (
       state = {
         filter: { namespaces: new Set<string>(), search: '' },
         config: { settings: { tableRowsPerPageOptions: [10, 20, 50, 100] } },
       }
     ) => state,
-    {
+    preloadedState: {
       filter: {
         namespaces: new Set(namespaces),
         search,
@@ -35,8 +35,8 @@ const TemplateWithFilter: Story<{
           tableRowsPerPageOptions: [10, 20, 50, 100],
         },
       },
-    }
-  );
+    },
+  });
 
   return (
     <TestContext store={storeWithFilterAndSettings}>
