@@ -305,7 +305,7 @@ export function registerDetailsViewHeaderAction(headerAction: DetailsViewHeaderA
  *
  */
 export function registerDetailsViewHeaderActionsProcessor(
-  processor: DetailsViewHeaderActionsProcessor
+  processor: DetailsViewHeaderActionsProcessor | DetailsViewHeaderActionsProcessor['processor']
 ) {
   store.dispatch(addDetailsViewHeaderActionsProcessor(processor));
 }

@@ -18,6 +18,9 @@ function IconAction() {
 }
 registerDetailsViewHeaderAction(IconAction);
 
+// We can replace the section view with our own custom one.
+// Here we are showing a custom view when it's a ConfigMap resource.
+
 registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
   if (resource && resource.kind === 'ConfigMap') {
     return (
@@ -29,35 +32,32 @@ registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
   return null;
 });
 
-registerDetailsViewHeaderActionsProcessor({
-  id: 'replace-default-delete-by-useless-one',
-  processor: (resource, actions) => {
-    if (!resource) {
-      return actions;
-    }
+// We can replace action buttons with our own custom ones.
 
-    let hasDeleteAction = false;
-    const noDeleteActions = actions.filter(action => {
-      if (action.id === DetailsViewDefaultHeaderActions.DELETE) {
-        hasDeleteAction = true;
-        return false;
-      }
-      return true;
-    });
+registerDetailsViewHeaderActionsProcessor(function replaceDeleteAction(resource, actions) {
+  if (!resource || !actions.find(action => action.id === DetailsViewDefaultHeaderActions.DELETE)) {
+    // There was no delete button so we do nothing.
+    return actions;
+  }
 
-    if (hasDeleteAction) {
-      noDeleteActions.push({
-        id: 'my-custom-delete-action',
-        action: (
-          <ActionButton
-            description="Useless button from a plugin example"
-            icon="mdi:delete-off"
-            onClick={() => alert(`One cannot simply delete a ${resource.kind}!`)}
-          />
-        ),
-      });
-    }
+  const actionsDeleteRemoved = actions.filter(
+    action => action.id !== DetailsViewDefaultHeaderActions.DELETE
+  );
+  // DetailsViewDefaultHeaderActions includes DELETE, EDIT, RESTART, SCALE, and more.
 
-    return noDeleteActions;
-  },
+  // We add our own button as an example to show how we can replace default buttons.
+  const actionsWithOurDelete = [
+    ...actionsDeleteRemoved,
+    {
+      id: 'my-custom-delete-action',
+      action: (
+        <ActionButton
+          description="Useless button from a plugin example from details-view example plugin"
+          icon="mdi:delete"
+          onClick={() => alert(`One cannot simply delete a ${resource.kind}!`)}
+        />
+      ),
+    },
+  ];
+  return actionsWithOurDelete;
 });
