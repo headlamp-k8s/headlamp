@@ -80,38 +80,12 @@ export function PodListRenderer(props: PodListProps) {
       {
         label: t('frequent|Pod IP'),
         getter: (pod: Pod) => pod.status.podIP,
-        sort: (p1: Pod, p2: Pod) => {
-          if (p1.status.podIP < p2.status.podIP) {
-            return -1;
-          } else if (p1.status.podIP > p2.status.podIP) {
-            return 1;
-          }
-          return 0;
-        },
+        sort: true,
       },
       {
         label: t('frequent|Node Name'),
         getter: (pod: Pod) => pod.spec.nodeName,
-        sort: (p1: Pod, p2: Pod) => {
-          if (p1.spec.nodeName < p2.spec.nodeName) {
-            return -1;
-          } else if (p1.spec.nodeName > p2.spec.nodeName) {
-            return 1;
-          }
-          return 0;
-        },
-      },
-      {
-        label: t('frequent|Node IP'),
-        getter: (pod: Pod) => pod.status.hostIP,
-        sort: (p1: Pod, p2: Pod) => {
-          if (p1.status.hostIP < p2.status.hostIP) {
-            return -1;
-          } else if (p1.status.hostIP > p2.status.hostIP) {
-            return 1;
-          }
-          return 0;
-        },
+        sort: true,
       },
       'age',
     ];
