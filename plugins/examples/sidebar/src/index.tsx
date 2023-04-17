@@ -33,6 +33,48 @@ registerRoute({
   ),
 });
 
+// Add an entry to the home sidebar (not in cluster).
+registerSidebarEntry({
+  name: 'mypluginsidebar',
+  label: 'Special Plugin Area',
+  url: '/mypluginarea',
+  icon: 'mdi:comment-quote',
+  sidebar: 'HOME',
+});
+
+registerRoute({
+  path: '/mypluginarea',
+  sidebar: {
+    item: 'mypluginarea',
+    sidebar: 'myplugin',
+  },
+  useClusterURL: false,
+  noAuthRequired: true, // No authentication is required to see the view
+  name: 'mypluginarea',
+  exact: true,
+  component: () => (
+    <SectionBox title="Special Plugin Area" textAlign="center" paddingTop={2}>
+      <Typography>See how the home sidebar is completely new?</Typography>
+    </SectionBox>
+  ),
+});
+// Adds a completely new sidebar + entry because the sidebar "myplugin" does not exist.
+registerSidebarEntry({
+  name: 'backtoclusters',
+  label: 'Back to Clusters',
+  url: '/',
+  icon: 'mdi:hexagon',
+  sidebar: 'myplugin',
+});
+// Adds a entry to the recently created sidebar "myplugin".
+registerSidebarEntry({
+  name: 'mypluginarea',
+  label: 'Special Area',
+  url: '/mypluginarea',
+  icon: 'mdi:comment-quote',
+  sidebar: 'myplugin',
+});
+
 // Another top level sidebar menu item.
 // The sidebar link URL is: /c/mycluster/feedback2
 registerSidebarEntry({

@@ -1,10 +1,33 @@
 import _ from 'lodash';
 import helpers from '../../helpers';
 import store from '../../redux/stores/store';
-import { SidebarItemProps } from '../Sidebar';
+import { DefaultSidebars, SidebarItemProps } from '../Sidebar';
 
-function prepareRoutes(t: (arg: string) => string) {
-  const LIST_ITEMS: SidebarItemProps[] = [
+function prepareRoutes(
+  t: (arg: string) => string,
+  sidebarToReturn: string = DefaultSidebars.IN_CLUSTER
+) {
+  const homeItems: SidebarItemProps[] = [
+    {
+      name: 'clusters',
+      icon: 'mdi:hexagon-multiple',
+      label: t('glossary|Cluster'),
+      url: '/',
+    },
+    {
+      name: 'notifications',
+      icon: 'mdi:bell',
+      label: t('frequent|Notifications'),
+      url: '/notifications',
+    },
+    {
+      name: 'settings',
+      icon: 'mdi:cog',
+      label: t('frequent|Settings'),
+      url: '/settings',
+    },
+  ];
+  const inClusterItems: SidebarItemProps[] = [
     {
       name: 'cluster',
       label: t('glossary|Cluster'),
@@ -170,15 +193,26 @@ function prepareRoutes(t: (arg: string) => string) {
     },
   ];
 
+  const sidebars: { [key: string]: SidebarItemProps[] } = {
+    [DefaultSidebars.IN_CLUSTER]: _.cloneDeep(inClusterItems),
+    [DefaultSidebars.HOME]: _.cloneDeep(homeItems),
+  };
+
   const items = store.getState().ui.sidebar.entries;
   const filters = store.getState().ui.sidebar.filters;
-  // @todo: Find a better way to avoid modifying the objects in LIST_ITEMS.
-  const routes: SidebarItemProps[] = JSON.parse(JSON.stringify(LIST_ITEMS));
 
   for (const i of Object.values(items)) {
     const item = _.cloneDeep(i);
-    const parent = item.parent ? routes.find(({ name }) => name === item.parent) : null;
-    let placement = routes;
+    // For back-compatibility reasons, the default sidebar is the in-cluster one.
+    const desiredSidebar = item.sidebar || DefaultSidebars.IN_CLUSTER;
+    let itemsSidebar = sidebars[desiredSidebar];
+    if (!itemsSidebar) {
+      itemsSidebar = [];
+      sidebars[desiredSidebar] = itemsSidebar;
+    }
+
+    const parent = item.parent ? itemsSidebar.find(({ name }) => name === item.parent) : null;
+    let placement = itemsSidebar;
     if (parent) {
       if (!parent['subList']) {
         parent['subList'] = [];
@@ -189,9 +223,12 @@ function prepareRoutes(t: (arg: string) => string) {
 
     placement.push(item);
   }
+
   // Filter the routes, if we have any filters.
+  // @todo: We need to deprecate this and implement a list processor.
   const filteredRoutes = [];
-  for (const route of routes) {
+  const defaultRoutes: SidebarItemProps[] = sidebars[DefaultSidebars.IN_CLUSTER];
+  for (const route of defaultRoutes) {
     const routeFiltered =
       filters.length > 0 && filters.filter(f => f(route)).length !== filters.length;
     if (routeFiltered) {
@@ -206,7 +243,12 @@ function prepareRoutes(t: (arg: string) => string) {
 
     filteredRoutes.push(route);
   }
-  return filteredRoutes;
+
+  if (!sidebarToReturn || sidebarToReturn === DefaultSidebars.IN_CLUSTER) {
+    return filteredRoutes;
+  }
+
+  return sidebars[sidebarToReturn];
 }
 
 export default prepareRoutes;
