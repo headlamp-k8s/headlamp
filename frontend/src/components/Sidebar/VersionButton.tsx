@@ -224,7 +224,7 @@ export default function VersionButton() {
             <NameValueTable rows={getVersionRows(cluster || '')} />
           ) : (
             <Tabs
-              ariaLabel='Cluster versions'
+              ariaLabel="Cluster versions"
               tabs={Object.keys(clusterVersions).map(clusterName => ({
                 label: clusterName,
                 component: (
