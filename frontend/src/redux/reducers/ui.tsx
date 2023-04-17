@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { SidebarEntryProps } from '../../components/Sidebar';
 import helpers from '../../helpers';
+import { KubeObject } from '../../lib/k8s/cluster';
 import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import themesConf, { setTheme } from '../../lib/themes';
@@ -9,9 +10,11 @@ import {
   Action,
   BrandingProps,
   FunctionsToOverride,
+  HeaderAction,
   HeaderActionType,
   UI_APP_BAR_SET_ACTION,
   UI_BRANDING_SET_APP_LOGO,
+  UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR,
   UI_DETAILS_VIEW_SET_HEADER_ACTION,
   UI_FUNCTIONS_OVERRIDE,
   UI_HIDE_APP_BAR,
@@ -34,6 +37,10 @@ import {
 
 type SidebarEntryFilterFuncType = (entry: SidebarEntryProps) => SidebarEntryProps | null;
 type RouteFilterFuncType = (entry: Route) => Route | null;
+type HeaderActionsProcessor = {
+  id: string;
+  processor: (resource: KubeObject | null, actions: HeaderAction[]) => HeaderAction[];
+};
 
 export interface UIState {
   sidebar: {
@@ -53,7 +60,8 @@ export interface UIState {
   routeFilters: RouteFilterFuncType[];
   views: {
     details: {
-      headerActions: HeaderActionType[];
+      headerActions: HeaderAction[];
+      headerActionsProcessors: HeaderActionsProcessor[];
       pluginAppendedDetailViews: DetailsViewSectionType[];
     };
     appBar: {
@@ -112,6 +120,7 @@ export const INITIAL_STATE: UIState = {
   views: {
     details: {
       headerActions: [],
+      headerActionsProcessors: [],
       pluginAppendedDetailViews: [],
     },
     appBar: {
@@ -190,8 +199,23 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       break;
     }
     case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
-      const headerActions = [...newFilters.views.details.headerActions, action.action];
+      const headerAction = action.action;
+      const generatedID = headerAction.id || `generated-id-${Date.now().toString(36)}`;
+      const headerActions = [
+        ...newFilters.views.details.headerActions,
+        { id: generatedID, action: headerAction.action },
+      ];
       newFilters.views.details.headerActions = headerActions;
+      break;
+    }
+    case UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR: {
+      const headerActionProcessor = action.action;
+      const generatedID = headerActionProcessor.id || `generated-id-${Date.now().toString(36)}`;
+      const processors = [
+        ...newFilters.views.details.headerActionsProcessors,
+        { id: generatedID, processor: headerActionProcessor.processor },
+      ];
+      newFilters.views.details.headerActionsProcessors = processors;
       break;
     }
     case UI_SET_DETAILS_VIEW: {

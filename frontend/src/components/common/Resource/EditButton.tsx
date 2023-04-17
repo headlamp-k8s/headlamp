@@ -64,6 +64,10 @@ export default function EditButton(props: EditButtonProps) {
     );
   }
 
+  if (!item) {
+    return null;
+  }
+
   if (isReadOnly) {
     return <ViewButton item={item} />;
   }

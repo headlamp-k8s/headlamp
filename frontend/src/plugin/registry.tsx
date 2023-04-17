@@ -7,6 +7,9 @@ import { AppLogoProps, AppLogoType } from '../components/Sidebar/AppLogo';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
+  addDetailsViewHeaderActionsProcessor,
+  DefaultHeaderAction,
+  HeaderActionsProcessor,
   HeaderActionType,
   setAppBarAction,
   setBrandingAppLogoComponent,
@@ -30,6 +33,7 @@ export type { AppLogoProps, AppLogoType };
 export type { ClusterChooserProps, ClusterChooserType };
 export type { SidebarEntryProps };
 export type { DetailsViewSectionProps, DetailsViewSectionType };
+export const DetailsViewDefaultHeaderActions = DefaultHeaderAction;
 
 /**
  * @deprecated please used DetailsViewSectionType and registerDetailViewSection
@@ -43,6 +47,7 @@ export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | un
 // @todo: these should also have a *Props
 // @todo: HeaderActionType should be deprecated.
 export type DetailsViewHeaderActionType = HeaderActionType;
+export type DetailsViewHeaderActionsProcessor = HeaderActionsProcessor;
 export type AppBarActionType = HeaderActionType;
 
 export default class Registry {
@@ -278,6 +283,31 @@ export function registerRoute(routeSpec: Route) {
  */
 export function registerDetailsViewHeaderAction(headerAction: DetailsViewHeaderActionType) {
   store.dispatch(setDetailsViewHeaderAction(headerAction));
+}
+
+/**
+ * Add a processor for the details view header actions. Allowing the modification of header actions.
+ *
+ * @param processor - The processor to add. Receives a resource (for which we are processing the header actions) and the current header actions and returns the new header actions. Return an empty array to remove all header actions.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerDetailsViewHeaderActionsProcessor, DetailsViewDefaultHeaderActions } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * // Processor that removes the default edit action.
+ * registerDetailsViewHeaderActionsProcessor((resource, headerActions) => {
+ *  return headerActions.filter(action => action.name !== DetailsViewDefaultHeaderActions.EDIT);
+ * });
+ *
+ * More complete detail view example in plugins/examples/details-view:
+ * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/details-view/ Detail View Example}
+ *
+ */
+export function registerDetailsViewHeaderActionsProcessor(
+  processor: DetailsViewHeaderActionsProcessor | DetailsViewHeaderActionsProcessor['processor']
+) {
+  store.dispatch(addDetailsViewHeaderActionsProcessor(processor));
 }
 
 /**
