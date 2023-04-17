@@ -286,7 +286,7 @@ export function registerDetailsViewHeaderAction(headerAction: DetailsViewHeaderA
 }
 
 /**
- * Add a processor for the details view header actions.
+ * Add a processor for the details view header actions. Allowing the modification of header actions.
  *
  * @param processor - The processor to add. Receives a resource (for which we are processing the header actions) and the current header actions and returns the new header actions. Return an empty array to remove all header actions.
  *
@@ -299,6 +299,10 @@ export function registerDetailsViewHeaderAction(headerAction: DetailsViewHeaderA
  * registerDetailsViewHeaderActionsProcessor((resource, headerActions) => {
  *  return headerActions.filter(action => action.name !== DetailsViewDefaultHeaderActions.EDIT);
  * });
+ *
+ * More complete detail view example in plugins/examples/details-view:
+ * @see {@link http://github.com/kinvolk/headlamp/plugins/examples/details-view/ Detail View Example}
+ *
  */
 export function registerDetailsViewHeaderActionsProcessor(
   processor: DetailsViewHeaderActionsProcessor
