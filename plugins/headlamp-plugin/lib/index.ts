@@ -16,6 +16,7 @@ import Registry, {
   registerDetailsViewHeaderAction,
   registerDetailsViewHeaderActionsProcessor,
   registerDetailsViewSection,
+  registerGetTokenFunction,
   registerRoute,
   registerRouteFilter,
   registerSidebarEntry,
@@ -50,4 +51,5 @@ export {
   registerSidebarEntry,
   registerSidebarEntryFilter,
   registerDetailsViewHeaderActionsProcessor,
+  registerGetTokenFunction,
 };
