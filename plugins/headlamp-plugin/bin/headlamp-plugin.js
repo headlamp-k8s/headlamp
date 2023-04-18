@@ -246,6 +246,10 @@ function start() {
                 source: './dist/*',
                 destination: path.join(configDir, 'plugins', packageName),
               },
+              {
+                source: './package.json',
+                destination: path.join(configDir, 'plugins', packageName, 'package.json'),
+              },
             ],
           },
         },
