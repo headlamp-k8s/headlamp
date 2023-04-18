@@ -232,6 +232,7 @@ export default function VersionButton() {
                   </Box>
                 ),
               }))}
+              ariaLabel={t('Kubernetes Version')}
             />
           )}
         </DialogContent>
