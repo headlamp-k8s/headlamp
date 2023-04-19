@@ -18,6 +18,7 @@ import Registry, {
   registerDetailsViewHeaderActionsProcessor,
   registerDetailsViewSection,
   registerGetTokenFunction,
+  registerResourceTableColumnsProcessor,
   registerRoute,
   registerRouteFilter,
   registerSidebarEntry,
@@ -48,6 +49,7 @@ export {
   registerSidebarEntryFilter,
   registerDetailsViewHeaderActionsProcessor,
   registerGetTokenFunction,
+  registerResourceTableColumnsProcessor,
 };
 
 export type { AppLogoProps, ClusterChooserProps, DetailsViewSectionProps, DefaultSidebars };

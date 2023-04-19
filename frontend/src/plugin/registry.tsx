@@ -9,6 +9,7 @@ import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
   addDetailsViewHeaderActionsProcessor,
+  addResourceTableColumnsProcessor,
   DefaultHeaderAction,
   HeaderActionsProcessor,
   HeaderActionType,
@@ -22,6 +23,7 @@ import {
   setRouteFilter,
   setSidebarItem,
   setSidebarItemFilter,
+  TableColumnsProcessor,
 } from '../redux/actions/actions';
 import store from '../redux/stores/store';
 
@@ -311,6 +313,38 @@ export function registerDetailsViewHeaderActionsProcessor(
   processor: DetailsViewHeaderActionsProcessor | DetailsViewHeaderActionsProcessor['processor']
 ) {
   store.dispatch(addDetailsViewHeaderActionsProcessor(processor));
+}
+
+/**
+ * Add a processor for the resource table columns. Allowing the modification of what tables show.
+ *
+ * @param processor - The processor ID and function. See #TableColumnsProcessor.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerResourceTableColumnsProcessor } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * // Processor that removes the age column for the table used in the pods list.
+ * registerResourceTableColumnsProcessor(function ageRemover({ id, columns }) {
+ *   if (id === 'pods') {
+ *     columns.push({
+ *       label: '',
+ *       getter: (pod: Pod) => {
+ *         // Create a menu with the actions
+ *         return <ContextMenu pod={pod} />;
+ *       },
+ *     });
+ *   }
+ *
+ *   return columns;
+ * });
+ * ```
+ */
+export function registerResourceTableColumnsProcessor(
+  processor: TableColumnsProcessor | TableColumnsProcessor['processor']
+) {
+  store.dispatch(addResourceTableColumnsProcessor(processor));
 }
 
 /**

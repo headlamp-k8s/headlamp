@@ -1,6 +1,7 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
 import { ReactElement, ReactNode } from 'react';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
+import { ResourceTableProps } from '../../components/common/Resource/ResourceTable';
 import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
 import { AppLogoType } from '../../components/Sidebar/AppLogo';
@@ -26,6 +27,7 @@ export const UI_ROUTER_SET_ROUTE_FILTER = 'UI_ROUTER_SET_ROUTE_FILTER';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
 export const UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR =
   'UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR';
+export const UI_ADD_TABLE_COLUMNS_PROCESSOR = 'UI_ADD_TABLE_COLUMNS_PROCESSOR';
 export const UI_SET_DETAILS_VIEW = 'UI_SET_DETAILS_VIEW';
 export const UI_APP_BAR_SET_ACTION = 'UI_APP_BAR_SET_ACTION';
 export const UI_THEME_SET = 'UI_THEME_SET';
@@ -110,6 +112,21 @@ export enum DefaultHeaderAction {
 export type HeaderActionsProcessor = {
   id: string;
   processor: (resource: KubeObject | null, actions: HeaderAction[]) => HeaderAction[];
+};
+
+export type TableColumnsProcessor = {
+  /** Unique ID for this processor. */
+  id: string;
+  /** Function that will be called to process the columns.
+   * @param args.id The table ID.
+   * @param args.columns The current table columns.
+   *
+   * @returns The new table columns.
+   */
+  processor: (args: {
+    id: string;
+    columns: ResourceTableProps['columns'];
+  }) => ResourceTableProps['columns'];
 };
 
 export function setNamespaceFilter(namespaces: string[]) {
@@ -197,6 +214,19 @@ export function addDetailsViewHeaderActionsProcessor(
     };
   }
   return { type: UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR, action: headerActionsProcessor };
+}
+
+export function addResourceTableColumnsProcessor(
+  tableProcessor: TableColumnsProcessor | TableColumnsProcessor['processor']
+) {
+  let tableColsProcessor = tableProcessor as TableColumnsProcessor;
+  if (tableColsProcessor.id === undefined && typeof tableProcessor === 'function') {
+    tableColsProcessor = {
+      id: '',
+      processor: tableProcessor,
+    };
+  }
+  return { type: UI_ADD_TABLE_COLUMNS_PROCESSOR, action: tableColsProcessor };
 }
 
 export function setDetailsView(viewSection: DetailsViewSectionType) {

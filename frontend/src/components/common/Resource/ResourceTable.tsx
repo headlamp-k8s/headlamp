@@ -2,6 +2,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { useFilterFunc } from '../../../lib/util';
+import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useSettings } from '../../App/Settings/hook';
 import { DateLabel } from '../Label';
 import Link from '../Link';
@@ -12,8 +13,15 @@ type SimpleTableColumn = SimpleTableProps['columns'][number];
 type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind';
 
 export interface ResourceTableProps extends Omit<SimpleTableProps, 'columns'> {
-  /** The columns to be rendered, like used in SimpleTable, or by name */
+  /** The columns to be rendered, like used in SimpleTable, or by name. */
   columns: (SimpleTableColumn | ColumnType)[];
+  /** ID for the table. Will be used by plugins to identify this table.
+   * Official tables in Headlamp will have the 'headlamp-' prefix for their IDs which is followed by the resource's plural name or the section in Headlamp the table is in.
+   * Plugins should use their own prefix when creating tables, to avoid any clashes.
+   */
+  id?: string;
+  /** Deny plugins to process this table's columns. */
+  noProcessing?: boolean;
 }
 
 export interface ResourceTableFromResourceClassProps extends Omit<ResourceTableProps, 'data'> {
@@ -32,21 +40,38 @@ export default function ResourceTable(
 }
 
 function TableFromResourceClass(props: ResourceTableFromResourceClassProps) {
-  const { resourceClass, ...otherProps } = props;
+  const { resourceClass, id, ...otherProps } = props;
   const [items, error] = resourceClass.useList();
 
-  return <Table errorMessage={resourceClass.getErrorMessage(error)} {...otherProps} data={items} />;
+  return (
+    <Table
+      errorMessage={resourceClass.getErrorMessage(error)}
+      id={id || `headlamp-${resourceClass.pluralName}`}
+      {...otherProps}
+      data={items}
+    />
+  );
 }
 
 function Table(props: ResourceTableProps) {
-  const { columns, defaultSortingColumn, ...otherProps } = props;
+  const { columns, defaultSortingColumn, id, noProcessing = false, ...otherProps } = props;
   const { t } = useTranslation(['glossary', 'frequent']);
   const theme = useTheme();
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
+  const tableProcessors = useTypedSelector(state => state.ui.views.tableColumnsProcessors);
 
   let sortingColumn = defaultSortingColumn;
 
-  const cols: SimpleTableColumn[] = columns.map((col, index) => {
+  let processedColumns = columns;
+
+  if (!noProcessing) {
+    tableProcessors.forEach(processorInfo => {
+      console.debug('Processing columns with processor: ', processorInfo.id, '...');
+      processedColumns = processorInfo.processor({ id: id || '', columns: processedColumns }) || [];
+    });
+  }
+
+  const cols: SimpleTableColumn[] = processedColumns.map((col, index) => {
     if (typeof col !== 'string') {
       return col;
     }
