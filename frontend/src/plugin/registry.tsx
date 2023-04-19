@@ -325,14 +325,13 @@ export function registerDetailsViewHeaderActionsProcessor(
  * ```tsx
  * import { registerResourceTableColumnsProcessor } from '@kinvolk/headlamp-plugin/lib';
  *
- * // Processor that removes the age column for the table used in the pods list.
+ * // Processor that adds a column to show how many init containers pods have (in the default pods' list table).
  * registerResourceTableColumnsProcessor(function ageRemover({ id, columns }) {
- *   if (id === 'pods') {
+ *   if (id === 'headlamp-pods') {
  *     columns.push({
- *       label: '',
+ *       label: 'Init Containers',
  *       getter: (pod: Pod) => {
- *         // Create a menu with the actions
- *         return <ContextMenu pod={pod} />;
+ *         return pod.spec.initContainers.length;
  *       },
  *     });
  *   }
