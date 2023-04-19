@@ -5,7 +5,7 @@ import { matchPath, useHistory } from 'react-router';
 import helpers from '../helpers';
 import { useTypedSelector } from '../redux/reducers/reducers';
 import store from '../redux/stores/store';
-import { loadGroupSettings } from './clusterAroup';
+import { loadGroupSettings } from './clusterGroup';
 import { ApiError } from './k8s/apiProxy';
 import { KubeMetrics, KubeObjectInterface, Workload } from './k8s/cluster';
 import { KubeEvent } from './k8s/event';
