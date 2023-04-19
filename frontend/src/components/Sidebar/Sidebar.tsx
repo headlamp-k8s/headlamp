@@ -20,7 +20,7 @@ import CreateButton from '../common/Resource/CreateButton';
 import HeadlampButton from './HeadlampButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';
-import SidebarItem, { SidebarEntryProps, SidebarItemProps } from './SidebarItem';
+import SidebarItem, { SidebarEntryProps } from './SidebarItem';
 import VersionButton from './VersionButton';
 
 export const drawerWidth = 330;
@@ -83,37 +83,6 @@ const useButtonStyle = makeStyles({
 
 export default function Sidebar() {
   const { t, i18n } = useTranslation(['glossary', 'frequent']);
-
-  const settingsMenu: SidebarItemProps = {
-    name: 'settings',
-    icon: 'mdi:cog',
-    label: t('frequent|Settings'),
-    url: '/settings',
-  };
-
-  const specialSidebarOptions: SidebarItemProps[] = [
-    {
-      name: 'clusters',
-      icon: 'mdi:hexagon-multiple',
-      label: t('glossary|Cluster'),
-      url: '/',
-    },
-    {
-      name: 'notifications',
-      icon: 'mdi:bell',
-      label: t('frequent|Notifications'),
-      url: '/notifications',
-    },
-  ];
-
-  specialSidebarOptions.push(settingsMenu);
-
-  /** Only adds settings menu when running as an App*/
-  if (helpers.isElectron() === true) {
-    settingsMenu.subList = [
-      { name: 'plugins', label: t('settings|Plugins'), url: '/settings/plugins' },
-    ];
-  }
 
   const sidebar = useTypedSelector(state => state.ui.sidebar);
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
