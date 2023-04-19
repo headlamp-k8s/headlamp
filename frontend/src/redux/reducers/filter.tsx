@@ -8,7 +8,7 @@ export const INITIAL_STATE: FilterState = {
 };
 
 function filter(filters = _.cloneDeep(INITIAL_STATE), action: Action) {
-  let newFilters = { ...filters };
+  let newFilters = { ..._.cloneDeep(filters) };
   switch (action.type) {
     case FILTER_SET_NAMESPACE:
       newFilters.namespaces = new Set(action.namespaces);

@@ -11,7 +11,7 @@ export const INITIAL_STATE: ClusterState = {
 
 function cluster(clusterActions = _.cloneDeep(INITIAL_STATE), action: ClusterAction & Action) {
   const { type, id, ...actionOptions } = action;
-  const newState = { ...clusterActions };
+  const newState = { ..._.cloneDeep(clusterActions) };
   switch (type) {
     case CLUSTER_ACTION_UPDATE:
       if (_.isEmpty(actionOptions)) {

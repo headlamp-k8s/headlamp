@@ -144,7 +144,8 @@ export const INITIAL_STATE: UIState = {
 };
 
 function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
-  const newFilters = { ...state };
+  const newFilters = { ..._.cloneDeep(state) };
+
   switch (action.type) {
     case UI_SIDEBAR_SET_SELECTED: {
       newFilters.sidebar = {
