@@ -109,6 +109,7 @@ export default function Overview() {
             'age',
           ]}
           data={getJointItems()}
+          id="headlamp-workloads"
         />
       </SectionBox>
     </PageGrid>
