@@ -4,7 +4,7 @@ import { Autocomplete } from '@material-ui/lab';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { deleteGroupSettings, storeGroupSettings } from '../../../lib/clusterAroup';
+import { deleteGroupSettings, storeGroupSettings } from '../../../lib/clusterGroup';
 import { useClustersConf } from '../../../lib/k8s';
 import { createRouteURL } from '../../../lib/router';
 import { getClusterGroupInfo } from '../../../lib/util';
