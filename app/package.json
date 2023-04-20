@@ -123,6 +123,10 @@
       {
         "from": "../.plugins",
         "to": ".plugins"
+      },
+      {
+        "from": "./app-build-manifest.json",
+        "to": "app-build-manifest.json"
       }
     ],
     "publish": {

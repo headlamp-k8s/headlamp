@@ -1,4 +1,5 @@
 {
+  "proxy-urls": ["https://artifacthub.io/*"],
   "plugins": [
     {
       "name": "app-catalog",
