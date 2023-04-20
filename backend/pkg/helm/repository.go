@@ -43,6 +43,7 @@ func AddRepositoryToHelm(name string, url string) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to create empty RepositoryConfig file")
+		return err
 	}
 
 	// TODO: Lock repo file
@@ -142,6 +143,7 @@ func (h *Handler) ListRepo(w http.ResponseWriter, r *http.Request) {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "list_repo").Msg("failed to create empty RepositoryConfig file")
+		return
 	}
 
 	// read repo file
@@ -186,6 +188,7 @@ func (h *Handler) RemoveRepo(w http.ResponseWriter, r *http.Request) {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "remove_repo").Msg("failed to create empty RepositoryConfig file")
+		return
 	}
 
 	name := r.URL.Query().Get("name")
@@ -223,6 +226,7 @@ func (h *Handler) UpdateRepository(w http.ResponseWriter, r *http.Request) {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to create empty RepositoryConfig file")
+		return
 	}
 
 	// parse request
