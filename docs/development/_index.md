@@ -243,3 +243,7 @@ This behavior can be turned off by adding a the following to a `.env` file in th
 ```
 HEADLAMP_CHECK_FOR_UPDATES=false
 ```
+
+## Build Headlamp Base (Headlamp without any plugins)
+
+For building Headlamp Base (Headlamp without plugins), simply remove the `app/app-build-manifest.json` and run the build commands in the sections above.
