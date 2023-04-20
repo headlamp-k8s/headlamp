@@ -21,7 +21,7 @@ describe('updateSettingsPackages tests', () => {
     const settingsPlugins: PluginInfo[] = [];
     const updatedSettingsPlugins = updateSettingsPackages(backendPlugins, settingsPlugins);
     expect(updatedSettingsPlugins.length).toBe(1);
-    expect(updatedSettingsPlugins[0].isEnabled).toBe(false);
+    expect(updatedSettingsPlugins[0].isEnabled).toBe(true);
   });
 
   test('when there is an existing setting already turned to true by user', () => {

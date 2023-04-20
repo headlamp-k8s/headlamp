@@ -153,7 +153,7 @@ export function filterSources(
 /**
  * Gives back updates settings from the backend.
  *
- * If there are new plugins, it includes the new ones with isEnabled=false.
+ * If there are new plugins, it includes the new ones with isEnabled=true.
  *
  * If plugins are not there anymore in the backend list,
  * then it removes them from the settings list of plugins.
@@ -183,7 +183,7 @@ export function updateSettingsPackages(
       // It's a new one settings doesn't know about so we do not enable it by default
       return {
         ...plugin,
-        isEnabled: false,
+        isEnabled: true,
       };
     }
     return settingsPlugins[index];
