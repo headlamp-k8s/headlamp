@@ -1071,7 +1071,6 @@ func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 }
 
 func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
-	handleClusterHelm(c, router)
 	if !c.useInCluster {
 		handleClusterHelm(c, router)
 	}
