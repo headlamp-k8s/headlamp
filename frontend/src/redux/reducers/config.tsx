@@ -37,7 +37,7 @@ export interface ConfigAction extends Action {
 }
 
 function reducer(state = _.cloneDeep(INITIAL_STATE), action: ConfigAction) {
-  const newState = { ...state };
+  const newState = { ..._.cloneDeep(state) };
   switch (action.type) {
     case CONFIG_NEW: {
       newState.clusters = { ...action.config.clusters };

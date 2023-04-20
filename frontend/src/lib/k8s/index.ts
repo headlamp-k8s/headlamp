@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { ConfigState } from '../../redux/reducers/config';
@@ -80,7 +81,7 @@ export const ResourceClasses = resourceClassesDict;
 
 // Hook for getting or fetching the clusters configuration.
 export function useClustersConf(): ConfigState['clusters'] {
-  const clusters = useTypedSelector(state => state.config.clusters);
+  const clusters = _.cloneDeep(useTypedSelector(state => state.config.clusters));
   return clusters;
 }
 
