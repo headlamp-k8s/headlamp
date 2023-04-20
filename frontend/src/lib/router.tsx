@@ -645,7 +645,10 @@ const defaultRoutes: {
     path: '/settings/plugins',
     exact: true,
     name: 'Plugins',
-    sidebar: 'plugins',
+    sidebar: {
+      item: 'plugins',
+      sidebar: DefaultSidebars.HOME,
+    },
     useClusterURL: false,
     noAuthRequired: true,
     disabled: !helpers.isElectron(),
