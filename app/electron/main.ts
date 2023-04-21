@@ -13,6 +13,9 @@ import yargs from 'yargs';
 import i18n from './i18next.config';
 import windowSize from './windowSize';
 
+const MANIFEST_FILE = path.join(process.resourcesPath, 'app-build-manifest.json');
+const buildManifest = fs.existsSync(MANIFEST_FILE) ? require(MANIFEST_FILE) : {};
+
 dotenv.config({ path: path.join(process.resourcesPath, '.env') });
 
 const args = yargs
@@ -51,6 +54,10 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   if (!!args.kubeconfig) {
     serverArgs = serverArgs.concat(['--kubeconfig', args.kubeconfig]);
   }
+  const proxyUrls = !!buildManifest && buildManifest['proxy-urls'];
+  if (!!proxyUrls && proxyUrls.length > 0) {
+    serverArgs = serverArgs.concat(['--proxy-urls', proxyUrls.join(',')]);
+  }
 
   const bundledPlugins = path.join(process.resourcesPath, '.plugins');
 
@@ -58,8 +65,9 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
     return fs.readdirSync(path).length === 0;
   }
 
+  // Set the bundled plugins in addition to the the user's plugins.
   if (fs.existsSync(bundledPlugins) && !isEmpty(bundledPlugins)) {
-    serverArgs = serverArgs.concat(['-plugins-dir', bundledPlugins]);
+    process.env.HEADLAMP_STATIC_PLUGINS_DIR = bundledPlugins;
   }
 
   serverArgs = serverArgs.concat(flags);

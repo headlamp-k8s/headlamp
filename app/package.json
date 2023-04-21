@@ -123,6 +123,10 @@
       {
         "from": "../.plugins",
         "to": ".plugins"
+      },
+      {
+        "from": "./app-build-manifest.json",
+        "to": "app-build-manifest.json"
       }
     ],
     "publish": {
@@ -150,6 +154,7 @@
     "jest": "^27.4.7",
     "mime-types": "^2.1.35",
     "octokit": "^2.0.14",
+    "tar": "^6.1.13",
     "typescript": "^4.4.3"
   },
   "dependencies": {
