@@ -50,6 +50,7 @@ type HeadlampConfig struct {
 	port             uint
 	staticDir        string
 	pluginDir        string
+	staticPluginDir  string
 	oidcClientID     string
 	oidcClientSecret string
 	oidcScopes       []string
@@ -396,6 +397,9 @@ func defaultKubeConfigPersistenceFile() (string, error) {
 func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	kubeConfigPath := config.kubeConfigPath
 
+	config.staticPluginDir = os.Getenv("HEADLAMP_STATIC_PLUGINS_DIR")
+
+	log.Printf("static plugin dir: %s\n", config.staticPluginDir)
 	log.Printf("plugins-dir: %s\n", config.pluginDir)
 
 	if !config.useInCluster {
