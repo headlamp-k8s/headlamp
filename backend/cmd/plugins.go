@@ -103,9 +103,25 @@ func watchSubfolders(path string) {
 // Returns pluginListURLs, nil if there is no problem.
 // returns nil, err if there's an error.
 func (c *HeadlampConfig) getPluginListBasePaths() ([]string, error) {
+	var pluginListURLStatic []string
+
+	if c.staticPluginDir != "" {
+		var err error
+
+		pluginListURLStatic, err = pluginBasePathListForDir(c.staticPluginDir, filepath.Join(c.baseURL, "static-plugins"))
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	pluginListURL, err := pluginBasePathListForDir(c.pluginDir, filepath.Join(c.baseURL, "plugins"))
 	if err != nil {
 		return nil, err
+	}
+
+	// Concatenate the static and user plugin lists.
+	if pluginListURLStatic != nil {
+		pluginListURL = append(pluginListURLStatic, pluginListURL...)
 	}
 
 	return pluginListURL, nil
@@ -184,4 +200,10 @@ func addPluginRoutes(config *HeadlampConfig, r *mux.Router) {
 	}
 
 	r.PathPrefix("/plugins/").Handler(pluginHandler)
+
+	if config.staticPluginDir != "" {
+		staticPluginsHandler := http.StripPrefix(config.baseURL+"/static-plugins/",
+			http.FileServer(http.Dir(config.staticPluginDir)))
+		r.PathPrefix("/static-plugins/").Handler(staticPluginsHandler)
+	}
 }
