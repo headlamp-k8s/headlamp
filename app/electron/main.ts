@@ -65,6 +65,10 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
     return fs.readdirSync(path).length === 0;
   }
 
+  // Enable the Helm and dynamic cluster endpoints
+  process.env.HEADLAMP_CONFIG_ENABLE_HELM = 'true';
+  process.env.HEADLAMP_CONFIG_ENABLE_DYNAMIC_CLUSTERS = 'true';
+
   // Set the bundled plugins in addition to the the user's plugins.
   if (fs.existsSync(bundledPlugins) && !isEmpty(bundledPlugins)) {
     process.env.HEADLAMP_STATIC_PLUGINS_DIR = bundledPlugins;
