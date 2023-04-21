@@ -40,6 +40,7 @@ import (
 	"k8s.io/client-go/tools/portforward"
 	"k8s.io/client-go/transport/spdy"
 
+	zlog "github.com/rs/zerolog/log"
 	"golang.org/x/oauth2"
 )
 
@@ -498,11 +499,19 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			proxyURL = r.Header.Get("Forward-to")
 		}
 		if proxyURL == "" {
+			zlog.Error().Err(err).
+				Str("action", "externalproxy").
+				Str("proxyURL", proxyURL).
+				Msg("proxy URL is empty")
 			http.Error(w, "proxy URL is empty", http.StatusBadRequest)
 			return
 		}
 		url, err := url.Parse(proxyURL)
 		if err != nil {
+			zlog.Error().Err(err).
+				Str("action", "externalproxy").
+				Str("proxyURL", proxyURL).
+				Msg("The provided proxy URL is invalid")
 			http.Error(w, fmt.Sprintf("The provided proxy URL is invalid: %v", err), http.StatusBadRequest)
 			return
 		}
@@ -515,6 +524,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			}
 		}
 		if !isURLContainedInProxyURLs {
+			zlog.Error().Err(err).Str("action", "externalproxy").Msg("no allowed proxy url match, request denied")
 			http.Error(w, "no allowed proxy url match, request denied ", http.StatusBadRequest)
 		}
 		proxy := httputil.NewSingleHostReverseProxy(url)
