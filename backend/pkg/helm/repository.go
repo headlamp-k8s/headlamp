@@ -1,10 +1,15 @@
 package helm
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
+	"time"
+
+	"github.com/gofrs/flock"
 
 	zlog "github.com/rs/zerolog/log"
 	"helm.sh/helm/v3/pkg/getter"
@@ -38,6 +43,27 @@ func createFileIfNotThere(fileName string) error {
 	return nil
 }
 
+// Uses a file lock like the helm tool.
+func lockRepositoryFile(lockCtx context.Context, repositoryConfig string) (bool, *flock.Flock, error) {
+	var lockPath string
+
+	repoFileExt := filepath.Ext(repositoryConfig)
+
+	if len(repoFileExt) > 0 && len(repoFileExt) < len(repositoryConfig) {
+		lockPath = strings.Replace(repositoryConfig, repoFileExt, ".lock", 1)
+	} else {
+		lockPath = repositoryConfig + ".lock"
+	}
+
+	fileLock := flock.New(lockPath)
+
+	locked, err := fileLock.TryLockContext(lockCtx, time.Second)
+
+	return locked, fileLock, err
+}
+
+const timeoutForLock = 30 * time.Second
+
 // Adds a repository with name, url to the helm config. Returns error if there is one.
 func AddRepositoryToHelm(name string, url string) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
@@ -46,7 +72,23 @@ func AddRepositoryToHelm(name string, url string) error {
 		return err
 	}
 
-	// TODO: Lock repo file
+	lockCtx, cancel := context.WithTimeout(context.Background(), timeoutForLock)
+	defer cancel()
+
+	locked, fileLock, err := lockRepositoryFile(lockCtx, settings.RepositoryConfig)
+	if err == nil && locked {
+		defer func() {
+			err := fileLock.Unlock()
+			if err != nil {
+				zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to unlock repository config file")
+			}
+		}()
+	}
+
+	if err != nil {
+		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to lock repository config file")
+		return err
+	}
 
 	// read repo file
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)

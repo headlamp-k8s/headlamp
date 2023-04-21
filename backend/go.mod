@@ -9,6 +9,7 @@ require (
 	github.com/go-openapi/swag v0.22.3 // indirect
 	github.com/go-playground/validator/v10 v10.12.0
 	github.com/gobwas/glob v0.2.3
+	github.com/gofrs/flock v0.8.1 // indirect
 	github.com/google/gnostic v0.6.9 // indirect
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/handlers v1.5.1
@@ -20,6 +21,7 @@ require (
 	github.com/rs/zerolog v1.29.0 // indirect
 	github.com/stretchr/testify v1.8.2
 	golang.org/x/oauth2 v0.3.0
+	golang.org/x/sys v0.7.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	gopkg.in/square/go-jose.v2 v2.6.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0
