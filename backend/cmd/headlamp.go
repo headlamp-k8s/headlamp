@@ -45,19 +45,21 @@ import (
 )
 
 type HeadlampConfig struct {
-	useInCluster     bool
-	devMode          bool
-	insecure         bool
-	kubeConfigPath   string
-	port             uint
-	staticDir        string
-	pluginDir        string
-	staticPluginDir  string
-	oidcClientID     string
-	oidcClientSecret string
-	oidcScopes       []string
-	oidcIdpIssuerURL string
-	baseURL          string
+	useInCluster          bool
+	devMode               bool
+	insecure              bool
+	enableHelm            bool
+	enableDynamicClusters bool
+	port                  uint
+	kubeConfigPath        string
+	staticDir             string
+	pluginDir             string
+	staticPluginDir       string
+	oidcClientID          string
+	oidcClientSecret      string
+	oidcIdpIssuerURL      string
+	baseURL               string
+	oidcScopes            []string
 	// Holds: context-name -> (context, reverse-proxy)
 	contextProxies map[string]contextProxy
 	proxyURLs      []string
@@ -493,7 +495,6 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	config.handleClusterRequests(r)
 
 	r.HandleFunc("/externalproxy", func(w http.ResponseWriter, r *http.Request) {
-
 		proxyURL := r.Header.Get("proxy-to")
 		if proxyURL == "" && r.Header.Get("Forward-to") != "" {
 			proxyURL = r.Header.Get("Forward-to")
@@ -1081,7 +1082,7 @@ func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 }
 
 func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
-	if !c.useInCluster {
+	if c.enableHelm {
 		handleClusterHelm(c, router)
 	}
 
@@ -1293,7 +1294,7 @@ func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 
 func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 	// We do not support this feature when in-cluster
-	if c.useInCluster {
+	if !c.enableDynamicClusters {
 		return
 	}
 

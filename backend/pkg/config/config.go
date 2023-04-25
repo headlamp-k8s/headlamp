@@ -20,19 +20,21 @@ import (
 const defaultPort = 4466
 
 type Config struct {
-	InCluster        bool   `koanf:"in-cluster"`
-	DevMode          bool   `koanf:"dev"`
-	InsecureSsl      bool   `koanf:"insecure-ssl"`
-	KubeConfigPath   string `koanf:"kubeconfig"`
-	StaticDir        string `koanf:"html-static-dir"`
-	PluginsDir       string `koanf:"plugins-dir"`
-	BaseURL          string `koanf:"base-url"`
-	Port             uint   `koanf:"port"`
-	ProxyURLs        string `koanf:"proxy-urls"`
-	OidcClientID     string `koanf:"oidc-client-id"`
-	OidcClientSecret string `koanf:"oidc-client-secret"`
-	OidcIdpIssuerURL string `koanf:"oidc-idp-issuer-url"`
-	OidcScopes       string `koanf:"oidc-scopes"`
+	InCluster             bool   `koanf:"in-cluster"`
+	DevMode               bool   `koanf:"dev"`
+	InsecureSsl           bool   `koanf:"insecure-ssl"`
+	EnableHelm            bool   `koanf:"enable-helm"`
+	EnableDynamicClusters bool   `koanf:"enable-dynamic-clusters"`
+	Port                  uint   `koanf:"port"`
+	KubeConfigPath        string `koanf:"kubeconfig"`
+	StaticDir             string `koanf:"html-static-dir"`
+	PluginsDir            string `koanf:"plugins-dir"`
+	BaseURL               string `koanf:"base-url"`
+	ProxyURLs             string `koanf:"proxy-urls"`
+	OidcClientID          string `koanf:"oidc-client-id"`
+	OidcClientSecret      string `koanf:"oidc-client-secret"`
+	OidcIdpIssuerURL      string `koanf:"oidc-idp-issuer-url"`
+	OidcScopes            string `koanf:"oidc-scopes"`
 }
 
 func (c *Config) Validate() error {
