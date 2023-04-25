@@ -1053,6 +1053,12 @@ func handleClusterHelm(c *HeadlampConfig, router *mux.Router) {
 			helmHandler.UpdateRepository(w, r)
 			return
 		}
+
+		if strings.HasSuffix(path, "/charts") && r.Method == http.MethodGet {
+			helmHandler.ListCharts(w, r)
+			return
+		}
+
 		if strings.HasSuffix(path, "/action/status") && r.Method == http.MethodGet {
 			helmHandler.GetActionStatus(w, r)
 			return
