@@ -19,7 +19,7 @@
     "@kinvolk/eslint-config": "^0.5.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/lab": "^4.0.0-alpha.60",
-    "@svgr/webpack": "^6.2.1",
+    "@svgr/webpack": "^7.0.0",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
