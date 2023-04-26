@@ -1,5 +1,6 @@
 import { InlineIcon } from '@iconify/react';
 import { Box, Button, withStyles } from '@material-ui/core';
+import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -48,6 +49,8 @@ function AuthChooser({ children }: AuthChooserProps) {
     {}) as ReactRouterLocationStateIface;
   const clusterName = getCluster() as string;
   const { t } = useTranslation('auth');
+  const clustersRef = React.useRef<typeof clusters>(null);
+  const cancelledRef = React.useRef(false);
 
   let clusterAuthType = '';
   if (clusters && clusters[clusterName]) {
@@ -56,10 +59,20 @@ function AuthChooser({ children }: AuthChooserProps) {
 
   const numClusters = Object.keys(clusters || {}).length;
 
+  function runTestAuthAgain() {
+    setError(null);
+    clustersRef.current = null;
+  }
+
   React.useEffect(
     () => {
+      const sameClusters = _.isEqual(clustersRef.current, clusters);
+      if (!sameClusters) {
+        clustersRef.current = clusters;
+      }
       const clusterName = getCluster();
-      if (!clusterName || !clusters || error || numClusters === 0) {
+
+      if (!clusterName || !clusters || sameClusters || error || numClusters === 0) {
         return;
       }
 
@@ -67,8 +80,6 @@ function AuthChooser({ children }: AuthChooserProps) {
       if (!cluster) {
         return;
       }
-
-      let cancelled = false;
 
       // If we haven't yet figured whether we need to use a token for the current
       //   cluster, then we check here.
@@ -80,7 +91,8 @@ function AuthChooser({ children }: AuthChooserProps) {
         setTestingAuth(true);
 
         let errorObj: Error | null = null;
-        setError(errorObj);
+
+        console.debug('Testing auth at authchooser');
 
         testAuth()
           .then(() => {
@@ -88,7 +100,7 @@ function AuthChooser({ children }: AuthChooserProps) {
             useToken = false;
           })
           .catch(err => {
-            if (!cancelled) {
+            if (!cancelledRef.current) {
               console.debug('Requiring token as testing auth failed:', err);
 
               // Ideally we'd only not assign the error if it was 401 or 403 (so we let the logic
@@ -102,13 +114,17 @@ function AuthChooser({ children }: AuthChooserProps) {
             }
           })
           .finally(() => {
-            if (!cancelled) {
-              cancelled = true;
+            if (!cancelledRef.current) {
               setTestingAuth(false);
 
               if (!!errorObj) {
-                setError(errorObj);
+                if (!_.isEqual(errorObj, error)) {
+                  setError(errorObj);
+                }
+
                 return;
+              } else {
+                setError(null);
               }
 
               cluster.useToken = useToken;
@@ -140,14 +156,18 @@ function AuthChooser({ children }: AuthChooserProps) {
           }),
         });
       }
-
-      return function cleanup() {
-        cancelled = true;
-      };
     },
     // eslint-disable-next-line
     [clusters, error]
   );
+
+  // Ensure we have a way to know in the testAuth result whether this component is no longer
+  // mounted.
+  React.useEffect(() => {
+    return function cleanup() {
+      cancelledRef.current = true;
+    };
+  }, []);
 
   return (
     <PureAuthChooser
@@ -167,7 +187,7 @@ function AuthChooser({ children }: AuthChooserProps) {
       error={error}
       oauthUrl={`${helpers.getAppUrl()}oidc?dt=${Date()}&cluster=${getCluster()}`}
       clusterAuthType={clusterAuthType}
-      handleTryAgain={() => setError(null)}
+      handleTryAgain={runTestAuthAgain}
       handleOidcAuth={() => {
         history.replace({
           pathname: generatePath(getClusterPrefixedPath(), {
