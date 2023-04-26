@@ -12,6 +12,7 @@ import (
 	"github.com/gofrs/flock"
 
 	zlog "github.com/rs/zerolog/log"
+	"helm.sh/helm/v3/pkg/cli"
 	"helm.sh/helm/v3/pkg/getter"
 	"helm.sh/helm/v3/pkg/repo"
 )
@@ -21,8 +22,7 @@ const (
 	defaultNewConfigFolderMode os.FileMode = os.FileMode(0770)
 )
 
-// add repository
-
+// add repository.
 type AddUpdateRepoRequest struct {
 	Name string `json:"name"`
 	URL  string `json:"url"`
@@ -65,7 +65,7 @@ func lockRepositoryFile(lockCtx context.Context, repositoryConfig string) (bool,
 const timeoutForLock = 30 * time.Second
 
 // Adds a repository with name, url to the helm config. Returns error if there is one.
-func AddRepositoryToHelm(name string, url string) error {
+func AddRepository(name string, url string, settings *cli.EnvSettings) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to create empty RepositoryConfig file")
@@ -140,7 +140,7 @@ func (h *Handler) AddRepo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = AddRepositoryToHelm(request.Name, request.URL)
+	err = AddRepository(request.Name, request.URL, h.EnvSettings)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -181,20 +181,18 @@ func createFullPath(p string) (*os.File, error) {
 	return os.Create(p)
 }
 
-func (h *Handler) ListRepo(w http.ResponseWriter, r *http.Request) {
+func listRepositories(settings *cli.EnvSettings) ([]repositoryInfo, error) {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "list_repo").Msg("failed to create empty RepositoryConfig file")
-		return
+		return nil, err
 	}
 
 	// read repo file
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "list_repo").Msg("failed to read repo file")
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-
-		return
+		return nil, err
 	}
 
 	// response
@@ -207,6 +205,16 @@ func (h *Handler) ListRepo(w http.ResponseWriter, r *http.Request) {
 			Name: repo.Name,
 			URL:  repo.URL,
 		})
+	}
+
+	return repositories, nil
+}
+
+func (h *Handler) ListRepo(w http.ResponseWriter, r *http.Request) {
+	repositories, err := listRepositories(h.EnvSettings)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	response := ListRepoResponse{
@@ -225,56 +233,108 @@ func (h *Handler) ListRepo(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Remove repository name.
-func (h *Handler) RemoveRepo(w http.ResponseWriter, r *http.Request) {
+func RemoveRepository(name string, settings *cli.EnvSettings) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "remove_repo").Msg("failed to create empty RepositoryConfig file")
-		return
+		return err
 	}
 
-	name := r.URL.Query().Get("name")
+	lockCtx, cancel := context.WithTimeout(context.Background(), timeoutForLock)
+	defer cancel()
+
+	locked, fileLock, err := lockRepositoryFile(lockCtx, settings.RepositoryConfig)
+	if err == nil && locked {
+		defer func() {
+			err := fileLock.Unlock()
+			if err != nil {
+				zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to unlock repository config file")
+			}
+		}()
+	}
 
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "remove_repo").Msg("failed to read repo file")
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-
-		return
+		return err
 	}
 
 	isRemoved := repoFile.Remove(name)
 	if !isRemoved {
 		zlog.Error().Err(err).Str("action", "remove_repo").Msg("repository not found")
-		http.Error(w, "repository not found", http.StatusNotFound)
-
-		return
+		return err
 	}
 
 	// write repo file
 	err = repoFile.WriteFile(settings.RepositoryConfig, defaultNewConfigFileMode)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "remove_repo").Msg("failed to write repo file")
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return err
+	}
 
+	return nil
+}
+
+// Remove repository name.
+func (h *Handler) RemoveRepo(w http.ResponseWriter, r *http.Request) {
+	name := r.URL.Query().Get("name")
+
+	err := RemoveRepository(name, h.EnvSettings)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
 }
 
-// Update repository name.
-func (h *Handler) UpdateRepository(w http.ResponseWriter, r *http.Request) {
+func UpdateRepository(name, url string, settings *cli.EnvSettings) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to create empty RepositoryConfig file")
-		return
+		return err
 	}
 
+	lockCtx, cancel := context.WithTimeout(context.Background(), timeoutForLock)
+	defer cancel()
+
+	locked, fileLock, err := lockRepositoryFile(lockCtx, settings.RepositoryConfig)
+	if err == nil && locked {
+		defer func() {
+			err := fileLock.Unlock()
+			if err != nil {
+				zlog.Error().Err(err).Str("action", "update_repo").Msg("failed to unlock repository config file")
+			}
+		}()
+	}
+
+	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
+	if err != nil {
+		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to read repo file")
+		return err
+	}
+
+	// update repo
+	repoFile.Update(&repo.Entry{
+		Name: name,
+		URL:  url,
+	})
+
+	err = repoFile.WriteFile(settings.RepositoryConfig, defaultNewConfigFileMode)
+	if err != nil {
+		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to write repo file")
+		return err
+	}
+
+	return nil
+}
+
+// Update repository name.
+func (h *Handler) UpdateRepository(w http.ResponseWriter, r *http.Request) {
 	// parse request
 	var request AddUpdateRepoRequest
 
-	err = json.NewDecoder(r.Body).Decode(&request)
+	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to parse request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -282,24 +342,9 @@ func (h *Handler) UpdateRepository(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
+	err = UpdateRepository(request.Name, request.URL, h.EnvSettings)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to read repo file")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-
-		return
-	}
-
-	repoFile.Update(&repo.Entry{
-		Name: request.Name,
-		URL:  request.URL,
-	})
-
-	err = repoFile.WriteFile(settings.RepositoryConfig, defaultNewConfigFileMode)
-	if err != nil {
-		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to write repo file")
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-
 		return
 	}
 
