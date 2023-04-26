@@ -14,6 +14,7 @@ import (
 	"helm.sh/helm/v3/pkg/action"
 	"helm.sh/helm/v3/pkg/chart"
 	"helm.sh/helm/v3/pkg/chart/loader"
+	"helm.sh/helm/v3/pkg/cli"
 	"helm.sh/helm/v3/pkg/downloader"
 	"helm.sh/helm/v3/pkg/getter"
 	"helm.sh/helm/v3/pkg/release"
@@ -415,6 +416,7 @@ type CommonInstallUpdateRequest struct {
 	Description string `json:"description" validate:"required"`
 	Values      string `json:"values" validate:"required"`
 	Chart       string `json:"chart" validate:"required"`
+	Version     string `json:"version" validate:"required"`
 }
 
 type InstallRequest struct {
@@ -466,6 +468,7 @@ func getChart(
 	reqName string,
 	chartPathOptions action.ChartPathOptions,
 	dependencyUpdate bool,
+	settings *cli.EnvSettings,
 ) (*chart.Chart, error) {
 	// locate chart
 	chartPath, err := chartPathOptions.LocateChart(reqChart, settings)
@@ -511,7 +514,6 @@ func getChart(
 	return chart, nil
 }
 
-//nolint:funlen
 func (h *Handler) installRelease(req InstallRequest) {
 	// Get install client
 	installClient := action.NewInstall(h.Configuration)
@@ -519,8 +521,10 @@ func (h *Handler) installRelease(req InstallRequest) {
 	installClient.Namespace = req.Namespace
 	installClient.Description = req.Description
 	installClient.CreateNamespace = req.CreateNamespace
+	installClient.ChartPathOptions.Version = req.Version
 
-	chart, err := getChart("install", req.Chart, req.Name, installClient.ChartPathOptions, req.DependencyUpdate)
+	chart, err := getChart("install", req.Chart, req.Name,
+		installClient.ChartPathOptions, req.DependencyUpdate, h.EnvSettings)
 	if err != nil {
 		return
 	}
@@ -529,8 +533,7 @@ func (h *Handler) installRelease(req InstallRequest) {
 
 	if err != nil {
 		zlog.Error().Err(err).Str("chart", req.Chart).
-			Str("action", "install").Str("releaseName", req.Name).
-			Msg("failed to decode values")
+			Str("action", "install").Str("releaseName", req.Name).Msg("failed to decode values")
 		actionState.SetStatus("install", req.Name, "failed", err)
 
 		return
@@ -555,11 +558,6 @@ func (h *Handler) installRelease(req InstallRequest) {
 		actionState.SetStatus("install", req.Name, "failed", err)
 
 		return
-	}
-
-	// Set annotations for the release
-	values["dev.headlamp.metadata"] = map[string]string{
-		"chartName": req.Chart,
 	}
 
 	// Install chart
@@ -653,18 +651,25 @@ func logActionState(log *zerolog.Event,
 	status string,
 	message string,
 ) {
+	if err != nil {
+		log = log.Err(err)
+	}
+
 	log.Str("chart", chart).
-		Str("action", action).Str("releaseName", releaseName).
+		Str("action", action).Str("releaseName", releaseName).Str("status", status).
 		Msg(message)
 
-	actionState.SetStatus("upgrade", releaseName, status, err)
+	actionState.SetStatus(action, releaseName, status, err)
 }
 
 func (h *Handler) upgradeRelease(req UpgradeReleaseRequest) {
 	// find chart
 	upgradeClient := action.NewUpgrade(h.Configuration)
+	upgradeClient.Namespace = req.Namespace
+	upgradeClient.Description = req.Description
+	upgradeClient.ChartPathOptions.Version = req.Version
 
-	chart, err := getChart("upgrade", req.Chart, req.Name, upgradeClient.ChartPathOptions, true)
+	chart, err := getChart("upgrade", req.Chart, req.Name, upgradeClient.ChartPathOptions, true, h.EnvSettings)
 	if err != nil {
 		return
 	}
