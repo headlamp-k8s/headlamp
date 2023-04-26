@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import Service from '../../lib/k8s/service';
+import { StatusLabel } from '../common';
 import ResourceTable from '../common/Resource/ResourceTable';
 import { SectionBox } from '../common/SectionBox';
 import SectionFilterHeader from '../common/SectionFilterHeader';
@@ -28,6 +29,20 @@ export default function ServiceList() {
             label: t('External IP'),
             getter: service => service.getExternalAddresses(),
             sort: true,
+          },
+          {
+            label: 'Selector',
+            getter: service => {
+              const selectors: JSX.Element[] = [];
+              Object.keys(service.spec.selector).forEach((key: string) => {
+                selectors.push(
+                  <StatusLabel key={key} status="">
+                    {key}={service.spec.selector[key]}
+                  </StatusLabel>
+                );
+              });
+              return <>{selectors}</>;
+            },
           },
           'age',
         ]}
