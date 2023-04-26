@@ -58,6 +58,10 @@ export default function NodeList() {
               />
             ),
           },
+          {
+            label: t('Version'),
+            getter: node => node.status.nodeInfo.kubeProxyVersion,
+          },
           'age',
         ]}
       />
