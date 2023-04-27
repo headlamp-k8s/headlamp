@@ -1,6 +1,6 @@
 import 'github-markdown-css';
 import { Icon } from '@iconify/react';
-import { Backdrop, Box, Button, Modal, Paper, Typography } from '@material-ui/core';
+import { Backdrop, Box, Button, Link, Modal, Paper, Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -51,7 +51,19 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
           className="markdown-body"
           style={{ color: theme.palette.text.primary, fontFamily: 'inherit' }}
         >
-          <ReactMarkdown>{releaseNotes}</ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              a: ({ children, href }) => {
+                return (
+                  <Link href={href} target="_blank">
+                    {children}
+                  </Link>
+                );
+              },
+            }}
+          >
+            {releaseNotes}
+          </ReactMarkdown>
         </Box>
       </Paper>
     </Modal>
