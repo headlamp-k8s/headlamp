@@ -687,10 +687,7 @@ func (h *Handler) upgradeRelease(req UpgradeReleaseRequest) {
 		logActionState(zlog.Error(), err, "upgrade", req.Chart, req.Name, "failed", "values un-marshalling failed")
 		return
 	}
-	// add headlamp chart metadata
-	values["dev.headlamp.metadata"] = map[string]string{
-		"chartName": req.Chart,
-	}
+
 	// Upgrade chart
 	_, err = upgradeClient.Run(req.Name, chart, values)
 	if err != nil {
