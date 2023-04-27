@@ -76,19 +76,27 @@ export default function NavigationTabs() {
     return null;
   }
 
+  /**
+   * This function is used to handle the tab change event.
+   *
+   * @param index The index of the tab that was clicked.
+   * @returns void
+   */
   function tabChangeHandler(index: number) {
     if (!subList) {
       return;
     }
-    let pathname;
 
     const url = subList[index].url;
-    if (url) {
-      pathname = generatePath(getClusterPrefixedPath(url), { cluster: getCluster()! });
+    if (url && getCluster()) {
+      history.push({
+        pathname: generatePath(getClusterPrefixedPath(url), { cluster: getCluster()! }),
+      });
+    } else if (url) {
+      history.push(url);
     } else {
-      pathname = createRouteURL(subList[index].name);
+      history.push({ pathname: createRouteURL(subList[index].name) });
     }
-    history.push({ pathname });
   }
 
   if (createRouteURL(navigationItem.name)) {
