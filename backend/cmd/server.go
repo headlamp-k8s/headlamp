@@ -15,18 +15,20 @@ func main() {
 	}
 
 	StartHeadlampServer(&HeadlampConfig{
-		useInCluster:     conf.InCluster,
-		kubeConfigPath:   conf.KubeConfigPath,
-		port:             conf.Port,
-		devMode:          conf.DevMode,
-		staticDir:        conf.StaticDir,
-		insecure:         conf.InsecureSsl,
-		pluginDir:        conf.PluginsDir,
-		oidcClientID:     conf.OidcClientID,
-		oidcClientSecret: conf.OidcClientSecret,
-		oidcIdpIssuerURL: conf.OidcIdpIssuerURL,
-		oidcScopes:       strings.Split(conf.OidcScopes, ","),
-		baseURL:          conf.BaseURL,
-		proxyURLs:        strings.Split(conf.ProxyURLs, ","),
+		useInCluster:          conf.InCluster,
+		kubeConfigPath:        conf.KubeConfigPath,
+		port:                  conf.Port,
+		devMode:               conf.DevMode,
+		staticDir:             conf.StaticDir,
+		insecure:              conf.InsecureSsl,
+		pluginDir:             conf.PluginsDir,
+		oidcClientID:          conf.OidcClientID,
+		oidcClientSecret:      conf.OidcClientSecret,
+		oidcIdpIssuerURL:      conf.OidcIdpIssuerURL,
+		oidcScopes:            strings.Split(conf.OidcScopes, ","),
+		baseURL:               conf.BaseURL,
+		proxyURLs:             strings.Split(conf.ProxyURLs, ","),
+		enableHelm:            conf.EnableHelm,
+		enableDynamicClusters: conf.EnableDynamicClusters,
 	})
 }

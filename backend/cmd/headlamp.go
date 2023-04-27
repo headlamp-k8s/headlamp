@@ -30,6 +30,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/helm"
 	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
@@ -39,23 +40,26 @@ import (
 	"k8s.io/client-go/tools/portforward"
 	"k8s.io/client-go/transport/spdy"
 
+	zlog "github.com/rs/zerolog/log"
 	"golang.org/x/oauth2"
 )
 
 type HeadlampConfig struct {
-	useInCluster     bool
-	devMode          bool
-	insecure         bool
-	kubeConfigPath   string
-	port             uint
-	staticDir        string
-	pluginDir        string
-	staticPluginDir  string
-	oidcClientID     string
-	oidcClientSecret string
-	oidcScopes       []string
-	oidcIdpIssuerURL string
-	baseURL          string
+	useInCluster          bool
+	devMode               bool
+	insecure              bool
+	enableHelm            bool
+	enableDynamicClusters bool
+	port                  uint
+	kubeConfigPath        string
+	staticDir             string
+	pluginDir             string
+	staticPluginDir       string
+	oidcClientID          string
+	oidcClientSecret      string
+	oidcIdpIssuerURL      string
+	baseURL               string
+	oidcScopes            []string
 	// Holds: context-name -> (context, reverse-proxy)
 	contextProxies map[string]contextProxy
 	proxyURLs      []string
@@ -496,11 +500,19 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			proxyURL = r.Header.Get("Forward-to")
 		}
 		if proxyURL == "" {
+			zlog.Error().Err(err).
+				Str("action", "externalproxy").
+				Str("proxyURL", proxyURL).
+				Msg("proxy URL is empty")
 			http.Error(w, "proxy URL is empty", http.StatusBadRequest)
 			return
 		}
 		url, err := url.Parse(proxyURL)
 		if err != nil {
+			zlog.Error().Err(err).
+				Str("action", "externalproxy").
+				Str("proxyURL", proxyURL).
+				Msg("The provided proxy URL is invalid")
 			http.Error(w, fmt.Sprintf("The provided proxy URL is invalid: %v", err), http.StatusBadRequest)
 			return
 		}
@@ -513,6 +525,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			}
 		}
 		if !isURLContainedInProxyURLs {
+			zlog.Error().Err(err).Str("action", "externalproxy").Msg("no allowed proxy url match, request denied")
 			http.Error(w, "no allowed proxy url match, request denied ", http.StatusBadRequest)
 		}
 		proxy := httputil.NewSingleHostReverseProxy(url)
@@ -964,7 +977,96 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 	return nil
 }
 
-func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
+// Returns the helm.Handler given the config and request. Writes http.NotFound if clusterName is not there.
+func getHelmHandler(c *HeadlampConfig, w http.ResponseWriter, r *http.Request) (*helm.Handler, error) {
+	clusterName := mux.Vars(r)["clusterName"]
+	context, ok := c.contextProxies[clusterName]
+
+	if !ok {
+		http.NotFound(w, r)
+		return nil, errors.New("not found")
+	}
+
+	namespace := r.URL.Query().Get("namespace")
+
+	helmHandler, err := helm.NewHandler(context.context.clientConfig(), namespace)
+	if err != nil {
+		log.Printf("Error: failed to create helm handler: %s", err)
+		http.Error(w, "failed to create helm handler", http.StatusInternalServerError)
+	}
+
+	return helmHandler, nil
+}
+
+//nolint:gocognit,funlen
+func handleClusterHelm(c *HeadlampConfig, router *mux.Router) {
+	router.PathPrefix("/clusters/{clusterName}/helm/{.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		helmHandler, err := getHelmHandler(c, w, r)
+		if err != nil {
+			return
+		}
+
+		// we used nolint:gocognit in this function because...
+		//  Perhaps there's a better way to dispatch these?
+		path := r.URL.Path
+		if strings.HasSuffix(path, "/releases/list") && r.Method == http.MethodGet {
+			helmHandler.ListRelease(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/release/install") && r.Method == http.MethodPost {
+			helmHandler.InstallRelease(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/release/history") && r.Method == http.MethodGet {
+			helmHandler.GetReleaseHistory(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/releases/uninstall") && r.Method == http.MethodDelete {
+			helmHandler.UninstallRelease(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/releases/rollback") && r.Method == http.MethodPut {
+			helmHandler.RollbackRelease(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/releases/upgrade") && r.Method == http.MethodPut {
+			helmHandler.UpgradeRelease(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/releases") && r.Method == http.MethodGet {
+			helmHandler.GetRelease(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/repositories") && r.Method == http.MethodGet {
+			helmHandler.ListRepo(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/repositories") && r.Method == http.MethodPost {
+			helmHandler.AddRepo(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/repositories/remove") && r.Method == http.MethodDelete {
+			helmHandler.RemoveRepo(w, r)
+			return
+		}
+		if strings.HasSuffix(path, "/repositories/update") && r.Method == http.MethodPut {
+			helmHandler.UpdateRepository(w, r)
+			return
+		}
+
+		if strings.HasSuffix(path, "/charts") && r.Method == http.MethodGet {
+			helmHandler.ListCharts(w, r)
+			return
+		}
+
+		if strings.HasSuffix(path, "/action/status") && r.Method == http.MethodGet {
+			helmHandler.GetActionStatus(w, r)
+			return
+		}
+	})
+}
+
+func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 	router.PathPrefix("/clusters/{clusterName}/{api:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		clusterName := mux.Vars(r)["clusterName"]
 		ctxtProxy, ok := c.contextProxies[clusterName]
@@ -983,6 +1085,14 @@ func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 		handler := proxyHandler(server, ctxtProxy.proxy)
 		handler(w, r)
 	})
+}
+
+func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
+	if c.enableHelm {
+		handleClusterHelm(c, router)
+	}
+
+	handleClusterAPI(c, router)
 }
 
 func (c *HeadlampConfig) getClusters() []Cluster {
@@ -1190,7 +1300,7 @@ func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 
 func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 	// We do not support this feature when in-cluster
-	if c.useInCluster {
+	if !c.enableDynamicClusters {
 		return
 	}
 
