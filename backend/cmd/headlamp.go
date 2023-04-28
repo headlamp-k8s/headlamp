@@ -1031,9 +1031,28 @@ func getHelmHandler(c *HeadlampConfig, w http.ResponseWriter, r *http.Request) (
 	return helmHandler, nil
 }
 
+// Check request for header "X-HEADLAMP_BACKEND-TOKEN" matches HEADLAMP_BACKEND_TOKEN env
+// This check is to prevent access except for from the app.
+// The app sets HEADLAMP_BACKEND_TOKEN, and gives the token to the frontend.
+func checkHeadlampBackendToken(w http.ResponseWriter, r *http.Request) error {
+	backendToken := r.Header.Get("X-HEADLAMP_BACKEND-TOKEN")
+	backendTokenEnv := os.Getenv("HEADLAMP_BACKEND_TOKEN")
+
+	if backendToken != backendTokenEnv || backendTokenEnv == "" {
+		http.Error(w, "access denied", http.StatusForbidden)
+		return errors.New("X-HEADLAMP_BACKEND-TOKEN does not match HEADLAMP_BACKEND_TOKEN")
+	}
+
+	return nil
+}
+
 //nolint:gocognit,funlen
 func handleClusterHelm(c *HeadlampConfig, router *mux.Router) {
 	router.PathPrefix("/clusters/{clusterName}/helm/{.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if err := checkHeadlampBackendToken(w, r); err != nil {
+			return
+		}
+
 		helmHandler, err := getHelmHandler(c, w, r)
 		if err != nil {
 			return
@@ -1210,6 +1229,10 @@ func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 
 //nolint:funlen,nestif
 func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
+	if err := checkHeadlampBackendToken(w, r); err != nil {
+		return
+	}
+
 	clusterReq := ClusterReq{}
 	if err := json.NewDecoder(r.Body).Decode(&clusterReq); err != nil {
 		http.Error(w, "Error decoding cluster info", http.StatusBadRequest)
@@ -1302,6 +1325,10 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
+	if err := checkHeadlampBackendToken(w, r); err != nil {
+		return
+	}
+
 	name := mux.Vars(r)["name"]
 	if _, ok := c.contextProxies[name]; !ok {
 		http.Error(w, "Cluster not found", http.StatusNotFound)
