@@ -11,6 +11,7 @@ import { OpPatch } from 'json-patch';
 import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
 import helpers from '../../helpers';
+import { getHeadlampAPIHeaders } from '../../helpers';
 import store from '../../redux/stores/store';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
@@ -872,14 +873,23 @@ export async function testAuth() {
 export async function setCluster(clusterReq: ClusterRequest) {
   return request(
     '/cluster',
-    { method: 'POST', body: JSON.stringify(clusterReq), headers: JSON_HEADERS },
+    {
+      method: 'POST',
+      body: JSON.stringify(clusterReq),
+      headers: { ...JSON_HEADERS, ...getHeadlampAPIHeaders() },
+    },
     false,
     false
   );
 }
 
 export async function deleteCluster(cluster: string) {
-  return request(`/cluster/${cluster}`, { method: 'DELETE' }, false, false);
+  return request(
+    `/cluster/${cluster}`,
+    { method: 'DELETE', headers: { ...getHeadlampAPIHeaders() } },
+    false,
+    false
+  );
 }
 
 export function startPortForward(

@@ -235,6 +235,28 @@ function loadClusterSettings(clusterName: string): ClusterSettings {
   return settings;
 }
 
+/**
+ * The backend token to use when making API calls from Headlamp when running as an app.
+ * The app opens the index.html?backendToken=... and passes the token to the frontend
+ * in this way. The token is then used in the getHeadlampAPIHeaders function below.
+ *
+ * The app also passes the token to the headlamp-server via HEADLAMP_BACKEND_TOKEN env var.
+ */
+const backendToken = new URLSearchParams(window.location.search).get('backendToken');
+
+/**
+ * Returns headers for making API calls to the headlamp-server backend.
+ */
+export function getHeadlampAPIHeaders(): { [key: string]: string } {
+  if (backendToken === null) {
+    return {};
+  }
+
+  return {
+    'X-HEADLAMP_BACKEND-TOKEN': backendToken,
+  };
+}
+
 const exportFunctions = {
   getBaseUrl,
   isDevMode,
@@ -254,6 +276,7 @@ const exportFunctions = {
   defaultMaxNotificationsStored,
   storeClusterSettings,
   loadClusterSettings,
+  getHeadlampAPIHeaders,
 };
 
 export default exportFunctions;
