@@ -60,7 +60,7 @@ export default function NodeList() {
           },
           {
             label: t('Version'),
-            getter: node => node.status.nodeInfo.kubeProxyVersion,
+            getter: node => node.status.nodeInfo.kubeletVersion,
           },
           'age',
         ]}
