@@ -65,7 +65,7 @@ function configWithSelectedClusters(config: kubeconfig, selectedClusters: string
     clusters[cluster.name] = cluster;
 
     // Optionally add the user.
-    const user = config.users.find(c => c.name === context.context.user);
+    const user = config.users?.find(c => c.name === context.context.user);
     if (!!user) {
       users[user.name] = user;
     }
