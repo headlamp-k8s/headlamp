@@ -199,6 +199,9 @@ function KubeConfigLoader() {
           ...new Uint8Array(reader.result as ArrayBuffer),
         ]);
         const doc = yaml.load(data) as kubeconfig;
+        if (!doc.clusters || !doc.contexts) {
+          throw new Error('Invalid kubeconfig file');
+        }
         setFileContent(doc);
       } catch (err) {
         setError(t('cluster|Load a valid kubeconfig'));
