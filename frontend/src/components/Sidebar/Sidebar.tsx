@@ -10,11 +10,13 @@ import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
+import { ActionButton } from '../common';
 import CreateButton from '../common/Resource/CreateButton';
 import HeadlampButton from './HeadlampButton';
 import NavigationTabs from './NavigationTabs';
@@ -103,6 +105,35 @@ const useButtonStyle = makeStyles({
   },
 });
 
+function AddClusterButton() {
+  const buttonClasses = useButtonStyle();
+  const history = useHistory();
+  const { t } = useTranslation(['frequent']);
+  const { isOpen } = useSidebarInfo();
+
+  return (
+    <Box pb={2}>
+      {isOpen ? (
+        <Button
+          className={buttonClasses.button}
+          onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+          startIcon={<InlineIcon icon="mdi:plus-box-outline" />}
+        >
+          {t('frequent|Add Cluster')}
+        </Button>
+      ) : (
+        <ActionButton
+          onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+          icon="mdi:plus-box-outline"
+          description={t('frequent|Add Cluster')}
+          color="#adadad"
+          width={38}
+        />
+      )}
+    </Box>
+  );
+}
+
 export default function Sidebar() {
   const { t, i18n } = useTranslation(['glossary']);
 
@@ -115,7 +146,6 @@ export default function Sidebar() {
     isTemporary: isTemporaryDrawer,
   } = useSidebarInfo();
   const isNarrowOnly = isNarrow && !canExpand;
-  const buttonClasses = useButtonStyle();
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const dispatch = useDispatch();
@@ -144,17 +174,7 @@ export default function Sidebar() {
       }}
       linkArea={
         sidebar.selected.sidebar === DefaultSidebars.HOME
-          ? helpers.isElectron() && (
-              <Box pb={2}>
-                <Button
-                  className={buttonClasses.button}
-                  onClick={() => history.push(createRouteURL('loadKubeConfig'))}
-                  startIcon={<InlineIcon icon="mdi:plus" />}
-                >
-                  {t('frequent|Add Cluster')}
-                </Button>
-              </Box>
-            )
+          ? helpers.isElectron() && <AddClusterButton />
           : sidebar.selected.sidebar === DefaultSidebars.IN_CLUSTER && (
               <>
                 <CreateButton />
