@@ -16,6 +16,7 @@ import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
+import { ActionButton } from '../common';
 import CreateButton from '../common/Resource/CreateButton';
 import HeadlampButton from './HeadlampButton';
 import NavigationTabs from './NavigationTabs';
@@ -75,22 +76,76 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
+function useSidebarInfo() {
+  const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
+  const isSidebarOpenUserSelected = useTypedSelector(
+    state => state.ui.sidebar.isSidebarOpenUserSelected
+  );
+  const isTemporary = useMediaQuery('(max-width:600px)');
+  const isNarrowOnly = useMediaQuery('(max-width:960px) and (min-width:600px)');
+  const temporarySideBarOpen =
+    isSidebarOpen === true && isTemporary && isSidebarOpenUserSelected === true;
+
+  // The large sidebar does not open in medium view (600-960px).
+  const isOpen =
+    (isSidebarOpen === true && !isNarrowOnly) || (isSidebarOpen === true && temporarySideBarOpen);
+
+  return {
+    isCollapsed: !temporarySideBarOpen && !isNarrowOnly,
+    isOpen,
+    isNarrow: !isSidebarOpen || isNarrowOnly,
+    canExpand: !isNarrowOnly,
+    isTemporary,
+    isUserOpened: isSidebarOpenUserSelected,
+  };
+}
 const useButtonStyle = makeStyles({
   button: {
     color: '#adadad',
   },
 });
 
+function AddClusterButton() {
+  const buttonClasses = useButtonStyle();
+  const history = useHistory();
+  const { t } = useTranslation(['frequent']);
+  const { isOpen } = useSidebarInfo();
+
+  return (
+    <Box pb={2}>
+      {isOpen ? (
+        <Button
+          className={buttonClasses.button}
+          onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+          startIcon={<InlineIcon icon="mdi:plus-box-outline" />}
+        >
+          {t('frequent|Add Cluster')}
+        </Button>
+      ) : (
+        <ActionButton
+          onClick={() => history.push(createRouteURL('loadKubeConfig'))}
+          icon="mdi:plus-box-outline"
+          description={t('frequent|Add Cluster')}
+          color="#adadad"
+          width={38}
+        />
+      )}
+    </Box>
+  );
+}
+
 export default function Sidebar() {
-  const { t, i18n } = useTranslation(['glossary', 'frequent']);
+  const { t, i18n } = useTranslation(['glossary']);
 
   const sidebar = useTypedSelector(state => state.ui.sidebar);
-  const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
-  const isSidebarOpenUserSelected = useTypedSelector(
-    state => state.ui.sidebar.isSidebarOpenUserSelected
-  );
-  const history = useHistory();
-  const buttonClasses = useButtonStyle();
+  const {
+    isOpen,
+    isUserOpened,
+    isNarrow,
+    canExpand,
+    isTemporary: isTemporaryDrawer,
+  } = useSidebarInfo();
+  const isNarrowOnly = isNarrow && !canExpand;
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const dispatch = useDispatch();
@@ -108,8 +163,10 @@ export default function Sidebar() {
   return (
     <PureSidebar
       items={items}
-      open={isSidebarOpen}
-      openUserSelected={isSidebarOpenUserSelected}
+      open={isOpen}
+      openUserSelected={isUserOpened}
+      isNarrowOnly={isNarrowOnly}
+      isTemporaryDrawer={isTemporaryDrawer}
       selectedName={sidebar?.selected.item}
       search={search}
       onToggleOpen={() => {
@@ -117,17 +174,7 @@ export default function Sidebar() {
       }}
       linkArea={
         sidebar.selected.sidebar === DefaultSidebars.HOME
-          ? helpers.isElectron() && (
-              <Box pb={2}>
-                <Button
-                  className={buttonClasses.button}
-                  onClick={() => history.push(createRouteURL('loadKubeConfig'))}
-                  startIcon={<InlineIcon icon="mdi:plus" />}
-                >
-                  {t('frequent|Add Cluster')}
-                </Button>
-              </Box>
-            )
+          ? helpers.isElectron() && <AddClusterButton />
           : sidebar.selected.sidebar === DefaultSidebars.IN_CLUSTER && (
               <>
                 <CreateButton />
@@ -148,6 +195,10 @@ export interface PureSidebarProps {
   items: SidebarEntryProps[];
   /** The selected route name of the sidebar open. */
   selectedName: string | null;
+  /** If the sidebar is the temporary one (full sidebar when user selects it in mobile). */
+  isTemporaryDrawer?: boolean;
+  /** If the sidebar is in narrow mode. */
+  isNarrowOnly?: boolean;
   /** Called when sidebar toggles between open and closed. */
   onToggleOpen: () => void;
   /** The search part of the url */
@@ -161,19 +212,19 @@ export function PureSidebar({
   openUserSelected,
   items,
   selectedName,
+  isTemporaryDrawer = false,
+  isNarrowOnly = false,
   onToggleOpen,
   search,
   linkArea,
 }: PureSidebarProps) {
   const classes = useStyle();
   const { t } = useTranslation(['frequent']);
-  const temporaryDrawer = useMediaQuery('(max-width:600px)');
-  const smallSideOnly = useMediaQuery('(max-width:960px) and (min-width:600px)');
-  const temporarySideBarOpen = open === true && temporaryDrawer && openUserSelected === true;
+  const temporarySideBarOpen = open === true && isTemporaryDrawer && openUserSelected === true;
 
   // The large sidebar does not open in medium view (600-960px).
   const largeSideBarOpen =
-    (open === true && !smallSideOnly) || (open === true && temporarySideBarOpen);
+    (open === true && !isNarrowOnly) || (open === true && temporarySideBarOpen);
 
   /**
    * For closing the sidebar if temporaryDrawer on mobile.
@@ -191,11 +242,7 @@ export function PureSidebar({
 
   const contents = (
     <>
-      <HeadlampButton
-        open={largeSideBarOpen}
-        onToggleOpen={onToggleOpen}
-        disabled={smallSideOnly}
-      />
+      <HeadlampButton open={largeSideBarOpen} onToggleOpen={onToggleOpen} disabled={isNarrowOnly} />
       <Grid
         className={classes.sidebarGrid}
         container
@@ -205,8 +252,8 @@ export function PureSidebar({
       >
         <Grid item>
           <List
-            onClick={temporaryDrawer ? toggleDrawer : undefined}
-            onKeyDown={temporaryDrawer ? toggleDrawer : undefined}
+            onClick={isTemporaryDrawer ? toggleDrawer : undefined}
+            onKeyDown={isTemporaryDrawer ? toggleDrawer : undefined}
           >
             {items.map(item => (
               <SidebarItem
@@ -226,7 +273,7 @@ export function PureSidebar({
     </>
   );
 
-  if (temporaryDrawer) {
+  if (isTemporaryDrawer) {
     return (
       <Box component="nav" aria-label={t('frequent|Navigation')}>
         <Drawer
