@@ -26,6 +26,8 @@ jobs:
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
     - name: Figure out the tag based on event trigger
       env:
         TRIGGER: ${{ github.event_name }}
@@ -60,8 +62,9 @@ jobs:
       run: |
         echo "BUILD_TAG=${{ env.BUILD_TAG }}"
         echo "CONTAINER_TAGS=${{ env.CONTAINER_TAGS }}"
-    - name: checkout to build branch 
+    - name: checkout to build branch
       run: |
+        git fetch origin
         git checkout ${{ env.BUILD_TAG }}
     - name: Log in to the Container registry
       uses: docker/login-action@v2
