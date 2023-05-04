@@ -28,6 +28,7 @@ const useVersionButtonStyle = makeStyles(theme => ({
   versionIcon: {
     marginTop: '5px',
     marginRight: '5px',
+    marginLeft: '5px',
   },
 }));
 
