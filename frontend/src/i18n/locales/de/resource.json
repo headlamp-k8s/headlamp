@@ -40,6 +40,7 @@
   "Stop port forward": "Portweiterleitung stoppen",
   "No data to be shown.": "Es sind keine Daten zum Anzeigen vorhanden.",
   "Init Containers": "Init-Container",
+  "Change columns displayed": "",
   "Current number of replicas: {{ numReplicas }}": "Aktuelle Anzahl der Replikas: {{ numReplicas }}",
   "Desired number of replicas:": "Gewünschte Anzahl von Replikas:",
   "View YAML": "YAML anzeigen",
