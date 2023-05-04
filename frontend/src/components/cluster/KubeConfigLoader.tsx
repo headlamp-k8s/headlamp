@@ -320,7 +320,10 @@ function KubeConfigLoader() {
                     </Grid>
                     <Grid item>
                       <Button
-                        onClick={() => setState(Step.LoadKubeConfig)}
+                        onClick={() => {
+                          setError('');
+                          setState(Step.LoadKubeConfig);
+                        }}
                         className={classes.wideButton}
                       >
                         {t('frequent|Back')}
