@@ -175,8 +175,10 @@ function KubeConfigLoader() {
               setState(Step.Success);
             }
           })
-          .catch(() => {
+          .catch(e => {
+            console.debug('Error setting up clusters from kubeconfig:', e);
             setError(t('cluster|Error setting up clusters, please load a valid kubeconfig file'));
+            setState(Step.SelectClusters);
           });
       }
       loadClusters();
