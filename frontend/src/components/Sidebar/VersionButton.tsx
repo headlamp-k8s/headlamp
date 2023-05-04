@@ -138,7 +138,7 @@ export default function VersionButton() {
   }
 
   return !clusterVersion ? null : (
-    <Box mx="auto" py=".2em" className={classes.versionBox}>
+    <Box mx="auto" pt=".2em" className={classes.versionBox}>
       <Button onClick={() => setOpen(true)} style={{ textTransform: 'none' }}>
         <Box display={sidebar.isSidebarOpen ? 'flex' : 'block'} alignItems="center">
           <Box>

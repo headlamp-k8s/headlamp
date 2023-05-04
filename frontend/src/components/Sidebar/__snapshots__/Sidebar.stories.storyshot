@@ -153,6 +153,23 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             />
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <button
+                aria-label="Collapse Sidebar"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                title="Collapse Sidebar"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <span />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -317,6 +334,23 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             />
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <button
+                aria-label="Collapse Sidebar"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                title="Collapse Sidebar"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <span />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -1315,6 +1349,23 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                 <span
                   class="MuiTouchRipple-root"
                 />
+              </button>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <button
+                aria-label="Collapse Sidebar"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                title="Collapse Sidebar"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <span />
+                </span>
               </button>
             </div>
           </div>
@@ -2323,6 +2374,23 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                 />
               </button>
             </div>
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <button
+                aria-label="Collapse Sidebar"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                title="Collapse Sidebar"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <span />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -3316,6 +3384,23 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             />
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <button
+                aria-label="Collapse Sidebar"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                title="Collapse Sidebar"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <span />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
