@@ -1,9 +1,9 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
 import { ReactElement, ReactNode } from 'react';
+import { AppLogoType } from '../../components/App/AppLogo';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
 import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
-import { AppLogoType } from '../../components/Sidebar/AppLogo';
 import { KubeObject } from '../../lib/k8s/cluster';
 import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
