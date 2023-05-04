@@ -1,10 +1,10 @@
 import { has } from 'lodash';
 import React from 'react';
+import { AppLogoProps, AppLogoType } from '../components/App/AppLogo';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
 import { SectionBox } from '../components/common/SectionBox';
 import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/DetailsViewSection';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
-import { AppLogoProps, AppLogoType } from '../components/Sidebar/AppLogo';
 import { getHeadlampAPIHeaders } from '../helpers';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';

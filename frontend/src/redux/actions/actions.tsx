@@ -1,9 +1,9 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
+import { AppLogoType } from '../../components/App/AppLogo';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
 import { ResourceTableProps } from '../../components/common/Resource/ResourceTable';
 import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
-import { AppLogoType } from '../../components/Sidebar/AppLogo';
 import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import { UIState } from '../reducers/ui';
