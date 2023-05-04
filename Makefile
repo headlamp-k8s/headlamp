@@ -60,7 +60,9 @@ frontend-build-storybook:
 	cd frontend && npm run build-storybook
 
 run-backend:
-	./backend/headlamp-server -dev
+	@echo "**** Warning: Running with Helm and dynamic-clusters endpoints enabled. ****"
+	@echo
+	HEADLAMP_CONFIG_ENABLE_HELM=true HEADLAMP_CONFIG_ENABLE_DYNAMIC_CLUSTERS=true ./backend/headlamp-server -dev
 
 run-frontend:
 	cd frontend && npm start
