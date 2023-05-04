@@ -267,7 +267,22 @@ export function PureSidebar({
           </List>
         </Grid>
         <Grid item>
-          <Box textAlign="center">{linkArea}</Box>
+          <Box textAlign="center" p={0}>
+            {linkArea}
+          </Box>
+          <Box textAlign={open ? 'right' : 'center'}>
+            <ActionButton
+              iconButtonProps={{
+                size: 'small',
+                disableRipple: true,
+                disableFocusRipple: true,
+              }}
+              color="#adadad"
+              onClick={onToggleOpen}
+              icon={open ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
+              description={t('frequent|Collapse Sidebar')}
+            />
+          </Box>
         </Grid>
       </Grid>
     </>
