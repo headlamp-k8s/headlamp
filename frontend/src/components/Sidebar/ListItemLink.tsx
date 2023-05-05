@@ -3,9 +3,12 @@ import { Tooltip } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
+
+const ExpandedIconSize = 20;
+const CollapsedIconSize = 24;
 
 const IconTooltip = withStyles(() => ({
   tooltip: {
@@ -25,10 +28,26 @@ interface ListItemLinkProps {
   search?: string;
   name: string;
   icon?: IconProps['icon'];
+  iconOnly?: boolean;
+  containerProps?: {
+    [prop: string]: any;
+  };
 }
 
+const useStyle = makeStyles({
+  icon: {
+    minWidth: '24px',
+  },
+});
+
 export default function ListItemLink(props: ListItemLinkProps) {
-  const { primary, pathname, search, icon, name, ...other } = props;
+  const { primary, pathname, search, icon, name, containerProps, iconOnly, ...other } = props;
+  const classes = useStyle();
+
+  const iconSize = React.useMemo(
+    () => (iconOnly ? CollapsedIconSize : ExpandedIconSize),
+    [iconOnly]
+  );
 
   const renderLink = React.useMemo(
     () =>
@@ -41,8 +60,8 @@ export default function ListItemLink(props: ListItemLinkProps) {
 
   if (icon) {
     listItemLink = (
-      <ListItemIcon>
-        <Icon icon={icon} width={30} height={30} />
+      <ListItemIcon className={classes.icon}>
+        <Icon icon={icon} width={iconSize} height={iconSize} />
       </ListItemIcon>
     );
   }
@@ -57,10 +76,10 @@ export default function ListItemLink(props: ListItemLinkProps) {
   }
 
   return (
-    <li>
+    <li {...containerProps}>
       <ListItem button component={renderLink} {...other}>
         {listItemLinkContainer}
-        <ListItemText primary={primary} />
+        {!iconOnly && <ListItemText primary={primary} />}
       </ListItem>
     </li>
   );

@@ -24,78 +24,63 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
             <ul
               class="MuiList-root MuiList-padding"
             >
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                     title="Cluster"
                   >
                     <span />
-                  </div>
-                  <div
-                    class="MuiListItemText-root"
-                  >
-                    <span
-                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                    />
                   </div>
                   <span
                     class="MuiTouchRipple-root"
                   />
                 </a>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/notifications"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                     title="Notifications"
                   >
                     <span />
-                  </div>
-                  <div
-                    class="MuiListItemText-root"
-                  >
-                    <span
-                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                    />
                   </div>
                   <span
                     class="MuiTouchRipple-root"
                   />
                 </a>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button MuiListItem-selected"
                   href="/settings"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                     title="Settings"
                   >
                     <span />
-                  </div>
-                  <div
-                    class="MuiListItemText-root"
-                  >
-                    <span
-                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                    />
                   </div>
                   <span
                     class="MuiTouchRipple-root"
@@ -179,16 +164,18 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
             <ul
               class="MuiList-root MuiList-padding"
             >
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -206,16 +193,18 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
                   />
                 </a>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/notifications"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -233,16 +222,18 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
                   />
                 </a>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button MuiListItem-selected"
                   href="/settings"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -337,26 +328,21 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
             <ul
               class="MuiList-root MuiList-padding"
             >
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button MuiListItem-selected"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                     title="Cluster"
                   >
                     <span />
-                  </div>
-                  <div
-                    class="MuiListItemText-root"
-                  >
-                    <span
-                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                    />
                   </div>
                   <span
                     class="MuiTouchRipple-root"
@@ -379,10 +365,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -401,10 +389,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -423,10 +413,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -450,26 +442,21 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                     title="Workloads"
                   >
                     <span />
-                  </div>
-                  <div
-                    class="MuiListItemText-root"
-                  >
-                    <span
-                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                    />
                   </div>
                   <span
                     class="MuiTouchRipple-root"
@@ -492,10 +479,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -514,10 +503,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -536,10 +527,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -558,10 +551,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -580,10 +575,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -602,10 +599,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -624,10 +623,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -651,26 +652,21 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                     title="Storage"
                   >
                     <span />
-                  </div>
-                  <div
-                    class="MuiListItemText-root"
-                  >
-                    <span
-                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                    />
                   </div>
                   <span
                     class="MuiTouchRipple-root"
@@ -693,10 +689,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -715,10 +713,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -737,10 +737,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -764,26 +766,21 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                     title="Network"
                   >
                     <span />
-                  </div>
-                  <div
-                    class="MuiListItemText-root"
-                  >
-                    <span
-                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                    />
                   </div>
                   <span
                     class="MuiTouchRipple-root"
@@ -806,10 +803,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -828,10 +827,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -850,10 +851,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -872,10 +875,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -899,26 +904,21 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                     title="Security"
                   >
                     <span />
-                  </div>
-                  <div
-                    class="MuiListItemText-root"
-                  >
-                    <span
-                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                    />
                   </div>
                   <span
                     class="MuiTouchRipple-root"
@@ -941,10 +941,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -963,10 +965,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -985,10 +989,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1012,26 +1018,21 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                     title="Configuration"
                   >
                     <span />
-                  </div>
-                  <div
-                    class="MuiListItemText-root"
-                  >
-                    <span
-                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
-                    />
                   </div>
                   <span
                     class="MuiTouchRipple-root"
@@ -1054,10 +1055,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1076,10 +1079,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1098,10 +1103,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1120,10 +1127,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1142,10 +1151,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1164,10 +1175,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1186,10 +1199,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1208,10 +1223,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1230,10 +1247,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1331,16 +1350,18 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
             <ul
               class="MuiList-root MuiList-padding"
             >
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button MuiListItem-selected"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -1374,10 +1395,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1396,10 +1419,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1418,10 +1443,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1445,16 +1472,18 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -1488,10 +1517,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1510,10 +1541,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1532,10 +1565,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1554,10 +1589,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1576,10 +1613,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1598,10 +1637,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1620,10 +1661,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1647,16 +1690,18 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -1690,10 +1735,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1712,10 +1759,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1734,10 +1783,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1761,16 +1812,18 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -1804,10 +1857,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1826,10 +1881,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1848,10 +1905,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1870,10 +1929,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1897,16 +1958,18 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -1940,10 +2003,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1962,10 +2027,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -1984,10 +2051,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2011,16 +2080,18 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -2054,10 +2125,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2076,10 +2149,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2098,10 +2173,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2120,10 +2197,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2142,10 +2221,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2164,10 +2245,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2186,10 +2269,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2208,10 +2293,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2230,10 +2317,12 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2335,16 +2424,18 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
             <ul
               class="MuiList-root MuiList-padding"
             >
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -2378,10 +2469,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2400,10 +2493,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2422,10 +2517,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2449,16 +2546,18 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button MuiListItem-selected"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -2492,10 +2591,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2514,10 +2615,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2536,10 +2639,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2558,10 +2663,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2580,10 +2687,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2602,10 +2711,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2624,10 +2735,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2651,16 +2764,18 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -2694,10 +2809,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2716,10 +2833,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2738,10 +2857,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2765,16 +2886,18 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -2808,10 +2931,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2830,10 +2955,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2852,10 +2979,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2874,10 +3003,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2901,16 +3032,18 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -2944,10 +3077,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2966,10 +3101,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -2988,10 +3125,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -3015,16 +3154,18 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                   </div>
                 </div>
               </li>
-              <li>
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
                 <a
                   aria-disabled="false"
-                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                   href="/"
                   role="button"
                   tabindex="0"
                 >
                   <div
-                    class="MuiListItemIcon-root"
+                    class="MuiListItemIcon-root makeStyles-icon"
                   >
                     <span />
                   </div>
@@ -3058,10 +3199,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                       <ul
                         class="MuiList-root makeStyles-nested"
                       >
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -3080,10 +3223,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -3102,10 +3247,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -3124,10 +3271,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -3146,10 +3295,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -3168,10 +3319,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -3190,10 +3343,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -3212,10 +3367,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"
@@ -3234,10 +3391,12 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                             />
                           </a>
                         </li>
-                        <li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
                           <a
                             aria-disabled="false"
-                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
                             href="/"
                             role="button"
                             tabindex="0"

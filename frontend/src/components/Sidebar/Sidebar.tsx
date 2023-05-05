@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 import React from 'react';
@@ -14,17 +14,18 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
+import themesConf from '../../lib/themes';
 import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ActionButton } from '../common';
 import CreateButton from '../common/Resource/CreateButton';
-import HeadlampButton from './HeadlampButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';
 import SidebarItem, { SidebarEntryProps } from './SidebarItem';
 import VersionButton from './VersionButton';
 
-export const drawerWidth = 330;
+export const drawerWidth = 240;
+export const mobileDrawerWidth = 320;
 export const drawerWidthClosed = 64;
 
 export enum DefaultSidebars {
@@ -70,9 +71,6 @@ const useStyle = makeStyles(theme => ({
   },
   sidebarGrid: {
     height: '100%',
-  },
-  '.MuiListItemText-primary': {
-    color: 'red',
   },
   toolbar: theme.mixins.toolbar,
 }));
@@ -255,16 +253,9 @@ export function PureSidebar({
   };
 
   const contents = (
-    <>
-      {isTemporaryDrawer ? (
-        <HeadlampButton
-          open={largeSideBarOpen}
-          onToggleOpen={onToggleOpen}
-          disabled={isNarrowOnly}
-        />
-      ) : (
-        <Box className={classes.toolbar} />
-      )}
+    // We set up the dark theme here so the elements in the app bar can be styled accordingly.
+    <ThemeProvider theme={themesConf['dark']}>
+      {!isTemporaryDrawer && <Box className={classes.toolbar} />}
       <Grid
         className={classes.sidebarGrid}
         container
@@ -302,7 +293,6 @@ export function PureSidebar({
                     disableRipple: true,
                     disableFocusRipple: true,
                   }}
-                  color="#adadad"
                   onClick={onToggleOpen}
                   icon={open ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
                   description={t('frequent|Collapse Sidebar')}
@@ -312,7 +302,7 @@ export function PureSidebar({
           }
         </Grid>
       </Grid>
-    </>
+    </ThemeProvider>
   );
 
   if (isTemporaryDrawer) {

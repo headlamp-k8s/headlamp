@@ -9,14 +9,14 @@ declare module '@material-ui/core/styles/createPalette.d' {
   interface Palette {
     success: PaletteColor;
     sidebarLink: {
-      [propName: string]: string;
+      [propName: string]: any;
     };
     [propName: string]: any;
   }
   interface PaletteOptions {
     success?: PaletteColorOptions;
     sidebarLink: {
-      [propName: string]: string;
+      [propName: string]: any;
     };
     [propName: string]: any;
   }
@@ -40,9 +40,24 @@ const commonRules = {
       ...orange,
     },
     sidebarLink: {
-      main: grey['500'],
-      selectedBg: grey['800'],
+      color: '#e7e7e7',
+      main: {
+        selected: {
+          color: '#000',
+          backgroundColor: '#fff200',
+        },
+        color: '#fff',
+      },
+      selected: {
+        color: '#fff',
+        backgroundColor: 'unset',
+      },
+      hover: {
+        color: '#000',
+        backgroundColor: '#3B3A39',
+      },
     },
+    sidebarBg: '#242424',
     error: {
       main: red['800'],
       light: red['50'],
@@ -50,7 +65,6 @@ const commonRules = {
     resourceToolTip: {
       color: 'rgba(0, 0, 0, 0.87)',
     },
-    sidebarBg: '#000',
     normalEventBg: '#F0F0F0',
     chartStyles: {
       defaultFillColor: grey['300'],
@@ -145,6 +159,14 @@ const darkTheme = createTheme({
     resourceToolTip: {
       color: 'rgba(255, 255, 255, 0.87)',
     },
+    sidebarLink: {
+      ...commonRules.palette.sidebarLink,
+      selected: {
+        color: '#FFF200',
+        backgroundColor: 'unset',
+      },
+    },
+    sidebarBg: '#000',
     notificationBorderColor: 'rgba(255,255,255,0.12)',
     type: 'dark',
   },
