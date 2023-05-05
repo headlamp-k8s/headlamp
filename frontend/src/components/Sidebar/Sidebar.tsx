@@ -74,6 +74,7 @@ const useStyle = makeStyles(theme => ({
   '.MuiListItemText-primary': {
     color: 'red',
   },
+  toolbar: theme.mixins.toolbar,
 }));
 
 function useSidebarInfo() {
@@ -242,7 +243,15 @@ export function PureSidebar({
 
   const contents = (
     <>
-      <HeadlampButton open={largeSideBarOpen} onToggleOpen={onToggleOpen} disabled={isNarrowOnly} />
+      {isTemporaryDrawer ? (
+        <HeadlampButton
+          open={largeSideBarOpen}
+          onToggleOpen={onToggleOpen}
+          disabled={isNarrowOnly}
+        />
+      ) : (
+        <Box className={classes.toolbar} />
+      )}
       <Grid
         className={classes.sidebarGrid}
         container
@@ -270,19 +279,24 @@ export function PureSidebar({
           <Box textAlign="center" p={0}>
             {linkArea}
           </Box>
-          <Box textAlign={open ? 'right' : 'center'}>
-            <ActionButton
-              iconButtonProps={{
-                size: 'small',
-                disableRipple: true,
-                disableFocusRipple: true,
-              }}
-              color="#adadad"
-              onClick={onToggleOpen}
-              icon={open ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
-              description={t('frequent|Collapse Sidebar')}
-            />
-          </Box>
+          {
+            // If the sidebar is temporary, it's collapsed by the Headlamp button, not the bottom button.
+            !isTemporaryDrawer && !isNarrowOnly && (
+              <Box textAlign={open ? 'right' : 'center'}>
+                <ActionButton
+                  iconButtonProps={{
+                    size: 'small',
+                    disableRipple: true,
+                    disableFocusRipple: true,
+                  }}
+                  color="#adadad"
+                  onClick={onToggleOpen}
+                  icon={open ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
+                  description={t('frequent|Collapse Sidebar')}
+                />
+              </Box>
+            )
+          }
         </Grid>
       </Grid>
     </>
