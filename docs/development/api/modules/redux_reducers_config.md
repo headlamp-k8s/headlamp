@@ -13,11 +13,21 @@ slug: "redux_reducers_config"
 
 ### INITIAL\_STATE
 
-• `Const` **INITIAL\_STATE**: [`ConfigState`](../interfaces/redux_reducers_config.ConfigState.md)
+• **INITIAL\_STATE**: [`ConfigState`](../interfaces/redux_reducers_config.ConfigState.md)
 
 #### Defined in
 
-[redux/reducers/config.tsx:11](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/redux/reducers/config.tsx#L11)
+[redux/reducers/config.tsx:24](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/redux/reducers/config.tsx#L24)
+
+___
+
+### defaultTableRowsPerPageOptions
+
+• **defaultTableRowsPerPageOptions**: `number`[]
+
+#### Defined in
+
+[redux/reducers/config.tsx:18](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/redux/reducers/config.tsx#L18)
 
 ## Functions
 
@@ -39,7 +49,10 @@ slug: "redux_reducers_config"
 | Name | Type |
 | :------ | :------ |
 | `clusters` | ``null`` \| { `[clusterName: string]`: [`Cluster`](../interfaces/lib_k8s_cluster.Cluster.md);  } |
+| `settings` | { `[key: string]`: `any`; `tableRowsPerPageOptions`: `number`[] ; `timezone`: `string`  } |
+| `settings.tableRowsPerPageOptions` | `number`[] |
+| `settings.timezone` | `string` |
 
 #### Defined in
 
-[redux/reducers/config.tsx:21](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/redux/reducers/config.tsx#L21)
+[redux/reducers/config.tsx:39](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/redux/reducers/config.tsx#L39)

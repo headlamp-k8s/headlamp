@@ -22,7 +22,7 @@ slug: "lib_util"
 
 #### Defined in
 
-[lib/util.ts:30](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L30)
+[lib/util.ts:32](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L32)
 
 ___
 
@@ -32,17 +32,17 @@ ___
 
 #### Defined in
 
-[lib/util.ts:28](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L28)
+[lib/util.ts:30](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L30)
 
 ## Variables
 
 ### CLUSTER\_ACTION\_GRACE\_PERIOD
 
-• `Const` **CLUSTER\_ACTION\_GRACE\_PERIOD**: ``5000``
+• **CLUSTER\_ACTION\_GRACE\_PERIOD**: ``5000``
 
 #### Defined in
 
-[lib/util.ts:26](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L26)
+[lib/util.ts:28](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L28)
 
 ## Functions
 
@@ -54,7 +54,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `item` | [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) |
+| `item` | [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) \| [`KubeEvent`](../interfaces/lib_k8s_event.KubeEvent.md) |
 | `filter` | [`FilterState`](../interfaces/lib_util.FilterState.md) |
 | `matchCriteria?` | `string`[] |
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:139](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L139)
+[lib/util.ts:142](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L142)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:208](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L208)
+[lib/util.ts:211](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L211)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:200](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L200)
+[lib/util.ts:203](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L203)
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:88](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L88)
+[lib/util.ts:91](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L91)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:97](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L97)
+[lib/util.ts:100](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L100)
 
 ___
 
@@ -161,7 +161,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:115](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L115)
+[lib/util.ts:118](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L118)
 
 ___
 
@@ -182,7 +182,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:105](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L105)
+[lib/util.ts:108](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L108)
 
 ___
 
@@ -202,7 +202,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:101](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L101)
+[lib/util.ts:104](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L104)
 
 ___
 
@@ -222,7 +222,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:72](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L72)
+[lib/util.ts:74](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L74)
 
 ___
 
@@ -247,7 +247,7 @@ The formatted date.
 
 #### Defined in
 
-[lib/util.ts:43](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L43)
+[lib/util.ts:45](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L45)
 
 ___
 
@@ -267,13 +267,13 @@ ___
 
 #### Defined in
 
-[lib/util.ts:220](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L220)
+[lib/util.ts:223](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L223)
 
 ___
 
 ### useFilterFunc
 
-▸ **useFilterFunc**(`matchCriteria?`): (`item`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md)) => `boolean`
+▸ **useFilterFunc**(`matchCriteria?`): (`item`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) \| [`KubeEvent`](../interfaces/lib_k8s_event.KubeEvent.md)) => `boolean`
 
 #### Parameters
 
@@ -291,7 +291,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `item` | [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) |
+| `item` | [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) \| [`KubeEvent`](../interfaces/lib_k8s_event.KubeEvent.md) |
 
 ##### Returns
 
@@ -299,7 +299,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:195](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L195)
+[lib/util.ts:198](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L198)
 
 ___
 
@@ -322,7 +322,7 @@ A hook to manage a state variable that is also stored in the URL.
 
 #### Defined in
 
-[lib/util.ts:245](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L245)
+[lib/util.ts:248](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L248)
 
 ▸ **useURLState**(`key`, `valueOrParams`): [`number`, `React.Dispatch`<`React.SetStateAction`<`number`\>\>]
 
@@ -341,4 +341,4 @@ A hook to manage a state variable that is also stored in the URL.
 
 #### Defined in
 
-[lib/util.ts:249](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/util.ts#L249)
+[lib/util.ts:252](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L252)

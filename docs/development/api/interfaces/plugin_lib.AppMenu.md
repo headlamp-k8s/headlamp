@@ -26,7 +26,7 @@ The submenus of this menu
 
 #### Defined in
 
-[plugin/lib.ts:72](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/lib.ts#L72)
+[plugin/lib.ts:74](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/lib.ts#L74)
 
 ___
 
@@ -38,4 +38,4 @@ A URL to open (if not starting with http, then it'll be opened in the external b
 
 #### Defined in
 
-[plugin/lib.ts:70](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/lib.ts#L70)
+[plugin/lib.ts:72](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/lib.ts#L72)

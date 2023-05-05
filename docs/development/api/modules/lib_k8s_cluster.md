@@ -12,6 +12,12 @@ Re-exports [ApiListOptions](../interfaces/lib_k8s_cluster.ApiListOptions.md)
 
 ___
 
+### AuthRequestResourceAttrs
+
+Re-exports [AuthRequestResourceAttrs](../interfaces/lib_k8s_cluster.AuthRequestResourceAttrs.md)
+
+___
+
 ### Cluster
 
 Re-exports [Cluster](../interfaces/lib_k8s_cluster.Cluster.md)
@@ -21,6 +27,12 @@ ___
 ### ContainerState
 
 Re-exports [ContainerState](../interfaces/lib_k8s_cluster.ContainerState.md)
+
+___
+
+### HEADLAMP\_ALLOWED\_NAMESPACES
+
+Re-exports [HEADLAMP_ALLOWED_NAMESPACES](lib_k8s_cluster.md#headlamp_allowed_namespaces)
 
 ___
 

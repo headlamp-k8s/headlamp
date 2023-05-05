@@ -20,7 +20,7 @@ They will have their initialize(register) method called at plugin initialization
 
 ### initialize
 
-▸ `Abstract` **initialize**(`register`): `boolean`
+▸ `Abstract` **initialize**(`register`): `boolean` \| `void`
 
 initialize is called for each plugin with a Registry which gives the plugin methods for doing things.
 
@@ -34,8 +34,10 @@ initialize is called for each plugin with a Registry which gives the plugin meth
 
 #### Returns
 
-`boolean`
+`boolean` \| `void`
+
+The return code is not used, but used to be required.
 
 #### Defined in
 
-[plugin/lib.ts:47](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/lib.ts#L47)
+[plugin/lib.ts:49](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/lib.ts#L49)

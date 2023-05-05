@@ -14,7 +14,7 @@ slug: "plugin_registry.ClusterChooserProps"
 
 #### Defined in
 
-[components/cluster/ClusterChooser.tsx:8](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/cluster/ClusterChooser.tsx#L8)
+[components/cluster/ClusterChooser.tsx:8](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/cluster/ClusterChooser.tsx#L8)
 
 ## Methods
 
@@ -34,4 +34,4 @@ slug: "plugin_registry.ClusterChooserProps"
 
 #### Defined in
 
-[components/cluster/ClusterChooser.tsx:7](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/cluster/ClusterChooser.tsx#L7)
+[components/cluster/ClusterChooser.tsx:7](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/cluster/ClusterChooser.tsx#L7)

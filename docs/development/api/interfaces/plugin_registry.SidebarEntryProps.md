@@ -20,7 +20,7 @@ An iconify string or icon object that will be used for the sidebar's icon
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:103](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/Sidebar/SidebarItem.tsx#L103)
+[components/Sidebar/SidebarItem.tsx:104](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/SidebarItem.tsx#L104)
 
 ___
 
@@ -32,7 +32,7 @@ Label to display.
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:85](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/Sidebar/SidebarItem.tsx#L85)
+[components/Sidebar/SidebarItem.tsx:86](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/SidebarItem.tsx#L86)
 
 ___
 
@@ -44,7 +44,7 @@ Name of this SidebarItem.
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:81](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/Sidebar/SidebarItem.tsx#L81)
+[components/Sidebar/SidebarItem.tsx:82](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/SidebarItem.tsx#L82)
 
 ___
 
@@ -56,7 +56,19 @@ Name of the parent SidebarEntry.
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:89](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/Sidebar/SidebarItem.tsx#L89)
+[components/Sidebar/SidebarItem.tsx:90](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/SidebarItem.tsx#L90)
+
+___
+
+### sidebar
+
+• `Optional` **sidebar**: `string`
+
+The sidebar to display this item in. If not specified, it will be displayed in the default sidebar.
+
+#### Defined in
+
+[components/Sidebar/SidebarItem.tsx:107](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/SidebarItem.tsx#L107)
 
 ___
 
@@ -68,7 +80,7 @@ URL to go to when this item is followed.
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:93](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/Sidebar/SidebarItem.tsx#L93)
+[components/Sidebar/SidebarItem.tsx:94](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/SidebarItem.tsx#L94)
 
 ___
 
@@ -80,4 +92,4 @@ Should URL have the cluster prefix? (default=true)
 
 #### Defined in
 
-[components/Sidebar/SidebarItem.tsx:97](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/Sidebar/SidebarItem.tsx#L97)
+[components/Sidebar/SidebarItem.tsx:98](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/SidebarItem.tsx#L98)

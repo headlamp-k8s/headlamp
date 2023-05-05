@@ -4,6 +4,10 @@ linkTitle: "plugin/registry"
 slug: "plugin_registry"
 ---
 
+## Enumerations
+
+- [DefaultSidebars](../enums/plugin_registry.DefaultSidebars.md)
+
 ## Classes
 
 - [Registry](../classes/plugin_registry.Registry.md)
@@ -24,7 +28,7 @@ slug: "plugin_registry"
 
 #### Defined in
 
-[plugin/registry.tsx:45](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L45)
+[plugin/registry.tsx:51](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L51)
 
 ___
 
@@ -34,7 +38,7 @@ ___
 
 #### Defined in
 
-[components/Sidebar/AppLogo.tsx:16](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/Sidebar/AppLogo.tsx#L16)
+[components/Sidebar/AppLogo.tsx:16](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/AppLogo.tsx#L16)
 
 ___
 
@@ -44,7 +48,7 @@ ___
 
 #### Defined in
 
-[components/cluster/ClusterChooser.tsx:10](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/cluster/ClusterChooser.tsx#L10)
+[components/cluster/ClusterChooser.tsx:10](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/cluster/ClusterChooser.tsx#L10)
 
 ___
 
@@ -54,7 +58,17 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:44](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L44)
+[plugin/registry.tsx:49](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L49)
+
+___
+
+### DetailsViewHeaderActionsProcessor
+
+Ƭ **DetailsViewHeaderActionsProcessor**: `HeaderActionsProcessor`
+
+#### Defined in
+
+[plugin/registry.tsx:50](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L50)
 
 ___
 
@@ -64,7 +78,7 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/DetailsViewSection.tsx:9](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L9)
+[components/DetailsViewSection/DetailsViewSection.tsx:9](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L9)
 
 ___
 
@@ -90,7 +104,17 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:36](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L36)
+[plugin/registry.tsx:41](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L41)
+
+## Variables
+
+### DetailsViewDefaultHeaderActions
+
+• **DetailsViewDefaultHeaderActions**: typeof `DefaultHeaderAction` = `DefaultHeaderAction`
+
+#### Defined in
+
+[plugin/registry.tsx:36](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L36)
 
 ## Functions
 
@@ -133,7 +157,7 @@ registerAppBarAction(ConsoleLogger);
 
 #### Defined in
 
-[plugin/registry.tsx:308](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L308)
+[plugin/registry.tsx:341](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L341)
 
 ___
 
@@ -166,7 +190,7 @@ More complete logo example in plugins/examples/change-logo:
 
 #### Defined in
 
-[plugin/registry.tsx:362](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L362)
+[plugin/registry.tsx:395](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L395)
 
 ___
 
@@ -199,7 +223,7 @@ registerClusterChooser(({ clickHandler, cluster }: ClusterChooserProps) => {
 
 #### Defined in
 
-[plugin/registry.tsx:384](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L384)
+[plugin/registry.tsx:417](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L417)
 
 ___
 
@@ -240,7 +264,42 @@ registerDetailsViewHeaderAction(IconAction);
 
 #### Defined in
 
-[plugin/registry.tsx:278](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L278)
+[plugin/registry.tsx:286](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L286)
+
+___
+
+### registerDetailsViewHeaderActionsProcessor
+
+▸ **registerDetailsViewHeaderActionsProcessor**(`processor`): `void`
+
+Add a processor for the details view header actions. Allowing the modification of header actions.
+
+**`example`**
+
+```tsx
+import { registerDetailsViewHeaderActionsProcessor, DetailsViewDefaultHeaderActions } from '@kinvolk/headlamp-plugin/lib';
+
+// Processor that removes the default edit action.
+registerDetailsViewHeaderActionsProcessor((resource, headerActions) => {
+ return headerActions.filter(action => action.name !== DetailsViewDefaultHeaderActions.EDIT);
+});
+
+More complete detail view example in plugins/examples/details-view:
+@see [Detail View Example](http://github.com/kinvolk/headlamp/plugins/examples/details-view/)
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `processor` | `HeaderActionsProcessor` \| (`resource`: `any`, `actions`: `HeaderAction`[]) => `HeaderAction`[] | The processor to add. Receives a resource (for which we are processing the header actions) and the current header actions and returns the new header actions. Return an empty array to remove all header actions. |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/registry.tsx:309](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L309)
 
 ___
 
@@ -282,7 +341,35 @@ registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
 
 #### Defined in
 
-[plugin/registry.tsx:337](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L337)
+[plugin/registry.tsx:370](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L370)
+
+___
+
+### registerGetTokenFunction
+
+▸ **registerGetTokenFunction**(`override`): `void`
+
+Override headlamp getToken method
+
+**`example`**
+```ts
+registerGetTokenFunction(() => {
+// set token logic here
+});
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `override` | (`cluster`: `string`) => `undefined` \| `string` | The getToken override method to use. |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/registry.tsx:447](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L447)
 
 ___
 
@@ -322,7 +409,7 @@ registerRoute({
 
 #### Defined in
 
-[plugin/registry.tsx:250](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L250)
+[plugin/registry.tsx:258](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L258)
 
 ___
 
@@ -352,7 +439,35 @@ registerRouteFilter(route => (route.path === '/workloads' ? null : route));
 
 #### Defined in
 
-[plugin/registry.tsx:223](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L223)
+[plugin/registry.tsx:231](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L231)
+
+___
+
+### registerSetTokenFunction
+
+▸ **registerSetTokenFunction**(`override`): `void`
+
+Override headlamp setToken method
+
+**`example`**
+```ts
+registerSetTokenFunction((cluster: string, token: string | null) => {
+// set token logic here
+});
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `override` | (`cluster`: `string`, `token`: ``null`` \| `string`) => `void` | The setToken override method to use. |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/registry.tsx:431](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L431)
 
 ___
 
@@ -384,7 +499,7 @@ registerSidebarEntry({ parent: 'cluster', name: 'traces', label: 'Traces', url: 
 
 #### Defined in
 
-[plugin/registry.tsx:171](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L171)
+[plugin/registry.tsx:177](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L177)
 
 ___
 
@@ -414,4 +529,4 @@ registerSidebarEntryFilter(entry => (entry.name === 'workloads' ? null : entry))
 
 #### Defined in
 
-[plugin/registry.tsx:204](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/plugin/registry.tsx#L204)
+[plugin/registry.tsx:212](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L212)
