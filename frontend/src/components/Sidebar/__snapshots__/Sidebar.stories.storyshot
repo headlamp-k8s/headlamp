@@ -13,31 +13,8 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
         class="MuiPaper-root MuiDrawer-paper makeStyles-drawerClose MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
       >
         <div
-          class="makeStyles-toolbar makeStyles-toolbar"
-        >
-          <button
-            aria-label="Expand sidebar"
-            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
-            tabindex="0"
-            type="button"
-          >
-            <span
-              class="MuiButton-label"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root makeStyles-logo"
-                focusable="false"
-                viewBox="0 0 auto 32"
-              >
-                icon-dark.svg
-              </svg>
-            </span>
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
+          class="MuiBox-root MuiBox-root makeStyles-toolbar"
+        />
         <div
           class="MuiGrid-root makeStyles-sidebarGrid MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap MuiGrid-justify-content-xs-space-between"
         >
@@ -191,31 +168,8 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
         class="MuiPaper-root MuiDrawer-paper makeStyles-drawerOpen MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
       >
         <div
-          class="makeStyles-toolbar makeStyles-toolbar"
-        >
-          <button
-            aria-label="Shrink sidebar"
-            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
-            tabindex="0"
-            type="button"
-          >
-            <span
-              class="MuiButton-label"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root makeStyles-logo"
-                focusable="false"
-                viewBox="0 0 auto 32"
-              >
-                logo-dark.svg
-              </svg>
-            </span>
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
+          class="MuiBox-root MuiBox-root makeStyles-toolbar"
+        />
         <div
           class="MuiGrid-root makeStyles-sidebarGrid MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap MuiGrid-justify-content-xs-space-between"
         >
@@ -372,31 +326,8 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
         class="MuiPaper-root MuiDrawer-paper makeStyles-drawerClose MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
       >
         <div
-          class="makeStyles-toolbar makeStyles-toolbar"
-        >
-          <button
-            aria-label="Expand sidebar"
-            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
-            tabindex="0"
-            type="button"
-          >
-            <span
-              class="MuiButton-label"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root makeStyles-logo"
-                focusable="false"
-                viewBox="0 0 auto 32"
-              >
-                icon-dark.svg
-              </svg>
-            </span>
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
+          class="MuiBox-root MuiBox-root makeStyles-toolbar"
+        />
         <div
           class="MuiGrid-root makeStyles-sidebarGrid MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap MuiGrid-justify-content-xs-space-between"
         >
@@ -1389,31 +1320,8 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
         class="MuiPaper-root MuiDrawer-paper makeStyles-drawerOpen MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
       >
         <div
-          class="makeStyles-toolbar makeStyles-toolbar"
-        >
-          <button
-            aria-label="Shrink sidebar"
-            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
-            tabindex="0"
-            type="button"
-          >
-            <span
-              class="MuiButton-label"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root makeStyles-logo"
-                focusable="false"
-                viewBox="0 0 auto 32"
-              >
-                logo-dark.svg
-              </svg>
-            </span>
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
+          class="MuiBox-root MuiBox-root makeStyles-toolbar"
+        />
         <div
           class="MuiGrid-root makeStyles-sidebarGrid MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap MuiGrid-justify-content-xs-space-between"
         >
@@ -2416,31 +2324,8 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
         class="MuiPaper-root MuiDrawer-paper makeStyles-drawerOpen MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
       >
         <div
-          class="makeStyles-toolbar makeStyles-toolbar"
-        >
-          <button
-            aria-label="Shrink sidebar"
-            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
-            tabindex="0"
-            type="button"
-          >
-            <span
-              class="MuiButton-label"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root makeStyles-logo"
-                focusable="false"
-                viewBox="0 0 auto 32"
-              >
-                logo-dark.svg
-              </svg>
-            </span>
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
+          class="MuiBox-root MuiBox-root makeStyles-toolbar"
+        />
         <div
           class="MuiGrid-root makeStyles-sidebarGrid MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap MuiGrid-justify-content-xs-space-between"
         >

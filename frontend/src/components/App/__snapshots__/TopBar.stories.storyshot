@@ -4,11 +4,22 @@ exports[`Storyshots TopBar No Token 1`] = `
 <div>
   <nav
     aria-label="Appbar Tools"
-    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar makeStyles-appbar mui-fixed MuiPaper-elevation1"
+    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar mui-fixed MuiPaper-elevation1"
   >
     <div
       class="MuiToolbar-root MuiToolbar-regular makeStyles-toolbar MuiToolbar-gutters"
     >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root makeStyles-logo"
+        focusable="false"
+        viewBox="0 0 auto 32"
+      >
+        logo-dark.svg
+      </svg>
+      <div
+        class="makeStyles-grow"
+      />
       <div
         class="makeStyles-grow makeStyles-clusterTitle"
       />
@@ -68,11 +79,22 @@ exports[`Storyshots TopBar One Cluster 1`] = `
 <div>
   <nav
     aria-label="Appbar Tools"
-    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar makeStyles-appbar mui-fixed MuiPaper-elevation1"
+    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar mui-fixed MuiPaper-elevation1"
   >
     <div
       class="MuiToolbar-root MuiToolbar-regular makeStyles-toolbar MuiToolbar-gutters"
     >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root makeStyles-logo"
+        focusable="false"
+        viewBox="0 0 auto 32"
+      >
+        logo-dark.svg
+      </svg>
+      <div
+        class="makeStyles-grow"
+      />
       <div
         class="makeStyles-grow makeStyles-clusterTitle"
       />
@@ -149,11 +171,22 @@ exports[`Storyshots TopBar Processor Action 1`] = `
 <div>
   <nav
     aria-label="Appbar Tools"
-    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar makeStyles-appbar mui-fixed MuiPaper-elevation1"
+    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar mui-fixed MuiPaper-elevation1"
   >
     <div
       class="MuiToolbar-root MuiToolbar-regular makeStyles-toolbar MuiToolbar-gutters"
     >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root makeStyles-logo"
+        focusable="false"
+        viewBox="0 0 auto 32"
+      >
+        logo-dark.svg
+      </svg>
+      <div
+        class="makeStyles-grow"
+      />
       <div
         class="makeStyles-grow makeStyles-clusterTitle"
       />
@@ -216,11 +249,22 @@ exports[`Storyshots TopBar Token 1`] = `
 <div>
   <nav
     aria-label="Appbar Tools"
-    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar makeStyles-appbar mui-fixed MuiPaper-elevation1"
+    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar mui-fixed MuiPaper-elevation1"
   >
     <div
       class="MuiToolbar-root MuiToolbar-regular makeStyles-toolbar MuiToolbar-gutters"
     >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root makeStyles-logo"
+        focusable="false"
+        viewBox="0 0 auto 32"
+      >
+        logo-dark.svg
+      </svg>
+      <div
+        class="makeStyles-grow"
+      />
       <div
         class="makeStyles-grow makeStyles-clusterTitle"
       />
@@ -280,11 +324,22 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
 <div>
   <nav
     aria-label="Appbar Tools"
-    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar makeStyles-appbar mui-fixed MuiPaper-elevation1"
+    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary makeStyles-appbar mui-fixed MuiPaper-elevation1"
   >
     <div
       class="MuiToolbar-root MuiToolbar-regular makeStyles-toolbar MuiToolbar-gutters"
     >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root makeStyles-logo"
+        focusable="false"
+        viewBox="0 0 auto 32"
+      >
+        logo-dark.svg
+      </svg>
+      <div
+        class="makeStyles-grow"
+      />
       <div
         class="makeStyles-grow makeStyles-clusterTitle"
       >

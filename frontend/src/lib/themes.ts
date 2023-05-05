@@ -3,7 +3,6 @@ import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
 import red from '@material-ui/core/colors/red';
 import { createTheme, Theme } from '@material-ui/core/styles';
-import { PaletteColor, PaletteColorOptions } from '@material-ui/core/styles/createPalette';
 import React from 'react';
 
 declare module '@material-ui/core/styles/createPalette.d' {
@@ -100,6 +99,11 @@ const commonRules = {
         // opacity: '1.0',
       },
     },
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: '#f5f5f5',
+      },
+    },
   },
 };
 
@@ -151,6 +155,11 @@ const darkTheme = createTheme({
         color: '#fff',
         backgroundColor: '#000',
         opacity: 1,
+      },
+    },
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: '#000',
       },
     },
   },

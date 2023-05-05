@@ -1,17 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { get } from 'lodash';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { AppBarActionsProcessor } from '../../redux/actionButtonsSlice';
+import { INITIAL_STATE as UI_INITIAL_STATE } from '../../redux/reducers/ui';
 import { processAppBarActions, PureTopBar, PureTopBarProps } from './TopBar';
 
 const store = configureStore({
-  reducer: (state = { config: {}, ui: { notifications: [] } }) => state,
+  reducer: (state = { config: {}, ui: typeof UI_INITIAL_STATE }) => state,
   preloadedState: {
     config: {},
     ui: {
+      ...UI_INITIAL_STATE,
       notifications: [],
     },
     plugins: {
