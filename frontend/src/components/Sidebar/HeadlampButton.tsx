@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -7,13 +8,10 @@ import { AppLogo } from '../App/AppLogo';
 
 const useStyle = makeStyles(theme => ({
   toolbar: {
-    borderBottom: '1px solid #1e1e1e',
     paddingTop: theme.spacing(1.5),
     paddingLeft: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
       props.isSmall ? 0 : props.isSidebarOpen ? theme.spacing(2) : theme.spacing(1),
     paddingBottom: theme.spacing(1),
-    backgroundColor: '#000',
-    borderRadius: (props: { isSmall: boolean }) => (props.isSmall ? 40 : 0),
     margin: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
       props.isSmall && !props.isSidebarOpen ? 5 : 0,
   },
@@ -24,10 +22,11 @@ const useStyle = makeStyles(theme => ({
   button: {
     padding: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
       props.isSmall && !props.isSidebarOpen ? 0 : '6px 8px',
-    minWidth: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
-      props.isSmall && !props.isSidebarOpen ? 55 : 64,
     // Useful for when the button has text.
     color: theme.palette.primary.contrastText,
+  },
+  menuIcon: {
+    marginRight: theme.spacing(1),
   },
 }));
 
@@ -64,11 +63,12 @@ export default function HeadlampButton({
         aria-label={open ? t('Shrink sidebar') : t('Expand sidebar')}
         disabled={disabled}
       >
-        <AppLogo
-          logoType={open ? 'large' : 'small'}
-          themeName={getThemeName()}
-          className={classes.logo}
+        <Icon
+          icon={open ? 'mdi:backburger' : 'mdi:menu'}
+          width="1.5rem"
+          className={classes.menuIcon}
         />
+        <AppLogo logoType={'large'} themeName={getThemeName()} className={classes.logo} />
       </Button>
     </div>
   );
