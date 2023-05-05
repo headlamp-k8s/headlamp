@@ -3,7 +3,7 @@ import { Headlamp, Plugin } from '@kinvolk/headlamp-plugin/lib';
 class AppMenuDemo extends Plugin {
   static warnedOnce = false;
 
-  initialize() {
+  initialize(): boolean {
     console.log('app-menus plugin initialized');
 
     if (!AppMenuDemo.warnedOnce && !Headlamp.isRunningAsApp()) {
