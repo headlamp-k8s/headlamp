@@ -20,12 +20,12 @@ import OauthPopup from '../oidcauth/OauthPopup';
 const ColorButton = withStyles(theme => ({
   root: {
     color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.sidebarBg,
+    backgroundColor: theme.palette.text.primary,
     width: '14rem',
     padding: '0.5rem 2rem',
     '&:hover': {
       opacity: '0.8',
-      backgroundColor: theme.palette.sidebarBg,
+      backgroundColor: theme.palette.text.primary,
     },
   },
 }))(Button);

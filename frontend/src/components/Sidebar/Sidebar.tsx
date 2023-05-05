@@ -24,7 +24,7 @@ import prepareRoutes from './prepareRoutes';
 import SidebarItem, { SidebarEntryProps } from './SidebarItem';
 import VersionButton from './VersionButton';
 
-export const drawerWidth = 330;
+export const drawerWidth = 240;
 export const drawerWidthClosed = 64;
 
 export enum DefaultSidebars {
@@ -289,7 +289,6 @@ export function PureSidebar({
                     disableRipple: true,
                     disableFocusRipple: true,
                   }}
-                  color="#adadad"
                   onClick={onToggleOpen}
                   icon={open ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
                   description={t('frequent|Collapse Sidebar')}

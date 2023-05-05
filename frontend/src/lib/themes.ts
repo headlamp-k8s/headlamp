@@ -3,21 +3,20 @@ import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
 import red from '@material-ui/core/colors/red';
 import { createTheme, Theme } from '@material-ui/core/styles';
-import { PaletteColor, PaletteColorOptions } from '@material-ui/core/styles/createPalette';
 import React from 'react';
 
 declare module '@material-ui/core/styles/createPalette.d' {
   interface Palette {
     success: PaletteColor;
     sidebarLink: {
-      [propName: string]: string;
+      [propName: string]: any;
     };
     [propName: string]: any;
   }
   interface PaletteOptions {
     success?: PaletteColorOptions;
     sidebarLink: {
-      [propName: string]: string;
+      [propName: string]: any;
     };
     [propName: string]: any;
   }
@@ -41,9 +40,24 @@ const commonRules = {
       ...orange,
     },
     sidebarLink: {
-      main: grey['500'],
-      selectedBg: grey['800'],
+      color: '#605E5C',
+      main: {
+        selected: {
+          color: '#fff',
+          backgroundColor: '#000',
+        },
+        color: '#000',
+      },
+      selected: {
+        color: '#000',
+        backgroundColor: 'unset',
+      },
+      hover: {
+        color: '#fff',
+        backgroundColor: '#d3d3d3',
+      },
     },
+    sidebarBg: '#F5F5F5',
     error: {
       main: red['800'],
       light: red['50'],
@@ -51,7 +65,6 @@ const commonRules = {
     resourceToolTip: {
       color: 'rgba(0, 0, 0, 0.87)',
     },
-    sidebarBg: '#000',
     normalEventBg: '#F0F0F0',
     chartStyles: {
       defaultFillColor: grey['300'],
@@ -109,6 +122,10 @@ const darkTheme = createTheme({
   ...commonRules,
   palette: {
     ...commonRules.palette,
+    sidebarLink: {
+      main: grey['500'],
+      selectedBg: grey['800'],
+    },
     tables: {
       headerText: '#aeaeae',
     },
