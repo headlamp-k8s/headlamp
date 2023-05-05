@@ -64,13 +64,14 @@ podSecurityContext:
 
 # -- Headlamp containers Security Context
 securityContext:
-  {}
   # capabilities:
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+  runAsNonRoot: true
+  privileged: false
+  runAsUser: 100
+  runAsGroup: 101
 
 service:
   # -- Kubernetes Service type
