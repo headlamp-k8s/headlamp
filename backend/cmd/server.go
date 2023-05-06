@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
 )
 
@@ -13,6 +14,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error fetching config:%v", err)
 	}
+
+	cache := cache.New()
 
 	StartHeadlampServer(&HeadlampConfig{
 		useInCluster:          conf.InCluster,
@@ -30,5 +33,6 @@ func main() {
 		proxyURLs:             strings.Split(conf.ProxyURLs, ","),
 		enableHelm:            conf.EnableHelm,
 		enableDynamicClusters: conf.EnableDynamicClusters,
+		cache:                 cache,
 	})
 }

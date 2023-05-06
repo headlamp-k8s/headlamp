@@ -188,7 +188,7 @@ func defaultPluginDir() string {
 		pluginsConfigDir = filepath.Join(userConfigDir, "Headlamp", "Config", "plugins")
 	}
 
-	fileMode := 0755
+	fileMode := 0o755
 	err = os.MkdirAll(pluginsConfigDir, fs.FileMode(fileMode))
 
 	if err != nil {

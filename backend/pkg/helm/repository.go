@@ -18,8 +18,8 @@ import (
 )
 
 const (
-	defaultNewConfigFileMode   os.FileMode = os.FileMode(0644)
-	defaultNewConfigFolderMode os.FileMode = os.FileMode(0770)
+	defaultNewConfigFileMode   os.FileMode = os.FileMode(0o644)
+	defaultNewConfigFolderMode os.FileMode = os.FileMode(0o770)
 )
 
 // add repository.

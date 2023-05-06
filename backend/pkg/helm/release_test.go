@@ -4,10 +4,13 @@
 package helm
 
 import (
+	"context"
+	"encoding/json"
 	"os/user"
 	"path/filepath"
 	"testing"
 
+	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"helm.sh/helm/v3/pkg/action"
@@ -35,10 +38,33 @@ func GetClient(t *testing.T, clusterName string) clientcmd.ClientConfig {
 	return clientcmd.NewInteractiveClientConfig(*config, clusterName, nil, nil, nil)
 }
 
+func getStatus(ch cache.Cache, action string, releaseName string, t *testing.T) (string, error) {
+	t.Helper()
+
+	statusVal, err := ch.Get(context.Background(), "helm_"+action+"_"+releaseName)
+	require.NoError(t, err)
+
+	valueBytes, err := json.Marshal(statusVal)
+	require.NoError(t, err)
+
+	var status struct {
+		Status string
+		Err    error
+	}
+
+	err = json.Unmarshal(valueBytes, &status)
+	require.NoError(t, err)
+
+	return status.Status, status.Err
+}
+
 func TestInstallRelease(t *testing.T) {
 	k8sclient := GetClient(t, "minikube")
 
-	helmHandler, err := NewHandlerWithSettings(k8sclient, "default", settings)
+	cache := cache.New()
+	require.NotNil(t, cache)
+
+	helmHandler, err := NewHandlerWithSettings(k8sclient, cache, "default", settings)
 	require.NoError(t, err)
 
 	// add headlmap repo
@@ -54,6 +80,7 @@ func TestInstallRelease(t *testing.T) {
 
 	if len(releases) > 0 {
 		t.Log("release helm-test-asdf already exists so cleaning up")
+
 		uninstallReq := UninstallReleaseRequest{
 			Name:      "helm-test-asdf",
 			Namespace: "default",
@@ -74,7 +101,7 @@ func TestInstallRelease(t *testing.T) {
 
 	helmHandler.installRelease(installReq)
 
-	status, err := actionState.GetStatus("install", "helm-test-asdf")
+	status, err := getStatus(cache, "install", "helm-test-asdf", t)
 	assert.NoError(t, err)
 	assert.Equal(t, "success", status)
 }
@@ -82,7 +109,10 @@ func TestInstallRelease(t *testing.T) {
 func TestListRelease(t *testing.T) {
 	k8sclient := GetClient(t, "minikube")
 
-	helmHandler, err := NewHandlerWithSettings(k8sclient, "default", settings)
+	cache := cache.New()
+	require.NotNil(t, cache)
+
+	helmHandler, err := NewHandlerWithSettings(k8sclient, cache, "default", settings)
 	require.NoError(t, err)
 
 	req := ListReleaseRequest{}
@@ -103,7 +133,10 @@ func TestListRelease(t *testing.T) {
 func TestUpgradeRelease(t *testing.T) {
 	k8sclient := GetClient(t, "minikube")
 
-	helmHandler, err := NewHandlerWithSettings(k8sclient, "default", settings)
+	cache := cache.New()
+	require.NotNil(t, cache)
+
+	helmHandler, err := NewHandlerWithSettings(k8sclient, cache, "default", settings)
 	require.NoError(t, err)
 
 	upgradeReq := UpgradeReleaseRequest{
@@ -119,15 +152,17 @@ func TestUpgradeRelease(t *testing.T) {
 
 	helmHandler.upgradeRelease(upgradeReq)
 
-	status, err := actionState.GetStatus("upgrade", "helm-test-asdf")
+	status, err := getStatus(cache, "upgrade", "helm-test-asdf", t)
 	assert.NoError(t, err)
 	assert.Equal(t, "success", status)
 }
 
 func TestRollbackRelease(t *testing.T) {
 	k8sclient := GetClient(t, "minikube")
+	cache := cache.New()
+	require.NotNil(t, cache)
 
-	helmHandler, err := NewHandlerWithSettings(k8sclient, "default", settings)
+	helmHandler, err := NewHandlerWithSettings(k8sclient, cache, "default", settings)
 	require.NoError(t, err)
 
 	rollbackReq := RollbackReleaseRequest{
@@ -137,7 +172,7 @@ func TestRollbackRelease(t *testing.T) {
 	}
 	helmHandler.rollbackRelease(rollbackReq)
 
-	status, err := actionState.GetStatus("rollback", "helm-test-asdf")
+	status, err := getStatus(cache, "rollback", "helm-test-asdf", t)
 	assert.NoError(t, err)
 	assert.Equal(t, "success", status)
 }
@@ -145,7 +180,10 @@ func TestRollbackRelease(t *testing.T) {
 func TestUninstallRelease(t *testing.T) {
 	k8sclient := GetClient(t, "minikube")
 
-	helmHandler, err := NewHandlerWithSettings(k8sclient, "default", settings)
+	cache := cache.New()
+	require.NotNil(t, cache)
+
+	helmHandler, err := NewHandlerWithSettings(k8sclient, cache, "default", settings)
 	require.NoError(t, err)
 
 	uninstallReq := UninstallReleaseRequest{
@@ -155,7 +193,7 @@ func TestUninstallRelease(t *testing.T) {
 
 	helmHandler.uninstallRelease(uninstallReq)
 
-	status, err := actionState.GetStatus("uninstall", "helm-test-asdf")
+	status, err := getStatus(cache, "uninstall", "helm-test-asdf", t)
 	assert.NoError(t, err)
 	assert.Equal(t, "success", status)
 }
