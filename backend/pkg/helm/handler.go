@@ -29,7 +29,7 @@ var (
 type Handler struct {
 	*action.Configuration
 	*cli.EnvSettings
-	cache cache.Cache
+	Cache cache.Cache
 }
 
 func NewActionConfig(clientConfig clientcmd.ClientConfig, namespace string) (*action.Configuration, error) {
@@ -66,7 +66,7 @@ func NewHandlerWithSettings(clientConfig clientcmd.ClientConfig,
 	return &Handler{
 		Configuration: actionConfig,
 		EnvSettings:   settings,
-		cache:         cache,
+		Cache:         cache,
 	}, nil
 }
 
@@ -121,7 +121,7 @@ type stat struct {
 func (h *Handler) getReleaseStatus(actionName, releaseName string) (*stat, error) {
 	key := "helm_" + actionName + "_" + releaseName
 
-	value, err := h.cache.Get(context.Background(), key)
+	value, err := h.Cache.Get(context.Background(), key)
 	if err != nil {
 		return nil, err
 	}
@@ -153,7 +153,7 @@ func (h *Handler) setReleaseStatus(actionName, releaseName, status string, err e
 		Err:    err,
 	}
 
-	cacheErr := h.cache.SetWithTTL(context.Background(), key, stat, statusCacheTimeout)
+	cacheErr := h.Cache.SetWithTTL(context.Background(), key, stat, statusCacheTimeout)
 	if cacheErr != nil {
 		return cacheErr
 	}

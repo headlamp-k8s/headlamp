@@ -1,28 +1,56 @@
-//go:build integration
-// +build integration
-
-package helm
+package helm_test
 
 import (
+	"context"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 
+	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/helm"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"helm.sh/helm/v3/pkg/cli"
 )
 
+var settings = cli.New()
+
 func TestListChart(t *testing.T) {
-	// add headlmap repo
-	err := AddRepository("headlamp", "https://headlamp-k8s.github.io/headlamp/", settings)
+	k8sclient := GetClient(t, "minikube")
+
+	cache := cache.New()
+	require.NotNil(t, cache)
+
+	helmHandler, err := helm.NewHandlerWithSettings(k8sclient, cache, "default", settings)
 	require.NoError(t, err)
 
-	// list charts without filter term
-	charts, err := listCharts("", settings)
-	require.NoError(t, err)
-	require.NotNil(t, charts)
-	require.NotEqual(t, 0, len(charts))
+	testAddRepo(t, helmHandler, "headlamp_test_repo", "https://headlamp-k8s.github.io/headlamp/")
 
-	// list charts with a filter term that doesnt exist
-	charts, err = listCharts("non-existing-chart", settings)
-	assert.NoError(t, err)
-	assert.Equal(t, 0, len(charts))
+	// list chart request
+	listChartsRequest, err := http.NewRequestWithContext(context.Background(),
+		"GET", "/clusters/minikube/helm/repositories/charts", nil)
+	require.NoError(t, err)
+
+	// response recorder
+	rr := httptest.NewRecorder()
+
+	helmHandler.ListCharts(rr, listChartsRequest)
+
+	assert.Equal(t, http.StatusOK, rr.Code)
+	assert.Contains(t, rr.Body.String(), "headlamp_test_repo/headlamp")
+	assert.NotContains(t, rr.Body.String(), "non-existing-chart")
+
+	// list chart request with filter
+	listChartsRequest, err = http.NewRequestWithContext(context.Background(),
+		"GET", "/clusters/minikube/helm/repositories/charts?filter=headlamp", nil)
+	require.NoError(t, err)
+
+	// response recorder
+	rr = httptest.NewRecorder()
+
+	helmHandler.ListCharts(rr, listChartsRequest)
+
+	assert.Equal(t, http.StatusOK, rr.Code)
+	assert.Contains(t, rr.Body.String(), "headlamp_test_repo/headlamp")
+	assert.NotContains(t, rr.Body.String(), "non-existing-chart")
 }

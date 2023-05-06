@@ -432,7 +432,7 @@ type CommonInstallUpdateRequest struct {
 	Name        string `json:"name" validate:"required"`
 	Namespace   string `json:"namespace" validate:"required"`
 	Description string `json:"description" validate:"required"`
-	Values      string `json:"values" validate:"required"`
+	Values      string `json:"values"`
 	Chart       string `json:"chart" validate:"required"`
 	Version     string `json:"version" validate:"required"`
 }
@@ -441,6 +441,11 @@ type InstallRequest struct {
 	CommonInstallUpdateRequest
 	CreateNamespace  bool `json:"createNamespace"`
 	DependencyUpdate bool `json:"dependencyUpdate"`
+}
+
+func (req *InstallRequest) Validate() error {
+	validate := validator.New()
+	return validate.Struct(req)
 }
 
 func (h *Handler) InstallRelease(w http.ResponseWriter, r *http.Request) {

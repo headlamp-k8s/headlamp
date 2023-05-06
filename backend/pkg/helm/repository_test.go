@@ -1,22 +1,53 @@
-//go:build integration
-// +build integration
-
-package helm
+package helm_test
 
 import (
+	"bytes"
+	"context"
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 
+	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/helm"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
-func checkRepoExists(t *testing.T, repoName string) bool {
+func newHelmHandler(t *testing.T) *helm.Handler {
 	t.Helper()
 
-	repos, err := listRepositories(settings)
+	k8sclient := GetClient(t, "minikube")
+
+	cache := cache.New()
+	require.NotNil(t, cache)
+
+	helmHandler, err := helm.NewHandlerWithSettings(k8sclient, cache, "default", settings)
 	require.NoError(t, err)
 
-	for _, repo := range repos {
+	return helmHandler
+}
+
+func checkRepoExists(t *testing.T, helmHandler *helm.Handler, repoName string) bool {
+	t.Helper()
+
+	// list repositories
+	listRepoReq, err := http.NewRequestWithContext(context.Background(),
+		"GET", "/clusters/minikube/helm/repositories", nil)
+	require.NoError(t, err)
+
+	// response recorder
+	rr := httptest.NewRecorder()
+
+	helmHandler.ListRepo(rr, listRepoReq)
+	require.Equal(t, http.StatusOK, rr.Code)
+
+	var listRepoResponse helm.ListRepoResponse
+
+	err = json.Unmarshal(rr.Body.Bytes(), &listRepoResponse)
+	require.NoError(t, err)
+
+	for _, repo := range listRepoResponse.Repositories {
 		repo := repo
 		if repo.Name == repoName {
 			return true
@@ -26,78 +57,157 @@ func checkRepoExists(t *testing.T, repoName string) bool {
 	return false
 }
 
-// TestAddRepositoryToHelm.
-func TestAddRepository(t *testing.T) {
-	// valid repository
-	err := AddRepository("headlamp_test_repo", "https://headlamp-k8s.github.io/headlamp/", settings)
+//nolint:unparam
+func testAddRepo(t *testing.T, helmHandler *helm.Handler, repoName string, repoURL string) {
+	t.Helper()
+
+	// add headlmap repo
+	addRepo := helm.AddUpdateRepoRequest{
+		Name: "headlamp_test_repo",
+		URL:  "https://headlamp-k8s.github.io/headlamp/",
+	}
+
+	addRepoRequestJSON, err := json.Marshal(addRepo)
 	require.NoError(t, err)
 
-	// check if repository exists in list
-	require.True(t, checkRepoExists(t, "headlamp_test_repo"))
+	addRepoRequest, err := http.NewRequestWithContext(context.Background(), "POST",
+		"/clusters/minikube/helm/repositories/charts", bytes.NewBuffer(addRepoRequestJSON))
+	require.NoError(t, err)
 
-	// invalid repository
-	err = AddRepository("headlamp_test_repo", "https://headlamp-k8s-invalid-url.github.io/headlamp", settings)
-	require.Error(t, err)
+	// response recorder
+	rr := httptest.NewRecorder()
+
+	helmHandler.AddRepo(rr, addRepoRequest)
+	assert.Equal(t, http.StatusOK, rr.Code)
+
+	// check if repository exists in list
+	assert.True(t, checkRepoExists(t, helmHandler, "headlamp_test_repo"))
+}
+
+// TestAddRepositoryToHelm.
+func TestAddRepository(t *testing.T) {
+	helmHandler := newHelmHandler(t)
+
+	t.Run("add_repo_success", func(t *testing.T) {
+		testAddRepo(t, helmHandler, "headlamp_test_repo", "https://headlamp-k8s.github.io/headlamp/")
+	})
+
+	t.Run("invalid_add_repo_request", func(t *testing.T) {
+		addRepoRequest, err := http.NewRequestWithContext(context.Background(),
+			"POST", "/clusters/minikube/helm/repositories/charts",
+			bytes.NewBufferString("some invalid request string"))
+		require.NoError(t, err)
+
+		// response recorder
+		rr := httptest.NewRecorder()
+
+		helmHandler.AddRepo(rr, addRepoRequest)
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
+	})
 }
 
 // TestRemoveRepository.
 func TestRemoveRepository(t *testing.T) {
-	// add repository
-	err := AddRepository("headlamp_test_repo", "https://headlamp-k8s.github.io/headlamp/", settings)
-	require.NoError(t, err)
+	helmHandler := newHelmHandler(t)
 
-	// check if repository exists in list
-	require.True(t, checkRepoExists(t, "headlamp_test_repo"))
+	t.Run("remove_repo_success", func(t *testing.T) {
+		testAddRepo(t, helmHandler, "headlamp_test_repo", "https://headlamp-k8s.github.io/headlamp/")
 
-	// remove repository
-	err = RemoveRepository("headlamp_test_repo", settings)
-	require.NoError(t, err)
+		// remove repository
+		removeRepoRequest, err := http.NewRequestWithContext(context.Background(), "DELETE",
+			"/clusters/minikube/helm/repositories/?name=headlamp_test_repo", nil)
+		require.NoError(t, err)
 
-	// check if repository exists in list
-	require.False(t, checkRepoExists(t, "headlamp_test_repo"))
+		// response recorder
+		rr := httptest.NewRecorder()
+		helmHandler.RemoveRepo(rr, removeRepoRequest)
+
+		assert.False(t, checkRepoExists(t, helmHandler, "headlamp_test_repo"))
+	})
 }
 
-// TestUpdateRepository.
-func TestUpdateRepository(t *testing.T) {
-	// add repository
-	err := AddRepository("headlamp_test_repo", "https://headlamp-k8s.github.io/headlamp/", settings)
-	require.NoError(t, err)
+// TestUpdateRepo.
+func TestUpdateRepo(t *testing.T) {
+	helmHandler := newHelmHandler(t)
 
-	// check if repository exists in list
-	require.True(t, checkRepoExists(t, "headlamp_test_repo"))
+	t.Run("update_repo_success", func(t *testing.T) {
+		testAddRepo(t, helmHandler, "headlamp_test_repo", "https://headlamp-k8s.github.io/headlamp/")
 
-	// update repository
-	err = UpdateRepository("headlamp_test_repo",
-		"https://headlamp-k8s-update-url.github.io/headlamp/", settings)
-	require.NoError(t, err)
-
-	// check if repo url is updated
-	repos, err := listRepositories(settings)
-	require.NoError(t, err)
-
-	for _, repo := range repos {
-		repo := repo
-		if repo.Name == "headlamp_test_repo" {
-			require.Equal(t, "https://headlamp-k8s-update-url.github.io/headlamp/", repo.URL)
+		// update repository request
+		updateRepo := helm.AddUpdateRepoRequest{
+			Name: "headlamp_test_repo",
+			URL:  "https://headlamp-k8s-update-url.github.io/headlamp/",
 		}
-	}
+
+		updateRepoRequestJSON, err := json.Marshal(updateRepo)
+		require.NoError(t, err)
+
+		updateRepoRequest, err := http.NewRequestWithContext(context.Background(),
+			"PUT", "/clusters/minikube/helm/repositories",
+			bytes.NewBuffer(updateRepoRequestJSON))
+		require.NoError(t, err)
+
+		// response recorder
+		rr := httptest.NewRecorder()
+
+		helmHandler.UpdateRepository(rr, updateRepoRequest)
+		assert.Equal(t, http.StatusOK, rr.Code)
+
+		// check if repository exists in list
+		// list repositories
+		listRepoReq, err := http.NewRequestWithContext(context.Background(),
+			"GET", "/clusters/minikube/helm/repositories", nil)
+		require.NoError(t, err)
+
+		// response recorder
+		rr = httptest.NewRecorder()
+
+		helmHandler.ListRepo(rr, listRepoReq)
+
+		var listRepoResponse helm.ListRepoResponse
+
+		err = json.Unmarshal(rr.Body.Bytes(), &listRepoResponse)
+		assert.NoError(t, err)
+
+		for _, repo := range listRepoResponse.Repositories {
+			repo := repo
+			if repo.Name == "headlamp_test_repo" {
+				assert.Equal(t, "https://headlamp-k8s-update-url.github.io/headlamp/", repo.URL)
+			}
+		}
+	})
+
+	t.Run("invalid_update_repo_request", func(t *testing.T) {
+		updateRepoRequest, err := http.NewRequestWithContext(context.Background(), "PUT",
+			"/clusters/minikube/helm/repositories", bytes.NewBufferString("some invalid request string"))
+		require.NoError(t, err)
+
+		// response recorder
+		rr := httptest.NewRecorder()
+
+		helmHandler.UpdateRepository(rr, updateRepoRequest)
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
+	})
 }
 
 // TestListRepositories.
 func TestListRepositories(t *testing.T) {
-	// add repository
-	err := AddRepository("headlamp_test_repo", "https://headlamp-k8s.github.io/headlamp/", settings)
-	require.NoError(t, err)
+	helmHandler := newHelmHandler(t)
 
-	// check if repository exists in list
-	assert.True(t, checkRepoExists(t, "headlamp_test_repo"))
+	testAddRepo(t, helmHandler, "headlamp_test_repo", "https://headlamp-k8s.github.io/headlamp/")
 
 	// list repositories
-	repos, err := listRepositories(settings)
-	assert.NoError(t, err)
-	assert.NotNil(t, repos)
-	assert.NotEqual(t, 0, len(repos))
+	listRepoReq, err := http.NewRequestWithContext(context.Background(),
+		"GET", "/clusters/minikube/helm/repositories", nil)
+	require.NoError(t, err)
 
-	// check for random repo
-	assert.False(t, checkRepoExists(t, "random_repo"))
+	// response recorder
+	rr := httptest.NewRecorder()
+
+	helmHandler.ListRepo(rr, listRepoReq)
+
+	var listRepoResponse helm.ListRepoResponse
+
+	err = json.Unmarshal(rr.Body.Bytes(), &listRepoResponse)
+	assert.NoError(t, err)
 }
