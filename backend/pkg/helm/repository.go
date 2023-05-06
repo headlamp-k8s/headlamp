@@ -65,7 +65,7 @@ func lockRepositoryFile(lockCtx context.Context, repositoryConfig string) (bool,
 const timeoutForLock = 30 * time.Second
 
 // Adds a repository with name, url to the helm config. Returns error if there is one.
-func AddRepository(name string, url string, settings *cli.EnvSettings) error {
+func addRepository(name string, url string, settings *cli.EnvSettings) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to create empty RepositoryConfig file")
@@ -140,7 +140,7 @@ func (h *Handler) AddRepo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = AddRepository(request.Name, request.URL, h.EnvSettings)
+	err = addRepository(request.Name, request.URL, h.EnvSettings)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
