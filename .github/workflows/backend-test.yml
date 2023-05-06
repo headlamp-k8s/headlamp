@@ -1,0 +1,30 @@
+name: Backend test
+on:
+  pull_request:
+    paths:
+    - 'backend/**'
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Test backend
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Setup go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20.*'
+    - name: Setup minikube cluster
+      uses: medyagh/setup-minikube@master
+    - name: Start cluster
+      run: |
+        minikube start --driver=docker
+    - name: Check cluster status 
+      run: |
+        minikube status
+    - name: Run golang test
+      run: |
+        export HEADLAMP_RUN_INTEGRATION_TESTS=true
+        make backend-test
