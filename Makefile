@@ -44,7 +44,7 @@ backend:
 
 .PHONY: backend-test
 backend-test:
-	cd backend && go test -p -v 1 ./...
+	cd backend && go test -v -p 1 ./...
 
 frontend-install:
 	cd frontend && npm install
