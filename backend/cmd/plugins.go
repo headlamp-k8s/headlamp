@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"encoding/json"
 	"fmt"
@@ -207,3 +208,4 @@ func addPluginRoutes(config *HeadlampConfig, r *mux.Router) {
 		r.PathPrefix("/static-plugins/").Handler(staticPluginsHandler)
 	}
 }
+*/

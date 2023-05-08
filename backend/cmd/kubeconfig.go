@@ -1,6 +1,6 @@
 package main
 
-import (
+/*import (
 	"context"
 	"fmt"
 	"log"
@@ -360,3 +360,4 @@ func removeContextFromKubeConfigFile(context string, path string) error {
 
 	return clientcmd.WriteToFile(*config, path)
 }
+*/

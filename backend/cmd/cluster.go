@@ -1,19 +1,9 @@
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
-	"log"
-	"path"
-	"path/filepath"
-
 	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
-	"k8s.io/client-go/rest"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 )
-
-// @todo: Use a different way to avoid name clashes with other clusters.
-const OwnClusterName = "main"
 
 type Cluster struct {
 	Name     string `json:"name"`
@@ -23,6 +13,12 @@ type Cluster struct {
 	Metadata map[string]interface{} `json:"meta_data"`
 	ProxyURL string                 `json:"proxy_url"`
 }
+
+/*
+import (
+	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
+	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
+)
 
 type ClusterReq struct {
 	Name   *string `json:"name"`
@@ -38,6 +34,12 @@ type ClusterReq struct {
 	KubeConfig               *string                `json:"kubeconfig,omitempty"`
 }
 
+// @todo: Use a different way to avoid name clashes with other clusters.
+const OwnClusterName = "main"
+
+
+
+/*
 func GetClusterOidcConfig(clusterName string) (*OidcConfig, error) {
 	if oidcConfig, ok := oidcConfigCache[clusterName]; ok {
 		return oidcConfig, nil
@@ -119,3 +121,4 @@ func (c *Cluster) getCAData() ([]byte, error) {
 
 	return nil, fmt.Errorf("no certificate authority data found for cluster %s", c.Name)
 }
+*/
