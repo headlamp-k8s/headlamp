@@ -6,6 +6,7 @@ DOCKER_CMD ?= docker
 DOCKER_REPO ?= ghcr.io/headlamp-k8s
 DOCKER_EXT_REPO ?= docker.io/headlamp
 DOCKER_IMAGE_NAME ?= headlamp
+DOCKER_PLUGINS_IMAGE_NAME ?= plugins
 DOCKER_IMAGE_VERSION ?= $(shell git describe --tags --always --dirty)
 DOCKER_PLATFORM ?= local
 
@@ -88,6 +89,15 @@ image:
 	--platform=$(DOCKER_PLATFORM) \
 	-t $(DOCKER_REPO)/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_VERSION) -f \
 	Dockerfile \
+	.
+
+.PHONY: build-plugins-container
+build-plugins-container:
+	$(DOCKER_CMD) buildx build \
+	--pull \
+	--platform=linux/amd64 \
+	-t $(DOCKER_REPO)/$(DOCKER_PLUGINS_IMAGE_NAME):$(DOCKER_IMAGE_VERSION) -f \
+	Dockerfile.plugins \
 	.
 
 docker-ext:

@@ -32,6 +32,7 @@ jobs:
         export SHELL=/bin/bash
         eval $(minikube -p minikube docker-env)
         DOCKER_IMAGE_VERSION=latest make image
+        DOCKER_IMAGE_VERSION=latest DOCKER_PLUGINS_IMAGE_NAME=headlamp-plugins-test make build-plugins-container
         echo -n "verifying images:"
         docker images
     - name: Deploy to cluster
@@ -44,7 +45,7 @@ jobs:
         sleep 2
         kubectl get deployments -n kube-system
         minikube logs | tail -10
-        kubectl wait deployment -n kube-system headlamp --for condition=Available=True --timeout=10s
+        kubectl wait deployment -n kube-system headlamp --for condition=Available=True --timeout=30s
         minikube service headlamp -n kube-system --url
         echo "------------------opening the service------------------"
         export SERVICE_URL=$(minikube service headlamp -n kube-system --url | tail -1)
