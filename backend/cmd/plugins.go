@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -128,7 +127,7 @@ func (c *HeadlampConfig) getPluginListBasePaths() ([]string, error) {
 }
 
 func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error) {
-	files, err := ioutil.ReadDir(pluginDir)
+	files, err := os.ReadDir(pluginDir)
 	if err != nil && !os.IsNotExist(err) {
 		return nil, err
 	}
