@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/fs"
-	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
@@ -235,7 +235,7 @@ func copyReplace(src string, dst string,
 	search []byte, replace []byte,
 	search2 []byte, replace2 []byte,
 ) {
-	data, err := ioutil.ReadFile(src)
+	data, err := os.ReadFile(src)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -244,7 +244,7 @@ func copyReplace(src string, dst string,
 	data2 := bytes.ReplaceAll(data1, search2, replace2)
 	fileMode := 0o600
 
-	err = ioutil.WriteFile(dst, data2, fs.FileMode(fileMode))
+	err = os.WriteFile(dst, data2, fs.FileMode(fileMode))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -550,7 +550,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			http.Error(w, err.Error(), http.StatusBadGateway)
 			return
 		}
-		respBody, err := ioutil.ReadAll(resp.Body)
+		respBody, err := io.ReadAll(resp.Body)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadGateway)
 			return

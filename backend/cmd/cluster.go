@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 	"path"
 	"path/filepath"
 
@@ -103,7 +103,7 @@ func (c *Cluster) getCAData() ([]byte, error) {
 		configDir := filepath.Dir(c.config.LocationOfOrigin)
 		caPath := pathRelativeToBase(configDir, c.config.CertificateAuthority)
 
-		pemBytes, err := ioutil.ReadFile(caPath)
+		pemBytes, err := os.ReadFile(caPath)
 		if err == nil {
 			return pemBytes, nil
 		}

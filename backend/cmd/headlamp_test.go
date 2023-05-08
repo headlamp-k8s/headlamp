@@ -5,10 +5,10 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"os"
 	"strings"
 	"testing"
 
@@ -260,7 +260,7 @@ func TestDynamicClusters(t *testing.T) {
 }
 
 func TestDynamicClustersKubeConfig(t *testing.T) {
-	kubeConfigByte, err := ioutil.ReadFile("./headlamp_testdata/kubeconfig")
+	kubeConfigByte, err := os.ReadFile("./headlamp_testdata/kubeconfig")
 	require.NoError(t, err)
 
 	kubeConfig := base64.StdEncoding.EncodeToString(kubeConfigByte)
