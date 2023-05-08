@@ -24,7 +24,7 @@ slug: "lib_k8s_pod.ExecOptions"
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:658](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L658)
+[lib/k8s/apiProxy.ts:664](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L664)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/pod.ts:36](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/pod.ts#L36)
+[lib/k8s/pod.ts:36](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/pod.ts#L36)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:657](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L657)
+[lib/k8s/apiProxy.ts:663](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L663)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:660](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L660)
+[lib/k8s/apiProxy.ts:666](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L666)
 
 ## Methods
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:659](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L659)
+[lib/k8s/apiProxy.ts:665](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L665)
 
 ___
 
@@ -98,4 +98,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:661](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L661)
+[lib/k8s/apiProxy.ts:667](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L667)

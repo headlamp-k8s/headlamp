@@ -35,7 +35,7 @@ slug: "lib_k8s_apiProxy"
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:222](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L222)
+[lib/k8s/apiProxy.ts:224](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L224)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:221](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L221)
+[lib/k8s/apiProxy.ts:223](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L223)
 
 ## Functions
 
@@ -89,7 +89,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:288](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L288)
+[lib/k8s/apiProxy.ts:290](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L290)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:338](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L338)
+[lib/k8s/apiProxy.ts:340](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L340)
 
 ___
 
@@ -135,7 +135,47 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:788](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L788)
+[lib/k8s/apiProxy.ts:794](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L794)
+
+___
+
+### deleteCluster
+
+▸ **deleteCluster**(`cluster`): `Promise`<`any`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `cluster` | `string` |
+
+#### Returns
+
+`Promise`<`any`\>
+
+#### Defined in
+
+[lib/k8s/apiProxy.ts:881](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L881)
+
+___
+
+### listPortForward
+
+▸ **listPortForward**(`cluster`): `Promise`<`any`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `cluster` | `string` |
+
+#### Returns
+
+`Promise`<`any`\>
+
+#### Defined in
+
+[lib/k8s/apiProxy.ts:939](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L939)
 
 ___
 
@@ -157,7 +197,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:820](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L820)
+[lib/k8s/apiProxy.ts:836](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L836)
 
 ___
 
@@ -180,7 +220,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:489](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L489)
+[lib/k8s/apiProxy.ts:491](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L491)
 
 ___
 
@@ -203,7 +243,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:478](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L478)
+[lib/k8s/apiProxy.ts:480](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L480)
 
 ___
 
@@ -226,7 +266,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:500](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L500)
+[lib/k8s/apiProxy.ts:502](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L502)
 
 ___
 
@@ -247,7 +287,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:511](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L511)
+[lib/k8s/apiProxy.ts:513](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L513)
 
 ___
 
@@ -271,7 +311,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:132](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L132)
+[lib/k8s/apiProxy.ts:134](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L134)
 
 ___
 
@@ -291,7 +331,56 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:856](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L856)
+[lib/k8s/apiProxy.ts:872](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L872)
+
+___
+
+### startPortForward
+
+▸ **startPortForward**(`cluster`, `namespace`, `podname`, `containerPort`, `service`, `serviceNamespace`, `port?`, `id?`): `Promise`<`any`\>
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `cluster` | `string` | `undefined` |
+| `namespace` | `string` | `undefined` |
+| `podname` | `string` | `undefined` |
+| `containerPort` | `string` \| `number` | `undefined` |
+| `service` | `string` | `undefined` |
+| `serviceNamespace` | `string` | `undefined` |
+| `port?` | `string` | `undefined` |
+| `id` | `string` | `''` |
+
+#### Returns
+
+`Promise`<`any`\>
+
+#### Defined in
+
+[lib/k8s/apiProxy.ts:885](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L885)
+
+___
+
+### stopOrDeletePortForward
+
+▸ **stopOrDeletePortForward**(`cluster`, `id`, `stopOrDelete?`): `Promise`<`string`\>
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `cluster` | `string` | `undefined` |
+| `id` | `string` | `undefined` |
+| `stopOrDelete` | `boolean` | `true` |
+
+#### Returns
+
+`Promise`<`string`\>
+
+#### Defined in
+
+[lib/k8s/apiProxy.ts:921](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L921)
 
 ___
 
@@ -318,7 +407,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:664](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L664)
+[lib/k8s/apiProxy.ts:670](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L670)
 
 ___
 
@@ -342,7 +431,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:516](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L516)
+[lib/k8s/apiProxy.ts:518](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L518)
 
 ___
 
@@ -365,7 +454,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:557](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L557)
+[lib/k8s/apiProxy.ts:559](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L559)
 
 ___
 
@@ -379,4 +468,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:849](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L849)
+[lib/k8s/apiProxy.ts:865](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L865)

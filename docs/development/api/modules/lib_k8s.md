@@ -156,13 +156,13 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:159](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L159)
+[lib/k8s/index.ts:109](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L109)
 
 ## Variables
 
 ### ResourceClasses
 
-• `Const` **ResourceClasses**: `Object` = `resourceClassesDict`
+• **ResourceClasses**: `Object` = `resourceClassesDict`
 
 #### Index signature
 
@@ -170,7 +170,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:83](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L83)
+[lib/k8s/index.ts:80](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L80)
 
 ## Functions
 
@@ -184,7 +184,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:155](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L155)
+[lib/k8s/index.ts:105](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L105)
 
 ___
 
@@ -209,7 +209,48 @@ See [Label selector examples](https://kubernetes.io/docs/concepts/overview/worki
 
 #### Defined in
 
-[lib/k8s/index.ts:190](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L190)
+[lib/k8s/index.ts:140](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L140)
+
+___
+
+### matchExpressionSimplifier
+
+▸ **matchExpressionSimplifier**(`matchExpressions`): `string`[] \| ``""``
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `matchExpressions` | `undefined` \| { `key`: `string` ; `operator`: `string` ; `values`: `string`[]  }[] |
+
+#### Returns
+
+`string`[] \| ``""``
+
+#### Defined in
+
+[lib/k8s/index.ts:175](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L175)
+
+___
+
+### matchLabelsSimplifier
+
+▸ **matchLabelsSimplifier**(`matchLabels`, `isEqualSeperator?`): `string`[] \| ``""``
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `matchLabels` | `undefined` \| { `[key: string]`: `string`;  } | `undefined` |
+| `isEqualSeperator` | `boolean` | `false` |
+
+#### Returns
+
+`string`[] \| ``""``
+
+#### Defined in
+
+[lib/k8s/index.ts:155](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L155)
 
 ___
 
@@ -223,7 +264,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:138](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L138)
+[lib/k8s/index.ts:88](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L88)
 
 ___
 
@@ -237,7 +278,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:90](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L90)
+[lib/k8s/index.ts:83](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L83)
 
 ___
 
@@ -257,4 +298,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:161](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/index.ts#L161)
+[lib/k8s/index.ts:111](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L111)

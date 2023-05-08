@@ -8,6 +8,18 @@ slug: "lib_router.Route"
 
 ## Properties
 
+### disabled
+
+• `Optional` **disabled**: `boolean`
+
+Whether the route should be disabled (not registered).
+
+#### Defined in
+
+[lib/router.tsx:108](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L108)
+
+___
+
 ### exact
 
 • `Optional` **exact**: `boolean`
@@ -16,7 +28,7 @@ When true, will only match if the path matches the location.pathname exactly.
 
 #### Defined in
 
-[lib/router.tsx:72](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L72)
+[lib/router.tsx:87](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L87)
 
 ___
 
@@ -28,7 +40,7 @@ Hide the appbar at the top.
 
 #### Defined in
 
-[lib/router.tsx:91](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L91)
+[lib/router.tsx:106](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L106)
 
 ___
 
@@ -40,7 +52,7 @@ Human readable name. Capitalized and short.
 
 #### Defined in
 
-[lib/router.tsx:74](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L74)
+[lib/router.tsx:89](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L89)
 
 ___
 
@@ -52,7 +64,7 @@ This route does not require Authentication.
 
 #### Defined in
 
-[lib/router.tsx:85](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L85)
+[lib/router.tsx:100](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L100)
 
 ___
 
@@ -66,7 +78,7 @@ In case this route does *not* need a cluster prefix and context.
 
 #### Defined in
 
-[lib/router.tsx:79](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L79)
+[lib/router.tsx:94](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L94)
 
 ___
 
@@ -78,19 +90,19 @@ Any valid URL path or array of paths that path-to-regexp@^1.7.0 understands.
 
 #### Defined in
 
-[lib/router.tsx:70](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L70)
+[lib/router.tsx:85](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L85)
 
 ___
 
 ### sidebar
 
-• **sidebar**: ``null`` \| `string`
+• **sidebar**: ``null`` \| `string` \| { `item`: ``null`` \| `string` ; `sidebar`: `string`  }
 
-The sidebar group this Route should be in, or null if it is in no group.
+The sidebar entry this Route should enable, or null if it shouldn't enable any. If an object is passed with item and sidebar, it will try to enable the given sidebar and the given item.
 
 #### Defined in
 
-[lib/router.tsx:87](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L87)
+[lib/router.tsx:102](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L102)
 
 ___
 
@@ -102,7 +114,7 @@ Should URL have the cluster prefix? (default=true)
 
 #### Defined in
 
-[lib/router.tsx:83](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L83)
+[lib/router.tsx:98](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L98)
 
 ## Methods
 
@@ -118,4 +130,4 @@ Shown component for this route.
 
 #### Defined in
 
-[lib/router.tsx:89](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/router.tsx#L89)
+[lib/router.tsx:104](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L104)

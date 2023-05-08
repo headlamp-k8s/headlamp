@@ -20,4 +20,4 @@ slug: "lib_k8s_apiProxy.ApiError"
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:817](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/apiProxy.ts#L817)
+[lib/k8s/apiProxy.ts:833](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L833)

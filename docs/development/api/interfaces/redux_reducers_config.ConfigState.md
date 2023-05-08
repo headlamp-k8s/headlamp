@@ -14,4 +14,25 @@ slug: "redux_reducers_config.ConfigState"
 
 #### Defined in
 
-[redux/reducers/config.tsx:6](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/redux/reducers/config.tsx#L6)
+[redux/reducers/config.tsx:8](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/redux/reducers/config.tsx#L8)
+
+___
+
+### settings
+
+• **settings**: `Object`
+
+#### Index signature
+
+▪ [key: `string`]: `any`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `tableRowsPerPageOptions` | `number`[] |
+| `timezone` | `string` |
+
+#### Defined in
+
+[redux/reducers/config.tsx:11](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/redux/reducers/config.tsx#L11)

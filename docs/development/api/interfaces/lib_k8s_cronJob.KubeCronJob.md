@@ -6,6 +6,12 @@ slug: "lib_k8s_cronJob.KubeCronJob"
 
 [lib/k8s/cronJob](../modules/lib_k8s_cronJob.md).KubeCronJob
 
+CronJob structure returned by the k8s API.
+
+**`see`** [https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/cron-job-v1/](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/cron-job-v1/) Kubernetes API reference for CronJob
+
+**`see`** [https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) Kubernetes definition for CronJob
+
 ## Hierarchy
 
 - [`KubeObjectInterface`](lib_k8s_cluster.KubeObjectInterface.md)
@@ -24,7 +30,7 @@ slug: "lib_k8s_cronJob.KubeCronJob"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:24](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L24)
+[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L37)
 
 ___
 
@@ -38,7 +44,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:23](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L23)
+[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L36)
 
 ___
 
@@ -52,7 +58,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:25](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L25)
+[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L38)
 
 ___
 
@@ -69,15 +75,15 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `concurrencyPolicy` | `string` |
-| `failedJobsHistoryLimit` | `string` |
+| `failedJobsHistoryLimit` | `number` |
 | `schedule` | `string` |
-| `startingDeadlineSeconds` | `string` |
-| `successfulJobsHistoryLimit` | `string` |
+| `startingDeadlineSeconds?` | `number` |
+| `successfulJobsHistoryLimit` | `number` |
 | `suspend` | `boolean` |
 
 #### Defined in
 
-[lib/k8s/cronJob.ts:5](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cronJob.ts#L5)
+[lib/k8s/cronJob.ts:12](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cronJob.ts#L12)
 
 ___
 
@@ -91,4 +97,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cronJob.ts:14](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cronJob.ts#L14)
+[lib/k8s/cronJob.ts:21](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cronJob.ts#L21)

@@ -18,7 +18,7 @@ slug: "lib_util.auth"
 
 #### Defined in
 
-[lib/auth.ts:28](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/auth.ts#L28)
+[lib/auth.ts:41](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/auth.ts#L41)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/auth.ts:5](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/auth.ts#L5)
+[lib/auth.ts:7](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/auth.ts#L7)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-[lib/auth.ts:9](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/auth.ts#L9)
+[lib/auth.ts:17](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/auth.ts#L17)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-[lib/auth.ts:14](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/auth.ts#L14)
+[lib/auth.ts:22](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/auth.ts#L22)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[lib/auth.ts:32](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/auth.ts#L32)
+[lib/auth.ts:45](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/auth.ts#L45)
 
 ___
 
@@ -113,4 +113,4 @@ ___
 
 #### Defined in
 
-[lib/auth.ts:22](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/auth.ts#L22)
+[lib/auth.ts:30](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/auth.ts#L30)

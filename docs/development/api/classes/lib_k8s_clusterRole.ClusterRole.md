@@ -30,7 +30,7 @@ slug: "lib_k8s_clusterRole.ClusterRole"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:93](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L93)
+[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L106)
 
 ## Properties
 
@@ -56,7 +56,7 @@ slug: "lib_k8s_clusterRole.ClusterRole"
 
 #### Defined in
 
-[lib/k8s/clusterRole.ts:5](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/clusterRole.ts#L5)
+[lib/k8s/clusterRole.ts:5](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/clusterRole.ts#L5)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:94](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L94)
+[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L107)
 
 ## Accessors
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/clusterRole.ts:7](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/clusterRole.ts#L7)
+[lib/k8s/clusterRole.ts:7](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/clusterRole.ts#L7)
 
 ___
 
@@ -102,7 +102,7 @@ Role.rules
 
 #### Defined in
 
-[lib/k8s/role.ts:17](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/role.ts#L17)
+[lib/k8s/role.ts:17](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/role.ts#L17)
 
 ## Methods
 
@@ -126,7 +126,32 @@ Role.rules
 
 #### Defined in
 
-[lib/k8s/cluster.ts:73](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L73)
+[lib/k8s/cluster.ts:86](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L86)
+
+___
+
+### getAuthorization
+
+▸ `Static` `Optional` **getAuthorization**(`arg`, `resourceAttrs?`): `any`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `arg` | `string` |
+| `resourceAttrs?` | [`AuthRequestResourceAttrs`](../interfaces/lib_k8s_cluster.AuthRequestResourceAttrs.md) |
+
+#### Returns
+
+`any`
+
+#### Inherited from
+
+[Role](lib_k8s_role.Role.md).[getAuthorization](lib_k8s_role.Role.md#getauthorization)
+
+#### Defined in
+
+[lib/k8s/cluster.ts:109](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L109)
 
 ___
 
@@ -150,7 +175,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:92](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L92)
+[lib/k8s/cluster.ts:105](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L105)
 
 ___
 
@@ -177,7 +202,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:79](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L79)
+[lib/k8s/cluster.ts:92](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L92)
 
 ___
 
@@ -203,7 +228,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:74](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L74)
+[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L87)
 
 ___
 
@@ -228,7 +253,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:88](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L88)
+[lib/k8s/cluster.ts:101](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L101)
 
 ___
 
@@ -252,4 +277,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:85](https://github.com/kinvolk/headlamp/blob/16fcc2a7/frontend/src/lib/k8s/cluster.ts#L85)
+[lib/k8s/cluster.ts:98](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L98)
