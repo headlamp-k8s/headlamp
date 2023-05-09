@@ -1,9 +1,11 @@
+import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
+import { getClusterGroup } from '../../../lib/util';
 import { clusterAction } from '../../../redux/actions/actions';
 import ActionButton from '../ActionButton';
 import EditorDialog from './EditorDialog';
@@ -14,30 +16,34 @@ export default function CreateButton() {
   const [errorMessage, setErrorMessage] = React.useState('');
   const location = useLocation();
   const { t } = useTranslation(['resource', 'frequent']);
+  const clusters = getClusterGroup();
+  const [targetCluster, setTargetCluster] = React.useState(clusters[0] || '');
 
   const applyFunc = async (newItems: KubeObjectInterface[]) => {
-    await Promise.allSettled(newItems.map(newItem => apply(newItem))).then((values: any) => {
-      values.forEach((value: any, index: number) => {
-        if (value.status === 'rejected') {
-          let msg;
-          const kind = newItems[index].kind;
-          const name = newItems[index].metadata.name;
-          const apiVersion = newItems[index].apiVersion;
-          if (newItems.length === 1) {
-            msg = t('resource|Failed to create {{ kind }} {{ name }}.', { kind, name });
-          } else {
-            msg = t('resource|Failed to create {{ kind }} {{ name }} in {{ apiVersion }}.', {
-              kind,
-              name,
-              apiVersion,
-            });
+    await Promise.allSettled(newItems.map(newItem => apply(newItem, targetCluster))).then(
+      (values: any) => {
+        values.forEach((value: any, index: number) => {
+          if (value.status === 'rejected') {
+            let msg;
+            const kind = newItems[index].kind;
+            const name = newItems[index].metadata.name;
+            const apiVersion = newItems[index].apiVersion;
+            if (newItems.length === 1) {
+              msg = t('resource|Failed to create {{ kind }} {{ name }}.', { kind, name });
+            } else {
+              msg = t('resource|Failed to create {{ kind }} {{ name }} in {{ apiVersion }}.', {
+                kind,
+                name,
+                apiVersion,
+              });
+            }
+            setErrorMessage(msg);
+            setOpenDialog(true);
+            throw msg;
           }
-          setErrorMessage(msg);
-          setOpenDialog(true);
-          throw msg;
-        }
-      });
-    });
+        });
+      }
+    );
   };
 
   function handleSave(newItemDefs: KubeObjectInterface[]) {
@@ -84,6 +90,10 @@ export default function CreateButton() {
     );
   }
 
+  const handleTargetClusterChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setTargetCluster(event.target.value as string);
+  };
+
   return (
     <React.Fragment>
       <ActionButton
@@ -102,6 +112,25 @@ export default function CreateButton() {
         errorMessage={errorMessage}
         onEditorChanged={() => setErrorMessage('')}
         title={t('frequent|Create / Apply')}
+        actions={[
+          clusters.length > 1 && (
+            <FormControl>
+              <InputLabel id="edit-dialog-cluster-target">{t('glossary|Cluster')}</InputLabel>
+              <Select
+                labelId="edit-dialog-cluster-target"
+                id="edit-dialog-cluster-target-select"
+                value={targetCluster}
+                onChange={handleTargetClusterChange}
+              >
+                {clusters.map(cluster => (
+                  <MenuItem key={cluster} value={cluster}>
+                    {cluster}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          ),
+        ]}
       />
     </React.Fragment>
   );

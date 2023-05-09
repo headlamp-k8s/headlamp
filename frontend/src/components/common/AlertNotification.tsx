@@ -2,6 +2,7 @@ import { Box, useTheme } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
+import { useClustersConf } from '../../lib/k8s';
 import { testAuth } from '../../lib/k8s/apiProxy';
 import { getDefaultRoutes, getRoutePath, Route } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -13,13 +14,15 @@ const NETWORK_STATUS_CHECK_TIME = 5000;
 export interface PureAlertNotificationProps {
   routes: { [path: string]: any };
   moreRoutes: { [routeName: string]: Route };
-  testAuth(): Promise<any>;
+  testAuth(cluster?: string): Promise<any>;
+  clusters: string[];
 }
 
 export function PureAlertNotification({
   routes,
   testAuth,
   moreRoutes,
+  clusters,
 }: PureAlertNotificationProps) {
   const [networkStatusCheckTimeFactor, setNetworkStatusCheckTimeFactor] = React.useState(0);
   const [error, setError] = React.useState<null | string | boolean>(null);
@@ -35,17 +38,27 @@ export function PureAlertNotification({
         return;
       }
       setError(null);
-      testAuth()
-        .then(() => {
-          setError(false);
-        })
-        .catch(err => {
-          const error = new Error(err);
-          setError(error.message);
-          setNetworkStatusCheckTimeFactor(
-            (networkStatusCheckTimeFactor: number) => networkStatusCheckTimeFactor + 1
-          );
-        });
+
+      let authErr: any;
+      for (let i = 0; i < clusters.length; i++) {
+        testAuth(clusters[i])
+          .catch(err => {
+            authErr = err;
+          })
+          .finally(() => {
+            if (i === clusters.length - 1) {
+              if (!authErr) {
+                setError(false);
+              } else {
+                const error = new Error(authErr);
+                setError(error.message);
+                setNetworkStatusCheckTimeFactor(
+                  (networkStatusCheckTimeFactor: number) => networkStatusCheckTimeFactor + 1
+                );
+              }
+            }
+          });
+      }
     }, (networkStatusCheckTimeFactor + 1) * NETWORK_STATUS_CHECK_TIME);
   }
 
@@ -136,8 +149,14 @@ export function PureAlertNotification({
 
 export default function AlertNotification() {
   const routes = useTypedSelector(state => state.ui.routes);
+  const clusters = useClustersConf() || {};
 
   return (
-    <PureAlertNotification routes={routes} testAuth={testAuth} moreRoutes={getDefaultRoutes()} />
+    <PureAlertNotification
+      clusters={Object.keys(clusters)}
+      routes={routes}
+      testAuth={testAuth}
+      moreRoutes={getDefaultRoutes()}
+    />
   );
 }

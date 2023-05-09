@@ -300,6 +300,10 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
 
     return newDetails;
   }
+
+  isFailed(): boolean {
+    return this.status.phase === 'Failed';
+  }
 }
 
 export default Pod;

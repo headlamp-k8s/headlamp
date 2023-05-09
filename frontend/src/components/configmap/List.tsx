@@ -9,7 +9,7 @@ export default function ConfigMapList() {
 
   return (
     <SectionBox title={<SectionFilterHeader title={t('Config Maps')} />}>
-      <ResourceTable resourceClass={ConfigMap} columns={['name', 'namespace', 'age']} />
+      <ResourceTable resourceClass={ConfigMap} columns={['name', 'namespace', 'cluster', 'age']} />
     </SectionBox>
   );
 }

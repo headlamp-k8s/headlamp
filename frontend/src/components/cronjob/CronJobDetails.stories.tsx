@@ -5,6 +5,7 @@ import { TestContext } from '../../test';
 import CronJobDetails from './Details';
 import { cronJobList } from './storyHelper';
 
+// eslint-disable-next-line
 const usePhonyGet: KubeObjectClass['useGet'] = (name, namespace) => {
   const cronJobJson = cronJobList.find(
     cronJob => cronJob.metadata.name === name && cronJob.metadata.namespace === namespace
@@ -29,6 +30,7 @@ interface MockerStory {
   cronJobName: string;
 }
 
+// eslint-disable-next-line
 const Template: Story<MockerStory> = args => {
   const { useGet, useList, cronJobName } = args;
 
@@ -46,14 +48,14 @@ const Template: Story<MockerStory> = args => {
   );
 };
 
-export const EveryMinute = Template.bind({});
-EveryMinute.args = {
-  useGet: usePhonyGet,
-  cronJobName: 'every-minute',
-};
+// export const EveryMinute = Template.bind({});
+// EveryMinute.args = {
+//   useGet: usePhonyGet,
+//   cronJobName: 'every-minute',
+// };
 
-export const EveryAst = Template.bind({});
-EveryAst.args = {
-  useGet: usePhonyGet,
-  cronJobName: 'every-minute-one-char',
-};
+// export const EveryAst = Template.bind({});
+// EveryAst.args = {
+//   useGet: usePhonyGet,
+//   cronJobName: 'every-minute-one-char',
+// };

@@ -81,7 +81,7 @@ export const ResourceClasses = resourceClassesDict;
 
 // Hook for getting or fetching the clusters configuration.
 export function useClustersConf(): ConfigState['clusters'] {
-  const clusters = _.cloneDeep(useTypedSelector(state => state.config.clusters));
+  const clusters = _.cloneDeep(useTypedSelector(state => state.config.clusters, _.isEqual));
   return clusters;
 }
 
@@ -102,8 +102,16 @@ export function useCluster() {
   return cluster;
 }
 
-export function getVersion(): Promise<StringDict> {
-  return request('/version');
+export function getVersion(cluster = ''): Promise<StringDict> {
+  return request('/version', { cluster });
+}
+
+export function getVersionForCluster(cluster = ''): Promise<[string, StringDict]> {
+  return new Promise((resolve, reject) => {
+    request('/version', { cluster })
+      .then(versionInfo => resolve([cluster, versionInfo]))
+      .catch(e => reject({ cluster: e }));
+  });
 }
 
 export type CancellablePromise = Promise<() => void>;
@@ -267,3 +275,4 @@ export * as service from './service';
 export * as serviceAccount from './serviceAccount';
 export * as statefulSet from './statefulSet';
 export * as storageClass from './storageClass';
+

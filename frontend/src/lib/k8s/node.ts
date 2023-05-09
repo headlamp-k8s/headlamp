@@ -1,7 +1,7 @@
 import React from 'react';
 import { useErrorState } from '../util';
 import { useConnectApi } from '.';
-import { ApiError, apiFactory, metrics } from './apiProxy';
+import { ApiError, apiFactory, fetchMetricsForClusters, metrics } from './apiProxy';
 import { KubeCondition, KubeMetrics, KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubeNode extends KubeObjectInterface {
@@ -62,6 +62,35 @@ class Node extends makeKubeObject<KubeNode>('node') {
     useConnectApi(metrics.bind(null, '/apis/metrics.k8s.io/v1beta1/nodes', setMetrics, setError));
 
     return [nodeMetrics, error];
+  }
+
+  static useMetricsPerCluster(): [
+    { [cluster: string]: KubeMetrics[] },
+    { [cluster: string]: ApiError }
+  ] {
+    const [nodeMetrics, setNodeMetrics] = React.useState<{ [cluster: string]: KubeMetrics[] }>({});
+    const [errors, setErrors] = React.useState<{ [cluster: string]: ApiError }>({});
+
+    function setMetrics(metrics: { [cluster: string]: KubeMetrics[] }) {
+      setNodeMetrics(metrics);
+    }
+
+    useConnectApi(
+      fetchMetricsForClusters.bind(
+        null,
+        '/apis/metrics.k8s.io/v1beta1/nodes',
+        setMetrics,
+        setErrors
+      )
+    );
+
+    return [nodeMetrics, errors];
+  }
+
+  isReady() {
+    return this.status.conditions.find(
+      condition => condition.type === 'Ready' && condition.status === 'True'
+    );
   }
 }
 

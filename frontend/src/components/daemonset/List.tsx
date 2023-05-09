@@ -14,6 +14,7 @@ export default function DaemonSetList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('Pods'),
             getter: daemonSet => daemonSet.status.currentNumberScheduled,

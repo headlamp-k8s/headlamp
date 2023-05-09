@@ -57,11 +57,16 @@ export interface ResourceLinkProps extends Omit<LinkProps, 'routeName' | 'params
 
 export function ResourceLink(props: ResourceLinkProps) {
   const {
+    resource,
     routeName = props.resource.kind,
-    routeParams = props.resource.metadata as RouteURLProps,
+    routeParams = { ...props.resource.metadata } as RouteURLProps,
     name = props.resource.metadata.name,
     state,
   } = props;
+
+  if (!!resource.cluster) {
+    routeParams.cluster = resource.cluster;
+  }
 
   return (
     <Link routeName={routeName} params={routeParams} state={state}>

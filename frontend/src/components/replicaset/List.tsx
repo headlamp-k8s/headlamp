@@ -27,6 +27,7 @@ export default function ReplicaSetList() {
         columns={[
           'name',
           'namespace',
+          'cluster',
           {
             label: t('Generation'),
             getter: replicaSet => replicaSet.status.observedGeneration,
