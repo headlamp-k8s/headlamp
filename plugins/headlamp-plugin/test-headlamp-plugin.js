@@ -77,7 +77,9 @@ function testHeadlampPlugin() {
   const changedJson = packageJson
     .split('\n')
     .map(line =>
-      line.includes('"@kinvolk/headlamp-plugin"') ? '"@kinvolk/headlamp-plugin": "^0.4.9",\n' : line
+      line.includes('"@kinvolk/headlamp-plugin"')
+        ? '    "@kinvolk/headlamp-plugin": "^0.4.9"\n'
+        : line
     )
     .join('\n');
   fs.writeFileSync(packageJsonPath, changedJson);

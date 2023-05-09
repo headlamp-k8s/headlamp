@@ -493,7 +493,6 @@ function upgrade(packageFolder, skipPackageUpdates) {
     }
 
     replaceNestedKeys('scripts', ['tsc', 'storybook', 'test', 'storybook-build']);
-    replaceNestedKeys('devDependencies', ['react', 'react-dom', '@storybook/addon-storyshots']);
 
     // replace top level keys
     const checkKeys = ['eslintConfig', 'prettier'];
