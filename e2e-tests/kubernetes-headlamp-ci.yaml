@@ -1,6 +1,19 @@
-# For testing headlamp in CI.
-kind: Service
+# Source: headlamp/templates/pvc.yaml
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: headlamp
+  namespace: kube-system
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+# Source: headlamp/templates/service.yaml
+apiVersion: v1
+kind: Service
 metadata:
   name: headlamp
   namespace: kube-system
@@ -10,34 +23,66 @@ spec:
     - port: 80
       targetPort: 4466
   selector:
-    k8s-app: headlamp
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/instance: headlamp
 ---
-kind: Deployment
+# Source: headlamp/templates/deployment.yaml
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: headlamp
   namespace: kube-system
+  labels:
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/instance: headlamp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      k8s-app: headlamp
+      app.kubernetes.io/name: headlamp
+      app.kubernetes.io/instance: headlamp
   template:
     metadata:
       labels:
-        k8s-app: headlamp
+        app.kubernetes.io/name: headlamp
+        app.kubernetes.io/instance: headlamp
     spec:
+      initContainers:
+      - command:
+        - /bin/sh
+        - -c
+        - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/
+        image: ghcr.io/headlamp-k8s/headlamp-plugins-test:latest
+        imagePullPolicy: Never
+        name: headlamp-plugins
+        volumeMounts:
+        - mountPath: /build/plugins
+          name: headlamp-plugins
       containers:
       - name: headlamp
+        securityContext:
+          privileged: false
+          runAsGroup: 101
+          runAsNonRoot: true
+          runAsUser: 100
+        image: "ghcr.io/headlamp-k8s/headlamp:latest"
         imagePullPolicy: Never
-        image: ghcr.io/headlamp-k8s/headlamp:latest
         args:
-          - "-in-cluster"
-          - "-plugins-dir=/headlamp/plugins"
+        - "-in-cluster"
+        - "-plugins-dir=/build/plugins"
         ports:
-        - containerPort: 4466
+        - name: http
+          containerPort: 4466
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /build/plugins
+          name: headlamp-plugins
       nodeSelector:
         'kubernetes.io/os': linux
+      volumes:
+      - name: headlamp-plugins
+        persistentVolumeClaim:
+          claimName: headlamp
 ---
 kind: Secret
 apiVersion: v1

@@ -16,3 +16,13 @@ test("headlamp is there and so is minikube", async ({ page }) => {
 
   await expect(page).toHaveURL(/.*main/);
 });
+
+test('GET /plugins/list returns plugins list', async ({ page }) => {
+  const response = await page.goto('/plugins');
+  expect(response).toBeTruthy();
+
+  const json = await response.json();
+
+  expect(json.length).toBeGreaterThan(0);
+  expect(json.some(str => str.includes('plugins/app-menus'))).toBeTruthy();
+});
