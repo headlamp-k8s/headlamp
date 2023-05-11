@@ -359,6 +359,27 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
               class="MuiList-root MuiList-padding"
             >
               <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root makeStyles-icon"
+                    title="Home"
+                  >
+                    <span />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
                 class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
               >
                 <a
@@ -1398,6 +1419,35 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
             <ul
               class="MuiList-root MuiList-padding"
             >
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root makeStyles-icon"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Home
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
               <li
                 class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
               >
@@ -2490,6 +2540,35 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
             <ul
               class="MuiList-root MuiList-padding"
             >
+              <li
+                class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
+              >
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-divider MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root makeStyles-icon"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Home
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
               <li
                 class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
               >
