@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { getToken, setToken } from '../../lib/auth';
-import { useCluster, useClustersConf } from '../../lib/k8s';
+import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import themesConf from '../../lib/themes';
 import {
@@ -25,7 +25,6 @@ import {
 } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SettingsButton } from '../App/Settings';
-import { ClusterTitle } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
@@ -45,7 +44,6 @@ export default function TopBar({}: TopBarProps) {
   );
   const hideAppBar = useTypedSelector(state => state.ui.hideAppBar);
 
-  const clustersConfig = useClustersConf();
   const cluster = useCluster();
   const history = useHistory();
 
@@ -82,7 +80,6 @@ export default function TopBar({}: TopBarProps) {
         dispatch(setWhetherSidebarOpen(!openSideBar));
       }}
       cluster={cluster || undefined}
-      clusters={clustersConfig || undefined}
     />
   );
 }
@@ -93,6 +90,7 @@ export interface PureTopBarProps {
   logout: () => void;
   hasToken: boolean;
 
+  /** @deprecated TopBar no longer has a cluster chooser button. */
   clusters?: {
     [clusterName: string]: any;
   };
@@ -189,7 +187,6 @@ export function PureTopBar({
   logout,
   hasToken,
   cluster,
-  clusters,
   isSidebarOpen,
   isSidebarOpenUserSelected,
   onToggleOpen,
@@ -297,11 +294,6 @@ export function PureTopBar({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {isClusterContext && (
-        <MenuItem>
-          <ClusterTitle cluster={cluster} clusters={clusters} />
-        </MenuItem>
-      )}
       <AppBarActionsMenu appBarActions={appBarActions} />
       <MenuItem>
         <Notifications />
@@ -341,9 +333,7 @@ export function PureTopBar({
           {!isSmall && (
             <>
               <AppLogo themeName="light" />
-              <div className={clsx(classes.grow, classes.clusterTitle)}>
-                <ClusterTitle cluster={cluster} clusters={clusters} />
-              </div>
+              <div className={clsx(classes.grow)}></div>
               <AppBarActions appBarActions={appBarActions} />
               <Notifications />
               <SettingsButton />

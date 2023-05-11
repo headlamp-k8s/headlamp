@@ -51,6 +51,8 @@ export function ClusterTitle(props: ClusterTitleProps) {
 
   useHotkeys('ctrl+shift+l', () => setShowChooser(true));
 
+  console.info('The ClusterTitle is deprecated. Please redirect users to the home page instead.');
+
   if (!cluster) {
     return null;
   }
