@@ -127,6 +127,11 @@ const commonRules = {
         backgroundColor: '#f5f5f5',
       },
     },
+    MuiIconButton: {
+      colorPrimary: {
+        color: '#000',
+      },
+    },
   },
 };
 
@@ -191,6 +196,11 @@ const darkTheme = createTheme({
     MuiAppBar: {
       colorPrimary: {
         backgroundColor: '#000',
+      },
+    },
+    MuiIconButton: {
+      colorPrimary: {
+        color: '#fff',
       },
     },
   },
