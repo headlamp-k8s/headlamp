@@ -18,9 +18,6 @@ exports[`Storyshots TopBar No Token 1`] = `
         logo-dark.svg
       </svg>
       <div
-        class="makeStyles-grow"
-      />
-      <div
         class="makeStyles-grow makeStyles-clusterTitle"
       />
       <button
@@ -92,9 +89,6 @@ exports[`Storyshots TopBar One Cluster 1`] = `
       >
         logo-dark.svg
       </svg>
-      <div
-        class="makeStyles-grow"
-      />
       <div
         class="makeStyles-grow makeStyles-clusterTitle"
       />
@@ -185,9 +179,6 @@ exports[`Storyshots TopBar Processor Action 1`] = `
         logo-dark.svg
       </svg>
       <div
-        class="makeStyles-grow"
-      />
-      <div
         class="makeStyles-grow makeStyles-clusterTitle"
       />
       <p>
@@ -263,9 +254,6 @@ exports[`Storyshots TopBar Token 1`] = `
         logo-dark.svg
       </svg>
       <div
-        class="makeStyles-grow"
-      />
-      <div
         class="makeStyles-grow makeStyles-clusterTitle"
       />
       <button
@@ -338,31 +326,8 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
         logo-dark.svg
       </svg>
       <div
-        class="makeStyles-grow"
-      />
-      <div
         class="makeStyles-grow makeStyles-clusterTitle"
-      >
-        <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button MuiButton-containedSizeLarge MuiButton-sizeLarge"
-          tabindex="0"
-          type="button"
-        >
-          <span
-            class="MuiButton-label"
-          >
-            <span
-              class="makeStyles-clusterName"
-              title="ak8s-desktop"
-            >
-              Cluster: ak8s-desktop
-            </span>
-          </span>
-          <span
-            class="MuiTouchRipple-root"
-          />
-        </button>
-      </div>
+      />
       <button
         aria-controls=""
         aria-haspopup="true"

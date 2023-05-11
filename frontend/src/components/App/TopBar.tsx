@@ -118,6 +118,7 @@ export interface PureTopBarProps {
   appBarActionsProcessors?: AppBarActionsProcessor[];
   logout: () => void;
   hasToken: boolean;
+  /** @deprecated The cluster button as is will be reomved soon, so this argument should not be used. */
   clusters?: {
     [clusterName: string]: any;
   };
@@ -412,7 +413,6 @@ export function PureTopBar({
           {!isSmall && (
             <>
               <AppLogo />
-              <div className={classes.grow} />
               <AppBarActions
                 appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
               />
