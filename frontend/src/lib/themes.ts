@@ -113,6 +113,11 @@ const commonRules = {
         // opacity: '1.0',
       },
     },
+    MuiIconButton: {
+      colorPrimary: {
+        color: '#000',
+      },
+    },
   },
 };
 
@@ -183,6 +188,11 @@ const darkTheme = createTheme({
         color: '#fff',
         backgroundColor: '#000',
         opacity: 1,
+      },
+    },
+    MuiIconButton: {
+      colorPrimary: {
+        color: '#fff',
       },
     },
   },
