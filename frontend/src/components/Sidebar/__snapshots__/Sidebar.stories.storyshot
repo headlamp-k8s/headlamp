@@ -113,24 +113,39 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
             class="MuiGrid-root MuiGrid-item"
           >
             <div
-              class="MuiBox-root MuiBox-root"
-            />
-            <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiBox-root MuiBox-root makeStyles-linkArea"
             >
-              <button
-                aria-label="Collapse Sidebar"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                title="Collapse Sidebar"
-                type="button"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <span
-                  class="MuiIconButton-label"
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+                <div
+                  class="MuiBox-root MuiBox-root"
                 >
-                  <span />
-                </span>
-              </button>
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  >
+                    <button
+                      aria-label="Collapse Sidebar"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                      tabindex="0"
+                      title="Collapse Sidebar"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -277,24 +292,39 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
             class="MuiGrid-root MuiGrid-item"
           >
             <div
-              class="MuiBox-root MuiBox-root"
-            />
-            <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiBox-root MuiBox-root makeStyles-linkArea"
             >
-              <button
-                aria-label="Collapse Sidebar"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                title="Collapse Sidebar"
-                type="button"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <span
-                  class="MuiIconButton-label"
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+                <div
+                  class="MuiBox-root MuiBox-root"
                 >
-                  <span />
-                </span>
-              </button>
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  >
+                    <button
+                      aria-label="Collapse Sidebar"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                      tabindex="0"
+                      title="Collapse Sidebar"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1282,41 +1312,59 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
             class="MuiGrid-root MuiGrid-item"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiBox-root MuiBox-root makeStyles-linkArea"
             >
-              <button
-                aria-label="Create / Apply"
-                class="MuiButtonBase-root MuiIconButton-root"
-                tabindex="0"
-                title="Create / Apply"
-                type="button"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <span
-                  class="MuiIconButton-label"
+                <button
+                  aria-label="Create / Apply"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary"
+                  tabindex="0"
+                  title="Create / Apply"
+                  type="button"
                 >
-                  <span />
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-            </div>
-            <div
-              class="MuiBox-root MuiBox-root"
-            >
-              <button
-                aria-label="Collapse Sidebar"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                title="Collapse Sidebar"
-                type="button"
-              >
-                <span
-                  class="MuiIconButton-label"
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+                <div
+                  class="MuiBox-root MuiBox-root"
                 >
-                  <span />
-                </span>
-              </button>
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  />
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  >
+                    <div
+                      class="MuiBox-root MuiBox-root"
+                    >
+                      <button
+                        aria-label="Collapse Sidebar"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        title="Collapse Sidebar"
+                        type="button"
+                      >
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2352,41 +2400,59 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
             class="MuiGrid-root MuiGrid-item"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiBox-root MuiBox-root makeStyles-linkArea"
             >
-              <button
-                aria-label="Create / Apply"
-                class="MuiButtonBase-root MuiIconButton-root"
-                tabindex="0"
-                title="Create / Apply"
-                type="button"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <span
-                  class="MuiIconButton-label"
+                <button
+                  aria-label="Create / Apply"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary"
+                  tabindex="0"
+                  title="Create / Apply"
+                  type="button"
                 >
-                  <span />
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-            </div>
-            <div
-              class="MuiBox-root MuiBox-root"
-            >
-              <button
-                aria-label="Collapse Sidebar"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                title="Collapse Sidebar"
-                type="button"
-              >
-                <span
-                  class="MuiIconButton-label"
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+                <div
+                  class="MuiBox-root MuiBox-root"
                 >
-                  <span />
-                </span>
-              </button>
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  />
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  >
+                    <div
+                      class="MuiBox-root MuiBox-root"
+                    >
+                      <button
+                        aria-label="Collapse Sidebar"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        title="Collapse Sidebar"
+                        type="button"
+                      >
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -3426,24 +3492,59 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
             class="MuiGrid-root MuiGrid-item"
           >
             <div
-              class="MuiBox-root MuiBox-root"
-            />
-            <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiBox-root MuiBox-root makeStyles-linkArea"
             >
-              <button
-                aria-label="Collapse Sidebar"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                title="Collapse Sidebar"
-                type="button"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <span
-                  class="MuiIconButton-label"
+                <button
+                  aria-label="Create / Apply"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary"
+                  tabindex="0"
+                  title="Create / Apply"
+                  type="button"
                 >
-                  <span />
-                </span>
-              </button>
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                >
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  />
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  >
+                    <div
+                      class="MuiBox-root MuiBox-root"
+                    >
+                      <button
+                        aria-label="Collapse Sidebar"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        title="Collapse Sidebar"
+                        type="button"
+                      >
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

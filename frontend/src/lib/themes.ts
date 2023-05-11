@@ -57,6 +57,15 @@ const commonRules = {
         backgroundColor: '#3B3A39',
       },
     },
+    sidebarButtonInLinkArea: {
+      color: '#fff',
+      primary: {
+        background: '#605e5c',
+      },
+      hover: {
+        background: '#3B3A39',
+      },
+    },
     sidebarBg: '#242424',
     error: {
       main: red['800'],

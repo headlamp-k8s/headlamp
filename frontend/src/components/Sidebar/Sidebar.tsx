@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
 import React from 'react';
@@ -14,7 +14,6 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
-import themesConf from '../../lib/themes';
 import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ActionButton } from '../common';
@@ -73,6 +72,23 @@ const useStyle = makeStyles(theme => ({
     height: '100%',
   },
   toolbar: theme.mixins.toolbar,
+  linkArea: {
+    '&, & *, & svg': {
+      color: theme.palette.sidebarLink.color,
+    },
+    '& .MuiButton-root': {
+      color: theme.palette.sidebarButtonInLinkArea.color,
+      '&:hover': {
+        background: theme.palette.sidebarButtonInLinkArea.hover.background,
+      },
+    },
+    '& .MuiButton-containedPrimary': {
+      background: theme.palette.sidebarButtonInLinkArea.primary.background,
+      '&:hover': {
+        background: theme.palette.sidebarButtonInLinkArea.hover.background,
+      },
+    },
+  },
 }));
 
 export function useSidebarInfo() {
@@ -135,6 +151,74 @@ function AddClusterButton() {
   );
 }
 
+function SidebarToggleButton() {
+  const dispatch = useDispatch();
+  const { isOpen, isNarrow, canExpand, isTemporary } = useSidebarInfo();
+
+  const { t } = useTranslation(['frequent']);
+  const isNarrowOnly = isNarrow && !canExpand;
+
+  if (isTemporary || isNarrowOnly) {
+    return null;
+  }
+
+  return (
+    <Box textAlign={isOpen ? 'right' : 'center'}>
+      <ActionButton
+        iconButtonProps={{
+          size: 'small',
+        }}
+        onClick={() => {
+          dispatch(setWhetherSidebarOpen(!isOpen));
+        }}
+        icon={isOpen ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
+        description={t('frequent|Collapse Sidebar')}
+      />
+    </Box>
+  );
+}
+
+function DefaultLinkArea(props: { sidebarName: string; isOpen: boolean }) {
+  const { sidebarName, isOpen } = props;
+
+  if (sidebarName === DefaultSidebars.HOME) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        flexDirection={isOpen ? 'row' : 'column'}
+        p={1}
+      >
+        <Box>{helpers.isElectron() && <AddClusterButton />}</Box>
+        <Box>
+          <SidebarToggleButton />
+        </Box>
+      </Box>
+    );
+  }
+
+  return (
+    <Box textAlign="center">
+      <CreateButton />
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        flexDirection={isOpen ? 'row' : 'column'}
+        p={1}
+      >
+        <Box>
+          <VersionButton />
+        </Box>
+        <Box>
+          <SidebarToggleButton />
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
 export default function Sidebar() {
   const { t, i18n } = useTranslation(['glossary']);
 
@@ -184,16 +268,7 @@ export default function Sidebar() {
       onToggleOpen={() => {
         dispatch(setWhetherSidebarOpen(!sidebar.isSidebarOpen));
       }}
-      linkArea={
-        sidebar.selected.sidebar === DefaultSidebars.HOME
-          ? helpers.isElectron() && <AddClusterButton />
-          : sidebar.selected.sidebar === DefaultSidebars.IN_CLUSTER && (
-              <>
-                <CreateButton />
-                <VersionButton />
-              </>
-            )
-      }
+      linkArea={<DefaultLinkArea sidebarName={sidebar.selected.sidebar || ''} isOpen={isOpen} />}
     />
   );
 }
@@ -253,8 +328,7 @@ export function PureSidebar({
   };
 
   const contents = (
-    // We set up the dark theme here so the elements in the app bar can be styled accordingly.
-    <ThemeProvider theme={themesConf['dark']}>
+    <>
       {!isTemporaryDrawer && <Box className={classes.toolbar} />}
       <Grid
         className={classes.sidebarGrid}
@@ -280,29 +354,12 @@ export function PureSidebar({
           </List>
         </Grid>
         <Grid item>
-          <Box textAlign="center" p={0}>
+          <Box textAlign="center" p={0} className={classes.linkArea}>
             {linkArea}
           </Box>
-          {
-            // If the sidebar is temporary, it's collapsed by the Headlamp button, not the bottom button.
-            !isTemporaryDrawer && !isNarrowOnly && (
-              <Box textAlign={open ? 'right' : 'center'}>
-                <ActionButton
-                  iconButtonProps={{
-                    size: 'small',
-                    disableRipple: true,
-                    disableFocusRipple: true,
-                  }}
-                  onClick={onToggleOpen}
-                  icon={open ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
-                  description={t('frequent|Collapse Sidebar')}
-                />
-              </Box>
-            )
-          }
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </>
   );
 
   if (isTemporaryDrawer) {

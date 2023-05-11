@@ -89,9 +89,11 @@ export default function CreateButton() {
       <ActionButton
         description={t('frequent|Create / Apply')}
         onClick={() => setOpenDialog(true)}
-        color="#adadad"
-        icon="mdi:plus-circle"
+        icon="mdi:plus-box"
         width="48"
+        iconButtonProps={{
+          color: 'primary',
+        }}
       />
       <EditorDialog
         item={{}}
