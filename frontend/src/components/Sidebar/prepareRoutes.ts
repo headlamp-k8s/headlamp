@@ -37,6 +37,13 @@ function prepareRoutes(
   ];
   const inClusterItems: SidebarItemProps[] = [
     {
+      name: 'home',
+      icon: 'mdi:home',
+      label: t('frequent|Home'),
+      url: '/',
+      divider: true,
+    },
+    {
       name: 'cluster',
       label: t('glossary|Cluster'),
       icon: 'mdi:hexagon-multiple-outline',
