@@ -1,5 +1,5 @@
 import { InlineIcon } from '@iconify/react';
-import { Button } from '@material-ui/core';
+import { Button, Divider } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
@@ -314,13 +314,15 @@ export function PureSidebar({
             onKeyDown={isTemporaryDrawer ? toggleDrawer : undefined}
           >
             {items.map(item => (
-              <SidebarItem
-                key={item.name}
-                selectedName={selectedName}
-                fullWidth={largeSideBarOpen}
-                search={search}
-                {...item}
-              />
+              <React.Fragment key={item.name}>
+                <SidebarItem
+                  selectedName={selectedName}
+                  fullWidth={largeSideBarOpen}
+                  search={search}
+                  {...item}
+                />
+                {item.divider && <Divider component="li" />}
+              </React.Fragment>
             ))}
           </List>
         </Grid>

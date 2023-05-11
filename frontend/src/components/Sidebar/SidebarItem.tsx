@@ -145,6 +145,8 @@ export interface SidebarEntryProps {
   /** The sidebar to display this item in. If not specified, it will be displayed in the default sidebar.
    */
   sidebar?: DefaultSidebars | string;
+  /** Whether to display a divider after this item. */
+  divider?: boolean;
 }
 
 /**
