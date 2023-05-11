@@ -123,9 +123,24 @@ const darkTheme = createTheme({
   palette: {
     ...commonRules.palette,
     sidebarLink: {
-      main: grey['500'],
-      selectedBg: grey['800'],
+      color: '#e7e7e7',
+      main: {
+        selected: {
+          color: '#000',
+          backgroundColor: '#fff',
+        },
+        color: '#fff',
+      },
+      selected: {
+        color: '#fff',
+        backgroundColor: 'unset',
+      },
+      hover: {
+        color: '#000',
+        backgroundColor: '#8d8d8d',
+      },
     },
+    sidebarBg: '#000',
     tables: {
       headerText: '#aeaeae',
     },

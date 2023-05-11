@@ -39,7 +39,7 @@ const useItemStyle = makeStyles(theme => ({
       },
     },
     '& svg': {
-      color: '#000',
+      color: theme.palette.sidebarLink.color,
     },
     '& .MuiListItemIcon-root': {
       minWidth: 0,

@@ -135,6 +135,64 @@ function AddClusterButton() {
   );
 }
 
+function SidebarToggleButton() {
+  const dispatch = useDispatch();
+  // const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const { isOpen, isNarrow, canExpand, isTemporary } = useSidebarInfo();
+
+  const { t } = useTranslation(['frequent']);
+  const isNarrowOnly = isNarrow && !canExpand;
+
+  if (isTemporary || isNarrowOnly) {
+    return null;
+  }
+
+  return (
+    <Box textAlign={isOpen ? 'right' : 'center'}>
+      <ActionButton
+        iconButtonProps={{
+          size: 'small',
+          disableRipple: true,
+          disableFocusRipple: true,
+        }}
+        onClick={() => {
+          dispatch(setWhetherSidebarOpen(!isOpen));
+        }}
+        icon={isOpen ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
+        description={t('frequent|Collapse Sidebar')}
+      />
+    </Box>
+  );
+}
+
+function DefaultLinkArea(props: { sidebarName: string; isOpen: boolean }) {
+  const { sidebarName, isOpen } = props;
+
+  if (sidebarName === DefaultSidebars.HOME) {
+    return helpers.isElectron() ? <AddClusterButton /> : null;
+  }
+
+  return (
+    <Box textAlign="center">
+      <CreateButton />
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        flexDirection={isOpen ? 'row' : 'column'}
+        p={1}
+      >
+        <Box>
+          <VersionButton />
+        </Box>
+        <Box>
+          <SidebarToggleButton />
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
 export default function Sidebar() {
   const { t, i18n } = useTranslation(['glossary']);
 
@@ -173,16 +231,7 @@ export default function Sidebar() {
       onToggleOpen={() => {
         dispatch(setWhetherSidebarOpen(!sidebar.isSidebarOpen));
       }}
-      linkArea={
-        sidebar.selected.sidebar === DefaultSidebars.HOME
-          ? helpers.isElectron() && <AddClusterButton />
-          : sidebar.selected.sidebar === DefaultSidebars.IN_CLUSTER && (
-              <>
-                <CreateButton />
-                <VersionButton />
-              </>
-            )
-      }
+      linkArea={<DefaultLinkArea sidebarName={sidebar.selected.sidebar || ''} isOpen={isOpen} />}
     />
   );
 }
@@ -279,23 +328,6 @@ export function PureSidebar({
           <Box textAlign="center" p={0}>
             {linkArea}
           </Box>
-          {
-            // If the sidebar is temporary, it's collapsed by the Headlamp button, not the bottom button.
-            !isTemporaryDrawer && !isNarrowOnly && (
-              <Box textAlign={open ? 'right' : 'center'}>
-                <ActionButton
-                  iconButtonProps={{
-                    size: 'small',
-                    disableRipple: true,
-                    disableFocusRipple: true,
-                  }}
-                  onClick={onToggleOpen}
-                  icon={open ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
-                  description={t('frequent|Collapse Sidebar')}
-                />
-              </Box>
-            )
-          }
         </Grid>
       </Grid>
     </>

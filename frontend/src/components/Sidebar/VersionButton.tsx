@@ -5,7 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -38,6 +38,7 @@ export default function VersionButton() {
   const classes = useVersionButtonStyle();
   const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
   const cluster = useCluster();
+  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const { t } = useTranslation('glossary');
 
@@ -139,10 +140,17 @@ export default function VersionButton() {
 
   return !clusterVersion ? null : (
     <Box mx="auto" pt=".2em" className={classes.versionBox}>
-      <Button onClick={() => setOpen(true)} style={{ textTransform: 'none' }}>
+      <Button
+        onClick={() => setOpen(true)}
+        style={{ textTransform: 'none', paddingBottom: 0, paddingTop: 0 }}
+      >
         <Box display={sidebar.isSidebarOpen ? 'flex' : 'block'} alignItems="center">
           <Box>
-            <Icon color="#adadad" icon="mdi:kubernetes" className={classes.versionIcon} />
+            <Icon
+              color={theme.palette.text.secondary}
+              icon="mdi:kubernetes"
+              className={classes.versionIcon}
+            />
           </Box>
           <Box>{clusterVersion.gitVersion}</Box>
         </Box>
