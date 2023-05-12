@@ -424,27 +424,14 @@ function build(packageFolder) {
 }
 
 /**
- * Format code with prettier.
+ * Format plugin code with prettier. Format the plugin package or folder of packages.
  *
- * @param packageFolder {string} - folder where the package is.
+ * @param packageFolder {string} - folder where the package, or folder of packages is.
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function format(packageFolder) {
-  // @todo: this should work on a folder of packages
-  try {
-    child_process.execSync('prettier --config package.json --write src', {
-      stdio: 'inherit',
-      cwd: packageFolder,
-      encoding: 'utf8',
-    });
-  } catch (e) {
-    console.error(
-      `Problem running prettier inside of "${packageFolder}" abs: "${resolve(packageFolder)}"`
-    );
-    return 1;
-  }
-
-  return 0;
+  const cmdLine = 'node_modules/.bin/prettier --config package.json --write src';
+  return runScriptOnPackages(packageFolder, 'format', cmdLine);
 }
 
 /**
@@ -904,7 +891,8 @@ yargs(process.argv.slice(2))
   )
   .command(
     'format [package]',
-    'format the plugin code with prettier. <package> defaults to current working directory.',
+    'format the plugin code with prettier. <package> defaults to current working directory.' +
+      ' Can also be a folder of packages.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package to code format',
