@@ -718,31 +718,17 @@ function upgrade(packageFolder, skipPackageUpdates) {
 }
 
 /**
- * Lint code with eslint.
+ * Lint code with eslint. Lint the plugin package or folder of packages.
  *
- * @param packageFolder {string} - folder where the package is.
+ * @param packageFolder {string} - folder where the package, or folder of packages is.
  * @param fix {boolean} - automatically fix problems.
  * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
  */
 function lint(packageFolder, fix) {
-  try {
-    const extra = fix ? ' --fix' : '';
-    child_process.execSync(
-      'eslint -c package.json --max-warnings 0 --ext .js,.ts,.tsx src/' + extra,
-      {
-        stdio: 'inherit',
-        cwd: packageFolder,
-        encoding: 'utf8',
-      }
-    );
-  } catch (e) {
-    console.error(
-      `Problem running eslint inside of "${packageFolder}" abs: "${resolve(packageFolder)}"`
-    );
-    return 1;
-  }
-
-  return 0;
+  const script = `eslint -c package.json --max-warnings 0 --ext .js,.ts,.tsx src/${
+    fix ? ' --fix' : ''
+  }`;
+  return runScriptOnPackages(packageFolder, 'lint', script);
 }
 
 /**
@@ -907,7 +893,8 @@ yargs(process.argv.slice(2))
   .command(
     'lint [package]',
     'Lint the plugin for coding issues with eslint. ' +
-      '<package> defaults to current working directory.',
+      '<package> defaults to current working directory.' +
+      ' Can also be a folder of packages.',
     yargs => {
       yargs
         .positional('package', {
