@@ -766,25 +766,8 @@ function storybook(packageFolder) {
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function storybook_build(packageFolder) {
-  try {
-    child_process.execSync(
-      './node_modules/.bin/build-storybook -c node_modules/@kinvolk/headlamp-plugin/config/.storybook',
-      {
-        stdio: 'inherit',
-        cwd: packageFolder,
-        encoding: 'utf8',
-      }
-    );
-  } catch (e) {
-    console.error(
-      `Problem running build-storybook inside of "${packageFolder}" abs: "${resolve(
-        packageFolder
-      )}"`
-    );
-    return 1;
-  }
-
-  return 0;
+  const script = `build-storybook -c node_modules/@kinvolk/headlamp-plugin/config/.storybook`;
+  return runScriptOnPackages(packageFolder, 'storybook-build', script);
 }
 
 /**
@@ -927,7 +910,8 @@ yargs(process.argv.slice(2))
   )
   .command(
     'storybook-build [package]',
-    'Build static storybook. <package> defaults to current working directory.',
+    'Build static storybook. <package> defaults to current working directory.' +
+      ' Can also be a folder of packages.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package to build storybook for',
