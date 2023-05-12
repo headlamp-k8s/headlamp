@@ -479,6 +479,17 @@ export function normalizeUnit(resourceType: string, quantity: string) {
   return normalizedQuantity;
 }
 
+/** Creates a unique ID, with the given prefix.
+ * If UNDER_TEST is set to true, it will return the same ID every time, so snapshots do not get invalidated.
+ */
+export function useId(prefix = '') {
+  const [id] = React.useState<string | undefined>(
+    process.env.UNDER_TEST === 'true' ? prefix + 'id' : prefix + Math.random().toString(16).slice(2)
+  );
+
+  return id;
+}
+
 // Make units available from here
 export * as auth from './auth';
 export * as units from './units';
