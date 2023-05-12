@@ -291,6 +291,84 @@ function start() {
 }
 
 /**
+ * Run script on a plugin package or folder of plugin packages.
+ *
+ * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @param scriptName {string} - name of the script to run.
+ * @param cmdLine {string} - command line to run.
+ * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
+ */
+function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
+  if (!fs.existsSync(packageFolder)) {
+    console.error(`"${packageFolder}" does not exist. Not ${scriptName}-ing.`);
+    return 1;
+  }
+
+  const oldCwd = process.cwd();
+
+  const runOnPackageReturn = {
+    success: 0,
+    notThere: 1,
+    issue: 2,
+  };
+
+  function runOnPackage(folder) {
+    if (!fs.existsSync(path.join(folder, 'package.json'))) {
+      return runOnPackageReturn.notThere;
+    }
+
+    process.chdir(folder);
+    console.log(`"${folder}": ${scriptName}-ing...`);
+
+    try {
+      child_process.execSync(cmdLine, {
+        stdio: 'inherit',
+        encoding: 'utf8',
+      });
+    } catch (e) {
+      console.error(`Problem running ${scriptName} inside of "${folder}"\r\n`);
+      process.chdir(oldCwd);
+      return runOnPackageReturn.issue;
+    }
+
+    console.log(`Done ${scriptName}-ing: "${folder}".\r\n`);
+    process.chdir(oldCwd);
+    return runOnPackageReturn.success;
+  }
+
+  function runOnFolderOfPackages(packageFolder) {
+    const folders = fs.readdirSync(packageFolder, { withFileTypes: true }).filter(fileName => {
+      return (
+        fileName.isDirectory() &&
+        fs.existsSync(path.join(packageFolder, fileName.name, 'package.json'))
+      );
+    });
+
+    folders.forEach(folder => {
+      const folderToLint = path.join(packageFolder, folder.name);
+      const err = runOnPackage(folderToLint);
+      if (err === 1) {
+        console.error(`"${folderToLint}" does not contain a package. Not ${scriptName}-ing.`);
+      }
+    });
+    return folders.length !== 0;
+  }
+
+  if (
+    !(
+      runOnPackage(packageFolder) !== runOnPackageReturn.notThere ||
+      runOnFolderOfPackages(packageFolder)
+    )
+  ) {
+    console.error(
+      `"${packageFolder}" does not contain a package or packages. Not ${scriptName}-ing.`
+    );
+  }
+
+  return 0;
+}
+
+/**
  * Build the plugin package or folder of packages for production.
  *
  * @param packageFolder {string} - folder where the package, or folder of packages is.
