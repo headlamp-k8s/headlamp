@@ -777,25 +777,8 @@ function storybook_build(packageFolder) {
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function test(packageFolder) {
-  try {
-    child_process.execSync(
-      './node_modules/.bin/react-scripts test --transformIgnorePatterns "/node_modules/(?!d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference|@kinvolk/headlamp-plugin)"',
-      {
-        stdio: 'inherit',
-        cwd: packageFolder,
-        encoding: 'utf8',
-      }
-    );
-  } catch (e) {
-    console.error(
-      `Problem running start-storybook inside of "${packageFolder}" abs: "${resolve(
-        packageFolder
-      )}"`
-    );
-    return 1;
-  }
-
-  return 0;
+  const script = `react-scripts test --transformIgnorePatterns "/node_modules/(?!d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference|@kinvolk/headlamp-plugin)"`;
+  return runScriptOnPackages(packageFolder, 'test', script);
 }
 
 yargs(process.argv.slice(2))
@@ -945,7 +928,7 @@ yargs(process.argv.slice(2))
   )
   .command(
     'test [package]',
-    'Test. <package> defaults to current working directory.',
+    'Test. <package> defaults to current working directory.' + ' Can also be a folder of packages.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package to test',
