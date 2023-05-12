@@ -1,5 +1,7 @@
 {
   "Cluster settings": "Configuración del cluster",
+  "View": "",
+  "Settings": "",
   "Plugins": "",
   "Enter a value between {{ minRows }} and {{ maxRows }}.": "Introduzca un valor entre {{ minRows }} y {{ maxRows }}.",
   "Custom row value": "Núm. de líneas personalizado",

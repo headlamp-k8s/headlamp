@@ -1,4 +1,7 @@
 {
+  "Home": "",
+  "All Clusters": "",
+  "Status": "Estado",
   "Cluster": "Cluster",
   "Memory": "Memória",
   "CPU": "CPU",
@@ -11,7 +14,6 @@
   "Namespace": "Namespace",
   "toggle field visibility": "alternar visibilidade do campo",
   "Condition": "Condição",
-  "Status": "Estado",
   "Last Transition": "Última Transição",
   "Last Update": "Última Actualização",
   "Container ID": "ID do Container",

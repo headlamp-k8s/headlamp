@@ -36,7 +36,7 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
                 >
                   <div
                     class="MuiListItemIcon-root makeStyles-icon"
-                    title="Cluster"
+                    title="Home"
                   >
                     <span />
                   </div>
@@ -200,7 +200,7 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
                     <span
                       class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                     >
-                      Cluster
+                      Home
                     </span>
                   </div>
                   <span

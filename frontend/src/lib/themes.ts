@@ -39,6 +39,9 @@ const commonRules = {
       light: orange['50'],
       ...orange,
     },
+    squareButton: {
+      background: '#f5f5f5',
+    },
     sidebarLink: {
       color: '#e7e7e7',
       main: {
@@ -64,6 +67,14 @@ const commonRules = {
       },
       hover: {
         background: '#3B3A39',
+      },
+    },
+    home: {
+      status: {
+        error: red['800'],
+        success: '#107C10',
+        warning: orange['50'],
+        unknown: grey['800'],
       },
     },
     sidebarBg: '#242424',
@@ -163,6 +174,9 @@ const darkTheme = createTheme({
       contrastText: '#fff',
       main: '#6CB6F2',
     },
+    squareButton: {
+      background: '#424242',
+    },
     primaryColor: '#fff',
     chartStyles: {
       defaultFillColor: 'rgba(20, 20, 20, 0.1)',
@@ -182,6 +196,14 @@ const darkTheme = createTheme({
     error: {
       main: red['800'],
       light: 'rgba(244, 67, 54, 0.2)',
+    },
+    home: {
+      status: {
+        error: '#E37D80',
+        success: '#54B054',
+        warning: '#FEEE66',
+        unknown: '#D6D6D6',
+      },
     },
     normalEventBg: '#333333',
     metadataBgColor: '#333',
