@@ -9,9 +9,9 @@ function prepareRoutes(
 ) {
   const homeItems: SidebarItemProps[] = [
     {
-      name: 'clusters',
-      icon: 'mdi:hexagon-multiple',
-      label: t('glossary|Cluster'),
+      name: 'home',
+      icon: 'mdi:home',
+      label: t('glossary|Home'),
       url: '/',
     },
     {

@@ -37,7 +37,7 @@ export function SectionBox(props: SectionBoxProps) {
       {actualBackLink !== undefined && <BackLink to={actualBackLink} />}
       <Box py={0} {...outterBoxProps}>
         {title && titleElem}
-        <Paper>
+        <Paper elevation={0}>
           <Box px={2} {...otherProps}>
             {React.Children.toArray(children)}
           </Box>

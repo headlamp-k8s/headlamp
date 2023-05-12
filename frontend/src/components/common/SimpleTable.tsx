@@ -1,5 +1,5 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Button, Grid, GridProps, IconButton } from '@material-ui/core';
+import { Button, Grid, GridProps, IconButton, Paper, TableContainer } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -32,8 +32,7 @@ const useTableStyle = makeStyles(theme => ({
       overflowX: 'auto', // make it responsive
     },
     '& .MuiTableCell-root': {
-      paddingLeft: '0',
-      fontSize: '1rem',
+      padding: '8px 24px 7px 16px',
     },
     '& .MuiTableBody-root': {
       '& .MuiTableRow-root:last-child': {
@@ -44,7 +43,8 @@ const useTableStyle = makeStyles(theme => ({
     },
     '& .MuiTableCell-head': {
       color: theme.palette.tables.headerText,
-      fontSize: '1.1rem',
+      backgroundColor: '#FAF9F8',
+      // fontSize: '1.1rem',
     },
   },
 }));
@@ -322,7 +322,7 @@ export default function SimpleTable(props: SimpleTableProps) {
   return !currentData || currentData.length === 0 ? (
     <Empty>{emptyMessage || t('No data to be shown.')}</Empty>
   ) : (
-    <React.Fragment>
+    <TableContainer component={Paper}>
       {
         // Show a refresh button if the data is not up to date, so we allow the user to keep
         // reading the current data without "losing" it or being sent to the first page
@@ -341,7 +341,7 @@ export default function SimpleTable(props: SimpleTableProps) {
           </Box>
         )
       }
-      <Table className={classes.table}>
+      <Table className={classes.table} size="small">
         {!noTableHeader && (
           <TableHead>
             <TableRow>
@@ -415,7 +415,7 @@ export default function SimpleTable(props: SimpleTableProps) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       )}
-    </React.Fragment>
+    </TableContainer>
   );
 }
 

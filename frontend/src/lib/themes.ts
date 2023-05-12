@@ -93,6 +93,9 @@ const commonRules = {
       headerText: '#474747',
     },
     notificationBorderColor: 'rgba(0,0,0,0.12)',
+    background: {
+      default: '#fff',
+    },
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', '),
@@ -102,7 +105,7 @@ const commonRules = {
     },
   },
   shape: {
-    borderRadius: 0,
+    borderRadius: 4,
   },
   overrides: {
     MuiTooltip: {
@@ -132,7 +135,7 @@ const darkTheme = createTheme({
       main: {
         selected: {
           color: '#000',
-          backgroundColor: '#fff',
+          backgroundColor: '#fff200',
         },
         color: '#fff',
       },
@@ -180,6 +183,7 @@ const darkTheme = createTheme({
     },
     notificationBorderColor: 'rgba(255,255,255,0.12)',
     type: 'dark',
+    background: {},
   },
   overrides: {
     MuiTooltip: {

@@ -196,6 +196,7 @@ export default function SidebarItem(props: SidebarItemProps) {
     fullURL = createRouteURL(routeName);
   }
 
+  // @todo cache this.
   function isSelected() {
     if (name === selectedName) {
       return true;
