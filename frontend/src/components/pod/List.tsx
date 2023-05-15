@@ -53,10 +53,11 @@ export interface PodListProps {
   error: ApiError | null;
   hideColumns?: ('namespace' | 'restarts')[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
+  noNamespaceFilter?: boolean;
 }
 
 export function PodListRenderer(props: PodListProps) {
-  const { pods, error, hideColumns = [], reflectTableInURL = 'pods' } = props;
+  const { pods, error, hideColumns = [], reflectTableInURL = 'pods', noNamespaceFilter } = props;
   const { t } = useTranslation('glossary');
 
   function getDataCols() {
@@ -116,7 +117,9 @@ export function PodListRenderer(props: PodListProps) {
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Pods')} />}>
+    <SectionBox
+      title={<SectionFilterHeader title={t('Pods')} noNamespaceFilter={noNamespaceFilter} />}
+    >
       <ResourceTable
         errorMessage={Pod.getErrorMessage(error)}
         columns={getDataCols()}
