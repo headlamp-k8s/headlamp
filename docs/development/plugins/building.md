@@ -200,10 +200,10 @@ A workflow for testing your plugin on github with actions.
 
 Below is based on the [Building and testing Node.js](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs) docs from GitHub.
 
-Place this in a file named something like `.github/workflows/myplugin.yaml` in the root of your repo.
+Place this in a file named something like `.github/workflows/headlamp-plugin-github-workflow.yaml` in the root of your repo.
 
 ```yaml
-name: Node.js CI
+name: Headlamp plugin linting, type checking, and testing
 
 on:
   push:
@@ -218,11 +218,11 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./your-plugin-folder
+        working-directory: ./your-folder-of-plugins
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -230,11 +230,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm run lint
-      - run: npm run format
-      - run: npm run tsc
-      - run: npm run test
+      - run: npx @kinvolk/headlamp-plugin lint .
+      - run: npx @kinvolk/headlamp-plugin format --check .
+      - run: npx @kinvolk/headlamp-plugin tsc .
+      - run: npx @kinvolk/headlamp-plugin test .
 ```
 
 Please see the github documentation for further details on workflows and actions.
