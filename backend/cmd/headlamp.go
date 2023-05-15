@@ -72,6 +72,8 @@ const (
 	STOPPED = "Stopped"
 )
 
+const isWindows = runtime.GOOS == "windows"
+
 type PortForward struct {
 	ID               string `json:"id"`
 	closeChan        chan struct{}
@@ -192,22 +194,15 @@ func getPortForwardByID(cluster string, id string) PortForward {
 }
 
 func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	// get the absolute path to prevent directory traversal
-	path, err := filepath.Abs(r.URL.Path)
-	if err != nil {
-		// if we failed to get the absolute path respond with a 400 bad request
-		// and stop
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
+	// Clean the path to prevent directory traversal
+	path := filepath.Clean(r.URL.Path)
 	path = strings.TrimPrefix(path, h.baseURL)
 
 	// prepend the path with the path to the static directory
 	path = filepath.Join(h.staticPath, path)
 
 	// check whether a file exists at the given path
-	_, err = os.Stat(path)
+	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
 		// file does not exist, serve index.html
 		http.ServeFile(w, r, filepath.Join(h.staticPath, h.indexPath))
@@ -364,7 +359,7 @@ func defaultKubeConfigPersistenceDir() (string, error) {
 	userConfigDir, err := os.UserConfigDir()
 	if err == nil {
 		kubeConfigDir := filepath.Join(userConfigDir, "Headlamp", "kubeconfigs")
-		if runtime.GOOS == "windows" {
+		if isWindows {
 			// golang is wrong for config folder on windows.
 			// This matches env-paths and headlamp-plugin.
 			kubeConfigDir = filepath.Join(userConfigDir, "Headlamp", "Config", "kubeconfigs")
@@ -825,7 +820,16 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 
 	// Serve the frontend if needed
 	if config.staticDir != "" {
-		spa := spaHandler{staticPath: config.staticDir, indexPath: "index.html", baseURL: config.baseURL}
+		staticPath := config.staticDir
+
+		if isWindows {
+			// We support unix paths on windows. So "frontend/static" works.
+			if strings.Contains(config.staticDir, "/") {
+				staticPath = filepath.FromSlash(config.staticDir)
+			}
+		}
+
+		spa := spaHandler{staticPath: staticPath, indexPath: "index.html", baseURL: config.baseURL}
 		r.PathPrefix("/").Handler(spa)
 
 		http.Handle("/", r)
