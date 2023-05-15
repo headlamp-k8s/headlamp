@@ -1,5 +1,5 @@
 import { OpPatch } from 'json-patch';
-import { unset } from 'lodash';
+import { cloneDeep, unset } from 'lodash';
 import React from 'react';
 import helpers from '../../helpers';
 import { createRouteURL } from '../router';
@@ -264,7 +264,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       }
 
       const listCalls = [];
-      const queryParams = opts;
+      const queryParams = cloneDeep(opts);
       let namespaces: string[] = [];
       unset(queryParams, 'namespace');
 
