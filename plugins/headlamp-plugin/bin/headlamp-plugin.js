@@ -732,6 +732,17 @@ function lint(packageFolder, fix) {
 }
 
 /**
+ * Type check code with tsc. Type check the plugin package or folder of packages.
+ *
+ * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
+ */
+function tsc(packageFolder) {
+  const script = 'node_modules/.bin/tsc --noEmit';
+  return runScriptOnPackages(packageFolder, 'lint', script);
+}
+
+/**
  * Start storybook.
  *
  * @param packageFolder {string} - folder where the package is.
@@ -875,6 +886,22 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = lint(argv.package, argv.fix);
+    }
+  )
+  .command(
+    'tsc [package]',
+    'Type check the plugin for coding issues with tsc. ' +
+      '<package> defaults to current working directory.' +
+      ' Can also be a folder of packages.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to type check',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = tsc(argv.package);
     }
   )
   .command(
