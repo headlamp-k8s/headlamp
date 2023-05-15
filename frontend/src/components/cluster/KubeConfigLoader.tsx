@@ -65,7 +65,7 @@ function configWithSelectedClusters(config: kubeconfig, selectedClusters: string
     clusters[cluster.name] = cluster;
 
     // Optionally add the user.
-    const user = config.users.find(c => c.name === context.context.user);
+    const user = config.users?.find(c => c.name === context.context.user);
     if (!!user) {
       users[user.name] = user;
     }
@@ -201,6 +201,9 @@ function KubeConfigLoader() {
           ...new Uint8Array(reader.result as ArrayBuffer),
         ]);
         const doc = yaml.load(data) as kubeconfig;
+        if (!doc.clusters || !doc.contexts) {
+          throw new Error('Invalid kubeconfig file');
+        }
         setFileContent(doc);
       } catch (err) {
         setError(t('cluster|Load a valid kubeconfig'));
