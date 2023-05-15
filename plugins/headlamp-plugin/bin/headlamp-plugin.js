@@ -427,10 +427,13 @@ function build(packageFolder) {
  * Format plugin code with prettier. Format the plugin package or folder of packages.
  *
  * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @param check {boolean} - if true, check if the code is checked for formatting, but don't format it.
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
-function format(packageFolder) {
-  const cmdLine = 'node_modules/.bin/prettier --config package.json --write src';
+function format(packageFolder, check) {
+  const cmdLine = check
+    ? `node_modules/.bin/prettier --config package.json --check src`
+    : 'node_modules/.bin/prettier --config package.json --write src';
   return runScriptOnPackages(packageFolder, 'format', cmdLine);
 }
 
@@ -857,14 +860,19 @@ yargs(process.argv.slice(2))
     'format the plugin code with prettier. <package> defaults to current working directory.' +
       ' Can also be a folder of packages.',
     yargs => {
-      yargs.positional('package', {
-        describe: 'Package to code format',
-        type: 'string',
-        default: '.',
-      });
+      yargs
+        .positional('package', {
+          describe: 'Package to code format',
+          type: 'string',
+          default: '.',
+        })
+        .option('check', {
+          describe: 'Check the formatting without changing files',
+          type: 'boolean',
+        });
     },
     argv => {
-      process.exitCode = format(argv.package);
+      process.exitCode = format(argv.package, argv.check);
     }
   )
   .command(
