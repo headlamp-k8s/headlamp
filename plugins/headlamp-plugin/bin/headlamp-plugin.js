@@ -320,6 +320,22 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
     process.chdir(folder);
     console.log(`"${folder}": ${scriptName}-ing...`);
 
+    // See if the cmd is in the node_modules/.bin, or ../node_modules/.bin.
+    // If not, just use the original cmdLine and hope for the best.
+    let cmdLineToUse = cmdLine;
+    const scriptCmd = cmdLine.split(' ')[0];
+    const nodeModulesBinCmd = path.join('node_modules', '.bin', scriptCmd);
+    const upNodeModulesBinCmd = path.join('../', nodeModulesBinCmd);
+    if (fs.existsSync(nodeModulesBinCmd)) {
+      cmdLineToUse = nodeModulesBinCmd;
+    } else if (fs.existsSync(upNodeModulesBinCmd)) {
+      cmdLineToUse = upNodeModulesBinCmd;
+    } else {
+      console.warn(
+        `"${scriptCmd}" not found in "${nodeModulesBinCmd}" or "${upNodeModulesBinCmd}".`
+      );
+    }
+
     try {
       child_process.execSync(cmdLine, {
         stdio: 'inherit',
@@ -432,8 +448,8 @@ function build(packageFolder) {
  */
 function format(packageFolder, check) {
   const cmdLine = check
-    ? `node_modules/.bin/prettier --config package.json --check src`
-    : 'node_modules/.bin/prettier --config package.json --write src';
+    ? `prettier --config package.json --check src`
+    : 'prettier --config package.json --write src';
   return runScriptOnPackages(packageFolder, 'format', cmdLine);
 }
 
@@ -741,8 +757,8 @@ function lint(packageFolder, fix) {
  * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
  */
 function tsc(packageFolder) {
-  const script = 'node_modules/.bin/tsc --noEmit';
-  return runScriptOnPackages(packageFolder, 'lint', script);
+  const script = 'tsc --noEmit';
+  return runScriptOnPackages(packageFolder, 'tsc', script);
 }
 
 /**
