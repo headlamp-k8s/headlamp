@@ -58,7 +58,7 @@ func checkRepoExists(t *testing.T, helmHandler *helm.Handler, repoName string) b
 }
 
 //nolint:unparam
-func testAddRepo(t *testing.T, helmHandler *helm.Handler, repoName string, repoURL string) {
+func testAddRepo(t *testing.T, helmHandler *helm.Handler, repoName, repoURL string) {
 	t.Helper()
 
 	// add headlmap repo
