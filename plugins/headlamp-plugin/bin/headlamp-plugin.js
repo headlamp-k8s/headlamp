@@ -840,6 +840,9 @@ function test(packageFolder) {
   return runScriptOnPackages(packageFolder, 'test', script);
 }
 
+const headlampPluginBin = fs.realpathSync(process.argv[1]);
+console.log('headlampPluginBin', headlampPluginBin);
+
 yargs(process.argv.slice(2))
   .command(
     'build [package]',
