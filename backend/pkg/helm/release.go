@@ -118,7 +118,7 @@ func (h *Handler) ListRelease(w http.ResponseWriter, r *http.Request) {
 
 	err := decoder.Decode(&req, r.URL.Query())
 	if err != nil {
-		zlog.Error().Err(err).Str("request", "list_releases").Msg("Failed to parse request")
+		zlog.Error().Err(err).Str("request", "list_releases").Msg("parsing request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -126,7 +126,7 @@ func (h *Handler) ListRelease(w http.ResponseWriter, r *http.Request) {
 
 	releases, err := getReleases(req, h.Configuration)
 	if err != nil {
-		zlog.Error().Err(err).Str("request", "list_releases").Msg("Failed to list releases")
+		zlog.Error().Err(err).Str("request", "list_releases").Msg("fetching releases")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -139,7 +139,7 @@ func (h *Handler) ListRelease(w http.ResponseWriter, r *http.Request) {
 	err = json.NewEncoder(w).Encode(res)
 
 	if err != nil {
-		zlog.Error().Err(err).Str("request", "list_releases").Msg("Failed to encode response")
+		zlog.Error().Err(err).Str("request", "list_releases").Msg("encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -161,7 +161,7 @@ func (h *Handler) GetRelease(w http.ResponseWriter, r *http.Request) {
 
 	err := decoder.Decode(&req, r.URL.Query())
 	if err != nil {
-		zlog.Error().Err(err).Str("request", "get_release").Msg("failed to parse request")
+		zlog.Error().Err(err).Str("request", "get_release").Msg("parsing request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -181,7 +181,7 @@ func (h *Handler) GetRelease(w http.ResponseWriter, r *http.Request) {
 
 	result, err := getClient.Run(req.Name)
 	if err != nil {
-		zlog.Error().Err(err).Str("request", "get_release").Str("releaseName", req.Name).Msg("failed to get release")
+		zlog.Error().Err(err).Str("request", "get_release").Str("releaseName", req.Name).Msg("getting release")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -191,7 +191,7 @@ func (h *Handler) GetRelease(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewEncoder(w).Encode(result)
 	if err != nil {
-		zlog.Error().Err(err).Str("request", "get_release").Str("releaseName", req.Name).Msg("failed to encode response")
+		zlog.Error().Err(err).Str("request", "get_release").Str("releaseName", req.Name).Msg("encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -242,7 +242,7 @@ func (h *Handler) GetReleaseHistory(w http.ResponseWriter, r *http.Request) {
 			Err(err).
 			Str("request", "get_release_history").
 			Str("releaseName", req.Name).
-			Msg("failed to get release history")
+			Msg("getting release history")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -262,7 +262,7 @@ func (h *Handler) GetReleaseHistory(w http.ResponseWriter, r *http.Request) {
 			Err(err).
 			Str("request", "get_release_history").
 			Str("releaseName", req.Name).
-			Msg("failed to encode response")
+			Msg("encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -284,7 +284,7 @@ func (h *Handler) UninstallRelease(w http.ResponseWriter, r *http.Request) {
 
 	err := decoder.Decode(&req, r.URL.Query())
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "uninstall").Msg("failed to parse request")
+		zlog.Error().Err(err).Str("action", "uninstall").Msg("parsing request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -302,7 +302,7 @@ func (h *Handler) UninstallRelease(w http.ResponseWriter, r *http.Request) {
 
 	err = h.setReleaseStatus("uninstall", req.Name, processing, nil)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "uninstall").Msg("failed to set status")
+		zlog.Error().Err(err).Str("action", "uninstall").Msg("setting status")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
@@ -319,7 +319,7 @@ func (h *Handler) UninstallRelease(w http.ResponseWriter, r *http.Request) {
 	err = json.NewEncoder(w).Encode(response)
 
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "uninstall").Msg("failed to encode response")
+		zlog.Error().Err(err).Str("action", "uninstall").Msg("encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -336,7 +336,7 @@ func (h *Handler) uninstallRelease(req UninstallReleaseRequest) {
 
 	_, err := uninstallClient.Run(req.Name)
 	if err != nil {
-		zlog.Error().Err(err).Str("releaseName", req.Name).Str("namespace", req.Namespace).Msg("failed to uninstall release")
+		zlog.Error().Err(err).Str("releaseName", req.Name).Str("namespace", req.Namespace).Msg("uninstalling release")
 
 		status = failed
 	}
@@ -361,7 +361,7 @@ func (h *Handler) RollbackRelease(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "rollback").Msg("failed to parse request body")
+		zlog.Error().Err(err).Str("action", "rollback").Msg("parsing request body")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -369,7 +369,7 @@ func (h *Handler) RollbackRelease(w http.ResponseWriter, r *http.Request) {
 
 	err = req.Validate()
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "rollback").Msg("failed to validate request body")
+		zlog.Error().Err(err).Str("action", "rollback").Msg("validating request body")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -387,7 +387,7 @@ func (h *Handler) RollbackRelease(w http.ResponseWriter, r *http.Request) {
 
 	err = h.setReleaseStatus("rollback", req.Name, processing, nil)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "rollback").Msg("failed to set status")
+		zlog.Error().Err(err).Str("action", "rollback").Msg("setting status")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
@@ -403,7 +403,7 @@ func (h *Handler) RollbackRelease(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "rollback").Msg("failed to encode response")
+		zlog.Error().Err(err).Str("action", "rollback").Msg("encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -420,7 +420,7 @@ func (h *Handler) rollbackRelease(req RollbackReleaseRequest) {
 
 	err := rollbackClient.Run(req.Name)
 	if err != nil {
-		zlog.Error().Err(err).Str("releaseName", req.Name).Msg("failed to rollback release")
+		zlog.Error().Err(err).Str("releaseName", req.Name).Msg("rollback release")
 
 		status = failed
 	}
@@ -454,7 +454,7 @@ func (h *Handler) InstallRelease(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "install").Msg("failed to parse request body")
+		zlog.Error().Err(err).Str("action", "install").Msg("parsing request body")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -468,7 +468,7 @@ func (h *Handler) InstallRelease(w http.ResponseWriter, r *http.Request) {
 
 	err = h.setReleaseStatus("install", req.Name, processing, nil)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "install").Msg("failed to set status")
+		zlog.Error().Err(err).Str("action", "install").Msg("setting status")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
@@ -486,7 +486,7 @@ func (h *Handler) InstallRelease(w http.ResponseWriter, r *http.Request) {
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
 		zlog.Error().Err(err).Str("releaseName", req.Name).
-			Str("action", "install").Str("chart", req.Chart).Str("action", "install").Msg("failed to encode response")
+			Str("action", "install").Str("chart", req.Chart).Str("action", "install").Msg("encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -507,14 +507,14 @@ func (h *Handler) getChart(
 	// locate chart
 	chartPath, err := chartPathOptions.LocateChart(reqChart, settings)
 	if err != nil {
-		h.logActionState(zlog.Error(), err, actionName, reqChart, reqName, failed, "failed to locate chart")
+		h.logActionState(zlog.Error(), err, actionName, reqChart, reqName, failed, "locating chart")
 		return nil, err
 	}
 
 	// load chart
 	chart, err := loader.Load(chartPath)
 	if err != nil {
-		h.logActionState(zlog.Error(), err, actionName, reqChart, reqName, failed, "failed to load chart")
+		h.logActionState(zlog.Error(), err, actionName, reqChart, reqName, failed, "loading chart")
 		return nil, err
 	}
 
@@ -539,7 +539,7 @@ func (h *Handler) getChart(
 
 			err = manager.Update()
 			if err != nil {
-				h.logActionState(zlog.Error(), err, actionName, reqChart, reqName, failed, "failed to update dependencies")
+				h.logActionState(zlog.Error(), err, actionName, reqChart, reqName, failed, "updating dependencies")
 				return nil, err
 			}
 		}
@@ -560,17 +560,14 @@ func (h *Handler) installRelease(req InstallRequest) {
 	chart, err := h.getChart("install", req.Chart, req.Name,
 		installClient.ChartPathOptions, req.DependencyUpdate, h.EnvSettings)
 	if err != nil {
+		zlog.Error().Err(err).Str("chart", req.Chart).
+			Str("action", "install").Str("releaseName", req.Name).
+			Msg("getting chart")
+
 		return
 	}
 
 	values := make(map[string]interface{})
-
-	if err != nil {
-		zlog.Error().Err(err).Str("chart", req.Chart).
-			Str("action", "install").Str("releaseName", req.Name).Msg("failed to decode values")
-
-		return
-	}
 
 	decodedBytes, err := base64.StdEncoding.DecodeString(req.Values)
 	if err != nil {
@@ -627,7 +624,7 @@ func (h *Handler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		zlog.Error().Err(err).Str("releaseName", req.Name).
-			Str("action", "upgrade").Msg("failed to parse request for upgrade release")
+			Str("action", "upgrade").Msg("parsing request for upgrade release")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -636,7 +633,7 @@ func (h *Handler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 	err = req.Validate()
 	if err != nil {
 		zlog.Error().Err(err).Str("releaseName", req.Name).
-			Str("action", "upgrade").Msg("failed to validate request for upgrade release")
+			Str("action", "upgrade").Msg("validating request for upgrade release")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -654,7 +651,7 @@ func (h *Handler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 
 	err = h.setReleaseStatus("upgrade", req.Name, processing, nil)
 	if err != nil {
-		zlog.Error().Err(err).Str("releaseName", req.Name).Str("action", "upgrade").Msg("failed to set status")
+		zlog.Error().Err(err).Str("releaseName", req.Name).Str("action", "upgrade").Msg("setting status")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
@@ -672,7 +669,7 @@ func (h *Handler) UpgradeRelease(w http.ResponseWriter, r *http.Request) {
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
 		zlog.Error().Err(err).Str("releaseName", req.Name).
-			Str("action", "upgrade").Str("chart", req.Chart).Msg("failed to encode response")
+			Str("action", "upgrade").Str("chart", req.Chart).Msg("encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -761,7 +758,7 @@ func (h *Handler) GetActionStatus(w http.ResponseWriter, r *http.Request) {
 
 	err := schema.NewDecoder().Decode(&request, r.URL.Query())
 	if err != nil {
-		zlog.Error().Err(err).Msg("failed to parse request for status")
+		zlog.Error().Err(err).Msg("parsing request for status")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -769,7 +766,7 @@ func (h *Handler) GetActionStatus(w http.ResponseWriter, r *http.Request) {
 
 	err = request.Validate()
 	if err != nil {
-		zlog.Error().Err(err).Msg("failed to validate request for status")
+		zlog.Error().Err(err).Msg("validating request for status")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
@@ -777,7 +774,7 @@ func (h *Handler) GetActionStatus(w http.ResponseWriter, r *http.Request) {
 
 	stat, err := h.getReleaseStatus(request.Action, request.Name)
 	if err != nil {
-		zlog.Error().Err(err).Msg("failed to get status")
+		zlog.Error().Err(err).Msg("getting status")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -799,7 +796,7 @@ func (h *Handler) GetActionStatus(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
-		zlog.Error().Err(err).Msg("failed to encode response")
+		zlog.Error().Err(err).Msg("encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
