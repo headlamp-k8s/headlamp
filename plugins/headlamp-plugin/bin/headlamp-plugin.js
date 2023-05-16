@@ -332,12 +332,14 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
       cmdLineToUse = upNodeModulesBinCmd;
     } else {
       console.warn(
-        `"${scriptCmd}" not found in "${nodeModulesBinCmd}" or "${upNodeModulesBinCmd}".`
+        `"${scriptCmd}" not found in "${resolve(nodeModulesBinCmd)}" or "${resolve(
+          upNodeModulesBinCmd
+        )}".`
       );
     }
 
     try {
-      child_process.execSync(cmdLine, {
+      child_process.execSync(cmdLineToUse, {
         stdio: 'inherit',
         encoding: 'utf8',
       });
@@ -360,28 +362,55 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
       );
     });
 
-    folders.forEach(folder => {
-      const folderToLint = path.join(packageFolder, folder.name);
-      const err = runOnPackage(folderToLint);
-      if (err === 1) {
-        console.error(`"${folderToLint}" does not contain a package. Not ${scriptName}-ing.`);
-      }
+    if (folders.length === 0) {
+      return {
+        error: runOnPackageReturn.notThere,
+        failedFolders: [],
+      };
+    }
+
+    const errorFolders = folders.map(folder => {
+      const folderToProcess = path.join(packageFolder, folder.name);
+      return {
+        error: runOnPackage(folderToProcess),
+        folder: folderToProcess,
+      };
     });
-    return folders.length !== 0;
-  }
-
-  if (
-    !(
-      runOnPackage(packageFolder) !== runOnPackageReturn.notThere ||
-      runOnFolderOfPackages(packageFolder)
-    )
-  ) {
-    console.error(
-      `"${packageFolder}" does not contain a package or packages. Not ${scriptName}-ing.`
+    const failedErrorFolders = errorFolders.filter(
+      errFolder => errFolder.error !== runOnPackageReturn.success
     );
+
+    if (failedErrorFolders.length === 0) {
+      return {
+        error: runOnPackageReturn.success,
+        failedFolders: [],
+      };
+    }
+    return {
+      error: runOnPackageReturn.issue,
+      failedFolders: failedErrorFolders.map(errFolder => path.basename(errFolder.folder)),
+    };
   }
 
-  return 0;
+  const err = runOnPackage(packageFolder);
+  if (err === runOnPackageReturn.notThere) {
+    const folderErr = runOnFolderOfPackages(packageFolder);
+    if (folderErr.error === runOnPackageReturn.notThere) {
+      console.error(
+        `"${resolve(packageFolder)}" does not contain a package or packages. Not ${scriptName}-ing.`
+      );
+      return 1; // failed
+    } else if (folderErr.error === runOnPackageReturn.issue) {
+      console.error(
+        `Some in "${resolve(packageFolder)}" failed. Failed folders: ${folderErr.failedFolders.join(
+          ', '
+        )}`
+      );
+      return 1; // failed
+    }
+  }
+
+  return 0; // success
 }
 
 /**
