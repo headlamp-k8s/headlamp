@@ -320,21 +320,38 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
     process.chdir(folder);
     console.log(`"${folder}": ${scriptName}-ing...`);
 
-    // See if the cmd is in the node_modules/.bin, or ../node_modules/.bin.
-    // If not, just use the original cmdLine and hope for the best.
+    // See if the cmd is in the:
+    // - package/node_modules/.bin
+    // - package/../node_modules/.bin
+    // - the npx node_modules/.bin
+    // If not, just use the original cmdLine and hope for the best :)
     let cmdLineToUse = cmdLine;
     const scriptCmd = cmdLine.split(' ')[0];
     const nodeModulesBinCmd = path.join('node_modules', '.bin', scriptCmd);
     const upNodeModulesBinCmd = path.join('../', nodeModulesBinCmd);
+
+    // When run as npx, find it in the node_modules npx uses
+    const headlampPluginBin = fs.realpathSync(process.argv[1]);
+    const npxBinCmd = path.join(
+      path.dirname(headlampPluginBin),
+      '..',
+      '..',
+      '..',
+      '..',
+      nodeModulesBinCmd
+    );
+
     if (fs.existsSync(nodeModulesBinCmd)) {
       cmdLineToUse = nodeModulesBinCmd;
     } else if (fs.existsSync(upNodeModulesBinCmd)) {
       cmdLineToUse = upNodeModulesBinCmd;
+    } else if (fs.existsSync(npxBinCmd)) {
+      cmdLineToUse = npxBinCmd;
     } else {
       console.warn(
         `"${scriptCmd}" not found in "${resolve(nodeModulesBinCmd)}" or "${resolve(
           upNodeModulesBinCmd
-        )}".`
+        )}" or "${resolve(npxBinCmd)}".`
       );
     }
 
@@ -841,7 +858,7 @@ function test(packageFolder) {
 }
 
 const headlampPluginBin = fs.realpathSync(process.argv[1]);
-console.log('headlampPluginBin', headlampPluginBin);
+console.log('headlampPluginBin path:', headlampPluginBin);
 
 yargs(process.argv.slice(2))
   .command(
