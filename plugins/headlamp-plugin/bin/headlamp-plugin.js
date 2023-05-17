@@ -342,6 +342,8 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
     // If not, just use the original cmdLine and hope for the best :)
     let cmdLineToUse = cmdLine;
     const scriptCmd = cmdLine.split(' ')[0];
+    const scriptCmdRest = cmdLine.split(' ').slice(1).join(' ');
+
     const nodeModulesBinCmd = path.join('node_modules', '.bin', scriptCmd);
     const upNodeModulesBinCmd = path.join('../', nodeModulesBinCmd);
 
@@ -357,11 +359,11 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
     );
 
     if (fs.existsSync(nodeModulesBinCmd)) {
-      cmdLineToUse = nodeModulesBinCmd;
+      cmdLineToUse = nodeModulesBinCmd + ' ' + scriptCmdRest;
     } else if (fs.existsSync(upNodeModulesBinCmd)) {
-      cmdLineToUse = upNodeModulesBinCmd;
+      cmdLineToUse = upNodeModulesBinCmd + ' ' + scriptCmdRest;
     } else if (fs.existsSync(npxBinCmd)) {
-      cmdLineToUse = npxBinCmd;
+      cmdLineToUse = npxBinCmd + ' ' + scriptCmdRest;
     } else {
       console.warn(
         `"${scriptCmd}" not found in "${resolve(nodeModulesBinCmd)}" or "${resolve(
@@ -370,7 +372,7 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
       );
     }
 
-    console.log(`"${folder}": ${scriptName}-ing...`);
+    console.log(`"${folder}": ${scriptName}-ing, :${cmdLineToUse}:...`);
 
     try {
       child_process.execSync(cmdLineToUse, {
