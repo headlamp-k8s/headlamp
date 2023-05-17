@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 )
 
 func main() {
@@ -13,6 +14,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error fetching config:%v", err)
 	}
+
+	kubeConfigStore := kubeconfig.NewContextStore()
 
 	StartHeadlampServer(&HeadlampConfig{
 		useInCluster:          conf.InCluster,
@@ -30,5 +33,6 @@ func main() {
 		proxyURLs:             strings.Split(conf.ProxyURLs, ","),
 		enableHelm:            conf.EnableHelm,
 		enableDynamicClusters: conf.EnableDynamicClusters,
+		kubeConfigStore:       kubeConfigStore,
 	})
 }

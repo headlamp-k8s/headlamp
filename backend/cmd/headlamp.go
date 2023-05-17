@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"context"
-	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
 	"errors"
@@ -13,10 +12,8 @@ import (
 	"log"
 	"net"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"os"
-	"os/user"
 	"path"
 	"path/filepath"
 	"runtime"
@@ -25,18 +22,15 @@ import (
 	"syscall"
 	"time"
 
-	oidc "github.com/coreos/go-oidc"
 	"github.com/gobwas/glob"
 	"github.com/google/uuid"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/helm"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
-	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 	"k8s.io/client-go/tools/portforward"
 	"k8s.io/client-go/transport/spdy"
 
@@ -60,9 +54,8 @@ type HeadlampConfig struct {
 	oidcIdpIssuerURL      string
 	baseURL               string
 	oidcScopes            []string
-	// Holds: context-name -> (context, reverse-proxy)
-	contextProxies map[string]contextProxy
-	proxyURLs      []string
+	proxyURLs             []string
+	kubeConfigStore       kubeconfig.ContextStore
 }
 
 const PodAvailabilityCheckTimer = 5 // seconds
@@ -125,12 +118,6 @@ func configSourceToString(source int) string {
 	default:
 		return "unknown"
 	}
-}
-
-type contextProxy struct {
-	context *Context
-	proxy   *httputil.ReverseProxy
-	source  int // Source indicates if contextProxy is configured from kubeconfig or dynamic cluster or incluster.
 }
 
 var pluginListURLs []string
@@ -332,32 +319,6 @@ func serveWithNoCacheHeader(fs http.Handler) http.HandlerFunc {
 	}
 }
 
-func setupProxyForContext(context *Context, config *HeadlampConfig, source int) error {
-	proxy, err := config.createProxyForContext(*context)
-	if err != nil {
-		log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
-		return err
-	}
-
-	_, isReplacement := config.contextProxies[context.Name]
-	if isReplacement {
-		fmt.Printf("Replaced cluster \"%s\" proxy by:\n", context.Name)
-	} else {
-		fmt.Println("Created new cluster proxy:")
-	}
-
-	fmt.Printf("\tlocalhost:%d%s%s/{api...} -> %s\n", config.port, config.baseURL, "/clusters/"+context.Name,
-		*context.cluster.getServer())
-
-	config.contextProxies[context.Name] = contextProxy{
-		context,
-		proxy,
-		source,
-	}
-
-	return nil
-}
-
 // defaultKubeConfigPersistenceDir returns the default directory to store kubeconfig
 // files of clusters that are loaded in Headlamp.
 func defaultKubeConfigPersistenceDir() (string, error) {
@@ -410,29 +371,19 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		// in-cluster mode is unlikely to want reloading plugins.
 		go watchForChanges(config.pluginDir)
 		// in-cluster mode is unlikely to want reloading kubeconfig.
-		go watchForKubeConfigChanges(config)
+		go kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPath)
 	}
-
-	var contexts []Context
-
-	config.contextProxies = make(map[string]contextProxy)
 
 	// In-cluster
 	if config.useInCluster {
-		context, err := GetOwnContext(config)
+		context, err := kubeconfig.GetInClusterContext()
 		if err != nil {
 			log.Println("Failed to get in-cluster config", err)
 		}
 
-		proxy, err := config.createProxyForContext(*context)
+		err = config.kubeConfigStore.AddContext(context)
 		if err != nil {
-			log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
-		}
-
-		config.contextProxies[context.Name] = contextProxy{
-			context,
-			proxy,
-			InCluster,
+			log.Println("Failed to add in-cluster context", err)
 		}
 	}
 
@@ -452,42 +403,22 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	fmt.Println("*** Headlamp Server ***")
 	fmt.Println("  API Routers:")
 
-	// KubeConfig clusters
-	contexts = append(contexts, getContextFromKubeConfigs(kubeConfigPath)...)
-	if len(contexts) == 0 {
-		log.Println("No contexts/clusters configured by default!")
-	} else {
-		for _, context := range contexts {
-			context := context
-			err := setupProxyForContext(&context, config, KubeConfig)
-			if err != nil {
-				log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
-			}
-		}
+	// load kubeConfig clusters
+	err := kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPath)
+	if err != nil {
+		log.Printf("Error loading kubeconfig: %v", err)
 	}
 
-	// Dynamic clusters
-	var dynamicContexts []Context
+	// load dynamic clusters
 
 	kubeConfigPersistenceFile, err := defaultKubeConfigPersistenceFile()
 	if err != nil {
 		log.Printf("Error getting default kubeconfig persistence directory: %v", err)
 	}
 
-	if kubeConfigPersistenceFile != "" {
-		dynamicContexts = append(dynamicContexts, getContextFromKubeConfigs(kubeConfigPersistenceFile)...)
-
-		if len(contexts) == 0 {
-			log.Println("No contexts/clusters configured from config!")
-		} else {
-			for _, dynamicContext := range dynamicContexts {
-				context := dynamicContext
-				err := setupProxyForContext(&context, config, DynamicCluster)
-				if err != nil {
-					log.Printf("Error setting up proxy for context %s: %s\n", context.Name, err)
-				}
-			}
-		}
+	err = kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPersistenceFile)
+	if err != nil {
+		log.Printf("Error loading dynamic kubeconfig file: %v", err)
 	}
 
 	addPluginRoutes(config, r)
@@ -574,47 +505,47 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	oauthRequestMap := make(map[string]*OauthConfig)
 
 	r.HandleFunc("/oidc", func(w http.ResponseWriter, r *http.Request) {
-		ctx := context.Background()
-		cluster := r.URL.Query().Get("cluster")
-		if config.insecure {
-			tr := &http.Transport{
-				TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, //nolint:gosec
-			}
-			insecureClient := &http.Client{Transport: tr}
-			ctx = oidc.ClientContext(ctx, insecureClient)
-		}
+		// ctx := context.Background()
+		// cluster := r.URL.Query().Get("cluster")
+		// if config.insecure {
+		// 	tr := &http.Transport{
+		// 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, //nolint:gosec
+		// 	}
+		// 	insecureClient := &http.Client{Transport: tr}
+		// 	ctx = oidc.ClientContext(ctx, insecureClient)
+		// }
 
-		oidcAuthConfig, err := GetClusterOidcConfig(cluster)
-		if err != nil {
-			log.Printf("Error getting %s cluster oidc config %s", cluster, err)
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		provider, err := oidc.NewProvider(ctx, oidcAuthConfig.IdpIssuerURL)
-		if err != nil {
-			log.Printf("Error while fetching the provider from %s error %s", oidcAuthConfig.IdpIssuerURL, err)
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
+		// oidcAuthConfig, err := GetClusterOidcConfig(cluster)
+		// if err != nil {
+		// 	log.Printf("Error getting %s cluster oidc config %s", cluster, err)
+		// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+		// 	return
+		// }
+		// provider, err := oidc.NewProvider(ctx, oidcAuthConfig.IdpIssuerURL)
+		// if err != nil {
+		// 	log.Printf("Error while fetching the provider from %s error %s", oidcAuthConfig.IdpIssuerURL, err)
+		// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+		// 	return
+		// }
 
-		oidcConfig := &oidc.Config{
-			ClientID: oidcAuthConfig.ClientID,
-		}
+		// oidcConfig := &oidc.Config{
+		// 	ClientID: oidcAuthConfig.ClientID,
+		// }
 
-		verifier := provider.Verifier(oidcConfig)
-		oauthConfig := &oauth2.Config{
-			ClientID:     oidcAuthConfig.ClientID,
-			ClientSecret: oidcAuthConfig.ClientSecret,
-			Endpoint:     provider.Endpoint(),
-			RedirectURL:  getOidcCallbackURL(r, config),
-			Scopes:       append([]string{oidc.ScopeOpenID}, oidcAuthConfig.Scopes...),
-		}
-		/* we encode the cluster to base64 and set it as state so that when getting redirected
-		by oidc we can use this state value to get cluster name
-		*/
-		state := base64.StdEncoding.EncodeToString([]byte(cluster))
-		oauthRequestMap[state] = &OauthConfig{Config: oauthConfig, Verifier: verifier, Ctx: ctx}
-		http.Redirect(w, r, oauthConfig.AuthCodeURL(state), http.StatusFound)
+		// verifier := provider.Verifier(oidcConfig)
+		// oauthConfig := &oauth2.Config{
+		// 	ClientID:     oidcAuthConfig.ClientID,
+		// 	ClientSecret: oidcAuthConfig.ClientSecret,
+		// 	Endpoint:     provider.Endpoint(),
+		// 	RedirectURL:  getOidcCallbackURL(r, config),
+		// 	Scopes:       append([]string{oidc.ScopeOpenID}, oidcAuthConfig.Scopes...),
+		// }
+		// /* we encode the cluster to base64 and set it as state so that when getting redirected
+		// by oidc we can use this state value to get cluster name
+		// */
+		// state := base64.StdEncoding.EncodeToString([]byte(cluster))
+		// oauthRequestMap[state] = &OauthConfig{Config: oauthConfig, Verifier: verifier, Ctx: ctx}
+		// http.Redirect(w, r, oauthConfig.AuthCodeURL(state), http.StatusFound)
 	}).Queries("cluster", "{cluster}")
 
 	r.HandleFunc("/portforward", func(w http.ResponseWriter, r *http.Request) {
@@ -867,50 +798,23 @@ func GetFreePort() (int, error) {
 //nolint:funlen
 func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) error {
 	ports := []string{fmt.Sprintf(p.Port + ":" + p.TargetPort)}
-	ctxtProxy, ok := c.contextProxies[p.Cluster]
 
-	if !ok {
-		return fmt.Errorf("cluster %s not found", p.Cluster)
+	kContext, err := c.kubeConfigStore.GetContext(p.Cluster)
+	if err != nil {
+		return nil
 	}
 
-	var caData []byte
-
-	var err error
-
-	if caData, err = ctxtProxy.context.cluster.getCAData(); err != nil {
-		return fmt.Errorf("failed to get CA data: %v", err)
-	}
-
-	rConf := &rest.Config{
-		Host:        ctxtProxy.context.cluster.config.Server,
-		BearerToken: token,
-		TLSClientConfig: rest.TLSClientConfig{
-			CAData: caData,
-		},
-	}
-
-	if ctxtProxy.context.authInfo != nil {
-		if ctxtProxy.context.authInfo.ClientKey != "" {
-			rConf.TLSClientConfig.KeyFile = ctxtProxy.context.authInfo.ClientKey
-		}
-
-		if ctxtProxy.context.authInfo.ClientCertificate != "" {
-			rConf.TLSClientConfig.CertFile = ctxtProxy.context.authInfo.ClientCertificate
-		}
-
-		if ctxtProxy.context.authInfo.ClientKeyData != nil {
-			rConf.TLSClientConfig.KeyData = ctxtProxy.context.authInfo.ClientKeyData
-		}
-
-		if ctxtProxy.context.authInfo.ClientCertificateData != nil {
-			rConf.TLSClientConfig.CertData = ctxtProxy.context.authInfo.ClientCertificateData
-		}
-	}
-
-	clientset, err := kubernetes.NewForConfig(rConf)
+	clientset, err := kContext.ClientSetWithToken(token)
 	if err != nil {
 		return fmt.Errorf("failed to create portforward request: %v", err)
 	}
+
+	rConf, err := kContext.RESTConfig()
+	if err != nil {
+		return fmt.Errorf("failed to create portforward request: %v", err)
+	}
+
+	rConf.BearerToken = token
 
 	roundTripper, upgrader, err := spdy.RoundTripperFor(rConf)
 	if err != nil {
@@ -1007,16 +911,16 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 // Returns the helm.Handler given the config and request. Writes http.NotFound if clusterName is not there.
 func getHelmHandler(c *HeadlampConfig, w http.ResponseWriter, r *http.Request) (*helm.Handler, error) {
 	clusterName := mux.Vars(r)["clusterName"]
-	context, ok := c.contextProxies[clusterName]
 
-	if !ok {
-		http.NotFound(w, r)
-		return nil, errors.New("not found")
+	context, err := c.kubeConfigStore.GetContext(clusterName)
+	if err != nil {
+		log.Printf("Error: failed to get context: %s", err)
+		http.Error(w, "failed to get context", http.StatusInternalServerError)
 	}
 
 	namespace := r.URL.Query().Get("namespace")
 
-	helmHandler, err := helm.NewHandler(context.context.clientConfig(), namespace)
+	helmHandler, err := helm.NewHandler(context.ClientConfig(), namespace)
 	if err != nil {
 		log.Printf("Error: failed to create helm handler: %s", err)
 		http.Error(w, "failed to create helm handler", http.StatusInternalServerError)
@@ -1096,21 +1000,32 @@ func handleClusterHelm(c *HeadlampConfig, router *mux.Router) {
 func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 	router.PathPrefix("/clusters/{clusterName}/{api:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		clusterName := mux.Vars(r)["clusterName"]
-		ctxtProxy, ok := c.contextProxies[clusterName]
-		if !ok {
+
+		kContext, err := c.kubeConfigStore.GetContext(clusterName)
+		if err != nil {
+			log.Printf("Error: failed to get context: %s", err)
 			http.NotFound(w, r)
 			return
 		}
 
-		server, err := url.Parse(*ctxtProxy.context.cluster.getServer())
+		clusterURL, err := url.Parse(kContext.Cluster.Server)
 		if err != nil {
-			log.Printf("Error: failed to get valid URL from server %s: %s", server, err)
-			w.WriteHeader(http.StatusBadRequest)
-			return
+			log.Printf("Error: failed to parse cluster URL: %s", err)
+			http.NotFound(w, r)
 		}
 
-		handler := proxyHandler(server, ctxtProxy.proxy)
-		handler(w, r)
+		r.Host = clusterURL.Host
+		r.Header.Set("X-Forwarded-Host", r.Header.Get("Host"))
+		r.URL.Host = clusterURL.Host
+		r.URL.Path = mux.Vars(r)["api"]
+		r.URL.Scheme = clusterURL.Scheme
+
+		// if pluginsChanged() {
+		// 	resetPlugins()
+		// 	setPluginReloadHeader(w)
+		// }
+
+		kContext.ProxyRequest(w, r)
 	})
 }
 
@@ -1123,45 +1038,25 @@ func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 }
 
 func (c *HeadlampConfig) getClusters() []Cluster {
-	clusters := make([]Cluster, 0, len(c.contextProxies))
 
-	for _, contextProxy := range c.contextProxies {
-		context := contextProxy.context
+	clusters := []Cluster{}
 
-		cluster := context.getCluster()
-		if cluster.Metadata == nil {
-			cluster.Metadata = make(map[string]interface{})
-		}
+	contexts, err := c.kubeConfigStore.GetContexts()
+	if err != nil {
+		log.Printf("Error: failed to get contexts: %s", err)
+		return clusters
+	}
 
-		cluster.Metadata["source"] = configSourceToString(contextProxy.source)
-
-		clusters = append(clusters, *context.getCluster())
+	// TODO: Figure out Auth and Metadata
+	for _, context := range contexts {
+		context := context
+		clusters = append(clusters, Cluster{
+			Name:   context.Name,
+			Server: context.Cluster.Server,
+		})
 	}
 
 	return clusters
-}
-
-func (c *HeadlampConfig) createProxyForContext(context Context) (*httputil.ReverseProxy, error) {
-	cluster := context.getCluster()
-	name := cluster.getName()
-
-	server, err := url.Parse(*cluster.getServer())
-	if err != nil {
-		return nil, fmt.Errorf("failed to get URL from server %s: %w", *name, err)
-	}
-
-	// Create a reverse proxy to direct the API calls to the right server
-	proxy := httputil.NewSingleHostReverseProxy(server)
-
-	restConfig, err := context.restConfig()
-	if err == nil {
-		roundTripper, err := rest.TransportFor(restConfig)
-		if err == nil {
-			proxy.Transport = roundTripper
-		}
-	}
-
-	return proxy, nil
 }
 
 func setPluginReloadHeader(writer http.ResponseWriter) {
@@ -1174,23 +1069,23 @@ func setPluginReloadHeader(writer http.ResponseWriter) {
 	writer.Header().Set("X-Reload", "reload")
 }
 
-func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.ResponseWriter, *http.Request) {
-	return func(writer http.ResponseWriter, request *http.Request) {
-		request.Host = url.Host
-		request.Header.Set("X-Forwarded-Host", request.Header.Get("Host"))
-		request.URL.Host = url.Host
-		request.URL.Path = mux.Vars(request)["api"]
-		request.URL.Scheme = url.Scheme
+// func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.ResponseWriter, *http.Request) {
+// 	return func(writer http.ResponseWriter, request *http.Request) {
+// 		request.Host = url.Host
+// 		request.Header.Set("X-Forwarded-Host", request.Header.Get("Host"))
+// 		request.URL.Host = url.Host
+// 		request.URL.Path = mux.Vars(request)["api"]
+// 		request.URL.Scheme = url.Scheme
 
-		if pluginsChanged() {
-			resetPlugins()
-			setPluginReloadHeader(writer)
-		}
+// 		if pluginsChanged() {
+// 			resetPlugins()
+// 			setPluginReloadHeader(writer)
+// 		}
 
-		log.Println("Requesting ", request.URL.String())
-		proxy.ServeHTTP(writer, request)
-	}
-}
+// 		log.Println("Requesting ", request.URL.String())
+// 		proxy.ServeHTTP(writer, request)
+// 	}
+// }
 
 func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -1234,23 +1129,18 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		contexts, err := GetContextsFromKubeConfig(config)
-		if err != nil {
-			http.Error(w, "Error getting contexts from kubeconfig", http.StatusBadRequest)
-			return
-		}
+		// contexts, err := kubeconfig.LoadContextsFromKubeConfig(config)
+		// if err != nil {
+		// 	http.Error(w, "Error getting contexts from kubeconfig", http.StatusBadRequest)
+		// 	return
+		// }
 
 		var setupErrors []error
 
-		for _, context := range contexts {
-			context := context
-			context.cluster.Metadata = clusterReq.Metadata
-
-			err := setupProxyForContext(&context, c, DynamicCluster)
-			if err != nil {
-				setupErrors = append(setupErrors, err)
-			}
-		}
+		// for _, context := range contexts {
+		// 	context := context
+		// 	context.cluster.Metadata = clusterReq.Metadata
+		// }
 
 		if len(setupErrors) > 0 {
 			http.Error(w, "Error setting up contexts from kubeconfig", http.StatusBadRequest)
@@ -1269,27 +1159,19 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	context := Context{
-		Name: *clusterReq.Name,
-		cluster: Cluster{
-			Name:   *clusterReq.Name,
-			Server: *clusterReq.Server,
-			config: &clientcmdapi.Cluster{
-				Server:                   *clusterReq.Server,
-				InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
-				CertificateAuthorityData: clusterReq.CertificateAuthorityData,
-			},
-			Metadata: clusterReq.Metadata,
-		},
-	}
-
-	err := setupProxyForContext(&context, c, DynamicCluster)
-	if err != nil {
-		log.Printf("Error creating proxy for cluster %s: %s", *clusterReq.Name, err)
-		http.Error(w, "Error setting up cluster", http.StatusBadRequest)
-
-		return
-	}
+	// context := Context{
+	// 	Name: *clusterReq.Name,
+	// 	cluster: Cluster{
+	// 		Name:   *clusterReq.Name,
+	// 		Server: *clusterReq.Server,
+	// 		config: &clientcmdapi.Cluster{
+	// 			Server:                   *clusterReq.Server,
+	// 			InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
+	// 			CertificateAuthorityData: clusterReq.CertificateAuthorityData,
+	// 		},
+	// 		Metadata: clusterReq.Metadata,
+	// 	},
+	// }
 
 	w.WriteHeader(http.StatusCreated)
 	c.getConfig(w, r)
@@ -1297,12 +1179,12 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 
 func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 	name := mux.Vars(r)["name"]
-	if _, ok := c.contextProxies[name]; !ok {
-		http.Error(w, "Cluster not found", http.StatusNotFound)
-		return
-	}
 
-	delete(c.contextProxies, name)
+	err := c.kubeConfigStore.RemoveContext(name)
+	if err != nil {
+		log.Printf("Error deleting cluster %s: %s", name, err)
+		http.Error(w, "Error deleting cluster", http.StatusInternalServerError)
+	}
 
 	kubeConfigPersistenceFile, err := defaultKubeConfigPersistenceFile()
 	if err != nil {
@@ -1335,17 +1217,4 @@ func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
 
 	// Delete a cluster
 	r.HandleFunc("/cluster/{name}", c.deleteCluster).Methods("DELETE")
-}
-
-func absPath(path string) (string, error) {
-	if !strings.HasPrefix(path, "~/") {
-		return path, nil
-	}
-
-	currentUser, err := user.Current()
-	if err != nil {
-		return "", err
-	}
-
-	return filepath.Join(currentUser.HomeDir, path[2:]), nil
 }

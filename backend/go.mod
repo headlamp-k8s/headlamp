@@ -17,8 +17,7 @@ require (
 	github.com/gorilla/schema v1.2.0
 	github.com/knadh/koanf v1.4.4
 	github.com/pelletier/go-toml v1.9.5 // indirect
-	github.com/pkg/errors v0.9.1
-	github.com/rs/zerolog v1.29.0 // indirect
+	github.com/rs/zerolog v1.29.0
 	github.com/stretchr/testify v1.8.2
 	golang.org/x/oauth2 v0.3.0
 	golang.org/x/sys v0.7.0 // indirect
@@ -30,7 +29,13 @@ require (
 	k8s.io/cli-runtime v0.26.0
 	k8s.io/client-go v0.26.0
 	k8s.io/kube-openapi v0.0.0-20221207184640-f3cff1453715 // indirect
-	k8s.io/utils v0.0.0-20221128185143-99ec85e7a448 // indirect
-	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
+	k8s.io/kubectl v0.26.0
+	k8s.io/utils v0.0.0-20221128185143-99ec85e7a448
 	sigs.k8s.io/yaml v1.3.0
+)
+
+require (
+	github.com/cespare/xxhash/v2 v2.2.0 // indirect
+	github.com/pkg/errors v0.9.1
+	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 )
