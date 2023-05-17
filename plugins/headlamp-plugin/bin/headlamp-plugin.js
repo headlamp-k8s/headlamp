@@ -318,7 +318,22 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
     }
 
     process.chdir(folder);
-    console.log(`"${folder}": ${scriptName}-ing...`);
+
+    if (!fs.existsSync('node_modules')) {
+      console.log(`No node_modules in "${folder}" found. Running npm install...`);
+
+      try {
+        child_process.execSync('npm install', {
+          stdio: 'inherit',
+          encoding: 'utf8',
+        });
+      } catch (e) {
+        console.error(`Problem running 'npm install' inside of "${folder}"\r\n`);
+        process.chdir(oldCwd);
+        return runOnPackageReturn.issue;
+      }
+      console.log(`Finished npm install.`);
+    }
 
     // See if the cmd is in the:
     // - package/node_modules/.bin
@@ -354,6 +369,8 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
         )}" or "${resolve(npxBinCmd)}".`
       );
     }
+
+    console.log(`"${folder}": ${scriptName}-ing...`);
 
     try {
       child_process.execSync(cmdLineToUse, {
@@ -410,6 +427,7 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
   }
 
   const err = runOnPackage(packageFolder);
+
   if (err === runOnPackageReturn.notThere) {
     const folderErr = runOnFolderOfPackages(packageFolder);
     if (folderErr.error === runOnPackageReturn.notThere) {
