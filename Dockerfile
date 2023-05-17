@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM --platform=${BUILDPLATFORM} golang:1.19 as backend-build
+FROM --platform=${BUILDPLATFORM} golang:1.20 as backend-build
 
 WORKDIR /headlamp
 

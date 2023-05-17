@@ -1,10 +1,12 @@
 package helm
 
 import (
+	"context"
+	"encoding/json"
 	"fmt"
-	"sync"
 	"time"
 
+	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/rs/zerolog/log"
 
 	"helm.sh/helm/v3/pkg/action"
@@ -19,86 +21,15 @@ import (
 )
 
 var (
-	_        genericclioptions.RESTClientGetter = &restConfigGetter{}
-	settings                                    = cli.New()
+	_                  genericclioptions.RESTClientGetter = &restConfigGetter{}
+	settings                                              = cli.New()
+	statusCacheTimeout                                    = 20 * time.Minute
 )
-
-// Key of the object is action_name + "_" + release_name
-// action_name is the name of the action, e.g. install, upgrade, delete
-// status is one of the following: in_progress, success, failed.
-type actionStatus struct {
-	store map[string]struct {
-		status    string
-		updatedAt time.Time
-		err       error
-	}
-	sync.Mutex
-}
-
-var actionState *actionStatus
-
-func (a *actionStatus) GetStatus(actionName, releaseName string) (string, error) {
-	a.Lock()
-	defer a.Unlock()
-
-	key := actionName + "_" + releaseName
-	if _, ok := a.store[key]; !ok {
-		return "", nil
-	}
-
-	return a.store[key].status, a.store[key].err
-}
-
-func (a *actionStatus) SetStatus(actionName, releaseName, status string, err error) {
-	a.Lock()
-	defer a.Unlock()
-
-	key := actionName + "_" + releaseName
-
-	a.store[key] = struct {
-		status    string
-		updatedAt time.Time
-		err       error
-	}{
-		status:    status,
-		updatedAt: time.Now(),
-		err:       err,
-	}
-}
-
-func (a *actionStatus) RemoveStaleStatus() {
-	a.Lock()
-	defer a.Unlock()
-
-	for key, value := range a.store {
-		if time.Since(value.updatedAt) > 5*time.Minute {
-			delete(a.store, key)
-		}
-	}
-}
-
-// TODO FIXME: can this be refactored without init?
-//
-//nolint:gochecknoinits
-func init() {
-	actionState = &actionStatus{}
-	actionState.store = make(map[string]struct {
-		status    string
-		updatedAt time.Time
-		err       error
-	})
-
-	go func() {
-		for {
-			actionState.RemoveStaleStatus()
-			time.Sleep(time.Minute)
-		}
-	}()
-}
 
 type Handler struct {
 	*action.Configuration
 	*cli.EnvSettings
+	Cache cache.Cache
 }
 
 func NewActionConfig(clientConfig clientcmd.ClientConfig, namespace string) (*action.Configuration, error) {
@@ -119,11 +50,12 @@ func NewActionConfig(clientConfig clientcmd.ClientConfig, namespace string) (*ac
 	return actionConfig, nil
 }
 
-func NewHandler(clientConfig clientcmd.ClientConfig, namespace string) (*Handler, error) {
-	return NewHandlerWithSettings(clientConfig, namespace, settings)
+func NewHandler(clientConfig clientcmd.ClientConfig, cache cache.Cache, namespace string) (*Handler, error) {
+	return NewHandlerWithSettings(clientConfig, cache, namespace, settings)
 }
 
 func NewHandlerWithSettings(clientConfig clientcmd.ClientConfig,
+	cache cache.Cache,
 	namespace string, settings *cli.EnvSettings,
 ) (*Handler, error) {
 	actionConfig, err := NewActionConfig(clientConfig, namespace)
@@ -134,6 +66,7 @@ func NewHandlerWithSettings(clientConfig clientcmd.ClientConfig,
 	return &Handler{
 		Configuration: actionConfig,
 		EnvSettings:   settings,
+		Cache:         cache,
 	}, nil
 }
 
@@ -177,4 +110,62 @@ func (r *restConfigGetter) ToRESTMapper() (meta.RESTMapper, error) {
 	expander := restmapper.NewShortcutExpander(mapper, discoveryClient)
 
 	return expander, nil
+}
+
+type stat struct {
+	Status string
+	Err    error
+}
+
+// getReleaseStatus returns the status of the release.
+func (h *Handler) getReleaseStatus(actionName, releaseName string) (*stat, error) {
+	key := "helm_" + actionName + "_" + releaseName
+
+	value, err := h.Cache.Get(context.Background(), key)
+	if err != nil {
+		return nil, err
+	}
+
+	valueBytes, err := json.Marshal(value)
+	if err != nil {
+		return nil, err
+	}
+
+	var stat stat
+
+	err = json.Unmarshal(valueBytes, &stat)
+	if err != nil {
+		return nil, err
+	}
+
+	return &stat, nil
+}
+
+// setReleaseStatus sets the status of the release
+// Key of the object is action_name + "_" + release_name
+// action_name is the name of the action, e.g. install, upgrade, delete
+// status is one of the following: processing, success, failed.
+func (h *Handler) setReleaseStatus(actionName, releaseName, status string, err error) error {
+	key := "helm_" + actionName + "_" + releaseName
+
+	stat := stat{
+		Status: status,
+		Err:    err,
+	}
+
+	cacheErr := h.Cache.SetWithTTL(context.Background(), key, stat, statusCacheTimeout)
+	if cacheErr != nil {
+		return cacheErr
+	}
+
+	return nil
+}
+
+func (h *Handler) setReleaseStatusSilent(actionName, releaseName, status string, err error) {
+	cacheErr := h.setReleaseStatus(actionName, releaseName, status, err)
+	if cacheErr != nil {
+		log.Error().Err(cacheErr).Str("action", actionName).
+			Str("releaseName", releaseName).Str("status", status).
+			Msg("unable to set status")
+	}
 }

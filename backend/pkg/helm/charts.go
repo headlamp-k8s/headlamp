@@ -2,7 +2,6 @@ package helm
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"path/filepath"
 	"strings"
@@ -92,7 +91,6 @@ func (h *Handler) ListCharts(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
-		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return

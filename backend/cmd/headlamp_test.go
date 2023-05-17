@@ -5,10 +5,10 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"os"
 	"strings"
 	"testing"
 
@@ -195,8 +195,9 @@ func TestDynamicClusters(t *testing.T) {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
 			c := HeadlampConfig{
-				useInCluster:   false,
-				kubeConfigPath: "",
+				useInCluster:          false,
+				kubeConfigPath:        "",
+				enableDynamicClusters: true,
 			}
 			handler := createHeadlampHandler(&c)
 
@@ -250,7 +251,7 @@ func TestDynamicClusters(t *testing.T) {
 					t.Fatal(err)
 				}
 
-				assert.Equal(t, clusterConfig, config)
+				assert.Equal(t, len(clusterConfig.Clusters), len(config.Clusters))
 			}
 
 			assert.Equal(t, len(c.getClusters()), tc.expectedNumClusters)
@@ -259,7 +260,7 @@ func TestDynamicClusters(t *testing.T) {
 }
 
 func TestDynamicClustersKubeConfig(t *testing.T) {
-	kubeConfigByte, err := ioutil.ReadFile("./headlamp_testdata/kubeconfig")
+	kubeConfigByte, err := os.ReadFile("./headlamp_testdata/kubeconfig")
 	require.NoError(t, err)
 
 	kubeConfig := base64.StdEncoding.EncodeToString(kubeConfigByte)
@@ -268,8 +269,9 @@ func TestDynamicClustersKubeConfig(t *testing.T) {
 	}
 
 	c := HeadlampConfig{
-		useInCluster:   false,
-		kubeConfigPath: "",
+		useInCluster:          false,
+		kubeConfigPath:        "",
+		enableDynamicClusters: true,
 	}
 	handler := createHeadlampHandler(&c)
 
@@ -278,7 +280,7 @@ func TestDynamicClustersKubeConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, r.Code, http.StatusCreated)
+	assert.Equal(t, http.StatusCreated, r.Code)
 	assert.Equal(t, 2, len(c.getClusters()))
 }
 

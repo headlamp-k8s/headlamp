@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/fs"
-	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
@@ -30,6 +30,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/helm"
 	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -63,6 +64,7 @@ type HeadlampConfig struct {
 	// Holds: context-name -> (context, reverse-proxy)
 	contextProxies map[string]contextProxy
 	proxyURLs      []string
+	cache          cache.Cache
 }
 
 const PodAvailabilityCheckTimer = 5 // seconds
@@ -233,16 +235,16 @@ func copyReplace(src string, dst string,
 	search []byte, replace []byte,
 	search2 []byte, replace2 []byte,
 ) {
-	data, err := ioutil.ReadFile(src)
+	data, err := os.ReadFile(src)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	data1 := bytes.ReplaceAll(data, search, replace)
 	data2 := bytes.ReplaceAll(data1, search2, replace2)
-	fileMode := 0600
+	fileMode := 0o600
 
-	err = ioutil.WriteFile(dst, data2, fs.FileMode(fileMode))
+	err = os.WriteFile(dst, data2, fs.FileMode(fileMode))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -366,7 +368,7 @@ func defaultKubeConfigPersistenceDir() (string, error) {
 		}
 
 		// Create the directory if it doesn't exist.
-		fileMode := 0755
+		fileMode := 0o755
 
 		err = os.MkdirAll(kubeConfigDir, fs.FileMode(fileMode))
 		if err == nil {
@@ -550,7 +552,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			http.Error(w, err.Error(), http.StatusBadGateway)
 			return
 		}
-		respBody, err := ioutil.ReadAll(resp.Body)
+		respBody, err := io.ReadAll(resp.Body)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadGateway)
 			return
@@ -1022,7 +1024,7 @@ func getHelmHandler(c *HeadlampConfig, w http.ResponseWriter, r *http.Request) (
 
 	namespace := r.URL.Query().Get("namespace")
 
-	helmHandler, err := helm.NewHandler(context.context.clientConfig(), namespace)
+	helmHandler, err := helm.NewHandler(context.context.clientConfig(), c.cache, namespace)
 	if err != nil {
 		log.Printf("Error: failed to create helm handler: %s", err)
 		http.Error(w, "failed to create helm handler", http.StatusInternalServerError)

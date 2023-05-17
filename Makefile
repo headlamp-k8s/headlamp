@@ -42,6 +42,10 @@ app-mac: app-build
 backend:
 	cd backend && go build -o ./headlamp-server${SERVER_EXE_EXT} ./cmd
 
+.PHONY: backend-test
+backend-test:
+	cd backend && go test -v -p 1 ./...
+
 frontend-install:
 	cd frontend && npm install
 

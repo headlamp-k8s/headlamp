@@ -18,8 +18,8 @@ import (
 )
 
 const (
-	defaultNewConfigFileMode   os.FileMode = os.FileMode(0644)
-	defaultNewConfigFolderMode os.FileMode = os.FileMode(0770)
+	defaultNewConfigFileMode   os.FileMode = os.FileMode(0o644)
+	defaultNewConfigFolderMode os.FileMode = os.FileMode(0o770)
 )
 
 // add repository.
@@ -65,10 +65,10 @@ func lockRepositoryFile(lockCtx context.Context, repositoryConfig string) (bool,
 const timeoutForLock = 30 * time.Second
 
 // Adds a repository with name, url to the helm config. Returns error if there is one.
-func AddRepository(name string, url string, settings *cli.EnvSettings) error {
+func addRepository(name string, url string, settings *cli.EnvSettings) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to create empty RepositoryConfig file")
+		zlog.Error().Err(err).Str("action", "add_repo").Msg("creating empty RepositoryConfig file")
 		return err
 	}
 
@@ -80,20 +80,20 @@ func AddRepository(name string, url string, settings *cli.EnvSettings) error {
 		defer func() {
 			err := fileLock.Unlock()
 			if err != nil {
-				zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to unlock repository config file")
+				zlog.Error().Err(err).Str("action", "add_repo").Msg("unlocking repository config file")
 			}
 		}()
 	}
 
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to lock repository config file")
+		zlog.Error().Err(err).Str("action", "add_repo").Msg("locking repository config file")
 		return err
 	}
 
 	// read repo file
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to read repo file")
+		zlog.Error().Err(err).Str("action", "add_repo").Msg("reading repo file")
 		return err
 	}
 
@@ -105,14 +105,14 @@ func AddRepository(name string, url string, settings *cli.EnvSettings) error {
 
 	repo, err := repo.NewChartRepository(newRepo, getter.All(settings))
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to create chart repository")
+		zlog.Error().Err(err).Str("action", "add_repo").Msg("creating chart repository")
 		return err
 	}
 
 	// download chart repo index
 	_, err = repo.DownloadIndexFile()
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to download index file")
+		zlog.Error().Err(err).Str("action", "add_repo").Msg("downloading index file")
 		return err
 	}
 
@@ -121,7 +121,7 @@ func AddRepository(name string, url string, settings *cli.EnvSettings) error {
 
 	err = repoFile.WriteFile(settings.RepositoryConfig, defaultNewConfigFileMode)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to write repo file")
+		zlog.Error().Err(err).Str("action", "add_repo").Msg("writing to repo file")
 		return err
 	}
 
@@ -134,13 +134,13 @@ func (h *Handler) AddRepo(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to parse request")
+		zlog.Error().Err(err).Str("action", "add_repo").Msg("parsing request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
 	}
 
-	err = AddRepository(request.Name, request.URL, h.EnvSettings)
+	err = addRepository(request.Name, request.URL, h.EnvSettings)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -156,7 +156,7 @@ func (h *Handler) AddRepo(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to encode response")
+		zlog.Error().Err(err).Str("action", "add_repo").Msg("encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -184,14 +184,14 @@ func createFullPath(p string) (*os.File, error) {
 func listRepositories(settings *cli.EnvSettings) ([]repositoryInfo, error) {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "list_repo").Msg("failed to create empty RepositoryConfig file")
+		zlog.Error().Err(err).Str("action", "list_repo").Msg("creating empty RepositoryConfig file")
 		return nil, err
 	}
 
 	// read repo file
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "list_repo").Msg("failed to read repo file")
+		zlog.Error().Err(err).Str("action", "list_repo").Msg("reading repo file")
 		return nil, err
 	}
 
@@ -226,7 +226,7 @@ func (h *Handler) ListRepo(w http.ResponseWriter, r *http.Request) {
 
 	err = json.NewEncoder(w).Encode(response)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "list_repo").Msg("failed to encode response")
+		zlog.Error().Err(err).Str("action", "list_repo").Msg("encoding response")
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 
 		return
@@ -236,7 +236,7 @@ func (h *Handler) ListRepo(w http.ResponseWriter, r *http.Request) {
 func RemoveRepository(name string, settings *cli.EnvSettings) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "remove_repo").Msg("failed to create empty RepositoryConfig file")
+		zlog.Error().Err(err).Str("action", "remove_repo").Msg("creating empty RepositoryConfig file")
 		return err
 	}
 
@@ -248,14 +248,14 @@ func RemoveRepository(name string, settings *cli.EnvSettings) error {
 		defer func() {
 			err := fileLock.Unlock()
 			if err != nil {
-				zlog.Error().Err(err).Str("action", "add_repo").Msg("failed to unlock repository config file")
+				zlog.Error().Err(err).Str("action", "add_repo").Msg("unlocking repository config file")
 			}
 		}()
 	}
 
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "remove_repo").Msg("failed to read repo file")
+		zlog.Error().Err(err).Str("action", "remove_repo").Msg("reading repo file")
 		return err
 	}
 
@@ -268,7 +268,7 @@ func RemoveRepository(name string, settings *cli.EnvSettings) error {
 	// write repo file
 	err = repoFile.WriteFile(settings.RepositoryConfig, defaultNewConfigFileMode)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "remove_repo").Msg("failed to write repo file")
+		zlog.Error().Err(err).Str("action", "remove_repo").Msg("writing repo file")
 		return err
 	}
 
@@ -291,7 +291,7 @@ func (h *Handler) RemoveRepo(w http.ResponseWriter, r *http.Request) {
 func UpdateRepository(name, url string, settings *cli.EnvSettings) error {
 	err := createFileIfNotThere(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to create empty RepositoryConfig file")
+		zlog.Error().Err(err).Str("action", "update_repository").Msg("creating empty RepositoryConfig file")
 		return err
 	}
 
@@ -303,14 +303,14 @@ func UpdateRepository(name, url string, settings *cli.EnvSettings) error {
 		defer func() {
 			err := fileLock.Unlock()
 			if err != nil {
-				zlog.Error().Err(err).Str("action", "update_repo").Msg("failed to unlock repository config file")
+				zlog.Error().Err(err).Str("action", "update_repo").Msg("unlocking repository config file")
 			}
 		}()
 	}
 
 	repoFile, err := repo.LoadFile(settings.RepositoryConfig)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to read repo file")
+		zlog.Error().Err(err).Str("action", "update_repository").Msg("reading repo file")
 		return err
 	}
 
@@ -322,7 +322,7 @@ func UpdateRepository(name, url string, settings *cli.EnvSettings) error {
 
 	err = repoFile.WriteFile(settings.RepositoryConfig, defaultNewConfigFileMode)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to write repo file")
+		zlog.Error().Err(err).Str("action", "update_repository").Msg("writing repo file")
 		return err
 	}
 
@@ -336,7 +336,7 @@ func (h *Handler) UpdateRepository(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(&request)
 	if err != nil {
-		zlog.Error().Err(err).Str("action", "update_repository").Msg("failed to parse request")
+		zlog.Error().Err(err).Str("action", "update_repository").Msg("parsing request")
 		http.Error(w, err.Error(), http.StatusBadRequest)
 
 		return
