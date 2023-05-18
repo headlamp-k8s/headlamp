@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots network/ServiceDetails Service Detail 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          >
+            <div
+              aria-busy="true"
+              aria-live="polite"
+              class="MuiBox-root MuiBox-root"
+            >
+              <div
+                class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+              >
+                <div
+                  class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+                  role="progressbar"
+                  style="width: 40px; height: 40px;"
+                  title="Loading resource data"
+                >
+                  <svg
+                    class="MuiCircularProgress-svg"
+                    viewBox="22 22 44 44"
+                  >
+                    <circle
+                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                      cx="44"
+                      cy="44"
+                      fill="none"
+                      r="20.2"
+                      stroke-width="3.6"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+</div>
+`;

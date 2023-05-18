@@ -92,6 +92,31 @@ const fixtureData = {
   defaultSortingColumn: 1,
 };
 
+export const SimpleTableTemplateWithEmptyMessage = Template.bind({});
+SimpleTableTemplateWithEmptyMessage.args = {
+  ...fixtureData,
+  data: [],
+  emptyMessage: 'No data',
+};
+
+export const SimpleTableTemplateWithDefaultSortingColumn = Template.bind({});
+SimpleTableTemplateWithDefaultSortingColumn.args = {
+  ...fixtureData,
+  defaultSortingColumn: 1, // status
+};
+
+export const SimpleTableTemplateWithError = Template.bind({});
+SimpleTableTemplateWithError.args = {
+  ...fixtureData,
+  errorMessage: 'Error message',
+};
+
+export const SimpleTableTemplateWithRowsPerPageOption = Template.bind({});
+SimpleTableTemplateWithRowsPerPageOption.args = {
+  ...fixtureData,
+  rowsPerPage: [10, 20, 30],
+};
+
 export const Getter = Template.bind({});
 Getter.args = {
   ...fixtureData,

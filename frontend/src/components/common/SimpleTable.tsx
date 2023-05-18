@@ -1,13 +1,10 @@
+import 'react-virtualized/styles.css';
 import { Icon, InlineIcon } from '@iconify/react';
 import { Button, Grid, GridProps, IconButton } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,19 +14,57 @@ import { useSettings } from '../App/Settings/hook';
 import Empty from './EmptyContent';
 import { ValueLabel } from './Label';
 import Loader from './Loader';
+import VirtualizedTable from './VirtualizedTable';
 
-const useTableStyle = makeStyles(theme => ({
+export const useTableStyle = makeStyles(theme => ({
   headerCell: {
     fontWeight: 'bold',
     paddingBottom: theme.spacing(0.5),
+    paddingRight: theme.spacing(1),
+    height: '60px',
+    justifyContent: 'space-between',
+    overflowX: 'scroll',
+    overflowY: 'hidden',
   },
   sortCell: {
     whiteSpace: 'nowrap',
   },
+  tableCell: {
+    borderBottom: 'none',
+    textAlign: 'left',
+    display: 'inline-block',
+  },
+  flexContainer: {
+    display: 'flex',
+    boxSizing: 'border-box',
+    justifyContent: 'space-between',
+  },
   table: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'block',
-      overflowX: 'auto', // make it responsive
+    width: '100%',
+    minHeight: '300px',
+    '& .ReactVirtualized__Table__headerRow': {
+      textTransform: 'none',
+      gap: '2rem',
+      borderBottom: `1px solid ${theme.palette.divider}`,
+      '& .ReactVirtualized__Table__headerColumn': {
+        flex: '1 !important',
+        gap: '2rem',
+        overflowY: 'hidden !important',
+        overflowX: 'scroll !important',
+      },
+      '& .MuiTableCell-root': {
+        textAlign: 'left !important',
+      },
+    },
+
+    '& .ReactVirtualized__Table__row': {
+      borderBottom: `1px solid ${theme.palette.divider}`,
+      gap: '2rem',
+    },
+    '& .ReactVirtualized__Table__rowColumn': {
+      flex: '1 !important',
+      overflowY: 'hidden !important',
+      overflowX: 'scroll !important',
     },
     '& .MuiTableCell-root': {
       paddingLeft: '0',
@@ -319,6 +354,78 @@ export default function SimpleTable(props: SimpleTableProps) {
     setSortColIndex(index);
   }
 
+  function cellRenderer({ columnIndex, rowIndex }: { columnIndex: number; rowIndex: number }) {
+    const col = columns[columnIndex];
+    if (columnIndex === undefined || col === undefined) {
+      return null;
+    }
+    const { cellProps = {} } = col;
+    const row = getPagedRows()[rowIndex];
+    if (!row) {
+      return null;
+    }
+
+    return (
+      <TableCell
+        key={`cell_${columnIndex}`}
+        {...cellProps}
+        component="div"
+        variant="body"
+        style={{
+          height: 48,
+        }}
+        className={clsx(classes.tableCell)}
+        align="left"
+      >
+        {columnIndex === 0 && row.color && (
+          <React.Fragment>
+            <InlineIcon icon="mdi:square" color={row.color} height="15" width="15" />
+            &nbsp;
+          </React.Fragment>
+        )}
+        {'datum' in col ? row[col.datum] : col.getter(row)}
+      </TableCell>
+    );
+  }
+
+  function headerRenderer({ columnIndex }: { columnIndex: number }) {
+    if (noTableHeader || columnIndex === undefined || columns[columnIndex] === undefined) {
+      return null;
+    }
+
+    const { label, cellProps = {}, sort } = columns[columnIndex];
+
+    const { className = '', ...otherProps } = cellProps;
+    return (
+      <TableCell
+        style={{
+          textAlign: 'left',
+        }}
+        variant="head"
+        component={'div'}
+        key={`tabletitle_${columnIndex}`}
+        className={clsx(
+          classes.headerCell,
+          classes.tableCell,
+          className,
+          sort ? classes.sortCell : ''
+        )}
+        {...otherProps}
+      >
+        {label}
+        {sort && (
+          <ColumnSortButtons
+            isIncreasingOrder={Boolean(isIncreasingOrder)}
+            isDefaultSorted={sortColIndex === columnIndex}
+            clickHandler={(isIncreasingOrder: boolean) =>
+              sortClickHandler(isIncreasingOrder, columnIndex)
+            }
+          />
+        )}
+      </TableCell>
+    );
+  }
+
   return !currentData || currentData.length === 0 ? (
     <Empty>{emptyMessage || t('No data to be shown.')}</Empty>
   ) : (
@@ -341,63 +448,28 @@ export default function SimpleTable(props: SimpleTableProps) {
           </Box>
         )
       }
-      <Table className={classes.table}>
-        {!noTableHeader && (
-          <TableHead>
-            <TableRow>
-              {columns.map(({ label, cellProps = {}, sort }, i) => {
-                const { className = '', ...otherProps } = cellProps;
-                return (
-                  <TableCell
-                    key={`tabletitle_${i}`}
-                    className={clsx(classes.headerCell, className, sort ? classes.sortCell : '')}
-                    {...otherProps}
-                  >
-                    {label}
-                    {sort && (
-                      <ColumnSortButtons
-                        isIncreasingOrder={Boolean(isIncreasingOrder)}
-                        isDefaultSorted={sortColIndex === i}
-                        clickHandler={(isIncreasingOrder: boolean) =>
-                          sortClickHandler(isIncreasingOrder, i)
-                        }
-                      />
-                    )}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          </TableHead>
-        )}
-        <TableBody>
-          {filteredData.length > 0 ? (
-            getPagedRows().map((row: any, i: number) => (
-              <TableRow key={i}>
-                {columns.map((col, i) => {
-                  const { cellProps = {} } = col;
-                  return (
-                    <TableCell key={`cell_${i}`} {...cellProps}>
-                      {i === 0 && row.color && (
-                        <React.Fragment>
-                          <InlineIcon icon="mdi:square" color={row.color} height="15" width="15" />
-                          &nbsp;
-                        </React.Fragment>
-                      )}
-                      {'datum' in col ? row[col.datum] : col.getter(row)}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length}>
-                <Empty>{t('No data matching the filter criteria.')}</Empty>
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+      <Box
+        style={{
+          display: 'inline-block !important',
+          height: `${
+            getPagedRows().length === 1
+              ? '120px'
+              : getPagedRows().length === 2
+              ? '180px'
+              : getPagedRows().length < 5
+              ? '250px'
+              : '60vh'
+          }`,
+        }}
+      >
+        <VirtualizedTable
+          rowCount={getPagedRows().length}
+          rowGetter={({ index }) => getPagedRows()[index]}
+          columns={columns}
+          cellRenderer={cellRenderer}
+          headerRenderer={headerRenderer}
+        />
+      </Box>
       {filteredData.length > rowsPerPageOptions[0] && showPagination && (
         <TablePagination
           rowsPerPageOptions={rowsPerPageOptions}
