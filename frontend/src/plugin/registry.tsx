@@ -4,6 +4,7 @@ import { SectionBox } from '../components/common/SectionBox';
 import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/DetailsViewSection';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
 import { AppLogoProps, AppLogoType } from '../components/Sidebar/AppLogo';
+import { getHeadlampAPIHeaders } from '../helpers';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
@@ -447,3 +448,5 @@ export function registerSetTokenFunction(
 export function registerGetTokenFunction(override: (cluster: string) => string | undefined) {
   store.dispatch(setFunctionsToOverride({ getToken: override }));
 }
+
+export { getHeadlampAPIHeaders };

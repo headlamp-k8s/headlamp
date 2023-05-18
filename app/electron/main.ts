@@ -1,5 +1,6 @@
 import 'regenerator-runtime/runtime';
 import { ChildProcessWithoutNullStreams, execSync, spawn } from 'child_process';
+import { randomBytes } from 'crypto';
 import dotenv from 'dotenv';
 import { app, BrowserWindow, dialog, ipcMain, Menu, MenuItem, screen, shell } from 'electron';
 import { IpcMainEvent, MenuItemConstructorOptions } from 'electron/main';
@@ -38,6 +39,7 @@ const args = yargs
 const isHeadlessMode = args.headless;
 let disableGPU = args['disable-gpu'];
 const defaultPort = 4466;
+const backendToken = randomBytes(32).toString('hex');
 
 const isDev = process.env.ELECTRON_DEV || false;
 const useExternalServer = process.env.EXTERNAL_SERVER || false;
@@ -68,6 +70,9 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   // Enable the Helm and dynamic cluster endpoints
   process.env.HEADLAMP_CONFIG_ENABLE_HELM = 'true';
   process.env.HEADLAMP_CONFIG_ENABLE_DYNAMIC_CLUSTERS = 'true';
+
+  // Pass a token to the backend that can be used for auth on some routes
+  process.env.HEADLAMP_BACKEND_TOKEN = backendToken;
 
   // Set the bundled plugins in addition to the the user's plugins.
   if (fs.existsSync(bundledPlugins) && !isEmpty(bundledPlugins)) {
@@ -503,6 +508,9 @@ function startElecron() {
         pathname: frontendPath,
         protocol: 'file:',
         slashes: true,
+        query: {
+          backendToken: backendToken,
+        },
       });
 
     // WSL has a problem with full size window placement, so make it smaller.
