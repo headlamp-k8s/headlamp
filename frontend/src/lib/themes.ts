@@ -108,6 +108,9 @@ const commonRules = {
       },
     },
     notificationBorderColor: 'rgba(0,0,0,0.12)',
+    background: {
+      default: '#fff',
+    },
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', '),
@@ -195,6 +198,10 @@ const darkTheme = createTheme({
     sidebarBg: '#000',
     notificationBorderColor: 'rgba(255,255,255,0.12)',
     type: 'dark',
+    background: {
+      default: '#1f1f1f',
+      paper: '#1f1f1f',
+    },
   },
   overrides: {
     MuiTooltip: {
