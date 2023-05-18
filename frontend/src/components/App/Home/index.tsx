@@ -139,8 +139,24 @@ function ClusterStatus({ error }: { error?: ApiError | null }) {
 }
 
 export default function Home() {
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const history = useHistory();
   const clusters = useClustersConf() || {};
+
+  if (!helpers.isElectron() && Object.keys(clusters).length === 1) {
+    history.push(createRouteURL('cluster', { cluster: Object.keys(clusters)[0] }));
+    return null;
+  }
+
+  return <HomeComponent clusters={clusters} />;
+}
+
+interface HomeComponentProps {
+  clusters: { [name: string]: Cluster };
+}
+
+function HomeComponent(props: HomeComponentProps) {
+  const { clusters } = props;
+  const { t } = useTranslation(['glossary', 'frequent']);
   const [versions, errors] = useClustersVersion(Object.values(clusters));
   const filterFunc = useFilterFunc<Cluster>(['.name']);
 
