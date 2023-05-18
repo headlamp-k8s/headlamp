@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { ConfigState } from '../../redux/reducers/config';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { getCluster } from '../util';
-import { request } from './apiProxy';
-import { KubeObject, LabelSelector, StringDict } from './cluster';
+import { ApiError, clusterRequest } from './apiProxy';
+import { Cluster, KubeObject, LabelSelector, StringDict } from './cluster';
 import ClusterRole from './clusterRole';
 import ClusterRoleBinding from './clusterRoleBinding';
 import ConfigMap from './configMap';
@@ -102,8 +102,8 @@ export function useCluster() {
   return cluster;
 }
 
-export function getVersion(): Promise<StringDict> {
-  return request('/version');
+export function getVersion(clusterName: string = ''): Promise<StringDict> {
+  return clusterRequest('/version', { cluster: clusterName || getCluster() });
 }
 
 export type CancellablePromise = Promise<() => void>;
@@ -239,6 +239,94 @@ export function matchExpressionSimplifier(matchExpressions: LabelSelector['match
   }
 
   return segments;
+}
+
+/** Hook to get the version of the clusters given by the parameter.
+ *
+ * @param clusters
+ * @returns a map with cluster -> version-info, and a map with cluster -> error.
+ */
+export function useClustersVersion(clusters: Cluster[]) {
+  const [clusterNames, setClusterNames] = React.useState<string[]>(
+    Object.values(clusters).map(c => c.name)
+  );
+  const [versions, setVersions] = React.useState<{ [cluster: string]: StringDict }>({});
+  const [errors, setErrors] = React.useState<{ [cluster: string]: ApiError | null }>({});
+  const versionFetchInterval = 10000; // ms
+  const cancelledRef = React.useRef(false);
+  const lastUpdateRef = React.useRef(0);
+
+  React.useEffect(() => {
+    const newClusterNames = Object.values(clusters).map(c => c.name);
+    if (_.isEqual(newClusterNames, clusterNames)) {
+      return;
+    }
+
+    setClusterNames(newClusterNames);
+    lastUpdateRef.current = Date.now();
+  }, [clusters, clusterNames]);
+
+  React.useEffect(() => {
+    const newVersions: typeof versions = {};
+    const newErrors: typeof errors = {};
+
+    function updateValues() {
+      if (cancelledRef.current) {
+        return;
+      }
+
+      setVersions(currentVersions => {
+        const newVersionsToSet = { ...currentVersions };
+        Object.keys(newErrors).forEach(clusterName => {
+          if (!!newErrors[clusterName]) {
+            delete newVersionsToSet[clusterName];
+          }
+        });
+        return { ...newVersionsToSet, ...newVersions };
+      });
+      setErrors(currentErrors => {
+        const newErrorsToSet = { ...currentErrors };
+        Object.keys(newVersions).forEach(clusterName => {
+          newErrorsToSet[clusterName] = null;
+        });
+        return { ...newErrorsToSet, ...newErrors };
+      });
+    }
+
+    clusterNames.forEach(clusterName => {
+      getVersion(clusterName)
+        .then(version => {
+          newVersions[clusterName] = version;
+        })
+        .catch(err => {
+          newErrors[clusterName] = err;
+        })
+        .finally(() => {
+          updateValues();
+        });
+    });
+  }, [clusterNames]);
+
+  React.useEffect(() => {
+    cancelledRef.current = false;
+    // Trigger periodically
+    const timeout = setInterval(() => {
+      if (cancelledRef.current) {
+        return;
+      }
+
+      if (Date.now() - lastUpdateRef.current > versionFetchInterval - 1) {
+        setClusterNames(clusterNames);
+      }
+    }, versionFetchInterval);
+
+    return function cleanup() {
+      cancelledRef.current = true;
+      clearInterval(timeout);
+    };
+  }, []);
+
+  return [versions, errors] as const;
 }
 
 // Other exports that can be used by plugins:
