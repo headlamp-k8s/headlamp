@@ -150,7 +150,11 @@ export function filterResource(
     matches = filter.namespaces.has(item.metadata.namespace);
   }
 
-  if (matches && filter.search) {
+  if (!matches) {
+    return false;
+  }
+
+  if (filter.search) {
     const filterString = filter.search.toLowerCase();
     const usedMatchCriteria = [
       item.metadata.uid.toLowerCase(),
@@ -160,44 +164,81 @@ export function filterResource(
       ...Object.values(item.metadata.labels || {}).map(item => item.toLowerCase()),
     ];
 
-    // Use the custom matchCriteria if any
-    (matchCriteria || []).forEach(jsonPath => {
-      let values: any[];
-      try {
-        values = JSONPath({ path: '$' + jsonPath, json: item });
-      } catch (err) {
-        console.debug(
-          `Failed to get value from JSONPath when filtering ${jsonPath} on item ${item}; skipping criteria`
-        );
-        return;
-      }
-
-      // Include matches values in the criteria
-      values.forEach((value: any) => {
-        if (typeof value === 'string' || typeof value === 'number') {
-          // Don't use empty string, otherwise it'll match everything
-          if (value !== '') {
-            usedMatchCriteria.push(value.toString().toLowerCase());
-          }
-        } else if (Array.isArray(value)) {
-          value.forEach((elem: any) => {
-            if (!!elem && typeof elem === 'string') {
-              usedMatchCriteria.push(elem.toLowerCase());
-            }
-          });
-        }
-      });
-    });
-
     matches = !!usedMatchCriteria.find(item => item.includes(filterString));
+    if (matches) {
+      return true;
+    }
+
+    matches = filterGeneric(item, filter, matchCriteria);
   }
 
   return matches;
 }
 
-export function useFilterFunc(matchCriteria?: string[]) {
+/** Filters a generic item based on the filter state.
+ * The item is considered to match if any of the matchCriteria (described as JSONPath) matches the filter.search contents. Case matching is insensitive.
+ *
+ * @param item - The item to filter.
+ * @param filter - The filter state.
+ * @param matchCriteria - The JSONPath criteria to match.
+ */
+export function filterGeneric<T extends { [key: string]: any } = { [key: string]: any }>(
+  item: T,
+  filter: FilterState,
+  matchCriteria?: string[]
+) {
+  if (!filter.search) {
+    return true;
+  }
+
+  const filterString = filter.search.toLowerCase();
+  const usedMatchCriteria: string[] = [];
+
+  // Use the custom matchCriteria if any
+  (matchCriteria || []).forEach(jsonPath => {
+    let values: any[];
+    try {
+      values = JSONPath({ path: '$' + jsonPath, json: item });
+    } catch (err) {
+      console.debug(
+        `Failed to get value from JSONPath when filtering ${jsonPath} on item ${item}; skipping criteria`
+      );
+      return;
+    }
+
+    // Include matches values in the criteria
+    values.forEach((value: any) => {
+      if (typeof value === 'string' || typeof value === 'number') {
+        // Don't use empty string, otherwise it'll match everything
+        if (value !== '') {
+          usedMatchCriteria.push(value.toString().toLowerCase());
+        }
+      } else if (Array.isArray(value)) {
+        value.forEach((elem: any) => {
+          if (!!elem && typeof elem === 'string') {
+            usedMatchCriteria.push(elem.toLowerCase());
+          }
+        });
+      }
+    });
+  });
+
+  return !!usedMatchCriteria.find(item => item.includes(filterString));
+}
+
+export function useFilterFunc<
+  T extends { [key: string]: any } | KubeObjectInterface | KubeEvent =
+    | KubeObjectInterface
+    | KubeEvent
+>(matchCriteria?: string[]) {
   const filter = useTypedSelector(state => state.filter);
-  return (item: KubeObjectInterface | KubeEvent) => filterResource(item, filter, matchCriteria);
+
+  return (item: T) => {
+    if (!!item.metadata) {
+      return filterResource(item as KubeObjectInterface | KubeEvent, filter, matchCriteria);
+    }
+    return filterGeneric<T>(item, filter, matchCriteria);
+  };
 }
 
 export function getClusterPrefixedPath(path?: string | null) {
