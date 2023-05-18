@@ -120,7 +120,7 @@ const commonRules = {
     },
   },
   shape: {
-    borderRadius: 0,
+    borderRadius: 4,
   },
   overrides: {
     MuiTooltip: {
