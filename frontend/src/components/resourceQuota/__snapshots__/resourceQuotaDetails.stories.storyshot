@@ -165,78 +165,82 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
               <dd
                 class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
               >
-                <table
-                  class="MuiTable-root makeStyles-table"
+                <div
+                  class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
                 >
-                  <thead
-                    class="MuiTableHead-root"
+                  <table
+                    class="MuiTable-root makeStyles-table"
                   >
-                    <tr
-                      class="MuiTableRow-root MuiTableRow-head"
+                    <thead
+                      class="MuiTableHead-root"
                     >
-                      <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                        scope="col"
+                      <tr
+                        class="MuiTableRow-root MuiTableRow-head"
                       >
-                        Resource
-                      </th>
-                      <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                        scope="col"
-                      >
-                        Used
-                      </th>
-                      <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                        scope="col"
-                      >
-                        Hard
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody
-                    class="MuiTableBody-root"
-                  >
-                    <tr
-                      class="MuiTableRow-root"
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          Resource
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          Used
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          Hard
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="MuiTableBody-root"
                     >
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body"
+                      <tr
+                        class="MuiTableRow-root"
                       >
-                        limits.cpu
-                      </td>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body"
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          limits.cpu
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          0 core
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          300m (0.3 cores)
+                        </td>
+                      </tr>
+                      <tr
+                        class="MuiTableRow-root"
                       >
-                        0 core
-                      </td>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body"
-                      >
-                        300m (0.3 cores)
-                      </td>
-                    </tr>
-                    <tr
-                      class="MuiTableRow-root"
-                    >
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body"
-                      >
-                        requests.cpu
-                      </td>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body"
-                      >
-                        500m (0.5 cores)
-                      </td>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body"
-                      >
-                        200m (0.2 cores)
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          requests.cpu
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          500m (0.5 cores)
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          200m (0.2 cores)
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </dd>
             </dl>
           </div>
@@ -289,102 +293,106 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
           <div
             class="MuiBox-root MuiBox-root"
           >
-            <table
-              class="MuiTable-root makeStyles-table"
+            <div
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
-              <thead
-                class="MuiTableHead-root"
+              <table
+                class="MuiTable-root makeStyles-table"
               >
-                <tr
-                  class="MuiTableRow-root MuiTableRow-head"
+                <thead
+                  class="MuiTableHead-root"
                 >
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
                   >
-                    Type
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    Reason
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    From
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    Message
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                    scope="col"
-                  >
-                    Age
-                    <button
-                      aria-label="sort swap"
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                      tabindex="0"
-                      type="button"
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
                     >
-                      <span
-                        class="MuiIconButton-label"
+                      Type
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      From
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Message
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Age
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
                       >
-                        <span />
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                class="MuiTableBody-root"
-              >
-                <tr
-                  class="MuiTableRow-root"
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
                 >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
+                  <tr
+                    class="MuiTableRow-root"
                   >
-                    Normal
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    Created
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    kubelet
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    Created
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2021-03-01T00:00:00.000Z"
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      3mo
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      Normal
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      Created
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      kubelet
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      Created
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2021-03-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

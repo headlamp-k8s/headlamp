@@ -2,256 +2,264 @@
 
 exports[`Storyshots SimpleTable Datum 1`] = `
 <div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
-    <thead
-      class="MuiTableHead-root"
+    <table
+      class="MuiTable-root makeStyles-table"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <thead
+        class="MuiTableHead-root"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Status
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Age
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Long Field Name
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
-    >
-      <tr
-        class="MuiTableRow-root"
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Status
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Age
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Long Field Name
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+        <tr
+          class="MuiTableRow-root"
         >
-          some name0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some name0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some status0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some age0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
         >
-          some status0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some name1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some status1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some age1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
         >
-          some age0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some name1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some status1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some age1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some name2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some status2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some age2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some name2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some status2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some age2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 `;
 
 exports[`Storyshots SimpleTable Getter 1`] = `
 <div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
-    <thead
-      class="MuiTableHead-root"
+    <table
+      class="MuiTable-root makeStyles-table"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <thead
+        class="MuiTableHead-root"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Status
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Age
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Long Field Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Number
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
-    >
-      <tr
-        class="MuiTableRow-root"
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Status
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Age
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Long Field Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Number
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+        <tr
+          class="MuiTableRow-root"
         >
-          some name0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some name0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some status0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some age0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            22
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
         >
-          some status0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some name1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some status1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some age1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            33
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
         >
-          some age0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          22
-        </td>
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some name1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some status1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some age1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          33
-        </td>
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some name2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some status2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some age2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          44
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some name2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some status2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            some age2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            44
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 `;
 
@@ -443,94 +451,98 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
-    <thead
-      class="MuiTableHead-root"
+    <table
+      class="MuiTable-root makeStyles-table"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <thead
+        class="MuiTableHead-root"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          UID
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Labels
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
-    >
-      <tr
-        class="MuiTableRow-root"
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Namespace
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            UID
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Labels
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+        <tr
+          class="MuiTableRow-root"
         >
-          mydefinition.phonyresources1.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            mydefinition.phonyresources1.io
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            MyNamespace1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            phony1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            {"mylabel1":"myvalue1"}
+          </td>
+        </tr>
+        <tr
+          class="MuiTableRow-root"
         >
-          MyNamespace1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          {"mylabel1":"myvalue1"}
-        </td>
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          mydefinition.phonyresources2.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          {"mykey2":"mylabel"}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            mydefinition.phonyresources2.io
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            MyNamespace2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            phony2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            {"mykey2":"mylabel"}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 `;
 
@@ -722,70 +734,74 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
-    <thead
-      class="MuiTableHead-root"
+    <table
+      class="MuiTable-root makeStyles-table"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <thead
+        class="MuiTableHead-root"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          UID
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Labels
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
-    >
-      <tr
-        class="MuiTableRow-root"
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Namespace
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            UID
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Labels
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+        <tr
+          class="MuiTableRow-root"
         >
-          mydefinition.phonyresources2.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          {"mykey2":"mylabel"}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            mydefinition.phonyresources2.io
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            MyNamespace2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            phony2
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            {"mykey2":"mylabel"}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 `;
 
@@ -977,70 +993,74 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
-    <thead
-      class="MuiTableHead-root"
+    <table
+      class="MuiTable-root makeStyles-table"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <thead
+        class="MuiTableHead-root"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          UID
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Labels
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
-    >
-      <tr
-        class="MuiTableRow-root"
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Namespace
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            UID
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Labels
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+        <tr
+          class="MuiTableRow-root"
         >
-          mydefinition.phonyresources3.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace3
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony3
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          {"mykey3":"myvalue3"}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            mydefinition.phonyresources3.io
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            MyNamespace3
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            phony3
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            {"mykey3":"myvalue3"}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 `;
 
@@ -1244,92 +1264,96 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
-    <thead
-      class="MuiTableHead-root"
+    <table
+      class="MuiTable-root makeStyles-table"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <thead
+        class="MuiTableHead-root"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          UID
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Labels
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
-    >
-      <tr
-        class="MuiTableRow-root"
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Namespace
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            UID
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Labels
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+        <tr
+          class="MuiTableRow-root"
         >
-          mydefinition.phonyresources0.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            mydefinition.phonyresources0.io
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            MyNamespace0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            phony0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          />
+        </tr>
+        <tr
+          class="MuiTableRow-root"
         >
-          MyNamespace0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        />
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          mydefinition.phonyresources1.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          {"mylabel1":"myvalue1"}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            mydefinition.phonyresources1.io
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            MyNamespace1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            phony1
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            {"mylabel1":"myvalue1"}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 `;
 
@@ -1521,59 +1545,63 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
-    <thead
-      class="MuiTableHead-root"
+    <table
+      class="MuiTable-root makeStyles-table"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <thead
+        class="MuiTableHead-root"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Number
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
-    >
-      <tr
-        class="MuiTableRow-root"
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Namespace
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Number
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+        <tr
+          class="MuiTableRow-root"
         >
-          mydefinition.phonyresources3.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace3
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          30
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            mydefinition.phonyresources3.io
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            MyNamespace3
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            30
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 `;
 
@@ -1596,135 +1624,139 @@ exports[`Storyshots SimpleTable Reflect In URL 1`] = `
        
       ?p=2
     </p>
-    <table
-      class="MuiTable-root makeStyles-table"
+    <div
+      class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
     >
-      <thead
-        class="MuiTableHead-root"
+      <table
+        class="MuiTable-root makeStyles-table"
       >
-        <tr
-          class="MuiTableRow-root MuiTableRow-head"
+        <thead
+          class="MuiTableHead-root"
         >
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
+          <tr
+            class="MuiTableRow-root MuiTableRow-head"
           >
-            Name
-          </th>
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
-          >
-            Namespace
-          </th>
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
-          >
-            Number
-          </th>
-        </tr>
-      </thead>
-      <tbody
-        class="MuiTableBody-root"
-      >
-        <tr
-          class="MuiTableRow-root"
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+              scope="col"
+            >
+              Namespace
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+              scope="col"
+            >
+              Number
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="MuiTableBody-root"
         >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+          <tr
+            class="MuiTableRow-root"
           >
-            Name 5
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Name 5
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Namespace 5
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              5
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
           >
-            Namespace 5
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Name 6
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Namespace 6
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              6
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
           >
-            5
-          </td>
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Name 7
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Namespace 7
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              7
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
           >
-            Name 6
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Name 8
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Namespace 8
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              8
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
           >
-            Namespace 6
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            6
-          </td>
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 7
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 7
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            7
-          </td>
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 8
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 8
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            8
-          </td>
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 9
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 9
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            9
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Name 9
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Namespace 9
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              9
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 `;
@@ -1748,125 +1780,129 @@ exports[`Storyshots SimpleTable Reflect In URL With Prefix 1`] = `
        
       ?p=2
     </p>
-    <table
-      class="MuiTable-root makeStyles-table"
+    <div
+      class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
     >
-      <thead
-        class="MuiTableHead-root"
+      <table
+        class="MuiTable-root makeStyles-table"
       >
-        <tr
-          class="MuiTableRow-root MuiTableRow-head"
+        <thead
+          class="MuiTableHead-root"
         >
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
+          <tr
+            class="MuiTableRow-root MuiTableRow-head"
           >
-            Name
-          </th>
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
-          >
-            Namespace
-          </th>
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
-          >
-            Number
-          </th>
-        </tr>
-      </thead>
-      <tbody
-        class="MuiTableBody-root"
-      >
-        <tr
-          class="MuiTableRow-root"
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+              scope="col"
+            >
+              Namespace
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+              scope="col"
+            >
+              Number
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="MuiTableBody-root"
         >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+          <tr
+            class="MuiTableRow-root"
           >
-            Name 0
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Name 0
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Namespace 0
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            />
+          </tr>
+          <tr
+            class="MuiTableRow-root"
           >
-            Namespace 0
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          />
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Name 1
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Namespace 1
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            />
+          </tr>
+          <tr
+            class="MuiTableRow-root"
           >
-            Name 1
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Name 2
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Namespace 2
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            />
+          </tr>
+          <tr
+            class="MuiTableRow-root"
           >
-            Namespace 1
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          />
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Name 3
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Namespace 3
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            />
+          </tr>
+          <tr
+            class="MuiTableRow-root"
           >
-            Name 2
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 2
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          />
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 3
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 3
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          />
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 4
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 4
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          />
-        </tr>
-      </tbody>
-    </table>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Name 4
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            >
+              Namespace 4
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+            />
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 `;
@@ -2059,67 +2095,71 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
-    <thead
-      class="MuiTableHead-root"
+    <table
+      class="MuiTable-root makeStyles-table"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <thead
+        class="MuiTableHead-root"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <tr
+          class="MuiTableRow-root MuiTableRow-head"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          UID
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Labels
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
-    >
-      <tr
-        class="MuiTableRow-root"
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Namespace
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            UID
+          </th>
+          <th
+            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+            scope="col"
+          >
+            Labels
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="MuiTableBody-root"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+        <tr
+          class="MuiTableRow-root"
         >
-          mydefinition.phonyresources0.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        />
-      </tr>
-    </tbody>
-  </table>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            mydefinition.phonyresources0.io
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            MyNamespace0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          >
+            phony0
+          </td>
+          <td
+            class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+          />
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 `;

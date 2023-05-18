@@ -233,13 +233,17 @@ exports[`Storyshots PriorityClasses/PriorityClassesDetailsView Default 1`] = `
             class="MuiBox-root MuiBox-root"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                No data to be shown.
-              </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+                >
+                  No data to be shown.
+                </p>
+              </div>
             </div>
           </div>
         </div>

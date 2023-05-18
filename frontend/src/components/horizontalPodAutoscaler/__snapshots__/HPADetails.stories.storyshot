@@ -182,62 +182,66 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
               <dd
                 class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
               >
-                <table
-                  class="MuiTable-root makeStyles-table"
+                <div
+                  class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
                 >
-                  <thead
-                    class="MuiTableHead-root"
+                  <table
+                    class="MuiTable-root makeStyles-table"
                   >
-                    <tr
-                      class="MuiTableRow-root MuiTableRow-head"
+                    <thead
+                      class="MuiTableHead-root"
                     >
-                      <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                        scope="col"
+                      <tr
+                        class="MuiTableRow-root MuiTableRow-head"
                       >
-                        Name
-                      </th>
-                      <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                        scope="col"
-                      >
-                        (Current/Target)
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody
-                    class="MuiTableBody-root"
-                  >
-                    <tr
-                      class="MuiTableRow-root"
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          Name
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          (Current/Target)
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="MuiTableBody-root"
                     >
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body"
+                      <tr
+                        class="MuiTableRow-root"
                       >
-                        resource memory on pods
-                      </td>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body"
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          resource memory on pods
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          14360576/100Mi
+                        </td>
+                      </tr>
+                      <tr
+                        class="MuiTableRow-root"
                       >
-                        14360576/100Mi
-                      </td>
-                    </tr>
-                    <tr
-                      class="MuiTableRow-root"
-                    >
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body"
-                      >
-                        resource cpu on pods (as a percentage of request)
-                      </td>
-                      <td
-                        class="MuiTableCell-root MuiTableCell-body"
-                      >
-                        0% (1m)/50%
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          resource cpu on pods (as a percentage of request)
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          0% (1m)/50%
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </dd>
               <dt
                 class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -310,190 +314,194 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
           <div
             class="MuiBox-root MuiBox-root"
           >
-            <table
-              class="MuiTable-root makeStyles-table"
+            <div
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
-              <thead
-                class="MuiTableHead-root"
+              <table
+                class="MuiTable-root makeStyles-table"
               >
-                <tr
-                  class="MuiTableRow-root MuiTableRow-head"
+                <thead
+                  class="MuiTableHead-root"
                 >
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
                   >
-                    Condition
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    Status
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    Last Transition
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    Last Update
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    Reason
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                class="MuiTableBody-root"
-              >
-                <tr
-                  class="MuiTableRow-root"
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Condition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Last Transition
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Last Update
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
                 >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
+                  <tr
+                    class="MuiTableRow-root"
                   >
-                    <span
-                      class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                      style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      AbleToScale
-                    </span>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    True
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2022-10-20T11:11:01.000Z"
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        AbleToScale
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      3 months
-                      <span />
-                    </p>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    -
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="the HPA controller was able to get the target's current scale"
+                      True
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      SucceededGetScale
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-                <tr
-                  class="MuiTableRow-root"
-                >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <span
-                      class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                      style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-10-20T11:11:01.000Z"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      ScalingActive
-                    </span>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    False
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2022-10-26T12:53:22.000Z"
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      3 months
-                      <span />
-                    </p>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="the HPA controller was able to get the target's current scale"
+                      >
+                        SucceededGetScale
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
                   >
-                    -
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="the HPA was unable to compute the replica count: failed to get memory utilization: unable to get metrics for resource memory: no metrics returned from resource metrics API"
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      FailedGetResourceMetric
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-                <tr
-                  class="MuiTableRow-root"
-                >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <span
-                      class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                      style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        ScalingActive
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      ScalingLimited
-                    </span>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    False
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2022-10-20T11:11:01.000Z"
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      3 months
-                      <span />
-                    </p>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    -
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="the desired count is within the acceptable range"
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-10-26T12:53:22.000Z"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      DesiredWithinRange
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="the HPA was unable to compute the replica count: failed to get memory utilization: unable to get metrics for resource memory: no metrics returned from resource metrics API"
+                      >
+                        FailedGetResourceMetric
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <span
+                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                      >
+                        ScalingLimited
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      False
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-10-20T11:11:01.000Z"
+                      >
+                        3 months
+                        <span />
+                      </p>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      -
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="the desired count is within the acceptable range"
+                      >
+                        DesiredWithinRange
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -538,13 +546,17 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
             class="MuiBox-root MuiBox-root"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                No data to be shown.
-              </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+                >
+                  No data to be shown.
+                </p>
+              </div>
             </div>
           </div>
         </div>

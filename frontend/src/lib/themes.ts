@@ -99,7 +99,13 @@ const commonRules = {
       },
     },
     tables: {
-      headerText: '#474747',
+      head: {
+        background: '#faf9f8',
+        color: '#242424',
+      },
+      body: {
+        background: '#fff',
+      },
     },
     notificationBorderColor: 'rgba(0,0,0,0.12)',
   },
@@ -142,7 +148,13 @@ const darkTheme = createTheme({
   palette: {
     ...commonRules.palette,
     tables: {
-      headerText: '#aeaeae',
+      head: {
+        background: '#000',
+        color: '#aeaeae',
+      },
+      body: {
+        background: '#1B1A19',
+      },
     },
     primary: {
       contrastText: '#fff',

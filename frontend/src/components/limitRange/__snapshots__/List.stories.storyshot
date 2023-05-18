@@ -87,122 +87,126 @@ exports[`Storyshots LimitRange/ListView Items 1`] = `
     <div
       class="MuiBox-root MuiBox-root"
     >
-      <table
-        class="MuiTable-root makeStyles-table"
+      <div
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
-        <thead
-          class="MuiTableHead-root"
+        <table
+          class="MuiTable-root makeStyles-table"
         >
-          <tr
-            class="MuiTableRow-root MuiTableRow-head"
+          <thead
+            class="MuiTableHead-root"
           >
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-              scope="col"
+            <tr
+              class="MuiTableRow-root MuiTableRow-head"
             >
-              Name
-              <button
-                aria-label="sort swap"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                type="button"
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                scope="col"
               >
-                <span
-                  class="MuiIconButton-label"
+                Name
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
                 >
-                  <span />
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-              scope="col"
-            >
-              Namespace
-              <button
-                aria-label="sort swap"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                type="button"
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                scope="col"
               >
-                <span
-                  class="MuiIconButton-label"
+                Namespace
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
                 >
-                  <span />
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-              scope="col"
-              style="text-align: right;"
-            >
-              Age
-              <button
-                aria-label="sort up"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                type="button"
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                scope="col"
+                style="text-align: right;"
               >
-                <span
-                  class="MuiIconButton-label"
+                Age
+                <button
+                  aria-label="sort up"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
                 >
-                  <span />
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          class="MuiTableBody-root"
-        >
-          <tr
-            class="MuiTableRow-root"
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="MuiTableBody-root"
           >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+            <tr
+              class="MuiTableRow-root"
             >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                limit-range
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  limit-range
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                default
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-              style="text-align: right;"
-            >
-              <p
-                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                title="2022-01-01T00:00:00.000Z"
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  default
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="text-align: right;"
               >
-                3mo
-                <span />
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                <p
+                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  title="2022-01-01T00:00:00.000Z"
+                >
+                  3mo
+                  <span />
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

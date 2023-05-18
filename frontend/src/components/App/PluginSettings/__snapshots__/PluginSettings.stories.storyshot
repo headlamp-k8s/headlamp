@@ -28,309 +28,313 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
     <div
       class="MuiBox-root MuiBox-root"
     >
-      <table
-        class="MuiTable-root makeStyles-table"
+      <div
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
-        <thead
-          class="MuiTableHead-root"
+        <table
+          class="MuiTable-root makeStyles-table"
         >
-          <tr
-            class="MuiTableRow-root MuiTableRow-head"
+          <thead
+            class="MuiTableHead-root"
           >
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
+            <tr
+              class="MuiTableRow-root MuiTableRow-head"
             >
-              Name
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Description
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Homepage
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Enable
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          class="MuiTableBody-root"
-        >
-          <tr
-            class="MuiTableRow-root"
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Name
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Description
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Homepage
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Enable
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="MuiTableBody-root"
           >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 0"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 0"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 0"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 0"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 1"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 1"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 1"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 1"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 2"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 2"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 2"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 2"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 3"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 3"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 3"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 3"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 4"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 4"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 4"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 4"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <div
@@ -383,13 +387,17 @@ exports[`Storyshots Settings/PluginSettings Empty 1`] = `
       class="MuiBox-root MuiBox-root"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
       >
-        <p
-          class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+        <div
+          class="MuiBox-root MuiBox-root"
         >
-          No data to be shown.
-        </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+          >
+            No data to be shown.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -424,309 +432,313 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
     <div
       class="MuiBox-root MuiBox-root"
     >
-      <table
-        class="MuiTable-root makeStyles-table"
+      <div
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
-        <thead
-          class="MuiTableHead-root"
+        <table
+          class="MuiTable-root makeStyles-table"
         >
-          <tr
-            class="MuiTableRow-root MuiTableRow-head"
+          <thead
+            class="MuiTableHead-root"
           >
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
+            <tr
+              class="MuiTableRow-root MuiTableRow-head"
             >
-              Name
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Description
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Homepage
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Enable
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          class="MuiTableBody-root"
-        >
-          <tr
-            class="MuiTableRow-root"
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Name
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Description
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Homepage
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Enable
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="MuiTableBody-root"
           >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 0"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 0"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 0"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 0"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 1"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 1"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 1"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 1"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 2"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 2"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 2"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 2"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 3"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 3"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 3"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 3"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 4"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 4"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 4"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 4"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -760,309 +772,313 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
     <div
       class="MuiBox-root MuiBox-root"
     >
-      <table
-        class="MuiTable-root makeStyles-table"
+      <div
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
-        <thead
-          class="MuiTableHead-root"
+        <table
+          class="MuiTable-root makeStyles-table"
         >
-          <tr
-            class="MuiTableRow-root MuiTableRow-head"
+          <thead
+            class="MuiTableHead-root"
           >
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
+            <tr
+              class="MuiTableRow-root MuiTableRow-head"
             >
-              Name
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Description
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Homepage
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Enable
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          class="MuiTableBody-root"
-        >
-          <tr
-            class="MuiTableRow-root"
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Name
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Description
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Homepage
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Enable
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="MuiTableBody-root"
           >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 0"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 0"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 0"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 0"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 1"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 1"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 1"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 1"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 2"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 2"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 2"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 2"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 3"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 3"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 3"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 3"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 4"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 4"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 4"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 4"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -1096,834 +1112,838 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
     <div
       class="MuiBox-root MuiBox-root"
     >
-      <table
-        class="MuiTable-root makeStyles-table"
+      <div
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
-        <thead
-          class="MuiTableHead-root"
+        <table
+          class="MuiTable-root makeStyles-table"
         >
-          <tr
-            class="MuiTableRow-root MuiTableRow-head"
+          <thead
+            class="MuiTableHead-root"
           >
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
+            <tr
+              class="MuiTableRow-root MuiTableRow-head"
             >
-              Name
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Description
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Homepage
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Enable
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          class="MuiTableBody-root"
-        >
-          <tr
-            class="MuiTableRow-root"
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Name
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Description
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Homepage
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Enable
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="MuiTableBody-root"
           >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 0"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 0"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 0"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 0"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 1"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 1"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 1"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 1"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 2"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 2"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 2"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 2"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 3"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 3"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 3"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 3"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 4"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 4"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 4"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 4"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 5
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A5
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-5
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 5
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A5
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-5
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 5"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 5"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 5"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 5"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 6
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A6
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-6
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 6
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A6
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-6
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 6"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 6"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 6"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 6"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 7
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A7
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-7
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 7
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A7
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-7
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 7"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 7"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 7"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 7"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 8
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A8
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-8
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 8
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A8
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-8
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 8"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 8"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 8"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 8"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 9
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A9
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-9
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 9
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A9
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-9
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 9"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 9"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 9"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 9"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 10
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A10
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-10
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 10
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A10
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-10
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 10"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 10"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 10"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 10"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 11
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A11
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-11
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 11
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A11
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-11
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 11"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 11"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 11"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 11"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 12
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A12
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-12
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 12
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A12
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-12
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 12"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 12"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 12"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 12"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 13
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A13
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-13
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 13
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A13
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-13
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 13"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 13"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 13"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 13"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 14
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A14
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-14
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 14
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A14
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-14
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 14"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 14"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 14"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 14"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -1957,834 +1977,838 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
     <div
       class="MuiBox-root MuiBox-root"
     >
-      <table
-        class="MuiTable-root makeStyles-table"
+      <div
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
-        <thead
-          class="MuiTableHead-root"
+        <table
+          class="MuiTable-root makeStyles-table"
         >
-          <tr
-            class="MuiTableRow-root MuiTableRow-head"
+          <thead
+            class="MuiTableHead-root"
           >
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
+            <tr
+              class="MuiTableRow-root MuiTableRow-head"
             >
-              Name
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Description
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Homepage
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Enable
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          class="MuiTableBody-root"
-        >
-          <tr
-            class="MuiTableRow-root"
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Name
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Description
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Homepage
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Enable
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="MuiTableBody-root"
           >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-0
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-0
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 0"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 0"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 0"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 0"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-1
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-1
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 1"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 1"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 1"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 1"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-2
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-2
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 2"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 2"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 2"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 2"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-3
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-3
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 3"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 3"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 3"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 3"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-4
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-4
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 4"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 4"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 4"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 4"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 5
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A5
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-5
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 5
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A5
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-5
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 5"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 5"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 5"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 5"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 6
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A6
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-6
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 6
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A6
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-6
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 6"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 6"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 6"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 6"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 7
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A7
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-7
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 7
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A7
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-7
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 7"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 7"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 7"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 7"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 8
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A8
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-8
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 8
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A8
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-8
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 8"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 8"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 8"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 8"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 9
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A9
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-9
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 9
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A9
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-9
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 9"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 9"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 9"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 9"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 10
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A10
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-10
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 10
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A10
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-10
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 10"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 10"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 10"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 10"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 11
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A11
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-11
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 11
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A11
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-11
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 11"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 11"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 11"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 11"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 12
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A12
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-12
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 12
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A12
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-12
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 12"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 12"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 12"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 12"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 13
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A13
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-13
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 13
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A13
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-13
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 13"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 13"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
                   >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 13"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 13"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              plugin a 14
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              This is a plugin for this project PLUGIN A14
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              https://example.com/plugin-link-14
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <span
-                class="MuiSwitch-root"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                plugin a 14
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                This is a plugin for this project PLUGIN A14
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                https://example.com/plugin-link-14
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  aria-disabled="false"
-                  aria-label="Toggle plugin a 14"
-                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
+                  class="MuiSwitch-root"
                 >
                   <span
-                    class="MuiIconButton-label"
+                    aria-disabled="false"
+                    aria-label="Toggle plugin a 14"
+                    class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-checked MuiSwitch-checked"
                   >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input"
-                      name="plugin a 14"
-                      type="checkbox"
-                      value=""
-                    />
                     <span
-                      class="MuiSwitch-thumb"
+                      class="MuiIconButton-label"
+                    >
+                      <input
+                        checked=""
+                        class="PrivateSwitchBase-input MuiSwitch-input"
+                        name="plugin a 14"
+                        type="checkbox"
+                        value=""
+                      />
+                      <span
+                        class="MuiSwitch-thumb"
+                      />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
                     />
                   </span>
                   <span
-                    class="MuiTouchRipple-root"
+                    class="MuiSwitch-track"
                   />
                 </span>
-                <span
-                  class="MuiSwitch-track"
-                />
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

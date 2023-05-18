@@ -225,535 +225,539 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
           <div
             class="MuiBox-root MuiBox-root"
           >
-            <table
-              class="MuiTable-root makeStyles-table"
+            <div
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
-              <thead
-                class="MuiTableHead-root"
+              <table
+                class="MuiTable-root makeStyles-table"
               >
-                <tr
-                  class="MuiTableRow-root MuiTableRow-head"
+                <thead
+                  class="MuiTableHead-root"
                 >
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                    scope="col"
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
                   >
-                    Name
-                    <button
-                      aria-label="sort swap"
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                      tabindex="0"
-                      type="button"
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
                     >
-                      <span
-                        class="MuiIconButton-label"
+                      Name
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
                       >
-                        <span />
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                    scope="col"
-                  >
-                    Restarts
-                    <button
-                      aria-label="sort swap"
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                      tabindex="0"
-                      type="button"
-                    >
-                      <span
-                        class="MuiIconButton-label"
-                      >
-                        <span />
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    Ready
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                    scope="col"
-                  >
-                    Status
-                    <button
-                      aria-label="sort swap"
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                      tabindex="0"
-                      type="button"
-                    >
-                      <span
-                        class="MuiIconButton-label"
-                      >
-                        <span />
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                    scope="col"
-                  >
-                    Pod IP
-                    <button
-                      aria-label="sort swap"
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                      tabindex="0"
-                      type="button"
-                    >
-                      <span
-                        class="MuiIconButton-label"
-                      >
-                        <span />
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                    scope="col"
-                  >
-                    Node Name
-                    <button
-                      aria-label="sort swap"
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                      tabindex="0"
-                      type="button"
-                    >
-                      <span
-                        class="MuiIconButton-label"
-                      >
-                        <span />
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                    scope="col"
-                    style="text-align: right;"
-                  >
-                    Age
-                    <button
-                      aria-label="sort up"
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                      tabindex="0"
-                      type="button"
-                    >
-                      <span
-                        class="MuiIconButton-label"
-                      >
-                        <span />
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                class="MuiTableBody-root"
-              >
-                <tr
-                  class="MuiTableRow-root"
-                >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <a
-                      class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                      href="/"
-                    >
-                      imagepullbackoff
-                    </a>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0/1
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root"
-                      title="Back-off pulling image \\"doesnotexist:nover\\""
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        ImagePullBackOff
-                      </span>
-                    </div>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0.0.0.2
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    my-node
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                    style="text-align: right;"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2022-01-01T00:00:00.000Z"
-                    >
-                      3mo
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-                <tr
-                  class="MuiTableRow-root"
-                >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <a
-                      class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                      href="/"
-                    >
-                      successful
-                    </a>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0/1
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root"
-                      title=""
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
-                      >
-                        Completed
-                      </span>
-                    </div>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0.0.0.2
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    my-node
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                    style="text-align: right;"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2022-01-01T00:00:00.000Z"
-                    >
-                      3mo
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-                <tr
-                  class="MuiTableRow-root"
-                >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <a
-                      class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                      href="/"
-                    >
-                      initializing
-                    </a>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0/1
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root"
-                      title=""
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Init:0/2
-                      </span>
-                    </div>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0.0.0.2
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    my-node
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                    style="text-align: right;"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2022-01-01T00:00:00.000Z"
-                    >
-                      3mo
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-                <tr
-                  class="MuiTableRow-root"
-                >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <a
-                      class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                      href="/"
-                    >
-                      liveness-http
-                    </a>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    337 (3mo ago)
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0/1
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root"
-                      title="back-off 5m0s restarting failed container=liveness pod=liveness-http_default(4f8b71a3-f99c-41c2-9523-83edc1de02ce)"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
-                      >
-                        CrashLoopBackOff
-                        <div
-                          aria-label="hidden"
-                          class="MuiBox-root MuiBox-root"
-                          style="vertical-align: text-top;"
+                        <span
+                          class="MuiIconButton-label"
                         >
                           <span />
-                        </div>
-                      </span>
-                    </div>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0.0.0.2
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    my-node
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                    style="text-align: right;"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2022-01-01T00:00:00.000Z"
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
                     >
-                      3mo
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-                <tr
-                  class="MuiTableRow-root"
-                >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <a
-                      class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                      href="/"
-                    >
-                      terminated
-                    </a>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0/1
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root"
-                      title=""
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
+                      Restarts
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
                       >
-                        Error
-                        <div
-                          aria-label="hidden"
-                          class="MuiBox-root MuiBox-root"
-                          style="vertical-align: text-top;"
+                        <span
+                          class="MuiIconButton-label"
                         >
                           <span />
-                        </div>
-                      </span>
-                    </div>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0.0.0.2
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    my-node
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                    style="text-align: right;"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2022-01-01T00:00:00.000Z"
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
                     >
-                      3mo
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-                <tr
-                  class="MuiTableRow-root"
-                >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <a
-                      class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                      href="/"
+                      Ready
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
                     >
-                      running
-                    </a>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    1/1
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root"
-                      title=""
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                      Status
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
                       >
-                        Running
-                      </span>
-                    </div>
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    0.0.0.2
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    my-node
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                    style="text-align: right;"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2022-01-01T00:00:00.000Z"
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
                     >
-                      3mo
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      Pod IP
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Node Name
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
+                      style="text-align: right;"
+                    >
+                      Age
+                      <button
+                        aria-label="sort up"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        imagepullbackoff
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0/1
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title="Back-off pulling image \\"doesnotexist:nover\\""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                        >
+                          ImagePullBackOff
+                        </span>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0.0.0.2
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      my-node
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                      style="text-align: right;"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-01-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        successful
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0/1
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title=""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                        >
+                          Completed
+                        </span>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0.0.0.2
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      my-node
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                      style="text-align: right;"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-01-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        initializing
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0/1
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title=""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                        >
+                          Init:0/2
+                        </span>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0.0.0.2
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      my-node
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                      style="text-align: right;"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-01-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        liveness-http
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      337 (3mo ago)
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0/1
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title="back-off 5m0s restarting failed container=liveness pod=liveness-http_default(4f8b71a3-f99c-41c2-9523-83edc1de02ce)"
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
+                        >
+                          CrashLoopBackOff
+                          <div
+                            aria-label="hidden"
+                            class="MuiBox-root MuiBox-root"
+                            style="vertical-align: text-top;"
+                          >
+                            <span />
+                          </div>
+                        </span>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0.0.0.2
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      my-node
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                      style="text-align: right;"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-01-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        terminated
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0/1
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title=""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
+                        >
+                          Error
+                          <div
+                            aria-label="hidden"
+                            class="MuiBox-root MuiBox-root"
+                            style="vertical-align: text-top;"
+                          >
+                            <span />
+                          </div>
+                        </span>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0.0.0.2
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      my-node
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                      style="text-align: right;"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-01-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        running
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      1/1
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title=""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                        >
+                          Running
+                        </span>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0.0.0.2
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      my-node
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                      style="text-align: right;"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2022-01-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -797,102 +801,106 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
           <div
             class="MuiBox-root MuiBox-root"
           >
-            <table
-              class="MuiTable-root makeStyles-table"
+            <div
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
-              <thead
-                class="MuiTableHead-root"
+              <table
+                class="MuiTable-root makeStyles-table"
               >
-                <tr
-                  class="MuiTableRow-root MuiTableRow-head"
+                <thead
+                  class="MuiTableHead-root"
                 >
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
                   >
-                    Type
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    Reason
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    From
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                    scope="col"
-                  >
-                    Message
-                  </th>
-                  <th
-                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                    scope="col"
-                  >
-                    Age
-                    <button
-                      aria-label="sort swap"
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                      tabindex="0"
-                      type="button"
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
                     >
-                      <span
-                        class="MuiIconButton-label"
+                      Type
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      From
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Message
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Age
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
                       >
-                        <span />
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                class="MuiTableBody-root"
-              >
-                <tr
-                  class="MuiTableRow-root"
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
                 >
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
+                  <tr
+                    class="MuiTableRow-root"
                   >
-                    Normal
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    Created
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    kubelet
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    Created
-                  </td>
-                  <td
-                    class="MuiTableCell-root MuiTableCell-body"
-                  >
-                    <p
-                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                      title="2021-03-01T00:00:00.000Z"
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      3mo
-                      <span />
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      Normal
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      Created
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      kubelet
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      Created
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        title="2021-03-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

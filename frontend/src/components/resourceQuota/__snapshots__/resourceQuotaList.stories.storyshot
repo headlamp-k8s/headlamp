@@ -87,448 +87,452 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
     <div
       class="MuiBox-root MuiBox-root"
     >
-      <table
-        class="MuiTable-root makeStyles-table"
+      <div
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
-        <thead
-          class="MuiTableHead-root"
+        <table
+          class="MuiTable-root makeStyles-table"
         >
-          <tr
-            class="MuiTableRow-root MuiTableRow-head"
+          <thead
+            class="MuiTableHead-root"
           >
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-              scope="col"
+            <tr
+              class="MuiTableRow-root MuiTableRow-head"
             >
-              Name
-              <button
-                aria-label="sort swap"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                type="button"
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                scope="col"
               >
-                <span
-                  class="MuiIconButton-label"
+                Name
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
                 >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Namespace
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Request
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Limit
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                scope="col"
+                style="text-align: right;"
+              >
+                Age
+                <button
+                  aria-label="sort up"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="MuiTableBody-root"
+          >
+            <tr
+              class="MuiTableRow-root"
+            >
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test-cpu-quota
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <div
+                  class="MuiBox-root MuiBox-root makeStyles-root"
+                >
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      requests.cpu: 0.5 cores/0.2 cores
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <div
+                  class="MuiBox-root MuiBox-root makeStyles-root"
+                >
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      limits.cpu: 0 core/0.3 cores
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="text-align: right;"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  title="2020-01-01T00:00:00.000Z"
+                >
+                  3mo
                   <span />
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-              scope="col"
+                </p>
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              Namespace
-              <button
-                aria-label="sort swap"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                type="button"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                <span
-                  class="MuiIconButton-label"
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
                 >
+                  test-cpu-quota
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <div
+                  class="MuiBox-root MuiBox-root makeStyles-root"
+                >
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      requests.cpu: 0.5 cores/0.2 cores
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <div
+                  class="MuiBox-root MuiBox-root makeStyles-root"
+                >
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      limits.cpu: 0 core/0.3 cores
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="text-align: right;"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  title="2020-01-01T00:00:00.000Z"
+                >
+                  3mo
                   <span />
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
+                </p>
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              Request
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-              scope="col"
-            >
-              Limit
-            </th>
-            <th
-              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-              scope="col"
-              style="text-align: right;"
-            >
-              Age
-              <button
-                aria-label="sort up"
-                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                tabindex="0"
-                type="button"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                <span
-                  class="MuiIconButton-label"
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
                 >
+                  test-cpu-quota
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <div
+                  class="MuiBox-root MuiBox-root makeStyles-root"
+                >
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      requests.cpu: 0.5 cores/0.2 cores
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <div
+                  class="MuiBox-root MuiBox-root makeStyles-root"
+                >
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      limits.cpu: 0 core/0.3 cores
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="text-align: right;"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  title="2020-01-01T00:00:00.000Z"
+                >
+                  3mo
                   <span />
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          class="MuiTableBody-root"
-        >
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+                </p>
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                test-cpu-quota
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test-cpu-quota
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                test
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <div
-                class="MuiBox-root MuiBox-root makeStyles-root"
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
-                  class="MuiChip-root MuiChip-outlined"
+                  class="MuiBox-root MuiBox-root makeStyles-root"
                 >
-                  <span
-                    class="MuiChip-label"
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
                   >
-                    requests.cpu: 0.5 cores/0.2 cores
-                  </span>
+                    <span
+                      class="MuiChip-label"
+                    >
+                      requests.cpu: 0.5 cores/0.2 cores
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <div
-                class="MuiBox-root MuiBox-root makeStyles-root"
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
-                  class="MuiChip-root MuiChip-outlined"
+                  class="MuiBox-root MuiBox-root makeStyles-root"
                 >
-                  <span
-                    class="MuiChip-label"
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
                   >
-                    limits.cpu: 0 core/0.3 cores
-                  </span>
+                    <span
+                      class="MuiChip-label"
+                    >
+                      limits.cpu: 0 core/0.3 cores
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-              style="text-align: right;"
-            >
-              <p
-                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                title="2020-01-01T00:00:00.000Z"
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="text-align: right;"
               >
-                3mo
-                <span />
-              </p>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
+                <p
+                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  title="2020-01-01T00:00:00.000Z"
+                >
+                  3mo
+                  <span />
+                </p>
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
             >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                test-cpu-quota
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test-cpu-quota
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                test
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <div
-                class="MuiBox-root MuiBox-root makeStyles-root"
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  test
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
-                  class="MuiChip-root MuiChip-outlined"
+                  class="MuiBox-root MuiBox-root makeStyles-root"
                 >
-                  <span
-                    class="MuiChip-label"
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
                   >
-                    requests.cpu: 0.5 cores/0.2 cores
-                  </span>
+                    <span
+                      class="MuiChip-label"
+                    >
+                      requests.cpu: 0.5 cores/0.2 cores
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <div
-                class="MuiBox-root MuiBox-root makeStyles-root"
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
-                  class="MuiChip-root MuiChip-outlined"
+                  class="MuiBox-root MuiBox-root makeStyles-root"
                 >
-                  <span
-                    class="MuiChip-label"
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
                   >
-                    limits.cpu: 0 core/0.3 cores
-                  </span>
+                    <span
+                      class="MuiChip-label"
+                    >
+                      limits.cpu: 0 core/0.3 cores
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-              style="text-align: right;"
-            >
-              <p
-                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                title="2020-01-01T00:00:00.000Z"
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="text-align: right;"
               >
-                3mo
-                <span />
-              </p>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
-              >
-                test-cpu-quota
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
-              >
-                test
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <div
-                class="MuiBox-root MuiBox-root makeStyles-root"
-              >
-                <div
-                  class="MuiChip-root MuiChip-outlined"
+                <p
+                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  title="2020-01-01T00:00:00.000Z"
                 >
-                  <span
-                    class="MuiChip-label"
-                  >
-                    requests.cpu: 0.5 cores/0.2 cores
-                  </span>
-                </div>
-              </div>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <div
-                class="MuiBox-root MuiBox-root makeStyles-root"
-              >
-                <div
-                  class="MuiChip-root MuiChip-outlined"
-                >
-                  <span
-                    class="MuiChip-label"
-                  >
-                    limits.cpu: 0 core/0.3 cores
-                  </span>
-                </div>
-              </div>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-              style="text-align: right;"
-            >
-              <p
-                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                title="2020-01-01T00:00:00.000Z"
-              >
-                3mo
-                <span />
-              </p>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
-              >
-                test-cpu-quota
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
-              >
-                test
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <div
-                class="MuiBox-root MuiBox-root makeStyles-root"
-              >
-                <div
-                  class="MuiChip-root MuiChip-outlined"
-                >
-                  <span
-                    class="MuiChip-label"
-                  >
-                    requests.cpu: 0.5 cores/0.2 cores
-                  </span>
-                </div>
-              </div>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <div
-                class="MuiBox-root MuiBox-root makeStyles-root"
-              >
-                <div
-                  class="MuiChip-root MuiChip-outlined"
-                >
-                  <span
-                    class="MuiChip-label"
-                  >
-                    limits.cpu: 0 core/0.3 cores
-                  </span>
-                </div>
-              </div>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-              style="text-align: right;"
-            >
-              <p
-                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                title="2020-01-01T00:00:00.000Z"
-              >
-                3mo
-                <span />
-              </p>
-            </td>
-          </tr>
-          <tr
-            class="MuiTableRow-root"
-          >
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
-              >
-                test-cpu-quota
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <a
-                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                href="/"
-              >
-                test
-              </a>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <div
-                class="MuiBox-root MuiBox-root makeStyles-root"
-              >
-                <div
-                  class="MuiChip-root MuiChip-outlined"
-                >
-                  <span
-                    class="MuiChip-label"
-                  >
-                    requests.cpu: 0.5 cores/0.2 cores
-                  </span>
-                </div>
-              </div>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-            >
-              <div
-                class="MuiBox-root MuiBox-root makeStyles-root"
-              >
-                <div
-                  class="MuiChip-root MuiChip-outlined"
-                >
-                  <span
-                    class="MuiChip-label"
-                  >
-                    limits.cpu: 0 core/0.3 cores
-                  </span>
-                </div>
-              </div>
-            </td>
-            <td
-              class="MuiTableCell-root MuiTableCell-body"
-              style="text-align: right;"
-            >
-              <p
-                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                title="2020-01-01T00:00:00.000Z"
-              >
-                3mo
-                <span />
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                  3mo
+                  <span />
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
