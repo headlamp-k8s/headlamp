@@ -79,170 +79,166 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="false"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root"
           >
-            <div
-              aria-busy="false"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+            <dl
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
             >
-              <dl
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
               >
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                Name
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Name
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  test-cpu-quota
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Namespace
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    test-cpu-quota
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  test
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Creation
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Namespace
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    test
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Creation
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    2022-10-25T11:48:48.000Z
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Annotations
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  2022-10-25T11:48:48.000Z
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Annotations
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
                 >
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                    style="max-width: 80%;"
                   >
                     <div
-                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-                      style="max-width: 80%;"
+                      class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                     >
-                      <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-                      >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
-                          title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ResourceQuota\\",\\"metadata\\":{\\"annotations\\":{},\\"name\\":\\"test-cpu-quota\\",\\"namespace\\":\\"test\\"},\\"spec\\":{\\"hard\\":{\\"limits.cpu\\":\\"300m\\",\\"requests.cpu\\":\\"200m\\"}}}
+                      <p
+                        class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                        title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ResourceQuota\\",\\"metadata\\":{\\"annotations\\":{},\\"name\\":\\"test-cpu-quota\\",\\"namespace\\":\\"test\\"},\\"spec\\":{\\"hard\\":{\\"limits.cpu\\":\\"300m\\",\\"requests.cpu\\":\\"200m\\"}}}
 "
-                        >
-                          kubectl.kubernetes.io/last-applied-configuration: …
-                        </p>
-                      </div>
+                      >
+                        kubectl.kubernetes.io/last-applied-configuration: …
+                      </p>
                     </div>
                   </div>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                </div>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Status
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <table
+                  class="MuiTable-root makeStyles-table"
                 >
-                  Status
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <table
-                    class="MuiTable-root makeStyles-table"
+                  <thead
+                    class="MuiTableHead-root"
                   >
-                    <thead
-                      class="MuiTableHead-root"
+                    <tr
+                      class="MuiTableRow-root MuiTableRow-head"
                     >
-                      <tr
-                        class="MuiTableRow-root MuiTableRow-head"
+                      <th
+                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                        scope="col"
                       >
-                        <th
-                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                          scope="col"
-                        >
-                          Resource
-                        </th>
-                        <th
-                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                          scope="col"
-                        >
-                          Used
-                        </th>
-                        <th
-                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                          scope="col"
-                        >
-                          Hard
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody
-                      class="MuiTableBody-root"
+                        Resource
+                      </th>
+                      <th
+                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                        scope="col"
+                      >
+                        Used
+                      </th>
+                      <th
+                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                        scope="col"
+                      >
+                        Hard
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root"
                     >
-                      <tr
-                        class="MuiTableRow-root"
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body"
                       >
-                        <td
-                          class="MuiTableCell-root MuiTableCell-body"
-                        >
-                          limits.cpu
-                        </td>
-                        <td
-                          class="MuiTableCell-root MuiTableCell-body"
-                        >
-                          0 core
-                        </td>
-                        <td
-                          class="MuiTableCell-root MuiTableCell-body"
-                        >
-                          300m (0.3 cores)
-                        </td>
-                      </tr>
-                      <tr
-                        class="MuiTableRow-root"
+                        limits.cpu
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body"
                       >
-                        <td
-                          class="MuiTableCell-root MuiTableCell-body"
-                        >
-                          requests.cpu
-                        </td>
-                        <td
-                          class="MuiTableCell-root MuiTableCell-body"
-                        >
-                          500m (0.5 cores)
-                        </td>
-                        <td
-                          class="MuiTableCell-root MuiTableCell-body"
-                        >
-                          200m (0.2 cores)
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </dd>
-              </dl>
-            </div>
+                        0 core
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body"
+                      >
+                        300m (0.3 cores)
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body"
+                      >
+                        requests.cpu
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body"
+                      >
+                        500m (0.5 cores)
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body"
+                      >
+                        200m (0.2 cores)
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </dd>
+            </dl>
           </div>
         </div>
       </div>
@@ -291,108 +287,104 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root"
           >
-            <div
-              class="MuiBox-root MuiBox-root"
+            <table
+              class="MuiTable-root makeStyles-table"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <thead
+                class="MuiTableHead-root"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <tr
+                  class="MuiTableRow-root MuiTableRow-head"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Type
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      From
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Message
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                    >
-                      Age
-                      <button
-                        aria-label="sort swap"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
-                      >
-                        <span
-                          class="MuiIconButton-label"
-                        >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root"
+                    Type
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                    Reason
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
+                  >
+                    From
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
+                  >
+                    Message
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                    scope="col"
+                  >
+                    Age
+                    <button
+                      aria-label="sort swap"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                      tabindex="0"
+                      type="button"
                     >
-                      Normal
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      kubelet
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-03-01T00:00:00.000Z"
+                      <span
+                        class="MuiIconButton-label"
                       >
-                        3mo
                         <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    Normal
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    Created
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    kubelet
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    Created
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    <p
+                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                      title="2021-03-01T00:00:00.000Z"
+                    >
+                      3mo
+                      <span />
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -465,22 +457,18 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="true"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root"
           >
             <div
-              aria-busy="true"
-              aria-live="polite"
               class="MuiBox-root MuiBox-root"
             >
-              <div
-                class="MuiBox-root MuiBox-root"
+              <p
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorError MuiTypography-alignCenter"
               >
-                <p
-                  class="MuiTypography-root MuiTypography-body1 MuiTypography-colorError MuiTypography-alignCenter"
-                >
-                  Phony error is phony!
-                </p>
-              </div>
+                Phony error is phony!
+              </p>
             </div>
           </div>
         </div>
@@ -568,36 +556,32 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView No Item Yet 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="true"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root"
           >
             <div
-              aria-busy="true"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+              class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
             >
               <div
-                class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+                class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+                role="progressbar"
+                style="width: 40px; height: 40px;"
+                title="Loading resource data"
               >
-                <div
-                  class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-                  role="progressbar"
-                  style="width: 40px; height: 40px;"
-                  title="Loading resource data"
+                <svg
+                  class="MuiCircularProgress-svg"
+                  viewBox="22 22 44 44"
                 >
-                  <svg
-                    class="MuiCircularProgress-svg"
-                    viewBox="22 22 44 44"
-                  >
-                    <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                      cx="44"
-                      cy="44"
-                      fill="none"
-                      r="20.2"
-                      stroke-width="3.6"
-                    />
-                  </svg>
-                </div>
+                  <circle
+                    class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                    cx="44"
+                    cy="44"
+                    fill="none"
+                    r="20.2"
+                    stroke-width="3.6"
+                  />
+                </svg>
               </div>
             </div>
           </div>

@@ -107,905 +107,901 @@ exports[`Storyshots Notifications List 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root"
     >
-      <div
-        class="MuiBox-root MuiBox-root"
+      <table
+        class="MuiTable-root makeStyles-table"
       >
-        <table
-          class="MuiTable-root makeStyles-table"
+        <tbody
+          class="MuiTableBody-root"
         >
-          <tbody
-            class="MuiTableBody-root"
+          <tr
+            class="MuiTableRow-root"
           >
-            <tr
-              class="MuiTableRow-root"
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 0"
-                  >
-                    Notification 0
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 0"
                 >
-                  3 months
-                  <span />
+                  Notification 0
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 1"
-                  >
-                    Notification 1
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 1"
                 >
-                  3 months
-                  <span />
+                  Notification 1
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 2"
-                  >
-                    Notification 2
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 2"
                 >
-                  3 months
-                  <span />
+                  Notification 2
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 3"
-                  >
-                    Notification 3
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 3"
                 >
-                  3 months
-                  <span />
+                  Notification 3
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 4"
-                  >
-                    Notification 4
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 4"
                 >
-                  3 months
-                  <span />
+                  Notification 4
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 5"
-                  >
-                    Notification 5
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 5"
                 >
-                  3 months
-                  <span />
+                  Notification 5
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 6"
-                  >
-                    Notification 6
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 6"
                 >
-                  3 months
-                  <span />
+                  Notification 6
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 7"
-                  >
-                    Notification 7
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 7"
                 >
-                  3 months
-                  <span />
+                  Notification 7
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 8"
-                  >
-                    Notification 8
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 8"
                 >
-                  3 months
-                  <span />
+                  Notification 8
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 9"
-                  >
-                    Notification 9
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 9"
                 >
-                  3 months
-                  <span />
+                  Notification 9
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 10"
-                  >
-                    Notification 10
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 10"
                 >
-                  3 months
-                  <span />
+                  Notification 10
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 11"
-                  >
-                    Notification 11
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 11"
                 >
-                  3 months
-                  <span />
+                  Notification 11
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 12"
-                  >
-                    Notification 12
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 12"
                 >
-                  3 months
-                  <span />
+                  Notification 12
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 13"
-                  >
-                    Notification 13
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 13"
                 >
-                  3 months
-                  <span />
+                  Notification 13
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                    style="font-weight: bold; cursor: pointer;"
-                    title="Notification 14"
-                  >
-                    Notification 14
-                  </p>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
               >
-                <div
-                  class="MuiBox-root MuiBox-root"
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                   
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2022-08-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+                  style="font-weight: bold; cursor: pointer;"
+                  title="Notification 14"
                 >
-                  3 months
-                  <span />
+                  Notification 14
                 </p>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                <button
-                  aria-label="Mark as read"
-                  class="MuiButtonBase-root MuiIconButton-root"
-                  tabindex="0"
-                  title="Mark as read"
-                  type="button"
+                 
+              </div>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2022-08-01T00:00:00.000Z"
+              >
+                3 months
+                <span />
+              </p>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <button
+                aria-label="Mark as read"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Mark as read"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
                 >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

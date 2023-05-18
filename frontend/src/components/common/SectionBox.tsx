@@ -1,5 +1,4 @@
 import Box, { BoxProps } from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import BackLink, { BackLinkProps } from './BackLink';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';
@@ -37,11 +36,9 @@ export function SectionBox(props: SectionBoxProps) {
       {actualBackLink !== undefined && <BackLink to={actualBackLink} />}
       <Box py={0} {...outterBoxProps}>
         {title && titleElem}
-        <Paper>
-          <Box px={2} {...otherProps}>
-            {React.Children.toArray(children)}
-          </Box>
-        </Paper>
+        <Box px={2} {...otherProps}>
+          {React.Children.toArray(children)}
+        </Box>
       </Box>
     </>
   );

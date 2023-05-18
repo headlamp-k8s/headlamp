@@ -85,34 +85,30 @@ exports[`Storyshots Lease/LeaseListView Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
       >
         <div
-          class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+          class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+          title="Loading table data"
         >
-          <div
-            class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-            role="progressbar"
-            style="width: 40px; height: 40px;"
-            title="Loading table data"
+          <svg
+            class="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
           >
-            <svg
-              class="MuiCircularProgress-svg"
-              viewBox="22 22 44 44"
-            >
-              <circle
-                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                cx="44"
-                cy="44"
-                fill="none"
-                r="20.2"
-                stroke-width="3.6"
-              />
-            </svg>
-          </div>
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
         </div>
       </div>
     </div>

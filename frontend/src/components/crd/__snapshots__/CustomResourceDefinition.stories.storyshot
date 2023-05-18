@@ -79,88 +79,84 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="false"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root"
           >
-            <div
-              aria-busy="false"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+            <dl
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
             >
-              <dl
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
               >
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                Name
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Name
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  mydefinition.phonyresources.io
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Creation
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    mydefinition.phonyresources.io
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  2021-12-15T14:57:13.000Z
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Group
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Creation
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  my.phonyresources.io
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Version
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    2021-12-15T14:57:13.000Z
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  v1
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Scope
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Group
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    my.phonyresources.io
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Version
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    v1
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Scope
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    Namespaced
-                  </span>
-                </dd>
-              </dl>
-            </div>
+                  Namespaced
+                </span>
+              </dd>
+            </dl>
           </div>
         </div>
       </div>
@@ -195,76 +191,72 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root"
           >
-            <div
-              class="MuiBox-root MuiBox-root"
+            <table
+              class="MuiTable-root makeStyles-table"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <thead
+                class="MuiTableHead-root"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <tr
+                  class="MuiTableRow-root MuiTableRow-head"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Plural
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Singular
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Kind
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      List Kind
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                    Plural
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
+                  >
+                    Singular
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
+                  >
+                    Kind
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
+                  >
+                    List Kind
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      mycustomresources
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      mycustomresource
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      MyCustomResource
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      MyCustomResourceList
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                    mycustomresources
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    mycustomresource
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    MyCustomResource
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    MyCustomResourceList
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -299,65 +291,61 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root"
           >
-            <div
-              class="MuiBox-root MuiBox-root"
+            <table
+              class="MuiTable-root makeStyles-table"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <thead
+                class="MuiTableHead-root"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <tr
+                  class="MuiTableRow-root MuiTableRow-head"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Name
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Served
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Storage
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                    Name
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
+                  >
+                    Served
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
+                  >
+                    Storage
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      v1
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      false
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      false
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                    v1
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    false
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    false
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -392,20 +380,16 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root"
           >
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <div
-                class="MuiBox-root MuiBox-root"
+              <p
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
               >
-                <p
-                  class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
-                >
-                  No data to be shown.
-                </p>
-              </div>
+                No data to be shown.
+              </p>
             </div>
           </div>
         </div>
@@ -441,124 +425,120 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root"
           >
-            <div
-              class="MuiBox-root MuiBox-root"
+            <table
+              class="MuiTable-root makeStyles-table"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <thead
+                class="MuiTableHead-root"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <tr
+                  class="MuiTableRow-root MuiTableRow-head"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    Name
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
+                  >
+                    Namespace
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                    scope="col"
+                    style="text-align: right;"
+                  >
+                    Age
+                    <button
+                      aria-label="sort up"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                      tabindex="0"
+                      type="button"
                     >
-                      Name
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Namespace
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                      style="text-align: right;"
-                    >
-                      Age
-                      <button
-                        aria-label="sort up"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
+                      <span
+                        class="MuiIconButton-label"
                       >
-                        <span
-                          class="MuiIconButton-label"
-                        >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                    <a
+                      class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-link MuiTypography-colorPrimary"
+                      href="/"
                     >
-                      <a
-                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-link MuiTypography-colorPrimary"
-                        href="/"
-                      >
-                        mycustomresource
-                      </a>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      mynamespace
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                      style="text-align: right;"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-12-15T14:57:13.000Z"
-                      >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
+                      mycustomresource
+                    </a>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                    mynamespace
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                    style="text-align: right;"
+                  >
+                    <p
+                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                      title="2021-12-15T14:57:13.000Z"
                     >
-                      <a
-                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-link MuiTypography-colorPrimary"
-                        href="/"
-                      >
-                        myotherresource
-                      </a>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      3mo
+                      <span />
+                    </p>
+                  </td>
+                </tr>
+                <tr
+                  class="MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    <a
+                      class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-link MuiTypography-colorPrimary"
+                      href="/"
                     >
-                      mynamespace
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                      style="text-align: right;"
+                      myotherresource
+                    </a>
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    mynamespace
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                    style="text-align: right;"
+                  >
+                    <p
+                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                      title="2021-12-15T14:57:13.000Z"
                     >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-12-15T14:57:13.000Z"
-                      >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                      3mo
+                      <span />
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -600,108 +580,104 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root"
           >
-            <div
-              class="MuiBox-root MuiBox-root"
+            <table
+              class="MuiTable-root makeStyles-table"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <thead
+                class="MuiTableHead-root"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <tr
+                  class="MuiTableRow-root MuiTableRow-head"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Type
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      From
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Message
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                    >
-                      Age
-                      <button
-                        aria-label="sort swap"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
-                      >
-                        <span
-                          class="MuiIconButton-label"
-                        >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root"
+                    Type
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                    Reason
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
+                  >
+                    From
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                    scope="col"
+                  >
+                    Message
+                  </th>
+                  <th
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                    scope="col"
+                  >
+                    Age
+                    <button
+                      aria-label="sort swap"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                      tabindex="0"
+                      type="button"
                     >
-                      Normal
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      kubelet
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-03-01T00:00:00.000Z"
+                      <span
+                        class="MuiIconButton-label"
                       >
-                        3mo
                         <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="MuiTableBody-root"
+              >
+                <tr
+                  class="MuiTableRow-root"
+                >
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    Normal
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    Created
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    kubelet
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    Created
+                  </td>
+                  <td
+                    class="MuiTableCell-root MuiTableCell-body"
+                  >
+                    <p
+                      class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                      title="2021-03-01T00:00:00.000Z"
+                    >
+                      3mo
+                      <span />
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -795,160 +771,156 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root"
     >
-      <div
-        class="MuiBox-root MuiBox-root"
+      <table
+        class="MuiTable-root makeStyles-table"
       >
-        <table
-          class="MuiTable-root makeStyles-table"
+        <thead
+          class="MuiTableHead-root"
         >
-          <thead
-            class="MuiTableHead-root"
+          <tr
+            class="MuiTableRow-root MuiTableRow-head"
           >
-            <tr
-              class="MuiTableRow-root MuiTableRow-head"
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+              scope="col"
             >
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                scope="col"
-              >
-                Name
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
-              >
-                Group
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
-              >
-                Scope
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
-              >
-                Full name
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
-                style="text-align: right;"
-              >
-                Age
-                <button
-                  aria-label="sort up"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            class="MuiTableBody-root"
-          >
-            <tr
-              class="MuiTableRow-root"
+              Name
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+              scope="col"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              Group
+              <button
+                aria-label="sort swap"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                type="button"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
+                <span
+                  class="MuiIconButton-label"
                 >
-                  MyCustomResource
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                my.phonyresources.io
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                Namespaced
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                mydefinition.phonyresources.io
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="text-align: right;"
-              >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2021-12-15T14:57:13.000Z"
-                >
-                  3mo
                   <span />
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+              scope="col"
+            >
+              Scope
+              <button
+                aria-label="sort swap"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+              scope="col"
+            >
+              Full name
+              <button
+                aria-label="sort swap"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+              scope="col"
+              style="text-align: right;"
+            >
+              Age
+              <button
+                aria-label="sort up"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="MuiTableBody-root"
+        >
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                MyCustomResource
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              my.phonyresources.io
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              Namespaced
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              mydefinition.phonyresources.io
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="text-align: right;"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2021-12-15T14:57:13.000Z"
+              >
+                3mo
+                <span />
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

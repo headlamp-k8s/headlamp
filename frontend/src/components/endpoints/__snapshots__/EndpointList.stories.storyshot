@@ -85,309 +85,305 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root"
     >
-      <div
-        class="MuiBox-root MuiBox-root"
+      <table
+        class="MuiTable-root makeStyles-table"
       >
-        <table
-          class="MuiTable-root makeStyles-table"
+        <thead
+          class="MuiTableHead-root"
         >
-          <thead
-            class="MuiTableHead-root"
+          <tr
+            class="MuiTableRow-root MuiTableRow-head"
           >
-            <tr
-              class="MuiTableRow-root MuiTableRow-head"
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+              scope="col"
             >
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
+              Name
+              <button
+                aria-label="sort swap"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                type="button"
               >
-                Name
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
+                <span
+                  class="MuiIconButton-label"
                 >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+              scope="col"
+            >
+              Namespace
+              <button
+                aria-label="sort swap"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                type="button"
               >
-                Namespace
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
+                <span
+                  class="MuiIconButton-label"
                 >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                scope="col"
-                style="width: 40%; max-width: 40%;"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+              scope="col"
+              style="width: 40%; max-width: 40%;"
+            >
+              Addresses
+            </th>
+            <th
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+              scope="col"
+              style="text-align: right;"
+            >
+              Age
+              <button
+                aria-label="sort up"
+                class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                tabindex="0"
+                type="button"
               >
-                Addresses
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
-                style="text-align: right;"
-              >
-                Age
-                <button
-                  aria-label="sort up"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
+                <span
+                  class="MuiIconButton-label"
                 >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            class="MuiTableBody-root"
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="MuiTableBody-root"
+        >
+          <tr
+            class="MuiTableRow-root"
           >
-            <tr
-              class="MuiTableRow-root"
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  endpoints-0
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  my-namespace
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="width: 40%; max-width: 40%;"
-              >
-                127.0.01:8080
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="text-align: right;"
-              >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2020-01-01T00:00:00.000Z"
-                >
-                  3mo
-                  <span />
-                </p>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+                endpoints-0
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  endpoints-1
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  my-namespace
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="width: 40%; max-width: 40%;"
-              >
-                127.0.01:8080
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="text-align: right;"
-              >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2020-01-01T00:00:00.000Z"
-                >
-                  3mo
-                  <span />
-                </p>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+                my-namespace
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="width: 40%; max-width: 40%;"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  endpoints-2
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  my-namespace
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="width: 40%; max-width: 40%;"
-              >
-                127.0.01:8080
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="text-align: right;"
-              >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2020-01-01T00:00:00.000Z"
-                >
-                  3mo
-                  <span />
-                </p>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+              127.0.01:8080
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="text-align: right;"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2020-01-01T00:00:00.000Z"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  endpoints-3
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  my-namespace
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="width: 40%; max-width: 40%;"
-              >
-                127.0.01:8080
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="text-align: right;"
-              >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2020-01-01T00:00:00.000Z"
-                >
-                  3mo
-                  <span />
-                </p>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
+                3mo
+                <span />
+              </p>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  endpoints-4
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
+                endpoints-1
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  my-namespace
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="width: 40%; max-width: 40%;"
+                my-namespace
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="width: 40%; max-width: 40%;"
+            >
+              127.0.01:8080
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="text-align: right;"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2020-01-01T00:00:00.000Z"
               >
-                127.0.01:8080
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="text-align: right;"
+                3mo
+                <span />
+              </p>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
               >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2020-01-01T00:00:00.000Z"
-                >
-                  3mo
-                  <span />
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                endpoints-2
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                my-namespace
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="width: 40%; max-width: 40%;"
+            >
+              127.0.01:8080
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="text-align: right;"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2020-01-01T00:00:00.000Z"
+              >
+                3mo
+                <span />
+              </p>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                endpoints-3
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                my-namespace
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="width: 40%; max-width: 40%;"
+            >
+              127.0.01:8080
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="text-align: right;"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2020-01-01T00:00:00.000Z"
+              >
+                3mo
+                <span />
+              </p>
+            </td>
+          </tr>
+          <tr
+            class="MuiTableRow-root"
+          >
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                endpoints-4
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+            >
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                my-namespace
+              </a>
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="width: 40%; max-width: 40%;"
+            >
+              127.0.01:8080
+            </td>
+            <td
+              class="MuiTableCell-root MuiTableCell-body"
+              style="text-align: right;"
+            >
+              <p
+                class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                title="2020-01-01T00:00:00.000Z"
+              >
+                3mo
+                <span />
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
