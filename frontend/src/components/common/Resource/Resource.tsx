@@ -759,7 +759,14 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
 
   const [pods, error] = Pod.useList(queryData);
 
-  return <PodListRenderer hideColumns={hideColumns} pods={pods} error={error} />;
+  return (
+    <PodListRenderer
+      hideColumns={hideColumns}
+      pods={pods}
+      error={error}
+      noNamespaceFilter={resource.kind === 'Namespace'}
+    />
+  );
 }
 
 export function ContainersSection(props: { resource: KubeObjectInterface | null }) {
