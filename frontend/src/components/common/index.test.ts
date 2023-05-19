@@ -26,6 +26,7 @@ const checkExports = [
   'Link',
   'Loader',
   'LogViewer',
+  'NameValueTable',
   'Resource',
   'SectionBox',
   'SectionFilterHeader',
