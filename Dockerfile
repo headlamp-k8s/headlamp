@@ -58,7 +58,7 @@ RUN for i in $(find ./plugins-old/*/main.js); do plugin_name=$(echo $i|cut -d'/'
 RUN for i in $(find ./.plugins/*/main.js); do plugin_name=$(echo $i|cut -d'/' -f3); mkdir -p plugins/$plugin_name; cp $i plugins/$plugin_name; done
 
 # Final container image
-FROM alpine:3.17
+FROM alpine:3.18
 
 COPY --from=backend-build --link /headlamp/backend/headlamp-server /headlamp/headlamp-server
 COPY --from=frontend --link /headlamp/frontend/build /headlamp/frontend
