@@ -5,13 +5,18 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
 	"os"
 	"strings"
 	"testing"
+	"time"
 
+	"github.com/google/uuid"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -115,8 +120,34 @@ func getResponse(handler http.Handler, method, url string, body interface{}) (*h
 	return rr, nil
 }
 
+func getResponseFromRestrictedEndpoint(
+	handler http.Handler, method, url string, body interface{},
+) (*httptest.ResponseRecorder, error) {
+	token := uuid.New().String()
+	os.Setenv("HEADLAMP_BACKEND_TOKEN", token)
+
+	defer os.Unsetenv("HEADLAMP_BACKEND_TOKEN")
+
+	req, err := makeJSONReq(method, url, body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("X-HEADLAMP_BACKEND-TOKEN", token)
+
+	rr := httptest.NewRecorder()
+
+	handler.ServeHTTP(rr, req)
+
+	return rr, nil
+}
+
 //nolint:gocognit,funlen
 func TestDynamicClusters(t *testing.T) {
+	if os.Getenv("HEADLAMP_RUN_INTEGRATION_TESTS") != "true" {
+		t.Skip("skipping integration test")
+	}
+
 	var (
 		newCluster        = "mynewcluster"
 		newClusterServer  = "https://mysupercluster.io"
@@ -203,7 +234,7 @@ func TestDynamicClusters(t *testing.T) {
 
 			var resp *httptest.ResponseRecorder
 			for _, clusterReq := range tc.clusters {
-				r, err := getResponse(handler, "POST", "/cluster", clusterReq)
+				r, err := getResponseFromRestrictedEndpoint(handler, "POST", "/cluster", clusterReq)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -275,7 +306,7 @@ func TestDynamicClustersKubeConfig(t *testing.T) {
 	}
 	handler := createHeadlampHandler(&c)
 
-	r, err := getResponse(handler, "POST", "/cluster", req)
+	r, err := getResponseFromRestrictedEndpoint(handler, "POST", "/cluster", req)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -368,6 +399,63 @@ func TestExternalProxy(t *testing.T) {
 		if rr.Body.String() != "OK" {
 			t.Errorf("handler returned unexpected body: got %v want %v",
 				rr.Body.String(), "OK")
+		}
+	}
+}
+
+func TestDrainAndCordonNode(t *testing.T) {
+	type test struct {
+		handler http.Handler
+	}
+
+	cache := cache.New()
+	tests := []test{
+		{
+			handler: createHeadlampHandler(&HeadlampConfig{
+				useInCluster:   false,
+				kubeConfigPath: config.GetDefaultKubeConfigPath(),
+				cache:          cache,
+			}),
+		},
+	}
+
+	var drainNodePayload struct {
+		Cluster  string `json:"cluster"`
+		NodeName string `json:"nodeName"`
+	}
+
+	for _, tc := range tests {
+		drainNodePayload.Cluster = "minikube"
+		drainNodePayload.NodeName = "minikube"
+
+		rr, err := getResponse(tc.handler, "POST", "/drain-node", drainNodePayload)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if status := rr.Code; status != http.StatusOK {
+			t.Errorf("handler returned wrong status code: got %v want %v",
+				status, http.StatusOK)
+		}
+
+		cacheKey := uuid.NewSHA1(uuid.Nil, []byte(drainNodePayload.NodeName+drainNodePayload.Cluster)).String()
+		cacheItemTTL := DrainNodeCacheTTL * time.Minute
+		ctx := context.Background()
+
+		err = cache.SetWithTTL(ctx, cacheKey, "success", cacheItemTTL)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		rr, err = getResponse(tc.handler, "GET",
+			fmt.Sprintf("/drain-node-status?cluster=%s&nodeName=%s", drainNodePayload.Cluster, drainNodePayload.NodeName), nil)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if status := rr.Code; status != http.StatusOK {
+			t.Errorf("handler returned wrong status code: got %v want %v",
+				status, http.StatusOK)
 		}
 	}
 }
