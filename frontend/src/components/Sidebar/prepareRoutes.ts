@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import helpers from '../../helpers';
 import { createRouteURL } from '../../lib/router';
+import { getCluster } from '../../lib/util';
 import store from '../../redux/stores/store';
 import { DefaultSidebars, SidebarItemProps } from '../Sidebar';
 
@@ -57,6 +58,7 @@ function prepareRoutes(
     {
       name: 'cluster',
       label: t('glossary|Cluster'),
+      subtitle: getCluster() || undefined,
       icon: 'mdi:hexagon-multiple-outline',
       subList: [
         {
