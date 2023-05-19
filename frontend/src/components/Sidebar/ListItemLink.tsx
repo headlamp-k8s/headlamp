@@ -27,6 +27,7 @@ interface ListItemLinkProps {
   pathname: string;
   search?: string;
   name: string;
+  subtitle?: string;
   icon?: IconProps['icon'];
   iconOnly?: boolean;
   containerProps?: {
@@ -41,7 +42,8 @@ const useStyle = makeStyles({
 });
 
 export default function ListItemLink(props: ListItemLinkProps) {
-  const { primary, pathname, search, icon, name, containerProps, iconOnly, ...other } = props;
+  const { primary, pathname, search, icon, name, containerProps, iconOnly, subtitle, ...other } =
+    props;
   const classes = useStyle();
 
   const iconSize = React.useMemo(
@@ -79,7 +81,7 @@ export default function ListItemLink(props: ListItemLinkProps) {
     <li {...containerProps}>
       <ListItem button component={renderLink} {...other}>
         {listItemLinkContainer}
-        {!iconOnly && <ListItemText primary={primary} />}
+        {!iconOnly && <ListItemText primary={primary} secondary={subtitle} />}
       </ListItem>
     </li>
   );

@@ -42,7 +42,20 @@ const useItemStyle = makeStyles(theme => ({
     },
     '& .MuiListItemIcon-root': {
       minWidth: 0,
+      alignSelf: (props: { fullWidth: boolean; hasSubtitle: boolean }) =>
+        props.fullWidth && props.hasSubtitle ? 'stretch' : 'auto',
+      paddingTop: (props: { fullWidth: boolean; hasSubtitle: boolean }) =>
+        props.fullWidth && props.hasSubtitle ? theme.spacing(1) : 0,
       marginRight: (props: { fullWidth: boolean }) => (props.fullWidth ? '8px' : '0'),
+    },
+    '& .MuiListItemText-secondary': {
+      fontSize: '.85rem',
+      fontStyle: 'italic',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      overflowWrap: 'anywhere',
+      overflow: 'hidden',
+      color: theme.palette.sidebarLink.color,
     },
   },
   linkMain: {
@@ -53,8 +66,8 @@ const useItemStyle = makeStyles(theme => ({
     borderRadius: '4px',
 
     '& .MuiListItem-root': {
-      paddingTop: '7px',
-      paddingBottom: '7px',
+      paddingTop: (props: { hasSubtitle: boolean }) => (props.hasSubtitle ? '0' : '7px'),
+      paddingBottom: (props: { hasSubtitle: boolean }) => (props.hasSubtitle ? '0' : '7px'),
       paddingLeft: '19px',
       minHeight: (props: { fullWidth: boolean }) => (!props.fullWidth ? '56px' : 'unset'),
     },
@@ -70,6 +83,12 @@ const useItemStyle = makeStyles(theme => ({
       },
     },
   },
+  linkMainNoVerticalPadding: {
+    '& .MuiListItem-root': {
+      paddingTop: '0',
+      paddingBottom: '0',
+    },
+  },
   linkMainSelected: {
     '& svg': {
       color: theme.palette.sidebarLink.main.selected.color,
@@ -80,8 +99,13 @@ const useItemStyle = makeStyles(theme => ({
         color: theme.palette.sidebarLink.main.selected.color,
       },
     },
-    color: theme.palette.sidebarLink.main.selected.color,
+    '&, & *': {
+      color: theme.palette.sidebarLink.main.selected.color,
+    },
     backgroundColor: `${theme.palette.sidebarLink.main.selected.backgroundColor}!important`,
+    '& .MuiListItemText-secondary': {
+      color: theme.palette.sidebarLink.main.selected.color,
+    },
   },
   linkSelected: {
     fontWeight: 'bold',
@@ -119,6 +143,10 @@ export interface SidebarEntryProps {
    * Name of this SidebarItem.
    */
   name: string;
+  /**
+   * Text to display under the name.
+   */
+  subtitle?: string;
   /**
    * Label to display.
    */
@@ -168,6 +196,7 @@ export default function SidebarItem(props: SidebarItemProps) {
   const {
     label,
     name,
+    subtitle,
     url = null,
     search,
     useClusterURL = false,
@@ -179,7 +208,7 @@ export default function SidebarItem(props: SidebarItemProps) {
     hide,
     ...other
   } = props;
-  const classes = useItemStyle({ fullWidth });
+  const classes = useItemStyle({ fullWidth, hasSubtitle: !!subtitle });
   let fullURL = url;
   if (fullURL && useClusterURL && getCluster()) {
     fullURL = generatePath(getClusterPrefixedPath(url), { cluster: getCluster()! });
@@ -240,6 +269,7 @@ export default function SidebarItem(props: SidebarItemProps) {
         }}
         icon={icon}
         name={label}
+        subtitle={subtitle}
         search={search}
         iconOnly={!fullWidth}
         {...other}
