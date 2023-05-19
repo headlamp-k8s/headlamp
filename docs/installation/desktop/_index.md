@@ -43,7 +43,7 @@ KUBECONFIG=kubeconfig1;kubeconfig2;kubeconfig3 /path/to/headlamp
 ## Access using OIDC
 
 OIDC has a feature makes more sense when
-[running Headlamp in a cluster](../in-cluster.md) as it will allow cluster operators to just
+[running Headlamp in a cluster](../in-cluster) as it will allow cluster operators to just
 give users a URL that they can use for logging in and access Headlamp.
 However, if you have your kube config set to use OIDC for the authentication (because you already
 authenticated and produced a kube config with that data), Headlamp will read those settings and
