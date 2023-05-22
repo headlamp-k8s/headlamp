@@ -72,12 +72,16 @@ export function DialogTitle(props: OurDialogTitleProps) {
   );
 }
 
-export interface DialogProps extends MuiDialogProps {
+export interface OurDialogProps {
   withFullScreen?: boolean;
   onFullScreenToggled?: (isFullScreen: boolean) => void;
   titleProps?: OurDialogTitleProps;
-  children?: React.ReactNode;
 }
+
+// Extends has some issue when exporting.
+//   Perhaps because we are stomping over the DialogProps namespace? It's a mystery.
+//   Creating an intersection type works fine though. Shrug emoji: 🤷‍♂️
+export type DialogProps = OurDialogProps & MuiDialogProps;
 
 export function Dialog(props: DialogProps) {
   const {
