@@ -234,6 +234,7 @@ jobs:
       - run: npx @kinvolk/headlamp-plugin format --check .
       - run: npx @kinvolk/headlamp-plugin tsc .
       - run: npx @kinvolk/headlamp-plugin test .
+      - run: npx @kinvolk/headlamp-plugin build .
 ```
 
 Please see the github documentation for further details on workflows and actions.
