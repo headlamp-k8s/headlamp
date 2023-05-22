@@ -76,6 +76,7 @@ export interface DialogProps extends MuiDialogProps {
   withFullScreen?: boolean;
   onFullScreenToggled?: (isFullScreen: boolean) => void;
   titleProps?: OurDialogTitleProps;
+  children?: React.ReactNode;
 }
 
 export function Dialog(props: DialogProps) {
