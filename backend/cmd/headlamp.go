@@ -478,7 +478,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	if kubeConfigPersistenceFile != "" {
 		dynamicContexts = append(dynamicContexts, getContextFromKubeConfigs(kubeConfigPersistenceFile)...)
 
-		if len(contexts) == 0 {
+		if len(dynamicContexts) == 0 {
 			log.Println("No contexts/clusters configured from config!")
 		} else {
 			for _, dynamicContext := range dynamicContexts {
