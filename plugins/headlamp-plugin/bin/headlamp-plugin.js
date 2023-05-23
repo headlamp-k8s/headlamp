@@ -620,13 +620,13 @@ function upgrade(packageFolder, skipPackageUpdates) {
     let configChanged = false;
 
     /**
-     * Replaces nested config keys with ones in the template.
+     * replaceNestedKeys is used to replace nested keys in the package.json file.
      *
      * It only replaces the properties specified, and does so if they
      * are missing or not equal to the ones in the template.
      *
-     * @param {string} keyName top level key to do the replacement in
-     * @param {string[]} subProperties properties for keyName to replace
+     * @param {string} keyName top-level key in the package.json file that contains the nested keys to be replaced.
+     * @param {string[]} subProperties names of the nested keys to be replaced in keyName.
      */
     function replaceNestedKeys(keyName, subProperties) {
       subProperties.forEach(key => {
@@ -642,6 +642,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
       });
     }
 
+    // Update these scripts keys to match the template.
     replaceNestedKeys('scripts', ['tsc', 'storybook', 'test', 'storybook-build']);
 
     // replace top level keys
