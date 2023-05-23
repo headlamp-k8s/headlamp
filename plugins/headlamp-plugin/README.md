@@ -11,20 +11,43 @@ This package is published to the npm package index separately from Headlamp.
 
 ```
 headlamp-plugin --help
-headlamp-plugin create <name>       Create a new plugin folder with base code.
-headlamp-plugin build <package>     Build the plugin, or folder of
-                                    plugins. <package> defaults to
-                                    current working directory.
-headlamp-plugin start               Watch for changes and build the plugin.
-headlamp-plugin upgrade <package>   Upgrade the plugin to latest headlamp-plugin.
-                                    Audits, formats, lints and type checks.
-                                    <package> defaults to current working
-                                    directory. Can also be a folder of packages.
-headlamp-plugin extract             Copies folders of packages from plug
-<pluginPackages> <outputPlugins>    inPackages/packageName/dist/main.js
-                                    to outputPlugins/packageName/main.js.
-headlamp-plugin storybook [package] Start storybook. <package> defaults
-                                    to current working directory.
+
+  headlamp-plugin.js build [package]        Build the plugin, or folder of
+                                            plugins. <package> defaults to
+                                            current working directory.
+  headlamp-plugin.js start                  Watch for changes and build plugin.
+  headlamp-plugin.js create <name>          Create a new plugin folder.
+  headlamp-plugin.js extract                Copies folders of packages from plug
+  <pluginPackages> <outputPlugins>          inPackages/packageName/dist/main.js
+                                            to
+                                            outputPlugins/packageName/main.js.
+  headlamp-plugin.js format [package]       format the plugin code with
+                                            prettier. <package> defaults to
+                                            current working directory. Can also
+                                            be a folder of packages.
+  headlamp-plugin.js lint [package]         Lint the plugin for coding issues
+                                            with eslint. <package> defaults to
+                                            current working directory. Can also
+                                            be a folder of packages.
+  headlamp-plugin.js tsc [package]          Type check the plugin for coding
+                                            issues with tsc. <package> defaults
+                                            to current working directory. Can
+                                            also be a folder of packages.
+  headlamp-plugin.js storybook [package]    Start storybook. <package> defaults
+                                            to current working directory.
+  headlamp-plugin.js storybook-build        Build static storybook. <package>
+  [package]                                 defaults to current working
+                                            directory. Can also be a folder of
+                                            packages.
+  headlamp-plugin.js upgrade [package]      Upgrade the plugin to latest
+                                            headlamp-plugin; audits, formats,
+                                            lints and type checks.<package>
+                                            defaults to current working
+                                            directory. Can also be a folder of
+                                            packages.
+  headlamp-plugin.js test [package]         Test. <package> defaults to current
+                                            working directory. Can also be a
+                                            folder of packages.
 ```
 
 ## Development notes
