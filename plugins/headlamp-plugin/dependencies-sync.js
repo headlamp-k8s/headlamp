@@ -2,8 +2,15 @@
 // @ts-check
 'use strict';
 
-// Aids maintenance syncing packages between frontend/ and headlamp-plugin
-// Inside headlamp-plugin: `npm run update-dependencies`.
+/*
+ * # What is dependencies-sync.js for?
+ *
+ * Aids maintenance syncing packages between frontend/ and headlamp-plugin
+ * Inside headlamp-plugin/ folder: `npm run update-dependencies`.
+ *
+ * This script is used to sync the dependencies between the frontend and headlamp-plugin.
+ * It updates the dependencies from frontend/package.json into headlamp-plugin/packages.json.
+ */
 
 // Some packages are used by headlamp-plugin that are not used by the frontend.
 // These won't be removed from headlamp-plugin/package.json
