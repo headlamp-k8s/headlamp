@@ -2,7 +2,9 @@ import { makeStyles, SvgIcon } from '@material-ui/core';
 import React, { isValidElement, ReactElement } from 'react';
 import { getThemeName } from '../../lib/themes';
 import { useTypedSelector } from '../../redux/reducers/reducers';
+import { ReactComponent as LogoDark } from '../../resources/icon-dark.svg';
 import { ReactComponent as LogoLight } from '../../resources/icon-light.svg';
+import { ReactComponent as LogoWithTextDark } from '../../resources/logo-dark.svg';
 import { ReactComponent as LogoWithTextLight } from '../../resources/logo-light.svg';
 import { EmptyContent } from '../common';
 import ErrorBoundary from '../common/ErrorBoundary';
@@ -24,12 +26,20 @@ export type AppLogoType =
   | null;
 
 export default function OriginalAppLogo(props: AppLogoProps) {
-  const { className, logoType } = props;
+  const { className, logoType, themeName } = props;
 
   return (
     <SvgIcon
       className={className}
-      component={logoType === 'large' ? LogoWithTextLight : LogoLight}
+      component={
+        logoType === 'large'
+          ? themeName === 'dark'
+            ? LogoWithTextLight
+            : LogoWithTextDark
+          : themeName === 'dark'
+          ? LogoLight
+          : LogoDark
+      }
       viewBox="0 0 auto 32"
     />
   );
@@ -65,6 +75,6 @@ export function AppLogo(props: AppLogoProps) {
       )}
     </ErrorBoundary>
   ) : (
-    <OriginalAppLogo logoType={logoType} className={className} />
+    <OriginalAppLogo logoType={logoType} themeName={themeName} className={className} />
   );
 }

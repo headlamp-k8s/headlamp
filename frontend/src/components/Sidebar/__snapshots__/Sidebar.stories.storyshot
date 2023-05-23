@@ -30,7 +30,7 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
                 focusable="false"
                 viewBox="0 0 auto 32"
               >
-                icon-light.svg
+                icon-dark.svg
               </svg>
             </span>
             <span
@@ -191,7 +191,7 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
                 focusable="false"
                 viewBox="0 0 auto 32"
               >
-                logo-light.svg
+                logo-dark.svg
               </svg>
             </span>
             <span
@@ -355,7 +355,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                 focusable="false"
                 viewBox="0 0 auto 32"
               >
-                icon-light.svg
+                icon-dark.svg
               </svg>
             </span>
             <span
@@ -1355,7 +1355,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                 focusable="false"
                 viewBox="0 0 auto 32"
               >
-                logo-light.svg
+                logo-dark.svg
               </svg>
             </span>
             <span
@@ -2365,7 +2365,7 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                 focusable="false"
                 viewBox="0 0 auto 32"
               >
-                logo-light.svg
+                logo-dark.svg
               </svg>
             </span>
             <span
