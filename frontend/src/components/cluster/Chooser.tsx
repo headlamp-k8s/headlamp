@@ -314,7 +314,7 @@ export function ClusterDialog(props: ClusterDialogProps) {
           ),
         ]}
       >
-        <AppLogo logoType={'large'} className={classes.logo} />
+        <AppLogo logoType={'large'} className={classes.logo} themeName="dark" />
       </DialogTitle>
       <DialogContent className={classes.chooserDialog}>{children}</DialogContent>
     </Dialog>
