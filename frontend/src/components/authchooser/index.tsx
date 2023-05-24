@@ -279,6 +279,11 @@ export function PureAuthChooser({
               <Box m={2}>
                 <ColorButton onClick={handleTokenAuth}>{t('Use A Token')}</ColorButton>
               </Box>
+              <Box m={2} textAlign="center">
+                <Link routeName="settingsCluster" params={{ clusterID: clusterName }}>
+                  {t('settings|Cluster settings')}
+                </Link>
+              </Box>
             </Box>
           ) : (
             <Box alignItems="center" textAlign="center">
