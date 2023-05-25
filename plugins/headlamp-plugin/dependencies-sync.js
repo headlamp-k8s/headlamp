@@ -150,8 +150,33 @@ function updateDependencies(packageJsonPath, checkOnly) {
     }
   }
 
+  /**
+   * Check if the versions match, and if not sync the ones from frontend/ to headlamp-plugin/.
+   *
+   * @param dependencies {object} the dependencies from headlamp-plugin/package.json
+   * @param dependenciesFront {object} the dependencies from frontend/package.json
+   */
+  function checkDependencyVersions(dependencies, dependenciesFront) {
+    const changed = [];
+
+    for (const [key, value] of Object.entries(dependencies)) {
+      if (dependenciesFront[key] !== undefined && dependenciesFront[key] !== value) {
+        changed.push({ name: key, frontend: dependenciesFront[key], headlampPlugin: value });
+        dependencies[key] = dependenciesFront[key];
+      }
+    }
+
+    if (changed.length > 0) {
+      console.warn(
+        'Dependencies with changed versions in headlamp-plugin/package.json from frontend/package.json',
+        changed
+      );
+    }
+  }
+
   checkRemovedDependencies(checkOnly);
   checkAddedDependencies(headlampPluginPkg.dependencies, headlampPluginPkgOriginal.dependencies);
+  checkDependencyVersions(headlampPluginPkg.dependencies, allFrontendDependencies);
 
   const changed = JSON.stringify(headlampPluginPkgOriginal) !== JSON.stringify(headlampPluginPkg);
 
