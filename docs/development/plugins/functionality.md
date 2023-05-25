@@ -144,3 +144,12 @@ Remove sidebar items with [registerSidebarEntryFilter](../api/modules/plugin_reg
 - Example plugin shows [How To add items to the sidebar](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar), and also how to remove sidebar items.
 - API reference for [registerSidebarEntry](../api/modules/plugin_registry.md#registerSidebarEntry)
 - API reference for [registerSidebarEntryFilter](../api/modules/plugin_registry.md#registerSidebarEntryFilter)
+
+### Tables
+
+Change what tables across Headlamp show with [registerResourceTableColumnsProcessor](../api/modules/plugin_registry.md#registerSidebarEntry). This allows to remove, add, update, or shuffle table columns.
+
+![screenshot of the pods list with a context menu added by a plugin](./images/table-context-menu.png)
+
+- Example plugin shows [How to add a context menu to each row in the pods list table](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/tables).
+- API reference for [registerResourceTableColumnsProcessor](../api/modules/plugin_registry.md#registerResourceTableColumnsProcessor)

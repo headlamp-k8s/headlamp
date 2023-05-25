@@ -100,6 +100,7 @@ export function JobsListRenderer(props: JobsListRendererProps) {
           'age',
         ]}
         data={jobs}
+        id="headlamp-jobs"
       />
     </SectionBox>
   );

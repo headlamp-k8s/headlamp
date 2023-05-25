@@ -83,6 +83,7 @@ export default function RoleBindingList() {
           'age',
         ]}
         data={getJointItems()}
+        id="headlamp-rolebindings"
       />
     </SectionBox>
   );

@@ -12,6 +12,8 @@ import {
   FunctionsToOverride,
   HeaderAction,
   HeaderActionType,
+  TableColumnsProcessor,
+  UI_ADD_TABLE_COLUMNS_PROCESSOR,
   UI_APP_BAR_SET_ACTION,
   UI_BRANDING_SET_APP_LOGO,
   UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR,
@@ -69,6 +71,7 @@ export interface UIState {
     appBar: {
       actions: HeaderActionType[];
     };
+    tableColumnsProcessors: TableColumnsProcessor[];
   };
   theme: {
     name: string;
@@ -127,6 +130,7 @@ export const INITIAL_STATE: UIState = {
       headerActionsProcessors: [],
       pluginAppendedDetailViews: [],
     },
+    tableColumnsProcessors: [],
     appBar: {
       actions: [],
     },
@@ -220,6 +224,16 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
         { id: generatedID, processor: headerActionProcessor.processor },
       ];
       newFilters.views.details.headerActionsProcessors = processors;
+      break;
+    }
+    case UI_ADD_TABLE_COLUMNS_PROCESSOR: {
+      const processor = action.action;
+      const generatedID = processor.id || `generated-id-${Date.now().toString(36)}`;
+      const processors = [
+        ...newFilters.views.tableColumnsProcessors,
+        { id: generatedID, processor: processor.processor },
+      ];
+      newFilters.views.tableColumnsProcessors = processors;
       break;
     }
     case UI_SET_DETAILS_VIEW: {

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
+import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';
 import { TestContext } from '../../../test';
 import ResourceTable, { ResourceTableFromResourceClassProps } from './ResourceTable';
 
@@ -23,9 +24,11 @@ const TemplateWithFilter: Story<{
       state = {
         filter: { namespaces: new Set<string>(), search: '' },
         config: { settings: { tableRowsPerPageOptions: [10, 20, 50, 100] } },
+        ui: UI_INITIAL_STATE,
       }
     ) => state,
     preloadedState: {
+      ui: UI_INITIAL_STATE,
       filter: {
         namespaces: new Set(namespaces),
         search,

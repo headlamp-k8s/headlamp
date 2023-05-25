@@ -11,4 +11,8 @@ export class RuntimeClass extends makeKubeObject<KubeObject>('runtimeClass') {
   get spec() {
     return this.jsonData!.spec;
   }
+
+  static get pluralName() {
+    return 'runtimeclasses';
+  }
 }

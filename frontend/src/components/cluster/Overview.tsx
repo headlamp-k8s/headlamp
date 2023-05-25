@@ -167,6 +167,7 @@ function EventsSection() {
           'age',
         ]}
         filterFunction={warningActionFilterFunc}
+        id="headlamp-cluster.overview.events"
       />
     </SectionBox>
   );

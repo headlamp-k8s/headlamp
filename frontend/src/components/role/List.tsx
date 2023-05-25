@@ -93,6 +93,7 @@ export default function RoleList() {
           'age',
         ]}
         data={getJointItems()}
+        id="headlamp-roles"
       />
     </SectionBox>
   );

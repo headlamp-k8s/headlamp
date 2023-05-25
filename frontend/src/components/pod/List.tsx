@@ -125,6 +125,7 @@ export function PodListRenderer(props: PodListProps) {
         columns={getDataCols()}
         data={pods}
         reflectInURL={reflectTableInURL}
+        id="headlamp-pods"
       />
     </SectionBox>
   );

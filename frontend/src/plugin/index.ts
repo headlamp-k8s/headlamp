@@ -17,6 +17,7 @@ import Registry, {
   registerDetailsViewHeaderActionsProcessor,
   registerDetailsViewSection,
   registerGetTokenFunction,
+  registerResourceTableColumnsProcessor,
   registerRoute,
   registerRouteFilter,
   registerSidebarEntry,
@@ -60,6 +61,7 @@ window.pluginLib = {
   registerSidebarEntryFilter,
   registerGetTokenFunction,
   registerDetailsViewHeaderActionsProcessor,
+  registerResourceTableColumnsProcessor,
   DetailsViewDefaultHeaderActions,
   getHeadlampAPIHeaders,
 };
