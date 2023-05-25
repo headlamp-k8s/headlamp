@@ -162,9 +162,9 @@ registerRoute({
 // The sidebar link URL is: /no-cluster-link
 registerSidebarEntry({
   parent: null,
-  name: 'no-cluster-link',
-  label: 'No Cluster Link',
-  url: '/no-cluster-link',
+  name: 'no-sidebar-link',
+  label: 'No Sidebar Link',
+  url: '/no-sidebar-link',
   icon: 'mdi:comment-quote',
   useClusterURL: false, // Do not put "/c/mycluster/" in the URL
 });
