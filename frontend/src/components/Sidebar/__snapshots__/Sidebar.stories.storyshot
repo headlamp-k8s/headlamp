@@ -978,6 +978,2341 @@ exports[`Storyshots Sidebar/Sidebar Closed 1`] = `
 </div>
 `;
 
+exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
+<div>
+  <nav
+    aria-label="Navigation Tabs"
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiDrawer-root MuiDrawer-docked makeStyles-drawer makeStyles-drawerClose"
+    >
+      <div
+        class="MuiPaper-root MuiDrawer-paper makeStyles-drawerClose MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
+      >
+        <div
+          class="makeStyles-toolbar makeStyles-toolbar"
+        >
+          <button
+            aria-label="Expand sidebar"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root makeStyles-logo"
+                focusable="false"
+                viewBox="0 0 auto 32"
+              >
+                icon-light.svg
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="MuiGrid-root makeStyles-sidebarGrid MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <ul
+              class="MuiList-root MuiList-padding"
+            >
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                    title="Cluster"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  href="/notifications"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                    title="Notifications"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
+                  href="/settings"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                    title="Settings"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+`;
+
+exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
+<div>
+  <nav
+    aria-label="Navigation Tabs"
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiDrawer-root MuiDrawer-docked makeStyles-drawer makeStyles-drawerOpen"
+    >
+      <div
+        class="MuiPaper-root MuiDrawer-paper makeStyles-drawerOpen MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
+      >
+        <div
+          class="makeStyles-toolbar makeStyles-toolbar"
+        >
+          <button
+            aria-label="Shrink sidebar"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root makeStyles-logo"
+                focusable="false"
+                viewBox="0 0 auto 32"
+              >
+                logo-light.svg
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="MuiGrid-root makeStyles-sidebarGrid MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <ul
+              class="MuiList-root MuiList-padding"
+            >
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Cluster
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/notifications"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Notifications
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
+                  href="/settings"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Settings
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-entered"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+`;
+
+exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
+<div>
+  <nav
+    aria-label="Navigation Tabs"
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiDrawer-root MuiDrawer-docked makeStyles-drawer makeStyles-drawerClose"
+    >
+      <div
+        class="MuiPaper-root MuiDrawer-paper makeStyles-drawerClose MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
+      >
+        <div
+          class="makeStyles-toolbar makeStyles-toolbar"
+        >
+          <button
+            aria-label="Expand sidebar"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root makeStyles-logo"
+                focusable="false"
+                viewBox="0 0 auto 32"
+              >
+                icon-light.svg
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="MuiGrid-root makeStyles-sidebarGrid MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <ul
+              class="MuiList-root MuiList-padding"
+            >
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                    title="Cluster"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Namespaces
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Nodes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                CRDs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                    title="Workloads"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Pods
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Replica Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Daemon Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Stateful Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Jobs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Deployments
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                CronJobs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                    title="Storage"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Storage Classes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Storage Volumes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Persistent Volume Claims
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                    title="Network"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Services
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Endpoints
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Ingresses
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Network Policies
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                    title="Security"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Service Accounts
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Roles
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Role Bindings
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain makeStyles-linkSmallWidth MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                    title="Configuration"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    />
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Config Maps
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Secrets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                HPAs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Resource Quotas
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Pod Disruption Budgets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Priority Classes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Leases
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Runtime Classes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Limit Ranges
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <button
+                aria-label="Create / Apply"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Create / Apply"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+`;
+
+exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
+<div>
+  <nav
+    aria-label="Navigation Tabs"
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiDrawer-root MuiDrawer-docked makeStyles-drawer makeStyles-drawerOpen"
+    >
+      <div
+        class="MuiPaper-root MuiDrawer-paper makeStyles-drawerOpen MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
+      >
+        <div
+          class="makeStyles-toolbar makeStyles-toolbar"
+        >
+          <button
+            aria-label="Shrink sidebar"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root makeStyles-logo"
+                focusable="false"
+                viewBox="0 0 auto 32"
+              >
+                logo-light.svg
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="MuiGrid-root makeStyles-sidebarGrid MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <ul
+              class="MuiList-root MuiList-padding"
+            >
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Cluster
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-entered"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Namespaces
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Nodes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                CRDs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Workloads
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Pods
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Replica Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Daemon Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Stateful Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Jobs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Deployments
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                CronJobs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Storage
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Storage Classes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Storage Volumes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Persistent Volume Claims
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Network
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Services
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Endpoints
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Ingresses
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Network Policies
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Security
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Service Accounts
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Roles
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Role Bindings
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Configuration
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Config Maps
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Secrets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                HPAs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Resource Quotas
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Pod Disruption Budgets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Priority Classes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Leases
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Runtime Classes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Limit Ranges
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <button
+                aria-label="Create / Apply"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                title="Create / Apply"
+                type="button"
+              >
+                <span
+                  class="MuiIconButton-label"
+                >
+                  <span />
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+`;
+
+exports[`Storyshots Sidebar/Sidebar No Sidebar 1`] = `<div />`;
+
+exports[`Storyshots Sidebar/Sidebar Not Visible Sidebar 1`] = `<div />`;
+
 exports[`Storyshots Sidebar/Sidebar Open 1`] = `
 <div>
   <nav
@@ -1166,6 +3501,995 @@ exports[`Storyshots Sidebar/Sidebar Open 1`] = `
               >
                 <div
                   class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Pods
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Replica Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Daemon Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Stateful Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Jobs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Deployments
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                CronJobs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Storage
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Storage Classes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Storage Volumes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Persistent Volume Claims
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Network
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Services
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Endpoints
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Ingresses
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Network Policies
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Security
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Service Accounts
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Roles
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Role Bindings
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Configuration
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Config Maps
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Secrets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                HPAs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Resource Quotas
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Pod Disruption Budgets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Priority Classes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Leases
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Runtime Classes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Limit Ranges
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+`;
+
+exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
+<div>
+  <nav
+    aria-label="Navigation Tabs"
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiDrawer-root MuiDrawer-docked makeStyles-drawer makeStyles-drawerOpen"
+    >
+      <div
+        class="MuiPaper-root MuiDrawer-paper makeStyles-drawerOpen MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
+      >
+        <div
+          class="makeStyles-toolbar makeStyles-toolbar"
+        >
+          <button
+            aria-label="Shrink sidebar"
+            class="MuiButtonBase-root MuiButton-root MuiButton-text makeStyles-button makeStyles-button"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root makeStyles-logo"
+                focusable="false"
+                viewBox="0 0 auto 32"
+              >
+                logo-light.svg
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="MuiGrid-root makeStyles-sidebarGrid MuiGrid-container MuiGrid-direction-xs-column MuiGrid-wrap-xs-nowrap MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <ul
+              class="MuiList-root MuiList-padding"
+            >
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkMain MuiListItem-gutters MuiListItem-button"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Cluster
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-hidden"
+                  style="min-height: 0px;"
+                >
+                  <div
+                    class="MuiCollapse-wrapper"
+                  >
+                    <div
+                      class="MuiCollapse-wrapperInner"
+                    >
+                      <ul
+                        class="MuiList-root makeStyles-nested"
+                      >
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Namespaces
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Nodes
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                CRDs
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiListItem-root makeStyles-link makeStyles-linkActive makeStyles-linkMain MuiListItem-gutters MuiListItem-button MuiListItem-selected makeStyles-linkSelected"
+                  href="/"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="MuiListItemIcon-root"
+                  >
+                    <span />
+                  </div>
+                  <div
+                    class="MuiListItemText-root"
+                  >
+                    <span
+                      class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                    >
+                      Workloads
+                    </span>
+                  </div>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </a>
+              </li>
+              <li
+                class="MuiListItem-root makeStyles-fullWidthList MuiListItem-gutters"
+              >
+                <div
+                  class="MuiCollapse-root makeStyles-fullWidth MuiCollapse-entered"
                   style="min-height: 0px;"
                 >
                   <div
