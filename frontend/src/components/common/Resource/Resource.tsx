@@ -758,13 +758,14 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
   };
 
   const [pods, error] = Pod.useList(queryData);
+  const onlyOneNamespace = !!resource.metadata.namespace || resource.kind === 'Namespace';
 
   return (
     <PodListRenderer
-      hideColumns={hideColumns}
+      hideColumns={hideColumns || onlyOneNamespace ? ['namespace'] : undefined}
       pods={pods}
       error={error}
-      noNamespaceFilter={resource.kind === 'Namespace'}
+      noNamespaceFilter={onlyOneNamespace}
     />
   );
 }
