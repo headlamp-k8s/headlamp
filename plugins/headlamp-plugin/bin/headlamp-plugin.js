@@ -8,6 +8,7 @@ const fs = require('fs-extra');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const envPaths = require('env-paths');
 const path = require('path');
+const resolve = path.resolve;
 const child_process = require('child_process');
 const validate = require('validate-npm-package-name');
 const yargs = require('yargs/yargs');
@@ -82,7 +83,9 @@ function create(name, link) {
       encoding: 'utf8',
     });
   } catch (e) {
-    console.error(`Problem running npm install inside of "${dstFolder}"`);
+    console.error(
+      `Problem running npm install inside of "${dstFolder}" abs: "${resolve(dstFolder)}"`
+    );
     return 3;
   }
 
@@ -288,6 +291,166 @@ function start() {
 }
 
 /**
+ * Run script on a plugin package or folder of plugin packages.
+ *
+ * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @param scriptName {string} - name of the script to run.
+ * @param cmdLine {string} - command line to run.
+ * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
+ */
+function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
+  if (!fs.existsSync(packageFolder)) {
+    console.error(`"${packageFolder}" does not exist. Not ${scriptName}-ing.`);
+    return 1;
+  }
+
+  const oldCwd = process.cwd();
+
+  const runOnPackageReturn = {
+    success: 0,
+    notThere: 1,
+    issue: 2,
+  };
+
+  function runOnPackage(folder) {
+    if (!fs.existsSync(path.join(folder, 'package.json'))) {
+      return runOnPackageReturn.notThere;
+    }
+
+    process.chdir(folder);
+
+    if (!fs.existsSync('node_modules')) {
+      console.log(`No node_modules in "${folder}" found. Running npm install...`);
+
+      try {
+        child_process.execSync('npm install', {
+          stdio: 'inherit',
+          encoding: 'utf8',
+        });
+      } catch (e) {
+        console.error(`Problem running 'npm install' inside of "${folder}"\r\n`);
+        process.chdir(oldCwd);
+        return runOnPackageReturn.issue;
+      }
+      console.log(`Finished npm install.`);
+    }
+
+    // See if the cmd is in the:
+    // - package/node_modules/.bin
+    // - package/../node_modules/.bin
+    // - the npx node_modules/.bin
+    // If not, just use the original cmdLine and hope for the best :)
+    let cmdLineToUse = cmdLine;
+    const scriptCmd = cmdLine.split(' ')[0];
+    const scriptCmdRest = cmdLine.split(' ').slice(1).join(' ');
+
+    const nodeModulesBinCmd = path.join('node_modules', '.bin', scriptCmd);
+    const upNodeModulesBinCmd = path.join('../', nodeModulesBinCmd);
+
+    // When run as npx, find it in the node_modules npx uses
+    const headlampPluginBin = fs.realpathSync(process.argv[1]);
+    const npxBinCmd = path.join(
+      path.dirname(headlampPluginBin),
+      '..',
+      '..',
+      '..',
+      '..',
+      nodeModulesBinCmd
+    );
+
+    if (fs.existsSync(nodeModulesBinCmd)) {
+      cmdLineToUse = nodeModulesBinCmd + ' ' + scriptCmdRest;
+    } else if (fs.existsSync(upNodeModulesBinCmd)) {
+      cmdLineToUse = upNodeModulesBinCmd + ' ' + scriptCmdRest;
+    } else if (fs.existsSync(npxBinCmd)) {
+      cmdLineToUse = npxBinCmd + ' ' + scriptCmdRest;
+    } else {
+      console.warn(
+        `"${scriptCmd}" not found in "${resolve(nodeModulesBinCmd)}" or "${resolve(
+          upNodeModulesBinCmd
+        )}" or "${resolve(npxBinCmd)}".`
+      );
+    }
+
+    console.log(`"${folder}": ${scriptName}-ing, :${cmdLineToUse}:...`);
+
+    try {
+      child_process.execSync(cmdLineToUse, {
+        stdio: 'inherit',
+        encoding: 'utf8',
+      });
+    } catch (e) {
+      console.error(`Problem running ${scriptName} inside of "${folder}"\r\n`);
+      process.chdir(oldCwd);
+      return runOnPackageReturn.issue;
+    }
+
+    console.log(`Done ${scriptName}-ing: "${folder}".\r\n`);
+    process.chdir(oldCwd);
+    return runOnPackageReturn.success;
+  }
+
+  function runOnFolderOfPackages(packageFolder) {
+    const folders = fs.readdirSync(packageFolder, { withFileTypes: true }).filter(fileName => {
+      return (
+        fileName.isDirectory() &&
+        fs.existsSync(path.join(packageFolder, fileName.name, 'package.json'))
+      );
+    });
+
+    if (folders.length === 0) {
+      return {
+        error: runOnPackageReturn.notThere,
+        failedFolders: [],
+      };
+    }
+
+    const errorFolders = folders.map(folder => {
+      const folderToProcess = path.join(packageFolder, folder.name);
+      return {
+        error: runOnPackage(folderToProcess),
+        folder: folderToProcess,
+      };
+    });
+    const failedErrorFolders = errorFolders.filter(
+      errFolder => errFolder.error !== runOnPackageReturn.success
+    );
+
+    if (failedErrorFolders.length === 0) {
+      return {
+        error: runOnPackageReturn.success,
+        failedFolders: [],
+      };
+    }
+    return {
+      error: runOnPackageReturn.issue,
+      failedFolders: failedErrorFolders.map(errFolder => path.basename(errFolder.folder)),
+    };
+  }
+
+  const err = runOnPackage(packageFolder);
+
+  if (err === runOnPackageReturn.notThere) {
+    const folderErr = runOnFolderOfPackages(packageFolder);
+    if (folderErr.error === runOnPackageReturn.notThere) {
+      console.error(
+        `"${resolve(packageFolder)}" does not contain a package or packages. Not ${scriptName}-ing.`
+      );
+      return 1; // failed
+    } else if (folderErr.error === runOnPackageReturn.issue) {
+      console.error(
+        `Some in "${resolve(packageFolder)}" failed. Failed folders: ${folderErr.failedFolders.join(
+          ', '
+        )}`
+      );
+      return 1; // failed
+    }
+  }
+
+  return 0; // success
+}
+
+/**
  * Build the plugin package or folder of packages for production.
  *
  * @param packageFolder {string} - folder where the package, or folder of packages is.
@@ -343,25 +506,17 @@ function build(packageFolder) {
 }
 
 /**
- * Format code with prettier.
+ * Format plugin code with prettier. Format the plugin package or folder of packages.
  *
- * @param packageFolder {string} - folder where the package is.
+ * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @param check {boolean} - if true, check if the code is checked for formatting, but don't format it.
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
-function format(packageFolder) {
-  // @todo: this should work on a folder of packages
-  try {
-    child_process.execSync('prettier --config package.json --write src', {
-      stdio: 'inherit',
-      cwd: packageFolder,
-      encoding: 'utf8',
-    });
-  } catch (e) {
-    console.error(`Problem running prettier inside of "${packageFolder}"`);
-    return 1;
-  }
-
-  return 0;
+function format(packageFolder, check) {
+  const cmdLine = check
+    ? `prettier --config package.json --check src`
+    : 'prettier --config package.json --write src';
+  return runScriptOnPackages(packageFolder, 'format', cmdLine);
 }
 
 /**
@@ -420,11 +575,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
    * Assumes we are in the package folder.
    */
   function addMissingTemplateFiles() {
-    const missingFiles = [
-      path.join('src', 'headlamp-plugin.d.ts'),
-      'tsconfig.json',
-      'jsconfig.json',
-    ];
+    const missingFiles = [path.join('src', 'headlamp-plugin.d.ts'), 'tsconfig.json'];
     const templateFolder = path.resolve(__dirname, '..', 'template');
 
     missingFiles.forEach(pathToCheck => {
@@ -440,6 +591,23 @@ function upgrade(packageFolder, skipPackageUpdates) {
   }
 
   /**
+   * Some files should not be there anymore.
+   *
+   * Assumes we are in the package folder.
+   */
+  function removeFiles() {
+    const filesToRemove = ['jsconfig.json'];
+
+    filesToRemove.forEach(pathToCheck => {
+      const removePath = path.join('.', pathToCheck);
+      if (fs.existsSync(removePath)) {
+        console.log(`Removing file: "${removePath}"`);
+        fs.unlinkSync(removePath);
+      }
+    });
+  }
+
+  /**
    * Adds missing config into package.json
    */
   function addMissingConfiguration() {
@@ -449,25 +617,45 @@ function upgrade(packageFolder, skipPackageUpdates) {
       fs.readFileSync(path.join(templateFolder, 'package.json'), 'utf8')
     );
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    let configChanged = false;
 
-    let changed = false;
-
-    if (packageJson?.scripts?.tsc !== templatePackageJson['scripts']['tsc']) {
-      packageJson['scripts']['tsc'] = templatePackageJson['scripts']['tsc'];
-      changed = true;
-      console.log(`Updated package.json field "scripts.tsc"`);
+    /**
+     * replaceNestedKeys is used to replace nested keys in the package.json file.
+     *
+     * It only replaces the properties specified, and does so if they
+     * are missing or not equal to the ones in the template.
+     *
+     * @param {string} keyName top-level key in the package.json file that contains the nested keys to be replaced.
+     * @param {string[]} subProperties names of the nested keys to be replaced in keyName.
+     */
+    function replaceNestedKeys(keyName, subProperties) {
+      subProperties.forEach(key => {
+        if (packageJson[keyName][key] !== templatePackageJson[keyName][key]) {
+          packageJson[keyName][key] = templatePackageJson[keyName][key];
+          configChanged = true;
+          console.log(
+            `Updated package.json field ${keyName}.${key}: ${JSON.stringify(
+              packageJson[keyName][key]
+            )}`
+          );
+        }
+      });
     }
 
+    // Update these scripts keys to match the template.
+    replaceNestedKeys('scripts', ['tsc', 'storybook', 'test', 'storybook-build']);
+
+    // replace top level keys
     const checkKeys = ['eslintConfig', 'prettier'];
     checkKeys.forEach(key => {
       if (JSON.stringify(packageJson[key]) !== JSON.stringify(templatePackageJson[key])) {
         packageJson[key] = templatePackageJson[key];
-        changed = true;
-        console.log(`Updated package.json field "${key}"`);
+        configChanged = true;
+        console.log(`Updated package.json field "${key}": ${JSON.stringify(packageJson[key])}`);
       }
     });
 
-    if (changed) {
+    if (configChanged) {
       fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, '  ') + '\n');
     }
   }
@@ -480,7 +668,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
    * @returns status code, so 0 on success and failure otherwise.
    */
   function runCmd(cmd, folder) {
-    console.log(`Running cmd:"${cmd}" inside of ${folder}`);
+    console.log(`Running cmd:"${cmd}" inside of ${folder} abs: "${resolve(folder)}"`);
     try {
       child_process.execSync(cmd, {
         stdio: 'inherit',
@@ -526,6 +714,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
 
     addMissingTemplateFiles();
     addMissingConfiguration();
+    removeFiles();
 
     let failed = false;
     let reason = '';
@@ -615,17 +804,40 @@ function upgrade(packageFolder, skipPackageUpdates) {
 }
 
 /**
- * Lint code with eslint.
+ * Lint code with eslint. Lint the plugin package or folder of packages.
  *
- * @param packageFolder {string} - folder where the package is.
+ * @param packageFolder {string} - folder where the package, or folder of packages is.
  * @param fix {boolean} - automatically fix problems.
  * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
  */
 function lint(packageFolder, fix) {
+  const script = `eslint -c package.json --max-warnings 0 --ext .js,.ts,.tsx src/${
+    fix ? ' --fix' : ''
+  }`;
+  return runScriptOnPackages(packageFolder, 'lint', script);
+}
+
+/**
+ * Type check code with tsc. Type check the plugin package or folder of packages.
+ *
+ * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
+ */
+function tsc(packageFolder) {
+  const script = 'tsc --noEmit';
+  return runScriptOnPackages(packageFolder, 'tsc', script);
+}
+
+/**
+ * Start storybook.
+ *
+ * @param packageFolder {string} - folder where the package is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ */
+function storybook(packageFolder) {
   try {
-    const extra = fix ? ' --fix' : '';
     child_process.execSync(
-      'eslint -c package.json --max-warnings 0 --ext .js,.ts,.tsx src/' + extra,
+      './node_modules/.bin/start-storybook -p 6007 -c node_modules/@kinvolk/headlamp-plugin/config/.storybook',
       {
         stdio: 'inherit',
         cwd: packageFolder,
@@ -633,17 +845,46 @@ function lint(packageFolder, fix) {
       }
     );
   } catch (e) {
-    console.error(`Problem running eslint inside of "${packageFolder}"`);
+    console.error(
+      `Problem running start-storybook inside of "${packageFolder}" abs: "${resolve(
+        packageFolder
+      )}"`
+    );
     return 1;
   }
 
   return 0;
 }
 
+/**
+ * Build storybook.
+ *
+ * @param packageFolder {string} - folder where the package is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ */
+function storybook_build(packageFolder) {
+  const script = `build-storybook -c node_modules/@kinvolk/headlamp-plugin/config/.storybook`;
+  return runScriptOnPackages(packageFolder, 'storybook-build', script);
+}
+
+/**
+ * Run tests.
+ *
+ * @param packageFolder {string} - folder where the package is.
+ * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
+ */
+function test(packageFolder) {
+  const script = `react-scripts test --transformIgnorePatterns "/node_modules/(?!d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference|@kinvolk/headlamp-plugin)"`;
+  return runScriptOnPackages(packageFolder, 'test', script);
+}
+
+const headlampPluginBin = fs.realpathSync(process.argv[1]);
+console.log('headlampPluginBin path:', headlampPluginBin);
+
 yargs(process.argv.slice(2))
   .command(
     'build [package]',
-    'Build the plugin, or folder of plugins. ' + '<package> defaults to current working directory.',
+    'Build the plugin, or folder of plugins. <package> defaults to current working directory.',
     yargs => {
       yargs.positional('package', {
         describe: 'Package or folder of packages to build',
@@ -655,12 +896,12 @@ yargs(process.argv.slice(2))
       process.exitCode = build(argv.package);
     }
   )
-  .command('start', 'Watch for changes and build plugin', {}, () => {
+  .command('start', 'Watch for changes and build plugin.', {}, () => {
     process.exitCode = start();
   })
   .command(
     'create <name>',
-    'Create a new plugin folder',
+    'Create a new plugin folder.',
     yargs => {
       yargs
         .positional('name', {
@@ -680,7 +921,7 @@ yargs(process.argv.slice(2))
   .command(
     'extract <pluginPackages> <outputPlugins>',
     'Copies folders of packages from pluginPackages/packageName/dist/main.js ' +
-      'to outputPlugins/packageName/main.js',
+      'to outputPlugins/packageName/main.js.',
     yargs => {
       yargs.positional('pluginPackages', {
         describe:
@@ -702,22 +943,29 @@ yargs(process.argv.slice(2))
   )
   .command(
     'format [package]',
-    'format the plugin code with prettier. ' + '<package> defaults to current working directory.',
+    'format the plugin code with prettier. <package> defaults to current working directory.' +
+      ' Can also be a folder of packages.',
     yargs => {
-      yargs.positional('package', {
-        describe: 'Package to code format',
-        type: 'string',
-        default: '.',
-      });
+      yargs
+        .positional('package', {
+          describe: 'Package to code format',
+          type: 'string',
+          default: '.',
+        })
+        .option('check', {
+          describe: 'Check the formatting without changing files',
+          type: 'boolean',
+        });
     },
     argv => {
-      process.exitCode = format(argv.package);
+      process.exitCode = format(argv.package, argv.check);
     }
   )
   .command(
     'lint [package]',
     'Lint the plugin for coding issues with eslint. ' +
-      '<package> defaults to current working directory.',
+      '<package> defaults to current working directory.' +
+      ' Can also be a folder of packages.',
     yargs => {
       yargs
         .positional('package', {
@@ -732,6 +980,51 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = lint(argv.package, argv.fix);
+    }
+  )
+  .command(
+    'tsc [package]',
+    'Type check the plugin for coding issues with tsc. ' +
+      '<package> defaults to current working directory.' +
+      ' Can also be a folder of packages.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to type check',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = tsc(argv.package);
+    }
+  )
+  .command(
+    'storybook [package]',
+    'Start storybook. <package> defaults to current working directory.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to start storybook for',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = storybook(argv.package);
+    }
+  )
+  .command(
+    'storybook-build [package]',
+    'Build static storybook. <package> defaults to current working directory.' +
+      ' Can also be a folder of packages.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to build storybook for',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = storybook_build(argv.package);
     }
   )
   .command(
@@ -752,6 +1045,20 @@ yargs(process.argv.slice(2))
     },
     argv => {
       process.exitCode = upgrade(argv.package, argv.skipPackageUpdates);
+    }
+  )
+  .command(
+    'test [package]',
+    'Test. <package> defaults to current working directory.' + ' Can also be a folder of packages.',
+    yargs => {
+      yargs.positional('package', {
+        describe: 'Package to test',
+        type: 'string',
+        default: '.',
+      });
+    },
+    argv => {
+      process.exitCode = test(argv.package);
     }
   )
   .demandCommand(1, '')

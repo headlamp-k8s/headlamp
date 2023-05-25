@@ -1,13 +1,10 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "outDir": "./lib/",
     "declaration": true,
-    "declarationDir": "../plugins/headlamp-plugin/types/",
+    "declarationDir": "./lib/",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,16 +17,12 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": false
   },
   "exclude": [
-    "dist",
     "./src/components/TestHelpers/**/*",
-    "./src/plugin/index.ts"
+    "./src/plugin/index.ts",
+    "./src/plugin/headlamp-plugin/**/*"
   ],
-  "include": [
-    "./src/lib/**/*",
-    "./src/plugin/**/*",
-    "./src/react-app-env.d.ts"
-  ]
+  "include": ["./src/*.ts", "./src/lib/**/*", "./src/plugin/**/*", "./src/react-app-env.d.ts"]
 }

@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# The output for npm run storybook-book, static html built storybook for the plugin
+storybook-static
+

@@ -62,12 +62,11 @@ function testHeadlampPlugin() {
   run('npm run tsc');
 
   // test upgrade adds missing files
-  const filesToRemove = ['jsconfig.json', 'tsconfig.json', join('src', 'headlamp-plugin.d.ts')];
+  const filesToRemove = ['tsconfig.json', join('src', 'headlamp-plugin.d.ts')];
   filesToRemove.forEach(file => {
     fs.rmSync(join(curDir, file), { recursive: true });
   });
   run(`node ${join('..', 'bin', 'headlamp-plugin.js')} upgrade --skip-package-updates`);
-  checkFileExists(join(curDir, 'jsconfig.json'));
   checkFileExists(join(curDir, 'tsconfig.json'));
   checkFileExists(join(curDir, 'src', 'headlamp-plugin.d.ts'));
 
@@ -78,7 +77,9 @@ function testHeadlampPlugin() {
   const changedJson = packageJson
     .split('\n')
     .map(line =>
-      line.includes('"@kinvolk/headlamp-plugin"') ? '"@kinvolk/headlamp-plugin": "^0.4.9"\n' : line
+      line.includes('"@kinvolk/headlamp-plugin"')
+        ? '    "@kinvolk/headlamp-plugin": "^0.4.9"\n'
+        : line
     )
     .join('\n');
   fs.writeFileSync(packageJsonPath, changedJson);
@@ -95,6 +96,7 @@ const fs = require('fs');
 const child_process = require('child_process');
 const path = require('path');
 const join = path.join;
+const resolve = path.resolve;
 let curDir;
 
 function cleanup() {
@@ -105,6 +107,7 @@ function cleanup() {
     .forEach(file => fs.rmSync(file));
 
   const foldersToRemove = [path.join('.plugins', PACKAGE_NAME), PACKAGE_NAME];
+  console.log('Temp foldersToRemove', foldersToRemove);
   foldersToRemove
     .filter(folder => fs.existsSync(folder))
     .forEach(folder => fs.rmSync(folder, { recursive: true }));
@@ -112,7 +115,7 @@ function cleanup() {
 
 function run(cmd) {
   console.log('');
-  console.log(`Running cmd:${cmd} inside of cwd:${curDir}`);
+  console.log(`Running cmd:${cmd} inside of cwd:${curDir} abs: "${resolve(curDir)}"`);
   console.log('');
   try {
     child_process.execSync(cmd, {
@@ -121,7 +124,7 @@ function run(cmd) {
       encoding: 'utf8',
     });
   } catch (e) {
-    exit(`Error: Problem running "${cmd}" inside of "${curDir}"`);
+    exit(`Error: Problem running "${cmd}" inside of "${curDir}" abs: "${resolve(curDir)}"`);
   }
 }
 function checkFileExists(fname) {

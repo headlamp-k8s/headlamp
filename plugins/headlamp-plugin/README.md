@@ -11,18 +11,43 @@ This package is published to the npm package index separately from Headlamp.
 
 ```
 headlamp-plugin --help
-headlamp-plugin create <name>     Create a new plugin folder with base code
-headlamp-plugin build <package>   Build the plugin, or folder of
-                                  plugins. <package> defaults to
-                                  current working directory.
-headlamp-plugin start             Watch for changes and build the plugin
-headlamp-plugin upgrade <package> Upgrade the plugin to latest headlamp-plugin.
-                                  Audits, formats, lints and type checks.
-                                  <package> defaults to current working
-                                  directory. Can also be a folder of packages.
-headlamp-plugin extract           Copies folders of packages from plug
-<pluginPackages> <outputPlugins>  inPackages/packageName/dist/main.js
-                                  to outputPlugins/packageName/main.js
+
+  headlamp-plugin.js build [package]        Build the plugin, or folder of
+                                            plugins. <package> defaults to
+                                            current working directory.
+  headlamp-plugin.js start                  Watch for changes and build plugin.
+  headlamp-plugin.js create <name>          Create a new plugin folder.
+  headlamp-plugin.js extract                Copies folders of packages from plug
+  <pluginPackages> <outputPlugins>          inPackages/packageName/dist/main.js
+                                            to
+                                            outputPlugins/packageName/main.js.
+  headlamp-plugin.js format [package]       format the plugin code with
+                                            prettier. <package> defaults to
+                                            current working directory. Can also
+                                            be a folder of packages.
+  headlamp-plugin.js lint [package]         Lint the plugin for coding issues
+                                            with eslint. <package> defaults to
+                                            current working directory. Can also
+                                            be a folder of packages.
+  headlamp-plugin.js tsc [package]          Type check the plugin for coding
+                                            issues with tsc. <package> defaults
+                                            to current working directory. Can
+                                            also be a folder of packages.
+  headlamp-plugin.js storybook [package]    Start storybook. <package> defaults
+                                            to current working directory.
+  headlamp-plugin.js storybook-build        Build static storybook. <package>
+  [package]                                 defaults to current working
+                                            directory. Can also be a folder of
+                                            packages.
+  headlamp-plugin.js upgrade [package]      Upgrade the plugin to latest
+                                            headlamp-plugin; audits, formats,
+                                            lints and type checks.<package>
+                                            defaults to current working
+                                            directory. Can also be a folder of
+                                            packages.
+  headlamp-plugin.js test [package]         Test. <package> defaults to current
+                                            working directory. Can also be a
+                                            folder of packages.
 ```
 
 ## Development notes
@@ -67,3 +92,15 @@ you can call the script directly.
 cd plugins/headlamp-plugin
 node ./bin/headlamp-plugin.js create myplugin --link
 ```
+
+### Keep the dependencies in sync with the frontend/
+
+Run `npm run update-dependencies` so the packages are kept up to date with there.
+
+A lot of the packages are shared between the two, but some are not. See
+dependencies-sync.js for lists of dependencies which are shared/not-shared.
+You may need to update these lists when adding/removing packages.
+
+Run `npm run check-dependencies` to see if frontend/package.json and
+headlamp-plugin/package.json are synced. This is run in CI to make sure when dependencies
+are changed, they are synced appropriately.

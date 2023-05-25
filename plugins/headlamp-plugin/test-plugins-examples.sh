@@ -4,6 +4,7 @@
 set -e
 set -o xtrace
 
+npm run check-dependencies
 npm run build
 npm pack
 

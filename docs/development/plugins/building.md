@@ -57,6 +57,12 @@ npm run lint-fix
 npm run tsc
 ```
 
+#### Run the tests
+
+```bash
+npm run test
+```
+
 ## Building for production
 
 To build the previous plugin example for production, run the following
@@ -143,3 +149,92 @@ make app-linux
 ```
 
 For more on how to extract files into there see "Shipping and Deploying Plugins" above.
+
+
+## Writing storybook stories
+
+What is a storybook story? 
+
+From https://storybook.js.org/docs/web-components/get-started/introduction
+
+> Storybook is a tool for UI development. It makes development faster and 
+> easier by isolating components. This allows you to work on one component
+> at a time. You can develop entire UIs without needing to start up a
+> complex dev stack, force certain data into your database,
+> or navigate around your application.
+
+See an example in your browser:
+
+```bash
+$ cd plugins/examples/pod-counter
+$ ls src
+headlamp-plugin.d.ts  index.tsx  Message.stories.tsx  Message.tsx
+$ npm install
+$ npm run storybook
+```
+
+Your browser should open and show you a Message component with three
+different states the component can be in. 
+
+Notices that there is a Message.stories.tsx to go along with the Message.tsx
+which has the `<Message>` component defined within it. See that file for an
+example of how to write a story.
+
+### Snapshot testing
+
+Another benefit of writing storybook stories is that they can act as 
+unit tests for regression testing. With storyshots it will save snapshots 
+of html for the different states that a component can be in. See the 
+[Snapshot tests](https://storybook.js.org/docs/react/writing-tests/snapshot-testing)
+guide in the storybook documentation for more information.
+
+This is in addition to the benefit of making sure your components can be 
+manually tested and developed quickly in isolation.
+
+See the [storybook documentation](https://storybook.js.org/docs/) for full
+details on storybook.
+
+## Running tests on a github action
+
+A workflow for testing your plugin on github with actions.
+
+Below is based on the [Building and testing Node.js](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs) docs from GitHub.
+
+Place this in a file named something like `.github/workflows/headlamp-plugin-github-workflow.yaml` in the root of your repo.
+
+```yaml
+name: Headlamp plugin linting, type checking, and testing
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./your-folder-of-plugins
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npx @kinvolk/headlamp-plugin lint .
+      - run: npx @kinvolk/headlamp-plugin format --check .
+      - run: npx @kinvolk/headlamp-plugin tsc .
+      - run: npx @kinvolk/headlamp-plugin test .
+      - run: npx @kinvolk/headlamp-plugin build .
+```
+
+Please see the github documentation for further details on workflows and actions.

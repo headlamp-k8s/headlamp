@@ -9,7 +9,10 @@
     "build": "headlamp-plugin build",
     "format": "headlamp-plugin format",
     "lint": "headlamp-plugin lint",
-    "tsc": "tsc --noEmit"
+    "tsc": "headlamp-plugin tsc",
+    "storybook": "headlamp-plugin storybook",
+    "storybook-build": "headlamp-plugin storybook-build",
+    "test": "headlamp-plugin test"
   },
   "keywords": [
     "headlamp",
@@ -31,6 +34,6 @@
     ]
   },
   "devDependencies": {
-    "@kinvolk/headlamp-plugin": "^0.5.6"
+    "@kinvolk/headlamp-plugin": "^0.6.0-alpha.27"
   }
 }
