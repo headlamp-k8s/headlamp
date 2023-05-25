@@ -750,9 +750,15 @@ export interface OwnedPodsSectionProps {
 
 export function OwnedPodsSection(props: OwnedPodsSectionProps) {
   const { resource, hideColumns } = props;
+  let namespace;
 
+  if (resource.kind === 'Namespace') {
+    namespace = resource.metadata.name;
+  } else {
+    namespace = resource.metadata.namespace;
+  }
   const queryData = {
-    namespace: resource.kind === 'Namespace' ? resource.metadata.name : undefined,
+    namespace,
     labelSelector: resource?.spec?.selector ? labelSelectorToQuery(resource?.spec?.selector) : '',
     fieldSelector: resource.kind === 'Node' ? `spec.nodeName=${resource.metadata.name}` : undefined,
   };
