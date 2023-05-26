@@ -7,22 +7,7 @@
 import helpers from '../helpers';
 import { Headlamp, Plugin } from './lib';
 import { PluginInfo } from './pluginsSlice';
-import Registry, {
-  DetailsViewDefaultHeaderActions,
-  getHeadlampAPIHeaders,
-  registerAppBarAction,
-  registerAppLogo,
-  registerClusterChooser,
-  registerDetailsViewHeaderAction,
-  registerDetailsViewHeaderActionsProcessor,
-  registerDetailsViewSection,
-  registerGetTokenFunction,
-  registerResourceTableColumnsProcessor,
-  registerRoute,
-  registerRouteFilter,
-  registerSidebarEntry,
-  registerSidebarEntryFilter,
-} from './registry';
+import Registry, * as registryToExport from './registry';
 
 window.pluginLib = {
   ApiProxy: require('../lib/k8s/apiProxy'),
@@ -50,20 +35,7 @@ window.pluginLib = {
   Notification: require('../lib/notification'),
   Headlamp,
   Plugin,
-  registerAppBarAction,
-  registerAppLogo,
-  registerClusterChooser,
-  registerDetailsViewHeaderAction,
-  registerDetailsViewSection,
-  registerRoute,
-  registerRouteFilter,
-  registerSidebarEntry,
-  registerSidebarEntryFilter,
-  registerGetTokenFunction,
-  registerDetailsViewHeaderActionsProcessor,
-  registerResourceTableColumnsProcessor,
-  DetailsViewDefaultHeaderActions,
-  getHeadlampAPIHeaders,
+  ...registryToExport,
 };
 
 // @todo: should window.plugins be private?
