@@ -26,6 +26,13 @@ type Context struct {
 	ProxyHandler http.Handler  `json:"-"`
 }
 
+type OidcConfig struct {
+	ClientID     string
+	ClientSecret string
+	IdpIssuerURL string
+	Scopes       []string
+}
+
 func (c *Context) ClientConfig() clientcmd.ClientConfig {
 	// If the context is empty, return nil.
 	if c.Name == "" && c.KubeContext == nil && c.Cluster == nil && c.AuthInfo == nil {
@@ -68,9 +75,19 @@ func (c *Context) RESTConfig() (*rest.Config, error) {
 	return clientConfig.ClientConfig()
 }
 
-// func (c *Context) OidcConfig() (*OidcConfig, error) {
-// 	oidcConfig := &OidcConfig{}
-// }
+func (c *Context) OidcConfig() (*OidcConfig, error) {
+
+	if c.AuthInfo.AuthProvider == nil {
+		return nil, errors.New("authProvider is nil")
+	}
+
+	return &OidcConfig{
+		ClientID:     c.AuthInfo.AuthProvider.Config["client-id"],
+		ClientSecret: c.AuthInfo.AuthProvider.Config["client-secret"],
+		Scopes:       strings.Split(c.AuthInfo.AuthProvider.Config["scope"], ","),
+		IdpIssuerURL: c.AuthInfo.AuthProvider.Config["idp-issuer-url"],
+	}, nil
+}
 
 func (c *Context) ProxyRequest(writer http.ResponseWriter, request *http.Request) error {
 
@@ -83,19 +100,6 @@ func (c *Context) ProxyRequest(writer http.ResponseWriter, request *http.Request
 
 	c.ProxyHandler.ServeHTTP(writer, request)
 	return nil
-	// restConf, err := c.RESTConfig()
-	// if err != nil {
-	// 	return err
-	// }
-
-	// handler, err := proxy.NewProxyHandler("/api", nil, restConf, 0, false)
-	// if err != nil {
-	// 	return err
-	// }
-
-	// handler.ServeHTTP(writer, request)
-
-	// return nil
 }
 
 func (c *Context) ClientSetWithToken(token string) (*kubernetes.Clientset, error) {

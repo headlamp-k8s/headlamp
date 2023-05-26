@@ -1,33 +1,17 @@
-package main
+package kubeconfig
 
 import (
-	"context"
 	"os"
 	"path/filepath"
 	"time"
 
-	oidc "github.com/coreos/go-oidc"
 	"github.com/pkg/errors"
-	"golang.org/x/oauth2"
-	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 )
 
-type OauthConfig struct {
-	Config   *oauth2.Config
-	Verifier *oidc.IDTokenVerifier
-	Ctx      context.Context
-}
-
-type OidcConfig struct {
-	ClientID     string
-	ClientSecret string
-	IdpIssuerURL string
-	Scopes       []string
-}
-
-func writeKubeConfig(config clientcmdapi.Config, path string) error {
+// WriteToFile writes the given config to the kubeconfig file.
+func WriteToFile(config clientcmdapi.Config, path string) error {
 	configFile := filepath.Join(path, "config")
 	now := time.Now().Format("20060102150405")
 	// check if config file exists
@@ -59,9 +43,9 @@ func writeKubeConfig(config clientcmdapi.Config, path string) error {
 	return clientcmd.WriteToFile(config, configFile)
 }
 
-// removeContextFromKubeConfigFile removes the given context and its related
+// RemoveContextFromFile removes the given context and its related
 // cluster and user from the kubeconfig file.
-func removeContextFromKubeConfigFile(context string, path string) error {
+func RemoveContextFromFile(context string, path string) error {
 	config, err := clientcmd.LoadFromFile(path)
 	if err != nil {
 		return errors.Wrap(err, "failed to load kubeconfig file")

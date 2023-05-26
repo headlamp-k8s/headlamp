@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
 	"errors"
@@ -22,6 +23,7 @@ import (
 	"syscall"
 	"time"
 
+	oidc "github.com/coreos/go-oidc"
 	"github.com/gobwas/glob"
 	"github.com/google/uuid"
 	"github.com/gorilla/handlers"
@@ -98,6 +100,12 @@ type spaHandler struct {
 	staticPath string
 	indexPath  string
 	baseURL    string
+}
+
+type OauthConfig struct {
+	Config   *oauth2.Config
+	Verifier *oidc.IDTokenVerifier
+	Ctx      context.Context
 }
 
 const (
@@ -505,47 +513,54 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	oauthRequestMap := make(map[string]*OauthConfig)
 
 	r.HandleFunc("/oidc", func(w http.ResponseWriter, r *http.Request) {
-		// ctx := context.Background()
-		// cluster := r.URL.Query().Get("cluster")
-		// if config.insecure {
-		// 	tr := &http.Transport{
-		// 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, //nolint:gosec
-		// 	}
-		// 	insecureClient := &http.Client{Transport: tr}
-		// 	ctx = oidc.ClientContext(ctx, insecureClient)
-		// }
+		ctx := context.Background()
+		cluster := r.URL.Query().Get("cluster")
+		if config.insecure {
+			tr := &http.Transport{
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, //nolint:gosec
+			}
+			insecureClient := &http.Client{Transport: tr}
+			ctx = oidc.ClientContext(ctx, insecureClient)
+		}
 
-		// oidcAuthConfig, err := GetClusterOidcConfig(cluster)
-		// if err != nil {
-		// 	log.Printf("Error getting %s cluster oidc config %s", cluster, err)
-		// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-		// 	return
-		// }
-		// provider, err := oidc.NewProvider(ctx, oidcAuthConfig.IdpIssuerURL)
-		// if err != nil {
-		// 	log.Printf("Error while fetching the provider from %s error %s", oidcAuthConfig.IdpIssuerURL, err)
-		// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-		// 	return
-		// }
+		kContext, err := config.kubeConfigStore.GetContext(cluster)
+		if err != nil {
+			log.Printf("Error: failed to get context: %s", err)
+			http.NotFound(w, r)
+			return
+		}
 
-		// oidcConfig := &oidc.Config{
-		// 	ClientID: oidcAuthConfig.ClientID,
-		// }
+		oidcAuthConfig, err := kContext.OidcConfig()
+		if err != nil {
+			log.Printf("Error getting %s cluster oidc config %s", cluster, err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		provider, err := oidc.NewProvider(ctx, oidcAuthConfig.IdpIssuerURL)
+		if err != nil {
+			log.Printf("Error while fetching the provider from %s error %s", oidcAuthConfig.IdpIssuerURL, err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 
-		// verifier := provider.Verifier(oidcConfig)
-		// oauthConfig := &oauth2.Config{
-		// 	ClientID:     oidcAuthConfig.ClientID,
-		// 	ClientSecret: oidcAuthConfig.ClientSecret,
-		// 	Endpoint:     provider.Endpoint(),
-		// 	RedirectURL:  getOidcCallbackURL(r, config),
-		// 	Scopes:       append([]string{oidc.ScopeOpenID}, oidcAuthConfig.Scopes...),
-		// }
-		// /* we encode the cluster to base64 and set it as state so that when getting redirected
-		// by oidc we can use this state value to get cluster name
-		// */
-		// state := base64.StdEncoding.EncodeToString([]byte(cluster))
-		// oauthRequestMap[state] = &OauthConfig{Config: oauthConfig, Verifier: verifier, Ctx: ctx}
-		// http.Redirect(w, r, oauthConfig.AuthCodeURL(state), http.StatusFound)
+		oidcConfig := &oidc.Config{
+			ClientID: oidcAuthConfig.ClientID,
+		}
+
+		verifier := provider.Verifier(oidcConfig)
+		oauthConfig := &oauth2.Config{
+			ClientID:     oidcAuthConfig.ClientID,
+			ClientSecret: oidcAuthConfig.ClientSecret,
+			Endpoint:     provider.Endpoint(),
+			RedirectURL:  getOidcCallbackURL(r, config),
+			Scopes:       append([]string{oidc.ScopeOpenID}, oidcAuthConfig.Scopes...),
+		}
+		/* we encode the cluster to base64 and set it as state so that when getting redirected
+		by oidc we can use this state value to get cluster name
+		*/
+		state := base64.StdEncoding.EncodeToString([]byte(cluster))
+		oauthRequestMap[state] = &OauthConfig{Config: oauthConfig, Verifier: verifier, Ctx: ctx}
+		http.Redirect(w, r, oauthConfig.AuthCodeURL(state), http.StatusFound)
 	}).Queries("cluster", "{cluster}")
 
 	r.HandleFunc("/portforward", func(w http.ResponseWriter, r *http.Request) {
@@ -1123,7 +1138,7 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Error getting default kubeconfig persistence dir", http.StatusInternalServerError)
 		}
 
-		err = writeKubeConfig(*config, kubeConfigPersistenceDir)
+		err = kubeconfig.WriteToFile(*config, kubeConfigPersistenceDir)
 		if err != nil {
 			http.Error(w, "Error writing kubeconfig", http.StatusBadRequest)
 			return
@@ -1194,7 +1209,7 @@ func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 
 	log.Println("Removing cluster from kubeconfig", name, kubeConfigPersistenceFile)
 
-	err = removeContextFromKubeConfigFile(name, kubeConfigPersistenceFile)
+	err = kubeconfig.RemoveContextFromFile(name, kubeConfigPersistenceFile)
 	if err != nil {
 		log.Printf("Error removing cluster from kubeconfig: %v\n", err)
 		http.Error(w, "Error removing cluster from kubeconfig", http.StatusInternalServerError)
