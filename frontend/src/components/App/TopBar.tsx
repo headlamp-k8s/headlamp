@@ -17,15 +17,12 @@ import helpers from '../../helpers';
 import { getToken, setToken } from '../../lib/auth';
 import { useCluster, useClustersConf } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
-import {
-  HeaderActionType,
-  setVersionDialogOpen,
-  setWhetherSidebarOpen,
-} from '../../redux/actions/actions';
+import { setVersionDialogOpen, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SettingsButton } from '../App/Settings';
 import { ClusterTitle } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
+import { HeaderActionType } from '../common/Resource/headerActionSlice';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
 import Notifications from './Notifications';

@@ -15,12 +15,12 @@ import { useParams } from 'react-router-dom';
 import { Terminal as XTerminal } from 'xterm';
 import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
-import { DefaultHeaderAction } from '../../redux/actions/actions';
 import { LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import { ConditionsSection, ContainersSection, DetailsGrid } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
+import { DefaultHeaderAction } from '../common/Resource/headerActionSlice';
 import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
 

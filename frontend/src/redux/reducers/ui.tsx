@@ -1,7 +1,7 @@
 import _ from 'lodash';
+import { HeaderActionType } from '../../components/common/Resource/headerActionSlice';
 import { DefaultSidebars, SidebarEntryProps } from '../../components/Sidebar';
 import helpers from '../../helpers';
-import { KubeObject } from '../../lib/k8s/cluster';
 import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import themesConf, { setTheme } from '../../lib/themes';
@@ -10,14 +10,10 @@ import {
   Action,
   BrandingProps,
   FunctionsToOverride,
-  HeaderAction,
-  HeaderActionType,
   TableColumnsProcessor,
   UI_ADD_TABLE_COLUMNS_PROCESSOR,
   UI_APP_BAR_SET_ACTION,
   UI_BRANDING_SET_APP_LOGO,
-  UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR,
-  UI_DETAILS_VIEW_SET_HEADER_ACTION,
   UI_FUNCTIONS_OVERRIDE,
   UI_HIDE_APP_BAR,
   UI_INITIALIZE_PLUGIN_VIEWS,
@@ -38,10 +34,6 @@ import {
 
 type SidebarEntryFilterFuncType = (entry: SidebarEntryProps) => SidebarEntryProps | null;
 type RouteFilterFuncType = (entry: Route) => Route | null;
-type HeaderActionsProcessor = {
-  id: string;
-  processor: (resource: KubeObject | null, actions: HeaderAction[]) => HeaderAction[];
-};
 
 export interface UIState {
   sidebar: {
@@ -64,8 +56,6 @@ export interface UIState {
   routeFilters: RouteFilterFuncType[];
   views: {
     details: {
-      headerActions: HeaderAction[];
-      headerActionsProcessors: HeaderActionsProcessor[];
       pluginAppendedDetailViews: DetailsViewSectionType[];
     };
     appBar: {
@@ -126,8 +116,6 @@ export const INITIAL_STATE: UIState = {
   routeFilters: [],
   views: {
     details: {
-      headerActions: [],
-      headerActionsProcessors: [],
       pluginAppendedDetailViews: [],
     },
     tableColumnsProcessors: [],
@@ -204,26 +192,6 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
     case UI_ROUTER_SET_ROUTE_FILTER: {
       const routeFilters = [...newFilters.routeFilters, action.filterFunc];
       newFilters.routeFilters = routeFilters;
-      break;
-    }
-    case UI_DETAILS_VIEW_SET_HEADER_ACTION: {
-      const headerAction = action.action;
-      const generatedID = headerAction.id || `generated-id-${Date.now().toString(36)}`;
-      const headerActions = [
-        ...newFilters.views.details.headerActions,
-        { id: generatedID, action: headerAction.action },
-      ];
-      newFilters.views.details.headerActions = headerActions;
-      break;
-    }
-    case UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR: {
-      const headerActionProcessor = action.action;
-      const generatedID = headerActionProcessor.id || `generated-id-${Date.now().toString(36)}`;
-      const processors = [
-        ...newFilters.views.details.headerActionsProcessors,
-        { id: generatedID, processor: headerActionProcessor.processor },
-      ];
-      newFilters.views.details.headerActionsProcessors = processors;
       break;
     }
     case UI_ADD_TABLE_COLUMNS_PROCESSOR: {

@@ -1,11 +1,10 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
-import { ReactElement, ReactNode } from 'react';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
+import { HeaderActionType } from '../../components/common/Resource/headerActionSlice';
 import { ResourceTableProps } from '../../components/common/Resource/ResourceTable';
 import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
 import { AppLogoType } from '../../components/Sidebar/AppLogo';
-import { KubeObject } from '../../lib/k8s/cluster';
 import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import { UIState } from '../reducers/ui';
@@ -87,33 +86,6 @@ export interface Action {
 
 type SidebarType = UIState['sidebar'];
 
-export type HeaderActionType =
-  | ((...args: any[]) => JSX.Element | null | ReactNode)
-  | null
-  | ReactElement
-  | ReactNode;
-export type DetailsViewFunc = HeaderActionType;
-
-export type HeaderAction = {
-  id: string;
-  action?: HeaderActionType;
-};
-
-export enum DefaultHeaderAction {
-  RESTART = 'RESTART',
-  DELETE = 'DELETE',
-  EDIT = 'EDIT',
-  SCALE = 'SCALE',
-  POD_LOGS = 'POD_LOGS',
-  POD_TERMINAL = 'POD_TERMINAL',
-  POD_ATTACH = 'POD_ATTACH',
-}
-
-export type HeaderActionsProcessor = {
-  id: string;
-  processor: (resource: KubeObject | null, actions: HeaderAction[]) => HeaderAction[];
-};
-
 export type TableColumnsProcessor = {
   /** Unique ID for this processor. */
   id: string;
@@ -189,31 +161,6 @@ export function setRoute(routeSpec: Route) {
 
 export function setRouteFilter(filterFunc: (entry: Route) => Route | null) {
   return { type: UI_ROUTER_SET_ROUTE_FILTER, filterFunc };
-}
-
-export function setDetailsViewHeaderAction(action: HeaderActionType | HeaderAction) {
-  let headerAction = action as HeaderAction;
-  if (headerAction.id === undefined) {
-    if (headerAction.action === undefined) {
-      headerAction = { id: '', action: action as HeaderActionType };
-    } else {
-      headerAction = { id: '', action: headerAction.action };
-    }
-  }
-  return { type: UI_DETAILS_VIEW_SET_HEADER_ACTION, action: headerAction };
-}
-
-export function addDetailsViewHeaderActionsProcessor(
-  actionProcessor: HeaderActionsProcessor | HeaderActionsProcessor['processor']
-) {
-  let headerActionsProcessor = actionProcessor as HeaderActionsProcessor;
-  if (headerActionsProcessor.id === undefined && typeof actionProcessor === 'function') {
-    headerActionsProcessor = {
-      id: '',
-      processor: actionProcessor,
-    };
-  }
-  return { type: UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR, action: headerActionsProcessor };
 }
 
 export function addResourceTableColumnsProcessor(

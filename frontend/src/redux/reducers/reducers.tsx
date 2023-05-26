@@ -1,5 +1,6 @@
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { combineReducers } from 'redux';
+import headerActionReducer from '../../components/common/Resource/headerActionSlice';
 import pluginsReducer from '../../plugin/pluginsSlice';
 import clusterAction from './clusterAction';
 import config from './config';
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   clusterAction: clusterAction,
   config: config,
   plugins: pluginsReducer,
+  headerAction: headerActionReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;

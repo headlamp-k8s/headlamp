@@ -1,5 +1,12 @@
 import React from 'react';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
+import {
+  addDetailsViewHeaderActionsProcessor,
+  DefaultHeaderAction,
+  HeaderActionsProcessor,
+  HeaderActionType,
+  setDetailsViewHeaderAction,
+} from '../components/common/Resource/headerActionSlice';
 import { SectionBox } from '../components/common/SectionBox';
 import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/DetailsViewSection';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
@@ -8,16 +15,11 @@ import { getHeadlampAPIHeaders } from '../helpers';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
-  addDetailsViewHeaderActionsProcessor,
   addResourceTableColumnsProcessor,
-  DefaultHeaderAction,
-  HeaderActionsProcessor,
-  HeaderActionType,
   setAppBarAction,
   setBrandingAppLogoComponent,
   setClusterChooserButtonComponent,
   setDetailsView,
-  setDetailsViewHeaderAction,
   setFunctionsToOverride,
   setRoute,
   setRouteFilter,
