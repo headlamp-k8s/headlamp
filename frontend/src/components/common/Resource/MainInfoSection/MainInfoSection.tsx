@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { KubeObject } from '../../../../lib/k8s/cluster';
 import { createRouteURL } from '../../../../lib/router';
+import { DefaultHeaderAction, HeaderAction } from '../../../../redux/actionButtonsSlice';
 import { useTypedSelector } from '../../../../redux/reducers/reducers';
 import Loader from '../../../common/Loader';
 import SectionHeader, { HeaderStyleProps } from '../../../common/SectionHeader';
@@ -12,7 +13,6 @@ import ErrorBoundary from '../../ErrorBoundary';
 import SectionBox from '../../SectionBox';
 import DeleteButton from '../DeleteButton';
 import EditButton from '../EditButton';
-import { DefaultHeaderAction, HeaderAction } from '../headerActionSlice';
 import { MetadataDisplay } from '../MetadataDisplay';
 import { RestartButton } from '../RestartButton';
 import ScaleButton from '../ScaleButton';
@@ -49,9 +49,9 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     backLink,
     error = null,
   } = props;
-  const headerActions = useTypedSelector(state => state.headerAction.headerActions);
+  const headerActions = useTypedSelector(state => state.actionButtons.headerActions);
   const headerActionsProcessors = useTypedSelector(
-    state => state.headerAction.headerActionsProcessors
+    state => state.actionButtons.headerActionsProcessors
   );
   const { t } = useTranslation('frequent');
   const header = typeof headerSection === 'function' ? headerSection(resource) : headerSection;

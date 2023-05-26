@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReactElement, ReactNode } from 'react';
-import { KubeObject } from '../../../lib/k8s/cluster';
+import { KubeObject } from '../lib/k8s/cluster';
 
 export type HeaderActionType =
   | ((...args: any[]) => JSX.Element | null | ReactNode)
@@ -31,14 +31,16 @@ export type HeaderActionsProcessor = {
 export interface HeaderActionState {
   headerActions: HeaderAction[];
   headerActionsProcessors: HeaderActionsProcessor[];
+  appBarActions: HeaderActionType[];
 }
 const initialState: HeaderActionState = {
   headerActions: [],
   headerActionsProcessors: [],
+  appBarActions: [],
 };
 
-export const headerActionSlice = createSlice({
-  name: 'headerAction',
+export const actionButtonsSlice = createSlice({
+  name: 'actionButtons',
   initialState,
   reducers: {
     setDetailsViewHeaderAction(state, action: PayloadAction<HeaderActionType | HeaderAction>) {
@@ -70,10 +72,14 @@ export const headerActionSlice = createSlice({
         headerActionsProcessor.id || `generated-id-${Date.now().toString(36)}`;
       state.headerActionsProcessors.push(headerActionsProcessor);
     },
+
+    setAppBarAction(state, action: PayloadAction<HeaderActionType>) {
+      state.appBarActions.push(action.payload);
+    },
   },
 });
 
-export const { setDetailsViewHeaderAction, addDetailsViewHeaderActionsProcessor } =
-  headerActionSlice.actions;
+export const { setDetailsViewHeaderAction, addDetailsViewHeaderActionsProcessor, setAppBarAction } =
+  actionButtonsSlice.actions;
 
-export default headerActionSlice.reducer;
+export default actionButtonsSlice.reducer;

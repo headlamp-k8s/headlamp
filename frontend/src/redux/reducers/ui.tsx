@@ -1,18 +1,17 @@
 import _ from 'lodash';
-import { HeaderActionType } from '../../components/common/Resource/headerActionSlice';
 import { DefaultSidebars, SidebarEntryProps } from '../../components/Sidebar';
 import helpers from '../../helpers';
 import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import themesConf, { setTheme } from '../../lib/themes';
 import { ClusterChooserType, DetailsViewSectionType } from '../../plugin/registry';
+import { HeaderActionType } from '../actionButtonsSlice';
 import {
   Action,
   BrandingProps,
   FunctionsToOverride,
   TableColumnsProcessor,
   UI_ADD_TABLE_COLUMNS_PROCESSOR,
-  UI_APP_BAR_SET_ACTION,
   UI_BRANDING_SET_APP_LOGO,
   UI_FUNCTIONS_OVERRIDE,
   UI_HIDE_APP_BAR,
@@ -208,12 +207,6 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       const { action: sectionFunc } = action;
       const detailViews = [...newFilters.views.details.pluginAppendedDetailViews, sectionFunc];
       newFilters.views.details.pluginAppendedDetailViews = detailViews;
-      break;
-    }
-    case UI_APP_BAR_SET_ACTION: {
-      const appBarActions = [...newFilters.views.appBar.actions];
-      appBarActions.push(action.action);
-      newFilters.views.appBar.actions = appBarActions;
       break;
     }
     case UI_THEME_SET: {

@@ -1,6 +1,5 @@
 import { OptionsObject as SnackbarProps } from 'notistack';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
-import { HeaderActionType } from '../../components/common/Resource/headerActionSlice';
 import { ResourceTableProps } from '../../components/common/Resource/ResourceTable';
 import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
@@ -28,7 +27,6 @@ export const UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR =
   'UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR';
 export const UI_ADD_TABLE_COLUMNS_PROCESSOR = 'UI_ADD_TABLE_COLUMNS_PROCESSOR';
 export const UI_SET_DETAILS_VIEW = 'UI_SET_DETAILS_VIEW';
-export const UI_APP_BAR_SET_ACTION = 'UI_APP_BAR_SET_ACTION';
 export const UI_THEME_SET = 'UI_THEME_SET';
 export const UI_INITIALIZE_PLUGIN_VIEWS = 'UI_INITIALIZE_PLUGIN_VIEWS';
 export const UI_PLUGINS_LOADED = 'UI_PLUGINS_LOADED';
@@ -181,10 +179,6 @@ export function setDetailsView(viewSection: DetailsViewSectionType) {
     type: UI_SET_DETAILS_VIEW,
     action: viewSection,
   };
-}
-
-export function setAppBarAction(actionFunc: HeaderActionType) {
-  return { type: UI_APP_BAR_SET_ACTION, action: actionFunc };
 }
 
 export function setConfig(config: object) {
