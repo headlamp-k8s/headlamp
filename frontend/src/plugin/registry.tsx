@@ -1,3 +1,4 @@
+import { has } from 'lodash';
 import React from 'react';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
 import { SectionBox } from '../components/common/SectionBox';
@@ -13,6 +14,7 @@ import {
   HeaderActionsProcessor,
   HeaderActionType,
   setAppBarAction,
+  setAppBarActionProcessor,
   setDetailsViewHeaderAction,
 } from '../redux/actionButtonsSlice';
 import {
@@ -53,7 +55,7 @@ export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | un
 // @todo: HeaderActionType should be deprecated.
 export type DetailsViewHeaderActionType = HeaderActionType;
 export type DetailsViewHeaderActionsProcessor = HeaderActionsProcessor;
-export type AppBarActionType = HeaderActionType;
+export type AppBarActionType = HeaderActionType | HeaderActionsProcessor;
 
 export default class Registry {
   /**
@@ -348,6 +350,14 @@ export function registerResourceTableColumnsProcessor(
   store.dispatch(addResourceTableColumnsProcessor(processor));
 }
 
+function isProcessor(headerAction: AppBarActionType): boolean {
+  return !!(
+    headerAction &&
+    (has(headerAction, 'processor') ||
+      (typeof headerAction === 'function' && headerAction.length === 2))
+  );
+}
+
 /**
  * Add a component into the app bar (at the top of the app).
  *
@@ -375,6 +385,9 @@ export function registerResourceTableColumnsProcessor(
  * ```
  */
 export function registerAppBarAction(headerAction: AppBarActionType) {
+  if (isProcessor(headerAction)) {
+    store.dispatch(setAppBarActionProcessor(headerAction as HeaderActionsProcessor));
+  }
   store.dispatch(setAppBarAction(headerAction));
 }
 

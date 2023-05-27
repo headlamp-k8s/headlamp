@@ -16,10 +16,10 @@ export interface MessageProps {
 
 /**
  * For showing our action item message.
- * 
- * This is a pure presentational component to make it 
+ *
+ * This is a pure presentational component to make it
  * easier to use in storybook.
- * 
+ *
  * See https://storybook.js.org/docs/web-components/writing-stories/build-pages-with-storybook
  *
  */

@@ -5,7 +5,6 @@ import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import themesConf, { setTheme } from '../../lib/themes';
 import { ClusterChooserType, DetailsViewSectionType } from '../../plugin/registry';
-import { HeaderActionType } from '../actionButtonsSlice';
 import {
   Action,
   BrandingProps,
@@ -56,9 +55,6 @@ export interface UIState {
   views: {
     details: {
       pluginAppendedDetailViews: DetailsViewSectionType[];
-    };
-    appBar: {
-      actions: HeaderActionType[];
     };
     tableColumnsProcessors: TableColumnsProcessor[];
   };
@@ -118,9 +114,6 @@ export const INITIAL_STATE: UIState = {
       pluginAppendedDetailViews: [],
     },
     tableColumnsProcessors: [],
-    appBar: {
-      actions: [],
-    },
   },
   theme: {
     name: '',

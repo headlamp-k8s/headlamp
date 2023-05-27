@@ -25,19 +25,44 @@ export enum DefaultHeaderAction {
 }
 export type HeaderActionsProcessor = {
   id: string;
-  processor: (resource: KubeObject | null, actions: HeaderAction[]) => HeaderAction[];
+  processor: (resource: KubeObject | null, actions: HeaderActionType[]) => HeaderAction[];
 };
 
 export interface HeaderActionState {
-  headerActions: HeaderAction[];
+  headerActions: HeaderActionType[];
   headerActionsProcessors: HeaderActionsProcessor[];
   appBarActions: HeaderActionType[];
+  appBarActionsProcessors: HeaderActionsProcessor[];
 }
 const initialState: HeaderActionState = {
   headerActions: [],
   headerActionsProcessors: [],
   appBarActions: [],
+  appBarActionsProcessors: [],
 };
+
+/**
+ * Normalizes a header actions processor by ensuring it has an 'id' and a processor function.
+ *
+ * If the processor is passed as a function, it will be wrapped in an object with a generated ID.
+ *
+ * @param action - The payload action containing the header actions processor.
+ * @returns The normalized header actions processor.
+ */
+function _normalizeProcessor(
+  action: PayloadAction<HeaderActionsProcessor | HeaderActionsProcessor['processor']>
+) {
+  let headerActionsProcessor = action.payload as HeaderActionsProcessor;
+  if (headerActionsProcessor.id === undefined && typeof headerActionsProcessor === 'function') {
+    headerActionsProcessor = {
+      id: '',
+      processor: headerActionsProcessor,
+    };
+  }
+  headerActionsProcessor.id =
+    headerActionsProcessor.id || `generated-id-${Date.now().toString(36)}`;
+  return headerActionsProcessor;
+}
 
 export const actionButtonsSlice = createSlice({
   name: 'actionButtons',
@@ -61,25 +86,27 @@ export const actionButtonsSlice = createSlice({
       state,
       action: PayloadAction<HeaderActionsProcessor | HeaderActionsProcessor['processor']>
     ) {
-      let headerActionsProcessor = action.payload as HeaderActionsProcessor;
-      if (headerActionsProcessor.id === undefined && typeof headerActionsProcessor === 'function') {
-        headerActionsProcessor = {
-          id: '',
-          processor: headerActionsProcessor,
-        };
-      }
-      headerActionsProcessor.id =
-        headerActionsProcessor.id || `generated-id-${Date.now().toString(36)}`;
-      state.headerActionsProcessors.push(headerActionsProcessor);
+      state.headerActionsProcessors.push(_normalizeProcessor(action));
     },
 
-    setAppBarAction(state, action: PayloadAction<HeaderActionType>) {
+    setAppBarAction(state, action: PayloadAction<HeaderActionType | HeaderAction>) {
       state.appBarActions.push(action.payload);
+    },
+
+    setAppBarActionProcessor(
+      state,
+      action: PayloadAction<HeaderActionsProcessor | HeaderActionsProcessor['processor']>
+    ) {
+      state.appBarActionsProcessors.push(_normalizeProcessor(action));
     },
   },
 });
 
-export const { setDetailsViewHeaderAction, addDetailsViewHeaderActionsProcessor, setAppBarAction } =
-  actionButtonsSlice.actions;
+export const {
+  setDetailsViewHeaderAction,
+  addDetailsViewHeaderActionsProcessor,
+  setAppBarAction,
+  setAppBarActionProcessor,
+} = actionButtonsSlice.actions;
 
 export default actionButtonsSlice.reducer;

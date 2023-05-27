@@ -1,9 +1,14 @@
+import { has } from 'lodash';
 import React, { isValidElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { KubeObject } from '../../../../lib/k8s/cluster';
 import { createRouteURL } from '../../../../lib/router';
-import { DefaultHeaderAction, HeaderAction } from '../../../../redux/actionButtonsSlice';
+import {
+  DefaultHeaderAction,
+  HeaderAction,
+  HeaderActionType,
+} from '../../../../redux/actionButtonsSlice';
 import { useTypedSelector } from '../../../../redux/reducers/reducers';
 import Loader from '../../../common/Loader';
 import SectionHeader, { HeaderStyleProps } from '../../../common/SectionHeader';
@@ -56,10 +61,11 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   const { t } = useTranslation('frequent');
   const header = typeof headerSection === 'function' ? headerSection(resource) : headerSection;
 
-  function setupAction(headerAction: HeaderAction) {
-    let Action = headerAction.action;
-    if (!Action && !noDefaultActions) {
-      switch (headerAction.id) {
+  function setupAction(headerAction: HeaderActionType) {
+    let Action = has(headerAction, 'action') ? (headerAction as HeaderAction).action : headerAction;
+
+    if (!noDefaultActions && has(headerAction, 'id')) {
+      switch ((headerAction as HeaderAction).id) {
         case DefaultHeaderAction.RESTART:
           Action = RestartButton;
           break;
@@ -77,7 +83,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
       }
     }
 
-    if (!Action) {
+    if (!Action || (headerAction as HeaderAction).action === null) {
       return null;
     }
 

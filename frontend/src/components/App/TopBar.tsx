@@ -9,6 +9,7 @@ import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/sty
 import Toolbar from '@material-ui/core/Toolbar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
+import { has } from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -17,7 +18,11 @@ import helpers from '../../helpers';
 import { getToken, setToken } from '../../lib/auth';
 import { useCluster, useClustersConf } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
-import { HeaderActionType } from '../../redux/actionButtonsSlice';
+import {
+  HeaderAction,
+  HeaderActionsProcessor,
+  HeaderActionType,
+} from '../../redux/actionButtonsSlice';
 import { setVersionDialogOpen, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SettingsButton } from '../App/Settings';
@@ -29,8 +34,28 @@ import Notifications from './Notifications';
 
 export interface TopBarProps {}
 
+export function useAppBarActionsProcessed() {
+  const appBarActions = useTypedSelector(state => state.actionButtons.appBarActions);
+  const appBarActionsProcessors = useTypedSelector(
+    state => state.actionButtons.appBarActionsProcessors
+  );
+  return processAppBarActions(appBarActions, appBarActionsProcessors);
+}
+
+export function processAppBarActions(
+  appBarActions: HeaderActionType[],
+  appBarActionsProcessors: HeaderActionsProcessor[]
+) {
+  let appBarActionsProcessed = [...appBarActions];
+  if (appBarActionsProcessors.length > 0) {
+    for (const appBarActionsProcessor of appBarActionsProcessors) {
+      appBarActionsProcessed = appBarActionsProcessor.processor(null, appBarActionsProcessed);
+    }
+  }
+  return appBarActionsProcessed;
+}
+
 export default function TopBar({}: TopBarProps) {
-  const appBarActions = useTypedSelector(state => state.ui.views.appBar.actions);
   const dispatch = useDispatch();
   const isMedium = useMediaQuery('(max-width:960px)');
 
@@ -43,6 +68,7 @@ export default function TopBar({}: TopBarProps) {
   const clustersConfig = useClustersConf();
   const cluster = useCluster();
   const history = useHistory();
+  const appBarActionsProcessed = useAppBarActionsProcessed();
 
   function hasToken() {
     return !!cluster ? !!getToken(cluster) : false;
@@ -60,7 +86,7 @@ export default function TopBar({}: TopBarProps) {
   }
   return (
     <PureTopBar
-      appBarActions={appBarActions}
+      appBarActions={appBarActionsProcessed}
       logout={logout}
       hasToken={hasToken()}
       isSidebarOpen={isSidebarOpen}
@@ -139,7 +165,8 @@ const useStyles = makeStyles((theme: Theme) =>
 function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[] }) {
   const actions = (function stateActions() {
     return React.Children.toArray(
-      appBarActions.map(Action => {
+      appBarActions.map(action => {
+        const Action = has(action, 'action') ? (action as HeaderAction).action : action;
         if (React.isValidElement(Action)) {
           return (
             <ErrorBoundary>
@@ -166,7 +193,8 @@ function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[
 function AppBarActions({ appBarActions }: { appBarActions: HeaderActionType[] }) {
   const actions = (function stateActions() {
     return React.Children.toArray(
-      appBarActions.map(Action => {
+      appBarActions.map(action => {
+        const Action = has(action, 'action') ? (action as HeaderAction).action : action;
         if (React.isValidElement(Action)) {
           return <ErrorBoundary>{Action}</ErrorBoundary>;
         } else if (Action === null) {
