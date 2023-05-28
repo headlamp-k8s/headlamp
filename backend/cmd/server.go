@@ -7,6 +7,7 @@ import (
 
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 )
 
 func main() {
@@ -16,6 +17,7 @@ func main() {
 	}
 
 	cache := cache.New()
+	kubeConfigStore := kubeconfig.NewContextStore()
 
 	StartHeadlampServer(&HeadlampConfig{
 		useInCluster:          conf.InCluster,
@@ -34,5 +36,6 @@ func main() {
 		enableHelm:            conf.EnableHelm,
 		enableDynamicClusters: conf.EnableDynamicClusters,
 		cache:                 cache,
+		kubeConfigStore:       kubeConfigStore,
 	})
 }
