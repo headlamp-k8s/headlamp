@@ -249,14 +249,28 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                  id="memory"
-                  style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                  title="memory"
+                <div
+                  class="makeStyles-root"
                 >
-                  14360576/100Mi
-                </span>
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      14360576/100Mi
+                    </span>
+                  </div>
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      1more…
+                    </span>
+                  </div>
+                </div>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -324,14 +338,28 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                  id="memory"
-                  style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                  title="memory"
+                <div
+                  class="makeStyles-root"
                 >
-                  14360576/100Mi
-                </span>
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      14360576/100Mi
+                    </span>
+                  </div>
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      1more…
+                    </span>
+                  </div>
+                </div>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -399,14 +427,28 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                  id="memory"
-                  style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                  title="memory"
+                <div
+                  class="makeStyles-root"
                 >
-                  14360576/100Mi
-                </span>
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      14360576/100Mi
+                    </span>
+                  </div>
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      1more…
+                    </span>
+                  </div>
+                </div>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -474,14 +516,28 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                  id="memory"
-                  style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                  title="memory"
+                <div
+                  class="makeStyles-root"
                 >
-                  14360576/100Mi
-                </span>
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      14360576/100Mi
+                    </span>
+                  </div>
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      1more…
+                    </span>
+                  </div>
+                </div>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -549,14 +605,28 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body"
               >
-                <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                  id="memory"
-                  style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                  title="memory"
+                <div
+                  class="makeStyles-root"
                 >
-                  14360576/100Mi
-                </span>
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      14360576/100Mi
+                    </span>
+                  </div>
+                  <div
+                    class="MuiChip-root MuiChip-outlined"
+                  >
+                    <span
+                      class="MuiChip-label"
+                    >
+                      1more…
+                    </span>
+                  </div>
+                </div>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"

@@ -352,6 +352,92 @@ export function useURLState<T extends string | number | undefined = string>(
   return [value, setValue] as [T, React.Dispatch<React.SetStateAction<T>>];
 }
 
+// compareUnits compares two units and returns true if they are equal
+export function compareUnits(quantity1: string, quantity2: string) {
+  // strip whitespace and convert to lowercase
+  const qty1 = quantity1.replace(/\s/g, '').toLowerCase();
+  const qty2 = quantity2.replace(/\s/g, '').toLowerCase();
+
+  // compare numbers
+  return parseInt(qty1) === parseInt(qty2);
+}
+
+export function normalizeUnit(resourceType: string, quantity: string) {
+  let type = resourceType;
+
+  if (type.includes('.')) {
+    type = type.split('.')[1];
+  }
+
+  let normalizedQuantity = '';
+  let bytes = 0;
+  switch (type) {
+    case 'cpu':
+      normalizedQuantity = quantity?.endsWith('m')
+        ? `${Number(quantity.substring(0, quantity.length - 1)) / 1000}`
+        : `${quantity}`;
+      if (normalizedQuantity === '0' || normalizedQuantity === '1') {
+        normalizedQuantity = '0 ' + 'core';
+      } else {
+        normalizedQuantity = normalizedQuantity + ' ' + 'cores';
+      }
+      break;
+
+    case 'memory':
+      /**
+       * Decimal: m | n | "" | k | M | G | T | P | E
+       * Binary: Ki | Mi | Gi | Ti | Pi | Ei
+       * Refer https://github.com/kubernetes-client/csharp/blob/840a90e24ef922adee0729e43859cf6b43567594/src/KubernetesClient.Models/ResourceQuantity.cs#L211
+       */
+      console.log('debug:', quantity, parseInt(quantity), quantity.endsWith('m'));
+      bytes = parseInt(quantity);
+      if (quantity.endsWith('Ki')) {
+        bytes *= 1024;
+      } else if (quantity.endsWith('Mi')) {
+        bytes *= 1024 * 1024;
+      } else if (quantity.endsWith('Gi')) {
+        bytes *= 1024 * 1024 * 1024;
+      } else if (quantity.endsWith('Ti')) {
+        bytes *= 1024 * 1024 * 1024 * 1024;
+      } else if (quantity.endsWith('Ei')) {
+        bytes *= 1024 * 1024 * 1024 * 1024 * 1024;
+      } else if (quantity.endsWith('m')) {
+        bytes /= 1000;
+      } else if (quantity.endsWith('u')) {
+        bytes /= 1000 * 1000;
+      } else if (quantity.endsWith('n')) {
+        bytes /= 1000 * 1000 * 1000;
+      } else if (quantity.endsWith('k')) {
+        bytes *= 1000;
+      } else if (quantity.endsWith('M')) {
+        bytes *= 1000 * 1000;
+      } else if (quantity.endsWith('G')) {
+        bytes *= 1000 * 1000 * 1000;
+      } else if (quantity.endsWith('T')) {
+        bytes *= 1000 * 1000 * 1000 * 1000;
+      } else if (quantity.endsWith('E')) {
+        bytes *= 1000 * 1000 * 1000 * 1000 * 1000;
+      }
+
+      if (bytes === 0) {
+        normalizedQuantity = '0 Bytes';
+      } else {
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        const k = 1000;
+        const dm = 2;
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        console.debug('debug bytes:', bytes, i, sizes);
+        normalizedQuantity = parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+      }
+      break;
+
+    default:
+      normalizedQuantity = quantity;
+      break;
+  }
+  return normalizedQuantity;
+}
+
 // Make units available from here
 export * as auth from './auth';
 export * as units from './units';

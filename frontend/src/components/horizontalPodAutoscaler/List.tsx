@@ -1,9 +1,24 @@
+import { Chip, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import HPA from '../../lib/k8s/hpa';
-import { Link, SectionBox, SectionFilterHeader, StatusLabel } from '../common';
+import { Link, SectionBox, SectionFilterHeader } from '../common';
 import ResourceTable from '../common/Resource/ResourceTable';
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      justifyContent: 'left',
+      flexWrap: 'wrap',
+      '& > *': {
+        margin: theme.spacing(0.5),
+      },
+    },
+  })
+);
+
 export default function HpaList() {
+  const classes = useStyles();
   const { t } = useTranslation(['glossary', 'hpa', 'frequent']);
 
   return (
@@ -27,25 +42,14 @@ export default function HpaList() {
               const value: JSX.Element[] = [];
               const metrics = hpa.metrics(t);
               if (metrics.length) {
-                value.push(
-                  <StatusLabel
-                    key={metrics[0].name}
-                    id={metrics[0].name}
-                    status=""
-                    title={metrics[0].name}
-                  >
-                    {metrics[0].shortValue}
-                  </StatusLabel>
-                );
-                if (hpa.metrics.length > 1) {
+                value.push(<Chip label={metrics[0].shortValue} variant="outlined" />);
+                if (metrics.length > 1) {
                   value.push(
-                    <StatusLabel key="more..." status="">
-                      {metrics.length - 1} {t('frequent|more…')}
-                    </StatusLabel>
+                    <Chip label={metrics.length - 1 + t('frequent|more…')} variant="outlined" />
                   );
                 }
               }
-              return <>{value}</>;
+              return <div className={classes.root}>{value}</div>;
             },
           },
           {
