@@ -10,6 +10,7 @@ import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
   addDetailsViewHeaderActionsProcessor,
+  DefaultAppBarAction,
   DefaultHeaderAction,
   HeaderActionsProcessor,
   HeaderActionType,
@@ -497,4 +498,4 @@ export function registerGetTokenFunction(override: (cluster: string) => string |
   store.dispatch(setFunctionsToOverride({ getToken: override }));
 }
 
-export { getHeadlampAPIHeaders };
+export { getHeadlampAPIHeaders, DefaultAppBarAction };

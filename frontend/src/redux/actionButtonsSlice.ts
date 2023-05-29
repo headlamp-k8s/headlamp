@@ -23,6 +23,14 @@ export enum DefaultHeaderAction {
   POD_TERMINAL = 'POD_TERMINAL',
   POD_ATTACH = 'POD_ATTACH',
 }
+
+export enum DefaultAppBarAction {
+  CLUSTER = 'CLUSTER',
+  NOTIFICATION = 'NOTIFICATION',
+  SETTINGS = 'SETTINGS',
+  USER = 'USER',
+}
+
 export type HeaderActionsProcessor = {
   id: string;
   processor: (resource: KubeObject | null, actions: HeaderActionType[]) => HeaderAction[];
