@@ -88,7 +88,8 @@ export default function NavigationTabs() {
     }
 
     const url = subList[index].url;
-    if (url && getCluster()) {
+    const useClusterURL = !!subList[index].useClusterURL;
+    if (url && useClusterURL && getCluster()) {
       history.push({
         pathname: generatePath(getClusterPrefixedPath(url), { cluster: getCluster()! }),
       });
