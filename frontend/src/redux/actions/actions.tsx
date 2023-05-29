@@ -152,7 +152,7 @@ export function updateClusterAction(actionOptions: ClusterAction) {
   return { type: CLUSTER_ACTION_UPDATE, ...actionOptions };
 }
 
-export function setSidebarSelected(selected: string | null, sidebar = '') {
+export function setSidebarSelected(selected: string | null, sidebar: string | null = '') {
   return { type: UI_SIDEBAR_SET_SELECTED, selected: { item: selected, sidebar } };
 }
 

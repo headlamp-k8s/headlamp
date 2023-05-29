@@ -150,13 +150,24 @@ export default function Sidebar() {
   const namespaces = useTypedSelector(state => state.filter.namespaces);
   const dispatch = useDispatch();
   const cluster = useCluster();
-  const items = React.useMemo(
-    () => prepareRoutes(t, sidebar.selected.sidebar || ''),
-    [cluster, sidebar.selected, sidebar.entries, sidebar.filters, i18n.language, arePluginsLoaded]
-  );
+  const items = React.useMemo(() => {
+    // If the sidebar is null, then it means it should not be visible.
+    if (sidebar.selected.sidebar === null) {
+      return [];
+    }
+    return prepareRoutes(t, sidebar.selected.sidebar || '');
+  }, [
+    cluster,
+    sidebar.selected,
+    sidebar.entries,
+    sidebar.filters,
+    i18n.language,
+    arePluginsLoaded,
+  ]);
+
   const search = namespaces.size !== 0 ? `?namespace=${[...namespaces].join('+')}` : '';
 
-  if (!sidebar?.isVisible) {
+  if (sidebar.selected.sidebar === null || !sidebar?.isVisible) {
     return null;
   }
 
@@ -322,9 +333,11 @@ export function useSidebarItem(
   sidebarDesc: string | null | { item: string | null; sidebar?: string }
 ) {
   let itemName: string | null = null;
-  let sidebar: DefaultSidebars | string = DefaultSidebars.IN_CLUSTER;
+  let sidebar: DefaultSidebars | string | null = DefaultSidebars.IN_CLUSTER;
   if (typeof sidebarDesc === 'string') {
     itemName = sidebarDesc;
+  } else if (sidebarDesc === null) {
+    sidebar = null;
   } else if (!!sidebarDesc) {
     itemName = sidebarDesc.item;
     if (!!sidebarDesc.sidebar) {
