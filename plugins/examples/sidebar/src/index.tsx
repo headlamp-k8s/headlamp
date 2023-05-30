@@ -85,6 +85,17 @@ registerSidebarEntry({
   icon: 'mdi:comment-quote',
 });
 
+// Sub-level sidebar entry, under cluster but without a cluster link.
+// The sidebar link URL is: /no-cluster-link
+registerSidebarEntry({
+  parent: 'cluster',
+  name: 'no-cluster-sublevel-link',
+  label: 'No cluster link',
+  url: '/no-cluster-link',
+  icon: 'mdi:airplane',
+  useClusterURL: false,
+});
+
 // Please see https://icon-sets.iconify.design/mdi/ for icons.
 
 // Here we have some sub menus.
