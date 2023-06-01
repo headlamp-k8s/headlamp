@@ -812,6 +812,11 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 				redirectURL = "/"
 			}
 
+			baseURL := strings.Trim(config.baseURL, "/")
+			if baseURL != "" {
+				redirectURL += baseURL + "/"
+			}
+
 			redirectURL += fmt.Sprintf("auth?cluster=%1s&token=%2s", decodedState, rawIDToken)
 			http.Redirect(w, r, redirectURL, http.StatusSeeOther)
 		} else {
