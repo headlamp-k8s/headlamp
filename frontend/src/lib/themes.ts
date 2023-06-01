@@ -152,6 +152,11 @@ const commonRules = {
         color: '#000',
       },
     },
+    MuiLink: {
+      root: {
+        color: '#0078D4',
+      },
+    },
   },
 };
 
