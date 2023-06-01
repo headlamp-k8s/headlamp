@@ -51,6 +51,7 @@ export interface PercentageCircleProps {
   totalProps?: {
     [propName: string]: any;
   };
+  thickness?: number;
 }
 
 export function PercentageCircle(props: PercentageCircleProps) {
@@ -65,6 +66,7 @@ export function PercentageCircle(props: PercentageCircleProps) {
     legend = null,
     total = 100,
     totalProps = {},
+    thickness = 16,
   } = props;
 
   const chartSize = size * 0.8;
@@ -125,7 +127,7 @@ export function PercentageCircle(props: PercentageCircleProps) {
             // Center the chart
             cx={chartSize / 2}
             cy={chartSize / 2}
-            innerRadius={chartSize * 0.35}
+            innerRadius={chartSize * 0.4 - thickness}
             outerRadius={chartSize * 0.4}
             dataKey={dataKey}
             // Start at the top
