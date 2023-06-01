@@ -116,14 +116,7 @@ export function useSidebarInfo() {
   };
 }
 
-const useButtonStyle = makeStyles({
-  button: {
-    color: '#adadad',
-  },
-});
-
 function AddClusterButton() {
-  const buttonClasses = useButtonStyle();
   const history = useHistory();
   const { t } = useTranslation(['frequent']);
   const { isOpen } = useSidebarInfo();
@@ -132,7 +125,6 @@ function AddClusterButton() {
     <Box pb={2}>
       {isOpen ? (
         <Button
-          className={buttonClasses.button}
           onClick={() => history.push(createRouteURL('loadKubeConfig'))}
           startIcon={<InlineIcon icon="mdi:plus-box-outline" />}
         >
