@@ -192,7 +192,7 @@ function DefaultLinkArea(props: { sidebarName: string; isOpen: boolean }) {
 
   return (
     <Box textAlign="center">
-      <CreateButton />
+      <CreateButton isNarrow={!isOpen} />
       <Box
         display="flex"
         justifyContent="space-between"
