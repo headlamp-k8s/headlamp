@@ -26,7 +26,7 @@ const commonRules = {
   palette: {
     primary: {
       contrastText: '#fff',
-      main: '#2774b3',
+      main: '#0078d4',
     },
     primaryColor: '#000',
     success: {
