@@ -2,8 +2,8 @@ import '../../../i18n/config';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { KubeMetrics, KubeObject } from '../../../lib/k8s/cluster';
-import { PercentageCircle, PercentageCircleProps } from '../Chart';
-import { HeaderLabel } from '../Label';
+import { PercentageCircleProps } from '../Chart';
+import TileChart from '../TileChart';
 
 export interface CircularChartProps extends Omit<PercentageCircleProps, 'data'> {
   /** Items to display in the chart (should have a corresponding value in @param itemsMetrics) */
@@ -45,7 +45,7 @@ export function CircularChart(props: CircularChartProps) {
   }
 
   function getLabel() {
-    if (available === 0) {
+    if (available === 0 || used === -1) {
       return '…';
     }
     return `${((used / available) * 100).toFixed(1)} %`;
@@ -74,19 +74,14 @@ export function CircularChart(props: CircularChartProps) {
     ];
   }
 
-  return noMetrics ? (
-    <HeaderLabel
-      label={title || ''}
-      value={!!getLegend ? getLegend(used, available) : ''}
-      tooltip={t('cluster|Install the metrics-server to get usage data.')}
-    />
-  ) : (
-    <PercentageCircle
+  return (
+    <TileChart
       title={title}
-      data={makeData()}
-      total={available}
-      label={getLabel()}
+      data={noMetrics ? null : makeData()}
       legend={!!getLegend ? getLegend(used, available) : ''}
+      label={getLabel()}
+      total={available}
+      infoTooltip={noMetrics ? t('cluster|Install the metrics-server to get usage data.') : null}
       {...others}
     />
   );
