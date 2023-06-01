@@ -5,6 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps } from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Input, { InputProps } from '@material-ui/core/Input';
+import Paper from '@material-ui/core/Paper';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/styles';
@@ -14,9 +15,7 @@ import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLinkProps, generatePath, useLocation } from 'react-router-dom';
-import { useMetadataDisplayStyles } from '.';
-import { LightTooltip, ObjectEventList } from '..';
+import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
 import { labelSelectorToQuery } from '../../../lib/k8s';
 import {
   KubeCondition,
@@ -26,17 +25,19 @@ import {
   KubeObjectInterface,
 } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
-import { RouteURLProps, createRouteURL } from '../../../lib/router';
+import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
-import DetailsViewSection from '../../DetailsViewSection';
 import { SectionBox } from '../../common/SectionBox';
 import SectionHeader from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable } from '../../common/SimpleTable';
+import DetailsViewSection from '../../DetailsViewSection';
 import { PodListProps, PodListRenderer } from '../../pod/List';
+import { LightTooltip, ObjectEventList } from '..';
 import Empty from '../EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
 import Link, { LinkProps } from '../Link';
+import { useMetadataDisplayStyles } from '.';
 import { MainInfoSection, MainInfoSectionProps } from './MainInfoSection/MainInfoSection';
 import { MetadataDictGrid } from './MetadataDisplay';
 import PortForward from './PortForward';
@@ -568,17 +569,19 @@ export function ContainerInfo(props: ContainerInfoProps) {
   }
 
   return (
-    <Box py={1}>
-      <SectionHeader noPadding title={container.name} headerStyle="normal" />
-      <NameValueTable rows={containerRows()} />
-      {!_.isEmpty(container.volumeMounts) && (
-        <>
-          <Divider />
-          <SectionHeader noPadding title={t('Volume Mounts')} headerStyle="label" />
-          <VolumeMounts mounts={container.volumeMounts} />
-        </>
-      )}
-    </Box>
+    <Paper variant="outlined">
+      <Box py={1} px={2}>
+        <SectionHeader noPadding title={container.name} headerStyle="normal" />
+        <NameValueTable rows={containerRows()} />
+        {!_.isEmpty(container.volumeMounts) && (
+          <>
+            <Divider />
+            <SectionHeader noPadding title={t('Volume Mounts')} headerStyle="label" />
+            <VolumeMounts mounts={container.volumeMounts} />
+          </>
+        )}
+      </Box>
+    </Paper>
   );
 }
 

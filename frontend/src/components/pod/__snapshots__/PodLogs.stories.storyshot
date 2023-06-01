@@ -519,147 +519,151 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             class="MuiBox-root MuiBox-root"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
             >
               <div
-                class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                class="MuiBox-root MuiBox-root"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-item"
+                  class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root"
+                    class="MuiGrid-root MuiGrid-item"
                   >
-                    <h3
-                      class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
-                    >
-                      nginx
-                    </h3>
                     <div
                       class="MuiBox-root MuiBox-root"
-                    />
-                  </div>
-                </div>
-              </div>
-              <dl
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
-              >
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Status
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    aria-describedby="container-state-message-nginx"
-                    class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                    style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
-                  >
-                    Running
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Restart Count
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  0
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Container ID
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    containerd://f8eb12a25a065d170b68cee522d431f4920fe083bf9cf53a4a576d60b8641584
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Image Pull Policy
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    IfNotPresent
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Image
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <p
-                    class="MuiTypography-root MuiTypography-body1"
-                  >
-                    nginx:1.14.2
-                  </p>
-                  <p
-                    class="MuiTypography-root makeStyles-imageID MuiTypography-body1"
-                  >
-                    <span
-                      class="MuiTypography-root MuiTypography-body1"
-                      style="font-weight: bold;"
                     >
-                      ID:
-                    </span>
-                     
-                    docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
-                  </p>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Ports
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <div
-                    class="MuiGrid-root MuiGrid-container"
-                  >
-                    <div
-                      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
-                    >
+                      <h3
+                        class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                      >
+                        nginx
+                      </h3>
                       <div
                         class="MuiBox-root MuiBox-root"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <dl
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+                >
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Status
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    <span
+                      aria-describedby="container-state-message-nginx"
+                      class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                      style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                    >
+                      Running
+                    </span>
+                  </dd>
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Restart Count
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    0
+                  </dd>
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Container ID
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    <span
+                      class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                    >
+                      containerd://f8eb12a25a065d170b68cee522d431f4920fe083bf9cf53a4a576d60b8641584
+                    </span>
+                  </dd>
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Image Pull Policy
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    <span
+                      class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                    >
+                      IfNotPresent
+                    </span>
+                  </dd>
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Image
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    <p
+                      class="MuiTypography-root MuiTypography-body1"
+                    >
+                      nginx:1.14.2
+                    </p>
+                    <p
+                      class="MuiTypography-root makeStyles-imageID MuiTypography-body1"
+                    >
+                      <span
+                        class="MuiTypography-root MuiTypography-body1"
+                        style="font-weight: bold;"
+                      >
+                        ID:
+                      </span>
+                       
+                      docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d
+                    </p>
+                  </dd>
+                  <dt
+                    class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  >
+                    Ports
+                  </dt>
+                  <dd
+                    class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  >
+                    <div
+                      class="MuiGrid-root MuiGrid-container"
+                    >
+                      <div
+                        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
                       >
                         <div
                           class="MuiBox-root MuiBox-root"
                         >
-                          <span
-                            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                          <div
+                            class="MuiBox-root MuiBox-root"
                           >
-                            TCP:
-                          </span>
-                          <span
-                            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                          >
-                            80
-                          </span>
+                            <span
+                              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                            >
+                              TCP:
+                            </span>
+                            <span
+                              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                            >
+                              80
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </dd>
-              </dl>
+                  </dd>
+                </dl>
+              </div>
             </div>
           </div>
         </div>
