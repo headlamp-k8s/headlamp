@@ -14,7 +14,9 @@ import { Base64 } from 'js-base64';
 import _ from 'lodash';
 import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
+import { NavLinkProps, generatePath, useLocation } from 'react-router-dom';
+import { useMetadataDisplayStyles } from '.';
+import { LightTooltip, ObjectEventList } from '..';
 import { labelSelectorToQuery } from '../../../lib/k8s';
 import {
   KubeCondition,
@@ -24,19 +26,17 @@ import {
   KubeObjectInterface,
 } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
-import { createRouteURL, RouteURLProps } from '../../../lib/router';
+import { RouteURLProps, createRouteURL } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
+import DetailsViewSection from '../../DetailsViewSection';
 import { SectionBox } from '../../common/SectionBox';
 import SectionHeader from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable } from '../../common/SimpleTable';
-import DetailsViewSection from '../../DetailsViewSection';
 import { PodListProps, PodListRenderer } from '../../pod/List';
-import { LightTooltip, ObjectEventList } from '..';
 import Empty from '../EmptyContent';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
 import Link, { LinkProps } from '../Link';
-import { useMetadataDisplayStyles } from '.';
 import { MainInfoSection, MainInfoSectionProps } from './MainInfoSection/MainInfoSection';
 import { MetadataDictGrid } from './MetadataDisplay';
 import PortForward from './PortForward';

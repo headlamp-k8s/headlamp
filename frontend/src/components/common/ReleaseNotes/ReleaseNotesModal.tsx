@@ -33,7 +33,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
 
   return (
     <Modal open={showReleaseNotes} BackdropComponent={Backdrop} style={modalStyle}>
-      <Paper style={releaseNotesStyle}>
+      <Paper style={releaseNotesStyle} variant="outlined">
         <Box display="flex" justifyContent="center">
           <Box flexGrow={2}>
             <Typography variant="h4">

@@ -611,13 +611,17 @@ exports[`Storyshots endpoints/EndpointsDetailsView Error 1`] = `
             class="MuiBox-root MuiBox-root"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorError MuiTypography-alignCenter"
+              <div
+                class="MuiBox-root MuiBox-root"
               >
-                Phony error is phony!
-              </p>
+                <p
+                  class="MuiTypography-root MuiTypography-body1 MuiTypography-colorError MuiTypography-alignCenter"
+                >
+                  Phony error is phony!
+                </p>
+              </div>
             </div>
           </div>
         </div>
