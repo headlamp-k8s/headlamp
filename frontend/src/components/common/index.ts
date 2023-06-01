@@ -30,6 +30,8 @@ export * from './Tabs';
 export { default as Tabs } from './Tabs';
 export * from './Terminal';
 export { default as Terminal } from './Terminal';
+export * from './TileChart';
+export { default as TileChart } from './TileChart';
 export * from './TimezoneSelect';
 export { default as BackLink, default as TimezoneSelect } from './TimezoneSelect';
 export * from './Tooltip';

@@ -34,6 +34,7 @@ const checkExports = [
   'SimpleTable',
   'Tabs',
   'Terminal',
+  'TileChart',
   'TimezoneSelect',
   'Tooltip',
   'ObjectEventList',
