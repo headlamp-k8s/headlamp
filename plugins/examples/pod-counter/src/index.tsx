@@ -18,9 +18,7 @@ registerAppBarAction(function reorderNotifications(_, actions) {
   // newActions.push({action: <PodCounter />, id: 'pod-counter });
 
   // Move the notification action to the end.
-  const notificationAction = actions.filter(
-    action => action.id === DefaultAppBarAction.NOTIFICATION
-  )[0];
+  const notificationAction = actions.find(action => action.id === DefaultAppBarAction.NOTIFICATION);
   newActions.push(notificationAction);
 
   return newActions;
