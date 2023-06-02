@@ -9,6 +9,7 @@ import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/sty
 import Toolbar from '@material-ui/core/Toolbar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import clsx from 'clsx';
+import { has } from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -18,10 +19,13 @@ import { getToken, setToken } from '../../lib/auth';
 import { useCluster, useClustersConf } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import {
+  AppBarAction,
+  AppBarActionsProcessor,
+  DefaultAppBarAction,
+  HeaderAction,
   HeaderActionType,
-  setVersionDialogOpen,
-  setWhetherSidebarOpen,
-} from '../../redux/actions/actions';
+} from '../../redux/actionButtonsSlice';
+import { setVersionDialogOpen, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SettingsButton } from '../App/Settings';
 import { ClusterTitle } from '../cluster/Chooser';
@@ -32,8 +36,27 @@ import Notifications from './Notifications';
 
 export interface TopBarProps {}
 
+export function useAppBarActionsProcessed() {
+  const appBarActions = useTypedSelector(state => state.actionButtons.appBarActions);
+  const appBarActionsProcessors = useTypedSelector(
+    state => state.actionButtons.appBarActionsProcessors
+  );
+
+  return { appBarActions, appBarActionsProcessors };
+}
+
+export function processAppBarActions(
+  appBarActions: AppBarAction[],
+  appBarActionsProcessors: AppBarActionsProcessor[]
+): AppBarAction[] {
+  let appBarActionsProcessed = [...appBarActions];
+  for (const appBarActionsProcessor of appBarActionsProcessors) {
+    appBarActionsProcessed = appBarActionsProcessor.processor({ actions: appBarActionsProcessed });
+  }
+  return appBarActionsProcessed;
+}
+
 export default function TopBar({}: TopBarProps) {
-  const appBarActions = useTypedSelector(state => state.ui.views.appBar.actions);
   const dispatch = useDispatch();
   const isMedium = useMediaQuery('(max-width:960px)');
 
@@ -46,6 +69,7 @@ export default function TopBar({}: TopBarProps) {
   const clustersConfig = useClustersConf();
   const cluster = useCluster();
   const history = useHistory();
+  const { appBarActions, appBarActionsProcessors } = useAppBarActionsProcessed();
 
   function hasToken() {
     return !!cluster ? !!getToken(cluster) : false;
@@ -64,6 +88,7 @@ export default function TopBar({}: TopBarProps) {
   return (
     <PureTopBar
       appBarActions={appBarActions}
+      appBarActionsProcessors={appBarActionsProcessors}
       logout={logout}
       hasToken={hasToken()}
       isSidebarOpen={isSidebarOpen}
@@ -87,10 +112,11 @@ export default function TopBar({}: TopBarProps) {
 
 export interface PureTopBarProps {
   /** If the sidebar is fully expanded open or shrunk. */
-  appBarActions: HeaderActionType[];
+  appBarActions: AppBarAction[];
+  /** functions which filter the app bar action buttons */
+  appBarActionsProcessors?: AppBarActionsProcessor[];
   logout: () => void;
   hasToken: boolean;
-
   clusters?: {
     [clusterName: string]: any;
   };
@@ -142,7 +168,8 @@ const useStyles = makeStyles((theme: Theme) =>
 function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[] }) {
   const actions = (function stateActions() {
     return React.Children.toArray(
-      appBarActions.map(Action => {
+      appBarActions.map(action => {
+        const Action = has(action, 'action') ? (action as HeaderAction).action : action;
         if (React.isValidElement(Action)) {
           return (
             <ErrorBoundary>
@@ -169,7 +196,8 @@ function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[
 function AppBarActions({ appBarActions }: { appBarActions: HeaderActionType[] }) {
   const actions = (function stateActions() {
     return React.Children.toArray(
-      appBarActions.map(Action => {
+      appBarActions.map(action => {
+        const Action = has(action, 'action') ? (action as HeaderAction).action : action;
         if (React.isValidElement(Action)) {
           return <ErrorBoundary>{Action}</ErrorBoundary>;
         } else if (Action === null) {
@@ -190,6 +218,7 @@ function AppBarActions({ appBarActions }: { appBarActions: HeaderActionType[] })
 
 export function PureTopBar({
   appBarActions,
+  appBarActionsProcessors = [],
   logout,
   hasToken,
   cluster,
@@ -230,8 +259,8 @@ export function PureTopBar({
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
   const userMenuId = 'primary-user-menu';
+
   const renderUserMenu = !!isClusterContext && (
     <Menu
       anchorEl={anchorEl}
@@ -290,29 +319,23 @@ export function PureTopBar({
   );
 
   const mobileMenuId = 'primary-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      {isClusterContext && (
-        <MenuItem>
-          <ClusterTitle cluster={cluster} clusters={clusters} />
-        </MenuItem>
-      )}
-      <AppBarActionsMenu appBarActions={appBarActions} />
-      <MenuItem>
-        <Notifications />
-      </MenuItem>
-      <MenuItem>
-        <SettingsButton onClickExtra={handleMenuClose} />
-      </MenuItem>
-      {!!isClusterContext && (
+  const allAppBarActionsMobile: AppBarAction[] = [
+    {
+      id: DefaultAppBarAction.CLUSTER,
+      action: isClusterContext && <ClusterTitle cluster={cluster} clusters={clusters} />,
+    },
+    ...appBarActions,
+    {
+      id: DefaultAppBarAction.NOTIFICATION,
+      action: <Notifications />,
+    },
+    {
+      id: DefaultAppBarAction.SETTINGS,
+      action: <SettingsButton onClickExtra={handleMenuClose} />,
+    },
+    {
+      id: DefaultAppBarAction.USER,
+      action: !!isClusterContext && (
         <MenuItem>
           <IconButton
             aria-label={t('Account of current user')}
@@ -324,10 +347,58 @@ export function PureTopBar({
             <Icon icon="mdi:account" />
           </IconButton>
         </MenuItem>
-      )}
+      ),
+    },
+  ];
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <AppBarActionsMenu
+        appBarActions={processAppBarActions(allAppBarActionsMobile, appBarActionsProcessors)}
+      />
     </Menu>
   );
 
+  const allAppBarActions: AppBarAction[] = [
+    {
+      id: DefaultAppBarAction.CLUSTER,
+      action: (
+        <div className={clsx(classes.grow, classes.clusterTitle)}>
+          <ClusterTitle cluster={cluster} clusters={clusters} />
+        </div>
+      ),
+    },
+    ...appBarActions,
+    {
+      id: DefaultAppBarAction.NOTIFICATION,
+      action: <Notifications />,
+    },
+    {
+      id: DefaultAppBarAction.SETTINGS,
+      action: <SettingsButton onClickExtra={handleMenuClose} />,
+    },
+    {
+      id: DefaultAppBarAction.USER,
+      action: !!isClusterContext && (
+        <IconButton
+          aria-label={t('Account of current user')}
+          aria-controls={userMenuId}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpen}
+          color="inherit"
+        >
+          <Icon icon="mdi:account" />
+        </IconButton>
+      ),
+    },
+  ];
   return (
     <>
       <AppBar
@@ -342,24 +413,9 @@ export function PureTopBar({
 
           {!isSmall && (
             <>
-              <div className={clsx(classes.grow, classes.clusterTitle)}>
-                <ClusterTitle cluster={cluster} clusters={clusters} />
-              </div>
-              <AppBarActions appBarActions={appBarActions} />
-              <Notifications />
-              <SettingsButton />
-              {!!isClusterContext && (
-                <IconButton
-                  edge="end"
-                  aria-label={t('Account of current user')}
-                  aria-controls={userMenuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <Icon icon="mdi:account" />
-                </IconButton>
-              )}
+              <AppBarActions
+                appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
+              />
             </>
           )}
           {isSmall && (

@@ -15,7 +15,7 @@ import { useParams } from 'react-router-dom';
 import { Terminal as XTerminal } from 'xterm';
 import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
-import { DefaultHeaderAction } from '../../redux/actions/actions';
+import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
 import { LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';

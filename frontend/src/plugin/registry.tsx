@@ -1,3 +1,4 @@
+import { has } from 'lodash';
 import React from 'react';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
 import { SectionBox } from '../components/common/SectionBox';
@@ -9,15 +10,23 @@ import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
   addDetailsViewHeaderActionsProcessor,
-  addResourceTableColumnsProcessor,
+  AppBarAction,
+  AppBarActionProcessorType,
+  AppBarActionsProcessor,
+  AppBarActionType,
+  DefaultAppBarAction,
   DefaultHeaderAction,
   HeaderActionsProcessor,
   HeaderActionType,
   setAppBarAction,
+  setAppBarActionsProcessor,
+  setDetailsViewHeaderAction,
+} from '../redux/actionButtonsSlice';
+import {
+  addResourceTableColumnsProcessor,
   setBrandingAppLogoComponent,
   setClusterChooserButtonComponent,
   setDetailsView,
-  setDetailsViewHeaderAction,
   setFunctionsToOverride,
   setRoute,
   setRouteFilter,
@@ -37,7 +46,7 @@ export type { ClusterChooserProps, ClusterChooserType };
 export type { SidebarEntryProps, DefaultSidebars };
 export type { DetailsViewSectionProps, DetailsViewSectionType };
 export const DetailsViewDefaultHeaderActions = DefaultHeaderAction;
-
+export type { AppBarActionProcessorType };
 /**
  * @deprecated please used DetailsViewSectionType and registerDetailViewSection
  */
@@ -51,7 +60,6 @@ export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | un
 // @todo: HeaderActionType should be deprecated.
 export type DetailsViewHeaderActionType = HeaderActionType;
 export type DetailsViewHeaderActionsProcessor = HeaderActionsProcessor;
-export type AppBarActionType = HeaderActionType;
 
 export default class Registry {
   /**
@@ -346,6 +354,16 @@ export function registerResourceTableColumnsProcessor(
   store.dispatch(addResourceTableColumnsProcessor(processor));
 }
 
+function isProcessor(
+  headerAction: AppBarActionType | AppBarActionsProcessor | AppBarActionProcessorType
+): boolean {
+  return !!(
+    headerAction &&
+    (has(headerAction, 'processor') ||
+      (typeof headerAction === 'function' && headerAction.length === 1))
+  );
+}
+
 /**
  * Add a component into the app bar (at the top of the app).
  *
@@ -372,8 +390,13 @@ export function registerResourceTableColumnsProcessor(
  * registerAppBarAction(ConsoleLogger);
  * ```
  */
-export function registerAppBarAction(headerAction: AppBarActionType) {
-  store.dispatch(setAppBarAction(headerAction));
+export function registerAppBarAction(
+  headerAction: AppBarActionType | AppBarAction | AppBarActionsProcessor | AppBarActionProcessorType
+) {
+  if (isProcessor(headerAction)) {
+    store.dispatch(setAppBarActionsProcessor(headerAction as AppBarActionsProcessor));
+  }
+  store.dispatch(setAppBarAction(headerAction as AppBarAction));
 }
 
 /**
@@ -482,4 +505,4 @@ export function registerGetTokenFunction(override: (cluster: string) => string |
   store.dispatch(setFunctionsToOverride({ getToken: override }));
 }
 
-export { getHeadlampAPIHeaders };
+export { getHeadlampAPIHeaders, DefaultAppBarAction };
