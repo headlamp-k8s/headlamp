@@ -49,10 +49,8 @@ export function processAppBarActions(
   appBarActionsProcessors: HeaderActionsProcessor[]
 ) {
   let appBarActionsProcessed = [...appBarActions];
-  if (appBarActionsProcessors.length > 0) {
-    for (const appBarActionsProcessor of appBarActionsProcessors) {
-      appBarActionsProcessed = appBarActionsProcessor.processor(null, appBarActionsProcessed);
-    }
+  for (const appBarActionsProcessor of appBarActionsProcessors) {
+    appBarActionsProcessed = appBarActionsProcessor.processor(null, appBarActionsProcessed);
   }
   return appBarActionsProcessed;
 }
@@ -114,13 +112,10 @@ export default function TopBar({}: TopBarProps) {
 export interface PureTopBarProps {
   /** If the sidebar is fully expanded open or shrunk. */
   appBarActions: HeaderActionType[];
-
   /** functions which filter the app bar action buttons */
   appBarActionsProcessors?: HeaderActionsProcessor[];
-
   logout: () => void;
   hasToken: boolean;
-
   clusters?: {
     [clusterName: string]: any;
   };
