@@ -10,12 +10,12 @@ function PodCounter() {
 registerAppBarAction(PodCounter);
 
 // We can also reorder the actions in the app bar.
-registerAppBarAction((_, actions) => {
+registerAppBarAction(function reorderNotifications(_, actions) {
   // Remove the notifications action button
   const newActions = actions.filter(action => action.id !== DefaultAppBarAction.NOTIFICATION);
 
-  // Add an extra pod counter action button
-  // newActions.push({action: <PodCounter />, id: 'pod-counter
+  // This is an example of how you can add an extra pod counter action button.
+  // newActions.push({action: <PodCounter />, id: 'pod-counter });
 
   // Move the notification action to the end.
   const notificationAction = actions.filter(
