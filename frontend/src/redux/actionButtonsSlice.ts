@@ -101,7 +101,7 @@ export const actionButtonsSlice = createSlice({
       state.appBarActions.push(action.payload);
     },
 
-    setAppBarActionProcessor(
+    setAppBarActionsProcessor(
       state,
       action: PayloadAction<HeaderActionsProcessor | HeaderActionsProcessor['processor']>
     ) {
@@ -114,7 +114,7 @@ export const {
   setDetailsViewHeaderAction,
   addDetailsViewHeaderActionsProcessor,
   setAppBarAction,
-  setAppBarActionProcessor,
+  setAppBarActionsProcessor,
 } = actionButtonsSlice.actions;
 
 export default actionButtonsSlice.reducer;

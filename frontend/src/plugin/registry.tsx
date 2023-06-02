@@ -15,7 +15,7 @@ import {
   HeaderActionsProcessor,
   HeaderActionType,
   setAppBarAction,
-  setAppBarActionProcessor,
+  setAppBarActionsProcessor,
   setDetailsViewHeaderAction,
 } from '../redux/actionButtonsSlice';
 import {
@@ -387,7 +387,7 @@ function isProcessor(headerAction: AppBarActionType): boolean {
  */
 export function registerAppBarAction(headerAction: AppBarActionType) {
   if (isProcessor(headerAction)) {
-    store.dispatch(setAppBarActionProcessor(headerAction as HeaderActionsProcessor));
+    store.dispatch(setAppBarActionsProcessor(headerAction as HeaderActionsProcessor));
   }
   store.dispatch(setAppBarAction(headerAction));
 }
