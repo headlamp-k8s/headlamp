@@ -19,9 +19,10 @@ import { getToken, setToken } from '../../lib/auth';
 import { useCluster, useClustersConf } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
 import {
+  AppBarAction,
+  AppBarActionsProcessor,
   DefaultAppBarAction,
   HeaderAction,
-  HeaderActionsProcessor,
   HeaderActionType,
 } from '../../redux/actionButtonsSlice';
 import { setVersionDialogOpen, setWhetherSidebarOpen } from '../../redux/actions/actions';
@@ -45,12 +46,12 @@ export function useAppBarActionsProcessed() {
 }
 
 export function processAppBarActions(
-  appBarActions: HeaderActionType[],
-  appBarActionsProcessors: HeaderActionsProcessor[]
-) {
+  appBarActions: AppBarAction[],
+  appBarActionsProcessors: AppBarActionsProcessor[]
+): AppBarAction[] {
   let appBarActionsProcessed = [...appBarActions];
   for (const appBarActionsProcessor of appBarActionsProcessors) {
-    appBarActionsProcessed = appBarActionsProcessor.processor(null, appBarActionsProcessed);
+    appBarActionsProcessed = appBarActionsProcessor.processor({ actions: appBarActionsProcessed });
   }
   return appBarActionsProcessed;
 }
@@ -111,9 +112,9 @@ export default function TopBar({}: TopBarProps) {
 
 export interface PureTopBarProps {
   /** If the sidebar is fully expanded open or shrunk. */
-  appBarActions: HeaderActionType[];
+  appBarActions: AppBarAction[];
   /** functions which filter the app bar action buttons */
-  appBarActionsProcessors?: HeaderActionsProcessor[];
+  appBarActionsProcessors?: AppBarActionsProcessor[];
   logout: () => void;
   hasToken: boolean;
   clusters?: {
@@ -318,7 +319,7 @@ export function PureTopBar({
   );
 
   const mobileMenuId = 'primary-menu-mobile';
-  const allAppBarActionsMobile: HeaderActionType[] = [
+  const allAppBarActionsMobile: AppBarAction[] = [
     {
       id: DefaultAppBarAction.CLUSTER,
       action: isClusterContext && <ClusterTitle cluster={cluster} clusters={clusters} />,
@@ -365,7 +366,7 @@ export function PureTopBar({
     </Menu>
   );
 
-  const allAppBarActions: HeaderActionType[] = [
+  const allAppBarActions: AppBarAction[] = [
     {
       id: DefaultAppBarAction.CLUSTER,
       action: (

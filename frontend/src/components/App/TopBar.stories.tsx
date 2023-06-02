@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { HeaderActionsProcessor } from '../../redux/actionButtonsSlice';
+import { AppBarActionsProcessor } from '../../redux/actionButtonsSlice';
 import { processAppBarActions, PureTopBar, PureTopBarProps } from './TopBar';
 
 const store = configureStore({
@@ -41,13 +41,13 @@ function OurTopBar(args: PropsWithChildren<PureTopBarProps>) {
   const appBarActions = [{ id: 'moo-thing', action: <p>moo</p> }];
   const appBarActionsProcessors = [
     {
-      processor: (_, actions) => {
+      processor: ({ actions }) => {
         const newActions = actions.filter(action => action && get(action, 'id') !== 'moo-thing');
         newActions.push({ action: <p>meow</p>, id: 'meow-thing' });
         return newActions;
       },
       id: 'no-moo-processor',
-    } as HeaderActionsProcessor,
+    } as AppBarActionsProcessor,
   ];
 
   return (

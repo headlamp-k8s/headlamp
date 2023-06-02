@@ -10,6 +10,10 @@ import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
 import {
   addDetailsViewHeaderActionsProcessor,
+  AppBarAction,
+  AppBarActionProcessorType,
+  AppBarActionsProcessor,
+  AppBarActionType,
   DefaultAppBarAction,
   DefaultHeaderAction,
   HeaderActionsProcessor,
@@ -42,7 +46,7 @@ export type { ClusterChooserProps, ClusterChooserType };
 export type { SidebarEntryProps, DefaultSidebars };
 export type { DetailsViewSectionProps, DetailsViewSectionType };
 export const DetailsViewDefaultHeaderActions = DefaultHeaderAction;
-
+export type { AppBarActionProcessorType };
 /**
  * @deprecated please used DetailsViewSectionType and registerDetailViewSection
  */
@@ -56,7 +60,6 @@ export type sectionFunc = (resource: KubeObject) => SectionFuncProps | null | un
 // @todo: HeaderActionType should be deprecated.
 export type DetailsViewHeaderActionType = HeaderActionType;
 export type DetailsViewHeaderActionsProcessor = HeaderActionsProcessor;
-export type AppBarActionType = HeaderActionType | HeaderActionsProcessor;
 
 export default class Registry {
   /**
@@ -351,11 +354,13 @@ export function registerResourceTableColumnsProcessor(
   store.dispatch(addResourceTableColumnsProcessor(processor));
 }
 
-function isProcessor(headerAction: AppBarActionType): boolean {
+function isProcessor(
+  headerAction: AppBarActionType | AppBarActionsProcessor | AppBarActionProcessorType
+): boolean {
   return !!(
     headerAction &&
     (has(headerAction, 'processor') ||
-      (typeof headerAction === 'function' && headerAction.length === 2))
+      (typeof headerAction === 'function' && headerAction.length === 1))
   );
 }
 
@@ -385,11 +390,13 @@ function isProcessor(headerAction: AppBarActionType): boolean {
  * registerAppBarAction(ConsoleLogger);
  * ```
  */
-export function registerAppBarAction(headerAction: AppBarActionType) {
+export function registerAppBarAction(
+  headerAction: AppBarActionType | AppBarAction | AppBarActionsProcessor | AppBarActionProcessorType
+) {
   if (isProcessor(headerAction)) {
-    store.dispatch(setAppBarActionsProcessor(headerAction as HeaderActionsProcessor));
+    store.dispatch(setAppBarActionsProcessor(headerAction as AppBarActionsProcessor));
   }
-  store.dispatch(setAppBarAction(headerAction));
+  store.dispatch(setAppBarAction(headerAction as AppBarAction));
 }
 
 /**

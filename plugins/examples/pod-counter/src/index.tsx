@@ -1,4 +1,9 @@
-import { DefaultAppBarAction, K8s, registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
+import {
+  AppBarActionsProcessorArgs,
+  DefaultAppBarAction,
+  K8s,
+  registerAppBarAction,
+} from '@kinvolk/headlamp-plugin/lib';
 import Message from './Message';
 
 function PodCounter() {
@@ -10,7 +15,7 @@ function PodCounter() {
 registerAppBarAction(PodCounter);
 
 // We can also reorder the actions in the app bar.
-registerAppBarAction(function reorderNotifications(_, actions) {
+registerAppBarAction(function reorderNotifications({ actions }: AppBarActionsProcessorArgs) {
   // Remove the notifications action button
   const newActions = actions.filter(action => action.id !== DefaultAppBarAction.NOTIFICATION);
 
@@ -19,7 +24,9 @@ registerAppBarAction(function reorderNotifications(_, actions) {
 
   // Move the notification action to the end.
   const notificationAction = actions.find(action => action.id === DefaultAppBarAction.NOTIFICATION);
-  newActions.push(notificationAction);
+  if (notificationAction) {
+    newActions.push(notificationAction);
+  }
 
   return newActions;
 });

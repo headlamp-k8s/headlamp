@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { get, set } from 'lodash';
 import { ReactElement, ReactNode } from 'react';
 import { KubeObject } from '../lib/k8s/cluster';
 
@@ -9,9 +10,20 @@ export type HeaderActionType =
   | ReactNode;
 export type DetailsViewFunc = HeaderActionType;
 
+export type AppBarActionType =
+  | ((...args: any[]) => JSX.Element | null | ReactNode)
+  | null
+  | ReactElement
+  | ReactNode;
+
 export type HeaderAction = {
   id: string;
   action?: HeaderActionType;
+};
+
+export type AppBarAction = {
+  id: string;
+  action?: AppBarActionType;
 };
 
 export enum DefaultHeaderAction {
@@ -31,16 +43,28 @@ export enum DefaultAppBarAction {
   USER = 'USER',
 }
 
+type HeaderActionFuncType = (
+  resource: KubeObject | null,
+  actions: HeaderAction[]
+) => HeaderAction[];
+
 export type HeaderActionsProcessor = {
   id: string;
-  processor: (resource: KubeObject | null, actions: HeaderActionType[]) => HeaderAction[];
+  processor: HeaderActionFuncType;
+};
+
+export type AppBarActionsProcessorArgs = { actions: AppBarAction[] };
+export type AppBarActionProcessorType = (info: AppBarActionsProcessorArgs) => AppBarAction[];
+export type AppBarActionsProcessor = {
+  id: string;
+  processor: AppBarActionProcessorType;
 };
 
 export interface HeaderActionState {
-  headerActions: HeaderActionType[];
+  headerActions: HeaderAction[];
   headerActionsProcessors: HeaderActionsProcessor[];
-  appBarActions: HeaderActionType[];
-  appBarActionsProcessors: HeaderActionsProcessor[];
+  appBarActions: AppBarAction[];
+  appBarActionsProcessors: AppBarActionsProcessor[];
 }
 const initialState: HeaderActionState = {
   headerActions: [],
@@ -57,18 +81,25 @@ const initialState: HeaderActionState = {
  * @param action - The payload action containing the header actions processor.
  * @returns The normalized header actions processor.
  */
-function _normalizeProcessor(
-  action: PayloadAction<HeaderActionsProcessor | HeaderActionsProcessor['processor']>
+function _normalizeProcessor<Processor, ProcessorProcessor>(
+  action: PayloadAction<Processor | ProcessorProcessor>
 ) {
-  let headerActionsProcessor = action.payload as HeaderActionsProcessor;
-  if (headerActionsProcessor.id === undefined && typeof headerActionsProcessor === 'function') {
-    headerActionsProcessor = {
+  let headerActionsProcessor: Processor = action.payload as Processor;
+  if (
+    get(headerActionsProcessor, 'id') === undefined &&
+    typeof headerActionsProcessor === 'function'
+  ) {
+    const headerActionsProcessor2: unknown = {
       id: '',
       processor: headerActionsProcessor,
     };
+    headerActionsProcessor = headerActionsProcessor2 as Processor;
   }
-  headerActionsProcessor.id =
-    headerActionsProcessor.id || `generated-id-${Date.now().toString(36)}`;
+  set(
+    headerActionsProcessor as Object,
+    'id',
+    get(headerActionsProcessor, 'id') || `generated-id-${Date.now().toString(36)}`
+  );
   return headerActionsProcessor;
 }
 
@@ -94,18 +125,22 @@ export const actionButtonsSlice = createSlice({
       state,
       action: PayloadAction<HeaderActionsProcessor | HeaderActionsProcessor['processor']>
     ) {
-      state.headerActionsProcessors.push(_normalizeProcessor(action));
+      state.headerActionsProcessors.push(
+        _normalizeProcessor<HeaderActionsProcessor, HeaderActionsProcessor['processor']>(action)
+      );
     },
 
-    setAppBarAction(state, action: PayloadAction<HeaderActionType | HeaderAction>) {
+    setAppBarAction(state, action: PayloadAction<AppBarAction | AppBarAction>) {
       state.appBarActions.push(action.payload);
     },
 
     setAppBarActionsProcessor(
       state,
-      action: PayloadAction<HeaderActionsProcessor | HeaderActionsProcessor['processor']>
+      action: PayloadAction<AppBarActionsProcessor | AppBarActionsProcessor['processor']>
     ) {
-      state.appBarActionsProcessors.push(_normalizeProcessor(action));
+      state.appBarActionsProcessors.push(
+        _normalizeProcessor<AppBarActionsProcessor, AppBarActionsProcessor['processor']>(action)
+      );
     },
   },
 });
