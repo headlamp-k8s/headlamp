@@ -127,7 +127,7 @@ exports[`Storyshots TopBar One Cluster 1`] = `
         aria-controls="primary-user-menu"
         aria-haspopup="true"
         aria-label="Account of current user"
-        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeEnd"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
         tabindex="0"
         type="button"
       >
@@ -359,7 +359,7 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
         aria-controls="primary-user-menu"
         aria-haspopup="true"
         aria-label="Account of current user"
-        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeEnd"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
         tabindex="0"
         type="button"
       >

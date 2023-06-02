@@ -387,7 +387,6 @@ export function PureTopBar({
       id: DefaultAppBarAction.USER,
       action: !!isClusterContext && (
         <IconButton
-          edge="end"
           aria-label={t('Account of current user')}
           aria-controls={userMenuId}
           aria-haspopup="true"
