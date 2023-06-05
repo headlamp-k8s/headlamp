@@ -111,8 +111,7 @@ export type CancellablePromise = Promise<() => void>;
 export function useConnectApi(...apiCalls: (() => CancellablePromise)[]) {
   // Use the location to make sure the API calls are changed, as they may depend on the cluster
   // (defined in the URL ATM).
-  // @todo: Update this if the active cluster management is changed.
-  const location = useLocation();
+  const cluster = useCluster();
 
   React.useEffect(
     () => {
@@ -127,7 +126,7 @@ export function useConnectApi(...apiCalls: (() => CancellablePromise)[]) {
     // If we add the apiCalls to the dependency list, then it actually
     // results in undesired reloads.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [location]
+    [cluster]
   );
 }
 
