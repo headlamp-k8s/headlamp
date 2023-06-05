@@ -10,14 +10,17 @@
 import { OpPatch } from 'json-patch';
 import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
-import helpers from '../../helpers';
-import { getHeadlampAPIHeaders } from '../../helpers';
+import helpers, { getHeadlampAPIHeaders, isDebugVerbose } from '../../helpers';
 import store from '../../redux/stores/store';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
 import { ResourceClasses } from '.';
 import { KubeMetadata, KubeMetrics, KubeObjectInterface } from './cluster';
 import { KubeToken } from './token';
+
+// Uncomment the following lines to enable verbose debug logging in this module.
+// import { debugVerbose } from '../../helpers';
+// debugVerbose('k8s/apiProxy');
 
 const BASE_HTTP_URL = helpers.getAppUrl();
 const BASE_WS_URL = BASE_HTTP_URL.replace('http', 'ws');
@@ -91,7 +94,10 @@ async function refreshToken(token: string | null) {
     return;
   }
 
-  console.debug('Refreshing token');
+  if (isDebugVerbose('k8s/apiProxy@refreshToken')) {
+    console.debug('k8s/apiProxy@refreshToken', 'Refreshing token');
+  }
+
   isTokenRefreshInProgress = true;
 
   let tokenUrl = combinePath(BASE_HTTP_URL, `/${CLUSTERS_PREFIX}/${cluster}`);
@@ -132,6 +138,18 @@ function getClusterAuthType(cluster: string): string {
   return authType;
 }
 
+/**
+ * Sends a request to the Kubernetes API server.
+ *
+ * @param path - The path to the API endpoint.
+ * @param params - Optional parameters for the request.
+ * @param autoLogoutOnAuthError - Whether to automatically log out the user if there is an authentication error.
+ * @param useCluster - Whether to use the current cluster for the request.
+ * @param queryParams - Optional query parameters for the request.
+ *
+ * @returns A Promise that resolves to the JSON response from the API server.
+ * @throws An ApiError if the response status is not ok.
+ */
 export async function request(
   path: string,
   params: RequestParams = {},
@@ -142,6 +160,10 @@ export async function request(
   interface RequestHeaders {
     Authorization?: string;
     [otherHeader: string]: any;
+  }
+
+  if (isDebugVerbose('k8s/apiProxy@request')) {
+    console.debug('k8s/apiProxy@request', { path, params, useCluster, queryParams });
   }
 
   const { timeout = DEFAULT_TIMEOUT, ...otherParams } = params;
@@ -235,6 +257,10 @@ async function repeatStreamFunc(
   let isCancelled = false;
   let streamCancel = () => {};
 
+  if (isDebugVerbose('k8s/apiProxy@repeatStreamFunc')) {
+    console.debug('k8s/apiProxy@repeatStreamFunc', { apiEndpoints, funcName, args });
+  }
+
   function runStreamFunc(
     endpointIndex: number,
     funcName: string,
@@ -291,6 +317,10 @@ function repeatFactoryMethod(apiEndpoints: ApiFactoryReturn[], funcName: keyof A
 export function apiFactory(
   ...args: Parameters<typeof singleApiFactory> | Parameters<typeof multipleApiFactory>
 ) {
+  if (isDebugVerbose('k8s/apiProxy@apiFactory')) {
+    console.debug('k8s/apiProxy@apiFactory', { args });
+  }
+
   if (args[0] instanceof Array) {
     return multipleApiFactory(...(args as Parameters<typeof multipleApiFactory>));
   }
@@ -301,6 +331,10 @@ export function apiFactory(
 function multipleApiFactory(
   ...args: Parameters<typeof singleApiFactory>[]
 ): ReturnType<typeof singleApiFactory> {
+  if (isDebugVerbose('k8s/apiProxy@multipleApiFactory')) {
+    console.debug('k8s/apiProxy@multipleApiFactory', { args });
+  }
+
   const apiEndpoints: ReturnType<typeof singleApiFactory>[] = args.map(apiArgs =>
     singleApiFactory(...apiArgs)
   );
@@ -319,11 +353,20 @@ function multipleApiFactory(
 }
 
 function singleApiFactory(group: string, version: string, resource: string) {
+  if (isDebugVerbose('k8s/apiProxy@singleApiFactory')) {
+    console.debug('k8s/apiProxy@singleApiFactory', { group, version, resource });
+  }
+
   const apiRoot = getApiRoot(group, version);
   const url = `${apiRoot}/${resource}`;
   return {
-    list: (cb: StreamResultsCb, errCb: StreamErrCb, queryParams?: QueryParameters) =>
-      streamResults(url, cb, errCb, queryParams),
+    list: (cb: StreamResultsCb, errCb: StreamErrCb, queryParams?: QueryParameters) => {
+      if (isDebugVerbose('k8s/apiProxy@singleApiFactory list')) {
+        console.debug('k8s/apiProxy@singleApiFactory list', { queryParams });
+      }
+
+      return streamResults(url, cb, errCb, queryParams);
+    },
     get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb, queryParams?: QueryParameters) =>
       streamResult(url, name, cb, errCb, queryParams),
     post: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
@@ -380,6 +423,15 @@ function simpleApiFactoryWithNamespace(
   resource: string,
   includeScale: boolean = false
 ) {
+  if (isDebugVerbose('k8s/apiProxy@simpleApiFactoryWithNamespace')) {
+    console.debug('k8s/apiProxy@simpleApiFactoryWithNamespace', {
+      group,
+      version,
+      resource,
+      includeScale,
+    });
+  }
+
   const apiRoot = getApiRoot(group, version);
   const results: {
     scale?: ReturnType<typeof apiScaleFactory>;
@@ -390,7 +442,13 @@ function simpleApiFactoryWithNamespace(
       cb: StreamResultsCb,
       errCb: StreamErrCb,
       queryParams?: QueryParameters
-    ) => streamResults(url(namespace), cb, errCb, queryParams),
+    ) => {
+      if (isDebugVerbose('k8s/apiProxy@simpleApiFactoryWithNamespace list')) {
+        console.debug('k8s/apiProxy@simpleApiFactoryWithNamespace list', { queryParams });
+      }
+
+      return streamResults(url(namespace), cb, errCb, queryParams);
+    },
     get: (
       namespace: string,
       name: string,
@@ -427,6 +485,10 @@ function asQuery(queryParams?: QueryParameters): string {
 }
 
 function resourceDefToApiFactory(resourceDef: KubeObjectInterface): ApiFactoryReturn {
+  if (isDebugVerbose('k8s/apiProxy@resourceDefToApiFactory')) {
+    console.debug('k8s/apiProxy@resourceDefToApiFactory', { resourceDef });
+  }
+
   if (!resourceDef.kind) {
     throw new Error(`Cannot handle unknown resource kind: ${resourceDef.kind}`);
   }
@@ -516,6 +578,17 @@ export function remove(url: string, requestOptions = {}) {
   return request(url, opts);
 }
 
+/**
+ * Streams the results of a Kubernetes API request.
+ *
+ * @param url - The URL of the Kubernetes API endpoint.
+ * @param name - The name of the Kubernetes API resource.
+ * @param cb - The callback function to execute when the stream receives data.
+ * @param errCb - The callback function to execute when an error occurs.
+ * @param queryParams - The query parameters to include in the API request.
+ *
+ * @returns A function to cancel the stream.
+ */
 export async function streamResult(
   url: string,
   name: string,
@@ -525,6 +598,11 @@ export async function streamResult(
 ) {
   let isCancelled = false;
   let socket: ReturnType<typeof stream>;
+
+  if (isDebugVerbose('k8s/apiProxy@streamResult')) {
+    console.debug('k8s/apiProxy@streamResult', { url, name, queryParams });
+  }
+
   run();
 
   return cancel;
@@ -534,6 +612,11 @@ export async function streamResult(
       const item = await request(`${url}/${name}` + asQuery(queryParams));
 
       if (isCancelled) return;
+
+      if (isDebugVerbose('k8s/apiProxy@streamResult run cb(item)')) {
+        console.debug('k8s/apiProxy@streamResult run cb(item)', { item });
+      }
+
       cb(item);
 
       const watchUrl =
@@ -557,6 +640,16 @@ export async function streamResult(
   }
 }
 
+/**
+ * Streams the results of a Kubernetes API request.
+ *
+ * @param url - The URL of the Kubernetes API endpoint.
+ * @param cb - The callback function to execute when the stream receives data.
+ * @param errCb - The callback function to execute when an error occurs.
+ * @param queryParams - The query parameters to include in the API request.
+ *
+ * @returns A function to cancel the stream.
+ */
 export async function streamResults(
   url: string,
   cb: StreamResultsCb,
@@ -568,6 +661,11 @@ export async function streamResults(
   } = {};
   let isCancelled = false;
   let socket: ReturnType<typeof stream>;
+
+  if (isDebugVerbose('k8s/apiProxy@streamResults')) {
+    console.debug('k8s/apiProxy@streamResults', { url, queryParams });
+  }
+
   run();
 
   return cancel;
@@ -656,24 +754,50 @@ export async function streamResults(
 
   function push() {
     const values = Object.values(results);
+    if (isDebugVerbose('k8s/apiProxy@push cb(values)')) {
+      console.debug('k8s/apiProxy@push cb(values)', { values });
+    }
     cb(values);
   }
 }
 
+/**
+ * Configure a stream with... StreamArgs.
+ */
 export interface StreamArgs {
+  /** Whether the stream is expected to receive JSON data. */
   isJson?: boolean;
+  /** Additional WebSocket protocols to use when connecting. */
   additionalProtocols?: string[];
+  /** A callback function to execute when the WebSocket connection is established. */
   connectCb?: () => void;
+  /** Whether to attempt to reconnect the WebSocket connection if it fails. */
   reconnectOnFailure?: boolean;
+  /** A callback function to execute when the WebSocket connection fails. */
   failCb?: () => void;
 }
 
+/**
+ * Establishes a WebSocket connection to the specified URL and streams the results
+ * to the provided callback function.
+ *
+ * @param url - The URL to connect to.
+ * @param cb - The callback function to receive the streamed results.
+ * @param args - Additional arguments to configure the stream.
+ *
+ * @returns An object with two functions: `cancel`, which can be called to cancel
+ * the stream, and `getSocket`, which returns the WebSocket object.
+ */
 export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   let connection: ReturnType<typeof connectStream>;
   let isCancelled = false;
   const { failCb } = args;
   // We only set reconnectOnFailure as true by default if the failCb has not been provided.
   const { isJson = false, additionalProtocols, connectCb, reconnectOnFailure = !failCb } = args;
+
+  if (isDebugVerbose('k8s/apiProxy@stream')) {
+    console.debug('k8s/apiProxy@stream', { url, args });
+  }
 
   connect();
 
@@ -697,7 +821,10 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
     if (isCancelled) return;
 
     if (reconnectOnFailure) {
-      console.log('Reconnecting in 3 seconds', { url });
+      if (isDebugVerbose('k8s/apiProxy@stream retryOnFail')) {
+        console.debug('k8s/apiProxy@stream retryOnFail', 'Reconnecting in 3 seconds', { url });
+      }
+
       setTimeout(connect, 3000);
     }
   }
@@ -763,6 +890,10 @@ function connectStream(
     if (isClosing) return;
 
     const item = isJson ? JSON.parse(body.data) : body.data;
+    if (isDebugVerbose('k8s/apiProxy@connectStream onMessage cb(item)')) {
+      console.debug('k8s/apiProxy@connectStream onMessage cb(item)', { item });
+    }
+
     cb(item);
   }
 
@@ -846,7 +977,9 @@ export async function metrics(
       const metric = await request(url);
       onMetrics(metric.items || metric);
     } catch (err) {
-      console.debug('No metrics', { err, url });
+      if (isDebugVerbose('k8s/apiProxy@metrics')) {
+        console.debug('k8s/apiProxy@metrics', { err, url });
+      }
 
       if (onError) {
         onError(err as ApiError);
