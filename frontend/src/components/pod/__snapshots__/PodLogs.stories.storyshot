@@ -187,7 +187,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                 >
                   <span
                     class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                    style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                    style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                   >
                     Running
                   </span>
@@ -558,7 +558,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                     <span
                       aria-describedby="container-state-message-nginx"
                       class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                      style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                      style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                     >
                       Running
                     </span>

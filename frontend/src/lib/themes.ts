@@ -30,7 +30,7 @@ const commonRules = {
     },
     primaryColor: '#000',
     success: {
-      light: green['50'],
+      light: '#f8fff0',
       main: green['800'],
       ...green,
     },

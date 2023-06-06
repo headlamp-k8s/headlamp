@@ -186,7 +186,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               >
                 <span
                   class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                  style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
                   Active
                 </span>
@@ -222,7 +222,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               >
                 <span
                   class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                  style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
                   Active
                 </span>
@@ -258,7 +258,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               >
                 <span
                   class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                  style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
                   Active
                 </span>
@@ -294,7 +294,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               >
                 <span
                   class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                  style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
                   Active
                 </span>
@@ -330,7 +330,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               >
                 <span
                   class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                  style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
                   Active
                 </span>
