@@ -2,6 +2,7 @@ import { Icon, IconProps } from '@iconify/react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import clsx from 'clsx';
 import React from 'react';
 import { DateFormatOptions, localeDate, timeAgo } from '../../lib/util';
 import { LightTooltip, TooltipIcon } from './Tooltip';
@@ -23,13 +24,14 @@ const useStyles = makeStyles(theme => ({
   },
   statusLabel: {
     color: theme.palette.primary.contrastText,
-    fontSize: theme.typography.pxToRem(16),
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    fontSize: theme.typography.pxToRem(14),
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
     display: 'inline-block',
     textAlign: 'center',
+    alignItems: 'center',
   },
 }));
 
@@ -92,7 +94,7 @@ export function StatusLabel(props: StatusLabelProps) {
 
   return (
     <Typography
-      className={classes.statusLabel + ' ' + className}
+      className={clsx(classes.statusLabel, className)}
       style={{
         backgroundColor: bgColor,
         color,

@@ -186,7 +186,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                   title=""
                 >
                   <span
-                    class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                     style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                   >
                     Running
@@ -327,7 +327,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         Initialized
@@ -367,7 +367,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         Ready
@@ -407,7 +407,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         ContainersReady
@@ -447,7 +447,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         PodScheduled
@@ -557,7 +557,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                   >
                     <span
                       aria-describedby="container-state-message-nginx"
-                      class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                      class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                       style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                     >
                       Running

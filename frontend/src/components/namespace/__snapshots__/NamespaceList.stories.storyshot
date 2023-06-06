@@ -185,7 +185,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                 >
                   Active
@@ -221,7 +221,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                 >
                   Active
@@ -257,7 +257,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                 >
                   Active
@@ -293,7 +293,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                 >
                   Active
@@ -329,7 +329,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                 >
                   Active

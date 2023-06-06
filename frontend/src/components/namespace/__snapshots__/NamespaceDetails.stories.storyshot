@@ -123,7 +123,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                 class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                 >
                   Active
@@ -406,7 +406,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                         title="Back-off pulling image \\"doesnotexist:nover\\""
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           ImagePullBackOff
@@ -467,7 +467,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                         title=""
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                           style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                         >
                           Completed
@@ -528,7 +528,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                         title=""
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           Init:0/2
@@ -589,7 +589,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                         title="back-off 5m0s restarting failed container=liveness pod=liveness-http_default(4f8b71a3-f99c-41c2-9523-83edc1de02ce)"
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                           style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                         >
                           CrashLoopBackOff
@@ -657,7 +657,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                         title=""
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                           style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
                         >
                           Error
@@ -725,7 +725,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                         title=""
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                           style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
                         >
                           Running

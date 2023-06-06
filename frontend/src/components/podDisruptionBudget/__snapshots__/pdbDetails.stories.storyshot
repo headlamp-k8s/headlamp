@@ -211,7 +211,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                 class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                 >
                   k8s-app: kube-dns
@@ -226,7 +226,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                 class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                 >
                   Allowed disruptions
@@ -235,7 +235,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                 </span>
                 <br />
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                 >
                   Current
@@ -244,7 +244,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                 </span>
                 <br />
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                 >
                   Desired
@@ -253,7 +253,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
                 </span>
                 <br />
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                   style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                 >
                   Total

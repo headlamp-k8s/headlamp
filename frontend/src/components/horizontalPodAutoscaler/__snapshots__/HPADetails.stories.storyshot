@@ -368,7 +368,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         AbleToScale
@@ -414,7 +414,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         ScalingActive
@@ -460,7 +460,7 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         ScalingLimited
