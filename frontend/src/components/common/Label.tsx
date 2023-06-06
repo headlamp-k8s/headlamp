@@ -9,7 +9,7 @@ import { LightTooltip, TooltipIcon } from './Tooltip';
 const useStyles = makeStyles(theme => ({
   nameLabel: {
     color: theme.palette.text.secondary,
-    fontSize: '1.1em',
+    fontSize: theme.typography.pxToRem(16),
     textAlign: 'right',
   },
   nameLabelItem: {
@@ -18,12 +18,12 @@ const useStyles = makeStyles(theme => ({
   },
   valueLabel: {
     color: theme.palette.text.primary,
-    fontSize: '1.1em',
+    fontSize: theme.typography.pxToRem(16),
     wordBreak: 'break-word',
   },
   statusLabel: {
     color: theme.palette.primary.contrastText,
-    fontSize: '1.1em',
+    fontSize: theme.typography.pxToRem(16),
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
     paddingTop: theme.spacing(0.5),
