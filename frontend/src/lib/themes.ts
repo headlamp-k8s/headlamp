@@ -176,8 +176,8 @@ const darkTheme = createTheme({
       },
     },
     primary: {
-      contrastText: '#fff',
-      main: '#6CB6F2',
+      contrastText: '#000',
+      main: '#4B99EE',
     },
     squareButton: {
       background: '#424242',
@@ -185,7 +185,7 @@ const darkTheme = createTheme({
     primaryColor: '#fff',
     chartStyles: {
       defaultFillColor: 'rgba(20, 20, 20, 0.1)',
-      fillColor: '#3DA3F5',
+      fillColor: '#929191',
       labelColor: '#fff',
     },
     success: {
@@ -231,6 +231,7 @@ const darkTheme = createTheme({
     },
   },
   overrides: {
+    ...commonRules.overrides,
     MuiTooltip: {
       tooltip: {
         fontSize: '1.3em',
@@ -247,6 +248,31 @@ const darkTheme = createTheme({
     MuiIconButton: {
       colorPrimary: {
         color: '#fff',
+      },
+    },
+    MuiLink: {
+      root: {
+        color: '#6CB6F2',
+      },
+    },
+    MuiSwitch: {
+      colorPrimary: {
+        '&&.Mui-checked': {
+          color: '#4b99ee',
+        },
+      },
+    },
+    MuiTab: {
+      textColorPrimary: {
+        '&&.Mui-selected': {
+          color: '#fff',
+          borderBottomColor: '#fff',
+        },
+      },
+    },
+    MuiTabs: {
+      indicator: {
+        backgroundColor: '#fff',
       },
     },
   },
