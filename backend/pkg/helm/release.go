@@ -789,7 +789,7 @@ func (h *Handler) GetActionStatus(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if stat.Status == failed {
-		response["message"] = "action failed with error: " + stat.Err.Error()
+		response["message"] = "action failed with error: " + *stat.Err
 	}
 
 	w.WriteHeader(http.StatusAccepted)
