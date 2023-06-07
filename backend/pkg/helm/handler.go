@@ -114,7 +114,7 @@ func (r *restConfigGetter) ToRESTMapper() (meta.RESTMapper, error) {
 
 type stat struct {
 	Status string
-	Err    error
+	Err    *string
 }
 
 // getReleaseStatus returns the status of the release.
@@ -150,7 +150,11 @@ func (h *Handler) setReleaseStatus(actionName, releaseName, status string, err e
 
 	stat := stat{
 		Status: status,
-		Err:    err,
+	}
+
+	if err != nil {
+		errString := err.Error()
+		stat.Err = &errString
 	}
 
 	cacheErr := h.Cache.SetWithTTL(context.Background(), key, stat, statusCacheTimeout)
