@@ -58,7 +58,7 @@ type HeadlampConfig struct {
 	baseURL               string
 	oidcScopes            []string
 	proxyURLs             []string
-	cache                 cache.Cache
+	cache                 cache.Cache[interface{}]
 	kubeConfigStore       kubeconfig.ContextStore
 }
 

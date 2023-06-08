@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func testCache(ch cache.Cache, t *testing.T) {
+func testCache(ch cache.Cache[interface{}], t *testing.T) {
 	t.Helper()
 
 	// set value
@@ -46,6 +46,6 @@ func testCache(ch cache.Cache, t *testing.T) {
 
 func TestCache(t *testing.T) {
 	// create cache
-	ch := cache.New()
+	ch := cache.New[interface{}]()
 	testCache(ch, t)
 }

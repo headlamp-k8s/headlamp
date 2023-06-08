@@ -29,7 +29,7 @@ var (
 type Handler struct {
 	*action.Configuration
 	*cli.EnvSettings
-	Cache cache.Cache
+	Cache cache.Cache[interface{}]
 }
 
 func NewActionConfig(clientConfig clientcmd.ClientConfig, namespace string) (*action.Configuration, error) {
@@ -50,12 +50,12 @@ func NewActionConfig(clientConfig clientcmd.ClientConfig, namespace string) (*ac
 	return actionConfig, nil
 }
 
-func NewHandler(clientConfig clientcmd.ClientConfig, cache cache.Cache, namespace string) (*Handler, error) {
+func NewHandler(clientConfig clientcmd.ClientConfig, cache cache.Cache[interface{}], namespace string) (*Handler, error) {
 	return NewHandlerWithSettings(clientConfig, cache, namespace, settings)
 }
 
 func NewHandlerWithSettings(clientConfig clientcmd.ClientConfig,
-	cache cache.Cache,
+	cache cache.Cache[interface{}],
 	namespace string, settings *cli.EnvSettings,
 ) (*Handler, error) {
 	actionConfig, err := NewActionConfig(clientConfig, namespace)

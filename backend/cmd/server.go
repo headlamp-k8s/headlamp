@@ -16,7 +16,7 @@ func main() {
 		log.Fatalf("Error fetching config:%v", err)
 	}
 
-	cache := cache.New()
+	cache := cache.New[interface{}]()
 	kubeConfigStore := kubeconfig.NewContextStore()
 
 	StartHeadlampServer(&HeadlampConfig{
