@@ -19,7 +19,7 @@ func newHelmHandler(t *testing.T) *helm.Handler {
 
 	k8sclient := GetClient(t, "minikube")
 
-	cache := cache.New()
+	cache := cache.New[interface{}]()
 	require.NotNil(t, cache)
 
 	helmHandler, err := helm.NewHandlerWithSettings(k8sclient, cache, "default", settings)

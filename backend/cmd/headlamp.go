@@ -64,7 +64,7 @@ type HeadlampConfig struct {
 	// Holds: context-name -> (context, reverse-proxy)
 	contextProxies map[string]contextProxy
 	proxyURLs      []string
-	cache          cache.Cache
+	cache          cache.Cache[interface{}]
 }
 
 const PodAvailabilityCheckTimer = 5 // seconds
@@ -1026,8 +1026,8 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 // Returns the helm.Handler given the config and request. Writes http.NotFound if clusterName is not there.
 func getHelmHandler(c *HeadlampConfig, w http.ResponseWriter, r *http.Request) (*helm.Handler, error) {
 	clusterName := mux.Vars(r)["clusterName"]
-	context, ok := c.contextProxies[clusterName]
 
+	context, ok := c.contextProxies[clusterName]
 	if !ok {
 		http.NotFound(w, r)
 		return nil, errors.New("not found")
