@@ -464,6 +464,8 @@ func (h *Handler) InstallRelease(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		zlog.Error().Err(err).Str("action", "install").Msg("validating request body")
 		http.Error(w, err.Error(), http.StatusBadRequest)
+
+		return
 	}
 
 	err = h.setReleaseStatus("install", req.Name, processing, nil)
