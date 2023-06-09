@@ -44,7 +44,7 @@ func TestWatchAndLoadKubeConfigFile(t *testing.T) {
 
 	kubeConfigStore := kubeconfig.NewContextStore()
 
-	go kubeconfig.LoadAndWatchKubeConfigFiles(kubeConfigStore, path)
+	go kubeconfig.LoadAndWatchKubeConfigFiles(kubeConfigStore, path, kubeconfig.KubeConfig)
 
 	// create kubeconfig3 file that doesn't exist
 	conf, err := clientcmd.Load([]byte(clusterConf))

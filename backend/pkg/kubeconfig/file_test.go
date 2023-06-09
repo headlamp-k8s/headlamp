@@ -12,7 +12,6 @@ import (
 )
 
 func TestWriteToFile(t *testing.T) {
-
 	// create kubeconfig3 file that doesn't exist
 	conf, err := clientcmd.Load([]byte(clusterConf))
 	require.NoError(t, err)
@@ -36,12 +35,11 @@ func TestWriteToFile(t *testing.T) {
 }
 
 func TestRemoveContextFromFile(t *testing.T) {
-
 	data, err := ioutil.ReadFile("./test_data/kubeconfig1")
 	require.NoError(t, err)
 	require.NotNil(t, data)
 
-	err = ioutil.WriteFile("./test_data/config_copy", data, 0644)
+	err = ioutil.WriteFile("./test_data/config_copy", data, 0o644)
 	require.NoError(t, err)
 
 	// remove context from kubeconfig file

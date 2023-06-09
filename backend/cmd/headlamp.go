@@ -34,6 +34,7 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/tools/clientcmd/api"
 	"k8s.io/client-go/tools/portforward"
 	"k8s.io/client-go/transport/spdy"
 
@@ -110,26 +111,6 @@ type OauthConfig struct {
 	Config   *oauth2.Config
 	Verifier *oidc.IDTokenVerifier
 	Ctx      context.Context
-}
-
-const (
-	KubeConfig = 1 << iota
-	DynamicCluster
-	InCluster
-)
-
-// configSourceToString returns a string representation of the source of the config.
-func configSourceToString(source int) string {
-	switch source {
-	case KubeConfig:
-		return "kubeconfig"
-	case DynamicCluster:
-		return "dynamic_cluster"
-	case InCluster:
-		return "incluster"
-	default:
-		return "unknown"
-	}
 }
 
 var pluginListURLs []string
@@ -378,7 +359,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		// in-cluster mode is unlikely to want reloading plugins.
 		go watchForChanges(config.pluginDir)
 		// in-cluster mode is unlikely to want reloading kubeconfig.
-		go kubeconfig.LoadAndWatchKubeConfigFiles(config.kubeConfigStore, kubeConfigPath)
+		go kubeconfig.LoadAndWatchKubeConfigFiles(config.kubeConfigStore, kubeConfigPath, kubeconfig.KubeConfig)
 	}
 
 	// In-cluster
@@ -388,6 +369,11 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			log.Println("Failed to get in-cluster config", err)
 		}
 
+		context.Source = kubeconfig.InCluster
+		err = context.SetupProxy()
+		if err != nil {
+			log.Println("Failed to setup proxy for in-cluster context", err)
+		}
 		err = config.kubeConfigStore.AddContext(context)
 		if err != nil {
 			log.Println("Failed to add in-cluster context", err)
@@ -411,7 +397,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	fmt.Println("  API Routers:")
 
 	// load kubeConfig clusters
-	err := kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPath)
+	err := kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPath, kubeconfig.KubeConfig)
 	if err != nil {
 		log.Printf("Error loading kubeconfig: %v", err)
 	}
@@ -423,7 +409,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		log.Printf("Error getting default kubeconfig persistence directory: %v", err)
 	}
 
-	err = kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPersistenceFile)
+	err = kubeconfig.LoadAndStoreKubeConfigs(config.kubeConfigStore, kubeConfigPersistenceFile, kubeconfig.DynamicCluster)
 	if err != nil {
 		log.Printf("Error loading dynamic kubeconfig file: %v", err)
 	}
@@ -1048,7 +1034,11 @@ func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 			setPluginReloadHeader(w)
 		}
 
-		kContext.ProxyRequest(w, r)
+		err = kContext.ProxyRequest(w, r)
+		if err != nil {
+			log.Printf("Error: failed to proxy request: %s", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
 	})
 }
 
@@ -1076,6 +1066,9 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 		clusters = append(clusters, Cluster{
 			Name:   context.Name,
 			Server: context.Cluster.Server,
+			Metadata: map[string]interface{}{
+				"source": context.SourceStr(),
+			},
 		})
 	}
 
@@ -1091,24 +1084,6 @@ func setPluginReloadHeader(writer http.ResponseWriter) {
 	writer.Header().Set("Access-Control-Expose-Headers", "X-Reload")
 	writer.Header().Set("X-Reload", "reload")
 }
-
-// func proxyHandler(url *url.URL, proxy *httputil.ReverseProxy) func(http.ResponseWriter, *http.Request) {
-// 	return func(writer http.ResponseWriter, request *http.Request) {
-// 		request.Host = url.Host
-// 		request.Header.Set("X-Forwarded-Host", request.Header.Get("Host"))
-// 		request.URL.Host = url.Host
-// 		request.URL.Path = mux.Vars(request)["api"]
-// 		request.URL.Scheme = url.Scheme
-
-// 		if pluginsChanged() {
-// 			resetPlugins()
-// 			setPluginReloadHeader(writer)
-// 		}
-
-// 		log.Println("Requesting ", request.URL.String())
-// 		proxy.ServeHTTP(writer, request)
-// 	}
-// }
 
 func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -1127,6 +1102,9 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error decoding cluster info", http.StatusBadRequest)
 		return
 	}
+
+	var contexts []kubeconfig.Context
+	var setupErrors []error
 
 	if clusterReq.KubeConfig != nil {
 		kubeConfigByte, err := base64.StdEncoding.DecodeString(*clusterReq.KubeConfig)
@@ -1152,49 +1130,61 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// contexts, err := kubeconfig.LoadContextsFromKubeConfig(config)
-		// if err != nil {
-		// 	http.Error(w, "Error getting contexts from kubeconfig", http.StatusBadRequest)
-		// 	return
-		// }
-
-		var setupErrors []error
-
-		// for _, context := range contexts {
-		// 	context := context
-		// 	context.cluster.Metadata = clusterReq.Metadata
-		// }
-
-		if len(setupErrors) > 0 {
-			http.Error(w, "Error setting up contexts from kubeconfig", http.StatusBadRequest)
-
+		contexts, err = kubeconfig.LoadContextsFromKubeConfig(config)
+		if err != nil {
+			http.Error(w, "Error getting contexts from kubeconfig", http.StatusBadRequest)
 			return
 		}
-
-		w.WriteHeader(http.StatusCreated)
-		c.getConfig(w, r)
-
-		return
 	} else if clusterReq.Name == nil || clusterReq.Server == nil {
 		http.Error(w, "Error creating cluster with invalid info; please provide a 'name' and 'server' fields at least.",
 			http.StatusBadRequest)
 
 		return
+	} else {
+		conf := &api.Config{
+			Clusters: map[string]*api.Cluster{
+				*clusterReq.Name: {
+					Server:                   *clusterReq.Server,
+					InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
+					CertificateAuthorityData: clusterReq.CertificateAuthorityData,
+				},
+			},
+			Contexts: map[string]*api.Context{
+				*clusterReq.Name: {
+					Cluster: *clusterReq.Name,
+				},
+			},
+		}
+
+		var err error
+		contexts, err = kubeconfig.LoadContextsFromKubeConfig(conf)
+		if err != nil {
+			http.Error(w, "Error getting contexts from kubeconfig", http.StatusBadRequest)
+			return
+		}
+
 	}
 
-	// context := Context{
-	// 	Name: *clusterReq.Name,
-	// 	cluster: Cluster{
-	// 		Name:   *clusterReq.Name,
-	// 		Server: *clusterReq.Server,
-	// 		config: &clientcmdapi.Cluster{
-	// 			Server:                   *clusterReq.Server,
-	// 			InsecureSkipTLSVerify:    clusterReq.InsecureSkipTLSVerify,
-	// 			CertificateAuthorityData: clusterReq.CertificateAuthorityData,
-	// 		},
-	// 		Metadata: clusterReq.Metadata,
-	// 	},
-	// }
+	for _, context := range contexts {
+		context := context
+		context.Source = kubeconfig.DynamicCluster
+		err := context.SetupProxy()
+		if err != nil {
+			setupErrors = append(setupErrors, err)
+		}
+		err = c.kubeConfigStore.AddContext(&context)
+		if err != nil {
+			setupErrors = append(setupErrors, err)
+		}
+
+	}
+
+	if len(setupErrors) > 0 {
+		log.Println("Error setting up contexts from kubeconfig", setupErrors)
+		http.Error(w, "Error setting up contexts from kubeconfig", http.StatusBadRequest)
+
+		return
+	}
 
 	w.WriteHeader(http.StatusCreated)
 	c.getConfig(w, r)

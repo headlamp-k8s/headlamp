@@ -2,7 +2,6 @@ package kubeconfig
 
 import (
 	"errors"
-	"fmt"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -21,11 +20,18 @@ import (
 // TODO: Use a different way to avoid name clashes with other clusters.
 const InClusterContextName = "main"
 
+const (
+	KubeConfig = 1 << iota
+	DynamicCluster
+	InCluster
+)
+
 type Context struct {
 	Name        string                 `json:"name"`
 	KubeContext *api.Context           `json:"kubeContext"`
 	Cluster     *api.Cluster           `json:"cluster"`
 	AuthInfo    *api.AuthInfo          `json:"authInfo"`
+	Source      int                    `json:"source"`
 	proxy       *httputil.ReverseProxy `json:"-"`
 }
 
@@ -79,7 +85,6 @@ func (c *Context) RESTConfig() (*rest.Config, error) {
 }
 
 func (c *Context) OidcConfig() (*OidcConfig, error) {
-
 	if c.AuthInfo.AuthProvider == nil {
 		return nil, errors.New("authProvider is nil")
 	}
@@ -93,9 +98,8 @@ func (c *Context) OidcConfig() (*OidcConfig, error) {
 }
 
 func (c *Context) ProxyRequest(writer http.ResponseWriter, request *http.Request) error {
-
 	if c.proxy == nil {
-		err := c.setupProxy()
+		err := c.SetupProxy()
 		if err != nil {
 			return err
 		}
@@ -116,8 +120,20 @@ func (c *Context) ClientSetWithToken(token string) (*kubernetes.Clientset, error
 	return kubernetes.NewForConfig(restConf)
 }
 
-func (c *Context) setupProxy() error {
+func (c *Context) SourceStr() string {
+	switch c.Source {
+	case KubeConfig:
+		return "kubeconfig"
+	case DynamicCluster:
+		return "dynamic_cluster"
+	case InCluster:
+		return "incluster"
+	default:
+		return "unknown"
+	}
+}
 
+func (c *Context) SetupProxy() error {
 	zlog.Info().Msgf("Setting up proxy for context %q to cluster url %q", c.Name, c.Cluster.Server)
 
 	restConf, err := c.RESTConfig()
@@ -143,8 +159,8 @@ func (c *Context) setupProxy() error {
 	return nil
 }
 
-func LoadContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
-	fmt.Println("loading contexts from:", kubeConfigPath)
+func LoadContextsFromKubeConfigFile(kubeConfigPath string, source int) ([]Context, error) {
+
 	// If the file path is relative make it absolute.
 	if !filepath.IsAbs(kubeConfigPath) {
 		absPath, err := filepath.Abs(kubeConfigPath)
@@ -160,7 +176,17 @@ func LoadContextsFromKubeConfigFile(kubeConfigPath string) ([]Context, error) {
 		return nil, err
 	}
 
-	return LoadContextsFromKubeConfig(config)
+	contexts, err := LoadContextsFromKubeConfig(config)
+	if err != nil {
+		return nil, err
+	}
+	var contextsWithSource []Context
+	for _, context := range contexts {
+		context := context
+		context.Source = source
+		contextsWithSource = append(contextsWithSource, context)
+	}
+	return contextsWithSource, nil
 }
 
 func LoadContextsFromKubeConfig(config *api.Config) ([]Context, error) {
@@ -184,7 +210,7 @@ func LoadContextsFromKubeConfig(config *api.Config) ([]Context, error) {
 			AuthInfo:    authInfo,
 		}
 
-		err := context.setupProxy()
+		err := context.SetupProxy()
 		if err != nil {
 			return nil, err
 		}
@@ -195,13 +221,13 @@ func LoadContextsFromKubeConfig(config *api.Config) ([]Context, error) {
 	return contexts, nil
 }
 
-func LoadContextsFromMultipleKubeConfigs(kubeConfigs string) ([]Context, error) {
+func LoadContextsFromMultipleKubeConfigs(kubeConfigs string, source int) ([]Context, error) {
 	var contexts []Context
 
 	kubeConfigPaths := splitKubeConfigPath(kubeConfigs)
 	for _, kubeConfigPath := range kubeConfigPaths {
 		kubeConfigPath := kubeConfigPath
-		kubeConfigContexts, err := LoadContextsFromKubeConfigFile(kubeConfigPath)
+		kubeConfigContexts, err := LoadContextsFromKubeConfigFile(kubeConfigPath, source)
 		if err != nil {
 			log.Println("Error loading kubeconfig file", kubeConfigPath, err)
 			return nil, err
@@ -251,8 +277,8 @@ func GetInClusterContext() (*Context, error) {
 
 // Note: No need to remove contexts from the store, since
 // adding a context with the same name will overwrite the old one.
-func LoadAndStoreKubeConfigs(kubeConfigStore ContextStore, kubeConfigs string) error {
-	kubeConfigContexts, err := LoadContextsFromMultipleKubeConfigs(kubeConfigs)
+func LoadAndStoreKubeConfigs(kubeConfigStore ContextStore, kubeConfigs string, source int) error {
+	kubeConfigContexts, err := LoadContextsFromMultipleKubeConfigs(kubeConfigs, source)
 	if err != nil {
 		return err
 	}

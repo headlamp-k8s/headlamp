@@ -12,7 +12,7 @@ import (
 
 const watchInterval = 10 * time.Second
 
-func LoadAndWatchKubeConfigFiles(kubeConfigStore ContextStore, paths string) {
+func LoadAndWatchKubeConfigFiles(kubeConfigStore ContextStore, paths string, source int) {
 	// create ticker
 	ticker := time.NewTicker(watchInterval)
 
@@ -37,7 +37,7 @@ func LoadAndWatchKubeConfigFiles(kubeConfigStore ContextStore, paths string) {
 				log.Println("watcher: re-adding missing files")
 				addFilesToWatcher(watcher, kubeConfigPaths)
 
-				err := LoadAndStoreKubeConfigs(kubeConfigStore, paths)
+				err := LoadAndStoreKubeConfigs(kubeConfigStore, paths, source)
 				if err != nil {
 					log.Println("watcher: error loading kubeconfig files", err)
 				}
@@ -50,7 +50,7 @@ func LoadAndWatchKubeConfigFiles(kubeConfigStore ContextStore, paths string) {
 				if event.Op.Has(trigger) {
 					log.Println("watcher: kubeconfig file changed, reloading contexts")
 
-					err := LoadAndStoreKubeConfigs(kubeConfigStore, paths)
+					err := LoadAndStoreKubeConfigs(kubeConfigStore, paths, source)
 					if err != nil {
 						log.Println("watcher: error loading kubeconfig files", err)
 					}
