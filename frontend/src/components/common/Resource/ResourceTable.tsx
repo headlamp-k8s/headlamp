@@ -5,9 +5,11 @@ import { KubeObject } from '../../../lib/k8s/cluster';
 import { useFilterFunc } from '../../../lib/util';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useSettings } from '../../App/Settings/hook';
+import ActionButton from '../ActionButton';
 import { DateLabel } from '../Label';
 import Link from '../Link';
 import SimpleTable, { SimpleTableProps } from '../SimpleTable';
+import TableColumnChooserPopup from '../TableColumnChooserPopup';
 
 type SimpleTableColumn = SimpleTableProps['columns'][number];
 
@@ -101,6 +103,7 @@ function Table(props: ResourceTableProps) {
   const theme = useTheme();
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
   const tableProcessors = useTypedSelector(state => state.ui.views.tableColumnsProcessors);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   let sortingColumn = defaultSortingColumn;
 
@@ -175,14 +178,38 @@ function Table(props: ResourceTableProps) {
     }
   });
 
+  cols.push({
+    label: 'lll',
+    header: (
+      <ActionButton
+        iconButtonProps={{ size: 'small' }}
+        description={t('frequent|Filter columns')}
+        icon="mdi:format-list-checks"
+        onClick={event => {
+          setAnchorEl(event.currentTarget);
+        }}
+      />
+    ),
+    cellProps: { style: { textAlign: 'right', maxWidth: '45px' } },
+    getter: () => null,
+  });
+
   return (
-    <SimpleTable
-      columns={cols}
-      rowsPerPage={storeRowsPerPageOptions}
-      defaultSortingColumn={sortingColumn}
-      filterFunction={useFilterFunc()}
-      reflectInURL
-      {...otherProps}
-    />
+    <>
+      <SimpleTable
+        columns={cols}
+        rowsPerPage={storeRowsPerPageOptions}
+        defaultSortingColumn={sortingColumn}
+        filterFunction={useFilterFunc()}
+        reflectInURL
+        {...otherProps}
+      />
+      <TableColumnChooserPopup
+        columns={cols}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        onToggleColumn={col => console.log('>>>>>COLL', col)}
+      />
+    </>
   );
 }
