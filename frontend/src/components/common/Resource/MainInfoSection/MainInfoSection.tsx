@@ -122,7 +122,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
       if ((action as HeaderAction).id !== undefined) {
         return action as HeaderAction;
       } else {
-        return { id: `gen-${i}`, action: () => action };
+        return { id: `gen-${i}`, action };
       }
     });
   }
