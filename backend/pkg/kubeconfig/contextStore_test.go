@@ -3,6 +3,7 @@ package kubeconfig_test
 import (
 	"testing"
 
+	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 	"github.com/stretchr/testify/require"
 )
@@ -38,5 +39,5 @@ func TestContextStore(t *testing.T) {
 
 	_, err = store.GetContext("test")
 	require.Error(t, err)
-	require.Equal(t, kubeconfig.ErrNotFound, err)
+	require.Equal(t, cache.ErrNotFound, err)
 }

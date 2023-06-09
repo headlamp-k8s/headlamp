@@ -1,11 +1,10 @@
 package kubeconfig
 
 import (
-	"errors"
-	"sync"
-)
+	"context"
 
-var ErrNotFound = errors.New("not found")
+	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
+)
 
 type ContextStore interface {
 	AddContext(headlampContext *Context) error
@@ -15,48 +14,42 @@ type ContextStore interface {
 }
 
 type contextStore struct {
-	store map[string]*Context
-	lock  sync.Mutex
+	cache cache.Cache[*Context]
 }
 
 func NewContextStore() ContextStore {
+	cache := cache.New[*Context]()
 	return &contextStore{
-		store: make(map[string]*Context),
+		cache: cache,
 	}
 }
 
 func (c *contextStore) AddContext(headlampContext *Context) error {
-	// lock the store
-	c.lock.Lock()
-	defer c.lock.Unlock()
-
-	c.store[headlampContext.Name] = headlampContext
-	return nil
+	return c.cache.Set(context.Background(), headlampContext.Name, headlampContext)
 }
 
 func (c *contextStore) GetContexts() ([]*Context, error) {
-	var contexts []*Context
-	for _, context := range c.store {
-		context := context
-		contexts = append(contexts, context)
+	contexts := []*Context{}
+	contextMap, err := c.cache.GetAll(context.Background(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, ctx := range contextMap {
+		contexts = append(contexts, ctx)
 	}
 	return contexts, nil
 }
 
 func (c *contextStore) GetContext(name string) (*Context, error) {
-	context, ok := c.store[name]
-	if !ok {
-		return nil, ErrNotFound
+	context, err := c.cache.Get(context.Background(), name)
+	if err != nil {
+		return nil, err
 	}
 
 	return context, nil
 }
 
 func (c *contextStore) RemoveContext(name string) error {
-	// lock the store
-	c.lock.Lock()
-	defer c.lock.Unlock()
-
-	delete(c.store, name)
-	return nil
+	return c.cache.Delete(context.Background(), name)
 }
