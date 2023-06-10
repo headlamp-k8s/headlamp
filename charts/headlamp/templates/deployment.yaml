@@ -35,22 +35,51 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.registry}}/{{ .Values.image.repository }}:{{ .Values.image.tag | default (printf "v%s" .Chart.AppVersion) }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- with .Values.config.oidc.clientID }}
+            - name: OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: oidc
+                  key: clientID
+            {{- end }}
+            {{- with .Values.config.oidc.clientSecret }}
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: oidc
+                  key: clientSecret
+            {{- end }}
+            {{- with .Values.config.oidc.issuerURL }}
+            - name: OIDC_ISSUER_URL
+              valueFrom:
+                secretKeyRef:
+                  name: oidc
+                  key: issuerURL
+            {{- end }}
+            {{- with .Values.config.oidc.scopes }}
+            - name: OIDC_SCOPES
+              valueFrom:
+                secretKeyRef:
+                  name: oidc
+                  key: scopes
+            {{- end }}
           args:
             - "-in-cluster"
             {{- with .Values.config.pluginsDir}}
             - "-plugins-dir={{ . }}"
             {{- end }}
             {{- with .Values.config.oidc.clientID }}
-            - "-oidc-client-id={{ . }}"
+            - "-oidc-client-id=$(OIDC_CLIENT_ID)"
             {{- end }}
             {{- with .Values.config.oidc.clientSecret }}
-            - "-oidc-client-secret={{ . }}"
+            - "-oidc-client-secret=$(OIDC_CLIENT_SECRET)"
             {{- end }}
             {{- with .Values.config.oidc.issuerURL }}
-            - "-oidc-idp-issuer-url={{ . }}"
+            - "-oidc-idp-issuer-url=$(OIDC_ISSUER_URL)"
             {{- end }}
             {{- with .Values.config.oidc.scopes }}
-            - "-oidc-scopes={{ . }}"
+            - "-oidc-scopes=$(OIDC_SCOPES)"
             {{- end }}
             {{- with .Values.config.baseURL }}
             - "-base-url={{ . }}"
