@@ -161,11 +161,11 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                 <div
                   class="MuiBox-root MuiBox-root"
                 >
-                  <h3
-                    class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                  <h4
+                    class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h4 MuiTypography-noWrap"
                   >
                     Addresses
-                  </h3>
+                  </h4>
                   <div
                     class="MuiBox-root MuiBox-root"
                   />
@@ -263,11 +263,11 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                 <div
                   class="MuiBox-root MuiBox-root"
                 >
-                  <h3
-                    class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
+                  <h4
+                    class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h4 MuiTypography-noWrap"
                   >
                     Ports
-                  </h3>
+                  </h4>
                   <div
                     class="MuiBox-root MuiBox-root"
                   />
