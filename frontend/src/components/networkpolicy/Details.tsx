@@ -61,7 +61,7 @@ export function NetworkPolicyDetails() {
               rows={[
                 {
                   name: t('Ports'),
-                  value: item.ports.map((port: NetworkPolicyPort) => (
+                  value: item.ports?.map((port: NetworkPolicyPort) => (
                     <Box>
                       {port.protocol}:{port.port}
                     </Box>
@@ -73,7 +73,7 @@ export function NetworkPolicyDetails() {
                 },
                 {
                   name: t('ipBlock'),
-                  value: item.from.map(from => {
+                  value: item.from?.map(from => {
                     if (!from.ipBlock) {
                       return <></>;
                     }
@@ -89,7 +89,7 @@ export function NetworkPolicyDetails() {
                 },
                 {
                   name: t('namespaceSelector'),
-                  value: item.from.map(from => {
+                  value: item.from?.map(from => {
                     if (!from.namespaceSelector) {
                       return <></>;
                     }
@@ -100,7 +100,7 @@ export function NetworkPolicyDetails() {
                 },
                 {
                   name: t('podSelector'),
-                  value: item.from.map(from => {
+                  value: item.from?.map(from => {
                     if (!from.podSelector) {
                       return <></>;
                     }
@@ -129,7 +129,7 @@ export function NetworkPolicyDetails() {
               rows={[
                 {
                   name: t('Ports'),
-                  value: item.ports.map((port: NetworkPolicyPort) => (
+                  value: item.ports?.map((port: NetworkPolicyPort) => (
                     <Box>
                       {port.protocol}:{port.port}
                     </Box>
@@ -141,7 +141,7 @@ export function NetworkPolicyDetails() {
                 },
                 {
                   name: t('ipBlock'),
-                  value: item.to.map(to => {
+                  value: item.to?.map(to => {
                     const { cidr, except = [] } = to.ipBlock || {};
                     if (!cidr) {
                       return <></>;
