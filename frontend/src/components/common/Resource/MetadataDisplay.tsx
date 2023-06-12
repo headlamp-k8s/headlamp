@@ -16,10 +16,14 @@ export const useMetadataDisplayStyles = makeStyles(theme => ({
   metadataValueLabel: {
     color: theme.palette.text.primary,
     backgroundColor: theme.palette.metadataBgColor,
-    fontSize: '1.1em',
+    fontSize: theme.typography.pxToRem(16),
     wordBreak: 'break-word',
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    overflowWrap: 'anywhere',
+    textOverflow: 'ellipsis',
   },
 }));
 

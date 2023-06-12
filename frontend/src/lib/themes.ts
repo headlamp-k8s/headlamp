@@ -90,7 +90,7 @@ const commonRules = {
       defaultFillColor: grey['300'],
       labelColor: '#000',
     },
-    metadataBgColor: grey['300'],
+    metadataBgColor: '#f3f2f1',
     headerStyle: {
       normal: {
         fontSize: '1.8rem',
