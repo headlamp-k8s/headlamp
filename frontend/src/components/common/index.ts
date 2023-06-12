@@ -5,6 +5,8 @@ export * from './Chart';
 export * from './Dialog';
 export * from './EmptyContent';
 export { default as EmptyContent } from './EmptyContent';
+export * from './InnerTable';
+export { default as InnerTable } from './InnerTable';
 export * from './Label';
 export * from './Link';
 export { default as Link } from './Link';
