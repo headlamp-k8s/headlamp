@@ -85,7 +85,7 @@ exports[`Storyshots Lease/LeaseListView Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
         class="MuiBox-root MuiBox-root makeStyles-loaderContainer"

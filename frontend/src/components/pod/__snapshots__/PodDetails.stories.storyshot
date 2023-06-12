@@ -90,7 +90,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -242,7 +242,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -490,14 +490,14 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           />
         </div>
         <div
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -666,7 +666,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -867,7 +867,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -1012,7 +1012,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -1268,14 +1268,14 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           />
         </div>
         <div
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -1412,14 +1412,14 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           />
         </div>
         <div
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -1501,7 +1501,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -1618,7 +1618,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -1819,7 +1819,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -1971,7 +1971,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -2221,14 +2221,14 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           />
         </div>
         <div
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -2487,7 +2487,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -2688,7 +2688,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -2833,7 +2833,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -3083,14 +3083,14 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           />
         </div>
         <div
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -3237,7 +3237,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -3438,7 +3438,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -3583,7 +3583,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -3821,14 +3821,14 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           />
         </div>
         <div
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -4018,7 +4018,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -4219,7 +4219,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -4364,7 +4364,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -4617,14 +4617,14 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           />
         </div>
         <div
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -4793,7 +4793,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"

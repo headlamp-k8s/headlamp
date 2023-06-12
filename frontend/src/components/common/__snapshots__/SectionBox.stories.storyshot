@@ -9,7 +9,7 @@ exports[`Storyshots SectionBox Custom Title 1`] = `
       custom title
     </h1>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     />
   </div>
 </div>
@@ -41,7 +41,7 @@ exports[`Storyshots SectionBox Header Props 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     />
   </div>
 </div>
@@ -73,7 +73,7 @@ exports[`Storyshots SectionBox Titled 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     />
   </div>
 </div>
@@ -105,7 +105,7 @@ exports[`Storyshots SectionBox Titled Children 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <p>
         A child paragraph.
@@ -121,7 +121,7 @@ exports[`Storyshots SectionBox With Children 1`] = `
     class="MuiBox-root MuiBox-root"
   >
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <p>
         A child paragraph.

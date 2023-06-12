@@ -81,7 +81,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -143,14 +143,14 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           />
         </div>
         <div
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
@@ -417,7 +417,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -608,7 +608,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Error 1`] = `
           <div
             aria-busy="true"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -726,7 +726,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView No Item Yet 1`] = `
           <div
             aria-busy="true"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiBox-root MuiBox-root makeStyles-loaderContainer"

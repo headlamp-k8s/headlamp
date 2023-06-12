@@ -26,7 +26,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -384,7 +384,7 @@ exports[`Storyshots Settings/PluginSettings Empty 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
         class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -430,7 +430,7 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -770,7 +770,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -1110,7 +1110,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -1975,7 +1975,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"

@@ -78,7 +78,7 @@ exports[`Storyshots Settings General 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <dl
         class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"

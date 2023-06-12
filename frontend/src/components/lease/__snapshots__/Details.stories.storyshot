@@ -81,7 +81,7 @@ exports[`Storyshots Lease/LeaseDetailsView Lease Detail 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -217,7 +217,7 @@ exports[`Storyshots Lease/LeaseDetailsView Lease Detail 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"

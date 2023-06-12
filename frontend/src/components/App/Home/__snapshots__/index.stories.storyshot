@@ -35,7 +35,7 @@ exports[`Storyshots Home/Home Base 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               aria-labelledby="#recent-clusters-label"
@@ -187,7 +187,7 @@ exports[`Storyshots Home/Home Base 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"

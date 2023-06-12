@@ -126,7 +126,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -271,7 +271,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
@@ -509,14 +509,14 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           />
         </div>
         <div
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -706,7 +706,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"

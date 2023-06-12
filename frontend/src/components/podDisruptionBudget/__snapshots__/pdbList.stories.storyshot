@@ -85,7 +85,7 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"

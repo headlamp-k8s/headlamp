@@ -81,7 +81,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
           <div
             aria-busy="false"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
               class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
@@ -297,7 +297,7 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -393,7 +393,7 @@ exports[`Storyshots pdb/PDBDetailsView Error 1`] = `
           <div
             aria-busy="true"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
@@ -496,7 +496,7 @@ exports[`Storyshots pdb/PDBDetailsView No Item Yet 1`] = `
           <div
             aria-busy="true"
             aria-live="polite"
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
               class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
