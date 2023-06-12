@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 import { InputLabel, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
-import Grid, { GridProps } from '@material-ui/core/Grid';
+import Grid, { GridProps, GridSize } from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Input, { InputProps } from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
@@ -35,6 +35,7 @@ import DetailsViewSection from '../../DetailsViewSection';
 import { PodListProps, PodListRenderer } from '../../pod/List';
 import { LightTooltip, ObjectEventList } from '..';
 import Empty from '../EmptyContent';
+import InnerTable from '../InnerTable';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
 import Link, { LinkProps } from '../Link';
 import { useMetadataDisplayStyles } from '.';
@@ -338,7 +339,7 @@ export function VolumeMounts(props: VolumeMountsProps) {
   }
 
   return (
-    <SimpleTable
+    <InnerTable
       columns={[
         {
           label: t('frequent|Mount Path'),
@@ -565,6 +566,12 @@ export function ContainerInfo(props: ContainerInfoProps) {
         ),
         hide: _.isEmpty(container.ports),
       },
+      {
+        name: t('Volume Mounts'),
+        value: <VolumeMounts mounts={container?.volumeMounts || undefined} />,
+        valueCellProps: { sm: 12 as GridSize },
+        hide: _.isEmpty(container?.volumeMounts),
+      },
     ];
   }
 
@@ -573,13 +580,6 @@ export function ContainerInfo(props: ContainerInfoProps) {
       <Box py={1} px={2}>
         <SectionHeader noPadding title={container.name} headerStyle="normal" />
         <NameValueTable rows={containerRows()} />
-        {!_.isEmpty(container.volumeMounts) && (
-          <>
-            <Divider />
-            <SectionHeader noPadding title={t('Volume Mounts')} headerStyle="label" />
-            <VolumeMounts mounts={container.volumeMounts} />
-          </>
-        )}
       </Box>
     </Paper>
   );
