@@ -256,14 +256,16 @@ function ChartsSection(props: ChartsSectionProps) {
         style={{
           marginBottom: '2rem',
         }}
+        alignItems="stretch"
+        spacing={4}
       >
-        <Grid item>
+        <Grid item xs>
           <HeaderLabel value={getUptime()} label={t('Uptime')} />
         </Grid>
-        <Grid item>
+        <Grid item xs>
           <CpuCircularChart items={node && [node]} itemsMetrics={metrics} noMetrics={noMetrics} />
         </Grid>
-        <Grid item>
+        <Grid item xs>
           <MemoryCircularChart
             items={node && [node]}
             itemsMetrics={metrics}
