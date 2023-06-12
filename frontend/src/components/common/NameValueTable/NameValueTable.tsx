@@ -68,6 +68,8 @@ export interface NameValueTableRow {
   /** Whether this row should be hidden (can be a boolean or a function that will take the
    * @param value and return a boolean) */
   hide?: boolean | ((value: NameValueTableRow['value']) => boolean);
+  /** Extra properties to pass to the value cell */
+  valueCellProps?: GridProps;
 }
 
 export interface NameValueTableProps {
@@ -99,7 +101,7 @@ function Value({
 
 export default function NameValueTable(props: NameValueTableProps) {
   const classes = useStyles();
-  const { rows, valueCellProps } = props;
+  const { rows, valueCellProps: globalValueCellProps } = props;
 
   const visibleRows = React.useMemo(
     () =>
@@ -122,7 +124,7 @@ export default function NameValueTable(props: NameValueTableProps) {
       component="dl" // mount a Definition List
       spacing={3}
     >
-      {visibleRows.map(({ name, value, hide = false }, i) => {
+      {visibleRows.map(({ name, value, hide = false, valueCellProps = {} }, i) => {
         let shouldHide = false;
         if (typeof hide === 'function') {
           shouldHide = hide(value);
@@ -135,7 +137,7 @@ export default function NameValueTable(props: NameValueTableProps) {
         }
 
         const last = visibleRows.length === i + 1;
-        const { className, ...otherValueCellProps } = valueCellProps || {};
+        const { className, ...otherValueCellProps } = globalValueCellProps || {};
 
         return (
           <>
@@ -163,6 +165,7 @@ export default function NameValueTable(props: NameValueTableProps) {
                 className ? className : ''
               )}
               {...otherValueCellProps}
+              {...valueCellProps}
             >
               <Value value={value} />
             </Grid>
