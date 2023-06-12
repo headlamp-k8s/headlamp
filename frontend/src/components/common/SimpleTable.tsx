@@ -95,6 +95,8 @@ export interface SimpleTableProps {
   page?: number;
   /** Whether to show the pagination component */
   showPagination?: boolean;
+  /** The style for the table */
+  className?: string;
 }
 
 interface ColumnSortButtonProps {
@@ -165,6 +167,7 @@ export default function SimpleTable(props: SimpleTableProps) {
     defaultSortingColumn,
     noTableHeader = false,
     reflectInURL,
+    className,
   } = props;
   const shouldReflectInURL = reflectInURL !== undefined && reflectInURL !== false;
   const prefix = reflectInURL === true ? '' : reflectInURL || '';
@@ -328,7 +331,11 @@ export default function SimpleTable(props: SimpleTableProps) {
       <Empty>{emptyMessage || t('No data to be shown.')}</Empty>
     </Paper>
   ) : (
-    <TableContainer className={classes.tableContainer} component={Paper} variant="outlined">
+    <TableContainer
+      className={clsx(classes.tableContainer, className)}
+      component={Paper}
+      variant="outlined"
+    >
       {
         // Show a refresh button if the data is not up to date, so we allow the user to keep
         // reading the current data without "losing" it or being sent to the first page
