@@ -69,6 +69,8 @@ type HeadlampConfig struct {
 
 const PodAvailabilityCheckTimer = 5 // seconds
 
+const DrainNodeCacheTTL = 20 // seconds
+
 const (
 	RUNNING = "Running"
 	STOPPED = "Stopped"
@@ -476,7 +478,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	if kubeConfigPersistenceFile != "" {
 		dynamicContexts = append(dynamicContexts, getContextFromKubeConfigs(kubeConfigPersistenceFile)...)
 
-		if len(contexts) == 0 {
+		if len(dynamicContexts) == 0 {
 			log.Println("No contexts/clusters configured from config!")
 		} else {
 			for _, dynamicContext := range dynamicContexts {
@@ -725,6 +727,9 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		}
 	})
 
+	r.HandleFunc("/drain-node", config.handleNodeDrain).Methods("POST")
+	r.HandleFunc("/drain-node-status",
+		config.handleNodeDrainStatus).Methods("GET").Queries("cluster", "{cluster}", "nodeName", "{node}")
 	r.HandleFunc("/portforward", func(w http.ResponseWriter, r *http.Request) {
 		id := r.URL.Query().Get("id")
 		cluster := r.URL.Query().Get("cluster")
@@ -1024,7 +1029,7 @@ func getHelmHandler(c *HeadlampConfig, w http.ResponseWriter, r *http.Request) (
 
 	namespace := r.URL.Query().Get("namespace")
 
-	helmHandler, err := helm.NewHandler(context.context.clientConfig(), c.cache, namespace)
+	helmHandler, err := helm.NewHandler(context.context.getClientConfig(), c.cache, namespace)
 	if err != nil {
 		log.Printf("Error: failed to create helm handler: %s", err)
 		http.Error(w, "failed to create helm handler", http.StatusInternalServerError)
@@ -1383,4 +1388,147 @@ func absPath(path string) (string, error) {
 	}
 
 	return filepath.Join(currentUser.HomeDir, path[2:]), nil
+}
+
+/*
+This function is used to handle the node drain request.
+*/
+func (c *HeadlampConfig) handleNodeDrain(w http.ResponseWriter, r *http.Request) {
+	var drainPayload struct {
+		Cluster  string `json:"cluster"`
+		NodeName string `json:"nodeName"`
+	}
+	// get nodeName and cluster from request body
+	err := json.NewDecoder(r.Body).Decode(&drainPayload)
+	if err != nil {
+		http.Error(w, "Error decoding payload", http.StatusBadRequest)
+		return
+	}
+
+	if drainPayload.NodeName == "" {
+		http.Error(w, "nodeName is required", http.StatusBadRequest)
+		return
+	}
+
+	if drainPayload.Cluster == "" {
+		http.Error(w, "clusterName is required", http.StatusBadRequest)
+		return
+	}
+	// get token from header
+	token := r.Header.Get("Authorization")
+
+	ctxtProxy := c.contextProxies[drainPayload.Cluster]
+
+	clientset, err := ctxtProxy.context.getClientSetToInteractWithKubernetesAPIServer(token)
+	if err != nil {
+		http.Error(w, "Error getting client", http.StatusInternalServerError)
+		return
+	}
+
+	var responsePayload struct {
+		Message string `json:"message"`
+		Cluster string `json:"cluster"`
+	}
+
+	responsePayload.Cluster = drainPayload.Cluster
+	responsePayload.Message = "Drain node request submitted successfully"
+
+	if err = json.NewEncoder(w).Encode(responsePayload); err != nil {
+		http.Error(w, "Error writing response", http.StatusInternalServerError)
+		return
+	}
+
+	c.drainNode(clientset, drainPayload.NodeName, drainPayload.Cluster)
+}
+
+func (c *HeadlampConfig) drainNode(clientset *kubernetes.Clientset, nodeName string, cluster string) {
+	go func() {
+		nodeClient := clientset.CoreV1().Nodes()
+		ctx := context.Background()
+		cacheKey := uuid.NewSHA1(uuid.Nil, []byte(nodeName+cluster)).String()
+		cacheItemTTL := DrainNodeCacheTTL * time.Minute
+
+		node, err := nodeClient.Get(context.TODO(), nodeName, v1.GetOptions{})
+		if err != nil {
+			_ = c.cache.SetWithTTL(ctx, cacheKey, "error: "+err.Error(), cacheItemTTL)
+			return
+		}
+
+		// cordon the node first
+		node.Spec.Unschedulable = true
+		_, err = nodeClient.Update(context.TODO(), node, v1.UpdateOptions{})
+
+		if err != nil {
+			_ = c.cache.SetWithTTL(ctx, cacheKey, "error: "+err.Error(), cacheItemTTL)
+			return
+		}
+
+		pods, err := clientset.CoreV1().Pods("").List(context.TODO(),
+			v1.ListOptions{FieldSelector: "spec.nodeName=" + nodeName})
+		if err != nil {
+			_ = c.cache.SetWithTTL(ctx, cacheKey, "error: "+err.Error(), cacheItemTTL)
+			return
+		}
+
+		var gracePeriod int64 = 0
+
+		for _, pod := range pods.Items {
+			// ignore daemonsets
+			if pod.ObjectMeta.Labels["kubernetes.io/created-by"] == "daemonset-controller" {
+				continue
+			}
+
+			_ = clientset.CoreV1().Pods(pod.Namespace).Delete(context.TODO(),
+				pod.Name, v1.DeleteOptions{GracePeriodSeconds: &gracePeriod})
+		}
+
+		_ = c.cache.SetWithTTL(ctx, cacheKey, "success", cacheItemTTL)
+	}()
+}
+
+/*
+* Handle node drain status
+Since node drain is an async operation, we need to poll for the status of the drain operation
+This endpoint returns the status of the drain operation.
+*/
+func (c *HeadlampConfig) handleNodeDrainStatus(w http.ResponseWriter, r *http.Request) {
+	var drainPayload struct {
+		Cluster  string `json:"cluster"`
+		NodeName string `json:"nodeName"`
+	}
+
+	drainPayload.Cluster = r.URL.Query().Get("cluster")
+	drainPayload.NodeName = r.URL.Query().Get("nodeName")
+
+	if drainPayload.NodeName == "" {
+		http.Error(w, "nodeName is required", http.StatusBadRequest)
+		return
+	}
+
+	if drainPayload.Cluster == "" {
+		http.Error(w, "clusterName is required", http.StatusBadRequest)
+		return
+	}
+
+	cacheKey := uuid.NewSHA1(uuid.Nil, []byte(drainPayload.NodeName+drainPayload.Cluster)).String()
+	ctx := context.Background()
+
+	cacheItem, err := c.cache.Get(ctx, cacheKey)
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
+	var responsePayload struct {
+		ID      string `json:"id"`
+		Cluster string `json:"cluster"`
+	}
+
+	responsePayload.ID = cacheItem.(string)
+	responsePayload.Cluster = drainPayload.Cluster
+
+	if err = json.NewEncoder(w).Encode(responsePayload); err != nil {
+		http.Error(w, "Error writing response", http.StatusInternalServerError)
+		return
+	}
 }

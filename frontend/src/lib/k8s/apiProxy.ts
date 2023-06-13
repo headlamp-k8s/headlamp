@@ -951,3 +951,65 @@ export function listPortForward(cluster: string) {
     response.json()
   );
 }
+
+/**
+ * Drain a node
+ * @param cluster
+ * @param nodeName
+ * @returns {Promise<JSON>}
+ * @throws {Error} if the request fails
+ * @throws {Error} if the response is not ok
+ *
+ * This function is used to drain a node. It is used in the node detail page.
+ * As draining a node is a long running process, we get the request received
+ * message if the request is successful. And then we poll the drain node status endpoint
+ * to get the status of the drain node process.
+ */
+export function drainNode(cluster: string, nodeName: string) {
+  return fetch(`${helpers.getAppUrl()}drain-node`, {
+    method: 'POST',
+    headers: new Headers({
+      Authorization: `Bearer ${getToken(cluster)}`,
+      ...JSON_HEADERS,
+    }),
+    body: JSON.stringify({
+      cluster,
+      nodeName,
+    }),
+  }).then(response => {
+    return response.json().then(data => {
+      if (!response.ok) {
+        throw new Error('Something went wrong');
+      }
+      return data;
+    });
+  });
+}
+
+/**
+ * Get the status of the drain node process
+ * @param cluster
+ * @param nodeName
+ * @returns {Promise<JSON>}
+ * @throws {Error} if the request fails
+ * @throws {Error} if the response is not ok
+ *
+ * This function is used to get the status of the drain node process. It is used in the node detail page.
+ * As draining a node is a long running process, we poll this endpoint to get the status of the drain node process.
+ */
+export function drainNodeStatus(cluster: string, nodeName: string) {
+  return fetch(`${helpers.getAppUrl()}drain-node-status?cluster=${cluster}&nodeName=${nodeName}`, {
+    method: 'GET',
+    headers: new Headers({
+      Authorization: `Bearer ${getToken(cluster)}`,
+      ...JSON_HEADERS,
+    }),
+  }).then(response => {
+    return response.json().then(data => {
+      if (!response.ok) {
+        throw new Error('Something went wrong');
+      }
+      return data;
+    });
+  });
+}
