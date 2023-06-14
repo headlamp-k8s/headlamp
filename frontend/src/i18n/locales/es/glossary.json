@@ -4,7 +4,7 @@
   "CPU": "CPU",
   "Pods": "Pods",
   "Events": "Eventos",
-  "Warnings": "Advertencias",
+  "Only warnings ({{ numWarnings }})": "",
   "Type": "Tipo",
   "Reason": "Razón",
   "Namespaces": "Espacios de nombre",

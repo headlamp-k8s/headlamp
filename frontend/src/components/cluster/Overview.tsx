@@ -76,6 +76,7 @@ function EventsSection() {
   const [isWarningEventSwitchChecked, setIsWarningEventSwitchChecked] = React.useState(
     Boolean(localStorage.getItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY))
   );
+  const [events, eventsError] = Event.useList();
 
   const warningActionFilterFunc = (event: KubeEvent) => {
     if (!filterFunc(event)) {
@@ -98,6 +99,11 @@ function EventsSection() {
     // we want to consider search by id
     dispatch(setSearchFilter(eventsFilter));
   }, [eventsFilter]);
+
+  const numWarnings = React.useMemo(
+    () => events?.filter(e => e.type === 'Warning').length ?? '?',
+    [events]
+  );
 
   function makeStatusLabel(event: Event) {
     return (
@@ -123,7 +129,7 @@ function EventsSection() {
         titleSideActions: [
           <FormControlLabel
             checked={isWarningEventSwitchChecked}
-            label={t('Warnings')}
+            label={t('Only warnings ({{ numWarnings }})', { numWarnings })}
             control={<Switch color="primary" />}
             onChange={(event, checked) => {
               localStorage.setItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY, checked.toString());
@@ -132,7 +138,8 @@ function EventsSection() {
           />,
         ],
       }}
-      resourceClass={Event}
+      data={events}
+      errorMessage={Event.getErrorMessage(eventsError)}
       columns={[
         {
           label: t('Type'),
