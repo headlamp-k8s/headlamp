@@ -1,11 +1,12 @@
 {
   "Cluster settings": "",
-  "Cluster Settings ({{ clusterName }})": "",
-  "Cluster Settings": "",
+  "Plugins": "",
   "Enter a value between {{ minRows }} and {{ maxRows }}.": "",
   "Custom row value": "",
+  "Version": "",
   "Number of rows for tables": "",
-  "Plugins": "",
   "Timezone to display for dates": "",
+  "Cluster Settings ({{ clusterName }})": "",
+  "Cluster Settings": "",
   "Timezone": ""
 }

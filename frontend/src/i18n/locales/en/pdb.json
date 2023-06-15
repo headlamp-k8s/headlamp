@@ -1,9 +1,9 @@
 {
+  "Max Unavailable": "Max Unavailable",
+  "Min Available": "Min Available",
   "Allowed disruptions": "Allowed disruptions",
   "Current": "Current",
   "Desired": "Desired",
   "Total": "Total",
-  "Min Available": "Min Available",
-  "Max Unavailable": "Max Unavailable",
   "Allowed Disruptions": "Allowed Disruptions"
 }

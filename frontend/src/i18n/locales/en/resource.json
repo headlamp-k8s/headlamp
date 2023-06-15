@@ -45,11 +45,14 @@
   "View YAML": "View YAML",
   "Loading table data": "Loading table data",
   "No data matching the filter criteria.": "No data matching the filter criteria.",
+  "Any new output for this container's process should be shown below. In case it doesn't show up, press enter…": "Any new output for this container's process should be shown below. In case it doesn't show up, press enter…",
   "Failed to run \"{{command}}\"…": "Failed to run \"{{command}}\"…",
   "Failed to connect…": "Failed to connect…",
   "Press the enter key to reconnect.": "Press the enter key to reconnect.",
   "Failed to run \"{{ command }}\"": "Failed to run \"{{ command }}\"",
+  "Trying to attach to the container {{ container }}…": "Trying to attach to the container {{ container }}…",
   "Trying to run \"{{command}}\"…": "Trying to run \"{{command}}\"…",
+  "Attach: {{ itemName }}": "Attach: {{ itemName }}",
   "Terminal: {{ itemName }}": "Terminal: {{ itemName }}",
   "Loading resource definition details": "Loading resource definition details",
   "Spawn Job": "Spawn Job",
@@ -66,7 +69,12 @@
   "Resumed CronJob {{ newItemName }}.": "Resumed CronJob {{ newItemName }}.",
   "Failed to suspend CronJob {{ newItemName }}.": "Failed to suspend CronJob {{ newItemName }}.",
   "Failed to resume CronJob {{ newItemName }}.": "Failed to resume CronJob {{ newItemName }}.",
+  "Holder Identity": "Holder Identity",
+  "Lease Duration Seconds": "Lease Duration Seconds",
+  "Renew Time": "Renew Time",
+  "Container Limits": "Container Limits",
   "Loading port forwarding": "Loading port forwarding",
   "Pod Port": "Pod Port",
-  "Local Port": "Local Port"
+  "Local Port": "Local Port",
+  "Handler": "Handler"
 }

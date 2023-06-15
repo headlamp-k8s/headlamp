@@ -45,11 +45,14 @@
   "View YAML": "Ver YAML",
   "Loading table data": "Cargando datos de la tabla",
   "No data matching the filter criteria.": "Sin datos que correspondan a los criterios de filtrado",
+  "Any new output for this container's process should be shown below. In case it doesn't show up, press enter…": "",
   "Failed to run \"{{command}}\"…": "Fallor al ejecutar \"{{command}}\"…",
   "Failed to connect…": "Fallo al conectar…",
   "Press the enter key to reconnect.": "Pulse la tecla intro para reconectar.",
   "Failed to run \"{{ command }}\"": "Fallo al ejecutar \"{{ command }}\"",
+  "Trying to attach to the container {{ container }}…": "",
   "Trying to run \"{{command}}\"…": "Intentando ejecutar \"{{command}}\"…",
+  "Attach: {{ itemName }}": "",
   "Terminal: {{ itemName }}": "Terminal: {{ itemName }}",
   "Loading resource definition details": "Cargando detalles de la definición del recurso",
   "Spawn Job": "",
@@ -66,7 +69,12 @@
   "Resumed CronJob {{ newItemName }}.": "",
   "Failed to suspend CronJob {{ newItemName }}.": "",
   "Failed to resume CronJob {{ newItemName }}.": "",
+  "Holder Identity": "",
+  "Lease Duration Seconds": "",
+  "Renew Time": "",
+  "Container Limits": "",
   "Loading port forwarding": "Cargango redireccionamientos de puerto",
   "Pod Port": "Puerto del Pod",
-  "Local Port": "Perto Local"
+  "Local Port": "Perto Local",
+  "Handler": ""
 }

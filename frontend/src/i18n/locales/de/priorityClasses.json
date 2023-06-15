@@ -1,1 +1,4 @@
-{ "Global Default": "Globale Voreinstellung", "Preemption Policy": "Preemtions-Policy" }
+{
+  "Global Default": "Globale Voreinstellung",
+  "Preemption Policy": "Preemtions-Policy"
+}

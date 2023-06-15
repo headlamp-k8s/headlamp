@@ -45,11 +45,14 @@
   "View YAML": "YAML anzeigen",
   "Loading table data": "Laden von Tabellendaten",
   "No data matching the filter criteria.": "Keine Daten, die den Filterkriterien entsprechen.",
+  "Any new output for this container's process should be shown below. In case it doesn't show up, press enter…": "",
   "Failed to run \"{{command}}\"…": "Fehler bei der Ausführung von \"{{command}}\"…",
   "Failed to connect…": "Verbindung fehlgeschlagen…",
   "Press the enter key to reconnect.": "Drücken Sie die Eingabetaste, um die Verbindung wiederherzustellen.",
   "Failed to run \"{{ command }}\"": "Ausführung von \"{{ command }}\" fehlgeschlagen",
+  "Trying to attach to the container {{ container }}…": "",
   "Trying to run \"{{command}}\"…": "Versuche, \"{{command}}\" auszuführen…",
+  "Attach: {{ itemName }}": "",
   "Terminal: {{ itemName }}": "Terminal: {{ itemName }}",
   "Loading resource definition details": "Lade Details zur Ressourcendefinition",
   "Spawn Job": "Erzeuge Job",
@@ -66,7 +69,12 @@
   "Resumed CronJob {{ newItemName }}.": "CronJob {{ newItemName }} wieder aufgenommen.",
   "Failed to suspend CronJob {{ newItemName }}.": "CronJob {{ newItemName }} konnte nicht ausgesetzt werden.",
   "Failed to resume CronJob {{ newItemName }}.": "CronJob {{ newItemName }} konnte nicht fortgesetzt werden.",
+  "Holder Identity": "",
+  "Lease Duration Seconds": "",
+  "Renew Time": "",
+  "Container Limits": "",
   "Loading port forwarding": "Laden der Portweiterleitung",
   "Pod Port": "Pod-Port",
-  "Local Port": "Lokaler Port"
+  "Local Port": "Lokaler Port",
+  "Handler": ""
 }
