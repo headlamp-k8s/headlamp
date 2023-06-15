@@ -3,7 +3,7 @@
   "plugins": [
     {
       "name": "app-catalog",
-      "archive": "https://github.com/headlamp-k8s/plugins/releases/download/0.1.0/app-catalog-0.1.0.tgz"
+      "archive": "https://github.com/headlamp-k8s/plugins/releases/download/v0.1.2/app-catalog-0.1.2.tgz"
     }
   ]
 }
