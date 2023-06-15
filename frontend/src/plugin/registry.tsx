@@ -439,6 +439,7 @@ export function registerDetailsViewSection(viewSection: DetailsViewSectionType) 
  * which is a string with two values 'light' and 'dark' base on which theme is selected.
  *
  * @example
+ *
  * ```tsx
  * import { registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
  *
@@ -460,6 +461,7 @@ export function registerAppLogo(logo: AppLogoType) {
  * action handler that happens when the custom chooser button component click event occurs
  *
  * @example
+ *
  * ```tsx
  * import { ClusterChooserProps, registerClusterChooser } from '@kinvolk/headlamp-plugin/lib';
  *
@@ -480,10 +482,12 @@ export function registerClusterChooser(chooser: ClusterChooserType) {
  * @param override - The setToken override method to use.
  *
  * @example
+ *
  * ```ts
  * registerSetTokenFunction((cluster: string, token: string | null) => {
  * // set token logic here
  * });
+ * ```
  */
 export function registerSetTokenFunction(
   override: (cluster: string, token: string | null) => void
@@ -496,10 +500,12 @@ export function registerSetTokenFunction(
  * @param override - The getToken override method to use.
  *
  * @example
+ *
  * ```ts
  * registerGetTokenFunction(() => {
  * // set token logic here
  * });
+ * ```
  */
 export function registerGetTokenFunction(override: (cluster: string) => string | undefined) {
   store.dispatch(setFunctionsToOverride({ getToken: override }));
