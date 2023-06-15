@@ -406,6 +406,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	log.Printf("plugins-dir: %s\n", config.pluginDir)
 	log.Printf("dynamic clusters support: %v\n", config.enableDynamicClusters)
 	log.Printf("Helm support: %v\n", config.enableHelm)
+	log.Printf("Proxy URLs: %+v\n", config.proxyURLs)
 
 	if !config.useInCluster {
 		// in-cluster mode is unlikely to want reloading plugins.
