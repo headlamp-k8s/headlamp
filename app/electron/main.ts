@@ -14,9 +14,6 @@ import yargs from 'yargs';
 import i18n from './i18next.config';
 import windowSize from './windowSize';
 
-const MANIFEST_FILE = path.join(process.resourcesPath, 'app-build-manifest.json');
-const buildManifest = fs.existsSync(MANIFEST_FILE) ? require(MANIFEST_FILE) : {};
-
 dotenv.config({ path: path.join(process.resourcesPath, '.env') });
 
 const args = yargs
@@ -44,6 +41,10 @@ const backendToken = randomBytes(32).toString('hex');
 const isDev = process.env.ELECTRON_DEV || false;
 const useExternalServer = process.env.EXTERNAL_SERVER || false;
 const shouldCheckForUpdates = process.env.HEADLAMP_CHECK_FOR_UPDATES !== 'false';
+const manifestDir = isDev ? path.resolve('./') : process.resourcesPath;
+const manifestFile = path.join(manifestDir, 'app-build-manifest.json');
+const buildManifest = fs.existsSync(manifestFile) ? require(manifestFile) : {};
+
 // make it global so that it doesn't get garbage collected
 let mainWindow: BrowserWindow | null;
 
