@@ -1,4 +1,5 @@
 import { useTheme } from '@material-ui/core/styles';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { useFilterFunc } from '../../../lib/util';
@@ -39,16 +40,57 @@ export default function ResourceTable(
   return <Table {...(props as ResourceTableProps)} />;
 }
 
+/**
+ * Returns a throttled version of the input value.
+ *
+ * @param value - The value to be throttled.
+ * @param interval - The interval in milliseconds to throttle the value.
+ * @returns The throttled value.
+ */
+export function useThrottle(value: any, interval = 1000): any {
+  const [throttledValue, setThrottledValue] = useState(value);
+  const lastEffected = useRef(Date.now() + interval);
+
+  // Ensure we don't throttle holding the loading null or undefined value before
+  // real data comes in. Otherwise we could wait up to interval milliseconds
+  // before we update the throttled value.
+  //
+  //   numEffected == 0,  null, or undefined whilst loading.
+  //   numEffected == 1,  real data.
+  const numEffected = useRef(0);
+
+  useEffect(() => {
+    const now = Date.now();
+
+    if (now >= lastEffected.current + interval || numEffected.current < 2) {
+      numEffected.current = numEffected.current + 1;
+      lastEffected.current = now;
+      setThrottledValue(value);
+    } else {
+      const id = window.setTimeout(() => {
+        lastEffected.current = now;
+        setThrottledValue(value);
+      }, interval);
+
+      return () => window.clearTimeout(id);
+    }
+  }, [value, interval]);
+
+  return throttledValue;
+}
+
 function TableFromResourceClass(props: ResourceTableFromResourceClassProps) {
   const { resourceClass, id, ...otherProps } = props;
   const [items, error] = resourceClass.useList();
+  // throttle the update of the table to once per second
+  const throttledItems = useThrottle(items, 1000);
 
   return (
     <Table
       errorMessage={resourceClass.getErrorMessage(error)}
       id={id || `headlamp-${resourceClass.pluralName}`}
       {...otherProps}
-      data={items}
+      data={throttledItems}
     />
   );
 }
