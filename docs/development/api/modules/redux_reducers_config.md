@@ -17,7 +17,7 @@ slug: "redux_reducers_config"
 
 #### Defined in
 
-[redux/reducers/config.tsx:24](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/redux/reducers/config.tsx#L24)
+[redux/reducers/config.tsx:24](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/redux/reducers/config.tsx#L24)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 #### Defined in
 
-[redux/reducers/config.tsx:18](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/redux/reducers/config.tsx#L18)
+[redux/reducers/config.tsx:18](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/redux/reducers/config.tsx#L18)
 
 ## Functions
 
@@ -55,4 +55,4 @@ ___
 
 #### Defined in
 
-[redux/reducers/config.tsx:39](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/redux/reducers/config.tsx#L39)
+[redux/reducers/config.tsx:39](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/redux/reducers/config.tsx#L39)

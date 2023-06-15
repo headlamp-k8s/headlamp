@@ -156,7 +156,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:109](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L109)
+[lib/k8s/index.ts:109](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L109)
 
 ## Variables
 
@@ -170,7 +170,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:80](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L80)
+[lib/k8s/index.ts:80](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L80)
 
 ## Functions
 
@@ -184,7 +184,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:105](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L105)
+[lib/k8s/index.ts:105](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L105)
 
 ___
 
@@ -209,7 +209,7 @@ See [Label selector examples](https://kubernetes.io/docs/concepts/overview/worki
 
 #### Defined in
 
-[lib/k8s/index.ts:140](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L140)
+[lib/k8s/index.ts:139](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L139)
 
 ___
 
@@ -229,7 +229,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:175](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L175)
+[lib/k8s/index.ts:174](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L174)
 
 ___
 
@@ -250,7 +250,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:155](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L155)
+[lib/k8s/index.ts:154](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L154)
 
 ___
 
@@ -264,7 +264,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:88](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L88)
+[lib/k8s/index.ts:88](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L88)
 
 ___
 
@@ -278,7 +278,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:83](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L83)
+[lib/k8s/index.ts:83](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L83)
 
 ___
 
@@ -298,4 +298,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:111](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/index.ts#L111)
+[lib/k8s/index.ts:111](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L111)

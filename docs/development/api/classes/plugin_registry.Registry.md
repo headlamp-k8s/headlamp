@@ -33,7 +33,7 @@ slug: "plugin_registry.Registry"
 
 #### Defined in
 
-[plugin/registry.tsx:99](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L99)
+[plugin/registry.tsx:110](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L110)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:148](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L148)
+[plugin/registry.tsx:159](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L159)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:156](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L156)
+[plugin/registry.tsx:167](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L167)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:89](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L89)
+[plugin/registry.tsx:100](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L100)
 
 ___
 
@@ -137,7 +137,7 @@ register.registerDetailsViewSection('biolatency', resource => {
 
 #### Defined in
 
-[plugin/registry.tsx:121](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L121)
+[plugin/registry.tsx:132](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L132)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:81](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L81)
+[plugin/registry.tsx:92](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L92)
 
 ___
 
@@ -185,4 +185,4 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:57](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L57)
+[plugin/registry.tsx:68](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L68)

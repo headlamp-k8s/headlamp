@@ -14,25 +14,25 @@ slug: "plugin_registry.AppLogoProps"
 
 ### className
 
-• **className**: `string`
+• `Optional` **className**: `string`
 
 A class to use on your SVG.
 
 #### Defined in
 
-[components/Sidebar/AppLogo.tsx:12](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/AppLogo.tsx#L12)
+[components/App/AppLogo.tsx:16](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/components/App/AppLogo.tsx#L16)
 
 ___
 
 ### logoType
 
-• **logoType**: ``"small"`` \| ``"large"``
+• `Optional` **logoType**: ``"small"`` \| ``"large"``
 
-The size of the logo. 'small' for in mobile view, and 'large' for tablet and desktop sizes.
+The size of the logo. 'small' for in mobile view, and 'large' for tablet and desktop sizes. By default the 'large' is used.
 
 #### Defined in
 
-[components/Sidebar/AppLogo.tsx:8](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/AppLogo.tsx#L8)
+[components/App/AppLogo.tsx:12](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/components/App/AppLogo.tsx#L12)
 
 ___
 
@@ -40,8 +40,8 @@ ___
 
 • `Optional` **themeName**: ``"dark"`` \| ``"light"``
 
-User selected theme.
+User selected theme. By default it checks which is is active.
 
 #### Defined in
 
-[components/Sidebar/AppLogo.tsx:10](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/AppLogo.tsx#L10)
+[components/App/AppLogo.tsx:14](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/components/App/AppLogo.tsx#L14)

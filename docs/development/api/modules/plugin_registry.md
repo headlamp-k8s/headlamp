@@ -6,6 +6,7 @@ slug: "plugin_registry"
 
 ## Enumerations
 
+- [DefaultAppBarAction](../enums/plugin_registry.DefaultAppBarAction.md)
 - [DefaultSidebars](../enums/plugin_registry.DefaultSidebars.md)
 
 ## Classes
@@ -22,23 +23,37 @@ slug: "plugin_registry"
 
 ## Type aliases
 
-### AppBarActionType
+### AppBarActionProcessorType
 
-Ƭ **AppBarActionType**: `HeaderActionType`
+Ƭ **AppBarActionProcessorType**: (`info`: `AppBarActionsProcessorArgs`) => `AppBarAction`[]
+
+#### Type declaration
+
+▸ (`info`): `AppBarAction`[]
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `info` | `AppBarActionsProcessorArgs` |
+
+##### Returns
+
+`AppBarAction`[]
 
 #### Defined in
 
-[plugin/registry.tsx:51](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L51)
+[redux/actionButtonsSlice.ts:57](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/redux/actionButtonsSlice.ts#L57)
 
 ___
 
 ### AppLogoType
 
-Ƭ **AppLogoType**: `React.ComponentType`<[`AppLogoProps`](../interfaces/plugin_registry.AppLogoProps.md)\> \| `ReactElement` \| ``null``
+Ƭ **AppLogoType**: `React.ComponentType`<[`AppLogoProps`](../interfaces/plugin_registry.AppLogoProps.md)\> \| `ReactElement` \| typeof `React.Component` \| ``null``
 
 #### Defined in
 
-[components/Sidebar/AppLogo.tsx:16](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/Sidebar/AppLogo.tsx#L16)
+[components/App/AppLogo.tsx:20](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/components/App/AppLogo.tsx#L20)
 
 ___
 
@@ -48,7 +63,7 @@ ___
 
 #### Defined in
 
-[components/cluster/ClusterChooser.tsx:10](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/cluster/ClusterChooser.tsx#L10)
+[components/cluster/ClusterChooser.tsx:10](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/components/cluster/ClusterChooser.tsx#L10)
 
 ___
 
@@ -58,7 +73,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:49](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L49)
+[plugin/registry.tsx:61](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L61)
 
 ___
 
@@ -68,7 +83,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:50](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L50)
+[plugin/registry.tsx:62](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L62)
 
 ___
 
@@ -78,7 +93,7 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/DetailsViewSection.tsx:9](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L9)
+[components/DetailsViewSection/DetailsViewSection.tsx:9](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L9)
 
 ___
 
@@ -104,7 +119,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:41](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L41)
+[plugin/registry.tsx:53](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L53)
 
 ## Variables
 
@@ -114,9 +129,25 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:36](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L36)
+[plugin/registry.tsx:48](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L48)
 
 ## Functions
+
+### getHeadlampAPIHeaders
+
+▸ **getHeadlampAPIHeaders**(): `Object`
+
+Returns headers for making API calls to the headlamp-server backend.
+
+#### Returns
+
+`Object`
+
+#### Defined in
+
+[helpers/index.ts:250](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/helpers/index.ts#L250)
+
+___
 
 ### registerAppBarAction
 
@@ -149,7 +180,7 @@ registerAppBarAction(ConsoleLogger);
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `headerAction` | `HeaderActionType` | The action (link) to put in the app bar. |
+| `headerAction` | `AppBarAction` \| `AppBarActionsProcessor` \| [`AppBarActionProcessorType`](plugin_registry.md#appbaractionprocessortype) \| `AppBarActionType` | The action (link) to put in the app bar. |
 
 #### Returns
 
@@ -157,7 +188,7 @@ registerAppBarAction(ConsoleLogger);
 
 #### Defined in
 
-[plugin/registry.tsx:341](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L341)
+[plugin/registry.tsx:393](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L393)
 
 ___
 
@@ -190,7 +221,7 @@ More complete logo example in plugins/examples/change-logo:
 
 #### Defined in
 
-[plugin/registry.tsx:395](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L395)
+[plugin/registry.tsx:452](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L452)
 
 ___
 
@@ -223,7 +254,7 @@ registerClusterChooser(({ clickHandler, cluster }: ClusterChooserProps) => {
 
 #### Defined in
 
-[plugin/registry.tsx:417](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L417)
+[plugin/registry.tsx:474](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L474)
 
 ___
 
@@ -264,7 +295,7 @@ registerDetailsViewHeaderAction(IconAction);
 
 #### Defined in
 
-[plugin/registry.tsx:286](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L286)
+[plugin/registry.tsx:297](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L297)
 
 ___
 
@@ -291,7 +322,7 @@ More complete detail view example in plugins/examples/details-view:
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `processor` | `HeaderActionsProcessor` \| (`resource`: `any`, `actions`: `HeaderAction`[]) => `HeaderAction`[] | The processor to add. Receives a resource (for which we are processing the header actions) and the current header actions and returns the new header actions. Return an empty array to remove all header actions. |
+| `processor` | `HeaderActionsProcessor` \| `HeaderActionFuncType` | The processor to add. Receives a resource (for which we are processing the header actions) and the current header actions and returns the new header actions. Return an empty array to remove all header actions. |
 
 #### Returns
 
@@ -299,7 +330,7 @@ More complete detail view example in plugins/examples/details-view:
 
 #### Defined in
 
-[plugin/registry.tsx:309](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L309)
+[plugin/registry.tsx:320](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L320)
 
 ___
 
@@ -341,7 +372,7 @@ registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
 
 #### Defined in
 
-[plugin/registry.tsx:370](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L370)
+[plugin/registry.tsx:427](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L427)
 
 ___
 
@@ -369,7 +400,49 @@ registerGetTokenFunction(() => {
 
 #### Defined in
 
-[plugin/registry.tsx:447](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L447)
+[plugin/registry.tsx:504](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L504)
+
+___
+
+### registerResourceTableColumnsProcessor
+
+▸ **registerResourceTableColumnsProcessor**(`processor`): `void`
+
+Add a processor for the resource table columns. Allowing the modification of what tables show.
+
+**`example`**
+
+```tsx
+import { registerResourceTableColumnsProcessor } from '@kinvolk/headlamp-plugin/lib';
+
+// Processor that adds a column to show how many init containers pods have (in the default pods' list table).
+registerResourceTableColumnsProcessor(function ageRemover({ id, columns }) {
+  if (id === 'headlamp-pods') {
+    columns.push({
+      label: 'Init Containers',
+      getter: (pod: Pod) => {
+        return pod.spec.initContainers.length;
+      },
+    });
+  }
+
+  return columns;
+});
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `processor` | `TableColumnsProcessor` \| (`args`: { `columns`: (`SimpleTableGetterColumn` \| `SimpleTableDatumColumn` \| `ColumnType`)[] ; `id`: `string`  }) => (`SimpleTableGetterColumn` \| `SimpleTableDatumColumn` \| `ColumnType`)[] | The processor ID and function. See #TableColumnsProcessor. |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[plugin/registry.tsx:351](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L351)
 
 ___
 
@@ -409,7 +482,7 @@ registerRoute({
 
 #### Defined in
 
-[plugin/registry.tsx:258](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L258)
+[plugin/registry.tsx:269](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L269)
 
 ___
 
@@ -439,7 +512,7 @@ registerRouteFilter(route => (route.path === '/workloads' ? null : route));
 
 #### Defined in
 
-[plugin/registry.tsx:231](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L231)
+[plugin/registry.tsx:242](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L242)
 
 ___
 
@@ -467,7 +540,7 @@ registerSetTokenFunction((cluster: string, token: string | null) => {
 
 #### Defined in
 
-[plugin/registry.tsx:431](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L431)
+[plugin/registry.tsx:488](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L488)
 
 ___
 
@@ -499,7 +572,7 @@ registerSidebarEntry({ parent: 'cluster', name: 'traces', label: 'Traces', url: 
 
 #### Defined in
 
-[plugin/registry.tsx:177](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L177)
+[plugin/registry.tsx:188](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L188)
 
 ___
 
@@ -529,4 +602,4 @@ registerSidebarEntryFilter(entry => (entry.name === 'workloads' ? null : entry))
 
 #### Defined in
 
-[plugin/registry.tsx:212](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/registry.tsx#L212)
+[plugin/registry.tsx:223](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/registry.tsx#L223)

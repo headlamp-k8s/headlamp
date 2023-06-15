@@ -18,4 +18,4 @@ slug: "lib_router.RouteURLProps"
 
 #### Defined in
 
-[lib/router.tsx:734](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/router.tsx#L734)
+[lib/router.tsx:734](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/router.tsx#L734)

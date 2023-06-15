@@ -40,4 +40,4 @@ The return code is not used, but used to be required.
 
 #### Defined in
 
-[plugin/lib.ts:49](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/plugin/lib.ts#L49)
+[plugin/lib.ts:49](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/plugin/lib.ts#L49)

@@ -32,7 +32,7 @@ makeKubeObject<KubeRole\>('role').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L106)
+[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L106)
 
 ## Properties
 
@@ -54,7 +54,7 @@ makeKubeObject<KubeRole\>('role').constructor
 
 #### Defined in
 
-[lib/k8s/role.ts:15](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/role.ts#L15)
+[lib/k8s/role.ts:15](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/role.ts#L15)
 
 ___
 
@@ -68,7 +68,7 @@ makeKubeObject<KubeRole\>('role').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L107)
+[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L107)
 
 ## Accessors
 
@@ -82,7 +82,7 @@ makeKubeObject<KubeRole\>('role').className
 
 #### Defined in
 
-[lib/k8s/role.ts:17](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/role.ts#L17)
+[lib/k8s/role.ts:17](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/role.ts#L17)
 
 ## Methods
 
@@ -106,7 +106,7 @@ makeKubeObject<KubeRole\>('role').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:86](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L86)
+[lib/k8s/cluster.ts:86](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L86)
 
 ___
 
@@ -131,7 +131,7 @@ makeKubeObject<KubeRole\>('role').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:109](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L109)
+[lib/k8s/cluster.ts:109](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L109)
 
 ___
 
@@ -155,7 +155,7 @@ makeKubeObject<KubeRole\>('role').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:105](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L105)
+[lib/k8s/cluster.ts:105](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L105)
 
 ___
 
@@ -182,7 +182,7 @@ makeKubeObject<KubeRole\>('role').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:92](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L92)
+[lib/k8s/cluster.ts:92](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L92)
 
 ___
 
@@ -208,7 +208,7 @@ makeKubeObject<KubeRole\>('role').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L87)
+[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L87)
 
 ___
 
@@ -233,7 +233,7 @@ makeKubeObject<KubeRole\>('role').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:101](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L101)
+[lib/k8s/cluster.ts:101](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L101)
 
 ___
 
@@ -257,4 +257,4 @@ makeKubeObject<KubeRole\>('role').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:98](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L98)
+[lib/k8s/cluster.ts:98](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L98)
