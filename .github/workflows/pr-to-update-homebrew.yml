@@ -14,34 +14,34 @@ jobs:
     name: Create PR to upgrade homebrew
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout headlamp repo 
-        uses: actions/checkout@v2 
+      - name: Checkout headlamp repo
+        uses: actions/checkout@v2
         with:
           path: headlamp
           fetch-depth: 0
-      - name: Configure Git 
-        run: | 
+      - name: Configure Git
+        run: |
           user=${{github.actor}}
           if [ -z $user ]; then
             user=yolossn
           fi
           git config --global user.name "$user"
           git config --global user.email "$user@users.noreply.github.com"
-      - name: Get headlamp latest tag 
+      - name: Get headlamp latest tag
         run: |
-          cd headlamp 
+          cd headlamp
           latestTag=$(git tag --list --sort=version:refname 'v*' | tail -1)
           echo "LATEST_HEADLAMP_TAG=$latestTag" >> $GITHUB_ENV
           echo $latestTag
       - name: Sync homebrew-cask fork from upstream
         run: |
-          gh repo sync kinvolk/homebrew-cask
+          gh repo sync headlamp-k8s/homebrew-cask
         env:
           GITHUB_TOKEN: ${{ secrets.KINVOLK_REPOS_TOKEN }}
-      - name: Check out homebrew-cask repo 
-        uses: actions/checkout@v2 
-        with: 
-          repository: kinvolk/homebrew-cask
+      - name: Check out homebrew-cask repo
+        uses: actions/checkout@v2
+        with:
+          repository: headlamp-k8s/homebrew-cask
           path: homebrew-cask
           token: ${{ secrets.KINVOLK_REPOS_TOKEN }}
           fetch-depth: 0
@@ -60,8 +60,8 @@ jobs:
           if git branch -a | grep -q "origin/update_headlamp_$HEADLAMP_VERSION"; then
             echo "deleting old branch from remote to avoid conflict"
             git push origin --delete "update_headlamp_$HEADLAMP_VERSION"
-          fi 
-          wget "https://github.com/kinvolk/headlamp/releases/download/$LATEST_HEADLAMP_TAG/checksums.txt"
+          fi
+          wget "https://github.com/headlamp-k8s/headlamp/releases/download/$LATEST_HEADLAMP_TAG/checksums.txt"
           ARM_SHA=$(cat checksums.txt | grep .arm64.dmg | awk -F" " '{print $1}')
           INTEL_SHA=$(cat checksums.txt | grep .x64.dmg | awk -F" " '{print $1}')
           git checkout -b "update_headlamp_$HEADLAMP_VERSION"
@@ -77,15 +77,15 @@ jobs:
           git diff
           rm ./checksums.txt
           git add ./Casks/headlamp.rb
-          git status 
+          git status
           git commit --signoff -m "Update Headlamp version to $HEADLAMP_VERSION"
-          git status 
-          git log -1 
+          git status
+          git log -1
           git push origin "update_headlamp_$HEADLAMP_VERSION" -f
           gh pr create \
           --title "Upgrade Headlamp version to $HEADLAMP_VERSION" \
           --repo "Homebrew/homebrew-cask" \
-          --head "kinvolk:update_headlamp_$HEADLAMP_VERSION" \
+          --head "headlamp-k8s:update_headlamp_$HEADLAMP_VERSION" \
           --base "master"  \
           --assignee "$user" \
           --body "Upgrade Headlamp version to $HEADLAMP_VERSION
