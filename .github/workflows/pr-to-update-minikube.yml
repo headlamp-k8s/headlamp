@@ -37,13 +37,13 @@ jobs:
           echo $latestTag
       - name: Sync minikube fork from upstream
         run: |
-          gh repo sync kinvolk/minikube
+          gh repo sync headlamp-k8s/minikube
         env:
           GITHUB_TOKEN: ${{ secrets. KINVOLK_REPOS_TOKEN }}
       - name: Check out minikube repo
         uses: actions/checkout@v2
         with:
-          repository: kinvolk/minikube
+          repository: headlamp-k8s/minikube
           path: minikube
           token: ${{ secrets. KINVOLK_REPOS_TOKEN }}
           fetch-depth: 0
@@ -78,7 +78,7 @@ jobs:
           gh pr create \
           --title "Upgrade Headlamp version to $HEADLAMP_VERSION" \
           --repo "kubernetes/minikube" \
-          --head "kinvolk:update_headlamp_$HEADLAMP_VERSION" \
+          --head "headlamp-k8s:update_headlamp_$HEADLAMP_VERSION" \
           --base "master"  \
           --assignee "$user" \
           --body "Upgrade Headlamp version to $HEADLAMP_VERSION
