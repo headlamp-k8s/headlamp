@@ -67,11 +67,11 @@ $ helm install my-headlamp headlamp/headlamp --namespace kube-system
 
 ### Headlamp Configuration
 
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| config.baseURL | string | `""` | base url path at which headlamp should run |
-| config.oidc.clientID | string | `""` | OIDC client ID |
-| config.oidc.clientSecret | string | `""` | OIDC client secret |
-| config.oidc.issuerURL | string | `""` | OIDC issuer URL |
-| config.oidc.scopes | string | `""` | OIDC scopes to be used |
-| config.pluginsDir | string | `"/headlamp/plugins"` | directory to look for plugins |
+| Key                      | Type   | Default               | Description                                |
+|--------------------------|--------|-----------------------|--------------------------------------------|
+| config.baseURL           | string | `""`                  | base url path at which headlamp should run |
+| config.oidc.clientID     | string | `""`                  | OIDC client ID                             |
+| config.oidc.clientSecret | string | `""`                  | OIDC client secret                         |
+| config.oidc.issuerURL    | string | `""`                  | OIDC issuer URL                            |
+| config.oidc.scopes       | string | `""`                  | OIDC scopes to be used                     |
+| config.pluginsDir        | string | `"/headlamp/plugins"` | directory to look for plugins              |
