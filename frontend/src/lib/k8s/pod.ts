@@ -144,8 +144,11 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
 
   exec(container: string, onExec: StreamResultsCb, options: ExecOptions = {}) {
     const { command = ['sh'], ...streamOpts } = options;
+    const { tty = true, stdin = true, stdout = true, stderr = true } = streamOpts;
     const commandStr = command.map(item => '&command=' + encodeURIComponent(item)).join('');
-    const url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/exec?container=${container}${commandStr}&stdin=1&stderr=1&stdout=1&tty=1`;
+    const url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/exec?container=${container}${commandStr}&stdin=${
+      stdin ? 1 : 0
+    }&stderr=${stderr ? 1 : 0}&stdout=${stdout ? 1 : 0}&tty=${tty ? 1 : 0}`;
     const additionalProtocols = [
       'v4.channel.k8s.io',
       'v3.channel.k8s.io',
