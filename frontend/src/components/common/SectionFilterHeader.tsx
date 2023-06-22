@@ -15,7 +15,7 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import { NamespacesAutocomplete } from './NamespacesAutocomplete';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';
 
-interface SectionFilterHeaderProps extends SectionHeaderProps {
+export interface SectionFilterHeaderProps extends SectionHeaderProps {
   noNamespaceFilter?: boolean;
   noSearch?: boolean;
   preRenderFromFilterActions?: React.ReactNode[];
