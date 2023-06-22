@@ -154,6 +154,7 @@ function Table(props: ResourceTableProps) {
         switch (col) {
           case 'name':
             return {
+              id: 'name',
               label: t('frequent|Name'),
               getter: (resource: KubeObject) => <Link kubeObject={resource} />,
               sort: (n1: KubeObject, n2: KubeObject) => {
@@ -170,6 +171,7 @@ function Table(props: ResourceTableProps) {
               sortingColumn = index + 1;
             }
             return {
+              id: 'age',
               label: t('frequent|Age'),
               cellProps: { style: { textAlign: 'right' } },
               getter: (resource: KubeObject) => (
@@ -185,6 +187,7 @@ function Table(props: ResourceTableProps) {
             };
           case 'namespace':
             return {
+              id: 'namespace',
               label: t('glossary|Namespace'),
               getter: (resource: KubeObject) =>
                 resource.getNamespace() ? (
@@ -208,6 +211,7 @@ function Table(props: ResourceTableProps) {
           case 'type':
           case 'kind':
             return {
+              id: 'kind',
               label: t('frequent|Type'),
               getter: (resource: KubeObject) => resource.kind,
               sort: true,
