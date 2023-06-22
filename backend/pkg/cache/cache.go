@@ -102,7 +102,7 @@ func (c *cache) cleanUp() {
 		<-ticker.C
 
 		for key, value := range c.store {
-			if !value.expiresAt.IsZero() && value.expiresAt.After(time.Now()) {
+			if !value.expiresAt.IsZero() && value.expiresAt.Before(time.Now()) {
 				c.lock.Lock()
 				delete(c.store, key)
 				c.lock.Unlock()
