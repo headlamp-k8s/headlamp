@@ -1,21 +1,34 @@
 import { useTheme } from '@material-ui/core/styles';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import helpers from '../../../helpers';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { useFilterFunc } from '../../../lib/util';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useSettings } from '../../App/Settings/hook';
 import { DateLabel } from '../Label';
 import Link from '../Link';
-import SimpleTable, { SimpleTableProps } from '../SimpleTable';
+import SimpleTable, {
+  SimpleTableDatumColumn,
+  SimpleTableGetterColumn,
+  SimpleTableProps,
+} from '../SimpleTable';
+import TableColumnChooserPopup from './ResourceTableColumnChooser';
 
-type SimpleTableColumn = SimpleTableProps['columns'][number];
+interface ToggableColumn {
+  id?: string;
+  show?: boolean;
+}
+
+export type ResourceTableColumn =
+  | (ToggableColumn & SimpleTableDatumColumn)
+  | (ToggableColumn & SimpleTableGetterColumn);
 
 type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind';
 
 export interface ResourceTableProps extends Omit<SimpleTableProps, 'columns'> {
   /** The columns to be rendered, like used in SimpleTable, or by name. */
-  columns: (SimpleTableColumn | ColumnType)[];
+  columns: (ResourceTableColumn | ColumnType)[];
   /** ID for the table. Will be used by plugins to identify this table.
    * Official tables in Headlamp will have the 'headlamp-' prefix for their IDs which is followed by the resource's plural name or the section in Headlamp the table is in.
    * Plugins should use their own prefix when creating tables, to avoid any clashes.
@@ -23,6 +36,10 @@ export interface ResourceTableProps extends Omit<SimpleTableProps, 'columns'> {
   id?: string;
   /** Deny plugins to process this table's columns. */
   noProcessing?: boolean;
+  /** The anchor element for the column chooser popup. */
+  columnChooserAnchor?: HTMLElement | null;
+  /** The callback for when the columns chooser is closed. */
+  onColumnChooserClose?: () => void;
 }
 
 export interface ResourceTableFromResourceClassProps extends Omit<ResourceTableProps, 'data'> {
@@ -95,103 +112,157 @@ function TableFromResourceClass(props: ResourceTableFromResourceClassProps) {
   );
 }
 
+type ResourceTableColumnWithDefaultShow = ResourceTableColumn & { defaultShow?: boolean };
+
 function Table(props: ResourceTableProps) {
-  const { columns, defaultSortingColumn, id, noProcessing = false, ...otherProps } = props;
+  const {
+    columns,
+    defaultSortingColumn,
+    id,
+    noProcessing = false,
+    columnChooserAnchor = null,
+    onColumnChooserClose,
+    ...otherProps
+  } = props;
   const { t } = useTranslation(['glossary', 'frequent']);
   const theme = useTheme();
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
   const tableProcessors = useTypedSelector(state => state.ui.views.tableColumnsProcessors);
+  const [tableSettings, setTableSettings] = useState<{ id: string; show: boolean }[]>(
+    !!id ? helpers.loadTableSettings(id) : []
+  );
 
-  let sortingColumn = defaultSortingColumn;
+  const [resourceCols, cols, sortingColumn] = useMemo(() => {
+    let sortingColumn = defaultSortingColumn;
 
-  let processedColumns = columns;
+    let processedColumns = columns;
 
-  if (!noProcessing) {
-    tableProcessors.forEach(processorInfo => {
-      console.debug('Processing columns with processor: ', processorInfo.id, '...');
-      processedColumns = processorInfo.processor({ id: id || '', columns: processedColumns }) || [];
-    });
+    if (!noProcessing) {
+      tableProcessors.forEach(processorInfo => {
+        console.debug('Processing columns with processor: ', processorInfo.id, '...');
+        processedColumns =
+          processorInfo.processor({ id: id || '', columns: processedColumns }) || [];
+      });
+    }
+
+    const resourceCols: ResourceTableColumnWithDefaultShow[] = processedColumns
+      .map((col, index) => {
+        if (typeof col !== 'string') {
+          return col;
+        }
+
+        switch (col) {
+          case 'name':
+            return {
+              label: t('frequent|Name'),
+              getter: (resource: KubeObject) => <Link kubeObject={resource} />,
+              sort: (n1: KubeObject, n2: KubeObject) => {
+                if (n1.metadata.name < n2.metadata.name) {
+                  return -1;
+                } else if (n1.metadata.name > n2.metadata.name) {
+                  return 1;
+                }
+                return 0;
+              },
+            };
+          case 'age':
+            if (sortingColumn === undefined) {
+              sortingColumn = index + 1;
+            }
+            return {
+              label: t('frequent|Age'),
+              cellProps: { style: { textAlign: 'right' } },
+              getter: (resource: KubeObject) => (
+                <DateLabel
+                  date={resource.metadata.creationTimestamp}
+                  format="mini"
+                  iconProps={{ color: theme.palette.grey.A700 }}
+                />
+              ),
+              sort: (n1: KubeObject, n2: KubeObject) =>
+                new Date(n2.metadata.creationTimestamp).getTime() -
+                new Date(n1.metadata.creationTimestamp).getTime(),
+            };
+          case 'namespace':
+            return {
+              label: t('glossary|Namespace'),
+              getter: (resource: KubeObject) =>
+                resource.getNamespace() ? (
+                  <Link routeName="namespace" params={{ name: resource.getNamespace() }}>
+                    {resource.getNamespace()}
+                  </Link>
+                ) : (
+                  ''
+                ),
+              sort: (n1: KubeObject, n2: KubeObject) => {
+                const ns1 = n1.getNamespace() || '';
+                const ns2 = n2.getNamespace() || '';
+                if (ns1 < ns2) {
+                  return -1;
+                } else if (ns1 > ns2) {
+                  return 1;
+                }
+                return 0;
+              },
+            };
+          case 'type':
+          case 'kind':
+            return {
+              label: t('frequent|Type'),
+              getter: (resource: KubeObject) => resource.kind,
+              sort: true,
+            };
+          default:
+            throw new Error(`Unknown column: ${col}`);
+        }
+      })
+      .map((col, idx) => {
+        const newCol: ResourceTableColumnWithDefaultShow = { id: col.id || idx.toString(), ...col };
+        // Assign the default show value so we can remember it later.
+        newCol.defaultShow = newCol.show ?? true;
+
+        // Assign the actual show value from whatever is stored in the table settings.
+        const colSettings = tableSettings.find(col => col.id === newCol.id);
+        newCol.show = colSettings?.show ?? newCol.defaultShow;
+        return newCol;
+      });
+
+    // Filter out columns that have show set to false.
+    const cols = resourceCols.filter(col => col.show !== false);
+    return [resourceCols, cols, sortingColumn];
+  }, [columns, id, noProcessing, defaultSortingColumn, tableProcessors, tableSettings]);
+
+  function onColumnsVisibilityToggled(cols: ResourceTableColumn[]) {
+    if (!!id) {
+      const colsToStore = cols.filter(
+        c => resourceCols.find(rc => rc.id === c.id)?.defaultShow !== c.show
+      );
+      helpers.storeTableSettings(
+        id || '',
+        colsToStore.map(c => ({ id: c.id || '', show: c.show ?? true }))
+      );
+    }
+    setTableSettings(cols.map(c => ({ id: c.id || '', show: c.show || c.show === undefined })));
   }
 
-  const cols: SimpleTableColumn[] = processedColumns.map((col, index) => {
-    if (typeof col !== 'string') {
-      return col;
-    }
-
-    switch (col) {
-      case 'name':
-        return {
-          label: t('frequent|Name'),
-          getter: (resource: KubeObject) => <Link kubeObject={resource} />,
-          sort: (n1: KubeObject, n2: KubeObject) => {
-            if (n1.metadata.name < n2.metadata.name) {
-              return -1;
-            } else if (n1.metadata.name > n2.metadata.name) {
-              return 1;
-            }
-            return 0;
-          },
-        };
-      case 'age':
-        if (sortingColumn === undefined) {
-          sortingColumn = index + 1;
-        }
-        return {
-          label: t('frequent|Age'),
-          cellProps: { style: { textAlign: 'right' } },
-          getter: resource => (
-            <DateLabel
-              date={resource.metadata.creationTimestamp}
-              format="mini"
-              iconProps={{ color: theme.palette.grey.A700 }}
-            />
-          ),
-          sort: (n1: KubeObject, n2: KubeObject) =>
-            new Date(n2.metadata.creationTimestamp).getTime() -
-            new Date(n1.metadata.creationTimestamp).getTime(),
-        };
-      case 'namespace':
-        return {
-          label: t('glossary|Namespace'),
-          getter: (resource: KubeObject) =>
-            resource.getNamespace() ? (
-              <Link routeName="namespace" params={{ name: resource.getNamespace() }}>
-                {resource.getNamespace()}
-              </Link>
-            ) : (
-              ''
-            ),
-          sort: (n1: KubeObject, n2: KubeObject) => {
-            const ns1 = n1.getNamespace() || '';
-            const ns2 = n2.getNamespace() || '';
-            if (ns1 < ns2) {
-              return -1;
-            } else if (ns1 > ns2) {
-              return 1;
-            }
-            return 0;
-          },
-        };
-      case 'type':
-      case 'kind':
-        return {
-          label: t('frequent|Type'),
-          getter: (resource: KubeObject) => resource.kind,
-          sort: true,
-        };
-      default:
-        throw new Error(`Unknown column: ${col}`);
-    }
-  });
-
   return (
-    <SimpleTable
-      columns={cols}
-      rowsPerPage={storeRowsPerPageOptions}
-      defaultSortingColumn={sortingColumn}
-      filterFunction={useFilterFunc()}
-      reflectInURL
-      {...otherProps}
-    />
+    <>
+      <SimpleTable
+        columns={cols}
+        rowsPerPage={storeRowsPerPageOptions}
+        defaultSortingColumn={sortingColumn}
+        filterFunction={useFilterFunc()}
+        reflectInURL
+        {...otherProps}
+      />
+      <TableColumnChooserPopup
+        columns={resourceCols}
+        anchorEl={columnChooserAnchor}
+        onClose={() => {
+          onColumnChooserClose && onColumnChooserClose();
+        }}
+        onToggleColumn={onColumnsVisibilityToggled}
+      />
+    </>
   );
 }
