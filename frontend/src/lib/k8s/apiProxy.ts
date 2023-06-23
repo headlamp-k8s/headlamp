@@ -666,6 +666,10 @@ export interface StreamArgs {
   connectCb?: () => void;
   reconnectOnFailure?: boolean;
   failCb?: () => void;
+  tty?: boolean;
+  stdin?: boolean;
+  stdout?: boolean;
+  stderr?: boolean;
 }
 
 export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
