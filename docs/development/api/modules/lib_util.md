@@ -22,7 +22,7 @@ slug: "lib_util"
 
 #### Defined in
 
-[lib/util.ts:32](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L32)
+[lib/util.ts:32](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L32)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:30](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L30)
+[lib/util.ts:30](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L30)
 
 ## Variables
 
@@ -42,9 +42,30 @@ ___
 
 #### Defined in
 
-[lib/util.ts:28](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L28)
+[lib/util.ts:28](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L28)
 
 ## Functions
+
+### compareUnits
+
+▸ **compareUnits**(`quantity1`, `quantity2`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `quantity1` | `string` |
+| `quantity2` | `string` |
+
+#### Returns
+
+`boolean`
+
+#### Defined in
+
+[lib/util.ts:356](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L356)
+
+___
 
 ### filterResource
 
@@ -64,7 +85,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:142](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L142)
+[lib/util.ts:142](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L142)
 
 ___
 
@@ -78,7 +99,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:211](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L211)
+[lib/util.ts:211](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L211)
 
 ___
 
@@ -98,7 +119,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:203](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L203)
+[lib/util.ts:203](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L203)
 
 ___
 
@@ -119,7 +140,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:91](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L91)
+[lib/util.ts:91](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L91)
 
 ___
 
@@ -139,7 +160,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:100](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L100)
+[lib/util.ts:100](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L100)
 
 ___
 
@@ -161,7 +182,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:118](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L118)
+[lib/util.ts:118](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L118)
 
 ___
 
@@ -182,7 +203,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:108](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L108)
+[lib/util.ts:108](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L108)
 
 ___
 
@@ -202,7 +223,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:104](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L104)
+[lib/util.ts:104](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L104)
 
 ___
 
@@ -222,7 +243,28 @@ ___
 
 #### Defined in
 
-[lib/util.ts:74](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L74)
+[lib/util.ts:74](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L74)
+
+___
+
+### normalizeUnit
+
+▸ **normalizeUnit**(`resourceType`, `quantity`): `string`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `resourceType` | `string` |
+| `quantity` | `string` |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[lib/util.ts:365](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L365)
 
 ___
 
@@ -247,7 +289,7 @@ The formatted date.
 
 #### Defined in
 
-[lib/util.ts:45](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L45)
+[lib/util.ts:45](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L45)
 
 ___
 
@@ -267,7 +309,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:223](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L223)
+[lib/util.ts:223](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L223)
 
 ___
 
@@ -299,7 +341,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:198](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L198)
+[lib/util.ts:198](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L198)
 
 ___
 
@@ -322,7 +364,7 @@ A hook to manage a state variable that is also stored in the URL.
 
 #### Defined in
 
-[lib/util.ts:248](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L248)
+[lib/util.ts:248](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L248)
 
 ▸ **useURLState**(`key`, `valueOrParams`): [`number`, `React.Dispatch`<`React.SetStateAction`<`number`\>\>]
 
@@ -341,4 +383,4 @@ A hook to manage a state variable that is also stored in the URL.
 
 #### Defined in
 
-[lib/util.ts:252](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L252)
+[lib/util.ts:252](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L252)

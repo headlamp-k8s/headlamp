@@ -30,7 +30,7 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L106)
+[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L106)
 
 ## Properties
 
@@ -52,7 +52,7 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').constructor
 
 #### Defined in
 
-[lib/k8s/resourceQuota.ts:33](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/resourceQuota.ts#L33)
+[lib/k8s/resourceQuota.ts:34](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/resourceQuota.ts#L34)
 
 ___
 
@@ -66,7 +66,7 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L107)
+[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L107)
 
 ## Accessors
 
@@ -80,7 +80,7 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').className
 
 #### Defined in
 
-[lib/k8s/resourceQuota.ts:53](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/resourceQuota.ts#L53)
+[lib/k8s/resourceQuota.ts:60](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/resourceQuota.ts#L60)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/resourceQuota.ts:43](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/resourceQuota.ts#L43)
+[lib/k8s/resourceQuota.ts:44](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/resourceQuota.ts#L44)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/resourceQuota.ts:63](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/resourceQuota.ts#L63)
+[lib/k8s/resourceQuota.ts:76](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/resourceQuota.ts#L76)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/resourceQuota.ts:35](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/resourceQuota.ts#L35)
+[lib/k8s/resourceQuota.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/resourceQuota.ts#L36)
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/resourceQuota.ts:39](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/resourceQuota.ts#L39)
+[lib/k8s/resourceQuota.ts:40](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/resourceQuota.ts#L40)
 
 ## Methods
 
@@ -160,7 +160,7 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:86](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L86)
+[lib/k8s/cluster.ts:86](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L86)
 
 ___
 
@@ -185,7 +185,7 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:109](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L109)
+[lib/k8s/cluster.ts:109](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L109)
 
 ___
 
@@ -209,7 +209,7 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:105](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L105)
+[lib/k8s/cluster.ts:105](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L105)
 
 ___
 
@@ -236,7 +236,7 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:92](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L92)
+[lib/k8s/cluster.ts:92](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L92)
 
 ___
 
@@ -262,7 +262,7 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L87)
+[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L87)
 
 ___
 
@@ -287,7 +287,7 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:101](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L101)
+[lib/k8s/cluster.ts:101](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L101)
 
 ___
 
@@ -311,4 +311,4 @@ makeKubeObject<KubeResourceQuota\>('resourceQuota').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:98](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/cluster.ts#L98)
+[lib/k8s/cluster.ts:98](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L98)

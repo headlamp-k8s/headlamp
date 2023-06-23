@@ -14,4 +14,4 @@ slug: "lib_util.TimeAgoOptions"
 
 #### Defined in
 
-[lib/util.ts:35](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/util.ts#L35)
+[lib/util.ts:35](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L35)

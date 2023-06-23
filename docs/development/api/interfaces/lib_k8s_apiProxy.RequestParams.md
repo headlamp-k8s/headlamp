@@ -18,4 +18,4 @@ slug: "lib_k8s_apiProxy.RequestParams"
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:31](https://github.com/headlamp-k8s/headlamp/blob/a8b3c4c6/frontend/src/lib/k8s/apiProxy.ts#L31)
+[lib/k8s/apiProxy.ts:32](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/apiProxy.ts#L32)
