@@ -57,12 +57,12 @@ what we have so far:
 ### App Bar Action
 
 Show a component in the app bar (in the top right) with
-[registerAppBarAction](../api/modules/plugin_registry.md#registerAppBarAction).
+[registerAppBarAction](../api/modules/plugin_registry.md#registerappbaraction).
 
 ![screenshot of the header showing two actions](./images/podcounter_screenshot.png)
 
 - Example plugin shows [How To Register an App Bar Action](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/pod-counter)
-- API reference for [registerAppBarAction](../api/modules/plugin_registry.md#registerAppBarAction)
+- API reference for [registerAppBarAction](../api/modules/plugin_registry.md#registerappbaraction)
 
 ### App Logo
 
@@ -77,79 +77,79 @@ Change the logo (at the top left) with
 ### App Menus
 
 Add menus when Headlamp is running as an app.
-[Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp/#setAppMenu)
+[Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp/#setappmenu)
 
 ![screenshot of the logo being changed](./images/app-menus.png)
 
 - Example plugin shows [How To Add App Menus](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/app-menus)
-- API reference for [Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp/#setAppMenu)
+- API reference for [Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp/#setappmenu)
 
 ### Cluster Chooser
 
 Change the Cluster Chooser button (in the middle top of the Headlamp app bar) with
-[registerClusterChooser](../api/modules/plugin_registry.md#registerClusterChooser).
+[registerClusterChooser](../api/modules/plugin_registry.md#registerclusterchooser).
 
 ![screenshot of the cluster chooser button](./images/cluster-chooser.png)
 
 - Example plugin shows [How To Register Cluster Chooser button](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/clusterchooser)
-- API reference for [registerClusterChooser](../api/modules/plugin_registry.md#registerClusterChooser)
+- API reference for [registerClusterChooser](../api/modules/plugin_registry.md#registerclusterchooser)
 
 ### Details View Header Action
 
 Show a component to the top right area of a detail view
 (in the area of the screenshot below that's highlighted as yellow)
-[registerDetailsViewHeaderAction](../api/modules/plugin_registry.md#registerDetailsViewHeaderAction).
+[registerDetailsViewHeaderAction](../api/modules/plugin_registry.md#registerdetailsviewheaderaction).
 
 ![screenshot of the header showing two actions](./images/header_actions_screenshot.png)
 
 - Example plugin shows [How To set a Details View Header Action](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/details-view)
-- API reference for [registerDetailsViewHeaderAction](../api/modules/plugin_registry.md#registerDetailsViewHeaderAction)
+- API reference for [registerDetailsViewHeaderAction](../api/modules/plugin_registry.md#registerdetailsviewheaderaction)
 
 ### Details View Section
 
 Show a component at the bottom of different details views.
-[registerDetailsViewSection](../api/modules/plugin_registry.md#registerDetailsViewSection).
+[registerDetailsViewSection](../api/modules/plugin_registry.md#registerdetailsviewsection).
 
 ![screenshot of the appended Details View Section](./images/details-view.png)
 
 - Example plugin shows [How To set a Details View Section](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/details-view)
-- API reference for [registerDetailsViewSection](../api/modules/plugin_registry.md#registerDetailsViewSection)
+- API reference for [registerDetailsViewSection](../api/modules/plugin_registry.md#registerdetailsviewsection)
 
 ### Dynamic Clusters
 
 Set a cluster dynamically, rather than have the backend read it from configuration files.
-[Headlamp.setCluster](../api/classes/plugin_lib.headlamp/#setCluster).
+[Headlamp.setCluster](../api/classes/plugin_lib.Headlamp/#setcluster).
 
 - Example plugin shows [How To Dynamically Set a Cluster](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/dynamic-clusters)
-- API reference for [Headlamp.setCluster](../api/classes/plugin_lib.headlamp/#setCluster)
+- API reference for [Headlamp.setCluster](../api/classes/plugin_lib.Headlamp/#setcluster)
 
 ### Route
 
 Show a component (in Headlamps main area) at a given URL with
-[registerRoute](../api/modules/plugin_registry.md#registerRoute).
+[registerRoute](../api/modules/plugin_registry.md#registerroute).
 
 - Example plugin shows [How To Register a Route](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar), and how to remove a route.
-- API reference for [registerRoute](../api/modules/plugin_registry.md#registerRoute)
-- API reference for [registerRouteFilter](../api/modules/plugin_registry.md#registerRouteFilter)
+- API reference for [registerRoute](../api/modules/plugin_registry.md#registerroute)
+- API reference for [registerRouteFilter](../api/modules/plugin_registry.md#registerroutefilter)
 
 
 ### Sidebar Item
 
 Add sidebar items (menu on the left) with
-[registerSidebarEntry](../api/modules/plugin_registry.md#registerSidebarEntry).
-Remove sidebar items with [registerSidebarEntryFilter](../api/modules/plugin_registry.md#registerSidebarEntryFilter).
+[registerSidebarEntry](../api/modules/plugin_registry.md#registersidebarentry).
+Remove sidebar items with [registerSidebarEntryFilter](../api/modules/plugin_registry.md#registersidebarentryfilter).
 
 ![screenshot of the sidebar being changed](./images/sidebar.png)
 
 - Example plugin shows [How To add items to the sidebar](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/sidebar), and also how to remove sidebar items.
-- API reference for [registerSidebarEntry](../api/modules/plugin_registry.md#registerSidebarEntry)
-- API reference for [registerSidebarEntryFilter](../api/modules/plugin_registry.md#registerSidebarEntryFilter)
+- API reference for [registerSidebarEntry](../api/modules/plugin_registry.md#registersidebarentry)
+- API reference for [registerSidebarEntryFilter](../api/modules/plugin_registry.md#registersidebarentryfilter)
 
 ### Tables
 
-Change what tables across Headlamp show with [registerResourceTableColumnsProcessor](../api/modules/plugin_registry.md#registerSidebarEntry). This allows to remove, add, update, or shuffle table columns.
+Change what tables across Headlamp show with [registerResourceTableColumnsProcessor](../api/modules/plugin_registry.md#registersidebarentry). This allows to remove, add, update, or shuffle table columns.
 
 ![screenshot of the pods list with a context menu added by a plugin](./images/table-context-menu.png)
 
 - Example plugin shows [How to add a context menu to each row in the pods list table](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/tables).
-- API reference for [registerResourceTableColumnsProcessor](../api/modules/plugin_registry.md#registerResourceTableColumnsProcessor)
+- API reference for [registerResourceTableColumnsProcessor](../api/modules/plugin_registry.md#registerresourcetablecolumnsprocessor)

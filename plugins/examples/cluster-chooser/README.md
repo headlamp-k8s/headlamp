@@ -20,5 +20,5 @@ The main code for the plugin is in [src/index.tsx](src/index.tsx).
 
 See:
 
-- API documentation for [registerClusterChooser](https://headlamp.dev/docs/latest/development/api/classes/plugin_registry.registry/#registercluster-chooser)
+- API documentation for [registerClusterChooser](https://headlamp.dev/docs/latest/development/api/modules/plugin_registry/#registerclusterchooser)
 - The [getting started documentation for Headlamp plugin development](https://headlamp.dev/docs/latest/development/plugins/building/)
