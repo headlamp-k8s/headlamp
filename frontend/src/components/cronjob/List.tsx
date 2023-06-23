@@ -2,9 +2,7 @@ import cronstrue from 'cronstrue/i18n';
 import { useTranslation } from 'react-i18next';
 import CronJob from '../../lib/k8s/cronJob';
 import { DateLabel, HoverInfoLabel } from '../common';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export function getSchedule(cronJob: CronJob, locale: string) {
   const { schedule } = cronJob.spec;
@@ -34,27 +32,26 @@ export default function CronJobList() {
   const { t, i18n } = useTranslation('glossary');
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Cron Jobs')} />}>
-      <ResourceTable
-        resourceClass={CronJob}
-        columns={[
-          'name',
-          'namespace',
-          {
-            label: t('Schedule'),
-            getter: cronJob => getSchedule(cronJob, i18n.language),
-          },
-          {
-            label: t('Suspend'),
-            getter: cronJob => cronJob.spec.suspend.toString(),
-          },
-          {
-            label: t('Last Schedule'),
-            getter: cronJob => getLastScheduleTime(cronJob),
-          },
-          'age',
-        ]}
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('Cron Jobs')}
+      resourceClass={CronJob}
+      columns={[
+        'name',
+        'namespace',
+        {
+          label: t('Schedule'),
+          getter: cronJob => getSchedule(cronJob, i18n.language),
+        },
+        {
+          label: t('Suspend'),
+          getter: cronJob => cronJob.spec.suspend.toString(),
+        },
+        {
+          label: t('Last Schedule'),
+          getter: cronJob => getLastScheduleTime(cronJob),
+        },
+        'age',
+      ]}
+    />
   );
 }

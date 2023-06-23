@@ -3,22 +3,32 @@ import { useTranslation } from 'react-i18next';
 import helpers from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import Namespace from '../../lib/k8s/namespace';
-import { Link, SimpleTable } from '../common';
+import { Link } from '../common';
 import { StatusLabel } from '../common/Label';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
+import {
+  ResourceTableFromResourceClassProps,
+  ResourceTableProps,
+} from '../common/Resource/ResourceTable';
 
 export default function NamespacesList() {
   const { t } = useTranslation(['glossary', 'frequent']);
   const cluster = useCluster();
-  const [allowedNamespaces, setAllowedNamespaces] = React.useState<{ namespace: string }[]>([]);
-  let renderResource = null;
+  // Use the metadata.name field to match the expected format of the ResourceTable component.
+  const [allowedNamespaces, setAllowedNamespaces] = React.useState<
+    { metadata: { name: string } }[]
+  >([]);
 
   React.useEffect(() => {
     if (cluster) {
       const namespaces = helpers.loadClusterSettings(cluster)?.allowedNamespaces || [];
-      setAllowedNamespaces(namespaces.map(namespace => ({ namespace })));
+      setAllowedNamespaces(
+        namespaces.map(namespace => ({
+          metadata: {
+            name: namespace,
+          },
+        }))
+      );
     }
   }, [cluster]);
 
@@ -27,57 +37,61 @@ export default function NamespacesList() {
     return <StatusLabel status={status === 'Active' ? 'success' : 'error'}>{status}</StatusLabel>;
   }
 
-  if (allowedNamespaces.length > 0) {
-    renderResource = (
-      <SimpleTable
-        columns={[
-          {
-            label: t('frequent|Name'),
-            getter: ({ namespace }) => (
-              <Link
-                routeName={'namespace'}
-                params={{
-                  name: namespace,
-                }}
-              >
-                {namespace}
-              </Link>
-            ),
-          },
-          {
-            label: t('frequent|Status'),
-            getter: () => 'Unknown',
-          },
-          {
-            label: t('frequent|Age'),
-            getter: () => 'Unknown',
-          },
-        ]}
-        data={allowedNamespaces}
-      />
-    );
-  } else {
-    renderResource = (
-      <ResourceTable
-        resourceClass={Namespace}
-        columns={[
+  const resourceTableProps: ResourceTableFromResourceClassProps | ResourceTableProps =
+    React.useMemo(() => {
+      if (allowedNamespaces.length > 0) {
+        return {
+          columns: [
+            {
+              id: 'name',
+              label: t('frequent|Name'),
+              getter: ({ metadata }) => (
+                <Link
+                  routeName={'namespace'}
+                  params={{
+                    name: metadata.name,
+                  }}
+                >
+                  {metadata.name}
+                </Link>
+              ),
+            },
+            {
+              id: 'status',
+              label: t('frequent|Status'),
+              getter: () => 'Unknown',
+            },
+            {
+              id: 'age',
+              label: t('frequent|Age'),
+              getter: () => 'Unknown',
+            },
+          ],
+          data: allowedNamespaces,
+        };
+      }
+      return {
+        resourceClass: Namespace,
+        columns: [
           'name',
           {
+            id: 'status',
             label: t('frequent|Status'),
             getter: makeStatusLabel,
             sort: (namespace: Namespace) => namespace.status.phase,
           },
           'age',
-        ]}
-      />
-    );
-  }
+        ],
+      };
+    }, [allowedNamespaces]);
 
   return (
-    <SectionBox
-      title={<SectionFilterHeader title={t('Namespaces')} noNamespaceFilter headerStyle="main" />}
-    >
-      {renderResource}
-    </SectionBox>
+    <ResourceListView
+      title={t('Namespaces')}
+      headerProps={{
+        noNamespaceFilter: true,
+      }}
+      {...resourceTableProps}
+    />
   );
 }

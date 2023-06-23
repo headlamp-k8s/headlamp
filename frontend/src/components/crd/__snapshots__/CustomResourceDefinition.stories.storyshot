@@ -743,21 +743,53 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
           <div
             class="MuiGrid-root MuiGrid-item"
           >
-            <button
-              aria-label="Show filter"
-              class="MuiButtonBase-root MuiIconButton-root"
-              tabindex="0"
-              type="button"
+            <div
+              class="MuiBox-root MuiBox-root"
             >
-              <span
-                class="MuiIconButton-label"
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-align-items-xs-center"
               >
-                <span />
-              </span>
-              <span
-                class="MuiTouchRipple-root"
-              />
-            </button>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="Show filter"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <button
+                    aria-label="Change columns displayed"
+                    class="MuiButtonBase-root MuiIconButton-root"
+                    tabindex="0"
+                    title="Change columns displayed"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

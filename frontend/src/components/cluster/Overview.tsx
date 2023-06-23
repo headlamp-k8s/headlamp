@@ -14,9 +14,8 @@ import { setSearchFilter } from '../../redux/actions/actions';
 import { Link, StatusLabel } from '../common';
 import Empty from '../common/EmptyContent';
 import { PageGrid } from '../common/Resource';
-import ResourceTable from '../common/Resource/ResourceTable';
+import ResourceListView from '../common/Resource/ResourceListView';
 import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
 import { LightTooltip } from '../common/Tooltip';
 import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './Charts';
 
@@ -118,57 +117,52 @@ function EventsSection() {
   }
 
   return (
-    <SectionBox
-      title={
-        <SectionFilterHeader
-          title={t('Events')}
-          titleSideActions={[
-            <FormControlLabel
-              checked={isWarningEventSwitchChecked}
-              label={t('Warnings')}
-              control={<Switch color="primary" />}
-              onChange={(event, checked) => {
-                localStorage.setItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY, checked.toString());
-                setIsWarningEventSwitchChecked(checked);
-              }}
-            />,
-          ]}
-        />
-      }
-    >
-      <ResourceTable
-        resourceClass={Event}
-        columns={[
-          {
-            label: t('Type'),
-            getter: event => event.involvedObject.kind,
-            sort: true,
+    <ResourceListView
+      title={t('Events')}
+      headerProps={{
+        titleSideActions: [
+          <FormControlLabel
+            checked={isWarningEventSwitchChecked}
+            label={t('Warnings')}
+            control={<Switch color="primary" />}
+            onChange={(event, checked) => {
+              localStorage.setItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY, checked.toString());
+              setIsWarningEventSwitchChecked(checked);
+            }}
+          />,
+        ],
+      }}
+      resourceClass={Event}
+      columns={[
+        {
+          label: t('Type'),
+          getter: event => event.involvedObject.kind,
+          sort: true,
+        },
+        {
+          label: t('frequent|Name'),
+          getter: event => makeObjectLink(event),
+          cellProps: {
+            scope: 'row',
+            component: 'th',
           },
-          {
-            label: t('frequent|Name'),
-            getter: event => makeObjectLink(event),
-            cellProps: {
-              scope: 'row',
-              component: 'th',
-            },
-            sort: true,
-          },
-          'namespace',
-          // @todo: Maybe the message should be shown on slide-down.
-          {
-            label: t('Reason'),
-            getter: event => (
-              <LightTooltip title={event.message} interactive>
-                <Box>{makeStatusLabel(event)}</Box>
-              </LightTooltip>
-            ),
-            sort: (e1: Event, e2: Event) => e1.reason.localeCompare(e2.reason),
-          },
-          'age',
-        ]}
-        filterFunction={warningActionFilterFunc}
-        id="headlamp-cluster.overview.events"
-      />
-    </SectionBox>
+          sort: true,
+        },
+        'namespace',
+        // @todo: Maybe the message should be shown on slide-down.
+        {
+          label: t('Reason'),
+          getter: event => (
+            <LightTooltip title={event.message} interactive>
+              <Box>{makeStatusLabel(event)}</Box>
+            </LightTooltip>
+          ),
+          sort: (e1: Event, e2: Event) => e1.reason.localeCompare(e2.reason),
+        },
+        'age',
+      ]}
+      filterFunction={warningActionFilterFunc}
+      id="headlamp-cluster.overview.events"
+    />
   );
 }

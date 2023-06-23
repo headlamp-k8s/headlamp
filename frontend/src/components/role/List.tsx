@@ -4,9 +4,7 @@ import ClusterRole from '../../lib/k8s/clusterRole';
 import Role from '../../lib/k8s/role';
 import { useErrorState, useFilterFunc } from '../../lib/util';
 import Link from '../common/Link';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 interface RolesDict {
   [kind: string]: Role[] | null;
@@ -61,40 +59,39 @@ export default function RoleList() {
   ClusterRole.useApiList(setupClusterRoles, setClusterRolesError);
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Roles')} />}>
-      <ResourceTable
-        filterFunction={filterFunc}
-        errorMessage={getErrorMessage()}
-        columns={[
-          'type',
-          {
-            label: t('frequent|Name'),
-            getter: item => (
-              <Link
-                routeName={item.metadata.namespace ? 'role' : 'clusterrole'}
-                params={{
-                  namespace: item.metadata.namespace || '',
-                  name: item.metadata.name,
-                }}
-              >
-                {item.metadata.name}
-              </Link>
-            ),
-            sort: (r1: Role, r2: Role) => {
-              if (r1.metadata.name < r2.metadata.name) {
-                return -1;
-              } else if (r1.metadata.name > r2.metadata.name) {
-                return 1;
-              }
-              return 0;
-            },
+    <ResourceListView
+      title={t('Roles')}
+      filterFunction={filterFunc}
+      errorMessage={getErrorMessage()}
+      columns={[
+        'type',
+        {
+          label: t('frequent|Name'),
+          getter: item => (
+            <Link
+              routeName={item.metadata.namespace ? 'role' : 'clusterrole'}
+              params={{
+                namespace: item.metadata.namespace || '',
+                name: item.metadata.name,
+              }}
+            >
+              {item.metadata.name}
+            </Link>
+          ),
+          sort: (r1: Role, r2: Role) => {
+            if (r1.metadata.name < r2.metadata.name) {
+              return -1;
+            } else if (r1.metadata.name > r2.metadata.name) {
+              return 1;
+            }
+            return 0;
           },
-          'namespace',
-          'age',
-        ]}
-        data={getJointItems()}
-        id="headlamp-roles"
-      />
-    </SectionBox>
+        },
+        'namespace',
+        'age',
+      ]}
+      data={getJointItems()}
+      id="headlamp-roles"
+    />
   );
 }

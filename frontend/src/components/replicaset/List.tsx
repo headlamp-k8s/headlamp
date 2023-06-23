@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import ReplicaSet from '../../lib/k8s/replicaSet';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function ReplicaSetList() {
   const { t } = useTranslation('glossary');
@@ -21,25 +19,26 @@ export default function ReplicaSetList() {
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Replica Sets')} />}>
-      <ResourceTable
-        resourceClass={ReplicaSet}
-        columns={[
-          'name',
-          'namespace',
-          {
-            label: t('Generation'),
-            getter: replicaSet => replicaSet.status.observedGeneration,
-            sort: true,
-          },
-          {
-            label: t('Replicas'),
-            getter: replicaSet => getReplicas(replicaSet),
-            sort: sortByReplicas,
-          },
-          'age',
-        ]}
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('Replica Sets')}
+      resourceClass={ReplicaSet}
+      columns={[
+        'name',
+        'namespace',
+        {
+          id: 'generation',
+          label: t('Generation'),
+          getter: replicaSet => replicaSet.status.observedGeneration,
+          sort: true,
+        },
+        {
+          id: 'replicas',
+          label: t('Replicas'),
+          getter: replicaSet => getReplicas(replicaSet),
+          sort: sortByReplicas,
+        },
+        'age',
+      ]}
+    />
   );
 }

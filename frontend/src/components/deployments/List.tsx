@@ -2,9 +2,7 @@ import { Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Deployment from '../../lib/k8s/deployment';
 import { StatusLabel } from '../common';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function DeploymentsList() {
   const { t } = useTranslation('glossary');
@@ -58,29 +56,31 @@ export default function DeploymentsList() {
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Deployments')} />}>
-      <ResourceTable
-        resourceClass={Deployment}
-        columns={[
-          'name',
-          'namespace',
-          {
-            label: t('Pods'),
-            getter: deployment => renderPods(deployment),
-            sort: sortByPods,
-          },
-          {
-            label: t('Replicas'),
-            getter: deployment => deployment.spec.replicas || 0,
-            sort: true,
-          },
-          {
-            label: t('Conditions'),
-            getter: deployment => renderConditions(deployment),
-          },
-          'age',
-        ]}
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('Deployments')}
+      resourceClass={Deployment}
+      columns={[
+        'name',
+        'namespace',
+        {
+          id: 'pods',
+          label: t('Pods'),
+          getter: deployment => renderPods(deployment),
+          sort: sortByPods,
+        },
+        {
+          id: 'replicas',
+          label: t('Replicas'),
+          getter: deployment => deployment.spec.replicas || 0,
+          sort: true,
+        },
+        {
+          id: 'conditions',
+          label: t('Conditions'),
+          getter: deployment => renderConditions(deployment),
+        },
+        'age',
+      ]}
+    />
   );
 }

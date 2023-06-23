@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import StatefulSet from '../../lib/k8s/statefulSet';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function StatefulSetList() {
   const { t } = useTranslation('glossary');
@@ -14,25 +12,26 @@ export default function StatefulSetList() {
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Stateful Sets')} />}>
-      <ResourceTable
-        resourceClass={StatefulSet}
-        columns={[
-          'name',
-          'namespace',
-          {
-            label: t('Pods'),
-            getter: statefulSet => renderPods(statefulSet),
-            sort: true,
-          },
-          {
-            label: t('Replicas'),
-            getter: statefulSet => statefulSet.spec.replicas,
-            sort: true,
-          },
-          'age',
-        ]}
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('Stateful Sets')}
+      resourceClass={StatefulSet}
+      columns={[
+        'name',
+        'namespace',
+        {
+          id: 'pods',
+          label: t('Pods'),
+          getter: statefulSet => renderPods(statefulSet),
+          sort: true,
+        },
+        {
+          id: 'replicas',
+          label: t('Replicas'),
+          getter: statefulSet => statefulSet.spec.replicas,
+          sort: true,
+        },
+        'age',
+      ]}
+    />
   );
 }

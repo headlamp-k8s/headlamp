@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo } from '../../lib/util';
-import { LightTooltip, SectionFilterHeader, SimpleTableProps } from '../common';
+import { LightTooltip, SimpleTableProps } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
-import ResourceTable, { ResourceTableProps } from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
+import ResourceListView from '../common/Resource/ResourceListView';
+import { ResourceTableProps } from '../common/Resource/ResourceTable';
 
 export function makePodStatusLabel(pod: Pod) {
   const phase = pod.status.phase;
@@ -64,6 +64,7 @@ export function PodListRenderer(props: PodListProps) {
     const dataCols: ResourceTableProps['columns'] = [
       'name',
       {
+        id: 'ready',
         label: t('frequent|Ready'),
         getter: (pod: Pod) => {
           const podRow = pod.getDetailedStatus();
@@ -71,6 +72,7 @@ export function PodListRenderer(props: PodListProps) {
         },
       },
       {
+        id: 'status',
         label: t('Status'),
         getter: makePodStatusLabel,
         sort: (pod: Pod) => {
@@ -79,11 +81,13 @@ export function PodListRenderer(props: PodListProps) {
         },
       },
       {
+        id: 'ip',
         label: t('frequent|Pod IP'),
         getter: (pod: Pod) => pod.status.podIP,
         sort: true,
       },
       {
+        id: 'node',
         label: t('frequent|Node Name'),
         getter: (pod: Pod) => pod.spec.nodeName,
         sort: true,
@@ -117,17 +121,17 @@ export function PodListRenderer(props: PodListProps) {
   }
 
   return (
-    <SectionBox
-      title={<SectionFilterHeader title={t('Pods')} noNamespaceFilter={noNamespaceFilter} />}
-    >
-      <ResourceTable
-        errorMessage={Pod.getErrorMessage(error)}
-        columns={getDataCols()}
-        data={pods}
-        reflectInURL={reflectTableInURL}
-        id="headlamp-pods"
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('Pods')}
+      headerProps={{
+        noNamespaceFilter,
+      }}
+      errorMessage={Pod.getErrorMessage(error)}
+      columns={getDataCols()}
+      data={pods}
+      reflectInURL={reflectTableInURL}
+      id="headlamp-pods"
+    />
   );
 }
 

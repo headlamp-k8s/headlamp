@@ -3,9 +3,7 @@ import { Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Job from '../../lib/k8s/job';
 import { LightTooltip, StatusLabel, StatusLabelProps } from '../common';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export function makePodStatusLabel(job: Job) {
   if (!job?.status?.conditions) {
@@ -82,26 +80,27 @@ export function JobsListRenderer(props: JobsListRendererProps) {
   }
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Jobs')} />}>
-      <ResourceTable
-        errorMessage={error}
-        columns={[
-          'name',
-          'namespace',
-          {
-            label: t('Completions'),
-            getter: job => getCompletions(job),
-            sort: sortByCompletions,
-          },
-          {
-            label: t('Conditions'),
-            getter: job => makePodStatusLabel(job),
-          },
-          'age',
-        ]}
-        data={jobs}
-        id="headlamp-jobs"
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('Jobs')}
+      errorMessage={error}
+      columns={[
+        'name',
+        'namespace',
+        {
+          id: 'completions',
+          label: t('Completions'),
+          getter: job => getCompletions(job),
+          sort: sortByCompletions,
+        },
+        {
+          id: 'conditions',
+          label: t('Conditions'),
+          getter: job => makePodStatusLabel(job),
+        },
+        'age',
+      ]}
+      data={jobs}
+      id="headlamp-jobs"
+    />
   );
 }

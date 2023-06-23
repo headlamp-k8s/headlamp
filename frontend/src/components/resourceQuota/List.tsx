@@ -1,8 +1,7 @@
 import { Box, Chip, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import ResourceQuota from '../../lib/k8s/resourceQuota';
-import { SectionBox, SectionFilterHeader } from '../common';
-import ResourceTable from '../common/Resource/ResourceTable';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,35 +20,36 @@ export default function ResourceQuotaList() {
   const classes = useStyles();
   const { t } = useTranslation(['frequent', 'glossary']);
   return (
-    <SectionBox title={<SectionFilterHeader title={t('glossary|Resource Quotas')} />}>
-      <ResourceTable
-        resourceClass={ResourceQuota}
-        columns={[
-          'name',
-          'namespace',
-          {
-            label: t('frequent|Request'),
-            getter: (item: ResourceQuota) => {
-              const requests: JSX.Element[] = [];
-              item.requests.forEach((request: string) => {
-                requests.push(<Chip label={request} variant="outlined" />);
-              });
-              return <Box className={classes.root}>{requests}</Box>;
-            },
+    <ResourceListView
+      title={t('glossary|Resource Quotas')}
+      resourceClass={ResourceQuota}
+      columns={[
+        'name',
+        'namespace',
+        {
+          id: 'requests',
+          label: t('frequent|Request'),
+          getter: (item: ResourceQuota) => {
+            const requests: JSX.Element[] = [];
+            item.requests.forEach((request: string) => {
+              requests.push(<Chip label={request} variant="outlined" />);
+            });
+            return <Box className={classes.root}>{requests}</Box>;
           },
-          {
-            label: t('frequent|Limit'),
-            getter: (item: ResourceQuota) => {
-              const limits: JSX.Element[] = [];
-              item.limits.forEach((limit: string) => {
-                limits.push(<Chip label={limit} variant="outlined" />);
-              });
-              return <Box className={classes.root}>{limits}</Box>;
-            },
+        },
+        {
+          id: 'limits',
+          label: t('frequent|Limit'),
+          getter: (item: ResourceQuota) => {
+            const limits: JSX.Element[] = [];
+            item.limits.forEach((limit: string) => {
+              limits.push(<Chip label={limit} variant="outlined" />);
+            });
+            return <Box className={classes.root}>{limits}</Box>;
           },
-          'age',
-        ]}
-      />
-    </SectionBox>
+        },
+        'age',
+      ]}
+    />
   );
 }

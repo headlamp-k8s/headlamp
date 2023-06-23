@@ -346,7 +346,7 @@ export default function SimpleTable(props: SimpleTableProps) {
         {!noTableHeader && (
           <TableHead>
             <TableRow>
-              {columns.map(({ label, cellProps = {}, sort }, i) => {
+              {columns.map(({ label, header, cellProps = {}, sort }, i) => {
                 const { className = '', ...otherProps } = cellProps;
                 return (
                   <TableCell
@@ -354,7 +354,7 @@ export default function SimpleTable(props: SimpleTableProps) {
                     className={clsx(classes.headerCell, className, sort ? classes.sortCell : '')}
                     {...otherProps}
                   >
-                    {label}
+                    {header || label}
                     {sort && (
                       <ColumnSortButtons
                         isIncreasingOrder={Boolean(isIncreasingOrder)}
