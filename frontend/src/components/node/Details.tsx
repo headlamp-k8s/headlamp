@@ -85,6 +85,12 @@ export default function NodeDetails() {
           errorMessage: cordon
             ? t('Failed to uncordon node {{name}}.', { name: node.metadata.name })
             : t('Failed to cordon node {{name}}.', { name: node.metadata.name }),
+          cancelledMessage: cordon
+            ? t('Uncordon node {{name}} cancelled.', { name: node.metadata.name })
+            : t('Cordon node {{name}} cancelled.', { name: node.metadata.name }),
+          cancelCallback: () => {
+            setisUpdatingNodeScheduleProperty(false);
+          },
         }
       )
     );
@@ -135,6 +141,10 @@ export default function NodeDetails() {
           startMessage: t('Draining node {{name}}…', { name: node.metadata.name }),
           successMessage: t('Drained node {{name}}.', { name: node.metadata.name }),
           errorMessage: t('Failed to drain node {{name}}.', { name: node.metadata.name }),
+          cancelledMessage: t('Draining node {{name}} cancelled.', { name: node.metadata.name }),
+          cancelCallback: () => {
+            setisNodeDrainInProgress(false);
+          },
         }
       )
     );

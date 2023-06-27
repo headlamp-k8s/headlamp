@@ -75,6 +75,7 @@ export interface CallbackActionOptions {
   cancelledOptions?: SnackbarProps;
   successOptions?: SnackbarProps;
   errorOptions?: SnackbarProps;
+  cancelCallback?: (...args: any[]) => void;
 }
 
 export interface Action {
