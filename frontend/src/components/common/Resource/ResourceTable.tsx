@@ -161,7 +161,16 @@ function Table(props: ResourceTableProps) {
             ) : (
               ''
             ),
-          sort: true,
+          sort: (n1: KubeObject, n2: KubeObject) => {
+            const ns1 = n1.getNamespace() || '';
+            const ns2 = n2.getNamespace() || '';
+            if (ns1 < ns2) {
+              return -1;
+            } else if (ns1 > ns2) {
+              return 1;
+            }
+            return 0;
+          },
         };
       case 'type':
       case 'kind':
