@@ -40,6 +40,7 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
     errorMessage,
     errorUrl,
     successMessage,
+    cancelCallback,
     startOptions = {},
     cancelledOptions = {},
     successOptions = { variant: 'success' },
@@ -78,6 +79,9 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
           snackbarProps: cancelledOptions,
         })
       );
+      if (cancelCallback) {
+        yield call(cancelCallback);
+      }
     } else {
       // Actually perform the action. This part is no longer cancellable,
       // so it's here instead of within the try block.
