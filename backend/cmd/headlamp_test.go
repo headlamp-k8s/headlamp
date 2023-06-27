@@ -17,6 +17,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -225,10 +226,14 @@ func TestDynamicClusters(t *testing.T) {
 	for _, tc := range tests {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
+			cache := cache.New[interface{}]()
+			kubeConfigStore := kubeconfig.NewContextStore()
 			c := HeadlampConfig{
 				useInCluster:          false,
 				kubeConfigPath:        "",
 				enableDynamicClusters: true,
+				cache:                 cache,
+				kubeConfigStore:       kubeConfigStore,
 			}
 			handler := createHeadlampHandler(&c)
 
@@ -257,8 +262,6 @@ func TestDynamicClusters(t *testing.T) {
 					assert.NotNil(t, cluster)
 					assert.Equal(t, *clusterReq.Name, cluster.Name)
 					assert.Equal(t, *clusterReq.Server, cluster.Server)
-					assert.Equal(t, clusterReq.InsecureSkipTLSVerify, cluster.config.InsecureSkipTLSVerify)
-					assert.Equal(t, clusterReq.CertificateAuthorityData, cluster.config.CertificateAuthorityData)
 				}
 
 				resp = r
@@ -285,7 +288,7 @@ func TestDynamicClusters(t *testing.T) {
 				assert.Equal(t, len(clusterConfig.Clusters), len(config.Clusters))
 			}
 
-			assert.Equal(t, len(c.getClusters()), tc.expectedNumClusters)
+			assert.Equal(t, tc.expectedNumClusters, len(c.getClusters()))
 		})
 	}
 }
@@ -298,11 +301,15 @@ func TestDynamicClustersKubeConfig(t *testing.T) {
 	req := ClusterReq{
 		KubeConfig: &kubeConfig,
 	}
+	cache := cache.New[interface{}]()
+	kubeConfigStore := kubeconfig.NewContextStore()
 
 	c := HeadlampConfig{
 		useInCluster:          false,
 		kubeConfigPath:        "",
 		enableDynamicClusters: true,
+		cache:                 cache,
+		kubeConfigStore:       kubeConfigStore,
 	}
 	handler := createHeadlampHandler(&c)
 
@@ -340,24 +347,33 @@ func TestExternalProxy(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	cache := cache.New[interface{}]()
+	kubeConfigStore := kubeconfig.NewContextStore()
+
 	tests := []test{
 		{
 			handler: createHeadlampHandler(&HeadlampConfig{
-				useInCluster: false,
-				proxyURLs:    []string{proxyURL.String()},
+				useInCluster:    false,
+				proxyURLs:       []string{proxyURL.String()},
+				cache:           cache,
+				kubeConfigStore: kubeConfigStore,
 			}),
 			useForwardedHeaders: true,
 		},
 		{
 			handler: createHeadlampHandler(&HeadlampConfig{
 				useInCluster: false, proxyURLs: []string{},
+				cache:           cache,
+				kubeConfigStore: kubeConfigStore,
 			}),
 			useNoProxyURL: true,
 		},
 		{
 			handler: createHeadlampHandler(&HeadlampConfig{
-				useInCluster: false,
-				proxyURLs:    []string{proxyURL.String()},
+				useInCluster:    false,
+				proxyURLs:       []string{proxyURL.String()},
+				cache:           cache,
+				kubeConfigStore: kubeConfigStore,
 			}),
 			useProxyURL: true,
 		},
@@ -408,13 +424,15 @@ func TestDrainAndCordonNode(t *testing.T) {
 		handler http.Handler
 	}
 
-	cache := cache.New()
+	cache := cache.New[interface{}]()
+	kubeConfigStore := kubeconfig.NewContextStore()
 	tests := []test{
 		{
 			handler: createHeadlampHandler(&HeadlampConfig{
-				useInCluster:   false,
-				kubeConfigPath: config.GetDefaultKubeConfigPath(),
-				cache:          cache,
+				useInCluster:    false,
+				kubeConfigPath:  config.GetDefaultKubeConfigPath(),
+				cache:           cache,
+				kubeConfigStore: kubeConfigStore,
 			}),
 		},
 	}

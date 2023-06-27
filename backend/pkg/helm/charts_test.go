@@ -18,7 +18,7 @@ var settings = cli.New()
 func TestListChart(t *testing.T) {
 	k8sclient := GetClient(t, "minikube")
 
-	cache := cache.New()
+	cache := cache.New[interface{}]()
 	require.NotNil(t, cache)
 
 	helmHandler, err := helm.NewHandlerWithSettings(k8sclient, cache, "default", settings)

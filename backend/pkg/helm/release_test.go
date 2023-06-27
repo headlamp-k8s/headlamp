@@ -46,7 +46,7 @@ func GetClient(t *testing.T, clusterName string) clientcmd.ClientConfig {
 	return clientcmd.NewInteractiveClientConfig(*config, clusterName, nil, nil, nil)
 }
 
-func getStatus(t *testing.T, ch cache.Cache, action string, releaseName string) (string, error) {
+func getStatus(t *testing.T, ch cache.Cache[interface{}], action string, releaseName string) (string, error) {
 	t.Helper()
 
 	statusVal, err := ch.Get(context.Background(), "helm_"+action+"_"+releaseName)
@@ -67,7 +67,7 @@ func getStatus(t *testing.T, ch cache.Cache, action string, releaseName string) 
 }
 
 //nolint:unparam
-func pingStatusTillSuccess(t *testing.T, action, releaseName string, cache cache.Cache) {
+func pingStatusTillSuccess(t *testing.T, action, releaseName string, cache cache.Cache[interface{}]) {
 	t.Helper()
 
 	now := time.Now()
