@@ -13,6 +13,7 @@ const avoidCheck = [
   'ConfirmButton',
   'NamespacesAutocomplete',
   'ErrorBoundary',
+  'VirtualizedTable',
 ];
 
 const checkExports = [

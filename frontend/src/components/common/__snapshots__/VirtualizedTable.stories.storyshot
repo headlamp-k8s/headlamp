@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots VirtualizedTable Default 1`] = `
+<div>
+  <div
+    style="overflow: visible; height: 0px; width: 0px;"
+  >
+    <div
+      aria-colcount="0"
+      aria-rowcount="0"
+      class="ReactVirtualized__Table makeStyles-table"
+      role="grid"
+    >
+      <div
+        class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+        role="row"
+        style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
+      />
+      <div
+        aria-label="grid"
+        class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+        role="rowgroup"
+        style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+        tabindex="0"
+      />
+    </div>
+  </div>
+  <div
+    class="resize-triggers"
+  >
+    <div
+      class="expand-trigger"
+    >
+      <div
+        style="width: 1px; height: 1px;"
+      />
+    </div>
+    <div
+      class="contract-trigger"
+    />
+  </div>
+</div>
+`;

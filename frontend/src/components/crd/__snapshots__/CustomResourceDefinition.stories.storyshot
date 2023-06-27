@@ -200,70 +200,101 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 120px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="4"
+                    aria-rowcount="1"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Plural
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Singular
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Kind
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      List Kind
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Plural
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Singular
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Kind
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          List Kind
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <div
+                    class="expand-trigger"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      mycustomresources
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      mycustomresource
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      MyCustomResource
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      MyCustomResourceList
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -304,59 +335,88 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 120px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="3"
+                    aria-rowcount="1"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Name
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Served
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Storage
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Name
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Served
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Storage
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <div
+                    class="expand-trigger"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      v1
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      false
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      false
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -446,118 +506,103 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 180px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="3"
+                    aria-rowcount="2"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Name
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Namespace
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                      style="text-align: right;"
-                    >
-                      Age
-                      <button
-                        aria-label="sort up"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        <span
-                          class="MuiIconButton-label"
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
                         >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                          Name
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Namespace
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                          role="cell"
+                          style="text-align: right;"
+                        >
+                          Age
+                          <button
+                            aria-label="sort up"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span
+                              class="MuiIconButton-label"
+                            >
+                              <span />
+                            </span>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <div
+                    class="expand-trigger"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <a
-                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-link MuiTypography-colorPrimary"
-                        href="/"
-                      >
-                        mycustomresource
-                      </a>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      mynamespace
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                      style="text-align: right;"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-12-15T14:57:13.000Z"
-                      >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <a
-                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-link MuiTypography-colorPrimary"
-                        href="/"
-                      >
-                        myotherresource
-                      </a>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      mynamespace
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                      style="text-align: right;"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-12-15T14:57:13.000Z"
-                      >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -605,102 +650,129 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 120px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="1"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Type
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      From
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Message
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                    >
-                      Age
-                      <button
-                        aria-label="sort swap"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        <span
-                          class="MuiIconButton-label"
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
                         >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Normal
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      kubelet
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-03-01T00:00:00.000Z"
+                          Type
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          From
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Message
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Age
+                          <button
+                            aria-label="sort swap"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span
+                              class="MuiIconButton-label"
+                            >
+                              <span />
+                            </span>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
+                >
+                  <div
+                    class="expand-trigger"
+                  >
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -768,154 +840,174 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
       <div
         class="MuiBox-root MuiBox-root"
       >
-        <table
-          class="MuiTable-root makeStyles-table"
+        <div
+          class="MuiBox-root MuiBox-root"
+          style="display: inline-block !important; height: 120px;"
         >
-          <thead
-            class="MuiTableHead-root"
+          <div
+            style="overflow: visible; height: 0px; width: 0px;"
           >
-            <tr
-              class="MuiTableRow-root MuiTableRow-head"
+            <div
+              aria-colcount="5"
+              aria-rowcount="1"
+              class="ReactVirtualized__Table makeStyles-table"
+              role="grid"
             >
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                scope="col"
+              <div
+                class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                role="row"
+                style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
               >
-                Name
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
-              >
-                Group
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
+                <div
+                  class="ReactVirtualized__Table__headerColumn"
+                  role="columnheader"
+                  style="flex: 0 1 50px;"
                 >
-                  <span
-                    class="MuiIconButton-label"
+                  <div
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                    role="cell"
+                    style="text-align: left;"
                   >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
-              >
-                Scope
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
+                    Name
+                  </div>
+                </div>
+                <div
+                  class="ReactVirtualized__Table__headerColumn"
+                  role="columnheader"
+                  style="flex: 0 1 50px;"
                 >
-                  <span
-                    class="MuiIconButton-label"
+                  <div
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                    role="cell"
+                    style="text-align: left;"
                   >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
-              >
-                Full name
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
+                    Group
+                    <button
+                      aria-label="sort swap"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="ReactVirtualized__Table__headerColumn"
+                  role="columnheader"
+                  style="flex: 0 1 50px;"
                 >
-                  <span
-                    class="MuiIconButton-label"
+                  <div
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                    role="cell"
+                    style="text-align: left;"
                   >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                scope="col"
-                style="text-align: right;"
-              >
-                Age
-                <button
-                  aria-label="sort up"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
+                    Scope
+                    <button
+                      aria-label="sort swap"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="ReactVirtualized__Table__headerColumn"
+                  role="columnheader"
+                  style="flex: 0 1 50px;"
                 >
-                  <span
-                    class="MuiIconButton-label"
+                  <div
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                    role="cell"
+                    style="text-align: left;"
                   >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            class="MuiTableBody-root"
+                    Full name
+                    <button
+                      aria-label="sort swap"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="ReactVirtualized__Table__headerColumn"
+                  role="columnheader"
+                  style="flex: 0 1 50px;"
+                >
+                  <div
+                    class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                    role="cell"
+                    style="text-align: right;"
+                  >
+                    Age
+                    <button
+                      aria-label="sort up"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-label="grid"
+                class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                role="rowgroup"
+                style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                tabindex="0"
+              />
+            </div>
+          </div>
+          <div
+            class="resize-triggers"
           >
-            <tr
-              class="MuiTableRow-root"
+            <div
+              class="expand-trigger"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  MyCustomResource
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                my.phonyresources.io
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                Namespaced
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                mydefinition.phonyresources.io
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-                style="text-align: right;"
-              >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2021-12-15T14:57:13.000Z"
-                >
-                  3mo
-                  <span />
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              <div
+                style="width: 1px; height: 1px;"
+              />
+            </div>
+            <div
+              class="contract-trigger"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -2,256 +2,214 @@
 
 exports[`Storyshots SimpleTable Datum 1`] = `
 <div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 250px;"
   >
-    <thead
-      class="MuiTableHead-root"
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <div
+        aria-colcount="4"
+        aria-rowcount="3"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Status
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Age
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Long Field Name
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Status
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Age
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Long Field Name
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
+        />
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
     >
-      <tr
-        class="MuiTableRow-root"
+      <div
+        class="expand-trigger"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some name0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some status0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some age0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some name1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some status1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some age1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some name2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some status2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some age2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
 </div>
 `;
 
 exports[`Storyshots SimpleTable Getter 1`] = `
 <div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 250px;"
   >
-    <thead
-      class="MuiTableHead-root"
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <div
+        aria-colcount="5"
+        aria-rowcount="3"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Status
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Age
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Long Field Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Number
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Status
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Age
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Long Field Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Number
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
+        />
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
     >
-      <tr
-        class="MuiTableRow-root"
+      <div
+        class="expand-trigger"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some name0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some status0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some age0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          22
-        </td>
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some name1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some status1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some age1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          33
-        </td>
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some name2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some status2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          some age2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          44
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
 </div>
 `;
 
@@ -443,94 +401,101 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 180px;"
   >
-    <thead
-      class="MuiTableHead-root"
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <div
+        aria-colcount="4"
+        aria-rowcount="2"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          UID
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Labels
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Namespace
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              UID
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Labels
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
+        />
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
     >
-      <tr
-        class="MuiTableRow-root"
+      <div
+        class="expand-trigger"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          mydefinition.phonyresources1.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          {"mylabel1":"myvalue1"}
-        </td>
-      </tr>
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          mydefinition.phonyresources2.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          {"mykey2":"mylabel"}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
 </div>
 `;
 
@@ -722,70 +687,101 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 120px;"
   >
-    <thead
-      class="MuiTableHead-root"
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <div
+        aria-colcount="4"
+        aria-rowcount="1"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          UID
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Labels
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Namespace
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              UID
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Labels
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
+        />
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
     >
-      <tr
-        class="MuiTableRow-root"
+      <div
+        class="expand-trigger"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          mydefinition.phonyresources2.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony2
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          {"mykey2":"mylabel"}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
 </div>
 `;
 
@@ -977,70 +973,101 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 120px;"
   >
-    <thead
-      class="MuiTableHead-root"
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <div
+        aria-colcount="4"
+        aria-rowcount="1"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          UID
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Labels
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Namespace
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              UID
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Labels
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
+        />
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
     >
-      <tr
-        class="MuiTableRow-root"
+      <div
+        class="expand-trigger"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          mydefinition.phonyresources3.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace3
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony3
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          {"mykey3":"myvalue3"}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
 </div>
 `;
 
@@ -1244,92 +1271,101 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 180px;"
   >
-    <thead
-      class="MuiTableHead-root"
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <div
+        aria-colcount="4"
+        aria-rowcount="2"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          UID
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Labels
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
-    >
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          mydefinition.phonyresources0.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Namespace
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              UID
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Labels
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
         />
-      </tr>
-      <tr
-        class="MuiTableRow-root"
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
+    >
+      <div
+        class="expand-trigger"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          mydefinition.phonyresources1.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony1
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          {"mylabel1":"myvalue1"}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
 </div>
 `;
 
@@ -1521,59 +1557,88 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 120px;"
   >
-    <thead
-      class="MuiTableHead-root"
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <div
+        aria-colcount="3"
+        aria-rowcount="1"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Number
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Namespace
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Number
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
+        />
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
     >
-      <tr
-        class="MuiTableRow-root"
+      <div
+        class="expand-trigger"
       >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          mydefinition.phonyresources3.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace3
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          30
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
 </div>
 `;
 
@@ -1596,135 +1661,88 @@ exports[`Storyshots SimpleTable Reflect In URL 1`] = `
        
       ?p=2
     </p>
-    <table
-      class="MuiTable-root makeStyles-table"
+    <div
+      class="MuiBox-root MuiBox-root"
+      style="display: inline-block !important; height: 60vh;"
     >
-      <thead
-        class="MuiTableHead-root"
+      <div
+        style="overflow: visible; height: 0px; width: 0px;"
       >
-        <tr
-          class="MuiTableRow-root MuiTableRow-head"
+        <div
+          aria-colcount="3"
+          aria-rowcount="5"
+          class="ReactVirtualized__Table makeStyles-table"
+          role="grid"
         >
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
+          <div
+            class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+            role="row"
+            style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
           >
-            Name
-          </th>
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
-          >
-            Namespace
-          </th>
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
-          >
-            Number
-          </th>
-        </tr>
-      </thead>
-      <tbody
-        class="MuiTableBody-root"
+            <div
+              class="ReactVirtualized__Table__headerColumn"
+              role="columnheader"
+              style="flex: 0 1 50px;"
+            >
+              <div
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                role="cell"
+                style="text-align: left;"
+              >
+                Name
+              </div>
+            </div>
+            <div
+              class="ReactVirtualized__Table__headerColumn"
+              role="columnheader"
+              style="flex: 0 1 50px;"
+            >
+              <div
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                role="cell"
+                style="text-align: left;"
+              >
+                Namespace
+              </div>
+            </div>
+            <div
+              class="ReactVirtualized__Table__headerColumn"
+              role="columnheader"
+              style="flex: 0 1 50px;"
+            >
+              <div
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                role="cell"
+                style="text-align: left;"
+              >
+                Number
+              </div>
+            </div>
+          </div>
+          <div
+            aria-label="grid"
+            class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+            role="rowgroup"
+            style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+            tabindex="0"
+          />
+        </div>
+      </div>
+      <div
+        class="resize-triggers"
       >
-        <tr
-          class="MuiTableRow-root"
+        <div
+          class="expand-trigger"
         >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 5
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 5
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            5
-          </td>
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 6
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 6
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            6
-          </td>
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 7
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 7
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            7
-          </td>
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 8
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 8
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            8
-          </td>
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 9
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 9
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            9
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <div
+            style="width: 1px; height: 1px;"
+          />
+        </div>
+        <div
+          class="contract-trigger"
+        />
+      </div>
+    </div>
   </div>
 </div>
 `;
@@ -1748,125 +1766,441 @@ exports[`Storyshots SimpleTable Reflect In URL With Prefix 1`] = `
        
       ?p=2
     </p>
-    <table
-      class="MuiTable-root makeStyles-table"
+    <div
+      class="MuiBox-root MuiBox-root"
+      style="display: inline-block !important; height: 60vh;"
     >
-      <thead
-        class="MuiTableHead-root"
+      <div
+        style="overflow: visible; height: 0px; width: 0px;"
       >
-        <tr
-          class="MuiTableRow-root MuiTableRow-head"
+        <div
+          aria-colcount="3"
+          aria-rowcount="5"
+          class="ReactVirtualized__Table makeStyles-table"
+          role="grid"
         >
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
+          <div
+            class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+            role="row"
+            style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
           >
-            Name
-          </th>
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
-          >
-            Namespace
-          </th>
-          <th
-            class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-            scope="col"
-          >
-            Number
-          </th>
-        </tr>
-      </thead>
-      <tbody
-        class="MuiTableBody-root"
+            <div
+              class="ReactVirtualized__Table__headerColumn"
+              role="columnheader"
+              style="flex: 0 1 50px;"
+            >
+              <div
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                role="cell"
+                style="text-align: left;"
+              >
+                Name
+              </div>
+            </div>
+            <div
+              class="ReactVirtualized__Table__headerColumn"
+              role="columnheader"
+              style="flex: 0 1 50px;"
+            >
+              <div
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                role="cell"
+                style="text-align: left;"
+              >
+                Namespace
+              </div>
+            </div>
+            <div
+              class="ReactVirtualized__Table__headerColumn"
+              role="columnheader"
+              style="flex: 0 1 50px;"
+            >
+              <div
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                role="cell"
+                style="text-align: left;"
+              >
+                Number
+              </div>
+            </div>
+          </div>
+          <div
+            aria-label="grid"
+            class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+            role="rowgroup"
+            style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+            tabindex="0"
+          />
+        </div>
+      </div>
+      <div
+        class="resize-triggers"
       >
-        <tr
-          class="MuiTableRow-root"
+        <div
+          class="expand-trigger"
         >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Name 0
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          >
-            Namespace 0
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+          <div
+            style="width: 1px; height: 1px;"
           />
-        </tr>
-        <tr
-          class="MuiTableRow-root"
+        </div>
+        <div
+          class="contract-trigger"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SimpleTable Simple Table Template With Default Sorting Column 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 250px;"
+  >
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
+    >
+      <div
+        aria-colcount="5"
+        aria-rowcount="3"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
+      >
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
           >
-            Name 1
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
           >
-            Namespace 1
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          />
-        </tr>
-        <tr
-          class="MuiTableRow-root"
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Status
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Age
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Long Field Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Number
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
+        />
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
+    >
+      <div
+        class="expand-trigger"
+      >
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SimpleTable Simple Table Template With Empty Message 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
+    >
+      No data
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SimpleTable Simple Table Template With Error 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 250px;"
+  >
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
+    >
+      <div
+        aria-colcount="5"
+        aria-rowcount="3"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
+      >
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
           >
-            Name 2
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
           >
-            Namespace 2
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          />
-        </tr>
-        <tr
-          class="MuiTableRow-root"
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Status
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Age
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Long Field Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Number
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
+        />
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
+    >
+      <div
+        class="expand-trigger"
+      >
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots SimpleTable Simple Table Template With Rows Per Page Option 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 250px;"
+  >
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
+    >
+      <div
+        aria-colcount="5"
+        aria-rowcount="3"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
+      >
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
           >
-            Name 3
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
           >
-            Namespace 3
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          />
-        </tr>
-        <tr
-          class="MuiTableRow-root"
-        >
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Status
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
           >
-            Name 4
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Age
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
           >
-            Namespace 4
-          </td>
-          <td
-            class="MuiTableCell-root MuiTableCell-body"
-          />
-        </tr>
-      </tbody>
-    </table>
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Long Field Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Number
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
+        />
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
+    >
+      <div
+        class="expand-trigger"
+      >
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -2059,67 +2393,100 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
       </div>
     </div>
   </div>
-  <table
-    class="MuiTable-root makeStyles-table"
+  <div
+    class="MuiBox-root MuiBox-root"
+    style="display: inline-block !important; height: 120px;"
   >
-    <thead
-      class="MuiTableHead-root"
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
     >
-      <tr
-        class="MuiTableRow-root MuiTableRow-head"
+      <div
+        aria-colcount="4"
+        aria-rowcount="1"
+        class="ReactVirtualized__Table makeStyles-table"
+        role="grid"
       >
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
+        <div
+          class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+          role="row"
+          style="height: 48px; overflow: hidden; padding-right: 0px; width: 0px;"
         >
-          Name
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Namespace
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          UID
-        </th>
-        <th
-          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-          scope="col"
-        >
-          Labels
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      class="MuiTableBody-root"
-    >
-      <tr
-        class="MuiTableRow-root"
-      >
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          mydefinition.phonyresources0.io
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          MyNamespace0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
-        >
-          phony0
-        </td>
-        <td
-          class="MuiTableCell-root MuiTableCell-body"
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Name
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Namespace
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              UID
+            </div>
+          </div>
+          <div
+            class="ReactVirtualized__Table__headerColumn"
+            role="columnheader"
+            style="flex: 0 1 50px;"
+          >
+            <div
+              class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+              role="cell"
+              style="text-align: left;"
+            >
+              Labels
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="grid"
+          class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+          role="rowgroup"
+          style="box-sizing: border-box; direction: inherit; height: -48px; position: relative; width: 0px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+          tabindex="0"
         />
-      </tr>
-    </tbody>
-  </table>
+      </div>
+    </div>
+    <div
+      class="resize-triggers"
+    >
+      <div
+        class="expand-trigger"
+      >
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
 </div>
 `;

@@ -251,222 +251,114 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 250px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="4"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Condition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Transition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Update
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Condition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Status
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Transition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Update
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <div
+                    class="expand-trigger"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Initialized
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Ready
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title=""
-                      >
-                        PodFailed
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        ContainersReady
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title=""
-                      >
-                        PodFailed
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        PodScheduled
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -679,102 +571,129 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 120px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="1"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Type
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      From
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Message
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                    >
-                      Age
-                      <button
-                        aria-label="sort swap"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        <span
-                          class="MuiIconButton-label"
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
                         >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Normal
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      kubelet
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-03-01T00:00:00.000Z"
+                          Type
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          From
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Message
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Age
+                          <button
+                            aria-label="sort swap"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span
+                              class="MuiIconButton-label"
+                            >
+                              <span />
+                            </span>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
+                >
+                  <div
+                    class="expand-trigger"
+                  >
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1029,230 +948,114 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 250px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="4"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Condition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Transition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Update
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Condition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Status
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Transition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Update
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <div
+                    class="expand-trigger"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Initialized
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="containers with incomplete status: [init-myservice init-mydb]"
-                      >
-                        ContainersNotInitialized
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Ready
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="containers with unready status: [myapp-container]"
-                      >
-                        ContainersNotReady
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        ContainersReady
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="containers with unready status: [myapp-container]"
-                      >
-                        ContainersNotReady
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        PodScheduled
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1643,102 +1446,129 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 120px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="1"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Type
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      From
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Message
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                    >
-                      Age
-                      <button
-                        aria-label="sort swap"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        <span
-                          class="MuiIconButton-label"
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
                         >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Normal
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      kubelet
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-03-01T00:00:00.000Z"
+                          Type
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          From
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Message
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Age
+                          <button
+                            aria-label="sort swap"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span
+                              class="MuiIconButton-label"
+                            >
+                              <span />
+                            </span>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
+                >
+                  <div
+                    class="expand-trigger"
+                  >
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2000,224 +1830,114 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 250px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="4"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Condition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Transition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Update
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Condition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Status
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Transition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Update
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <div
+                    class="expand-trigger"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Initialized
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Ready
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="containers with unready status: [liveness]"
-                      >
-                        ContainersNotReady
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        ContainersReady
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="containers with unready status: [liveness]"
-                      >
-                        ContainersNotReady
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        PodScheduled
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2520,102 +2240,129 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 120px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="1"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Type
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      From
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Message
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                    >
-                      Age
-                      <button
-                        aria-label="sort swap"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        <span
-                          class="MuiIconButton-label"
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
                         >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Normal
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      kubelet
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-03-01T00:00:00.000Z"
+                          Type
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          From
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Message
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Age
+                          <button
+                            aria-label="sort swap"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span
+                              class="MuiIconButton-label"
+                            >
+                              <span />
+                            </span>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
+                >
+                  <div
+                    class="expand-trigger"
+                  >
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2870,224 +2617,114 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 250px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="4"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Condition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Transition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Update
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Condition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Status
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Transition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Update
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <div
+                    class="expand-trigger"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Initialized
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Ready
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="containers with unready status: [imagepullbackoff]"
-                      >
-                        ContainersNotReady
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        ContainersReady
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="containers with unready status: [imagepullbackoff]"
-                      >
-                        ContainersNotReady
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        PodScheduled
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -3278,102 +2915,129 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 120px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="1"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Type
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      From
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Message
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                    >
-                      Age
-                      <button
-                        aria-label="sort swap"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        <span
-                          class="MuiIconButton-label"
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
                         >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Normal
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      kubelet
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-03-01T00:00:00.000Z"
+                          Type
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          From
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Message
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Age
+                          <button
+                            aria-label="sort swap"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span
+                              class="MuiIconButton-label"
+                            >
+                              <span />
+                            </span>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
+                >
+                  <div
+                    class="expand-trigger"
+                  >
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -3628,212 +3292,114 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 250px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="4"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Condition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Transition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Update
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Condition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Status
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Transition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Update
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <div
+                    class="expand-trigger"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Initialized
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Ready
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        ContainersReady
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        PodScheduled
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -4067,102 +3633,129 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 120px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="1"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Type
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      From
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Message
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                    >
-                      Age
-                      <button
-                        aria-label="sort swap"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        <span
-                          class="MuiIconButton-label"
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
                         >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Normal
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      kubelet
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-03-01T00:00:00.000Z"
+                          Type
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          From
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Message
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Age
+                          <button
+                            aria-label="sort swap"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span
+                              class="MuiIconButton-label"
+                            >
+                              <span />
+                            </span>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
+                >
+                  <div
+                    class="expand-trigger"
+                  >
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -4417,227 +4010,114 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 250px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="4"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Condition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Transition
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Last Update
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Condition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Status
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Transition
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Last Update
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
                 >
-                  <tr
-                    class="MuiTableRow-root"
+                  <div
+                    class="expand-trigger"
                   >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Initialized
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title=""
-                      >
-                        PodCompleted
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        Ready
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title=""
-                      >
-                        PodCompleted
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        ContainersReady
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      False
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title=""
-                      >
-                        PodCompleted
-                      </p>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                        style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                      >
-                        PodScheduled
-                      </span>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      True
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2022-01-01T00:05:00.000Z"
-                      >
-                        3 months
-                        <span />
-                      </p>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      -
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -4850,102 +4330,129 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             <div
               class="MuiBox-root MuiBox-root"
             >
-              <table
-                class="MuiTable-root makeStyles-table"
+              <div
+                class="MuiBox-root MuiBox-root"
+                style="display: inline-block !important; height: 120px;"
               >
-                <thead
-                  class="MuiTableHead-root"
+                <div
+                  style="overflow: visible; height: 0px; width: 0px;"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head"
+                  <div
+                    aria-colcount="5"
+                    aria-rowcount="1"
+                    class="ReactVirtualized__Table makeStyles-table"
+                    role="grid"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
+                    <div
+                      class="ReactVirtualized__Table__headerRow makeStyles-flexContainer"
+                      role="row"
+                      style="height: 48px; overflow: hidden; padding-right: 0px; width: -32px;"
                     >
-                      Type
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Reason
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      From
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                      scope="col"
-                    >
-                      Message
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
-                      scope="col"
-                    >
-                      Age
-                      <button
-                        aria-label="sort swap"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                        tabindex="0"
-                        type="button"
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        <span
-                          class="MuiIconButton-label"
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
                         >
-                          <span />
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Normal
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      kubelet
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      Created
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body"
-                    >
-                      <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                        title="2021-03-01T00:00:00.000Z"
+                          Type
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
                       >
-                        3mo
-                        <span />
-                      </p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Reason
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          From
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Message
+                        </div>
+                      </div>
+                      <div
+                        class="ReactVirtualized__Table__headerColumn"
+                        role="columnheader"
+                        style="flex: 0 1 50px;"
+                      >
+                        <div
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-tableCell makeStyles-sortCell"
+                          role="cell"
+                          style="text-align: left;"
+                        >
+                          Age
+                          <button
+                            aria-label="sort swap"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span
+                              class="MuiIconButton-label"
+                            >
+                              <span />
+                            </span>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      aria-label="grid"
+                      class="ReactVirtualized__Grid ReactVirtualized__Table__Grid"
+                      role="rowgroup"
+                      style="box-sizing: border-box; direction: inherit; height: -80px; position: relative; width: -32px; will-change: transform; overflow-x: hidden; overflow-y: auto;"
+                      tabindex="0"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="resize-triggers"
+                >
+                  <div
+                    class="expand-trigger"
+                  >
+                    <div
+                      style="width: 1px; height: 1px;"
+                    />
+                  </div>
+                  <div
+                    class="contract-trigger"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
