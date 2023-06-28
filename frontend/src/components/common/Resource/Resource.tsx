@@ -5,7 +5,6 @@ import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps, GridSize } from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Input, { InputProps } from '@material-ui/core/Input';
-import Paper from '@material-ui/core/Paper';
 import { TextFieldProps } from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/styles';
@@ -29,7 +28,6 @@ import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
 import { SectionBox } from '../../common/SectionBox';
-import SectionHeader from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable } from '../../common/SimpleTable';
 import DetailsViewSection from '../../DetailsViewSection';
 import { PodListProps, PodListRenderer } from '../../pod/List';
@@ -480,6 +478,10 @@ export function ContainerInfo(props: ContainerInfoProps) {
 
     return [
       {
+        name: container.name,
+        withHighlightStyle: true,
+      },
+      {
         name: t('Status'),
         value: getContainerStatusLabel(),
         hide: !status,
@@ -576,12 +578,9 @@ export function ContainerInfo(props: ContainerInfoProps) {
   }
 
   return (
-    <Paper variant="outlined">
-      <Box py={1} px={2}>
-        <SectionHeader noPadding title={container.name} headerStyle="normal" />
-        <NameValueTable rows={containerRows()} />
-      </Box>
-    </Paper>
+    <Box pb={1}>
+      <NameValueTable rows={containerRows()} />
+    </Box>
   );
 }
 
@@ -672,38 +671,32 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
   return (
     <>
-      <SectionBox title={title} />
-      <>
+      <SectionBox title={title}>
         {numContainers === 0 ? (
-          <SectionBox>
-            <Empty>{t('resource|No data to be shown.')}</Empty>
-          </SectionBox>
+          <Empty>{t('resource|No data to be shown.')}</Empty>
         ) : (
-          containers.map((container: any, i: number) => (
-            <SectionBox key={i} outterBoxProps={{ pt: 1 }}>
-              <ContainerInfo
-                resource={resource}
-                container={container}
-                status={statuses[container.name]}
-              />
-            </SectionBox>
+          containers.map((container: any) => (
+            <ContainerInfo
+              key={`container_${container.name}`}
+              resource={resource}
+              container={container}
+              status={statuses[container.name]}
+            />
           ))
         )}
-      </>
+      </SectionBox>
 
       {initContainers.length > 0 && (
-        <>
-          <SectionBox title={t('resource|Init Containers')} />
+        <SectionBox title={t('resource|Init Containers')}>
           {initContainers.map((initContainer: KubeContainer, i: number) => (
-            <SectionBox key={`init_container_${i}`} outterBoxProps={{ pt: 1 }}>
-              <ContainerInfo
-                resource={resource}
-                container={initContainer}
-                status={statuses[initContainer.name]}
-              />
-            </SectionBox>
+            <ContainerInfo
+              key={`init_container_${i}`}
+              resource={resource}
+              container={initContainer}
+              status={statuses[initContainer.name]}
+            />
           ))}
-        </>
+        </SectionBox>
       )}
     </>
   );
