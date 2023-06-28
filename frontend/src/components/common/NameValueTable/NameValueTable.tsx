@@ -11,10 +11,9 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '100%',
     minWidth: '10rem',
     verticalAlign: 'top',
-    paddingLeft: '0',
-    paddingRight: '0',
     color: theme.palette.text.secondary,
     borderBottom: `1px solid ${theme.palette.divider}`,
+    padding: '7px 12px',
     [theme.breakpoints.down('sm')]: {
       color: theme.palette.text.primary,
       fontSize: '1.5rem',
@@ -31,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     verticalAlign: 'top',
     fontSize: '1rem',
     overflowWrap: 'anywhere',
-    paddingBottom: '3.5rem',
+    padding: '7px 12px',
     borderBottom: `1px solid ${theme.palette.divider}`,
     [theme.breakpoints.down('sm')]: {
       color: theme.palette.text.secondary,
@@ -50,13 +49,8 @@ const useStyles = makeStyles(theme => ({
     borderBottom: 'none',
   },
   table: {
-    '& .MuiTableBody-root': {
-      '& .MuiTableRow-root:last-child': {
-        '& .MuiTableCell-root': {
-          borderBottom: 'none',
-        },
-      },
-    },
+    border: '1px solid #e7e7e7',
+    borderRadius: theme.shape.borderRadius,
   },
 }));
 
@@ -122,7 +116,7 @@ export default function NameValueTable(props: NameValueTableProps) {
     <Grid
       container
       component="dl" // mount a Definition List
-      spacing={3}
+      className={classes.table}
     >
       {visibleRows.map(({ name, value, hide = false, valueCellProps = {} }, i) => {
         let shouldHide = false;

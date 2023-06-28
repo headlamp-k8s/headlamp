@@ -84,7 +84,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
               <dt
                 class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"

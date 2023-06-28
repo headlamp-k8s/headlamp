@@ -93,7 +93,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
               <dt
                 class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -526,7 +526,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   </div>
                 </div>
                 <dl
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+                  class="MuiGrid-root makeStyles-table MuiGrid-container"
                 >
                   <dt
                     class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -870,7 +870,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
               <dt
                 class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -1304,7 +1304,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </div>
                 </div>
                 <dl
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+                  class="MuiGrid-root makeStyles-table MuiGrid-container"
                 >
                   <dt
                     class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -1448,7 +1448,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </div>
                 </div>
                 <dl
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+                  class="MuiGrid-root makeStyles-table MuiGrid-container"
                 >
                   <dt
                     class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -1530,7 +1530,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   </div>
                 </div>
                 <dl
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+                  class="MuiGrid-root makeStyles-table MuiGrid-container"
                 >
                   <dt
                     class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -1822,7 +1822,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
               <dt
                 class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -2257,7 +2257,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   </div>
                 </div>
                 <dl
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+                  class="MuiGrid-root makeStyles-table MuiGrid-container"
                 >
                   <dt
                     class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -2691,7 +2691,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
               <dt
                 class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -3119,7 +3119,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   </div>
                 </div>
                 <dl
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+                  class="MuiGrid-root makeStyles-table MuiGrid-container"
                 >
                   <dt
                     class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -3441,7 +3441,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
               <dt
                 class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -3857,7 +3857,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   </div>
                 </div>
                 <dl
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+                  class="MuiGrid-root makeStyles-table MuiGrid-container"
                 >
                   <dt
                     class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -4222,7 +4222,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <dl
-              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
               <dt
                 class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -4653,7 +4653,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   </div>
                 </div>
                 <dl
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+                  class="MuiGrid-root makeStyles-table MuiGrid-container"
                 >
                   <dt
                     class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
