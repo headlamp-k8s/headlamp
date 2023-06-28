@@ -52,6 +52,11 @@ const useStyles = makeStyles(theme => ({
     border: '1px solid #e7e7e7',
     borderRadius: theme.shape.borderRadius,
   },
+  highlightRow: {
+    color: theme.palette.tables.head.color,
+    fontWeight: 'bold',
+    background: theme.palette.tables.head.background,
+  },
 }));
 
 export interface NameValueTableRow {
@@ -64,6 +69,8 @@ export interface NameValueTableRow {
   hide?: boolean | ((value: NameValueTableRow['value']) => boolean);
   /** Extra properties to pass to the value cell */
   valueCellProps?: GridProps;
+  /** Whether to highlight the row (used for titles, separators, etc.). */
+  withHighlightStyle?: boolean;
 }
 
 export interface NameValueTableProps {
@@ -118,54 +125,65 @@ export default function NameValueTable(props: NameValueTableProps) {
       component="dl" // mount a Definition List
       className={classes.table}
     >
-      {visibleRows.map(({ name, value, hide = false, valueCellProps = {} }, i) => {
-        let shouldHide = false;
-        if (typeof hide === 'function') {
-          shouldHide = hide(value);
-        } else {
-          shouldHide = hide;
-        }
+      {visibleRows.map(
+        ({ name, value, hide = false, withHighlightStyle = false, valueCellProps = {} }, i) => {
+          let shouldHide = false;
+          if (typeof hide === 'function') {
+            shouldHide = hide(value);
+          } else {
+            shouldHide = hide;
+          }
 
-        if (shouldHide) {
-          return null;
-        }
+          if (shouldHide) {
+            return null;
+          }
 
-        const last = visibleRows.length === i + 1;
-        const { className, ...otherValueCellProps } = globalValueCellProps || {};
+          const last = visibleRows.length === i + 1;
+          const { className, ...otherValueCellProps } = globalValueCellProps || {};
 
-        return (
-          <>
-            <Grid
-              item
-              key={i}
-              xs={12}
-              sm={4}
-              spacing={2}
-              component="dt"
-              className={clsx(last ? classes.metadataLast : '', classes.metadataNameCell)}
-            >
-              {name}
-            </Grid>
-            <Grid
-              item
-              key={i + 10000}
-              xs={12}
-              sm={8}
-              spacing={2}
-              component="dd"
-              className={clsx(
-                last ? classes.metadataLast : '',
-                classes.metadataCell,
-                className ? className : ''
+          const hideValueGridItem = withHighlightStyle && !value;
+
+          return (
+            <>
+              <Grid
+                item
+                key={i}
+                xs={12}
+                spacing={1}
+                sm={hideValueGridItem ? 12 : 4}
+                component="dt"
+                className={clsx(
+                  last ? classes.metadataLast : '',
+                  classes.metadataNameCell,
+                  withHighlightStyle ? classes.highlightRow : ''
+                )}
+              >
+                {name}
+              </Grid>
+              {!hideValueGridItem && (
+                <Grid
+                  item
+                  key={i + 10000}
+                  xs={12}
+                  sm={8}
+                  spacing={1}
+                  component="dd"
+                  className={clsx(
+                    last ? classes.metadataLast : '',
+                    classes.metadataCell,
+                    className ? className : '',
+                    withHighlightStyle ? classes.highlightRow : ''
+                  )}
+                  {...otherValueCellProps}
+                  {...valueCellProps}
+                >
+                  <Value value={value} />
+                </Grid>
               )}
-              {...otherValueCellProps}
-              {...valueCellProps}
-            >
-              <Value value={value} />
-            </Grid>
-          </>
-        );
-      })}
+            </>
+          );
+        }
+      )}
     </Grid>
   );
 }
