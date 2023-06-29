@@ -11,9 +11,8 @@ import ReplicaSet from '../../lib/k8s/replicaSet';
 import StatefulSet from '../../lib/k8s/statefulSet';
 import { getReadyReplicas, getTotalReplicas, useFilterFunc } from '../../lib/util';
 import { PageGrid, ResourceLink } from '../common/Resource';
-import ResourceTable from '../common/Resource/ResourceTable';
+import ResourceListView from '../common/Resource/ResourceListView';
 import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
 import { WorkloadCircleChart } from './Charts';
 
 interface WorkloadDict {
@@ -81,37 +80,36 @@ export default function Overview() {
           ))}
         </Grid>
       </SectionBox>
-      <SectionBox title={<SectionFilterHeader title={t('Workloads')} />}>
-        <ResourceTable
-          filterFunction={filterFunc}
-          columns={[
-            'kind',
-            {
-              label: t('frequent|Name'),
-              getter: item => (
-                <ResourceLink resource={item} state={{ backLink: { ...location } }} />
-              ),
-              sort: (w1: Workload, w2: Workload) => {
-                if (w1.metadata.name < w2.metadata.name) {
-                  return -1;
-                } else if (w1.metadata.name > w2.metadata.name) {
-                  return 1;
-                }
-                return 0;
-              },
+      <ResourceListView
+        title={t('Workloads')}
+        filterFunction={filterFunc}
+        columns={[
+          'kind',
+          {
+            id: 'name',
+            label: t('frequent|Name'),
+            getter: item => <ResourceLink resource={item} state={{ backLink: { ...location } }} />,
+            sort: (w1: Workload, w2: Workload) => {
+              if (w1.metadata.name < w2.metadata.name) {
+                return -1;
+              } else if (w1.metadata.name > w2.metadata.name) {
+                return 1;
+              }
+              return 0;
             },
-            'namespace',
-            {
-              label: t('Pods'),
-              getter: item => item && getPods(item),
-              sort: sortByReplicas,
-            },
-            'age',
-          ]}
-          data={getJointItems()}
-          id="headlamp-workloads"
-        />
-      </SectionBox>
+          },
+          'namespace',
+          {
+            id: 'pods',
+            label: t('Pods'),
+            getter: item => item && getPods(item),
+            sort: sortByReplicas,
+          },
+          'age',
+        ]}
+        data={getJointItems()}
+        id="headlamp-workloads"
+      />
     </PageGrid>
   );
 }

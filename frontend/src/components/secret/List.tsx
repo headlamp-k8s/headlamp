@@ -1,30 +1,28 @@
 import { useTranslation } from 'react-i18next';
 import Secret from '../../lib/k8s/secret';
 import { useFilterFunc } from '../../lib/util';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function SecretList() {
   const filterFunc = useFilterFunc(['.jsonData.type']);
   const { t } = useTranslation('glossary');
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Secrets')} />}>
-      <ResourceTable
-        resourceClass={Secret}
-        filterFunction={filterFunc}
-        columns={[
-          'name',
-          'namespace',
-          {
-            label: t('Type'),
-            getter: secret => secret.type,
-            sort: true,
-          },
-          'age',
-        ]}
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('Secrets')}
+      resourceClass={Secret}
+      filterFunction={filterFunc}
+      columns={[
+        'name',
+        'namespace',
+        {
+          id: 'type',
+          label: t('Type'),
+          getter: secret => secret.type,
+          sort: true,
+        },
+        'age',
+      ]}
+    />
   );
 }

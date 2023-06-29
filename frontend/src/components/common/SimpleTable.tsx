@@ -54,17 +54,18 @@ type getterFunction = (arg: any) => any;
 
 interface SimpleTableColumn {
   label: string;
+  header?: React.ReactNode;
   cellProps?: {
     [propName: string]: any;
   };
   sort?: sortFunction | getterFunction | boolean;
 }
 
-interface SimpleTableDatumColumn extends SimpleTableColumn {
+export interface SimpleTableDatumColumn extends SimpleTableColumn {
   datum: string;
 }
 
-interface SimpleTableGetterColumn extends SimpleTableColumn {
+export interface SimpleTableGetterColumn extends SimpleTableColumn {
   getter: (...args: any[]) => void;
 }
 
@@ -345,7 +346,7 @@ export default function SimpleTable(props: SimpleTableProps) {
         {!noTableHeader && (
           <TableHead>
             <TableRow>
-              {columns.map(({ label, cellProps = {}, sort }, i) => {
+              {columns.map(({ label, header, cellProps = {}, sort }, i) => {
                 const { className = '', ...otherProps } = cellProps;
                 return (
                   <TableCell
@@ -353,7 +354,7 @@ export default function SimpleTable(props: SimpleTableProps) {
                     className={clsx(classes.headerCell, className, sort ? classes.sortCell : '')}
                     {...otherProps}
                   >
-                    {label}
+                    {header || label}
                     {sort && (
                       <ColumnSortButtons
                         isIncreasingOrder={Boolean(isIncreasingOrder)}

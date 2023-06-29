@@ -319,6 +319,31 @@ function loadClusterSettings(clusterName: string): ClusterSettings {
   return settings;
 }
 
+function storeTableSettings(tableId: string, columns: { id?: string; show: boolean }[]) {
+  if (!tableId) {
+    console.debug('storeTableSettings: tableId is empty!', new Error().stack);
+    return;
+  }
+
+  const columnsWithIds = columns.map((c, i) => ({ id: i.toString(), ...c }));
+  // Delete the entry if there are no settings to store.
+  if (columnsWithIds.length === 0) {
+    localStorage.removeItem(`table_settings.${tableId}`);
+    return;
+  }
+  localStorage.setItem(`table_settings.${tableId}`, JSON.stringify(columnsWithIds));
+}
+
+function loadTableSettings(tableId: string): { id: string; show: boolean }[] {
+  if (!tableId) {
+    console.debug('loadTableSettings: tableId is empty!', new Error().stack);
+    return [];
+  }
+
+  const settings = JSON.parse(localStorage.getItem(`table_settings.${tableId}`) || '[]');
+  return settings;
+}
+
 /**
  * The backend token to use when making API calls from Headlamp when running as an app.
  * The app opens the index.html?backendToken=... and passes the token to the frontend
@@ -361,6 +386,8 @@ const exportFunctions = {
   storeClusterSettings,
   loadClusterSettings,
   getHeadlampAPIHeaders,
+  storeTableSettings,
+  loadTableSettings,
 };
 
 export default exportFunctions;

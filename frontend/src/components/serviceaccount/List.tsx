@@ -1,15 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import ServiceAccount from '../../lib/k8s/serviceAccount';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function ServiceAccountList() {
   const { t } = useTranslation('glossary');
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Service Accounts')} />}>
-      <ResourceTable resourceClass={ServiceAccount} columns={['name', 'namespace', 'age']} />
-    </SectionBox>
+    <ResourceListView
+      title={t('Service Accounts')}
+      resourceClass={ServiceAccount}
+      columns={['name', 'namespace', 'age']}
+    />
   );
 }

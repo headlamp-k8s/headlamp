@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
+exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
 <div>
   <div
     class="MuiBox-root MuiBox-root"
@@ -17,7 +17,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
           <h1
             class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
           >
-            Resource Quotas
+            My Pod List
           </h1>
           <div
             class="MuiBox-root MuiBox-root"
@@ -142,25 +142,13 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                scope="col"
-              >
-                Request
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
-                scope="col"
-              >
-                Limit
-              </th>
-              <th
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
                 scope="col"
                 style="text-align: right;"
               >
                 Age
                 <button
-                  aria-label="sort up"
+                  aria-label="sort swap"
                   class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
                   tabindex="0"
                   type="button"
@@ -190,7 +178,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  test-cpu-quota
+                  imagepullbackoff
                 </a>
               </td>
               <td
@@ -200,42 +188,8 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  test
+                  default
                 </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root makeStyles-root"
-                >
-                  <div
-                    class="MuiChip-root MuiChip-outlined"
-                  >
-                    <span
-                      class="MuiChip-label"
-                    >
-                      requests.cpu: 0.5 cores/0.2 cores
-                    </span>
-                  </div>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root makeStyles-root"
-                >
-                  <div
-                    class="MuiChip-root MuiChip-outlined"
-                  >
-                    <span
-                      class="MuiChip-label"
-                    >
-                      limits.cpu: 0 core/0.3 cores
-                    </span>
-                  </div>
-                </div>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -260,7 +214,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  test-cpu-quota
+                  imagepullbackoff
                 </a>
               </td>
               <td
@@ -270,42 +224,8 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  test
+                  default
                 </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root makeStyles-root"
-                >
-                  <div
-                    class="MuiChip-root MuiChip-outlined"
-                  >
-                    <span
-                      class="MuiChip-label"
-                    >
-                      requests.cpu: 0.5 cores/0.2 cores
-                    </span>
-                  </div>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root makeStyles-root"
-                >
-                  <div
-                    class="MuiChip-root MuiChip-outlined"
-                  >
-                    <span
-                      class="MuiChip-label"
-                    >
-                      limits.cpu: 0 core/0.3 cores
-                    </span>
-                  </div>
-                </div>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -330,7 +250,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  test-cpu-quota
+                  imagepullbackoff
                 </a>
               </td>
               <td
@@ -340,42 +260,8 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  test
+                  default
                 </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root makeStyles-root"
-                >
-                  <div
-                    class="MuiChip-root MuiChip-outlined"
-                  >
-                    <span
-                      class="MuiChip-label"
-                    >
-                      requests.cpu: 0.5 cores/0.2 cores
-                    </span>
-                  </div>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root makeStyles-root"
-                >
-                  <div
-                    class="MuiChip-root MuiChip-outlined"
-                  >
-                    <span
-                      class="MuiChip-label"
-                    >
-                      limits.cpu: 0 core/0.3 cores
-                    </span>
-                  </div>
-                </div>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -400,7 +286,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  test-cpu-quota
+                  imagepullbackoff
                 </a>
               </td>
               <td
@@ -410,42 +296,8 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  test
+                  default
                 </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root makeStyles-root"
-                >
-                  <div
-                    class="MuiChip-root MuiChip-outlined"
-                  >
-                    <span
-                      class="MuiChip-label"
-                    >
-                      requests.cpu: 0.5 cores/0.2 cores
-                    </span>
-                  </div>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root makeStyles-root"
-                >
-                  <div
-                    class="MuiChip-root MuiChip-outlined"
-                  >
-                    <span
-                      class="MuiChip-label"
-                    >
-                      limits.cpu: 0 core/0.3 cores
-                    </span>
-                  </div>
-                </div>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"
@@ -470,7 +322,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  test-cpu-quota
+                  imagepullbackoff
                 </a>
               </td>
               <td
@@ -480,42 +332,8 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  test
+                  default
                 </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root makeStyles-root"
-                >
-                  <div
-                    class="MuiChip-root MuiChip-outlined"
-                  >
-                    <span
-                      class="MuiChip-label"
-                    >
-                      requests.cpu: 0.5 cores/0.2 cores
-                    </span>
-                  </div>
-                </div>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root makeStyles-root"
-                >
-                  <div
-                    class="MuiChip-root MuiChip-outlined"
-                  >
-                    <span
-                      class="MuiChip-label"
-                    >
-                      limits.cpu: 0 core/0.3 cores
-                    </span>
-                  </div>
-                </div>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body"

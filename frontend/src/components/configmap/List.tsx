@@ -1,15 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import ConfigMap from '../../lib/k8s/configMap';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function ConfigMapList() {
   const { t } = useTranslation('glossary');
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Config Maps')} />}>
-      <ResourceTable resourceClass={ConfigMap} columns={['name', 'namespace', 'age']} />
-    </SectionBox>
+    <ResourceListView
+      title={t('Config Maps')}
+      resourceClass={ConfigMap}
+      columns={['name', 'namespace', 'age']}
+    />
   );
 }

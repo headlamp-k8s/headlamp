@@ -4,9 +4,7 @@ import ClusterRoleBinding from '../../lib/k8s/clusterRoleBinding';
 import RoleBinding from '../../lib/k8s/roleBinding';
 import { useErrorState, useFilterFunc } from '../../lib/util';
 import { Link } from '../common';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 interface RoleBindingDict {
   [kind: string]: RoleBinding[] | null;
@@ -61,30 +59,30 @@ export default function RoleBindingList() {
   ClusterRoleBinding.useApiList(setupClusterRoleBindings, onClusterRoleBindingError);
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Role Bindings')} />}>
-      <ResourceTable
-        filterFunction={filterFunc}
-        errorMessage={getErrorMessage()}
-        columns={[
-          'type',
-          'name',
-          {
-            label: t('glossary|Namespace'),
-            getter: item =>
-              item.getNamespace() ? (
-                <Link routeName="namespace" params={{ name: item.getNamespace() }}>
-                  {item.getNamespace()}
-                </Link>
-              ) : (
-                t('frequent|All namespaces')
-              ),
-            sort: true,
-          },
-          'age',
-        ]}
-        data={getJointItems()}
-        id="headlamp-rolebindings"
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('glossary|Role Bindings')}
+      filterFunction={filterFunc}
+      errorMessage={getErrorMessage()}
+      columns={[
+        'type',
+        'name',
+        {
+          id: 'namespace',
+          label: t('glossary|Namespace'),
+          getter: item =>
+            item.getNamespace() ? (
+              <Link routeName="namespace" params={{ name: item.getNamespace() }}>
+                {item.getNamespace()}
+              </Link>
+            ) : (
+              t('frequent|All namespaces')
+            ),
+          sort: true,
+        },
+        'age',
+      ]}
+      data={getJointItems()}
+      id="headlamp-rolebindings"
+    />
   );
 }

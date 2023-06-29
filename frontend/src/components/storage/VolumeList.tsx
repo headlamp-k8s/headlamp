@@ -1,30 +1,32 @@
 import { useTranslation } from 'react-i18next';
 import PersistentVolume from '../../lib/k8s/persistentVolume';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function VolumeList() {
   const { t } = useTranslation('glossary');
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('Persistent Volumes')} noNamespaceFilter />}>
-      <ResourceTable
-        resourceClass={PersistentVolume}
-        columns={[
-          'name',
-          {
-            label: t('Status'),
-            getter: volume => volume.status.phase,
-            sort: true,
-          },
-          {
-            label: t('Capacity'),
-            getter: volume => volume.spec.capacity.storage,
-          },
-          'age',
-        ]}
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('Persistent Volumes')}
+      headerProps={{
+        noNamespaceFilter: true,
+      }}
+      resourceClass={PersistentVolume}
+      columns={[
+        'name',
+        {
+          id: 'status',
+          label: t('Status'),
+          getter: volume => volume.status.phase,
+          sort: true,
+        },
+        {
+          id: 'capacity',
+          label: t('Capacity'),
+          getter: volume => volume.spec.capacity.storage,
+        },
+        'age',
+      ]}
+    />
   );
 }

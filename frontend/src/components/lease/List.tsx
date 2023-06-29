@@ -1,24 +1,23 @@
 import { useTranslation } from 'react-i18next';
 import { Lease } from '../../lib/k8s/lease';
-import { SectionBox, SectionFilterHeader } from '../common';
-import ResourceTable from '../common/Resource/ResourceTable';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export function LeaseList() {
   const { t } = useTranslation(['glossary', 'resource', 'frequent']);
   return (
-    <SectionBox title={<SectionFilterHeader title={t('glossary|Lease')} />}>
-      <ResourceTable
-        resourceClass={Lease}
-        columns={[
-          'name',
-          'namespace',
-          {
-            label: t('frequent|Holder'),
-            getter: item => item?.spec.holderIdentity,
-          },
-          'age',
-        ]}
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('glossary|Lease')}
+      resourceClass={Lease}
+      columns={[
+        'name',
+        'namespace',
+        {
+          id: 'holder',
+          label: t('frequent|Holder'),
+          getter: item => item?.spec.holderIdentity,
+        },
+        'age',
+      ]}
+    />
   );
 }

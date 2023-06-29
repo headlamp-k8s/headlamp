@@ -1,9 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import Endpoints from '../../lib/k8s/endpoints';
 import { useFilterFunc } from '../../lib/util';
-import ResourceTable from '../common/Resource/ResourceTable';
-import { SectionBox } from '../common/SectionBox';
-import SectionFilterHeader from '../common/SectionFilterHeader';
+import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function EndpointList() {
   const { t } = useTranslation(['glossary', 'frequent']);
@@ -14,21 +12,21 @@ export default function EndpointList() {
   ]);
 
   return (
-    <SectionBox title={<SectionFilterHeader title={t('glossary|Endpoints')} />}>
-      <ResourceTable
-        resourceClass={Endpoints}
-        filterFunction={filterFunc}
-        columns={[
-          'name',
-          'namespace',
-          {
-            label: t('frequent|Addresses'),
-            getter: endpoint => endpoint.getAddressesText(),
-            cellProps: { style: { width: '40%', maxWidth: '40%' } },
-          },
-          'age',
-        ]}
-      />
-    </SectionBox>
+    <ResourceListView
+      title={t('glossary|Endpoints')}
+      resourceClass={Endpoints}
+      filterFunction={filterFunc}
+      columns={[
+        'name',
+        'namespace',
+        {
+          id: 'addresses',
+          label: t('frequent|Addresses'),
+          getter: endpoint => endpoint.getAddressesText(),
+          cellProps: { style: { width: '40%', maxWidth: '40%' } },
+        },
+        'age',
+      ]}
+    />
   );
 }
