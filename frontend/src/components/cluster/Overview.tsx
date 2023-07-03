@@ -74,7 +74,7 @@ function EventsSection() {
   const dispatch = useDispatch();
   const filterFunc = useFilterFunc(['.jsonData.involvedObject.kind']);
   const [isWarningEventSwitchChecked, setIsWarningEventSwitchChecked] = React.useState(
-    Boolean(localStorage.getItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY))
+    Boolean(JSON.parse(localStorage.getItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY) || 'false'))
   );
 
   const warningActionFilterFunc = (event: KubeEvent) => {
