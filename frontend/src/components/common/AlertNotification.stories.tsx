@@ -25,7 +25,7 @@ const Template: Story<PureAlertNotificationProps> = args => <PureAlertNotificati
 
 export const Error = Template.bind({});
 Error.args = {
-  testAuth: () => {
+  checkerFunction: () => {
     return new Promise(function (resolve, reject) {
       reject('Offline');
     });
@@ -36,7 +36,7 @@ Error.args = {
 
 export const NoError = Template.bind({});
 NoError.args = {
-  testAuth: () => {
+  checkerFunction: () => {
     return new Promise(function (resolve) {
       resolve('fine');
     });

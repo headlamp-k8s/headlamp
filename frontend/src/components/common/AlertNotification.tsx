@@ -2,23 +2,22 @@ import { Box, useTheme } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
-import { testAuth } from '../../lib/k8s/apiProxy';
+import { testClusterHealth } from '../../lib/k8s/apiProxy';
 import { getDefaultRoutes, getRoutePath, Route } from '../../lib/router';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
-const NOT_FOUND_ERROR_MESSAGES = ['Error: Api request error: Bad Gateway', 'Offline'];
 // in ms
 const NETWORK_STATUS_CHECK_TIME = 5000;
 
 export interface PureAlertNotificationProps {
   routes: { [path: string]: any };
   moreRoutes: { [routeName: string]: Route };
-  testAuth(): Promise<any>;
+  checkerFunction(): Promise<any>;
 }
 
 export function PureAlertNotification({
   routes,
-  testAuth,
+  checkerFunction,
   moreRoutes,
 }: PureAlertNotificationProps) {
   const [networkStatusCheckTimeFactor, setNetworkStatusCheckTimeFactor] = React.useState(0);
@@ -35,7 +34,7 @@ export function PureAlertNotification({
         return;
       }
       setError(null);
-      testAuth()
+      checkerFunction()
         .then(() => {
           setError(false);
         })
@@ -99,9 +98,6 @@ export function PureAlertNotification({
     return null;
   }
 
-  if (NOT_FOUND_ERROR_MESSAGES.filter(err => err === error).length === 0) {
-    return null;
-  }
   return (
     <Box
       bgcolor="error.main"
@@ -138,6 +134,10 @@ export default function AlertNotification() {
   const routes = useTypedSelector(state => state.ui.routes);
 
   return (
-    <PureAlertNotification routes={routes} testAuth={testAuth} moreRoutes={getDefaultRoutes()} />
+    <PureAlertNotification
+      routes={routes}
+      checkerFunction={testClusterHealth}
+      moreRoutes={getDefaultRoutes()}
+    />
   );
 }
