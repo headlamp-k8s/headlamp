@@ -76,7 +76,7 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
-function useSidebarInfo() {
+export function useSidebarInfo() {
   const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
   const isSidebarOpenUserSelected = useTypedSelector(
     state => state.ui.sidebar.isSidebarOpenUserSelected
@@ -97,8 +97,10 @@ function useSidebarInfo() {
     canExpand: !isNarrowOnly,
     isTemporary,
     isUserOpened: isSidebarOpenUserSelected,
+    width: isOpen ? `${drawerWidth}px` : isTemporary ? '0px' : `${drawerWidthClosed}px`,
   };
 }
+
 const useButtonStyle = makeStyles({
   button: {
     color: '#adadad',
