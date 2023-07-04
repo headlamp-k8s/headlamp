@@ -33,7 +33,7 @@ export function PureAlertNotification({
         setError(t('frequent|Offline') as string);
         return;
       }
-      setError(null);
+
       checkerFunction()
         .then(() => {
           setError(false);
