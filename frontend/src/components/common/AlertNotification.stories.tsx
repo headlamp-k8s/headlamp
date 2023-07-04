@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { SnackbarProvider } from 'notistack';
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { TestContext } from '../../test';
 import { PureAlertNotification, PureAlertNotificationProps } from './AlertNotification';
 
 export default {
@@ -12,11 +11,11 @@ export default {
   },
   decorators: [
     Story => (
-      <MemoryRouter>
+      <TestContext>
         <SnackbarProvider>
           <Story />
         </SnackbarProvider>
-      </MemoryRouter>
+      </TestContext>
     ),
   ],
 } as Meta;
@@ -30,17 +29,13 @@ Error.args = {
       reject('Offline');
     });
   },
-  moreRoutes: {},
-  routes: {},
 };
 
 export const NoError = Template.bind({});
 NoError.args = {
   checkerFunction: () => {
     return new Promise(function (resolve) {
-      resolve('fine');
+      resolve({ statusText: 'OK' });
     });
   },
-  moreRoutes: {},
-  routes: {},
 };

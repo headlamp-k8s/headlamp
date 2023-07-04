@@ -1,31 +1,59 @@
-import { Box, useTheme } from '@material-ui/core';
+import { Box, Button, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
 import { testClusterHealth } from '../../lib/k8s/apiProxy';
-import { getDefaultRoutes, getRoutePath, Route } from '../../lib/router';
-import { useTypedSelector } from '../../redux/reducers/reducers';
+import { getRoute, getRoutePath } from '../../lib/router';
+import { useSidebarInfo } from '../Sidebar';
 
 // in ms
 const NETWORK_STATUS_CHECK_TIME = 5000;
 
 export interface PureAlertNotificationProps {
-  routes: { [path: string]: any };
-  moreRoutes: { [routeName: string]: Route };
   checkerFunction(): Promise<any>;
 }
 
-export function PureAlertNotification({
-  routes,
-  checkerFunction,
-  moreRoutes,
-}: PureAlertNotificationProps) {
+const useStyle = makeStyles(theme => ({
+  box: {
+    color: theme.palette.common.white,
+    textAlign: 'center',
+    display: 'flex',
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(0.5),
+    justifyContent: 'center',
+    position: 'fixed',
+    zIndex: theme.zIndex.snackbar + 1,
+    width: '100%',
+    top: '0',
+    height: '3.8vh',
+  },
+  button: {
+    color: theme.palette.error.main,
+    borderColor: theme.palette.error.main,
+    background: theme.palette.common.white,
+    lineHeight: '1',
+    marginLeft: theme.spacing(1),
+    '&:hover': {
+      color: theme.palette.common.white,
+      borderColor: theme.palette.common.white,
+      background: theme.palette.error.dark,
+    },
+  },
+}));
+
+// Routes where we don't show the alert notification.
+// Because maybe they already offer context about the cluster health or
+// some other reason.
+const ROUTES_WITHOUT_ALERT = ['login', 'token', 'settingsCluster'];
+
+export function PureAlertNotification({ checkerFunction }: PureAlertNotificationProps) {
+  const { width: sidebarWidth } = useSidebarInfo();
   const [networkStatusCheckTimeFactor, setNetworkStatusCheckTimeFactor] = React.useState(0);
   const [error, setError] = React.useState<null | string | boolean>(null);
   const [intervalID, setIntervalID] = React.useState<NodeJS.Timeout | null>(null);
   const { t } = useTranslation('resource');
-  const theme = useTheme();
   const { pathname } = useLocation();
+  const classes = useStyle();
 
   function registerSetInterval(): NodeJS.Timeout {
     return setInterval(() => {
@@ -71,73 +99,36 @@ export function PureAlertNotification({
     [networkStatusCheckTimeFactor]
   );
 
-  function checkWhetherInNoAuthRequireRoute(): boolean {
-    const noAuthRequiringRoutes = Object.values(moreRoutes)
-      .concat(Object.values(routes))
-      .filter(route => route.noAuthRequired);
-
-    for (const route of noAuthRequiringRoutes) {
-      const routeMatch = matchPath(pathname, {
-        path: getRoutePath(route),
-        strict: true,
-      });
-
-      if (routeMatch && routeMatch.isExact) {
-        return true;
+  const showOnRoute = React.useMemo(() => {
+    for (const route of ROUTES_WITHOUT_ALERT) {
+      const routePath = getRoutePath(getRoute(route));
+      if (matchPath(pathname, routePath)?.isExact) {
+        return false;
       }
     }
-    return false;
-  }
+    return true;
+  }, [pathname]);
 
-  const whetherInNoAuthRoute = checkWhetherInNoAuthRequireRoute();
-  let isErrorInNoAuthRequiredRoute = false;
-  if (whetherInNoAuthRoute) {
-    isErrorInNoAuthRequiredRoute = true;
-  }
-  if (!error) {
+  if (!error || !showOnRoute) {
     return null;
   }
 
   return (
-    <Box
-      bgcolor="error.main"
-      color={theme.palette.common.white}
-      textAlign="center"
-      display="flex"
-      p={1}
-      justifyContent="center"
-      position="fixed"
-      zIndex={1400}
-      width="100%"
-      top={'0'}
-      height={'3.8vh'}
-    >
-      <Box marginLeft={isErrorInNoAuthRequiredRoute ? '0%' : '-15%'}>
-        {t('Something Went Wrong.')}
-      </Box>
-      <Box
-        bgcolor={theme.palette.common.white}
-        color="error.main"
-        ml={1}
-        px={1}
-        py={0.1}
-        style={{ cursor: 'pointer' }}
-        onClick={() => setNetworkStatusCheckTimeFactor(0)}
-      >
-        {t('frequent|Try Again')}
+    <Box className={classes.box} bgcolor="error.main" paddingRight={sidebarWidth}>
+      <Box>
+        {t('Something went wrong.')}
+        <Button
+          className={classes.button}
+          onClick={() => setNetworkStatusCheckTimeFactor(0)}
+          size="small"
+        >
+          {t('frequent|Try Again')}
+        </Button>
       </Box>
     </Box>
   );
 }
 
 export default function AlertNotification() {
-  const routes = useTypedSelector(state => state.ui.routes);
-
-  return (
-    <PureAlertNotification
-      routes={routes}
-      checkerFunction={testClusterHealth}
-      moreRoutes={getDefaultRoutes()}
-    />
-  );
+  return <PureAlertNotification checkerFunction={testClusterHealth} />;
 }
