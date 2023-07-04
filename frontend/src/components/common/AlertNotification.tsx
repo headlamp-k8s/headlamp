@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
 import { testClusterHealth } from '../../lib/k8s/apiProxy';
 import { getRoute, getRoutePath } from '../../lib/router';
+import { getCluster } from '../../lib/util';
 import { useSidebarInfo } from '../Sidebar';
 
 // in ms
@@ -62,6 +63,12 @@ export function PureAlertNotification({ checkerFunction }: PureAlertNotification
         return;
       }
 
+      // Don't check for the cluster health if we are not on a cluster route.
+      if (!getCluster()) {
+        setError(null);
+        return;
+      }
+
       checkerFunction()
         .then(() => {
           setError(false);
@@ -85,6 +92,13 @@ export function PureAlertNotification({ checkerFunction }: PureAlertNotification
     // eslint-disable-next-line
     []
   );
+
+  // Make sure we do not show the alert notification if we are not on a cluster route.
+  React.useEffect(() => {
+    if (!getCluster()) {
+      setError(null);
+    }
+  }, [pathname]);
 
   React.useEffect(
     () => {
