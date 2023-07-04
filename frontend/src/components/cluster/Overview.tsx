@@ -28,7 +28,7 @@ const useOverviewStyle = makeStyles({
 export default function Overview() {
   const [pods, setPods] = React.useState<Pod[] | null>(null);
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
-  const { t } = useTranslation('cluster');
+  const { t } = useTranslation(['cluster', 'frequent']);
   const classes = useOverviewStyle();
 
   Pod.useApiList(setPods);
@@ -41,7 +41,7 @@ export default function Overview() {
 
   return (
     <PageGrid>
-      <SectionBox py={2} mt={[4, 0, 0]}>
+      <SectionBox title={t('frequent|Overview')} py={2} mt={[4, 0, 0]}>
         {noPermissions ? (
           <Empty color="error">{t('auth|No permissions to list pods.')}</Empty>
         ) : (
