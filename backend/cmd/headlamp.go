@@ -116,6 +116,12 @@ type OauthConfig struct {
 	Ctx      context.Context
 }
 
+type providerInfo struct {
+	AuthURL         string   `json:"authorization_endpoint"`
+	TokenURL        string   `json:"token_endpoint"`
+	ScopesSupported []string `json:"scopes_supported"`
+}
+
 var pluginListURLs []string
 
 func resetPlugins() {
@@ -540,12 +546,49 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		}
 
 		verifier := provider.Verifier(oidcConfig)
+
+		tr := &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		}
+
+		client := &http.Client{Transport: tr}
+		resp, err := client.Get("https://openshift.default.svc/.well-known/oauth-authorization-server")
+		if err != nil {
+			log.Printf("Error while fetching the openshift well known endpoint %s", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode != http.StatusOK {
+			log.Printf("Error while fetching the openshift well known endpoint %s", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		rawOauth, err := io.ReadAll(resp.Body)
+		if err != nil {
+			log.Printf("Error while reading the openshift well known endpoint %s", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		oauthInfo := providerInfo{}
+		if err = json.Unmarshal(rawOauth, &oauthInfo); err != nil {
+			log.Printf("Error while unmarshalling the openshift well known endpoint %s", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
 		oauthConfig := &oauth2.Config{
 			ClientID:     oidcAuthConfig.ClientID,
 			ClientSecret: oidcAuthConfig.ClientSecret,
-			Endpoint:     provider.Endpoint(),
-			RedirectURL:  getOidcCallbackURL(r, config),
-			Scopes:       append([]string{oidc.ScopeOpenID}, oidcAuthConfig.Scopes...),
+			Endpoint: oauth2.Endpoint{
+				AuthURL:  oauthInfo.AuthURL,
+				TokenURL: oauthInfo.TokenURL,
+			},
+			RedirectURL: getOidcCallbackURL(r, config),
+			Scopes:      oauthInfo.ScopesSupported,
 		}
 		/* we encode the cluster to base64 and set it as state so that when getting redirected
 		by oidc we can use this state value to get cluster name
@@ -726,26 +769,26 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 				return
 			}
 
-			rawIDToken, ok := oauth2Token.Extra("id_token").(string)
-			if !ok {
-				http.Error(w, "No id_token field in oauth2 token.", http.StatusInternalServerError)
-				return
-			}
+			//rawIDToken, ok := oauth2Token.Extra("id_token").(string)
+			//if !ok {
+			//	http.Error(w, "No id_token field in oauth2 token.", http.StatusInternalServerError)
+			//	return
+			//}
 
-			idToken, err := oauthConfig.Verifier.Verify(oauthConfig.Ctx, rawIDToken)
-			if err != nil {
-				http.Error(w, "Failed to verify ID Token: "+err.Error(), http.StatusInternalServerError)
-				return
-			}
-			resp := struct {
-				OAuth2Token   *oauth2.Token
-				IDTokenClaims *json.RawMessage // ID Token payload is just JSON.
-			}{oauth2Token, new(json.RawMessage)}
-
-			if err := idToken.Claims(&resp.IDTokenClaims); err != nil {
-				http.Error(w, err.Error(), http.StatusInternalServerError)
-				return
-			}
+			//idToken, err := oauthConfig.Verifier.Verify(oauthConfig.Ctx, rawIDToken)
+			//if err != nil {
+			//	http.Error(w, "Failed to verify ID Token: "+err.Error(), http.StatusInternalServerError)
+			//	return
+			//}
+			//resp := struct {
+			//	OAuth2Token   *oauth2.Token
+			//	IDTokenClaims *json.RawMessage // ID Token payload is just JSON.
+			//}{oauth2Token, new(json.RawMessage)}
+			//
+			//if err := idToken.Claims(&resp.IDTokenClaims); err != nil {
+			//	http.Error(w, err.Error(), http.StatusInternalServerError)
+			//	return
+			//}
 
 			var redirectURL string
 			if config.devMode {
@@ -759,7 +802,8 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 				redirectURL += baseURL + "/"
 			}
 
-			redirectURL += fmt.Sprintf("auth?cluster=%1s&token=%2s", decodedState, rawIDToken)
+			// oauth2Token.AccessToken here we have sha256 hash of the token
+			redirectURL += fmt.Sprintf("auth?cluster=%1s&token=%2s", decodedState, oauth2Token.AccessToken)
 			http.Redirect(w, r, redirectURL, http.StatusSeeOther)
 		} else {
 			http.Error(w, "invalid request", http.StatusBadRequest)
