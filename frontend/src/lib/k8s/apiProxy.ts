@@ -33,6 +33,7 @@ let isTokenRefreshInProgress = false;
 
 export interface RequestParams {
   timeout?: number; // ms
+  isJSON?: boolean;
   [prop: string]: any;
 }
 
@@ -166,7 +167,7 @@ export async function request(
     console.debug('k8s/apiProxy@request', { path, params, useCluster, queryParams });
   }
 
-  const { timeout = DEFAULT_TIMEOUT, ...otherParams } = params;
+  const { timeout = DEFAULT_TIMEOUT, isJSON = true, ...otherParams } = params;
   const opts: { headers: RequestHeaders } = Object.assign({ headers: {} }, otherParams);
 
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
@@ -223,8 +224,10 @@ export async function request(
 
     let message = statusText;
     try {
-      const json = await response.json();
-      message += ` - ${json.message}`;
+      if (isJSON) {
+        const json = await response.json();
+        message += ` - ${json.message}`;
+      }
     } catch (err) {
       console.error(
         'Unable to parse error json at url:',
@@ -238,6 +241,10 @@ export async function request(
     const error = new Error(message) as ApiError;
     error.status = status;
     return Promise.reject(error);
+  }
+
+  if (!isJSON) {
+    return Promise.resolve(response);
   }
 
   return response.json();
@@ -1005,6 +1012,10 @@ export async function testAuth() {
   return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', { spec }, false, {
     timeout: 5 * 1000,
   });
+}
+
+export async function testClusterHealth() {
+  return request('/healthz', { isJSON: false });
 }
 
 export async function setCluster(clusterReq: ClusterRequest) {
