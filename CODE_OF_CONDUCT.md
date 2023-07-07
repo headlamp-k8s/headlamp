@@ -1,3 +1,3 @@
 # Code of Conduct
 
-Please refer to the [Kinvolk Code of Conduct](https://github.com/kinvolk/contribution/blob/master/CODE_OF_CONDUCT.md).
+Headlamp follows the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/main/code-of-conduct.md).
