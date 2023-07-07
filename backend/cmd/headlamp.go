@@ -75,6 +75,7 @@ const (
 
 const isWindows = runtime.GOOS == "windows"
 
+// PortForward Information for internal use for each port that is being forwarded.
 type PortForward struct {
 	ID               string `json:"id"`
 	closeChan        chan struct{}
@@ -89,6 +90,8 @@ type PortForward struct {
 	Error            string `json:"error"`
 }
 
+// PortForwardPayload Request parameters for Port forwarding.
+// RequestURL:/portforward  POST.
 type PortForwardPayload struct {
 	ID               string `json:"id"`
 	Namespace        string `json:"namespace"`
@@ -136,6 +139,10 @@ func portforwardstore(p PortForward) {
 	portForwards[p.Cluster] = append(portForwards[p.Cluster], p)
 }
 
+// stopOrDeletePortForward stops or deletes a port forward by its cluster and id.
+// It takes three parameters: cluster is the name of the cluster, id is the unique identifier of the port forward,
+// isStopRequest is a boolean value indicating whether to stop or delete the port forward.
+// It returns an error value indicating whether the operation is successful or not.
 func stopOrDeletePortForward(cluster string, id string, isStopRequest bool) error {
 	clusterPortForwards, ok := portForwards[cluster]
 	if ok {
