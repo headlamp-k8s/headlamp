@@ -25,6 +25,11 @@ read those guidelines.
 Please use the [project's issue tracker](https://github.com/headlamp-k8s/headlamp/issues) for filing any bugs you find or features
 you think are useful.
 
+### Security issues
+
+For filing security issues that are sensitive and should not be public, please
+send an email to security@headlamp.dev .
+
 ## Translations
 
 If you want to contribute to the internationalization of Headlamp, please refer to the
