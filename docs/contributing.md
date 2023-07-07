@@ -63,3 +63,23 @@ the CI checks are passing for your PR.
 For the general guidelines on making PRs/commits easier to review, please check
 out Kinvolk's
 [contribution guidelines on git](https://github.com/kinvolk/contribution/tree/master/topics/git.md).
+
+
+## Testing
+
+The frontend is tested via Storybook related snapshots. So new components should have
+an associated story when possible.
+
+For running the frontend tests, use the following command:
+
+```bash
+make frontend-test
+```
+
+The backend uses go's testing and can be run by using the following command:
+
+```bash
+make backend-test
+```
+
+Tests will run as part of the CI after a Pull Request is open.
