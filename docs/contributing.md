@@ -16,7 +16,7 @@ Please refer to the Kinvolk [Code of Conduct](https://github.com/kinvolk/contrib
 ## Development practices
 
 The Headlamp project follows the [Kinvolk Contribution Guidelines](https://github.com/kinvolk/contribution)
-which promotes good and consistent contribution practises across Kinvolk's
+which promotes good and consistent contribution practices across Kinvolk's
 projects. Before start contributing, and in addition to this section, please
 read those guidelines.
 
@@ -38,7 +38,7 @@ discuss the implementation with the project's maintainers.
 
 ## Coding style
 
-The coding style for `backend` and `frontend` should be consistent.
+The coding style for the `backend` and `frontend` should be consistent.
 For helping and verifying that, we have go and js linters.
 
 For linting the `backend` and `frontend`, use the following commands

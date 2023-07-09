@@ -5,7 +5,7 @@ linkTitle: Metrics Server
 
 Headlamp can show information for resources usage if the Metrics Server is
 installed. If the Metrics Server is not installed, then a related notice is
-displayed as shown in in the following screenshot:
+displayed as shown in the following screenshot:
 
 ![screenshot for no-metrics-notice](./no-metrics-server.png)
 

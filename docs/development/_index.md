@@ -57,12 +57,12 @@ make run-frontend
 
 ## Build the app
 
-You can build the app for Linux, Windows or Mac.
+You can build the app for Linux, Windows, or Mac.
 
 Do so on the platform you are building for. That is build the mac app on a Mac,
 and the linux app on a linux box.
 
-First we need to
+First, we need to
 
 ```bash
 make backend frontend
@@ -142,7 +142,7 @@ and test it locally on minikube with a local container image.
 We assume you've already setup a minikube
 (probably with `minikube start --driver=docker`).
 
-#### Container image in the minikub docker environment
+#### Container image in the minikube docker environment
 
 First we have to make the container image in the minikube docker environment.
 This is needed because minikube looks for container images in there, not
@@ -238,7 +238,7 @@ Here are some options that can be used when building Headlamp, to change its def
 When in the **desktop app**, by default, Headlamp will check for new versions from its Github page and warn the user about it,
 as well as showing the release notes after updating to a new version.
 
-This behavior can be turned off by adding a the following to a `.env` file in the `app/` folder:
+This behavior can be turned off by adding the following to a `.env` file in the `app/` folder:
 
 ```
 HEADLAMP_CHECK_FOR_UPDATES=false
