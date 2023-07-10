@@ -10,7 +10,7 @@ We maintain a simple/vanilla [file](https://github.com/kinvolk/headlamp/blob/mai
 for setting up a Headlamp deployment and service. Be sure to review it and change
 anything you need.
 
-If you're happy with the options in the this deployment file, and assuming
+If you're happy with the options in this deployment file, and assuming
 you have a running Kubernetes cluster and your `kubeconfig` pointing to it,
 you can run:
 

@@ -39,13 +39,13 @@ These are:
 
 Thus, plugins only need to install dependencies that are not yet provided by Headlamp.
 Yet, if any dependencies already covered by Headlamp are installed by the plugins, you
-just need to make sure they are te same version that Headlamp supports, as these will
+just need to make sure they are the same version that Headlamp supports, as these will
 not be bundled when [building the plugin](../building.md).
 Particularly, the mentioned modules will be replaced by their version that's included
 in a global objects called `pluginLib`.
 
 Older plugin development guides still asked developers to use e.g. React in the following
-way `const React = window.pluginLib.React`, but this is not longer needed.
+way `const React = window.pluginLib.React`, but this is no longer needed.
 
 ## Functionality
 
@@ -147,7 +147,7 @@ Remove sidebar items with [registerSidebarEntryFilter](../api/modules/plugin_reg
 
 ### Tables
 
-Change what tables across Headlamp show with [registerResourceTableColumnsProcessor](../api/modules/plugin_registry.md#registersidebarentry). This allows to remove, add, update, or shuffle table columns.
+Change what tables across Headlamp show with [registerResourceTableColumnsProcessor](../api/modules/plugin_registry.md#registersidebarentry). This allows you to remove, add, update, or shuffle table columns.
 
 ![screenshot of the pods list with a context menu added by a plugin](./images/table-context-menu.png)
 

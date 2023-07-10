@@ -9,7 +9,7 @@ of the Electron's environment as this allows them to leverage the browser's func
 bookmarks, groups, etc.
 
 Running Headlamp in the system's browser can be done by using the `--headless` CLI option.
-Assuming the have already downloaded and installed Headlamp on your desktop, you can run it in headless mode as follows:
+Assuming you have already downloaded and installed Headlamp on your desktop, you can run it in headless mode as follows:
 
 Example:
 
