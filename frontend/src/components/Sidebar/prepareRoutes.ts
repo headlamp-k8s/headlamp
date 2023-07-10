@@ -1,18 +1,29 @@
 import _ from 'lodash';
 import helpers from '../../helpers';
+import { createRouteURL } from '../../lib/router';
+import { getCluster } from '../../lib/util';
 import store from '../../redux/stores/store';
 import { DefaultSidebars, SidebarItemProps } from '../Sidebar';
 
+// @todo: We should convert this to a hook so we can update it automatically when
+// needed.
 function prepareRoutes(
   t: (arg: string) => string,
   sidebarToReturn: string = DefaultSidebars.IN_CLUSTER
 ) {
+  // We do not show the home view if there is only one cluster and we cannot
+  // add new clusters, as it is redundant.
+  const clusters = store.getState()?.config?.clusters || {};
+  const showHome = helpers.isElectron() || Object.keys(clusters).length !== 1;
+  const defaultClusterURL = createRouteURL('cluster', { cluster: Object.keys(clusters)[0] });
+
   const homeItems: SidebarItemProps[] = [
     {
-      name: 'clusters',
-      icon: 'mdi:hexagon-multiple',
-      label: t('glossary|Cluster'),
-      url: '/',
+      name: 'home',
+      icon: showHome ? 'mdi:home' : 'mdi:hexagon-multiple-outline',
+      label: showHome ? t('glossary|Home') : t('glossary|Cluster'),
+      url: showHome ? '/' : defaultClusterURL,
+      divider: !showHome,
     },
     {
       name: 'notifications',
@@ -37,8 +48,17 @@ function prepareRoutes(
   ];
   const inClusterItems: SidebarItemProps[] = [
     {
+      name: 'home',
+      icon: 'mdi:home',
+      label: t('frequent|Home'),
+      url: '/',
+      divider: true,
+      hide: !showHome,
+    },
+    {
       name: 'cluster',
       label: t('glossary|Cluster'),
+      subtitle: getCluster() || undefined,
       icon: 'mdi:hexagon-multiple-outline',
       subList: [
         {

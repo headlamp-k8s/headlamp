@@ -26,10 +26,10 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -41,25 +41,25 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Name
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Description
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Homepage
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Enable
@@ -73,22 +73,22 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -126,22 +126,22 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -178,22 +178,22 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -231,22 +231,22 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -283,22 +283,22 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -384,10 +384,10 @@ exports[`Storyshots Settings/PluginSettings Empty 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
       >
         <div
           class="MuiBox-root MuiBox-root"
@@ -430,10 +430,10 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -445,25 +445,25 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Name
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Description
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Homepage
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Enable
@@ -477,22 +477,22 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -530,22 +530,22 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -582,22 +582,22 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -635,22 +635,22 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -687,22 +687,22 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -770,10 +770,10 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -785,25 +785,25 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Name
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Description
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Homepage
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Enable
@@ -817,22 +817,22 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -870,22 +870,22 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -922,22 +922,22 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -975,22 +975,22 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1027,22 +1027,22 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1110,10 +1110,10 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -1125,25 +1125,25 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Name
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Description
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Homepage
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Enable
@@ -1157,22 +1157,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1210,22 +1210,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1262,22 +1262,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1315,22 +1315,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1367,22 +1367,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1420,22 +1420,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 5
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A5
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-5
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1472,22 +1472,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 6
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A6
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-6
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1525,22 +1525,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 7
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A7
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-7
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1577,22 +1577,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 8
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A8
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-8
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1630,22 +1630,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 9
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A9
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-9
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1682,22 +1682,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 10
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A10
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-10
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1735,22 +1735,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 11
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A11
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-11
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1787,22 +1787,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 12
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A12
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-12
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1840,22 +1840,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 13
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A13
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-13
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1892,22 +1892,22 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 14
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A14
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-14
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -1975,10 +1975,10 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -1990,25 +1990,25 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Name
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Description
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Homepage
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Enable
@@ -2022,22 +2022,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2075,22 +2075,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2127,22 +2127,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2180,22 +2180,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-3
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2232,22 +2232,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-4
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2285,22 +2285,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 5
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A5
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-5
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2337,22 +2337,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 6
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A6
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-6
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2390,22 +2390,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 7
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A7
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-7
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2442,22 +2442,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 8
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A8
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-8
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2495,22 +2495,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 9
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A9
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-9
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2547,22 +2547,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 10
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A10
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-10
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2600,22 +2600,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 11
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A11
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-11
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2652,22 +2652,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 12
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A12
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-12
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2705,22 +2705,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 13
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A13
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-13
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"
@@ -2757,22 +2757,22 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 plugin a 14
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 This is a plugin for this project PLUGIN A14
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 https://example.com/plugin-link-14
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
                   class="MuiSwitch-root"

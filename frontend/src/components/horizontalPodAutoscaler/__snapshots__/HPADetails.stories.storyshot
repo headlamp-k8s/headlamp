@@ -79,111 +79,111 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="false"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <div
-              aria-busy="false"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+            <dl
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
-              <dl
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
               >
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                Name
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Name
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  php-apache
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Namespace
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    php-apache
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  default
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Creation
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Namespace
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    default
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Creation
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    2022-10-20T11:10:58.000Z
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Annotations
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  2022-10-20T11:10:58.000Z
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Annotations
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
                 >
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                    style="max-width: 80%;"
                   >
                     <div
-                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-                      style="max-width: 80%;"
+                      class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                     >
-                      <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-                      >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
-                          title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"autoscaling/v2\\",\\"kind\\":\\"HorizontalPodAutoscaler\\",\\"metadata\\":{\\"annotations\\":{},\\"creationTimestamp\\":\\"2022-10-17T08:04:30Z\\",\\"name\\":\\"php-apache\\",\\"namespace\\":\\"default\\",\\"resourceVersion\\":\\"4488138\\",\\"uid\\":\\"a98be011-f69e-404a-bcfa-d76d78d24884\\"},\\"spec\\":{\\"maxReplicas\\":10,\\"metrics\\":[{\\"resource\\":{\\"name\\":\\"cpu\\",\\"target\\":{\\"averageUtilization\\":50,\\"type\\":\\"Utilization\\"}},\\"type\\":\\"Resource\\"},{\\"resource\\":{\\"name\\":\\"memory\\",\\"target\\":{\\"averageValue\\":\\"100Mi\\",\\"type\\":\\"AverageValue\\"}},\\"type\\":\\"Resource\\"}],\\"minReplicas\\":1,\\"scaleTargetRef\\":{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"name\\":\\"php-apache\\"}},\\"status\\":{\\"conditions\\":[{\\"lastTransitionTime\\":\\"2022-10-17T08:04:45Z\\",\\"message\\":\\"recommended size matches current size\\",\\"reason\\":\\"ReadyForNewScale\\",\\"status\\":\\"True\\",\\"type\\":\\"AbleToScale\\"},{\\"lastTransitionTime\\":\\"2022-10-17T21:57:14Z\\",\\"message\\":\\"the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)\\",\\"reason\\":\\"ValidMetricFound\\",\\"status\\":\\"True\\",\\"type\\":\\"ScalingActive\\"},{\\"lastTransitionTime\\":\\"2022-10-20T10:11:08Z\\",\\"message\\":\\"the desired replica count is less than the minimum replica count\\",\\"reason\\":\\"TooFewReplicas\\",\\"status\\":\\"True\\",\\"type\\":\\"ScalingLimited\\"}],\\"currentMetrics\\":[{\\"resource\\":{\\"current\\":{\\"averageUtilization\\":0,\\"averageValue\\":\\"1m\\"},\\"name\\":\\"cpu\\"},\\"type\\":\\"Resource\\"}],\\"currentReplicas\\":1,\\"desiredReplicas\\":1,\\"lastScaleTime\\":\\"2022-10-20T10:11:08Z\\"}}
+                      <p
+                        class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                        title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"autoscaling/v2\\",\\"kind\\":\\"HorizontalPodAutoscaler\\",\\"metadata\\":{\\"annotations\\":{},\\"creationTimestamp\\":\\"2022-10-17T08:04:30Z\\",\\"name\\":\\"php-apache\\",\\"namespace\\":\\"default\\",\\"resourceVersion\\":\\"4488138\\",\\"uid\\":\\"a98be011-f69e-404a-bcfa-d76d78d24884\\"},\\"spec\\":{\\"maxReplicas\\":10,\\"metrics\\":[{\\"resource\\":{\\"name\\":\\"cpu\\",\\"target\\":{\\"averageUtilization\\":50,\\"type\\":\\"Utilization\\"}},\\"type\\":\\"Resource\\"},{\\"resource\\":{\\"name\\":\\"memory\\",\\"target\\":{\\"averageValue\\":\\"100Mi\\",\\"type\\":\\"AverageValue\\"}},\\"type\\":\\"Resource\\"}],\\"minReplicas\\":1,\\"scaleTargetRef\\":{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"name\\":\\"php-apache\\"}},\\"status\\":{\\"conditions\\":[{\\"lastTransitionTime\\":\\"2022-10-17T08:04:45Z\\",\\"message\\":\\"recommended size matches current size\\",\\"reason\\":\\"ReadyForNewScale\\",\\"status\\":\\"True\\",\\"type\\":\\"AbleToScale\\"},{\\"lastTransitionTime\\":\\"2022-10-17T21:57:14Z\\",\\"message\\":\\"the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)\\",\\"reason\\":\\"ValidMetricFound\\",\\"status\\":\\"True\\",\\"type\\":\\"ScalingActive\\"},{\\"lastTransitionTime\\":\\"2022-10-20T10:11:08Z\\",\\"message\\":\\"the desired replica count is less than the minimum replica count\\",\\"reason\\":\\"TooFewReplicas\\",\\"status\\":\\"True\\",\\"type\\":\\"ScalingLimited\\"}],\\"currentMetrics\\":[{\\"resource\\":{\\"current\\":{\\"averageUtilization\\":0,\\"averageValue\\":\\"1m\\"},\\"name\\":\\"cpu\\"},\\"type\\":\\"Resource\\"}],\\"currentReplicas\\":1,\\"desiredReplicas\\":1,\\"lastScaleTime\\":\\"2022-10-20T10:11:08Z\\"}}
 "
-                        >
-                          kubectl.kubernetes.io/last-applied-configuration: …
-                        </p>
-                      </div>
+                      >
+                        kubectl.kubernetes.io/last-applied-configuration: …
+                      </p>
                     </div>
                   </div>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                </div>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Reference
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
                 >
-                  Reference
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <a
-                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                    href="/"
-                  >
-                    Deployment
-                    /
-                    php-apache
-                  </a>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Metrics
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  Deployment
+                  /
+                  php-apache
+                </a>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Metrics
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <div
+                  class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
                 >
                   <table
                     class="MuiTable-root makeStyles-table"
@@ -195,13 +195,13 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                         class="MuiTableRow-root MuiTableRow-head"
                       >
                         <th
-                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                           scope="col"
                         >
                           Name
                         </th>
                         <th
-                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                           scope="col"
                         >
                           (Current/Target)
@@ -215,12 +215,12 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                         class="MuiTableRow-root"
                       >
                         <td
-                          class="MuiTableCell-root MuiTableCell-body"
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                         >
                           resource memory on pods
                         </td>
                         <td
-                          class="MuiTableCell-root MuiTableCell-body"
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                         >
                           14360576/100Mi
                         </td>
@@ -229,55 +229,55 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                         class="MuiTableRow-root"
                       >
                         <td
-                          class="MuiTableCell-root MuiTableCell-body"
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                         >
                           resource cpu on pods (as a percentage of request)
                         </td>
                         <td
-                          class="MuiTableCell-root MuiTableCell-body"
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                         >
                           0% (1m)/50%
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                </div>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                MinReplicas
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                1
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                MaxReplicas
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                10
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Deployment pods
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  MinReplicas
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  1
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  MaxReplicas
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  10
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Deployment pods
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    1 current / 1 desired
-                  </span>
-                </dd>
-              </dl>
-            </div>
+                  1 current / 1 desired
+                </span>
+              </dd>
+            </dl>
           </div>
         </div>
       </div>
@@ -312,10 +312,10 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
                 class="MuiTable-root makeStyles-table"
@@ -327,31 +327,31 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Condition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Status
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Last Transition
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Last Update
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Reason
@@ -365,22 +365,22 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         AbleToScale
                       </span>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       True
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -391,12 +391,12 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                       </p>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       -
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -411,22 +411,22 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         ScalingActive
                       </span>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       False
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -437,12 +437,12 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                       </p>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       -
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -457,22 +457,22 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <span
-                        class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                         style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                       >
                         ScalingLimited
                       </span>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       False
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -483,12 +483,12 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
                       </p>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       -
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -543,10 +543,10 @@ exports[`Storyshots hpa/HpaDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
             >
               <div
                 class="MuiBox-root MuiBox-root"
@@ -630,12 +630,12 @@ exports[`Storyshots hpa/HpaDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="true"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              aria-busy="true"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
             >
               <div
                 class="MuiBox-root MuiBox-root"
@@ -733,36 +733,32 @@ exports[`Storyshots hpa/HpaDetailsView No Item Yet 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="true"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              aria-busy="true"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+              class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
             >
               <div
-                class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+                class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+                role="progressbar"
+                style="width: 40px; height: 40px;"
+                title="Loading resource data"
               >
-                <div
-                  class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-                  role="progressbar"
-                  style="width: 40px; height: 40px;"
-                  title="Loading resource data"
+                <svg
+                  class="MuiCircularProgress-svg"
+                  viewBox="22 22 44 44"
                 >
-                  <svg
-                    class="MuiCircularProgress-svg"
-                    viewBox="22 22 44 44"
-                  >
-                    <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                      cx="44"
-                      cy="44"
-                      fill="none"
-                      r="20.2"
-                      stroke-width="3.6"
-                    />
-                  </svg>
-                </div>
+                  <circle
+                    class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                    cx="44"
+                    cy="44"
+                    fill="none"
+                    r="20.2"
+                    stroke-width="3.6"
+                  />
+                </svg>
               </div>
             </div>
           </div>

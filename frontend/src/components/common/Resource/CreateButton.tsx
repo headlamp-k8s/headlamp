@@ -1,3 +1,5 @@
+import { InlineIcon } from '@iconify/react';
+import Button from '@material-ui/core/Button';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -8,7 +10,12 @@ import { clusterAction } from '../../../redux/actions/actions';
 import ActionButton from '../ActionButton';
 import EditorDialog from './EditorDialog';
 
-export default function CreateButton() {
+interface CreateButtonProps {
+  isNarrow?: boolean;
+}
+
+export default function CreateButton(props: CreateButtonProps) {
+  const { isNarrow } = props;
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
@@ -86,13 +93,26 @@ export default function CreateButton() {
 
   return (
     <React.Fragment>
-      <ActionButton
-        description={t('frequent|Create / Apply')}
-        onClick={() => setOpenDialog(true)}
-        color="#adadad"
-        icon="mdi:plus-circle"
-        width="48"
-      />
+      {isNarrow ? (
+        <ActionButton
+          description={t('frequent|Create / Apply')}
+          onClick={() => setOpenDialog(true)}
+          icon="mdi:plus-box"
+          width="48"
+          iconButtonProps={{
+            color: 'primary',
+          }}
+        />
+      ) : (
+        <Button
+          onClick={() => setOpenDialog(true)}
+          startIcon={<InlineIcon icon="mdi:plus" />}
+          color="primary"
+          variant="contained"
+        >
+          {t('frequent|Create')}
+        </Button>
+      )}
       <EditorDialog
         item={{}}
         open={openDialog}

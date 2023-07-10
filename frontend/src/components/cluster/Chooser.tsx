@@ -33,7 +33,6 @@ import ActionButton from '../common/ActionButton';
 import { DialogTitle } from '../common/Dialog';
 import ErrorBoundary from '../common/ErrorBoundary';
 import Loader from '../common/Loader';
-import ClusterChooser from './ClusterChooser';
 
 export interface ClusterTitleProps {
   clusters?: {
@@ -65,15 +64,12 @@ export function ClusterTitle(props: ClusterTitleProps) {
 
   return (
     <ErrorBoundary>
-      {ChooserButton ? (
-        isValidElement(ChooserButton) ? (
+      {ChooserButton &&
+        (isValidElement(ChooserButton) ? (
           ChooserButton
         ) : (
           <ChooserButton clickHandler={() => setShowChooser(true)} cluster={cluster} />
-        )
-      ) : (
-        <ClusterChooser clickHandler={() => setShowChooser(true)} cluster={cluster} />
-      )}
+        ))}
       <Chooser open={showChooser} onClose={() => setShowChooser(false)} />
     </ErrorBoundary>
   );
@@ -318,7 +314,7 @@ export function ClusterDialog(props: ClusterDialogProps) {
           ),
         ]}
       >
-        <AppLogo logoType={'large'} className={classes.logo} />
+        <AppLogo logoType={'large'} className={classes.logo} themeName="dark" />
       </DialogTitle>
       <DialogContent className={classes.chooserDialog}>{children}</DialogContent>
     </Dialog>

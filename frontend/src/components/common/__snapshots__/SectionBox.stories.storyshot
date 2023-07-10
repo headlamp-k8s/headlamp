@@ -9,12 +9,8 @@ exports[`Storyshots SectionBox Custom Title 1`] = `
       custom title
     </h1>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        class="MuiBox-root MuiBox-root"
-      />
-    </div>
+      class="MuiBox-root MuiBox-root makeStyles-box"
+    />
   </div>
 </div>
 `;
@@ -45,12 +41,8 @@ exports[`Storyshots SectionBox Header Props 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        class="MuiBox-root MuiBox-root"
-      />
-    </div>
+      class="MuiBox-root MuiBox-root makeStyles-box"
+    />
   </div>
 </div>
 `;
@@ -81,12 +73,8 @@ exports[`Storyshots SectionBox Titled 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
-    >
-      <div
-        class="MuiBox-root MuiBox-root"
-      />
-    </div>
+      class="MuiBox-root MuiBox-root makeStyles-box"
+    />
   </div>
 </div>
 `;
@@ -117,15 +105,11 @@ exports[`Storyshots SectionBox Titled Children 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
-      <div
-        class="MuiBox-root MuiBox-root"
-      >
-        <p>
-          A child paragraph.
-        </p>
-      </div>
+      <p>
+        A child paragraph.
+      </p>
     </div>
   </div>
 </div>
@@ -137,15 +121,11 @@ exports[`Storyshots SectionBox With Children 1`] = `
     class="MuiBox-root MuiBox-root"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
-      <div
-        class="MuiBox-root MuiBox-root"
-      >
-        <p>
-          A child paragraph.
-        </p>
-      </div>
+      <p>
+        A child paragraph.
+      </p>
     </div>
   </div>
 </div>

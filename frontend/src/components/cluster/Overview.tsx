@@ -19,10 +19,17 @@ import { SectionBox } from '../common/SectionBox';
 import { LightTooltip } from '../common/Tooltip';
 import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './Charts';
 
+const useOverviewStyle = makeStyles({
+  chartItem: {
+    maxWidth: '300px',
+  },
+});
+
 export default function Overview() {
   const [pods, setPods] = React.useState<Pod[] | null>(null);
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
-  const { t } = useTranslation('cluster');
+  const { t } = useTranslation(['cluster', 'frequent']);
+  const classes = useOverviewStyle();
 
   Pod.useApiList(setPods);
   Node.useApiList(setNodes);
@@ -34,18 +41,18 @@ export default function Overview() {
 
   return (
     <PageGrid>
-      <SectionBox py={2} mt={[4, 0, 0]}>
+      <SectionBox title={t('frequent|Overview')} py={2} mt={[4, 0, 0]}>
         {noPermissions ? (
           <Empty color="error">{t('auth|No permissions to list pods.')}</Empty>
         ) : (
-          <Grid container justifyContent="space-around" alignItems="flex-start">
-            <Grid item>
+          <Grid container justifyContent="flex-start" alignItems="stretch" spacing={4}>
+            <Grid item xs className={classes.chartItem}>
               <CpuCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
             </Grid>
-            <Grid item>
+            <Grid item xs className={classes.chartItem}>
               <MemoryCircularChart items={nodes} itemsMetrics={nodeMetrics} noMetrics={noMetrics} />
             </Grid>
-            <Grid item>
+            <Grid item xs className={classes.chartItem}>
               <PodsStatusCircleChart items={pods} />
             </Grid>
           </Grid>

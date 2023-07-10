@@ -79,40 +79,36 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="false"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <div
-              aria-busy="false"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+            <dl
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
-              <dl
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
               >
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                Name
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              />
+              <dt
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Creation
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Name
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                />
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Creation
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    2020-04-25T00:00:00.000Z
-                  </span>
-                </dd>
-              </dl>
-            </div>
+                  2020-04-25T00:00:00.000Z
+                </span>
+              </dd>
+            </dl>
           </div>
         </div>
       </div>
@@ -147,42 +143,38 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
-          >
-            <div
-              class="MuiBox-root MuiBox-root"
-            />
-          </div>
+            class="MuiBox-root MuiBox-root makeStyles-box"
+          />
         </div>
         <div
           class="MuiBox-root MuiBox-root"
         >
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
             >
               <div
-                class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                class="MuiGrid-root MuiGrid-item"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-item"
+                  class="MuiBox-root MuiBox-root"
                 >
+                  <h4
+                    class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h4 MuiTypography-noWrap"
+                  >
+                    Addresses
+                  </h4>
                   <div
                     class="MuiBox-root MuiBox-root"
-                  >
-                    <h3
-                      class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
-                    >
-                      Addresses
-                    </h3>
-                    <div
-                      class="MuiBox-root MuiBox-root"
-                    />
-                  </div>
+                  />
                 </div>
               </div>
+            </div>
+            <div
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
+            >
               <table
                 class="MuiTable-root makeStyles-table"
               >
@@ -193,19 +185,19 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       IP
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Hostname
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Target
@@ -219,15 +211,15 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       127.0.0.1
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     />
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -241,15 +233,15 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       127.0.0.2
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     />
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -261,26 +253,30 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div
+              class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+            >
               <div
-                class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+                class="MuiGrid-root MuiGrid-item"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-item"
+                  class="MuiBox-root MuiBox-root"
                 >
+                  <h4
+                    class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h4 MuiTypography-noWrap"
+                  >
+                    Ports
+                  </h4>
                   <div
                     class="MuiBox-root MuiBox-root"
-                  >
-                    <h3
-                      class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h3 MuiTypography-noWrap"
-                    >
-                      Ports
-                    </h3>
-                    <div
-                      class="MuiBox-root MuiBox-root"
-                    />
-                  </div>
+                  />
                 </div>
               </div>
+            </div>
+            <div
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
+            >
               <table
                 class="MuiTable-root makeStyles-table"
               >
@@ -291,7 +287,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Name
@@ -312,7 +308,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                       </button>
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Port
@@ -333,7 +329,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                       </button>
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Protocol
@@ -362,17 +358,17 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       myport
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       8080
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       TCP
                     </td>
@@ -421,10 +417,10 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
                 class="MuiTable-root makeStyles-table"
@@ -436,31 +432,31 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Type
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Reason
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       From
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Message
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Age
@@ -489,27 +485,27 @@ exports[`Storyshots endpoints/EndpointsDetailsView Default 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       Normal
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       Created
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       kubelet
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       Created
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -610,12 +606,12 @@ exports[`Storyshots endpoints/EndpointsDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="true"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              aria-busy="true"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
             >
               <div
                 class="MuiBox-root MuiBox-root"
@@ -728,36 +724,32 @@ exports[`Storyshots endpoints/EndpointsDetailsView No Item Yet 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="true"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              aria-busy="true"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+              class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
             >
               <div
-                class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+                class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+                role="progressbar"
+                style="width: 40px; height: 40px;"
+                title="Loading resource data"
               >
-                <div
-                  class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-                  role="progressbar"
-                  style="width: 40px; height: 40px;"
-                  title="Loading resource data"
+                <svg
+                  class="MuiCircularProgress-svg"
+                  viewBox="22 22 44 44"
                 >
-                  <svg
-                    class="MuiCircularProgress-svg"
-                    viewBox="22 22 44 44"
-                  >
-                    <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                      cx="44"
-                      cy="44"
-                      fill="none"
-                      r="20.2"
-                      stroke-width="3.6"
-                    />
-                  </svg>
-                </div>
+                  <circle
+                    class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                    cx="44"
+                    cy="44"
+                    fill="none"
+                    r="20.2"
+                    stroke-width="3.6"
+                  />
+                </svg>
               </div>
             </div>
           </div>

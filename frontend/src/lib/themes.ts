@@ -3,21 +3,20 @@ import grey from '@material-ui/core/colors/grey';
 import orange from '@material-ui/core/colors/orange';
 import red from '@material-ui/core/colors/red';
 import { createTheme, Theme } from '@material-ui/core/styles';
-import { PaletteColor, PaletteColorOptions } from '@material-ui/core/styles/createPalette';
 import React from 'react';
 
 declare module '@material-ui/core/styles/createPalette.d' {
   interface Palette {
     success: PaletteColor;
     sidebarLink: {
-      [propName: string]: string;
+      [propName: string]: any;
     };
     [propName: string]: any;
   }
   interface PaletteOptions {
     success?: PaletteColorOptions;
     sidebarLink: {
-      [propName: string]: string;
+      [propName: string]: any;
     };
     [propName: string]: any;
   }
@@ -27,11 +26,11 @@ const commonRules = {
   palette: {
     primary: {
       contrastText: '#fff',
-      main: '#2774b3',
+      main: '#0078d4',
     },
     primaryColor: '#000',
     success: {
-      light: green['50'],
+      light: '#f8fff0',
       main: green['800'],
       ...green,
     },
@@ -40,10 +39,45 @@ const commonRules = {
       light: orange['50'],
       ...orange,
     },
-    sidebarLink: {
-      main: grey['500'],
-      selectedBg: grey['800'],
+    squareButton: {
+      background: '#f5f5f5',
     },
+    sidebarLink: {
+      color: '#e7e7e7',
+      main: {
+        selected: {
+          color: '#000',
+          backgroundColor: '#fff200',
+        },
+        color: '#fff',
+      },
+      selected: {
+        color: '#fff',
+        backgroundColor: 'unset',
+      },
+      hover: {
+        color: '#000',
+        backgroundColor: '#3B3A39',
+      },
+    },
+    sidebarButtonInLinkArea: {
+      color: '#fff',
+      primary: {
+        background: '#605e5c',
+      },
+      hover: {
+        background: '#3B3A39',
+      },
+    },
+    home: {
+      status: {
+        error: red['800'],
+        success: '#107C10',
+        warning: orange['50'],
+        unknown: grey['800'],
+      },
+    },
+    sidebarBg: '#242424',
     error: {
       main: red['800'],
       light: red['50'],
@@ -51,13 +85,12 @@ const commonRules = {
     resourceToolTip: {
       color: 'rgba(0, 0, 0, 0.87)',
     },
-    sidebarBg: '#000',
     normalEventBg: '#F0F0F0',
     chartStyles: {
       defaultFillColor: grey['300'],
       labelColor: '#000',
     },
-    metadataBgColor: grey['300'],
+    metadataBgColor: '#f3f2f1',
     headerStyle: {
       normal: {
         fontSize: '1.8rem',
@@ -77,9 +110,18 @@ const commonRules = {
       },
     },
     tables: {
-      headerText: '#474747',
+      head: {
+        background: '#faf9f8',
+        color: '#242424',
+      },
+      body: {
+        background: '#fff',
+      },
     },
     notificationBorderColor: 'rgba(0,0,0,0.12)',
+    background: {
+      default: '#fff',
+    },
   },
   typography: {
     fontFamily: ['Overpass', 'sans-serif'].join(', '),
@@ -89,7 +131,7 @@ const commonRules = {
     },
   },
   shape: {
-    borderRadius: 0,
+    borderRadius: 4,
   },
   overrides: {
     MuiTooltip: {
@@ -98,6 +140,21 @@ const commonRules = {
         color: '#fff',
         backgroundColor: '#000',
         // opacity: '1.0',
+      },
+    },
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: '#f5f5f5',
+      },
+    },
+    MuiIconButton: {
+      colorPrimary: {
+        color: '#000',
+      },
+    },
+    MuiLink: {
+      root: {
+        color: '#0078D4',
       },
     },
   },
@@ -110,16 +167,25 @@ const darkTheme = createTheme({
   palette: {
     ...commonRules.palette,
     tables: {
-      headerText: '#aeaeae',
+      head: {
+        background: '#000',
+        color: '#aeaeae',
+      },
+      body: {
+        background: '#1B1A19',
+      },
     },
     primary: {
-      contrastText: '#fff',
-      main: '#6CB6F2',
+      contrastText: '#000',
+      main: '#4B99EE',
+    },
+    squareButton: {
+      background: '#424242',
     },
     primaryColor: '#fff',
     chartStyles: {
       defaultFillColor: 'rgba(20, 20, 20, 0.1)',
-      fillColor: '#3DA3F5',
+      fillColor: '#929191',
       labelColor: '#fff',
     },
     success: {
@@ -136,21 +202,77 @@ const darkTheme = createTheme({
       main: red['800'],
       light: 'rgba(244, 67, 54, 0.2)',
     },
+    home: {
+      status: {
+        error: '#E37D80',
+        success: '#54B054',
+        warning: '#FEEE66',
+        unknown: '#D6D6D6',
+      },
+    },
     normalEventBg: '#333333',
     metadataBgColor: '#333',
     resourceToolTip: {
       color: 'rgba(255, 255, 255, 0.87)',
     },
+    sidebarLink: {
+      ...commonRules.palette.sidebarLink,
+      selected: {
+        color: '#FFF200',
+        backgroundColor: 'unset',
+      },
+    },
+    sidebarBg: '#000',
     notificationBorderColor: 'rgba(255,255,255,0.12)',
     type: 'dark',
+    background: {
+      default: '#1f1f1f',
+      paper: '#1f1f1f',
+    },
   },
   overrides: {
+    ...commonRules.overrides,
     MuiTooltip: {
       tooltip: {
         fontSize: '1.3em',
         color: '#fff',
         backgroundColor: '#000',
         opacity: 1,
+      },
+    },
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: '#000',
+      },
+    },
+    MuiIconButton: {
+      colorPrimary: {
+        color: '#fff',
+      },
+    },
+    MuiLink: {
+      root: {
+        color: '#6CB6F2',
+      },
+    },
+    MuiSwitch: {
+      colorPrimary: {
+        '&&.Mui-checked': {
+          color: '#4b99ee',
+        },
+      },
+    },
+    MuiTab: {
+      textColorPrimary: {
+        '&&.Mui-selected': {
+          color: '#fff',
+          borderBottomColor: '#fff',
+        },
+      },
+    },
+    MuiTabs: {
+      indicator: {
+        backgroundColor: '#fff',
       },
     },
   },

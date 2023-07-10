@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots common/SquareButton Basic 1`] = `
+<div>
+  <button
+    class="MuiButtonBase-root"
+    tabindex="0"
+    type="button"
+  >
+    <div
+      class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiCardContent-root makeStyles-content"
+      >
+        <span />
+        <p
+          class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+          title="Some label"
+        >
+          Some label
+        </p>
+      </div>
+    </div>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`Storyshots common/SquareButton Different Icon Color 1`] = `
+<div>
+  <button
+    class="MuiButtonBase-root"
+    tabindex="0"
+    type="button"
+  >
+    <div
+      class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiCardContent-root makeStyles-content"
+      >
+        <span />
+        <p
+          class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+          title="Some label"
+        >
+          Some label
+        </p>
+      </div>
+    </div>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`Storyshots common/SquareButton Different Icon Size 1`] = `
+<div>
+  <button
+    class="MuiButtonBase-root"
+    tabindex="0"
+    type="button"
+  >
+    <div
+      class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiCardContent-root makeStyles-content"
+      >
+        <span />
+        <p
+          class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+          title="Some label"
+        >
+          Some label
+        </p>
+      </div>
+    </div>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`Storyshots common/SquareButton Primary 1`] = `
+<div>
+  <button
+    class="MuiButtonBase-root"
+    tabindex="0"
+    type="button"
+  >
+    <div
+      class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        class="MuiCardContent-root makeStyles-content"
+      >
+        <span />
+        <p
+          class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+          title="Some label"
+        >
+          Some label
+        </p>
+      </div>
+    </div>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;

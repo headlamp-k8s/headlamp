@@ -1,0 +1,584 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots home/RecentClusters More Than Three Clusters 1`] = `
+<div>
+  <div
+    aria-labelledby="#recent-clusters-label"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster3"
+            >
+              cluster3
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster2"
+            >
+              cluster2
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster1"
+            >
+              cluster1
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots home/RecentClusters No Clusters 1`] = `
+<div>
+  <div
+    aria-labelledby="#recent-clusters-label"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
+  />
+</div>
+`;
+
+exports[`Storyshots home/RecentClusters One Existing Cluster 1`] = `
+<div>
+  <div
+    aria-labelledby="#recent-clusters-label"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster0"
+            >
+              cluster0
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots home/RecentClusters One Recent Cluster 1`] = `
+<div>
+  <div
+    aria-labelledby="#recent-clusters-label"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster0"
+            >
+              cluster0
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster1"
+            >
+              cluster1
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster2"
+            >
+              cluster2
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots home/RecentClusters Three Clusters 1`] = `
+<div>
+  <div
+    aria-labelledby="#recent-clusters-label"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster0"
+            >
+              cluster0
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster1"
+            >
+              cluster1
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster2"
+            >
+              cluster2
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots home/RecentClusters Two Existing Clusters 1`] = `
+<div>
+  <div
+    aria-labelledby="#recent-clusters-label"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster0"
+            >
+              cluster0
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster1"
+            >
+              cluster1
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots home/RecentClusters Two Recent Clusters 1`] = `
+<div>
+  <div
+    aria-labelledby="#recent-clusters-label"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster0"
+            >
+              cluster0
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster1"
+            >
+              cluster1
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster2"
+            >
+              cluster2
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots home/RecentClusters With Obsolete Clusters 1`] = `
+<div>
+  <div
+    aria-labelledby="#recent-clusters-label"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster0"
+            >
+              cluster0
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster1"
+            >
+              cluster1
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <button
+        class="MuiButtonBase-root"
+        tabindex="0"
+        type="button"
+      >
+        <div
+          class="MuiPaper-root MuiCard-root makeStyles-root makeStyles-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="MuiCardContent-root makeStyles-content"
+          >
+            <span />
+            <p
+              class="MuiTypography-root makeStyles-label makeStyles-label MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+              title="cluster2"
+            >
+              cluster2
+            </p>
+          </div>
+        </div>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

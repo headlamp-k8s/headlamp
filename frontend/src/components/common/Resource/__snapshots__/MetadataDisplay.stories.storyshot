@@ -3,7 +3,7 @@
 exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
 <div>
   <dl
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+    class="MuiGrid-root makeStyles-table MuiGrid-container"
   >
     <dt
       class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -48,12 +48,12 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
       </span>
     </dd>
     <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
     >
       Labels
     </dt>
     <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+      class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
     >
       <div
         class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
@@ -99,7 +99,7 @@ exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
 exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
 <div>
   <dl
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+    class="MuiGrid-root makeStyles-table MuiGrid-container"
   >
     <dt
       class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -237,7 +237,7 @@ exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
 exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
 <div>
   <dl
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+    class="MuiGrid-root makeStyles-table MuiGrid-container"
   >
     <dt
       class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"

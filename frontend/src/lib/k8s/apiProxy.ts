@@ -140,7 +140,8 @@ function getClusterAuthType(cluster: string): string {
 }
 
 /**
- * Sends a request to the Kubernetes API server.
+ * Sends a request to the backend. If the useCluster parameter is true (which it is, by default), it will be
+ * treated as a request to the Kubernetes server of the currently defined (in the URL) cluster.
  *
  * @param path - The path to the API endpoint.
  * @param params - Optional parameters for the request.
@@ -158,23 +159,51 @@ export async function request(
   useCluster: boolean = true,
   queryParams?: QueryParameters
 ) {
-  interface RequestHeaders {
-    Authorization?: string;
-    [otherHeader: string]: any;
-  }
+  // @todo: This is a temporary way of getting the current cluster. We should improve it later.
+  const cluster = (useCluster && getCluster()) || '';
 
   if (isDebugVerbose('k8s/apiProxy@request')) {
     console.debug('k8s/apiProxy@request', { path, params, useCluster, queryParams });
   }
 
-  const { timeout = DEFAULT_TIMEOUT, isJSON = true, ...otherParams } = params;
-  const opts: { headers: RequestHeaders } = Object.assign({ headers: {} }, otherParams);
+  return clusterRequest(path, { cluster, autoLogoutOnAuthError, ...params }, queryParams);
+}
 
-  // @todo: This is a temporary way of getting the current cluster. We should improve it later.
-  const cluster = getCluster();
+/**
+ * Sends a request to the backend. If the cluster is required in the params parameter, it will
+ * be used as a request to the respective Kubernetes server.
+ *
+ * @param path - The path to the API endpoint.
+ * @param params - Optional parameters for the request.
+ * @param queryParams - Optional query parameters for the request.
+ *
+ * @returns A Promise that resolves to the JSON response from the API server.
+ * @throws An ApiError if the response status is not ok.
+ */
+export async function clusterRequest(
+  path: string,
+  params: RequestParams = {},
+  queryParams?: QueryParameters
+) {
+  interface RequestHeaders {
+    Authorization?: string;
+    cluster?: string;
+    autoLogoutOnAuthError?: boolean;
+    [otherHeader: string]: any;
+  }
+
+  const {
+    timeout = DEFAULT_TIMEOUT,
+    cluster: paramsCluster,
+    autoLogoutOnAuthError = true,
+    isJSON = true,
+    ...otherParams
+  } = params;
+  const opts: { headers: RequestHeaders } = Object.assign({ headers: {} }, otherParams);
+  const cluster = paramsCluster || '';
 
   let fullPath = path;
-  if (useCluster && cluster) {
+  if (cluster) {
     const token = getToken(cluster);
 
     // Refresh service account token only if the cluster auth type is not OIDC

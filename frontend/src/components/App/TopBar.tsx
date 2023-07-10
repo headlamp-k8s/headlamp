@@ -32,6 +32,7 @@ import { ClusterTitle } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
+import { AppLogo } from './AppLogo';
 import Notifications from './Notifications';
 
 export interface TopBarProps {}
@@ -117,6 +118,7 @@ export interface PureTopBarProps {
   appBarActionsProcessors?: AppBarActionsProcessor[];
   logout: () => void;
   hasToken: boolean;
+  /** @deprecated The cluster button as is will be reomved soon, so this argument should not be used. */
   clusters?: {
     [clusterName: string]: any;
   };
@@ -131,18 +133,16 @@ export interface PureTopBarProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appbar: {
-      background: theme.palette.background.default,
-      // When the draw is open, we move the app bar over.
-      paddingLeft: (props: { isSidebarOpen: boolean | undefined; isSmall: boolean }) =>
-        props.isSidebarOpen ? `${drawerWidth}px` : props.isSmall ? '0px' : '60px',
       marginLeft: drawerWidth,
+      zIndex: theme.zIndex.drawer + 1,
       '& > *': {
         color: theme.palette.text.primary,
       },
     },
     toolbar: {
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('xs')]: {
         paddingLeft: 0,
+        paddingRight: 0,
       },
     },
     grow: {
@@ -153,8 +153,6 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
     },
     versionLink: {
-      backgroundColor: theme.palette.background.default,
-      color: theme.palette.text.primary,
       textAlign: 'center',
     },
     userMenu: {
@@ -230,6 +228,7 @@ export function PureTopBar({
   const { t } = useTranslation('frequent');
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -409,10 +408,11 @@ export function PureTopBar({
         aria-label={t('Appbar Tools')}
       >
         <Toolbar className={classes.toolbar}>
-          {isSmall && <HeadlampButton open={openSideBar} mobileOnly onToggleOpen={onToggleOpen} />}
+          {isMobile && <HeadlampButton open={openSideBar} onToggleOpen={onToggleOpen} />}
 
           {!isSmall && (
             <>
+              <AppLogo />
               <AppBarActions
                 appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
               />
@@ -420,6 +420,7 @@ export function PureTopBar({
           )}
           {isSmall && (
             <>
+              {!isMobile && <AppLogo />}
               <div className={classes.grow} />
               <IconButton
                 aria-label={t('show more')}

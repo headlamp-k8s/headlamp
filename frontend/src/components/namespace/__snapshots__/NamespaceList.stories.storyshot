@@ -85,10 +85,10 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -100,7 +100,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Name
@@ -121,7 +121,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Status
@@ -142,7 +142,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
                 style="text-align: right;"
               >
@@ -172,7 +172,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -182,17 +182,17 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                  style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
                   Active
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p
@@ -208,7 +208,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -218,17 +218,17 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                  style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
                   Active
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p
@@ -244,7 +244,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -254,17 +254,17 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                  style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
                   Active
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p
@@ -280,7 +280,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -290,17 +290,17 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                  style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
                   Active
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p
@@ -316,7 +316,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -326,17 +326,17 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <span
-                  class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                  style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
                   Active
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p

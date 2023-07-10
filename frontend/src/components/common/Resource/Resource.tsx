@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 import { InputLabel, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
-import Grid, { GridProps } from '@material-ui/core/Grid';
+import Grid, { GridProps, GridSize } from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Input, { InputProps } from '@material-ui/core/Input';
 import { TextFieldProps } from '@material-ui/core/TextField';
@@ -28,12 +28,12 @@ import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
 import { SectionBox } from '../../common/SectionBox';
-import SectionHeader from '../../common/SectionHeader';
 import SimpleTable, { NameValueTable } from '../../common/SimpleTable';
 import DetailsViewSection from '../../DetailsViewSection';
 import { PodListProps, PodListRenderer } from '../../pod/List';
 import { LightTooltip, ObjectEventList } from '..';
 import Empty from '../EmptyContent';
+import InnerTable from '../InnerTable';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
 import Link, { LinkProps } from '../Link';
 import { useMetadataDisplayStyles } from '.';
@@ -337,7 +337,7 @@ export function VolumeMounts(props: VolumeMountsProps) {
   }
 
   return (
-    <SimpleTable
+    <InnerTable
       columns={[
         {
           label: t('frequent|Mount Path'),
@@ -478,6 +478,10 @@ export function ContainerInfo(props: ContainerInfoProps) {
 
     return [
       {
+        name: container.name,
+        withHighlightStyle: true,
+      },
+      {
         name: t('Status'),
         value: getContainerStatusLabel(),
         hide: !status,
@@ -564,20 +568,18 @@ export function ContainerInfo(props: ContainerInfoProps) {
         ),
         hide: _.isEmpty(container.ports),
       },
+      {
+        name: t('Volume Mounts'),
+        value: <VolumeMounts mounts={container?.volumeMounts || undefined} />,
+        valueCellProps: { sm: 12 as GridSize },
+        hide: _.isEmpty(container?.volumeMounts),
+      },
     ];
   }
 
   return (
-    <Box py={1}>
-      <SectionHeader noPadding title={container.name} headerStyle="normal" />
+    <Box pb={1}>
       <NameValueTable rows={containerRows()} />
-      {!_.isEmpty(container.volumeMounts) && (
-        <>
-          <Divider />
-          <SectionHeader noPadding title={t('Volume Mounts')} headerStyle="label" />
-          <VolumeMounts mounts={container.volumeMounts} />
-        </>
-      )}
     </Box>
   );
 }
@@ -669,38 +671,32 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
   return (
     <>
-      <SectionBox title={title} />
-      <>
+      <SectionBox title={title}>
         {numContainers === 0 ? (
-          <SectionBox>
-            <Empty>{t('resource|No data to be shown.')}</Empty>
-          </SectionBox>
+          <Empty>{t('resource|No data to be shown.')}</Empty>
         ) : (
-          containers.map((container: any, i: number) => (
-            <SectionBox key={i} outterBoxProps={{ pt: 1 }}>
-              <ContainerInfo
-                resource={resource}
-                container={container}
-                status={statuses[container.name]}
-              />
-            </SectionBox>
+          containers.map((container: any) => (
+            <ContainerInfo
+              key={`container_${container.name}`}
+              resource={resource}
+              container={container}
+              status={statuses[container.name]}
+            />
           ))
         )}
-      </>
+      </SectionBox>
 
       {initContainers.length > 0 && (
-        <>
-          <SectionBox title={t('resource|Init Containers')} />
+        <SectionBox title={t('resource|Init Containers')}>
           {initContainers.map((initContainer: KubeContainer, i: number) => (
-            <SectionBox key={`init_container_${i}`} outterBoxProps={{ pt: 1 }}>
-              <ContainerInfo
-                resource={resource}
-                container={initContainer}
-                status={statuses[initContainer.name]}
-              />
-            </SectionBox>
+            <ContainerInfo
+              key={`init_container_${i}`}
+              resource={resource}
+              container={initContainer}
+              status={statuses[initContainer.name]}
+            />
           ))}
-        </>
+        </SectionBox>
       )}
     </>
   );

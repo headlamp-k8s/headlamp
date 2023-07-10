@@ -18,13 +18,13 @@ import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/a
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ActionButton } from '../common';
 import CreateButton from '../common/Resource/CreateButton';
-import HeadlampButton from './HeadlampButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';
 import SidebarItem, { SidebarEntryProps } from './SidebarItem';
 import VersionButton from './VersionButton';
 
-export const drawerWidth = 330;
+export const drawerWidth = 240;
+export const mobileDrawerWidth = 320;
 export const drawerWidthClosed = 64;
 
 export enum DefaultSidebars {
@@ -71,8 +71,23 @@ const useStyle = makeStyles(theme => ({
   sidebarGrid: {
     height: '100%',
   },
-  '.MuiListItemText-primary': {
-    color: 'red',
+  toolbar: theme.mixins.toolbar,
+  linkArea: {
+    '&, & *, & svg': {
+      color: theme.palette.sidebarLink.color,
+    },
+    '& .MuiButton-root': {
+      color: theme.palette.sidebarButtonInLinkArea.color,
+      '&:hover': {
+        background: theme.palette.sidebarButtonInLinkArea.hover.background,
+      },
+    },
+    '& .MuiButton-containedPrimary': {
+      background: theme.palette.sidebarButtonInLinkArea.primary.background,
+      '&:hover': {
+        background: theme.palette.sidebarButtonInLinkArea.hover.background,
+      },
+    },
   },
 }));
 
@@ -101,14 +116,7 @@ export function useSidebarInfo() {
   };
 }
 
-const useButtonStyle = makeStyles({
-  button: {
-    color: '#adadad',
-  },
-});
-
 function AddClusterButton() {
-  const buttonClasses = useButtonStyle();
   const history = useHistory();
   const { t } = useTranslation(['frequent']);
   const { isOpen } = useSidebarInfo();
@@ -117,7 +125,6 @@ function AddClusterButton() {
     <Box pb={2}>
       {isOpen ? (
         <Button
-          className={buttonClasses.button}
           onClick={() => history.push(createRouteURL('loadKubeConfig'))}
           startIcon={<InlineIcon icon="mdi:plus-box-outline" />}
         >
@@ -132,6 +139,74 @@ function AddClusterButton() {
           width={38}
         />
       )}
+    </Box>
+  );
+}
+
+function SidebarToggleButton() {
+  const dispatch = useDispatch();
+  const { isOpen, isNarrow, canExpand, isTemporary } = useSidebarInfo();
+
+  const { t } = useTranslation(['frequent']);
+  const isNarrowOnly = isNarrow && !canExpand;
+
+  if (isTemporary || isNarrowOnly) {
+    return null;
+  }
+
+  return (
+    <Box textAlign={isOpen ? 'right' : 'center'}>
+      <ActionButton
+        iconButtonProps={{
+          size: 'small',
+        }}
+        onClick={() => {
+          dispatch(setWhetherSidebarOpen(!isOpen));
+        }}
+        icon={isOpen ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
+        description={t('frequent|Collapse Sidebar')}
+      />
+    </Box>
+  );
+}
+
+function DefaultLinkArea(props: { sidebarName: string; isOpen: boolean }) {
+  const { sidebarName, isOpen } = props;
+
+  if (sidebarName === DefaultSidebars.HOME) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        flexDirection={isOpen ? 'row' : 'column'}
+        p={1}
+      >
+        <Box>{helpers.isElectron() && <AddClusterButton />}</Box>
+        <Box>
+          <SidebarToggleButton />
+        </Box>
+      </Box>
+    );
+  }
+
+  return (
+    <Box textAlign="center">
+      <CreateButton isNarrow={!isOpen} />
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        flexDirection={isOpen ? 'row' : 'column'}
+        p={1}
+      >
+        <Box>
+          <VersionButton />
+        </Box>
+        <Box>
+          <SidebarToggleButton />
+        </Box>
+      </Box>
     </Box>
   );
 }
@@ -185,16 +260,7 @@ export default function Sidebar() {
       onToggleOpen={() => {
         dispatch(setWhetherSidebarOpen(!sidebar.isSidebarOpen));
       }}
-      linkArea={
-        sidebar.selected.sidebar === DefaultSidebars.HOME
-          ? helpers.isElectron() && <AddClusterButton />
-          : sidebar.selected.sidebar === DefaultSidebars.IN_CLUSTER && (
-              <>
-                <CreateButton />
-                <VersionButton />
-              </>
-            )
-      }
+      linkArea={<DefaultLinkArea sidebarName={sidebar.selected.sidebar || ''} isOpen={isOpen} />}
     />
   );
 }
@@ -255,7 +321,7 @@ export function PureSidebar({
 
   const contents = (
     <>
-      <HeadlampButton open={largeSideBarOpen} onToggleOpen={onToggleOpen} disabled={isNarrowOnly} />
+      {!isTemporaryDrawer && <Box className={classes.toolbar} />}
       <Grid
         className={classes.sidebarGrid}
         container
@@ -280,7 +346,9 @@ export function PureSidebar({
           </List>
         </Grid>
         <Grid item>
-          <Box textAlign="center">{linkArea}</Box>
+          <Box textAlign="center" p={0} className={classes.linkArea}>
+            {linkArea}
+          </Box>
         </Grid>
       </Grid>
     </>

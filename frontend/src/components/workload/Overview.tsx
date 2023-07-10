@@ -66,9 +66,9 @@ export default function Overview() {
   return (
     <PageGrid>
       <SectionBox py={2}>
-        <Grid container justifyContent="space-around" alignItems="flex-start" spacing={1}>
+        <Grid container justifyContent="flex-start" alignItems="flex-start" spacing={2}>
           {workloads.map(({ className: name }) => (
-            <Grid item lg={2} md={4} xs={6} key={name}>
+            <Grid item lg={3} md={4} xs={6} key={name}>
               <WorkloadCircleChart
                 workloadData={workloadsData[name] || []}
                 // @todo: Use a plural from from the class itself when we have it

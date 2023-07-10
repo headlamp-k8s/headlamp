@@ -32,7 +32,7 @@ export default function EndpointDetails() {
               ) : (
                 item.subsets?.map((subset, i) => (
                   <SectionBox key={`subsetDetails_${i}`} outterBoxProps={{ pb: 3 }}>
-                    <SectionHeader noPadding title={t('frequent|Addresses')} headerStyle="normal" />
+                    <SectionHeader noPadding title={t('frequent|Addresses')} headerStyle="label" />
                     <SimpleTable
                       data={subset?.addresses || []}
                       columns={[
@@ -73,7 +73,7 @@ export default function EndpointDetails() {
                       ]}
                       reflectInURL="addresses"
                     />
-                    <SectionHeader noPadding title={t('Ports')} headerStyle="normal" />
+                    <SectionHeader noPadding title={t('Ports')} headerStyle="label" />
                     <SimpleTable
                       data={subset?.ports || []}
                       columns={[

@@ -248,14 +248,21 @@ function setAppVersion(value: string) {
 const recentClustersStorageKey = 'recent_clusters';
 
 function setRecentCluster(cluster: Cluster) {
-  const currentClusters = getRecentClusters().filter(name => name !== cluster.name);
+  const recentClusters = getRecentClusters();
+  const currentClusters = recentClusters.filter(name => name !== cluster.name);
   const newClusters = [cluster.name, ...currentClusters].slice(0, 3);
   localStorage.setItem(recentClustersStorageKey, JSON.stringify(newClusters));
 }
 
 function getRecentClusters() {
   const currentClustersStr = localStorage.getItem(recentClustersStorageKey) || '[]';
-  return JSON.parse(currentClustersStr) as string[];
+  const recentClusters = JSON.parse(currentClustersStr) as string[];
+
+  if (!Array.isArray(recentClusters)) {
+    return [];
+  }
+
+  return recentClusters;
 }
 
 const tablesRowsPerPageKey = 'tables_rows_per_page';

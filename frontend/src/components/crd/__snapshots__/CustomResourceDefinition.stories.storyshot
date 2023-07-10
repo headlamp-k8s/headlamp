@@ -79,88 +79,84 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="false"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <div
-              aria-busy="false"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+            <dl
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
-              <dl
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
               >
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                Name
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Name
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  mydefinition.phonyresources.io
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Creation
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    mydefinition.phonyresources.io
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  2021-12-15T14:57:13.000Z
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Group
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Creation
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  my.phonyresources.io
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Version
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    2021-12-15T14:57:13.000Z
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  v1
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Scope
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Group
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    my.phonyresources.io
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Version
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    v1
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Scope
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    Namespaced
-                  </span>
-                </dd>
-              </dl>
-            </div>
+                  Namespaced
+                </span>
+              </dd>
+            </dl>
           </div>
         </div>
       </div>
@@ -195,10 +191,10 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
                 class="MuiTable-root makeStyles-table"
@@ -210,25 +206,25 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Plural
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Singular
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Kind
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       List Kind
@@ -242,22 +238,22 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       mycustomresources
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       mycustomresource
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       MyCustomResource
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       MyCustomResourceList
                     </td>
@@ -299,10 +295,10 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
                 class="MuiTable-root makeStyles-table"
@@ -314,19 +310,19 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Name
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Served
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Storage
@@ -340,17 +336,17 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       v1
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       false
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       false
                     </td>
@@ -392,10 +388,10 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
             >
               <div
                 class="MuiBox-root MuiBox-root"
@@ -441,10 +437,10 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
                 class="MuiTable-root makeStyles-table"
@@ -456,19 +452,19 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Name
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Namespace
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                       style="text-align: right;"
                     >
@@ -498,7 +494,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-link MuiTypography-colorPrimary"
@@ -508,12 +504,12 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       </a>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       mynamespace
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                       style="text-align: right;"
                     >
                       <p
@@ -529,7 +525,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-link MuiTypography-colorPrimary"
@@ -539,12 +535,12 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       </a>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       mynamespace
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                       style="text-align: right;"
                     >
                       <p
@@ -600,10 +596,10 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
                 class="MuiTable-root makeStyles-table"
@@ -615,31 +611,31 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Type
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Reason
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       From
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Message
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Age
@@ -668,27 +664,27 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       Normal
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       Created
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       kubelet
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       Created
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -795,10 +791,10 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -810,13 +806,13 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Name
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Group
@@ -837,7 +833,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Scope
@@ -858,7 +854,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Full name
@@ -879,7 +875,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
                 style="text-align: right;"
               >
@@ -909,7 +905,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -919,22 +915,22 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 my.phonyresources.io
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 Namespaced
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 mydefinition.phonyresources.io
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p

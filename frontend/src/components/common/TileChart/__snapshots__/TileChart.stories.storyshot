@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Charts/TileChart With Progress 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiBox-root MuiBox-root makeStyles-tileBox"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <p
+            class="MuiTypography-root makeStyles-title MuiTypography-body1 MuiTypography-gutterBottom"
+          >
+            My chart
+          </p>
+          
+        </div>
+        <p
+          class="MuiTypography-root makeStyles-legend MuiTypography-body1 MuiTypography-gutterBottom"
+        >
+          Progress so far
+        </p>
+      </div>
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          aria-busy="false"
+          aria-live="polite"
+          class="MuiBox-root MuiBox-root"
+        >
+          
+          <div
+            class="recharts-wrapper makeStyles-chart"
+            style="position: relative; cursor: default; width: 112px; height: 112px;"
+          >
+            <svg
+              class="recharts-surface"
+              cx="70"
+              cy="70"
+              height="112"
+              version="1.1"
+              viewBox="0 0 112 112"
+              width="112"
+            >
+              <title />
+              <desc />
+              <defs>
+                <clippath
+                  id="recharts9-clip"
+                >
+                  <rect
+                    height="102"
+                    width="102"
+                    x="5"
+                    y="5"
+                  />
+                </clippath>
+              </defs>
+              <g
+                class="recharts-layer recharts-pie"
+              >
+                <g
+                  class="recharts-layer"
+                >
+                  <g
+                    class="recharts-layer recharts-pie-sector"
+                  />
+                  <g
+                    class="recharts-layer recharts-pie-sector"
+                  />
+                  <g
+                    class="recharts-layer recharts-pie-sector"
+                  />
+                </g>
+                <text
+                  class="recharts-text recharts-label"
+                  offset="5"
+                  style="font-size: 16.8px; fill: #000;"
+                  text-anchor="middle"
+                  x="61"
+                  y="61"
+                >
+                  <tspan
+                    dy="0.355em"
+                    x="61"
+                  >
+                    10%
+                  </tspan>
+                </text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Charts/TileChart Without Progress 1`] = `
+<div>
+  <div
+    class="MuiPaper-root makeStyles-paper MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <div
+      class="MuiBox-root MuiBox-root makeStyles-tileBox"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <p
+            class="MuiTypography-root makeStyles-title MuiTypography-body1 MuiTypography-gutterBottom"
+          >
+            My chart
+          </p>
+          <div
+            class="MuiContainer-root makeStyles-container MuiContainer-maxWidthLg"
+          >
+            <span />
+          </div>
+        </div>
+        <p
+          class="MuiTypography-root makeStyles-legend MuiTypography-body1 MuiTypography-gutterBottom"
+        >
+          Progress so far
+        </p>
+      </div>
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+  </div>
+</div>
+`;

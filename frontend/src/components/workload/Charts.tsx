@@ -1,9 +1,9 @@
 import { useTheme } from '@material-ui/core/styles';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Workload } from '../../lib/k8s/cluster';
 import { getPercentStr, getReadyReplicas, getTotalReplicas } from '../../lib/util';
-import { PercentageCircle, PercentageCircleProps } from '../common/Chart';
+import { PercentageCircleProps } from '../common/Chart';
+import TileChart from '../common/TileChart';
 
 interface WorkloadCircleChartProps extends Omit<PercentageCircleProps, 'data'> {
   workloadData: Workload[];
@@ -48,7 +48,7 @@ export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
   }
 
   return (
-    <PercentageCircle
+    <TileChart
       data={makeData()}
       total={workloadData.length}
       totalProps={{

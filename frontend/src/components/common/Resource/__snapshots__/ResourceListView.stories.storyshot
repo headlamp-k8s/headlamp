@@ -85,10 +85,10 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -100,7 +100,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Name
@@ -121,7 +121,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Namespace
@@ -142,7 +142,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
                 style="text-align: right;"
               >
@@ -172,7 +172,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -182,7 +182,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -192,7 +192,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p
@@ -208,7 +208,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -218,7 +218,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -228,7 +228,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p
@@ -244,7 +244,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -254,7 +254,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -264,7 +264,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p
@@ -280,7 +280,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -290,7 +290,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -300,7 +300,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p
@@ -316,7 +316,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -326,7 +326,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -336,7 +336,7 @@ exports[`Storyshots Resource/ListView One Hidden Column 1`] = `
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 style="text-align: right;"
               >
                 <p

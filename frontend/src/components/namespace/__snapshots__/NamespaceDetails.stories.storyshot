@@ -79,61 +79,57 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="false"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <div
-              aria-busy="false"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+            <dl
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
-              <dl
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
               >
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                Name
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Name
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  my-namespace
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Creation
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    my-namespace
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  2023-01-01T00:00:00.000Z
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Status
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                  style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                 >
-                  Creation
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    2023-01-01T00:00:00.000Z
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Status
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                    style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
-                  >
-                    Active
-                  </span>
-                </dd>
-              </dl>
-            </div>
+                  Active
+                </span>
+              </dd>
+            </dl>
           </div>
         </div>
       </div>
@@ -227,10 +223,10 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
                 class="MuiTable-root makeStyles-table"
@@ -242,7 +238,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Name
@@ -263,7 +259,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </button>
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Restarts
@@ -284,13 +280,13 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </button>
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Ready
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Status
@@ -311,7 +307,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </button>
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Pod IP
@@ -332,7 +328,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </button>
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Node Name
@@ -353,7 +349,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </button>
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                       style="text-align: right;"
                     >
@@ -383,7 +379,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -393,24 +389,24 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </a>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0/1
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <div
                         class="MuiBox-root MuiBox-root"
                         title="Back-off pulling image \\"doesnotexist:nover\\""
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           ImagePullBackOff
@@ -418,17 +414,17 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </div>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0.0.0.2
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       my-node
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                       style="text-align: right;"
                     >
                       <p
@@ -444,7 +440,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -454,42 +450,42 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </a>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0/1
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <div
                         class="MuiBox-root MuiBox-root"
                         title=""
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                          style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                          style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                         >
                           Completed
                         </span>
                       </div>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0.0.0.2
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       my-node
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                       style="text-align: right;"
                     >
                       <p
@@ -505,7 +501,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -515,24 +511,24 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </a>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0/1
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <div
                         class="MuiBox-root MuiBox-root"
                         title=""
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                         >
                           Init:0/2
@@ -540,17 +536,17 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </div>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0.0.0.2
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       my-node
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                       style="text-align: right;"
                     >
                       <p
@@ -566,7 +562,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -576,24 +572,24 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </a>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       337 (3mo ago)
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0/1
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <div
                         class="MuiBox-root MuiBox-root"
                         title="back-off 5m0s restarting failed container=liveness pod=liveness-http_default(4f8b71a3-f99c-41c2-9523-83edc1de02ce)"
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                           style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                         >
                           CrashLoopBackOff
@@ -608,17 +604,17 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </div>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0.0.0.2
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       my-node
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                       style="text-align: right;"
                     >
                       <p
@@ -634,7 +630,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -644,24 +640,24 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </a>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0/1
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <div
                         class="MuiBox-root MuiBox-root"
                         title=""
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
                           style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
                         >
                           Error
@@ -676,17 +672,17 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </div>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0.0.0.2
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       my-node
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                       style="text-align: right;"
                     >
                       <p
@@ -702,7 +698,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
@@ -712,42 +708,42 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       </a>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       1/1
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <div
                         class="MuiBox-root MuiBox-root"
                         title=""
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel  MuiTypography-body1"
-                          style="background-color: rgb(232, 245, 233); color: rgb(46, 125, 50);"
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                          style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                         >
                           Running
                         </span>
                       </div>
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       0.0.0.2
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       my-node
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                       style="text-align: right;"
                     >
                       <p
@@ -803,10 +799,10 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
                 class="MuiTable-root makeStyles-table"
@@ -818,31 +814,31 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Type
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Reason
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       From
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Message
                     </th>
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Age
@@ -871,27 +867,27 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     class="MuiTableRow-root"
                   >
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       Normal
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       Created
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       kubelet
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       Created
                     </td>
                     <td
-                      class="MuiTableCell-root MuiTableCell-body"
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
                         class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"

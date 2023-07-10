@@ -78,219 +78,215 @@ exports[`Storyshots Settings General 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
-      <div
-        class="MuiBox-root MuiBox-root"
+      <dl
+        class="MuiGrid-root makeStyles-table MuiGrid-container"
       >
-        <dl
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
         >
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-          >
-            Language
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell makeStyles-valueCol MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+          Language
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell makeStyles-valueCol MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <div
+            class="MuiFormControl-root"
           >
             <div
-              class="MuiFormControl-root"
+              class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
             >
               <div
-                class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
-              >
-                <div
-                  aria-haspopup="listbox"
-                  aria-label="Select locale"
-                  class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
-                  role="button"
-                  tabindex="0"
-                >
-                  English
-                </div>
-                <input
-                  aria-hidden="true"
-                  class="MuiSelect-nativeInput"
-                  tabindex="-1"
-                  value="en"
-                />
-                <svg
-                  aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSelect-icon"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M7 10l5 5 5-5z"
-                  />
-                </svg>
-              </div>
-            </div>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-          >
-            Theme
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell makeStyles-valueCol MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-          >
-            <div
-              class="MuiButtonGroup-root makeStyles-buttonGroup"
-              role="group"
-            >
-              <button
-                aria-label="light theme"
-                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlined MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                aria-haspopup="listbox"
+                aria-label="Select locale"
+                class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+                role="button"
                 tabindex="0"
-                type="button"
               >
-                <span
-                  class="MuiButton-label"
-                >
-                  <span />
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-              <button
-                aria-label="dark theme"
-                class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlined MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
-                tabindex="0"
-                type="button"
-              >
-                <span
-                  class="MuiButton-label"
-                >
-                  <span />
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </button>
-            </div>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-          >
-            Number of rows for tables
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell makeStyles-valueCol MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-          >
-            <div
-              class="MuiFormControl-root"
-            >
-              <div
-                class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
-                style="width: 100px;"
-              >
-                <div
-                  aria-haspopup="listbox"
-                  class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
-                  role="button"
-                  tabindex="0"
-                >
-                  15
-                </div>
-                <input
-                  aria-hidden="true"
-                  class="MuiSelect-nativeInput"
-                  tabindex="-1"
-                  value="15"
-                />
-                <svg
-                  aria-hidden="true"
-                  class="MuiSvgIcon-root MuiSelect-icon"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M7 10l5 5 5-5z"
-                  />
-                </svg>
+                English
               </div>
+              <input
+                aria-hidden="true"
+                class="MuiSelect-nativeInput"
+                tabindex="-1"
+                value="en"
+              />
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSelect-icon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
             </div>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+          </div>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Theme
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell makeStyles-valueCol MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <div
+            class="MuiButtonGroup-root makeStyles-buttonGroup"
+            role="group"
           >
-            Timezone to display for dates
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell makeStyles-valueCol MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+            <button
+              aria-label="light theme"
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlined MuiButton-containedSizeLarge MuiButton-sizeLarge"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                <span />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              aria-label="dark theme"
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal MuiButtonGroup-groupedOutlined MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                <span />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Number of rows for tables
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell makeStyles-valueCol MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <div
+            class="MuiFormControl-root"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+              style="width: 100px;"
             >
               <div
-                aria-expanded="false"
-                class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon"
-                role="combobox"
+                aria-haspopup="listbox"
+                class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+                role="button"
+                tabindex="0"
               >
-                <div
-                  class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+                15
+              </div>
+              <input
+                aria-hidden="true"
+                class="MuiSelect-nativeInput"
+                tabindex="-1"
+                value="15"
+              />
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSelect-icon"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
+          </div>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Timezone to display for dates
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell makeStyles-valueCol MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <div
+            class="MuiBox-root MuiBox-root"
+          >
+            <div
+              aria-expanded="false"
+              class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon"
+              role="combobox"
+            >
+              <div
+                class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+                  data-shrink="false"
+                  for="cluster-selector-autocomplete"
+                  id="cluster-selector-autocomplete-label"
                 >
-                  <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
-                    data-shrink="false"
-                    for="cluster-selector-autocomplete"
-                    id="cluster-selector-autocomplete-label"
-                  >
-                    Timezone
-                  </label>
+                  Timezone
+                </label>
+                <div
+                  class="MuiInputBase-root MuiInput-root MuiInput-underline MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd"
+                >
+                  <input
+                    aria-autocomplete="both"
+                    aria-invalid="false"
+                    autocapitalize="none"
+                    autocomplete="off"
+                    class="MuiInputBase-input MuiInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd"
+                    id="cluster-selector-autocomplete"
+                    spellcheck="false"
+                    type="text"
+                    value=""
+                  />
                   <div
-                    class="MuiInputBase-root MuiInput-root MuiInput-underline MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-adornedEnd"
+                    class="MuiAutocomplete-endAdornment"
                   >
-                    <input
-                      aria-autocomplete="both"
-                      aria-invalid="false"
-                      autocapitalize="none"
-                      autocomplete="off"
-                      class="MuiInputBase-input MuiInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd"
-                      id="cluster-selector-autocomplete"
-                      spellcheck="false"
-                      type="text"
-                      value=""
-                    />
-                    <div
-                      class="MuiAutocomplete-endAdornment"
+                    <button
+                      aria-label="Open"
+                      class="MuiButtonBase-root MuiIconButton-root MuiAutocomplete-popupIndicator"
+                      tabindex="-1"
+                      title="Open"
+                      type="button"
                     >
-                      <button
-                        aria-label="Open"
-                        class="MuiButtonBase-root MuiIconButton-root MuiAutocomplete-popupIndicator"
-                        tabindex="-1"
-                        title="Open"
-                        type="button"
+                      <span
+                        class="MuiIconButton-label"
                       >
-                        <span
-                          class="MuiIconButton-label"
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root"
+                          focusable="false"
+                          viewBox="0 0 24 24"
                         >
-                          <svg
-                            aria-hidden="true"
-                            class="MuiSvgIcon-root"
-                            focusable="false"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              d="M7 10l5 5 5-5z"
-                            />
-                          </svg>
-                        </span>
-                        <span
-                          class="MuiTouchRipple-root"
-                        />
-                      </button>
-                    </div>
+                          <path
+                            d="M7 10l5 5 5-5z"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-          </dd>
-        </dl>
-      </div>
+          </div>
+        </dd>
+      </dl>
     </div>
   </div>
 </div>

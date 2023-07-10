@@ -73,102 +73,98 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      aria-busy="false"
+      aria-live="polite"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
-      <div
-        aria-busy="false"
-        aria-live="polite"
-        class="MuiBox-root MuiBox-root"
+      <dl
+        class="MuiGrid-root makeStyles-table MuiGrid-container"
       >
-        <dl
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
         >
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+          Name
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            Name
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+            every-minute-one-char
+          </span>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Namespace
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            <span
-              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-            >
-              every-minute-one-char
-            </span>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+            default
+          </span>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Creation
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            Namespace
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+            2022-01-01T00:00:00.000Z
+          </span>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Schedule
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <p
+            class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+            title=""
           >
-            <span
-              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-            >
-              default
-            </span>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+            *
+            
+          </p>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Suspend
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            Creation
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-          >
-            <span
-              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-            >
-              2022-01-01T00:00:00.000Z
-            </span>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-          >
-            Schedule
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-          >
-            <p
-              class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-              title=""
-            >
-              *
-              
-            </p>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-          >
-            Suspend
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-          >
-            <span
-              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-            >
-              false
-            </span>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-          >
-            Last Schedule
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-          >
-            <span
-              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-            />
-          </dd>
-        </dl>
-      </div>
+            false
+          </span>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Last Schedule
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          />
+        </dd>
+      </dl>
     </div>
   </div>
   <div
@@ -254,34 +250,30 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
       >
         <div
-          class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+          class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+          title="Loading table data"
         >
-          <div
-            class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-            role="progressbar"
-            style="width: 40px; height: 40px;"
-            title="Loading table data"
+          <svg
+            class="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
           >
-            <svg
-              class="MuiCircularProgress-svg"
-              viewBox="22 22 44 44"
-            >
-              <circle
-                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                cx="44"
-                cy="44"
-                fill="none"
-                r="20.2"
-                stroke-width="3.6"
-              />
-            </svg>
-          </div>
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
         </div>
       </div>
     </div>
@@ -310,10 +302,10 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -325,31 +317,31 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Type
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Reason
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 From
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Message
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Age
@@ -378,27 +370,27 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 Normal
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 Created
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 kubelet
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 Created
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -490,102 +482,98 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      aria-busy="false"
+      aria-live="polite"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
-      <div
-        aria-busy="false"
-        aria-live="polite"
-        class="MuiBox-root MuiBox-root"
+      <dl
+        class="MuiGrid-root makeStyles-table MuiGrid-container"
       >
-        <dl
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
         >
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+          Name
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            Name
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+            every-minute
+          </span>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Namespace
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            <span
-              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-            >
-              every-minute
-            </span>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+            default
+          </span>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Creation
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            Namespace
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+            2022-01-01T00:00:00.000Z
+          </span>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Schedule
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <p
+            class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+            title="Every minute"
           >
-            <span
-              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-            >
-              default
-            </span>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+            * * * * *
+            <span />
+          </p>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Suspend
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
           >
-            Creation
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-          >
-            <span
-              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-            >
-              2022-01-01T00:00:00.000Z
-            </span>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-          >
-            Schedule
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-          >
-            <p
-              class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-              title="Every minute"
-            >
-              * * * * *
-              <span />
-            </p>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-          >
-            Suspend
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-          >
-            <span
-              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-            >
-              false
-            </span>
-          </dd>
-          <dt
-            class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-          >
-            Last Schedule
-          </dt>
-          <dd
-            class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-          >
-            <span
-              class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-            />
-          </dd>
-        </dl>
-      </div>
+            false
+          </span>
+        </dd>
+        <dt
+          class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+        >
+          Last Schedule
+        </dt>
+        <dd
+          class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+        >
+          <span
+            class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+          />
+        </dd>
+      </dl>
     </div>
   </div>
   <div
@@ -671,34 +659,30 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
       >
         <div
-          class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+          class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+          role="progressbar"
+          style="width: 40px; height: 40px;"
+          title="Loading table data"
         >
-          <div
-            class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-            role="progressbar"
-            style="width: 40px; height: 40px;"
-            title="Loading table data"
+          <svg
+            class="MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
           >
-            <svg
-              class="MuiCircularProgress-svg"
-              viewBox="22 22 44 44"
-            >
-              <circle
-                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                cx="44"
-                cy="44"
-                fill="none"
-                r="20.2"
-                stroke-width="3.6"
-              />
-            </svg>
-          </div>
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="20.2"
+              stroke-width="3.6"
+            />
+          </svg>
         </div>
       </div>
     </div>
@@ -727,10 +711,10 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -742,31 +726,31 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
               class="MuiTableRow-root MuiTableRow-head"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Type
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Reason
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 From
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Message
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell"
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                 scope="col"
               >
                 Age
@@ -795,27 +779,27 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 Normal
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 Created
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 kubelet
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 Created
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"

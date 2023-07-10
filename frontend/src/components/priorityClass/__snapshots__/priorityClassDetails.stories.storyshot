@@ -79,127 +79,123 @@ exports[`Storyshots PriorityClasses/PriorityClassesDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="false"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <div
-              aria-busy="false"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+            <dl
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
             >
-              <dl
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
               >
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                Name
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Name
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  high-priority-apps
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Creation
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    high-priority-apps
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Creation
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    2022-10-26T13:46:17.000Z
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Annotations
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  2022-10-26T13:46:17.000Z
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Annotations
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
                 >
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                    style="max-width: 80%;"
                   >
                     <div
-                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-                      style="max-width: 80%;"
+                      class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                     >
-                      <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-                      >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
-                          title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"scheduling.k8s.io/v1\\",\\"description\\":\\"Mission Critical apps.\\",\\"globalDefault\\":false,\\"kind\\":\\"PriorityClass\\",\\"metadata\\":{\\"annotations\\":{},\\"name\\":\\"high-priority-apps\\"},\\"preemptionPolicy\\":\\"PreemptLowerPriority\\",\\"value\\":1000000}
+                      <p
+                        class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                        title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"scheduling.k8s.io/v1\\",\\"description\\":\\"Mission Critical apps.\\",\\"globalDefault\\":false,\\"kind\\":\\"PriorityClass\\",\\"metadata\\":{\\"annotations\\":{},\\"name\\":\\"high-priority-apps\\"},\\"preemptionPolicy\\":\\"PreemptLowerPriority\\",\\"value\\":1000000}
 "
-                        >
-                          kubectl.kubernetes.io/last-applied-configuration: …
-                        </p>
-                      </div>
+                      >
+                        kubectl.kubernetes.io/last-applied-configuration: …
+                      </p>
                     </div>
                   </div>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                </div>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Value
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                1000000
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Global Default
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Value
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  False
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Preemption Policy
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  1000000
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  PreemptLowerPriority
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Description
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                 >
-                  Global Default
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    False
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Preemption Policy
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    PreemptLowerPriority
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-                >
-                  Description
-                </dt>
-                <dd
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-                >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                  >
-                    Mission Critical apps.
-                  </span>
-                </dd>
-              </dl>
-            </div>
+                  Mission Critical apps.
+                </span>
+              </dd>
+            </dl>
           </div>
         </div>
       </div>
@@ -234,10 +230,10 @@ exports[`Storyshots PriorityClasses/PriorityClassesDetailsView Default 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
             >
               <div
                 class="MuiBox-root MuiBox-root"
@@ -328,12 +324,12 @@ exports[`Storyshots PriorityClasses/PriorityClassesDetailsView Error 1`] = `
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="true"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              aria-busy="true"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
             >
               <div
                 class="MuiBox-root MuiBox-root"
@@ -431,36 +427,32 @@ exports[`Storyshots PriorityClasses/PriorityClassesDetailsView No Item Yet 1`] =
             </div>
           </div>
           <div
-            class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+            aria-busy="true"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
           >
             <div
-              aria-busy="true"
-              aria-live="polite"
-              class="MuiBox-root MuiBox-root"
+              class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
             >
               <div
-                class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+                class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+                role="progressbar"
+                style="width: 40px; height: 40px;"
+                title="Loading resource data"
               >
-                <div
-                  class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-                  role="progressbar"
-                  style="width: 40px; height: 40px;"
-                  title="Loading resource data"
+                <svg
+                  class="MuiCircularProgress-svg"
+                  viewBox="22 22 44 44"
                 >
-                  <svg
-                    class="MuiCircularProgress-svg"
-                    viewBox="22 22 44 44"
-                  >
-                    <circle
-                      class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-                      cx="44"
-                      cy="44"
-                      fill="none"
-                      r="20.2"
-                      stroke-width="3.6"
-                    />
-                  </svg>
-                </div>
+                  <circle
+                    class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                    cx="44"
+                    cy="44"
+                    fill="none"
+                    r="20.2"
+                    stroke-width="3.6"
+                  />
+                </svg>
               </div>
             </div>
           </div>

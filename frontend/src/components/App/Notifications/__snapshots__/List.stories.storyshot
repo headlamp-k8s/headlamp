@@ -107,10 +107,10 @@ exports[`Storyshots Notifications List 1`] = `
       </div>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+      class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
           class="MuiTable-root makeStyles-table"
@@ -122,7 +122,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -137,7 +137,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -146,7 +146,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -157,7 +157,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -181,7 +181,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -196,7 +196,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -205,7 +205,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -216,7 +216,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -240,7 +240,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -255,7 +255,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -264,7 +264,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -275,7 +275,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -299,7 +299,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -314,7 +314,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -323,7 +323,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -334,7 +334,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -358,7 +358,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -373,7 +373,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -382,7 +382,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -393,7 +393,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -417,7 +417,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -432,7 +432,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -441,7 +441,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -452,7 +452,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -476,7 +476,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -491,7 +491,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -500,7 +500,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -511,7 +511,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -535,7 +535,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -550,7 +550,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -559,7 +559,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -570,7 +570,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -594,7 +594,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -609,7 +609,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -618,7 +618,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -629,7 +629,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -653,7 +653,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -668,7 +668,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -677,7 +677,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -688,7 +688,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -712,7 +712,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -727,7 +727,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -736,7 +736,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -747,7 +747,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -771,7 +771,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -786,7 +786,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -795,7 +795,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -806,7 +806,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -830,7 +830,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -845,7 +845,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -854,7 +854,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -865,7 +865,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -889,7 +889,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -904,7 +904,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -913,7 +913,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -924,7 +924,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"
@@ -948,7 +948,7 @@ exports[`Storyshots Notifications List 1`] = `
               class="MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -963,7 +963,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <div
                   class="MuiBox-root MuiBox-root"
@@ -972,7 +972,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
                   class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
@@ -983,7 +983,7 @@ exports[`Storyshots Notifications List 1`] = `
                 </p>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <button
                   aria-label="Mark as read"

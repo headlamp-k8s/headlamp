@@ -1,5 +1,5 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Button, Grid, GridProps, IconButton } from '@material-ui/core';
+import { Button, IconButton, Paper, TableContainer } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -15,7 +15,6 @@ import helpers from '../../helpers';
 import { useURLState } from '../../lib/util';
 import { useSettings } from '../App/Settings/hook';
 import Empty from './EmptyContent';
-import { ValueLabel } from './Label';
 import Loader from './Loader';
 
 const useTableStyle = makeStyles(theme => ({
@@ -32,10 +31,11 @@ const useTableStyle = makeStyles(theme => ({
       overflowX: 'auto', // make it responsive
     },
     '& .MuiTableCell-root': {
-      paddingLeft: '0',
-      fontSize: '1rem',
+      padding: '8px 24px 7px 16px',
     },
     '& .MuiTableBody-root': {
+      background: theme.palette.tables.body.background,
+
       '& .MuiTableRow-root:last-child': {
         '& .MuiTableCell-root': {
           borderBottom: 'none',
@@ -43,9 +43,12 @@ const useTableStyle = makeStyles(theme => ({
       },
     },
     '& .MuiTableCell-head': {
-      color: theme.palette.tables.headerText,
-      fontSize: '1.1rem',
+      color: theme.palette.tables.head.text,
+      background: theme.palette.tables.head.background,
     },
+  },
+  tableContainer: {
+    overflowY: 'hidden',
   },
 }));
 
@@ -92,6 +95,8 @@ export interface SimpleTableProps {
   page?: number;
   /** Whether to show the pagination component */
   showPagination?: boolean;
+  /** The style for the table */
+  className?: string;
 }
 
 interface ColumnSortButtonProps {
@@ -162,6 +167,7 @@ export default function SimpleTable(props: SimpleTableProps) {
     defaultSortingColumn,
     noTableHeader = false,
     reflectInURL,
+    className,
   } = props;
   const shouldReflectInURL = reflectInURL !== undefined && reflectInURL !== false;
   const prefix = reflectInURL === true ? '' : reflectInURL || '';
@@ -321,9 +327,15 @@ export default function SimpleTable(props: SimpleTableProps) {
   }
 
   return !currentData || currentData.length === 0 ? (
-    <Empty>{emptyMessage || t('No data to be shown.')}</Empty>
+    <Paper variant="outlined">
+      <Empty>{emptyMessage || t('No data to be shown.')}</Empty>
+    </Paper>
   ) : (
-    <React.Fragment>
+    <TableContainer
+      className={clsx(classes.tableContainer, className)}
+      component={Paper}
+      variant="outlined"
+    >
       {
         // Show a refresh button if the data is not up to date, so we allow the user to keep
         // reading the current data without "losing" it or being sent to the first page
@@ -342,7 +354,7 @@ export default function SimpleTable(props: SimpleTableProps) {
           </Box>
         )
       }
-      <Table className={classes.table}>
+      <Table className={classes.table} size="small">
         {!noTableHeader && (
           <TableHead>
             <TableRow>
@@ -416,161 +428,9 @@ export default function SimpleTable(props: SimpleTableProps) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       )}
-    </React.Fragment>
+    </TableContainer>
   );
 }
 
-const useStyles = makeStyles(theme => ({
-  metadataNameCell: {
-    fontSize: '1rem',
-    textAlign: 'left',
-    maxWidth: '100%',
-    minWidth: '10rem',
-    verticalAlign: 'top',
-    paddingLeft: '0',
-    paddingRight: '0',
-    color: theme.palette.text.secondary,
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    [theme.breakpoints.down('sm')]: {
-      color: theme.palette.text.primary,
-      fontSize: '1.5rem',
-      minWidth: '100%',
-      width: '100%',
-      maxWidth: '100%',
-      display: 'block',
-      borderTop: `1px solid ${theme.palette.divider}`,
-      borderBottom: `none`,
-    },
-  },
-  metadataCell: {
-    width: '100%',
-    verticalAlign: 'top',
-    fontSize: '1rem',
-    overflowWrap: 'anywhere',
-    paddingBottom: '3.5rem',
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    [theme.breakpoints.down('sm')]: {
-      color: theme.palette.text.secondary,
-      minWidth: '100%',
-      width: '100%',
-      maxWidth: '100%',
-      display: 'block',
-      marginBottom: '2rem',
-      borderBottom: `none`,
-    },
-  },
-  metadataRow: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  metadataLast: {
-    borderBottom: 'none',
-  },
-  table: {
-    '& .MuiTableBody-root': {
-      '& .MuiTableRow-root:last-child': {
-        '& .MuiTableCell-root': {
-          borderBottom: 'none',
-        },
-      },
-    },
-  },
-}));
-
-export interface NameValueTableRow {
-  /** The name (key) for this row */
-  name: string | JSX.Element;
-  /** The value for this row */
-  value?: string | JSX.Element | JSX.Element[];
-  /** Whether this row should be hidden (can be a boolean or a function that will take the
-   * @param value and return a boolean) */
-  hide?: boolean | ((value: NameValueTableRow['value']) => boolean);
-}
-
-interface NameValueTableProps {
-  rows: NameValueTableRow[];
-  valueCellProps?: GridProps;
-}
-
-function Value({
-  value,
-}: {
-  value: string | JSX.Element | JSX.Element[] | undefined;
-}): JSX.Element | null {
-  if (typeof value === 'undefined') {
-    return null;
-  } else if (typeof value === 'string') {
-    return <ValueLabel>{value}</ValueLabel>;
-  } else if (Array.isArray(value)) {
-    return (
-      <>
-        {value.map((val, i) => (
-          <Value value={val} key={i} />
-        ))}
-      </>
-    );
-  } else {
-    return value;
-  }
-}
-
-export function NameValueTable(props: NameValueTableProps) {
-  const classes = useStyles();
-  const { rows, valueCellProps } = props;
-
-  return (
-    <Grid
-      container
-      component="dl" // mount a Definition List
-      spacing={3}
-    >
-      {rows.map(({ name, value, hide = false }, i) => {
-        let shouldHide = false;
-        if (typeof hide === 'function') {
-          shouldHide = hide(value);
-        } else {
-          shouldHide = hide;
-        }
-
-        if (shouldHide) {
-          return null;
-        }
-
-        const last = rows.length === i + 1;
-
-        const { className, ...otherValueCellProps } = valueCellProps || {};
-
-        return (
-          <>
-            <Grid
-              item
-              key={i}
-              xs={12}
-              sm={4}
-              spacing={2}
-              component="dt"
-              className={clsx(last ? classes.metadataLast : '', classes.metadataNameCell)}
-            >
-              {name}
-            </Grid>
-            <Grid
-              item
-              key={i + 10000}
-              xs={12}
-              sm={8}
-              spacing={2}
-              component="dd"
-              className={clsx(
-                last ? classes.metadataLast : '',
-                classes.metadataCell,
-                className ? className : ''
-              )}
-              {...otherValueCellProps}
-            >
-              <Value value={value} />
-            </Grid>
-          </>
-        );
-      })}
-    </Grid>
-  );
-}
+// For legacy reasons.
+export * from './NameValueTable';

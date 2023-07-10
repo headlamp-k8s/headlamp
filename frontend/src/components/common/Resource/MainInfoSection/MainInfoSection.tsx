@@ -1,3 +1,4 @@
+import Paper from '@material-ui/core/Paper';
 import { has } from 'lodash';
 import React, { isValidElement } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -166,7 +167,9 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     >
       {resource === null ? (
         !!error ? (
-          <Empty color="error">{error.toString()}</Empty>
+          <Paper variant="outlined">
+            <Empty color="error">{error.toString()}</Empty>
+          </Paper>
         ) : (
           <Loader title={t('frequent|Loading resource data')} />
         )

@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
-import { PercentageCircle } from '../common/Chart';
 import ResourceCircularChart, {
   CircularChartProps as ResourceCircularChartProps,
 } from '../common/Resource/CircularChart';
+import TileChart from '../common/TileChart';
 
 export function MemoryCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
@@ -132,7 +132,7 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
   }
 
   return (
-    <PercentageCircle
+    <TileChart
       data={getData()}
       total={items !== null ? items.length : -1}
       label={getLabel()}
