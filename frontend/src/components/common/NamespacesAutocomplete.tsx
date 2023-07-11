@@ -23,12 +23,27 @@ export interface PureNamespacesAutocompleteProps {
 
 export function PureNamespacesAutocomplete({
   namespaceNames,
-  onChange,
+  onChange: onChangeFromProps,
   filter,
 }: PureNamespacesAutocompleteProps) {
   const theme = useTheme();
   const { t } = useTranslation(['glossary', 'frequent']);
+  const [namespaceInput, setNamespaceInput] = React.useState<string>('');
   const maxNamespacesChars = 12;
+
+  const onInputChange = (event: object, value: string, reason: string) => {
+    // For some reason, the AutoComplete component resets the text after a short
+    // delay, so we need to avoid that or the user won't be able to edit/use what they type.
+    if (reason !== 'reset') {
+      setNamespaceInput(value);
+    }
+  };
+
+  const onChange = (event: React.ChangeEvent<{}>, newValue: string[]) => {
+    // Now we reset the input so it won't show next to the selected namespaces.
+    setNamespaceInput('');
+    onChangeFromProps(event, newValue);
+  };
 
   return (
     <Autocomplete
@@ -37,6 +52,8 @@ export function PureNamespacesAutocomplete({
       autoComplete
       options={namespaceNames}
       onChange={onChange}
+      onInputChange={onInputChange}
+      inputValue={namespaceInput}
       // We reverse the namespaces so the last chosen appear as the first in the label. This
       // is useful since the label is ellipsized and this we get to see it change.
       value={[...filter.namespaces.values()].reverse()}
