@@ -184,9 +184,9 @@ export default function Layout({}: LayoutProps) {
             ''
           )}
           <AlertNotification />
-          <Box p={[0, 3, 3]}>
+          <Box>
             <div className={classes.toolbar} />
-            <Container maxWidth="lg">
+            <Container maxWidth="xl">
               <NavigationTabs />
               {arePluginsLoaded && (
                 <RouteSwitcher
