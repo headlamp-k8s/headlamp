@@ -3,6 +3,27 @@ title: In-cluster Deployment
 weight: 10
 ---
 
+The easiest way to install headlamp in your existing cluster is to use our [helm chart](../../../charts/headlamp/).
+
+```bash
+# first add our custom repo to your local helm repositories
+helm repo add headlamp https://headlamp-k8s.github.io/headlamp/
+
+# now you should be able to install headlamp via helm
+helm install my-headlamp headlamp/headlamp --namespace kube-system
+```
+
+As usual it is possible to configure the helm release via the [values file](../../../charts/headlamp/values.yaml) or setting your preferred values directly.
+
+```bash
+# install headlamp with your own values.yaml
+helm install my-headlamp headlamp/headlamp --namespace kube-system -f values.yaml
+
+# install headlamp by setting your values directly
+
+helm install my-headlamp headlamp/headlamp --namespace kube-system --set replicaCount=2
+```
+
 A common use-case for any Kubernetes web UI is to deploy it in-cluster and
 set up an ingress server for having it available to users.
 
