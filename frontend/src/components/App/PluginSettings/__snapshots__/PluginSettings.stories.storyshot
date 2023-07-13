@@ -32,7 +32,7 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
-          class="MuiTable-root makeStyles-table"
+          class="MuiTable-root makeStyles-table makeStyles-table"
         >
           <thead
             class="MuiTableHead-root"
@@ -436,7 +436,7 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
-          class="MuiTable-root makeStyles-table"
+          class="MuiTable-root makeStyles-table makeStyles-table"
         >
           <thead
             class="MuiTableHead-root"
@@ -776,7 +776,7 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
-          class="MuiTable-root makeStyles-table"
+          class="MuiTable-root makeStyles-table makeStyles-table"
         >
           <thead
             class="MuiTableHead-root"
@@ -1116,7 +1116,7 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
-          class="MuiTable-root makeStyles-table"
+          class="MuiTable-root makeStyles-table makeStyles-table"
         >
           <thead
             class="MuiTableHead-root"
@@ -1981,7 +1981,7 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
-          class="MuiTable-root makeStyles-table"
+          class="MuiTable-root makeStyles-table makeStyles-table"
         >
           <thead
             class="MuiTableHead-root"

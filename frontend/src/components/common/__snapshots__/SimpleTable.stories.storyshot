@@ -6,7 +6,7 @@ exports[`Storyshots SimpleTable Datum 1`] = `
     class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
     <table
-      class="MuiTable-root makeStyles-table"
+      class="MuiTable-root makeStyles-table makeStyles-table"
     >
       <thead
         class="MuiTableHead-root"
@@ -127,7 +127,7 @@ exports[`Storyshots SimpleTable Getter 1`] = `
     class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
     <table
-      class="MuiTable-root makeStyles-table"
+      class="MuiTable-root makeStyles-table makeStyles-table"
     >
       <thead
         class="MuiTableHead-root"
@@ -455,7 +455,7 @@ exports[`Storyshots SimpleTable Label Search 1`] = `
     class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
     <table
-      class="MuiTable-root makeStyles-table"
+      class="MuiTable-root makeStyles-table makeStyles-table"
     >
       <thead
         class="MuiTableHead-root"
@@ -738,7 +738,7 @@ exports[`Storyshots SimpleTable Name Search 1`] = `
     class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
     <table
-      class="MuiTable-root makeStyles-table"
+      class="MuiTable-root makeStyles-table makeStyles-table"
     >
       <thead
         class="MuiTableHead-root"
@@ -997,7 +997,7 @@ exports[`Storyshots SimpleTable Namespace Search 1`] = `
     class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
     <table
-      class="MuiTable-root makeStyles-table"
+      class="MuiTable-root makeStyles-table makeStyles-table"
     >
       <thead
         class="MuiTableHead-root"
@@ -1268,7 +1268,7 @@ exports[`Storyshots SimpleTable Namespace Select 1`] = `
     class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
     <table
-      class="MuiTable-root makeStyles-table"
+      class="MuiTable-root makeStyles-table makeStyles-table"
     >
       <thead
         class="MuiTableHead-root"
@@ -1549,7 +1549,7 @@ exports[`Storyshots SimpleTable Number Search 1`] = `
     class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
     <table
-      class="MuiTable-root makeStyles-table"
+      class="MuiTable-root makeStyles-table makeStyles-table"
     >
       <thead
         class="MuiTableHead-root"
@@ -1628,7 +1628,7 @@ exports[`Storyshots SimpleTable Reflect In URL 1`] = `
       class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
     >
       <table
-        class="MuiTable-root makeStyles-table"
+        class="MuiTable-root makeStyles-table makeStyles-table"
       >
         <thead
           class="MuiTableHead-root"
@@ -1784,7 +1784,7 @@ exports[`Storyshots SimpleTable Reflect In URL With Prefix 1`] = `
       class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
     >
       <table
-        class="MuiTable-root makeStyles-table"
+        class="MuiTable-root makeStyles-table makeStyles-table"
       >
         <thead
           class="MuiTableHead-root"
@@ -2099,7 +2099,7 @@ exports[`Storyshots SimpleTable UID Search 1`] = `
     class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
   >
     <table
-      class="MuiTable-root makeStyles-table"
+      class="MuiTable-root makeStyles-table makeStyles-table"
     >
       <thead
         class="MuiTableHead-root"

@@ -25,13 +25,23 @@ const useTableStyle = makeStyles(theme => ({
   sortCell: {
     whiteSpace: 'nowrap',
   },
-  table: {
+  table: ({ gridTemplateColumns }: { gridTemplateColumns: string }) => ({
+    minWidth: '100%',
+    width: 'auto',
+    display: 'grid',
+    gridTemplateColumns: gridTemplateColumns || '1fr',
     [theme.breakpoints.down('sm')]: {
-      display: 'block',
       overflowX: 'auto', // make it responsive
     },
     '& .MuiTableCell-root': {
-      padding: '8px 24px 7px 16px',
+      padding: '8px 16px 7px 16px',
+      [theme.breakpoints.down('sm')]: {
+        padding: '8px 24px 7px 16px',
+      },
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      width: '100%',
     },
     '& .MuiTableBody-root': {
       background: theme.palette.tables.body.background,
@@ -43,10 +53,18 @@ const useTableStyle = makeStyles(theme => ({
       },
     },
     '& .MuiTableCell-head': {
+      overflow: 'hidden',
+      textOverflow: 'unset',
+      whiteSpace: 'nowrap',
       color: theme.palette.tables.head.text,
       background: theme.palette.tables.head.background,
+      width: '100%',
+      minWidth: 'fit-content',
     },
-  },
+    '& .MuiTableHead-root, & .MuiTableRow-root, & .MuiTableBody-root': {
+      display: 'contents',
+    },
+  }),
   tableContainer: {
     overflowY: 'hidden',
   },
@@ -58,6 +76,7 @@ type getterFunction = (arg: any) => any;
 interface SimpleTableColumn {
   label: string;
   header?: React.ReactNode;
+  gridTemplate?: number | string;
   cellProps?: {
     [propName: string]: any;
   };
@@ -184,7 +203,20 @@ export default function SimpleTable(props: SimpleTableProps) {
     defaultValue: defaultRowsPerPage,
     prefix,
   });
-  const classes = useTableStyle();
+  const gridTemplateColumns = React.useMemo(() => {
+    const columnsTemplates = columns.map(column => column.gridTemplate || 1);
+    const templates: string[] = [];
+    columnsTemplates.forEach(template => {
+      if (typeof template === 'number') {
+        templates.push(`${template}fr`);
+      } else if (typeof template === 'string') {
+        templates.push(template);
+      }
+    });
+
+    return templates.join(' ');
+  }, [columns]);
+  const classes = useTableStyle({ gridTemplateColumns });
   const [isIncreasingOrder, setIsIncreasingOrder] = React.useState(
     !defaultSortingColumn || defaultSortingColumn > 0
   );

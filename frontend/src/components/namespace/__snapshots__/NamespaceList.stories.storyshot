@@ -91,7 +91,7 @@ exports[`Storyshots Namespace/ListView Regular 1`] = `
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
-          class="MuiTable-root makeStyles-table"
+          class="MuiTable-root makeStyles-table makeStyles-table"
         >
           <thead
             class="MuiTableHead-root"
