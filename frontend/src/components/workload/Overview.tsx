@@ -78,7 +78,7 @@ export default function Overview() {
 
   return (
     <PageGrid>
-      <SectionBox py={2}>
+      <SectionBox py={2} mt={1}>
         <Grid container justifyContent="flex-start" alignItems="flex-start" spacing={2}>
           {workloads.map(({ className: name }) => (
             <Grid item lg={3} md={4} xs={6} key={name}>
