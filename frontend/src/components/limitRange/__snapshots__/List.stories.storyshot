@@ -174,12 +174,17 @@ exports[`Storyshots LimitRange/ListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
+                <span
+                  class=""
+                  title="limit-range"
                 >
-                  limit-range
-                </a>
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    limit-range
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"

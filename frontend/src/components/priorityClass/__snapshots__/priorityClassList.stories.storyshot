@@ -165,12 +165,17 @@ exports[`Storyshots PriorityClasses/PriorityClassesListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
+                <span
+                  class=""
+                  title="high-priority-apps"
                 >
-                  high-priority-apps
-                </a>
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    high-priority-apps
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -201,12 +206,17 @@ exports[`Storyshots PriorityClasses/PriorityClassesListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
+                <span
+                  class=""
+                  title="high-priority-apps"
                 >
-                  high-priority-apps
-                </a>
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    high-priority-apps
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -237,12 +247,17 @@ exports[`Storyshots PriorityClasses/PriorityClassesListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
+                <span
+                  class=""
+                  title="high-priority-apps"
                 >
-                  high-priority-apps
-                </a>
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    high-priority-apps
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -273,12 +288,17 @@ exports[`Storyshots PriorityClasses/PriorityClassesListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
+                <span
+                  class=""
+                  title="high-priority-apps"
                 >
-                  high-priority-apps
-                </a>
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    high-priority-apps
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -309,12 +329,17 @@ exports[`Storyshots PriorityClasses/PriorityClassesListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
+                <span
+                  class=""
+                  title="high-priority-apps"
                 >
-                  high-priority-apps
-                </a>
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    high-priority-apps
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"

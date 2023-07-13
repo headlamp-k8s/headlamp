@@ -181,54 +181,17 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
+                <span
+                  class=""
+                  title="endpoints-0"
                 >
-                  endpoints-0
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  my-namespace
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                style="width: 40%; max-width: 40%;"
-              >
-                127.0.01:8080
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                style="text-align: right;"
-              >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                  title="2020-01-01T00:00:00.000Z"
-                >
-                  3mo
-                  <span />
-                </p>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
-            >
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  endpoints-1
-                </a>
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    endpoints-0
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -265,54 +228,17 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
+                <span
+                  class=""
+                  title="endpoints-1"
                 >
-                  endpoints-2
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  my-namespace
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                style="width: 40%; max-width: 40%;"
-              >
-                127.0.01:8080
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                style="text-align: right;"
-              >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                  title="2020-01-01T00:00:00.000Z"
-                >
-                  3mo
-                  <span />
-                </p>
-              </td>
-            </tr>
-            <tr
-              class="MuiTableRow-root"
-            >
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
-                >
-                  endpoints-3
-                </a>
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    endpoints-1
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -349,12 +275,111 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
+                <span
+                  class=""
+                  title="endpoints-2"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    endpoints-2
+                  </a>
+                </span>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
                 <a
                   class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
                   href="/"
                 >
-                  endpoints-4
+                  my-namespace
                 </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="width: 40%; max-width: 40%;"
+              >
+                127.0.01:8080
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="text-align: right;"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+                  title="2020-01-01T00:00:00.000Z"
+                >
+                  3mo
+                  <span />
+                </p>
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
+            >
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <span
+                  class=""
+                  title="endpoints-3"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    endpoints-3
+                  </a>
+                </span>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  my-namespace
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="width: 40%; max-width: 40%;"
+              >
+                127.0.01:8080
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="text-align: right;"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+                  title="2020-01-01T00:00:00.000Z"
+                >
+                  3mo
+                  <span />
+                </p>
+              </td>
+            </tr>
+            <tr
+              class="MuiTableRow-root"
+            >
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
+                <span
+                  class=""
+                  title="endpoints-4"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    endpoints-4
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"

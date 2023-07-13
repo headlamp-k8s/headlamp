@@ -89,12 +89,17 @@ exports[`Storyshots ResourceTable Name Search 1`] = `
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
           >
-            <a
-              class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              href="/"
+            <span
+              class=""
+              title="mypod3"
             >
-              mypod3
-            </a>
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                mypod3
+              </a>
+            </span>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -214,12 +219,17 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
           >
-            <a
-              class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              href="/"
+            <span
+              class=""
+              title="mypod0"
             >
-              mypod0
-            </a>
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                mypod0
+              </a>
+            </span>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -250,12 +260,17 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
           >
-            <a
-              class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              href="/"
+            <span
+              class=""
+              title="mypod1"
             >
-              mypod1
-            </a>
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                mypod1
+              </a>
+            </span>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -286,12 +301,17 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
           >
-            <a
-              class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              href="/"
+            <span
+              class=""
+              title="mypod2"
             >
-              mypod2
-            </a>
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                mypod2
+              </a>
+            </span>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -322,12 +342,17 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
           >
-            <a
-              class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-              href="/"
+            <span
+              class=""
+              title="mypod3"
             >
-              mypod3
-            </a>
+              <a
+                class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                href="/"
+              >
+                mypod3
+              </a>
+            </span>
           </td>
           <td
             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"

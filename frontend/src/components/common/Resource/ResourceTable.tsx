@@ -13,6 +13,7 @@ import SimpleTable, {
   SimpleTableGetterColumn,
   SimpleTableProps,
 } from '../SimpleTable';
+import { LightTooltip } from '../Tooltip';
 import TableColumnChooserPopup from './ResourceTableColumnChooser';
 
 interface ToggableColumn {
@@ -156,7 +157,15 @@ function Table(props: ResourceTableProps) {
             return {
               id: 'name',
               label: t('frequent|Name'),
-              getter: (resource: KubeObject) => <Link kubeObject={resource} />,
+              gridTemplate: 1.5,
+              // We add the span element because somehow the tooltip doesn't work without it.
+              getter: (resource: KubeObject) => (
+                <LightTooltip title={resource.getName()} interactive>
+                  <span>
+                    <Link kubeObject={resource} />
+                  </span>
+                </LightTooltip>
+              ),
               sort: (n1: KubeObject, n2: KubeObject) => {
                 if (n1.metadata.name < n2.metadata.name) {
                   return -1;
@@ -174,6 +183,7 @@ function Table(props: ResourceTableProps) {
               id: 'age',
               label: t('frequent|Age'),
               cellProps: { style: { textAlign: 'right' } },
+              gridTemplate: 0.5,
               getter: (resource: KubeObject) => (
                 <DateLabel
                   date={resource.metadata.creationTimestamp}
