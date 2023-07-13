@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo } from '../../lib/util';
-import { LightTooltip, SimpleTableProps } from '../common';
+import { LightTooltip, Link, SimpleTableProps } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { ResourceTableProps } from '../common/Resource/ResourceTable';
@@ -89,7 +89,12 @@ export function PodListRenderer(props: PodListProps) {
       {
         id: 'node',
         label: t('frequent|Node Name'),
-        getter: (pod: Pod) => pod.spec.nodeName,
+        getter: (pod: Pod) =>
+          pod?.spec?.nodeName && (
+            <Link routeName="node" params={{ name: pod.spec.nodeName }} tooltip>
+              {pod.spec.nodeName}
+            </Link>
+          ),
         sort: true,
       },
       'age',

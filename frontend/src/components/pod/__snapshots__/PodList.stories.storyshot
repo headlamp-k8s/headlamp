@@ -314,7 +314,17 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                my-node
+                <span
+                  class=""
+                  title="my-node"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    my-node
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -385,7 +395,17 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                my-node
+                <span
+                  class=""
+                  title="my-node"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    my-node
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -456,7 +476,17 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                my-node
+                <span
+                  class=""
+                  title="my-node"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    my-node
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -534,7 +564,17 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                my-node
+                <span
+                  class=""
+                  title="my-node"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    my-node
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -612,7 +652,17 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                my-node
+                <span
+                  class=""
+                  title="my-node"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    my-node
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -683,7 +733,17 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
-                my-node
+                <span
+                  class=""
+                  title="my-node"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    my-node
+                  </a>
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
