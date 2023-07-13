@@ -1,5 +1,4 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import Link, { LinkProps } from './Link';
 
@@ -32,4 +31,18 @@ export const Params = Template.bind({});
 Params.args = {
   routeName: 'node',
   params: { name: 'anode' },
+};
+
+export const AutoTooltip = Template.bind({});
+AutoTooltip.args = {
+  routeName: 'node',
+  params: { name: 'anode' },
+  tooltip: true,
+};
+
+export const ExplicitTooltip = Template.bind({});
+ExplicitTooltip.args = {
+  routeName: 'node',
+  params: { name: 'anode' },
+  tooltip: 'A tooltip',
 };
