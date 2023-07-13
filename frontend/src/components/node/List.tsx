@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import Node from '../../lib/k8s/node';
+import { HoverInfoLabel } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { UsageBarChart } from './Charts';
 import { NodeReadyLabel } from './Details';
@@ -14,7 +15,7 @@ const useStyle = makeStyles({
 export default function NodeList() {
   const classes = useStyle();
   const [nodeMetrics, metricsError] = Node.useMetrics();
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'frequent']);
 
   const noMetrics = metricsError?.status === 404;
 
@@ -30,6 +31,7 @@ export default function NodeList() {
         {
           id: 'ready',
           label: t('frequent|Ready'),
+          gridTemplate: 'minmax(100px, .5fr)',
           getter: node => <NodeReadyLabel node={node} />,
         },
         {
@@ -63,9 +65,68 @@ export default function NodeList() {
           ),
         },
         {
+          id: 'roles',
+          label: t('Roles'),
+          getter: node => node.metadata.labels['kubernetes.io/role'],
+          gridTemplate: 'minmax(120px, .5fr)',
+        },
+        {
+          id: 'internalIP',
+          label: t('frequent|Internal IP'),
+          getter: node => node.getInternalIP(),
+        },
+        {
+          id: 'externalIP',
+          label: t('frequent|External IP'),
+          getter: node => node.getExternalIP(),
+        },
+        {
           id: 'version',
-          label: t('Version'),
+          label: t('frequent|Version'),
+          gridTemplate: 'minmax(100px, .5fr)',
           getter: node => node.status.nodeInfo.kubeletVersion,
+        },
+        {
+          id: 'software',
+          label: t('frequent|Software'),
+          gridTemplate: 'minmax(200px, 1.5fr)',
+          getter: node => {
+            let osIcon = 'mdi:desktop-classic';
+            if (node.status.nodeInfo.operatingSystem === 'linux') {
+              osIcon = 'mdi:linux';
+            } else if (node.status.nodeInfo.operatingSystem === 'windows') {
+              osIcon = 'mdi:microsoft-windows';
+            }
+
+            return (
+              <>
+                <HoverInfoLabel
+                  label={node.status.nodeInfo.osImage}
+                  hoverInfo={t('OS image')}
+                  labelProps={{ variant: 'body2' }}
+                  iconPosition="start"
+                  icon={osIcon}
+                />
+                {node.status.nodeInfo.kernelVersion && (
+                  <HoverInfoLabel
+                    label={node.status.nodeInfo.kernelVersion}
+                    hoverInfo={t('Kernel version')}
+                    labelProps={{ variant: 'body2' }}
+                    iconPosition="start"
+                    icon="mdi:nut"
+                  />
+                )}
+                <HoverInfoLabel
+                  label={node.status.nodeInfo.containerRuntimeVersion}
+                  hoverInfo={t('Container Runtime')}
+                  labelProps={{ variant: 'body2' }}
+                  iconPosition="start"
+                  icon="mdi:train-car-container"
+                />
+              </>
+            );
+          },
+          show: false,
         },
         'age',
       ]}

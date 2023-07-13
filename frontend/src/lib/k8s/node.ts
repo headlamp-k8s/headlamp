@@ -63,6 +63,14 @@ class Node extends makeKubeObject<KubeNode>('node') {
 
     return [nodeMetrics, error];
   }
+
+  getExternalIP(): string {
+    return this.status.addresses.find(address => address.type === 'ExternalIP')?.address || '';
+  }
+
+  getInternalIP(): string {
+    return this.status.addresses.find(address => address.type === 'InternalIP')?.address || '';
+  }
 }
 
 export default Node;
