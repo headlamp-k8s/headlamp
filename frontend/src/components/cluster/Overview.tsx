@@ -1,5 +1,4 @@
 import { FormControlLabel, Switch } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
@@ -11,7 +10,7 @@ import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { useFilterFunc } from '../../lib/util';
 import { setSearchFilter } from '../../redux/actions/actions';
-import { Link, StatusLabel } from '../common';
+import { DateLabel, Link, StatusLabel } from '../common';
 import Empty from '../common/EmptyContent';
 import { PageGrid } from '../common/Resource';
 import ResourceListView from '../common/Resource/ResourceListView';
@@ -67,6 +66,7 @@ const useStyles = makeStyles(theme => ({
   eventLabel: {
     [theme.breakpoints.up('md')]: {
       minWidth: '180px',
+      display: 'unset',
     },
   },
 }));
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
 function EventsSection() {
   const EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY = 'EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY';
   const classes = useStyles();
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'frequent']);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const eventsFilter = queryParams.get('eventsFilter');
@@ -160,22 +160,44 @@ function EventsSection() {
             scope: 'row',
             component: 'th',
           },
+          gridTemplate: 1.5,
           sort: true,
         },
         'namespace',
-        // @todo: Maybe the message should be shown on slide-down.
         {
           label: t('Reason'),
           getter: event => (
-            <LightTooltip title={event.message} interactive>
-              <Box>{makeStatusLabel(event)}</Box>
+            <LightTooltip title={event.reason} interactive>
+              {makeStatusLabel(event)}
             </LightTooltip>
           ),
           sort: (e1: Event, e2: Event) => e1.reason.localeCompare(e2.reason),
         },
-        'age',
+        {
+          label: t('frequent|Message'),
+          getter: event => event?.message || '',
+          sort: true,
+          gridTemplate: 1.5,
+        },
+        {
+          label: t('frequent|Last Seen'),
+          getter: event => (
+            <DateLabel
+              date={event.lastTimestamp || event.metadata.creationTimestamp}
+              format="mini"
+            />
+          ),
+          cellProps: { style: { textAlign: 'right' } },
+          gridTemplate: 'minmax(150px, 0.5fr)',
+          sort: (e1: Event, e2: Event) => {
+            const date1 = e1.lastTimestamp || e1.metadata.creationTimestamp;
+            const date2 = e2.lastTimestamp || e2.metadata.creationTimestamp;
+            return new Date(date2).getTime() - new Date(date1).getTime();
+          },
+        },
       ]}
       filterFunction={warningActionFilterFunc}
+      defaultSortingColumn={6}
       id="headlamp-cluster.overview.events"
     />
   );
