@@ -327,7 +327,7 @@ export function PureTopBar({
     {
       id: DefaultAppBarAction.NOTIFICATION,
       action: (
-        <MenuItem>
+        <MenuItem onClick={handleMenuClose}>
           <Notifications />
         </MenuItem>
       ),
@@ -349,7 +349,10 @@ export function PureTopBar({
             aria-controls={userMenuId}
             aria-haspopup="true"
             color="inherit"
-            onClick={handleProfileMenuOpen}
+            onClick={event => {
+              handleMenuClose();
+              handleProfileMenuOpen(event);
+            }}
           >
             <Icon icon="mdi:account" />
           </IconButton>
