@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots LabelListItem List 1`] = `
+<div>
+  <span
+    class=""
+    title="a label
+another label
+yet another label"
+  >
+    a label, another label, yet another label
+  </span>
+</div>
+`;
