@@ -252,7 +252,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -650,7 +650,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -1000,7 +1000,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -1527,7 +1527,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -1884,7 +1884,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -2374,7 +2374,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -2724,7 +2724,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -3102,7 +3102,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -3452,7 +3452,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -3861,7 +3861,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -4211,7 +4211,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -4614,7 +4614,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
