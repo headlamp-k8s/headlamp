@@ -156,6 +156,7 @@ function Table(props: ResourceTableProps) {
             return {
               id: 'name',
               label: t('frequent|Name'),
+              gridTemplate: 1.5,
               getter: (resource: KubeObject) => <Link kubeObject={resource} />,
               sort: (n1: KubeObject, n2: KubeObject) => {
                 if (n1.metadata.name < n2.metadata.name) {
@@ -174,6 +175,7 @@ function Table(props: ResourceTableProps) {
               id: 'age',
               label: t('frequent|Age'),
               cellProps: { style: { textAlign: 'right' } },
+              gridTemplate: 0.5,
               getter: (resource: KubeObject) => (
                 <DateLabel
                   date={resource.metadata.creationTimestamp}
