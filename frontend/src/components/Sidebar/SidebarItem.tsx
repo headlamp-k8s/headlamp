@@ -37,6 +37,9 @@ const useItemStyle = makeStyles(theme => ({
         color: theme.palette.sidebarLink.hover.color,
       },
     },
+    '& a.Mui-focusVisible': {
+      backgroundColor: theme.palette.sidebarLink.hover.backgroundColor,
+    },
     '& svg': {
       color: theme.palette.sidebarLink.color,
     },
@@ -105,6 +108,9 @@ const useItemStyle = makeStyles(theme => ({
     backgroundColor: `${theme.palette.sidebarLink.main.selected.backgroundColor}!important`,
     '& .MuiListItemText-secondary': {
       color: theme.palette.sidebarLink.main.selected.color,
+    },
+    '& a.Mui-focusVisible': {
+      backgroundColor: theme.palette.sidebarLink.selected.backgroundColor,
     },
   },
   linkSelected: {
