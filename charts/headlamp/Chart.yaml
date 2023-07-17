@@ -9,6 +9,11 @@ keywords:
   - plugins
   - kinvolk
   - headlamp
+  - dashboard
+  - ui
+  - web
+  - monitoring
+  - logging
 sources:
   - https://github.com/headlamp-k8s/headlamp/tree/main/charts/headlamp
   - https://github.com/headlamp-k8s/headlamp
