@@ -27,23 +27,23 @@ export default function NotificationList() {
     if (!notification) {
       return;
     }
-    notification.seen = !notification.seen;
     dispatch(updateUINotification(notification));
   }
 
   function clearAllNotifications() {
-    const currentSetOfNotifications = notifications;
-    const massagedNotifications = currentSetOfNotifications.map(notification => {
-      notification.deleted = true;
-      return notification;
+    const massagedNotifications = notifications.map(notification => {
+      const updatedNotification = Object.assign(new Notification(), notification);
+      updatedNotification.deleted = true;
+      return updatedNotification;
     });
     dispatch(setUINotifications(massagedNotifications));
   }
 
   function markAllAsRead() {
     const massagedNotifications = notifications.map(notification => {
-      notification.seen = true;
-      return notification;
+      const updatedNotification = Object.assign(new Notification(), notification);
+      updatedNotification.seen = true;
+      return updatedNotification;
     });
     dispatch(setUINotifications(massagedNotifications));
   }
