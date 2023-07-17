@@ -168,6 +168,87 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                 <th
                   class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                   scope="col"
+                >
+                  Current
+                  <button
+                    aria-label="sort swap"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Desired
+                  <button
+                    aria-label="sort swap"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Ready
+                  <button
+                    aria-label="sort swap"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Node Selector
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Containers
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Images
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                  scope="col"
                   style="text-align: right;"
                 >
                   Age
@@ -219,6 +300,51 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                 >
                   2
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  2
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  2
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  2
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  <span
+                    class=""
+                    title="kubernetes.io/os=linux"
+                  >
+                    kubernetes.io/os=linux
+                  </span>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  <span
+                    class=""
+                    title="gadget"
+                  >
+                    gadget
+                  </span>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  <span
+                    class=""
+                    title="ghcr.io/inspektor-gadget/inspektor-gadget:v0.15.0"
+                  >
+                    ghcr.io/inspektor-gadget/inspektor-gadget:v0.15.0
+                  </span>
                 </td>
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
