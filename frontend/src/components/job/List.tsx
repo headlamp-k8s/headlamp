@@ -1,7 +1,9 @@
 import { Icon } from '@iconify/react';
 import { Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import { KubeContainer } from '../../lib/k8s/cluster';
 import Job from '../../lib/k8s/job';
+import { formatDuration } from '../../lib/util';
 import { LightTooltip, StatusLabel, StatusLabelProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
@@ -65,7 +67,7 @@ export interface JobsListRendererProps {
 
 export function JobsListRenderer(props: JobsListRendererProps) {
   const { jobs = null, error } = props;
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'frequent']);
 
   function getCompletions(job: Job) {
     return `${job.spec.completions}/${job.spec.parallelism}`;
@@ -96,6 +98,49 @@ export function JobsListRenderer(props: JobsListRendererProps) {
           id: 'conditions',
           label: t('Conditions'),
           getter: job => makePodStatusLabel(job),
+        },
+        {
+          id: 'duration',
+          label: t('frequent|Duration'),
+          getter: job => {
+            const startTime = job.status?.startTime;
+            const completionTime = job.status?.completionTime;
+            if (!!startTime && !!completionTime) {
+              const duration = new Date(completionTime).getTime() - new Date(startTime).getTime();
+              return formatDuration(duration, { format: 'mini' });
+            }
+            return '-';
+          },
+          gridTemplate: 0.6,
+          sort: true,
+        },
+        {
+          id: 'containers',
+          label: t('Containers'),
+          getter: job => {
+            const containerNames = job.getContainers().map((c: KubeContainer) => c.name);
+            const containerTooltip = containerNames.join('\n');
+            const containerText = containerNames.join(', ');
+            return (
+              <LightTooltip title={containerTooltip} interactive>
+                {containerText}
+              </LightTooltip>
+            );
+          },
+        },
+        {
+          id: 'images',
+          label: t('Images'),
+          getter: job => {
+            const containerImages = job.getContainers().map((c: KubeContainer) => c.image);
+            const containerTooltip = containerImages.join('\n');
+            const containerText = containerImages.join(', ');
+            return (
+              <LightTooltip title={containerTooltip} interactive>
+                {containerText}
+              </LightTooltip>
+            );
+          },
         },
         'age',
       ]}
