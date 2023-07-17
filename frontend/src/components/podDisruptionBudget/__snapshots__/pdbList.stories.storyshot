@@ -244,7 +244,7 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2020-01-01T00:00:00.000Z"
                 >
                   3mo
@@ -295,7 +295,7 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2020-01-01T00:00:00.000Z"
                 >
                   3mo
@@ -346,7 +346,7 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2020-01-01T00:00:00.000Z"
                 >
                   3mo
@@ -397,7 +397,7 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2020-01-01T00:00:00.000Z"
                 >
                   3mo
@@ -448,7 +448,7 @@ exports[`Storyshots PDB/PDBListView Items 1`] = `
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2020-01-01T00:00:00.000Z"
                 >
                   3mo

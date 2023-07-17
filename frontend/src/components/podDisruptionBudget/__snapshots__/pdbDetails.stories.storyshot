@@ -83,186 +83,190 @@ exports[`Storyshots pdb/PDBDetailsView Default 1`] = `
             aria-live="polite"
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <dl
-              class="MuiGrid-root makeStyles-table MuiGrid-container"
+            <div
+              class="MuiBox-root MuiBox-root"
             >
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              <dl
+                class="MuiGrid-root makeStyles-table MuiGrid-container"
               >
-                Name
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  coredns-pdb
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Namespace
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  kube-system
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Creation
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    coredns-pdb
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  2022-10-06T05:17:14.000Z
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Labels
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                  Namespace
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    kube-system
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    2022-10-06T05:17:14.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Labels
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-                    style="max-width: 80%;"
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
                   >
                     <div
-                      class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                      style="max-width: 80%;"
                     >
-                      <p
-                        class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                      <div
+                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                       >
-                        addonmanager.kubernetes.io/mode: Reconcile
-                      </p>
+                        <p
+                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                        >
+                          addonmanager.kubernetes.io/mode: Reconcile
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Annotations
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Annotations
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-                    style="max-width: 80%;"
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
                   >
                     <div
-                      class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                      style="max-width: 80%;"
                     >
-                      <p
-                        class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
-                        title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"policy/v1beta1\\",\\"kind\\":\\"PodDisruptionBudget\\",\\"metadata\\":{\\"annotations\\":{},\\"labels\\":{\\"addonmanager.kubernetes.io/mode\\":\\"Reconcile\\"},\\"name\\":\\"coredns-pdb\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"minAvailable\\":1,\\"selector\\":{\\"matchLabels\\":{\\"k8s-app\\":\\"kube-dns\\"}}}}
+                      <div
+                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                      >
+                        <p
+                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          title="kubectl.kubernetes.io/last-applied-configuration: {\\"apiVersion\\":\\"policy/v1beta1\\",\\"kind\\":\\"PodDisruptionBudget\\",\\"metadata\\":{\\"annotations\\":{},\\"labels\\":{\\"addonmanager.kubernetes.io/mode\\":\\"Reconcile\\"},\\"name\\":\\"coredns-pdb\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"minAvailable\\":1,\\"selector\\":{\\"matchLabels\\":{\\"k8s-app\\":\\"kube-dns\\"}}}}
 "
-                      >
-                        kubectl.kubernetes.io/last-applied-configuration: …
-                      </p>
+                        >
+                          kubectl.kubernetes.io/last-applied-configuration: …
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Max Unavailable
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              />
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Min Available
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                1
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Selector
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                  style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  k8s-app: kube-dns
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Status
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                  style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                  Max Unavailable
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                />
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  Allowed disruptions
-                  :
+                  Min Available
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
                   1
-                </span>
-                <br />
-                <span
-                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                  style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  Current
-                  :
-                  2
-                </span>
-                <br />
-                <span
-                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                  style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                  Selector
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  Desired
-                  :
-                  1
-                </span>
-                <br />
-                <span
-                  class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                  style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                  <span
+                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                  >
+                    k8s-app: kube-dns
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  Total
-                  :
-                  2
-                </span>
-                <br />
-              </dd>
-            </dl>
+                  Status
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                  >
+                    Allowed disruptions
+                    :
+                    1
+                  </span>
+                  <br />
+                  <span
+                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                  >
+                    Current
+                    :
+                    2
+                  </span>
+                  <br />
+                  <span
+                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                  >
+                    Desired
+                    :
+                    1
+                  </span>
+                  <br />
+                  <span
+                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
+                  >
+                    Total
+                    :
+                    2
+                  </span>
+                  <br />
+                </dd>
+              </dl>
+            </div>
           </div>
         </div>
       </div>

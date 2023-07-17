@@ -111,7 +111,7 @@ exports[`Storyshots ResourceTable Name Search 1`] = `
             style="text-align: right;"
           >
             <p
-              class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+              class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
               title="2021-12-15T14:57:13.000Z"
             >
               3mo
@@ -236,7 +236,7 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
             style="text-align: right;"
           >
             <p
-              class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+              class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
               title="2021-12-15T14:57:13.000Z"
             >
               3mo
@@ -272,7 +272,7 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
             style="text-align: right;"
           >
             <p
-              class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+              class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
               title="2021-12-15T14:57:13.000Z"
             >
               3mo
@@ -308,7 +308,7 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
             style="text-align: right;"
           >
             <p
-              class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+              class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
               title="2021-12-15T14:57:13.000Z"
             >
               3mo
@@ -344,7 +344,7 @@ exports[`Storyshots ResourceTable No Filter 1`] = `
             style="text-align: right;"
           >
             <p
-              class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+              class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
               title="2021-12-15T14:57:13.000Z"
             >
               3mo

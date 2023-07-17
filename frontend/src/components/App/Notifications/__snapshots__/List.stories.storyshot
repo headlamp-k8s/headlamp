@@ -149,7 +149,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -208,7 +208,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -267,7 +267,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -326,7 +326,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -385,7 +385,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -444,7 +444,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -503,7 +503,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -562,7 +562,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -621,7 +621,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -680,7 +680,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -739,7 +739,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -798,7 +798,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -857,7 +857,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -916,7 +916,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months
@@ -975,7 +975,7 @@ exports[`Storyshots Notifications List 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2022-08-01T00:00:00.000Z"
                 >
                   3 months

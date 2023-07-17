@@ -158,6 +158,9 @@ export interface HoverInfoLabelProps {
 }
 
 const useHoverInfoLabelStyles = makeStyles({
+  display: {
+    display: 'inline-block',
+  },
   noWrap: {
     whiteSpace: 'nowrap',
   },
@@ -173,7 +176,7 @@ export function HoverInfoLabel(props: HoverInfoLabelProps) {
 
   return (
     <LightTooltip title={hoverInfo || ''}>
-      <Typography className={classes.noWrap}>
+      <Typography className={clsx(classes.noWrap, classes.display)}>
         {label}
         {hoverInfo && (
           <Icon

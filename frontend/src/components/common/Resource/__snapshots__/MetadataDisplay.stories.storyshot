@@ -2,347 +2,359 @@
 
 exports[`Storyshots Resource/MetadataDisplay Metadata Display 1`] = `
 <div>
-  <dl
-    class="MuiGrid-root makeStyles-table MuiGrid-container"
+  <div
+    class="MuiBox-root MuiBox-root"
   >
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+    <dl
+      class="MuiGrid-root makeStyles-table MuiGrid-container"
     >
-      Name
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
-        my-new-kind
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Namespace
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        Name
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
       >
-        kube-system
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Creation
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          my-new-kind
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
-        2021-06-02T00:00:00.000Z
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Labels
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+        Namespace
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+      >
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          kube-system
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      >
+        Creation
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+      >
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          2021-06-02T00:00:00.000Z
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      >
+        Labels
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-          style="max-width: 80%;"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
         >
           <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+            style="max-width: 80%;"
           >
-            <p
-              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
             >
-              label1: My Label 1
-            </p>
-          </div>
-          <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-          >
-            <p
-              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              <p
+                class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              >
+                label1: My Label 1
+              </p>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
             >
-              label2: My Label 2
-            </p>
-          </div>
-          <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-          >
-            <p
-              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              <p
+                class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              >
+                label2: My Label 2
+              </p>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
             >
-              label3: My Label 3
-            </p>
+              <p
+                class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              >
+                label3: My Label 3
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </dd>
-  </dl>
+      </dd>
+    </dl>
+  </div>
 </div>
 `;
 
 exports[`Storyshots Resource/MetadataDisplay With Extra Rows 1`] = `
 <div>
-  <dl
-    class="MuiGrid-root makeStyles-table MuiGrid-container"
+  <div
+    class="MuiBox-root MuiBox-root"
   >
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+    <dl
+      class="MuiGrid-root makeStyles-table MuiGrid-container"
     >
-      Name
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
-        my-new-kind
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Namespace
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        Name
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
       >
-        kube-system
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Creation
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          my-new-kind
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
-        2021-06-02T00:00:00.000Z
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Labels
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+        Namespace
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+      >
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          kube-system
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      >
+        Creation
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+      >
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          2021-06-02T00:00:00.000Z
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      >
+        Labels
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-          style="max-width: 80%;"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
         >
           <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+            style="max-width: 80%;"
           >
-            <p
-              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
             >
-              label1: My Label 1
-            </p>
-          </div>
-          <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-          >
-            <p
-              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              <p
+                class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              >
+                label1: My Label 1
+              </p>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
             >
-              label2: My Label 2
-            </p>
-          </div>
-          <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-          >
-            <p
-              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              <p
+                class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              >
+                label2: My Label 2
+              </p>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
             >
-              label3: My Label 3
-            </p>
+              <p
+                class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              >
+                label3: My Label 3
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Some extra label 1
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
-        Some extra value 1
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Some extra label 2
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        Some extra label 1
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
       >
-        Some extra value 2
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Some extra label 3
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          Some extra value 1
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
-        Some extra value 3
-      </span>
-    </dd>
-  </dl>
+        Some extra label 2
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+      >
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          Some extra value 2
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      >
+        Some extra label 3
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+      >
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          Some extra value 3
+        </span>
+      </dd>
+    </dl>
+  </div>
 </div>
 `;
 
 exports[`Storyshots Resource/MetadataDisplay With Owner References 1`] = `
 <div>
-  <dl
-    class="MuiGrid-root makeStyles-table MuiGrid-container"
+  <div
+    class="MuiBox-root MuiBox-root"
   >
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+    <dl
+      class="MuiGrid-root makeStyles-table MuiGrid-container"
     >
-      Name
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
-        my-new-kind
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Namespace
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        Name
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
       >
-        kube-system
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Creation
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          my-new-kind
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
-        2021-06-02T00:00:00.000Z
-      </span>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Labels
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+        Namespace
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+      >
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          kube-system
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      >
+        Creation
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+      >
+        <span
+          class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        >
+          2021-06-02T00:00:00.000Z
+        </span>
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+      >
+        Labels
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-          style="max-width: 80%;"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
         >
           <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+            style="max-width: 80%;"
           >
-            <p
-              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
             >
-              label1: My Label 1
-            </p>
-          </div>
-          <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-          >
-            <p
-              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              <p
+                class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              >
+                label1: My Label 1
+              </p>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
             >
-              label2: My Label 2
-            </p>
-          </div>
-          <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-          >
-            <p
-              class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              <p
+                class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              >
+                label2: My Label 2
+              </p>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
             >
-              label3: My Label 3
-            </p>
+              <p
+                class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+              >
+                label3: My Label 3
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </dd>
-    <dt
-      class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-    >
-      Controlled by
-    </dt>
-    <dd
-      class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-    >
-      <a
-        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-        href="/"
+      </dd>
+      <dt
+        class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
       >
-        Deployment
-        : 
-        kube-scheduler
-      </a>
-    </dd>
-  </dl>
+        Controlled by
+      </dt>
+      <dd
+        class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+      >
+        <a
+          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          href="/"
+        >
+          Deployment
+          : 
+          kube-scheduler
+        </a>
+      </dd>
+    </dl>
+  </div>
 </div>
 `;
