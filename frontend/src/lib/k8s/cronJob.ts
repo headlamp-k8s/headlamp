@@ -1,5 +1,5 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeContainer, KubeMetadata, KubeObjectInterface, makeKubeObject } from './cluster';
 
 /**
  * CronJob structure returned by the k8s API.
@@ -16,6 +16,17 @@ export interface KubeCronJob extends KubeObjectInterface {
     successfulJobsHistoryLimit: number;
     failedJobsHistoryLimit: number;
     concurrencyPolicy: string;
+    jobTemplate: {
+      spec: {
+        metadata?: Partial<KubeMetadata>;
+        template: {
+          spec: {
+            metadata?: Partial<KubeMetadata>;
+            containers: KubeContainer[];
+          };
+        };
+      };
+    };
     [otherProps: string]: any;
   };
   status: {
@@ -35,6 +46,10 @@ class CronJob extends makeKubeObject<KubeCronJob>('CronJob') {
 
   get status() {
     return this.getValue('status');
+  }
+
+  getContainers(): KubeContainer[] {
+    return this.spec.jobTemplate?.spec?.template?.spec?.containers || [];
   }
 }
 
