@@ -1,7 +1,8 @@
 import { Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import { KubeContainer } from '../../lib/k8s/cluster';
 import Deployment from '../../lib/k8s/deployment';
-import { StatusLabel } from '../common';
+import { LightTooltip, StatusLabel } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function DeploymentsList() {
@@ -67,17 +68,62 @@ export default function DeploymentsList() {
           label: t('Pods'),
           getter: deployment => renderPods(deployment),
           sort: sortByPods,
+          gridTemplate: 0.5,
         },
         {
           id: 'replicas',
           label: t('Replicas'),
           getter: deployment => deployment.spec.replicas || 0,
           sort: true,
+          gridTemplate: 0.6,
         },
         {
           id: 'conditions',
           label: t('Conditions'),
           getter: deployment => renderConditions(deployment),
+        },
+        {
+          id: 'containers',
+          label: t('Containers'),
+          getter: deployment => {
+            const containers = deployment.getContainers().map((c: KubeContainer) => c.name);
+            const containerText = containers.join(', ');
+            const containerTooltip = containers.join('\n');
+            return (
+              <LightTooltip title={containerTooltip} interactive>
+                {containerText}
+              </LightTooltip>
+            );
+          },
+        },
+        {
+          id: 'images',
+          label: t('Images'),
+          getter: deployment => {
+            const images = deployment.getContainers().map((c: KubeContainer) => c.image);
+            const imageText = images.join(', ');
+            const imageTooltip = images.join('\n');
+            return (
+              <LightTooltip title={imageTooltip} interactive>
+                {imageText}
+              </LightTooltip>
+            );
+          },
+        },
+        {
+          id: 'selector',
+          label: t('Selector'),
+          getter: deployment => {
+            const matchLabels = deployment.getMatchLabelsList();
+            const text = matchLabels.join(', ');
+            const tooltip = matchLabels.join('\n');
+            return (
+              <LightTooltip title={tooltip} interactive>
+                {text}
+              </LightTooltip>
+            );
+          },
+          show: false,
         },
         'age',
       ]}
