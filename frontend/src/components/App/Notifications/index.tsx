@@ -173,7 +173,10 @@ export default function Notifications() {
   const [anchorEl, setAnchorEl] = useState(null);
   const notifications = useTypedSelector(state => state.ui.notifications);
   const dispatch = useDispatch();
-  const [events] = Event.useList({ fieldSelector: 'type!=Normal' });
+  const [events] = Event.useList({
+    fieldSelector: 'type!=Normal',
+    limit: helpers.defaultMaxNotificationsStored,
+  });
   const { t } = useTranslation();
   const history = useHistory();
 
