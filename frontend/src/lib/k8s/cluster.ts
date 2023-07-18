@@ -234,6 +234,9 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       if (opts?.queryParams?.fieldSelector) {
         queryParams['fieldSelector'] = opts.queryParams.fieldSelector;
       }
+      if (opts?.queryParams?.limit) {
+        queryParams['limit'] = opts.queryParams.limit;
+      }
       args.push(queryParams);
 
       return this.apiEndpoint.list.bind(null, ...args);

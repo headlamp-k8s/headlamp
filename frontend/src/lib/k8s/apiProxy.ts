@@ -53,6 +53,7 @@ export interface ClusterRequest {
 export interface QueryParameters {
   labelSelector?: string;
   fieldSelector?: string;
+  limit?: number;
   [prop: string]: any;
 }
 
