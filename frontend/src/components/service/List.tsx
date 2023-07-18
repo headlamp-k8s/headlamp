@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import Service from '../../lib/k8s/service';
+import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function ServiceList() {
@@ -28,6 +29,18 @@ export default function ServiceList() {
           id: 'externalIP',
           label: t('External IP'),
           getter: service => service.getExternalAddresses(),
+          sort: true,
+        },
+        {
+          id: 'ports',
+          label: t('Ports'),
+          getter: service => <LabelListItem labels={service.getPorts()} />,
+          sort: true,
+        },
+        {
+          id: 'selector',
+          label: t('Selector'),
+          getter: service => <LabelListItem labels={service.getSelector()} />,
           sort: true,
         },
         'age',

@@ -26,6 +26,9 @@ export interface KubeService extends KubeObjectInterface {
     }[];
     type: string;
     externalIPs: string[];
+    selector: {
+      [key: string]: string;
+    };
     [otherProps: string]: any;
   };
   status: {
@@ -39,7 +42,7 @@ export interface KubeService extends KubeObjectInterface {
 class Service extends makeKubeObject<KubeService>('service') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'services');
 
-  get spec() {
+  get spec(): KubeService['spec'] {
     return this.jsonData!.spec;
   }
 
@@ -55,6 +58,14 @@ class Service extends makeKubeObject<KubeService>('service') {
         ) || []
       ).concat(this.spec.externalIPs || [])
     ).join(', ');
+  }
+
+  getPorts() {
+    return this.spec?.ports?.map(port => port.port);
+  }
+
+  getSelector() {
+    return Object.entries(this.spec?.selector || {}).map(([key, value]) => `${key}=${value}`);
   }
 }
 
