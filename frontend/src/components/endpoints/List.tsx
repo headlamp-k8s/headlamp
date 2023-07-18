@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import Endpoints from '../../lib/k8s/endpoints';
 import { useFilterFunc } from '../../lib/util';
+import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function EndpointList() {
@@ -22,8 +23,8 @@ export default function EndpointList() {
         {
           id: 'addresses',
           label: t('frequent|Addresses'),
-          getter: endpoint => endpoint.getAddressesText(),
-          cellProps: { style: { width: '40%', maxWidth: '40%' } },
+          getter: endpoint => <LabelListItem labels={endpoint.getAddresses()} />,
+          gridTemplate: 1.5,
         },
         'age',
       ]}

@@ -44,6 +44,10 @@ class Endpoints extends makeKubeObject<KubeEndpoint>('endpoint') {
   }
 
   getAddressesText() {
+    this.getAddresses().join(', ');
+  }
+
+  getAddresses() {
     const addresses: string[] = [];
     this.subsets?.forEach((subset: KubeEndpointSubset) => {
       subset.ports?.forEach(port => {
@@ -52,7 +56,7 @@ class Endpoints extends makeKubeObject<KubeEndpoint>('endpoint') {
         });
       });
     });
-    return addresses.join(', ');
+    return addresses;
   }
 }
 
