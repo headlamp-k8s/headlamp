@@ -14,9 +14,7 @@ $ helm install my-headlamp headlamp/headlamp --namespace kube-system
 
 ## Maintainers
 
-| Name | Url |
-| ---- | --- |
-| kinvolk | https://kinvolk.io/ |
+See [MAINTAINERS.md](https://github.com/headlamp-k8s/headlamp/blob/main/MAINTAINERS.md) in the headlamp github repo.
 
 ## Source Code
 
