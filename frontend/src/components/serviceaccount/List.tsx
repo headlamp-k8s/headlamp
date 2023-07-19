@@ -9,7 +9,18 @@ export default function ServiceAccountList() {
     <ResourceListView
       title={t('Service Accounts')}
       resourceClass={ServiceAccount}
-      columns={['name', 'namespace', 'age']}
+      columns={[
+        'name',
+        'namespace',
+        {
+          id: 'secrets',
+          label: t('Secrets'),
+          getter: (serviceaccount: ServiceAccount) => serviceaccount?.secrets?.length || 0,
+          sort: true,
+          gridTemplate: 0.5,
+        },
+        'age',
+      ]}
     />
   );
 }
