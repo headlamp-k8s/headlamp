@@ -83,205 +83,209 @@ exports[`Storyshots LimitRange/DetailsView Limit Range Detail 1`] = `
             aria-live="polite"
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <dl
-              class="MuiGrid-root makeStyles-table MuiGrid-container"
+            <div
+              class="MuiBox-root MuiBox-root"
             >
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              <dl
+                class="MuiGrid-root makeStyles-table MuiGrid-container"
               >
-                Name
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  limit-range
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Namespace
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  default
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Creation
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                >
-                  2022-01-01T00:00:00.000Z
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Container Limits
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <h6
-                    class="MuiTypography-root MuiTypography-h6"
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    Default
-                  </h6>
+                    limit-range
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Namespace
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    default
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    2022-01-01T00:00:00.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Container Limits
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                    class="MuiBox-root MuiBox-root"
                   >
+                    <h6
+                      class="MuiTypography-root MuiTypography-h6"
+                    >
+                      Default
+                    </h6>
                     <div
-                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-                      style="max-width: 80%;"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
                     >
                       <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                        style="max-width: 80%;"
                       >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                        <div
+                          class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                         >
-                          cpu: 100m
-                        </p>
-                      </div>
-                      <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-                      >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          <p
+                            class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          >
+                            cpu: 100m
+                          </p>
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                         >
-                          memory: 128Mi
-                        </p>
+                          <p
+                            class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          >
+                            memory: 128Mi
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <h6
-                    class="MuiTypography-root MuiTypography-h6"
-                  >
-                    Default Request
-                  </h6>
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                    class="MuiBox-root MuiBox-root"
                   >
+                    <h6
+                      class="MuiTypography-root MuiTypography-h6"
+                    >
+                      Default Request
+                    </h6>
                     <div
-                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-                      style="max-width: 80%;"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
                     >
                       <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                        style="max-width: 80%;"
                       >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                        <div
+                          class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                         >
-                          cpu: 50m
-                        </p>
-                      </div>
-                      <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-                      >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          <p
+                            class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          >
+                            cpu: 50m
+                          </p>
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                         >
-                          memory: 64Mi
-                        </p>
+                          <p
+                            class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          >
+                            memory: 64Mi
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <h6
-                    class="MuiTypography-root MuiTypography-h6"
-                  >
-                    Max
-                  </h6>
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                    class="MuiBox-root MuiBox-root"
                   >
+                    <h6
+                      class="MuiTypography-root MuiTypography-h6"
+                    >
+                      Max
+                    </h6>
                     <div
-                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-                      style="max-width: 80%;"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
                     >
                       <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                        style="max-width: 80%;"
                       >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                        <div
+                          class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                         >
-                          cpu: 500m
-                        </p>
-                      </div>
-                      <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-                      >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          <p
+                            class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          >
+                            cpu: 500m
+                          </p>
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                         >
-                          memory: 1Gi
-                        </p>
+                          <p
+                            class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          >
+                            memory: 1Gi
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                >
-                  <h6
-                    class="MuiTypography-root MuiTypography-h6"
-                  >
-                    Min
-                  </h6>
                   <div
-                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                    class="MuiBox-root MuiBox-root"
                   >
+                    <h6
+                      class="MuiTypography-root MuiTypography-h6"
+                    >
+                      Min
+                    </h6>
                     <div
-                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
-                      style="max-width: 80%;"
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
                     >
                       <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                        style="max-width: 80%;"
                       >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                        <div
+                          class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                         >
-                          cpu: 10m
-                        </p>
-                      </div>
-                      <div
-                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
-                      >
-                        <p
-                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          <p
+                            class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          >
+                            cpu: 10m
+                          </p>
+                        </div>
+                        <div
+                          class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
                         >
-                          memory: 4Mi
-                        </p>
+                          <p
+                            class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                          >
+                            memory: 4Mi
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </dd>
-            </dl>
+                </dd>
+              </dl>
+            </div>
           </div>
         </div>
       </div>
@@ -421,7 +425,7 @@ exports[`Storyshots LimitRange/DetailsView Limit Range Detail 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2021-03-01T00:00:00.000Z"
                       >
                         3mo
