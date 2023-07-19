@@ -15,4 +15,8 @@ export class RuntimeClass extends makeKubeObject<KubeObject>('runtimeClass') {
   static get pluralName() {
     return 'runtimeclasses';
   }
+
+  static get listRoute() {
+    return this.pluralName;
+  }
 }
