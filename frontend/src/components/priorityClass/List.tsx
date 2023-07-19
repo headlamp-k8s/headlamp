@@ -15,11 +15,13 @@ export default function PriorityClassList() {
           id: 'value',
           label: t('frequent|Value'),
           getter: item => item.value,
+          sort: true,
         },
         {
           id: 'globalDefault',
           label: t('priorityClasses|Global Default'),
           getter: item => item.globalDefault || 'False',
+          sort: true,
         },
         'age',
       ]}
