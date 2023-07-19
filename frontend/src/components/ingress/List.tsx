@@ -1,9 +1,33 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Ingress from '../../lib/k8s/ingress';
+import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
 
+function RulesDisplay(props: { ingress: Ingress }) {
+  const { ingress } = props;
+
+  const rulesText = React.useMemo(() => {
+    const rules = ingress.getRules();
+    let labels: string[] = [];
+
+    rules.forEach(({ http }) => {
+      const text = http.paths.map(({ path, backend }) => {
+        const service = backend.service.name;
+        const port = backend.service.port.number;
+        return `${path} 🞂 ${!!service ? service + ':' + port.toString() : port.toString()}`;
+      });
+      labels = labels.concat(text);
+    });
+
+    return labels;
+  }, [ingress]);
+
+  return <LabelListItem labels={rulesText} />;
+}
+
 export default function IngressList() {
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'frequent']);
 
   return (
     <ResourceListView
@@ -13,9 +37,22 @@ export default function IngressList() {
         'name',
         'namespace',
         {
+          id: 'class',
+          label: t('Class Name'),
+          getter: (ingress: Ingress) => ingress.spec?.ingressClassName,
+          sort: true,
+        },
+        {
           id: 'hosts',
           label: t('Hosts'),
-          getter: ingress => ingress.getHosts(),
+          getter: (ingress: Ingress) => (
+            <LabelListItem labels={ingress.getRules().map(({ host }) => host || '*')} />
+          ),
+        },
+        {
+          id: 'ports',
+          label: t('frequent|Path'),
+          getter: (ingress: Ingress) => <RulesDisplay ingress={ingress} />,
         },
         'age',
       ]}
