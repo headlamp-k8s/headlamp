@@ -150,6 +150,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               <th
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
+                style="min-width: 100%;"
               >
                 Targets
               </th>
@@ -280,24 +281,25 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       14360576/100Mi
                     </span>
                   </div>
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       1more…
                     </span>
@@ -369,24 +371,25 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       14360576/100Mi
                     </span>
                   </div>
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       1more…
                     </span>
@@ -458,24 +461,25 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       14360576/100Mi
                     </span>
                   </div>
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       1more…
                     </span>
@@ -547,24 +551,25 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       14360576/100Mi
                     </span>
                   </div>
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       1more…
                     </span>
@@ -636,24 +641,25 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       14360576/100Mi
                     </span>
                   </div>
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       1more…
                     </span>

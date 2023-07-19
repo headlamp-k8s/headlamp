@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: theme.spacing(0.5),
       },
     },
+    chip: {
+      paddingTop: '2px',
+      paddingBottom: '2px',
+    },
   })
 );
 
@@ -44,10 +48,22 @@ export default function HpaList() {
             const value: JSX.Element[] = [];
             const metrics = hpa.metrics(t);
             if (metrics.length) {
-              value.push(<Chip label={metrics[0].shortValue} variant="outlined" />);
+              value.push(
+                <Chip
+                  className={classes.chip}
+                  label={metrics[0].shortValue}
+                  variant="outlined"
+                  size="small"
+                />
+              );
               if (metrics.length > 1) {
                 value.push(
-                  <Chip label={metrics.length - 1 + t('frequent|more…')} variant="outlined" />
+                  <Chip
+                    className={classes.chip}
+                    label={metrics.length - 1 + t('frequent|more…')}
+                    variant="outlined"
+                    size="small"
+                  />
                 );
               }
             }
