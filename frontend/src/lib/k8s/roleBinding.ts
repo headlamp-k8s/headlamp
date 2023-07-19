@@ -22,7 +22,7 @@ class RoleBinding extends makeKubeObject<KubeRoleBinding>('roleBinding') {
     return this.jsonData!.roleRef;
   }
 
-  get subjects() {
+  get subjects(): KubeRoleBinding['subjects'] {
     return this.jsonData!.subjects;
   }
 }
