@@ -171,14 +171,14 @@ const defaultRoutes: {
     path: '/storage/persistentvolumes',
     exact: true,
     sidebar: 'persistentVolumes',
-    name: 'Storage Volumes',
+    name: 'Persistent Volumes',
     component: () => <PersistentVolumeList />,
   },
   persistentVolume: {
     path: '/storage/persistentvolumes/:name',
     exact: true,
     sidebar: 'persistentVolumes',
-    name: 'Storage Volume',
+    name: 'Persistent Volume',
     component: () => <PersistentVolumeDetails />,
   },
   persistentVolumeClaims: {
