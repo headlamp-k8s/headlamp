@@ -259,20 +259,23 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       const dispatchedNotification = action.dispatchedNotification;
       // if we have an array of updated list of notifications, update the store notifications list with these updated notifications list.
       if (Array.isArray(dispatchedNotification)) {
-        dispatchedNotification.forEach(notification => {
-          const index = newFilters.notifications.findIndex(
-            notificationItem => notificationItem.id === notification.id
-          );
-          if (index !== -1) {
-            newFilters.notifications[index] = notification;
-          }
+        newFilters.notifications = newFilters.notifications.map(notification => {
+          const newNotification = dispatchedNotification.find(obj => obj.id === notification.id);
+          return newNotification ? { ...newNotification } : { ...notification };
         });
+
+        const newObjects = dispatchedNotification.filter(
+          obj2 => !newFilters.notifications.some(obj1 => obj1.id === obj2.id)
+        );
+        newFilters.notifications = [...newFilters.notifications, ...newObjects];
       } else {
         newFilters.notifications = newFilters.notifications.map(notification => {
           if (notification.id === dispatchedNotification.id) {
-            return dispatchedNotification;
+            const payload = { ...dispatchedNotification };
+            payload.seen = true;
+            return payload;
           }
-          return notification;
+          return { ...notification };
         });
       }
       helpers.storeNotifications(newFilters.notifications);
