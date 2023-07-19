@@ -42,6 +42,12 @@ export default function ResourceQuotaList() {
             });
             return <Box className={classes.root}>{requests}</Box>;
           },
+          cellProps: {
+            style: {
+              width: 'fit-content',
+              minWidth: '100%',
+            },
+          },
         },
         {
           id: 'limits',

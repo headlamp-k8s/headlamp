@@ -144,6 +144,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               <th
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
+                style="min-width: 100%;"
               >
                 Request
               </th>
@@ -205,6 +206,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="MuiBox-root MuiBox-root makeStyles-root"
@@ -275,6 +277,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="MuiBox-root MuiBox-root makeStyles-root"
@@ -345,6 +348,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="MuiBox-root MuiBox-root makeStyles-root"
@@ -415,6 +419,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="MuiBox-root MuiBox-root makeStyles-root"
@@ -485,6 +490,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="MuiBox-root MuiBox-root makeStyles-root"

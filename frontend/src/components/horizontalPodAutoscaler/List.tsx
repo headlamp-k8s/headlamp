@@ -69,6 +69,12 @@ export default function HpaList() {
             }
             return <div className={classes.root}>{value}</div>;
           },
+          cellProps: {
+            style: {
+              width: 'fit-content',
+              minWidth: '100%',
+            },
+          },
         },
         {
           id: 'minReplicas',

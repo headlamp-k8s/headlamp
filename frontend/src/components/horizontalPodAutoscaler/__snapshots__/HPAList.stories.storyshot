@@ -150,6 +150,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               <th
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
+                style="min-width: 100%;"
               >
                 Targets
               </th>
@@ -280,6 +281,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="makeStyles-root"
@@ -369,6 +371,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="makeStyles-root"
@@ -458,6 +461,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="makeStyles-root"
@@ -547,6 +551,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="makeStyles-root"
@@ -636,6 +641,7 @@ exports[`Storyshots hpa/HpaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="makeStyles-root"
