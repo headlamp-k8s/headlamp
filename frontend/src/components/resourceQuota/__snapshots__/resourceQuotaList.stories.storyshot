@@ -210,10 +210,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       requests.cpu: 0.5 cores/0.2 cores
                     </span>
@@ -227,10 +227,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       limits.cpu: 0 core/0.3 cores
                     </span>
@@ -280,10 +280,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       requests.cpu: 0.5 cores/0.2 cores
                     </span>
@@ -297,10 +297,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       limits.cpu: 0 core/0.3 cores
                     </span>
@@ -350,10 +350,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       requests.cpu: 0.5 cores/0.2 cores
                     </span>
@@ -367,10 +367,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       limits.cpu: 0 core/0.3 cores
                     </span>
@@ -420,10 +420,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       requests.cpu: 0.5 cores/0.2 cores
                     </span>
@@ -437,10 +437,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       limits.cpu: 0 core/0.3 cores
                     </span>
@@ -490,10 +490,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       requests.cpu: 0.5 cores/0.2 cores
                     </span>
@@ -507,10 +507,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       limits.cpu: 0 core/0.3 cores
                     </span>

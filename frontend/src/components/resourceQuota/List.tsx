@@ -13,6 +13,10 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: theme.spacing(0.5),
       },
     },
+    chip: {
+      paddingTop: '2px',
+      paddingBottom: '2px',
+    },
   })
 );
 
@@ -32,7 +36,9 @@ export default function ResourceQuotaList() {
           getter: (item: ResourceQuota) => {
             const requests: JSX.Element[] = [];
             item.requests.forEach((request: string) => {
-              requests.push(<Chip label={request} variant="outlined" />);
+              requests.push(
+                <Chip className={classes.chip} label={request} variant="outlined" size="small" />
+              );
             });
             return <Box className={classes.root}>{requests}</Box>;
           },
@@ -43,7 +49,9 @@ export default function ResourceQuotaList() {
           getter: (item: ResourceQuota) => {
             const limits: JSX.Element[] = [];
             item.limits.forEach((limit: string) => {
-              limits.push(<Chip label={limit} variant="outlined" />);
+              limits.push(
+                <Chip className={classes.chip} label={limit} variant="outlined" size="small" />
+              );
             });
             return <Box className={classes.root}>{limits}</Box>;
           },
