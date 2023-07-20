@@ -192,6 +192,13 @@ export function LogViewer(props: LogViewerProps) {
           </Grid>
           <Grid item xs>
             <ActionButton
+              description={t('frequent|Clear')}
+              onClick={() => clearPodLogs(xtermRef)}
+              icon="mdi:broom"
+            />
+          </Grid>
+          <Grid item xs>
+            <ActionButton
               description={t('Download')}
               onClick={downloadLog}
               icon="mdi:file-download-outline"
@@ -213,6 +220,13 @@ export function LogViewer(props: LogViewerProps) {
       </DialogContent>
     </Dialog>
   );
+}
+
+// clears logs for pod
+function clearPodLogs(xtermRef: React.MutableRefObject<XTerminal | null>) {
+  xtermRef.current?.clear();
+  // keeping this comment if logs dont print after clear
+  // xtermRef.current?.write(getJointLogs());
 }
 
 function enableCopyPasteInXterm(xterm: XTerminal) {
