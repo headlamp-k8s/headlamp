@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import PriorityClass from '../../lib/k8s/priorityClasses';
+import PriorityClass from '../../lib/k8s/priorityClass';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function PriorityClassList() {

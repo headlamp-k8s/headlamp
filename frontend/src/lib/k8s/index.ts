@@ -26,7 +26,7 @@ import PersistentVolume from './persistentVolume';
 import PersistentVolumeClaim from './persistentVolumeClaim';
 import Pod from './pod';
 import PodDisruptionBudget from './podDisruptionBudget';
-import PriorityClasses from './priorityClasses';
+import PriorityClass from './priorityClass';
 import ReplicaSet from './replicaSet';
 import ResourceQuota from './resourceQuota';
 import Role from './role';
@@ -52,7 +52,7 @@ const classList = [
   ResourceQuota,
   HPA,
   PodDisruptionBudget,
-  PriorityClasses,
+  PriorityClass,
   Ingress,
   Job,
   Namespace,
