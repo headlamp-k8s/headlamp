@@ -22,7 +22,7 @@ class StorageClass extends makeKubeObject<KubeStorageClass>('storageClass') {
     return this.jsonData?.volumeBindingMode;
   }
 
-  get listRoute() {
+  static get listRoute() {
     return 'storageClasses';
   }
 

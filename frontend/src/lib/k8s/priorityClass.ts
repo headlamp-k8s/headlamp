@@ -15,7 +15,7 @@ class PriorityClass extends makeKubeObject<KubePriorityClass>('priorityClass') {
     return 'priorityclasses';
   }
 
-  get listRoute() {
+  static get listRoute() {
     return 'priorityclasses';
   }
 

@@ -21,12 +21,15 @@ const mockK8sObject = (className: string) => ({
 });
 
 describe('Class tests', () => {
-  test('Check plurals', () => {
-    Object.values(ResourceClasses).forEach((cls: KubeObjectClass) => {
+  Object.values(ResourceClasses).forEach((cls: KubeObjectClass) => {
+    test(`Check plurals for ${cls.className}`, () => {
       expect(cls.pluralName).toBe(cls.pluralName.toLowerCase());
+      // Check naive plural for classes ending in 's'. E.g. Check plural for myClass != myClasss
       if (cls.className.endsWith('s')) {
-        // Check naive plural for classes ending in 's'.
         expect(cls.pluralName.toLowerCase()).not.toBe(cls.className.toLowerCase() + 's');
+      }
+      if (cls.className.endsWith('s')) {
+        expect(cls.listRoute.toLowerCase()).not.toBe(cls.className.toLowerCase() + 's');
       }
     });
   });
