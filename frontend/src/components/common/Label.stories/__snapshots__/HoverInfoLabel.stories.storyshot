@@ -3,7 +3,7 @@
 exports[`Storyshots Label/HoverInfoLabel Hover Info Label 1`] = `
 <div>
   <p
-    class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
     title="hover info"
   >
     Some label
@@ -15,7 +15,7 @@ exports[`Storyshots Label/HoverInfoLabel Hover Info Label 1`] = `
 exports[`Storyshots Label/HoverInfoLabel Hover Info Label Info 1`] = `
 <div>
   <p
-    class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
   >
     Some label
     <span />

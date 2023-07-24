@@ -83,80 +83,84 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
             aria-live="polite"
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <dl
-              class="MuiGrid-root makeStyles-table MuiGrid-container"
+            <div
+              class="MuiBox-root MuiBox-root"
             >
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              <dl
+                class="MuiGrid-root makeStyles-table MuiGrid-container"
               >
-                Name
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  mydefinition.phonyresources.io
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Creation
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  2021-12-15T14:57:13.000Z
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Group
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    mydefinition.phonyresources.io
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  my.phonyresources.io
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Version
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  v1
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Scope
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    2021-12-15T14:57:13.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  Namespaced
-                </span>
-              </dd>
-            </dl>
+                  Group
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    my.phonyresources.io
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Version
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    v1
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Scope
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    Namespaced
+                  </span>
+                </dd>
+              </dl>
+            </div>
           </div>
         </div>
       </div>
@@ -513,7 +517,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       style="text-align: right;"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2021-12-15T14:57:13.000Z"
                       >
                         3mo
@@ -544,7 +548,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       style="text-align: right;"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2021-12-15T14:57:13.000Z"
                       >
                         3mo
@@ -687,7 +691,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2021-03-01T00:00:00.000Z"
                       >
                         3mo
@@ -934,7 +938,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                   title="2021-12-15T14:57:13.000Z"
                 >
                   3mo

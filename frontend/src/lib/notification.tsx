@@ -14,7 +14,7 @@ type NotificationMessageString = string;
 type OldNotificationDateArg = number | string;
 
 export class Notification {
-  private _message: string = '';
+  message: string = '';
   id: string;
   seen: boolean = false;
   url?: string;
@@ -31,7 +31,7 @@ export class Notification {
         `Notification constructor with a string arg is deprecated. Please use NotificationOptions as args instead`
       );
       if (messageOrOptions) {
-        this.message = messageOrOptions;
+        this.message = this.prepareMessage(messageOrOptions);
       }
       if (date) {
         this.date = date;
@@ -39,7 +39,7 @@ export class Notification {
     } else if (messageOrOptions) {
       const { message, date, cluster } = messageOrOptions;
       if (message) {
-        this.message = message;
+        this.message = this.prepareMessage(message);
       }
       if (date) {
         if (date instanceof Date) {
@@ -56,20 +56,26 @@ export class Notification {
     this.id = btoa(unescape(encodeURIComponent(`${this.date},${this.message},${this.cluster}`)));
   }
 
-  set message(message: string) {
-    this._message = message;
-    if (this._message.length > 250) {
+  prepareMessage(message: string) {
+    let trimmedMessage = message;
+    if (message && message.length > 250) {
       // I am not sure if this applies well to all languages, but it should be good enough for now.
-      this._message = this._message.slice(0, 249) + '…';
+      trimmedMessage = message.slice(0, 249) + '…';
     }
-  }
-
-  get message() {
-    return this._message;
+    return trimmedMessage;
   }
 
   static fromJSON(json: any) {
-    return Object.assign(new Notification(), json);
+    const notification = new Notification({
+      message: json.message,
+      date: json.date,
+      cluster: json.cluster,
+    });
+    notification.id = json.id;
+    notification.seen = json.seen;
+    notification.url = json.url;
+    notification.deleted = json.deleted;
+    return notification;
   }
 
   // Avoid marshalling the entire object to JSON, as well as

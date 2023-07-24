@@ -128,115 +128,119 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             aria-live="polite"
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <dl
-              class="MuiGrid-root makeStyles-table MuiGrid-container"
+            <div
+              class="MuiBox-root MuiBox-root"
             >
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              <dl
+                class="MuiGrid-root makeStyles-table MuiGrid-container"
               >
-                Name
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  running
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Namespace
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                >
-                  default
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Creation
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
-                >
-                  2022-01-01T00:00:00.000Z
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                State
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <div
-                  class="MuiBox-root MuiBox-root"
-                  title=""
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
                   <span
-                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
-                    style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
-                    Running
+                    running
                   </span>
-                </div>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Node
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
-                  href="/"
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  my-node
-                </a>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Host IP
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  Namespace
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  0.0.0.1
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Pod IP
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    default
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  0.0.0.2
-                </span>
-              </dd>
-            </dl>
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    2022-01-01T00:00:00.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  State
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                    title=""
+                  >
+                    <span
+                      class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                      style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                    >
+                      Running
+                    </span>
+                  </div>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Node
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    my-node
+                  </a>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Host IP
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    0.0.0.1
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Pod IP
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    0.0.0.2
+                  </span>
+                </dd>
+              </dl>
+            </div>
           </div>
         </div>
       </div>
@@ -342,7 +346,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2022-01-01T00:05:00.000Z"
                       >
                         3 months
@@ -382,7 +386,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2022-01-01T00:05:00.000Z"
                       >
                         3 months
@@ -422,7 +426,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2022-01-01T00:05:00.000Z"
                       >
                         3 months
@@ -462,7 +466,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2022-01-01T00:05:00.000Z"
                       >
                         3 months
@@ -771,7 +775,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2021-03-01T00:00:00.000Z"
                       >
                         3mo

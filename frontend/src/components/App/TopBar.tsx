@@ -326,11 +326,19 @@ export function PureTopBar({
     ...appBarActions,
     {
       id: DefaultAppBarAction.NOTIFICATION,
-      action: <Notifications />,
+      action: (
+        <MenuItem>
+          <Notifications />
+        </MenuItem>
+      ),
     },
     {
       id: DefaultAppBarAction.SETTINGS,
-      action: <SettingsButton onClickExtra={handleMenuClose} />,
+      action: (
+        <MenuItem>
+          <SettingsButton onClickExtra={handleMenuClose} />
+        </MenuItem>
+      ),
     },
     {
       id: DefaultAppBarAction.USER,

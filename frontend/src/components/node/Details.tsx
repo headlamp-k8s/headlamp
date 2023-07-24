@@ -15,7 +15,7 @@ import { clusterAction } from '../../redux/actions/actions';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
 import { ActionButton, ObjectEventList, StatusLabelProps } from '../common';
 import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
-import { MainInfoSection, OwnedPodsSection } from '../common/Resource';
+import { MainInfoSection, OwnedPodsSection, PageGrid } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
@@ -151,7 +151,7 @@ export default function NodeDetails() {
   }
 
   return (
-    <>
+    <PageGrid>
       <MainInfoSection
         error={nodeError}
         headerSection={item => (
@@ -221,7 +221,7 @@ export default function NodeDetails() {
           {node && <ObjectEventList object={node} />}
         </>
       )}
-    </>
+    </PageGrid>
   );
 }
 

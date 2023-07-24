@@ -83,20 +83,17 @@ function NotificationsList(props: {
     if (!notification) {
       return;
     }
-    notification.seen = true;
     clickEventHandler(notification);
   }
 
   function notificationItemClickHandler(notification: Notification) {
     notification.url && history.push(notification.url);
-    notification.seen = true;
     clickEventHandler(notification, true);
   }
 
   function Row(props: ListChildComponentProps) {
     const { index, style } = props;
     const notification = notifications[index];
-
     if (notification.deleted) {
       return null;
     }
@@ -239,17 +236,18 @@ export default function Notifications() {
 
   function handleNotificationMarkAllRead() {
     const massagedNotifications = notifications.map(notification => {
-      notification.seen = true;
-      return notification;
+      const updatedNotification = Object.assign(new Notification(), notification);
+      updatedNotification.seen = true;
+      return updatedNotification;
     });
     dispatch(setUINotifications(massagedNotifications));
   }
 
   function handleNotificationClear() {
-    const currentSetOfNotifications = notifications;
-    const massagedNotifications = currentSetOfNotifications.map(notification => {
-      notification.deleted = true;
-      return notification;
+    const massagedNotifications = notifications.map(notification => {
+      const updatedNotification = Object.assign(new Notification(), notification);
+      updatedNotification.deleted = true;
+      return updatedNotification;
     });
     dispatch(setUINotifications(massagedNotifications));
   }

@@ -83,92 +83,96 @@ exports[`Storyshots Lease/LeaseDetailsView Lease Detail 1`] = `
             aria-live="polite"
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <dl
-              class="MuiGrid-root makeStyles-table MuiGrid-container"
+            <div
+              class="MuiBox-root MuiBox-root"
             >
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              <dl
+                class="MuiGrid-root makeStyles-table MuiGrid-container"
               >
-                Name
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  lease
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Namespace
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  default
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Creation
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    lease
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  2022-01-01T00:00:00.000Z
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Holder Identity
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  Namespace
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  holder
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Lease Duration Seconds
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                10
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Renew Time
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="2021-03-01T00:00:00.000Z"
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    default
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  3 months
-                  <span />
-                </p>
-              </dd>
-            </dl>
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    2022-01-01T00:00:00.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Holder Identity
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    holder
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Lease Duration Seconds
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  10
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Renew Time
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <p
+                    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+                    title="2021-03-01T00:00:00.000Z"
+                  >
+                    3 months
+                    <span />
+                  </p>
+                </dd>
+              </dl>
+            </div>
           </div>
         </div>
       </div>
@@ -308,7 +312,7 @@ exports[`Storyshots Lease/LeaseDetailsView Lease Detail 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2021-03-01T00:00:00.000Z"
                       >
                         3mo

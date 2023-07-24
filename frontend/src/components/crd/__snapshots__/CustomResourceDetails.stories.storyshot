@@ -175,68 +175,72 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
             aria-live="polite"
             class="MuiBox-root MuiBox-root makeStyles-box"
           >
-            <dl
-              class="MuiGrid-root makeStyles-table MuiGrid-container"
+            <div
+              class="MuiBox-root MuiBox-root"
             >
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              <dl
+                class="MuiGrid-root makeStyles-table MuiGrid-container"
               >
-                Name
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  mycustomresource
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Namespace
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  mynamespace
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Creation
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <span
-                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    mycustomresource
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
-                  2021-12-15T14:57:13.000Z
-                </span>
-              </dd>
-              <dt
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
-              >
-                Test Col
-              </dt>
-              <dd
-                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
-              >
-                <p
-                  class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
-                  title="My description"
+                  Namespace
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  mycustomresource
-                  <span />
-                </p>
-              </dd>
-            </dl>
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    mynamespace
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    2021-12-15T14:57:13.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Test Col
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <p
+                    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+                    title="My description"
+                  >
+                    mycustomresource
+                    <span />
+                  </p>
+                </dd>
+              </dl>
+            </div>
           </div>
         </div>
       </div>
@@ -369,7 +373,7 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
                       <p
-                        class="MuiTypography-root makeStyles-noWrap MuiTypography-body1"
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
                         title="2021-03-01T00:00:00.000Z"
                       >
                         3mo

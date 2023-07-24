@@ -40,11 +40,13 @@ jobs:
         kubectl apply -f e2e-tests/kubernetes-headlamp-ci.yaml
     - name: Test service URLs
       run: |
+        echo "------------------sleeping 3...------------------"
+        sleep 3
         minikube service list
         minikube service headlamp -n kube-system --url
-        sleep 2
         kubectl get deployments -n kube-system
         minikube logs | tail -10
+        echo "------------------waiting for headlamp deployment to be available...------------------"
         kubectl wait deployment -n kube-system headlamp --for condition=Available=True --timeout=30s
         minikube service headlamp -n kube-system --url
         echo "------------------opening the service------------------"
