@@ -60,6 +60,16 @@ const commonRules = {
         backgroundColor: '#3B3A39',
       },
     },
+    clusterChooser: {
+      button: {
+        color: '#fff',
+        background: '#000',
+
+        hover: {
+          background: '#605e5c',
+        },
+      },
+    },
     sidebarButtonInLinkArea: {
       color: '#fff',
       primary: {
@@ -214,6 +224,16 @@ const darkTheme = createTheme({
     metadataBgColor: '#333',
     resourceToolTip: {
       color: 'rgba(255, 255, 255, 0.87)',
+    },
+    clusterChooser: {
+      button: {
+        color: '#fff',
+        background: '#605e5c',
+
+        hover: {
+          background: '#3B3A39',
+        },
+      },
     },
     sidebarLink: {
       ...commonRules.palette.sidebarLink,
