@@ -16,6 +16,9 @@ export interface KubePodSpec {
     [key: string]: string;
   };
   initContainers?: any[];
+  readinessGates?: {
+    conditionType: string;
+  }[];
 }
 
 export interface KubePod extends KubeObjectInterface {
