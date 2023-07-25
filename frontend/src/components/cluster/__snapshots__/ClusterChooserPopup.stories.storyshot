@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots cluster/ClusterChooserPopup No Clusters But Recent 1`] = `
+<div
+  aria-hidden="true"
+>
+  <span />
+</div>
+`;
+
+exports[`Storyshots cluster/ClusterChooserPopup No Recent Clusters 1`] = `
+<div
+  aria-hidden="true"
+>
+  <span />
+</div>
+`;
+
+exports[`Storyshots cluster/ClusterChooserPopup Normal 1`] = `
+<div
+  aria-hidden="true"
+>
+  <span />
+</div>
+`;
+
+exports[`Storyshots cluster/ClusterChooserPopup Scrollbar 1`] = `
+<div
+  aria-hidden="true"
+>
+  <span />
+</div>
+`;

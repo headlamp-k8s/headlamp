@@ -9,13 +9,14 @@ import defaultStore from '../redux/stores/store';
 export type TestContextProps = PropsWithChildren<{
   store?: ReturnType<typeof configureStore>;
   routerMap?: Record<string, string>;
+  urlPrefix?: string;
   urlSearchParams?: {
     [key: string]: string;
   };
 }>;
 
 export function TestContext(props: TestContextProps) {
-  const { store, routerMap, urlSearchParams, children } = props;
+  const { store, routerMap, urlPrefix = '', urlSearchParams, children } = props;
   let url = '';
   let routePath = '';
 
@@ -23,6 +24,12 @@ export function TestContext(props: TestContextProps) {
     // Add the prefix : to the key to make it a param if needed.
     routePath += '/' + (key.startsWith(':') ? key : ':' + key);
     url += '/' + value;
+  }
+
+  if (!!urlPrefix) {
+    const prefix = urlPrefix.endsWith('/') ? urlPrefix.slice(0, -1) : urlPrefix;
+    url = prefix + url;
+    routePath = prefix + routePath;
   }
 
   if (!!urlSearchParams) {
