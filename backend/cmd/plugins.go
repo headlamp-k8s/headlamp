@@ -165,6 +165,10 @@ func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error
 	return pluginListURLs, nil
 }
 
+// addPluginRoutes adds plugin routes to a router.
+// It serves plugin list base paths as json at “/plugins”.
+// It serves plugin static files at “/plugins/” and “/static-plugins/”.
+// It disables caching and reloads plugin list base paths if not in-cluster.
 func addPluginRoutes(config *HeadlampConfig, r *mux.Router) {
 	var err error
 
