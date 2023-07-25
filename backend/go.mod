@@ -15,7 +15,7 @@ require (
 	github.com/knadh/koanf v1.5.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.29.1
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.8.4
 	golang.org/x/oauth2 v0.4.0
 	helm.sh/helm/v3 v3.12.0
 	k8s.io/api v0.27.1
