@@ -58,7 +58,7 @@ export interface PodListProps {
 
 export function PodListRenderer(props: PodListProps) {
   const { pods, error, hideColumns = [], reflectTableInURL = 'pods', noNamespaceFilter } = props;
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'frequent']);
 
   function getDataCols() {
     const dataCols: ResourceTableProps['columns'] = [
@@ -82,13 +82,13 @@ export function PodListRenderer(props: PodListProps) {
       },
       {
         id: 'ip',
-        label: t('frequent|Pod IP'),
+        label: t('glossary|IP'),
         getter: (pod: Pod) => pod.status.podIP,
         sort: true,
       },
       {
         id: 'node',
-        label: t('frequent|Node Name'),
+        label: t('glossary|Node'),
         getter: (pod: Pod) =>
           pod?.spec?.nodeName && (
             <Link routeName="node" params={{ name: pod.spec.nodeName }} tooltip>

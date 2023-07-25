@@ -314,7 +314,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
-                      Pod IP
+                      IP
                       <button
                         aria-label="sort swap"
                         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
@@ -335,7 +335,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
-                      Node Name
+                      Node
                       <button
                         aria-label="sort swap"
                         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
