@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { matchPath, useLocation } from 'react-router-dom';
 import { ConfigState } from '../../redux/reducers/config';
 import { useTypedSelector } from '../../redux/reducers/reducers';
-import { getCluster } from '../util';
+import { getCluster, getClusterPrefixedPath } from '../util';
 import { ApiError, clusterRequest } from './apiProxy';
 import { Cluster, KubeObject, LabelSelector, StringDict } from './cluster';
 import ClusterRole from './clusterRole';
@@ -93,9 +93,20 @@ export function useCluster() {
   const clusters = useClustersConf();
 
   React.useEffect(() => {
-    const currentCluster = getCluster();
+    // This function is similar to the getCluster() but uses the location
+    // meaning it will return the URL from whatever the router used it (which
+    // is more accurate than getting it from window.location like the former).
+    function getClusterFromLocation() {
+      const urlPath = location?.pathname;
+      const clusterURLMatch = matchPath<{ cluster?: string }>(urlPath, {
+        path: getClusterPrefixedPath(),
+      });
+      return (!!clusterURLMatch && clusterURLMatch.params.cluster) || null;
+    }
+
+    const currentCluster = getClusterFromLocation();
     if (cluster !== currentCluster) {
-      setCluster(getCluster());
+      setCluster(currentCluster);
     }
   }, [clusters, cluster, location]);
 

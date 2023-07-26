@@ -33,22 +33,31 @@ import ActionButton from '../common/ActionButton';
 import { DialogTitle } from '../common/Dialog';
 import ErrorBoundary from '../common/ErrorBoundary';
 import Loader from '../common/Loader';
+import ClusterChooser from './ClusterChooser';
+import ClusterChooserPopup from './ClusterChooserPopup';
 
 export interface ClusterTitleProps {
   clusters?: {
     [clusterName: string]: Cluster;
   };
   cluster?: string;
+  onClick?: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export function ClusterTitle(props: ClusterTitleProps) {
-  const cluster = props.cluster;
-  const clusters = props.clusters;
-  const [showChooser, setShowChooser] = React.useState(false);
+  const { cluster, clusters, onClick } = props;
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const ChooserButton = useTypedSelector(state => state.ui.clusterChooserButtonComponent);
 
-  useHotkeys('ctrl+shift+l', () => setShowChooser(true));
+  useHotkeys(
+    'ctrl+shift+l',
+    () => {
+      setAnchorEl(buttonRef.current);
+    },
+    { preventDefault: true }
+  );
 
   if (!cluster) {
     return null;
@@ -64,13 +73,29 @@ export function ClusterTitle(props: ClusterTitleProps) {
 
   return (
     <ErrorBoundary>
-      {ChooserButton &&
-        (isValidElement(ChooserButton) ? (
+      {ChooserButton ? (
+        isValidElement(ChooserButton) ? (
           ChooserButton
         ) : (
-          <ChooserButton clickHandler={() => setShowChooser(true)} cluster={cluster} />
-        ))}
-      <Chooser open={showChooser} onClose={() => setShowChooser(false)} />
+          <ChooserButton
+            clickHandler={e => {
+              onClick && onClick(e);
+              e?.currentTarget && setAnchorEl(e.currentTarget);
+            }}
+            cluster={cluster}
+          />
+        )
+      ) : (
+        <ClusterChooser
+          ref={buttonRef}
+          clickHandler={e => {
+            onClick && onClick(e);
+            e?.currentTarget && setAnchorEl(e.currentTarget);
+          }}
+          cluster={cluster}
+        />
+      )}
+      <ClusterChooserPopup anchor={anchorEl} onClose={() => setAnchorEl(null)} />
     </ErrorBoundary>
   );
 }

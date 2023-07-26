@@ -8,7 +8,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import clsx from 'clsx';
 import { has } from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -118,7 +117,6 @@ export interface PureTopBarProps {
   appBarActionsProcessors?: AppBarActionsProcessor[];
   logout: () => void;
   hasToken: boolean;
-  /** @deprecated The cluster button as is will be reomved soon, so this argument should not be used. */
   clusters?: {
     [clusterName: string]: any;
   };
@@ -149,8 +147,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     clusterTitle: {
-      display: 'flex',
-      justifyContent: 'center',
+      paddingRight: theme.spacing(10),
     },
     versionLink: {
       textAlign: 'center',
@@ -321,7 +318,9 @@ export function PureTopBar({
   const allAppBarActionsMobile: AppBarAction[] = [
     {
       id: DefaultAppBarAction.CLUSTER,
-      action: isClusterContext && <ClusterTitle cluster={cluster} clusters={clusters} />,
+      action: isClusterContext && (
+        <ClusterTitle cluster={cluster} clusters={clusters} onClick={() => handleMenuClose()} />
+      ),
     },
     ...appBarActions,
     {
@@ -380,8 +379,8 @@ export function PureTopBar({
     {
       id: DefaultAppBarAction.CLUSTER,
       action: (
-        <div className={clsx(classes.grow, classes.clusterTitle)}>
-          <ClusterTitle cluster={cluster} clusters={clusters} />
+        <div className={classes.clusterTitle}>
+          <ClusterTitle cluster={cluster} clusters={clusters} onClick={handleMobileMenuClose} />
         </div>
       ),
     },
@@ -424,6 +423,7 @@ export function PureTopBar({
           {!isSmall && (
             <>
               <AppLogo />
+              <div className={classes.grow} />
               <AppBarActions
                 appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
               />
