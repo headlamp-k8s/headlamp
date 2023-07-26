@@ -288,14 +288,14 @@ export function PureTopBar({
       <MenuItem
         component="a"
         onClick={() => {
-          history.push(createRouteURL('settingsCluster', { cluster: cluster! }));
+          history.push(createRouteURL('settings'));
           handleMenuClose();
         }}
       >
         <ListItemIcon>
           <Icon icon="mdi:cog-box" />
         </ListItemIcon>
-        <ListItemText>{t('settings|Cluster settings')}</ListItemText>
+        <ListItemText>{t('settings|General Settings')}</ListItemText>
       </MenuItem>
       <MenuItem
         component="a"

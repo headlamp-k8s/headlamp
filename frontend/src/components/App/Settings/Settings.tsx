@@ -42,7 +42,7 @@ export default function Settings() {
 
   return (
     <SectionBox
-      title={t('frequent|General')}
+      title={t('frequent|General Settings')}
       headerProps={{
         actions: [
           <ActionButton

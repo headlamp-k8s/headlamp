@@ -41,7 +41,7 @@ exports[`Storyshots Settings General 1`] = `
           <h1
             class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
           >
-            General
+            General Settings
           </h1>
           <div
             class="MuiBox-root MuiBox-root"
