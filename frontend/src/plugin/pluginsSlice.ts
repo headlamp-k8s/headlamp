@@ -29,6 +29,15 @@ export type PluginInfo = {
 
   version?: string; // unused by PluginSettings
   author?: string; // unused by PluginSettings
+
+  /** Information about engines related to this plugin. */
+  engines?: {
+    /** The version of the headlamp plugin engine this plugin is compatible with. */
+    headlampPlugin?: string;
+    [key: string]: string | undefined;
+  };
+
+  [key: string]: any;
 };
 
 export interface PluginsState {

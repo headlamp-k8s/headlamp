@@ -4,10 +4,18 @@
  * The lib.ts file should carry the bits to be used by plugins whereas
  */
 
+import semver from 'semver';
 import helpers from '../helpers';
 import { Headlamp, Plugin } from './lib';
 import { PluginInfo } from './pluginsSlice';
 import Registry, * as registryToExport from './registry';
+
+/** The version of the plugin engine for which this headlamp build is compatible.
+ * If the plugin engine version is not compatible, the plugin will not be loaded.
+ * Can be set to a semver range, e.g. '>= 0.6.0' or '0.6.0 - 0.7.0'.
+ * If set to an empty string, all plugin versions will be loaded.
+ */
+const compatibleHeadlampPluginVersion = '';
 
 window.pluginLib = {
   ApiProxy: require('../lib/k8s/apiProxy'),
@@ -87,6 +95,42 @@ export async function initializePlugins() {
 }
 
 /**
+ * Get the version of the plugin engine from the plugin info.
+ *
+ * @param pluginInfo the plugin info describing the plugin.
+ * @returns the version of the plugin engine for the given pluginInfo.
+ */
+export function getPluginEngineVersion(pluginInfo: PluginInfo) {
+  let engineVersionFromPlugin = pluginInfo.engines?.headlampPlugin;
+  if (!engineVersionFromPlugin) {
+    engineVersionFromPlugin = pluginInfo.devDependencies?.['@kinvolk/headlamp-plugin'];
+  }
+
+  return engineVersionFromPlugin;
+}
+
+/**
+ * Check if the plugin is compatible with the given plugin engine version (using semver).
+ *
+ * @param pluginInfo the plugin info describing the plugin.
+ * @param version the version of the plugin engine to check compatibility with.
+ * @returns true if the plugin is compatible with the given plugin engine version. If the version is empty, it returns true.
+ */
+export function isCompatiblePluginVersion(pluginInfo: PluginInfo, version: string) {
+  if (version === '') {
+    return true;
+  }
+
+  const engineVersionFromPlugin = getPluginEngineVersion(pluginInfo);
+
+  if (!engineVersionFromPlugin) {
+    return false;
+  }
+
+  return semver.satisfies(semver.coerce(engineVersionFromPlugin) || '', version);
+}
+
+/**
  * This can be used to filter out which of the plugins we should execute.
  *
  * @param sources array of source to execute. Has the same order as packageInfos.
@@ -119,6 +163,10 @@ export function filterSources(
 
     // if it's not in the settings don't enable the plugin
     if (index === -1) return false;
+
+    if (!isCompatiblePluginVersion(packageInfo, compatibleHeadlampPluginVersion)) {
+      return false;
+    }
 
     return settingsPackages[index].isEnabled;
   });
