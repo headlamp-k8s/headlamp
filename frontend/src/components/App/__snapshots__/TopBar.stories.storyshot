@@ -51,22 +51,6 @@ exports[`Storyshots TopBar No Token 1`] = `
           class="MuiTouchRipple-root"
         />
       </button>
-      <button
-        aria-label="Settings"
-        class="MuiButtonBase-root MuiIconButton-root"
-        tabindex="0"
-        title="Settings"
-        type="button"
-      >
-        <span
-          class="MuiIconButton-label"
-        >
-          <span />
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
     </div>
   </nav>
 </div>
@@ -118,22 +102,6 @@ exports[`Storyshots TopBar One Cluster 1`] = `
               fill="currentColor"
             />
           </svg>
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
-      <button
-        aria-label="Settings"
-        class="MuiButtonBase-root MuiIconButton-root"
-        tabindex="0"
-        title="Settings"
-        type="button"
-      >
-        <span
-          class="MuiIconButton-label"
-        >
-          <span />
         </span>
         <span
           class="MuiTouchRipple-root"
@@ -215,22 +183,6 @@ exports[`Storyshots TopBar Processor Action 1`] = `
           class="MuiTouchRipple-root"
         />
       </button>
-      <button
-        aria-label="Settings"
-        class="MuiButtonBase-root MuiIconButton-root"
-        tabindex="0"
-        title="Settings"
-        type="button"
-      >
-        <span
-          class="MuiIconButton-label"
-        >
-          <span />
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
     </div>
   </nav>
 </div>
@@ -287,22 +239,6 @@ exports[`Storyshots TopBar Token 1`] = `
           class="MuiTouchRipple-root"
         />
       </button>
-      <button
-        aria-label="Settings"
-        class="MuiButtonBase-root MuiIconButton-root"
-        tabindex="0"
-        title="Settings"
-        type="button"
-      >
-        <span
-          class="MuiIconButton-label"
-        >
-          <span />
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
     </div>
   </nav>
 </div>
@@ -354,22 +290,6 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
               fill="currentColor"
             />
           </svg>
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
-      <button
-        aria-label="Settings"
-        class="MuiButtonBase-root MuiIconButton-root"
-        tabindex="0"
-        title="Settings"
-        type="button"
-      >
-        <span
-          class="MuiIconButton-label"
-        >
-          <span />
         </span>
         <span
           class="MuiTouchRipple-root"

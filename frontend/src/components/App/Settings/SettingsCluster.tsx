@@ -1,5 +1,5 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Box, Chip, IconButton, TextField } from '@material-ui/core';
+import { Box, Chip, IconButton, Link, TextField } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import helpers, { ClusterSettings } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
 import { deleteCluster } from '../../../lib/k8s/apiProxy';
+import { createRouteURL } from '../../../lib/router';
 import { setConfig } from '../../../redux/actions/actions';
 import { NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
@@ -168,6 +169,17 @@ export default function SettingsCluster() {
             : t('settings|Cluster Settings')
         }
         backLink
+        headerProps={{
+          actions: [
+            <Link
+              href={createRouteURL('settings')}
+              align="right"
+              style={{ color: theme.palette.text.primary }}
+            >
+              {t('settings|General Settings')}
+            </Link>,
+          ],
+        }}
       >
         <NameValueTable
           rows={[
