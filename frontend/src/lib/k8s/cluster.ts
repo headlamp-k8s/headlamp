@@ -55,6 +55,7 @@ export interface KubeMetadata {
   annotations?: StringDict;
   ownerReferences?: KubeOwnerReference[];
   managedFields?: KubeManagedFields[];
+  generation?: number;
 }
 
 export interface KubeOwnerReference {
