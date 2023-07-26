@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import PriorityClasses, { KubePriorityClasses } from '../../lib/k8s/priorityClasses';
+import PriorityClass, { KubePriorityClass } from '../../lib/k8s/priorityClass';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import PriorityClassList from './List';
 
-PriorityClasses.useList = () => {
-  const objList = generateK8sResourceList<KubePriorityClasses>(
+PriorityClass.useList = () => {
+  const objList = generateK8sResourceList<KubePriorityClass>(
     {
       description: 'Mission Critical apps.',
       kind: 'PriorityClass',
@@ -23,13 +23,13 @@ PriorityClasses.useList = () => {
       preemptionPolicy: 'PreemptLowerPriority',
       value: 1000000,
     },
-    { instantiateAs: PriorityClasses }
+    { instantiateAs: PriorityClass }
   );
   return [objList, null, () => {}, () => {}] as any;
 };
 
 export default {
-  title: 'PriorityClasses/PriorityClassesListView',
+  title: 'PriorityClass/PriorityClassListView',
   component: PriorityClassList,
   argTypes: {},
   decorators: [

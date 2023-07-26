@@ -17,6 +17,8 @@ import Endpoints from './endpoints';
 import HPA from './hpa';
 import Ingress from './ingress';
 import Job from './job';
+import { Lease } from './lease';
+import { LimitRange } from './limitRange';
 import Namespace from './namespace';
 import NetworkPolicy from './networkpolicy';
 import Node from './node';
@@ -24,11 +26,12 @@ import PersistentVolume from './persistentVolume';
 import PersistentVolumeClaim from './persistentVolumeClaim';
 import Pod from './pod';
 import PodDisruptionBudget from './podDisruptionBudget';
-import PriorityClasses from './priorityClasses';
+import PriorityClass from './priorityClass';
 import ReplicaSet from './replicaSet';
 import ResourceQuota from './resourceQuota';
 import Role from './role';
 import RoleBinding from './roleBinding';
+import { RuntimeClass } from './runtime';
 import Secret from './secret';
 import Service from './service';
 import ServiceAccount from './serviceAccount';
@@ -44,10 +47,12 @@ const classList = [
   DaemonSet,
   Deployment,
   Endpoints,
+  LimitRange,
+  Lease,
   ResourceQuota,
   HPA,
   PodDisruptionBudget,
-  PriorityClasses,
+  PriorityClass,
   Ingress,
   Job,
   Namespace,
@@ -59,6 +64,7 @@ const classList = [
   ReplicaSet,
   Role,
   RoleBinding,
+  RuntimeClass,
   Secret,
   Service,
   ServiceAccount,

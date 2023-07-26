@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import PriorityClasses from '../../lib/k8s/priorityClasses';
+import PriorityClass from '../../lib/k8s/priorityClass';
 import { DetailsGrid, ObjectEventList } from '../common';
 
 export default function PriorityClassDetails() {
@@ -9,7 +9,7 @@ export default function PriorityClassDetails() {
 
   return (
     <DetailsGrid
-      resourceType={PriorityClasses}
+      resourceType={PriorityClass}
       name={name}
       extraInfo={item =>
         item && [

@@ -21,12 +21,15 @@ const mockK8sObject = (className: string) => ({
 });
 
 describe('Class tests', () => {
-  test('Check plurals', () => {
-    Object.values(ResourceClasses).forEach((cls: KubeObjectClass) => {
+  Object.values(ResourceClasses).forEach((cls: KubeObjectClass) => {
+    test(`Check plurals for ${cls.className}`, () => {
       expect(cls.pluralName).toBe(cls.pluralName.toLowerCase());
+      // Check naive plural for classes ending in 's'. E.g. Check plural for myClass != myClasss
       if (cls.className.endsWith('s')) {
-        // Check naive plural for classes ending in 's'.
         expect(cls.pluralName.toLowerCase()).not.toBe(cls.className.toLowerCase() + 's');
+      }
+      if (cls.className.endsWith('s')) {
+        expect(cls.listRoute.toLowerCase()).not.toBe(cls.className.toLowerCase() + 's');
       }
     });
   });
@@ -198,5 +201,65 @@ describe('Label selector', () => {
       ],
     });
     expect(query).toBe('!label2');
+  });
+});
+
+const notNamespacedClasses = [
+  'ClusterRole',
+  'ClusterRoleBinding',
+  'CustomResourceDefinition',
+  'Namespace',
+  'Node',
+  'PersistentVolume',
+  'PriorityClass',
+  'RuntimeClass',
+  'StorageClass',
+];
+
+const namespacedClasses = [
+  'ConfigMap',
+  'CronJob',
+  'DaemonSet',
+  'Deployment',
+  'Endpoint',
+  'HorizontalPodAutoscaler',
+  'Ingress',
+  'Job',
+  'Lease',
+  'LimitRange',
+  'NetworkPolicy',
+  'Pod',
+  'ReplicaSet',
+  'ResourceQuota',
+  'Role',
+  'RoleBinding',
+  'Secret',
+  'Service',
+  'ServiceAccount',
+  'StatefulSet',
+  'PodDisruptionBudget',
+  'PersistentVolumeClaim',
+];
+
+describe('Test class namespaces', () => {
+  const classCopy = { ...ResourceClasses };
+  namespacedClasses.forEach(cls => {
+    test(`Check namespaced ${cls}`, () => {
+      expect(classCopy[cls]).toBeDefined();
+      expect(classCopy[cls].isNamespaced).toBe(true);
+      delete classCopy[cls];
+    });
+  });
+
+  notNamespacedClasses.forEach(cls => {
+    test(`Check not namespaced ${cls}`, () => {
+      expect(classCopy[cls]).toBeDefined();
+      expect(classCopy[cls].isNamespaced).toBe(false);
+      delete classCopy[cls];
+    });
+  });
+
+  test('Check all classes', () => {
+    expect(classCopy).toEqual({});
   });
 });

@@ -1,14 +1,13 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { KubeObjectClass } from '../../lib/k8s/cluster';
-import { KubeObject } from '../../lib/k8s/cluster';
+import { KubeObject, KubeObjectClass } from '../../lib/k8s/cluster';
 import Event from '../../lib/k8s/event';
-import PriorityClasses, { KubePriorityClasses } from '../../lib/k8s/priorityClasses';
+import PriorityClass, { KubePriorityClass } from '../../lib/k8s/priorityClass';
 import { TestContext } from '../../test';
 import HPADetails from './Details';
 
 const usePhonyGet: KubeObjectClass['useGet'] = () => {
   return [
-    new PriorityClasses({
+    new PriorityClass({
       description: 'Mission Critical apps.',
       kind: 'PriorityClass',
       metadata: {
@@ -25,12 +24,12 @@ const usePhonyGet: KubeObjectClass['useGet'] = () => {
       },
       preemptionPolicy: 'PreemptLowerPriority',
       value: 1000000,
-    } as KubePriorityClasses),
+    } as KubePriorityClass),
   ] as any;
 };
 
 export default {
-  title: 'PriorityClasses/PriorityClassesDetailsView',
+  title: 'PriorityClass/PriorityClassDetailsView',
   component: HPADetails,
   argTypes: {},
   decorators: [
@@ -51,14 +50,14 @@ interface MockerStory {
 
 const Template: Story = (args: MockerStory) => {
   if (!!args.useGet) {
-    PriorityClasses.useGet = args.useGet;
+    PriorityClass.useGet = args.useGet;
     Event.objectEvents = async (obj: KubeObject) => {
       console.log('object:', obj);
       return [];
     };
   }
   if (!!args.useList) {
-    PriorityClasses.useList = args.useList;
+    PriorityClass.useList = args.useList;
   }
 
   return <HPADetails />;
