@@ -29,7 +29,7 @@ export function makePodStatusLabel(job: Job) {
     },
     Suspended: {
       status: '',
-      icon: 'mdi:pauseIcon',
+      icon: 'mdi:pause',
     },
   };
 

@@ -287,9 +287,9 @@ const mdiIcons = {
     'comment-quote': {
       body: '<path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v3c0 .6.4 1 1 1h.5c.2 0 .5-.1.7-.3l3.7-3.7H20c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m-9 11H7V8.8L8.3 6h2L8.9 9H11v4m6 0h-4V8.8L14.3 6h2l-1.4 3H17v4Z"/>',
     },
-    // 'pause-icon': {
-    //   body: ''
-    // },
+    pause: {
+      body: '<path fill="currentColor" d="M14 19h4V5h-4M6 19h4V5H6v14Z"/>',
+    },
     'desktop-classic': {
       body: '<path fill="currentColor" d="M6 2c-1.11 0-2 .89-2 2v8c0 1.11.89 2 2 2h12c1.11 0 2-.89 2-2V4c0-1.11-.89-2-2-2H6m0 2h12v8H6V4M4 15c-1.11 0-2 .89-2 2v3c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2v-3c0-1.11-.89-2-2-2H4m4 2h12v3H8v-3m1 .75v1.5h4v-1.5H9m6 0v1.5h4v-1.5h-4Z"/>',
     },
