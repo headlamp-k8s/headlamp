@@ -46,6 +46,9 @@ func TestWatchAndLoadFiles(t *testing.T) {
 
 	go kubeconfig.LoadAndWatchFiles(kubeConfigStore, path, kubeconfig.KubeConfig)
 
+	// SLeep so the config file has a different time stamp.
+	time.Sleep(5 * time.Second)
+
 	// create kubeconfig3 file that doesn't exist
 	conf, err := clientcmd.Load([]byte(clusterConf))
 	require.NoError(t, err)
@@ -56,11 +59,20 @@ func TestWatchAndLoadFiles(t *testing.T) {
 
 	t.Log("created kubeconfig3 file")
 
-	// wait for watcher to reload kubeconfig files
-	time.Sleep(20 * time.Second)
-
 	// check if kubeconfig3 is loaded
 	context, err := kubeConfigStore.GetContext("random-cluster-4")
+
+	// loop for until GetContext returns "random-cluster-4" or 30 seconds has past
+	for i := 0; i < 30; i++ {
+		if err == nil && context.Name == "random-cluster-4" {
+			break
+		}
+
+		time.Sleep(1 * time.Second)
+
+		context, err = kubeConfigStore.GetContext("random-cluster-4")
+	}
+
 	require.NoError(t, err)
 	require.Equal(t, "random-cluster-4", context.Name)
 
