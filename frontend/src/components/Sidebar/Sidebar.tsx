@@ -96,7 +96,7 @@ export function useSidebarInfo() {
   const isSidebarOpenUserSelected = useTypedSelector(
     state => state.ui.sidebar.isSidebarOpenUserSelected
   );
-  const isTemporary = useMediaQuery('(max-width:600px)');
+  const isTemporary = useMediaQuery('(max-width:599px)');
   const isNarrowOnly = useMediaQuery('(max-width:960px) and (min-width:600px)');
   const temporarySideBarOpen =
     isSidebarOpen === true && isTemporary && isSidebarOpenUserSelected === true;

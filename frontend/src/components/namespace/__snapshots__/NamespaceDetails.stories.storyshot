@@ -233,7 +233,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"
@@ -314,7 +314,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
-                      Pod IP
+                      IP
                       <button
                         aria-label="sort swap"
                         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
@@ -335,7 +335,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                       class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
-                      Node Name
+                      Node
                       <button
                         aria-label="sort swap"
                         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
@@ -359,7 +359,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     >
                       Age
                       <button
-                        aria-label="sort up"
+                        aria-label="sort swap"
                         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
                         tabindex="0"
                         type="button"
@@ -425,7 +425,17 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      my-node
+                      <span
+                        class=""
+                        title="my-node"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="/"
+                        >
+                          my-node
+                        </a>
+                      </span>
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -486,7 +496,17 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      my-node
+                      <span
+                        class=""
+                        title="my-node"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="/"
+                        >
+                          my-node
+                        </a>
+                      </span>
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -547,7 +567,17 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      my-node
+                      <span
+                        class=""
+                        title="my-node"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="/"
+                        >
+                          my-node
+                        </a>
+                      </span>
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -615,7 +645,17 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      my-node
+                      <span
+                        class=""
+                        title="my-node"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="/"
+                        >
+                          my-node
+                        </a>
+                      </span>
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -683,7 +723,17 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      my-node
+                      <span
+                        class=""
+                        title="my-node"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="/"
+                        >
+                          my-node
+                        </a>
+                      </span>
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -744,7 +794,159 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      my-node
+                      <span
+                        class=""
+                        title="my-node"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="/"
+                        >
+                          my-node
+                        </a>
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                      style="text-align: right;"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+                        title="2022-01-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        nominated-node
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      1/1
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title=""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                          style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                        >
+                          Running
+                        </span>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0.0.0.2
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <span
+                        class=""
+                        title="my-node"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="/"
+                        >
+                          my-node
+                        </a>
+                      </span>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                      style="text-align: right;"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+                        title="2022-01-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        readiness-gate
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      1/1
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        title=""
+                      >
+                        <span
+                          class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                          style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                        >
+                          Running
+                        </span>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      0.0.0.2
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <span
+                        class=""
+                        title="my-node"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="/"
+                        >
+                          my-node
+                        </a>
+                      </span>
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -809,7 +1011,7 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
               class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
             >
               <table
-                class="MuiTable-root makeStyles-table"
+                class="MuiTable-root makeStyles-table makeStyles-table"
               >
                 <thead
                   class="MuiTableHead-root"

@@ -91,7 +91,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
-          class="MuiTable-root makeStyles-table"
+          class="MuiTable-root makeStyles-table makeStyles-table"
         >
           <thead
             class="MuiTableHead-root"
@@ -144,6 +144,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               <th
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
+                style="min-width: 100%;"
               >
                 Request
               </th>
@@ -205,15 +206,16 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       requests.cpu: 0.5 cores/0.2 cores
                     </span>
@@ -227,10 +229,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       limits.cpu: 0 core/0.3 cores
                     </span>
@@ -275,15 +277,16 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       requests.cpu: 0.5 cores/0.2 cores
                     </span>
@@ -297,10 +300,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       limits.cpu: 0 core/0.3 cores
                     </span>
@@ -345,15 +348,16 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       requests.cpu: 0.5 cores/0.2 cores
                     </span>
@@ -367,10 +371,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       limits.cpu: 0 core/0.3 cores
                     </span>
@@ -415,15 +419,16 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       requests.cpu: 0.5 cores/0.2 cores
                     </span>
@@ -437,10 +442,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       limits.cpu: 0 core/0.3 cores
                     </span>
@@ -485,15 +490,16 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                style="min-width: 100%;"
               >
                 <div
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       requests.cpu: 0.5 cores/0.2 cores
                     </span>
@@ -507,10 +513,10 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                   class="MuiBox-root MuiBox-root makeStyles-root"
                 >
                   <div
-                    class="MuiChip-root MuiChip-outlined"
+                    class="MuiChip-root makeStyles-chip MuiChip-outlined MuiChip-sizeSmall"
                   >
                     <span
-                      class="MuiChip-label"
+                      class="MuiChip-label MuiChip-labelSmall"
                     >
                       limits.cpu: 0 core/0.3 cores
                     </span>

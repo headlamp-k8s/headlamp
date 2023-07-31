@@ -1,5 +1,12 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, LabelSelector, makeKubeObject } from './cluster';
+import {
+  KubeContainer,
+  KubeMetadata,
+  KubeObjectInterface,
+  LabelSelector,
+  makeKubeObject,
+} from './cluster';
+import { KubePodSpec } from './pod';
 
 export interface KubeDeployment extends KubeObjectInterface {
   spec: {
@@ -7,6 +14,10 @@ export interface KubeDeployment extends KubeObjectInterface {
     strategy?: {
       type: string;
       [otherProps: string]: any;
+    };
+    template: {
+      metadata?: KubeMetadata;
+      spec: KubePodSpec;
     };
     [otherProps: string]: any;
   };
@@ -24,6 +35,15 @@ class Deployment extends makeKubeObject<KubeDeployment>('Deployment') {
 
   get status() {
     return this.getValue('status');
+  }
+
+  getContainers(): KubeContainer[] {
+    return this.spec?.template?.spec?.containers || [];
+  }
+
+  getMatchLabelsList(): string[] {
+    const labels = this.spec.selector.matchLabels || {};
+    return Object.keys(labels).map(key => `${key}=${labels[key]}`);
   }
 }
 

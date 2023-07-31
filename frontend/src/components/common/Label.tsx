@@ -1,7 +1,7 @@
 import { Icon, IconProps } from '@iconify/react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import Typography, { TypographyProps } from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import React from 'react';
 import { DateFormatOptions, localeDate, timeAgo } from '../../lib/util';
@@ -153,8 +153,10 @@ export function HeaderLabel(props: HeaderLabelProps) {
 export interface HoverInfoLabelProps {
   label: React.ReactNode;
   hoverInfo?: React.ReactNode;
+  labelProps?: TypographyProps;
   icon?: IconProps['icon'];
   iconProps?: Omit<IconProps, 'icon'>;
+  iconPosition?: 'start' | 'end';
 }
 
 const useHoverInfoLabelStyles = makeStyles({
@@ -171,13 +173,14 @@ const useHoverInfoLabelStyles = makeStyles({
 });
 
 export function HoverInfoLabel(props: HoverInfoLabelProps) {
-  const { label, hoverInfo, icon = null, iconProps = {} } = props;
+  const { label, hoverInfo, icon = null, iconProps = {}, labelProps, iconPosition = 'end' } = props;
   const classes = useHoverInfoLabelStyles();
+  const labelFirst = iconPosition === 'end';
 
   return (
     <LightTooltip title={hoverInfo || ''}>
-      <Typography className={clsx(classes.noWrap, classes.display)}>
-        {label}
+      <Typography className={clsx(classes.noWrap, classes.display)} {...labelProps}>
+        {labelFirst && label}
         {hoverInfo && (
           <Icon
             icon={icon || 'mdi:information-outline'}
@@ -187,6 +190,7 @@ export function HoverInfoLabel(props: HoverInfoLabelProps) {
             {...iconProps}
           />
         )}
+        {!labelFirst && label}
       </Typography>
     </LightTooltip>
   );

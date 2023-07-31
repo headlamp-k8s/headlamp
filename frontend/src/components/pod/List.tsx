@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo } from '../../lib/util';
-import { LightTooltip, SimpleTableProps } from '../common';
+import { LightTooltip, Link, SimpleTableProps } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { ResourceTableProps } from '../common/Resource/ResourceTable';
@@ -48,6 +48,22 @@ export function makePodStatusLabel(pod: Pod) {
   );
 }
 
+function getReadinessGatesStatus(pods: Pod) {
+  const readinessGates = pods?.spec?.readinessGates?.map(gate => gate.conditionType) || [];
+  const readinessGatesMap: { [key: string]: string } = {};
+  if (readinessGates.length === 0) {
+    return readinessGatesMap;
+  }
+
+  pods?.status?.conditions?.forEach(condition => {
+    if (readinessGates.includes(condition.type)) {
+      readinessGatesMap[condition.type] = condition.status;
+    }
+  });
+
+  return readinessGatesMap;
+}
+
 export interface PodListProps {
   pods: Pod[] | null;
   error: ApiError | null;
@@ -58,7 +74,7 @@ export interface PodListProps {
 
 export function PodListRenderer(props: PodListProps) {
   const { pods, error, hideColumns = [], reflectTableInURL = 'pods', noNamespaceFilter } = props;
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'frequent']);
 
   function getDataCols() {
     const dataCols: ResourceTableProps['columns'] = [
@@ -82,15 +98,85 @@ export function PodListRenderer(props: PodListProps) {
       },
       {
         id: 'ip',
-        label: t('frequent|Pod IP'),
+        label: t('glossary|IP'),
         getter: (pod: Pod) => pod.status.podIP,
         sort: true,
       },
       {
         id: 'node',
-        label: t('frequent|Node Name'),
-        getter: (pod: Pod) => pod.spec.nodeName,
-        sort: true,
+        label: t('glossary|Node'),
+        getter: (pod: Pod) =>
+          pod?.spec?.nodeName && (
+            <Link routeName="node" params={{ name: pod.spec.nodeName }} tooltip>
+              {pod.spec.nodeName}
+            </Link>
+          ),
+        sort: (p1: Pod, p2: Pod) => {
+          return p1?.spec?.nodeName?.localeCompare(p2?.spec?.nodeName || '') || 0;
+        },
+      },
+      {
+        id: 'nominatedNode',
+        label: t('glossary|Nominated Node'),
+        getter: (pod: Pod) =>
+          !!pod?.status?.nominatedNodeName && (
+            <Link routeName="node" params={{ name: pod?.status?.nominatedNodeName }} tooltip>
+              {pod?.status?.nominatedNodeName}
+            </Link>
+          ),
+        sort: (p1: Pod, p2: Pod) => {
+          return (
+            p1?.status?.nominatedNodeName?.localeCompare(p2?.status?.nominatedNodeName || '') || 0
+          );
+        },
+        show: false,
+      },
+      {
+        id: 'readinessGates',
+        label: t('glossary|Readiness Gates'),
+        getter: (pod: Pod) => {
+          const readinessGatesStatus = getReadinessGatesStatus(pod);
+          const total = Object.keys(readinessGatesStatus).length;
+
+          if (total === 0) {
+            return null;
+          }
+
+          const statusTrueCount = Object.values(readinessGatesStatus).filter(
+            status => status === 'True'
+          ).length;
+
+          return (
+            <LightTooltip
+              title={Object.keys(readinessGatesStatus)
+                .map(conditionType => `${conditionType}: ${readinessGatesStatus[conditionType]}`)
+                .join('\n')}
+              interactive
+            >
+              <span>{`${statusTrueCount}/${total}`}</span>
+            </LightTooltip>
+          );
+        },
+        sort: (p1: Pod, p2: Pod) => {
+          const readinessGatesStatus1 = getReadinessGatesStatus(p1);
+          const readinessGatesStatus2 = getReadinessGatesStatus(p2);
+          const total1 = Object.keys(readinessGatesStatus1).length;
+          const total2 = Object.keys(readinessGatesStatus2).length;
+
+          if (total1 !== total2) {
+            return total1 - total2;
+          }
+
+          const statusTrueCount1 = Object.values(readinessGatesStatus1).filter(
+            status => status === 'True'
+          ).length;
+          const statusTrueCount2 = Object.values(readinessGatesStatus2).filter(
+            status => status === 'True'
+          ).length;
+
+          return statusTrueCount1 - statusTrueCount2;
+        },
+        show: false,
       },
       'age',
     ];

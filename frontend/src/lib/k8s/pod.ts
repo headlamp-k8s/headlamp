@@ -9,15 +9,20 @@ import {
   Time,
 } from './cluster';
 
-export interface KubePod extends KubeObjectInterface {
-  spec: {
-    containers: KubeContainer[];
-    nodeName: string;
-    nodeSelector?: {
-      [key: string]: string;
-    };
-    initContainers?: any[];
+export interface KubePodSpec {
+  containers: KubeContainer[];
+  nodeName: string;
+  nodeSelector?: {
+    [key: string]: string;
   };
+  initContainers?: any[];
+  readinessGates?: {
+    conditionType: string;
+  }[];
+}
+
+export interface KubePod extends KubeObjectInterface {
+  spec: KubePodSpec;
   status: {
     conditions: KubeCondition[];
     containerStatuses: KubeContainerStatus[];

@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import NetworkPolicy from '../../lib/k8s/networkpolicy';
+import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export function NetworkPolicyList() {
@@ -27,6 +28,20 @@ export function NetworkPolicyList() {
               : isEgressAvailable
               ? 'Egress'
               : 'None';
+          },
+        },
+        {
+          id: 'podSelector',
+          label: t('Pod Selector'),
+          getter: networkpolicy => {
+            const podSelector = networkpolicy.jsonData.spec.podSelector;
+            return podSelector.matchLabels ? (
+              <LabelListItem
+                labels={Object.keys(podSelector.matchLabels).map(
+                  key => `${key}=${podSelector.matchLabels[key]}`
+                )}
+              />
+            ) : null;
           },
         },
         'age',

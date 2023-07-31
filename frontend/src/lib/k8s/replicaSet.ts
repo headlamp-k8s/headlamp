@@ -1,11 +1,23 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeCondition, KubeObjectInterface, LabelSelector, makeKubeObject } from './cluster';
+import {
+  KubeCondition,
+  KubeContainer,
+  KubeMetadata,
+  KubeObjectInterface,
+  LabelSelector,
+  makeKubeObject,
+} from './cluster';
+import { KubePodSpec } from './pod';
 
 export interface KubeReplicaSet extends KubeObjectInterface {
   spec: {
     minReadySeconds: number;
     replicas: number;
     selector: LabelSelector;
+    template: {
+      metadata?: KubeMetadata;
+      spec: KubePodSpec;
+    };
     [other: string]: any;
   };
   status: {
@@ -27,6 +39,15 @@ class ReplicaSet extends makeKubeObject<KubeReplicaSet>('ReplicaSet') {
 
   get status(): KubeReplicaSet['status'] {
     return this.jsonData!.status;
+  }
+
+  getContainers(): KubeContainer[] {
+    return this.spec?.template?.spec?.containers || [];
+  }
+
+  getMatchLabelsList(): string[] {
+    const labels = this.spec.selector.matchLabels || {};
+    return Object.keys(labels).map(key => `${key}=${labels[key]}`);
   }
 }
 

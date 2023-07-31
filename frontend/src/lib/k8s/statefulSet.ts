@@ -1,5 +1,12 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, LabelSelector, makeKubeObject } from './cluster';
+import {
+  KubeContainer,
+  KubeMetadata,
+  KubeObjectInterface,
+  LabelSelector,
+  makeKubeObject,
+} from './cluster';
+import { KubePodSpec } from './pod';
 
 export interface KubeStatefulSet extends KubeObjectInterface {
   spec: {
@@ -9,6 +16,10 @@ export interface KubeStatefulSet extends KubeObjectInterface {
         partition: number;
       };
       type: string;
+    };
+    template: {
+      metadata: KubeMetadata;
+      spec: KubePodSpec;
     };
     [other: string]: any;
   };
@@ -26,6 +37,10 @@ class StatefulSet extends makeKubeObject<KubeStatefulSet>('StatefulSet') {
 
   get status() {
     return this.jsonData!.status;
+  }
+
+  getContainers(): KubeContainer[] {
+    return this.spec?.template?.spec?.containers || [];
   }
 }
 

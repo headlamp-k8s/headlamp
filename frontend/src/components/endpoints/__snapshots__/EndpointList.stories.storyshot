@@ -91,7 +91,7 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
         class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
       >
         <table
-          class="MuiTable-root makeStyles-table"
+          class="MuiTable-root makeStyles-table makeStyles-table"
         >
           <thead
             class="MuiTableHead-root"
@@ -144,7 +144,6 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               <th
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
-                style="width: 40%; max-width: 40%;"
               >
                 Addresses
               </th>
@@ -200,9 +199,13 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                style="width: 40%; max-width: 40%;"
               >
-                127.0.01:8080
+                <span
+                  class=""
+                  title="127.0.01:8080"
+                >
+                  127.0.01:8080
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -242,9 +245,13 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                style="width: 40%; max-width: 40%;"
               >
-                127.0.01:8080
+                <span
+                  class=""
+                  title="127.0.01:8080"
+                >
+                  127.0.01:8080
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -284,9 +291,13 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                style="width: 40%; max-width: 40%;"
               >
-                127.0.01:8080
+                <span
+                  class=""
+                  title="127.0.01:8080"
+                >
+                  127.0.01:8080
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -326,9 +337,13 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                style="width: 40%; max-width: 40%;"
               >
-                127.0.01:8080
+                <span
+                  class=""
+                  title="127.0.01:8080"
+                >
+                  127.0.01:8080
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -368,9 +383,13 @@ exports[`Storyshots endpoints/EndpointsListView Items 1`] = `
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                style="width: 40%; max-width: 40%;"
               >
-                127.0.01:8080
+                <span
+                  class=""
+                  title="127.0.01:8080"
+                >
+                  127.0.01:8080
+                </span>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"

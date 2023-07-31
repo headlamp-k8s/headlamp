@@ -2,11 +2,12 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-import { Workload } from '../../lib/k8s/cluster';
+import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import DaemonSet from '../../lib/k8s/daemonSet';
 import Deployment from '../../lib/k8s/deployment';
 import Job from '../../lib/k8s/job';
+import Pod from '../../lib/k8s/pod';
 import ReplicaSet from '../../lib/k8s/replicaSet';
 import StatefulSet from '../../lib/k8s/statefulSet';
 import { getReadyReplicas, getTotalReplicas, useFilterFunc } from '../../lib/util';
@@ -48,16 +49,28 @@ export default function Overview() {
     return totalReplicasDiff;
   }
 
+  // Get all items except the pods since those shouldn't be shown in the table (only the chart).
   function getJointItems() {
     let joint: Workload[] = [];
-    for (const items of Object.values(workloadsData)) {
+    for (const [key, items] of Object.entries(workloadsData)) {
+      if (key === 'Pod') {
+        continue;
+      }
       joint = joint.concat(items);
     }
     return joint;
   }
 
-  const workloads = [DaemonSet, Deployment, Job, CronJob, ReplicaSet, StatefulSet];
-  workloads.forEach(workloadClass => {
+  const workloads: KubeObject[] = [
+    DaemonSet,
+    Deployment,
+    Job,
+    CronJob,
+    ReplicaSet,
+    StatefulSet,
+    Pod,
+  ];
+  workloads.forEach((workloadClass: KubeObject) => {
     workloadClass.useApiList((items: InstanceType<typeof workloadClass>[]) =>
       dispatch({ items, kind: workloadClass.className })
     );
@@ -65,7 +78,7 @@ export default function Overview() {
 
   return (
     <PageGrid>
-      <SectionBox py={2}>
+      <SectionBox py={2} mt={1}>
         <Grid container justifyContent="flex-start" alignItems="flex-start" spacing={2}>
           {workloads.map(({ className: name }) => (
             <Grid item lg={3} md={4} xs={6} key={name}>

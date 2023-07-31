@@ -1,0 +1,346 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots node/List Nodes 1`] = `
+<div>
+  <div
+    class="MuiContainer-root MuiContainer-maxWidthXl"
+  >
+    <div
+      class="MuiBox-root MuiBox-root"
+    >
+      <div
+        class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item"
+        >
+          <div
+            class="MuiBox-root MuiBox-root"
+          >
+            <h1
+              class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+            >
+              Nodes
+            </h1>
+            <div
+              class="MuiBox-root MuiBox-root"
+            />
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-align-items-xs-center"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <button
+                      aria-label="Show filter"
+                      class="MuiButtonBase-root MuiIconButton-root"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <button
+                      aria-label="Change columns displayed"
+                      class="MuiButtonBase-root MuiIconButton-root"
+                      tabindex="0"
+                      title="Change columns displayed"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root MuiBox-root makeStyles-box"
+      >
+        <div
+          class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
+        >
+          <table
+            class="MuiTable-root makeStyles-table makeStyles-table"
+          >
+            <thead
+              class="MuiTableHead-root"
+            >
+              <tr
+                class="MuiTableRow-root MuiTableRow-head"
+              >
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Name
+                  <button
+                    aria-label="sort swap"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Ready
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-chartCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  CPU
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-chartCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Memory
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Roles
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Internal IP
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  External IP
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                  scope="col"
+                >
+                  Version
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                  scope="col"
+                  style="text-align: right;"
+                >
+                  Age
+                  <button
+                    aria-label="sort swap"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <span />
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="MuiTableBody-root"
+            >
+              <tr
+                class="MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    my-linux-node
+                  </a>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                  >
+                    Yes
+                  </span>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body makeStyles-chartCell MuiTableCell-sizeSmall"
+                >
+                  <div
+                    class="recharts-responsive-container makeStyles-container"
+                    style="width: 95%; height: 20px;"
+                  />
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body makeStyles-chartCell MuiTableCell-sizeSmall"
+                >
+                  <div
+                    class="recharts-responsive-container makeStyles-container"
+                    style="width: 95%; height: 20px;"
+                  />
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  agent
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  10.2.3.4
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  v1.23.12
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                  style="text-align: right;"
+                >
+                  <p
+                    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+                    title="2023-06-30T11:49:44.000Z"
+                  >
+                    3mo
+                    <span />
+                  </p>
+                </td>
+              </tr>
+              <tr
+                class="MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    my-windows-node
+                  </a>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                  >
+                    Yes
+                  </span>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body makeStyles-chartCell MuiTableCell-sizeSmall"
+                >
+                  <div
+                    class="recharts-responsive-container makeStyles-container"
+                    style="width: 95%; height: 20px;"
+                  />
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body makeStyles-chartCell MuiTableCell-sizeSmall"
+                >
+                  <div
+                    class="recharts-responsive-container makeStyles-container"
+                    style="width: 95%; height: 20px;"
+                  />
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  agent
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  1.2.3.4
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                >
+                  v1.26.3
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                  style="text-align: right;"
+                >
+                  <p
+                    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+                    title="2023-07-13T23:28:40.000Z"
+                  >
+                    3mo
+                    <span />
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

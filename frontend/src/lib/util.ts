@@ -43,8 +43,6 @@ export interface TimeAgoOptions {
  * @returns The formatted date.
  */
 export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
-  const { format = 'brief' } = options;
-
   const fromDate = new Date(date);
   let now = new Date();
 
@@ -54,15 +52,27 @@ export function timeAgo(date: DateParam, options: TimeAgoOptions = {}) {
     now = new Date(fromDate.getTime() + 90 * days);
   }
 
+  return formatDuration(now.getTime() - fromDate.getTime(), options);
+}
+
+/** Format a duration in milliseconds to a human-readable string.
+ *
+ * @param duration - The duration in milliseconds.
+ * @param options - `format` takes "brief" or "mini". "brief" rounds the date and uses the largest suitable unit (e.g. "4 weeks"). "mini" uses something like "4w" (for 4 weeks).
+ * @returns The formatted duration.
+ * */
+export function formatDuration(duration: number, options: TimeAgoOptions = {}) {
+  const { format = 'brief' } = options;
+
   if (format === 'brief') {
-    return humanize(now.getTime() - fromDate.getTime(), {
+    return humanize(duration, {
       fallbacks: ['en'],
       round: true,
       largest: 1,
     });
   }
 
-  return humanize(now.getTime() - fromDate.getTime(), {
+  return humanize(duration, {
     language: 'en-mini',
     spacer: '',
     fallbacks: ['en'],

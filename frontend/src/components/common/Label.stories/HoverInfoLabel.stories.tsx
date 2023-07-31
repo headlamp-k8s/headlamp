@@ -1,5 +1,4 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
 import { HoverInfoLabel as HoverInfoLabelComponent, HoverInfoLabelProps } from '../Label';
 
 export default {
@@ -20,6 +19,22 @@ export const HoverInfoLabelInfo = Template.bind({});
 HoverInfoLabelInfo.args = {
   label: 'Some label',
   hoverInfo: <div>hover info div</div>,
+};
+
+export const LabelProps = Template.bind({});
+LabelProps.args = {
+  label: 'Some label',
+  hoverInfo: <div>hover info div</div>,
+  labelProps: {
+    variant: 'body2',
+  },
+};
+
+export const IconPosition = Template.bind({});
+IconPosition.args = {
+  label: 'Some label',
+  hoverInfo: <div>hover info div</div>,
+  iconPosition: 'start',
 };
 
 // icon isn't used in the codebase.

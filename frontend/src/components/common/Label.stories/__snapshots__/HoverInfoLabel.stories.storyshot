@@ -22,3 +22,25 @@ exports[`Storyshots Label/HoverInfoLabel Hover Info Label Info 1`] = `
   </p>
 </div>
 `;
+
+exports[`Storyshots Label/HoverInfoLabel Icon Position 1`] = `
+<div>
+  <p
+    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+  >
+    <span />
+    Some label
+  </p>
+</div>
+`;
+
+exports[`Storyshots Label/HoverInfoLabel Label Props 1`] = `
+<div>
+  <p
+    class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body2"
+  >
+    Some label
+    <span />
+  </p>
+</div>
+`;

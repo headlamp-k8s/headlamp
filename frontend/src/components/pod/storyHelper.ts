@@ -572,6 +572,164 @@ const running = {
   },
 };
 
+const nominatedNode = {
+  ...basePod,
+  metadata: {
+    ...basePod.metadata,
+    name: 'nominated-node',
+  },
+  spec: {
+    ...basePod.spec,
+    containers: [
+      {
+        name: 'nginx',
+        image: 'nginx:1.14.2',
+        ports: [
+          {
+            containerPort: 80,
+            protocol: 'TCP',
+          },
+        ],
+        imagePullPolicy: 'IfNotPresent',
+      },
+    ],
+  },
+  status: {
+    ...basePod.status,
+    nominatedNodeName: 'my-node',
+    phase: 'Running',
+    conditions: [
+      {
+        type: 'Initialized',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+      {
+        type: 'Ready',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+      {
+        type: 'ContainersReady',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+      {
+        type: 'PodScheduled',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+    ],
+    containerStatuses: [
+      {
+        name: 'nginx',
+        state: {
+          running: {
+            startedAt: stateDate,
+          },
+        },
+        lastState: {},
+        ready: true,
+        restartCount: 0,
+        image: 'docker.io/library/nginx:1.14.2',
+        imageID:
+          'docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d',
+        containerID:
+          'containerd://f8eb12a25a065d170b68cee522d431f4920fe083bf9cf53a4a576d60b8641584',
+        started: true,
+      },
+    ],
+  },
+};
+
+const readinessGate = {
+  ...basePod,
+  metadata: {
+    ...basePod.metadata,
+    name: 'readiness-gate',
+  },
+  spec: {
+    ...basePod.spec,
+    containers: [
+      {
+        name: 'nginx',
+        image: 'nginx:1.14.2',
+        ports: [
+          {
+            containerPort: 80,
+            protocol: 'TCP',
+          },
+        ],
+        imagePullPolicy: 'IfNotPresent',
+      },
+    ],
+    readinessGates: [
+      {
+        conditionType: 'www.example.com/gate-1',
+      },
+    ],
+  },
+  status: {
+    ...basePod.status,
+    phase: 'Running',
+    conditions: [
+      {
+        lastProbeTime: null,
+        lastTransitionTime: null,
+        status: 'True',
+        type: 'www.example.com/gate-1',
+      },
+      {
+        type: 'Initialized',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+      {
+        type: 'Ready',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+      {
+        type: 'ContainersReady',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+      {
+        type: 'PodScheduled',
+        status: 'True',
+        lastProbeTime: null,
+        lastTransitionTime: stateDate,
+      },
+    ],
+    containerStatuses: [
+      {
+        name: 'nginx',
+        state: {
+          running: {
+            startedAt: stateDate,
+          },
+        },
+        lastState: {},
+        ready: true,
+        restartCount: 0,
+        image: 'docker.io/library/nginx:1.14.2',
+        imageID:
+          'docker.io/library/nginx@sha256:f7988fb6c02e0ce69257d9bd9cf37ae20a60f1df7563c3a2a6abe24160306b8d',
+        containerID:
+          'containerd://f8eb12a25a065d170b68cee522d431f4920fe083bf9cf53a4a576d60b8641584',
+        started: true,
+      },
+    ],
+  },
+};
+
 // Exporting so these can be used for details views
 export const podList = [
   imgPullBackOff,
@@ -580,4 +738,6 @@ export const podList = [
   livenessFailed,
   errorTerminated,
   running,
+  nominatedNode,
+  readinessGate,
 ];

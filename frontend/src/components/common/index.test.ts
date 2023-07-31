@@ -24,6 +24,7 @@ const checkExports = [
   'EmptyContent',
   'InnerTable',
   'Label',
+  'LabelListItem',
   'Link',
   'Loader',
   'LogViewer',

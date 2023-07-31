@@ -593,6 +593,8 @@ export interface KubeContainer {
   livenessProbe?: KubeContainerProbe;
   readinessProbe?: KubeContainerProbe;
   imagePullPolicy: string;
+  terminationMessagePath?: string;
+  terminationMessagePolicy?: string;
 }
 
 export interface KubeContainerProbe {

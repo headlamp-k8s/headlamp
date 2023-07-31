@@ -156,7 +156,8 @@ function Table(props: ResourceTableProps) {
             return {
               id: 'name',
               label: t('frequent|Name'),
-              getter: (resource: KubeObject) => <Link kubeObject={resource} />,
+              gridTemplate: 1.5,
+              getter: (resource: KubeObject) => resource && <Link kubeObject={resource} />,
               sort: (n1: KubeObject, n2: KubeObject) => {
                 if (n1.metadata.name < n2.metadata.name) {
                   return -1;
@@ -174,13 +175,15 @@ function Table(props: ResourceTableProps) {
               id: 'age',
               label: t('frequent|Age'),
               cellProps: { style: { textAlign: 'right' } },
-              getter: (resource: KubeObject) => (
-                <DateLabel
-                  date={resource.metadata.creationTimestamp}
-                  format="mini"
-                  iconProps={{ color: theme.palette.grey.A700 }}
-                />
-              ),
+              gridTemplate: 0.5,
+              getter: (resource: KubeObject) =>
+                resource && (
+                  <DateLabel
+                    date={resource.metadata.creationTimestamp}
+                    format="mini"
+                    iconProps={{ color: theme.palette.grey.A700 }}
+                  />
+                ),
               sort: (n1: KubeObject, n2: KubeObject) =>
                 new Date(n2.metadata.creationTimestamp).getTime() -
                 new Date(n1.metadata.creationTimestamp).getTime(),
@@ -190,7 +193,7 @@ function Table(props: ResourceTableProps) {
               id: 'namespace',
               label: t('glossary|Namespace'),
               getter: (resource: KubeObject) =>
-                resource.getNamespace() ? (
+                resource?.getNamespace() ? (
                   <Link routeName="namespace" params={{ name: resource.getNamespace() }}>
                     {resource.getNamespace()}
                   </Link>
@@ -213,7 +216,7 @@ function Table(props: ResourceTableProps) {
             return {
               id: 'kind',
               label: t('frequent|Type'),
-              getter: (resource: KubeObject) => resource.kind,
+              getter: (resource: KubeObject) => resource?.kind,
               sort: true,
             };
           default:

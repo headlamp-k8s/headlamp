@@ -1,5 +1,12 @@
 import { apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, LabelSelector, makeKubeObject } from './cluster';
+import {
+  KubeContainer,
+  KubeMetadata,
+  KubeObjectInterface,
+  LabelSelector,
+  makeKubeObject,
+} from './cluster';
+import { KubePodSpec } from './pod';
 
 export interface KubeDaemonSet extends KubeObjectInterface {
   spec: {
@@ -10,6 +17,10 @@ export interface KubeDaemonSet extends KubeObjectInterface {
       };
     };
     selector: LabelSelector;
+    template: {
+      metadata: KubeMetadata;
+      spec: KubePodSpec;
+    };
     [otherProps: string]: any;
   };
   status: {
@@ -26,6 +37,15 @@ class DaemonSet extends makeKubeObject<KubeDaemonSet>('DaemonSet') {
 
   get status() {
     return this.jsonData!.status;
+  }
+
+  getContainers(): KubeContainer[] {
+    return this.spec?.template?.spec?.containers || [];
+  }
+
+  getNodeSelectors(): string[] {
+    const selectors = this.spec?.template?.spec?.nodeSelector || {};
+    return Object.keys(selectors).map(key => `${key}=${selectors[key]}`);
   }
 }
 

@@ -23,11 +23,11 @@ export interface LimitRangeSpec {
   }[];
 }
 
-export interface KubeObject extends KubeObjectInterface {
+export interface KubeLimitRange extends KubeObjectInterface {
   spec: LimitRangeSpec;
 }
 
-export class LimitRange extends makeKubeObject<KubeObject>('limitRange') {
+export class LimitRange extends makeKubeObject<KubeLimitRange>('LimitRange') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'limitranges');
 
   get spec() {
