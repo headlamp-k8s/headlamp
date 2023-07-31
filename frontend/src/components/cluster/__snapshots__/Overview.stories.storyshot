@@ -66,9 +66,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         </div>
                         <p
                           class="MuiTypography-root makeStyles-legend MuiTypography-body1 MuiTypography-gutterBottom"
-                        >
-                          -1.00 / -1 units
-                        </p>
+                        />
                       </div>
                       <div
                         class="MuiBox-root MuiBox-root"
@@ -131,9 +129,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         </div>
                         <p
                           class="MuiTypography-root makeStyles-legend MuiTypography-body1 MuiTypography-gutterBottom"
-                        >
-                          -1.00 / -1.00 GB
-                        </p>
+                        />
                       </div>
                       <div
                         class="MuiBox-root MuiBox-root"

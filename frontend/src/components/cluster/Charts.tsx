@@ -22,7 +22,7 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
   }
 
   function getLegend(used: number, available: number) {
-    if (available === 0) {
+    if (available === 0 || available === -1) {
       return '';
     }
 
@@ -58,7 +58,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
   }
 
   function getLegend(used: number, available: number) {
-    if (available === 0) {
+    if (available === 0 || available === -1) {
       return '';
     }
 
