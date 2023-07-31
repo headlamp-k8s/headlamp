@@ -16,6 +16,7 @@ export interface IngressRule {
   http: {
     paths: {
       path: string;
+      pathType?: string;
       backend: IngressBackend;
     }[];
   };
@@ -26,7 +27,7 @@ interface LegacyIngressBackend {
   servicePort: string;
 }
 
-interface IngressBackend {
+export interface IngressBackend {
   service?: {
     name: string;
     port: {
@@ -43,7 +44,7 @@ interface IngressBackend {
 
 export interface KubeIngress extends KubeObjectInterface {
   spec: {
-    ingressClassName: string;
+    ingressClassName?: string;
     rules: IngressRule[] | LegacyIngressRule[];
     tls?: {
       hosts: string[];

@@ -247,22 +247,43 @@ exports[`Storyshots Ingress/DetailsView With Resource 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      https-example.foo.com
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                    >
-                      /
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                    >
-                      <span
-                        class=""
-                        title="Service:service1"
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="http://https-example.foo.com/"
                       >
-                        Service:service1
-                      </span>
+                        http://https-example.foo.com/
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        style="display: flex; margin-bottom: 5px;"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="http://https-example.foo.com/"
+                          style="margin-right: 5px;"
+                        >
+                          /
+                        </a>
+                        (Prefix)
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        style="display: flex; flex-direction: column; flex-wrap: nowrap; margin-bottom: 5px;"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          Service:service1
+                        </p>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -682,23 +703,61 @@ exports[`Storyshots Ingress/DetailsView With TLS 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      https-example.foo.com
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                    >
-                      /, /second
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                    >
-                      <span
-                        class=""
-                        title="service1:80
-service2:someport"
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="https://https-example.foo.com/"
                       >
-                        service1:80, service2:someport
-                      </span>
+                        https://https-example.foo.com/
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        style="display: flex; margin-bottom: 5px;"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="https://https-example.foo.com/"
+                          style="margin-right: 5px;"
+                        >
+                          /
+                        </a>
+                        (Prefix)
+                      </div>
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        style="display: flex; margin-bottom: 5px;"
+                      >
+                        <a
+                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          href="https://https-example.foo.com/second"
+                          style="margin-right: 5px;"
+                        >
+                          /second
+                        </a>
+                        (Prefix)
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                        style="display: flex; flex-direction: column; flex-wrap: nowrap; margin-bottom: 5px;"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          service1:80
+                        </p>
+                        <p
+                          class="MuiTypography-root MuiTypography-body1"
+                        >
+                          service2:someport
+                        </p>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
