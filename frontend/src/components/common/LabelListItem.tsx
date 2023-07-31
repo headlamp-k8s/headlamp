@@ -6,7 +6,7 @@ export interface LabelListItemProps {
 }
 
 export default function LabelListItem(props: LabelListItemProps) {
-  const { labels } = props;
+  const { labels = [] } = props;
   const [text, tooltip] = React.useMemo(() => {
     const text = labels.join(', ');
     const tooltip = labels.join('\n');
