@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@types/jest": "^29.5.3",
+    "glob": "^10.3.3"
+  }
+}

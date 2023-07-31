@@ -257,27 +257,16 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
       class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
       >
         <div
-          class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-          role="progressbar"
-          style="width: 40px; height: 40px;"
-          title="Loading table data"
+          class="MuiBox-root MuiBox-root"
         >
-          <svg
-            class="MuiCircularProgress-svg"
-            viewBox="22 22 44 44"
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
           >
-            <circle
-              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-              cx="44"
-              cy="44"
-              fill="none"
-              r="20.2"
-              stroke-width="3.6"
-            />
-          </svg>
+            No data to be shown.
+          </p>
         </div>
       </div>
     </div>
@@ -670,27 +659,16 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
       class="MuiBox-root MuiBox-root makeStyles-box"
     >
       <div
-        class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded"
       >
         <div
-          class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
-          role="progressbar"
-          style="width: 40px; height: 40px;"
-          title="Loading table data"
+          class="MuiBox-root MuiBox-root"
         >
-          <svg
-            class="MuiCircularProgress-svg"
-            viewBox="22 22 44 44"
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-alignCenter"
           >
-            <circle
-              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
-              cx="44"
-              cy="44"
-              fill="none"
-              r="20.2"
-              stroke-width="3.6"
-            />
-          </svg>
+            No data to be shown.
+          </p>
         </div>
       </div>
     </div>
