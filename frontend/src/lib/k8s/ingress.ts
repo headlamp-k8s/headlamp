@@ -84,7 +84,7 @@ class Ingress extends makeKubeObject<KubeIngress>('ingress') {
 
     const rules: IngressRule[] = [];
 
-    this.spec!.rules.forEach(({ http, host }) => {
+    this.spec!.rules?.forEach(({ http, host }) => {
       const paths = http.paths.map(({ backend, path }) => {
         if (!!(backend as IngressBackend).service) {
           return {
