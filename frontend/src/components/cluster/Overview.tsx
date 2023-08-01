@@ -15,6 +15,7 @@ import Empty from '../common/EmptyContent';
 import { PageGrid } from '../common/Resource';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { SectionBox } from '../common/SectionBox';
+import ShowHideLabel from '../common/ShowHideLabel';
 import { LightTooltip } from '../common/Tooltip';
 import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './Charts';
 
@@ -175,7 +176,9 @@ function EventsSection() {
         },
         {
           label: t('frequent|Message'),
-          getter: event => event?.message || '',
+          getter: event => (
+            <ShowHideLabel labelId={event.metadata?.uid || ''}>{event.message || ''}</ShowHideLabel>
+          ),
           sort: true,
           gridTemplate: 1.5,
         },

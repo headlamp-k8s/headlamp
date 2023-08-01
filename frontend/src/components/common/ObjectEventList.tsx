@@ -4,6 +4,7 @@ import { KubeObject } from '../../lib/k8s/cluster';
 import Event, { KubeEvent } from '../../lib/k8s/event';
 import { localeDate, timeAgo } from '../../lib/util';
 import { HoverInfoLabel, SectionBox, SimpleTable } from '../common';
+import ShowHideLabel from './ShowHideLabel';
 
 export interface ObjectEventListProps {
   object: KubeObject;
@@ -47,7 +48,13 @@ export default function ObjectEventList(props: ObjectEventListProps) {
           {
             label: t('frequent|Message'),
             getter: item => {
-              return item.message;
+              return (
+                item && (
+                  <ShowHideLabel labelId={item?.metadata?.uid || ''}>
+                    {item.message || ''}
+                  </ShowHideLabel>
+                )
+              );
             },
           },
           {

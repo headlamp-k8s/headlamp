@@ -367,7 +367,16 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      Created
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                      >
+                        <label
+                          class="makeStyles-fullText"
+                          id=""
+                        >
+                          Created
+                        </label>
+                      </div>
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
