@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots common/ShowHideLabel Basic 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiBox-root MuiBox-root"
+    >
+      <label
+        aria-expanded="false"
+        class="makeStyles-fullText"
+        id="label-id"
+      >
+        This is a placeholder label text that is many characters long. It is meant to be used as a temporary label for a UI element until the actual label is available. The text is long enough to fill up the space allocated for the label and provide a realistic pr
+        …
+        <button
+          aria-controls="label-id"
+          arial-label="Expand"
+          class="MuiButtonBase-root MuiIconButton-root makeStyles-button MuiIconButton-sizeSmall"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <span />
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots common/ShowHideLabel Empty 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+  />
+</div>
+`;
+
+exports[`Storyshots common/ShowHideLabel Expanded 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiBox-root MuiBox-root"
+    >
+      <label
+        aria-expanded="true"
+        class="makeStyles-fullText"
+        id="my-label"
+      >
+        This is a placeholder label text that is many characters long. It is meant to be used as a temporary label for a UI element until the actual label is available. The text is long enough to fill up the space allocated for the label and provide a realistic preview of how the label will look in the final UI. You can replace this text with the actual label text once it is available. This will ensure that the UI looks complete and professional even during the development phase. Thank you for using this placeholder text!
+        <button
+          aria-controls="my-label"
+          arial-label="Collapse"
+          class="MuiButtonBase-root MuiIconButton-root makeStyles-button MuiIconButton-sizeSmall"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <span />
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots common/ShowHideLabel Short Text 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root"
+  >
+    <div
+      class="MuiBox-root MuiBox-root"
+    >
+      <label
+        class="makeStyles-fullText"
+        id="my-label2"
+      >
+        Short text
+      </label>
+    </div>
+  </div>
+</div>
+`;

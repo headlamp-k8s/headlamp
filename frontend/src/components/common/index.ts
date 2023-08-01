@@ -28,6 +28,8 @@ export * from './SectionFilterHeader';
 export { default as SectionFilterHeader } from './SectionFilterHeader';
 export * from './SectionHeader';
 export { default as SectionHeader } from './SectionHeader';
+export * from './ShowHideLabel';
+export { default as ShowHideLabel } from './ShowHideLabel';
 export * from './SimpleTable';
 export { default as SimpleTable } from './SimpleTable';
 export * from './Tabs';
