@@ -1,5 +1,5 @@
 {
-  "Something Went Wrong.": "Etwas ist schief gelaufen.",
+  "Something went wrong.": "Etwas ist schief gelaufen.",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})": "{{ eventDate }} ({{ count }} mal seit {{ firstEventDate }})",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_plural": "{{ eventDate }} ({{ count }} mal seit {{ firstEventDate }})",
   "Failed to create {{ kind }} {{ name }}.": "Erstellung von {{ kind }} fehlgeschlagen {{ name }}.",

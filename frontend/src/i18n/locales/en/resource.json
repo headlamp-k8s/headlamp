@@ -1,5 +1,5 @@
 {
-  "Something Went Wrong.": "Something Went Wrong.",
+  "Something went wrong.": "Something went wrong.",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})": "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_plural": "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})",
   "Failed to create {{ kind }} {{ name }}.": "Failed to create {{ kind }} {{ name }}.",

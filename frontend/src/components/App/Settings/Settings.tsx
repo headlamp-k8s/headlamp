@@ -48,7 +48,7 @@ export default function Settings() {
           <ActionButton
             key="version"
             icon="mdi:information-outline"
-            description={t('Version')}
+            description={t('frequent|Version')}
             onClick={() => {
               dispatch(setVersionDialogOpen(true));
             }}

@@ -118,7 +118,7 @@ export function useSidebarInfo() {
 
 function AddClusterButton() {
   const history = useHistory();
-  const { t } = useTranslation(['frequent']);
+  const { t } = useTranslation(['frequent', 'cluster']);
   const { isOpen } = useSidebarInfo();
 
   return (
@@ -128,13 +128,13 @@ function AddClusterButton() {
           onClick={() => history.push(createRouteURL('loadKubeConfig'))}
           startIcon={<InlineIcon icon="mdi:plus-box-outline" />}
         >
-          {t('frequent|Add Cluster')}
+          {t('cluster|Add Cluster')}
         </Button>
       ) : (
         <ActionButton
           onClick={() => history.push(createRouteURL('loadKubeConfig'))}
           icon="mdi:plus-box-outline"
-          description={t('frequent|Add Cluster')}
+          description={t('cluster|Add Cluster')}
           color="#adadad"
           width={38}
         />

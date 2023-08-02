@@ -303,7 +303,7 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
             className={classes.button}
             onClick={() => history.push(createRouteURL('loadKubeConfig'))}
           >
-            {t('Add cluster')}
+            {t('cluster|Add Cluster')}
           </Button>
         </>
       )}
