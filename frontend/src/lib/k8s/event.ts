@@ -23,6 +23,19 @@ export interface KubeEvent {
 class Event extends makeKubeObject<KubeEvent>('Event') {
   static apiEndpoint = apiFactoryWithNamespace('', 'v1', 'events');
 
+  // Max number of events to fetch from the API
+  private static maxEventsLimit = 2000;
+
+  // Getter to get the max number of events that are to be fetched
+  static get maxLimit() {
+    return this.maxEventsLimit;
+  }
+
+  // Setter to set the max number of events that are to be fetched
+  static set maxLimit(limit: number) {
+    this.maxEventsLimit = limit;
+  }
+
   get spec() {
     return this.getValue('spec');
   }
@@ -69,7 +82,7 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
           return `${k}=${fieldSelector[k]}`;
         })
         .join(','),
-      limit: '500',
+      limit: this.maxLimit,
     };
 
     const response = await request(path, {}, true, true, queryParams);
