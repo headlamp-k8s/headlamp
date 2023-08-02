@@ -175,9 +175,6 @@ export default function EditorDialog(props: EditorDialogProps) {
     );
 
     setCode({ code: value as string, format: code.format });
-    if (error && getObjectsFromCode({ code: value as string, format: originalCode.format })) {
-      setError('');
-    }
 
     if (onEditorChanged) {
       onEditorChanged(value as string);
