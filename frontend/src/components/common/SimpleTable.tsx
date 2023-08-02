@@ -435,7 +435,7 @@ export default function SimpleTable(props: SimpleTableProps) {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length}>
+              <TableCell style={{ gridColumn: `span ${columns.length}` }}>
                 <Empty>{t('No data matching the filter criteria.')}</Empty>
               </TableCell>
             </TableRow>

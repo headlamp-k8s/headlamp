@@ -555,7 +555,16 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                       <td
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                       >
-                        Started container hello
+                        <div
+                          class="MuiBox-root MuiBox-root"
+                        >
+                          <label
+                            class="makeStyles-fullText"
+                            id="a12345"
+                          >
+                            Started container hello
+                          </label>
+                        </div>
                       </td>
                       <td
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -614,7 +623,16 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                       <td
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                       >
-                        failed to get cpu utilization: missing request for cpu
+                        <div
+                          class="MuiBox-root MuiBox-root"
+                        >
+                          <label
+                            class="makeStyles-fullText"
+                            id="b12345"
+                          >
+                            failed to get cpu utilization: missing request for cpu
+                          </label>
+                        </div>
                       </td>
                       <td
                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"

@@ -406,6 +406,12 @@ NumberSearch.args = {
   search: '30',
 };
 
+export const NotFoundMessage = TemplateWithFilter.bind({});
+NotFoundMessage.args = {
+  simpleTableArgs: podData,
+  search: 'somethingthatsnotapossiblematch123',
+};
+
 // emptyMessage
 // defaultSortingColumn
 // rowsPerPage
