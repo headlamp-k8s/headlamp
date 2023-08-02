@@ -21,7 +21,7 @@ const useStyle = makeStyles(theme => ({
   },
   button: {
     padding: (props: { isSidebarOpen: boolean; isSmall: boolean }) =>
-      props.isSmall && !props.isSidebarOpen ? 0 : '6px 8px',
+      props.isSmall && !props.isSidebarOpen ? `10px 10px` : '6px 8px',
     // Useful for when the button has text.
     color: theme.palette.text.primary,
   },
