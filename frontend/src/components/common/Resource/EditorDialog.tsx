@@ -82,7 +82,7 @@ export default function EditorDialog(props: EditorDialogProps) {
 
   const [originalCode, setOriginalCode] = React.useState({ code: '', format: item ? 'yaml' : '' });
   const [code, setCode] = React.useState(originalCode);
-  const [lastCodeCheckHandler, setLastCodeCheckHandler] = React.useState(0);
+  const lastCodeCheckHandler = React.useRef(0);
   const [previousVersion, setPreviousVersion] = React.useState('');
   const [error, setError] = React.useState('');
   const [docSpecs, setDocSpecs] = React.useState<
@@ -133,7 +133,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     i18n.on('languageChanged', setLang);
     return () => {
       // Stop the timeout from trying to use the component after it's been unmounted.
-      clearTimeout(lastCodeCheckHandler);
+      clearTimeout(lastCodeCheckHandler.current);
 
       i18n.off('languageChanged', setLang);
     };
@@ -155,24 +155,22 @@ export default function EditorDialog(props: EditorDialogProps) {
 
   function onChange(value: string | undefined): void {
     // Clear any ongoing attempts to check the code.
-    window.clearTimeout(lastCodeCheckHandler);
+    window.clearTimeout(lastCodeCheckHandler.current);
 
     // Only check the code for errors after the user has stopped typing for a moment.
-    setLastCodeCheckHandler(
-      window.setTimeout(() => {
-        const { error: err, format } = getObjectsFromCode({
-          code: value || '',
-          format: originalCode.format,
-        });
-        if (code.format !== format) {
-          setCode({ code: value || '', format });
-        }
+    lastCodeCheckHandler.current = window.setTimeout(() => {
+      const { error: err, format } = getObjectsFromCode({
+        code: value || '',
+        format: originalCode.format,
+      });
+      if (code.format !== format) {
+        setCode({ code: value || '', format });
+      }
 
-        if (error !== (err?.message || '')) {
-          setError(err?.message || '');
-        }
-      }, 500) // ms
-    );
+      if (error !== (err?.message || '')) {
+        setError(err?.message || '');
+      }
+    }, 500); // ms
 
     setCode({ code: value as string, format: code.format });
 
