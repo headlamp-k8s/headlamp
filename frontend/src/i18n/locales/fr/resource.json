@@ -1,5 +1,5 @@
 {
-  "Something Went Wrong.": "Quelque chose a mal tourné.",
+  "Something went wrong.": "",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})": "",
   "{{ eventDate }} ({{ count }} times since {{ firstEventDate }})_plural": "",
   "Failed to create {{ kind }} {{ name }}.": "",
