@@ -25,15 +25,15 @@ web UIs/dashboards available (i.e. to list and view resources) as well as other 
 
 <table>
     <tr>
-        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/cluster_overview.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/home.png"></td>
         <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/cluster_chooser.png"></td>
     </tr>
     <tr>
-        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/nodes.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/workloads.png"></td>
         <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/resource_edition.png"></td>
     </tr>
     <tr>
-        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/editor_documentation.png"></td>
+        <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/logs.png"></td>
         <td width="33%"><img src="https://raw.githubusercontent.com/headlamp-k8s/headlamp/screenshots/screenshots/terminal.png"></td>
     </tr>
 </table>
