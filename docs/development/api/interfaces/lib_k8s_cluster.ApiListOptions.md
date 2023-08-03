@@ -24,7 +24,7 @@ slug: "lib_k8s_cluster.ApiListOptions"
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:51](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/apiProxy.ts#L51)
+[lib/k8s/apiProxy.ts:55](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L55)
 
 ___
 
@@ -38,7 +38,21 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:50](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/apiProxy.ts#L50)
+[lib/k8s/apiProxy.ts:54](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L54)
+
+___
+
+### limit
+
+• `Optional` **limit**: `number`
+
+#### Inherited from
+
+[QueryParameters](lib_k8s_apiProxy.QueryParameters.md).[limit](lib_k8s_apiProxy.QueryParameters.md#limit)
+
+#### Defined in
+
+[lib/k8s/apiProxy.ts:56](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L56)
 
 ___
 
@@ -48,4 +62,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:70](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L70)
+[lib/k8s/cluster.ts:71](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L71)

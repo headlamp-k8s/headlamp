@@ -14,7 +14,7 @@ slug: "redux_reducers_config.ConfigState"
 
 #### Defined in
 
-[redux/reducers/config.tsx:8](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/redux/reducers/config.tsx#L8)
+[redux/reducers/config.tsx:8](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/redux/reducers/config.tsx#L8)
 
 ___
 
@@ -35,4 +35,4 @@ ___
 
 #### Defined in
 
-[redux/reducers/config.tsx:11](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/redux/reducers/config.tsx#L11)
+[redux/reducers/config.tsx:11](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/redux/reducers/config.tsx#L11)

@@ -22,15 +22,15 @@ slug: "lib_k8s_lease.Lease"
 
 | Name | Type |
 | :------ | :------ |
-| `json` | [`KubeObject`](../interfaces/lib_k8s_lease.KubeObject.md) |
+| `json` | [`KubeLease`](../interfaces/lib_k8s_lease.KubeLease.md) |
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('lease').constructor
+makeKubeObject<KubeLease\>('Lease').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L106)
+[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L107)
 
 ## Properties
 
@@ -52,7 +52,7 @@ makeKubeObject<KubeObject\>('lease').constructor
 
 #### Defined in
 
-[lib/k8s/lease.ts:16](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/lease.ts#L16)
+[lib/k8s/lease.ts:16](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/lease.ts#L16)
 
 ___
 
@@ -62,11 +62,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('lease').className
+makeKubeObject<KubeLease\>('Lease').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L107)
+[lib/k8s/cluster.ts:108](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L108)
 
 ## Accessors
 
@@ -80,7 +80,7 @@ makeKubeObject<KubeObject\>('lease').className
 
 #### Defined in
 
-[lib/k8s/lease.ts:18](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/lease.ts#L18)
+[lib/k8s/lease.ts:18](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/lease.ts#L18)
 
 ## Methods
 
@@ -100,11 +100,11 @@ makeKubeObject<KubeObject\>('lease').className
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('lease').apiList
+makeKubeObject<KubeLease\>('Lease').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:86](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L86)
+[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L87)
 
 ___
 
@@ -125,11 +125,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('lease').getAuthorization
+makeKubeObject<KubeLease\>('Lease').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:109](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L109)
+[lib/k8s/cluster.ts:110](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L110)
 
 ___
 
@@ -149,11 +149,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('lease').getErrorMessage
+makeKubeObject<KubeLease\>('Lease').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:105](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L105)
+[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L106)
 
 ___
 
@@ -176,11 +176,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('lease').useApiGet
+makeKubeObject<KubeLease\>('Lease').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:92](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L92)
+[lib/k8s/cluster.ts:93](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L93)
 
 ___
 
@@ -202,11 +202,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('lease').useApiList
+makeKubeObject<KubeLease\>('Lease').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L87)
+[lib/k8s/cluster.ts:88](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L88)
 
 ___
 
@@ -227,11 +227,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('lease').useGet
+makeKubeObject<KubeLease\>('Lease').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:101](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L101)
+[lib/k8s/cluster.ts:102](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L102)
 
 ___
 
@@ -251,8 +251,8 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('lease').useList
+makeKubeObject<KubeLease\>('Lease').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:98](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L98)
+[lib/k8s/cluster.ts:99](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L99)

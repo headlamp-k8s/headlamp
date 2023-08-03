@@ -12,10 +12,20 @@ slug: "lib_k8s_apiProxy.RequestParams"
 
 ## Properties
 
+### isJSON
+
+• `Optional` **isJSON**: `boolean`
+
+#### Defined in
+
+[lib/k8s/apiProxy.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L36)
+
+___
+
 ### timeout
 
 • `Optional` **timeout**: `number`
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:32](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/apiProxy.ts#L32)
+[lib/k8s/apiProxy.ts:35](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L35)

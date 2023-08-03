@@ -24,7 +24,7 @@ slug: "lib_k8s_service.KubeService"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L37)
+[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L37)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L36)
+[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L36)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L38)
+[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L38)
 
 ___
 
@@ -71,11 +71,12 @@ ___
 | `clusterIP` | `string` |
 | `externalIPs` | `string`[] |
 | `ports` | { `name`: `string` ; `nodePort`: `number` ; `port`: `number` ; `protocol`: `string` ; `targetPort`: `string` \| `number`  }[] |
+| `selector` | { `[key: string]`: `string`;  } |
 | `type` | `string` |
 
 #### Defined in
 
-[lib/k8s/service.ts:18](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/service.ts#L18)
+[lib/k8s/service.ts:18](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/service.ts#L18)
 
 ___
 
@@ -93,4 +94,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/service.ts:31](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/service.ts#L31)
+[lib/k8s/service.ts:34](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/service.ts#L34)

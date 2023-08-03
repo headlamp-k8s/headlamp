@@ -10,5 +10,5 @@ slug: "lib_k8s_limitRange"
 
 ## Interfaces
 
-- [KubeObject](../interfaces/lib_k8s_limitRange.KubeObject.md)
+- [KubeLimitRange](../interfaces/lib_k8s_limitRange.KubeLimitRange.md)
 - [LimitRangeSpec](../interfaces/lib_k8s_limitRange.LimitRangeSpec.md)

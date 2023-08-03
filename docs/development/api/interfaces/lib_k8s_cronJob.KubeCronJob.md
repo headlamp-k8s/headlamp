@@ -30,7 +30,7 @@ CronJob structure returned by the k8s API.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L37)
+[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L37)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L36)
+[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L36)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L38)
+[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L38)
 
 ___
 
@@ -76,6 +76,13 @@ ___
 | :------ | :------ |
 | `concurrencyPolicy` | `string` |
 | `failedJobsHistoryLimit` | `number` |
+| `jobTemplate` | { `spec`: { `metadata?`: `Partial`<[`KubeMetadata`](lib_k8s_cluster.KubeMetadata.md)\> ; `template`: { `spec`: { `containers`: [`KubeContainer`](lib_k8s_cluster.KubeContainer.md)[] ; `metadata?`: `Partial`<[`KubeMetadata`](lib_k8s_cluster.KubeMetadata.md)\>  }  }  }  } |
+| `jobTemplate.spec` | { `metadata?`: `Partial`<[`KubeMetadata`](lib_k8s_cluster.KubeMetadata.md)\> ; `template`: { `spec`: { `containers`: [`KubeContainer`](lib_k8s_cluster.KubeContainer.md)[] ; `metadata?`: `Partial`<[`KubeMetadata`](lib_k8s_cluster.KubeMetadata.md)\>  }  }  } |
+| `jobTemplate.spec.metadata?` | `Partial`<[`KubeMetadata`](lib_k8s_cluster.KubeMetadata.md)\> |
+| `jobTemplate.spec.template` | { `spec`: { `containers`: [`KubeContainer`](lib_k8s_cluster.KubeContainer.md)[] ; `metadata?`: `Partial`<[`KubeMetadata`](lib_k8s_cluster.KubeMetadata.md)\>  }  } |
+| `jobTemplate.spec.template.spec` | { `containers`: [`KubeContainer`](lib_k8s_cluster.KubeContainer.md)[] ; `metadata?`: `Partial`<[`KubeMetadata`](lib_k8s_cluster.KubeMetadata.md)\>  } |
+| `jobTemplate.spec.template.spec.containers` | [`KubeContainer`](lib_k8s_cluster.KubeContainer.md)[] |
+| `jobTemplate.spec.template.spec.metadata?` | `Partial`<[`KubeMetadata`](lib_k8s_cluster.KubeMetadata.md)\> |
 | `schedule` | `string` |
 | `startingDeadlineSeconds?` | `number` |
 | `successfulJobsHistoryLimit` | `number` |
@@ -83,7 +90,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cronJob.ts:12](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cronJob.ts#L12)
+[lib/k8s/cronJob.ts:12](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cronJob.ts#L12)
 
 ___
 
@@ -97,4 +104,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cronJob.ts:21](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cronJob.ts#L21)
+[lib/k8s/cronJob.ts:32](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cronJob.ts#L32)

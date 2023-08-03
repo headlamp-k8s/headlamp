@@ -22,15 +22,15 @@ slug: "lib_k8s_runtime.RuntimeClass"
 
 | Name | Type |
 | :------ | :------ |
-| `json` | [`KubeObject`](../interfaces/lib_k8s_runtime.KubeObject.md) |
+| `json` | [`KubeRuntimeClass`](../interfaces/lib_k8s_runtime.KubeRuntimeClass.md) |
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('runtimeClass').constructor
+makeKubeObject<KubeRuntimeClass\>('RuntimeClass').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L106)
+[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L107)
 
 ## Properties
 
@@ -38,21 +38,21 @@ makeKubeObject<KubeObject\>('runtimeClass').constructor
 
 ▪ `Static` **apiEndpoint**: `Object`
 
-#### Index signature
-
-▪ [other: `string`]: `any`
-
 #### Type declaration
 
 | Name | Type |
 | :------ | :------ |
-| `scale?` | { `get`: (`namespace`: `string`, `name`: `string`) => `Promise`<`any`\> ; `put`: (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }) => `Promise`<`any`\>  } |
-| `scale.get` | (`namespace`: `string`, `name`: `string`) => `Promise`<`any`\> |
-| `scale.put` | (`body`: { `metadata`: [`KubeMetadata`](../interfaces/lib_k8s_cluster.KubeMetadata.md) ; `spec`: { `replicas`: `number`  }  }) => `Promise`<`any`\> |
+| `delete` | (`name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
+| `get` | (`name`: `string`, `cb`: [`StreamResultsCb`](../modules/lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](../modules/lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<() => `void`\> |
+| `isNamespaced` | `boolean` |
+| `list` | (`cb`: [`StreamResultsCb`](../modules/lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](../modules/lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<() => `void`\> |
+| `patch` | (`body`: `OpPatch`[], `name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
+| `post` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
+| `put` | (`body`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
 
 #### Defined in
 
-[lib/k8s/runtime.ts:9](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/runtime.ts#L9)
+[lib/k8s/runtime.ts:9](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/runtime.ts#L9)
 
 ___
 
@@ -62,11 +62,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('runtimeClass').className
+makeKubeObject<KubeRuntimeClass\>('RuntimeClass').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L107)
+[lib/k8s/cluster.ts:108](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L108)
 
 ## Accessors
 
@@ -80,7 +80,21 @@ makeKubeObject<KubeObject\>('runtimeClass').className
 
 #### Defined in
 
-[lib/k8s/runtime.ts:11](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/runtime.ts#L11)
+[lib/k8s/runtime.ts:11](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/runtime.ts#L11)
+
+___
+
+### listRoute
+
+• `Static` `get` **listRoute**(): `string`
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[lib/k8s/runtime.ts:19](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/runtime.ts#L19)
 
 ___
 
@@ -94,7 +108,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/runtime.ts:15](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/runtime.ts#L15)
+[lib/k8s/runtime.ts:15](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/runtime.ts#L15)
 
 ## Methods
 
@@ -114,11 +128,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('runtimeClass').apiList
+makeKubeObject<KubeRuntimeClass\>('RuntimeClass').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:86](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L86)
+[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L87)
 
 ___
 
@@ -139,11 +153,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('runtimeClass').getAuthorization
+makeKubeObject<KubeRuntimeClass\>('RuntimeClass').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:109](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L109)
+[lib/k8s/cluster.ts:110](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L110)
 
 ___
 
@@ -163,11 +177,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('runtimeClass').getErrorMessage
+makeKubeObject<KubeRuntimeClass\>('RuntimeClass').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:105](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L105)
+[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L106)
 
 ___
 
@@ -190,11 +204,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('runtimeClass').useApiGet
+makeKubeObject<KubeRuntimeClass\>('RuntimeClass').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:92](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L92)
+[lib/k8s/cluster.ts:93](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L93)
 
 ___
 
@@ -216,11 +230,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('runtimeClass').useApiList
+makeKubeObject<KubeRuntimeClass\>('RuntimeClass').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L87)
+[lib/k8s/cluster.ts:88](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L88)
 
 ___
 
@@ -241,11 +255,11 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('runtimeClass').useGet
+makeKubeObject<KubeRuntimeClass\>('RuntimeClass').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:101](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L101)
+[lib/k8s/cluster.ts:102](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L102)
 
 ___
 
@@ -265,8 +279,8 @@ ___
 
 #### Inherited from
 
-makeKubeObject<KubeObject\>('runtimeClass').useList
+makeKubeObject<KubeRuntimeClass\>('RuntimeClass').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:98](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L98)
+[lib/k8s/cluster.ts:99](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L99)

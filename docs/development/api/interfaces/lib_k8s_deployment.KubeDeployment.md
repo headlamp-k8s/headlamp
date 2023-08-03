@@ -24,7 +24,7 @@ slug: "lib_k8s_deployment.KubeDeployment"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L37)
+[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L37)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L36)
+[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L36)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L38)
+[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L38)
 
 ___
 
@@ -71,10 +71,13 @@ ___
 | `selector?` | [`LabelSelector`](lib_k8s_cluster.LabelSelector.md) |
 | `strategy?` | { `[otherProps: string]`: `any`; `type`: `string`  } |
 | `strategy.type` | `string` |
+| `template` | { `metadata?`: [`KubeMetadata`](lib_k8s_cluster.KubeMetadata.md) ; `spec`: [`KubePodSpec`](lib_k8s_pod.KubePodSpec.md)  } |
+| `template.metadata?` | [`KubeMetadata`](lib_k8s_cluster.KubeMetadata.md) |
+| `template.spec` | [`KubePodSpec`](lib_k8s_pod.KubePodSpec.md) |
 
 #### Defined in
 
-[lib/k8s/deployment.ts:5](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/deployment.ts#L5)
+[lib/k8s/deployment.ts:12](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/deployment.ts#L12)
 
 ___
 
@@ -88,4 +91,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/deployment.ts:13](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/deployment.ts#L13)
+[lib/k8s/deployment.ts:24](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/deployment.ts#L24)

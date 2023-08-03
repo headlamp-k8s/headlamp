@@ -20,7 +20,7 @@ A class to use on your SVG.
 
 #### Defined in
 
-[components/App/AppLogo.tsx:16](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/components/App/AppLogo.tsx#L16)
+[components/App/AppLogo.tsx:18](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/components/App/AppLogo.tsx#L18)
 
 ___
 
@@ -32,7 +32,7 @@ The size of the logo. 'small' for in mobile view, and 'large' for tablet and des
 
 #### Defined in
 
-[components/App/AppLogo.tsx:12](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/components/App/AppLogo.tsx#L12)
+[components/App/AppLogo.tsx:14](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/components/App/AppLogo.tsx#L14)
 
 ___
 
@@ -44,4 +44,4 @@ User selected theme. By default it checks which is is active.
 
 #### Defined in
 
-[components/App/AppLogo.tsx:14](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/components/App/AppLogo.tsx#L14)
+[components/App/AppLogo.tsx:16](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/components/App/AppLogo.tsx#L16)

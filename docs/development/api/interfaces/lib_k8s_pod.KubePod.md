@@ -24,7 +24,7 @@ slug: "lib_k8s_pod.KubePod"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L37)
+[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L37)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L36)
+[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L36)
 
 ___
 
@@ -52,26 +52,17 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L38)
+[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L38)
 
 ___
 
 ### spec
 
-• **spec**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `containers` | [`KubeContainer`](lib_k8s_cluster.KubeContainer.md)[] |
-| `initContainers?` | `any`[] |
-| `nodeName` | `string` |
-| `nodeSelector?` | { `[key: string]`: `string`;  } |
+• **spec**: [`KubePodSpec`](lib_k8s_pod.KubePodSpec.md)
 
 #### Defined in
 
-[lib/k8s/pod.ts:13](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/pod.ts#L13)
+[lib/k8s/pod.ts:25](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L25)
 
 ___
 
@@ -99,4 +90,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/pod.ts:21](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/pod.ts#L21)
+[lib/k8s/pod.ts:26](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L26)

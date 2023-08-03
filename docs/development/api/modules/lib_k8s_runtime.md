@@ -10,4 +10,4 @@ slug: "lib_k8s_runtime"
 
 ## Interfaces
 
-- [KubeObject](../interfaces/lib_k8s_runtime.KubeObject.md)
+- [KubeRuntimeClass](../interfaces/lib_k8s_runtime.KubeRuntimeClass.md)

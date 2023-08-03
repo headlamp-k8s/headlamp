@@ -16,7 +16,7 @@ Whether to follow the log stream
 
 #### Defined in
 
-[lib/k8s/pod.ts:47](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/pod.ts#L47)
+[lib/k8s/pod.ts:52](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L52)
 
 ___
 
@@ -28,7 +28,7 @@ Whether to show the logs from previous runs of the container (only for restarted
 
 #### Defined in
 
-[lib/k8s/pod.ts:43](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/pod.ts#L43)
+[lib/k8s/pod.ts:48](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L48)
 
 ___
 
@@ -40,7 +40,7 @@ Whether to show the timestamps in the logs
 
 #### Defined in
 
-[lib/k8s/pod.ts:45](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/pod.ts#L45)
+[lib/k8s/pod.ts:50](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L50)
 
 ___
 
@@ -52,4 +52,4 @@ The number of lines to display from the end side of the log
 
 #### Defined in
 
-[lib/k8s/pod.ts:41](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/pod.ts#L41)
+[lib/k8s/pod.ts:46](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L46)
