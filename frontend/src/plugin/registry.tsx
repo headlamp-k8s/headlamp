@@ -26,7 +26,6 @@ import {
   addResourceTableColumnsProcessor,
   setBrandingAppLogoComponent,
   setClusterChooserButtonComponent,
-  setDetailsView,
   setFunctionsToOverride,
   setRoute,
   setRouteFilter,
@@ -34,6 +33,12 @@ import {
   setSidebarItemFilter,
   TableColumnsProcessor,
 } from '../redux/actions/actions';
+import {
+  addDetailsViewSectionsProcessor,
+  DefaultDetailsViewSection,
+  DetailsViewSectionsProcessor,
+  setDetailsViewSection,
+} from '../redux/detailsViewSectionsSlice';
 import store from '../redux/stores/store';
 
 export interface SectionFuncProps {
@@ -41,10 +46,16 @@ export interface SectionFuncProps {
   component: (props: { resource: any }) => JSX.Element | null;
 }
 
-export type { AppLogoProps, AppLogoType };
-export type { ClusterChooserProps, ClusterChooserType };
-export type { SidebarEntryProps, DefaultSidebars };
-export type { DetailsViewSectionProps, DetailsViewSectionType };
+export type {
+  AppLogoProps,
+  AppLogoType,
+  ClusterChooserProps,
+  ClusterChooserType,
+  DefaultSidebars,
+  DetailsViewSectionProps,
+  DetailsViewSectionType,
+  SidebarEntryProps,
+};
 export const DetailsViewDefaultHeaderActions = DefaultHeaderAction;
 export type { AppBarActionProcessorType };
 /**
@@ -425,7 +436,47 @@ export function registerAppBarAction(
  * ```
  */
 export function registerDetailsViewSection(viewSection: DetailsViewSectionType) {
-  store.dispatch(setDetailsView(viewSection));
+  store.dispatch(setDetailsViewSection(viewSection));
+}
+
+/**
+ * Add a processor for the details view sections. Allowing the modification of what sections are shown.
+ *
+ * @param processor - The processor to add. Receives a resource (for which we are processing the sections) and the current sections and returns the new sections. Return an empty array to remove all sections.
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerDetailsViewSectionsProcessor } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * registerDetailsViewSectionsProcessor(function addTopSection( resource, sections ) {
+ *   // Ignore if there is no resource.
+ *   if (!resource) {
+ *    return sections;
+ *   }
+ *
+ *   // Check if we already have added our custom section (this function may be called multiple times).
+ *   const customSectionId = 'my-custom-section';
+ *   if (sections.findIndex(section => section.id === customSectionId) !== -1) {
+ *     return sections;
+ *   }
+ *
+ *   return [
+ *     {
+ *       id: 'my-custom-section',
+ *       section: (
+ *         <SectionBox title="I'm the top of the world!" />
+         ),
+ *     },
+ *     ...sections,
+ *   ];
+ * });
+ * ```
+ */
+export function registerDetailsViewSectionsProcessor(
+  processor: DetailsViewSectionsProcessor | DetailsViewSectionsProcessor['processor']
+) {
+  store.dispatch(addDetailsViewSectionsProcessor(processor));
 }
 
 /**
@@ -511,4 +562,4 @@ export function registerGetTokenFunction(override: (cluster: string) => string |
   store.dispatch(setFunctionsToOverride({ getToken: override }));
 }
 
-export { getHeadlampAPIHeaders, DefaultAppBarAction };
+export { DefaultAppBarAction, DefaultDetailsViewSection, getHeadlampAPIHeaders };

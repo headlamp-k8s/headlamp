@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import { InputLabel, Theme } from '@material-ui/core';
+import { InputLabel, Paper, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import Grid, { GridProps, GridSize } from '@material-ui/core/Grid';
@@ -11,7 +11,7 @@ import { makeStyles, useTheme } from '@material-ui/styles';
 import Editor from '@monaco-editor/react';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
-import _ from 'lodash';
+import _, { has } from 'lodash';
 import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
@@ -26,19 +26,26 @@ import {
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
+import {
+  DefaultDetailsViewSection,
+  DetailsViewSection,
+} from '../../../redux/detailsViewSectionsSlice';
+import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
 import { SectionBox } from '../../common/SectionBox';
 import SimpleTable, { NameValueTable } from '../../common/SimpleTable';
-import DetailsViewSection from '../../DetailsViewSection';
 import { PodListProps, PodListRenderer } from '../../pod/List';
-import { LightTooltip, ObjectEventList } from '..';
+import { LightTooltip, Loader, ObjectEventList } from '..';
+import BackLink from '../BackLink';
 import Empty from '../EmptyContent';
+import ErrorBoundary from '../ErrorBoundary';
 import InnerTable from '../InnerTable';
 import { DateLabel, HoverInfoLabel, StatusLabel, StatusLabelProps, ValueLabel } from '../Label';
 import Link, { LinkProps } from '../Link';
 import { useMetadataDisplayStyles } from '.';
 import { MainInfoSection, MainInfoSectionProps } from './MainInfoSection/MainInfoSection';
-import { MetadataDictGrid } from './MetadataDisplay';
+import { MainInfoHeader } from './MainInfoSection/MainInfoSectionHeader';
+import { MetadataDictGrid, MetadataDisplay } from './MetadataDisplay';
 import PortForward from './PortForward';
 
 export { MainInfoSection };
@@ -68,13 +75,26 @@ export function ResourceLink(props: ResourceLinkProps) {
 
 export interface DetailsGridProps
   extends PropsWithChildren<Omit<MainInfoSectionProps, 'resource'>> {
+  /** Resource type to fetch (from the ResourceClasses). */
   resourceType: KubeObject;
+  /** Name of the resource. */
   name: string;
+  /** Namespace of the resource. If not provided, it's assumed the resource is not namespaced. */
   namespace?: string;
-  sectionsFunc?: (item: KubeObject) => React.ReactNode;
+  /** Sections to show in the details grid (besides the default ones). */
+  extraSections?:
+    | ((item: KubeObject) => boolean | DetailsViewSection[])
+    | boolean
+    | DetailsViewSection[];
+  /** @deprecated Use extraSections instead. */
+  sectionsFunc?: (item: KubeObject) => React.ReactNode | DetailsViewSection[];
+  /** If true, will show the events section. */
   withEvents?: boolean;
 }
 
+/** Renders the different parts that constibute an actual resource's details view.
+ * Those are: the back link, the header, the main info section, the extra sections, and the events section.
+ */
 export function DetailsGrid(props: DetailsGridProps) {
   const {
     sectionsFunc,
@@ -83,12 +103,28 @@ export function DetailsGrid(props: DetailsGridProps) {
     namespace,
     children,
     withEvents,
+    extraSections,
     ...otherMainInfoSectionProps
   } = props;
+  const { t } = useTranslation('frequent');
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
   const hasPreviousRoute = useHasPreviousRoute();
+  const detailViews = useTypedSelector(state => state.detailsViewSections.detailsViewSections);
+  const detailViewsProcessors = useTypedSelector(
+    state => state.detailsViewSections.detailsViewSectionsProcessors
+  );
+  // This component used to have a MainInfoSection with all these props passed to it, so we're
+  // using them to accomplish the same behavior.
+  const { extraInfo, actions, noDefaultActions, headerStyle, backLink, title, headerSection } =
+    otherMainInfoSectionProps;
 
-  const backLink: string | Location | undefined = React.useMemo(() => {
+  const [item, error] = resourceType.useGet(name, namespace);
+
+  const actualBackLink: string | Location | undefined = React.useMemo(() => {
+    if (!!backLink || backLink === '') {
+      return backLink;
+    }
+
     const stateLink = location.state?.backLink || null;
     if (!!stateLink) {
       return generatePath(stateLink.pathname);
@@ -100,35 +136,167 @@ export function DetailsGrid(props: DetailsGridProps) {
     }
 
     let route;
-    try {
-      route = new resourceType().listRoute;
-    } catch (err) {
-      console.error(
-        `Error creating route for details grid (resource type=${resourceType}): ${err}`
-      );
 
-      // Let the MainInfoSection handle it.
-      return undefined;
+    if (!!item) {
+      route = item.listRoute;
+    } else {
+      try {
+        route = new resourceType().listRoute;
+      } catch (err) {
+        console.error(
+          `Error creating route for details grid (resource type=${resourceType}): ${err}`
+        );
+
+        // Let the MainInfoSection handle it.
+        return undefined;
+      }
     }
 
     return createRouteURL(route);
-  }, []);
+  }, [item]);
 
-  const [item, error] = resourceType.useGet(name, namespace);
+  const sections: DetailsViewSection[] = [];
+
+  // Back link
+  if (!!actualBackLink || actualBackLink === '') {
+    sections.push({
+      id: DefaultDetailsViewSection.BACK_LINK,
+      section: <BackLink to={actualBackLink} />,
+    });
+  }
+
+  // Title / Header
+  sections.push({
+    id: DefaultDetailsViewSection.MAIN_HEADER,
+    section: (
+      <MainInfoHeader
+        title={title}
+        resource={item}
+        actions={actions}
+        noDefaultActions={noDefaultActions}
+        headerStyle={headerStyle}
+      />
+    ),
+  });
+
+  // Error / Loading or Metadata
+  if (item === null) {
+    sections.push(
+      !!error
+        ? {
+            id: DefaultDetailsViewSection.ERROR,
+            section: (
+              <Paper variant="outlined">
+                <Empty color="error">{error.toString()}</Empty>
+              </Paper>
+            ),
+          }
+        : {
+            id: DefaultDetailsViewSection.LOADING,
+            section: <Loader title={t('frequent|Loading resource data')} />,
+          }
+    );
+  } else {
+    const mainInfoHeader =
+      typeof headerSection === 'function' ? headerSection(item) : headerSection;
+    sections.push({
+      id: DefaultDetailsViewSection.METADATA,
+      section: (
+        <SectionBox aria-busy={item === null} aria-live="polite">
+          {mainInfoHeader}
+          <MetadataDisplay resource={item} extraRows={extraInfo} />
+        </SectionBox>
+      ),
+    });
+  }
+
+  // Other sections
+  if (!!sectionsFunc) {
+    console.info(
+      `Using legacy sectionsFunc in DetailsGrid for ${
+        title || resourceType + '/' + namespace + '/' + name
+      }. Please use the children, or set up a details view processor.`
+    );
+    sections.push({
+      id: 'LEGACY_SECTIONS_FUNC',
+      section: sectionsFunc(item),
+    });
+  }
+
+  if (!!extraSections) {
+    let actualExtraSections: DetailsViewSection[] = [];
+    if (Array.isArray(extraSections)) {
+      actualExtraSections = extraSections;
+    } else if (typeof extraSections === 'function') {
+      const extraSectionsResult = extraSections(item) || [];
+      if (Array.isArray(extraSectionsResult)) {
+        actualExtraSections = extraSectionsResult;
+      }
+    }
+
+    sections.push(...actualExtraSections);
+  }
+
+  // Children
+  if (!!children) {
+    sections.push({
+      id: DefaultDetailsViewSection.CHILDREN,
+      section: children,
+    });
+  }
+
+  // Plugin appended details views
+  if (!!detailViews) {
+    sections.push(...detailViews);
+  }
+
+  // Events
+  if (withEvents && item) {
+    sections.push({
+      id: DefaultDetailsViewSection.EVENTS,
+      section: <ObjectEventList object={item} />,
+    });
+  }
+
+  let sectionsProcessed = [...sections];
+  for (const detailViewsProcessor of detailViewsProcessors) {
+    let processorsSections = sectionsProcessed;
+    try {
+      processorsSections = detailViewsProcessor.processor(item, sectionsProcessed);
+      if (!Array.isArray(processorsSections)) {
+        throw new Error(`Invalid return value: ${processorsSections}`);
+      }
+    } catch (err) {
+      console.error(
+        `Error processing details view sections for ${resourceType}/${namespace}/${name}: ${err}`
+      );
+
+      continue;
+    }
+
+    sectionsProcessed = processorsSections;
+  }
 
   return (
     <PageGrid>
-      <MainInfoSection
-        resource={item}
-        error={error}
-        actions={otherMainInfoSectionProps.actions}
-        backLink={backLink}
-        {...otherMainInfoSectionProps}
-      />
-      <>{!!sectionsFunc && sectionsFunc(item)}</>
-      {children}
-      <DetailsViewSection resource={item} />
-      {withEvents && item && <ObjectEventList object={item} />}
+      {React.Children.toArray(
+        sectionsProcessed.map(section => {
+          const Section = has(section, 'section')
+            ? (section as DetailsViewSection).section
+            : section;
+          if (React.isValidElement(Section)) {
+            return <ErrorBoundary>{Section}</ErrorBoundary>;
+          } else if (Section === null) {
+            return null;
+          } else if (typeof Section === 'function') {
+            return (
+              <ErrorBoundary>
+                <Section resource={item} />
+              </ErrorBoundary>
+            );
+          }
+        })
+      )}
     </PageGrid>
   );
 }

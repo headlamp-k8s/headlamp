@@ -2,6 +2,7 @@ import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { combineReducers } from 'redux';
 import pluginsReducer from '../../plugin/pluginsSlice';
 import actionButtons from '../actionButtonsSlice';
+import detailsViewSectionsSlice from '../detailsViewSectionsSlice';
 import clusterAction from './clusterAction';
 import config from './config';
 import filter from './filter';
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   config: config,
   plugins: pluginsReducer,
   actionButtons: actionButtons,
+  detailsViewSections: detailsViewSectionsSlice,
 });
 
 export type RootState = ReturnType<typeof reducers>;
