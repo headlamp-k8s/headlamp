@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Cluster } from '../lib/k8s/cluster';
 import { Notification } from '../lib/notification';
 
@@ -375,6 +376,25 @@ export function getHeadlampAPIHeaders(): { [key: string]: string } {
   };
 }
 
+export function getSessionId(): { [key: string]: string } {
+  // Retrieve session ID from sessionStorage
+  let sessionId = sessionStorage.getItem('sessionId');
+
+  // If no session ID exists, generate one
+  if (!sessionId) {
+    sessionId = uuidv4();
+
+    if (sessionId) {
+      // Store session ID in sessionStorage
+      sessionStorage.setItem('sessionId', sessionId);
+    }
+  }
+
+  return {
+    'X-HEADLAMP_SESSION_ID': sessionId,
+  };
+}
+
 const exportFunctions = {
   getBaseUrl,
   isDevMode,
@@ -397,6 +417,7 @@ const exportFunctions = {
   getHeadlampAPIHeaders,
   storeTableSettings,
   loadTableSettings,
+  getSessionId,
 };
 
 export default exportFunctions;
