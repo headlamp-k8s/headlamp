@@ -62,6 +62,7 @@
     "@types/react-window": "^1.8.5",
     "@types/redux-mock-store": "^1.0.4",
     "@types/semver": "^7.3.8",
+    "@types/uuid": "^9.0.4",
     "@types/webpack-env": "^1.16.2",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",

@@ -109,7 +109,7 @@ func makeJSONReq(method, url string, jsonObj interface{}) (*http.Request, error)
 	return http.NewRequestWithContext(context.Background(), method, url, bytes.NewBuffer(jsonBytes))
 }
 
-func getResponse(handler http.Handler, method, url string, body interface{}) (*httptest.ResponseRecorder, error) {
+func getResponse(handler http.Handler, method, url string, body interface{}) (*httptest.ResponseRecorder, error) { //nolint:lll
 	req, err := makeJSONReq(method, url, body)
 	if err != nil {
 		return nil, err
@@ -121,9 +121,7 @@ func getResponse(handler http.Handler, method, url string, body interface{}) (*h
 	return rr, nil
 }
 
-func getResponseFromRestrictedEndpoint(
-	handler http.Handler, method, url string, body interface{},
-) (*httptest.ResponseRecorder, error) {
+func getResponseFromRestrictedEndpoint(handler http.Handler, method, url string, body interface{}) (*httptest.ResponseRecorder, error) { //nolint:lll
 	token := uuid.New().String()
 	os.Setenv("HEADLAMP_BACKEND_TOKEN", token)
 
@@ -248,6 +246,13 @@ func TestDynamicClusters(t *testing.T) {
 
 				// Verify if the created cluster matches what we asked to be created
 				if r.Code == http.StatusCreated {
+					var config clientConfig
+
+					err = json.Unmarshal(r.Body.Bytes(), &config)
+					if err != nil {
+						t.Fatal(err)
+					}
+
 					configuredClusters := c.getClusters()
 					var cluster *Cluster
 
@@ -286,9 +291,8 @@ func TestDynamicClusters(t *testing.T) {
 				}
 
 				assert.Equal(t, len(clusterConfig.Clusters), len(config.Clusters))
+				assert.Equal(t, tc.expectedNumClusters, len(c.getClusters()))
 			}
-
-			assert.Equal(t, tc.expectedNumClusters, len(c.getClusters()))
 		})
 	}
 }
@@ -466,7 +470,7 @@ func TestDrainAndCordonNode(t *testing.T) {
 		}
 
 		rr, err = getResponse(tc.handler, "GET",
-			fmt.Sprintf("/drain-node-status?cluster=%s&nodeName=%s", drainNodePayload.Cluster, drainNodePayload.NodeName), nil)
+			fmt.Sprintf("/drain-node-status?cluster=%s&nodeName=%s", drainNodePayload.Cluster, drainNodePayload.NodeName), nil) //nolint:lll
 		if err != nil {
 			t.Fatal(err)
 		}

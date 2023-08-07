@@ -18,6 +18,18 @@ slug: "redux_reducers_config.ConfigState"
 
 ___
 
+### statelessClusters
+
+When [dynamic clusters](https://github.com/headlamp-k8s/headlamp/blob/main/backend/cmd/server.go#L37) are enabled `statelessClusters` are stored in IndexedDB, providing a client-side caching mechanism for cluster data. This approach reduces server requests, enhancing responsiveness.
+
+• **statelessClusters**: ``null`` \| { `[clusterName: string]`: [`Cluster`](lib_k8s_cluster.Cluster.md);  }
+
+### allClusters
+
+When [dynamic clusters](https://github.com/headlamp-k8s/headlamp/blob/main/backend/cmd/server.go#L37) are disabled, users default to the clusters. When enabled, `allClusters` represent the combined set of clusters and statelessClusters, providing a unified view.
+
+• **allClusters**: ``null`` \| { `[clusterName: string]`: [`Cluster`](lib_k8s_cluster.Cluster.md);  }
+
 ### settings
 
 • **settings**: `Object`
