@@ -24,3 +24,7 @@ type ClusterReq struct {
 	Metadata                 map[string]interface{} `json:"meta_data"`
 	KubeConfig               *string                `json:"kubeconfig,omitempty"`
 }
+
+type KubeconfigRequest struct {
+	Kubeconfigs []string `json:"kubeconfigs"`
+}

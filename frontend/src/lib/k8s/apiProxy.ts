@@ -12,6 +12,11 @@ import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
 import helpers, { getHeadlampAPIHeaders, isDebugVerbose } from '../../helpers';
 import store from '../../redux/stores/store';
+import {
+  findKubeconfigByClusterName,
+  getUserIdFromLocalStorage,
+  storeStatelessClusterKubeconfig,
+} from '../../stateless/';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
 import { KubeMetadata, KubeMetrics, KubeObjectInterface } from './cluster';
@@ -334,12 +339,19 @@ export async function clusterRequest(
     isJSON = true,
     ...otherParams
   } = params;
+
+  const userID = getUserIdFromLocalStorage();
   const opts: { headers: RequestHeaders } = Object.assign({ headers: {} }, otherParams);
   const cluster = paramsCluster || '';
 
   let fullPath = path;
   if (cluster) {
     const token = getToken(cluster);
+    const matchingKubeconfig = findKubeconfigByClusterName(cluster);
+    if (matchingKubeconfig !== null) {
+      opts.headers['KUBECONFIG'] = matchingKubeconfig;
+      opts.headers['X-HEADLAMP-USER-ID'] = userID;
+    }
 
     // Refresh service account token only if the cluster auth type is not OIDC
     if (getClusterAuthType(cluster) !== 'oidc') {
@@ -1344,6 +1356,7 @@ function connectStreamWithParams(
   let isClosing = false;
 
   const token = getToken(cluster || '');
+  const userID = getUserIdFromLocalStorage();
 
   const protocols = ['base64.binary.k8s.io', ...additionalProtocols];
   if (token) {
@@ -1352,11 +1365,19 @@ function connectStreamWithParams(
   }
 
   let fullPath = path;
+  let url = '';
   if (cluster) {
     fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
+    // Include the userID as a query parameter if it's a stateless cluster
+    const matchingKubeconfig = findKubeconfigByClusterName(cluster);
+    if (matchingKubeconfig !== null) {
+      const queryParams = `X-HEADLAMP-USER-ID=${userID}`;
+      url = combinePath(BASE_WS_URL, fullPath) + (fullPath.includes('?') ? '&' : '?') + queryParams;
+    } else {
+      url = combinePath(BASE_WS_URL, fullPath);
+    }
   }
 
-  const url = combinePath(BASE_WS_URL, fullPath);
   let socket: WebSocket | null = null;
   try {
     socket = new WebSocket(url, protocols);
@@ -1547,12 +1568,22 @@ export async function testClusterHealth(cluster?: string) {
 }
 
 export async function setCluster(clusterReq: ClusterRequest) {
+  const kubeconfig = clusterReq.kubeconfig;
+
+  if (kubeconfig) {
+    storeStatelessClusterKubeconfig(kubeconfig);
+    return;
+  }
+
   return request(
     '/cluster',
     {
       method: 'POST',
       body: JSON.stringify(clusterReq),
-      headers: { ...JSON_HEADERS, ...getHeadlampAPIHeaders() },
+      headers: {
+        ...JSON_HEADERS,
+        ...getHeadlampAPIHeaders(),
+      },
     },
     false,
     false

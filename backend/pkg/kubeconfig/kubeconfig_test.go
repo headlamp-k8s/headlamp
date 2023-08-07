@@ -2,8 +2,10 @@ package kubeconfig_test
 
 import (
 	"context"
+	"encoding/base64"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"github.com/headlamp-k8s/headlamp/backend/pkg/config"
@@ -91,4 +93,30 @@ func TestContext(t *testing.T) {
 	t.Logf("Proxy request Response: %s", rr.Body.String())
 	assert.Contains(t, rr.Body.String(), "major")
 	assert.Contains(t, rr.Body.String(), "minor")
+}
+
+func TestLoadContextsFromBase64String(t *testing.T) {
+	t.Run("valid_base64", func(t *testing.T) {
+		// Read the content of the kubeconfig file
+		kubeConfigFile := config.GetDefaultKubeConfigPath()
+		kubeConfigContent, err := os.ReadFile(kubeConfigFile)
+		require.NoError(t, err)
+
+		// Encode the content using base64 encoding
+		base64String := base64.StdEncoding.EncodeToString(kubeConfigContent)
+
+		contexts, err := kubeconfig.LoadContextsFromBase64String(base64String, kubeconfig.DynamicCluster)
+		require.NoError(t, err)
+
+		require.Equal(t, 1, len(contexts))
+		assert.Equal(t, kubeconfig.DynamicCluster, contexts[0].Source)
+	})
+
+	t.Run("invalid_base64", func(t *testing.T) {
+		invalidBase64String := "invalid_base64"
+		source := 2
+
+		_, err := kubeconfig.LoadContextsFromBase64String(invalidBase64String, source)
+		require.Error(t, err)
+	})
 }

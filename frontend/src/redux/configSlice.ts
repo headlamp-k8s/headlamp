@@ -10,6 +10,22 @@ export interface ConfigState {
     [clusterName: string]: Cluster;
   } | null;
   /**
+   * Stateless Clusters is a map of cluster names to cluster objects.
+   * Null indicates that the clusters have not been loaded yet.
+   */
+  statelessClusters: {
+    [clusterName: string]: Cluster;
+  } | null;
+
+  /**
+   * All Clusters is a map of cluster names to cluster objects.
+   * They are comination of clusters and statelessClusters.
+   * Null indicates that the clusters have not been loaded yet.
+   */
+  allClusters: {
+    [clusterName: string]: Cluster;
+  } | null;
+  /**
    * Settings is a map of settings names to settings values.
    */
   settings: {
@@ -35,6 +51,8 @@ const storedSettings = JSON.parse(localStorage.getItem('settings') || '{}');
 
 export const initialState: ConfigState = {
   clusters: null,
+  statelessClusters: null,
+  allClusters: null,
   settings: {
     tableRowsPerPageOptions:
       storedSettings.tableRowsPerPageOptions || defaultTableRowsPerPageOptions,
@@ -55,6 +73,17 @@ const configSlice = createSlice({
       state.clusters = action.payload.clusters;
     },
     /**
+     * Save the config. To both the store, and localStorage.
+     * @param state - The current state.
+     * @param action - The payload action containing the config.
+     */
+    setStatelessConfig(
+      state,
+      action: PayloadAction<{ statelessClusters: ConfigState['statelessClusters'] }>
+    ) {
+      state.statelessClusters = action.payload.statelessClusters;
+    },
+    /**
      * Save the settings. To both the store, and localStorage.
      * @param state - The current state.
      * @param action - The payload action containing the settings.
@@ -68,6 +97,6 @@ const configSlice = createSlice({
   },
 });
 
-export const { setConfig, setAppSettings } = configSlice.actions;
+export const { setConfig, setAppSettings, setStatelessConfig } = configSlice.actions;
 
 export default configSlice.reducer;
