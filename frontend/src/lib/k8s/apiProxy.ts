@@ -10,7 +10,7 @@
 import { OpPatch } from 'json-patch';
 import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
-import helpers, { getHeadlampAPIHeaders, isDebugVerbose } from '../../helpers';
+import helpers, { getHeadlampAPIHeaders, getSessionId, isDebugVerbose } from '../../helpers';
 import store from '../../redux/stores/store';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
@@ -1375,7 +1375,7 @@ export async function setCluster(clusterReq: ClusterRequest) {
     {
       method: 'POST',
       body: JSON.stringify(clusterReq),
-      headers: { ...JSON_HEADERS, ...getHeadlampAPIHeaders() },
+      headers: { ...JSON_HEADERS, ...getSessionId(), ...getHeadlampAPIHeaders() },
     },
     false,
     false

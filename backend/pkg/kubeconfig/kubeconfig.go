@@ -41,6 +41,7 @@ type Context struct {
 	Source      int                    `json:"source"`
 	OidcConf    *OidcConfig            `json:"oidcConfig"`
 	proxy       *httputil.ReverseProxy `json:"-"`
+	SessionID   string                 `json:"string"`
 }
 
 type OidcConfig struct {

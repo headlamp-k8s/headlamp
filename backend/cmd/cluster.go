@@ -5,10 +5,11 @@ import (
 )
 
 type Cluster struct {
-	Name     string                 `json:"name"`
-	Server   string                 `json:"server,omitempty"`
-	AuthType string                 `json:"auth_type"`
-	Metadata map[string]interface{} `json:"meta_data"`
+	Name      string                 `json:"name"`
+	Server    string                 `json:"server,omitempty"`
+	AuthType  string                 `json:"auth_type"`
+	Metadata  map[string]interface{} `json:"meta_data"`
+	SessionID string                 `json:"session_id"`
 }
 
 type ClusterReq struct {

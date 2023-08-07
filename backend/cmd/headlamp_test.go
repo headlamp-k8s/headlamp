@@ -248,6 +248,7 @@ func TestDynamicClusters(t *testing.T) {
 
 				// Verify if the created cluster matches what we asked to be created
 				if r.Code == http.StatusCreated {
+					// TODO: update test
 					configuredClusters := c.getClusters()
 					var cluster *Cluster
 
@@ -287,7 +288,7 @@ func TestDynamicClusters(t *testing.T) {
 
 				assert.Equal(t, len(clusterConfig.Clusters), len(config.Clusters))
 			}
-
+			// TODO: update test
 			assert.Equal(t, tc.expectedNumClusters, len(c.getClusters()))
 		})
 	}
@@ -319,6 +320,7 @@ func TestDynamicClustersKubeConfig(t *testing.T) {
 	}
 
 	assert.Equal(t, http.StatusCreated, r.Code)
+	// TODO: update test
 	assert.Equal(t, 2, len(c.getClusters()))
 }
 

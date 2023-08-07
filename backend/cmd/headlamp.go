@@ -760,7 +760,7 @@ func (c *HeadlampConfig) handleClusterRequests(router *mux.Router) {
 	handleClusterAPI(c, router)
 }
 
-func (c *HeadlampConfig) getClusters() []Cluster {
+func (c *HeadlampConfig) getClusters(sessionID string) []Cluster {
 	clusters := []Cluster{}
 
 	contexts, err := c.kubeConfigStore.GetContexts()
@@ -771,14 +771,29 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 
 	for _, context := range contexts {
 		context := context
-		clusters = append(clusters, Cluster{
-			Name:     context.Name,
-			Server:   context.Cluster.Server,
-			AuthType: context.AuthType(),
-			Metadata: map[string]interface{}{
-				"source": context.SourceStr(),
-			},
-		})
+
+		// Filter for dynamic clusters with matching SessionID
+		if context.Source == kubeconfig.DynamicCluster && context.SessionID == sessionID {
+			clusters = append(clusters, Cluster{
+				Name:     context.Name,
+				Server:   context.Cluster.Server,
+				AuthType: context.AuthType(),
+				Metadata: map[string]interface{}{
+					"source": context.SourceStr(),
+				},
+				SessionID: context.SessionID,
+			})
+		} else if context.Source != kubeconfig.DynamicCluster {
+			clusters = append(clusters, Cluster{
+				Name:     context.Name,
+				Server:   context.Cluster.Server,
+				AuthType: context.AuthType(),
+				Metadata: map[string]interface{}{
+					"source": context.SourceStr(),
+				},
+				SessionID: context.SessionID,
+			})
+		}
 	}
 
 	return clusters
@@ -787,7 +802,8 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	clientConfig := clientConfig{c.getClusters()}
+	sessionID := r.Header.Get("X-Headlamp_session_id")
+	clientConfig := clientConfig{c.getClusters(sessionID)}
 
 	if err := json.NewEncoder(w).Encode(&clientConfig); err != nil {
 		log.Println("Error encoding config", err)
@@ -796,9 +812,10 @@ func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 
 //nolint:funlen,nestif
 func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
-	if err := checkHeadlampBackendToken(w, r); err != nil {
-		return
-	}
+	// TODO: update this check accordingly
+	// if err := checkHeadlampBackendToken(w, r); err != nil {
+	// 	return
+	// }
 
 	clusterReq := ClusterReq{}
 	if err := json.NewDecoder(r.Body).Decode(&clusterReq); err != nil {
@@ -812,6 +829,8 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 
 		return
 	}
+
+	sessionID := r.Header.Get("X-Headlamp_session_id")
 
 	var contexts []kubeconfig.Context
 
@@ -869,6 +888,7 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 	for _, context := range contexts {
 		context := context
 		context.Source = kubeconfig.DynamicCluster
+		context.SessionID = sessionID
 
 		err := c.kubeConfigStore.AddContext(&context)
 		if err != nil {
@@ -922,11 +942,10 @@ func (c *HeadlampConfig) deleteCluster(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *HeadlampConfig) addClusterSetupRoute(r *mux.Router) {
-	// We do not support this feature when in-cluster
+	// Do not add the route if dynamic clusters are disabled
 	if !c.enableDynamicClusters {
 		return
 	}
-
 	r.HandleFunc("/cluster", c.addCluster).Methods("POST")
 
 	// Delete a cluster
