@@ -118,10 +118,10 @@ Show a component at the bottom of different details views.
 ### Dynamic Clusters
 
 Set a cluster dynamically, rather than have the backend read it from configuration files.
-[Headlamp.setCluster](../api/classes/plugin_lib.Headlamp/#setcluster).
+[Headlamp.setCluster](../api/classes/plugin_lib.Headlamp.md#setcluster).
 
 - Example plugin shows [How To Dynamically Set a Cluster](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/dynamic-clusters)
-- API reference for [Headlamp.setCluster](../api/classes/plugin_lib.Headlamp/#setcluster)
+- API reference for [Headlamp.setCluster](../api/classes/plugin_lib.Headlamp.md#setcluster)
 
 ### Route
 
