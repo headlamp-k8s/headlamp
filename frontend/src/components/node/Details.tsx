@@ -164,7 +164,7 @@ export default function NodeDetails() {
 
           return [
             {
-              id: 'headlamp-node-togglecordon',
+              id: 'headlamp.node-togglecordon',
               action: (
                 <AuthVisible item={item} authVerb="update">
                   <ActionButton
@@ -179,7 +179,7 @@ export default function NodeDetails() {
               ),
             },
             {
-              id: 'headlamp-node-togglecordon',
+              id: 'headlamp.node-togglecordon',
               action: (
                 <AuthVisible item={item} authVerb="delete">
                   <ActionButton

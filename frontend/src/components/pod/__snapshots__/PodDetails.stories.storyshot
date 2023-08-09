@@ -402,6 +402,14 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -650,6 +658,14 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -786,6 +802,27 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -1332,6 +1369,14 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -1588,6 +1633,14 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -1845,6 +1898,27 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -2398,6 +2472,14 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -2648,6 +2730,14 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -2874,6 +2964,27 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -3420,6 +3531,14 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -3670,6 +3789,14 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -3784,6 +3911,27 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -4330,6 +4478,14 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -4568,6 +4724,14 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -4725,6 +4889,27 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -5271,6 +5456,14 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -5524,6 +5717,14 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -5660,6 +5861,27 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"

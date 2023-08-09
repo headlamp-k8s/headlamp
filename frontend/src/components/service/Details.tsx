@@ -50,59 +50,67 @@ export default function ServiceDetails() {
           },
         ]
       }
-      sectionsFunc={item =>
-        item && (
-          <>
-            <SectionBox title={t('Ports')}>
-              <SimpleTable
-                data={item.spec.ports}
-                columns={[
-                  {
-                    label: t('Protocol'),
-                    datum: 'protocol',
-                  },
-                  {
-                    label: t('frequent|Name'),
-                    datum: 'name',
-                  },
-                  {
-                    label: t('Ports'),
-                    getter: ({ port, targetPort }) => (
-                      <React.Fragment>
-                        <ValueLabel>{port}</ValueLabel>
-                        <InlineIcon icon="mdi:chevron-right" />
-                        <ValueLabel>{targetPort}</ValueLabel>
-                        <PortForward containerPort={targetPort} resource={item} />
-                      </React.Fragment>
-                    ),
-                  },
-                ]}
-                reflectInURL="ports"
-              />
-            </SectionBox>
-            <SectionBox title={t('Endpoints')}>
-              {endpointsError ? (
-                <Empty color="error">{endpointsError}</Empty>
-              ) : (
+      extraSections={item =>
+        item && [
+          {
+            id: 'headlamp.service-ports',
+            section: (
+              <SectionBox title={t('Ports')}>
                 <SimpleTable
-                  data={getOwnedEndpoints(item)}
+                  data={item.spec.ports}
                   columns={[
                     {
-                      label: t('frequent|Name'),
-                      getter: endpoint => <Link kubeObject={endpoint} />,
+                      label: t('Protocol'),
+                      datum: 'protocol',
                     },
                     {
-                      label: t('frequent|Addresses'),
-                      getter: endpoint => endpoint.getAddressesText(),
-                      cellProps: { style: { width: '40%', maxWidth: '40%' } },
+                      label: t('frequent|Name'),
+                      datum: 'name',
+                    },
+                    {
+                      label: t('Ports'),
+                      getter: ({ port, targetPort }) => (
+                        <React.Fragment>
+                          <ValueLabel>{port}</ValueLabel>
+                          <InlineIcon icon="mdi:chevron-right" />
+                          <ValueLabel>{targetPort}</ValueLabel>
+                          <PortForward containerPort={targetPort} resource={item} />
+                        </React.Fragment>
+                      ),
                     },
                   ]}
-                  reflectInURL="endpoints"
+                  reflectInURL="ports"
                 />
-              )}
-            </SectionBox>
-          </>
-        )
+              </SectionBox>
+            ),
+          },
+          {
+            id: 'headlamp.service-endpoints',
+            section: (
+              <SectionBox title={t('Endpoints')}>
+                {endpointsError ? (
+                  <Empty color="error">{endpointsError}</Empty>
+                ) : (
+                  <SimpleTable
+                    data={getOwnedEndpoints(item)}
+                    columns={[
+                      {
+                        label: t('frequent|Name'),
+                        getter: endpoint => <Link kubeObject={endpoint} />,
+                      },
+                      {
+                        label: t('frequent|Addresses'),
+                        getter: endpoint => endpoint.getAddressesText(),
+                        cellProps: { style: { width: '40%', maxWidth: '40%' } },
+                      },
+                    ]}
+                    reflectInURL="endpoints"
+                  />
+                )}
+              </SectionBox>
+            ),
+          },
+        ]
       }
     />
   );

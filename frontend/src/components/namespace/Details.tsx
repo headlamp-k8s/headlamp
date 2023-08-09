@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import Namespace from '../../lib/k8s/namespace';
@@ -28,14 +27,21 @@ export default function NamespaceDetails() {
           },
         ]
       }
-      sectionsFunc={item =>
-        item && (
-          <>
-            {item.status?.conditions && <ConditionsSection resource={item} />}
-            <OwnedPodsSection hideColumns={['namespace']} resource={item?.jsonData} />
-            <DetailsViewSection resource={item} />
-          </>
-        )
+      extraSections={item =>
+        item && [
+          {
+            id: 'headlamp.namespace-conditions',
+            section: item?.status?.conditions && <ConditionsSection resource={item} />,
+          },
+          {
+            id: 'headlamp.namespace-owned-pods',
+            section: <OwnedPodsSection hideColumns={['namespace']} resource={item?.jsonData} />,
+          },
+          {
+            id: 'headlamp.namespace-details-view',
+            section: <DetailsViewSection resource={item} />,
+          },
+        ]
       }
     />
   );

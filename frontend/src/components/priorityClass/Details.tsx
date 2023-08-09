@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import PriorityClass from '../../lib/k8s/priorityClass';
-import { DetailsGrid, ObjectEventList } from '../common';
+import { DetailsGrid } from '../common';
 
 export default function PriorityClassDetails() {
   const { t } = useTranslation(['frequent', 'priorityClasses']);
@@ -11,6 +11,7 @@ export default function PriorityClassDetails() {
     <DetailsGrid
       resourceType={PriorityClass}
       name={name}
+      withEvents
       extraInfo={item =>
         item && [
           {
@@ -31,7 +32,6 @@ export default function PriorityClassDetails() {
           },
         ]
       }
-      sectionsFunc={item => item && <ObjectEventList object={item} />}
     />
   );
 }

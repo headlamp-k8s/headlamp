@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import PDB from '../../lib/k8s/podDisruptionBudget';
-import { DetailsGrid, ObjectEventList, StatusLabel } from '../common';
+import { DetailsGrid, StatusLabel } from '../common';
 
 export default function PDBDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
@@ -26,6 +26,7 @@ export default function PDBDetails() {
       resourceType={PDB}
       name={name}
       namespace={namespace}
+      withEvents
       extraInfo={item =>
         item && [
           {
@@ -65,7 +66,6 @@ export default function PDBDetails() {
           },
         ]
       }
-      sectionsFunc={item => item && <ObjectEventList object={item} />}
     />
   );
 }

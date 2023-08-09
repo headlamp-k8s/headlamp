@@ -989,6 +989,13 @@ exports[`Storyshots Namespace/DetailsView Active 1`] = `
     >
       <div
         class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
       >
         <div
           class="MuiBox-root MuiBox-root"

@@ -431,6 +431,14 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -669,6 +677,14 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -826,6 +842,27 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"

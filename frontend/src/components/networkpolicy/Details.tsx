@@ -174,13 +174,17 @@ export function NetworkPolicyDetails() {
           },
         ]
       }
-      sectionsFunc={item =>
-        !!item && (
-          <>
-            <Ingress ingress={item.jsonData.spec.ingress} />
-            <Egress egress={item.jsonData.spec.egress} />
-          </>
-        )
+      extraSections={item =>
+        item && [
+          {
+            id: 'networkpolicy-ingress',
+            section: <Ingress ingress={item.jsonData.spec.ingress} />,
+          },
+          {
+            id: 'networkpolicy-egress',
+            section: <Egress egress={item.jsonData.spec.egress} />,
+          },
+        ]
       }
     />
   );

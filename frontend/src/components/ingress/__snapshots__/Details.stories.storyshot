@@ -35,49 +35,65 @@ exports[`Storyshots Ingress/DetailsView With Resource 1`] = `
             class="MuiTouchRipple-root"
           />
         </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Ingress
+              </h1>
+              <div
+                class="MuiBox-root MuiBox-root"
+              />
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
-          <div
-            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiBox-root MuiBox-root"
-              >
-                <h1
-                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
-                >
-                  Ingress
-                </h1>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                />
-              </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-              </div>
-            </div>
-          </div>
           <div
             aria-busy="false"
             aria-live="polite"
@@ -298,13 +314,6 @@ exports[`Storyshots Ingress/DetailsView With Resource 1`] = `
     >
       <div
         class="MuiBox-root MuiBox-root"
-      />
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
-    >
-      <div
-        class="MuiBox-root MuiBox-root"
       >
         <div
           class="MuiBox-root MuiBox-root"
@@ -484,49 +493,65 @@ exports[`Storyshots Ingress/DetailsView With TLS 1`] = `
             class="MuiTouchRipple-root"
           />
         </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Ingress
+              </h1>
+              <div
+                class="MuiBox-root MuiBox-root"
+              />
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
-          <div
-            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiBox-root MuiBox-root"
-              >
-                <h1
-                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
-                >
-                  Ingress
-                </h1>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                />
-              </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-              </div>
-            </div>
-          </div>
           <div
             aria-busy="false"
             aria-live="polite"
@@ -766,13 +791,6 @@ exports[`Storyshots Ingress/DetailsView With TLS 1`] = `
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
-    >
-      <div
-        class="MuiBox-root MuiBox-root"
-      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { KubeObject, Workload } from '../../lib/k8s/cluster';
@@ -9,7 +8,6 @@ import {
   MetadataDictGrid,
   OwnedPodsSection,
 } from '../common/Resource';
-import DetailsViewSection from '../DetailsViewSection';
 
 interface WorkloadDetailsProps {
   workloadKind: KubeObject;
@@ -105,18 +103,22 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
           },
         ]
       }
-      sectionsFunc={item => (
-        <>
-          <ConditionsSection resource={item?.jsonData} />
-          {item && (
-            <>
-              <OwnedPodsSection resource={item?.jsonData} />
-              <ContainersSection resource={item?.jsonData} />
-            </>
-          )}
-          <DetailsViewSection resource={item} />
-        </>
-      )}
+      extraSections={item =>
+        item && [
+          {
+            id: 'headlamp.workload-conditions',
+            section: <ConditionsSection resource={item?.jsonData} />,
+          },
+          {
+            id: 'headlamp.workload-owned-pods',
+            section: <OwnedPodsSection resource={item?.jsonData} />,
+          },
+          {
+            id: 'headlamp.workload-containers',
+            section: <ContainersSection resource={item?.jsonData} />,
+          },
+        ]
+      }
     />
   );
 }
