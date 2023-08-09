@@ -77,12 +77,12 @@ Change the logo (at the top left) with
 ### App Menus
 
 Add menus when Headlamp is running as an app.
-[Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp/#setappmenu)
+[Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp.md/#setappmenu)
 
 ![screenshot of the logo being changed](./images/app-menus.png)
 
 - Example plugin shows [How To Add App Menus](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/app-menus)
-- API reference for [Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp/#setappmenu)
+- API reference for [Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp.md/#setappmenu)
 
 ### Cluster Chooser
 
@@ -118,10 +118,10 @@ Show a component at the bottom of different details views.
 ### Dynamic Clusters
 
 Set a cluster dynamically, rather than have the backend read it from configuration files.
-[Headlamp.setCluster](../api/classes/plugin_lib.Headlamp/#setcluster).
+[Headlamp.setCluster](../api/classes/plugin_lib.Headlamp.md#setcluster).
 
 - Example plugin shows [How To Dynamically Set a Cluster](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/dynamic-clusters)
-- API reference for [Headlamp.setCluster](../api/classes/plugin_lib.Headlamp/#setcluster)
+- API reference for [Headlamp.setCluster](../api/classes/plugin_lib.Headlamp.md#setcluster)
 
 ### Route
 
