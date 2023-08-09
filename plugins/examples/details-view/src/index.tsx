@@ -1,9 +1,11 @@
 import {
+  DefaultDetailsViewSection,
   DetailsViewDefaultHeaderActions,
   DetailsViewSectionProps,
   registerDetailsViewHeaderAction,
   registerDetailsViewHeaderActionsProcessor,
   registerDetailsViewSection,
+  registerDetailsViewSectionsProcessor,
 } from '@kinvolk/headlamp-plugin/lib';
 import { ActionButton, SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
 
@@ -30,6 +32,39 @@ registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
     );
   }
   return null;
+});
+
+registerDetailsViewSectionsProcessor(function addSubheaderSection(resource, sections) {
+  // Ignore if there is no resource.
+  if (!resource) {
+    return sections;
+  }
+
+  // Check if we already have added our custom section (this function may be called multiple times).
+  const customSectionId = 'my-custom-section';
+  if (sections.findIndex(section => section.id === customSectionId) !== -1) {
+    return sections;
+  }
+
+  const detailsHeaderIdx = sections.findIndex(
+    section => section.id === DefaultDetailsViewSection.MAIN_HEADER
+  );
+  // There is no header, so we do nothing.
+  if (detailsHeaderIdx === -1) {
+    return sections;
+  }
+
+  // We place our custom section after the header.
+  sections.splice(detailsHeaderIdx + 1, 0, {
+    id: 'my-custom-section',
+    section: (
+      <SectionBox title={`${resource.kind}: ${resource.getName()}`}>
+        A custom very fine section title
+      </SectionBox>
+    ),
+  });
+
+  return sections;
 });
 
 // We can replace action buttons with our own custom ones.
