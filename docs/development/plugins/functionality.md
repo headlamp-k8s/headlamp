@@ -77,12 +77,12 @@ Change the logo (at the top left) with
 ### App Menus
 
 Add menus when Headlamp is running as an app.
-[Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp/#setappmenu)
+[Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp.md/#setappmenu)
 
 ![screenshot of the logo being changed](./images/app-menus.png)
 
 - Example plugin shows [How To Add App Menus](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/app-menus)
-- API reference for [Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp/#setappmenu)
+- API reference for [Headlamp.setAppMenu](../api/classes/plugin_lib.Headlamp.md/#setappmenu)
 
 ### Cluster Chooser
 
