@@ -156,7 +156,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:109](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L109)
+[lib/k8s/index.ts:126](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/index.ts#L126)
 
 ## Variables
 
@@ -170,13 +170,19 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:80](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L80)
+[lib/k8s/index.ts:86](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/index.ts#L86)
 
 ## Functions
 
 ### getVersion
 
-▸ **getVersion**(): `Promise`<[`StringDict`](../interfaces/lib_k8s_cluster.StringDict.md)\>
+▸ **getVersion**(`clusterName?`): `Promise`<[`StringDict`](../interfaces/lib_k8s_cluster.StringDict.md)\>
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `clusterName` | `string` | `''` |
 
 #### Returns
 
@@ -184,7 +190,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:105](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L105)
+[lib/k8s/index.ts:122](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/index.ts#L122)
 
 ___
 
@@ -209,13 +215,13 @@ See [Label selector examples](https://kubernetes.io/docs/concepts/overview/worki
 
 #### Defined in
 
-[lib/k8s/index.ts:139](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L139)
+[lib/k8s/index.ts:156](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/index.ts#L156)
 
 ___
 
 ### matchExpressionSimplifier
 
-▸ **matchExpressionSimplifier**(`matchExpressions`): `string`[] \| ``""``
+▸ **matchExpressionSimplifier**(`matchExpressions`): ``""`` \| `string`[]
 
 #### Parameters
 
@@ -225,17 +231,17 @@ ___
 
 #### Returns
 
-`string`[] \| ``""``
+``""`` \| `string`[]
 
 #### Defined in
 
-[lib/k8s/index.ts:174](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L174)
+[lib/k8s/index.ts:191](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/index.ts#L191)
 
 ___
 
 ### matchLabelsSimplifier
 
-▸ **matchLabelsSimplifier**(`matchLabels`, `isEqualSeperator?`): `string`[] \| ``""``
+▸ **matchLabelsSimplifier**(`matchLabels`, `isEqualSeperator?`): ``""`` \| `string`[]
 
 #### Parameters
 
@@ -246,11 +252,11 @@ ___
 
 #### Returns
 
-`string`[] \| ``""``
+``""`` \| `string`[]
 
 #### Defined in
 
-[lib/k8s/index.ts:154](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L154)
+[lib/k8s/index.ts:171](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/index.ts#L171)
 
 ___
 
@@ -264,7 +270,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:88](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L88)
+[lib/k8s/index.ts:94](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/index.ts#L94)
 
 ___
 
@@ -278,7 +284,31 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:83](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L83)
+[lib/k8s/index.ts:89](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/index.ts#L89)
+
+___
+
+### useClustersVersion
+
+▸ **useClustersVersion**(`clusters`): readonly [{ `[cluster: string]`: [`StringDict`](../interfaces/lib_k8s_cluster.StringDict.md);  }, { `[cluster: string]`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md) \| ``null``;  }]
+
+Hook to get the version of the clusters given by the parameter.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `clusters` | [`Cluster`](../interfaces/lib_k8s_cluster.Cluster.md)[] |
+
+#### Returns
+
+readonly [{ `[cluster: string]`: [`StringDict`](../interfaces/lib_k8s_cluster.StringDict.md);  }, { `[cluster: string]`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md) \| ``null``;  }]
+
+a map with cluster -> version-info, and a map with cluster -> error.
+
+#### Defined in
+
+[lib/k8s/index.ts:266](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/index.ts#L266)
 
 ___
 
@@ -298,4 +328,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:111](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/index.ts#L111)
+[lib/k8s/index.ts:128](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/index.ts#L128)

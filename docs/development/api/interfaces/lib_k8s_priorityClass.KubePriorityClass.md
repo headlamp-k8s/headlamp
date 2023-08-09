@@ -1,16 +1,16 @@
 ---
-title: "Interface: KubePersistentVolume"
-linkTitle: "KubePersistentVolume"
-slug: "lib_k8s_persistentVolume.KubePersistentVolume"
+title: "Interface: KubePriorityClass"
+linkTitle: "KubePriorityClass"
+slug: "lib_k8s_priorityClass.KubePriorityClass"
 ---
 
-[lib/k8s/persistentVolume](../modules/lib_k8s_persistentVolume.md).KubePersistentVolume
+[lib/k8s/priorityClass](../modules/lib_k8s_priorityClass.md).KubePriorityClass
 
 ## Hierarchy
 
 - [`KubeObjectInterface`](lib_k8s_cluster.KubeObjectInterface.md)
 
-  ↳ **`KubePersistentVolume`**
+  ↳ **`KubePriorityClass`**
 
 ## Properties
 
@@ -25,6 +25,26 @@ slug: "lib_k8s_persistentVolume.KubePersistentVolume"
 #### Defined in
 
 [lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L37)
+
+___
+
+### description
+
+• **description**: `string`
+
+#### Defined in
+
+[lib/k8s/priorityClass.ts:8](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/priorityClass.ts#L8)
+
+___
+
+### globalDefault
+
+• `Optional` **globalDefault**: `boolean`
+
+#### Defined in
+
+[lib/k8s/priorityClass.ts:7](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/priorityClass.ts#L7)
 
 ___
 
@@ -56,39 +76,20 @@ ___
 
 ___
 
-### spec
+### preemptionPolicy
 
-• **spec**: `Object`
-
-#### Index signature
-
-▪ [other: `string`]: `any`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `capacity` | { `storage`: `string`  } |
-| `capacity.storage` | `string` |
+• **preemptionPolicy**: `string`
 
 #### Defined in
 
-[lib/k8s/persistentVolume.ts:5](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/persistentVolume.ts#L5)
+[lib/k8s/priorityClass.ts:6](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/priorityClass.ts#L6)
 
 ___
 
-### status
+### value
 
-• **status**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `message` | `string` |
-| `phase` | `string` |
-| `reason` | `string` |
+• **value**: `number`
 
 #### Defined in
 
-[lib/k8s/persistentVolume.ts:11](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/persistentVolume.ts#L11)
+[lib/k8s/priorityClass.ts:5](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/priorityClass.ts#L5)

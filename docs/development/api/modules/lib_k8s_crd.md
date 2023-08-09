@@ -31,4 +31,4 @@ slug: "lib_k8s_crd"
 
 #### Defined in
 
-[lib/k8s/crd.ts:56](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/crd.ts#L56)
+[lib/k8s/crd.ts:56](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/crd.ts#L56)

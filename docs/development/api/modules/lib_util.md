@@ -22,7 +22,7 @@ slug: "lib_util"
 
 #### Defined in
 
-[lib/util.ts:32](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L32)
+[lib/util.ts:32](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L32)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:30](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L30)
+[lib/util.ts:30](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L30)
 
 ## Variables
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:28](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L28)
+[lib/util.ts:28](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L28)
 
 ## Functions
 
@@ -63,7 +63,38 @@ ___
 
 #### Defined in
 
-[lib/util.ts:356](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L356)
+[lib/util.ts:407](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L407)
+
+___
+
+### filterGeneric
+
+▸ **filterGeneric**<`T`\>(`item`, `filter`, `matchCriteria?`): `boolean`
+
+Filters a generic item based on the filter state.
+The item is considered to match if any of the matchCriteria (described as JSONPath) matches the filter.search contents. Case matching is insensitive.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Object` = { `[key: string]`: `any`;  } |
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `item` | `T` | The item to filter. |
+| `filter` | [`FilterState`](../interfaces/lib_util.FilterState.md) | The filter state. |
+| `matchCriteria?` | `string`[] | The JSONPath criteria to match. |
+
+#### Returns
+
+`boolean`
+
+#### Defined in
+
+[lib/util.ts:195](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L195)
 
 ___
 
@@ -85,7 +116,32 @@ ___
 
 #### Defined in
 
-[lib/util.ts:142](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L142)
+[lib/util.ts:152](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L152)
+
+___
+
+### formatDuration
+
+▸ **formatDuration**(`duration`, `options?`): `string`
+
+Format a duration in milliseconds to a human-readable string.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `duration` | `number` | The duration in milliseconds. |
+| `options` | [`TimeAgoOptions`](../interfaces/lib_util.TimeAgoOptions.md) | `format` takes "brief" or "mini". "brief" rounds the date and uses the largest suitable unit (e.g. "4 weeks"). "mini" uses something like "4w" (for 4 weeks). |
+
+#### Returns
+
+`string`
+
+The formatted duration.
+
+#### Defined in
+
+[lib/util.ts:64](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L64)
 
 ___
 
@@ -99,7 +155,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:211](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L211)
+[lib/util.ts:262](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L262)
 
 ___
 
@@ -119,7 +175,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:203](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L203)
+[lib/util.ts:254](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L254)
 
 ___
 
@@ -140,7 +196,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:91](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L91)
+[lib/util.ts:101](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L101)
 
 ___
 
@@ -160,7 +216,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:100](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L100)
+[lib/util.ts:110](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L110)
 
 ___
 
@@ -182,7 +238,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:118](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L118)
+[lib/util.ts:128](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L128)
 
 ___
 
@@ -203,7 +259,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:108](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L108)
+[lib/util.ts:118](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L118)
 
 ___
 
@@ -223,7 +279,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:104](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L104)
+[lib/util.ts:114](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L114)
 
 ___
 
@@ -243,7 +299,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:74](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L74)
+[lib/util.ts:84](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L84)
 
 ___
 
@@ -264,7 +320,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:365](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L365)
+[lib/util.ts:416](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L416)
 
 ___
 
@@ -289,7 +345,7 @@ The formatted date.
 
 #### Defined in
 
-[lib/util.ts:45](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L45)
+[lib/util.ts:45](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L45)
 
 ___
 
@@ -309,13 +365,19 @@ ___
 
 #### Defined in
 
-[lib/util.ts:223](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L223)
+[lib/util.ts:274](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L274)
 
 ___
 
 ### useFilterFunc
 
-▸ **useFilterFunc**(`matchCriteria?`): (`item`: [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) \| [`KubeEvent`](../interfaces/lib_k8s_event.KubeEvent.md)) => `boolean`
+▸ **useFilterFunc**<`T`\>(`matchCriteria?`): (`item`: `T`) => `boolean`
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) \| [`KubeEvent`](../interfaces/lib_k8s_event.KubeEvent.md) \| { `[key: string]`: `any`;  } = [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) \| [`KubeEvent`](../interfaces/lib_k8s_event.KubeEvent.md) |
 
 #### Parameters
 
@@ -333,7 +395,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `item` | [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) \| [`KubeEvent`](../interfaces/lib_k8s_event.KubeEvent.md) |
+| `item` | `T` |
 
 ##### Returns
 
@@ -341,7 +403,30 @@ ___
 
 #### Defined in
 
-[lib/util.ts:198](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L198)
+[lib/util.ts:239](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L239)
+
+___
+
+### useId
+
+▸ **useId**(`prefix?`): `undefined` \| `string`
+
+Creates a unique ID, with the given prefix.
+If UNDER_TEST is set to true, it will return the same ID every time, so snapshots do not get invalidated.
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `prefix` | `string` | `''` |
+
+#### Returns
+
+`undefined` \| `string`
+
+#### Defined in
+
+[lib/util.ts:495](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L495)
 
 ___
 
@@ -364,7 +449,7 @@ A hook to manage a state variable that is also stored in the URL.
 
 #### Defined in
 
-[lib/util.ts:248](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L248)
+[lib/util.ts:299](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L299)
 
 ▸ **useURLState**(`key`, `valueOrParams`): [`number`, `React.Dispatch`<`React.SetStateAction`<`number`\>\>]
 
@@ -383,4 +468,4 @@ A hook to manage a state variable that is also stored in the URL.
 
 #### Defined in
 
-[lib/util.ts:252](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/util.ts#L252)
+[lib/util.ts:303](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L303)

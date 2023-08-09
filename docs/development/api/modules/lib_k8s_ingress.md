@@ -10,4 +10,5 @@ slug: "lib_k8s_ingress"
 
 ## Interfaces
 
+- [IngressRule](../interfaces/lib_k8s_ingress.IngressRule.md)
 - [KubeIngress](../interfaces/lib_k8s_ingress.KubeIngress.md)

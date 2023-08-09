@@ -28,9 +28,9 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
 
   ↳ [`KubeJob`](lib_k8s_job.KubeJob.md)
 
-  ↳ [`KubeObject`](lib_k8s_lease.KubeObject.md)
+  ↳ [`KubeLease`](lib_k8s_lease.KubeLease.md)
 
-  ↳ [`KubeObject`](lib_k8s_limitRange.KubeObject.md)
+  ↳ [`KubeLimitRange`](lib_k8s_limitRange.KubeLimitRange.md)
 
   ↳ [`KubeNamespace`](lib_k8s_namespace.KubeNamespace.md)
 
@@ -46,7 +46,7 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
 
   ↳ [`KubePDB`](lib_k8s_podDisruptionBudget.KubePDB.md)
 
-  ↳ [`KubePriorityClasses`](lib_k8s_priorityClasses.KubePriorityClasses.md)
+  ↳ [`KubePriorityClass`](lib_k8s_priorityClass.KubePriorityClass.md)
 
   ↳ [`KubeReplicaSet`](lib_k8s_replicaSet.KubeReplicaSet.md)
 
@@ -56,7 +56,7 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
 
   ↳ [`KubeRoleBinding`](lib_k8s_roleBinding.KubeRoleBinding.md)
 
-  ↳ [`KubeObject`](lib_k8s_runtime.KubeObject.md)
+  ↳ [`KubeRuntimeClass`](lib_k8s_runtime.KubeRuntimeClass.md)
 
   ↳ [`KubeSecret`](lib_k8s_secret.KubeSecret.md)
 
@@ -82,7 +82,7 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L37)
+[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L37)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L36)
+[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L36)
 
 ___
 
@@ -102,4 +102,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L38)
+[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L38)

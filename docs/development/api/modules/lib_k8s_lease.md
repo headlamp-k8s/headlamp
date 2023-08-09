@@ -10,5 +10,5 @@ slug: "lib_k8s_lease"
 
 ## Interfaces
 
-- [KubeObject](../interfaces/lib_k8s_lease.KubeObject.md)
+- [KubeLease](../interfaces/lib_k8s_lease.KubeLease.md)
 - [LeaseSpec](../interfaces/lib_k8s_lease.LeaseSpec.md)

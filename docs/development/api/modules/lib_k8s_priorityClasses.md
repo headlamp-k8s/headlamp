@@ -4,10 +4,24 @@ linkTitle: "lib/k8s/priorityClasses"
 slug: "lib_k8s_priorityClasses"
 ---
 
-## Classes
+## References
 
-- [PriorityClasses](../classes/lib_k8s_priorityClasses.PriorityClasses.md)
+### KubePriorityClass
 
-## Interfaces
+Re-exports [KubePriorityClass](../interfaces/lib_k8s_priorityClass.KubePriorityClass.md)
 
-- [KubePriorityClasses](../interfaces/lib_k8s_priorityClasses.KubePriorityClasses.md)
+___
+
+### default
+
+Renames and re-exports [PriorityClass](../classes/lib_k8s_priorityClass.PriorityClass.md)
+
+## Type aliases
+
+### KubePriorityClasses
+
+Ƭ **KubePriorityClasses**: [`KubePriorityClass`](../interfaces/lib_k8s_priorityClass.KubePriorityClass.md)
+
+#### Defined in
+
+[lib/k8s/priorityClasses.ts:6](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/priorityClasses.ts#L6)

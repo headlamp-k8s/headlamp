@@ -31,6 +31,7 @@ slug: "_index"
 - [lib/k8s/persistentVolumeClaim](modules/lib_k8s_persistentVolumeClaim.md)
 - [lib/k8s/pod](modules/lib_k8s_pod.md)
 - [lib/k8s/podDisruptionBudget](modules/lib_k8s_podDisruptionBudget.md)
+- [lib/k8s/priorityClass](modules/lib_k8s_priorityClass.md)
 - [lib/k8s/priorityClasses](modules/lib_k8s_priorityClasses.md)
 - [lib/k8s/replicaSet](modules/lib_k8s_replicaSet.md)
 - [lib/k8s/resourceQuota](modules/lib_k8s_resourceQuota.md)

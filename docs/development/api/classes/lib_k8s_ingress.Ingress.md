@@ -30,7 +30,7 @@ makeKubeObject<KubeIngress\>('ingress').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L106)
+[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L107)
 
 ## Properties
 
@@ -52,7 +52,7 @@ makeKubeObject<KubeIngress\>('ingress').constructor
 
 #### Defined in
 
-[lib/k8s/ingress.ts:22](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/ingress.ts#L22)
+[lib/k8s/ingress.ts:65](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/ingress.ts#L65)
 
 ___
 
@@ -66,23 +66,9 @@ makeKubeObject<KubeIngress\>('ingress').className
 
 #### Defined in
 
-[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L107)
+[lib/k8s/cluster.ts:108](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L108)
 
 ## Accessors
-
-### listRoute
-
-• `get` **listRoute**(): `string`
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-[lib/k8s/ingress.ts:35](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/ingress.ts#L35)
-
-___
 
 ### spec
 
@@ -94,11 +80,37 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `rules` | { `host`: `string` ; `http`: { `paths`: { `backend`: { `serviceName`: `string` ; `servicePort`: `string`  } ; `path`: `string`  }[]  }  }[] |
+| `defaultBackend?` | { `resource?`: { `apiVersion`: `string` ; `kind`: `string` ; `name`: `string`  } ; `service?`: { `name`: `string` ; `port`: { `name?`: `string` ; `number?`: `number`  }  }  } |
+| `defaultBackend.resource?` | { `apiVersion`: `string` ; `kind`: `string` ; `name`: `string`  } |
+| `defaultBackend.resource.apiVersion` | `string` |
+| `defaultBackend.resource.kind` | `string` |
+| `defaultBackend.resource.name` | `string` |
+| `defaultBackend.service?` | { `name`: `string` ; `port`: { `name?`: `string` ; `number?`: `number`  }  } |
+| `defaultBackend.service.name` | `string` |
+| `defaultBackend.service.port` | { `name?`: `string` ; `number?`: `number`  } |
+| `defaultBackend.service.port.name?` | `string` |
+| `defaultBackend.service.port.number?` | `number` |
+| `ingressClassName` | `string` |
+| `rules` | [`IngressRule`](../interfaces/lib_k8s_ingress.IngressRule.md)[] \| `LegacyIngressRule`[] |
+| `tls?` | { `hosts`: `string`[] ; `secretName`: `string`  }[] |
 
 #### Defined in
 
-[lib/k8s/ingress.ts:27](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/ingress.ts#L27)
+[lib/k8s/ingress.ts:72](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/ingress.ts#L72)
+
+___
+
+### listRoute
+
+• `Static` `get` **listRoute**(): `string`
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[lib/k8s/ingress.ts:119](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/ingress.ts#L119)
 
 ___
 
@@ -112,7 +124,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/ingress.ts:39](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/ingress.ts#L39)
+[lib/k8s/ingress.ts:123](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/ingress.ts#L123)
 
 ## Methods
 
@@ -126,7 +138,21 @@ ___
 
 #### Defined in
 
-[lib/k8s/ingress.ts:31](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/ingress.ts#L31)
+[lib/k8s/ingress.ts:76](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/ingress.ts#L76)
+
+___
+
+### getRules
+
+▸ **getRules**(): [`IngressRule`](../interfaces/lib_k8s_ingress.IngressRule.md)[]
+
+#### Returns
+
+[`IngressRule`](../interfaces/lib_k8s_ingress.IngressRule.md)[]
+
+#### Defined in
+
+[lib/k8s/ingress.ts:80](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/ingress.ts#L80)
 
 ___
 
@@ -150,7 +176,7 @@ makeKubeObject<KubeIngress\>('ingress').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:86](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L86)
+[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L87)
 
 ___
 
@@ -175,7 +201,7 @@ makeKubeObject<KubeIngress\>('ingress').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:109](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L109)
+[lib/k8s/cluster.ts:110](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L110)
 
 ___
 
@@ -199,7 +225,7 @@ makeKubeObject<KubeIngress\>('ingress').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:105](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L105)
+[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L106)
 
 ___
 
@@ -226,7 +252,7 @@ makeKubeObject<KubeIngress\>('ingress').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:92](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L92)
+[lib/k8s/cluster.ts:93](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L93)
 
 ___
 
@@ -252,7 +278,7 @@ makeKubeObject<KubeIngress\>('ingress').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L87)
+[lib/k8s/cluster.ts:88](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L88)
 
 ___
 
@@ -277,7 +303,7 @@ makeKubeObject<KubeIngress\>('ingress').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:101](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L101)
+[lib/k8s/cluster.ts:102](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L102)
 
 ___
 
@@ -301,4 +327,4 @@ makeKubeObject<KubeIngress\>('ingress').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:98](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/cluster.ts#L98)
+[lib/k8s/cluster.ts:99](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L99)

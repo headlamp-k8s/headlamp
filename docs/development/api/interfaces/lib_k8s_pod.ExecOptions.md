@@ -18,13 +18,15 @@ slug: "lib_k8s_pod.ExecOptions"
 
 • `Optional` **additionalProtocols**: `string`[]
 
+Additional WebSocket protocols to use when connecting.
+
 #### Inherited from
 
 [StreamArgs](lib_k8s_apiProxy.StreamArgs.md).[additionalProtocols](lib_k8s_apiProxy.StreamArgs.md#additionalprotocols)
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:665](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/apiProxy.ts#L665)
+[lib/k8s/apiProxy.ts:808](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L808)
 
 ___
 
@@ -34,7 +36,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/pod.ts:36](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/pod.ts#L36)
+[lib/k8s/pod.ts:41](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L41)
 
 ___
 
@@ -42,13 +44,15 @@ ___
 
 • `Optional` **isJson**: `boolean`
 
+Whether the stream is expected to receive JSON data.
+
 #### Inherited from
 
 [StreamArgs](lib_k8s_apiProxy.StreamArgs.md).[isJson](lib_k8s_apiProxy.StreamArgs.md#isjson)
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:664](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/apiProxy.ts#L664)
+[lib/k8s/apiProxy.ts:806](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L806)
 
 ___
 
@@ -56,19 +60,79 @@ ___
 
 • `Optional` **reconnectOnFailure**: `boolean`
 
+Whether to attempt to reconnect the WebSocket connection if it fails.
+
 #### Inherited from
 
 [StreamArgs](lib_k8s_apiProxy.StreamArgs.md).[reconnectOnFailure](lib_k8s_apiProxy.StreamArgs.md#reconnectonfailure)
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:667](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/apiProxy.ts#L667)
+[lib/k8s/apiProxy.ts:812](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L812)
+
+___
+
+### stderr
+
+• `Optional` **stderr**: `boolean`
+
+#### Inherited from
+
+[StreamArgs](lib_k8s_apiProxy.StreamArgs.md).[stderr](lib_k8s_apiProxy.StreamArgs.md#stderr)
+
+#### Defined in
+
+[lib/k8s/apiProxy.ts:818](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L818)
+
+___
+
+### stdin
+
+• `Optional` **stdin**: `boolean`
+
+#### Inherited from
+
+[StreamArgs](lib_k8s_apiProxy.StreamArgs.md).[stdin](lib_k8s_apiProxy.StreamArgs.md#stdin)
+
+#### Defined in
+
+[lib/k8s/apiProxy.ts:816](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L816)
+
+___
+
+### stdout
+
+• `Optional` **stdout**: `boolean`
+
+#### Inherited from
+
+[StreamArgs](lib_k8s_apiProxy.StreamArgs.md).[stdout](lib_k8s_apiProxy.StreamArgs.md#stdout)
+
+#### Defined in
+
+[lib/k8s/apiProxy.ts:817](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L817)
+
+___
+
+### tty
+
+• `Optional` **tty**: `boolean`
+
+#### Inherited from
+
+[StreamArgs](lib_k8s_apiProxy.StreamArgs.md).[tty](lib_k8s_apiProxy.StreamArgs.md#tty)
+
+#### Defined in
+
+[lib/k8s/apiProxy.ts:815](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L815)
 
 ## Methods
 
 ### connectCb
 
 ▸ `Optional` **connectCb**(): `void`
+
+A callback function to execute when the WebSocket connection is established.
 
 #### Returns
 
@@ -80,13 +144,15 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:666](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/apiProxy.ts#L666)
+[lib/k8s/apiProxy.ts:810](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L810)
 
 ___
 
 ### failCb
 
 ▸ `Optional` **failCb**(): `void`
+
+A callback function to execute when the WebSocket connection fails.
 
 #### Returns
 
@@ -98,4 +164,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:668](https://github.com/headlamp-k8s/headlamp/blob/1093c364/frontend/src/lib/k8s/apiProxy.ts#L668)
+[lib/k8s/apiProxy.ts:814](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/apiProxy.ts#L814)
