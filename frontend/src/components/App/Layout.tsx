@@ -17,8 +17,7 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import store from '../../redux/stores/store';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
-import Sidebar, { drawerWidthClosed } from '../Sidebar';
-import NavigationTabs from '../Sidebar/NavigationTabs';
+import Sidebar, { NavigationTabs } from '../Sidebar';
 import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
 import VersionDialog from './VersionDialog';
@@ -27,9 +26,6 @@ const useStyle = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     marginLeft: 'initial',
-    [theme.breakpoints.only('sm')]: {
-      marginLeft: drawerWidthClosed,
-    },
   },
   toolbar: theme.mixins.toolbar,
   // importing visuallyHidden has typing issues at time of writing.
