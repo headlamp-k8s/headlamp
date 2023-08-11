@@ -229,7 +229,6 @@ export function PureTopBar({
   const { t } = useTranslation();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -425,20 +424,9 @@ export function PureTopBar({
         enableColorOnDark
       >
         <Toolbar className={classes.toolbar}>
-          {isMobile && <HeadlampButton open={openSideBar} onToggleOpen={onToggleOpen} />}
-
-          {!isSmall && (
+          {isSmall ? (
             <>
-              <AppLogo />
-              <div className={classes.grow} />
-              <AppBarActions
-                appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
-              />
-            </>
-          )}
-          {isSmall && (
-            <>
-              {!isMobile && <AppLogo />}
+              <HeadlampButton open={openSideBar} onToggleOpen={onToggleOpen} />
               <div className={classes.grow} />
               <IconButton
                 aria-label={t('show more')}
@@ -450,6 +438,14 @@ export function PureTopBar({
               >
                 <Icon icon="mdi:more-vert" />
               </IconButton>
+            </>
+          ) : (
+            <>
+              <AppLogo />
+              <div className={classes.grow} />
+              <AppBarActions
+                appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
+              />
             </>
           )}
         </Toolbar>
