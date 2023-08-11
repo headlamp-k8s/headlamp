@@ -8,9 +8,9 @@ export default function StatefulSetList() {
   const { t } = useTranslation('glossary');
 
   function renderPods(statefulSet: StatefulSet) {
-    const { readyReplicas, currentReplicas } = statefulSet.status;
+    const { readyReplicas, replicas } = statefulSet.status;
 
-    return `${readyReplicas || 0}/${currentReplicas || 0}`;
+    return `${readyReplicas || 0}/${replicas || 0}`;
   }
 
   return (
