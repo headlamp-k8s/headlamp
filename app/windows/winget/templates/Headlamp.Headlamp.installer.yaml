@@ -1,0 +1,23 @@
+PackageIdentifier: Headlamp.Headlamp
+PackageVersion: __PACKAGE_VERSION__
+Installers:
+  - Architecture: x64
+    InstallerLocale: en-US
+    InstallerType: exe
+    InstallerUrl: __INSTALLER_URL__
+    InstallerSha256: __INSTALLER_SHA256__
+    Scope: user
+    InstallModes:
+      - interactive
+      - silent
+    InstallerSwitches:
+      Silent: /S
+      SilentWithProgress: /S
+    AppsAndFeaturesEntries:
+      - DisplayName: Headlamp
+        DisplayVersion: __PACKAGE_VERSION__
+        Publisher: Headlamp
+        InstallerType: exe
+    ReleaseDate: __RELEASE_DATE__
+ManifestType: installer
+ManifestVersion: 1.5.0
