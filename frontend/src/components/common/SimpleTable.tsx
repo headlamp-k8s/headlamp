@@ -36,7 +36,7 @@ const useTableStyle = makeStyles(theme => ({
     '& .MuiTableCell-root': {
       padding: '8px 16px 7px 16px',
       [theme.breakpoints.down('sm')]: {
-        padding: '8px 24px 7px 16px',
+        padding: '15px 24px 15px 16px',
       },
       overflow: 'hidden',
       width: '100%',
