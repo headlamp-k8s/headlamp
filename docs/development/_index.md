@@ -100,6 +100,22 @@ make app-win-msi
 
 See the generated app files in app/dist/ .
 
+
+### Running the app on Ubuntu WSL
+
+Headlamp on WSL requires some packages installed (maybe it requires more) to run the app.
+
+```bash
+sudo apt install libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm1 libnss3 libasound2
+```
+
+Some of these are also needed some of them only for the end to end tests.
+
+```bash
+sudo apt-get install firefox libgstreamer-plugins-bad1.0-0 libegl1 libnotify4 libopengl0 libwoff1 libharfbuzz-icu0 libgstreamer-gl1.0-0 libwebpdemux2 libenchant1c2a libsecret-1-0 libhyphen0 libevdev2 libgles2 gstreamer1.0-libav
+```
+
+
 ## Build a container image
 
 The following command builds a container image for Headlamp from the current
