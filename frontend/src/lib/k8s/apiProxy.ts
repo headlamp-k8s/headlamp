@@ -30,10 +30,19 @@ const MIN_LIFESPAN_FOR_TOKEN_REFRESH = 10; // sec
 
 let isTokenRefreshInProgress = false;
 
-export interface RequestParams {
-  timeout?: number; // ms
+// @todo: Params is a confusing name for options, because params are also query params.
+/**
+ * Options for the request.
+ */
+export interface RequestParams extends RequestInit {
+  /** Number of milliseconds to wait for a response. */
+  timeout?: number;
+  /** Is the request expected to receive JSON data? */
   isJSON?: boolean;
-  [prop: string]: any;
+  /** Cluster context name. */
+  cluster?: string | null;
+  /** Whether to automatically log out the user if there is an authentication error. */
+  autoLogoutOnAuthError?: boolean;
 }
 
 export interface ClusterRequest {
