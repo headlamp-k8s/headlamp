@@ -9,7 +9,7 @@ import { Dialog, NameValueTable } from '../common';
 export default function VersionDialog() {
   const open = useTypedSelector(state => state.ui.isVersionDialogOpen);
   const dispatch = useDispatch();
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation(['glossary', 'translation']);
   const { VERSION, GIT_VERSION } = helpers.getVersion();
 
   return (
@@ -25,7 +25,7 @@ export default function VersionDialog() {
         <NameValueTable
           rows={[
             {
-              name: t('Version'),
+              name: t('translation|Version'),
               value: VERSION,
             },
             {

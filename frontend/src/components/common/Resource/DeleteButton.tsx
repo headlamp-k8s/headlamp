@@ -18,7 +18,7 @@ export default function DeleteButton(props: DeleteButtonProps) {
   const { item, options } = props;
   const [openAlert, setOpenAlert] = React.useState(false);
   const location = useLocation();
-  const { t } = useTranslation(['frequent', 'resource']);
+  const { t } = useTranslation(['translation']);
 
   const deleteFunc = React.useCallback(
     () => {
@@ -61,14 +61,14 @@ export default function DeleteButton(props: DeleteButtonProps) {
       }}
     >
       <ActionButton
-        description={t('frequent|Delete')}
+        description={t('translation|Delete')}
         onClick={() => setOpenAlert(true)}
         icon="mdi:delete"
       />
       <ConfirmDialog
         open={openAlert}
-        title={t('resource|Delete item')}
-        description={t('resource|Are you sure you want to delete this item?')}
+        title={t('translation|Delete item')}
+        description={t('translation|Are you sure you want to delete this item?')}
         handleClose={() => setOpenAlert(false)}
         onConfirm={() => deleteFunc()}
       />

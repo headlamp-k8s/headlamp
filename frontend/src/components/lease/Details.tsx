@@ -5,7 +5,7 @@ import { DateLabel, DetailsGrid } from '../common';
 
 export function LeaseDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation();
 
   return (
     <DetailsGrid

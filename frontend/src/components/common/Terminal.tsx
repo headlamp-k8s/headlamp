@@ -84,7 +84,7 @@ export default function Terminal(props: TerminalProps) {
     available: getAvailableShells(),
     currentIdx: 0,
   });
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation();
 
   function getDefaultContainer() {
     return item.spec.containers.length > 0 ? item.spec.containers[0].name : '';

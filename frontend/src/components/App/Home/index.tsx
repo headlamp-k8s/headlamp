@@ -22,7 +22,7 @@ import ResourceTable from '../../common/Resource/ResourceTable';
 import RecentClusters from './RecentClusters';
 
 function ContextMenu({ cluster }: { cluster: Cluster }) {
-  const { t } = useTranslation(['settings', 'frequent']);
+  const { t } = useTranslation(['translation']);
   const history = useHistory();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -56,7 +56,7 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
         }}
         aria-haspopup="menu"
         aria-controls={menuId}
-        aria-label={t('frequent|Actions')}
+        aria-label={t('Actions')}
       >
         <Icon icon="mdi:more-vert" />
       </IconButton>
@@ -75,7 +75,7 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
             handleMenuClose();
           }}
         >
-          <ListItemText>{t('settings|View')}</ListItemText>
+          <ListItemText>{t('translation|View')}</ListItemText>
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -83,7 +83,7 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
             handleMenuClose();
           }}
         >
-          <ListItemText>{t('settings|Settings')}</ListItemText>
+          <ListItemText>{t('translation|Settings')}</ListItemText>
         </MenuItem>
         {helpers.isElectron() && cluster.meta_data?.source === 'dynamic_cluster' && (
           <MenuItem
@@ -92,7 +92,7 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
               handleMenuClose();
             }}
           >
-            <ListItemText>{t('frequent|Delete')}</ListItemText>
+            <ListItemText>{t('translation|Delete')}</ListItemText>
           </MenuItem>
         )}
       </Menu>
@@ -101,7 +101,7 @@ function ContextMenu({ cluster }: { cluster: Cluster }) {
 }
 
 function ClusterStatus({ error }: { error?: ApiError | null }) {
-  const { t } = useTranslation(['cluster', 'frequent']);
+  const { t } = useTranslation(['translation']);
   const theme = useTheme();
 
   const stateUnknown = error === undefined;
@@ -132,7 +132,7 @@ function ClusterStatus({ error }: { error?: ApiError | null }) {
               : undefined,
           }}
         >
-          {hasReachError ? error.message : stateUnknown ? '⋯' : t('frequent|Active')}
+          {hasReachError ? error.message : stateUnknown ? '⋯' : t('translation|Active')}
         </Typography>
       </Box>
     </Box>
@@ -157,7 +157,7 @@ interface HomeComponentProps {
 
 function HomeComponent(props: HomeComponentProps) {
   const { clusters } = props;
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['translation', 'glossary']);
   const [versions, errors] = useClustersVersion(Object.values(clusters));
   const filterFunc = useFilterFunc<Cluster>(['.name']);
 
@@ -180,7 +180,7 @@ function HomeComponent(props: HomeComponentProps) {
           defaultSortingColumn={1}
           columns={[
             {
-              label: t('frequent|Name'),
+              label: t('Name'),
               getter: ({ name }: Cluster) => (
                 <Link routeName="cluster" params={{ cluster: name }}>
                   {name}
@@ -189,11 +189,11 @@ function HomeComponent(props: HomeComponentProps) {
               sort: (c1: Cluster, c2: Cluster) => c1.name.localeCompare(c2.name),
             },
             {
-              label: t('glossary|Status'),
+              label: t('Status'),
               getter: ({ name }: Cluster) => <ClusterStatus error={errors[name]} />,
             },
             {
-              label: t('frequent|Kubernetes Version'),
+              label: t('glossary|Kubernetes Version'),
               getter: ({ name }: Cluster) => versions[name]?.gitVersion || '⋯',
               sort: true,
             },

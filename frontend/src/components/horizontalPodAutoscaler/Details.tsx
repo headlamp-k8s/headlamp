@@ -5,7 +5,7 @@ import { ConditionsSection, DetailsGrid, Link, SimpleTable } from '../common';
 
 export default function HpaDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const { t } = useTranslation(['hpa', 'frequent']);
+  const { t } = useTranslation();
 
   return (
     <DetailsGrid
@@ -16,7 +16,7 @@ export default function HpaDetails() {
       extraInfo={item =>
         item && [
           {
-            name: t('hpa|Reference'),
+            name: t('translation|Reference'),
             value: (
               <Link kubeObject={item.referenceObject}>
                 {item.referenceObject?.kind}/{item.referenceObject?.metadata.name}
@@ -24,28 +24,28 @@ export default function HpaDetails() {
             ),
           },
           {
-            name: t('hpa|Metrics'),
+            name: t('translation|Metrics'),
             value: (
               <SimpleTable
                 data={item.metrics(t)}
                 columns={[
-                  { label: t('frequent|Name'), getter: item => item.definition },
-                  { label: t('hpa|(Current/Target)'), getter: item => item.value },
+                  { label: t('translation|Name'), getter: item => item.definition },
+                  { label: t('translation|(Current/Target)'), getter: item => item.value },
                 ]}
               />
             ),
           },
           {
-            name: t('hpa|MinReplicas'),
+            name: t('translation|MinReplicas'),
             value: item.spec.minReplicas,
           },
           {
-            name: t('hpa|MaxReplicas'),
+            name: t('translation|MaxReplicas'),
             value: item.spec.maxReplicas,
           },
           {
-            name: t('hpa|Deployment pods'),
-            value: t(`hpa|{{ currentReplicas }} current / {{ desiredReplicas }} desired`, {
+            name: t('translation|Deployment pods'),
+            value: t(`translation|{{ currentReplicas }} current / {{ desiredReplicas }} desired`, {
               currentReplicas: item.status.currentReplicas,
               desiredReplicas: item.status.desiredReplicas,
             }),

@@ -124,7 +124,7 @@ function Table(props: ResourceTableProps) {
     onColumnChooserClose,
     ...otherProps
   } = props;
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
   const theme = useTheme();
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
   const tableProcessors = useTypedSelector(state => state.ui.views.tableColumnsProcessors);
@@ -155,7 +155,7 @@ function Table(props: ResourceTableProps) {
           case 'name':
             return {
               id: 'name',
-              label: t('frequent|Name'),
+              label: t('translation|Name'),
               gridTemplate: 1.5,
               getter: (resource: KubeObject) => resource && <Link kubeObject={resource} />,
               sort: (n1: KubeObject, n2: KubeObject) => {
@@ -173,7 +173,7 @@ function Table(props: ResourceTableProps) {
             }
             return {
               id: 'age',
-              label: t('frequent|Age'),
+              label: t('translation|Age'),
               cellProps: { style: { textAlign: 'right' } },
               gridTemplate: 0.5,
               getter: (resource: KubeObject) =>
@@ -215,7 +215,7 @@ function Table(props: ResourceTableProps) {
           case 'kind':
             return {
               id: 'kind',
-              label: t('frequent|Type'),
+              label: t('translation|Type'),
               getter: (resource: KubeObject) => resource?.kind,
               sort: true,
             };

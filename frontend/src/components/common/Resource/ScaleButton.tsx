@@ -30,7 +30,7 @@ export default function ScaleButton(props: ScaleButtonProps) {
   const { item, options = {} } = props;
   const [openDialog, setOpenDialog] = React.useState(false);
   const location = useLocation();
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation();
 
   async function updateFunc(numReplicas: number) {
     try {
@@ -78,8 +78,8 @@ export default function ScaleButton(props: ScaleButtonProps) {
         console.error(`Error while getting authorization for scaling button in ${item}:`, err);
       }}
     >
-      <Tooltip title={t('frequent|Scale') as string}>
-        <IconButton aria-label={t('frequent|scale')} onClick={() => setOpenDialog(true)}>
+      <Tooltip title={t('translation|Scale') as string}>
+        <IconButton aria-label={t('translation|scale')} onClick={() => setOpenDialog(true)}>
           <Icon icon="mdi:content-copy" />
         </IconButton>
       </Tooltip>
@@ -126,7 +126,7 @@ const useScaleDialogStyle = makeStyles(() => ({
 function ScaleDialog(props: ScaleDialogProps) {
   const { open, resource, onClose, onSave } = props;
   const [numReplicas, setNumReplicas] = React.useState<number>(getNumReplicas());
-  const { t } = useTranslation(['frequent', 'resource']);
+  const { t } = useTranslation(['translation']);
   const classes = useScaleDialogStyle();
   const theme = useTheme();
   const desiredNumReplicasLabel = 'desired-number-replicas-label';
@@ -149,8 +149,9 @@ function ScaleDialog(props: ScaleDialogProps) {
         <Grid container spacing={5}>
           <Grid item xs={12}>
             <DialogContentText>
-              {t('resource|Current number of replicas: {{ numReplicas }}', {
-                numReplicas: currentNumReplicas === -1 ? t('frequent|Unknown') : currentNumReplicas,
+              {t('translation|Current number of replicas: {{ numReplicas }}', {
+                numReplicas:
+                  currentNumReplicas === -1 ? t('translation|Unknown') : currentNumReplicas,
               })}
             </DialogContentText>
           </Grid>
@@ -160,7 +161,7 @@ function ScaleDialog(props: ScaleDialogProps) {
                 id={desiredNumReplicasLabel}
                 className={classes.desiredReplicasText}
               >
-                {t('resource|Desired number of replicas:')}
+                {t('translation|Desired number of replicas:')}
               </DialogContentText>
             </Grid>
             <Grid item spacing={2} sm="auto" className={classes.replicasSwitcher}>
@@ -168,7 +169,7 @@ function ScaleDialog(props: ScaleDialogProps) {
                 size="small"
                 color="primary"
                 onClick={() => setNumReplicas(numReplicas => numReplicas - 1)}
-                aria-label={t('frequent|Decrement')}
+                aria-label={t('translation|Decrement')}
               >
                 <Icon icon="mdi:minus" width="22px" />
               </Fab>
@@ -187,7 +188,7 @@ function ScaleDialog(props: ScaleDialogProps) {
                 size="small"
                 color="primary"
                 onClick={() => setNumReplicas(numReplicas => numReplicas + 1)}
-                aria-label={t('frequent|Increment')}
+                aria-label={t('translation|Increment')}
               >
                 <Icon icon="mdi:plus" width="22px" />
               </Fab>
@@ -208,10 +209,10 @@ function ScaleDialog(props: ScaleDialogProps) {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
-          {t('frequent|Cancel')}
+          {t('translation|Cancel')}
         </Button>
         <Button onClick={() => onSave(numReplicas)} color="primary">
-          {t('frequent|Apply')}
+          {t('translation|Apply')}
         </Button>
       </DialogActions>
     </Dialog>

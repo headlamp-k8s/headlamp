@@ -22,7 +22,7 @@ export default function ResourceListView(
   props: ResourceListViewProps | ResourceListViewWithResourceClassProps
 ) {
   const { title, children, headerProps, ...tableProps } = props;
-  const { t } = useTranslation(['resource']);
+  const { t } = useTranslation();
   const [columnChooserAnchorEl, setColumnChooserAnchorEl] = React.useState<null | HTMLElement>(
     null
   );

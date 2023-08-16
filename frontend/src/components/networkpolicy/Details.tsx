@@ -11,7 +11,7 @@ import NetworkPolicy, {
 import { DetailsGrid, NameValueTable, SectionBox, useMetadataDisplayStyles } from '../common';
 
 export function NetworkPolicyDetails() {
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
   const { name, namespace } = useParams<{ name: string; namespace: string }>();
   const classes = useMetadataDisplayStyles();
 
@@ -68,7 +68,7 @@ export function NetworkPolicyDetails() {
                   )),
                 },
                 {
-                  name: t('From'),
+                  name: t('translation|From'),
                   value: '',
                 },
                 {
@@ -136,7 +136,7 @@ export function NetworkPolicyDetails() {
                   )),
                 },
                 {
-                  name: t('To'),
+                  name: t('translation|To'),
                   value: '',
                 },
                 {
@@ -149,7 +149,11 @@ export function NetworkPolicyDetails() {
                     if (cidr && except.length === 0) {
                       return <>{`cidr: ${cidr}`}</>;
                     }
-                    return <>{`cidr: ${cidr}, ${t('except')}: ${except.join(', ')}`}</>;
+                    return (
+                      <>{`cidr: ${cidr}, ${t('except: {{ cidrExceptions }}', {
+                        cidrExceptions: except.join(', '),
+                      })}`}</>
+                    );
                   }),
                 },
               ]}

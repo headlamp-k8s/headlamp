@@ -38,22 +38,22 @@ function TolerationsSection(props: TolerationsSection) {
         data={tolerations}
         columns={[
           {
-            label: t('frequent|Key'),
+            label: t('translation|Key'),
             getter: toleration => toleration.key,
             sort: true,
           },
           {
-            label: t('frequent|Operator'),
+            label: t('translation|Operator'),
             getter: toleration => toleration.operator,
             sort: true,
           },
           {
-            label: t('frequent|Value'),
+            label: t('translation|Value'),
             getter: toleration => toleration.value,
             sort: true,
           },
           {
-            label: t('frequent|Effect'),
+            label: t('translation|Effect'),
             getter: toleration => getEffectString(toleration.effect, toleration.tolerationSeconds),
             sort: true,
           },
@@ -66,7 +66,7 @@ function TolerationsSection(props: TolerationsSection) {
 
 export default function DaemonSetDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <DetailsGrid

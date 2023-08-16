@@ -11,7 +11,7 @@ import TileChart from '../common/TileChart';
 
 export function MemoryCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
-  const { t } = useTranslation(['cluster', 'glossary']);
+  const { t } = useTranslation(['translation', 'glossary']);
 
   function memoryUsedGetter(item: KubeObject) {
     return parseRam(item.usage.memory) / TO_GB;
@@ -39,7 +39,7 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
       getLegend={getLegend}
       resourceUsedGetter={memoryUsedGetter}
       resourceAvailableGetter={memoryAvailableGetter}
-      title={noMetrics ? t('glossary|Memory') : t('cluster|Memory Usage')}
+      title={noMetrics ? t('glossary|Memory') : t('translation|Memory Usage')}
       {...props}
     />
   );
@@ -47,7 +47,7 @@ export function MemoryCircularChart(props: ResourceCircularChartProps) {
 
 export function CpuCircularChart(props: ResourceCircularChartProps) {
   const { noMetrics } = props;
-  const { t } = useTranslation(['cluster', 'glossary']);
+  const { t } = useTranslation(['translation', 'glossary']);
 
   function cpuUsedGetter(item: KubeObject) {
     return parseCpu(item.usage.cpu) / TO_ONE_CPU;
@@ -62,7 +62,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
       return '';
     }
 
-    const availableLabel = t('cluster|{{ available }} units', { available });
+    const availableLabel = t('translation|{{ available }} units', { available });
     if (noMetrics) {
       return availableLabel;
     }
@@ -75,7 +75,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
       getLegend={getLegend}
       resourceUsedGetter={cpuUsedGetter}
       resourceAvailableGetter={cpuAvailableGetter}
-      title={noMetrics ? t('glossary|CPU') : t('cluster|CPU Usage')}
+      title={noMetrics ? t('glossary|CPU') : t('translation|CPU Usage')}
       {...props}
     />
   );
@@ -84,7 +84,7 @@ export function CpuCircularChart(props: ResourceCircularChartProps) {
 export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'items'>) {
   const theme = useTheme();
   const { items } = props;
-  const { t } = useTranslation(['cluster', 'glossary']);
+  const { t } = useTranslation(['translation', 'glossary']);
 
   const podsReady = (items || []).filter((pod: Pod) => {
     if (pod.status!.phase === 'Succeeded') {
@@ -99,7 +99,7 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
     if (items === null) {
       return null;
     }
-    return t('cluster|{{ numReady }} / {{ numItems }} Requested', {
+    return t('translation|{{ numReady }} / {{ numItems }} Requested', {
       numReady: podsReady.length,
       numItems: items.length,
     });

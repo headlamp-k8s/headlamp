@@ -5,7 +5,7 @@ import { LightTooltip } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function ReplicaSetList() {
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <ResourceListView
@@ -23,21 +23,21 @@ export default function ReplicaSetList() {
         },
         {
           id: 'currentReplicas',
-          label: t('frequent|Current'),
+          label: t('translation|Current', { context: 'replicas' }),
           getter: replicaSet => replicaSet?.status?.replicas || 0,
           gridTemplate: 0.6,
           sort: true,
         },
         {
           id: 'desiredReplicas',
-          label: t('frequent|Desired'),
+          label: t('translation|Desired', { context: 'replicas' }),
           getter: replicaSet => replicaSet?.spec?.replicas || 0,
           gridTemplate: 0.6,
           sort: true,
         },
         {
           id: 'readyReplicas',
-          label: t('frequent|Ready'),
+          label: t('translation|Ready'),
           getter: replicaSet => replicaSet?.status?.readyReplicas || 0,
           gridTemplate: 0.6,
           sort: true,

@@ -28,7 +28,7 @@ export default function CustomResourceDefinitionList() {
           ),
         },
         {
-          label: t('frequent|Definition'),
+          label: t('glossary|Definition'),
           getter: crd => (
             <Link
               routeName="crd"
@@ -49,7 +49,7 @@ export default function CustomResourceDefinitionList() {
           },
         },
         {
-          label: t('frequent|Group'),
+          label: t('translation|Group'),
           getter: crd => crd.spec.group,
           sort: true,
         },

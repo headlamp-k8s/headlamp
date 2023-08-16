@@ -20,7 +20,7 @@ export default function PDBDetails() {
     return values;
   }
 
-  const { t } = useTranslation(['pdb', 'frequent', 'glossary']);
+  const { t } = useTranslation(['translation', 'glossary']);
   return (
     <DetailsGrid
       resourceType={PDB}
@@ -30,11 +30,11 @@ export default function PDBDetails() {
       extraInfo={item =>
         item && [
           {
-            name: t('pdb|Max Unavailable'),
+            name: t('translation|Max Unavailable'),
             value: <>{item.spec.maxUnavailable}</>,
           },
           {
-            name: t('pdb|Min Available'),
+            name: t('translation|Min Available'),
             value: <>{item.spec.minAvailable}</>,
           },
           {
@@ -42,23 +42,23 @@ export default function PDBDetails() {
             value: <>{selectorsToJSX(item.selectors)}</>,
           },
           {
-            name: t('frequent|Status'),
+            name: t('translation|Status'),
             value: (
               <>
                 <StatusLabel status="">
-                  {t('pdb|Allowed disruptions')}:{item.status.disruptionsAllowed}
+                  {t('translation|Allowed disruptions')}:{item.status.disruptionsAllowed}
                 </StatusLabel>
                 <br />
                 <StatusLabel status="">
-                  {t('pdb|Current')}:{item.status.currentHealthy}
+                  {t('translation|Current', { context: 'pods' })}:{item.status.currentHealthy}
                 </StatusLabel>
                 <br />
                 <StatusLabel status="">
-                  {t('pdb|Desired')}:{item.status.desiredHealthy}
+                  {t('translation|Desired', { context: 'pods' })}:{item.status.desiredHealthy}
                 </StatusLabel>
                 <br />
                 <StatusLabel status="">
-                  {t('pdb|Total')}:{item.status.expectedPods}
+                  {t('translation|Total')}:{item.status.expectedPods}
                 </StatusLabel>
                 <br />
               </>

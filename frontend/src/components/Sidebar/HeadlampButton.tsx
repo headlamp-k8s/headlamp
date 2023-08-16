@@ -49,7 +49,7 @@ export default function HeadlampButton({
 }: HeadlampButtonProps) {
   const isSmall = useMediaQuery('(max-width:600px)');
   const classes = useStyle({ isSidebarOpen: open, isSmall: isSmall });
-  const { t } = useTranslation('sidebar');
+  const { t } = useTranslation();
 
   if (mobileOnly && (!isSmall || (isSmall && open))) {
     return null;

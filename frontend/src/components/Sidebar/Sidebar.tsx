@@ -118,7 +118,7 @@ export function useSidebarInfo() {
 
 function AddClusterButton() {
   const history = useHistory();
-  const { t } = useTranslation(['frequent', 'cluster']);
+  const { t } = useTranslation(['translation']);
   const { isOpen } = useSidebarInfo();
 
   return (
@@ -128,13 +128,13 @@ function AddClusterButton() {
           onClick={() => history.push(createRouteURL('loadKubeConfig'))}
           startIcon={<InlineIcon icon="mdi:plus-box-outline" />}
         >
-          {t('cluster|Add Cluster')}
+          {t('translation|Add Cluster')}
         </Button>
       ) : (
         <ActionButton
           onClick={() => history.push(createRouteURL('loadKubeConfig'))}
           icon="mdi:plus-box-outline"
-          description={t('cluster|Add Cluster')}
+          description={t('translation|Add Cluster')}
           color="#adadad"
           width={38}
         />
@@ -147,7 +147,7 @@ function SidebarToggleButton() {
   const dispatch = useDispatch();
   const { isOpen, isNarrow, canExpand, isTemporary } = useSidebarInfo();
 
-  const { t } = useTranslation(['frequent']);
+  const { t } = useTranslation();
   const isNarrowOnly = isNarrow && !canExpand;
 
   if (isTemporary || isNarrowOnly) {
@@ -164,7 +164,7 @@ function SidebarToggleButton() {
           dispatch(setWhetherSidebarOpen(!isOpen));
         }}
         icon={isOpen ? 'mdi:chevron-left-box-outline' : 'mdi:chevron-right-box-outline'}
-        description={t('frequent|Collapse Sidebar')}
+        description={t('translation|Collapse Sidebar')}
       />
     </Box>
   );
@@ -212,7 +212,7 @@ function DefaultLinkArea(props: { sidebarName: string; isOpen: boolean }) {
 }
 
 export default function Sidebar() {
-  const { t, i18n } = useTranslation(['glossary']);
+  const { t, i18n } = useTranslation(['glossary', 'translation']);
 
   const sidebar = useTypedSelector(state => state.ui.sidebar);
   const {
@@ -298,7 +298,7 @@ export function PureSidebar({
   linkArea,
 }: PureSidebarProps) {
   const classes = useStyle();
-  const { t } = useTranslation(['frequent']);
+  const { t } = useTranslation();
   const temporarySideBarOpen = open === true && isTemporaryDrawer && openUserSelected === true;
 
   // The large sidebar does not open in medium view (600-960px).
@@ -356,7 +356,7 @@ export function PureSidebar({
 
   if (isTemporaryDrawer) {
     return (
-      <Box component="nav" aria-label={t('frequent|Navigation')}>
+      <Box component="nav" aria-label={t('translation|Navigation')}>
         <Drawer
           variant="temporary"
           className={clsx(classes.drawer, {
@@ -379,7 +379,7 @@ export function PureSidebar({
   }
 
   return (
-    <Box component="nav" aria-label={t('frequent|Navigation')}>
+    <Box component="nav" aria-label={t('translation|Navigation')}>
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {

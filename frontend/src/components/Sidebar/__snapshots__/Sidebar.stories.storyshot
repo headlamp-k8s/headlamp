@@ -3,7 +3,7 @@
 exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
 <div>
   <nav
-    aria-label="Navigation Tabs"
+    aria-label="Navigation"
     class="MuiBox-root MuiBox-root"
   >
     <div
@@ -158,7 +158,7 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Closed 1`] = `
 exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
 <div>
   <nav
-    aria-label="Navigation Tabs"
+    aria-label="Navigation"
     class="MuiBox-root MuiBox-root"
   >
     <div
@@ -337,7 +337,7 @@ exports[`Storyshots Sidebar/Sidebar Home Sidebar Open 1`] = `
 exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
 <div>
   <nav
-    aria-label="Navigation Tabs"
+    aria-label="Navigation"
     class="MuiBox-root MuiBox-root"
   >
     <div
@@ -1446,7 +1446,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
 exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
 <div>
   <nav
-    aria-label="Navigation Tabs"
+    aria-label="Navigation"
     class="MuiBox-root MuiBox-root"
   >
     <div
@@ -2618,7 +2618,7 @@ exports[`Storyshots Sidebar/Sidebar Not Visible Sidebar 1`] = `<div />`;
 exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
 <div>
   <nav
-    aria-label="Navigation Tabs"
+    aria-label="Navigation"
     class="MuiBox-root MuiBox-root"
   >
     <div

@@ -21,7 +21,7 @@ function UpdatePopup(props: {
   const classes = useStyles();
   const [show, setShow] = React.useState(true);
   const { releaseDownloadURL, fetchingRelease, releaseFetchFailed, skipUpdateHandler } = props;
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
 
   if (fetchingRelease && !releaseDownloadURL) {
     return (
@@ -32,7 +32,7 @@ function UpdatePopup(props: {
           horizontal: 'right',
         }}
         autoHideDuration={5000}
-        message={t('release|Fetching release information…')}
+        message={t('translation|Fetching release information…')}
         ContentProps={{
           'aria-describedby': 'updatePopup',
         }}
@@ -47,7 +47,7 @@ function UpdatePopup(props: {
                 skipUpdateHandler();
               }}
             >
-              {t('frequent|Skip')}
+              {t('translation|Skip')}
             </Button>
           </React.Fragment>
         }
@@ -64,7 +64,7 @@ function UpdatePopup(props: {
           horizontal: 'right',
         }}
         open={releaseFetchFailed}
-        message={t('release|Failed to fetch release information')}
+        message={t('translation|Failed to fetch release information')}
         ContentProps={{
           'aria-describedby': 'updatePopup',
         }}
@@ -89,7 +89,7 @@ function UpdatePopup(props: {
       ContentProps={{
         'aria-describedby': 'updatePopup',
       }}
-      message={t('release|An update is available')}
+      message={t('translation|An update is available')}
       action={
         <React.Fragment>
           <Box display={'flex'} alignItems="center">
@@ -101,7 +101,7 @@ function UpdatePopup(props: {
                   textTransform: 'none',
                 }}
               >
-                {t('frequent|Read more')}
+                {t('translation|Read more')}
               </Button>
             </Box>
             <Box mb={0.5}>
@@ -124,7 +124,7 @@ function UpdatePopup(props: {
                 }}
                 onClick={() => setShow(false)}
               >
-                {t('frequent|Dismiss')}
+                {t('translation|Dismiss')}
               </Button>
             </Box>
           </Box>

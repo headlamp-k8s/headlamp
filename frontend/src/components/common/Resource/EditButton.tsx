@@ -21,7 +21,7 @@ export default function EditButton(props: EditButtonProps) {
   const [isReadOnly, setIsReadOnly] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState<string>('');
   const location = useLocation();
-  const { t } = useTranslation(['frequent', 'resource']);
+  const { t } = useTranslation(['translation', 'resource']);
 
   function makeErrorMessage(err: any) {
     const status: number = err.status;
@@ -53,10 +53,10 @@ export default function EditButton(props: EditButtonProps) {
     setOpenDialog(false);
     dispatch(
       clusterAction(() => applyFunc(newItemDef), {
-        startMessage: t('resource|Applying changes to {{ itemName }}…', { itemName }),
-        cancelledMessage: t('resource|Cancelled changes to {{ itemName }}.', { itemName }),
-        successMessage: t('resource|Applied changes to {{ itemName }}.', { itemName }),
-        errorMessage: t('resource|Failed to apply changes to {{ itemName }}.', { itemName }),
+        startMessage: t('translation|Applying changes to {{ itemName }}…', { itemName }),
+        cancelledMessage: t('translation|Cancelled changes to {{ itemName }}.', { itemName }),
+        successMessage: t('translation|Applied changes to {{ itemName }}.', { itemName }),
+        errorMessage: t('translation|Failed to apply changes to {{ itemName }}.', { itemName }),
         cancelUrl,
         errorUrl: cancelUrl,
         ...options,
@@ -85,7 +85,7 @@ export default function EditButton(props: EditButtonProps) {
       }}
     >
       <ActionButton
-        description={t('frequent|Edit')}
+        description={t('translation|Edit')}
         onClick={() => setOpenDialog(true)}
         icon="mdi:pencil"
       />

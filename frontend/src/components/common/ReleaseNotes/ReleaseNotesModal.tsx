@@ -15,7 +15,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
   const { releaseNotes, appVersion } = props;
   const [showReleaseNotes, setShowReleaseNotes] = React.useState(Boolean(releaseNotes));
   const theme = useTheme();
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const modalStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -37,7 +37,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
         <Box display="flex" justifyContent="center">
           <Box flexGrow={2}>
             <Typography variant="h4">
-              {t('release|Release Notes ({{ appVersion }})', {
+              {t('translation|Release Notes ({{ appVersion }})', {
                 appVersion: appVersion,
               })}
             </Typography>

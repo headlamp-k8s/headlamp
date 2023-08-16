@@ -56,7 +56,7 @@ function* doClusterAction(action: CallbackAction, actionKey: string, uniqueCance
         url: startUrl,
         buttons: [
           {
-            label: i18next.t('frequent|Cancel'),
+            label: i18next.t('translation|Cancel'),
             actionToDispatch: uniqueCancelAction,
           },
         ],

@@ -38,7 +38,7 @@ export interface MetadataDisplayProps {
 
 export function MetadataDisplay(props: MetadataDisplayProps) {
   const { resource, extraRows } = props;
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation();
   let makeExtraRows: ExtraRowsFunc;
 
   function makeOwnerReferences(ownerReferences: KubeOwnerReference[]) {
@@ -94,7 +94,7 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
   const mainRows = (
     [
       {
-        name: t('frequent|Name'),
+        name: t('translation|Name'),
         value: resource.metadata.name,
       },
       {

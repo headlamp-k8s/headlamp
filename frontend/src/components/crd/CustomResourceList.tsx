@@ -13,21 +13,24 @@ import ResourceListView from '../common/Resource/ResourceListView';
 import { ResourceTableProps } from '../common/Resource/ResourceTable';
 
 export default function CustomResourceList() {
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
   const { crd: crdName } = useParams<{ crd: string }>();
   const [crd, error] = CRD.useGet(crdName);
 
   if (!crd && !error) {
-    return <Loader title={t('crd|Loading custom resource definition')} />;
+    return <Loader title={t('translation|Loading custom resource definition')} />;
   }
 
   if (!!error) {
     return (
       <Empty color="error">
-        {t('crd|Error getting custom resource definition {{ crdName }}: {{ errorMessage }}', {
-          crdName,
-          errorMessage: error,
-        })}
+        {t(
+          'translation|Error getting custom resource definition {{ crdName }}: {{ errorMessage }}',
+          {
+            crdName,
+            errorMessage: error,
+          }
+        )}
       </Empty>
     );
   }
@@ -67,17 +70,17 @@ export interface CustomResourceListProps {
 
 function CustomResourceListRenderer(props: CustomResourceListProps) {
   const { crd } = props;
-  const { t } = useTranslation(['glossary', 'crd']);
+  const { t } = useTranslation('glossary');
 
   return (
     <PageGrid>
       <BackLink />
       <SectionHeader
-        title={t('{{ resourceKind }}', { resourceKind: crd.spec.names.kind })}
+        title={crd.spec.names.kind}
         actions={[
           <Box mr={2}>
             <Link routeName="crd" params={{ name: crd.metadata.name }}>
-              {t('crd|CRD: {{ crdName }}', { crdName: crd.metadata.name })}
+              {t('glossary|CRD: {{ crdName }}', { crdName: crd.metadata.name })}
             </Link>
           </Box>,
         ]}
@@ -107,7 +110,7 @@ export interface CustomResourceTableProps {
 }
 
 export function CustomResourceListTable(props: CustomResourceTableProps) {
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
   const { crd, title = '' } = props;
 
   const apiGroup = React.useMemo(() => {
@@ -119,7 +122,7 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
   }, [apiGroup, crd.metadata.namespace]);
 
   if (!CRClass) {
-    return <Empty>{t('crd|No custom resources found')}</Empty>;
+    return <Empty>{t('translation|No custom resources found')}</Empty>;
   }
 
   const additionalPrinterCols = React.useMemo(() => {
@@ -156,7 +159,7 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
   const cols = React.useMemo(() => {
     const colsToDisplay: ResourceTableProps['columns'] = [
       {
-        label: t('frequent|Name'),
+        label: t('translation|Name'),
         getter: (resource: KubeObject) => <CustomResourceLink resource={resource} crd={crd} />,
         sort: (c1: KubeObject, c2: KubeObject) => {
           return c1.metadata.name.localeCompare(c2.metadata.name);

@@ -4,7 +4,7 @@ import PriorityClass from '../../lib/k8s/priorityClass';
 import { DetailsGrid } from '../common';
 
 export default function PriorityClassDetails() {
-  const { t } = useTranslation(['frequent', 'priorityClasses']);
+  const { t } = useTranslation(['translation']);
   const { name } = useParams<{ name: string }>();
 
   return (
@@ -15,19 +15,19 @@ export default function PriorityClassDetails() {
       extraInfo={item =>
         item && [
           {
-            name: t('frequent|Value'),
+            name: t('translation|Value'),
             value: item.value,
           },
           {
-            name: t('priorityClasses|Global Default'),
+            name: t('translation|Global Default'),
             value: item.globalDefault || 'False',
           },
           {
-            name: t('priorityClasses|Preemption Policy'),
+            name: t('translation|Preemption Policy'),
             value: item.preemptionPolicy,
           },
           {
-            name: t('frequent|Description'),
+            name: t('translation|Description'),
             value: item.description,
           },
         ]

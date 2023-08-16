@@ -4,7 +4,7 @@ import { RuntimeClass } from '../../lib/k8s/runtime';
 import { DetailsGrid } from '../common';
 
 export function RuntimeClassDetails() {
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation(['translation']);
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
 
   return (
@@ -16,7 +16,7 @@ export function RuntimeClassDetails() {
       extraInfo={item =>
         item && [
           {
-            name: t('Handler'),
+            name: t('translation|Handler'),
             value: item?.jsonData?.handler,
           },
         ]

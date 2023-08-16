@@ -55,7 +55,7 @@ function PodLogViewer(props: PodLogViewerProps) {
     lastLineShown: -1,
   });
   const xtermRef = React.useRef<XTerminal | null>(null);
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
 
   function getDefaultContainer() {
     return item.spec.containers.length > 0 ? item.spec.containers[0].name : '';
@@ -86,7 +86,7 @@ function PodLogViewer(props: PodLogViewerProps) {
     if (!follow && logs.logs.length > 0) {
       xtermRef.current?.write(
         '\n\n' +
-          t('logs|Logs are paused. Click the follow button to resume following them.') +
+          t('translation|Logs are paused. Click the follow button to resume following them.') +
           '\r\n'
       );
       return;
@@ -180,7 +180,7 @@ function PodLogViewer(props: PodLogViewerProps) {
         </FormControl>,
         <FormControl className={classes.linesFormControl}>
           <InputLabel shrink id="container-lines-chooser-label">
-            {t('frequent|Lines')}
+            {t('translation|Lines')}
           </InputLabel>
           <Select
             labelId="container-lines-chooser-label"
@@ -198,13 +198,15 @@ function PodLogViewer(props: PodLogViewerProps) {
         <LightTooltip
           title={
             hasContainerRestarted()
-              ? t('logs|Show logs for previous instances of this container.')
-              : t('logs|You can only select this option for containers that have been restarted.')
+              ? t('translation|Show logs for previous instances of this container.')
+              : t(
+                  'translation|You can only select this option for containers that have been restarted.'
+                )
           }
         >
           <FormControlLabel
             className={classes.switchControl}
-            label={t('logs|Show previous')}
+            label={t('translation|Show previous')}
             disabled={!hasContainerRestarted()}
             control={
               <Switch
@@ -219,7 +221,7 @@ function PodLogViewer(props: PodLogViewerProps) {
         </LightTooltip>,
         <FormControlLabel
           className={classes.switchControl}
-          label={t('logs|Timestamps')}
+          label={t('translation|Timestamps')}
           control={
             <Switch
               checked={showTimestamps}
@@ -232,7 +234,7 @@ function PodLogViewer(props: PodLogViewerProps) {
         />,
         <FormControlLabel
           className={classes.switchControl}
-          label={t('logs|Follow')}
+          label={t('translation|Follow')}
           control={
             <Switch
               checked={follow}
@@ -260,15 +262,15 @@ export function VolumeDetails(props: VolumeDetailsProps) {
   }
   const { t } = useTranslation();
   return (
-    <SectionBox title={t('frequent|Volumes')}>
+    <SectionBox title={t('translation|Volumes')}>
       <SimpleTable
         columns={[
           {
-            label: t('frequent|Name'),
+            label: t('translation|Name'),
             getter: data => data.name,
           },
           {
-            label: t('frequent|Type'),
+            label: t('translation|Type'),
             getter: data => Object.keys(data)[1],
           },
         ]}
@@ -281,7 +283,7 @@ export function VolumeDetails(props: VolumeDetailsProps) {
 
 function TolerationsSection(props: { tolerations: any[] }) {
   const { tolerations } = props;
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <SectionBox title={t('Tolerations')}>
@@ -289,20 +291,20 @@ function TolerationsSection(props: { tolerations: any[] }) {
         data={tolerations}
         columns={[
           {
-            label: t('Key'),
+            label: t('translation|Key'),
             getter: data => data.key,
           },
           {
-            label: t('Value'),
+            label: t('translation|Value'),
             getter: data => data.value,
           },
           {
-            label: t('Operator'),
+            label: t('translation|Operator'),
             getter: data => data.operator,
             gridTemplate: '0.5fr',
           },
           {
-            label: t('Effect'),
+            label: t('translation|Effect'),
             getter: data => data.effect,
           },
           {

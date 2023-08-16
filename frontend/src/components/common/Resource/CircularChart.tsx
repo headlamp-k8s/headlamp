@@ -33,7 +33,7 @@ export function CircularChart(props: CircularChartProps) {
     getLegend,
     ...others
   } = props;
-  const { t } = useTranslation(['cluster']);
+  const { t } = useTranslation();
 
   const [used, available] = getResourceUsage();
 
@@ -81,7 +81,9 @@ export function CircularChart(props: CircularChartProps) {
       legend={!!getLegend ? getLegend(used, available) : ''}
       label={getLabel()}
       total={available}
-      infoTooltip={noMetrics ? t('cluster|Install the metrics-server to get usage data.') : null}
+      infoTooltip={
+        noMetrics ? t('translation|Install the metrics-server to get usage data.') : null
+      }
       {...others}
     />
   );

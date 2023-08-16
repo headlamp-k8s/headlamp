@@ -15,7 +15,7 @@ import SimpleTable from '../common/SimpleTable';
 
 export default function ServiceDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   const [endpoints, endpointsError] = Endpoints.useList({ namespace });
 
@@ -32,7 +32,7 @@ export default function ServiceDetails() {
       extraInfo={item =>
         item && [
           {
-            name: t('Type'),
+            name: t('translation|Type'),
             value: item.spec.type,
           },
           {
@@ -64,7 +64,7 @@ export default function ServiceDetails() {
                       datum: 'protocol',
                     },
                     {
-                      label: t('frequent|Name'),
+                      label: t('translation|Name'),
                       datum: 'name',
                     },
                     {
@@ -95,11 +95,11 @@ export default function ServiceDetails() {
                     data={getOwnedEndpoints(item)}
                     columns={[
                       {
-                        label: t('frequent|Name'),
+                        label: t('translation|Name'),
                         getter: endpoint => <Link kubeObject={endpoint} />,
                       },
                       {
-                        label: t('frequent|Addresses'),
+                        label: t('translation|Addresses'),
                         getter: endpoint => endpoint.getAddressesText(),
                         cellProps: { style: { width: '40%', maxWidth: '40%' } },
                       },

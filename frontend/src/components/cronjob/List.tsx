@@ -30,7 +30,7 @@ export function getLastScheduleTime(cronJob: CronJob) {
 }
 
 export default function CronJobList() {
-  const { t, i18n } = useTranslation(['glossary', 'frequent']);
+  const { t, i18n } = useTranslation(['glossary', 'translation']);
 
   return (
     <ResourceListView
@@ -46,14 +46,14 @@ export default function CronJobList() {
         },
         {
           id: 'suspend',
-          label: t('Suspend'),
+          label: t('translation|Suspend'),
           getter: cronJob => cronJob.spec.suspend.toString(),
           sort: true,
           gridTemplate: 0.6,
         },
         {
           id: 'active',
-          label: t('frequent|Active'),
+          label: t('translation|Active'),
           getter: cronJob => cronJob.status?.active?.length || 0,
           sort: true,
           gridTemplate: 0.6,

@@ -34,7 +34,7 @@ function SpawnJobDialog(props: {
 }) {
   const { cronJob, openJobDialog, setOpenJobDialog, applyFunc } = props;
   const { namespace } = useParams<{ namespace: string }>();
-  const { t } = useTranslation(['frequent', 'resource']);
+  const { t } = useTranslation(['translation']);
   const dispatch = useDispatch();
   // method to generate a unique string
   const uniqueString = () => {
@@ -66,15 +66,15 @@ function SpawnJobDialog(props: {
       aria-labelledby="form-dialog-title"
       maxWidth="sm"
     >
-      <DialogTitle id="form-dialog-title">{t('resource|Spawn Job')}</DialogTitle>
+      <DialogTitle id="form-dialog-title">{t('translation|Spawn Job')}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          {t('resource|This will trigger a new Job based on the CronJob {{ name }}', {
+          {t('translation|This will trigger a new Job based on the CronJob {{ name }}', {
             name,
           })}
         </DialogContentText>
         <Box mb={1}>
-          <InputLabel htmlFor="name">{t('resource|Job Name')}</InputLabel>
+          <InputLabel htmlFor="name">{t('translation|Job Name')}</InputLabel>
         </Box>
         <Input
           margin="dense"
@@ -89,20 +89,20 @@ function SpawnJobDialog(props: {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          {t('frequent|Cancel')}
+          {t('translation|Cancel')}
         </Button>
         <Button
           onClick={() => {
             handleClose();
             dispatch(
               clusterAction(() => applyFunc(job), {
-                startMessage: t('resource|Spawning Job {{ newItemName }}…', {
+                startMessage: t('translation|Spawning Job {{ newItemName }}…', {
                   newItemName: job.metadata.name,
                 }),
-                successMessage: t('resource|Job {{ newItemName }} spawned', {
+                successMessage: t('translation|Job {{ newItemName }} spawned', {
                   newItemName: job.metadata.name,
                 }),
-                errorMessage: t('resource|Failed to spawn Job {{ newItemName }}', {
+                errorMessage: t('translation|Failed to spawn Job {{ newItemName }}', {
                   newItemName: job.metadata.name,
                 }),
               })
@@ -110,7 +110,7 @@ function SpawnJobDialog(props: {
           }}
           color="primary"
         >
-          {t('frequent|Spawn')}
+          {t('translation|Spawn')}
         </Button>
       </DialogActions>
     </Dialog>
@@ -167,7 +167,7 @@ export default function CronJobDetails() {
   function PauseResumeAction() {
     return (
       <ActionButton
-        description={isCronSuspended ? t('frequent|Resume') : t('frequent|Suspend')}
+        description={isCronSuspended ? t('translation|Resume') : t('translation|Suspend')}
         onClick={() => {
           handleCron(!isCronSuspended);
         }}
@@ -186,31 +186,31 @@ export default function CronJobDetails() {
     dispatch(
       clusterAction(() => applyFunc(clonedCronJob.jsonData), {
         startMessage: suspend
-          ? t('resource|Suspending CronJob {{ newItemName }}…', {
+          ? t('translation|Suspending CronJob {{ newItemName }}…', {
               newItemName: clonedCronJob.metadata.name,
             })
-          : t('resource|Resuming CronJob {{ newItemName }}…', {
+          : t('translation|Resuming CronJob {{ newItemName }}…', {
               newItemName: clonedCronJob.metadata.name,
             }),
         cancelledMessage: suspend
-          ? t('resource|Cancelled suspending CronJob {{ newItemName }}.', {
+          ? t('translation|Cancelled suspending CronJob {{ newItemName }}.', {
               newItemName: clonedCronJob.metadata.name,
             })
-          : t('resource|Cancelled resuming CronJob {{ newItemName }}.', {
+          : t('translation|Cancelled resuming CronJob {{ newItemName }}.', {
               newItemName: clonedCronJob.metadata.name,
             }),
         successMessage: suspend
-          ? t('resource|Suspended CronJob {{ newItemName }}.', {
+          ? t('translation|Suspended CronJob {{ newItemName }}.', {
               newItemName: clonedCronJob.metadata.name,
             })
-          : t('resource|Resumed CronJob {{ newItemName }}.', {
+          : t('translation|Resumed CronJob {{ newItemName }}.', {
               newItemName: clonedCronJob.metadata.name,
             }),
         errorMessage: suspend
-          ? t('resource|Failed to suspend CronJob {{ newItemName }}.', {
+          ? t('translation|Failed to suspend CronJob {{ newItemName }}.', {
               newItemName: clonedCronJob.metadata.name,
             })
-          : t('resource|Failed to resume CronJob {{ newItemName }}.', {
+          : t('translation|Failed to resume CronJob {{ newItemName }}.', {
               newItemName: clonedCronJob.metadata.name,
             }),
       })
@@ -223,7 +223,7 @@ export default function CronJobDetails() {
     cronJob && (
       <AuthVisible authVerb="create" item={Job} namespace={cronJob.getNamespace()}>
         <ActionButton
-          description={t('resource|Spawn Job')}
+          description={t('translation|Spawn Job')}
           onClick={() => {
             setOpenJobDialog(true);
           }}
@@ -260,7 +260,7 @@ export default function CronJobDetails() {
               value: getSchedule(item, i18n.language),
             },
             {
-              name: t('Suspend'),
+              name: t('translation|Suspend'),
               value: item.spec.suspend.toString(),
             },
             {

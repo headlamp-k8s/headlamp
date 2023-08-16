@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
 
 function ClusterListItem(props: { cluster: Cluster; onClick: () => void; selected?: boolean }) {
   const { cluster, selected, onClick } = props;
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const theme = useTheme();
 
   return (
@@ -75,7 +75,10 @@ function ClusterListItem(props: { cluster: Cluster; onClick: () => void; selecte
       <ListItemIcon>
         <Icon icon="mdi:kubernetes" width={26} color={theme.palette.text.primary} />
       </ListItemIcon>
-      <ListItemText primary={cluster.name} secondary={!!cluster.isCurrent ? t('Current') : ''} />
+      <ListItemText
+        primary={cluster.name}
+        secondary={!!cluster.isCurrent ? t('Current', { context: 'cluster' }) : ''}
+      />
     </MenuItem>
   );
 }
@@ -92,7 +95,7 @@ export interface ChooserPopupPros {
  * @param onClose Callback to be called when the popup is closed.
  */
 function ClusterChooserPopup(props: ChooserPopupPros) {
-  const { t } = useTranslation(['cluster', 'frequent']);
+  const { t } = useTranslation(['translation']);
   const { anchor, onClose, ...otherProps } = props;
   const [filter, setFilter] = React.useState('');
   const clusters = useClustersConf();
@@ -252,7 +255,7 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
         <TextField
           label={t('Choose cluster')}
           id="filled-size-small"
-          placeholder={t('frequent|Name')}
+          placeholder={t('translation|Name')}
           size="small"
           fullWidth
           InputLabelProps={{ shrink: true }}
@@ -303,7 +306,7 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
             className={classes.button}
             onClick={() => history.push(createRouteURL('loadKubeConfig'))}
           >
-            {t('cluster|Add Cluster')}
+            {t('translation|Add Cluster')}
           </Button>
         </>
       )}

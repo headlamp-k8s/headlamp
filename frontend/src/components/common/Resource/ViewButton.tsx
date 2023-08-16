@@ -13,7 +13,7 @@ export interface ViewButtonProps {
 
 function ViewButton({ item, initialToggle = false }: ViewButtonProps) {
   const [toggle, setToggle] = React.useState(initialToggle);
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation();
 
   function handleButtonClick() {
     setToggle(toggle => !toggle);

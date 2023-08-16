@@ -5,7 +5,7 @@ import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function VolumeClaimList() {
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <ResourceListView
@@ -16,7 +16,7 @@ export default function VolumeClaimList() {
         'namespace',
         {
           id: 'status',
-          label: t('frequent|Status'),
+          label: t('translation|Status'),
           getter: volumeClaim => volumeClaim.status.phase,
           gridTemplate: 0.8,
           sort: true,

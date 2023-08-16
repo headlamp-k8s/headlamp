@@ -3,7 +3,7 @@ import { Lease } from '../../lib/k8s/lease';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export function LeaseList() {
-  const { t } = useTranslation(['glossary', 'resource', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
   return (
     <ResourceListView
       title={t('glossary|Lease')}
@@ -13,7 +13,7 @@ export function LeaseList() {
         'namespace',
         {
           id: 'holder',
-          label: t('frequent|Holder'),
+          label: t('translation|Holder'),
           getter: item => item?.spec.holderIdentity,
         },
         'age',

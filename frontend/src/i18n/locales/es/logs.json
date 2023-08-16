@@ -1,8 +1,0 @@
-{
-  "Logs are paused. Click the follow button to resume following them.": "Los registros están en pausa. Haga clic en el botón siguiente para continuar a seguirlos.",
-  "Show logs for previous instances of this container.": "Mostrar registros para instancias anteriores de este contenedor.",
-  "You can only select this option for containers that have been restarted.": "Sólo podrá seleccionar esta opción para los contenedores que se han reiniciado.",
-  "Show previous": "Mostrar anteriores",
-  "Timestamps": "Marcas de tiempo",
-  "Follow": "Seguir"
-}

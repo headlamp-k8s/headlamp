@@ -21,25 +21,25 @@ function prepareRoutes(
     {
       name: 'home',
       icon: showHome ? 'mdi:home' : 'mdi:hexagon-multiple-outline',
-      label: showHome ? t('glossary|Home') : t('glossary|Cluster'),
+      label: showHome ? t('translation|Home') : t('glossary|Cluster'),
       url: showHome ? '/' : defaultClusterURL,
       divider: !showHome,
     },
     {
       name: 'notifications',
       icon: 'mdi:bell',
-      label: t('frequent|Notifications'),
+      label: t('translation|Notifications'),
       url: '/notifications',
     },
     {
       name: 'settings',
       icon: 'mdi:cog',
-      label: t('frequent|Settings'),
+      label: t('translation|Settings'),
       url: '/settings',
       subList: [
         {
           name: 'plugins',
-          label: t('settings|Plugins'),
+          label: t('translation|Plugins'),
           url: '/settings/plugins',
           hide: !helpers.isElectron(),
         },
@@ -50,7 +50,7 @@ function prepareRoutes(
     {
       name: 'home',
       icon: 'mdi:home',
-      label: t('frequent|Home'),
+      label: t('translation|Home'),
       url: '/',
       divider: true,
       hide: !showHome,

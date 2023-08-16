@@ -12,7 +12,7 @@ export interface WebhookConfigurationDetailsProps {
 
 export default function WebhookConfigurationDetails(props: WebhookConfigurationDetailsProps) {
   const { resourceClass, name } = props;
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <DetailsGrid
@@ -46,17 +46,17 @@ export default function WebhookConfigurationDetails(props: WebhookConfigurationD
                       key={webhook.name}
                       rows={[
                         {
-                          name: t('Name'),
+                          name: t('translation|Name'),
                           value: webhook.name,
                         },
                         {
-                          name: t('Admission Review Versions'),
+                          name: t('translation|Admission Review Versions'),
                           value: webhook.admissionReviewVersions?.join(', '),
                         },
                         {
                           name: webhook.clientConfig?.url
-                            ? t('Client Config: URL')
-                            : t('Client Config: Service'),
+                            ? t('translation|Client Config: URL')
+                            : t('translation|Client Config: Service'),
                           value: webhook.clientConfig?.url ? (
                             webhook.clientConfig?.url
                           ) : (
@@ -68,13 +68,13 @@ export default function WebhookConfigurationDetails(props: WebhookConfigurationD
                                   namespace: webhook.clientConfig?.service?.namespace,
                                 }}
                               >
-                                {t('Service: {{namespace}}/{{name}}', {
+                                {t('translation|Service: {{namespace}}/{{name}}', {
                                   namespace: webhook.clientConfig?.service?.namespace,
                                   name: webhook.clientConfig?.service?.name,
                                 })}
                               </Link>
                               <br />
-                              {t('Path: {{ path }}:{{ port }}', {
+                              {t('translation|Path: {{ path }}:{{ port }}', {
                                 path: webhook.clientConfig?.service?.path,
                                 port: webhook.clientConfig?.service?.port || 443,
                               })}
@@ -141,7 +141,7 @@ export default function WebhookConfigurationDetails(props: WebhookConfigurationD
                                   getter: rule => rule.apiVersions?.join(', '),
                                 },
                                 {
-                                  label: t('Operations'),
+                                  label: t('translation|Operations'),
                                   getter: rule => rule.operations?.join(', '),
                                 },
                                 {

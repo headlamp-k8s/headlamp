@@ -6,7 +6,7 @@ import { LightTooltip, StatusLabel } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function DeploymentsList() {
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
 
   function renderPods(deployment: Deployment) {
     const { replicas, availableReplicas } = deployment.status;
@@ -79,7 +79,7 @@ export default function DeploymentsList() {
         },
         {
           id: 'conditions',
-          label: t('Conditions'),
+          label: t('translation|Conditions'),
           getter: deployment => renderConditions(deployment),
         },
         {

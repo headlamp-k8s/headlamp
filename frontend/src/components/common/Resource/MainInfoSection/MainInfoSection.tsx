@@ -45,7 +45,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
     backLink,
     error = null,
   } = props;
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const header = typeof headerSection === 'function' ? headerSection(resource) : headerSection;
 
   function getBackLink() {
@@ -79,7 +79,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
             <Empty color="error">{error.toString()}</Empty>
           </Paper>
         ) : (
-          <Loader title={t('frequent|Loading resource data')} />
+          <Loader title={t('translation|Loading resource data')} />
         )
       ) : (
         <React.Fragment>

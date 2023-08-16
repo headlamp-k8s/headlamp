@@ -13,7 +13,7 @@ import Empty from '../../common/EmptyContent';
 export default function NotificationList() {
   const notifications = useTypedSelector(state => state.ui.notifications);
   const config = useTypedSelector(state => state.config);
-  const { t } = useTranslation(['notifications', 'glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
   const dispatch = useDispatch();
   const theme = useTheme();
   const search = useTypedSelector(state => state.filter.search);
@@ -76,10 +76,10 @@ export default function NotificationList() {
         </IconButton>
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
           <MenuItem onClick={markAllAsRead} disabled={!hasUnseenNotifications}>
-            <Typography color={'primary'}>{t('notifications|Mark all as read')}</Typography>
+            <Typography color={'primary'}>{t('translation|Mark all as read')}</Typography>
           </MenuItem>
           <MenuItem onClick={clearAllNotifications} disabled={allNotificationsAreDeleted}>
-            <Typography color="primary">{t('notifications|Clear all')}</Typography>
+            <Typography color="primary">{t('translation|Clear all')}</Typography>
           </MenuItem>
         </Menu>
       </>
@@ -90,7 +90,7 @@ export default function NotificationList() {
     <SectionBox
       title={
         <SectionFilterHeader
-          title={t('frequent|Notifications')}
+          title={t('translation|Notifications')}
           noNamespaceFilter
           actions={[<NotificationActionMenu />]}
         />
@@ -98,7 +98,7 @@ export default function NotificationList() {
       backLink
     >
       {allNotificationsAreDeleted ? (
-        <Empty>{t("notifications|You don't have any notifications right now")}</Empty>
+        <Empty>{t("translation|You don't have any notifications right now")}</Empty>
       ) : (
         <SimpleTable
           filterFunction={(notification: Notification) =>
@@ -106,11 +106,11 @@ export default function NotificationList() {
           }
           columns={[
             {
-              label: t('Message'),
+              label: t('translation|Message'),
               getter: (notification: Notification) => (
                 <Box width={'30vw'}>
                   <Tooltip
-                    title={notification.message || t('notifications|No message')}
+                    title={notification.message || t('translation|No message')}
                     disableHoverListener={!notification.message}
                   >
                     <Typography
@@ -121,7 +121,7 @@ export default function NotificationList() {
                       noWrap
                       onClick={() => notificationItemClickHandler(notification)}
                     >
-                      {`${notification.message || t(`notifications|No message`)}`}
+                      {`${notification.message || t(`translation|No message`)}`}
                     </Typography>
                   </Tooltip>
                 </Box>
@@ -147,17 +147,17 @@ export default function NotificationList() {
               ),
             },
             {
-              label: t('frequent|Date'),
+              label: t('translation|Date'),
               getter: (notification: Notification) => <DateLabel date={notification.date} />,
             },
             {
-              label: t('Visible'),
+              label: t('translation|Visible'),
               getter: (notification: Notification) =>
                 !notification.seen && (
-                  <Tooltip title={t(`notifications|Mark as read`)}>
+                  <Tooltip title={t(`translation|Mark as read`)}>
                     <IconButton
                       onClick={e => notificationSeenUnseenHandler(e, notification)}
-                      aria-label={t(`notifications|Mark as read`)}
+                      aria-label={t(`translation|Mark as read`)}
                     >
                       <Icon
                         icon="mdi:circle"
