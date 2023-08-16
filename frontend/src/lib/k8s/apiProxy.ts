@@ -516,6 +516,16 @@ function repeatFactoryMethod(apiEndpoints: ApiFactoryReturn[], funcName: keyof A
   };
 }
 
+// @todo: in apiFactory, and multipleApiFactory use rather than 'args'...
+//        `group: string, version: string, resource: string`
+
+/**
+ * Creates an API client for a single or multiple Kubernetes resources.
+ *
+ * @param args - The arguments to pass to either `singleApiFactory` or `multipleApiFactory`.
+ *
+ * @returns An API client for the specified Kubernetes resource(s).
+ */
 export function apiFactory(
   ...args: Parameters<typeof singleApiFactory> | Parameters<typeof multipleApiFactory>
 ) {
