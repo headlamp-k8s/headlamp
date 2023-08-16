@@ -254,7 +254,12 @@ async function refreshToken(token: string | null) {
   }
 }
 
-// getClusterAuthType returns the auth type of the cluster.
+/**
+ * @returns Auth type of the cluster, or an empty string if the cluster is not found.
+ * It could return 'oidc' or '' for example.
+ *
+ * @param cluster - Name of the cluster.
+ */
 function getClusterAuthType(cluster: string): string {
   const state = store.getState();
   const authType: string = state.config?.clusters?.[cluster]?.['auth_type'] || '';
