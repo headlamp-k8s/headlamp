@@ -423,6 +423,23 @@ export type StreamErrCb = (err: Error & { status?: number }, cancelStreamFunc?: 
 
 type ApiFactoryReturn = ReturnType<typeof apiFactory> | ReturnType<typeof apiFactoryWithNamespace>;
 
+// @todo: repeatStreamFunc could be improved for performance by remembering when a URL
+//       is 404 and not trying it again... and again.
+
+/**
+ * Repeats a streaming function call across multiple API endpoints until a
+ * successful response is received or all endpoints have been exhausted.
+ *
+ * This is especially useful for Kubernetes beta APIs that then stabalize.
+ * So the APIs are available at different endpoints on different versions of Kubernetes.
+ *
+ * @param apiEndpoints - An array of API endpoint objects returned by the `apiFactory` function.
+ * @param funcName - The name of the streaming function to call on each endpoint.
+ * @param errCb - A callback function to handle errors that occur during the streaming function call.
+ * @param args - Additional arguments to pass to the streaming function.
+ *
+ * @returns A function that cancels the streaming function call.
+ */
 async function repeatStreamFunc(
   apiEndpoints: ApiFactoryReturn[],
   funcName: keyof ApiFactoryReturn,
