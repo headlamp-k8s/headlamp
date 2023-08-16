@@ -540,6 +540,15 @@ export function apiFactory(
   return singleApiFactory(...(args as Parameters<typeof singleApiFactory>));
 }
 
+/**
+ * Creates an API endpoint object for multiple API endpoints.
+ * It first tries the first endpoint, then the second, and so on until it
+ * gets a successful response.
+ *
+ * @param args - An array of arguments to pass to the `singleApiFactory` function.
+ *
+ * @returns An API endpoint object.
+ */
 function multipleApiFactory(
   ...args: Parameters<typeof singleApiFactory>[]
 ): ReturnType<typeof singleApiFactory> {
