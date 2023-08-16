@@ -414,7 +414,11 @@ export async function clusterRequest(
   return response.json();
 }
 
+// @todo: there should be more specific args and types on StreamResultsCb than '...args: any'.
+
+/** The callback that's called when some results are streamed in. */
 export type StreamResultsCb = (...args: any[]) => void;
+/** The callback that's called when there's an error streaming the results. */
 export type StreamErrCb = (err: Error & { status?: number }, cancelStreamFunc?: () => void) => void;
 
 type ApiFactoryReturn = ReturnType<typeof apiFactory> | ReturnType<typeof apiFactoryWithNamespace>;
