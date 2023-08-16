@@ -1,0 +1,1302 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Service 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <h1
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+                >
+                  MutatingWebhookConfiguration
+                </h1>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            aria-busy="false"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <dl
+                class="MuiGrid-root makeStyles-table MuiGrid-container"
+              >
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    webhook-admission-controller
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    2022-10-14T11:25:22.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Labels
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                  >
+                    <div
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                      style="max-width: 80%;"
+                    >
+                      <div
+                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                      >
+                        <p
+                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                        >
+                          admissions.enforcer/disabled: true
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  API Version
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                />
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Webhooks
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  1
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Webhooks
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root MuiBox-root makeStyles-box"
+          >
+            <dl
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
+            >
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Name
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  webhook-admission-controller.example.com
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Admission Review Versions
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  v1beta1
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Client Config: Service
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  Service: my-namespace/my-service
+                </a>
+                <br />
+                Path: /mutate-nodes:443
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Client Config: Ca Bundle
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <button
+                      aria-label="toggle field visibility"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true"
+                  >
+                    <div
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth"
+                    >
+                      <input
+                        class="MuiInputBase-input MuiInput-input"
+                        readonly=""
+                        type="password"
+                        value="******"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Failure Policy
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  Fail
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Match Policy
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  Exact
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Side Effects
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  NoneOnDryRun
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Timeout Seconds
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  10
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Namespace Selector
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                >
+                  validating-webhook: true
+                </p>
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                >
+                  validating-webhook in (true)
+                </p>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Object Selector
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                >
+                  validating-webhook: true
+                </p>
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                >
+                  validating-webhook in (true)
+                </p>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Reinvocation Policy
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  Never
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Rules
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <div
+                  class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
+                >
+                  <table
+                    class="MuiTable-root makeStyles-table makeStyles-table"
+                  >
+                    <thead
+                      class="MuiTableHead-root"
+                    >
+                      <tr
+                        class="MuiTableRow-root MuiTableRow-head"
+                      >
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          API Groups
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          API Versions
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          Operations
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          Resources
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          Scope
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="MuiTableBody-root"
+                    >
+                      <tr
+                        class="MuiTableRow-root"
+                      >
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          v1
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          CREATE
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          pods
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          *
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root MuiBox-root makeStyles-box"
+          >
+            <div
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
+            >
+              <table
+                class="MuiTable-root makeStyles-table makeStyles-table"
+              >
+                <thead
+                  class="MuiTableHead-root"
+                >
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      From
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Message
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Age
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      Normal
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      Created
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      kubelet
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                      >
+                        <label
+                          class="makeStyles-fullText"
+                          id=""
+                        >
+                          Created
+                        </label>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+                        title="2021-03-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  ;
+</div>
+`;
+
+exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 1`] = `
+<div>
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            <span
+              class="MuiButton-startIcon MuiButton-iconSizeSmall"
+            >
+              <span />
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+              style="padding-top: 3px;"
+            >
+              Back
+            </p>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <h1
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+                >
+                  MutatingWebhookConfiguration
+                </h1>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            aria-busy="false"
+            aria-live="polite"
+            class="MuiBox-root MuiBox-root makeStyles-box"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <dl
+                class="MuiGrid-root makeStyles-table MuiGrid-container"
+              >
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Name
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    webhook-admission-controller
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Creation
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <span
+                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  >
+                    2022-10-14T11:25:22.000Z
+                  </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Labels
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+                  >
+                    <div
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"
+                      style="max-width: 80%;"
+                    >
+                      <div
+                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth"
+                      >
+                        <p
+                          class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1"
+                        >
+                          admissions.enforcer/disabled: true
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  API Version
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                />
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Webhooks
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  1
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Webhooks
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root MuiBox-root makeStyles-box"
+          >
+            <dl
+              class="MuiGrid-root makeStyles-table MuiGrid-container"
+            >
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Name
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  webhook-admission-controller.example.com
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Admission Review Versions
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  v1beta1
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Client Config: URL
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  https://localhost:8443/mutate-nodes
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Client Config: Ca Bundle
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item"
+                  >
+                    <button
+                      aria-label="toggle field visibility"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <span />
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true"
+                  >
+                    <div
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth"
+                    >
+                      <input
+                        class="MuiInputBase-input MuiInput-input"
+                        readonly=""
+                        type="password"
+                        value="******"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Failure Policy
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  Fail
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Match Policy
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  Exact
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Side Effects
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  NoneOnDryRun
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Timeout Seconds
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  10
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Namespace Selector
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                >
+                  validating-webhook: true
+                </p>
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                >
+                  validating-webhook in (true)
+                </p>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Object Selector
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                >
+                  validating-webhook: true
+                </p>
+                <p
+                  class="MuiTypography-root makeStyles-metadataValueLabel MuiTypography-body1 MuiTypography-displayInline"
+                >
+                  validating-webhook in (true)
+                </p>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Reinvocation Policy
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <span
+                  class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                >
+                  Never
+                </span>
+              </dd>
+              <dt
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+              >
+                Rules
+              </dt>
+              <dd
+                class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+              >
+                <div
+                  class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
+                >
+                  <table
+                    class="MuiTable-root makeStyles-table makeStyles-table"
+                  >
+                    <thead
+                      class="MuiTableHead-root"
+                    >
+                      <tr
+                        class="MuiTableRow-root MuiTableRow-head"
+                      >
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          API Groups
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          API Versions
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          Operations
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          Resources
+                        </th>
+                        <th
+                          class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                          scope="col"
+                        >
+                          Scope
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="MuiTableBody-root"
+                    >
+                      <tr
+                        class="MuiTableRow-root"
+                      >
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          v1
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          CREATE
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          pods
+                        </td>
+                        <td
+                          class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        >
+                          *
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiBox-root MuiBox-root"
+        >
+          <div
+            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiBox-root MuiBox-root"
+              >
+                <h2
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                >
+                  Events
+                </h2>
+                <div
+                  class="MuiBox-root MuiBox-root"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root MuiBox-root makeStyles-box"
+          >
+            <div
+              class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
+            >
+              <table
+                class="MuiTable-root makeStyles-table makeStyles-table"
+              >
+                <thead
+                  class="MuiTableHead-root"
+                >
+                  <tr
+                    class="MuiTableRow-root MuiTableRow-head"
+                  >
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Reason
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      From
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Message
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Age
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="MuiTableBody-root"
+                >
+                  <tr
+                    class="MuiTableRow-root"
+                  >
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      Normal
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      Created
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      kubelet
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <div
+                        class="MuiBox-root MuiBox-root"
+                      >
+                        <label
+                          class="makeStyles-fullText"
+                          id=""
+                        >
+                          Created
+                        </label>
+                      </div>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      <p
+                        class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
+                        title="2021-03-01T00:00:00.000Z"
+                      >
+                        3mo
+                        <span />
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  ;
+</div>
+`;
