@@ -573,6 +573,15 @@ function multipleApiFactory(
   };
 }
 
+// @todo: singleApiFactory should have a return type rather than just what it returns.
+
+/**
+ * @returns An object with methods for interacting with a single API endpoint.
+ *
+ * @param group - The API group.
+ * @param version - The API version.
+ * @param resource - The API resource.
+ */
 function singleApiFactory(group: string, version: string, resource: string) {
   if (isDebugVerbose('k8s/apiProxy@singleApiFactory')) {
     console.debug('k8s/apiProxy@singleApiFactory', { group, version, resource });
