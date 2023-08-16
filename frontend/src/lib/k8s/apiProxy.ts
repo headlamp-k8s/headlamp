@@ -297,19 +297,27 @@ export async function request(
 }
 
 /**
+ * The options for `clusterRequest`.
+ */
+export interface ClusterRequestParams extends RequestParams {
+  cluster?: string | null;
+  autoLogoutOnAuthError?: boolean;
+}
+
+/**
  * Sends a request to the backend. If the cluster is required in the params parameter, it will
  * be used as a request to the respective Kubernetes server.
  *
  * @param path - The path to the API endpoint.
  * @param params - Optional parameters for the request.
- * @param queryParams - Optional query parameters for the request.
+ * @param queryParams - Optional query parameters for the k8s request.
  *
  * @returns A Promise that resolves to the JSON response from the API server.
  * @throws An ApiError if the response status is not ok.
  */
 export async function clusterRequest(
   path: string,
-  params: RequestParams = {},
+  params: ClusterRequestParams = {},
   queryParams?: QueryParameters
 ) {
   interface RequestHeaders {
