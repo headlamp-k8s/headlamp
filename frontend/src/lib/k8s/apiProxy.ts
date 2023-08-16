@@ -170,7 +170,15 @@ export interface QueryParameters {
   watch?: string;
 }
 
-//refreshToken checks if the token is about to expire and refreshes it if so.
+/**
+ * Refreshes the token if it is about to expire.
+ *
+ * @param token - The token to refresh. For null token it just does nothing.
+ *
+ * @note Sets the token with `setToken` if the token is refreshed.
+ * @note Uses global `isTokenRefreshInProgress` to prevent multiple token
+ * refreshes at the same time.
+ */
 async function refreshToken(token: string | null) {
   if (!token || isTokenRefreshInProgress) {
     return;
