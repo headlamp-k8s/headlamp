@@ -488,6 +488,16 @@ async function repeatStreamFunc(
   };
 }
 
+/**
+ * Repeats a factory method call across multiple API endpoints until a
+ * successful response is received or all endpoints have been exhausted.
+ *
+ * This is especially useful for Kubernetes beta APIs that then stabalize.
+ * @param apiEndpoints - An array of API endpoint objects returned by the `apiFactory` function.
+ * @param funcName - The name of the factory method to call on each endpoint.
+ *
+ * @returns A function that cancels the factory method call.
+ */
 function repeatFactoryMethod(apiEndpoints: ApiFactoryReturn[], funcName: keyof ApiFactoryReturn) {
   return async (...args: Parameters<ApiFactoryReturn[typeof funcName]>) => {
     for (let i = 0; i < apiEndpoints.length; i++) {
