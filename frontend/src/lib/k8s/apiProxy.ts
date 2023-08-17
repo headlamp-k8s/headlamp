@@ -1465,10 +1465,14 @@ export function listPortForward(cluster: string) {
   );
 }
 
+// @todo: Move drainNode and drainNodeStatus to a drainNode.ts
+
 /**
  * Drain a node
- * @param cluster
- * @param nodeName
+ *
+ * @param cluster - The cluster to drain the node
+ * @param nodeName - The node name to drain
+ *
  * @returns {Promise<JSON>}
  * @throws {Error} if the request fails
  * @throws {Error} if the response is not ok
