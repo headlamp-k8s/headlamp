@@ -611,6 +611,9 @@ function singleApiFactory(group: string, version: string, resource: string) {
   };
 }
 
+// @todo: just use args from simpleApiFactoryWithNamespace, rather than `args`?
+//        group: string, version: string, resource: string, includeScale: boolean = false
+
 export function apiFactoryWithNamespace(
   ...args:
     | Parameters<typeof simpleApiFactoryWithNamespace>
@@ -665,6 +668,7 @@ function simpleApiFactoryWithNamespace(
   const apiRoot = getApiRoot(group, version);
   const results: {
     scale?: ReturnType<typeof apiScaleFactory>;
+    // @todo: Need to write types for these properties instead.
     [other: string]: any;
   } = {
     list: (
