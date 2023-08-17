@@ -1452,6 +1452,13 @@ export function stopOrDeletePortForward(cluster: string, id: string, stopOrDelet
   );
 }
 
+/**
+ * Lists the port forwards for the specified cluster.
+ *
+ * @param cluster - The cluster to list the port forwards.
+ *
+ * @returns the list of port forwards for the cluster.
+ */
 export function listPortForward(cluster: string) {
   return fetch(`${helpers.getAppUrl()}portforward/list?cluster=${cluster}`).then(response =>
     response.json()
