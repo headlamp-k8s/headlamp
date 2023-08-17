@@ -1503,18 +1503,26 @@ export function drainNode(cluster: string, nodeName: string) {
   });
 }
 
+interface DrainNodeStatus {
+  id: string;
+  cluster: string;
+}
+
 /**
- * Get the status of the drain node process
- * @param cluster
- * @param nodeName
- * @returns {Promise<JSON>}
+ * Get the status of the drain node process.
+ *
+ * It is used in the node detail page.
+ * As draining a node is a long running process, we poll this endpoint to get
+ * the status of the drain node process.
+ *
+ * @param cluster - The cluster to get the status of the drain node process for.
+ * @param nodeName - The node name to get the status of the drain node process for.
+ *
+ * @returns - The response from the API.
  * @throws {Error} if the request fails
  * @throws {Error} if the response is not ok
- *
- * This function is used to get the status of the drain node process. It is used in the node detail page.
- * As draining a node is a long running process, we poll this endpoint to get the status of the drain node process.
  */
-export function drainNodeStatus(cluster: string, nodeName: string) {
+export function drainNodeStatus(cluster: string, nodeName: string): Promise<DrainNodeStatus> {
   return fetch(`${helpers.getAppUrl()}drain-node-status?cluster=${cluster}&nodeName=${nodeName}`, {
     method: 'GET',
     headers: new Headers({
@@ -1522,7 +1530,7 @@ export function drainNodeStatus(cluster: string, nodeName: string) {
       ...JSON_HEADERS,
     }),
   }).then(response => {
-    return response.json().then(data => {
+    return response.json().then((data: DrainNodeStatus) => {
       if (!response.ok) {
         throw new Error('Something went wrong');
       }
