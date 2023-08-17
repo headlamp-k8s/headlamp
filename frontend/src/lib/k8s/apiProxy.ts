@@ -1423,6 +1423,17 @@ export function startPortForward(
   });
 }
 
+// @todo: stopOrDelete true is confusing, rename this param to justStop?
+/**
+ * Stops or deletes a portforward with the specified details.
+ *
+ * @param cluster - The cluster to portforward for.
+ * @param id - The id to portforward for.
+ * @param stopOrDelete - Whether to stop or delete the portforward. True for stop, false for delete.
+ *
+ * @returns The response from the API.
+ * @throws {Error} if the request fails.
+ */
 export function stopOrDeletePortForward(cluster: string, id: string, stopOrDelete: boolean = true) {
   return fetch(`${helpers.getAppUrl()}portforward`, {
     method: 'DELETE',
