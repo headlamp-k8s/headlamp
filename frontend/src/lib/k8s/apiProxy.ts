@@ -1367,6 +1367,26 @@ export async function deleteCluster(cluster: string) {
   );
 }
 
+// @todo: Move startPortForward, stopPortForward, and getPortForwardStatus to a portForward.ts
+
+// @todo: the return type is missing for the following functions.
+//       See PortForwardState in PortForward.tsx
+
+/**
+ * Starts a portforward with the given details.
+ *
+ * @param cluster - The cluster to portforward for.
+ * @param namespace - The namespace to portforward for.
+ * @param podname - The pod to portforward for.
+ * @param containerPort - The container port to portforward for.
+ * @param service - The service to portforward for.
+ * @param serviceNamespace - The service namespace to portforward for.
+ * @param port - The port to portforward for.
+ * @param id - The id to portforward for.
+ *
+ * @returns The response from the API.
+ * @throws {Error} if the request fails.
+ */
 export function startPortForward(
   cluster: string,
   namespace: string,
