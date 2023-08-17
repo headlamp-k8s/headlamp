@@ -1292,6 +1292,17 @@ export interface ApiError extends Error {
   status: number;
 }
 
+// @todo: is metrics() used anywhere? I can't find so, maybe in a plugin?
+
+/**
+ * Gets the metrics for the specified resource. Gets new metrics every 10 seconds.
+ *
+ * @param url - The url of the resource to get metrics for.
+ * @param onMetrics - The function to call with the metrics.
+ * @param onError - The function to call if there's an error.
+ *
+ * @returns A function to cancel the metrics request.
+ */
 export async function metrics(
   url: string,
   onMetrics: (arg: KubeMetrics[]) => void,
