@@ -279,6 +279,43 @@ export function VolumeDetails(props: VolumeDetailsProps) {
   );
 }
 
+function TolerationsSection(props: { tolerations: any[] }) {
+  const { tolerations } = props;
+  const { t } = useTranslation('glossary');
+
+  return (
+    <SectionBox title={t('Tolerations')}>
+      <SimpleTable
+        data={tolerations}
+        columns={[
+          {
+            label: t('Key'),
+            getter: data => data.key,
+          },
+          {
+            label: t('Value'),
+            getter: data => data.value,
+          },
+          {
+            label: t('Operator'),
+            getter: data => data.operator,
+            gridTemplate: '0.5fr',
+          },
+          {
+            label: t('Effect'),
+            getter: data => data.effect,
+          },
+          {
+            label: t('Seconds'),
+            getter: data => data.tolerationSeconds,
+            gridTemplate: '0.5fr',
+          },
+        ]}
+      />
+    </SectionBox>
+  );
+}
+
 export interface PodDetailsProps {
   showLogsDefault?: boolean;
 }
@@ -360,6 +397,23 @@ export default function PodDetails(props: PodDetailsProps) {
             ),
           },
           {
+            name: t('Service Account'),
+            value:
+              !!item.spec.serviceAccountName || !!item.spec.serviceAccount ? (
+                <Link
+                  routeName="serviceAccount"
+                  params={{
+                    namespace: item.metadata.namespace,
+                    name: item.spec.serviceAccountName || item.spec.serviceAccount,
+                  }}
+                >
+                  {item.spec.serviceAccountName || item.spec.serviceAccount}
+                </Link>
+              ) : (
+                ''
+              ),
+          },
+          {
             name: t('Host IP'),
             value: item.status.hostIP,
           },
@@ -367,11 +421,20 @@ export default function PodDetails(props: PodDetailsProps) {
             name: t('Pod IP'),
             value: item.status.podIP,
           },
+          {
+            name: t('QoS Class'),
+            value: item.status.qosClass,
+          },
+          {
+            name: t('Priority'),
+            value: item.spec.priority,
+          },
         ]
       }
       sectionsFunc={item =>
         item && (
           <>
+            <TolerationsSection tolerations={item?.spec?.tolerations || []} />
             <ConditionsSection resource={item?.jsonData} />
             <ContainersSection resource={item?.jsonData} />
             <VolumeDetails volumes={item?.jsonData?.spec.volumes} />
