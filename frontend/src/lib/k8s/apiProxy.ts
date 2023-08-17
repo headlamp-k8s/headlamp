@@ -1217,6 +1217,16 @@ function connectStream(
   }
 }
 
+/**
+ * Combines a base path and a path to create a full path.
+ *
+ * Doesn't matter if the start or the end has a single slash, the result will always have a single slash.
+ *
+ * @param base - The base path.
+ * @param path - The path to combine with the base path.
+ *
+ * @returns The combined path.
+ */
 function combinePath(base: string, path: string) {
   if (base.endsWith('/')) base = base.slice(0, -1); // eslint-disable-line no-param-reassign
   if (path.startsWith('/')) path = path.slice(1); // eslint-disable-line no-param-reassign
