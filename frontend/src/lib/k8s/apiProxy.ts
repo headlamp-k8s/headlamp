@@ -863,7 +863,7 @@ export function remove(url: string, requestOptions = {}) {
 }
 
 /**
- * Streams the results of a Kubernetes API request.
+ * Streams the results of a Kubernetes API request into a 'cb' callback.
  *
  * @param url - The URL of the Kubernetes API endpoint.
  * @param name - The name of the Kubernetes API resource.
