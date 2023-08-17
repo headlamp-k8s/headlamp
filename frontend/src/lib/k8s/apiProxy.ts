@@ -1233,6 +1233,17 @@ function combinePath(base: string, path: string) {
   return `${base}/${path}`;
 }
 
+// @todo: apply() and other requests return Promise<any> Can we get it to return a better type?
+
+/**
+ * Applies the provided body to the Kubernetes API.
+ *
+ * Tries to POST, and if there's a conflict it does a PUT to the api endpoint.
+ *
+ * @param body - The kubernetes object body to apply.
+ *
+ * @returns The response from the kubernetes API server.
+ */
 export async function apply(body: KubeObjectInterface): Promise<JSON> {
   const bodyToApply = _.cloneDeep(body);
 
