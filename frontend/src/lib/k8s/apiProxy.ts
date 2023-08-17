@@ -1128,6 +1128,18 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   }
 }
 
+/**
+ * Connects to a WebSocket stream at the specified path and returns an object
+ * with a `close` function and a `socket` property. Sends messages to `cb` callback.
+ *
+ * @param path - The path of the WebSocket stream to connect to.
+ * @param cb - The function to call with each message received from the stream.
+ * @param onFail - The function to call if the stream is closed unexpectedly.
+ * @param isJson - Whether the messages should be parsed as JSON.
+ * @param additionalProtocols - An optional array of additional WebSocket protocols to use.
+ *
+ * @returns An object with a `close` function and a `socket` property.
+ */
 function connectStream(
   path: string,
   cb: StreamResultsCb,
