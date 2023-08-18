@@ -261,6 +261,9 @@ function setRecentCluster(cluster: string | Cluster) {
   localStorage.setItem(recentClustersStorageKey, JSON.stringify(newClusters));
 }
 
+/**
+ * @returns the list of recent clusters from localStorage.
+ */
 function getRecentClusters() {
   const currentClustersStr = localStorage.getItem(recentClustersStorageKey) || '[]';
   const recentClusters = JSON.parse(currentClustersStr) as string[];
@@ -287,6 +290,9 @@ function setTablesRowsPerPage(perPage: number) {
   localStorage.setItem(tablesRowsPerPageKey, perPage.toString());
 }
 
+/**
+ * @returns the 'VERSION' of the app and the 'GIT_VERSION' of the app.
+ */
 function getVersion() {
   return {
     VERSION: process.env.REACT_APP_HEADLAMP_VERSION,
@@ -294,7 +300,10 @@ function getVersion() {
   };
 }
 
-function getProductName() {
+/**
+ * @returns the product name of the app, or undefined if it's not set.
+ */
+function getProductName(): string | undefined {
   return process.env.REACT_APP_HEADLAMP_PRODUCT_NAME;
 }
 
