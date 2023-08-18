@@ -99,6 +99,6 @@ Scrollbar.args = {
   clusters: ourState(
     Array(20)
       .fill(0)
-      .map((_, i) => ({ name: `cluster${i}` }))
+      .map((_, i) => ({ name: `cluster${i}`, auth_type: '' }))
   ).config.clusters,
 };

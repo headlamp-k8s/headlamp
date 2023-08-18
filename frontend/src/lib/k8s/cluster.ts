@@ -26,9 +26,14 @@ function getAllowedNamespaces() {
   return clusterSettings.allowedNamespaces || [];
 }
 
+//@todo: kubeconfig.go AuthType also doesn't document what '' means for auth_type.
 export interface Cluster {
   name: string;
   useToken?: boolean;
+  /**
+   * Either 'oidc' or ''.
+   */
+  auth_type: string;
   [propName: string]: any;
 }
 

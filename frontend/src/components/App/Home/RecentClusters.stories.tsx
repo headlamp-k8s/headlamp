@@ -7,15 +7,19 @@ import RecentClusters, { RecentClustersProps } from './RecentClusters';
 const clusters: Cluster[] = [
   {
     name: 'cluster0',
+    auth_type: '',
   },
   {
     name: 'cluster1',
+    auth_type: '',
   },
   {
     name: 'cluster2',
+    auth_type: '',
   },
   {
     name: 'cluster3',
+    auth_type: '',
   },
 ];
 
@@ -36,7 +40,7 @@ const Template: Story<RecentClusterStoryProps> = args => {
     const clusters = getRecentClusters();
     localStorage.setItem('recent_clusters', '[]');
     for (const clusterName of clusters) {
-      helpers.setRecentCluster({ name: clusterName });
+      helpers.setRecentCluster(clusterName);
     }
   });
 
