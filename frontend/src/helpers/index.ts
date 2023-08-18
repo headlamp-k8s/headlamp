@@ -247,10 +247,17 @@ function setAppVersion(value: string) {
 
 const recentClustersStorageKey = 'recent_clusters';
 
-function setRecentCluster(cluster: Cluster) {
+/**
+ * Adds the cluster name to the list of recent clusters in localStorage.
+ *
+ * @param cluster - the cluster to add to the list of recent clusters. Can be the name, or a Cluster object.
+ * @returns void
+ */
+function setRecentCluster(cluster: string | Cluster) {
   const recentClusters = getRecentClusters();
-  const currentClusters = recentClusters.filter(name => name !== cluster.name);
-  const newClusters = [cluster.name, ...currentClusters].slice(0, 3);
+  const clusterName = typeof cluster === 'string' ? cluster : cluster.name;
+  const currentClusters = recentClusters.filter(name => name !== clusterName);
+  const newClusters = [clusterName, ...currentClusters].slice(0, 3);
   localStorage.setItem(recentClustersStorageKey, JSON.stringify(newClusters));
 }
 
