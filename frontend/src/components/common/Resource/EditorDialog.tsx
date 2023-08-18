@@ -103,7 +103,7 @@ export default function EditorDialog(props: EditorDialogProps) {
 
   // Update the code when the item changes, but only if the code hasn't been touched.
   React.useEffect(() => {
-    if (!item) {
+    if (!item || Object.keys(item || {}).length === 0) {
       return;
     }
 
