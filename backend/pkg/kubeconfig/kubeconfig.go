@@ -33,6 +33,7 @@ type Context struct {
 	Cluster     *api.Cluster           `json:"cluster"`
 	AuthInfo    *api.AuthInfo          `json:"authInfo"`
 	Source      int                    `json:"source"`
+	OidcConf    *OidcConfig            `json:"oidcConfig"`
 	proxy       *httputil.ReverseProxy `json:"-"`
 }
 
@@ -89,6 +90,10 @@ func (c *Context) RESTConfig() (*rest.Config, error) {
 
 // OidcConfig returns the oidc config for the context.
 func (c *Context) OidcConfig() (*OidcConfig, error) {
+	if c.OidcConf != nil {
+		return c.OidcConf, nil
+	}
+
 	if c.AuthInfo.AuthProvider == nil {
 		return nil, errors.New("authProvider is nil")
 	}
@@ -169,7 +174,7 @@ func (c *Context) SetupProxy() error {
 
 // AuthType returns the authentication type for the context.
 func (c *Context) AuthType() string {
-	if c.AuthInfo != nil && c.AuthInfo.AuthProvider != nil {
+	if (c.OidcConf != nil) || (c.AuthInfo != nil && c.AuthInfo.AuthProvider != nil) {
 		return "oidc"
 	}
 
@@ -296,15 +301,14 @@ func GetInClusterContext(oidcIssuerURL string,
 
 	inClusterAuthInfo := &api.AuthInfo{}
 
+	var oidcConf *OidcConfig
+
 	if oidcClientID != "" && oidcClientSecret != "" && oidcIssuerURL != "" && oidcScopes != "" {
-		inClusterAuthInfo.AuthProvider = &api.AuthProviderConfig{
-			Name: "oidc",
-			Config: map[string]string{
-				"client-id":      oidcClientID,
-				"client-secret":  oidcClientSecret,
-				"idp-issuer-url": oidcIssuerURL,
-				"scope":          oidcScopes,
-			},
+		oidcConf = &OidcConfig{
+			ClientID:     oidcClientID,
+			ClientSecret: oidcClientSecret,
+			IdpIssuerURL: oidcIssuerURL,
+			Scopes:       strings.Split(oidcScopes, ","),
 		}
 	}
 
@@ -313,6 +317,7 @@ func GetInClusterContext(oidcIssuerURL string,
 		KubeContext: inClusterContext,
 		Cluster:     cluster,
 		AuthInfo:    inClusterAuthInfo,
+		OidcConf:    oidcConf,
 	}, nil
 }
 
