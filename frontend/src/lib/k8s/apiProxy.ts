@@ -10,7 +10,13 @@
 import { OpPatch } from 'json-patch';
 import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
-import helpers, { getHeadlampAPIHeaders, getSessionId, isDebugVerbose } from '../../helpers';
+import helpers, {
+  getClusterKubeconfig,
+  getHeadlampAPIHeaders,
+  getSessionId,
+  isDebugVerbose,
+  storeClusterKubeconfig,
+} from '../../helpers';
 import store from '../../redux/stores/store';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
@@ -334,7 +340,14 @@ export async function clusterRequest(
     isJSON = true,
     ...otherParams
   } = params;
-  const opts: { headers: RequestHeaders } = Object.assign({ headers: {} }, otherParams);
+
+  const sessionId = getSessionId();
+  const opts: { headers: RequestHeaders } = Object.assign(
+    {
+      headers: { 'X-HEADLAMP_SESSION_ID': sessionId },
+    },
+    otherParams
+  );
   const cluster = paramsCluster || '';
 
   let fullPath = path;
@@ -348,6 +361,11 @@ export async function clusterRequest(
 
     if (!!token) {
       opts.headers.Authorization = `Bearer ${token}`;
+    }
+
+    const kubeconfigHeaders = getClusterKubeconfig(sessionId, cluster);
+    if (kubeconfigHeaders !== '') {
+      opts.headers['KUBECONFIG'] = kubeconfigHeaders;
     }
 
     fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
@@ -1370,12 +1388,26 @@ export async function testClusterHealth() {
 }
 
 export async function setCluster(clusterReq: ClusterRequest) {
+  const sessionId = getSessionId();
+  const clusterName = clusterReq.name;
+  const kubeconfig = clusterReq.kubeconfig;
+
+  if (clusterName && kubeconfig) {
+    storeClusterKubeconfig(sessionId, clusterName, kubeconfig);
+  }
+
   return request(
     '/cluster',
     {
       method: 'POST',
       body: JSON.stringify(clusterReq),
-      headers: { ...JSON_HEADERS, ...getSessionId(), ...getHeadlampAPIHeaders() },
+      headers: {
+        ...JSON_HEADERS,
+        ...getHeadlampAPIHeaders(),
+        ...{
+          'X-HEADLAMP_SESSION_ID': sessionId,
+        },
+      },
     },
     false,
     false

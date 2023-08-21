@@ -109,11 +109,13 @@ func makeJSONReq(method, url string, jsonObj interface{}) (*http.Request, error)
 	return http.NewRequestWithContext(context.Background(), method, url, bytes.NewBuffer(jsonBytes))
 }
 
-func getResponse(handler http.Handler, method, url string, body interface{}) (*httptest.ResponseRecorder, error) {
+func getResponse(handler http.Handler, method, url, sessionID string, body interface{}) (*httptest.ResponseRecorder, error) { //nolint:lll
 	req, err := makeJSONReq(method, url, body)
 	if err != nil {
 		return nil, err
 	}
+
+	req.Header.Set("X-HEADLAMP_SESSION_ID", sessionID)
 
 	rr := httptest.NewRecorder()
 	handler.ServeHTTP(rr, req)
@@ -121,9 +123,7 @@ func getResponse(handler http.Handler, method, url string, body interface{}) (*h
 	return rr, nil
 }
 
-func getResponseFromRestrictedEndpoint(
-	handler http.Handler, method, url string, body interface{},
-) (*httptest.ResponseRecorder, error) {
+func getResponseFromRestrictedEndpoint(handler http.Handler, method, url, sessionID string, body interface{}) (*httptest.ResponseRecorder, error) { //nolint:lll
 	token := uuid.New().String()
 	os.Setenv("HEADLAMP_BACKEND_TOKEN", token)
 
@@ -135,6 +135,7 @@ func getResponseFromRestrictedEndpoint(
 	}
 
 	req.Header.Set("X-HEADLAMP_BACKEND-TOKEN", token)
+	req.Header.Set("X-HEADLAMP_SESSION_ID", sessionID)
 
 	rr := httptest.NewRecorder()
 
@@ -163,6 +164,7 @@ func TestDynamicClusters(t *testing.T) {
 		clusters            []ClusterReq
 		expectedState       int
 		expectedNumClusters int
+		sessionID           string
 	}{
 		{
 			name: "create",
@@ -186,6 +188,7 @@ func TestDynamicClusters(t *testing.T) {
 			},
 			expectedState:       http.StatusCreated,
 			expectedNumClusters: 3,
+			sessionID:           uuid.New().String(),
 		},
 		{
 			name: "override",
@@ -203,6 +206,7 @@ func TestDynamicClusters(t *testing.T) {
 			},
 			expectedState:       http.StatusCreated,
 			expectedNumClusters: 1,
+			sessionID:           uuid.New().String(),
 		},
 		{
 			name: "invalid",
@@ -220,6 +224,7 @@ func TestDynamicClusters(t *testing.T) {
 			},
 			expectedState:       http.StatusBadRequest,
 			expectedNumClusters: 0,
+			sessionID:           uuid.New().String(),
 		},
 	}
 
@@ -239,7 +244,7 @@ func TestDynamicClusters(t *testing.T) {
 
 			var resp *httptest.ResponseRecorder
 			for _, clusterReq := range tc.clusters {
-				r, err := getResponseFromRestrictedEndpoint(handler, "POST", "/cluster", clusterReq)
+				r, err := getResponseFromRestrictedEndpoint(handler, "POST", "/cluster", tc.sessionID, clusterReq)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -248,8 +253,14 @@ func TestDynamicClusters(t *testing.T) {
 
 				// Verify if the created cluster matches what we asked to be created
 				if r.Code == http.StatusCreated {
-					// TODO: update test
-					configuredClusters := c.getClusters()
+					var config clientConfig
+
+					err = json.Unmarshal(r.Body.Bytes(), &config)
+					if err != nil {
+						t.Fatal(err)
+					}
+
+					configuredClusters := c.getClusters(tc.sessionID)
 					var cluster *Cluster
 
 					// Get cluster we created
@@ -269,7 +280,7 @@ func TestDynamicClusters(t *testing.T) {
 			}
 
 			// The response for the /config should be the same as the previous /cluster call.
-			configResp, err := getResponse(handler, "GET", "/config", nil)
+			configResp, err := getResponse(handler, "GET", "/config", tc.sessionID, nil)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -287,9 +298,8 @@ func TestDynamicClusters(t *testing.T) {
 				}
 
 				assert.Equal(t, len(clusterConfig.Clusters), len(config.Clusters))
+				assert.Equal(t, tc.expectedNumClusters, len(c.getClusters(tc.sessionID)))
 			}
-			// TODO: update test
-			assert.Equal(t, tc.expectedNumClusters, len(c.getClusters()))
 		})
 	}
 }
@@ -297,6 +307,8 @@ func TestDynamicClusters(t *testing.T) {
 func TestDynamicClustersKubeConfig(t *testing.T) {
 	kubeConfigByte, err := os.ReadFile("./headlamp_testdata/kubeconfig")
 	require.NoError(t, err)
+
+	sessionID := uuid.New().String()
 
 	kubeConfig := base64.StdEncoding.EncodeToString(kubeConfigByte)
 	req := ClusterReq{
@@ -314,14 +326,20 @@ func TestDynamicClustersKubeConfig(t *testing.T) {
 	}
 	handler := createHeadlampHandler(&c)
 
-	r, err := getResponseFromRestrictedEndpoint(handler, "POST", "/cluster", req)
+	r, err := getResponseFromRestrictedEndpoint(handler, "POST", "/cluster", sessionID, req)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var config clientConfig
+
+	err = json.Unmarshal(r.Body.Bytes(), &config)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	assert.Equal(t, http.StatusCreated, r.Code)
-	// TODO: update test
-	assert.Equal(t, 2, len(c.getClusters()))
+	assert.Equal(t, 2, len(c.getClusters(sessionID)))
 }
 
 //nolint:funlen
@@ -426,6 +444,7 @@ func TestDrainAndCordonNode(t *testing.T) {
 		handler http.Handler
 	}
 
+	sessionID := uuid.New().String()
 	cache := cache.New[interface{}]()
 	kubeConfigStore := kubeconfig.NewContextStore()
 	tests := []test{
@@ -448,7 +467,7 @@ func TestDrainAndCordonNode(t *testing.T) {
 		drainNodePayload.Cluster = "minikube"
 		drainNodePayload.NodeName = "minikube"
 
-		rr, err := getResponse(tc.handler, "POST", "/drain-node", drainNodePayload)
+		rr, err := getResponse(tc.handler, "POST", "/drain-node", sessionID, drainNodePayload)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -468,7 +487,7 @@ func TestDrainAndCordonNode(t *testing.T) {
 		}
 
 		rr, err = getResponse(tc.handler, "GET",
-			fmt.Sprintf("/drain-node-status?cluster=%s&nodeName=%s", drainNodePayload.Cluster, drainNodePayload.NodeName), nil)
+			fmt.Sprintf("/drain-node-status?cluster=%s&nodeName=%s", drainNodePayload.Cluster, drainNodePayload.NodeName), sessionID, nil) //nolint:lll
 		if err != nil {
 			t.Fatal(err)
 		}
