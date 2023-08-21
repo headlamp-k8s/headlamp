@@ -164,7 +164,7 @@ export default function CronJobDetails() {
     });
   }
 
-  function SpawnJobAction() {
+  function PauseResumeAction() {
     return (
       <ActionButton
         description={isCronSuspended ? t('frequent|Resume') : t('frequent|Suspend')}
@@ -243,7 +243,7 @@ export default function CronJobDetails() {
 
   actions.push(
     <AuthVisible authVerb="update" item={cronJob}>
-      <SpawnJobAction />
+      <PauseResumeAction />
     </AuthVisible>
   );
 
