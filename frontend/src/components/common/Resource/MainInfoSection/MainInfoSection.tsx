@@ -120,7 +120,7 @@ export function MainInfoSection(props: MainInfoSectionProps) {
   const accs = typeof actions === 'function' ? actions(resource) || [] : actions;
   if (accs !== null) {
     hAccs = [...accs].map((action, i) => {
-      if ((action as HeaderAction).id !== undefined) {
+      if ((action as HeaderAction)?.id !== undefined) {
         return action as HeaderAction;
       } else {
         return { id: `gen-${i}`, action };
