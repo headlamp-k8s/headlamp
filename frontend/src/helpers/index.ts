@@ -376,7 +376,7 @@ export function getHeadlampAPIHeaders(): { [key: string]: string } {
   };
 }
 
-export function getSessionId(): { [key: string]: string } {
+export function getSessionId(): string {
   // Retrieve session ID from sessionStorage
   let sessionId = sessionStorage.getItem('sessionId');
 
@@ -390,9 +390,49 @@ export function getSessionId(): { [key: string]: string } {
     }
   }
 
-  return {
-    'X-HEADLAMP_SESSION_ID': sessionId,
-  };
+  return sessionId!;
+}
+
+// Export function to store cluster kubeconfig
+export function storeClusterKubeconfig(sessionId: string, clusterName: string, kubeconfig: string) {
+  // Get existing stored cluster kubeconfigs for the session
+  const storedClusterKubeconfigsJSON = sessionStorage.getItem('clusterKubeconfigs');
+
+  let storedClusterKubeconfigs: { [sessionId: string]: { [clusterName: string]: string } } = {};
+  if (storedClusterKubeconfigsJSON) {
+    storedClusterKubeconfigs = JSON.parse(storedClusterKubeconfigsJSON);
+  }
+
+  // If no session-specific cluster kubeconfigs exist, create an empty object
+  if (!storedClusterKubeconfigs[sessionId]) {
+    storedClusterKubeconfigs[sessionId] = {};
+  }
+
+  // Add or update the kubeconfig for the given cluster name under the session ID
+  storedClusterKubeconfigs[sessionId][clusterName] = kubeconfig;
+
+  // Store the updated cluster kubeconfigs back in sessionStorage
+  sessionStorage.setItem('clusterKubeconfigs', JSON.stringify(storedClusterKubeconfigs));
+}
+
+// Export function to retrieve cluster kubeconfig
+export function getClusterKubeconfig(sessionId: string, clusterName: string) {
+  // Get stored cluster kubeconfigs for the session
+  const storedClusterKubeconfigsJSON = sessionStorage.getItem('clusterKubeconfigs');
+
+  if (storedClusterKubeconfigsJSON) {
+    const storedClusterKubeconfigs = JSON.parse(storedClusterKubeconfigsJSON);
+
+    // Retrieve the kubeconfig for the given session ID and cluster name
+    if (storedClusterKubeconfigs[sessionId] && storedClusterKubeconfigs[sessionId][clusterName]) {
+      // Decode the kubeconfig
+      return storedClusterKubeconfigs[sessionId][clusterName]
+        ? storedClusterKubeconfigs[sessionId][clusterName]
+        : '';
+    }
+  }
+
+  return '';
 }
 
 const exportFunctions = {
@@ -418,6 +458,8 @@ const exportFunctions = {
   storeTableSettings,
   loadTableSettings,
   getSessionId,
+  storeClusterKubeconfig,
+  getClusterKubeconfig,
 };
 
 export default exportFunctions;

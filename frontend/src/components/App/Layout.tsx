@@ -7,7 +7,6 @@ import _ from 'lodash';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { getSessionId } from '../../helpers';
 import { request } from '../../lib/k8s/apiProxy';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster } from '../../lib/util';
@@ -118,14 +117,7 @@ export default function Layout({}: LayoutProps) {
    */
   const fetchConfig = () => {
     const clusters = store.getState().config.clusters;
-    request(
-      '/config',
-      {
-        headers: { ...getSessionId() },
-      },
-      false,
-      false
-    )
+    request('/config', {}, false, false)
       .then((config: Config) => {
         const clustersToConfig: ConfigState['clusters'] = {};
         config?.clusters.forEach((cluster: Cluster) => {
