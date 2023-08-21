@@ -165,5 +165,5 @@ export function PreviousRouteProvider({ children }: React.PropsWithChildren<{}>)
 
 export function useHasPreviousRoute() {
   const routeLevels = React.useContext(PreviousRouteContext);
-  return routeLevels > 1;
+  return routeLevels >= 1;
 }
