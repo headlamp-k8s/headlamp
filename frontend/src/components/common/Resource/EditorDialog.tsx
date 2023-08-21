@@ -59,12 +59,19 @@ const useStyle = makeStyles(theme => ({
 type KubeObjectIsh = Partial<KubeObjectInterface>;
 
 export interface EditorDialogProps extends DialogProps {
+  /** The object to edit, or null to make the dialog be in "loading mode". Pass it an empty object if no contents are to be shown when the dialog is first open. */
   item: KubeObjectIsh | null;
+  /** Called when the dialog is closed. */
   onClose: () => void;
+  /** Called when the user clicks the save button. */
   onSave: ((...args: any[]) => void) | null;
+  /** Called when the editor's contents change. */
   onEditorChanged?: ((newValue: string) => void) | null;
+  /** The label to use for the save button. */
   saveLabel?: string;
+  /** The error message to display. */
   errorMessage?: string;
+  /** The dialog title. */
   title?: string;
 }
 
