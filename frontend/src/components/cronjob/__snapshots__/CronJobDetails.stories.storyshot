@@ -56,7 +56,44 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
         >
           <div
             class="MuiGrid-root MuiGrid-item"
-          />
+          >
+            <button
+              aria-label="Spawn Job"
+              class="MuiButtonBase-root MuiIconButton-root"
+              tabindex="0"
+              title="Spawn Job"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <span />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <button
+              aria-label="Suspend"
+              class="MuiButtonBase-root MuiIconButton-root"
+              tabindex="0"
+              title="Suspend"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <span />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
           <div
             class="MuiGrid-root MuiGrid-item"
           />
@@ -65,10 +102,45 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Ast 1`] = `
           />
           <div
             class="MuiGrid-root MuiGrid-item"
-          />
+          >
+            <button
+              aria-label="Edit"
+              class="MuiButtonBase-root MuiIconButton-root"
+              tabindex="0"
+              title="Edit"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <span />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
           <div
             class="MuiGrid-root MuiGrid-item"
-          />
+          >
+            <button
+              aria-label="Delete"
+              class="MuiButtonBase-root MuiIconButton-root"
+              tabindex="0"
+              title="Delete"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <span />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <div />
+          </div>
         </div>
       </div>
     </div>
@@ -467,7 +539,44 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
         >
           <div
             class="MuiGrid-root MuiGrid-item"
-          />
+          >
+            <button
+              aria-label="Spawn Job"
+              class="MuiButtonBase-root MuiIconButton-root"
+              tabindex="0"
+              title="Spawn Job"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <span />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <button
+              aria-label="Suspend"
+              class="MuiButtonBase-root MuiIconButton-root"
+              tabindex="0"
+              title="Suspend"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <span />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
           <div
             class="MuiGrid-root MuiGrid-item"
           />
@@ -476,10 +585,45 @@ exports[`Storyshots CronJob/CronJobDetailsView Every Minute 1`] = `
           />
           <div
             class="MuiGrid-root MuiGrid-item"
-          />
+          >
+            <button
+              aria-label="Edit"
+              class="MuiButtonBase-root MuiIconButton-root"
+              tabindex="0"
+              title="Edit"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <span />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
           <div
             class="MuiGrid-root MuiGrid-item"
-          />
+          >
+            <button
+              aria-label="Delete"
+              class="MuiButtonBase-root MuiIconButton-root"
+              tabindex="0"
+              title="Delete"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <span />
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <div />
+          </div>
         </div>
       </div>
     </div>

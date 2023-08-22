@@ -1,9 +1,18 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
+import Job from '../../lib/k8s/job';
 import { TestContext } from '../../test';
 import CronJobDetails from './Details';
 import { cronJobList } from './storyHelper';
+
+CronJob.getAuthorization = (): Promise<{ status: any }> => {
+  return new Promise(resolve => {
+    resolve({ status: { allowed: true, reason: '', code: 200 } });
+  });
+};
+
+Job.getAuthorization = CronJob.getAuthorization;
 
 const usePhonyGet: KubeObjectClass['useGet'] = (name, namespace) => {
   const cronJobJson = cronJobList.find(
