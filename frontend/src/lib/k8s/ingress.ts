@@ -27,11 +27,17 @@ interface LegacyIngressBackend {
 }
 
 interface IngressBackend {
-  service: {
+  service?: {
     name: string;
     port: {
-      number: number;
+      number?: number;
+      name?: string;
     };
+  };
+  resource?: {
+    apiVersion: string;
+    kind: string;
+    name: string;
   };
 }
 
@@ -86,12 +92,7 @@ class Ingress extends makeKubeObject<KubeIngress>('ingress') {
 
     this.spec!.rules?.forEach(({ http, host }) => {
       const paths = http.paths.map(({ backend, path }) => {
-        if (!!(backend as IngressBackend).service) {
-          return {
-            path,
-            backend: backend as IngressBackend,
-          };
-        } else {
+        if (!!(backend as LegacyIngressBackend).serviceName) {
           return {
             path,
             backend: {
@@ -102,6 +103,11 @@ class Ingress extends makeKubeObject<KubeIngress>('ingress') {
                 },
               },
             },
+          };
+        } else {
+          return {
+            path,
+            backend: backend as IngressBackend,
           };
         }
       });
