@@ -169,6 +169,7 @@ const useHoverInfoLabelStyles = makeStyles({
   icon: {
     marginRight: '0.2rem',
     marginLeft: '0.2rem',
+    color: 'unset !important',
   },
 });
 
