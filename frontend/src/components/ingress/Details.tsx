@@ -13,18 +13,24 @@ export default function IngressDetails() {
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
 
   function getPorts(item: Ingress) {
-    const ports: number[] = [];
+    const ports: string[] = [];
     item.getRules().forEach(rule => {
       rule.http.paths.forEach(path => {
-        ports.push(path.backend.service.port.number);
+        if (!!path.backend.service) {
+          const portNumber =
+            path.backend.service.port.number ?? path.backend.service.port.name ?? '';
+          ports.push(portNumber.toString());
+        } else if (!!path.backend.resource) {
+          ports.push(path.backend.resource.kind + ':' + path.backend.resource.name);
+        }
       });
     });
 
     if (!!item.spec?.tls) {
-      ports.push(443);
+      ports.push('443');
     }
 
-    return ports.sort((a, b) => a - b);
+    return ports.sort((a, b) => a.localeCompare(b));
   }
 
   function getDefaultBackend(item: Ingress) {
@@ -84,11 +90,22 @@ export default function IngressDetails() {
                   label: t('Backends'),
                   getter: (data: IngressRule) => (
                     <LabelListItem
-                      labels={data.http.paths.map(({ backend }) =>
-                        backend.service.name
-                          ? backend.service.name + ':' + backend.service.port.number.toString()
-                          : backend.service.port.number.toString()
-                      )}
+                      labels={data.http.paths.map(({ backend }) => {
+                        if (!!backend.resource) {
+                          return backend.resource.kind + ':' + backend.resource.name;
+                        }
+                        if (!!backend.service) {
+                          return (
+                            backend.service.name +
+                            ':' +
+                            (
+                              backend.service.port.number ??
+                              backend.service.port.name ??
+                              ''
+                            ).toString()
+                          );
+                        }
+                      })}
                     />
                   ),
                 },
