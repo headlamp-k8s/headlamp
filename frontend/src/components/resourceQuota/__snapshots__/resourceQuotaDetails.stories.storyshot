@@ -214,7 +214,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
                           <td
                             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                           >
-                            0 core
+                            0 cores
                           </td>
                           <td
                             class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
