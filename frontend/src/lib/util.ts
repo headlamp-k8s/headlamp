@@ -427,8 +427,8 @@ export function normalizeUnit(resourceType: string, quantity: string) {
       normalizedQuantity = quantity?.endsWith('m')
         ? `${Number(quantity.substring(0, quantity.length - 1)) / 1000}`
         : `${quantity}`;
-      if (normalizedQuantity === '0' || normalizedQuantity === '1') {
-        normalizedQuantity = '0 ' + 'core';
+      if (normalizedQuantity === '1') {
+        normalizedQuantity = normalizedQuantity + ' ' + 'core';
       } else {
         normalizedQuantity = normalizedQuantity + ' ' + 'cores';
       }
