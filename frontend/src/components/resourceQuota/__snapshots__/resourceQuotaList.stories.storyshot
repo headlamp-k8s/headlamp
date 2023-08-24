@@ -234,7 +234,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                     <span
                       class="MuiChip-label MuiChip-labelSmall"
                     >
-                      limits.cpu: 0 core/0.3 cores
+                      limits.cpu: 0 cores/0.3 cores
                     </span>
                   </div>
                 </div>
@@ -305,7 +305,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                     <span
                       class="MuiChip-label MuiChip-labelSmall"
                     >
-                      limits.cpu: 0 core/0.3 cores
+                      limits.cpu: 0 cores/0.3 cores
                     </span>
                   </div>
                 </div>
@@ -376,7 +376,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                     <span
                       class="MuiChip-label MuiChip-labelSmall"
                     >
-                      limits.cpu: 0 core/0.3 cores
+                      limits.cpu: 0 cores/0.3 cores
                     </span>
                   </div>
                 </div>
@@ -447,7 +447,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                     <span
                       class="MuiChip-label MuiChip-labelSmall"
                     >
-                      limits.cpu: 0 core/0.3 cores
+                      limits.cpu: 0 cores/0.3 cores
                     </span>
                   </div>
                 </div>
@@ -518,7 +518,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaListView Items 1`] = `
                     <span
                       class="MuiChip-label MuiChip-labelSmall"
                     >
-                      limits.cpu: 0 core/0.3 cores
+                      limits.cpu: 0 cores/0.3 cores
                     </span>
                   </div>
                 </div>
