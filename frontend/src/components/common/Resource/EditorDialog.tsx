@@ -59,12 +59,19 @@ const useStyle = makeStyles(theme => ({
 type KubeObjectIsh = Partial<KubeObjectInterface>;
 
 export interface EditorDialogProps extends DialogProps {
+  /** The object to edit, or null to make the dialog be in "loading mode". Pass it an empty object if no contents are to be shown when the dialog is first open. */
   item: KubeObjectIsh | null;
+  /** Called when the dialog is closed. */
   onClose: () => void;
+  /** Called when the user clicks the save button. */
   onSave: ((...args: any[]) => void) | null;
+  /** Called when the editor's contents change. */
   onEditorChanged?: ((newValue: string) => void) | null;
+  /** The label to use for the save button. */
   saveLabel?: string;
+  /** The error message to display. */
   errorMessage?: string;
+  /** The dialog title. */
   title?: string;
 }
 
@@ -80,10 +87,11 @@ export default function EditorDialog(props: EditorDialogProps) {
   const classes = useStyle();
   const themeName = getThemeName();
 
-  const [originalCode, setOriginalCode] = React.useState({ code: '', format: item ? 'yaml' : '' });
-  const [code, setCode] = React.useState(originalCode);
-  const [lastCodeCheckHandler, setLastCodeCheckHandler] = React.useState(0);
-  const [previousVersion, setPreviousVersion] = React.useState('');
+  const originalCodeRef = React.useRef({ code: '', format: item ? 'yaml' : '' });
+  const [code, setCode] = React.useState(originalCodeRef.current);
+  const codeRef = React.useRef(code);
+  const lastCodeCheckHandler = React.useRef(0);
+  const previousVersionRef = React.useRef(item?.metadata?.resourceVersion || '');
   const [error, setError] = React.useState('');
   const [docSpecs, setDocSpecs] = React.useState<
     KubeObjectInterface | KubeObjectInterface[] | null
@@ -100,40 +108,49 @@ export default function EditorDialog(props: EditorDialogProps) {
     setUseSimpleEditorState(data);
   }
 
+  // Update the code when the item changes, but only if the code hasn't been touched.
   React.useEffect(() => {
-    if (!item) {
+    if (!item || Object.keys(item || {}).length === 0) {
       return;
     }
 
-    const itemCode = originalCode.format === 'json' ? JSON.stringify(item) : yaml.dump(item);
-    if (itemCode !== originalCode.code) {
-      setOriginalCode({ code: itemCode, format: originalCode.format });
+    const originalCode = originalCodeRef.current.code;
+    const itemCode =
+      originalCodeRef.current.format === 'json' ? JSON.stringify(item) : yaml.dump(item);
+    if (itemCode !== originalCodeRef.current.code) {
+      originalCodeRef.current = { code: itemCode, format: originalCodeRef.current.format };
     }
 
     if (!item.metadata) {
       return;
     }
 
+    const resourceVersionsDiffer =
+      (previousVersionRef.current || '') !== (item.metadata!.resourceVersion || '');
     // Only change if the code hasn't been touched.
-    if (previousVersion !== item.metadata!.resourceVersion || code.code === originalCode.code) {
+    // We use the codeRef in this effect instead of the code, because we need to access the current
+    // state of the code but we don't want to trigger a re-render when we set the code here.
+    if (resourceVersionsDiffer || codeRef.current.code === originalCode) {
       // Prevent updating to the same code, which would lead to an infinite loop.
-      if (code.code !== itemCode) {
-        setCode({ code: itemCode, format: originalCode.format });
+      if (codeRef.current.code !== itemCode) {
+        setCode({ code: itemCode, format: originalCodeRef.current.format });
       }
 
-      if (previousVersion !== item.metadata!.resourceVersion) {
-        if (item.metadata!.resourceVersion) {
-          setPreviousVersion(item!.metadata!.resourceVersion);
-        }
+      if (resourceVersionsDiffer && !!item.metadata!.resourceVersion) {
+        previousVersionRef.current = item.metadata!.resourceVersion;
       }
     }
-  }, [item, previousVersion, originalCode, code]);
+  }, [item]);
+
+  React.useEffect(() => {
+    codeRef.current = code;
+  }, [code]);
 
   React.useEffect(() => {
     i18n.on('languageChanged', setLang);
     return () => {
       // Stop the timeout from trying to use the component after it's been unmounted.
-      clearTimeout(lastCodeCheckHandler);
+      clearTimeout(lastCodeCheckHandler.current);
 
       i18n.off('languageChanged', setLang);
     };
@@ -155,36 +172,31 @@ export default function EditorDialog(props: EditorDialogProps) {
 
   function onChange(value: string | undefined): void {
     // Clear any ongoing attempts to check the code.
-    window.clearTimeout(lastCodeCheckHandler);
+    window.clearTimeout(lastCodeCheckHandler.current);
 
     // Only check the code for errors after the user has stopped typing for a moment.
-    setLastCodeCheckHandler(
-      window.setTimeout(() => {
-        const { error: err, format } = getObjectsFromCode({
-          code: value || '',
-          format: originalCode.format,
-        });
-        if (code.format !== format) {
-          setCode({ code: value || '', format });
-        }
+    lastCodeCheckHandler.current = window.setTimeout(() => {
+      const { error: err, format } = getObjectsFromCode({
+        code: value || '',
+        format: originalCodeRef.current.format,
+      });
+      if (code.format !== format) {
+        setCode(currentCode => ({ code: currentCode.code || '', format }));
+      }
 
-        if (error !== (err?.message || '')) {
-          setError(err?.message || '');
-        }
-      }, 500) // ms
-    );
+      if (error !== (err?.message || '')) {
+        setError(err?.message || '');
+      }
+    }, 500); // ms
 
-    setCode({ code: value as string, format: code.format });
-    if (error && getObjectsFromCode({ code: value as string, format: originalCode.format })) {
-      setError('');
-    }
+    setCode(currentCode => ({ code: value as string, format: currentCode.format }));
 
     if (onEditorChanged) {
       onEditorChanged(value as string);
     }
   }
 
-  function getObjectsFromCode(codeInfo: typeof originalCode): {
+  function getObjectsFromCode(codeInfo: typeof originalCodeRef.current): {
     obj: KubeObjectInterface[] | null;
     format: string;
     error: Error | null;
@@ -241,7 +253,7 @@ export default function EditorDialog(props: EditorDialogProps) {
   }
 
   function onUndo() {
-    setCode(originalCode);
+    setCode(originalCodeRef.current);
   }
 
   function handleSave() {
@@ -253,7 +265,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     }
 
     if (format !== code.format) {
-      setCode({ code: code.code, format });
+      setCode(currentCode => ({ code: currentCode.code, format }));
     }
 
     if (!getObjectsFromCode(code)) {
@@ -274,7 +286,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     return useSimpleEditor ? (
       <Box paddingTop={2} height="100%">
         <SimpleEditor
-          language={originalCode.format || 'yaml'}
+          language={originalCodeRef.current.format || 'yaml'}
           value={code.code}
           onChange={onChange}
         />
@@ -282,7 +294,7 @@ export default function EditorDialog(props: EditorDialogProps) {
     ) : (
       <Box paddingTop={2} height="100%">
         <Editor
-          language={originalCode.format || 'yaml'}
+          language={originalCodeRef.current.format || 'yaml'}
           theme={themeName === 'dark' ? 'vs-dark' : 'light'}
           value={code.code}
           options={editorOptions}
@@ -364,7 +376,7 @@ export default function EditorDialog(props: EditorDialogProps) {
           <DialogActions>
             {!isReadOnly() && (
               <ConfirmButton
-                disabled={originalCode.code === code.code}
+                disabled={originalCodeRef.current.code === code.code}
                 color="secondary"
                 aria-label={t('frequent|Undo')}
                 onConfirm={onUndo}
@@ -387,7 +399,7 @@ export default function EditorDialog(props: EditorDialogProps) {
               <Button
                 onClick={handleSave}
                 color="primary"
-                disabled={originalCode.code === code.code || !!error}
+                disabled={originalCodeRef.current.code === code.code || !!error}
                 // @todo: aria-controls should point to the textarea id
               >
                 {saveLabel || t('frequent|Save & Apply')}

@@ -102,20 +102,26 @@ function DocsViewer(props: { docSpecs: any }) {
       {docsLoading ? (
         <Loader title={t('Loading documentation')} />
       ) : (
-        docs.map((docSpec: any) => {
+        docs.map((docSpec: any, idx: number) => {
           if (!docSpec.error && !docSpec.data) {
             return (
-              <Empty>
-                {t('No documentation for type {{ docsType }}.', { docsType: docSpec.kind.trim() })}
+              <Empty key={`empty_msg_${idx}`}>
+                {t('No documentation for type {{ docsType }}.', {
+                  docsType: docSpec?.kind?.trim() || '""',
+                })}
               </Empty>
             );
           }
           if (docSpec.error) {
-            return <Empty color="error">{docSpec.error.message}</Empty>;
+            return (
+              <Empty color="error" key={`empty_msg_${idx}`}>
+                {docSpec.error.message}
+              </Empty>
+            );
           }
           if (docSpec.data) {
             return (
-              <Box p={2}>
+              <Box p={2} key={`docs_${idx}`}>
                 <Typography>
                   {t('Showing documentation for: {{ docsType }}', {
                     docsType: docSpec.kind.trim(),
