@@ -65,18 +65,18 @@ jobs:
           ARM_SHA=$(cat checksums.txt | grep .arm64.dmg | awk -F" " '{print $1}')
           INTEL_SHA=$(cat checksums.txt | grep .x64.dmg | awk -F" " '{print $1}')
           git checkout -b "update_headlamp_$HEADLAMP_VERSION"
-          sed -i "s/version\ .*/version \"$HEADLAMP_VERSION\"/g" ./Casks/headlamp.rb
+          sed -i "s/version\ .*/version \"$HEADLAMP_VERSION\"/g" ./Casks/h/headlamp.rb
           if [ $ARM_SHA ]; then
             echo "replacing ARM SHA"
-            sed -i "s/sha256 arm:\   \".*/sha256 arm:\   \"$ARM_SHA\",/g" ./Casks/headlamp.rb
+            sed -i "s/sha256 arm:\   \".*/sha256 arm:\   \"$ARM_SHA\",/g" ./Casks/h/headlamp.rb
           fi
           if [ $INTEL_SHA ]; then
             echo "replacing Intel SHA"
-            sed -i "s/  intel:\ \".*/  intel:\ \"$INTEL_SHA\"/g" ./Casks/headlamp.rb
+            sed -i "s/  intel:\ \".*/  intel:\ \"$INTEL_SHA\"/g" ./Casks/h/headlamp.rb
           fi
           git diff
           rm ./checksums.txt
-          git add ./Casks/headlamp.rb
+          git add ./Casks/h/headlamp.rb
           git status
           git commit --signoff -m "Update Headlamp version to $HEADLAMP_VERSION"
           git status
