@@ -98,7 +98,11 @@ export function MetadataDisplay(props: MetadataDisplayProps) {
       },
       {
         name: t('glossary|Namespace'),
-        value: resource.metadata.namespace && resource.metadata.namespace,
+        value: resource.metadata.namespace && (
+          <Link routeName={'namespace'} params={{ name: resource.metadata.namespace }}>
+            {resource.metadata.namespace}
+          </Link>
+        ),
         hide: !resource.metadata.namespace,
       },
       {

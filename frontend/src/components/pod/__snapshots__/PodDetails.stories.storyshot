@@ -120,11 +120,12 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                 <dd
                   class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
                   >
                     default
-                  </span>
+                  </a>
                 </dd>
                 <dt
                   class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -1047,11 +1048,12 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                 <dd
                   class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
                   >
                     default
-                  </span>
+                  </a>
                 </dd>
                 <dt
                   class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -2096,11 +2098,12 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                 <dd
                   class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
                   >
                     default
-                  </span>
+                  </a>
                 </dd>
                 <dt
                   class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -3115,11 +3118,12 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                 <dd
                   class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
                   >
                     default
-                  </span>
+                  </a>
                 </dd>
                 <dt
                   class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -4015,11 +4019,12 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                 <dd
                   class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
                   >
                     default
-                  </span>
+                  </a>
                 </dd>
                 <dt
                   class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
@@ -4946,11 +4951,12 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                 <dd
                   class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
                   >
                     default
-                  </span>
+                  </a>
                 </dd>
                 <dt
                   class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"

@@ -156,11 +156,12 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                 <dd
                   class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
-                  <span
-                    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
                   >
                     default
-                  </span>
+                  </a>
                 </dd>
                 <dt
                   class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
