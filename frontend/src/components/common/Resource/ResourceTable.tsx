@@ -181,7 +181,7 @@ function Table(props: ResourceTableProps) {
                   <DateLabel
                     date={resource.metadata.creationTimestamp}
                     format="mini"
-                    iconProps={{ color: theme.palette.grey.A700 }}
+                    iconProps={{ color: theme.palette.text.primary }}
                   />
                 ),
               sort: (n1: KubeObject, n2: KubeObject) =>
