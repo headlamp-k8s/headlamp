@@ -9,6 +9,11 @@ import {
   Time,
 } from './cluster';
 
+export interface KubeVolume {
+  name: string;
+  [volumeName: string]: any;
+}
+
 export interface KubePodSpec {
   containers: KubeContainer[];
   nodeName: string;
@@ -20,6 +25,7 @@ export interface KubePodSpec {
   readinessGates?: {
     conditionType: string;
   }[];
+  volumes?: KubeVolume[];
 }
 
 export interface KubePod extends KubeObjectInterface {
