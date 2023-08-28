@@ -358,7 +358,9 @@ function loadTableSettings(tableId: string): { id: string; show: boolean }[] {
  *
  * The app also passes the token to the headlamp-server via HEADLAMP_BACKEND_TOKEN env var.
  */
-const backendToken = new URLSearchParams(window.location.search).get('backendToken');
+const backendToken =
+  process.env.REACT_APP_HEADLAMP_BACKEND_TOKEN ||
+  new URLSearchParams(window.location.search).get('backendToken');
 
 /**
  * Returns headers for making API calls to the headlamp-server backend.
