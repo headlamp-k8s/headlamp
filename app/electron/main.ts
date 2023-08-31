@@ -92,6 +92,25 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   return spawn(serverFilePath, serverArgs, options);
 }
 
+function azLogin() {
+  const az = spawn('az', ['login', '-o', 'json']);
+  az.stdout.on('data', data => {
+    console.log(`stdout: ${data}`);
+  });
+
+  az.stderr.on('data', data => {
+    console.error(`stderr: ${data}`);
+  });
+
+  az.on('close', code => {
+    console.log(`child process exited with code ${code}`);
+  });
+
+  az.stdin.end();
+
+  return az;
+}
+
 /**
  * Are we running inside WSL?
  * @returns true if we are running inside WSL.
@@ -757,6 +776,8 @@ function startElecron() {
 }
 
 app.on('quit', quitServerProcess);
+
+azLogin();
 
 /**
  * add some error handlers to the serverProcess.
