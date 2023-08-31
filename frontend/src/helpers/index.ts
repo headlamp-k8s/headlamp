@@ -375,6 +375,44 @@ export function getHeadlampAPIHeaders(): { [key: string]: string } {
   };
 }
 
+// Runs a command (from the electron app).
+export function runCommand(cmd: string | string[]) {
+  if (!window.desktopApi) {
+    console.error('Not running as a desktop app');
+    return;
+  }
+
+  let command: string[];
+  if (typeof cmd === 'string') {
+    // Split the command into an array of strings and remove any empty strings, originated from
+    // multiple spaces between words.
+    command = cmd.split(' ').filter(s => s.length > 0);
+  } else {
+    command = cmd;
+  }
+
+  console.log('>>>>>>>>>>>>>>>>RUNCOMMAND', command);
+  return new Promise((resolve, reject) => {
+    window.desktopApi
+      .invoke('runCommand', { command })
+      .then((commandId: string) => {
+        console.log('>>>>>>>>>>>>>>>>>>RECEIVE', command, commandId);
+        window.desktopApi.receive(
+          `commandResponse-${commandId}`,
+          (response: any) => {
+            console.log('>>>>>>>>>>>>>>>>>>RECEIVE::::', command, commandId, response);
+            resolve(response);
+          },
+          { once: true }
+        );
+        commandId;
+      })
+      .catch((err: any) => {
+        reject(err);
+      });
+  });
+}
+
 const exportFunctions = {
   getBaseUrl,
   isDevMode,
@@ -394,6 +432,7 @@ const exportFunctions = {
   getHeadlampAPIHeaders,
   storeTableSettings,
   loadTableSettings,
+  runCommand,
 };
 
 export default exportFunctions;

@@ -92,23 +92,52 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
   return spawn(serverFilePath, serverArgs, options);
 }
 
-function azLogin() {
-  const az = spawn('az', ['login', '-o', 'json']);
-  az.stdout.on('data', data => {
-    console.log(`stdout: ${data}`);
+function runCommand(cmd: string[], requestId: string) {
+  if (!cmd) {
+    mainWindow?.webContents.send('commandResponse', {
+      requestId,
+      error: 'No command provided',
+      exitCode: 1,
+    });
+  }
+
+  const command = cmd[0];
+  const args = cmd.slice(1);
+  // let cmdRun = spawnSync(command, args);
+  // return {
+  //   output: cmdRun.output,
+  //   error: cmdRun.error,
+  //   exitCode: cmdRun.status,
+  // };
+
+  let output = '';
+  let error = '';
+
+  const cmdRun = spawn(command, args);
+  cmdRun.stdout.on('data', data => {
+    output += data.toString();
   });
 
-  az.stderr.on('data', data => {
-    console.error(`stderr: ${data}`);
+  cmdRun.stderr.on('data', data => {
+    error += data.toString();
   });
 
-  az.on('close', code => {
-    console.log(`child process exited with code ${code}`);
+  cmdRun.on('close', code => {
+    console.log('>>>>>>>>>>CLOSEEEEE', {
+      output,
+      error,
+      exitCode: code,
+    });
+    mainWindow?.webContents.send(`commandResponse-${requestId}`, {
+      output,
+      error,
+      exitCode: code,
+    });
   });
 
-  az.stdin.end();
+  cmdRun.stdin.end();
 
-  return az;
+  return cmdRun;
 }
 
 /**
@@ -663,6 +692,14 @@ function startElecron() {
       }
     });
 
+    ipcMain.handle('runCommand', async (event, commandData: { command: string[] }) => {
+      const { command } = commandData;
+      const requestId = randomBytes(32).toString('hex');
+      console.log('>>>>>>>>>>RUN_COMMAND', command, requestId);
+      runCommand(command, requestId);
+      return requestId;
+    });
+
     if (!useExternalServer) {
       const runningHeadlamp = await getRunningHeadlampPIDs();
       let shouldWaitForKill = true;
@@ -776,8 +813,6 @@ function startElecron() {
 }
 
 app.on('quit', quitServerProcess);
-
-azLogin();
 
 /**
  * add some error handlers to the serverProcess.

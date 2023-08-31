@@ -17,8 +17,7 @@ import {
 } from '../components/DetailsViewSection/detailsViewSectionSlice';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
 import { setSidebarItem, setSidebarItemFilter } from '../components/Sidebar/sidebarSlice';
-import { getHeadlampAPIHeaders } from '../helpers';
-import { KubeObject } from '../lib/k8s/cluster';
+import { getHeadlampAPIHeaders, runCommand } from '../helpers';
 import { Route } from '../lib/router';
 import {
   addDetailsViewHeaderActionsProcessor,
@@ -559,4 +558,4 @@ export function registerGetTokenFunction(override: (cluster: string) => string |
   store.dispatch(setFunctionsToOverride({ getToken: override }));
 }
 
-export { DefaultAppBarAction, DefaultDetailsViewSection, getHeadlampAPIHeaders };
+export { DefaultAppBarAction, DefaultDetailsViewSection, getHeadlampAPIHeaders, runCommand };
