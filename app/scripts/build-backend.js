@@ -1,6 +1,6 @@
 'use strict';
 
-const { execSync } = require("child_process");
+const { execSync } = require('child_process');
 
 exports.default = async context => {
   let arch = context.arch;
@@ -21,6 +21,6 @@ exports.default = async context => {
       GOARCH: arch,
       OS: osName,
     },
-    cwd: '..'
+    cwd: '..',
   });
 };
