@@ -46,6 +46,10 @@ backend:
 backend-test:
 	cd backend && go test -v -p 1 ./...
 
+.PHONY: backend-format
+backend-format:
+	cd backend && go fmt ./cmd/ ./pkg/**
+
 frontend-install:
 	cd frontend && npm install
 
