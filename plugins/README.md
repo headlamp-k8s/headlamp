@@ -1,10 +1,26 @@
 # Plugins
 
+## Quickstart for running an example plugin
+
+To see "Pods: x" in the header of Headlamp run this example plugin:
+
+```bash
+cd plugins/examples/pod-counter
+npm install
+npm start
+```
+
+## Plugin documentation
+
 See the [Headlamp plugins documentation on the web](
 https://headlamp.dev/docs/latest/development/plugins/) 
 or in this repo at 
 [../docs/development/plugins/](../docs/development/plugins/).
 
+There you will see detailed API documentation, examples, and guides on how to develop plugins.
+
+
+## The example plugins
 
 Folder                                         | Description
 ------                                         | -----------
