@@ -95,7 +95,7 @@
     "test": "cross-env UNDER_TEST=true react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint -c package.json --ext .js,.ts,.tsx src/ ../app/electron ../plugins/headlamp-plugin --ignore-pattern ../plugins/headlamp-plugin/template --ignore-pattern ../plugins/headlamp-plugin/lib/",
-    "format": "prettier --config package.json --write src ../app/electron ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/lib ../plugins/headlamp-plugin/config ../plugins/headlamp-plugin/template ../plugins/headlamp-plugin/test*.js ../plugins/headlamp-plugin/*.json ../plugins/headlamp-plugin/*.js",
+    "format": "prettier --config package.json --write src ../app/electron ../app/scripts ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/lib ../plugins/headlamp-plugin/config ../plugins/headlamp-plugin/template ../plugins/headlamp-plugin/test*.js ../plugins/headlamp-plugin/*.json ../plugins/headlamp-plugin/*.js",
     "format-check": "prettier --config package.json --check src ../app/electron ../plugins/headlamp-plugin",
     "storybook": "start-storybook -p 6006 -s public",
     "build-typedoc": "npx typedoc",
