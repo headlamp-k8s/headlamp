@@ -6,18 +6,18 @@
   "homepage": "https://github.com/headlamp-k8s/headlamp/#readme",
   "productName": "Headlamp",
   "scripts": {
-    "compile-electron": "babel electron --out-dir electron/ --extensions .ts",
-    "start": "cd ../ && make backend && make run-backend  & cd ../frontend/ && export BROWSER=none && npm start",
-    "prod-deps": "mkdirp prod_deps && cd ./prod_deps && copyfiles -f ../package.json ../package-lock.json . && npm i --only=prod && cd .. && npx --no-install rimraf ./prod_deps/node_modules/.bin",
-    "copy-icons": "mkdirp build/icons && copyfiles -f ../frontend/build/*.png ../frontend/build/*.ico ../frontend/build/*.icns ../frontend/build/*.svg build/icons",
     "build": "npm run copy-icons && npm run copy-plugins && npm run compile-electron && npm run prod-deps && electron-builder --dir --publish never",
-    "package": "npm run build && electron-builder build --publish never",
-    "package-msi": "npm run build && node windows/msi/build.js",
+    "compile-electron": "babel electron --out-dir electron/ --extensions .ts",
+    "copy-icons": "mkdirp build/icons && copyfiles -f ../frontend/build/*.png ../frontend/build/*.ico ../frontend/build/*.icns ../frontend/build/*.svg build/icons",
+    "copy-plugins": "npx --no-install rimraf build/.plugins && mkdirp build/.plugins && copyfiles ../.plugins build/.plugins",
     "dev": "npm run compile-electron && cross-env ELECTRON_DEV=1 electron .",
     "dev-only-app": "npm run compile-electron && cross-env ELECTRON_DEV=1 ELECTRON_START_URL=http://localhost:3000 EXTERNAL_SERVER=true electron .",
     "i18n": "npx --no-install i18next ./electron/main.ts -c ./electron/i18next-parser.config.js",
-    "test": "jest",
-    "copy-plugins": "npx --no-install rimraf build/.plugins && mkdirp build/.plugins && copyfiles ../.plugins build/.plugins"
+    "package": "npm run build && electron-builder build --publish never",
+    "package-msi": "npm run build && node windows/msi/build.js",
+    "prod-deps": "mkdirp prod_deps && cd ./prod_deps && copyfiles -f ../package.json ../package-lock.json . && npm i --only=prod && cd .. && npx --no-install rimraf ./prod_deps/node_modules/.bin",
+    "start": "node scripts/start.js",
+    "test": "jest"
   },
   "build": {
     "appId": "com.kinvolk.headlamp",
