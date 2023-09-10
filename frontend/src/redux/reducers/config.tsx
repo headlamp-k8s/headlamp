@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Cluster } from '../../lib/k8s/cluster';
-import { Action, CONFIG_NEW, CONFIG_SET_SETTINGS } from '../actions/actions';
+import { Action, CONFIG_NEW, CONFIG_SET_SETTINGS, CONFIG_STATELESS_NEW } from '../actions/actions';
 
 const storedSettings = JSON.parse(localStorage.getItem('settings') || '{}');
 
@@ -8,6 +8,10 @@ export interface ConfigState {
   clusters: {
     [clusterName: string]: Cluster;
   } | null;
+  statelessClusters: {
+    [clusterName: string]: Cluster;
+  } | null;
+  isDynamicEnabled: boolean;
   settings: {
     tableRowsPerPageOptions: number[];
     timezone: string;
@@ -23,6 +27,8 @@ function defaultTimezone() {
 
 export const INITIAL_STATE: ConfigState = {
   clusters: null,
+  statelessClusters: null,
+  isDynamicEnabled: true,
   settings: {
     tableRowsPerPageOptions:
       storedSettings.tableRowsPerPageOptions || defaultTableRowsPerPageOptions,
@@ -33,6 +39,7 @@ export const INITIAL_STATE: ConfigState = {
 export interface ConfigAction extends Action {
   config: {
     clusters: ConfigState['clusters'];
+    statelessClusters: ConfigState['statelessClusters'];
   };
 }
 
@@ -41,6 +48,10 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: ConfigAction) {
   switch (action.type) {
     case CONFIG_NEW: {
       newState.clusters = { ...action.config.clusters };
+      break;
+    }
+    case CONFIG_STATELESS_NEW: {
+      newState.statelessClusters = { ...action.config.statelessClusters };
       break;
     }
     case CONFIG_SET_SETTINGS: {

@@ -110,6 +110,7 @@ func (c *Context) OidcConfig() (*OidcConfig, error) {
 // ProxyRequest proxies the given request to the cluster.
 func (c *Context) ProxyRequest(writer http.ResponseWriter, request *http.Request) error {
 	if c.proxy == nil {
+		fmt.Println("proxy was nil", c.Name)
 		err := c.SetupProxy()
 		if err != nil {
 			return err
@@ -241,6 +242,33 @@ func LoadContextsFromAPIConfig(config *api.Config) ([]Context, []error) {
 		if err != nil {
 			errors = append(errors, fmt.Errorf("couldnt setup proxy for context: %q, err:%q", contextName, err))
 			continue
+		}
+
+		contexts = append(contexts, context)
+	}
+
+	return contexts, errors
+}
+
+func LoadContextsFromAPIConfigStateless(config *api.Config) ([]Context, []error) {
+	contexts := []Context{}
+	errors := []error{}
+
+	for contextName, context := range config.Contexts {
+		cluster := config.Clusters[context.Cluster]
+		if cluster == nil {
+			errors = append(errors, fmt.Errorf("cluster not found for context: %q", contextName))
+			continue
+		}
+
+		// Note: nil authInfo is valid as authInfo can be provided by token.
+		authInfo := config.AuthInfos[context.AuthInfo]
+
+		context := Context{
+			Name:        contextName,
+			KubeContext: context,
+			Cluster:     cluster,
+			AuthInfo:    authInfo,
 		}
 
 		contexts = append(contexts, context)

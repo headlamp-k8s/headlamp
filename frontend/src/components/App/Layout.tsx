@@ -7,10 +7,11 @@ import _ from 'lodash';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import helpers from '../../helpers';
 import { request } from '../../lib/k8s/apiProxy';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster } from '../../lib/util';
-import { setConfig } from '../../redux/actions/actions';
+import { setConfig, setStatelessConfig } from '../../redux/actions/actions';
 import { ConfigState } from '../../redux/reducers/config';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import store from '../../redux/stores/store';
@@ -99,17 +100,63 @@ export default function Layout({}: LayoutProps) {
     window.clusterConfigFetchHandler = setInterval(
       () => {
         fetchConfig();
+        fetchStatelessKubeconfig();
       },
       CLUSTER_FETCH_INTERVAL,
       clusters
     );
     fetchConfig();
+    fetchStatelessKubeconfig();
     return () => {
       if (window.clusterConfigFetchHandler) {
         clearInterval(window.clusterConfigFetchHandler);
       }
     };
   }, []);
+
+  const fetchStatelessKubeconfig = () => {
+    const statelessClusters = store.getState().config.statelessClusters;
+    const sessionId = helpers.getSessionId();
+    const config = helpers.getClusterKubeconfigs(sessionId);
+    const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
+    const clusterReq = {
+      kubeconfigs: config,
+    };
+
+    request(
+      '/statelessCluster',
+      {
+        method: 'POST',
+        body: JSON.stringify(clusterReq),
+        headers: {
+          ...JSON_HEADERS,
+          ...{
+            'X-HEADLAMP_SESSION_ID': sessionId,
+          },
+        },
+      },
+      false,
+      false
+    )
+      .then((config: Config) => {
+        const clustersToConfig: ConfigState['statelessClusters'] = {};
+        config?.statelessClusters.forEach((cluster: Cluster) => {
+          clustersToConfig[cluster.name] = cluster;
+        });
+        const configToStore = {
+          ...config,
+          statelessClusters: clustersToConfig,
+        };
+        if (statelessClusters === null) {
+          dispatch(setStatelessConfig(configToStore));
+        } else if (Object.keys(clustersToConfig).length !== Object.keys(statelessClusters).length) {
+          dispatch(setStatelessConfig(configToStore));
+        }
+      })
+      .catch((err: Error) => {
+        console.error('Error getting config:', err);
+      });
+  };
 
   /**
    * Fetches the cluster config from the backend and updates the redux store

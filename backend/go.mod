@@ -28,6 +28,8 @@ require (
 	sigs.k8s.io/yaml v1.3.0
 )
 
+require github.com/gorilla/websocket v1.4.2
+
 require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230106234847-43070de90fa1 // indirect
 	github.com/Azure/go-ansiterm v0.0.0-20210617225240-d185dfc1b5a1 // indirect

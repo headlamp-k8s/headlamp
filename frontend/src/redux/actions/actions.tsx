@@ -15,6 +15,7 @@ export const CLUSTER_ACTION = 'CLUSTER_ACTION';
 export const CLUSTER_ACTION_UPDATE = 'CLUSTER_ACTION_UPDATE';
 export const CLUSTER_ACTION_CANCEL = 'CLUSTER_ACTION_CANCEL';
 export const CONFIG_NEW = 'CONFIG_NEW';
+export const CONFIG_STATELESS_NEW = 'CONFIG_STATELESS_NEW';
 export const UI_SIDEBAR_SET_SELECTED = 'UI_SIDEBAR_SET_SELECTED';
 export const UI_SIDEBAR_SET_VISIBLE = 'UI_SIDEBAR_SET_VISIBLE';
 export const UI_SIDEBAR_SET_ITEM = 'UI_SIDEBAR_SET_ITEM';
@@ -184,6 +185,10 @@ export function setDetailsView(viewSection: DetailsViewSectionType) {
 
 export function setConfig(config: object) {
   return { type: CONFIG_NEW, config };
+}
+
+export function setStatelessConfig(config: object) {
+  return { type: CONFIG_STATELESS_NEW, config };
 }
 
 export function setTheme(name?: string) {

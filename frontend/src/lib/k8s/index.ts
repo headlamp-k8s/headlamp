@@ -87,7 +87,14 @@ export const ResourceClasses = resourceClassesDict;
 
 // Hook for getting or fetching the clusters configuration.
 export function useClustersConf(): ConfigState['clusters'] {
-  const clusters = _.cloneDeep(useTypedSelector(state => state.config.clusters));
+  const state = useTypedSelector(state => state.config);
+  const clusters = _.cloneDeep(state.clusters || {});
+
+  if (state.statelessClusters) {
+    // Combine statelessClusters with clusters
+    Object.assign(clusters, state.statelessClusters);
+  }
+
   return clusters;
 }
 
