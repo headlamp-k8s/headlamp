@@ -8,7 +8,7 @@ use the K8s API to count the number of pods in the cluster.
 To run the plugin:
 
 ```bash
-cd plugins/examples/podcounter
+cd plugins/examples/pod-counter
 npm install
 npm start
 # See the app bar at the top of Headlamp has changed to show the number of Pods.
