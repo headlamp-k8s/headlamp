@@ -431,31 +431,51 @@ export default function PodDetails(props: PodDetailsProps) {
           },
         ]
       }
-      sectionsFunc={item =>
-        item && (
-          <>
-            <TolerationsSection tolerations={item?.spec?.tolerations || []} />
-            <ConditionsSection resource={item?.jsonData} />
-            <ContainersSection resource={item?.jsonData} />
-            <VolumeDetails volumes={item?.jsonData?.spec.volumes} />
-            <PodLogViewer
-              key="logs"
-              open={showLogs}
-              item={item}
-              onClose={() => setShowLogs(false)}
-            />
-            <Terminal
-              key="terminal"
-              open={showTerminal || isAttached}
-              item={item}
-              onClose={() => {
-                setShowTerminal(false);
-                setIsAttached(false);
-              }}
-              isAttach={isAttached}
-            />
-          </>
-        )
+      extraSections={item =>
+        item && [
+          {
+            id: 'headlamp.pod-tolerations',
+            section: <TolerationsSection tolerations={item?.spec?.tolerations || []} />,
+          },
+          {
+            id: 'headlamp.pod-conditions',
+            section: <ConditionsSection resource={item?.jsonData} />,
+          },
+          {
+            id: 'headlamp.pod-containers',
+            section: <ContainersSection resource={item?.jsonData} />,
+          },
+          {
+            id: 'headlamp.pod-volumes',
+            section: <VolumeDetails volumes={item?.jsonData?.spec.volumes} />,
+          },
+          {
+            id: 'headlamp.pod-logs',
+            section: (
+              <PodLogViewer
+                key="logs"
+                open={showLogs}
+                item={item}
+                onClose={() => setShowLogs(false)}
+              />
+            ),
+          },
+          {
+            id: 'headlamp.pod-terminal',
+            section: (
+              <Terminal
+                key="terminal"
+                open={showTerminal || isAttached}
+                item={item}
+                onClose={() => {
+                  setShowTerminal(false);
+                  setIsAttached(false);
+                }}
+                isAttach={isAttached}
+              />
+            ),
+          },
+        ]
       }
     />
   );

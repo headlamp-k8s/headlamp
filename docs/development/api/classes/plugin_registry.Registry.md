@@ -33,7 +33,7 @@ slug: "plugin_registry.Registry"
 
 #### Defined in
 
-[plugin/registry.tsx:110](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/plugin/registry.tsx#L110)
+[plugin/registry.tsx:121](https://github.com/headlamp-k8s/headlamp/blob/0953b71fc/frontend/src/plugin/registry.tsx#L121)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:159](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/plugin/registry.tsx#L159)
+[plugin/registry.tsx:170](https://github.com/headlamp-k8s/headlamp/blob/0953b71fc/frontend/src/plugin/registry.tsx#L170)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:167](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/plugin/registry.tsx#L167)
+[plugin/registry.tsx:178](https://github.com/headlamp-k8s/headlamp/blob/0953b71fc/frontend/src/plugin/registry.tsx#L178)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:100](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/plugin/registry.tsx#L100)
+[plugin/registry.tsx:111](https://github.com/headlamp-k8s/headlamp/blob/0953b71fc/frontend/src/plugin/registry.tsx#L111)
 
 ___
 
@@ -137,7 +137,7 @@ register.registerDetailsViewSection('biolatency', resource => {
 
 #### Defined in
 
-[plugin/registry.tsx:132](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/plugin/registry.tsx#L132)
+[plugin/registry.tsx:143](https://github.com/headlamp-k8s/headlamp/blob/0953b71fc/frontend/src/plugin/registry.tsx#L143)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:92](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/plugin/registry.tsx#L92)
+[plugin/registry.tsx:103](https://github.com/headlamp-k8s/headlamp/blob/0953b71fc/frontend/src/plugin/registry.tsx#L103)
 
 ___
 
@@ -185,4 +185,4 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:68](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/plugin/registry.tsx#L68)
+[plugin/registry.tsx:79](https://github.com/headlamp-k8s/headlamp/blob/0953b71fc/frontend/src/plugin/registry.tsx#L79)

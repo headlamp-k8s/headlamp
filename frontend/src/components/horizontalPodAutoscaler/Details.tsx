@@ -52,12 +52,13 @@ export default function HpaDetails() {
           },
         ]
       }
-      sectionsFunc={item =>
-        item && (
-          <>
-            <ConditionsSection resource={item?.jsonData} />
-          </>
-        )
+      extraSections={item =>
+        item && [
+          {
+            id: 'headlamp.hpa-conditions',
+            section: <ConditionsSection resource={item?.jsonData} />,
+          },
+        ]
       }
     />
   );

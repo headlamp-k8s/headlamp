@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import DaemonSet from '../../lib/k8s/daemonSet';
@@ -9,7 +8,6 @@ import {
   MetadataDictGrid,
   OwnedPodsSection,
 } from '../common/Resource';
-import DetailsViewSection from '../DetailsViewSection';
 
 interface TolerationsSection {
   resource: DaemonSet;
@@ -92,18 +90,20 @@ export default function DaemonSetDetails() {
           },
         ]
       }
-      sectionsFunc={item => (
-        <>
-          {item && (
-            <>
-              <OwnedPodsSection resource={item?.jsonData} />
-              <TolerationsSection resource={item} t={t} />
-              <ContainersSection resource={item?.jsonData} />
-            </>
-          )}
-          <DetailsViewSection resource={item} />
-        </>
-      )}
+      extraSections={item => [
+        {
+          id: 'headlamp.daemonset-owned-pods',
+          section: <OwnedPodsSection resource={item?.jsonData} />,
+        },
+        {
+          id: 'headlamp.daemonset-tolerations',
+          section: <TolerationsSection resource={item} t={t} />,
+        },
+        {
+          id: 'headlamp.daemonset-containers',
+          section: <ContainersSection resource={item?.jsonData} />,
+        },
+      ]}
     />
   );
 }

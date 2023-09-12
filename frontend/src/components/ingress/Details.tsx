@@ -1,8 +1,7 @@
 import { Box, Link, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import Ingress, { IngressRule } from '../../lib/k8s/ingress';
-import { IngressBackend } from '../../lib/k8s/ingress';
+import Ingress, { IngressBackend, IngressRule } from '../../lib/k8s/ingress';
 import { useSettings } from '../App/Settings/hook';
 import LabelListItem from '../common/LabelListItem';
 import { DetailsGrid } from '../common/Resource';
@@ -216,39 +215,42 @@ export default function IngressDetails() {
           },
         ]
       }
-      sectionsFunc={item => (
-        <>
-          <SectionBox title={t('Rules')}>
-            <SimpleTable
-              rowsPerPage={storeRowsPerPageOptions}
-              emptyMessage={t('ingress|No rules data to be shown.')}
-              columns={[
-                {
-                  label: t('Host'),
-                  getter: (data: IngressRule) => (
-                    <LinkStringFormat url={data.host || '*'} item={item} />
-                  ),
-                },
-                {
-                  label: t('Path'),
-                  getter: (data: IngressRule) =>
-                    data.http.paths.map(({ path }) => (
-                      <LinkStringFormat url={data.host || '*'} item={item} urlPath={path} />
-                    )),
-                },
-                {
-                  label: t('Backends'),
-                  getter: (data: IngressRule) => (
-                    <BackendFormat backend={data.http.paths.map(({ backend }) => backend)} />
-                  ),
-                },
-              ]}
-              data={item?.getRules() || []}
-              reflectInURL="rules"
-            />
-          </SectionBox>
-        </>
-      )}
+      extraSections={item => [
+        {
+          id: 'headlamp.ingress-rules',
+          section: item && (
+            <SectionBox title={t('Rules')}>
+              <SimpleTable
+                rowsPerPage={storeRowsPerPageOptions}
+                emptyMessage={t('ingress|No rules data to be shown.')}
+                columns={[
+                  {
+                    label: t('Host'),
+                    getter: (data: IngressRule) => (
+                      <LinkStringFormat url={data.host || '*'} item={item} />
+                    ),
+                  },
+                  {
+                    label: t('Path'),
+                    getter: (data: IngressRule) =>
+                      data.http.paths.map(({ path }) => (
+                        <LinkStringFormat url={data.host || '*'} item={item} urlPath={path} />
+                      )),
+                  },
+                  {
+                    label: t('Backends'),
+                    getter: (data: IngressRule) => (
+                      <BackendFormat backend={data.http.paths.map(({ backend }) => backend)} />
+                    ),
+                  },
+                ]}
+                data={item?.getRules() || []}
+                reflectInURL="rules"
+              />
+            </SectionBox>
+          ),
+        },
+      ]}
     />
   );
 }

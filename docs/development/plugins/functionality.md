@@ -107,10 +107,12 @@ Show a component to the top right area of a detail view
 
 ### Details View Section
 
-Show a component at the bottom of different details views.
+Change sections in cluster resources' details views with [registerDetailsViewSectionsProcessor](../api/modules/plugin_registry.md#registerDetailsViewSectionsProcessor). This allows you to remove, add, update, or shuffle sections within details views, including the back link.
+
+Or simply append a component at the bottom of different details views with
 [registerDetailsViewSection](../api/modules/plugin_registry.md#registerdetailsviewsection).
 
-![screenshot of the appended Details View Section](./images/details-view.png)
+![screenshot of the appended Details View Section](./images/details-view.jpeg)
 
 - Example plugin shows [How To set a Details View Section](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/details-view)
 - API reference for [registerDetailsViewSection](../api/modules/plugin_registry.md#registerdetailsviewsection)

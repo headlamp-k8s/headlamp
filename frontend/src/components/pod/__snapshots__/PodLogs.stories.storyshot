@@ -37,92 +37,108 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             class="MuiTouchRipple-root"
           />
         </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+              <div
+                class="MuiBox-root MuiBox-root"
+              />
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              >
+                <button
+                  aria-label="logs"
+                  class="MuiButtonBase-root MuiIconButton-root"
+                  tabindex="0"
+                  title="Show Logs"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              >
+                <button
+                  aria-label="View YAML"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                  tabindex="0"
+                  title="View YAML"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
-          <div
-            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiBox-root MuiBox-root"
-              >
-                <h1
-                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
-                >
-                  Pod
-                </h1>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                />
-              </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="logs"
-                    class="MuiButtonBase-root MuiIconButton-root"
-                    tabindex="0"
-                    title="Show Logs"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                >
-                  <button
-                    aria-label="View YAML"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
-                    tabindex="0"
-                    title="View YAML"
-                    type="button"
-                  >
-                    <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-              </div>
-            </div>
-          </div>
           <div
             aria-busy="false"
             aria-live="polite"
@@ -415,6 +431,14 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -653,6 +677,14 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -810,6 +842,20 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"

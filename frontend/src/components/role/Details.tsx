@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ClusterRole from '../../lib/k8s/clusterRole';
@@ -20,33 +19,38 @@ export default function RoleDetails() {
       name={name}
       namespace={namespace}
       withEvents
-      sectionsFunc={item =>
-        item && (
-          <SectionBox title={t('Rules')}>
-            <SimpleTable
-              columns={[
-                {
-                  label: t('API Groups'),
-                  getter: ({ apiGroups = [] }) => apiGroups.join(', '),
-                },
-                {
-                  label: t('Resources'),
-                  getter: ({ resources = [] }) => resources.join(', '),
-                },
-                {
-                  label: t('Non Resources'),
-                  getter: ({ nonResources = [] }) => nonResources.join(', '),
-                },
-                {
-                  label: t('Verbs'),
-                  getter: ({ verbs = [] }) => verbs.join(', '),
-                },
-              ]}
-              data={item.rules}
-              reflectInURL="rules"
-            />
-          </SectionBox>
-        )
+      extraSections={item =>
+        item && [
+          {
+            id: 'headlamp.role-rules',
+            section: (
+              <SectionBox title={t('Rules')}>
+                <SimpleTable
+                  columns={[
+                    {
+                      label: t('API Groups'),
+                      getter: ({ apiGroups = [] }) => apiGroups.join(', '),
+                    },
+                    {
+                      label: t('Resources'),
+                      getter: ({ resources = [] }) => resources.join(', '),
+                    },
+                    {
+                      label: t('Non Resources'),
+                      getter: ({ nonResources = [] }) => nonResources.join(', '),
+                    },
+                    {
+                      label: t('Verbs'),
+                      getter: ({ verbs = [] }) => verbs.join(', '),
+                    },
+                  ]}
+                  data={item.rules || []}
+                  reflectInURL="rules"
+                />
+              </SectionBox>
+            ),
+          },
+        ]
       }
     />
   );

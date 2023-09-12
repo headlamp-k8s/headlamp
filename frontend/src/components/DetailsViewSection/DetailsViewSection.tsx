@@ -1,4 +1,4 @@
-import { ComponentType, isValidElement, ReactElement, useMemo } from 'react';
+import { isValidElement, ReactElement, ReactNode, useMemo } from 'react';
 import { KubeObject } from '../../lib/k8s/cluster';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import ErrorBoundary from '../common/ErrorBoundary';
@@ -6,7 +6,11 @@ import ErrorBoundary from '../common/ErrorBoundary';
 export interface DetailsViewSectionProps {
   resource: KubeObject;
 }
-export type DetailsViewSectionType = ComponentType<DetailsViewSectionProps> | ReactElement | null;
+export type DetailsViewSectionType =
+  | ((...args: any[]) => JSX.Element | null | ReactNode)
+  | null
+  | ReactElement
+  | ReactNode;
 
 /**
  * View components registered by plugins in the different Details views.
@@ -23,11 +27,7 @@ export default function DetailsViewSection(props: DetailsViewSectionProps) {
           return null;
         }
 
-        return (
-          <ErrorBoundary key={index}>
-            {isValidElement(Component) ? Component : <Component resource={resource} />}
-          </ErrorBoundary>
-        );
+        return <ErrorBoundary key={index}>{isValidElement(Component) && Component}</ErrorBoundary>;
       }),
     [detailViews, resource]
   );

@@ -36,42 +36,47 @@ export default function RoleBindingDetails() {
           },
         ]
       }
-      sectionsFunc={item =>
-        item && (
-          <SectionBox title={t('Binding Info')}>
-            <SimpleTable
-              data={item.subjects}
-              columns={[
-                {
-                  label: t('Kind'),
-                  getter: item => item.kind,
-                },
-                {
-                  label: t('frequent|Name'),
-                  getter: item =>
-                    // item can hold a reference to non kube Objects
-                    // such as user and group names, in that case
-                    // dont create a link.
-                    !item?.apiGroup ? (
-                      <Link
-                        routeName={item.kind}
-                        params={{ namespace: item.namespace || namespace, name: item.name }}
-                      >
-                        {item.name}
-                      </Link>
-                    ) : (
-                      item.name
-                    ),
-                },
-                {
-                  label: t('Namespace'),
-                  getter: item => item.namespace,
-                },
-              ]}
-              reflectInURL="bindingInfo"
-            />
-          </SectionBox>
-        )
+      extraSections={item =>
+        item && [
+          {
+            id: 'headlamp.role-binding-info',
+            section: (
+              <SectionBox title={t('Binding Info')}>
+                <SimpleTable
+                  data={item.subjects}
+                  columns={[
+                    {
+                      label: t('Kind'),
+                      getter: item => item.kind,
+                    },
+                    {
+                      label: t('frequent|Name'),
+                      getter: item =>
+                        // item can hold a reference to non kube Objects
+                        // such as user and group names, in that case
+                        // dont create a link.
+                        !item?.apiGroup ? (
+                          <Link
+                            routeName={item.kind}
+                            params={{ namespace: item.namespace || namespace, name: item.name }}
+                          >
+                            {item.name}
+                          </Link>
+                        ) : (
+                          item.name
+                        ),
+                    },
+                    {
+                      label: t('Namespace'),
+                      getter: item => item.namespace,
+                    },
+                  ]}
+                  reflectInURL="bindingInfo"
+                />
+              </SectionBox>
+            ),
+          },
+        ]
       }
     />
   );

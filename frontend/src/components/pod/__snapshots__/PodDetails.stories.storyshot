@@ -35,58 +35,74 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             class="MuiTouchRipple-root"
           />
         </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+              <div
+                class="MuiBox-root MuiBox-root"
+              />
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
-          <div
-            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiBox-root MuiBox-root"
-              >
-                <h1
-                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
-                >
-                  Pod
-                </h1>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                />
-              </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-              </div>
-            </div>
-          </div>
           <div
             aria-busy="false"
             aria-live="polite"
@@ -386,6 +402,14 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -634,6 +658,14 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -770,6 +802,20 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -963,58 +1009,74 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             class="MuiTouchRipple-root"
           />
         </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+              <div
+                class="MuiBox-root MuiBox-root"
+              />
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
-          <div
-            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiBox-root MuiBox-root"
-              >
-                <h1
-                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
-                >
-                  Pod
-                </h1>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                />
-              </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-              </div>
-            </div>
-          </div>
           <div
             aria-busy="false"
             aria-live="polite"
@@ -1307,6 +1369,14 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -1563,6 +1633,14 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -1833,6 +1911,20 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
     >
       <div
         class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
       >
         <div
           class="MuiBox-root MuiBox-root"
@@ -2013,58 +2105,74 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             class="MuiTouchRipple-root"
           />
         </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+              <div
+                class="MuiBox-root MuiBox-root"
+              />
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
-          <div
-            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiBox-root MuiBox-root"
-              >
-                <h1
-                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
-                >
-                  Pod
-                </h1>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                />
-              </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-              </div>
-            </div>
-          </div>
           <div
             aria-busy="false"
             aria-live="polite"
@@ -2364,6 +2472,14 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -2614,6 +2730,14 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -2853,6 +2977,20 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
     >
       <div
         class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
       >
         <div
           class="MuiBox-root MuiBox-root"
@@ -3033,58 +3171,74 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             class="MuiTouchRipple-root"
           />
         </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+              <div
+                class="MuiBox-root MuiBox-root"
+              />
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
-          <div
-            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiBox-root MuiBox-root"
-              >
-                <h1
-                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
-                >
-                  Pod
-                </h1>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                />
-              </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-              </div>
-            </div>
-          </div>
           <div
             aria-busy="false"
             aria-live="polite"
@@ -3377,6 +3531,14 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -3627,6 +3789,14 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -3741,6 +3911,20 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -3934,58 +4118,74 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             class="MuiTouchRipple-root"
           />
         </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+              <div
+                class="MuiBox-root MuiBox-root"
+              />
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
-          <div
-            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiBox-root MuiBox-root"
-              >
-                <h1
-                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
-                >
-                  Pod
-                </h1>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                />
-              </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-              </div>
-            </div>
-          </div>
           <div
             aria-busy="false"
             aria-live="polite"
@@ -4278,6 +4478,14 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -4516,6 +4724,14 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -4673,6 +4889,20 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -4866,58 +5096,74 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             class="MuiTouchRipple-root"
           />
         </button>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
+        <div
+          class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiBox-root MuiBox-root"
+            >
+              <h1
+                class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+              >
+                Pod
+              </h1>
+              <div
+                class="MuiBox-root MuiBox-root"
+              />
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+              <div
+                class="MuiGrid-root MuiGrid-item"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
-          <div
-            class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiBox-root MuiBox-root"
-              >
-                <h1
-                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
-                >
-                  Pod
-                </h1>
-                <div
-                  class="MuiBox-root MuiBox-root"
-                />
-              </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
-              >
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-                <div
-                  class="MuiGrid-root MuiGrid-item"
-                />
-              </div>
-            </div>
-          </div>
           <div
             aria-busy="false"
             aria-live="polite"
@@ -5210,6 +5456,14 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -5463,6 +5717,14 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      >
         <div
           class="MuiBox-root MuiBox-root"
         >
@@ -5599,6 +5861,20 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <div
+        class="MuiBox-root MuiBox-root"
+      />
     </div>
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
