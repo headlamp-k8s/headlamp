@@ -612,7 +612,10 @@ export function ContainerInfo(props: ContainerInfoProps) {
 
     return (
       <>
-        <StatusLabel status={statusType} aria-describedby={tooltipID}>
+        <StatusLabel
+          status={statusType}
+          aria-describedby={!!state?.message ? tooltipID : undefined}
+        >
           {label + (state?.reason ? ` (${state.reason})` : '')}
         </StatusLabel>
         {!!state && state.message && (
