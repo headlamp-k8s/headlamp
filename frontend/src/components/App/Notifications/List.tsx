@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography, useTheme } from '@material-ui/core';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -19,9 +19,13 @@ export default function NotificationList() {
   const search = useTypedSelector(state => state.filter.search);
   const history = useHistory();
 
-  function checkIfAllNotificationsDeleted() {
-    return notifications.filter(notification => notification.deleted === false).length === 0;
-  }
+  const allNotificationsAreDeleted = React.useMemo(() => {
+    return !notifications.find(notification => !notification.deleted);
+  }, [notifications]);
+
+  const hasUnseenNotifications = React.useMemo(() => {
+    return !!notifications.find(notification => !notification.deleted && !notification.seen);
+  }, [notifications]);
 
   function notificationSeenUnseenHandler(event: any, notification?: Notification) {
     if (!notification) {
@@ -71,10 +75,10 @@ export default function NotificationList() {
           <Icon icon="mdi:dots-vertical" onClick={handleClick} />
         </IconButton>
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-          <MenuItem onClick={markAllAsRead}>
+          <MenuItem onClick={markAllAsRead} disabled={!hasUnseenNotifications}>
             <Typography color={'primary'}>{t('notifications|Mark all as read')}</Typography>
           </MenuItem>
-          <MenuItem onClick={clearAllNotifications}>
+          <MenuItem onClick={clearAllNotifications} disabled={allNotificationsAreDeleted}>
             <Typography color="primary">{t('notifications|Clear all')}</Typography>
           </MenuItem>
         </Menu>
@@ -93,7 +97,7 @@ export default function NotificationList() {
       }
       backLink
     >
-      {checkIfAllNotificationsDeleted() ? (
+      {allNotificationsAreDeleted ? (
         <Empty>{t("notifications|You don't have any notifications right now")}</Empty>
       ) : (
         <SimpleTable
