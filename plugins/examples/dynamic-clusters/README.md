@@ -11,7 +11,7 @@ To run the plugin with [node.js](https://nodejs.org/en/) installed:
 
 ```bash
 git clone git@github.com:kinvolk/headlamp.git
-cd headlamp/plugins/examples/cluster-chooser/
+cd headlamp/plugins/examples/dynamic-clusters/
 npm install
 npm start
 ```

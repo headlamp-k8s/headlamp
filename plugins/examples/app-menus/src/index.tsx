@@ -9,7 +9,7 @@ class AppMenuDemo extends Plugin {
     if (!AppMenuDemo.warnedOnce && !Headlamp.isRunningAsApp()) {
       AppMenuDemo.warnedOnce = true;
       window.alert(
-        'app-menus plugin: Headland is running as an app. This plugin will not do anything!'
+        'app-menus plugin: Headlamp is running as an app. This plugin will not do anything!'
       );
       return;
     }
