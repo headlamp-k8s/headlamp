@@ -89,7 +89,7 @@
   },
   "scripts": {
     "prestart": "npm run make-version",
-    "start": "react-scripts start",
+    "start": "cross-env HEADLAMP_BACKEND_TOKEN=headlamp react-scripts start",
     "prebuild": "npm run make-version",
     "build": "if-env PUBLIC_URL react-scripts build || cross-env PUBLIC_URL=./ react-scripts build --max_old_space_size=768 && npx shx rm -f build/frontend/index.baseUrl.html",
     "test": "cross-env UNDER_TEST=true react-scripts test",

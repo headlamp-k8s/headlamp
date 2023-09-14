@@ -67,10 +67,10 @@ frontend-build-storybook:
 run-backend:
 	@echo "**** Warning: Running with Helm and dynamic-clusters endpoints enabled. ****"
 	@echo
-	HEADLAMP_CONFIG_ENABLE_HELM=true HEADLAMP_CONFIG_ENABLE_DYNAMIC_CLUSTERS=true ./backend/headlamp-server -dev
+	HEADLAMP_BACKEND_TOKEN=headlamp HEADLAMP_CONFIG_ENABLE_HELM=true HEADLAMP_CONFIG_ENABLE_DYNAMIC_CLUSTERS=true ./backend/headlamp-server -dev
 
 run-frontend:
-	cd frontend && npm start
+	cd frontend && REACT_APP_HEADLAMP_BACKEND_TOKEN=headlamp npm start
 
 frontend-lint:
 	cd frontend && npm run lint -- --max-warnings 0 && npm run format-check
