@@ -161,8 +161,7 @@ export interface HoverInfoLabelProps {
 
 const useHoverInfoLabelStyles = makeStyles({
   display: {
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: 'inline-flex',
   },
   noWrap: {
     whiteSpace: 'nowrap',
