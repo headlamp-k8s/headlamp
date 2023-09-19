@@ -11,12 +11,14 @@ import Registry, * as registryToExport from './registry';
 
 window.pluginLib = {
   ApiProxy: require('../lib/k8s/apiProxy'),
-  Crd: require('../lib/k8s/crd'),
   ReactMonacoEditor: require('@monaco-editor/react'),
   MonacoEditor: require(process.env.NODE_ENV === 'test'
     ? 'monaco-editor/esm/vs/editor/editor.api.js'
     : 'monaco-editor'),
   K8s: require('../lib/k8s'),
+  // Anything that is part of the lib/k8s/ folder should be imported after the K8s import, to
+  // avoid circular dependencies' issues.
+  Crd: require('../lib/k8s/crd'),
   CommonComponents: require('../components/common'),
   MuiCore: require('@material-ui/core'),
   MuiStyles: require('@material-ui/styles'),
