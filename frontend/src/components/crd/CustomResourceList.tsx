@@ -103,11 +103,12 @@ function getValueWithJSONPath(item: KubeCRD, jsonPath: string): string {
 
 export interface CustomResourceTableProps {
   crd: CRD;
+  title?: string;
 }
 
-function CustomResourceListTable(props: CustomResourceTableProps) {
+export function CustomResourceListTable(props: CustomResourceTableProps) {
   const { t } = useTranslation('glossary');
-  const { crd } = props;
+  const { crd, title = '' } = props;
 
   const apiGroup = React.useMemo(() => {
     return crd.getMainAPIGroup();
@@ -174,7 +175,7 @@ function CustomResourceListTable(props: CustomResourceTableProps) {
 
   return (
     <ResourceListView
-      title=""
+      title={title}
       headerProps={{
         noNamespaceFilter: !crd.isNamespaced,
       }}

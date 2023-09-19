@@ -444,14 +444,73 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
               <div
                 class="MuiBox-root MuiBox-root"
               >
-                <h2
-                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                <h1
+                  class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
                 >
                   Objects
-                </h2>
+                </h1>
                 <div
                   class="MuiBox-root MuiBox-root"
                 />
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  >
+                    <div
+                      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-align-items-xs-center"
+                    >
+                      <div
+                        class="MuiGrid-root MuiGrid-item"
+                      >
+                        <button
+                          aria-label="Show filter"
+                          class="MuiButtonBase-root MuiIconButton-root"
+                          tabindex="0"
+                          type="button"
+                        >
+                          <span
+                            class="MuiIconButton-label"
+                          >
+                            <span />
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </div>
+                      <div
+                        class="MuiGrid-root MuiGrid-item"
+                      >
+                        <button
+                          aria-label="Change columns displayed"
+                          class="MuiButtonBase-root MuiIconButton-root"
+                          tabindex="0"
+                          title="Change columns displayed"
+                          type="button"
+                        >
+                          <span
+                            class="MuiIconButton-label"
+                          >
+                            <span />
+                          </span>
+                          <span
+                            class="MuiTouchRipple-root"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -471,16 +530,52 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     class="MuiTableRow-root MuiTableRow-head"
                   >
                     <th
-                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
                       Name
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
+                    </th>
+                    <th
+                      class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                      scope="col"
+                    >
+                      Namespace
+                      <button
+                        aria-label="sort swap"
+                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                        tabindex="0"
+                        type="button"
+                      >
+                        <span
+                          class="MuiIconButton-label"
+                        >
+                          <span />
+                        </span>
+                        <span
+                          class="MuiTouchRipple-root"
+                        />
+                      </button>
                     </th>
                     <th
                       class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                       scope="col"
                     >
-                      Namespace
+                      Test Col
                     </th>
                     <th
                       class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
@@ -525,7 +620,17 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      mynamespace
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        mynamespace
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      mycustomresource
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
@@ -556,7 +661,17 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
                     >
-                      mynamespace
+                      <a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                        href="/"
+                      >
+                        mynamespace
+                      </a>
+                    </td>
+                    <td
+                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                    >
+                      myotherresource
                     </td>
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
