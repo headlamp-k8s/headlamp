@@ -14,6 +14,7 @@ import { PageGrid } from '../components/common/Resource/Resource';
 import ConfigDetails from '../components/configmap/Details';
 import ConfigMapList from '../components/configmap/List';
 import CustomResourceDetails from '../components/crd/CustomResourceDetails';
+import CustomResourceList from '../components/crd/CustomResourceList';
 import CustomResourceDefinitionDetails from '../components/crd/Details';
 import CustomResourceDefinitionList from '../components/crd/List';
 import CronJobDetails from '../components/cronjob/Details';
@@ -603,6 +604,13 @@ const defaultRoutes: {
     name: 'Custom Resource',
     sidebar: 'crds',
     component: () => <CustomResourceDetails />,
+  },
+  customresources: {
+    path: '/customresources/:crd',
+    exact: true,
+    name: 'Custom Resources',
+    sidebar: 'crds',
+    component: () => <CustomResourceList />,
   },
   notifications: {
     path: '/notifications',

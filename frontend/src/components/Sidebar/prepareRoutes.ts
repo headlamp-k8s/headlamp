@@ -71,7 +71,7 @@ function prepareRoutes(
         },
         {
           name: 'crds',
-          label: t('glossary|CRDs'),
+          label: t('glossary|Custom Resources'),
         },
       ],
     },

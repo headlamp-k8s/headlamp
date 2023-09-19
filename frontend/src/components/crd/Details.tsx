@@ -78,7 +78,7 @@ export default function CustomResourceDefinitionDetails() {
             },
             {
               name: t('Version'),
-              value: item.spec.version,
+              value: item.getMainAPIGroup()[1],
             },
             {
               name: t('Scope'),
@@ -88,6 +88,19 @@ export default function CustomResourceDefinitionDetails() {
               name: t('Subresources'),
               value: item.spec.subresources && Object.keys(item.spec.subresources).join(' & '),
               hide: !item.spec.subresources,
+            },
+            {
+              name: t('Resource'),
+              value: (
+                <Link
+                  routeName="customresources"
+                  params={{
+                    crd: item.metadata.name,
+                  }}
+                >
+                  {item.spec.names.kind}
+                </Link>
+              ),
             },
           ]
         }

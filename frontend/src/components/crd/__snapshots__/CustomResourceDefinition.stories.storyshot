@@ -146,18 +146,33 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                  class="MuiGrid-root makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
                 >
                   Scope
                 </dt>
                 <dd
-                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                  class="MuiGrid-root makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
                 >
                   <span
                     class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
                   >
                     Namespaced
                   </span>
+                </dd>
+                <dt
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataNameCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4"
+                >
+                  Resource
+                </dt>
+                <dd
+                  class="MuiGrid-root makeStyles-metadataLast makeStyles-metadataCell MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8"
+                >
+                  <a
+                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    href="/"
+                  >
+                    MyCustomResource
+                  </a>
                 </dd>
               </dl>
             </div>
@@ -736,7 +751,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
           <h1
             class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
           >
-            Custom Resource Definitions
+            Custom Resources
           </h1>
           <div
             class="MuiBox-root MuiBox-root"
@@ -822,7 +837,28 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
                 scope="col"
               >
-                Name
+                Resource
+              </th>
+              <th
+                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                scope="col"
+              >
+                Definition
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
                 class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
@@ -850,27 +886,6 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                 scope="col"
               >
                 Scope
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
-                  tabindex="0"
-                  type="button"
-                >
-                  <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
-                scope="col"
-              >
-                Full name
                 <button
                   aria-label="sort swap"
                   class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
@@ -930,17 +945,22 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
+                <a
+                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  href="/"
+                >
+                  mydefinition.phonyresources.io
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+              >
                 my.phonyresources.io
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
               >
                 Namespaced
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-              >
-                mydefinition.phonyresources.io
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
