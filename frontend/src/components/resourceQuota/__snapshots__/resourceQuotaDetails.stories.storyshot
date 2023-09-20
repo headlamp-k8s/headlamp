@@ -3,7 +3,7 @@
 exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -420,7 +420,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Default 1`] = `
 exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Error 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -517,7 +517,7 @@ exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView Error 1`] = `
 exports[`Storyshots ResourceQuota/ResourceQuotaDetailsView No Item Yet 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"

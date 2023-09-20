@@ -3,7 +3,7 @@
 exports[`Storyshots Pod/PodDetailsView Error 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -976,7 +976,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
 exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -2071,7 +2071,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
 exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -3137,7 +3137,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
 exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -4084,7 +4084,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
 exports[`Storyshots Pod/PodDetailsView Running 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -5061,7 +5061,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
 exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
