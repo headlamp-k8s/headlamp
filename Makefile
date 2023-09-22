@@ -16,7 +16,7 @@ endif
 all: backend frontend
 
 tools/golangci-lint: backend/go.mod backend/go.sum
-	cd backend && go build -o ./tools/golangci-lint github.com/golangci/golangci-lint/cmd/golangci-lint
+	GOBIN=`pwd`/backend/tools go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.52.2
 
 backend-lint: tools/golangci-lint
 	cd backend && ./tools/golangci-lint run
@@ -45,6 +45,10 @@ backend:
 .PHONY: backend-test
 backend-test:
 	cd backend && go test -v -p 1 ./...
+
+.PHONY: backend-format
+backend-format:
+	cd backend && go fmt ./cmd/ ./pkg/**
 
 frontend-install:
 	cd frontend && npm install

@@ -27,3 +27,25 @@ Once built, it can be run in development mode (insecure / don't use in productio
 ```bash
 make run-backend
 ```
+
+## Lint
+
+To lint the backend/ code.
+
+```bash
+make backend-lint
+```
+
+## Format
+
+To format the backend code.
+
+```bash
+make backend-format
+```
+
+## Test
+
+```bash
+make backend-test
+```
