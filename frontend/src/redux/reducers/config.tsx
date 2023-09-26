@@ -11,6 +11,9 @@ export interface ConfigState {
   statelessClusters: {
     [clusterName: string]: Cluster;
   } | null;
+  allClusters: {
+    [clusterName: string]: Cluster;
+  } | null;
   isDynamicEnabled: boolean;
   settings: {
     tableRowsPerPageOptions: number[];
@@ -28,6 +31,7 @@ function defaultTimezone() {
 export const INITIAL_STATE: ConfigState = {
   clusters: null,
   statelessClusters: null,
+  allClusters: null,
   isDynamicEnabled: true,
   settings: {
     tableRowsPerPageOptions:
@@ -40,6 +44,7 @@ export interface ConfigAction extends Action {
   config: {
     clusters: ConfigState['clusters'];
     statelessClusters: ConfigState['statelessClusters'];
+    allClusters: ConfigState['allClusters'];
   };
 }
 

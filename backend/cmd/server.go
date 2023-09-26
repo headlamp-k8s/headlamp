@@ -19,6 +19,7 @@ func main() {
 	cache := cache.New[interface{}]()
 	kubeConfigStore := kubeconfig.NewContextStore()
 
+	go CheckAndRemoveClusters(kubeConfigStore)
 	StartHeadlampServer(&HeadlampConfig{
 		useInCluster:          conf.InCluster,
 		kubeConfigPath:        conf.KubeConfigPath,

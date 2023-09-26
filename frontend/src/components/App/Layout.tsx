@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import helpers from '../../helpers';
+import { useClustersConf } from '../../lib/k8s';
 import { request } from '../../lib/k8s/apiProxy';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster } from '../../lib/util';
@@ -93,6 +94,7 @@ export default function Layout({}: LayoutProps) {
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
+  const allClusters = useClustersConf();
   const { t } = useTranslation('frequent');
   const clusterInURL = getCluster();
 
@@ -100,13 +102,11 @@ export default function Layout({}: LayoutProps) {
     window.clusterConfigFetchHandler = setInterval(
       () => {
         fetchConfig();
-        fetchStatelessKubeconfig();
       },
       CLUSTER_FETCH_INTERVAL,
       clusters
     );
     fetchConfig();
-    fetchStatelessKubeconfig();
     return () => {
       if (window.clusterConfigFetchHandler) {
         clearInterval(window.clusterConfigFetchHandler);
@@ -114,8 +114,87 @@ export default function Layout({}: LayoutProps) {
     };
   }, []);
 
-  const fetchStatelessKubeconfig = () => {
+  /**
+   * Fetches the cluster config from the backend and updates the redux store
+   * if the present stored config is different from the fetched one.
+   */
+  const fetchConfig = () => {
+    const clusters = store.getState().config.clusters;
     const statelessClusters = store.getState().config.statelessClusters;
+    request('/config', {}, false, false)
+      .then((config: Config) => {
+        const clustersToConfig: ConfigState['clusters'] = {};
+        config?.clusters.forEach((cluster: Cluster) => {
+          clustersToConfig[cluster.name] = cluster;
+        });
+        const configToStore = {
+          ...config,
+          clusters: clustersToConfig,
+        };
+
+        if (clusters === null) {
+          dispatch(setConfig(configToStore));
+        } else {
+          let isConfigDifferent = false;
+
+          Object.keys(clustersToConfig).every((key: string) => {
+            // The length of the old cluster list and the new one may be the same, so we need
+            // to check if the cluster is present in the new list (happens when renaming a
+            // cluster for example).
+            if (!!clusters[key]) {
+              let clusterToCompare = clusters[key];
+
+              // Remove the cluster status from the comparison if needed (in which case we copy
+              // the cluster object to avoid modifying the original one).
+              if (clusterToCompare.useToken !== undefined) {
+                clusterToCompare = _.cloneDeep(clusters[key]);
+                delete clusterToCompare.useToken;
+              }
+
+              if (_.isEqual(clusterToCompare, clustersToConfig[key])) {
+                return true;
+              }
+            }
+
+            isConfigDifferent = true;
+            return false;
+          });
+
+          if (isConfigDifferent) {
+            dispatch(setConfig(configToStore));
+          } else if (Object.keys(clustersToConfig).length !== Object.keys(clusters).length) {
+            if (statelessClusters !== null) {
+              Object.keys(statelessClusters).every((key: string) => {
+                // The length of the old cluster list and the new one may be the same, so we need
+                // to check if the cluster is present in the new list (happens when renaming a
+                // cluster for example).
+                if (!!clusters[key]) {
+                  let clusterToCompare = clusters[key];
+                  const cluster = statelessClusters[key];
+
+                  // Remove the cluster status from the comparison if needed (in which case we copy
+                  // the cluster object to avoid modifying the original one).
+                  if (clusterToCompare.useToken !== undefined) {
+                    clusterToCompare = _.cloneDeep(clusters[key]);
+                    delete clusterToCompare.useToken;
+                  }
+
+                  // Check if the cluster configuration is equal to clusterToCompare
+                  if (_.isEqual(cluster, clusterToCompare)) {
+                    delete clusters[key]; // Remove the cluster
+                  }
+                }
+              });
+            }
+
+            dispatch(setConfig(configToStore));
+          }
+        }
+      })
+      .catch((err: Error) => {
+        console.error('Error getting config:', err);
+      });
+
     const sessionId = helpers.getSessionId();
     const config = helpers.getClusterKubeconfigs(sessionId);
     const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
@@ -143,6 +222,7 @@ export default function Layout({}: LayoutProps) {
         config?.statelessClusters.forEach((cluster: Cluster) => {
           clustersToConfig[cluster.name] = cluster;
         });
+
         const configToStore = {
           ...config,
           statelessClusters: clustersToConfig,
@@ -151,62 +231,6 @@ export default function Layout({}: LayoutProps) {
           dispatch(setStatelessConfig(configToStore));
         } else if (Object.keys(clustersToConfig).length !== Object.keys(statelessClusters).length) {
           dispatch(setStatelessConfig(configToStore));
-        }
-      })
-      .catch((err: Error) => {
-        console.error('Error getting config:', err);
-      });
-  };
-
-  /**
-   * Fetches the cluster config from the backend and updates the redux store
-   * if the present stored config is different from the fetched one.
-   */
-  const fetchConfig = () => {
-    const clusters = store.getState().config.clusters;
-    request('/config', {}, false, false)
-      .then((config: Config) => {
-        const clustersToConfig: ConfigState['clusters'] = {};
-        config?.clusters.forEach((cluster: Cluster) => {
-          clustersToConfig[cluster.name] = cluster;
-        });
-        const configToStore = {
-          ...config,
-          clusters: clustersToConfig,
-        };
-
-        if (clusters === null) {
-          dispatch(setConfig(configToStore));
-        } else if (Object.keys(clustersToConfig).length !== Object.keys(clusters).length) {
-          dispatch(setConfig(configToStore));
-        } else {
-          let isConfigDifferent = false;
-          Object.keys(clustersToConfig).every((key: string) => {
-            // The length of the old cluster list and the new one may be the same, so we need
-            // to check if the cluster is present in the new list (happens when renaming a
-            // cluster for example).
-            if (!!clusters[key]) {
-              let clusterToCompare = clusters[key];
-
-              // Remove the cluster status from the comparison if needed (in which case we copy
-              // the cluster object to avoid modifying the original one).
-              if (clusterToCompare.useToken !== undefined) {
-                clusterToCompare = _.cloneDeep(clusters[key]);
-                delete clusterToCompare.useToken;
-              }
-
-              if (_.isEqual(clusterToCompare, clustersToConfig[key])) {
-                return true;
-              }
-            }
-
-            isConfigDifferent = true;
-            return false;
-          });
-
-          if (isConfigDifferent) {
-            dispatch(setConfig(configToStore));
-          }
         }
       })
       .catch((err: Error) => {
@@ -225,7 +249,9 @@ export default function Layout({}: LayoutProps) {
         <TopBar />
         <Sidebar />
         <main id="main" className={classes.content}>
-          {clusters && !!clusterInURL && !Object.keys(clusters).includes(getCluster() || '') ? (
+          {allClusters &&
+          !!clusterInURL &&
+          !Object.keys(allClusters).includes(getCluster() || '') ? (
             <ClusterNotFoundPopup />
           ) : (
             ''

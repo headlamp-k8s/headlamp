@@ -28,7 +28,6 @@ import (
 	"github.com/google/uuid"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	"github.com/gorilla/websocket"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/helm"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
@@ -815,6 +814,35 @@ func StartHeadlampServer(config *HeadlampConfig) {
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.port), handler)) //nolint:gosec
 }
 
+func CheckAndRemoveClusters(kubeConfigStore kubeconfig.ContextStore) {
+	ticker := time.NewTicker(5 * time.Minute) //nolint:gomnd
+
+	for { //nolint:gosimple
+		select {
+		case <-ticker.C:
+			currentTime := time.Now()
+			// Get all contexts from the store
+			contexts, err := kubeConfigStore.GetContexts()
+			if err != nil {
+				log.Printf("Error getting contexts: %s", err)
+				continue
+			}
+
+			// Iterate through the contexts
+			for _, context := range contexts {
+				if context.Source == kubeconfig.DynamicCluster && currentTime.Sub(context.Timestamp) >= 10*time.Minute {
+					// Remove clusters marked as "dynamic_cluster"
+					if err := kubeConfigStore.RemoveContext(context.Name); err != nil {
+						log.Printf("Error removing dynamic cluster %s", context.Name)
+					}
+
+					log.Printf("Removed dynamic cluster %s", context.Name)
+				}
+			}
+		}
+	}
+}
+
 func GetFreePort() (int, error) {
 	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
 	if err != nil {
@@ -1052,19 +1080,6 @@ func handleClusterHelm(c *HeadlampConfig, router *mux.Router) {
 	})
 }
 
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-	CheckOrigin: func(r *http.Request) bool {
-		// Customize the origin check here.
-		// For example, to allow all origins:
-		return true
-
-		// Or check against a specific origin:
-		// return r.Header.Get("Origin") == "http://your-allowed-origin.com"
-	},
-}
-
 func handleClusterAPI(c *HeadlampConfig, router *mux.Router) { //nolint:funlen,gocognit
 	router.PathPrefix("/clusters/{clusterName}/{api:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		clusterName := mux.Vars(r)["clusterName"]
@@ -1119,6 +1134,8 @@ func handleClusterAPI(c *HeadlampConfig, router *mux.Router) { //nolint:funlen,g
 
 				if context.Name == clusterName {
 					context.Source = kubeconfig.DynamicCluster
+					// Set the timestamp to the current time
+					context.Timestamp = time.Now()
 					// check context is present
 					_, err := c.kubeConfigStore.GetContext(clusterName)
 					if err != nil && err.Error() == "key not found" {
@@ -1219,10 +1236,10 @@ func (c *HeadlampConfig) getStatelessClusters(sessionID string, kubeConfigs []st
 		config, err := clientcmd.Load(kubeConfigByte)
 		if err != nil {
 			log.Printf("Error: loading kubeconfig: %s", err)
-			setupErrors = append(setupErrors, err)
+			setupErrors = append(setupErrors, err) //nolint:ineffassign
 		}
 
-		contexts, setupErrors = kubeconfig.LoadContextsFromAPIConfig(config)
+		contexts, setupErrors = kubeconfig.LoadContextsFromAPIConfig(config, true)
 		if len(setupErrors) > 0 {
 			log.Println("Error setting up contexts from kubeconfig", setupErrors)
 			continue // Skip this kubeconfig and proceed to the next one
@@ -1338,7 +1355,7 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		contexts, setupErrors = kubeconfig.LoadContextsFromAPIConfig(config)
+		contexts, setupErrors = kubeconfig.LoadContextsFromAPIConfig(config, false)
 	} else {
 		conf := &api.Config{
 			Clusters: map[string]*api.Cluster{
@@ -1355,7 +1372,7 @@ func (c *HeadlampConfig) addCluster(w http.ResponseWriter, r *http.Request) {
 			},
 		}
 
-		contexts, setupErrors = kubeconfig.LoadContextsFromAPIConfig(conf)
+		contexts, setupErrors = kubeconfig.LoadContextsFromAPIConfig(conf, false)
 	}
 
 	if len(contexts) == 0 {

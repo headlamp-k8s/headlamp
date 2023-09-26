@@ -86,16 +86,18 @@ classList.forEach(cls => {
 export const ResourceClasses = resourceClassesDict;
 
 // Hook for getting or fetching the clusters configuration.
-export function useClustersConf(): ConfigState['clusters'] {
+export function useClustersConf(): ConfigState['allClusters'] {
   const state = useTypedSelector(state => state.config);
   const clusters = _.cloneDeep(state.clusters || {});
+  const allClusters = _.cloneDeep(state.allClusters || {});
+  Object.assign(allClusters, clusters);
 
   if (state.statelessClusters) {
     // Combine statelessClusters with clusters
-    Object.assign(clusters, state.statelessClusters);
+    Object.assign(allClusters, state.statelessClusters);
   }
 
-  return clusters;
+  return allClusters;
 }
 
 export function useCluster() {

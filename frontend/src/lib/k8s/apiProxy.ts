@@ -731,45 +731,9 @@ export async function streamResults(
       if (isCancelled) return;
 
       add(items, kind);
-      // Get the current URL
-      const currentURL = window.location.href;
-
-      // Split the URL by "/"
-      const urlSegments = currentURL.split('/');
-
-      // Find the index of "c" in the URL segments
-      const indexOfC = urlSegments.indexOf('c');
-
-      // Check if "c" exists in the URL and if there's a segment after it
-      let clusterName;
-      let matchingKubeconfig;
-      if (indexOfC !== -1 && indexOfC < urlSegments.length - 1) {
-        // Extract the "variable" part
-        clusterName = urlSegments[indexOfC + 1];
-      }
-      const sessionId = getSessionId();
-      if (clusterName !== undefined) {
-        matchingKubeconfig = findKubeconfigByClusterName(sessionId, clusterName);
-      }
-
-      let kubeconfig;
-      if (matchingKubeconfig !== null) {
-        kubeconfig = matchingKubeconfig;
-      }
-
-      let watchUrl;
-      if (kubeconfig === null || kubeconfig === undefined) {
-        watchUrl =
-          url +
-          asQuery({ ...queryParams, ...{ watch: '1', resourceVersion: metadata.resourceVersion } });
-      } else {
-        watchUrl =
-          url +
-          asQuery({
-            ...queryParams,
-            ...{ watch: '1', resourceVersion: metadata.resourceVersion, kubeconfig: kubeconfig },
-          });
-      }
+      const watchUrl =
+        url +
+        asQuery({ ...queryParams, ...{ watch: '1', resourceVersion: metadata.resourceVersion } });
 
       socket = stream(watchUrl, update, { isJson: true });
     } catch (err) {
