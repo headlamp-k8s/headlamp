@@ -129,6 +129,7 @@ function AuthChooser({ children }: AuthChooserProps) {
               }
 
               cluster.useToken = useToken;
+              Object.preventExtensions(cluster);
               dispatch(setConfig({ clusters: { ...clusters } }));
               // If we don't require a token, then we just move to the attempted URL or root.
               if (!useToken) {

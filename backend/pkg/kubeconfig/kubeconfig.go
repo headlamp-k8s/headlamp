@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"time"
 
 	zlog "github.com/rs/zerolog/log"
 	"k8s.io/client-go/kubernetes"
@@ -42,6 +43,7 @@ type Context struct {
 	OidcConf    *OidcConfig            `json:"oidcConfig"`
 	proxy       *httputil.ReverseProxy `json:"-"`
 	SessionID   string                 `json:"string"`
+	Timestamp   time.Time              `json:"timestamp"`
 }
 
 type OidcConfig struct {
@@ -210,7 +212,7 @@ func LoadContextsFromFile(kubeConfigPath string, source int) ([]Context, error) 
 		return nil, err
 	}
 
-	contexts, errs := LoadContextsFromAPIConfig(config)
+	contexts, errs := LoadContextsFromAPIConfig(config, false)
 	if errs == nil {
 		return nil, errors.Join(errs...)
 	}
@@ -227,7 +229,7 @@ func LoadContextsFromFile(kubeConfigPath string, source int) ([]Context, error) 
 }
 
 // LoadContextsFromAPIConfig loads contexts from the given api.Config.
-func LoadContextsFromAPIConfig(config *api.Config) ([]Context, []error) {
+func LoadContextsFromAPIConfig(config *api.Config, skipProxySetup bool) ([]Context, []error) {
 	contexts := []Context{}
 	errors := []error{}
 
@@ -248,10 +250,12 @@ func LoadContextsFromAPIConfig(config *api.Config) ([]Context, []error) {
 			AuthInfo:    authInfo,
 		}
 
-		err := context.SetupProxy()
-		if err != nil {
-			errors = append(errors, fmt.Errorf("couldnt setup proxy for context: %q, err:%q", contextName, err))
-			continue
+		if !skipProxySetup {
+			err := context.SetupProxy()
+			if err != nil {
+				errors = append(errors, fmt.Errorf("couldnt setup proxy for context: %q, err:%q", contextName, err))
+				continue
+			}
 		}
 
 		contexts = append(contexts, context)

@@ -8,10 +8,12 @@ import _ from 'lodash';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import helpers from '../../helpers';
+import { useClustersConf } from '../../lib/k8s';
 import { request } from '../../lib/k8s/apiProxy';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster } from '../../lib/util';
-import { setConfig } from '../../redux/configSlice';
+import { setConfig, setStatelessConfig } from '../../redux/configSlice';
 import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import store from '../../redux/stores/store';
@@ -91,6 +93,7 @@ export default function Layout({}: LayoutProps) {
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
   const { t } = useTranslation();
+  const allClusters = useClustersConf();
   const clusterInURL = getCluster();
 
   useEffect(() => {
@@ -115,6 +118,7 @@ export default function Layout({}: LayoutProps) {
    */
   const fetchConfig = () => {
     const clusters = store.getState().config.clusters;
+    const statelessClusters = store.getState().config.statelessClusters;
     request('/config', {}, false, false)
       .then((config: Config) => {
         const clustersToConfig: ConfigState['clusters'] = {};
@@ -127,11 +131,10 @@ export default function Layout({}: LayoutProps) {
         };
 
         if (clusters === null) {
-          dispatch(setConfig(configToStore));
-        } else if (Object.keys(clustersToConfig).length !== Object.keys(clusters).length) {
-          dispatch(setConfig(configToStore));
+          dispatch(setConfig({ ...configToStore }));
         } else {
           let isConfigDifferent = false;
+
           Object.keys(clustersToConfig).every((key: string) => {
             // The length of the old cluster list and the new one may be the same, so we need
             // to check if the cluster is present in the new list (happens when renaming a
@@ -156,8 +159,77 @@ export default function Layout({}: LayoutProps) {
           });
 
           if (isConfigDifferent) {
-            dispatch(setConfig(configToStore));
+            dispatch(setConfig({ ...configToStore }));
+          } else if (Object.keys(clustersToConfig).length !== Object.keys(clusters).length) {
+            if (statelessClusters !== null) {
+              Object.keys(statelessClusters).every((key: string) => {
+                // The length of the old cluster list and the new one may be the same, so we need
+                // to check if the cluster is present in the new list (happens when renaming a
+                // cluster for example).
+                if (!!clusters[key]) {
+                  let clusterToCompare = clusters[key];
+                  const cluster = statelessClusters[key];
+
+                  // Remove the cluster status from the comparison if needed (in which case we copy
+                  // the cluster object to avoid modifying the original one).
+                  if (clusterToCompare.useToken !== undefined) {
+                    clusterToCompare = _.cloneDeep(clusters[key]);
+                    delete clusterToCompare.useToken;
+                  }
+
+                  // Check if the cluster configuration is equal to clusterToCompare
+                  if (_.isEqual(cluster, clusterToCompare)) {
+                    delete clusters[key]; // Remove the cluster
+                  }
+                }
+              });
+            }
+
+            dispatch(setConfig({ ...configToStore }));
           }
+        }
+      })
+      .catch((err: Error) => {
+        console.error('Error getting config:', err);
+      });
+
+    const sessionId = helpers.getSessionId();
+    const config = helpers.getClusterKubeconfigs(sessionId);
+    const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
+    const clusterReq = {
+      kubeconfigs: config,
+    };
+
+    // Fetch statelessCluster config
+    request(
+      '/statelessCluster',
+      {
+        method: 'POST',
+        body: JSON.stringify(clusterReq),
+        headers: {
+          ...JSON_HEADERS,
+          ...{
+            'X-HEADLAMP_SESSION_ID': sessionId,
+          },
+        },
+      },
+      false,
+      false
+    )
+      .then((config: Config) => {
+        const clustersToConfig: ConfigState['statelessClusters'] = {};
+        config?.statelessClusters.forEach((cluster: Cluster) => {
+          clustersToConfig[cluster.name] = cluster;
+        });
+
+        const configToStore = {
+          ...config,
+          statelessClusters: clustersToConfig,
+        };
+        if (statelessClusters === null) {
+          dispatch(setStatelessConfig({ ...configToStore }));
+        } else if (Object.keys(clustersToConfig).length !== Object.keys(statelessClusters).length) {
+          dispatch(setStatelessConfig({ ...configToStore }));
         }
       })
       .catch((err: Error) => {
@@ -176,7 +248,9 @@ export default function Layout({}: LayoutProps) {
         <TopBar />
         <Sidebar />
         <main id="main" className={classes.content}>
-          {clusters && !!clusterInURL && !Object.keys(clusters).includes(getCluster() || '') ? (
+          {allClusters &&
+          !!clusterInURL &&
+          !Object.keys(allClusters).includes(getCluster() || '') ? (
             <ClusterNotFoundPopup />
           ) : (
             ''

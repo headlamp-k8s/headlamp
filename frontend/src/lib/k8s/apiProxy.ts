@@ -11,7 +11,7 @@ import { OpPatch } from 'json-patch';
 import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
 import helpers, {
-  getClusterKubeconfig,
+  findKubeconfigByClusterName,
   getHeadlampAPIHeaders,
   getSessionId,
   isDebugVerbose,
@@ -353,6 +353,10 @@ export async function clusterRequest(
   let fullPath = path;
   if (cluster) {
     const token = getToken(cluster);
+    const matchingKubeconfig = findKubeconfigByClusterName(sessionId, cluster);
+    if (matchingKubeconfig !== null) {
+      opts.headers['KUBECONFIG'] = matchingKubeconfig;
+    }
 
     // Refresh service account token only if the cluster auth type is not OIDC
     if (getClusterAuthType(cluster) !== 'oidc') {
@@ -361,11 +365,6 @@ export async function clusterRequest(
 
     if (!!token) {
       opts.headers.Authorization = `Bearer ${token}`;
-    }
-
-    const kubeconfigHeaders = getClusterKubeconfig(sessionId, cluster);
-    if (kubeconfigHeaders !== '') {
-      opts.headers['KUBECONFIG'] = kubeconfigHeaders;
     }
 
     fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
@@ -1389,11 +1388,11 @@ export async function testClusterHealth() {
 
 export async function setCluster(clusterReq: ClusterRequest) {
   const sessionId = getSessionId();
-  const clusterName = clusterReq.name;
   const kubeconfig = clusterReq.kubeconfig;
 
-  if (clusterName && kubeconfig) {
-    storeClusterKubeconfig(sessionId, clusterName, kubeconfig);
+  if (kubeconfig) {
+    storeClusterKubeconfig(sessionId, kubeconfig);
+    return;
   }
 
   return request(

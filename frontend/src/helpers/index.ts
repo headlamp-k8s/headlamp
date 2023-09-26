@@ -1,5 +1,29 @@
+import * as jsyaml from 'js-yaml';
 import { v4 as uuidv4 } from 'uuid';
 import { Cluster } from '../lib/k8s/cluster';
+
+interface KubeconfigObject {
+  apiVersion: string;
+  kind: string;
+  clusters: Array<{
+    name: string;
+    cluster: {
+      server: string;
+    };
+  }>;
+  users: Array<{
+    name: string;
+    user: {};
+  }>;
+  contexts: Array<{
+    name: string;
+    context: {
+      cluster: string;
+      user: string;
+    };
+  }>;
+  'current-context': string;
+}
 
 /**
  * Determines whether app is running in electron environment.
@@ -394,45 +418,79 @@ export function getSessionId(): string {
 }
 
 // Export function to store cluster kubeconfig
-export function storeClusterKubeconfig(sessionId: string, clusterName: string, kubeconfig: string) {
+export function storeClusterKubeconfig(sessionId: string, kubeconfig: string) {
   // Get existing stored cluster kubeconfigs for the session
   const storedClusterKubeconfigsJSON = sessionStorage.getItem('clusterKubeconfigs');
 
-  let storedClusterKubeconfigs: { [sessionId: string]: { [clusterName: string]: string } } = {};
+  let storedClusterKubeconfigs: { [sessionId: string]: string[] } = {};
   if (storedClusterKubeconfigsJSON) {
     storedClusterKubeconfigs = JSON.parse(storedClusterKubeconfigsJSON);
   }
 
-  // If no session-specific cluster kubeconfigs exist, create an empty object
+  // If no session-specific cluster kubeconfigs exist, create an empty array
   if (!storedClusterKubeconfigs[sessionId]) {
-    storedClusterKubeconfigs[sessionId] = {};
+    storedClusterKubeconfigs[sessionId] = [];
   }
 
-  // Add or update the kubeconfig for the given cluster name under the session ID
-  storedClusterKubeconfigs[sessionId][clusterName] = kubeconfig;
+  // Check if the kubeconfig is not already in the array, then add it
+  if (!storedClusterKubeconfigs[sessionId].includes(kubeconfig)) {
+    storedClusterKubeconfigs[sessionId].push(kubeconfig);
+  }
 
   // Store the updated cluster kubeconfigs back in sessionStorage
   sessionStorage.setItem('clusterKubeconfigs', JSON.stringify(storedClusterKubeconfigs));
 }
 
 // Export function to retrieve cluster kubeconfig
-export function getClusterKubeconfig(sessionId: string, clusterName: string) {
+export function getClusterKubeconfigs(sessionId: string): string[] {
+  // Get stored cluster kubeconfigs for the session
+  const storedClusterKubeconfigsJSON = sessionStorage.getItem('clusterKubeconfigs');
+
+  if (storedClusterKubeconfigsJSON) {
+    const storedClusterKubeconfigs: { [sessionId: string]: string[] } = JSON.parse(
+      storedClusterKubeconfigsJSON
+    );
+
+    // Retrieve the kubeconfigs for the given session ID
+    const sessionKubeconfigs = storedClusterKubeconfigs[sessionId];
+
+    if (sessionKubeconfigs) {
+      return sessionKubeconfigs;
+    }
+  }
+
+  return [];
+}
+
+export function findKubeconfigByClusterName(sessionId: string, clusterName: string) {
   // Get stored cluster kubeconfigs for the session
   const storedClusterKubeconfigsJSON = sessionStorage.getItem('clusterKubeconfigs');
 
   if (storedClusterKubeconfigsJSON) {
     const storedClusterKubeconfigs = JSON.parse(storedClusterKubeconfigsJSON);
 
-    // Retrieve the kubeconfig for the given session ID and cluster name
-    if (storedClusterKubeconfigs[sessionId] && storedClusterKubeconfigs[sessionId][clusterName]) {
-      // Decode the kubeconfig
-      return storedClusterKubeconfigs[sessionId][clusterName]
-        ? storedClusterKubeconfigs[sessionId][clusterName]
-        : '';
+    // Check if the sessionID exists in stored kubeconfigs
+    if (storedClusterKubeconfigs[sessionId]) {
+      const kubeconfigs = storedClusterKubeconfigs[sessionId];
+
+      // Check each kubeconfig for the target clusterName
+      for (const kubeconfig of kubeconfigs) {
+        const kubeconfigObject = jsyaml.load(atob(kubeconfig)) as KubeconfigObject;
+
+        // Check if the kubeconfig contains a cluster with the target clusterName
+        const matchingKubeconfig = kubeconfigObject.clusters.find(
+          cluster => cluster.name === clusterName
+        );
+        if (matchingKubeconfig) {
+          // Encode the kubeconfig back to base64 if needed
+          const encodedKubeconfig = btoa(JSON.stringify(kubeconfigObject));
+          return encodedKubeconfig;
+        }
+      }
     }
   }
 
-  return '';
+  return null; // If not found
 }
 
 const exportFunctions = {
@@ -456,7 +514,8 @@ const exportFunctions = {
   loadTableSettings,
   getSessionId,
   storeClusterKubeconfig,
-  getClusterKubeconfig,
+  getClusterKubeconfigs,
+  findKubeconfigByClusterName,
 };
 
 export default exportFunctions;
