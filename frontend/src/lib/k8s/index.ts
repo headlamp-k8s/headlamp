@@ -156,7 +156,7 @@ export function useConnectApi(...apiCalls: (() => CancellablePromise)[]) {
 export function labelSelectorToQuery(labelSelector: LabelSelector) {
   const segments: string[] = [];
 
-  segments.push(...matchLabelsSimplifier(labelSelector.matchLabels, true));
+  segments.push(...(matchLabelsSimplifier(labelSelector.matchLabels, true) || []));
 
   const matchExpressions = labelSelector.matchExpressions ?? [];
 
@@ -171,7 +171,7 @@ export function labelSelectorToQuery(labelSelector: LabelSelector) {
 export function matchLabelsSimplifier(
   matchLabels: LabelSelector['matchLabels'],
   isEqualSeperator = false
-) {
+): string[] | '' {
   if (!matchLabels) {
     return '';
   }
@@ -188,7 +188,9 @@ export function matchLabelsSimplifier(
   return segments;
 }
 
-export function matchExpressionSimplifier(matchExpressions: LabelSelector['matchExpressions']) {
+export function matchExpressionSimplifier(
+  matchExpressions: LabelSelector['matchExpressions']
+): string[] | '' {
   if (!matchExpressions) {
     return '';
   }

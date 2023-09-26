@@ -21,6 +21,7 @@ export const useMetadataDisplayStyles = makeStyles(theme => ({
     wordBreak: 'break-word',
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
+    marginRight: theme.spacing(1),
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     overflowWrap: 'anywhere',

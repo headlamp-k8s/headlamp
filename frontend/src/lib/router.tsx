@@ -70,6 +70,9 @@ import StorageClassDetails from '../components/storage/ClassDetails';
 import StorageClassList from '../components/storage/ClassList';
 import PersistentVolumeDetails from '../components/storage/VolumeDetails';
 import PersistentVolumeList from '../components/storage/VolumeList';
+import MutatingWebhookConfigList from '../components/webhookconfiguration/MutatingWebhookConfigDetails';
+import ValidatingWebhookConfigurationDetails from '../components/webhookconfiguration/ValidatingWebhookConfigDetails';
+import ValidatingWebhookConfigurationList from '../components/webhookconfiguration/ValidatingWebhookConfigList';
 import WorkloadDetails from '../components/workload/Details';
 import WorkloadOverview from '../components/workload/Overview';
 import helpers from '../helpers';
@@ -531,6 +534,27 @@ const defaultRoutes: {
     name: 'Limit Range',
     sidebar: 'limitRanges',
     component: () => <LimitRangeDetails />,
+  },
+  mutatingWebhookConfigurations: {
+    path: '/mutatingwebhookconfigurations',
+    exact: true,
+    name: 'Mutating Webhook Configurations',
+    sidebar: 'mutatingWebhookConfigurations',
+    component: () => <MutatingWebhookConfigList />,
+  },
+  validatingWebhookConfigurations: {
+    path: '/validatingwebhookconfigurations',
+    exact: true,
+    name: 'Validating Webhook Configurations',
+    sidebar: 'validatingWebhookConfigurations',
+    component: () => <ValidatingWebhookConfigurationList />,
+  },
+  validatingWebhookConfiguration: {
+    path: '/validatingwebhookconfigurations/:name',
+    exact: true,
+    name: 'Validating Webhook Configuration',
+    sidebar: 'validatingWebhookConfigurations',
+    component: () => <ValidatingWebhookConfigurationDetails />,
   },
   token: {
     path: '/token',

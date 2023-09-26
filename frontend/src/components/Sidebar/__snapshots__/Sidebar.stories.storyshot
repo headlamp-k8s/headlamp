@@ -1322,6 +1322,54 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                             />
                           </a>
                         </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Mutating Webhook Configurations
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Validating Webhook Configurations
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -2432,6 +2480,54 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                                 class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                               >
                                 Limit Ranges
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Mutating Webhook Configurations
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Validating Webhook Configurations
                               </span>
                             </div>
                             <span
@@ -3556,6 +3652,54 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                                 class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                               >
                                 Limit Ranges
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Mutating Webhook Configurations
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            aria-disabled="false"
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                              >
+                                Validating Webhook Configurations
                               </span>
                             </div>
                             <span

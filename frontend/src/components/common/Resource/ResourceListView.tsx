@@ -26,6 +26,8 @@ export default function ResourceListView(
   const [columnChooserAnchorEl, setColumnChooserAnchorEl] = React.useState<null | HTMLElement>(
     null
   );
+  const withNamespaceFilter = (props as ResourceListViewWithResourceClassProps).resourceClass
+    ?.isNamespaced;
 
   return (
     <SectionBox
@@ -42,6 +44,7 @@ export default function ResourceListView(
                 }}
               />,
             ]}
+            noNamespaceFilter={!withNamespaceFilter}
             {...headerProps}
           />
         ) : (

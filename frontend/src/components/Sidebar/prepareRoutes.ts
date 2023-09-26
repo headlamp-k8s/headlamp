@@ -217,6 +217,14 @@ function prepareRoutes(
           name: 'limitRanges',
           label: t('glossary|Limit Ranges'),
         },
+        {
+          name: 'mutatingWebhookConfigurations',
+          label: t('glossary|Mutating Webhook Configurations'),
+        },
+        {
+          name: 'validatingWebhookConfigurations',
+          label: t('glossary|Validating Webhook Configurations'),
+        },
       ],
     },
   ];
