@@ -23,6 +23,11 @@ const ourState = {
   filter: {
     search: '',
   },
+  ui: {
+    views: {
+      tableColumnsProcessors: [],
+    },
+  },
 };
 
 // @todo: Add a way for the results from useClustersVersion to be mocked, so not
