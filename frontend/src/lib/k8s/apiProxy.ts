@@ -562,7 +562,12 @@ async function resourceDefToApiFactory(
   // this way we always get the right plural name and we also avoid eventually getting
   // the wrong "known" resource because e.g. there can be CustomResources with the same
   // kind as a known resource.
-  const apiResult: APIResourceList = await request(`/apis/${resourceDef.apiVersion}`, {}, false);
+  const apiPrefix = !!apiGroup ? 'apis' : 'api';
+  const apiResult: APIResourceList = await request(
+    `/${apiPrefix}/${resourceDef.apiVersion}`,
+    {},
+    false
+  );
   if (!apiResult) {
     throw new Error(`Unkown apiVersion: ${resourceDef.apiVersion}`);
   }
