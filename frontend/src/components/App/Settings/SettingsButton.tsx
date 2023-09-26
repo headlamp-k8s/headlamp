@@ -6,7 +6,7 @@ import { ActionButton } from '../../common';
 
 export default function SettingsButton(props: { onClickExtra?: () => void }) {
   const { onClickExtra } = props;
-  const { t } = useTranslation(['glossary']);
+  const { t } = useTranslation(['glossary', 'translation']);
   const history = useHistory();
   const clusterName = getCluster();
 
@@ -17,7 +17,7 @@ export default function SettingsButton(props: { onClickExtra?: () => void }) {
   return (
     <ActionButton
       icon="mdi:cog"
-      description={t('frequent|Settings')}
+      description={t('translation|Settings')}
       onClick={() => {
         history.push(createRouteURL('settingsCluster', { cluster: clusterName }));
         onClickExtra && onClickExtra();

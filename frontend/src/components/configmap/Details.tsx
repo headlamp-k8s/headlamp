@@ -8,7 +8,7 @@ import { SectionBox } from '../common/SectionBox';
 
 export default function ConfigDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const { t } = useTranslation(['configmap', 'frequent']);
+  const { t } = useTranslation(['translation']);
 
   return (
     <DetailsGrid
@@ -23,7 +23,7 @@ export default function ConfigDetails() {
             section: () => {
               const itemData = item?.data;
               return (
-                <SectionBox title={t('frequent|Data')}>
+                <SectionBox title={t('translation|Data')}>
                   {!itemData ? (
                     <Empty>{t('No data in this config map')}</Empty>
                   ) : (

@@ -67,7 +67,7 @@ export interface JobsListRendererProps {
 
 export function JobsListRenderer(props: JobsListRendererProps) {
   const { jobs = null, error } = props;
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   function getCompletions(job: Job) {
     return `${job.spec.completions}/${job.spec.parallelism}`;
@@ -96,12 +96,12 @@ export function JobsListRenderer(props: JobsListRendererProps) {
         },
         {
           id: 'conditions',
-          label: t('Conditions'),
+          label: t('translation|Conditions'),
           getter: job => makePodStatusLabel(job),
         },
         {
           id: 'duration',
-          label: t('frequent|Duration'),
+          label: t('translation|Duration'),
           getter: job => {
             const startTime = job.status?.startTime;
             const completionTime = job.status?.completionTime;

@@ -222,7 +222,7 @@ export function PureTopBar({
   isSidebarOpenUserSelected,
   onToggleOpen,
 }: PureTopBarProps) {
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -295,7 +295,7 @@ export function PureTopBar({
         <ListItemIcon>
           <Icon icon="mdi:cog-box" />
         </ListItemIcon>
-        <ListItemText>{t('settings|General Settings')}</ListItemText>
+        <ListItemText>{t('translation|General Settings')}</ListItemText>
       </MenuItem>
       <MenuItem
         component="a"

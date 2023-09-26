@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import PersistentVolumeClaim from '../../lib/k8s/persistentVolumeClaim';
@@ -7,7 +6,7 @@ import { DetailsGrid } from '../common/Resource';
 
 export default function VolumeClaimDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
 
   function makeStatusLabel(item: PersistentVolumeClaim) {
     const status = item.status!.phase;
@@ -23,7 +22,7 @@ export default function VolumeClaimDetails() {
       extraInfo={item =>
         item && [
           {
-            name: t('Status'),
+            name: t('translation|Status'),
             value: makeStatusLabel(item),
           },
           {

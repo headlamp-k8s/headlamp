@@ -86,8 +86,8 @@ export default function Overview() {
                 workloadData={workloadsData[name] || []}
                 // @todo: Use a plural from from the class itself when we have it
                 title={name + 's'}
-                partialLabel={t('frequent|Failed')}
-                totalLabel={t('frequent|Running')}
+                partialLabel={t('translation|Failed')}
+                totalLabel={t('translation|Running')}
               />
             </Grid>
           ))}
@@ -100,7 +100,7 @@ export default function Overview() {
           'kind',
           {
             id: 'name',
-            label: t('frequent|Name'),
+            label: t('translation|Name'),
             getter: item => <ResourceLink resource={item} state={{ backLink: { ...location } }} />,
             sort: (w1: Workload, w2: Workload) => {
               if (w1.metadata.name < w2.metadata.name) {

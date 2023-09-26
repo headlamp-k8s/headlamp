@@ -88,11 +88,11 @@ export default function VersionButton() {
 
               let msg = '';
               if (versionChange > 0) {
-                msg = t('cluster|Cluster version upgraded to {{ gitVersion }}', {
+                msg = t('translation|Cluster version upgraded to {{ gitVersion }}', {
                   gitVersion: results.gitVersion,
                 });
               } else if (versionChange < 0) {
-                msg = t('cluster|Cluster version downgraded to {{ gitVersion }}', {
+                msg = t('translation|Cluster version downgraded to {{ gitVersion }}', {
                   gitVersion: results.gitVersion,
                 });
               }
@@ -162,7 +162,7 @@ export default function VersionButton() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            {t('frequent|Close')}
+            {t('translation|Close')}
           </Button>
         </DialogActions>
       </Dialog>

@@ -11,7 +11,7 @@ export interface TimezoneSelectorProps {
 
 export default function TimezoneSelect(props: TimezoneSelectorProps) {
   const { onChange, initialTimezone } = props;
-  const { i18n, t } = useTranslation(['settings']);
+  const { i18n, t } = useTranslation();
   const timezoneOptions = React.useMemo(() => {
     const timezoneNames = spacetime.timezones();
     return Object.keys(timezoneNames).map(name => {

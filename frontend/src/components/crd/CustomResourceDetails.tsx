@@ -39,13 +39,16 @@ export function CustomResourceDetails(props: CustomResourceDetailsProps) {
   return !crd ? (
     !!error ? (
       <Empty color="error">
-        {t('crd|Error getting custom resource definition {{ crdName }}: {{ errorMessage }}', {
-          crdName,
-          errorMessage: error.message,
-        })}
+        {t(
+          'translation|Error getting custom resource definition {{ crdName }}: {{ errorMessage }}',
+          {
+            crdName,
+            errorMessage: error.message,
+          }
+        )}
       </Empty>
     ) : (
-      <Loader title={t('crd|Loading custom resource details')} />
+      <Loader title={t('translation|Loading custom resource details')} />
     )
   ) : (
     <CustomResourceDetailsRenderer crd={crd} crName={crName} namespace={namespace} />
@@ -125,13 +128,13 @@ function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps
   return !item ? (
     !!error ? (
       <Empty color="error">
-        {t('crd|Error getting custom resource {{ crName }}: {{ errorMessage }}', {
+        {t('translation|Error getting custom resource {{ crName }}: {{ errorMessage }}', {
           crName,
           errorMessage: error.message,
         })}
       </Empty>
     ) : (
-      <Loader title={t('crd|Loading custom resource details')} />
+      <Loader title={t('translation|Loading custom resource details')} />
     )
   ) : (
     <PageGrid>
@@ -139,7 +142,7 @@ function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps
         resource={item}
         extraInfo={[
           {
-            name: t('frequent|Definition'),
+            name: t('glossary|Definition'),
             value: (
               <Link
                 routeName="crd"

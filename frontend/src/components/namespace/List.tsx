@@ -12,7 +12,7 @@ import {
 } from '../common/Resource/ResourceTable';
 
 export default function NamespacesList() {
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
   const cluster = useCluster();
   // Use the metadata.name field to match the expected format of the ResourceTable component.
   const [allowedNamespaces, setAllowedNamespaces] = React.useState<
@@ -44,7 +44,7 @@ export default function NamespacesList() {
           columns: [
             {
               id: 'name',
-              label: t('frequent|Name'),
+              label: t('translation|Name'),
               getter: ({ metadata }) => (
                 <Link
                   routeName={'namespace'}
@@ -58,12 +58,12 @@ export default function NamespacesList() {
             },
             {
               id: 'status',
-              label: t('frequent|Status'),
+              label: t('translation|Status'),
               getter: () => 'Unknown',
             },
             {
               id: 'age',
-              label: t('frequent|Age'),
+              label: t('translation|Age'),
               getter: () => 'Unknown',
             },
           ],
@@ -76,7 +76,7 @@ export default function NamespacesList() {
           'name',
           {
             id: 'status',
-            label: t('frequent|Status'),
+            label: t('translation|Status'),
             getter: makeStatusLabel,
             sort: (namespace: Namespace) => namespace.status.phase,
           },

@@ -12,7 +12,7 @@ export interface BackLinkProps {
 
 export default function BackLink(props: BackLinkProps) {
   const { to: backLink = '' } = props;
-  const { t } = useTranslation(['frequent']);
+  const { t } = useTranslation();
   const history = useHistory();
 
   // We only want to update when the backLink changes (not the history).
@@ -32,7 +32,7 @@ export default function BackLink(props: BackLinkProps) {
         history.push(backLink);
       }}
     >
-      <Typography style={{ paddingTop: '3px' }}>{t('frequent|Back')}</Typography>
+      <Typography style={{ paddingTop: '3px' }}>{t('translation|Back')}</Typography>
     </Button>
   );
 }

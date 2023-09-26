@@ -153,7 +153,7 @@ export function BackendFormat({ backend }: BackendFormatProps) {
 
 export default function IngressDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
 
   function getPorts(item: Ingress) {
@@ -222,16 +222,16 @@ export default function IngressDetails() {
             <SectionBox title={t('Rules')}>
               <SimpleTable
                 rowsPerPage={storeRowsPerPageOptions}
-                emptyMessage={t('ingress|No rules data to be shown.')}
+                emptyMessage={t('translation|No rules data to be shown.')}
                 columns={[
                   {
-                    label: t('Host'),
+                    label: t('translation|Host'),
                     getter: (data: IngressRule) => (
                       <LinkStringFormat url={data.host || '*'} item={item} />
                     ),
                   },
                   {
-                    label: t('Path'),
+                    label: t('translation|Path'),
                     getter: (data: IngressRule) =>
                       data.http.paths.map(({ path }) => (
                         <LinkStringFormat url={data.host || '*'} item={item} urlPath={path} />

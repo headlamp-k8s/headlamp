@@ -66,7 +66,7 @@ export default function RoleList() {
       columns={[
         'type',
         {
-          label: t('frequent|Name'),
+          label: t('translation|Name'),
           getter: item => (
             <Link
               routeName={item.metadata.namespace ? 'role' : 'clusterrole'}

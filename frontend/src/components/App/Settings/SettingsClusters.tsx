@@ -4,14 +4,14 @@ import { Link, SectionBox, SimpleTable } from '../../common';
 
 export default function SettingsClusters() {
   const clusterConf = useClustersConf();
-  const { t } = useTranslation(['settings', 'frequent']);
+  const { t } = useTranslation(['translation']);
 
   return (
     <SectionBox title="Cluster Settings">
       <SimpleTable
         columns={[
           {
-            label: t('frequent|Name'),
+            label: t('translation|Name'),
             getter: cluster => (
               <Link routeName="settingsCluster" params={{ cluster: cluster.name }}>
                 {cluster.name}
@@ -19,7 +19,7 @@ export default function SettingsClusters() {
             ),
           },
           {
-            label: t('frequent|Server'),
+            label: t('translation|Server'),
             datum: 'server',
           },
         ]}

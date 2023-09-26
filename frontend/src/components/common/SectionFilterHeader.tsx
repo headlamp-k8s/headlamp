@@ -35,7 +35,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
   const history = useHistory();
   const hasNamespaceFilters = !noNamespaceFilter && filter.namespaces.size > 0;
   const hasSearch = !noSearch && !!filter.search;
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
 
   // When the user moves to a different route, the search filter is reset (to an empty string), but
   // this goes through redux, so when the new route is rendered, the search filter is still the old

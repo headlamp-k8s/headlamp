@@ -34,7 +34,7 @@ export default function RoleBindingList() {
   const [roleBindingError, onRoleBindingError] = useErrorState(setupRoleBindings);
   const [clusterRoleBindingError, onClusterRoleBindingError] =
     useErrorState(setupClusterRoleBindings);
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
   const filterFunc = useFilterFunc(['.jsonData.kind']);
 
   function setRoleBindings(newBindings: RoleBinding[] | null, kind: string) {
@@ -112,7 +112,7 @@ export default function RoleBindingList() {
                 {item.getNamespace()}
               </Link>
             ) : (
-              t('frequent|All namespaces')
+              t('translation|All namespaces')
             ),
           sort: true,
         },
@@ -124,7 +124,7 @@ export default function RoleBindingList() {
         },
         {
           id: 'users',
-          label: t('frequent|Users'),
+          label: t('translation|Users'),
           getter: (item: KubeRoleBinding) => (
             <LabelListItem
               labels={

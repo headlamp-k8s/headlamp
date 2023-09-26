@@ -48,7 +48,7 @@ function AuthChooser({ children }: AuthChooserProps) {
   const { from = { pathname: createRouteURL('cluster') } } = (location.state ||
     {}) as ReactRouterLocationStateIface;
   const clusterName = getCluster() as string;
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation();
   const clustersRef = React.useRef<typeof clusters>(null);
   const cancelledRef = React.useRef(false);
 
@@ -242,7 +242,7 @@ export function PureAuthChooser({
   children,
   clusterName,
 }: PureAuthChooserProps) {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation();
 
   function onClose() {
     // Do nothing because we're not supposed to close on backdrop click or escape.
@@ -281,7 +281,7 @@ export function PureAuthChooser({
               </Box>
               <Box m={2} textAlign="center">
                 <Link routeName="settingsCluster" params={{ clusterID: clusterName }}>
-                  {t('settings|Cluster settings')}
+                  {t('translation|Cluster settings')}
                 </Link>
               </Box>
             </Box>
@@ -299,10 +299,10 @@ export function PureAuthChooser({
                       })}
                 </Empty>
                 <Link routeName="settingsCluster" params={{ clusterID: clusterName }}>
-                  {t('settings|Cluster settings')}
+                  {t('translation|Cluster settings')}
                 </Link>
               </Box>
-              <ColorButton onClick={handleTryAgain}>{t('frequent|Try Again')}</ColorButton>
+              <ColorButton onClick={handleTryAgain}>{t('translation|Try Again')}</ColorButton>
             </Box>
           )}
         </Box>
@@ -321,7 +321,7 @@ export function PureAuthChooser({
               <InlineIcon icon="mdi:chevron-left" height={20} width={20} />
             </Box>
             <Box fontSize={14} style={{ textTransform: 'uppercase' }}>
-              {t('frequent|Back')}
+              {t('translation|Back')}
             </Box>
           </Box>
         </Box>

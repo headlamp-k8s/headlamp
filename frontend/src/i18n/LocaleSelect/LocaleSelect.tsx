@@ -26,7 +26,7 @@ export interface LocaleSelectProps {
 export default function LocaleSelect(props: LocaleSelectProps) {
   const { formControlProps, showFullNames } = props;
   const classes = useStyles();
-  const { t, i18n } = useTranslation('frequent');
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
   const fullNames = React.useMemo(() => {
     if (!showFullNames) {

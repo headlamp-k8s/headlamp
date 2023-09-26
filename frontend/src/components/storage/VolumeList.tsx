@@ -5,7 +5,7 @@ import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function VolumeList() {
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <ResourceListView
@@ -60,7 +60,7 @@ export default function VolumeList() {
         },
         {
           id: 'reason',
-          label: t('frequent|Reason'),
+          label: t('translation|Reason'),
           getter: volume => {
             const reason = volume.status.reason;
             return <LightTooltip title={reason}>{reason}</LightTooltip>;
@@ -70,7 +70,7 @@ export default function VolumeList() {
         },
         {
           id: 'status',
-          label: t('frequent|Status'),
+          label: t('translation|Status'),
           getter: volume => volume.status.phase,
           sort: true,
         },

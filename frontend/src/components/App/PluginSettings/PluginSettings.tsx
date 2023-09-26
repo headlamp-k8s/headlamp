@@ -46,7 +46,7 @@ export interface PluginSettingsProps {}
 /** PluginSettingsPure is the main component to where we render the plugin data. */
 export function PluginSettingsPure(props: PluginSettingsPureProps) {
   const classes = useStyles();
-  const { t } = useTranslation(['frequent', 'settings']);
+  const { t } = useTranslation(['translation']);
 
   /** Plugin arr to be rendered to the page from prop data */
   const pluginArr: any = props.plugins ? props.plugins : [];
@@ -116,7 +116,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
 
   return (
     <>
-      <SectionBox title={t('settings|Plugins')}>
+      <SectionBox title={t('translation|Plugins')}>
         <SimpleTable
           columns={[
             {
@@ -159,7 +159,7 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
             className={classes.saveButton}
             onClick={() => onSaveButtonHandler()}
           >
-            {t('frequent|Save & Apply')}
+            {t('translation|Save & Apply')}
           </Button>
         </Box>
       )}

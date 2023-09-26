@@ -52,14 +52,14 @@ export function PureAlertNotification({ checkerFunction }: PureAlertNotification
   const [networkStatusCheckTimeFactor, setNetworkStatusCheckTimeFactor] = React.useState(0);
   const [error, setError] = React.useState<null | string | boolean>(null);
   const [intervalID, setIntervalID] = React.useState<NodeJS.Timeout | null>(null);
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const classes = useStyle();
 
   function registerSetInterval(): NodeJS.Timeout {
     return setInterval(() => {
       if (!window.navigator.onLine) {
-        setError(t('frequent|Offline') as string);
+        setError(t('translation|Offline') as string);
         return;
       }
 
@@ -136,7 +136,7 @@ export function PureAlertNotification({ checkerFunction }: PureAlertNotification
           onClick={() => setNetworkStatusCheckTimeFactor(0)}
           size="small"
         >
-          {t('frequent|Try Again')}
+          {t('translation|Try Again')}
         </Button>
       </Box>
     </Box>

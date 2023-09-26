@@ -74,14 +74,14 @@ export interface PodListProps {
 
 export function PodListRenderer(props: PodListProps) {
   const { pods, error, hideColumns = [], reflectTableInURL = 'pods', noNamespaceFilter } = props;
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   function getDataCols() {
     const dataCols: ResourceTableProps['columns'] = [
       'name',
       {
         id: 'ready',
-        label: t('frequent|Ready'),
+        label: t('translation|Ready'),
         getter: (pod: Pod) => {
           const podRow = pod.getDetailedStatus();
           return `${podRow.readyContainers}/${podRow.totalContainers}`;
@@ -89,7 +89,7 @@ export function PodListRenderer(props: PodListProps) {
       },
       {
         id: 'status',
-        label: t('Status'),
+        label: t('translation|Status'),
         getter: makePodStatusLabel,
         sort: (pod: Pod) => {
           const podRow = pod.getDetailedStatus();

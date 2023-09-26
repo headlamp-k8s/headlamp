@@ -28,7 +28,7 @@ const useOverviewStyle = makeStyles({
 export default function Overview() {
   const [pods, setPods] = React.useState<Pod[] | null>(null);
   const [nodes, setNodes] = React.useState<Node[] | null>(null);
-  const { t } = useTranslation(['cluster', 'frequent']);
+  const { t } = useTranslation(['translation']);
   const classes = useOverviewStyle();
 
   Pod.useApiList(setPods);
@@ -41,9 +41,9 @@ export default function Overview() {
 
   return (
     <PageGrid>
-      <SectionBox title={t('frequent|Overview')} py={2} mt={[4, 0, 0]}>
+      <SectionBox title={t('translation|Overview')} py={2} mt={[4, 0, 0]}>
         {noPermissions ? (
-          <Empty color="error">{t('auth|No permissions to list pods.')}</Empty>
+          <Empty color="error">{t('translation|No permissions to list pods.')}</Empty>
         ) : (
           <Grid container justifyContent="flex-start" alignItems="stretch" spacing={4}>
             <Grid item xs className={classes.chartItem}>
@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
 function EventsSection() {
   const EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY = 'EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY';
   const classes = useStyles();
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['translation', 'glossary']);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const eventsFilter = queryParams.get('eventsFilter');
@@ -132,7 +132,7 @@ function EventsSection() {
 
   return (
     <ResourceListView
-      title={t('Events')}
+      title={t('glossary|Events')}
       headerProps={{
         titleSideActions: [
           <FormControlLabel
@@ -155,7 +155,7 @@ function EventsSection() {
           sort: true,
         },
         {
-          label: t('frequent|Name'),
+          label: t('Name'),
           getter: event => makeObjectLink(event),
           cellProps: {
             scope: 'row',
@@ -175,7 +175,7 @@ function EventsSection() {
           sort: (e1: Event, e2: Event) => e1.reason.localeCompare(e2.reason),
         },
         {
-          label: t('frequent|Message'),
+          label: t('Message'),
           getter: event => (
             <ShowHideLabel labelId={event.metadata?.uid || ''}>{event.message || ''}</ShowHideLabel>
           ),
@@ -183,7 +183,7 @@ function EventsSection() {
           gridTemplate: 1.5,
         },
         {
-          label: t('frequent|Last Seen'),
+          label: t('Last Seen'),
           getter: event => (
             <DateLabel
               date={event.lastTimestamp || event.metadata.creationTimestamp}

@@ -112,7 +112,7 @@ export function DetailsGrid(props: DetailsGridProps) {
     extraSections,
     ...otherMainInfoSectionProps
   } = props;
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
   const classes = useDetailsGridStyles();
   const hasPreviousRoute = useHasPreviousRoute();
@@ -200,7 +200,7 @@ export function DetailsGrid(props: DetailsGridProps) {
           }
         : {
             id: DefaultDetailsViewSection.LOADING,
-            section: <Loader title={t('frequent|Loading resource data')} />,
+            section: <Loader title={t('translation|Loading resource data')} />,
           }
     );
   } else {
@@ -397,7 +397,7 @@ export function DataField(props: TextFieldProps) {
 export function SecretField(props: InputProps) {
   const { value, ...other } = props;
   const [showPassword, setShowPassword] = React.useState(false);
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
 
   function handleClickShowPassword() {
     setShowPassword(!showPassword);
@@ -437,7 +437,7 @@ export interface ConditionsTableProps {
 
 export function ConditionsTable(props: ConditionsTableProps) {
   const { resource, showLastUpdate = true } = props;
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
 
   function makeStatusLabel(condition: KubeCondition) {
     let status: StatusLabelProps['status'] = '';
@@ -459,7 +459,7 @@ export function ConditionsTable(props: ConditionsTableProps) {
         getter: makeStatusLabel,
       },
       {
-        label: t('Status'),
+        label: t('translation|Status'),
         getter: condition => condition.status,
       },
       {
@@ -473,7 +473,7 @@ export function ConditionsTable(props: ConditionsTableProps) {
         hide: !showLastUpdate,
       },
       {
-        label: t('Reason'),
+        label: t('translation|Reason'),
         getter: condition =>
           condition.reason ? (
             <HoverInfoLabel label={condition.reason} hoverInfo={condition.message} />
@@ -515,15 +515,15 @@ export function VolumeMounts(props: VolumeMountsProps) {
     <InnerTable
       columns={[
         {
-          label: t('frequent|Mount Path'),
+          label: t('translation|Mount Path'),
           getter: (data: any) => data.mountPath,
         },
         {
-          label: t('frequent|from'),
+          label: t('translation|from'),
           getter: (data: any) => data.name,
         },
         {
-          label: t('frequent|I/O'),
+          label: t('translation|I/O'),
           getter: (data: any) => (data.readOnly ? 'ReadOnly' : 'ReadWrite'),
         },
       ]}
@@ -592,7 +592,7 @@ export function ContainerInfo(props: ContainerInfoProps) {
   const { container, status, resource } = props;
   const theme = useTheme();
   const classes = useContainerInfoStyles(theme);
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
 
   function getContainerStatusLabel() {
     if (!status || !container) {
@@ -600,19 +600,19 @@ export function ContainerInfo(props: ContainerInfoProps) {
     }
 
     let state: KubeContainerStatus['state']['waiting' | 'terminated'] | null = null;
-    let label = t('frequent|Ready');
+    let label = t('translation|Ready');
     let statusType: StatusLabelProps['status'] = '';
 
     if (!!status.state.waiting) {
       state = status.state.waiting;
       statusType = 'warning';
-      label = t('frequent|Waiting');
+      label = t('translation|Waiting');
     } else if (!!status.state.running) {
       statusType = 'success';
-      label = t('frequent|Running');
+      label = t('translation|Running');
     } else if (!!status.state.terminated) {
       statusType = status.state.terminated.exitCode === 0 ? '' : 'error';
-      label = t('frequent|Error');
+      label = t('translation|Error');
     }
 
     const tooltipID = 'container-state-message-' + container.name;
@@ -660,12 +660,12 @@ export function ContainerInfo(props: ContainerInfoProps) {
         withHighlightStyle: true,
       },
       {
-        name: t('Status'),
+        name: t('translation|Status'),
         value: getContainerStatusLabel(),
         hide: !status,
       },
       {
-        name: t('frequent|Restart Count'),
+        name: t('translation|Restart Count'),
         value: status?.restartCount,
         hide: !status,
       },
@@ -851,7 +851,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
     <>
       <SectionBox title={title}>
         {numContainers === 0 ? (
-          <Empty>{t('resource|No data to be shown.')}</Empty>
+          <Empty>{t('translation|No data to be shown.')}</Empty>
         ) : (
           containers.map((container: any) => (
             <ContainerInfo
@@ -865,7 +865,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
       </SectionBox>
 
       {initContainers.length > 0 && (
-        <SectionBox title={t('resource|Init Containers')}>
+        <SectionBox title={t('translation|Init Containers')}>
           {initContainers.map((initContainer: KubeContainer, i: number) => (
             <ContainerInfo
               key={`init_container_${i}`}
@@ -882,14 +882,14 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
 export function ConditionsSection(props: { resource: KubeObjectInterface | null }) {
   const { resource } = props;
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary']);
 
   if (!resource) {
     return null;
   }
 
   return (
-    <SectionBox title={t('Conditions')}>
+    <SectionBox title={t('translation|Conditions')}>
       <ConditionsTable resource={resource} />
     </SectionBox>
   );

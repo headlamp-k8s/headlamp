@@ -38,6 +38,8 @@ i18next
   // i18next options: https://www.i18next.com/overview/configuration-options
   .init({
     debug: process.env.NODE_ENV === 'development',
+    ns: ['translation', 'glossary'],
+    defaultNS: 'translation',
     fallbackLng: 'en',
     supportedLngs: Object.keys(supportedLanguages),
     // nonExplicitSupportedLngs: true,

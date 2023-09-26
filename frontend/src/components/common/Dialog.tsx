@@ -93,7 +93,7 @@ export function Dialog(props: DialogProps) {
     ...other
   } = props;
   const [fullScreen, setFullScreen] = React.useState(false);
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
 
   function handleFullScreen() {
     setFullScreen(fs => {

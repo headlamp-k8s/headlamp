@@ -33,7 +33,7 @@ function RulesDisplay(props: { ingress: Ingress }) {
 }
 
 export default function IngressList() {
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <ResourceListView
@@ -57,7 +57,7 @@ export default function IngressList() {
         },
         {
           id: 'ports',
-          label: t('frequent|Path'),
+          label: t('translation|Path'),
           getter: (ingress: Ingress) => <RulesDisplay ingress={ingress} />,
         },
         'age',

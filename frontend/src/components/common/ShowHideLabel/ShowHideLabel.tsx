@@ -22,7 +22,7 @@ export interface ShowHideLabelProps {
 
 export default function ShowHideLabel(props: ShowHideLabelProps) {
   const { show = false, labelId = '', maxChars = 256, children } = props;
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const [expanded, setExpanded] = React.useState(show);
   const classes = useStyles();
 
@@ -66,7 +66,7 @@ export default function ShowHideLabel(props: ShowHideLabelProps) {
               className={classes.button}
               onClick={() => setExpanded(expandedVal => !expandedVal)}
               size="small"
-              arial-label={expanded ? t('frequent|Collapse') : t('frequent|Expand')}
+              arial-label={expanded ? t('translation|Collapse') : t('translation|Expand')}
             >
               <Icon icon={expanded ? 'mdi:menu-up' : 'mdi:menu-down'} />
             </IconButton>

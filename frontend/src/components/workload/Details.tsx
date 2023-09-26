@@ -16,7 +16,7 @@ interface WorkloadDetailsProps {
 export default function WorkloadDetails(props: WorkloadDetailsProps) {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const { workloadKind } = props;
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
 
   function renderUpdateStrategy(item: Workload) {
     if (!item?.spec?.strategy) {
@@ -47,11 +47,11 @@ export default function WorkloadDetails(props: WorkloadDetailsProps) {
     }
 
     let values: { [key: string]: string } = {
-      [t('Desired')]: item.spec.replicas,
-      [t('Ready')]: item.status.readyReplicas,
-      [t('Up to date')]: item.status.updatedReplicas,
-      [t('Available')]: item.status.availableReplicas,
-      [t('Total')]: item.status.replicas,
+      [t('translation|Desired', { context: 'replicas' })]: item.spec.replicas,
+      [t('translation|Ready', { context: 'replicas' })]: item.status.readyReplicas,
+      [t('translation|Up to date', { context: 'replicas' })]: item.status.updatedReplicas,
+      [t('translation|Available', { context: 'replicas' })]: item.status.availableReplicas,
+      [t('translation|Total')]: item.status.replicas,
     };
 
     const validEntries = Object.entries(values).filter(

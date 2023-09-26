@@ -15,7 +15,7 @@ const useStyle = makeStyles({
 export default function NodeList() {
   const classes = useStyle();
   const [nodeMetrics, metricsError] = Node.useMetrics();
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   const noMetrics = metricsError?.status === 404;
 
@@ -30,7 +30,7 @@ export default function NodeList() {
         'name',
         {
           id: 'ready',
-          label: t('frequent|Ready'),
+          label: t('translation|Ready'),
           gridTemplate: 'minmax(100px, .5fr)',
           getter: node => <NodeReadyLabel node={node} />,
         },
@@ -72,23 +72,23 @@ export default function NodeList() {
         },
         {
           id: 'internalIP',
-          label: t('frequent|Internal IP'),
+          label: t('translation|Internal IP'),
           getter: node => node.getInternalIP(),
         },
         {
           id: 'externalIP',
-          label: t('frequent|External IP'),
+          label: t('External IP'),
           getter: node => node.getExternalIP(),
         },
         {
           id: 'version',
-          label: t('frequent|Version'),
+          label: t('translation|Version'),
           gridTemplate: 'minmax(100px, .5fr)',
           getter: node => node.status.nodeInfo.kubeletVersion,
         },
         {
           id: 'software',
-          label: t('frequent|Software'),
+          label: t('translation|Software'),
           gridTemplate: 'minmax(200px, 1.5fr)',
           getter: node => {
             let osIcon = 'mdi:desktop-classic';

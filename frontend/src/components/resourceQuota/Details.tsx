@@ -6,7 +6,7 @@ import { DetailsGrid, SimpleTable } from '../common';
 
 export default function ResourceQuotaDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
-  const { t } = useTranslation(['frequent', 'glossary', 'resourceQuota']);
+  const { t } = useTranslation(['translation', 'glossary']);
 
   return (
     <DetailsGrid
@@ -17,7 +17,7 @@ export default function ResourceQuotaDetails() {
       extraInfo={item =>
         item && [
           {
-            name: t('frequent|Status'),
+            name: t('translation|Status'),
             value: (
               <SimpleTable
                 data={item.resourceStats}
@@ -27,7 +27,7 @@ export default function ResourceQuotaDetails() {
                     getter: item => item.name,
                   },
                   {
-                    label: t('resourceQuota|Used'),
+                    label: t('translation|Used'),
                     getter: item => {
                       const normalizedUnit = normalizeUnit(item.name, item.used);
                       return compareUnits(item.used, normalizedUnit)
@@ -36,7 +36,7 @@ export default function ResourceQuotaDetails() {
                     },
                   },
                   {
-                    label: t('resourceQuota|Hard'),
+                    label: t('translation|Hard'),
                     getter: item => {
                       const normalizedUnit = normalizeUnit(item.name, item.hard);
                       return compareUnits(item.hard, normalizedUnit)

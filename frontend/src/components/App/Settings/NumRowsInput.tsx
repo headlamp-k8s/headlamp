@@ -18,7 +18,7 @@ import { setAppSettings } from '../../../redux/configSlice';
 import { defaultTableRowsPerPageOptions } from '../../../redux/configSlice';
 
 export default function NumRowsInput(props: { defaultValue: number[] }) {
-  const { t } = useTranslation(['frequent', 'settings']);
+  const { t } = useTranslation(['translation']);
   const { defaultValue } = props;
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [options, setOptions] = useState(defaultValue);
@@ -76,7 +76,7 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
     setIsSelectOpen(true);
   };
 
-  const suggestionMsg = t('settings|Enter a value between {{ minRows }} and {{ maxRows }}.', {
+  const suggestionMsg = t('translation|Enter a value between {{ minRows }} and {{ maxRows }}.', {
     minRows,
     maxRows,
   });
@@ -89,7 +89,7 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
           type={'number'}
           value={customValue}
           error={!!errorMessage}
-          placeholder={t('settings|Custom row value')}
+          placeholder={t('translation|Custom row value')}
           helperText={errorMessage || suggestionMsg}
           inputProps={{ min: minRows, max: maxRows }}
           inputRef={focusedRef}
@@ -122,10 +122,10 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
               setSelectedValue(customValue);
             }}
           >
-            {t('frequent|Apply')}
+            {t('translation|Apply')}
           </Button>
           <IconButton
-            aria-label={t('frequent|Delete')}
+            aria-label={t('translation|Delete')}
             onClick={() => {
               setOptions(defaultTableRowsPerPageOptions);
               setSelectedValue(defaultTableRowsPerPageOptions[0]);
@@ -155,7 +155,7 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
                   <ListItemSecondaryAction>
                     <IconButton
                       size="small"
-                      aria-label={t('frequent|Delete')}
+                      aria-label={t('translation|Delete')}
                       onClick={() => {
                         setOptions(defaultTableRowsPerPageOptions);
                         setSelectedValue(defaultTableRowsPerPageOptions[0]);
@@ -170,7 +170,7 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
             );
           })}
           <MenuItem key={'custom'} value={-1}>
-            {t('frequent|Custom value')}
+            {t('translation|Custom value')}
           </MenuItem>
         </Select>
       </FormControl>

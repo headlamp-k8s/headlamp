@@ -87,7 +87,7 @@ export default function PortForward(props: PortForwardProps) {
   const [portForward, setPortForward] = React.useState<PortForwardState | null>(null);
   const [loading, setLoading] = React.useState(false);
   const cluster = getCluster();
-  const { t } = useTranslation(['frequent', 'resource']);
+  const { t } = useTranslation(['translation', 'resource']);
   const [pods, podsFetchError] = Pod.useList({
     namespace,
     labelSelector: getPodsSelectorFilter(service),
@@ -245,7 +245,7 @@ export default function PortForward(props: PortForwardProps) {
       ) : (
         <Button
           onClick={handlePortForward}
-          aria-label={t('resource|Start port forward')}
+          aria-label={t('translation|Start port forward')}
           color="primary"
           variant="outlined"
           style={{
@@ -254,7 +254,7 @@ export default function PortForward(props: PortForwardProps) {
           disabled={loading}
         >
           <InlineIcon icon="mdi:fast-forward" width={20} />
-          <Typography>{t('resource|Forward port')}</Typography>
+          <Typography>{t('translation|Forward port')}</Typography>
         </Button>
       )}
       {error && (
@@ -285,7 +285,7 @@ export default function PortForward(props: PortForwardProps) {
           >{`${forwardBaseURL}:${portForward.port}`}</Typography>
           <ActionButton
             onClick={handlePortForward}
-            description={t('resource|Start port forward')}
+            description={t('translation|Start port forward')}
             color="primary"
             icon="mdi:fast-forward"
             iconButtonProps={{
@@ -297,7 +297,7 @@ export default function PortForward(props: PortForwardProps) {
           />
           <ActionButton
             onClick={deletePortForwardHandler}
-            description={t('resource|Delete port forward')}
+            description={t('translation|Delete port forward')}
             color="primary"
             icon="mdi:delete-outline"
             iconButtonProps={{
@@ -315,7 +315,7 @@ export default function PortForward(props: PortForwardProps) {
           </MuiLink>
           <ActionButton
             onClick={portForwardStopHandler}
-            description={t('resource|Stop port forward')}
+            description={t('translation|Stop port forward')}
             color="primary"
             icon="mdi:stop-circle-outline"
             iconButtonProps={{

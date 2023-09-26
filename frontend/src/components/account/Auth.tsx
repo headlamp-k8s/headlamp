@@ -23,7 +23,7 @@ export default function AuthToken() {
   const [token, setToken] = React.useState('');
   const [showError, setShowError] = React.useState(false);
   const clusters = useClustersConf();
-  const { t } = useTranslation(['auth']);
+  const { t } = useTranslation();
 
   function onAuthClicked() {
     loginWithToken(token).then(code => {
@@ -89,7 +89,7 @@ export function PureAuthToken({
   onChangeToken,
   onCloseError,
 }: PureAuthTokenProps) {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation();
   const cluster = getCluster();
   const focusedRef = React.useCallback(node => {
     if (node !== null) {
@@ -139,20 +139,20 @@ export function PureAuthToken({
         </DialogActions>
         <Box overflow="hidden" textAlign="center">
           <HeadlampLink routeName="settingsCluster" params={{ clusterID: cluster || '' }}>
-            {t('settings|Cluster settings')}
+            {t('translation|Cluster settings')}
           </HeadlampLink>
         </Box>
         <DialogActions>
           {showActions && (
             <>
               <Button onClick={onCancel} color="primary">
-                {t('frequent|Cancel')}
+                {t('translation|Cancel')}
               </Button>
               <div style={{ flex: '1 0 0' }} />
             </>
           )}
           <Button onClick={onAuthClicked} color="primary">
-            {t('auth|Authenticate')}
+            {t('translation|Authenticate')}
           </Button>
         </DialogActions>
       </ClusterDialog>
@@ -167,7 +167,7 @@ export function PureAuthToken({
         ContentProps={{
           'aria-describedby': 'message-id',
         }}
-        message={<span id="message-id">{t('auth|Error authenticating')}</span>}
+        message={<span id="message-id">{t('translation|Error authenticating')}</span>}
       />
     </Box>
   );

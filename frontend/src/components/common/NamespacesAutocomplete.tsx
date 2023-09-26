@@ -27,7 +27,7 @@ export function PureNamespacesAutocomplete({
   filter,
 }: PureNamespacesAutocompleteProps) {
   const theme = useTheme();
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
   const [namespaceInput, setNamespaceInput] = React.useState<string>('');
   const maxNamespacesChars = 12;
 
@@ -72,7 +72,7 @@ export function PureNamespacesAutocomplete({
       )}
       renderTags={(tags: string[]) => {
         if (tags.length === 0) {
-          return <Typography variant="body2">{t('frequent|All namespaces')}</Typography>;
+          return <Typography variant="body2">{t('translation|All namespaces')}</Typography>;
         }
 
         let namespacesToShow = tags[0];

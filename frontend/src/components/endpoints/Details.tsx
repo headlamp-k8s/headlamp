@@ -11,7 +11,7 @@ import SimpleTable from '../common/SimpleTable';
 export default function EndpointDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const location = useLocation();
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <DetailsGrid
@@ -30,14 +30,14 @@ export default function EndpointDetails() {
                 <>
                   {!item.subsets?.length ? (
                     <SectionBox>
-                      <Empty>{t('resource|No data to be shown.')}</Empty>
+                      <Empty>{t('translation|No data to be shown.')}</Empty>
                     </SectionBox>
                   ) : (
                     item.subsets?.map((subset, i) => (
                       <SectionBox key={`subsetDetails_${i}`} outterBoxProps={{ pb: 3 }}>
                         <SectionHeader
                           noPadding
-                          title={t('frequent|Addresses')}
+                          title={t('translation|Addresses')}
                           headerStyle="label"
                         />
                         <SimpleTable
@@ -85,7 +85,7 @@ export default function EndpointDetails() {
                           data={subset?.ports || []}
                           columns={[
                             {
-                              label: t('frequent|Name'),
+                              label: t('translation|Name'),
                               datum: 'name',
                               sort: true,
                             },

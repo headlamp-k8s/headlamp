@@ -42,12 +42,12 @@ export default function PortForwardingList() {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const cluster = getCluster();
-  const { t, i18n } = useTranslation(['resource', 'frequent', 'glossary']);
+  const { t, i18n } = useTranslation(['translation', 'glossary']);
   const optionsTranslated = React.useMemo(
     () => ({
-      [PortForwardAction.Start]: t('frequent|Start'),
-      [PortForwardAction.Stop]: t('frequent|Stop'),
-      [PortForwardAction.Delete]: t('frequent|Delete'),
+      [PortForwardAction.Start]: t('translation|Start'),
+      [PortForwardAction.Stop]: t('translation|Stop'),
+      [PortForwardAction.Delete]: t('translation|Delete'),
     }),
     [i18n.language]
   );
@@ -169,11 +169,11 @@ export default function PortForwardingList() {
 
   function prepareStatusLabel(portforward: any) {
     if (portForwardInAction?.id === portforward.id && portForwardInAction.loading) {
-      return <Loader noContainer title={t('resource|Loading port forwarding')} size={30} />;
+      return <Loader noContainer title={t('translation|Loading port forwarding')} size={30} />;
     }
     const error = portforward.error;
     if (error) {
-      return <StatusLabel status="error">{t('frequent|Error')}</StatusLabel>;
+      return <StatusLabel status="error">{t('translation|Error')}</StatusLabel>;
     }
     return (
       <StatusLabel status={portforward.status === PORT_FORWARD_RUNNING_STATUS ? 'success' : ''}>
@@ -187,7 +187,7 @@ export default function PortForwardingList() {
       <SimpleTable
         columns={[
           {
-            label: t('frequent|Name'),
+            label: t('translation|Name'),
             getter: portforward => {
               const podOrService = portforward.service ? 'service' : 'pod';
               const name = portforward.service || portforward.pod;
@@ -212,13 +212,13 @@ export default function PortForwardingList() {
             },
           },
           {
-            label: t('resource|Pod Port'),
+            label: t('translation|Pod Port'),
             getter: portforward => {
               return portforward.targetPort;
             },
           },
           {
-            label: t('resource|Local Port'),
+            label: t('translation|Local Port'),
             getter: portforward => {
               return (
                 <Box display={'flex'} alignItems="center">
@@ -240,13 +240,13 @@ export default function PortForwardingList() {
             },
           },
           {
-            label: t('frequent|Status'),
+            label: t('translation|Status'),
             getter: portforward => {
               return prepareStatusLabel(portforward);
             },
           },
           {
-            label: t('frequent|Actions'),
+            label: t('translation|Actions'),
             getter: portforward => {
               const filteredOptions = options.filter(option => {
                 if (portForwardInAction?.error) {
@@ -261,7 +261,7 @@ export default function PortForwardingList() {
               return (
                 <>
                   <IconButton
-                    aria-label={t('frequent|More')}
+                    aria-label={t('translation|More')}
                     onClick={e => handleClick(e, portforward)}
                   >
                     <Icon icon={'mdi:dots-vertical'} />

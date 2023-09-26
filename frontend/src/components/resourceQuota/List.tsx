@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ResourceQuotaList() {
   const classes = useStyles();
-  const { t } = useTranslation(['frequent', 'glossary']);
+  const { t } = useTranslation(['translation', 'glossary']);
   return (
     <ResourceListView
       title={t('glossary|Resource Quotas')}
@@ -32,7 +32,7 @@ export default function ResourceQuotaList() {
         'namespace',
         {
           id: 'requests',
-          label: t('frequent|Request'),
+          label: t('translation|Request'),
           getter: (item: ResourceQuota) => {
             const requests: JSX.Element[] = [];
             item.requests.forEach((request: string) => {
@@ -51,7 +51,7 @@ export default function ResourceQuotaList() {
         },
         {
           id: 'limits',
-          label: t('frequent|Limit'),
+          label: t('translation|Limit'),
           getter: (item: ResourceQuota) => {
             const limits: JSX.Element[] = [];
             item.limits.forEach((limit: string) => {

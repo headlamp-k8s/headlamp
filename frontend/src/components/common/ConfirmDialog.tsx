@@ -16,7 +16,7 @@ export interface ConfirmDialogProps extends MuiDialogProps {
 
 export function ConfirmDialog(props: ConfirmDialogProps) {
   const { onConfirm, open, handleClose, title, description } = props;
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
 
   function onConfirmationClicked() {
     handleClose();
