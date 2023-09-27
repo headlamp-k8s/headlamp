@@ -5,10 +5,11 @@ import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function CustomResourceDefinitionList() {
   const { t } = useTranslation(['glossary', 'frequent']);
+  const title = 'glossary|Custom Resources';
 
   return (
     <ResourceListView
-      title={t('glossary|Custom Resources')}
+      title={t(title)}
       headerProps={{
         noNamespaceFilter: true,
       }}
