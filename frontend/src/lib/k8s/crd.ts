@@ -82,9 +82,11 @@ export function makeCustomResourceClass(
   isNamespaced: boolean
 ) {
   // Used for tests
-  const knownClass = ResourceClasses[args[0][2]];
-  if (!!knownClass) {
-    return knownClass;
+  if (process.env.UNDER_TEST === 'true') {
+    const knownClass = ResourceClasses[args[0][2]];
+    if (!!knownClass) {
+      return knownClass;
+    }
   }
 
   const apiFunc = !!isNamespaced ? apiFactoryWithNamespace : apiFactory;

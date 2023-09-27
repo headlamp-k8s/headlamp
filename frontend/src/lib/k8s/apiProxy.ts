@@ -14,7 +14,6 @@ import helpers, { getHeadlampAPIHeaders, isDebugVerbose } from '../../helpers';
 import store from '../../redux/stores/store';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
-import { ResourceClasses } from '.';
 import { KubeMetadata, KubeMetrics, KubeObjectInterface } from './cluster';
 import { KubeToken } from './token';
 
@@ -521,7 +520,18 @@ function asQuery(queryParams?: QueryParameters): string {
     : '';
 }
 
-function resourceDefToApiFactory(resourceDef: KubeObjectInterface): ApiFactoryReturn {
+async function resourceDefToApiFactory(
+  resourceDef: KubeObjectInterface
+): Promise<ApiFactoryReturn> {
+  interface APIResourceList {
+    resources: {
+      kind: string;
+      namespaced: boolean;
+      singularName: string;
+      name: string;
+    }[];
+    [other: string]: any;
+  }
   if (isDebugVerbose('k8s/apiProxy@resourceDefToApiFactory')) {
     console.debug('k8s/apiProxy@resourceDefToApiFactory', { resourceDef });
   }
@@ -531,12 +541,7 @@ function resourceDefToApiFactory(resourceDef: KubeObjectInterface): ApiFactoryRe
   }
 
   if (!resourceDef.apiVersion) {
-    throw new Error(`Definition has no apiVersion`);
-  }
-
-  let factoryFunc: typeof apiFactory | typeof apiFactoryWithNamespace = apiFactory;
-  if (!!resourceDef.metadata?.namespace) {
-    factoryFunc = apiFactoryWithNamespace;
+    throw new Error(`Definition ${resourceDef.kind} has no apiVersion`);
   }
 
   let [apiGroup, apiVersion] = resourceDef.apiVersion.split('/');
@@ -553,12 +558,30 @@ function resourceDefToApiFactory(resourceDef: KubeObjectInterface): ApiFactoryRe
     throw new Error(`apiVersion has no version string: ${resourceDef.apiVersion}`);
   }
 
-  // Try to use a known resource class to get the plural from, otherwise fall back to
-  // generating a plural from the kind (which is very naive).
-  const knownResource = ResourceClasses[resourceDef.kind];
-  const resourcePlural = knownResource?.pluralName || resourceDef.kind.toLowerCase() + 's';
+  // Get details about this resource. We could avoid this for known resources, but
+  // this way we always get the right plural name and we also avoid eventually getting
+  // the wrong "known" resource because e.g. there can be CustomResources with the same
+  // kind as a known resource.
+  const apiResult: APIResourceList = await request(`/apis/${resourceDef.apiVersion}`, {}, false);
+  if (!apiResult) {
+    throw new Error(`Unkown apiVersion: ${resourceDef.apiVersion}`);
+  }
 
-  return factoryFunc(apiGroup, apiVersion, resourcePlural);
+  // Get resource
+  const resource = apiResult.resources?.find(({ kind }) => kind === resourceDef.kind);
+
+  if (!resource) {
+    throw new Error(`Unkown resource kind: ${resourceDef.kind}`);
+  }
+
+  const hasNamespace = !!resource.namespaced;
+
+  let factoryFunc: typeof apiFactory | typeof apiFactoryWithNamespace = apiFactory;
+  if (!!hasNamespace) {
+    factoryFunc = apiFactoryWithNamespace;
+  }
+
+  return factoryFunc(apiGroup, apiVersion, resource.name);
 }
 
 function getApiRoot(group: string, version: string) {
@@ -966,25 +989,31 @@ function combinePath(base: string, path: string) {
 
 export async function apply(body: KubeObjectInterface): Promise<JSON> {
   const bodyToApply = _.cloneDeep(body);
-  // Check if the default namespace is needed. And we need to do this before
-  // getting the apiEndpoint because it will affect the endpoint itself.
-  const { namespace } = body.metadata;
-  if (!namespace) {
-    const knownResource = ResourceClasses[body.kind];
-    if (knownResource?.isNamespaced) {
-      let defaultNamespace = 'default';
 
-      const cluster = getCluster();
-      if (!!cluster) {
-        const clusterSettings = helpers.loadClusterSettings(cluster);
-        defaultNamespace = clusterSettings?.defaultNamespace || defaultNamespace;
-      }
-
-      bodyToApply.metadata.namespace = defaultNamespace;
-    }
+  let apiEndpoint;
+  try {
+    apiEndpoint = await resourceDefToApiFactory(bodyToApply);
+  } catch (err) {
+    console.error(`Error getting api endpoint when applying the resource ${bodyToApply}: ${err}`);
+    throw err;
   }
 
-  const apiEndpoint = resourceDefToApiFactory(bodyToApply);
+  // Check if the default namespace is needed. And we need to do this before
+  // getting the apiEndpoint because it will affect the endpoint itself.
+  const isNamespaced = apiEndpoint.isNamespaced;
+  const { namespace } = body.metadata;
+  if (!namespace && isNamespaced) {
+    let defaultNamespace = 'default';
+
+    const cluster = getCluster();
+    if (!!cluster) {
+      const clusterSettings = helpers.loadClusterSettings(cluster);
+      defaultNamespace = clusterSettings?.defaultNamespace || defaultNamespace;
+    }
+
+    bodyToApply.metadata.namespace = defaultNamespace;
+  }
+
   const resourceVersion = bodyToApply.metadata.resourceVersion;
 
   try {
