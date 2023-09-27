@@ -73,6 +73,12 @@ export function ResourceLink(props: ResourceLinkProps) {
   );
 }
 
+const useDetailsGridStyles = makeStyles((theme: Theme) => ({
+  section: {
+    marginBottom: theme.spacing(2),
+  },
+}));
+
 export interface DetailsGridProps
   extends PropsWithChildren<Omit<MainInfoSectionProps, 'resource'>> {
   /** Resource type to fetch (from the ResourceClasses). */
@@ -108,6 +114,7 @@ export function DetailsGrid(props: DetailsGridProps) {
   } = props;
   const { t } = useTranslation('frequent');
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
+  const classes = useDetailsGridStyles();
   const hasPreviousRoute = useHasPreviousRoute();
   const detailViews = useTypedSelector(state => state.detailsViewSections.detailsViewSections);
   const detailViewsProcessors = useTypedSelector(
@@ -278,7 +285,7 @@ export function DetailsGrid(props: DetailsGridProps) {
   }
 
   return (
-    <PageGrid>
+    <PageGrid className={classes.section}>
       {React.Children.toArray(
         sectionsProcessed.map(section => {
           const Section = has(section, 'section')

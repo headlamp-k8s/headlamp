@@ -5,7 +5,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
   aria-hidden="true"
 >
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+    class="MuiGrid-root makeStyles-section MuiGrid-container MuiGrid-spacing-xs-1"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
