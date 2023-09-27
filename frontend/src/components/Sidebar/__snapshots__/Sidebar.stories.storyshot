@@ -480,7 +480,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                               <span
                                 class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                               >
-                                CRDs
+                                Custom Resources
                               </span>
                             </div>
                             <span
@@ -1605,7 +1605,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                               <span
                                 class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                               >
-                                CRDs
+                                Custom Resources
                               </span>
                             </div>
                             <span
@@ -2777,7 +2777,7 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                               <span
                                 class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
                               >
-                                CRDs
+                                Custom Resources
                               </span>
                             </div>
                             <span

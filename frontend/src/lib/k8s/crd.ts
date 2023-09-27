@@ -44,12 +44,36 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
     return 'crd';
   }
 
-  get spec() {
+  get spec(): KubeCRD['spec'] {
     return this.jsonData!.spec;
   }
 
   get plural(): string {
-    return this.spec().names.plural;
+    return this.spec.names.plural;
+  }
+
+  getMainAPIGroup(): [string, string, string] {
+    const group = this.spec.group;
+    let version = this.spec.version;
+    const name = this.spec.names.plural as string;
+
+    // Assign the 1st storage version if no version is specified,
+    // or the 1st served version if no storage version is specified.
+    if (!version && this.spec.versions.length > 0) {
+      for (const versionItem of this.spec.versions) {
+        if (!!versionItem.storage) {
+          version = versionItem.name;
+        } else if (!version) {
+          version = versionItem.name;
+        }
+      }
+    }
+
+    return [group, version, name];
+  }
+
+  get isNamespaced(): boolean {
+    return this.spec.scope === 'Namespaced';
   }
 }
 

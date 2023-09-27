@@ -5,9 +5,8 @@ import { useParams } from 'react-router-dom';
 import { ResourceClasses } from '../../lib/k8s';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import CustomResourceDefinition, { KubeCRD, makeCustomResourceClass } from '../../lib/k8s/crd';
-import { createRouteURL } from '../../lib/router';
 import { localeDate } from '../../lib/util';
-import { HoverInfoLabel, NameValueTableRow, ObjectEventList, SectionBox } from '../common';
+import { HoverInfoLabel, Link, NameValueTableRow, ObjectEventList, SectionBox } from '../common';
 import Empty from '../common/EmptyContent';
 import Loader from '../common/Loader';
 import { ConditionsTable, MainInfoSection, PageGrid } from '../common/Resource';
@@ -138,8 +137,23 @@ function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps
     <PageGrid>
       <MainInfoSection
         resource={item}
-        backLink={createRouteURL(crd.detailsRoute, { name: crd.metadata.name })}
-        extraInfo={getExtraInfo(extraColumns, item!.jsonData)}
+        extraInfo={[
+          {
+            name: t('frequent|Definition'),
+            value: (
+              <Link
+                routeName="crd"
+                params={{
+                  name: crd.metadata.name,
+                }}
+              >
+                {crd.metadata.name}
+              </Link>
+            ),
+          },
+          ...getExtraInfo(extraColumns, item!.jsonData),
+        ]}
+        backLink=""
       />
       {item!.jsonData.status?.conditions && (
         <SectionBox>

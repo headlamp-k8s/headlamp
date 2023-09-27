@@ -319,7 +319,9 @@ exports[`Storyshots PriorityClass/PriorityClassDetailsView Error 1`] = `
         <div
           class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
         >
-          
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          />
           <div
             class="MuiGrid-root MuiGrid-item"
           >
@@ -414,7 +416,9 @@ exports[`Storyshots PriorityClass/PriorityClassDetailsView No Item Yet 1`] = `
         <div
           class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
         >
-          
+          <div
+            class="MuiGrid-root MuiGrid-item"
+          />
           <div
             class="MuiGrid-root MuiGrid-item"
           >

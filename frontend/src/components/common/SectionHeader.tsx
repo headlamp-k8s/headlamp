@@ -33,7 +33,7 @@ export interface SectionHeaderProps {
 }
 
 export default function SectionHeader(props: SectionHeaderProps) {
-  const { noPadding = false, headerStyle = 'main' } = props;
+  const { noPadding = false, headerStyle = 'main', titleSideActions = [] } = props;
   const classes = useStyles({ noPadding, headerStyle });
   const actions = props.actions || [];
   const titleVariants: { [key: string]: Variant } = {
@@ -51,10 +51,10 @@ export default function SectionHeader(props: SectionHeaderProps) {
       className={classes.sectionHeader}
       spacing={2}
     >
-      {props.title && (
-        <>
-          <Grid item>
-            <Box display="flex">
+      <Grid item>
+        {(!!props.title || titleSideActions.length > 0) && (
+          <Box display="flex" alignItems="center">
+            {!!props.title && (
               <Typography
                 variant={titleVariants[headerStyle]}
                 noWrap
@@ -62,11 +62,15 @@ export default function SectionHeader(props: SectionHeaderProps) {
               >
                 {props.title}
               </Typography>
-              <Box ml={1}>{props.titleSideActions}</Box>
-            </Box>
-          </Grid>
-        </>
-      )}
+            )}
+            {!!titleSideActions && (
+              <Box ml={1} justifyContent="center">
+                {titleSideActions}
+              </Box>
+            )}
+          </Box>
+        )}
+      </Grid>
       {actions.length > 0 && (
         <Grid item>
           <Grid item container alignItems="center" justifyContent="flex-end">
