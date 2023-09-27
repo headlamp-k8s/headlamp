@@ -17,7 +17,8 @@ import { Cluster } from '../../../lib/k8s/cluster';
 import { createRouteURL } from '../../../lib/router';
 import { useFilterFunc, useId } from '../../../lib/util';
 import { setConfig } from '../../../redux/actions/actions';
-import { Link, PageGrid, SectionBox, SectionFilterHeader, SimpleTable } from '../../common';
+import { Link, PageGrid, SectionBox, SectionFilterHeader } from '../../common';
+import ResourceTable from '../../common/Resource/ResourceTable';
 import RecentClusters from './RecentClusters';
 
 function ContextMenu({ cluster }: { cluster: Cluster }) {
@@ -174,7 +175,7 @@ function HomeComponent(props: HomeComponentProps) {
           />
         }
       >
-        <SimpleTable
+        <ResourceTable
           filterFunction={filterFunc}
           defaultSortingColumn={1}
           columns={[
@@ -206,6 +207,7 @@ function HomeComponent(props: HomeComponentProps) {
             },
           ]}
           data={Object.values(clusters)}
+          id="headlamp-home-clusters"
         />
       </SectionBox>
     </PageGrid>
