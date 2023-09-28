@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"compress/gzip"
 	"context"
 	"crypto/tls"
 	"encoding/base64"
@@ -491,7 +492,22 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			http.Error(w, err.Error(), http.StatusBadGateway)
 			return
 		}
-		respBody, err := io.ReadAll(resp.Body)
+		defer resp.Body.Close()
+
+		// Check that the server actually sent compressed data
+		var reader io.ReadCloser
+		switch resp.Header.Get("Content-Encoding") {
+		case "gzip":
+			reader, err = gzip.NewReader(resp.Body)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+			defer reader.Close()
+		default:
+			reader = resp.Body
+		}
+		respBody, err := io.ReadAll(reader)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadGateway)
 			return
