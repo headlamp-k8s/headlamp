@@ -103,6 +103,6 @@ sed -i "s!^\$headlampVersion = '.*'!\$headlampVersion = '${VERSION}'!" ./tools/c
 sed -i "s/^\$checksum = '.*'/\$checksum = '${CHECKSUM}'/" ./tools/chocolateyinstall.ps1
 
 echo ""
-echo "You can test this package by running the following command from an Windows admin shell, in this directory:"
+echo "You can test this package by running the following command from a Windows admin shell, in this directory:"
 echo " choco pack"
 echo " choco install headlamp -d -v -s ."
