@@ -92,24 +92,26 @@ export function useClustersConf(): ConfigState['clusters'] {
 }
 
 export function useCluster() {
-  const [cluster, setCluster] = React.useState<string | null>(null);
   // Make sure we update when changing clusters.
   // @todo: We need a better way to do this.
   const location = useLocation();
+
+  // This function is similar to the getCluster() but uses the location
+  // meaning it will return the URL from whatever the router used it (which
+  // is more accurate than getting it from window.location like the former).
+  function getClusterFromLocation(): string | null {
+    const urlPath = location?.pathname;
+    const clusterURLMatch = matchPath<{ cluster?: string }>(urlPath, {
+      path: getClusterPrefixedPath(),
+    });
+    return (!!clusterURLMatch && clusterURLMatch.params.cluster) || null;
+  }
+
+  const [cluster, setCluster] = React.useState<string | null>(getClusterFromLocation());
+
   const clusters = useClustersConf();
 
   React.useEffect(() => {
-    // This function is similar to the getCluster() but uses the location
-    // meaning it will return the URL from whatever the router used it (which
-    // is more accurate than getting it from window.location like the former).
-    function getClusterFromLocation() {
-      const urlPath = location?.pathname;
-      const clusterURLMatch = matchPath<{ cluster?: string }>(urlPath, {
-        path: getClusterPrefixedPath(),
-      });
-      return (!!clusterURLMatch && clusterURLMatch.params.cluster) || null;
-    }
-
     const currentCluster = getClusterFromLocation();
     if (cluster !== currentCluster) {
       setCluster(currentCluster);
