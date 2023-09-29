@@ -28,7 +28,7 @@ slug: "lib_router"
 
 #### Defined in
 
-[lib/router.tsx:678](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/router.tsx#L678)
+[lib/router.tsx:710](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/router.tsx#L710)
 
 ## Functions
 
@@ -49,7 +49,7 @@ slug: "lib_router"
 
 #### Defined in
 
-[lib/router.tsx:736](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/router.tsx#L736)
+[lib/router.tsx:768](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/router.tsx#L768)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:764](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/router.tsx#L764)
+[lib/router.tsx:796](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/router.tsx#L796)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:687](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/router.tsx#L687)
+[lib/router.tsx:719](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/router.tsx#L719)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[lib/router.tsx:720](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/router.tsx#L720)
+[lib/router.tsx:752](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/router.tsx#L752)
 
 ___
 
@@ -128,4 +128,4 @@ true when a cluster URL contains cluster in the URL. eg. /c/minikube/my-url
 
 #### Defined in
 
-[lib/router.tsx:708](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/router.tsx#L708)
+[lib/router.tsx:740](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/router.tsx#L740)

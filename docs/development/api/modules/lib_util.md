@@ -22,7 +22,7 @@ slug: "lib_util"
 
 #### Defined in
 
-[lib/util.ts:32](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L32)
+[lib/util.ts:32](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L32)
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:30](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L30)
+[lib/util.ts:30](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L30)
 
 ## Variables
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:28](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L28)
+[lib/util.ts:28](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L28)
 
 ## Functions
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:407](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L407)
+[lib/util.ts:407](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L407)
 
 ___
 
@@ -94,7 +94,7 @@ The item is considered to match if any of the matchCriteria (described as JSONPa
 
 #### Defined in
 
-[lib/util.ts:195](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L195)
+[lib/util.ts:195](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L195)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:152](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L152)
+[lib/util.ts:152](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L152)
 
 ___
 
@@ -141,7 +141,7 @@ The formatted duration.
 
 #### Defined in
 
-[lib/util.ts:64](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L64)
+[lib/util.ts:64](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L64)
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:262](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L262)
+[lib/util.ts:262](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L262)
 
 ___
 
@@ -175,7 +175,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:254](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L254)
+[lib/util.ts:254](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L254)
 
 ___
 
@@ -196,7 +196,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:101](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L101)
+[lib/util.ts:101](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L101)
 
 ___
 
@@ -216,7 +216,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:110](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L110)
+[lib/util.ts:110](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L110)
 
 ___
 
@@ -238,7 +238,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:128](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L128)
+[lib/util.ts:128](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L128)
 
 ___
 
@@ -259,7 +259,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:118](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L118)
+[lib/util.ts:118](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L118)
 
 ___
 
@@ -279,7 +279,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:114](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L114)
+[lib/util.ts:114](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L114)
 
 ___
 
@@ -299,7 +299,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:84](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L84)
+[lib/util.ts:84](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L84)
 
 ___
 
@@ -320,7 +320,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:416](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L416)
+[lib/util.ts:416](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L416)
 
 ___
 
@@ -345,7 +345,7 @@ The formatted date.
 
 #### Defined in
 
-[lib/util.ts:45](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L45)
+[lib/util.ts:45](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L45)
 
 ___
 
@@ -365,7 +365,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:274](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L274)
+[lib/util.ts:274](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L274)
 
 ___
 
@@ -403,7 +403,7 @@ ___
 
 #### Defined in
 
-[lib/util.ts:239](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L239)
+[lib/util.ts:239](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L239)
 
 ___
 
@@ -426,7 +426,7 @@ If UNDER_TEST is set to true, it will return the same ID every time, so snapshot
 
 #### Defined in
 
-[lib/util.ts:495](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L495)
+[lib/util.ts:495](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L495)
 
 ___
 
@@ -449,7 +449,7 @@ A hook to manage a state variable that is also stored in the URL.
 
 #### Defined in
 
-[lib/util.ts:299](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L299)
+[lib/util.ts:299](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L299)
 
 ▸ **useURLState**(`key`, `valueOrParams`): [`number`, `React.Dispatch`<`React.SetStateAction`<`number`\>\>]
 
@@ -468,4 +468,4 @@ A hook to manage a state variable that is also stored in the URL.
 
 #### Defined in
 
-[lib/util.ts:303](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/util.ts#L303)
+[lib/util.ts:303](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/util.ts#L303)

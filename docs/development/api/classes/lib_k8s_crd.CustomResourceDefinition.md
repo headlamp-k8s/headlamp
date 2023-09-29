@@ -30,7 +30,7 @@ makeKubeObject<KubeCRD\>('crd').constructor
 
 #### Defined in
 
-[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L107)
+[lib/k8s/cluster.ts:107](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L107)
 
 ## Properties
 
@@ -52,9 +52,23 @@ makeKubeObject<KubeCRD\>('crd').constructor
 
 #### Defined in
 
-[lib/k8s/crd.ts:34](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/crd.ts#L34)
+[lib/k8s/crd.ts:34](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/crd.ts#L34)
 
 ## Accessors
+
+### isNamespaced
+
+• `get` **isNamespaced**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+#### Defined in
+
+[lib/k8s/crd.ts:75](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/crd.ts#L75)
+
+___
 
 ### plural
 
@@ -66,21 +80,33 @@ makeKubeObject<KubeCRD\>('crd').constructor
 
 #### Defined in
 
-[lib/k8s/crd.ts:51](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/crd.ts#L51)
+[lib/k8s/crd.ts:51](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/crd.ts#L51)
 
 ___
 
 ### spec
 
-• `get` **spec**(): `any`
+• `get` **spec**(): `Object`
 
 #### Returns
 
-`any`
+`Object`
+
+| Name | Type |
+| :------ | :------ |
+| `group` | `string` |
+| `names` | { `kind`: `string` ; `listKind`: `string` ; `plural`: `string` ; `singular`: `string`  } |
+| `names.kind` | `string` |
+| `names.listKind` | `string` |
+| `names.plural` | `string` |
+| `names.singular` | `string` |
+| `scope` | `string` |
+| `version` | `string` |
+| `versions` | { `additionalPrinterColumns`: { `description?`: `string` ; `format?`: `string` ; `jsonPath`: `string` ; `name`: `string` ; `priority?`: `number` ; `type`: `string`  }[] ; `name`: `string` ; `served`: `boolean` ; `storage`: `boolean`  }[] |
 
 #### Defined in
 
-[lib/k8s/crd.ts:47](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/crd.ts#L47)
+[lib/k8s/crd.ts:47](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/crd.ts#L47)
 
 ___
 
@@ -98,7 +124,7 @@ makeKubeObject&lt;KubeCRD\&gt;(&#x27;crd&#x27;).className
 
 #### Defined in
 
-[lib/k8s/crd.ts:39](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/crd.ts#L39)
+[lib/k8s/crd.ts:39](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/crd.ts#L39)
 
 ___
 
@@ -112,9 +138,23 @@ ___
 
 #### Defined in
 
-[lib/k8s/crd.ts:43](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/crd.ts#L43)
+[lib/k8s/crd.ts:43](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/crd.ts#L43)
 
 ## Methods
+
+### getMainAPIGroup
+
+▸ **getMainAPIGroup**(): [`string`, `string`, `string`]
+
+#### Returns
+
+[`string`, `string`, `string`]
+
+#### Defined in
+
+[lib/k8s/crd.ts:55](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/crd.ts#L55)
+
+___
 
 ### apiList
 
@@ -136,7 +176,7 @@ makeKubeObject<KubeCRD\>('crd').apiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L87)
+[lib/k8s/cluster.ts:87](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L87)
 
 ___
 
@@ -161,7 +201,7 @@ makeKubeObject<KubeCRD\>('crd').getAuthorization
 
 #### Defined in
 
-[lib/k8s/cluster.ts:110](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L110)
+[lib/k8s/cluster.ts:110](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L110)
 
 ___
 
@@ -185,7 +225,7 @@ makeKubeObject<KubeCRD\>('crd').getErrorMessage
 
 #### Defined in
 
-[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L106)
+[lib/k8s/cluster.ts:106](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L106)
 
 ___
 
@@ -212,7 +252,7 @@ makeKubeObject<KubeCRD\>('crd').useApiGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:93](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L93)
+[lib/k8s/cluster.ts:93](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L93)
 
 ___
 
@@ -238,7 +278,7 @@ makeKubeObject<KubeCRD\>('crd').useApiList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:88](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L88)
+[lib/k8s/cluster.ts:88](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L88)
 
 ___
 
@@ -263,7 +303,7 @@ makeKubeObject<KubeCRD\>('crd').useGet
 
 #### Defined in
 
-[lib/k8s/cluster.ts:102](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L102)
+[lib/k8s/cluster.ts:102](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L102)
 
 ___
 
@@ -287,4 +327,4 @@ makeKubeObject<KubeCRD\>('crd').useList
 
 #### Defined in
 
-[lib/k8s/cluster.ts:99](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/cluster.ts#L99)
+[lib/k8s/cluster.ts:99](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L99)

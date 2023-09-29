@@ -14,7 +14,7 @@ slug: "lib_k8s_pod.KubePodSpec"
 
 #### Defined in
 
-[lib/k8s/pod.ts:13](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L13)
+[lib/k8s/pod.ts:13](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/pod.ts#L13)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/pod.ts:18](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L18)
+[lib/k8s/pod.ts:18](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/pod.ts#L18)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/pod.ts:14](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L14)
+[lib/k8s/pod.ts:14](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/pod.ts#L14)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/pod.ts:15](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L15)
+[lib/k8s/pod.ts:15](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/pod.ts#L15)
 
 ___
 
@@ -58,4 +58,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/pod.ts:19](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/pod.ts#L19)
+[lib/k8s/pod.ts:19](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/pod.ts#L19)
