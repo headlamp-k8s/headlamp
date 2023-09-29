@@ -14,7 +14,7 @@ slug: "lib_k8s_ingress.IngressRule"
 
 #### Defined in
 
-[lib/k8s/ingress.ts:15](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/ingress.ts#L15)
+[lib/k8s/ingress.ts:15](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/ingress.ts#L15)
 
 ___
 
@@ -26,8 +26,8 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `paths` | { `backend`: `IngressBackend` ; `path`: `string`  }[] |
+| `paths` | { `backend`: [`IngressBackend`](lib_k8s_ingress.IngressBackend.md) ; `path`: `string` ; `pathType?`: `string`  }[] |
 
 #### Defined in
 
-[lib/k8s/ingress.ts:16](https://github.com/headlamp-k8s/headlamp/blob/1ae27053/frontend/src/lib/k8s/ingress.ts#L16)
+[lib/k8s/ingress.ts:16](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/ingress.ts#L16)
