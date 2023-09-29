@@ -71,7 +71,7 @@ import StorageClassDetails from '../components/storage/ClassDetails';
 import StorageClassList from '../components/storage/ClassList';
 import PersistentVolumeDetails from '../components/storage/VolumeDetails';
 import PersistentVolumeList from '../components/storage/VolumeList';
-import MutatingWebhookConfigList from '../components/webhookconfiguration/MutatingWebhookConfigDetails';
+import MutatingWebhookConfigList from '../components/webhookconfiguration/MutatingWebhookConfigList';
 import ValidatingWebhookConfigurationDetails from '../components/webhookconfiguration/ValidatingWebhookConfigDetails';
 import ValidatingWebhookConfigurationList from '../components/webhookconfiguration/ValidatingWebhookConfigList';
 import WorkloadDetails from '../components/workload/Details';
