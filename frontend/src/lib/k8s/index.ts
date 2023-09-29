@@ -109,14 +109,12 @@ export function useCluster() {
 
   const [cluster, setCluster] = React.useState<string | null>(getClusterFromLocation());
 
-  const clusters = useClustersConf();
-
   React.useEffect(() => {
     const currentCluster = getClusterFromLocation();
     if (cluster !== currentCluster) {
       setCluster(currentCluster);
     }
-  }, [clusters, cluster, location]);
+  }, [cluster, location]);
 
   return cluster;
 }
