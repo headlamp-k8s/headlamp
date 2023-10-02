@@ -11,7 +11,7 @@ license ([Apache 2.0](../LICENSE)).
 
 ## Code of Conduct
 
-Please refer to the Kinvolk [Code of Conduct](https://github.com/kinvolk/contribution/blob/master/CODE_OF_CONDUCT.md).
+The Headlamp project follows the CNCF [Code of Conduct](https://github.com/cncf/foundation/blob/main/code-of-conduct.md).
 
 ## Development practices
 
