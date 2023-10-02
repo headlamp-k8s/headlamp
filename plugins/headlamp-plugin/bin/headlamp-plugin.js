@@ -575,7 +575,13 @@ function upgrade(packageFolder, skipPackageUpdates) {
    * Assumes we are in the package folder.
    */
   function addMissingTemplateFiles() {
-    const missingFiles = [path.join('src', 'headlamp-plugin.d.ts'), 'tsconfig.json'];
+    const missingFiles = [
+      path.join('src', 'headlamp-plugin.d.ts'),
+      path.join('.vscode', 'extensions.json'),
+      path.join('.vscode', 'settings.json'),
+      path.join('.vscode', 'tasks.json'),
+      'tsconfig.json',
+    ];
     const templateFolder = path.resolve(__dirname, '..', 'template');
 
     missingFiles.forEach(pathToCheck => {
@@ -585,6 +591,8 @@ function upgrade(packageFolder, skipPackageUpdates) {
       // only copy it if it doesn't exist
       if (!fs.existsSync(to)) {
         console.log(`Adding missing file: "${to}"`);
+        // Make the folder in to there if it is not.
+        fs.mkdirSync(path.dirname(to), { recursive: true });
         fs.copyFileSync(from, to);
       }
     });

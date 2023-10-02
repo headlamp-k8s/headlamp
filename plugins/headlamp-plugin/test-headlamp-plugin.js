@@ -62,13 +62,18 @@ function testHeadlampPlugin() {
   run('npm run tsc');
 
   // test upgrade adds missing files
-  const filesToRemove = ['tsconfig.json', join('src', 'headlamp-plugin.d.ts')];
+  const filesToRemove = [
+    'tsconfig.json',
+    join('src', 'headlamp-plugin.d.ts'),
+    join('.vscode', 'extensions.json'),
+  ];
   filesToRemove.forEach(file => {
     fs.rmSync(join(curDir, file), { recursive: true });
   });
   run(`node ${join('..', 'bin', 'headlamp-plugin.js')} upgrade --skip-package-updates`);
   checkFileExists(join(curDir, 'tsconfig.json'));
   checkFileExists(join(curDir, 'src', 'headlamp-plugin.d.ts'));
+  checkFileExists(join(curDir, '.vscode', 'extensions.json'));
 
   // Does it upgrade "@kinvolk/headlamp-plugin" from an old version?
   // change @kinvolk/headlamp-plugin version in package.json to an old one "^0.4.9"
