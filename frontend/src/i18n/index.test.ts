@@ -1,9 +1,12 @@
+import { execSync } from 'child_process';
 import { error } from 'console';
 import fs from 'fs';
 import glob from 'glob';
 
 const path = require('node:path');
 const allowlist = require('./allowlist.json');
+
+const frontendDir = path.join(__dirname, '..', '..');
 
 /*
  * Description:
@@ -115,5 +118,19 @@ describe('Test for non-intentional repeating translation keys', () => {
   test('Decide which keys are needed if already in use', async () => {
     const result = await checkKeys();
     expect(result).toBe(true);
+  });
+});
+
+function getTranslationChanges() {
+  // Get uncommitted changes in the tracked translation files.
+  return execSync(
+    `git status -uno --porcelain ${frontendDir}/src/i18n/locales/*/*.json`
+  ).toString();
+}
+
+describe('Forgotten translations', () => {
+  test('Check uncommitted translations', async () => {
+    execSync('npm run i18n', { cwd: frontendDir });
+    expect(getTranslationChanges()).toBe('');
   });
 });
