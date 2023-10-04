@@ -5,7 +5,7 @@ export interface KubePersistentVolumeClaim extends KubeObjectInterface {
   spec: {
     accessModes: string[];
     resources: {
-      limits: object;
+      limits?: object;
       requests: {
         storage?: string;
         [other: string]: any;
