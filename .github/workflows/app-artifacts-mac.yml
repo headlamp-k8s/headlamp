@@ -7,6 +7,10 @@ on:
         description: 'Headlamp ref/branch/tag'
         required: true
         default: 'main'
+      signBinaries:
+        description: Notarize app
+        default: false
+        type: boolean
 jobs:
   build-mac:
     runs-on: macos-latest
@@ -23,7 +27,24 @@ jobs:
         go-version: '1.20.*'
     - name: Dependencies
       run: brew install make
-    - name: App Mac
+    - name: Build Backend and Frontend
+      run: |
+        make
+    - name: Add MacOS certs
+      run: cd ./app/mac/scripts/ && sh ./setup-certificate.sh
+      env:
+        APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+        APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+    - name: Build Notarized App Mac
+      if: ${{ inputs.signBinaries }}
+      run: |
+        make app-mac
+      env:
+        APPLEID: ${{ secrets.APPLEID }}
+        APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
+        APPLETEAMID: ${{ secrets.APPLETEAMID }}
+    - name: Build App Mac
+      if: ${{ ! inputs.signBinaries }}
       run: |
         make app-mac
     - name: Upload artifact
