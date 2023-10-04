@@ -144,6 +144,18 @@ const commonRules = {
     borderRadius: 4,
   },
   overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        '@media (prefers-reduced-motion: reduce)': {
+          '*': {
+            animationDuration: '0.01ms !important',
+            animationIterationCount: '1 !important',
+            transitionDuration: '0.01ms !important',
+            scrollBehavior: 'auto !important',
+          },
+        },
+      },
+    },
     MuiTooltip: {
       tooltip: {
         fontSize: '1.3em',
