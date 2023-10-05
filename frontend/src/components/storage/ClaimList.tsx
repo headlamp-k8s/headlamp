@@ -26,6 +26,9 @@ export default function VolumeClaimList() {
           label: t('Class Name'),
           getter: volumeClaim => {
             const name = volumeClaim.spec.storageClassName;
+            if (!name) {
+              return '';
+            }
             return (
               <Link routeName="storageClass" params={{ name }} tooltip>
                 {name}
