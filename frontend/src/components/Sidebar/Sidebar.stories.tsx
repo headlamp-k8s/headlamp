@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { SnackbarProvider } from 'notistack';
-import { INITIAL_STATE } from '../../redux/reducers/config';
+import { initialState as CONFIG_INITIAL_STATE } from '../../redux/configSlice';
 import { INITIAL_STATE as FILTER_INITIAL_STATE } from '../../redux/reducers/filter';
 import { INITIAL_STATE as UI_INITIAL_STATE, UIState } from '../../redux/reducers/ui';
 import { TestContext } from '../../test';
@@ -29,7 +29,7 @@ const Template: Story<StoryProps> = args => {
         loaded: true,
       },
       config: {
-        ...INITIAL_STATE,
+        ...CONFIG_INITIAL_STATE,
       },
       filter: {
         ...FILTER_INITIAL_STATE,

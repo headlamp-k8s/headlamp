@@ -2,13 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { Cluster } from '../../lib/k8s/cluster';
-import { INITIAL_STATE } from '../../redux/reducers/config';
+import { initialState } from '../../redux/configSlice';
 import { TestContext } from '../../test';
 import ClusterChooserPopup from './ClusterChooserPopup';
 
 const ourState = (clusters?: Cluster[]) => ({
   config: {
-    ...INITIAL_STATE,
+    ...initialState,
     clusters: clusters || [
       {
         name: 'cluster0',

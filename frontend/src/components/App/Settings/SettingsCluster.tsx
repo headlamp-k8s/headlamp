@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import helpers, { ClusterSettings } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
 import { deleteCluster } from '../../../lib/k8s/apiProxy';
-import { setConfig } from '../../../redux/actions/actions';
+import { setConfig } from '../../../redux/configSlice';
 import { Link, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
 

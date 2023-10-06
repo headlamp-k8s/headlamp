@@ -2,12 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { INITIAL_STATE } from '../../../redux/reducers/config';
+import { initialState } from '../../../redux/configSlice';
 import Home from '.';
 
 const ourState = {
   config: {
-    ...INITIAL_STATE,
+    ...initialState,
     clusters: [
       {
         name: 'cluster0',

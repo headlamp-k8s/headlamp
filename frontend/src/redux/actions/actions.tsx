@@ -14,7 +14,6 @@ export const FILTER_SET_SEARCH = 'FILTER_SET_SEARCH';
 export const CLUSTER_ACTION = 'CLUSTER_ACTION';
 export const CLUSTER_ACTION_UPDATE = 'CLUSTER_ACTION_UPDATE';
 export const CLUSTER_ACTION_CANCEL = 'CLUSTER_ACTION_CANCEL';
-export const CONFIG_NEW = 'CONFIG_NEW';
 export const UI_SIDEBAR_SET_SELECTED = 'UI_SIDEBAR_SET_SELECTED';
 export const UI_SIDEBAR_SET_VISIBLE = 'UI_SIDEBAR_SET_VISIBLE';
 export const UI_SIDEBAR_SET_ITEM = 'UI_SIDEBAR_SET_ITEM';
@@ -35,7 +34,6 @@ export const UI_BRANDING_SET_APP_LOGO = 'UI_BRANDING_SET_APP_LOGO';
 export const UI_SET_CLUSTER_CHOOSER_BUTTON = 'UI_SET_CLUSTER_CHOOSER_BUTTON';
 export const UI_HIDE_APP_BAR = 'UI_HIDE_APP_BAR';
 export const UI_FUNCTIONS_OVERRIDE = 'UI_FUNCTIONS_OVERRIDE';
-export const CONFIG_SET_SETTINGS = 'CONFIG_SET_SETTINGS';
 
 export interface BrandingProps {
   logo: AppLogoType;
@@ -182,10 +180,6 @@ export function setDetailsView(viewSection: DetailsViewSectionType) {
   };
 }
 
-export function setConfig(config: object) {
-  return { type: CONFIG_NEW, config };
-}
-
 export function setTheme(name?: string) {
   return { type: UI_THEME_SET, theme: { name } };
 }
@@ -215,8 +209,4 @@ export type FunctionsToOverride = {
 
 export function setFunctionsToOverride(override: FunctionsToOverride) {
   return { type: UI_FUNCTIONS_OVERRIDE, override };
-}
-
-export function setAppSettings(settings: { [key: string]: any }) {
-  return { type: CONFIG_SET_SETTINGS, settings };
 }
