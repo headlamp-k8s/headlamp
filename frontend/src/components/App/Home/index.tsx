@@ -16,7 +16,7 @@ import { ApiError, deleteCluster } from '../../../lib/k8s/apiProxy';
 import { Cluster } from '../../../lib/k8s/cluster';
 import { createRouteURL } from '../../../lib/router';
 import { useFilterFunc, useId } from '../../../lib/util';
-import { setConfig } from '../../../redux/actions/actions';
+import { setConfig } from '../../../redux/configSlice';
 import { Link, PageGrid, SectionBox, SectionFilterHeader } from '../../common';
 import ResourceTable from '../../common/Resource/ResourceTable';
 import RecentClusters from './RecentClusters';

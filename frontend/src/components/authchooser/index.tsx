@@ -10,7 +10,7 @@ import { useClustersConf } from '../../lib/k8s';
 import { testAuth } from '../../lib/k8s/apiProxy';
 import { createRouteURL, getRoute, getRoutePath } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
-import { setConfig } from '../../redux/actions/actions';
+import { setConfig } from '../../redux/configSlice';
 import { ClusterDialog } from '../cluster/Chooser';
 import { Link, Loader } from '../common';
 import { DialogTitle } from '../common/Dialog';

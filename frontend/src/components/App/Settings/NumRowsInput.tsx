@@ -14,8 +14,8 @@ import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import helpers from '../../../helpers';
-import { setAppSettings } from '../../../redux/actions/actions';
-import { defaultTableRowsPerPageOptions } from '../../../redux/reducers/config';
+import { setAppSettings } from '../../../redux/configSlice';
+import { defaultTableRowsPerPageOptions } from '../../../redux/configSlice';
 
 export default function NumRowsInput(props: { defaultValue: number[] }) {
   const { t } = useTranslation(['frequent', 'settings']);

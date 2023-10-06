@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setCluster } from '../../lib/k8s/apiProxy';
-import { setConfig } from '../../redux/actions/actions';
+import { setConfig } from '../../redux/configSlice';
 import { DialogTitle } from '../common/Dialog';
 import Loader from '../common/Loader';
 import { ClusterDialog } from './Chooser';

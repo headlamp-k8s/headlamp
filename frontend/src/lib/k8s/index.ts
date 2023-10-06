@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
-import { ConfigState } from '../../redux/reducers/config';
+import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { getCluster, getClusterPrefixedPath } from '../util';
 import { ApiError, clusterRequest } from './apiProxy';

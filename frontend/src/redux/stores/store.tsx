@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import { INITIAL_STATE as CONFIG_INITIAL_STATE } from '../reducers/config';
+import { initialState as CONFIG_INITIAL_STATE } from '../configSlice';
 import { INITIAL_STATE as FILTER_INITIAL_STATE } from '../reducers/filter';
 import reducers from '../reducers/reducers';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../reducers/ui';
