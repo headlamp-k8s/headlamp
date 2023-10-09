@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { SnackbarProvider } from 'notistack';
 import { initialState as CONFIG_INITIAL_STATE } from '../../redux/configSlice';
-import { INITIAL_STATE as FILTER_INITIAL_STATE } from '../../redux/reducers/filter';
+import { initialState as FILTER_INITIAL_STATE } from '../../redux/filterSlice';
 import { INITIAL_STATE as UI_INITIAL_STATE, UIState } from '../../redux/reducers/ui';
 import { TestContext } from '../../test';
 import Sidebar, { DefaultSidebars, PureSidebar } from './Sidebar';

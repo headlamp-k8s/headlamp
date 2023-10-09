@@ -1,8 +1,8 @@
 import humanizeDuration from 'humanize-duration';
-import { JSONPath } from 'jsonpath-plus';
 import React from 'react';
 import { matchPath, useHistory } from 'react-router';
 import helpers from '../helpers';
+import { filterGeneric, filterResource } from '../redux/filterSlice';
 import { useTypedSelector } from '../redux/reducers/reducers';
 import store from '../redux/stores/store';
 import { ApiError } from './k8s/apiProxy';
@@ -11,7 +11,8 @@ import { KubeEvent } from './k8s/event';
 import Node from './k8s/node';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 
-// @todo: these are exported to window.pluginLib.
+// Exported to keep compatibility for plugins that may have used them.
+export { filterGeneric, filterResource };
 
 const humanize = humanizeDuration.humanizer();
 humanize.languages['en-mini'] = {
@@ -144,98 +145,11 @@ export function getResourceMetrics(
   return [used, capacity];
 }
 
-export interface FilterState {
-  namespaces: Set<string>;
-  search: string;
-}
-
-export function filterResource(
-  item: KubeObjectInterface | KubeEvent,
-  filter: FilterState,
-  matchCriteria?: string[]
-) {
-  let matches: boolean = true;
-
-  if (item.metadata.namespace && filter.namespaces.size > 0) {
-    matches = filter.namespaces.has(item.metadata.namespace);
-  }
-
-  if (!matches) {
-    return false;
-  }
-
-  if (filter.search) {
-    const filterString = filter.search.toLowerCase();
-    const usedMatchCriteria = [
-      item.metadata.uid.toLowerCase(),
-      item.metadata.namespace ? item.metadata.namespace.toLowerCase() : '',
-      item.metadata.name.toLowerCase(),
-      ...Object.keys(item.metadata.labels || {}).map(item => item.toLowerCase()),
-      ...Object.values(item.metadata.labels || {}).map(item => item.toLowerCase()),
-    ];
-
-    matches = !!usedMatchCriteria.find(item => item.includes(filterString));
-    if (matches) {
-      return true;
-    }
-
-    matches = filterGeneric(item, filter, matchCriteria);
-  }
-
-  return matches;
-}
-
-/** Filters a generic item based on the filter state.
- * The item is considered to match if any of the matchCriteria (described as JSONPath) matches the filter.search contents. Case matching is insensitive.
+/**
+ * @returns A filter function that can be used to filter a list of items.
  *
- * @param item - The item to filter.
- * @param filter - The filter state.
  * @param matchCriteria - The JSONPath criteria to match.
  */
-export function filterGeneric<T extends { [key: string]: any } = { [key: string]: any }>(
-  item: T,
-  filter: FilterState,
-  matchCriteria?: string[]
-) {
-  if (!filter.search) {
-    return true;
-  }
-
-  const filterString = filter.search.toLowerCase();
-  const usedMatchCriteria: string[] = [];
-
-  // Use the custom matchCriteria if any
-  (matchCriteria || []).forEach(jsonPath => {
-    let values: any[];
-    try {
-      values = JSONPath({ path: '$' + jsonPath, json: item });
-    } catch (err) {
-      console.debug(
-        `Failed to get value from JSONPath when filtering ${jsonPath} on item ${item}; skipping criteria`
-      );
-      return;
-    }
-
-    // Include matches values in the criteria
-    values.forEach((value: any) => {
-      if (typeof value === 'string' || typeof value === 'number') {
-        // Don't use empty string, otherwise it'll match everything
-        if (value !== '') {
-          usedMatchCriteria.push(value.toString().toLowerCase());
-        }
-      } else if (Array.isArray(value)) {
-        value.forEach((elem: any) => {
-          if (!!elem && typeof elem === 'string') {
-            usedMatchCriteria.push(elem.toLowerCase());
-          }
-        });
-      }
-    });
-  });
-
-  return !!usedMatchCriteria.find(item => item.includes(filterString));
-}
-
 export function useFilterFunc<
   T extends { [key: string]: any } | KubeObjectInterface | KubeEvent =
     | KubeObjectInterface

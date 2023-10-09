@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { addQuery, getFilterValueByNameFromURL } from '../../helpers';
-import { resetFilter, setNamespaceFilter, setSearchFilter } from '../../redux/actions/actions';
+import { resetFilter, setNamespaceFilter, setSearchFilter } from '../../redux/filterSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { NamespacesAutocomplete } from './NamespacesAutocomplete';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';

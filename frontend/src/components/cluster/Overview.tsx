@@ -9,7 +9,7 @@ import Event, { KubeEvent } from '../../lib/k8s/event';
 import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { useFilterFunc } from '../../lib/util';
-import { setSearchFilter } from '../../redux/actions/actions';
+import { setSearchFilter } from '../../redux/filterSlice';
 import { DateLabel, Link, StatusLabel } from '../common';
 import Empty from '../common/EmptyContent';
 import { PageGrid } from '../common/Resource';

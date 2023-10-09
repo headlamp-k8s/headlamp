@@ -8,9 +8,6 @@ import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import { UIState } from '../reducers/ui';
 
-export const FILTER_RESET = 'FILTER_RESET';
-export const FILTER_SET_NAMESPACE = 'FILTER_SET_NAMESPACE';
-export const FILTER_SET_SEARCH = 'FILTER_SET_SEARCH';
 export const CLUSTER_ACTION = 'CLUSTER_ACTION';
 export const CLUSTER_ACTION_UPDATE = 'CLUSTER_ACTION_UPDATE';
 export const CLUSTER_ACTION_CANCEL = 'CLUSTER_ACTION_CANCEL';
@@ -97,18 +94,6 @@ export type TableColumnsProcessor = {
     columns: ResourceTableProps['columns'];
   }) => ResourceTableProps['columns'];
 };
-
-export function setNamespaceFilter(namespaces: string[]) {
-  return { type: FILTER_SET_NAMESPACE, namespaces: namespaces };
-}
-
-export function setSearchFilter(searchTerms: string) {
-  return { type: FILTER_SET_SEARCH, search: searchTerms };
-}
-
-export function resetFilter() {
-  return { type: FILTER_RESET };
-}
 
 export function clusterAction(
   callback: CallbackAction['callback'],
