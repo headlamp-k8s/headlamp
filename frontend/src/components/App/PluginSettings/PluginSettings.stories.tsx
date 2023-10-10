@@ -1,6 +1,4 @@
 import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
-import store from '../../../redux/stores/store';
 import { TestContext } from '../../../test';
 import { PluginSettingsPure, PluginSettingsPureProps } from './PluginSettings';
 
@@ -10,7 +8,7 @@ export default {
 } as Meta;
 
 const Template: Story<PluginSettingsPureProps> = args => (
-  <TestContext store={store}>
+  <TestContext>
     <PluginSettingsPure {...args} />
   </TestContext>
 );

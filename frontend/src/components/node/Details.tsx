@@ -11,7 +11,7 @@ import { apply, drainNode, drainNodeStatus } from '../../lib/k8s/apiProxy';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import { getCluster, timeAgo } from '../../lib/util';
-import { clusterAction } from '../../redux/actions/actions';
+import { clusterAction } from '../../redux/clusterActionSlice';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
 import { ActionButton, ObjectEventList, StatusLabelProps } from '../common';
 import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';

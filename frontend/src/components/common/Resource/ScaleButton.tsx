@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { KubeObject } from '../../../lib/k8s/cluster';
-import { CallbackActionOptions, clusterAction } from '../../../redux/actions/actions';
+import { CallbackActionOptions, clusterAction } from '../../../redux/clusterActionSlice';
 import { LightTooltip } from '../Tooltip';
 import AuthVisible from './AuthVisible';
 
