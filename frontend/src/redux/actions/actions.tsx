@@ -1,4 +1,3 @@
-import { OptionsObject as SnackbarProps } from 'notistack';
 import { AppLogoType } from '../../components/App/AppLogo';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
 import { ResourceTableProps } from '../../components/common/Resource/ResourceTable';
@@ -8,9 +7,6 @@ import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import { UIState } from '../reducers/ui';
 
-export const CLUSTER_ACTION = 'CLUSTER_ACTION';
-export const CLUSTER_ACTION_UPDATE = 'CLUSTER_ACTION_UPDATE';
-export const CLUSTER_ACTION_CANCEL = 'CLUSTER_ACTION_CANCEL';
 export const UI_SIDEBAR_SET_SELECTED = 'UI_SIDEBAR_SET_SELECTED';
 export const UI_SIDEBAR_SET_VISIBLE = 'UI_SIDEBAR_SET_VISIBLE';
 export const UI_SIDEBAR_SET_ITEM = 'UI_SIDEBAR_SET_ITEM';
@@ -38,41 +34,6 @@ export interface BrandingProps {
 export const UI_SET_NOTIFICATIONS = 'UI_SET_NOTIFICATIONS';
 export const UI_UPDATE_NOTIFICATION = 'UI_UPDATE_NOTIFICATION';
 
-export interface ClusterActionButton {
-  label: string;
-  actionToDispatch: string;
-}
-
-export interface ClusterAction {
-  id: string;
-  key?: string;
-  message?: string;
-  url?: string;
-  buttons?: ClusterActionButton[];
-  dismissSnackbar?: string;
-  snackbarProps?: SnackbarProps;
-}
-
-export interface CallbackAction extends CallbackActionOptions {
-  callback: (...args: any[]) => void;
-}
-
-export interface CallbackActionOptions {
-  startUrl?: string;
-  cancelUrl?: string;
-  errorUrl?: string;
-  successUrl?: string;
-  startMessage?: string;
-  cancelledMessage?: string;
-  errorMessage?: string;
-  successMessage?: string;
-  startOptions?: SnackbarProps;
-  cancelledOptions?: SnackbarProps;
-  successOptions?: SnackbarProps;
-  errorOptions?: SnackbarProps;
-  cancelCallback?: (...args: any[]) => void;
-}
-
 export interface Action {
   type: string;
   [propName: string]: any;
@@ -94,17 +55,6 @@ export type TableColumnsProcessor = {
     columns: ResourceTableProps['columns'];
   }) => ResourceTableProps['columns'];
 };
-
-export function clusterAction(
-  callback: CallbackAction['callback'],
-  actionOptions: CallbackActionOptions = {}
-) {
-  return { type: CLUSTER_ACTION, callback, ...actionOptions };
-}
-
-export function updateClusterAction(actionOptions: ClusterAction) {
-  return { type: CLUSTER_ACTION_UPDATE, ...actionOptions };
-}
 
 export function setSidebarSelected(selected: string | null, sidebar: string | null = '') {
   return { type: UI_SIDEBAR_SET_SELECTED, selected: { item: selected, sidebar } };

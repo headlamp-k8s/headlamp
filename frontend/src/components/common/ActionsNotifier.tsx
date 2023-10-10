@@ -4,8 +4,7 @@ import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/util';
-import { ClusterAction } from '../../redux/actions/actions';
+import { CLUSTER_ACTION_GRACE_PERIOD, ClusterAction } from '../../redux/clusterActionSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
 export interface PureActionsNotifierProps {

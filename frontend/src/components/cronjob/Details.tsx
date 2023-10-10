@@ -18,7 +18,7 @@ import { apply } from '../../lib/k8s/apiProxy';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import Job from '../../lib/k8s/job';
-import { clusterAction } from '../../redux/actions/actions';
+import { clusterAction } from '../../redux/clusterActionSlice';
 import { ActionButton, ObjectEventList } from '../common';
 import { MainInfoSection } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
