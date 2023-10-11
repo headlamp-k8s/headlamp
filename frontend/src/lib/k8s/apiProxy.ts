@@ -30,10 +30,19 @@ const MIN_LIFESPAN_FOR_TOKEN_REFRESH = 10; // sec
 
 let isTokenRefreshInProgress = false;
 
-export interface RequestParams {
-  timeout?: number; // ms
+// @todo: Params is a confusing name for options, because params are also query params.
+/**
+ * Options for the request.
+ */
+export interface RequestParams extends RequestInit {
+  /** Number of milliseconds to wait for a response. */
+  timeout?: number;
+  /** Is the request expected to receive JSON data? */
   isJSON?: boolean;
-  [prop: string]: any;
+  /** Cluster context name. */
+  cluster?: string | null;
+  /** Whether to automatically log out the user if there is an authentication error. */
+  autoLogoutOnAuthError?: boolean;
 }
 
 export interface ClusterRequest {
@@ -49,14 +58,127 @@ export interface ClusterRequest {
   kubeconfig?: string;
 }
 
+// @todo: QueryParamaters should be specific to different resources.
+//        Because some only support some paramaters.
+
+/**
+ * QueryParamaters is a map of query parameters for the Kubernetes API.
+ */
 export interface QueryParameters {
-  labelSelector?: string;
+  /**
+   * Continue token for paging through large result sets.
+   *
+   * The continue option should be set when retrieving more results from the server.
+   * Since this value is server defined, clients may only use the continue value
+   * from a previous query result with identical query parameters
+   * (except for the value of continue) and the server may reject a continue value
+   * it does not recognize. If the specified continue value is no longer valid
+   * whether due to expiration (generally five to fifteen minutes) or a
+   * configuration change on the server, the server will respond with a
+   * 410 ResourceExpired error together with a continue token. If the client
+   * needs a consistent list, it must restart their list without the continue field.
+   * Otherwise, the client may send another list request with the token received
+   * with the 410 error, the server will respond with a list starting from the next
+   * key, but from the latest snapshot, which is inconsistent from the previous
+   * list results - objects that are created, modified, or deleted after the first
+   * list request will be included in the response, as long as their keys are after
+   * the "next key".
+   *
+   * This field is not supported when watch is true. Clients may start a watch from
+   * the last resourceVersion value returned by the server and not miss any modifications.
+   * @see https://kubernetes.io/docs/reference/using-api/api-concepts/#retrieving-large-results-sets-in-chunks
+   */
+  continue?: string;
+  /**
+   * dryRun causes apiserver to simulate the request, and report whether the object would be modified.
+   * Can be '' or 'All'
+   *
+   * @see https://kubernetes.io/docs/reference/using-api/api-concepts/#dry-run
+   */
+  dryRun?: string;
+  /**
+   * fieldSeletor restricts the list of returned objects by their fields. Defaults to everything.
+   *
+   * @see https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/
+   */
   fieldSelector?: string;
-  limit?: number;
-  [prop: string]: any;
+  /**
+   * labelSelector restricts the list of returned objects by their labels. Defaults to everything.
+   *
+   * @see https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#api
+   * @see https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
+   */
+  labelSelector?: string;
+  /**
+   * limit is a maximum number of responses to return for a list call.
+   *
+   * If more items exist, the server will set the continue field on the list
+   * metadata to a value that can be used with the same initial query to retrieve
+   * the next set of results. Setting a limit may return fewer than the requested
+   * amount of items (up to zero items) in the event all requested objects are
+   * filtered out and clients should only use the presence of the continue field
+   * to determine whether more results are available. Servers may choose not to
+   * support the limit argument and will return all of the available results.
+   * If limit is specified and the continue field is empty, clients may assume
+   * that no more results are available.
+   *
+   * This field is not supported if watch is true.
+   * @see https://kubernetes.io/docs/reference/using-api/api-concepts/#retrieving-large-results-sets-in-chunks
+   */
+  limit?: string | number;
+  /**
+   * resourceVersion sets a constraint on what resource versions a request may be served from.
+   * Defaults to unset
+   *
+   * @see https://kubernetes.io/docs/reference/using-api/api-concepts/#efficient-detection-of-changes
+   * @see https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions
+   */
+  resourceVersion?: string;
+  /**
+   * allowWatchBookmarks means watch events with type "BOOKMARK" will also be sent.
+   *
+   * Can be 'true'
+   * @see https://kubernetes.io/docs/reference/using-api/api-concepts/#watch-bookmarks
+   */
+  allowWatchBookmarks?: string;
+  /**
+   * sendInitialEvents controls whether the server will send the events
+   * for a watch before sending the current list state.
+   *
+   * Can be 'true'.
+   * @see https://kubernetes.io/docs/reference/using-api/api-concepts/#streaming-lists
+   */
+  sendInitialEvents?: string;
+  /**
+   * The resource version to match.
+   *
+   * @see https://kubernetes.io/docs/reference/using-api/api-concepts/#semantics-for-get-and-list
+   */
+  resourceVersionMatch?: string;
+  /**
+   * If 'true', then the output is pretty printed.
+   * Can be '' or 'true'
+   * @see https://kubernetes.io/docs/reference/using-api/api-concepts/#output-options
+   */
+  pretty?: string;
+  /**
+   * watch instead of a list or get, watch for changes to the requested object(s).
+   *
+   * Can be 1.
+   * @see https://kubernetes.io/docs/reference/using-api/api-concepts/#efficient-detection-of-changes
+   */
+  watch?: string;
 }
 
-//refreshToken checks if the token is about to expire and refreshes it if so.
+/**
+ * Refreshes the token if it is about to expire.
+ *
+ * @param token - The token to refresh. For null token it just does nothing.
+ *
+ * @note Sets the token with `setToken` if the token is refreshed.
+ * @note Uses global `isTokenRefreshInProgress` to prevent multiple token
+ * refreshes at the same time.
+ */
 async function refreshToken(token: string | null) {
   if (!token || isTokenRefreshInProgress) {
     return;
@@ -132,7 +254,12 @@ async function refreshToken(token: string | null) {
   }
 }
 
-// getClusterAuthType returns the auth type of the cluster.
+/**
+ * @returns Auth type of the cluster, or an empty string if the cluster is not found.
+ * It could return 'oidc' or '' for example.
+ *
+ * @param cluster - Name of the cluster.
+ */
 function getClusterAuthType(cluster: string): string {
   const state = store.getState();
   const authType: string = state.config?.clusters?.[cluster]?.['auth_type'] || '';
@@ -170,19 +297,27 @@ export async function request(
 }
 
 /**
+ * The options for `clusterRequest`.
+ */
+export interface ClusterRequestParams extends RequestParams {
+  cluster?: string | null;
+  autoLogoutOnAuthError?: boolean;
+}
+
+/**
  * Sends a request to the backend. If the cluster is required in the params parameter, it will
  * be used as a request to the respective Kubernetes server.
  *
  * @param path - The path to the API endpoint.
  * @param params - Optional parameters for the request.
- * @param queryParams - Optional query parameters for the request.
+ * @param queryParams - Optional query parameters for the k8s request.
  *
  * @returns A Promise that resolves to the JSON response from the API server.
  * @throws An ApiError if the response status is not ok.
  */
 export async function clusterRequest(
   path: string,
-  params: RequestParams = {},
+  params: ClusterRequestParams = {},
   queryParams?: QueryParameters
 ) {
   interface RequestHeaders {
@@ -279,11 +414,32 @@ export async function clusterRequest(
   return response.json();
 }
 
+// @todo: there should be more specific args and types on StreamResultsCb than '...args: any'.
+
+/** The callback that's called when some results are streamed in. */
 export type StreamResultsCb = (...args: any[]) => void;
+/** The callback that's called when there's an error streaming the results. */
 export type StreamErrCb = (err: Error & { status?: number }, cancelStreamFunc?: () => void) => void;
 
 type ApiFactoryReturn = ReturnType<typeof apiFactory> | ReturnType<typeof apiFactoryWithNamespace>;
 
+// @todo: repeatStreamFunc could be improved for performance by remembering when a URL
+//       is 404 and not trying it again... and again.
+
+/**
+ * Repeats a streaming function call across multiple API endpoints until a
+ * successful response is received or all endpoints have been exhausted.
+ *
+ * This is especially useful for Kubernetes beta APIs that then stabalize.
+ * So the APIs are available at different endpoints on different versions of Kubernetes.
+ *
+ * @param apiEndpoints - An array of API endpoint objects returned by the `apiFactory` function.
+ * @param funcName - The name of the streaming function to call on each endpoint.
+ * @param errCb - A callback function to handle errors that occur during the streaming function call.
+ * @param args - Additional arguments to pass to the streaming function.
+ *
+ * @returns A function that cancels the streaming function call.
+ */
 async function repeatStreamFunc(
   apiEndpoints: ApiFactoryReturn[],
   funcName: keyof ApiFactoryReturn,
@@ -332,6 +488,16 @@ async function repeatStreamFunc(
   };
 }
 
+/**
+ * Repeats a factory method call across multiple API endpoints until a
+ * successful response is received or all endpoints have been exhausted.
+ *
+ * This is especially useful for Kubernetes beta APIs that then stabalize.
+ * @param apiEndpoints - An array of API endpoint objects returned by the `apiFactory` function.
+ * @param funcName - The name of the factory method to call on each endpoint.
+ *
+ * @returns A function that cancels the factory method call.
+ */
 function repeatFactoryMethod(apiEndpoints: ApiFactoryReturn[], funcName: keyof ApiFactoryReturn) {
   return async (...args: Parameters<ApiFactoryReturn[typeof funcName]>) => {
     for (let i = 0; i < apiEndpoints.length; i++) {
@@ -350,6 +516,16 @@ function repeatFactoryMethod(apiEndpoints: ApiFactoryReturn[], funcName: keyof A
   };
 }
 
+// @todo: in apiFactory, and multipleApiFactory use rather than 'args'...
+//        `group: string, version: string, resource: string`
+
+/**
+ * Creates an API client for a single or multiple Kubernetes resources.
+ *
+ * @param args - The arguments to pass to either `singleApiFactory` or `multipleApiFactory`.
+ *
+ * @returns An API client for the specified Kubernetes resource(s).
+ */
 export function apiFactory(
   ...args: Parameters<typeof singleApiFactory> | Parameters<typeof multipleApiFactory>
 ) {
@@ -364,6 +540,15 @@ export function apiFactory(
   return singleApiFactory(...(args as Parameters<typeof singleApiFactory>));
 }
 
+/**
+ * Creates an API endpoint object for multiple API endpoints.
+ * It first tries the first endpoint, then the second, and so on until it
+ * gets a successful response.
+ *
+ * @param args - An array of arguments to pass to the `singleApiFactory` function.
+ *
+ * @returns An API endpoint object.
+ */
 function multipleApiFactory(
   ...args: Parameters<typeof singleApiFactory>[]
 ): ReturnType<typeof singleApiFactory> {
@@ -388,6 +573,15 @@ function multipleApiFactory(
   };
 }
 
+// @todo: singleApiFactory should have a return type rather than just what it returns.
+
+/**
+ * @returns An object with methods for interacting with a single API endpoint.
+ *
+ * @param group - The API group.
+ * @param version - The API version.
+ * @param resource - The API resource.
+ */
 function singleApiFactory(group: string, version: string, resource: string) {
   if (isDebugVerbose('k8s/apiProxy@singleApiFactory')) {
     console.debug('k8s/apiProxy@singleApiFactory', { group, version, resource });
@@ -416,6 +610,9 @@ function singleApiFactory(group: string, version: string, resource: string) {
     isNamespaced: false,
   };
 }
+
+// @todo: just use args from simpleApiFactoryWithNamespace, rather than `args`?
+//        group: string, version: string, resource: string, includeScale: boolean = false
 
 export function apiFactoryWithNamespace(
   ...args:
@@ -471,6 +668,7 @@ function simpleApiFactoryWithNamespace(
   const apiRoot = getApiRoot(group, version);
   const results: {
     scale?: ReturnType<typeof apiScaleFactory>;
+    // @todo: Need to write types for these properties instead.
     [other: string]: any;
   } = {
     list: (
@@ -514,9 +712,30 @@ function simpleApiFactoryWithNamespace(
   }
 }
 
+/**
+ * Converts k8s queryParams to a URL query string.
+ *
+ * @param queryParams - The k8s API query parameters to convert.
+ * @returns The query string (starting with '?'), or empty string.
+ */
 function asQuery(queryParams?: QueryParameters): string {
-  return !!queryParams && !!Object.keys(queryParams).length
-    ? '?' + new URLSearchParams(queryParams).toString()
+  if (queryParams === undefined) {
+    return '';
+  }
+
+  let newQueryParams;
+  if (typeof queryParams.limit === 'number' || typeof queryParams.limit === 'string') {
+    newQueryParams = {
+      ...queryParams,
+      limit:
+        typeof queryParams.limit === 'number' ? queryParams.limit.toString() : queryParams.limit,
+    };
+  } else {
+    newQueryParams = { ..._.omit(queryParams, 'limit') };
+  }
+
+  return !!newQueryParams && !!Object.keys(newQueryParams).length
+    ? '?' + new URLSearchParams(newQueryParams).toString()
     : '';
 }
 
@@ -644,7 +863,7 @@ export function remove(url: string, requestOptions = {}) {
 }
 
 /**
- * Streams the results of a Kubernetes API request.
+ * Streams the results of a Kubernetes API request into a 'cb' callback.
  *
  * @param url - The URL of the Kubernetes API endpoint.
  * @param name - The name of the Kubernetes API resource.
@@ -909,6 +1128,18 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   }
 }
 
+/**
+ * Connects to a WebSocket stream at the specified path and returns an object
+ * with a `close` function and a `socket` property. Sends messages to `cb` callback.
+ *
+ * @param path - The path of the WebSocket stream to connect to.
+ * @param cb - The function to call with each message received from the stream.
+ * @param onFail - The function to call if the stream is closed unexpectedly.
+ * @param isJson - Whether the messages should be parsed as JSON.
+ * @param additionalProtocols - An optional array of additional WebSocket protocols to use.
+ *
+ * @returns An object with a `close` function and a `socket` property.
+ */
 function connectStream(
   path: string,
   cb: StreamResultsCb,
@@ -986,12 +1217,33 @@ function connectStream(
   }
 }
 
+/**
+ * Combines a base path and a path to create a full path.
+ *
+ * Doesn't matter if the start or the end has a single slash, the result will always have a single slash.
+ *
+ * @param base - The base path.
+ * @param path - The path to combine with the base path.
+ *
+ * @returns The combined path.
+ */
 function combinePath(base: string, path: string) {
   if (base.endsWith('/')) base = base.slice(0, -1); // eslint-disable-line no-param-reassign
   if (path.startsWith('/')) path = path.slice(1); // eslint-disable-line no-param-reassign
   return `${base}/${path}`;
 }
 
+// @todo: apply() and other requests return Promise<any> Can we get it to return a better type?
+
+/**
+ * Applies the provided body to the Kubernetes API.
+ *
+ * Tries to POST, and if there's a conflict it does a PUT to the api endpoint.
+ *
+ * @param body - The kubernetes object body to apply.
+ *
+ * @returns The response from the kubernetes API server.
+ */
 export async function apply(body: KubeObjectInterface): Promise<JSON> {
   const bodyToApply = _.cloneDeep(body);
 
@@ -1040,6 +1292,17 @@ export interface ApiError extends Error {
   status: number;
 }
 
+// @todo: is metrics() used anywhere? I can't find so, maybe in a plugin?
+
+/**
+ * Gets the metrics for the specified resource. Gets new metrics every 10 seconds.
+ *
+ * @param url - The url of the resource to get metrics for.
+ * @param onMetrics - The function to call with the metrics.
+ * @param onError - The function to call if there's an error.
+ *
+ * @returns A function to cancel the metrics request.
+ */
 export async function metrics(
   url: string,
   onMetrics: (arg: KubeMetrics[]) => void,
@@ -1104,6 +1367,26 @@ export async function deleteCluster(cluster: string) {
   );
 }
 
+// @todo: Move startPortForward, stopPortForward, and getPortForwardStatus to a portForward.ts
+
+// @todo: the return type is missing for the following functions.
+//       See PortForwardState in PortForward.tsx
+
+/**
+ * Starts a portforward with the given details.
+ *
+ * @param cluster - The cluster to portforward for.
+ * @param namespace - The namespace to portforward for.
+ * @param podname - The pod to portforward for.
+ * @param containerPort - The container port to portforward for.
+ * @param service - The service to portforward for.
+ * @param serviceNamespace - The service namespace to portforward for.
+ * @param port - The port to portforward for.
+ * @param id - The id to portforward for.
+ *
+ * @returns The response from the API.
+ * @throws {Error} if the request fails.
+ */
 export function startPortForward(
   cluster: string,
   namespace: string,
@@ -1140,6 +1423,17 @@ export function startPortForward(
   });
 }
 
+// @todo: stopOrDelete true is confusing, rename this param to justStop?
+/**
+ * Stops or deletes a portforward with the specified details.
+ *
+ * @param cluster - The cluster to portforward for.
+ * @param id - The id to portforward for.
+ * @param stopOrDelete - Whether to stop or delete the portforward. True for stop, false for delete.
+ *
+ * @returns The response from the API.
+ * @throws {Error} if the request fails.
+ */
 export function stopOrDeletePortForward(cluster: string, id: string, stopOrDelete: boolean = true) {
   return fetch(`${helpers.getAppUrl()}portforward`, {
     method: 'DELETE',
@@ -1158,16 +1452,27 @@ export function stopOrDeletePortForward(cluster: string, id: string, stopOrDelet
   );
 }
 
+/**
+ * Lists the port forwards for the specified cluster.
+ *
+ * @param cluster - The cluster to list the port forwards.
+ *
+ * @returns the list of port forwards for the cluster.
+ */
 export function listPortForward(cluster: string) {
   return fetch(`${helpers.getAppUrl()}portforward/list?cluster=${cluster}`).then(response =>
     response.json()
   );
 }
 
+// @todo: Move drainNode and drainNodeStatus to a drainNode.ts
+
 /**
  * Drain a node
- * @param cluster
- * @param nodeName
+ *
+ * @param cluster - The cluster to drain the node
+ * @param nodeName - The node name to drain
+ *
  * @returns {Promise<JSON>}
  * @throws {Error} if the request fails
  * @throws {Error} if the response is not ok
@@ -1198,18 +1503,26 @@ export function drainNode(cluster: string, nodeName: string) {
   });
 }
 
+interface DrainNodeStatus {
+  id: string;
+  cluster: string;
+}
+
 /**
- * Get the status of the drain node process
- * @param cluster
- * @param nodeName
- * @returns {Promise<JSON>}
+ * Get the status of the drain node process.
+ *
+ * It is used in the node detail page.
+ * As draining a node is a long running process, we poll this endpoint to get
+ * the status of the drain node process.
+ *
+ * @param cluster - The cluster to get the status of the drain node process for.
+ * @param nodeName - The node name to get the status of the drain node process for.
+ *
+ * @returns - The response from the API.
  * @throws {Error} if the request fails
  * @throws {Error} if the response is not ok
- *
- * This function is used to get the status of the drain node process. It is used in the node detail page.
- * As draining a node is a long running process, we poll this endpoint to get the status of the drain node process.
  */
-export function drainNodeStatus(cluster: string, nodeName: string) {
+export function drainNodeStatus(cluster: string, nodeName: string): Promise<DrainNodeStatus> {
   return fetch(`${helpers.getAppUrl()}drain-node-status?cluster=${cluster}&nodeName=${nodeName}`, {
     method: 'GET',
     headers: new Headers({
@@ -1217,7 +1530,7 @@ export function drainNodeStatus(cluster: string, nodeName: string) {
       ...JSON_HEADERS,
     }),
   }).then(response => {
-    return response.json().then(data => {
+    return response.json().then((data: DrainNodeStatus) => {
       if (!response.ok) {
         throw new Error('Something went wrong');
       }
