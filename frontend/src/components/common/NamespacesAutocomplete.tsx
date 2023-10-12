@@ -12,7 +12,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import helpers, { addQuery } from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import Namespace from '../../lib/k8s/namespace';
-import { setNamespaceFilter } from '../../redux/actions/actions';
+import { setNamespaceFilter } from '../../redux/filterSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
 export interface PureNamespacesAutocompleteProps {

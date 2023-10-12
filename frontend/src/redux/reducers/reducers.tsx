@@ -4,12 +4,12 @@ import pluginsReducer from '../../plugin/pluginsSlice';
 import actionButtons from '../actionButtonsSlice';
 import configReducer from '../configSlice';
 import detailsViewSectionsSlice from '../detailsViewSectionsSlice';
+import filterReducer from '../filterSlice';
 import clusterAction from './clusterAction';
-import filter from './filter';
 import uiReducer from './ui';
 
 const reducers = combineReducers({
-  filter: filter,
+  filter: filterReducer,
   ui: uiReducer,
   clusterAction: clusterAction,
   config: configReducer,
