@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../lib/k8s/cluster';
 import Event, { KubeEvent } from '../../lib/k8s/event';
 import { localeDate, timeAgo } from '../../lib/util';
+import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { HoverInfoLabel, SectionBox, SimpleTable } from '../common';
 import ShowHideLabel from './ShowHideLabel';
 
@@ -11,7 +12,14 @@ export interface ObjectEventListProps {
 }
 
 export default function ObjectEventList(props: ObjectEventListProps) {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<Event[]>([]);
+  const dispatchEventList = useEventCallback(HeadlampEventType.OBJECT_EVENTS);
+
+  useEffect(() => {
+    if (events) {
+      dispatchEventList(events, props.object);
+    }
+  }, [events]);
 
   async function fetchEvents() {
     const events = await Event.objectEvents(props.object);

@@ -13,6 +13,7 @@ import { Terminal as XTerminal } from 'xterm';
 import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
 import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
+import { EventStatus, HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { ActionButton, LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
@@ -399,6 +400,7 @@ export default function PodDetails(props: PodDetailsProps) {
   const [showTerminal, setShowTerminal] = React.useState(false);
   const { t } = useTranslation('glossary');
   const [isAttached, setIsAttached] = React.useState(false);
+  const dispatchHeadlampEvent = useEventCallback();
 
   return (
     <DetailsGrid
@@ -416,7 +418,15 @@ export default function PodDetails(props: PodDetailsProps) {
                   description={t('Show Logs')}
                   aria-label={t('logs')}
                   icon="mdi:file-document-box-outline"
-                  onClick={() => setShowLogs(true)}
+                  onClick={() => {
+                    setShowLogs(true);
+                    dispatchHeadlampEvent({
+                      type: HeadlampEventType.LOGS,
+                      data: {
+                        status: EventStatus.OPENED,
+                      },
+                    });
+                  }}
                 />
               </AuthVisible>
             ),
@@ -429,7 +439,16 @@ export default function PodDetails(props: PodDetailsProps) {
                   description={t('Terminal / Exec')}
                   aria-label={t('terminal')}
                   icon="mdi:console"
-                  onClick={() => setShowTerminal(true)}
+                  onClick={() => {
+                    setShowTerminal(true);
+                    dispatchHeadlampEvent({
+                      type: HeadlampEventType.TERMINAL,
+                      data: {
+                        resource: item,
+                        status: EventStatus.CLOSED,
+                      },
+                    });
+                  }}
                 />
               </AuthVisible>
             ),
@@ -442,7 +461,16 @@ export default function PodDetails(props: PodDetailsProps) {
                   description={t('Attach')}
                   aria-label={t('attach')}
                   icon="mdi:connection"
-                  onClick={() => setIsAttached(true)}
+                  onClick={() => {
+                    setIsAttached(true);
+                    dispatchHeadlampEvent({
+                      type: HeadlampEventType.POD_ATTACH,
+                      data: {
+                        resource: item,
+                        status: EventStatus.OPENED,
+                      },
+                    });
+                  }}
                 />
               </AuthVisible>
             ),
@@ -525,7 +553,16 @@ export default function PodDetails(props: PodDetailsProps) {
                 key="logs"
                 open={showLogs}
                 item={item}
-                onClose={() => setShowLogs(false)}
+                onClose={() => {
+                  dispatchHeadlampEvent({
+                    type: HeadlampEventType.LOGS,
+                    data: {
+                      resource: item,
+                      status: EventStatus.CLOSED,
+                    },
+                  });
+                  setShowLogs(false);
+                }}
               />
             ),
           },
@@ -538,6 +575,13 @@ export default function PodDetails(props: PodDetailsProps) {
                 item={item}
                 onClose={() => {
                   setShowTerminal(false);
+                  dispatchHeadlampEvent({
+                    type: HeadlampEventType.TERMINAL,
+                    data: {
+                      resource: item,
+                      status: EventStatus.CLOSED,
+                    },
+                  });
                   setIsAttached(false);
                 }}
                 isAttach={isAttached}

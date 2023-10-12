@@ -5,6 +5,8 @@
  */
 import semver from 'semver';
 import helpers from '../helpers';
+import { eventAction, HeadlampEventType } from '../redux/headlampEventSlice';
+import store from '../redux/stores/store';
 import { Headlamp, Plugin } from './lib';
 import { PluginInfo } from './pluginsSlice';
 import Registry, * as registryToExport from './registry';
@@ -288,8 +290,30 @@ export async function fetchAndExecutePlugins(
       } catch (e) {
         // We just continue if there is an error.
         console.error(`Plugin execution error in ${pluginPaths[index]}:`, e);
+        store.dispatch(
+          eventAction({
+            type: HeadlampEventType.PLUGIN_LOADING_ERROR,
+            data: {
+              pluginInfo: { name: packageInfos[index].name, version: packageInfos[index].version },
+              error: e,
+            },
+          })
+        );
       }
     }).call({}, source);
   });
   await initializePlugins();
+
+  const pluginsLoaded = updatedSettingsPackages.map(plugin => ({
+    name: plugin.name,
+    version: plugin.version,
+    isEnabled: plugin.isEnabled,
+  }));
+
+  store.dispatch(
+    eventAction({
+      type: HeadlampEventType.PLUGINS_LOADED,
+      data: { plugins: pluginsLoaded },
+    })
+  );
 }
