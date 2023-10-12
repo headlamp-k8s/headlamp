@@ -4,7 +4,23 @@ linktitle: Windows
 weight: 20
 ---
 
-Headlamp is available for Windows as a direct download from its [releases page](https://github.com/kinvolk/headlamp/releases) on Github (.exe file) and from the [Chocolatey](https://chocolatey.org/) package registry.
+Headlamp is available for Windows as a direct download from its [releases page](https://github.com/kinvolk/headlamp/releases) on Github (.exe file) and from package registries
+like [Winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) and [Chocolatey](https://chocolatey.org/).
+
+## Install via Winget
+
+To install Headlamp from the Winget registry. Simply run the following command:
+```powershell
+winget install headlamp
+```
+
+### Upgrading
+
+To upgrade Headlamp when its installed with Winget, run the command:
+```powershell
+winget upgrade headlamp
+```
+
 
 ## Install via Chocolatey
 
