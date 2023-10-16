@@ -1,6 +1,5 @@
 {
   "Whoops! This page doesn't exist": "Ups! Esta página não existe",
-  "Head back <1>home</1>.": "Voltar ao <1>início</1>.",
   "Authentication: {{ clusterName }}": "Autenticação: {{ clusterName }}",
   "Authentication": "Autenticação",
   "Please paste your authentication token.": "Please paste your authentication token.",
@@ -117,6 +116,8 @@
   "Yes": "Sim",
   "Toggle fullscreen": "Alternar ecrã inteiro",
   "Close": "Fechar",
+  "Uh-oh! Something went wrong.": "Oh-oh! Algo correu mal.",
+  "Head back <1>home</1>.": "Voltar ao <1>início</1>.",
   "Find": "Pesquisar",
   "Download": "Descarregar",
   "No results": "Sem resultados",

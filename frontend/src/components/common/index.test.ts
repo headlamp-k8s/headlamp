@@ -22,6 +22,7 @@ const checkExports = [
   'ConfirmDialog',
   'Dialog',
   'EmptyContent',
+  'ErrorPage',
   'InnerTable',
   'Label',
   'LabelListItem',

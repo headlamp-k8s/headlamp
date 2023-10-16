@@ -41,3 +41,5 @@ export { default as TileChart } from './TileChart';
 export * from './TimezoneSelect';
 export { default as BackLink, default as TimezoneSelect } from './TimezoneSelect';
 export * from './Tooltip';
+export { default as ErrorPage } from './ErrorPage';
+export * from './ErrorPage';
