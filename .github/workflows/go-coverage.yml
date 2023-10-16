@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/backend
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v3
@@ -18,7 +21,7 @@ jobs:
       - name: Try the cluster!
         run: kubectl get pods -A
       - name: generate test coverage
-        run: cd backend && ls && go test ./... -coverprofile=./cover.out
+        run: ls && go test ./... -coverprofile=./cover.out
       - name: cat cover.out
         run: cat ./backend/cover.out
       - name: check test coverage
