@@ -15,37 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v3
+      - name: Install dependencies
+        run: go mod download
+      - name: Install go-test-coverage
+        run: go install github.com/vladopajic/go-test-coverage/v2@latest
       - name: Start cluster
         uses: medyagh/setup-minikube@master
         # now you can run kubectl to see the pods in the cluster
       - name: Try the cluster!
         run: kubectl get pods -A
-      - name: Test
-        run: go test -v ./...
-      - name: Update coverage report
-        uses: ncruces/go-coverage-report@v0
-        with:
-          report: 'true'
-          chart: 'true'
-          amend: 'true'
-          reuse-go: 'true'
-        # if: |
-        #   matrix.os == 'ubuntu-latest'
-        continue-on-error: true
-      # - name: generate test coverage
-      #   run: ls && go test ./... -coverprofile=./cover.out
-      # - name: cat cover.out
-      #   run: cat ./cover.out
-      # - name: check test coverage
-      #   uses: vladopajic/go-test-coverage@v2
-      #   env:
-      #     RUNNER_WORKSPACE: ${{ github.workspace }}/backend
-      #   with:
-      #     # Configure action using config file (option 1)
-      #     # config: ./.testcoverage.yml
-      #     # Configure action by specifying input parameters individually (option 2)
-      #     profile: ./backend/cover.out
-      #     local-prefix: github.com/headlamp-k8s/headlamp/backend
-      #     threshold-file: 80
-      #     threshold-package: 80
-      #     threshold-total: 95
+      - name: Test coverage
+        run: go test -coverprofile=coverage.out ./...
+      - name: Coverage report 
+        run: 	${GOBIN}/go-test-coverage --profile=cover.out --local-prefix="github.com/headlamp-k8s/headlamp/backend"
