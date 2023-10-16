@@ -23,7 +23,7 @@ jobs:
       - name: generate test coverage
         run: ls && go test ./... -coverprofile=./cover.out
       - name: cat cover.out
-        run: cat ./backend/cover.out
+        run: cat ./cover.out
       - name: check test coverage
         uses: vladopajic/go-test-coverage@v2
         env:
