@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - 'backend/**'
-  workflow_dispatch:
 
 jobs:
   build:
@@ -25,6 +24,9 @@ jobs:
       - name: Try the cluster!
         run: kubectl get pods -A
       - name: Test coverage
-        run: go test -coverprofile=coverage.out ./...
+        run: HEADLAMP_RUN_INTEGRATION_TESTS=true go test -coverprofile=coverage.out ./...
       - name: Coverage report 
-        run: 	~/go/bin/go-test-coverage --profile=coverage.out --local-prefix="github.com/headlamp-k8s/headlamp/backend"
+        run: 	~/go/bin/go-test-coverage --profile=coverage.out --local-prefix="github.com/headlamp-k8s/headlamp/backend" > report.txt
+      - name: Comment code coverage on PR
+        run: |
+          gh pr comment ${{ github.event.number }} --body "$(cat report.txt)"
