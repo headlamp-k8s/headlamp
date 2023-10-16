@@ -27,4 +27,4 @@ jobs:
       - name: Test coverage
         run: go test -coverprofile=coverage.out ./...
       - name: Coverage report 
-        run: 	${GOBIN}/go-test-coverage --profile=cover.out --local-prefix="github.com/headlamp-k8s/headlamp/backend"
+        run: 	~/go/bin/go-test-coverage --profile=cover.out --local-prefix="github.com/headlamp-k8s/headlamp/backend"
