@@ -22,19 +22,16 @@ interface WorkloadDict {
 }
 
 export default function Overview() {
-  const [workloadsData, dispatch] = React.useReducer(setWorkloads, {});
+  const [workloadsData, setWorkloadsData] = React.useState<WorkloadDict>({});
   const location = useLocation();
   const filterFunc = useFilterFunc(['.jsonData.kind']);
   const { t } = useTranslation('glossary');
 
-  function setWorkloads(
-    workloads: WorkloadDict,
-    { items, kind }: { items: Workload[]; kind: string }
-  ) {
-    const data = { ...workloads };
-    data[kind] = items;
-
-    return data;
+  function setWorkloads(newWorkloads: WorkloadDict) {
+    setWorkloadsData(workloads => ({
+      ...workloads,
+      ...newWorkloads,
+    }));
   }
 
   function getPods(item: Workload) {
@@ -79,11 +76,12 @@ export default function Overview() {
   ];
   workloads.forEach((workloadClass: KubeObject) => {
     workloadClass.useApiList(
-      (items: InstanceType<typeof workloadClass>[]) =>
-        dispatch({ items, kind: workloadClass.className }),
+      (items: InstanceType<typeof workloadClass>[]) => {
+        setWorkloads({ [workloadClass.className]: items });
+      },
       (err: ApiError) => {
         console.error(`Workloads list: Failed to get list for ${workloadClass.className}: ${err}`);
-        dispatch({ items: [], kind: workloadClass.className });
+        setWorkloads({ [workloadClass.className]: [] });
       }
     );
   });
