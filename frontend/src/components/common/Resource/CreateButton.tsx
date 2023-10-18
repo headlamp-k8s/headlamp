@@ -20,7 +20,7 @@ export default function CreateButton(props: CreateButtonProps) {
   const [openDialog, setOpenDialog] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
   const location = useLocation();
-  const { t } = useTranslation(['resource', 'frequent']);
+  const { t } = useTranslation(['translation']);
 
   const applyFunc = async (newItems: KubeObjectInterface[]) => {
     await Promise.allSettled(newItems.map(newItem => apply(newItem))).then((values: any) => {
@@ -31,9 +31,9 @@ export default function CreateButton(props: CreateButtonProps) {
           const name = newItems[index].metadata.name;
           const apiVersion = newItems[index].apiVersion;
           if (newItems.length === 1) {
-            msg = t('resource|Failed to create {{ kind }} {{ name }}.', { kind, name });
+            msg = t('translation|Failed to create {{ kind }} {{ name }}.', { kind, name });
           } else {
-            msg = t('resource|Failed to create {{ kind }} {{ name }} in {{ apiVersion }}.', {
+            msg = t('translation|Failed to create {{ kind }} {{ name }} in {{ apiVersion }}.', {
               kind,
               name,
               apiVersion,
@@ -60,12 +60,12 @@ export default function CreateButton(props: CreateButtonProps) {
       }
       if (!massagedNewItemDefs[i].metadata?.name) {
         setErrorMessage(
-          t(`resource|Invalid: One or more of resources doesn't have a name property`)
+          t(`translation|Invalid: One or more of resources doesn't have a name property`)
         );
         return;
       }
       if (!massagedNewItemDefs[i].kind) {
-        setErrorMessage(t('resource|Invalid: Please set a kind to the resource'));
+        setErrorMessage(t('translation|Invalid: Please set a kind to the resource'));
         return;
       }
     }
@@ -74,16 +74,16 @@ export default function CreateButton(props: CreateButtonProps) {
     setOpenDialog(false);
     dispatch(
       clusterAction(() => applyFunc(massagedNewItemDefs), {
-        startMessage: t('resource|Applying {{ newItemName }}…', {
+        startMessage: t('translation|Applying {{ newItemName }}…', {
           newItemName: resourceNames.join(','),
         }),
-        cancelledMessage: t('resource|Cancelled applying {{ newItemName }}.', {
+        cancelledMessage: t('translation|Cancelled applying {{ newItemName }}.', {
           newItemName: resourceNames.join(','),
         }),
-        successMessage: t('resource|Applied {{ newItemName }}.', {
+        successMessage: t('translation|Applied {{ newItemName }}.', {
           newItemName: resourceNames.join(','),
         }),
-        errorMessage: t('resource|Failed to apply {{ newItemName }}.', {
+        errorMessage: t('translation|Failed to apply {{ newItemName }}.', {
           newItemName: resourceNames.join(','),
         }),
         cancelUrl,
@@ -95,7 +95,7 @@ export default function CreateButton(props: CreateButtonProps) {
     <React.Fragment>
       {isNarrow ? (
         <ActionButton
-          description={t('frequent|Create / Apply')}
+          description={t('translation|Create / Apply')}
           onClick={() => setOpenDialog(true)}
           icon="mdi:plus-box"
           width="48"
@@ -110,7 +110,7 @@ export default function CreateButton(props: CreateButtonProps) {
           color="primary"
           variant="contained"
         >
-          {t('frequent|Create')}
+          {t('translation|Create')}
         </Button>
       )}
       <EditorDialog
@@ -118,10 +118,10 @@ export default function CreateButton(props: CreateButtonProps) {
         open={openDialog}
         onClose={() => setOpenDialog(false)}
         onSave={handleSave}
-        saveLabel={t('frequent|Apply')}
+        saveLabel={t('translation|Apply')}
         errorMessage={errorMessage}
         onEditorChanged={() => setErrorMessage('')}
-        title={t('frequent|Create / Apply')}
+        title={t('translation|Create / Apply')}
       />
     </React.Fragment>
   );

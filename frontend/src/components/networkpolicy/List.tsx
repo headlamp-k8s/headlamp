@@ -4,7 +4,7 @@ import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export function NetworkPolicyList() {
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary']);
   return (
     <ResourceListView
       title={t('Network Policies')}
@@ -14,7 +14,7 @@ export function NetworkPolicyList() {
         'namespace',
         {
           id: 'type',
-          label: t('Type'),
+          label: t('translation|Type'),
           getter: networkpolicy => {
             console.log(networkpolicy);
             const isIngressAvailable =

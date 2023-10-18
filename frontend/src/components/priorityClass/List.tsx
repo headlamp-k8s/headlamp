@@ -3,7 +3,7 @@ import PriorityClass from '../../lib/k8s/priorityClass';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function PriorityClassList() {
-  const { t } = useTranslation(['glossary', 'priorityClasses']);
+  const { t } = useTranslation(['glossary']);
 
   return (
     <ResourceListView
@@ -13,13 +13,13 @@ export default function PriorityClassList() {
         'name',
         {
           id: 'value',
-          label: t('frequent|Value'),
+          label: t('translation|Value'),
           getter: item => item.value,
           sort: true,
         },
         {
           id: 'globalDefault',
-          label: t('priorityClasses|Global Default'),
+          label: t('translation|Global Default'),
           getter: item => item.globalDefault || 'False',
           sort: true,
         },

@@ -2,7 +2,6 @@ import { Icon } from '@iconify/react';
 import IconButton from '@material-ui/core/IconButton';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import i18next from 'i18next';
-import React from 'react';
 import TooltipLight, { TooltipLightProps } from './TooltipLight';
 
 export default {
@@ -16,7 +15,7 @@ export const Add = Template.bind({});
 Add.args = {
   title: 'Add',
   children: (
-    <IconButton aria-label={i18next.t('frequent|Add')}>
+    <IconButton aria-label={i18next.t('translation|Add')}>
       <Icon color="#adadad" icon="mdi:plus-circle" width="48" />
     </IconButton>
   ),

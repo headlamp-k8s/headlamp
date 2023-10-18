@@ -17,7 +17,7 @@ export default function ObjectEventList(props: ObjectEventListProps) {
     const events = await Event.objectEvents(props.object);
     setEvents(events);
   }
-  const { t } = useTranslation(['frequent']);
+  const { t } = useTranslation(['translation', 'glossary']);
 
   useEffect(() => {
     fetchEvents();
@@ -28,25 +28,25 @@ export default function ObjectEventList(props: ObjectEventListProps) {
       <SimpleTable
         columns={[
           {
-            label: t('frequent|Type'),
+            label: t('Type'),
             getter: item => {
               return item.type;
             },
           },
           {
-            label: t('frequent|Reason'),
+            label: t('Reason'),
             getter: item => {
               return item.reason;
             },
           },
           {
-            label: t('frequent|From'),
+            label: t('From'),
             getter: item => {
               return item.source.component;
             },
           },
           {
-            label: t('frequent|Message'),
+            label: t('Message'),
             getter: item => {
               return (
                 item && (
@@ -58,7 +58,7 @@ export default function ObjectEventList(props: ObjectEventListProps) {
             },
           },
           {
-            label: t('frequent|Age'),
+            label: t('Age'),
             getter: item => {
               if (item.count > 1) {
                 return `${timeAgo(item.lastTimestamp)} (${item.count} times over ${timeAgo(
@@ -68,14 +68,11 @@ export default function ObjectEventList(props: ObjectEventListProps) {
               const eventDate = timeAgo(item.lastTimestamp, { format: 'mini' });
               let label: string;
               if (item.count > 1) {
-                label = t(
-                  'resource|{{ eventDate }} ({{ count }} times since {{ firstEventDate }})',
-                  {
-                    eventDate,
-                    count: item.count,
-                    firstEventDate: timeAgo(item.firstTimestamp),
-                  }
-                );
+                label = t('{{ eventDate }} ({{ count }} times since {{ firstEventDate }})', {
+                  eventDate,
+                  count: item.count,
+                  firstEventDate: timeAgo(item.firstTimestamp),
+                });
               } else {
                 label = eventDate;
               }

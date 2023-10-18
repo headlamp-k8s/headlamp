@@ -80,7 +80,7 @@ export function LogViewer(props: LogViewerProps) {
   } = props;
   const [isFullScreen, setIsFullScreen] = React.useState(false);
   const classes = useStyle({ isFullScreen });
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const xtermRef = React.useRef<XTerminal | null>(null);
   const fitAddonRef = React.useRef<any>(null);
   const searchAddonRef = React.useRef<any>(null);
@@ -185,14 +185,14 @@ export function LogViewer(props: LogViewerProps) {
           </Grid>
           <Grid item xs>
             <ActionButton
-              description={t('frequent|Find')}
+              description={t('translation|Find')}
               onClick={() => setShowSearch(show => !show)}
               icon="mdi:magnify"
             />
           </Grid>
           <Grid item xs>
             <ActionButton
-              description={t('frequent|Clear')}
+              description={t('translation|Clear')}
               onClick={() => clearPodLogs(xtermRef)}
               icon="mdi:broom"
             />
@@ -332,7 +332,7 @@ export function SearchPopover(props: SearchPopoverProps) {
   const [caseSensitiveChecked, setCaseSensitiveChecked] = React.useState<boolean>(false);
   const [wholeWordMatchChecked, setWholeWordMatchChecked] = React.useState<boolean>(false);
   const [regexChecked, setRegexChecked] = React.useState<boolean>(false);
-  const { t } = useTranslation(['search', 'frequent']);
+  const { t } = useTranslation(['translation']);
   const focusedRef = React.useCallback(
     node => {
       if (open && !!node) {
@@ -421,16 +421,16 @@ export function SearchPopover(props: SearchPopoverProps) {
     let className = classes.grayText;
     let msg = '';
     if (!searchText) {
-      msg = t('search|No results');
+      msg = t('translation|No results');
     } else if (!searchResult) {
-      msg = t('search|Too many matches');
+      msg = t('translation|Too many matches');
       className = classes.redText;
     } else {
       if (searchResult.resultCount === 0) {
-        msg = t('search|No results');
+        msg = t('translation|No results');
         className = classes.redText;
       } else {
-        msg = t('search|{{ currentIndex }} of {{ totalResults }}', {
+        msg = t('translation|{{ currentIndex }} of {{ totalResults }}', {
           currentIndex:
             searchResult?.resultIndex !== undefined ? searchResult?.resultIndex + 1 : '?',
           totalResults:
@@ -450,7 +450,7 @@ export function SearchPopover(props: SearchPopoverProps) {
         <InputBase
           value={searchText}
           onChange={onSearchTextChange}
-          placeholder={t('frequent|Find')}
+          placeholder={t('translation|Find')}
           inputProps={{ autoComplete: 'off', type: 'text', name: randomId, id: randomId }}
           onKeyDown={handleInputKeyDown}
           inputRef={focusedRef}
@@ -458,7 +458,7 @@ export function SearchPopover(props: SearchPopoverProps) {
         <ActionButton
           icon="mdi:format-letter-case"
           onClick={() => setCaseSensitiveChecked(!caseSensitiveChecked)}
-          description={t('search|Match case')}
+          description={t('translation|Match case')}
           iconButtonProps={{
             className: caseSensitiveChecked ? 'checked' : '',
           }}
@@ -466,7 +466,7 @@ export function SearchPopover(props: SearchPopoverProps) {
         <ActionButton
           icon="mdi:format-letter-matches"
           onClick={() => setWholeWordMatchChecked(!wholeWordMatchChecked)}
-          description={t('search|Match whole word')}
+          description={t('translation|Match whole word')}
           iconButtonProps={{
             className: wholeWordMatchChecked ? 'checked' : '',
           }}
@@ -474,7 +474,7 @@ export function SearchPopover(props: SearchPopoverProps) {
         <ActionButton
           icon="mdi:regex"
           onClick={() => setRegexChecked(!regexChecked)}
-          description={t('search|Use regular expression')}
+          description={t('translation|Use regular expression')}
           iconButtonProps={{
             className: regexChecked ? 'checked' : '',
           }}
@@ -485,7 +485,7 @@ export function SearchPopover(props: SearchPopoverProps) {
         <ActionButton
           icon="mdi:arrow-up"
           onClick={handleFindPrevious}
-          description={t('search|Previous Match (Shift+Enter)')}
+          description={t('translation|Previous Match (Shift+Enter)')}
           iconButtonProps={{
             disabled: !searchResult?.resultCount && searchResult?.resultCount !== undefined,
           }}
@@ -493,12 +493,12 @@ export function SearchPopover(props: SearchPopoverProps) {
         <ActionButton
           icon="mdi:arrow-down"
           onClick={handleFindNext}
-          description={t('search|Next Match (Enter)')}
+          description={t('translation|Next Match (Enter)')}
           iconButtonProps={{
             disabled: !searchResult?.resultCount && searchResult?.resultCount !== undefined,
           }}
         />
-        <ActionButton icon="mdi:close" onClick={handleClose} description={t('frequent|Close')} />
+        <ActionButton icon="mdi:close" onClick={handleClose} description={t('translation|Close')} />
       </div>
     </Paper>
   );

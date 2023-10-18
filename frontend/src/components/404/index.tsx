@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function NotFoundComponent() {
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const classes = useStyles();
   return (
     <Grid

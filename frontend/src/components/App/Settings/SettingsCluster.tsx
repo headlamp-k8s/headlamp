@@ -49,7 +49,7 @@ function isValidNamespaceFormat(namespace: string) {
 export default function SettingsCluster() {
   const cluster = useCluster();
   const clusterConf = useClustersConf();
-  const { t } = useTranslation(['settings', 'frequent', 'cluster']);
+  const { t } = useTranslation(['translation']);
   const [defaultNamespace, setDefaultNamespace] = React.useState('');
   const [newAllowedNamespace, setNewAllowedNamespace] = React.useState('');
   const [clusterSettings, setClusterSettings] = React.useState<ClusterSettings | null>(null);
@@ -156,7 +156,7 @@ export default function SettingsCluster() {
   const isValidDefaultNamespace = isValidNamespaceFormat(defaultNamespace);
   const isValidNewAllowedNamespace = isValidNamespaceFormat(newAllowedNamespace);
   const invalidNamespaceMessage = t(
-    "cluster|Namespaces must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character."
+    "translation|Namespaces must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character."
   );
 
   return (
@@ -164,8 +164,8 @@ export default function SettingsCluster() {
       <SectionBox
         title={
           Object.keys(clusterConf || {}).length > 1
-            ? t('settings|Cluster Settings ({{ clusterName }})', { clusterName: cluster || '' })
-            : t('settings|Cluster Settings')
+            ? t('translation|Cluster Settings ({{ clusterName }})', { clusterName: cluster || '' })
+            : t('translation|Cluster Settings')
         }
         backLink
         headerProps={{
@@ -175,7 +175,7 @@ export default function SettingsCluster() {
               align="right"
               style={{ color: theme.palette.text.primary }}
             >
-              {t('settings|General Settings')}
+              {t('translation|General Settings')}
             </Link>,
           ],
         }}
@@ -183,7 +183,7 @@ export default function SettingsCluster() {
         <NameValueTable
           rows={[
             {
-              name: t('cluster|Default namespace'),
+              name: t('translation|Default namespace'),
               value: (
                 <TextField
                   onChange={event => {
@@ -197,7 +197,7 @@ export default function SettingsCluster() {
                   helperText={
                     isValidDefaultNamespace
                       ? t(
-                          'cluster|The default namespace for e.g. when applying resources (when not specified directly).'
+                          'translation|The default namespace for e.g. when applying resources (when not specified directly).'
                         )
                       : invalidNamespaceMessage
                   }
@@ -217,7 +217,7 @@ export default function SettingsCluster() {
               ),
             },
             {
-              name: t('cluster|Allowed namespaces'),
+              name: t('translation|Allowed namespaces'),
               value: (
                 <>
                   <TextField
@@ -232,7 +232,7 @@ export default function SettingsCluster() {
                     helperText={
                       isValidNewAllowedNamespace
                         ? t(
-                            'cluster|The list of namespaces you are allowed to access in this cluster.'
+                            'translation|The list of namespaces you are allowed to access in this cluster.'
                           )
                         : invalidNamespaceMessage
                     }
@@ -262,7 +262,7 @@ export default function SettingsCluster() {
                       className: classes.input,
                     }}
                   />
-                  <Box className={classes.chipBox} aria-label={t('cluster|Allowed namespaces')}>
+                  <Box className={classes.chipBox} aria-label={t('translation|Allowed namespaces')}>
                     {((clusterSettings || {}).allowedNamespaces || []).map(namespace => (
                       <Chip
                         key={namespace}
@@ -292,13 +292,13 @@ export default function SettingsCluster() {
           <ConfirmButton
             color="secondary"
             onConfirm={() => removeCluster()}
-            confirmTitle={t('cluster|Remove Cluster')}
+            confirmTitle={t('translation|Remove Cluster')}
             confirmDescription={t(
-              'cluster|Are you sure you want to remove the cluster "{{ clusterName }}"?',
+              'translation|Are you sure you want to remove the cluster "{{ clusterName }}"?',
               { clusterName: cluster }
             )}
           >
-            {t('cluster|Remove Cluster')}
+            {t('translation|Remove Cluster')}
           </ConfirmButton>
         </Box>
       )}

@@ -62,7 +62,7 @@ interface Config {
 function ClusterNotFoundPopup() {
   const theme = useTheme();
   const cluster = getCluster();
-  const { t } = useTranslation('cluster');
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -92,7 +92,7 @@ export default function Layout({}: LayoutProps) {
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const clusterInURL = getCluster();
 
   useEffect(() => {

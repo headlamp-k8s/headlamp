@@ -31,7 +31,7 @@ export default function RoleBindingDetails() {
             value: item.roleRef.name,
           },
           {
-            name: t('role|Ref. API Group'),
+            name: t('Ref. API Group'),
             value: item.roleRef.apiGroup,
           },
         ]
@@ -50,7 +50,7 @@ export default function RoleBindingDetails() {
                       getter: item => item.kind,
                     },
                     {
-                      label: t('frequent|Name'),
+                      label: t('translation|Name'),
                       getter: item =>
                         // item can hold a reference to non kube Objects
                         // such as user and group names, in that case

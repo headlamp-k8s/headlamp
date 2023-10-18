@@ -57,7 +57,7 @@ export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
 }
 
 function RouteComponent({ route }: { route: RouteType }) {
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(setHideAppBar(route.hideAppBar));

@@ -177,7 +177,9 @@ function KubeConfigLoader() {
           })
           .catch(e => {
             console.debug('Error setting up clusters from kubeconfig:', e);
-            setError(t('cluster|Error setting up clusters, please load a valid kubeconfig file'));
+            setError(
+              t('translation|Error setting up clusters, please load a valid kubeconfig file')
+            );
             setState(Step.SelectClusters);
           });
       }
@@ -187,14 +189,14 @@ function KubeConfigLoader() {
   }, [state]);
 
   const dispatch = useDispatch();
-  const { t } = useTranslation(['cluster', 'frequent']);
+  const { t } = useTranslation(['translation']);
 
   const classes = useStyles();
 
   const onDrop = (acceptedFiles: Blob[]) => {
     setError('');
     const reader = new FileReader();
-    reader.onerror = () => setError(t("cluster|Couldn't read kubeconfig file"));
+    reader.onerror = () => setError(t("translation|Couldn't read kubeconfig file"));
     reader.onload = () => {
       try {
         const data = String.fromCharCode.apply(null, [
@@ -206,7 +208,7 @@ function KubeConfigLoader() {
         }
         setFileContent(doc);
       } catch (err) {
-        setError(t('cluster|Load a valid kubeconfig'));
+        setError(t('translation|Load a valid kubeconfig'));
         return;
       }
     };
@@ -244,7 +246,7 @@ function KubeConfigLoader() {
               <FormControl>
                 <input {...getInputProps()} />
                 <Tooltip
-                  title={t('cluster|Drag & drop or choose kubeconfig file here')}
+                  title={t('translation|Drag & drop or choose kubeconfig file here')}
                   placement="top"
                 >
                   <Button
@@ -252,14 +254,14 @@ function KubeConfigLoader() {
                     onClick={() => open}
                     startIcon={<InlineIcon icon="mdi:upload" width={32} />}
                   >
-                    {t('cluster|Choose file')}
+                    {t('translation|Choose file')}
                   </Button>
                 </Tooltip>
               </FormControl>
             </Box>
             <Box style={{ display: 'flex', justifyContent: 'center' }}>
               <Button onClick={() => history.goBack()} className={classes.wideButton}>
-                {t('frequent|Back')}
+                {t('translation|Back')}
               </Button>
             </Box>
           </Box>
@@ -275,7 +277,7 @@ function KubeConfigLoader() {
               alignItems: 'center',
             }}
           >
-            <Typography>{t('cluster|Select clusters')}</Typography>
+            <Typography>{t('translation|Select clusters')}</Typography>
             {fileContent.clusters ? (
               <>
                 <Box className={classes.selectorBox}>
@@ -315,7 +317,7 @@ function KubeConfigLoader() {
                         className={clsx(classes.wideButton, classes.blackButton)}
                         disabled={selectedClusters.length === 0}
                       >
-                        {t('frequent|Next')}
+                        {t('translation|Next')}
                       </Button>
                     </Grid>
                     <Grid item>
@@ -326,7 +328,7 @@ function KubeConfigLoader() {
                         }}
                         className={classes.wideButton}
                       >
-                        {t('frequent|Back')}
+                        {t('translation|Back')}
                       </Button>
                     </Grid>
                   </Grid>
@@ -338,22 +340,22 @@ function KubeConfigLoader() {
       case Step.ConfigureClusters:
         return (
           <Box style={{ textAlign: 'center' }}>
-            <Typography>{t('cluster|Setting up clusters')}</Typography>
-            <Loader title={t('cluster|Setting up clusters')} />
+            <Typography>{t('translation|Setting up clusters')}</Typography>
+            <Loader title={t('translation|Setting up clusters')} />
           </Box>
         );
       case Step.Success:
         return (
           <Box className={classes.centeredBox}>
             <Box style={{ padding: '32px' }}>
-              <Typography>{t('cluster|Clusters successfully set up!')}</Typography>
+              <Typography>{t('translation|Clusters successfully set up!')}</Typography>
             </Box>
             <Button
               variant="contained"
               className={clsx(classes.wideButton, classes.blackButton)}
               onClick={() => history.replace('/')}
             >
-              {t('frequent|Finish')}
+              {t('translation|Finish')}
             </Button>
           </Box>
         );
@@ -367,7 +369,7 @@ function KubeConfigLoader() {
       onClose={() => {}}
       useCover
     >
-      <DialogTitle>{t('cluster|Load from KubeConfig')}</DialogTitle>
+      <DialogTitle>{t('translation|Load from KubeConfig')}</DialogTitle>
       {error && error !== '' ? (
         <Box style={{ backgroundColor: 'red', textAlign: 'center', padding: '4px' }}>{error}</Box>
       ) : null}

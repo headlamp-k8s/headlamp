@@ -26,15 +26,15 @@ function NodeConditionsLabel(props: { node: Node }) {
   const unschedulable = node?.jsonData?.spec?.unschedulable;
   const { t } = useTranslation();
   return unschedulable ? (
-    <StatusLabel status="warning">{t('frequent|Scheduling Disabled')}</StatusLabel>
+    <StatusLabel status="warning">{t('translation|Scheduling Disabled')}</StatusLabel>
   ) : (
-    <StatusLabel status="success">{t('frequent|Scheduling Enabled')}</StatusLabel>
+    <StatusLabel status="success">{t('translation|Scheduling Enabled')}</StatusLabel>
   );
 }
 
 export default function NodeDetails() {
   const { name } = useParams<{ name: string }>();
-  const { t } = useTranslation(['node', 'glossary']);
+  const { t } = useTranslation(['glossary']);
   const dispatch = useDispatch();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -75,7 +75,7 @@ export default function NodeDetails() {
             }),
         {
           startMessage: cordon
-            ? t('Uncordoning node {{name}}...', {
+            ? t('Uncordoning node {{name}}…', {
                 name: node.metadata.name,
               })
             : t('Cordoning node {{name}}…', { name: node.metadata.name }),
@@ -198,11 +198,11 @@ export default function NodeDetails() {
         extraInfo={item =>
           item && [
             {
-              name: t('frequent|Ready'),
+              name: t('translation|Ready'),
               value: <NodeReadyLabel node={item} />,
             },
             {
-              name: t('frequent|Conditions'),
+              name: t('translation|Conditions'),
               value: <NodeConditionsLabel node={item} />,
             },
             {
@@ -245,7 +245,7 @@ function ChartsSection(props: ChartsSectionProps) {
       return timeAgo(readyInfo.lastTransitionTime as string);
     }
 
-    return t('frequent|Not ready yet!');
+    return t('translation|Not ready yet!');
   }
 
   return (
@@ -369,10 +369,10 @@ export function NodeReadyLabel(props: NodeReadyLabelProps) {
   let label = null;
   if (isReady) {
     status = 'success';
-    label = t('frequent|Yes');
+    label = t('translation|Yes');
   } else {
     status = 'error';
-    label = t('frequent|No');
+    label = t('translation|No');
   }
 
   return <StatusLabel status={status}>{label}</StatusLabel>;

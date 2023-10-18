@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function HpaList() {
   const classes = useStyles();
-  const { t } = useTranslation(['glossary', 'hpa', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <ResourceListView
@@ -34,7 +34,7 @@ export default function HpaList() {
         'namespace',
         {
           id: 'reference',
-          label: t('hpa|Reference'),
+          label: t('translation|Reference'),
           getter: item => (
             <Link kubeObject={item.referenceObject}>
               {item.referenceObject?.kind}/{item.referenceObject?.metadata.name}
@@ -43,7 +43,7 @@ export default function HpaList() {
         },
         {
           id: 'targets',
-          label: t('hpa|Targets'),
+          label: t('translation|Targets'),
           getter: (hpa: HPA) => {
             const value: JSX.Element[] = [];
             const metrics = hpa.metrics(t);
@@ -60,7 +60,7 @@ export default function HpaList() {
                 value.push(
                   <Chip
                     className={classes.chip}
-                    label={metrics.length - 1 + t('frequent|more…')}
+                    label={metrics.length - 1 + t('translation|more…')}
                     variant="outlined"
                     size="small"
                   />
@@ -78,13 +78,13 @@ export default function HpaList() {
         },
         {
           id: 'minReplicas',
-          label: t('hpa|MinReplicas'),
+          label: t('translation|MinReplicas'),
           getter: item => item.spec.minReplicas,
           sort: true,
         },
         {
           id: 'maxReplicas',
-          label: t('hpa|MaxReplicas'),
+          label: t('translation|MaxReplicas'),
           getter: item => item.spec.maxReplicas,
           sort: true,
         },

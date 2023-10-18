@@ -4,7 +4,7 @@ import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function ServiceList() {
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <ResourceListView
@@ -15,7 +15,7 @@ export default function ServiceList() {
         'namespace',
         {
           id: 'type',
-          label: t('Type'),
+          label: t('translation|Type'),
           getter: service => service.spec.type,
           sort: true,
         },

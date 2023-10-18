@@ -15,12 +15,12 @@ export default function CustomResourceDefinitionDetails() {
   const { name } = useParams<{ name: string }>();
   const [item, setItem] = React.useState<CRD | null>(null);
   const [error, setError] = React.useState<ApiError | null>(null);
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
 
   CRD.useApiGet(setItem, name, undefined, setError);
 
   return !item ? (
-    <Loader title={t('resource|Loading resource definition details')} />
+    <Loader title={t('translation|Loading resource definition details')} />
   ) : (
     <PageGrid>
       <MainInfoSection
@@ -29,12 +29,12 @@ export default function CustomResourceDefinitionDetails() {
         extraInfo={
           item && [
             {
-              name: t('frequent|Group'),
+              name: t('translation|Group'),
               value: item.spec.group,
             },
             {
-              name: t('Version'),
-              value: item.getMainAPIGroup()[1],
+              name: t('translation|Version'),
+              value: item.spec.version,
             },
             {
               name: t('Scope'),
@@ -61,7 +61,7 @@ export default function CustomResourceDefinitionDetails() {
           ]
         }
       />
-      <SectionBox title={t('crd|Accepted Names')}>
+      <SectionBox title={t('translation|Accepted Names')}>
         <SimpleTable
           data={[item.spec.names]}
           columns={[
@@ -85,12 +85,12 @@ export default function CustomResourceDefinitionDetails() {
           reflectInURL="acceptedNames"
         />
       </SectionBox>
-      <SectionBox title={t('frequent|Versions')}>
+      <SectionBox title={t('translation|Versions')}>
         <SimpleTable
           data={item.spec.versions}
           columns={[
             {
-              label: t('frequent|Name'),
+              label: t('translation|Name'),
               datum: 'name',
             },
             {
@@ -105,7 +105,7 @@ export default function CustomResourceDefinitionDetails() {
           reflectInURL="versions"
         />
       </SectionBox>
-      <SectionBox title={t('Conditions')}>
+      <SectionBox title={t('translation|Conditions')}>
         <ConditionsTable resource={item.jsonData} showLastUpdate={false} />
       </SectionBox>
       <CustomResourceListTable title={t('Objects')} crd={item} />

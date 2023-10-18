@@ -75,7 +75,7 @@ function NotificationsList(props: {
   const config = useTypedSelector(state => state.config);
 
   if (!notifications || notifications.length === 0) {
-    return <Empty>{t(`notifications|You don't have any notifications right now`)}</Empty>;
+    return <Empty>{t(`translation|You don't have any notifications right now`)}</Empty>;
   }
 
   function notificationSeenUnseenHandler(event: any, notification?: Notification) {
@@ -112,18 +112,18 @@ function NotificationsList(props: {
           onClick={() => notificationItemClickHandler(notification)}
         >
           <Grid item md={notification.seen ? 11 : 10}>
-            <Tooltip title={notification.message || t('notifications|No message')}>
+            <Tooltip title={notification.message || t('translation|No message')}>
               <Typography style={{ fontWeight: notification.seen ? 'normal' : 'bold' }} noWrap>
-                {`${notification.message || t('notifications|No message')}`}
+                {`${notification.message || t('translation|No message')}`}
               </Typography>
             </Tooltip>
           </Grid>
           {!notification.seen && (
             <Grid item md={1}>
-              <Tooltip title={t('notifications|Mark as read')}>
+              <Tooltip title={t('translation|Mark as read')}>
                 <IconButton
                   onClick={e => notificationSeenUnseenHandler(e, notification)}
-                  aria-label={t('notifications|Mark as read')}
+                  aria-label={t('translation|Mark as read')}
                 >
                   <Icon icon="mdi:circle" color={theme.palette.error.main} height={12} width={12} />
                 </IconButton>
@@ -274,14 +274,14 @@ export default function Notifications() {
   return (
     <>
       <IconButton
-        aria-label={t('notifications|Show notifications')}
+        aria-label={t('translation|Show notifications')}
         aria-controls={show ? notificationMenuId : ''}
         aria-haspopup="true"
         onClick={handleClick}
       >
         {!areAllNotificationsInDeleteState && areThereUnseenNotifications ? (
           <Badge variant="dot" color="error">
-            <Tooltip title={`${t('notifications|You have unread notifications')}`}>
+            <Tooltip title={`${t('translation|You have unread notifications')}`}>
               <Icon icon={bellIcon} />
             </Tooltip>
           </Badge>
@@ -311,7 +311,7 @@ export default function Notifications() {
             <Grid item>
               <Box mx={1}>
                 <Typography style={{ fontWeight: 'bold' }}>
-                  {t('notifications|Notifications')}
+                  {t('translation|Notifications')}
                 </Typography>
               </Box>
             </Grid>
@@ -322,7 +322,7 @@ export default function Notifications() {
                 onClick={handleNotificationMarkAllRead}
                 disabled={areAllNotificationsInDeleteState || !areThereUnseenNotifications}
               >
-                {t('notifications|Mark all as read')}
+                {t('translation|Mark all as read')}
               </Button>
               <Button
                 className={classes.notificationButton}
@@ -330,7 +330,7 @@ export default function Notifications() {
                 onClick={handleNotificationClear}
                 disabled={areAllNotificationsInDeleteState}
               >
-                {t('notifications|Clear')}
+                {t('translation|Clear')}
               </Button>
             </Grid>
           </Grid>
@@ -350,7 +350,7 @@ export default function Notifications() {
           }}
           style={{ textTransform: 'none' }}
         >
-          {t('notifications|View all notifications')}
+          {t('translation|View all notifications')}
         </Button>
       </Popover>
     </>

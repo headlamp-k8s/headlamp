@@ -13,7 +13,7 @@ interface WorkloadCircleChartProps extends Omit<PercentageCircleProps, 'data'> {
 
 export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
   const theme = useTheme();
-  const { t } = useTranslation('workload');
+  const { t } = useTranslation();
 
   const { workloadData, partialLabel = '', totalLabel = '', ...other } = props;
 
@@ -38,7 +38,7 @@ export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
 
   function getLegend() {
     if (total === 0) {
-      return t('workload|0 Running');
+      return t('translation|0 Running');
     }
     if (partial !== 0) {
       return `${partial} ${partialLabel} / ${total} ${totalLabel}`;

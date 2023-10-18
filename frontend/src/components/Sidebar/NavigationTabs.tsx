@@ -112,7 +112,7 @@ export default function NavigationTabs() {
 
   defaultIndex = subList.findIndex(item => item.name === sidebar.selected.item);
   return (
-    <Box mb={2} component="nav" aria-label={t('frequent|Main Navigation')}>
+    <Box mb={2} component="nav" aria-label={t('translation|Main Navigation')}>
       <Tabs
         tabs={tabRoutes}
         onTabChanged={index => {
@@ -120,7 +120,7 @@ export default function NavigationTabs() {
         }}
         defaultIndex={defaultIndex}
         className={classes.tabs}
-        ariaLabel={t('frequent|Navigation Tabs')}
+        ariaLabel={t('translation|Navigation Tabs')}
       />
       <Divider />
     </Box>

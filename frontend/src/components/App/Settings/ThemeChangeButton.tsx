@@ -27,7 +27,7 @@ export default function ThemeChangeButton(props: { showBothIcons?: boolean }) {
   const classes = useStyles();
   const { showBothIcons } = props;
   const dispatch = useDispatch();
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const darkIcon = 'mdi:weather-night';
   const lightIcon = 'mdi:weather-sunny';
   type iconType = typeof darkIcon | typeof lightIcon;

@@ -37,7 +37,7 @@ function metricValueStatus(status: MetricValueStatus, t: Function): string {
   if (status.value) {
     return `${status.value}`;
   }
-  return t('frequent|<unknown>');
+  return t('translation|<unknown>');
 }
 
 interface MetricTarget {
@@ -189,7 +189,7 @@ class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
               const value = `${
                 status && status.external
                   ? metricValueStatus(status.external.current, t)
-                  : t('frequent|<unknown>')
+                  : t('translation|<unknown>')
               }/${metricTargetValue(spec.external.target)}`;
               const definition = `"${spec.external.metric.name}" ${defineMetricTarget(
                 spec.external.target
@@ -209,10 +209,10 @@ class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
               const value = `${
                 status && status.object
                   ? metricValueStatus(status.object.current, t)
-                  : t('frequent|<unknown>')
+                  : t('translation|<unknown>')
               }/${metricTargetValue(spec.object.target)}`;
               const definition = t(
-                'hpa|"{{metricName}}" on {{objectKind}}/{{objectName}} {{metricTarget}}',
+                'translation|"{{metricName}}" on {{objectKind}}/{{objectName}} {{metricTarget}}',
                 {
                   metricName: spec.object.metric.name,
                   objectKind: spec.object.describedObject.kind,
@@ -235,9 +235,9 @@ class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
               const value = `${
                 status && status.pods
                   ? metricValueStatus(status.pods.current, t)
-                  : t('frequent|<unknown>')
+                  : t('translation|<unknown>')
               }/${metricTargetValue(spec.pods.target)}`;
-              const definition = t('hpa|"{{metricName}}" on pods', {
+              const definition = t('translation|"{{metricName}}" on pods', {
                 metricName: spec.pods.metric.name,
               });
               metrics.push({
@@ -252,7 +252,7 @@ class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
         case 'Resource':
           {
             if (spec.resource) {
-              let definition = t('hpa|resource {{resourceName}} on pods', {
+              let definition = t('translation|resource {{resourceName}} on pods', {
                 resourceName: spec.resource.name,
               });
               let value = ``;
@@ -261,12 +261,12 @@ class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
                 value = `${
                   status && status.resource
                     ? metricValueStatus(status.resource.current, t)
-                    : t('frequent|<unknown>')
+                    : t('translation|<unknown>')
                 }/${metricTargetValue(spec.resource.target)}`;
                 shortValue = `${
                   status && status.resource
                     ? metricValueStatus(status.resource.current, t)
-                    : t('frequent|<unknown>')
+                    : t('translation|<unknown>')
                 }/${metricTargetValue(spec.resource.target)}`;
               }
               if (spec.resource.target.type === 'Utilization') {
@@ -275,18 +275,22 @@ class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
                   value = `${
                     status.resource
                       ? status.resource.current.averageUtilization
-                      : t('frequent|<unknown>')
+                      : t('translation|<unknown>')
                   }% (${
-                    status.resource ? status.resource.current.averageValue : t('frequent|<unknown>')
+                    status.resource
+                      ? status.resource.current.averageValue
+                      : t('translation|<unknown>')
                   })/${metricTargetValue(spec.resource.target)}`;
                   shortValue = `${
                     status.resource
                       ? status.resource.current.averageUtilization
-                      : t('frequent|<unknown>')
+                      : t('translation|<unknown>')
                   }% /${metricTargetValue(spec.resource.target)}`;
                 } else {
-                  value = `${t('frequent|<unknown>')}/${metricTargetValue(spec.resource.target)}`;
-                  shortValue = `${t('frequent|<unknown>')}/${metricTargetValue(
+                  value = `${t('translation|<unknown>')}/${metricTargetValue(
+                    spec.resource.target
+                  )}`;
+                  shortValue = `${t('translation|<unknown>')}/${metricTargetValue(
                     spec.resource.target
                   )}`;
                 }
@@ -306,10 +310,10 @@ class HPA extends makeKubeObject<KubeHPA>('horizontalPodAutoscaler') {
               const value = `${
                 status && status.containerResource
                   ? metricValueStatus(status.containerResource.current, t)
-                  : t('frequent|<unknown>')
+                  : t('translation|<unknown>')
               }/${metricTargetValue(spec.containerResource.target)}`;
               const definition = t(
-                'hpa|resource {{resourceName}} of container {{containerName}} on pods',
+                'translation|resource {{resourceName}} of container {{containerName}} on pods',
                 {
                   resourceName: spec.containerResource.name,
                   containerName: spec.containerResource.container,

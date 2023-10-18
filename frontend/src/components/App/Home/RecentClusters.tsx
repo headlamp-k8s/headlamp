@@ -48,7 +48,7 @@ export default function RecentClusters(props: RecentClustersProps) {
       node.focus();
     }
   }, []);
-  const { t } = useTranslation('cluster');
+  const { t } = useTranslation();
   const recentClustersLabelId = 'recent-clusters-label';
   const maxRecentClusters = 3;
   // We slice it here for the maximum recent clusters just for extra safety, since this
@@ -108,7 +108,7 @@ export default function RecentClusters(props: RecentClustersProps) {
             onClick={() => {
               history.push(createRouteURL('loadKubeConfig'));
             }}
-            label={t('frequent|Load cluster')}
+            label={t('Load cluster')}
             icon="mdi:plus-circle-outline"
             primary
           />

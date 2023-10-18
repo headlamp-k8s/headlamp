@@ -5,7 +5,7 @@ import { LightTooltip } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function DaemonSetList() {
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <ResourceListView
@@ -23,21 +23,21 @@ export default function DaemonSetList() {
         },
         {
           id: 'currentPods',
-          label: t('frequent|Current'),
+          label: t('translation|Current'),
           getter: daemonSet => daemonSet.status?.currentNumberScheduled || 0,
           gridTemplate: 0.6,
           sort: true,
         },
         {
           id: 'desiredPods',
-          label: t('frequent|Desired'),
+          label: t('translation|Desired', { context: 'pods' }),
           getter: daemonSet => daemonSet.status?.desiredNumberScheduled || 0,
           gridTemplate: 0.6,
           sort: true,
         },
         {
           id: 'readyPods',
-          label: t('frequent|Ready'),
+          label: t('translation|Ready'),
           getter: daemonSet => daemonSet.status?.numberReady || 0,
           gridTemplate: 0.6,
           sort: true,

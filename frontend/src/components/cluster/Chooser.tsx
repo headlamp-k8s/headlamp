@@ -189,7 +189,7 @@ function ClusterList(props: ClusterListProps) {
       node.focus();
     }
   }, []);
-  const { t } = useTranslation('cluster');
+  const { t } = useTranslation();
   const recentClustersLabelId = 'recent-clusters-label';
   const maxRecentClusters = 3;
   // We slice it here for the maximum recent clusters just for extra safety, since this
@@ -229,7 +229,7 @@ function ClusterList(props: ClusterListProps) {
         {recentClusters.length !== clusters.length && (
           <Grid item>
             <Typography align="center" id={recentClustersLabelId}>
-              {t('cluster|Recent clusters')}
+              {t('translation|Recent clusters')}
             </Typography>
           </Grid>
         )}
@@ -263,7 +263,7 @@ function ClusterList(props: ClusterListProps) {
               includeInputInList
               openOnFocus
               renderInput={params => (
-                <TextField {...params} label={t('cluster|All clusters')} variant="outlined" />
+                <TextField {...params} label={t('translation|All clusters')} variant="outlined" />
               )}
               onChange={(_event, cluster) => onButtonClick(cluster)}
             />
@@ -284,7 +284,7 @@ interface ClusterDialogProps extends PropsWithChildren<Omit<DialogProps, 'open' 
 export function ClusterDialog(props: ClusterDialogProps) {
   const classes = useStyles();
   const theme = useTheme();
-  const { t } = useTranslation('cluster');
+  const { t } = useTranslation();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const {
     open,
@@ -352,7 +352,7 @@ function Chooser(props: ClusterDialogProps) {
   const { open = null, onClose, children = [], ...otherProps } = props;
   // Only used if open is not provided
   const [show, setShow] = React.useState(props.open);
-  const { t } = useTranslation('cluster');
+  const { t } = useTranslation();
 
   React.useEffect(
     () => {

@@ -3,7 +3,7 @@ import PDB from '../../lib/k8s/podDisruptionBudget';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function PDBList() {
-  const { t } = useTranslation(['glossary', 'frequent', 'pdb']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <ResourceListView
@@ -14,19 +14,19 @@ export default function PDBList() {
         'namespace',
         {
           id: 'minAvailable',
-          label: t('pdb|Min Available'),
-          getter: (item: PDB) => item.spec.minAvailable || t('frequent|N/A'),
+          label: t('translation|Min Available'),
+          getter: (item: PDB) => item.spec.minAvailable || t('translation|N/A'),
           sort: true,
         },
         {
           id: 'maxUnavailable',
-          label: t('pdb|Max Unavailable'),
-          getter: (item: PDB) => item.spec.maxUnavailable || t('frequent|N/A'),
+          label: t('translation|Max Unavailable'),
+          getter: (item: PDB) => item.spec.maxUnavailable || t('translation|N/A'),
         },
         {
           id: 'allowedDisruptions',
-          label: t('pdb|Allowed Disruptions'),
-          getter: (item: PDB) => item.status.disruptionsAllowed || t('frequent|N/A'),
+          label: t('translation|Allowed Disruptions'),
+          getter: (item: PDB) => item.status.disruptionsAllowed || t('translation|N/A'),
         },
         'age',
       ]}

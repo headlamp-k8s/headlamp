@@ -3,7 +3,7 @@ import { RuntimeClass } from '../../lib/k8s/runtime';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export function RuntimeClassList() {
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
 
   return (
     <ResourceListView
@@ -13,7 +13,7 @@ export function RuntimeClassList() {
         'name',
         {
           id: 'handler',
-          label: t('frequent|Handler'),
+          label: t('translation|Handler'),
           getter: item => item?.jsonData?.handler,
         },
         'age',

@@ -124,11 +124,11 @@ interface ColumnSortButtonProps {
 }
 
 function ColumnSortButtons(props: ColumnSortButtonProps) {
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const { isDefaultSorted, isIncreasingOrder, clickHandler } = props;
   return isDefaultSorted ? (
     <IconButton
-      aria-label={isIncreasingOrder ? t('frequent|sort up') : t('frequent|sort down')}
+      aria-label={isIncreasingOrder ? t('translation|sort up') : t('translation|sort down')}
       size="small"
       onClick={() => clickHandler(!isIncreasingOrder)}
     >
@@ -136,7 +136,7 @@ function ColumnSortButtons(props: ColumnSortButtonProps) {
     </IconButton>
   ) : (
     <IconButton
-      aria-label={t('frequent|sort swap')}
+      aria-label={t('translation|sort swap')}
       size="small"
       onClick={() => clickHandler(true)}
     >
@@ -223,7 +223,7 @@ export default function SimpleTable(props: SimpleTableProps) {
   const [sortColIndex, setSortColIndex] = React.useState(
     defaultSortingColumn ? Math.abs(defaultSortingColumn) - 1 : -1
   );
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation();
 
   function handleChangePage(_event: any, newPage: number) {
     setPage(newPage);
@@ -380,7 +380,7 @@ export default function SimpleTable(props: SimpleTableProps) {
                 setPage(0);
               }}
             >
-              {t('frequent|Refresh')}
+              {t('translation|Refresh')}
             </Button>
           </Box>
         )

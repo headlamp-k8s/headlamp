@@ -33,7 +33,7 @@ const ClusterChooser = React.forwardRef(function ClusterChooser(
   ref: React.Ref<HTMLButtonElement>
 ) {
   const classes = useClusterTitleStyle();
-  const { t } = useTranslation('cluster');
+  const { t } = useTranslation();
 
   return (
     <Button

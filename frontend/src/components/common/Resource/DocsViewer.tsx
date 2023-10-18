@@ -41,7 +41,7 @@ function DocsViewer(props: { docSpecs: any }) {
     )[]
   >([]);
   const [docsLoading, setDocsLoading] = React.useState(false);
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     setDocsLoading(true);

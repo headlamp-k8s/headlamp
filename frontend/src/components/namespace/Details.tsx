@@ -7,7 +7,7 @@ import DetailsViewSection from '../DetailsViewSection';
 
 export default function NamespaceDetails() {
   const { name } = useParams<{ name: string }>();
-  const { t } = useTranslation('glossary');
+  const { t } = useTranslation(['glossary', 'translation']);
 
   function makeStatusLabel(namespace: Namespace | null) {
     const status = namespace?.status.phase;
@@ -22,7 +22,7 @@ export default function NamespaceDetails() {
       extraInfo={item =>
         item && [
           {
-            name: t('Status'),
+            name: t('translation|Status'),
             value: makeStatusLabel(item),
           },
         ]

@@ -24,7 +24,7 @@ interface RestartButtonProps {
 
 export function RestartButton(props: RestartButtonProps) {
   const { item } = props;
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
   const [openDialog, setOpenDialog] = useState(false);
   const dispatch = useDispatch();
 
@@ -76,8 +76,8 @@ export function RestartButton(props: RestartButtonProps) {
         console.error(`Error while getting authorization for restart button in ${item}:`, err);
       }}
     >
-      <Tooltip title={t('frequent|Restart') as string}>
-        <IconButton aria-label={t('frequent|restart')} onClick={() => setOpenDialog(true)}>
+      <Tooltip title={t('translation|Restart') as string}>
+        <IconButton aria-label={t('translation|restart')} onClick={() => setOpenDialog(true)}>
           <Icon icon="mdi:restart" />
         </IconButton>
       </Tooltip>
@@ -95,7 +95,7 @@ interface RestartDialogProps {
 
 function RestartDialog(props: RestartDialogProps) {
   const { resource, open, onClose, onSave } = props;
-  const { t } = useTranslation('frequent');
+  const { t } = useTranslation();
 
   return (
     <Dialog
@@ -105,20 +105,20 @@ function RestartDialog(props: RestartDialogProps) {
       maxWidth="xs"
       fullWidth
     >
-      <DialogTitle id="form-dialog-title">{t('frequent|Restart')}</DialogTitle>
+      <DialogTitle id="form-dialog-title">{t('translation|Restart')}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          {t('frequent|Are you sure you want to restart {{ name }}?', {
+          {t('translation|Are you sure you want to restart {{ name }}?', {
             name: resource.metadata.name,
           })}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
-          {t('frequent|Cancel')}
+          {t('translation|Cancel')}
         </Button>
         <Button onClick={onSave} color="primary">
-          {t('frequent|Restart')}
+          {t('translation|Restart')}
         </Button>
       </DialogActions>
     </Dialog>

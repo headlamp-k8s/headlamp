@@ -1,6 +1,7 @@
 import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
+import sharedConfig from './i18nextSharedConfig';
 
 const en = {}; // To keep TS happy.
 
@@ -38,7 +39,10 @@ i18next
   // i18next options: https://www.i18next.com/overview/configuration-options
   .init({
     debug: process.env.NODE_ENV === 'development',
+    ns: ['translation', 'glossary'],
+    defaultNS: 'translation',
     fallbackLng: 'en',
+    contextSeparator: sharedConfig.contextSeparator,
     supportedLngs: Object.keys(supportedLanguages),
     // nonExplicitSupportedLngs: true,
     interpolation: {

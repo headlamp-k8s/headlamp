@@ -96,7 +96,7 @@ export default function EditorDialog(props: EditorDialogProps) {
   const [docSpecs, setDocSpecs] = React.useState<
     KubeObjectInterface | KubeObjectInterface[] | null
   >([]);
-  const { t } = useTranslation('resource');
+  const { t } = useTranslation();
 
   const [useSimpleEditor, setUseSimpleEditorState] = React.useState(() => {
     const localData = localStorage.getItem('useSimpleEditor');
@@ -310,8 +310,8 @@ export default function EditorDialog(props: EditorDialogProps) {
   if (!dialogTitle && item) {
     const itemName = item.metadata?.name || t('New Object');
     dialogTitle = isReadOnly()
-      ? t('resource|View: {{ itemName }}', { itemName })
-      : t('resource|Edit: {{ itemName }}', { itemName });
+      ? t('translation|View: {{ itemName }}', { itemName })
+      : t('translation|Edit: {{ itemName }}', { itemName });
   }
 
   return (
@@ -355,14 +355,14 @@ export default function EditorDialog(props: EditorDialogProps) {
             ) : (
               <Tabs
                 onTabChanged={handleTabChange}
-                ariaLabel={t('frequent|Editor')}
+                ariaLabel={t('translation|Editor')}
                 tabs={[
                   {
-                    label: t('frequent|Editor'),
+                    label: t('translation|Editor'),
                     component: makeEditor(),
                   },
                   {
-                    label: t('frequent|Documentation'),
+                    label: t('translation|Documentation'),
                     component: (
                       <Box p={2} className={classes.scrollable} maxHeight={600} height={600}>
                         <DocsViewer docSpecs={docSpecs} />
@@ -378,22 +378,22 @@ export default function EditorDialog(props: EditorDialogProps) {
               <ConfirmButton
                 disabled={originalCodeRef.current.code === code.code}
                 color="secondary"
-                aria-label={t('frequent|Undo')}
+                aria-label={t('translation|Undo')}
                 onConfirm={onUndo}
-                confirmTitle={t('frequent|Are you sure?')}
+                confirmTitle={t('translation|Are you sure?')}
                 confirmDescription={t(
                   'This will discard your changes in the editor. Do you want to proceed?'
                 )}
                 // @todo: aria-controls should point to the textarea id
               >
-                {t('frequent|Undo Changes')}
+                {t('translation|Undo Changes')}
               </ConfirmButton>
             )}
             <div style={{ flex: '1 0 0' }} />
             {errorLabel && <Typography color="error">{errorLabel}</Typography>}
             <div style={{ flex: '1 0 0' }} />
             <Button onClick={onClose} color="primary">
-              {t('frequent|Close')}
+              {t('translation|Close')}
             </Button>
             {!isReadOnly() && (
               <Button
@@ -402,7 +402,7 @@ export default function EditorDialog(props: EditorDialogProps) {
                 disabled={originalCodeRef.current.code === code.code || !!error}
                 // @todo: aria-controls should point to the textarea id
               >
-                {saveLabel || t('frequent|Save & Apply')}
+                {saveLabel || t('translation|Save & Apply')}
               </Button>
             )}
           </DialogActions>

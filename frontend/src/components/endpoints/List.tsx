@@ -5,7 +5,7 @@ import LabelListItem from '../common/LabelListItem';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 export default function EndpointList() {
-  const { t } = useTranslation(['glossary', 'frequent']);
+  const { t } = useTranslation(['glossary', 'translation']);
   const filterFunc = useFilterFunc([
     '.jsonData.subsets[*].addresses[*].ip',
     '.jsonData.subsets[*].ports[*].port',
@@ -22,7 +22,7 @@ export default function EndpointList() {
         'namespace',
         {
           id: 'addresses',
-          label: t('frequent|Addresses'),
+          label: t('translation|Addresses'),
           getter: endpoint => <LabelListItem labels={endpoint.getAddresses()} />,
           gridTemplate: 1.5,
         },

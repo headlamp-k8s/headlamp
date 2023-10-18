@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Settings() {
   const classes = useStyles();
-  const { t } = useTranslation(['settings', 'frequent']);
+  const { t } = useTranslation(['translation']);
   const settingsObj = useSettings();
   const storedTimezone = settingsObj.timezone;
   const storedRowsPerPageOptions = settingsObj.tableRowsPerPageOptions;
@@ -43,13 +43,13 @@ export default function Settings() {
 
   return (
     <SectionBox
-      title={t('frequent|General Settings')}
+      title={t('translation|General Settings')}
       headerProps={{
         actions: [
           <ActionButton
             key="version"
             icon="mdi:information-outline"
-            description={t('frequent|Version')}
+            description={t('translation|Version')}
             onClick={() => {
               dispatch(setVersionDialogOpen(true));
             }}
@@ -62,15 +62,15 @@ export default function Settings() {
         valueCellProps={{ className: classes.valueCol }}
         rows={[
           {
-            name: t('frequent|Language'),
+            name: t('translation|Language'),
             value: <LocaleSelect showFullNames formControlProps={{ className: '' }} />,
           },
           {
-            name: t('frequent|Theme'),
+            name: t('translation|Theme'),
             value: <ThemeChangeButton showBothIcons />,
           },
           {
-            name: t('settings|Number of rows for tables'),
+            name: t('translation|Number of rows for tables'),
             value: (
               <NumRowsInput
                 defaultValue={storedRowsPerPageOptions || defaultTableRowsPerPageOptions}
@@ -78,7 +78,7 @@ export default function Settings() {
             ),
           },
           {
-            name: t('settings|Timezone to display for dates'),
+            name: t('translation|Timezone to display for dates'),
             value: (
               <Box maxWidth="350px">
                 <TimezoneSelect
