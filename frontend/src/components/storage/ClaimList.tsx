@@ -42,6 +42,9 @@ export default function VolumeClaimList() {
           label: t('Volume'),
           getter: volumeClaim => {
             const name = volumeClaim.spec.volumeName;
+            if (!name) {
+              return '';
+            }
             return (
               <Link routeName="persistentVolume" params={{ name }} tooltip>
                 {name}

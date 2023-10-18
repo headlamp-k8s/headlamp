@@ -6,7 +6,7 @@ import PersistentVolumeClaim, {
 import { TestContext } from '../../test';
 import PVClaimList from './ClaimList';
 
-const basePVC = {
+const basePVC: KubePersistentVolumeClaim = {
   apiVersion: 'v1',
   kind: 'PersistentVolumeClaim',
   metadata: {
@@ -40,9 +40,21 @@ const basePVC = {
 PersistentVolumeClaim.useList = () => {
   const noStorageClassNamePVC = _.cloneDeep(basePVC);
   noStorageClassNamePVC.metadata.name = 'no-storage-class-name-pvc';
-  noStorageClassNamePVC.spec.storageClassName = '';
+  noStorageClassNamePVC.spec!.storageClassName = '';
 
-  const objList = [basePVC, noStorageClassNamePVC].map(
+  const noVolumeNamePVC = _.cloneDeep(basePVC);
+  noVolumeNamePVC.metadata.name = 'no-volume-name-pvc';
+  noVolumeNamePVC.spec = {
+    accessModes: ['ReadWriteOnce'],
+    volumeMode: 'Block',
+    resources: {
+      requests: {
+        storage: '10Gi',
+      },
+    },
+  };
+
+  const objList = [basePVC, noStorageClassNamePVC, noVolumeNamePVC].map(
     pvc => new PersistentVolumeClaim(pvc as KubePersistentVolumeClaim)
   );
   return [objList, null, () => {}, () => {}] as any;
