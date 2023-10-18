@@ -289,7 +289,7 @@ function getDefaultAppMenu(): AppMenu[] {
         },
         sep,
         {
-          label: i18n.t('Toogle Fullscreen'),
+          label: i18n.t('Toggle Fullscreen'),
           role: 'togglefullscreen',
           id: 'original-toggle-fullscreen',
         },
