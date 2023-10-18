@@ -2,6 +2,7 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
+import { ApiError } from '../../lib/k8s/apiProxy';
 import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import DaemonSet from '../../lib/k8s/daemonSet';
@@ -49,9 +50,15 @@ export default function Overview() {
     return totalReplicasDiff;
   }
 
-  // Get all items except the pods since those shouldn't be shown in the table (only the chart).
   function getJointItems() {
     let joint: Workload[] = [];
+
+    // Return null if no items are yet loaded, so we show the spinner in the table.
+    if (Object.keys(workloadsData).length === 0) {
+      return null;
+    }
+
+    // Get all items except the pods since those shouldn't be shown in the table (only the chart).
     for (const [key, items] of Object.entries(workloadsData)) {
       if (key === 'Pod') {
         continue;
@@ -71,8 +78,13 @@ export default function Overview() {
     Pod,
   ];
   workloads.forEach((workloadClass: KubeObject) => {
-    workloadClass.useApiList((items: InstanceType<typeof workloadClass>[]) =>
-      dispatch({ items, kind: workloadClass.className })
+    workloadClass.useApiList(
+      (items: InstanceType<typeof workloadClass>[]) =>
+        dispatch({ items, kind: workloadClass.className }),
+      (err: ApiError) => {
+        console.error(`Workloads list: Failed to get list for ${workloadClass.className}: ${err}`);
+        dispatch({ items: [], kind: workloadClass.className });
+      }
     );
   });
 
