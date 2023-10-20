@@ -147,7 +147,7 @@
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
     "@electron/notarize": "^2.1.0",
-    "electron": "^22.0.0",
+    "electron": "^22.3.25",
     "electron-builder": "^24.0.0",
     "fs-extra": "^8.1.0",
     "i18next-parser": "^7.7.0",
