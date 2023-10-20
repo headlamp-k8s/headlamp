@@ -30,7 +30,7 @@ function SimpleLogo(props: AppLogoProps) {
 /**
  * This logo example shows how you can customize the logo more for different conditions.
  */
-function ReactiveLogo(props: AppLogoProps) {
+export function ReactiveLogo(props: AppLogoProps) {
   const { logoType, themeName } = props;
 
   if (logoType === 'small' && themeName === 'dark') {
