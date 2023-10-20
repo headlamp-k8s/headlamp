@@ -1,0 +1,245 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots common/GenericError Component Message 1`] = `
+<div>
+  <div
+    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <img
+        alt=""
+        class="makeStyles-img"
+        src="headlamp-broken.svg"
+      />
+      <h1
+        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+      >
+        Uh-oh! Something went wrong.
+      </h1>
+      <h2
+        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+      >
+        <h3
+          class="MuiTypography-root MuiTypography-h3"
+        >
+          Not sure what to do!
+        </h3>
+      </h2>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots common/GenericError Component Title 1`] = `
+<div>
+  <div
+    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <img
+        alt=""
+        class="makeStyles-img"
+        src="headlamp-broken.svg"
+      />
+      <h1
+        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
+          >
+            Oh no!
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </h1>
+      <h2
+        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+      >
+        Head back 
+        <a
+          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          href="/"
+        >
+          home
+        </a>
+        .
+      </h2>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots common/GenericError Default 1`] = `
+<div>
+  <div
+    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <img
+        alt=""
+        class="makeStyles-img"
+        src="headlamp-broken.svg"
+      />
+      <h1
+        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+      >
+        Uh-oh! Something went wrong.
+      </h1>
+      <h2
+        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+      >
+        Head back 
+        <a
+          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          href="/"
+        >
+          home
+        </a>
+        .
+      </h2>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots common/GenericError Different Image 1`] = `
+<div>
+  <div
+    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <img
+        alt=""
+        class="makeStyles-img"
+        src="headlamp-404.svg"
+      />
+      <h1
+        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+      >
+        Uh-oh! Something went wrong.
+      </h1>
+      <h2
+        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+      >
+        Head back 
+        <a
+          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          href="/"
+        >
+          home
+        </a>
+        .
+      </h2>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots common/GenericError Number Graphic 1`] = `
+<div>
+  <div
+    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      404
+      <h1
+        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+      >
+        Uh-oh! Something went wrong.
+      </h1>
+      <h2
+        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+      >
+        Head back 
+        <a
+          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          href="/"
+        >
+          home
+        </a>
+        .
+      </h2>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots common/GenericError String Graphic 1`] = `
+<div>
+  <div
+    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <img
+        alt=""
+        class="makeStyles-img"
+        src="Oh no!"
+      />
+      <h1
+        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+      >
+        Uh-oh! Something went wrong.
+      </h1>
+      <h2
+        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+      >
+        Head back 
+        <a
+          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          href="/"
+        >
+          home
+        </a>
+        .
+      </h2>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots common/GenericError String Message 1`] = `
+<div>
+  <div
+    class="MuiGrid-root makeStyles-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-center"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+    >
+      <img
+        alt=""
+        class="makeStyles-img"
+        src="headlamp-broken.svg"
+      />
+      <h1
+        class="MuiTypography-root makeStyles-h1 MuiTypography-h1"
+      >
+        Uh-oh! Something went wrong.
+      </h1>
+      <h2
+        class="MuiTypography-root makeStyles-h2 MuiTypography-h2"
+      >
+        Not sure what to do!
+      </h2>
+    </div>
+  </div>
+</div>
+`;

@@ -4,6 +4,8 @@ import React from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import AppContainer from './components/App/AppContainer';
+import ErrorBoundary from './components/common/ErrorBoundary';
+import ErrorComponent from './components/common/ErrorPage';
 import i18n from './i18n/config';
 import { useElectronI18n } from './i18n/electronI18n';
 import ThemeProviderNexti18n from './i18n/ThemeProviderNexti18n';
@@ -30,12 +32,14 @@ function AppWithRedux(props: React.PropsWithChildren<{}>) {
 
 function App() {
   return (
-    <Provider store={store}>
-      <Plugins />
-      <AppWithRedux>
-        <AppContainer />
-      </AppWithRedux>
-    </Provider>
+    <ErrorBoundary fallback={<ErrorComponent />}>
+      <Provider store={store}>
+        <Plugins />
+        <AppWithRedux>
+          <AppContainer />
+        </AppWithRedux>
+      </Provider>
+    </ErrorBoundary>
   );
 }
 
