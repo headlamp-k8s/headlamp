@@ -2,6 +2,12 @@ import initStoryshots, { Stories2SnapsConverter } from '@storybook/addon-storysh
 import * as rtl from '@testing-library/react';
 import path from 'path';
 
+// jsdom used by react-scripts test doesn't include TextEncoder/TextDecoder polyfills
+import { TextEncoder, TextDecoder } from 'util';
+global.TextEncoder = TextEncoder;
+// @ts-expect-error
+global.TextDecoder = TextDecoder;
+
 /**
  * The storyshot addon has some bug where the path is src/
  *  and the cwd is src, so it makes src/src folders.
