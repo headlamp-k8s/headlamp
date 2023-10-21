@@ -166,6 +166,38 @@ export default function PortForward(props: PortForwardProps) {
     const serviceNamespace = namespace;
     const serviceName = !isPod ? resourceName : '';
     const podName = isPod ? resourceName : pods[0].metadata.name;
+    var port = portForward?.port;
+
+    let address = 'localhost';
+    // In case of docker desktop only a range of ports are open
+    // so we need to generate a random port from that range
+    // while making sure that it is not already in use
+    if (helpers.isDockerDesktop()) {
+      const validMinPort = 30000;
+      const validMaxPort = 32000;
+
+      // create a list of active ports
+      const activePorts: string[] = [];
+      const portForwardsInStorage = localStorage.getItem(PORT_FORWARDS_STORAGE_KEY);
+      const parsedPortForwards = JSON.parse(portForwardsInStorage || '[]');
+      parsedPortForwards.forEach((pf: any) => {
+        if (pf.status === PORT_FORWARD_RUNNING_STATUS) {
+          activePorts.push(pf.port);
+        }
+      });
+
+      // generate random port till it is not in use
+      while (true) {
+        const randomPort = (
+          Math.floor(Math.random() * (validMaxPort - validMinPort + 1)) + validMinPort
+        ).toString();
+        if (!activePorts.includes(randomPort)) {
+          port = randomPort;
+          break;
+        }
+      }
+      address = '0.0.0.0';
+    }
 
     setLoading(true);
     startPortForward(
@@ -175,7 +207,8 @@ export default function PortForward(props: PortForwardProps) {
       numericContainerPort,
       serviceName,
       serviceNamespace,
-      portForward?.port,
+      port,
+      address,
       portForward?.id
     )
       .then((data: any) => {

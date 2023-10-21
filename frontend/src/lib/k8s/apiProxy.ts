@@ -1395,6 +1395,7 @@ export function startPortForward(
   service: string,
   serviceNamespace: string,
   port?: string,
+  address: string = '',
   id: string = ''
 ) {
   return fetch(`${helpers.getAppUrl()}portforward`, {
@@ -1411,6 +1412,7 @@ export function startPortForward(
       targetPort: containerPort.toString(),
       serviceNamespace,
       id: id,
+      address,
       port,
     }),
   }).then((response: Response) => {
