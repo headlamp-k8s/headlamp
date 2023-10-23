@@ -8,7 +8,6 @@ import _ from 'lodash';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import helpers from '../../helpers';
 import { useClustersConf } from '../../lib/k8s';
 import { request } from '../../lib/k8s/apiProxy';
 import { Cluster } from '../../lib/k8s/cluster';
@@ -17,6 +16,7 @@ import { setConfig, setStatelessConfig } from '../../redux/configSlice';
 import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import store from '../../redux/stores/store';
+import { getStatelessClusterKubeConfigs } from '../../stateless';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
 import Sidebar, { NavigationTabs } from '../Sidebar';
@@ -124,7 +124,11 @@ export default function Layout({}: LayoutProps) {
         const clustersToConfig: ConfigState['clusters'] = {};
         config?.clusters.forEach((cluster: Cluster) => {
           clustersToConfig[cluster.name] = cluster;
+          if (clustersToConfig[cluster.name].meta_data.source === 'dynamic_cluster') {
+            delete clustersToConfig[cluster.name];
+          }
         });
+
         const configToStore = {
           ...config,
           clusters: clustersToConfig,
@@ -193,24 +197,29 @@ export default function Layout({}: LayoutProps) {
         console.error('Error getting config:', err);
       });
 
-    const sessionId = helpers.getSessionId();
-    const config = helpers.getClusterKubeconfigs(sessionId);
+    fetchStatelessConfig();
+  };
+
+  /**
+   * Parses the cluster config from the backend and updates the redux store
+   * if the present stored config is different from the fetched one.
+   */
+  const fetchStatelessConfig = () => {
+    const config = getStatelessClusterKubeConfigs();
+    const statelessClusters = store.getState().config.statelessClusters;
     const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
     const clusterReq = {
       kubeconfigs: config,
     };
 
-    // Fetch statelessCluster config
+    // Parses statelessCluster config
     request(
-      '/statelessCluster',
+      '/parseKubeConfig',
       {
         method: 'POST',
         body: JSON.stringify(clusterReq),
         headers: {
           ...JSON_HEADERS,
-          ...{
-            'X-HEADLAMP_SESSION_ID': sessionId,
-          },
         },
       },
       false,
@@ -218,7 +227,7 @@ export default function Layout({}: LayoutProps) {
     )
       .then((config: Config) => {
         const clustersToConfig: ConfigState['statelessClusters'] = {};
-        config?.statelessClusters.forEach((cluster: Cluster) => {
+        config?.clusters.forEach((cluster: Cluster) => {
           clustersToConfig[cluster.name] = cluster;
         });
 

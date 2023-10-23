@@ -10,13 +10,18 @@ export interface ConfigState {
     [clusterName: string]: Cluster;
   } | null;
   /**
-   * Statelss Clusters is a map of cluster names to cluster objects.
+   * Stateless Clusters is a map of cluster names to cluster objects.
    * Null indicates that the clusters have not been loaded yet.
    */
   statelessClusters: {
     [clusterName: string]: Cluster;
   } | null;
 
+  /**
+   * All Clusters is a map of cluster names to cluster objects.
+   * They are comination of clusters and statelessClusters.
+   * Null indicates that the clusters have not been loaded yet.
+   */
   allClusters: {
     [clusterName: string]: Cluster;
   } | null;

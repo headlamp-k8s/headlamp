@@ -1,6 +1,7 @@
 package kubeconfig
 
 import (
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"net/http"
@@ -9,7 +10,6 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
-	"time"
 
 	zlog "github.com/rs/zerolog/log"
 	"k8s.io/client-go/kubernetes"
@@ -42,8 +42,6 @@ type Context struct {
 	Source      int                    `json:"source"`
 	OidcConf    *OidcConfig            `json:"oidcConfig"`
 	proxy       *httputil.ReverseProxy `json:"-"`
-	SessionID   string                 `json:"string"`
-	Timestamp   time.Time              `json:"timestamp"`
 }
 
 type OidcConfig struct {
@@ -283,6 +281,38 @@ func LoadContextsFromMultipleFiles(kubeConfigs string, source int) ([]Context, e
 	}
 
 	return contexts, errors.Join(errs...)
+}
+
+// LoadContextsFromBase64String loads contexts from the given kubeconfig string.
+func LoadContextsFromBase64String(kubeConfig string, source int) ([]Context, error) {
+	var contexts []Context
+
+	var errs []error
+
+	kubeConfigByte, err := base64.StdEncoding.DecodeString(kubeConfig)
+	if err != nil {
+		return nil, err
+	}
+
+	config, err := clientcmd.Load(kubeConfigByte)
+	if err != nil {
+		return nil, err
+	}
+
+	contexts, errs = LoadContextsFromAPIConfig(config, true)
+	if errs == nil {
+		return nil, errors.Join(errs...)
+	}
+
+	contextsWithSource := make([]Context, 0, len(contexts))
+
+	for _, context := range contexts {
+		context := context
+		context.Source = source
+		contextsWithSource = append(contextsWithSource, context)
+	}
+
+	return contextsWithSource, nil
 }
 
 func splitKubeConfigPath(path string) []string {

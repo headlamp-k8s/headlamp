@@ -15,6 +15,7 @@ type Cache[T any] interface {
 	Delete(ctx context.Context, key string) error
 	Get(ctx context.Context, key string) (T, error)
 	GetAll(ctx context.Context, selectFunc Matcher) (map[string]T, error)
+	UpdateTTL(ctx context.Context, key string, ttl time.Duration) error
 }
 
 // Matcher is a function that returns true if the key matches.
@@ -133,4 +134,22 @@ func (c *cache[T]) cleanUp() {
 			}
 		}
 	}
+}
+
+// UpdateTTL updates the TTL of a value in the cache.
+func (c *cache[T]) UpdateTTL(ctx context.Context, key string, ttl time.Duration) error {
+	c.lock.Lock()
+	defer c.lock.Unlock()
+
+	value, ok := c.store[key]
+	if !ok {
+		return ErrNotFound
+	}
+
+	if value.expiresAt.IsZero() || value.expiresAt.After(time.Now()) {
+		value.expiresAt = time.Now().Add(ttl)
+		c.store[key] = value
+	}
+
+	return nil
 }
