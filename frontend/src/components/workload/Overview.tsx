@@ -93,7 +93,7 @@ export default function Overview() {
           {workloads.map(({ className: name }) => (
             <Grid item lg={3} md={4} xs={6} key={name}>
               <WorkloadCircleChart
-                workloadData={workloadsData[name] || []}
+                workloadData={workloadsData[name] || null}
                 // @todo: Use a plural from from the class itself when we have it
                 title={name + 's'}
                 partialLabel={t('translation|Failed')}
