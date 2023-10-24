@@ -30,11 +30,6 @@ export function initTests() {
       // We use React Testing library here
       const converter = new OurConverter();
       const snapshotFilename = converter.getSnapshotFileName(context);
-      console.log('snapshotFilename', snapshotFilename);
-
-      // get abs snapshotFilename, since it is relative
-      const absSnapshotFilename = path.join(process.cwd(), snapshotFilename);
-      console.log('absSnapshotFilename', absSnapshotFilename);
 
       // Re-render for state changes:
       // https://github.com/storybookjs/storybook/issues/7745#issuecomment-801940326
