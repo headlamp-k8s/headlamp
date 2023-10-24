@@ -4,7 +4,7 @@ import path from 'path';
 // jsdom used by react-scripts test doesn't include TextEncoder/TextDecoder polyfills
 import { TextDecoder, TextEncoder } from 'util';
 global.TextEncoder = TextEncoder;
-// @ts-expect-error
+// @ts-ignore
 global.TextDecoder = TextDecoder;
 
 /**
