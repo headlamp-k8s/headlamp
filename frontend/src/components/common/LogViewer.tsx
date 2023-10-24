@@ -99,10 +99,13 @@ export function LogViewer(props: LogViewerProps) {
   };
 
   function downloadLog() {
+    // Cuts off the last 5 digits of the timestamp to remove the milliseconds
+    const time = new Date().toISOString().replace(/:/g, '-').slice(0, -5);
+
     const element = document.createElement('a');
     const file = new Blob(logs, { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
-    element.download = `${downloadName}.txt`;
+    element.download = `${downloadName}_${time}.txt`;
     // Required for FireFox
     document.body.appendChild(element);
     element.click();
