@@ -32,6 +32,7 @@ import (
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/helm"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/plugins"
 	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
@@ -118,12 +119,6 @@ type OauthConfig struct {
 	Config   *oauth2.Config
 	Verifier *oidc.IDTokenVerifier
 	Ctx      context.Context
-}
-
-var pluginListURLs []string
-
-func resetPlugins() {
-	pluginListURLs = nil
 }
 
 var portForwards = make(map[string][]PortForward)
@@ -355,6 +350,39 @@ func defaultKubeConfigPersistenceFile() (string, error) {
 	return filepath.Join(kubeConfigDir, "config"), nil
 }
 
+// addPluginRoutes adds plugin routes to a router.
+// It serves plugin list base paths as json at “/plugins”.
+// It serves plugin static files at “/plugins/” and “/static-plugins/”.
+// It disables caching and reloads plugin list base paths if not in-cluster.
+func addPluginRoutes(config *HeadlampConfig, r *mux.Router) {
+	r.HandleFunc("/plugins", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		pluginsList, err := config.cache.Get(context.Background(), plugins.PluginListKey)
+		if err != nil && err == cache.ErrNotFound {
+			pluginsList = []string{}
+		}
+		if err := json.NewEncoder(w).Encode(pluginsList); err != nil {
+			log.Println("Error encoding plugins base paths list", err)
+		}
+	}).Methods("GET")
+
+	// Serve plugins
+	pluginHandler := http.StripPrefix(config.baseURL+"/plugins/", http.FileServer(http.Dir(config.pluginDir)))
+	// If we're running locally, then do not cache the plugins. This ensures that reloading them (development,
+	// update) will actually get the new content.
+	if !config.useInCluster {
+		pluginHandler = serveWithNoCacheHeader(pluginHandler)
+	}
+
+	r.PathPrefix("/plugins/").Handler(pluginHandler)
+
+	if config.staticPluginDir != "" {
+		staticPluginsHandler := http.StripPrefix(config.baseURL+"/static-plugins/",
+			http.FileServer(http.Dir(config.staticPluginDir)))
+		r.PathPrefix("/static-plugins/").Handler(staticPluginsHandler)
+	}
+}
+
 //nolint:gocognit,funlen,gocyclo
 func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	kubeConfigPath := config.kubeConfigPath
@@ -367,9 +395,13 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	log.Printf("Helm support: %v\n", config.enableHelm)
 	log.Printf("Proxy URLs: %+v\n", config.proxyURLs)
 
+	plugins.PopulatePluginsCache(config.baseURL, config.staticPluginDir, config.pluginDir, config.cache)
+
 	if !config.useInCluster {
 		// in-cluster mode is unlikely to want reloading plugins.
-		go watchForChanges(config.pluginDir)
+		pluginEventChan := make(chan string)
+		go plugins.Watch(config.pluginDir, pluginEventChan)
+		go plugins.HandlePluginEvents(config.baseURL, config.staticPluginDir, config.pluginDir, pluginEventChan, config.cache)
 		// in-cluster mode is unlikely to want reloading kubeconfig.
 		go kubeconfig.LoadAndWatchFiles(config.kubeConfigStore, kubeConfigPath, kubeconfig.KubeConfig)
 	}
@@ -1089,10 +1121,7 @@ func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 		r.URL.Path = mux.Vars(r)["api"]
 		r.URL.Scheme = clusterURL.Scheme
 
-		if pluginsChanged() {
-			resetPlugins()
-			setPluginReloadHeader(w)
-		}
+		plugins.HandlePluginReload(c.cache, w)
 
 		err = kContext.ProxyRequest(w, r)
 		if err != nil {
@@ -1132,16 +1161,6 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 	}
 
 	return clusters
-}
-
-func setPluginReloadHeader(writer http.ResponseWriter) {
-	// We signal back to the frontend through a header.
-	// See apiProxy.ts in the frontend for how it handles this.
-	log.Println("Sending reload plugins signal to frontend")
-
-	// Allow JavaScript access to X-Reload header. Because denied by default.
-	writer.Header().Set("Access-Control-Expose-Headers", "X-Reload")
-	writer.Header().Set("X-Reload", "reload")
 }
 
 func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
