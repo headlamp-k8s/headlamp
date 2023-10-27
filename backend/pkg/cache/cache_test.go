@@ -12,6 +12,7 @@ import (
 
 func testCache(ch cache.Cache[interface{}], t *testing.T) {
 	t.Helper()
+	t.Parallel()
 
 	// set value
 	err := ch.Set(context.Background(), "key1", "value1")
@@ -42,10 +43,47 @@ func testCache(ch cache.Cache[interface{}], t *testing.T) {
 	assert.Equal(t, cache.ErrNotFound, err)
 	assert.Error(t, err)
 	assert.Nil(t, value)
+
+	time.Sleep(10 * time.Second)
+
+	value, err = ch.Get(context.Background(), "ttlkey1")
+	assert.Equal(t, cache.ErrNotFound, err)
+	assert.Error(t, err)
+	assert.Nil(t, value)
 }
 
 func TestCache(t *testing.T) {
 	// create cache
 	ch := cache.New[interface{}]()
 	testCache(ch, t)
+}
+
+func TestCacheGetAll(t *testing.T) {
+	// create cache
+	ch := cache.New[interface{}]()
+
+	// set value
+	err := ch.Set(context.Background(), "key1", "value1")
+	require.NoError(t, err)
+
+	// set value
+	err = ch.Set(context.Background(), "key2", "value2")
+	require.NoError(t, err)
+
+	// set value
+	err = ch.Set(context.Background(), "key3", "value3")
+	require.NoError(t, err)
+
+	// get all values
+	values, err := ch.GetAll(context.Background(), nil)
+	assert.NoError(t, err)
+	assert.Equal(t, 3, len(values))
+
+	// get all values with selectFunc
+	values, err = ch.GetAll(context.Background(), func(key string) bool {
+		return key == "key1"
+	})
+
+	assert.NoError(t, err)
+	assert.Equal(t, 1, len(values))
 }
