@@ -100,8 +100,10 @@ export default function ServiceDetails() {
                       },
                       {
                         label: t('translation|Addresses'),
-                        getter: endpoint => endpoint.getAddressesText(),
-                        cellProps: { style: { width: '40%', maxWidth: '40%' } },
+                        getter: endpoint => {
+                          return endpoint.getAddressesText();
+                        },
+                        cellProps: { style: { width: '100%', maxWidth: '100%' } },
                       },
                     ]}
                     reflectInURL="endpoints"
