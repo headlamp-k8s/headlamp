@@ -14,6 +14,8 @@ const store = configureStore({
     config: {},
     ui: {
       ...UI_INITIAL_STATE,
+    },
+    notifications: {
       notifications: [],
     },
     plugins: {
