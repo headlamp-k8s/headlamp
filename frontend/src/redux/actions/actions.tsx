@@ -3,7 +3,6 @@ import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
 import { ResourceTableProps } from '../../components/common/Resource/ResourceTable';
 import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
-import { Notification } from '../../lib/notification';
 import { Route } from '../../lib/router';
 import { UIState } from '../reducers/ui';
 
@@ -31,8 +30,6 @@ export const UI_FUNCTIONS_OVERRIDE = 'UI_FUNCTIONS_OVERRIDE';
 export interface BrandingProps {
   logo: AppLogoType;
 }
-export const UI_SET_NOTIFICATIONS = 'UI_SET_NOTIFICATIONS';
-export const UI_UPDATE_NOTIFICATION = 'UI_UPDATE_NOTIFICATION';
 
 export interface Action {
   type: string;
@@ -123,13 +120,6 @@ export function setBrandingAppLogoComponent(component: AppLogoType) {
   return { type: UI_BRANDING_SET_APP_LOGO, component };
 }
 
-export function setUINotifications(notifications: Notification[] | Notification) {
-  return { type: UI_SET_NOTIFICATIONS, notifications };
-}
-
-export function updateUINotification(dispatchedNotification: Notification[] | Notification) {
-  return { type: UI_UPDATE_NOTIFICATION, dispatchedNotification };
-}
 export function setClusterChooserButtonComponent(component: ClusterChooserType) {
   return { type: UI_SET_CLUSTER_CHOOSER_BUTTON, component };
 }

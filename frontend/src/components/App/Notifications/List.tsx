@@ -4,15 +4,14 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Notification } from '../../../lib/notification';
-import { setUINotifications, updateUINotification } from '../../../redux/actions/actions';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { DateLabel, SectionBox, SectionFilterHeader, SimpleTable } from '../../common';
 import Empty from '../../common/EmptyContent';
+import { Notification, setNotifications, updateNotifications } from './notificationsSlice';
 
 export default function NotificationList() {
-  const notifications = useTypedSelector(state => state.ui.notifications);
-  const config = useTypedSelector(state => state.config);
+  const notifications = useTypedSelector(state => state.notifications.notifications);
+  const clusters = useTypedSelector(state => state.config.clusters);
   const { t } = useTranslation(['glossary', 'translation']);
   const dispatch = useDispatch();
   const theme = useTheme();
@@ -31,7 +30,7 @@ export default function NotificationList() {
     if (!notification) {
       return;
     }
-    dispatch(updateUINotification(notification));
+    dispatch(updateNotifications(notification));
   }
 
   function clearAllNotifications() {
@@ -40,7 +39,7 @@ export default function NotificationList() {
       updatedNotification.deleted = true;
       return updatedNotification;
     });
-    dispatch(setUINotifications(massagedNotifications));
+    dispatch(setNotifications(massagedNotifications));
   }
 
   function markAllAsRead() {
@@ -49,13 +48,13 @@ export default function NotificationList() {
       updatedNotification.seen = true;
       return updatedNotification;
     });
-    dispatch(setUINotifications(massagedNotifications));
+    dispatch(setNotifications(massagedNotifications));
   }
 
   function notificationItemClickHandler(notification: Notification) {
     notification.url && history.push(notification.url);
     notification.seen = true;
-    dispatch(updateUINotification(notification));
+    dispatch(updateNotifications(notification));
   }
 
   function NotificationActionMenu() {
@@ -131,7 +130,7 @@ export default function NotificationList() {
               label: t('glossary|Cluster'),
               getter: (notification: Notification) => (
                 <Box display={'flex'} alignItems="center">
-                  {Object.entries(config?.clusters || {}).length > 1 && notification.cluster && (
+                  {Object.entries(clusters || {}).length > 1 && notification.cluster && (
                     <Box
                       border={1}
                       p={0.5}

@@ -1,5 +1,4 @@
 import { Cluster } from '../lib/k8s/cluster';
-import { Notification } from '../lib/notification';
 
 /**
  * Determines whether app is running in electron environment.
@@ -307,21 +306,6 @@ function getProductName(): string | undefined {
   return process.env.REACT_APP_HEADLAMP_PRODUCT_NAME;
 }
 
-const defaultMaxNotificationsStored = 200;
-type NotificationStoreOptions = {
-  max?: number;
-};
-function storeNotifications(notifications: Notification[], options: NotificationStoreOptions = {}) {
-  const { max = defaultMaxNotificationsStored } = options;
-  localStorage.setItem('notifications', JSON.stringify(notifications.slice(0, max)));
-}
-
-function loadNotifications(): Notification[] {
-  const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
-  // Ensure we return real Notification objects.
-  return notifications.map((n: any) => Notification.fromJSON(n));
-}
-
 export interface ClusterSettings {
   defaultNamespace?: string;
   allowedNamespaces?: string[];
@@ -405,9 +389,6 @@ const exportFunctions = {
   setTablesRowsPerPage,
   getVersion,
   getProductName,
-  storeNotifications,
-  loadNotifications,
-  defaultMaxNotificationsStored,
   storeClusterSettings,
   loadClusterSettings,
   getHeadlampAPIHeaders,
