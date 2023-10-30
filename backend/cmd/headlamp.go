@@ -102,6 +102,7 @@ type PortForwardPayload struct {
 	ServiceNamespace string `json:"serviceNamespace"`
 	TargetPort       string `json:"targetPort"`
 	Cluster          string `json:"cluster"`
+	Address          string `json:"address"`
 	Port             string `json:"port"`
 }
 
@@ -621,6 +622,9 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 			id := uuid.New().String()
 			p.ID = id
 		}
+		if p.Address == "" {
+			p.Address = "localhost"
+		}
 
 		reqToken := r.Header.Get("Authorization")
 		splitToken := strings.Split(reqToken, "Bearer ")
@@ -915,7 +919,7 @@ func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) er
 	stopChan, readyChan := make(chan struct{}), make(chan struct{}, 1)
 	out, errOut := new(bytes.Buffer), new(bytes.Buffer)
 
-	forwarder, err := portforward.New(dialer, ports, stopChan, readyChan, out, errOut)
+	forwarder, err := portforward.NewOnAddresses(dialer, []string{p.Address}, ports, stopChan, readyChan, out, errOut)
 	if err != nil {
 		return fmt.Errorf("portforward request: failed to create portforward: %v", err)
 	}
