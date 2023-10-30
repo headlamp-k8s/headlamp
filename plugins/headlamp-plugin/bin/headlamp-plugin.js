@@ -296,9 +296,10 @@ function start() {
  * @param packageFolder {string} - folder where the package, or folder of packages is.
  * @param scriptName {string} - name of the script to run.
  * @param cmdLine {string} - command line to run.
+ * @param env {object} - environment variables to run the command with.
  * @returns {0 | 1} - Exit code, where 0 is success, 1 is failure.
  */
-function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
+function runScriptOnPackages(packageFolder, scriptName, cmdLine, env) {
   if (!fs.existsSync(packageFolder)) {
     console.error(`"${packageFolder}" does not exist. Not ${scriptName}-ing.`);
     return 1;
@@ -378,6 +379,7 @@ function runScriptOnPackages(packageFolder, scriptName, cmdLine) {
       child_process.execSync(cmdLineToUse, {
         stdio: 'inherit',
         encoding: 'utf8',
+        env: { ...process.env, ...(env || {}) },
       });
     } catch (e) {
       console.error(`Problem running ${scriptName} inside of "${folder}"\r\n`);
@@ -516,7 +518,7 @@ function format(packageFolder, check) {
   const cmdLine = check
     ? `prettier --config package.json --check src`
     : 'prettier --config package.json --write src';
-  return runScriptOnPackages(packageFolder, 'format', cmdLine);
+  return runScriptOnPackages(packageFolder, 'format', cmdLine, {});
 }
 
 /**
@@ -822,7 +824,7 @@ function lint(packageFolder, fix) {
   const script = `eslint -c package.json --max-warnings 0 --ext .js,.ts,.tsx src/${
     fix ? ' --fix' : ''
   }`;
-  return runScriptOnPackages(packageFolder, 'lint', script);
+  return runScriptOnPackages(packageFolder, 'lint', script, {});
 }
 
 /**
@@ -833,7 +835,7 @@ function lint(packageFolder, fix) {
  */
 function tsc(packageFolder) {
   const script = 'tsc --noEmit';
-  return runScriptOnPackages(packageFolder, 'tsc', script);
+  return runScriptOnPackages(packageFolder, 'tsc', script, {});
 }
 
 /**
@@ -872,7 +874,7 @@ function storybook(packageFolder) {
  */
 function storybook_build(packageFolder) {
   const script = `build-storybook -c node_modules/@kinvolk/headlamp-plugin/config/.storybook`;
-  return runScriptOnPackages(packageFolder, 'storybook-build', script);
+  return runScriptOnPackages(packageFolder, 'storybook-build', script, {});
 }
 
 /**
@@ -882,8 +884,8 @@ function storybook_build(packageFolder) {
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function test(packageFolder) {
-  const script = `react-scripts test --transformIgnorePatterns "/node_modules/(?!d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference|@kinvolk/headlamp-plugin)"`;
-  return runScriptOnPackages(packageFolder, 'test', script);
+  const script = `react-scripts test --transformIgnorePatterns "/node_modules/(?!monaco-editor|spacetime|d3|internmap|react-markdown|xterm|github-markdown-css|vfile|unist-.+|unified|bail|is-plain-obj|trough|remark-.+|mdast-util-.+|micromark|parse-entities|character-entities|property-information|comma-separated-tokens|hast-util-whitespace|remark-.+|space-separated-tokens|decode-named-character-reference|@kinvolk/headlamp-plugin)"`;
+  return runScriptOnPackages(packageFolder, 'test', script, { UNDER_TEST: 'true' });
 }
 
 const headlampPluginBin = fs.realpathSync(process.argv[1]);
