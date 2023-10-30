@@ -70,6 +70,10 @@ should be consider.
 If you are interested in tweaking Headlamp to fit your use-cases, you can check out
 our [plugin development guide](https://headlamp.dev/docs/latest/development/plugins/).
 
+## FAQs
+Check out the link below
+[FAQs](https://headlamp.dev/docs/FAQs/FAQs.md)
+
 ## Get involved
 
 Check out our [guidelines](https://headlamp.dev/docs/latest/contributing/), including our [Code of Conduct](./CODE_OF_CONDUCT.md),
