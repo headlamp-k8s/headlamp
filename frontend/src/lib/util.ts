@@ -1,10 +1,10 @@
 import humanizeDuration from 'humanize-duration';
 import React from 'react';
-import { matchPath, useHistory } from 'react-router';
-import helpers from '../helpers';
+import { useHistory } from 'react-router';
 import { filterGeneric, filterResource } from '../redux/filterSlice';
 import { useTypedSelector } from '../redux/reducers/reducers';
 import store from '../redux/stores/store';
+import { getCluster, getClusterPrefixedPath } from './cluster';
 import { ApiError } from './k8s/apiProxy';
 import { KubeMetrics, KubeObjectInterface, Workload } from './k8s/cluster';
 import { KubeEvent } from './k8s/event';
@@ -12,7 +12,7 @@ import Node from './k8s/node';
 import { parseCpu, parseRam, unparseCpu, unparseRam } from './units';
 
 // Exported to keep compatibility for plugins that may have used them.
-export { filterGeneric, filterResource };
+export { filterGeneric, filterResource, getClusterPrefixedPath, getCluster };
 
 const humanize = humanizeDuration.humanizer();
 humanize.languages['en-mini'] = {
@@ -163,26 +163,6 @@ export function useFilterFunc<
     }
     return filterGeneric<T>(item, filter, matchCriteria);
   };
-}
-
-export function getClusterPrefixedPath(path?: string | null) {
-  const baseClusterPath = '/c/:cluster';
-  if (!path) {
-    return baseClusterPath;
-  }
-  return baseClusterPath + (path[0] === '/' ? '' : '/') + path;
-}
-
-export function getCluster(): string | null {
-  const prefix = helpers.getBaseUrl();
-  const urlPath = helpers.isElectron()
-    ? window.location.hash.substr(1)
-    : window.location.pathname.slice(prefix.length);
-
-  const clusterURLMatch = matchPath<{ cluster?: string }>(urlPath, {
-    path: getClusterPrefixedPath(),
-  });
-  return (!!clusterURLMatch && clusterURLMatch.params.cluster) || null;
 }
 
 export function useErrorState(dependentSetter?: (...args: any) => void) {
