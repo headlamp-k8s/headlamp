@@ -15,7 +15,8 @@ export interface KubePodSpec {
   nodeSelector?: {
     [key: string]: string;
   };
-  initContainers?: any[];
+  initContainers?: KubeContainer[];
+  ephemeralContainers?: KubeContainer[];
   readinessGates?: {
     conditionType: string;
   }[];

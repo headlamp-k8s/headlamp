@@ -24,6 +24,7 @@
   "Containers": "Conteneurs",
   "Container Spec": "Spécifications des conteneurs",
   "Container": "Conteneur",
+  "Ephemeral Containers": "",
   "Config Maps": "Config Maps",
   "Definition": "Définition",
   "CRD: {{ crdName }}": "CRD: {{ crdName }}",
