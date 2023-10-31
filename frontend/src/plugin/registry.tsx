@@ -1,6 +1,7 @@
 import { has } from 'lodash';
 import React from 'react';
 import { AppLogoProps, AppLogoType } from '../components/App/AppLogo';
+import { setBrandingAppLogoComponent } from '../components/App/themeSlice';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
 import { SectionBox } from '../components/common/SectionBox';
 import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/DetailsViewSection';
@@ -24,7 +25,6 @@ import {
 } from '../redux/actionButtonsSlice';
 import {
   addResourceTableColumnsProcessor,
-  setBrandingAppLogoComponent,
   setClusterChooserButtonComponent,
   setFunctionsToOverride,
   setRoute,

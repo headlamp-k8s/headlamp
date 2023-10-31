@@ -5,7 +5,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { getThemeName, ThemesConf } from '../../../lib/themes';
-import { setTheme as setThemeRedux } from '../../../redux/actions/actions';
+import { setTheme as setThemeRedux } from '../themeSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   buttonGroup: {
