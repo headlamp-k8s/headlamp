@@ -18,11 +18,9 @@ export const UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR =
   'UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR';
 export const UI_ADD_TABLE_COLUMNS_PROCESSOR = 'UI_ADD_TABLE_COLUMNS_PROCESSOR';
 export const UI_SET_DETAILS_VIEW = 'UI_SET_DETAILS_VIEW';
-export const UI_THEME_SET = 'UI_THEME_SET';
 export const UI_INITIALIZE_PLUGIN_VIEWS = 'UI_INITIALIZE_PLUGIN_VIEWS';
 export const UI_PLUGINS_LOADED = 'UI_PLUGINS_LOADED';
 export const UI_VERSION_DIALOG_OPEN = 'UI_VERSION_DIALOG_OPEN';
-export const UI_BRANDING_SET_APP_LOGO = 'UI_BRANDING_SET_APP_LOGO';
 export const UI_SET_CLUSTER_CHOOSER_BUTTON = 'UI_SET_CLUSTER_CHOOSER_BUTTON';
 export const UI_HIDE_APP_BAR = 'UI_HIDE_APP_BAR';
 export const UI_FUNCTIONS_OVERRIDE = 'UI_FUNCTIONS_OVERRIDE';
@@ -110,14 +108,6 @@ export function setDetailsView(viewSection: DetailsViewSectionType) {
     type: UI_SET_DETAILS_VIEW,
     action: viewSection,
   };
-}
-
-export function setTheme(name?: string) {
-  return { type: UI_THEME_SET, theme: { name } };
-}
-
-export function setBrandingAppLogoComponent(component: AppLogoType) {
-  return { type: UI_BRANDING_SET_APP_LOGO, component };
 }
 
 export function setClusterChooserButtonComponent(component: ClusterChooserType) {

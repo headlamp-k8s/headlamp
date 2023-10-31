@@ -1,15 +1,13 @@
 import _ from 'lodash';
 import { DefaultSidebars, SidebarEntryProps } from '../../components/Sidebar';
 import { Route } from '../../lib/router';
-import themesConf, { setTheme } from '../../lib/themes';
+import themesConf from '../../lib/themes';
 import { ClusterChooserType, DetailsViewSectionType } from '../../plugin/registry';
 import {
   Action,
-  BrandingProps,
   FunctionsToOverride,
   TableColumnsProcessor,
   UI_ADD_TABLE_COLUMNS_PROCESSOR,
-  UI_BRANDING_SET_APP_LOGO,
   UI_FUNCTIONS_OVERRIDE,
   UI_HIDE_APP_BAR,
   UI_INITIALIZE_PLUGIN_VIEWS,
@@ -22,7 +20,6 @@ import {
   UI_SIDEBAR_SET_ITEM_FILTER,
   UI_SIDEBAR_SET_SELECTED,
   UI_SIDEBAR_SET_VISIBLE,
-  UI_THEME_SET,
   UI_VERSION_DIALOG_OPEN,
 } from '../actions/actions';
 
@@ -54,10 +51,6 @@ export interface UIState {
     };
     tableColumnsProcessors: TableColumnsProcessor[];
   };
-  theme: {
-    name: string;
-  };
-  branding: BrandingProps;
   isVersionDialogOpen: boolean;
   clusterChooserButtonComponent?: ClusterChooserType;
   hideAppBar?: boolean;
@@ -110,13 +103,7 @@ export const INITIAL_STATE: UIState = {
     },
     tableColumnsProcessors: [],
   },
-  theme: {
-    name: '',
-  },
   isVersionDialogOpen: false,
-  branding: {
-    logo: null,
-  },
   hideAppBar: false,
   functionsToOverride: {},
 };
@@ -196,21 +183,11 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
       newFilters.views.details.pluginAppendedDetailViews = detailViews;
       break;
     }
-    case UI_THEME_SET: {
-      newFilters.theme = action.theme;
-      setTheme(newFilters.theme.name);
-      break;
-    }
     case UI_INITIALIZE_PLUGIN_VIEWS: {
       const newState = _.cloneDeep(INITIAL_STATE);
       // Keep the sidebar folding state in the current one
       newState.sidebar = { ...newState.sidebar, ...setInitialSidebarOpen() };
       return newState;
-    }
-    case UI_BRANDING_SET_APP_LOGO: {
-      const component = action.component;
-      newFilters.branding.logo = component;
-      break;
     }
     case UI_SET_CLUSTER_CHOOSER_BUTTON: {
       const component = action.component;

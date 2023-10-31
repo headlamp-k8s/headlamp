@@ -15,7 +15,7 @@ import { useTypedSelector } from './redux/reducers/reducers';
 import store from './redux/stores/store';
 
 function AppWithRedux(props: React.PropsWithChildren<{}>) {
-  let themeName = useTypedSelector(state => state.ui.theme.name);
+  let themeName = useTypedSelector(state => state.theme.name);
   usePrefersColorScheme();
   useElectronI18n();
 

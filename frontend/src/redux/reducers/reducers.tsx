@@ -1,6 +1,7 @@
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { combineReducers } from 'redux';
 import notificationsReducer from '../../components/App/Notifications/notificationsSlice';
+import themeReducer from '../../components/App/themeSlice';
 import pluginsReducer from '../../plugin/pluginsSlice';
 import actionButtons from '../actionButtonsSlice';
 import clusterAction from '../clusterActionSlice';
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   actionButtons: actionButtons,
   detailsViewSections: detailsViewSectionsSlice,
   notifications: notificationsReducer,
+  theme: themeReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;
