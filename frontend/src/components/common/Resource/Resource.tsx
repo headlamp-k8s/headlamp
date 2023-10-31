@@ -26,14 +26,14 @@ import {
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
-import {
-  DefaultDetailsViewSection,
-  DetailsViewSection,
-} from '../../../redux/detailsViewSectionsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
 import { SectionBox } from '../../common/SectionBox';
 import SimpleTable, { NameValueTable } from '../../common/SimpleTable';
+import {
+  DefaultDetailsViewSection,
+  DetailsViewSection,
+} from '../../DetailsViewSection/detailsViewSectionSlice';
 import { PodListProps, PodListRenderer } from '../../pod/List';
 import { LightTooltip, Loader, ObjectEventList } from '..';
 import BackLink from '../BackLink';
@@ -116,9 +116,9 @@ export function DetailsGrid(props: DetailsGridProps) {
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
   const classes = useDetailsGridStyles();
   const hasPreviousRoute = useHasPreviousRoute();
-  const detailViews = useTypedSelector(state => state.detailsViewSections.detailsViewSections);
+  const detailViews = useTypedSelector(state => state.detailsViewSection.detailsViewSections);
   const detailViewsProcessors = useTypedSelector(
-    state => state.detailsViewSections.detailsViewSectionsProcessors
+    state => state.detailsViewSection.detailsViewSectionsProcessors
   );
   // This component used to have a MainInfoSection with all these props passed to it, so we're
   // using them to accomplish the same behavior.

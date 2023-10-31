@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { DefaultSidebars, SidebarEntryProps } from '../../components/Sidebar';
 import { Route } from '../../lib/router';
 import themesConf from '../../lib/themes';
-import { ClusterChooserType, DetailsViewSectionType } from '../../plugin/registry';
+import { ClusterChooserType } from '../../plugin/registry';
 import {
   Action,
   FunctionsToOverride,
@@ -12,7 +12,6 @@ import {
   UI_ROUTER_SET_ROUTE,
   UI_ROUTER_SET_ROUTE_FILTER,
   UI_SET_CLUSTER_CHOOSER_BUTTON,
-  UI_SET_DETAILS_VIEW,
   UI_SIDEBAR_SET_EXPANDED,
   UI_SIDEBAR_SET_ITEM,
   UI_SIDEBAR_SET_ITEM_FILTER,
@@ -43,11 +42,6 @@ export interface UIState {
     [path: string]: Route;
   };
   routeFilters: RouteFilterFuncType[];
-  views: {
-    details: {
-      pluginAppendedDetailViews: DetailsViewSectionType[];
-    };
-  };
   isVersionDialogOpen: boolean;
   clusterChooserButtonComponent?: ClusterChooserType;
   hideAppBar?: boolean;
@@ -94,11 +88,6 @@ export const INITIAL_STATE: UIState = {
     // path -> Route
   },
   routeFilters: [],
-  views: {
-    details: {
-      pluginAppendedDetailViews: [],
-    },
-  },
   isVersionDialogOpen: false,
   hideAppBar: false,
   functionsToOverride: {},
@@ -161,12 +150,6 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
     case UI_ROUTER_SET_ROUTE_FILTER: {
       const routeFilters = [...newFilters.routeFilters, action.filterFunc];
       newFilters.routeFilters = routeFilters;
-      break;
-    }
-    case UI_SET_DETAILS_VIEW: {
-      const { action: sectionFunc } = action;
-      const detailViews = [...newFilters.views.details.pluginAppendedDetailViews, sectionFunc];
-      newFilters.views.details.pluginAppendedDetailViews = detailViews;
       break;
     }
     case UI_INITIALIZE_PLUGIN_VIEWS: {
