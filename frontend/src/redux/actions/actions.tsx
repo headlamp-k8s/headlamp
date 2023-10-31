@@ -1,6 +1,5 @@
 import { AppLogoType } from '../../components/App/AppLogo';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
-import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
 import { Route } from '../../lib/router';
 import { UIState } from '../reducers/ui';
@@ -15,7 +14,6 @@ export const UI_ROUTER_SET_ROUTE_FILTER = 'UI_ROUTER_SET_ROUTE_FILTER';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
 export const UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR =
   'UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR';
-export const UI_SET_DETAILS_VIEW = 'UI_SET_DETAILS_VIEW';
 export const UI_INITIALIZE_PLUGIN_VIEWS = 'UI_INITIALIZE_PLUGIN_VIEWS';
 export const UI_PLUGINS_LOADED = 'UI_PLUGINS_LOADED';
 export const UI_VERSION_DIALOG_OPEN = 'UI_VERSION_DIALOG_OPEN';
@@ -71,13 +69,6 @@ export function setRoute(routeSpec: Route) {
 
 export function setRouteFilter(filterFunc: (entry: Route) => Route | null) {
   return { type: UI_ROUTER_SET_ROUTE_FILTER, filterFunc };
-}
-
-export function setDetailsView(viewSection: DetailsViewSectionType) {
-  return {
-    type: UI_SET_DETAILS_VIEW,
-    action: viewSection,
-  };
 }
 
 export function setClusterChooserButtonComponent(component: ClusterChooserType) {

@@ -9,6 +9,12 @@ import {
 } from '../components/common/Resource/resourceTableSlice';
 import { SectionBox } from '../components/common/SectionBox';
 import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/DetailsViewSection';
+import {
+  addDetailsViewSectionsProcessor,
+  DefaultDetailsViewSection,
+  DetailsViewSectionsProcessor,
+  setDetailsViewSection,
+} from '../components/DetailsViewSection/detailsViewSectionSlice';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
 import { getHeadlampAPIHeaders } from '../helpers';
 import { KubeObject } from '../lib/k8s/cluster';
@@ -35,12 +41,6 @@ import {
   setSidebarItem,
   setSidebarItemFilter,
 } from '../redux/actions/actions';
-import {
-  addDetailsViewSectionsProcessor,
-  DefaultDetailsViewSection,
-  DetailsViewSectionsProcessor,
-  setDetailsViewSection,
-} from '../redux/detailsViewSectionsSlice';
 import store from '../redux/stores/store';
 
 export interface SectionFuncProps {

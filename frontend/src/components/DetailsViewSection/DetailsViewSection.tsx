@@ -19,7 +19,7 @@ export type DetailsViewSectionType =
  */
 export default function DetailsViewSection(props: DetailsViewSectionProps) {
   const { resource } = props;
-  const detailViews = useTypedSelector(state => state.ui.views.details.pluginAppendedDetailViews);
+  const detailViews = useTypedSelector(state => state.detailsViewSection.detailViews);
   const memoizedComponents = useMemo(
     () =>
       detailViews.map((Component, index) => {

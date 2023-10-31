@@ -6,9 +6,9 @@ import pluginsReducer from '../../plugin/pluginsSlice';
 import actionButtons from '../actionButtonsSlice';
 import clusterAction from '../clusterActionSlice';
 import configReducer from '../configSlice';
-import detailsViewSectionsSlice from '../detailsViewSectionsSlice';
 import filterReducer from '../filterSlice';
 import resourceTableReducer from './../../components/common/Resource/resourceTableSlice';
+import detailsViewSectionReducer from './../../components/DetailsViewSection/detailsViewSectionSlice';
 import uiReducer from './ui';
 
 const reducers = combineReducers({
@@ -18,10 +18,10 @@ const reducers = combineReducers({
   config: configReducer,
   plugins: pluginsReducer,
   actionButtons: actionButtons,
-  detailsViewSections: detailsViewSectionsSlice,
   notifications: notificationsReducer,
   theme: themeReducer,
   resourceTable: resourceTableReducer,
+  detailsViewSection: detailsViewSectionReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;
