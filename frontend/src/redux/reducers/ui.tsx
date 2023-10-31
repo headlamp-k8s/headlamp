@@ -6,8 +6,6 @@ import { ClusterChooserType, DetailsViewSectionType } from '../../plugin/registr
 import {
   Action,
   FunctionsToOverride,
-  TableColumnsProcessor,
-  UI_ADD_TABLE_COLUMNS_PROCESSOR,
   UI_FUNCTIONS_OVERRIDE,
   UI_HIDE_APP_BAR,
   UI_INITIALIZE_PLUGIN_VIEWS,
@@ -49,7 +47,6 @@ export interface UIState {
     details: {
       pluginAppendedDetailViews: DetailsViewSectionType[];
     };
-    tableColumnsProcessors: TableColumnsProcessor[];
   };
   isVersionDialogOpen: boolean;
   clusterChooserButtonComponent?: ClusterChooserType;
@@ -101,7 +98,6 @@ export const INITIAL_STATE: UIState = {
     details: {
       pluginAppendedDetailViews: [],
     },
-    tableColumnsProcessors: [],
   },
   isVersionDialogOpen: false,
   hideAppBar: false,
@@ -165,16 +161,6 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
     case UI_ROUTER_SET_ROUTE_FILTER: {
       const routeFilters = [...newFilters.routeFilters, action.filterFunc];
       newFilters.routeFilters = routeFilters;
-      break;
-    }
-    case UI_ADD_TABLE_COLUMNS_PROCESSOR: {
-      const processor = action.action;
-      const generatedID = processor.id || `generated-id-${Date.now().toString(36)}`;
-      const processors = [
-        ...newFilters.views.tableColumnsProcessors,
-        { id: generatedID, processor: processor.processor },
-      ];
-      newFilters.views.tableColumnsProcessors = processors;
       break;
     }
     case UI_SET_DETAILS_VIEW: {

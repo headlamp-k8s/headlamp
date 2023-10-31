@@ -1,6 +1,5 @@
 import { AppLogoType } from '../../components/App/AppLogo';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
-import { ResourceTableProps } from '../../components/common/Resource/ResourceTable';
 import { DetailsViewSectionType } from '../../components/DetailsViewSection';
 import { SidebarEntryProps } from '../../components/Sidebar';
 import { Route } from '../../lib/router';
@@ -16,7 +15,6 @@ export const UI_ROUTER_SET_ROUTE_FILTER = 'UI_ROUTER_SET_ROUTE_FILTER';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
 export const UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR =
   'UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR';
-export const UI_ADD_TABLE_COLUMNS_PROCESSOR = 'UI_ADD_TABLE_COLUMNS_PROCESSOR';
 export const UI_SET_DETAILS_VIEW = 'UI_SET_DETAILS_VIEW';
 export const UI_INITIALIZE_PLUGIN_VIEWS = 'UI_INITIALIZE_PLUGIN_VIEWS';
 export const UI_PLUGINS_LOADED = 'UI_PLUGINS_LOADED';
@@ -35,21 +33,6 @@ export interface Action {
 }
 
 type SidebarType = UIState['sidebar'];
-
-export type TableColumnsProcessor = {
-  /** Unique ID for this processor. */
-  id: string;
-  /** Function that will be called to process the columns.
-   * @param args.id The table ID.
-   * @param args.columns The current table columns.
-   *
-   * @returns The new table columns.
-   */
-  processor: (args: {
-    id: string;
-    columns: ResourceTableProps['columns'];
-  }) => ResourceTableProps['columns'];
-};
 
 export function setSidebarSelected(selected: string | null, sidebar: string | null = '') {
   return { type: UI_SIDEBAR_SET_SELECTED, selected: { item: selected, sidebar } };
@@ -88,19 +71,6 @@ export function setRoute(routeSpec: Route) {
 
 export function setRouteFilter(filterFunc: (entry: Route) => Route | null) {
   return { type: UI_ROUTER_SET_ROUTE_FILTER, filterFunc };
-}
-
-export function addResourceTableColumnsProcessor(
-  tableProcessor: TableColumnsProcessor | TableColumnsProcessor['processor']
-) {
-  let tableColsProcessor = tableProcessor as TableColumnsProcessor;
-  if (tableColsProcessor.id === undefined && typeof tableProcessor === 'function') {
-    tableColsProcessor = {
-      id: '',
-      processor: tableProcessor,
-    };
-  }
-  return { type: UI_ADD_TABLE_COLUMNS_PROCESSOR, action: tableColsProcessor };
 }
 
 export function setDetailsView(viewSection: DetailsViewSectionType) {

@@ -8,6 +8,7 @@ import clusterAction from '../clusterActionSlice';
 import configReducer from '../configSlice';
 import detailsViewSectionsSlice from '../detailsViewSectionsSlice';
 import filterReducer from '../filterSlice';
+import resourceTableReducer from './../../components/common/Resource/resourceTableSlice';
 import uiReducer from './ui';
 
 const reducers = combineReducers({
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   detailsViewSections: detailsViewSectionsSlice,
   notifications: notificationsReducer,
   theme: themeReducer,
+  resourceTable: resourceTableReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;
