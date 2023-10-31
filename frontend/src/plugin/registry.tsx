@@ -3,6 +3,10 @@ import React from 'react';
 import { AppLogoProps, AppLogoType } from '../components/App/AppLogo';
 import { setBrandingAppLogoComponent } from '../components/App/themeSlice';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
+import {
+  addResourceTableColumnsProcessor,
+  TableColumnsProcessor,
+} from '../components/common/Resource/resourceTableSlice';
 import { SectionBox } from '../components/common/SectionBox';
 import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/DetailsViewSection';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
@@ -24,14 +28,12 @@ import {
   setDetailsViewHeaderAction,
 } from '../redux/actionButtonsSlice';
 import {
-  addResourceTableColumnsProcessor,
   setClusterChooserButtonComponent,
   setFunctionsToOverride,
   setRoute,
   setRouteFilter,
   setSidebarItem,
   setSidebarItemFilter,
-  TableColumnsProcessor,
 } from '../redux/actions/actions';
 import {
   addDetailsViewSectionsProcessor,
