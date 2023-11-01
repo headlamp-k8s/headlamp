@@ -1,7 +1,6 @@
 import { AppLogoType } from '../../components/App/AppLogo';
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
 import { SidebarEntryProps } from '../../components/Sidebar';
-import { Route } from '../../lib/router';
 import { UIState } from '../reducers/ui';
 
 export const UI_SIDEBAR_SET_SELECTED = 'UI_SIDEBAR_SET_SELECTED';
@@ -9,8 +8,6 @@ export const UI_SIDEBAR_SET_VISIBLE = 'UI_SIDEBAR_SET_VISIBLE';
 export const UI_SIDEBAR_SET_ITEM = 'UI_SIDEBAR_SET_ITEM';
 export const UI_SIDEBAR_SET_ITEM_FILTER = 'UI_SIDEBAR_SET_ITEM_FILTER';
 export const UI_SIDEBAR_SET_EXPANDED = 'UI_SIDEBAR_SET_EXPANDED';
-export const UI_ROUTER_SET_ROUTE = 'UI_ROUTER_SET_ROUTE';
-export const UI_ROUTER_SET_ROUTE_FILTER = 'UI_ROUTER_SET_ROUTE_FILTER';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
 export const UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR =
   'UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR';
@@ -61,14 +58,6 @@ export function setSidebarItemFilter(
   filterFunc: (entry: SidebarEntryProps) => SidebarEntryProps | null
 ) {
   return { type: UI_SIDEBAR_SET_ITEM_FILTER, filterFunc };
-}
-
-export function setRoute(routeSpec: Route) {
-  return { type: UI_ROUTER_SET_ROUTE, route: routeSpec };
-}
-
-export function setRouteFilter(filterFunc: (entry: Route) => Route | null) {
-  return { type: UI_ROUTER_SET_ROUTE_FILTER, filterFunc };
 }
 
 export function setClusterChooserButtonComponent(component: ClusterChooserType) {

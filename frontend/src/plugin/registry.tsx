@@ -36,11 +36,10 @@ import {
 import {
   setClusterChooserButtonComponent,
   setFunctionsToOverride,
-  setRoute,
-  setRouteFilter,
   setSidebarItem,
   setSidebarItemFilter,
 } from '../redux/actions/actions';
+import { setRoute, setRouteFilter } from '../redux/routesSlice';
 import store from '../redux/stores/store';
 
 export interface SectionFuncProps {

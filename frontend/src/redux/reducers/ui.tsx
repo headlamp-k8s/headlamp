@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { DefaultSidebars, SidebarEntryProps } from '../../components/Sidebar';
-import { Route } from '../../lib/router';
 import themesConf from '../../lib/themes';
 import { ClusterChooserType } from '../../plugin/registry';
 import {
@@ -9,8 +8,6 @@ import {
   UI_FUNCTIONS_OVERRIDE,
   UI_HIDE_APP_BAR,
   UI_INITIALIZE_PLUGIN_VIEWS,
-  UI_ROUTER_SET_ROUTE,
-  UI_ROUTER_SET_ROUTE_FILTER,
   UI_SET_CLUSTER_CHOOSER_BUTTON,
   UI_SIDEBAR_SET_EXPANDED,
   UI_SIDEBAR_SET_ITEM,
@@ -21,7 +18,6 @@ import {
 } from '../actions/actions';
 
 type SidebarEntryFilterFuncType = (entry: SidebarEntryProps) => SidebarEntryProps | null;
-type RouteFilterFuncType = (entry: Route) => Route | null;
 
 export interface UIState {
   sidebar: {
@@ -38,10 +34,6 @@ export interface UIState {
     };
     filters: SidebarEntryFilterFuncType[];
   };
-  routes: {
-    [path: string]: Route;
-  };
-  routeFilters: RouteFilterFuncType[];
   isVersionDialogOpen: boolean;
   clusterChooserButtonComponent?: ClusterChooserType;
   hideAppBar?: boolean;
@@ -84,10 +76,6 @@ export const INITIAL_STATE: UIState = {
     entries: {},
     filters: [],
   },
-  routes: {
-    // path -> Route
-  },
-  routeFilters: [],
   isVersionDialogOpen: false,
   hideAppBar: false,
   functionsToOverride: {},
@@ -139,17 +127,6 @@ function reducer(state = _.cloneDeep(INITIAL_STATE), action: Action) {
     }
     case UI_HIDE_APP_BAR: {
       newFilters.hideAppBar = action.hideAppBar;
-      break;
-    }
-    case UI_ROUTER_SET_ROUTE: {
-      const routes = { ...newFilters.routes };
-      routes[action.route.path] = action.route;
-      newFilters.routes = routes;
-      break;
-    }
-    case UI_ROUTER_SET_ROUTE_FILTER: {
-      const routeFilters = [...newFilters.routeFilters, action.filterFunc];
-      newFilters.routeFilters = routeFilters;
       break;
     }
     case UI_INITIALIZE_PLUGIN_VIEWS: {

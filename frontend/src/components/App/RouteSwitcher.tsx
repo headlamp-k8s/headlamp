@@ -19,8 +19,8 @@ import { useSidebarItem } from '../Sidebar';
 
 export default function RouteSwitcher(props: { requiresToken: () => boolean }) {
   // The NotFoundRoute always has to be evaluated in the last place.
-  const routes = useTypedSelector(state => state.ui.routes);
-  const routeFilters = useTypedSelector(state => state.ui.routeFilters);
+  const routes = useTypedSelector(state => state.routes.routes);
+  const routeFilters = useTypedSelector(state => state.routes.routeFilters);
   const defaultRoutes = Object.values(getDefaultRoutes()).concat(NotFoundRoute);
   const clusters = useClustersConf();
   const filteredRoutes = Object.values(routes)
