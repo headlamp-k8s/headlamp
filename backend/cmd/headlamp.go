@@ -12,16 +12,13 @@ import (
 	"io"
 	"io/fs"
 	"log"
-	"net"
 	"net/http"
 	"net/url"
 	"os"
 	"path"
 	"path/filepath"
 	"runtime"
-	"strconv"
 	"strings"
-	"syscall"
 	"time"
 
 	oidc "github.com/coreos/go-oidc"
@@ -33,13 +30,11 @@ import (
 	"github.com/headlamp-k8s/headlamp/backend/pkg/helm"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/plugins"
-	corev1 "k8s.io/api/core/v1"
+	"github.com/headlamp-k8s/headlamp/backend/pkg/portforward"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
-	"k8s.io/client-go/tools/portforward"
-	"k8s.io/client-go/transport/spdy"
 
 	zlog "github.com/rs/zerolog/log"
 	"golang.org/x/oauth2"
@@ -66,45 +61,9 @@ type HeadlampConfig struct {
 	kubeConfigStore       kubeconfig.ContextStore
 }
 
-const PodAvailabilityCheckTimer = 5 // seconds
-
 const DrainNodeCacheTTL = 20 // seconds
 
-const (
-	RUNNING = "Running"
-	STOPPED = "Stopped"
-)
-
 const isWindows = runtime.GOOS == "windows"
-
-// PortForward Information for internal use for each port that is being forwarded.
-type PortForward struct {
-	ID               string `json:"id"`
-	closeChan        chan struct{}
-	Pod              string `json:"pod"`
-	Service          string `json:"service"`
-	ServiceNamespace string `json:"serviceNamespace"`
-	Namespace        string `json:"namespace"`
-	Cluster          string `json:"cluster"`
-	Port             string `json:"port"`
-	TargetPort       string `json:"targetPort"`
-	Status           string `json:"status"`
-	Error            string `json:"error"`
-}
-
-// PortForwardPayload Request parameters for Port forwarding.
-// RequestURL:/portforward  POST.
-type PortForwardPayload struct {
-	ID               string `json:"id"`
-	Namespace        string `json:"namespace"`
-	Pod              string `json:"pod"`
-	Service          string `json:"service"`
-	ServiceNamespace string `json:"serviceNamespace"`
-	TargetPort       string `json:"targetPort"`
-	Cluster          string `json:"cluster"`
-	Address          string `json:"address"`
-	Port             string `json:"port"`
-}
 
 type clientConfig struct {
 	Clusters []Cluster `json:"clusters"`
@@ -120,62 +79,6 @@ type OauthConfig struct {
 	Config   *oauth2.Config
 	Verifier *oidc.IDTokenVerifier
 	Ctx      context.Context
-}
-
-var portForwards = make(map[string][]PortForward)
-
-func portforwardstore(p PortForward) {
-	// check if we already have a portforward with the same id if yes update it
-	for index, v := range portForwards[p.Cluster] {
-		if v.ID == p.ID {
-			portForwards[p.Cluster][index] = p
-			return
-		}
-	}
-
-	portForwards[p.Cluster] = append(portForwards[p.Cluster], p)
-}
-
-// stopOrDeletePortForward stops or deletes a port forward by its cluster and id.
-// It takes three parameters: cluster is the name of the cluster, id is the unique identifier of the port forward,
-// isStopRequest is a boolean value indicating whether to stop or delete the port forward.
-// It returns an error value indicating whether the operation is successful or not.
-func stopOrDeletePortForward(cluster string, id string, isStopRequest bool) error {
-	clusterPortForwards, ok := portForwards[cluster]
-	if ok {
-		for index, v := range clusterPortForwards {
-			if v.ID == id {
-				if !isStopRequest {
-					portForwards[cluster] = append(clusterPortForwards[:index], clusterPortForwards[index+1:]...)
-				} else {
-					v.Status = STOPPED
-					v.closeChan <- struct{}{}
-					clusterPortForwards[index] = v
-				}
-
-				return nil
-			}
-		}
-	}
-
-	return fmt.Errorf("PortForward not found")
-}
-
-func getPortForwardList(cluster string) []PortForward {
-	return portForwards[cluster]
-}
-
-func getPortForwardByID(cluster string, id string) PortForward {
-	val, ok := portForwards[cluster]
-	if ok {
-		for _, v := range val {
-			if v.ID == id {
-				return v
-			}
-		}
-	}
-
-	return PortForward{}
 }
 
 func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -231,26 +134,6 @@ func copyReplace(src string, dst string,
 	if err != nil {
 		log.Fatal(err)
 	}
-}
-
-func (p PortForwardPayload) validatePortForward() error {
-	if p.Namespace == "" {
-		return fmt.Errorf("namespace is required")
-	}
-
-	if p.Pod == "" {
-		return fmt.Errorf("pod name is required")
-	}
-
-	if p.TargetPort == "" {
-		return fmt.Errorf("targetPort is required")
-	}
-
-	if p.Cluster == "" {
-		return fmt.Errorf("cluster name is required")
-	}
-
-	return nil
 }
 
 // make sure the base-url is updated in the index.html file.
@@ -612,159 +495,22 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	}).Queries("cluster", "{cluster}")
 
 	r.HandleFunc("/portforward", func(w http.ResponseWriter, r *http.Request) {
-		var p PortForwardPayload
-		err := json.NewDecoder(r.Body).Decode(&p)
-		if err != nil {
-			http.Error(w, "invalid request "+err.Error(), http.StatusBadRequest)
-			return
-		}
-		if p.ID == "" {
-			id := uuid.New().String()
-			p.ID = id
-		}
-		if p.Address == "" {
-			p.Address = "localhost"
-		}
-
-		reqToken := r.Header.Get("Authorization")
-		splitToken := strings.Split(reqToken, "Bearer ")
-		var token string
-		if reqToken != "" || len(splitToken) > 2 {
-			token = splitToken[1]
-		}
-
-		err = p.validatePortForward()
-		if err != nil {
-			http.Error(w, "invalid request "+err.Error(), http.StatusBadRequest)
-			return
-		}
-		if p.Port == "" {
-			// if no port is specified find a available port
-			freePort, err := GetFreePort()
-			if err != nil {
-				http.Error(w, "can't find any available port "+err.Error(), http.StatusInternalServerError)
-			}
-			if freePort != 0 {
-				p.Port = strconv.Itoa(freePort)
-			}
-		}
-
-		if err != nil {
-			http.Error(w, "failed to marshal port forward payload "+err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		err = config.startPortForward(p, token)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		jsonPayload, err := json.Marshal(p)
-		if err != nil {
-			log.Printf("Error decoding portforward payload %s", err)
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		w.Header().Set("Content-Type", "application/json")
-		if _, err = w.Write(jsonPayload); err != nil {
-			http.Error(w, "failed to write json payload to response write "+err.Error(), http.StatusInternalServerError)
-		}
+		portforward.StartPortForward(config.kubeConfigStore, config.cache, w, r)
 	}).Methods("POST")
 
 	r.HandleFunc("/portforward", func(w http.ResponseWriter, r *http.Request) {
-		type deletePayload struct {
-			ID           string `json:"id"`
-			Cluster      string `json:"cluster"`
-			StopOrDelete bool   `json:"stopOrDelete"`
-		}
-		var dp deletePayload
-		err := json.NewDecoder(r.Body).Decode(&dp)
-		if err != nil {
-			log.Printf("Error decoding delete portforward payload %s", err)
-			http.Error(w, err.Error(), http.StatusBadRequest)
-			return
-		}
-		if dp.ID == "" {
-			http.Error(w, "id is required", http.StatusBadRequest)
-			return
-		}
-		if dp.Cluster == "" {
-			http.Error(w, "cluster is required", http.StatusBadRequest)
-			return
-		}
-		err = stopOrDeletePortForward(dp.Cluster, dp.ID, dp.StopOrDelete)
-		if err == nil {
-			if _, err := w.Write([]byte("stopped")); err != nil {
-				http.Error(w, "failed to write response "+err.Error(), http.StatusInternalServerError)
-			}
-			return
-		}
-		http.Error(w, "failed to delete port forward "+err.Error(), http.StatusInternalServerError)
+		portforward.StopOrDeletePortForward(config.cache, w, r)
 	}).Methods("DELETE")
 
 	r.HandleFunc("/portforward/list", func(w http.ResponseWriter, r *http.Request) {
-		cluster := r.URL.Query().Get("cluster")
-		if cluster == "" {
-			http.Error(w, "cluster is required", http.StatusBadRequest)
-			return
-		}
-		ports := getPortForwardList(cluster)
-
-		jsonPayload, err := json.Marshal(ports)
-		if err != nil {
-			http.Error(w, "failed to marshal port forward list "+err.Error(), http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "application/json")
-		if _, err = w.Write(jsonPayload); err != nil {
-			http.Error(w, "failed to write json payload to response "+err.Error(), http.StatusInternalServerError)
-		}
+		portforward.GetPortForwards(config.cache, w, r)
 	})
 
 	r.HandleFunc("/drain-node", config.handleNodeDrain).Methods("POST")
 	r.HandleFunc("/drain-node-status",
 		config.handleNodeDrainStatus).Methods("GET").Queries("cluster", "{cluster}", "nodeName", "{node}")
 	r.HandleFunc("/portforward", func(w http.ResponseWriter, r *http.Request) {
-		id := r.URL.Query().Get("id")
-		cluster := r.URL.Query().Get("cluster")
-		if cluster == "" {
-			http.Error(w, "cluster is required", http.StatusBadRequest)
-			return
-		}
-		if id == "" {
-			http.Error(w, "id is required", http.StatusBadRequest)
-			return
-		}
-		p := getPortForwardByID(cluster, id)
-		if p.ID == "" {
-			http.Error(w, "no portforward running with id "+id, http.StatusNotFound)
-			return
-		}
-		type payload struct {
-			ID        string `json:"id"`
-			Pod       string `json:"pod"`
-			Service   string `json:"service"`
-			Cluster   string `json:"cluster"`
-			Namespace string `json:"namespace"`
-		}
-		portForwardStruct := payload{
-			ID:        p.ID,
-			Pod:       p.Pod,
-			Namespace: p.Namespace,
-			Cluster:   p.Cluster,
-			Service:   p.Service,
-		}
-		jsonPayload, err := json.Marshal(portForwardStruct)
-		if err != nil {
-			http.Error(w, "failed to marshal port forward get "+err.Error(), http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "application/json")
-		if _, err := w.Write(jsonPayload); err != nil {
-			http.Error(w, "failed to write json payload "+err.Error(), http.StatusInternalServerError)
-		}
+		portforward.GetPortForwardByID(config.cache, w, r)
 	}).Methods("GET")
 
 	r.HandleFunc("/oidc-callback", func(w http.ResponseWriter, r *http.Request) {
@@ -863,135 +609,6 @@ func StartHeadlampServer(config *HeadlampConfig) {
 
 	// Start server
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.port), handler)) //nolint:gosec
-}
-
-func GetFreePort() (int, error) {
-	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
-	if err != nil {
-		return 0, err
-	}
-
-	l, err := net.ListenTCP("tcp", addr)
-	if err != nil {
-		return 0, err
-	}
-
-	defer l.Close()
-
-	return l.Addr().(*net.TCPAddr).Port, nil
-}
-
-//nolint:funlen
-func (c *HeadlampConfig) startPortForward(p PortForwardPayload, token string) error {
-	ports := []string{fmt.Sprintf(p.Port + ":" + p.TargetPort)}
-
-	kContext, err := c.kubeConfigStore.GetContext(p.Cluster)
-	if err != nil {
-		return nil
-	}
-
-	clientset, err := kContext.ClientSetWithToken(token)
-	if err != nil {
-		return fmt.Errorf("failed to create portforward request: %v", err)
-	}
-
-	rConf, err := kContext.RESTConfig()
-	if err != nil {
-		return fmt.Errorf("failed to create portforward request: %v", err)
-	}
-
-	rConf.BearerToken = token
-
-	roundTripper, upgrader, err := spdy.RoundTripperFor(rConf)
-	if err != nil {
-		log.Printf("Error: failed to create round tripper: %s", err)
-		return fmt.Errorf("failed to create portforward request")
-	}
-
-	requestURL := fmt.Sprintf("%s/api/v1/namespaces/%s/pods/%s/portforward", rConf.Host, p.Namespace, p.Pod)
-
-	reqURL, err := url.Parse(requestURL)
-	if err != nil {
-		return fmt.Errorf("portforward request: failed to parse url: %v", err)
-	}
-
-	dialer := spdy.NewDialer(upgrader, &http.Client{Transport: roundTripper}, http.MethodPost, reqURL)
-	stopChan, readyChan := make(chan struct{}), make(chan struct{}, 1)
-	out, errOut := new(bytes.Buffer), new(bytes.Buffer)
-
-	forwarder, err := portforward.NewOnAddresses(dialer, []string{p.Address}, ports, stopChan, readyChan, out, errOut)
-	if err != nil {
-		return fmt.Errorf("portforward request: failed to create portforward: %v", err)
-	}
-
-	portForwardToStore := PortForward{
-		ID:               p.ID,
-		closeChan:        stopChan,
-		Pod:              p.Pod,
-		Cluster:          p.Cluster,
-		Namespace:        p.Namespace,
-		Service:          p.Service,
-		ServiceNamespace: p.ServiceNamespace,
-		TargetPort:       p.TargetPort,
-		Status:           RUNNING,
-		Port:             p.Port,
-		Error:            "",
-	}
-
-	go func() {
-		if err = forwarder.ForwardPorts(); err != nil { // Locks until stopChan is closed.
-			log.Printf("Error: failed to forward ports: %s", err)
-			stopChan <- struct{}{}
-
-			portForwardToStore.Error = err.Error()
-			portforwardstore(portForwardToStore)
-		}
-	}()
-
-	for {
-		<-readyChan
-		break
-	}
-
-	if errOut.String() == "" {
-		portforwardstore(portForwardToStore)
-	}
-
-	/* check every PodAvailabilityCheckTimer seconds if the pod for which we started a portforward is running
-	if not then we close the channel
-	*/
-	ticker := time.NewTicker(PodAvailabilityCheckTimer * time.Second)
-
-	go func() {
-		for range ticker.C {
-			ctx := context.Background()
-
-			pod, err := clientset.CoreV1().Pods(p.Namespace).Get(ctx, p.Pod, v1.GetOptions{})
-			if errors.Is(err, syscall.ECONNREFUSED) {
-				continue
-			} else if err != nil {
-				log.Printf("portforward: failed to get pod: %s", err)
-				stopChan <- struct{}{}
-				portForwardToStore.Error = err.Error()
-				portforwardstore(portForwardToStore)
-				ticker.Stop()
-				break
-			}
-
-			if pod.Status.Phase != corev1.PodRunning {
-				// close the channel if this pod is not running
-				stopChan <- struct{}{}
-
-				portForwardToStore.Error = "Pod is not running"
-				portforwardstore(portForwardToStore)
-				ticker.Stop()
-
-				break
-			}
-		}
-	}()
-
-	return nil
 }
 
 // Returns the helm.Handler given the config and request. Writes http.NotFound if clusterName is not there.
