@@ -570,7 +570,24 @@ function multipleApiFactory(
     put: repeatFactoryMethod(apiEndpoints, 'put'),
     delete: repeatFactoryMethod(apiEndpoints, 'delete'),
     isNamespaced: false,
+    apiInfo: args.map(apiArgs => ({
+      group: apiArgs[0],
+      version: apiArgs[1],
+      resource: apiArgs[2],
+    })),
   };
+}
+
+/**
+ * Describes the API for a certain resource.
+ */
+export interface ApiInfo {
+  /** The API group. */
+  group: string;
+  /** The API version. */
+  version: string;
+  /** The resource name. */
+  resource: string;
 }
 
 // @todo: singleApiFactory should have a return type rather than just what it returns.
@@ -608,6 +625,7 @@ function singleApiFactory(group: string, version: string, resource: string) {
     delete: (name: string, queryParams?: QueryParameters) =>
       remove(`${url}/${name}` + asQuery(queryParams)),
     isNamespaced: false,
+    apiInfo: [{ group, version, resource }],
   };
 }
 
@@ -647,6 +665,11 @@ function multipleApiFactoryWithNamespace(
     put: repeatFactoryMethod(apiEndpoints, 'put'),
     delete: repeatFactoryMethod(apiEndpoints, 'delete'),
     isNamespaced: true,
+    apiInfo: args.map(apiArgs => ({
+      group: apiArgs[0],
+      version: apiArgs[1],
+      resource: apiArgs[2],
+    })),
   };
 }
 
@@ -699,6 +722,7 @@ function simpleApiFactoryWithNamespace(
     delete: (namespace: string, name: string, queryParams?: QueryParameters) =>
       remove(`${url(namespace)}/${name}` + asQuery(queryParams)),
     isNamespaced: true,
+    apiInfo: [{ group, version, resource }],
   };
 
   if (includeScale) {

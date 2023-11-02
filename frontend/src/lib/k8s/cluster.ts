@@ -309,6 +309,9 @@ export interface AuthRequestResourceAttrs {
   resource?: string;
   subresource?: string;
   namespace?: string;
+  version?: string;
+  group?: string;
+  verb?: string;
 }
 
 // @todo: uses of makeKubeObject somehow end up in an 'any' type.
@@ -667,10 +670,39 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       return this._class().apiEndpoint.patch(...args);
     }
 
+    /** Performs a request to check if the user has the given permission.
+     * @param reResourceAttrs The attributes describing this access request. See https://kubernetes.io/docs/reference/kubernetes-api/authorization-resources/self-subject-access-review-v1/#SelfSubjectAccessReviewSpec .
+     * @returns The result of the access request.
+     */
+    private static async fetchAuthorization(reqResourseAttrs?: AuthRequestResourceAttrs) {
+      // @todo: We should get the API info from the API endpoint.
+      const authApiVersions = ['v1', 'v1beta1'];
+      for (let j = 0; j < authApiVersions.length; j++) {
+        const authVersion = authApiVersions[j];
+
+        try {
+          return await post(
+            `/apis/authorization.k8s.io/${authVersion}/selfsubjectaccessreviews`,
+            {
+              kind: 'SelfSubjectAccessReview',
+              apiVersion: `authorization.k8s.io/${authVersion}`,
+              spec: {
+                resourceAttributes: reqResourseAttrs,
+              },
+            },
+            false
+          );
+        } catch (err) {
+          // If this is the last attempt or the error is not 404, let it throw.
+          if ((err as ApiError).status !== 404 || j === authApiVersions.length - 1) {
+            throw err;
+          }
+        }
+      }
+    }
+
     static async getAuthorization(verb: string, reqResourseAttrs?: AuthRequestResourceAttrs) {
-      const resourceAttrs: AuthRequestResourceAttrs & {
-        verb: string;
-      } = {
+      const resourceAttrs: AuthRequestResourceAttrs = {
         verb,
         ...reqResourseAttrs,
       };
@@ -679,37 +711,53 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
         resourceAttrs['resource'] = this.pluralName;
       }
 
-      const spec = {
-        resourceAttributes: resourceAttrs,
-      };
+      // @todo: We should get the API info from the API endpoint.
 
-      const versions = ['v1', 'v1beta1'];
-      for (let i = 0; i < versions.length; i++) {
-        const version = versions[i];
+      // If we already have the group, version, and resource, then we can make the request
+      // without trying the API info, which may have several versions and thus be less optimal.
+      if (!!resourceAttrs.group && !!resourceAttrs.version && !!resourceAttrs.resource) {
+        return this.fetchAuthorization(resourceAttrs);
+      }
+
+      // If we don't have the group, version, and resource, then we have to try all of the
+      // API info versions until we find one that works.
+      const apiInfo = this.apiEndpoint.apiInfo;
+      for (let i = 0; i < apiInfo.length; i++) {
+        const { group, version, resource } = apiInfo[i];
+        // We only take from the details from the apiInfo if they're missing from the resourceAttrs.
+        // The idea is that, since this function may also be called from the instance's getAuthorization,
+        // it may already have the details from the instance's API version.
+        const attrs = { ...resourceAttrs };
+
+        if (!!attrs.resource) {
+          attrs.resource = resource;
+        }
+        if (!!attrs.group) {
+          attrs.group = group;
+        }
+        if (!!attrs.version) {
+          attrs.version = version;
+        }
+
+        let authResult;
+
         try {
-          return await post(
-            `/apis/authorization.k8s.io/${version}/selfsubjectaccessreviews`,
-            {
-              kind: 'SelfSubjectAccessReview',
-              apiVersion: `authorization.k8s.io/${version}`,
-              spec,
-            },
-            false
-          );
+          authResult = await this.fetchAuthorization(attrs);
         } catch (err) {
           // If this is the last attempt or the error is not 404, let it throw.
-          if ((err as ApiError).status !== 404 || i === versions.length - 1) {
+          if ((err as ApiError).status !== 404 || i === apiInfo.length - 1) {
             throw err;
           }
+        }
+
+        if (!!authResult) {
+          return authResult;
         }
       }
     }
 
     async getAuthorization(verb: string, reqResourseAttrs?: AuthRequestResourceAttrs) {
-      const resourceAttrs: AuthRequestResourceAttrs & {
-        name: string;
-        verb: string;
-      } = {
+      const resourceAttrs: AuthRequestResourceAttrs = {
         name: this.getName(),
         verb,
         ...reqResourseAttrs,
@@ -718,6 +766,20 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       const namespace = this.getNamespace();
       if (!resourceAttrs.namespace && !!namespace) {
         resourceAttrs['namespace'] = namespace;
+      }
+
+      // Set up the group and version from the object's API version.
+      let [group, version] = this.jsonData?.apiVersion.split('/');
+      if (!version) {
+        version = group;
+        group = '';
+      }
+
+      if (!!group) {
+        resourceAttrs['group'] = group;
+      }
+      if (!!version) {
+        resourceAttrs['version'] = version;
       }
 
       return this._class().getAuthorization(verb, resourceAttrs);
