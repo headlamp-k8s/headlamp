@@ -2,6 +2,7 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
+import { ApiError } from '../../lib/k8s/apiProxy';
 import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import DaemonSet from '../../lib/k8s/daemonSet';
@@ -21,19 +22,16 @@ interface WorkloadDict {
 }
 
 export default function Overview() {
-  const [workloadsData, dispatch] = React.useReducer(setWorkloads, {});
+  const [workloadsData, setWorkloadsData] = React.useState<WorkloadDict>({});
   const location = useLocation();
   const filterFunc = useFilterFunc(['.jsonData.kind']);
   const { t } = useTranslation('glossary');
 
-  function setWorkloads(
-    workloads: WorkloadDict,
-    { items, kind }: { items: Workload[]; kind: string }
-  ) {
-    const data = { ...workloads };
-    data[kind] = items;
-
-    return data;
+  function setWorkloads(newWorkloads: WorkloadDict) {
+    setWorkloadsData(workloads => ({
+      ...workloads,
+      ...newWorkloads,
+    }));
   }
 
   function getPods(item: Workload) {
@@ -49,9 +47,15 @@ export default function Overview() {
     return totalReplicasDiff;
   }
 
-  // Get all items except the pods since those shouldn't be shown in the table (only the chart).
   function getJointItems() {
     let joint: Workload[] = [];
+
+    // Return null if no items are yet loaded, so we show the spinner in the table.
+    if (Object.keys(workloadsData).length === 0) {
+      return null;
+    }
+
+    // Get all items except the pods since those shouldn't be shown in the table (only the chart).
     for (const [key, items] of Object.entries(workloadsData)) {
       if (key === 'Pod') {
         continue;
@@ -71,8 +75,14 @@ export default function Overview() {
     Pod,
   ];
   workloads.forEach((workloadClass: KubeObject) => {
-    workloadClass.useApiList((items: InstanceType<typeof workloadClass>[]) =>
-      dispatch({ items, kind: workloadClass.className })
+    workloadClass.useApiList(
+      (items: InstanceType<typeof workloadClass>[]) => {
+        setWorkloads({ [workloadClass.className]: items });
+      },
+      (err: ApiError) => {
+        console.error(`Workloads list: Failed to get list for ${workloadClass.className}: ${err}`);
+        setWorkloads({ [workloadClass.className]: [] });
+      }
     );
   });
 
@@ -83,7 +93,7 @@ export default function Overview() {
           {workloads.map(({ className: name }) => (
             <Grid item lg={3} md={4} xs={6} key={name}>
               <WorkloadCircleChart
-                workloadData={workloadsData[name] || []}
+                workloadData={workloadsData[name] || null}
                 // @todo: Use a plural from from the class itself when we have it
                 title={name + 's'}
                 partialLabel={t('translation|Failed')}
