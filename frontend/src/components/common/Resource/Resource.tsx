@@ -12,7 +12,7 @@ import Editor from '@monaco-editor/react';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _, { has } from 'lodash';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
 import { labelSelectorToQuery } from '../../../lib/k8s';
@@ -130,8 +130,25 @@ export function DetailsGrid(props: DetailsGridProps) {
     otherMainInfoSectionProps;
 
   const [item, error] = resourceType.useGet(name, namespace);
+  const prevItemRef = useRef<{ uid?: string; version?: string; error?: ApiError }>({});
 
   React.useEffect(() => {
+    // We cannot call this callback more than once on each version of the item, in order to avoid
+    // infinite loops.
+    const prevItem = prevItemRef.current;
+    if (
+      prevItem?.uid === item?.metatada?.uid &&
+      prevItem?.version === item?.metadata?.resourceVersion &&
+      error === prevItem.error
+    ) {
+      return;
+    }
+
+    prevItemRef.current = {
+      uid: item?.metatada?.uid,
+      version: item?.metadata?.resourceVersion,
+      error,
+    };
     onResourceUpdate?.(item, error);
   }, [item, error]);
 
