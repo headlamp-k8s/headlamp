@@ -16,6 +16,7 @@ import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
 import { labelSelectorToQuery } from '../../../lib/k8s';
+import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
   KubeCondition,
   KubeContainer,
@@ -96,6 +97,8 @@ export interface DetailsGridProps
   sectionsFunc?: (item: KubeObject) => React.ReactNode | DetailsViewSection[];
   /** If true, will show the events section. */
   withEvents?: boolean;
+  /** Called when the resource instance is created/updated, or there is an error. */
+  onResourceUpdate?: (resource: KubeObject, error: ApiError) => void;
 }
 
 /** Renders the different parts that constibute an actual resource's details view.
@@ -110,6 +113,7 @@ export function DetailsGrid(props: DetailsGridProps) {
     children,
     withEvents,
     extraSections,
+    onResourceUpdate,
     ...otherMainInfoSectionProps
   } = props;
   const { t } = useTranslation();
@@ -126,6 +130,10 @@ export function DetailsGrid(props: DetailsGridProps) {
     otherMainInfoSectionProps;
 
   const [item, error] = resourceType.useGet(name, namespace);
+
+  React.useEffect(() => {
+    onResourceUpdate?.(item, error);
+  }, [item, error]);
 
   const actualBackLink: string | Location | undefined = React.useMemo(() => {
     if (!!backLink || backLink === '') {
