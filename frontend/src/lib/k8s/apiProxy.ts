@@ -1308,7 +1308,7 @@ export async function metrics(
   onMetrics: (arg: KubeMetrics[]) => void,
   onError?: (err: ApiError) => void
 ) {
-  const handel = setInterval(getMetrics, 10000);
+  const handle = setInterval(getMetrics, 10000);
 
   async function getMetrics() {
     try {
@@ -1326,7 +1326,7 @@ export async function metrics(
   }
 
   function cancel() {
-    clearInterval(handel);
+    clearInterval(handle);
   }
 
   getMetrics();
