@@ -7,7 +7,7 @@
   "bin": "bin/headlamp-plugin.js",
   "scripts": {
     "prepack": "(node -e \"if (! require('fs').existsSync('./lib/components')) {process.exit(1)} \" || (echo 'lib dir is empty. Remember to run `npm run build` before packing' && exit 1))",
-    "build": "npx shx rm -rf lib types lib/assets lib/components lib/helpers lib/i18n lib/lib lib/plugin lib/redux lib/resources && npx shx cp -r ../../frontend/src/react-app-env.d.ts ../../frontend/src/assets ../../frontend/src/components ../../frontend/src/helpers ../../frontend/src/i18n ../../frontend/src/lib ../../frontend/src/plugin ../../frontend/src/redux ../../frontend/src/resources src/ && tsc --build ./tsconfig.json && npx shx cp -r src/additional.d.ts lib/ && npx shx cp -r ../../frontend/src/assets lib/ && npx shx cp -r ../../frontend/src/resources lib/ && npx shx cp -r ../../frontend/src/i18n/locales lib/i18n",
+    "build": "npx shx rm -rf lib types lib/assets lib/components lib/helpers lib/i18n lib/lib lib/plugin lib/redux lib/resources && npx shx cp -r ../../frontend/src/react-app-env.d.ts ../../frontend/src/assets ../../frontend/src/components ../../frontend/src/helpers ../../frontend/src/stateless ../../frontend/src/i18n ../../frontend/src/lib ../../frontend/src/plugin ../../frontend/src/redux ../../frontend/src/resources src/ && tsc --build ./tsconfig.json && npx shx cp -r src/additional.d.ts lib/ && npx shx cp -r ../../frontend/src/assets lib/ && npx shx cp -r ../../frontend/src/resources lib/ && npx shx cp -r ../../frontend/src/i18n/locales lib/i18n",
     "update-dependencies": "node dependencies-sync.js update",
     "check-dependencies": "node dependencies-sync.js check",
     "postinstall": "patch-package"

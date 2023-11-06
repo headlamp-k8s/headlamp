@@ -14,7 +14,7 @@ import helpers, { getHeadlampAPIHeaders, isDebugVerbose } from '../../helpers';
 import store from '../../redux/stores/store';
 import {
   findKubeconfigByClusterName,
-  getUserId,
+  getUserIdFromLocalStorage,
   storeStatelessClusterKubeconfig,
 } from '../../stateless';
 import { getToken, logout, setToken } from '../auth';
@@ -340,16 +340,16 @@ export async function clusterRequest(
     ...otherParams
   } = params;
 
-  const userID = getUserId();
+  const userID = getUserIdFromLocalStorage();
   const opts: { headers: RequestHeaders } = Object.assign({ headers: {} }, otherParams);
   const cluster = paramsCluster || '';
 
   let fullPath = path;
   if (cluster) {
     const token = getToken(cluster);
-    const matchingKubeconfig = findKubeconfigByClusterName(cluster);
-    if (matchingKubeconfig !== null) {
-      opts.headers['KUBECONFIG'] = matchingKubeconfig;
+    const kubeconfig = await findKubeconfigByClusterName(cluster);
+    if (kubeconfig !== null) {
+      opts.headers['KUBECONFIG'] = kubeconfig;
       opts.headers['X-HEADLAMP-USER-ID'] = userID;
     }
 
@@ -1187,7 +1187,7 @@ function connectStream(
 
   // @todo: This is a temporary way of getting the current cluster. We should improve it later.
   const cluster = getCluster();
-  const userID = getUserId();
+  const userID = getUserIdFromLocalStorage();
   const token = getToken(cluster || '');
 
   const protocols = ['base64.binary.k8s.io', ...additionalProtocols];
@@ -1201,13 +1201,15 @@ function connectStream(
   if (cluster) {
     fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
     // Include the userID as a query parameter if it's a stateless cluster
-    const matchingKubeconfig = findKubeconfigByClusterName(cluster);
-    if (matchingKubeconfig !== null) {
-      const queryParams = `X-HEADLAMP-USER-ID=${userID}`;
-      url = combinePath(BASE_WS_URL, fullPath) + (fullPath.includes('?') ? '&' : '?') + queryParams;
-    } else {
-      url = combinePath(BASE_WS_URL, fullPath);
-    }
+    findKubeconfigByClusterName(cluster).then(kubeconfig => {
+      if (kubeconfig !== null) {
+        const queryParams = `X-HEADLAMP-USER-ID=${userID}`;
+        url =
+          combinePath(BASE_WS_URL, fullPath) + (fullPath.includes('?') ? '&' : '?') + queryParams;
+      } else {
+        url = combinePath(BASE_WS_URL, fullPath);
+      }
+    });
   }
 
   let socket: WebSocket | null = null;
@@ -1394,7 +1396,7 @@ export async function setCluster(clusterReq: ClusterRequest) {
   const kubeconfig = clusterReq.kubeconfig;
 
   if (kubeconfig) {
-    storeStatelessClusterKubeconfig(kubeconfig);
+    await storeStatelessClusterKubeconfig(kubeconfig);
     return;
   }
 

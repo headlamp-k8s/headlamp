@@ -746,7 +746,6 @@ func handleWebsocket(w http.ResponseWriter, r *http.Request, clusterName string)
 	}
 
 	// TODO: authentication add token to request and check.
-	// TODO: Store everything in indexDB rather then in session storage.
 
 	// Remove the "X-HEADLAMP-USER-ID" parameter from the websocket URL.
 	delete(queryParams, "X-HEADLAMP-USER-ID")

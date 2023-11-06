@@ -87,6 +87,48 @@ function ClusterNotFoundPopup() {
   );
 }
 
+async function fetchStatelessClusterKubeConfigs(dispatch: any) {
+  const config = await getStatelessClusterKubeConfigs();
+  const statelessClusters = store.getState().config.statelessClusters;
+  const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
+  const clusterReq = {
+    kubeconfigs: config,
+  };
+
+  // Parses statelessCluster config
+  request(
+    '/parseKubeConfig',
+    {
+      method: 'POST',
+      body: JSON.stringify(clusterReq),
+      headers: {
+        ...JSON_HEADERS,
+      },
+    },
+    false,
+    false
+  )
+    .then((config: Config) => {
+      const clustersToConfig: ConfigState['statelessClusters'] = {};
+      config?.clusters.forEach((cluster: Cluster) => {
+        clustersToConfig[cluster.name] = cluster;
+      });
+
+      const configToStore = {
+        ...config,
+        statelessClusters: clustersToConfig,
+      };
+      if (statelessClusters === null) {
+        dispatch(setStatelessConfig({ ...configToStore }));
+      } else if (Object.keys(clustersToConfig).length !== Object.keys(statelessClusters).length) {
+        dispatch(setStatelessConfig({ ...configToStore }));
+      }
+    })
+    .catch((err: Error) => {
+      console.error('Error getting config:', err);
+    });
+}
+
 export default function Layout({}: LayoutProps) {
   const classes = useStyle();
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
@@ -202,45 +244,7 @@ export default function Layout({}: LayoutProps) {
    * if the present stored config is different from the fetched one.
    */
   const fetchStatelessConfig = () => {
-    const config = getStatelessClusterKubeConfigs();
-    const statelessClusters = store.getState().config.statelessClusters;
-    const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
-    const clusterReq = {
-      kubeconfigs: config,
-    };
-
-    // Parses statelessCluster config
-    request(
-      '/parseKubeConfig',
-      {
-        method: 'POST',
-        body: JSON.stringify(clusterReq),
-        headers: {
-          ...JSON_HEADERS,
-        },
-      },
-      false,
-      false
-    )
-      .then((config: Config) => {
-        const clustersToConfig: ConfigState['statelessClusters'] = {};
-        config?.clusters.forEach((cluster: Cluster) => {
-          clustersToConfig[cluster.name] = cluster;
-        });
-
-        const configToStore = {
-          ...config,
-          statelessClusters: clustersToConfig,
-        };
-        if (statelessClusters === null) {
-          dispatch(setStatelessConfig({ ...configToStore }));
-        } else if (Object.keys(clustersToConfig).length !== Object.keys(statelessClusters).length) {
-          dispatch(setStatelessConfig({ ...configToStore }));
-        }
-      })
-      .catch((err: Error) => {
-        console.error('Error getting config:', err);
-      });
+    fetchStatelessClusterKubeConfigs(dispatch);
   };
 
   return (
