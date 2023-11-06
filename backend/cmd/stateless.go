@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"net/url"
 
 	"github.com/gorilla/mux"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
@@ -95,4 +96,77 @@ func (c *HeadlampConfig) parseKubeConfig(w http.ResponseWriter, r *http.Request)
 		log.Println("Error encoding config", err)
 		http.Error(w, "Invalid JSON request body", http.StatusBadRequest)
 	}
+}
+
+// websocketConnContextKey handles websocket requests. It returns context key
+// which is used to store the context in the cache. The context key is
+// unique for each user. It is found in the "X-HEADLAMP-USER-ID" parameter
+// in the websocket URL.
+func websocketConnContextKey(w http.ResponseWriter, r *http.Request, clusterName string) (string, error) {
+	var contextKey string
+	// Parse the URL
+	u, err := url.Parse(r.URL.String())
+	if err != nil {
+		log.Println("Error: parsing URL: ", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+
+		return "", err
+	}
+
+	// Get the query parameters
+	queryParams := u.Query()
+	// Check if "X-HEADLAMP-USER-ID" parameter is present in the websocket URL.
+	userIDparam := queryParams.Get("X-HEADLAMP-USER-ID")
+	if userIDparam != "" {
+		contextKey = clusterName + userIDparam
+	} else {
+		contextKey = clusterName
+	}
+
+	// Remove the "X-HEADLAMP-USER-ID" parameter from the websocket URL.
+	delete(queryParams, "X-HEADLAMP-USER-ID")
+	u.RawQuery = queryParams.Encode()
+	r.URL = u
+
+	return contextKey, nil
+}
+
+// getContextKeyForRequest handles every requests. It returns context key
+// which is used to store the context in the cache. The context key is
+// unique for each user. It is found in the "X-HEADLAMP-USER-ID" parameter.
+// For stateless clusters it is combination of cluster name and user id.
+// For normal clusters it is just the cluster name.
+func (c *HeadlampConfig) getContextKeyForRequest(w http.ResponseWriter, r *http.Request) (string, error) {
+	var contextKey string
+
+	var err error
+
+	clusterName := mux.Vars(r)["clusterName"]
+
+	// checking if kubeConfig exists, if not check if the request headers for kubeConfig information
+	kubeConfig := r.Header.Get("KUBECONFIG")
+
+	if kubeConfig != "" && c.enableDynamicClusters {
+		// if kubeConfig is set and dynamic clusters are enabled then handle stateless cluster requests
+		key, err := c.handleStatelessReq(r, kubeConfig)
+		if err != nil {
+			return "", err
+		}
+
+		contextKey = key
+	} else {
+		contextKey = clusterName
+	}
+
+	// This means the connection is from websocket so there won't be kubeconfig header.
+	// We get the value of X-HEADLAMP-USER-ID from the parameter and append it to the cluster name
+	// to get the context key. This is to ensure that the context key is unique for each user.
+	if r.Header.Get("Upgrade") == "websocket" {
+		contextKey, err = websocketConnContextKey(w, r, clusterName)
+		if err != nil {
+			return "", err
+		}
+	}
+
+	return contextKey, nil
 }

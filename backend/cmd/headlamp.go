@@ -890,77 +890,17 @@ func handleClusterHelm(c *HeadlampConfig, router *mux.Router) {
 	})
 }
 
-// websocketConnContextKey handles websocket requests. It returns context key
-// which is used to store the context in the cache. The context key is
-// unique for each user. It is found in the "X-HEADLAMP-USER-ID" parameter
-// in the websocket URL.
-func websocketConnContextKey(w http.ResponseWriter, r *http.Request, clusterName string) (string, error) {
-	var contextKey string
-	// Parse the URL
-	u, err := url.Parse(r.URL.String())
-	if err != nil {
-		log.Println("Error: parsing URL: ", err)
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-
-		return "", err
-	}
-
-	// Get the query parameters
-	queryParams := u.Query()
-	// Check if "X-HEADLAMP-USER-ID" parameter is present in the websocket URL.
-	userIDparam := queryParams.Get("X-HEADLAMP-USER-ID")
-	if userIDparam != "" {
-		contextKey = clusterName + userIDparam
-	} else {
-		contextKey = clusterName
-	}
-
-	// TODO: Store everything in indexDB rather then in session storage.
-
-	// Remove the "X-HEADLAMP-USER-ID" parameter from the websocket URL.
-	delete(queryParams, "X-HEADLAMP-USER-ID")
-	u.RawQuery = queryParams.Encode()
-	r.URL = u
-
-	return contextKey, nil
-}
-
 // handleClusterAPI handles cluster API requests. It is responsible for
 // all the requests made to /clusters/{clusterName}/{api:.*} endpoint.
 // It parses the request and creates a proxy request to the cluster.
 // That proxy is saved in the cache with the context key.
 func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 	router.PathPrefix("/clusters/{clusterName}/{api:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		var contextKey string
-		var err error
-		clusterName := mux.Vars(r)["clusterName"]
-
-		// checking if kubeConfig exists, if not check if the request headers for kubeConfig information
-		kubeConfig := r.Header.Get("KUBECONFIG")
-
-		if kubeConfig != "" && c.enableDynamicClusters {
-			// if kubeConfig is set and dynamic clusters are enabled then handle stateless cluster requests
-			key, err := c.handleStatelessReq(r, kubeConfig)
-			if err != nil {
-				log.Println("Error: handling stateless cluster request: ", err)
-				http.Error(w, "Error: handling stateless cluster request", http.StatusInternalServerError)
-				return
-			}
-			contextKey = key
-		} else {
-			contextKey = clusterName
-		}
-
-		// This means the connection is from websocket so there won't be kubeconfig header.
-		// We get the value of X-HEADLAMP-USER-ID from the parameter and append it to the cluster name
-		// to get the context key. This is to ensure that the context key is unique for each user.
-		if r.Header.Get("Upgrade") == "websocket" {
-			contextKey, err = websocketConnContextKey(w, r, clusterName)
-			if err != nil {
-				log.Println("Error: handling websocket connection: ", err)
-				http.Error(w, "Error: handling websocket connection", http.StatusInternalServerError)
-				return
-			}
+		contextKey, err := c.getContextKeyForRequest(w, r)
+		if err != nil {
+			log.Printf("Error: failed to get context key: %s", err)
+			http.NotFound(w, r)
+			return
 		}
 
 		kContext, err := c.kubeConfigStore.GetContext(contextKey)

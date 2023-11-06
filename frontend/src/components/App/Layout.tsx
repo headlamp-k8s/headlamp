@@ -11,11 +11,11 @@ import { useClustersConf } from '../../lib/k8s';
 import { request } from '../../lib/k8s/apiProxy';
 import { Cluster } from '../../lib/k8s/cluster';
 import { getCluster } from '../../lib/util';
-import { setConfig, setStatelessConfig } from '../../redux/configSlice';
+import { setConfig } from '../../redux/configSlice';
 import { ConfigState } from '../../redux/configSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import store from '../../redux/stores/store';
-import { getStatelessClusterKubeConfigs, processClusterComparison } from '../../stateless/';
+import { fetchStatelessClusterKubeConfigs, processClusterComparison } from '../../stateless/';
 import ActionsNotifier from '../common/ActionsNotifier';
 import AlertNotification from '../common/AlertNotification';
 import Sidebar, { NavigationTabs } from '../Sidebar';
@@ -53,10 +53,6 @@ const useStyle = makeStyles(theme => ({
 export interface LayoutProps {}
 
 const CLUSTER_FETCH_INTERVAL = 10 * 1000; // ms
-
-interface Config {
-  [prop: string]: any;
-}
 
 function ClusterNotFoundPopup() {
   const theme = useTheme();
@@ -157,54 +153,7 @@ export default function Layout({}: LayoutProps) {
         console.error('Error getting config:', err);
       });
 
-    // Fetches statelessCluster config
-    fetchStatelessConfig();
-  };
-
-  /**
-   * Parses the cluster config from the backend and updates the redux store
-   * if the present stored config is different from the fetched one.
-   */
-  const fetchStatelessConfig = () => {
-    const config = getStatelessClusterKubeConfigs();
-    const statelessClusters = store.getState().config.statelessClusters;
-    const JSON_HEADERS = { Accept: 'application/json', 'Content-Type': 'application/json' };
-    const clusterReq = {
-      kubeconfigs: config,
-    };
-
-    // Parses statelessCluster config
-    request(
-      '/parseKubeConfig',
-      {
-        method: 'POST',
-        body: JSON.stringify(clusterReq),
-        headers: {
-          ...JSON_HEADERS,
-        },
-      },
-      false,
-      false
-    )
-      .then((config: Config) => {
-        const clustersToConfig: ConfigState['statelessClusters'] = {};
-        config?.clusters.forEach((cluster: Cluster) => {
-          clustersToConfig[cluster.name] = cluster;
-        });
-
-        const configToStore = {
-          ...config,
-          statelessClusters: clustersToConfig,
-        };
-        if (statelessClusters === null) {
-          dispatch(setStatelessConfig({ ...configToStore }));
-        } else if (Object.keys(clustersToConfig).length !== Object.keys(statelessClusters).length) {
-          dispatch(setStatelessConfig({ ...configToStore }));
-        }
-      })
-      .catch((err: Error) => {
-        console.error('Error getting config:', err);
-      });
+    fetchStatelessClusterKubeConfigs(dispatch);
   };
 
   return (

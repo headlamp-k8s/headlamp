@@ -91,10 +91,8 @@ interface CursorSuccessEvent extends Event {
 function handleDatabaseUpgrade(event: DatabaseEvent) {
   const db = event.target ? event.target.result : null;
   // Create the object store if it doesn't exist
-  if (db) {
-    if (!db.objectStoreNames.contains('kubeconfigStore')) {
-      db.createObjectStore('kubeconfigStore', { keyPath: 'id', autoIncrement: true });
-    }
+  if (db && !db.objectStoreNames.contains('kubeconfigStore')) {
+    db.createObjectStore('kubeconfigStore', { keyPath: 'id', autoIncrement: true });
   }
 }
 
@@ -117,7 +115,7 @@ function handleDataBaseError(event: DatabaseErrorEvent, reject: (reason?: any) =
  * @throws Error if IndexedDB is not supported.
  * @throws Error if the kubeconfig is invalid.
  */
-export function storeStatelessClusterKubeconfig(kubeconfig: any): Promise<void> {
+export function storeStatelessClusterKubeconfig(kubeconfig: string): Promise<void> {
   return new Promise<void>(async (resolve, reject) => {
     const request =
       process.env.NODE_ENV === 'test'
