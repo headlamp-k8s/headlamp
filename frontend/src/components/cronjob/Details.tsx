@@ -54,6 +54,22 @@ function SpawnJobDialog(props: {
   job.metadata.namespace = namespace;
   job.apiVersion = 'batch/v1';
   job.metadata.name = jobName;
+  job.metadata.annotations = {
+    ...job.metadata.annotations,
+    'cronjob.kubernetes.io/instantiate': 'manual',
+  };
+  if (!!cronJob.jsonData) {
+    job.metadata.ownerReferences = [
+      {
+        apiVersion: cronJob.jsonData.apiVersion,
+        blockOwnerDeletion: true,
+        controller: true,
+        kind: cronJob.jsonData.kind,
+        name: cronJob.metadata.name,
+        uid: cronJob.metadata.uid,
+      },
+    ];
+  }
 
   function handleClose() {
     setOpenJobDialog(false);
