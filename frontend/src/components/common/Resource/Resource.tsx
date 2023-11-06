@@ -12,10 +12,11 @@ import Editor from '@monaco-editor/react';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _, { has } from 'lodash';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
 import { labelSelectorToQuery } from '../../../lib/k8s';
+import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
   KubeCondition,
   KubeContainer,
@@ -96,6 +97,8 @@ export interface DetailsGridProps
   sectionsFunc?: (item: KubeObject) => React.ReactNode | DetailsViewSection[];
   /** If true, will show the events section. */
   withEvents?: boolean;
+  /** Called when the resource instance is created/updated, or there is an error. */
+  onResourceUpdate?: (resource: KubeObject, error: ApiError) => void;
 }
 
 /** Renders the different parts that constibute an actual resource's details view.
@@ -110,6 +113,7 @@ export function DetailsGrid(props: DetailsGridProps) {
     children,
     withEvents,
     extraSections,
+    onResourceUpdate,
     ...otherMainInfoSectionProps
   } = props;
   const { t } = useTranslation();
@@ -126,6 +130,27 @@ export function DetailsGrid(props: DetailsGridProps) {
     otherMainInfoSectionProps;
 
   const [item, error] = resourceType.useGet(name, namespace);
+  const prevItemRef = useRef<{ uid?: string; version?: string; error?: ApiError }>({});
+
+  React.useEffect(() => {
+    // We cannot call this callback more than once on each version of the item, in order to avoid
+    // infinite loops.
+    const prevItem = prevItemRef.current;
+    if (
+      prevItem?.uid === item?.metatada?.uid &&
+      prevItem?.version === item?.metadata?.resourceVersion &&
+      error === prevItem.error
+    ) {
+      return;
+    }
+
+    prevItemRef.current = {
+      uid: item?.metatada?.uid,
+      version: item?.metadata?.resourceVersion,
+      error,
+    };
+    onResourceUpdate?.(item, error);
+  }, [item, error]);
 
   const actualBackLink: string | Location | undefined = React.useMemo(() => {
     if (!!backLink || backLink === '') {
