@@ -49,7 +49,7 @@ function findParentOfSubList(
 export default function NavigationTabs() {
   const history = useHistory();
   const classes = useStyle();
-  const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const sidebar = useTypedSelector(state => state.sidebar);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const isSmallSideBar = useMediaQuery(theme.breakpoints.only('sm'));

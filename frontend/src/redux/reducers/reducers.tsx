@@ -10,6 +10,7 @@ import filterReducer from '../filterSlice';
 import routesReducer from '../routesSlice';
 import resourceTableReducer from './../../components/common/Resource/resourceTableSlice';
 import detailsViewSectionReducer from './../../components/DetailsViewSection/detailsViewSectionSlice';
+import sidebarReducer from './../../components/Sidebar/sidebarSlice';
 import uiReducer from './ui';
 
 const reducers = combineReducers({
@@ -24,6 +25,7 @@ const reducers = combineReducers({
   resourceTable: resourceTableReducer,
   detailsViewSection: detailsViewSectionReducer,
   routes: routesReducer,
+  sidebar: sidebarReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;
