@@ -1,12 +1,5 @@
 import { ClusterChooserType } from '../../components/cluster/ClusterChooser';
-import { SidebarEntryProps } from '../../components/Sidebar';
-import { UIState } from '../reducers/ui';
 
-export const UI_SIDEBAR_SET_SELECTED = 'UI_SIDEBAR_SET_SELECTED';
-export const UI_SIDEBAR_SET_VISIBLE = 'UI_SIDEBAR_SET_VISIBLE';
-export const UI_SIDEBAR_SET_ITEM = 'UI_SIDEBAR_SET_ITEM';
-export const UI_SIDEBAR_SET_ITEM_FILTER = 'UI_SIDEBAR_SET_ITEM_FILTER';
-export const UI_SIDEBAR_SET_EXPANDED = 'UI_SIDEBAR_SET_EXPANDED';
 export const UI_DETAILS_VIEW_SET_HEADER_ACTION = 'UI_DETAILS_VIEW_SET_HEADER_ACTION';
 export const UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR =
   'UI_DETAILS_VIEW_ADD_HEADER_ACTIONS_PROCESSOR';
@@ -22,37 +15,8 @@ export interface Action {
   [propName: string]: any;
 }
 
-type SidebarType = UIState['sidebar'];
-
-export function setSidebarSelected(selected: string | null, sidebar: string | null = '') {
-  return { type: UI_SIDEBAR_SET_SELECTED, selected: { item: selected, sidebar } };
-}
-
-export function setWhetherSidebarOpen(isSidebarOpen: boolean) {
-  localStorage.setItem('sidebar', JSON.stringify({ shrink: !isSidebarOpen }));
-  return { type: UI_SIDEBAR_SET_EXPANDED, isSidebarOpen, isSidebarOpenUserSelected: isSidebarOpen };
-}
-
 export function setHideAppBar(hideAppBar: boolean | undefined) {
   return { type: UI_HIDE_APP_BAR, hideAppBar };
-}
-
-export function setSidebarVisible(isVisible: SidebarType['isVisible']) {
-  return { type: UI_SIDEBAR_SET_VISIBLE, isVisible };
-}
-
-export function setSidebarItem(item: SidebarEntryProps) {
-  // @todo: Clarify the spec when we port this to Ts.
-  if (item.parent === undefined) {
-    item['parent'] = null;
-  }
-  return { type: UI_SIDEBAR_SET_ITEM, item };
-}
-
-export function setSidebarItemFilter(
-  filterFunc: (entry: SidebarEntryProps) => SidebarEntryProps | null
-) {
-  return { type: UI_SIDEBAR_SET_ITEM_FILTER, filterFunc };
 }
 
 export function setClusterChooserButtonComponent(component: ClusterChooserType) {

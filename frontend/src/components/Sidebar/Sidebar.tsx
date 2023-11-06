@@ -14,23 +14,26 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
-import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ActionButton } from '../common';
 import CreateButton from '../common/Resource/CreateButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';
-import SidebarItem, { SidebarEntryProps } from './SidebarItem';
+import SidebarItem from './SidebarItem';
+import {
+  DefaultSidebars,
+  setSidebarSelected,
+  setWhetherSidebarOpen,
+  SidebarEntryProps,
+} from './sidebarSlice';
 import VersionButton from './VersionButton';
 
 export const drawerWidth = 240;
 export const mobileDrawerWidth = 320;
 export const drawerWidthClosed = 64;
 
-export enum DefaultSidebars {
-  HOME = 'HOME',
-  IN_CLUSTER = 'IN-CLUSTER',
-}
+// exported for backwards compatibility for plugins
+export { DefaultSidebars };
 
 const useStyle = makeStyles(theme => ({
   drawer: {
@@ -92,9 +95,9 @@ const useStyle = makeStyles(theme => ({
 }));
 
 export function useSidebarInfo() {
-  const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
+  const isSidebarOpen = useTypedSelector(state => state.sidebar.isSidebarOpen);
   const isSidebarOpenUserSelected = useTypedSelector(
-    state => state.ui.sidebar.isSidebarOpenUserSelected
+    state => state.sidebar.isSidebarOpenUserSelected
   );
   const isTemporary = useMediaQuery('(max-width:599px)');
   const isNarrowOnly = useMediaQuery('(max-width:960px) and (min-width:600px)');
@@ -214,7 +217,7 @@ function DefaultLinkArea(props: { sidebarName: string; isOpen: boolean }) {
 export default function Sidebar() {
   const { t, i18n } = useTranslation(['glossary', 'translation']);
 
-  const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const sidebar = useTypedSelector(state => state.sidebar);
   const {
     isOpen,
     isUserOpened,
@@ -419,7 +422,7 @@ export function useSidebarItem(
 
   React.useEffect(
     () => {
-      dispatch(setSidebarSelected(itemName, sidebar));
+      dispatch(setSidebarSelected({ item: itemName, sidebar: sidebar }));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [itemName]

@@ -24,13 +24,14 @@ import {
   HeaderAction,
   HeaderActionType,
 } from '../../redux/actionButtonsSlice';
-import { setVersionDialogOpen, setWhetherSidebarOpen } from '../../redux/actions/actions';
+import { setVersionDialogOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SettingsButton } from '../App/Settings';
 import { ClusterTitle } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
+import { setWhetherSidebarOpen } from '../Sidebar/sidebarSlice';
 import { AppLogo } from './AppLogo';
 import Notifications from './Notifications';
 
@@ -60,9 +61,9 @@ export default function TopBar({}: TopBarProps) {
   const dispatch = useDispatch();
   const isMedium = useMediaQuery('(max-width:960px)');
 
-  const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
+  const isSidebarOpen = useTypedSelector(state => state.sidebar.isSidebarOpen);
   const isSidebarOpenUserSelected = useTypedSelector(
-    state => state.ui.sidebar.isSidebarOpenUserSelected
+    state => state.sidebar.isSidebarOpenUserSelected
   );
   const hideAppBar = useTypedSelector(state => state.ui.hideAppBar);
 

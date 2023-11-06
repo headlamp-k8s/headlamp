@@ -3,9 +3,10 @@ import { Meta, Story } from '@storybook/react/types-6-0';
 import { SnackbarProvider } from 'notistack';
 import { initialState as CONFIG_INITIAL_STATE } from '../../redux/configSlice';
 import { initialState as FILTER_INITIAL_STATE } from '../../redux/filterSlice';
-import { INITIAL_STATE as UI_INITIAL_STATE, UIState } from '../../redux/reducers/ui';
+import { INITIAL_STATE as UI_INITIAL_STATE } from '../../redux/reducers/ui';
 import { TestContext } from '../../test';
 import Sidebar, { DefaultSidebars, PureSidebar } from './Sidebar';
+import { initialState as SIDEBAR_INITIAL_STATE, SidebarState } from './sidebarSlice';
 
 export default {
   title: 'Sidebar/Sidebar',
@@ -15,7 +16,7 @@ export default {
   },
 } as Meta;
 
-type StoryProps = Partial<UIState['sidebar']>;
+type StoryProps = Partial<SidebarState>;
 
 const Template: Story<StoryProps> = args => {
   const sidebarStore = configureStore({
@@ -36,11 +37,11 @@ const Template: Story<StoryProps> = args => {
       },
       ui: {
         ...UI_INITIAL_STATE,
-        sidebar: {
-          ...UI_INITIAL_STATE.sidebar,
-          isVisible: true,
-          ...args,
-        },
+      },
+      sidebar: {
+        ...SIDEBAR_INITIAL_STATE,
+        isVisible: true,
+        ...args,
       },
     },
   });

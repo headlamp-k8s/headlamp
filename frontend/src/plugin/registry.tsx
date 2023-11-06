@@ -16,6 +16,7 @@ import {
   setDetailsViewSection,
 } from '../components/DetailsViewSection/detailsViewSectionSlice';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
+import { setSidebarItem, setSidebarItemFilter } from '../components/Sidebar/sidebarSlice';
 import { getHeadlampAPIHeaders } from '../helpers';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
@@ -33,12 +34,7 @@ import {
   setAppBarActionsProcessor,
   setDetailsViewHeaderAction,
 } from '../redux/actionButtonsSlice';
-import {
-  setClusterChooserButtonComponent,
-  setFunctionsToOverride,
-  setSidebarItem,
-  setSidebarItemFilter,
-} from '../redux/actions/actions';
+import { setClusterChooserButtonComponent, setFunctionsToOverride } from '../redux/actions/actions';
 import { setRoute, setRouteFilter } from '../redux/routesSlice';
 import store from '../redux/stores/store';
 
