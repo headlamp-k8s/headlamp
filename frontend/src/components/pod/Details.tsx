@@ -170,12 +170,36 @@ function PodLogViewer(props: PodLogViewerProps) {
             value={container}
             onChange={handleContainerChange}
           >
-            {item &&
-              item.spec.containers.map(({ name }) => (
-                <MenuItem value={name} key={name}>
-                  {name}
-                </MenuItem>
-              ))}
+            {item?.spec?.containers && (
+              <MenuItem disabled value="">
+                {t('glossary|Containers')}
+              </MenuItem>
+            )}
+            {item?.spec?.containers.map(({ name }) => (
+              <MenuItem value={name} key={name}>
+                {name}
+              </MenuItem>
+            ))}
+            {item?.spec?.initContainers && (
+              <MenuItem disabled value="">
+                {t('translation|Init Containers')}
+              </MenuItem>
+            )}
+            {item.spec.initContainers?.map(({ name }) => (
+              <MenuItem value={name} key={`init_container_${name}`}>
+                {name}
+              </MenuItem>
+            ))}
+            {item?.spec?.ephemeralContainers && (
+              <MenuItem disabled value="">
+                {t('glossary|Ephemeral Containers')}
+              </MenuItem>
+            )}
+            {item.spec.ephemeralContainers?.map(({ name }) => (
+              <MenuItem value={name} key={`eph_container_${name}`}>
+                {name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>,
         <FormControl className={classes.linesFormControl}>
