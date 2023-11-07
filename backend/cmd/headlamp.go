@@ -65,6 +65,10 @@ const DrainNodeCacheTTL = 20 // seconds
 
 const isWindows = runtime.GOOS == "windows"
 
+const ContextCacheTTL = 5 * time.Minute // minutes
+
+const ContextUpdateChacheTTL = 20 * time.Second // seconds
+
 type clientConfig struct {
 	Clusters []Cluster `json:"clusters"`
 }
@@ -761,8 +765,6 @@ func handleClusterAPI(c *HeadlampConfig, router *mux.Router) { //nolint:funlen
 				contextKey = clusterName + userIDparam
 			}
 
-			// TODO: authentication add token to request and check.
-
 			// Remove the "X-HEADLAMP-USER-ID" parameter from the websocket URL.
 			delete(queryParams, "X-HEADLAMP-USER-ID")
 			u.RawQuery = queryParams.Encode()
@@ -838,7 +840,7 @@ func (c *HeadlampConfig) handleStatelessReq(r *http.Request, kubeConfig string) 
 			if err != nil {
 				if err.Error() == "key not found" {
 					if err = c.kubeConfigStore.AddContextWithKeyAndTTL(&context, key, ContextCacheTTL); err != nil {
-						log.Println("Error: failed to store proxy: ", err)
+						log.Println("Error: failed to store context to cache: ", err)
 						return "", err
 					}
 				}
