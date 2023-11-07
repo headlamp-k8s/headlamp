@@ -745,8 +745,6 @@ func handleWebsocket(w http.ResponseWriter, r *http.Request, clusterName string)
 		contextKey = clusterName
 	}
 
-	// TODO: authentication add token to request and check.
-
 	// Remove the "X-HEADLAMP-USER-ID" parameter from the websocket URL.
 	delete(queryParams, "X-HEADLAMP-USER-ID")
 	u.RawQuery = queryParams.Encode()
@@ -852,7 +850,7 @@ func (c *HeadlampConfig) handleStatelessReq(r *http.Request, kubeConfig string) 
 			if err != nil {
 				if err.Error() == "key not found" {
 					if err = c.kubeConfigStore.AddContextWithKeyAndTTL(&context, key, ContextCacheTTL); err != nil {
-						log.Println("Error: failed to store proxy: ", err)
+						log.Println("Error: failed to store context to cache: ", err)
 						return "", err
 					}
 				}
