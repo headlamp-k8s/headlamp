@@ -2,6 +2,7 @@ package kubeconfig_test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/kubeconfig"
@@ -38,6 +39,32 @@ func TestContextStore(t *testing.T) {
 	require.NoError(t, err)
 
 	_, err = store.GetContext("test")
+	require.Error(t, err)
+	require.Equal(t, cache.ErrNotFound, err)
+
+	// Add context with key and ttl
+	err = store.AddContextWithKeyAndTTL(&kubeconfig.Context{Name: "testwithttl"}, "testwithttl", 2*time.Second)
+	require.NoError(t, err)
+
+	// Test GetContext
+	value, err := store.GetContext("testwithttl")
+	require.NoError(t, err)
+	require.Equal(t, "testwithttl", value.Name)
+
+	// Update ttl
+	err = store.UpdateTTL("testwithttl", 2*time.Second)
+	require.NoError(t, err)
+
+	// Test GetContext after updating ttl
+	value, err = store.GetContext("testwithttl")
+	require.NoError(t, err)
+	require.Equal(t, "testwithttl", value.Name)
+
+	// sleep for 5 seconds and check ttlkey is present or not
+	time.Sleep(5 * time.Second)
+
+	// Test GetContext
+	_, err = store.GetContext("testwithttl")
 	require.Error(t, err)
 	require.Equal(t, cache.ErrNotFound, err)
 }
