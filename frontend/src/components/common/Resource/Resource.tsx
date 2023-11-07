@@ -850,7 +850,13 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
     return resource?.spec?.initContainers || [];
   }
 
-  function getStatuses() {
+  function getEphemeralContainers() {
+    return resource?.spec?.ephemeralContainers || [];
+  }
+
+  function getStatuses(
+    statusKind: 'containerStatuses' | 'initContainerStatuses' | 'ephemeralContainerStatuses'
+  ) {
     if (!resource || resource.kind !== 'Pod') {
       return {};
     }
@@ -859,7 +865,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
       [key: string]: ContainerInfoProps['status'];
     } = {};
 
-    ((resource as KubePod).status.containerStatuses || []).forEach(containerStatus => {
+    ((resource as KubePod).status[statusKind] || []).forEach(containerStatus => {
       const { name, ...status } = containerStatus;
       statuses[name] = { ...status };
     });
@@ -869,7 +875,10 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
   const containers = getContainers();
   const initContainers = getInitContainers();
-  const statuses = getStatuses();
+  const ephemContainers = getEphemeralContainers();
+  const statuses = getStatuses('containerStatuses');
+  const initStatuses = getStatuses('initContainerStatuses');
+  const ephemStatuses = getStatuses('ephemeralContainerStatuses');
   const numContainers = containers.length;
 
   return (
@@ -889,6 +898,19 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
         )}
       </SectionBox>
 
+      {ephemContainers.length > 0 && (
+        <SectionBox title={t('glossary|Ephemeral Containers')}>
+          {ephemContainers.map((ephemContainer: KubeContainer) => (
+            <ContainerInfo
+              key={`ephem_container_${ephemContainer.name}`}
+              resource={resource}
+              container={ephemContainer}
+              status={ephemStatuses[ephemContainer.name]}
+            />
+          ))}
+        </SectionBox>
+      )}
+
       {initContainers.length > 0 && (
         <SectionBox title={t('translation|Init Containers')}>
           {initContainers.map((initContainer: KubeContainer, i: number) => (
@@ -896,7 +918,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
               key={`init_container_${i}`}
               resource={resource}
               container={initContainer}
-              status={statuses[initContainer.name]}
+              status={initStatuses[initContainer.name]}
             />
           ))}
         </SectionBox>
