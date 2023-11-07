@@ -850,7 +850,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
     return resource?.spec?.initContainers || [];
   }
 
-  function getStatuses() {
+  function getStatuses(statusKind: 'containerStatuses' | 'initContainerStatuses') {
     if (!resource || resource.kind !== 'Pod') {
       return {};
     }
@@ -859,7 +859,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
       [key: string]: ContainerInfoProps['status'];
     } = {};
 
-    ((resource as KubePod).status.containerStatuses || []).forEach(containerStatus => {
+    ((resource as KubePod).status[statusKind] || []).forEach(containerStatus => {
       const { name, ...status } = containerStatus;
       statuses[name] = { ...status };
     });
@@ -869,7 +869,8 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
   const containers = getContainers();
   const initContainers = getInitContainers();
-  const statuses = getStatuses();
+  const statuses = getStatuses('containerStatuses');
+  const initStatuses = getStatuses('initContainerStatuses');
   const numContainers = containers.length;
 
   return (
@@ -896,7 +897,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
               key={`init_container_${i}`}
               resource={resource}
               container={initContainer}
-              status={statuses[initContainer.name]}
+              status={initStatuses[initContainer.name]}
             />
           ))}
         </SectionBox>
