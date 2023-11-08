@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import helpers from '../../helpers';
 import { listPortForward, startPortForward, stopOrDeletePortForward } from '../../lib/k8s/apiProxy';
 import { getCluster } from '../../lib/util';
 import { Link, Loader, SectionBox, SimpleTable, StatusLabel } from '../common';
@@ -117,6 +118,11 @@ export default function PortForwardingList() {
     const { id, namespace, cluster, port, targetPort, pod, service, serviceNamespace } =
       portForwardInAction;
 
+    let address = 'localhost';
+    if (helpers.isDockerDesktop()) {
+      address = '0.0.0.0';
+    }
+
     portForwardInAction.loading = true;
     setPortForwardInAction(portForwardInAction);
     if (option === PortForwardAction.Start) {
@@ -129,6 +135,7 @@ export default function PortForwardingList() {
         service,
         serviceNamespace,
         port,
+        address,
         id
       ).then(() => {
         portForwardInAction.loading = false;
