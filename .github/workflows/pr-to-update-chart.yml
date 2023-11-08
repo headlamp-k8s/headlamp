@@ -34,7 +34,7 @@ jobs:
           echo $latestTag
       - name: Update Headlamp version in charts
         env:
-          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           if [ -z $user ]; then
             user=joaquimrocha
