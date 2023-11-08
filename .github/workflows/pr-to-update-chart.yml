@@ -62,6 +62,7 @@ jobs:
           git commit --signoff -m "charts: Bump Headlamp version to $LATEST_HEADLAMP_TAG"
           git status
           git log -1
+          git push origin $BRANCH -f
           gh pr create \
           --title "chart: Bump Headlamp version to $LATEST_HEADLAMP_TAG" \
           --base "main"  \
