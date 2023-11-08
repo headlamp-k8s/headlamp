@@ -20,8 +20,8 @@ sources:
 maintainers:
   - name: kinvolk
     url: https://kinvolk.io/
-version: 0.16.0
-appVersion: 0.20.1
+version: 0.17.0
+appVersion: v0.21.0
 annotations:
   artifacthub.io/category: monitoring-logging
   artifacthub.io/license: Apache-2.0
