@@ -55,15 +55,10 @@ jobs:
           ls
           base_branch="${{ github.base_ref }}"
           testcoverage="${{ env.coverage }}"
-          if [ "$base_branch" = "main" ]; then
-            echo "Base branch is main, using current test coverage value: $base_coverage"
-            base_coverage="$testcoverage"
-          else
-            git fetch origin "$base_branch"
-            git checkout "origin/$base_branch"
-            go test ./... -coverprofile=base_coverage.out -covermode=atomic -coverpkg=./...
-            base_coverage=$(go tool cover -func=base_coverage.out | grep total | grep -Eo '[0-9]+\.[0-9]+')
-          fi
+          git fetch origin "$base_branch"
+          git checkout "origin/$base_branch"
+          go test ./... -coverprofile=base_coverage.out -covermode=atomic -coverpkg=./...
+          base_coverage=$(go tool cover -func=base_coverage.out | grep total | grep -Eo '[0-9]+\.[0-9]+')
           echo "Base branch code coverage: $base_coverage"
           echo "base_coverage=$base_coverage" >> $GITHUB_ENV
         shell: bash
