@@ -54,7 +54,9 @@ jobs:
           cd backend
           ls
           base_branch="${{ github.base_ref }}"
+          testcoverage="${{ env.coverage }}"
           if [ "$base_branch" = "main" ]; then
+            echo "Base branch is main, using current test coverage value: $base_coverage"
             base_coverage="$testcoverage"
           else
             git fetch origin "$base_branch"
@@ -95,8 +97,8 @@ jobs:
             emoji="😃" # Increased or unchanged coverage
           fi
 
-          comment="Code coverage $emoji ${emoji}changed from $base_coverage% to $testcoverage%. Change: $coverage_diff%."
+          comment="Code coverage $emoji changed from $base_coverage% to $testcoverage%. Change: $coverage_diff%."
           echo "$comment"
-          gh issue comment ${GITHUB_REF} --body "${comment}"
+          gh issue comment ${{github.event.number}} --body "${comment}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
