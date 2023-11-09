@@ -89,7 +89,7 @@ jobs:
             emoji="😃" # Increased or unchanged coverage
           fi
 
-          comment="Code coverage changed from $base_coverage% to $testcoverage%. Change: $coverage_diff% $emoji."
+          comment="Backend Code coverage changed from $base_coverage% to $testcoverage%. Change: $coverage_diff% $emoji."
           echo "$comment"
           gh issue comment ${{github.event.number}} --body "${comment}"
         env:
