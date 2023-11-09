@@ -52,6 +52,7 @@ jobs:
       - name: Get base branch code coverage
         run: |
           cd backend
+          ls
           base_branch="${{ github.base_ref }}"
           if [ "$base_branch" = "main" ]; then
             base_coverage="$testcoverage"
