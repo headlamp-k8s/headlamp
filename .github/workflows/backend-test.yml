@@ -8,6 +8,9 @@ on:
 env:
   HEADLAMP_RUN_INTEGRATION_TESTS: true
 
+permissions:
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
