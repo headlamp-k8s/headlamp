@@ -19,7 +19,7 @@ jobs:
     
       - uses: actions/setup-go@v3
         with:
-          go-version: 1.20
+          go-version: 1.20.5
     
       - name: Install dependencies
         run: |
@@ -46,14 +46,17 @@ jobs:
           go test ./... -coverprofile=coverage.out -covermode=atomic -coverpkg=./...
           testcoverage=$(go tool cover -func=coverage.out | grep total | grep -Eo '[0-9]+\.[0-9]+')
           echo "Code coverage: $testcoverage"
-          echo "Code coverage::set-output name=coverage::$testcoverage"
+          echo "coverage=$testcoverage" >> $GITHUB_ENV
         shell: bash
 
       - name: Get base branch code coverage
         run: |
           cd backend
+          ls
           base_branch="${{ github.base_ref }}"
+          testcoverage="${{ env.coverage }}"
           if [ "$base_branch" = "main" ]; then
+            echo "Base branch is main, using current test coverage value: $base_coverage"
             base_coverage="$testcoverage"
           else
             git fetch origin "$base_branch"
@@ -62,25 +65,40 @@ jobs:
             base_coverage=$(go tool cover -func=base_coverage.out | grep total | grep -Eo '[0-9]+\.[0-9]+')
           fi
           echo "Base branch code coverage: $base_coverage"
-          echo "Base branch code coverage::set-output name=base_coverage::$base_coverage"
+          echo "base_coverage=$base_coverage" >> $GITHUB_ENV
         shell: bash
 
       - name: Compare code coverage
         run: |
-          testcoverage="${{ steps.code-coverage.outputs.coverage }}"
-          base_coverage="${{ steps.get-base-branch-code-coverage.outputs.base_coverage }}"
+          testcoverage="${{ env.coverage }}"
+          base_coverage="${{ env.base_coverage }}"
+          if [[ -z $testcoverage || -z $base_coverage ]]; then
+            echo "testcoverage or base_coverage is not set. Cannot calculate coverage difference."
+            exit 1
+          fi
+          
+          echo "testcoverage=$testcoverage"
+          echo "base_coverage=$base_coverage"
+          echo "$testcoverage - $base_coverage"
+
           coverage_diff=$(echo "$testcoverage - $base_coverage" | bc)
           echo "Coverage change: $coverage_diff"
-          echo "Coverage change::set-output name=coverage_diff::$coverage_diff"
+          echo "coverage_diff=$coverage_diff" >> $GITHUB_ENV
         shell: bash
 
       - name: Comment on PR
         run: |
-          testcoverage="${{ steps.code-coverage.outputs.coverage }}"
-          base_coverage="${{ steps.get-base-branch-code-coverage.outputs.base_coverage }}"
-          coverage_diff="${{ steps.compare-code-coverage.outputs.coverage_diff }}"
-          comment="Code coverage changed from $base_coverage% to $testcoverage%. Change: $coverage_diff%."
+          testcoverage="${{ env.coverage }}"
+          base_coverage="${{ env.base_coverage }}"
+          coverage_diff="${{ env.coverage_diff }}"
+          if (( $(echo "$coverage_diff < 0" | bc -l) )); then
+            emoji="😞" # Decreased coverage
+          else
+            emoji="😃" # Increased or unchanged coverage
+          fi
 
-          gh issue comment ${GITHUB_REF} --body "${comment}"
+          comment="Code coverage $emoji changed from $base_coverage% to $testcoverage%. Change: $coverage_diff%."
+          echo "$comment"
+          gh issue comment ${{github.event.number}} --body "${comment}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
