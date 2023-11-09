@@ -24,6 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd backend
+          ls
           go mod download
     
       - name: Start cluster
