@@ -20,6 +20,7 @@ type ClusterReq struct {
 	InsecureSkipTLSVerify bool `json:"insecure-skip-tls-verify,omitempty"`
 	// CertificateAuthorityData contains PEM-encoded certificate authority certificates. Overrides CertificateAuthority
 	// +optional
+	// it is
 	CertificateAuthorityData []byte                 `json:"certificate-authority-data,omitempty"`
 	Metadata                 map[string]interface{} `json:"meta_data"`
 	KubeConfig               *string                `json:"kubeconfig,omitempty"`
