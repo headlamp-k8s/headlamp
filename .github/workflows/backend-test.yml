@@ -8,9 +8,6 @@ on:
 env:
   HEADLAMP_RUN_INTEGRATION_TESTS: true
 
-permissions:
-  pull-requests: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -96,4 +93,4 @@ jobs:
           echo "$comment"
           gh issue comment ${{github.event.number}} --body "${comment}"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.KINVOLK_REPOS_TOKEN }}
