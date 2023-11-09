@@ -217,10 +217,10 @@ func fileExists(filename string) bool {
 func copyReplace(src string, dst string,
 	search []byte, replace []byte,
 	search2 []byte, replace2 []byte,
-) {
+) error {
 	data, err := os.ReadFile(src)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	data1 := bytes.ReplaceAll(data, search, replace)
@@ -229,8 +229,9 @@ func copyReplace(src string, dst string,
 
 	err = os.WriteFile(dst, data2, fs.FileMode(fileMode))
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
+	return nil
 }
 
 func (p PortForwardPayload) validatePortForward() error {
@@ -254,7 +255,7 @@ func (p PortForwardPayload) validatePortForward() error {
 }
 
 // make sure the base-url is updated in the index.html file.
-func baseURLReplace(staticDir string, baseURL string) {
+func baseURLReplace(staticDir string, baseURL string) error {
 	indexBaseURL := path.Join(staticDir, "index.baseUrl.html")
 	index := path.Join(staticDir, "index.html")
 
@@ -267,10 +268,10 @@ func baseURLReplace(staticDir string, baseURL string) {
 	}
 
 	if !fileExists(indexBaseURL) {
-		copyReplace(index, indexBaseURL, []byte(""), []byte(""), []byte(""), []byte(""))
+		return copyReplace(index, indexBaseURL, []byte(""), []byte(""), []byte(""), []byte(""))
 	}
 
-	copyReplace(indexBaseURL,
+	return copyReplace(indexBaseURL,
 		index,
 		[]byte("./"),
 		[]byte(baseURL+"/"),
@@ -430,7 +431,10 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	}
 
 	if config.staticDir != "" {
-		baseURLReplace(config.staticDir, config.baseURL)
+		err := baseURLReplace(config.staticDir, config.baseURL)
+		if err != nil {
+			log.Println("Failed to replace base-url in index.html", err)
+		}
 	}
 
 	// For when using a base-url, like "/headlamp" with a reverse proxy.
