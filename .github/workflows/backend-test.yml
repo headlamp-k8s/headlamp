@@ -49,7 +49,6 @@ jobs:
       - name: Get base branch code coverage
         run: |
           cd backend
-          ls
           base_branch="${{ github.base_ref }}"
           testcoverage="${{ env.coverage }}"
           git fetch origin "$base_branch"
@@ -91,6 +90,10 @@ jobs:
 
           comment="Backend Code coverage changed from $base_coverage% to $testcoverage%. Change: $coverage_diff% $emoji."
           echo "$comment"
-          gh issue comment ${{github.event.number}} --body "${comment}"
+          if [[ "${{github.event.pull_request.head.repo.full_name}}" == "${{github.repository}}" ]]; then
+            gh issue comment ${{github.event.number}} --body "${comment}"
+          else
+            echo "Pull request raised from a fork. Skipping comment."
+          fi
         env:
-          GITHUB_TOKEN: ${{ secrets.KINVOLK_REPOS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
