@@ -2,6 +2,7 @@ import Grid from '@mui/material/Grid';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
+import { useCluster } from '../../lib/k8s';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import { KubeObject, Workload } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
@@ -26,6 +27,11 @@ export default function Overview() {
   const location = useLocation();
   const filterFunc = useFilterFunc(['.jsonData.kind']);
   const { t } = useTranslation('glossary');
+  const cluster = useCluster();
+
+  React.useEffect(() => {
+    setWorkloadsData({});
+  }, [cluster]);
 
   function setWorkloads(newWorkloads: WorkloadDict) {
     setWorkloadsData(workloads => ({
