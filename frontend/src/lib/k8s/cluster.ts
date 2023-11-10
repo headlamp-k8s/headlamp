@@ -4,7 +4,7 @@ import React from 'react';
 import helpers from '../../helpers';
 import { createRouteURL } from '../router';
 import { getCluster, timeAgo, useErrorState } from '../util';
-import { useConnectApi } from '.';
+import { useCluster, useConnectApi } from '.';
 import { ApiError, apiFactory, apiFactoryWithNamespace, post, QueryParameters } from './apiProxy';
 import CronJob from './cronJob';
 import DaemonSet from './daemonSet';
@@ -527,6 +527,13 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
     ): [U[] | null, ApiError | null, (items: U[]) => void, (err: ApiError | null) => void] {
       const [objList, setObjList] = React.useState<U[] | null>(null);
       const [error, setError] = useErrorState(setObjList);
+      const cluster = useCluster();
+
+      // Reset the list and error when the cluster changes.
+      React.useEffect(() => {
+        setObjList(null);
+        setError(null);
+      }, [cluster]);
 
       function setList(items: U[] | null) {
         setObjList(items);
