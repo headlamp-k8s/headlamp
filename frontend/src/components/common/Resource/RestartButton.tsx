@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObject } from '../../../lib/k8s/cluster';
-import { clusterAction } from '../../../redux/actions/actions';
+import { clusterAction } from '../../../redux/clusterActionSlice';
 import AuthVisible from './AuthVisible';
 
 interface RestartButtonProps {
