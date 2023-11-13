@@ -16,7 +16,7 @@ import {
   findKubeconfigByClusterName,
   getUserIdFromLocalStorage,
   storeStatelessClusterKubeconfig,
-} from '../../stateless';
+} from '../../stateless/index';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
 import { KubeMetadata, KubeMetrics, KubeObjectInterface } from './cluster';
@@ -1113,10 +1113,9 @@ export interface StreamArgs {
  * the stream, and `getSocket`, which returns the WebSocket object.
  */
 export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
-  let connection: ReturnType<typeof connectStream>;
+  let connection: { close: () => void; socket: WebSocket | null } | null = null;
   let isCancelled = false;
   const { failCb } = args;
-  // We only set reconnectOnFailure as true by default if the failCb has not been provided.
   const { isJson = false, additionalProtocols, connectCb, reconnectOnFailure = !failCb } = args;
 
   if (isDebugVerbose('k8s/apiProxy@stream')) {
@@ -1128,7 +1127,7 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   return { cancel, getSocket };
 
   function getSocket() {
-    return connection.socket;
+    return connection ? connection.socket : null;
   }
 
   function cancel() {
@@ -1136,9 +1135,14 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
     isCancelled = true;
   }
 
-  function connect() {
+  async function connect() {
     if (connectCb) connectCb();
-    connection = connectStream(url, cb, onFail, isJson, additionalProtocols);
+    try {
+      connection = await connectStream(url, cb, onFail, isJson, additionalProtocols);
+    } catch (error) {
+      console.error('Error connecting stream:', error);
+      onFail();
+    }
   }
 
   function retryOnFail() {
@@ -1176,16 +1180,15 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
  *
  * @returns An object with a `close` function and a `socket` property.
  */
-function connectStream(
+async function connectStream(
   path: string,
   cb: StreamResultsCb,
   onFail: () => void,
   isJson: boolean,
   additionalProtocols: string[] = []
-) {
+): Promise<{ close: () => void; socket: WebSocket | null }> {
   let isClosing = false;
 
-  // @todo: This is a temporary way of getting the current cluster. We should improve it later.
   const cluster = getCluster();
   const userID = getUserIdFromLocalStorage();
   const token = getToken(cluster || '');
@@ -1200,16 +1203,13 @@ function connectStream(
   let url = '';
   if (cluster) {
     fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
-    // Include the userID as a query parameter if it's a stateless cluster
-    findKubeconfigByClusterName(cluster).then(kubeconfig => {
-      if (kubeconfig !== null) {
-        const queryParams = `X-HEADLAMP-USER-ID=${userID}`;
-        url =
-          combinePath(BASE_WS_URL, fullPath) + (fullPath.includes('?') ? '&' : '?') + queryParams;
-      } else {
-        url = combinePath(BASE_WS_URL, fullPath);
-      }
-    });
+    const kubeconfig = await findKubeconfigByClusterName(cluster);
+    if (kubeconfig !== null) {
+      const queryParams = `X-HEADLAMP-USER-ID=${userID}`;
+      url = combinePath(BASE_WS_URL, fullPath) + (fullPath.includes('?') ? '&' : '?') + queryParams;
+    } else {
+      url = combinePath(BASE_WS_URL, fullPath);
+    }
   }
 
   let socket: WebSocket | null = null;
@@ -1230,7 +1230,10 @@ function connectStream(
     if (!socket) {
       return;
     }
-    socket.close();
+
+    if (socket) {
+      socket.close();
+    }
   }
 
   function onMessage(body: MessageEvent) {
@@ -1251,9 +1254,11 @@ function connectStream(
       return;
     }
 
-    socket.removeEventListener('message', onMessage);
-    socket.removeEventListener('close', onClose);
-    socket.removeEventListener('error', onError);
+    if (socket) {
+      socket.removeEventListener('message', onMessage);
+      socket.removeEventListener('close', onClose);
+      socket.removeEventListener('error', onError);
+    }
 
     console.warn('Socket closed unexpectedly', { path, args });
     onFail();
