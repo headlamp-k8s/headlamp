@@ -1262,7 +1262,7 @@ export interface StreamArgs {
  * the stream, and `getSocket`, which returns the WebSocket object.
  */
 export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
-  let connection: ReturnType<typeof connectStream>;
+  let connection: { close: () => void; socket: WebSocket | null } | null = null;
   let isCancelled = false;
   const { failCb, cluster = '' } = args;
   // We only set reconnectOnFailure as true by default if the failCb has not been provided.
@@ -1277,7 +1277,7 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   return { cancel, getSocket };
 
   function getSocket() {
-    return connection.socket;
+    return connection ? connection.socket : null;
   }
 
   function cancel() {
@@ -1285,9 +1285,14 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
     isCancelled = true;
   }
 
-  function connect() {
+  async function connect() {
     if (connectCb) connectCb();
-    connection = connectStream(url, cb, onFail, isJson, additionalProtocols, cluster);
+    try {
+      connection = await connectStream(url, cb, onFail, isJson, additionalProtocols, cluster);
+    } catch (error) {
+      console.error('Error connecting stream:', error);
+      onFail();
+    }
   }
 
   function retryOnFail() {
@@ -1325,7 +1330,7 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
  *
  * @returns An object with a `close` function and a `socket` property.
  */
-function connectStream(
+async function connectStream(
   path: string,
   cb: StreamResultsCb,
   onFail: () => void,
@@ -1346,7 +1351,18 @@ interface StreamParams {
   additionalProtocols?: string[];
 }
 
-function connectStreamWithParams(
+/**
+ * @param path - The path of the WebSocket stream to connect to.
+ * @param cb - The function to call with each message received from the stream.
+ * @param onFail - The function to call if the stream is closed unexpectedly.
+ * @param params - Stream parameters to configure the connection.
+ * connectStreamWithParams is a wrapper around connectStream that allows for more
+ * flexibility in the parameters that can be passed to the WebSocket connection.
+ * This is an async function because it may need to fetch the kubeconfig for the
+ * cluster if the cluster is specified in the params.
+ * @returns A promise that resolves to an object with a `close` function and a `socket` property.
+ */
+async function connectStreamWithParams(
   path: string,
   cb: StreamResultsCb,
   onFail: () => void,
@@ -1368,8 +1384,9 @@ function connectStreamWithParams(
   let url = '';
   if (cluster) {
     fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
-    // Include the userID as a query parameter if it's a stateless cluster
-    findKubeconfigByClusterName(cluster).then(kubeconfig => {
+    try {
+      const kubeconfig = await findKubeconfigByClusterName(cluster);
+
       if (kubeconfig !== null) {
         const queryParams = `X-HEADLAMP-USER-ID=${userID}`;
         url =
@@ -1377,7 +1394,11 @@ function connectStreamWithParams(
       } else {
         url = combinePath(BASE_WS_URL, fullPath);
       }
-    });
+    } catch (error) {
+      console.error('Error while finding kubeconfig:', error);
+      // Even if we can't find the kubeconfig, we can still try to connect to the cluster.
+      url = combinePath(BASE_WS_URL, fullPath);
+    }
   }
 
   let socket: WebSocket | null = null;
@@ -1398,6 +1419,7 @@ function connectStreamWithParams(
     if (!socket) {
       return;
     }
+
     socket.close();
   }
 
@@ -1419,9 +1441,11 @@ function connectStreamWithParams(
       return;
     }
 
-    socket.removeEventListener('message', onMessage);
-    socket.removeEventListener('close', onClose);
-    socket.removeEventListener('error', onError);
+    if (socket) {
+      socket.removeEventListener('message', onMessage);
+      socket.removeEventListener('close', onClose);
+      socket.removeEventListener('error', onError);
+    }
 
     console.warn('Socket closed unexpectedly', { path, args });
     onFail();
