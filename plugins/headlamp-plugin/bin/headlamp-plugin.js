@@ -5,7 +5,9 @@
 const webpack = require('webpack');
 const config = require('../config/webpack.config');
 const fs = require('fs-extra');
+const Ajv = require('ajv');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
+const WatchExternalFilesPlugin = require('webpack-watch-files-plugin').default;
 const envPaths = require('env-paths');
 const path = require('path');
 const resolve = path.resolve;
@@ -30,6 +32,7 @@ function create(name, link) {
   const indexPath = path.join(dstFolder, 'src', 'index.tsx');
   const packagePath = path.join(dstFolder, 'package.json');
   const readmePath = path.join(dstFolder, 'README.md');
+  const settingsPath = path.join(dstFolder, 'settings.json');
 
   if (fs.existsSync(name)) {
     console.error(`"${name}" already exists, not initializing`);
@@ -65,6 +68,7 @@ function create(name, link) {
   replaceFileVariables(packagePath);
   replaceFileVariables(indexPath);
   replaceFileVariables(readmePath);
+  replaceFileVariables(settingsPath);
 
   // This can be used to make testing locally easier.
   if (link) {
@@ -186,6 +190,11 @@ function extract(pluginPackagesPath, outputPlugins) {
       console.log(`Copying "${inputPackageJson}" to "${outputPackageJson}".`);
       fs.copyFileSync(inputPackageJson, outputPackageJson);
 
+      const inputSettingsJson = path.join(pluginPackagesPath, 'settings.json');
+      const outputSettingsJson = path.join(plugName, 'settings.json');
+      console.log(`Copying "${inputSettingsJson}" to "${outputSettingsJson}".`);
+      fs.copyFileSync(inputSettingsJson, outputSettingsJson);
+
       return true;
     }
     return false;
@@ -210,6 +219,11 @@ function extract(pluginPackagesPath, outputPlugins) {
       const outputPackageJson = path.join(plugName, 'package.json');
       console.log(`Copying "${inputPackageJson}" to "${outputPackageJson}".`);
       fs.copyFileSync(inputPackageJson, outputPackageJson);
+
+      const inputSettingsJson = path.join(pluginPackagesPath, 'settings.json');
+      const outputSettingsJson = path.join(plugName, 'settings.json');
+      console.log(`Copying "${inputSettingsJson}" to "${outputSettingsJson}".`);
+      fs.copyFileSync(inputSettingsJson, outputSettingsJson);
     });
     return folders.length !== 0;
   }
@@ -221,6 +235,7 @@ function extract(pluginPackagesPath, outputPlugins) {
   return 0;
 }
 
+// does webpack support prebuild validation hook?
 /**
  * Start watching for changes, and build again if there are changes.
  * @returns {0} Exit code, where 0 is success.
@@ -240,24 +255,77 @@ function start() {
     const paths = envPaths('Headlamp', { suffix: '' });
     const configDir = fs.existsSync(paths.data) ? paths.data : paths.config;
 
-    webpackConfig.plugins = [
-      new FileManagerPlugin({
-        events: {
-          onEnd: {
-            copy: [
-              {
-                source: './dist/*',
-                destination: path.join(configDir, 'plugins', packageName),
-              },
-              {
-                source: './package.json',
-                destination: path.join(configDir, 'plugins', packageName, 'package.json'),
-              },
-            ],
-          },
+    const fileManagerPlugin = new FileManagerPlugin({
+      events: {
+        onEnd: {
+          copy: [
+            {
+              source: './dist/*',
+              destination: path.join(configDir, 'plugins', packageName),
+            },
+            {
+              source: './package.json',
+              destination: path.join(configDir, 'plugins', packageName, 'package.json'),
+            },
+          ],
         },
-      }),
-    ];
+      },
+    });
+
+    // add settings.json to the copy list if it exists
+    if (fs.existsSync(path.join('.', 'settings.json'))) {
+      fileManagerPlugin.options.events.onEnd.copy.push({
+        source: './settings.json',
+        destination: path.join(configDir, 'plugins', packageName, 'settings.json'),
+      });
+    }
+
+    if (webpackConfig.plugins === undefined) {
+      webpackConfig.plugins = [fileManagerPlugin];
+    } else {
+      webpackConfig.plugins.push(fileManagerPlugin);
+    }
+  }
+  /**
+   *
+   * Adds a webpack plugin to validate the settings.json file.
+   */
+  function addValidateSettings(webpackConfig) {
+    const validateSettingsPlugin = {
+      apply: compiler => {
+        compiler.hooks.watchRun.tapAsync('ValidatePluginSettings', (compilation, callback) => {
+          console.log('Validating settings.json');
+          const settingsJson = fs.readFileSync('./settings.json', 'utf8');
+          const { isValid, errors } = validateSettingsJson(settingsJson);
+          if (!isValid) {
+            console.error('settings.json is invalid');
+            console.error(errors);
+          }
+          callback();
+        });
+      },
+    };
+
+    if (webpackConfig.plugins === undefined) {
+      webpackConfig.plugins = [validateSettingsPlugin];
+    } else {
+      webpackConfig.plugins.push(validateSettingsPlugin);
+    }
+  }
+
+  /**
+   *
+   * Adds a webpack plugin to watch for changes to settings.json file.
+   */
+  function addSettingsJSONToWatch(webpackConfig) {
+    const settingsWatchPlugin = new WatchExternalFilesPlugin({
+      files: ['./settings.json'],
+    });
+    if (webpackConfig.plugins === undefined) {
+      webpackConfig.plugins = [settingsWatchPlugin];
+    } else {
+      webpackConfig.plugins.push(settingsWatchPlugin);
+    }
   }
 
   /**
@@ -284,10 +352,186 @@ function start() {
   config.watch = true;
   config.mode = 'development';
   process.env['BABEL_ENV'] = 'development';
+
+  // if the settings.json file is present in the plugin folder,
+  // add webpack plugins to watch for changes to it
+  // and validate it.
+  if (fs.existsSync(path.join('.', 'settings.json'))) {
+    addSettingsJSONToWatch(config);
+    addValidateSettings(config);
+  } else {
+    console.warn(
+      'settings.json not found in the plugin folder. Run the following command to upgrade \n' +
+        '    headlamp-plugin upgrade '
+    );
+  }
   copyToPluginsFolder(config);
   webpack(config, compileMessages);
 
   return 0;
+}
+
+function validateSettingsJson(settingsJson) {
+  const settings = JSON.parse(settingsJson);
+  // read the settings schema file
+  const schema = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, 'settings-schema.json'), 'utf8')
+  );
+
+  const ajv = new Ajv({ allErrors: true });
+  const validate = ajv.compile(schema);
+
+  let isValid = validate(settings);
+  if (!isValid) {
+    return { isValid, errors: validate.errors };
+  }
+
+  validate.errors = validate.errors || [];
+
+  // validate the properties
+  settings.properties.forEach(property => {
+    // validate if the enum and enumDescription are of the same length
+    if (property.enum !== undefined && property.enumDescription !== undefined) {
+      if (property.enum.length !== property.enumDescription.length) {
+        isValid = false;
+        validate.errors.push({
+          keyword: 'enumDescription',
+          message: `enum and enumDescription must be of the same length for the property "${property.name}"`,
+          params: {
+            keyword: 'enumDescription',
+          },
+        });
+      }
+    }
+
+    // validate if max is greater than min
+    if (property.min !== undefined && property.max !== undefined) {
+      if (property.min > property.max) {
+        isValid = false;
+        validate.errors.push({
+          keyword: 'min',
+          message: `min value must be less than max value for the property "${property.name}"`,
+          params: {
+            keyword: 'min',
+          },
+        });
+      }
+    }
+
+    // validate if the default value is in the enum
+    if (property.enum !== undefined && property.default !== undefined) {
+      if (!property.enum.includes(property.default)) {
+        isValid = false;
+        validate.errors.push({
+          keyword: 'default',
+          message: `default value must be in the enum for the property "${property.name}"`,
+          params: {
+            keyword: 'default',
+          },
+        });
+      }
+    }
+
+    // validate if the default value is in the range
+    if (
+      property.min !== undefined &&
+      property.max !== undefined &&
+      property.default !== undefined
+    ) {
+      if (property.default < property.min || property.default > property.max) {
+        isValid = false;
+        validate.errors.push({
+          keyword: 'default',
+          message: `default value must be in the range for the property "${property.name}"`,
+          params: {
+            keyword: 'default',
+          },
+        });
+      }
+    }
+
+    // validate if the default value is of the correct type
+    if (property.default !== undefined) {
+      const definedType = property.type;
+      const defaultValueType = typeof property.default;
+      if (definedType !== defaultValueType) {
+        isValid = false;
+        validate.errors.push({
+          keyword: 'default',
+          message: `default value must be of type "${definedType}" for the property "${property.name}"`,
+          params: {
+            keyword: 'default',
+          },
+        });
+      }
+    }
+
+    // validate if the regex is valid
+    if (property.regex !== undefined) {
+      try {
+        new RegExp(property.regex);
+      } catch (e) {
+        isValid = false;
+        validate.errors.push({
+          keyword: 'regex',
+          message: `regex is not valid for the property "${property.name}"`,
+          params: {
+            keyword: 'regex',
+          },
+        });
+      }
+    }
+
+    // validate if the example is of the correct type
+    if (property.example !== undefined) {
+      const definedType = property.type;
+      const exampleType = typeof property.example;
+      if (definedType !== exampleType) {
+        isValid = false;
+        validate.errors.push({
+          keyword: 'example',
+          message: `example must be of type "${definedType}" for the property "${property.name}"`,
+          params: {
+            keyword: 'example',
+          },
+        });
+      }
+    }
+
+    // validate if enum values types are correct
+    if (property.enum !== undefined) {
+      property.enum.forEach(value => {
+        const definedType = property.type;
+        const valueType = typeof value;
+        if (definedType !== valueType) {
+          isValid = false;
+          validate.errors.push({
+            keyword: 'enum',
+            message: `enum value "${value}" must be of type "${definedType}" for the property "${property.name}"`,
+            params: {
+              keyword: 'enum',
+            },
+          });
+        }
+      });
+    }
+
+    // validate if format is set only for string type
+    if (property.format !== undefined) {
+      if (property.type !== 'string') {
+        isValid = false;
+        validate.errors.push({
+          keyword: 'format',
+          message: `format can be set only for string type for the property "${property.name}"`,
+          params: {
+            keyword: 'format',
+          },
+        });
+      }
+    }
+  });
+
+  return { isValid, errors: validate.errors };
 }
 
 /**
@@ -475,6 +719,17 @@ function build(packageFolder) {
 
     process.chdir(folder);
     console.log(`Building "${folder}" for production...`);
+    // validate the settings.json file if it exists
+    if (fs.existsSync(path.join(folder, 'settings.json'))) {
+      const settingsJson = fs.readFileSync(path.join(folder, 'settings.json'), 'utf8');
+      const { isValid, errors } = validateSettingsJson(settingsJson);
+      if (!isValid) {
+        console.error(`${folder}/settings.json is invalid`);
+        console.error(errors);
+        process.chdir(oldCwd);
+        return false;
+      }
+    }
     webpack(config, compileMessages);
     console.log(`Done building: "${folder}".`);
     process.chdir(oldCwd);
@@ -601,6 +856,26 @@ function upgrade(packageFolder, skipPackageUpdates) {
   }
 
   /**
+   * Add missing settings.json file if it doesn't exist.
+   *
+   */
+  function addMissingSettingsJSON() {
+    // fetch plugin name from package.json
+    const packageJSON = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+    const pluginName = packageJSON.name;
+    const settingsPath = path.join('.', 'settings.json');
+    const settingsTemplatePath = path.resolve(__dirname, '..', 'template', 'settings.json');
+    // create settings.json file if it doesn't exist
+    if (!fs.existsSync(settingsPath)) {
+      console.log(`Adding missing file: "${settingsPath}"`);
+      fs.writeFileSync(
+        settingsPath,
+        fs.readFileSync(settingsTemplatePath, 'utf8').split('$${name}').join(pluginName)
+      );
+    }
+  }
+
+  /**
    * Some files should not be there anymore.
    *
    * Assumes we are in the package folder.
@@ -723,6 +998,7 @@ function upgrade(packageFolder, skipPackageUpdates) {
     console.log(`Upgrading "${folder}"...`);
 
     addMissingTemplateFiles();
+    addMissingSettingsJSON();
     addMissingConfiguration();
     removeFiles();
 
