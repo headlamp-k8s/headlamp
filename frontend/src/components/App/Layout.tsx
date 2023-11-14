@@ -166,9 +166,6 @@ export default function Layout({}: LayoutProps) {
         const clustersToConfig: ConfigState['clusters'] = {};
         config?.clusters.forEach((cluster: Cluster) => {
           clustersToConfig[cluster.name] = cluster;
-          if (clustersToConfig[cluster.name].meta_data.source === 'dynamic_cluster') {
-            delete clustersToConfig[cluster.name];
-          }
         });
 
         const configToStore = {
