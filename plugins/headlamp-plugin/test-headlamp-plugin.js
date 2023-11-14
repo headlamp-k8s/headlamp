@@ -95,6 +95,11 @@ function testHeadlampPlugin() {
   if (fs.readFileSync(packageJsonPath, 'utf8').includes(oldVersion)) {
     exit(`Error: old version still in ${packageJsonPath}`);
   }
+
+  // test there are no @material-ui imports, they should be mui
+  if (fs.readFileSync(join(curDir, 'src', 'index.tsx'), 'utf8').includes('@material-ui')) {
+    exit(`Error: @material-ui imports in ${mainJsPath}`);
+  }
 }
 
 const fs = require('fs');

@@ -601,6 +601,29 @@ function upgrade(packageFolder, skipPackageUpdates) {
   }
 
   /**
+   * If there are material-ui v4 files in src/ folder, upgrade them to v5.
+   *
+   * @see https://mui.com/material-ui/migration/migration-v4/#run-codemods
+   */
+  function upgradeMui() {
+    const hasMaterialUI = fs
+      .readdirSync('src', { withFileTypes: true })
+      .filter(dirent => dirent.isFile() && dirent.name.endsWith('.ts'))
+      .map(dirent => path.join('src', dirent.name))
+      .filter(path => fs.readFileSync(path, 'utf8').includes('@material-ui'));
+
+    if (hasMaterialUI) {
+      console.log('Found files with "@material-ui". Upgrading material-ui v4 to mui v5...');
+      const cmd = 'npx @mui/codemod v5.0.0/preset-safe src';
+      if (runCmd(cmd, '.')) {
+        console.error(`Failed to upgrade material-ui v4 to mui v5.`);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * Some files should not be there anymore.
    *
    * Assumes we are in the package folder.
@@ -729,7 +752,11 @@ function upgrade(packageFolder, skipPackageUpdates) {
     let failed = false;
     let reason = '';
     if (skipPackageUpdates !== true) {
-      if (!upgradeHeadlampPlugin()) {
+      if (!failed && !upgradeMui()) {
+        failed = true;
+        reason = 'upgrading from material-ui 4 to mui 5 failed.';
+      }
+      if (!failed && !upgradeHeadlampPlugin()) {
         failed = true;
         reason = 'upgrading @kinvolk/headlamp-plugin failed.';
       }
