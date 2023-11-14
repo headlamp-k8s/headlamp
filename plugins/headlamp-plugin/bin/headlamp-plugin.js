@@ -548,6 +548,7 @@ function format(packageFolder, check) {
  */
 function getNpmOutdated() {
   let result = null;
+
   try {
     result = child_process.execSync('npm outdated --json', {
       encoding: 'utf8',
@@ -565,9 +566,11 @@ function getNpmOutdated() {
  * In the future this could be used for other upgrade tasks.
  *
  * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @parm skipPackageUpdates {boolean} - do not upgrade packages if true.
+ * @param headlampPluginVersion {string} - tag or version of headlamp-plugin to upgrade to.
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
-function upgrade(packageFolder, skipPackageUpdates) {
+function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
   /**
    * Files from the template might not be there.
    *
@@ -715,16 +718,16 @@ function upgrade(packageFolder, skipPackageUpdates) {
   }
 
   /**
-   * Upgrades "@kinvolk/headlamp-plugin" dependency to latest version.
+   * Upgrades "@kinvolk/headlamp-plugin" dependency to latest or given version.
    *
    * @returns true unless there is a problem with the upgrade.
    */
   function upgradeHeadlampPlugin() {
-    const outDated = getNpmOutdated();
-    if ('@kinvolk/headlamp-plugin' in outDated) {
+    const theTag = headlampPluginVersion ? headlampPluginVersion : 'latest';
+    if (headlampPluginVersion !== undefined || '@kinvolk/headlamp-plugin' in getNpmOutdated()) {
       // Upgrade the @kinvolk/headlamp-plugin
 
-      const cmd = 'npm install @kinvolk/headlamp-plugin@latest --save';
+      const cmd = `npm install @kinvolk/headlamp-plugin@${theTag} --save`;
       if (runCmd(cmd, '.')) {
         return false;
       }
@@ -1078,10 +1081,15 @@ yargs(process.argv.slice(2))
         .option('skip-package-updates', {
           describe: 'For development of headlamp-plugin itself, so it does not do package updates.',
           type: 'boolean',
+        })
+        .option('headlamp-plugin-version', {
+          describe:
+            'Use a specific headlamp-plugin-version when upgrading packages. Defaults to "latest".',
+          type: 'string',
         });
     },
     argv => {
-      process.exitCode = upgrade(argv.package, argv.skipPackageUpdates);
+      process.exitCode = upgrade(argv.package, argv.skipPackageUpdates, argv.headlampPluginVersion);
     }
   )
   .command(
