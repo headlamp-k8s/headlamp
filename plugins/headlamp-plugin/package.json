@@ -83,6 +83,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^1.1.5",
+    "fake-indexeddb": "^5.0.1",
     "fetch-mock": "^9.11.0",
     "file-loader": "^6.2.0",
     "filemanager-webpack-plugin": "^7.0.0",
