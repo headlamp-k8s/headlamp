@@ -5,7 +5,7 @@ import {
   registerSidebarEntryFilter,
 } from '@kinvolk/headlamp-plugin/lib';
 import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 
 // A top level item in the sidebar.

@@ -4,7 +4,7 @@
 // registerAppLogo(() => <p>My Logo</p>);
 
 import { AppLogoProps, registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
-import { SvgIcon } from '@material-ui/core';
+import { SvgIcon } from '@mui/material';
 import LogoWithTextLight from './icon-large-light.svg';
 import LogoLight from './icon-small-light.svg';
 

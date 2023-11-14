@@ -1,7 +1,7 @@
 import { registerResourceTableColumnsProcessor } from '@kinvolk/headlamp-plugin/lib';
 import { ActionButton } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
 import Pod from '@kinvolk/headlamp-plugin/lib/K8s/pod';
-import { Menu, MenuItem, Typography } from '@material-ui/core';
+import { Menu, MenuItem, Typography } from '@mui/material';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
