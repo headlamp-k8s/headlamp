@@ -849,6 +849,7 @@ func (c *HeadlampConfig) handleStatelessReq(r *http.Request, kubeConfig string) 
 			_, err := c.kubeConfigStore.GetContext(key)
 			if err != nil {
 				if err.Error() == "key not found" {
+					context.Internal = true
 					if err = c.kubeConfigStore.AddContextWithKeyAndTTL(&context, key, ContextCacheTTL); err != nil {
 						log.Println("Error: failed to store context to cache: ", err)
 						return "", err
@@ -881,6 +882,10 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 
 	for _, context := range contexts {
 		context := context
+
+		if context.Internal {
+			continue
+		}
 
 		clusters = append(clusters, Cluster{
 			Name:     context.Name,
