@@ -600,6 +600,11 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
         fs.mkdirSync(path.dirname(to), { recursive: true });
         fs.copyFileSync(from, to);
       }
+      // Add file if it is different
+      if (fs.readFileSync(from, 'utf8') !== fs.readFileSync(to, 'utf8')) {
+        console.log(`Updating file: "${to}"`);
+        fs.copyFileSync(from, to);
+      }
     });
   }
 
