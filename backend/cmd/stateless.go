@@ -44,6 +44,9 @@ func (c *HeadlampConfig) handleStatelessReq(r *http.Request, kubeConfig string) 
 		// check context is present
 		_, err := c.kubeConfigStore.GetContext(key)
 		if err != nil && err.Error() == "key not found" {
+			// To ensure stateless clusters are not visible to other users, they are marked as internal clusters.
+			// They are stored in the proxy cache and accessed through the /config endpoint.
+			context.Internal = true
 			if err = c.kubeConfigStore.AddContextWithKeyAndTTL(&context, key, ContextCacheTTL); err != nil {
 				log.Println("Error: failed to store context to cache:", err)
 				return "", err

@@ -36,6 +36,7 @@ type Context struct {
 	Source      int                    `json:"source"`
 	OidcConf    *OidcConfig            `json:"oidcConfig"`
 	proxy       *httputil.ReverseProxy `json:"-"`
+	Internal    bool                   `json:"internal"`
 }
 
 type OidcConfig struct {

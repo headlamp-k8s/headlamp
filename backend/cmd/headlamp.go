@@ -952,6 +952,11 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 	for _, context := range contexts {
 		context := context
 
+		// Dynamic clusters should not be visible to other users.
+		if context.Internal {
+			continue
+		}
+
 		clusters = append(clusters, Cluster{
 			Name:     context.Name,
 			Server:   context.Cluster.Server,
