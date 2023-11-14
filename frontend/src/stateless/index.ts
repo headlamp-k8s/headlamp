@@ -1,4 +1,4 @@
-// import 'fake-indexeddb/auto';
+import { indexedDB as indexedDBtest } from 'fake-indexeddb';
 import * as jsyaml from 'js-yaml';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -43,7 +43,12 @@ interface KubeconfigObject {
  */
 export function storeStatelessClusterKubeconfig(kubeconfig: any): Promise<void> {
   return new Promise<void>((resolve, reject) => {
-    const request = indexedDB.open('kubeconfigs', 1);
+    let request;
+    if (process.env.NODE_ENV === 'test') {
+      request = indexedDBtest.open('kubeconfigs', 1);
+    } else {
+      request = indexedDB.open('kubeconfigs', 1);
+    }
 
     request.onupgradeneeded = function (event: any) {
       const db = event.target ? event.target.result : null;
@@ -96,7 +101,12 @@ export function storeStatelessClusterKubeconfig(kubeconfig: any): Promise<void> 
  */
 export function getStatelessClusterKubeConfigs(): Promise<string[]> {
   return new Promise<string[]>((resolve, reject) => {
-    const request = indexedDB.open('kubeconfigs', 1);
+    let request;
+    if (process.env.NODE_ENV === 'test') {
+      request = indexedDBtest.open('kubeconfigs', 1);
+    } else {
+      request = indexedDB.open('kubeconfigs', 1);
+    }
 
     request.onupgradeneeded = function (event: any) {
       const db = event.target ? event.target.result : null;
@@ -148,7 +158,12 @@ export function getStatelessClusterKubeConfigs(): Promise<string[]> {
 export function findKubeconfigByClusterName(clusterName: string): Promise<string | null> {
   return new Promise<string | null>(async (resolve, reject) => {
     try {
-      const request = indexedDB.open('kubeconfigs', 1);
+      let request;
+      if (process.env.NODE_ENV === 'test') {
+        request = indexedDBtest.open('kubeconfigs', 1);
+      } else {
+        request = indexedDB.open('kubeconfigs', 1);
+      }
 
       request.onupgradeneeded = function (event: any) {
         const db = event.target ? event.target.result : null;
