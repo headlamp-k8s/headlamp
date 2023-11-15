@@ -3,7 +3,7 @@
  * loading the plugins.
  * The lib.ts file should carry the bits to be used by plugins whereas
  */
-
+import semver from 'semver';
 import helpers from '../helpers';
 import { Headlamp, Plugin } from './lib';
 import { PluginInfo } from './pluginsSlice';
@@ -93,39 +93,65 @@ export async function initializePlugins() {
  *
  * @param sources array of source to execute. Has the same order as packageInfos.
  * @param packageInfos array of package.json contents
- * @param settingsPackages the packages from settings
  * @param appMode if we are in app mode
+ * @param compatibleVersion headlamp-plugin version this build is compatible with.
+ *     If the plugin engine version is not compatible, the plugin will not be loaded.
+ *     Can be set to a semver range, e.g. '>= 0.6.0' or '0.6.0 - 0.7.0'.
+ *     If set to an empty string, all plugin versions will be loaded.
+ * @param settingsPackages the packages from settings
  *
- * @returns array of source to execute
+ * @returns the sources to execute and incompatible PackageInfos
+ *          with this structure { sourcesToExecute, incompatiblePackageInfos }
  */
 export function filterSources(
   sources: string[],
   packageInfos: PluginInfo[],
   appMode: boolean,
+  compatibleVersion: string,
   settingsPackages?: PluginInfo[]
 ) {
-  if (!appMode) {
-    return sources;
-  }
-  if (!settingsPackages) {
-    // No plugins should be enabled if settings are not set.
-    return [];
-  }
+  const incompatiblePlugins: Record<string, PluginInfo> = {};
 
-  // remove the plugins which are not enabled.
-  const enabledPlugins = sources.filter((_, i) => {
-    const packageInfo = packageInfos[i];
-
-    // settingsPackages might have a different order or length than packageInfos
-    const index = settingsPackages.findIndex(x => x.name === packageInfo.name);
-
-    // if it's not in the settings don't enable the plugin
-    if (index === -1) return false;
-
-    return settingsPackages[index].isEnabled;
+  // combine the parallel arrays
+  const sourcesAndPackageInfos = sources.map((source, i) => {
+    return { source, packageInfo: packageInfos[i] };
   });
 
-  return enabledPlugins;
+  const enabledSourcesAndPackageInfos = sourcesAndPackageInfos.filter(({ packageInfo }) => {
+    // When not in appMode we don't have settings to enable plugins.
+    if (!appMode) {
+      return true;
+    }
+
+    // No plugins should be enabled if settings are not set.
+    if (!settingsPackages) {
+      return false;
+    }
+
+    // settingsPackages might have a different order or length than packageInfos
+    // If it's not in the settings don't enable the plugin.
+    const enabledInSettings =
+      settingsPackages[settingsPackages.findIndex(x => x.name === packageInfo.name)]?.isEnabled ===
+      true;
+    return enabledInSettings;
+  });
+
+  const compatible = enabledSourcesAndPackageInfos.filter(({ packageInfo }) => {
+    const isCompatible = semver.satisfies(
+      semver.coerce(packageInfo.devDependencies?.['@kinvolk/headlamp-plugin']) || '',
+      compatibleVersion
+    );
+    if (!isCompatible) {
+      incompatiblePlugins[packageInfo.name] = packageInfo;
+      return false;
+    }
+    return true;
+  });
+
+  return {
+    sourcesToExecute: compatible.map(({ source }) => source),
+    incompatiblePlugins,
+  };
 }
 
 /**
@@ -205,7 +231,7 @@ export async function fetchAndExecutePlugins(
               'Missing package.json. ' +
                 `Please upgrade the plugin ${path}` +
                 ' by running "headlamp-plugin extract" again.' +
-                ' Please use headlamp-plugin >= 0.6.0'
+                ' Please use headlamp-plugin >= 0.8.0'
             );
             return {
               name: path.split('/').slice(-1)[0],
@@ -229,12 +255,26 @@ export async function fetchAndExecutePlugins(
     onSettingsChange(updatedSettingsPackages);
   }
 
-  const sourcesToExecute = filterSources(
+  // Can set this to a semver version range like '>=0.8.0-alpha.3'.
+  // '' means all versions.
+  const compatibleHeadlampPluginVersion = '';
+
+  const { sourcesToExecute, incompatiblePlugins } = filterSources(
     sources,
     packageInfos,
     helpers.isElectron(),
+    compatibleHeadlampPluginVersion,
     updatedSettingsPackages
   );
+
+  if (Object.keys(incompatiblePlugins).length > 0) {
+    console.warn(
+      'The following plugins are not compatible and will not be executed:' +
+        Object.values(incompatiblePlugins)
+          .map(p => p.name)
+          .join(', ')
+    );
+  }
 
   sourcesToExecute.forEach((source, index) => {
     // Execute plugins inside a context (not in global/window)
