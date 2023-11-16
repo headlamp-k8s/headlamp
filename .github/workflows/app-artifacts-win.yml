@@ -49,6 +49,15 @@ jobs:
       uses: crazy-max/ghaction-chocolatey@v1
       with:
         args: install make
+    - name: "Install Wix"
+      if: ${{ inputs.msi }}
+      shell: pwsh
+      run: |
+        mkdir C:\wix
+        cd C:\wix
+        Invoke-WebRequest -Uri https://github.com/wixtoolset/wix3/releases/download/wix3112rtm/wix311-binaries.zip -OutFile wix.zip
+        Expand-Archive -Path wix.zip
+        rm .\wix.zip
     - name: Fetch certificates
       if: ${{ inputs.signBinaries }}
       shell: pwsh
@@ -95,7 +104,7 @@ jobs:
         } else {
           echo "Not signing binaries"
         }
-        winget install WixToolset.AdditionalTools
+        $env:PATH = $env:PATH + ";C:\wix\wix;"
         make app-win-msi
 
     - name: Upload artifact
