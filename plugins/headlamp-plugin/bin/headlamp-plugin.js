@@ -747,7 +747,11 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
    */
   function upgradeHeadlampPlugin() {
     const theTag = headlampPluginVersion ? headlampPluginVersion : 'latest';
-    if (headlampPluginVersion !== undefined || '@kinvolk/headlamp-plugin' in getNpmOutdated()) {
+    if (
+      headlampPluginVersion !== undefined ||
+      '@kinvolk/headlamp-plugin' in getNpmOutdated() ||
+      !fs.existsSync('node_modules')
+    ) {
       // Upgrade the @kinvolk/headlamp-plugin
 
       const cmd = `npm install @kinvolk/headlamp-plugin@${theTag} --save`;
@@ -755,6 +759,7 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
         return false;
       }
     }
+
     return true;
   }
 
