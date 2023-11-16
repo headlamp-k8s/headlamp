@@ -723,6 +723,24 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
   }
 
   /**
+   * In order to more robustly upgrade packages,
+   * we reset the package-lock.json and node_modules.
+   *
+   * @returns true unless there is a problem.
+   */
+  function resetPackageLock() {
+    if (fs.existsSync('node_modules')) {
+      console.log(`Resetting node_modules folder for more robust package upgrade...`);
+      fs.rm('node_modules', { recursive: true });
+    }
+    if (fs.existsSync('package-lock.json')) {
+      console.log(`Resetting package-lock.json file for more robust package upgrade...`);
+      fs.unlinkSync('package-lock.json');
+    }
+    return true;
+  }
+
+  /**
    * Upgrades "@kinvolk/headlamp-plugin" dependency to latest or given version.
    *
    * @returns true unless there is a problem with the upgrade.
@@ -760,13 +778,17 @@ function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
     let failed = false;
     let reason = '';
     if (skipPackageUpdates !== true) {
-      if (!failed && !upgradeMui()) {
+      if (!failed && !resetPackageLock()) {
         failed = true;
-        reason = 'upgrading from material-ui 4 to mui 5 failed.';
+        reason = 'resetting package-lock.json and node_modules failed.';
       }
       if (!failed && !upgradeHeadlampPlugin()) {
         failed = true;
         reason = 'upgrading @kinvolk/headlamp-plugin failed.';
+      }
+      if (!failed && !upgradeMui()) {
+        failed = true;
+        reason = 'upgrading from material-ui 4 to mui 5 failed.';
       }
       if (!failed && runCmd('npm audit fix', folder)) {
         console.warn('"npm audit fix" failed. You may need to inspect your dependencies manually.');
@@ -1074,7 +1096,8 @@ yargs(process.argv.slice(2))
   )
   .command(
     'upgrade [package]',
-    'Upgrade the plugin to latest headlamp-plugin; audits, formats, lints and type checks.' +
+    'Upgrade the plugin to latest headlamp-plugin; ' +
+      'upgrades headlamp-plugin and audits packages, formats, lints, type checks.' +
       '<package> defaults to current working directory. Can also be a folder of packages.',
     yargs => {
       yargs

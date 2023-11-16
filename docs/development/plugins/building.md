@@ -246,7 +246,8 @@ There's a command which handles much of upgrading plugins to the latest headlamp
 
 Additionally this handles some code changes needed for plugins. For example, it handles running the material-ui 4 to mui 5 'codemod' code changes, and creates missing configuration added in different versions of headlamp-plugin.
 
-Testing is necessary after running the upgrade command, and of course make sure you have a backup of your plugin code before running it.
+Testing is necessary after running the upgrade command. 
+Of course make sure you have a backup of your plugin folder before running it.
 
 ```bash
 npx @kinvolk/headlamp-plugin upgrade --headlamp-plugin-version=latest your-plugin-folder
