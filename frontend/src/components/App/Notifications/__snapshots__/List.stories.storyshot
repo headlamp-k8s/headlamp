@@ -142,6 +142,11 @@ exports[`Storyshots Notifications List 1`] = `
                 <div
                   class="MuiBox-root MuiBox-root"
                 >
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  >
+                    cluster
+                  </div>
                    
                 </div>
               </td>
@@ -732,6 +737,11 @@ exports[`Storyshots Notifications List 1`] = `
                 <div
                   class="MuiBox-root MuiBox-root"
                 >
+                  <div
+                    class="MuiBox-root MuiBox-root"
+                  >
+                    cluster
+                  </div>
                    
                 </div>
               </td>

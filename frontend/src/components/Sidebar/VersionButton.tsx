@@ -33,7 +33,7 @@ const useVersionButtonStyle = makeStyles(theme => ({
 }));
 
 export default function VersionButton() {
-  const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const isSidebarOpen = useTypedSelector(state => state.sidebar.isSidebarOpen);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useVersionButtonStyle();
   const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
@@ -144,7 +144,7 @@ export default function VersionButton() {
         onClick={() => setOpen(true)}
         style={{ textTransform: 'none', paddingBottom: 0, paddingTop: 0 }}
       >
-        <Box display={sidebar.isSidebarOpen ? 'flex' : 'block'} alignItems="center">
+        <Box display={isSidebarOpen ? 'flex' : 'block'} alignItems="center">
           <Box>
             <Icon
               color={theme.palette.text.secondary}

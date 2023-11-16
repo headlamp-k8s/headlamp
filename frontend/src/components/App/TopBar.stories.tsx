@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { AppBarActionsProcessor } from '../../redux/actionButtonsSlice';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../../redux/reducers/ui';
+import { initialState as themeInitialState } from './themeSlice';
 import { processAppBarActions, PureTopBar, PureTopBarProps } from './TopBar';
 
 const store = configureStore({
@@ -14,10 +15,15 @@ const store = configureStore({
     config: {},
     ui: {
       ...UI_INITIAL_STATE,
+    },
+    notifications: {
       notifications: [],
     },
     plugins: {
       loaded: true,
+    },
+    theme: {
+      ...themeInitialState,
     },
   },
 });

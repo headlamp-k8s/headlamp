@@ -19,14 +19,19 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
-import helpers from '../../../helpers';
 import Event, { KubeEvent } from '../../../lib/k8s/event';
-import { Notification } from '../../../lib/notification';
 import { createRouteURL } from '../../../lib/router';
-import { setUINotifications, updateUINotification } from '../../../redux/actions/actions';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { DateLabel } from '../../common';
 import Empty from '../../common/EmptyContent';
+import {
+  defaultMaxNotificationsStored,
+  loadNotifications,
+  Notification,
+  NotificationIface,
+  setNotifications,
+  updateNotifications,
+} from './notificationsSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   notificationItem: {
@@ -64,8 +69,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function NotificationsList(props: {
-  notifications: Notification[];
-  clickEventHandler: (notification?: Notification, closeMenu?: boolean) => void;
+  notifications: NotificationIface[];
+  clickEventHandler: (notification?: NotificationIface, closeMenu?: boolean) => void;
 }) {
   const { notifications, clickEventHandler } = props;
   const { t } = useTranslation();
@@ -78,7 +83,7 @@ function NotificationsList(props: {
     return <Empty>{t(`translation|You don't have any notifications right now`)}</Empty>;
   }
 
-  function notificationSeenUnseenHandler(event: any, notification?: Notification) {
+  function notificationSeenUnseenHandler(event: any, notification?: NotificationIface) {
     event.stopPropagation();
     if (!notification) {
       return;
@@ -86,7 +91,7 @@ function NotificationsList(props: {
     clickEventHandler(notification);
   }
 
-  function notificationItemClickHandler(notification: Notification) {
+  function notificationItemClickHandler(notification: NotificationIface) {
     notification.url && history.push(notification.url);
     clickEventHandler(notification, true);
   }
@@ -168,22 +173,22 @@ function NotificationsList(props: {
 export default function Notifications() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const notifications = useTypedSelector(state => state.ui.notifications);
+  const notifications = useTypedSelector(state => state.notifications.notifications);
   const dispatch = useDispatch();
   const [events] = Event.useList({
     fieldSelector: 'type!=Normal',
-    limit: helpers.defaultMaxNotificationsStored,
+    limit: defaultMaxNotificationsStored,
   });
   const { t } = useTranslation();
   const history = useHistory();
 
   useEffect(() => {
-    let notificationsToShow: Notification[] = [];
+    let notificationsToShow: NotificationIface[] = [];
     let currentNotifications = notifications;
     let changed = false;
 
     if (currentNotifications.length === 0) {
-      currentNotifications = helpers.loadNotifications();
+      currentNotifications = loadNotifications();
       changed = currentNotifications.length > 0;
     }
 
@@ -209,7 +214,7 @@ export default function Notifications() {
 
           changed = true;
 
-          return notification;
+          return notification.toJSON();
         });
 
       // Ensure that notifications which are not part of this stream of events are still shown
@@ -225,7 +230,7 @@ export default function Notifications() {
     // It's important to dispatch only if something changed, otherwise we will get into an infinite loop.
     if (changed) {
       // we are here means the events list changed and we have now new set of events, so we will notify the store about it
-      dispatch(setUINotifications(notificationsToShow));
+      dispatch(setNotifications(notificationsToShow));
     }
   }, [events, notifications]);
 
@@ -243,7 +248,7 @@ export default function Notifications() {
       updatedNotification.seen = true;
       return updatedNotification;
     });
-    dispatch(setUINotifications(massagedNotifications));
+    dispatch(setNotifications(massagedNotifications));
   }
 
   function handleNotificationClear() {
@@ -252,12 +257,12 @@ export default function Notifications() {
       updatedNotification.deleted = true;
       return updatedNotification;
     });
-    dispatch(setUINotifications(massagedNotifications));
+    dispatch(setNotifications(massagedNotifications));
   }
 
-  function menuItemClickHandler(notification?: Notification, closeMenu?: boolean) {
+  function menuItemClickHandler(notification?: NotificationIface, closeMenu?: boolean) {
     if (notification) {
-      dispatch(updateUINotification(notification));
+      dispatch(updateNotifications(notification));
     }
     if (closeMenu) {
       setAnchorEl(null);

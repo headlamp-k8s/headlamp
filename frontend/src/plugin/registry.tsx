@@ -1,10 +1,22 @@
 import { has } from 'lodash';
 import React from 'react';
 import { AppLogoProps, AppLogoType } from '../components/App/AppLogo';
+import { setBrandingAppLogoComponent } from '../components/App/themeSlice';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
+import {
+  addResourceTableColumnsProcessor,
+  TableColumnsProcessor,
+} from '../components/common/Resource/resourceTableSlice';
 import { SectionBox } from '../components/common/SectionBox';
 import { DetailsViewSectionProps, DetailsViewSectionType } from '../components/DetailsViewSection';
+import {
+  addDetailsViewSectionsProcessor,
+  DefaultDetailsViewSection,
+  DetailsViewSectionsProcessor,
+  setDetailsViewSection,
+} from '../components/DetailsViewSection/detailsViewSectionSlice';
 import { DefaultSidebars, SidebarEntryProps } from '../components/Sidebar';
+import { setSidebarItem, setSidebarItemFilter } from '../components/Sidebar/sidebarSlice';
 import { getHeadlampAPIHeaders } from '../helpers';
 import { KubeObject } from '../lib/k8s/cluster';
 import { Route } from '../lib/router';
@@ -22,23 +34,8 @@ import {
   setAppBarActionsProcessor,
   setDetailsViewHeaderAction,
 } from '../redux/actionButtonsSlice';
-import {
-  addResourceTableColumnsProcessor,
-  setBrandingAppLogoComponent,
-  setClusterChooserButtonComponent,
-  setFunctionsToOverride,
-  setRoute,
-  setRouteFilter,
-  setSidebarItem,
-  setSidebarItemFilter,
-  TableColumnsProcessor,
-} from '../redux/actions/actions';
-import {
-  addDetailsViewSectionsProcessor,
-  DefaultDetailsViewSection,
-  DetailsViewSectionsProcessor,
-  setDetailsViewSection,
-} from '../redux/detailsViewSectionsSlice';
+import { setClusterChooserButtonComponent, setFunctionsToOverride } from '../redux/actions/actions';
+import { setRoute, setRouteFilter } from '../redux/routesSlice';
 import store from '../redux/stores/store';
 
 export interface SectionFuncProps {
