@@ -11,11 +11,25 @@ on:
         description: Sign the binaries
         default: false
         type: boolean
+      exe:
+        description: Build Exe Installer
+        default: true
+        type: boolean
+      msi:
+        description: Build Msi Installer
+        default: false
+        type: boolean
 
 jobs:
   build-windows:
     runs-on: windows-2022
     steps:
+    - name: Validate choices
+      if: ${{ !inputs.exe && !inputs.msi }}
+      shell: pwsh
+      run: |
+        echo Please choose either an exe or msi installer
+        exit 1
     - uses: actions/checkout@v2.3.3
       with:
         path: build-helper
@@ -56,7 +70,8 @@ jobs:
         nuget.exe sources add -name esrp -source ${{ secrets.ESRP_NUGET_INDEX_URL }} -username headlamp -password ${{ secrets.AZ_DEVOPS_TOKEN }}
         nuget.exe install Microsoft.EsrpClient -Version 1.2.80 -source  ${{ secrets.ESRP_NUGET_INDEX_URL }} | out-null
 
-    - name: App Windows
+    - name: App Windows Exe
+      if: ${{ inputs.exe }}
       shell: pwsh
       working-directory: headlamp
       run: |
@@ -68,6 +83,20 @@ jobs:
           echo "Not signing binaries"
         }
         make app-win
+    - name: App Windows MSI
+      if: ${{ inputs.msi }}
+      shell: pwsh
+      working-directory: headlamp
+      run: |
+        if ("${{ inputs.signBinaries }}" -eq "true") {
+          $env:ESRP_PATH="$(Get-Location)\..\Microsoft.EsrpClient.1.2.80\tools\EsrpClient.exe"
+          $env:HEADLAMP_WINDOWS_CLIENT_ID="${{ secrets.WINDOWS_CLIENT_ID }}"
+          $env:HEADLAMP_WINDOWS_SIGN_EMAIL="${{ secrets.WINDOWS_SIGN_EMAIL }}"
+        } else {
+          echo "Not signing binaries"
+        }
+        winget install WixToolset.AdditionalTools
+        make app-win-msi
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
