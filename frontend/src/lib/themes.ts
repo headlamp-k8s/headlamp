@@ -299,6 +299,13 @@ const darkTheme = createTheme({
   },
   components: {
     ...commonRules.components,
+    MuiButton: {
+      styleOverrides: {
+        text: {
+          color: '#fff',
+        },
+      },
+    },
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
@@ -316,7 +323,6 @@ const darkTheme = createTheme({
         },
       },
     },
-
     MuiIconButton: {
       styleOverrides: {
         colorPrimary: {
