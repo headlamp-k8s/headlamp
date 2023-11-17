@@ -127,7 +127,7 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                 >
                   <button
                     aria-label="Edit"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-bc0omg-MuiButtonBase-root-MuiIconButton-root"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
                     data-mui-internal-clone-element="true"
                     tabindex="0"
                     type="button"
@@ -143,7 +143,7 @@ exports[`Storyshots crd/CustomResourceDetails No Error 1`] = `
                 >
                   <button
                     aria-label="Delete"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-bc0omg-MuiButtonBase-root-MuiIconButton-root"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
                     data-mui-internal-clone-element="true"
                     tabindex="0"
                     type="button"

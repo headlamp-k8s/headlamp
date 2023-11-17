@@ -77,7 +77,11 @@ export function RestartButton(props: RestartButtonProps) {
       }}
     >
       <Tooltip title={t('translation|Restart') as string}>
-        <IconButton aria-label={t('translation|restart')} onClick={() => setOpenDialog(true)}>
+        <IconButton
+          aria-label={t('translation|restart')}
+          onClick={() => setOpenDialog(true)}
+          size="medium"
+        >
           <Icon icon="mdi:restart" />
         </IconButton>
       </Tooltip>

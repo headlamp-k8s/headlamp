@@ -80,7 +80,11 @@ export default function ScaleButton(props: ScaleButtonProps) {
       }}
     >
       <Tooltip title={t('translation|Scale') as string}>
-        <IconButton aria-label={t('translation|scale')} onClick={() => setOpenDialog(true)}>
+        <IconButton
+          aria-label={t('translation|scale')}
+          onClick={() => setOpenDialog(true)}
+          size="medium"
+        >
           <Icon icon="mdi:content-copy" />
         </IconButton>
       </Tooltip>

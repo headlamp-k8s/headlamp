@@ -125,7 +125,7 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
               setOptions(defaultTableRowsPerPageOptions);
               setSelectedValue(defaultTableRowsPerPageOptions[0]);
             }}
-            size="large"
+            size="medium"
           >
             <Icon icon="mdi:delete" />
           </IconButton>

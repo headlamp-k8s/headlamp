@@ -367,7 +367,11 @@ export default function PodDetails(props: PodDetailsProps) {
             action: (
               <AuthVisible item={item} authVerb="get" subresource="log">
                 <Tooltip title={t('Show Logs') as string}>
-                  <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
+                  <IconButton
+                    aria-label={t('logs')}
+                    onClick={() => setShowLogs(true)}
+                    size="medium"
+                  >
                     <Icon icon="mdi:file-document-box-outline" />
                   </IconButton>
                 </Tooltip>
@@ -382,6 +386,7 @@ export default function PodDetails(props: PodDetailsProps) {
                   <IconButton
                     aria-label={t('terminal') as string}
                     onClick={() => setShowTerminal(true)}
+                    size="medium"
                   >
                     <Icon icon="mdi:console" />
                   </IconButton>
@@ -397,6 +402,7 @@ export default function PodDetails(props: PodDetailsProps) {
                   <IconButton
                     aria-label={t('attach') as string}
                     onClick={() => setIsAttached(true)}
+                    size="medium"
                   >
                     <Icon icon="mdi:connection" />
                   </IconButton>

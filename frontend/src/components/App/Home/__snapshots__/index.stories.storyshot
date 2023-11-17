@@ -169,7 +169,7 @@ exports[`Storyshots Home/Home Base 1`] = `
                 >
                   <button
                     aria-label="Show filter"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-bc0omg-MuiButtonBase-root-MuiIconButton-root"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
                     tabindex="0"
                     type="button"
                   >

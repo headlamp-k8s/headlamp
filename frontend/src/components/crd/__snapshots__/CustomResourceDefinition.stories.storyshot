@@ -470,7 +470,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       >
                         <button
                           aria-label="Show filter"
-                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-bc0omg-MuiButtonBase-root-MuiIconButton-root"
+                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
                           tabindex="0"
                           type="button"
                         >
@@ -485,7 +485,7 @@ exports[`Storyshots crd/CustomResourceDefinition Details 1`] = `
                       >
                         <button
                           aria-label="Change columns displayed"
-                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-bc0omg-MuiButtonBase-root-MuiIconButton-root"
+                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
                           data-mui-internal-clone-element="true"
                           tabindex="0"
                           type="button"
@@ -868,7 +868,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                 >
                   <button
                     aria-label="Show filter"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-bc0omg-MuiButtonBase-root-MuiIconButton-root"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
                     tabindex="0"
                     type="button"
                   >
@@ -883,7 +883,7 @@ exports[`Storyshots crd/CustomResourceDefinition List 1`] = `
                 >
                   <button
                     aria-label="Change columns displayed"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-bc0omg-MuiButtonBase-root-MuiIconButton-root"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
                     data-mui-internal-clone-element="true"
                     tabindex="0"
                     type="button"

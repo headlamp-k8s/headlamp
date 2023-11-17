@@ -115,7 +115,7 @@ export default function SectionFilterHeader(props: SectionFilterHeaderProps) {
       <IconButton
         aria-label={t('Show filter')}
         onClick={() => setShowFilters({ show: true, userTriggered: true })}
-        size="large"
+        size="medium"
       >
         <Icon icon="mdi:filter-variant" />
       </IconButton>

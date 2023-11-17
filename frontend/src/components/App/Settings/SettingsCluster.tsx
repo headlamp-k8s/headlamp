@@ -250,7 +250,7 @@ export default function SettingsCluster() {
                             storeNewAllowedNamespace(newAllowedNamespace);
                           }}
                           disabled={!newAllowedNamespace}
-                          size="large"
+                          size="medium"
                         >
                           <InlineIcon icon="mdi:plus-circle" />
                         </IconButton>

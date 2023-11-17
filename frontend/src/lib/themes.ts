@@ -197,6 +197,9 @@ const commonRules = {
       },
     },
     MuiIconButton: {
+      defaultProps: {
+        size: 'medium' as 'medium' | 'large' | 'small' | undefined,
+      },
       styleOverrides: {
         colorPrimary: {
           color: '#000',
@@ -324,6 +327,9 @@ const darkTheme = createTheme({
       },
     },
     MuiIconButton: {
+      defaultProps: {
+        size: 'medium' as 'medium' | 'large' | 'small' | undefined,
+      },
       styleOverrides: {
         colorPrimary: {
           color: '#fff',

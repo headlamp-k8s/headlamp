@@ -276,7 +276,7 @@ exports[`Storyshots WebhookConfiguration/ValidatingWebhookConfig/Details With Se
                   >
                     <button
                       aria-label="toggle field visibility"
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeLarge css-1hs2hb7-MuiButtonBase-root-MuiIconButton-root"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
                       tabindex="0"
                       type="button"
                     >
@@ -909,7 +909,7 @@ exports[`Storyshots WebhookConfiguration/ValidatingWebhookConfig/Details With UR
                   >
                     <button
                       aria-label="toggle field visibility"
-                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeLarge css-1hs2hb7-MuiButtonBase-root-MuiIconButton-root"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
                       tabindex="0"
                       type="button"
                     >

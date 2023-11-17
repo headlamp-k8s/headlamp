@@ -70,7 +70,7 @@ export default function NotificationList() {
 
     return (
       <>
-        <IconButton>
+        <IconButton size="medium">
           <Icon icon="mdi:dots-vertical" onClick={handleClick} />
         </IconButton>
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
@@ -157,7 +157,7 @@ export default function NotificationList() {
                     <IconButton
                       onClick={e => notificationSeenUnseenHandler(e, notification)}
                       aria-label={t(`translation|Mark as read`)}
-                      size="large"
+                      size="medium"
                     >
                       <Icon
                         icon="mdi:circle"

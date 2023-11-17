@@ -270,6 +270,7 @@ export default function PortForwardingList() {
                   <IconButton
                     aria-label={t('translation|More')}
                     onClick={e => handleClick(e, portforward)}
+                    size="medium"
                   >
                     <Icon icon={'mdi:dots-vertical'} />
                   </IconButton>

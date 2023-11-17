@@ -1346,7 +1346,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
               >
                 <button
                   aria-label="Create / Apply"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeLarge css-1qdl9cm-MuiButtonBase-root-MuiIconButton-root"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeMedium css-cc97v8-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   tabindex="0"
                   type="button"

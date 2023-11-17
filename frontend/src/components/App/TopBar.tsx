@@ -355,7 +355,7 @@ export function PureTopBar({
               handleMenuClose();
               handleProfileMenuOpen(event);
             }}
-            size="large"
+            size="medium"
           >
             <Icon icon="mdi:account" />
           </IconButton>
@@ -406,7 +406,7 @@ export function PureTopBar({
           aria-haspopup="true"
           onClick={handleProfileMenuOpen}
           color="inherit"
-          size="large"
+          size="medium"
         >
           <Icon icon="mdi:account" />
         </IconButton>
@@ -434,7 +434,7 @@ export function PureTopBar({
                 aria-haspopup="true"
                 onClick={handleMobileMenuOpen}
                 color="inherit"
-                size="large"
+                size="medium"
               >
                 <Icon icon="mdi:more-vert" />
               </IconButton>

@@ -437,7 +437,7 @@ export function SecretField(props: InputProps) {
           aria-label={t('toggle field visibility')}
           onClick={handleClickShowPassword}
           onMouseDown={event => event.preventDefault()}
-          size="large"
+          size="medium"
         >
           <Icon icon={showPassword ? 'mdi:eye-off' : 'mdi:eye'} />
         </IconButton>

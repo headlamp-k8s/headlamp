@@ -48,7 +48,7 @@ export default function ActionButton({
         aria-label={description}
         onClick={onClick}
         edge={edge}
-        size="large"
+        size="medium"
         {...iconButtonProps}
       >
         <Icon icon={icon} color={color} width={width} {...iconProps} />

@@ -75,7 +75,7 @@ export default function ThemeChangeButton(props: { showBothIcons?: boolean }) {
   }
 
   return (
-    <IconButton aria-label={t('Change theme')} onClick={() => changeTheme()}>
+    <IconButton aria-label={t('Change theme')} onClick={() => changeTheme()} size="medium">
       <Icon icon={icon} />
     </IconButton>
   );
