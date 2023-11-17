@@ -1,9 +1,9 @@
 import { Icon } from '@iconify/react';
-import TreeItem from '@mui/lab/TreeItem';
-import TreeView from '@mui/lab/TreeView';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
+import { TreeView } from '@mui/x-tree-view/TreeView';
 import * as buffer from 'buffer';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
