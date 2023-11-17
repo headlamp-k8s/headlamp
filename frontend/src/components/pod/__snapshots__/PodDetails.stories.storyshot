@@ -12,7 +12,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-usz26d-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -133,7 +133,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -190,7 +190,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -205,7 +205,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -303,7 +303,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -341,7 +341,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -368,7 +368,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -443,7 +443,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -481,7 +481,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -522,7 +522,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -569,7 +569,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -616,7 +616,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -868,7 +868,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -917,7 +917,7 @@ exports[`Storyshots Pod/PodDetailsView Error 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -985,7 +985,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-usz26d-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -1106,7 +1106,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -1156,7 +1156,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -1171,7 +1171,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -1269,7 +1269,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -1307,7 +1307,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1334,7 +1334,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1409,7 +1409,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -1447,7 +1447,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1495,7 +1495,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1543,7 +1543,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1591,7 +1591,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2049,7 +2049,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -2098,7 +2098,7 @@ exports[`Storyshots Pod/PodDetailsView Initializing 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2166,7 +2166,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-usz26d-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -2287,7 +2287,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -2344,7 +2344,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -2359,7 +2359,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -2457,7 +2457,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -2495,7 +2495,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2522,7 +2522,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2597,7 +2597,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -2635,7 +2635,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2676,7 +2676,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2724,7 +2724,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2772,7 +2772,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -3115,7 +3115,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -3164,7 +3164,7 @@ exports[`Storyshots Pod/PodDetailsView Liveness Failed 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -3232,7 +3232,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-usz26d-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -3353,7 +3353,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -3403,7 +3403,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -3418,7 +3418,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -3516,7 +3516,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -3554,7 +3554,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -3581,7 +3581,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -3656,7 +3656,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -3694,7 +3694,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -3735,7 +3735,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -3783,7 +3783,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -3831,7 +3831,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -4062,7 +4062,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -4111,7 +4111,7 @@ exports[`Storyshots Pod/PodDetailsView Pull Back Off 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -4179,7 +4179,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-usz26d-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -4300,7 +4300,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -4350,7 +4350,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -4365,7 +4365,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -4463,7 +4463,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -4501,7 +4501,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -4528,7 +4528,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -4603,7 +4603,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -4641,7 +4641,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -4682,7 +4682,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -4723,7 +4723,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -4764,7 +4764,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -5037,7 +5037,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -5086,7 +5086,7 @@ exports[`Storyshots Pod/PodDetailsView Running 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -5154,7 +5154,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-usz26d-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -5275,7 +5275,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -5325,7 +5325,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -5340,7 +5340,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -5438,7 +5438,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -5476,7 +5476,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -5503,7 +5503,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -5578,7 +5578,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -5616,7 +5616,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -5663,7 +5663,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -5710,7 +5710,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -5757,7 +5757,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -6009,7 +6009,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -6058,7 +6058,7 @@ exports[`Storyshots Pod/PodDetailsView Successful 1`] = `
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"

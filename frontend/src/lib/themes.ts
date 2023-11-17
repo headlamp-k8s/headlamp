@@ -33,7 +33,7 @@ const commonRules = {
   palette: {
     primary: {
       contrastText: '#fff',
-      main: '#0078d4',
+      main: '#000',
     },
     primaryColor: '#000',
     success: {

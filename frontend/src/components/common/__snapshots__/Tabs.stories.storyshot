@@ -21,7 +21,7 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
         <button
           aria-controls="full-width-tabpanel-0-BasicTabs"
           aria-selected="true"
-          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-1qhanmh-MuiButtonBase-root-MuiTab-root"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-h5yy84-MuiButtonBase-root-MuiTab-root"
           id="full-width-tab-0-BasicTabs"
           role="tab"
           tabindex="0"
@@ -35,7 +35,7 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
         <button
           aria-controls="full-width-tabpanel-1-BasicTabs"
           aria-selected="false"
-          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1qhanmh-MuiButtonBase-root-MuiTab-root"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-h5yy84-MuiButtonBase-root-MuiTab-root"
           id="full-width-tab-1-BasicTabs"
           role="tab"
           tabindex="-1"
@@ -48,7 +48,7 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
         </button>
       </div>
       <span
-        class="MuiTabs-indicator css-fgn50m-MuiTabs-indicator"
+        class="MuiTabs-indicator css-13zgqbm-MuiTabs-indicator"
         style="left: 0px; width: 0px;"
       />
     </div>
@@ -98,7 +98,7 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
         <button
           aria-controls="full-width-tabpanel-0-StartingTabs"
           aria-selected="false"
-          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1qhanmh-MuiButtonBase-root-MuiTab-root"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-h5yy84-MuiButtonBase-root-MuiTab-root"
           id="full-width-tab-0-StartingTabs"
           role="tab"
           tabindex="-1"
@@ -112,7 +112,7 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
         <button
           aria-controls="full-width-tabpanel-1-StartingTabs"
           aria-selected="true"
-          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-1qhanmh-MuiButtonBase-root-MuiTab-root"
+          class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-h5yy84-MuiButtonBase-root-MuiTab-root"
           id="full-width-tab-1-StartingTabs"
           role="tab"
           tabindex="0"
@@ -125,7 +125,7 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
         </button>
       </div>
       <span
-        class="MuiTabs-indicator css-fgn50m-MuiTabs-indicator"
+        class="MuiTabs-indicator css-13zgqbm-MuiTabs-indicator"
         style="left: 0px; width: 0px;"
       />
     </div>

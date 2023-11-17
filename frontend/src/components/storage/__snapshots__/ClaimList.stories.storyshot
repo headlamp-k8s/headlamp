@@ -89,7 +89,7 @@ exports[`Storyshots Storage/PersistentVolumeClaim List View 1`] = `
             class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
           >
             <tr
-              class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+              class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
             >
               <th
                 class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
@@ -240,13 +240,13 @@ exports[`Storyshots Storage/PersistentVolumeClaim List View 1`] = `
             class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
           >
             <tr
-              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   my-pvc
@@ -256,7 +256,7 @@ exports[`Storyshots Storage/PersistentVolumeClaim List View 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default
@@ -276,7 +276,7 @@ exports[`Storyshots Storage/PersistentVolumeClaim List View 1`] = `
                   data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     default
@@ -292,7 +292,7 @@ exports[`Storyshots Storage/PersistentVolumeClaim List View 1`] = `
                   data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     pvc-abc-1234
@@ -335,13 +335,13 @@ exports[`Storyshots Storage/PersistentVolumeClaim List View 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   no-storage-class-name-pvc
@@ -351,7 +351,7 @@ exports[`Storyshots Storage/PersistentVolumeClaim List View 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default
@@ -376,7 +376,7 @@ exports[`Storyshots Storage/PersistentVolumeClaim List View 1`] = `
                   data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     pvc-abc-1234
@@ -419,13 +419,13 @@ exports[`Storyshots Storage/PersistentVolumeClaim List View 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   no-volume-name-pvc
@@ -435,7 +435,7 @@ exports[`Storyshots Storage/PersistentVolumeClaim List View 1`] = `
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default

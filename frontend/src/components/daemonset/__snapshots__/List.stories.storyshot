@@ -92,7 +92,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
               class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
             >
               <tr
-                class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
               >
                 <th
                   class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
@@ -238,13 +238,13 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
               class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
             >
               <tr
-                class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
               >
                 <td
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     gadget
@@ -254,7 +254,7 @@ exports[`Storyshots DaemonSet/List Daemon Sets 1`] = `
                   class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 >
                   <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     gadget
