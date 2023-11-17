@@ -1288,8 +1288,7 @@ export async function apply(body: KubeObjectInterface): Promise<JSON> {
 
     const cluster = getCluster();
     if (!!cluster) {
-      const clusterSettings = helpers.loadClusterSettings(cluster);
-      defaultNamespace = clusterSettings?.defaultNamespace || defaultNamespace;
+      defaultNamespace = getClusterDefaultNamespace(cluster) || 'default';
     }
 
     bodyToApply.metadata.namespace = defaultNamespace;
@@ -1563,4 +1562,35 @@ export function drainNodeStatus(cluster: string, nodeName: string): Promise<Drai
       return data;
     });
   });
+}
+
+/** Gets the default namespace for the given cluster.
+ * If the checkSettings parameter is true (default), it will check the cluster settings first.
+ * Otherwise it will just check the cluster config. This means that if one needs the default
+ * namespace that may come from the kubeconfig, call this function with the checkSettings parameter as false.
+ *
+ * @param cluster The cluster name.
+ * @param checkSettings Whether to check the settings for the default namespace (otherwise it just checks the cluster config). Defaults to true.
+ *
+ * @returns The default namespace for the given cluster.
+ */
+function getClusterDefaultNamespace(cluster: string, checkSettings?: boolean): string {
+  const includeSettings = checkSettings ?? true;
+  let defaultNamespace = '';
+
+  if (!!cluster) {
+    if (includeSettings) {
+      const clusterSettings = helpers.loadClusterSettings(cluster);
+      defaultNamespace = clusterSettings?.defaultNamespace || '';
+    }
+
+    if (!defaultNamespace) {
+      const state = store.getState();
+      const clusterDefaultNs: string =
+        state.config?.clusters?.[cluster]?.meta_data?.namespace || '';
+      defaultNamespace = clusterDefaultNs;
+    }
+  }
+
+  return defaultNamespace;
 }

@@ -51,7 +51,8 @@ export default function SettingsCluster() {
   const cluster = useCluster();
   const clusterConf = useClustersConf();
   const { t } = useTranslation(['translation']);
-  const [defaultNamespace, setDefaultNamespace] = React.useState('');
+  const [defaultNamespace, setDefaultNamespace] = React.useState('default');
+  const [userDefaultNamespace, setUserDefaultNamespace] = React.useState('');
   const [newAllowedNamespace, setNewAllowedNamespace] = React.useState('');
   const [clusterSettings, setClusterSettings] = React.useState<ClusterSettings | null>(null);
   const classes = useStyles();
@@ -88,8 +89,16 @@ export default function SettingsCluster() {
   }, [cluster]);
 
   React.useEffect(() => {
-    if (clusterSettings?.defaultNamespace !== defaultNamespace) {
-      setDefaultNamespace(clusterSettings?.defaultNamespace || '');
+    const clusterInfo = (clusterConf && clusterConf[cluster || '']) || null;
+    const clusterConfNs = clusterInfo?.meta_data?.namespace;
+    if (!!clusterConfNs && clusterConfNs !== defaultNamespace) {
+      setDefaultNamespace(clusterConfNs);
+    }
+  }, [cluster, clusterConf]);
+
+  React.useEffect(() => {
+    if (clusterSettings?.defaultNamespace !== userDefaultNamespace) {
+      setUserDefaultNamespace(clusterSettings?.defaultNamespace || '');
     }
 
     // Avoid re-initializing settings as {} just because the cluster is not yet set.
@@ -104,8 +113,8 @@ export default function SettingsCluster() {
     if (isEditingDefaultNamespace()) {
       // We store the namespace after a timeout.
       timeoutHandle = setTimeout(() => {
-        if (isValidNamespaceFormat(defaultNamespace)) {
-          storeNewDefaultNamespace(defaultNamespace);
+        if (isValidNamespaceFormat(userDefaultNamespace)) {
+          storeNewDefaultNamespace(userDefaultNamespace);
         }
       }, 1000);
     }
@@ -116,10 +125,10 @@ export default function SettingsCluster() {
         timeoutHandle = null;
       }
     };
-  }, [defaultNamespace]);
+  }, [userDefaultNamespace]);
 
   function isEditingDefaultNamespace() {
-    return clusterSettings?.defaultNamespace !== defaultNamespace;
+    return clusterSettings?.defaultNamespace !== userDefaultNamespace;
   }
 
   if (!cluster) {
@@ -140,9 +149,9 @@ export default function SettingsCluster() {
 
   function storeNewDefaultNamespace(namespace: string) {
     let actualNamespace = namespace;
-    if (namespace === 'default') {
+    if (namespace === defaultNamespace) {
       actualNamespace = '';
-      setDefaultNamespace(actualNamespace);
+      setUserDefaultNamespace(actualNamespace);
     }
 
     setClusterSettings((settings: ClusterSettings | null) => {
@@ -154,7 +163,7 @@ export default function SettingsCluster() {
     });
   }
 
-  const isValidDefaultNamespace = isValidNamespaceFormat(defaultNamespace);
+  const isValidDefaultNamespace = isValidNamespaceFormat(userDefaultNamespace);
   const isValidNewAllowedNamespace = isValidNamespaceFormat(newAllowedNamespace);
   const invalidNamespaceMessage = t(
     "translation|Namespaces must contain only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character."
@@ -190,10 +199,10 @@ export default function SettingsCluster() {
                   onChange={event => {
                     let value = event.target.value;
                     value = value.replace(' ', '');
-                    setDefaultNamespace(value);
+                    setUserDefaultNamespace(value);
                   }}
-                  value={defaultNamespace}
-                  placeholder="default"
+                  value={userDefaultNamespace}
+                  placeholder={defaultNamespace}
                   error={!isValidDefaultNamespace}
                   helperText={
                     isValidDefaultNamespace
