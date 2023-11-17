@@ -304,8 +304,25 @@ const darkTheme = createTheme({
     ...commonRules.components,
     MuiButton: {
       styleOverrides: {
-        text: {
+        root: {
           color: '#fff',
+          borderColor: 'rgba(255, 255, 255, 0.08)',
+          '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.12)',
+            borderColor: 'rgba(255, 255, 255, 0.08)',
+          },
+        },
+        outlinedPrimary: {
+          color: '#fff',
+          borderColor: 'rgba(255, 255, 255, 0.08)',
+          '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.12)',
+            borderColor: 'rgba(255, 255, 255, 0.08)',
+          },
+          '&.Mui-selected': {
+            color: '#000',
+            backgroundColor: '#fff',
+          },
         },
       },
     },

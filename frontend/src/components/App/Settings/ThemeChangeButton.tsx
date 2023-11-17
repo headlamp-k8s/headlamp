@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: '0.8rem 1.5rem',
     },
     '& .MuiButton-contained': {
-      backgroundColor: theme.palette.type === 'dark' ? '' : 'rgba(0, 0, 0, 0.45)',
-      color: theme.palette.type === 'dark' ? '' : 'rgb(255, 255, 255)',
+      backgroundColor: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0, 0, 0, 0.45)',
+      color: theme.palette.mode === 'dark' ? '#000' : 'rgb(255, 255, 255)',
     },
   },
 }));
