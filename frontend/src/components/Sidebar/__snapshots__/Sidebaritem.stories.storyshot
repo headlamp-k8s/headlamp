@@ -13,7 +13,7 @@ exports[`Storyshots Sidebar/SidebarItem Selected 1`] = `
         class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
       >
         <a
-          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button Mui-selected css-1yh4fwk-MuiButtonBase-root-MuiListItem-root"
+          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button Mui-selected css-sayhe9-MuiButtonBase-root-MuiListItem-root"
           href="/"
           role="button"
           tabindex="0"
@@ -55,7 +55,7 @@ exports[`Storyshots Sidebar/SidebarItem Sublist 1`] = `
         class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
       >
         <a
-          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1yh4fwk-MuiButtonBase-root-MuiListItem-root"
+          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
           href="/"
           role="button"
           tabindex="0"
@@ -80,7 +80,7 @@ exports[`Storyshots Sidebar/SidebarItem Sublist 1`] = `
         </a>
       </li>
       <li
-        class="MuiListItem-root MuiListItem-gutters MuiListItem-padding makeStyles-fullWidthList css-1coio5s-MuiListItem-root"
+        class="MuiListItem-root MuiListItem-gutters MuiListItem-padding makeStyles-fullWidthList css-19sz5b9-MuiListItem-root"
       >
         <div
           class="MuiCollapse-root MuiCollapse-vertical makeStyles-fullWidth MuiCollapse-hidden css-bz4dnt-MuiCollapse-root"
@@ -99,7 +99,7 @@ exports[`Storyshots Sidebar/SidebarItem Sublist 1`] = `
                   class="makeStyles-link makeStyles-link"
                 >
                   <a
-                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1yh4fwk-MuiButtonBase-root-MuiListItem-root"
+                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
                     href="/"
                     role="button"
                     tabindex="0"
@@ -141,7 +141,7 @@ exports[`Storyshots Sidebar/SidebarItem Sublist Expanded 1`] = `
         class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain makeStyles-linkMainSelected"
       >
         <a
-          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button Mui-selected css-1yh4fwk-MuiButtonBase-root-MuiListItem-root"
+          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button Mui-selected css-sayhe9-MuiButtonBase-root-MuiListItem-root"
           href="/"
           role="button"
           tabindex="0"
@@ -166,7 +166,7 @@ exports[`Storyshots Sidebar/SidebarItem Sublist Expanded 1`] = `
         </a>
       </li>
       <li
-        class="MuiListItem-root MuiListItem-gutters MuiListItem-padding makeStyles-fullWidthList css-1coio5s-MuiListItem-root"
+        class="MuiListItem-root MuiListItem-gutters MuiListItem-padding makeStyles-fullWidthList css-19sz5b9-MuiListItem-root"
       >
         <div
           class="MuiCollapse-root MuiCollapse-vertical makeStyles-fullWidth MuiCollapse-entered css-pwcg7p-MuiCollapse-root"
@@ -185,7 +185,7 @@ exports[`Storyshots Sidebar/SidebarItem Sublist Expanded 1`] = `
                   class="makeStyles-link makeStyles-link"
                 >
                   <a
-                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1yh4fwk-MuiButtonBase-root-MuiListItem-root"
+                    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
                     href="/"
                     role="button"
                     tabindex="0"
@@ -227,7 +227,7 @@ exports[`Storyshots Sidebar/SidebarItem Unselected 1`] = `
         class="makeStyles-link makeStyles-link makeStyles-linkMain makeStyles-linkMain"
       >
         <a
-          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1yh4fwk-MuiButtonBase-root-MuiListItem-root"
+          class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
           href="/"
           role="button"
           tabindex="0"

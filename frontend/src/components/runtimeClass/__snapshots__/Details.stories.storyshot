@@ -12,7 +12,7 @@ exports[`Storyshots RuntimeClass/DetailsView Runtime Class Detail 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-usz26d-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -78,7 +78,7 @@ exports[`Storyshots RuntimeClass/DetailsView Runtime Class Detail 1`] = `
           class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
         >
           <span
-            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-lepzwj-MuiCircularProgress-root"
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
             role="progressbar"
             style="width: 40px; height: 40px;"
             title="Loading resource data"

@@ -12,7 +12,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-usz26d-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -252,7 +252,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                 class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
               >
                 <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   Service: my-namespace/my-service
@@ -290,7 +290,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                     class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-1z0dvx8-MuiGrid-root"
                   >
                     <div
-                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-readOnly MuiInputBase-readOnly css-njsd40-MuiInputBase-root-MuiInput-root"
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-readOnly MuiInputBase-readOnly css-2b76fi-MuiInputBase-root-MuiInput-root"
                     >
                       <input
                         class="MuiInputBase-input MuiInput-input Mui-readOnly MuiInputBase-readOnly css-1x51dt5-MuiInputBase-input-MuiInput-input"
@@ -428,7 +428,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                       class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                     >
                       <tr
-                        class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
+                        class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                       >
                         <th
                           class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -466,7 +466,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                       class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                     >
                       <tr
-                        class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+                        class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
                       >
                         <td
                           class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -545,7 +545,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -594,7 +594,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With Serv
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -662,7 +662,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-usz26d-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -937,7 +937,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                     class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-1z0dvx8-MuiGrid-root"
                   >
                     <div
-                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-readOnly MuiInputBase-readOnly css-njsd40-MuiInputBase-root-MuiInput-root"
+                      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-readOnly MuiInputBase-readOnly css-2b76fi-MuiInputBase-root-MuiInput-root"
                     >
                       <input
                         class="MuiInputBase-input MuiInput-input Mui-readOnly MuiInputBase-readOnly css-1x51dt5-MuiInputBase-input-MuiInput-input"
@@ -1075,7 +1075,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                       class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                     >
                       <tr
-                        class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
+                        class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                       >
                         <th
                           class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -1113,7 +1113,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                       class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                     >
                       <tr
-                        class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+                        class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
                       >
                         <td
                           class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1192,7 +1192,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                   class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                 >
                   <tr
-                    class="MuiTableRow-root MuiTableRow-head css-1gsj6qz-MuiTableRow-root"
+                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                   >
                     <th
                       class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
@@ -1241,7 +1241,7 @@ exports[`Storyshots WebhookConfiguration/MutatingWebhookConfig/Details With URL 
                   class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                 >
                   <tr
-                    class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
                   >
                     <td
                       class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"

@@ -83,7 +83,7 @@ exports[`Storyshots Lease/LeaseListView Items 1`] = `
         class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
       >
         <span
-          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-lepzwj-MuiCircularProgress-root"
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
           role="progressbar"
           style="width: 40px; height: 40px;"
           title="Loading table data"

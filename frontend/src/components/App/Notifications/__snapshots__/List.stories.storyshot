@@ -3,7 +3,7 @@
 exports[`Storyshots Notifications List 1`] = `
 <div>
   <button
-    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-usz26d-MuiButtonBase-root-MuiButton-root"
+    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall css-1eo01bt-MuiButtonBase-root-MuiButton-root"
     tabindex="0"
     type="button"
   >
@@ -107,7 +107,7 @@ exports[`Storyshots Notifications List 1`] = `
             class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
           >
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -169,7 +169,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -226,7 +226,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -283,7 +283,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -340,7 +340,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -397,7 +397,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -454,7 +454,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -511,7 +511,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -568,7 +568,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -625,7 +625,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -682,7 +682,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -744,7 +744,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -801,7 +801,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -858,7 +858,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -915,7 +915,7 @@ exports[`Storyshots Notifications List 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root css-1gsj6qz-MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"

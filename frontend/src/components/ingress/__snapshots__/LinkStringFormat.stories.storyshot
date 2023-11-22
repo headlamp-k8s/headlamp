@@ -7,7 +7,7 @@ exports[`Storyshots ingress/LinkStringFormat Empty 1`] = `
     style="display: flex; margin-bottom: 5px;"
   >
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
       href="http://exampleurl.com/"
       style="margin-right: 5px;"
     >
@@ -25,7 +25,7 @@ exports[`Storyshots ingress/LinkStringFormat More Path 1`] = `
     style="display: flex; margin-bottom: 5px;"
   >
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
       href="http://exampleurl.com/pathB"
       style="margin-right: 5px;"
     >
@@ -43,7 +43,7 @@ exports[`Storyshots ingress/LinkStringFormat Solo Path 1`] = `
     style="display: flex; margin-bottom: 5px;"
   >
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-1ke5svz-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
       href="http://exampleurl.com/pathA"
       style="margin-right: 5px;"
     >
