@@ -1,4 +1,8 @@
 # syntax=docker/dockerfile:1
+# Final container image
+ARG IMAGE_BASE=alpine:3.18
+FROM ${IMAGE_BASE} as image-base
+
 FROM --platform=${BUILDPLATFORM} golang:1.20 as backend-build
 
 WORKDIR /headlamp
@@ -57,14 +61,23 @@ RUN for i in $(find ./plugins-old/*/main.js); do plugin_name=$(echo $i|cut -d'/'
 
 RUN for i in $(find ./.plugins/*/main.js); do plugin_name=$(echo $i|cut -d'/' -f3); mkdir -p plugins/$plugin_name; cp $i plugins/$plugin_name; done
 
-# Final container image
-FROM alpine:3.18
+
+FROM image-base as final
+
+RUN if command -v apt-get > /dev/null; then \
+        apt-get update && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        && addgroup --system headlamp \
+        && adduser --system --ingroup headlamp headlamp \
+        && rm -rf /var/lib/apt/lists/*; \
+    else \
+        addgroup -S headlamp && adduser -S headlamp -G headlamp; \
+    fi
 
 COPY --from=backend-build --link /headlamp/backend/headlamp-server /headlamp/headlamp-server
 COPY --from=frontend --link /headlamp/frontend/build /headlamp/frontend
 COPY --from=frontend --link /headlamp/plugins /headlamp/plugins
 
-RUN addgroup -S headlamp && adduser -S headlamp -G headlamp
 RUN chown -R headlamp:headlamp /headlamp
 USER headlamp
 

@@ -126,6 +126,22 @@ options can be appended to the main command as arguments.
 make image
 ```
 
+### Custom container base images
+
+The Dockerfile takes a build argument for the base image used. You can specify the 
+base image used using the IMAGE_BASE environment variable with make.
+
+```bash
+IMAGE_BASE=debian:latest make image
+```
+
+If no IMAGE_BASE is specified, then a default image is used (see Dockerfile for exact default image used).
+
+This is useful if there are requirements on what base images can be used in an environment.
+
+So far Debian variants (including Ubuntu), and Alpine Linux are supported. 
+If you have other requirements, please get in touch.
+
 ### Running the container image
 
 With docker you can run the Headlamp image(`ghcr.io/headlamp-k8s/headlamp:latest`).
