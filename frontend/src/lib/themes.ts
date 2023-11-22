@@ -1,4 +1,4 @@
-import { green, grey, orange, red } from '@mui/material/colors';
+import { green, grey, orange, pink, red } from '@mui/material/colors';
 import { createTheme, Theme } from '@mui/material/styles';
 import React from 'react';
 
@@ -34,6 +34,11 @@ const commonRules = {
     primary: {
       contrastText: '#fff',
       main: '#0078d4',
+    },
+    secondary: {
+      light: pink.A200,
+      main: pink.A400,
+      dark: pink.A700,
     },
     primaryColor: '#000',
     success: {
@@ -302,30 +307,6 @@ const darkTheme = createTheme({
   },
   components: {
     ...commonRules.components,
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          color: '#fff',
-          borderColor: 'rgba(255, 255, 255, 0.08)',
-          '&:hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.12)',
-            borderColor: 'rgba(255, 255, 255, 0.08)',
-          },
-        },
-        outlinedPrimary: {
-          color: '#fff',
-          borderColor: 'rgba(255, 255, 255, 0.08)',
-          '&:hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.12)',
-            borderColor: 'rgba(255, 255, 255, 0.08)',
-          },
-          '&.Mui-selected': {
-            color: '#000',
-            backgroundColor: '#fff',
-          },
-        },
-      },
-    },
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
