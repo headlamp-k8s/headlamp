@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { KubeObject } from '../../lib/k8s/cluster';
-import CRD, { KubeCRD, makeCustomResourceClass } from '../../lib/k8s/crd';
+import CRD, { KubeCRD } from '../../lib/k8s/crd';
 import { localeDate } from '../../lib/util';
 import { Link, Loader, PageGrid, SectionHeader, SimpleTableGetterColumn } from '../common';
 import BackLink from '../common/BackLink';
@@ -118,8 +118,8 @@ export function CustomResourceListTable(props: CustomResourceTableProps) {
   }, [crd]);
 
   const CRClass = React.useMemo(() => {
-    return makeCustomResourceClass([apiGroup], crd.metadata.namespace);
-  }, [apiGroup, crd.metadata.namespace]);
+    return crd.makeCRClass();
+  }, [crd]);
 
   if (!CRClass) {
     return <Empty>{t('translation|No custom resources found')}</Empty>;
