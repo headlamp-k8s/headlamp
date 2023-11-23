@@ -3,95 +3,95 @@
 exports[`Storyshots cluster/Overview Events 1`] = `
 <div>
   <div
-    class="MuiContainer-root MuiContainer-maxWidthXl"
+    class="MuiContainer-root MuiContainer-maxWidthXl css-4hqp1a-MuiContainer-root"
   >
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-1ub3t8b-MuiGrid-root"
     >
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
       >
         <div
-          class="MuiBox-root MuiBox-root"
+          class="MuiBox-root css-p0cik4"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root css-j1fy4m"
           >
             <div
-              class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
             >
               <div
-                class="MuiGrid-root MuiGrid-item"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
                 <div
-                  class="MuiBox-root MuiBox-root"
+                  class="MuiBox-root css-70qvj9"
                 >
                   <h2
-                    class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+                    class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
                   >
                     Overview
                   </h2>
                   <div
-                    class="MuiBox-root MuiBox-root"
+                    class="MuiBox-root css-ldp2l3"
                   />
                 </div>
               </div>
             </div>
             <div
-              class="MuiBox-root MuiBox-root makeStyles-box"
+              class="makeStyles-box MuiBox-root css-opkpcd"
             >
               <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4"
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4 css-13cu5dn-MuiGrid-root"
               >
                 <div
-                  class="MuiGrid-root makeStyles-chartItem MuiGrid-item MuiGrid-grid-xs-true"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true makeStyles-chartItem css-1z0dvx8-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root makeStyles-paper MuiPaper-elevation1 MuiPaper-rounded"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root makeStyles-tileBox"
+                      class="makeStyles-tileBox MuiBox-root css-k008qs"
                     >
                       <div
-                        class="MuiBox-root MuiBox-root"
+                        class="MuiBox-root css-1sl8dhm"
                       >
                         <div
-                          class="MuiBox-root MuiBox-root"
+                          class="MuiBox-root css-0"
                         >
                           <p
-                            class="MuiTypography-root makeStyles-title MuiTypography-body1 MuiTypography-gutterBottom"
+                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
                           >
                             CPU Usage
                           </p>
                         </div>
                         <p
-                          class="MuiTypography-root makeStyles-legend MuiTypography-body1 MuiTypography-gutterBottom"
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
                         />
                       </div>
                       <div
-                        class="MuiBox-root MuiBox-root"
+                        class="MuiBox-root css-0"
                       >
                         <div
                           aria-busy="true"
                           aria-live="polite"
-                          class="MuiBox-root MuiBox-root"
+                          class="MuiBox-root css-2esbmj"
                         >
                           
                           <div
-                            class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+                            class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
                           >
-                            <div
-                              class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+                            <span
+                              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
                               role="progressbar"
                               style="width: 40px; height: 40px;"
                               title="Loading data for "
                             >
                               <svg
-                                class="MuiCircularProgress-svg"
+                                class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
                                 viewBox="22 22 44 44"
                               >
                                 <circle
-                                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                                   cx="44"
                                   cy="44"
                                   fill="none"
@@ -99,7 +99,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                                   stroke-width="3.6"
                                 />
                               </svg>
-                            </div>
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -107,54 +107,54 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   </div>
                 </div>
                 <div
-                  class="MuiGrid-root makeStyles-chartItem MuiGrid-item MuiGrid-grid-xs-true"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true makeStyles-chartItem css-1z0dvx8-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root makeStyles-paper MuiPaper-elevation1 MuiPaper-rounded"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root makeStyles-tileBox"
+                      class="makeStyles-tileBox MuiBox-root css-k008qs"
                     >
                       <div
-                        class="MuiBox-root MuiBox-root"
+                        class="MuiBox-root css-1sl8dhm"
                       >
                         <div
-                          class="MuiBox-root MuiBox-root"
+                          class="MuiBox-root css-0"
                         >
                           <p
-                            class="MuiTypography-root makeStyles-title MuiTypography-body1 MuiTypography-gutterBottom"
+                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
                           >
                             Memory Usage
                           </p>
                         </div>
                         <p
-                          class="MuiTypography-root makeStyles-legend MuiTypography-body1 MuiTypography-gutterBottom"
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
                         />
                       </div>
                       <div
-                        class="MuiBox-root MuiBox-root"
+                        class="MuiBox-root css-0"
                       >
                         <div
                           aria-busy="true"
                           aria-live="polite"
-                          class="MuiBox-root MuiBox-root"
+                          class="MuiBox-root css-2esbmj"
                         >
                           
                           <div
-                            class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+                            class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
                           >
-                            <div
-                              class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+                            <span
+                              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
                               role="progressbar"
                               style="width: 40px; height: 40px;"
                               title="Loading data for "
                             >
                               <svg
-                                class="MuiCircularProgress-svg"
+                                class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
                                 viewBox="22 22 44 44"
                               >
                                 <circle
-                                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                                   cx="44"
                                   cy="44"
                                   fill="none"
@@ -162,7 +162,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                                   stroke-width="3.6"
                                 />
                               </svg>
-                            </div>
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -170,55 +170,55 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                   </div>
                 </div>
                 <div
-                  class="MuiGrid-root makeStyles-chartItem MuiGrid-item MuiGrid-grid-xs-true"
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true makeStyles-chartItem css-1z0dvx8-MuiGrid-root"
                 >
                   <div
-                    class="MuiPaper-root makeStyles-paper MuiPaper-elevation1 MuiPaper-rounded"
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root makeStyles-tileBox"
+                      class="makeStyles-tileBox MuiBox-root css-k008qs"
                     >
                       <div
-                        class="MuiBox-root MuiBox-root"
+                        class="MuiBox-root css-1sl8dhm"
                       >
                         <div
-                          class="MuiBox-root MuiBox-root"
+                          class="MuiBox-root css-0"
                         >
                           <p
-                            class="MuiTypography-root makeStyles-title MuiTypography-body1 MuiTypography-gutterBottom"
+                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
                           >
                             Pods
                           </p>
                           
                         </div>
                         <p
-                          class="MuiTypography-root makeStyles-legend MuiTypography-body1 MuiTypography-gutterBottom"
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
                         />
                       </div>
                       <div
-                        class="MuiBox-root MuiBox-root"
+                        class="MuiBox-root css-0"
                       >
                         <div
                           aria-busy="true"
                           aria-live="polite"
-                          class="MuiBox-root MuiBox-root"
+                          class="MuiBox-root css-2esbmj"
                         >
                           
                           <div
-                            class="MuiBox-root MuiBox-root makeStyles-loaderContainer"
+                            class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
                           >
-                            <div
-                              class="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+                            <span
+                              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
                               role="progressbar"
                               style="width: 40px; height: 40px;"
                               title="Loading data for "
                             >
                               <svg
-                                class="MuiCircularProgress-svg"
+                                class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
                                 viewBox="22 22 44 44"
                               >
                                 <circle
-                                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
                                   cx="44"
                                   cy="44"
                                   fill="none"
@@ -226,7 +226,7 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                                   stroke-width="3.6"
                                 />
                               </svg>
-                            </div>
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -239,63 +239,57 @@ exports[`Storyshots cluster/Overview Events 1`] = `
         </div>
       </div>
       <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
+        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
       >
         <div
-          class="MuiBox-root MuiBox-root"
+          class="MuiBox-root css-p0cik4"
         >
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root css-j1fy4m"
           >
             <div
-              class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
             >
               <div
-                class="MuiGrid-root MuiGrid-item"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
                 <div
-                  class="MuiBox-root MuiBox-root"
+                  class="MuiBox-root css-70qvj9"
                 >
                   <h1
-                    class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+                    class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
                   >
                     Events
                   </h1>
                   <div
-                    class="MuiBox-root MuiBox-root"
+                    class="MuiBox-root css-ldp2l3"
                   >
                     <label
-                      class="MuiFormControlLabel-root"
+                      class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
                     >
                       <span
-                        class="MuiSwitch-root"
+                        class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
                       >
                         <span
-                          aria-disabled="false"
-                          class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary"
+                          class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
                         >
+                          <input
+                            class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+                            type="checkbox"
+                          />
                           <span
-                            class="MuiIconButton-label"
-                          >
-                            <input
-                              class="PrivateSwitchBase-input MuiSwitch-input"
-                              type="checkbox"
-                              value=""
-                            />
-                            <span
-                              class="MuiSwitch-thumb"
-                            />
-                          </span>
+                            class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+                          />
                           <span
-                            class="MuiTouchRipple-root"
+                            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </span>
                         <span
-                          class="MuiSwitch-track"
+                          class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
                         />
                       </span>
                       <span
-                        class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+                        class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-1ezega9-MuiTypography-root"
                       >
                         Only warnings (1)
                       </span>
@@ -304,56 +298,48 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                 </div>
               </div>
               <div
-                class="MuiGrid-root MuiGrid-item"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+                  class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
                 >
                   <div
-                    class="MuiGrid-root MuiGrid-item"
+                    class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root"
+                      class="MuiBox-root css-0"
                     >
                       <div
-                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-align-items-xs-center"
+                        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-7ldjcq-MuiGrid-root"
                       >
                         <div
-                          class="MuiGrid-root MuiGrid-item"
+                          class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
                         >
                           <button
                             aria-label="Show filter"
-                            class="MuiButtonBase-root MuiIconButton-root"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
                             tabindex="0"
                             type="button"
                           >
+                            <span />
                             <span
-                              class="MuiIconButton-label"
-                            >
-                              <span />
-                            </span>
-                            <span
-                              class="MuiTouchRipple-root"
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                             />
                           </button>
                         </div>
                         <div
-                          class="MuiGrid-root MuiGrid-item"
+                          class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
                         >
                           <button
                             aria-label="Change columns displayed"
-                            class="MuiButtonBase-root MuiIconButton-root"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+                            data-mui-internal-clone-element="true"
                             tabindex="0"
-                            title="Change columns displayed"
                             type="button"
                           >
+                            <span />
                             <span
-                              class="MuiIconButton-label"
-                            >
-                              <span />
-                            </span>
-                            <span
-                              class="MuiTouchRipple-root"
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                             />
                           </button>
                         </div>
@@ -364,199 +350,174 @@ exports[`Storyshots cluster/Overview Events 1`] = `
               </div>
             </div>
             <div
-              class="MuiBox-root MuiBox-root makeStyles-box"
+              class="makeStyles-box MuiBox-root css-0"
             >
               <div
-                class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
+                class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
               >
                 <table
-                  class="MuiTable-root makeStyles-table makeStyles-table"
+                  class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
                 >
                   <thead
-                    class="MuiTableHead-root"
+                    class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                   >
                     <tr
-                      class="MuiTableRow-root MuiTableRow-head"
+                      class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                     >
                       <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                         scope="col"
                       >
                         Type
                         <button
                           aria-label="sort swap"
-                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                           tabindex="0"
                           type="button"
                         >
+                          <span />
                           <span
-                            class="MuiIconButton-label"
-                          >
-                            <span />
-                          </span>
-                          <span
-                            class="MuiTouchRipple-root"
+                            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
                       </th>
                       <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
-                        role="columnheader"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                         scope="row"
                       >
                         Name
                         <button
                           aria-label="sort swap"
-                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                           tabindex="0"
                           type="button"
                         >
+                          <span />
                           <span
-                            class="MuiIconButton-label"
-                          >
-                            <span />
-                          </span>
-                          <span
-                            class="MuiTouchRipple-root"
+                            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
                       </th>
                       <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                         scope="col"
                       >
                         Namespace
                         <button
                           aria-label="sort swap"
-                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                           tabindex="0"
                           type="button"
                         >
+                          <span />
                           <span
-                            class="MuiIconButton-label"
-                          >
-                            <span />
-                          </span>
-                          <span
-                            class="MuiTouchRipple-root"
+                            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
                       </th>
                       <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                         scope="col"
                       >
                         Reason
                         <button
                           aria-label="sort swap"
-                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                           tabindex="0"
                           type="button"
                         >
+                          <span />
                           <span
-                            class="MuiIconButton-label"
-                          >
-                            <span />
-                          </span>
-                          <span
-                            class="MuiTouchRipple-root"
+                            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
                       </th>
                       <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                         scope="col"
                       >
                         Message
                         <button
                           aria-label="sort swap"
-                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                           tabindex="0"
                           type="button"
                         >
+                          <span />
                           <span
-                            class="MuiIconButton-label"
-                          >
-                            <span />
-                          </span>
-                          <span
-                            class="MuiTouchRipple-root"
+                            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
                       </th>
                       <th
-                        class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                         scope="col"
                         style="text-align: right;"
                       >
                         Last Seen
                         <button
                           aria-label="sort up"
-                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                           tabindex="0"
                           type="button"
                         >
+                          <span />
                           <span
-                            class="MuiIconButton-label"
-                          >
-                            <span />
-                          </span>
-                          <span
-                            class="MuiTouchRipple-root"
+                            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
                       </th>
                     </tr>
                   </thead>
                   <tbody
-                    class="MuiTableBody-root"
+                    class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
                   >
                     <tr
-                      class="MuiTableRow-root"
+                      class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
                     >
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         Pod
                       </td>
                       <th
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                        role="cell"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                         scope="row"
                       >
                         <a
-                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                           href="/"
                         >
                           hello-123-123
                         </a>
                       </th>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <a
-                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                           href="/"
                         >
                           default
                         </a>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel makeStyles-eventLabel MuiTypography-body1"
+                          aria-label="Started"
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel makeStyles-eventLabel css-1ezega9-MuiTypography-root"
+                          data-mui-internal-clone-element="true"
                           style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
-                          title="Started"
                         >
                           Started
                         </span>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <div
-                          class="MuiBox-root MuiBox-root"
+                          class="MuiBox-root css-k008qs"
                         >
                           <label
                             class="makeStyles-fullText"
@@ -567,12 +528,13 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         </div>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                         style="text-align: right;"
                       >
                         <p
-                          class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                          title="2023-07-13T13:42:00.000Z"
+                          aria-label="2023-07-13T13:42:00.000Z"
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                          data-mui-internal-clone-element="true"
                         >
                           3mo
                           <span />
@@ -580,51 +542,51 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                       </td>
                     </tr>
                     <tr
-                      class="MuiTableRow-root"
+                      class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
                     >
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         HorizontalPodAutoscaler
                       </td>
                       <th
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
-                        role="cell"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                         scope="row"
                       >
                         <a
-                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                           href="/"
                         >
                           nginx-deployment
                         </a>
                       </th>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <a
-                          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                           href="/"
                         >
                           default
                         </a>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <span
-                          class="MuiTypography-root makeStyles-statusLabel makeStyles-eventLabel MuiTypography-body1"
+                          aria-label="FailedGetResourceMetric"
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel makeStyles-eventLabel css-1ezega9-MuiTypography-root"
+                          data-mui-internal-clone-element="true"
                           style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
-                          title="FailedGetResourceMetric"
                         >
                           FailedGetResourceMetric
                         </span>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <div
-                          class="MuiBox-root MuiBox-root"
+                          class="MuiBox-root css-k008qs"
                         >
                           <label
                             class="makeStyles-fullText"
@@ -635,12 +597,13 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         </div>
                       </td>
                       <td
-                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                         style="text-align: right;"
                       >
                         <p
-                          class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                          title="2023-07-12T20:07:10.000Z"
+                          aria-label="2023-07-12T20:07:10.000Z"
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                          data-mui-internal-clone-element="true"
                         >
                           3mo
                           <span />

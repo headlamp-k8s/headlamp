@@ -1,11 +1,11 @@
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import Link from '@material-ui/core/Link';
-import Snackbar from '@material-ui/core/Snackbar';
-import TextField from '@material-ui/core/TextField';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import Link from '@mui/material/Link';
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+import TextField from '@mui/material/TextField';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { generatePath, useHistory } from 'react-router-dom';
@@ -76,7 +76,10 @@ export interface PureAuthTokenProps {
   onCancel: clickCallbackType;
   onChangeToken: changeCallbackType;
   onAuthClicked: clickCallbackType;
-  onCloseError: (event: React.SyntheticEvent<any, Event>, reason: string) => void;
+  onCloseError: (
+    event: Event | React.SyntheticEvent<any, Event>,
+    reason: SnackbarCloseReason
+  ) => void;
 }
 
 export function PureAuthToken({

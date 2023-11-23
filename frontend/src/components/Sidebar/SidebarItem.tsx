@@ -1,7 +1,7 @@
-import Collapse from '@material-ui/core/Collapse';
-import List from '@material-ui/core/List';
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
-import { makeStyles } from '@material-ui/core/styles';
+import Collapse from '@mui/material/Collapse';
+import List from '@mui/material/List';
+import ListItem, { ListItemProps } from '@mui/material/ListItem';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React from 'react';
 import { generatePath } from 'react-router';

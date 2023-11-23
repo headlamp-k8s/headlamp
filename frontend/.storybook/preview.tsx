@@ -1,8 +1,14 @@
 import React from 'react';
 import themesConf from '../src/lib/themes';
-import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
+import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles';
+import StylesProvider from '@mui/styles/StylesProvider';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import { rest } from 'msw'
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 // https://github.com/mswjs/msw-storybook-addon
 initialize();
@@ -17,9 +23,11 @@ const withThemeProvider = (Story, context) => {
   const theme = backgroundColor !== 'dark' ? lightTheme : darkTheme;
 
   const ourThemeProvider = (
-    <ThemeProvider theme={theme}>
-      <Story {...context} />
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <Story {...context} />
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
   if (process.env.NODE_ENV !== 'test') {
     return ourThemeProvider;

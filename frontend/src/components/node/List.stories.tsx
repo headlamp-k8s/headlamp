@@ -1,4 +1,4 @@
-import Container from '@material-ui/core/Container';
+import Container from '@mui/material/Container';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import Node from '../../lib/k8s/node';
 import { TestContext } from '../../test';

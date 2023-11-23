@@ -3,23 +3,23 @@
 exports[`Storyshots Label/InfoLabel Info Label 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-item MuiGrid-align-items-xs-flex-start"
+    class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-spacing-xs-2 css-4lm93d-MuiGrid-root"
   >
     <div
-      class="MuiGrid-root makeStyles-nameLabelItem MuiGrid-item MuiGrid-grid-xs-true"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true makeStyles-nameLabelItem css-1z0dvx8-MuiGrid-root"
     >
       <span
-        class="MuiTypography-root makeStyles-nameLabel MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 makeStyles-nameLabel css-1ezega9-MuiTypography-root"
       >
         name
       </span>
        
     </div>
     <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true css-1z0dvx8-MuiGrid-root"
     >
       <span
-        class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+        class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
       >
         value
       </span>

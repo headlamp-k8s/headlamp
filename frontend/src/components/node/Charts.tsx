@@ -1,4 +1,5 @@
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';

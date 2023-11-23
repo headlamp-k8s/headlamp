@@ -1,5 +1,5 @@
-import { useTheme } from '@material-ui/core/styles';
-import React from 'react';
+import { useTheme } from '@mui/material/styles';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Workload } from '../../lib/k8s/cluster';
 import { getPercentStr, getReadyReplicas, getTotalReplicas } from '../../lib/util';
@@ -18,7 +18,7 @@ export function WorkloadCircleChart(props: WorkloadCircleChartProps) {
 
   const { workloadData, partialLabel = '', totalLabel = '', ...other } = props;
 
-  const [total, partial] = React.useMemo(() => {
+  const [total, partial] = useMemo(() => {
     // Total as -1 means it's loading.
     const total = !workloadData ? -1 : workloadData.length;
     const partial =

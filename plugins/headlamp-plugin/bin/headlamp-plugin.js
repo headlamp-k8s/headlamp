@@ -548,6 +548,7 @@ function format(packageFolder, check) {
  */
 function getNpmOutdated() {
   let result = null;
+
   try {
     result = child_process.execSync('npm outdated --json', {
       encoding: 'utf8',
@@ -565,9 +566,11 @@ function getNpmOutdated() {
  * In the future this could be used for other upgrade tasks.
  *
  * @param packageFolder {string} - folder where the package, or folder of packages is.
+ * @parm skipPackageUpdates {boolean} - do not upgrade packages if true.
+ * @param headlampPluginVersion {string} - tag or version of headlamp-plugin to upgrade to.
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
-function upgrade(packageFolder, skipPackageUpdates) {
+function upgrade(packageFolder, skipPackageUpdates, headlampPluginVersion) {
   /**
    * Files from the template might not be there.
    *
@@ -597,7 +600,35 @@ function upgrade(packageFolder, skipPackageUpdates) {
         fs.mkdirSync(path.dirname(to), { recursive: true });
         fs.copyFileSync(from, to);
       }
+      // Add file if it is different
+      if (fs.readFileSync(from, 'utf8') !== fs.readFileSync(to, 'utf8')) {
+        console.log(`Updating file: "${to}"`);
+        fs.copyFileSync(from, to);
+      }
     });
+  }
+
+  /**
+   * If there are material-ui v4 files in src/ folder, upgrade them to v5.
+   *
+   * @see https://mui.com/material-ui/migration/migration-v4/#run-codemods
+   */
+  function upgradeMui() {
+    const hasMaterialUI = fs
+      .readdirSync('src', { withFileTypes: true })
+      .filter(dirent => dirent.isFile() && dirent.name.endsWith('.ts'))
+      .map(dirent => path.join('src', dirent.name))
+      .filter(path => fs.readFileSync(path, 'utf8').includes('@material-ui'));
+
+    if (hasMaterialUI) {
+      console.log('Found files with "@material-ui". Upgrading material-ui v4 to mui v5...');
+      const cmd = 'npx @mui/codemod v5.0.0/preset-safe src';
+      if (runCmd(cmd, '.')) {
+        console.error(`Failed to upgrade material-ui v4 to mui v5.`);
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -692,20 +723,43 @@ function upgrade(packageFolder, skipPackageUpdates) {
   }
 
   /**
-   * Upgrades "@kinvolk/headlamp-plugin" dependency to latest version.
+   * In order to more robustly upgrade packages,
+   * we reset the package-lock.json and node_modules.
+   *
+   * @returns true unless there is a problem.
+   */
+  function resetPackageLock() {
+    if (fs.existsSync('node_modules')) {
+      console.log(`Resetting node_modules folder for more robust package upgrade...`);
+      fs.rm('node_modules', { recursive: true });
+    }
+    if (fs.existsSync('package-lock.json')) {
+      console.log(`Resetting package-lock.json file for more robust package upgrade...`);
+      fs.unlinkSync('package-lock.json');
+    }
+    return true;
+  }
+
+  /**
+   * Upgrades "@kinvolk/headlamp-plugin" dependency to latest or given version.
    *
    * @returns true unless there is a problem with the upgrade.
    */
   function upgradeHeadlampPlugin() {
-    const outDated = getNpmOutdated();
-    if ('@kinvolk/headlamp-plugin' in outDated) {
+    const theTag = headlampPluginVersion ? headlampPluginVersion : 'latest';
+    if (
+      headlampPluginVersion !== undefined ||
+      '@kinvolk/headlamp-plugin' in getNpmOutdated() ||
+      !fs.existsSync('node_modules')
+    ) {
       // Upgrade the @kinvolk/headlamp-plugin
 
-      const cmd = 'npm install @kinvolk/headlamp-plugin@latest --save';
+      const cmd = `npm install @kinvolk/headlamp-plugin@${theTag} --save`;
       if (runCmd(cmd, '.')) {
         return false;
       }
     }
+
     return true;
   }
 
@@ -729,9 +783,17 @@ function upgrade(packageFolder, skipPackageUpdates) {
     let failed = false;
     let reason = '';
     if (skipPackageUpdates !== true) {
-      if (!upgradeHeadlampPlugin()) {
+      if (!failed && !resetPackageLock()) {
+        failed = true;
+        reason = 'resetting package-lock.json and node_modules failed.';
+      }
+      if (!failed && !upgradeHeadlampPlugin()) {
         failed = true;
         reason = 'upgrading @kinvolk/headlamp-plugin failed.';
+      }
+      if (!failed && !upgradeMui()) {
+        failed = true;
+        reason = 'upgrading from material-ui 4 to mui 5 failed.';
       }
       if (!failed && runCmd('npm audit fix', folder)) {
         console.warn('"npm audit fix" failed. You may need to inspect your dependencies manually.');
@@ -1039,7 +1101,8 @@ yargs(process.argv.slice(2))
   )
   .command(
     'upgrade [package]',
-    'Upgrade the plugin to latest headlamp-plugin; audits, formats, lints and type checks.' +
+    'Upgrade the plugin to latest headlamp-plugin; ' +
+      'upgrades headlamp-plugin and audits packages, formats, lints, type checks.' +
       '<package> defaults to current working directory. Can also be a folder of packages.',
     yargs => {
       yargs
@@ -1051,10 +1114,15 @@ yargs(process.argv.slice(2))
         .option('skip-package-updates', {
           describe: 'For development of headlamp-plugin itself, so it does not do package updates.',
           type: 'boolean',
+        })
+        .option('headlamp-plugin-version', {
+          describe:
+            'Use a specific headlamp-plugin-version when upgrading packages. Defaults to "latest".',
+          type: 'string',
         });
     },
     argv => {
-      process.exitCode = upgrade(argv.package, argv.skipPackageUpdates);
+      process.exitCode = upgrade(argv.package, argv.skipPackageUpdates, argv.headlampPluginVersion);
     }
   )
   .command(

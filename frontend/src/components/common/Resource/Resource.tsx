@@ -1,18 +1,19 @@
 import { Icon } from '@iconify/react';
-import { InputLabel, Paper, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Divider from '@material-ui/core/Divider';
-import Grid, { GridProps, GridSize } from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Input, { InputProps } from '@material-ui/core/Input';
-import { TextFieldProps } from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme } from '@material-ui/styles';
 import Editor from '@monaco-editor/react';
+import { InputLabel, Theme } from '@mui/material';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Grid, { GridProps, GridSize } from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Input, { InputProps } from '@mui/material/Input';
+import Paper from '@mui/material/Paper';
+import { TextFieldProps } from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { makeStyles, useTheme } from '@mui/styles';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _, { has } from 'lodash';
-import React, { PropsWithChildren, useRef } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
 import { labelSelectorToQuery } from '../../../lib/k8s';
@@ -130,7 +131,7 @@ export function DetailsGrid(props: DetailsGridProps) {
     otherMainInfoSectionProps;
 
   const [item, error] = resourceType.useGet(name, namespace);
-  const prevItemRef = useRef<{ uid?: string; version?: string; error?: ApiError }>({});
+  const prevItemRef = React.useRef<{ uid?: string; version?: string; error?: ApiError }>({});
 
   React.useEffect(() => {
     // We cannot call this callback more than once on each version of the item, in order to avoid
@@ -436,6 +437,7 @@ export function SecretField(props: InputProps) {
           aria-label={t('toggle field visibility')}
           onClick={handleClickShowPassword}
           onMouseDown={event => event.preventDefault()}
+          size="medium"
         >
           <Icon icon={showPassword ? 'mdi:eye-off' : 'mdi:eye'} />
         </IconButton>
@@ -446,7 +448,7 @@ export function SecretField(props: InputProps) {
           type="password"
           fullWidth
           multiline={showPassword}
-          rowsMax="20"
+          maxRows="20"
           value={showPassword ? Base64.decode(value as string) : '******'}
           {...other}
         />

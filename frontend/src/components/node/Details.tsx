@@ -1,6 +1,6 @@
 import { InlineIcon } from '@iconify/react';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import _ from 'lodash';
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';

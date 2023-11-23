@@ -1,5 +1,5 @@
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import NotFoundImage from '../../../assets/headlamp-404.svg';

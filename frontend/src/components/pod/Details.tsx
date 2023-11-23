@@ -1,13 +1,13 @@
 import { Icon } from '@iconify/react';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import { makeStyles } from '@material-ui/core/styles';
-import Switch from '@material-ui/core/Switch';
-import Tooltip from '@material-ui/core/Tooltip';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Switch from '@mui/material/Switch';
+import Tooltip from '@mui/material/Tooltip';
+import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -367,7 +367,11 @@ export default function PodDetails(props: PodDetailsProps) {
             action: (
               <AuthVisible item={item} authVerb="get" subresource="log">
                 <Tooltip title={t('Show Logs') as string}>
-                  <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
+                  <IconButton
+                    aria-label={t('logs')}
+                    onClick={() => setShowLogs(true)}
+                    size="medium"
+                  >
                     <Icon icon="mdi:file-document-box-outline" />
                   </IconButton>
                 </Tooltip>
@@ -382,6 +386,7 @@ export default function PodDetails(props: PodDetailsProps) {
                   <IconButton
                     aria-label={t('terminal') as string}
                     onClick={() => setShowTerminal(true)}
+                    size="medium"
                   >
                     <Icon icon="mdi:console" />
                   </IconButton>
@@ -397,6 +402,7 @@ export default function PodDetails(props: PodDetailsProps) {
                   <IconButton
                     aria-label={t('attach') as string}
                     onClick={() => setIsAttached(true)}
+                    size="medium"
                   >
                     <Icon icon="mdi:connection" />
                   </IconButton>

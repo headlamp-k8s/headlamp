@@ -1,7 +1,7 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Box, IconButton, Menu, MenuItem } from '@material-ui/core';
-import MuiLink from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import MuiLink from '@mui/material/Link';
+import makeStyles from '@mui/styles/makeStyles';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -270,6 +270,7 @@ export default function PortForwardingList() {
                   <IconButton
                     aria-label={t('translation|More')}
                     onClick={e => handleClick(e, portforward)}
+                    size="medium"
                   >
                     <Icon icon={'mdi:dots-vertical'} />
                   </IconButton>

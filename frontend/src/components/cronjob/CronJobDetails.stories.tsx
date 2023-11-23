@@ -25,11 +25,6 @@ export default {
   title: 'CronJob/CronJobDetailsView',
   component: CronJobDetails,
   argTypes: {},
-  decorators: [
-    Story => {
-      return <Story />;
-    },
-  ],
 } as Meta;
 
 interface MockerStory {

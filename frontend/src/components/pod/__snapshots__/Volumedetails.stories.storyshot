@@ -3,51 +3,51 @@
 exports[`Storyshots pods/VolumeDetails Volume Details 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
     >
       <div
-        class="MuiGrid-root MuiGrid-item"
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
       >
         <div
-          class="MuiBox-root MuiBox-root"
+          class="MuiBox-root css-70qvj9"
         >
           <h2
-            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h2 MuiTypography-noWrap"
+            class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
           >
             Volumes
           </h2>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root css-ldp2l3"
           />
         </div>
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root makeStyles-box"
+      class="makeStyles-box MuiBox-root css-0"
     >
       <div
-        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
       >
         <table
-          class="MuiTable-root makeStyles-table makeStyles-table"
+          class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
         >
           <thead
-            class="MuiTableHead-root"
+            class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
           >
             <tr
-              class="MuiTableRow-root MuiTableRow-head"
+              class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Name
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Type
@@ -55,32 +55,32 @@ exports[`Storyshots pods/VolumeDetails Volume Details 1`] = `
             </tr>
           </thead>
           <tbody
-            class="MuiTableBody-root"
+            class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
           >
             <tr
-              class="MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 Dummy_Volume
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 configMap
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 random_name
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 secret
               </td>

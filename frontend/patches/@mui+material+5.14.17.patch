@@ -1,0 +1,11 @@
+diff --git a/node_modules/@mui/material/ClickAwayListener/index.d.ts b/node_modules/@mui/material/ClickAwayListener/index.d.ts
+index 56d3b7e..18bf936 100644
+--- a/node_modules/@mui/material/ClickAwayListener/index.d.ts
++++ b/node_modules/@mui/material/ClickAwayListener/index.d.ts
+@@ -1 +1,5 @@
+-export { ClickAwayListener as default, type ClickAwayListenerProps, } from '@mui/base/ClickAwayListener';
++import { ClickAwayListenerProps } from '@mui/base/ClickAwayListener';
++
++export { ClickAwayListener as default } from '@mui/base/ClickAwayListener';
++
++export type { ClickAwayListenerProps };

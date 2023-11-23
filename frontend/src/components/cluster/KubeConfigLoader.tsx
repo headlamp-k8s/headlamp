@@ -1,9 +1,9 @@
 import { InlineIcon } from '@iconify/react';
-import { Button, Checkbox, FormControl, Grid, Tooltip } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { Button, Checkbox, FormControl, Grid, Tooltip } from '@mui/material';
+import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import * as yaml from 'js-yaml';
 import React, { useEffect, useState } from 'react';

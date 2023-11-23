@@ -4,18 +4,48 @@ exports[`Storyshots Tooltip/TooltipLight Add 1`] = `
 <div>
   <button
     aria-label="Add"
-    class="MuiButtonBase-root MuiIconButton-root"
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+    data-mui-internal-clone-element="true"
     tabindex="0"
-    title="Add"
     type="button"
   >
+    <span />
     <span
-      class="MuiIconButton-label"
-    >
-      <span />
-    </span>
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`Storyshots Tooltip/TooltipLight Interactive 1`] = `
+<div>
+  <button
+    aria-label="Add"
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+    data-mui-internal-clone-element="true"
+    tabindex="0"
+    type="button"
+  >
+    <span />
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`Storyshots Tooltip/TooltipLight Not Interactive 1`] = `
+<div>
+  <button
+    aria-label="Add"
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+    data-mui-internal-clone-element="true"
+    tabindex="0"
+    type="button"
+  >
+    <span />
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </button>
 </div>

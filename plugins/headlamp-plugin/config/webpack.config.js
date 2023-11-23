@@ -1,9 +1,9 @@
 const externalModules = {
-  '@material-ui/core': 'pluginLib.MuiCore',
+  '@mui/material': 'pluginLib.MuiCore',
   '@monaco-editor/react': 'pluginLib.ReactMonacoEditor',
   'monaco-editor': 'pluginLib.MonacoEditor',
-  '@material-ui/lab': 'pluginLib.MuiLab',
-  '@material-ui/styles': 'pluginLib.MuiStyles',
+  '@mui/lab': 'pluginLib.MuiLab',
+  '@mui/styles': 'pluginLib.MuiStyles',
   react: 'pluginLib.React',
   'react/jsx-runtime': 'pluginLib.ReactJSX',
   recharts: 'pluginLib.Recharts',

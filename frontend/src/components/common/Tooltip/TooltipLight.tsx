@@ -1,5 +1,14 @@
-import { withStyles } from '@material-ui/core/styles';
-import Tooltip, { TooltipProps as TooltipLightProps } from '@material-ui/core/Tooltip';
+import Tooltip, { TooltipProps } from '@mui/material/Tooltip';
+import withStyles from '@mui/styles/withStyles';
+
+export interface TooltipLightProps extends TooltipProps {
+  /**
+   * If true, the tooltip will be interactive. Defaults to true.
+   *
+   * If a tooltip is interactive, it will close when the user hovers over the tooltip before the leaveDelay is expired.
+   */
+  interactive?: boolean;
+}
 
 const StyledTooltip = withStyles(theme => ({
   tooltip: {
@@ -12,10 +21,12 @@ const StyledTooltip = withStyles(theme => ({
 }))(Tooltip);
 
 export default function TooltipLight(props: TooltipLightProps) {
-  const { children, ...rest } = props;
+  const { children, interactive = true, ...rest } = props;
+  const disableInteractive = !interactive;
+
   if (typeof children === 'string') {
     return (
-      <StyledTooltip {...rest}>
+      <StyledTooltip disableInteractive={disableInteractive} {...rest}>
         <span>{children}</span>
       </StyledTooltip>
     );
@@ -23,5 +34,3 @@ export default function TooltipLight(props: TooltipLightProps) {
 
   return <StyledTooltip {...props} />;
 }
-
-export type { TooltipLightProps };

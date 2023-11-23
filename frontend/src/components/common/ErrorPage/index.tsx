@@ -1,6 +1,6 @@
-import { Grid, Typography } from '@material-ui/core';
-import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography } from '@mui/material';
+import Link from '@mui/material/Link';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import headlampBrokenImage from '../../../assets/headlamp-broken.svg';

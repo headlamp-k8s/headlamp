@@ -1,5 +1,5 @@
 import '../../i18n/config';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';

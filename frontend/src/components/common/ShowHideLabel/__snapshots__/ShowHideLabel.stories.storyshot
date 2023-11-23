@@ -3,10 +3,10 @@
 exports[`Storyshots common/ShowHideLabel Basic 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-1v5z18m"
   >
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root css-k008qs"
     >
       <label
         aria-expanded="false"
@@ -18,17 +18,13 @@ exports[`Storyshots common/ShowHideLabel Basic 1`] = `
         <button
           aria-controls="label-id"
           arial-label="Expand"
-          class="MuiButtonBase-root MuiIconButton-root makeStyles-button MuiIconButton-sizeSmall"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall makeStyles-button css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
           tabindex="0"
           type="button"
         >
+          <span />
           <span
-            class="MuiIconButton-label"
-          >
-            <span />
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </label>
@@ -40,7 +36,7 @@ exports[`Storyshots common/ShowHideLabel Basic 1`] = `
 exports[`Storyshots common/ShowHideLabel Empty 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-1v5z18m"
   />
 </div>
 `;
@@ -48,10 +44,10 @@ exports[`Storyshots common/ShowHideLabel Empty 1`] = `
 exports[`Storyshots common/ShowHideLabel Expanded 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-1v5z18m"
   >
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root css-13o7eu2"
     >
       <label
         aria-expanded="true"
@@ -62,17 +58,13 @@ exports[`Storyshots common/ShowHideLabel Expanded 1`] = `
         <button
           aria-controls="my-label"
           arial-label="Collapse"
-          class="MuiButtonBase-root MuiIconButton-root makeStyles-button MuiIconButton-sizeSmall"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall makeStyles-button css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
           tabindex="0"
           type="button"
         >
+          <span />
           <span
-            class="MuiIconButton-label"
-          >
-            <span />
-          </span>
-          <span
-            class="MuiTouchRipple-root"
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
       </label>
@@ -84,10 +76,10 @@ exports[`Storyshots common/ShowHideLabel Expanded 1`] = `
 exports[`Storyshots common/ShowHideLabel Short Text 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-1v5z18m"
   >
     <div
-      class="MuiBox-root MuiBox-root"
+      class="MuiBox-root css-k008qs"
     >
       <label
         class="makeStyles-fullText"

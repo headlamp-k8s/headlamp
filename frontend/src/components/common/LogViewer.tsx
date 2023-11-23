@@ -1,4 +1,5 @@
-import { Box, DialogContent, Grid, InputBase, makeStyles, Paper } from '@material-ui/core';
+import { Box, DialogContent, Grid, InputBase, Paper } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React, { useEffect } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
