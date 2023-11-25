@@ -12,6 +12,7 @@ on:
     - Makefile
     - '.github/**'
     - Dockerfile
+    - 'e2e-tests/**'
 
 jobs:
   build:
@@ -38,7 +39,7 @@ jobs:
     - name: Deploy to cluster
       run:
         kubectl apply -f e2e-tests/kubernetes-headlamp-ci.yaml
-    - name: Test service URLs
+    - name: Run e2e tests
       run: |
         echo "------------------sleeping 3...------------------"
         sleep 3
@@ -55,6 +56,7 @@ jobs:
         curl -L $SERVICE_URL | grep -q "Headlamp: Kubernetes Web UI"        
         echo "------------------Getting HEADLAMP_TOKEN------------------"
         kubectl create serviceaccount headlamp-admin --namespace kube-system
+        kubectl create clusterrolebinding headlamp-admin --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
         export HEADLAMP_TOKEN=$(kubectl create token headlamp-admin --duration 24h -n kube-system)
         echo "------------------Running playwright e2e tests------------------"
         cd e2e-tests
