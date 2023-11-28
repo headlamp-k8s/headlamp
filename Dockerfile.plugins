@@ -1,21 +1,37 @@
+# Build the plugin
 FROM node:16.4 as builder
 
 WORKDIR /headlamp-plugins
 
+# Copy the example plugins source code to the working directory
 COPY ./plugins/examples /headlamp-plugins/
 
+# Create a build directory
 RUN mkdir -p /headlamp-plugins/build
 
-# Build the plugin
+# Copy the plugin source code to the working directory
+COPY ./plugins/headlamp-plugin /headlamp-plugins/headlamp-plugin
 
-RUN npx @kinvolk/headlamp-plugin build /headlamp-plugins
+# Change to the headlamp-plugin directory, install dependencies. 
+# We are doing so that we can use the local binary to build
+# the example plugin.
+WORKDIR /headlamp-plugins/headlamp-plugin
+RUN npm install
+
+# Go back to the main working directory
+WORKDIR /headlamp-plugins
+
+# Build the plugin using the local binary
+RUN ./headlamp-plugin/bin/headlamp-plugin.js build /headlamp-plugins
 
 # Extract the built plugin files to the build directory
-RUN npx @kinvolk/headlamp-plugin extract /headlamp-plugins/ /headlamp-plugins/build
+RUN ./headlamp-plugin/bin/headlamp-plugin.js extract /headlamp-plugins/ /headlamp-plugins/build
 
+# Create the final image
 FROM alpine:latest
 
-# Copy the built plugin files from the base image to /plugins directory
+# Copy the built plugin files from the first stage to /plugins directory
 COPY --from=builder /headlamp-plugins/build/ /plugins/
 
+# Command to run when the container starts
 CMD ["/bin/sh", "-c", "mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/"]
