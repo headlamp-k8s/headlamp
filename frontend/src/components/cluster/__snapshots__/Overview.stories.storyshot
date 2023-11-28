@@ -66,40 +66,76 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         </div>
                         <p
                           class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
-                        />
+                        >
+                          0.00 / 36 units
+                        </p>
                       </div>
                       <div
                         class="MuiBox-root css-0"
                       >
                         <div
-                          aria-busy="true"
+                          aria-busy="false"
                           aria-live="polite"
                           class="MuiBox-root css-2esbmj"
                         >
                           
                           <div
-                            class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
+                            class="recharts-wrapper makeStyles-chart"
+                            style="position: relative; cursor: default; width: 112px; height: 112px;"
                           >
-                            <span
-                              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
-                              role="progressbar"
-                              style="width: 40px; height: 40px;"
-                              title="Loading data for "
+                            <svg
+                              class="recharts-surface"
+                              cx="70"
+                              cy="70"
+                              height="112"
+                              version="1.1"
+                              viewBox="0 0 112 112"
+                              width="112"
                             >
-                              <svg
-                                class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
-                                viewBox="22 22 44 44"
+                              <title />
+                              <desc />
+                              <defs>
+                                <clippath
+                                  id="recharts1-clip"
+                                >
+                                  <rect
+                                    height="102"
+                                    width="102"
+                                    x="5"
+                                    y="5"
+                                  />
+                                </clippath>
+                              </defs>
+                              <g
+                                class="recharts-layer recharts-pie"
                               >
-                                <circle
-                                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
-                                  cx="44"
-                                  cy="44"
-                                  fill="none"
-                                  r="20.2"
-                                  stroke-width="3.6"
-                                />
-                              </svg>
-                            </span>
+                                <g
+                                  class="recharts-layer"
+                                >
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                  />
+                                </g>
+                                <text
+                                  class="recharts-text recharts-label"
+                                  offset="5"
+                                  style="font-size: 16.8px; fill: #000;"
+                                  text-anchor="middle"
+                                  x="61"
+                                  y="61"
+                                >
+                                  <tspan
+                                    dy="0.355em"
+                                    x="61"
+                                  >
+                                    0.0 %
+                                  </tspan>
+                                </text>
+                              </g>
+                            </svg>
                           </div>
                         </div>
                       </div>
@@ -129,40 +165,76 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         </div>
                         <p
                           class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
-                        />
+                        >
+                          0.00 / 143.63 GB
+                        </p>
                       </div>
                       <div
                         class="MuiBox-root css-0"
                       >
                         <div
-                          aria-busy="true"
+                          aria-busy="false"
                           aria-live="polite"
                           class="MuiBox-root css-2esbmj"
                         >
                           
                           <div
-                            class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
+                            class="recharts-wrapper makeStyles-chart"
+                            style="position: relative; cursor: default; width: 112px; height: 112px;"
                           >
-                            <span
-                              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
-                              role="progressbar"
-                              style="width: 40px; height: 40px;"
-                              title="Loading data for "
+                            <svg
+                              class="recharts-surface"
+                              cx="70"
+                              cy="70"
+                              height="112"
+                              version="1.1"
+                              viewBox="0 0 112 112"
+                              width="112"
                             >
-                              <svg
-                                class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
-                                viewBox="22 22 44 44"
+                              <title />
+                              <desc />
+                              <defs>
+                                <clippath
+                                  id="recharts3-clip"
+                                >
+                                  <rect
+                                    height="102"
+                                    width="102"
+                                    x="5"
+                                    y="5"
+                                  />
+                                </clippath>
+                              </defs>
+                              <g
+                                class="recharts-layer recharts-pie"
                               >
-                                <circle
-                                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
-                                  cx="44"
-                                  cy="44"
-                                  fill="none"
-                                  r="20.2"
-                                  stroke-width="3.6"
-                                />
-                              </svg>
-                            </span>
+                                <g
+                                  class="recharts-layer"
+                                >
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                  />
+                                </g>
+                                <text
+                                  class="recharts-text recharts-label"
+                                  offset="5"
+                                  style="font-size: 16.8px; fill: #000;"
+                                  text-anchor="middle"
+                                  x="61"
+                                  y="61"
+                                >
+                                  <tspan
+                                    dy="0.355em"
+                                    x="61"
+                                  >
+                                    0.0 %
+                                  </tspan>
+                                </text>
+                              </g>
+                            </svg>
                           </div>
                         </div>
                       </div>
@@ -193,40 +265,79 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                         </div>
                         <p
                           class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
-                        />
+                        >
+                          4 / 8 Requested
+                        </p>
                       </div>
                       <div
                         class="MuiBox-root css-0"
                       >
                         <div
-                          aria-busy="true"
+                          aria-busy="false"
                           aria-live="polite"
                           class="MuiBox-root css-2esbmj"
                         >
                           
                           <div
-                            class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
+                            class="recharts-wrapper makeStyles-chart"
+                            style="position: relative; cursor: default; width: 112px; height: 112px;"
                           >
-                            <span
-                              class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
-                              role="progressbar"
-                              style="width: 40px; height: 40px;"
-                              title="Loading data for "
+                            <svg
+                              class="recharts-surface"
+                              cx="70"
+                              cy="70"
+                              height="112"
+                              version="1.1"
+                              viewBox="0 0 112 112"
+                              width="112"
                             >
-                              <svg
-                                class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
-                                viewBox="22 22 44 44"
+                              <title />
+                              <desc />
+                              <defs>
+                                <clippath
+                                  id="recharts5-clip"
+                                >
+                                  <rect
+                                    height="102"
+                                    width="102"
+                                    x="5"
+                                    y="5"
+                                  />
+                                </clippath>
+                              </defs>
+                              <g
+                                class="recharts-layer recharts-pie"
                               >
-                                <circle
-                                  class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
-                                  cx="44"
-                                  cy="44"
-                                  fill="none"
-                                  r="20.2"
-                                  stroke-width="3.6"
-                                />
-                              </svg>
-                            </span>
+                                <g
+                                  class="recharts-layer"
+                                >
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                  />
+                                </g>
+                                <text
+                                  class="recharts-text recharts-label"
+                                  offset="5"
+                                  style="font-size: 16.8px; fill: #000;"
+                                  text-anchor="middle"
+                                  x="61"
+                                  y="61"
+                                >
+                                  <tspan
+                                    dy="0.355em"
+                                    x="61"
+                                  >
+                                    50.0 %
+                                  </tspan>
+                                </text>
+                              </g>
+                            </svg>
                           </div>
                         </div>
                       </div>

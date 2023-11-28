@@ -25,13 +25,11 @@ const useOverviewStyle = makeStyles({
 });
 
 export default function Overview() {
-  const [pods, setPods] = React.useState<Pod[] | null>(null);
-  const [nodes, setNodes] = React.useState<Node[] | null>(null);
   const { t } = useTranslation(['translation']);
   const classes = useOverviewStyle();
 
-  Pod.useApiList(setPods);
-  Node.useApiList(setNodes);
+  const [pods] = Pod.useList();
+  const [nodes] = Node.useList();
 
   const [nodeMetrics, metricsError] = Node.useMetrics();
 

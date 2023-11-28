@@ -48,7 +48,7 @@ describe('notificationsSlice', () => {
       getItem: jest.fn(),
       setItem: jest.fn(),
     };
-    global.localStorage = mockLocalStorage as any;
+    localStorage = mockLocalStorage as any;
 
     store = configureStore({
       reducer: {

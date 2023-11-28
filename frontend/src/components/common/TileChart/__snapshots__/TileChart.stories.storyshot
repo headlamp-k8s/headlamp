@@ -53,7 +53,7 @@ exports[`Storyshots Charts/TileChart With Progress 1`] = `
               <desc />
               <defs>
                 <clippath
-                  id="recharts9-clip"
+                  id="recharts15-clip"
                 >
                   <rect
                     height="102"
