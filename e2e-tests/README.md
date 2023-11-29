@@ -1,16 +1,25 @@
 # end to end tests with playwright and minikube
 
+## Running e2e tests
+
+These instructions assume Headlamp is running locally 
+in development mode (with make run-backend & make run-frontend)
+
 ```bash
-HEADLAMP_TEST_URL=http://localhost:3000 HEADLAMP_TOKEN=... npx playwright test
+cd e2e-tests && npx playwright test
 ```
 
-The instructions below assume Headlamp is running in-cluster with minikube.
-
+You can also test using a token, and change the cluster name too:
 ```bash
-minikube addons enable headlamp
-minikube service headlamp -n kube-system --url
-
-# run in a separate terminal...
-export HEADLAMP_TEST_URL= # from the command directly above.
-export HEADLAMP_TOKEN=$(kubectl create token headlamp --duration 24h -n headlamp)
+HEADLAMP_E2E_CLUSTER_NAME=my-little-cluster \
+HEADLAMP_E2E_TEST_URL=http://localhost:3000 \
+HEADLAMP_E2E_TOKEN=... \
+npx playwright test
 ```
+
+The tests are run on CI within .github/build-container.yml
+
+## Writing e2e Tests
+
+See [Writing Tests](https://playwright.dev/docs/writing-tests) playwright documentation.
+
