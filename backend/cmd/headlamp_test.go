@@ -170,18 +170,18 @@ func TestDynamicClusters(t *testing.T) {
 				{
 					Name:                     &newCluster,
 					Server:                   &newClusterServer,
-					CertificateAuthorityData: []byte("abcde"),
+					CertificateAuthorityData: []byte("YWJjZGUK"),
 				},
 				{
 					Name:                     &newCluster2,
 					Server:                   &newCluster2Server,
 					InsecureSkipTLSVerify:    true,
-					CertificateAuthorityData: []byte("abcde"),
+					CertificateAuthorityData: []byte("YWJjZGUK"),
 				},
 				{
 					Name:                     &newCluster3,
 					Server:                   &newCluster3Server,
-					CertificateAuthorityData: []byte("abcde"),
+					CertificateAuthorityData: []byte("YWJjZGUK"),
 				},
 			},
 			expectedState:       http.StatusCreated,
@@ -193,12 +193,12 @@ func TestDynamicClusters(t *testing.T) {
 				{
 					Name:                     &newCluster,
 					Server:                   &newClusterServer,
-					CertificateAuthorityData: []byte("abcde"),
+					CertificateAuthorityData: []byte("YWJjZGUK"),
 				},
 				{
 					Name:                     &newCluster, // same name will override
 					Server:                   &newCluster2Server,
-					CertificateAuthorityData: []byte("abcde"),
+					CertificateAuthorityData: []byte("YWJjZGUK"),
 				},
 			},
 			expectedState:       http.StatusCreated,
@@ -210,12 +210,12 @@ func TestDynamicClusters(t *testing.T) {
 				{
 					Name:                     nil,
 					Server:                   &newClusterServer,
-					CertificateAuthorityData: []byte("abcde"),
+					CertificateAuthorityData: []byte("YWJjZGUK"),
 				},
 				{
 					Name:                     &newCluster,
 					Server:                   nil,
-					CertificateAuthorityData: []byte("abcde"),
+					CertificateAuthorityData: []byte("YWJjZGUK"),
 				},
 			},
 			expectedState:       http.StatusBadRequest,
@@ -244,7 +244,7 @@ func TestDynamicClusters(t *testing.T) {
 					t.Fatal(err)
 				}
 
-				assert.Equal(t, r.Code, tc.expectedState)
+				assert.Equal(t, tc.expectedState, r.Code)
 
 				// Verify if the created cluster matches what we asked to be created
 				if r.Code == http.StatusCreated {
