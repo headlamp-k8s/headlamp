@@ -1,8 +1,12 @@
+import Button from '@mui/material/Button';
+import { useSnackbar } from 'notistack';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import helpers from '../helpers';
 import { UI_INITIALIZE_PLUGIN_VIEWS } from '../redux/actions/actions';
 import { useTypedSelector } from '../redux/reducers/reducers';
-// import { useAppDispatch } from '../redux/hooks';
 import { fetchAndExecutePlugins } from './index';
 import { pluginsLoaded, setPluginSettings } from './pluginsSlice';
 
@@ -18,15 +22,54 @@ import { pluginsLoaded, setPluginSettings } from './pluginsSlice';
  */
 export default function Plugins() {
   const dispatch = useDispatch();
+  const { closeSnackbar, enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
+  const { t } = useTranslation();
+
   const settingsPlugins = useTypedSelector(state => state.plugins.pluginSettings);
 
   // only run on first load
   useEffect(() => {
     dispatch({ type: UI_INITIALIZE_PLUGIN_VIEWS });
 
-    fetchAndExecutePlugins(settingsPlugins, updatedSettingsPackages => {
-      dispatch(setPluginSettings(updatedSettingsPackages));
-    })
+    fetchAndExecutePlugins(
+      settingsPlugins,
+      updatedSettingsPackages => {
+        dispatch(setPluginSettings(updatedSettingsPackages));
+      },
+      incompatiblePlugins => {
+        const pluginList = Object.values(incompatiblePlugins)
+          .map(p => p.name)
+          .join(', ');
+        const message = t(
+          'translation|Warning. Incompatible plugins disabled: ({{ pluginList }})',
+          { pluginList }
+        );
+        console.warn(message);
+
+        if (helpers.isElectron()) {
+          enqueueSnackbar(message, {
+            action: (snackbarId: any) => (
+              <>
+                <Button
+                  color="secondary"
+                  size="small"
+                  onClick={() => {
+                    history.push('/settings/plugins');
+                    closeSnackbar(snackbarId);
+                  }}
+                >
+                  {t('Settings')}
+                </Button>
+              </>
+            ),
+            variant: 'warning',
+          });
+        } else {
+          enqueueSnackbar(message, { variant: 'warning' });
+        }
+      }
+    )
       .finally(() => {
         dispatch(pluginsLoaded());
         // Warn the app (if we're in app mode).

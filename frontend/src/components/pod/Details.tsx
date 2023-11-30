@@ -8,7 +8,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Terminal as XTerminal } from 'xterm';
 import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
@@ -348,19 +348,35 @@ export interface PodDetailsProps {
   showLogsDefault?: boolean;
 }
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 export default function PodDetails(props: PodDetailsProps) {
   const { showLogsDefault } = props;
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
+  const params = useQuery();
+
   const [showLogs, setShowLogs] = React.useState(!!showLogsDefault);
   const [showTerminal, setShowTerminal] = React.useState(false);
   const { t } = useTranslation('glossary');
   const [isAttached, setIsAttached] = React.useState(false);
+  let theNamespace = namespace;
+  if (params.get('namespace')) {
+    theNamespace = params.get('namespace')!;
+  }
+  let theName = name;
+  if (params.get('name')) {
+    theName = params.get('name')!;
+  }
 
   return (
     <DetailsGrid
       resourceType={Pod}
-      name={name}
-      namespace={namespace}
+      name={theName}
+      namespace={theNamespace}
       withEvents
       actions={item =>
         item && [

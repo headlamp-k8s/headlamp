@@ -253,6 +253,12 @@ const defaultRoutes: {
     sidebar: 'Pods',
     component: () => <PodDetails />,
   },
+  PodsDrawer: {
+    path: '/pods/:namespace/:name/drawer',
+    exact: true,
+    sidebar: 'Pods',
+    component: () => <PodList drawer />,
+  },
   services: {
     path: '/services',
     exact: true,

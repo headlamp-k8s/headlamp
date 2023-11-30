@@ -70,10 +70,18 @@ export interface PodListProps {
   hideColumns?: ('namespace' | 'restarts')[];
   reflectTableInURL?: SimpleTableProps['reflectInURL'];
   noNamespaceFilter?: boolean;
+  drawer?: boolean;
 }
 
 export function PodListRenderer(props: PodListProps) {
-  const { pods, error, hideColumns = [], reflectTableInURL = 'pods', noNamespaceFilter } = props;
+  const {
+    pods,
+    error,
+    hideColumns = [],
+    reflectTableInURL = 'pods',
+    noNamespaceFilter,
+    drawer,
+  } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   function getDataCols() {
@@ -207,22 +215,25 @@ export function PodListRenderer(props: PodListProps) {
   }
 
   return (
-    <ResourceListView
-      title={t('Pods')}
-      headerProps={{
-        noNamespaceFilter,
-      }}
-      errorMessage={Pod.getErrorMessage(error)}
-      columns={getDataCols()}
-      data={pods}
-      reflectInURL={reflectTableInURL}
-      id="headlamp-pods"
-    />
+    <>
+      <ResourceListView
+        title={t('Pods')}
+        headerProps={{
+          noNamespaceFilter,
+        }}
+        errorMessage={Pod.getErrorMessage(error)}
+        columns={getDataCols()}
+        data={pods}
+        reflectInURL={reflectTableInURL}
+        id="headlamp-pods"
+      />
+      {drawer && <p>drawer open</p>}
+    </>
   );
 }
 
-export default function PodList() {
+export default function PodList(props: { drawer?: boolean }) {
   const [pods, error] = Pod.useList();
 
-  return <PodListRenderer pods={pods} error={error} reflectTableInURL />;
+  return <PodListRenderer drawer={props.drawer} pods={pods} error={error} reflectTableInURL />;
 }

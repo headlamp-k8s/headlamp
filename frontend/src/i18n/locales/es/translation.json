@@ -373,5 +373,6 @@
   "\"{{metricName}}\" on {{objectKind}}/{{objectName}} {{metricTarget}}": "\"{{metricName}}\" en {{objectKind}}/{{objectName}} {{metricTarget}}",
   "\"{{metricName}}\" on pods": "\"{{metricName}}\" en pods",
   "resource {{resourceName}} on pods": "recurso {{resourceName}} en pods",
-  "resource {{resourceName}} of container {{containerName}} on pods": "recurso {{resourceName}} del contenedor {{containerName}} en pods"
+  "resource {{resourceName}} of container {{containerName}} on pods": "recurso {{resourceName}} del contenedor {{containerName}} en pods",
+  "Warning. Incompatible plugins disabled: ({{ pluginList }})": "Advertencia. Plugins incompatibles deshabilitados: ({{ pluginList }})"
 }

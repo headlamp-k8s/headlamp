@@ -31,10 +31,21 @@ export interface LinkObjectProps extends LinkBaseProps {
 function PureLink(props: React.PropsWithChildren<LinkProps | LinkObjectProps>) {
   if ((props as LinkObjectProps).kubeObject) {
     const { kubeObject, ...otherProps } = props as LinkObjectProps;
+    //@todo: add /drawer to link here?
     return (
-      <MuiLink component={RouterLink} to={kubeObject.getDetailsLink()} {...otherProps}>
-        {props.children || kubeObject.getName()}
-      </MuiLink>
+      <>
+        {/* <MuiLink component={RouterLink} to={'/c/minikubeThisisreallyLong/pods?name=coredns-787d4945fb-94hdw&namespace=kube-system'} {...otherProps}> */}
+        <MuiLink component={RouterLink} to={kubeObject.getDetailsLink()} {...otherProps}>
+          {props.children || kubeObject.getName()}
+        </MuiLink>
+        <MuiLink
+          component={RouterLink}
+          to={kubeObject.getDetailsLink() + '/drawer'}
+          {...otherProps}
+        >
+          {props.children || kubeObject.getName()}
+        </MuiLink>
+      </>
     );
   }
 
