@@ -104,7 +104,7 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-typedoc": "npx typedoc",
     "build-storybook": "build-storybook -s public -o ../docs/development/storybook",
-    "i18n": "npx --no-install i18next ./src/**/ts* ./src/**/**/*.ts* ./src/**/**/**/*.ts* -c ./src/i18n/i18next-parser.config.js",
+    "i18n": "npx --no-install i18next ./src/**/*.ts* ./src/**/**/*.ts* ./src/**/**/**/*.ts* -c ./src/i18n/i18next-parser.config.js",
     "tsc": "tsc",
     "make-version": "node ./make-env.js",
     "postinstall": "patch-package"
