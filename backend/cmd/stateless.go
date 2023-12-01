@@ -93,7 +93,7 @@ func (c *HeadlampConfig) parseKubeConfig(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	clientConfig := clientConfig{contexts}
+	clientConfig := clientConfig{contexts, c.enableDynamicClusters}
 
 	if err := json.NewEncoder(w).Encode(&clientConfig); err != nil {
 		log.Println("Error encoding config", err)

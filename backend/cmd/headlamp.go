@@ -71,7 +71,8 @@ const ContextCacheTTL = 5 * time.Minute // minutes
 const ContextUpdateChacheTTL = 20 * time.Second // seconds
 
 type clientConfig struct {
-	Clusters []Cluster `json:"clusters"`
+	Clusters                []Cluster `json:"clusters"`
+	IsDyanmicClusterEnabled bool      `json:"isDynamicClusterEnabled"`
 }
 
 type spaHandler struct {
@@ -1026,7 +1027,7 @@ func parseClusterFromKubeConfig(kubeConfigs []string) ([]Cluster, []error) {
 func (c *HeadlampConfig) getConfig(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	clientConfig := clientConfig{c.getClusters()}
+	clientConfig := clientConfig{c.getClusters(), c.enableDynamicClusters}
 
 	if err := json.NewEncoder(w).Encode(&clientConfig); err != nil {
 		log.Println("Error encoding config", err)
