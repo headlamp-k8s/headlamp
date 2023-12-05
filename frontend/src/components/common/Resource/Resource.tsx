@@ -16,7 +16,8 @@ import _, { has } from 'lodash';
 import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
-import { labelSelectorToQuery } from '../../../lib/k8s';
+import YAML from 'yaml';
+import { labelSelectorToQuery, ResourceClasses } from '../../../lib/k8s';
 import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
   KubeCondition,
@@ -25,7 +26,7 @@ import {
   KubeObject,
   KubeObjectInterface,
 } from '../../../lib/k8s/cluster';
-import Pod, { KubePod } from '../../../lib/k8s/pod';
+import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
@@ -940,6 +941,175 @@ export function ConditionsSection(props: { resource: KubeObjectInterface | null 
   return (
     <SectionBox title={t('translation|Conditions')}>
       <ConditionsTable resource={resource} />
+    </SectionBox>
+  );
+}
+
+export interface VolumeSectionProps {
+  resource: KubeObjectInterface | null;
+}
+
+export interface VolumeRowsProps {
+  volume: KubeVolume;
+}
+
+export interface PrintVolumeLinkProps {
+  volumeName: string;
+  volumeKind: string;
+  volume: KubeVolume;
+}
+
+export interface VolumePrints {
+  directPrint?: any[];
+  yamlPrint?: any[];
+}
+
+export function VolumeSection(props: VolumeSectionProps) {
+  const { t } = useTranslation('glossary');
+  const { resource } = props;
+  const volumes = resource?.spec?.volumes;
+
+  if (!volumes) {
+    return null;
+  }
+
+  const namespace = resource?.metadata?.namespace;
+
+  /*
+   * printVolumeLink will print a working link that is set within the router using fields from the resource as params
+   */
+  function PrintVolumeLink(props: PrintVolumeLinkProps) {
+    const { volumeName, volumeKind, volume } = props;
+    const resourceClasses = ResourceClasses;
+    const classList = Object.keys(resourceClasses);
+
+    for (const kind of classList) {
+      if (kind.toLowerCase() === volumeKind.toLowerCase()) {
+        const volumeClass = resourceClasses[kind];
+        const volumeRoute = volumeClass.detailsRoute;
+        const volumeNamespace = volumeClass.isNamespaced ? namespace : null;
+
+        const volumeKindNames = {
+          configMap: 'name',
+          secret: 'secretName',
+          persistentVolumeClaim: 'claimName',
+        };
+
+        const volumeNameKey = volumeKindNames[volumeKind as keyof typeof volumeKindNames];
+        if (!!volumeNameKey) {
+          const detailName = volume[volumeKind][volumeNameKey];
+          if (!!detailName) {
+            return (
+              <Link
+                routeName={volumeRoute}
+                params={{ namespace: volumeNamespace, name: detailName }}
+              >
+                {volumeName}
+              </Link>
+            );
+          }
+        }
+      }
+    }
+
+    return <Typography>{volumeName}</Typography>;
+  }
+
+  function volumeRows(volume: VolumeRowsProps['volume']) {
+    const { name, ...objWithVolumeKind } = volume;
+    const volumeKind = Object.keys(objWithVolumeKind)[0] || '';
+
+    if (!volume) {
+      return [];
+    }
+
+    function printVolumeDetails(volume: VolumeRowsProps['volume']): VolumePrints {
+      const { ...vol } = volume[volumeKind];
+
+      // array for items that are printable
+      const directPrint = [];
+
+      // array for items that are not printable and need to be printed to yaml
+      const yamlPrint = [];
+
+      // loop over volumeKeys and check if the value is a string, number, or bool
+      for (const key in vol) {
+        if (!(vol[key] === '')) {
+          if (
+            typeof vol[key] === 'string' ||
+            typeof vol[key] === 'number' ||
+            typeof vol[key] === 'boolean'
+          ) {
+            directPrint.push({
+              volKey: key,
+              volValue: typeof vol[key] === 'boolean' ? vol[key].toString() : vol[key],
+            });
+          } else {
+            yamlPrint.push({
+              volKey: key,
+              volValue: vol[key],
+            });
+          }
+        }
+      }
+
+      const volumePrints = {
+        directPrint,
+        yamlPrint,
+      };
+
+      return volumePrints;
+    }
+
+    const volumeDetails: VolumePrints = printVolumeDetails(volume);
+
+    return [
+      {
+        name: name,
+        withHighlightStyle: true,
+      },
+      ...(volumeKind
+        ? [
+            {
+              name: 'Kind',
+              value: volumeKind,
+            },
+          ]
+        : []),
+      {
+        name: 'Source',
+        value: <PrintVolumeLink volumeName={name} volumeKind={volumeKind} volume={volume} />,
+      },
+      ...(volumeDetails.directPrint
+        ? volumeDetails.directPrint.map(
+            ({ volKey, volValue }: { volKey: string; volValue: any }) => {
+              return {
+                name: volKey,
+                value: volValue,
+              };
+            }
+          )
+        : []),
+      ...(volumeDetails.yamlPrint
+        ? volumeDetails.yamlPrint.map(({ volKey, volValue }: { volKey: string; volValue: any }) => {
+            return {
+              name: volKey,
+              value: (
+                <Typography component="pre" variant="body2">
+                  {YAML.stringify(volValue)}
+                </Typography>
+              ),
+            };
+          })
+        : []),
+    ];
+  }
+
+  return (
+    <SectionBox title={t('translation|Volumes')}>
+      {volumes.map((volume: VolumeRowsProps['volume']) => (
+        <NameValueTable key={volume.name} rows={volumeRows(volume)} />
+      ))}
     </SectionBox>
   );
 }

@@ -19,7 +19,12 @@ import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
 import { LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
-import { ConditionsSection, ContainersSection, DetailsGrid } from '../common/Resource';
+import {
+  ConditionsSection,
+  ContainersSection,
+  DetailsGrid,
+  VolumeSection,
+} from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
 import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
@@ -479,7 +484,7 @@ export default function PodDetails(props: PodDetailsProps) {
           },
           {
             id: 'headlamp.pod-volumes',
-            section: <VolumeDetails volumes={item?.jsonData?.spec.volumes} />,
+            section: <VolumeSection resource={item?.jsonData} />,
           },
           {
             id: 'headlamp.pod-logs',
