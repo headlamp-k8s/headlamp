@@ -1,6 +1,6 @@
 import 'github-markdown-css';
 import { Icon } from '@iconify/react';
-import { Backdrop, Box, Button, Link, Modal, Paper, Typography } from '@mui/material';
+import { Box, Button, Link, Modal, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +32,7 @@ export default function ReleaseNotesModal(props: ReleaseNotesModalProps) {
   };
 
   return (
-    <Modal open={showReleaseNotes} BackdropComponent={Backdrop} style={modalStyle}>
+    <Modal open={showReleaseNotes} style={modalStyle}>
       <Paper style={releaseNotesStyle} variant="outlined">
         <Box display="flex" justifyContent="center">
           <Box flexGrow={2}>
