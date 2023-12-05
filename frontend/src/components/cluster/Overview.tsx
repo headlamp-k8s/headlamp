@@ -81,7 +81,18 @@ function EventsSection() {
   const [isWarningEventSwitchChecked, setIsWarningEventSwitchChecked] = React.useState(
     Boolean(JSON.parse(localStorage.getItem(EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY) || 'false'))
   );
-  const [events, eventsError] = Event.useList({ limit: Event.maxLimit });
+  const [events, setEvents] = React.useState<any>(null);
+  const [eventsError, setEventsError] = React.useState(null);
+
+  React.useEffect(() => {
+    Event.listEvents({ limit: Event.maxLimit })
+      .then(response => {
+        setEvents(response?.map((event: KubeEvent) => new Event(event)));
+      })
+      .catch(error => {
+        setEventsError(error);
+      });
+  }, []);
 
   const warningActionFilterFunc = (event: KubeEvent) => {
     if (!filterFunc(event)) {
@@ -106,7 +117,7 @@ function EventsSection() {
   }, [eventsFilter]);
 
   const numWarnings = React.useMemo(
-    () => events?.filter(e => e.type === 'Warning').length ?? '?',
+    () => events?.filter((e: Event) => e.type === 'Warning').length ?? '?',
     [events]
   );
 

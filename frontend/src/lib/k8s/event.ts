@@ -60,6 +60,12 @@ class Event extends makeKubeObject<KubeEvent>('Event') {
     return this.getValue('message');
   }
 
+  static async listEvents(queryParams: { [key: string]: any }) {
+    const response = await request('/api/v1/events', {}, true, true, queryParams);
+
+    return response.items;
+  }
+
   static async objectEvents(object: KubeObject) {
     const namespace = object.metadata.namespace;
     const name = object.metadata.name;
