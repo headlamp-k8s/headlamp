@@ -14,6 +14,7 @@ import {
   useTheme,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
+import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -231,7 +232,8 @@ export default function Notifications() {
     // It's important to dispatch only if something changed, otherwise we will get into an infinite loop.
     if (changed) {
       // we are here means the events list changed and we have now new set of events, so we will notify the store about it
-      dispatch(setNotifications(notificationsToShow));
+      // update only after an interval of 5 second to avoid too many updates
+      dispatch(_.debounce(() => setNotifications(notificationsToShow), 5000));
     }
   }, [events, notifications]);
 
