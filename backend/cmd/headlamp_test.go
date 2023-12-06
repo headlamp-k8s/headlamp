@@ -22,7 +22,10 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-const staticTestPath = "headlamp_testdata/static_files/"
+const (
+	staticTestPath = "headlamp_testdata/static_files/"
+	minikubeName   = "minikube"
+)
 
 // Is supposed to return the index.html if there is no static file.
 func TestSpaHandlerMissing(t *testing.T) {
@@ -318,8 +321,31 @@ func TestDynamicClustersKubeConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	clusters := c.getClusters()
+
 	assert.Equal(t, http.StatusCreated, r.Code)
-	assert.Equal(t, 2, len(c.getClusters()))
+	assert.Equal(t, 2, len(clusters))
+
+	var contextWithoutNamespace *Cluster
+
+	var minikubeCluster *Cluster
+
+	for i, cluster := range clusters {
+		if cluster.Name == minikubeName {
+			// Using the slice addressing here to avoid the
+			// implicit memory aliasing in the loop.
+			minikubeCluster = &clusters[i]
+		} else if cluster.Name == "docker-desktop" {
+			contextWithoutNamespace = &clusters[i]
+		}
+	}
+
+	assert.NotNil(t, contextWithoutNamespace)
+	assert.Equal(t, "", contextWithoutNamespace.Metadata["namespace"])
+
+	assert.NotNil(t, minikubeCluster)
+	assert.Equal(t, minikubeName, minikubeCluster.Name)
+	assert.Equal(t, "default", minikubeCluster.Metadata["namespace"])
 }
 
 //nolint:funlen
@@ -443,8 +469,8 @@ func TestDrainAndCordonNode(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		drainNodePayload.Cluster = "minikube"
-		drainNodePayload.NodeName = "minikube"
+		drainNodePayload.Cluster = minikubeName
+		drainNodePayload.NodeName = minikubeName
 
 		rr, err := getResponse(tc.handler, "POST", "/drain-node", drainNodePayload)
 		if err != nil {

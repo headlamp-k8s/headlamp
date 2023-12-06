@@ -85,9 +85,11 @@ func TestStartPortForward(t *testing.T) {
 	req := &http.Request{}
 	resp := httptest.NewRecorder()
 
+	const minikubeName = "minikube"
+
 	// create request
 	reqPayload := map[string]interface{}{
-		"cluster":    "minikube",
+		"cluster":    minikubeName,
 		"pod":        podName,
 		"namespace":  "headlamp",
 		"targetPort": targetPort,
@@ -144,7 +146,7 @@ func TestStartPortForward(t *testing.T) {
 
 	// create stop request
 	reqPayload = map[string]interface{}{
-		"cluster":      "minikube",
+		"cluster":      minikubeName,
 		"id":           pfRespPayload["id"],
 		"stopOrDelete": true,
 	}
@@ -228,7 +230,7 @@ func TestStartPortForward(t *testing.T) {
 
 	// create delete request
 	reqPayload = map[string]interface{}{
-		"cluster":      "minikube",
+		"cluster":      minikubeName,
 		"id":           pfRespPayload["id"],
 		"stopOrDelete": false,
 	}

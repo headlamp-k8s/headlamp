@@ -87,6 +87,7 @@ func TestContext(t *testing.T) {
 
 	require.Equal(t, "minikube", testContext.Name)
 	require.NotNil(t, testContext.ClientConfig())
+	require.Equal(t, "default", testContext.KubeContext.Namespace)
 
 	restConf, err := testContext.RESTConfig()
 	require.NoError(t, err)

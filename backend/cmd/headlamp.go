@@ -776,7 +776,8 @@ func (c *HeadlampConfig) getClusters() []Cluster {
 			Server:   context.Cluster.Server,
 			AuthType: context.AuthType(),
 			Metadata: map[string]interface{}{
-				"source": context.SourceStr(),
+				"source":    context.SourceStr(),
+				"namespace": context.KubeContext.Namespace,
 			},
 		})
 	}
