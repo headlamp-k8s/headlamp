@@ -126,7 +126,7 @@ docker-ext:
 	-t $(DOCKER_EXT_REPO)/$(DOCKER_IMAGE_NAME)-docker-extension:${LATEST_TAG} \
 	-t $(DOCKER_EXT_REPO)/$(DOCKER_IMAGE_NAME)-docker-extension:latest -f \
 	./docker-extension/Dockerfile \
-	./docker-extension 
+	./docker-extension
 
 .PHONY: docs
 docs:
