@@ -50,13 +50,18 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
 
   /** Plugin arr to be rendered to the page from prop data */
   const pluginArr: any = props.plugins ? props.plugins : [];
-
   /** enableSave state enables the save button when changes are made to the plugin list */
   const [enableSave, setEnableSave] = useState(false);
 
   /** pluginChanges state is the array of plugin data and any current changes made by the user to a plugin's "Enable" field via toggler */
   const [pluginChanges, setPluginChanges] = useState(() => pluginArr.map((p: any) => p));
 
+  const pluginComponents = pluginArr.map((plugin: PluginInfo) => {
+    if (plugin.component !== null || plugin.component !== undefined) {
+      return plugin.component;
+    }
+  });
+  console.log('plugincomp', pluginComponents);
   /**
    * useEffect to control the rendering of the save button.
    * By default, the enableSave is set to false.
@@ -150,7 +155,9 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
           ]}
           data={pluginChanges}
         />
+        {pluginComponents}
       </SectionBox>
+
       {enableSave && (
         <Box className={classes.saveButtonBox}>
           <Button

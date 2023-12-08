@@ -689,7 +689,7 @@ const defaultRoutes: {
     },
     useClusterURL: false,
     noAuthRequired: true,
-    disabled: !helpers.isElectron(),
+    // disabled: !helpers.isElectron(),
     component: () => <PluginSettings />,
   },
   portforwards: {

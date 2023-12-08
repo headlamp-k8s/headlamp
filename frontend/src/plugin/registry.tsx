@@ -40,6 +40,7 @@ import {
   setDetailsViewSection,
 } from '../redux/detailsViewSectionsSlice';
 import store from '../redux/stores/store';
+import { setPluginSettingsComponent } from './pluginsSlice';
 
 export interface SectionFuncProps {
   title: string;
@@ -562,4 +563,8 @@ export function registerGetTokenFunction(override: (cluster: string) => string |
   store.dispatch(setFunctionsToOverride({ getToken: override }));
 }
 
+export function registerPluginSettingsComponent(name: string, component: React.ComponentType) {
+  console.log(`Registering plugin settings component: ${name}, ${component}`);
+  store.dispatch(setPluginSettingsComponent({ name, component }));
+}
 export { DefaultAppBarAction, DefaultDetailsViewSection, getHeadlampAPIHeaders };

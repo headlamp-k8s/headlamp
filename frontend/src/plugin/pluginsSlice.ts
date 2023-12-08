@@ -1,4 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// import { produce } from 'immer';
+import { ReactElement, ReactNode } from 'react';
+
+export type PluginSettingsSectionType =
+  | ((...args: any[]) => JSX.Element | null | ReactNode)
+  | null
+  | ReactElement
+  | ReactNode;
 
 /**
  * PluginInfo is the shape of the metadata information for individual plugin objects.
@@ -29,6 +37,8 @@ export type PluginInfo = {
 
   version?: string; // unused by PluginSettings
   author?: string; // unused by PluginSettings
+
+  component?: PluginSettingsSectionType;
 };
 
 export interface PluginsState {
@@ -55,8 +65,34 @@ export const pluginsSlice = createSlice({
      * Save the plugin settings. To both the store, and localStorage.
      */
     setPluginSettings(state, action: PayloadAction<PluginInfo[]>) {
+      console.log('setPluginSettings', action.payload);
       state.pluginSettings = action.payload;
       localStorage.setItem('headlampPluginSettings', JSON.stringify(action.payload));
+    },
+    /**
+     * Set the component for a plugin.
+     * @param state
+     * @param action
+     * @param action.payload.name The name of the plugin to set the component for.
+     * @param action.payload.component The component to set for the plugin.
+     * @returns
+     */
+    setPluginSettingsComponent(
+      state,
+      action: PayloadAction<{ name: string; component: PluginSettingsSectionType }>
+    ) {
+      const { name, component } = action.payload;
+      console.log('setPluginSettingsComponent before', state.pluginSettings);
+      state.pluginSettings = state.pluginSettings.map(plugin => {
+        if (plugin.name === name) {
+          return {
+            ...plugin,
+            component,
+          };
+        }
+        return plugin;
+      });
+      console.log('setPluginSettingsComponent after', state.pluginSettings);
     },
     /** Reloads the browser page */
     reloadPage() {
@@ -65,6 +101,7 @@ export const pluginsSlice = createSlice({
   },
 });
 
-export const { pluginsLoaded, setPluginSettings, reloadPage } = pluginsSlice.actions;
+export const { pluginsLoaded, setPluginSettings, setPluginSettingsComponent, reloadPage } =
+  pluginsSlice.actions;
 
 export default pluginsSlice.reducer;

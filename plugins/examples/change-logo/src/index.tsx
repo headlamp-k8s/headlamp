@@ -3,7 +3,11 @@
 // import { registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
 // registerAppLogo(() => <p>My Logo</p>);
 
-import { AppLogoProps, registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
+import {
+  AppLogoProps,
+  registerAppLogo,
+  registerPluginSettingsComponent,
+} from '@kinvolk/headlamp-plugin/lib';
 import { SvgIcon } from '@material-ui/core';
 import LogoWithTextLight from './icon-large-light.svg';
 import LogoLight from './icon-small-light.svg';
@@ -56,3 +60,9 @@ if (show === 'simple') {
 } else {
   registerAppLogo(ReactiveLogo);
 }
+
+function Settings() {
+  return <p>Hi Settings from change-logo plugin</p>;
+}
+
+registerPluginSettingsComponent('change-logo', <Settings />);
