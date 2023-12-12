@@ -19,10 +19,10 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
         role="tablist"
       >
         <button
-          aria-controls="full-width-tabpanel-0-BasicTabs"
+          aria-controls="full-width-tabpanel-0-BasicTabs-tabs-id"
           aria-selected="true"
           class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-1qhanmh-MuiButtonBase-root-MuiTab-root"
-          id="full-width-tab-0-BasicTabs"
+          id="full-width-tab-0-BasicTabs-tabs-id"
           role="tab"
           tabindex="0"
           type="button"
@@ -33,10 +33,10 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
           />
         </button>
         <button
-          aria-controls="full-width-tabpanel-1-BasicTabs"
+          aria-controls="full-width-tabpanel-1-BasicTabs-tabs-id"
           aria-selected="false"
           class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1qhanmh-MuiButtonBase-root-MuiTab-root"
-          id="full-width-tab-1-BasicTabs"
+          id="full-width-tab-1-BasicTabs-tabs-id"
           role="tab"
           tabindex="-1"
           type="button"
@@ -54,9 +54,9 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
     </div>
   </div>
   <div
-    aria-labelledby="full-width-tab-0-BasicTabs"
+    aria-labelledby="full-width-tab-0-BasicTabs-tabs-id"
     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
-    id="full-width-tabpanel-0-BasicTabs"
+    id="full-width-tabpanel-0-BasicTabs-tabs-id"
     role="tabpanel"
   >
     <p>
@@ -64,10 +64,10 @@ exports[`Storyshots Tabs Basic Tabs 1`] = `
     </p>
   </div>
   <div
-    aria-labelledby="full-width-tab-1-BasicTabs"
+    aria-labelledby="full-width-tab-1-BasicTabs-tabs-id"
     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
     hidden=""
-    id="full-width-tabpanel-1-BasicTabs"
+    id="full-width-tabpanel-1-BasicTabs-tabs-id"
     role="tabpanel"
   >
     <p>
@@ -96,10 +96,10 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
         role="tablist"
       >
         <button
-          aria-controls="full-width-tabpanel-0-StartingTabs"
+          aria-controls="full-width-tabpanel-0-StartingTabs-tabs-id"
           aria-selected="false"
           class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1qhanmh-MuiButtonBase-root-MuiTab-root"
-          id="full-width-tab-0-StartingTabs"
+          id="full-width-tab-0-StartingTabs-tabs-id"
           role="tab"
           tabindex="-1"
           type="button"
@@ -110,10 +110,10 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
           />
         </button>
         <button
-          aria-controls="full-width-tabpanel-1-StartingTabs"
+          aria-controls="full-width-tabpanel-1-StartingTabs-tabs-id"
           aria-selected="true"
           class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-1qhanmh-MuiButtonBase-root-MuiTab-root"
-          id="full-width-tab-1-StartingTabs"
+          id="full-width-tab-1-StartingTabs-tabs-id"
           role="tab"
           tabindex="0"
           type="button"
@@ -131,10 +131,10 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
     </div>
   </div>
   <div
-    aria-labelledby="full-width-tab-0-StartingTabs"
+    aria-labelledby="full-width-tab-0-StartingTabs-tabs-id"
     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
     hidden=""
-    id="full-width-tabpanel-0-StartingTabs"
+    id="full-width-tabpanel-0-StartingTabs-tabs-id"
     role="tabpanel"
   >
     <p>
@@ -142,9 +142,9 @@ exports[`Storyshots Tabs Starting Tab 1`] = `
     </p>
   </div>
   <div
-    aria-labelledby="full-width-tab-1-StartingTabs"
+    aria-labelledby="full-width-tab-1-StartingTabs-tabs-id"
     class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
-    id="full-width-tabpanel-1-StartingTabs"
+    id="full-width-tabpanel-1-StartingTabs-tabs-id"
     role="tabpanel"
   >
     <p>
