@@ -974,6 +974,12 @@ export async function streamResults(
     console.debug('k8s/apiProxy@streamResults', { url, queryParams });
   }
 
+  // -1 means unlimited.
+  const maxResources =
+    typeof queryParams?.limit === 'number'
+      ? queryParams.limit
+      : parseInt(queryParams?.limit ?? '-1');
+
   run();
 
   return cancel;
@@ -1062,6 +1068,19 @@ export async function streamResults(
 
   function push() {
     const values = Object.values(results);
+    // Limit the number of resources to maxResources. We do this because when we're streaming, the
+    // API server will send us all the resources that match the query, without limitting, even if the
+    // API params wanted to limit it. So we do the limitting here.
+    if (maxResources > 0 && values.length > maxResources) {
+      values.sort((a, b) => {
+        const aTime = new Date(a.lastTimestamp || a.metadata.creationTimestamp!).getTime();
+        const bTime = new Date(b.lastTimestamp || b.metadata.creationTimestamp!).getTime();
+        // Reverse sort, so we have the most recent resources at the beginning of the array.
+        return 0 - (aTime - bTime);
+      });
+      values.splice(0, values.length - maxResources);
+    }
+
     if (isDebugVerbose('k8s/apiProxy@push cb(values)')) {
       console.debug('k8s/apiProxy@push cb(values)', { values });
     }
