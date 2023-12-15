@@ -194,6 +194,10 @@ function prepareRoutes(
           label: t('glossary|HPAs'),
         },
         {
+          name: 'verticalPodAutoscalers',
+          label: t('glossary|VPAs'),
+        },
+        {
           name: 'resourceQuotas',
           label: t('glossary|Resource Quotas'),
         },
