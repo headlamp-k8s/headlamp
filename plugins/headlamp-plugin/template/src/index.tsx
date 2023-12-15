@@ -4,6 +4,6 @@ import { registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
 //   See README.md for links to plugin development documentation.
 // import { SectionBox } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
 // import { K8s } from '@kinvolk/headlamp-plugin/lib/K8s';
-// import { Typography } from '@material-ui/core';
+// import { Typography } from '@mui/material';
 
 registerAppBarAction(<span>Hello</span>);

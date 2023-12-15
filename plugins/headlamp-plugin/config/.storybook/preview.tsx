@@ -1,6 +1,7 @@
 import React from 'react';
 import themesConf from '@kinvolk/headlamp-plugin/lib/lib/themes';
-import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import StylesProvider from '@mui/styles/StylesProvider';
 
 const darkTheme = themesConf['dark'];
 const lightTheme = themesConf['light'];

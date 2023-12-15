@@ -32,8 +32,8 @@ displays that information in the top bar (i.e. registers an "app bar action").
 
 ```tsx
 import { K8s, registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 const useStyle = makeStyles(() => ({
   pods: {

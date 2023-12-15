@@ -1,5 +1,5 @@
 const externalModules = {
-  '@mui/material': 'pluginLib.MuiCore',
+  '@mui/material': 'pluginLib.MuiMaterial',
   '@monaco-editor/react': 'pluginLib.ReactMonacoEditor',
   'monaco-editor': 'pluginLib.MonacoEditor',
   '@mui/lab': 'pluginLib.MuiLab',
@@ -40,13 +40,13 @@ module.exports = {
   },
   externals: function ({ request }, callback) {
     const pluginLib = externalModules[request];
-    // For cases like: import { Grid } from '@material-ui/core'
+    // For cases like: import { Grid } from '@mui/material'
     if (!!pluginLib) {
       return callback(null, pluginLib);
     }
 
     // For cases like:
-    // import Grid from '@material-ui/core/Grid' -> const Grid = pluginLib.MuiCore["Grid"];
+    // import Grid from '@mui/material/Grid' -> const Grid = pluginLib.MuiMaterial["Grid"];
     for (const importModule of Object.keys(externalModules)) {
       const modulePrefix = importModule + '/';
       if (request.startsWith(modulePrefix)) {
