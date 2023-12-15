@@ -96,7 +96,7 @@ const verboseModDebug: string[] = [];
  * ```
  */
 export function isDebugVerbose(modName: string): boolean {
-  if (verboseModDebug.filter(mod => modName.indexOf(mod) > 0)) {
+  if (verboseModDebug.filter(mod => modName.indexOf(mod) > 0).length > 0) {
     return true;
   }
 
