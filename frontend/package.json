@@ -59,7 +59,7 @@
     "lodash": "^4.17.21",
     "monaco-editor": "^0.25.2",
     "monaco-editor-webpack-plugin": "^4.2.0",
-    "notistack": "^1.0.10",
+    "notistack": "^2.0.8",
     "openapi-types": "^9.3.0",
     "patch-package": "^6.4.7",
     "postcss": "^8.4.5",

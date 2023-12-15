@@ -106,7 +106,7 @@
     "monaco-editor-webpack-plugin": "^4.2.0",
     "msw": "^0.47.4",
     "msw-storybook-addon": "^1.6.3",
-    "notistack": "^1.0.10",
+    "notistack": "^2.0.8",
     "openapi-types": "^9.3.0",
     "patch-package": "^6.4.7",
     "postcss": "^8.4.5",
