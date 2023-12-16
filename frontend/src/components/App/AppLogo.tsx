@@ -1,4 +1,5 @@
-import { makeStyles, SvgIcon } from '@material-ui/core';
+import { SvgIcon } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { isValidElement, ReactElement } from 'react';
 import { getThemeName } from '../../lib/themes';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -56,7 +57,7 @@ export function AppLogo(props: AppLogoProps) {
   const classes = useStyle();
   const { className = classes.logo, logoType = 'large', themeName = getThemeName() } = props;
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
-  const PluginAppLogoComponent = useTypedSelector(state => state.ui.branding.logo);
+  const PluginAppLogoComponent = useTypedSelector(state => state.theme.logo);
   const PluginAppLogoComp = PluginAppLogoComponent as typeof React.Component;
 
   // Till all plugins are not loaded show empty content for logo as we might have logo coming from a plugin

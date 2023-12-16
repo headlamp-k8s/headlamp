@@ -1,5 +1,6 @@
 import { InlineIcon } from '@iconify/react';
-import { Box, Button, withStyles } from '@material-ui/core';
+import { Box, Button } from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';

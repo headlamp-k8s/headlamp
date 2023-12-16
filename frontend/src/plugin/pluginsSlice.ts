@@ -29,6 +29,12 @@ export type PluginInfo = {
 
   version?: string; // unused by PluginSettings
   author?: string; // unused by PluginSettings
+  /**
+   * dependencies is an object of the plugin's dependencies from the package.json
+   */
+  devDependencies?: {
+    [key: string]: string;
+  };
 };
 
 export interface PluginsState {

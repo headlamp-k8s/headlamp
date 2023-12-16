@@ -1,11 +1,10 @@
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import _ from 'lodash';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { CLUSTER_ACTION_GRACE_PERIOD } from '../../lib/util';
-import { ClusterAction } from '../../redux/actions/actions';
+import { CLUSTER_ACTION_GRACE_PERIOD, ClusterAction } from '../../redux/clusterActionSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 
 export interface PureActionsNotifierProps {
@@ -50,14 +49,14 @@ function PureActionsNotifier({ dispatch, clusterActions }: PureActionsNotifierPr
       closeSnackbar(clusterAction.dismissSnackbar);
     }
 
-    const { key, message, snackbarProps } = clusterAction;
-    enqueueSnackbar(message, {
-      key,
-      preventDuplicate: true,
-      autoHideDuration: CLUSTER_ACTION_GRACE_PERIOD,
-      action,
-      ...snackbarProps,
-    });
+    if (clusterAction.message) {
+      enqueueSnackbar(clusterAction.message, {
+        key: clusterAction.key,
+        autoHideDuration: clusterAction.autoHideDuration || CLUSTER_ACTION_GRACE_PERIOD,
+        action,
+        ...clusterAction.snackbarProps,
+      });
+    }
   }
 
   React.useEffect(

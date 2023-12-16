@@ -1,4 +1,4 @@
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@mui/material/styles';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
@@ -127,7 +127,7 @@ function Table(props: ResourceTableProps) {
   const { t } = useTranslation(['glossary', 'translation']);
   const theme = useTheme();
   const storeRowsPerPageOptions = useSettings('tableRowsPerPageOptions');
-  const tableProcessors = useTypedSelector(state => state.ui.views.tableColumnsProcessors);
+  const tableProcessors = useTypedSelector(state => state.resourceTable.tableColumnsProcessors);
   const [tableSettings, setTableSettings] = useState<{ id: string; show: boolean }[]>(
     !!id ? helpers.loadTableSettings(id) : []
   );

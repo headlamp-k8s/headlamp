@@ -93,10 +93,18 @@ plugins-test:
 	cd plugins/headlamp-plugin && npm install && ./test-headlamp-plugin.js
 	cd plugins/headlamp-plugin && ./test-plugins-examples.sh
 
+# IMAGE_BASE can be used to specify a base final image.
+#   IMAGE_BASE=debian:latest make image
 image:
+	@if [ -n "${IMAGE_BASE}" ]; then \
+		BUILD_ARG="--build-arg IMAGE_BASE=${IMAGE_BASE}"; \
+	else \
+		BUILD_ARG=""; \
+	fi; \
 	$(DOCKER_CMD) buildx build \
 	--pull \
 	--platform=$(DOCKER_PLATFORM) \
+	$$BUILD_ARG \
 	-t $(DOCKER_REPO)/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_VERSION) -f \
 	Dockerfile \
 	.

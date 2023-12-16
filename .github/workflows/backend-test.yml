@@ -1,30 +1,99 @@
 name: Backend test
+
 on:
   pull_request:
     paths:
-    - 'backend/**'
+      - 'backend/**'
 
+env:
+  HEADLAMP_RUN_INTEGRATION_TESTS: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Test backend
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Setup go
-      uses: actions/setup-go@v4
-      with:
-        go-version: '1.20.*'
-    - name: Setup minikube cluster
-      uses: medyagh/setup-minikube@master
-    - name: Start cluster
-      run: |
-        minikube start --driver=docker
-    - name: Check cluster status 
-      run: |
-        minikube status
-    - name: Run golang test
-      run: |
-        export HEADLAMP_RUN_INTEGRATION_TESTS=true
-        make backend-test
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+    
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.20.5
+    
+      - name: Install dependencies
+        run: |
+          cd backend
+          go mod download
+    
+      - name: Start cluster
+        uses: medyagh/setup-minikube@master
+
+      - name: Check cluster status and enable headlamp addon
+        run: |
+          minikube status
+          minikube addons enable headlamp
+          kubectl wait deployment -n headlamp headlamp --for condition=Available=True --timeout=30s    
+
+      - name: Run tests and calculate code coverage
+        run: |
+          cd backend
+          go test ./... -coverprofile=coverage.out -covermode=atomic -coverpkg=./...
+          testcoverage=$(go tool cover -func=coverage.out | grep total | grep -Eo '[0-9]+\.[0-9]+')
+          echo "Code coverage: $testcoverage"
+          echo "coverage=$testcoverage" >> $GITHUB_ENV
+          echo "cleaning up..."
+          rm ~/.config/Headlamp/kubeconfigs/config
+        shell: bash
+
+      - name: Get base branch code coverage
+        run: |
+          cd backend
+          base_branch="${{ github.base_ref }}"
+          testcoverage="${{ env.coverage }}"
+          git fetch origin "$base_branch"
+          git checkout "origin/$base_branch"
+          go test ./... -coverprofile=base_coverage.out -covermode=atomic -coverpkg=./...
+          base_coverage=$(go tool cover -func=base_coverage.out | grep total | grep -Eo '[0-9]+\.[0-9]+')
+          echo "Base branch code coverage: $base_coverage"
+          echo "base_coverage=$base_coverage" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Compare code coverage
+        run: |
+          testcoverage="${{ env.coverage }}"
+          base_coverage="${{ env.base_coverage }}"
+          if [[ -z $testcoverage || -z $base_coverage ]]; then
+            echo "testcoverage or base_coverage is not set. Cannot calculate coverage difference."
+            exit 1
+          fi
+          
+          echo "testcoverage=$testcoverage"
+          echo "base_coverage=$base_coverage"
+          echo "$testcoverage - $base_coverage"
+
+          coverage_diff=$(echo "$testcoverage - $base_coverage" | bc)
+          echo "Coverage change: $coverage_diff"
+          echo "coverage_diff=$coverage_diff" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Comment on PR
+        run: |
+          testcoverage="${{ env.coverage }}"
+          base_coverage="${{ env.base_coverage }}"
+          coverage_diff="${{ env.coverage_diff }}"
+          if (( $(echo "$coverage_diff < 0" | bc -l) )); then
+            emoji="😞" # Decreased coverage
+          else
+            emoji="😃" # Increased or unchanged coverage
+          fi
+
+          comment="Backend Code coverage changed from $base_coverage% to $testcoverage%. Change: $coverage_diff% $emoji."
+          echo "$comment"
+          if [[ "${{github.event.pull_request.head.repo.full_name}}" == "${{github.repository}}" ]]; then
+            gh issue comment ${{github.event.number}} --body "${comment}"
+          else
+            echo "Pull request raised from a fork. Skipping comment."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

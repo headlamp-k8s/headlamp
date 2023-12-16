@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { get, set } from 'lodash';
-import { DetailsViewSectionType } from '../components/DetailsViewSection';
-import { KubeObject } from '../lib/k8s/cluster';
+import { KubeObject } from '../../lib/k8s/cluster';
+import { DetailsViewSectionType } from './DetailsViewSection';
 
 export type DetailsViewSection = {
   id: string;
@@ -37,15 +37,6 @@ export type DetailsViewSectionsProcessor = {
   processor: DetailsViewSectionProcessorType;
 };
 
-export interface HeaderActionState {
-  detailsViewSections: DetailsViewSection[];
-  detailsViewSectionsProcessors: DetailsViewsSectionProcessor[];
-}
-const initialState: HeaderActionState = {
-  detailsViewSections: [],
-  detailsViewSectionsProcessors: [],
-};
-
 /**
  * Normalizes a header actions processor by ensuring it has an 'id' and a processor function.
  *
@@ -76,10 +67,43 @@ function _normalizeProcessor<Processor, ProcessorProcessor>(
   return defailsViewSectionsProcessor;
 }
 
-export const detailsViewSectionsSlice = createSlice({
-  name: 'detailsViewSections',
+export interface DetailsViewSectionState {
+  /**
+   * List of details views.
+   */
+  detailViews: DetailsViewSectionType[];
+  /**
+   * List of details view sections.
+   */
+  detailsViewSections: DetailsViewSection[];
+  /**
+   * List of details view sections processors.
+   */
+  detailsViewSectionsProcessors: DetailsViewsSectionProcessor[];
+}
+
+const initialState: DetailsViewSectionState = {
+  detailViews: [],
+  detailsViewSections: [],
+  detailsViewSectionsProcessors: [],
+};
+
+const detailsViewSectionSlice = createSlice({
+  name: 'detailsViewSection',
   initialState,
   reducers: {
+    /**
+     * Sets details view.
+     */
+    setDetailsView(state, action: PayloadAction<DetailsViewSectionType>) {
+      state.detailViews.push(action.payload);
+    },
+
+    /**
+     * Sets details view section.
+     *
+     * If the processor is passed as a function, it will be wrapped in an object with a generated ID.
+     */
     setDetailsViewSection(
       state,
       action: PayloadAction<DetailsViewSectionType | DetailsViewSection>
@@ -96,6 +120,12 @@ export const detailsViewSectionsSlice = createSlice({
 
       state.detailsViewSections.push(section);
     },
+
+    /**
+     * Adds a details view sections processor.
+     *
+     * If the processor is passed as a function, it will be wrapped in an object with a generated ID.
+     */
     addDetailsViewSectionsProcessor(
       state,
       action: PayloadAction<
@@ -112,7 +142,7 @@ export const detailsViewSectionsSlice = createSlice({
   },
 });
 
-export const { setDetailsViewSection, addDetailsViewSectionsProcessor } =
-  detailsViewSectionsSlice.actions;
-
-export default detailsViewSectionsSlice.reducer;
+export const { addDetailsViewSectionsProcessor, setDetailsView, setDetailsViewSection } =
+  detailsViewSectionSlice.actions;
+export { detailsViewSectionSlice };
+export default detailsViewSectionSlice.reducer;

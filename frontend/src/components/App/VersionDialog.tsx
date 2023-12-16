@@ -1,4 +1,4 @@
-import { DialogContent } from '@material-ui/core';
+import { DialogContent } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import helpers from '../../helpers';

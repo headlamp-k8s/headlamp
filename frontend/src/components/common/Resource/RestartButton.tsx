@@ -8,14 +8,14 @@ import {
   DialogTitle,
   IconButton,
   Tooltip,
-} from '@material-ui/core';
+} from '@mui/material';
 import _ from 'lodash';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObject } from '../../../lib/k8s/cluster';
-import { clusterAction } from '../../../redux/actions/actions';
+import { clusterAction } from '../../../redux/clusterActionSlice';
 import AuthVisible from './AuthVisible';
 
 interface RestartButtonProps {
@@ -77,7 +77,11 @@ export function RestartButton(props: RestartButtonProps) {
       }}
     >
       <Tooltip title={t('translation|Restart') as string}>
-        <IconButton aria-label={t('translation|restart')} onClick={() => setOpenDialog(true)}>
+        <IconButton
+          aria-label={t('translation|restart')}
+          onClick={() => setOpenDialog(true)}
+          size="medium"
+        >
           <Icon icon="mdi:restart" />
         </IconButton>
       </Tooltip>

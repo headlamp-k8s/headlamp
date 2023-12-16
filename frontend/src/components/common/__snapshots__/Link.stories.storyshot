@@ -3,11 +3,12 @@
 exports[`Storyshots Link Auto Tooltip 1`] = `
 <div>
   <span
+    aria-label="a link"
     class=""
-    title="a link"
+    data-mui-internal-clone-element="true"
   >
     <a
-      class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
       href="/"
     >
       a link
@@ -19,7 +20,7 @@ exports[`Storyshots Link Auto Tooltip 1`] = `
 exports[`Storyshots Link Basic 1`] = `
 <div>
   <a
-    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
     href="/"
   >
     a link
@@ -30,11 +31,12 @@ exports[`Storyshots Link Basic 1`] = `
 exports[`Storyshots Link Explicit Tooltip 1`] = `
 <div>
   <span
+    aria-label="A tooltip"
     class=""
-    title="A tooltip"
+    data-mui-internal-clone-element="true"
   >
     <a
-      class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
       href="/"
     >
       a link
@@ -46,7 +48,7 @@ exports[`Storyshots Link Explicit Tooltip 1`] = `
 exports[`Storyshots Link Params 1`] = `
 <div>
   <a
-    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
     href="/"
   >
     a link

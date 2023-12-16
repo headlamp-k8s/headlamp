@@ -194,6 +194,10 @@ function prepareRoutes(
           label: t('glossary|HPAs'),
         },
         {
+          name: 'verticalPodAutoscalers',
+          label: t('glossary|VPAs'),
+        },
+        {
           name: 'resourceQuotas',
           label: t('glossary|Resource Quotas'),
         },
@@ -234,8 +238,8 @@ function prepareRoutes(
     [DefaultSidebars.HOME]: _.cloneDeep(homeItems),
   };
 
-  const items = store.getState().ui.sidebar.entries;
-  const filters = store.getState().ui.sidebar.filters;
+  const items = store.getState().sidebar.entries;
+  const filters = store.getState().sidebar.filters;
 
   for (const i of Object.values(items)) {
     const item = _.cloneDeep(i);

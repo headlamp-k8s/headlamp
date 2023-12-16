@@ -23,10 +23,8 @@ const ourState = {
   filter: {
     search: '',
   },
-  ui: {
-    views: {
-      tableColumnsProcessors: [],
-    },
+  resourceTable: {
+    tableColumnsProcessors: [],
   },
 };
 

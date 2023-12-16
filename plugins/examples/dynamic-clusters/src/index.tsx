@@ -1,5 +1,5 @@
 import { Headlamp, registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 function ClusterCreationButton() {
   return (

@@ -4,18 +4,14 @@ exports[`Storyshots Resource/ViewButton View 1`] = `
 <div>
   <button
     aria-label="View YAML"
-    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
+    data-mui-internal-clone-element="true"
     tabindex="0"
-    title="View YAML"
     type="button"
   >
+    <span />
     <span
-      class="MuiIconButton-label"
-    >
-      <span />
-    </span>
-    <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </button>
 </div>
@@ -27,18 +23,14 @@ exports[`Storyshots Resource/ViewButton View Open 1`] = `
 >
   <button
     aria-label="View YAML"
-    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1d2b2o6-MuiButtonBase-root-MuiIconButton-root"
+    data-mui-internal-clone-element="true"
     tabindex="0"
-    title="View YAML"
     type="button"
   >
+    <span />
     <span
-      class="MuiIconButton-label"
-    >
-      <span />
-    </span>
-    <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </button>
 </div>

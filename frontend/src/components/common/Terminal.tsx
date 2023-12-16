@@ -1,14 +1,14 @@
 import 'xterm/css/xterm.css';
-import { Box } from '@material-ui/core';
-import { DialogProps } from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@mui/material';
+import { DialogProps } from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Terminal as XTerminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
@@ -76,7 +76,7 @@ export default function Terminal(props: TerminalProps) {
   const { item, onClose, isAttach, ...other } = props;
   const classes = useStyle();
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
-  const [container, setContainer] = React.useState<string | null>(null);
+  const [container, setContainer] = useState<string | null>(getDefaultContainer());
   const execOrAttachRef = React.useRef<execReturn | null>(null);
   const fitAddonRef = React.useRef<FitAddon | null>(null);
   const xtermRef = React.useRef<XTerminalConnected | null>(null);
@@ -84,7 +84,7 @@ export default function Terminal(props: TerminalProps) {
     available: getAvailableShells(),
     currentIdx: 0,
   });
-  const { t } = useTranslation();
+  const { t } = useTranslation(['translation', 'glossary']);
 
   function getDefaultContainer() {
     return item.spec.containers.length > 0 ? item.spec.containers[0].name : '';
@@ -424,12 +424,36 @@ export default function Terminal(props: TerminalProps) {
               value={container !== null ? container : getDefaultContainer()}
               onChange={handleContainerChange}
             >
-              {item &&
-                item.spec.containers.map(({ name }) => (
-                  <MenuItem value={name} key={name}>
-                    {name}
-                  </MenuItem>
-                ))}
+              {item?.spec?.containers && (
+                <MenuItem disabled value="">
+                  {t('glossary|Containers')}
+                </MenuItem>
+              )}
+              {item?.spec?.containers.map(({ name }) => (
+                <MenuItem value={name} key={name}>
+                  {name}
+                </MenuItem>
+              ))}
+              {item?.spec?.initContainers && (
+                <MenuItem disabled value="">
+                  {t('translation|Init Containers')}
+                </MenuItem>
+              )}
+              {item.spec.initContainers?.map(({ name }) => (
+                <MenuItem value={name} key={`init_container_${name}`}>
+                  {name}
+                </MenuItem>
+              ))}
+              {item?.spec?.ephemeralContainers && (
+                <MenuItem disabled value="">
+                  {t('glossary|Ephemeral Containers')}
+                </MenuItem>
+              )}
+              {item.spec.ephemeralContainers?.map(({ name }) => (
+                <MenuItem value={name} key={`eph_container_${name}`}>
+                  {name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Box>

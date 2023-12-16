@@ -3,7 +3,7 @@
 exports[`Storyshots Label/ValueLabel Value Label 1`] = `
 <div>
   <span
-    class="MuiTypography-root makeStyles-valueLabel MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
   >
     A ValueLabel is here
   </span>

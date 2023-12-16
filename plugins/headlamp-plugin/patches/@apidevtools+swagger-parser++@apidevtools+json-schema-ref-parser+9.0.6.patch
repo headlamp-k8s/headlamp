@@ -1,0 +1,11 @@
+diff --git a/node_modules/@apidevtools/swagger-parser/node_modules/@apidevtools/json-schema-ref-parser/lib/util/url.js b/node_modules/@apidevtools/swagger-parser/node_modules/@apidevtools/json-schema-ref-parser/lib/util/url.js
+index 39b3948..5b89e8e 100644
+--- a/node_modules/@apidevtools/swagger-parser/node_modules/@apidevtools/json-schema-ref-parser/lib/util/url.js
++++ b/node_modules/@apidevtools/swagger-parser/node_modules/@apidevtools/json-schema-ref-parser/lib/util/url.js
+@@ -1,5 +1,6 @@
+ "use strict";
+ 
++let process = require("process");
+ let isWindows = /^win/.test(process.platform),
+     forwardSlashPattern = /\//g,
+     protocolPattern = /^(\w{2,}):\/\//i,

@@ -40,8 +40,8 @@ headlamp-plugin --help
                                             directory. Can also be a folder of
                                             packages.
   headlamp-plugin.js upgrade [package]      Upgrade the plugin to latest
-                                            headlamp-plugin; audits, formats,
-                                            lints and type checks.<package>
+  <skip-package-updates>                    headlamp-plugin; audits, formats,
+  <headlamp-plugin-version>                 lints and type checks.<package>
                                             defaults to current working
                                             directory. Can also be a folder of
                                             packages.
@@ -104,3 +104,37 @@ You may need to update these lists when adding/removing packages.
 Run `npm run check-dependencies` to see if frontend/package.json and
 headlamp-plugin/package.json are synced. This is run in CI to make sure when dependencies
 are changed, they are synced appropriately.
+
+
+### Upgrading to an alpha release
+
+You can try an alpha release for testing with the following command.
+
+```bash
+npx @kinvolk/headlamp-plugin@alpha upgrade --headlamp-plugin-version=alpha your-plugin-folder
+```
+
+### Making an alpha release of headlamp-plugin
+
+You can bump the version to do a new alpha release like so:
+```bash
+cd plugins/headlamp-plugin
+npm version preminor --preid=alpha
+v0.6.0-alpha.0
+```
+
+Then to do another prerelease do...
+
+```bash
+npm version prerelease --preid=alpha
+v0.6.0-alpha.1
+```
+
+To set the "alpha" tag when publishing do the following.
+
+```bash
+npm run build && npm pack
+npm publish kinvolk-headlamp-plugin-0.6.0-alpha.0.tgz --tag alpha
+```
+
+If you don't specify a tag, npm publish uses the "latest" tag.

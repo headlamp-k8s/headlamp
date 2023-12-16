@@ -29,7 +29,6 @@ Some.args = {
     '1': {
       id: '1',
       url: '/tmp',
-      key: '1',
       dismissSnackbar: '1',
       message: 'Some message',
       snackbarProps: {},

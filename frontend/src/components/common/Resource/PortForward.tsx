@@ -1,8 +1,8 @@
 import { InlineIcon } from '@iconify/react';
-import { Box, Button, CircularProgress, Tooltip, Typography } from '@material-ui/core';
-import grey from '@material-ui/core/colors/grey';
-import MuiLink from '@material-ui/core/Link';
-import { Alert } from '@material-ui/lab';
+import { Box, Button, CircularProgress, Tooltip, Typography } from '@mui/material';
+import { Alert } from '@mui/material';
+import { grey } from '@mui/material/colors';
+import MuiLink from '@mui/material/Link';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
@@ -166,6 +166,38 @@ export default function PortForward(props: PortForwardProps) {
     const serviceNamespace = namespace;
     const serviceName = !isPod ? resourceName : '';
     const podName = isPod ? resourceName : pods[0].metadata.name;
+    var port = portForward?.port;
+
+    let address = 'localhost';
+    // In case of docker desktop only a range of ports are open
+    // so we need to generate a random port from that range
+    // while making sure that it is not already in use
+    if (helpers.isDockerDesktop()) {
+      const validMinPort = 30000;
+      const validMaxPort = 32000;
+
+      // create a list of active ports
+      const activePorts: string[] = [];
+      const portForwardsInStorage = localStorage.getItem(PORT_FORWARDS_STORAGE_KEY);
+      const parsedPortForwards = JSON.parse(portForwardsInStorage || '[]');
+      parsedPortForwards.forEach((pf: any) => {
+        if (pf.status === PORT_FORWARD_RUNNING_STATUS) {
+          activePorts.push(pf.port);
+        }
+      });
+
+      // generate random port till it is not in use
+      while (true) {
+        const randomPort = (
+          Math.floor(Math.random() * (validMaxPort - validMinPort + 1)) + validMinPort
+        ).toString();
+        if (!activePorts.includes(randomPort)) {
+          port = randomPort;
+          break;
+        }
+      }
+      address = '0.0.0.0';
+    }
 
     setLoading(true);
     startPortForward(
@@ -175,7 +207,8 @@ export default function PortForward(props: PortForwardProps) {
       numericContainerPort,
       serviceName,
       serviceNamespace,
-      portForward?.port,
+      port,
+      address,
       portForward?.id
     )
       .then((data: any) => {

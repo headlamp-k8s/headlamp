@@ -44,7 +44,7 @@ class Endpoints extends makeKubeObject<KubeEndpoint>('endpoint') {
   }
 
   getAddressesText() {
-    this.getAddresses().join(', ');
+    return this.getAddresses().join(', ');
   }
 
   getAddresses() {

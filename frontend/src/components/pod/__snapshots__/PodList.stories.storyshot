@@ -3,78 +3,70 @@
 exports[`Storyshots Pod/PodListView Items 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root"
+    class="MuiBox-root css-j1fy4m"
   >
     <div
-      class="MuiGrid-root makeStyles-sectionHeader makeStyles-sectionHeader MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
     >
       <div
-        class="MuiGrid-root MuiGrid-item"
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
       >
         <div
-          class="MuiBox-root MuiBox-root"
+          class="MuiBox-root css-70qvj9"
         >
           <h1
-            class="MuiTypography-root makeStyles-sectionTitle makeStyles-sectionTitle MuiTypography-h1 MuiTypography-noWrap"
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
           >
             Pods
           </h1>
           <div
-            class="MuiBox-root MuiBox-root"
+            class="MuiBox-root css-ldp2l3"
           />
         </div>
       </div>
       <div
-        class="MuiGrid-root MuiGrid-item"
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-flex-end"
+          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
         >
           <div
-            class="MuiGrid-root MuiGrid-item"
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           >
             <div
-              class="MuiBox-root MuiBox-root"
+              class="MuiBox-root css-0"
             >
               <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-align-items-xs-center"
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-7ldjcq-MuiGrid-root"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-item"
+                  class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
                 >
                   <button
                     aria-label="Show filter"
-                    class="MuiButtonBase-root MuiIconButton-root"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
                     tabindex="0"
                     type="button"
                   >
+                    <span />
                     <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                     />
                   </button>
                 </div>
                 <div
-                  class="MuiGrid-root MuiGrid-item"
+                  class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
                 >
                   <button
                     aria-label="Change columns displayed"
-                    class="MuiButtonBase-root MuiIconButton-root"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+                    data-mui-internal-clone-element="true"
                     tabindex="0"
-                    title="Change columns displayed"
                     type="button"
                   >
+                    <span />
                     <span
-                      class="MuiIconButton-label"
-                    >
-                      <span />
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                     />
                   </button>
                 </div>
@@ -85,221 +77,194 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root MuiBox-root makeStyles-box"
+      class="makeStyles-box MuiBox-root css-0"
     >
       <div
-        class="MuiPaper-root MuiTableContainer-root makeStyles-tableContainer MuiPaper-outlined MuiPaper-rounded"
+        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
       >
         <table
-          class="MuiTable-root makeStyles-table makeStyles-table"
+          class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
         >
           <thead
-            class="MuiTableHead-root"
+            class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
           >
             <tr
-              class="MuiTableRow-root MuiTableRow-head"
+              class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Name
                 <button
                   aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"
                 >
+                  <span />
                   <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                   />
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Namespace
                 <button
                   aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"
                 >
+                  <span />
                   <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                   />
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Restarts
                 <button
                   aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"
                 >
+                  <span />
                   <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                   />
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Ready
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Status
                 <button
                   aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"
                 >
+                  <span />
                   <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                   />
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 IP
                 <button
                   aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"
                 >
+                  <span />
                   <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                   />
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Node
                 <button
                   aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"
                 >
+                  <span />
                   <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                   />
                 </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head makeStyles-headerCell makeStyles-sortCell MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
                 style="text-align: right;"
               >
                 Age
                 <button
                   aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"
                 >
+                  <span />
                   <span
-                    class="MuiIconButton-label"
-                  >
-                    <span />
-                  </span>
-                  <span
-                    class="MuiTouchRipple-root"
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                   />
                 </button>
               </th>
             </tr>
           </thead>
           <tbody
-            class="MuiTableBody-root"
+            class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
           >
             <tr
-              class="MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   imagepullbackoff
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0/1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="MuiBox-root MuiBox-root"
-                  title="Back-off pulling image \\"doesnotexist:nover\\""
+                  aria-label="Back-off pulling image \\"doesnotexist:nover\\""
+                  class="MuiBox-root css-6n7j50"
+                  data-mui-internal-clone-element="true"
                 >
                   <span
-                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
                     style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                   >
                     ImagePullBackOff
@@ -307,19 +272,20 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0.0.0.2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <span
+                  aria-label="my-node"
                   class=""
-                  title="my-node"
+                  data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -327,12 +293,13 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                  title="2022-01-01T00:00:00.000Z"
+                  aria-label="2022-01-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                  data-mui-internal-clone-element="true"
                 >
                   3mo
                   <span />
@@ -340,47 +307,48 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   successful
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0/1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="MuiBox-root MuiBox-root"
-                  title=""
+                  aria-label=""
+                  class="MuiBox-root css-6n7j50"
+                  data-mui-internal-clone-element="true"
                 >
                   <span
-                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
                     style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                   >
                     Completed
@@ -388,19 +356,20 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0.0.0.2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <span
+                  aria-label="my-node"
                   class=""
-                  title="my-node"
+                  data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -408,12 +377,13 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                  title="2022-01-01T00:00:00.000Z"
+                  aria-label="2022-01-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                  data-mui-internal-clone-element="true"
                 >
                   3mo
                   <span />
@@ -421,47 +391,48 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   initializing
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0/1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="MuiBox-root MuiBox-root"
-                  title=""
+                  aria-label=""
+                  class="MuiBox-root css-6n7j50"
+                  data-mui-internal-clone-element="true"
                 >
                   <span
-                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
                     style="background-color: rgb(240, 240, 240); color: rgba(0, 0, 0, 0.87);"
                   >
                     Init:0/2
@@ -469,19 +440,20 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0.0.0.2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <span
+                  aria-label="my-node"
                   class=""
-                  title="my-node"
+                  data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -489,12 +461,13 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                  title="2022-01-01T00:00:00.000Z"
+                  aria-label="2022-01-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                  data-mui-internal-clone-element="true"
                 >
                   3mo
                   <span />
@@ -502,53 +475,54 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   liveness-http
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 337 (3mo ago)
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0/1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="MuiBox-root MuiBox-root"
-                  title="back-off 5m0s restarting failed container=liveness pod=liveness-http_default(4f8b71a3-f99c-41c2-9523-83edc1de02ce)"
+                  aria-label="back-off 5m0s restarting failed container=liveness pod=liveness-http_default(4f8b71a3-f99c-41c2-9523-83edc1de02ce)"
+                  class="MuiBox-root css-6n7j50"
+                  data-mui-internal-clone-element="true"
                 >
                   <span
-                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
                     style="background-color: rgb(255, 243, 224); color: rgb(196, 69, 0);"
                   >
                     CrashLoopBackOff
                     <div
                       aria-label="hidden"
-                      class="MuiBox-root MuiBox-root"
+                      class="MuiBox-root css-p4lqkr"
                       style="vertical-align: text-top;"
                     >
                       <span />
@@ -557,19 +531,20 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0.0.0.2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <span
+                  aria-label="my-node"
                   class=""
-                  title="my-node"
+                  data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -577,12 +552,13 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                  title="2022-01-01T00:00:00.000Z"
+                  aria-label="2022-01-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                  data-mui-internal-clone-element="true"
                 >
                   3mo
                   <span />
@@ -590,53 +566,54 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   terminated
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0/1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="MuiBox-root MuiBox-root"
-                  title=""
+                  aria-label=""
+                  class="MuiBox-root css-6n7j50"
+                  data-mui-internal-clone-element="true"
                 >
                   <span
-                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
                     style="background-color: rgb(255, 235, 238); color: rgb(198, 40, 40);"
                   >
                     Error
                     <div
                       aria-label="hidden"
-                      class="MuiBox-root MuiBox-root"
+                      class="MuiBox-root css-p4lqkr"
                       style="vertical-align: text-top;"
                     >
                       <span />
@@ -645,19 +622,20 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0.0.0.2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <span
+                  aria-label="my-node"
                   class=""
-                  title="my-node"
+                  data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -665,12 +643,13 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                  title="2022-01-01T00:00:00.000Z"
+                  aria-label="2022-01-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                  data-mui-internal-clone-element="true"
                 >
                   3mo
                   <span />
@@ -678,47 +657,48 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   running
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 1/1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="MuiBox-root MuiBox-root"
-                  title=""
+                  aria-label=""
+                  class="MuiBox-root css-6n7j50"
+                  data-mui-internal-clone-element="true"
                 >
                   <span
-                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
                     style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                   >
                     Running
@@ -726,19 +706,20 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0.0.0.2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <span
+                  aria-label="my-node"
                   class=""
-                  title="my-node"
+                  data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -746,12 +727,13 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                  title="2022-01-01T00:00:00.000Z"
+                  aria-label="2022-01-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                  data-mui-internal-clone-element="true"
                 >
                   3mo
                   <span />
@@ -759,47 +741,48 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   nominated-node
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 1/1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="MuiBox-root MuiBox-root"
-                  title=""
+                  aria-label=""
+                  class="MuiBox-root css-6n7j50"
+                  data-mui-internal-clone-element="true"
                 >
                   <span
-                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
                     style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                   >
                     Running
@@ -807,19 +790,20 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0.0.0.2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <span
+                  aria-label="my-node"
                   class=""
-                  title="my-node"
+                  data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -827,12 +811,13 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                  title="2022-01-01T00:00:00.000Z"
+                  aria-label="2022-01-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                  data-mui-internal-clone-element="true"
                 >
                   3mo
                   <span />
@@ -840,47 +825,48 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               </td>
             </tr>
             <tr
-              class="MuiTableRow-root"
+              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
             >
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   readiness-gate
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <a
-                  class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
                   default
                 </a>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 1/1
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <div
-                  class="MuiBox-root MuiBox-root"
-                  title=""
+                  aria-label=""
+                  class="MuiBox-root css-6n7j50"
+                  data-mui-internal-clone-element="true"
                 >
                   <span
-                    class="MuiTypography-root makeStyles-statusLabel MuiTypography-body1"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
                     style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
                   >
                     Running
@@ -888,19 +874,20 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </div>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 0.0.0.2
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
                 <span
+                  aria-label="my-node"
                   class=""
-                  title="my-node"
+                  data-mui-internal-clone-element="true"
                 >
                   <a
-                    class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                     href="/"
                   >
                     my-node
@@ -908,12 +895,13 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
                 </span>
               </td>
               <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall"
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 style="text-align: right;"
               >
                 <p
-                  class="MuiTypography-root makeStyles-noWrap makeStyles-display MuiTypography-body1"
-                  title="2022-01-01T00:00:00.000Z"
+                  aria-label="2022-01-01T00:00:00.000Z"
+                  class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                  data-mui-internal-clone-element="true"
                 >
                   3mo
                   <span />

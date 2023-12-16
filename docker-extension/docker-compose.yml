@@ -8,3 +8,4 @@ services:
       - ~/.kube/:/headlamp/config:ro
     ports:
       - 64446:64446
+      - "30000-32000:30000-32000"

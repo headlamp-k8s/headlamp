@@ -1,25 +1,41 @@
 import { Icon } from '@iconify/react';
-import { Button, ButtonGroup, makeStyles, Theme } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
+import { Button, ButtonGroup, Theme } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { getThemeName, ThemesConf } from '../../../lib/themes';
-import { setTheme as setThemeRedux } from '../../../redux/actions/actions';
+import { setTheme as setThemeRedux } from '../themeSlice';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  buttonGroup: {
-    '& button': {
-      boxShadow: 'none',
-      borderRadius: '4px',
-      padding: '0.8rem 1.5rem',
+const useStyles = makeStyles((theme: Theme) => {
+  const styles = {
+    buttonGroup: {
+      '& button': {
+        boxShadow: 'none',
+        borderRadius: '4px',
+        padding: '0.8rem 1.5rem',
+      },
+      '& .MuiButton-contained': {
+        backgroundColor: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0, 0, 0, 0.45)',
+        color: theme.palette.mode === 'dark' ? '#000' : 'rgb(255, 255, 255)',
+      },
     },
-    '& .MuiButton-contained': {
-      backgroundColor: theme.palette.type === 'dark' ? '' : 'rgba(0, 0, 0, 0.45)',
-      color: theme.palette.type === 'dark' ? '' : 'rgb(255, 255, 255)',
+    button: {
+      color: theme.palette.mode === 'dark' ? '#fff' : '#000',
+      borderColor:
+        theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
+      '&:hover': {
+        backgroundColor:
+          theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)',
+        borderColor:
+          theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)',
+      },
     },
-  },
-}));
+  };
+
+  return styles;
+});
 
 export default function ThemeChangeButton(props: { showBothIcons?: boolean }) {
   const themeName = getThemeName();
@@ -58,6 +74,7 @@ export default function ThemeChangeButton(props: { showBothIcons?: boolean }) {
             aria-label={t('light theme')}
             onClick={() => changeTheme('dark')}
             variant={themeName === 'light' ? 'contained' : 'outlined'}
+            className={classes.button}
           >
             <Icon icon={counterIcons.dark} width="20" />
           </Button>
@@ -65,6 +82,7 @@ export default function ThemeChangeButton(props: { showBothIcons?: boolean }) {
             aria-label={t('dark theme')}
             onClick={() => changeTheme('light')}
             variant={themeName === 'dark' ? 'contained' : 'outlined'}
+            className={classes.button}
           >
             <Icon icon={counterIcons.light} width="20" />
           </Button>
@@ -74,7 +92,7 @@ export default function ThemeChangeButton(props: { showBothIcons?: boolean }) {
   }
 
   return (
-    <IconButton aria-label={t('Change theme')} onClick={() => changeTheme()}>
+    <IconButton aria-label={t('Change theme')} onClick={() => changeTheme()} size="medium">
       <Icon icon={icon} />
     </IconButton>
   );

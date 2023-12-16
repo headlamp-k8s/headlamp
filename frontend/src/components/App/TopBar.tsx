@@ -1,13 +1,15 @@
 import { Icon } from '@iconify/react';
-import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import AppBar from '@mui/material/AppBar';
+import IconButton from '@mui/material/IconButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { Theme, useTheme } from '@mui/material/styles';
+import Toolbar from '@mui/material/Toolbar';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { has } from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -24,13 +26,14 @@ import {
   HeaderAction,
   HeaderActionType,
 } from '../../redux/actionButtonsSlice';
-import { setVersionDialogOpen, setWhetherSidebarOpen } from '../../redux/actions/actions';
+import { setVersionDialogOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { SettingsButton } from '../App/Settings';
 import { ClusterTitle } from '../cluster/Chooser';
 import ErrorBoundary from '../common/ErrorBoundary';
 import { drawerWidth } from '../Sidebar';
 import HeadlampButton from '../Sidebar/HeadlampButton';
+import { setWhetherSidebarOpen } from '../Sidebar/sidebarSlice';
 import { AppLogo } from './AppLogo';
 import Notifications from './Notifications';
 
@@ -60,9 +63,9 @@ export default function TopBar({}: TopBarProps) {
   const dispatch = useDispatch();
   const isMedium = useMediaQuery('(max-width:960px)');
 
-  const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
+  const isSidebarOpen = useTypedSelector(state => state.sidebar.isSidebarOpen);
   const isSidebarOpenUserSelected = useTypedSelector(
-    state => state.ui.sidebar.isSidebarOpenUserSelected
+    state => state.sidebar.isSidebarOpenUserSelected
   );
   const hideAppBar = useTypedSelector(state => state.ui.hideAppBar);
 
@@ -136,6 +139,7 @@ const useStyles = makeStyles((theme: Theme) =>
       '& > *': {
         color: theme.palette.text.primary,
       },
+      backgroundColor: theme.palette.background.default,
     },
     toolbar: {
       [theme.breakpoints.down('xs')]: {
@@ -225,7 +229,6 @@ export function PureTopBar({
   const { t } = useTranslation();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -352,6 +355,7 @@ export function PureTopBar({
               handleMenuClose();
               handleProfileMenuOpen(event);
             }}
+            size="medium"
           >
             <Icon icon="mdi:account" />
           </IconButton>
@@ -402,6 +406,7 @@ export function PureTopBar({
           aria-haspopup="true"
           onClick={handleProfileMenuOpen}
           color="inherit"
+          size="medium"
         >
           <Icon icon="mdi:account" />
         </IconButton>
@@ -416,22 +421,12 @@ export function PureTopBar({
         elevation={1}
         component="nav"
         aria-label={t('Appbar Tools')}
+        enableColorOnDark
       >
         <Toolbar className={classes.toolbar}>
-          {isMobile && <HeadlampButton open={openSideBar} onToggleOpen={onToggleOpen} />}
-
-          {!isSmall && (
+          {isSmall ? (
             <>
-              <AppLogo />
-              <div className={classes.grow} />
-              <AppBarActions
-                appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
-              />
-            </>
-          )}
-          {isSmall && (
-            <>
-              {!isMobile && <AppLogo />}
+              <HeadlampButton open={openSideBar} onToggleOpen={onToggleOpen} />
               <div className={classes.grow} />
               <IconButton
                 aria-label={t('show more')}
@@ -439,9 +434,18 @@ export function PureTopBar({
                 aria-haspopup="true"
                 onClick={handleMobileMenuOpen}
                 color="inherit"
+                size="medium"
               >
                 <Icon icon="mdi:more-vert" />
               </IconButton>
+            </>
+          ) : (
+            <>
+              <AppLogo />
+              <div className={classes.grow} />
+              <AppBarActions
+                appBarActions={processAppBarActions(allAppBarActions, appBarActionsProcessors)}
+              />
             </>
           )}
         </Toolbar>

@@ -1,7 +1,7 @@
-import { Switch } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import { Switch } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import makeStyles from '@mui/styles/makeStyles';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';

@@ -1,11 +1,12 @@
 import { Icon } from '@iconify/react';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useTheme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -33,7 +34,7 @@ const useVersionButtonStyle = makeStyles(theme => ({
 }));
 
 export default function VersionButton() {
-  const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const isSidebarOpen = useTypedSelector(state => state.sidebar.isSidebarOpen);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useVersionButtonStyle();
   const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
@@ -144,7 +145,7 @@ export default function VersionButton() {
         onClick={() => setOpen(true)}
         style={{ textTransform: 'none', paddingBottom: 0, paddingTop: 0 }}
       >
-        <Box display={sidebar.isSidebarOpen ? 'flex' : 'block'} alignItems="center">
+        <Box display={isSidebarOpen ? 'flex' : 'block'} alignItems="center">
           <Box>
             <Icon
               color={theme.palette.text.secondary}

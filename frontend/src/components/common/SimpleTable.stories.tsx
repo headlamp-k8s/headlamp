@@ -1,10 +1,9 @@
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography } from '@mui/material';
 import { configureStore } from '@reduxjs/toolkit';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import { useLocation } from 'react-router-dom';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { useFilterFunc } from '../../lib/util';
-import store from '../../redux/stores/store';
 import { TestContext, TestContextProps } from '../../test';
 import SectionFilterHeader from './SectionFilterHeader';
 import SimpleTable, { SimpleTableProps } from './SimpleTable';
@@ -33,7 +32,7 @@ function TestSimpleTable(props: SimpleTableProps) {
 }
 
 const Template: Story<SimpleTableProps> = args => (
-  <TestContext store={store}>
+  <TestContext>
     <TestSimpleTable {...args} />
   </TestContext>
 );

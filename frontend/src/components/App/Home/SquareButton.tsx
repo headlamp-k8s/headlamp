@@ -1,9 +1,10 @@
 import { Icon } from '@iconify/react';
-import { makeStyles, useTheme } from '@material-ui/core';
-import ButtonBase, { ButtonBaseProps } from '@material-ui/core/ButtonBase';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import { useTheme } from '@mui/material';
+import ButtonBase, { ButtonBaseProps } from '@mui/material/ButtonBase';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 
 export interface SquareButtonProps extends ButtonBaseProps {
   /** The icon to display for this button. */

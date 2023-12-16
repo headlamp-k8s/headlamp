@@ -1,29 +1,28 @@
 import { Icon } from '@iconify/react';
-import { Box, IconButton, Menu, MenuItem, Tooltip, Typography, useTheme } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Box, IconButton, Menu, MenuItem, Tooltip, Typography, useTheme } from '@mui/material';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Notification } from '../../../lib/notification';
-import { setUINotifications, updateUINotification } from '../../../redux/actions/actions';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { DateLabel, SectionBox, SectionFilterHeader, SimpleTable } from '../../common';
 import Empty from '../../common/EmptyContent';
+import { Notification, setNotifications, updateNotifications } from './notificationsSlice';
 
 export default function NotificationList() {
-  const notifications = useTypedSelector(state => state.ui.notifications);
-  const config = useTypedSelector(state => state.config);
+  const notifications = useTypedSelector(state => state.notifications.notifications);
+  const clusters = useTypedSelector(state => state.config.clusters);
   const { t } = useTranslation(['glossary', 'translation']);
   const dispatch = useDispatch();
   const theme = useTheme();
   const search = useTypedSelector(state => state.filter.search);
   const history = useHistory();
 
-  const allNotificationsAreDeleted = React.useMemo(() => {
+  const allNotificationsAreDeleted = useMemo(() => {
     return !notifications.find(notification => !notification.deleted);
   }, [notifications]);
 
-  const hasUnseenNotifications = React.useMemo(() => {
+  const hasUnseenNotifications = useMemo(() => {
     return !!notifications.find(notification => !notification.deleted && !notification.seen);
   }, [notifications]);
 
@@ -31,7 +30,7 @@ export default function NotificationList() {
     if (!notification) {
       return;
     }
-    dispatch(updateUINotification(notification));
+    dispatch(updateNotifications(notification));
   }
 
   function clearAllNotifications() {
@@ -40,7 +39,7 @@ export default function NotificationList() {
       updatedNotification.deleted = true;
       return updatedNotification;
     });
-    dispatch(setUINotifications(massagedNotifications));
+    dispatch(setNotifications(massagedNotifications));
   }
 
   function markAllAsRead() {
@@ -49,13 +48,13 @@ export default function NotificationList() {
       updatedNotification.seen = true;
       return updatedNotification;
     });
-    dispatch(setUINotifications(massagedNotifications));
+    dispatch(setNotifications(massagedNotifications));
   }
 
   function notificationItemClickHandler(notification: Notification) {
     notification.url && history.push(notification.url);
     notification.seen = true;
-    dispatch(updateUINotification(notification));
+    dispatch(updateNotifications(notification));
   }
 
   function NotificationActionMenu() {
@@ -71,7 +70,7 @@ export default function NotificationList() {
 
     return (
       <>
-        <IconButton>
+        <IconButton size="medium">
           <Icon icon="mdi:dots-vertical" onClick={handleClick} />
         </IconButton>
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
@@ -131,7 +130,7 @@ export default function NotificationList() {
               label: t('glossary|Cluster'),
               getter: (notification: Notification) => (
                 <Box display={'flex'} alignItems="center">
-                  {Object.entries(config?.clusters || {}).length > 1 && notification.cluster && (
+                  {Object.entries(clusters || {}).length > 1 && notification.cluster && (
                     <Box
                       border={1}
                       p={0.5}
@@ -158,6 +157,7 @@ export default function NotificationList() {
                     <IconButton
                       onClick={e => notificationSeenUnseenHandler(e, notification)}
                       aria-label={t(`translation|Mark as read`)}
+                      size="medium"
                     >
                       <Icon
                         icon="mdi:circle"

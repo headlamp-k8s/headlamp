@@ -1,4 +1,5 @@
-import { Box, Button, makeStyles } from '@material-ui/core';
+import { Box, Button } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';

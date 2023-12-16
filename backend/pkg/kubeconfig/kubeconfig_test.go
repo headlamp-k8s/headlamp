@@ -56,6 +56,22 @@ func TestLoadContextsFromKubeConfigFile(t *testing.T) {
 		_, err := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
 		require.Error(t, err)
 	})
+
+	t.Run("invalid_file without any context", func(t *testing.T) {
+		kubeConfigFile := "./test_data/invalid_kubeconfig_without_context"
+
+		_, err := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
+		require.Error(t, err)
+		require.Contains(t, err.Error(), "invalid configuration: context was not found")
+	})
+
+	t.Run("invalid_file client cert data value", func(t *testing.T) {
+		kubeConfigFile := "./test_data/invalid_kubeconfig"
+
+		_, err := kubeconfig.LoadContextsFromFile(kubeConfigFile, kubeconfig.KubeConfig)
+		require.Error(t, err)
+		require.Contains(t, err.Error(), "[invalid certificate authority data in kubeconfig]")
+	})
 }
 
 func TestContext(t *testing.T) {
@@ -71,6 +87,7 @@ func TestContext(t *testing.T) {
 
 	require.Equal(t, "minikube", testContext.Name)
 	require.NotNil(t, testContext.ClientConfig())
+	require.Equal(t, "default", testContext.KubeContext.Namespace)
 
 	restConf, err := testContext.RESTConfig()
 	require.NoError(t, err)

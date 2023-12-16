@@ -1,8 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
-import MuiTab from '@material-ui/core/Tab';
-import MuiTabs from '@material-ui/core/Tabs';
-import Typography, { TypographyProps } from '@material-ui/core/Typography';
+import MuiTab from '@mui/material/Tab';
+import MuiTabs from '@mui/material/Tabs';
+import Typography, { TypographyProps } from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
+import { useId } from '../../lib/util';
 
 const useStyle = makeStyles(() => ({
   tab: {
@@ -53,6 +54,8 @@ export default function Tabs(props: TabsProps) {
     [defaultIndex]
   );
 
+  const uniqueIdSuffix = useId('tabs-');
+
   return (
     <React.Fragment>
       <MuiTabs
@@ -72,8 +75,11 @@ export default function Tabs(props: TabsProps) {
             key={i}
             label={label}
             className={tabs?.length > 7 ? classes.tab : ''}
-            id={`full-width-tab-${i}-${ariaLabel.replace(' ', '')}`}
-            aria-controls={`full-width-tabpanel-${i}-${ariaLabel.replace(' ', '')}`}
+            id={`full-width-tab-${i}-${ariaLabel.replace(' ', '')}-${uniqueIdSuffix}`}
+            aria-controls={`full-width-tabpanel-${i}-${ariaLabel.replace(
+              ' ',
+              ''
+            )}-${uniqueIdSuffix}`}
           />
         ))}
       </MuiTabs>
@@ -82,8 +88,8 @@ export default function Tabs(props: TabsProps) {
           key={i}
           tabIndex={Number(tabIndex)}
           index={i}
-          id={`full-width-tabpanel-${i}-${ariaLabel.replace(' ', '')}`}
-          labeledBy={`full-width-tab-${i}-${ariaLabel.replace(' ', '')}`}
+          id={`full-width-tabpanel-${i}-${ariaLabel.replace(' ', '')}-${uniqueIdSuffix}`}
+          labeledBy={`full-width-tab-${i}-${ariaLabel.replace(' ', '')}-${uniqueIdSuffix}`}
         >
           {component}
         </TabPanel>

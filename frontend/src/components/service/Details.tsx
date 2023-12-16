@@ -1,4 +1,5 @@
 import { InlineIcon } from '@iconify/react';
+import { Box } from '@mui/material';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -100,8 +101,13 @@ export default function ServiceDetails() {
                       },
                       {
                         label: t('translation|Addresses'),
-                        getter: endpoint => endpoint.getAddressesText(),
-                        cellProps: { style: { width: '40%', maxWidth: '40%' } },
+                        getter: endpoint => (
+                          <Box display="flex" flexDirection="column">
+                            {endpoint.getAddresses().map((address: string) => (
+                              <ValueLabel>{address}</ValueLabel>
+                            ))}
+                          </Box>
+                        ),
                       },
                     ]}
                     reflectInURL="endpoints"

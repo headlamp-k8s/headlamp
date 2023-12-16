@@ -1,5 +1,5 @@
-import Box from '@material-ui/core/Box';
-import Typography, { TypographyProps } from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 import React from 'react';
 
 export default function Empty(props: React.PropsWithChildren<{ color: TypographyProps['color'] }>) {

@@ -1,8 +1,8 @@
-import { Box } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import { Variant } from '@material-ui/core/styles/createTypography';
-import Typography from '@material-ui/core/Typography';
+import { Box } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import { Variant } from '@mui/material/styles/createTypography';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 
 type HeaderStyle = 'main' | 'subsection' | 'normal' | 'label';

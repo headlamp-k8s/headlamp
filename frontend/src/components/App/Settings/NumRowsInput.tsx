@@ -8,17 +8,17 @@ import {
   ListItemText,
   MenuItem,
   Select,
+  SelectChangeEvent,
   TextField,
-} from '@material-ui/core';
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+} from '@mui/material';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import helpers from '../../../helpers';
-import { setAppSettings } from '../../../redux/configSlice';
-import { defaultTableRowsPerPageOptions } from '../../../redux/configSlice';
+import { defaultTableRowsPerPageOptions, setAppSettings } from '../../../redux/configSlice';
 
 export default function NumRowsInput(props: { defaultValue: number[] }) {
-  const { t } = useTranslation(['translation']);
+  const { t } = useTranslation(['frequent', 'settings']);
   const { defaultValue } = props;
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [options, setOptions] = useState(defaultValue);
@@ -58,12 +58,7 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
     }
   }, [selectedValue]);
 
-  const handleChange = (
-    event: ChangeEvent<{
-      name?: string | undefined;
-      value: unknown;
-    }>
-  ) => {
+  const handleChange = (event: SelectChangeEvent<number>) => {
     const val = parseInt(event.target.value as string);
     setSelectedValue(val);
   };
@@ -130,6 +125,7 @@ export default function NumRowsInput(props: { defaultValue: number[] }) {
               setOptions(defaultTableRowsPerPageOptions);
               setSelectedValue(defaultTableRowsPerPageOptions[0]);
             }}
+            size="medium"
           >
             <Icon icon="mdi:delete" />
           </IconButton>

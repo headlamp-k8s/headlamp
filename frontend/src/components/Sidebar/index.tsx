@@ -1,5 +1,7 @@
 export * from './Sidebar';
 import Sidebar from './Sidebar';
-import { SidebarEntryProps, SidebarItemProps } from './SidebarItem';
+import { SidebarItemProps } from './SidebarItem';
+import { SidebarEntry } from './sidebarSlice';
 export default Sidebar;
-export type { SidebarEntryProps, SidebarItemProps };
+export type { SidebarEntry as SidebarEntryProps, SidebarItemProps };
+export type { SidebarEntry };

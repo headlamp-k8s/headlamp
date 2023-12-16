@@ -9,16 +9,23 @@ import {
   Time,
 } from './cluster';
 
+export interface KubeVolume {
+  name: string;
+  [volumeName: string]: any;
+}
+
 export interface KubePodSpec {
   containers: KubeContainer[];
   nodeName: string;
   nodeSelector?: {
     [key: string]: string;
   };
-  initContainers?: any[];
+  initContainers?: KubeContainer[];
+  ephemeralContainers?: KubeContainer[];
   readinessGates?: {
     conditionType: string;
   }[];
+  volumes?: KubeVolume[];
 }
 
 export interface KubePod extends KubeObjectInterface {
@@ -27,6 +34,7 @@ export interface KubePod extends KubeObjectInterface {
     conditions: KubeCondition[];
     containerStatuses: KubeContainerStatus[];
     initContainerStatuses?: KubeContainerStatus[];
+    ephemeralContainerStatuses?: KubeContainerStatus[];
     hostIP: string;
     message?: string;
     phase: string;

@@ -1,19 +1,20 @@
 import '../../../i18n/config';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import { makeStyles } from '@material-ui/core/styles';
-import Switch from '@material-ui/core/Switch';
-import Typography from '@material-ui/core/Typography';
 import Editor, { loader } from '@monaco-editor/react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import Switch from '@mui/material/Switch';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 import * as yaml from 'js-yaml';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
 import { getThemeName } from '../../../lib/themes';
+import { useId } from '../../../lib/util';
 import ConfirmButton from '../ConfirmButton';
 import { Dialog, DialogProps } from '../Dialog';
 import Loader from '../Loader';
@@ -314,6 +315,8 @@ export default function EditorDialog(props: EditorDialogProps) {
       : t('translation|Edit: {{ itemName }}', { itemName });
   }
 
+  const dialogTitleId = useId('editor-dialog-title-');
+
   return (
     <Dialog
       title={dialogTitle}
@@ -324,9 +327,9 @@ export default function EditorDialog(props: EditorDialogProps) {
       withFullScreen
       onClose={onClose}
       {...other}
-      aria-labelledby="editor-dialog-title"
+      aria-labelledby={dialogTitleId}
       titleProps={{
-        id: 'editor-dialog-title',
+        id: dialogTitleId,
       }}
     >
       {!item ? (

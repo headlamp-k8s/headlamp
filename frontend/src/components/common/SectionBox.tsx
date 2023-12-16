@@ -1,5 +1,6 @@
-import { makeStyles, Theme } from '@material-ui/core';
-import Box, { BoxProps } from '@material-ui/core/Box';
+import { Theme } from '@mui/material';
+import Box, { BoxProps } from '@mui/material/Box';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import BackLink, { BackLinkProps } from './BackLink';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';

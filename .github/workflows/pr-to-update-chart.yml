@@ -33,6 +33,8 @@ jobs:
           echo "LATEST_HEADLAMP_TAG=$latestTag" >> $GITHUB_ENV
           echo $latestTag
       - name: Update Headlamp version in charts
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [ -z $user ]; then
             user=joaquimrocha
@@ -53,13 +55,15 @@ jobs:
           # Move to new branch
           git checkout -b $BRANCH
           sed -i "s/^version:\ .*/version: $CURRENT_CHART_VERSION/g" ./charts/headlamp/Chart.yaml
-          sed -i "s/^appVersion:\ .*/appVersion: $LATEST_HEADLAMP_TAG/g" ./charts/headlamp/Chart.yaml
+          # Replace the app version by the headlamp tag but discarding the first char (v)
+          sed -i "s/^appVersion:\ .*/appVersion: ${LATEST_HEADLAMP_TAG:1}/g" ./charts/headlamp/Chart.yaml
           git diff
           git status
           git add ./charts/headlamp/Chart.yaml
           git commit --signoff -m "charts: Bump Headlamp version to $LATEST_HEADLAMP_TAG"
           git status
           git log -1
+          git push origin $BRANCH -f
           gh pr create \
           --title "chart: Bump Headlamp version to $LATEST_HEADLAMP_TAG" \
           --base "main"  \

@@ -71,6 +71,8 @@ import StorageClassDetails from '../components/storage/ClassDetails';
 import StorageClassList from '../components/storage/ClassList';
 import PersistentVolumeDetails from '../components/storage/VolumeDetails';
 import PersistentVolumeList from '../components/storage/VolumeList';
+import VpaDetails from '../components/verticalPodAutoscaler/Details';
+import VpaList from '../components/verticalPodAutoscaler/List';
 import MutatingWebhookConfigurationDetails from '../components/webhookconfiguration/MutatingWebhookConfigDetails';
 import MutatingWebhookConfigList from '../components/webhookconfiguration/MutatingWebhookConfigList';
 import ValidatingWebhookConfigurationDetails from '../components/webhookconfiguration/ValidatingWebhookConfigDetails';
@@ -565,6 +567,20 @@ const defaultRoutes: {
     sidebar: 'validatingWebhookConfigurations',
     component: () => <ValidatingWebhookConfigurationDetails />,
   },
+  verticalPodAutoscalers: {
+    path: '/verticalpodautoscalers',
+    exact: true,
+    name: 'Vertical Pod Autoscalers',
+    sidebar: 'verticalPodAutoscalers',
+    component: () => <VpaList />,
+  },
+  verticalPodAutoscaler: {
+    path: '/verticalpodautoscalers/:namespace/:name',
+    exact: true,
+    name: 'Vertical Pod Autoscaler',
+    sidebar: 'verticalPodAutoscalers',
+    component: () => <VpaDetails />,
+  },
   token: {
     path: '/token',
     exact: true,
@@ -774,7 +790,7 @@ export interface RouteURLProps {
 }
 
 export function createRouteURL(routeName: string, params: RouteURLProps = {}) {
-  const storeRoutes = store.getState().ui.routes;
+  const storeRoutes = store.getState().routes.routes;
   const route = (storeRoutes && storeRoutes[routeName]) || getRoute(routeName);
 
   if (!route) {

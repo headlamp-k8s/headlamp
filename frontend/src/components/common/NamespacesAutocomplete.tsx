@@ -1,10 +1,10 @@
 import { Icon } from '@iconify/react';
-import Box from '@material-ui/core/Box';
-import Checkbox from '@material-ui/core/Checkbox';
-import { useTheme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
+import Checkbox from '@mui/material/Checkbox';
+import { useTheme } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -57,8 +57,8 @@ export function PureNamespacesAutocomplete({
       // We reverse the namespaces so the last chosen appear as the first in the label. This
       // is useful since the label is ellipsized and this we get to see it change.
       value={[...filter.namespaces.values()].reverse()}
-      renderOption={(option, { selected }) => (
-        <React.Fragment>
+      renderOption={(props, option, { selected }) => (
+        <li {...props}>
           <Checkbox
             icon={<Icon icon="mdi:checkbox-blank-outline" />}
             checkedIcon={<Icon icon="mdi:check-box-outline" />}
@@ -68,7 +68,7 @@ export function PureNamespacesAutocomplete({
             checked={selected}
           />
           {option}
-        </React.Fragment>
+        </li>
       )}
       renderTags={(tags: string[]) => {
         if (tags.length === 0) {

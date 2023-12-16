@@ -1,6 +1,6 @@
 import { ResourceClasses } from '.';
 import { apiFactory, apiFactoryWithNamespace } from './apiProxy';
-import { KubeObjectInterface, makeKubeObject } from './cluster';
+import { KubeObjectClass, KubeObjectInterface, makeKubeObject } from './cluster';
 
 export interface KubeCRD extends KubeObjectInterface {
   spec: {
@@ -75,23 +75,66 @@ class CustomResourceDefinition extends makeKubeObject<KubeCRD>('crd') {
   get isNamespaced(): boolean {
     return this.spec.scope === 'Namespaced';
   }
+
+  makeCRClass(): KubeObjectClass {
+    const apiInfo: CRClassArgs['apiInfo'] = (this.jsonData as KubeCRD).spec.versions.map(
+      versionInfo => ({ group: this.spec.group, version: versionInfo.name })
+    );
+
+    return makeCustomResourceClass({
+      apiInfo,
+      isNamespaced: this.spec.scope === 'Namespaced',
+      singularName: this.spec.names.singular,
+      pluralName: this.spec.names.plural,
+    });
+  }
 }
 
+export interface CRClassArgs {
+  apiInfo: {
+    group: string;
+    version: string;
+  }[];
+  pluralName: string;
+  singularName: string;
+  isNamespaced: boolean;
+}
+
+/** @deprecated Use the version of the function that receives an object as its argument. */
 export function makeCustomResourceClass(
   args: [group: string, version: string, pluralName: string][],
   isNamespaced: boolean
-) {
+): ReturnType<typeof makeKubeObject>;
+export function makeCustomResourceClass(args: CRClassArgs): ReturnType<typeof makeKubeObject>;
+export function makeCustomResourceClass(
+  args: [group: string, version: string, pluralName: string][] | CRClassArgs,
+  isNamespaced?: boolean
+): ReturnType<typeof makeKubeObject> {
+  let apiInfoArgs: [group: string, version: string, pluralName: string][] = [];
+
+  if (Array.isArray(args)) {
+    apiInfoArgs = args;
+  } else {
+    apiInfoArgs = args.apiInfo.map(info => [info.group, info.version, args.pluralName]);
+  }
+
   // Used for tests
   if (process.env.UNDER_TEST === 'true') {
-    const knownClass = ResourceClasses[args[0][2]];
+    const knownClass = ResourceClasses[apiInfoArgs[0][2]];
     if (!!knownClass) {
       return knownClass;
     }
   }
 
-  const apiFunc = !!isNamespaced ? apiFactoryWithNamespace : apiFactory;
-  return class CRClass extends makeKubeObject<KubeCRD>('crd') {
-    static apiEndpoint = apiFunc(...args);
+  const crClassArgs = args as CRClassArgs;
+  const objArgs = {
+    isNamespaced: !!isNamespaced || crClassArgs.isNamespaced,
+    singleName: crClassArgs.singularName || 'crd',
+  };
+
+  const apiFunc = !!objArgs.isNamespaced ? apiFactoryWithNamespace : apiFactory;
+  return class CRClass extends makeKubeObject(objArgs.singleName) {
+    static apiEndpoint = apiFunc(...apiInfoArgs);
   };
 }
 

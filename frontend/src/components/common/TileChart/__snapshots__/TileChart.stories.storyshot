@@ -3,37 +3,37 @@
 exports[`Storyshots Charts/TileChart With Progress 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiBox-root MuiBox-root makeStyles-tileBox"
+      class="makeStyles-tileBox MuiBox-root css-k008qs"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiBox-root css-1sl8dhm"
       >
         <div
-          class="MuiBox-root MuiBox-root"
+          class="MuiBox-root css-0"
         >
           <p
-            class="MuiTypography-root makeStyles-title MuiTypography-body1 MuiTypography-gutterBottom"
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
           >
             My chart
           </p>
           
         </div>
         <p
-          class="MuiTypography-root makeStyles-legend MuiTypography-body1 MuiTypography-gutterBottom"
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
         >
           Progress so far
         </p>
       </div>
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiBox-root css-0"
       >
         <div
           aria-busy="false"
           aria-live="polite"
-          class="MuiBox-root MuiBox-root"
+          class="MuiBox-root css-2esbmj"
         >
           
           <div
@@ -53,7 +53,7 @@ exports[`Storyshots Charts/TileChart With Progress 1`] = `
               <desc />
               <defs>
                 <clippath
-                  id="recharts9-clip"
+                  id="recharts15-clip"
                 >
                   <rect
                     height="102"
@@ -107,36 +107,36 @@ exports[`Storyshots Charts/TileChart With Progress 1`] = `
 exports[`Storyshots Charts/TileChart Without Progress 1`] = `
 <div>
   <div
-    class="MuiPaper-root makeStyles-paper MuiPaper-elevation1 MuiPaper-rounded"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
   >
     <div
-      class="MuiBox-root MuiBox-root makeStyles-tileBox"
+      class="makeStyles-tileBox MuiBox-root css-k008qs"
     >
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiBox-root css-1sl8dhm"
       >
         <div
-          class="MuiBox-root MuiBox-root"
+          class="MuiBox-root css-0"
         >
           <p
-            class="MuiTypography-root makeStyles-title MuiTypography-body1 MuiTypography-gutterBottom"
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
           >
             My chart
           </p>
           <div
-            class="MuiContainer-root makeStyles-container MuiContainer-maxWidthLg"
+            class="MuiContainer-root MuiContainer-maxWidthLg makeStyles-container css-cnms5y-MuiContainer-root"
           >
             <span />
           </div>
         </div>
         <p
-          class="MuiTypography-root makeStyles-legend MuiTypography-body1 MuiTypography-gutterBottom"
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
         >
           Progress so far
         </p>
       </div>
       <div
-        class="MuiBox-root MuiBox-root"
+        class="MuiBox-root css-0"
       />
     </div>
   </div>

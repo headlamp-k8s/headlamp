@@ -1,5 +1,6 @@
 import { Icon } from '@iconify/react';
-import { Box, Button, makeStyles, Snackbar } from '@material-ui/core';
+import { Box, Button, Snackbar } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -22,6 +23,60 @@ function UpdatePopup(props: {
   const [show, setShow] = React.useState(true);
   const { releaseDownloadURL, fetchingRelease, releaseFetchFailed, skipUpdateHandler } = props;
   const { t } = useTranslation();
+
+  if (fetchingRelease && !releaseDownloadURL) {
+    return (
+      <Snackbar
+        className={classes.root}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        autoHideDuration={5000}
+        message={t('translation|Fetching release information…')}
+        ContentProps={{
+          'aria-describedby': 'updatePopup',
+        }}
+        open={fetchingRelease}
+        action={
+          <React.Fragment>
+            <Button
+              style={{
+                color: 'rgb(255, 242, 0)',
+              }}
+              onClick={() => {
+                skipUpdateHandler();
+              }}
+            >
+              {t('translation|Skip')}
+            </Button>
+          </React.Fragment>
+        }
+      />
+    );
+  }
+
+  if (releaseFetchFailed && !releaseDownloadURL) {
+    return (
+      <Snackbar
+        className={classes.root}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={releaseFetchFailed}
+        message={t('translation|Failed to fetch release information')}
+        ContentProps={{
+          'aria-describedby': 'updatePopup',
+        }}
+        autoHideDuration={6000}
+      />
+    );
+  }
+
+  if (!releaseDownloadURL) {
+    return null;
+  }
 
   if (fetchingRelease && !releaseDownloadURL) {
     return (

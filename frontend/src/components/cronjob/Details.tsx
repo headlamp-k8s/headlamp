@@ -8,7 +8,7 @@ import {
   DialogTitle,
   Input,
   InputLabel,
-} from '@material-ui/core';
+} from '@mui/material';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,11 +18,10 @@ import { apply } from '../../lib/k8s/apiProxy';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import CronJob from '../../lib/k8s/cronJob';
 import Job from '../../lib/k8s/job';
-import { clusterAction } from '../../redux/actions/actions';
-import { ActionButton, ObjectEventList } from '../common';
-import { MainInfoSection } from '../common/Resource';
+import { clusterAction } from '../../redux/clusterActionSlice';
+import { ActionButton } from '../common';
+import { DetailsGrid } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
-import DetailsViewSection from '../DetailsViewSection';
 import { JobsListRenderer } from '../job/List';
 import { getLastScheduleTime, getSchedule } from './List';
 
@@ -54,6 +53,22 @@ function SpawnJobDialog(props: {
   job.metadata.namespace = namespace;
   job.apiVersion = 'batch/v1';
   job.metadata.name = jobName;
+  job.metadata.annotations = {
+    ...job.metadata.annotations,
+    'cronjob.kubernetes.io/instantiate': 'manual',
+  };
+  if (!!cronJob.jsonData) {
+    job.metadata.ownerReferences = [
+      {
+        apiVersion: cronJob.jsonData.apiVersion,
+        blockOwnerDeletion: true,
+        controller: true,
+        kind: cronJob.jsonData.kind,
+        name: cronJob.metadata.name,
+        uid: cronJob.metadata.uid,
+      },
+    ];
+  }
 
   function handleClose() {
     setOpenJobDialog(false);
@@ -122,7 +137,7 @@ export default function CronJobDetails() {
   const { t, i18n } = useTranslation('glossary');
 
   const [jobs, jobsError] = Job.useList();
-  const [cronJob, cronJobError] = CronJob.useGet(name, namespace);
+  const [cronJob, setCronJob] = useState<CronJob | null>(null);
   const [isCronSuspended, setIsCronSuspended] = useState(false);
   const [isCheckingCronSuspendStatus, setIsCheckingCronSuspendStatus] = useState(true);
   const [openJobDialog, setOpenJobDialog] = useState(false);
@@ -165,11 +180,14 @@ export default function CronJobDetails() {
   }
 
   function PauseResumeAction() {
+    if (!cronJob) {
+      return null;
+    }
     return (
       <ActionButton
         description={isCronSuspended ? t('translation|Resume') : t('translation|Suspend')}
         onClick={() => {
-          handleCron(!isCronSuspended);
+          handleCron(cronJob, !isCronSuspended);
         }}
         icon={isCronSuspended ? 'mdi:play-circle' : 'mdi:pause-circle'}
         iconButtonProps={{
@@ -179,7 +197,7 @@ export default function CronJobDetails() {
     );
   }
 
-  function handleCron(suspend: boolean) {
+  function handleCron(cronJob: CronJob, suspend: boolean) {
     const clonedCronJob = _.cloneDeep(cronJob);
     clonedCronJob.spec.suspend = suspend;
     setIsCheckingCronSuspendStatus(true);
@@ -248,36 +266,39 @@ export default function CronJobDetails() {
   );
 
   return (
-    <>
-      <MainInfoSection
-        resource={cronJob}
-        actions={actions}
-        error={CronJob.getErrorMessage(cronJobError)}
-        extraInfo={item =>
-          item && [
-            {
-              name: t('Schedule'),
-              value: getSchedule(item, i18n.language),
-            },
-            {
-              name: t('translation|Suspend'),
-              value: item.spec.suspend.toString(),
-            },
-            {
-              name: t('Starting deadline'),
-              value: `${item.spec.startingDeadlineSeconds}s`,
-              hide: !item.spec.startingDeadlineSeconds,
-            },
-            {
-              name: t('Last Schedule'),
-              value: getLastScheduleTime(item),
-            },
-          ]
-        }
-      />
-      {cronJob && <JobsListRenderer jobs={ownedJobs} error={CronJob.getErrorMessage(jobsError)} />}
-      <DetailsViewSection resource={cronJob} />
-      {cronJob && <ObjectEventList object={cronJob} />}
-    </>
+    <DetailsGrid
+      resourceType={CronJob}
+      name={name}
+      namespace={namespace}
+      onResourceUpdate={(cronJob: CronJob) => setCronJob(cronJob)}
+      withEvents
+      actions={actions}
+      extraInfo={item =>
+        item && [
+          {
+            name: t('Schedule'),
+            value: getSchedule(item, i18n.language),
+          },
+          {
+            name: t('translation|Suspend'),
+            value: item.spec.suspend.toString(),
+          },
+          {
+            name: t('Starting deadline'),
+            value: `${item.spec.startingDeadlineSeconds}s`,
+            hide: !item.spec.startingDeadlineSeconds,
+          },
+          {
+            name: t('Last Schedule'),
+            value: getLastScheduleTime(item),
+          },
+        ]
+      }
+      extraSections={cronJob =>
+        cronJob && [
+          <JobsListRenderer jobs={ownedJobs} error={CronJob.getErrorMessage(jobsError)} />,
+        ]
+      }
+    />
   );
 }

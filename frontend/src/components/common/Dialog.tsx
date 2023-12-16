@@ -1,8 +1,8 @@
-import Box from '@material-ui/core/Box';
-import MuiDialog, { DialogProps as MuiDialogProps } from '@material-ui/core/Dialog';
-import MuiDialogTitle, { DialogTitleProps } from '@material-ui/core/DialogTitle';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import MuiDialog, { DialogProps as MuiDialogProps } from '@mui/material/Dialog';
+import MuiDialogTitle, { DialogTitleProps } from '@mui/material/DialogTitle';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ActionButton from './ActionButton';
@@ -16,6 +16,7 @@ export interface OurDialogTitleProps extends DialogTitleProps {
   /** true if you want the title focused in the dialog */
   focusTitle?: boolean;
   buttons?: React.ReactNode[];
+  disableTypography?: boolean;
 }
 
 /**
@@ -27,7 +28,7 @@ export interface OurDialogTitleProps extends DialogTitleProps {
  * reading can begin.
  */
 export function DialogTitle(props: OurDialogTitleProps) {
-  const { children, focusTitle, buttons, disableTypography, ...other } = props;
+  const { children, focusTitle, buttons, disableTypography = false, ...other } = props;
 
   const focusedRef = React.useCallback(node => {
     if (node !== null) {
@@ -39,7 +40,7 @@ export function DialogTitle(props: OurDialogTitleProps) {
   }, []);
 
   return (
-    <MuiDialogTitle style={{ display: 'flex' }} disableTypography {...other}>
+    <MuiDialogTitle style={{ display: 'flex' }} {...other}>
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
           {disableTypography ? (

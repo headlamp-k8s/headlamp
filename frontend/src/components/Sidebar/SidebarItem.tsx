@@ -1,15 +1,14 @@
-import { IconProps } from '@iconify/react';
-import Collapse from '@material-ui/core/Collapse';
-import List from '@material-ui/core/List';
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
-import { makeStyles } from '@material-ui/core/styles';
+import Collapse from '@mui/material/Collapse';
+import List from '@mui/material/List';
+import ListItem, { ListItemProps } from '@mui/material/ListItem';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React from 'react';
 import { generatePath } from 'react-router';
 import { createRouteURL, getRoute } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 import ListItemLink from './ListItemLink';
-import { DefaultSidebars } from './Sidebar';
+import { SidebarEntry } from './sidebarSlice';
 
 const useItemStyle = makeStyles(theme => ({
   link: {
@@ -142,48 +141,9 @@ const useItemStyle = makeStyles(theme => ({
 }));
 
 /**
- * Represents an entry in the sidebar menu.
- */
-export interface SidebarEntryProps {
-  /**
-   * Name of this SidebarItem.
-   */
-  name: string;
-  /**
-   * Text to display under the name.
-   */
-  subtitle?: string;
-  /**
-   * Label to display.
-   */
-  label: string;
-  /**
-   * Name of the parent SidebarEntry.
-   */
-  parent?: string | null;
-  /**
-   * URL to go to when this item is followed.
-   */
-  url?: string;
-  /**
-   * Should URL have the cluster prefix? (default=true)
-   */
-  useClusterURL?: boolean;
-  /**
-   * An iconify string or icon object that will be used for the sidebar's icon
-   *
-   * @see https://icon-sets.iconify.design/mdi/ for icons.
-   */
-  icon?: IconProps['icon'];
-  /** The sidebar to display this item in. If not specified, it will be displayed in the default sidebar.
-   */
-  sidebar?: DefaultSidebars | string;
-}
-
-/**
  * Adds onto SidebarEntryProps for the display of the sidebars.
  */
-export interface SidebarItemProps extends ListItemProps, SidebarEntryProps {
+export interface SidebarItemProps extends ListItemProps, SidebarEntry {
   /** The route name which is selected. */
   selectedName?: string | null;
   /** The navigation is a child. */

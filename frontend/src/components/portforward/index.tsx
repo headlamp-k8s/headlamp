@@ -1,10 +1,11 @@
 import { Icon, InlineIcon } from '@iconify/react';
-import { Box, IconButton, Menu, MenuItem } from '@material-ui/core';
-import MuiLink from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import MuiLink from '@mui/material/Link';
+import makeStyles from '@mui/styles/makeStyles';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import helpers from '../../helpers';
 import { listPortForward, startPortForward, stopOrDeletePortForward } from '../../lib/k8s/apiProxy';
 import { getCluster } from '../../lib/util';
 import { Link, Loader, SectionBox, SimpleTable, StatusLabel } from '../common';
@@ -117,6 +118,11 @@ export default function PortForwardingList() {
     const { id, namespace, cluster, port, targetPort, pod, service, serviceNamespace } =
       portForwardInAction;
 
+    let address = 'localhost';
+    if (helpers.isDockerDesktop()) {
+      address = '0.0.0.0';
+    }
+
     portForwardInAction.loading = true;
     setPortForwardInAction(portForwardInAction);
     if (option === PortForwardAction.Start) {
@@ -129,6 +135,7 @@ export default function PortForwardingList() {
         service,
         serviceNamespace,
         port,
+        address,
         id
       ).then(() => {
         portForwardInAction.loading = false;
@@ -263,6 +270,7 @@ export default function PortForwardingList() {
                   <IconButton
                     aria-label={t('translation|More')}
                     onClick={e => handleClick(e, portforward)}
+                    size="medium"
                   >
                     <Icon icon={'mdi:dots-vertical'} />
                   </IconButton>

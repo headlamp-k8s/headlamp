@@ -570,7 +570,24 @@ function multipleApiFactory(
     put: repeatFactoryMethod(apiEndpoints, 'put'),
     delete: repeatFactoryMethod(apiEndpoints, 'delete'),
     isNamespaced: false,
+    apiInfo: args.map(apiArgs => ({
+      group: apiArgs[0],
+      version: apiArgs[1],
+      resource: apiArgs[2],
+    })),
   };
+}
+
+/**
+ * Describes the API for a certain resource.
+ */
+export interface ApiInfo {
+  /** The API group. */
+  group: string;
+  /** The API version. */
+  version: string;
+  /** The resource name. */
+  resource: string;
 }
 
 // @todo: singleApiFactory should have a return type rather than just what it returns.
@@ -608,6 +625,7 @@ function singleApiFactory(group: string, version: string, resource: string) {
     delete: (name: string, queryParams?: QueryParameters) =>
       remove(`${url}/${name}` + asQuery(queryParams)),
     isNamespaced: false,
+    apiInfo: [{ group, version, resource }],
   };
 }
 
@@ -647,6 +665,11 @@ function multipleApiFactoryWithNamespace(
     put: repeatFactoryMethod(apiEndpoints, 'put'),
     delete: repeatFactoryMethod(apiEndpoints, 'delete'),
     isNamespaced: true,
+    apiInfo: args.map(apiArgs => ({
+      group: apiArgs[0],
+      version: apiArgs[1],
+      resource: apiArgs[2],
+    })),
   };
 }
 
@@ -699,6 +722,7 @@ function simpleApiFactoryWithNamespace(
     delete: (namespace: string, name: string, queryParams?: QueryParameters) =>
       remove(`${url(namespace)}/${name}` + asQuery(queryParams)),
     isNamespaced: true,
+    apiInfo: [{ group, version, resource }],
   };
 
   if (includeScale) {
@@ -1264,8 +1288,7 @@ export async function apply(body: KubeObjectInterface): Promise<JSON> {
 
     const cluster = getCluster();
     if (!!cluster) {
-      const clusterSettings = helpers.loadClusterSettings(cluster);
-      defaultNamespace = clusterSettings?.defaultNamespace || defaultNamespace;
+      defaultNamespace = getClusterDefaultNamespace(cluster) || 'default';
     }
 
     bodyToApply.metadata.namespace = defaultNamespace;
@@ -1308,7 +1331,7 @@ export async function metrics(
   onMetrics: (arg: KubeMetrics[]) => void,
   onError?: (err: ApiError) => void
 ) {
-  const handel = setInterval(getMetrics, 10000);
+  const handle = setInterval(getMetrics, 10000);
 
   async function getMetrics() {
     try {
@@ -1326,7 +1349,7 @@ export async function metrics(
   }
 
   function cancel() {
-    clearInterval(handel);
+    clearInterval(handle);
   }
 
   getMetrics();
@@ -1395,6 +1418,7 @@ export function startPortForward(
   service: string,
   serviceNamespace: string,
   port?: string,
+  address: string = '',
   id: string = ''
 ) {
   return fetch(`${helpers.getAppUrl()}portforward`, {
@@ -1411,6 +1435,7 @@ export function startPortForward(
       targetPort: containerPort.toString(),
       serviceNamespace,
       id: id,
+      address,
       port,
     }),
   }).then((response: Response) => {
@@ -1537,4 +1562,35 @@ export function drainNodeStatus(cluster: string, nodeName: string): Promise<Drai
       return data;
     });
   });
+}
+
+/** Gets the default namespace for the given cluster.
+ * If the checkSettings parameter is true (default), it will check the cluster settings first.
+ * Otherwise it will just check the cluster config. This means that if one needs the default
+ * namespace that may come from the kubeconfig, call this function with the checkSettings parameter as false.
+ *
+ * @param cluster The cluster name.
+ * @param checkSettings Whether to check the settings for the default namespace (otherwise it just checks the cluster config). Defaults to true.
+ *
+ * @returns The default namespace for the given cluster.
+ */
+function getClusterDefaultNamespace(cluster: string, checkSettings?: boolean): string {
+  const includeSettings = checkSettings ?? true;
+  let defaultNamespace = '';
+
+  if (!!cluster) {
+    if (includeSettings) {
+      const clusterSettings = helpers.loadClusterSettings(cluster);
+      defaultNamespace = clusterSettings?.defaultNamespace || '';
+    }
+
+    if (!defaultNamespace) {
+      const state = store.getState();
+      const clusterDefaultNs: string =
+        state.config?.clusters?.[cluster]?.meta_data?.namespace || '';
+      defaultNamespace = clusterDefaultNs;
+    }
+  }
+
+  return defaultNamespace;
 }

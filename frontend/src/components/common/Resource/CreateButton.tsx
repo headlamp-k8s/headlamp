@@ -1,12 +1,12 @@
 import { InlineIcon } from '@iconify/react';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
-import { clusterAction } from '../../../redux/actions/actions';
+import { clusterAction } from '../../../redux/clusterActionSlice';
 import ActionButton from '../ActionButton';
 import EditorDialog from './EditorDialog';
 

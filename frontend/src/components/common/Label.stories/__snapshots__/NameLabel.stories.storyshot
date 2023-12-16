@@ -3,7 +3,7 @@
 exports[`Storyshots Label/NameLabel Name Label 1`] = `
 <div>
   <span
-    class="MuiTypography-root makeStyles-nameLabel MuiTypography-body1"
+    class="MuiTypography-root MuiTypography-body1 makeStyles-nameLabel css-1ezega9-MuiTypography-root"
   >
     A name label
   </span>

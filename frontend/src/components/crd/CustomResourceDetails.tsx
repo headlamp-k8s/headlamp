@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { ResourceClasses } from '../../lib/k8s';
 import { ApiError } from '../../lib/k8s/apiProxy';
-import CustomResourceDefinition, { KubeCRD, makeCustomResourceClass } from '../../lib/k8s/crd';
+import CustomResourceDefinition, { KubeCRD } from '../../lib/k8s/crd';
 import { localeDate } from '../../lib/util';
 import { HoverInfoLabel, Link, NameValueTableRow, ObjectEventList, SectionBox } from '../common';
 import Empty from '../common/EmptyContent';
@@ -114,12 +114,10 @@ function CustomResourceDetailsRenderer(props: CustomResourceDetailsRendererProps
 
   const { t } = useTranslation('glossary');
 
-  let CRClass: ReturnType<typeof makeCustomResourceClass> | null = null;
+  const CRClass = React.useMemo(() => {
+    return crd.makeCRClass();
+  }, [crd]);
 
-  const versions: [string, string, string][] = (crd.jsonData as KubeCRD).spec.versions.map(
-    versionInfo => [crd.spec.group, versionInfo.name, crd.spec.names.plural]
-  );
-  CRClass = makeCustomResourceClass(versions, !!namespace);
   CRClass.useApiGet(setItem, crName, namespace, setError);
 
   const apiVersion = item?.jsonData.apiVersion?.split('/')[1] || '';

@@ -1,7 +1,8 @@
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import {
   Bar,

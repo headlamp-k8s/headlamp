@@ -1,13 +1,19 @@
 import { registerResourceTableColumnsProcessor } from '@kinvolk/headlamp-plugin/lib';
 import { ActionButton } from '@kinvolk/headlamp-plugin/lib/CommonComponents';
 import Pod from '@kinvolk/headlamp-plugin/lib/K8s/pod';
-import { Menu, MenuItem, Typography } from '@material-ui/core';
+import { Menu, MenuItem, Typography } from '@mui/material';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-// Will show a 3-dot menu with two options: Details and Delete.
-function ContextMenu(props: { pod: Pod }) {
-  const { pod } = props;
+export interface ContextMenuProps {
+  detailsLink: string;
+}
+
+/**
+ * Will show a 3-dot menu with two options: Details and Delete.
+ */
+export function ContextMenu(props: ContextMenuProps) {
+  const { detailsLink } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const history = useHistory();
 
@@ -29,7 +35,7 @@ function ContextMenu(props: { pod: Pod }) {
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
-            history.push(pod.getDetailsLink());
+            history.push(detailsLink);
           }}
         >
           <Typography>Details</Typography>
@@ -66,7 +72,7 @@ registerResourceTableColumnsProcessor(function setupContextMenuForPodsList({ id,
     columns.push({
       label: '',
       getter: (pod: Pod) => {
-        return <ContextMenu pod={pod} />;
+        return <ContextMenu detailsLink={pod.getDetailsLink()} />;
       },
     });
   }

@@ -1,21 +1,24 @@
 import { Icon } from '@iconify/react';
-import { InputLabel, Paper, Theme } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Divider from '@material-ui/core/Divider';
-import Grid, { GridProps, GridSize } from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Input, { InputProps } from '@material-ui/core/Input';
-import { TextFieldProps } from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme } from '@material-ui/styles';
 import Editor from '@monaco-editor/react';
+import { InputLabel, Theme } from '@mui/material';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Grid, { GridProps, GridSize } from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Input, { InputProps } from '@mui/material/Input';
+import Paper from '@mui/material/Paper';
+import { TextFieldProps } from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { makeStyles, useTheme } from '@mui/styles';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _, { has } from 'lodash';
 import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, NavLinkProps, useLocation } from 'react-router-dom';
-import { labelSelectorToQuery } from '../../../lib/k8s';
+import YAML from 'yaml';
+import { labelSelectorToQuery, ResourceClasses } from '../../../lib/k8s';
+import { ApiError } from '../../../lib/k8s/apiProxy';
 import {
   KubeCondition,
   KubeContainer,
@@ -23,17 +26,17 @@ import {
   KubeObject,
   KubeObjectInterface,
 } from '../../../lib/k8s/cluster';
-import Pod, { KubePod } from '../../../lib/k8s/pod';
+import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
-import {
-  DefaultDetailsViewSection,
-  DetailsViewSection,
-} from '../../../redux/detailsViewSectionsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
 import { SectionBox } from '../../common/SectionBox';
 import SimpleTable, { NameValueTable } from '../../common/SimpleTable';
+import {
+  DefaultDetailsViewSection,
+  DetailsViewSection,
+} from '../../DetailsViewSection/detailsViewSectionSlice';
 import { PodListProps, PodListRenderer } from '../../pod/List';
 import { LightTooltip, Loader, ObjectEventList } from '..';
 import BackLink from '../BackLink';
@@ -96,6 +99,8 @@ export interface DetailsGridProps
   sectionsFunc?: (item: KubeObject) => React.ReactNode | DetailsViewSection[];
   /** If true, will show the events section. */
   withEvents?: boolean;
+  /** Called when the resource instance is created/updated, or there is an error. */
+  onResourceUpdate?: (resource: KubeObject, error: ApiError) => void;
 }
 
 /** Renders the different parts that constibute an actual resource's details view.
@@ -110,15 +115,16 @@ export function DetailsGrid(props: DetailsGridProps) {
     children,
     withEvents,
     extraSections,
+    onResourceUpdate,
     ...otherMainInfoSectionProps
   } = props;
   const { t } = useTranslation();
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
   const classes = useDetailsGridStyles();
   const hasPreviousRoute = useHasPreviousRoute();
-  const detailViews = useTypedSelector(state => state.detailsViewSections.detailsViewSections);
+  const detailViews = useTypedSelector(state => state.detailsViewSection.detailsViewSections);
   const detailViewsProcessors = useTypedSelector(
-    state => state.detailsViewSections.detailsViewSectionsProcessors
+    state => state.detailsViewSection.detailsViewSectionsProcessors
   );
   // This component used to have a MainInfoSection with all these props passed to it, so we're
   // using them to accomplish the same behavior.
@@ -126,6 +132,27 @@ export function DetailsGrid(props: DetailsGridProps) {
     otherMainInfoSectionProps;
 
   const [item, error] = resourceType.useGet(name, namespace);
+  const prevItemRef = React.useRef<{ uid?: string; version?: string; error?: ApiError }>({});
+
+  React.useEffect(() => {
+    // We cannot call this callback more than once on each version of the item, in order to avoid
+    // infinite loops.
+    const prevItem = prevItemRef.current;
+    if (
+      prevItem?.uid === item?.metatada?.uid &&
+      prevItem?.version === item?.metadata?.resourceVersion &&
+      error === prevItem.error
+    ) {
+      return;
+    }
+
+    prevItemRef.current = {
+      uid: item?.metatada?.uid,
+      version: item?.metadata?.resourceVersion,
+      error,
+    };
+    onResourceUpdate?.(item, error);
+  }, [item, error]);
 
   const actualBackLink: string | Location | undefined = React.useMemo(() => {
     if (!!backLink || backLink === '') {
@@ -411,6 +438,7 @@ export function SecretField(props: InputProps) {
           aria-label={t('toggle field visibility')}
           onClick={handleClickShowPassword}
           onMouseDown={event => event.preventDefault()}
+          size="medium"
         >
           <Icon icon={showPassword ? 'mdi:eye-off' : 'mdi:eye'} />
         </IconButton>
@@ -421,7 +449,7 @@ export function SecretField(props: InputProps) {
           type="password"
           fullWidth
           multiline={showPassword}
-          rowsMax="20"
+          maxRows="20"
           value={showPassword ? Base64.decode(value as string) : '******'}
           {...other}
         />
@@ -825,7 +853,13 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
     return resource?.spec?.initContainers || [];
   }
 
-  function getStatuses() {
+  function getEphemeralContainers() {
+    return resource?.spec?.ephemeralContainers || [];
+  }
+
+  function getStatuses(
+    statusKind: 'containerStatuses' | 'initContainerStatuses' | 'ephemeralContainerStatuses'
+  ) {
     if (!resource || resource.kind !== 'Pod') {
       return {};
     }
@@ -834,7 +868,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
       [key: string]: ContainerInfoProps['status'];
     } = {};
 
-    ((resource as KubePod).status.containerStatuses || []).forEach(containerStatus => {
+    ((resource as KubePod).status[statusKind] || []).forEach(containerStatus => {
       const { name, ...status } = containerStatus;
       statuses[name] = { ...status };
     });
@@ -844,7 +878,10 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
 
   const containers = getContainers();
   const initContainers = getInitContainers();
-  const statuses = getStatuses();
+  const ephemContainers = getEphemeralContainers();
+  const statuses = getStatuses('containerStatuses');
+  const initStatuses = getStatuses('initContainerStatuses');
+  const ephemStatuses = getStatuses('ephemeralContainerStatuses');
   const numContainers = containers.length;
 
   return (
@@ -864,6 +901,19 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
         )}
       </SectionBox>
 
+      {ephemContainers.length > 0 && (
+        <SectionBox title={t('glossary|Ephemeral Containers')}>
+          {ephemContainers.map((ephemContainer: KubeContainer) => (
+            <ContainerInfo
+              key={`ephem_container_${ephemContainer.name}`}
+              resource={resource}
+              container={ephemContainer}
+              status={ephemStatuses[ephemContainer.name]}
+            />
+          ))}
+        </SectionBox>
+      )}
+
       {initContainers.length > 0 && (
         <SectionBox title={t('translation|Init Containers')}>
           {initContainers.map((initContainer: KubeContainer, i: number) => (
@@ -871,7 +921,7 @@ export function ContainersSection(props: { resource: KubeObjectInterface | null 
               key={`init_container_${i}`}
               resource={resource}
               container={initContainer}
-              status={statuses[initContainer.name]}
+              status={initStatuses[initContainer.name]}
             />
           ))}
         </SectionBox>
@@ -891,6 +941,175 @@ export function ConditionsSection(props: { resource: KubeObjectInterface | null 
   return (
     <SectionBox title={t('translation|Conditions')}>
       <ConditionsTable resource={resource} />
+    </SectionBox>
+  );
+}
+
+export interface VolumeSectionProps {
+  resource: KubeObjectInterface | null;
+}
+
+export interface VolumeRowsProps {
+  volume: KubeVolume;
+}
+
+export interface PrintVolumeLinkProps {
+  volumeName: string;
+  volumeKind: string;
+  volume: KubeVolume;
+}
+
+export interface VolumePrints {
+  directPrint?: any[];
+  yamlPrint?: any[];
+}
+
+export function VolumeSection(props: VolumeSectionProps) {
+  const { t } = useTranslation('glossary');
+  const { resource } = props;
+  const volumes = resource?.spec?.volumes;
+
+  if (!volumes) {
+    return null;
+  }
+
+  const namespace = resource?.metadata?.namespace;
+
+  /*
+   * printVolumeLink will print a working link that is set within the router using fields from the resource as params
+   */
+  function PrintVolumeLink(props: PrintVolumeLinkProps) {
+    const { volumeName, volumeKind, volume } = props;
+    const resourceClasses = ResourceClasses;
+    const classList = Object.keys(resourceClasses);
+
+    for (const kind of classList) {
+      if (kind.toLowerCase() === volumeKind.toLowerCase()) {
+        const volumeClass = resourceClasses[kind];
+        const volumeRoute = volumeClass.detailsRoute;
+        const volumeNamespace = volumeClass.isNamespaced ? namespace : null;
+
+        const volumeKindNames = {
+          configMap: 'name',
+          secret: 'secretName',
+          persistentVolumeClaim: 'claimName',
+        };
+
+        const volumeNameKey = volumeKindNames[volumeKind as keyof typeof volumeKindNames];
+        if (!!volumeNameKey) {
+          const detailName = volume[volumeKind][volumeNameKey];
+          if (!!detailName) {
+            return (
+              <Link
+                routeName={volumeRoute}
+                params={{ namespace: volumeNamespace, name: detailName }}
+              >
+                {volumeName}
+              </Link>
+            );
+          }
+        }
+      }
+    }
+
+    return <Typography>{volumeName}</Typography>;
+  }
+
+  function volumeRows(volume: VolumeRowsProps['volume']) {
+    const { name, ...objWithVolumeKind } = volume;
+    const volumeKind = Object.keys(objWithVolumeKind)[0] || '';
+
+    if (!volume) {
+      return [];
+    }
+
+    function printVolumeDetails(volume: VolumeRowsProps['volume']): VolumePrints {
+      const { ...vol } = volume[volumeKind];
+
+      // array for items that are printable
+      const directPrint = [];
+
+      // array for items that are not printable and need to be printed to yaml
+      const yamlPrint = [];
+
+      // loop over volumeKeys and check if the value is a string, number, or bool
+      for (const key in vol) {
+        if (!(vol[key] === '')) {
+          if (
+            typeof vol[key] === 'string' ||
+            typeof vol[key] === 'number' ||
+            typeof vol[key] === 'boolean'
+          ) {
+            directPrint.push({
+              volKey: key,
+              volValue: typeof vol[key] === 'boolean' ? vol[key].toString() : vol[key],
+            });
+          } else {
+            yamlPrint.push({
+              volKey: key,
+              volValue: vol[key],
+            });
+          }
+        }
+      }
+
+      const volumePrints = {
+        directPrint,
+        yamlPrint,
+      };
+
+      return volumePrints;
+    }
+
+    const volumeDetails: VolumePrints = printVolumeDetails(volume);
+
+    return [
+      {
+        name: name,
+        withHighlightStyle: true,
+      },
+      ...(volumeKind
+        ? [
+            {
+              name: 'Kind',
+              value: volumeKind,
+            },
+          ]
+        : []),
+      {
+        name: 'Source',
+        value: <PrintVolumeLink volumeName={name} volumeKind={volumeKind} volume={volume} />,
+      },
+      ...(volumeDetails.directPrint
+        ? volumeDetails.directPrint.map(
+            ({ volKey, volValue }: { volKey: string; volValue: any }) => {
+              return {
+                name: volKey,
+                value: volValue,
+              };
+            }
+          )
+        : []),
+      ...(volumeDetails.yamlPrint
+        ? volumeDetails.yamlPrint.map(({ volKey, volValue }: { volKey: string; volValue: any }) => {
+            return {
+              name: volKey,
+              value: (
+                <Typography component="pre" variant="body2">
+                  {YAML.stringify(volValue)}
+                </Typography>
+              ),
+            };
+          })
+        : []),
+    ];
+  }
+
+  return (
+    <SectionBox title={t('translation|Volumes')}>
+      {volumes.map((volume: VolumeRowsProps['volume']) => (
+        <NameValueTable key={volume.name} rows={volumeRows(volume)} />
+      ))}
     </SectionBox>
   );
 }

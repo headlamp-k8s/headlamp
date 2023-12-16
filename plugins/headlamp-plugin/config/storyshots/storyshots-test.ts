@@ -1,6 +1,11 @@
 import initStoryshots, { Stories2SnapsConverter } from '@storybook/addon-storyshots';
 import * as rtl from '@testing-library/react';
 import path from 'path';
+// jsdom used by react-scripts test doesn't include TextEncoder/TextDecoder polyfills
+import { TextDecoder, TextEncoder } from 'util';
+global.TextEncoder = TextEncoder;
+// @ts-ignore
+global.TextDecoder = TextDecoder;
 
 /**
  * The storyshot addon has some bug where the path is src/
@@ -10,7 +15,7 @@ class OurConverter extends Stories2SnapsConverter {
   getStoryshotFile(fileName: string) {
     const name = super.getStoryshotFile(fileName);
     if (name.startsWith('src')) {
-      return path.join('..', '..', name);
+      return path.join('..', name);
     }
     return name;
   }
@@ -18,11 +23,11 @@ class OurConverter extends Stories2SnapsConverter {
 
 export function initTests() {
   initStoryshots({
-    stories2snapsConverter: new OurConverter(),
     asyncJest: true,
+    stories2snapsConverter: new OurConverter(),
     configPath: 'node_modules/@kinvolk/headlamp-plugin/config/.storybook',
     test: async ({ story, context, done }) => {
-      // We use React Testing library here, and our custom converter.
+      // We use React Testing library here
       const converter = new OurConverter();
       const snapshotFilename = converter.getSnapshotFileName(context);
 
@@ -35,7 +40,6 @@ export function initTests() {
         const { unmount, rerender, container } = await rtl.render(jsx);
         // wait for state changes
         await rtl.act(() => new Promise(resolve => setTimeout(resolve)));
-
         await rtl.act(async () => {
           await rerender(jsx);
         });

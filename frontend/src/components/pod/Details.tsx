@@ -1,13 +1,13 @@
 import { Icon } from '@iconify/react';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import { makeStyles } from '@material-ui/core/styles';
-import Switch from '@material-ui/core/Switch';
-import Tooltip from '@material-ui/core/Tooltip';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Switch from '@mui/material/Switch';
+import Tooltip from '@mui/material/Tooltip';
+import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +19,12 @@ import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
 import { LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
-import { ConditionsSection, ContainersSection, DetailsGrid } from '../common/Resource';
+import {
+  ConditionsSection,
+  ContainersSection,
+  DetailsGrid,
+  VolumeSection,
+} from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
 import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
@@ -170,12 +175,36 @@ function PodLogViewer(props: PodLogViewerProps) {
             value={container}
             onChange={handleContainerChange}
           >
-            {item &&
-              item.spec.containers.map(({ name }) => (
-                <MenuItem value={name} key={name}>
-                  {name}
-                </MenuItem>
-              ))}
+            {item?.spec?.containers && (
+              <MenuItem disabled value="">
+                {t('glossary|Containers')}
+              </MenuItem>
+            )}
+            {item?.spec?.containers.map(({ name }) => (
+              <MenuItem value={name} key={name}>
+                {name}
+              </MenuItem>
+            ))}
+            {item?.spec?.initContainers && (
+              <MenuItem disabled value="">
+                {t('translation|Init Containers')}
+              </MenuItem>
+            )}
+            {item.spec.initContainers?.map(({ name }) => (
+              <MenuItem value={name} key={`init_container_${name}`}>
+                {name}
+              </MenuItem>
+            ))}
+            {item?.spec?.ephemeralContainers && (
+              <MenuItem disabled value="">
+                {t('glossary|Ephemeral Containers')}
+              </MenuItem>
+            )}
+            {item.spec.ephemeralContainers?.map(({ name }) => (
+              <MenuItem value={name} key={`eph_container_${name}`}>
+                {name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>,
         <FormControl className={classes.linesFormControl}>
@@ -343,7 +372,11 @@ export default function PodDetails(props: PodDetailsProps) {
             action: (
               <AuthVisible item={item} authVerb="get" subresource="log">
                 <Tooltip title={t('Show Logs') as string}>
-                  <IconButton aria-label={t('logs')} onClick={() => setShowLogs(true)}>
+                  <IconButton
+                    aria-label={t('logs')}
+                    onClick={() => setShowLogs(true)}
+                    size="medium"
+                  >
                     <Icon icon="mdi:file-document-box-outline" />
                   </IconButton>
                 </Tooltip>
@@ -358,6 +391,7 @@ export default function PodDetails(props: PodDetailsProps) {
                   <IconButton
                     aria-label={t('terminal') as string}
                     onClick={() => setShowTerminal(true)}
+                    size="medium"
                   >
                     <Icon icon="mdi:console" />
                   </IconButton>
@@ -373,6 +407,7 @@ export default function PodDetails(props: PodDetailsProps) {
                   <IconButton
                     aria-label={t('attach') as string}
                     onClick={() => setIsAttached(true)}
+                    size="medium"
                   >
                     <Icon icon="mdi:connection" />
                   </IconButton>
@@ -449,7 +484,7 @@ export default function PodDetails(props: PodDetailsProps) {
           },
           {
             id: 'headlamp.pod-volumes',
-            section: <VolumeDetails volumes={item?.jsonData?.spec.volumes} />,
+            section: <VolumeSection resource={item?.jsonData} />,
           },
           {
             id: 'headlamp.pod-logs',

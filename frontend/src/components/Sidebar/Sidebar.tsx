@@ -1,11 +1,11 @@
 import { InlineIcon } from '@iconify/react';
-import { Button } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
-import Drawer from '@material-ui/core/Drawer';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Grid from '@mui/material/Grid';
+import List from '@mui/material/List';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,23 +14,26 @@ import { useHistory } from 'react-router-dom';
 import helpers from '../../helpers';
 import { useCluster } from '../../lib/k8s';
 import { createRouteURL } from '../../lib/router';
-import { setSidebarSelected, setWhetherSidebarOpen } from '../../redux/actions/actions';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { ActionButton } from '../common';
 import CreateButton from '../common/Resource/CreateButton';
 import NavigationTabs from './NavigationTabs';
 import prepareRoutes from './prepareRoutes';
-import SidebarItem, { SidebarEntryProps } from './SidebarItem';
+import SidebarItem from './SidebarItem';
+import {
+  DefaultSidebars,
+  setSidebarSelected,
+  setWhetherSidebarOpen,
+  SidebarEntry,
+} from './sidebarSlice';
 import VersionButton from './VersionButton';
 
 export const drawerWidth = 240;
 export const mobileDrawerWidth = 320;
 export const drawerWidthClosed = 64;
 
-export enum DefaultSidebars {
-  HOME = 'HOME',
-  IN_CLUSTER = 'IN-CLUSTER',
-}
+// exported for backwards compatibility for plugins
+export { DefaultSidebars };
 
 const useStyle = makeStyles(theme => ({
   drawer: {
@@ -52,7 +55,7 @@ const useStyle = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
+    width: '56px',
     [theme.breakpoints.down('xs')]: {
       background: 'initial',
     },
@@ -60,7 +63,7 @@ const useStyle = makeStyles(theme => ({
       width: theme.spacing(0),
     },
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
+      width: '72px',
     },
     background: theme.palette.sidebarBg,
   },
@@ -92,9 +95,9 @@ const useStyle = makeStyles(theme => ({
 }));
 
 export function useSidebarInfo() {
-  const isSidebarOpen = useTypedSelector(state => state.ui.sidebar.isSidebarOpen);
+  const isSidebarOpen = useTypedSelector(state => state.sidebar.isSidebarOpen);
   const isSidebarOpenUserSelected = useTypedSelector(
-    state => state.ui.sidebar.isSidebarOpenUserSelected
+    state => state.sidebar.isSidebarOpenUserSelected
   );
   const isTemporary = useMediaQuery('(max-width:599px)');
   const isNarrowOnly = useMediaQuery('(max-width:960px) and (min-width:600px)');
@@ -214,7 +217,7 @@ function DefaultLinkArea(props: { sidebarName: string; isOpen: boolean }) {
 export default function Sidebar() {
   const { t, i18n } = useTranslation(['glossary', 'translation']);
 
-  const sidebar = useTypedSelector(state => state.ui.sidebar);
+  const sidebar = useTypedSelector(state => state.sidebar);
   const {
     isOpen,
     isUserOpened,
@@ -271,7 +274,7 @@ export interface PureSidebarProps {
   /** If the user has selected to open/shrink the sidebar */
   openUserSelected?: boolean;
   /** To show in the sidebar. */
-  items: SidebarEntryProps[];
+  items: SidebarEntry[];
   /** The selected route name of the sidebar open. */
   selectedName: string | null;
   /** If the sidebar is the temporary one (full sidebar when user selects it in mobile). */
@@ -419,7 +422,7 @@ export function useSidebarItem(
 
   React.useEffect(
     () => {
-      dispatch(setSidebarSelected(itemName, sidebar));
+      dispatch(setSidebarSelected({ item: itemName, sidebar: sidebar }));
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [itemName]
