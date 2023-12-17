@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Ingress/DetailsView With Resource 1`] = `
+exports[`Storyshots IngressClass/DetailsView Basic 1`] = `
 <div>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
@@ -51,7 +51,7 @@ exports[`Storyshots Ingress/DetailsView With Resource 1`] = `
               <h1
                 class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
               >
-                Ingress
+                IngressClass
               </h1>
               <div
                 class="MuiBox-root css-ldp2l3"
@@ -145,169 +145,20 @@ exports[`Storyshots Ingress/DetailsView With Resource 1`] = `
                   </span>
                 </dd>
                 <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
-                >
-                  Default Backend
-                </dt>
-                <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
-                  >
-                    -
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
-                >
-                  Ports
-                </dt>
-                <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
-                  >
-                    Service:service1
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
-                >
-                  TLS
-                </dt>
-                <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
-                />
-                <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
                 >
-                  Class Name
+                  Default
                 </dt>
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
-                />
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  >
+                    No
+                  </span>
+                </dd>
               </dl>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
-    >
-      <div
-        class="MuiBox-root css-p0cik4"
-      >
-        <div
-          class="MuiBox-root css-j1fy4m"
-        >
-          <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-            >
-              <div
-                class="MuiBox-root css-70qvj9"
-              >
-                <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
-                >
-                  Rules
-                </h2>
-                <div
-                  class="MuiBox-root css-ldp2l3"
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            class="makeStyles-box MuiBox-root css-0"
-          >
-            <div
-              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
-            >
-              <table
-                class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
-              >
-                <thead
-                  class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
-                >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
-                  >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
-                      scope="col"
-                    >
-                      Host
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
-                      scope="col"
-                    >
-                      Path
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
-                      scope="col"
-                    >
-                      Backends
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <a
-                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                        href="http://https-example.foo.com/"
-                      >
-                        http://https-example.foo.com/
-                      </a>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <div
-                        class="MuiBox-root css-0"
-                        style="display: flex; margin-bottom: 5px;"
-                      >
-                        <a
-                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                          href="http://https-example.foo.com/"
-                          style="margin-right: 5px;"
-                        >
-                          /
-                        </a>
-                        (Prefix)
-                      </div>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <div
-                        class="MuiBox-root css-0"
-                        style="display: flex; flex-direction: column; flex-wrap: nowrap; margin-bottom: 5px;"
-                      >
-                        <p
-                          class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
-                        >
-                          Service:service1
-                        </p>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
         </div>
@@ -459,7 +310,7 @@ exports[`Storyshots Ingress/DetailsView With Resource 1`] = `
 </div>
 `;
 
-exports[`Storyshots Ingress/DetailsView With TLS 1`] = `
+exports[`Storyshots IngressClass/DetailsView With Default 1`] = `
 <div>
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
@@ -510,7 +361,7 @@ exports[`Storyshots Ingress/DetailsView With TLS 1`] = `
               <h1
                 class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
               >
-                Ingress
+                IngressClass
               </h1>
               <div
                 class="MuiBox-root css-ldp2l3"
@@ -571,7 +422,7 @@ exports[`Storyshots Ingress/DetailsView With TLS 1`] = `
                   <span
                     class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
                   >
-                    tls-example-ingress
+                    resource-example-ingress
                   </span>
                 </dd>
                 <dt
@@ -606,193 +457,45 @@ exports[`Storyshots Ingress/DetailsView With TLS 1`] = `
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
                 >
-                  Default Backend
+                  Annotations
                 </dt>
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
                 >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  <div
+                    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-17wqeb1-MuiGrid-root"
                   >
-                    -
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
-                >
-                  Ports
-                </dt>
-                <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
-                  >
-                    443, 80, someport
-                  </span>
-                </dd>
-                <dt
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
-                >
-                  TLS
-                </dt>
-                <dd
-                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataCell css-r0umuq-MuiGrid-root"
-                >
-                  <span
-                    aria-label="testsecret-tls 🞂 https-example.foo.com"
-                    class=""
-                    data-mui-internal-clone-element="true"
-                  >
-                    testsecret-tls 🞂 https-example.foo.com
-                  </span>
+                    <div
+                      class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-spacing-xs-1 css-wdtksl-MuiGrid-root"
+                      style="max-width: 80%;"
+                    >
+                      <div
+                        class="MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth css-175wz9v-MuiGrid-root"
+                      >
+                        <p
+                          class="MuiTypography-root MuiTypography-body1 makeStyles-metadataValueLabel css-1ezega9-MuiTypography-root"
+                        >
+                          ingressclass.kubernetes.io/is-default-class: true
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </dd>
                 <dt
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-4 makeStyles-metadataLast makeStyles-metadataNameCell css-1r6indk-MuiGrid-root"
                 >
-                  Class Name
+                  Default
                 </dt>
                 <dd
                   class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 makeStyles-metadataLast makeStyles-metadataCell css-r0umuq-MuiGrid-root"
-                />
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-valueLabel css-1ezega9-MuiTypography-root"
+                  >
+                    Yes
+                  </span>
+                </dd>
               </dl>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
-    >
-      <div
-        class="MuiBox-root css-p0cik4"
-      >
-        <div
-          class="MuiBox-root css-j1fy4m"
-        >
-          <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
-          >
-            <div
-              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-            >
-              <div
-                class="MuiBox-root css-70qvj9"
-              >
-                <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
-                >
-                  Rules
-                </h2>
-                <div
-                  class="MuiBox-root css-ldp2l3"
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            class="makeStyles-box MuiBox-root css-0"
-          >
-            <div
-              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
-            >
-              <table
-                class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
-              >
-                <thead
-                  class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
-                >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
-                  >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
-                      scope="col"
-                    >
-                      Host
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
-                      scope="col"
-                    >
-                      Path
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
-                      scope="col"
-                    >
-                      Backends
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <a
-                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                        href="https://https-example.foo.com/"
-                      >
-                        https://https-example.foo.com/
-                      </a>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <div
-                        class="MuiBox-root css-0"
-                        style="display: flex; margin-bottom: 5px;"
-                      >
-                        <a
-                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                          href="https://https-example.foo.com/"
-                          style="margin-right: 5px;"
-                        >
-                          /
-                        </a>
-                        (Prefix)
-                      </div>
-                      <div
-                        class="MuiBox-root css-0"
-                        style="display: flex; margin-bottom: 5px;"
-                      >
-                        <a
-                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                          href="https://https-example.foo.com/second"
-                          style="margin-right: 5px;"
-                        >
-                          /second
-                        </a>
-                        (Prefix)
-                      </div>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <div
-                        class="MuiBox-root css-0"
-                        style="display: flex; flex-direction: column; flex-wrap: nowrap; margin-bottom: 5px;"
-                      >
-                        <p
-                          class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
-                        >
-                          service1:80
-                        </p>
-                        <p
-                          class="MuiTypography-root MuiTypography-body1 css-1ezega9-MuiTypography-root"
-                        >
-                          service2:someport
-                        </p>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
         </div>

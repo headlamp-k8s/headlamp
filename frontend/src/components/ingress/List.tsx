@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Ingress from '../../lib/k8s/ingress';
 import LabelListItem from '../common/LabelListItem';
+import Link from '../common/Link';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 function RulesDisplay(props: { ingress: Ingress }) {
@@ -45,7 +46,12 @@ export default function IngressList() {
         {
           id: 'class',
           label: t('Class Name'),
-          getter: (ingress: Ingress) => ingress.spec?.ingressClassName,
+          getter: (ingress: Ingress) =>
+            ingress.spec?.ingressClassName ? (
+              <Link routeName="ingressclass" params={{ name: ingress.spec?.ingressClassName }}>
+                {ingress.spec?.ingressClassName}
+              </Link>
+            ) : null,
           sort: true,
         },
         {

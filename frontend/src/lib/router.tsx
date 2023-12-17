@@ -26,6 +26,8 @@ import EndpointDetails from '../components/endpoints/Details';
 import EndpointList from '../components/endpoints/List';
 import HpaDetails from '../components/horizontalPodAutoscaler/Details';
 import HpaList from '../components/horizontalPodAutoscaler/List';
+import IngressClassDetails from '../components/ingress/ClassDetails';
+import IngressClassList from '../components/ingress/ClassList';
 import IngressDetails from '../components/ingress/Details';
 import IngressList from '../components/ingress/List';
 import JobsList from '../components/job/List';
@@ -289,6 +291,19 @@ const defaultRoutes: {
     exact: true,
     sidebar: 'ingresses',
     component: () => <IngressDetails />,
+  },
+  ingressclasses: {
+    path: '/ingressclasses',
+    exact: true,
+    name: 'IngressClasses',
+    sidebar: 'ingressclasses',
+    component: () => <IngressClassList />,
+  },
+  ingressclass: {
+    path: '/ingressclasses/:name',
+    exact: true,
+    sidebar: 'ingressclasses',
+    component: () => <IngressClassDetails />,
   },
   networkPolicies: {
     path: '/networkpolicies',

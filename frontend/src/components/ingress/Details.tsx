@@ -1,9 +1,10 @@
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Link as MuiLink, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import Ingress, { IngressBackend, IngressRule } from '../../lib/k8s/ingress';
 import { useSettings } from '../App/Settings/hook';
 import LabelListItem from '../common/LabelListItem';
+import Link from '../common/Link';
 import { DetailsGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
 import SimpleTable from '../common/SimpleTable';
@@ -94,18 +95,18 @@ export function LinkStringFormat({ url, item, urlPath }: LinkStringFormatProps) 
     if (formatURL && urlPath) {
       return (
         <Box style={{ display: 'flex', marginBottom: '5px' }}>
-          <Link
+          <MuiLink
             href={`${formatURL.protocol}//${formatURL.hostname}${urlPath}`}
             style={{ marginRight: '5px' }}
           >
             {urlPath}
-          </Link>
+          </MuiLink>
           {`(${currentPathType})`}
         </Box>
       );
     }
 
-    return <Link href={formatURL.toString()}>{`${formatURL.toString()}`}</Link>;
+    return <MuiLink href={formatURL.toString()}>{`${formatURL.toString()}`}</MuiLink>;
   }
 }
 
@@ -212,6 +213,14 @@ export default function IngressDetails() {
                 )}
               />
             ),
+          },
+          {
+            name: t('Class Name'),
+            value: ingress.spec?.ingressClassName ? (
+              <Link routeName="ingressclass" params={{ name: ingress.spec?.ingressClassName }}>
+                {ingress.spec?.ingressClassName}
+              </Link>
+            ) : null,
           },
         ]
       }
