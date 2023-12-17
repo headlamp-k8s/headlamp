@@ -2,6 +2,7 @@ import '../../i18n/config';
 import { useTheme } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 import { KubeObject } from '../../lib/k8s/cluster';
+import Node from '../../lib/k8s/node';
 import Pod from '../../lib/k8s/pod';
 import { parseCpu, parseRam, TO_GB, TO_ONE_CPU } from '../../lib/units';
 import ResourceCircularChart, {
@@ -137,6 +138,63 @@ export function PodsStatusCircleChart(props: Pick<ResourceCircularChartProps, 'i
       total={items !== null ? items.length : -1}
       label={getLabel()}
       title={t('glossary|Pods')}
+      legend={getLegend()}
+    />
+  );
+}
+
+export function NodesStatusCircleChart(props: Pick<ResourceCircularChartProps, 'items'>) {
+  const theme = useTheme();
+  const { items } = props;
+  const { t } = useTranslation(['translation', 'glossary']);
+
+  const nodesReady = (items || []).filter((node: Node) => {
+    const readyCondition = node.status?.conditions?.find(condition => condition.type === 'Ready');
+    return readyCondition?.status === 'True';
+  });
+
+  function getLegend() {
+    if (items === null) {
+      return null;
+    }
+    return t('translation|{{ numReady }} / {{ numItems }} Ready', {
+      numReady: nodesReady.length,
+      numItems: items.length,
+    });
+  }
+
+  function getLabel() {
+    if (items === null) {
+      return '…';
+    }
+    const percentage = ((nodesReady.length / items.length) * 100).toFixed(1);
+    return `${items.length === 0 ? 0 : percentage} %`;
+  }
+
+  function getData() {
+    if (items === null) {
+      return [];
+    }
+
+    return [
+      {
+        name: 'ready',
+        value: nodesReady.length,
+      },
+      {
+        name: 'notReady',
+        value: items.length - nodesReady.length,
+        fill: theme.palette.error.main,
+      },
+    ];
+  }
+
+  return (
+    <TileChart
+      data={getData()}
+      total={items !== null ? items.length : -1}
+      label={getLabel()}
+      title={t('glossary|Nodes')}
       legend={getLegend()}
     />
   );
