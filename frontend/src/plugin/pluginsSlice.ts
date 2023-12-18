@@ -1,4 +1,30 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import React, { ReactElement } from 'react';
+
+/**
+ * Props for PluginSettingsDetailsProps component.
+ */
+export interface PluginSettingsDetailsProps {
+  /**
+   * Callback function to be triggered when there's a change in data.
+   * @param data - The updated data object.
+   */
+  onDataChange?: (data: { [key: string]: any }) => void;
+
+  /**
+   * Data object representing the current state/configuration.
+   * readonly - The data object is readonly and cannot be modified.
+   */
+  readonly data?: { [key: string]: any };
+}
+
+/**
+ * PluginSettingsComponentType is the type of the component associated with the plugin's settings.
+ */
+export type PluginSettingsComponentType =
+  | React.ComponentType<PluginSettingsDetailsProps>
+  | ReactElement
+  | null;
 
 /**
  * PluginInfo is the shape of the metadata information for individual plugin objects.
@@ -35,6 +61,17 @@ export type PluginInfo = {
   devDependencies?: {
     [key: string]: string;
   };
+
+  /**
+   * Component associated with the plugin's settings.
+   */
+  settingsComponent?: PluginSettingsComponentType;
+
+  /**
+   * If the plugin settings should be displayed with a save button.
+   *
+   */
+  displaySettingsComponentWithSaveButton?: boolean;
 };
 
 export interface PluginsState {
@@ -68,9 +105,33 @@ export const pluginsSlice = createSlice({
     reloadPage() {
       window.location.reload();
     },
+    /**
+     * Set the plugin settings component.
+     */
+    setPluginSettingsComponent(
+      state,
+      action: PayloadAction<{
+        name: string;
+        component: PluginSettingsComponentType;
+        displaySaveButton: boolean;
+      }>
+    ) {
+      const { name, component, displaySaveButton } = action.payload;
+      state.pluginSettings = state.pluginSettings.map(plugin => {
+        if (plugin.name === name) {
+          return {
+            ...plugin,
+            settingsComponent: component,
+            displaySettingsComponentWithSaveButton: displaySaveButton,
+          };
+        }
+        return plugin;
+      });
+    },
   },
 });
 
-export const { pluginsLoaded, setPluginSettings, reloadPage } = pluginsSlice.actions;
+export const { pluginsLoaded, setPluginSettings, setPluginSettingsComponent, reloadPage } =
+  pluginsSlice.actions;
 
 export default pluginsSlice.reducer;

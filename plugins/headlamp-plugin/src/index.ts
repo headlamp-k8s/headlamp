@@ -1,7 +1,6 @@
-
 import { Theme } from '@mui/material/styles';
 
-declare module "@mui/private-theming" {
+declare module '@mui/private-theming' {
   interface DefaultTheme extends Theme {}
 }
 
@@ -12,6 +11,7 @@ import * as Notification from './lib/notification';
 import * as Router from './lib/router';
 import * as Utils from './lib/util';
 import { Headlamp, Plugin } from './plugin/lib';
+import { PluginSettingsDetailsProps } from './plugin/pluginsSlice';
 import Registry, {
   AppLogoProps,
   ClusterChooserProps,
@@ -26,6 +26,7 @@ import Registry, {
   registerDetailsViewHeaderActionsProcessor,
   registerDetailsViewSection,
   registerGetTokenFunction,
+  registerPluginSettings,
   registerResourceTableColumnsProcessor,
   registerRoute,
   registerRouteFilter,
@@ -59,6 +60,13 @@ export {
   registerDetailsViewHeaderActionsProcessor,
   registerGetTokenFunction,
   registerResourceTableColumnsProcessor,
+  registerPluginSettings,
 };
 
-export type { AppLogoProps, ClusterChooserProps, DetailsViewSectionProps, DefaultSidebars };
+export type {
+  AppLogoProps,
+  PluginSettingsDetailsProps,
+  ClusterChooserProps,
+  DetailsViewSectionProps,
+  DefaultSidebars,
+};
