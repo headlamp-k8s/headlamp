@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { KubeContainer } from '../../lib/k8s/cluster';
 import Job from '../../lib/k8s/job';
 import { formatDuration } from '../../lib/util';
-import { LightTooltip, StatusLabel, StatusLabelProps } from '../common';
+import { LightTooltip, SimpleTableProps, StatusLabel, StatusLabelProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
+import { ResourceTableProps } from '../common/Resource/ResourceTable';
 
 export function makePodStatusLabel(job: Job) {
   if (!job?.status?.conditions) {
@@ -57,16 +58,19 @@ export function makePodStatusLabel(job: Job) {
 
 export default function JobsList() {
   const [jobs, error] = Job.useList();
-  return <JobsListRenderer jobs={jobs} error={Job.getErrorMessage(error)} />;
+  return <JobsListRenderer jobs={jobs} error={Job.getErrorMessage(error)} reflectTableInURL />;
 }
 
 export interface JobsListRendererProps {
-  jobs?: Job[] | null;
-  error?: string | null;
+  jobs: Job[] | null;
+  error: string | null;
+  hideColumns?: 'namespace'[];
+  reflectTableInURL?: SimpleTableProps['reflectInURL'];
+  noNamespaceFilter?: boolean;
 }
 
 export function JobsListRenderer(props: JobsListRendererProps) {
-  const { jobs = null, error } = props;
+  const { jobs, error, hideColumns = [], reflectTableInURL = 'jobs', noNamespaceFilter } = props;
   const { t } = useTranslation(['glossary', 'translation']);
 
   function getCompletions(job: Job) {
@@ -81,70 +85,84 @@ export function JobsListRenderer(props: JobsListRendererProps) {
     return parallelismSorted;
   }
 
+  function getDataCols() {
+    const dataCols: ResourceTableProps['columns'] = [
+      'name',
+      {
+        id: 'completions',
+        label: t('Completions'),
+        getter: job => getCompletions(job),
+        sort: sortByCompletions,
+      },
+      {
+        id: 'conditions',
+        label: t('translation|Conditions'),
+        getter: job => makePodStatusLabel(job),
+      },
+      {
+        id: 'duration',
+        label: t('translation|Duration'),
+        getter: job => {
+          const startTime = job.status?.startTime;
+          const completionTime = job.status?.completionTime;
+          if (!!startTime && !!completionTime) {
+            const duration = new Date(completionTime).getTime() - new Date(startTime).getTime();
+            return formatDuration(duration, { format: 'mini' });
+          }
+          return '-';
+        },
+        gridTemplate: 0.6,
+        sort: true,
+      },
+      {
+        id: 'containers',
+        label: t('Containers'),
+        getter: job => {
+          const containerNames = job.getContainers().map((c: KubeContainer) => c.name);
+          const containerTooltip = containerNames.join('\n');
+          const containerText = containerNames.join(', ');
+          return (
+            <LightTooltip title={containerTooltip} interactive>
+              {containerText}
+            </LightTooltip>
+          );
+        },
+      },
+      {
+        id: 'images',
+        label: t('Images'),
+        getter: job => {
+          const containerImages = job.getContainers().map((c: KubeContainer) => c.image);
+          const containerTooltip = containerImages.join('\n');
+          const containerText = containerImages.join(', ');
+          return (
+            <LightTooltip title={containerTooltip} interactive>
+              {containerText}
+            </LightTooltip>
+          );
+        },
+      },
+      'age',
+    ];
+
+    let insertIndex = 1;
+
+    if (!hideColumns.includes('namespace')) {
+      dataCols.splice(insertIndex++, 0, 'namespace');
+    }
+    return dataCols;
+  }
+
   return (
     <ResourceListView
       title={t('Jobs')}
+      headerProps={{
+        noNamespaceFilter,
+      }}
       errorMessage={error}
-      columns={[
-        'name',
-        'namespace',
-        {
-          id: 'completions',
-          label: t('Completions'),
-          getter: job => getCompletions(job),
-          sort: sortByCompletions,
-        },
-        {
-          id: 'conditions',
-          label: t('translation|Conditions'),
-          getter: job => makePodStatusLabel(job),
-        },
-        {
-          id: 'duration',
-          label: t('translation|Duration'),
-          getter: job => {
-            const startTime = job.status?.startTime;
-            const completionTime = job.status?.completionTime;
-            if (!!startTime && !!completionTime) {
-              const duration = new Date(completionTime).getTime() - new Date(startTime).getTime();
-              return formatDuration(duration, { format: 'mini' });
-            }
-            return '-';
-          },
-          gridTemplate: 0.6,
-          sort: true,
-        },
-        {
-          id: 'containers',
-          label: t('Containers'),
-          getter: job => {
-            const containerNames = job.getContainers().map((c: KubeContainer) => c.name);
-            const containerTooltip = containerNames.join('\n');
-            const containerText = containerNames.join(', ');
-            return (
-              <LightTooltip title={containerTooltip} interactive>
-                {containerText}
-              </LightTooltip>
-            );
-          },
-        },
-        {
-          id: 'images',
-          label: t('Images'),
-          getter: job => {
-            const containerImages = job.getContainers().map((c: KubeContainer) => c.image);
-            const containerTooltip = containerImages.join('\n');
-            const containerText = containerImages.join(', ');
-            return (
-              <LightTooltip title={containerTooltip} interactive>
-                {containerText}
-              </LightTooltip>
-            );
-          },
-        },
-        'age',
-      ]}
+      columns={getDataCols()}
       data={jobs}
+      reflectInURL={reflectTableInURL}
       id="headlamp-jobs"
     />
   );

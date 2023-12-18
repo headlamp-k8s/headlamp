@@ -138,6 +138,9 @@ export default function Overview() {
           'age',
         ]}
         data={getJointItems()}
+        headerProps={{
+          noNamespaceFilter: false,
+        }}
         id="headlamp-workloads"
       />
     </PageGrid>
