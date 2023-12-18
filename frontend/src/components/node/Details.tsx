@@ -11,15 +11,15 @@ import { apply, drainNode, drainNodeStatus } from '../../lib/k8s/apiProxy';
 import { KubeMetrics } from '../../lib/k8s/cluster';
 import Node from '../../lib/k8s/node';
 import { getCluster, timeAgo } from '../../lib/util';
+import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
 import { clusterAction } from '../../redux/clusterActionSlice';
 import { CpuCircularChart, MemoryCircularChart } from '../cluster/Charts';
-import { ActionButton, ObjectEventList, StatusLabelProps } from '../common';
+import { ActionButton, StatusLabelProps } from '../common';
 import { HeaderLabel, StatusLabel, ValueLabel } from '../common/Label';
-import { MainInfoSection, OwnedPodsSection, PageGrid } from '../common/Resource';
+import { DetailsGrid, OwnedPodsSection } from '../common/Resource';
 import AuthVisible from '../common/Resource/AuthVisible';
 import { SectionBox } from '../common/SectionBox';
 import { NameValueTable } from '../common/SimpleTable';
-import DetailsViewSection from '../DetailsViewSection';
 
 function NodeConditionsLabel(props: { node: Node }) {
   const { node } = props;
@@ -151,77 +151,81 @@ export default function NodeDetails() {
   }
 
   return (
-    <PageGrid>
-      <MainInfoSection
-        error={nodeError}
-        headerSection={item => (
-          <ChartsSection node={item} metrics={nodeMetrics} noMetrics={noMetrics} />
-        )}
-        resource={node}
-        actions={item => {
-          const cordon = item?.jsonData?.spec?.unschedulable;
-          const cordonOrUncordon = cordon ? t('Uncordon') : t('Cordon');
-
-          return [
-            {
-              id: 'headlamp.node-togglecordon',
-              action: (
-                <AuthVisible item={item} authVerb="update">
-                  <ActionButton
-                    description={cordonOrUncordon}
-                    icon={cordon ? 'mdi:check-circle-outline' : 'mdi:cancel'}
-                    onClick={() => handleNodeScheduleState(item, cordon)}
-                    iconButtonProps={{
-                      disabled: isupdatingNodeScheduleProperty,
-                    }}
-                  />
-                </AuthVisible>
-              ),
-            },
-            {
-              id: 'headlamp.node-togglecordon',
-              action: (
-                <AuthVisible item={item} authVerb="delete">
-                  <ActionButton
-                    description={t('Drain')}
-                    icon="mdi:delete-variant"
-                    onClick={() => handleNodeDrain(item)}
-                    iconButtonProps={{
-                      disabled: isNodeDrainInProgress,
-                    }}
-                  />
-                </AuthVisible>
-              ),
-            },
-          ];
-        }}
-        extraInfo={item =>
-          item && [
-            {
-              name: t('translation|Ready'),
-              value: <NodeReadyLabel node={item} />,
-            },
-            {
-              name: t('translation|Conditions'),
-              value: <NodeConditionsLabel node={item} />,
-            },
-            {
-              name: t('Pod CIDR'),
-              value: item.spec.podCIDR,
-            },
-            ...getAddresses(item),
-          ]
-        }
-      />
-      {!!node && (
-        <>
-          <SystemInfoSection node={node} />
-          <OwnedPodsSection resource={node?.jsonData} />
-          <DetailsViewSection resource={node} />
-          {node && <ObjectEventList object={node} />}
-        </>
+    <DetailsGrid
+      resourceType={Node}
+      name={name}
+      error={nodeError}
+      headerSection={item => (
+        <ChartsSection node={item} metrics={nodeMetrics} noMetrics={noMetrics} />
       )}
-    </PageGrid>
+      withEvents
+      actions={item => {
+        const cordon = item?.jsonData?.spec?.unschedulable;
+        const cordonOrUncordon = cordon ? t('Uncordon') : t('Cordon');
+
+        return [
+          {
+            id: DefaultHeaderAction.NODE_TOGGLE_CORDON,
+            action: (
+              <AuthVisible item={item} authVerb="update">
+                <ActionButton
+                  description={cordonOrUncordon}
+                  icon={cordon ? 'mdi:check-circle-outline' : 'mdi:cancel'}
+                  onClick={() => handleNodeScheduleState(item, cordon)}
+                  iconButtonProps={{
+                    disabled: isupdatingNodeScheduleProperty,
+                  }}
+                />
+              </AuthVisible>
+            ),
+          },
+          {
+            id: DefaultHeaderAction.NODE_DRAIN,
+            action: (
+              <AuthVisible item={item} authVerb="delete">
+                <ActionButton
+                  description={t('Drain')}
+                  icon="mdi:delete-variant"
+                  onClick={() => handleNodeDrain(item)}
+                  iconButtonProps={{
+                    disabled: isNodeDrainInProgress,
+                  }}
+                />
+              </AuthVisible>
+            ),
+          },
+        ];
+      }}
+      extraInfo={item =>
+        item && [
+          {
+            name: t('translation|Ready'),
+            value: <NodeReadyLabel node={item} />,
+          },
+          {
+            name: t('translation|Conditions'),
+            value: <NodeConditionsLabel node={item} />,
+          },
+          {
+            name: t('Pod CIDR'),
+            value: item.spec.podCIDR,
+          },
+          ...getAddresses(item),
+        ]
+      }
+      extraSections={item =>
+        item && [
+          {
+            id: 'headlamp.node-system-info',
+            section: <SystemInfoSection node={item} />,
+          },
+          {
+            id: 'headlamp.node-owned-pods',
+            section: <OwnedPodsSection resource={item?.jsonData} />,
+          },
+        ]
+      }
+    />
   );
 }
 

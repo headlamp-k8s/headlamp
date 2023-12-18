@@ -34,6 +34,8 @@ export enum DefaultHeaderAction {
   POD_LOGS = 'POD_LOGS',
   POD_TERMINAL = 'POD_TERMINAL',
   POD_ATTACH = 'POD_ATTACH',
+  NODE_TOGGLE_CORDON = 'NODE_TOGGLE_CORDON',
+  NODE_DRAIN = 'NODE_DRAIN',
 }
 
 export enum DefaultAppBarAction {
