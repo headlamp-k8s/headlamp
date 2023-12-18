@@ -136,7 +136,7 @@ export default function CronJobDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const { t, i18n } = useTranslation('glossary');
 
-  const [jobs, jobsError] = Job.useList();
+  const [jobs, jobsError] = Job.useList({ namespace });
   const [cronJob, setCronJob] = useState<CronJob | null>(null);
   const [isCronSuspended, setIsCronSuspended] = useState(false);
   const [isCheckingCronSuspendStatus, setIsCheckingCronSuspendStatus] = useState(true);
@@ -296,7 +296,12 @@ export default function CronJobDetails() {
       }
       extraSections={cronJob =>
         cronJob && [
-          <JobsListRenderer jobs={ownedJobs} error={CronJob.getErrorMessage(jobsError)} />,
+          <JobsListRenderer
+            jobs={ownedJobs}
+            error={CronJob.getErrorMessage(jobsError)}
+            hideColumns={['namespace']}
+            noNamespaceFilter
+          />,
         ]
       }
     />
