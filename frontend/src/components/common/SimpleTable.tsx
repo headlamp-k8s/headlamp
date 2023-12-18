@@ -352,6 +352,10 @@ export default function SimpleTable(props: SimpleTableProps) {
     filteredData = displayData.filter(filterFunction);
   }
 
+  if ((filteredData.length === 0 || filteredData.length < page * rowsPerPage) && page !== 0) {
+    setPage(0);
+  }
+
   function sortClickHandler(isIncreasingOrder: boolean, index: number) {
     setIsIncreasingOrder(isIncreasingOrder);
     setSortColIndex(index);
@@ -448,6 +452,8 @@ export default function SimpleTable(props: SimpleTableProps) {
           component="div"
           count={filteredData.length}
           rowsPerPage={rowsPerPage}
+          showFirstButton
+          showLastButton
           page={page}
           backIconButtonProps={{
             'aria-label': 'previous page',
