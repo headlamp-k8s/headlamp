@@ -41,7 +41,7 @@ Internet Explorer 11                     |  ❌     |
 
 ## Tested Desktop OS, for App version
 
-We test on MacOS, various flavours of linux, and Windows. Headlamp runs in the browser, but also as an App.
+We test on MacOS, various flavours of Linux, and Windows. Headlamp runs in the browser, but also as an App.
 
 Platform<div style="min-width: 300px"></div>    | Works | Comments
 ----------------------------------------------|:-----:|------------------------------------------------------------------------------------------
