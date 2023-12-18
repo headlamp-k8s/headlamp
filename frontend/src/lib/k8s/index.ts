@@ -16,6 +16,7 @@ import Deployment from './deployment';
 import Endpoints from './endpoints';
 import HPA from './hpa';
 import Ingress from './ingress';
+import IngressClass from './ingressClass';
 import Job from './job';
 import { Lease } from './lease';
 import { LimitRange } from './limitRange';
@@ -54,6 +55,7 @@ const classList = [
   PodDisruptionBudget,
   PriorityClass,
   Ingress,
+  IngressClass,
   Job,
   Namespace,
   NetworkPolicy,
@@ -359,6 +361,7 @@ export * as daemonSet from './daemonSet';
 export * as deployment from './deployment';
 export * as event from './event';
 export * as ingress from './ingress';
+export * as ingressClass from './ingressClass';
 export * as job from './job';
 export * as namespace from './namespace';
 export * as node from './node';

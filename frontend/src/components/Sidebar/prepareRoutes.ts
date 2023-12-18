@@ -147,6 +147,10 @@ function prepareRoutes(
           label: t('glossary|Ingresses'),
         },
         {
+          name: 'ingressclasses',
+          label: t('glossary|Ingress Classes'),
+        },
+        {
           name: 'portforwards',
           label: t('glossary|Port Forwarding'),
           hide: !helpers.isElectron(),

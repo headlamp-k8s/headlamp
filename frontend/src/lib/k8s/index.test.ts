@@ -208,6 +208,7 @@ const notNamespacedClasses = [
   'ClusterRole',
   'ClusterRoleBinding',
   'CustomResourceDefinition',
+  'IngressClass',
   'Namespace',
   'Node',
   'PersistentVolume',

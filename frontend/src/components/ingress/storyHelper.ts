@@ -92,3 +92,38 @@ export const RESOURCE_INGRESS = {
     loadBalancer: {},
   },
 };
+
+export const RESOURCE_INGRESS_CLASS = {
+  apiVersion: 'networking.k8s.io/v1',
+  kind: 'IngressClass',
+  metadata: {
+    creationTimestamp: '2023-07-19T09:48:42Z',
+    generation: 1,
+    name: 'resource-example-ingress',
+    namespace: 'default',
+    resourceVersion: '1234',
+    uid: 'abc1234',
+  },
+  spec: {
+    controller: 'test',
+  },
+};
+
+export const RESOURCE_DEFAULT_INGRESS_CLASS = {
+  apiVersion: 'networking.k8s.io/v1',
+  kind: 'IngressClass',
+  metadata: {
+    creationTimestamp: '2023-07-19T09:48:42Z',
+    generation: 1,
+    name: 'resource-example-ingress',
+    namespace: 'default',
+    resourceVersion: '1234',
+    uid: 'abc1234',
+    annotations: {
+      'ingressclass.kubernetes.io/is-default-class': 'true',
+    },
+  },
+  spec: {
+    controller: 'test',
+  },
+};
