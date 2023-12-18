@@ -1,4 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ReactElement, ReactNode } from 'react';
+
+export type PluginSettingsSectionType =
+  | ((...args: any[]) => JSX.Element | null | ReactNode)
+  | null
+  | ReactElement
+  | ReactNode;
 
 /**
  * PluginInfo is the shape of the metadata information for individual plugin objects.
@@ -35,6 +42,11 @@ export type PluginInfo = {
   devDependencies?: {
     [key: string]: string;
   };
+
+  /**
+   * component is the plugin's component that is rendered in the settings page.
+   */
+  component?: PluginSettingsSectionType;
 };
 
 export interface PluginsState {
@@ -68,9 +80,28 @@ export const pluginsSlice = createSlice({
     reloadPage() {
       window.location.reload();
     },
+    /**
+     * Set the plugin settings component.
+     */
+    setPluginSettingsComponent(
+      state,
+      action: PayloadAction<{ name: string; component: PluginSettingsSectionType }>
+    ) {
+      const { name, component } = action.payload;
+      state.pluginSettings = state.pluginSettings.map(plugin => {
+        if (plugin.name === name) {
+          return {
+            ...plugin,
+            component,
+          };
+        }
+        return plugin;
+      });
+    },
   },
 });
 
-export const { pluginsLoaded, setPluginSettings, reloadPage } = pluginsSlice.actions;
+export const { pluginsLoaded, setPluginSettings, setPluginSettingsComponent, reloadPage } =
+  pluginsSlice.actions;
 
 export default pluginsSlice.reducer;
