@@ -1,12 +1,9 @@
-import { Icon } from '@iconify/react';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
-import Tooltip from '@mui/material/Tooltip';
 import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React from 'react';
@@ -16,7 +13,7 @@ import { Terminal as XTerminal } from 'xterm';
 import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
 import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
-import { LightTooltip, SectionBox, SimpleTable } from '../common';
+import { ActionButton, LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
 import {
@@ -371,15 +368,12 @@ export default function PodDetails(props: PodDetailsProps) {
             id: DefaultHeaderAction.POD_LOGS,
             action: (
               <AuthVisible item={item} authVerb="get" subresource="log">
-                <Tooltip title={t('Show Logs') as string}>
-                  <IconButton
-                    aria-label={t('logs')}
-                    onClick={() => setShowLogs(true)}
-                    size="medium"
-                  >
-                    <Icon icon="mdi:file-document-box-outline" />
-                  </IconButton>
-                </Tooltip>
+                <ActionButton
+                  description={t('Show Logs')}
+                  aria-label={t('logs')}
+                  icon="mdi:file-document-box-outline"
+                  onClick={() => setShowLogs(true)}
+                />
               </AuthVisible>
             ),
           },
@@ -387,15 +381,12 @@ export default function PodDetails(props: PodDetailsProps) {
             id: DefaultHeaderAction.POD_TERMINAL,
             action: (
               <AuthVisible item={item} authVerb="get" subresource="exec">
-                <Tooltip title={t('Terminal / Exec') as string}>
-                  <IconButton
-                    aria-label={t('terminal') as string}
-                    onClick={() => setShowTerminal(true)}
-                    size="medium"
-                  >
-                    <Icon icon="mdi:console" />
-                  </IconButton>
-                </Tooltip>
+                <ActionButton
+                  description={t('Terminal / Exec')}
+                  aria-label={t('terminal')}
+                  icon="mdi:console"
+                  onClick={() => setShowTerminal(true)}
+                />
               </AuthVisible>
             ),
           },
@@ -403,15 +394,12 @@ export default function PodDetails(props: PodDetailsProps) {
             id: DefaultHeaderAction.POD_ATTACH,
             action: (
               <AuthVisible item={item} authVerb="get" subresource="attach">
-                <Tooltip title={t('Attach') as string}>
-                  <IconButton
-                    aria-label={t('attach') as string}
-                    onClick={() => setIsAttached(true)}
-                    size="medium"
-                  >
-                    <Icon icon="mdi:connection" />
-                  </IconButton>
-                </Tooltip>
+                <ActionButton
+                  description={t('Attach')}
+                  aria-label={t('attach')}
+                  icon="mdi:connection"
+                  onClick={() => setIsAttached(true)}
+                />
               </AuthVisible>
             ),
           },

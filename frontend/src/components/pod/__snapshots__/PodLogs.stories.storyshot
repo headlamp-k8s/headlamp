@@ -70,7 +70,7 @@ exports[`Storyshots Pod/PodLogs Logs 1`] = `
                 class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
                 <button
-                  aria-label="logs"
+                  aria-label="Show Logs"
                   class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
                   data-mui-internal-clone-element="true"
                   tabindex="0"
