@@ -1,11 +1,17 @@
 import initStoryshots, { Stories2SnapsConverter } from '@storybook/addon-storyshots';
 import * as rtl from '@testing-library/react';
 import path from 'path';
+import ResizeObserver from 'resize-observer-polyfill';
 // jsdom used by react-scripts test doesn't include TextEncoder/TextDecoder polyfills
 import { TextDecoder, TextEncoder } from 'util';
 global.TextEncoder = TextEncoder;
 // @ts-ignore
 global.TextDecoder = TextDecoder;
+
+if (!global.ResizeObserver) {
+  // @ts-ignore
+  global.ResizeObserver = ResizeObserver;
+}
 
 /**
  * The storyshot addon has some bug where the path is src/
