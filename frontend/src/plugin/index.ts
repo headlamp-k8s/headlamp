@@ -20,7 +20,7 @@ window.pluginLib = {
   // avoid circular dependencies' issues.
   Crd: require('../lib/k8s/crd'),
   CommonComponents: require('../components/common'),
-  MuiCore: require('@mui/material'),
+  MuiMaterial: require('@mui/material'),
   MuiStyles: require('@mui/styles'),
   MuiLab: require('@mui/lab'),
   React: require('react'),
@@ -39,6 +39,9 @@ window.pluginLib = {
   Plugin,
   ...registryToExport,
 };
+
+// backwards compat.
+window.pluginLib.MuiCore = window.pluginLib.MuiMaterial;
 
 // @todo: should window.plugins be private?
 // @todo: Should all the plugin objects be in a single window.Headlamp object?

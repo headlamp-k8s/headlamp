@@ -5,35 +5,35 @@ exports[`Storyshots ActionsNotifier None 1`] = `<div />`;
 exports[`Storyshots ActionsNotifier Some 1`] = `
 <div>
   <div
-    class="makeStyles-bottom-4 makeStyles-left-5 makeStyles-root-1"
+    class="SnackbarContainer-bottom SnackbarContainer-left SnackbarContainer-root css-uwcd5u"
   >
     <div
-      class="MuiCollapse-root MuiCollapse-entered"
+      class="MuiCollapse-root MuiCollapse-vertical MuiCollapse-entered css-pwcg7p-MuiCollapse-root"
       style="min-height: 0px;"
     >
       <div
-        class="MuiCollapse-wrapper"
+        class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
       >
         <div
-          class="MuiCollapse-wrapperInner"
+          class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
         >
           <div
-            class="SnackbarItem-root-8 SnackbarItem-wrappedRoot-23 SnackbarItem-anchorOriginBottomLeft-14"
+            class="SnackbarItem-wrappedRoot css-1erfie"
           >
             <div
               aria-describedby="notistack-snackbar"
-              class="ForwardRef-root-24 SnackbarItem-contentRoot-15"
+              class="SnackbarContent-root SnackbarItem-contentRoot css-hped4j"
               role="alert"
               style="webkit-transform: none; transform: none; webkit-transition: -webkit-transform 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms; transition: transform 225ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;"
             >
               <div
-                class="SnackbarItem-message-21"
+                class="SnackbarItem-message"
                 id="notistack-snackbar"
               >
                 Some message
               </div>
               <div
-                class="SnackbarItem-action-22"
+                class="SnackbarItem-action"
               >
                 <button
                   class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textSecondary MuiButton-sizeSmall MuiButton-textSizeSmall css-u3zvl7-MuiButtonBase-root-MuiButton-root"
