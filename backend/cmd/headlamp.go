@@ -382,6 +382,7 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 		if !isURLContainedInProxyURLs {
 			zlog.Error().Err(err).Str("action", "externalproxy").Msg("no allowed proxy url match, request denied")
 			http.Error(w, "no allowed proxy url match, request denied ", http.StatusBadRequest)
+			return
 		}
 
 		ctx := context.Background()
