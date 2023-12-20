@@ -260,7 +260,7 @@ export async function fetchAndExecutePlugins(
 
   // Can set this to a semver version range like '>=0.8.0-alpha.3'.
   // '' means all versions.
-  const compatibleHeadlampPluginVersion = '';
+  const compatibleHeadlampPluginVersion = '>=0.8.0-alpha.3';
 
   const { sourcesToExecute, incompatiblePlugins } = filterSources(
     sources,
