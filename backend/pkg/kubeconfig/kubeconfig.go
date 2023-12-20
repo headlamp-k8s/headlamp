@@ -17,12 +17,6 @@ import (
 	"k8s.io/client-go/tools/clientcmd/api"
 )
 
-// errorCheck contains a condition and a message.
-type errorCheck struct {
-	Condition func(error) bool
-	Message   string
-}
-
 // TODO: Use a different way to avoid name clashes with other clusters.
 const InClusterContextName = "main"
 
@@ -201,11 +195,6 @@ func LoadContextsFromFile(kubeConfigPath string, source int) ([]Context, error) 
 
 	config, err := clientcmd.LoadFromFile(kubeConfigPath)
 	if err != nil {
-		return nil, handleErrors(err)
-	}
-
-	// Validate kubeconfig
-	if err := clientcmd.Validate(*config); err != nil {
 		return nil, err
 	}
 
@@ -352,75 +341,4 @@ func LoadAndStoreKubeConfigs(kubeConfigStore ContextStore, kubeConfigs string, s
 	}
 
 	return nil
-}
-
-// getErrorChecks returns a list of error checks.
-// These are generally the errors when config is not loaded properly.
-func getErrorChecks() []errorCheck {
-	return []errorCheck{
-		{
-			Condition: func(e error) bool {
-				return strings.Contains(e.Error(), "illegal base64 data")
-			},
-			Message: "invalid client certificate or client key or certificate authority data in kubeconfig",
-		},
-		{
-			Condition: func(e error) bool {
-				return strings.Contains(e.Error(), "client-certificate-data")
-			},
-			Message: "invalid client certificate data in kubeconfig",
-		},
-		{
-			Condition: func(e error) bool {
-				return strings.Contains(e.Error(), "client-key-data")
-			},
-			Message: "invalid client key data in kubeconfig",
-		},
-		{
-			Condition: func(e error) bool {
-				return strings.Contains(e.Error(), "certificate-authority-data")
-			},
-			Message: "invalid certificate authority data in kubeconfig",
-		},
-		{
-			Condition: func(e error) bool {
-				return (strings.Contains(e.Error(), "client-certificate") &&
-					!strings.Contains(e.Error(), "client-certificate-data"))
-			},
-			Message: "invalid client certificate path in kubeconfig",
-		},
-		{
-			Condition: func(e error) bool {
-				return (strings.Contains(e.Error(), "client-key") && !strings.Contains(e.Error(), "client-key-data"))
-			},
-			Message: "invalid client key path in kubeconfig",
-		},
-		{
-			Condition: func(e error) bool {
-				return (strings.Contains(e.Error(), "certificate-authority") &&
-					!strings.Contains(e.Error(), "certificate-authority-data"))
-			},
-			Message: "invalid certificate authority path in kubeconfig",
-		},
-		// Add more checks as needed
-	}
-}
-
-// handleErrors handles errors based on the given error checks.
-// It returns a single error message with all the error messages.
-func handleErrors(err error) error {
-	var errorMessages []string
-
-	errorChecks := getErrorChecks()
-	for _, check := range errorChecks {
-		if check.Condition(err) {
-			errorMessages = append(errorMessages, check.Message)
-		}
-	}
-
-	if len(errorMessages) > 0 {
-		return fmt.Errorf("[%s]", strings.Join(errorMessages, ", "))
-	}
-
-	return err
 }
