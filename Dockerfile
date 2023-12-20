@@ -61,6 +61,14 @@ RUN for i in $(find ./plugins-old/*/main.js); do plugin_name=$(echo $i|cut -d'/'
 
 RUN for i in $(find ./.plugins/*/main.js); do plugin_name=$(echo $i|cut -d'/' -f3); mkdir -p plugins/$plugin_name; cp $i plugins/$plugin_name; done
 
+# Static (officially shipped) plugins
+FROM --platform=${BUILDPLATFORM} frontend-build as static-plugins
+RUN apt-get update && apt-get install -y jq
+COPY ./container/build-manifest.json ./container/fetch-plugins.sh /tools/
+
+WORKDIR /tools
+RUN mkdir -p /plugins
+RUN ./fetch-plugins.sh /plugins/
 
 FROM image-base as final
 
@@ -77,10 +85,12 @@ RUN if command -v apt-get > /dev/null; then \
 COPY --from=backend-build --link /headlamp/backend/headlamp-server /headlamp/headlamp-server
 COPY --from=frontend --link /headlamp/frontend/build /headlamp/frontend
 COPY --from=frontend --link /headlamp/plugins /headlamp/plugins
+COPY --from=static-plugins --link /plugins /headlamp/static-plugins
 
 RUN chown -R headlamp:headlamp /headlamp
 USER headlamp
 
 EXPOSE 4466
 
+ENV HEADLAMP_STATIC_PLUGINS_DIR=/headlamp/static-plugins
 ENTRYPOINT ["/headlamp/headlamp-server", "-html-static-dir", "/headlamp/frontend"]
