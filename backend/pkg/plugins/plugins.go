@@ -2,7 +2,9 @@ package plugins
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"io"
 	"io/fs"
 	"log"
 	"net/http"
@@ -10,6 +12,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/Masterminds/semver/v3"
 	"github.com/fsnotify/fsnotify"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/cache"
 	"github.com/headlamp-k8s/headlamp/backend/pkg/utils"
@@ -97,6 +100,55 @@ func GeneratePluginPaths(basePath string, staticPluginDir string, pluginDir stri
 	return pluginListURL, nil
 }
 
+// CheckHeadlampPluginVersion checks the Headlamp plugin version against a required version.
+// It reads the packageJSONPath and compares the version of the plugin with the
+// requiredVersionStr. If the current version is less than the required version,
+// or there is another issue, it exits with a non nil status code.
+func CheckHeadlampPluginVersion(packageJSONPath, requiredVersionStr string) error {
+	// Open the package.json file
+	file, err := os.Open(packageJSONPath)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	fileData, err := io.ReadAll(file)
+	if err != nil {
+		return err
+	}
+
+	var packageJSON struct {
+		DevDependencies map[string]string `json:"devDependencies"`
+	}
+
+	if err := json.Unmarshal(fileData, &packageJSON); err != nil {
+		return err
+	}
+
+	version, exists := packageJSON.DevDependencies["@kinvolk/headlamp-plugin"]
+	if !exists {
+		return fmt.Errorf("headlamp plugin not found in devDependencies")
+	}
+
+	requiredVersion, err := semver.NewVersion(requiredVersionStr)
+	if err != nil {
+		return fmt.Errorf("invalid required version format: %v", err)
+	}
+
+	currentVersion, err := semver.NewVersion(version)
+	if err != nil {
+		return fmt.Errorf("invalid current version format: %v", err)
+	}
+
+	if currentVersion.LessThan(requiredVersion) {
+		return fmt.Errorf("current version: %v less than requiredVersion:%v",
+			currentVersion,
+			requiredVersion)
+	}
+
+	return nil
+}
+
 // pluginBasePathListForDir returns a list of valid plugin paths for the given directory.
 func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error) {
 	files, err := os.ReadDir(pluginDir)
@@ -126,8 +178,18 @@ func pluginBasePathListForDir(pluginDir string, baseURL string) ([]string, error
 
 		_, err = os.Stat(packageJSONPath)
 		if err != nil {
-			log.Printf("Warning, package.json not found at '%s': %s\n", packageJSONPath, err)
-			log.Printf("Please run 'headlamp-plugin extract' again with headlamp-plugin >= 0.6.0")
+			log.Printf("Error, package.json not found at '%s': %s\n", packageJSONPath, err)
+			log.Printf("Please run 'headlamp-plugin extract' again with headlamp-plugin >= 0.8.0")
+
+			return nil, err
+		}
+
+		err = CheckHeadlampPluginVersion(packageJSONPath, "0.8.0-alpha.10")
+		if err != nil {
+			log.Printf("Error, plugin version is not compatible with this version of Headlamp: %s\n", err)
+			log.Printf("Please run 'headlamp-plugin upgrade' with headlamp-plugin >= 0.8.0")
+
+			return nil, err
 		}
 
 		pluginFileURL := filepath.Join(baseURL, f.Name())

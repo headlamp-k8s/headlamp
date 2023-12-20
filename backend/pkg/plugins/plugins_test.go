@@ -2,6 +2,7 @@ package plugins_test
 
 import (
 	"context"
+	"encoding/json"
 	"net/http/httptest"
 	"os"
 	"path"
@@ -108,7 +109,7 @@ func TestGeneratePluginPaths(t *testing.T) { //nolint:funlen
 		require.NoError(t, err)
 
 		packageJSONPath := path.Join(subDir, "package.json")
-		_, err = os.Create(packageJSONPath)
+		_, err = createTempPackageJSON("0.8.0-alpha.10", packageJSONPath)
 		require.NoError(t, err)
 
 		// test without basePath
@@ -144,7 +145,7 @@ func TestGeneratePluginPaths(t *testing.T) { //nolint:funlen
 		require.NoError(t, err)
 
 		packageJSONPath := path.Join(subDir, "package.json")
-		_, err = os.Create(packageJSONPath)
+		_, err = createTempPackageJSON("0.8.0-alpha.10", packageJSONPath)
 		require.NoError(t, err)
 
 		// test without basePath
@@ -216,7 +217,7 @@ func TestHandlePluginEvents(t *testing.T) { //nolint:funlen
 	require.NoError(t, err)
 
 	packageJSONPath := path.Join(pluginDirPath, "package.json")
-	_, err = os.Create(packageJSONPath)
+	_, err = createTempPackageJSON("0.8.0-alpha.10", packageJSONPath)
 	require.NoError(t, err)
 
 	// create channel to receive events
@@ -318,4 +319,79 @@ func TestPopulatePluginsCache(t *testing.T) {
 	pluginListArr, ok := pluginList.([]string)
 	require.True(t, ok)
 	require.Empty(t, pluginListArr)
+}
+
+func TestCheckHeadlampPluginVersion(t *testing.T) {
+	cases := []struct {
+		Version         string
+		RequiredVersion string
+		ShouldExit      bool
+	}{
+		{"0.7.0", "0.8.0-alpha.10", true},
+		{"0.9.0", "0.8.0-alpha.10", false},
+		{"0.9.1-alpha.10", "0.8.0-alpha.10", false},
+		{"0.8.0", "0.8.0-alpha.10", false},
+		{"0.8.0-alpha.10", "0.8.0-alpha.10", false},
+	}
+
+	for _, tc := range cases {
+		tc := tc // Capture range variable
+		t.Run(tc.Version, func(t *testing.T) {
+			tempFile, err := createTempPackageJSON(tc.Version, "")
+			if err != nil {
+				t.Fatalf("could not create temp file: %v", err)
+			}
+			defer os.Remove(tempFile.Name())
+
+			err = plugins.CheckHeadlampPluginVersion(tempFile.Name(), tc.RequiredVersion)
+
+			if (err != nil && !tc.ShouldExit) || (err == nil && tc.ShouldExit) {
+				t.Errorf("for version %s and required version %s, expected exit: %v, got error: %v",
+					tc.Version,
+					tc.RequiredVersion,
+					tc.ShouldExit,
+					err)
+			}
+		})
+	}
+}
+
+// Helper function to create temporary package.json files.
+func createTempPackageJSON(version string, packageJSONPath string) (*os.File, error) {
+	content := map[string]interface{}{
+		"devDependencies": map[string]string{
+			"@kinvolk/headlamp-plugin": version,
+		},
+	}
+
+	var file *os.File
+
+	var err error
+
+	if packageJSONPath == "" {
+		file, err = os.CreateTemp("", "package.json")
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		file, err = os.Create(packageJSONPath)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	data, err := json.Marshal(content)
+	if err != nil {
+		return nil, err
+	}
+
+	if _, err := file.Write(data); err != nil {
+		return nil, err
+	}
+
+	if err := file.Close(); err != nil {
+		return nil, err
+	}
+
+	return file, nil
 }
