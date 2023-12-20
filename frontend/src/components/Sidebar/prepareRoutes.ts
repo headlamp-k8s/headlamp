@@ -85,24 +85,24 @@ function prepareRoutes(
           label: t('glossary|Pods'),
         },
         {
-          name: 'ReplicaSets',
-          label: t('glossary|Replica Sets'),
-        },
-        {
-          name: 'DaemonSets',
-          label: t('glossary|Daemon Sets'),
+          name: 'Deployments',
+          label: t('glossary|Deployments'),
         },
         {
           name: 'StatefulSets',
           label: t('glossary|Stateful Sets'),
         },
         {
-          name: 'Jobs',
-          label: t('glossary|Jobs'),
+          name: 'DaemonSets',
+          label: t('glossary|Daemon Sets'),
         },
         {
-          name: 'Deployments',
-          label: t('glossary|Deployments'),
+          name: 'ReplicaSets',
+          label: t('glossary|Replica Sets'),
+        },
+        {
+          name: 'Jobs',
+          label: t('glossary|Jobs'),
         },
         {
           name: 'CronJobs',
@@ -116,16 +116,16 @@ function prepareRoutes(
       icon: 'mdi:database',
       subList: [
         {
-          name: 'storageClasses',
-          label: t('glossary|Storage Classes'),
+          name: 'persistentVolumeClaims',
+          label: t('glossary|Persistent Volume Claims'),
         },
         {
           name: 'persistentVolumes',
           label: t('glossary|Persistent Volumes'),
         },
         {
-          name: 'persistentVolumeClaims',
-          label: t('glossary|Persistent Volume Claims'),
+          name: 'storageClasses',
+          label: t('glossary|Storage Classes'),
         },
       ],
     },
@@ -202,28 +202,28 @@ function prepareRoutes(
           label: t('glossary|VPAs'),
         },
         {
+          name: 'podDisruptionBudgets',
+          label: t('glossary|Pod Disruption Budgets'),
+        },
+        {
           name: 'resourceQuotas',
           label: t('glossary|Resource Quotas'),
         },
         {
-          name: 'podDisruptionBudgets',
-          label: t('glossary|Pod Disruption Budgets'),
+          name: 'limitRanges',
+          label: t('glossary|Limit Ranges'),
         },
         {
           name: 'priorityClasses',
           label: t('glossary|Priority Classes'),
         },
         {
-          name: 'leases',
-          label: t('glossary|Leases'),
-        },
-        {
           name: 'runtimeClasses',
           label: t('glossary|Runtime Classes'),
         },
         {
-          name: 'limitRanges',
-          label: t('glossary|Limit Ranges'),
+          name: 'leases',
+          label: t('glossary|Leases'),
         },
         {
           name: 'mutatingWebhookConfigurations',

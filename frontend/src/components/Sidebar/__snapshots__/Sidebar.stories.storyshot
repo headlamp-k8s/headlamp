@@ -554,30 +554,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Replica Sets
-                              </span>
-                            </div>
-                            <span
-                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                            />
-                          </a>
-                        </li>
-                        <li
-                          class="makeStyles-link makeStyles-link"
-                        >
-                          <a
-                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
-                            href="/"
-                            role="button"
-                            tabindex="0"
-                          >
-                            <div
-                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
-                            >
-                              <span
-                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
-                              >
-                                Daemon Sets
+                                Deployments
                               </span>
                             </div>
                             <span
@@ -623,7 +600,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Jobs
+                                Daemon Sets
                               </span>
                             </div>
                             <span
@@ -646,7 +623,30 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Deployments
+                                Replica Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
+                              >
+                                Jobs
                               </span>
                             </div>
                             <span
@@ -734,7 +734,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Storage Classes
+                                Persistent Volume Claims
                               </span>
                             </div>
                             <span
@@ -780,7 +780,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Persistent Volume Claims
+                                Storage Classes
                               </span>
                             </div>
                             <span
@@ -1205,6 +1205,29 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
+                                Pod Disruption Budgets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
+                              >
                                 Resource Quotas
                               </span>
                             </div>
@@ -1228,7 +1251,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Pod Disruption Budgets
+                                Limit Ranges
                               </span>
                             </div>
                             <span
@@ -1274,29 +1297,6 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Leases
-                              </span>
-                            </div>
-                            <span
-                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                            />
-                          </a>
-                        </li>
-                        <li
-                          class="makeStyles-link makeStyles-link"
-                        >
-                          <a
-                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
-                            href="/"
-                            role="button"
-                            tabindex="0"
-                          >
-                            <div
-                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
-                            >
-                              <span
-                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
-                              >
                                 Runtime Classes
                               </span>
                             </div>
@@ -1320,7 +1320,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Closed 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Limit Ranges
+                                Leases
                               </span>
                             </div>
                             <span
@@ -1691,30 +1691,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Replica Sets
-                              </span>
-                            </div>
-                            <span
-                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                            />
-                          </a>
-                        </li>
-                        <li
-                          class="makeStyles-link makeStyles-link"
-                        >
-                          <a
-                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
-                            href="/"
-                            role="button"
-                            tabindex="0"
-                          >
-                            <div
-                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
-                            >
-                              <span
-                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
-                              >
-                                Daemon Sets
+                                Deployments
                               </span>
                             </div>
                             <span
@@ -1760,7 +1737,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Jobs
+                                Daemon Sets
                               </span>
                             </div>
                             <span
@@ -1783,7 +1760,30 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Deployments
+                                Replica Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
+                              >
+                                Jobs
                               </span>
                             </div>
                             <span
@@ -1878,7 +1878,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Storage Classes
+                                Persistent Volume Claims
                               </span>
                             </div>
                             <span
@@ -1924,7 +1924,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Persistent Volume Claims
+                                Storage Classes
                               </span>
                             </div>
                             <span
@@ -2370,6 +2370,29 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
+                                Pod Disruption Budgets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
+                              >
                                 Resource Quotas
                               </span>
                             </div>
@@ -2393,7 +2416,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Pod Disruption Budgets
+                                Limit Ranges
                               </span>
                             </div>
                             <span
@@ -2439,29 +2462,6 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Leases
-                              </span>
-                            </div>
-                            <span
-                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                            />
-                          </a>
-                        </li>
-                        <li
-                          class="makeStyles-link makeStyles-link"
-                        >
-                          <a
-                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
-                            href="/"
-                            role="button"
-                            tabindex="0"
-                          >
-                            <div
-                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
-                            >
-                              <span
-                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
-                              >
                                 Runtime Classes
                               </span>
                             </div>
@@ -2485,7 +2485,7 @@ exports[`Storyshots Sidebar/Sidebar In Cluster Sidebar Open 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Limit Ranges
+                                Leases
                               </span>
                             </div>
                             <span
@@ -2863,30 +2863,7 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Replica Sets
-                              </span>
-                            </div>
-                            <span
-                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                            />
-                          </a>
-                        </li>
-                        <li
-                          class="makeStyles-link makeStyles-link"
-                        >
-                          <a
-                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
-                            href="/"
-                            role="button"
-                            tabindex="0"
-                          >
-                            <div
-                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
-                            >
-                              <span
-                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
-                              >
-                                Daemon Sets
+                                Deployments
                               </span>
                             </div>
                             <span
@@ -2932,7 +2909,7 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Jobs
+                                Daemon Sets
                               </span>
                             </div>
                             <span
@@ -2955,7 +2932,30 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Deployments
+                                Replica Sets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
+                              >
+                                Jobs
                               </span>
                             </div>
                             <span
@@ -3050,7 +3050,7 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Storage Classes
+                                Persistent Volume Claims
                               </span>
                             </div>
                             <span
@@ -3096,7 +3096,7 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Persistent Volume Claims
+                                Storage Classes
                               </span>
                             </div>
                             <span
@@ -3542,6 +3542,29 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
+                                Pod Disruption Budgets
+                              </span>
+                            </div>
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </a>
+                        </li>
+                        <li
+                          class="makeStyles-link makeStyles-link"
+                        >
+                          <a
+                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
+                            href="/"
+                            role="button"
+                            tabindex="0"
+                          >
+                            <div
+                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
+                            >
+                              <span
+                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
+                              >
                                 Resource Quotas
                               </span>
                             </div>
@@ -3565,7 +3588,7 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Pod Disruption Budgets
+                                Limit Ranges
                               </span>
                             </div>
                             <span
@@ -3611,29 +3634,6 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Leases
-                              </span>
-                            </div>
-                            <span
-                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                            />
-                          </a>
-                        </li>
-                        <li
-                          class="makeStyles-link makeStyles-link"
-                        >
-                          <a
-                            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-sayhe9-MuiButtonBase-root-MuiListItem-root"
-                            href="/"
-                            role="button"
-                            tabindex="0"
-                          >
-                            <div
-                              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
-                            >
-                              <span
-                                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
-                              >
                                 Runtime Classes
                               </span>
                             </div>
@@ -3657,7 +3657,7 @@ exports[`Storyshots Sidebar/Sidebar Selected Item With Sidebar Omitted 1`] = `
                               <span
                                 class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-nqgwvn-MuiTypography-root"
                               >
-                                Limit Ranges
+                                Leases
                               </span>
                             </div>
                             <span
