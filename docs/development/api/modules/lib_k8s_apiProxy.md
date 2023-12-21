@@ -7,7 +7,9 @@ slug: "lib_k8s_apiProxy"
 ## Interfaces
 
 - [ApiError](../interfaces/lib_k8s_apiProxy.ApiError.md)
+- [ApiInfo](../interfaces/lib_k8s_apiProxy.ApiInfo.md)
 - [ClusterRequest](../interfaces/lib_k8s_apiProxy.ClusterRequest.md)
+- [ClusterRequestParams](../interfaces/lib_k8s_apiProxy.ClusterRequestParams.md)
 - [QueryParameters](../interfaces/lib_k8s_apiProxy.QueryParameters.md)
 - [RequestParams](../interfaces/lib_k8s_apiProxy.RequestParams.md)
 - [StreamArgs](../interfaces/lib_k8s_apiProxy.StreamArgs.md)
@@ -22,6 +24,8 @@ slug: "lib_k8s_apiProxy"
 
 ▸ (`err`, `cancelStreamFunc?`): `void`
 
+The callback that's called when there's an error streaming the results.
+
 ##### Parameters
 
 | Name | Type |
@@ -35,7 +39,7 @@ slug: "lib_k8s_apiProxy"
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:283](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L283)
+[lib/k8s/apiProxy.ts:422](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L422)
 
 ___
 
@@ -46,6 +50,8 @@ ___
 #### Type declaration
 
 ▸ (...`args`): `void`
+
+The callback that's called when some results are streamed in.
 
 ##### Parameters
 
@@ -59,7 +65,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:282](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L282)
+[lib/k8s/apiProxy.ts:420](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L420)
 
 ## Functions
 
@@ -67,18 +73,23 @@ ___
 
 ▸ **apiFactory**(...`args`): `Object`
 
+Creates an API client for a single or multiple Kubernetes resources.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `...args` | [group: string, version: string, resource: string] \| [group: string, version: string, resource: string][] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...args` | [group: string, version: string, resource: string] \| [group: string, version: string, resource: string][] | The arguments to pass to either `singleApiFactory` or `multipleApiFactory`. |
 
 #### Returns
 
 `Object`
 
+An API client for the specified Kubernetes resource(s).
+
 | Name | Type |
 | :------ | :------ |
+| `apiInfo` | { `group`: `string` ; `resource`: `string` ; `version`: `string`  }[] |
 | `delete` | (`name`: `string`, `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<`any`\> |
 | `get` | (`name`: `string`, `cb`: [`StreamResultsCb`](lib_k8s_apiProxy.md#streamresultscb), `errCb`: [`StreamErrCb`](lib_k8s_apiProxy.md#streamerrcb), `queryParams?`: [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md)) => `Promise`<() => `void`\> |
 | `isNamespaced` | `boolean` |
@@ -89,7 +100,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:353](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L353)
+[lib/k8s/apiProxy.ts:529](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L529)
 
 ___
 
@@ -115,7 +126,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:420](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L420)
+[lib/k8s/apiProxy.ts:635](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L635)
 
 ___
 
@@ -123,19 +134,25 @@ ___
 
 ▸ **apply**(`body`): `Promise`<`JSON`\>
 
+Applies the provided body to the Kubernetes API.
+
+Tries to POST, and if there's a conflict it does a PUT to the api endpoint.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `body` | [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `body` | [`KubeObjectInterface`](../interfaces/lib_k8s_cluster.KubeObjectInterface.md) | The kubernetes object body to apply. |
 
 #### Returns
 
 `Promise`<`JSON`\>
 
+The response from the kubernetes API server.
+
 #### Defined in
 
-[lib/k8s/apiProxy.ts:995](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L995)
+[lib/k8s/apiProxy.ts:1290](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1290)
 
 ___
 
@@ -153,8 +170,8 @@ be used as a request to the respective Kubernetes server.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `path` | `string` | The path to the API endpoint. |
-| `params` | [`RequestParams`](../interfaces/lib_k8s_apiProxy.RequestParams.md) | Optional parameters for the request. |
-| `queryParams?` | [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md) | Optional query parameters for the request. |
+| `params` | [`ClusterRequestParams`](../interfaces/lib_k8s_apiProxy.ClusterRequestParams.md) | Optional parameters for the request. |
+| `queryParams?` | [`QueryParameters`](../interfaces/lib_k8s_apiProxy.QueryParameters.md) | Optional query parameters for the k8s request. |
 
 #### Returns
 
@@ -164,7 +181,7 @@ A Promise that resolves to the JSON response from the API server.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:183](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L183)
+[lib/k8s/apiProxy.ts:318](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L318)
 
 ___
 
@@ -184,7 +201,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1098](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L1098)
+[lib/k8s/apiProxy.ts:1403](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1403)
 
 ___
 
@@ -205,10 +222,10 @@ to get the status of the drain node process.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `cluster` | `string` |
-| `nodeName` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cluster` | `string` | The cluster to drain the node |
+| `nodeName` | `string` | The node name to drain |
 
 #### Returns
 
@@ -216,37 +233,40 @@ to get the status of the drain node process.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1180](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L1180)
+[lib/k8s/apiProxy.ts:1529](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1529)
 
 ___
 
 ### drainNodeStatus
 
-▸ **drainNodeStatus**(`cluster`, `nodeName`): `Promise`<`any`\>
+▸ **drainNodeStatus**(`cluster`, `nodeName`): `Promise`<`DrainNodeStatus`\>
 
-Get the status of the drain node process
+Get the status of the drain node process.
+
+It is used in the node detail page.
+As draining a node is a long running process, we poll this endpoint to get
+the status of the drain node process.
 
 **`throws`** {Error} if the request fails
 
 **`throws`** {Error} if the response is not ok
 
-This function is used to get the status of the drain node process. It is used in the node detail page.
-As draining a node is a long running process, we poll this endpoint to get the status of the drain node process.
-
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `cluster` | `string` |
-| `nodeName` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cluster` | `string` | The cluster to get the status of the drain node process for. |
+| `nodeName` | `string` | The node name to get the status of the drain node process for. |
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`DrainNodeStatus`\>
+
+- The response from the API.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1212](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L1212)
+[lib/k8s/apiProxy.ts:1569](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1569)
 
 ___
 
@@ -254,19 +274,23 @@ ___
 
 ▸ **listPortForward**(`cluster`): `Promise`<`any`\>
 
+Lists the port forwards for the specified cluster.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `cluster` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cluster` | `string` | The cluster to list the port forwards. |
 
 #### Returns
 
 `Promise`<`any`\>
 
+the list of port forwards for the cluster.
+
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1161](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L1161)
+[lib/k8s/apiProxy.ts:1506](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1506)
 
 ___
 
@@ -274,21 +298,25 @@ ___
 
 ▸ **metrics**(`url`, `onMetrics`, `onError?`): `Promise`<() => `void`\>
 
+Gets the metrics for the specified resource. Gets new metrics every 10 seconds.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `url` | `string` |
-| `onMetrics` | (`arg`: [`KubeMetrics`](../interfaces/lib_k8s_cluster.KubeMetrics.md)[]) => `void` |
-| `onError?` | (`err`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `url` | `string` | The url of the resource to get metrics for. |
+| `onMetrics` | (`arg`: [`KubeMetrics`](../interfaces/lib_k8s_cluster.KubeMetrics.md)[]) => `void` | The function to call with the metrics. |
+| `onError?` | (`err`: [`ApiError`](../interfaces/lib_k8s_apiProxy.ApiError.md)) => `void` | The function to call if there's an error. |
 
 #### Returns
 
 `Promise`<() => `void`\>
 
+A function to cancel the metrics request.
+
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1043](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L1043)
+[lib/k8s/apiProxy.ts:1348](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1348)
 
 ___
 
@@ -311,7 +339,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:619](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L619)
+[lib/k8s/apiProxy.ts:862](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L862)
 
 ___
 
@@ -334,7 +362,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:608](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L608)
+[lib/k8s/apiProxy.ts:851](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L851)
 
 ___
 
@@ -357,7 +385,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:630](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L630)
+[lib/k8s/apiProxy.ts:873](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L873)
 
 ___
 
@@ -378,7 +406,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:641](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L641)
+[lib/k8s/apiProxy.ts:884](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L884)
 
 ___
 
@@ -409,7 +437,7 @@ A Promise that resolves to the JSON response from the API server.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:155](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L155)
+[lib/k8s/apiProxy.ts:282](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L282)
 
 ___
 
@@ -429,34 +457,41 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1085](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L1085)
+[lib/k8s/apiProxy.ts:1390](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1390)
 
 ___
 
 ### startPortForward
 
-▸ **startPortForward**(`cluster`, `namespace`, `podname`, `containerPort`, `service`, `serviceNamespace`, `port?`, `id?`): `Promise`<`any`\>
+▸ **startPortForward**(`cluster`, `namespace`, `podname`, `containerPort`, `service`, `serviceNamespace`, `port?`, `address?`, `id?`): `Promise`<`any`\>
+
+Starts a portforward with the given details.
+
+**`throws`** {Error} if the request fails.
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `cluster` | `string` | `undefined` |
-| `namespace` | `string` | `undefined` |
-| `podname` | `string` | `undefined` |
-| `containerPort` | `string` \| `number` | `undefined` |
-| `service` | `string` | `undefined` |
-| `serviceNamespace` | `string` | `undefined` |
-| `port?` | `string` | `undefined` |
-| `id` | `string` | `''` |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `cluster` | `string` | `undefined` | The cluster to portforward for. |
+| `namespace` | `string` | `undefined` | The namespace to portforward for. |
+| `podname` | `string` | `undefined` | The pod to portforward for. |
+| `containerPort` | `string` \| `number` | `undefined` | The container port to portforward for. |
+| `service` | `string` | `undefined` | The service to portforward for. |
+| `serviceNamespace` | `string` | `undefined` | The service namespace to portforward for. |
+| `port?` | `string` | `undefined` | The port to portforward for. |
+| `address` | `string` | `''` | - |
+| `id` | `string` | `''` | The id to portforward for. |
 
 #### Returns
 
 `Promise`<`any`\>
 
+The response from the API.
+
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1107](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L1107)
+[lib/k8s/apiProxy.ts:1432](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1432)
 
 ___
 
@@ -464,21 +499,27 @@ ___
 
 ▸ **stopOrDeletePortForward**(`cluster`, `id`, `stopOrDelete?`): `Promise`<`string`\>
 
+Stops or deletes a portforward with the specified details.
+
+**`throws`** {Error} if the request fails.
+
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `cluster` | `string` | `undefined` |
-| `id` | `string` | `undefined` |
-| `stopOrDelete` | `boolean` | `true` |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `cluster` | `string` | `undefined` | The cluster to portforward for. |
+| `id` | `string` | `undefined` | The id to portforward for. |
+| `stopOrDelete` | `boolean` | `true` | Whether to stop or delete the portforward. True for stop, false for delete. |
 
 #### Returns
 
 `Promise`<`string`\>
 
+The response from the API.
+
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1143](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L1143)
+[lib/k8s/apiProxy.ts:1481](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1481)
 
 ___
 
@@ -511,7 +552,7 @@ the stream, and `getSocket`, which returns the WebSocket object.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:860](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L860)
+[lib/k8s/apiProxy.ts:1122](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1122)
 
 ___
 
@@ -519,7 +560,7 @@ ___
 
 ▸ **streamResult**(`url`, `name`, `cb`, `errCb`, `queryParams?`): `Promise`<() => `void`\>
 
-Streams the results of a Kubernetes API request.
+Streams the results of a Kubernetes API request into a 'cb' callback.
 
 #### Parameters
 
@@ -539,7 +580,7 @@ A function to cancel the stream.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:657](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L657)
+[lib/k8s/apiProxy.ts:900](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L900)
 
 ___
 
@@ -566,7 +607,7 @@ A function to cancel the stream.
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:718](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L718)
+[lib/k8s/apiProxy.ts:961](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L961)
 
 ___
 
@@ -580,7 +621,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1074](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L1074)
+[lib/k8s/apiProxy.ts:1379](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1379)
 
 ___
 
@@ -594,4 +635,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/apiProxy.ts:1081](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/apiProxy.ts#L1081)
+[lib/k8s/apiProxy.ts:1386](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/apiProxy.ts#L1386)

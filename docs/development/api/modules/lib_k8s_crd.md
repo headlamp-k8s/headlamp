@@ -10,13 +10,16 @@ slug: "lib_k8s_crd"
 
 ## Interfaces
 
+- [CRClassArgs](../interfaces/lib_k8s_crd.CRClassArgs.md)
 - [KubeCRD](../interfaces/lib_k8s_crd.KubeCRD.md)
 
 ## Functions
 
 ### makeCustomResourceClass
 
-▸ **makeCustomResourceClass**(`args`, `isNamespaced`): `any`
+▸ **makeCustomResourceClass**(`args`, `isNamespaced`): `ReturnType`<typeof [`makeKubeObject`](lib_k8s_cluster.md#makekubeobject)\>
+
+**`deprecated`** Use the version of the function that receives an object as its argument.
 
 #### Parameters
 
@@ -27,8 +30,24 @@ slug: "lib_k8s_crd"
 
 #### Returns
 
-`any`
+`ReturnType`<typeof [`makeKubeObject`](lib_k8s_cluster.md#makekubeobject)\>
 
 #### Defined in
 
-[lib/k8s/crd.ts:80](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/crd.ts#L80)
+[lib/k8s/crd.ts:104](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/crd.ts#L104)
+
+▸ **makeCustomResourceClass**(`args`): `ReturnType`<typeof [`makeKubeObject`](lib_k8s_cluster.md#makekubeobject)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `args` | [`CRClassArgs`](../interfaces/lib_k8s_crd.CRClassArgs.md) |
+
+#### Returns
+
+`ReturnType`<typeof [`makeKubeObject`](lib_k8s_cluster.md#makekubeobject)\>
+
+#### Defined in
+
+[lib/k8s/crd.ts:108](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/crd.ts#L108)

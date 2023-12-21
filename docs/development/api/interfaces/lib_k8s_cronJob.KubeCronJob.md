@@ -30,7 +30,7 @@ CronJob structure returned by the k8s API.
 
 #### Defined in
 
-[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L37)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -38,13 +38,22 @@ ___
 
 • **kind**: `string`
 
+Kind is a string value representing the REST resource this object represents.
+Servers may infer this from the endpoint the client submits requests to.
+
+In CamelCase.
+
+Cannot be updated.
+
+**`see`** [more info](https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds)
+
 #### Inherited from
 
 [KubeObjectInterface](lib_k8s_cluster.KubeObjectInterface.md).[kind](lib_k8s_cluster.KubeObjectInterface.md#kind)
 
 #### Defined in
 
-[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L36)
+[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L54)
 
 ___
 
@@ -58,7 +67,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L38)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L56)
 
 ___
 
@@ -90,7 +99,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cronJob.ts:12](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cronJob.ts#L12)
+[lib/k8s/cronJob.ts:12](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cronJob.ts#L12)
 
 ___
 
@@ -104,4 +113,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cronJob.ts:32](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cronJob.ts#L32)
+[lib/k8s/cronJob.ts:32](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cronJob.ts#L32)

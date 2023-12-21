@@ -66,6 +66,12 @@ Re-exports [KubeManagedFields](../interfaces/lib_k8s_cluster.KubeManagedFields.m
 
 ___
 
+### KubeManagedFieldsEntry
+
+Re-exports [KubeManagedFieldsEntry](../interfaces/lib_k8s_cluster.KubeManagedFieldsEntry.md)
+
+___
+
 ### KubeMetadata
 
 Re-exports [KubeMetadata](../interfaces/lib_k8s_cluster.KubeMetadata.md)

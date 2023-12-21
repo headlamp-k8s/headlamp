@@ -24,4 +24,4 @@ Renames and re-exports [PriorityClass](../classes/lib_k8s_priorityClass.Priority
 
 #### Defined in
 
-[lib/k8s/priorityClasses.ts:6](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/priorityClasses.ts#L6)
+[lib/k8s/priorityClasses.ts:6](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/priorityClasses.ts#L6)

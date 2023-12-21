@@ -14,7 +14,7 @@ slug: "lib_k8s_networkpolicy.IPBlock"
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:11](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/networkpolicy.tsx#L11)
+[lib/k8s/networkpolicy.tsx:11](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/networkpolicy.tsx#L11)
 
 ___
 
@@ -24,4 +24,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/networkpolicy.tsx:12](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/networkpolicy.tsx#L12)
+[lib/k8s/networkpolicy.tsx:12](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/networkpolicy.tsx#L12)

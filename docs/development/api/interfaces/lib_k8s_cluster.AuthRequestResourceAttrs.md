@@ -8,13 +8,23 @@ slug: "lib_k8s_cluster.AuthRequestResourceAttrs"
 
 ## Properties
 
+### group
+
+• `Optional` **group**: `string`
+
+#### Defined in
+
+[lib/k8s/cluster.ts:313](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L313)
+
+___
+
 ### name
 
 • `Optional` **name**: `string`
 
 #### Defined in
 
-[lib/k8s/cluster.ts:114](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L114)
+[lib/k8s/cluster.ts:308](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L308)
 
 ___
 
@@ -24,7 +34,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:117](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L117)
+[lib/k8s/cluster.ts:311](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L311)
 
 ___
 
@@ -34,7 +44,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:115](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L115)
+[lib/k8s/cluster.ts:309](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L309)
 
 ___
 
@@ -44,4 +54,24 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:116](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L116)
+[lib/k8s/cluster.ts:310](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L310)
+
+___
+
+### verb
+
+• `Optional` **verb**: `string`
+
+#### Defined in
+
+[lib/k8s/cluster.ts:314](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L314)
+
+___
+
+### version
+
+• `Optional` **version**: `string`
+
+#### Defined in
+
+[lib/k8s/cluster.ts:312](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L312)
