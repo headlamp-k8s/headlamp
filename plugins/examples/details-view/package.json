@@ -30,6 +30,6 @@
     ]
   },
   "devDependencies": {
-    "@kinvolk/headlamp-plugin": "^0.8.0-alpha.3"
+    "@kinvolk/headlamp-plugin": "^0.8.0"
   }
 }
