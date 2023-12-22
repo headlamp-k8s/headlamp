@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import {
   PureNamespacesAutocomplete,
@@ -11,7 +11,7 @@ export default {
   decorators: [Story => <Story />],
 } as Meta;
 
-const Template: Story<PureNamespacesAutocompleteProps> = args => {
+const Template: StoryFn<PureNamespacesAutocompleteProps> = args => {
   const [filter, setFilter] = React.useState<{ namespaces: Set<string>; search: string }>({
     namespaces: new Set([]),
     search: '',

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import PriorityClass, { KubePriorityClass } from '../../lib/k8s/priorityClass';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';

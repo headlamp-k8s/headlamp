@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { SnackbarProvider } from 'notistack';
 import { TestContext } from '../../test';
 import { PureAlertNotification, PureAlertNotificationProps } from './AlertNotification';
@@ -20,7 +20,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<PureAlertNotificationProps> = args => <PureAlertNotification {...args} />;
+const Template: StoryFn<PureAlertNotificationProps> = args => <PureAlertNotification {...args} />;
 
 export const Error = Template.bind({});
 Error.args = {

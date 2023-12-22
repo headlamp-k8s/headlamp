@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 import Link, { LinkProps } from './Link';
 
@@ -14,7 +14,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<LinkProps> = args => <Link {...args}>a link</Link>;
+const Template: StoryFn<LinkProps> = args => <Link {...args}>a link</Link>;
 
 // @todo: the Link depends on some router.tsx global functions
 //        that would require mocking at the webpack layer.

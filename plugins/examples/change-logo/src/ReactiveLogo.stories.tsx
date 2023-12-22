@@ -1,5 +1,5 @@
 import { AppLogoProps } from '@kinvolk/headlamp-plugin/lib';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { ReactiveLogo } from './index';
@@ -16,7 +16,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<AppLogoProps> = args => <ReactiveLogo {...args} />;
+const Template: StoryFn<AppLogoProps> = args => <ReactiveLogo {...args} />;
 
 export const SmallDark = Template.bind({});
 SmallDark.args = {

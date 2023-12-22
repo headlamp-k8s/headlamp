@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { initialState } from '../../../redux/configSlice';
@@ -51,6 +51,6 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => <Home />;
+const Template: StoryFn = () => <Home />;
 
 export const Base = Template.bind({});

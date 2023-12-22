@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import Job from '../../lib/k8s/job';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';

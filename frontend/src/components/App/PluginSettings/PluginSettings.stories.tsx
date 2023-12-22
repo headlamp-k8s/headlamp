@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { TestContext } from '../../../test';
 import { PluginSettingsPure, PluginSettingsPureProps } from './PluginSettings';
 
@@ -7,7 +7,7 @@ export default {
   component: PluginSettingsPure,
 } as Meta;
 
-const Template: Story<PluginSettingsPureProps> = args => (
+const Template: StoryFn<PluginSettingsPureProps> = args => (
   <TestContext>
     <PluginSettingsPure {...args} />
   </TestContext>

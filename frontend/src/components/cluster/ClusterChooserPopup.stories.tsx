@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { Cluster } from '../../lib/k8s/cluster';
 import { initialState } from '../../redux/configSlice';
@@ -38,7 +38,7 @@ export default {
   decorators: [Story => <Story />],
 } as Meta;
 
-const Template: Story = args => {
+const Template: StoryFn = args => {
   const { cluster, clusters, recentClusters = [] } = args;
   const ref = React.useRef<HTMLDivElement>(null);
   const [anchor, setAnchor] = React.useState<HTMLElement | null>(null);

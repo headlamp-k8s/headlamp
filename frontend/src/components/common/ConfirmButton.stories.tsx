@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import ConfirmButton, { ConfirmButtonProps } from './ConfirmButton';
 
@@ -10,7 +10,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ConfirmButtonProps> = args => (
+const Template: StoryFn<ConfirmButtonProps> = args => (
   <ConfirmButton {...args}>Confirm button</ConfirmButton>
 );
 

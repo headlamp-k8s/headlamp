@@ -1,18 +1,18 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObject } from '../../lib/k8s/cluster';
-import { Lease } from '../../lib/k8s/lease';
+import { RuntimeClass } from '../../lib/k8s/runtime';
 import { TestContext } from '../../test';
 import { RuntimeClassList } from './List';
 import { RUNTIME_CLASS_DUMMY_DATA } from './storyHelper';
 
-Lease.useList = () => {
-  const objList = RUNTIME_CLASS_DUMMY_DATA.map((data: KubeObject) => new Lease(data));
+RuntimeClass.useList = () => {
+  const objList = RUNTIME_CLASS_DUMMY_DATA.map((data: KubeObject) => new RuntimeClass(data));
 
   return [objList, null, () => {}, () => {}] as any;
 };
 
 export default {
-  title: 'Lease/LeaseListView',
+  title: 'RuntimeClass/ListView',
   component: RuntimeClassList,
   argTypes: {},
   decorators: [
@@ -26,7 +26,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <RuntimeClassList />;
 };
 

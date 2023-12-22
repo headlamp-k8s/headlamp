@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { KubeObject } from '../../lib/k8s/cluster';
 import Ingress from '../../lib/k8s/ingress';
 import { TestContext } from '../../test';

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObject, KubeObjectClass } from '../../lib/k8s/cluster';
 import Event from '../../lib/k8s/event';
 import VPA from '../../lib/k8s/vpa';
@@ -128,7 +128,7 @@ interface MockerStory {
   useList?: KubeObjectClass['useList'];
 }
 
-const Template: Story = (args: MockerStory) => {
+const Template: StoryFn = (args: MockerStory) => {
   if (!!args.useGet) {
     VPA.useGet = args.useGet;
     Event.objectEvents = async (obj: KubeObject) => {

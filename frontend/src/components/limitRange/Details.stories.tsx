@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { LimitRange } from '../../lib/k8s/limitRange';
 import { TestContext } from '../../test';
 import { LimitRangeDetails } from './Details';
