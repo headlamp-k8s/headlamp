@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import Endpoints, { KubeEndpoint } from '../../lib/k8s/endpoints';
 import { TestContext } from '../../test';

@@ -1,5 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { PercentageBar, PercentageBarProps } from '../Chart';
 
 export default {
@@ -8,7 +7,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<PercentageBarProps> = args => <PercentageBar {...args} />;
+const Template: StoryFn<PercentageBarProps> = args => <PercentageBar {...args} />;
 
 export const Percent100 = Template.bind({});
 Percent100.args = {

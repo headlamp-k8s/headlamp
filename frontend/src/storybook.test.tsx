@@ -22,7 +22,7 @@ initStoryshots({
   test: async ({ story, context, done }) => {
     // We use React Testing library here, and our custom converter.
     const converter = new OurConverter();
-    const snapshotFilename = converter.getSnapshotFileName(context);
+    const snapshotFilename = converter.getSnapshotFileName(context) || '';
 
     // Re-render for state changes:
     // https://github.com/storybookjs/storybook/issues/7745#issuecomment-801940326

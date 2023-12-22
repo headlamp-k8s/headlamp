@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { get } from 'lodash';
 import { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
@@ -66,7 +66,7 @@ function OurTopBar(args: PropsWithChildren<PureTopBarProps>) {
   );
 }
 
-const Template: Story<PureTopBarProps> = args => {
+const Template: StoryFn<PureTopBarProps> = args => {
   return <OurTopBar {...args} />;
 };
 export const ProcessorAction = Template.bind({});
@@ -75,7 +75,7 @@ ProcessorAction.args = {
   hasToken: false,
 };
 
-const PureTemplate: Story<PureTopBarProps> = args => {
+const PureTemplate: StoryFn<PureTopBarProps> = args => {
   return <PureTopBar {...args} />;
 };
 

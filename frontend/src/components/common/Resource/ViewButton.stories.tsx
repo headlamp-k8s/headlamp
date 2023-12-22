@@ -1,5 +1,5 @@
 import '../../../i18n/config';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
 import ViewButton from './ViewButton';
 import { ViewButtonProps } from './ViewButton';

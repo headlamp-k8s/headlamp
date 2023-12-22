@@ -289,7 +289,7 @@ export async function fetchAndExecutePlugins(
         // We just continue if there is an error.
         console.error(`Plugin execution error in ${pluginPaths[index]}:`, e);
       }
-    }.call({}, source));
+    }).call({}, source);
   });
   await initializePlugins();
 }

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { TestContext } from '../../test';
 import { PureAuthToken, PureAuthTokenProps } from './Auth';
 
@@ -22,7 +22,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<PureAuthTokenProps> = args => <PureAuthToken {...args} />;
+const Template: StoryFn<PureAuthTokenProps> = args => <PureAuthToken {...args} />;
 
 export const ShowError = Template.bind({});
 ShowError.args = {

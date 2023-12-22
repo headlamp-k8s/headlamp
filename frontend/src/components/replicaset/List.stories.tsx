@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import ReplicaSet from '../../lib/k8s/replicaSet';
 import { TestContext } from '../../test';
 import List from './List';

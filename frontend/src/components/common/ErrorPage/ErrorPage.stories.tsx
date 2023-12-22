@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
 import NotFoundImage from '../../../assets/headlamp-404.svg';
 import ErrorComponent, { ErrorComponentProps } from '.';

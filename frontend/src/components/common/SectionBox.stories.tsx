@@ -1,5 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import SectionBox, { SectionBoxProps } from './SectionBox';
 
 export default {
@@ -8,7 +7,7 @@ export default {
   argTypes: { onTabChanged: { action: 'tab changed' } },
 } as Meta;
 
-const Template: Story<SectionBoxProps> = args => <SectionBox {...args} />;
+const Template: StoryFn<SectionBoxProps> = args => <SectionBox {...args} />;
 
 export const WithChildren = Template.bind({});
 WithChildren.args = {

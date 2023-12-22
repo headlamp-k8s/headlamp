@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { StreamResultsCb } from '../../lib/k8s/apiProxy';
 import { AuthRequestResourceAttrs, KubeObjectClass } from '../../lib/k8s/cluster';
 import Pod, { KubePod, LogOptions } from '../../lib/k8s/pod';

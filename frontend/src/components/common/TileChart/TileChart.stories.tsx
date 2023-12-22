@@ -1,5 +1,5 @@
 import '../../../i18n/config';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import TileChart, { TileChartProps } from './TileChart';
 
 export default {

@@ -1,5 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import SectionHeader, { SectionHeaderProps } from './SectionHeader';
 
 export default {
@@ -8,7 +7,7 @@ export default {
   argTypes: { onTabChanged: { action: 'tab changed' } },
 } as Meta;
 
-const Template: Story<SectionHeaderProps> = args => <SectionHeader {...args} />;
+const Template: StoryFn<SectionHeaderProps> = args => <SectionHeader {...args} />;
 
 export const Main = Template.bind({});
 Main.args = {

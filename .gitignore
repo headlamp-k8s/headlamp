@@ -6,3 +6,5 @@ docs/development/storybook/
 .plugins
 node_modules
 .idea/
+plugins/headlamp-plugin/headlamp-myfancy/
+plugins/examples/*/dist/

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import helpers from '../../../helpers';
 import { Cluster } from '../../../lib/k8s/cluster';
@@ -33,7 +33,7 @@ interface RecentClusterStoryProps extends RecentClustersProps {
   getRecentClusters: typeof helpers.getRecentClusters;
 }
 
-const Template: Story<RecentClusterStoryProps> = args => {
+const Template: StoryFn<RecentClusterStoryProps> = args => {
   const { getRecentClusters, ...props } = args;
 
   React.useEffect(() => {

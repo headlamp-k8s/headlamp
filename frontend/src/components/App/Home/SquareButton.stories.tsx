@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import SquareButton, { SquareButtonProps } from './SquareButton';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<SquareButtonProps> = args => <SquareButton {...args} />;
+const Template: StoryFn<SquareButtonProps> = args => <SquareButton {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import { KubeObject } from '../../lib/k8s/cluster';
 import Event from '../../lib/k8s/event';

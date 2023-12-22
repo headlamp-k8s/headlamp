@@ -14,7 +14,7 @@ i18next
     read<Namespace extends keyof typeof en>(
       language: string | any,
       namespace: Namespace,
-      callback: (errorValue: unknown, translations: null | typeof en[Namespace]) => void
+      callback: (errorValue: unknown, translations: null | (typeof en)[Namespace]) => void
     ) {
       import(`./locales/${language}/${namespace}.json`)
         .then(resources => {

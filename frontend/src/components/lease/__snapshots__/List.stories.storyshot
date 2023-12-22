@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots RuntimeClass/ListView Items 1`] = `
+exports[`Storyshots Lease/ListView Items 1`] = `
 <div>
   <div
     class="MuiBox-root css-j1fy4m"
@@ -17,7 +17,7 @@ exports[`Storyshots RuntimeClass/ListView Items 1`] = `
           <h1
             class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
           >
-            RuntimeClass
+            Lease
           </h1>
           <div
             class="MuiBox-root css-ldp2l3"
@@ -109,10 +109,27 @@ exports[`Storyshots RuntimeClass/ListView Items 1`] = `
                 </button>
               </th>
               <th
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
+                scope="col"
+              >
+                Namespace
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+              </th>
+              <th
                 class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Handler
+                Holder
               </th>
               <th
                 class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
@@ -147,13 +164,23 @@ exports[`Storyshots RuntimeClass/ListView Items 1`] = `
                   class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
                   href="/"
                 >
-                  runtime-class
+                  lease
                 </a>
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                handler
+                <a
+                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                  href="/"
+                >
+                  default
+                </a>
+              </td>
+              <td
+                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+              >
+                holder
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"

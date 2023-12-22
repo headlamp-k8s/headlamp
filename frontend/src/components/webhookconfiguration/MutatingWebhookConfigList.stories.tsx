@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import MutatingWebhookConfiguration from '../../lib/k8s/mutatingWebhookConfiguration';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';

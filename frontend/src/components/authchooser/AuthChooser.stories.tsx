@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { TestContext } from '../../test';
 import { PureAuthChooser, PureAuthChooserProps } from './index';
 
@@ -22,7 +22,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<PureAuthChooserProps> = args => <PureAuthChooser {...args} />;
+const Template: StoryFn<PureAuthChooserProps> = args => <PureAuthChooser {...args} />;
 
 const argFixture = {
   clusterName: 'some-cluster',

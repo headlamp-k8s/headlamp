@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { KubeObject } from '../../lib/k8s/cluster';
 import { Lease } from '../../lib/k8s/lease';
 import { TestContext } from '../../test';
@@ -12,7 +12,7 @@ Lease.useList = () => {
 };
 
 export default {
-  title: 'Lease/LeaseListView',
+  title: 'Lease/ListView',
   component: LeaseList,
   argTypes: {},
   decorators: [
@@ -26,7 +26,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <LeaseList />;
 };
 
