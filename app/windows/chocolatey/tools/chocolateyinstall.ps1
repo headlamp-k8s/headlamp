@@ -1,8 +1,8 @@
 ﻿$ErrorActionPreference = 'Stop'; # stop on all errors
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$headlampVersion = '0.21.0'
+$headlampVersion = '0.22.0'
 $url = "https://github.com/headlamp-k8s/headlamp/releases/download/v${headlampVersion}/Headlamp-${headlampVersion}-win-x64.exe"
-$checksum = '841105457d5e877b15da0f2b6830283f0b1a5f52f443d4a349519386a2edb223'
+$checksum = '78a1548a79e2d2b3702b393c5095225c8847eafe853165f8c158dd4538003e14'
 
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
