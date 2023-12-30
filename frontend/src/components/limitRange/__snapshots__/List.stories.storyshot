@@ -3,190 +3,194 @@
 exports[`Storyshots LimitRange/ListView Items 1`] = `
 <div>
   <div
-    class="MuiBox-root css-j1fy4m"
+    class="css-1mf30tz"
   >
     <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+      class="MuiBox-root css-j1fy4m"
     >
       <div
-        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 SectionHeader-sectionHeader css-k9zzm4-MuiGrid-root"
       >
         <div
-          class="MuiBox-root css-70qvj9"
+          class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
         >
-          <h1
-            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
+          <div
+            class="MuiBox-root css-70qvj9"
           >
-            LimitRange
-          </h1>
-          <div
-            class="MuiBox-root css-ldp2l3"
-          />
+            <h1
+              class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap SectionHeader-sectionTitle css-1f1i6v9-MuiTypography-root"
+            >
+              LimitRange
+            </h1>
+            <div
+              class="MuiBox-root css-ldp2l3"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-      >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
         >
           <div
-            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
           >
             <div
-              class="MuiBox-root css-0"
+              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
             >
               <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-7ldjcq-MuiGrid-root"
+                class="MuiBox-root css-0"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-7ldjcq-MuiGrid-root"
                 >
-                  <button
-                    aria-label="Show filter"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
-                    tabindex="0"
-                    type="button"
+                  <div
+                    class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
                   >
-                    <span />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
-                </div>
-                <div
-                  class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-                >
-                  <button
-                    aria-label="Change columns displayed"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
-                    data-mui-internal-clone-element="true"
-                    tabindex="0"
-                    type="button"
+                    <button
+                      aria-label="Show filter"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span />
+                      <span
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
                   >
-                    <span />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
+                    <button
+                      aria-label="Change columns displayed"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+                      data-mui-internal-clone-element="true"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span />
+                      <span
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="makeStyles-box MuiBox-root css-0"
-    >
       <div
-        class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
+        class="SectionBox-box MuiBox-root css-0"
       >
-        <table
-          class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
+        <div
+          class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
         >
-          <thead
-            class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+          <table
+            class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
           >
-            <tr
-              class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+            <thead
+              class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
             >
-              <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
-                scope="col"
+              <tr
+                class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
               >
-                Name
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                  tabindex="0"
-                  type="button"
+                <th
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
+                  scope="col"
                 >
-                  <span />
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
-                scope="col"
-              >
-                Namespace
-                <button
-                  aria-label="sort swap"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                  tabindex="0"
-                  type="button"
+                  Name
+                  <button
+                    aria-label="sort swap"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span />
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
+                  scope="col"
                 >
-                  <span />
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-              <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
-                scope="col"
-                style="text-align: right;"
-              >
-                Age
-                <button
-                  aria-label="sort up"
-                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                  tabindex="0"
-                  type="button"
+                  Namespace
+                  <button
+                    aria-label="sort swap"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span />
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </th>
+                <th
+                  class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
+                  scope="col"
+                  style="text-align: right;"
                 >
-                  <span />
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
-          >
-            <tr
-              class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                  Age
+                  <button
+                    aria-label="sort up"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span />
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
             >
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+              <tr
+                class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
               >
-                <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 >
-                  limit-range
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-              >
-                <a
-                  class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                  href="/"
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    href="/"
+                  >
+                    limit-range
+                  </a>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                 >
-                  default
-                </a>
-              </td>
-              <td
-                class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                style="text-align: right;"
-              >
-                <p
-                  aria-label="2022-01-01T00:00:00.000Z"
-                  class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
-                  data-mui-internal-clone-element="true"
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    href="/"
+                  >
+                    default
+                  </a>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                  style="text-align: right;"
                 >
-                  3mo
-                  <span />
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                  <p
+                    aria-label="2022-01-01T00:00:00.000Z"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1yycdcv-MuiTypography-root"
+                    data-mui-internal-clone-element="true"
+                  >
+                    3mo
+                    <span />
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

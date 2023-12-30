@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { JSONPath } from 'jsonpath-plus';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,10 @@ import BackLink from '../common/BackLink';
 import Empty from '../common/EmptyContent';
 import ResourceListView from '../common/Resource/ResourceListView';
 import { ResourceTableProps } from '../common/Resource/ResourceTable';
+
+const StyledLink = styled(Link)({
+  cursor: 'pointer',
+});
 
 export default function CustomResourceList() {
   const { t } = useTranslation(['glossary', 'translation']);
@@ -39,19 +43,11 @@ export default function CustomResourceList() {
   return <CustomResourceListRenderer crd={crd} />;
 }
 
-const useStyle = makeStyles({
-  link: {
-    cursor: 'pointer',
-  },
-});
-
 function CustomResourceLink(props: { resource: KubeCRD; crd: CRD; [otherProps: string]: any }) {
-  const classes = useStyle();
   const { resource, crd, ...otherProps } = props;
 
   return (
-    <Link
-      className={classes.link}
+    <StyledLink
       routeName="customresource"
       params={{
         crName: resource.metadata.name,
@@ -61,7 +57,7 @@ function CustomResourceLink(props: { resource: KubeCRD; crd: CRD; [otherProps: s
       {...otherProps}
     >
       {resource.metadata.name}
-    </Link>
+    </StyledLink>
   );
 }
 

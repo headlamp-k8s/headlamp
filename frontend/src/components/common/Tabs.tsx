@@ -1,12 +1,18 @@
+import { styled } from '@mui/material/styles';
 import MuiTab from '@mui/material/Tab';
 import MuiTabs from '@mui/material/Tabs';
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useId } from '../../lib/util';
 
-const useStyle = makeStyles(() => ({
-  tab: {
+const PREFIX = 'Tabs';
+
+const classes = {
+  tab: `${PREFIX}-tab`,
+};
+
+const StyledTypography = styled(Typography)(() => ({
+  [`& .${classes.tab}`]: {
     minWidth: 150, // allows 8 tabs to show like on pods
   },
 }));
@@ -32,7 +38,6 @@ export default function Tabs(props: TabsProps) {
   const [tabIndex, setTabIndex] = React.useState<TabsProps['defaultIndex']>(
     defaultIndex && Math.min(defaultIndex as number, 0)
   );
-  const classes = useStyle();
 
   function handleTabChange(event: any, newValue: number) {
     setTabIndex(newValue);
@@ -109,14 +114,14 @@ export function TabPanel(props: TabPanelProps) {
   const { children, tabIndex, index, id, labeledBy } = props;
 
   return (
-    <Typography
-      component="div"
+    <StyledTypography
+      //component="div"
       role="tabpanel"
       hidden={tabIndex !== index}
       id={id}
       aria-labelledby={labeledBy}
     >
       {children}
-    </Typography>
+    </StyledTypography>
   );
 }

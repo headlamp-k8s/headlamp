@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import React, { ReactElement } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -9,8 +9,15 @@ export interface ClusterChooserProps {
 }
 export type ClusterChooserType = React.ComponentType<ClusterChooserProps> | ReactElement | null;
 
-const useClusterTitleStyle = makeStyles(theme => ({
-  button: {
+const PREFIX = 'ClusterChooser';
+
+const classes = {
+  button: `${PREFIX}-button`,
+  clusterName: `${PREFIX}-clusterName`,
+};
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  [`&.${classes.button}`]: {
     color: theme.palette.clusterChooser.button.color,
     background: theme.palette.clusterChooser.button.background,
     '&:hover': {
@@ -20,7 +27,8 @@ const useClusterTitleStyle = makeStyles(theme => ({
     textTransform: 'none',
     padding: '6px 22px',
   },
-  clusterName: {
+
+  [`& .${classes.clusterName}`]: {
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -32,11 +40,10 @@ const ClusterChooser = React.forwardRef(function ClusterChooser(
   { clickHandler, cluster }: ClusterChooserProps,
   ref: React.Ref<HTMLButtonElement>
 ) {
-  const classes = useClusterTitleStyle();
   const { t } = useTranslation();
 
   return (
-    <Button
+    <StyledButton
       size="large"
       variant="contained"
       onClick={clickHandler}
@@ -46,7 +53,7 @@ const ClusterChooser = React.forwardRef(function ClusterChooser(
       <span className={classes.clusterName} title={cluster}>
         <Trans t={t}>Cluster: {{ cluster }}</Trans>
       </span>
-    </Button>
+    </StyledButton>
   );
 });
 

@@ -3,25 +3,27 @@ import { Tooltip } from '@mui/material';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import makeStyles from '@mui/styles/makeStyles';
-import withStyles from '@mui/styles/withStyles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
+
+const PREFIX = 'ListItemLink';
+
+const classes = {
+  tooltip: `${PREFIX}-tooltip`,
+  icon: `${PREFIX}-icon`,
+};
+
+const Root = styled('li')({
+  [`& .${classes.icon}`]: {
+    minWidth: '24px',
+  },
+});
 
 const ExpandedIconSize = 20;
 const CollapsedIconSize = 24;
 
-const IconTooltip = withStyles(() => ({
-  tooltip: {
-    backgroundColor: '#474747',
-    color: '#fff',
-    minWidth: 60,
-    padding: '0.5rem',
-    fontSize: '0.8rem',
-    border: '1px solid #474747',
-    marginLeft: '1rem',
-  },
-}))(Tooltip);
+const IconTooltip = Tooltip;
 
 interface ListItemLinkProps {
   primary: string;
@@ -36,17 +38,9 @@ interface ListItemLinkProps {
   };
 }
 
-const useStyle = makeStyles({
-  icon: {
-    minWidth: '24px',
-  },
-});
-
 export default function ListItemLink(props: ListItemLinkProps) {
   const { primary, pathname, search, icon, name, containerProps, iconOnly, subtitle, ...other } =
     props;
-  const classes = useStyle();
-
   const iconSize = React.useMemo(
     () => (iconOnly ? CollapsedIconSize : ExpandedIconSize),
     [iconOnly]
@@ -72,18 +66,24 @@ export default function ListItemLink(props: ListItemLinkProps) {
   let listItemLinkContainer = listItemLink;
   if (!primary) {
     listItemLinkContainer = listItemLink && (
-      <IconTooltip title={name} placement="right-start">
+      <IconTooltip
+        title={name}
+        placement="right-start"
+        classes={{
+          tooltip: classes.tooltip,
+        }}
+      >
         {listItemLink}
       </IconTooltip>
     );
   }
 
   return (
-    <li {...containerProps}>
+    <Root {...containerProps}>
       <ListItem button component={renderLink} {...other}>
         {listItemLinkContainer}
         {!iconOnly && <ListItemText primary={primary} secondary={subtitle} />}
       </ListItem>
-    </li>
+    </Root>
   );
 }

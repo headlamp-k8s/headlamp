@@ -1,8 +1,8 @@
 import { Divider } from '@mui/material';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import makeStyles from '@mui/styles/makeStyles';
 import { useTranslation } from 'react-i18next';
 import { generatePath, useHistory } from 'react-router';
 import { createRouteURL } from '../../lib/router';
@@ -12,8 +12,14 @@ import Tabs from '../common/Tabs';
 import { SidebarItemProps } from '../Sidebar';
 import prepareRoutes from './prepareRoutes';
 
-const useStyle = makeStyles(() => ({
-  tabs: {
+const PREFIX = 'NavigationTabs';
+
+const classes = {
+  tabs: `${PREFIX}-tabs`,
+};
+
+const StyledBox = styled(Box)(() => ({
+  [`& .${classes.tabs}`]: {
     maxWidth: '85vw',
   },
 }));
@@ -49,7 +55,6 @@ function findParentOfSubList(
 
 export default function NavigationTabs() {
   const history = useHistory();
-  const classes = useStyle();
   const sidebar = useTypedSelector(state => state.sidebar);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -113,7 +118,7 @@ export default function NavigationTabs() {
 
   defaultIndex = subList.findIndex(item => item.name === sidebar.selected.item);
   return (
-    <Box mb={2} component="nav" aria-label={t('translation|Main Navigation')}>
+    <StyledBox mb={2} component="nav" aria-label={t('translation|Main Navigation')}>
       <Tabs
         tabs={tabRoutes}
         onTabChanged={index => {
@@ -124,6 +129,6 @@ export default function NavigationTabs() {
         ariaLabel={t('translation|Navigation Tabs')}
       />
       <Divider />
-    </Box>
+    </StyledBox>
   );
 }

@@ -6,9 +6,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
+import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import * as yaml from 'js-yaml';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -22,6 +22,45 @@ import Tabs from '../Tabs';
 import DocsViewer from './DocsViewer';
 import SimpleEditor from './SimpleEditor';
 
+const PREFIX = 'EditorDialog';
+
+const classes = {
+  dialogContent: `${PREFIX}-dialogContent`,
+  terminalCode: `${PREFIX}-terminalCode`,
+  terminal: `${PREFIX}-terminal`,
+  containerFormControl: `${PREFIX}-containerFormControl`,
+  scrollable: `${PREFIX}-scrollable`,
+};
+
+const StyledEditorDialog = styled(EditorDialog)(({ theme }) => ({
+  [`& .${classes.dialogContent}`]: {
+    height: '80%',
+    // minHeight: '600px',
+    overflowY: 'hidden',
+  },
+
+  [`& .${classes.terminalCode}`]: {
+    color: theme.palette.common.white,
+  },
+
+  [`& .${classes.terminal}`]: {
+    backgroundColor: theme.palette.common.black,
+    height: '500px',
+    width: '100%',
+    overflow: 'scroll',
+    marginTop: theme.spacing(3),
+  },
+
+  [`& .${classes.containerFormControl}`]: {
+    minWidth: '11rem',
+  },
+
+  [`& .${classes.scrollable}`]: {
+    overflowY: 'auto',
+    overflowX: 'hidden',
+  },
+}));
+
 // Jest does not work with esm modules and 'monaco-editor' properly
 // It says it can't find the module when running the tests.
 let monaco: any;
@@ -31,31 +70,6 @@ if (process.env.NODE_ENV === 'test') {
   // const monaco = monacoEditor;
   monaco = require('monaco-editor');
 }
-
-const useStyle = makeStyles(theme => ({
-  dialogContent: {
-    height: '80%',
-    // minHeight: '600px',
-    overflowY: 'hidden',
-  },
-  terminalCode: {
-    color: theme.palette.common.white,
-  },
-  terminal: {
-    backgroundColor: theme.palette.common.black,
-    height: '500px',
-    width: '100%',
-    overflow: 'scroll',
-    marginTop: theme.spacing(3),
-  },
-  containerFormControl: {
-    minWidth: '11rem',
-  },
-  scrollable: {
-    overflowY: 'auto',
-    overflowX: 'hidden',
-  },
-}));
 
 type KubeObjectIsh = Partial<KubeObjectInterface>;
 
@@ -85,7 +99,6 @@ export default function EditorDialog(props: EditorDialogProps) {
   };
   const { i18n } = useTranslation();
   const [lang, setLang] = React.useState(i18n.language);
-  const classes = useStyle();
   const themeName = getThemeName();
 
   const originalCodeRef = React.useRef({ code: '', format: item ? 'yaml' : '' });
@@ -416,5 +429,5 @@ export default function EditorDialog(props: EditorDialogProps) {
 }
 
 export function ViewDialog(props: Omit<EditorDialogProps, 'onSave'>) {
-  return <EditorDialog {...props} onSave={null} />;
+  return <StyledEditorDialog {...props} onSave={null} />;
 }

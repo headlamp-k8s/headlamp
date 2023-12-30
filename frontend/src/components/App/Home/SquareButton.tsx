@@ -3,8 +3,8 @@ import { useTheme } from '@mui/material';
 import ButtonBase, { ButtonBaseProps } from '@mui/material/ButtonBase';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 
 export interface SquareButtonProps extends ButtonBaseProps {
   /** The icon to display for this button. */
@@ -19,19 +19,29 @@ export interface SquareButtonProps extends ButtonBaseProps {
   primary?: boolean;
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
+const PREFIX = 'SquareButton';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  content: `${PREFIX}-content`,
+  label: `${PREFIX}-label`,
+};
+
+const StyledButtonBase = styled(ButtonBase)(({ theme }) => ({
+  [`& .${classes.root}`]: {
     width: 140,
     height: 140,
     paddingTop: '24px',
     backgroundColor: ({ primary }: { primary: boolean }) =>
       primary ? theme.palette.text.primary : theme.palette.squareButton.background,
   },
-  content: {
+
+  [`& .${classes.content}`]: {
     textAlign: 'center',
     paddingTop: 0,
   },
-  label: {
+
+  [`& .${classes.label}`]: {
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -47,11 +57,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function SquareButton(props: SquareButtonProps) {
   const { icon, iconSize = 50, iconColor, label, primary = false, ...otherProps } = props;
-  const classes = useStyles({ primary });
   const theme = useTheme();
 
   return (
-    <ButtonBase focusRipple {...otherProps}>
+    <StyledButtonBase focusRipple {...otherProps}>
       <Card className={classes.root}>
         <CardContent className={classes.content}>
           <Icon
@@ -70,6 +79,6 @@ export default function SquareButton(props: SquareButtonProps) {
           </Typography>
         </CardContent>
       </Card>
-    </ButtonBase>
+    </StyledButtonBase>
   );
 }

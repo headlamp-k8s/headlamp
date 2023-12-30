@@ -1,10 +1,8 @@
 import { Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 
-const useStyle = makeStyles(() => ({
-  pods: {
-    fontStyle: 'italic',
-  },
+const StyledTypography = styled(Typography)(() => ({
+  fontStyle: 'italic',
 }));
 
 export interface MessageProps {
@@ -24,10 +22,9 @@ export interface MessageProps {
  *
  */
 export default function Message({ msg, error }: MessageProps) {
-  const classes = useStyle();
   return (
-    <Typography color="textPrimary" className={classes.pods}>
+    <StyledTypography color="textPrimary">
       {!error ? `# Pods: ${msg}` : 'Uh, pods!?'}
-    </Typography>
+    </StyledTypography>
   );
 }

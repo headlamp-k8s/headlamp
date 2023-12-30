@@ -1,15 +1,16 @@
 import { Icon } from '@iconify/react';
 import Editor from '@monaco-editor/react';
-import { InputLabel, Theme } from '@mui/material';
+import { InputLabel } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Grid, { GridProps, GridSize } from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Input, { InputProps } from '@mui/material/Input';
 import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 import { TextFieldProps } from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/styles';
 import { Location } from 'history';
 import { Base64 } from 'js-base64';
 import _, { has } from 'lodash';
@@ -76,10 +77,8 @@ export function ResourceLink(props: ResourceLinkProps) {
   );
 }
 
-const useDetailsGridStyles = makeStyles((theme: Theme) => ({
-  section: {
-    marginBottom: theme.spacing(2),
-  },
+const StyledPageGrid = styled(PageGrid)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
 }));
 
 export interface DetailsGridProps
@@ -120,7 +119,6 @@ export function DetailsGrid(props: DetailsGridProps) {
   } = props;
   const { t } = useTranslation();
   const location = useLocation<{ backLink: NavLinkProps['location'] }>();
-  const classes = useDetailsGridStyles();
   const hasPreviousRoute = useHasPreviousRoute();
   const detailViews = useTypedSelector(state => state.detailsViewSection.detailsViewSections);
   const detailViewsProcessors = useTypedSelector(
@@ -312,7 +310,7 @@ export function DetailsGrid(props: DetailsGridProps) {
   }
 
   return (
-    <PageGrid className={classes.section}>
+    <StyledPageGrid>
       {React.Children.toArray(
         sectionsProcessed.map(section => {
           const Section = has(section, 'section')
@@ -331,7 +329,7 @@ export function DetailsGrid(props: DetailsGridProps) {
           }
         })
       )}
-    </PageGrid>
+    </StyledPageGrid>
   );
 }
 
@@ -602,12 +600,9 @@ export function LivenessProbes(props: { liveness: KubeContainer['livenessProbe']
     </Box>
   );
 }
-
-const useContainerInfoStyles = makeStyles((theme: Theme) => ({
-  imageID: {
-    paddingTop: theme.spacing(1),
-    fontSize: '.95rem',
-  },
+const ContainerInfoTypography = styled(Typography)(({ theme }) => ({
+  paddingTop: theme.spacing(1),
+  fontSize: '.95rem',
 }));
 
 export interface ContainerInfoProps {
@@ -618,8 +613,6 @@ export interface ContainerInfoProps {
 
 export function ContainerInfo(props: ContainerInfoProps) {
   const { container, status, resource } = props;
-  const theme = useTheme();
-  const classes = useContainerInfoStyles(theme);
   const { t } = useTranslation(['glossary', 'translation']);
 
   function getContainerStatusLabel() {
@@ -712,12 +705,12 @@ export function ContainerInfo(props: ContainerInfoProps) {
           <>
             <Typography>{container.image}</Typography>
             {status?.imageID && (
-              <Typography className={classes.imageID}>
+              <ContainerInfoTypography>
                 <Typography component="span" style={{ fontWeight: 'bold' }}>
                   ID:
                 </Typography>{' '}
                 {status?.imageID}
-              </Typography>
+              </ContainerInfoTypography>
             )}
           </>
         ),

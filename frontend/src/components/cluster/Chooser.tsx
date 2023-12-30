@@ -10,11 +10,11 @@ import Dialog, { DialogProps } from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React, { isValidElement, PropsWithChildren } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -36,6 +36,18 @@ import ErrorBoundary from '../common/ErrorBoundary';
 import Loader from '../common/Loader';
 import ClusterChooser from './ClusterChooser';
 import ClusterChooserPopup from './ClusterChooserPopup';
+
+const PREFIX = 'Chooser';
+
+const classes = {
+  chooserDialog: `${PREFIX}-chooserDialog`,
+  chooserDialogCover: `${PREFIX}-chooserDialogCover`,
+  chooserTitle: `${PREFIX}-chooserTitle`,
+  logo: `${PREFIX}-logo`,
+  root: `${PREFIX}-root`,
+  content: `${PREFIX}-content`,
+  clusterName: `${PREFIX}-clusterName`,
+};
 
 export interface ClusterTitleProps {
   clusters?: {
@@ -101,8 +113,8 @@ export function ClusterTitle(props: ClusterTitleProps) {
   );
 }
 
-const useStyles = makeStyles(theme => ({
-  chooserDialog: {
+const StyledDialog = styled(Dialog)(({ theme }) => ({
+  [`& .${classes.chooserDialog}`]: {
     [theme.breakpoints.up('sm')]: {
       minWidth: 500,
     },
@@ -114,39 +126,41 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(3),
     },
   },
-  chooserDialogCover: {
+
+  [`& .${classes.chooserDialogCover}`]: {
     background: theme.palette.common.black,
   },
-  chooserTitle: {
+
+  [`& .${classes.chooserTitle}`]: {
     background: theme.palette.common.black,
     textAlign: 'center',
     alignItems: 'center',
     display: 'flex',
   },
-  logo: {
+
+  [`& .${classes.logo}`]: {
     height: '32px',
     width: 'auto',
   },
 }));
 
-const useClusterButtonStyles = makeStyles({
-  root: {
+const StyledButtonBase = styled(ButtonBase)({
+  [`& .${classes.root}`]: {
     width: 128,
     height: 115,
     paddingTop: '10%',
   },
-  content: {
+  [`& .${classes.content}`]: {
     textAlign: 'center',
     paddingTop: 0,
   },
-  clusterName: {
+  [`& .${classes.clusterName}`]: {
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     display: 'block',
   },
 });
-
 interface ClusterButtonProps extends PropsWithChildren<{}> {
   cluster: Cluster;
   onClick?: (...args: any[]) => void;
@@ -154,12 +168,11 @@ interface ClusterButtonProps extends PropsWithChildren<{}> {
 }
 
 function ClusterButton(props: ClusterButtonProps) {
-  const classes = useClusterButtonStyles();
   const theme = useTheme();
   const { cluster, onClick = undefined, focusedRef } = props;
 
   return (
-    <ButtonBase focusRipple ref={focusedRef} onClick={onClick}>
+    <StyledButtonBase focusRipple ref={focusedRef} onClick={onClick}>
       <Card className={classes.root}>
         <CardContent className={classes.content}>
           <Icon icon="mdi:kubernetes" width="50" height="50" color={theme.palette.primaryColor} />
@@ -173,7 +186,7 @@ function ClusterButton(props: ClusterButtonProps) {
           </Typography>
         </CardContent>
       </Card>
-    </ButtonBase>
+    </StyledButtonBase>
   );
 }
 
@@ -283,7 +296,6 @@ interface ClusterDialogProps extends PropsWithChildren<Omit<DialogProps, 'open' 
 }
 
 export function ClusterDialog(props: ClusterDialogProps) {
-  const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -312,7 +324,7 @@ export function ClusterDialog(props: ClusterDialogProps) {
   }
 
   return (
-    <Dialog
+    <StyledDialog
       fullScreen={fullScreen}
       open={open !== undefined ? open : show}
       onClose={handleClose}
@@ -342,7 +354,7 @@ export function ClusterDialog(props: ClusterDialogProps) {
         <AppLogo logoType={'large'} className={classes.logo} themeName="dark" />
       </DialogTitle>
       <DialogContent className={classes.chooserDialog}>{children}</DialogContent>
-    </Dialog>
+    </StyledDialog>
   );
 }
 

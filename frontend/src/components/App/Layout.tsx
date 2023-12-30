@@ -2,8 +2,8 @@ import { Box, Button } from '@mui/material';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Link from '@mui/material/Link';
+import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -22,15 +22,25 @@ import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
 import VersionDialog from './VersionDialog';
 
-const useStyle = makeStyles(theme => ({
-  content: {
+const PREFIX = 'Layout';
+
+const classes = {
+  content: `${PREFIX}-content`,
+  toolbar: `${PREFIX}-toolbar`,
+  visuallyHidden: `${PREFIX}-visuallyHidden`,
+  wrapper: `${PREFIX}-wrapper`,
+};
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.content}`]: {
     flexGrow: 1,
     marginLeft: 'initial',
   },
-  toolbar: theme.mixins.toolbar,
+  [`& .${classes.toolbar}`]: theme.mixins.toolbar,
   // importing visuallyHidden has typing issues at time of writing.
   // import { visuallyHidden } from '@mui/utils';
-  visuallyHidden: {
+  [`& .${classes.visuallyHidden}`]: {
     border: 0,
     clip: 'rect(0 0 0 0)',
     height: '1px',
@@ -41,7 +51,7 @@ const useStyle = makeStyles(theme => ({
     whiteSpace: 'nowrap',
     width: '1px',
   },
-  wrapper: {
+  [`& .${classes.wrapper}`]: {
     display: 'flex',
     [theme.breakpoints.down('sm')]: {
       display: 'block',
@@ -86,7 +96,6 @@ function ClusterNotFoundPopup() {
 }
 
 export default function Layout({}: LayoutProps) {
-  const classes = useStyle();
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
@@ -166,7 +175,7 @@ export default function Layout({}: LayoutProps) {
   };
 
   return (
-    <>
+    <Root>
       <Link href="#main" className={classes.visuallyHidden}>
         {t('Skip to main content')}
       </Link>
@@ -200,6 +209,6 @@ export default function Layout({}: LayoutProps) {
         </main>
         <ActionsNotifier />
       </Box>
-    </>
+    </Root>
   );
 }

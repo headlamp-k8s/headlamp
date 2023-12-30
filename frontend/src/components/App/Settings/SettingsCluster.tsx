@@ -1,7 +1,7 @@
 import { Icon, InlineIcon } from '@iconify/react';
 import { Box, Chip, IconButton, TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -13,8 +13,17 @@ import { setConfig } from '../../../redux/configSlice';
 import { Link, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
 
-const useStyles = makeStyles(theme => ({
-  chipBox: {
+const PREFIX = 'SettingsCluster';
+
+const classes = {
+  chipBox: `${PREFIX}-chipBox`,
+  input: `${PREFIX}-input`,
+  blackButton: `${PREFIX}-blackButton`,
+};
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.chipBox}`]: {
     display: 'flex',
     flexWrap: 'wrap',
     '& > *': {
@@ -22,10 +31,12 @@ const useStyles = makeStyles(theme => ({
     },
     marginTop: theme.spacing(1),
   },
-  input: {
+
+  [`& .${classes.input}`]: {
     maxWidth: 250,
   },
-  blackButton: {
+
+  [`& .${classes.blackButton}`]: {
     backgroundColor: theme.palette.sidebarBg,
     color: theme.palette.primary.contrastText,
     '&:hover': {
@@ -55,7 +66,7 @@ export default function SettingsCluster() {
   const [userDefaultNamespace, setUserDefaultNamespace] = React.useState('');
   const [newAllowedNamespace, setNewAllowedNamespace] = React.useState('');
   const [clusterSettings, setClusterSettings] = React.useState<ClusterSettings | null>(null);
-  const classes = useStyles();
+
   const theme = useTheme();
 
   const history = useHistory();
@@ -170,7 +181,7 @@ export default function SettingsCluster() {
   );
 
   return (
-    <>
+    <Root>
       <SectionBox
         title={
           Object.keys(clusterConf || {}).length > 1
@@ -313,6 +324,6 @@ export default function SettingsCluster() {
           </ConfirmButton>
         </Box>
       )}
-    </>
+    </Root>
   );
 }

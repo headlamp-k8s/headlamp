@@ -11,9 +11,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
+import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router';
@@ -24,8 +24,17 @@ import { Cluster } from '../../lib/k8s/cluster';
 import { createRouteURL } from '../../lib/router';
 import { getCluster, getClusterPrefixedPath } from '../../lib/util';
 
-const useStyles = makeStyles(theme => ({
-  button: {
+const PREFIX = 'ClusterChooserPopup';
+
+const classes = {
+  button: `${PREFIX}-button`,
+  list: `${PREFIX}-list`,
+  recentClustersSubheader: `${PREFIX}-recentClustersSubheader`,
+  popover: `${PREFIX}-popover`,
+};
+
+const StyledPopover = styled(Popover)(({ theme }) => ({
+  [`& .${classes.button}`]: {
     backgroundColor: theme.palette.sidebarBg,
     color: theme.palette.primary.contrastText,
     '&:hover': {
@@ -36,7 +45,8 @@ const useStyles = makeStyles(theme => ({
     borderTopRightRadius: 0,
     textTransform: 'none',
   },
-  list: {
+
+  [`& .${classes.list}`]: {
     width: '280px',
     minWidth: '280px',
     minHeight: '200px',
@@ -52,11 +62,13 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: 0,
     },
   },
-  recentClustersSubheader: {
+
+  [`& .${classes.recentClustersSubheader}`]: {
     paddingLeft: 0,
     lineHeight: theme.typography.pxToRem(24),
   },
-  popover: {
+
+  [`&.${classes.popover}`]: {
     marginTop: '-5px',
   },
 }));
@@ -101,7 +113,7 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
   const [filter, setFilter] = React.useState('');
   const clusters = useClustersConf();
   const history = useHistory();
-  const classes = useStyles();
+
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [activeDescendantIndex, setActiveDescendantIndex] = React.useState<number>(-1);
@@ -235,7 +247,7 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
   }
 
   return (
-    <Popover
+    <StyledPopover
       open={!!anchor}
       anchorEl={isSmallScreen ? null : anchor}
       onClose={handleClose}
@@ -311,7 +323,7 @@ function ClusterChooserPopup(props: ChooserPopupPros) {
           </Button>
         </>
       )}
-    </Popover>
+    </StyledPopover>
   );
 }
 

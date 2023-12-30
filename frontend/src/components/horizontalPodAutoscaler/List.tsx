@@ -1,30 +1,31 @@
-import { Chip, Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { Chip } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 import HPA from '../../lib/k8s/hpa';
 import { Link } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      justifyContent: 'left',
-      flexWrap: 'wrap',
-      '& > *': {
-        margin: theme.spacing(0.5),
-      },
-    },
-    chip: {
-      paddingTop: '2px',
-      paddingBottom: '2px',
-    },
-  })
-);
+const PREFIX = 'List';
+
+const classes = {
+  chip: `${PREFIX}-chip`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'left',
+  flexWrap: 'wrap',
+  '& > *': {
+    margin: theme.spacing(0.5),
+  },
+
+  [`& .${classes.chip}`]: {
+    paddingTop: '2px',
+    paddingBottom: '2px',
+  },
+}));
 
 export default function HpaList() {
-  const classes = useStyles();
   const { t } = useTranslation(['glossary', 'translation']);
 
   return (
@@ -71,7 +72,7 @@ export default function HpaList() {
                 );
               }
             }
-            return <div className={classes.root}>{value}</div>;
+            return <Root>{value}</Root>;
           },
           cellProps: {
             style: {

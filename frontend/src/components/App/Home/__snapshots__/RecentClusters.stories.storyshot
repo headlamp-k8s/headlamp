@@ -10,19 +10,19 @@ exports[`Storyshots home/RecentClusters More Than Three Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster3"
             >
               cluster3
@@ -38,19 +38,19 @@ exports[`Storyshots home/RecentClusters More Than Three Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster2"
             >
               cluster2
@@ -66,19 +66,19 @@ exports[`Storyshots home/RecentClusters More Than Three Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster1"
             >
               cluster1
@@ -113,19 +113,19 @@ exports[`Storyshots home/RecentClusters One Existing Cluster 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster0"
             >
               cluster0
@@ -151,19 +151,19 @@ exports[`Storyshots home/RecentClusters One Recent Cluster 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster0"
             >
               cluster0
@@ -179,19 +179,19 @@ exports[`Storyshots home/RecentClusters One Recent Cluster 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster1"
             >
               cluster1
@@ -207,19 +207,19 @@ exports[`Storyshots home/RecentClusters One Recent Cluster 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster2"
             >
               cluster2
@@ -245,19 +245,19 @@ exports[`Storyshots home/RecentClusters Three Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster0"
             >
               cluster0
@@ -273,19 +273,19 @@ exports[`Storyshots home/RecentClusters Three Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster1"
             >
               cluster1
@@ -301,19 +301,19 @@ exports[`Storyshots home/RecentClusters Three Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster2"
             >
               cluster2
@@ -339,19 +339,19 @@ exports[`Storyshots home/RecentClusters Two Existing Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster0"
             >
               cluster0
@@ -367,19 +367,19 @@ exports[`Storyshots home/RecentClusters Two Existing Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster1"
             >
               cluster1
@@ -405,19 +405,19 @@ exports[`Storyshots home/RecentClusters Two Recent Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster0"
             >
               cluster0
@@ -433,19 +433,19 @@ exports[`Storyshots home/RecentClusters Two Recent Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster1"
             >
               cluster1
@@ -461,19 +461,19 @@ exports[`Storyshots home/RecentClusters Two Recent Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster2"
             >
               cluster2
@@ -499,19 +499,19 @@ exports[`Storyshots home/RecentClusters With Obsolete Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster0"
             >
               cluster0
@@ -527,19 +527,19 @@ exports[`Storyshots home/RecentClusters With Obsolete Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster1"
             >
               cluster1
@@ -555,19 +555,19 @@ exports[`Storyshots home/RecentClusters With Obsolete Clusters 1`] = `
       class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
     >
       <button
-        class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
+        class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
         tabindex="0"
         type="button"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
         >
           <div
-            class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+            class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
           >
             <span />
             <p
-              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
               title="cluster2"
             >
               cluster2

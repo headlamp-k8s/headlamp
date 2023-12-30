@@ -1,14 +1,21 @@
 import { Icon } from '@iconify/react';
 import { Box, IconButton } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles({
-  fullText: {
+const PREFIX = 'ShowHideLabel';
+
+const classes = {
+  fullText: `${PREFIX}-fullText`,
+  button: `${PREFIX}-button`,
+};
+
+const StyledBox = styled(Box)({
+  [`& .${classes.fullText}`]: {
     wordBreak: 'break-all',
   },
-  button: {
+  [`& .${classes.button}`]: {
     display: 'inline',
   },
 });
@@ -24,7 +31,6 @@ export default function ShowHideLabel(props: ShowHideLabelProps) {
   const { show = false, labelId = '', maxChars = 256, children } = props;
   const { t } = useTranslation();
   const [expanded, setExpanded] = React.useState(show);
-  const classes = useStyles();
 
   const labelIdOrRandom = React.useMemo(() => {
     if (!!labelId || !!process.env.UNDER_TEST) {
@@ -51,7 +57,7 @@ export default function ShowHideLabel(props: ShowHideLabelProps) {
   }
 
   return (
-    <Box display={expanded ? 'block' : 'flex'}>
+    <StyledBox display={expanded ? 'block' : 'flex'}>
       <label
         id={labelIdOrRandom}
         className={classes.fullText}
@@ -73,6 +79,6 @@ export default function ShowHideLabel(props: ShowHideLabelProps) {
           </>
         )}
       </label>
-    </Box>
+    </StyledBox>
   );
 }

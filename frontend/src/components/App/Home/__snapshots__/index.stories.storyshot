@@ -12,118 +12,122 @@ exports[`Storyshots Home/Home Base 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <div
-          class="MuiBox-root css-j1fy4m"
+          class="css-1mf30tz"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiBox-root css-j1fy4m"
           >
             <div
-              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 SectionHeader-sectionHeader css-k9zzm4-MuiGrid-root"
             >
               <div
-                class="MuiBox-root css-70qvj9"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
-                <h1
-                  class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
-                >
-                  Home
-                </h1>
                 <div
-                  class="MuiBox-root css-ldp2l3"
-                />
+                  class="MuiBox-root css-70qvj9"
+                >
+                  <h1
+                    class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap SectionHeader-sectionTitle css-1f1i6v9-MuiTypography-root"
+                  >
+                    Home
+                  </h1>
+                  <div
+                    class="MuiBox-root css-ldp2l3"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            class="makeStyles-box MuiBox-root css-0"
-          >
             <div
-              aria-labelledby="#recent-clusters-label"
-              class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-spacing-xs-2 css-1vj4bu4-MuiGrid-root"
+              class="SectionBox-box MuiBox-root css-0"
             >
               <div
-                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                aria-labelledby="#recent-clusters-label"
+                class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-spacing-xs-2 css-1vj4bu4-MuiGrid-root"
               >
-                <button
-                  class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
-                  tabindex="0"
-                  type="button"
+                <div
+                  class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
                 >
-                  <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+                  <button
+                    class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
+                    tabindex="0"
+                    type="button"
                   >
                     <div
-                      class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+                      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
                     >
-                      <span />
-                      <p
-                        class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
-                        title="cluster0"
+                      <div
+                        class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
                       >
-                        cluster0
-                      </p>
+                        <span />
+                        <p
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
+                          title="cluster0"
+                        >
+                          cluster0
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </div>
-              <div
-                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-              >
-                <button
-                  class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
-                  tabindex="0"
-                  type="button"
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
                 >
-                  <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+                  <button
+                    class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
+                    tabindex="0"
+                    type="button"
                   >
                     <div
-                      class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+                      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
                     >
-                      <span />
-                      <p
-                        class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
-                        title="cluster2"
+                      <div
+                        class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
                       >
-                        cluster2
-                      </p>
+                        <span />
+                        <p
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
+                          title="cluster2"
+                        >
+                          cluster2
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
-              </div>
-              <div
-                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-              >
-                <button
-                  class="MuiButtonBase-root css-10d1a0h-MuiButtonBase-root"
-                  tabindex="0"
-                  type="button"
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
                 >
-                  <div
-                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+                  <button
+                    class="MuiButtonBase-root css-1rqymkz-MuiButtonBase-root"
+                    tabindex="0"
+                    type="button"
                   >
                     <div
-                      class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+                      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root SquareButton-root css-bhp9pd-MuiPaper-root-MuiCard-root"
                     >
-                      <span />
-                      <p
-                        class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
-                        title="cluster1"
+                      <div
+                        class="MuiCardContent-root SquareButton-content css-46bh2p-MuiCardContent-root"
                       >
-                        cluster1
-                      </p>
+                        <span />
+                        <p
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom SquareButton-label css-zklona-MuiTypography-root"
+                          title="cluster1"
+                        >
+                          cluster1
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <span
-                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                  />
-                </button>
+                    <span
+                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -137,164 +141,76 @@ exports[`Storyshots Home/Home Base 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <div
-          class="MuiBox-root css-j1fy4m"
+          class="css-1mf30tz"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+            class="MuiBox-root css-j1fy4m"
           >
             <div
-              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+              class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 SectionHeader-sectionHeader css-k9zzm4-MuiGrid-root"
             >
               <div
-                class="MuiBox-root css-70qvj9"
-              >
-                <h2
-                  class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
-                >
-                  All Clusters
-                </h2>
-                <div
-                  class="MuiBox-root css-ldp2l3"
-                />
-              </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-            >
-              <div
-                class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
               >
                 <div
-                  class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                  class="MuiBox-root css-70qvj9"
                 >
-                  <button
-                    aria-label="Show filter"
-                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
-                    tabindex="0"
-                    type="button"
+                  <h2
+                    class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap SectionHeader-sectionTitle css-1c4rm8p-MuiTypography-root"
                   >
-                    <span />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </button>
+                    All Clusters
+                  </h2>
+                  <div
+                    class="MuiBox-root css-ldp2l3"
+                  />
+                </div>
+              </div>
+              <div
+                class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+              >
+                <div
+                  class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+                >
+                  <div
+                    class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+                  >
+                    <button
+                      aria-label="Show filter"
+                      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span />
+                      <span
+                        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            class="makeStyles-box MuiBox-root css-0"
-          >
             <div
-              class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
+              class="SectionBox-box MuiBox-root css-0"
             >
-              <table
-                class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
+              <div
+                class="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiTableContainer-root makeStyles-tableContainer css-h2cton-MuiPaper-root-MuiTableContainer-root"
               >
-                <thead
-                  class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+                <table
+                  class="MuiTable-root makeStyles-table makeStyles-table css-vzt8dn-MuiTable-root"
                 >
-                  <tr
-                    class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
+                  <thead
+                    class="MuiTableHead-root css-15wwp11-MuiTableHead-root"
                   >
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
-                      scope="col"
+                    <tr
+                      class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
                     >
-                      Name
-                      <button
-                        aria-label="sort up"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                        tabindex="0"
-                        type="button"
+                      <th
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
+                        scope="col"
                       >
-                        <span />
-                        <span
-                          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
-                      scope="col"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
-                      scope="col"
-                    >
-                      Kubernetes Version
-                      <button
-                        aria-label="sort swap"
-                        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                        tabindex="0"
-                        type="button"
-                      >
-                        <span />
-                        <span
-                          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                        />
-                      </button>
-                    </th>
-                    <th
-                      class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
-                      scope="col"
-                    >
-                      
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
-                >
-                  <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <a
-                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                        href="/c/cluster0/"
-                      >
-                        cluster0
-                      </a>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <div
-                        class="MuiBox-root css-1gtanqs"
-                      >
-                        <div
-                          class="MuiBox-root css-gmuwbf"
-                        >
-                          <span />
-                          <p
-                            class="MuiTypography-root MuiTypography-body2 css-ab4e19-MuiTypography-root"
-                            style="margin-left: 8px;"
-                          >
-                            ⋯
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      ⋯
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <div
-                        class="MuiBox-root css-s2uf1z"
-                      >
+                        Name
                         <button
-                          aria-controls="context-menuid"
-                          aria-haspopup="menu"
-                          aria-label="Actions"
+                          aria-label="sort up"
                           class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                           tabindex="0"
                           type="button"
@@ -304,56 +220,20 @@ exports[`Storyshots Home/Home Base 1`] = `
                             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <a
-                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                        href="/c/cluster1/"
+                      </th>
+                      <th
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                        scope="col"
                       >
-                        cluster1
-                      </a>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <div
-                        class="MuiBox-root css-1gtanqs"
+                        Status
+                      </th>
+                      <th
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
+                        scope="col"
                       >
-                        <div
-                          class="MuiBox-root css-gmuwbf"
-                        >
-                          <span />
-                          <p
-                            class="MuiTypography-root MuiTypography-body2 css-ab4e19-MuiTypography-root"
-                            style="margin-left: 8px;"
-                          >
-                            ⋯
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      ⋯
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <div
-                        class="MuiBox-root css-s2uf1z"
-                      >
+                        Kubernetes Version
                         <button
-                          aria-controls="context-menuid"
-                          aria-haspopup="menu"
-                          aria-label="Actions"
+                          aria-label="sort swap"
                           class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                           tabindex="0"
                           type="button"
@@ -363,70 +243,198 @@ exports[`Storyshots Home/Home Base 1`] = `
                             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
                           />
                         </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr
-                    class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
-                  >
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <a
-                        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                        href="/c/cluster2/"
+                      </th>
+                      <th
+                        class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                        scope="col"
                       >
-                        cluster2
-                      </a>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                        
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+                  >
+                    <tr
+                      class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
                     >
-                      <div
-                        class="MuiBox-root css-1gtanqs"
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <a
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                          href="/c/cluster0/"
+                        >
+                          cluster0
+                        </a>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
                         <div
-                          class="MuiBox-root css-gmuwbf"
+                          class="MuiBox-root css-1gtanqs"
                         >
-                          <span />
-                          <p
-                            class="MuiTypography-root MuiTypography-body2 css-ab4e19-MuiTypography-root"
-                            style="margin-left: 8px;"
+                          <div
+                            class="MuiBox-root css-gmuwbf"
                           >
-                            ⋯
-                          </p>
+                            <span />
+                            <p
+                              class="MuiTypography-root MuiTypography-body2 css-ab4e19-MuiTypography-root"
+                              style="margin-left: 8px;"
+                            >
+                              ⋯
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      ⋯
-                    </td>
-                    <td
-                      class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                    >
-                      <div
-                        class="MuiBox-root css-s2uf1z"
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
                       >
-                        <button
-                          aria-controls="context-menuid"
-                          aria-haspopup="menu"
-                          aria-label="Actions"
-                          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
-                          tabindex="0"
-                          type="button"
+                        ⋯
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <div
+                          class="MuiBox-root css-s2uf1z"
                         >
-                          <span />
-                          <span
-                            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                          />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                          <button
+                            aria-controls="context-menuid"
+                            aria-haspopup="menu"
+                            aria-label="Actions"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span />
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <a
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                          href="/c/cluster1/"
+                        >
+                          cluster1
+                        </a>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <div
+                          class="MuiBox-root css-1gtanqs"
+                        >
+                          <div
+                            class="MuiBox-root css-gmuwbf"
+                          >
+                            <span />
+                            <p
+                              class="MuiTypography-root MuiTypography-body2 css-ab4e19-MuiTypography-root"
+                              style="margin-left: 8px;"
+                            >
+                              ⋯
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        ⋯
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <div
+                          class="MuiBox-root css-s2uf1z"
+                        >
+                          <button
+                            aria-controls="context-menuid"
+                            aria-haspopup="menu"
+                            aria-label="Actions"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span />
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr
+                      class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+                    >
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <a
+                          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                          href="/c/cluster2/"
+                        >
+                          cluster2
+                        </a>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <div
+                          class="MuiBox-root css-1gtanqs"
+                        >
+                          <div
+                            class="MuiBox-root css-gmuwbf"
+                          >
+                            <span />
+                            <p
+                              class="MuiTypography-root MuiTypography-body2 css-ab4e19-MuiTypography-root"
+                              style="margin-left: 8px;"
+                            >
+                              ⋯
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        ⋯
+                      </td>
+                      <td
+                        class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                      >
+                        <div
+                          class="MuiBox-root css-s2uf1z"
+                        >
+                          <button
+                            aria-controls="context-menuid"
+                            aria-haspopup="menu"
+                            aria-label="Actions"
+                            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                            tabindex="0"
+                            type="button"
+                          >
+                            <span />
+                            <span
+                              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                            />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

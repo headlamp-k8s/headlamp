@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
@@ -8,15 +8,15 @@ import { getRoute, getRoutePath } from '../../lib/router';
 import { getCluster } from '../../lib/util';
 import { useSidebarInfo } from '../Sidebar';
 
-// in ms
-const NETWORK_STATUS_CHECK_TIME = 5000;
+const PREFIX = 'AlertNotification';
 
-export interface PureAlertNotificationProps {
-  checkerFunction(): Promise<any>;
-}
+const classes = {
+  box: `${PREFIX}-box`,
+  button: `${PREFIX}-button`,
+};
 
-const useStyle = makeStyles(theme => ({
-  box: {
+const StyledPureAlertNotification = styled(PureAlertNotification)(({ theme }) => ({
+  [`& .${classes.box}`]: {
     color: theme.palette.common.white,
     textAlign: 'center',
     display: 'flex',
@@ -29,7 +29,8 @@ const useStyle = makeStyles(theme => ({
     top: '0',
     height: '3.8vh',
   },
-  button: {
+
+  [`& .${classes.button}`]: {
     color: theme.palette.error.main,
     borderColor: theme.palette.error.main,
     background: theme.palette.common.white,
@@ -43,6 +44,13 @@ const useStyle = makeStyles(theme => ({
   },
 }));
 
+// in ms
+const NETWORK_STATUS_CHECK_TIME = 5000;
+
+export interface PureAlertNotificationProps {
+  checkerFunction(): Promise<any>;
+}
+
 // Routes where we don't show the alert notification.
 // Because maybe they already offer context about the cluster health or
 // some other reason.
@@ -55,7 +63,6 @@ export function PureAlertNotification({ checkerFunction }: PureAlertNotification
   const [intervalID, setIntervalID] = React.useState<NodeJS.Timeout | null>(null);
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const classes = useStyle();
 
   function registerSetInterval(): NodeJS.Timeout {
     return setInterval(() => {
@@ -145,5 +152,5 @@ export function PureAlertNotification({ checkerFunction }: PureAlertNotification
 }
 
 export default function AlertNotification() {
-  return <PureAlertNotification checkerFunction={testClusterHealth} />;
+  return <StyledPureAlertNotification checkerFunction={testClusterHealth} />;
 }

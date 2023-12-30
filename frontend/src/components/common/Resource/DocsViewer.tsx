@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { TreeView } from '@mui/x-tree-view/TreeView';
 import * as buffer from 'buffer';
@@ -11,20 +11,27 @@ import getDocDefinitions from '../../../lib/docs';
 import Empty from '../EmptyContent';
 import Loader from '../Loader';
 
-// Buffer class is not polyffiled with CRA(v5) so we manually do it here
-window.Buffer = buffer.Buffer;
+const PREFIX = 'DocsViewer';
 
-const useStyles = makeStyles(() => ({
-  root: {
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(() => ({
+  [`& .${classes.root}`]: {
     flexGrow: 1,
     maxWidth: 400,
   },
 }));
 
+// Buffer class is not polyffiled with CRA(v5) so we manually do it here
+window.Buffer = buffer.Buffer;
+
 // @todo: Declare strict types.
 function DocsViewer(props: { docSpecs: any }) {
   const { docSpecs } = props;
-  const classes = useStyles();
+
   const [docs, setDocs] = React.useState<
     (
       | {
@@ -98,7 +105,7 @@ function DocsViewer(props: { docSpecs: any }) {
   }
 
   return (
-    <>
+    <Root>
       {docsLoading ? (
         <Loader title={t('Loading documentation')} />
       ) : (
@@ -141,7 +148,7 @@ function DocsViewer(props: { docSpecs: any }) {
           }
         })
       )}
-    </>
+    </Root>
   );
 }
 

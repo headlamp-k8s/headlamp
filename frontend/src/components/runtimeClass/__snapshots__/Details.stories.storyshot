@@ -3,7 +3,7 @@
 exports[`Storyshots RuntimeClass/DetailsView Runtime Class Detail 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 makeStyles-section css-1ub3t8b-MuiGrid-root"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 css-1hii5np-MuiGrid-root"
   >
     <div
       class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-49904w-MuiGrid-root"
@@ -12,7 +12,7 @@ exports[`Storyshots RuntimeClass/DetailsView Runtime Class Detail 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall makeStyles-root css-1eo01bt-MuiButtonBase-root-MuiButton-root"
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall BackLink-root css-1r0rsq-MuiButtonBase-root-MuiButton-root"
           tabindex="0"
           type="button"
         >
@@ -40,7 +40,7 @@ exports[`Storyshots RuntimeClass/DetailsView Runtime Class Detail 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 makeStyles-sectionHeader makeStyles-sectionHeader css-6ejd34-MuiGrid-root"
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 SectionHeader-sectionHeader css-k9zzm4-MuiGrid-root"
         >
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
@@ -75,7 +75,7 @@ exports[`Storyshots RuntimeClass/DetailsView Runtime Class Detail 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <div
-          class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
+          class="Loader-loaderContainer MuiBox-root css-9mvasj"
         >
           <span
             class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"

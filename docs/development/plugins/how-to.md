@@ -33,23 +33,20 @@ displays that information in the top bar (i.e. registers an "app bar action").
 ```tsx
 import { K8s, registerAppBarAction } from '@kinvolk/headlamp-plugin/lib';
 import { Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 
-const useStyle = makeStyles(() => ({
-  pods: {
-    fontStyle: 'italic',
-  },
+const StyledTypography = styled(Typography)(() => ({
+  fontStyle: 'italic',
 }));
 
 function PodCounter() {
-  const classes = useStyle();
   const [pods, error] = K8s.ResourceClasses.Pod.useList();
   const msg = pods === null ? 'Loading…' : pods.length.toString();
 
   return (
-    <Typography color="textPrimary" className={classes.pods}>
+    <StyledTypography color="textPrimary">
       {!error ? `# Pods: ${msg}` : 'Uh, pods!?'}
-    </Typography>
+    </StyledTypography>
   );
 }
 

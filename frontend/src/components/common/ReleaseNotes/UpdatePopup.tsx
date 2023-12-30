@@ -1,11 +1,18 @@
 import { Icon } from '@iconify/react';
 import { Box, Button, Snackbar } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = makeStyles(() => ({
-  root: {
+const PREFIX = 'UpdatePopup';
+
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(() => ({
+  [`& .${classes.root}`]: {
     '& .MuiSnackbarContent-root': {
       backgroundColor: 'rgb(49, 49, 49)',
       color: '#fff',
@@ -19,7 +26,6 @@ function UpdatePopup(props: {
   releaseFetchFailed?: boolean;
   skipUpdateHandler: () => void;
 }) {
-  const classes = useStyles();
   const [show, setShow] = React.useState(true);
   const { releaseDownloadURL, fetchingRelease, releaseFetchFailed, skipUpdateHandler } = props;
   const { t } = useTranslation();
@@ -39,7 +45,7 @@ function UpdatePopup(props: {
         }}
         open={fetchingRelease}
         action={
-          <React.Fragment>
+          <Root>
             <Button
               style={{
                 color: 'rgb(255, 242, 0)',
@@ -50,7 +56,7 @@ function UpdatePopup(props: {
             >
               {t('translation|Skip')}
             </Button>
-          </React.Fragment>
+          </Root>
         }
       />
     );

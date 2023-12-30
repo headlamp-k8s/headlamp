@@ -6,7 +6,7 @@ exports[`Storyshots LabelListItem List 1`] = `
     aria-label="a label
 another label
 yet another label"
-    class=""
+    class="css-19hmxrs"
     data-mui-internal-clone-element="true"
   >
     a label, another label, yet another label

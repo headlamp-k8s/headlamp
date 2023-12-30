@@ -1,8 +1,49 @@
 import '../../../i18n/config';
 import { Box, Paper, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { PercentageCircle, PercentageCircleProps } from '../Chart';
 import { TooltipIcon } from '../Tooltip';
+
+const PREFIX = 'TileChart';
+
+const classes = {
+  paper: `${PREFIX}-paper`,
+  title: `${PREFIX}-title`,
+  legend: `${PREFIX}-legend`,
+  chartBox: `${PREFIX}-chartBox`,
+  tileBox: `${PREFIX}-tileBox`,
+};
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  [`&.${classes.paper}`]: {
+    background: theme.palette.squareButton.background,
+    padding: theme.spacing(2),
+    height: '100%',
+    maxWidth: '300px',
+  },
+
+  [`& .${classes.title}`]: {
+    fontSize: theme.typography.pxToRem(16),
+    display: 'inline',
+    fontWeight: 600,
+  },
+
+  [`& .${classes.legend}`]: {
+    fontSize: theme.typography.pxToRem(16),
+    display: 'inline',
+    fontWeight: 400,
+  },
+
+  [`& .${classes.chartBox}`]: {
+    maxWidth: '150px',
+  },
+
+  [`& .${classes.tileBox}`]: {
+    [theme.breakpoints.down('sm')]: {
+      flexWrap: 'wrap',
+    },
+  },
+}));
 
 export interface TileChartProps extends Omit<PercentageCircleProps, 'data'> {
   /** Tooltip to display when hovering over the info icon. This info icon is only shown if this property is passed. */
@@ -11,39 +52,11 @@ export interface TileChartProps extends Omit<PercentageCircleProps, 'data'> {
   data?: PercentageCircleProps['data'] | null;
 }
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    background: theme.palette.squareButton.background,
-    padding: theme.spacing(2),
-    height: '100%',
-    maxWidth: '300px',
-  },
-  title: {
-    fontSize: theme.typography.pxToRem(16),
-    display: 'inline',
-    fontWeight: 600,
-  },
-  legend: {
-    fontSize: theme.typography.pxToRem(16),
-    display: 'inline',
-    fontWeight: 400,
-  },
-  chartBox: {
-    maxWidth: '150px',
-  },
-  tileBox: {
-    [theme.breakpoints.down('sm')]: {
-      flexWrap: 'wrap',
-    },
-  },
-}));
-
 export function TileChart(props: TileChartProps) {
   const { title, infoTooltip = '', legend, total, data, ...others } = props;
-  const classes = useStyles();
 
   return (
-    <Paper className={classes.paper}>
+    <StyledPaper className={classes.paper}>
       <Box display="flex" className={classes.tileBox}>
         <Box flexGrow={1} width="100%">
           <Box>
@@ -62,7 +75,7 @@ export function TileChart(props: TileChartProps) {
           )}
         </Box>
       </Box>
-    </Paper>
+    </StyledPaper>
   );
 }
 

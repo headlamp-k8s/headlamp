@@ -3,8 +3,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
-import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -26,14 +26,24 @@ import AuthVisible from '../common/Resource/AuthVisible';
 import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
 
-const useStyle = makeStyles(theme => ({
-  containerFormControl: {
+const PREFIX = 'Details';
+
+const classes = {
+  containerFormControl: `${PREFIX}-containerFormControl`,
+  linesFormControl: `${PREFIX}-linesFormControl`,
+  switchControl: `${PREFIX}-switchControl`,
+};
+
+const StyledLogViewer = styled(LogViewer)(({ theme }) => ({
+  [`& .${classes.containerFormControl}`]: {
     minWidth: '11rem',
   },
-  linesFormControl: {
+
+  [`& .${classes.linesFormControl}`]: {
     minWidth: '6rem',
   },
-  switchControl: {
+
+  [`& .${classes.switchControl}`]: {
     margin: 0,
     paddingTop: theme.spacing(2),
     paddingRight: theme.spacing(2),
@@ -45,7 +55,6 @@ interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
 }
 
 function PodLogViewer(props: PodLogViewerProps) {
-  const classes = useStyle();
   const { item, onClose, open, ...other } = props;
   const [container, setContainer] = React.useState(getDefaultContainer());
   const [showPrevious, setShowPrevious] = React.useState<boolean>(false);
@@ -154,7 +163,7 @@ function PodLogViewer(props: PodLogViewerProps) {
   }
 
   return (
-    <LogViewer
+    <StyledLogViewer
       title={t('glossary|Logs: {{ itemName }}', { itemName: item.getName() })}
       downloadName={`${item.getName()}_${container}`}
       open={open}

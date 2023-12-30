@@ -1,10 +1,15 @@
 import Box from '@mui/material/Box';
 import CircularProgress, { CircularProgressProps } from '@mui/material/CircularProgress';
-import makeStyles from '@mui/styles/makeStyles';
-import React from 'react';
+import { styled } from '@mui/material/styles';
 
-const useStyles = makeStyles({
-  loaderContainer: {
+const PREFIX = 'Loader';
+
+const classes = {
+  loaderContainer: `${PREFIX}-loaderContainer`,
+};
+
+const StyledBox = styled(Box)({
+  [`&.${classes.loaderContainer}`]: {
     textAlign: 'center',
   },
 });
@@ -15,15 +20,14 @@ export interface LoaderProps {
 }
 
 export default function Loader(props: LoaderProps & CircularProgressProps) {
-  const classes = useStyles();
   const { noContainer = false, title, ...other } = props;
   const progress = <CircularProgress title={title} {...other} />;
 
   if (noContainer) return progress;
 
   return (
-    <Box className={classes.loaderContainer} py={3} px="auto">
+    <StyledBox className={classes.loaderContainer} py={3} px="auto">
       {progress}
-    </Box>
+    </StyledBox>
   );
 }

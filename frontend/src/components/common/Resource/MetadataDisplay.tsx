@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react';
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
+import { styled } from '@mui/material/styles';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
@@ -12,6 +13,28 @@ import { localeDate } from '../../../lib/util';
 import { NameValueTable, NameValueTableRow } from '../../common/SimpleTable';
 import Link from '../Link';
 import { LightTooltip } from '../Tooltip';
+
+const PREFIX = 'MetadataDisplay';
+
+const classes = {
+  metadataValueLabel: `${PREFIX}-metadataValueLabel`,
+};
+
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  [`& .${classes.metadataValueLabel}`]: {
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.metadataBgColor,
+    fontSize: theme.typography.pxToRem(16),
+    wordBreak: 'break-word',
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    overflowWrap: 'anywhere',
+    textOverflow: 'ellipsis',
+  },
+}));
 
 export const useMetadataDisplayStyles = makeStyles(theme => ({
   metadataValueLabel: {
@@ -152,7 +175,6 @@ interface MetadataDictGridProps {
 }
 
 export function MetadataDictGrid(props: MetadataDictGridProps) {
-  const classes = useMetadataDisplayStyles({});
   const { dict, showKeys = true, gridProps } = props;
   const [expanded, setExpanded] = React.useState(false);
   const defaultNumShown = 20;
@@ -190,7 +212,7 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
   }
 
   return (
-    <Grid container spacing={1} justifyContent="flex-start">
+    <StyledGrid container spacing={1} justifyContent="flex-start">
       {keys.length > defaultNumShown && (
         <Grid item>
           <IconButton onClick={() => setExpanded(!expanded)} size="small">
@@ -215,6 +237,6 @@ export function MetadataDictGrid(props: MetadataDictGridProps) {
           </Grid>
         ))}
       </Grid>
-    </Grid>
+    </StyledGrid>
   );
 }

@@ -1,25 +1,37 @@
 import { Grid, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import headlampBrokenImage from '../../../assets/headlamp-broken.svg';
 
-const useStyles = makeStyles(() => ({
-  root: {
+const PREFIX = 'index';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  h1: `${PREFIX}-h1`,
+  h2: `${PREFIX}-h2`,
+  img: `${PREFIX}-img`,
+};
+
+const StyledGrid = styled(Grid)(() => ({
+  [`&.${classes.root}`]: {
     textAlign: 'center',
   },
-  h1: {
+
+  [`& .${classes.h1}`]: {
     fontSize: '2.125rem',
     lineHeight: 1.2,
     fontWeight: 400,
   },
-  h2: {
+
+  [`& .${classes.h2}`]: {
     fontSize: '1.25rem',
     lineHeight: 3.6,
     fontWeight: 500,
   },
-  img: {
+
+  [`& .${classes.img}`]: {
     width: '100%',
   },
 }));
@@ -44,9 +56,8 @@ export default function ErrorComponent(props: ErrorComponentProps) {
     withTypography = true,
     graphic = headlampBrokenImage,
   } = props;
-  const classes = useStyles();
   return (
-    <Grid
+    <StyledGrid
       container
       spacing={0}
       direction="column"
@@ -81,6 +92,6 @@ export default function ErrorComponent(props: ErrorComponentProps) {
           message
         )}
       </Grid>
-    </Grid>
+    </StyledGrid>
   );
 }

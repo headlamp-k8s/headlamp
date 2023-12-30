@@ -11,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import MuiInput from '@mui/material/Input';
 import { styled, useTheme } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -20,6 +19,35 @@ import { KubeObject } from '../../../lib/k8s/cluster';
 import { CallbackActionOptions, clusterAction } from '../../../redux/clusterActionSlice';
 import { LightTooltip } from '../Tooltip';
 import AuthVisible from './AuthVisible';
+
+const PREFIX = 'ScaleButton';
+
+const classes = {
+  dialogContent: `${PREFIX}-dialogContent`,
+  replicasNumberInput: `${PREFIX}-replicasNumberInput`,
+  replicasSwitcher: `${PREFIX}-replicasSwitcher`,
+  desiredReplicasText: `${PREFIX}-desiredReplicasText`,
+};
+
+const StyledDialog = styled(Dialog)(() => ({
+  [`& .${classes.dialogContent}`]: {
+    paddingBottom: '30px', // Prevent the content from overflowing
+  },
+
+  [`& .${classes.replicasNumberInput}`]: {
+    marginLeft: '6px',
+    marginRight: '6px',
+  },
+
+  [`& .${classes.replicasSwitcher}`]: {
+    padding: '6px',
+    textAlign: 'left',
+  },
+
+  [`& .${classes.desiredReplicasText}`]: {
+    minWidth: '250px',
+  },
+}));
 
 interface ScaleButtonProps {
   item: KubeObject;
@@ -111,28 +139,10 @@ const Input = styled(MuiInput)({
   width: '80px',
 });
 
-const useScaleDialogStyle = makeStyles(() => ({
-  dialogContent: {
-    paddingBottom: '30px', // Prevent the content from overflowing
-  },
-  replicasNumberInput: {
-    marginLeft: '6px',
-    marginRight: '6px',
-  },
-  replicasSwitcher: {
-    padding: '6px',
-    textAlign: 'left',
-  },
-  desiredReplicasText: {
-    minWidth: '250px',
-  },
-}));
-
 function ScaleDialog(props: ScaleDialogProps) {
   const { open, resource, onClose, onSave } = props;
   const [numReplicas, setNumReplicas] = React.useState<number>(getNumReplicas());
   const { t } = useTranslation(['translation']);
-  const classes = useScaleDialogStyle();
   const theme = useTheme();
   const desiredNumReplicasLabel = 'desired-number-replicas-label';
   const numReplicasForWarning = 100;
@@ -148,7 +158,7 @@ function ScaleDialog(props: ScaleDialogProps) {
   const currentNumReplicas = getNumReplicas();
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+    <StyledDialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>{t('Scale Replicas')}</DialogTitle>
       <DialogContent className={classes.dialogContent}>
         <Grid container spacing={5}>
@@ -220,6 +230,6 @@ function ScaleDialog(props: ScaleDialogProps) {
           {t('translation|Apply')}
         </Button>
       </DialogActions>
-    </Dialog>
+    </StyledDialog>
   );
 }

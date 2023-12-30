@@ -1,7 +1,7 @@
 import { Icon, InlineIcon } from '@iconify/react';
 import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import MuiLink from '@mui/material/Link';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,17 +15,27 @@ import {
   PORT_FORWARDS_STORAGE_KEY,
 } from '../common/Resource/PortForward';
 
-const useStyles = makeStyles(theme => ({
-  link: {
+const PREFIX = 'index';
+
+const classes = {
+  link: `${PREFIX}-link`,
+  disabledLink: `${PREFIX}-disabledLink`,
+  linkIcon: `${PREFIX}-linkIcon`,
+};
+
+const StyledSectionBox = styled(SectionBox)(({ theme }) => ({
+  [`& .${classes.link}`]: {
     // color: portforward.status === PORT_FORWARD_RUNNING_STATUS ? '#2774B3' : '',
     cursor: 'pointer',
     marginRight: theme.spacing(1),
   },
-  disabledLink: {
+
+  [`& .${classes.disabledLink}`]: {
     pointerEvents: 'none',
     color: theme.palette.text.disabled,
   },
-  linkIcon: {
+
+  [`& .${classes.linkIcon}`]: {
     marginLeft: theme.spacing(0.5),
   },
 }));
@@ -41,7 +51,6 @@ export default function PortForwardingList() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [portForwardInAction, setPortForwardInAction] = React.useState<any>(null);
   const { enqueueSnackbar } = useSnackbar();
-  const classes = useStyles();
   const cluster = getCluster();
   const { t, i18n } = useTranslation(['translation', 'glossary']);
   const optionsTranslated = React.useMemo(
@@ -190,7 +199,7 @@ export default function PortForwardingList() {
   }
 
   return (
-    <SectionBox title={t('glossary|Port Forwarding')}>
+    <StyledSectionBox title={t('glossary|Port Forwarding')}>
       <SimpleTable
         columns={[
           {
@@ -288,6 +297,6 @@ export default function PortForwardingList() {
         ]}
         data={portforwards.filter((pf: any) => pf.cluster === cluster)}
       />
-    </SectionBox>
+    </StyledSectionBox>
   );
 }

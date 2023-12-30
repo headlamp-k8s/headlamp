@@ -5,11 +5,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Theme, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import { has } from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -36,6 +35,54 @@ import HeadlampButton from '../Sidebar/HeadlampButton';
 import { setWhetherSidebarOpen } from '../Sidebar/sidebarSlice';
 import { AppLogo } from './AppLogo';
 import Notifications from './Notifications';
+
+const PREFIX = 'TopBar';
+
+const classes = {
+  appbar: `${PREFIX}-appbar`,
+  toolbar: `${PREFIX}-toolbar`,
+  grow: `${PREFIX}-grow`,
+  clusterTitle: `${PREFIX}-clusterTitle`,
+  versionLink: `${PREFIX}-versionLink`,
+  userMenu: `${PREFIX}-userMenu`,
+};
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.appbar}`]: {
+    marginLeft: drawerWidth,
+    zIndex: theme.zIndex.drawer + 1,
+    '& > *': {
+      color: theme.palette.text.primary,
+    },
+    backgroundColor: theme.palette.background.default,
+  },
+
+  [`& .${classes.toolbar}`]: {
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
+  },
+
+  [`& .${classes.grow}`]: {
+    flexGrow: 1,
+  },
+
+  [`& .${classes.clusterTitle}`]: {
+    paddingRight: theme.spacing(10),
+  },
+
+  [`& .${classes.versionLink}`]: {
+    textAlign: 'center',
+  },
+
+  [`& .${classes.userMenu}`]: {
+    '& .MuiMenu-list': {
+      paddingBottom: 0,
+    },
+  },
+}));
 
 export interface TopBarProps {}
 
@@ -131,39 +178,6 @@ export interface PureTopBarProps {
   onToggleOpen: () => void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    appbar: {
-      marginLeft: drawerWidth,
-      zIndex: theme.zIndex.drawer + 1,
-      '& > *': {
-        color: theme.palette.text.primary,
-      },
-      backgroundColor: theme.palette.background.default,
-    },
-    toolbar: {
-      [theme.breakpoints.down('xs')]: {
-        paddingLeft: 0,
-        paddingRight: 0,
-      },
-    },
-    grow: {
-      flexGrow: 1,
-    },
-    clusterTitle: {
-      paddingRight: theme.spacing(10),
-    },
-    versionLink: {
-      textAlign: 'center',
-    },
-    userMenu: {
-      '& .MuiMenu-list': {
-        paddingBottom: 0,
-      },
-    },
-  })
-);
-
 function AppBarActionsMenu({ appBarActions }: { appBarActions: HeaderActionType[] }) {
   const actions = (function stateActions() {
     return React.Children.toArray(
@@ -234,7 +248,6 @@ export function PureTopBar({
 
   const openSideBar = !!(isSidebarOpenUserSelected === undefined ? false : isSidebarOpen);
 
-  const classes = useStyles({ isSidebarOpen, isSmall });
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
   const isClusterContext = !!cluster;
@@ -414,7 +427,7 @@ export function PureTopBar({
     },
   ];
   return (
-    <>
+    <Root>
       <AppBar
         position="fixed"
         className={classes.appbar}
@@ -452,6 +465,6 @@ export function PureTopBar({
       </AppBar>
       {renderUserMenu}
       {isSmall && renderMobileMenu}
-    </>
+    </Root>
   );
 }

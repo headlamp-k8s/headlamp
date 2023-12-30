@@ -1,6 +1,6 @@
 import { FormControlLabel, Switch } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -23,16 +23,27 @@ import {
   PodsStatusCircleChart,
 } from './Charts';
 
-const useOverviewStyle = makeStyles({
-  chartItem: {
+const PREFIX = 'Overview';
+
+const classes = {
+  chartItem: `${PREFIX}-chartItem`,
+};
+
+const StyledPageGrid = styled(PageGrid)({
+  [`& .${classes.chartItem}`]: {
     maxWidth: '300px',
   },
 });
 
+const StyledStatusLabel = styled(StatusLabel)(({ theme }) => ({
+  [theme.breakpoints.up('md')]: {
+    minWidth: '180px',
+    display: 'unset',
+  },
+}));
+
 export default function Overview() {
   const { t } = useTranslation(['translation']);
-  const classes = useOverviewStyle();
-
   const [pods] = Pod.useList();
   const [nodes] = Node.useList();
 
@@ -42,7 +53,7 @@ export default function Overview() {
   const noPermissions = metricsError?.status === 403;
 
   return (
-    <PageGrid>
+    <StyledPageGrid>
       <SectionBox title={t('translation|Overview')} py={2} mt={[4, 0, 0]}>
         {noPermissions ? (
           <Empty color="error">{t('translation|No permissions to list pods.')}</Empty>
@@ -64,22 +75,12 @@ export default function Overview() {
         )}
       </SectionBox>
       <EventsSection />
-    </PageGrid>
+    </StyledPageGrid>
   );
 }
 
-const useStyles = makeStyles(theme => ({
-  eventLabel: {
-    [theme.breakpoints.up('md')]: {
-      minWidth: '180px',
-      display: 'unset',
-    },
-  },
-}));
-
 function EventsSection() {
   const EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY = 'EVENT_WARNING_SWITCH_FILTER_STORAGE_KEY';
-  const classes = useStyles();
   const { t } = useTranslation(['translation', 'glossary']);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -120,9 +121,9 @@ function EventsSection() {
 
   function makeStatusLabel(event: Event) {
     return (
-      <StatusLabel status={event.type === 'Normal' ? '' : 'warning'} className={classes.eventLabel}>
+      <StyledStatusLabel status={event.type === 'Normal' ? '' : 'warning'}>
         {event.reason}
-      </StatusLabel>
+      </StyledStatusLabel>
     );
   }
 

@@ -4,7 +4,7 @@ exports[`Storyshots Resource/SimpleEditor Simple 1`] = `
 <div>
   <textarea
     aria-label="yaml Code"
-    class="makeStyles-editor"
+    class="SimpleEditor-editor css-lhnjso"
     spellcheck="false"
   />
 </div>

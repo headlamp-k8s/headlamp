@@ -1,8 +1,21 @@
 import { Icon, IconProps } from '@iconify/react';
 import Container from '@mui/material/Container';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 import TooltipLight from './TooltipLight';
+
+const PREFIX = 'TooltipIcon';
+
+const classes = {
+  container: `${PREFIX}-container`,
+};
+
+const StyledTooltipLight = styled(TooltipLight)({
+  [`& .${classes.container}`]: {
+    display: 'inline',
+    padding: '0 .3rem',
+  },
+});
 
 export interface TooltipIconProps {
   children: string;
@@ -10,15 +23,7 @@ export interface TooltipIconProps {
   icon?: IconProps['icon'];
 }
 
-const useContainerStyles = makeStyles({
-  container: {
-    display: 'inline',
-    padding: '0 .3rem',
-  },
-});
-
 const IconReffed = React.forwardRef((props: IconProps, ref: any) => {
-  const classes = useContainerStyles({});
   return (
     <Container ref={ref} className={classes.container}>
       <Icon {...props} />
@@ -30,8 +35,8 @@ export default function TooltipIcon(props: TooltipIconProps) {
   const { children, icon = 'mdi:information-outline' } = props;
 
   return (
-    <TooltipLight title={children} interactive>
+    <StyledTooltipLight title={children} interactive>
       <IconReffed icon={icon} />
-    </TooltipLight>
+    </StyledTooltipLight>
   );
 }

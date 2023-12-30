@@ -3,7 +3,7 @@
 exports[`Storyshots Loader With Container 1`] = `
 <div>
   <div
-    class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
+    class="Loader-loaderContainer MuiBox-root css-9mvasj"
   >
     <span
       class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"

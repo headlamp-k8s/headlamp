@@ -2,8 +2,8 @@ import { InlineIcon } from '@iconify/react';
 import { Button, Checkbox, FormControl, Grid, Tooltip } from '@mui/material';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import * as yaml from 'js-yaml';
 import React, { useEffect, useState } from 'react';
@@ -16,6 +16,79 @@ import { setConfig } from '../../redux/configSlice';
 import { DialogTitle } from '../common/Dialog';
 import Loader from '../common/Loader';
 import { ClusterDialog } from './Chooser';
+
+const PREFIX = 'KubeConfigLoader';
+
+const classes = {
+  dropzone: `${PREFIX}-dropzone`,
+  blackButton: `${PREFIX}-blackButton`,
+  wideButton: `${PREFIX}-wideButton`,
+  centeredBox: `${PREFIX}-centeredBox`,
+  selectorBox: `${PREFIX}-selectorBox`,
+  selectorForm: `${PREFIX}-selectorForm`,
+};
+
+const StyledClusterDialog = styled(ClusterDialog)(({ theme }) => ({
+  [`& .${classes.dropzone}`]: {
+    border: 1,
+    borderRadius: 1,
+    borderWidth: 2,
+    borderColor: 'rgba(0, 0, 0)',
+    borderStyle: 'dashed',
+    padding: '20px',
+    margin: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    '&:hover': {
+      borderColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    '&:focus-within': {
+      borderColor: 'rgba(0, 0, 0, 0.5)',
+    },
+  },
+
+  [`& .${classes.blackButton}`]: {
+    backgroundColor: theme.palette.sidebarBg,
+    color: theme.palette.primary.contrastText,
+    '&:hover': {
+      opacity: '0.8',
+      backgroundColor: theme.palette.sidebarBg,
+    },
+  },
+
+  [`& .${classes.wideButton}`]: {
+    width: '100%',
+    maxWidth: '300px',
+  },
+
+  [`& .${classes.centeredBox}`]: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+  },
+
+  [`& .${classes.selectorBox}`]: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
+    padding: '15px',
+    width: '100%',
+    maxWidth: '300px',
+  },
+
+  [`& .${classes.selectorForm}`]: {
+    overflowY: 'auto',
+    height: '150px',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+    width: '100%',
+  },
+}));
 
 interface Cluster {
   name: string;
@@ -79,63 +152,6 @@ function configWithSelectedClusters(config: kubeconfig, selectedClusters: string
   return newConfig;
 }
 
-const useStyles = makeStyles(theme => ({
-  dropzone: {
-    border: 1,
-    borderRadius: 1,
-    borderWidth: 2,
-    borderColor: 'rgba(0, 0, 0)',
-    borderStyle: 'dashed',
-    padding: '20px',
-    margin: '20px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    '&:hover': {
-      borderColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    '&:focus-within': {
-      borderColor: 'rgba(0, 0, 0, 0.5)',
-    },
-  },
-  blackButton: {
-    backgroundColor: theme.palette.sidebarBg,
-    color: theme.palette.primary.contrastText,
-    '&:hover': {
-      opacity: '0.8',
-      backgroundColor: theme.palette.sidebarBg,
-    },
-  },
-  wideButton: {
-    width: '100%',
-    maxWidth: '300px',
-  },
-  centeredBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
-  },
-  selectorBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    justifyContent: 'center',
-    padding: '15px',
-    width: '100%',
-    maxWidth: '300px',
-  },
-  selectorForm: {
-    overflowY: 'auto',
-    height: '150px',
-    paddingLeft: '10px',
-    paddingRight: '10px',
-    width: '100%',
-  },
-}));
-
 const enum Step {
   LoadKubeConfig,
   SelectClusters,
@@ -190,8 +206,6 @@ function KubeConfigLoader() {
 
   const dispatch = useDispatch();
   const { t } = useTranslation(['translation']);
-
-  const classes = useStyles();
 
   const onDrop = (acceptedFiles: Blob[]) => {
     setError('');
@@ -363,7 +377,7 @@ function KubeConfigLoader() {
   }
 
   return (
-    <ClusterDialog
+    <StyledClusterDialog
       showInfoButton={false}
       // Disable backdrop clicking.
       onClose={() => {}}
@@ -374,7 +388,7 @@ function KubeConfigLoader() {
         <Box style={{ backgroundColor: 'red', textAlign: 'center', padding: '4px' }}>{error}</Box>
       ) : null}
       <Box>{renderSwitch()}</Box>
-    </ClusterDialog>
+    </StyledClusterDialog>
   );
 }
 

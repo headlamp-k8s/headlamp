@@ -21,7 +21,6 @@ window.pluginLib = {
   Crd: require('../lib/k8s/crd'),
   CommonComponents: require('../components/common'),
   MuiMaterial: require('@mui/material'),
-  MuiStyles: require('@mui/styles'),
   MuiLab: require('@mui/lab'),
   React: require('react'),
   ReactJSX: require('react/jsx-runtime'),

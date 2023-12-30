@@ -1,11 +1,22 @@
 import { Grid, GridProps } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import React from 'react';
 import { ValueLabel } from '../Label';
 
-const useStyles = makeStyles(theme => ({
-  metadataNameCell: {
+const PREFIX = 'NameValueTable';
+
+const classes = {
+  metadataNameCell: `${PREFIX}-metadataNameCell`,
+  metadataCell: `${PREFIX}-metadataCell`,
+  metadataRow: `${PREFIX}-metadataRow`,
+  metadataLast: `${PREFIX}-metadataLast`,
+  table: `${PREFIX}-table`,
+  highlightRow: `${PREFIX}-highlightRow`,
+};
+
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  [`& .${classes.metadataNameCell}`]: {
     fontSize: '1rem',
     textAlign: 'left',
     maxWidth: '100%',
@@ -25,7 +36,8 @@ const useStyles = makeStyles(theme => ({
       borderBottom: `none`,
     },
   },
-  metadataCell: {
+
+  [`& .${classes.metadataCell}`]: {
     width: '100%',
     verticalAlign: 'top',
     fontSize: '1rem',
@@ -42,17 +54,21 @@ const useStyles = makeStyles(theme => ({
       borderBottom: `none`,
     },
   },
-  metadataRow: {
+
+  [`& .${classes.metadataRow}`]: {
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
-  metadataLast: {
+
+  [`& .${classes.metadataLast}`]: {
     borderBottom: 'none',
   },
-  table: {
+
+  [`&.${classes.table}`]: {
     border: '1px solid #e7e7e7',
     borderRadius: theme.shape.borderRadius,
   },
-  highlightRow: {
+
+  [`& .${classes.highlightRow}`]: {
     color: theme.palette.tables.head.color,
     fontWeight: 'bold',
     background: theme.palette.tables.head.background,
@@ -101,7 +117,6 @@ function Value({
 }
 
 export default function NameValueTable(props: NameValueTableProps) {
-  const classes = useStyles();
   const { rows, valueCellProps: globalValueCellProps } = props;
 
   const visibleRows = React.useMemo(
@@ -120,9 +135,9 @@ export default function NameValueTable(props: NameValueTableProps) {
   );
 
   return (
-    <Grid
+    <StyledGrid
       container
-      component="dl" // mount a Definition List
+      //component="dl" // mount a Definition List
       className={classes.table}
     >
       {visibleRows.flatMap(
@@ -183,6 +198,6 @@ export default function NameValueTable(props: NameValueTableProps) {
           return items;
         }
       )}
-    </Grid>
+    </StyledGrid>
   );
 }

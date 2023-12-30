@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import _ from 'lodash';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,19 +15,16 @@ import { FitAddon } from 'xterm-addon-fit';
 import Pod from '../../lib/k8s/pod';
 import { Dialog } from './Dialog';
 
-const decoder = new TextDecoder('utf-8');
-const encoder = new TextEncoder();
+const PREFIX = 'Terminal';
 
-enum Channel {
-  StdIn = 0,
-  StdOut,
-  StdErr,
-  ServerError,
-  Resize,
-}
+const classes = {
+  dialogContent: `${PREFIX}-dialogContent`,
+  containerFormControl: `${PREFIX}-containerFormControl`,
+  terminalBox: `${PREFIX}-terminalBox`,
+};
 
-const useStyle = makeStyles(theme => ({
-  dialogContent: {
+const StyledDialog = styled(Dialog)(({ theme }) => ({
+  [`& .${classes.dialogContent}`]: {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -45,10 +42,12 @@ const useStyle = makeStyles(theme => ({
       },
     },
   },
-  containerFormControl: {
+
+  [`& .${classes.containerFormControl}`]: {
     minWidth: '11rem',
   },
-  terminalBox: {
+
+  [`& .${classes.terminalBox}`]: {
     paddingTop: theme.spacing(1),
     flex: 1,
     width: '100%',
@@ -57,6 +56,17 @@ const useStyle = makeStyles(theme => ({
     flexDirection: 'column-reverse',
   },
 }));
+
+const decoder = new TextDecoder('utf-8');
+const encoder = new TextEncoder();
+
+enum Channel {
+  StdIn = 0,
+  StdOut,
+  StdErr,
+  ServerError,
+  Resize,
+}
 
 interface TerminalProps extends DialogProps {
   item: Pod;
@@ -74,7 +84,6 @@ type execReturn = ReturnType<Pod['exec']>;
 
 export default function Terminal(props: TerminalProps) {
   const { item, onClose, isAttach, ...other } = props;
-  const classes = useStyle();
   const [terminalContainerRef, setTerminalContainerRef] = React.useState<HTMLElement | null>(null);
   const [container, setContainer] = useState<string | null>(getDefaultContainer());
   const execOrAttachRef = React.useRef<execReturn | null>(null);
@@ -396,7 +405,7 @@ export default function Terminal(props: TerminalProps) {
   }
 
   return (
-    <Dialog
+    <StyledDialog
       onClose={onClose}
       onFullScreenToggled={() => {
         setTimeout(() => {
@@ -465,6 +474,6 @@ export default function Terminal(props: TerminalProps) {
           />
         </Box>
       </DialogContent>
-    </Dialog>
+    </StyledDialog>
   );
 }

@@ -1,5 +1,20 @@
+import { styled } from '@mui/material/styles';
 import Tooltip, { TooltipProps } from '@mui/material/Tooltip';
-import withStyles from '@mui/styles/withStyles';
+const PREFIX = 'TooltipLight';
+
+const classes = {
+  tooltip: `${PREFIX}-tooltip`,
+};
+
+const StyledTooltip = styled(Tooltip)(({ theme }) => ({
+  [`& .${classes.tooltip}`]: {
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.resourceToolTip.color,
+    boxShadow: theme.shadows[1],
+    fontSize: '1rem',
+    whiteSpace: 'pre-line',
+  },
+}));
 
 export interface TooltipLightProps extends TooltipProps {
   /**
@@ -9,16 +24,6 @@ export interface TooltipLightProps extends TooltipProps {
    */
   interactive?: boolean;
 }
-
-const StyledTooltip = withStyles(theme => ({
-  tooltip: {
-    backgroundColor: theme.palette.background.default,
-    color: theme.palette.resourceToolTip.color,
-    boxShadow: theme.shadows[1],
-    fontSize: '1rem',
-    whiteSpace: 'pre-line',
-  },
-}))(Tooltip);
 
 export default function TooltipLight(props: TooltipLightProps) {
   const { children, interactive = true, ...rest } = props;
@@ -32,5 +37,12 @@ export default function TooltipLight(props: TooltipLightProps) {
     );
   }
 
-  return <StyledTooltip {...props} />;
+  return (
+    <StyledTooltip
+      {...props}
+      classes={{
+        tooltip: classes.tooltip,
+      }}
+    />
+  );
 }

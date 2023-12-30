@@ -1,8 +1,14 @@
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import SimpleTable, { SimpleTableProps } from './SimpleTable';
 
-const useStyles = makeStyles({
-  root: {
+const PREFIX = 'InnerTable';
+
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const StyledSimpleTable = styled(SimpleTable)({
+  [`&.${classes.root}`]: {
     border: 'none',
     '& .MuiTableCell-head': {
       background: 'none',
@@ -11,7 +17,5 @@ const useStyles = makeStyles({
 });
 
 export default function InnerTable(props: SimpleTableProps) {
-  const classes = useStyles();
-
-  return <SimpleTable className={classes.root} {...props} />;
+  return <StyledSimpleTable className={classes.root} {...props} />;
 }

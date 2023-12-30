@@ -3,7 +3,6 @@ const externalModules = {
   '@monaco-editor/react': 'pluginLib.ReactMonacoEditor',
   'monaco-editor': 'pluginLib.MonacoEditor',
   '@mui/lab': 'pluginLib.MuiLab',
-  '@mui/styles': 'pluginLib.MuiStyles',
   react: 'pluginLib.React',
   'react/jsx-runtime': 'pluginLib.ReactJSX',
   recharts: 'pluginLib.Recharts',

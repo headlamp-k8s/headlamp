@@ -1,9 +1,29 @@
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
 import { Variant } from '@mui/material/styles/createTypography';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
+
+const PREFIX = 'SectionHeader';
+
+const classes = {
+  sectionHeader: `${PREFIX}-sectionHeader`,
+  sectionTitle: `${PREFIX}-sectionTitle`,
+};
+
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  [`&.${classes.sectionHeader}`]: ({ noPadding }: HeaderStyleProps) => ({
+    padding: theme.spacing(noPadding ? 0 : 2),
+    paddingTop: theme.spacing(noPadding ? 0 : 3),
+    paddingRight: '0',
+  }),
+
+  [`& .${classes.sectionTitle}`]: ({ headerStyle }: HeaderStyleProps) => ({
+    ...theme.palette.headerStyle[headerStyle || 'normal'],
+    whiteSpace: 'pre-wrap',
+  }),
+}));
 
 type HeaderStyle = 'main' | 'subsection' | 'normal' | 'label';
 
@@ -11,18 +31,6 @@ export interface HeaderStyleProps {
   noPadding?: boolean;
   headerStyle?: HeaderStyle;
 }
-
-const useStyles = makeStyles(theme => ({
-  sectionHeader: ({ noPadding }: HeaderStyleProps) => ({
-    padding: theme.spacing(noPadding ? 0 : 2),
-    paddingTop: theme.spacing(noPadding ? 0 : 3),
-    paddingRight: '0',
-  }),
-  sectionTitle: ({ headerStyle }: HeaderStyleProps) => ({
-    ...theme.palette.headerStyle[headerStyle || 'normal'],
-    whiteSpace: 'pre-wrap',
-  }),
-}));
 
 export interface SectionHeaderProps {
   title: string;
@@ -33,8 +41,7 @@ export interface SectionHeaderProps {
 }
 
 export default function SectionHeader(props: SectionHeaderProps) {
-  const { noPadding = false, headerStyle = 'main', titleSideActions = [] } = props;
-  const classes = useStyles({ noPadding, headerStyle });
+  const { headerStyle = 'main', titleSideActions = [] } = props;
   const actions = props.actions || [];
   const titleVariants: { [key: string]: Variant } = {
     main: 'h1',
@@ -44,7 +51,7 @@ export default function SectionHeader(props: SectionHeaderProps) {
   };
 
   return (
-    <Grid
+    <StyledGrid
       container
       alignItems="center"
       justifyContent="space-between"
@@ -82,6 +89,6 @@ export default function SectionHeader(props: SectionHeaderProps) {
           </Grid>
         </Grid>
       )}
-    </Grid>
+    </StyledGrid>
   );
 }

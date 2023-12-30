@@ -4,7 +4,7 @@ exports[`Storyshots Link Auto Tooltip 1`] = `
 <div>
   <span
     aria-label="a link"
-    class=""
+    class="css-19hmxrs"
     data-mui-internal-clone-element="true"
   >
     <a
@@ -32,7 +32,7 @@ exports[`Storyshots Link Explicit Tooltip 1`] = `
 <div>
   <span
     aria-label="A tooltip"
-    class=""
+    class="css-19hmxrs"
     data-mui-internal-clone-element="true"
   >
     <a

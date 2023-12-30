@@ -5,8 +5,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -16,27 +16,34 @@ import { StringDict } from '../../lib/k8s/cluster';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import { NameValueTable } from '../common/SimpleTable';
 
-const versionSnackbarHideTimeout = 5000; // ms
-const versionFetchInterval = 60000; // ms
+const PREFIX = 'VersionButton';
 
-const useVersionButtonStyle = makeStyles(theme => ({
-  versionBox: {
+const classes = {
+  versionBox: `${PREFIX}-versionBox`,
+  versionIcon: `${PREFIX}-versionIcon`,
+};
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  [`&.${classes.versionBox}`]: {
     textAlign: 'center',
     '& .MuiButton-label': {
       color: theme.palette.sidebarLink.main,
     },
   },
-  versionIcon: {
+
+  [`& .${classes.versionIcon}`]: {
     marginTop: '5px',
     marginRight: '5px',
     marginLeft: '5px',
   },
 }));
 
+const versionSnackbarHideTimeout = 5000; // ms
+const versionFetchInterval = 60000; // ms
+
 export default function VersionButton() {
   const isSidebarOpen = useTypedSelector(state => state.sidebar.isSidebarOpen);
   const { enqueueSnackbar } = useSnackbar();
-  const classes = useVersionButtonStyle();
   const [clusterVersion, setClusterVersion] = React.useState<StringDict | null>(null);
   const cluster = useCluster();
   const theme = useTheme();
@@ -140,7 +147,7 @@ export default function VersionButton() {
   }
 
   return !clusterVersion ? null : (
-    <Box mx="auto" pt=".2em" className={classes.versionBox}>
+    <StyledBox mx="auto" pt=".2em" className={classes.versionBox}>
       <Button
         onClick={() => setOpen(true)}
         style={{ textTransform: 'none', paddingBottom: 0, paddingTop: 0 }}
@@ -167,6 +174,6 @@ export default function VersionButton() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Box>
+    </StyledBox>
   );
 }

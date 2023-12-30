@@ -3,7 +3,7 @@
 exports[`Storyshots common/ReleaseNotes/UpdatePopup Closed 1`] = `
 <div>
   <div
-    class="MuiSnackbar-root MuiSnackbar-anchorOriginBottomRight makeStyles-root css-sfbrjq-MuiSnackbar-root"
+    class="MuiSnackbar-root MuiSnackbar-anchorOriginBottomRight UpdatePopup-root css-sfbrjq-MuiSnackbar-root"
     role="presentation"
   >
     <div
@@ -79,7 +79,7 @@ exports[`Storyshots common/ReleaseNotes/UpdatePopup Closed 1`] = `
 exports[`Storyshots common/ReleaseNotes/UpdatePopup Show 1`] = `
 <div>
   <div
-    class="MuiSnackbar-root MuiSnackbar-anchorOriginBottomRight makeStyles-root css-sfbrjq-MuiSnackbar-root"
+    class="MuiSnackbar-root MuiSnackbar-anchorOriginBottomRight UpdatePopup-root css-sfbrjq-MuiSnackbar-root"
     role="presentation"
   >
     <div

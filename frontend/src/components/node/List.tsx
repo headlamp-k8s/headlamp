@@ -1,4 +1,4 @@
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 import Node from '../../lib/k8s/node';
 import { HoverInfoLabel } from '../common';
@@ -6,14 +6,20 @@ import ResourceListView from '../common/Resource/ResourceListView';
 import { UsageBarChart } from './Charts';
 import { NodeReadyLabel } from './Details';
 
-const useStyle = makeStyles({
-  chartCell: {
+const PREFIX = 'List';
+
+const classes = {
+  chartCell: `${PREFIX}-chartCell`,
+};
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')({
+  [`& .${classes.chartCell}`]: {
     width: '20%',
   },
 });
 
 export default function NodeList() {
-  const classes = useStyle();
   const [nodeMetrics, metricsError] = Node.useMetrics();
   const { t } = useTranslation(['glossary', 'translation']);
 
@@ -99,7 +105,7 @@ export default function NodeList() {
             }
 
             return (
-              <>
+              <Root>
                 <HoverInfoLabel
                   label={node.status.nodeInfo.osImage}
                   hoverInfo={t('OS image')}
@@ -123,7 +129,7 @@ export default function NodeList() {
                   iconPosition="start"
                   icon="mdi:train-car-container"
                 />
-              </>
+              </Root>
             );
           },
           show: false,
