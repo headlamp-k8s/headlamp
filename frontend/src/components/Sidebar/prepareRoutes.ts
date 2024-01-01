@@ -41,7 +41,6 @@ function prepareRoutes(
           name: 'plugins',
           label: t('translation|Plugins'),
           url: '/settings/plugins',
-          hide: !helpers.isElectron(),
         },
       ],
     },
