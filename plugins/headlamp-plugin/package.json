@@ -1,6 +1,6 @@
 {
   "name": "@kinvolk/headlamp-plugin",
-  "version": "0.8.0",
+  "version": "0.9.0-alpha.2",
   "description": "The needed infrastructure for building Headlamp plugins.",
   "main": "lib/index.js",
   "types": "./lib/additional.d.ts",
