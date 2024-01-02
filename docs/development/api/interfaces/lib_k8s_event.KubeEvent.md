@@ -30,7 +30,7 @@ slug: "lib_k8s_event.KubeEvent"
 
 #### Defined in
 
-[lib/k8s/event.ts:11](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/event.ts#L11)
+[lib/k8s/event.ts:11](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L11)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:9](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/event.ts#L9)
+[lib/k8s/event.ts:9](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L9)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:10](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/event.ts#L10)
+[lib/k8s/event.ts:10](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L10)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:8](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/event.ts#L8)
+[lib/k8s/event.ts:8](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L8)
 
 ___
 
@@ -70,4 +70,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/event.ts:7](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/event.ts#L7)
+[lib/k8s/event.ts:7](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/event.ts#L7)

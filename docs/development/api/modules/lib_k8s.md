@@ -66,6 +66,12 @@ Renames and re-exports [lib/k8s/ingress](lib_k8s_ingress.md)
 
 ___
 
+### ingressClass
+
+Renames and re-exports [lib/k8s/ingressClass](lib_k8s_ingressClass.md)
+
+___
+
 ### job
 
 Renames and re-exports [lib/k8s/job](lib_k8s_job.md)
@@ -156,7 +162,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:126](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/index.ts#L126)
+[lib/k8s/index.ts:128](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/index.ts#L128)
 
 ## Variables
 
@@ -170,7 +176,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:86](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/index.ts#L86)
+[lib/k8s/index.ts:88](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/index.ts#L88)
 
 ## Functions
 
@@ -190,7 +196,7 @@ Renames and re-exports [lib/k8s/storageClass](lib_k8s_storageClass.md)
 
 #### Defined in
 
-[lib/k8s/index.ts:122](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/index.ts#L122)
+[lib/k8s/index.ts:124](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/index.ts#L124)
 
 ___
 
@@ -215,7 +221,7 @@ See [Label selector examples](https://kubernetes.io/docs/concepts/overview/worki
 
 #### Defined in
 
-[lib/k8s/index.ts:156](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/index.ts#L156)
+[lib/k8s/index.ts:158](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/index.ts#L158)
 
 ___
 
@@ -235,7 +241,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:191](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/index.ts#L191)
+[lib/k8s/index.ts:193](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/index.ts#L193)
 
 ___
 
@@ -256,7 +262,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:171](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/index.ts#L171)
+[lib/k8s/index.ts:173](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/index.ts#L173)
 
 ___
 
@@ -270,21 +276,21 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:94](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/index.ts#L94)
+[lib/k8s/index.ts:96](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/index.ts#L96)
 
 ___
 
 ### useClustersConf
 
-▸ **useClustersConf**(): [`ConfigState`](../interfaces/redux_reducers_config.ConfigState.md)[``"clusters"``]
+▸ **useClustersConf**(): `ConfigState`[``"clusters"``]
 
 #### Returns
 
-[`ConfigState`](../interfaces/redux_reducers_config.ConfigState.md)[``"clusters"``]
+`ConfigState`[``"clusters"``]
 
 #### Defined in
 
-[lib/k8s/index.ts:89](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/index.ts#L89)
+[lib/k8s/index.ts:91](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/index.ts#L91)
 
 ___
 
@@ -308,7 +314,7 @@ a map with cluster -> version-info, and a map with cluster -> error.
 
 #### Defined in
 
-[lib/k8s/index.ts:268](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/index.ts#L268)
+[lib/k8s/index.ts:270](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/index.ts#L270)
 
 ___
 
@@ -328,4 +334,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/index.ts:128](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/index.ts#L128)
+[lib/k8s/index.ts:130](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/index.ts#L130)

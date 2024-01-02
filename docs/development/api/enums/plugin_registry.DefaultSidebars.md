@@ -14,7 +14,7 @@ slug: "plugin_registry.DefaultSidebars"
 
 #### Defined in
 
-[components/Sidebar/Sidebar.tsx:31](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/components/Sidebar/Sidebar.tsx#L31)
+[components/Sidebar/sidebarSlice.ts:6](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/Sidebar/sidebarSlice.ts#L6)
 
 ___
 
@@ -24,4 +24,4 @@ ___
 
 #### Defined in
 
-[components/Sidebar/Sidebar.tsx:32](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/components/Sidebar/Sidebar.tsx#L32)
+[components/Sidebar/sidebarSlice.ts:7](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/Sidebar/sidebarSlice.ts#L7)

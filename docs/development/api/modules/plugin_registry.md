@@ -44,7 +44,7 @@ slug: "plugin_registry"
 
 #### Defined in
 
-[redux/actionButtonsSlice.ts:57](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/redux/actionButtonsSlice.ts#L57)
+[redux/actionButtonsSlice.ts:59](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/redux/actionButtonsSlice.ts#L59)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[components/App/AppLogo.tsx:22](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/components/App/AppLogo.tsx#L22)
+[components/App/AppLogo.tsx:23](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/App/AppLogo.tsx#L23)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[components/cluster/ClusterChooser.tsx:10](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/components/cluster/ClusterChooser.tsx#L10)
+[components/cluster/ClusterChooser.tsx:10](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/cluster/ClusterChooser.tsx#L10)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:72](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L72)
+[plugin/registry.tsx:69](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L69)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:73](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L73)
+[plugin/registry.tsx:70](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L70)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[components/DetailsViewSection/DetailsViewSection.tsx:9](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L9)
+[components/DetailsViewSection/DetailsViewSection.tsx:9](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/components/DetailsViewSection/DetailsViewSection.tsx#L9)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:64](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L64)
+[plugin/registry.tsx:61](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L61)
 
 ## Variables
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:59](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L59)
+[plugin/registry.tsx:56](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L56)
 
 ## Functions
 
@@ -146,7 +146,7 @@ Returns headers for making API calls to the headlamp-server backend.
 
 #### Defined in
 
-[helpers/index.ts:368](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/helpers/index.ts#L368)
+[helpers/index.ts:368](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/helpers/index.ts#L368)
 
 ___
 
@@ -189,7 +189,7 @@ registerAppBarAction(ConsoleLogger);
 
 #### Defined in
 
-[plugin/registry.tsx:404](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L404)
+[plugin/registry.tsx:401](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L401)
 
 ___
 
@@ -223,7 +223,7 @@ More complete logo example in plugins/examples/change-logo:
 
 #### Defined in
 
-[plugin/registry.tsx:504](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L504)
+[plugin/registry.tsx:501](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L501)
 
 ___
 
@@ -257,7 +257,7 @@ registerClusterChooser(({ clickHandler, cluster }: ClusterChooserProps) => {
 
 #### Defined in
 
-[plugin/registry.tsx:527](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L527)
+[plugin/registry.tsx:524](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L524)
 
 ___
 
@@ -298,7 +298,7 @@ registerDetailsViewHeaderAction(IconAction);
 
 #### Defined in
 
-[plugin/registry.tsx:308](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L308)
+[plugin/registry.tsx:305](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L305)
 
 ___
 
@@ -333,7 +333,7 @@ More complete detail view example in plugins/examples/details-view:
 
 #### Defined in
 
-[plugin/registry.tsx:331](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L331)
+[plugin/registry.tsx:328](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L328)
 
 ___
 
@@ -375,7 +375,7 @@ registerDetailsViewSection(({ resource }: DetailsViewSectionProps) => {
 
 #### Defined in
 
-[plugin/registry.tsx:438](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L438)
+[plugin/registry.tsx:435](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L435)
 
 ___
 
@@ -426,7 +426,7 @@ registerDetailsViewSectionsProcessor(function addTopSection( resource, sections 
 
 #### Defined in
 
-[plugin/registry.tsx:476](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L476)
+[plugin/registry.tsx:473](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L473)
 
 ___
 
@@ -456,7 +456,7 @@ registerGetTokenFunction(() => {
 
 #### Defined in
 
-[plugin/registry.tsx:561](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L561)
+[plugin/registry.tsx:558](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L558)
 
 ___
 
@@ -498,7 +498,7 @@ registerResourceTableColumnsProcessor(function ageRemover({ id, columns }) {
 
 #### Defined in
 
-[plugin/registry.tsx:362](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L362)
+[plugin/registry.tsx:359](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L359)
 
 ___
 
@@ -538,7 +538,7 @@ registerRoute({
 
 #### Defined in
 
-[plugin/registry.tsx:280](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L280)
+[plugin/registry.tsx:277](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L277)
 
 ___
 
@@ -568,7 +568,7 @@ registerRouteFilter(route => (route.path === '/workloads' ? null : route));
 
 #### Defined in
 
-[plugin/registry.tsx:253](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L253)
+[plugin/registry.tsx:250](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L250)
 
 ___
 
@@ -598,7 +598,7 @@ registerSetTokenFunction((cluster: string, token: string | null) => {
 
 #### Defined in
 
-[plugin/registry.tsx:543](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L543)
+[plugin/registry.tsx:540](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L540)
 
 ___
 
@@ -630,7 +630,7 @@ registerSidebarEntry({ parent: 'cluster', name: 'traces', label: 'Traces', url: 
 
 #### Defined in
 
-[plugin/registry.tsx:199](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L199)
+[plugin/registry.tsx:196](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L196)
 
 ___
 
@@ -660,4 +660,4 @@ registerSidebarEntryFilter(entry => (entry.name === 'workloads' ? null : entry))
 
 #### Defined in
 
-[plugin/registry.tsx:234](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L234)
+[plugin/registry.tsx:231](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L231)

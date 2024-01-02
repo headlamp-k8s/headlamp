@@ -14,7 +14,7 @@ slug: "plugin_registry.DefaultAppBarAction"
 
 #### Defined in
 
-[redux/actionButtonsSlice.ts:40](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/redux/actionButtonsSlice.ts#L40)
+[redux/actionButtonsSlice.ts:42](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/redux/actionButtonsSlice.ts#L42)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[redux/actionButtonsSlice.ts:41](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/redux/actionButtonsSlice.ts#L41)
+[redux/actionButtonsSlice.ts:43](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/redux/actionButtonsSlice.ts#L43)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[redux/actionButtonsSlice.ts:42](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/redux/actionButtonsSlice.ts#L42)
+[redux/actionButtonsSlice.ts:44](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/redux/actionButtonsSlice.ts#L44)
 
 ___
 
@@ -44,4 +44,4 @@ ___
 
 #### Defined in
 
-[redux/actionButtonsSlice.ts:43](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/redux/actionButtonsSlice.ts#L43)
+[redux/actionButtonsSlice.ts:45](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/redux/actionButtonsSlice.ts#L45)

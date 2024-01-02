@@ -33,7 +33,7 @@ slug: "plugin_registry.Registry"
 
 #### Defined in
 
-[plugin/registry.tsx:121](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L121)
+[plugin/registry.tsx:118](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L118)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:170](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L170)
+[plugin/registry.tsx:167](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L167)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:178](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L178)
+[plugin/registry.tsx:175](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L175)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:111](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L111)
+[plugin/registry.tsx:108](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L108)
 
 ___
 
@@ -137,7 +137,7 @@ register.registerDetailsViewSection('biolatency', resource => {
 
 #### Defined in
 
-[plugin/registry.tsx:143](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L143)
+[plugin/registry.tsx:140](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L140)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:103](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L103)
+[plugin/registry.tsx:100](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L100)
 
 ___
 
@@ -177,7 +177,7 @@ ___
 | `itemName` | `string` |
 | `itemLabel` | `string` |
 | `url` | `string` |
-| `opts` | `Pick`<[`SidebarEntryProps`](../interfaces/plugin_registry.SidebarEntryProps.md), ``"sidebar"`` \| ``"useClusterURL"`` \| ``"icon"``\> |
+| `opts` | `Pick`<[`SidebarEntryProps`](../interfaces/plugin_registry.SidebarEntryProps.md), ``"sidebar"`` \| ``"icon"`` \| ``"useClusterURL"``\> |
 
 #### Returns
 
@@ -185,4 +185,4 @@ ___
 
 #### Defined in
 
-[plugin/registry.tsx:79](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L79)
+[plugin/registry.tsx:76](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L76)

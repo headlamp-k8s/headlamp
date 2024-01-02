@@ -6,6 +6,9 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
 
 [lib/k8s/cluster](../modules/lib_k8s_cluster.md).KubeObjectInterface
 
+This is the base interface for all Kubernetes resources, i.e. it contains fields
+that all Kubernetes resources have.
+
 ## Hierarchy
 
 - **`KubeObjectInterface`**
@@ -25,6 +28,8 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
   ↳ [`KubeHPA`](lib_k8s_hpa.KubeHPA.md)
 
   ↳ [`KubeIngress`](lib_k8s_ingress.KubeIngress.md)
+
+  ↳ [`KubeIngressClass`](lib_k8s_ingressClass.KubeIngressClass.md)
 
   ↳ [`KubeJob`](lib_k8s_job.KubeJob.md)
 
@@ -74,6 +79,8 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
 
   ↳ [`KubeValidatingWebhookConfiguration`](lib_k8s_validatingWebhookConfiguration.KubeValidatingWebhookConfiguration.md)
 
+  ↳ [`KubeVPA`](lib_k8s_vpa.KubeVPA.md)
+
 ## Indexable
 
 ▪ [otherProps: `string`]: `any`
@@ -86,7 +93,7 @@ slug: "lib_k8s_cluster.KubeObjectInterface"
 
 #### Defined in
 
-[lib/k8s/cluster.ts:37](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L37)
+[lib/k8s/cluster.ts:55](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L55)
 
 ___
 
@@ -94,9 +101,18 @@ ___
 
 • **kind**: `string`
 
+Kind is a string value representing the REST resource this object represents.
+Servers may infer this from the endpoint the client submits requests to.
+
+In CamelCase.
+
+Cannot be updated.
+
+**`see`** [more info](https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds)
+
 #### Defined in
 
-[lib/k8s/cluster.ts:36](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L36)
+[lib/k8s/cluster.ts:54](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L54)
 
 ___
 
@@ -106,4 +122,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:38](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L38)
+[lib/k8s/cluster.ts:56](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L56)

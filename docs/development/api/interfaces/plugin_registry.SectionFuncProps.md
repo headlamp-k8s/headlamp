@@ -14,7 +14,7 @@ slug: "plugin_registry.SectionFuncProps"
 
 #### Defined in
 
-[plugin/registry.tsx:45](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L45)
+[plugin/registry.tsx:42](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L42)
 
 ## Methods
 
@@ -35,4 +35,4 @@ slug: "plugin_registry.SectionFuncProps"
 
 #### Defined in
 
-[plugin/registry.tsx:46](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/plugin/registry.tsx#L46)
+[plugin/registry.tsx:43](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/plugin/registry.tsx#L43)

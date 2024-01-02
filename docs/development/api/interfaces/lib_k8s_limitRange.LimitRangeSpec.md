@@ -14,4 +14,4 @@ slug: "lib_k8s_limitRange.LimitRangeSpec"
 
 #### Defined in
 
-[lib/k8s/limitRange.tsx:5](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/limitRange.tsx#L5)
+[lib/k8s/limitRange.tsx:5](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/limitRange.tsx#L5)

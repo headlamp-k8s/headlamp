@@ -12,9 +12,11 @@ slug: "lib_k8s_cluster.KubeCondition"
 
 • **lastProbeTime**: [`Time`](../modules/lib_k8s_cluster.md#time)
 
+Last time we probed the condition.
+
 #### Defined in
 
-[lib/k8s/cluster.ts:542](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L542)
+[lib/k8s/cluster.ts:827](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L827)
 
 ___
 
@@ -24,7 +26,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:543](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L543)
+[lib/k8s/cluster.ts:828](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L828)
 
 ___
 
@@ -34,7 +36,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:544](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L544)
+[lib/k8s/cluster.ts:829](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L829)
 
 ___
 
@@ -44,7 +46,7 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:546](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L546)
+[lib/k8s/cluster.ts:830](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L830)
 
 ___
 
@@ -52,9 +54,11 @@ ___
 
 • `Optional` **reason**: `string`
 
+Unique, one-word, CamelCase reason for the condition's last transition.
+
 #### Defined in
 
-[lib/k8s/cluster.ts:545](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L545)
+[lib/k8s/cluster.ts:832](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L832)
 
 ___
 
@@ -62,9 +66,11 @@ ___
 
 • **status**: `string`
 
+Status of the condition, one of True, False, Unknown.
+
 #### Defined in
 
-[lib/k8s/cluster.ts:541](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L541)
+[lib/k8s/cluster.ts:834](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L834)
 
 ___
 
@@ -74,4 +80,4 @@ ___
 
 #### Defined in
 
-[lib/k8s/cluster.ts:540](https://github.com/headlamp-k8s/headlamp/blob/840d05a1/frontend/src/lib/k8s/cluster.ts#L540)
+[lib/k8s/cluster.ts:835](https://github.com/headlamp-k8s/headlamp/blob/b0236780/frontend/src/lib/k8s/cluster.ts#L835)
