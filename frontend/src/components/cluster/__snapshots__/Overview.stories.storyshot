@@ -344,6 +344,109 @@ exports[`Storyshots cluster/Overview Events 1`] = `
                     </div>
                   </div>
                 </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true makeStyles-chartItem css-1z0dvx8-MuiGrid-root"
+                >
+                  <div
+                    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 makeStyles-paper css-1ps6pg7-MuiPaper-root"
+                  >
+                    <div
+                      class="makeStyles-tileBox MuiBox-root css-k008qs"
+                    >
+                      <div
+                        class="MuiBox-root css-1sl8dhm"
+                      >
+                        <div
+                          class="MuiBox-root css-0"
+                        >
+                          <p
+                            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-title css-9vf8gf-MuiTypography-root"
+                          >
+                            Nodes
+                          </p>
+                          
+                        </div>
+                        <p
+                          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-legend css-9vf8gf-MuiTypography-root"
+                        >
+                          2 / 2 Ready
+                        </p>
+                      </div>
+                      <div
+                        class="MuiBox-root css-0"
+                      >
+                        <div
+                          aria-busy="false"
+                          aria-live="polite"
+                          class="MuiBox-root css-2esbmj"
+                        >
+                          
+                          <div
+                            class="recharts-wrapper makeStyles-chart"
+                            style="position: relative; cursor: default; width: 112px; height: 112px;"
+                          >
+                            <svg
+                              class="recharts-surface"
+                              cx="70"
+                              cy="70"
+                              height="112"
+                              version="1.1"
+                              viewBox="0 0 112 112"
+                              width="112"
+                            >
+                              <title />
+                              <desc />
+                              <defs>
+                                <clippath
+                                  id="recharts7-clip"
+                                >
+                                  <rect
+                                    height="102"
+                                    width="102"
+                                    x="5"
+                                    y="5"
+                                  />
+                                </clippath>
+                              </defs>
+                              <g
+                                class="recharts-layer recharts-pie"
+                              >
+                                <g
+                                  class="recharts-layer"
+                                >
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                  />
+                                  <g
+                                    class="recharts-layer recharts-pie-sector"
+                                  />
+                                </g>
+                                <text
+                                  class="recharts-text recharts-label"
+                                  offset="5"
+                                  style="font-size: 16.8px; fill: #000;"
+                                  text-anchor="middle"
+                                  x="61"
+                                  y="61"
+                                >
+                                  <tspan
+                                    dy="0.355em"
+                                    x="61"
+                                  >
+                                    100.0 %
+                                  </tspan>
+                                </text>
+                              </g>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

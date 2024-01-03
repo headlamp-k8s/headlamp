@@ -16,7 +16,12 @@ import ResourceListView from '../common/Resource/ResourceListView';
 import { SectionBox } from '../common/SectionBox';
 import ShowHideLabel from '../common/ShowHideLabel';
 import { LightTooltip } from '../common/Tooltip';
-import { CpuCircularChart, MemoryCircularChart, PodsStatusCircleChart } from './Charts';
+import {
+  CpuCircularChart,
+  MemoryCircularChart,
+  NodesStatusCircleChart,
+  PodsStatusCircleChart,
+} from './Charts';
 
 const useOverviewStyle = makeStyles({
   chartItem: {
@@ -51,6 +56,9 @@ export default function Overview() {
             </Grid>
             <Grid item xs className={classes.chartItem}>
               <PodsStatusCircleChart items={pods} />
+            </Grid>
+            <Grid item xs className={classes.chartItem}>
+              <NodesStatusCircleChart items={nodes} />
             </Grid>
           </Grid>
         )}

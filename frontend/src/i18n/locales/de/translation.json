@@ -79,6 +79,7 @@
   "{{ available }} units": "{{ available }} CPU-Anteile",
   "CPU Usage": "CPU-Nutzung",
   "{{ numReady }} / {{ numItems }} Requested": "{{ numReady }} / {{ numItems }} Angefordert",
+  "{{ numReady }} / {{ numItems }} Ready": "{{ numReady }} / {{ numItems }} Bereit",
   "Recent clusters": "Aktuelle Cluster",
   "All clusters": "Alle Cluster",
   "Show build information": "Build-Informationen anzeigen",

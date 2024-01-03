@@ -79,6 +79,7 @@
   "{{ available }} units": "{{ available }} units",
   "CPU Usage": "CPU Usage",
   "{{ numReady }} / {{ numItems }} Requested": "{{ numReady }} / {{ numItems }} Requested",
+  "{{ numReady }} / {{ numItems }} Ready": "{{ numReady }} / {{ numItems }} Ready",
   "Recent clusters": "Recent clusters",
   "All clusters": "All clusters",
   "Show build information": "Show build information",
