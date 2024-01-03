@@ -909,7 +909,7 @@ function tsc(packageFolder) {
 function storybook(packageFolder) {
   try {
     child_process.execSync(
-      './node_modules/.bin/start-storybook -p 6007 -c node_modules/@kinvolk/headlamp-plugin/config/.storybook',
+      './node_modules/.bin/storybook dev -p 6007 -c node_modules/@kinvolk/headlamp-plugin/config/.storybook',
       {
         stdio: 'inherit',
         cwd: packageFolder,
@@ -918,9 +918,7 @@ function storybook(packageFolder) {
     );
   } catch (e) {
     console.error(
-      `Problem running start-storybook inside of "${packageFolder}" abs: "${resolve(
-        packageFolder
-      )}"`
+      `Problem running storybook dev inside of "${packageFolder}" abs: "${resolve(packageFolder)}"`
     );
     return 1;
   }
@@ -935,8 +933,8 @@ function storybook(packageFolder) {
  * @returns {0 | 1} Exit code, where 0 is success, 1 is failure.
  */
 function storybook_build(packageFolder) {
-  const script = `build-storybook -c node_modules/@kinvolk/headlamp-plugin/config/.storybook`;
-  return runScriptOnPackages(packageFolder, 'storybook-build', script, {});
+  const script = `storybook build -c node_modules/@kinvolk/headlamp-plugin/config/.storybook`;
+  return runScriptOnPackages(packageFolder, 'storybook build', script, {});
 }
 
 /**
