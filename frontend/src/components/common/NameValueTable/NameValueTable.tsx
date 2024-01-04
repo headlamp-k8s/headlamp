@@ -125,7 +125,7 @@ export default function NameValueTable(props: NameValueTableProps) {
       component="dl" // mount a Definition List
       className={classes.table}
     >
-      {visibleRows.map(
+      {visibleRows.flatMap(
         ({ name, value, hide = false, withHighlightStyle = false, valueCellProps = {} }, i) => {
           let shouldHide = false;
           if (typeof hide === 'function') {
@@ -143,45 +143,44 @@ export default function NameValueTable(props: NameValueTableProps) {
 
           const hideValueGridItem = withHighlightStyle && !value;
 
-          return (
-            <>
+          const items = [
+            <Grid
+              item
+              key={i}
+              xs={12}
+              sm={hideValueGridItem ? 12 : 4}
+              component="dt"
+              className={clsx(
+                last ? classes.metadataLast : '',
+                classes.metadataNameCell,
+                withHighlightStyle ? classes.highlightRow : ''
+              )}
+            >
+              {name}
+            </Grid>,
+          ];
+          if (!hideValueGridItem) {
+            items.push(
               <Grid
                 item
-                key={i}
+                key={i + 10000}
                 xs={12}
-                spacing={1}
-                sm={hideValueGridItem ? 12 : 4}
-                component="dt"
+                sm={8}
+                component="dd"
                 className={clsx(
                   last ? classes.metadataLast : '',
-                  classes.metadataNameCell,
+                  classes.metadataCell,
+                  className ? className : '',
                   withHighlightStyle ? classes.highlightRow : ''
                 )}
+                {...otherValueCellProps}
+                {...valueCellProps}
               >
-                {name}
+                <Value value={value} />
               </Grid>
-              {!hideValueGridItem && (
-                <Grid
-                  item
-                  key={i + 10000}
-                  xs={12}
-                  sm={8}
-                  spacing={1}
-                  component="dd"
-                  className={clsx(
-                    last ? classes.metadataLast : '',
-                    classes.metadataCell,
-                    className ? className : '',
-                    withHighlightStyle ? classes.highlightRow : ''
-                  )}
-                  {...otherValueCellProps}
-                  {...valueCellProps}
-                >
-                  <Value value={value} />
-                </Grid>
-              )}
-            </>
-          );
+            );
+          }
+          return items;
         }
       )}
     </Grid>

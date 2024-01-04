@@ -7,6 +7,7 @@ import ResourceQuotaList from './List';
 ResourceQuota.useList = () => {
   const objList = generateK8sResourceList<KubeResourceQuota>(
     {
+      apiVersion: 'v1',
       kind: 'ResourceQuota',
       metadata: {
         annotations: {

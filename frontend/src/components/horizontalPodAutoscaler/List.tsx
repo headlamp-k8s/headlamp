@@ -56,6 +56,7 @@ export default function HpaList() {
                   label={metrics[0].shortValue}
                   variant="outlined"
                   size="small"
+                  key="1"
                 />
               );
               if (metrics.length > 1) {
@@ -65,6 +66,7 @@ export default function HpaList() {
                     label={metrics.length - 1 + t('translation|more…')}
                     variant="outlined"
                     size="small"
+                    key="2"
                   />
                 );
               }

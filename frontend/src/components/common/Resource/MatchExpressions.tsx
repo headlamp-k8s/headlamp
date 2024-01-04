@@ -22,12 +22,12 @@ export function MatchExpressions(props: MatchExpressionsProps) {
     return (
       <>
         {matchLabelsSimplified.map(label => (
-          <Typography className={classes.metadataValueLabel} display="inline">
+          <Typography className={classes.metadataValueLabel} display="inline" key={label}>
             {label}
           </Typography>
         ))}
         {matchExpressionsSimplified.map(expression => (
-          <Typography className={classes.metadataValueLabel} display="inline">
+          <Typography className={classes.metadataValueLabel} display="inline" key={expression}>
             {expression}
           </Typography>
         ))}

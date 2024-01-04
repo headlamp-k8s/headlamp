@@ -776,7 +776,7 @@ export function makeKubeObject<T extends KubeObjectInterface | KubeEvent>(
       }
 
       // Set up the group and version from the object's API version.
-      let [group, version] = this.jsonData?.apiVersion.split('/');
+      let [group, version] = this.jsonData?.apiVersion?.split('/') ?? [];
       if (!version) {
         version = group;
         group = '';
