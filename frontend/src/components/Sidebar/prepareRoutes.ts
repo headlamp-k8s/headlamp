@@ -121,7 +121,7 @@ function prepareRoutes(
         },
         {
           name: 'persistentVolumes',
-          label: t('glossary|Storage Volumes'),
+          label: t('glossary|Persistent Volumes'),
         },
         {
           name: 'persistentVolumeClaims',
