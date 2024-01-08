@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';

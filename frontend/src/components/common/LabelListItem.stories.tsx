@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import LabelListItem, { LabelListItemProps } from './LabelListItem';
 
 export default {
@@ -6,7 +6,7 @@ export default {
   component: LabelListItem,
 } as Meta;
 
-const Template: Story<LabelListItemProps> = args => <LabelListItem {...args} />;
+const Template: StoryFn<LabelListItemProps> = args => <LabelListItem {...args} />;
 
 export const List = Template.bind({});
 List.args = {

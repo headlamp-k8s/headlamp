@@ -1,5 +1,5 @@
 import { DialogContent, Typography } from '@mui/material';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { Dialog as DialogComponent, DialogProps } from './Dialog';
 
@@ -8,7 +8,7 @@ export default {
   component: DialogComponent,
 } as Meta;
 
-const Template: Story<DialogProps> = args => (
+const Template: StoryFn<DialogProps> = args => (
   <DialogComponent {...args}>
     <DialogContent>
       <Typography>Some content here</Typography>

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { ResourceClasses } from '../../lib/k8s';
 import CustomResourceDefinition from '../../lib/k8s/crd';
 import { overrideKubeObject, TestContext } from '../../test';

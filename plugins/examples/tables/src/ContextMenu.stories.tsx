@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { ContextMenu, ContextMenuProps } from './index';
@@ -15,7 +15,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<ContextMenuProps> = args => <ContextMenu {...args} />;
+const Template: StoryFn<ContextMenuProps> = args => <ContextMenu {...args} />;
 
 export const OpenMenu = Template.bind({});
 OpenMenu.args = {

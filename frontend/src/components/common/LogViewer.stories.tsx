@@ -1,5 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import { LogViewer, LogViewerProps } from './LogViewer';
 
 export default {
@@ -10,7 +9,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<LogViewerProps> = args => <LogViewer {...args} />;
+const Template: StoryFn<LogViewerProps> = args => <LogViewer {...args} />;
 
 export const SomeLogs = Template.bind({});
 SomeLogs.args = {

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { ConfirmDialog as ConfirmDialogComponent, ConfirmDialogProps } from './Dialog';
 
@@ -11,7 +11,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ConfirmDialogProps> = args => <ConfirmDialogComponent {...args} />;
+const Template: StoryFn<ConfirmDialogProps> = args => <ConfirmDialogComponent {...args} />;
 
 export const ConfirmDialog = Template.bind({});
 ConfirmDialog.args = {

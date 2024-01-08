@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import Namespace, { KubeNamespace } from '../../lib/k8s/namespace';
 import { TestContext } from '../../test';
 import NamespaceDetails from './Details';

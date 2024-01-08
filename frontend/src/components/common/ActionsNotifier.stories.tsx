@@ -1,6 +1,5 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { SnackbarProvider } from 'notistack';
-import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { PureActionsNotifier, PureActionsNotifierProps } from './ActionsNotifier';
 
@@ -21,7 +20,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<PureActionsNotifierProps> = args => <PureActionsNotifier {...args} />;
+const Template: StoryFn<PureActionsNotifierProps> = args => <PureActionsNotifier {...args} />;
 
 export const Some = Template.bind({});
 Some.args = {

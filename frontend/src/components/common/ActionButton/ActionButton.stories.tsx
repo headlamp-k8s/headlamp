@@ -1,5 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
-import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
 import ActionButton, { ActionButtonProps } from './ActionButton';
 
 export default {
@@ -8,7 +7,7 @@ export default {
   argTypes: {},
 } as Meta;
 
-const Template: Story<ActionButtonProps> = args => <ActionButton {...args} />;
+const Template: StoryFn<ActionButtonProps> = args => <ActionButton {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
 import Ingress from '../../lib/k8s/ingress';
 import { LinkStringFormat, LinkStringFormatProps } from './Details';

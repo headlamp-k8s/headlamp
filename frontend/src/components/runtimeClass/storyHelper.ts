@@ -1,3 +1,5 @@
+const creationTimestamp = new Date('2022-01-01').toISOString();
+
 export const RUNTIME_CLASS_DUMMY_DATA = [
   {
     apiVersion: 'node.k8s.io/v1',
@@ -5,6 +7,8 @@ export const RUNTIME_CLASS_DUMMY_DATA = [
     metadata: {
       name: 'runtime-class',
       namespace: 'default',
+      creationTimestamp,
+      uid: '123',
     },
     handler: 'handler',
     overhead: {

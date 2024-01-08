@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { useLocation } from 'react-router-dom';
 import { KubeObjectInterface } from '../../lib/k8s/cluster';
 import { useFilterFunc } from '../../lib/util';
@@ -31,7 +31,7 @@ function TestSimpleTable(props: SimpleTableProps) {
   return <SimpleTable {...props} />;
 }
 
-const Template: Story<SimpleTableProps> = args => (
+const Template: StoryFn<SimpleTableProps> = args => (
   <TestContext>
     <TestSimpleTable {...args} />
   </TestContext>
@@ -146,7 +146,7 @@ Datum.args = {
   ],
 };
 
-const TemplateWithURLReflection: Story<{
+const TemplateWithURLReflection: StoryFn<{
   simpleTableProps: SimpleTableProps;
   testContextProps: TestContextProps;
 }> = args => {
@@ -230,7 +230,7 @@ function SimpleTableWithFilter(props: SimpleTableWithFilterProps) {
   return <SimpleTable filterFunction={filterFunc} {...otherProps} />;
 }
 
-const TemplateWithFilter: Story<{
+const TemplateWithFilter: StoryFn<{
   simpleTableArgs: SimpleTableWithFilterProps;
   namespaces: string[];
   search: string;

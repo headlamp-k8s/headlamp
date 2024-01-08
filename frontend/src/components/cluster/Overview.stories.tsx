@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import Event from '../../lib/k8s/event';
 import { TestContext } from '../../test';
 import Overview from './Overview';
@@ -89,7 +89,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return (
     <Container maxWidth="xl">
       <Overview />

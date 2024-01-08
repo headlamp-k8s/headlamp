@@ -61,6 +61,9 @@ function testHeadlampPlugin() {
   // test type script error checks
   run('npm run tsc');
 
+  // test the storybook builds
+  run('npm run storybook-build');
+
   // test upgrade adds missing files
   const filesToRemove = [
     'tsconfig.json',

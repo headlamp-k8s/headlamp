@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { initialState as CONFIG_INITIAL_STATE } from '../../../redux/configSlice';
 import { initialState as FILTER_INITIAL_STATE } from '../../../redux/filterSlice';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';
@@ -77,7 +77,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <NotificationList />;
 };
 

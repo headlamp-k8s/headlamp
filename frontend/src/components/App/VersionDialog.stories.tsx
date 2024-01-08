@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, StoryFn } from '@storybook/react';
 import { Provider } from 'react-redux';
 import helpers from '../../helpers';
 import VersionDialogComponent from './VersionDialog';
@@ -34,7 +34,7 @@ helpers.getVersion = () => ({
   GIT_VERSION: 'abc123abc123abc123abc123abc123abc123abc123abc123abc123',
 });
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <VersionDialogComponent />;
 };
 
