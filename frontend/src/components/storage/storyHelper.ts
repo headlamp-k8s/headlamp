@@ -1,5 +1,21 @@
 import { KubePersistentVolume } from '../../lib/k8s/persistentVolume';
 import { KubePersistentVolumeClaim } from '../../lib/k8s/persistentVolumeClaim';
+import { KubeStorageClass } from '../../lib/k8s/storageClass';
+
+export const BASE_SC: KubeStorageClass = {
+  apiVersion: 'v1',
+  kind: 'StorageClass',
+  metadata: {
+    creationTimestamp: '2023-04-27T20:31:27Z',
+    name: 'my-pvc',
+    resourceVersion: '1234',
+    uid: 'abc-1234',
+  },
+  provisioner: 'csi.test',
+  reclaimPolicy: 'Delete',
+  allowVolumeExpansion: true,
+  volumeBindingMode: 'WaitForFirstConsumer',
+};
 
 export const BASE_PVC: KubePersistentVolumeClaim = {
   apiVersion: 'v1',
