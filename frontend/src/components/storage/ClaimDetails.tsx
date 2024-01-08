@@ -1,17 +1,18 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import PersistentVolumeClaim from '../../lib/k8s/persistentVolumeClaim';
-import { StatusLabel } from '../common/Label';
+import { Link } from '../common';
 import { DetailsGrid } from '../common/Resource';
+import { StatusLabelByPhase } from './utils';
+
+export function makePVCStatusLabel(item: PersistentVolumeClaim) {
+  const status = item.status!.phase;
+  return StatusLabelByPhase(status);
+}
 
 export default function VolumeClaimDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
   const { t } = useTranslation(['glossary', 'translation']);
-
-  function makeStatusLabel(item: PersistentVolumeClaim) {
-    const status = item.status!.phase;
-    return <StatusLabel status={status === 'Bound' ? 'success' : 'error'}>{status}</StatusLabel>;
-  }
 
   return (
     <DetailsGrid
@@ -23,7 +24,7 @@ export default function VolumeClaimDetails() {
         item && [
           {
             name: t('translation|Status'),
-            value: makeStatusLabel(item),
+            value: makePVCStatusLabel(item),
           },
           {
             name: t('Capacity'),
@@ -39,7 +40,11 @@ export default function VolumeClaimDetails() {
           },
           {
             name: t('Storage Class'),
-            value: item.spec!.storageClassName,
+            value: (
+              <Link routeName="storageClass" params={{ name: item.spec!.storageClassName }} tooltip>
+                {item.spec!.storageClassName}
+              </Link>
+            ),
           },
         ]
       }
