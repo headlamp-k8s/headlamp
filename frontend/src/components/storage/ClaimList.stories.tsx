@@ -4,45 +4,15 @@ import PersistentVolumeClaim, {
   KubePersistentVolumeClaim,
 } from '../../lib/k8s/persistentVolumeClaim';
 import { TestContext } from '../../test';
-import PVClaimList from './ClaimList';
-
-const basePVC: KubePersistentVolumeClaim = {
-  apiVersion: 'v1',
-  kind: 'PersistentVolumeClaim',
-  metadata: {
-    creationTimestamp: '2023-04-27T20:31:27Z',
-    finalizers: ['kubernetes.io/pvc-protection'],
-    name: 'my-pvc',
-    namespace: 'default',
-    resourceVersion: '1234',
-    uid: 'abc-1234',
-  },
-  spec: {
-    accessModes: ['ReadWriteOnce'],
-    resources: {
-      requests: {
-        storage: '8Gi',
-      },
-    },
-    storageClassName: 'default',
-    volumeMode: 'Filesystem',
-    volumeName: 'pvc-abc-1234',
-  },
-  status: {
-    accessModes: ['ReadWriteOnce'],
-    capacity: {
-      storage: '8Gi',
-    },
-    phase: 'Bound',
-  },
-};
+import ListView from './ClaimList';
+import { BASE_PVC } from './storyHelper';
 
 PersistentVolumeClaim.useList = () => {
-  const noStorageClassNamePVC = _.cloneDeep(basePVC);
+  const noStorageClassNamePVC = _.cloneDeep(BASE_PVC);
   noStorageClassNamePVC.metadata.name = 'no-storage-class-name-pvc';
   noStorageClassNamePVC.spec!.storageClassName = '';
 
-  const noVolumeNamePVC = _.cloneDeep(basePVC);
+  const noVolumeNamePVC = _.cloneDeep(BASE_PVC);
   noVolumeNamePVC.metadata.name = 'no-volume-name-pvc';
   noVolumeNamePVC.spec = {
     accessModes: ['ReadWriteOnce'],
@@ -54,15 +24,15 @@ PersistentVolumeClaim.useList = () => {
     },
   };
 
-  const objList = [basePVC, noStorageClassNamePVC, noVolumeNamePVC].map(
+  const objList = [BASE_PVC, noStorageClassNamePVC, noVolumeNamePVC].map(
     pvc => new PersistentVolumeClaim(pvc as KubePersistentVolumeClaim)
   );
   return [objList, null, () => {}, () => {}] as any;
 };
 
 export default {
-  title: 'Storage/PersistentVolumeClaim',
-  component: PVClaimList,
+  title: 'PersistentVolumeClaim/ListView',
+  component: ListView,
   argTypes: {},
   decorators: [
     Story => {
@@ -76,7 +46,7 @@ export default {
 } as Meta;
 
 const Template: Story = () => {
-  return <PVClaimList />;
+  return <ListView />;
 };
 
-export const ListView = Template.bind({});
+export const Items = Template.bind({});
