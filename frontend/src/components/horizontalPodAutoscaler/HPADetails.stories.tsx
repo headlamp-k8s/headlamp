@@ -9,6 +9,7 @@ import HPADetails from './Details';
 const usePhonyGet: KubeObjectClass['useGet'] = () => {
   return [
     new HPA({
+      apiVersion: 'autoscaling/v2',
       kind: 'HorizontalPodAutoscaler',
       metadata: {
         annotations: {

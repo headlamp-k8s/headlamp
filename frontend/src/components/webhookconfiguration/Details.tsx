@@ -31,17 +31,18 @@ export default function WebhookConfigurationDetails(props: WebhookConfigurationD
           },
         ]
       }
-      sectionsFunc={(item: InstanceType<typeof resourceClass>) =>
-        item && (
-          <>
-            <SectionBox title={t('Webhooks')}>
-              {item.webhooks?.map(
-                (
-                  webhook:
-                    | ValidatingWebhookConfiguration['webhooks'][number]
-                    | MutatingWebhookConfiguration['webhooks'][number]
-                ) => (
-                  <>
+      extraSections={item =>
+        item && [
+          {
+            id: 'headlamp.webhooks-data',
+            section: () => (
+              <SectionBox title={t('Webhooks')}>
+                {item.webhooks?.map(
+                  (
+                    webhook:
+                      | ValidatingWebhookConfiguration['webhooks'][number]
+                      | MutatingWebhookConfiguration['webhooks'][number]
+                  ) => (
                     <NameValueTable
                       key={webhook.name}
                       rows={[
@@ -158,12 +159,12 @@ export default function WebhookConfigurationDetails(props: WebhookConfigurationD
                         },
                       ]}
                     />
-                  </>
-                )
-              )}
-            </SectionBox>
-          </>
-        )
+                  )
+                )}
+              </SectionBox>
+            ),
+          },
+        ]
       }
     />
   );

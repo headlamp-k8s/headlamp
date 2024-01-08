@@ -73,6 +73,7 @@ export default {
 interface MockerStory {
   useGet?: KubeObjectClass['useGet'];
   useList?: KubeObjectClass['useList'];
+  allowEdit?: boolean;
 }
 
 const Template: Story = (args: MockerStory) => {
@@ -86,6 +87,13 @@ const Template: Story = (args: MockerStory) => {
   if (!!args.useList) {
     PDB.useList = args.useList;
   }
+  if (!!args.allowEdit) {
+    PDB.getAuthorization = (): Promise<{ status: any }> => {
+      return new Promise(resolve => {
+        resolve({ status: { allowed: true, reason: '', code: 200 } });
+      });
+    };
+  }
 
   return <HPADetails />;
 };
@@ -93,6 +101,7 @@ const Template: Story = (args: MockerStory) => {
 export const Default = Template.bind({});
 Default.args = {
   useGet: usePhonyGet,
+  allowEdit: true,
 };
 
 export const NoItemYet = Template.bind({});

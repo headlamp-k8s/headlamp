@@ -146,7 +146,7 @@ export function BackendFormat({ backend }: BackendFormatProps) {
       }}
     >
       {backendList.map(backendItem => (
-        <Typography>{backendItem}</Typography>
+        <Typography key={backendItem}>{backendItem}</Typography>
       ))}
     </Box>
   );
@@ -243,7 +243,12 @@ export default function IngressDetails() {
                     label: t('translation|Path'),
                     getter: (data: IngressRule) =>
                       data.http.paths.map(({ path }) => (
-                        <LinkStringFormat url={data.host || '*'} item={item} urlPath={path} />
+                        <LinkStringFormat
+                          key={path}
+                          url={data.host || '*'}
+                          item={item}
+                          urlPath={path}
+                        />
                       )),
                   },
                   {
