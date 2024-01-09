@@ -1,11 +1,10 @@
-import Box from '@mui/material/Box';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import ConfigMap from '../../lib/k8s/configMap';
-import Empty from '../common/EmptyContent';
+import EmptyContent from '../common/EmptyContent';
 import { DataField, DetailsGrid } from '../common/Resource';
 import { SectionBox } from '../common/SectionBox';
+import { NameValueTable, NameValueTableRow } from '../common/SimpleTable';
 
 export default function ConfigDetails() {
   const { namespace, name } = useParams<{ namespace: string; name: string }>();
@@ -22,17 +21,19 @@ export default function ConfigDetails() {
           {
             id: 'headlamp.configmap-data',
             section: () => {
-              const itemData = item?.data;
+              const itemData = item?.data || [];
+              const mainRows: NameValueTableRow[] = Object.entries(itemData).map(
+                (item: unknown[]) => ({
+                  name: item[0] as string,
+                  value: <DataField label={item[0] as string} disableLabel value={item[1]} />,
+                })
+              );
               return (
                 <SectionBox title={t('translation|Data')}>
-                  {!itemData ? (
-                    <Empty>{t('No data in this config map')}</Empty>
+                  {mainRows.length === 0 ? (
+                    <EmptyContent>{t('No data in this config map')}</EmptyContent>
                   ) : (
-                    Object.keys(itemData).map((key, i) => (
-                      <Box py={2} key={i}>
-                        <DataField label={key} value={itemData[key]} />
-                      </Box>
-                    ))
+                    <NameValueTable rows={mainRows} />
                   )}
                 </SectionBox>
               );
