@@ -16,19 +16,19 @@ jobs:
   build-windows:
     runs-on: windows-2022
     steps:
-    - uses: actions/checkout@v2.3.3
+    - uses: actions/checkout@v4
       with:
         path: build-helper
-    - uses: actions/checkout@v2.3.3
+    - uses: actions/checkout@v4
       with:
         repository: headlamp-k8s/headlamp
         ref: ${{ github.event.inputs.buildBranch }}
         path: headlamp
     - name: Setup nodejs
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: 18.x
-    - uses: actions/setup-go@v2
+    - uses: actions/setup-go@v5
       with:
         go-version: '1.20.*'
     - name: Dependencies
@@ -70,7 +70,7 @@ jobs:
         make app-win
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: Win exes
         path: ./headlamp/app/dist/Headlamp*.*
