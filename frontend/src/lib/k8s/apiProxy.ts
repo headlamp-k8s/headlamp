@@ -379,6 +379,13 @@ export async function clusterRequest(
     window.location.reload();
   }
 
+  // In case of OIDC auth if the token is about to expire the backend
+  // sends a refreshed token in the response header.
+  const newToken = response.headers.get('X-Authorization');
+  if (newToken) {
+    setToken(cluster, newToken);
+  }
+
   if (!response.ok) {
     const { status, statusText } = response;
     if (autoLogoutOnAuthError && status === 401 && opts.headers.Authorization) {

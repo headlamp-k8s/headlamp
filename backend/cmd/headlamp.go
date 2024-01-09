@@ -17,6 +17,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"runtime"
 	"strings"
 	"time"
@@ -538,6 +539,11 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 				return
 			}
 
+			if err := config.cache.Set(context.Background(),
+				fmt.Sprintf("oidc-token-%s", rawIDToken), oauth2Token.RefreshToken); err != nil {
+				http.Error(w, "Failed to cache refresh token: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
 			idToken, err := oauthConfig.Verifier.Verify(oauthConfig.Ctx, rawIDToken)
 			if err != nil {
 				http.Error(w, "Failed to verify ID Token: "+err.Error(), http.StatusInternalServerError)
@@ -605,8 +611,167 @@ func createHeadlampHandler(config *HeadlampConfig) http.Handler {
 	return r
 }
 
+func parseClusterAndToken(r *http.Request) (string, string) {
+	cluster := ""
+	re := regexp.MustCompile(`^/clusters/([^/]+)/.*`)
+	urlString := r.URL.RequestURI()
+
+	matches := re.FindStringSubmatch(urlString)
+	if len(matches) > 1 {
+		cluster = matches[1]
+	}
+
+	// get token
+	token := r.Header.Get("Authorization")
+	token = strings.TrimPrefix(token, "Bearer ")
+
+	return cluster, token
+}
+
+func isTokenAboutToExpire(token string) bool {
+	const TokenParts = 3
+
+	// parse expiry time from token
+	parts := strings.Split(token, ".")
+	if len(parts) != TokenParts {
+		return false
+	}
+
+	payloadPart := parts[1]
+
+	payloadBytes, err := base64.RawStdEncoding.DecodeString(payloadPart)
+	if err != nil {
+		return false
+	}
+
+	var payload map[string]interface{}
+	if err := json.Unmarshal(payloadBytes, &payload); err != nil {
+		return false
+	}
+
+	// check if token is expired
+	exp, ok := payload["exp"].(float64)
+	if !ok {
+		return false
+	}
+
+	// if token is not about to expire, then skip
+	expTime := time.Unix(int64(exp), 0)
+
+	return time.Until(expTime) <= time.Second*10
+}
+
+func refreshAndCacheNewToken(oidcAuthConfig *kubeconfig.OidcConfig,
+	cache cache.Cache[interface{}], token string,
+) (string, error) {
+	const ExtendRefreshTokenTTL = 10 // seconds
+
+	// get provider
+	provider, err := oidc.NewProvider(context.Background(), oidcAuthConfig.IdpIssuerURL)
+	if err != nil {
+		return "", err
+	}
+
+	// get refresh token from cache
+	refreshToken, err := cache.Get(context.Background(), fmt.Sprintf("oidc-token-%s", token))
+	if err != nil || refreshToken == "" {
+		return "", err
+	}
+
+	rToken, ok := refreshToken.(string)
+	if !ok {
+		return "", err
+	}
+
+	oauth2Config := oauth2.Config{
+		ClientID:     oidcAuthConfig.ClientID,
+		ClientSecret: oidcAuthConfig.ClientSecret,
+		Endpoint:     provider.Endpoint(),
+		Scopes:       oidcAuthConfig.Scopes,
+	}
+
+	// get new token using refresh token
+	ts := oauth2Config.TokenSource(context.Background(), &oauth2.Token{
+		RefreshToken: rToken,
+	})
+
+	tk, err := ts.Token()
+	if err != nil {
+		return "", err
+	}
+
+	idToken, ok := tk.Extra("id_token").(string)
+	if ok {
+		// update cache
+		if err := cache.Set(context.Background(), fmt.Sprintf("oidc-token-%s", idToken), tk.RefreshToken); err != nil {
+			return "", err
+		}
+
+		// set ttl to 10 seconds for old token to handle case when the new token is not accepted by the client.
+		if err := cache.SetWithTTL(context.Background(), fmt.Sprintf("oidc-token-%s", token),
+			refreshToken, time.Second*ExtendRefreshTokenTTL); err != nil {
+			return "", err
+		}
+
+		return idToken, nil
+	}
+
+	return "", errors.New("failed to get id token")
+}
+
+func (c *HeadlampConfig) OIDCTokenRefreshMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// skip if not cluster request
+		if !strings.HasPrefix(r.URL.String(), "/clusters/") {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		// parse cluster and token
+		cluster, token := parseClusterAndToken(r)
+		if cluster == "" || token == "" {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		// get oidc config
+		kContext, err := c.kubeConfigStore.GetContext(cluster)
+		if err != nil {
+			log.Printf("Error: failed to get context: %s", err)
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		// skip if cluster is not using OIDC auth
+		oidcAuthConfig, err := kContext.OidcConfig()
+		if err != nil {
+			log.Printf("Error getting %s cluster oidc config %s", cluster, err)
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		// skip if token is not about to expire
+		if !isTokenAboutToExpire(token) {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		// refresh and cache new token
+		newToken, err := refreshAndCacheNewToken(oidcAuthConfig, c.cache, token)
+		if err != nil {
+			log.Printf("Error refreshing token %s", err)
+		}
+		if newToken != "" {
+			w.Header().Set("X-Authorization", newToken)
+		}
+		next.ServeHTTP(w, r)
+	})
+}
+
 func StartHeadlampServer(config *HeadlampConfig) {
 	handler := createHeadlampHandler(config)
+
+	handler = config.OIDCTokenRefreshMiddleware(handler)
 
 	// Start server
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.port), handler)) //nolint:gosec
