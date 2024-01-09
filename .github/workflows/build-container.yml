@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     name: build discover and deploy
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/setup-node@v3
       with:
         node-version: 18.x
@@ -63,7 +63,7 @@ jobs:
         npm ci
         npx playwright install --with-deps
         HEADLAMP_TEST_URL=$SERVICE_URL npx playwright test
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: always()
       with:
         name: e2e-tests-report
