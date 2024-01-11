@@ -29,6 +29,8 @@ type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind';
 export interface ResourceTableProps extends Omit<SimpleTableProps, 'columns'> {
   /** The columns to be rendered, like used in SimpleTable, or by name. */
   columns: (ResourceTableColumn | ColumnType)[];
+  /** Allow to prefilter columns */
+  hideColumns?: string[] | null;
   /** ID for the table. Will be used by plugins to identify this table.
    * Official tables in Headlamp will have the 'headlamp-' prefix for their IDs which is followed by the resource's plural name or the section in Headlamp the table is in.
    * Plugins should use their own prefix when creating tables, to avoid any clashes.
@@ -121,6 +123,7 @@ function Table(props: ResourceTableProps) {
     id,
     noProcessing = false,
     columnChooserAnchor = null,
+    hideColumns = [],
     onColumnChooserClose,
     ...otherProps
   } = props;
@@ -223,6 +226,7 @@ function Table(props: ResourceTableProps) {
             throw new Error(`Unknown column: ${col}`);
         }
       })
+      .filter(col => !hideColumns?.includes(col.id ?? ''))
       .map((col, idx) => {
         const newCol: ResourceTableColumnWithDefaultShow = { id: col.id || idx.toString(), ...col };
         // Assign the default show value so we can remember it later.
@@ -237,7 +241,15 @@ function Table(props: ResourceTableProps) {
     // Filter out columns that have show set to false.
     const cols = resourceCols.filter(col => col.show !== false);
     return [resourceCols, cols, sortingColumn];
-  }, [columns, id, noProcessing, defaultSortingColumn, tableProcessors, tableSettings]);
+  }, [
+    columns,
+    hideColumns,
+    id,
+    noProcessing,
+    defaultSortingColumn,
+    tableProcessors,
+    tableSettings,
+  ]);
 
   function onColumnsVisibilityToggled(cols: ResourceTableColumn[]) {
     if (!!id) {
