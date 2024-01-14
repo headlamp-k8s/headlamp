@@ -1359,7 +1359,10 @@ interface StreamParams {
  * connectStreamWithParams is a wrapper around connectStream that allows for more
  * flexibility in the parameters that can be passed to the WebSocket connection.
  * This is an async function because it may need to fetch the kubeconfig for the
- * cluster if the cluster is specified in the params.
+ * cluster if the cluster is specified in the params. If kubeconfig is found, it
+ * sends the X-HEADLAMP-USER-ID header with the user ID from the localStorage.
+ * It is sent as a base64url encoded string in protocal format:
+ * `base64url.headlamp.authorization.k8s.io.${userID}`.
  * @returns A promise that resolves to an object with a `close` function and a `socket` property.
  */
 async function connectStreamWithParams(
@@ -1388,15 +1391,13 @@ async function connectStreamWithParams(
       const kubeconfig = await findKubeconfigByClusterName(cluster);
 
       if (kubeconfig !== null) {
-        const queryParams = `X-HEADLAMP-USER-ID=${userID}`;
-        url =
-          combinePath(BASE_WS_URL, fullPath) + (fullPath.includes('?') ? '&' : '?') + queryParams;
-      } else {
-        url = combinePath(BASE_WS_URL, fullPath);
+        protocols.push(`base64url.headlamp.authorization.k8s.io.${userID}`);
       }
+
+      url = combinePath(BASE_WS_URL, fullPath);
     } catch (error) {
       console.error('Error while finding kubeconfig:', error);
-      // Even if we can't find the kubeconfig, we can still try to connect to the cluster.
+      // If we can't find the kubeconfig, we'll just use the base URL.
       url = combinePath(BASE_WS_URL, fullPath);
     }
   }

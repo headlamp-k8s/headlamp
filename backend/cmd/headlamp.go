@@ -897,7 +897,7 @@ func handleClusterHelm(c *HeadlampConfig, router *mux.Router) {
 // That proxy is saved in the cache with the context key.
 func handleClusterAPI(c *HeadlampConfig, router *mux.Router) {
 	router.PathPrefix("/clusters/{clusterName}/{api:.*}").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		contextKey, err := c.getContextKeyForRequest(w, r)
+		contextKey, err := c.getContextKeyForRequest(r)
 		if err != nil {
 			log.Printf("Error: failed to get context key: %s", err)
 			http.NotFound(w, r)
