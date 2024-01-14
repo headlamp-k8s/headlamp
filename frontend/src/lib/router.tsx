@@ -3,7 +3,7 @@ import NotFoundComponent from '../components/404';
 import AuthToken from '../components/account/Auth';
 import Home from '../components/App/Home';
 import NotificationList from '../components/App/Notifications/List';
-import PluginSettings from '../components/App/PluginSettings';
+import PluginSettings, { PluginDetail } from '../components/App/PluginSettings';
 import Settings from '../components/App/Settings';
 import SettingsCluster from '../components/App/Settings/SettingsCluster';
 import SettingsClusters from '../components/App/Settings/SettingsClusters';
@@ -706,6 +706,18 @@ const defaultRoutes: {
     useClusterURL: false,
     noAuthRequired: true,
     component: () => <PluginSettings />,
+  },
+  pluginDetails: {
+    path: '/settings/plugins/:name',
+    exact: true,
+    name: 'Plugin Details',
+    sidebar: {
+      item: 'plugins',
+      sidebar: DefaultSidebars.HOME,
+    },
+    useClusterURL: false,
+    noAuthRequired: true,
+    component: () => <PluginDetail />,
   },
   portforwards: {
     path: '/portforwards',

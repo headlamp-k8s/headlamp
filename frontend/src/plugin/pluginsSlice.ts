@@ -24,6 +24,10 @@ export type PluginInfo = {
    */
   description: string;
   /**
+   * origin is the source of the plugin.
+   */
+  origin?: string;
+  /**
    * homepage is the URL link address for the plugin defined from the package.json
    */
   homepage: string;
