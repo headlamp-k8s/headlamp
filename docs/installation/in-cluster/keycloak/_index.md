@@ -1,4 +1,7 @@
-# How to Set Up Headlamp in a Minikube Cluster with Keycloak OIDC Authentication
+---
+title: How to Set Up Headlamp in minikube with Keycloak OIDC Authentication
+linktitle: 'Tutorial: OIDC with Keycloak'
+---
 
 In this tutorial, we'll walk through the process of configuring Headlamp within a Minikube cluster while utilizing Keycloak for OIDC (OpenID Connect) authentication. This tutorial is based on Keycloak version 22.0.4, Minikube version v1.31.2, and Headlamp version 0.20.1.
 
@@ -42,7 +45,7 @@ minikube start -p=keycloak \
 
 ![Minikube start](./minikube-start.jpg)
 
-Note: 
+Note:
 Replace `<YOUR-KEYCLOAK-URL>`, `<REALM-NAME>`, and `<CLIENT-ID>` with the actual values relevant to your Keycloak setup.
 
 ## Configuring a ClusterRole Binding for the OIDC User

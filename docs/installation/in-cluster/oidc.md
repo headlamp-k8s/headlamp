@@ -34,6 +34,12 @@ then add them all to the option:
 used by Dex and other services, but since it's not part of the default spec,
 it was removed in the mentioned version.
 
+### Example: OIDC with Keycloak in Minikube
+
+If you are interested in a comprehensive example of using OIDC and Headlamp,
+you can check the
+[tutorial on setting up OIDC with Keycloack in Minikube](./keycloak/).
+
 ### Example: OIDC with Dex
 
 If you are using Dex and want to configure Headlamp to use it for OIDC,
