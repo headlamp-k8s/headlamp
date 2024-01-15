@@ -120,8 +120,15 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
       showTimestamps = false,
       follow = true,
     } = logsOptions;
+
     let logs: string[] = [];
-    const url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/log?container=${container}&previous=${showPrevious}&tailLines=${tailLines}&timestamps=${showTimestamps}&follow=${follow}`;
+    let url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/log?container=${container}&previous=${showPrevious}&timestamps=${showTimestamps}&follow=${follow}`;
+
+    // Negative tailLines parameter fetches all logs. If it's non negative it fetches
+    // the tailLines number of logs.
+    if (tailLines !== -1) {
+      url += `&tailLines=${tailLines}`;
+    }
 
     function onResults(item: string) {
       if (!item) {
