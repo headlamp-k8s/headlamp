@@ -199,6 +199,15 @@ const notificationsSlice = createSlice({
 
       notifications = _.uniqBy([...notifications, ...state.notifications], 'id');
       notifications.sort((n1, n2) => new Date(n2.date).getTime() - new Date(n1.date).getTime());
+      // We limit the number of notifications here even though we also do it when storing them
+      // so we can check if the notifications are the same and avoid updating them in that case.
+      notifications = notifications.slice(0, defaultMaxNotificationsStored);
+
+      // Check if the events are the same, if so, don't update the state unless
+      // needed. This saves unnecessary re-renders and may also prevent infinite loops.
+      if (_.isEqual(notifications, state.notifications)) {
+        return state;
+      }
 
       return {
         notifications: storeNotifications(notifications),
