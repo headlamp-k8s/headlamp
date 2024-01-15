@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import i18next from 'i18next';
 import { OptionsObject as SnackbarProps } from 'notistack';
+import { getCluster } from '../lib/cluster';
 
 /**
  * See components/common/ActionsNotifier.tsx for a user of cluster actions.
@@ -208,6 +209,17 @@ export const executeClusterAction = createAsyncThunk(
         })
       );
     }
+    function dispatchCancelledDueToClusterChanged() {
+      dispatch(
+        updateClusterAction({
+          buttons: undefined,
+          id: actionKey,
+          message: i18next.t('Cluster changed: {{ cancelledMessage }}', { cancelledMessage }),
+          url: '',
+          dismissSnackbar: actionKey,
+        })
+      );
+    }
     function dispatchError() {
       dispatch(
         updateClusterAction({
@@ -229,6 +241,8 @@ export const executeClusterAction = createAsyncThunk(
     }
 
     async function cancellableActionLogic() {
+      const currentCluster = getCluster();
+
       dispatchStart();
       try {
         await new Promise((resolve, reject) => {
@@ -242,8 +256,23 @@ export const executeClusterAction = createAsyncThunk(
         if (controller.signal.aborted) {
           return rejectWithValue('Action cancelled');
         }
-        callback();
-        dispatchSuccess();
+
+        // Functions may be called without the cluster being an argument to them, as
+        // the cluster is automatically gotten when executing functions like delete,
+        // apply, etc.
+        // So we need to make sure the cluster hasn't changed, otherwise we could start
+        // a function, change clusters, and then the function gets executed on the wrong
+        // cluster.
+        if (currentCluster !== getCluster()) {
+          try {
+            dispatchCancelledDueToClusterChanged();
+          } catch (err) {
+            console.error(err);
+          }
+        } else {
+          callback();
+          dispatchSuccess();
+        }
       } catch (err) {
         if ((err as Error).message === 'Action cancelled' || controller.signal.aborted) {
           dispatchCancelled();
