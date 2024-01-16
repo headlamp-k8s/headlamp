@@ -219,6 +219,7 @@ function PodLogViewer(props: PodLogViewerProps) {
                 {i}
               </MenuItem>
             ))}
+            <MenuItem value={-1}>All</MenuItem>
           </Select>
         </FormControl>,
         <LightTooltip
