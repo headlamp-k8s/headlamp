@@ -1115,6 +1115,13 @@ export interface StreamArgs {
   stderr?: boolean;
 }
 
+const OPEN_SOCKET_CONNECTIONS = new Map<
+  string,
+  {
+    socket: WebSocket | null;
+    close: () => void;
+  }
+>();
 /**
  * Establishes a WebSocket connection to the specified URL and streams the results
  * to the provided callback function.
@@ -1148,11 +1155,18 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   function cancel() {
     if (connection) connection.close();
     isCancelled = true;
+    OPEN_SOCKET_CONNECTIONS.delete(url);
   }
 
   function connect() {
     if (connectCb) connectCb();
-    connection = connectStream(url, cb, onFail, isJson, additionalProtocols);
+    if (OPEN_SOCKET_CONNECTIONS.has(url)) {
+      const { socket, close } = OPEN_SOCKET_CONNECTIONS.get(url)!;
+      connection = { socket, close };
+    } else {
+      connection = connectStream(url, cb, onFail, isJson, additionalProtocols);
+      OPEN_SOCKET_CONNECTIONS.set(url, connection);
+    }
   }
 
   function retryOnFail() {
