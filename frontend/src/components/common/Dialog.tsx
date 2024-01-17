@@ -117,7 +117,7 @@ export function Dialog(props: DialogProps) {
       <ActionButton
         description={t('Toggle fullscreen')}
         onClick={handleFullScreen}
-        icon={`mdi:${fullScreen ? 'fullscreen-exit' : 'fullscreen'}`}
+        icon={fullScreen ? 'mdi:fullscreen-exit' : 'mdi:fullscreen'}
       />
     );
   }
