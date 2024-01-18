@@ -2,10 +2,23 @@
 
 Configure (or update) a cluster dynamically that can then be used throughout Headlamp.
 
-Important: This plugin example only works in the desktop version.
-Dynamically setting up clusters can not be done when Headlamp is run in-cluster.
+Headlamp supports both dynamic and static cluster configurations.
 
-You will need to edit the source code of this plugin to add a cluster.
+### Static Clusters (Default):
+
+- If dynamic cluster is disabled (default setting), Headlamp prompts users to manually enter information about the cluster, including the cluster name and server details.
+- Users can submit the form, and Headlamp will load the cluster based on the provided information.
+
+<img width="584" alt="dynamic cluster is disabled" src="https://github.com/headlamp-k8s/headlamp/assets/24803604/8b67f739-dd41-4114-9f2f-93f8cf2bbf0a">
+
+### Dynamic Clusters (Enable with -enable-dynamic-clusters flag):
+
+- When dynamic cluster is enabled on the backend using the -enable-dynamic-clusters flag, Headlamp allows users to paste the base64 encoded value of their kubeconfig.
+- Upon submission, Headlamp seamlessly loads the cluster statelessly using the provided kubeconfig information.
+
+<img width="763" alt="dynamic cluster is enabled" src="https://github.com/headlamp-k8s/headlamp/assets/24803604/19bceb85-9d68-44bc-a8b4-e0303da09f70">
+
+## Running the plugin
 
 To run the plugin with [node.js](https://nodejs.org/en/) installed:
 
