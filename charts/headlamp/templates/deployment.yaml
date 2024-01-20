@@ -36,28 +36,28 @@ spec:
           image: "{{ .Values.image.registry}}/{{ .Values.image.repository }}:{{ .Values.image.tag | default (printf "v%s" .Chart.AppVersion) }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            {{- with .Values.config.oidc.clientID }}
+            {{- if or .Values.config.oidc.clientID (not .Values.config.oidc.create) }}
             - name: OIDC_CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: oidc
                   key: clientID
             {{- end }}
-            {{- with .Values.config.oidc.clientSecret }}
+            {{- if or .Values.config.oidc.clientSecret (not .Values.config.oidc.create) }}
             - name: OIDC_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: oidc
                   key: clientSecret
             {{- end }}
-            {{- with .Values.config.oidc.issuerURL }}
+            {{- if or .Values.config.oidc.issuerURL (not .Values.config.oidc.create) }}
             - name: OIDC_ISSUER_URL
               valueFrom:
                 secretKeyRef:
                   name: oidc
                   key: issuerURL
             {{- end }}
-            {{- with .Values.config.oidc.scopes }}
+            {{- if or .Values.config.oidc.scopes (not .Values.config.oidc.create) }}
             - name: OIDC_SCOPES
               valueFrom:
                 secretKeyRef:
