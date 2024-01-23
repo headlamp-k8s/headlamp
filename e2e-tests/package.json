@@ -9,5 +9,8 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.27.1"
+  },
+  "dependencies": {
+    "yaml": "^2.3.4"
   }
 }

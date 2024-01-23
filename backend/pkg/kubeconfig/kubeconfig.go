@@ -1,6 +1,7 @@
 package kubeconfig
 
 import (
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"net/http"
@@ -35,6 +36,7 @@ type Context struct {
 	Source      int                    `json:"source"`
 	OidcConf    *OidcConfig            `json:"oidcConfig"`
 	proxy       *httputil.ReverseProxy `json:"-"`
+	Internal    bool                   `json:"internal"`
 }
 
 type OidcConfig struct {
@@ -198,7 +200,7 @@ func LoadContextsFromFile(kubeConfigPath string, source int) ([]Context, error) 
 		return nil, err
 	}
 
-	contexts, errs := LoadContextsFromAPIConfig(config)
+	contexts, errs := LoadContextsFromAPIConfig(config, false)
 	if errs == nil {
 		return nil, errors.Join(errs...)
 	}
@@ -215,7 +217,7 @@ func LoadContextsFromFile(kubeConfigPath string, source int) ([]Context, error) 
 }
 
 // LoadContextsFromAPIConfig loads contexts from the given api.Config.
-func LoadContextsFromAPIConfig(config *api.Config) ([]Context, []error) {
+func LoadContextsFromAPIConfig(config *api.Config, skipProxySetup bool) ([]Context, []error) {
 	contexts := []Context{}
 	errors := []error{}
 
@@ -236,10 +238,12 @@ func LoadContextsFromAPIConfig(config *api.Config) ([]Context, []error) {
 			AuthInfo:    authInfo,
 		}
 
-		err := context.SetupProxy()
-		if err != nil {
-			errors = append(errors, fmt.Errorf("couldnt setup proxy for context: %q, err:%q", contextName, err))
-			continue
+		if !skipProxySetup {
+			err := context.SetupProxy()
+			if err != nil {
+				errors = append(errors, fmt.Errorf("couldnt setup proxy for context: %q, err:%q", contextName, err))
+				continue
+			}
 		}
 
 		contexts = append(contexts, context)
@@ -267,6 +271,38 @@ func LoadContextsFromMultipleFiles(kubeConfigs string, source int) ([]Context, e
 	}
 
 	return contexts, errors.Join(errs...)
+}
+
+// LoadContextsFromBase64String loads contexts from the given kubeconfig string.
+func LoadContextsFromBase64String(kubeConfig string, source int) ([]Context, error) {
+	var contexts []Context
+
+	var errs []error
+
+	kubeConfigByte, err := base64.StdEncoding.DecodeString(kubeConfig)
+	if err != nil {
+		return nil, err
+	}
+
+	config, err := clientcmd.Load(kubeConfigByte)
+	if err != nil {
+		return nil, err
+	}
+
+	contexts, errs = LoadContextsFromAPIConfig(config, true)
+	if errs == nil {
+		return nil, errors.Join(errs...)
+	}
+
+	contextsWithSource := make([]Context, 0, len(contexts))
+
+	for _, context := range contexts {
+		context := context
+		context.Source = source
+		contextsWithSource = append(contextsWithSource, context)
+	}
+
+	return contextsWithSource, nil
 }
 
 func splitKubeConfigPath(path string) []string {

@@ -12,6 +12,11 @@ import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
 import helpers, { getHeadlampAPIHeaders, isDebugVerbose } from '../../helpers';
 import store from '../../redux/stores/store';
+import {
+  findKubeconfigByClusterName,
+  getUserIdFromLocalStorage,
+  storeStatelessClusterKubeconfig,
+} from '../../stateless/';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
 import { KubeMetadata, KubeMetrics, KubeObjectInterface } from './cluster';
@@ -334,12 +339,19 @@ export async function clusterRequest(
     isJSON = true,
     ...otherParams
   } = params;
+
+  const userID = getUserIdFromLocalStorage();
   const opts: { headers: RequestHeaders } = Object.assign({ headers: {} }, otherParams);
   const cluster = paramsCluster || '';
 
   let fullPath = path;
   if (cluster) {
     const token = getToken(cluster);
+    const kubeconfig = await findKubeconfigByClusterName(cluster);
+    if (kubeconfig !== null) {
+      opts.headers['KUBECONFIG'] = kubeconfig;
+      opts.headers['X-HEADLAMP-USER-ID'] = userID;
+    }
 
     // Refresh service account token only if the cluster auth type is not OIDC
     if (getClusterAuthType(cluster) !== 'oidc') {
@@ -1250,7 +1262,7 @@ export interface StreamArgs {
  * the stream, and `getSocket`, which returns the WebSocket object.
  */
 export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
-  let connection: ReturnType<typeof connectStream>;
+  let connection: { close: () => void; socket: WebSocket | null } | null = null;
   let isCancelled = false;
   const { failCb, cluster = '' } = args;
   // We only set reconnectOnFailure as true by default if the failCb has not been provided.
@@ -1265,7 +1277,7 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   return { cancel, getSocket };
 
   function getSocket() {
-    return connection.socket;
+    return connection ? connection.socket : null;
   }
 
   function cancel() {
@@ -1273,9 +1285,14 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
     isCancelled = true;
   }
 
-  function connect() {
+  async function connect() {
     if (connectCb) connectCb();
-    connection = connectStream(url, cb, onFail, isJson, additionalProtocols, cluster);
+    try {
+      connection = await connectStream(url, cb, onFail, isJson, additionalProtocols, cluster);
+    } catch (error) {
+      console.error('Error connecting stream:', error);
+      onFail();
+    }
   }
 
   function retryOnFail() {
@@ -1313,7 +1330,7 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
  *
  * @returns An object with a `close` function and a `socket` property.
  */
-function connectStream(
+async function connectStream(
   path: string,
   cb: StreamResultsCb,
   onFail: () => void,
@@ -1334,7 +1351,21 @@ interface StreamParams {
   additionalProtocols?: string[];
 }
 
-function connectStreamWithParams(
+/**
+ * @param path - The path of the WebSocket stream to connect to.
+ * @param cb - The function to call with each message received from the stream.
+ * @param onFail - The function to call if the stream is closed unexpectedly.
+ * @param params - Stream parameters to configure the connection.
+ * connectStreamWithParams is a wrapper around connectStream that allows for more
+ * flexibility in the parameters that can be passed to the WebSocket connection.
+ * This is an async function because it may need to fetch the kubeconfig for the
+ * cluster if the cluster is specified in the params. If kubeconfig is found, it
+ * sends the X-HEADLAMP-USER-ID header with the user ID from the localStorage.
+ * It is sent as a base64url encoded string in protocal format:
+ * `base64url.headlamp.authorization.k8s.io.${userID}`.
+ * @returns A promise that resolves to an object with a `close` function and a `socket` property.
+ */
+async function connectStreamWithParams(
   path: string,
   cb: StreamResultsCb,
   onFail: () => void,
@@ -1344,6 +1375,7 @@ function connectStreamWithParams(
   let isClosing = false;
 
   const token = getToken(cluster || '');
+  const userID = getUserIdFromLocalStorage();
 
   const protocols = ['base64.binary.k8s.io', ...additionalProtocols];
   if (token) {
@@ -1352,11 +1384,24 @@ function connectStreamWithParams(
   }
 
   let fullPath = path;
+  let url = '';
   if (cluster) {
     fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
+    try {
+      const kubeconfig = await findKubeconfigByClusterName(cluster);
+
+      if (kubeconfig !== null) {
+        protocols.push(`base64url.headlamp.authorization.k8s.io.${userID}`);
+      }
+
+      url = combinePath(BASE_WS_URL, fullPath);
+    } catch (error) {
+      console.error('Error while finding kubeconfig:', error);
+      // If we can't find the kubeconfig, we'll just use the base URL.
+      url = combinePath(BASE_WS_URL, fullPath);
+    }
   }
 
-  const url = combinePath(BASE_WS_URL, fullPath);
   let socket: WebSocket | null = null;
   try {
     socket = new WebSocket(url, protocols);
@@ -1375,6 +1420,7 @@ function connectStreamWithParams(
     if (!socket) {
       return;
     }
+
     socket.close();
   }
 
@@ -1396,9 +1442,11 @@ function connectStreamWithParams(
       return;
     }
 
-    socket.removeEventListener('message', onMessage);
-    socket.removeEventListener('close', onClose);
-    socket.removeEventListener('error', onError);
+    if (socket) {
+      socket.removeEventListener('message', onMessage);
+      socket.removeEventListener('close', onClose);
+      socket.removeEventListener('error', onError);
+    }
 
     console.warn('Socket closed unexpectedly', { path, args });
     onFail();
@@ -1547,12 +1595,22 @@ export async function testClusterHealth(cluster?: string) {
 }
 
 export async function setCluster(clusterReq: ClusterRequest) {
+  const kubeconfig = clusterReq.kubeconfig;
+
+  if (kubeconfig) {
+    await storeStatelessClusterKubeconfig(kubeconfig);
+    return;
+  }
+
   return request(
     '/cluster',
     {
       method: 'POST',
       body: JSON.stringify(clusterReq),
-      headers: { ...JSON_HEADERS, ...getHeadlampAPIHeaders() },
+      headers: {
+        ...JSON_HEADERS,
+        ...getHeadlampAPIHeaders(),
+      },
     },
     false,
     false

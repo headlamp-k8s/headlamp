@@ -93,4 +93,15 @@ func TestParse(t *testing.T) {
 
 		assert.Equal(t, conf.KubeConfigPath, "~/.kube/test_config.yaml")
 	})
+
+	t.Run("enable_dynamic_clusters", func(t *testing.T) {
+		args := []string{
+			"go run ./cmd", "--enable-dynamic-clusters",
+		}
+		conf, err := config.Parse(args)
+		require.NoError(t, err)
+		require.NotNil(t, conf)
+
+		assert.Equal(t, true, conf.EnableDynamicClusters)
+	})
 }

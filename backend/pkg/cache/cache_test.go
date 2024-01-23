@@ -36,16 +36,21 @@ func testCache(ch cache.Cache[interface{}], t *testing.T) {
 	err = ch.SetWithTTL(context.Background(), "ttlkey1", "value1", time.Second)
 	require.NoError(t, err)
 
-	time.Sleep(3 * time.Second)
+	// update ttl value
+	err = ch.UpdateTTL(context.Background(), "ttlkey1", 4*time.Second)
+	assert.NoError(t, err)
 
-	// get value with ttl
+	// sleep for 2 seconds and check ttlkey is present or not
+	time.Sleep(2 * time.Second)
+
+	// get value with ttl after 2 seconds
 	value, err = ch.Get(context.Background(), "ttlkey1")
-	assert.Equal(t, cache.ErrNotFound, err)
-	assert.Error(t, err)
-	assert.Nil(t, value)
+	assert.NoError(t, err)
+	assert.Equal(t, "value1", value)
 
 	time.Sleep(10 * time.Second)
 
+	// get value with ttl, it should not be present
 	value, err = ch.Get(context.Background(), "ttlkey1")
 	assert.Equal(t, cache.ErrNotFound, err)
 	assert.Error(t, err)

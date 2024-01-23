@@ -140,6 +140,7 @@ func flagset() *flag.FlagSet {
 	f.Bool("in-cluster", false, "Set when running from a k8s cluster")
 	f.Bool("dev", false, "Allow connections from other origins")
 	f.Bool("insecure-ssl", false, "Accept/Ignore all server SSL certificates")
+	f.Bool("enable-dynamic-clusters", false, "Enable dynamic clusters, which stores stateless clusters in the frontend.")
 
 	f.String("kubeconfig", "", "Absolute path to the kubeconfig file")
 	f.String("html-static-dir", "", "Static HTML directory to serve")

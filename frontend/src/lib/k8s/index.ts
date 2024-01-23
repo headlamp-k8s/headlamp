@@ -87,10 +87,26 @@ classList.forEach(cls => {
 
 export const ResourceClasses = resourceClassesDict;
 
-// Hook for getting or fetching the clusters configuration.
-export function useClustersConf(): ConfigState['clusters'] {
-  const clusters = _.cloneDeep(useTypedSelector(state => state.config.clusters));
-  return clusters;
+/** Hook for getting or fetching the clusters configuration.
+ * This gets the clusters from the redux store. The redux store is updated
+ * when the user changes the configuration. The configuration is stored in
+ * the local storage. When stateless clusters are present, it combines the
+ * stateless clusters with the clusters from the redux store.
+ * @returns the clusters configuration.
+ * */
+export function useClustersConf(): ConfigState['allClusters'] {
+  const state = useTypedSelector(state => state.config);
+  const clusters = _.cloneDeep(state.clusters || {});
+  const allClusters = _.cloneDeep(state.allClusters || {});
+  Object.assign(allClusters, clusters);
+
+  if (state.statelessClusters) {
+    // Combine statelessClusters with clusters
+    const statelessClusters = _.cloneDeep(state.statelessClusters || {});
+    Object.assign(allClusters, statelessClusters);
+  }
+
+  return allClusters;
 }
 
 export function useCluster() {
