@@ -68,7 +68,7 @@ See [MAINTAINERS.md](https://github.com/headlamp-k8s/headlamp/blob/main/MAINTAIN
 | Key                      | Type   | Default               | Description                                |
 |--------------------------|--------|-----------------------|--------------------------------------------|
 | config.baseURL           | string | `""`                  | base url path at which headlamp should run |
-| config.oidc.create       | bool   | `true`                | Let chart create the OIDC secret.<br>If set to `true`, will use the values as specified below. |
+| config.oidc.create       | bool   | `true`                | Enable this option to have the chart automatically create the OIDC secret using the specified values. |
 | config.oidc.clientID     | string | `""`                  | OIDC client ID                             |
 | config.oidc.clientSecret | string | `""`                  | OIDC client secret                         |
 | config.oidc.issuerURL    | string | `""`                  | OIDC issuer URL                            |
