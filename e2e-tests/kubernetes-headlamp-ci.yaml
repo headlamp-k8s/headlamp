@@ -69,6 +69,7 @@ spec:
         imagePullPolicy: Never
         args:
         - "-in-cluster"
+        - "-enable-dynamic-clusters"
         - "-plugins-dir=/build/plugins"
         ports:
         - name: http

@@ -51,4 +51,14 @@ export class HeadlampPage {
     const pageContent = await this.page.content();
     expect(pageContent).toContain(text);
   }
+
+  async pageLocatorContent(locator: string, text: string) {
+    const pageContent = this.page.locator(locator).textContent();
+    expect(await pageContent).toContain(text);
+  }
+
+  async navigateTopage(page: string) {
+    await this.page.goto(page);
+    await this.page.waitForLoadState('load');
+  }
 }
