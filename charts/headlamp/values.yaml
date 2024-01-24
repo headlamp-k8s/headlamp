@@ -29,8 +29,11 @@ config:
   # -- base url path at which headlamp should run
   baseURL: ""
   oidc:
-    # -- Generate OIDC secret. If true, will generate a secret using the values below.
-    create: true
+    secret:
+      # -- Generate OIDC secret. If true, will generate a secret using .config.oidc.
+      create: true
+      # -- Name of the OIDC secret.
+      name: oidc
     # -- OIDC client ID
     clientID: ""
     # -- OIDC client secret
