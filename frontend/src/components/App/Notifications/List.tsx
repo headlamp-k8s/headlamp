@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
-import { DateLabel, SectionBox, SectionFilterHeader, SimpleTable } from '../../common';
+import { DateLabel, Link, SectionBox, SectionFilterHeader, SimpleTable } from '../../common';
 import Empty from '../../common/EmptyContent';
 import { Notification, setNotifications, updateNotifications } from './notificationsSlice';
 
@@ -97,82 +97,94 @@ export default function NotificationList() {
       backLink
     >
       {allNotificationsAreDeleted ? (
-        <Empty>{t("translation|You don't have any notifications right now")}</Empty>
+        <Empty> {t("translation|You don't have any notifications right now")}</Empty>
       ) : (
-        <SimpleTable
-          filterFunction={(notification: Notification) =>
-            (notification?.message?.toLowerCase() || '').includes(search.toLowerCase())
-          }
-          columns={[
-            {
-              label: t('translation|Message'),
-              getter: (notification: Notification) => (
-                <Box width={'30vw'}>
-                  <Tooltip
-                    title={notification.message || t('translation|No message')}
-                    disableHoverListener={!notification.message}
-                  >
-                    <Typography
-                      style={{
-                        fontWeight: notification.seen ? 'normal' : 'bold',
-                        cursor: 'pointer',
-                      }}
-                      noWrap
-                      onClick={() => notificationItemClickHandler(notification)}
+        <Box
+          style={{
+            maxWidth: '100%',
+          }}
+        >
+          <SimpleTable
+            filterFunction={(notification: Notification) =>
+              (notification?.message?.toLowerCase() || '').includes(search.toLowerCase())
+            }
+            columns={[
+              {
+                label: t('translation|Message'),
+                gridTemplate: 'auto',
+                getter: (notification: Notification) => (
+                  <Box>
+                    <Tooltip
+                      title={notification.message || t('translation|No message')}
+                      disableHoverListener={!notification.message}
                     >
-                      {`${notification.message || t(`translation|No message`)}`}
-                    </Typography>
-                  </Tooltip>
-                </Box>
-              ),
-            },
-            {
-              label: t('glossary|Cluster'),
-              getter: (notification: Notification) => (
-                <Box display={'flex'} alignItems="center">
-                  {Object.entries(clusters || {}).length > 1 && notification.cluster && (
-                    <Box
-                      border={1}
-                      p={0.5}
-                      mr={1}
-                      textOverflow="ellipsis"
-                      overflow={'hidden'}
-                      whiteSpace="nowrap"
-                    >
-                      {notification.cluster}
-                    </Box>
-                  )}{' '}
-                </Box>
-              ),
-            },
-            {
-              label: t('translation|Date'),
-              getter: (notification: Notification) => <DateLabel date={notification.date} />,
-            },
-            {
-              label: t('translation|Visible'),
-              getter: (notification: Notification) =>
-                !notification.seen && (
-                  <Tooltip title={t(`translation|Mark as read`)}>
-                    <IconButton
-                      onClick={e => notificationSeenUnseenHandler(e, notification)}
-                      aria-label={t(`translation|Mark as read`)}
-                      size="medium"
-                    >
-                      <Icon
-                        icon="mdi:circle"
-                        color={theme.palette.error.main}
-                        height={12}
-                        width={12}
-                      />
-                    </IconButton>
-                  </Tooltip>
+                      <Typography
+                        style={{
+                          fontWeight: notification.seen ? 'normal' : 'bold',
+                          cursor: 'pointer',
+                        }}
+                        noWrap
+                        onClick={() => notificationItemClickHandler(notification)}
+                      >
+                        {`${notification.message || t(`translation|No message`)}`}
+                      </Typography>
+                    </Tooltip>
+                  </Box>
                 ),
-            },
-          ]}
-          data={notifications}
-          noTableHeader
-        />
+              },
+              {
+                label: t('glossary|Cluster'),
+                gridTemplate: 'min-content',
+                getter: (notification: Notification) => (
+                  <Box display={'flex'} alignItems="center">
+                    {Object.entries(clusters || {}).length > 1 && notification.cluster && (
+                      <Box
+                        border={0}
+                        p={0.5}
+                        mr={1}
+                        textOverflow="ellipsis"
+                        overflow={'hidden'}
+                        whiteSpace="nowrap"
+                      >
+                        <Link routeName="cluster" params={{ cluster: `${notification.cluster}` }}>
+                          {notification.cluster}
+                        </Link>
+                      </Box>
+                    )}{' '}
+                  </Box>
+                ),
+              },
+              {
+                label: t('translation|Date'),
+                gridTemplate: 'min-content',
+                getter: (notification: Notification) => <DateLabel date={notification.date} />,
+              },
+              {
+                label: t('translation|Visible'),
+                gridTemplate: 'min-content',
+                getter: (notification: Notification) =>
+                  !notification.seen && (
+                    <Tooltip title={t(`translation|Mark as read`)}>
+                      <IconButton
+                        onClick={e => notificationSeenUnseenHandler(e, notification)}
+                        aria-label={t(`translation|Mark as read`)}
+                        size="medium"
+                      >
+                        <Icon
+                          icon="mdi:circle"
+                          color={theme.palette.error.main}
+                          height={12}
+                          width={12}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  ),
+              },
+            ]}
+            data={notifications}
+            noTableHeader
+          />
+        </Box>
       )}
     </SectionBox>
   );
