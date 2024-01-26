@@ -8,14 +8,15 @@ weight: 5
 Can Headlamp work well with a busy cluster?
 
 Limits we want to test for to begin with:
+
 - 10,000 pods
 - 1,000 nodes
 - 10,000 events
 
 Steps:
+
 - Create load in a cluster
 - Run Headlamp and see if it works well
-
 
 ### Kwok for low resource usage load testing of Headlamp
 
@@ -23,10 +24,10 @@ Steps:
 
 - [KWOK installation](https://kwok.sigs.k8s.io/docs/user/installation/)
 
-
 ### Creating lots of Kubernetes activity
 
 Maybe you need to delete a cluster and create a fresh one.
+
 ```bash
 kwokctl delete cluster
 kwokctl create cluster
@@ -43,13 +44,14 @@ kubectl config get-contexts
 This will create 900 nodes, 9000 pods, and 1000 events as fast as possible. Then it will create 1 event per second up to a total of 9000 events. Also one per second: 100 new nodes, and 1000 new pods.
 
 ```bash
-cd load-testing
+cd load-tests
 npm install
 
 echo "Creating initial activity: 900 nodes, 9000 pods, and 1000 events"
 node scripts/create-nodes.js 900 0
 node scripts/create-pods.js 9000 0
 node scripts/create-events.js 1000 0
+node scripts/create-deployments.js 500 0
 ```
 
 #### Generating Activity
