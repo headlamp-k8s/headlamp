@@ -1,6 +1,7 @@
 import { has } from 'lodash';
 import React from 'react';
 import { AppLogoProps, AppLogoType } from '../components/App/AppLogo';
+import { runCommand } from '../components/App/runCommand';
 import { setBrandingAppLogoComponent } from '../components/App/themeSlice';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
 import {
@@ -559,4 +560,4 @@ export function registerGetTokenFunction(override: (cluster: string) => string |
   store.dispatch(setFunctionsToOverride({ getToken: override }));
 }
 
-export { DefaultAppBarAction, DefaultDetailsViewSection, getHeadlampAPIHeaders };
+export { DefaultAppBarAction, DefaultDetailsViewSection, getHeadlampAPIHeaders, runCommand };

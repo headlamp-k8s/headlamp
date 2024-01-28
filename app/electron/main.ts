@@ -98,7 +98,10 @@ function startServer(flags: string[] = []): ChildProcessWithoutNullStreams {
  */
 function isWSL(): boolean {
   try {
-    const data = fs.readFileSync('/proc/version', { encoding: 'utf8', flag: 'r' });
+    const data = fs.readFileSync('/proc/version', {
+      encoding: 'utf8',
+      flag: 'r',
+    });
     return data.indexOf('icrosoft') !== -1;
   } catch {
     return false;
@@ -643,6 +646,66 @@ function startElecron() {
         i18n.changeLanguage(newLocale);
       }
     });
+
+    /**
+     * Data sent from the renderer process when a 'run-command' event is emitted.
+     */
+    interface CommandData {
+      /** The unique ID of the command. */
+      id: string;
+      /** The command to run. */
+      command: string;
+      /** The arguments to pass to the command. */
+      args: string[];
+      /**
+       * Options to pass to the command.
+       * See https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
+       */
+      options: {};
+    }
+
+    /**
+     * Handles 'run-command' events from the renderer process.
+     *
+     * Spawns the requested command and sends 'command-stdout',
+     * 'command-stderr', and 'command-exit' events back to the renderer
+     * process with the command's output and exit code.
+     *
+     * @param event - The event object.
+     * @param eventData - The data sent from the renderer process.
+     */
+    function handleRunCommand(event: IpcMainEvent, eventData: CommandData): void {
+      // Only allow "minikube", and "az" commands
+      const validCommands = ['minikube', 'az'];
+      if (!validCommands.includes(eventData.command)) {
+        console.error(
+          `Invalid command: ${eventData.command}, only valid commands are: ${JSON.stringify(
+            validCommands
+          )}`
+        );
+        return;
+      }
+
+      const child: ChildProcessWithoutNullStreams = spawn(
+        eventData.command,
+        eventData.args,
+        eventData.options
+      );
+
+      child.stdout.on('data', (data: string | Buffer) => {
+        event.sender.send('command-stdout', eventData.id, data.toString());
+      });
+
+      child.stderr.on('data', (data: string | Buffer) => {
+        event.sender.send('command-stderr', eventData.id, data.toString());
+      });
+
+      child.on('exit', (code: number | null) => {
+        event.sender.send('command-exit', eventData.id, code);
+      });
+    }
+
+    ipcMain.on('run-command', handleRunCommand);
 
     if (!useExternalServer) {
       const runningHeadlamp = await getRunningHeadlampPIDs();
