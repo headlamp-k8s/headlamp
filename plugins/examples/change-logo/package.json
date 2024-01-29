@@ -1,6 +1,8 @@
 {
   "name": "change-logo",
   "version": "0.0.1",
+  "origin": "Kinvolk",
+  "homepage": "http://test.com",
   "description": "Changing the logo in Headlamp can be done like this.",
   "scripts": {
     "start": "headlamp-plugin start",

@@ -7,16 +7,22 @@ import { styled } from '@mui/material/styles';
 import makeStyles from '@mui/styles/makeStyles';
 import withStyles from '@mui/styles/withStyles';
 import { useEffect, useState } from 'react';
+import { isValidElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { deletePlugin } from '../../../lib/k8s/apiProxy';
 import { useFilterFunc } from '../../../lib/util';
 import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
+// import {ConfigStore}  from '../../../plugin/pluginStore';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import NotFoundComponent from '../../404';
 import { Link as HeadlampLink, SectionBox, SimpleTable } from '../../common';
+import { ConfirmDialog } from '../../common/Dialog';
 import ErrorBoundary from '../../common/ErrorBoundary';
 import SectionFilterHeader from '../../common/SectionFilterHeader';
+import GenericInput from '../../common/Settings/Input';
+
 /**
  * useStyles css for alignment of the save button
  *
@@ -304,17 +310,131 @@ export function PluginDetail() {
 
 export function PluginDetailPure(props: { plugin: PluginInfo }) {
   const plugin = props.plugin;
+
+  {
+    /*interface testconf {
+    name: string;
+    url: string;
+  }
+
+  interface testconf2 {
+    name: string;
+    url: string;
+    age: number;
+  }
+
+  const store = new ConfigStore<testconf>("test")
+  // store.update({name:"chatgpt"})
+
+  const store2 = new ConfigStore<testconf2>("test2")
+
+  useEffect(()=>{
+    store.set({name:"water",url:"https://water.com"})
+    store.update({name:"chatgpt"})
+    store.set({name:"fire",url:"https://fire.com"})
+  
+    store2.set({name:"water",url:"https://water.com",age:10})
+    store2.update({name:"chatgpt"})
+    store2.set({name:"fire",url:"https://fire.com",age:20})  
+  },[])
+
+  const useMyConfig = store.get()
+  const conf = useMyConfig();
+console.log("conf",conf)*/
+  }
+
+  // const history = useHistory();
+
+  // const store = new ConfigStore(plugin.name);
+  // const config = store.get() as {[key:string]:any};
+  const config = { test: 'test' };
+  const [data, setData] = useState<{ [key: string]: any }>(config);
+  const [saveEnabled, setSaveEnabled] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
+
+  useEffect(() => {
+    // if the data is changed by the user, enable the save button
+    if (JSON.stringify(data) !== JSON.stringify(config)) {
+      setSaveEnabled(true);
+    } else {
+      setSaveEnabled(false);
+    }
+  }, [data]);
+
+  function onDataChange(data: any) {
+    setData(data);
+  }
+
+  function handleSave() {
+    console.log('handleSave', data);
+    // store.set(data);
+  }
+
+  function handleCancel() {
+    setData({});
+  }
+
+  function handleDelete() {
+    setOpenAlert(true);
+  }
+
+  const handleDeleteConfirm = async () => {
+    // delete the plugin
+    deletePlugin(plugin.name)
+      .then(() => {
+        // update the plugin list
+        const dispatch = useDispatch();
+        const pluginSettings = useTypedSelector(state => state.plugins.pluginSettings);
+        const plugins = pluginSettings.filter(p => p.name !== plugin.name);
+        dispatch(setPluginSettings(plugins));
+        dispatch(reloadPage());
+      })
+      .finally(() => {
+        // redirect /plugins page
+        // history.push isn't updating the plugins list so we're using window.location.pathname
+        window.location.pathname = '/settings/plugins';
+        // history.push("/settings/plugins")
+      });
+  };
+
+  let component;
+  if (isValidElement(plugin.settingsComponent)) {
+    component = plugin.settingsComponent;
+  } else if (typeof plugin.settingsComponent === 'function') {
+    const Comp = plugin.settingsComponent;
+    if (plugin.settingsAutoSave) {
+      component = <Comp />;
+    } else {
+      component = <Comp onDataChange={onDataChange} data={data} />;
+    }
+    console.log('plugin.component', component);
+  } else {
+    component = null;
+  }
+
   return (
     <>
       <SectionBox aria-live="polite" title={plugin.name} backLink={'/settings/plugins'}>
         {plugin.description}
         <ScrollableBox style={{ height: '70vh' }} py={0}>
+          <ConfirmDialog
+            open={openAlert}
+            title={'Delete Plugin'}
+            description={'Are you sure you want to delete this plugin?'}
+            handleClose={() => setOpenAlert(false)}
+            onConfirm={() => handleDeleteConfirm()}
+          />
+          {/* {JSON.stringify(conf)} */}
           <ErrorBoundary>
-            {plugin.component
-              ? typeof plugin.component === 'function'
-                ? plugin.component()
-                : plugin.component
-              : null}
+            <GenericInput
+              title={'test'}
+              validationRegex={
+                new RegExp(
+                  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                )
+              }
+            />
+            {component}
           </ErrorBoundary>
         </ScrollableBox>
       </SectionBox>
@@ -327,16 +447,24 @@ export function PluginDetailPure(props: { plugin: PluginInfo }) {
           sx={{ borderTop: '2px solid', borderColor: 'silver', padding: '10px' }}
         >
           <Stack direction="row" spacing={1}>
-            <Button
-              variant="contained"
-              disabled={!plugin.component}
-              style={{ backgroundColor: 'silver', color: 'black' }}
-            >
-              Save
-            </Button>
-            <Button style={{ color: 'silver' }}>Cancel</Button>
+            {!plugin.settingsAutoSave && (
+              <>
+                <Button
+                  variant="contained"
+                  disabled={saveEnabled}
+                  style={{ backgroundColor: 'silver', color: 'black' }}
+                  onClick={handleSave}
+                >
+                  Save
+                </Button>
+                <Button style={{ color: 'silver' }} onClick={handleCancel}>
+                  Cancel
+                </Button>
+              </>
+            )}
           </Stack>
-          <Button variant="text" color="error">
+
+          <Button variant="text" color="error" onClick={handleDelete}>
             Delete Plugin
           </Button>
         </Stack>

@@ -1,11 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 
-export type PluginSettingsSectionType =
-  | ((...args: any[]) => JSX.Element | null | ReactNode)
-  | null
+/**
+ * Props for PluginSettings component.
+ */
+export interface PluginSettingsProps {
+  /**
+   * Callback function triggered when there's a change in data.
+   * @param data - The updated data object.
+   */
+  onDataChange?: (data: { [key: string]: any }) => void;
+
+  /**
+   * Data object representing the current state/configuration.
+   */
+  data?: { [key: string]: any };
+}
+
+/**
+ * PluginSettingsComponentType is the type of the component associated with the plugin's settings.
+ */
+export type PluginSettingsComponentType =
+  | React.ComponentType<PluginSettingsProps>
   | ReactElement
-  | ReactNode;
+  | null;
 
 /**
  * PluginInfo is the shape of the metadata information for individual plugin objects.
@@ -48,9 +66,17 @@ export type PluginInfo = {
   };
 
   /**
-   * component is the plugin's component that is rendered in the settings page.
+   * Component associated with the plugin's settings.
    */
-  component?: PluginSettingsSectionType;
+  settingsComponent?: PluginSettingsComponentType;
+
+  /**
+   * If true, the plugin settings will be saved automatically.
+   * Otherwise, the plugin settings will be saved when the user clicks the save button
+   * in the plugin details page.
+   * Defaults to false.
+   */
+  settingsAutoSave?: boolean;
 };
 
 export interface PluginsState {
@@ -89,14 +115,19 @@ export const pluginsSlice = createSlice({
      */
     setPluginSettingsComponent(
       state,
-      action: PayloadAction<{ name: string; component: PluginSettingsSectionType }>
+      action: PayloadAction<{
+        name: string;
+        component: PluginSettingsComponentType;
+        autoSave: boolean;
+      }>
     ) {
-      const { name, component } = action.payload;
+      const { name, component, autoSave } = action.payload;
       state.pluginSettings = state.pluginSettings.map(plugin => {
         if (plugin.name === name) {
           return {
             ...plugin,
-            component,
+            settingsComponent: component,
+            settingsAutoSave: autoSave,
           };
         }
         return plugin;

@@ -3,11 +3,20 @@
 // import { registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
 // registerAppLogo(() => <p>My Logo</p>);
 
-import { AppLogoProps, registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
-import { SvgIcon } from '@mui/material';
+import {
+  PluginSettingsProps,
+  AppLogoProps,
+  registerAppLogo,
+  registerPluginSettings,
+} from '@kinvolk/headlamp-plugin/lib';
+import { SvgIcon, TextField } from '@mui/material';
+import { useEffect, useState } from 'react';
 import LogoWithTextLight from './icon-large-light.svg';
 import LogoLight from './icon-small-light.svg';
+import { ConfigStore } from '@kinvolk/headlamp-plugin/lib/plugin/pluginStore';
+// import {ConfigStore} from '@kinvolk/headlamp-plugin/lib/plugin'
 
+console.log('ConfigStore is', ConfigStore);
 /**
  * A simple logo using two different SVG files.
  * One for the small logo (used in mobile view), and a larger one used in desktop view.
@@ -56,3 +65,65 @@ if (show === 'simple') {
 } else {
   registerAppLogo(ReactiveLogo);
 }
+
+const AutoSaveInput = ({ onSave, defaultValue = '', delay = 1000 }) => {
+  const [value, setValue] = useState(defaultValue);
+  const [timer, setTimer] = useState(null);
+
+  const handleChange = event => {
+    const newValue = event.target.value;
+    setValue(newValue);
+
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    const newTimer = setTimeout(() => onSave(newValue), delay);
+    setTimer(newTimer);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [timer]);
+
+  return (
+    <TextField
+      value={value}
+      onChange={handleChange}
+      label="Autosave Input"
+      variant="outlined"
+      fullWidth
+    />
+  );
+};
+
+const Settings: React.FC<PluginSettingsProps> = () => {
+  interface pluginConfig {
+    url: string;
+  }
+
+  console.log('ConfigStore is', ConfigStore);
+  const store = new ConfigStore<pluginConfig>('change-logo');
+  const config = store.get();
+
+  const [currentConfig, setCurrentConfig] = useState<pluginConfig>(config);
+
+  function handleSave(value) {
+    const updatedConfig = { url: value };
+    store.set(updatedConfig);
+    setCurrentConfig(store.get());
+  }
+
+  return (
+    <>
+      Test: <AutoSaveInput defaultValue={currentConfig?.url} onSave={handleSave} />
+    </>
+  );
+};
+
+console.log('registering settings');
+registerPluginSettings('change-logo', Settings, true);

@@ -2,6 +2,7 @@ import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { combineReducers } from 'redux';
 import notificationsReducer from '../../components/App/Notifications/notificationsSlice';
 import themeReducer from '../../components/App/themeSlice';
+import pluginConfigReducer from '../../plugin/pluginConfigSlice';
 import pluginsReducer from '../../plugin/pluginsSlice';
 import actionButtons from '../actionButtonsSlice';
 import clusterAction from '../clusterActionSlice';
@@ -26,6 +27,7 @@ const reducers = combineReducers({
   detailsViewSection: detailsViewSectionReducer,
   routes: routesReducer,
   sidebar: sidebarReducer,
+  pluginConfigs: pluginConfigReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;

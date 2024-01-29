@@ -1594,3 +1594,17 @@ function getClusterDefaultNamespace(cluster: string, checkSettings?: boolean): s
 
   return defaultNamespace;
 }
+
+/**
+ * Deletes the plugin with the given name.
+ * @param name The name of the plugin to delete.
+ *
+ */
+export function deletePlugin(name: string) {
+  return request(
+    `/plugins/${name}`,
+    { method: 'DELETE', headers: { ...getHeadlampAPIHeaders() } },
+    false,
+    false
+  );
+}

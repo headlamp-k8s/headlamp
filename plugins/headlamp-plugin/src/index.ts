@@ -33,6 +33,7 @@ import Registry, {
   registerSidebarEntryFilter,
   registerPluginSettings
 } from './plugin/registry';
+import { PluginSettingsProps } from './plugin/pluginsSlice';
 
 // We export k8s (lowercase) since someone may use it as we do in the Headlamp source code.
 export {
@@ -63,4 +64,4 @@ export {
   registerPluginSettings,
 };
 
-export type { AppLogoProps, ClusterChooserProps, DetailsViewSectionProps, DefaultSidebars };
+export type { AppLogoProps, ClusterChooserProps, DetailsViewSectionProps, DefaultSidebars,PluginSettingsProps };

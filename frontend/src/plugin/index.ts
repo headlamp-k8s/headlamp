@@ -7,6 +7,7 @@ import semver from 'semver';
 import helpers from '../helpers';
 import { Headlamp, Plugin } from './lib';
 import { PluginInfo } from './pluginsSlice';
+import { ConfigStore } from './pluginStore';
 import Registry, * as registryToExport from './registry';
 
 window.pluginLib = {
@@ -37,6 +38,7 @@ window.pluginLib = {
   Notification: require('../lib/notification'),
   Headlamp,
   Plugin,
+  ConfigStore,
   ...registryToExport,
 };
 
