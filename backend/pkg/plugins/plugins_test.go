@@ -319,3 +319,42 @@ func TestPopulatePluginsCache(t *testing.T) {
 	require.True(t, ok)
 	require.Empty(t, pluginListArr)
 }
+
+// TestDelete checks the Delete function.
+func TestDelete(t *testing.T) {
+	tempDir, err := os.MkdirTemp("", "testdelete")
+	require.NoError(t, err)
+
+	defer os.RemoveAll(tempDir) // clean up
+
+	// Create a temporary file
+	tempFile, err := os.CreateTemp(tempDir, "testfile")
+	require.NoError(t, err)
+	tempFile.Close() // Close the file
+
+	// Test cases
+	tests := []struct {
+		pluginDir  string
+		pluginName string
+		expectErr  bool
+	}{
+		{pluginDir: tempDir, pluginName: tempFile.Name(), expectErr: false},          // Existing file
+		{pluginDir: tempDir, pluginName: "non-existent-directory", expectErr: false}, // Non-existent file
+		{pluginDir: tempDir, pluginName: "../", expectErr: true},                     // Directory traversal
+
+	}
+
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.pluginName, func(t *testing.T) {
+			err := plugins.Delete(tt.pluginDir, tt.pluginName)
+			if tt.expectErr {
+				assert.Error(t, err, "Delete should return an error")
+			} else {
+				// check if the file exists
+				_, err := os.Stat(path.Join(tt.pluginDir, tt.pluginName))
+				assert.True(t, os.IsNotExist(err), "File should not exist")
+			}
+		})
+	}
+}
