@@ -212,3 +212,8 @@ func HandlePluginReload(cache cache.Cache[interface{}], w http.ResponseWriter) {
 		}
 	}
 }
+
+// Delete deletes the plugin from the plugin directory.
+func Delete(name string) error {
+	return os.RemoveAll(name)
+}

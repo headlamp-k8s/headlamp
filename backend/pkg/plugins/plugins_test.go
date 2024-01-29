@@ -2,6 +2,7 @@ package plugins_test
 
 import (
 	"context"
+	"fmt"
 	"net/http/httptest"
 	"os"
 	"path"
@@ -318,4 +319,38 @@ func TestPopulatePluginsCache(t *testing.T) {
 	pluginListArr, ok := pluginList.([]string)
 	require.True(t, ok)
 	require.Empty(t, pluginListArr)
+}
+
+// TestDelete checks the Delete function
+func TestDelete(t *testing.T) {
+	tempDir, err := os.MkdirTemp("", "testdelete")
+	require.NoError(t, err)
+	defer os.RemoveAll(tempDir) // clean up
+
+	// Create a temporary file
+	tempFile, err := os.CreateTemp(tempDir, "testfile")
+	require.NoError(t, err)
+	tempFile.Close() // Close the file
+
+	// Test cases
+	tests := []struct {
+		name      string
+		expectErr bool
+	}{
+		{name: tempDir, expectErr: false},                  // Existing file
+		{name: "non-existent-directory", expectErr: false}, // Non-existent file
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			err := plugins.Delete(tt.name)
+			fmt.Println(err)
+			if tt.expectErr {
+				assert.Error(t, err, "Delete should return an error")
+			} else {
+				assert.NoError(t, err, "Delete should not return an error")
+			}
+			// Additional checks can be added here, such as verifying file removal
+		})
+	}
 }

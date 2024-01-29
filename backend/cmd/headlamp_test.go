@@ -503,3 +503,38 @@ func TestDrainAndCordonNode(t *testing.T) {
 		}
 	}
 }
+
+func TestDeletePlugin(t *testing.T) {
+	// create temp dir for plugins
+	tempDir, err := os.MkdirTemp("", "plugins")
+	require.NoError(t, err)
+	defer os.RemoveAll(tempDir)
+
+	// create plugin
+	pluginDir := tempDir + "/test-plugin"
+	err = os.Mkdir(pluginDir, 0o755)
+	require.NoError(t, err)
+
+	// create plugin file
+	pluginFile := pluginDir + "/main.js"
+	_, err = os.Create(pluginFile)
+	require.NoError(t, err)
+
+	cache := cache.New[interface{}]()
+	kubeConfigStore := kubeconfig.NewContextStore()
+
+	c := HeadlampConfig{
+		useInCluster:    false,
+		kubeConfigPath:  config.GetDefaultKubeConfigPath(),
+		cache:           cache,
+		kubeConfigStore: kubeConfigStore,
+		pluginDir:       tempDir,
+	}
+
+	handler := createHeadlampHandler(&c)
+
+	rr, err := getResponseFromRestrictedEndpoint(handler, "DELETE", "/plugins/test-plugin", nil)
+	require.NoError(t, err)
+
+	assert.Equal(t, http.StatusOK, rr.Code)
+}

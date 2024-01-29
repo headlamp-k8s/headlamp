@@ -239,6 +239,21 @@ func defaultKubeConfigPersistenceFile() (string, error) {
 // It serves plugin static files at “/plugins/” and “/static-plugins/”.
 // It disables caching and reloads plugin list base paths if not in-cluster.
 func addPluginRoutes(config *HeadlampConfig, r *mux.Router) {
+	r.HandleFunc("/plugins/{name}", func(w http.ResponseWriter, r *http.Request) {
+		if err := checkHeadlampBackendToken(w, r); err != nil {
+			return
+		}
+		pluginName := mux.Vars(r)["name"]
+		pluginPath := path.Join(config.pluginDir, pluginName)
+		err := plugins.Delete(pluginPath)
+		if err != nil {
+			fmt.Println("Error deleting plugin", err)
+			http.Error(w, "Error deleting plugin", http.StatusInternalServerError)
+			return
+		}
+		w.WriteHeader(http.StatusOK)
+	}).Methods("DELETE")
+
 	r.HandleFunc("/plugins", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		pluginsList, err := config.cache.Get(context.Background(), plugins.PluginListKey)
