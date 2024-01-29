@@ -7,6 +7,7 @@ import semver from 'semver';
 import helpers from '../helpers';
 import { eventAction, HeadlampEventType } from '../redux/headlampEventSlice';
 import store from '../redux/stores/store';
+import { ConfigStore } from './configStore';
 import { Headlamp, Plugin } from './lib';
 import { PluginInfo } from './pluginsSlice';
 import Registry, * as registryToExport from './registry';
@@ -18,6 +19,7 @@ window.pluginLib = {
     ? 'monaco-editor/esm/vs/editor/editor.api.js'
     : 'monaco-editor'),
   K8s: require('../lib/k8s'),
+  ConfigStore: ConfigStore,
   // Anything that is part of the lib/k8s/ folder should be imported after the K8s import, to
   // avoid circular dependencies' issues.
   Crd: require('../lib/k8s/crd'),
