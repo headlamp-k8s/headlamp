@@ -35,50 +35,52 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.registry}}/{{ .Values.image.repository }}:{{ .Values.image.tag | default (printf "v%s" .Chart.AppVersion) }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ with .Values.config.oidc }}
           env:
-            {{- with .Values.config.oidc.clientID }}
+            {{- if or .clientID (not .secret.create) }}
             - name: OIDC_CLIENT_ID
               valueFrom:
                 secretKeyRef:
-                  name: oidc
+                  name: {{ .secret.name }}
                   key: clientID
             {{- end }}
-            {{- with .Values.config.oidc.clientSecret }}
+            {{- if or .clientSecret (not .secret.create) }}
             - name: OIDC_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: oidc
+                  name: {{ .secret.name }}
                   key: clientSecret
             {{- end }}
-            {{- with .Values.config.oidc.issuerURL }}
+            {{- if or .issuerURL (not .secret.create) }}
             - name: OIDC_ISSUER_URL
               valueFrom:
                 secretKeyRef:
-                  name: oidc
+                  name: {{ .secret.name }}
                   key: issuerURL
             {{- end }}
-            {{- with .Values.config.oidc.scopes }}
+            {{- if or .scopes (not .secret.create) }}
             - name: OIDC_SCOPES
               valueFrom:
                 secretKeyRef:
-                  name: oidc
+                  name: {{ .secret.name }}
                   key: scopes
             {{- end }}
+          {{- end }}
           args:
             - "-in-cluster"
             {{- with .Values.config.pluginsDir}}
             - "-plugins-dir={{ . }}"
             {{- end }}
-            {{- with .Values.config.oidc.clientID }}
+            {{- if or .Values.config.oidc.clientID (not .Values.config.oidc.secret.create) }}
             - "-oidc-client-id=$(OIDC_CLIENT_ID)"
             {{- end }}
-            {{- with .Values.config.oidc.clientSecret }}
+            {{- if or .Values.config.oidc.clientSecret (not .Values.config.oidc.secret.create) }}
             - "-oidc-client-secret=$(OIDC_CLIENT_SECRET)"
             {{- end }}
-            {{- with .Values.config.oidc.issuerURL }}
+            {{- if or .Values.config.oidc.issuerURL (not .Values.config.oidc.secret.create) }}
             - "-oidc-idp-issuer-url=$(OIDC_ISSUER_URL)"
             {{- end }}
-            {{- with .Values.config.oidc.scopes }}
+            {{- if or .Values.config.oidc.scopes (not .Values.config.oidc.secret.create) }}
             - "-oidc-scopes=$(OIDC_SCOPES)"
             {{- end }}
             {{- with .Values.config.baseURL }}
