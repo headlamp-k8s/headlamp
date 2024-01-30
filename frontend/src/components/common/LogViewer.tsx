@@ -1,4 +1,4 @@
-import { Box, DialogContent, Grid, InputBase, Paper } from '@mui/material';
+import { Box, Button, DialogContent, Grid, InputBase, Paper } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import React, { useEffect } from 'react';
@@ -67,6 +67,15 @@ export interface LogViewerProps extends DialogProps {
   topActions?: JSX.Element[];
   open: boolean;
   xtermRef?: React.MutableRefObject<XTerminal | null>;
+  /**
+   * @description This is a callback function that is called when the user clicks on the reconnect button.
+   * @returns void
+   */
+  handleReconnect?: () => void;
+  /**
+   * @description This is a boolean that determines whether the reconnect button should be shown or not.
+   */
+  showReconnectButton?: boolean;
 }
 
 export function LogViewer(props: LogViewerProps) {
@@ -77,6 +86,8 @@ export function LogViewer(props: LogViewerProps) {
     xtermRef: outXtermRef,
     onClose,
     topActions = [],
+    handleReconnect,
+    showReconnectButton = false,
     ...other
   } = props;
   const [isFullScreen, setIsFullScreen] = React.useState(false);
@@ -210,6 +221,11 @@ export function LogViewer(props: LogViewerProps) {
           </Grid>
         </Grid>
         <Box className={classes.logBox}>
+          {showReconnectButton && (
+            <Button onClick={handleReconnect} color="info" variant="contained">
+              Reconnect
+            </Button>
+          )}
           <div
             id="xterm-container"
             ref={ref => setTerminalContainerRef(ref)}

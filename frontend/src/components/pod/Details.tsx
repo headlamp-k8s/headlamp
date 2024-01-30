@@ -56,6 +56,8 @@ function PodLogViewer(props: PodLogViewerProps) {
     logs: [],
     lastLineShown: -1,
   });
+  const [showReconnectButton, setShowReconnectButton] = React.useState(false);
+  const [cancelLogsStream, setCancelLogsStream] = React.useState<(() => void) | null>(null);
   const xtermRef = React.useRef<XTerminal | null>(null);
   const { t } = useTranslation();
 
@@ -109,6 +111,13 @@ function PodLogViewer(props: PodLogViewerProps) {
           showPrevious,
           showTimestamps,
           follow,
+          /**
+           * When the connection is lost, show the reconnect button.
+           * This will stop the current log stream.
+           */
+          onReconnectStop: () => {
+            setShowReconnectButton(true);
+          },
         });
       }
 
@@ -153,6 +162,38 @@ function PodLogViewer(props: PodLogViewerProps) {
     setFollow(follow => !follow);
   }
 
+  /**
+   * Handle the reconnect button being clicked.
+   * This will start a new log stream and hide the reconnect button.
+   */
+  function handleReconnect() {
+    // If there's an existing log stream, cancel it
+    if (cancelLogsStream) {
+      cancelLogsStream();
+    }
+
+    // Start a new log stream
+    const newCancelLogsStream = item.getLogs(container, debouncedSetState, {
+      tailLines: lines,
+      showPrevious,
+      showTimestamps,
+      follow,
+      /**
+       * When the connection is lost, show the reconnect button.
+       * This will stop the current log stream.
+       */
+      onReconnectStop: () => {
+        setShowReconnectButton(true);
+      },
+    });
+
+    // Set the cancelLogsStream function to the new one
+    setCancelLogsStream(() => newCancelLogsStream);
+
+    // Hide the reconnect button
+    setShowReconnectButton(false);
+  }
+
   return (
     <LogViewer
       title={t('glossary|Logs: {{ itemName }}', { itemName: item.getName() })}
@@ -161,6 +202,8 @@ function PodLogViewer(props: PodLogViewerProps) {
       onClose={onClose}
       logs={logs.logs}
       xtermRef={xtermRef}
+      handleReconnect={handleReconnect}
+      showReconnectButton={showReconnectButton}
       topActions={[
         <FormControl className={classes.containerFormControl}>
           <InputLabel shrink id="container-name-chooser-label">
