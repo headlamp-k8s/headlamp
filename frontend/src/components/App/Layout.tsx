@@ -145,12 +145,18 @@ export default function Layout({}: LayoutProps) {
             dispatch(setConfig(configToStore));
           }
         }
+
+        /**
+         * Fetches the stateless cluster config from the indexDB and then sends the backend to parse it
+         * only if the stateless cluster config is enabled in the backend.
+         */
+        if (config?.isDynamicClusterEnabled) {
+          fetchStatelessClusterKubeConfigs(dispatch);
+        }
       })
       .catch(err => {
         console.error('Error getting config:', err);
       });
-
-    fetchStatelessClusterKubeConfigs(dispatch);
   };
 
   return (
