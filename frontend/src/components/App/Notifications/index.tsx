@@ -184,7 +184,7 @@ export default function Notifications() {
   const history = useHistory();
 
   useEffect(() => {
-    let notificationsToShow: NotificationIface[] = [];
+    const notificationsToShow: NotificationIface[] = [];
     let currentNotifications = notifications;
     let changed = false;
 
@@ -194,18 +194,16 @@ export default function Notifications() {
     }
 
     if (events && events.length !== 0) {
-      const eventIds = new Set<string>();
-      notificationsToShow = events
+      events
         .filter((event: KubeEvent) => event.type !== 'Normal')
-        .map((event: KubeEvent) => {
-          const notificationIndexFromStore = currentNotifications.findIndex(
+        .forEach((event: KubeEvent) => {
+          const alreadyInNotificationList = !!currentNotifications.find(
             notification => notification.id === event.metadata.uid
           );
-          if (notificationIndexFromStore !== -1) {
-            return currentNotifications[notificationIndexFromStore];
-          }
 
-          eventIds.add(event.metadata.uid);
+          if (alreadyInNotificationList) {
+            return;
+          }
 
           const message = event.message;
           const date = new Date(event.metadata.creationTimestamp).getTime();
@@ -215,23 +213,15 @@ export default function Notifications() {
 
           changed = true;
 
-          return notification.toJSON();
+          const notiJson = notification.toJSON();
+          notificationsToShow.push(notiJson);
         });
-
-      // Ensure that notifications which are not part of this stream of events are still shown
-      currentNotifications.forEach(notification => {
-        if (!eventIds.has(notification.id)) {
-          notificationsToShow.push(notification);
-        }
-      });
-    } else {
-      notificationsToShow = currentNotifications;
     }
 
     // It's important to dispatch only if something changed, otherwise we will get into an infinite loop.
     if (changed) {
       // we are here means the events list changed and we have now new set of events, so we will notify the store about it
-      dispatch(setNotifications(notificationsToShow));
+      dispatch(setNotifications(notificationsToShow.concat(currentNotifications)));
     }
   }, [events, notifications]);
 
