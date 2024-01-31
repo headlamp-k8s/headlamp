@@ -124,6 +124,21 @@ const podData: ResourceTableFromResourceClassProps = {
   resourceClass: MyPod as KubeObject,
 };
 
+const withHiddenCols: ResourceTableFromResourceClassProps = {
+  columns: [
+    'name',
+    'namespace',
+    {
+      label: 'UID',
+      getter: (pod: Pod) => pod.metadata.uid,
+      show: false,
+    },
+    'age',
+  ],
+  resourceClass: MyPod as KubeObject,
+  hideColumns: ['namespace'],
+};
+
 export const NoFilter = TemplateWithFilter.bind({});
 NoFilter.args = {
   resourceTableArgs: podData,
@@ -134,4 +149,10 @@ export const NameSearch = TemplateWithFilter.bind({});
 NameSearch.args = {
   resourceTableArgs: podData,
   search: 'mypod3',
+};
+
+export const WithHiddenCols = TemplateWithFilter.bind({});
+WithHiddenCols.args = {
+  resourceTableArgs: withHiddenCols,
+  search: '',
 };
