@@ -1,3 +1,4 @@
+import { ConfigStore } from '@kinvolk/headlamp-plugin/lib';
 import { Typography } from '@mui/material';
 
 export interface MessageProps {
@@ -17,9 +18,13 @@ export interface MessageProps {
  *
  */
 export default function Message({ msg, error }: MessageProps) {
+  const config = new ConfigStore<{ errorMessage?: string }>('@kinvolk/headlamp-pod-counter');
+  const useConf = config.useConfig();
+  const conf = useConf();
+
   return (
     <Typography color="textPrimary" sx={{ fontStyle: 'italic' }}>
-      {!error ? `# Pods: ${msg}` : 'Uh, pods!?'}
+      {!error ? `# Pods: ${msg}` : conf?.errorMessage ? conf?.errorMessage : 'Uh, pods!?'}
     </Typography>
   );
 }
