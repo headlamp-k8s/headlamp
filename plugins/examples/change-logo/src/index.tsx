@@ -3,11 +3,15 @@
 // import { registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
 // registerAppLogo(() => <p>My Logo</p>);
 
-import { AppLogoProps, registerAppLogo } from '@kinvolk/headlamp-plugin/lib';
-import { SvgIcon } from '@mui/material';
+import {
+  AppLogoProps,
+  registerAppLogo,
+  registerPluginSettings,
+} from '@kinvolk/headlamp-plugin/lib';
+import { Avatar, SvgIcon } from '@mui/material';
 import LogoWithTextLight from './icon-large-light.svg';
 import LogoLight from './icon-small-light.svg';
-
+import Settings, { store } from './settings';
 /**
  * A simple logo using two different SVG files.
  * One for the small logo (used in mobile view), and a larger one used in desktop view.
@@ -18,7 +22,12 @@ import LogoLight from './icon-small-light.svg';
 function SimpleLogo(props: AppLogoProps) {
   const { logoType, className } = props;
 
-  return (
+  const useConf = store.useConfig();
+  const config = useConf();
+
+  return config?.url ? (
+    <Avatar src={config?.url} alt="logo" className={className} />
+  ) : (
     <SvgIcon
       className={className}
       component={logoType === 'large' ? LogoWithTextLight : LogoLight}
@@ -56,3 +65,12 @@ if (show === 'simple') {
 } else {
   registerAppLogo(ReactiveLogo);
 }
+
+/**
+ * Register the settings component for the plugin.
+ *
+ * In this example, the settings component allows users to update the logo URL.
+ * The updated URL is automatically saved to the configStore.
+ */
+
+registerPluginSettings('change-logo', Settings, false);
