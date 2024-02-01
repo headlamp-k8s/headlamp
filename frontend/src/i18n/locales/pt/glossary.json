@@ -94,6 +94,8 @@
   "Drained node {{name}}.": "Node {{name}} esvaziado.",
   "Failed to drain node {{name}}.": "Falha ao esvaziar o node {{name}}.",
   "Draining node {{name}} cancelled.": "Esvaziamento do node {{name}} cancelado.",
+  "Drain Node": "",
+  "Are you sure you want to drain the node {{name}}?": "",
   "Uncordon": "Desbloquear",
   "Cordon": "Bloquear",
   "Drain": "Esvaziar",

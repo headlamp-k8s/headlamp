@@ -94,6 +94,8 @@
   "Drained node {{name}}.": "Drained node {{name}}.",
   "Failed to drain node {{name}}.": "Failed to drain node {{name}}.",
   "Draining node {{name}} cancelled.": "Draining node {{name}} cancelled.",
+  "Drain Node": "Drain Node",
+  "Are you sure you want to drain the node {{name}}?": "Are you sure you want to drain the node {{name}}?",
   "Uncordon": "Uncordon",
   "Cordon": "Cordon",
   "Drain": "Drain",

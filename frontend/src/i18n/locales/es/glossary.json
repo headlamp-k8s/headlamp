@@ -94,6 +94,8 @@
   "Drained node {{name}}.": "Nodo {{name}} drenado.",
   "Failed to drain node {{name}}.": "Error al drenar nodo {{name}}.",
   "Draining node {{name}} cancelled.": "Drenado de nodo {{name}} cancelado.",
+  "Drain Node": "",
+  "Are you sure you want to drain the node {{name}}?": "",
   "Uncordon": "Desbloquear",
   "Cordon": "Bloquear",
   "Drain": "Drenar",
