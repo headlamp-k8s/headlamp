@@ -1,11 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit';
 import notificationsReducer, {
   defaultMaxNotificationsStored,
+  loadNotifications,
   Notification,
   setNotifications,
   storeNotifications,
   updateNotifications,
 } from './notificationsSlice';
+
+describe('loadNotifications', () => {
+  it('should return an empty array when localStorage.getItem returns null', () => {
+    const orig = Storage.prototype.getItem;
+    Storage.prototype.getItem = jest.fn(() => null);
+    const result = loadNotifications();
+    expect(result).toEqual([]);
+    Storage.prototype.getItem = orig;
+  });
+});
 
 describe('notifications', () => {
   it('should limit message length', () => {
