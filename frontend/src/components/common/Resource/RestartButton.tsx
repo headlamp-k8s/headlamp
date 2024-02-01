@@ -32,7 +32,7 @@ export function RestartButton(props: RestartButtonProps) {
     try {
       const clonedItem = _.cloneDeep(item);
       clonedItem.spec.template.metadata.annotations = {
-        ...clonedItem.metadata.annotations,
+        ...clonedItem.spec.template.metadata.annotations,
         'kubectl.kubernetes.io/restartedAt': new Date().toISOString(),
       };
       apply(clonedItem.jsonData);
