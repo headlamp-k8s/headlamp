@@ -137,8 +137,8 @@ export default function Terminal(props: TerminalProps) {
     fitAddon.fit();
   }
 
-  function send(channel: number, data: string) {
-    const socket = execOrAttachRef.current!.getSocket();
+  async function send(channel: number, data: string) {
+    const socket = await execOrAttachRef.current!.getSocket();
 
     // We should only send data if the socket is ready.
     if (!socket || socket.readyState !== 1) {

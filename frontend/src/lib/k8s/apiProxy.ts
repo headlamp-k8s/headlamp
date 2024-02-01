@@ -1258,7 +1258,7 @@ export interface StreamArgs {
  * @param cb - The callback function to receive the streamed results.
  * @param args - Additional arguments to configure the stream.
  *
- * @returns An object with two functions: `cancel`, which can be called to cancel
+ * @returns An object with two Promises: `cancel`, which can be called to cancel
  * the stream, and `getSocket`, which returns the WebSocket object.
  */
 export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
@@ -1276,13 +1276,41 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
 
   return { cancel, getSocket };
 
+  /**
+   * This function returns a promise that resolves to the WebSocket object.
+   * It is a hack to get around the fact that the WebSocket object is not
+   * available immediately after calling `stream`. It is only available after
+   * the WebSocket connection is established, which can take some time.
+   * @returns A promise that resolves to the WebSocket object.
+   */
   function getSocket() {
-    return connection ? connection.socket : null;
+    return new Promise<WebSocket | null>(resolve => {
+      const intervalID = setInterval(() => {
+        if (connection && connection.socket) {
+          resolve(connection.socket);
+          clearInterval(intervalID);
+        }
+      }, 0);
+    });
   }
 
+  /**
+   * This function returns a promise that resolves to the WebSocket connection
+   * close function. It is a hack to get around the fact that the WebSocket
+   * connection is not available immediately after calling `stream`. It is only
+   * available after the WebSocket connection is established, which can take some time.
+   * @returns A promise which resolves to the WebSocket connection close function.
+   */
   function cancel() {
-    if (connection) connection.close();
-    isCancelled = true;
+    return new Promise(resolve => {
+      const intervalID = setInterval(() => {
+        if (connection) {
+          resolve(connection.close());
+          isCancelled = true;
+          clearInterval(intervalID);
+        }
+      }, 0);
+    });
   }
 
   async function connect() {
