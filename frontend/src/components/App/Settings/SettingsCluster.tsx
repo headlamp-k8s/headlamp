@@ -6,7 +6,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import helpers, { ClusterSettings } from '../../../helpers';
+import helpers, { ClusterSettings, DEFAULT_NODE_SHELL_LINUX_IMAGE } from '../../../helpers';
 import { useCluster, useClustersConf } from '../../../lib/k8s';
 import { deleteCluster } from '../../../lib/k8s/apiProxy';
 import { setConfig } from '../../../redux/configSlice';
@@ -53,6 +53,7 @@ export default function SettingsCluster() {
   const { t } = useTranslation(['translation']);
   const [defaultNamespace, setDefaultNamespace] = React.useState('default');
   const [userDefaultNamespace, setUserDefaultNamespace] = React.useState('');
+  const [nodeShellLinuxImage, setNodeShellLinuxImage] = React.useState('');
   const [newAllowedNamespace, setNewAllowedNamespace] = React.useState('');
   const [clusterSettings, setClusterSettings] = React.useState<ClusterSettings | null>(null);
   const classes = useStyles();
@@ -127,8 +128,30 @@ export default function SettingsCluster() {
     };
   }, [userDefaultNamespace]);
 
+  React.useEffect(() => {
+    let timeoutHandle: NodeJS.Timeout | null = null;
+
+    if (isEditingNodeShellLinuxImage()) {
+      // We store the node shell image after a timeout.
+      timeoutHandle = setTimeout(() => {
+        storeNewNodeShellLinuxImage(nodeShellLinuxImage);
+      }, 1000);
+    }
+
+    return () => {
+      if (timeoutHandle) {
+        clearTimeout(timeoutHandle);
+        timeoutHandle = null;
+      }
+    };
+  }, [nodeShellLinuxImage]);
+
   function isEditingDefaultNamespace() {
     return clusterSettings?.defaultNamespace !== userDefaultNamespace;
+  }
+
+  function isEditingNodeShellLinuxImage() {
+    return clusterSettings?.nodeShellLinuxImage !== nodeShellLinuxImage;
   }
 
   if (!cluster) {
@@ -159,6 +182,14 @@ export default function SettingsCluster() {
       if (isValidNamespaceFormat(namespace)) {
         newSettings.defaultNamespace = actualNamespace;
       }
+      return newSettings;
+    });
+  }
+
+  function storeNewNodeShellLinuxImage(image: string) {
+    setClusterSettings((settings: ClusterSettings | null) => {
+      const newSettings = { ...(settings || {}) };
+      newSettings.nodeShellLinuxImage = image;
       return newSettings;
     });
   }
@@ -293,6 +324,35 @@ export default function SettingsCluster() {
                     ))}
                   </Box>
                 </>
+              ),
+            },
+            {
+              name: t('translation|Node Shell Linux Image'),
+              value: (
+                <TextField
+                  onChange={event => {
+                    let value = event.target.value;
+                    value = value.replace(' ', '');
+                    setNodeShellLinuxImage(value);
+                  }}
+                  value={nodeShellLinuxImage}
+                  placeholder={DEFAULT_NODE_SHELL_LINUX_IMAGE}
+                  helperText={t(
+                    'translation|The default image is used for dropping a shell into a node (when not specified directly).'
+                  )}
+                  InputProps={{
+                    endAdornment: isEditingNodeShellLinuxImage() ? (
+                      <Icon
+                        width={24}
+                        color={theme.palette.text.secondary}
+                        icon="mdi:progress-check"
+                      />
+                    ) : (
+                      <Icon width={24} icon="mdi:check-bold" />
+                    ),
+                    className: classes.input,
+                  }}
+                />
               ),
             },
           ]}
