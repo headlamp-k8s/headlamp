@@ -237,7 +237,7 @@ exports[`Storyshots ReplicaSet/List Replica Sets 1`] = `
                 >
                   Age
                   <button
-                    aria-label="sort swap"
+                    aria-label="sort up"
                     class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                     tabindex="0"
                     type="button"
@@ -253,93 +253,6 @@ exports[`Storyshots ReplicaSet/List Replica Sets 1`] = `
             <tbody
               class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
             >
-              <tr
-                class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
-              >
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    headlamp-a123456
-                  </a>
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    default
-                  </a>
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  0
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  2
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  0
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  <span
-                    aria-label="headlamp"
-                    class=""
-                    data-mui-internal-clone-element="true"
-                  >
-                    headlamp
-                  </span>
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  <span
-                    aria-label="ghcr.io/headlamp-k8s/headlamp:latest"
-                    class=""
-                    data-mui-internal-clone-element="true"
-                  >
-                    ghcr.io/headlamp-k8s/headlamp:latest
-                  </span>
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  <span
-                    aria-label="k8s-app=headlamp
-pod-template-hash=a123456"
-                    class=""
-                    data-mui-internal-clone-element="true"
-                  >
-                    k8s-app=headlamp
-pod-template-hash=a123456
-                  </span>
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                  style="text-align: right;"
-                >
-                  <p
-                    aria-label="2023-05-25T05:15:05.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
-                    data-mui-internal-clone-element="true"
-                  >
-                    3mo
-                    <span />
-                  </p>
-                </td>
-              </tr>
               <tr
                 class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
               >
@@ -421,6 +334,93 @@ pod-template-hash=b123456
                 >
                   <p
                     aria-label="2023-07-07T05:36:02.000Z"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    data-mui-internal-clone-element="true"
+                  >
+                    3mo
+                    <span />
+                  </p>
+                </td>
+              </tr>
+              <tr
+                class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    href="/"
+                  >
+                    headlamp-a123456
+                  </a>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    href="/"
+                  >
+                    default
+                  </a>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  0
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  2
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  0
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  <span
+                    aria-label="headlamp"
+                    class=""
+                    data-mui-internal-clone-element="true"
+                  >
+                    headlamp
+                  </span>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  <span
+                    aria-label="ghcr.io/headlamp-k8s/headlamp:latest"
+                    class=""
+                    data-mui-internal-clone-element="true"
+                  >
+                    ghcr.io/headlamp-k8s/headlamp:latest
+                  </span>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  <span
+                    aria-label="k8s-app=headlamp
+pod-template-hash=a123456"
+                    class=""
+                    data-mui-internal-clone-element="true"
+                  >
+                    k8s-app=headlamp
+pod-template-hash=a123456
+                  </span>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                  style="text-align: right;"
+                >
+                  <p
+                    aria-label="2023-05-25T05:15:05.000Z"
                     class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >

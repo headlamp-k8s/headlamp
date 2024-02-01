@@ -148,8 +148,10 @@ function Table(props: ResourceTableProps) {
       });
     }
 
+    let shouldSortOnAge = false;
+
     const resourceCols: ResourceTableColumnWithDefaultShow[] = processedColumns
-      .map((col, index) => {
+      .map(col => {
         if (typeof col !== 'string') {
           return col;
         }
@@ -171,9 +173,7 @@ function Table(props: ResourceTableProps) {
               },
             };
           case 'age':
-            if (sortingColumn === undefined) {
-              sortingColumn = index + 1;
-            }
+            shouldSortOnAge = defaultSortingColumn === undefined;
             return {
               id: 'age',
               label: t('translation|Age'),
@@ -240,6 +240,12 @@ function Table(props: ResourceTableProps) {
 
     // Filter out columns that have show set to false.
     const cols = resourceCols.filter(col => col.show !== false);
+
+    if (shouldSortOnAge) {
+      // Sorting column on SimpleTable starts at 1.
+      sortingColumn = cols.findIndex(col => col.id === 'age') + 1;
+    }
+
     return [resourceCols, cols, sortingColumn];
   }, [
     columns,

@@ -206,7 +206,7 @@ exports[`Storyshots Pod/PodListView Items 1`] = `
               >
                 Age
                 <button
-                  aria-label="sort swap"
+                  aria-label="sort up"
                   class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"

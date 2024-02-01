@@ -160,7 +160,7 @@ exports[`Storyshots node/List Nodes 1`] = `
                 >
                   Age
                   <button
-                    aria-label="sort swap"
+                    aria-label="sort up"
                     class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
                     tabindex="0"
                     type="button"
@@ -176,79 +176,6 @@ exports[`Storyshots node/List Nodes 1`] = `
             <tbody
               class="MuiTableBody-root css-apqrd9-MuiTableBody-root"
             >
-              <tr
-                class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
-              >
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  <a
-                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
-                    href="/"
-                  >
-                    my-linux-node
-                  </a>
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  <span
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
-                    style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
-                  >
-                    Yes
-                  </span>
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-chartCell css-1k1onho-MuiTableCell-root"
-                >
-                  <div
-                    class="recharts-responsive-container makeStyles-container"
-                    style="width: 95%; height: 20px;"
-                  />
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-chartCell css-1k1onho-MuiTableCell-root"
-                >
-                  <div
-                    class="recharts-responsive-container makeStyles-container"
-                    style="width: 95%; height: 20px;"
-                  />
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  agent
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  10.2.3.4
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                >
-                  v1.23.12
-                </td>
-                <td
-                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
-                  style="text-align: right;"
-                >
-                  <p
-                    aria-label="2023-06-30T11:49:44.000Z"
-                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
-                    data-mui-internal-clone-element="true"
-                  >
-                    3mo
-                    <span />
-                  </p>
-                </td>
-              </tr>
               <tr
                 class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
               >
@@ -314,6 +241,79 @@ exports[`Storyshots node/List Nodes 1`] = `
                 >
                   <p
                     aria-label="2023-07-13T23:28:40.000Z"
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
+                    data-mui-internal-clone-element="true"
+                  >
+                    3mo
+                    <span />
+                  </p>
+                </td>
+              </tr>
+              <tr
+                class="MuiTableRow-root css-73w7uv-MuiTableRow-root"
+              >
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineHover css-srrjpp-MuiTypography-root-MuiLink-root"
+                    href="/"
+                  >
+                    my-linux-node
+                  </a>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  <span
+                    class="MuiTypography-root MuiTypography-body1 makeStyles-statusLabel css-1ezega9-MuiTypography-root"
+                    style="background-color: rgb(248, 255, 240); color: rgb(46, 125, 50);"
+                  >
+                    Yes
+                  </span>
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-chartCell css-1k1onho-MuiTableCell-root"
+                >
+                  <div
+                    class="recharts-responsive-container makeStyles-container"
+                    style="width: 95%; height: 20px;"
+                  />
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall makeStyles-chartCell css-1k1onho-MuiTableCell-root"
+                >
+                  <div
+                    class="recharts-responsive-container makeStyles-container"
+                    style="width: 95%; height: 20px;"
+                  />
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  agent
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  10.2.3.4
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                >
+                  v1.23.12
+                </td>
+                <td
+                  class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
+                  style="text-align: right;"
+                >
+                  <p
+                    aria-label="2023-06-30T11:49:44.000Z"
                     class="MuiTypography-root MuiTypography-body1 makeStyles-noWrap makeStyles-display css-1ezega9-MuiTypography-root"
                     data-mui-internal-clone-element="true"
                   >
