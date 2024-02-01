@@ -6,7 +6,8 @@ weight: 10
 A common use-case for any Kubernetes web UI is to deploy it in-cluster and
 set up an ingress server for having it available to users.
 
-The easiest way to install headlamp in your existing cluster is to use our [helm chart](../../../charts/headlamp/).
+The easiest way to install headlamp in your existing cluster is to
+use [helm](https://helm.sh/docs/intro/quickstart/) with our [helm chart](../../../charts/headlamp/).
 
 ```bash
 # first add our custom repo to your local helm repositories
