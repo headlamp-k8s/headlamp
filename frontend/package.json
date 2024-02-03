@@ -77,7 +77,6 @@
     "react-redux": "^7.2.5",
     "react-router": "^5.3.0",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "5.0.0",
     "react-window": "^1.8.7",
     "recharts": "^2.1.4",
     "semver": "^7.3.5",
@@ -95,7 +94,7 @@
   },
   "scripts": {
     "prestart": "npm run make-version",
-    "start": "cross-env HEADLAMP_BACKEND_TOKEN=headlamp react-scripts start",
+    "start": "cross-env HEADLAMP_BACKEND_TOKEN=headlamp vite",
     "prebuild": "npm run make-version",
     "build": "if-env PUBLIC_URL react-scripts build || cross-env PUBLIC_URL=./ react-scripts build --max_old_space_size=768 && npx shx rm -f build/frontend/index.baseUrl.html",
     "test": "cross-env UNDER_TEST=true react-scripts test",
@@ -197,6 +196,7 @@
     "@storybook/react-webpack5": "^7.6.7",
     "@testing-library/user-event": "^14.5.1",
     "@types/redux-mock-store": "^1.0.4",
+    "@vitejs/plugin-react": "^4.2.1",
     "fetch-mock": "^9.11.0",
     "http-proxy-middleware": "^2.0.1",
     "husky": "^4.3.8",
@@ -213,6 +213,8 @@
     "typedoc-hugo-theme": "1.0.0",
     "typedoc-plugin-markdown": "3.11.14",
     "typedoc-plugin-rename-defaults": "0.4.0",
+    "vite": "^5.0.12",
+    "vite-plugin-svgr": "^4.2.0",
     "vm-browserify": "^1.1.2"
   }
 }
