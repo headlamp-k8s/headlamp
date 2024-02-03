@@ -9,9 +9,9 @@ const appInfo = require('../app/package.json');
 const gitVersion = execSync('git rev-parse HEAD').toString().trim();
 
 const envContents = {
-  REACT_APP_HEADLAMP_VERSION: appInfo.version,
-  REACT_APP_HEADLAMP_GIT_VERSION: gitVersion,
-  REACT_APP_HEADLAMP_PRODUCT_NAME: appInfo.productName,
+  VITE_HEADLAMP_VERSION: appInfo.version,
+  VITE_HEADLAMP_GIT_VERSION: gitVersion,
+  VITE_HEADLAMP_PRODUCT_NAME: appInfo.productName,
 };
 
 function createEnvText() {

@@ -46,7 +46,7 @@ const verboseModDebug: string[] = [];
  *   If it was in a wrapper function it just shows the wrapper function line number.
  * - Turned off by default, and the message doesn't even get constructed if it's off.
  *   This is important do high frequency messages so not impact performance.
- * - ON/OFF via environment variable REACT_APP_DEBUG_VERBOSE='k8s/apiProxy'
+ * - ON/OFF via environment variable VITE_DEBUG_VERBOSE='k8s/apiProxy'
  * - ON/OFF via code debugVerbose('k8s/apiProxy').
  *   So can easily turn it on when debugging.
  * - Also can turn on just a function debugVerbose('k8s/apiProxy@refreshToken')
@@ -87,12 +87,12 @@ const verboseModDebug: string[] = [];
  *
  * To turn it on for multiple modules via environment variable:
  * ```bash
- * REACT_APP_DEBUG_VERBOSE="k8s/apiProxy i18n/config" make run-frontend
+ * VITE_DEBUG_VERBOSE="k8s/apiProxy i18n/config" make run-frontend
  * ```
  *
  * To turn it on via environment variable for all modules:
  * ```bash
- * REACT_APP_DEBUG_VERBOSE="all" make run-frontend
+ * VITE_DEBUG_VERBOSE="all" make run-frontend
  * ```
  */
 export function isDebugVerbose(modName: string): boolean {
@@ -101,11 +101,8 @@ export function isDebugVerbose(modName: string): boolean {
   }
 
   return (
-    process.env.REACT_APP_DEBUG_VERBOSE === 'all' ||
-    !!(
-      process.env.REACT_APP_DEBUG_VERBOSE &&
-      process.env.REACT_APP_DEBUG_VERBOSE?.indexOf(modName) !== -1
-    )
+    process.env.VITE_DEBUG_VERBOSE === 'all' ||
+    !!(process.env.VITE_DEBUG_VERBOSE && process.env.VITE_DEBUG_VERBOSE?.indexOf(modName) !== -1)
   );
 }
 
@@ -294,8 +291,8 @@ function setTablesRowsPerPage(perPage: number) {
  */
 function getVersion() {
   return {
-    VERSION: process.env.REACT_APP_HEADLAMP_VERSION,
-    GIT_VERSION: process.env.REACT_APP_HEADLAMP_GIT_VERSION,
+    VERSION: process.env.VITE_HEADLAMP_VERSION,
+    GIT_VERSION: process.env.VITE_HEADLAMP_GIT_VERSION,
   };
 }
 
@@ -303,7 +300,7 @@ function getVersion() {
  * @returns the product name of the app, or undefined if it's not set.
  */
 function getProductName(): string | undefined {
-  return process.env.REACT_APP_HEADLAMP_PRODUCT_NAME;
+  return process.env.VITE_HEADLAMP_PRODUCT_NAME;
 }
 
 export interface ClusterSettings {
@@ -359,7 +356,7 @@ function loadTableSettings(tableId: string): { id: string; show: boolean }[] {
  * The app also passes the token to the headlamp-server via HEADLAMP_BACKEND_TOKEN env var.
  */
 const backendToken =
-  process.env.REACT_APP_HEADLAMP_BACKEND_TOKEN ||
+  process.env.VITE_HEADLAMP_BACKEND_TOKEN ||
   new URLSearchParams(window.location.search).get('backendToken');
 
 /**
