@@ -96,7 +96,7 @@
     "prestart": "npm run make-version",
     "start": "cross-env HEADLAMP_BACKEND_TOKEN=headlamp vite",
     "prebuild": "npm run make-version",
-    "build": "cross-env PUBLIC_URL=./ vite build --max_old_space_size=768 && npx shx rm -f build/frontend/index.baseUrl.html",
+    "build": "cross-env PUBLIC_URL=./ NODE_OPTIONS=--max-old-space-size=8192 vite build && npx shx rm -f build/frontend/index.baseUrl.html",
     "test": "cross-env UNDER_TEST=true jest --config jest.config.ts",
     "lint": "eslint -c package.json --ext .js,.ts,.tsx src/ ../app/electron ../plugins/headlamp-plugin --ignore-pattern ../plugins/headlamp-plugin/template --ignore-pattern ../plugins/headlamp-plugin/lib/",
     "format": "prettier --config package.json --write src ../app/electron ../app/scripts ../plugins/headlamp-plugin/bin ../plugins/headlamp-plugin/config ../plugins/headlamp-plugin/template ../plugins/headlamp-plugin/test*.js ../plugins/headlamp-plugin/*.json ../plugins/headlamp-plugin/*.js",
