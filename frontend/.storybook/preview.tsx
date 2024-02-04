@@ -3,7 +3,7 @@ import themesConf from '../src/lib/themes';
 import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles';
 import StylesProvider from '@mui/styles/StylesProvider';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
-import { rest } from 'msw'
+import { rest } from 'msw';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -17,9 +17,7 @@ const darkTheme = themesConf['dark'];
 const lightTheme = themesConf['light'];
 
 const withThemeProvider = (Story, context) => {
-  const backgroundColor = context.globals.backgrounds
-    ? context.globals.backgrounds.value
-    : 'light';
+  const backgroundColor = context.globals.backgrounds ? context.globals.backgrounds.value : 'light';
   const theme = backgroundColor !== 'dark' ? lightTheme : darkTheme;
 
   const ourThemeProvider = (
@@ -29,17 +27,15 @@ const withThemeProvider = (Story, context) => {
       </ThemeProvider>
     </StyledEngineProvider>
   );
-  if (process.env.NODE_ENV !== 'test') {
+  if (import.meta.env.NODE_ENV !== 'test') {
     return ourThemeProvider;
   } else {
     const generateClassName = (rule, styleSheet) =>
       `${styleSheet?.options.classNamePrefix}-${rule.key}`;
 
     return (
-      <StylesProvider generateClassName={generateClassName}>
-        {ourThemeProvider}
-      </StylesProvider>
-    )
+      <StylesProvider generateClassName={generateClassName}>{ourThemeProvider}</StylesProvider>
+    );
   }
 };
 export const decorators = [withThemeProvider, mswDecorator];
@@ -77,18 +73,24 @@ export const parameters = {
       rest.get('http://localhost/api/v1/events', (_req, res, ctx) => {
         return res(ctx.json({}));
       }),
-      rest.post('http://localhost/apis/authorization.k8s.io/v1/selfsubjectaccessreviews', (_req, res, ctx) => {
-        return res(ctx.json({status: 200}));
-      }),
+      rest.post(
+        'http://localhost/apis/authorization.k8s.io/v1/selfsubjectaccessreviews',
+        (_req, res, ctx) => {
+          return res(ctx.json({ status: 200 }));
+        }
+      ),
       rest.get('http://localhost:4466/api/v1/namespaces', (_req, res, ctx) => {
         return res(ctx.json({}));
       }),
       rest.get('http://localhost:4466/api/v1/events', (_req, res, ctx) => {
         return res(ctx.json({}));
       }),
-      rest.post('http://localhost:4466/apis/authorization.k8s.io/v1/selfsubjectaccessreviews', (_req, res, ctx) => {
-        return res(ctx.json({status: 200}));
-      }),
-    ]
+      rest.post(
+        'http://localhost:4466/apis/authorization.k8s.io/v1/selfsubjectaccessreviews',
+        (_req, res, ctx) => {
+          return res(ctx.json({ status: 200 }));
+        }
+      ),
+    ],
   },
 };

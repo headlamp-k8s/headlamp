@@ -63,7 +63,7 @@ export default function LocaleSelect(props: LocaleSelectProps) {
   }
 
   // Select has a problem with aria-controls not being stable under test.
-  const extraInputProps = process.env.UNDER_TEST ? { 'aria-controls': 'under-test' } : {};
+  const extraInputProps = import.meta.env.UNDER_TEST ? { 'aria-controls': 'under-test' } : {};
 
   return (
     <FormControl className={classes.formControl} {...formControlProps}>

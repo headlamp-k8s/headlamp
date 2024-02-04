@@ -101,8 +101,11 @@ export function isDebugVerbose(modName: string): boolean {
   }
 
   return (
-    process.env.VITE_DEBUG_VERBOSE === 'all' ||
-    !!(process.env.VITE_DEBUG_VERBOSE && process.env.VITE_DEBUG_VERBOSE?.indexOf(modName) !== -1)
+    import.meta.env.VITE_DEBUG_VERBOSE === 'all' ||
+    !!(
+      import.meta.env.VITE_DEBUG_VERBOSE &&
+      import.meta.env.VITE_DEBUG_VERBOSE?.indexOf(modName) !== -1
+    )
   );
 }
 
@@ -174,7 +177,7 @@ export function addQuery(
  * @returns true if the app is in development mode.
  */
 function isDevMode(): boolean {
-  return !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+  return !import.meta.env.NODE_ENV || import.meta.env.NODE_ENV === 'development';
 }
 
 /**
@@ -213,7 +216,7 @@ declare global {
 }
 
 /**
- * @returns the baseUrl for the app based on window.headlampBaseUrl or process.env.PUBLIC_URL
+ * @returns the baseUrl for the app based on window.headlampBaseUrl or import.meta.env.PUBLIC_URL
  *
  * This could be either '' meaning /, or something like '/headlamp'.
  */
@@ -225,7 +228,7 @@ function getBaseUrl(): string {
   if (window?.headlampBaseUrl !== undefined) {
     baseUrl = window.headlampBaseUrl;
   } else {
-    baseUrl = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : '';
+    baseUrl = import.meta.env.PUBLIC_URL ? import.meta.env.PUBLIC_URL : '';
   }
 
   if (baseUrl === './' || baseUrl === '.' || baseUrl === '/') {
@@ -291,8 +294,8 @@ function setTablesRowsPerPage(perPage: number) {
  */
 function getVersion() {
   return {
-    VERSION: process.env.VITE_HEADLAMP_VERSION,
-    GIT_VERSION: process.env.VITE_HEADLAMP_GIT_VERSION,
+    VERSION: import.meta.env.VITE_HEADLAMP_VERSION,
+    GIT_VERSION: import.meta.env.VITE_HEADLAMP_GIT_VERSION,
   };
 }
 
@@ -300,7 +303,7 @@ function getVersion() {
  * @returns the product name of the app, or undefined if it's not set.
  */
 function getProductName(): string | undefined {
-  return process.env.VITE_HEADLAMP_PRODUCT_NAME;
+  return import.meta.env.VITE_HEADLAMP_PRODUCT_NAME;
 }
 
 export interface ClusterSettings {
@@ -356,7 +359,7 @@ function loadTableSettings(tableId: string): { id: string; show: boolean }[] {
  * The app also passes the token to the headlamp-server via HEADLAMP_BACKEND_TOKEN env var.
  */
 const backendToken =
-  process.env.VITE_HEADLAMP_BACKEND_TOKEN ||
+  import.meta.env.VITE_HEADLAMP_BACKEND_TOKEN ||
   new URLSearchParams(window.location.search).get('backendToken');
 
 /**

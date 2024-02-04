@@ -9,7 +9,7 @@ import store from '../redux/stores/store';
 let indexedDBtest: any;
 
 // Import 'fake-indexeddb' only in the testing environment
-if (process.env.NODE_ENV === 'test') {
+if (import.meta.env.NODE_ENV === 'test') {
   import('fake-indexeddb')
     .then(module => {
       indexedDBtest = module.indexedDB;
@@ -118,7 +118,7 @@ function handleDataBaseError(event: DatabaseErrorEvent, reject: (reason?: any) =
 export function storeStatelessClusterKubeconfig(kubeconfig: string): Promise<void> {
   return new Promise<void>(async (resolve, reject) => {
     const request =
-      process.env.NODE_ENV === 'test'
+      import.meta.env.NODE_ENV === 'test'
         ? indexedDBtest.open('kubeconfigs', 1)
         : indexedDB.open('kubeconfigs', 1);
 
@@ -176,7 +176,7 @@ export function storeStatelessClusterKubeconfig(kubeconfig: string): Promise<voi
 export function getStatelessClusterKubeConfigs(): Promise<string[]> {
   return new Promise<string[]>(async (resolve, reject) => {
     const request =
-      process.env.NODE_ENV === 'test'
+      import.meta.env.NODE_ENV === 'test'
         ? indexedDBtest.open('kubeconfigs', 1)
         : indexedDB.open('kubeconfigs', 1);
 
@@ -235,7 +235,7 @@ export function findKubeconfigByClusterName(clusterName: string): Promise<string
   return new Promise<string | null>(async (resolve, reject) => {
     try {
       const request =
-        process.env.NODE_ENV === 'test'
+        import.meta.env.NODE_ENV === 'test'
           ? indexedDBtest.open('kubeconfigs', 1)
           : indexedDB.open('kubeconfigs', 1);
 
@@ -316,7 +316,7 @@ export function getUserIdFromLocalStorage(): string {
  */
 function generateSecureToken(length = 16): string {
   const buffer = new Uint8Array(length);
-  if (process.env.NODE_ENV === 'test') {
+  if (import.meta.env.NODE_ENV === 'test') {
     // Use Math.random() in the testing environment
     return Array.from(buffer, () => Math.floor(Math.random() * 16).toString(16)).join('');
   }

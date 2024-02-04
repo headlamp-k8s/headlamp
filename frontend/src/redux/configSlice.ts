@@ -44,7 +44,7 @@ export interface ConfigState {
 export const defaultTableRowsPerPageOptions = [15, 25, 50];
 
 function defaultTimezone() {
-  return process.env.UNDER_TEST ? 'UTC' : Intl.DateTimeFormat().resolvedOptions().timeZone;
+  return import.meta.env.UNDER_TEST ? 'UTC' : Intl.DateTimeFormat().resolvedOptions().timeZone;
 }
 
 const storedSettings = JSON.parse(localStorage.getItem('settings') || '{}');

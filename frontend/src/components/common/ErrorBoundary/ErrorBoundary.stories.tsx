@@ -29,7 +29,7 @@ let BrokenNoFallback: StoryOrNull = () => 'disabled under test to avoid console 
 let BrokenFallback: StoryOrNull = () => 'disabled under test to avoid console spam';
 let BrokenFallbackElement: StoryOrNull = () => 'disabled under test to avoid console spam';
 
-if (process.env.UNDER_TEST !== 'true') {
+if (import.meta.env.UNDER_TEST !== 'true') {
   // These are only seen in the storybook, not under test.
   const BrokenTemplate: Story<ErrorBoundaryProps> = args => (
     <ErrorBoundary {...args}>

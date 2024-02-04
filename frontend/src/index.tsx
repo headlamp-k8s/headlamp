@@ -1,18 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import axe from '@axe-core/react';
+import axeCore from 'axe-core';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-if (process.env.NODE_ENV !== 'production') {
+if (import.meta.env.NODE_ENV !== 'production') {
   let alreadyWarned = false;
-  let axe = require('@axe-core/react');
-  if (axe.default) {
-    axe = axe.default; //changed to esm module sometimes?
-  }
-  const axeCore = require('axe-core');
 
-  if (process.env.VITE_SKIP_A11Y === 'false') {
+  if (import.meta.env.VITE_SKIP_A11Y === 'false') {
     function filterFalsePositives(results: typeof axeCore.AxeResults) {
       // React changes the dom quickly, but axe-core notices missing main in between rendering
       results.violations = results.violations.filter((v: any) => v.id !== 'landmark-one-main');

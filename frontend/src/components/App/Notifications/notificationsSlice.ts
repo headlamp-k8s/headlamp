@@ -172,7 +172,7 @@ function storeNotifications(
  * @returns An array of NotificationIface objects from localStorage.
  */
 export function loadNotifications(): NotificationIface[] {
-  const localStorageItem = global.localStorage.getItem('notifications');
+  const localStorageItem = localStorage.getItem('notifications');
   const notifications = JSON.parse(localStorageItem || '[]');
 
   // getting an error here .map is not a function here some times, so we return [] to handle this

@@ -55,7 +55,7 @@ export default function ReleaseNotes() {
             if (
               latestRelease &&
               semver.gt(latestRelease.name as string, currentBuildAppVersion) &&
-              !process.env.FLATPAK_ID
+              !import.meta.env.FLATPAK_ID
             ) {
               setReleaseDownloadURL(latestRelease.html_url);
             }
