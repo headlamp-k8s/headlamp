@@ -25,12 +25,13 @@ import SimpleEditor from './SimpleEditor';
 // Jest does not work with esm modules and 'monaco-editor' properly
 // It says it can't find the module when running the tests.
 let monaco: any;
-if (process.env.NODE_ENV === 'test') {
-  monaco = require('monaco-editor/esm/vs/editor/editor.api.js');
-} else {
-  // const monaco = monacoEditor;
-  monaco = require('monaco-editor');
-}
+(async () => {
+  monaco = await import(
+    import.meta.env.NODE_ENV === 'test'
+      ? 'monaco-editor/esm/vs/editor/editor.api.js'
+      : 'monaco-editor'
+  );
+})();
 
 const useStyle = makeStyles(theme => ({
   dialogContent: {
