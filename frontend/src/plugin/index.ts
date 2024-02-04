@@ -3,32 +3,31 @@
  * loading the plugins.
  * The lib.ts file should carry the bits to be used by plugins whereas
  */
-import semver from 'semver';
-import helpers from '../helpers';
-import { Headlamp, Plugin } from './lib';
-import { PluginInfo } from './pluginsSlice';
-import Registry, * as registryToExport from './registry';
-
-import * as ApiProxy from '../lib/k8s/apiProxy';
+import * as Iconify from '@iconify/react';
 import * as ReactMonacoEditor from '@monaco-editor/react';
-import * as K8s from '../lib/k8s';
-import * as Crd from '../lib/k8s/crd';
-import * as CommonComponents from '../components/common';
+import * as MuiLab from '@mui/lab';
 import * as MuiMaterial from '@mui/material';
 import * as MuiStyles from '@mui/styles';
-import * as MuiLab from '@mui/lab';
+import * as Lodash from 'lodash';
+import * as Notistack from 'notistack';
 import * as React from 'react';
 import * as ReactJSX from 'react/jsx-runtime';
 import * as ReactDOM from 'react-dom';
-import * as Recharts from 'recharts';
-import * as ReactRouter from 'react-router-dom';
 import * as ReactRedux from 'react-redux';
+import * as ReactRouter from 'react-router-dom';
+import * as Recharts from 'recharts';
+import semver from 'semver';
+import * as CommonComponents from '../components/common';
+import helpers from '../helpers';
+import * as K8s from '../lib/k8s';
+import * as ApiProxy from '../lib/k8s/apiProxy';
+import * as Crd from '../lib/k8s/crd';
+import * as Notification from '../lib/notification';
 import * as Router from '../lib/router';
 import * as Utils from '../lib/util';
-import * as Iconify from '@iconify/react';
-import * as Lodash from 'lodash';
-import * as Notistack from 'notistack';
-import * as Notification from '../lib/notification';
+import { Headlamp, Plugin } from './lib';
+import { PluginInfo } from './pluginsSlice';
+import Registry, * as registryToExport from './registry';
 
 let MonacoEditor: any;
 (async () => {

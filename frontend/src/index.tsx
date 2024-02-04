@@ -1,8 +1,8 @@
+import axe from '@axe-core/react';
+import axeCore from 'axe-core';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import axe from '@axe-core/react';
-import axeCore from 'axe-core';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
