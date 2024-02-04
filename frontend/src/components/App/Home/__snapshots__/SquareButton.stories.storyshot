@@ -8,14 +8,14 @@ exports[`Storyshots common/SquareButton Basic 1`] = `
     type="button"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1o0qjyj-MuiPaper-root-MuiCard-root"
     >
       <div
-        class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+        class="MuiCardContent-root css-d64700-MuiCardContent-root"
       >
         <span />
         <p
-          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-qscjxq-MuiTypography-root"
           title="Some label"
         >
           Some label
@@ -37,14 +37,14 @@ exports[`Storyshots common/SquareButton Different Icon Color 1`] = `
     type="button"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1o0qjyj-MuiPaper-root-MuiCard-root"
     >
       <div
-        class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+        class="MuiCardContent-root css-d64700-MuiCardContent-root"
       >
         <span />
         <p
-          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-qscjxq-MuiTypography-root"
           title="Some label"
         >
           Some label
@@ -66,14 +66,14 @@ exports[`Storyshots common/SquareButton Different Icon Size 1`] = `
     type="button"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1o0qjyj-MuiPaper-root-MuiCard-root"
     >
       <div
-        class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+        class="MuiCardContent-root css-d64700-MuiCardContent-root"
       >
         <span />
         <p
-          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-qscjxq-MuiTypography-root"
           title="Some label"
         >
           Some label
@@ -95,14 +95,14 @@ exports[`Storyshots common/SquareButton Primary 1`] = `
     type="button"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root makeStyles-root makeStyles-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1nmpgjc-MuiPaper-root-MuiCard-root"
     >
       <div
-        class="MuiCardContent-root makeStyles-content css-46bh2p-MuiCardContent-root"
+        class="MuiCardContent-root css-d64700-MuiCardContent-root"
       >
         <span />
         <p
-          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom makeStyles-label makeStyles-label css-zklona-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-11x8x5l-MuiTypography-root"
           title="Some label"
         >
           Some label

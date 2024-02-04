@@ -14,14 +14,6 @@ import { Link, NameValueTable, SectionBox } from '../../common';
 import ConfirmButton from '../../common/ConfirmButton';
 
 const useStyles = makeStyles(theme => ({
-  chipBox: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(0.5),
-    },
-    marginTop: theme.spacing(1),
-  },
   input: {
     maxWidth: 250,
   },
@@ -273,7 +265,17 @@ export default function SettingsCluster() {
                       className: classes.input,
                     }}
                   />
-                  <Box className={classes.chipBox} aria-label={t('translation|Allowed namespaces')}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      '& > *': {
+                        margin: theme.spacing(0.5),
+                      },
+                      marginTop: theme.spacing(1),
+                    }}
+                    aria-label={t('translation|Allowed namespaces')}
+                  >
                     {((clusterSettings || {}).allowedNamespaces || []).map(namespace => (
                       <Chip
                         key={namespace}
