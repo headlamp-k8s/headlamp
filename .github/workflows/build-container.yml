@@ -28,6 +28,18 @@ jobs:
       # now you can run kubectl to see the pods in the cluster
     - name: Try the cluster!
       run: kubectl get pods -A
+    - name: Make a .plugins folder for testing later
+      run: |
+        echo "Extract pod-counter plugin into .plugins folder, which will be copied into image later by 'make image'."
+        cd plugins/examples/pod-counter
+        npm install
+        npm run build
+        cd ../../../
+        cd plugins/headlamp-plugin
+        npm install
+        node bin/headlamp-plugin.js extract ../examples/pod-counter ../../.plugins/
+        cd ../../
+        ls -laR .plugins
     - name: Build image
       run: |
         export SHELL=/bin/bash
@@ -36,6 +48,12 @@ jobs:
         DOCKER_IMAGE_VERSION=latest DOCKER_PLUGINS_IMAGE_NAME=headlamp-plugins-test make build-plugins-container
         echo -n "verifying images:"
         docker images
+        echo "----------------------------"
+        echo "Test .plugins folder is copied to the right place in the image by 'make image'"
+        echo "--- Files in the image /headlamp/ folder: ---"
+        docker run --rm --entrypoint=/bin/sh ghcr.io/headlamp-k8s/headlamp:latest -c "cd /headlamp/ && find ."
+        echo "----- Checking if the .plugins/ are copied to the right place in the image -----"
+        docker run --rm --entrypoint=/bin/sh ghcr.io/headlamp-k8s/headlamp:latest -c "set -e; (cd /headlamp/plugins && [ -e pod-counter/package.json ] && [ -e pod-counter/main.js ]) || exit 1"
     - name: Deploy to cluster
       run:
         kubectl apply -f e2e-tests/kubernetes-headlamp-ci.yaml

@@ -53,13 +53,15 @@ RUN cat ./frontend/.env
 # Backwards compatibility, move plugin folder to only copy matching plugins.
 RUN mv plugins plugins-old || true
 
+# Copy a .plugins folder if it is there to ./plugins, otherwise create an empty one.
+# This is a Dockerfile quirky way to copy a folder if it exists, but also not fail if it is empty.
+COPY ./.plugi*s ./plugins
 RUN mkdir -p ./plugins
 
 # Backwards compatibility, copy any matching plugins found inside "./plugins-old" into "./plugins".
 # They should match plugins-old/MyFolder/main.js, otherwise they are not copied.
 RUN for i in $(find ./plugins-old/*/main.js); do plugin_name=$(echo $i|cut -d'/' -f3); mkdir -p plugins/$plugin_name; cp $i plugins/$plugin_name; done
-
-RUN for i in $(find ./.plugins/*/main.js); do plugin_name=$(echo $i|cut -d'/' -f3); mkdir -p plugins/$plugin_name; cp $i plugins/$plugin_name; done
+RUN for i in $(find ./plugins-old/*/package.json); do plugin_name=$(echo $i|cut -d'/' -f3); mkdir -p plugins/$plugin_name; cp $i plugins/$plugin_name; done
 
 # Static (officially shipped) plugins
 FROM --platform=${BUILDPLATFORM} frontend-build as static-plugins
@@ -93,4 +95,4 @@ USER headlamp
 EXPOSE 4466
 
 ENV HEADLAMP_STATIC_PLUGINS_DIR=/headlamp/static-plugins
-ENTRYPOINT ["/headlamp/headlamp-server", "-html-static-dir", "/headlamp/frontend"]
+ENTRYPOINT ["/headlamp/headlamp-server", "-html-static-dir", "/headlamp/frontend", "-plugins-dir", "/headlamp/plugins"]
