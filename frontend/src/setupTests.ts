@@ -5,6 +5,19 @@
 import '@testing-library/jest-dom';
 import 'jest-canvas-mock';
 
+jest.mock('./constants/envs', () => ({
+  NODE_ENV: 'test',
+  VITE_SKIP_A11Y: true,
+  UNDER_TEST: true,
+  FLATPAK_ID: '',
+  VITE_DEBUG_VERBOSE: 'k8s/apiProxy',
+  PUBLIC_URL: '.',
+  VITE_HEADLAMP_VERSION: '',
+  VITE_HEADLAMP_GIT_VERSION: '',
+  VITE_HEADLAMP_PRODUCT_NAME: '',
+  VITE_HEADLAMP_BACKEND_TOKEN: '',
+}));
+
 if (typeof TextDecoder === 'undefined' && typeof require !== 'undefined') {
   (global as any).TextDecoder = require('util').TextDecoder;
 }

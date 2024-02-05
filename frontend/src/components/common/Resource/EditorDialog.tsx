@@ -12,6 +12,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import * as yaml from 'js-yaml';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import env from '../../../constants';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
 import { getThemeName } from '../../../lib/themes';
 import { useId } from '../../../lib/util';
@@ -27,9 +28,7 @@ import SimpleEditor from './SimpleEditor';
 let monaco: any;
 (async () => {
   monaco = await import(
-    import.meta.env.NODE_ENV === 'test'
-      ? 'monaco-editor/esm/vs/editor/editor.api.js'
-      : 'monaco-editor'
+    env.NODE_ENV === 'test' ? 'monaco-editor/esm/vs/editor/editor.api.js' : 'monaco-editor'
   );
 })();
 

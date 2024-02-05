@@ -7,6 +7,7 @@ import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import env from '../../constants';
 import { supportedLanguages } from '../config';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -63,7 +64,7 @@ export default function LocaleSelect(props: LocaleSelectProps) {
   }
 
   // Select has a problem with aria-controls not being stable under test.
-  const extraInputProps = import.meta.env.UNDER_TEST ? { 'aria-controls': 'under-test' } : {};
+  const extraInputProps = env.UNDER_TEST ? { 'aria-controls': 'under-test' } : {};
 
   return (
     <FormControl className={classes.formControl} {...formControlProps}>

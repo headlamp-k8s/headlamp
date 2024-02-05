@@ -18,6 +18,7 @@ import * as ReactRouter from 'react-router-dom';
 import * as Recharts from 'recharts';
 import semver from 'semver';
 import * as CommonComponents from '../components/common';
+import env from '../constants';
 import helpers from '../helpers';
 import * as K8s from '../lib/k8s';
 import * as ApiProxy from '../lib/k8s/apiProxy';
@@ -32,9 +33,7 @@ import Registry, * as registryToExport from './registry';
 let MonacoEditor: any;
 (async () => {
   MonacoEditor = await import(
-    import.meta.env.NODE_ENV === 'test'
-      ? 'monaco-editor/esm/vs/editor/editor.api.js'
-      : 'monaco-editor'
+    env.NODE_ENV === 'test' ? 'monaco-editor/esm/vs/editor/editor.api.js' : 'monaco-editor'
   );
 })();
 

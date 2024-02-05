@@ -3,13 +3,14 @@ import axeCore from 'axe-core';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import env from './constants';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-if (import.meta.env.NODE_ENV !== 'production') {
+if (env.NODE_ENV !== 'production') {
   let alreadyWarned = false;
 
-  if (import.meta.env.VITE_SKIP_A11Y === 'false') {
+  if (env.VITE_SKIP_A11Y === 'false') {
     function filterFalsePositives(results: typeof axeCore.AxeResults) {
       // React changes the dom quickly, but axe-core notices missing main in between rendering
       results.violations = results.violations.filter((v: any) => v.id !== 'landmark-one-main');

@@ -3,6 +3,7 @@ import { Box, IconButton } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import env from '../../../constants';
 
 const useStyles = makeStyles({
   fullText: {
@@ -27,7 +28,7 @@ export default function ShowHideLabel(props: ShowHideLabelProps) {
   const classes = useStyles();
 
   const labelIdOrRandom = React.useMemo(() => {
-    if (!!labelId || !!import.meta.env.UNDER_TEST) {
+    if (!!labelId || !!env.UNDER_TEST) {
       return labelId;
     }
 

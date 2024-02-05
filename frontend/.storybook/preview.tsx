@@ -4,6 +4,7 @@ import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles
 import StylesProvider from '@mui/styles/StylesProvider';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import { rest } from 'msw';
+import env from '../src/constants';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -27,7 +28,7 @@ const withThemeProvider = (Story, context) => {
       </ThemeProvider>
     </StyledEngineProvider>
   );
-  if (import.meta.env.NODE_ENV !== 'test') {
+  if (env.NODE_ENV !== 'test') {
     return ourThemeProvider;
   } else {
     const generateClassName = (rule, styleSheet) =>
