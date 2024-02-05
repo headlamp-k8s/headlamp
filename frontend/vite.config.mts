@@ -4,6 +4,46 @@ import svgr from 'vite-plugin-svgr';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
+  define: {
+    // By default, Vite doesn't include shims for NodeJS
+    // necessary for @octokit_core lib to work
+    global: {},
+    'process.env': {},
+  },
+  resolve: {
+    alias: {
+      process: 'process/browser',
+      buffer: 'buffer',
+      crypto: 'crypto-browserify',
+      stream: 'stream-browserify',
+      assert: 'assert',
+      http: 'stream-http',
+      https: 'https-browserify',
+      os: 'os-browserify',
+      url: 'url',
+      util: 'util',
+    },
+  },
+  server: {
+    port: 3000,
+  },
+  plugins: [
+    svgr(),
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: ['@emotion/babel-plugin'],
+      },
+    }),
+    splitVendorChunkPlugin(),
+    visualizer({
+      template: 'treemap',
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+      filename: 'analyse.html',
+    }) as PluginOption,
+  ],
   build: {
     outDir: 'build',
     commonjsOptions: {
@@ -34,43 +74,6 @@ export default defineConfig({
           }
         },
       },
-    },
-  },
-  plugins: [
-    svgr(),
-    react({
-      jsxImportSource: '@emotion/react',
-      babel: {
-        plugins: ['@emotion/babel-plugin'],
-      },
-    }),
-    splitVendorChunkPlugin(),
-    visualizer({
-      template: 'treemap',
-      open: true,
-      gzipSize: true,
-      brotliSize: true,
-      filename: 'analyse.html',
-    }) as PluginOption,
-  ],
-  define: {
-    // By default, Vite doesn't include shims for NodeJS
-    // necessary for @octokit_core lib to work
-    global: {},
-    'process.env': {},
-  },
-  resolve: {
-    alias: {
-      process: 'process/browser',
-      buffer: 'buffer',
-      crypto: 'crypto-browserify',
-      stream: 'stream-browserify',
-      assert: 'assert',
-      http: 'stream-http',
-      https: 'https-browserify',
-      os: 'os-browserify',
-      url: 'url',
-      util: 'util',
     },
   },
 });
