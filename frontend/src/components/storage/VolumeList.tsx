@@ -66,7 +66,11 @@ export default function VolumeList() {
           label: t('Claim'),
           getter: volume => {
             const claim = volume.spec.claimRef?.name;
+            if (!claim) {
+              return null;
+            }
             const claimNamespace = volume.spec.claimRef?.namespace;
+
             return (
               <Link
                 routeName="persistentVolumeClaim"
