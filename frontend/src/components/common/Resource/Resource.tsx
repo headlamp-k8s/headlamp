@@ -29,6 +29,7 @@ import {
 import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
+import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
 import { SectionBox } from '../../common/SectionBox';
@@ -126,6 +127,8 @@ export function DetailsGrid(props: DetailsGridProps) {
   const detailViewsProcessors = useTypedSelector(
     state => state.detailsViewSection.detailsViewSectionsProcessors
   );
+  const dispatchHeadlampEvent = useEventCallback();
+
   // This component used to have a MainInfoSection with all these props passed to it, so we're
   // using them to accomplish the same behavior.
   const { extraInfo, actions, noDefaultActions, headerStyle, backLink, title, headerSection } =
@@ -133,6 +136,19 @@ export function DetailsGrid(props: DetailsGridProps) {
 
   const [item, error] = resourceType.useGet(name, namespace);
   const prevItemRef = React.useRef<{ uid?: string; version?: string; error?: ApiError }>({});
+
+  React.useEffect(() => {
+    if (item) {
+      dispatchHeadlampEvent({
+        type: HeadlampEventType.DETAILS_VIEW,
+        data: {
+          title: item?.jsonData.kind,
+          resource: item,
+          error: error || undefined,
+        },
+      });
+    }
+  }, [item]);
 
   React.useEffect(() => {
     // We cannot call this callback more than once on each version of the item, in order to avoid

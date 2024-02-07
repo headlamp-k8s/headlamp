@@ -7,6 +7,11 @@ import { useLocation } from 'react-router-dom';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
 import { clusterAction } from '../../../redux/clusterActionSlice';
+import {
+  EventStatus,
+  HeadlampEventType,
+  useEventCallback,
+} from '../../../redux/headlampEventSlice';
 import ActionButton from '../ActionButton';
 import EditorDialog from './EditorDialog';
 
@@ -21,6 +26,7 @@ export default function CreateButton(props: CreateButtonProps) {
   const [errorMessage, setErrorMessage] = React.useState('');
   const location = useLocation();
   const { t } = useTranslation(['translation']);
+  const dispatchCreateEvent = useEventCallback(HeadlampEventType.CREATE_RESOURCE);
 
   const applyFunc = async (newItems: KubeObjectInterface[]) => {
     await Promise.allSettled(newItems.map(newItem => apply(newItem))).then((values: any) => {
@@ -89,6 +95,10 @@ export default function CreateButton(props: CreateButtonProps) {
         cancelUrl,
       })
     );
+
+    dispatchCreateEvent({
+      status: EventStatus.CONFIRMED,
+    });
   }
 
   return (
@@ -105,7 +115,9 @@ export default function CreateButton(props: CreateButtonProps) {
         />
       ) : (
         <Button
-          onClick={() => setOpenDialog(true)}
+          onClick={() => {
+            setOpenDialog(true);
+          }}
           startIcon={<InlineIcon icon="mdi:plus" />}
           color="primary"
           variant="contained"

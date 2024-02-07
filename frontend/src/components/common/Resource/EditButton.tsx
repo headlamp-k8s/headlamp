@@ -4,6 +4,11 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { KubeObject, KubeObjectInterface } from '../../../lib/k8s/cluster';
 import { CallbackActionOptions, clusterAction } from '../../../redux/clusterActionSlice';
+import {
+  EventStatus,
+  HeadlampEventType,
+  useEventCallback,
+} from '../../../redux/headlampEventSlice';
 import ActionButton from '../ActionButton';
 import AuthVisible from './AuthVisible';
 import EditorDialog from './EditorDialog';
@@ -22,6 +27,7 @@ export default function EditButton(props: EditButtonProps) {
   const [errorMessage, setErrorMessage] = React.useState<string>('');
   const location = useLocation();
   const { t } = useTranslation(['translation', 'resource']);
+  const dispatchHeadlampEditEvent = useEventCallback(HeadlampEventType.EDIT_RESOURCE);
 
   function makeErrorMessage(err: any) {
     const status: number = err.status;
@@ -62,6 +68,11 @@ export default function EditButton(props: EditButtonProps) {
         ...options,
       })
     );
+
+    dispatchHeadlampEditEvent({
+      resource: item,
+      status: EventStatus.CLOSED,
+    });
   }
 
   if (!item) {
@@ -86,7 +97,13 @@ export default function EditButton(props: EditButtonProps) {
     >
       <ActionButton
         description={t('translation|Edit')}
-        onClick={() => setOpenDialog(true)}
+        onClick={() => {
+          setOpenDialog(true);
+          dispatchHeadlampEditEvent({
+            resource: item,
+            status: EventStatus.OPENED,
+          });
+        }}
         icon="mdi:pencil"
       />
       {openDialog && (

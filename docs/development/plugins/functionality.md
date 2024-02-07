@@ -155,3 +155,14 @@ Change what tables across Headlamp show with [registerResourceTableColumnsProces
 
 - Example plugin shows [How to add a context menu to each row in the pods list table](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/tables).
 - API reference for [registerResourceTableColumnsProcessor](../api/modules/plugin_registry.md#registerresourcetablecolumnsprocessor)
+
+### Headlamp Events
+
+Headlamp has the concept of "Headlamp events". Those are fired when something relevant happens in Headlamp.
+
+React to Headlamp events with [registerHeadlampEventCallback](../api/modules/plugin_registry.md#registerheadlampeventcallback).
+
+![screenshot of a snackbar notification when an event occurred](./images/event-snackbar.png)
+
+- Example plugin shows [How to show snackbars for Headlamp events](https://github.com/kinvolk/headlamp/tree/main/plugins/examples/headlamp-events).
+- API reference for [registerHeadlampEventCallback](../api/modules/plugin_registry.md#registerheadlampeventcallback)

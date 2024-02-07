@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { useFilterFunc } from '../../../lib/util';
+import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useSettings } from '../../App/Settings/hook';
 import { DateLabel } from '../Label';
@@ -103,6 +104,15 @@ function TableFromResourceClass(props: ResourceTableFromResourceClassProps) {
   const [items, error] = resourceClass.useList();
   // throttle the update of the table to once per second
   const throttledItems = useThrottle(items, 1000);
+  const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
+
+  useEffect(() => {
+    dispatchHeadlampEvent({
+      resources: items,
+      resourceKind: resourceClass.className,
+      error: error || undefined,
+    });
+  }, [items, error]);
 
   return (
     <Table
