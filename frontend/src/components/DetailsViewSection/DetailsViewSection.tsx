@@ -1,5 +1,6 @@
-import { isValidElement, ReactElement, ReactNode, useMemo } from 'react';
+import React, { isValidElement, ReactElement, ReactNode, useMemo } from 'react';
 import { KubeObject } from '../../lib/k8s/cluster';
+import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../redux/reducers/reducers';
 import ErrorBoundary from '../common/ErrorBoundary';
 
@@ -20,6 +21,12 @@ export type DetailsViewSectionType =
 export default function DetailsViewSection(props: DetailsViewSectionProps) {
   const { resource } = props;
   const detailViews = useTypedSelector(state => state.detailsViewSection.detailViews);
+  const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.DETAILS_VIEW);
+
+  React.useEffect(() => {
+    dispatchHeadlampEvent({ resource });
+  }, [resource]);
+
   const memoizedComponents = useMemo(
     () =>
       detailViews.map((Component, index) => {

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { initialState as CLUSTER_ACTIONS_INITIAL_STATE } from '../clusterActionSlice';
 import { initialState as CONFIG_INITIAL_STATE } from '../configSlice';
 import { initialState as FILTER_INITIAL_STATE } from '../filterSlice';
+import { listenerMiddleware } from '../headlampEventSlice';
 import reducers from '../reducers/reducers';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../reducers/ui';
 
@@ -17,7 +18,7 @@ const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
       thunk: true,
-    }),
+    }).prepend(listenerMiddleware.middleware),
 });
 
 export default store;

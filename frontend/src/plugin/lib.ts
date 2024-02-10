@@ -151,6 +151,27 @@ export abstract class Headlamp {
   static isRunningAsApp() {
     return helpers.isElectron();
   }
+
+  /**
+   * Returns the version of Headlamp as an object with a VERSION (application version) and
+   * GIT_VERSION (commit) fields. Like:
+   * { VERSION: 'v0.0.0', GIT_VERSION: '0000000000000}
+   *
+   * @returns the version of Headlamp.
+   */
+  getVersion() {
+    const version = helpers.getVersion();
+    return { VERSION: version.VERSION || '', GIT_VERSION: version.GIT_VERSION || '' };
+  }
+
+  /**
+   * Returns the name of the product.
+   *
+   * @returns the name of the product.
+   */
+  getProductName() {
+    return helpers.getProductName() || '';
+  }
 }
 
 window.desktopApi?.receive('currentMenu', (currentMenus: AppMenu[]) => {

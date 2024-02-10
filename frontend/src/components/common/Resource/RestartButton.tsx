@@ -16,6 +16,11 @@ import { useDispatch } from 'react-redux';
 import { apply } from '../../../lib/k8s/apiProxy';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { clusterAction } from '../../../redux/clusterActionSlice';
+import {
+  EventStatus,
+  HeadlampEventType,
+  useEventCallback,
+} from '../../../redux/headlampEventSlice';
 import AuthVisible from './AuthVisible';
 
 interface RestartButtonProps {
@@ -100,6 +105,7 @@ interface RestartDialogProps {
 function RestartDialog(props: RestartDialogProps) {
   const { resource, open, onClose, onSave } = props;
   const { t } = useTranslation();
+  const dispatchRestartEvent = useEventCallback(HeadlampEventType.DELETE_RESOURCE);
 
   return (
     <Dialog
@@ -121,7 +127,16 @@ function RestartDialog(props: RestartDialogProps) {
         <Button onClick={onClose} color="primary">
           {t('translation|Cancel')}
         </Button>
-        <Button onClick={onSave} color="primary">
+        <Button
+          onClick={() => {
+            dispatchRestartEvent({
+              resource: resource,
+              status: EventStatus.CONFIRMED,
+            });
+            onSave();
+          }}
+          color="primary"
+        >
           {t('translation|Restart')}
         </Button>
       </DialogActions>

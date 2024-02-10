@@ -36,6 +36,26 @@ import {
   setDetailsViewHeaderAction,
 } from '../redux/actionButtonsSlice';
 import { setClusterChooserButtonComponent, setFunctionsToOverride } from '../redux/actions/actions';
+import {
+  addEventCallback,
+  CreateResourceEvent,
+  DeleteResourceEvent,
+  EditResourceEvent,
+  ErrorBoundaryEvent,
+  EventListEvent,
+  HeadlampEvent,
+  HeadlampEventCallback,
+  HeadlampEventType,
+  LogsEvent,
+  PluginLoadingErrorEvent,
+  PluginsLoadedEvent,
+  PodAttachEvent,
+  ResourceDetailsViewLoadedEvent,
+  ResourceListViewLoadedEvent,
+  RestartResourceEvent,
+  ScaleResourceEvent,
+  TerminalEvent,
+} from '../redux/headlampEventSlice';
 import { setRoute, setRouteFilter } from '../redux/routesSlice';
 import store from '../redux/stores/store';
 
@@ -53,7 +73,24 @@ export type {
   DetailsViewSectionProps,
   DetailsViewSectionType,
   SidebarEntryProps,
+  HeadlampEventCallback,
+  HeadlampEvent,
+  ErrorBoundaryEvent,
+  DeleteResourceEvent,
+  EditResourceEvent,
+  ScaleResourceEvent,
+  RestartResourceEvent,
+  LogsEvent,
+  TerminalEvent,
+  PodAttachEvent,
+  CreateResourceEvent,
+  PluginLoadingErrorEvent,
+  PluginsLoadedEvent,
+  ResourceDetailsViewLoadedEvent,
+  ResourceListViewLoadedEvent,
+  EventListEvent,
 };
+export const DefaultHeadlampEvents = HeadlampEventType;
 export const DetailsViewDefaultHeaderActions = DefaultHeaderAction;
 export type { AppBarActionProcessorType };
 /**
@@ -558,6 +595,32 @@ export function registerSetTokenFunction(
  */
 export function registerGetTokenFunction(override: (cluster: string) => string | undefined) {
   store.dispatch(setFunctionsToOverride({ getToken: override }));
+}
+
+/**
+ * Add a callback for headlamp events.
+ * @param callback - The callback to add.
+ *
+ * @example
+ *
+ * ```ts
+ * import {
+ *   DefaultHeadlampEvents,
+ *   registerHeadlampEventCallback,
+ *   HeadlampEvent,
+ * } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * registerHeadlampEventCallback((event: HeadlampEvent) => {
+ *   if (event.type === DefaultHeadlampEvents.ERROR_BOUNDARY) {
+ *     console.error('Error:', event.data);
+ *   } else {
+ *     console.log(`Headlamp event of type ${event.type}: ${event.data}`)
+ *   }
+ * });
+ * ```
+ */
+export function registerHeadlampEventCallback(callback: HeadlampEventCallback) {
+  store.dispatch(addEventCallback(callback));
 }
 
 export { DefaultAppBarAction, DefaultDetailsViewSection, getHeadlampAPIHeaders, runCommand };

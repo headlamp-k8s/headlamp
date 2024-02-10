@@ -1,9 +1,11 @@
 import { Icon } from '@iconify/react';
 import { Box } from '@mui/material';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../lib/k8s/apiProxy';
 import Pod from '../../lib/k8s/pod';
 import { timeAgo } from '../../lib/util';
+import { HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { LightTooltip, Link, SimpleTableProps } from '../common';
 import { StatusLabel, StatusLabelProps } from '../common/Label';
 import ResourceListView from '../common/Resource/ResourceListView';
@@ -209,6 +211,15 @@ export function PodListRenderer(props: PodListProps) {
 
 export default function PodList() {
   const [pods, error] = Pod.useList();
+  const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
+
+  React.useEffect(() => {
+    dispatchHeadlampEvent({
+      resources: pods,
+      resourceKind: 'Pod',
+      error: error || undefined,
+    });
+  }, [pods, error]);
 
   return <PodListRenderer pods={pods} error={error} reflectTableInURL />;
 }
