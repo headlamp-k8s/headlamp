@@ -11,6 +11,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import env from '../../constants';
 import helpers from '../../helpers';
 import { useURLState } from '../../lib/util';
 import { useSettings } from '../App/Settings/hook';
@@ -180,7 +181,7 @@ export default function SimpleTable(props: SimpleTableProps) {
     emptyMessage = null,
     page: initialPage = 0,
     // @todo: This is a workaround due to how the pagination is built by default.
-    showPagination = !process.env.UNDER_TEST, // Disable for snapshots: The pagination uses useId so snapshots will fail.
+    showPagination = !env.UNDER_TEST, // Disable for snapshots: The pagination uses useId so snapshots will fail.
     errorMessage = null,
     defaultSortingColumn,
     noTableHeader = false,

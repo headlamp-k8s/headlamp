@@ -1,3 +1,4 @@
+import env from '../../constants';
 import { ResourceClasses } from '.';
 import { apiFactory, apiFactoryWithNamespace } from './apiProxy';
 import { KubeObjectClass, KubeObjectInterface, makeKubeObject } from './cluster';
@@ -119,7 +120,7 @@ export function makeCustomResourceClass(
   }
 
   // Used for tests
-  if (process.env.UNDER_TEST === 'true') {
+  if (env.UNDER_TEST === 'true') {
     const knownClass = ResourceClasses[apiInfoArgs[0][2]];
     if (!!knownClass) {
       return knownClass;

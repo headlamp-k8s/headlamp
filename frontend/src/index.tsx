@@ -1,18 +1,16 @@
+import axe from '@axe-core/react';
+import axeCore from 'axe-core';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import env from './constants';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-if (process.env.NODE_ENV !== 'production') {
+if (env.NODE_ENV !== 'production') {
   let alreadyWarned = false;
-  let axe = require('@axe-core/react');
-  if (axe.default) {
-    axe = axe.default; //changed to esm module sometimes?
-  }
-  const axeCore = require('axe-core');
 
-  if (process.env.REACT_APP_SKIP_A11Y === 'false') {
+  if (env.VITE_SKIP_A11Y === 'false') {
     function filterFalsePositives(results: typeof axeCore.AxeResults) {
       // React changes the dom quickly, but axe-core notices missing main in between rendering
       results.violations = results.violations.filter((v: any) => v.id !== 'landmark-one-main');
@@ -49,7 +47,7 @@ if (process.env.NODE_ENV !== 'production') {
           alreadyWarned = true;
           alert(
             'Accessibility issues found. See developer console. ' +
-              '`REACT_APP_SKIP_A11Y=false make run-frontend` to enable alert.'
+              '`VITE_SKIP_A11Y=false make run-frontend` to enable alert.'
           );
         }
       }

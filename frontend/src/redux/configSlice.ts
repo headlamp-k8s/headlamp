@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import env from '../constants';
 import { Cluster } from '../lib/k8s/cluster';
 
 export interface ConfigState {
@@ -44,7 +45,7 @@ export interface ConfigState {
 export const defaultTableRowsPerPageOptions = [15, 25, 50];
 
 function defaultTimezone() {
-  return process.env.UNDER_TEST ? 'UTC' : Intl.DateTimeFormat().resolvedOptions().timeZone;
+  return env.UNDER_TEST ? 'UTC' : Intl.DateTimeFormat().resolvedOptions().timeZone;
 }
 
 const storedSettings = JSON.parse(localStorage.getItem('settings') || '{}');

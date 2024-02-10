@@ -1,6 +1,7 @@
 import { Octokit } from '@octokit/core';
 import React from 'react';
 import semver from 'semver';
+import env from '../../../constants';
 import helpers from '../../../helpers';
 import ReleaseNotesModal from './ReleaseNotesModal';
 import UpdatePopup from './UpdatePopup';
@@ -55,7 +56,7 @@ export default function ReleaseNotes() {
             if (
               latestRelease &&
               semver.gt(latestRelease.name as string, currentBuildAppVersion) &&
-              !process.env.FLATPAK_ID
+              !env.FLATPAK_ID
             ) {
               setReleaseDownloadURL(latestRelease.html_url);
             }

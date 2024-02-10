@@ -12,6 +12,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import * as yaml from 'js-yaml';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import env from '../../../constants';
 import { KubeObjectInterface } from '../../../lib/k8s/cluster';
 import { getThemeName } from '../../../lib/themes';
 import { useId } from '../../../lib/util';
@@ -25,12 +26,11 @@ import SimpleEditor from './SimpleEditor';
 // Jest does not work with esm modules and 'monaco-editor' properly
 // It says it can't find the module when running the tests.
 let monaco: any;
-if (process.env.NODE_ENV === 'test') {
-  monaco = require('monaco-editor/esm/vs/editor/editor.api.js');
-} else {
-  // const monaco = monacoEditor;
-  monaco = require('monaco-editor');
-}
+(async () => {
+  monaco = await import(
+    env.NODE_ENV === 'test' ? 'monaco-editor/esm/vs/editor/editor.api.js' : 'monaco-editor'
+  );
+})();
 
 const useStyle = makeStyles(theme => ({
   dialogContent: {
