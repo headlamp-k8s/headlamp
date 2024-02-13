@@ -40,6 +40,10 @@ jobs:
         node bin/headlamp-plugin.js extract ../examples/pod-counter ../../.plugins/
         cd ../../
         ls -laR .plugins
+    - name: Remove unnecessary files
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
     - name: Build image
       run: |
         export SHELL=/bin/bash
@@ -48,12 +52,34 @@ jobs:
         DOCKER_IMAGE_VERSION=latest DOCKER_PLUGINS_IMAGE_NAME=headlamp-plugins-test make build-plugins-container
         echo -n "verifying images:"
         docker images
+    - name: Test .plugins folder
+      run: |
+        export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
         echo "----------------------------"
         echo "Test .plugins folder is copied to the right place in the image by 'make image'"
         echo "--- Files in the image /headlamp/ folder: ---"
         docker run --rm --entrypoint=/bin/sh ghcr.io/headlamp-k8s/headlamp:latest -c "cd /headlamp/ && find ."
         echo "----- Checking if the .plugins/ are copied to the right place in the image -----"
         docker run --rm --entrypoint=/bin/sh ghcr.io/headlamp-k8s/headlamp:latest -c "set -e; (cd /headlamp/plugins && [ -e pod-counter/package.json ] && [ -e pod-counter/main.js ]) || exit 1"
+        echo "----- Checking if the plugins/example folder match copied docker plugins -----"
+        # List contents of /plugins inside the container
+        docker_output=$(docker run --rm --entrypoint=/bin/sh ghcr.io/headlamp-k8s/headlamp-plugins-test:latest -c "set -e; ls /plugins || exit 1")
+
+        # Get the list of folders inside the examples folder
+        examples_folder="plugins/examples"
+        examples_content=$(ls "$examples_folder")
+
+        # Check if the Docker output matches the examples folder content
+        if [[ "$docker_output" == "$examples_content" ]]; then
+          echo "Docker output matches examples folder content"
+        else
+          echo "Docker output does not match examples folder content"
+          echo "Docker output: $docker_output"
+          echo "----------------------------"
+          echo "Examples content: $examples_content"
+          exit 1
+        fi
     - name: Deploy to cluster
       run:
         kubectl apply -f e2e-tests/kubernetes-headlamp-ci.yaml
