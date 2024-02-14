@@ -28,7 +28,10 @@ export class ConfigStore<T> {
    */
   public set(configValue: T) {
     store.dispatch(
-      setPluginConfig({ configKey: this.configKey, payload: configValue as { [key: string]: any } })
+      setPluginConfig({
+        configKey: this.configKey,
+        payload: configValue as { [key: string]: any },
+      })
     );
   }
 
