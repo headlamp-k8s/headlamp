@@ -1,6 +1,7 @@
 import { createRouteURL } from '../router';
 import { labelSelectorToQuery, ResourceClasses } from '.';
 import { KubeObjectClass, LabelSelector } from './cluster';
+import Namespace from './namespace';
 
 // Remove NetworkPolicy since we don't use it.
 const k8sClassesToTest = Object.values(ResourceClasses).filter(
@@ -262,5 +263,34 @@ describe('Test class namespaces', () => {
 
   test('Check all classes', () => {
     expect(classCopy).toEqual({});
+  });
+});
+
+/**
+ * This is a function test for the Namespace class.
+ * note: this test will not work correctly if used in its own environment (i.e. namespace.test.ts)
+ */
+describe('Namespace testing', () => {
+  describe('test working isValidNamespaceFormat', () => {
+    it('should return true for valid namespace', () => {
+      expect(Namespace.isValidNamespaceFormat('valid-namespace')).toBe(true);
+    });
+
+    it('should return false for namespace longer than 63 characters', () => {
+      const longNamespace = 'a'.repeat(64);
+      expect(Namespace.isValidNamespaceFormat(longNamespace)).toBe(false);
+    });
+
+    it('should return false for namespace with invalid characters', () => {
+      expect(Namespace.isValidNamespaceFormat('invalid_namespace')).toBe(false);
+    });
+
+    it('should return false for namespace with capital letters', () => {
+      expect(Namespace.isValidNamespaceFormat('InvalidNamespace')).toBe(false);
+    });
+
+    it('should return false for empty namespace', () => {
+      expect(Namespace.isValidNamespaceFormat('')).toBe(false);
+    });
   });
 });
