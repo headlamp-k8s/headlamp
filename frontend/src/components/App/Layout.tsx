@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Link from '@mui/material/Link';
 import { useTheme } from '@mui/material/styles';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -23,39 +23,11 @@ import RouteSwitcher from './RouteSwitcher';
 import TopBar from './TopBar';
 import VersionDialog from './VersionDialog';
 
-const useStyle = makeStyles(theme => ({
-  content: {
-    flexGrow: 1,
-    marginLeft: 'initial',
-  },
-  toolbar: theme.mixins.toolbar,
-  // importing visuallyHidden has typing issues at time of writing.
-  // import { visuallyHidden } from '@mui/utils';
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: '1px',
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    whiteSpace: 'nowrap',
-    width: '1px',
-  },
-  wrapper: {
-    display: 'flex',
-    [theme.breakpoints.down('sm')]: {
-      display: 'block',
-    },
-  },
-}));
-
 export interface LayoutProps {}
 
 const CLUSTER_FETCH_INTERVAL = 10 * 1000; // ms
 
 function ClusterNotFoundPopup() {
-  const theme = useTheme();
   const cluster = getCluster();
   const { t } = useTranslation();
 
@@ -63,9 +35,9 @@ function ClusterNotFoundPopup() {
     <Box
       display={'flex'}
       justifyContent="center"
-      style={{
+      sx={{
         position: 'absolute',
-        color: theme.palette.common.white,
+        color: 'common.white',
         textAlign: 'center',
       }}
       bgcolor={'error.main'}
@@ -81,15 +53,17 @@ function ClusterNotFoundPopup() {
     </Box>
   );
 }
+const Div = styled('div')``;
+const Main = styled('main')``;
 
 export default function Layout({}: LayoutProps) {
-  const classes = useStyle();
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const dispatch = useDispatch();
   const clusters = useTypedSelector(state => state.config.clusters);
   const { t } = useTranslation();
   const allClusters = useClustersConf();
   const clusterInURL = getCluster();
+  const theme = useTheme();
 
   /** This fetches the cluster config from the backend and updates the redux store on an interval.
    * When stateless clusters are enabled, it also fetches the stateless cluster config from the
@@ -161,15 +135,28 @@ export default function Layout({}: LayoutProps) {
 
   return (
     <>
-      <Link href="#main" className={classes.visuallyHidden}>
+      <Link
+        href="#main"
+        sx={{
+          border: 0,
+          clip: 'rect(0 0 0 0)',
+          height: '1px',
+          margin: -1,
+          overflow: 'hidden',
+          padding: 0,
+          position: 'absolute',
+          whiteSpace: 'nowrap',
+          width: '1px',
+        }}
+      >
         {t('Skip to main content')}
       </Link>
-      <Box className={classes.wrapper}>
+      <Box sx={{ display: 'flex', [theme.breakpoints.down('sm')]: { display: 'block' } }}>
         <VersionDialog />
         <CssBaseline />
         <TopBar />
         <Sidebar />
-        <main id="main" className={classes.content}>
+        <Main id="main" sx={{ flexGrow: 1, marginLeft: 'initial' }}>
           {allClusters &&
           !!clusterInURL &&
           !Object.keys(allClusters).includes(getCluster() || '') ? (
@@ -179,7 +166,7 @@ export default function Layout({}: LayoutProps) {
           )}
           <AlertNotification />
           <Box>
-            <div className={classes.toolbar} />
+            <Div sx={theme.mixins.toolbar} />
             <Container maxWidth="xl">
               <NavigationTabs />
               {arePluginsLoaded && (
@@ -193,7 +180,7 @@ export default function Layout({}: LayoutProps) {
               )}
             </Container>
           </Box>
-        </main>
+        </Main>
         <ActionsNotifier />
       </Box>
     </>

@@ -4,7 +4,6 @@ import ButtonBase, { ButtonBaseProps } from '@mui/material/ButtonBase';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 
 export interface SquareButtonProps extends ButtonBaseProps {
   /** The icon to display for this button. */
@@ -19,41 +18,21 @@ export interface SquareButtonProps extends ButtonBaseProps {
   primary?: boolean;
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: 140,
-    height: 140,
-    paddingTop: '24px',
-    backgroundColor: ({ primary }: { primary: boolean }) =>
-      primary ? theme.palette.text.primary : theme.palette.squareButton.background,
-  },
-  content: {
-    textAlign: 'center',
-    paddingTop: 0,
-  },
-  label: {
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    display: 'block',
-    fontSize: '1rem',
-    paddingTop: '8px',
-    color: ({ primary }: { primary: boolean }) =>
-      primary
-        ? theme.palette.getContrastText(theme.palette.text.primary)
-        : theme.palette.getContrastText(theme.palette.squareButton.background),
-  },
-}));
-
 export default function SquareButton(props: SquareButtonProps) {
   const { icon, iconSize = 50, iconColor, label, primary = false, ...otherProps } = props;
-  const classes = useStyles({ primary });
   const theme = useTheme();
 
   return (
     <ButtonBase focusRipple {...otherProps}>
-      <Card className={classes.root}>
-        <CardContent className={classes.content}>
+      <Card
+        sx={{
+          width: 140,
+          height: 140,
+          paddingTop: '24px',
+          backgroundColor: primary ? 'text.primary' : 'squareButton.background',
+        }}
+      >
+        <CardContent sx={{ textAlign: 'center', paddingTop: 0 }}>
           <Icon
             icon={icon}
             width={iconSize}
@@ -65,7 +44,22 @@ export default function SquareButton(props: SquareButtonProps) {
                 : theme.palette.getContrastText(theme.palette.squareButton.background))
             }
           />
-          <Typography color="textSecondary" gutterBottom className={classes.label} title={label}>
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            title={label}
+            sx={{
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              display: 'block',
+              fontSize: '1rem',
+              paddingTop: '8px',
+              color: primary
+                ? theme.palette.getContrastText(theme.palette.text.primary)
+                : theme.palette.getContrastText(theme.palette.squareButton.background),
+            }}
+          >
             {label}
           </Typography>
         </CardContent>
