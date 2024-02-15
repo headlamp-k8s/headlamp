@@ -5,18 +5,22 @@ weight: 5
 
 ## Load testing Headlamp
 
-Can Headlamp work well with a busy cluster?
+Can Headlamp work well with busy clusters?
 
 Limits we want to test for to begin with:
 
 - 10,000 pods
 - 1,000 nodes
 - 10,000 events
+- 15 clusters (300 clusters max)
 
 Steps:
 
 - Create load in a cluster
-- Run Headlamp and see if it works well
+- Run Headlamp and see if it works well compared to low load
+    - performance profiles
+    - CPU/memory usage
+    - feel
 
 ### Kwok for low resource usage load testing of Headlamp
 
@@ -41,7 +45,7 @@ kubectl config get-contexts
 
 #### Generating Initial Data
 
-This will create 900 nodes, 9000 pods, and 1000 events as fast as possible. Then it will create 1 event per second up to a total of 9000 events. Also one per second: 100 new nodes, and 1000 new pods.
+This will create 900 nodes, 9000 pods, and 1000 events as fast as possible. Then it will create 1 event per second up to a total of 9000 events. Also one per second: 100 new nodes, and 1000 new pods. Finally it will create 15 clusters.
 
 ```bash
 cd load-tests
@@ -52,6 +56,7 @@ node scripts/create-nodes.js 900 0
 node scripts/create-pods.js 9000 0
 node scripts/create-events.js 1000 0
 node scripts/create-deployments.js 500 0
+node scripts/create-clusters.js 15 0
 ```
 
 #### Generating Activity
@@ -62,4 +67,16 @@ To make some activity after the initial data is loaded.
 echo "---------------"
 echo "creating 1 node, 1 pod, and 1 event per second"
 node scripts/create-events.js 9000 1 & node scripts/create-nodes.js 100 1 & node scripts/create-pods.js 1000 1 &
+```
+
+#### Cleaning up clusters
+
+Kwok clusters can take up a lot of resources even doing nothing, 
+due to the Kubernetes API server using resources even when idle.
+
+So when you're done, you can delete them like this.
+
+```bash
+kwokctl delete cluster --name=kwok
+node scripts/create-clusters.js 15 0 --delete
 ```
