@@ -1,31 +1,28 @@
 # Build the plugin
-FROM node:16.4 as builder
+FROM node:20.0.0 as builder
 
+# Set the working directory
 WORKDIR /headlamp-plugins
 
 # Copy the example plugins source code to the working directory
 COPY ./plugins/examples /headlamp-plugins/
 
-# Create a build directory
-RUN mkdir -p /headlamp-plugins/build
-
 # Copy the plugin source code to the working directory
 COPY ./plugins/headlamp-plugin /headlamp-plugins/headlamp-plugin
 
-# Change to the headlamp-plugin directory, install dependencies. 
+# Install dependencies.
 # We are doing so that we can use the local binary to build
 # the example plugin.
-WORKDIR /headlamp-plugins/headlamp-plugin
-RUN npm install
+RUN chmod +x /headlamp-plugins/headlamp-plugin/install-dependencies.sh && /headlamp-plugins/headlamp-plugin/install-dependencies.sh
 
-# Go back to the main working directory
-WORKDIR /headlamp-plugins
+# Create a build directory
+RUN mkdir -p /headlamp-plugins/build
 
-# Build the plugin using the local binary
-RUN ./headlamp-plugin/bin/headlamp-plugin.js build /headlamp-plugins
+# Build the example plugins (excluding headlamp-plugin)
+RUN find /headlamp-plugins -mindepth 1 -maxdepth 1 -type d ! -name "headlamp-plugin" -exec ./headlamp-plugin/bin/headlamp-plugin.js build {} \;
 
-# Extract the built plugin files to the build directory
-RUN ./headlamp-plugin/bin/headlamp-plugin.js extract /headlamp-plugins/ /headlamp-plugins/build
+# Extract the built plugin files to the build directory (excluding headlamp-plugin)
+RUN find /headlamp-plugins -mindepth 1 -maxdepth 1 -type d ! -name "headlamp-plugin" -exec ./headlamp-plugin/bin/headlamp-plugin.js extract {} /headlamp-plugins/build \;
 
 # Create the final image
 FROM alpine:latest
