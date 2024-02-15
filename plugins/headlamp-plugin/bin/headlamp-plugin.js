@@ -114,7 +114,8 @@ function create(name, link) {
 function compileMessages(err, stats) {
   if (err && err.message) {
     console.log(err);
-    return;
+    // This should be a failure.
+    return 1;
   }
   if (stats && stats.compilation) {
     const printList = {
@@ -133,7 +134,14 @@ function compileMessages(err, stats) {
         console.log('\n');
       }
     });
+
+    if (stats.hasErrors()) {
+      // This should be a failure.
+      return 1;
+    }
   }
+
+  return 0;
 }
 
 /**
@@ -280,12 +288,21 @@ function start() {
 
   informIfOutdated();
 
-  console.log('Watching for changes to plugin...');
   config.watch = true;
   config.mode = 'development';
   process.env['BABEL_ENV'] = 'development';
   copyToPluginsFolder(config);
-  webpack(config, compileMessages);
+  webpack(config, (err, stats) => {
+    // We are checking the exit code of the compileMessages function.
+    // It should be 0 if there are no errors, and 1 if there are errors.
+    const exitCode = compileMessages(err, stats);
+    if (exitCode !== 0) {
+      console.error('Failed to start watching for changes.');
+    } else {
+      console.log('Watching for changes to plugin...');
+    }
+    process.exit(exitCode);
+  });
 
   return 0;
 }
@@ -475,8 +492,17 @@ function build(packageFolder) {
 
     process.chdir(folder);
     console.log(`Building "${folder}" for production...`);
-    webpack(config, compileMessages);
-    console.log(`Done building: "${folder}".`);
+    webpack(config, (err, stats) => {
+      // We are checking the exit code of the compileMessages function.
+      // It should be 0 if there are no errors, and 1 if there are errors.
+      const exitCode = compileMessages(err, stats);
+      if (exitCode !== 0) {
+        console.error(`Failed to build "${folder}" for production.`);
+      } else {
+        console.log(`Finished building "${folder}" for production.`);
+      }
+      process.exit(exitCode);
+    });
     process.chdir(oldCwd);
     return true;
   }
