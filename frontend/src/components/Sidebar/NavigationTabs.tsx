@@ -12,9 +12,12 @@ import Tabs from '../common/Tabs';
 import { SidebarItemProps } from '../Sidebar';
 import prepareRoutes from './prepareRoutes';
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles(theme => ({
   tabs: {
     maxWidth: '85vw',
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: '10px',
+    },
   },
 }));
 
