@@ -19,7 +19,7 @@ exports[`Storyshots Sidebar/SidebarItem Selected 1`] = `
           tabindex="0"
         >
           <div
-            class="MuiListItemIcon-root makeStyles-icon css-cveggr-MuiListItemIcon-root"
+            class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
           >
             <span />
           </div>
@@ -61,7 +61,7 @@ exports[`Storyshots Sidebar/SidebarItem Sublist 1`] = `
           tabindex="0"
         >
           <div
-            class="MuiListItemIcon-root makeStyles-icon css-cveggr-MuiListItemIcon-root"
+            class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
           >
             <span />
           </div>
@@ -147,7 +147,7 @@ exports[`Storyshots Sidebar/SidebarItem Sublist Expanded 1`] = `
           tabindex="0"
         >
           <div
-            class="MuiListItemIcon-root makeStyles-icon css-cveggr-MuiListItemIcon-root"
+            class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
           >
             <span />
           </div>
@@ -233,7 +233,7 @@ exports[`Storyshots Sidebar/SidebarItem Unselected 1`] = `
           tabindex="0"
         >
           <div
-            class="MuiListItemIcon-root makeStyles-icon css-cveggr-MuiListItemIcon-root"
+            class="MuiListItemIcon-root css-1blhdvq-MuiListItemIcon-root"
           >
             <span />
           </div>

@@ -3,7 +3,6 @@ import { Tooltip } from '@mui/material';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import makeStyles from '@mui/styles/makeStyles';
 import withStyles from '@mui/styles/withStyles';
 import React from 'react';
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
@@ -36,16 +35,9 @@ interface ListItemLinkProps {
   };
 }
 
-const useStyle = makeStyles({
-  icon: {
-    minWidth: '24px',
-  },
-});
-
 export default function ListItemLink(props: ListItemLinkProps) {
   const { primary, pathname, search, icon, name, containerProps, iconOnly, subtitle, ...other } =
     props;
-  const classes = useStyle();
 
   const iconSize = React.useMemo(
     () => (iconOnly ? CollapsedIconSize : ExpandedIconSize),
@@ -63,7 +55,7 @@ export default function ListItemLink(props: ListItemLinkProps) {
 
   if (icon) {
     listItemLink = (
-      <ListItemIcon className={classes.icon}>
+      <ListItemIcon sx={{ minWidth: '24px' }}>
         <Icon icon={icon} width={iconSize} height={iconSize} />
       </ListItemIcon>
     );

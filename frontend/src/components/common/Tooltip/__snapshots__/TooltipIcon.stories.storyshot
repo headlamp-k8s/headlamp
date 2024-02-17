@@ -3,7 +3,7 @@
 exports[`Storyshots Tooltip/TooltipIcon Just Text 1`] = `
 <div>
   <div
-    class="MuiContainer-root MuiContainer-maxWidthLg makeStyles-container css-cnms5y-MuiContainer-root"
+    class="MuiContainer-root MuiContainer-maxWidthLg css-64uahr-MuiContainer-root"
   >
     <span />
   </div>
@@ -13,7 +13,7 @@ exports[`Storyshots Tooltip/TooltipIcon Just Text 1`] = `
 exports[`Storyshots Tooltip/TooltipIcon With Icon 1`] = `
 <div>
   <div
-    class="MuiContainer-root MuiContainer-maxWidthLg makeStyles-container css-cnms5y-MuiContainer-root"
+    class="MuiContainer-root MuiContainer-maxWidthLg css-64uahr-MuiContainer-root"
   >
     <span />
   </div>

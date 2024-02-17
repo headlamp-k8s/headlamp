@@ -1,7 +1,6 @@
 import { Icon } from '@iconify/react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { TreeView } from '@mui/x-tree-view/TreeView';
 import * as buffer from 'buffer';
@@ -14,17 +13,9 @@ import Loader from '../Loader';
 // Buffer class is not polyffiled with CRA(v5) so we manually do it here
 window.Buffer = buffer.Buffer;
 
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: 400,
-  },
-}));
-
 // @todo: Declare strict types.
 function DocsViewer(props: { docSpecs: any }) {
   const { docSpecs } = props;
-  const classes = useStyles();
   const [docs, setDocs] = React.useState<
     (
       | {
@@ -128,7 +119,7 @@ function DocsViewer(props: { docSpecs: any }) {
                   })}
                 </Typography>
                 <TreeView
-                  className={classes.root}
+                  sx={{ flexGrow: 1, maxWidth: 400 }}
                   defaultCollapseIcon={<Icon icon="mdi:chevron-down" />}
                   defaultExpandIcon={<Icon icon="mdi:chevron-right" />}
                 >

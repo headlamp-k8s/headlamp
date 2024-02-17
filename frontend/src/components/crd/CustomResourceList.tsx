@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import { JSONPath } from 'jsonpath-plus';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -39,19 +38,12 @@ export default function CustomResourceList() {
   return <CustomResourceListRenderer crd={crd} />;
 }
 
-const useStyle = makeStyles({
-  link: {
-    cursor: 'pointer',
-  },
-});
-
 function CustomResourceLink(props: { resource: KubeCRD; crd: CRD; [otherProps: string]: any }) {
-  const classes = useStyle();
   const { resource, crd, ...otherProps } = props;
 
   return (
     <Link
-      className={classes.link}
+      sx={{ cursor: 'pointer' }}
       routeName="customresource"
       params={{
         crName: resource.metadata.name,

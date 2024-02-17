@@ -724,7 +724,7 @@ exports[`Storyshots endpoints/EndpointsDetailsView No Item Yet 1`] = `
         class="MuiBox-root css-p0cik4"
       >
         <div
-          class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
+          class="MuiBox-root css-5cned0"
         >
           <span
             class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"

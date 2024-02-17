@@ -13,7 +13,7 @@ exports[`Storyshots Charts/PercentageCircle No Data 1`] = `
       CPU usage
     </p>
     <div
-      class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
+      class="MuiBox-root css-5cned0"
     >
       <span
         class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"

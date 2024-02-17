@@ -31,7 +31,7 @@ exports[`Storyshots crd/CustomResourceDetails Error Getting CRD 1`] = `
 exports[`Storyshots crd/CustomResourceDetails Loading CRD 1`] = `
 <div>
   <div
-    class="makeStyles-loaderContainer MuiBox-root css-11ra0t9"
+    class="MuiBox-root css-5cned0"
   >
     <span
       class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-wdedfu-MuiCircularProgress-root"
