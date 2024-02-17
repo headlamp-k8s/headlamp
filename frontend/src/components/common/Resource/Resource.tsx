@@ -829,10 +829,11 @@ export function ContainerInfo(props: ContainerInfoProps) {
 export interface OwnedPodsSectionProps {
   resource: KubeObjectInterface;
   hideColumns?: PodListProps['hideColumns'];
+  noSearch?: boolean;
 }
 
 export function OwnedPodsSection(props: OwnedPodsSectionProps) {
-  const { resource, hideColumns } = props;
+  const { resource, hideColumns, noSearch } = props;
   let namespace;
 
   if (resource.kind === 'Namespace') {
@@ -855,6 +856,7 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
       pods={pods}
       error={error}
       noNamespaceFilter={onlyOneNamespace}
+      noSearch={noSearch}
     />
   );
 }

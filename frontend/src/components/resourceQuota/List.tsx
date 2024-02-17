@@ -1,7 +1,9 @@
 import { Box, Chip } from '@mui/material';
 import { styled } from '@mui/system';
 import { useTranslation } from 'react-i18next';
+import { ApiError } from '../../lib/k8s/apiProxy';
 import ResourceQuota from '../../lib/k8s/resourceQuota';
+import { SimpleTableProps } from '../common';
 import ResourceListView from '../common/Resource/ResourceListView';
 
 const WrappingBox = styled(Box)(({ theme }) => ({
@@ -18,12 +20,28 @@ const PaddedChip = styled(Chip)({
   paddingBottom: '2px',
 });
 
-export default function ResourceQuotaList() {
-  const { t } = useTranslation(['translation', 'glossary']);
+export interface ResourceQuotaProps {
+  resourceQuotas: ResourceQuota[] | null;
+  error: ApiError | null;
+  hideColumns?: string[];
+  reflectTableInURL?: SimpleTableProps['reflectInURL'];
+  noSearch?: boolean;
+}
+
+export function ResourceQuotaRenderer(props: ResourceQuotaProps) {
+  const {
+    resourceQuotas,
+    error,
+    hideColumns = [],
+    reflectTableInURL = 'resourcequotas',
+    noSearch,
+  } = props;
+  const { t } = useTranslation(['glossary', 'translation']);
+
   return (
     <ResourceListView
       title={t('glossary|Resource Quotas')}
-      resourceClass={ResourceQuota}
+      hideColumns={hideColumns}
       columns={[
         'name',
         'namespace',
@@ -57,6 +75,19 @@ export default function ResourceQuotaList() {
         },
         'age',
       ]}
+      headerProps={{
+        noSearch,
+      }}
+      errorMessage={ResourceQuota.getErrorMessage(error)}
+      data={resourceQuotas}
+      reflectInURL={reflectTableInURL}
+      id="headlamp-resourcequotas"
     />
   );
+}
+
+export default function ResourceQuotaList() {
+  const [resourceQuotas, error] = ResourceQuota.useList();
+
+  return <ResourceQuotaRenderer resourceQuotas={resourceQuotas} error={error} reflectTableInURL />;
 }
