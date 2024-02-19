@@ -1,29 +1,12 @@
 import { Switch } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import makeStyles from '@mui/styles/makeStyles';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { PluginInfo, reloadPage, setPluginSettings } from '../../../plugin/pluginsSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { SectionBox, SimpleTable } from '../../common';
-
-/**
- * useStyles css for alignment of the save button
- *
- * saveButtonBox: css styling to align the save box to the right of the page.
- */
-const useStyles = makeStyles(() => ({
-  saveButtonBox: {
-    display: `flex`,
-    justifyContent: `flex-end`,
-    margin: `5px`,
-  },
-  saveButton: {
-    margin: `5px`,
-  },
-}));
 
 /**
  * Interface of the component's props structure.
@@ -45,7 +28,6 @@ export interface PluginSettingsProps {}
 
 /** PluginSettingsPure is the main component to where we render the plugin data. */
 export function PluginSettingsPure(props: PluginSettingsPureProps) {
-  const classes = useStyles();
   const { t } = useTranslation(['translation']);
 
   /** Plugin arr to be rendered to the page from prop data */
@@ -152,11 +134,11 @@ export function PluginSettingsPure(props: PluginSettingsPureProps) {
         />
       </SectionBox>
       {enableSave && (
-        <Box className={classes.saveButtonBox}>
+        <Box sx={{ display: `flex`, justifyContent: `flex-end`, margin: `5px` }}>
           <Button
             variant="contained"
             color="primary"
-            className={classes.saveButton}
+            sx={{ margin: `5px` }}
             onClick={() => onSaveButtonHandler()}
           >
             {t('translation|Save & Apply')}

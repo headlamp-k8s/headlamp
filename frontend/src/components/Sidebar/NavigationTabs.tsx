@@ -2,7 +2,6 @@ import { Divider } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import makeStyles from '@mui/styles/makeStyles';
 import { useTranslation } from 'react-i18next';
 import { generatePath, useHistory } from 'react-router';
 import { createRouteURL } from '../../lib/router';
@@ -11,12 +10,6 @@ import { useTypedSelector } from '../../redux/reducers/reducers';
 import Tabs from '../common/Tabs';
 import { SidebarItemProps } from '../Sidebar';
 import prepareRoutes from './prepareRoutes';
-
-const useStyle = makeStyles(() => ({
-  tabs: {
-    maxWidth: '85vw',
-  },
-}));
 
 function searchNameInSubList(sublist: SidebarItemProps['subList'], name: string): boolean {
   if (!sublist) {
@@ -49,7 +42,6 @@ function findParentOfSubList(
 
 export default function NavigationTabs() {
   const history = useHistory();
-  const classes = useStyle();
   const sidebar = useTypedSelector(state => state.sidebar);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -120,7 +112,7 @@ export default function NavigationTabs() {
           tabChangeHandler(index);
         }}
         defaultIndex={defaultIndex}
-        className={classes.tabs}
+        sx={{ maxWidth: '85vw' }}
         ariaLabel={t('translation|Navigation Tabs')}
       />
       <Divider />

@@ -11,7 +11,7 @@ exports[`Storyshots TopBar No Token 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-logo css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
         focusable="false"
         viewBox="0 0 auto 32"
       >
@@ -66,7 +66,7 @@ exports[`Storyshots TopBar One Cluster 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-logo css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
         focusable="false"
         viewBox="0 0 auto 32"
       >
@@ -134,7 +134,7 @@ exports[`Storyshots TopBar Processor Action 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-logo css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
         focusable="false"
         viewBox="0 0 auto 32"
       >
@@ -192,7 +192,7 @@ exports[`Storyshots TopBar Token 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-logo css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
         focusable="false"
         viewBox="0 0 auto 32"
       >
@@ -247,7 +247,7 @@ exports[`Storyshots TopBar Two Cluster 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium makeStyles-logo css-i4bv87-MuiSvgIcon-root"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
         focusable="false"
         viewBox="0 0 auto 32"
       >

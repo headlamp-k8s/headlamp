@@ -1,5 +1,4 @@
 import { SvgIcon } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { isValidElement, ReactElement } from 'react';
 import { getThemeName } from '../../lib/themes';
 import { useTypedSelector } from '../../redux/reducers/reducers';
@@ -46,16 +45,8 @@ export default function OriginalAppLogo(props: AppLogoProps) {
   );
 }
 
-const useStyle = makeStyles({
-  logo: {
-    height: '32px',
-    width: 'auto',
-  },
-});
-
 export function AppLogo(props: AppLogoProps) {
-  const classes = useStyle();
-  const { className = classes.logo, logoType = 'large', themeName = getThemeName() } = props;
+  const { logoType = 'large', themeName = getThemeName() } = props;
   const arePluginsLoaded = useTypedSelector(state => state.plugins.loaded);
   const PluginAppLogoComponent = useTypedSelector(state => state.theme.logo);
   const PluginAppLogoComp = PluginAppLogoComponent as typeof React.Component;
@@ -72,10 +63,18 @@ export function AppLogo(props: AppLogoProps) {
         PluginAppLogoComponent
       ) : (
         // It is a component, so we make it here.
-        <PluginAppLogoComp logoType={logoType} themeName={themeName} className={className} />
+        <PluginAppLogoComp
+          logoType={logoType}
+          themeName={themeName}
+          sx={{ height: '32px', width: 'auto' }}
+        />
       )}
     </ErrorBoundary>
   ) : (
-    <OriginalAppLogo logoType={logoType} themeName={themeName} className={className} />
+    <OriginalAppLogo
+      logoType={logoType}
+      themeName={themeName}
+      sx={{ height: '32px', width: 'auto' }}
+    />
   );
 }
